@@ -139,10 +139,6 @@ Namespace PresentationLayer.Views.Forms
                 }
         End Sub
 
-        Protected Overrides Sub CreateDataSources()
-            CreateDataSource("Leave", cboLeaveIdNo)
-        End Sub
-
     End Class
 
 End Namespace

@@ -16,6 +16,16 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "DepositTypeName"
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
+            CreateDetailAccountList("AccountIdNo")
+            CreateDetailAccountList("BankChargesAccountIdNo")
+            CreateDetailAccountList("BankChargesVatAccountIdNo")
+        End Sub
+
+        Protected Sub CreateDetailAccountList(fieldName As String)
+            CreateDataSource("Account", fieldName, "DetailAccount=1")
+        End Sub
+
         Private Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not View.WithBankCharges Then
                 View.Rate = 0

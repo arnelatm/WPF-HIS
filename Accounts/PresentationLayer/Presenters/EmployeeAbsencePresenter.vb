@@ -31,6 +31,11 @@ Namespace PresentationLayer.Presenters
             'AddHandler View.AddedByUserChanged, AddressOf OnAddedByUserChanged
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
+            CreateEnumDataSource(Of AbsenceTypeSelection)("AbsenceType")
+            CreateDataSource("Employee", "EmployeeIdNo")
+        End Sub
+
         Protected Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             'SetPayroll()
             'DataFilter = "PayrollIdNo = " & View.PayrollIdNo.ToString()

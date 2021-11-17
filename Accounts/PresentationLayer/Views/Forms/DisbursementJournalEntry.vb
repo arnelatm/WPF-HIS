@@ -12,18 +12,15 @@ Namespace PresentationLayer.Views.Forms
         Implements IDisbursementJournalView
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
-        Private _accountsByCode
-        Private _employeesByName
-        Private _suppliersByName
-        Private _customersByName
+
         Private _apFooter As DgvFooter
         Private _jiFooter As DgvFooter
         Private _journalItems As List(Of JournalItemView)
         Private _djOiItems As List(Of DjOiItemView)
-        Private _revCostCentersByCode
         Private _defaultAccount As Int16
-        Private _bankTransfer As Boolean
         Private _tableName As String = ""
+
+        Public Property CustomersByName As Object Implements IDisbursementJournalView.CustomersByName
 
         Public Event PrintCheck() Implements IDisbursementJournalView.PrintCheck
 
@@ -305,6 +302,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property AccountsByCode As Object Implements IDisbursementJournalView.AccountsByCode
+        Public Property EmployeesByName As Object Implements IDisbursementJournalView.EmployeesByName
+        Public Property SuppliersByName As Object Implements IDisbursementJournalView.SuppliersByName
+        Public Property RevCostCentersByCode As Object Implements IDisbursementJournalView.RevCostCentersByCode
+        Public Property BankTransfer As Boolean Implements IDisbursementJournalView.BankTransfer
+
         Public Property Posted As Boolean Implements IDisbursementJournalView.Posted
             Get
                 Return chkPosted.Checked
@@ -373,28 +376,6 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
 #End Region
-
-        Protected Overrides Sub CreateDataSources()
-            CreateLookupData("Account", NameOf(_accountsByCode))
-            CreateLookupData("RevCostCenter", NameOf(_revCostCentersByCode))
-            CreateLookupData("Employee", NameOf(_employeesByName))
-            CreateLookupData("Customer", NameOf(_customersByName))
-            CreateLookupData("Supplier", NameOf(_suppliersByName))
-            CreateEnumDataSource(Of PaymentTypeSelection)(cboPaymentType)
-            CreateEnumDataSource(Of PayTypeSelection)(cboPayType)
-            If _tableName = "CdJournal" Then
-                If _bankTransfer Then
-                    CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.Bank), EnumToCode(SpecialAccountSelection.CheckingAccount)}, cboAccountIdNo)
-                Else
-                    CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.Bank), EnumToCode(SpecialAccountSelection.Cash), EnumToCode(SpecialAccountSelection.CheckingAccount)}, cboAccountIdNo)
-                End If
-            ElseIf _tableName = "PcJournal" Then
-                CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.PettyCashAccount)}, cboAccountIdNo)
-            Else
-                CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.CheckingAccount)}, cboAccountIdNo)
-            End If
-            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.PurchaseDiscount)}, cboDiscountAccountIdNo)
-        End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
@@ -518,13 +499,13 @@ Namespace PresentationLayer.Views.Forms
             End With
             With DataGridViewJournalItems.Columns
                 dgvSequence.DisplayOnly = True
-                dgvAccountIdNo.DataSource = _accountsByCode
+                dgvAccountIdNo.DataSource = AccountsByCode
                 dgvAccountIdNo.DisplayMember = "Name"
                 dgvAccountIdNo.ValueMember = "IdNo"
                 'dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
                 'dgvAccountIdNo.AutoComplete = True
-                dgvRevCostCenterIdNo.DataSource = _revCostCentersByCode
+                dgvRevCostCenterIdNo.DataSource = RevCostCentersByCode
                 dgvRevCostCenterIdNo.DisplayMember = "Name"
                 dgvRevCostCenterIdNo.ValueMember = "idNo"
                 'dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
@@ -826,15 +807,15 @@ Namespace PresentationLayer.Views.Forms
             Dim curValue As Int32? = cboPayeeIdNo.SelectedValue
             cboPayeeIdNo.DataSource = cbDataSource
             If OpenInvoiceMode Then
-                cbDataSource = _suppliersByName
+                cbDataSource = _SuppliersByName
             Else
                 Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cPaymentType)
                 If paymentTypeEnum = PaymentTypeSelection.Supplier Then
-                    cbDataSource = _suppliersByName
+                    cbDataSource = _SuppliersByName
                 ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
-                    cbDataSource = _employeesByName
+                    cbDataSource = _EmployeesByName
                 ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
-                    cbDataSource = _customersByName
+                    cbDataSource = _CustomersByName
                 End If
             End If
             cboPayeeIdNo.DataSource = cbDataSource

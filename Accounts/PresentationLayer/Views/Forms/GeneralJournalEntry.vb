@@ -9,10 +9,8 @@ Namespace PresentationLayer.Views.Forms
         Implements IGeneralJournalView
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
-        Private _accountsByCode
         Private _footer As DgvFooter
         Private _journalItems As List(Of JournalItemView)
-        Private _revCostCenterByCode
         Private ReadOnly _closingEntry As Boolean
 
         Public Sub New(closingEntry As Boolean)
@@ -33,6 +31,9 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
 #Region "Fields"
+
+        Public Property RevCostCentersByCode As Object Implements IGeneralJournalView.RevCostCentersByCode
+        Public Property AccountsByCode As Object Implements IGeneralJournalView.AccountsByCode
 
         Public Property Cancelled As Boolean Implements IGeneralJournalView.Cancelled
             Get
@@ -155,11 +156,6 @@ Namespace PresentationLayer.Views.Forms
 
 #Region "Methods"
 
-        Protected Overrides Sub CreateDataSources()
-            CreateLookupData("Account", NameOf(_accountsByCode), "DetailAccount=1")
-            CreateLookupData("RevCostCenter", NameOf(_revCostCenterByCode))
-        End Sub
-
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
         {
@@ -193,13 +189,13 @@ Namespace PresentationLayer.Views.Forms
             End With
             With DataGridViewJournalItems.Columns
                 dgvSequence.DisplayOnly = True
-                dgvAccountIdNo.DataSource = _accountsByCode
+                dgvAccountIdNo.DataSource = _AccountsByCode
                 dgvAccountIdNo.DisplayMember = "Name"
                 dgvAccountIdNo.ValueMember = "IdNo"
                 dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvAccountIdNo.AutoComplete = True
-                dgvRevCostCenterIdNo.DataSource = _revCostCenterByCode
+                dgvRevCostCenterIdNo.DataSource = RevCostCentersByCode
                 dgvRevCostCenterIdNo.DisplayMember = "Name"
                 dgvRevCostCenterIdNo.ValueMember = "idNo"
                 dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend

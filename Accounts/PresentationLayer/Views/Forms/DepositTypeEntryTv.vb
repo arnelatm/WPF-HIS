@@ -115,16 +115,6 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-        Protected Overrides Sub CreateDataSources()
-            CreateDetailAccountList(cboAccountIdNo)
-            CreateDetailAccountList(cboBankChargesAccountIdNo)
-            CreateDetailAccountList(cboBankChargesVatAccountIdNo)
-        End Sub
-
-        Protected Sub CreateDetailAccountList(cControl As Control)
-            CreateDataSource("Account", cControl, "DetailAccount=1")
-        End Sub
-
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {

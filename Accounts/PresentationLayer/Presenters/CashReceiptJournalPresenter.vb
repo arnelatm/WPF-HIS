@@ -68,6 +68,17 @@ Namespace PresentationLayer.Presenters
                                               {"Sequence", GetType(Int16)}})
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
+            CreateLookupData("Account", "AccountsByCode")
+            CreateLookupData("RevCostCenter", "RevCostCentersByCode")
+            CreateLookupData("Employee", "EmployeesByName")
+            CreateLookupData("Customer", "CustomersByName")
+            CreateLookupData("Supplier", "SuppliersByName")
+            CreateEnumDataSource(Of ReceiptTypeSelection)("PayorType")
+            CreateSpecialAccountDataSource("AccountIdNo", {EnumToCode(SpecialAccountSelection.Bank), EnumToCode(SpecialAccountSelection.Cash), EnumToCode(SpecialAccountSelection.CheckingAccount)})
+            CreateSpecialAccountDataSource("DiscountAccountIdNo", {EnumToCode(SpecialAccountSelection.AccountsReceivableDiscount)})
+        End Sub
+
         Public Function GetCustomerAdvancesAccountIdNo()
             Return GetRecordFieldWithKey("CA", "Account", "SpecialAccount", "IdNo")
         End Function

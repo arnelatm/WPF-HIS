@@ -26,7 +26,7 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        Public Overrides Sub CreateDataSources()
+        Protected Overrides Sub CreateDataSources()
             Dim employeeLeaveList As List(Of EmployeeLeave) = Service.GetDaoRecords()
             Dim employeeLeaveListModel As New List(Of EmployeeLeaveModel)
             GlobalVariables.Mapper.Map(employeeLeaveList, employeeLeaveListModel)

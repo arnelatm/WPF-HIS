@@ -15,12 +15,6 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
         End Sub
 
-        Protected Overrides Sub CreateDataSources()
-            CreateDataSource("SecurityGroup", cacSecurityGroupIdNo)
-            CreateDataSource("Employee", cacEmployeeIdNo)
-            CreateEnumDataSource(Of SecurityLevelSelection)(cacSecurityLevel)
-        End Sub
-
 #Region "Fields"
 
         Public Property IdNo As Int32 Implements IUserView.IdNo
@@ -79,20 +73,18 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-    End Class
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
+                {
+                {"IdNo", TxtIdNo},
+                {"EmployeeIdNo", cacEmployeeIdNo},
+                {"UserName", TxtUserName},
+                {"Password", TxtPassword},
+                {"SecurityLevel", cacSecurityLevel},
+                {"SecurityGroupIdNo", cacSecurityGroupIdNo}
+                }
+        End Sub
 
-    Public Enum SecurityLevelSelection
-        None
-        Guest
-        User1
-        User2
-        User3
-        Manager1
-        Manager2
-        Manager3
-        Administrator1
-        Administrator2
-        Administrator3
-    End Enum
+    End Class
 
 End Namespace

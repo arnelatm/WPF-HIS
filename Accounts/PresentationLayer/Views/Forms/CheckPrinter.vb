@@ -19,11 +19,17 @@ Namespace PresentationLayer.Views.Forms
         Private _accountsByCode
 
         Public Event PrintCheck() Implements IDisbursementJournalView.PrintCheck
+
         Public Event AutoApplyAmount(bsDjOiItem As BindingSource) Implements IDisbursementJournalView.AutoApplyAmount
+
         Public Event AddSupplierOpenInvoices() Implements IDisbursementJournalView.AddSupplierOpenInvoices
+
         Public Event UserDeletedRow() Implements IDisbursementJournalView.UserDeletedRow
+
         Public Event PrintPcReplenishment() Implements IDisbursementJournalView.PrintPcReplenishment
+
         Public Event FirstLineUpdateNeeded() Implements IDisbursementJournalView.FirstLineUpdateNeeded
+
         Public Event SetSupplierVatNumber(ByRef currentVatNumber As String, idNo As String, override As Boolean) Implements IDisbursementJournalView.SetSupplierVatNumber
 
         Public Sub New()

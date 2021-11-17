@@ -33,14 +33,27 @@ Namespace PresentationLayer.Views.Interfaces
         Property VatNumber As String
         Property JournalItems As List(Of JournalItemView)
         Property DjOiItems As List(Of DjOiItemView)
+        Property AccountsByCode
+        Property EmployeesByName
+        Property SuppliersByName
+        Property CustomersByName
+        Property RevCostCentersByCode
+        Property BankTransfer As Boolean
 
         Event PrintCheck()
+
         Event AutoApplyAmount(bsDjOiItem As BindingSource)
+
         Event AddSupplierOpenInvoices()
+
         Event UserDeletedRow()
+
         Event PrintPcReplenishment()
+
         Event FirstLineUpdateNeeded()
+
         Event SetSupplierVatNumber(ByRef currentVatNumber As String, idNo As String, override As Boolean)
+
     End Interface
 
 End Namespace

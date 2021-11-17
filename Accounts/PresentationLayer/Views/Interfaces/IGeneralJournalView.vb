@@ -17,6 +17,8 @@ Namespace PresentationLayer.Views.Interfaces
         ReadOnly Property TotalCredits As Decimal
         Property TransactionDate As Date?
         Property JournalItems As List(Of JournalItemView)
+        Property AccountsByCode As Object
+        Property RevCostCentersByCode As Object
     End Interface
 
 End Namespace

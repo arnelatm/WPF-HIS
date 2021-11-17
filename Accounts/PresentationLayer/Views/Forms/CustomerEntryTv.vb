@@ -368,16 +368,6 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-        Protected Overrides Sub CreateDataSources()
-            CreateEnumDataSource(Of PaymentMethodSelection)(cacPaymentMethod)
-            CreateEnumDataSource(Of AccountStatusSelection)(cacAccountStatus)
-            CreateDataSource("Country", cacCountryCode)
-            CreateDataSource("Bank", cacBankIdNo)
-            CreateDataSource("DiscountScheme", cacDiscountSchemeIdNo)
-            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.AccountsReceivable)}, cacArAccountIdNo)
-            CreateDataSource("Account", cacRevAccountIdNo, "DetailAccount=1")
-        End Sub
-
         'Private Sub CreateArDataSource()
         '    Dim commaDelimitedSpecialAccountCodes As String = EnumToCode(SpecialAccountSelection.AccountsReceivable)
         '    Dim lookupFilterKey = CreateSpecialAccountFilterKey(commaDelimitedSpecialAccountCodes)

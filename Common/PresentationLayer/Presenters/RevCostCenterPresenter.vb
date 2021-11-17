@@ -19,6 +19,11 @@ Namespace PresentationLayer.Presenters
             ParentViewList = New List(Of TM)
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
+            CreateDataSource("RevCostCenter", "ParentIdNo")
+            CreateEnumDataSource(Of RevCostTypeSelection)("RcType")
+        End Sub
+
     End Class
 
 End Namespace

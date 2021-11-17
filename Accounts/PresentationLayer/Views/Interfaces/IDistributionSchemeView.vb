@@ -13,6 +13,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Notes As String
         Property TotalPercentage As Decimal
         Property DistributionSchemeItems As List(Of DistributionSchemeItemView)
+        Property RevCostCenterByCode
     End Interface
 
 End Namespace

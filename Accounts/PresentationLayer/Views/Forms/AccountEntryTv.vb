@@ -166,14 +166,6 @@ Namespace PresentationLayer.Views.Forms
         '    End If
         'End Sub
 
-        Protected Overrides Sub CreateDataSources()
-            CreateDataSource("Account", cboParentIdNo)
-            CreateEnumDataSource(Of AccountGroupSelection)(cboAccountGroup)
-            CreateEnumDataSource(Of PayeeTypeSelection)(cboPayeeType)
-            CreateEnumDataSource(Of DebitCreditSelection)(cboNormalBalance)
-            CreateEnumDataSource(Of SpecialAccountSelection)(cboSpecialAccount)
-        End Sub
-
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                     {

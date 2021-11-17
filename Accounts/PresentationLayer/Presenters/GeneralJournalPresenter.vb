@@ -49,6 +49,11 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
+            CreateLookupData("Account", "AccountsByCode", "DetailAccount=1")
+            CreateLookupData("RevCostCenter", "RevCostCenterByCode")
+        End Sub
+
         Public Overrides Sub GoPrintRecord()
             Dim totalCreditAmount As String
             Dim currencies As New List(Of CurrencyInfo)()
@@ -166,7 +171,6 @@ Namespace PresentationLayer.Presenters
             Next
             Return result
         End Function
-
 
     End Class
 

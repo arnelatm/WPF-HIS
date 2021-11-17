@@ -66,7 +66,7 @@ Public Class CPictureBox
                                 Dim path As String = GlobalFuncNSub.GetTempFileName(fileExtension)
                                 Dim resizer As ImageResizer = New ImageResizer(MaxImageSize, strFileName, path)
                                 If Not resizer.ScaleImage() Then
-                                    MessageBox.Show("Cannot scale image to 1 Megabyte size. Either select a smaller file size or resize the image manually to less than or equal to 1 Megabyte.")
+                                    MessageBox.Show("Cannot scale image to " & MaxImageSize.ToString() & $" bytes size. Either select a smaller file size or resize the image manually to less than or equal to " & MaxImageSize.ToString() & " bytes.")
                                 End If
                                 Image = Drawing.Image.FromFile(path)
                             End If

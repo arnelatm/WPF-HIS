@@ -15,17 +15,12 @@ Namespace PresentationLayer.Views.Forms
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private ReadOnly _payorOrigWidth As Integer
-        Private _accountsByCode
 
         Private _arFooter As DgvFooter
         Private _csrOiItems As List(Of CsrOiItemView)
         Private _jiFooter As DgvFooter
         Private _journalItems As List(Of JournalItemView)
-        Private _revCostCentersByCode
         Private _defaultAccount As Int16
-        Private _employeesByName
-        Private _suppliersByName
-        Private _customersByName
 
         Public Sub New()
             MyBase.New()
@@ -60,6 +55,12 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
 #Region "Fields"
+
+        Public Property AccountsByCode Implements ICashReceiptJournalView.AccountsByCode
+        Public Property RevCostCentersByCode Implements ICashReceiptJournalView.RevCostCentersByCode
+        Public Property EmployeesByName Implements ICashReceiptJournalView.EmployeesByName
+        Public Property CustomersByName Implements ICashReceiptJournalView.CustomersByName
+        Public Property SuppliersByName Implements ICashReceiptJournalView.SuppliersByName
 
         Public Property AccountIdNo As Int16? Implements ICashReceiptJournalView.AccountIdNo
             Get
@@ -314,17 +315,6 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-        Protected Overrides Sub CreateDataSources()
-            CreateLookupData("Account", NameOf(_accountsByCode))
-            CreateLookupData("RevCostCenter", NameOf(_revCostCentersByCode))
-            CreateLookupData("Employee", NameOf(_employeesByName))
-            CreateLookupData("Customer", NameOf(_customersByName))
-            CreateLookupData("Supplier", NameOf(_suppliersByName))
-            CreateEnumDataSource(Of ReceiptTypeSelection)(cboPayorType)
-            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.Bank), EnumToCode(SpecialAccountSelection.Cash), EnumToCode(SpecialAccountSelection.CheckingAccount)}, cboAccountIdNo)
-            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.AccountsReceivableDiscount)}, cboDiscountAccountIdNo)
-        End Sub
-
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
         {
@@ -447,13 +437,13 @@ Namespace PresentationLayer.Views.Forms
             End With
             With DataGridViewJournalItems.Columns
                 dgvSequence.DisplayOnly = True
-                dgvAccountIdNo.DataSource = _accountsByCode
+                dgvAccountIdNo.DataSource = AccountsByCode
                 dgvAccountIdNo.DisplayMember = "Name"
                 dgvAccountIdNo.ValueMember = "IdNo"
                 dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvAccountIdNo.AutoComplete = True
-                dgvRevCostCenterIdNo.DataSource = _revCostCentersByCode
+                dgvRevCostCenterIdNo.DataSource = RevCostCentersByCode
                 dgvRevCostCenterIdNo.DisplayMember = "Name"
                 dgvRevCostCenterIdNo.ValueMember = "idNo"
                 dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend

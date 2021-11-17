@@ -22,6 +22,12 @@ Public Class UserPresenter(Of TM As New)
         TreeViewSecondaryField = "EmployeeIdNo"
     End Sub
 
+    Protected Overrides Sub CreateDataSources()
+        CreateDataSource("SecurityGroup", "SecurityGroupIdNo")
+        CreateDataSource("Employee", "EmployeeIdNo")
+        CreateEnumDataSource(Of SecurityLevelSelection)("SecurityLevel")
+    End Sub
+
     Private Sub OnBeforeSave() Handles MyBase.BeforeSave
         If View.Password <> OriginalModel.Password Then
             View.Password = _serviceLogin.EncryptPassword(View.IdNo, View.Password)
@@ -52,3 +58,17 @@ Public Class UserPresenter(Of TM As New)
     End Function
 
 End Class
+
+Public Enum SecurityLevelSelection
+    None
+    Guest
+    User1
+    User2
+    User3
+    Manager1
+    Manager2
+    Manager3
+    Administrator1
+    Administrator2
+    Administrator3
+End Enum

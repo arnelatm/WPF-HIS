@@ -1,7 +1,5 @@
 ﻿Imports System.Globalization
-Imports System.IO
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Common
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
@@ -15,12 +13,13 @@ Namespace PresentationLayer.Views.Forms
         Private _regularEmployeeEarnings As List(Of EmployeePayElementView)
         Private _employeeLeaveCredits As List(Of EmployeeLeaveCreditView)
         Private _employeePhones As List(Of EmployeePhoneView)
-        Private _unit As List(Of Lookup.LookupData)
-        Private _phoneTypes As List(Of Lookup.LookupData)
-        Private _deductionsByName As List(Of Lookup.LookupData)
-        Private _leaves As List(Of Lookup.LookupData)
-        Private _earningsByName As List(Of Lookup.LookupData)
+
+        'Private _unit As List(Of Lookup.LookupData)
+        'Private _deductionsByName As List(Of Lookup.LookupData)
+        'Private _leaves As List(Of Lookup.LookupData)
+        'Private _earningsByName As List(Of Lookup.LookupData)
         Private _fileSizeTooLarge As Boolean = False
+
         Private ReadOnly _nfi As NumberFormatInfo
 
         Public Sub New()
@@ -34,6 +33,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
 #Region "Fields"
+
+        Public Property PhoneTypes As List(Of Lookup.LookupData) Implements IEmployeeView.PhoneTypes
+        Public Property Leaves As List(Of Lookup.LookupData) Implements IEmployeeView.Leaves
+        Public Property DeductionsByName As List(Of Lookup.LookupData) Implements IEmployeeView.DeductionsByName
+        Public Property EarningsByName As List(Of Lookup.LookupData) Implements IEmployeeView.EarningsByName
+        Public Property Unit As List(Of Lookup.LookupData) Implements IEmployeeView.Unit
 
         Public Property Active As Boolean Implements IEmployeeView.Active
             Get
@@ -453,32 +458,6 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-        Protected Overrides Sub CreateDataSources()
-            CreateEnumDataSource(Of MaleFemaleSelection)(cacGender)
-            CreateEnumDataSource(Of MaritalStatusSelection)(cacMaritalStatus)
-            CreateEnumDataSource(Of PayrollPaymentMethodSelection)(cboPaymentMethod)
-            CreateEnumDataSource(Of SponsorTypeSelection)(cboSponsorType)
-            CreateEnumDataSource(Of BloodTypeSelection)(cboBloodType)
-            CreateEnumData(Of PayRateUnitSelection)(_unit)
-            CreateDataSource("Bank", cacBankIdNo)
-            CreateDataSource("Country", cacCountryCode)
-            CreateDataSource("Department", cacDepartmentIdNo)
-            CreateDataSource("Designation", cacDesignationIdNo)
-            CreateDataSource("Country", cacNationalityCode)
-            CreateDataSource("Religion", cacReligionIdNo)
-            CreateDataSource("PayCycle", cboPayCycleidNo)
-            CreateDataSource("PayGroup", cboPayGroupIdNo)
-            CreateDataSource("Employee", cboSupervisorIdNo, "Supervisor=1")
-            CreateLookupData("PhoneType", NameOf(_phoneTypes))
-            CreateLookupData("Leave", NameOf(_leaves))
-            CreateLookupData("PayElement", NameOf(_deductionsByName), "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
-            CreateLookupData("PayElement", NameOf(_earningsByName), "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
-        End Sub
-
-        'Private Sub CreateLookupData(tableName As String, cVariableName As String)
-        '    _phoneTypes = GetLookupData(tableName, cVariableName)
-        'End Sub
-
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
         {
@@ -487,6 +466,7 @@ Namespace PresentationLayer.Views.Forms
          {"BankAccountNo", txtBankAccountNo},
          {"BankIdNo", cacBankIdNo},
          {"BirthDate", dtpBirthDate},
+         {"BloodType", cboBloodType},
          {"CountryCode", cacCountryCode},
          {"DepartmentIdNo", cacDepartmentIdNo},
          {"DesignationIdNo", cacDesignationIdNo},
@@ -522,21 +502,7 @@ Namespace PresentationLayer.Views.Forms
         }
         End Sub
 
-        'Private Sub EmployeeEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        '    'If GlobalVariables.RightToLeftLayout Then
-        '    '    SwitchUiLanguage(True)
-        '    '    SwitchUiLanguage(False)
-        '    'Else
-        '    '    SwitchUiLanguage(True)
-        '    'End If
-        '    DataGridViewEarnings.DgvFooter.ColumnToSum("dgvEarningAmount") = True
-        '    DataGridViewEarnings.DgvFooter.SetText("dgvEarningIdNo", "Totals ->")
-        '    DataGridViewDeductions.DgvFooter.ColumnToSum("dgvDeductionAmount") = True
-        '    DataGridViewDeductions.DgvFooter.SetText("dgvDeductionIdNo", "Totals ->")
-        'End Sub
-
         Private Sub BindEmployeeDeduction()
-            'SuspendLayout()
             bsDeductions.DataSource = Nothing
             DataGridViewDeductions.Refresh()
             bsDeductions.DataSource = RegularEmployeeDeductions
@@ -548,19 +514,18 @@ Namespace PresentationLayer.Views.Forms
                 .Refresh()
             End With
             With DataGridViewDeductions.Columns
-                dgvDeductionIdNo.DataSource = _deductionsByName
+                dgvDeductionIdNo.DataSource = DeductionsByName
                 dgvDeductionIdNo.DisplayMember = "Name"
                 dgvDeductionIdNo.ValueMember = "IdNo"
                 dgvDeductionIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvDeductionIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvDeductionUnit.DataSource = _unit
+                dgvDeductionUnit.DataSource = Unit
                 dgvDeductionUnit.ValueMember = "Code"
                 dgvDeductionUnit.DisplayMember = "Name"
                 dgvDeductionUnit.DisplayStyleForCurrentCellOnly = True
                 dgvSequenceDeduction.DisplayOnly = True
                 dgvDeductionAmount.DisplayOnly = True
             End With
-            'ResumeLayout()
         End Sub
 
         Private Sub BindEmployeeEarning()
@@ -576,12 +541,12 @@ Namespace PresentationLayer.Views.Forms
                 .Refresh()
             End With
             With DataGridViewEarnings.Columns
-                dgvEarningIdNo.DataSource = _earningsByName
+                dgvEarningIdNo.DataSource = EarningsByName
                 dgvEarningIdNo.DisplayMember = "Name"
                 dgvEarningIdNo.ValueMember = "IdNo"
                 dgvEarningIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvEarningUnit.DataSource = _unit
+                dgvEarningUnit.DataSource = Unit
                 dgvEarningUnit.ValueMember = "Code"
                 dgvEarningUnit.DisplayMember = "Name"
                 dgvEarningUnit.DisplayStyleForCurrentCellOnly = True
@@ -605,7 +570,7 @@ Namespace PresentationLayer.Views.Forms
             End With
             With DataGridViewPhones.Columns
                 dgvPhoneTypeIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvPhoneTypeIdNo.DataSource = _phoneTypes
+                dgvPhoneTypeIdNo.DataSource = PhoneTypes
                 dgvPhoneTypeIdNo.DisplayMember = "Name"
                 dgvPhoneTypeIdNo.ValueMember = "IdNo"
                 dgvPhoneTypeIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
@@ -639,7 +604,7 @@ Namespace PresentationLayer.Views.Forms
             End With
             With DataGridViewLeaveCredits.Columns
                 dgvLeaveIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvLeaveIdNo.DataSource = _leaves
+                dgvLeaveIdNo.DataSource = Leaves
                 dgvLeaveIdNo.DisplayMember = "Name"
                 dgvLeaveIdNo.ValueMember = "IdNo"
                 dgvLeaveIdNo.AutoComplete = AutoCompleteMode.SuggestAppend

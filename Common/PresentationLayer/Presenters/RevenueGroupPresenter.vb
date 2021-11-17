@@ -18,6 +18,10 @@ Namespace PresentationLayer.Presenters
             ParentFieldName = "ParentIdNo"
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
+            CreateDataSource("RevenueGroup", "ParentIdNo")
+        End Sub
+
         Public Function GetLastSortKey(ByVal searchValue As String) As String
             Return Service.GetLastSortKey(searchValue, TableName)
         End Function

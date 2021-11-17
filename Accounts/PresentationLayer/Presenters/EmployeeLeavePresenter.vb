@@ -46,20 +46,20 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Overrides Sub CreateDataSources()
+        Protected Overrides Sub CreateDataSources()
             If UserHasAccess("HumanResources") Then
-                CreateControlDataSource("Employee", "EmployeeIdNo")
+                CreateDataSource("Employee", "EmployeeIdNo")
             ElseIf IsUserASupervisor() Then
                 Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
                 Dim filter As String = "IdNo = " + employeeIdNo.ToString() + " or SupervisorIdNo = " + employeeIdNo.ToString()
-                CreateControlDataSource("Employee", "EmployeeIdNo", filter)
+                CreateDataSource("Employee", "EmployeeIdNo", filter)
             Else
                 Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
-                CreateControlDataSource("Employee", "EmployeeIdNo", "IdNo = " + employeeIdNo.ToString())
+                CreateDataSource("Employee", "EmployeeIdNo", "IdNo = " + employeeIdNo.ToString())
             End If
-            CreateControlDataSource("User", "AppliedBy", {"IdNo", "UserName"})
-            CreateControlDataSource("Leave", "LeaveIdNo")
-            CreateControlEnumDataSource(Of LeaveStatusSelection)("LeaveStatus")
+            CreateDataSource("User", "AppliedBy", {"IdNo", "UserName"})
+            CreateDataSource("Leave", "LeaveIdNo")
+            CreateEnumDataSource(Of LeaveStatusSelection)("LeaveStatus")
         End Sub
 
     End Class

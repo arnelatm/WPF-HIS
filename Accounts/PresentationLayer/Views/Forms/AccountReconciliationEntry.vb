@@ -261,10 +261,6 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-        Protected Overrides Sub CreateDataSources()
-            CreateSpecialAccountDataSource(Ea, {EnumToCode(SpecialAccountSelection.Bank), EnumToCode(SpecialAccountSelection.CheckingAccount), EnumToCode(SpecialAccountSelection.Cash), EnumToCode(SpecialAccountSelection.PettyCashAccount)}, cboAccountIdNo)
-        End Sub
-
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {

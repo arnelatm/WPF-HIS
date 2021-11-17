@@ -3,6 +3,7 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
@@ -12,6 +13,12 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(itemView As AATM.PresentationLayer.Views.IView)
             MyBase.New(itemView)
+        End Sub
+
+        Public Sub CreateSpecialAccountDataSource(fieldName As String, specialAccountArray As String())
+            Dim filter As String
+            filter = CreateSpecialAccountFilterKey(specialAccountArray)
+            CreateDataSource("Account", fieldName, filter)
         End Sub
 
         Public Function GetDepositTypeModel() As List(Of DepositTypeModel)
