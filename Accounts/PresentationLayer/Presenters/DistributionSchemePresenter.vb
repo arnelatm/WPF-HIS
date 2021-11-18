@@ -15,6 +15,8 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IDistributionSchemeView)
             MyBase.New(view)
+
+            Service = New AccountsService("DistributionScheme")
             TableName = "DistributionScheme"
             SortOrderKey = "DistributionSchemeName"
 
@@ -32,7 +34,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateLookupData("RevCostCenter", "RevCostCenterByCode")
+            CreateLookupData("RevCostCenter", "RevCostCentersByCode")
         End Sub
 
         Private Sub OnBeforeSave() Handles MyBase.BeforeSave

@@ -1189,6 +1189,23 @@ Public Class BfMain
         childForm.Show()
     End Sub
 
+    Public Sub RunSubForm(Of TV, TP)()
+        Dim childMdiForm = Activator.CreateInstance(GetType(TV))
+        Dim pType As Type = GetType(TP)
+        childMdiForm.Presenter = Activator.CreateInstance(pType, {childMdiForm})
+        childMdiForm.MdiParent = Me
+        childMdiForm.Show()
+    End Sub
+
+    Public Sub RunSubForm(Of TF, TP)(subFormParent As Form)
+        Dim childForm = Activator.CreateInstance(GetType(TF))
+        Activator.CreateInstance(GetType(TP), {childForm})
+        Dim pType As Type = GetType(TP)
+        childForm.Presenter = Activator.CreateInstance(pType, {childForm})
+        childForm.MdiParent = subFormParent
+        childForm.Show()
+    End Sub
+
 End Class
 
 Public Class SettingsSaver

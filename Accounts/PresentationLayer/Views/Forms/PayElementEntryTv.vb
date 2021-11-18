@@ -337,8 +337,6 @@ Namespace PresentationLayer.Views.Forms
             Return False
         End Function
 
-
-
         Private Sub UpdateReportGroup()
             cboReportGroupIdNo.DataSource = Nothing
             If cboPayElementKind.SelectedValue = EnumToCode(PayElementKindSelection.Deduction) Then
@@ -379,22 +377,25 @@ Namespace PresentationLayer.Views.Forms
                 {"BasePaymentIdNo", cboBasePaymentIdNo},
                 {"CalculationType", cboCalculationType},
                 {"DefaultQuantity", txtDefaultQuantity},
-                {"PayElementCode", txtPayElementCode},
-                {"PayElementName", txtPayElementName},
-                {"PayElementNameAra", txtPayElementNameAra},
+                {"FactorType", cboFactorType},
+                {"FactorValue", txtMultiplier},
                 {"IdNo", TxtIdNo},
                 {"IncludeInEos", chkIncludeInEOS},
-                {"FactorValue", txtMultiplier},
-                {"FactorType", cboFactorType},
                 {"Notes", txtNotes},
+                {"PayElementAccounts", DataGridViewPayElementAccounts},
+                {"PayElementCode", txtPayElementCode},
+                {"PayElementItems", DataGridViewPayElementItems},
+                {"PayElementKind", cboPayElementKind},
+                {"PayElementName", txtPayElementName},
+                {"PayElementNameAra", txtPayElementNameAra},
+                {"PayElementType", cboPayElementType},
+                {"QuantityType", cboQuantityType},
                 {"Rate", txtRate},
+                {"ReportGroupIdNo", cboReportGroupIdNo},
                 {"Summary", chkSummary},
                 {"Taxable", chkTaxable},
                 {"Unit", cboUnit},
-                {"QuantityType", cboQuantityType},
-                {"UsePayGroups", chkUsePayGroups},
-                {"PayElementItems", DataGridViewPayElementItems},
-                {"PayElementAccounts", DataGridViewPayElementAccounts}
+                {"UsePayGroups", chkUsePayGroups}
                 }
 
             _eSumFieldsDict = New Dictionary(Of String, Object) From

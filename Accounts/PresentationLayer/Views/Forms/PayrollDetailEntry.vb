@@ -15,8 +15,6 @@ Namespace PresentationLayer.Views.Forms
 
         Private _payrollEarnings As List(Of PayrollPayElementView)
         Private _payrollDeductions As List(Of PayrollPayElementView)
-        Private _payEarningsByCode
-        Private _payDeductionsByCode
         Private _earningFooter
         Private _deductionFooter
 
@@ -52,6 +50,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
 #Region "Fields"
+
+        Public Property PayEarningsByCode As Object Implements IPayrollDetailView.PayEarningsByCode
+        Public Property PayDeductionsByCode As Object Implements IPayrollDetailView.PayDeductionsByCode
 
         Public Property BankTransfer As Boolean Implements IPayrollDetailView.BankTransfer
             Get
@@ -208,7 +209,6 @@ Namespace PresentationLayer.Views.Forms
                 {"EndDate", dtpEndDate},
                 {"IdNo", txtIdNo},
                 {"PayrollIdNo", txtPayrollIdNo},
-                {"SponsorType", SponsorType},
                 {"StartDate", dtpStartDate}
                 }
         End Sub
@@ -220,7 +220,7 @@ Namespace PresentationLayer.Views.Forms
             bsEarnings.DataSource = PayrollEarnings
             bsEarnings.AllowNew = True
             With DataGridViewEarnings
-                dgvEarningIdNo.DataSource = _payEarningsByCode
+                dgvEarningIdNo.DataSource = _PayEarningsByCode
                 dgvEarningIdNo.DisplayMember = "Name"
                 dgvEarningIdNo.ValueMember = "IdNo"
                 dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
@@ -238,7 +238,7 @@ Namespace PresentationLayer.Views.Forms
             bsDeductions.DataSource = PayrollDeductions
             bsDeductions.AllowNew = True
             With DataGridViewDeductions
-                dgvDeductionIdNo.DataSource = _payDeductionsByCode
+                dgvDeductionIdNo.DataSource = _PayDeductionsByCode
                 dgvDeductionIdNo.DisplayMember = "Name"
                 dgvDeductionIdNo.ValueMember = "IdNo"
                 dgvDeductionIdNo.DisplayStyleForCurrentCellOnly = True

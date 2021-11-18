@@ -49,7 +49,7 @@ Namespace PresentationLayer.Views.Forms
             DtUpdateTable.Columns.Add("RevCostCenterIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Percentage", GetType(Decimal))
 
-            _revCostCenterByCode = Presenter.GetLookup("RevCostCenter")
+            RevCostCentersByCode = Presenter.GetLookup("RevCostCenter")
 
         End Sub
 
@@ -142,8 +142,7 @@ Namespace PresentationLayer.Views.Forms
 #Region "DistributionSchemeItemsView"
 
         Public Property DistributionSchemeItemsDataSource As List(Of DistributionSchemeItemModel)
-        Public Property RevCostCenterByCode As Object Implements IDistributionSchemeView.RevCostCenterByCode
-
+        Public Property RevCostCentersByCode As Object Implements IDistributionSchemeView.RevCostCentersByCode
 
         Public Property DistributionSchemeItems As IList(Of DistributionSchemeItemModel) Implements IDistributionSchemeItemsView.DistributionSchemeItems
             Get
@@ -153,7 +152,6 @@ Namespace PresentationLayer.Views.Forms
                 _distributionSchemeItems = value
             End Set
         End Property
-
 
         Private Sub BindDistributionSchemeItem()
             bsDistributionSchemeItems.DataSource = DistributionSchemeItems
@@ -168,7 +166,7 @@ Namespace PresentationLayer.Views.Forms
             End With
             With DataGridViewDistributionSchemeItems.Columns
                 dgvSequence.DisplayOnly = True
-                dgvRevCostCenterIdNo.DataSource = _revCostCenterByCode
+                dgvRevCostCenterIdNo.DataSource = RevCostCentersByCode
                 dgvRevCostCenterIdNo.DisplayMember = "Name"
                 dgvRevCostCenterIdNo.ValueMember = "idNo"
                 dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend

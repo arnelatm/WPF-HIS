@@ -30,11 +30,9 @@ Namespace PresentationLayer.Views.Forms
 
 #Region "Fields"
 
-        
         Public Property AccountsByCode As Object Implements ISalesJournalView.AccountsByCode
         Public Property DepositTypesByCode As Object Implements ISalesJournalView.DepositTypesByCode
-        Public Property RevCostCenterByCode As Object Implements ISalesJournalView.RevCostCenterByCode
-
+        Public Property RevCostCentersByCode As Object Implements ISalesJournalView.RevCostCentersByCode
 
         Public Property AccountIdNo As Int16? Implements ISalesJournalView.AccountIdNo
             Get
@@ -193,8 +191,6 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-
-
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
@@ -240,7 +236,7 @@ Namespace PresentationLayer.Views.Forms
                     dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                     dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
                     dgvAccountIdNo.AutoComplete = True
-                    dgvRevCostCenterIdNo.DataSource = RevCostCenterByCode
+                    dgvRevCostCenterIdNo.DataSource = RevCostCentersByCode
                     dgvRevCostCenterIdNo.DisplayMember = "Name"
                     dgvRevCostCenterIdNo.ValueMember = "idNo"
                     dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend

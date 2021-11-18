@@ -1,16 +1,13 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
     Public Class DistributionSchemeEntry
         Implements IDistributionSchemeView
 
-        Private ReadOnly _distributionSchemeItemsPresenter As New DistributionSchemeItemsPresenter(Me)
+        'Private ReadOnly _distributionSchemeItemsPresenter As New DistributionSchemeItemsPresenter(Me)
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
         Private _footer As DgvFooter
@@ -27,6 +24,7 @@ Namespace PresentationLayer.Views.Forms
             ' Set KeyPreview object to true to allow the form to process
             ' the key before the control with focus processes it.
             ' Add any initialization after the InitializeComponent() call.
+
             FirstControl = txtDistributionSchemeCode
             _nfi.NumberDecimalDigits = 2
         End Sub
@@ -127,7 +125,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property RevCostCenterByCode As Object Implements IDistributionSchemeView.RevCostCenterByCode
+        Public Property RevCostCentersByCode As Object Implements IDistributionSchemeView.RevCostCentersByCode
 
 #End Region
 
@@ -160,7 +158,7 @@ Namespace PresentationLayer.Views.Forms
             End With
             With DataGridViewDistributionSchemeItems.Columns
                 dgvSequence.DisplayOnly = True
-                dgvRevCostCenterIdNo.DataSource = _RevCostCenterByCode
+                dgvRevCostCenterIdNo.DataSource = RevCostCentersByCode
                 dgvRevCostCenterIdNo.DisplayMember = "Code"
                 dgvRevCostCenterIdNo.ValueMember = "idNo"
                 dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
