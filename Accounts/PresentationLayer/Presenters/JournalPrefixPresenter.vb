@@ -14,7 +14,7 @@ Namespace PresentationLayer.Presenters
             TreeViewMainField = "JournalName"
             TreeViewSecondaryField = "JournalCode"
             SortOrderKey = "IdNo"
-            QuitOnSave = False
+            'QuitOnSave = False
         End Sub
 
     End Class

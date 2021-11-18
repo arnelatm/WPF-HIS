@@ -38,7 +38,7 @@ Namespace PresentationLayer.Views.Forms
 #Region "Fields"
 
         Public Property AccountsByCode Implements IArJournalView.AccountsByCode
-        Public Property RevCostCentersByCode Implements IArJournalView.RevCostCenterByCode
+        Public Property RevCostCentersByCode Implements IArJournalView.RevCostCentersByCode
 
         Public Property AccountIdNo As Int16? Implements IArJournalView.AccountIdNo
             Get

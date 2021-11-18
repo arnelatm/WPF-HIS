@@ -90,14 +90,13 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-
-
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
                 {"PayCycleCode", txtPayCycleCode},
                 {"PayCycleName", txtPayCycleName},
                 {"PayCycleNameAra", txtPayCycleNameAra},
+                {"PayFrequency", cboPayFrequency},
                 {"IdNo", TxtIdNo},
                 {"Notes", txtNotes}
                 }

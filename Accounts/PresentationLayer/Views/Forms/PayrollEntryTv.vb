@@ -138,9 +138,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-
-
-
 #End Region
 
         Public Event InitializeAttendance(sender As Object) Implements IPayrollView.InitializeAttendance
@@ -278,10 +275,10 @@ Namespace PresentationLayer.Views.Forms
             RunSubForm(Of EmployeeAbsenceEntry, EmployeeAbsencePresenter(Of EmployeeAbsenceModel))(IdNo, ParentForm)
         End Sub
 
-        Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton2.ClickButtonArea
-            RunSubForm(Of EmployeeLeaveEntry, EmployeeLeavePresenter(Of EmployeeLeaveModel))(IdNo, ParentForm)
-
+        Private Sub CButton2_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles CButton2.ClickButtonArea
+            RunSubForm(Of EmployeeLeaveEntry, EmployeeLeavePresenter(Of EmployeeLeaveModel))(ParentForm)
         End Sub
+
     End Class
 
 End Namespace

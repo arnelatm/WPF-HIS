@@ -51,7 +51,7 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Sub CreateDataSources()
             CreateLookupData("Account", "AccountsByCode", "DetailAccount=1")
-            CreateLookupData("RevCostCenter", "RevCostCenterByCode")
+            CreateLookupData("RevCostCenter", "RevCostCentersByCode")
         End Sub
 
         Public Overrides Sub GoPrintRecord()
