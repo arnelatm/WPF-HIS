@@ -21,6 +21,7 @@ Namespace PresentationLayer.Views.Forms
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(GeneratePayrollBankCsv))
         Me.lblPayrollName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -29,11 +30,11 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayCycleIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblPayrollCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtPayrollCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtStartDate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtEndDate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.dtpStartDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
+        Me.dtpEndDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout1.SuspendLayout
         Me.SuspendLayout
@@ -78,9 +79,9 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout1.Controls.Add(Me.lblPayrollCode)
         Me.CFlowLayout1.Controls.Add(Me.txtPayrollCode)
         Me.CFlowLayout1.Controls.Add(Me.lblStartDate)
-        Me.CFlowLayout1.Controls.Add(Me.txtStartDate)
+        Me.CFlowLayout1.Controls.Add(Me.dtpStartDate)
         Me.CFlowLayout1.Controls.Add(Me.lblEndDate)
-        Me.CFlowLayout1.Controls.Add(Me.txtEndDate)
+        Me.CFlowLayout1.Controls.Add(Me.dtpEndDate)
         Me.CFlowLayout1.Location = New System.Drawing.Point(12, 57)
         Me.CFlowLayout1.Name = "CFlowLayout1"
         Me.CFlowLayout1.Size = New System.Drawing.Size(502, 141)
@@ -239,37 +240,6 @@ Namespace PresentationLayer.Views.Forms
         Me.txtPayrollCode.TabIndex = 2
         Me.txtPayrollCode.Translatable = false
         '
-        'txtStartDate
-        '
-        Me.txtStartDate.BackColor = System.Drawing.Color.White
-        Me.txtStartDate.BegFindValue = Nothing
-        Me.txtStartDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtStartDate.ComputedValue = false
-        Me.txtStartDate.CustomFormat = Nothing
-        Me.txtStartDate.DataBoundControl = true
-        Me.txtStartDate.DisplayOnly = true
-        Me.txtStartDate.EditingMode = true
-        Me.txtStartDate.EndFindValue = Nothing
-        Me.txtStartDate.FieldDescription = Nothing
-        Me.txtStartDate.FieldName = Nothing
-        Me.txtStartDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtStartDate.FindEnabled = false
-        Me.CFlowLayout1.SetFlowBreak(Me.txtStartDate, true)
-        Me.txtStartDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtStartDate.ForeColor = System.Drawing.Color.Black
-        Me.txtStartDate.LinkedLabel = Nothing
-        Me.txtStartDate.Location = New System.Drawing.Point(121, 80)
-        Me.txtStartDate.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtStartDate.MaximumValue = Nothing
-        Me.txtStartDate.MinimumValue = Nothing
-        Me.txtStartDate.Name = "txtStartDate"
-        Me.txtStartDate.OldValue = Nothing
-        Me.txtStartDate.ReadOnly = true
-        Me.txtStartDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtStartDate.Size = New System.Drawing.Size(100, 23)
-        Me.txtStartDate.TabIndex = 3
-        Me.txtStartDate.Translatable = false
-        '
         'lblEndDate
         '
         Me.lblEndDate.BackColor = System.Drawing.Color.Transparent
@@ -285,37 +255,6 @@ Namespace PresentationLayer.Views.Forms
         Me.lblEndDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.lblEndDate.Translatable = true
         '
-        'txtEndDate
-        '
-        Me.txtEndDate.BackColor = System.Drawing.Color.White
-        Me.txtEndDate.BegFindValue = Nothing
-        Me.txtEndDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtEndDate.ComputedValue = false
-        Me.txtEndDate.CustomFormat = Nothing
-        Me.txtEndDate.DataBoundControl = true
-        Me.txtEndDate.DisplayOnly = true
-        Me.txtEndDate.EditingMode = true
-        Me.txtEndDate.EndFindValue = Nothing
-        Me.txtEndDate.FieldDescription = Nothing
-        Me.txtEndDate.FieldName = Nothing
-        Me.txtEndDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtEndDate.FindEnabled = false
-        Me.CFlowLayout1.SetFlowBreak(Me.txtEndDate, true)
-        Me.txtEndDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtEndDate.ForeColor = System.Drawing.Color.Black
-        Me.txtEndDate.LinkedLabel = Nothing
-        Me.txtEndDate.Location = New System.Drawing.Point(121, 106)
-        Me.txtEndDate.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtEndDate.MaximumValue = Nothing
-        Me.txtEndDate.MinimumValue = Nothing
-        Me.txtEndDate.Name = "txtEndDate"
-        Me.txtEndDate.OldValue = Nothing
-        Me.txtEndDate.ReadOnly = true
-        Me.txtEndDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtEndDate.Size = New System.Drawing.Size(100, 23)
-        Me.txtEndDate.TabIndex = 4
-        Me.txtEndDate.Translatable = false
-        '
         'btnOk
         '
         Me.btnOk.DesignerSelected = false
@@ -330,7 +269,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'btnCancel
         '
-        Me.btnCancel.DesignerSelected = true
+        Me.btnCancel.DesignerSelected = false
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnCancel.ImageIndex = 0
         Me.btnCancel.Location = New System.Drawing.Point(243, 204)
@@ -340,6 +279,57 @@ Namespace PresentationLayer.Views.Forms
         Me.btnCancel.Size = New System.Drawing.Size(90, 25)
         Me.btnCancel.TabIndex = 9
         Me.btnCancel.Text = "Cancel"
+        '
+        'dtpStartDate
+        '
+        Me.dtpStartDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+        Me.dtpStartDate.DefaultValue = Nothing
+        Me.dtpStartDate.DisplayOnly = false
+        Me.dtpStartDate.DtpDefaultValue = Nothing
+        Me.dtpStartDate.EditingMode = true
+        Me.dtpStartDate.EditsAllowed = false
+        Me.CFlowLayout1.SetFlowBreak(Me.dtpStartDate, true)
+        Me.dtpStartDate.ForeColor = System.Drawing.Color.Black
+        Me.dtpStartDate.LinkedLabel = Nothing
+        Me.dtpStartDate.Location = New System.Drawing.Point(121, 80)
+        Me.dtpStartDate.Margin = New System.Windows.Forms.Padding(1)
+        Me.dtpStartDate.Name = "dtpStartDate"
+        Me.dtpStartDate.ReadOnlyDp = false
+        Me.dtpStartDate.SecurityKey = Nothing
+        Me.dtpStartDate.ShowLongDate = false
+        Me.dtpStartDate.ShowTime = false
+        Me.dtpStartDate.Size = New System.Drawing.Size(112, 23)
+        Me.dtpStartDate.TabIndex = 11
+        Me.dtpStartDate.TargetCalendar = CType(resources.GetObject("dtpStartDate.TargetCalendar"),System.Globalization.Calendar)
+        Me.dtpStartDate.Translatable = false
+        Me.dtpStartDate.Value = Nothing
+        Me.dtpStartDate.ValueIsMandatory = false
+        Me.dtpStartDate.ValueIsNullable = false
+        '
+        'dtpEndDate
+        '
+        Me.dtpEndDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+        Me.dtpEndDate.DefaultValue = Nothing
+        Me.dtpEndDate.DisplayOnly = false
+        Me.dtpEndDate.DtpDefaultValue = Nothing
+        Me.dtpEndDate.EditingMode = true
+        Me.dtpEndDate.EditsAllowed = false
+        Me.dtpEndDate.ForeColor = System.Drawing.Color.Black
+        Me.dtpEndDate.LinkedLabel = Nothing
+        Me.dtpEndDate.Location = New System.Drawing.Point(121, 106)
+        Me.dtpEndDate.Margin = New System.Windows.Forms.Padding(1)
+        Me.dtpEndDate.Name = "dtpEndDate"
+        Me.dtpEndDate.ReadOnlyDp = false
+        Me.dtpEndDate.SecurityKey = Nothing
+        Me.dtpEndDate.ShowLongDate = false
+        Me.dtpEndDate.ShowTime = false
+        Me.dtpEndDate.Size = New System.Drawing.Size(112, 23)
+        Me.dtpEndDate.TabIndex = 12
+        Me.dtpEndDate.TargetCalendar = CType(resources.GetObject("dtpEndDate.TargetCalendar"),System.Globalization.Calendar)
+        Me.dtpEndDate.Translatable = false
+        Me.dtpEndDate.Value = Nothing
+        Me.dtpEndDate.ValueIsMandatory = false
+        Me.dtpEndDate.ValueIsNullable = false
         '
         'GeneratePayrollBankCsv
         '
@@ -369,12 +359,12 @@ End Sub
         Friend WithEvents lblEndDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
-        Friend WithEvents txtStartDate As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents txtEndDate As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblPayFrequency As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblPayrollCode As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtPayrollCode As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents cboIdNo As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents cboPayCycleIdNo As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents dtpStartDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
+        Friend WithEvents dtpEndDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
     End Class
 End NameSpace
