@@ -9,12 +9,12 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property MainTableName As String
 
-        Public Property EndDate As Date Implements IPayrollView.EndDate
+        Public Property EndDate As Date? Implements IPayrollView.EndDate
             Get
-                Return txtEndDate.Text
+                Return dtpEndDate.Value
             End Get
-            Set(value As Date)
-                txtEndDate.Text = value
+            Set
+                dtpEndDate.Value = Value
             End Set
         End Property
 
@@ -48,12 +48,12 @@ Namespace PresentationLayer.Views.Forms
         Public Property PayrollName As String Implements IPayrollView.PayrollName
         Public Property PayrollNameAra As String Implements IPayrollView.PayrollNameAra
 
-        Public Property StartDate As Date Implements IPayrollView.StartDate
+        Public Property StartDate As Date? Implements IPayrollView.StartDate
             Get
-                Return txtStartDate.Text
+                Return dtpStartDate.Value
             End Get
-            Set(value As Date)
-                txtStartDate.Text = value
+            Set
+                dtpStartDate.Value = Value
             End Set
         End Property
 
@@ -108,6 +108,17 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub btnCancel_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
             Close()
+        End Sub
+
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
+                {
+                {"IdNo", cboIdNo},
+                {"PayCycleIdNo", cboPayCycleIdNo},
+                {"PayrollCode", txtPayrollCode},
+                {"StartDate", StartDate},
+                {"EndDate", EndDate}
+                }
         End Sub
 
     End Class

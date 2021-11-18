@@ -4,7 +4,6 @@ Imports System.Threading
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Common
 Imports AATM.Common.PresentationLayer.Models
@@ -18,7 +17,6 @@ Imports AATM.PresentationLayer.Forms
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views.Interfaces
-Imports AATM.ServicesLayer.Services
 Imports AutoMapper
 
 Namespace PresentationLayer.Views.Forms

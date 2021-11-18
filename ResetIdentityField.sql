@@ -1,1 +1,3 @@
-﻿  DBCC CHECKIDENT ('securityobject', RESEED, 1)  
+﻿DECLARE @Max INT;
+SET @Max = (SELECT MAX (IdNo) FROM SecurityObject);
+DBCC CHECKIDENT('SecurityObject', RESEED, @Max);
