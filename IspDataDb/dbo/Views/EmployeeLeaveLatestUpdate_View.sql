@@ -1,5 +1,10 @@
 ﻿
 
+
+
+
+
+
 CREATE View [dbo].[EmployeeLeaveLatestUpdate_View] As
 SELECT [IdNo]
       ,[AppliedBy]
@@ -8,10 +13,14 @@ SELECT [IdNo]
       ,[EndDate]
       ,[FullDay]
       ,[EnteredBy]
-      ,[Status]
+      ,[Status] as 'LeaveStatus'
       ,[Note]
       ,[LeaveStatusDate]
 	  ,[LatestStatusUpdate]
+	  ,[DateCreated]
+      ,[EmployeeIdNo]
+      ,[LeaveReason]
+      ,[SupervisorIdNo]
   FROM [EmployeeLeaveStatus_View]
   Union
   SELECT [IdNo]
@@ -21,8 +30,12 @@ SELECT [IdNo]
       ,[EndDate]
       ,[FullDay]
       ,[EnteredBy]
-      ,[Status]
+      ,'0'
       ,[Note]
       ,[DateCreated]
 	  ,[LeaveStatusDate]
+	  ,[DateCreated]
+      ,[EmployeeIdNo]
+      ,[LeaveReason]
+      ,[SupervisorIdNo]
  FROM EmployeeLeave_View b where b.LeaveStatus is Null
