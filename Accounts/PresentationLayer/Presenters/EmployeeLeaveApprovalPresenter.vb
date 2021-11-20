@@ -54,15 +54,15 @@ Namespace PresentationLayer.Presenters
                                                          {"Status", GetType(Int32)},
                                                          {"EnteredBy", GetType(Int32)}
                                                         })
-                'For Each leave As EmployeeLeaveStatus In View.EmployeeLeaveList
-                '    If EmployeeLeaveStatus.Print Then
-                '        Dim workRow As DataRow
-                '        workRow = dtIdPrinting.NewRow()
-                '        workRow("EmployeeIdNo") = EmployeeId.IdNo
-                '        workRow("TransactionNumber") = transactionNumber
-                '        dtIdPrinting.Rows.Add(workRow)
-                '    End If
-                'Next
+                For Each leave As EmployeeLeaveStatus In View.EmployeeLeaveList
+                    If EmployeeLeaveStatus.
+                        Dim workRow As DataRow
+                        workRow = dtIdPrinting.NewRow()
+                        workRow("EmployeeIdNo") = EmployeeId.IdNo
+                        workRow("TransactionNumber") = transactionNumber
+                        dtIdPrinting.Rows.Add(workRow)
+                    End If
+                Next
                 'Dim retVal = Service.ExecuteTvpSp("InsertEmployeeIdPrintingTvp", dtIdPrinting)
                 'Dim cForm
                 'cForm = New ReportForm("HR Id Printing.Rpt", transactionNumber, "TransactionNumber")

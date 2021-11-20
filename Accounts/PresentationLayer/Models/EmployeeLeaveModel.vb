@@ -19,6 +19,8 @@ Namespace PresentationLayer.Models
         Public Property LeaveStatus As String
         Public Property StartDate As DateTime
         Public Property SupervisorIdNo As Int32
+        Public Property Approve As Boolean
+        Public Property ApprovalNote As String
 
     End Class
 

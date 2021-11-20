@@ -116,6 +116,17 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property SupervisorIdNo As Int32 Implements IEmployeeLeaveView.SupervisorIdNo
 
+        Public Property ApprovalNote As String Implements IEmployeeLeaveView.ApprovalNote
+
+        Public Property Approve As Boolean Implements IEmployeeLeaveView.Approve
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Boolean)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()

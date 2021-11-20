@@ -1853,6 +1853,10 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         SetDataSource(sourceTableName, control, Nothing, Nothing, Nothing)
     End Sub
 
+    Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal control As Control, Optional ByVal filter As String = Nothing)
+        SetDataSource(sourceTableName, control, Nothing, Nothing, filter)
+    End Sub
+
     Protected Function GetControlName(ByVal fieldName As String) As CaComboBox
         Dim control As Control = Nothing
         If Not MainFieldsDictionary.TryGetValue(fieldName, control) Then
