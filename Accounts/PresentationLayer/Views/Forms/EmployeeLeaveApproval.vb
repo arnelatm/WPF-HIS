@@ -58,11 +58,7 @@ Public Class EmployeeLeaveApproval
             dgvLeaveStatus.ValueMember = "Code"
             dgvLeaveStatus.DisplayMember = "Name"
             dgvLeaveStatus.DisplayStyleForCurrentCellOnly = True
-            dgvApproval.DisplayOnly = False
-            dgvApproval.DataSource = ApprovalStatusList
-            dgvApproval.ValueMember = "Code"
-            dgvApproval.DisplayMember = "Name"
-            dgvApproval.DisplayStyleForCurrentCellOnly = True
+            dgvApprove.DisplayOnly = False
             dgvFullDay.DisplayOnly = True
             dgvEndDate.DisplayOnly = True
             dgvLeaveReason.DisplayOnly = True

@@ -21,7 +21,7 @@ Partial Class EmployeeLeaveApproval
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -29,6 +29,7 @@ Partial Class EmployeeLeaveApproval
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DataGridViewEmployeeLeave = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.bsEmployeeLeave = New System.Windows.Forms.BindingSource(Me.components)
         Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
@@ -38,8 +39,8 @@ Partial Class EmployeeLeaveApproval
         Me.dgvLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
         Me.dgvLeaveReason = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvLeaveStatus = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
-        Me.dgvApproval = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-        Me.dgvApprovalNote = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dgvApprove = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
+        Me.dgvApprovalNote = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.AppliedByDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DateCreatedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -64,16 +65,16 @@ Partial Class EmployeeLeaveApproval
         Me.DataGridViewEmployeeLeave.AutoGenerateColumns = false
         Me.DataGridViewEmployeeLeave.BegFindValue = Nothing
         Me.DataGridViewEmployeeLeave.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewEmployeeLeave.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvEmployeeIdNo, Me.dgvFullDay, Me.dgvStartDate, Me.dgvEndDate, Me.dgvLeaveIdNo, Me.dgvLeaveReason, Me.dgvLeaveStatus, Me.dgvApproval, Me.dgvApprovalNote, Me.AppliedByDataGridViewTextBoxColumn, Me.DateCreatedDataGridViewTextBoxColumn, Me.dgvIdNo, Me.SupervisorIdNoDataGridViewTextBoxColumn})
+        Me.DataGridViewEmployeeLeave.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvEmployeeIdNo, Me.dgvFullDay, Me.dgvStartDate, Me.dgvEndDate, Me.dgvLeaveIdNo, Me.dgvLeaveReason, Me.dgvLeaveStatus, Me.dgvApprove, Me.dgvApprovalNote, Me.AppliedByDataGridViewTextBoxColumn, Me.DateCreatedDataGridViewTextBoxColumn, Me.dgvIdNo, Me.SupervisorIdNoDataGridViewTextBoxColumn})
         Me.DataGridViewEmployeeLeave.DataSource = Me.bsEmployeeLeave
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewEmployeeLeave.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewEmployeeLeave.DefaultCellStyle = DataGridViewCellStyle10
         Me.DataGridViewEmployeeLeave.DgvFooter = Nothing
         Me.DataGridViewEmployeeLeave.DisplayOnly = false
         Me.DataGridViewEmployeeLeave.Ea = Nothing
@@ -241,21 +242,45 @@ Partial Class EmployeeLeaveApproval
         Me.dgvLeaveStatus.Translatable = false
         Me.dgvLeaveStatus.Width = 120
         '
-        'dgvApproval
+        'dgvApprove
         '
-        Me.dgvApproval.DataPropertyName = "AppliedBy"
-        Me.dgvApproval.EditingMode = false
-        Me.dgvApproval.HeaderText = "Approval"
-        Me.dgvApproval.Name = "dgvApproval"
-        Me.dgvApproval.ReadOnly = true
-        Me.dgvApproval.Translatable = false
-        Me.dgvApproval.Width = 120
+        Me.dgvApprove.BegFindValue = Nothing
+        Me.dgvApprove.DataPropertyName = "Approve"
+        Me.dgvApprove.EditingMode = false
+        Me.dgvApprove.EndFindValue = Nothing
+        Me.dgvApprove.FieldDescription = Nothing
+        Me.dgvApprove.FieldName = Nothing
+        Me.dgvApprove.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvApprove.FindEnabled = false
+        Me.dgvApprove.HeaderText = "Approve"
+        Me.dgvApprove.IgnoreCase = false
+        Me.dgvApprove.Name = "dgvApprove"
+        Me.dgvApprove.ReadOnly = true
+        Me.dgvApprove.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvApprove.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvApprove.Translatable = false
+        Me.dgvApprove.Width = 50
         '
         'dgvApprovalNote
         '
-        Me.dgvApprovalNote.HeaderText = "Approval Note"
+        Me.dgvApprovalNote.BegFindValue = Nothing
+        Me.dgvApprovalNote.DataPropertyName = "ApprovalNote"
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
+        Me.dgvApprovalNote.DefaultCellStyle = DataGridViewCellStyle9
+        Me.dgvApprovalNote.EditingMode = false
+        Me.dgvApprovalNote.EndFindValue = Nothing
+        Me.dgvApprovalNote.FieldDescription = Nothing
+        Me.dgvApprovalNote.FieldName = Nothing
+        Me.dgvApprovalNote.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvApprovalNote.FindEnabled = false
+        Me.dgvApprovalNote.HeaderText = "ApprovalNote"
+        Me.dgvApprovalNote.IgnoreCase = false
         Me.dgvApprovalNote.Name = "dgvApprovalNote"
         Me.dgvApprovalNote.ReadOnly = true
+        Me.dgvApprovalNote.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvApprovalNote.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvApprovalNote.Translatable = false
         '
         'AppliedByDataGridViewTextBoxColumn
         '
@@ -314,8 +339,8 @@ End Sub
     Friend WithEvents dgvLeaveIdNo As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
     Friend WithEvents dgvLeaveReason As Libraries.CBaseControlsLibrary.CDgvTextColumn
     Friend WithEvents dgvLeaveStatus As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
-    Friend WithEvents dgvApproval As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
-    Friend WithEvents dgvApprovalNote As DataGridViewTextBoxColumn
+    Friend WithEvents dgvApprove As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
+    Friend WithEvents dgvApprovalNote As Libraries.CBaseControlsLibrary.CDgvTextColumn
     Friend WithEvents AppliedByDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents DateCreatedDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents dgvIdNo As DataGridViewTextBoxColumn
