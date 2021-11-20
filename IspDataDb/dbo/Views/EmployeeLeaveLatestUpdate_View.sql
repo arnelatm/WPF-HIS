@@ -25,4 +25,4 @@ SELECT [IdNo]
       ,[Note]
       ,[DateCreated]
 	  ,[LeaveStatusDate]
- FROM EmployeeLeave_View b where b.LeaveStatusIdNo is Null
+ FROM EmployeeLeave_View b where b.LeaveStatus is Null

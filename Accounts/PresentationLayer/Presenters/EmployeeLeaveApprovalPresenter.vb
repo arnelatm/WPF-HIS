@@ -8,7 +8,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Presenters
 
     Public Class EmployeeLeaveApprovalPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IEmployeeLeaveApprovalView, TM)
+        Inherits AccountsPresenterNew(Of IEmployeeLeaveApprovalView, TM)
 
         Private ReadOnly _journalItemService
         Private ReadOnly _EmployeeIdsService
@@ -27,10 +27,47 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            Dim employeeLeaveList As List(Of EmployeeLeave) = Service.GetDaoRecords()
+            Dim filter As String = "LeaveStatus <> '" + EnumToCode(LeaveStatusSelection.Approved) + "' and " &
+                         "LeaveStatus <> '" + EnumToCode(LeaveStatusSelection.Disapproved) + "' and " &
+                         "LeaveStatus <> '" + EnumToCode(LeaveStatusSelection.Cancelled) + "'"
+            Dim employeeLeaveList As List(Of EmployeeLeave) = Service.GetDaoRecords(filter)
             Dim employeeLeaveListModel As New List(Of EmployeeLeaveModel)
             GlobalVariables.Mapper.Map(employeeLeaveList, employeeLeaveListModel)
             GlobalVariables.Mapper.Map(employeeLeaveListModel, View.EmployeeLeaveList)
+            CreateLookupData("Employee", "EmployeeList")
+            CreateLookupData("Leave", "LeaveList")
+            CreateEnumData(Of LeaveStatusSelection)(View.LeaveStatusList)
+            If IsUserASupervisor() Then
+                CreateEnumData(Of SupervisorApprovalSelection)(View.ApprovalStatusList)
+            Else
+                CreateEnumData(Of LeaveApprovalSelection)(View.ApprovalStatusList)
+            End If
+        End Sub
+
+        Public Sub OnBeforeSave() Handles MyBase.BeforeSave
+            If Not CancelSave Then
+                Dim transactionNumber As Int32
+                transactionNumber = Service.GetNextSeries("IdPrintingSeries")
+                Dim dtEmployeeLeaveStatus As New DataTable
+                CreateDataTable(dtEmployeeLeaveStatus, {{"EmployeeLeaveIdNo", GetType(Int32)},
+                                                         {"EnteredBy", GetType(Int32)},
+                                                         {"Status", GetType(Int32)},
+                                                         {"EnteredBy", GetType(Int32)}
+                                                        })
+                'For Each leave As EmployeeLeaveStatus In View.EmployeeLeaveList
+                '    If EmployeeLeaveStatus.Print Then
+                '        Dim workRow As DataRow
+                '        workRow = dtIdPrinting.NewRow()
+                '        workRow("EmployeeIdNo") = EmployeeId.IdNo
+                '        workRow("TransactionNumber") = transactionNumber
+                '        dtIdPrinting.Rows.Add(workRow)
+                '    End If
+                'Next
+                'Dim retVal = Service.ExecuteTvpSp("InsertEmployeeIdPrintingTvp", dtIdPrinting)
+                'Dim cForm
+                'cForm = New ReportForm("HR Id Printing.Rpt", transactionNumber, "TransactionNumber")
+                'cForm.Show()
+            End If
         End Sub
 
         'Private Sub OnEmployeeIdCheckedEvent(sender As Object)

@@ -60,6 +60,7 @@ Namespace PresentationLayer.Presenters
             CreateDataSource("User", "AppliedBy", {"IdNo", "UserName"})
             CreateDataSource("Leave", "LeaveIdNo")
             CreateEnumDataSource(Of LeaveStatusSelection)("LeaveStatus")
+            CreateEnumDataSource(Of LeaveApprovalSelection)("Approval")
         End Sub
 
     End Class

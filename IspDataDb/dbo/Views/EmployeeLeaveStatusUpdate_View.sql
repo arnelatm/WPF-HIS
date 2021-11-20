@@ -25,4 +25,4 @@ SELECT TOP (1000) [IdNo]
       ,[Note]
       ,[DateCreated]
 	  ,[LeaveStatusDate]
- FROM EmployeeLeave_View b where b.LeaveStatusIdNo is Null
+ FROM EmployeeLeave_View b where b.LeaveStatus is Null

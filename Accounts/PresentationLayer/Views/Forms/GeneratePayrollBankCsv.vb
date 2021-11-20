@@ -63,7 +63,6 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Employees As Object Implements IPayrollView.Employees
 
-
         Protected SortOrderKey As String
 
         Public Event InitializeAttendance(sender As Object) Implements IPayrollView.InitializeAttendance
@@ -116,8 +115,8 @@ Namespace PresentationLayer.Views.Forms
                 {"IdNo", cboIdNo},
                 {"PayCycleIdNo", cboPayCycleIdNo},
                 {"PayrollCode", txtPayrollCode},
-                {"StartDate", StartDate},
-                {"EndDate", EndDate}
+                {"StartDate", dtpStartDate},
+                {"EndDate", dtpEndDate}
                 }
         End Sub
 

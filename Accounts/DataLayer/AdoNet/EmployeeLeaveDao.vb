@@ -22,6 +22,7 @@ Namespace DataLayer.AdoNet
                                   "IdNo," &
                                   "LeaveIdNo," &
                                   "LeaveReason," &
+                                  "LeaveStatus," &
                                   "StartDate," &
                                   "SupervisorIdNo"
 
@@ -78,7 +79,7 @@ Namespace DataLayer.AdoNet
         Public Function GetDaoRecords(Optional filter As String = Nothing) As List(Of EmployeeLeave) Implements IDaoGetRecords(Of EmployeeLeave).GetDaoRecords
             Dim sql As String = "SELECT " &
                                 FieldList &
-                                " FROM EmployeeLeave_View" &
+                                " FROM EmployeeLeaveLatestUpdate_View" &
                                 IIf(filter Is Nothing, "", " WHERE " & filter)
             Return Db.Read(sql, Make).ToList()
         End Function
@@ -94,6 +95,7 @@ Namespace DataLayer.AdoNet
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .LeaveIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("LeaveIdNo")),
             .LeaveReason = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveReason")),
+            .LeaveStatus = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveStatus")),
             .StartDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("StartDate")),
             .SupervisorIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("SupervisorIdNo"))
             }
@@ -115,12 +117,12 @@ Namespace DataLayer.AdoNet
                                 }
         End Function
 
-         Public Function GetEmployeeLeaveList(Optional sortExpression As String = Nothing) As List(Of EmployeeLeave) 
+        Public Function GetEmployeeLeaveList(Optional sortExpression As String = Nothing) As List(Of EmployeeLeave)
             If sortExpression Is Nothing Then
                 sortExpression = "EmployeeName ASC"
             End If
             Dim sql As String = " SELECT " & FieldList & " From EmployeeLeave Order by " & sortExpression
-            Return db.Read(sql, Make).ToList()
+            Return Db.Read(sql, Make).ToList()
         End Function
 
     End Class
