@@ -64,7 +64,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property StartDate As Date Implements IPayrollView.StartDate
+        Public Property StartDate As Date? Implements IPayrollView.StartDate
             Get
                 Return dtpStartDate.Value
             End Get
@@ -73,7 +73,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property EndDate As Date Implements IPayrollView.EndDate
+        Public Property EndDate As Date? Implements IPayrollView.EndDate
             Get
                 Return dtpEndDate.Value
             End Get

@@ -14,10 +14,9 @@ Namespace PresentationLayer.Views.Interfaces
         Property PayrollAttendance As List(Of AttendanceItemView)
         Property PayrollOvertime As List(Of OtWorkHourView)
         Property PayFrequency As Char
-        Property Employees 
+        Property Employees
 
         Event InitializeAttendance(sender As Object)
-
 
         Event InitializeOvertime(sender As Object)
 

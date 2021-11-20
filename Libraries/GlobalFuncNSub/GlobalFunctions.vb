@@ -1294,4 +1294,9 @@ Public Module GlobalFunctions
         End While
     End Function
 
+    Public Function AsMonthEndDate(dDate As DateTime) As Date
+        Dim firstDayOfMonth As New DateTime(dDate.Year, dDate.Month, 1)
+        Return firstDayOfMonth.AddMonths(1).AddDays(-1)
+    End Function
+
 End Module

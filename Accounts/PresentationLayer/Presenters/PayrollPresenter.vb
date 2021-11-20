@@ -144,7 +144,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub InitializeMonthlyPayroll(payCycleRecord As PayCycleModel)
-            If View.StartDate = Nothing And View.EndDate = Nothing Then
+            If View.StartDate Is Nothing And View.EndDate Is Nothing Then
                 If payCycleRecord.PayCycleCode = "Month" Then
                     Dim nIdNoMax As Int32
                     Dim maxRecord As PayrollModel
@@ -154,8 +154,9 @@ Namespace PresentationLayer.Presenters
                     maxRecord = Service.GetRecordByIdNo(Of PayrollModel)(nIdNoMax)
                     View.StartDate = maxRecord.EndDate.AddDays(1)
                     Dim arabicCulture As New CultureInfo("ar-ae", False)
-                    If View.StartDate.Day = 1 Then
-                        View.EndDate = View.StartDate.AddMonths(1).AddDays(-1)
+                    Dim dStartDate As Date = View.StartDate
+                    If dStartDate.Day = 1 Then
+                        View.EndDate = dStartDate.AddMonths(1).AddDays(-1)
                         View.PayrollName = payMonthText & " " & MonthName(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
                         View.PayrollNameAra = Messaging.TranslateCaption(payMonthText, "ar-SA") + GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate) - 1) & " " & Year(View.EndDate).ToString()
                     Else
@@ -173,7 +174,6 @@ Namespace PresentationLayer.Presenters
             CreateLookupData("Employee", "Employees")
         End Sub
 
-
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             Dim nIdNoMax As Int32
             Dim maxRecord As PayrollModel
@@ -182,20 +182,21 @@ Namespace PresentationLayer.Presenters
             nIdNoMax = Service.GetFieldOnMaxField("EndDate", "Payroll", "IdNo", "PayCycleIdNo = 1") ' + View.PayCycleIdNo.ToString())
             If nIdNoMax = 0 Then
                 Dim now As Date = Today()
-                View.EndDate = DateAdd(DateInterval.Day, DateAndTime.Day(now) * -1, now)
-                View.StartDate = DateAdd(DateInterval.Day, DateAndTime.Day(View.EndDate) * -1 + 1, View.EndDate)
+                View.EndDate = DateAdd(DateInterval.Day, now.Day * -1, now)
+                View.StartDate = DateAdd(DateInterval.Day, View.EndDate.Value.Day * -1 + 1, View.EndDate.Value.Day)
             Else
                 maxRecord = Service.GetRecordByIdNo(Of PayrollModel)(nIdNoMax)
                 View.StartDate = maxRecord.EndDate.AddDays(1)
-                If View.StartDate.Day = 1 Then
-                    View.EndDate = View.StartDate.AddMonths(1).AddDays(-1)
+                Dim dDate As Date = View.StartDate
+                If dDate.Day = 1 Then
+                    View.EndDate = dDate.AddMonths(1).AddDays(-1)
                 Else
                     View.EndDate = maxRecord.EndDate.AddMonths(1)
                 End If
             End If
             View.PayCycleIdNo = 1
             Dim arabicCulture As New CultureInfo("ar-ae", False)
-            If View.StartDate.Day = 1 AndAlso DateAdd(DateInterval.Day, DateAndTime.Day(View.EndDate) * -1 + 1, View.EndDate) = View.StartDate Then
+            If View.StartDate.Value.Day = 1 AndAlso AsMonthEndDate(View.StartDate) = View.EndDate Then
                 View.PayrollName = payMonthText & " " & MonthName(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
                 View.PayrollNameAra = Messaging.TranslateCaption(payMonthText, "ar-SA") + GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate) - 1) & " " & Year(View.EndDate).ToString()
             Else
@@ -227,8 +228,8 @@ Namespace PresentationLayer.Presenters
             'Dim earningDao = New EarningDao
             'Dim earnings = earningDao.GetAll()
             Dim numberOfEmployees = Int(activeEmployees.Count() / 4)
-            Dim daysInPeriod As Int16
-            Dim daysOffInPeriod As Int16
+            Dim daysInPeriod As Long
+            Dim daysOffInPeriod As Long
             Dim seq As Integer
             Dim dateHired As Date
             Dim dateReleased As Date?
@@ -238,7 +239,7 @@ Namespace PresentationLayer.Presenters
             Dim absenceService As New AccountsService("EmployeeAbsence")
             Dim absences As List(Of EmployeeAbsenceModel) = absenceService.GetRecordsWithGroupIdNo(Of EmployeeAbsenceModel)(View.IdNo, "IdNo")
             seq = View.PayrollAttendance.Count() + absences.Count() + 1
-            daysInPeriod = DateDiff(DateInterval.Day, View.StartDate, View.EndDate) + 1
+            daysInPeriod = DateDiff(DateInterval.Day, Convert.ToDateTime(View.StartDate), Convert.ToDateTime(View.EndDate)) + 1
             daysOffInPeriod = FridaysInPeriod(View.StartDate, View.EndDate)
             If View.PayrollAttendance.Any() Then
                 _reinitialize = True

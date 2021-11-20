@@ -353,10 +353,20 @@ Public Enum LeaveStatusSelection
     <EnumCode("0")> Submitted
     <EnumCode("1")> Cancelled
     <EnumCode("2")> SupervisorApproved
-    <EnumCode("3")> SupervisorDisapproved
-    <EnumCode("4")> NotEntitled
-    <EnumCode("5")> Disapproved
-    <EnumCode("6")> Approved
+    <EnumCode("3")> NotEntitled
+    <EnumCode("4")> Disapproved
+    <EnumCode("5")> Approved
+End Enum
+
+Public Enum SupervisorApprovalSelection
+    <EnumCode("2")> SupervisorApproved
+    <EnumCode("4")> Disapproved
+End Enum
+
+Public Enum LeaveApprovalSelection
+    <EnumCode("3")> NotEntitled
+    <EnumCode("4")> Disapproved
+    <EnumCode("5")> Approved
 End Enum
 
 Public Enum SponsorTypeSelection
