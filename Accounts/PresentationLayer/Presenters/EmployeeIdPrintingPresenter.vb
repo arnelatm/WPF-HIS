@@ -38,7 +38,7 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Sub GoPrintRecord()
             Dim transactionNumber As Int32
-            transactionNumber = Service.GetNextSeries("IdPrintingSeries", "CountBy1")
+            transactionNumber = Service.GetNextSeries("IdPrintingSeries")
             Dim dtIdPrinting As New DataTable
             CreateDataTable(dtIdPrinting, {{"EmployeeIdNo", GetType(Int32)},
                                            {"TransactionNumber", GetType(Int32)}

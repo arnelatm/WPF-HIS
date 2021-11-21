@@ -2,7 +2,7 @@
 Imports AATM.Libraries
 Imports AATM.PresentationLayer.Events
 
-Public Class EmployeeLeaveApproval
+Public Class EmployeeLeaveApprovalEntry
     Implements IEmployeeLeaveApprovalView
 
     Private _employeeLeaveList As New List(Of IEmployeeLeaveView)

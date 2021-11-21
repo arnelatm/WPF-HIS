@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class EmployeeLeaveApproval
+Partial Class EmployeeLeaveApprovalEntry
     Inherits AATM.PresentationLayer.Forms.CFormBase
 
     'Form overrides dispose to clean up the component list.
@@ -355,12 +355,12 @@ Partial Class EmployeeLeaveApproval
         Me.SupervisorIdNoDataGridViewTextBoxColumn.ReadOnly = true
         Me.SupervisorIdNoDataGridViewTextBoxColumn.Visible = false
         '
-        'EmployeeLeaveApproval
+        'EmployeeLeaveApprovalEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.ClientSize = New System.Drawing.Size(1130, 535)
         Me.Controls.Add(Me.DataGridViewEmployeeLeave)
-        Me.Name = "EmployeeLeaveApproval"
+        Me.Name = "EmployeeLeaveApprovalEntry"
         Me.Text = "Employee Leave Approval"
         Me.Controls.SetChildIndex(Me.DataGridViewEmployeeLeave, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
