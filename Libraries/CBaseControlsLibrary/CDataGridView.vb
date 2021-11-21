@@ -863,4 +863,26 @@ Public Class CDataGridView
     '    Return description
     'End Function
 
+    'Ends Edit Mode So CellValueChanged Event Can Fire
+    Private Sub EndEditMode(sender As System.Object, e As EventArgs) Handles MyBase.CurrentCellDirtyStateChanged
+        'if current cell of grid is dirty, commits edit
+        If Me.IsCurrentCellDirty Then
+            CommitEdit(DataGridViewDataErrorContexts.Commit)
+        End If
+    End Sub
+
+    Public Property IsDirty As Boolean = False
+
+    'Executes when Cell Value on a DataGridView changes
+    Private Sub DataGridCellValueChanged(sender As DataGridView, e As DataGridViewCellEventArgs) Handles MyBase.CellValueChanged
+        'check that row isn't -1, i.e. creating datagrid header
+        If e.RowIndex = -1 Then Exit Sub
+        'mark as dirty
+        IsDirty = True
+        If TypeOf CurrentCell Is DataGridViewCheckBoxCell Then
+            Dim cCell As DataGridViewCheckBoxCell = CurrentCell
+            cCell.EditingCellValueChanged = True
+        End If
+    End Sub
+
 End Class

@@ -82,9 +82,21 @@ Public Class EmployeeLeaveApproval
         PublishClickedButton(ButtonClicked.Edit)
     End Sub
 
-    Private Sub DgvEarning_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellEndEdit
-        ProcessCellEndEdit(DataGridViewEmployeeLeave, bsEmployeeLeave)
-        bsEmployeeLeave.ResetBindings(False)
+    'Private Sub DgvEarning_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellEndEdit
+    '    ProcessCellEndEdit(DataGridViewEmployeeLeave, bsEmployeeLeave)
+    '    bsEmployeeLeave.ResetBindings(False)
+    'End Sub
+
+    Private Sub CheckBoxValueChanged() Handles DataGridViewEmployeeLeave.CellValueChanged
+        Using DataGridViewEmployeeLeave.CurrentCell
+            If TypeOf DataGridViewEmployeeLeave.CurrentCell Is DataGridViewCheckBoxCell Then
+                If DataGridViewEmployeeLeave.CurrentCell.OwningColumn.Name = "dgvApprove" Then
+                    DataGridViewEmployeeLeave.CurrentRow.Cells("dgvDisapprove").Value = False
+                ElseIf DataGridViewEmployeeLeave.CurrentCell.OwningColumn.Name = "dgvDisapprove" Then
+                    DataGridViewEmployeeLeave.CurrentRow.Cells("dgvApprove").Value = False
+                End If
+            End If
+        End Using
     End Sub
 
     Protected Overrides Sub CreateMainFieldsDictionary()

@@ -12,7 +12,7 @@ Namespace PresentationLayer.Presenters
 
     Public Class EmployeeLeaveApprovalPresenter(Of TM As New)
         Inherits AccountsPresenterNew(Of IEmployeeLeaveApprovalView, TM)
-        Implements ISubscriber(Of DataChanged)
+        'Implements ISubscriber(Of DataChanged)
 
         Private ReadOnly _journalItemService
         Private ReadOnly _EmployeeIdsService
@@ -26,7 +26,7 @@ Namespace PresentationLayer.Presenters
             AskBeforeSave = True
             DisableSaveMemento = True
             'AddHandler view.ClearAllEmployee, AddressOf OnClearAllEmployeeId
-            AddHandler view.ApprovalCheckedEvent, AddressOf OnApprovalCheckedEvent
+            'AddHandler view.ApprovalCheckedEvent, AddressOf OnApprovalCheckedEvent
 
         End Sub
 
@@ -75,29 +75,29 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Sub OnEmpLeaveDataChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
-            With eventType.BindingSource
-                If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
-                    Select Case eventType.PropertyName
-                        Case $"Approve"
-                            Dim employeeLeave As IEmployeeLeaveView = eventType.BindingSource.Current
-                            If employeeLeave.Approve Then
-                                employeeLeave.Disapprove = False
-                            End If
-                        Case $"Disapprove"
-                            Dim employeeLeave As IEmployeeLeaveView = eventType.BindingSource.Current
-                            If employeeLeave.Disapprove Then
-                                employeeLeave.Approve = False
-                            End If
-                    End Select
-                End If
-            End With
-        End Sub
+        'Public Sub OnEmpLeaveDataChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
+        '    With eventType.BindingSource
+        '        If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
+        '            Select Case eventType.PropertyName
+        '                Case $"Approve"
+        '                    Dim employeeLeave As IEmployeeLeaveView = eventType.BindingSource.Current
+        '                    If employeeLeave.Approve Then
+        '                        employeeLeave.Disapprove = False
+        '                    End If
+        '                Case $"Disapprove"
+        '                    Dim employeeLeave As IEmployeeLeaveView = eventType.BindingSource.Current
+        '                    If employeeLeave.Disapprove Then
+        '                        employeeLeave.Approve = False
+        '                    End If
+        '            End Select
+        '        End If
+        '    End With
+        'End Sub
 
-        Private Sub OnApprovalCheckedEvent(sender As Object)
-            sender.Approve = Not sender.Approve
-            sender.bsEmployeeLeave.ResetBindings(False)
-        End Sub
+        'Private Sub OnApprovalCheckedEvent(sender As Object)
+        '    sender.Approve = Not sender.Approve
+        '    sender.bsEmployeeLeave.ResetBindings(False)
+        'End Sub
 
         'Private Sub OnEmployeeIdCheckedEvent(sender As Object)
         '    sender.Print = Not sender.Print
