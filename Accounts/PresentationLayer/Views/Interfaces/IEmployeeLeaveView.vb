@@ -17,6 +17,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property StartDate As DateTime
         Property SupervisorIdNo As Int32
         Property Approve As Boolean
+        Property Disapprove As Boolean
         Property ApprovalNote As String
 
     End Interface
