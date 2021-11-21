@@ -12,7 +12,6 @@ Namespace PresentationLayer.Presenters
 
     Public Class EmployeeLeaveApprovalPresenter(Of TM As New)
         Inherits AccountsPresenterNew(Of IEmployeeLeaveApprovalView, TM)
-        'Implements ISubscriber(Of DataChanged)
 
         Private ReadOnly _journalItemService
         Private ReadOnly _EmployeeIdsService
@@ -50,64 +49,45 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
-                Dim transactionNumber As Int32
-                transactionNumber = Service.GetNextSeries("IdPrintingSeries")
-                Dim dtEmployeeLeaveStatus As New DataTable
-                CreateDataTable(dtEmployeeLeaveStatus, {{"EmployeeLeaveIdNo", GetType(Int32)},
-                                                         {"EnteredBy", GetType(Int32)},
-                                                         {"Status", GetType(Int32)},
-                                                         {"EnteredBy", GetType(Int32)}
-                                                        })
-                For Each leave As IEmployeeLeaveView In View.EmployeeLeaveList
-                    If leave.Approve Then
-                        Dim workRow As DataRow
-                        workRow = dtEmployeeLeaveStatus.NewRow()
-                        workRow("EmployeeLeaveIdNo") = leave.IdNo
-                        workRow("EnteredBy") = GlobalVariables.UserIdNo
-                        'workRow("Status") =
-                        'dtIdPrinting.Rows.Add(workRow)
-                    End If
-                Next
+                'Dim transactionNumber As Int32
+                'Dim now As DateTime = Today()
+                'transactionNumber = Service.GetNextSeries("EmployeeApprovalSeries")
+                'Dim payrollDetail As New PayrollDetail
+                'GlobalVariables.Mapper.Map(PayrollDetailModel, payrollDetail)
+                'If payrollDetail.IdNo = 0 Then
+                '    payrollDetailIdNo = _payrollDetailsService.AddRecord(payrollDetail)
+                'End If
+                'Dim dtEmployeeLeaveStatus As New DataTable
+                'CreateDataTable(dtEmployeeLeaveStatus, {{"EmployeeLeaveIdNo", GetType(Int32)},
+                '                                         {"EnteredBy", GetType(Int32)},
+                '                                         {"Status", GetType(Int32)},
+                '                                         {"EnteredBy", GetType(Int32)}
+                '                                        })
+                'For Each leave As IEmployeeLeaveView In View.EmployeeLeaveList
+                '    If leave.Approve Or leave.Disapprove Then
+                '        Dim workRow As DataRow
+                '        workRow = dtEmployeeLeaveStatus.NewRow()
+                '        workRow("EmployeeLeaveIdNo") = leave.IdNo
+                '        workRow("EnteredBy") = GlobalVariables.UserIdNo
+                '        If leave.Approve Then
+                '            If IsUserASupervisor() Then
+                '                workRow("Status") = LeaveStatusSelection.SupervisorApproved
+                '            Else
+                '                workRow("Status") = LeaveStatusSelection.Approved
+                '            End If
+                '        Else
+                '            workRow("Status") = LeaveStatusSelection.Disapproved
+                '        End If
+
+                '        'dt dtIdPrinting.Rows.Add(workRow)
+                '    End If
+                'Next
                 'Dim retVal = Service.ExecuteTvpSp("InsertEmployeeIdPrintingTvp", dtIdPrinting)
                 'Dim cForm
                 'cForm = New ReportForm("HR Id Printing.Rpt", transactionNumber, "TransactionNumber")
                 'cForm.Show()
             End If
         End Sub
-
-        'Public Sub OnEmpLeaveDataChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
-        '    With eventType.BindingSource
-        '        If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
-        '            Select Case eventType.PropertyName
-        '                Case $"Approve"
-        '                    Dim employeeLeave As IEmployeeLeaveView = eventType.BindingSource.Current
-        '                    If employeeLeave.Approve Then
-        '                        employeeLeave.Disapprove = False
-        '                    End If
-        '                Case $"Disapprove"
-        '                    Dim employeeLeave As IEmployeeLeaveView = eventType.BindingSource.Current
-        '                    If employeeLeave.Disapprove Then
-        '                        employeeLeave.Approve = False
-        '                    End If
-        '            End Select
-        '        End If
-        '    End With
-        'End Sub
-
-        'Private Sub OnApprovalCheckedEvent(sender As Object)
-        '    sender.Approve = Not sender.Approve
-        '    sender.bsEmployeeLeave.ResetBindings(False)
-        'End Sub
-
-        'Private Sub OnEmployeeIdCheckedEvent(sender As Object)
-        '    sender.Print = Not sender.Print
-        'End Sub
-
-        'Private Sub OnClearAllEmployeeId(ByVal bsData As BindingSource, clear As Boolean)
-        '    For Each item In bsData
-        '        item.Print = clear
-        '    Next item
-        'End Sub
 
     End Class
 

@@ -23,7 +23,7 @@ Namespace PresentationLayer.Presenters
             AskBeforeSave = True
             DisableSaveMemento = True
             AddHandler view.ClearAllEmployee, AddressOf OnClearAllEmployeeId
-            AddHandler view.EmployeeIdCheckedEvent, AddressOf OnEmployeeIdCheckedEvent
+            'AddHandler view.EmployeeIdCheckedEvent, AddressOf OnEmployeeIdCheckedEvent
 
         End Sub
 
@@ -32,13 +32,13 @@ Namespace PresentationLayer.Presenters
             GlobalVariables.Mapper.Map(employeeIdListModel, View.EmployeeIdList)
         End Sub
 
-        Private Sub OnEmployeeIdCheckedEvent(sender As Object)
-            sender.Print = Not sender.Print
-        End Sub
+        'Private Sub OnEmployeeIdCheckedEvent(sender As Object)
+        '    sender.Print = Not sender.Print
+        'End Sub
 
         Public Overrides Sub GoPrintRecord()
             Dim transactionNumber As Int32
-            transactionNumber = Service.GetNextSeries("IdPrintingSeries")
+            transactionNumber = Service.GetNextSeries("IdPrintingSeries", "CountBy1")
             Dim dtIdPrinting As New DataTable
             CreateDataTable(dtIdPrinting, {{"EmployeeIdNo", GetType(Int32)},
                                            {"TransactionNumber", GetType(Int32)}

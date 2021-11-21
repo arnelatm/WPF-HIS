@@ -88,15 +88,13 @@ Public Class EmployeeLeaveApproval
     'End Sub
 
     Private Sub CheckBoxValueChanged() Handles DataGridViewEmployeeLeave.CellValueChanged
-        Using DataGridViewEmployeeLeave.CurrentCell
-            If TypeOf DataGridViewEmployeeLeave.CurrentCell Is DataGridViewCheckBoxCell Then
-                If DataGridViewEmployeeLeave.CurrentCell.OwningColumn.Name = "dgvApprove" Then
-                    DataGridViewEmployeeLeave.CurrentRow.Cells("dgvDisapprove").Value = False
-                ElseIf DataGridViewEmployeeLeave.CurrentCell.OwningColumn.Name = "dgvDisapprove" Then
-                    DataGridViewEmployeeLeave.CurrentRow.Cells("dgvApprove").Value = False
-                End If
+        If TypeOf DataGridViewEmployeeLeave.CurrentCell Is DataGridViewCheckBoxCell Then
+            If DataGridViewEmployeeLeave.CurrentCell.OwningColumn.Name = "dgvApprove" Then
+                DataGridViewEmployeeLeave.CurrentRow.Cells("dgvDisapprove").Value = False
+            ElseIf DataGridViewEmployeeLeave.CurrentCell.OwningColumn.Name = "dgvDisapprove" Then
+                DataGridViewEmployeeLeave.CurrentRow.Cells("dgvApprove").Value = False
             End If
-        End Using
+        End If
     End Sub
 
     Protected Overrides Sub CreateMainFieldsDictionary()

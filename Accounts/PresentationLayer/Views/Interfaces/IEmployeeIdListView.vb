@@ -9,7 +9,7 @@ Namespace PresentationLayer.Views.Interfaces
 
         Event ClearAllEmployee(sender As Object, clear As Boolean)
 
-        Event EmployeeIdCheckedEvent(sender As Object)
+        'Event EmployeeIdCheckedEvent(sender As Object)
 
     End Interface
 

@@ -94,7 +94,9 @@ Public Interface IBaseDao
 
     Function GetLastSeriesNumber(ByVal seriesName As String) As Integer
 
-    Function GetNextSeries(ByRef seriesName As String) As Integer
+    Function GetNextSeries(ByVal seriesName As String) As Integer
+
+    Function GetNextSeries(ByVal schemaName As String, ByVal seriesName As String) As Integer
 
     Function ExecuteTvpSp(ByRef procedureName As String, dataTable As DataTable) As Integer
 

@@ -32,7 +32,7 @@ Namespace PresentationLayer.Presenters
             DtInsertTable.Columns.Add("EmployeeidNo", GetType(Int32))
             DtInsertTable.Columns.Add("TransactionNumber", GetType(Int32))
 
-            AddHandler View.EmployeeIdCheckedEvent, AddressOf OnEmployeeIdCheckedEvent
+            'AddHandler View.EmployeeIdCheckedEvent, AddressOf OnEmployeeIdCheckedEvent
             AddHandler View.ClearAllEmployee, AddressOf OnClearAllEmployee
         End Sub
 
