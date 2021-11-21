@@ -387,7 +387,6 @@
     <Compile Include="PresentationLayer\Presenters\CustomerPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeeLeaveApprovalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeeIdPrintingPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\EmployeeIdPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ShiftSummaryPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\HolidayPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeeAbsencePresenter.vb" />
@@ -438,10 +437,10 @@
     <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveApproval.Designer.vb">
-      <DependentUpon>EmployeeLeaveApproval.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveApprovalEntry.Designer.vb">
+      <DependentUpon>EmployeeLeaveApprovalEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveApproval.vb">
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveApprovalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Form1.Designer.vb">
@@ -1172,8 +1171,8 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\EmployeeEntryTv.resx">
       <DependentUpon>EmployeeEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\EmployeeLeaveApproval.resx">
-      <DependentUpon>EmployeeLeaveApproval.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\EmployeeLeaveApprovalEntry.resx">
+      <DependentUpon>EmployeeLeaveApprovalEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
