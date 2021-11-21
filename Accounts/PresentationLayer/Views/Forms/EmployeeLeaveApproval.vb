@@ -7,6 +7,8 @@ Public Class EmployeeLeaveApproval
 
     Private _employeeLeaveList As New List(Of IEmployeeLeaveView)
 
+    Public Event ApprovalCheckedEvent(sender As Object) Implements IEmployeeLeaveApprovalView.ApprovalCheckedEvent
+
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
@@ -78,6 +80,11 @@ Public Class EmployeeLeaveApproval
     Private Sub EmployeeLeaveApproval_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         bsEmployeeLeave.ResetBindings(True)
         PublishClickedButton(ButtonClicked.Edit)
+    End Sub
+
+    Private Sub DgvEarning_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellEndEdit
+        ProcessCellEndEdit(DataGridViewEmployeeLeave, bsEmployeeLeave)
+        bsEmployeeLeave.ResetBindings(False)
     End Sub
 
     Protected Overrides Sub CreateMainFieldsDictionary()
