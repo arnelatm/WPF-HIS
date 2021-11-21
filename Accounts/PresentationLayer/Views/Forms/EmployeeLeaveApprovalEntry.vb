@@ -32,6 +32,37 @@ Public Class EmployeeLeaveApprovalEntry
     Public Property LeaveStatusList As List(Of Lookup.LookupData) Implements IEmployeeLeaveApprovalView.LeaveStatusList
     Public Property ApprovalStatusList As List(Of Lookup.LookupData) Implements IEmployeeLeaveApprovalView.ApprovalStatusList
 
+
+#Region "Fields"
+    Public Property IdNo As Integer Implements IEmployeeLeaveApprovalView.IdNo
+        Get
+            Throw New NotImplementedException()
+        End Get
+        Set(value As Integer)
+            Throw New NotImplementedException()
+        End Set
+    End Property
+
+    Public Property EnteredBy As Integer Implements IEmployeeLeaveApprovalView.EnteredBy
+        Get
+            Throw New NotImplementedException()
+        End Get
+        Set(value As Integer)
+            Throw New NotImplementedException()
+        End Set
+    End Property
+
+    Public Property DateCreated As Date Implements IEmployeeLeaveApprovalView.DateCreated
+        Get
+            Throw New NotImplementedException()
+        End Get
+        Set(value As Date)
+            Throw New NotImplementedException()
+        End Set
+    End Property
+#End Region
+
+
     Private Sub BindEmployeeLeaveList()
         SuspendLayout()
         bsEmployeeLeave.DataSource = Nothing
@@ -106,4 +137,7 @@ Public Class EmployeeLeaveApprovalEntry
             }
     End Sub
 
+    Private Sub CheckBoxValueChanged(sender As Object, e As DataGridViewCellEventArgs)
+
+    End Sub
 End Class

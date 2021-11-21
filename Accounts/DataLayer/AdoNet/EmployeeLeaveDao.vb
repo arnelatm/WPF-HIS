@@ -32,7 +32,7 @@ Namespace DataLayer.AdoNet
                     "   FROM EmployeeLeave_View" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
-            Dim employeeLeaveStatusDao = New EmployeeLeaveStatusDao
+            Dim employeeLeaveStatusDao = New EmployeeLeaveApprovalDao
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
             Dim leaveStatus As String = employeeLeaveStatusDao.GetLeaveStatus(data.IdNo)
             If leaveStatus IsNot Nothing Then
