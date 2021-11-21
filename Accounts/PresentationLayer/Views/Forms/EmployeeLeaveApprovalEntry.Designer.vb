@@ -114,7 +114,6 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.DataGridViewEmployeeLeave.FirstRowDeletionEnabled = true
         Me.DataGridViewEmployeeLeave.FirstRowInsertionEnabled = true
         Me.DataGridViewEmployeeLeave.IgnoreCase = false
-        Me.DataGridViewEmployeeLeave.IsDirty = false
         Me.DataGridViewEmployeeLeave.Location = New System.Drawing.Point(3, 28)
         Me.DataGridViewEmployeeLeave.Name = "DataGridViewEmployeeLeave"
         Me.DataGridViewEmployeeLeave.ReadOnly = true

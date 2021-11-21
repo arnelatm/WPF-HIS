@@ -867,7 +867,9 @@ Public Class CDataGridView
     Private Sub EndEditMode(sender As System.Object, e As EventArgs) Handles MyBase.CurrentCellDirtyStateChanged
         'if current cell of grid is dirty, commits edit
         If Me.IsCurrentCellDirty Then
-            CommitEdit(DataGridViewDataErrorContexts.Commit)
+            If TypeOf CurrentCell Is DataGridViewCheckBoxCell Then
+                CommitEdit(DataGridViewDataErrorContexts.Commit)
+            End If
         End If
     End Sub
 
@@ -878,10 +880,10 @@ Public Class CDataGridView
         'check that row isn't -1, i.e. creating datagrid header
         If e.RowIndex = -1 Then Exit Sub
         'mark as dirty
-        IsDirty = True
         If TypeOf CurrentCell Is DataGridViewCheckBoxCell Then
             Dim cCell As DataGridViewCheckBoxCell = CurrentCell
             cCell.EditingCellValueChanged = True
+            IsDirty = True
         End If
     End Sub
 
