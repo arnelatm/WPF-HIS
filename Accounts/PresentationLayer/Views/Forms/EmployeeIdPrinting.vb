@@ -11,7 +11,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event ClearAllEmployee(sender As Object, clear As Boolean) Implements IEmployeeIdListView.ClearAllEmployee
 
-        Public Event EmployeeIdCheckedEvent(sender As Object) Implements IEmployeeIdListView.EmployeeIdCheckedEvent
+        'Public Event EmployeeIdCheckedEvent(sender As Object) Implements IEmployeeIdListView.EmployeeIdCheckedEvent
 
         Public Sub New()
             MyBase.New()
@@ -78,20 +78,6 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UnselectAll_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnUnSelectAll.ClickButtonArea
             RaiseEvent ClearAllEmployee(bsEmployeeIdList, False)
             bsEmployeeIdList.ResetBindings(False)
-        End Sub
-
-        Private Sub DataGridViewEmployeeIdListCellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeIdList.CellContentClick
-            If DataGridViewEmployeeIdList.CurrentCell IsNot Nothing Then
-                With DataGridViewEmployeeIdList.CurrentCell
-                    Select Case .OwningColumn.Name
-                        Case $"PrintThis"
-                            If Not DataGridViewEmployeeIdList.DisplayOnly Then
-                                Dim selectedRow = DataGridViewEmployeeIdList.Rows(.RowIndex).DataBoundItem
-                                RaiseEvent EmployeeIdCheckedEvent(selectedRow)
-                            End If
-                    End Select
-                End With
-            End If
         End Sub
 
     End Class

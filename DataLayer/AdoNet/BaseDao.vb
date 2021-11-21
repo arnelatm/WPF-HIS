@@ -902,7 +902,15 @@ Namespace AdoNet
             Return retValue
         End Function
 
-        Public Function GetNextSeries(ByRef seriesName As String) As Int32 Implements IBaseDao.GetNextSeries
+        Public Function GetNextSeries(ByVal seriesName As String) As Int32 Implements IBaseDao.GetNextSeries
+            Dim retVal As Integer
+            Dim sql As String
+            sql = "SELECT NEXT VALUE FOR " & seriesName.Trim() & ".CountBy1"
+            retVal = _db.Scalar(sql)
+            Return retVal
+        End Function
+
+        Public Function GetNextSeries(ByVal schemaName As String, ByVal seriesName As String) As Int32 Implements IBaseDao.GetNextSeries
             Dim retVal As Integer
             Dim sql As String
             sql = "SELECT NEXT VALUE FOR " & seriesName.Trim() & ".CountBy1"
