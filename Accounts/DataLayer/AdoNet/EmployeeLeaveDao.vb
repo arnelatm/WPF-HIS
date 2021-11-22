@@ -10,7 +10,7 @@ Namespace DataLayer.AdoNet
 
     Public Class EmployeeLeaveDao
         Inherits CommonDao
-        Implements IDaoAll(Of EmployeeLeave), IDaoGetRecords(Of EmployeeLeave)
+        Implements IDaoAll(Of EmployeeLeave)
 
         Private ReadOnly Db As New Db()
 
@@ -27,14 +27,13 @@ Namespace DataLayer.AdoNet
                                   "SupervisorIdNo"
 
         Public Function GetRecordByIdNo(idNo) As EmployeeLeave Implements IDaoAll(Of EmployeeLeave).GetRecordByIdNo
-            Dim sql As String =
-                    " SELECT " & FieldList &
-                    "   FROM EmployeeLeave_View" &
+            Dim sql As String = "SELECT " & FieldList &
+                    " FROM EmployeeLeaveLatestUpdate_View" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
-            Dim employeeLeaveStatusDao = New EmployeeLeaveApprovalDao
+            Dim employeeLeaveApprovalDao = New EmployeeLeaveApprovalDao
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
-            Dim leaveStatus As String = employeeLeaveStatusDao.GetLeaveStatus(data.IdNo)
+            Dim leaveStatus As String = employeeLeaveApprovalDao.GetLeaveStatus(data.IdNo)
             If leaveStatus IsNot Nothing Then
                 data.LeaveStatus = leaveStatus
             Else
@@ -74,14 +73,6 @@ Namespace DataLayer.AdoNet
                     " (AppliedBy,EmployeeIdNo,EndDate,FullDay,LeaveIdNo,LeaveReason,StartDate) " &
                     " VALUES (@AppliedBy,@EmployeeIdNo,@EndDate,@FullDay,@LeaveIdNo,@LeaveReason,@StartDate)"
             Return Db.Insert(sql, Take(EmployeeLeave))
-        End Function
-
-        Public Function GetDaoRecords(Optional filter As String = Nothing) As List(Of EmployeeLeave) Implements IDaoGetRecords(Of EmployeeLeave).GetDaoRecords
-            Dim sql As String = "SELECT " &
-                                FieldList &
-                                " FROM EmployeeLeaveLatestUpdate_View" &
-                                IIf(filter Is Nothing, "", " WHERE " & filter)
-            Return Db.Read(sql, Make).ToList()
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, EmployeeLeave) =

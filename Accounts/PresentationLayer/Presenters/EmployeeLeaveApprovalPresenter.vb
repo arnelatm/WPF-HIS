@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.BusinessLayer
+﻿Imports System.Net.Http.Headers
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
@@ -6,6 +7,7 @@ Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Presenters
@@ -15,13 +17,14 @@ Namespace PresentationLayer.Presenters
 
         Private ReadOnly _journalItemService
         Private ReadOnly _EmployeeIdsService
+        Private _dtEmployeeLeaveApproval As New DataTable
 
         Public Sub New(view As IEmployeeLeaveApprovalView)
             MyBase.New(view)
             WithTreeView = False
-            Service = New AccountsService("EmployeeLeave")
-            TableName = "EmployeeLeave"
-            SortOrderKey = "EmployeeName"
+            Service = New AccountsService("EmployeeLeaveApproval")
+            TableName = "EmployeeLeaveApproval"
+            SortOrderKey = "IdNo"
             AskBeforeSave = True
             DisableSaveMemento = True
             'AddHandler view.ClearAllEmployee, AddressOf OnClearAllEmployeeId
@@ -38,6 +41,7 @@ Namespace PresentationLayer.Presenters
             GlobalVariables.Mapper.Map(employeeLeaveList, employeeLeaveListModel)
             GlobalVariables.Mapper.Map(employeeLeaveListModel, View.EmployeeLeaveList)
             CreateLookupData("Employee", "EmployeeList")
+            CreateDataSource("User", "EnteredBy", {"IdNo", "UserName"})
             CreateLookupData("Leave", "LeaveList")
             CreateEnumData(Of LeaveStatusSelection)(View.LeaveStatusList)
             If IsUserASupervisor() Then
@@ -47,47 +51,73 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Sub OnBeforeSave() Handles MyBase.BeforeSave
+        Public Sub CreateApprovalData()
             If Not CancelSave Then
-                'Dim transactionNumber As Int32
-                'Dim now As DateTime = Today()
-                'transactionNumber = Service.GetNextSeries("EmployeeApprovalSeries")
-                'Dim payrollDetail As New PayrollDetail
-                'GlobalVariables.Mapper.Map(PayrollDetailModel, payrollDetail)
-                'If payrollDetail.IdNo = 0 Then
-                '    payrollDetailIdNo = _payrollDetailsService.AddRecord(payrollDetail)
-                'End If
-                'Dim dtEmployeeLeaveStatus As New DataTable
-                'CreateDataTable(dtEmployeeLeaveStatus, {{"EmployeeLeaveIdNo", GetType(Int32)},
-                '                                         {"EnteredBy", GetType(Int32)},
-                '                                         {"Status", GetType(Int32)},
-                '                                         {"EnteredBy", GetType(Int32)}
-                '                                        })
-                'For Each leave As IEmployeeLeaveView In View.EmployeeLeaveList
-                '    If leave.Approve Or leave.Disapprove Then
-                '        Dim workRow As DataRow
-                '        workRow = dtEmployeeLeaveStatus.NewRow()
-                '        workRow("EmployeeLeaveIdNo") = leave.IdNo
-                '        workRow("EnteredBy") = GlobalVariables.UserIdNo
-                '        If leave.Approve Then
-                '            If IsUserASupervisor() Then
-                '                workRow("Status") = LeaveStatusSelection.SupervisorApproved
-                '            Else
-                '                workRow("Status") = LeaveStatusSelection.Approved
-                '            End If
-                '        Else
-                '            workRow("Status") = LeaveStatusSelection.Disapproved
-                '        End If
-
-                '        'dt dtIdPrinting.Rows.Add(workRow)
-                '    End If
-                'Next
-                'Dim retVal = Service.ExecuteTvpSp("InsertEmployeeIdPrintingTvp", dtIdPrinting)
-                'Dim cForm
-                'cForm = New ReportForm("HR Id Printing.Rpt", transactionNumber, "TransactionNumber")
-                'cForm.Show()
+                _dtEmployeeLeaveApproval.Clear()
+                CreateDataTable(_dtEmployeeLeaveApproval, {{"EmployeeLeaveApprovalIdNo", GetType(Int32)},
+                                                          {"EmployeeLeaveIdNo", GetType(Int32)},
+                                                          {"Note", GetType(String)},
+                                                          {"Status", GetType(Int32)}
+                                                          })
+                For Each leave As IEmployeeLeaveView In View.EmployeeLeaveList
+                    If leave.Approve Or leave.Disapprove Then
+                        Dim workRow As DataRow
+                        workRow = _dtEmployeeLeaveApproval.NewRow()
+                        workRow("EmployeeLeaveIdNo") = leave.IdNo
+                        workRow("Note") = leave.ApprovalNote
+                        If leave.Approve Then
+                            If IsUserASupervisor() Then
+                                workRow("Status") = EnumToCode(LeaveStatusSelection.SupervisorApproved)
+                            Else
+                                workRow("Status") = EnumToCode(LeaveStatusSelection.Approved)
+                            End If
+                        Else
+                            workRow("Status") = EnumToCode(LeaveStatusSelection.Disapproved)
+                        End If
+                        _dtEmployeeLeaveApproval.Rows.Add(workRow)
+                    End If
+                Next
             End If
         End Sub
+
+        Public Overrides Function Save(ByRef viewControl As Control)
+            Dim retVal As Integer
+            Dim record As New EmployeeLeaveApprovalModel
+            GlobalVariables.Mapper.Map(Of IEmployeeLeaveApprovalView, EmployeeLeaveApprovalModel)(View, record)
+            NewlyAddedRecordIdNo = Service.AddRecord(record)
+            If NewlyAddedRecordIdNo > 0 Then
+                CreateApprovalData()
+                For Each row As DataRow In _dtEmployeeLeaveApproval.Rows
+                    row.Item("EmployeeLeaveApprovalIdNo") = NewlyAddedRecordIdNo
+                Next row
+                retVal = Service.ExecuteTvpSp("InsertEmployeeLeaveApprovalItemTvp", _dtEmployeeLeaveApproval)
+            End If
+            Return retVal
+        End Function
+
+        Public Overrides Function ChangesMade() As Boolean
+            Dim retVal As Boolean = False
+            For Each item In View.EmployeeLeaveList
+                If item.Approve Or item.Disapprove Then
+                    retVal = True
+                    Exit For
+                End If
+            Next
+            Return retVal
+        End Function
+
+        Protected Overrides Function IsBizDataValid() As Boolean
+            Dim valid As Boolean = True
+            For Each leave As IEmployeeLeaveView In View.EmployeeLeaveList
+                If leave.Disapprove Then
+                    If leave.ApprovalNote Is Nothing OrElse leave.ApprovalNote.Trim() = "" Then
+                        Messaging.Show(True, "MsgEmptyApprovalNote", {"leaveNumber", leave.IdNo.ToString()})
+                        valid = False
+                    End If
+                End If
+            Next
+            Return valid
+        End Function
 
     End Class
 

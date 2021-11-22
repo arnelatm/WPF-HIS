@@ -17,7 +17,7 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property DateCreated As DateTime
+        Public Property DateCreated As DateTime?
         Public Property EnteredBy As Int32
         Public Property IdNo As Int32
         Public Property EmployeeLeaveIdNo As Int32

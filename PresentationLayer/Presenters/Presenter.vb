@@ -116,7 +116,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
 
     Protected Overrides Function ChildRecordExist(Optional ByVal warn As Boolean = True) As Boolean
         Dim returnValue As Boolean = False
-        If ParentFieldName IsNot Nothing Then
+        If ParentFieldName IsNot Nothing AndAlso ParentFieldName <> "" Then
             Dim filter As String
             filter = ParentFieldName + " = " + CallByName(View, IdFieldName, CallType.Get).ToString()
             If Service.GetRecordCount(TableName, filter) > 0 Then

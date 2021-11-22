@@ -1,6 +1,8 @@
-﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+﻿Imports System.Windows.Forms.VisualStyles
+Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 
@@ -14,7 +16,7 @@ Namespace PresentationLayer.Presenters
         Public Sub New(itemView As IEmployeeLeaveView)
             MyBase.New(itemView)
             Service = New AccountsService("EmployeeLeave")
-            TableName = "EmployeeLeave_View"
+            TableName = "EmployeeLeaveLatestUpdate_View"
             SortOrderKey = "IdNo"
             WithTreeView = False
         End Sub
@@ -60,7 +62,15 @@ Namespace PresentationLayer.Presenters
             CreateDataSource("User", "AppliedBy", {"IdNo", "UserName"})
             CreateDataSource("Leave", "LeaveIdNo")
             CreateEnumDataSource(Of LeaveStatusSelection)("LeaveStatus")
-            CreateEnumDataSource(Of LeaveApprovalSelection)("Approval")
+            'CreateEnumDataSource(Of LeaveApprovalSelection)("Approval")
+        End Sub
+
+        Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
+            Dim type As Type = View.GetType
+            If View.LeaveStatus <> EnumToCode(LeaveStatusSelection.Submitted) Then
+                Messaging.Show(True, "MsgLeaveAlreadyActed", {"approvalAction", CodeToEnum(Of LeaveStatusSelection)(View.LeaveStatus).ToString()})
+                CancelEdit = True
+            End If
         End Sub
 
     End Class

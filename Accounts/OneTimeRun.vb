@@ -119,7 +119,8 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgDependentRecordExists", "Sorry dependent records exists on other tables. Deletion not allowed!  {additionalMessage}", "Error")
         Messaging.AddMessage("MsgChildRecordsExists", "Sorry child records exist for this parent record. Deletion not allowed!", "Error")
         Messaging.AddMessage("MsgSeeTransactionNumber", "See {transactionName} Number #{transactionNumber}", "Error")
-
+        Messaging.AddMessage("MsgEmptyApprovalNote", "You must specify the reason for disapproving a leave for leave number <{leaveNumber}>.", "Error")
+        Messaging.AddMessage("MsgLeaveAlreadyActed", "Sorry, this leave has already been '{approvalAction}', change not allowed.", "Error")
     End Sub
 
     'Public Shared Sub CreateEnums()

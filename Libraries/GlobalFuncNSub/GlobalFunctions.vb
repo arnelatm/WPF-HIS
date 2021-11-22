@@ -1290,6 +1290,7 @@ Public Module GlobalFunctions
                 Return fileName
             Catch ex As IOException
                 If System.Threading.Interlocked.Increment(attempt) = 10 Then Throw New IOException("No unique temporary file name is available.", ex)
+                Return Nothing
             End Try
         End While
     End Function
