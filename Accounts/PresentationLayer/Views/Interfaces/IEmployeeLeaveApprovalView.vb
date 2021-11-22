@@ -8,7 +8,7 @@ Namespace PresentationLayer.Views.Interfaces
 
         Property IdNo As Int32
         Property EnteredBy As Int32
-        Property DateCreated As DateTime
+        Property DateCreated As DateTime?
         Property EmployeeLeaveList As List(Of IEmployeeLeaveView)
         Property EmployeeList As List(Of Lookup.LookupData)
         Property LeaveList As List(Of Lookup.LookupData)

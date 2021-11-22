@@ -69,6 +69,7 @@
     <Folder Include="Snapshots" />
     <Folder Include="IdPrintingSeries\" />
     <Folder Include="IdPrintingSeries\Sequences\" />
+    <Folder Include="dbo\Sequences\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\SJPrefix.sql" />
@@ -471,17 +472,17 @@
     <Build Include="dbo\Tables\EmployeeIdPrinting.sql" />
     <Build Include="dbo\Stored Procedures\InsertEmployeeIdPrintingTvp.sql" />
     <Build Include="dbo\User Defined Types\EmployeeIdPrintingInsert.sql" />
-    <Build Include="dbo\Tables\LeaveStatus.sql" />
     <Build Include="dbo\Tables\EmployeeLeaveStatus.sql" />
-    <Build Include="dbo\Views\EmployeeLeaveStatus_View.sql" />
     <Build Include="dbo\Views\EmployeeLeave_View.sql" />
-    <Build Include="dbo\Views\EmployeeLeaveStatusList_View2.sql" />
     <Build Include="dbo\Views\EmployeeLeaveStatusList_View.sql" />
-    <Build Include="dbo\Views\EmployeeLeaveStatusUpdate_View.sql" />
     <Build Include="dbo\Views\EmployeeLeaveLatestUpdate_View.sql" />
     <Build Include="dbo\Views\EmployeeIdPrinting_View.sql" />
-    <Build Include="Security\IdPrintingSeries.sql" />
-    <Build Include="IdPrintingSeries\Sequences\CountBy1.sql" />
+    <Build Include="dbo\Tables\EmployeeLeaveApprovalItem.sql" />
+    <Build Include="dbo\Views\EmployeeLeaveApproval_View.sql" />
+    <Build Include="dbo\Stored Procedures\InsertEmployeeLeaveApprovalItemTvp.sql" />
+    <Build Include="dbo\User Defined Types\EmployeeLeaveApprovalItemInsert.sql" />
+    <Build Include="dbo\Sequences\EmployeeLeaveApprovalSeries.sql" />
+    <Build Include="dbo\Sequences\EmployeeIdPrintingSeries.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

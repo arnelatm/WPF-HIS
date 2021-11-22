@@ -1,16 +1,17 @@
-﻿CREATE VIEW dbo.EmployeeLeaveStatus_View
+﻿
+CREATE VIEW [dbo].[EmployeeLeaveApproval_View]
 AS
 SELECT        a.IdNo, a.AppliedBy, a.LeaveIdNo, a.StartDate, a.EndDate, a.FullDay, a.EnteredBy, a.Status, a.Note, a.LeaveStatusDate, b.EmployeeLeaveIdNo, b.LatestStatusUpdate, dbo.EmployeeLeave.DateCreated, 
-                         dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.LeaveReason, dbo.Employee.SupervisorIdNo
-FROM            dbo.EmployeeLeaveStatusList_View AS a INNER JOIN
-                             (SELECT        EmployeeLeaveIdNo, MAX(DateCreated) AS LatestStatusUpdate
-                               FROM            dbo.EmployeeLeaveStatus
-                               GROUP BY EmployeeLeaveIdNo) AS b ON a.IdNo = b.EmployeeLeaveIdNo AND a.LeaveStatusDate = b.LatestStatusUpdate INNER JOIN
+                         dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.LeaveReason, dbo.Employee.SupervisorIdNo, a.EmployeeLeaveApprovalIdNo
+FROM            dbo.EmployeeLeaveApprovalList_View AS a INNER JOIN
+                             (SELECT        c.EmployeeLeaveIdNo, MAX(d.DateCreated) AS LatestStatusUpdate
+                               FROM            dbo.EmployeeLeaveApprovalItem AS c LEFT OUTER JOIN
+                                                         dbo.EmployeeLeaveApproval AS d ON c.EmployeeLeaveApprovalIdNo = d.IdNo
+                               GROUP BY c.EmployeeLeaveIdNo) AS b ON a.IdNo = b.EmployeeLeaveIdNo AND a.LeaveStatusDate = b.LatestStatusUpdate INNER JOIN
                          dbo.EmployeeLeave ON a.IdNo = dbo.EmployeeLeave.IdNo LEFT OUTER JOIN
                          dbo.Employee ON dbo.EmployeeLeave.EmployeeIdNo = dbo.Employee.IdNo
-
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveStatus_View';
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveApproval_View';
 
 
 GO
@@ -151,5 +152,5 @@ Begin DesignProperties =
       End
    End
 End
-', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveStatus_View';
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveApproval_View';
 

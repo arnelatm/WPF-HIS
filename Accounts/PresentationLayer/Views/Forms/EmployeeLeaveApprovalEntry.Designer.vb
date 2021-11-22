@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class EmployeeLeaveApprovalEntry
-    Inherits AATM.PresentationLayer.Forms.CFormEntry
+    Inherits AATM.PresentationLayer.Forms.CFormBase
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -20,6 +20,7 @@ Partial Class EmployeeLeaveApprovalEntry
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EmployeeLeaveApprovalEntry))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -35,6 +36,12 @@ Partial Class EmployeeLeaveApprovalEntry
         Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.bsEmployeeLeave = New System.Windows.Forms.BindingSource(Me.components)
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.lblEnteredBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboEnteredBy = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.dtpDateCreated = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.DataGridViewEmployeeLeave = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
@@ -50,9 +57,6 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.AppliedByDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DateCreatedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SupervisorIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblEnteredBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.bsEmployeeLeave,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout1.SuspendLayout
@@ -77,11 +81,153 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.CFlowLayout1.Controls.Add(Me.lblIdNo)
         Me.CFlowLayout1.Controls.Add(Me.txtIdNo)
         Me.CFlowLayout1.Controls.Add(Me.lblEnteredBy)
+        Me.CFlowLayout1.Controls.Add(Me.cboEnteredBy)
+        Me.CFlowLayout1.Controls.Add(Me.CLabel1)
+        Me.CFlowLayout1.Controls.Add(Me.dtpDateCreated)
         Me.CFlowLayout1.Controls.Add(Me.DataGridViewEmployeeLeave)
-        Me.CFlowLayout1.Location = New System.Drawing.Point(13, 70)
+        Me.CFlowLayout1.Location = New System.Drawing.Point(4, 70)
         Me.CFlowLayout1.Name = "CFlowLayout1"
-        Me.CFlowLayout1.Size = New System.Drawing.Size(1227, 542)
+        Me.CFlowLayout1.Size = New System.Drawing.Size(1067, 542)
         Me.CFlowLayout1.TabIndex = 5
+        '
+        'lblIdNo
+        '
+        Me.lblIdNo.AutoSize = true
+        Me.lblIdNo.DisplayOnly = true
+        Me.lblIdNo.EditingMode = false
+        Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblIdNo.Location = New System.Drawing.Point(1, 1)
+        Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblIdNo.Name = "lblIdNo"
+        Me.lblIdNo.Size = New System.Drawing.Size(47, 17)
+        Me.lblIdNo.TabIndex = 7
+        Me.lblIdNo.Text = "ID No."
+        Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblIdNo.Translatable = true
+        '
+        'txtIdNo
+        '
+        Me.txtIdNo.BackColor = System.Drawing.Color.White
+        Me.txtIdNo.BegFindValue = Nothing
+        Me.txtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtIdNo.ComputedValue = false
+        Me.txtIdNo.CustomFormat = Nothing
+        Me.txtIdNo.DataBoundControl = true
+        Me.txtIdNo.EditingMode = true
+        Me.txtIdNo.EndFindValue = Nothing
+        Me.txtIdNo.FieldDescription = Nothing
+        Me.txtIdNo.FieldName = Nothing
+        Me.txtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtIdNo.FindEnabled = false
+        Me.txtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.txtIdNo.ForeColor = System.Drawing.Color.Black
+        Me.txtIdNo.LinkedLabel = Nothing
+        Me.txtIdNo.Location = New System.Drawing.Point(50, 1)
+        Me.txtIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtIdNo.MaximumValue = Nothing
+        Me.txtIdNo.MinimumValue = Nothing
+        Me.txtIdNo.Name = "txtIdNo"
+        Me.txtIdNo.OldValue = Nothing
+        Me.txtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.txtIdNo.Size = New System.Drawing.Size(100, 23)
+        Me.txtIdNo.TabIndex = 6
+        Me.txtIdNo.Translatable = false
+        '
+        'lblEnteredBy
+        '
+        Me.lblEnteredBy.DisplayOnly = true
+        Me.lblEnteredBy.EditingMode = false
+        Me.lblEnteredBy.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblEnteredBy.Location = New System.Drawing.Point(152, 1)
+        Me.lblEnteredBy.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblEnteredBy.Name = "lblEnteredBy"
+        Me.lblEnteredBy.Size = New System.Drawing.Size(135, 24)
+        Me.lblEnteredBy.TabIndex = 8
+        Me.lblEnteredBy.Text = "Approved by:"
+        Me.lblEnteredBy.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.lblEnteredBy.Translatable = true
+        '
+        'cboEnteredBy
+        '
+        Me.cboEnteredBy.BackColor = System.Drawing.Color.White
+        Me.cboEnteredBy.BegFindValue = Nothing
+        Me.cboEnteredBy.ChangingSearchValueOnly = false
+        Me.cboEnteredBy.CurrentSearchTerm = ""
+        Me.cboEnteredBy.DefaultValue = Nothing
+        Me.cboEnteredBy.DisplayMember = "Name"
+        Me.cboEnteredBy.EditingMode = true
+        Me.cboEnteredBy.EndFindValue = Nothing
+        Me.cboEnteredBy.FieldDescription = Nothing
+        Me.cboEnteredBy.FieldName = Nothing
+        Me.cboEnteredBy.FilterRule = Nothing
+        Me.cboEnteredBy.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboEnteredBy.FindEnabled = false
+        Me.cboEnteredBy.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.cboEnteredBy.ForeColor = System.Drawing.Color.Black
+        Me.cboEnteredBy.FormattingEnabled = true
+        Me.cboEnteredBy.HideWhenNotEditingOrAdding = false
+        Me.cboEnteredBy.IgnoreCase = false
+        Me.cboEnteredBy.IntegralHeight = false
+        Me.cboEnteredBy.LinkedLabel = Nothing
+        Me.cboEnteredBy.Location = New System.Drawing.Point(289, 1)
+        Me.cboEnteredBy.Margin = New System.Windows.Forms.Padding(1)
+        Me.cboEnteredBy.Name = "cboEnteredBy"
+        Me.cboEnteredBy.OldValue = 0
+        Me.cboEnteredBy.OriginalDataSource = Nothing
+        Me.cboEnteredBy.OriginalList = Nothing
+        Me.cboEnteredBy.OverrideDropDownStyleList = false
+        Me.cboEnteredBy.PreviousSearchTerm = Nothing
+        Me.cboEnteredBy.PropertySelector = Nothing
+        Me.cboEnteredBy.ReadOnlyCombo = false
+        Me.cboEnteredBy.Size = New System.Drawing.Size(350, 24)
+        Me.cboEnteredBy.SuggestBoxHeight = 200
+        Me.cboEnteredBy.SuggestListOrderRule = Nothing
+        Me.cboEnteredBy.TabIndex = 10
+        Me.cboEnteredBy.TextToSearch = Nothing
+        Me.cboEnteredBy.Translatable = false
+        Me.cboEnteredBy.ValueIsMandatory = false
+        Me.cboEnteredBy.ValueIsNullable = false
+        Me.cboEnteredBy.ValueIsNumeric = false
+        Me.cboEnteredBy.ValueMember = "IdNo"
+        '
+        'CLabel1
+        '
+        Me.CLabel1.DisplayOnly = true
+        Me.CLabel1.EditingMode = false
+        Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.CLabel1.Location = New System.Drawing.Point(641, 1)
+        Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
+        Me.CLabel1.Name = "CLabel1"
+        Me.CLabel1.Size = New System.Drawing.Size(211, 24)
+        Me.CLabel1.TabIndex = 11
+        Me.CLabel1.Text = "Date/Time Approved"
+        Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.CLabel1.Translatable = true
+        '
+        'dtpDateCreated
+        '
+        Me.dtpDateCreated.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+        Me.dtpDateCreated.DefaultValue = Nothing
+        Me.dtpDateCreated.DisplayOnly = false
+        Me.dtpDateCreated.DtpDefaultValue = Nothing
+        Me.dtpDateCreated.EditingMode = true
+        Me.dtpDateCreated.EditsAllowed = false
+        Me.dtpDateCreated.ForeColor = System.Drawing.Color.Black
+        Me.dtpDateCreated.LinkedLabel = Nothing
+        Me.dtpDateCreated.Location = New System.Drawing.Point(854, 1)
+        Me.dtpDateCreated.Margin = New System.Windows.Forms.Padding(1)
+        Me.dtpDateCreated.Name = "dtpDateCreated"
+        Me.dtpDateCreated.ReadOnlyDp = false
+        Me.dtpDateCreated.SecurityKey = Nothing
+        Me.dtpDateCreated.ShowLongDate = false
+        Me.dtpDateCreated.ShowTime = true
+        Me.dtpDateCreated.Size = New System.Drawing.Size(191, 23)
+        Me.dtpDateCreated.TabIndex = 12
+        Me.dtpDateCreated.TargetCalendar = CType(resources.GetObject("dtpDateCreated.TargetCalendar"),System.Globalization.Calendar)
+        Me.dtpDateCreated.Translatable = false
+        Me.dtpDateCreated.Value = Nothing
+        Me.dtpDateCreated.ValueIsMandatory = false
+        Me.dtpDateCreated.ValueIsNullable = false
         '
         'DataGridViewEmployeeLeave
         '
@@ -114,7 +260,8 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.DataGridViewEmployeeLeave.FirstRowDeletionEnabled = true
         Me.DataGridViewEmployeeLeave.FirstRowInsertionEnabled = true
         Me.DataGridViewEmployeeLeave.IgnoreCase = false
-        Me.DataGridViewEmployeeLeave.Location = New System.Drawing.Point(3, 28)
+        Me.DataGridViewEmployeeLeave.IsDirty = false
+        Me.DataGridViewEmployeeLeave.Location = New System.Drawing.Point(3, 29)
         Me.DataGridViewEmployeeLeave.Name = "DataGridViewEmployeeLeave"
         Me.DataGridViewEmployeeLeave.ReadOnly = true
         Me.DataGridViewEmployeeLeave.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -123,12 +270,13 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.DataGridViewEmployeeLeave.SequenceFieldName = "Sequence"
         Me.DataGridViewEmployeeLeave.ShowFooter = false
         Me.DataGridViewEmployeeLeave.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewEmployeeLeave.Size = New System.Drawing.Size(1043, 222)
+        Me.DataGridViewEmployeeLeave.Size = New System.Drawing.Size(1055, 482)
         Me.DataGridViewEmployeeLeave.TabIndex = 5
         Me.DataGridViewEmployeeLeave.Translatable = true
         '
         'dgvIdNo
         '
+        Me.dgvIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
         Me.dgvIdNo.BegFindValue = Nothing
         Me.dgvIdNo.DataPropertyName = "IdNo"
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
@@ -148,7 +296,7 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.dgvIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvIdNo.Translatable = false
-        Me.dgvIdNo.Width = 30
+        Me.dgvIdNo.Width = 55
         '
         'dgvEmployeeIdNo
         '
@@ -163,7 +311,7 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.dgvEmployeeIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvEmployeeIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         Me.dgvEmployeeIdNo.Translatable = false
-        Me.dgvEmployeeIdNo.Width = 200
+        Me.dgvEmployeeIdNo.Width = 175
         '
         'dgvFullDay
         '
@@ -209,7 +357,7 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.dgvStartDate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvStartDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvStartDate.Translatable = false
-        Me.dgvStartDate.Width = 75
+        Me.dgvStartDate.Width = 70
         '
         'dgvEndDate
         '
@@ -231,7 +379,7 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.dgvEndDate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvEndDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvEndDate.Translatable = false
-        Me.dgvEndDate.Width = 75
+        Me.dgvEndDate.Width = 70
         '
         'dgvLeaveIdNo
         '
@@ -378,67 +526,10 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.SupervisorIdNoDataGridViewTextBoxColumn.ReadOnly = true
         Me.SupervisorIdNoDataGridViewTextBoxColumn.Visible = false
         '
-        'txtIdNo
-        '
-        Me.txtIdNo.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.txtIdNo.BegFindValue = Nothing
-        Me.txtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtIdNo.ComputedValue = false
-        Me.txtIdNo.CustomFormat = Nothing
-        Me.txtIdNo.DataBoundControl = true
-        Me.txtIdNo.EditingMode = true
-        Me.txtIdNo.EndFindValue = Nothing
-        Me.txtIdNo.FieldDescription = Nothing
-        Me.txtIdNo.FieldName = Nothing
-        Me.txtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtIdNo.FindEnabled = false
-        Me.txtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtIdNo.LinkedLabel = Nothing
-        Me.txtIdNo.Location = New System.Drawing.Point(50, 1)
-        Me.txtIdNo.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtIdNo.MaximumValue = Nothing
-        Me.txtIdNo.MinimumValue = Nothing
-        Me.txtIdNo.Name = "txtIdNo"
-        Me.txtIdNo.OldValue = Nothing
-        Me.txtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtIdNo.Size = New System.Drawing.Size(100, 23)
-        Me.txtIdNo.TabIndex = 6
-        Me.txtIdNo.Translatable = false
-        '
-        'lblIdNo
-        '
-        Me.lblIdNo.AutoSize = true
-        Me.lblIdNo.DisplayOnly = true
-        Me.lblIdNo.EditingMode = false
-        Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblIdNo.Location = New System.Drawing.Point(1, 1)
-        Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblIdNo.Name = "lblIdNo"
-        Me.lblIdNo.Size = New System.Drawing.Size(47, 17)
-        Me.lblIdNo.TabIndex = 7
-        Me.lblIdNo.Text = "ID No."
-        Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblIdNo.Translatable = true
-        '
-        'lblEnteredBy
-        '
-        Me.lblEnteredBy.AutoSize = true
-        Me.lblEnteredBy.DisplayOnly = true
-        Me.lblEnteredBy.EditingMode = false
-        Me.lblEnteredBy.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblEnteredBy.Location = New System.Drawing.Point(152, 1)
-        Me.lblEnteredBy.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblEnteredBy.Name = "lblEnteredBy"
-        Me.lblEnteredBy.Size = New System.Drawing.Size(47, 17)
-        Me.lblEnteredBy.TabIndex = 8
-        Me.lblEnteredBy.Text = "ID No."
-        Me.lblEnteredBy.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblEnteredBy.Translatable = true
-        '
         'EmployeeLeaveApprovalEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
-        Me.ClientSize = New System.Drawing.Size(1502, 708)
+        Me.ClientSize = New System.Drawing.Size(1073, 615)
         Me.Controls.Add(Me.CFlowLayout1)
         Me.Name = "EmployeeLeaveApprovalEntry"
         Me.Text = "Employee Leave Approval"
@@ -458,6 +549,9 @@ End Sub
     Friend WithEvents txtIdNo As Libraries.CBaseControlsLibrary.CTextBox
     Friend WithEvents lblEnteredBy As Libraries.CBaseControlsLibrary.CLabel
     Friend WithEvents DataGridViewEmployeeLeave As Libraries.CBaseControlsLibrary.CDataGridView
+    Friend WithEvents cboEnteredBy As Libraries.CBaseControlsLibrary.CaComboBox
+    Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
+    Friend WithEvents dtpDateCreated As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
     Friend WithEvents dgvIdNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
     Friend WithEvents dgvEmployeeIdNo As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
     Friend WithEvents dgvFullDay As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn

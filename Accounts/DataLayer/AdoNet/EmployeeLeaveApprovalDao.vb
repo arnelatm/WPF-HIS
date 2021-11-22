@@ -8,23 +8,13 @@ Namespace DataLayer.AdoNet
 
     Public Class EmployeeLeaveApprovalDao
         Inherits AccountsDao
-        Implements IDao(Of EmployeeLeaveApproval)
+        Implements IDao(Of EmployeeLeaveApproval), IDaoGetRecords(Of EmployeeLeave)
 
         Private ReadOnly _db As New Db()
 
         Private ReadOnly _fieldList As String = "DateCreated," &
                                       "EnteredBy," &
                                       "IdNo"
-
-        'Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of EmployeeLeaveApproval) Implements IDao(Of EmployeeLeaveApproval).GetRecordsWithGroupIdNo
-        '    Dim sql As String =
-        '            "SELECT " & FieldList &
-        '            " FROM [EmployeeLeaveStatus_View]" &
-        '            " WHERE LeaveIdNo = @IdNo" &
-        '            " ORDER BY " & sortExpression
-        '    Dim params() As Object = {"@IdNo", idNo}
-        '    Return Db.Read(sql, Make, params).ToList()
-        'End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, EmployeeLeaveApproval) =
                                     Function(reader) _
@@ -45,7 +35,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetLeaveStatus(idNo As Object) As String
             Dim sql As String =
-                    " SELECT [Status] from [EmployeeLeaveStatus_view]" &
+                    " SELECT [Status] from [EmployeeLeaveApproval_view]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Return _db.Scalar(sql, params)
@@ -65,6 +55,40 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(employeeLeaveApproval))
         End Function
+
+        Public Function GetDaoRecords(Optional filter As String = Nothing) As List(Of EmployeeLeave) Implements IDaoGetRecords(Of EmployeeLeave).GetDaoRecords
+            Dim sql As String = "SELECT " &
+                                "AppliedBy," &
+                                "DateCreated," &
+                                "EmployeeIdNo," &
+                                "EndDate," &
+                                "FullDay," &
+                                "IdNo," &
+                                "LeaveIdNo," &
+                                "LeaveReason," &
+                                "LeaveStatus," &
+                                "StartDate," &
+                                "SupervisorIdNo" &
+                                " FROM EmployeeLeaveLatestUpdate_View" &
+                                IIf(filter Is Nothing, "", " WHERE " & filter)
+            Return _db.Read(sql, MakeApproval).ToList()
+        End Function
+
+        Private Shared ReadOnly MakeApproval As Func(Of IDataReader, EmployeeLeave) =
+                                    Function(reader) _
+            New EmployeeLeave() With {
+            .AppliedBy = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("AppliedBy")),
+            .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("DateCreated")),
+            .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
+            .EndDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("EndDate")),
+            .FullDay = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("FullDay")),
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
+            .LeaveIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("LeaveIdNo")),
+            .LeaveReason = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveReason")),
+            .LeaveStatus = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveStatus")),
+            .StartDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("StartDate")),
+            .SupervisorIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("SupervisorIdNo"))
+            }
 
         Private Function Take(employeeLeaveApproval As EmployeeLeaveApproval) As Object()
             Return New Object() {

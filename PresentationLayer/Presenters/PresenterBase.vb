@@ -1468,7 +1468,9 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Protected Sub ClearAllErrorMessages()
         Dim myDict = MainFieldsDictionary
         For Each cCtrl As Control In myDict.Values
-            MyErrorProvider.SetError(cCtrl, "")
+            If cCtrl IsNot Nothing Then
+                MyErrorProvider.SetError(cCtrl, "")
+            End If
         Next
     End Sub
 

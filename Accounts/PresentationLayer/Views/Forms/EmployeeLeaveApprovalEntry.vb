@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
 
 Public Class EmployeeLeaveApprovalEntry
@@ -32,36 +33,40 @@ Public Class EmployeeLeaveApprovalEntry
     Public Property LeaveStatusList As List(Of Lookup.LookupData) Implements IEmployeeLeaveApprovalView.LeaveStatusList
     Public Property ApprovalStatusList As List(Of Lookup.LookupData) Implements IEmployeeLeaveApprovalView.ApprovalStatusList
 
-
 #Region "Fields"
-    Public Property IdNo As Integer Implements IEmployeeLeaveApprovalView.IdNo
+
+    Public Property IdNo As Int32 Implements IEmployeeLeaveApprovalView.IdNo
         Get
-            Throw New NotImplementedException()
+            Return GlobalFunctions.NumParser(Of Int32)(txtIdNo.Text)
         End Get
-        Set(value As Integer)
-            Throw New NotImplementedException()
+        Set
+            txtIdNo.Text = Convert.ToString(Value)
         End Set
     End Property
 
     Public Property EnteredBy As Integer Implements IEmployeeLeaveApprovalView.EnteredBy
         Get
-            Throw New NotImplementedException()
+            Return cboEnteredBy.GetValue()
         End Get
-        Set(value As Integer)
-            Throw New NotImplementedException()
+        Set
+            cboEnteredBy.SetValue(Value)
         End Set
     End Property
 
-    Public Property DateCreated As Date Implements IEmployeeLeaveApprovalView.DateCreated
+    Public Property DateCreated As DateTime? Implements IEmployeeLeaveApprovalView.DateCreated
         Get
-            Throw New NotImplementedException()
+            Return dtpDateCreated.Value
         End Get
-        Set(value As Date)
-            Throw New NotImplementedException()
+        Set
+            If Value.HasValue Then
+                dtpDateCreated.Value = Value
+            Else
+                dtpDateCreated.Value = Date.Now()
+            End If
         End Set
     End Property
-#End Region
 
+#End Region
 
     Private Sub BindEmployeeLeaveList()
         SuspendLayout()
@@ -111,6 +116,8 @@ Public Class EmployeeLeaveApprovalEntry
     Private Sub EmployeeLeaveApproval_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         bsEmployeeLeave.ResetBindings(True)
         PublishClickedButton(ButtonClicked.Edit)
+        cboEnteredBy.SelectedValue = GlobalVariables.UserIdNo
+        dtpDateCreated.Value = Now()
     End Sub
 
     'Private Sub DgvEarning_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellEndEdit
@@ -131,13 +138,10 @@ Public Class EmployeeLeaveApprovalEntry
     Protected Overrides Sub CreateMainFieldsDictionary()
         MainFieldsDictionary = New Dictionary(Of String, Object) From
             {
-            {"EmployeeList", EmployeeList},
-            {"LeaveList", LeaveList},
-            {"LeaveStatus", LeaveStatusList}
+            {"IdNo", txtIdNo},
+            {"DateCreated", dtpDateCreated},
+            {"EnteredBy", cboEnteredBy}
             }
     End Sub
 
-    Private Sub CheckBoxValueChanged(sender As Object, e As DataGridViewCellEventArgs)
-
-    End Sub
 End Class

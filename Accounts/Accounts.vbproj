@@ -551,7 +551,6 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeIdListView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeIdPrintingView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeIdView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeLeaveStatusView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IShiftSummaryView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeePayElementView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IJournalPrefixView.vb" />
