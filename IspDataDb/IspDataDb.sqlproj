@@ -475,7 +475,6 @@
     <Build Include="dbo\Tables\EmployeeLeaveStatus.sql" />
     <Build Include="dbo\Views\EmployeeLeave_View.sql" />
     <Build Include="dbo\Views\EmployeeLeaveStatusList_View.sql" />
-    <Build Include="dbo\Views\EmployeeLeaveLatestUpdate_View.sql" />
     <Build Include="dbo\Views\EmployeeIdPrinting_View.sql" />
     <Build Include="dbo\Tables\EmployeeLeaveApprovalItem.sql" />
     <Build Include="dbo\Views\EmployeeLeaveApproval_View.sql" />
@@ -483,6 +482,8 @@
     <Build Include="dbo\User Defined Types\EmployeeLeaveApprovalItemInsert.sql" />
     <Build Include="dbo\Sequences\EmployeeLeaveApprovalSeries.sql" />
     <Build Include="dbo\Sequences\EmployeeIdPrintingSeries.sql" />
+    <Build Include="dbo\Views\EmployeeLeaveList_View.sql" />
+    <Build Include="dbo\Views\EmployeeLeaveLatestApproval_View.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

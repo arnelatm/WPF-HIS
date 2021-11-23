@@ -28,18 +28,19 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordByIdNo(idNo) As EmployeeLeave Implements IDaoAll(Of EmployeeLeave).GetRecordByIdNo
             Dim sql As String = "SELECT " & FieldList &
-                    " FROM EmployeeLeaveLatestUpdate_View" &
+                    " FROM EmployeeLeave_View" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim employeeLeaveApprovalDao = New EmployeeLeaveApprovalDao
-            Dim data = Db.Read(sql, Make, params).FirstOrDefault()
-            Dim leaveStatus As String = employeeLeaveApprovalDao.GetLeaveStatus(data.IdNo)
-            If leaveStatus IsNot Nothing Then
-                data.LeaveStatus = leaveStatus
-            Else
-                data.LeaveStatus = GlobalFunctions.EnumToCode(LeaveStatusSelection.Submitted)
-            End If
-            Return data
+            Return Db.Read(sql, Make, params).FirstOrDefault()
+            'Dim leaveStatus As String = employeeLeaveApprovalDao.GetLeaveStatus(data.IdNo)
+            'If leaveStatus IsNot Nothing Then
+            '    data.LeaveStatus = leaveStatus
+            'Else
+            '    data.LeaveStatus = GlobalFunctions.EnumToCode(LeaveStatusSelection.Submitted)
+            'End If
+            'data.SupervisorIdNo = GetRecordFieldWithKeyG(Of Int32)(data.EmployeeIdNo.ToString(), "Employee", "IdNo", "SupervisorIdNo")
+            'Return data
         End Function
 
         Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of EmployeeLeave) _
