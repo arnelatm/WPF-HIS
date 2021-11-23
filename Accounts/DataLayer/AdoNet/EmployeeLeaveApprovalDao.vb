@@ -69,7 +69,7 @@ Namespace DataLayer.AdoNet
                                 "LeaveStatus," &
                                 "StartDate," &
                                 "SupervisorIdNo" &
-                                " FROM EmployeeLeaveLatestUpdate_View" &
+                                " FROM EmployeeLeaveLatestApproval_View" &
                                 IIf(filter Is Nothing, "", " WHERE " & filter)
             Return _db.Read(sql, MakeApproval).ToList()
         End Function
@@ -96,6 +96,42 @@ Namespace DataLayer.AdoNet
                                     "@IdNo", employeeLeaveApproval.IdNo
                                     }
         End Function
+
+        Public Function GetLeaveHistory(ByVal employeeLeaveIdNo As Int32) As List(Of EmployeeLeaveApprovalHistory)
+            Dim sql As String = "SELECT " &
+                                "AppliedBy," &
+                                "DateCreated," &
+                                "EmployeeIdNo," &
+                                "EndDate," &
+                                "FullDay," &
+                                "IdNo," &
+                                "LeaveIdNo," &
+                                "LeaveReason," &
+                                "LeaveStatus," &
+                                "StartDate," &
+                                "EnteredBy," &
+                                "Note," &
+                                "Status," &
+                                " FROM EmployeeLeaveApproval_View" &
+                                " WHERE EmployeeLeaveIdNo = " &
+            Return _db.Read(sql, MakeApproval).ToList()
+        End Function
+
+        Private Shared ReadOnly MakeApprovalHistory As Func(Of IDataReader, EmployeeLeaveApprovalHistory) =
+                                    Function(reader) _
+            New EmployeeLeave() With {
+            .AppliedBy = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("AppliedBy")),
+            .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("DateCreated")),
+            .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
+            .EndDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("EndDate")),
+            .FullDay = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("FullDay")),
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
+            .LeaveIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("LeaveIdNo")),
+            .LeaveReason = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveReason")),
+            .LeaveStatus = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveStatus")),
+            .StartDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("StartDate")),
+            .SupervisorIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("SupervisorIdNo"))
+            }
 
     End Class
 

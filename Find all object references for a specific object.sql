@@ -1,0 +1,1 @@
+﻿SELECT * FROM sys.dm_sql_referencing_entities('dbo.employeeleaveList_view','Object');

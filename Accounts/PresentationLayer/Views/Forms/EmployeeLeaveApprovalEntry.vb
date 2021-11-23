@@ -1,6 +1,7 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 
 Public Class EmployeeLeaveApprovalEntry
@@ -109,7 +110,11 @@ Public Class EmployeeLeaveApprovalEntry
 
     Private Sub EmployeeLeaveApproval_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         DataGridViewEmployeeLeave.Refresh()
-        BindEmployeeLeaveList()
+        If EmployeeLeaveList.Count() = 0 Then
+            Messaging.Show(True, "MsgNoLeavesToApprove")
+        Else
+            BindEmployeeLeaveList()
+        End If
         btnEdit.Visible = False
     End Sub
 

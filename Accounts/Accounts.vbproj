@@ -200,6 +200,7 @@
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
+    <Compile Include="BusinessLayer\EmployeeLeaveApprovalHistory.vb" />
     <Compile Include="BusinessLayer\EmployeeLeaveApprovalItem.vb" />
     <Compile Include="BusinessLayer\EmployeePayElement.vb" />
     <Compile Include="BusinessLayer\JournalPrefix.vb" />
@@ -352,6 +353,7 @@
     <Compile Include="OneTimeRun.vb" />
     <Compile Include="PresentationLayer\Models\EmployeeIdModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeeLeaveApprovalItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\EmployeeLeaveApprovalHistoryModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeeLeaveApprovalModel.vb" />
     <Compile Include="PresentationLayer\Models\ShiftSummaryModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeePayElementModel.vb" />
@@ -451,6 +453,12 @@
     <Compile Include="PresentationLayer\Views\Forms\Form1.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\FormDataViewer.Designer.vb">
+      <DependentUpon>FormDataViewer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\FormDataViewer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\GeneralJournalEntry.designer.vb">
       <DependentUpon>GeneralJournalEntry.vb</DependentUpon>
     </Compile>
@@ -547,6 +555,7 @@
     <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeLeaveApprovalHistoryView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeLeaveApprovalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeIdListView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeIdPrintingView.vb" />
@@ -1177,6 +1186,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\FormDataViewer.resx">
+      <DependentUpon>FormDataViewer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\GeneralJournalEntry.resx">
       <DependentUpon>GeneralJournalEntry.vb</DependentUpon>

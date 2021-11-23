@@ -28,6 +28,8 @@ Namespace PresentationLayer.Views.Forms
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EmployeeLeaveEntry))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -47,10 +49,15 @@ Namespace PresentationLayer.Views.Forms
         Me.txtLeaveReason = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblLeaveStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboLeaveStatus = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.btnHistory = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.lblAppliedBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboAppliedBy = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.CDataGridView1 = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.bsEmployeeLeaveApproval = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout2.SuspendLayout
+        CType(Me.CDataGridView1,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.bsEmployeeLeaveApproval,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'TranslatorDAC
@@ -84,7 +91,7 @@ Namespace PresentationLayer.Views.Forms
         Me.TxtIdNo.FieldDescription = Nothing
         Me.TxtIdNo.FieldName = Nothing
         Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.TxtIdNo.FindEnabled = false
+        Me.TxtIdNo.FindEnabled = true
         Me.CFlowLayout2.SetFlowBreak(Me.TxtIdNo, true)
         resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
         Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
@@ -122,7 +129,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboEmployeeIdNo.FieldName = Nothing
         Me.cboEmployeeIdNo.FilterRule = Nothing
         Me.cboEmployeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboEmployeeIdNo.FindEnabled = false
+        Me.cboEmployeeIdNo.FindEnabled = true
         Me.CFlowLayout2.SetFlowBreak(Me.cboEmployeeIdNo, true)
         resources.ApplyResources(Me.cboEmployeeIdNo, "cboEmployeeIdNo")
         Me.cboEmployeeIdNo.ForeColor = System.Drawing.Color.Black
@@ -202,7 +209,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtDateCreated.FieldDescription = Nothing
         Me.txtDateCreated.FieldName = Nothing
         Me.txtDateCreated.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtDateCreated.FindEnabled = false
+        Me.txtDateCreated.FindEnabled = true
         Me.CFlowLayout2.SetFlowBreak(Me.txtDateCreated, true)
         resources.ApplyResources(Me.txtDateCreated, "txtDateCreated")
         Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
@@ -235,10 +242,12 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout2.Controls.Add(Me.txtLeaveReason)
         Me.CFlowLayout2.Controls.Add(Me.lblLeaveStatus)
         Me.CFlowLayout2.Controls.Add(Me.cboLeaveStatus)
+        Me.CFlowLayout2.Controls.Add(Me.btnHistory)
         Me.CFlowLayout2.Controls.Add(Me.lblAppliedBy)
         Me.CFlowLayout2.Controls.Add(Me.cboAppliedBy)
         Me.CFlowLayout2.Controls.Add(Me.lblDateCreated)
         Me.CFlowLayout2.Controls.Add(Me.txtDateCreated)
+        Me.CFlowLayout2.Controls.Add(Me.CDataGridView1)
         resources.ApplyResources(Me.CFlowLayout2, "CFlowLayout2")
         Me.CFlowLayout2.Name = "CFlowLayout2"
         '
@@ -265,7 +274,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboLeaveIdNo.FieldName = Nothing
         Me.cboLeaveIdNo.FilterRule = Nothing
         Me.cboLeaveIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboLeaveIdNo.FindEnabled = false
+        Me.cboLeaveIdNo.FindEnabled = true
         Me.CFlowLayout2.SetFlowBreak(Me.cboLeaveIdNo, true)
         resources.ApplyResources(Me.cboLeaveIdNo, "cboLeaveIdNo")
         Me.cboLeaveIdNo.ForeColor = System.Drawing.Color.Black
@@ -309,7 +318,7 @@ Namespace PresentationLayer.Views.Forms
         Me.chkFullDay.FieldDescription = Nothing
         Me.chkFullDay.FieldName = Nothing
         Me.chkFullDay.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.chkFullDay.FindEnabled = false
+        Me.chkFullDay.FindEnabled = true
         resources.ApplyResources(Me.chkFullDay, "chkFullDay")
         Me.CFlowLayout2.SetFlowBreak(Me.chkFullDay, true)
         Me.chkFullDay.ForeColor = System.Drawing.Color.Black
@@ -377,7 +386,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtLeaveReason.FieldDescription = Nothing
         Me.txtLeaveReason.FieldName = Nothing
         Me.txtLeaveReason.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtLeaveReason.FindEnabled = false
+        Me.txtLeaveReason.FindEnabled = true
         Me.CFlowLayout2.SetFlowBreak(Me.txtLeaveReason, true)
         resources.ApplyResources(Me.txtLeaveReason, "txtLeaveReason")
         Me.txtLeaveReason.ForeColor = System.Drawing.Color.Black
@@ -417,8 +426,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboLeaveStatus.FieldName = Nothing
         Me.cboLeaveStatus.FilterRule = Nothing
         Me.cboLeaveStatus.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboLeaveStatus.FindEnabled = false
-        Me.CFlowLayout2.SetFlowBreak(Me.cboLeaveStatus, true)
+        Me.cboLeaveStatus.FindEnabled = true
         resources.ApplyResources(Me.cboLeaveStatus, "cboLeaveStatus")
         Me.cboLeaveStatus.ForeColor = System.Drawing.Color.Black
         Me.cboLeaveStatus.FormattingEnabled = true
@@ -441,6 +449,15 @@ Namespace PresentationLayer.Views.Forms
         Me.cboLeaveStatus.ValueIsNullable = false
         Me.cboLeaveStatus.ValueIsNumeric = false
         Me.cboLeaveStatus.ValueMember = "Code"
+        '
+        'btnHistory
+        '
+        Me.btnHistory.DesignerSelected = false
+        Me.btnHistory.ImageIndex = 0
+        resources.ApplyResources(Me.btnHistory, "btnHistory")
+        Me.btnHistory.Name = "btnHistory"
+        Me.btnHistory.OriginalImageName = Nothing
+        Me.btnHistory.SecurityKey = ""
         '
         'lblAppliedBy
         '
@@ -468,7 +485,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAppliedBy.FieldName = Nothing
         Me.cboAppliedBy.FilterRule = Nothing
         Me.cboAppliedBy.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboAppliedBy.FindEnabled = false
+        Me.cboAppliedBy.FindEnabled = true
         Me.CFlowLayout2.SetFlowBreak(Me.cboAppliedBy, true)
         resources.ApplyResources(Me.cboAppliedBy, "cboAppliedBy")
         Me.cboAppliedBy.ForeColor = System.Drawing.Color.Black
@@ -493,6 +510,45 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAppliedBy.ValueIsNumeric = false
         Me.cboAppliedBy.ValueMember = "IdNo"
         '
+        'CDataGridView1
+        '
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
+        Me.CDataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.CDataGridView1.BegFindValue = Nothing
+        Me.CDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.CDataGridView1.DefaultCellStyle = DataGridViewCellStyle2
+        Me.CDataGridView1.DgvFooter = Nothing
+        Me.CDataGridView1.DisplayOnly = false
+        Me.CDataGridView1.Ea = Nothing
+        Me.CDataGridView1.EditingMode = false
+        Me.CDataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+        Me.CDataGridView1.EndFindValue = Nothing
+        Me.CDataGridView1.FieldDescription = Nothing
+        Me.CDataGridView1.FieldName = Nothing
+        Me.CDataGridView1.FieldsDictionary = Nothing
+        Me.CDataGridView1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.CDataGridView1.FindEnabled = false
+        Me.CDataGridView1.FirstRowDeletionEnabled = true
+        Me.CDataGridView1.FirstRowInsertionEnabled = true
+        Me.CDataGridView1.IgnoreCase = false
+        Me.CDataGridView1.IsDirty = false
+        resources.ApplyResources(Me.CDataGridView1, "CDataGridView1")
+        Me.CDataGridView1.Name = "CDataGridView1"
+        Me.CDataGridView1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.CDataGridView1.SecurityKey = ""
+        Me.CDataGridView1.SequenceColumn = "dgvSequence"
+        Me.CDataGridView1.SequenceFieldName = "Sequence"
+        Me.CDataGridView1.ShowFooter = false
+        Me.CDataGridView1.ShowInsertColumnWhenEditing = true
+        Me.CDataGridView1.Translatable = true
+        '
         'EmployeeLeaveEntry
         '
         resources.ApplyResources(Me, "$this")
@@ -503,6 +559,8 @@ Namespace PresentationLayer.Views.Forms
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.CFlowLayout2.ResumeLayout(false)
         Me.CFlowLayout2.PerformLayout
+        CType(Me.CDataGridView1,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.bsEmployeeLeaveApproval,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -529,5 +587,8 @@ End Sub
         Public WithEvents cboLeaveStatus As CaComboBox
         Friend WithEvents lblAppliedBy As CLabel
         Public WithEvents cboAppliedBy As CaComboBox
+        Friend WithEvents btnHistory As CButton
+        Friend WithEvents CDataGridView1 As CDataGridView
+        Friend WithEvents bsEmployeeLeaveApproval As BindingSource
     End Class
 End Namespace

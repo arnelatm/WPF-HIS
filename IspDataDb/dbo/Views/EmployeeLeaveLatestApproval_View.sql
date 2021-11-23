@@ -7,7 +7,8 @@
 
 
 
-CREATE View [dbo].[EmployeeLeaveLatestUpdate_View] As
+
+CREATE View [dbo].[EmployeeLeaveLatestApproval_View] As
 SELECT [IdNo]
       ,[EmployeeLeaveApprovalIdNo]
       ,[AppliedBy]
@@ -42,4 +43,4 @@ SELECT [IdNo]
       ,[EmployeeIdNo]
       ,[LeaveReason]
       ,[SupervisorIdNo]
- FROM EmployeeLeave_View b where b.LeaveStatus is Null
+ FROM EmployeeLeaveList_View b where b.LeaveStatus is Null

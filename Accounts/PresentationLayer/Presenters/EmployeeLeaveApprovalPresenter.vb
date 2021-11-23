@@ -36,6 +36,12 @@ Namespace PresentationLayer.Presenters
             Dim filter As String = "LeaveStatus <> '" + EnumToCode(LeaveStatusSelection.Approved) + "' and " &
                          "LeaveStatus <> '" + EnumToCode(LeaveStatusSelection.Disapproved) + "' and " &
                          "LeaveStatus <> '" + EnumToCode(LeaveStatusSelection.Cancelled) + "'"
+            If IsUserASupervisor() Then
+                Dim employeeIdNo As Int32
+                employeeIdNo = Service.GetUserEmployeeIdNo()
+                filter += " and LeaveStatus <> '" + EnumToCode(LeaveStatusSelection.SupervisorApproved) + "' and EmployeeIdNo <> " & employeeIdNo.ToString()
+                filter += " and SuperVisorIdNo = " + employeeIdNo.ToString()
+            End If
             Dim employeeLeaveList As List(Of EmployeeLeave) = Service.GetDaoRecords(filter)
             Dim employeeLeaveListModel As New List(Of EmployeeLeaveModel)
             GlobalVariables.Mapper.Map(employeeLeaveList, employeeLeaveListModel)
