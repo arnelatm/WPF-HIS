@@ -54,10 +54,17 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAppliedBy = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.CDataGridView1 = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.bsEmployeeLeaveApproval = New System.Windows.Forms.BindingSource(Me.components)
+        Me.bsEmployeeLeaveApprovalHistory = New System.Windows.Forms.BindingSource(Me.components)
+        Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NoteDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.StatusDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateCreatedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EnteredByDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout2.SuspendLayout
         CType(Me.CDataGridView1,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.bsEmployeeLeaveApproval,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.bsEmployeeLeaveApprovalHistory,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'TranslatorDAC
@@ -514,8 +521,11 @@ Namespace PresentationLayer.Views.Forms
         '
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
         Me.CDataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.CDataGridView1.AutoGenerateColumns = false
         Me.CDataGridView1.BegFindValue = Nothing
         Me.CDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.CDataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdNoDataGridViewTextBoxColumn, Me.NoteDataGridViewTextBoxColumn, Me.StatusDataGridViewTextBoxColumn, Me.DateCreatedDataGridViewTextBoxColumn, Me.EnteredByDataGridViewTextBoxColumn})
+        Me.CDataGridView1.DataSource = Me.bsEmployeeLeaveApprovalHistory
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
@@ -541,6 +551,7 @@ Namespace PresentationLayer.Views.Forms
         Me.CDataGridView1.IsDirty = false
         resources.ApplyResources(Me.CDataGridView1, "CDataGridView1")
         Me.CDataGridView1.Name = "CDataGridView1"
+        Me.CDataGridView1.ReadOnly = true
         Me.CDataGridView1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.CDataGridView1.SecurityKey = ""
         Me.CDataGridView1.SequenceColumn = "dgvSequence"
@@ -548,6 +559,45 @@ Namespace PresentationLayer.Views.Forms
         Me.CDataGridView1.ShowFooter = false
         Me.CDataGridView1.ShowInsertColumnWhenEditing = true
         Me.CDataGridView1.Translatable = true
+        '
+        'bsEmployeeLeaveApprovalHistory
+        '
+        Me.bsEmployeeLeaveApprovalHistory.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeLeaveApprovalHistoryModel)
+        '
+        'IdNoDataGridViewTextBoxColumn
+        '
+        Me.IdNoDataGridViewTextBoxColumn.DataPropertyName = "IdNo"
+        resources.ApplyResources(Me.IdNoDataGridViewTextBoxColumn, "IdNoDataGridViewTextBoxColumn")
+        Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
+        Me.IdNoDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'NoteDataGridViewTextBoxColumn
+        '
+        Me.NoteDataGridViewTextBoxColumn.DataPropertyName = "Note"
+        resources.ApplyResources(Me.NoteDataGridViewTextBoxColumn, "NoteDataGridViewTextBoxColumn")
+        Me.NoteDataGridViewTextBoxColumn.Name = "NoteDataGridViewTextBoxColumn"
+        Me.NoteDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'StatusDataGridViewTextBoxColumn
+        '
+        Me.StatusDataGridViewTextBoxColumn.DataPropertyName = "Status"
+        resources.ApplyResources(Me.StatusDataGridViewTextBoxColumn, "StatusDataGridViewTextBoxColumn")
+        Me.StatusDataGridViewTextBoxColumn.Name = "StatusDataGridViewTextBoxColumn"
+        Me.StatusDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'DateCreatedDataGridViewTextBoxColumn
+        '
+        Me.DateCreatedDataGridViewTextBoxColumn.DataPropertyName = "DateCreated"
+        resources.ApplyResources(Me.DateCreatedDataGridViewTextBoxColumn, "DateCreatedDataGridViewTextBoxColumn")
+        Me.DateCreatedDataGridViewTextBoxColumn.Name = "DateCreatedDataGridViewTextBoxColumn"
+        Me.DateCreatedDataGridViewTextBoxColumn.ReadOnly = true
+        '
+        'EnteredByDataGridViewTextBoxColumn
+        '
+        Me.EnteredByDataGridViewTextBoxColumn.DataPropertyName = "EnteredBy"
+        resources.ApplyResources(Me.EnteredByDataGridViewTextBoxColumn, "EnteredByDataGridViewTextBoxColumn")
+        Me.EnteredByDataGridViewTextBoxColumn.Name = "EnteredByDataGridViewTextBoxColumn"
+        Me.EnteredByDataGridViewTextBoxColumn.ReadOnly = true
         '
         'EmployeeLeaveEntry
         '
@@ -561,6 +611,7 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout2.PerformLayout
         CType(Me.CDataGridView1,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.bsEmployeeLeaveApproval,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.bsEmployeeLeaveApprovalHistory,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -590,5 +641,11 @@ End Sub
         Friend WithEvents btnHistory As CButton
         Friend WithEvents CDataGridView1 As CDataGridView
         Friend WithEvents bsEmployeeLeaveApproval As BindingSource
+        Friend WithEvents bsEmployeeLeaveApprovalHistory As BindingSource
+        Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents NoteDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents StatusDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents DateCreatedDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents EnteredByDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     End Class
 End Namespace

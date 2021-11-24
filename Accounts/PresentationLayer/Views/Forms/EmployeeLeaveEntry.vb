@@ -177,7 +177,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub BtnHistory_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnHistory.ClickButtonArea
-
+            
         End Sub
 
     End Class
