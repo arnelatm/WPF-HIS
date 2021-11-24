@@ -1950,7 +1950,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Invoker.SetProperty(View, targetProperty, {data})
     End Sub
 
-    Protected Overloads Sub CreateLookupData(sourceTableName As String, targetProperty As String, fields As String(), Optional sortKey As String = Nothing, Optional filter As String = Nothing)
+    Protected Overloads Sub CreateLookupData(sourceTableName As String, targetProperty As String, fields As String(), sortKey As String, Optional filter As String = Nothing)
         Dim data As List(Of Lookup.LookupData)
         data = GetLookup(sourceTableName, fields, sortKey, filter)
         Invoker.SetProperty(View, targetProperty, {data})

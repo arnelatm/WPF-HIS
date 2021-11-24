@@ -31,16 +31,9 @@ Namespace DataLayer.AdoNet
                     " FROM EmployeeLeave_View" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
-            Dim employeeLeaveApprovalDao = New EmployeeLeaveApprovalDao
-            Return Db.Read(sql, Make, params).FirstOrDefault()
-            'Dim leaveStatus As String = employeeLeaveApprovalDao.GetLeaveStatus(data.IdNo)
-            'If leaveStatus IsNot Nothing Then
-            '    data.LeaveStatus = leaveStatus
-            'Else
-            '    data.LeaveStatus = GlobalFunctions.EnumToCode(LeaveStatusSelection.Submitted)
-            'End If
-            'data.SupervisorIdNo = GetRecordFieldWithKeyG(Of Int32)(data.EmployeeIdNo.ToString(), "Employee", "IdNo", "SupervisorIdNo")
-            'Return data
+            Dim data = Db.Read(sql, Make, params).FirstOrDefault()
+            data.ApprovalHistory = GetEmployeeLeaveHistory(idNo)
+            Return Data
         End Function
 
         Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of EmployeeLeave) _
@@ -92,9 +85,7 @@ Namespace DataLayer.AdoNet
             .SupervisorIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("SupervisorIdNo"))
             }
 
-        Public Sub New()
 
-        End Sub
 
         Private Function Take(employeeLeave As EmployeeLeave) As Object()
             Return New Object() {
@@ -116,6 +107,32 @@ Namespace DataLayer.AdoNet
             Dim sql As String = " SELECT " & FieldList & " From EmployeeLeave Order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
+
+        Public Function GetEmployeeLeaveHistory(ByVal idNo As Int32) As List(Of EmployeeLeaveApprovalHistory)
+            Dim sql As String = "SELECT " & 
+                                "EmployeeLeaveApprovalIdNo," &
+                                "DateCreated," & 
+                                "EmployeeLeaveIdNo," &
+                                "EnteredBy," &
+                                "IdNo," &
+                                "Note," &
+                                "Status" &
+                                " From LeaveApproval_View where EmployeeLeaveIdNo = " & idNo.ToString()
+                        Return Db.Read(sql, MakeLeaveApprovalHistory).ToList()
+        End Function
+
+        Private Shared ReadOnly MakeLeaveApprovalHistory As Func(Of IDataReader, EmployeeLeaveApprovalHistory) =
+                                    Function(reader) _
+            New EmployeeLeaveApprovalHistory() With {
+            .ApprovalIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeLeaveApprovalIdNo")),
+            .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("DateCreated")),
+            .EmployeeLeaveIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeLeaveIdNo")),
+            .EnteredBy = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("EnteredBy")),
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
+            .Note = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Note")),
+            .Status = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Status"))
+            }
+
 
     End Class
 

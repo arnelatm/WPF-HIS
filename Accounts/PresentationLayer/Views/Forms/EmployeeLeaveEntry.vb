@@ -1,5 +1,7 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.BusinessLayer.BusinessObjects
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
@@ -9,6 +11,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private ReadOnly _nfi As NumberFormatInfo
         Private _humanResourceUser As Boolean
+        Private _approvalHistory As List(Of IEmployeeLeaveApprovalHistoryView)
 
         Public Sub New()
             ' This call is required by the designer.
@@ -118,6 +121,18 @@ Namespace PresentationLayer.Views.Forms
         Public Property Disapprove As Boolean Implements IEmployeeLeaveView.Disapprove
         Public Property ApprovalNote As String Implements IEmployeeLeaveView.ApprovalNote
         Public Property Approve As Boolean Implements IEmployeeLeaveView.Approve
+        Public Property Users As List(Of Lookup.LookupData) Implements IEmployeeLeaveView.Users
+        Public Property LeaveStatusList As List(Of Lookup.LookupData) Implements IEmployeeLeaveView.LeaveStatusList
+
+        Public Property ApprovalHistory As List(Of IEmployeeLeaveApprovalHistoryView) Implements IEmployeeLeaveView.ApprovalHistory
+            Get
+                Return _approvalHistory
+            End Get
+            Set(value As List(Of IEmployeeLeaveApprovalHistoryView))
+                _approvalHistory = value
+                BindApprovalLeaveHistory()
+            End Set
+        End Property
 
 #End Region
 
@@ -177,7 +192,39 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub BtnHistory_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnHistory.ClickButtonArea
-            
+
+        End Sub
+
+        Private Sub BindApprovalLeaveHistory()
+            SuspendLayout()
+            bsEmployeeLeaveApprovalHistory.DataSource = Nothing
+            DataGridViewApprovalHistory.ShowInsertColumnWhenEditing = False
+            DataGridViewApprovalHistory.Refresh()
+            bsEmployeeLeaveApprovalHistory.DataSource = ApprovalHistory
+            bsEmployeeLeaveApprovalHistory.AllowNew = True
+            With DataGridViewApprovalHistory
+                .AutoGenerateColumns = False
+                .DataSource = bsEmployeeLeaveApprovalHistory
+                .RemoveInsertColumn()
+            End With
+            With DataGridViewApprovalHistory.Columns
+                dgvEnteredBy.DataSource = Users
+                dgvEnteredBy.DisplayMember = "Name"
+                dgvEnteredBy.ValueMember = "IdNo"
+                dgvEnteredBy.DisplayStyleForCurrentCellOnly = True
+                dgvEnteredBy.DisplayOnly = True
+                dgvLeaveStatus.DataSource = LeaveStatusList
+                dgvLeaveStatus.DisplayMember = "Name"
+                dgvLeaveStatus.ValueMember = "Code"
+                dgvLeaveStatus.DisplayStyleForCurrentCellOnly = True
+                dgvApprovalIdNo.DisplayOnly = True
+                dgvDateCreated.DisplayOnly = True
+                dgvEnteredBy.DisplayOnly = True
+                dgvItemIdNo.DisplayOnly = True
+                dgvNote.DisplayOnly = True
+                dgvLeaveStatus.DisplayOnly = True
+            End With
+            ResumeLayout()
         End Sub
 
     End Class

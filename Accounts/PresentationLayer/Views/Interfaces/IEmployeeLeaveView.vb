@@ -1,4 +1,6 @@
-﻿Imports AATM.PresentationLayer.Views
+﻿Imports AATM.BusinessLayer.BusinessObjects
+Imports AATM.Libraries
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Interfaces
 
@@ -19,7 +21,9 @@ Namespace PresentationLayer.Views.Interfaces
         Property Approve As Boolean
         Property Disapprove As Boolean
         Property ApprovalNote As String
-
+        Property ApprovalHistory As List(Of IEmployeeLeaveApprovalHistoryView)
+        Property Users As List(Of Lookup.LookupData)
+        Property LeaveStatusList As List(Of Lookup.LookupData)
     End Interface
 
 End Namespace

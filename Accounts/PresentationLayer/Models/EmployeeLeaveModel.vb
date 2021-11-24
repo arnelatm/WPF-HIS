@@ -22,7 +22,7 @@ Namespace PresentationLayer.Models
         Public Property Approve As Boolean
         Public Property Disapprove As Boolean
         Public Property ApprovalNote As String
-
+        Public Property ApprovalHistory As List(Of EmployeeLeaveApprovalHistoryModel)
     End Class
 
 End Namespace
