@@ -1,8 +1,12 @@
 ﻿Namespace PresentationLayer.Views.Interfaces
 
     Public Interface IEmployeeLeaveApprovalHistoryView
-        Inherits IEmployeeLeaveApprovalView
 
+        Property ApprovalIdNo As Int32
+        Property DateCreated As DateTime?
+        Property EmployeeLeaveIdNo As Int32
+        Property EnteredBy As Int32
+        Property IdNo As Int32
         Property Note As String
         Property Status As String
 
