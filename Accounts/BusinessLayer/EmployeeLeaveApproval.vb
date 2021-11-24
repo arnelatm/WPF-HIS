@@ -11,7 +11,6 @@ Namespace BusinessLayer
         Public Sub New()
             ' establish business rules
             If GetRules().Count() = 0 Then
-                AddRule(New ValidateRequired("LeaveIdNo"))
                 AddRule(New ValidateRequired("EnteredBy"))
                 AddRule(New ValidateRequired("Status"))
             End If
@@ -20,10 +19,10 @@ Namespace BusinessLayer
         Public Property DateCreated As DateTime?
         Public Property EnteredBy As Int32
         Public Property IdNo As Int32
-        Public Property EmployeeLeaveIdNo As Int32
-        Public Property ApprovalItemIdNo As Int32
-        Public Property Notes As String
-        Public Property Status As String
+        'Public Property EmployeeLeaveIdNo As Int32
+        'Public Property ApprovalItemIdNo As Int32
+        'Public Property Notes As String
+        'Public Property Status As String
     End Class
 
 End Namespace
