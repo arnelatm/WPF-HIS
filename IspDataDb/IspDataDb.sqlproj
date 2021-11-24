@@ -484,6 +484,7 @@
     <Build Include="dbo\Sequences\EmployeeIdPrintingSeries.sql" />
     <Build Include="dbo\Views\EmployeeLeaveList_View.sql" />
     <Build Include="dbo\Views\EmployeeLeaveLatestApproval_View.sql" />
+    <Build Include="dbo\Views\LeaveApproval_View.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
