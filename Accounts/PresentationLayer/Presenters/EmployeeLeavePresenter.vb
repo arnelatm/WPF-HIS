@@ -62,6 +62,8 @@ Namespace PresentationLayer.Presenters
             CreateDataSource("User", "AppliedBy", {"IdNo", "UserName"})
             CreateDataSource("Leave", "LeaveIdNo")
             CreateEnumDataSource(Of LeaveStatusSelection)("LeaveStatus")
+            CreateEnumData(Of LeaveStatusSelection)(View.LeaveStatusList)
+            CreateLookupData("User", "Users", {"IdNo", "UserName"})
             'CreateEnumDataSource(Of LeaveApprovalSelection)("Approval")
         End Sub
 
