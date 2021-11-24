@@ -777,6 +777,24 @@
   <data name="&gt;&gt;txtDateCreated.ZOrder" xml:space="preserve">
     <value>20</value>
   </data>
+  <data name="IdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>IdNo</value>
+  </data>
+  <data name="NoteDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="StatusDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="DateCreatedDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>DateCreated</value>
+  </data>
+  <data name="EnteredByDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>EnteredBy</value>
+  </data>
+  <metadata name="bsEmployeeLeaveApprovalHistory.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>873, 17</value>
+  </metadata>
   <data name="CDataGridView1.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 301</value>
   </data>
@@ -902,6 +920,42 @@
   </data>
   <data name="&gt;&gt;bsEmployeeLeaveApproval.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bsEmployeeLeaveApprovalHistory.Name" xml:space="preserve">
+    <value>bsEmployeeLeaveApprovalHistory</value>
+  </data>
+  <data name="&gt;&gt;bsEmployeeLeaveApprovalHistory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>IdNoDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;NoteDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>NoteDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;NoteDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;StatusDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>StatusDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;StatusDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;DateCreatedDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>DateCreatedDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;DateCreatedDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;EnteredByDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>EnteredByDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;EnteredByDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EmployeeLeaveEntry</value>
