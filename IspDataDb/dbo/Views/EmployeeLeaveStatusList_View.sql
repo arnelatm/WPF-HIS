@@ -1,6 +1,7 @@
-﻿CREATE VIEW dbo.EmployeeLeaveApprovalList_View
+﻿
+CREATE VIEW [dbo].[EmployeeLeaveApprovalList_View]
 AS
-SELECT        a.IdNo, a.AppliedBy, a.LeaveIdNo, a.StartDate, a.EndDate, a.FullDay, c.EnteredBy, b.Status, b.Note, c.DateCreated AS LeaveStatusDate, b.EmployeeLeaveApprovalIdNo, a.EmployeeIdNo, b.IdNo AS ApprovalItemIdNo
+SELECT        a.IdNo, a.AppliedBy, a.LeaveIdNo, a.StartDate, a.EndDate, a.FullDay, c.EnteredBy, b.Status, b.Note, c.DateCreated AS LeaveStatusDate, b.EmployeeLeaveApprovalIdNo, a.EmployeeIdNo
 FROM            dbo.EmployeeLeave AS a LEFT OUTER JOIN
                          dbo.EmployeeLeaveApprovalItem AS b ON a.IdNo = b.EmployeeLeaveIdNo LEFT OUTER JOIN
                          dbo.EmployeeLeaveApproval AS c ON b.EmployeeLeaveApprovalIdNo = c.IdNo
@@ -14,7 +15,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[41] 4[38] 2[3] 3) )"
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -137,6 +138,8 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveApprovalList_View';
+
+
 
 
 

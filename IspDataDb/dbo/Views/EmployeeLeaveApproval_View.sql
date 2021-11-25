@@ -1,7 +1,8 @@
-﻿CREATE VIEW dbo.EmployeeLeaveApproval_View
+﻿
+CREATE VIEW [dbo].[EmployeeLeaveApproval_View]
 AS
 SELECT        a.IdNo, a.AppliedBy, a.LeaveIdNo, a.StartDate, a.EndDate, a.FullDay, a.EnteredBy, a.Status, a.Note, a.LeaveStatusDate, b.EmployeeLeaveIdNo, b.LatestStatusUpdate, dbo.EmployeeLeave.DateCreated, 
-                         dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.LeaveReason, dbo.Employee.SupervisorIdNo, a.EmployeeLeaveApprovalIdNo, a.ApprovalItemIdNo
+                         dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.LeaveReason, dbo.Employee.SupervisorIdNo, a.EmployeeLeaveApprovalIdNo
 FROM            dbo.EmployeeLeaveApprovalList_View AS a INNER JOIN
                              (SELECT        c.EmployeeLeaveIdNo, MAX(d.DateCreated) AS LatestStatusUpdate
                                FROM            dbo.EmployeeLeaveApprovalItem AS c LEFT OUTER JOIN

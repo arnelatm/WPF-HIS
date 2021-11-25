@@ -200,6 +200,7 @@
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
+    <Compile Include="BusinessLayer\EmployeeHolidayTransfer.vb" />
     <Compile Include="BusinessLayer\EmployeeLeaveApprovalHistory.vb" />
     <Compile Include="BusinessLayer\EmployeeLeaveApprovalItem.vb" />
     <Compile Include="BusinessLayer\EmployeePayElement.vb" />
