@@ -319,15 +319,19 @@ Namespace AdoNet
             If cPicture.Equals(DBNull.Value) Or cPicture Is Nothing Or (cPicture.GetType().ToString() = "System.Byte[]" AndAlso cPicture.Length = 0) Then
                 Return Nothing
             Else
-                Dim imageData = CType(cPicture, Byte())
-                Dim img As Image = Nothing
-                If imageData IsNot Nothing Then
-                    Using ms As New MemoryStream(imageData, 0, imageData.Length)
-                        ms.Write(imageData, 0, imageData.Length)
-                        img = Image.FromStream(ms, True)
-                    End Using
-                End If
-                Return img
+                Dim ms As New IO.MemoryStream(CType(cPicture, Byte())) 'This is correct...
+                Dim returnImage As Image = Image.FromStream(ms, True)
+                return returnImage
+
+                'Dim imageData = CType(cPicture, Byte())
+                'Dim img As Image = Nothing
+                'If imageData IsNot Nothing Then
+                '    Using ms As New MemoryStream(imageData, 0, imageData.Length)
+                '        ms.Write(imageData, 0, imageData.Length)
+                '        img = Image.FromStream(ms, True)
+                '    End Using
+                'End If
+                'Return img
             End If
         End Function
 
