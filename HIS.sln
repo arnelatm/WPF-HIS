@@ -59,6 +59,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 		CreatePayElementGroups.sql = CreatePayElementGroups.sql
 		CreateProgramSecurities(non menu).sql = CreateProgramSecurities(non menu).sql
 		DO THIS NOW.txt = DO THIS NOW.txt
+		Error correction for DTC error.pdf = Error correction for DTC error.pdf
 		HomeSqlDataStructures.sql = HomeSqlDataStructures.sql
 		HomeSqlIspdata.sql = HomeSqlIspdata.sql
 		OldSecurityObjects.sql = OldSecurityObjects.sql
