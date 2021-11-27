@@ -99,5 +99,5 @@ Public Interface IBaseDao
     Function GetNextSeries(ByVal schemaName As String, ByVal seriesName As String) As Integer
 
     Function ExecuteTvpSp(ByRef procedureName As String, dataTable As DataTable) As Integer
-
+    Function GetMasterList(tableName As String, sortKey As String, fieldNames() As String, Optional filterKey As String = Nothing) As Object
 End Interface
