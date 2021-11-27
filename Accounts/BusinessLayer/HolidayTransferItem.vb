@@ -6,7 +6,7 @@ Imports AATM.Libraries.Lookup
 
 Namespace BusinessLayer
 
-    Public Class EmployeeHolidayTransfer
+    Public Class HolidayTransferItem
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
@@ -19,10 +19,8 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property AppliedBy As Int32
-        Public Property DateCreated As DateTime?
+        Public Property HolidayTransferIdNo As Int32
         Public Property EmployeeIdNo As Int32
-        Public Property HolidayIdNo As Int32
         Public Property IdNo As Int32
 
     End Class

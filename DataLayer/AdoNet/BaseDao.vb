@@ -1,6 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Dynamic
 Imports System.Globalization
+Imports AATM.BusinessLayer
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.MessagingLibrary
@@ -922,6 +923,36 @@ Namespace AdoNet
         Public Function ExecuteTvpSp(ByRef procedureName As String, dataTable As DataTable) As Int32 Implements IBaseDao.ExecuteTvpSp
             Return _db.InsertTvp(procedureName, dataTable)
         End Function
+
+
+        Public Function GetMasterList(tableName As String, sortKey As String, fieldNames As String(), Optional filterKey As String = Nothing) As Object Implements IBaseDao.GetMasterList
+            Dim fields As String
+            If Len(fieldNames) <> 3 Then
+                Debugger.Break()
+            End If
+            fields = fieldNames(1) & " As Name" + ", " & fieldNames(2) & " As Code" & fieldNames(3) & " As IdNo"
+            Dim sql As String
+            If filterKey Is Nothing Or filterKey = "" Then
+                If sortKey Is Nothing Or sortKey = "" Then
+                    sql = " SELECT " & fields & " from [" & tableName & "]"
+                Else
+                    sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey
+                End If
+            Else
+                If sortKey Is Nothing Or sortKey = "" Then
+                    sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey
+                Else
+                    sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey & " order by " & sortKey
+                End If
+            End If
+            Return _db.Read(sql, MakeMasterList).ToList()
+        End Function
+
+        Private Shared ReadOnly MakeMasterList As Func(Of IDataReader, GenericData) = Function(reader) New GenericData() With {
+            .Code = Extensions.AsString(reader("Code")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .Name = Extensions.AsString(reader("Name"))}
+
 
     End Class
 
