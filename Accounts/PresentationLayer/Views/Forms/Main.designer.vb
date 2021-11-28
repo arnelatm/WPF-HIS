@@ -106,6 +106,7 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemEmployeeLeave = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemEmployeeAbsenceLate = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemHolidayEntry = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemEmployeeLeaveApproval = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemPayrollTransaction = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemPayrollEntry = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemRecurringPayrollEntry = New System.Windows.Forms.ToolStripMenuItem()
@@ -181,7 +182,7 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemEmployeeLeaveApproval = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BulkEmployeeHolidayTransferToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.AccountsMenu.SuspendLayout
@@ -585,7 +586,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemHR
         '
-        Me.ToolStripMenuItemHR.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemEmployeeLeave, Me.ToolStripMenuItemEmployeeAbsenceLate, Me.ToolStripMenuItemHolidayEntry, Me.ToolStripMenuItemEmployeeLeaveApproval})
+        Me.ToolStripMenuItemHR.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemEmployeeLeave, Me.ToolStripMenuItemEmployeeAbsenceLate, Me.ToolStripMenuItemHolidayEntry, Me.ToolStripMenuItemEmployeeLeaveApproval, Me.BulkEmployeeHolidayTransferToolStripMenuItem})
         Me.ToolStripMenuItemHR.Name = "ToolStripMenuItemHR"
         resources.ApplyResources(Me.ToolStripMenuItemHR, "ToolStripMenuItemHR")
         '
@@ -603,6 +604,11 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.ToolStripMenuItemHolidayEntry.Name = "ToolStripMenuItemHolidayEntry"
         resources.ApplyResources(Me.ToolStripMenuItemHolidayEntry, "ToolStripMenuItemHolidayEntry")
+        '
+        'ToolStripMenuItemEmployeeLeaveApproval
+        '
+        Me.ToolStripMenuItemEmployeeLeaveApproval.Name = "ToolStripMenuItemEmployeeLeaveApproval"
+        resources.ApplyResources(Me.ToolStripMenuItemEmployeeLeaveApproval, "ToolStripMenuItemEmployeeLeaveApproval")
         '
         'ToolStripMenuItemPayrollTransaction
         '
@@ -996,10 +1002,10 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
-        'ToolStripMenuItemEmployeeLeaveApproval
+        'BulkEmployeeHolidayTransferToolStripMenuItem
         '
-        Me.ToolStripMenuItemEmployeeLeaveApproval.Name = "ToolStripMenuItemEmployeeLeaveApproval"
-        resources.ApplyResources(Me.ToolStripMenuItemEmployeeLeaveApproval, "ToolStripMenuItemEmployeeLeaveApproval")
+        Me.BulkEmployeeHolidayTransferToolStripMenuItem.Name = "BulkEmployeeHolidayTransferToolStripMenuItem"
+        resources.ApplyResources(Me.BulkEmployeeHolidayTransferToolStripMenuItem, "BulkEmployeeHolidayTransferToolStripMenuItem")
         '
         'Main
         '
@@ -1180,5 +1186,6 @@ End Sub
         Friend WithEvents ToolStripMenuItemEmployeeAbsenceLate As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemHolidayEntry As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemEmployeeLeaveApproval As ToolStripMenuItem
+        Friend WithEvents BulkEmployeeHolidayTransferToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace

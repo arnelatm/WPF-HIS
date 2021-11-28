@@ -12,6 +12,7 @@
     <MyType>WindowsFormsWithCustomSubMain</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +25,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -266,6 +266,8 @@
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeLeaveDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeLeaveApprovalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\HolidayTransferDao.vb" />
+    <Compile Include="DataLayer\AdoNet\HolidayTransferItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\ShiftSummaryDao.vb" />
     <Compile Include="DataLayer\AdoNet\HolidayDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeAbsenceDao.vb" />
@@ -395,6 +397,7 @@
     <Compile Include="PresentationLayer\Presenters\CustomerPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeeLeaveApprovalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeeIdPrintingPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\BulkHolidayTransferPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ShiftSummaryPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\HolidayPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeeAbsencePresenter.vb" />
@@ -1525,6 +1528,7 @@
     </None>
     <None Include="My Project\DataSources\AATM.Accounts.BusinessLayer.Bank.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.BusinessLayer.Customer1.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.BusinessLayer.HolidayTransferItem.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Forms.EmployeeEntryTv.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.AccountReconciliationItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.AttendanceModel.datasource" />
@@ -1545,6 +1549,8 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeePayElementModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeePhoneModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.GeneralJournalModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.HolidayTransferItemModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.HolidayTransferItemModel1.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.JournalItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.OvertimeItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PayElementAccountModel.datasource" />
@@ -1557,7 +1563,6 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PettyCashJournalModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.TransactionNotesModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Views.SalesDepositView.datasource" />
-    <None Include="My Project\DataSources\AATM.BusinessLayer.GenericData.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
@@ -1676,7 +1681,15 @@
   <ItemGroup>
     <None Include="Resources\GreenGradientBackgroundLarge.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="My Project\DataSources\Database1.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="My Project\DataSources\Database1_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>Database1.mdf</DependentUpon>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">
       <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
