@@ -488,6 +488,9 @@
     <Build Include="dbo\Tables\HolidayTransferAvailment.sql" />
     <Build Include="dbo\Tables\HolidayTransfer.sql" />
     <Build Include="dbo\Tables\HolidayTransferItem.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateInsertHolidayTransferItemTVP.sql" />
+    <Build Include="dbo\User Defined Types\HolidayTransferItemUpdate.sql" />
+    <Build Include="dbo\User Defined Types\HolidayTransferItemInsert.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

@@ -1,153 +1,136 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.BusinessLayer
-Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 
-Public Class BulkHolidayTransferEntry
-    Implements IHolidayTransferView
+Namespace PresentationLayer.Views.Forms
 
-    Private _employeeList As New List(Of GenericData)
+    Public Class BulkHolidayTransferEntry
+        Implements IHolidayTransferView
 
-    Public Sub New()
-        ' This call is required by the designer.
-        InitializeComponent()
-        ' Add any initialization after the InitializeComponent() call.
-    End Sub
+        Private _holidayTransferItems As New List(Of IHolidayTransferItemView)
+
+        Public Sub New()
+            ' This call is required by the designer.
+            InitializeComponent()
+            ' Add any initialization after the InitializeComponent() call.
+        End Sub
 
 #Region "Fields"
 
-    Public Property IdNo As Int32 Implements IHolidayTransferView.IdNo
-        Get
-            Return GlobalFunctions.NumParser(Of Int32)(txtIdNo.Text)
-        End Get
-        Set
-            txtIdNo.Text = Convert.ToString(Value)
-        End Set
-    End Property
+        Public Property IdNo As Int32 Implements IHolidayTransferView.IdNo
+            Get
+                Return NumParser(Of Integer)(txtIdNo.Text)
+            End Get
+            Set
+                txtIdNo.Text = Convert.ToString(Value)
+            End Set
+        End Property
 
-    Public Property AppliedBy As Integer Implements IHolidayTransferView.AppliedBy
-        Get
-            Return cboAppliedBy.GetValue()
-        End Get
-        Set
-            cboAppliedBy.SetValue(Value)
-        End Set
-    End Property
+        Public Property AppliedBy As Integer Implements IHolidayTransferView.AppliedBy
+            Get
+                Return cboAppliedBy.GetValue()
+            End Get
+            Set
+                cboAppliedBy.SetValue(Value)
+            End Set
+        End Property
 
-    Public Property DateCreated As DateTime? Implements IHolidayTransferView.DateCreated
-        Get
-            Return dtpDateCreated.Value
-        End Get
-        Set
-            If Value.HasValue Then
-                dtpDateCreated.Value = Value
-            Else
-                dtpDateCreated.Value = Date.Now()
-            End If
-        End Set
-    End Property
+        Public Property DateCreated As DateTime? Implements IHolidayTransferView.DateCreated
+            Get
+                Return dtpDateCreated.Value
+            End Get
+            Set
+                If Value.HasValue Then
+                    dtpDateCreated.Value = Value
+                Else
+                    dtpDateCreated.Value = Date.Now()
+                End If
+            End Set
+        End Property
 
-    Private Property EmployeeList As List(Of GenericData) Implements IHolidayTransferView.EmployeeList
-        Get
-            Return _employeeList
-        End Get
-        Set
-            _employeeList = Value
-            BindEmployeeList()
-        End Set
-    End Property
+        Public Property HolidayIdNo As Integer Implements IHolidayTransferView.HolidayIdNo
+            Get
+                Return cboHolidayIdNo.GetValue()
+            End Get
+            Set(value As Integer)
+                cboHolidayIdNo.SetValue(value)
+            End Set
+        End Property
 
-    Public Property HolidayIdNo As Integer Implements IHolidayTransferView.HolidayIdNo
-        Get
-            Return cboHolidayIdNo.GetValue()
-        End Get
-        Set(value As Integer)
-            cboHolidayIdNo.SetValue(value)
-        End Set
-    End Property
+        Private Property HolidayTransferItems As List(Of IHolidayTransferItemView) Implements IHolidayTransferView.HolidayTransferItems
+            Get
+                Return _holidayTransferItems
+            End Get
+            Set
+                _holidayTransferItems = Value
+                BindHolidayTransferItems()
+            End Set
+        End Property
 
 #End Region
 
-    Private Sub BindEmployeeList()
-        SuspendLayout()
-        bsEmployeeList.DataSource = Nothing
-        DataGridViewEmployeeLeave.ShowInsertColumnWhenEditing = False
-        DataGridViewEmployeeLeave.Refresh()
-        bsEmployeeList.DataSource = EmployeeList
-        bsEmployeeList.AllowNew = True
-        With DataGridViewEmployeeLeave
-            .AutoGenerateColumns = False
-            .DataSource = bsEmployeeList
-            .RemoveInsertColumn()
-        End With
-        With DataGridViewEmployeeLeave.Columns
-            dgvEmployeeIdNo.DisplayOnly = True
-            dgvEmployeeIdNo.DataSource = EmployeeList
-            dgvEmployeeIdNo.DisplayMember = "Name"
-            dgvEmployeeIdNo.ValueMember = "IdNo"
-            dgvEmployeeIdNo.DisplayStyleForCurrentCellOnly = True
-            dgvLeaveIdNo.DataSource = ""
-            dgvLeaveIdNo.DisplayMember = "Name"
-            dgvLeaveIdNo.ValueMember = "IdNo"
-            dgvLeaveIdNo.DisplayStyleForCurrentCellOnly = True
-            dgvLeaveIdNo.DisplayOnly = True
-            dgvLeaveStatus.DisplayOnly = True
-            dgvLeaveStatus.DataSource = ""
-            dgvLeaveStatus.ValueMember = "Code"
-            dgvLeaveStatus.DisplayMember = "Name"
-            dgvLeaveStatus.DisplayStyleForCurrentCellOnly = True
-            dgvApprove.DisplayOnly = False
-            dgvFullDay.DisplayOnly = True
-            dgvEndDate.DisplayOnly = True
-            dgvLeaveReason.DisplayOnly = True
-            dgvFullDay.DisplayOnly = True
-            dgvStartDate.DisplayOnly = True
-            dgvFullDay.DisplayOnly = True
-        End With
-        ResumeLayout()
-    End Sub
+        Private Sub BindHolidayTransferItems()
+            SuspendLayout()
+            bsHolidayTransferItems.DataSource = Nothing
+            DataGridViewHolidayTransferitems.ShowInsertColumnWhenEditing = False
+            DataGridViewHolidayTransferitems.Refresh()
+            bsHolidayTransferItems.DataSource = HolidayTransferItems
+            bsHolidayTransferItems.AllowNew = True
+            With DataGridViewHolidayTransferitems
+                .AutoGenerateColumns = False
+                .DataSource = bsHolidayTransferItems
+                .RemoveInsertColumn()
+            End With
+            With DataGridViewHolidayTransferitems.Columns
+                dgvEmployeeIdNo.DisplayOnly = True
+                dgvEmployeeIdNo.DataSource = HolidayTransferItems
+                dgvEmployeeIdNo.DisplayMember = "Name"
+                dgvEmployeeIdNo.ValueMember = "IdNo"
+                dgvEmployeeIdNo.DisplayStyleForCurrentCellOnly = True
+            End With
+            ResumeLayout()
+        End Sub
 
-    Private Sub HolidayTransfer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        DataGridViewEmployeeLeave.Refresh()
-        If EmployeeList.Count() <> 0 Then
-            BindEmployeeList()
-        End If
-        btnEdit.Visible = False
-    End Sub
-
-    Private Sub HolidayTransfer_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        bsEmployeeList.ResetBindings(True)
-        PublishClickedButton(ButtonClicked.Edit)
-        cboAppliedBy.SelectedValue = GlobalVariables.UserIdNo
-        dtpDateCreated.Value = Now()
-    End Sub
-
-    'Private Sub DgvEarning_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellEndEdit
-    '    ProcessCellEndEdit(DataGridViewEmployeeLeave, bsEmployeeLeave)
-    '    bsEmployeeLeaveeesf.ResetBindings(False)
-    'End Sub
-
-    Private Sub CheckBoxValueChanged() Handles DataGridViewEmployeeLeave.CellValueChanged
-        If TypeOf DataGridViewEmployeeLeave.CurrentCell Is DataGridViewCheckBoxCell Then
-            If DataGridViewEmployeeLeave.CurrentCell.OwningColumn.Name = "dgvApprove" Then
-                DataGridViewEmployeeLeave.CurrentRow.Cells("dgvDisapprove").Value = False
-            ElseIf DataGridViewEmployeeLeave.CurrentCell.OwningColumn.Name = "dgvDisapprove" Then
-                DataGridViewEmployeeLeave.CurrentRow.Cells("dgvApprove").Value = False
+        Private Sub HolidayTransfer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            DataGridViewHolidayTransferitems.Refresh()
+            If HolidayTransferItems.Count() <> 0 Then
+                BindHolidayTransferItems()
             End If
-        End If
-    End Sub
+            btnEdit.Visible = False
+        End Sub
 
-    Protected Overrides Sub CreateMainFieldsDictionary()
-        MainFieldsDictionary = New Dictionary(Of String, Object) From
-            {
-            {"IdNo", txtIdNo},
-            {"DateCreated", dtpDateCreated},
-            {"AppliedBy", cboAppliedBy},
-            {"EmployeeIdNo", cboAppliedBy},
-            {"HolidayIdNo", cboHolidayIdNo}
-            }
-    End Sub
+        Private Sub HolidayTransfer_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+            bsHolidayTransferItems.ResetBindings(True)
+            PublishClickedButton(ButtonClicked.Edit)
+            cboAppliedBy.SelectedValue = GlobalVariables.UserIdNo
+            dtpDateCreated.Value = Now()
+        End Sub
 
-End Class
+        'Private Sub DgvEarning_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellEndEdit
+        '    ProcessCellEndEdit(DataGridViewEmployeeLeave, bsEmployeeLeave)
+        '    bsEmployeeLeaveeesf.ResetBindings(False)
+        'End Sub
+
+        'Private Sub CheckBoxValueChanged() Handles DataGridViewHolidayTransferitems.CellValueChanged
+        '    If TypeOf DataGridViewHolidayTransferitems.CurrentCell Is DataGridViewCheckBoxCell Then
+        '        If DataGridViewHolidayTransferitems.CurrentCell.OwningColumn.Name = "dgvApprove" Then
+        '            DataGridViewHolidayTransferitems.CurrentRow.Cells("dgvDisapprove").Value = False
+        '        ElseIf DataGridViewHolidayTransferitems.CurrentCell.OwningColumn.Name = "dgvDisapprove" Then
+        '            DataGridViewHolidayTransferitems.CurrentRow.Cells("dgvApprove").Value = False
+        '        End If
+        '    End If
+        'End Sub
+
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
+                {
+                {"IdNo", txtIdNo},
+                {"DateCreated", dtpDateCreated},
+                {"AppliedBy", cboAppliedBy},
+                {"HolidayIdNo", cboHolidayIdNo}
+                }
+        End Sub
+
+    End Class
+
+End Namespace

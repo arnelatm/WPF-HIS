@@ -1129,6 +1129,10 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of EmployeeLeaveApprovalEntry, EmployeeLeaveApprovalPresenter(Of EmployeeLeaveModel))()
         End Sub
 
+        Private Sub BulkEmployeeHolidayTransferToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BulkEmployeeHolidayTransferToolStripMenuItem.Click
+            RunForm(Of BulkHolidayTransferEntry, HolidayTransferPresenter(Of HolidayTransferModel))()
+        End Sub
+
     End Class
 
 End Namespace

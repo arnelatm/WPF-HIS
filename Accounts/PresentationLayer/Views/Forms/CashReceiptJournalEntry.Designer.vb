@@ -1050,6 +1050,7 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewJournalItems.FirstRowDeletionEnabled = false
         Me.DataGridViewJournalItems.FirstRowInsertionEnabled = false
         Me.DataGridViewJournalItems.IgnoreCase = false
+        Me.DataGridViewJournalItems.IsDirty = false
         Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
         Me.DataGridViewJournalItems.ReadOnly = true
         Me.DataGridViewJournalItems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -1285,6 +1286,7 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewCsrOiItems.FirstRowDeletionEnabled = false
         Me.DataGridViewCsrOiItems.FirstRowInsertionEnabled = false
         Me.DataGridViewCsrOiItems.IgnoreCase = false
+        Me.DataGridViewCsrOiItems.IsDirty = false
         resources.ApplyResources(Me.DataGridViewCsrOiItems, "DataGridViewCsrOiItems")
         Me.DataGridViewCsrOiItems.Name = "DataGridViewCsrOiItems"
         Me.DataGridViewCsrOiItems.ReadOnly = true
