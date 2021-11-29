@@ -8,7 +8,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class HolidayTransferDao
-        Implements IDao(Of HolidayTransfer)
+        Implements IDao(Of HolidayTransfer), IDaoGetRecords(Of HolidayTransferItem)
 
         Private ReadOnly _db As New Db()
 
@@ -70,6 +70,24 @@ Namespace DataLayer.AdoNet
                                     "@IdNo", holidayTransfer.IdNo
                                     }
         End Function
+
+        Public Function GetDaoRecords(Optional filter As String = Nothing) As List(Of HolidayTransferItem) Implements IDaoGetRecords(Of HolidayTransferItem).GetDaoRecords
+            Dim sql As String = "SELECT " &
+                                "EmployeeIdNo," &
+                                "HolidayTransferIdNo," &
+                                "IdNo " &
+                                " FROM HolidayTransferItem" &
+                                IIf(filter Is Nothing, "", " WHERE " & filter)
+            Return _db.Read(sql, MakeHolidayTransferItem).ToList()
+        End Function
+
+        Private Shared ReadOnly MakeHolidayTransferItem As Func(Of IDataReader, HolidayTransferItem) =
+                                    Function(reader) _
+            New HolidayTransferItem() With {
+            .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("EmployeeIdNo")),
+            .HolidayTransferIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("HolidayTransferIdNo")),
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo"))
+            }
 
     End Class
 
