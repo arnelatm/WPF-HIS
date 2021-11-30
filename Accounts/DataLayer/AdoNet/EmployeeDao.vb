@@ -25,19 +25,21 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
-            Dim deductionDao = New EmployeePayElementDao
-            Dim earningDao = New EmployeePayElementDao
-            Dim phoneDao = New EmployeePhoneDao
-            Dim leaveDao = New EmployeeLeaveCreditDao
-            Dim dd As List(Of EmployeePayElement) = deductionDao.GetDaoRecords("EmployeeIdNo = " & data.IdNo & " and PayElementKind = '" & GlobalFunctions.EnumToCode(PayElementKindSelection.Deduction) & "'")
-            Dim er As List(Of EmployeePayElement) = earningDao.GetDaoRecords("EmployeeIdNo = " & data.IdNo & " and PayElementKind = '" & GlobalFunctions.EnumToCode(PayElementKindSelection.Earning) & "'")
-            Dim ph As List(Of EmployeePhone) = phoneDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
-            Dim lc As List(Of EmployeeLeaveCredit) = leaveDao.GetRecordsWithGroupIdNo(data.IdNo, "Sequence")
-            data.PayFrequency = CodeToEnum(Of PayFrequencySelection)(GetFieldWithIdNo(data.PayCycleIdNo, "PayCycle", "PayFrequency"))
-            data.RegularEmployeeDeductions = dd
-            data.RegularEmployeeEarnings = er
-            data.EmployeePhones = ph
-            data.EmployeeLeaveCredits = lc
+            If data IsNot Nothing Then
+                Dim deductionDao = New EmployeePayElementDao
+                Dim earningDao = New EmployeePayElementDao
+                Dim phoneDao = New EmployeePhoneDao
+                Dim leaveDao = New EmployeeLeaveCreditDao
+                Dim dd As List(Of EmployeePayElement) = deductionDao.GetDaoRecords("EmployeeIdNo = " & data.IdNo & " and PayElementKind = '" & GlobalFunctions.EnumToCode(PayElementKindSelection.Deduction) & "'")
+                Dim er As List(Of EmployeePayElement) = earningDao.GetDaoRecords("EmployeeIdNo = " & data.IdNo & " and PayElementKind = '" & GlobalFunctions.EnumToCode(PayElementKindSelection.Earning) & "'")
+                Dim ph As List(Of EmployeePhone) = phoneDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
+                Dim lc As List(Of EmployeeLeaveCredit) = leaveDao.GetRecordsWithGroupIdNo(data.IdNo, "Sequence")
+                data.PayFrequency = CodeToEnum(Of PayFrequencySelection)(GetFieldWithIdNo(data.PayCycleIdNo, "PayCycle", "PayFrequency"))
+                data.RegularEmployeeDeductions = dd
+                data.RegularEmployeeEarnings = er
+                data.EmployeePhones = ph
+                data.EmployeeLeaveCredits = lc
+            End If
             Return data
         End Function
 

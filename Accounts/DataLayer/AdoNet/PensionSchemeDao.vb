@@ -25,8 +25,10 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
-            Dim prDao = New PensionRateDao()
-            data.PensionRates = prDao.GetRecordsWithGroupIdNo(idNo, "Sequence")
+            If data IsNot Nothing Then
+                Dim prDao = New PensionRateDao()
+                data.PensionRates = prDao.GetRecordsWithGroupIdNo(idNo, "Sequence")
+            End If
             Return data
         End Function
 

@@ -26,8 +26,7 @@ Namespace DataLayer.AdoNet
                                 "ON t.LanguageIdNo = l.IdNo " &
                                 "where o.[IdNo] = @IdNo and (LanguageIdNo = 16 OR LanguageIdNo IS Null) "
             Dim params() As Object = {"@IdNo", idNo}
-            Dim data = _db.Read(sql, Make, params).FirstOrDefault()
-            Return data
+            Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
         Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of OriginalCaptions) _

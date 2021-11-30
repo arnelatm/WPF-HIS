@@ -360,6 +360,48 @@ Namespace AdoNet
             Return obj
         End Function
 
+        'Public Function GetRecords(tableName As String, fieldList As String, filter As String) As ExpandoObject Implements IBaseDao.GetRecords
+        '    Dim sql As String =
+        '            " Select " & fieldList & " FROM [" & tableName & "] " &
+        '            " Where " & filter
+        '    Dim values As Object
+        '    values = _db.SqlRead(sql)
+        '    Dim fields2 = fieldList.Split(",")
+        '    Dim dataCount = Values.Count()
+        '    Dim fieldCount = fields2.Count()
+        '    Dim data = New ExpandoObject
+        '    For number As Integer = 1 To dataCount Step fieldCount
+
+        '    Next
+
+        '    'Dim fields = New List(Of Field)() From {
+        '    '        New Field("EmployeeID", GetType(Integer)),
+        '    '        New Field("EmployeeName", GetType(String)),
+        '    '        New Field("Designation", GetType(String))
+        '    '        }
+        '    'Dim obj As dynamic = New DynamicClass(fields)
+        '    'obj.EmployeeID = 123456
+        '    'obj.EmployeeName = "John"
+        '    'obj.Designation = "Tech Lead"
+        '    'obj.Age = 25
+        '    'obj.EmployeeName = 666
+        '    'Console.WriteLine(obj.EmployeeID)
+        '    'Console.WriteLine(obj.EmployeeName)
+        '    'Console.WriteLine(obj.Designation)
+
+        '    'Dim obj As Object
+        '    'obj = New ExpandoObject
+        '    'Dim i As Int16 = 0
+        '    'For Each item In fields
+        '    '    CreateDynamicObject(obj, item, values(i))
+        '    '    i = i + 1
+        '    'Next
+        '    'for each item In values()
+
+        '    'Next
+        '    Return obj
+        'End Function
+
         Public Function GetSpRecords(spName As String, fieldList As String, sortKey As String, filter As String) As Object Implements IBaseDao.GetSpRecords
             'Dim fields as String = fieldList.Split(",")
             Dim sql As String = " Select " & fieldList & " From " & spName & " (" & filter & ") Order By " & sortKey
@@ -924,7 +966,6 @@ Namespace AdoNet
             Return _db.InsertTvp(procedureName, dataTable)
         End Function
 
-
         Public Function GetMasterList(tableName As String, sortKey As String, fieldNames As String(), Optional filterKey As String = Nothing) As Object Implements IBaseDao.GetMasterList
             Dim fields As String
             If Len(fieldNames) <> 3 Then
@@ -952,7 +993,6 @@ Namespace AdoNet
             .Code = Extensions.AsString(reader("Code")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Name = Extensions.AsString(reader("Name"))}
-
 
     End Class
 

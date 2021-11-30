@@ -32,8 +32,10 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
-            data.ApprovalHistory = GetEmployeeLeaveHistory(idNo)
-            Return Data
+            If data IsNot Nothing Then
+                data.ApprovalHistory = GetEmployeeLeaveHistory(idNo)
+            End If
+            Return data
         End Function
 
         Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of EmployeeLeave) _
@@ -85,8 +87,6 @@ Namespace DataLayer.AdoNet
             .SupervisorIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("SupervisorIdNo"))
             }
 
-
-
         Private Function Take(employeeLeave As EmployeeLeave) As Object()
             Return New Object() {
                                     "@AppliedBy", employeeLeave.AppliedBy,
@@ -109,16 +109,16 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function GetEmployeeLeaveHistory(ByVal idNo As Int32) As List(Of EmployeeLeaveApprovalHistory)
-            Dim sql As String = "SELECT " & 
+            Dim sql As String = "SELECT " &
                                 "EmployeeLeaveApprovalIdNo," &
-                                "DateCreated," & 
+                                "DateCreated," &
                                 "EmployeeLeaveIdNo," &
                                 "EnteredBy," &
                                 "IdNo," &
                                 "Note," &
                                 "Status" &
                                 " From LeaveApproval_View where EmployeeLeaveIdNo = " & idNo.ToString()
-                        Return Db.Read(sql, MakeLeaveApprovalHistory).ToList()
+            Return Db.Read(sql, MakeLeaveApprovalHistory).ToList()
         End Function
 
         Private Shared ReadOnly MakeLeaveApprovalHistory As Func(Of IDataReader, EmployeeLeaveApprovalHistory) =
@@ -132,7 +132,6 @@ Namespace DataLayer.AdoNet
             .Note = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Note")),
             .Status = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Status"))
             }
-
 
     End Class
 

@@ -38,15 +38,17 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
-            Dim ppeDao = New PayrollPayElementDao()
-            Dim payrollDao = New PayrollDao()
-            Dim payroll = payrollDao.GetRecordByIdNo(data.PayrollIdNo)
-            data.StartDate = payroll.StartDate
-            data.EndDate = payroll.EndDate
-            data.PayPeriodName = payroll.PayrollName
-            data.PayPeriodNameAra = payroll.PayrollNameAra
-            data.PayrollEarnings = ppeDao.GetDaoRecords("PayrollDetailIdNo = " & idNo & " and PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "'")
-            data.PayrollDeductions = ppeDao.GetDaoRecords("PayrollDetailIdNo = " & idNo & " and PayElementKind = '" & EnumToCode(PayElementKindSelection.Deduction) & "'")
+            If data IsNot Nothing Then
+                Dim ppeDao = New PayrollPayElementDao()
+                Dim payrollDao = New PayrollDao()
+                Dim payroll = payrollDao.GetRecordByIdNo(data.PayrollIdNo)
+                data.StartDate = payroll.StartDate
+                data.EndDate = payroll.EndDate
+                data.PayPeriodName = payroll.PayrollName
+                data.PayPeriodNameAra = payroll.PayrollNameAra
+                data.PayrollEarnings = ppeDao.GetDaoRecords("PayrollDetailIdNo = " & idNo & " and PayElementKind = '" & EnumToCode(PayElementKindSelection.Earning) & "'")
+                data.PayrollDeductions = ppeDao.GetDaoRecords("PayrollDetailIdNo = " & idNo & " and PayElementKind = '" & EnumToCode(PayElementKindSelection.Deduction) & "'")
+            End If
             Return data
         End Function
 
@@ -68,7 +70,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Private Function Take(PayrollDetail As PayrollDetail) As Object()
-            Return New Object() {   
+            Return New Object() {
                                     "@BankTransfer", PayrollDetail.BankTransfer,
                                     "@EmployeeIdNo", PayrollDetail.EmployeeIdNo,
                                     "@PayrollIdNo", PayrollDetail.PayrollIdNo,

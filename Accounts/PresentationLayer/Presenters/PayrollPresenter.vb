@@ -211,14 +211,6 @@ Namespace PresentationLayer.Presenters
                 ViewToDataTables(View.PayrollAttendance, DtInsertTable, DtUpdateTable, AddressOf AttendanceItemFillData, AddressOf AttendanceItemFilter, "IdNo")
                 ViewToDataTables(View.PayrollOvertime, DtOtInsertTable, DtOtUpdateTable, AddressOf OtWorkHourFillData, AddressOf OtWorkHourFilter, "IdNo")
             End If
-            'For Each item In View.PayrollAttendance
-            '    If item.Equals(DBNull.Value) Then
-            '        item.Notes = ""
-            '    End If
-            '    If item.Notes Is Nothing Then
-            '        item.Notes = ""
-            '    End If
-            'Next
         End Sub
 
         Public Sub InitializeAttendance()

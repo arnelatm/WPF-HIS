@@ -890,17 +890,17 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Sub
 
     Public Overridable Sub UpdateViewData(idNo As Int32)
-        If idNo <> 0 Then
-            Dim modelData As TM
-            RecordDateTimeStampValue = GetRecordDateTimeStamp(TargetIdNo)
-            modelData = Service.GetRecordByIdNo(Of TM)(idNo)
-            RaiseEvent BeforeMappingData(modelData)
-            GlobalVariables.Mapper.Map(Of TM, TV)(modelData, View)
-            For Each child In ChildPresenters
-                child.UpdateViewDisplay(idNo)
-            Next
-            ClearAllErrorMessages()
-        End If
+        'If idNo <> 0 Then
+        Dim modelData As TM
+        RecordDateTimeStampValue = GetRecordDateTimeStamp(TargetIdNo)
+        modelData = Service.GetRecordByIdNo(Of TM)(idNo)
+        RaiseEvent BeforeMappingData(modelData)
+        GlobalVariables.Mapper.Map(Of TM, TV)(modelData, View)
+        For Each child In ChildPresenters
+            child.UpdateViewDisplay(idNo)
+        Next
+        'End If
+        ClearAllErrorMessages()
     End Sub
 
     Protected Overridable Sub UpdateViewDisplay()

@@ -10,7 +10,7 @@
         Property DateCreated As DateTime?
         Property HolidayIdNo As Int32
         Property IdNo As Int32
-        
+        Property HolidayTransferItems As List(Of HolidayTransferItemModel)
     End Class
 
 End Namespace
