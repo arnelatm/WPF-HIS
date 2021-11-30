@@ -42,12 +42,14 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
-            Dim jiDao = New JournalItemDao({"CashReceiptJournalItem_View", "dbo.UpdateCashReceiptJournalItemTVP", "dbo.InsertCashReceiptJournalItemTVP"})
-            Dim oiDao = New CsrOiItemDao
-            Dim ji = jiDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
-            Dim oi = oiDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
-            data.JournalItems = ji
-            data.CsrOiItems = oi
+            If data IsNot Nothing Then
+                Dim jiDao = New JournalItemDao({"CashReceiptJournalItem_View", "dbo.UpdateCashReceiptJournalItemTVP", "dbo.InsertCashReceiptJournalItemTVP"})
+                Dim oiDao = New CsrOiItemDao
+                Dim ji = jiDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
+                Dim oi = oiDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
+                data.JournalItems = ji
+                data.CsrOiItems = oi
+            End If
             Return data
         End Function
 

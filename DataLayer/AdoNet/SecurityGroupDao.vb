@@ -17,7 +17,9 @@ Namespace AdoNet
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
-            data.GroupAccesses = GetRecordsWithGroupIdNo(idNo, "FullPathName")
+            If data IsNot Nothing Then
+                data.GroupAccesses = GetRecordsWithGroupIdNo(idNo, "FullPathName")
+            End If
             Return data
         End Function
 

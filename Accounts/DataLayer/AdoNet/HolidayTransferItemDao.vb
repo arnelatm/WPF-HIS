@@ -22,7 +22,7 @@ Namespace DataLayer.AdoNet
                     "SELECT " &
                     "EmployeeIdNo," &
                     "HolidayTransferIdNo," &
-                    "IdNo" &
+                    "a.IdNo" &
                     " FROM " & DboTableOrViewName & " as a" &
                     " Left Join Employee b on a.IdNo = b.IdNo" &
                     " WHERE HolidayTransferIdNo = @IdNo" &

@@ -30,16 +30,18 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
-            Dim attendanceDao = New AttendanceItemDao
-            Dim attendance As List(Of AttendanceItem)
-            If data Is Nothing Then
-                Return Nothing
+            If data IsNot Nothing Then
+                Dim attendanceDao = New AttendanceItemDao
+                Dim attendance As List(Of AttendanceItem)
+                If data Is Nothing Then
+                    Return Nothing
+                End If
+                attendance = attendanceDao.GetRecordsWithGroupIdNo(data.IdNo, "EmployeeName")
+                Dim overtimeDao = New OtWorkHourDao
+                Dim overtime As List(Of OtWorkHour) = overtimeDao.GetRecordsWithGroupIdNo(data.IdNo, "EmployeeName")
+                data.PayrollAttendance = attendance
+                data.PayrollOvertime = overtime
             End If
-            attendance = attendanceDao.GetRecordsWithGroupIdNo(data.IdNo, "EmployeeName")
-            Dim overtimeDao = New OtWorkHourDao
-            Dim overtime As List(Of OtWorkHour) = overtimeDao.GetRecordsWithGroupIdNo(data.IdNo, "EmployeeName")
-            data.PayrollAttendance = attendance
-            data.PayrollOvertime = overtime
             Return data
         End Function
 

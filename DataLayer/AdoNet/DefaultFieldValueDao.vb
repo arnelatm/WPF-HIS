@@ -58,8 +58,7 @@ Namespace AdoNet
         Public Function GetDefaultFieldValues(systemViewName As String) As List(Of DefaultFieldValue) Implements IDefaultFieldValueDao.GetTableDefaultValues
             Dim sql As String = "SELECT " & FieldList &
                     " FROM [DefaultFieldValue_View] where SystemViewName = '" & systemViewName & "'"
-            Dim data = Db.Read(sql, Make).ToList()
-            Return data
+            Return Db.Read(sql, Make).ToList()
         End Function
 
         Public Function AddRecord(ByRef defaultFieldValue As DefaultFieldValue) As Integer _

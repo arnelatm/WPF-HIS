@@ -38,13 +38,10 @@ Namespace DataLayer.AdoNet
                 " FROM PcJournal " &
                 " WHERE IdNo = @IdNo"
             data = _db.Read(sql, _cdMake, params).FirstOrDefault()
-            If data Is Nothing Then
-                Debugger.Break()
-            Else
+            If data IsNot Nothing Then
                 Dim pcDao = New PcClosingJournalDao()
                 data.PcClosingJournals = pcDao.GetRecordsWithGroupIdNo(0)
             End If
-            
             Return data
         End Function
 

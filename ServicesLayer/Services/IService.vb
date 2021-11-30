@@ -1,4 +1,5 @@
-﻿Imports AATM.BusinessLayer.BusinessObjects
+﻿Imports System.Dynamic
+Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.DataLayer
 Imports AATM.Libraries.AatmInterfaces
 
@@ -107,7 +108,7 @@ Namespace Services
         Function GetNextSeries(seriesName As String) As Integer
 
         Function ExecuteTvpSp(ByRef userProcedureName As String, dtTable As DataTable) As Integer
-
+        Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String) As ExpandoObject
     End Interface
 
 End Namespace

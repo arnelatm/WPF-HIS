@@ -43,11 +43,13 @@ Namespace DataLayer.AdoNet
                                 " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
-            Dim peaDao = New PayElementAccountDao()
-            data.PayElementAccounts = peaDao.GetRecordsWithGroupIdNo(idNo, "Sequence")
-            Dim esDao = New PayElementItemDao()
-            data.PayElementItems = esDao.GetRecordsWithGroupIdNo(idNo, "Sequence")
-            data.UsePayGroupSetting = GetUsePayGroupSetting(data)
+            If data IsNot Nothing Then
+                Dim peaDao = New PayElementAccountDao()
+                data.PayElementAccounts = peaDao.GetRecordsWithGroupIdNo(idNo, "Sequence")
+                Dim esDao = New PayElementItemDao()
+                data.PayElementItems = esDao.GetRecordsWithGroupIdNo(idNo, "Sequence")
+                data.UsePayGroupSetting = GetUsePayGroupSetting(data)
+            End If
             Return data
         End Function
 

@@ -34,8 +34,10 @@ Namespace DataLayer.AdoNet
             Dim data As AccountReconciliation = _db.Read(sql, Make, params).FirstOrDefault()
             'Dim accounts As List(Of Lookup.LookupData) = GetLookupData("Account", "AccountCode", "SpecialAccount = 'BA' or SpecialAccount = 'CK' or SpecialAccount = 'CS'")
             'data.Accounts = accounts
-            data.AccountReconciliationItems = GetRecordsWithGroupIdNo(idNo, "Sequence")
-            data.ComputeCalculatedProperties()
+            If data IsNot Nothing Then
+                data.AccountReconciliationItems = GetRecordsWithGroupIdNo(idNo, "Sequence")
+                data.ComputeCalculatedProperties()
+            End If
             Return data
         End Function
 

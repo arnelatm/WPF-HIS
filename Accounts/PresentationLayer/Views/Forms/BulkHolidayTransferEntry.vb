@@ -1,4 +1,5 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
 
@@ -7,7 +8,7 @@ Namespace PresentationLayer.Views.Forms
     Public Class BulkHolidayTransferEntry
         Implements IHolidayTransferView
 
-        Private _holidayTransferItems As New List(Of IHolidayTransferItemView)
+        Private _holidayTransferItems As New List(Of HolidayTransferItemView)
 
         Public Sub New()
             ' This call is required by the designer.
@@ -57,12 +58,16 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Private Property HolidayTransferItems As List(Of IHolidayTransferItemView) Implements IHolidayTransferView.HolidayTransferItems
+        Public Property EmployeeList As List(Of Lookup.LookupData) Implements IHolidayTransferView.EmployeeList
+        Public Property HolidayList As List(Of Lookup.LookupData) Implements IHolidayTransferView.HolidayList
+
+        Public Property HolidayTransferItems As List(Of HolidayTransferItemView) Implements IHolidayTransferView.HolidayTransferItems
             Get
+                'BindHolidayTransferItems()
                 Return _holidayTransferItems
             End Get
-            Set
-                _holidayTransferItems = Value
+            Set(value As List(Of HolidayTransferItemView))
+                _holidayTransferItems = value
                 BindHolidayTransferItems()
             End Set
         End Property
@@ -83,7 +88,7 @@ Namespace PresentationLayer.Views.Forms
             End With
             With DataGridViewHolidayTransferitems.Columns
                 dgvEmployeeIdNo.DisplayOnly = True
-                dgvEmployeeIdNo.DataSource = HolidayTransferItems
+                dgvEmployeeIdNo.DataSource = EmployeeList
                 dgvEmployeeIdNo.DisplayMember = "Name"
                 dgvEmployeeIdNo.ValueMember = "IdNo"
                 dgvEmployeeIdNo.DisplayStyleForCurrentCellOnly = True
@@ -91,18 +96,19 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
+        Private Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
+            BindHolidayTransferItems()
+        End Sub
+
         Private Sub HolidayTransfer_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             DataGridViewHolidayTransferitems.Refresh()
-            If HolidayTransferItems.Count() <> 0 Then
-                BindHolidayTransferItems()
-            End If
-            btnEdit.Visible = False
+            BindHolidayTransferItems()
         End Sub
 
         Private Sub HolidayTransfer_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
             bsHolidayTransferItems.ResetBindings(True)
-            PublishClickedButton(ButtonClicked.Edit)
-            cboAppliedBy.SelectedValue = GlobalVariables.UserIdNo
+            'PublishClickedButton(ButtonClicked.Edit)
+            cboAppliedBy.DisplayOnly = True
             dtpDateCreated.Value = Now()
         End Sub
 

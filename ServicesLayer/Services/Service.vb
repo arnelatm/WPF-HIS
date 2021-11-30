@@ -1,4 +1,5 @@
 ﻿Imports System.Configuration
+Imports System.Dynamic
 Imports System.Globalization
 Imports System.Reflection
 Imports AATM.BusinessLayer.BusinessObjects
@@ -644,6 +645,10 @@ Namespace Services
 
         Public Function GetNextSeries(seriesName As String) As Integer Implements IService.GetNextSeries
             Return BaseDao.GetNextSeries(seriesName)
+        End Function
+
+        Public Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String) As ExpandoObject Implements IService.GetRecordFieldsFiltered
+            Return BaseDao.GetRecordFieldsFiltered(tableName, fieldList, filter)
         End Function
 
 #End Region

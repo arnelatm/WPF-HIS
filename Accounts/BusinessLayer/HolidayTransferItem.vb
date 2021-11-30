@@ -22,6 +22,7 @@ Namespace BusinessLayer
         Public Property HolidayTransferIdNo As Int32
         Public Property EmployeeIdNo As Int32
         Public Property IdNo As Int32
+        Public Property Transfer As Boolean
 
     End Class
 

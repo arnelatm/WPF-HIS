@@ -306,8 +306,8 @@
         Me.DataGridViewHolidayTransferitems.ReadOnly = true
         Me.DataGridViewHolidayTransferitems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.DataGridViewHolidayTransferitems.SecurityKey = ""
-        Me.DataGridViewHolidayTransferitems.SequenceColumn = "dgvSequence"
-        Me.DataGridViewHolidayTransferitems.SequenceFieldName = "Sequence"
+        Me.DataGridViewHolidayTransferitems.SequenceColumn = ""
+        Me.DataGridViewHolidayTransferitems.SequenceFieldName = ""
         Me.DataGridViewHolidayTransferitems.ShowFooter = false
         Me.DataGridViewHolidayTransferitems.ShowInsertColumnWhenEditing = true
         Me.DataGridViewHolidayTransferitems.Size = New System.Drawing.Size(562, 452)

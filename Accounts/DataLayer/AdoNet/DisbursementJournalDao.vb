@@ -91,11 +91,9 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
                 data = _db.Read(sql, PcMake, params).FirstOrDefault()
             End If
-            jiDao = New JournalItemDao(JiDataNames)
-            oiDao = New DjOiItemDao(OiDataNames)
-            If data Is Nothing Then
-                Debugger.Break()
-            Else
+            If data IsNot Nothing Then
+                jiDao = New JournalItemDao(JiDataNames)
+                oiDao = New DjOiItemDao(OiDataNames)
                 Dim ji = jiDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
                 Dim oi = oiDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
                 data.JournalItems = ji

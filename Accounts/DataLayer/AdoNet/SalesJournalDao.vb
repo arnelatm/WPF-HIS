@@ -31,15 +31,17 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
-            Dim jiDao = New JournalItemDao({"SalesJournalItem_View", "dbo.UpdateSalesJournalItemTVP", "dbo.InsertSalesJournalItemTVP"})
-            Dim sdDao = New SalesDepositDao
-            Dim ji = jiDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
-            Dim sd = sdDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
-            data.JournalItems = ji
-            data.SalesDeposits = sd
-            'For Each item In data.SalesDeposits
-            '    item.ComputedBankCharge = item.SaleAmount *
-            'Next
+            If data IsNot Nothing Then
+                Dim jiDao = New JournalItemDao({"SalesJournalItem_View", "dbo.UpdateSalesJournalItemTVP", "dbo.InsertSalesJournalItemTVP"})
+                Dim sdDao = New SalesDepositDao
+                Dim ji = jiDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
+                Dim sd = sdDao.GetRecordsWithGroupIdNo(data.IdNo, "sequence")
+                data.JournalItems = ji
+                data.SalesDeposits = sd
+                'For Each item In data.SalesDeposits
+                '    item.ComputedBankCharge = item.SaleAmount *
+                'Next
+            End If
             Return data
         End Function
 
