@@ -39,9 +39,9 @@ Namespace DataLayer.AdoNet
             Throw New NotImplementedException
         End Function
 
-        Public Function UpdateInsertTvp(ByRef updateTvpTable As DataTable, ByRef insertTvpTable As DataTable, ByVal groupIdNo As Integer) As Integer Implements IDaoTvp(Of HolidayTransferItem).UpdateInsertTvp
-            Return _db.UpdateInsertTvp(DboTvpUpdateInsertName, updateTvpTable, insertTvpTable, groupIdNo)
-        End Function
+        'Public Function UpdateInsertTvp(ByRef updateTvpTable As DataTable, ByRef insertTvpTable As DataTable, ByVal groupIdNo As Integer) As Integer Implements IDaoTvp(Of HolidayTransferItem).UpdateInsertTvp
+        '    Return _db.UpdateInsertTvp(DboTvpUpdateInsertName, updateTvpTable, insertTvpTable, groupIdNo)
+        'End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, HolidayTransferItem) =
                                     Function(reader) _

@@ -13,6 +13,7 @@ Namespace PresentationLayer.Presenters
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
+        Private _htItemService
 
         Public Sub New(view As IHolidayTransferView)
             MyBase.New(view)
@@ -28,6 +29,7 @@ Namespace PresentationLayer.Presenters
                                             {"HolidayTransferIdNo", GetType(Integer)},
                                             {"IdNo", GetType(Int32)}
                                            })
+            _htItemService = New AccountsService("HolidayTransferItem")
         End Sub
 
         Public Property ChangesMadeInHolidayTransfer As Boolean = False
@@ -94,6 +96,40 @@ Namespace PresentationLayer.Presenters
             End If
             Return True
         End Function
+
+        Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
+            Dim passedValue As Integer = retVal
+            UpdateChildData(Service, DtUpdateTable, DtInsertTable, passedValue, "HolidayTransferIdNo")
+        End Sub
+
+        'Protected Function UpdateChildData(updateTable As DataTable, insertTable As DataTable, passedValue As Integer, parentIdFieldName As String) As Integer
+        '    Dim retVal As Integer
+        '    Dim updateReturnValue As Object
+        '    Dim insertReturnValue As Object
+        '    Dim parentIdNo As Integer
+        '    If AddMode Then
+        '        parentIdNo = passedValue
+        '    Else
+        '        parentIdNo = Invoker.GetProperty(View, IdFieldName)
+        '    End If
+        '    updateReturnValue = childDataService.DelUpdateTvp(updateTable, parentIdNo)
+        '    If updateReturnValue >= 0 AndAlso insertTable.Rows.Count > 0 Then
+        '        If passedValue <> 0 Then
+        '            For Each row As DataRow In insertTable.Rows
+        '                row.Item(parentIdFieldName) = parentIdNo
+        '            Next
+        '        End If
+        '        insertReturnValue = childDataService.InsertTvp(insertTable)
+        '        If insertReturnValue >= 0 Then
+        '            retVal = updateReturnValue + insertReturnValue
+        '        Else
+        '            retVal = insertReturnValue
+        '        End If
+        '    Else
+        '        retVal = updateReturnValue
+        '    End If
+        '    Return retVal
+        'End Function
 
     End Class
 
