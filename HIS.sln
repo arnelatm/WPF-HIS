@@ -120,6 +120,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQuer
 	ProjectSection(SolutionItems) = preProject
 		CreateEditReset Sequence.sql = CreateEditReset Sequence.sql
 		DeleteDuplicates.sql = DeleteDuplicates.sql
+		EditingSqlQuery.sql = EditingSqlQuery.sql
 		Find all object references for a specific object.sql = Find all object references for a specific object.sql
 		QueryAvailableIdentityFieldSpace.sql = QueryAvailableIdentityFieldSpace.sql
 		QueryWrongAccountsInReconciliation.sql = QueryWrongAccountsInReconciliation.sql

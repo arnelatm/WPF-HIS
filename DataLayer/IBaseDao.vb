@@ -31,7 +31,7 @@ Public Interface IBaseDao
 
     Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String) As ExpandoObject
 
-    Function GetSpRecords(spName As String, fieldList As String, sortKey As String, filter As String) As Object
+    Function GetSpRecords(spName As String, fieldList As String, sortKey As String, filter As String, ParamArray parameters As Array()) As Object
 
     Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object
 
@@ -101,6 +101,8 @@ Public Interface IBaseDao
     Function ExecuteTvpSp(ByRef procedureName As String, dataTable As DataTable) As Integer
 
     Function GetMasterList(tableName As String, sortKey As String, fieldNames() As String, Optional filterKey As String = Nothing) As Object
+
+    Function GetDataSet(storedProcedureName As String, parameters As Object) As DataSet
 
     'Function GetRecords(tableName As String, fieldList As String, filter As String) As ExpandoObject
 End Interface

@@ -16,6 +16,9 @@ Namespace PresentationLayer.Views.Interfaces
         Property HolidayTransferItems As List(Of HolidayTransferItemView)
         Property HolidayList As List(Of Lookup.LookupData)
         Property EmployeeList As List(Of Lookup.LookupData)
+
+        Event HolidayIdChangedEvent()
+
     End Interface
 
 End Namespace

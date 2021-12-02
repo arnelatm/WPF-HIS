@@ -10,6 +10,8 @@ Namespace PresentationLayer.Views.Forms
 
         Private _holidayTransferItems As New List(Of HolidayTransferItemView)
 
+        Public Event HolidayIdChangedEvent() Implements IHolidayTransferView.HolidayIdChangedEvent
+
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
@@ -135,6 +137,18 @@ Namespace PresentationLayer.Views.Forms
                 {"AppliedBy", cboAppliedBy},
                 {"HolidayIdNo", cboHolidayIdNo}
                 }
+        End Sub
+
+        Private Sub cboHolidayIdNo_SelectedIndexChanged() Handles cboHolidayIdNo.SelectedIndexChanged
+            RaiseEvent HolidayIdChangedEvent()
+            bsHolidayTransferItems.ResetBindings(True)
+        End Sub
+
+        Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+            'If btnEdit.Enabled Then
+            RaiseEvent HolidayIdChangedEvent()
+            bsHolidayTransferItems.ResetBindings(True)
+            'End If
         End Sub
 
     End Class
