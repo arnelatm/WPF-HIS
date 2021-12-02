@@ -8,10 +8,11 @@ Namespace DataLayer.AdoNet
 
     Public Class HolidayTransferItemDao
         Inherits AccountsDao
-        Implements IDaoTvp(Of HolidayTransferItem), IDaoChild(Of HolidayTransferItem)
+        Implements IDaoChild(Of HolidayTransferItem)
 
         Private ReadOnly _db As New Db()
-        Private Const DboTvpUpdateInsertName As String = "UpdateInsertHolidayTransferItemTVP"
+        Private Const DboTvpInsertName As String = "InsertHolidayTransferItemTVP"
+        Private Const DboTvpUpdateName As String = "UpdateHolidayTransferItemTVP"
         Private Const DboTableOrViewName As String = "HolidayTransferItem"
 
         Public Sub New()
@@ -32,11 +33,11 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of HolidayTransferItem).DelUpdateTvp
-            Throw New NotImplementedException
+            Return _db.DelUpdateTvp(DboTvpUpdateName, tvpTable, "@MParam", groupIdNo)
         End Function
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of HolidayTransferItem).InsertTvp
-            Throw New NotImplementedException
+            Return _db.InsertTvp(DboTvpInsertName, tvpTable)
         End Function
 
         'Public Function UpdateInsertTvp(ByRef updateTvpTable As DataTable, ByRef insertTvpTable As DataTable, ByVal groupIdNo As Integer) As Integer Implements IDaoTvp(Of HolidayTransferItem).UpdateInsertTvp

@@ -108,7 +108,11 @@ Namespace Services
         Function GetNextSeries(seriesName As String) As Integer
 
         Function ExecuteTvpSp(ByRef userProcedureName As String, dtTable As DataTable) As Integer
+
         Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String) As ExpandoObject
+
+        Function GetDataSet(storedProcedureName As String, parameters As Object) As DataSet
+
     End Interface
 
 End Namespace

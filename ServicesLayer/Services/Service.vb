@@ -468,6 +468,10 @@ Namespace Services
             Return BaseDao.GetSpRecords(spName, fields, sortKey, filter)
         End Function
 
+        Public Function GetDataSet(ByVal storedProcedureName As String, ByVal parameters As Object) As DataSet Implements IService.GetDataSet
+            Return BaseDao.GetDataSet(storedProcedureName, parameters)
+        End Function
+
         Public Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal fields As String(), Optional filterKey As String = Nothing) As Object Implements IService.GetRecords
             Return BaseDao.GetRecords(tableName, sortKey, fields, filterKey)
         End Function

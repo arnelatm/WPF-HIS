@@ -69,7 +69,8 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(holidayTransfer As HolidayTransfer) As Object()
             Return New Object() {"@AppliedBy", holidayTransfer.AppliedBy,
-                                 "@HolidayIdNo", holidayTransfer.HolidayIdNo
+                                 "@HolidayIdNo", holidayTransfer.HolidayIdNo,
+                                 "@IdNo", holidayTransfer.IdNo
                                  }
         End Function
 

@@ -1,5 +1,5 @@
-﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
@@ -10,6 +10,7 @@ Namespace PresentationLayer.Presenters
 
     Public Class HolidayTransferPresenter(Of TM As New)
         Inherits AccountsPresenterNew(Of IHolidayTransferView, HolidayTransferModel)
+        'Implements ISubscriber(Of ViewButtonClicked)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
@@ -27,9 +28,10 @@ Namespace PresentationLayer.Presenters
 
             CreateDataTable(DtUpdateTable, {{"EmployeeIdNo", GetType(Integer)},
                                             {"HolidayTransferIdNo", GetType(Integer)},
-                                            {"IdNo", GetType(Int32)}
+                                            {"IdNo", GetType(Integer)}
                                            })
             _htItemService = New AccountsService("HolidayTransferItem")
+            AddHandler view.HolidayIdChangedEvent, AddressOf OnHolidayIdChangedEvent
         End Sub
 
         Public Property ChangesMadeInHolidayTransfer As Boolean = False
@@ -49,12 +51,30 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
+            View.AppliedBy = GlobalVariables.UserIdNo
+        End Sub
+
+        Private Sub GetUnTransferredHolidays()
             Dim holidayTransferItems As New List(Of HolidayTransferItemModel)
-            Dim activeEmployees = Service.GetRecords("Employee", "EmployeeName", {"IdNo"}, "Active=1")
-            For Each item In activeEmployees
-                Dim cHt = New HolidayTransferItemModel
-                cHt.EmployeeIdNo = item
-                holidayTransferItems.Add(cHt)
+            Dim activeEmployees As DataSet = Service.GetDataSet("spGetUnTransferredHolidays", {"HolidayIdNo", View.HolidayIdNo})
+            Dim employeeIdNo As Int32
+            Dim active As Boolean
+            For Each item As HolidayTransferItemView In View.HolidayTransferItems
+                If item.Transfer Then
+                    Dim cHt = New HolidayTransferItemModel
+                    cHt.EmployeeIdNo = item.EmployeeIdNo
+                    cHt.Transfer = item.Transfer
+                    holidayTransferItems.Add(cHt)
+                End If
+            Next
+            For Each row As DataRow In activeEmployees.Tables(0).Rows()
+                employeeIdNo = row("IdNo")
+                Dim currentItem As HolidayTransferItemModel = holidayTransferItems.Find(Function(cc As HolidayTransferItemModel) cc.EmployeeIdNo = employeeIdNo)
+                If currentItem Is Nothing Then
+                    Dim cHt = New HolidayTransferItemModel
+                    cHt.EmployeeIdNo = employeeIdNo
+                    holidayTransferItems.Add(cHt)
+                End If
             Next
             View.AppliedBy = GlobalVariables.UserIdNo
             GlobalVariables.Mapper.Map(holidayTransferItems, View.HolidayTransferItems)
@@ -76,9 +96,9 @@ Namespace PresentationLayer.Presenters
             Dim insertReturnValue
             Dim updateReturnValue
             Dim retVal
-            updateReturnValue = Service.DelUpdateTvp(dtUpdate, journalIdNo)
+            updateReturnValue = _htItemService.DelUpdateTvp(dtUpdate, journalIdNo)
             If updateReturnValue >= 0 AndAlso dtInsert.Rows.Count > 0 Then
-                insertReturnValue = Service.InsertTvp(dtInsert)
+                insertReturnValue = _htItemService.InsertTvp(dtInsert)
                 If insertReturnValue >= 0 Then
                     retVal = updateReturnValue + insertReturnValue
                 Else
@@ -99,7 +119,13 @@ Namespace PresentationLayer.Presenters
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
-            UpdateChildData(Service, DtUpdateTable, DtInsertTable, passedValue, "HolidayTransferIdNo")
+            UpdateChildData(_htItemService, DtUpdateTable, DtInsertTable, passedValue, "HolidayTransferIdNo")
+        End Sub
+
+        Public Sub OnHolidayIdChangedEvent()
+            If EditMode Or AddMode Then
+                GetUnTransferredHolidays()
+            End If
         End Sub
 
         'Protected Function UpdateChildData(updateTable As DataTable, insertTable As DataTable, passedValue As Integer, parentIdFieldName As String) As Integer

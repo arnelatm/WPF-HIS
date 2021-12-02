@@ -402,7 +402,7 @@ Namespace AdoNet
         '    Return obj
         'End Function
 
-        Public Function GetSpRecords(spName As String, fieldList As String, sortKey As String, filter As String) As Object Implements IBaseDao.GetSpRecords
+        Public Function GetSpRecords(spName As String, fieldList As String, sortKey As String, filter As String, ParamArray parameters As Array()) As Object Implements IBaseDao.GetSpRecords
             'Dim fields as String = fieldList.Split(",")
             Dim sql As String = " Select " & fieldList & " From " & spName & " (" & filter & ") Order By " & sortKey
             If sortKey Is Nothing Or sortKey = "" Then
@@ -412,6 +412,20 @@ Namespace AdoNet
             End If
             Return _db.SqlRead(sql)
         End Function
+
+        'Public Function GetParametrizedSpRecords(spName As String, ParamArray parameters As Array()) As Object Implements IBaseDao.GetParametrizedSpRecords
+        '    'Dim fields as String = fieldList.Split(",")
+        '    For each item in parameters
+
+        '    Next
+        '    Dim sql As String = " Select * From " & spName &
+        '    If sortKey Is Nothing Or sortKey = "" Then
+        '        sql = " Select " & fieldList & " From " & spName & " (" & filter & ")"
+        '    Else
+        '        sql = " Select " & fieldList & " From " & spName & " (" & filter & ") Order By " & sortKey
+        '    End If
+        '    Return _db.SqlRead(sql)
+        'End Function
 
         Public Sub CreateDynamicObject(ByRef obj As ExpandoObject, ByVal propertyName As String, ByVal propertyValue As Object)
             CType(obj, IDictionary(Of String, Object))(propertyName) = propertyValue
@@ -964,6 +978,41 @@ Namespace AdoNet
         'Execute a Table Valued Parameter Stored Procedure
         Public Function ExecuteTvpSp(ByRef procedureName As String, dataTable As DataTable) As Int32 Implements IBaseDao.ExecuteTvpSp
             Return _db.InsertTvp(procedureName, dataTable)
+        End Function
+
+        'Public Overloads Function GetDataSet(ByVal storedProcedureName As String, ByVal paramList As Dictionary(Of String, String)) As DataSet Implements IBaseDao.GetDataSet
+        '    Using conn As SqlConnection = New SqlConnection(_db.GetConnectionString)
+        '        Dim cmd As SqlCommand = New SqlCommand()
+        '        cmd.CommandType = CommandType.StoredProcedure
+        '        cmd.CommandText = storedProcedureName
+        '        cmd.Connection = conn
+
+        '        For Each key As String In paramList.Keys
+        '            cmd.Parameters.AddWithValue(key, paramList(key))
+        '        Next
+        '        Dim da As SqlDataAdapter = New SqlDataAdapter(cmd)
+        '        Dim ds As DataSet = New DataSet()
+        '        da.Fill(ds)
+        '        cmd = Nothing
+        '        da = Nothing
+        '        Return ds
+        '    End Using
+        'End Function
+
+        Public Function GetDataSet(ByVal storedProcedureName As String, parameters As Object) As DataSet Implements IBaseDao.GetDataSet
+            Using conn As SqlConnection = New SqlConnection(_db.GetConnectionString)
+                Dim cmd As SqlCommand = New SqlCommand()
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.CommandText = storedProcedureName
+                cmd.Connection = conn
+                For i = 1 To parameters.Length Step 2
+                    cmd.Parameters.AddWithValue(parameters(i - 1).ToString(), parameters(i))
+                Next
+                Dim da As SqlDataAdapter = New SqlDataAdapter(cmd)
+                Dim ds As DataSet = New DataSet()
+                da.Fill(ds)
+                Return ds
+            End Using
         End Function
 
         Public Function GetMasterList(tableName As String, sortKey As String, fieldNames As String(), Optional filterKey As String = Nothing) As Object Implements IBaseDao.GetMasterList
