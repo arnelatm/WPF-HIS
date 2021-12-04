@@ -4,14 +4,13 @@
     '''     The Model in MVP design pattern.
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
-    Public Class HolidayTransferModel
+    Public Class HolidayTransferAvailmentModel
 
-        Property AppliedBy As Int32
         Property DateCreated As DateTime?
-        Property HolidayDate As DateTime?
-        Property HolidayIdNo As Int32
+        Property EmployeeIdNo As Int32
+        Property EnteredBy As Int16
         Property IdNo As Int32
-        Property HolidayTransferItems As List(Of HolidayTransferItemModel)
+
     End Class
 
 End Namespace

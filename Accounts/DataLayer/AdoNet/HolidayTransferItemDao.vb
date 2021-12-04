@@ -25,7 +25,7 @@ Namespace DataLayer.AdoNet
                     "HolidayTransferIdNo," &
                     "a.IdNo" &
                     " FROM " & DboTableOrViewName & " as a" &
-                    " Left Join Employee b on a.IdNo = b.IdNo" &
+                    " Left Join Employee b on a.EmployeeIdNo = b.IdNo" &
                     " WHERE HolidayTransferIdNo = @IdNo" &
                     " ORDER BY b.EmployeeName"
             Dim params() As Object = {"@IdNo", idNo}

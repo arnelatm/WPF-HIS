@@ -5,6 +5,7 @@ Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
+Imports Autofac.Core
 
 Namespace PresentationLayer.Presenters
 
@@ -15,6 +16,7 @@ Namespace PresentationLayer.Presenters
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
         Private _htItemService
+        Private ReadOnly _holidayService As New AccountsService("Holiday")
 
         Public Sub New(view As IHolidayTransferView)
             MyBase.New(view)
@@ -37,7 +39,7 @@ Namespace PresentationLayer.Presenters
         Public Property ChangesMadeInHolidayTransfer As Boolean = False
 
         Protected Overrides Sub CreateDataSources()
-            CreateDataSource("Holiday", "HolidayIdNo", {"IdNo", "Description"}, "DateStart", Nothing)
+            CreateDataSource("Holiday", "HolidayIdNo", {"IdNo", "HolidayName"}, "IdNo", Nothing)
             CreateDataSource("User", "AppliedBy", {"IdNo", "UserName"})
             CreateLookupData("Employee", "EmployeeList", "Active=1")
         End Sub
@@ -58,7 +60,6 @@ Namespace PresentationLayer.Presenters
             Dim holidayTransferItems As New List(Of HolidayTransferItemModel)
             Dim activeEmployees As DataSet = Service.GetDataSet("spGetUnTransferredHolidays", {"HolidayIdNo", View.HolidayIdNo})
             Dim employeeIdNo As Int32
-            Dim active As Boolean
             For Each item As HolidayTransferItemView In View.HolidayTransferItems
                 If item.Transfer Then
                     Dim cHt = New HolidayTransferItemModel
@@ -123,6 +124,9 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnHolidayIdChangedEvent()
+            Dim holidayModel As New HolidayModel
+            holidayModel = _holidayService.GetRecordByIdNo(Of HolidayModel)(View.HolidayIdNo)
+            View.HolidayDate = holidayModel.HolidayDate
             If EditMode Or AddMode Then
                 GetUnTransferredHolidays()
             End If

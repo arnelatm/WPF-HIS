@@ -200,6 +200,7 @@
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
+    <Compile Include="BusinessLayer\HolidayTransferAvailment.vb" />
     <Compile Include="BusinessLayer\HolidayTransferItem.vb" />
     <Compile Include="BusinessLayer\HolidayTransfer.vb" />
     <Compile Include="BusinessLayer\EmployeeLeaveApprovalHistory.vb" />
@@ -361,6 +362,7 @@
     <Compile Include="PresentationLayer\Models\EmployeeLeaveApprovalModel.vb" />
     <Compile Include="PresentationLayer\Models\HolidayTransferItemModel.vb" />
     <Compile Include="PresentationLayer\Models\HolidayTransferModel.vb" />
+    <Compile Include="PresentationLayer\Models\HolidayTransferAvailmentModel.vb" />
     <Compile Include="PresentationLayer\Models\ShiftSummaryModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeePayElementModel.vb" />
     <Compile Include="PresentationLayer\Models\HolidayModel.vb" />
@@ -398,6 +400,7 @@
     <Compile Include="PresentationLayer\Presenters\EmployeeLeaveApprovalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeeIdPrintingPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\BulkHolidayTransferPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\HolidayAvailmentPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ShiftSummaryPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\HolidayPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeeAbsencePresenter.vb" />
@@ -476,6 +479,12 @@
       <DependentUpon>GeneralJournalEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\GeneralJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\HolidayAvailmentEntry.designer.vb">
+      <DependentUpon>HolidayAvailmentEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\HolidayAvailmentEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\HolidayEntry.designer.vb">
@@ -573,8 +582,9 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeIdListView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeIdPrintingView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeIdView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\IHolidayTransferItemView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IHolidayItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IHolidayTransferView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IHolidayAvailmentView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IShiftSummaryView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeePayElementView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IJournalPrefixView.vb" />
@@ -1211,6 +1221,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\GeneralJournalEntry.resx">
       <DependentUpon>GeneralJournalEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\HolidayAvailmentEntry.resx">
+      <DependentUpon>HolidayAvailmentEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\HolidayEntry.resx">
       <DependentUpon>HolidayEntry.vb</DependentUpon>
