@@ -74,6 +74,19 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property HolidayDate As Date? Implements IHolidayTransferView.HolidayDate
+            Get
+                Return dtpHolidayDate.Value
+            End Get
+            Set
+                If Value.HasValue Then
+                    dtpHolidayDate.Value = Value
+                Else
+                    dtpHolidayDate.Value = Date.Now()
+                End If
+            End Set
+        End Property
+
 #End Region
 
         Private Sub BindHolidayTransferItems()
@@ -144,7 +157,7 @@ Namespace PresentationLayer.Views.Forms
             bsHolidayTransferItems.ResetBindings(True)
         End Sub
 
-        Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+        Private Sub BtnEdit_Click(sender As Object, e As EventArgs)
             'If btnEdit.Enabled Then
             RaiseEvent HolidayIdChangedEvent()
             bsHolidayTransferItems.ResetBindings(True)

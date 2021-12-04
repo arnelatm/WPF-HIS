@@ -12,13 +12,12 @@ Namespace DataLayer.AdoNet
         Implements IDaoAll(Of Holiday)
 
         Private ReadOnly Db As New Db()
+
         Private FieldList As String = "DateCreated," &
-                                          "DateEnd," &
-                                          "DateStart," &
-                                          "Description," &
-                                          "IdNo," &
-                                          "LeaveIdNo," &
-                                          "PayrollIdNo"
+                                      "HolidayDate," &
+                                      "HolidayName," &
+                                      "HolidayNameAra," &
+                                      "IdNo"
 
         Public Function GetRecordByIdNo(idNo) As Holiday Implements IDaoAll(Of Holiday).GetRecordByIdNo
             Dim sql As String =
@@ -34,7 +33,7 @@ Namespace DataLayer.AdoNet
             If sortExpression = Nothing Then
                 sortExpression = "StartDate ASC"
             End If
-            Dim sql As String = "SELECT IdNo, HolidayIdNo" &
+            Dim sql As String = "SELECT IdNo, HolidayName, " &
                 " FROM [Holiday] " & "order by " & sortExpression
             Return Db.Read(sql, Make).ToList()
         End Function
@@ -42,19 +41,17 @@ Namespace DataLayer.AdoNet
         Public Function UpdateRecord(ByRef holiday As Holiday) As Integer Implements IDaoAll(Of Holiday).UpdateRecord
             Dim sql As String =
                     " UPDATE [Holiday] SET " &
-                    " DateEnd = @DateEnd," &
-                    " DateStart = @DateStart," &
-                    " Description = @Description," &
-                    " LeaveIdNo = @LeaveIdNo," &
-                    " PayrollIdNo = @PayrollIdNo" &
+                    " HolidayDate = @HolidayDate," &
+                    " HolidayName = @HolidayName," &
+                    " HolidayNameAra = @HolidayNameAra" &
                     " WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(holiday))
         End Function
 
         Public Function AddRecord(ByRef holiday As Holiday) As Integer Implements IDaoAll(Of Holiday).AddRecord
             Dim sql As String = " INSERT INTO [Holiday] " &
-                    " (DateEnd,DateStart,Description,LeaveIdNo,PayrollIdNo)" &
-                    " VALUES (@DateEnd,@DateStart,@Description,@LeaveIdNo,@PayrollIdNo)"
+                    " (HolidayDate,HolidayName,HolidayNameAra)" &
+                    " VALUES (@HolidayDate,@HolidayName,@HolidayNameAra)"
             Return Db.Insert(sql, Take(holiday))
         End Function
 
@@ -62,23 +59,19 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New Holiday() With {
             .DateCreated = Extensions.AsDateTime(reader("DateCreated")),
-            .DateEnd = Extensions.AsDate(reader("DateEnd")),
-            .DateStart = Extensions.AsDate(reader("DateStart")),
-            .Description = Extensions.AsString(reader("Description")),
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
-            .LeaveIdNo = Extensions.AsInt(Of Int16)(reader("LeaveIdNo")),
-            .PayrollIdNo = Extensions.AsId(Of Int32)(reader("PayrollIdNo"))
+            .HolidayDate = Extensions.AsDate(reader("HolidayDate")),
+            .HolidayName = Extensions.AsString(reader("HolidayName")),
+            .HolidayNameAra = Extensions.AsString(reader("HolidayNameAra")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo"))
             }
 
         Private Function Take(holiday As Holiday) As Object()
             Return New Object() {
                             "DateCreated", holiday.DateCreated,
-                            "DateEnd", holiday.DateEnd,
-                            "DateStart", holiday.DateStart,
-                            "Description", holiday.Description,
-                            "IdNo", holiday.IdNo,
-                            "LeaveIdNo", holiday.LeaveIdNo,
-                            "PayrollIdNo", holiday.PayrollIdNo
+                            "HolidayDate", holiday.HolidayDate,
+                            "HolidayName", holiday.HolidayName,
+                            "HolidayNameAra", holiday.HolidayNameAra,
+                            "IdNo", holiday.IdNo
                             }
         End Function
 

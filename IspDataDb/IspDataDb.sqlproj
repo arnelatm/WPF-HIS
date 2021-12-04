@@ -485,7 +485,6 @@
     <Build Include="dbo\Views\EmployeeLeaveList_View.sql" />
     <Build Include="dbo\Views\EmployeeLeaveLatestApproval_View.sql" />
     <Build Include="dbo\Views\LeaveApproval_View.sql" />
-    <Build Include="dbo\Tables\HolidayTransferAvailment.sql" />
     <Build Include="dbo\Tables\HolidayTransfer.sql" />
     <Build Include="dbo\Tables\HolidayTransferItem.sql" />
     <Build Include="dbo\Stored Procedures\UpdateInsertHolidayTransferItemTVP.sql" />
@@ -494,6 +493,10 @@
     <Build Include="dbo\Stored Procedures\UpdateHolidayTransferItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\spGetUntransferredHolidays.sql" />
     <Build Include="dbo\Stored Procedures\InsertHolidayTransferItemTVP.sql" />
+    <Build Include="dbo\Tables\HolidayAvailmentItem.sql" />
+    <Build Include="dbo\Tables\HolidayAvailmentApprovalItem.sql" />
+    <Build Include="dbo\Tables\HolidayAvailmentApproval.sql" />
+    <Build Include="dbo\Tables\HolidayAvailment.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

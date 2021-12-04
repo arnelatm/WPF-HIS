@@ -16,12 +16,14 @@ Namespace DataLayer.AdoNet
             Implements IDao(Of HolidayTransfer).GetRecordByIdNo
             Dim sql As String =
                     "SELECT " &
-                    "AppliedBy," &
-                    "DateCreated," &
-                    "HolidayIdNo," &
-                    "IdNo" &
-                    " FROM [HolidayTransfer]" &
-                    " WHERE IdNo = @IdNo"
+                    "a.AppliedBy," &
+                    "a.DateCreated," &
+                    "b.HolidayDate," &
+                    "a.HolidayIdNo," &
+                    "a.IdNo" &
+                    " FROM [HolidayTransfer] a" &
+                    " Left Join Holiday b on a.HolidayIdNo = b.IdNo" &
+                    " WHERE a.IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
             If data IsNot Nothing Then

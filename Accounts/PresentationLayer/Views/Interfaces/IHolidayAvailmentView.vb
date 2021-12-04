@@ -2,13 +2,14 @@
 
 Namespace PresentationLayer.Views.Interfaces
 
-    Public Interface IHolidayView
+    Public Interface IHolidayAvailmentView
         Inherits IView
+
         Property DateCreated As DateTime?
-        Property HolidayDate As Date
-        Property HolidayName As String
-        Property HolidayNameAra As String
+        Property EmployeeIdNo As Int32
+        Property EnteredBy As Int32
         Property IdNo As Int32
+
     End Interface
 
 End Namespace

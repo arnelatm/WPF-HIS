@@ -11,6 +11,7 @@ Namespace PresentationLayer.Views.Interfaces
 
         Property AppliedBy As Int32
         Property DateCreated As DateTime?
+        Property HolidayDate As DateTime?
         Property HolidayIdNo As Int32
         Property IdNo As Int32
         Property HolidayTransferItems As List(Of HolidayTransferItemView)

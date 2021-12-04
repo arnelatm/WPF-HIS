@@ -4,23 +4,25 @@ Imports AATM.BusinessLayer.BusinessRules
 
 Namespace BusinessLayer
 
-    Public Class Holiday
+    Public Class HolidayTransferAvailment
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
         Public Sub New()
             ' establish business rules
             If GetRules().Count() = 0 Then
-                AddRule(New ValidateRequired("HolidayName"))
-                AddRule(New ValidateRequired("HolidayDate"))
+                AddRule(New ValidateRequired("DateAvailed"))
+                AddRule(New ValidateRequired("EmployeeIdNo"))
+                AddRule(New ValidateRequired("HolidayTransferIdNo"))
             End If
         End Sub
 
         Property DateCreated As DateTime?
-        Property HolidayName As String
-        Property HolidayNameAra As String
-        Property HolidayDate As Date
+        Property DateAvailed As Date
+        Property Description As String
+        Property EmployeeIdNo As Int32
         Property IdNo As Int32
+        Property HolidayTransferIdNo As Int16
 
     End Class
 

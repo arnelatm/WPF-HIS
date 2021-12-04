@@ -15,6 +15,7 @@ Namespace PresentationLayer.Views
         Public Property HolidayTransferIdNo As Integer Implements IHolidayTransferItemView.HolidayTransferIdNo
         Public Property IdNo As Integer Implements IHolidayTransferItemView.IdNo
         Public Property Transfer As Boolean Implements IHolidayTransferItemView.Transfer
+
     End Class
 
 End Namespace
