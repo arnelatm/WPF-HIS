@@ -15,6 +15,7 @@ Namespace DataLayer.AdoNet
 
         Private Const FieldList =
                     "Cumulative," &
+                    "Holiday," &
                     "IdNo," &
                     "LeaveAllowed," &
                     "LeaveCode," &
@@ -47,6 +48,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " UPDATE [Leave] SET " &
                     " Cumulative = @Cumulative," &
+                    " Holiday = @Holiday," &
                     " LeaveAllowed = @LeaveAllowed," &
                     " LeaveCode = @LeaveCode," &
                     " LeaveName = @LeaveName," &
@@ -62,8 +64,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef leave As Leave) As Integer Implements IDaoAll(Of Leave).AddRecord
             Dim sql As String =
                     " INSERT INTO [Leave] " &
-                    " (Cumulative,LeaveAllowed,LeaveCode,LeaveName,LeaveNameAra,MaxCarryOver,MaxLimit,Notes,PaidPercent)" &
-                    " VALUES (@Cumulative,@LeaveAllowed,@LeaveCode,@LeaveName,@LeaveNameAra,@MaxCarryOver,@MaxLimit,@Notes,@PaidPercent)"
+                    " (Cumulative,Holiday,LeaveAllowed,LeaveCode,LeaveName,LeaveNameAra,MaxCarryOver,MaxLimit,Notes,PaidPercent)" &
+                    " VALUES (@Cumulative,@Holiday,@LeaveAllowed,@LeaveCode,@LeaveName,@LeaveNameAra,@MaxCarryOver,@MaxLimit,@Notes,@PaidPercent)"
             Return Db.Insert(sql, Take(leave))
         End Function
 
@@ -71,6 +73,7 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New Leave() With {
             .Cumulative = Extensions.AsBool(reader("Cumulative")),
+            .Holiday = Extensions.AsBool(reader("Holiday")),
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .LeaveAllowed = Extensions.AsDecimal(reader("LeaveAllowed")),
             .LeaveCode = Extensions.AsString(reader("LeaveCode")),
@@ -84,6 +87,7 @@ Namespace DataLayer.AdoNet
         Private Function Take(leave As Leave) As Object()
             Return New Object() {
                                     "@Cumulative", leave.Cumulative,
+                                    "@Holiday", leave.Holiday,
                                     "@IdNo", leave.IdNo,
                                     "@LeaveAllowed", leave.LeaveAllowed,
                                     "@LeaveCode", leave.LeaveCode,

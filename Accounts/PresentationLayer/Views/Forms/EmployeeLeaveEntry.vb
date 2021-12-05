@@ -208,18 +208,18 @@ Namespace PresentationLayer.Views.Forms
                 .RemoveInsertColumn()
             End With
             With DataGridViewApprovalHistory.Columns
-                dgvEnteredBy.DataSource = Users
-                dgvEnteredBy.DisplayMember = "Name"
-                dgvEnteredBy.ValueMember = "IdNo"
-                dgvEnteredBy.DisplayStyleForCurrentCellOnly = True
-                dgvEnteredBy.DisplayOnly = True
+                dgvApprovedBy.DataSource = Users
+                dgvApprovedBy.DisplayMember = "Name"
+                dgvApprovedBy.ValueMember = "IdNo"
+                dgvApprovedBy.DisplayStyleForCurrentCellOnly = True
+                dgvApprovedBy.DisplayOnly = True
                 dgvLeaveStatus.DataSource = LeaveStatusList
                 dgvLeaveStatus.DisplayMember = "Name"
                 dgvLeaveStatus.ValueMember = "Code"
                 dgvLeaveStatus.DisplayStyleForCurrentCellOnly = True
                 dgvApprovalIdNo.DisplayOnly = True
                 dgvDateCreated.DisplayOnly = True
-                dgvEnteredBy.DisplayOnly = True
+                dgvApprovedBy.DisplayOnly = True
                 dgvItemIdNo.DisplayOnly = True
                 dgvNote.DisplayOnly = True
                 dgvLeaveStatus.DisplayOnly = True

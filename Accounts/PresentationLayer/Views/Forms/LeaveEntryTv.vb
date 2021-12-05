@@ -108,6 +108,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property Holiday As Boolean Implements ILeaveView.Holiday
+            Get
+                Return chkHoliday.Checked
+            End Get
+            Set
+                chkHoliday.Checked = Value
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()

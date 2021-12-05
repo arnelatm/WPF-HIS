@@ -59,14 +59,15 @@ Namespace PresentationLayer.Views.Forms
         Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.DataGridViewApprovalHistory = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.bsEmployeeLeaveApprovalHistory = New System.Windows.Forms.BindingSource(Me.components)
+        Me.bsEmployeeLeaveApproval = New System.Windows.Forms.BindingSource(Me.components)
         Me.dgvApprovalIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvItemIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvDateCreated = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvNote = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.dgvApprovedBy = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         Me.dgvLeaveStatus = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+        Me.dgvNote = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.EmployeeLeaveIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.bsEmployeeLeaveApprovalHistory = New System.Windows.Forms.BindingSource(Me.components)
-        Me.bsEmployeeLeaveApproval = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout2.SuspendLayout
         CType(Me.DataGridViewApprovalHistory,System.ComponentModel.ISupportInitialize).BeginInit
@@ -541,7 +542,7 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewApprovalHistory.AutoGenerateColumns = false
         Me.DataGridViewApprovalHistory.BegFindValue = Nothing
         Me.DataGridViewApprovalHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewApprovalHistory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvApprovalIdNo, Me.dgvItemIdNo, Me.dgvDateCreated, Me.dgvNote, Me.dgvLeaveStatus, Me.EmployeeLeaveIdNo})
+        Me.DataGridViewApprovalHistory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvApprovalIdNo, Me.dgvItemIdNo, Me.dgvDateCreated, Me.dgvApprovedBy, Me.dgvLeaveStatus, Me.dgvNote, Me.EmployeeLeaveIdNo})
         Me.DataGridViewApprovalHistory.DataSource = Me.bsEmployeeLeaveApprovalHistory
         DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
@@ -576,6 +577,10 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewApprovalHistory.ShowFooter = false
         Me.DataGridViewApprovalHistory.ShowInsertColumnWhenEditing = true
         Me.DataGridViewApprovalHistory.Translatable = true
+        '
+        'bsEmployeeLeaveApprovalHistory
+        '
+        Me.bsEmployeeLeaveApprovalHistory.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeLeaveApprovalHistoryModel)
         '
         'dgvApprovalIdNo
         '
@@ -640,14 +645,39 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvDateCreated.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvDateCreated.Translatable = false
         '
+        'dgvApprovedBy
+        '
+        Me.dgvApprovedBy.DataPropertyName = "ApprovedBy"
+        Me.dgvApprovedBy.EditingMode = false
+        resources.ApplyResources(Me.dgvApprovedBy, "dgvApprovedBy")
+        Me.dgvApprovedBy.Name = "dgvApprovedBy"
+        Me.dgvApprovedBy.ReadOnly = true
+        Me.dgvApprovedBy.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvApprovedBy.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.dgvApprovedBy.Translatable = false
+        '
+        'dgvLeaveStatus
+        '
+        Me.dgvLeaveStatus.DataPropertyName = "Status"
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+        Me.dgvLeaveStatus.DefaultCellStyle = DataGridViewCellStyle5
+        Me.dgvLeaveStatus.EditingMode = false
+        resources.ApplyResources(Me.dgvLeaveStatus, "dgvLeaveStatus")
+        Me.dgvLeaveStatus.Name = "dgvLeaveStatus"
+        Me.dgvLeaveStatus.ReadOnly = true
+        Me.dgvLeaveStatus.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvLeaveStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.dgvLeaveStatus.Translatable = false
+        '
         'dgvNote
         '
         Me.dgvNote.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.dgvNote.BegFindValue = Nothing
         Me.dgvNote.DataPropertyName = "Note"
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-        Me.dgvNote.DefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+        Me.dgvNote.DefaultCellStyle = DataGridViewCellStyle6
         Me.dgvNote.EditingMode = false
         Me.dgvNote.EndFindValue = Nothing
         Me.dgvNote.FieldDescription = Nothing
@@ -662,30 +692,12 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvNote.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvNote.Translatable = false
         '
-        'dgvLeaveStatus
-        '
-        Me.dgvLeaveStatus.DataPropertyName = "Status"
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-        Me.dgvLeaveStatus.DefaultCellStyle = DataGridViewCellStyle6
-        Me.dgvLeaveStatus.EditingMode = false
-        resources.ApplyResources(Me.dgvLeaveStatus, "dgvLeaveStatus")
-        Me.dgvLeaveStatus.Name = "dgvLeaveStatus"
-        Me.dgvLeaveStatus.ReadOnly = true
-        Me.dgvLeaveStatus.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvLeaveStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.dgvLeaveStatus.Translatable = false
-        '
         'EmployeeLeaveIdNo
         '
         Me.EmployeeLeaveIdNo.DataPropertyName = "EmployeeLeaveIdNo"
         resources.ApplyResources(Me.EmployeeLeaveIdNo, "EmployeeLeaveIdNo")
         Me.EmployeeLeaveIdNo.Name = "EmployeeLeaveIdNo"
         Me.EmployeeLeaveIdNo.ReadOnly = true
-        '
-        'bsEmployeeLeaveApprovalHistory
-        '
-        Me.bsEmployeeLeaveApprovalHistory.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeLeaveApprovalHistoryModel)
         '
         'EmployeeLeaveEntry
         '
@@ -734,9 +746,9 @@ End Sub
         Friend WithEvents dgvApprovalIdNo As CDgvTextColumn
         Friend WithEvents dgvItemIdNo As CDgvTextColumn
         Friend WithEvents dgvDateCreated As CDgvTextColumn
-        Friend WithEvents dgvEnteredBy As CaDgvComboBoxColumn
-        Friend WithEvents dgvNote As CDgvTextColumn
+        Friend WithEvents dgvApprovedBy As CDgvComboBoxColumn
         Friend WithEvents dgvLeaveStatus As CDgvComboBoxColumn
+        Friend WithEvents dgvNote As CDgvTextColumn
         Friend WithEvents EmployeeLeaveIdNo As DataGridViewTextBoxColumn
     End Class
 End Namespace

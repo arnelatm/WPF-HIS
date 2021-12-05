@@ -102,6 +102,15 @@ Namespace PresentationLayer.Views
 
         Public Property Errors As List(Of String) Implements IView.Errors
 
+        Public Property Holiday As Boolean Implements ILeaveView.Holiday
+            Get
+                Return chkCumulative.Checked
+            End Get
+            Set(value As Boolean)
+                chkCumulative.Checked = value
+            End Set
+        End Property
+
     End Class
 
 End Namespace

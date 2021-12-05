@@ -11,6 +11,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property LeaveAllowed As Decimal
         Property PaidPercent As Decimal
         Property Cumulative As Boolean
+        Property Holiday As Boolean
         Property MaxCarryOver As Decimal
         Property MaxLimit As Decimal
         Property Notes As String

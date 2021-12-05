@@ -23,6 +23,7 @@ Namespace BusinessLayer
         Public Property LeaveAllowed As Decimal
         Public Property PaidPercent As Decimal
         Public Property Cumulative As Boolean
+        Public Property Holiday As Boolean
         Public Property MaxCarryOver As Decimal
         Public Property MaxLimit As Decimal
         Public Property Notes As String
