@@ -8,14 +8,14 @@ Namespace PresentationLayer.Views.Interfaces
         Property DateCreated As DateTime?
         Property DateEnd As Date
         Property DateStart As Date
-        Property EnteredBy As Int32
+        Property Description As String
         Property IdNo As Int32
         Property LeaveIdNo As Int16
-        'Property PayrollCode As String
-        'Property PayrollEndDate As Date
-        'Property PayrollIdNo As Int32
-        'Property PayrollName As String
-        'Property PayrollStartDate As Date
+        Property PayrollCode As String
+        Property PayrollEndDate As Date
+        Property PayrollIdNo As Int32
+        Property PayrollName As String
+        Property PayrollStartDate As Date
 
     End Interface
 

@@ -75,6 +75,14 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+        Protected Overrides Function IsBizDataValid() As Boolean
+            Dim retValue = False
+            If MyBase.IsBizDataValid() Then
+                                
+            End If
+            Return retValue
+        End Function
+
     End Class
 
 End Namespace

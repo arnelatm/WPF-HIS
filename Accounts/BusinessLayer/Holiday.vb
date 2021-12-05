@@ -11,16 +11,23 @@ Namespace BusinessLayer
         Public Sub New()
             ' establish business rules
             If GetRules().Count() = 0 Then
-                AddRule(New ValidateRequired("HolidayName"))
-                AddRule(New ValidateRequired("HolidayDate"))
+                AddRule(New ValidateRequired("LeaveIdNo"))
+                AddRule(New ValidateRequired("DateEnd"))
+                AddRule(New ValidateRequired("DateStart"))
             End If
         End Sub
 
         Property DateCreated As DateTime?
-        Property HolidayName As String
-        Property HolidayNameAra As String
-        Property HolidayDate As Date
+        Property DateEnd As Date
+        Property DateStart As Date
+        Property EnteredBy As Int32
         Property IdNo As Int32
+        Property LeaveIdNo As Int16
+        'Property PayrollCode As String
+        'Property PayrollEndDate As Date
+        'Property PayrollIdNo As Int32
+        'Property PayrollName As String
+        'Property PayrollStartDate As Date
 
     End Class
 
