@@ -32,6 +32,8 @@
         Me.dtpDateCreated = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblEnteredBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboHolidayIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.lblHolidayDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.dtpDateStart = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.DataGridViewHolidayTransferitems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
@@ -40,8 +42,8 @@
         Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvTransfer = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.bsHolidayTransferItems = New System.Windows.Forms.BindingSource(Me.components)
-        Me.lblHolidayDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.dtpHolidayDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
+        Me.dtpDateEnd = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
+        Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout1.SuspendLayout
         CType(Me.DataGridViewHolidayTransferitems,System.ComponentModel.ISupportInitialize).BeginInit
@@ -66,7 +68,9 @@
         Me.CFlowLayout1.Controls.Add(Me.lblEnteredBy)
         Me.CFlowLayout1.Controls.Add(Me.cboHolidayIdNo)
         Me.CFlowLayout1.Controls.Add(Me.lblHolidayDate)
-        Me.CFlowLayout1.Controls.Add(Me.dtpHolidayDate)
+        Me.CFlowLayout1.Controls.Add(Me.dtpDateStart)
+        Me.CFlowLayout1.Controls.Add(Me.CLabel3)
+        Me.CFlowLayout1.Controls.Add(Me.dtpDateEnd)
         Me.CFlowLayout1.Controls.Add(Me.CLabel2)
         Me.CFlowLayout1.Controls.Add(Me.cboenteredBy)
         Me.CFlowLayout1.Controls.Add(Me.DataGridViewHolidayTransferitems)
@@ -215,6 +219,45 @@
         Me.cboHolidayIdNo.ValueIsNumeric = false
         Me.cboHolidayIdNo.ValueMember = "IdNo"
         '
+        'lblHolidayDate
+        '
+        Me.lblHolidayDate.DisplayOnly = true
+        Me.lblHolidayDate.EditingMode = false
+        Me.lblHolidayDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblHolidayDate.Location = New System.Drawing.Point(1, 53)
+        Me.lblHolidayDate.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblHolidayDate.Name = "lblHolidayDate"
+        Me.lblHolidayDate.Size = New System.Drawing.Size(131, 24)
+        Me.lblHolidayDate.TabIndex = 15
+        Me.lblHolidayDate.Text = "Holiday Date"
+        Me.lblHolidayDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblHolidayDate.Translatable = true
+        '
+        'dtpDateStart
+        '
+        Me.dtpDateStart.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+        Me.dtpDateStart.DefaultValue = Nothing
+        Me.dtpDateStart.DisplayOnly = false
+        Me.dtpDateStart.DtpDefaultValue = Nothing
+        Me.dtpDateStart.EditingMode = true
+        Me.dtpDateStart.EditsAllowed = false
+        Me.dtpDateStart.ForeColor = System.Drawing.Color.Black
+        Me.dtpDateStart.LinkedLabel = Nothing
+        Me.dtpDateStart.Location = New System.Drawing.Point(134, 53)
+        Me.dtpDateStart.Margin = New System.Windows.Forms.Padding(1)
+        Me.dtpDateStart.Name = "dtpDateStart"
+        Me.dtpDateStart.ReadOnlyDp = false
+        Me.dtpDateStart.SecurityKey = Nothing
+        Me.dtpDateStart.ShowLongDate = false
+        Me.dtpDateStart.ShowTime = false
+        Me.dtpDateStart.Size = New System.Drawing.Size(113, 23)
+        Me.dtpDateStart.TabIndex = 3
+        Me.dtpDateStart.TargetCalendar = CType(resources.GetObject("dtpDateStart.TargetCalendar"),System.Globalization.Calendar)
+        Me.dtpDateStart.Translatable = false
+        Me.dtpDateStart.Value = Nothing
+        Me.dtpDateStart.ValueIsMandatory = false
+        Me.dtpDateStart.ValueIsNullable = false
+        '
         'CLabel2
         '
         Me.CLabel2.DisplayOnly = true
@@ -361,45 +404,45 @@
         '
         Me.bsHolidayTransferItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.HolidayTransferItemModel)
         '
-        'lblHolidayDate
+        'dtpDateEnd
         '
-        Me.lblHolidayDate.DisplayOnly = true
-        Me.lblHolidayDate.EditingMode = false
-        Me.lblHolidayDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblHolidayDate.Location = New System.Drawing.Point(1, 53)
-        Me.lblHolidayDate.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblHolidayDate.Name = "lblHolidayDate"
-        Me.lblHolidayDate.Size = New System.Drawing.Size(131, 24)
-        Me.lblHolidayDate.TabIndex = 15
-        Me.lblHolidayDate.Text = "Holiday Date"
-        Me.lblHolidayDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblHolidayDate.Translatable = true
+        Me.dtpDateEnd.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+        Me.dtpDateEnd.DefaultValue = Nothing
+        Me.dtpDateEnd.DisplayOnly = false
+        Me.dtpDateEnd.DtpDefaultValue = Nothing
+        Me.dtpDateEnd.EditingMode = true
+        Me.dtpDateEnd.EditsAllowed = false
+        Me.CFlowLayout1.SetFlowBreak(Me.dtpDateEnd, true)
+        Me.dtpDateEnd.ForeColor = System.Drawing.Color.Black
+        Me.dtpDateEnd.LinkedLabel = Nothing
+        Me.dtpDateEnd.Location = New System.Drawing.Point(287, 53)
+        Me.dtpDateEnd.Margin = New System.Windows.Forms.Padding(1)
+        Me.dtpDateEnd.Name = "dtpDateEnd"
+        Me.dtpDateEnd.ReadOnlyDp = false
+        Me.dtpDateEnd.SecurityKey = Nothing
+        Me.dtpDateEnd.ShowLongDate = false
+        Me.dtpDateEnd.ShowTime = false
+        Me.dtpDateEnd.Size = New System.Drawing.Size(113, 23)
+        Me.dtpDateEnd.TabIndex = 16
+        Me.dtpDateEnd.TargetCalendar = CType(resources.GetObject("dtpDateEnd.TargetCalendar"),System.Globalization.Calendar)
+        Me.dtpDateEnd.Translatable = false
+        Me.dtpDateEnd.Value = Nothing
+        Me.dtpDateEnd.ValueIsMandatory = false
+        Me.dtpDateEnd.ValueIsNullable = false
         '
-        'dtpHolidayDate
+        'CLabel3
         '
-        Me.dtpHolidayDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-        Me.dtpHolidayDate.DefaultValue = Nothing
-        Me.dtpHolidayDate.DisplayOnly = false
-        Me.dtpHolidayDate.DtpDefaultValue = Nothing
-        Me.dtpHolidayDate.EditingMode = true
-        Me.dtpHolidayDate.EditsAllowed = false
-        Me.CFlowLayout1.SetFlowBreak(Me.dtpHolidayDate, true)
-        Me.dtpHolidayDate.ForeColor = System.Drawing.Color.Black
-        Me.dtpHolidayDate.LinkedLabel = Nothing
-        Me.dtpHolidayDate.Location = New System.Drawing.Point(134, 53)
-        Me.dtpHolidayDate.Margin = New System.Windows.Forms.Padding(1)
-        Me.dtpHolidayDate.Name = "dtpHolidayDate"
-        Me.dtpHolidayDate.ReadOnlyDp = false
-        Me.dtpHolidayDate.SecurityKey = Nothing
-        Me.dtpHolidayDate.ShowLongDate = false
-        Me.dtpHolidayDate.ShowTime = false
-        Me.dtpHolidayDate.Size = New System.Drawing.Size(113, 23)
-        Me.dtpHolidayDate.TabIndex = 3
-        Me.dtpHolidayDate.TargetCalendar = CType(resources.GetObject("dtpHolidayDate.TargetCalendar"),System.Globalization.Calendar)
-        Me.dtpHolidayDate.Translatable = false
-        Me.dtpHolidayDate.Value = Nothing
-        Me.dtpHolidayDate.ValueIsMandatory = false
-        Me.dtpHolidayDate.ValueIsNullable = false
+        Me.CLabel3.DisplayOnly = true
+        Me.CLabel3.EditingMode = false
+        Me.CLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.CLabel3.Location = New System.Drawing.Point(249, 53)
+        Me.CLabel3.Margin = New System.Windows.Forms.Padding(1)
+        Me.CLabel3.Name = "CLabel3"
+        Me.CLabel3.Size = New System.Drawing.Size(36, 24)
+        Me.CLabel3.TabIndex = 17
+        Me.CLabel3.Text = " to "
+        Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.CLabel3.Translatable = true
         '
         'BulkHolidayTransferEntry
         '
@@ -434,6 +477,8 @@ End Sub
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents dgvTransfer As DataGridViewCheckBoxColumn
         Friend WithEvents lblHolidayDate As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents dtpHolidayDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
+        Friend WithEvents dtpDateStart As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
+        Friend WithEvents CLabel3 As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents dtpDateEnd As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
     End Class
 End Namespace

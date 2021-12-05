@@ -74,19 +74,32 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property HolidayDate As Date? Implements IHolidayTransferView.HolidayDate
+        Public Property DateEnd As Date? Implements IHolidayTransferView.DateEnd
             Get
-                Return dtpHolidayDate.Value
+                Return dtpDateEnd.Value
             End Get
             Set
                 If Value.HasValue Then
-                    dtpHolidayDate.Value = Value
+                    dtpDateEnd.Value = Value
                 Else
-                    dtpHolidayDate.Value = Date.Now()
+                    dtpDateEnd.Value = Date.Now()
                 End If
             End Set
         End Property
 
+        
+        Public Property DateStart As Date? Implements IHolidayTransferView.DateStart
+            Get
+                Return dtpDateStart.Value
+            End Get
+            Set
+                If Value.HasValue Then
+                    dtpDateStart.Value = Value
+                Else
+                    dtpDateStart.Value = Date.Now()
+                End If
+            End Set
+        End Property
 #End Region
 
         Private Sub BindHolidayTransferItems()

@@ -8,7 +8,8 @@
 
         Property EnteredBy As Int32
         Property DateCreated As DateTime?
-        Property HolidayDate As DateTime?
+        Property DateEnd As DateTime?
+        Property DateStart As DateTime?
         Property HolidayIdNo As Int32
         Property IdNo As Int32
         Property HolidayTransferItems As List(Of HolidayTransferItemModel)
