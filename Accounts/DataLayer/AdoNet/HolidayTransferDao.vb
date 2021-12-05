@@ -18,21 +18,22 @@ Namespace DataLayer.AdoNet
                     "SELECT " &
                     "a.EnteredBy," &
                     "a.DateCreated," &
-                    "b.HolidayDate," &
+                    "b.DateStart," &
+                    "b.DateEnd," &
                     "a.HolidayIdNo," &
                     "a.IdNo" &
                     " FROM [HolidayTransfer] a" &
-                    " Left Join Holiday b on a.HolidayIdNo = b.IdNo" &
+                    " Left Join Holiday_View b on a.HolidayIdNo = b.IdNo" &
                     " WHERE a.IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
-            If data IsNot Nothing Then
-                Dim htDao = New HolidayTransferItemDao()
-                data.HolidayTransferItems = htDao.GetRecordsWithGroupIdNo(idNo)
-                For Each item In data.HolidayTransferItems
-                    item.Transfer = True
-                Next
-            End If
+            'If data IsNot Nothing Then
+            '    Dim htDao = New HolidayTransferItemDao()
+            '    data.HolidayTransferItems = htDao.GetRecordsWithGroupIdNo(idNo)
+            '    For Each item In data.HolidayTransferItems
+            '        item.Transfer = True
+            '    Next
+            'End If
             Return data
         End Function
 
@@ -72,6 +73,8 @@ Namespace DataLayer.AdoNet
         Private Function Take(holidayTransfer As HolidayTransfer) As Object()
             Return New Object() {"@EnteredBy", holidayTransfer.EnteredBy,
                                  "@HolidayIdNo", holidayTransfer.HolidayIdNo,
+                                 "@DateStart", holidayTransfer.DateStart,
+                                 "@DateEnd", holidayTransfer.DateEnd,
                                  "@IdNo", holidayTransfer.IdNo
                                  }
         End Function

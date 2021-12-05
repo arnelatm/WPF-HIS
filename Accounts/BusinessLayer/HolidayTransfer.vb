@@ -13,7 +13,8 @@ Namespace BusinessLayer
         Public Property EnteredBy As Int32
 
         Public Property DateCreated As DateTime?
-        Public Property HolidayDate As DateTime?
+        Public Property DateEnd As DateTime?
+        Public Property DateStart As DateTime?
         Public Property HolidayIdNo As Int32
         Public Property IdNo As Int32
         Public Property HolidayTransferItems As List(Of HolidayTransferItem)

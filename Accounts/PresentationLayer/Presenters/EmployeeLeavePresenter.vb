@@ -1,4 +1,5 @@
 ﻿Imports System.Windows.Forms.VisualStyles
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries.GlobalFuncNSub
@@ -78,7 +79,11 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
             If MyBase.IsBizDataValid() Then
-                                
+                Dim leave As Leave
+                leave = Service.GetRecordByIdNo(Of Leave)(View.LeaveIdNo)
+                If leave.Holiday Then
+
+                End If
             End If
             Return retValue
         End Function

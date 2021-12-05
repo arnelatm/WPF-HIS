@@ -27,7 +27,7 @@ Namespace DataLayer.AdoNet
         Public Function GetRecordByIdNo(idNo) As Holiday Implements IDaoAll(Of Holiday).GetRecordByIdNo
             Dim sql As String =
                     "SELECT " & FieldList &
-                    " FROM Holidayw" &
+                    " FROM Holiday" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).FirstOrDefault()
