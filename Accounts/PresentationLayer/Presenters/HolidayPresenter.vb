@@ -1,9 +1,7 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 
@@ -16,6 +14,15 @@ Namespace PresentationLayer.Presenters
             TableName = "Holiday"
             SortOrderKey = "IdNo"
             WithTreeView = False
+        End Sub
+
+        Protected Overrides Sub CreateDataSources()
+            CreateDataSource("User", "EnteredBy", {"IdNo", "UserName"})
+            CreateDataSource("Leave", "LeaveIdNo", "Holiday = 1")
+        End Sub
+
+        Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
+            View.EnteredBy = GlobalVariables.UserIdNo
         End Sub
 
     End Class

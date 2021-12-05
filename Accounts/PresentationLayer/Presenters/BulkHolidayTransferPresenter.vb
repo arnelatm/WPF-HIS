@@ -126,7 +126,7 @@ Namespace PresentationLayer.Presenters
         Public Sub OnHolidayIdChangedEvent()
             Dim holidayModel As New HolidayModel
             holidayModel = _holidayService.GetRecordByIdNo(Of HolidayModel)(View.HolidayIdNo)
-            View.HolidayDate = holidayModel.HolidayDate
+            'View.HolidayDate = holidayModel.HolidayDate
             If EditMode Or AddMode Then
                 GetUnTransferredHolidays()
             End If
