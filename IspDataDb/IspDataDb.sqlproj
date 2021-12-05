@@ -496,6 +496,8 @@
     <Build Include="dbo\Tables\HolidayAvailmentApprovalItem.sql" />
     <Build Include="dbo\Tables\HolidayAvailmentApproval.sql" />
     <Build Include="dbo\Tables\HolidayAvailment.sql" />
+    <Build Include="dbo\Views\HolidayTransferItemList_View.sql" />
+    <Build Include="dbo\Views\Holiday_View.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
