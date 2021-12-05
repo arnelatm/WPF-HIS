@@ -1,7 +1,7 @@
 ﻿
 CREATE VIEW [dbo].[EmployeeLeaveApproval_View]
 AS
-SELECT        a.IdNo, a.AppliedBy, a.LeaveIdNo, a.StartDate, a.EndDate, a.FullDay, a.EnteredBy, a.Status, a.Note, a.LeaveStatusDate, b.EmployeeLeaveIdNo, b.LatestStatusUpdate, dbo.EmployeeLeave.DateCreated, 
+SELECT        a.IdNo, a.EnteredBy, a.LeaveIdNo, a.StartDate, a.EndDate, a.FullDay, a.ApprovedBy, a.Status, a.Note, a.LeaveStatusDate, b.EmployeeLeaveIdNo, b.LatestStatusUpdate, dbo.EmployeeLeave.DateCreated, 
                          dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.LeaveReason, dbo.Employee.SupervisorIdNo, a.EmployeeLeaveApprovalIdNo
 FROM            dbo.EmployeeLeaveApprovalList_View AS a INNER JOIN
                              (SELECT        c.EmployeeLeaveIdNo, MAX(d.DateCreated) AS LatestStatusUpdate
@@ -98,10 +98,10 @@ Begin DesignProperties =
          End
          Begin Table = "b"
             Begin Extent = 
-               Top = 6
-               Left = 251
-               Bottom = 305
-               Right = 448
+               Top = 95
+               Left = 273
+               Bottom = 394
+               Right = 470
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -124,7 +124,7 @@ Begin DesignProperties =
                Right = 895
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 25
          End
       End
    End
@@ -153,4 +153,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveApproval_View';
+
+
 

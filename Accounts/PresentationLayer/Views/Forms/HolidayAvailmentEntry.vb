@@ -23,12 +23,12 @@ Namespace PresentationLayer.Views.Forms
 
 #Region "Fields"
 
-        Public Property AppliedBy As Integer Implements IHolidayAvailmentView.AppliedBy
+        Public Property EnteredBy As Integer Implements IHolidayAvailmentView.EnteredBy
             Get
-                Return cboAppliedBy.GetNullableValue(Of Int32)
+                Return cboenteredBy.GetNullableValue(Of Int32)
             End Get
             Set
-                cboAppliedBy.SetValue(Value)
+                cboenteredBy.SetValue(Value)
             End Set
         End Property
 
@@ -54,24 +54,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property EndDate As DateTime Implements IHolidayAvailmentView.EndDate
-            Get
-                Return dtpEndDate.Value
-            End Get
-            Set
-                dtpEndDate.Value = Value
-            End Set
-        End Property
-
-        Public Property FullDay As Boolean Implements IHolidayAvailmentView.FullDay
-            Get
-                Return chkFullDay.Checked
-            End Get
-            Set(value As Boolean)
-                chkFullDay.Checked = value
-            End Set
-        End Property
-
         Public Property IdNo As Int32 Implements IHolidayAvailmentView.IdNo
             Get
                 Return NumParser(Of Int32)(TxtIdNo.Text)
@@ -81,48 +63,11 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property LeaveReason As String Implements IHolidayAvailmentView.LeaveReason
-            Get
-                Return txtLeaveReason.Text
-            End Get
-            Set(value As String)
-                txtLeaveReason.Text = value
-            End Set
-        End Property
-
-        Public Property LeaveStatus As String Implements IHolidayAvailmentView.LeaveStatus
-            Get
-                Return cboLeaveStatus.GetValue()
-            End Get
-            Set
-                cboLeaveStatus.SetValue(Value)
-            End Set
-        End Property
-
-        Public Property StartDate As DateTime Implements IHolidayAvailmentView.StartDate
-            Get
-                Return dtpStartDate.Value
-            End Get
-            Set
-                dtpStartDate.Value = Value
-            End Set
-        End Property
-
-        Public Property LeaveIdNo As Int16 Implements IHolidayAvailmentView.LeaveIdNo
-            Get
-                Return cboLeaveIdNo.GetNullableValue(Of Int16)
-            End Get
-            Set
-                cboLeaveIdNo.SetValue(Value)
-            End Set
-        End Property
-
         Public Property SupervisorIdNo As Int32 Implements IHolidayAvailmentView.SupervisorIdNo
         Public Property Disapprove As Boolean Implements IHolidayAvailmentView.Disapprove
-        Public Property ApprovalNote As String Implements IHolidayAvailmentView.ApprovalNote
         Public Property Approve As Boolean Implements IHolidayAvailmentView.Approve
         Public Property Users As List(Of Lookup.LookupData) Implements IHolidayAvailmentView.Users
-        Public Property LeaveStatusList As List(Of Lookup.LookupData) Implements IHolidayAvailmentView.LeaveStatusList
+        Public Property HolidayStatusList As List(Of Lookup.LookupData) Implements IHolidayAvailmentView.HolidayStatusList
 
         Public Property ApprovalHistory As List(Of IHolidayAvailmentApprovalHistoryView) Implements IHolidayAvailmentView.ApprovalHistory
             Get
@@ -134,65 +79,59 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property HolidayTransferIdNo As Integer Implements IHolidayAvailmentView.HolidayTransferIdNo
+            Get
+                Return cboHolidayTransferIdNo.GetNullableValue(Of Int32)
+            End Get
+            Set
+                cboHolidayTransferIdNo.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property Status As String Implements IHolidayAvailmentView.Status
+            Get
+                Return cboStatus.GetNullableValue(Of Int32)
+            End Get
+            Set
+                cboStatus.SetValue(Value)
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
-                {"AppliedBy", cboAppliedBy},
+                {"EnteredBy", cboenteredBy},
                 {"EmployeeIdNo", cboEmployeeIdNo},
-                {"EndDate", dtpEndDate},
-                {"FullDay", chkFullDay},
                 {"IdNo", TxtIdNo},
-                {"LeaveIdNo", cboLeaveIdNo},
-                {"LeaveReason", txtLeaveReason},
-                {"LeaveStatus", cboLeaveStatus},
-                {"StartDate", dtpStartDate}
+                {"HolidayTransferIdNo", cboHolidayTransferIdNo},
+                {"LeaveStatus", cboStatus},
+                {"StartDate", dtpAvailmentDate}
                 }
         End Sub
 
         'Protected Overrides Sub CreateDataSources()
         '    CreateDataSource("Employee", cboEmployeeIdNo)
-        '    CreateDataSource("User", cboAppliedBy, {"IdNo", "UserName"})
+        '    CreateDataSource("User", cboenteredBy, {"IdNo", "UserName"})
         '    CreateDataSource("Leave", cboLeaveIdNo)
         '    CreateEnumDataSource(Of LeaveStatusSelection)(cboLeaveStatus)
         'End Sub
 
-        Private Sub dtpStartDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpStartDate.Validated
-            If dtpEndDate.Value Is Nothing OrElse dtpEndDate.Value < dtpStartDate.Value Then
-                dtpEndDate.Value = dtpStartDate.Value
-            End If
-        End Sub
+        'Private Sub dtpStartDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpAvailmentDate.Validated
+        '    If dtpAvailmentDate.Value Is Nothing OrElse dtpAvailmentDate.Value < dtpAvailmentDate.Value Then
+        '        dtpAvailmentDate.Value = dtpAvailmentDate.Value
+        '    End If
+        'End Sub
 
-        Private Sub dtpEndDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpEndDate.Validated
-            If dtpStartDate.Value Is Nothing OrElse dtpStartDate.Value > dtpEndDate.Value Then
-                dtpStartDate.Value = dtpEndDate.Value
-            End If
-        End Sub
-
-        Private Sub chkFullDay_CheckedChanged(sender As Object, e As EventArgs) Handles chkFullDay.CheckedChanged
-            If chkFullDay.Checked Then
-                dtpStartDate.ShowTime = False
-                dtpEndDate.ShowTime = False
-            Else
-                dtpStartDate.ShowTime = True
-                dtpEndDate.ShowTime = True
-            End If
-        End Sub
+        'Private Sub dtpEndDate_ValueChanged(sender As Object, e As EventArgs)
+        '    If dtpAvailmentDate.Value Is Nothing OrElse dtpAvailmentDate.Value > dtpEndDate.Value Then
+        '        dtpAvailmentDate.Value = dtpEndDate.Value
+        '    End If
+        'End Sub
 
         'Public Overrides Sub UpdateViewDisplay(editMode As Boolean, addMode As Boolean, recordPositionNumber As Integer, targetIdNo As Integer, recordCount As Integer)
         Public Sub OnBeforeLoad() Handles MyBase.BeforeLoad
-            If FullDay Then
-                dtpEndDate.ShowTime = False
-                dtpStartDate.ShowTime = False
-            Else
-                dtpEndDate.ShowTime = True
-                dtpStartDate.ShowTime = True
-            End If
-        End Sub
-
-        Private Sub BtnHistory_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnHistory.ClickButtonArea
-
         End Sub
 
         Private Sub BindApprovalLeaveHistory()
@@ -213,10 +152,10 @@ Namespace PresentationLayer.Views.Forms
                 dgvEnteredBy.ValueMember = "IdNo"
                 dgvEnteredBy.DisplayStyleForCurrentCellOnly = True
                 dgvEnteredBy.DisplayOnly = True
-                dgvLeaveStatus.DataSource = LeaveStatusList
-                dgvLeaveStatus.DisplayMember = "Name"
-                dgvLeaveStatus.ValueMember = "Code"
-                dgvLeaveStatus.DisplayStyleForCurrentCellOnly = True
+                'dgvLeaveStatus.DataSource = LeaveStatusList
+                'dgvLeaveStatus.DisplayMember = "Name"
+                'dgvLeaveStatus.ValueMember = "Code"
+                'dgvLeaveStatus.DisplayStyleForCurrentCellOnly = True
                 dgvApprovalIdNo.DisplayOnly = True
                 dgvDateCreated.DisplayOnly = True
                 dgvEnteredBy.DisplayOnly = True

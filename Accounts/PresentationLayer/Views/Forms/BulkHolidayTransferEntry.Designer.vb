@@ -33,7 +33,7 @@
         Me.lblEnteredBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboHolidayIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboAppliedBy = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.DataGridViewHolidayTransferitems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         Me.HolidayTransferIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -68,7 +68,7 @@
         Me.CFlowLayout1.Controls.Add(Me.lblHolidayDate)
         Me.CFlowLayout1.Controls.Add(Me.dtpHolidayDate)
         Me.CFlowLayout1.Controls.Add(Me.CLabel2)
-        Me.CFlowLayout1.Controls.Add(Me.cboAppliedBy)
+        Me.CFlowLayout1.Controls.Add(Me.cboenteredBy)
         Me.CFlowLayout1.Controls.Add(Me.DataGridViewHolidayTransferitems)
         Me.CFlowLayout1.Location = New System.Drawing.Point(4, 70)
         Me.CFlowLayout1.Name = "CFlowLayout1"
@@ -229,49 +229,49 @@
         Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.CLabel2.Translatable = true
         '
-        'cboAppliedBy
+        'cboenteredBy
         '
-        Me.cboAppliedBy.BackColor = System.Drawing.Color.White
-        Me.cboAppliedBy.BegFindValue = Nothing
-        Me.cboAppliedBy.ChangingSearchValueOnly = false
-        Me.cboAppliedBy.CurrentSearchTerm = ""
-        Me.cboAppliedBy.DefaultValue = Nothing
-        Me.cboAppliedBy.DisplayMember = "Name"
-        Me.cboAppliedBy.EditingMode = true
-        Me.cboAppliedBy.EndFindValue = Nothing
-        Me.cboAppliedBy.FieldDescription = Nothing
-        Me.cboAppliedBy.FieldName = Nothing
-        Me.cboAppliedBy.FilterRule = Nothing
-        Me.cboAppliedBy.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboAppliedBy.FindEnabled = false
-        Me.CFlowLayout1.SetFlowBreak(Me.cboAppliedBy, true)
-        Me.cboAppliedBy.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.cboAppliedBy.ForeColor = System.Drawing.Color.Black
-        Me.cboAppliedBy.FormattingEnabled = true
-        Me.cboAppliedBy.HideWhenNotEditingOrAdding = false
-        Me.cboAppliedBy.IgnoreCase = false
-        Me.cboAppliedBy.IntegralHeight = false
-        Me.cboAppliedBy.LinkedLabel = Nothing
-        Me.cboAppliedBy.Location = New System.Drawing.Point(134, 79)
-        Me.cboAppliedBy.Margin = New System.Windows.Forms.Padding(1)
-        Me.cboAppliedBy.Name = "cboAppliedBy"
-        Me.cboAppliedBy.OldValue = 0
-        Me.cboAppliedBy.OriginalDataSource = Nothing
-        Me.cboAppliedBy.OriginalList = Nothing
-        Me.cboAppliedBy.OverrideDropDownStyleList = false
-        Me.cboAppliedBy.PreviousSearchTerm = Nothing
-        Me.cboAppliedBy.PropertySelector = Nothing
-        Me.cboAppliedBy.ReadOnlyCombo = false
-        Me.cboAppliedBy.Size = New System.Drawing.Size(431, 24)
-        Me.cboAppliedBy.SuggestBoxHeight = 200
-        Me.cboAppliedBy.SuggestListOrderRule = Nothing
-        Me.cboAppliedBy.TabIndex = 4
-        Me.cboAppliedBy.TextToSearch = Nothing
-        Me.cboAppliedBy.Translatable = false
-        Me.cboAppliedBy.ValueIsMandatory = false
-        Me.cboAppliedBy.ValueIsNullable = false
-        Me.cboAppliedBy.ValueIsNumeric = false
-        Me.cboAppliedBy.ValueMember = "IdNo"
+        Me.cboenteredBy.BackColor = System.Drawing.Color.White
+        Me.cboenteredBy.BegFindValue = Nothing
+        Me.cboenteredBy.ChangingSearchValueOnly = false
+        Me.cboenteredBy.CurrentSearchTerm = ""
+        Me.cboenteredBy.DefaultValue = Nothing
+        Me.cboenteredBy.DisplayMember = "Name"
+        Me.cboenteredBy.EditingMode = true
+        Me.cboenteredBy.EndFindValue = Nothing
+        Me.cboenteredBy.FieldDescription = Nothing
+        Me.cboenteredBy.FieldName = Nothing
+        Me.cboenteredBy.FilterRule = Nothing
+        Me.cboenteredBy.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboenteredBy.FindEnabled = false
+        Me.CFlowLayout1.SetFlowBreak(Me.cboenteredBy, true)
+        Me.cboenteredBy.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.cboenteredBy.ForeColor = System.Drawing.Color.Black
+        Me.cboenteredBy.FormattingEnabled = true
+        Me.cboenteredBy.HideWhenNotEditingOrAdding = false
+        Me.cboenteredBy.IgnoreCase = false
+        Me.cboenteredBy.IntegralHeight = false
+        Me.cboenteredBy.LinkedLabel = Nothing
+        Me.cboenteredBy.Location = New System.Drawing.Point(134, 79)
+        Me.cboenteredBy.Margin = New System.Windows.Forms.Padding(1)
+        Me.cboenteredBy.Name = "cboenteredBy"
+        Me.cboenteredBy.OldValue = 0
+        Me.cboenteredBy.OriginalDataSource = Nothing
+        Me.cboenteredBy.OriginalList = Nothing
+        Me.cboenteredBy.OverrideDropDownStyleList = false
+        Me.cboenteredBy.PreviousSearchTerm = Nothing
+        Me.cboenteredBy.PropertySelector = Nothing
+        Me.cboenteredBy.ReadOnlyCombo = false
+        Me.cboenteredBy.Size = New System.Drawing.Size(431, 24)
+        Me.cboenteredBy.SuggestBoxHeight = 200
+        Me.cboenteredBy.SuggestListOrderRule = Nothing
+        Me.cboenteredBy.TabIndex = 4
+        Me.cboenteredBy.TextToSearch = Nothing
+        Me.cboenteredBy.Translatable = false
+        Me.cboenteredBy.ValueIsMandatory = false
+        Me.cboenteredBy.ValueIsNullable = false
+        Me.cboenteredBy.ValueIsNumeric = false
+        Me.cboenteredBy.ValueMember = "IdNo"
         '
         'DataGridViewHolidayTransferitems
         '
@@ -424,7 +424,7 @@ End Sub
         Friend WithEvents txtIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblEnteredBy As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents DataGridViewHolidayTransferitems As Libraries.CBaseControlsLibrary.CDataGridView
-        Friend WithEvents cboAppliedBy As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents cboenteredBy As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dtpDateCreated As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel

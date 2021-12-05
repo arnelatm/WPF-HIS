@@ -9,7 +9,7 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface IHolidayTransferView
         Inherits IView
 
-        Property AppliedBy As Int32
+        Property EnteredBy As Int32
         Property DateCreated As DateTime?
         Property HolidayDate As DateTime?
         Property HolidayIdNo As Int32

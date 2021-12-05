@@ -1,6 +1,6 @@
 ﻿CREATE VIEW dbo.EmployeeLeave_View
 AS
-SELECT        dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.IdNo, dbo.EmployeeLeave.LeaveIdNo, dbo.EmployeeLeave.StartDate, dbo.EmployeeLeave.EndDate, dbo.EmployeeLeave.FullDay, dbo.EmployeeLeave.AppliedBy, 
+SELECT        dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.IdNo, dbo.EmployeeLeave.LeaveIdNo, dbo.EmployeeLeave.StartDate, dbo.EmployeeLeave.EndDate, dbo.EmployeeLeave.FullDay, dbo.EmployeeLeave.EnteredBy, 
                          dbo.EmployeeLeave.LeaveReason, dbo.EmployeeLeave.DateCreated, dbo.EmployeeLeave.DateTimeStamp, dbo.EmployeeLeaveLatestApproval_View.SupervisorIdNo, 
                          dbo.EmployeeLeaveLatestApproval_View.LatestStatusUpdate, dbo.EmployeeLeaveLatestApproval_View.LeaveStatus
 FROM            dbo.EmployeeLeave INNER JOIN

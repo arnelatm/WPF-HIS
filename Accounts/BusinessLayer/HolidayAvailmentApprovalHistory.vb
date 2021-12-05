@@ -4,7 +4,7 @@ Imports AATM.BusinessLayer.BusinessRules
 
 Namespace BusinessLayer
 
-    Public Class EmployeeLeaveApprovalHistory
+    Public Class HolidayAvailmentApprovalHistory
 
         Public Property ApprovalIdNo As Int32
         Public Property DateCreated As DateTime?

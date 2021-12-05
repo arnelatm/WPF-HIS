@@ -7,13 +7,13 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Presenters
 
     Public Class HolidayAvailmentPresenter(Of TM As New)
-        Inherits AccountsPresenterNew(Of IEmployeeLeaveView, TM)
+        Inherits AccountsPresenterNew(Of IHolidayAvailmentView, TM)
         'Implements ISubscriber(Of EntryFormLoaded)
 
         Private _userHasAccess As Boolean = False
         Private _userIsASupervisor As Boolean = False
 
-        Public Sub New(itemView As IEmployeeLeaveView)
+        Public Sub New(itemView As IHolidayAvailmentView)
             MyBase.New(itemView)
             Service = New AccountsService("EmployeeLeave")
             TableName = "EmployeeLeave_View"
@@ -22,11 +22,8 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
-            View.FullDay = True
             View.EmployeeIdNo = Service.GetField(Of Int32, Int32)(GlobalVariables.UserIdNo, "User", "IdNo", "EmployeeIdNo")
-            View.AppliedBy = GlobalVariables.UserIdNo
-            View.StartDate = Today()
-            View.EndDate = Today()
+            View.EnteredBy = GlobalVariables.UserIdNo
         End Sub
 
         Public Overrides Sub EntryFormLoaded()
@@ -59,18 +56,18 @@ Namespace PresentationLayer.Presenters
                 Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
                 CreateDataSource("Employee", "EmployeeIdNo", "IdNo = " + employeeIdNo.ToString())
             End If
-            CreateDataSource("User", "AppliedBy", {"IdNo", "UserName"})
-            CreateDataSource("Leave", "LeaveIdNo")
-            CreateEnumDataSource(Of LeaveStatusSelection)("LeaveStatus")
-            CreateEnumData(Of LeaveStatusSelection)(View.LeaveStatusList)
+            CreateDataSource("User", "EnteredBy", {"IdNo", "UserName"})
+            CreateDataSource("Holiday", "HolidayTransferIdNo")
+            CreateEnumDataSource(Of LeaveStatusSelection)("Status")
+            CreateEnumData(Of LeaveStatusSelection)(View.HolidayStatusList)
             CreateLookupData("User", "Users", {"IdNo", "UserName"})
             'CreateEnumDataSource(Of LeaveApprovalSelection)("Approval")
         End Sub
 
         Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
             Dim type As Type = View.GetType
-            If View.LeaveStatus <> EnumToCode(LeaveStatusSelection.Submitted) Then
-                Messaging.Show(True, "MsgHolidayAvailmentAlreadyActed", {"approvalAction", CodeToEnum(Of LeaveStatusSelection)(View.LeaveStatus).ToString()})
+            If View.Status <> EnumToCode(LeaveStatusSelection.Submitted) Then
+                Messaging.Show(True, "MsgHolidayAvailmentAlreadyActed", {"approvalAction", CodeToEnum(Of LeaveStatusSelection)(View.Status).ToString()})
                 CancelEdit = True
             End If
         End Sub

@@ -651,73 +651,73 @@
   <data name="&gt;&gt;btnHistory.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
-  <data name="lblAppliedBy.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblenteredBy.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="lblAppliedBy.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblenteredBy.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblAppliedBy.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblenteredBy.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 248</value>
   </data>
-  <data name="lblAppliedBy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblenteredBy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="lblAppliedBy.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblenteredBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 23</value>
   </data>
-  <data name="lblAppliedBy.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblenteredBy.TabIndex" type="System.Int32, mscorlib">
     <value>299</value>
   </data>
-  <data name="lblAppliedBy.Text" xml:space="preserve">
+  <data name="lblenteredBy.Text" xml:space="preserve">
     <value>Applied By</value>
   </data>
-  <data name="lblAppliedBy.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblenteredBy.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;lblAppliedBy.Name" xml:space="preserve">
-    <value>lblAppliedBy</value>
+  <data name="&gt;&gt;lblenteredBy.Name" xml:space="preserve">
+    <value>lblenteredBy</value>
   </data>
-  <data name="&gt;&gt;lblAppliedBy.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblenteredBy.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lblAppliedBy.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblenteredBy.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
-  <data name="&gt;&gt;lblAppliedBy.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblenteredBy.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
-  <data name="cboAppliedBy.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="cboenteredBy.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="cboAppliedBy.IntegralHeight" type="System.Boolean, mscorlib">
+  <data name="cboenteredBy.IntegralHeight" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="cboAppliedBy.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cboenteredBy.Location" type="System.Drawing.Point, System.Drawing">
     <value>203, 248</value>
   </data>
-  <data name="cboAppliedBy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="cboenteredBy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="cboAppliedBy.MaxDropDownItems" type="System.Int32, mscorlib">
+  <data name="cboenteredBy.MaxDropDownItems" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="cboAppliedBy.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cboenteredBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 24</value>
   </data>
-  <data name="cboAppliedBy.TabIndex" type="System.Int32, mscorlib">
+  <data name="cboenteredBy.TabIndex" type="System.Int32, mscorlib">
     <value>300</value>
   </data>
-  <data name="&gt;&gt;cboAppliedBy.Name" xml:space="preserve">
-    <value>cboAppliedBy</value>
+  <data name="&gt;&gt;cboenteredBy.Name" xml:space="preserve">
+    <value>cboenteredBy</value>
   </data>
-  <data name="&gt;&gt;cboAppliedBy.Type" xml:space="preserve">
+  <data name="&gt;&gt;cboenteredBy.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;cboAppliedBy.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cboenteredBy.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
-  <data name="&gt;&gt;cboAppliedBy.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cboenteredBy.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
   <data name="lblDateCreated.Font" type="System.Drawing.Font, System.Drawing">
@@ -837,9 +837,6 @@
   <data name="dgvDateCreated.HeaderText" xml:space="preserve">
     <value>Date</value>
   </data>
-  <data name="dgvEnteredBy.HeaderText" xml:space="preserve">
-    <value>User Name</value>
-  </data>
   <data name="dgvNote.HeaderText" xml:space="preserve">
     <value>Remarks</value>
   </data>
@@ -948,9 +945,6 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>642, 679</value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>16, 268</value>
   </data>
@@ -981,18 +975,6 @@
   <data name="&gt;&gt;MyErrorProvider.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;bsEmployeeLeaveApproval.Name" xml:space="preserve">
-    <value>bsEmployeeLeaveApproval</value>
-  </data>
-  <data name="&gt;&gt;bsEmployeeLeaveApproval.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bsEmployeeLeaveApprovalHistory.Name" xml:space="preserve">
-    <value>bsEmployeeLeaveApprovalHistory</value>
-  </data>
-  <data name="&gt;&gt;bsEmployeeLeaveApprovalHistory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;dgvApprovalIdNo.Name" xml:space="preserve">
     <value>dgvApprovalIdNo</value>
   </data>
@@ -1011,12 +993,6 @@
   <data name="&gt;&gt;dgvDateCreated.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dgvEnteredBy.Name" xml:space="preserve">
-    <value>dgvEnteredBy</value>
-  </data>
-  <data name="&gt;&gt;dgvEnteredBy.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="&gt;&gt;dgvNote.Name" xml:space="preserve">
     <value>dgvNote</value>
   </data>
@@ -1034,6 +1010,18 @@
   </data>
   <data name="&gt;&gt;EmployeeLeaveIdNo.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bsEmployeeLeaveApprovalHistory.Name" xml:space="preserve">
+    <value>bsEmployeeLeaveApprovalHistory</value>
+  </data>
+  <data name="&gt;&gt;bsEmployeeLeaveApprovalHistory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bsEmployeeLeaveApproval.Name" xml:space="preserve">
+    <value>bsEmployeeLeaveApproval</value>
+  </data>
+  <data name="&gt;&gt;bsEmployeeLeaveApproval.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EmployeeLeaveEntry</value>

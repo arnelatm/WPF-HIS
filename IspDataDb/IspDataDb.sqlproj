@@ -424,7 +424,6 @@
     <Build Include="dbo\Functions\FuncBalanceSheet2.sql" />
     <Build Include="dbo\Stored Procedures\spTranslateTransactionNotes.sql" />
     <Build Include="dbo\Stored Procedures\spTranslateTransactionWordNotes.sql" />
-    <Build Include="dbo\Views\View_1.sql" />
     <Build Include="dbo\Views\GLStatementNew_View.sql" />
     <Build Include="dbo\Views\GlLedgersNew_View.sql" />
     <Build Include="dbo\Functions\FuncGlAccountStatement.sql" />

@@ -6,7 +6,7 @@
     ''' </summary>
     Public Class HolidayTransferModel
 
-        Property AppliedBy As Int32
+        Property EnteredBy As Int32
         Property DateCreated As DateTime?
         Property HolidayDate As DateTime?
         Property HolidayIdNo As Int32

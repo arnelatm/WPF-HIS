@@ -10,7 +10,7 @@ Namespace BusinessLayer
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
-        Public Property AppliedBy As Int32
+        Public Property EnteredBy As Int32
 
         Public Property DateCreated As DateTime?
         Public Property HolidayDate As DateTime?

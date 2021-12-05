@@ -6,12 +6,12 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class EmployeeLeaveEntry
-        Implements IEmployeeLeaveView
+    Public Class HolidayTransferAvailmentEntry
+        Implements IHolidayTransferAvailmentView
 
         Private ReadOnly _nfi As NumberFormatInfo
         Private _humanResourceUser As Boolean
-        Private _approvalHistory As List(Of IEmployeeLeaveApprovalHistoryView)
+        Private _approvalHistory As List(Of IHolidayTransferAvailmentApprovalHistoryView)
 
         Public Sub New()
             ' This call is required by the designer.
@@ -23,7 +23,7 @@ Namespace PresentationLayer.Views.Forms
 
 #Region "Fields"
 
-        Public Property EnteredBy As Integer Implements IEmployeeLeaveView.EnteredBy
+        Public Property EnteredBy As Integer Implements IHolidayTransferAvailmentView.EnteredBy
             Get
                 Return cboenteredBy.GetNullableValue(Of Int32)
             End Get
@@ -32,7 +32,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DateCreated As DateTime? Implements IEmployeeLeaveView.DateCreated
+        Public Property DateCreated As DateTime? Implements IHolidayTransferAvailmentView.DateCreated
             Get
                 Return Convert.ToDateTime(txtDateCreated.Text)
             End Get
@@ -45,7 +45,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property EmployeeIdNo As Integer Implements IEmployeeLeaveView.EmployeeIdNo
+        Public Property EmployeeIdNo As Integer Implements IHolidayTransferAvailmentView.EmployeeIdNo
             Get
                 Return cboEmployeeIdNo.GetNullableValue(Of Int32)
             End Get
@@ -54,25 +54,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property EndDate As DateTime Implements IEmployeeLeaveView.EndDate
-            Get
-                Return dtpEndDate.Value
-            End Get
-            Set
-                dtpEndDate.Value = Value
-            End Set
-        End Property
-
-        Public Property FullDay As Boolean Implements IEmployeeLeaveView.FullDay
-            Get
-                Return chkFullDay.Checked
-            End Get
-            Set(value As Boolean)
-                chkFullDay.Checked = value
-            End Set
-        End Property
-
-        Public Property IdNo As Int32 Implements IEmployeeLeaveView.IdNo
+        Public Property IdNo As Int32 Implements IHolidayTransferAvailmentView.IdNo
             Get
                 Return NumParser(Of Int32)(TxtIdNo.Text)
             End Get
@@ -81,54 +63,18 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property LeaveReason As String Implements IEmployeeLeaveView.LeaveReason
-            Get
-                Return txtLeaveReason.Text
-            End Get
-            Set(value As String)
-                txtLeaveReason.Text = value
-            End Set
-        End Property
+        Public Property SupervisorIdNo As Int32 Implements IHolidayTransferAvailmentView.SupervisorIdNo
+        Public Property Disapprove As Boolean Implements IHolidayTransferAvailmentView.Disapprove
+        Public Property ApprovalNote As String Implements IHolidayTransferAvailmentView.ApprovalNote
+        Public Property Approve As Boolean Implements IHolidayTransferAvailmentView.Approve
+        Public Property Users As List(Of Lookup.LookupData) Implements IHolidayTransferAvailmentView.Users
+        Public Property LeaveStatusList As List(Of Lookup.LookupData) Implements IHolidayTransferAvailmentView.LeaveStatusList
 
-        Public Property LeaveStatus As String Implements IEmployeeLeaveView.LeaveStatus
-            Get
-                Return cboLeaveStatus.GetValue()
-            End Get
-            Set
-                cboLeaveStatus.SetValue(Value)
-            End Set
-        End Property
-
-        Public Property StartDate As DateTime Implements IEmployeeLeaveView.StartDate
-            Get
-                Return dtpStartDate.Value
-            End Get
-            Set
-                dtpStartDate.Value = Value
-            End Set
-        End Property
-
-        Public Property LeaveIdNo As Int16 Implements IEmployeeLeaveView.LeaveIdNo
-            Get
-                Return cboLeaveIdNo.GetNullableValue(Of Int16)
-            End Get
-            Set
-                cboLeaveIdNo.SetValue(Value)
-            End Set
-        End Property
-
-        Public Property SupervisorIdNo As Int32 Implements IEmployeeLeaveView.SupervisorIdNo
-        Public Property Disapprove As Boolean Implements IEmployeeLeaveView.Disapprove
-        Public Property ApprovalNote As String Implements IEmployeeLeaveView.ApprovalNote
-        Public Property Approve As Boolean Implements IEmployeeLeaveView.Approve
-        Public Property Users As List(Of Lookup.LookupData) Implements IEmployeeLeaveView.Users
-        Public Property LeaveStatusList As List(Of Lookup.LookupData) Implements IEmployeeLeaveView.LeaveStatusList
-
-        Public Property ApprovalHistory As List(Of IEmployeeLeaveApprovalHistoryView) Implements IEmployeeLeaveView.ApprovalHistory
+        Public Property ApprovalHistory As List(Of IHolidayTransferAvailmentApprovalHistoryView) Implements IHolidayTransferAvailmentView.ApprovalHistory
             Get
                 Return _approvalHistory
             End Get
-            Set(value As List(Of IEmployeeLeaveApprovalHistoryView))
+            Set(value As List(Of IHolidayTransferAvailmentApprovalHistoryView))
                 _approvalHistory = value
                 BindApprovalLeaveHistory()
             End Set
@@ -197,14 +143,14 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub BindApprovalLeaveHistory()
             SuspendLayout()
-            bsEmployeeLeaveApprovalHistory.DataSource = Nothing
+            bsHolidayTransferAvailmentApprovalHistory.DataSource = Nothing
             DataGridViewApprovalHistory.ShowInsertColumnWhenEditing = False
             DataGridViewApprovalHistory.Refresh()
-            bsEmployeeLeaveApprovalHistory.DataSource = ApprovalHistory
-            bsEmployeeLeaveApprovalHistory.AllowNew = True
+            bsHolidayTransferAvailmentApprovalHistory.DataSource = ApprovalHistory
+            bsHolidayTransferAvailmentApprovalHistory.AllowNew = True
             With DataGridViewApprovalHistory
                 .AutoGenerateColumns = False
-                .DataSource = bsEmployeeLeaveApprovalHistory
+                .DataSource = bsHolidayTransferAvailmentApprovalHistory
                 .RemoveInsertColumn()
             End With
             With DataGridViewApprovalHistory.Columns

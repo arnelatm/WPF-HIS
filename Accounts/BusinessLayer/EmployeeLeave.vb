@@ -24,7 +24,7 @@ Namespace BusinessLayer
 
         End Sub
 
-        Public Property AppliedBy As Int32
+        Public Property EnteredBy As Int32
         Public Property DateCreated As DateTime?
         Public Property EmployeeIdNo As Int32
         Public Property EndDate As DateTime

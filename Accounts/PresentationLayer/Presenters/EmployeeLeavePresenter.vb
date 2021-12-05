@@ -24,7 +24,7 @@ Namespace PresentationLayer.Presenters
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             View.FullDay = True
             View.EmployeeIdNo = Service.GetField(Of Int32, Int32)(GlobalVariables.UserIdNo, "User", "IdNo", "EmployeeIdNo")
-            View.AppliedBy = GlobalVariables.UserIdNo
+            View.EnteredBy = GlobalVariables.UserIdNo
             View.StartDate = Today()
             View.EndDate = Today()
         End Sub
@@ -59,7 +59,7 @@ Namespace PresentationLayer.Presenters
                 Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
                 CreateDataSource("Employee", "EmployeeIdNo", "IdNo = " + employeeIdNo.ToString())
             End If
-            CreateDataSource("User", "AppliedBy", {"IdNo", "UserName"})
+            CreateDataSource("User", "EnteredBy", {"IdNo", "UserName"})
             CreateDataSource("Leave", "LeaveIdNo")
             CreateEnumDataSource(Of LeaveStatusSelection)("LeaveStatus")
             CreateEnumData(Of LeaveStatusSelection)(View.LeaveStatusList)
