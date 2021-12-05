@@ -16,7 +16,7 @@ Namespace DataLayer.AdoNet
             Implements IDao(Of HolidayTransfer).GetRecordByIdNo
             Dim sql As String =
                     "SELECT " &
-                    "a.AppliedBy," &
+                    "a.EnteredBy," &
                     "a.DateCreated," &
                     "b.HolidayDate," &
                     "a.HolidayIdNo," &
@@ -40,7 +40,7 @@ Namespace DataLayer.AdoNet
             Implements IDao(Of HolidayTransfer).UpdateRecord
             Dim sql As String =
                     "UPDATE [HolidayTransfer] SET " &
-                    "AppliedBy = @AppliedBy," &
+                    "EnteredBy = @EnteredBy," &
                     "HolidayIdNo = @HolidayIdNo" &
                     " WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(holidayTransfer))
@@ -51,10 +51,10 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " INSERT INTO [HolidayTransfer] " &
                     "(" &
-                    "AppliedBy," &
+                    "EnteredBy," &
                     "HolidayIdNo" &
                     ") VALUES (" &
-                    "@AppliedBy," &
+                    "@EnteredBy," &
                     "@HolidayIdNo" &
                     ")"
             Return _db.Insert(sql, Take(holidayTransfer))
@@ -63,14 +63,14 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, HolidayTransfer) =
                                     Function(reader) _
             New HolidayTransfer() With {
-            .AppliedBy = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("AppliedBy")),
+            .EnteredBy = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("EnteredBy")),
             .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("DateCreated")),
             .HolidayIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("HolidayIdNo")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo"))
             }
 
         Private Function Take(holidayTransfer As HolidayTransfer) As Object()
-            Return New Object() {"@AppliedBy", holidayTransfer.AppliedBy,
+            Return New Object() {"@EnteredBy", holidayTransfer.EnteredBy,
                                  "@HolidayIdNo", holidayTransfer.HolidayIdNo,
                                  "@IdNo", holidayTransfer.IdNo
                                  }

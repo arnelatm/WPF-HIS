@@ -1133,6 +1133,10 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of BulkHolidayTransferEntry, HolidayTransferPresenter(Of HolidayTransferModel))()
         End Sub
 
+        Private Sub ToolStripMenuItemHolidayTransferAvailment_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemHolidayTransferAvailment.Click
+            RunForm(Of HolidayAvailmentEntry, HolidayAvailmentPresenter(Of HolidayAvailmentModel))()
+        End Sub
+
     End Class
 
 End Namespace

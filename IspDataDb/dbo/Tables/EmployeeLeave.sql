@@ -5,7 +5,7 @@
     [StartDate]     DATETIME       NOT NULL,
     [EndDate]       DATETIME       NOT NULL,
     [FullDay]       BIT            NULL,
-    [AppliedBy]     INT            NOT NULL,
+    [EnteredBy]     INT            NOT NULL,
     [LeaveReason]   NVARCHAR (200) NULL,
     [DateCreated]   DATETIME       CONSTRAINT [DF_EmployeeLeave_DateCreated] DEFAULT (getdate()) NULL,
     [DateTimeStamp] ROWVERSION     NULL,

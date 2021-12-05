@@ -40,7 +40,7 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Sub CreateDataSources()
             CreateDataSource("Holiday", "HolidayIdNo", {"IdNo", "HolidayName"}, "IdNo", Nothing)
-            CreateDataSource("User", "AppliedBy", {"IdNo", "UserName"})
+            CreateDataSource("User", "EnteredBy", {"IdNo", "UserName"})
             CreateLookupData("Employee", "EmployeeList", "Active=1")
         End Sub
 
@@ -53,7 +53,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
-            View.AppliedBy = GlobalVariables.UserIdNo
+            View.EnteredBy = GlobalVariables.UserIdNo
         End Sub
 
         Private Sub GetUnTransferredHolidays()
@@ -77,7 +77,7 @@ Namespace PresentationLayer.Presenters
                     holidayTransferItems.Add(cHt)
                 End If
             Next
-            View.AppliedBy = GlobalVariables.UserIdNo
+            View.EnteredBy = GlobalVariables.UserIdNo
             GlobalVariables.Mapper.Map(holidayTransferItems, View.HolidayTransferItems)
         End Sub
 

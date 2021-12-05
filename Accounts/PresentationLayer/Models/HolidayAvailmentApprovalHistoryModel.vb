@@ -1,10 +1,12 @@
-﻿' Category business object
-' ** Enterprise Design Pattern: Domain Model, Identity Field
-Imports AATM.BusinessLayer.BusinessRules
+﻿Imports AATM.Libraries
 
-Namespace BusinessLayer
+Namespace PresentationLayer.Models
 
-    Public Class EmployeeLeaveApprovalHistory
+    ''' <summary>
+    '''     The Model in MVP design pattern.
+    '''     Implements IModel and communicates with WCF Service.
+    ''' </summary>
+    Public Class HolidayAvailmentHistoryModel
 
         Public Property ApprovalIdNo As Int32
         Public Property DateCreated As DateTime?

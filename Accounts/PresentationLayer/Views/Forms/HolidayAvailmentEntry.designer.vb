@@ -29,51 +29,36 @@ Namespace PresentationLayer.Views.Forms
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(HolidayAvailmentEntry))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.dtpStartDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.lblLeaveName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblFullDay = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.chkFullDay = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-        Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.dtpEndDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-        Me.lblLeaveReason = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtLeaveReason = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblLeaveStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboLeaveStatus = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.btnHistory = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.lblAppliedBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboAppliedBy = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboHolidayTransferIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.lblHolidayIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboHolidayIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.lblAvailmentDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.dtpAvailmentDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
+        Me.lblStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboStatus = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.lblenteredBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.DataGridViewApprovalHistory = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.bsHolidayAvailmentApproval = New System.Windows.Forms.BindingSource(Me.components)
-        Me.bsHolidayAvailmentApprovalHistory = New System.Windows.Forms.BindingSource(Me.components)
         Me.dgvApprovalIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvItemIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvDateCreated = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvEnteredBy = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
-        Me.dgvNote = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvLeaveStatus = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         Me.HolidayAvailmentIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.bsHolidayAvailmentApprovalHistory = New System.Windows.Forms.BindingSource(Me.components)
+        Me.bsHolidayAvailmentApproval = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout2.SuspendLayout
         CType(Me.DataGridViewApprovalHistory,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.bsHolidayAvailmentApproval,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.bsHolidayAvailmentApprovalHistory,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.bsHolidayAvailmentApproval,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'TranslatorDAC
@@ -170,38 +155,6 @@ Namespace PresentationLayer.Views.Forms
         Me.cboEmployeeIdNo.ValueIsNumeric = false
         Me.cboEmployeeIdNo.ValueMember = "IdNo"
         '
-        'lblStartDate
-        '
-        Me.lblStartDate.BackColor = System.Drawing.Color.Transparent
-        Me.lblStartDate.DisplayOnly = true
-        Me.lblStartDate.EditingMode = false
-        resources.ApplyResources(Me.lblStartDate, "lblStartDate")
-        Me.lblStartDate.Name = "lblStartDate"
-        Me.lblStartDate.Translatable = true
-        '
-        'dtpStartDate
-        '
-        Me.dtpStartDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-        Me.dtpStartDate.DefaultValue = Nothing
-        Me.dtpStartDate.DisplayOnly = false
-        Me.dtpStartDate.DtpDefaultValue = Nothing
-        Me.dtpStartDate.EditingMode = true
-        Me.dtpStartDate.EditsAllowed = false
-        Me.CFlowLayout2.SetFlowBreak(Me.dtpStartDate, true)
-        Me.dtpStartDate.ForeColor = System.Drawing.Color.Black
-        Me.dtpStartDate.LinkedLabel = Me.lblStartDate
-        resources.ApplyResources(Me.dtpStartDate, "dtpStartDate")
-        Me.dtpStartDate.Name = "dtpStartDate"
-        Me.dtpStartDate.ReadOnlyDp = false
-        Me.dtpStartDate.SecurityKey = Nothing
-        Me.dtpStartDate.ShowLongDate = false
-        Me.dtpStartDate.ShowTime = false
-        Me.dtpStartDate.TargetCalendar = Nothing
-        Me.dtpStartDate.Translatable = false
-        Me.dtpStartDate.Value = Nothing
-        Me.dtpStartDate.ValueIsMandatory = false
-        Me.dtpStartDate.ValueIsNullable = false
-        '
         'lblDateCreated
         '
         Me.lblDateCreated.BackColor = System.Drawing.Color.Transparent
@@ -246,21 +199,16 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout2.Controls.Add(Me.TxtIdNo)
         Me.CFlowLayout2.Controls.Add(Me.lblEmployeeIdNo)
         Me.CFlowLayout2.Controls.Add(Me.cboEmployeeIdNo)
-        Me.CFlowLayout2.Controls.Add(Me.lblLeaveName)
-        Me.CFlowLayout2.Controls.Add(Me.cboLeaveIdNo)
-        Me.CFlowLayout2.Controls.Add(Me.lblFullDay)
-        Me.CFlowLayout2.Controls.Add(Me.chkFullDay)
-        Me.CFlowLayout2.Controls.Add(Me.lblStartDate)
-        Me.CFlowLayout2.Controls.Add(Me.dtpStartDate)
-        Me.CFlowLayout2.Controls.Add(Me.lblEndDate)
-        Me.CFlowLayout2.Controls.Add(Me.dtpEndDate)
-        Me.CFlowLayout2.Controls.Add(Me.lblLeaveReason)
-        Me.CFlowLayout2.Controls.Add(Me.txtLeaveReason)
-        Me.CFlowLayout2.Controls.Add(Me.lblLeaveStatus)
-        Me.CFlowLayout2.Controls.Add(Me.cboLeaveStatus)
-        Me.CFlowLayout2.Controls.Add(Me.btnHistory)
-        Me.CFlowLayout2.Controls.Add(Me.lblAppliedBy)
-        Me.CFlowLayout2.Controls.Add(Me.cboAppliedBy)
+        Me.CFlowLayout2.Controls.Add(Me.CLabel2)
+        Me.CFlowLayout2.Controls.Add(Me.cboHolidayTransferIdNo)
+        Me.CFlowLayout2.Controls.Add(Me.lblHolidayIdNo)
+        Me.CFlowLayout2.Controls.Add(Me.cboHolidayIdNo)
+        Me.CFlowLayout2.Controls.Add(Me.lblAvailmentDate)
+        Me.CFlowLayout2.Controls.Add(Me.dtpAvailmentDate)
+        Me.CFlowLayout2.Controls.Add(Me.lblStatus)
+        Me.CFlowLayout2.Controls.Add(Me.cboStatus)
+        Me.CFlowLayout2.Controls.Add(Me.lblenteredBy)
+        Me.CFlowLayout2.Controls.Add(Me.cboenteredBy)
         Me.CFlowLayout2.Controls.Add(Me.lblDateCreated)
         Me.CFlowLayout2.Controls.Add(Me.txtDateCreated)
         Me.CFlowLayout2.Controls.Add(Me.CLabel1)
@@ -268,264 +216,237 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.CFlowLayout2, "CFlowLayout2")
         Me.CFlowLayout2.Name = "CFlowLayout2"
         '
-        'lblLeaveName
+        'CLabel2
         '
-        Me.lblLeaveName.BackColor = System.Drawing.Color.Transparent
-        Me.lblLeaveName.DisplayOnly = true
-        Me.lblLeaveName.EditingMode = false
-        resources.ApplyResources(Me.lblLeaveName, "lblLeaveName")
-        Me.lblLeaveName.Name = "lblLeaveName"
-        Me.lblLeaveName.Translatable = true
+        Me.CLabel2.BackColor = System.Drawing.Color.Transparent
+        Me.CLabel2.DisplayOnly = true
+        Me.CLabel2.EditingMode = false
+        resources.ApplyResources(Me.CLabel2, "CLabel2")
+        Me.CLabel2.Name = "CLabel2"
+        Me.CLabel2.Translatable = true
         '
-        'cboLeaveIdNo
+        'cboHolidayTransferIdNo
         '
-        Me.cboLeaveIdNo.BackColor = System.Drawing.Color.White
-        Me.cboLeaveIdNo.BegFindValue = Nothing
-        Me.cboLeaveIdNo.ChangingSearchValueOnly = false
-        Me.cboLeaveIdNo.CurrentSearchTerm = ""
-        Me.cboLeaveIdNo.DefaultValue = Nothing
-        Me.cboLeaveIdNo.DisplayMember = "Name"
-        Me.cboLeaveIdNo.EditingMode = true
-        Me.cboLeaveIdNo.EndFindValue = Nothing
-        Me.cboLeaveIdNo.FieldDescription = Nothing
-        Me.cboLeaveIdNo.FieldName = Nothing
-        Me.cboLeaveIdNo.FilterRule = Nothing
-        Me.cboLeaveIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboLeaveIdNo.FindEnabled = true
-        Me.CFlowLayout2.SetFlowBreak(Me.cboLeaveIdNo, true)
-        resources.ApplyResources(Me.cboLeaveIdNo, "cboLeaveIdNo")
-        Me.cboLeaveIdNo.ForeColor = System.Drawing.Color.Black
-        Me.cboLeaveIdNo.FormattingEnabled = true
-        Me.cboLeaveIdNo.HideWhenNotEditingOrAdding = false
-        Me.cboLeaveIdNo.IgnoreCase = false
-        Me.cboLeaveIdNo.LinkedLabel = Me.lblLeaveName
-        Me.cboLeaveIdNo.Name = "cboLeaveIdNo"
-        Me.cboLeaveIdNo.OldValue = 0
-        Me.cboLeaveIdNo.OriginalDataSource = Nothing
-        Me.cboLeaveIdNo.OriginalList = Nothing
-        Me.cboLeaveIdNo.OverrideDropDownStyleList = false
-        Me.cboLeaveIdNo.PreviousSearchTerm = Nothing
-        Me.cboLeaveIdNo.PropertySelector = Nothing
-        Me.cboLeaveIdNo.ReadOnlyCombo = false
-        Me.cboLeaveIdNo.SuggestBoxHeight = 200
-        Me.cboLeaveIdNo.SuggestListOrderRule = Nothing
-        Me.cboLeaveIdNo.TextToSearch = Nothing
-        Me.cboLeaveIdNo.Translatable = false
-        Me.cboLeaveIdNo.ValueIsMandatory = false
-        Me.cboLeaveIdNo.ValueIsNullable = false
-        Me.cboLeaveIdNo.ValueIsNumeric = false
-        Me.cboLeaveIdNo.ValueMember = "IdNo"
+        Me.cboHolidayTransferIdNo.BackColor = System.Drawing.Color.White
+        Me.cboHolidayTransferIdNo.BegFindValue = Nothing
+        Me.cboHolidayTransferIdNo.ChangingSearchValueOnly = false
+        Me.cboHolidayTransferIdNo.CurrentSearchTerm = ""
+        Me.cboHolidayTransferIdNo.DefaultValue = Nothing
+        Me.cboHolidayTransferIdNo.DisplayMember = "Name"
+        Me.cboHolidayTransferIdNo.EditingMode = true
+        Me.cboHolidayTransferIdNo.EndFindValue = Nothing
+        Me.cboHolidayTransferIdNo.FieldDescription = Nothing
+        Me.cboHolidayTransferIdNo.FieldName = Nothing
+        Me.cboHolidayTransferIdNo.FilterRule = Nothing
+        Me.cboHolidayTransferIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboHolidayTransferIdNo.FindEnabled = true
+        Me.CFlowLayout2.SetFlowBreak(Me.cboHolidayTransferIdNo, true)
+        resources.ApplyResources(Me.cboHolidayTransferIdNo, "cboHolidayTransferIdNo")
+        Me.cboHolidayTransferIdNo.ForeColor = System.Drawing.Color.Black
+        Me.cboHolidayTransferIdNo.FormattingEnabled = true
+        Me.cboHolidayTransferIdNo.HideWhenNotEditingOrAdding = false
+        Me.cboHolidayTransferIdNo.IgnoreCase = false
+        Me.cboHolidayTransferIdNo.LinkedLabel = Me.lblEmployeeIdNo
+        Me.cboHolidayTransferIdNo.Name = "cboHolidayTransferIdNo"
+        Me.cboHolidayTransferIdNo.OldValue = 0
+        Me.cboHolidayTransferIdNo.OriginalDataSource = Nothing
+        Me.cboHolidayTransferIdNo.OriginalList = Nothing
+        Me.cboHolidayTransferIdNo.OverrideDropDownStyleList = false
+        Me.cboHolidayTransferIdNo.PreviousSearchTerm = Nothing
+        Me.cboHolidayTransferIdNo.PropertySelector = Nothing
+        Me.cboHolidayTransferIdNo.ReadOnlyCombo = false
+        Me.cboHolidayTransferIdNo.SuggestBoxHeight = 200
+        Me.cboHolidayTransferIdNo.SuggestListOrderRule = Nothing
+        Me.cboHolidayTransferIdNo.TextToSearch = Nothing
+        Me.cboHolidayTransferIdNo.Translatable = false
+        Me.cboHolidayTransferIdNo.ValueIsMandatory = false
+        Me.cboHolidayTransferIdNo.ValueIsNullable = false
+        Me.cboHolidayTransferIdNo.ValueIsNumeric = false
+        Me.cboHolidayTransferIdNo.ValueMember = "IdNo"
         '
-        'lblFullDay
+        'lblHolidayIdNo
         '
-        Me.lblFullDay.BackColor = System.Drawing.Color.Transparent
-        Me.lblFullDay.DisplayOnly = true
-        Me.lblFullDay.EditingMode = false
-        resources.ApplyResources(Me.lblFullDay, "lblFullDay")
-        Me.lblFullDay.Name = "lblFullDay"
-        Me.lblFullDay.Translatable = true
+        Me.lblHolidayIdNo.BackColor = System.Drawing.Color.Transparent
+        Me.lblHolidayIdNo.DisplayOnly = true
+        Me.lblHolidayIdNo.EditingMode = false
+        resources.ApplyResources(Me.lblHolidayIdNo, "lblHolidayIdNo")
+        Me.lblHolidayIdNo.Name = "lblHolidayIdNo"
+        Me.lblHolidayIdNo.Translatable = true
         '
-        'chkFullDay
+        'cboHolidayIdNo
         '
-        Me.chkFullDay.BackColor = System.Drawing.Color.White
-        Me.chkFullDay.BegFindValue = Nothing
-        Me.chkFullDay.DisplayOnly = false
-        Me.chkFullDay.EditingMode = true
-        Me.chkFullDay.EndFindValue = Nothing
-        Me.chkFullDay.FieldDescription = Nothing
-        Me.chkFullDay.FieldName = Nothing
-        Me.chkFullDay.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.chkFullDay.FindEnabled = true
-        resources.ApplyResources(Me.chkFullDay, "chkFullDay")
-        Me.CFlowLayout2.SetFlowBreak(Me.chkFullDay, true)
-        Me.chkFullDay.ForeColor = System.Drawing.Color.Black
-        Me.chkFullDay.IFindableControl_FindEnabled = false
-        Me.chkFullDay.IgnoreCase = false
-        Me.chkFullDay.LinkedLabel = Me.lblFullDay
-        Me.chkFullDay.Name = "chkFullDay"
-        Me.chkFullDay.NoLabel = true
-        Me.chkFullDay.OldValue = Nothing
-        Me.chkFullDay.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.chkFullDay.Translatable = false
-        Me.chkFullDay.UseVisualStyleBackColor = false
+        Me.cboHolidayIdNo.BackColor = System.Drawing.Color.White
+        Me.cboHolidayIdNo.BegFindValue = Nothing
+        Me.cboHolidayIdNo.ChangingSearchValueOnly = false
+        Me.cboHolidayIdNo.CurrentSearchTerm = ""
+        Me.cboHolidayIdNo.DefaultValue = Nothing
+        Me.cboHolidayIdNo.DisplayMember = "Name"
+        Me.cboHolidayIdNo.DisplayOnly = true
+        Me.cboHolidayIdNo.DropDownHeight = 30
+        Me.cboHolidayIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+        Me.cboHolidayIdNo.EditingMode = true
+        Me.cboHolidayIdNo.EndFindValue = Nothing
+        Me.cboHolidayIdNo.FieldDescription = Nothing
+        Me.cboHolidayIdNo.FieldName = Nothing
+        Me.cboHolidayIdNo.FilterRule = Nothing
+        Me.cboHolidayIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboHolidayIdNo.FindEnabled = true
+        Me.CFlowLayout2.SetFlowBreak(Me.cboHolidayIdNo, true)
+        resources.ApplyResources(Me.cboHolidayIdNo, "cboHolidayIdNo")
+        Me.cboHolidayIdNo.ForeColor = System.Drawing.Color.Black
+        Me.cboHolidayIdNo.FormattingEnabled = true
+        Me.cboHolidayIdNo.HideWhenNotEditingOrAdding = false
+        Me.cboHolidayIdNo.IgnoreCase = false
+        Me.cboHolidayIdNo.LinkedLabel = Me.lblHolidayIdNo
+        Me.cboHolidayIdNo.Name = "cboHolidayIdNo"
+        Me.cboHolidayIdNo.OldValue = 0
+        Me.cboHolidayIdNo.OriginalDataSource = Nothing
+        Me.cboHolidayIdNo.OriginalList = Nothing
+        Me.cboHolidayIdNo.OverrideDropDownStyleList = false
+        Me.cboHolidayIdNo.PreviousSearchTerm = Nothing
+        Me.cboHolidayIdNo.PropertySelector = Nothing
+        Me.cboHolidayIdNo.ReadOnlyCombo = true
+        Me.cboHolidayIdNo.SuggestBoxHeight = 200
+        Me.cboHolidayIdNo.SuggestListOrderRule = Nothing
+        Me.cboHolidayIdNo.TextToSearch = Nothing
+        Me.cboHolidayIdNo.Translatable = false
+        Me.cboHolidayIdNo.ValueIsMandatory = false
+        Me.cboHolidayIdNo.ValueIsNullable = false
+        Me.cboHolidayIdNo.ValueIsNumeric = false
+        Me.cboHolidayIdNo.ValueMember = "Code"
         '
-        'lblEndDate
+        'lblAvailmentDate
         '
-        Me.lblEndDate.BackColor = System.Drawing.Color.Transparent
-        Me.lblEndDate.DisplayOnly = true
-        Me.lblEndDate.EditingMode = false
-        resources.ApplyResources(Me.lblEndDate, "lblEndDate")
-        Me.lblEndDate.Name = "lblEndDate"
-        Me.lblEndDate.Translatable = true
+        Me.lblAvailmentDate.BackColor = System.Drawing.Color.Transparent
+        Me.lblAvailmentDate.DisplayOnly = true
+        Me.lblAvailmentDate.EditingMode = false
+        resources.ApplyResources(Me.lblAvailmentDate, "lblAvailmentDate")
+        Me.lblAvailmentDate.Name = "lblAvailmentDate"
+        Me.lblAvailmentDate.Translatable = true
         '
-        'dtpEndDate
+        'dtpAvailmentDate
         '
-        Me.dtpEndDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-        Me.dtpEndDate.DefaultValue = Nothing
-        Me.dtpEndDate.DisplayOnly = false
-        Me.dtpEndDate.DtpDefaultValue = Nothing
-        Me.dtpEndDate.EditingMode = true
-        Me.dtpEndDate.EditsAllowed = false
-        Me.CFlowLayout2.SetFlowBreak(Me.dtpEndDate, true)
-        Me.dtpEndDate.ForeColor = System.Drawing.Color.Black
-        Me.dtpEndDate.LinkedLabel = Me.lblEndDate
-        resources.ApplyResources(Me.dtpEndDate, "dtpEndDate")
-        Me.dtpEndDate.Name = "dtpEndDate"
-        Me.dtpEndDate.ReadOnlyDp = false
-        Me.dtpEndDate.SecurityKey = Nothing
-        Me.dtpEndDate.ShowLongDate = false
-        Me.dtpEndDate.ShowTime = false
-        Me.dtpEndDate.TargetCalendar = Nothing
-        Me.dtpEndDate.Translatable = false
-        Me.dtpEndDate.Value = Nothing
-        Me.dtpEndDate.ValueIsMandatory = false
-        Me.dtpEndDate.ValueIsNullable = false
+        Me.dtpAvailmentDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+        Me.dtpAvailmentDate.DefaultValue = Nothing
+        Me.dtpAvailmentDate.DisplayOnly = false
+        Me.dtpAvailmentDate.DtpDefaultValue = Nothing
+        Me.dtpAvailmentDate.EditingMode = true
+        Me.dtpAvailmentDate.EditsAllowed = false
+        Me.CFlowLayout2.SetFlowBreak(Me.dtpAvailmentDate, true)
+        Me.dtpAvailmentDate.ForeColor = System.Drawing.Color.Black
+        Me.dtpAvailmentDate.LinkedLabel = Me.lblAvailmentDate
+        resources.ApplyResources(Me.dtpAvailmentDate, "dtpAvailmentDate")
+        Me.dtpAvailmentDate.Name = "dtpAvailmentDate"
+        Me.dtpAvailmentDate.ReadOnlyDp = false
+        Me.dtpAvailmentDate.SecurityKey = Nothing
+        Me.dtpAvailmentDate.ShowLongDate = false
+        Me.dtpAvailmentDate.ShowTime = false
+        Me.dtpAvailmentDate.TargetCalendar = Nothing
+        Me.dtpAvailmentDate.Translatable = false
+        Me.dtpAvailmentDate.Value = Nothing
+        Me.dtpAvailmentDate.ValueIsMandatory = false
+        Me.dtpAvailmentDate.ValueIsNullable = false
         '
-        'lblLeaveReason
+        'lblStatus
         '
-        Me.lblLeaveReason.BackColor = System.Drawing.Color.Transparent
-        Me.lblLeaveReason.DisplayOnly = true
-        Me.lblLeaveReason.EditingMode = false
-        resources.ApplyResources(Me.lblLeaveReason, "lblLeaveReason")
-        Me.lblLeaveReason.Name = "lblLeaveReason"
-        Me.lblLeaveReason.Translatable = true
+        Me.lblStatus.BackColor = System.Drawing.Color.Transparent
+        Me.lblStatus.DisplayOnly = true
+        Me.lblStatus.EditingMode = false
+        resources.ApplyResources(Me.lblStatus, "lblStatus")
+        Me.lblStatus.Name = "lblStatus"
+        Me.lblStatus.Translatable = true
         '
-        'txtLeaveReason
+        'cboStatus
         '
-        Me.txtLeaveReason.BackColor = System.Drawing.Color.White
-        Me.txtLeaveReason.BegFindValue = Nothing
-        Me.txtLeaveReason.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtLeaveReason.ComputedValue = false
-        Me.txtLeaveReason.CustomFormat = Nothing
-        Me.txtLeaveReason.DataBoundControl = true
-        Me.txtLeaveReason.EditingMode = true
-        Me.txtLeaveReason.EndFindValue = Nothing
-        Me.txtLeaveReason.FieldDescription = Nothing
-        Me.txtLeaveReason.FieldName = Nothing
-        Me.txtLeaveReason.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtLeaveReason.FindEnabled = true
-        Me.CFlowLayout2.SetFlowBreak(Me.txtLeaveReason, true)
-        resources.ApplyResources(Me.txtLeaveReason, "txtLeaveReason")
-        Me.txtLeaveReason.ForeColor = System.Drawing.Color.Black
-        Me.txtLeaveReason.LinkedLabel = Me.lblLeaveReason
-        Me.txtLeaveReason.MaximumValue = Nothing
-        Me.txtLeaveReason.MinimumValue = Nothing
-        Me.txtLeaveReason.Name = "txtLeaveReason"
-        Me.txtLeaveReason.OldValue = Nothing
-        Me.txtLeaveReason.ReadOnly = true
-        Me.txtLeaveReason.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtLeaveReason.Translatable = false
-        Me.txtLeaveReason.ValueIsMandatory = true
+        Me.cboStatus.BackColor = System.Drawing.Color.White
+        Me.cboStatus.BegFindValue = Nothing
+        Me.cboStatus.ChangingSearchValueOnly = false
+        Me.cboStatus.CurrentSearchTerm = ""
+        Me.cboStatus.DefaultValue = Nothing
+        Me.cboStatus.DisplayMember = "Name"
+        Me.cboStatus.DisplayOnly = true
+        Me.cboStatus.DropDownHeight = 24
+        Me.cboStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+        Me.cboStatus.EditingMode = true
+        Me.cboStatus.EndFindValue = Nothing
+        Me.cboStatus.FieldDescription = Nothing
+        Me.cboStatus.FieldName = Nothing
+        Me.cboStatus.FilterRule = Nothing
+        Me.cboStatus.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboStatus.FindEnabled = true
+        resources.ApplyResources(Me.cboStatus, "cboStatus")
+        Me.cboStatus.ForeColor = System.Drawing.Color.Black
+        Me.cboStatus.FormattingEnabled = true
+        Me.cboStatus.HideWhenNotEditingOrAdding = false
+        Me.cboStatus.IgnoreCase = false
+        Me.cboStatus.LinkedLabel = Me.lblStatus
+        Me.cboStatus.Name = "cboStatus"
+        Me.cboStatus.OldValue = 0
+        Me.cboStatus.OriginalDataSource = Nothing
+        Me.cboStatus.OriginalList = Nothing
+        Me.cboStatus.OverrideDropDownStyleList = false
+        Me.cboStatus.PreviousSearchTerm = Nothing
+        Me.cboStatus.PropertySelector = Nothing
+        Me.cboStatus.ReadOnlyCombo = true
+        Me.cboStatus.SuggestBoxHeight = 200
+        Me.cboStatus.SuggestListOrderRule = Nothing
+        Me.cboStatus.TextToSearch = Nothing
+        Me.cboStatus.Translatable = false
+        Me.cboStatus.ValueIsMandatory = false
+        Me.cboStatus.ValueIsNullable = false
+        Me.cboStatus.ValueIsNumeric = false
+        Me.cboStatus.ValueMember = "Code"
         '
-        'lblLeaveStatus
+        'lblenteredBy
         '
-        Me.lblLeaveStatus.BackColor = System.Drawing.Color.Transparent
-        Me.lblLeaveStatus.DisplayOnly = true
-        Me.lblLeaveStatus.EditingMode = false
-        resources.ApplyResources(Me.lblLeaveStatus, "lblLeaveStatus")
-        Me.lblLeaveStatus.Name = "lblLeaveStatus"
-        Me.lblLeaveStatus.Translatable = true
+        Me.lblenteredBy.BackColor = System.Drawing.Color.Transparent
+        Me.lblenteredBy.DisplayOnly = true
+        Me.lblenteredBy.EditingMode = false
+        resources.ApplyResources(Me.lblenteredBy, "lblenteredBy")
+        Me.lblenteredBy.Name = "lblenteredBy"
+        Me.lblenteredBy.Translatable = true
         '
-        'cboLeaveStatus
+        'cboenteredBy
         '
-        Me.cboLeaveStatus.BackColor = System.Drawing.Color.White
-        Me.cboLeaveStatus.BegFindValue = Nothing
-        Me.cboLeaveStatus.ChangingSearchValueOnly = false
-        Me.cboLeaveStatus.CurrentSearchTerm = ""
-        Me.cboLeaveStatus.DefaultValue = Nothing
-        Me.cboLeaveStatus.DisplayMember = "Name"
-        Me.cboLeaveStatus.DisplayOnly = true
-        Me.cboLeaveStatus.DropDownHeight = 24
-        Me.cboLeaveStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
-        Me.cboLeaveStatus.EditingMode = true
-        Me.cboLeaveStatus.EndFindValue = Nothing
-        Me.cboLeaveStatus.FieldDescription = Nothing
-        Me.cboLeaveStatus.FieldName = Nothing
-        Me.cboLeaveStatus.FilterRule = Nothing
-        Me.cboLeaveStatus.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboLeaveStatus.FindEnabled = true
-        resources.ApplyResources(Me.cboLeaveStatus, "cboLeaveStatus")
-        Me.cboLeaveStatus.ForeColor = System.Drawing.Color.Black
-        Me.cboLeaveStatus.FormattingEnabled = true
-        Me.cboLeaveStatus.HideWhenNotEditingOrAdding = false
-        Me.cboLeaveStatus.IgnoreCase = false
-        Me.cboLeaveStatus.LinkedLabel = Me.lblLeaveStatus
-        Me.cboLeaveStatus.Name = "cboLeaveStatus"
-        Me.cboLeaveStatus.OldValue = 0
-        Me.cboLeaveStatus.OriginalDataSource = Nothing
-        Me.cboLeaveStatus.OriginalList = Nothing
-        Me.cboLeaveStatus.OverrideDropDownStyleList = false
-        Me.cboLeaveStatus.PreviousSearchTerm = Nothing
-        Me.cboLeaveStatus.PropertySelector = Nothing
-        Me.cboLeaveStatus.ReadOnlyCombo = true
-        Me.cboLeaveStatus.SuggestBoxHeight = 200
-        Me.cboLeaveStatus.SuggestListOrderRule = Nothing
-        Me.cboLeaveStatus.TextToSearch = Nothing
-        Me.cboLeaveStatus.Translatable = false
-        Me.cboLeaveStatus.ValueIsMandatory = false
-        Me.cboLeaveStatus.ValueIsNullable = false
-        Me.cboLeaveStatus.ValueIsNumeric = false
-        Me.cboLeaveStatus.ValueMember = "Code"
-        '
-        'btnHistory
-        '
-        Me.btnHistory.DesignerSelected = false
-        resources.ApplyResources(Me.btnHistory, "btnHistory")
-        Me.btnHistory.ImageIndex = 0
-        Me.btnHistory.Name = "btnHistory"
-        Me.btnHistory.OriginalImageName = Nothing
-        Me.btnHistory.SecurityKey = ""
-        '
-        'lblAppliedBy
-        '
-        Me.lblAppliedBy.BackColor = System.Drawing.Color.Transparent
-        Me.lblAppliedBy.DisplayOnly = true
-        Me.lblAppliedBy.EditingMode = false
-        resources.ApplyResources(Me.lblAppliedBy, "lblAppliedBy")
-        Me.lblAppliedBy.Name = "lblAppliedBy"
-        Me.lblAppliedBy.Translatable = true
-        '
-        'cboAppliedBy
-        '
-        Me.cboAppliedBy.BackColor = System.Drawing.Color.White
-        Me.cboAppliedBy.BegFindValue = Nothing
-        Me.cboAppliedBy.ChangingSearchValueOnly = false
-        Me.cboAppliedBy.CurrentSearchTerm = ""
-        Me.cboAppliedBy.DefaultValue = Nothing
-        Me.cboAppliedBy.DisplayMember = "Name"
-        Me.cboAppliedBy.DisplayOnly = true
-        Me.cboAppliedBy.DropDownHeight = 24
-        Me.cboAppliedBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
-        Me.cboAppliedBy.EditingMode = true
-        Me.cboAppliedBy.EndFindValue = Nothing
-        Me.cboAppliedBy.FieldDescription = Nothing
-        Me.cboAppliedBy.FieldName = Nothing
-        Me.cboAppliedBy.FilterRule = Nothing
-        Me.cboAppliedBy.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboAppliedBy.FindEnabled = true
-        Me.CFlowLayout2.SetFlowBreak(Me.cboAppliedBy, true)
-        resources.ApplyResources(Me.cboAppliedBy, "cboAppliedBy")
-        Me.cboAppliedBy.ForeColor = System.Drawing.Color.Black
-        Me.cboAppliedBy.FormattingEnabled = true
-        Me.cboAppliedBy.HideWhenNotEditingOrAdding = false
-        Me.cboAppliedBy.IgnoreCase = false
-        Me.cboAppliedBy.LinkedLabel = Me.lblEmployeeIdNo
-        Me.cboAppliedBy.Name = "cboAppliedBy"
-        Me.cboAppliedBy.OldValue = 0
-        Me.cboAppliedBy.OriginalDataSource = Nothing
-        Me.cboAppliedBy.OriginalList = Nothing
-        Me.cboAppliedBy.OverrideDropDownStyleList = false
-        Me.cboAppliedBy.PreviousSearchTerm = Nothing
-        Me.cboAppliedBy.PropertySelector = Nothing
-        Me.cboAppliedBy.ReadOnlyCombo = true
-        Me.cboAppliedBy.SuggestBoxHeight = 200
-        Me.cboAppliedBy.SuggestListOrderRule = Nothing
-        Me.cboAppliedBy.TextToSearch = Nothing
-        Me.cboAppliedBy.Translatable = false
-        Me.cboAppliedBy.ValueIsMandatory = false
-        Me.cboAppliedBy.ValueIsNullable = false
-        Me.cboAppliedBy.ValueIsNumeric = false
-        Me.cboAppliedBy.ValueMember = "IdNo"
+        Me.cboenteredBy.BackColor = System.Drawing.Color.White
+        Me.cboenteredBy.BegFindValue = Nothing
+        Me.cboenteredBy.ChangingSearchValueOnly = false
+        Me.cboenteredBy.CurrentSearchTerm = ""
+        Me.cboenteredBy.DefaultValue = Nothing
+        Me.cboenteredBy.DisplayMember = "Name"
+        Me.cboenteredBy.DisplayOnly = true
+        Me.cboenteredBy.DropDownHeight = 24
+        Me.cboenteredBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+        Me.cboenteredBy.EditingMode = true
+        Me.cboenteredBy.EndFindValue = Nothing
+        Me.cboenteredBy.FieldDescription = Nothing
+        Me.cboenteredBy.FieldName = Nothing
+        Me.cboenteredBy.FilterRule = Nothing
+        Me.cboenteredBy.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboenteredBy.FindEnabled = true
+        Me.CFlowLayout2.SetFlowBreak(Me.cboenteredBy, true)
+        resources.ApplyResources(Me.cboenteredBy, "cboenteredBy")
+        Me.cboenteredBy.ForeColor = System.Drawing.Color.Black
+        Me.cboenteredBy.FormattingEnabled = true
+        Me.cboenteredBy.HideWhenNotEditingOrAdding = false
+        Me.cboenteredBy.IgnoreCase = false
+        Me.cboenteredBy.LinkedLabel = Me.lblEmployeeIdNo
+        Me.cboenteredBy.Name = "cboenteredBy"
+        Me.cboenteredBy.OldValue = 0
+        Me.cboenteredBy.OriginalDataSource = Nothing
+        Me.cboenteredBy.OriginalList = Nothing
+        Me.cboenteredBy.OverrideDropDownStyleList = false
+        Me.cboenteredBy.PreviousSearchTerm = Nothing
+        Me.cboenteredBy.PropertySelector = Nothing
+        Me.cboenteredBy.ReadOnlyCombo = true
+        Me.cboenteredBy.SuggestBoxHeight = 200
+        Me.cboenteredBy.SuggestListOrderRule = Nothing
+        Me.cboenteredBy.TextToSearch = Nothing
+        Me.cboenteredBy.Translatable = false
+        Me.cboenteredBy.ValueIsMandatory = false
+        Me.cboenteredBy.ValueIsNullable = false
+        Me.cboenteredBy.ValueIsNumeric = false
+        Me.cboenteredBy.ValueMember = "IdNo"
         '
         'CLabel1
         '
@@ -543,16 +464,16 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewApprovalHistory.AutoGenerateColumns = false
         Me.DataGridViewApprovalHistory.BegFindValue = Nothing
         Me.DataGridViewApprovalHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewApprovalHistory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvApprovalIdNo, Me.dgvItemIdNo, Me.dgvDateCreated, Me.dgvEnteredBy, Me.dgvNote, Me.dgvLeaveStatus, Me.HolidayAvailmentIdNo})
+        Me.DataGridViewApprovalHistory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvApprovalIdNo, Me.HolidayAvailmentIdNo})
         Me.DataGridViewApprovalHistory.DataSource = Me.bsHolidayAvailmentApprovalHistory
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewApprovalHistory.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewApprovalHistory.DefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridViewApprovalHistory.DgvFooter = Nothing
         Me.DataGridViewApprovalHistory.DisplayOnly = false
         Me.DataGridViewApprovalHistory.Ea = Nothing
@@ -579,10 +500,6 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewApprovalHistory.ShowInsertColumnWhenEditing = true
         Me.DataGridViewApprovalHistory.Translatable = true
         '
-        'bsHolidayAvailmentApprovalHistory
-        '
-        Me.bsHolidayAvailmentApprovalHistory.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.HolidayAvailmentApprovalHistoryModel)
-        '
         'dgvApprovalIdNo
         '
         Me.dgvApprovalIdNo.BegFindValue = Nothing
@@ -604,98 +521,6 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvApprovalIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvApprovalIdNo.Translatable = false
         '
-        'dgvItemIdNo
-        '
-        Me.dgvItemIdNo.BegFindValue = Nothing
-        Me.dgvItemIdNo.DataPropertyName = "IdNo"
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-        Me.dgvItemIdNo.DefaultCellStyle = DataGridViewCellStyle3
-        Me.dgvItemIdNo.EditingMode = false
-        Me.dgvItemIdNo.EndFindValue = Nothing
-        Me.dgvItemIdNo.FieldDescription = Nothing
-        Me.dgvItemIdNo.FieldName = Nothing
-        Me.dgvItemIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.dgvItemIdNo.FindEnabled = false
-        resources.ApplyResources(Me.dgvItemIdNo, "dgvItemIdNo")
-        Me.dgvItemIdNo.IgnoreCase = false
-        Me.dgvItemIdNo.Name = "dgvItemIdNo"
-        Me.dgvItemIdNo.ReadOnly = true
-        Me.dgvItemIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvItemIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.dgvItemIdNo.Translatable = false
-        '
-        'dgvDateCreated
-        '
-        Me.dgvDateCreated.BegFindValue = Nothing
-        Me.dgvDateCreated.DataPropertyName = "DateCreated"
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-        Me.dgvDateCreated.DefaultCellStyle = DataGridViewCellStyle4
-        Me.dgvDateCreated.EditingMode = false
-        Me.dgvDateCreated.EndFindValue = Nothing
-        Me.dgvDateCreated.FieldDescription = Nothing
-        Me.dgvDateCreated.FieldName = Nothing
-        Me.dgvDateCreated.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.dgvDateCreated.FindEnabled = false
-        resources.ApplyResources(Me.dgvDateCreated, "dgvDateCreated")
-        Me.dgvDateCreated.IgnoreCase = false
-        Me.dgvDateCreated.Name = "dgvDateCreated"
-        Me.dgvDateCreated.ReadOnly = true
-        Me.dgvDateCreated.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvDateCreated.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.dgvDateCreated.Translatable = false
-        '
-        'dgvEnteredBy
-        '
-        Me.dgvEnteredBy.DataPropertyName = "EnteredBy"
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-        Me.dgvEnteredBy.DefaultCellStyle = DataGridViewCellStyle5
-        Me.dgvEnteredBy.EditingMode = false
-        resources.ApplyResources(Me.dgvEnteredBy, "dgvEnteredBy")
-        Me.dgvEnteredBy.Name = "dgvEnteredBy"
-        Me.dgvEnteredBy.ReadOnly = true
-        Me.dgvEnteredBy.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvEnteredBy.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.dgvEnteredBy.Translatable = false
-        '
-        'dgvNote
-        '
-        Me.dgvNote.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.dgvNote.BegFindValue = Nothing
-        Me.dgvNote.DataPropertyName = "Note"
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-        Me.dgvNote.DefaultCellStyle = DataGridViewCellStyle6
-        Me.dgvNote.EditingMode = false
-        Me.dgvNote.EndFindValue = Nothing
-        Me.dgvNote.FieldDescription = Nothing
-        Me.dgvNote.FieldName = Nothing
-        Me.dgvNote.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.dgvNote.FindEnabled = false
-        resources.ApplyResources(Me.dgvNote, "dgvNote")
-        Me.dgvNote.IgnoreCase = false
-        Me.dgvNote.Name = "dgvNote"
-        Me.dgvNote.ReadOnly = true
-        Me.dgvNote.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvNote.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.dgvNote.Translatable = false
-        '
-        'dgvLeaveStatus
-        '
-        Me.dgvLeaveStatus.DataPropertyName = "Status"
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
-        Me.dgvLeaveStatus.DefaultCellStyle = DataGridViewCellStyle7
-        Me.dgvLeaveStatus.EditingMode = false
-        resources.ApplyResources(Me.dgvLeaveStatus, "dgvLeaveStatus")
-        Me.dgvLeaveStatus.Name = "dgvLeaveStatus"
-        Me.dgvLeaveStatus.ReadOnly = true
-        Me.dgvLeaveStatus.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvLeaveStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.dgvLeaveStatus.Translatable = false
-        '
         'HolidayAvailmentIdNo
         '
         Me.HolidayAvailmentIdNo.DataPropertyName = "HolidayAvailmentIdNo"
@@ -714,8 +539,8 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout2.ResumeLayout(false)
         Me.CFlowLayout2.PerformLayout
         CType(Me.DataGridViewApprovalHistory,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsHolidayAvailmentApproval,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.bsHolidayAvailmentApprovalHistory,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.bsHolidayAvailmentApproval,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -725,24 +550,11 @@ End Sub
         Public WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblEmployeeIdNo As CLabel
         Public WithEvents cboEmployeeIdNo As CaComboBox
-        Friend WithEvents lblStartDate As CLabel
-        Public WithEvents dtpStartDate As CCustomDateTimePicker
         Friend WithEvents lblDateCreated As CLabel
         Public WithEvents txtDateCreated As CTextBox
         Friend WithEvents CFlowLayout2 As CFlowLayout
-        Friend WithEvents lblLeaveName As CLabel
-        Public WithEvents cboLeaveIdNo As CaComboBox
-        Friend WithEvents lblEndDate As CLabel
-        Public WithEvents dtpEndDate As CCustomDateTimePicker
-        Friend WithEvents lblFullDay As CLabel
-        Friend WithEvents chkFullDay As CCheckBox
-        Friend WithEvents lblLeaveReason As CLabel
-        Public WithEvents txtLeaveReason As CTextBox
-        Friend WithEvents lblLeaveStatus As CLabel
-        Public WithEvents cboLeaveStatus As CaComboBox
-        Friend WithEvents lblAppliedBy As CLabel
-        Public WithEvents cboAppliedBy As CaComboBox
-        Friend WithEvents btnHistory As CButton
+        Friend WithEvents lblenteredBy As CLabel
+        Public WithEvents cboenteredBy As CaComboBox
         Friend WithEvents DataGridViewApprovalHistory As CDataGridView
         Friend WithEvents bsHolidayAvailmentApproval As BindingSource
         Friend WithEvents bsHolidayAvailmentApprovalHistory As BindingSource
@@ -754,5 +566,13 @@ End Sub
         Friend WithEvents dgvNote As CDgvTextColumn
         Friend WithEvents dgvLeaveStatus As CDgvComboBoxColumn
         Friend WithEvents HolidayAvailmentIdNo As DataGridViewTextBoxColumn
+        Friend WithEvents CLabel2 As CLabel
+        Public WithEvents cboHolidayTransferIdNo As CaComboBox
+        Friend WithEvents lblHolidayIdNo As CLabel
+        Public WithEvents cboHolidayIdNo As CaComboBox
+        Friend WithEvents lblStatus As CLabel
+        Friend WithEvents lblAvailmentDate As CLabel
+        Public WithEvents dtpAvailmentDate As CCustomDateTimePicker
+        Public WithEvents cboStatus As CaComboBox
     End Class
 End Namespace

@@ -15,8 +15,6 @@ Namespace PresentationLayer.Views.Interfaces
         Property LeaveStatusList As List(Of Lookup.LookupData)
         Property ApprovalStatusList As List(Of Lookup.LookupData)
 
-        'Event ClearAllEmployee(sender As Object, clear As Boolean)
-
         Event ApprovalCheckedEvent(sender As Object)
 
     End Interface

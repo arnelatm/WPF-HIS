@@ -200,6 +200,7 @@
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
+    <Compile Include="BusinessLayer\HolidayAvailmentApprovalHistory.vb" />
     <Compile Include="BusinessLayer\HolidayTransferAvailment.vb" />
     <Compile Include="BusinessLayer\HolidayTransferItem.vb" />
     <Compile Include="BusinessLayer\HolidayTransfer.vb" />
@@ -357,10 +358,12 @@
     </Compile>
     <Compile Include="OneTimeRun.vb" />
     <Compile Include="PresentationLayer\Models\EmployeeIdModel.vb" />
+    <Compile Include="PresentationLayer\Models\HolidayAvailmentApprovalHistoryModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeeLeaveApprovalItemModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeeLeaveApprovalHistoryModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeeLeaveApprovalModel.vb" />
     <Compile Include="PresentationLayer\Models\HolidayTransferItemModel.vb" />
+    <Compile Include="PresentationLayer\Models\HolidayAvailmentModel.vb" />
     <Compile Include="PresentationLayer\Models\HolidayTransferModel.vb" />
     <Compile Include="PresentationLayer\Models\HolidayTransferAvailmentModel.vb" />
     <Compile Include="PresentationLayer\Models\ShiftSummaryModel.vb" />
@@ -577,6 +580,7 @@
     <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Interfaces\IHolidayAvailmentApprovalHistoryView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeLeaveApprovalHistoryView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeLeaveApprovalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeIdListView.vb" />

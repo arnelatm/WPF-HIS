@@ -8,7 +8,7 @@ Namespace PresentationLayer.Models
     ''' </summary>
     Public Class EmployeeLeaveModel
 
-        Public Property AppliedBy As Int32
+        Public Property EnteredBy As Int32
         Public Property DateCreated As DateTime?
         Public Property EmployeeIdNo As Int32
         Public Property EndDate As DateTime
@@ -19,9 +19,11 @@ Namespace PresentationLayer.Models
         Public Property LeaveStatus As String
         Public Property StartDate As DateTime
         Public Property SupervisorIdNo As Int32
-        Public Property Approve As Boolean
-        Public Property Disapprove As Boolean
+
+        'Public Property Approve As Boolean
+        'Public Property Disapprove As Boolean
         Public Property ApprovalNote As String
+
         Public Property ApprovalHistory As List(Of EmployeeLeaveApprovalHistoryModel)
     End Class
 

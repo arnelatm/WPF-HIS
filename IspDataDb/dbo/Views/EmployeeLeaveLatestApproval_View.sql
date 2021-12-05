@@ -8,15 +8,16 @@
 
 
 
+
 CREATE View [dbo].[EmployeeLeaveLatestApproval_View] As
 SELECT [IdNo]
       ,[EmployeeLeaveApprovalIdNo]
-      ,[AppliedBy]
+      ,[EnteredBy]
       ,[LeaveIdNo]
       ,[StartDate]
       ,[EndDate]
       ,[FullDay]
-      ,[EnteredBy]
+      ,[ApprovedBy]
       ,[Status] as 'LeaveStatus'
       ,[Note]
       ,[LeaveStatusDate]
@@ -29,12 +30,12 @@ SELECT [IdNo]
   Union
   SELECT [IdNo]
       ,Null
-      ,[AppliedBy]
+      ,[EnteredBy]
       ,[LeaveIdNo]
       ,[StartDate]
       ,[EndDate]
       ,[FullDay]
-      ,[EnteredBy]
+      ,[ApprovedBy]
       ,'0'
       ,[Note]
       ,[DateCreated]

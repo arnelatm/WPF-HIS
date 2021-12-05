@@ -1,7 +1,7 @@
 ﻿CREATE VIEW dbo.LeaveApproval_View
 AS
-SELECT        dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.LeaveIdNo, dbo.EmployeeLeave.StartDate, dbo.EmployeeLeave.EndDate, dbo.EmployeeLeave.FullDay, dbo.EmployeeLeave.AppliedBy, 
-                         dbo.EmployeeLeave.LeaveReason, dbo.EmployeeLeave.DateCreated, dbo.EmployeeLeaveApproval.EnteredBy, dbo.EmployeeLeaveApprovalItem.Status, dbo.EmployeeLeaveApprovalItem.Note, 
+SELECT        dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.LeaveIdNo, dbo.EmployeeLeave.StartDate, dbo.EmployeeLeave.EndDate, dbo.EmployeeLeave.FullDay, dbo.EmployeeLeave.EnteredBy, 
+                         dbo.EmployeeLeave.LeaveReason, dbo.EmployeeLeave.DateCreated, dbo.EmployeeLeaveApproval.ApprovedBy, dbo.EmployeeLeaveApprovalItem.Status, dbo.EmployeeLeaveApprovalItem.Note, 
                          dbo.EmployeeLeaveApproval.DateCreated AS LeaveStatusDate, dbo.Employee.SupervisorIdNo, dbo.EmployeeLeave.DateTimeStamp, dbo.EmployeeLeaveApprovalItem.EmployeeLeaveApprovalIdNo, 
                          dbo.EmployeeLeaveApprovalItem.EmployeeLeaveIdNo, dbo.EmployeeLeaveApprovalItem.IdNo
 FROM            dbo.EmployeeLeaveApproval RIGHT OUTER JOIN

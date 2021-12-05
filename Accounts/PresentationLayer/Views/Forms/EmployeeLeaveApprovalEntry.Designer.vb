@@ -54,7 +54,7 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.dgvApprove = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
         Me.dgvDisapprove = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
         Me.dgvApprovalNote = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.AppliedByDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.enteredByDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DateCreatedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SupervisorIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
@@ -236,7 +236,7 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.DataGridViewEmployeeLeave.AutoGenerateColumns = false
         Me.DataGridViewEmployeeLeave.BegFindValue = Nothing
         Me.DataGridViewEmployeeLeave.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewEmployeeLeave.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvIdNo, Me.dgvEmployeeIdNo, Me.dgvFullDay, Me.dgvStartDate, Me.dgvEndDate, Me.dgvLeaveIdNo, Me.dgvLeaveReason, Me.dgvLeaveStatus, Me.dgvApprove, Me.dgvDisapprove, Me.dgvApprovalNote, Me.AppliedByDataGridViewTextBoxColumn, Me.DateCreatedDataGridViewTextBoxColumn, Me.SupervisorIdNoDataGridViewTextBoxColumn})
+        Me.DataGridViewEmployeeLeave.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvIdNo, Me.dgvEmployeeIdNo, Me.dgvFullDay, Me.dgvStartDate, Me.dgvEndDate, Me.dgvLeaveIdNo, Me.dgvLeaveReason, Me.dgvLeaveStatus, Me.dgvApprove, Me.dgvDisapprove, Me.dgvApprovalNote, Me.enteredByDataGridViewTextBoxColumn, Me.DateCreatedDataGridViewTextBoxColumn, Me.SupervisorIdNoDataGridViewTextBoxColumn})
         Me.DataGridViewEmployeeLeave.DataSource = Me.bsEmployeeLeave
         DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
@@ -502,13 +502,13 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.dgvApprovalNote.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvApprovalNote.Translatable = false
         '
-        'AppliedByDataGridViewTextBoxColumn
+        'enteredByDataGridViewTextBoxColumn
         '
-        Me.AppliedByDataGridViewTextBoxColumn.DataPropertyName = "AppliedBy"
-        Me.AppliedByDataGridViewTextBoxColumn.HeaderText = "AppliedBy"
-        Me.AppliedByDataGridViewTextBoxColumn.Name = "AppliedByDataGridViewTextBoxColumn"
-        Me.AppliedByDataGridViewTextBoxColumn.ReadOnly = true
-        Me.AppliedByDataGridViewTextBoxColumn.Visible = false
+        Me.enteredByDataGridViewTextBoxColumn.DataPropertyName = "EnteredBy"
+        Me.enteredByDataGridViewTextBoxColumn.HeaderText = "EnteredBy"
+        Me.enteredByDataGridViewTextBoxColumn.Name = "enteredByDataGridViewTextBoxColumn"
+        Me.enteredByDataGridViewTextBoxColumn.ReadOnly = true
+        Me.enteredByDataGridViewTextBoxColumn.Visible = false
         '
         'DateCreatedDataGridViewTextBoxColumn
         '
@@ -563,7 +563,7 @@ End Sub
     Friend WithEvents dgvApprove As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
     Friend WithEvents dgvDisapprove As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
     Friend WithEvents dgvApprovalNote As Libraries.CBaseControlsLibrary.CDgvTextColumn
-    Friend WithEvents AppliedByDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents enteredByDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents DateCreatedDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents SupervisorIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
 End Class

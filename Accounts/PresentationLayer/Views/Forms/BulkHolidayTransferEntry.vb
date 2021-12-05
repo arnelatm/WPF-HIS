@@ -29,12 +29,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property AppliedBy As Integer Implements IHolidayTransferView.AppliedBy
+        Public Property EnteredBy As Integer Implements IHolidayTransferView.EnteredBy
             Get
-                Return cboAppliedBy.GetValue()
+                Return cboenteredBy.GetValue()
             End Get
             Set
-                cboAppliedBy.SetValue(Value)
+                cboenteredBy.SetValue(Value)
             End Set
         End Property
 
@@ -123,7 +123,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub HolidayTransfer_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
             bsHolidayTransferItems.ResetBindings(True)
             'PublishClickedButton(ButtonClicked.Edit)
-            cboAppliedBy.DisplayOnly = True
+            cboenteredBy.DisplayOnly = True
             dtpDateCreated.Value = Now()
         End Sub
 
@@ -147,7 +147,7 @@ Namespace PresentationLayer.Views.Forms
                 {
                 {"IdNo", txtIdNo},
                 {"DateCreated", dtpDateCreated},
-                {"AppliedBy", cboAppliedBy},
+                {"EnteredBy", cboenteredBy},
                 {"HolidayIdNo", cboHolidayIdNo}
                 }
         End Sub
