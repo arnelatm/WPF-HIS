@@ -837,11 +837,20 @@
   <data name="dgvDateCreated.HeaderText" xml:space="preserve">
     <value>Date</value>
   </data>
-  <data name="dgvNote.HeaderText" xml:space="preserve">
-    <value>Remarks</value>
+  <data name="dgvDateCreated.Width" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
+  <metadata name="dgvApprovedBy.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dgvApprovedBy.HeaderText" xml:space="preserve">
+    <value>ApprovedBy</value>
   </data>
   <data name="dgvLeaveStatus.HeaderText" xml:space="preserve">
     <value>Status</value>
+  </data>
+  <data name="dgvNote.HeaderText" xml:space="preserve">
+    <value>Remarks</value>
   </data>
   <metadata name="EmployeeLeaveIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -975,6 +984,18 @@
   <data name="&gt;&gt;MyErrorProvider.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="&gt;&gt;bsEmployeeLeaveApprovalHistory.Name" xml:space="preserve">
+    <value>bsEmployeeLeaveApprovalHistory</value>
+  </data>
+  <data name="&gt;&gt;bsEmployeeLeaveApprovalHistory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bsEmployeeLeaveApproval.Name" xml:space="preserve">
+    <value>bsEmployeeLeaveApproval</value>
+  </data>
+  <data name="&gt;&gt;bsEmployeeLeaveApproval.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;dgvApprovalIdNo.Name" xml:space="preserve">
     <value>dgvApprovalIdNo</value>
   </data>
@@ -993,11 +1014,11 @@
   <data name="&gt;&gt;dgvDateCreated.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dgvNote.Name" xml:space="preserve">
-    <value>dgvNote</value>
+  <data name="&gt;&gt;dgvApprovedBy.Name" xml:space="preserve">
+    <value>dgvApprovedBy</value>
   </data>
-  <data name="&gt;&gt;dgvNote.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;dgvApprovedBy.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvLeaveStatus.Name" xml:space="preserve">
     <value>dgvLeaveStatus</value>
@@ -1005,23 +1026,17 @@
   <data name="&gt;&gt;dgvLeaveStatus.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="&gt;&gt;dgvNote.Name" xml:space="preserve">
+    <value>dgvNote</value>
+  </data>
+  <data name="&gt;&gt;dgvNote.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;EmployeeLeaveIdNo.Name" xml:space="preserve">
     <value>EmployeeLeaveIdNo</value>
   </data>
   <data name="&gt;&gt;EmployeeLeaveIdNo.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bsEmployeeLeaveApprovalHistory.Name" xml:space="preserve">
-    <value>bsEmployeeLeaveApprovalHistory</value>
-  </data>
-  <data name="&gt;&gt;bsEmployeeLeaveApprovalHistory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bsEmployeeLeaveApproval.Name" xml:space="preserve">
-    <value>bsEmployeeLeaveApproval</value>
-  </data>
-  <data name="&gt;&gt;bsEmployeeLeaveApproval.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EmployeeLeaveEntry</value>
