@@ -52,6 +52,19 @@ Namespace DataLayer.AdoNet
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo"))
             }
 
+        Public Function GetHolidayTransferItems(employeeIdNo,holidayIdNo) As List(Of HolidayTransferItem) 
+            Dim sql As String =
+                    "SELECT " &
+                    "EmployeeIdNo," &
+                    "HolidayTransferIdNo," &
+                    "a.IdNo" &
+                    " FROM HolidayTransferItem a" &
+                    " Left Join HolidayTransfer b on a.HolidayTransferIdNo = b.IdNo " &
+                    " WHERE a.EmployeeIdNo = @employeeIdNo and b.HolidayIdNo = @holidayIdNo"                     
+            Dim params() As Object = {"@employeeIdNo", employeeIdNo,"@holidayIdNo", holidayIdNo}
+            Return _db.Read(sql, Make, params).ToList()
+        End Function
+
     End Class
 
 End Namespace

@@ -20,6 +20,13 @@ Namespace PresentationLayer.Views.Forms
             FirstControl = cboEmployeeIdNo
             _nfi = GlobalVariables.DefaultNumberFormatInfo
             _holiday = holiday
+            If holiday Then
+                lblLeaveName.Visible = False
+                cboLeaveIdNo.Visible = False
+            Else
+                lblHolidayName.Visible = False
+                cboHolidayIdNo.Visible = False
+            End If
             'FormTreeView.Visible = False
         End Sub
 
@@ -119,6 +126,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property HolidayIdNo As Int16 Implements IEmployeeLeaveView.HolidayIdNo
+            Get
+                Return cboHolidayIdNo.GetNullableValue(Of Int16)
+            End Get
+            Set
+                cboHolidayIdNo.SetValue(Value)
+            End Set
+        End Property
+
         Public Property SupervisorIdNo As Int32 Implements IEmployeeLeaveView.SupervisorIdNo
         Public Property Disapprove As Boolean Implements IEmployeeLeaveView.Disapprove
         Public Property ApprovalNote As String Implements IEmployeeLeaveView.ApprovalNote
@@ -145,6 +161,7 @@ Namespace PresentationLayer.Views.Forms
                 {"EmployeeIdNo", cboEmployeeIdNo},
                 {"EndDate", dtpEndDate},
                 {"FullDay", chkFullDay},
+                {"HolidayIdNo", cboHolidayIdNo},
                 {"IdNo", TxtIdNo},
                 {"LeaveIdNo", cboLeaveIdNo},
                 {"LeaveReason", txtLeaveReason},

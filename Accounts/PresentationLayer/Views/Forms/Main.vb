@@ -999,7 +999,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemEmployeeLeave_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeLeaveNonHoliday.Click
-            RunForm(Of EmployeeLeaveEntry, EmployeeLeavePresenter(Of EmployeeLeaveModel), Boolean)(True)
+            RunForm(Of EmployeeLeaveEntry, EmployeeLeavePresenter(Of EmployeeLeaveModel), Boolean)(False)
         End Sub
 
         Private Sub ToolStripMenuItemHolidayEntry_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemHolidayEntry.Click
@@ -1134,7 +1134,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemHolidayTransferAvailment_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeLeaveHoliday.Click
-            RunForm(Of HolidayAvailmentEntry, HolidayAvailmentPresenter(Of HolidayAvailmentModel))()
+            RunForm(Of EmployeeLeaveEntry, EmployeeLeavePresenter(Of EmployeeLeaveModel), Boolean)(True)
         End Sub
 
     End Class
