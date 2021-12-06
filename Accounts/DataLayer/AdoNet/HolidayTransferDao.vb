@@ -27,13 +27,13 @@ Namespace DataLayer.AdoNet
                     " WHERE a.IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
-            'If data IsNot Nothing Then
-            '    Dim htDao = New HolidayTransferItemDao()
-            '    data.HolidayTransferItems = htDao.GetRecordsWithGroupIdNo(idNo)
-            '    For Each item In data.HolidayTransferItems
-            '        item.Transfer = True
-            '    Next
-            'End If
+            If data IsNot Nothing Then
+                Dim htDao = New HolidayTransferItemDao()
+                data.HolidayTransferItems = htDao.GetRecordsWithGroupIdNo(idNo)
+                For Each item In data.HolidayTransferItems
+                    item.Transfer = True
+                Next
+            End If
             Return data
         End Function
 
@@ -66,7 +66,9 @@ Namespace DataLayer.AdoNet
             New HolidayTransfer() With {
             .EnteredBy = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("EnteredBy")),
             .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("DateCreated")),
-            .HolidayIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("HolidayIdNo")),
+            .DateEnd = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("DateEnd")),
+            .DateStart = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("DateStart")),
+            .HolidayIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("HolidayIdNo")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo"))
             }
 

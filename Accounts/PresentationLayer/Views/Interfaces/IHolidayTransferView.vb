@@ -13,7 +13,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property DateCreated As DateTime?
         Property DateEnd As DateTime?
         Property DateStart As DateTime?
-        Property HolidayIdNo As Int32
+        Property HolidayIdNo As Int16
         Property IdNo As Int32
         Property HolidayTransferItems As List(Of HolidayTransferItemView)
         Property HolidayList As List(Of Lookup.LookupData)

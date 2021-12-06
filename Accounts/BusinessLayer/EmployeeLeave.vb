@@ -29,6 +29,7 @@ Namespace BusinessLayer
         Public Property EmployeeIdNo As Int32
         Public Property EndDate As DateTime
         Public Property FullDay As Boolean
+        Public Property HolidayIdNo As Int16
         Public Property IdNo As Int32
         Public Property LeaveIdNo As Int16
         Public Property LeaveReason As String

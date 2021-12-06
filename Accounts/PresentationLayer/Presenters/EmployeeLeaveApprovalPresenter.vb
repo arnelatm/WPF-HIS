@@ -12,9 +12,10 @@ Namespace PresentationLayer.Presenters
 
         Private ReadOnly _journalItemService
         Private ReadOnly _EmployeeIdsService
+        Private _holiday As Boolean
         Private _dtEmployeeLeaveApproval As New DataTable
 
-        Public Sub New(view As IEmployeeLeaveApprovalView)
+        Public Sub New(view As IEmployeeLeaveApprovalView, holiday As Boolean)
             MyBase.New(view)
             WithTreeView = False
             Service = New AccountsService("EmployeeLeaveApproval")
@@ -22,6 +23,7 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "IdNo"
             AskBeforeSave = True
             DisableSaveMemento = True
+            _holiday = holiday
             'AddHandler view.ClearAllEmployee, AddressOf OnClearAllEmployeeId
             'AddHandler view.ApprovalCheckedEvent, AddressOf OnApprovalCheckedEvent
 
@@ -56,7 +58,7 @@ Namespace PresentationLayer.Presenters
             If Not CancelSave Then
                 _dtEmployeeLeaveApproval.Clear()
                 CreateDataTable(_dtEmployeeLeaveApproval, {{"EmployeeLeaveApprovalIdNo", GetType(Int32)},
-                                                          {"EmployeeLeaveIdNo", GetType(Int32)},
+                                                          {"EmployeeLeaveIdNo", GetType(Int16)},
                                                           {"Note", GetType(String)},
                                                           {"Status", GetType(Int32)}
                                                           })

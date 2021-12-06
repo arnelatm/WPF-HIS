@@ -51,11 +51,11 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property HolidayIdNo As Integer Implements IHolidayTransferView.HolidayIdNo
+        Public Property HolidayIdNo As Int16 Implements IHolidayTransferView.HolidayIdNo
             Get
                 Return cboHolidayIdNo.GetValue()
             End Get
-            Set(value As Integer)
+            Set(value As Int16)
                 cboHolidayIdNo.SetValue(value)
             End Set
         End Property
@@ -87,7 +87,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        
         Public Property DateStart As Date? Implements IHolidayTransferView.DateStart
             Get
                 Return dtpDateStart.Value
@@ -100,6 +99,7 @@ Namespace PresentationLayer.Views.Forms
                 End If
             End Set
         End Property
+
 #End Region
 
         Private Sub BindHolidayTransferItems()

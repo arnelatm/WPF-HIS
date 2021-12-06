@@ -96,7 +96,7 @@ Namespace DataLayer.AdoNet
                                 }
         End Function
 
-        Public Function GetLeaveHistory(ByVal employeeLeaveIdNo As Int32) As List(Of EmployeeLeaveApprovalHistory)
+        Public Function GetLeaveHistory(ByVal employeeLeaveIdNo As Int16) As List(Of EmployeeLeaveApprovalHistory)
             Dim sql As String = "SELECT " &
                                 "ApprovalIdNo," &
                                 "DateCreated," &
