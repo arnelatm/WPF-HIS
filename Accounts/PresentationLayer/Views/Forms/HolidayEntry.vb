@@ -19,7 +19,6 @@ Namespace PresentationLayer.Views.Forms
 
 #Region "Fields"
 
-
         Public Property EnteredBy As Int32 Implements IHolidayView.EnteredBy
             Get
                 Return cboEnteredBy.GetNullableValue(Of Int32)
@@ -47,7 +46,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property LeaveIdNo As Int16 Implements IHolidayView.LeaveIdNo
             Get
-                Return cboLeaveIdNo.GetNullableValue(Of Int32)
+                Return cboLeaveIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cboLeaveIdNo.SetValue(Value)
@@ -157,6 +156,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub cboLeaveIdNo_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboLeaveIdNo.SelectionChangeCommitted
 
         End Sub
+
     End Class
 
 End Namespace

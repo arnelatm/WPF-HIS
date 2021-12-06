@@ -13,13 +13,15 @@ Namespace PresentationLayer.Presenters
 
         Private _userHasAccess As Boolean = False
         Private _userIsASupervisor As Boolean = False
+        Private _holiday As Boolean
 
-        Public Sub New(itemView As IEmployeeLeaveView)
+        Public Sub New(itemView As IEmployeeLeaveView, holiday As Boolean)
             MyBase.New(itemView)
             Service = New AccountsService("EmployeeLeave")
             TableName = "EmployeeLeave_View"
             SortOrderKey = "IdNo"
             WithTreeView = False
+            _holiday = holiday
         End Sub
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized

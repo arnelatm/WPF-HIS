@@ -17,7 +17,7 @@ Namespace BusinessLayer
         End Sub
 
         Public Property IdNo As Int32
-        Public Property EmployeeLeaveIdNo As Int32
+        Public Property EmployeeLeaveIdNo As Int16
         Public Property Notes As String
         Public Property Status As String
     End Class

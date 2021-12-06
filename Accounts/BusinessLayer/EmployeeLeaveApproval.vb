@@ -19,7 +19,7 @@ Namespace BusinessLayer
         Public Property DateCreated As DateTime?
         Public Property ApprovedBy As Int32
         Public Property IdNo As Int32
-        'Public Property EmployeeLeaveIdNo As Int32
+        'Public Property EmployeeLeaveIdNo As Int16
         'Public Property ApprovalItemIdNo As Int32
         'Public Property Notes As String
         'Public Property Status As String

@@ -12,12 +12,14 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _nfi As NumberFormatInfo
         Private _humanResourceUser As Boolean
         Private _approvalHistory As List(Of IEmployeeLeaveApprovalHistoryView)
+        Private _holiday As Boolean
 
-        Public Sub New()
+        Public Sub New(ByVal holiday As Boolean)
             ' This call is required by the designer.
             InitializeComponent()
             FirstControl = cboEmployeeIdNo
             _nfi = GlobalVariables.DefaultNumberFormatInfo
+            _holiday = holiday
             'FormTreeView.Visible = False
         End Sub
 
