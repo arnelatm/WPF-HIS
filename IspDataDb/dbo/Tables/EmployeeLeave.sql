@@ -2,6 +2,7 @@
     [IdNo]          INT            IDENTITY (1, 1) NOT NULL,
     [EmployeeIdNo]  INT            NOT NULL,
     [LeaveIdNo]     SMALLINT       NOT NULL,
+    [HolidayIdNo]   INT            NULL,
     [StartDate]     DATETIME       NOT NULL,
     [EndDate]       DATETIME       NOT NULL,
     [FullDay]       BIT            NULL,
@@ -11,6 +12,8 @@
     [DateTimeStamp] ROWVERSION     NULL,
     CONSTRAINT [PK_EmployeeLeave] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
