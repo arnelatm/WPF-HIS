@@ -22,3 +22,10 @@
 
 
 
+
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [LeaveLeaveCode]
+    ON [dbo].[Leave]([LeaveCode] ASC);
+
