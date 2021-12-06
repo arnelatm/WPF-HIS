@@ -16,6 +16,7 @@ Namespace PresentationLayer.Presenters
         Private _userIsASupervisor As Boolean = False
         Private _holiday As Boolean
         Private _holidayService As New AccountsService("Holiday")
+        Private _leaveService As New AccountsService("Leave")
         Private _holidayModel As New HolidayModel
 
         Public Sub New(itemView As IEmployeeLeaveView, holiday As Boolean)
@@ -98,12 +99,12 @@ Namespace PresentationLayer.Presenters
             If MyBase.IsBizDataValid() Then
                 If _holiday Then
                     Dim leave As LeaveModel
-                    leave = Service.GetRecordByIdNo(Of LeaveModel)(View.LeaveIdNo)
+                    leave = _leaveService.GetRecordByIdNo(Of LeaveModel)(View.LeaveIdNo)
                     If _holidayModel.DateStart >= View.StartDate AndAlso _holidayModel.DateEnd <= View.EndDate Then
                         retValue = True
                     Else
                         'Look for holidayTransfers
-                        Dim noOfDaysInHoliday As Long = DateAndTime.DateDiff(DateInterval.Day, _holidayModel.DateEnd, _holidayModel.DateStart) + 1
+                        Dim noOfDaysInHoliday As Long = DateAndTime.DateDiff(DateInterval.Day, _holidayModel.DateStart, _holidayModel.DateEnd) + 1
                         Dim htService = New AccountsService("HolidayTransferItem")
                         Dim nDays As Long = 0
                         Dim holidayTransfers = htService.GetHolidayTransferItems(View.EmployeeIdNo, View.HolidayIdNo)
@@ -112,15 +113,45 @@ Namespace PresentationLayer.Presenters
                         Else
                             Dim employeeLeaveModelList = New List(Of EmployeeLeaveModel)
                             Dim employeeLeaveService = New AccountsService("EmployeeLeave")
+                            Dim noOfRequestedDays As Short
+                            noOfRequestedDays = DateDiff(DateInterval.Day, View.StartDate, View.EndDate) + 1
                             Dim records = employeeLeaveService.GetEmployeeHolidayLeaves(View.EmployeeIdNo, View.HolidayIdNo)
                             'GlobalVariables.Mapper.Map(records,employeeLeaveModelList)
-                            If records Is Nothing Then
+                            If records Is Nothing OrElse records.Count = 0 Then
                                 retValue = True
                             Else
-                                MessageBox.Show("Sorry there is already an open holiday leave request for this employee and holiday.")
-                                'For Each item In records
-                                '    Dim x = item
-                                'Next
+                                ' check if no. of days for leave is not yet exceeded
+                                Dim noOfAppliedDays As Int16 = 0
+                                For Each item In records
+                                    noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
+                                Next
+                                If (noOfAppliedDays + noOfRequestedDays) <= noOfDaysInHoliday Then
+                                    ' check for overlapping dates
+                                    Dim overlappingDates As Boolean = False
+                                    Dim overlapIdNo As Int32 = 0
+                                    For Each item In records
+                                        If View.StartDate >= item.StartDate And View.StartDate <= item.EndDate Then
+                                            overlappingDates = True
+                                            overlapIdNo = item.IdNo
+                                            Exit For
+                                        ElseIf View.EndDate >= item.StartDate And View.EndDate <= item.EndDate Then
+                                            overlappingDates = True
+                                            overlapIdNo = item.IdNo
+                                            Exit For
+                                        End If
+                                    Next
+                                    If overlappingDates Then
+                                        MessageBox.Show("The applied date for this holiday leave overlaps with an existing leave application. See Leave Application Number #" & overlapIdNo.ToString("N0"))
+                                    Else
+                                        retValue = True
+                                    End If
+                                Else
+                                    If noOfDaysInHoliday = 1 Then
+                                        MessageBox.Show("Sorry there is already an open holiday leave request for this employee and holiday.")
+                                    Else
+                                        MessageBox.Show("Sorry either this employee has already consumed the allotted leave days for this holiday or the applied days leave plus the existing leaves will exceed the allotted days for this holiday.")
+                                    End If
+                                End If
                             End If
                         End If
                     End If
