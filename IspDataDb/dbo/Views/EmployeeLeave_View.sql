@@ -2,7 +2,7 @@
 AS
 SELECT        dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.IdNo, dbo.EmployeeLeave.LeaveIdNo, dbo.EmployeeLeave.StartDate, dbo.EmployeeLeave.EndDate, dbo.EmployeeLeave.FullDay, dbo.EmployeeLeave.EnteredBy, 
                          dbo.EmployeeLeave.LeaveReason, dbo.EmployeeLeave.DateCreated, dbo.EmployeeLeave.DateTimeStamp, dbo.EmployeeLeaveLatestApproval_View.SupervisorIdNo, 
-                         dbo.EmployeeLeaveLatestApproval_View.LatestStatusUpdate, dbo.EmployeeLeaveLatestApproval_View.LeaveStatus
+                         dbo.EmployeeLeaveLatestApproval_View.LatestStatusUpdate, dbo.EmployeeLeaveLatestApproval_View.LeaveStatus, dbo.EmployeeLeave.HolidayIdNo
 FROM            dbo.EmployeeLeave INNER JOIN
                          dbo.EmployeeLeaveLatestApproval_View ON dbo.EmployeeLeave.IdNo = dbo.EmployeeLeaveLatestApproval_View.IdNo
 GO
@@ -15,7 +15,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+         Configuration = "(H (1[79] 4[4] 2[4] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -128,6 +128,8 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeave_View';
+
+
 
 
 
