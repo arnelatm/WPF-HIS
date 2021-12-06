@@ -343,6 +343,7 @@ Namespace Services
         End Function
 
         Public Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM Implements IService.GetRecordByIdNo
+            'return DataDao.GetRecordByIdNo(Convert.ToInt32(idNo))
             Dim modelOfPresenter As New TM
             Dim record = DataDao.GetRecordByIdNo(Convert.ToInt32(idNo))
             If record IsNot Nothing Then

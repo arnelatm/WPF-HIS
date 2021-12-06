@@ -1,5 +1,6 @@
 ﻿Imports System.Windows.Forms.VisualStyles
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries.GlobalFuncNSub
@@ -14,6 +15,8 @@ Namespace PresentationLayer.Presenters
         Private _userHasAccess As Boolean = False
         Private _userIsASupervisor As Boolean = False
         Private _holiday As Boolean
+        Private _holidayService As New AccountsService("Holiday")
+        Private _holidayModel As New HolidayModel
 
         Public Sub New(itemView As IEmployeeLeaveView, holiday As Boolean)
             MyBase.New(itemView)
@@ -63,7 +66,12 @@ Namespace PresentationLayer.Presenters
                 CreateDataSource("Employee", "EmployeeIdNo", "IdNo = " + employeeIdNo.ToString())
             End If
             CreateDataSource("User", "EnteredBy", {"IdNo", "UserName"})
-            CreateDataSource("Leave", "LeaveIdNo")
+            If _holiday Then
+                CreateDataSource("Leave", "LeaveIdNo", "Holiday = 1")
+                CreateDataSource("Holiday_View", "HolidayIdNo", {"IdNo", "HolidayName", "DateStart"})
+            Else
+                CreateDataSource("Leave", "LeaveIdNo", "Holiday = 0")
+            End If
             CreateEnumDataSource(Of LeaveStatusSelection)("LeaveStatus")
             CreateEnumData(Of LeaveStatusSelection)(View.LeaveStatusList)
             CreateLookupData("User", "Users", {"IdNo", "UserName"})
@@ -78,13 +86,44 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+        Public Sub OnBeforeValidate() Handles MyBase.BeforeValidate
+            If _holiday Then
+                _holidayModel = _holidayService.GetRecordByIdNo(Of HolidayModel)(View.HolidayIdNo)
+                View.LeaveIdNo = _holidayModel.LeaveIdNo
+            End If
+        End Sub
+
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
             If MyBase.IsBizDataValid() Then
-                Dim leave As Leave
-                leave = Service.GetRecordByIdNo(Of Leave)(View.LeaveIdNo)
-                If leave.Holiday Then
-
+                If _holiday Then
+                    Dim leave As LeaveModel
+                    leave = Service.GetRecordByIdNo(Of LeaveModel)(View.LeaveIdNo)
+                    If _holidayModel.DateStart >= View.StartDate AndAlso _holidayModel.DateEnd <= View.EndDate Then
+                        retValue = True
+                    Else
+                        'Look for holidayTransfers
+                        Dim noOfDaysInHoliday As Long = DateAndTime.DateDiff(DateInterval.Day, _holidayModel.DateEnd, _holidayModel.DateStart) + 1
+                        Dim htService = New AccountsService("HolidayTransferItem")
+                        Dim nDays As Long = 0
+                        Dim holidayTransfers = htService.GetHolidayTransferItems(View.EmployeeIdNo, View.HolidayIdNo)
+                        If holidayTransfers Is Nothing OrElse holidayTransfers.Count() < 1 Then
+                            MessageBox.Show("Sorry you don't have a holiday transfer request for this holiday.")
+                        Else
+                            Dim employeeLeaveModelList = New List(Of EmployeeLeaveModel)
+                            Dim employeeLeaveService = New AccountsService("EmployeeLeave")
+                            Dim records = employeeLeaveService.GetEmployeeHolidayLeaves(View.EmployeeIdNo, View.HolidayIdNo)
+                            'GlobalVariables.Mapper.Map(records,employeeLeaveModelList)
+                            If records Is Nothing Then
+                                retValue = True
+                            Else
+                                MessageBox.Show("Sorry there is already an open holiday leave request for this employee and holiday.")
+                                'For Each item In records
+                                '    Dim x = item
+                                'Next
+                            End If
+                        End If
+                    End If
                 End If
             End If
             Return retValue
