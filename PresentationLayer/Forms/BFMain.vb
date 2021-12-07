@@ -315,6 +315,9 @@ Public Class BfMain
                     End If
                     Try
                         _originalText = CaptionCollection.Item(cCtrl.Name)
+                        if _originalText = "Gender" then
+                            debugger.Break()
+                        End If
                         r = Dv.Find(_originalText)
                         If r >= 0 Then
                             cCtrl.Text = Dv(r).Item("TranslatedCaption")
@@ -380,7 +383,7 @@ Public Class BfMain
 
     Protected Function GetSystemViewIdNo()
         Dim cmd As String
-        If ViewDisplayName Is Nothing Then
+        If ViewDisplayName Is Nothing or ViewDisplayName = "" Then
             ViewDisplayName = Name
         End If
         cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + ViewDisplayName.Trim() + "'"

@@ -801,8 +801,11 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return True
     End Function
 
-    Public Function CheckDependentRecords(Of T)(ByVal searchValue As T, ByVal dependentTableName As String, ByVal keyFieldName As String) As Boolean
-        Dim idNo = Service.GetRecordFieldWithKeyG(Of Integer, Integer)(searchValue, dependentTableName, keyFieldName)
+    Public Function CheckDependentRecords(Of T)(ByVal searchIdNo As T, ByVal dependentTableName As String, Optional searchFieldName As String = "", Optional returnIdFieldName As String = "IdNo") As Boolean
+        If searchFieldName = "" Then
+            searchFieldName = dependentTableName + "IdNo"
+        End If
+        Dim idNo = Service.GetRecordFieldWithKeyG(Of Integer, Integer)(searchIdNo, dependentTableName, searchFieldName, returnIdFieldName)
         If idNo > 0 Then
             Dim dependentTable = Messaging.TranslateCaption(dependentTableName)
             Dim additionalMessage = Messaging.GetParametrizedMessage(True, "MsgSeeTableEntry", {"tableName", dependentTable, "idNumber", idNo})

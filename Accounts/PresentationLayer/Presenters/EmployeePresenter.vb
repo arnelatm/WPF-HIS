@@ -373,8 +373,8 @@ Namespace PresentationLayer.Presenters
                 Return True
             ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "EmployeePhone", "EmployeeIdNo") Then
                 Return True
-            ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "Er_Details_View", "EmployeeIdNo") Then
-                Return True
+            'ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "ErDetails_View", "EmployeeIdNo") Then
+            '    Return True
             ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "ErJournal", "EmployeeIdNo") Then
                 Return True
             ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "HolidayTransferItem", "EmployeeIdNo") Then

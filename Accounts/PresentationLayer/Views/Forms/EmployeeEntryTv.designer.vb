@@ -1100,6 +1100,7 @@
         Me.DataGridViewPhoneDisplay.FirstRowDeletionEnabled = true
         Me.DataGridViewPhoneDisplay.FirstRowInsertionEnabled = true
         Me.DataGridViewPhoneDisplay.IgnoreCase = false
+        Me.DataGridViewPhoneDisplay.IsDirty = false
         Me.DataGridViewPhoneDisplay.Location = New System.Drawing.Point(3, 174)
         Me.DataGridViewPhoneDisplay.Name = "DataGridViewPhoneDisplay"
         Me.DataGridViewPhoneDisplay.ReadOnly = true
@@ -2659,6 +2660,7 @@
         Me.DataGridViewEarnings.FirstRowDeletionEnabled = true
         Me.DataGridViewEarnings.FirstRowInsertionEnabled = true
         Me.DataGridViewEarnings.IgnoreCase = false
+        Me.DataGridViewEarnings.IsDirty = false
         Me.DataGridViewEarnings.Location = New System.Drawing.Point(0, 0)
         Me.DataGridViewEarnings.Name = "DataGridViewEarnings"
         Me.DataGridViewEarnings.ReadOnly = true
@@ -2826,6 +2828,7 @@
         Me.DataGridViewDeductions.FirstRowDeletionEnabled = true
         Me.DataGridViewDeductions.FirstRowInsertionEnabled = true
         Me.DataGridViewDeductions.IgnoreCase = false
+        Me.DataGridViewDeductions.IsDirty = false
         Me.DataGridViewDeductions.Location = New System.Drawing.Point(3, 3)
         Me.DataGridViewDeductions.Name = "DataGridViewDeductions"
         Me.DataGridViewDeductions.ReadOnly = true
@@ -2998,6 +3001,7 @@
         Me.DataGridViewPhones.FirstRowDeletionEnabled = true
         Me.DataGridViewPhones.FirstRowInsertionEnabled = true
         Me.DataGridViewPhones.IgnoreCase = false
+        Me.DataGridViewPhones.IsDirty = false
         Me.DataGridViewPhones.Location = New System.Drawing.Point(3, 3)
         Me.DataGridViewPhones.Name = "DataGridViewPhones"
         Me.DataGridViewPhones.ReadOnly = true
@@ -3188,6 +3192,7 @@
         Me.DataGridViewLeaveCredits.FirstRowDeletionEnabled = true
         Me.DataGridViewLeaveCredits.FirstRowInsertionEnabled = true
         Me.DataGridViewLeaveCredits.IgnoreCase = false
+        Me.DataGridViewLeaveCredits.IsDirty = false
         Me.DataGridViewLeaveCredits.Location = New System.Drawing.Point(3, 3)
         Me.DataGridViewLeaveCredits.Name = "DataGridViewLeaveCredits"
         Me.DataGridViewLeaveCredits.ReadOnly = true
@@ -3345,6 +3350,7 @@
         Me.Name = "EmployeeEntryTv"
         Me.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.Text = "Employee Maintenance Form"
+        Me.ViewDisplayName = "EmployeeEntryTv"
         Me.SplitContainer1.Panel1.ResumeLayout(false)
         Me.SplitContainer1.Panel2.ResumeLayout(false)
         Me.SplitContainer1.Panel2.PerformLayout

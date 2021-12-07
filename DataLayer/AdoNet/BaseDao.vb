@@ -975,7 +975,7 @@ Namespace AdoNet
         Public Function GetNextSeries(ByVal seriesName As String) As Int32 Implements IBaseDao.GetNextSeries
             Dim retVal As Integer
             Dim sql As String
-            sql = "SELECT NEXT VALUE FOR " & seriesName.Trim() & ".CountBy1"
+            sql = "SELECT NEXT VALUE FOR " & seriesName.Trim() ' & ".CountBy1"
             retVal = _db.Scalar(sql)
             Return retVal
         End Function
@@ -983,7 +983,7 @@ Namespace AdoNet
         Public Function GetNextSeries(ByVal schemaName As String, ByVal seriesName As String) As Int32 Implements IBaseDao.GetNextSeries
             Dim retVal As Integer
             Dim sql As String
-            sql = "SELECT NEXT VALUE FOR " & seriesName.Trim() & ".CountBy1"
+            sql = "SELECT NEXT VALUE FOR " & seriesName.Trim() ' & ".CountBy1"
             retVal = _db.Scalar(sql)
             Return retVal
         End Function

@@ -237,7 +237,7 @@ Namespace DataLayer.AdoNet
 
         Public Function ToSqlImage(ByVal imageIn As System.Drawing.Image) As Byte()
             If imageIn Is Nothing Then
-                Return Nothing
+                Return System.Text.Encoding.UTF8.GetBytes("")
             Else
                 Dim data As Byte() = {}
                 Dim saveImage As New Bitmap(imageIn)
