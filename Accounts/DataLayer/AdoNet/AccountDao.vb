@@ -40,7 +40,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetDetailAccounts(Optional sortExpression As String = Nothing) As List(Of Account) _
             Implements IDaoAccount.GetDetailAccounts
-            If sortExpression Is Nothing Then
+            If sortExpression Is Nothing Or sortExpression = "" Then
                 sortExpression = "AccountName"
             End If
             Dim sql As String
