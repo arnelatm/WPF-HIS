@@ -1531,7 +1531,6 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app-Ibn-Server - Copy.config" />
     <None Include="app.config" />
     <None Include="appx.config" />
     <None Include="appMarcelo.config" />
