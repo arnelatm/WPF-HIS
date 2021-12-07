@@ -22,12 +22,15 @@ Namespace PresentationLayer.Views.Forms
 
         Private ReadOnly _nfi As NumberFormatInfo
 
+        'Public Overrides Property ViewDisplayName as String = "EmployeeEntryTv"
+
         Public Sub New()
 
             ' This call is required by the designer.
             InitializeComponent()
             '_presenter = presenter
             ' Add any initialization after the InitializeComponent() call.
+
             FirstControl = txtEmployeeName
             _nfi = GlobalVariables.DefaultNumberFormatInfo
         End Sub

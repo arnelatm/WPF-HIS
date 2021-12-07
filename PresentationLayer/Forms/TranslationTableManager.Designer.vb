@@ -45,8 +45,8 @@ Partial Class TranslationTableManager
         'DataGrid1
         '
         Me.DataGrid1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
-                                      Or System.Windows.Forms.AnchorStyles.Left)  _
-                                     Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.DataGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGrid1.Location = New System.Drawing.Point(90, 39)
         Me.DataGrid1.MultiSelect = false
@@ -122,29 +122,35 @@ Partial Class TranslationTableManager
         '
         'cmbLanguage
         '
+        Me.cmbLanguage.Enabled = false
         Me.cmbLanguage.FormattingEnabled = true
         Me.cmbLanguage.Location = New System.Drawing.Point(136, 12)
         Me.cmbLanguage.Name = "cmbLanguage"
-        Me.cmbLanguage.Size = New System.Drawing.Size(221, 21)
+        Me.cmbLanguage.Size = New System.Drawing.Size(404, 21)
         Me.cmbLanguage.TabIndex = 32
+        Me.cmbLanguage.Visible = false
         '
         'Label1
         '
         Me.Label1.AutoSize = true
+        Me.Label1.Enabled = false
         Me.Label1.Location = New System.Drawing.Point(12, 17)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(118, 13)
         Me.Label1.TabIndex = 35
         Me.Label1.Text = "Language To Translate"
+        Me.Label1.Visible = false
         '
         'cmbLanguagePicker
         '
         Me.cmbLanguagePicker.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.cmbLanguagePicker.Enabled = false
         Me.cmbLanguagePicker.FormattingEnabled = true
         Me.cmbLanguagePicker.Location = New System.Drawing.Point(728, 12)
         Me.cmbLanguagePicker.Name = "cmbLanguagePicker"
-        Me.cmbLanguagePicker.Size = New System.Drawing.Size(270, 21)
+        Me.cmbLanguagePicker.Size = New System.Drawing.Size(268, 21)
         Me.cmbLanguagePicker.TabIndex = 36
+        Me.cmbLanguagePicker.Visible = false
         '
         'CLabel2
         '
@@ -159,16 +165,19 @@ Partial Class TranslationTableManager
         Me.CLabel2.Size = New System.Drawing.Size(0, 17)
         Me.CLabel2.TabIndex = 24
         Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.CLabel2.Translatable = true
         '
         'Label2
         '
         Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = true
+        Me.Label2.Enabled = false
         Me.Label2.Location = New System.Drawing.Point(573, 14)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(149, 13)
         Me.Label2.TabIndex = 37
         Me.Label2.Text = "Language to Use for this Form"
+        Me.Label2.Visible = false
         '
         'TranslationTableManager
         '
@@ -195,7 +204,7 @@ Partial Class TranslationTableManager
         Me.ResumeLayout(false)
         Me.PerformLayout
 
-    End Sub
+End Sub
     Friend WithEvents DataGrid1 As DataGridView
     Friend WithEvents txtCaption As TextBox
     Friend WithEvents txtTranslation As TextBox
