@@ -28,7 +28,7 @@ Public Class StoreCaptions
         Dim viewDisplayName As String
         _dAc1 = frm.TranslatorDAC
         frm.Tag = frm.Text
-        If frm.ViewDisplayName Is Nothing Then
+        If frm.ViewDisplayName Is Nothing OrElse frm.ViewDisplayName = "" Then
             viewDisplayName = frm.Name
         Else
             viewDisplayName = frm.ViewDisplayName
@@ -101,7 +101,7 @@ Public Class StoreCaptions
         _dAc1 = frm.TranslatorDAC
         SaveOriginalText(frm, frm.Text)
         frm.Tag = frm.Text
-        If frm.ViewDisplayName Is Nothing Or frm.ViewDisplayName = "" Then
+        If frm.ViewDisplayName Is Nothing OrElse frm.ViewDisplayName = "" Then
             viewDisplayName = frm.Name
         Else
             viewDisplayName = frm.ViewDisplayName
