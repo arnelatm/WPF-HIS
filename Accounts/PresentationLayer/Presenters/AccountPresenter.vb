@@ -90,29 +90,29 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
             Dim returnValue As Boolean = False
-            If CheckDependentRecords("CdJournalItem", "Cash Disbursement") Then
+            If CheckDependentJournalRecords("CdJournalItem", "Cash Disbursement") Then
                 Return True
-            ElseIf CheckDependentRecords("PcJournalItem", "Petty Cash Disbursement") Then
+            ElseIf CheckDependentJournalRecords("PcJournalItem", "Petty Cash Disbursement") Then
                 Return True
-            ElseIf CheckDependentRecords("CashReceiptJournalItem", "Cash Receipt") Then
+            ElseIf CheckDependentJournalRecords("CashReceiptJournalItem", "Cash Receipt") Then
                 Return True
-            ElseIf CheckDependentRecords("ApJournalItem", "Accounts Payable") Then
+            ElseIf CheckDependentJournalRecords("ApJournalItem", "Accounts Payable") Then
                 Return True
-            ElseIf CheckDependentRecords("ArJournalItem", "Accounts Receivable") Then
+            ElseIf CheckDependentJournalRecords("ArJournalItem", "Accounts Receivable") Then
                 Return True
-            ElseIf CheckDependentRecords("SalesJournalItem", "Sales Journal") Then
+            ElseIf CheckDependentJournalRecords("SalesJournalItem", "Sales Journal") Then
                 Return True
-            ElseIf CheckDependentRecords("GeneralJournalItem", "General Journal") Then
+            ElseIf CheckDependentJournalRecords("GeneralJournalItem", "General Journal") Then
                 Return True
-            ElseIf CheckDependentRecords("ErJournalItem", "Employee Loans Journal") Then
+            ElseIf CheckDependentJournalRecords("ErJournalItem", "Employee Loans Journal") Then
                 Return True
-            ElseIf CheckDependentRecords("PayElementAccount", "Pay Element Account", "PayElementIdNo") Then
+            ElseIf CheckDependentJournalRecords("PayElementAccount", "Pay Element Account", "PayElementIdNo") Then
                 Return True
             End If
             Return False
         End Function
 
-        Private Function CheckDependentRecords(ByVal journalName As String, ByVal journalDescription As String, Optional returnFieldName As String = "JournalIdNo") As Boolean
+        Private Function CheckDependentJournalRecords(ByVal journalName As String, ByVal journalDescription As String, Optional returnFieldName As String = "JournalIdNo") As Boolean
             Dim transactionIdNo = Service.GetRecordFieldWithKeyG(Of Integer)(View.IdNo, journalName, "AccountIdNo", returnFieldName)
             If transactionIdNo > 0 Then
                 Dim jdMessage = Messaging.TranslateCaption(journalDescription)

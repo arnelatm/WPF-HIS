@@ -33,7 +33,6 @@ Namespace PresentationLayer.Presenters
             CreateSpecialAccountDataSource("ApAccountIdNo", {EnumToCode(SpecialAccountSelection.AccountsPayable)})
         End Sub
 
-
         Public Function GetSupplierBalance(idNo As Integer)
             Return Service.GetFieldValue(Of Decimal)("Sum(Credit-Debit)", "ApStatement_View", "SupplierIdNo = " & idNo.ToString() & " and SpecialAccount = 'AP'")
         End Function
@@ -77,6 +76,16 @@ Namespace PresentationLayer.Presenters
             value = Convert.ToDouble(GetSupplierBalance(TargetIdNo))
             View.Balance = value.ToString("N2")
         End Sub
+
+        Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
+            Dim returnValue As Boolean = False
+            If CheckDependentRecords(Of Int16)(View.IdNo, "JournalDetails_View", "SupplierIdNo") Then
+                Return True
+            ElseIf CheckDependentRecords(Of Int16)(View.IdNo, "SupplierInvoices", "SupplierIdNo") Then
+                Return True
+            End If
+            Return False
+        End Function
 
     End Class
 
