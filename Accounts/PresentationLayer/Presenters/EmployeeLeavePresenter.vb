@@ -97,7 +97,9 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
             If MyBase.IsBizDataValid() Then
-                If _holiday Then
+                If Not _holiday Then
+                    retValue = True
+                Else
                     'Dim leave As LeaveModel
                     'leave = _leaveService.GetRecordByIdNo(Of LeaveModel)(View.LeaveIdNo)
                     If _holidayModel.DateStart >= View.StartDate AndAlso _holidayModel.DateEnd <= View.EndDate Then
@@ -154,8 +156,6 @@ Namespace PresentationLayer.Presenters
                             End If
                         End If
                     End If
-                Else
-
                 End If
             End If
             Return retValue
