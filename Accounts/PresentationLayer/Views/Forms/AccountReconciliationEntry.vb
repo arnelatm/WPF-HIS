@@ -311,6 +311,29 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        'Private Sub DataGridViewReconciliationItems_CellContentClick() Handles DataGridViewReconciliationItems.CellValueChanged
+        '    If DataGridViewReconciliationItems.CurrentCell IsNot Nothing AndAlso (Presenter.EditMode Or Presenter.AddMode) Then
+        '        With DataGridViewReconciliationItems.CurrentCell
+        '            Select Case .OwningColumn.Name.ToLower()
+        '                Case $"dgvcleared"
+        '                    Dim selectedRow = DataGridViewReconciliationItems.Rows(.RowIndex).DataBoundItem
+        '                    RaiseEvent ReconciliationClearEvent(selectedRow, False, .Value, bsAccountReconciliationItems)
+        '            End Select
+        '        End With
+        '    End If
+        'End Sub
+
+        'Private Sub CheckBoxValueChanged() Handles DataGridViewReconciliationItems.CellValueChanged
+        '    If TypeOf DataGridViewReconciliationItems.CurrentCell Is DataGridViewCheckBoxCell Then
+        '        If DataGridViewReconciliationItems.CurrentCell.OwningColumn.Name = "dgvCleared" Then
+        '            With DataGridViewReconciliationItems.CurrentCell
+        '                Dim selectedRow = DataGridViewReconciliationItems.Rows(.RowIndex).DataBoundItem
+        '                RaiseEvent ReconciliationClearEvent(selectedRow, False, .Value, bsAccountReconciliationItems)
+        '            End With
+        '        End If
+        '    End If
+        'End Sub
+
         Private Sub MenuClicked()
             Dim myForm = FindForm()
             Dim pnt As Point
