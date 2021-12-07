@@ -587,6 +587,19 @@ Namespace AdoNet
             Return retVal
         End Function
 
+        Public Function GetRecordFieldWithKeyG(Of TR, TS)(searchValue As TS, tableName As String, searchFieldName As String, returnFieldName As String) As TR _
+            Implements IBaseDao.GetRecordFieldWithKeyG
+            Dim sql As String =
+                    " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] " &
+                    " Where " & searchFieldName & " = @SearchValue "
+            Dim params() As Object = {"@SearchValue", searchValue}
+            Dim retVal = _db.Scalar(sql, params)
+            If retVal Is Nothing Or IsDBNull(retVal) Then
+                Return Nothing
+            End If
+            Return retVal
+        End Function
+
         Public Function GetRecordPosition(tableName As String, idNo As Int32) As Integer _
             Implements IBaseDao.GetRecordPosition
             Dim sql As String =

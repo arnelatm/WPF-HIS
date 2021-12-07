@@ -64,6 +64,18 @@ Namespace PresentationLayer.Presenters
             Return Service.GetFieldValue(Of Decimal)("Sum(Debit-Credit)", "ArStatement_View", "CustomerIdNo = " & idNo.ToString())
         End Function
 
+        Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
+            Dim returnValue As Boolean = False
+            If CheckDependentRecords(Of Int16)(View.IdNo, "ArJournal", "CustomerIdNo") Then
+                Return True
+            ElseIf CheckDependentRecords(Of Int16)(View.IdNo, "ArStatement_View", "CustomerIdNo") Then
+                Return True
+            ElseIf CheckDependentRecords(Of Int16)(View.IdNo, "ArInvoices_View", "CustomerIdNo") Then
+                Return False
+            End If
+            Return False
+        End Function
+
     End Class
 
 End Namespace

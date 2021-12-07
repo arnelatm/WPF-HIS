@@ -61,6 +61,9 @@ Public Interface IBaseDao
     Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String,
                                    returnFieldName As String) As T
 
+    Function GetRecordFieldWithKeyG(Of TR, TS)(searchValue As TS, tableName As String, searchFieldName As String,
+                                          returnFieldName As String) As TR
+
     Function GetRecordPosition(tableName As String, idNo As Int32) As Integer
 
     Function GetRecordPositionByName(tableName As String, sortField As String, nameValue As String) As Integer

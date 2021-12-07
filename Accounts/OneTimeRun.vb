@@ -123,7 +123,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgLeaveAlreadyActed", "Sorry, this leave has already been '{approvalAction}', change not allowed.", "Error")
         Messaging.AddMessage("MsgNoLeavesToApprove", "Either No leaves are currently applied or all available leaves have already been acted upon.", "Error")
         Messaging.AddMessage("MsgNoHolidayAvailmentToApprove", "Either No holiday availment are currently applied or all available holiday availment have already been acted upon.", "Error")
-
+        Messaging.AddMessage("MsgSeeTableEntry", "See entry on {tableName} with ID Number #{idNumber}", "Error")
     End Sub
 
     'Public Shared Sub CreateEnums()

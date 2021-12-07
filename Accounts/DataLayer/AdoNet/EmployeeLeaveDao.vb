@@ -126,11 +126,14 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function GetEmployeeHolidayLeaves(employeeIdNo As Int32, holidayIdNo As Int16)
-              Dim sql As String = "SELECT " &FieldList & 'IdNo, EmployeeIdNo" &
-                    " FROM [EmployeeLeave_View] where EmployeeIdNo = @employeeIdNo and HolidayIdNo = @holidayIdNo "
-              Dim params() As Object = {"@employeeIdNo", employeeIdNo, "@HolidayIdNo", holidayIdNo}
-              Dim data = Db.Read(sql, Make, params).ToList()
-              Return data
+            Dim sql As String = "SELECT " & FieldList & 'IdNo, EmployeeIdNo" &
+                  " FROM [EmployeeLeave_View] where EmployeeIdNo = @employeeIdNo and HolidayIdNo = @holidayIdNo and LeaveStatus in (" &
+                  EnumToCode(LeaveStatusSelection.SupervisorApproved) & "," &
+                  EnumToCode(LeaveStatusSelection.Approved) & "," &
+                  EnumToCode(LeaveStatusSelection.Submitted) & ")"
+            Dim params() As Object = {"@employeeIdNo", employeeIdNo, "@HolidayIdNo", holidayIdNo}
+            Dim data = Db.Read(sql, Make, params).ToList()
+            Return data
         End Function
 
         Private Shared ReadOnly MakeLeaveApprovalHistory As Func(Of IDataReader, EmployeeLeaveApprovalHistory) =

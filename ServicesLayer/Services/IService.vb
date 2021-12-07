@@ -47,7 +47,7 @@ Namespace Services
 
         Function GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As T
 
-        Function GetFieldOnMaxField(searchFieldName As String, tableName As String, returnFieldName As String, Optional filter As String = Nothing) As Object
+        Function GetRecordFieldWithKeyG(Of TR, TS)(searchValue As TS, tableName As String, searchFieldName As String, returnFieldName As String) As TR
 
         Function GetRecordPosition(tableName As String, idNo As Int32) As Integer
 
@@ -112,6 +112,8 @@ Namespace Services
         Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String) As ExpandoObject
 
         Function GetDataSet(storedProcedureName As String, parameters As Object) As DataSet
+
+        Function GetFieldOnMaxField(searchFieldName As String, tableName As String, returnFieldName As String, Optional filter As String = Nothing) As Object
 
     End Interface
 

@@ -98,8 +98,8 @@ Namespace PresentationLayer.Presenters
             Dim retValue = False
             If MyBase.IsBizDataValid() Then
                 If _holiday Then
-                    Dim leave As LeaveModel
-                    leave = _leaveService.GetRecordByIdNo(Of LeaveModel)(View.LeaveIdNo)
+                    'Dim leave As LeaveModel
+                    'leave = _leaveService.GetRecordByIdNo(Of LeaveModel)(View.LeaveIdNo)
                     If _holidayModel.DateStart >= View.StartDate AndAlso _holidayModel.DateEnd <= View.EndDate Then
                         retValue = True
                     Else
@@ -108,15 +108,14 @@ Namespace PresentationLayer.Presenters
                         Dim htService = New AccountsService("HolidayTransferItem")
                         Dim nDays As Long = 0
                         Dim holidayTransfers = htService.GetHolidayTransferItems(View.EmployeeIdNo, View.HolidayIdNo)
-                        If holidayTransfers Is Nothing OrElse holidayTransfers.Count() < 1 Then
-                            MessageBox.Show("Sorry you don't have a holiday transfer request for this holiday.")
+                        If holidayTransfers Is Nothing OrElse holidayTransfers.Count() = 0 Then
+                            MessageBox.Show($"Sorry you don't have a holiday transfer request for this holiday.")
                         Else
                             Dim employeeLeaveModelList = New List(Of EmployeeLeaveModel)
                             Dim employeeLeaveService = New AccountsService("EmployeeLeave")
                             Dim noOfRequestedDays As Short
                             noOfRequestedDays = DateDiff(DateInterval.Day, View.StartDate, View.EndDate) + 1
                             Dim records = employeeLeaveService.GetEmployeeHolidayLeaves(View.EmployeeIdNo, View.HolidayIdNo)
-                            'GlobalVariables.Mapper.Map(records,employeeLeaveModelList)
                             If records Is Nothing OrElse records.Count = 0 Then
                                 retValue = True
                             Else
@@ -155,6 +154,8 @@ Namespace PresentationLayer.Presenters
                             End If
                         End If
                     End If
+                Else
+
                 End If
             End If
             Return retValue

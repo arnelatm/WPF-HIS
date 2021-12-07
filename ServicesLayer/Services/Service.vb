@@ -509,6 +509,10 @@ Namespace Services
             Return BaseDao.GetRecordFieldWithKeyG(Of T)(searchValue, tableName, searchFieldName, returnFieldName)
         End Function
 
+        Public Function GetRecordFieldWithKeyG(Of TR, TS)(searchValue As TS, tableName As String, searchFieldName As String, returnFieldName As String) As TR Implements IService.GetRecordFieldWithKeyG
+            Return BaseDao.GetRecordFieldWithKeyG(Of TR, TS)(searchValue, tableName, searchFieldName, returnFieldName)
+        End Function
+
         Public Function GetRecordField(tableName As String, returnFieldName As String) As Object Implements IService.GetRecordField
             Return BaseDao.GetRecordField(tableName, returnFieldName)
         End Function

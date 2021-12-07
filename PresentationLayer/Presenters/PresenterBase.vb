@@ -801,6 +801,30 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return True
     End Function
 
+    Public Function CheckDependentRecords(Of T)(ByVal searchValue As T, ByVal dependentTableName As String, ByVal keyFieldName As String) As Boolean
+        Dim idNo = Service.GetRecordFieldWithKeyG(Of Integer, Integer)(searchValue, dependentTableName, keyFieldName)
+        If idNo > 0 Then
+            Dim dependentTable = Messaging.TranslateCaption(dependentTableName)
+            Dim additionalMessage = Messaging.GetParametrizedMessage(True, "MsgSeeTableEntry", {"tableName", dependentTable, "idNumber", idNo})
+            Dim message = Messaging.GetParametrizedMessage(True, "MsgDependentRecordExists", {"additionalMessage", additionalMessage})
+            Messaging.Show(message, MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return True
+        End If
+        Return False
+    End Function
+
+    'Public Function CheckDependentRecords(Of TS)(ByVal searchValue As TS, ByVal dependentTableName As String, ByVal keyFieldName As String) As Boolean
+    '    Dim idNo = Service.GetRecordFieldWithKeyG(Of Integer, Integer)(searchValue, dependentTableName, keyFieldName)
+    '    If idNo > 0 Then
+    '        Dim dependentTable = Messaging.TranslateCaption(dependentTableName)
+    '        Dim additionalMessage = Messaging.GetParametrizedMessage(True, "MsgSeeTableEntry", {"tableName", dependentTable, "idNumber", idNo})
+    '        Dim message = Messaging.GetParametrizedMessage(True, "MsgDependentRecordExists", {"additionalMessage", additionalMessage})
+    '        Messaging.Show(message, MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '        Return True
+    '    End If
+    '    Return False
+    'End Function
+
     Public Overridable Function Save(ByRef viewControl As Control)
         RaiseEvent BeforeSave()
         Dim record As New TM
