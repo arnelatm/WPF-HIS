@@ -22,7 +22,7 @@ Public Class BfMain
     Private _sw As Int16 = 0
     Private _parentIdNo As Int32 = 0
     Private _formCulture As CultureInfo
-
+    Private _systemViewIdNo as Int32
     'Private _myPresenter As UserPresenter
     Protected CaptionCollection As New Collection
 
@@ -48,8 +48,7 @@ Public Class BfMain
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             TextDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
         End If
-        ' Add any initialization after the InitializeComponent() call.
-        VSystemViewIdNo = GetSystemViewIdNo()
+        ' Add any initialization after the InitializeComponent() call.       
     End Sub
 
     Public Sub New(ByVal transDac As Dac, ByVal appDac As Dac)
@@ -114,6 +113,13 @@ Public Class BfMain
     End Property
 
     Protected Property VSystemViewIdNo As Short
+        get
+            return GetSystemViewIdNo()
+        End Get        
+        set(value As Short)
+            _systemViewIdNo = value
+        End Set
+    End Property
 
     'Public Sub SetupDisplay()
     '    If IsRightToLeft(_textDisplayLanguage) Then
@@ -315,9 +321,9 @@ Public Class BfMain
                     End If
                     Try
                         _originalText = CaptionCollection.Item(cCtrl.Name)
-                        if _originalText = "Gender" then
-                            debugger.Break()
-                        End If
+                        'if _originalText = "Gender" then
+                        '    debugger.Break()
+                        'End If
                         r = Dv.Find(_originalText)
                         If r >= 0 Then
                             cCtrl.Text = Dv(r).Item("TranslatedCaption")
@@ -375,7 +381,7 @@ Public Class BfMain
     End Sub
 
     Protected Function GetTranslations(targetLanguageIdNo As Integer) As DataSet
-        Dim cmd As String = "Select Caption, translatedCaption from SystemViewItemOriginal_view where LanguageIdNo = " + targetLanguageIdNo.ToString() + " and SystemViewIdNo = " + VSystemViewIdNo.ToString()
+        Dim cmd As String = "Select Caption, translatedCaption from SystemViewItemOriginal_view where LanguageIdNo = " + targetLanguageIdNo.ToString() + " and SystemViewIdNo = " + GetSystemViewIdNo.ToString()
         Dim translations As DataSet
         translations = TranslatorDAC.ReturnDs(cmd)
         Return translations
@@ -675,7 +681,7 @@ Public Class BfMain
             CaptionCollection = StoreCaptions1.StoreTranslation(Me)
             StoreCaptions1.SaveControlsOriginalText(Me)
             DefaultMirroredLanguageIdNo = TranslatorDAC.DefaultMirroredLanguageIdNo
-            If ViewDisplayName Is Nothing Then
+            If ViewDisplayName Is Nothing or ViewDisplayName = "" Then
                 ViewDisplayName = Name
             End If
         End If

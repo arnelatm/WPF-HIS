@@ -37,6 +37,10 @@ Public Class TranslationTableManager
 
             AddHandler GridClick, AddressOf OnGridClick
         End If
+        cmbLanguage.Enabled = False
+        cmbLanguagePicker.Enabled = False
+        cmbLanguage.Visible = False
+        cmbLanguagePicker.Visible = False
     End Sub
 
 #Region " Form Load event code "
@@ -50,7 +54,7 @@ Public Class TranslationTableManager
             'Dim defaultMirroredLanguageIdNo As Int16
             'Cmd = "Select IdNo from Languages where cultureinfocode = '" + GlobalVariables.DefaultMirroredCultureInfoStr + "'"
             'defaultMirroredLanguageIdNo = TranslatorDAC.ExecScalar(Of Int16)(Cmd)
-            cmbLanguage.SelectedValue = DefaultMirroredLanguageIdNo
+            cmbLanguage.SelectedValue = TranslatorDAC.DefaultMirroredLanguageIdNo 
 
             Dim dsLanguages As DataSet
             Cmd = "SELECT idNo,Concat(Language,'-',LTrim(RTrim(Country))) as LanguageName FROM languages order by LanguageName"

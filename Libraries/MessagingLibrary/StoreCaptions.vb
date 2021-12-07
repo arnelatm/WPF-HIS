@@ -151,9 +151,9 @@ Public Class StoreCaptions
                         'TypeOf cCtrl Is TabPage Then
                         'TypeOf cCtrl Is AATM.Libraries.CBaseControlsLibrary.CButton Then
                         t = cCtrl.Text
-                        If t = "Gender" Then
-                            Debugger.Break()
-                        End If
+                        'If t = "Gender" Then
+                        '    Debugger.Break()
+                        'End If
                         If Not String.IsNullOrWhiteSpace(t) Then
                             Captions.Add(cCtrl.Text, cCtrl.Name)
                             InsertTranslation(t, systemViewIdNo)
@@ -401,9 +401,9 @@ Public Class StoreCaptions
         Dim captionIdNo As Int32
         cmd = "Select IdNo From OriginalCaptions where Caption = '" + item.ToString().TrimEnd() + "'"
         captionIdNo = _dAc1.ExecScalar(Of Int32)(cmd)
-        if item.ToString().TrimEnd() = "Gender" then
-            debugger.Break()
-        End If
+        'if item.ToString().TrimEnd() = "Gender" then
+        '    debugger.Break()
+        'End If
         cmd = "SELECT COUNT(*) FROM SystemViewItem where CaptionIdNo = " + captionIdNo.ToString() + " and SystemViewIdNo = " + systemViewIdNo.ToString()
         Dim howMany As Integer = _dAc1.ExecScalar(Of Int16)(cmd)
         If howMany = 0 Then
