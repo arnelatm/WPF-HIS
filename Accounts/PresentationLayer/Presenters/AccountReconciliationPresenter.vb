@@ -299,7 +299,7 @@ Namespace PresentationLayer.Presenters
                         View.TotalQtyCreditsNotCleared -= 1
                     End If
                 End If
-                sender.Cleared = Not sender.Cleared
+                'sender.Cleared = Not sender.Cleared
             End If
             ReComputeDifference()
         End Sub
