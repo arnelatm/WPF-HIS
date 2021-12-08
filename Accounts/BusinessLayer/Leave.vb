@@ -26,6 +26,7 @@ Namespace BusinessLayer
         Public Property Holiday As Boolean
         Public Property MaxCarryOver As Decimal
         Public Property MaxLimit As Decimal
+        Public Property NoMaxLimit As Boolean
         Public Property Notes As String
     End Class
 

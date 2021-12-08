@@ -166,10 +166,11 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Function IsLeaveValid() As Boolean
-            Dim retValue as Boolean = False
+            Dim retValue As Boolean = False
             Dim employeeLeaveModelList = New List(Of EmployeeLeaveModel)
             Dim employeeLeaveService = New AccountsService("EmployeeLeave")
             Dim noOfRequestedDays As Short
+            Dim noOfDaysInHoliday As Long = DateAndTime.DateDiff(DateInterval.Day, _holidayModel.DateStart, _holidayModel.DateEnd) + 1
             noOfRequestedDays = DateDiff(DateInterval.Day, View.StartDate, View.EndDate) + 1
             Dim records = employeeLeaveService.GetEmployeeHolidayLeaves(View.EmployeeIdNo, View.HolidayIdNo)
             If records Is Nothing OrElse records.Count = 0 Then

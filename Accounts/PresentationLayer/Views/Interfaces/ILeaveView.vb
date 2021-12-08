@@ -14,6 +14,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Holiday As Boolean
         Property MaxCarryOver As Decimal
         Property MaxLimit As Decimal
+        Property NoMaxLimit As Boolean
         Property Notes As String
     End Interface
 

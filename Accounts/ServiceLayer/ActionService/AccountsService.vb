@@ -141,6 +141,13 @@ Namespace ServiceLayer.ActionService
             Return model
         End Function
 
+        Friend Function GetEmployeeLeaves(idNo As Integer, leaveIdNo As Short) As List(Of EmployeeLeaveModel)
+            Dim records = DataDao.GetEmployeeLeaves(idNo, leaveIdNo)
+            Dim model As New List(Of EmployeeLeaveModel)
+            GlobalVariables.Mapper.Map(records, model)
+            Return model
+        End Function
+
         Private Function ComputeFixedRateEarning(payFrequency As Char, amount As Decimal, payRateUnit As Char) As Decimal
             Dim factor As Decimal
             Dim payFrequencySel = CodeToEnum(Of PayFrequencySelection)(payFrequency)
@@ -293,7 +300,7 @@ Namespace ServiceLayer.ActionService
         End Function
 
         Public Function GetHolidayTransferItems(ByVal employeeIdNo As Int32, ByVal holidayIdNo As Int16)
-            Return DataDao.GetHolidayTransferItems(employeeIdNo,holidayIdNo)
+            Return DataDao.GetHolidayTransferItems(employeeIdNo, holidayIdNo)
         End Function
 
         'Public Function GetCustomerOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)

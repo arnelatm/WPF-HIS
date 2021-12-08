@@ -73,6 +73,15 @@ Namespace PresentationLayer.Views
             End Set
         End Property
 
+        Public Property NoMaxLimit As Boolean Implements ILeaveView.NoMaxLimit
+            Get
+                Return chkCumulative.Checked
+            End Get
+            Set
+                chkCumulative.Checked = Value
+            End Set
+        End Property
+
         Public Property MaxCarryOver As Decimal Implements ILeaveView.MaxCarryOver
             Get
                 Return txtMaxCarryOver.GetDecimalValue()

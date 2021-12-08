@@ -30,6 +30,8 @@ Namespace PresentationLayer.Views.Forms
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(LeaveEntryTv))
         Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.lblHoliday = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.chkHoliday = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtMaxLimit = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -50,8 +52,8 @@ Namespace PresentationLayer.Views.Forms
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.chkHoliday = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-        Me.lblHoliday = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.lblNoMaxLimit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.chkNoMaxLimit = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -91,18 +93,18 @@ Namespace PresentationLayer.Views.Forms
         'TableLayoutPanel1
         '
         resources.ApplyResources(Me.TableLayoutPanel1, "TableLayoutPanel1")
-        Me.TableLayoutPanel1.Controls.Add(Me.lblHoliday, 1, 12)
-        Me.TableLayoutPanel1.Controls.Add(Me.chkHoliday, 1, 13)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblHoliday, 2, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.chkHoliday, 2, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.lblNotes, 0, 14)
         Me.TableLayoutPanel1.Controls.Add(Me.txtNotes, 0, 15)
-        Me.TableLayoutPanel1.Controls.Add(Me.txtMaxLimit, 0, 13)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblMaxLimit, 0, 12)
-        Me.TableLayoutPanel1.Controls.Add(Me.txtMaxCarryOver, 1, 11)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblMaxCarryOver, 1, 10)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtMaxLimit, 2, 13)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblMaxLimit, 2, 12)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtMaxCarryOver, 2, 11)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblMaxCarryOver, 2, 10)
         Me.TableLayoutPanel1.Controls.Add(Me.chkCumulative, 0, 11)
         Me.TableLayoutPanel1.Controls.Add(Me.lblCumulative, 0, 10)
-        Me.TableLayoutPanel1.Controls.Add(Me.txtPaidPercent, 1, 9)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblPaidPercent, 1, 8)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtPaidPercent, 2, 9)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblPaidPercent, 2, 8)
         Me.TableLayoutPanel1.Controls.Add(Me.txtLeaveAllowed, 0, 9)
         Me.TableLayoutPanel1.Controls.Add(Me.lblLeaveAllowed, 0, 8)
         Me.TableLayoutPanel1.Controls.Add(Me.txtLeaveNameAra, 0, 7)
@@ -113,7 +115,41 @@ Namespace PresentationLayer.Views.Forms
         Me.TableLayoutPanel1.Controls.Add(Me.TxtIdNo, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.lblIdNo, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.lblCode, 1, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblNoMaxLimit, 0, 12)
+        Me.TableLayoutPanel1.Controls.Add(Me.chkNoMaxLimit, 0, 13)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        '
+        'lblHoliday
+        '
+        resources.ApplyResources(Me.lblHoliday, "lblHoliday")
+        Me.lblHoliday.DisplayOnly = true
+        Me.lblHoliday.EditingMode = false
+        Me.lblHoliday.Name = "lblHoliday"
+        Me.lblHoliday.Translatable = true
+        '
+        'chkHoliday
+        '
+        resources.ApplyResources(Me.chkHoliday, "chkHoliday")
+        Me.chkHoliday.BackColor = System.Drawing.Color.White
+        Me.chkHoliday.BegFindValue = Nothing
+        Me.chkHoliday.DisplayOnly = false
+        Me.chkHoliday.EditingMode = true
+        Me.chkHoliday.EndFindValue = Nothing
+        Me.chkHoliday.FieldDescription = Nothing
+        Me.chkHoliday.FieldName = Nothing
+        Me.chkHoliday.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.chkHoliday.FindEnabled = false
+        Me.chkHoliday.FlatAppearance.BorderSize = 0
+        Me.chkHoliday.ForeColor = System.Drawing.Color.Black
+        Me.chkHoliday.IFindableControl_FindEnabled = false
+        Me.chkHoliday.IgnoreCase = false
+        Me.chkHoliday.LinkedLabel = Nothing
+        Me.chkHoliday.Name = "chkHoliday"
+        Me.chkHoliday.NoLabel = true
+        Me.chkHoliday.OldValue = Nothing
+        Me.chkHoliday.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.chkHoliday.Translatable = false
+        Me.chkHoliday.UseVisualStyleBackColor = false
         '
         'lblNotes
         '
@@ -128,17 +164,17 @@ Namespace PresentationLayer.Views.Forms
         Me.txtNotes.BackColor = System.Drawing.Color.White
         Me.txtNotes.BegFindValue = Nothing
         Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TableLayoutPanel1.SetColumnSpan(Me.txtNotes, 2)
+        Me.TableLayoutPanel1.SetColumnSpan(Me.txtNotes, 3)
         Me.txtNotes.ComputedValue = false
         Me.txtNotes.CustomFormat = Nothing
         Me.txtNotes.DataBoundControl = true
+        resources.ApplyResources(Me.txtNotes, "txtNotes")
         Me.txtNotes.EditingMode = false
         Me.txtNotes.EndFindValue = Nothing
         Me.txtNotes.FieldDescription = Nothing
         Me.txtNotes.FieldName = Nothing
         Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtNotes.FindEnabled = true
-        resources.ApplyResources(Me.txtNotes, "txtNotes")
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
         Me.txtNotes.MaximumValue = Nothing
@@ -313,6 +349,7 @@ Namespace PresentationLayer.Views.Forms
         'lblLeaveAllowed
         '
         resources.ApplyResources(Me.lblLeaveAllowed, "lblLeaveAllowed")
+        Me.TableLayoutPanel1.SetColumnSpan(Me.lblLeaveAllowed, 2)
         Me.lblLeaveAllowed.DisplayOnly = true
         Me.lblLeaveAllowed.EditingMode = false
         Me.lblLeaveAllowed.Name = "lblLeaveAllowed"
@@ -323,7 +360,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtLeaveNameAra.BackColor = System.Drawing.Color.White
         Me.txtLeaveNameAra.BegFindValue = Nothing
         Me.txtLeaveNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TableLayoutPanel1.SetColumnSpan(Me.txtLeaveNameAra, 2)
+        Me.TableLayoutPanel1.SetColumnSpan(Me.txtLeaveNameAra, 3)
         Me.txtLeaveNameAra.ComputedValue = false
         Me.txtLeaveNameAra.CustomFormat = Nothing
         Me.txtLeaveNameAra.DataBoundControl = true
@@ -350,7 +387,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtLeaveName.BackColor = System.Drawing.Color.White
         Me.txtLeaveName.BegFindValue = Nothing
         Me.txtLeaveName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TableLayoutPanel1.SetColumnSpan(Me.txtLeaveName, 2)
+        Me.TableLayoutPanel1.SetColumnSpan(Me.txtLeaveName, 3)
         Me.txtLeaveName.ComputedValue = false
         Me.txtLeaveName.CustomFormat = Nothing
         Me.txtLeaveName.DataBoundControl = true
@@ -460,37 +497,37 @@ Namespace PresentationLayer.Views.Forms
         Me.lblCode.Name = "lblCode"
         Me.lblCode.Translatable = true
         '
-        'chkHoliday
+        'lblNoMaxLimit
         '
-        resources.ApplyResources(Me.chkHoliday, "chkHoliday")
-        Me.chkHoliday.BackColor = System.Drawing.Color.White
-        Me.chkHoliday.BegFindValue = Nothing
-        Me.chkHoliday.DisplayOnly = false
-        Me.chkHoliday.EditingMode = true
-        Me.chkHoliday.EndFindValue = Nothing
-        Me.chkHoliday.FieldDescription = Nothing
-        Me.chkHoliday.FieldName = Nothing
-        Me.chkHoliday.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.chkHoliday.FindEnabled = false
-        Me.chkHoliday.FlatAppearance.BorderSize = 0
-        Me.chkHoliday.ForeColor = System.Drawing.Color.Black
-        Me.chkHoliday.IFindableControl_FindEnabled = false
-        Me.chkHoliday.IgnoreCase = false
-        Me.chkHoliday.LinkedLabel = Nothing
-        Me.chkHoliday.Name = "chkHoliday"
-        Me.chkHoliday.NoLabel = true
-        Me.chkHoliday.OldValue = Nothing
-        Me.chkHoliday.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.chkHoliday.Translatable = false
-        Me.chkHoliday.UseVisualStyleBackColor = false
+        resources.ApplyResources(Me.lblNoMaxLimit, "lblNoMaxLimit")
+        Me.lblNoMaxLimit.DisplayOnly = true
+        Me.lblNoMaxLimit.EditingMode = false
+        Me.lblNoMaxLimit.Name = "lblNoMaxLimit"
+        Me.lblNoMaxLimit.Translatable = true
         '
-        'lblHoliday
+        'chkNoMaxLimit
         '
-        resources.ApplyResources(Me.lblHoliday, "lblHoliday")
-        Me.lblHoliday.DisplayOnly = true
-        Me.lblHoliday.EditingMode = false
-        Me.lblHoliday.Name = "lblHoliday"
-        Me.lblHoliday.Translatable = true
+        resources.ApplyResources(Me.chkNoMaxLimit, "chkNoMaxLimit")
+        Me.chkNoMaxLimit.BackColor = System.Drawing.Color.White
+        Me.chkNoMaxLimit.BegFindValue = Nothing
+        Me.chkNoMaxLimit.DisplayOnly = false
+        Me.chkNoMaxLimit.EditingMode = true
+        Me.chkNoMaxLimit.EndFindValue = Nothing
+        Me.chkNoMaxLimit.FieldDescription = Nothing
+        Me.chkNoMaxLimit.FieldName = Nothing
+        Me.chkNoMaxLimit.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.chkNoMaxLimit.FindEnabled = false
+        Me.chkNoMaxLimit.FlatAppearance.BorderSize = 0
+        Me.chkNoMaxLimit.ForeColor = System.Drawing.Color.Black
+        Me.chkNoMaxLimit.IFindableControl_FindEnabled = false
+        Me.chkNoMaxLimit.IgnoreCase = false
+        Me.chkNoMaxLimit.LinkedLabel = Nothing
+        Me.chkNoMaxLimit.Name = "chkNoMaxLimit"
+        Me.chkNoMaxLimit.NoLabel = true
+        Me.chkNoMaxLimit.OldValue = Nothing
+        Me.chkNoMaxLimit.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.chkNoMaxLimit.Translatable = false
+        Me.chkNoMaxLimit.UseVisualStyleBackColor = false
         '
         'LeaveEntryTv
         '
@@ -533,5 +570,7 @@ End Sub
         Friend WithEvents lblCode As CLabel
         Friend WithEvents lblHoliday As CLabel
         Friend WithEvents chkHoliday As CCheckBox
+        Friend WithEvents lblNoMaxLimit As CLabel
+        Friend WithEvents chkNoMaxLimit As CCheckBox
     End Class
 End Namespace

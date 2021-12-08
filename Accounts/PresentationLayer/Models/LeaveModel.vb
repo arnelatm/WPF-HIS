@@ -16,6 +16,7 @@
         Public Property LeaveNameAra As String
         Public Property MaxCarryOver As Decimal
         Public Property MaxLimit As Decimal
+        Public Property NoMaxLimit As Boolean
         Public Property Notes As String
         Public Property PaidPercent As Decimal
 
