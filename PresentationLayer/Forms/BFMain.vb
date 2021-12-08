@@ -22,7 +22,8 @@ Public Class BfMain
     Private _sw As Int16 = 0
     Private _parentIdNo As Int32 = 0
     Private _formCulture As CultureInfo
-    Private _systemViewIdNo as Int32
+    Private _systemViewIdNo As Int32
+
     'Private _myPresenter As UserPresenter
     Protected CaptionCollection As New Collection
 
@@ -48,7 +49,7 @@ Public Class BfMain
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             TextDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
         End If
-        ' Add any initialization after the InitializeComponent() call.       
+        ' Add any initialization after the InitializeComponent() call.
     End Sub
 
     Public Sub New(ByVal transDac As Dac, ByVal appDac As Dac)
@@ -113,10 +114,10 @@ Public Class BfMain
     End Property
 
     Protected Property VSystemViewIdNo As Short
-        get
-            return GetSystemViewIdNo()
-        End Get        
-        set(value As Short)
+        Get
+            Return GetSystemViewIdNo()
+        End Get
+        Set(value As Short)
             _systemViewIdNo = value
         End Set
     End Property
@@ -389,7 +390,7 @@ Public Class BfMain
 
     Protected Function GetSystemViewIdNo()
         Dim cmd As String
-        If ViewDisplayName Is Nothing or ViewDisplayName = "" Then
+        If ViewDisplayName Is Nothing Or ViewDisplayName = "" Then
             ViewDisplayName = Name
         End If
         cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + ViewDisplayName.Trim() + "'"
@@ -681,7 +682,7 @@ Public Class BfMain
             CaptionCollection = StoreCaptions1.StoreTranslation(Me)
             StoreCaptions1.SaveControlsOriginalText(Me)
             DefaultMirroredLanguageIdNo = TranslatorDAC.DefaultMirroredLanguageIdNo
-            If ViewDisplayName Is Nothing or ViewDisplayName = "" Then
+            If ViewDisplayName Is Nothing Or ViewDisplayName = "" Then
                 ViewDisplayName = Name
             End If
         End If
