@@ -20,6 +20,14 @@ Namespace PresentationLayer.Presenters
             CreateDataSource("PayElement", "PayElementIdNo")
         End Sub
 
+        Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
+            Dim returnValue As Boolean = False
+            If CheckDependentRecords(Of Int16)(View.IdNo, "PayrollPayElement", "RecurringPayElementIdNo") Then
+                Return True
+            End If
+            Return False
+        End Function
+
     End Class
 
 End Namespace

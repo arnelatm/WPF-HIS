@@ -315,10 +315,11 @@ Public Class BfMain
                     Else
                         CType(cCtrl, DataGrid).CaptionText = cCtrl.Tag
                     End If
+                ElseIf TypeOf cCtrl Is CTabControl Then
+                    TranslateTabControl(cCtrl)
                 Else
                     If TypeOf cCtrl Is CButton Then
                         TranslateButton(cCtrl)
-                    ElseIf TypeOf cCtrl Is CTabControl Then
                     End If
                     Try
                         _originalText = CaptionCollection.Item(cCtrl.Name)
@@ -506,8 +507,28 @@ Public Class BfMain
     End Sub
 
     Private Sub TranslateDataGridView(ByRef cDataGridView As DataGridView)
-        For Each col As DataGridViewColumn In cDataGridView.Columns
-            col.HeaderText = Messaging.TranslateCaption(col.HeaderText)
+        Dim cGrid As DataGridView = cDataGridView
+        Dim r As String
+        For Each column As DataGridViewColumn In cGrid.Columns
+            r = Dv.Find(column.HeaderText)
+            If r >= 0 Then
+                column.HeaderText = Dv(r).Item("TranslatedCaption")
+            Else
+                column.HeaderText = column.Tag
+            End If
+        Next
+    End Sub
+
+
+    Private Sub TranslateTabControl(ByRef cTabControl As CTabControl)
+        For Each tabPage As TabPage In cTabControl.TabPages
+            Dim r As Int16
+            r = Dv.Find(tabPage.Tag)
+            If r > 0 Then
+                tabPage.Text = Dv(r).Item("translatedCaption")
+            Else
+                tabPage.Text = tabPage.Tag
+            End If
         Next
     End Sub
 

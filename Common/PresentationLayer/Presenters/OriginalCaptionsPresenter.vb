@@ -31,6 +31,18 @@ Namespace PresentationLayer.Presenters
             Return TreeViewList
         End Function
 
+        Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
+            Dim returnValue As Boolean = False
+            If CheckDependentRecords(Of Int32)(View.IdNo, "FormItems", "CaptionIdNo") Then
+                Return True
+            ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "SystemViewItem", "CaptionIdNo") Then
+                Return True
+            ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "TranslatedCaption", "CaptionIdNo") Then
+                Return True
+            End If
+            Return False
+        End Function
+
     End Class
 
 End Namespace

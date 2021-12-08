@@ -34,6 +34,16 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
+        Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
+            Dim returnValue As Boolean = False
+            If CheckDependentRecords(Of Int32)(View.IdNo, "Employee", "PayGroupIdNo") Then
+                Return True
+            ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "Employee", "PayElementAccont") Then
+                Return True
+            End If
+            Return False
+        End Function
+
     End Class
 
 End Namespace

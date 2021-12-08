@@ -1238,6 +1238,20 @@ Namespace PresentationLayer.Presenters
             Return qty
         End Function
 
+        Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
+            Dim returnValue As Boolean = False
+            If CheckDependentRecords(Of Int16)(View.IdNo, "AttendanceItem", "PayrollIdNo") Then
+                Return True
+            ElseIf CheckDependentRecords(View.IdNo, "EmployeeAbsence", "PayrollIdNo") Then
+                Return True
+            ElseIf CheckDependentRecords(View.IdNo, "OtWorkHour", "PayrollIdNo") Then
+                Return True
+            ElseIf CheckDependentRecords(View.IdNo, "PayrollDetail", "PayrollIdNo") Then
+                Return True
+            End If
+            Return False
+        End Function
+
         'Private Sub MakePayrollOt(payrollIdNo As Short, otHours As Decimal, otUnit As String, otRate As Decimal, otEarning As Earning, employeeIdNo As Integer)
         '    Dim otAmount As Decimal = ComputeOtAmount(otEarning, otHours, otRate)
         '    AddEarning(employeeIdNo, otAmount, payrollIdNo, otEarning.IdNo)
