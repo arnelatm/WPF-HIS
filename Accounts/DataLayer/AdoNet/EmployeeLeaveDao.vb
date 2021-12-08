@@ -136,6 +136,17 @@ Namespace DataLayer.AdoNet
             Return data
         End Function
 
+        Public Function GetEmployeeLeaves(employeeIdNo As Int32, leaveIdNo As Int16)
+            Dim sql As String = "SELECT " & FieldList &
+                                " FROM [EmployeeLeave_View] where EmployeeIdNo = @employeeIdNo and LeaveIdNo = @leaveIdNo and LeaveStatus in (" &
+                                EnumToCode(LeaveStatusSelection.SupervisorApproved) & "," &
+                                EnumToCode(LeaveStatusSelection.Approved) & "," &
+                                EnumToCode(LeaveStatusSelection.Submitted) & ")"
+            Dim params() As Object = {"@employeeIdNo", employeeIdNo, "@LeaveIdNo", leaveIdNo}
+            Dim data = Db.Read(sql, Make, params).ToList()
+            Return data
+        End Function
+
         Private Shared ReadOnly MakeLeaveApprovalHistory As Func(Of IDataReader, EmployeeLeaveApprovalHistory) =
                                     Function(reader) _
             New EmployeeLeaveApprovalHistory() With {

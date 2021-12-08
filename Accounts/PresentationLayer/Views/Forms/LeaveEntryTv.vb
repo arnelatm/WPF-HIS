@@ -99,6 +99,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property NoMaxLimit As Boolean Implements ILeaveView.NoMaxLimit
+            Get
+                Return chkNoMaxLimit.Checked
+            End Get
+            Set
+                chkNoMaxLimit.Checked = Value
+            End Set
+        End Property
+
         Public Property Notes As String Implements ILeaveView.Notes
             Get
                 Return txtNotes.Text
@@ -133,6 +142,86 @@ Namespace PresentationLayer.Views.Forms
                 {"IdNo", TxtIdNo},
                 {"Notes", txtNotes}
                 }
+        End Sub
+
+        Private Sub CbNoMaxLimitValueChanged() Handles chkNoMaxLimit.CheckedChanged
+            If chkNoMaxLimit.Checked Then
+                txtMaxLimit.Text = 0
+                txtMaxLimit.DisplayOnly = False
+            Else
+                If MaxLimit < LeaveAllowed Then
+                    MaxLimit = LeaveAllowed
+                End If
+                If btnEdit.Enabled Then
+                    txtMaxLimit.DisplayOnly = True
+                Else
+                    txtMaxLimit.DisplayOnly = False
+                End If
+            End If
+            'If btnEdit.Enabled Then
+            '    txtMaxLimit.DisplayOnly = True
+            '    chkNoMaxLimit.DisplayOnly = True
+            'Else
+            '    If Cumulative Then
+            '        chkNoMaxLimit.DisplayOnly = False
+            '    Else
+            '        chkNoMaxLimit.DisplayOnly = True
+            '    End If
+            'End If
+            'If chkNoMaxLimit.Checked Then
+            '    txtMaxLimit.Text = 0
+            '    txtMaxLimit.DisplayOnly = False
+            'Else
+            '    If MaxLimit < LeaveAllowed Then
+            '        MaxLimit = LeaveAllowed
+            '    End If
+            '    If btnEdit.Enabled Then
+            '        txtMaxLimit.DisplayOnly = True
+            '    Else
+            '        txtMaxLimit.DisplayOnly = False
+            '    End If
+            'End If
+            'If btnEdit.Enabled Then
+            '    txtMaxLimit.DisplayOnly = True
+            '    chkNoMaxLimit.DisplayOnly = True
+            'Else
+            '    If Cumulative Then
+            '        chkNoMaxLimit.DisplayOnly = False
+            '    Else
+            '        chkNoMaxLimit.DisplayOnly = True
+            '    End If
+            'End If
+        End Sub
+
+        Private Sub CbCumulativeValueChanged() Handles chkCumulative.CheckedChanged
+            If chkCumulative.Checked Then
+                If btnEdit.Enabled Then
+                    txtMaxCarryOver.DisplayOnly = True
+                    txtMaxLimit.DisplayOnly = True
+                    chkNoMaxLimit.DisplayOnly = True
+                Else
+                    txtMaxCarryOver.DisplayOnly = False
+                    If MaxLimit = 0 Then
+                        NoMaxLimit = True
+                    End If
+                    If NoMaxLimit Then
+                        txtMaxLimit.DisplayOnly = True
+                    Else
+                        txtMaxLimit.DisplayOnly = False
+                    End If
+                    If MaxCarryOver = 0 Then
+                        MaxCarryOver = LeaveAllowed
+                    End If
+                    chkNoMaxLimit.DisplayOnly = False
+                End If
+            Else
+                MaxCarryOver = 0
+                MaxLimit = 0
+                chkNoMaxLimit.Checked = False
+                txtMaxCarryOver.DisplayOnly = True
+                txtMaxLimit.DisplayOnly = True
+                chkNoMaxLimit.DisplayOnly = True
+            End If
         End Sub
 
     End Class
