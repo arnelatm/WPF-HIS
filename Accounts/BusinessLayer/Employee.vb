@@ -17,10 +17,10 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("EmployeeNameAra"))
                 AddRule(New ValidateRequired("HiredDate"))
                 'AddRule(New ValidateRequired("EmployeeCode"))
-                AddRule(New ValidateRequired("PaymentMethod"))
+                'AddRule(New ValidateRequired("PaymentMethod"))
                 AddRule(New ValidateEmail("Email"))
-                AddRule(New ValidateIfRequired("BankIdNo", "PaymentMethod", ValidationOperator.Equal, ValidationDataType.String, GlobalFunctions.EnumToCode(PayrollPaymentMethodSelection.BankTransfer)))
-                AddRule(New ValidateIfRequired("Iban", "PaymentMethod", ValidationOperator.Equal, ValidationDataType.String, GlobalFunctions.EnumToCode(PayrollPaymentMethodSelection.BankTransfer)))
+                'AddRule(New ValidateIfRequired("BankIdNo", "PaymentMethod", ValidationOperator.Equal, ValidationDataType.String, GlobalFunctions.EnumToCode(PayrollPaymentMethodSelection.BankTransfer)))
+                'AddRule(New ValidateIfRequired("Iban", "PaymentMethod", ValidationOperator.Equal, ValidationDataType.String, GlobalFunctions.EnumToCode(PayrollPaymentMethodSelection.BankTransfer)))
             End If
         End Sub
 

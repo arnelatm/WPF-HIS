@@ -17,6 +17,22 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "BankName"
         End Sub
 
+        Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
+            Dim returnValue As Boolean = False
+            If CheckDependentRecords(Of Int32)(View.IdNo, "BankAccount", "BankIdNo") Then
+                Return True
+            ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "Supplier", "BankIdNo") Then
+                Return True
+            ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "Customer", "BankIdNo") Then
+                Return True
+            ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "Employee", "BankIdNo") Then
+                Return True
+            ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "PensionProvider", "BankIdNo") Then
+                Return True
+            End If
+            Return False
+        End Function
+
     End Class
 
 End Namespace

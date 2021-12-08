@@ -20,6 +20,13 @@ Namespace PresentationLayer.Presenters
             TreeViewSecondaryField = "DesignationCode"
         End Sub
 
+        Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
+            Dim returnValue As Boolean = False
+            If CheckDependentRecords(Of Int32)(View.IdNo, "Employee", "DesignationIdNo") Then
+                Return True
+            End If
+            Return False
+        End Function
     End Class
 
 End Namespace

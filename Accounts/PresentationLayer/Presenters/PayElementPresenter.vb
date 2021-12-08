@@ -133,11 +133,21 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
-        'Public Overrides Sub UpdateViewDisplay(idNo As Int32)
-        '    MyBase.UpdateViewDisplay(idNo)
-        '    UpdateCalculationTabDisplay()
-        '    UpdatePostingTabDisplay()
-        'End Sub
+        Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
+            Dim returnValue As Boolean = False
+            If CheckDependentRecords(Of Int32)(View.IdNo, "EmployeePayElement", "PayElementIdNo") Then
+                Return True
+            ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "PayElementAccount", "PayElementIdNo") Then
+                Return True
+            ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "PayElementItem", "PayElementIdNo") Then
+                Return True
+            ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "RecurringPayElement", "PayElementIdNo") Then
+                Return True                
+            End If
+            Return False
+        End Function
+
+
 
     End Class
 

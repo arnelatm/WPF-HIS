@@ -20,6 +20,18 @@ Namespace PresentationLayer.Presenters
             CreateEnumDataSource(Of PayFrequencySelection)("PayFrequency")
         End Sub
 
+        Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
+            Dim returnValue As Boolean = False
+            If CheckDependentRecords(Of Int32)(View.IdNo, "Employee", "PayCycleIdNo") Then
+                Return True
+            ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "PayPeriod", "PayCycleIdNo") Then
+                Return True
+            ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "Payroll", "PayCycleIdNo") Then
+                Return True
+            End If
+            Return False
+        End Function
+
     End Class
 
 

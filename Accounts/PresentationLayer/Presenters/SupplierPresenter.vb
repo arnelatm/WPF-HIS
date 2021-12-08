@@ -83,6 +83,10 @@ Namespace PresentationLayer.Presenters
                 Return True
             ElseIf CheckDependentRecords(Of Int16)(View.IdNo, "SupplierInvoices", "SupplierIdNo") Then
                 Return True
+            ElseIf CheckDependentRecords(Of Int16)(View.IdNo, "ApJournal", "SupplierIdNo") Then
+                Return True
+            ElseIf CheckDependentRecords(Of Int16)(View.IdNo, "PurchaseJournal", "SupplierIdNo") Then
+                Return True
             End If
             Return False
         End Function
