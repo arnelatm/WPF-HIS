@@ -222,9 +222,21 @@ Public Module Extensions
     End Sub
 
     <Extension()>
-    Public Sub SuspendDrawing(ByVal target As Control)
+    Public Sub SuspendDrawing(ByRef target As Control)
+        Dim isVisible As Boolean
+        If target IsNot Nothing Then
+            isVisible = target.Visible
+            If isVisible Then
+                target.Visible = False
+            End If
+        End If
         If target IsNot Nothing Then
             SendMessage(target.Handle, WmSetRedraw, False, 0)
+        End If
+        If target IsNot Nothing Then
+            If isVisible Then
+                target.Visible = True
+            End If
         End If
     End Sub
 

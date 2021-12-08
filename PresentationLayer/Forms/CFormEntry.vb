@@ -290,7 +290,12 @@ Public Class CFormEntry
     End Sub
 
     Private Sub BtnArabic_Click(sender As Object, e As EventArgs) Handles btnArabic.Click
+        'this will reduce screen flicker
+        'DoubleBuffered = True
+        'Refresh()
+        'SuspendDrawing()
         SwitchUiLanguage(False)
+        'ResumeDrawing()
     End Sub
 
     Private Sub BtnDebug_Click(sender As Object, e As EventArgs) Handles btnDebug.Click
@@ -353,7 +358,10 @@ Public Class CFormEntry
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
+        'DoubleBuffered = True
+        'SuspendDrawing()
         SwitchUiLanguage(True)
+        'ResumeDrawing()
     End Sub
 
     Private Sub BtnPrev_Click(sender As Object, e As EventArgs) Handles btnPrev.Click
@@ -596,7 +604,9 @@ Public Class CFormEntry
     End Sub
 
     Protected Overridable Sub SwitchUiLanguage(originalUi As Boolean)
-        SuspendDrawing()
+        'SuspendLayout()
+        'SuspendDrawing()
+        Visible = False
         Dim sw As Integer = 0
         If originalUi Then
             If TextDisplayLanguage <> GlobalVariables.DefaultUnmirroredCultureInfoStr Then
@@ -630,7 +640,9 @@ Public Class CFormEntry
                 Ea.PublishEvent(New LanguageChanged(Me))
             End If
         End If
-        ResumeDrawing()
+        Visible = True
+        'ResumeDrawing()
+        'ResumeLayout()
     End Sub
 
     'Protected Overridable Function DataIsValid() As Boolean
