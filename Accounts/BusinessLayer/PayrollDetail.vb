@@ -12,7 +12,7 @@
             'End If
         End Sub
 
-        Public Property BankTransfer as Boolean
+        Public Property BankTransfer As Boolean
         Public Property EmployeeCode As String
         Public Property EmployeeIdNo As Int32
         Public Property EmployeeName As String
@@ -23,8 +23,8 @@
         Public Property PayPeriodNameAra As String
         Public Property PayrollDeductions As List(Of PayrollPayElement)
         Public Property PayrollEarnings As List(Of PayrollPayElement)
-        Public Property PaymentMethod as String
-        Public Property SponsorType as String
+        Public Property PaymentMethod As String
+        Public Property SponsorType As String
         Public Property PayrollIdNo As Int16
         Public Property StartDate As Date
     End Class

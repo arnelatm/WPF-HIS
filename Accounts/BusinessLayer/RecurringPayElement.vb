@@ -1,8 +1,6 @@
 ﻿' Category business object
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
 Imports AATM.BusinessLayer.BusinessRules
-Imports AATM.Libraries
-Imports AATM.Libraries.Lookup
 
 Namespace BusinessLayer
 

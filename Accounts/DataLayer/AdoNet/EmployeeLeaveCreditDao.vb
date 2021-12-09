@@ -1,5 +1,4 @@
 ﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 
@@ -24,15 +23,14 @@ Namespace DataLayer.AdoNet
                                   "PaidPercent," &
                                   "Sequence"
 
-        
-      Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of EmployeeLeaveCredit) Implements IDaoChild(Of EmployeeLeaveCredit).GetRecordsWithGroupIdNo
+        Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of EmployeeLeaveCredit) Implements IDaoChild(Of EmployeeLeaveCredit).GetRecordsWithGroupIdNo
             If sortExpression Is Nothing Then
                 sortExpression = "Sequence"
             End If
             Dim sql As String =
                     " SELECT " & FieldList &
                     " FROM [EmployeeLeaveCredit_View]" &
-                    " WHERE EmployeeIdNo = @IdNo " & 
+                    " WHERE EmployeeIdNo = @IdNo " &
                     " ORDER BY " & sortExpression
             Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).ToList()

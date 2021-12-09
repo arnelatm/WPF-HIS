@@ -1,7 +1,4 @@
-﻿Imports AATM.Libraries
-Imports AATM.PresentationLayer.Events
-
-Namespace PresentationLayer
+﻿Namespace PresentationLayer
 
     Module AccountHelpers
 
