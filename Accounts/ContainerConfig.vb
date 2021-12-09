@@ -1,5 +1,4 @@
-﻿Imports AATM.Accounts.PresentationLayer.Presenters
-Imports Autofac
+﻿Imports Autofac
 
 Public Module ContainerConfig
 

@@ -1,5 +1,4 @@
 ﻿Imports AATM.BusinessLayer.BusinessRules
-Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace BusinessLayer
 
@@ -75,7 +74,5 @@ Namespace BusinessLayer
         Public Property Picture As Image
 
     End Class
-
-
 
 End Namespace

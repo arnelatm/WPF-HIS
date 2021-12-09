@@ -11,15 +11,14 @@ Namespace DataLayer.AdoNet
         Inherits CommonDao
         Implements IDaoChild(Of Reconciled)
 
-         Private Const FieldList = "IdNo," &
-                                   "JournalCode," &
-                                   "JournalItemIdNo," &
-                                   "ReconciliationIdNo"    
+        Private Const FieldList = "IdNo," &
+                                  "JournalCode," &
+                                  "JournalItemIdNo," &
+                                  "ReconciliationIdNo"
 
         Private Shared ReadOnly Db As New Db()
         Protected TableFileName As String = "Reconciled"
         Protected DboTvpInsertFileName As String = "dbo.InsertReconciledTVP"
-        
 
         Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of Reconciled) Implements IDaoChild(Of Reconciled).GetRecordsWithGroupIdNo
             Throw New NotImplementedException
@@ -42,13 +41,11 @@ Namespace DataLayer.AdoNet
 
         Public Function IsItemReconciled(ByVal journalCode As String, journalItemIdNo As Int32)
             Dim params() As Object = {"@JournalCode", journalCode, "@JournalItemIdNo", journalItemIdNo}
-            If db.Scalar("Select Count(*) from Reconciled where JournalCode = @journalCode and JournalItemIdNo = @journalItemIdNo", params) > 0 then
+            If Db.Scalar("Select Count(*) from Reconciled where JournalCode = @journalCode and JournalItemIdNo = @journalItemIdNo", params) > 0 Then
                 Return True
             End If
-            Return false
+            Return False
         End Function
-
-
 
         'Private Shared ReadOnly Make As Func(Of IDataReader, Reconciled) =
         '                            Function(reader) _

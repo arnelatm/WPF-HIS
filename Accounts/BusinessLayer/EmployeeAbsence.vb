@@ -23,10 +23,13 @@ Namespace BusinessLayer
         Public Property AddedByUser As Int16
         Public Property DateCreated As DateTime?
         Public Property EmployeeIdNo As Int32
+
         'Public Property EndDate As DateTime
         Public Property EquivalentHours As Decimal
+
         Public Property IdNo As Int32
         Public Property PayrollIdNo As Int16
+
         'Public Property PayrollName As String
         'Public Property PayrollNameAra As String
         'Public Property StartDate As DateTime

@@ -12,12 +12,14 @@ Namespace DataLayer.AdoNet
         Implements IDaoAll(Of Holiday)
 
         Private ReadOnly Db As New Db()
+
         Private FieldList As String = "DateCreated," &
                                       "DateEnd," &
                                       "DateStart," &
                                       "EnteredBy," &
                                       "IdNo," &
                                       "LeaveIdNo"
+
         '"PayrollCode," &
         '"PayrollIdNo," &
         '"PayrollName," &
@@ -71,7 +73,6 @@ Namespace DataLayer.AdoNet
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .LeaveIdNo = Extensions.AsInt(Of Int16)(reader("LeaveIdNo"))
             }
-
 
         Private Function Take(holiday As Holiday) As Object()
             Return New Object() {
