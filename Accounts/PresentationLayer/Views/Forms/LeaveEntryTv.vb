@@ -188,8 +188,10 @@ Namespace PresentationLayer.Views.Forms
             Else
                 If Not btnEdit.Checked Then
                     txtMaxLimit.Enabled = True
-                    If MaxLimit < LeaveAllowed Then
+                    If Cumulative AndAlso MaxLimit < LeaveAllowed Then
                         MaxLimit = LeaveAllowed
+                    Else
+                        MaxLimit = 0
                     End If
                 End If
                 'txtMaxCarryOver.Enabled = False
@@ -241,7 +243,7 @@ Namespace PresentationLayer.Views.Forms
                     'txtMaxCarryOver.DisplayOnly = False
                     NoMaxLimit = True
                     MaxCarryOver = LeaveAllowed
-                    MaxLimit = LeaveAllowed
+                    MaxLimit = 0
                     chkNoMaxLimit.Enabled = True
                     txtMaxCarryOver.Enabled = True
                     'chkNoMaxLimit.DisplayOnly = False
