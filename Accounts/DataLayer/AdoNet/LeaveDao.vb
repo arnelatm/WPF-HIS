@@ -23,6 +23,7 @@ Namespace DataLayer.AdoNet
                     "LeaveNameAra," &
                     "MaxCarryOver," &
                     "MaxLimit," &
+                    "NoMaxLimit," &
                     "Notes," &
                     "PaidPercent"
 
@@ -55,6 +56,7 @@ Namespace DataLayer.AdoNet
                     " LeaveNameAra = @LeaveNameAra," &
                     " MaxCarryOver = @MaxCarryOver," &
                     " MaxLimit = @MaxLimit," &
+                    " NoMaxLimit = @NoMaxLimit," &
                     " Notes = @Notes," &
                     " PaidPercent = @PaidPercent" &
                     " WHERE IdNo = @IdNo"
@@ -64,8 +66,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef leave As Leave) As Integer Implements IDaoAll(Of Leave).AddRecord
             Dim sql As String =
                     " INSERT INTO [Leave] " &
-                    " (Cumulative,Holiday,LeaveAllowed,LeaveCode,LeaveName,LeaveNameAra,MaxCarryOver,MaxLimit,Notes,PaidPercent)" &
-                    " VALUES (@Cumulative,@Holiday,@LeaveAllowed,@LeaveCode,@LeaveName,@LeaveNameAra,@MaxCarryOver,@MaxLimit,@Notes,@PaidPercent)"
+                    " (Cumulative,Holiday,LeaveAllowed,LeaveCode,LeaveName,LeaveNameAra,MaxCarryOver,MaxLimit,NoMaxLimit,Notes,PaidPercent)" &
+                    " VALUES (@Cumulative,@Holiday,@LeaveAllowed,@LeaveCode,@LeaveName,@LeaveNameAra,@MaxCarryOver,@MaxLimit,@NoMaxLimit,@Notes,@PaidPercent)"
             Return Db.Insert(sql, Take(leave))
         End Function
 
@@ -80,6 +82,8 @@ Namespace DataLayer.AdoNet
             .LeaveName = Extensions.AsString(reader("LeaveName")),
             .LeaveNameAra = Extensions.AsString(reader("LeaveNameAra")),
             .MaxCarryOver = Extensions.AsDecimal(reader("MaxCarryOver")),
+            .MaxLimit = Extensions.AsDecimal(reader("MaxLimit")),
+            .NoMaxLimit = Extensions.AsBool(reader("NoMaxLimit")),
             .Notes = Extensions.AsString(reader("Notes")),
             .PaidPercent = Extensions.AsDecimal(reader("PaidPercent"))
             }
@@ -95,6 +99,7 @@ Namespace DataLayer.AdoNet
                                     "@LeaveNameAra", leave.LeaveNameAra,
                                     "@MaxCarryOver", leave.MaxCarryOver,
                                     "@MaxLimit", leave.MaxLimit,
+                                    "@NoMaxLimit", leave.NoMaxLimit,
                                     "@Notes", leave.Notes,
                                     "@PaidPercent", leave.PaidPercent
                                 }
