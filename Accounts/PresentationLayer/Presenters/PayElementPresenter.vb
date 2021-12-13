@@ -22,7 +22,7 @@ Namespace PresentationLayer.Presenters
                 Service = New AccountsService("PayElement")
                 TableName = "PayElement"
                 TreeViewMainField = "PayElementName"
-                TreeViewSecondaryField = "PayElementCode"
+                'TreeViewSecondaryField = "PayElementCode"
                 SortOrderKey = "PayElementName"
                 'OriginalModel = New PayElementModel()
                 'DataModel = New PayElementModel

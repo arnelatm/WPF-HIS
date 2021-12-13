@@ -11,7 +11,7 @@ Namespace PresentationLayer.Presenters
             Service = New CommonService("Religion")
             TableName = "Religion"
             TreeViewMainField = "ReligionName"
-            TreeViewSecondaryField = "ReligionCode"
+            'TreeViewSecondaryField = "ReligionCode"
             SortOrderKey = "IdNo"
         End Sub
 

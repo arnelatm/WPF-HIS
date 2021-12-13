@@ -75,7 +75,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
         End If
     End Sub
 
-    Public Overridable Shadows Sub UpdateViewData(idNo As Int32)
+    Public Overrides Sub UpdateViewData(idNo As Int32)
         MyBase.UpdateViewData(idNo)
         If _WithTreeView Then
             TreeViewUpdateViewDisplay(idNo)
@@ -133,7 +133,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
 
     Protected TreeViewList
     Protected TreeViewMainField As String
-    Protected TreeViewSecondaryField As String
+    Protected TreeViewSecondaryField As String 
     Protected ParentFieldName As String = ""
     Protected WithEvents FormTreeView As TreeView
     Protected NodeToDelete As TreeNode
@@ -162,8 +162,9 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
         'Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
         Dim lookupObj As New Lookup(TableName, DataFilter)
         lookupObj.NameField = TreeViewMainField
-        If TreeViewSecondaryField IsNot Nothing Then
-            lookupObj.CodeField = TreeViewSecondaryField
+        If TreeViewSecondaryField Is Nothing Then
+            lookupObj.CodeField = TableName + "Code"
+            TreeViewSecondaryField = TableName + "Code"
         End If
         If SortOrderKey IsNot Nothing Then
             lookupObj.SortKey = SortOrderKey
@@ -216,7 +217,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
     Protected Overloads Sub AddRecordToTree(dataNode As Object) ', mainFieldName As String)
         Dim idNo As Int32 = GetPropertyValue(dataNode, IdFieldName)
         Dim mainValue As String = GetPropertyValue(dataNode, "Name")
-        Dim secondaryValue As String = GetPropertyValue(dataNode, "Code")
+        Dim secondaryValue As String = GetPropertyValue(dataNode, "IdNo")
         Dim treeNode As TreeNode = MakeTreeNode(mainValue, secondaryValue, idNo)
         FormTreeView.Nodes(0).Nodes.Add(treeNode)
     End Sub

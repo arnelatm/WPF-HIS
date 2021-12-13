@@ -15,7 +15,7 @@ Namespace PresentationLayer.Presenters
             Service = New AccountsService("Leave")
             TableName = "Leave"
             TreeViewMainField = "LeaveName"
-            TreeViewSecondaryField = "LeaveCode"
+            'TreeViewSecondaryField = "LeaveCode"
             SortOrderKey = "LeaveName"
         End Sub
 

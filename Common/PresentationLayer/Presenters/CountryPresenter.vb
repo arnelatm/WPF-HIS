@@ -15,7 +15,7 @@ Namespace PresentationLayer.Presenters
             TableName = "Country"
             SortOrderKey = "CountryName"
             TreeViewMainField = "CountryName"
-            TreeViewSecondaryField = "CountryCode"
+            'TreeViewSecondaryField = "CountryCode"
             ParentViewList = New List(Of TM)
         End Sub
 

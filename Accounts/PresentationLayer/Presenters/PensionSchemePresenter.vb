@@ -16,7 +16,7 @@ Namespace PresentationLayer.Presenters
             Service = New AccountsService("PensionScheme")
             TableName = "PensionScheme"
             TreeViewMainField = "PensionSchemeName"
-            TreeViewSecondaryField = "PensionSchemeCode"
+            'TreeViewSecondaryField = "PensionSchemeCode"
             SortOrderKey = "PensionSchemeName"
 
             DtInsertTable.Columns.Add("EmployeeShare", GetType(Decimal))

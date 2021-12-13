@@ -12,7 +12,7 @@ Namespace PresentationLayer.Presenters
             Service = New AccountsService("PayCycle")
             TableName = "PayCycle"
             TreeViewMainField = "PayCycleName"
-            TreeViewSecondaryField = "PayCycleCode"
+            'TreeViewSecondaryField = "PayCycleCode"
             SortOrderKey = "PayCycleName"
         End Sub
 

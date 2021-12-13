@@ -14,7 +14,7 @@ Namespace PresentationLayer.Presenters
             TableName = "RevenueGroup_View"
             SortOrderKey = "SortKey"
             TreeViewMainField = "RevenueGroupName"
-            TreeViewSecondaryField = "RevenueGroupCode"
+            'TreeViewSecondaryField = "RevenueGroupCode"
             ParentFieldName = "ParentIdNo"
         End Sub
 
