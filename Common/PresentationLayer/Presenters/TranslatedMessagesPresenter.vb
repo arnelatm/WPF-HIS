@@ -17,7 +17,7 @@ Namespace PresentationLayer.Presenters
             TableName = "TranslatedMessages"
             SortOrderKey = "MessageKey"
             TreeViewMainField = "MessageKey"
-            TreeViewSecondaryField = Nothing
+            'TreeViewSecondaryField = Nothing
             TreeViewList = New List(Of TranslatedMessagesModel)
             Dac = New Dac
             Ea = New EventAggregator()

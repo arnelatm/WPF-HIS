@@ -17,7 +17,7 @@ Namespace PresentationLayer.Presenters
             TableName = "TranslatedCaption"
             SortOrderKey = "MessageKey"
             TreeViewMainField = "MessageKey"
-            TreeViewSecondaryField = Nothing
+            'TreeViewSecondaryField = Nothing
             TreeViewList = New List(Of TM)
             Dac = New Dac
         End Sub

@@ -11,7 +11,7 @@ Namespace PresentationLayer.Presenters
             Service = New CommonService("Branch")
             TableName = "Branch"
             TreeViewMainField = "BranchName"
-            TreeViewSecondaryField = "BranchCode"
+            'TreeViewSecondaryField = "BranchCode"
             SortOrderKey = "BranchName"
         End Sub
 

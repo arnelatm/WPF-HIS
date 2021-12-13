@@ -12,7 +12,7 @@ Namespace PresentationLayer.Presenters
             Service = New AccountsService("JournalPrefix")
             TableName = "JournalPrefix"
             TreeViewMainField = "JournalName"
-            TreeViewSecondaryField = "JournalCode"
+            'TreeViewSecondaryField = "JournalCode"
             SortOrderKey = "IdNo"
             'QuitOnSave = False
         End Sub

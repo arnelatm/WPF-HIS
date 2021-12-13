@@ -13,7 +13,7 @@ Namespace PresentationLayer.Presenters
             Service = New AccountsService("PayGroup")
             TableName = "PayGroup_View"
             TreeViewMainField = "PayGroupName"
-            TreeViewSecondaryField = "PayGroupCode"
+            'TreeViewSecondaryField = "PayGroupCode"
             SortOrderKey = "SortKey"
             ParentFieldName = "ParentIdNo"
         End Sub

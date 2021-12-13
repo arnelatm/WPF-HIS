@@ -12,7 +12,7 @@ Namespace PresentationLayer.Presenters
             Service = New AccountsService("DepositType")
             TableName = "DepositType"
             TreeViewMainField = "DepositTypeName"
-            TreeViewSecondaryField = "DepositTypeCode"
+            'TreeViewSecondaryField = "DepositTypeCode"
             SortOrderKey = "DepositTypeName"
         End Sub
 

@@ -12,7 +12,7 @@ Namespace PresentationLayer.Presenters
             TableName = "PhoneType"
             SortOrderKey = "PhoneTypeCode"
             TreeViewMainField = "PhoneTypeName"
-            TreeViewSecondaryField = "PhoneTypeCode"
+            'TreeViewSecondaryField = "PhoneTypeCode"
         End Sub
 
     End Class

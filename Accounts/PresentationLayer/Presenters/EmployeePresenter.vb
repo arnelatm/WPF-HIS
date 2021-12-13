@@ -32,7 +32,7 @@ Namespace PresentationLayer.Presenters
             Service = New AccountsService("Employee")
             TableName = "Employee"
             TreeViewMainField = "EmployeeName"
-            TreeViewSecondaryField = "EmployeeCode"
+            'TreeViewSecondaryField = "EmployeeCode"
             SortOrderKey = "EmployeeName"
             CreateDataTables()
         End Sub

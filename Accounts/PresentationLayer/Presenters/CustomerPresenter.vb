@@ -15,7 +15,7 @@ Namespace PresentationLayer.Presenters
             TableName = "Customer"
             Service = New AccountsService("Customer")
             TreeViewMainField = "CustomerName"
-            TreeViewSecondaryField = "CustomerCode"
+            'TreeViewSecondaryField = "CustomerCode"
             SortOrderKey = "CustomerName"
             'OriginalModel = New CustomerModel()
             'DataModel = New CustomerModel

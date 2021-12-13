@@ -20,7 +20,7 @@ Namespace PresentationLayer.Presenters
         Public Sub New(itemView As IPayrollDetailView)
             MyBase.New(itemView)
             TreeViewMainField = "EmployeeName"
-            TreeViewSecondaryField = "EmployeeCode"
+            'TreeViewSecondaryField = "EmployeeCode"
             TableName = "PayrollDetail_View"
             SortOrderKey = "EmployeeName"
 

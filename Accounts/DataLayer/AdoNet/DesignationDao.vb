@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
 
     Public Class DesignationDao
         Inherits CommonDao
-        Implements IDaoAll(Of Designation)
+        Implements IDaoAll(Of Designation), IDaoAutoCode
 
         Private ReadOnly Db As New Db()
 
@@ -76,6 +76,10 @@ Namespace DataLayer.AdoNet
                                     "@DesignationNameFemaleAra", designation.DesignationNameFemaleAra,
                                     "@Notes", designation.Notes
                                 }
+        End Function
+
+        Public Function GenerateCode(idNo As Integer) As String Implements IDaoAutoCode.GenerateCode
+            Return UpdateCode(db, "Designation", "DesignationCode", "IdNo", idNo)
         End Function
 
     End Class

@@ -11,7 +11,7 @@ Namespace BusinessLayer
         Public Sub New()
             ' establish business rules
             AddRule(New ValidateRequired("DesignationName"))
-            AddRule(New ValidateRequired("DesignationCode"))
+            'AddRule(New ValidateRequired("DesignationCode"))
         End Sub
 
         Public Property IdNo As Int16

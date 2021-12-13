@@ -95,12 +95,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Table", "Table", "{6FD94599-A0DF-448F-BF82-CAB5948D5F53}"
 	ProjectSection(SolutionItems) = preProject
 		ChartAndChartBalance.sql = ChartAndChartBalance.sql
+		ClinicInvoicePrint.sql = ClinicInvoicePrint.sql
 		CreateDepartment.sql = CreateDepartment.sql
 		DataBaseTable.sql = DataBaseTable.sql
 		Earning-Deduction-Leave.sql = Earning-Deduction-Leave.sql
 		Earning.sql = Earning.sql
 		SecurityObjects.sql = SecurityObjects.sql
 		Settings.sql = Settings.sql
+		SqlQuery_1.sql = SqlQuery_1.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8AD3DFDF-C6F0-4B21-8A40-902BAAFF6682}"
@@ -121,6 +123,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQuer
 		CreateEditReset Sequence.sql = CreateEditReset Sequence.sql
 		DeleteDuplicates.sql = DeleteDuplicates.sql
 		EditingSqlQuery.sql = EditingSqlQuery.sql
+		Extract Varchar Fields to Images.sql = Extract Varchar Fields to Images.sql
 		Find all object references for a specific object.sql = Find all object references for a specific object.sql
 		Look for tables containing field name.sql = Look for tables containing field name.sql
 		QueryAvailableIdentityFieldSpace.sql = QueryAvailableIdentityFieldSpace.sql
