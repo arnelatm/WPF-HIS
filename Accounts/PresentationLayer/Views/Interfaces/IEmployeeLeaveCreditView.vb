@@ -12,6 +12,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property LeaveIdNo As Int16
         Property MaxCarryOver As Decimal
         Property MaxLimit As Decimal
+        Property NoMaxLimit As Boolean
         Property PaidPercent As Decimal
         Property Sequence As Int16
     End Interface
