@@ -7,7 +7,7 @@ Namespace PresentationLayer.Views.Interfaces
         Inherits IView
 
         Property IdNo As Int32
-        Property EnteredBy As Int32
+        Property ApprovedBy As Int32
         Property DateCreated As DateTime?
         Property EmployeeLeaveList As List(Of IEmployeeLeaveView)
         Property EmployeeList As List(Of Lookup.LookupData)
