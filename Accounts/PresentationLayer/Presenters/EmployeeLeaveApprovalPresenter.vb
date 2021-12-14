@@ -44,7 +44,7 @@ Namespace PresentationLayer.Presenters
             GlobalVariables.Mapper.Map(employeeLeaveList, employeeLeaveListModel)
             GlobalVariables.Mapper.Map(employeeLeaveListModel, View.EmployeeLeaveList)
             CreateLookupData("Employee", "EmployeeList")
-            CreateDataSource("User", "EnteredBy", {"IdNo", "UserName"})
+            CreateDataSource("User", "ApprovedBy", {"IdNo", "UserName"})
             CreateLookupData("Leave", "LeaveList")
             CreateEnumData(Of LeaveStatusSelection)(View.LeaveStatusList)
             If IsUserASupervisor() Then
@@ -86,6 +86,7 @@ Namespace PresentationLayer.Presenters
         Public Overrides Function Save(ByRef viewControl As Control)
             Dim retVal As Integer
             Dim record As New EmployeeLeaveApprovalModel
+            'View.ApprovedBy = GlobalVariables.UserIdNo
             GlobalVariables.Mapper.Map(Of IEmployeeLeaveApprovalView, EmployeeLeaveApprovalModel)(View, record)
             NewlyAddedRecordIdNo = Service.AddRecord(record)
             If NewlyAddedRecordIdNo > 0 Then

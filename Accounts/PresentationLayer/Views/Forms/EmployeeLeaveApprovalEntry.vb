@@ -45,12 +45,12 @@ Public Class EmployeeLeaveApprovalEntry
         End Set
     End Property
 
-    Public Property EnteredBy As Integer Implements IEmployeeLeaveApprovalView.EnteredBy
+    Public Property ApprovedBy As Integer Implements IEmployeeLeaveApprovalView.ApprovedBy
         Get
-            Return cboEnteredBy.GetValue()
+            Return cboApprovedBy.GetValue()
         End Get
         Set
-            cboEnteredBy.SetValue(Value)
+            cboApprovedBy.SetValue(Value)
         End Set
     End Property
 
@@ -121,7 +121,7 @@ Public Class EmployeeLeaveApprovalEntry
     Private Sub EmployeeLeaveApproval_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         bsEmployeeLeave.ResetBindings(True)
         PublishClickedButton(ButtonClicked.Edit)
-        cboEnteredBy.SelectedValue = GlobalVariables.UserIdNo
+        cboApprovedBy.SelectedValue = GlobalVariables.UserIdNo
         dtpDateCreated.Value = Now()
     End Sub
 
@@ -145,7 +145,7 @@ Public Class EmployeeLeaveApprovalEntry
             {
             {"IdNo", txtIdNo},
             {"DateCreated", dtpDateCreated},
-            {"EnteredBy", cboEnteredBy}
+            {"ApprovedBy", cboApprovedBy}
             }
     End Sub
 

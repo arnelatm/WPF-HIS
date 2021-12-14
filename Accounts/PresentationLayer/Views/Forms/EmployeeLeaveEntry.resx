@@ -903,9 +903,6 @@
   <data name="dgvDateCreated.HeaderText" xml:space="preserve">
     <value>Date</value>
   </data>
-  <data name="dgvDateCreated.Width" type="System.Int32, mscorlib">
-    <value>60</value>
-  </data>
   <metadata name="dgvApprovedBy.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1020,6 +1017,9 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>642, 679</value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>16, 268</value>
   </data>
@@ -1049,6 +1049,18 @@
   </data>
   <data name="&gt;&gt;MyErrorProvider.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;bsEmployeeLeaveApproval.Name" xml:space="preserve">
+    <value>bsEmployeeLeaveApproval</value>
+  </data>
+  <data name="&gt;&gt;bsEmployeeLeaveApproval.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bsEmployeeLeaveApprovalHistory.Name" xml:space="preserve">
+    <value>bsEmployeeLeaveApprovalHistory</value>
+  </data>
+  <data name="&gt;&gt;bsEmployeeLeaveApprovalHistory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dgvApprovalIdNo.Name" xml:space="preserve">
     <value>dgvApprovalIdNo</value>
@@ -1091,18 +1103,6 @@
   </data>
   <data name="&gt;&gt;EmployeeLeaveIdNo.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bsEmployeeLeaveApprovalHistory.Name" xml:space="preserve">
-    <value>bsEmployeeLeaveApprovalHistory</value>
-  </data>
-  <data name="&gt;&gt;bsEmployeeLeaveApprovalHistory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bsEmployeeLeaveApproval.Name" xml:space="preserve">
-    <value>bsEmployeeLeaveApproval</value>
-  </data>
-  <data name="&gt;&gt;bsEmployeeLeaveApproval.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EmployeeLeaveEntry</value>

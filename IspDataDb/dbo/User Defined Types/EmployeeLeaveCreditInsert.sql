@@ -6,6 +6,9 @@
     [LeaveIdNo]        SMALLINT       NOT NULL,
     [MaxCarryOver]     DECIMAL (6, 2) NULL,
     [MaxLimit]         DECIMAL (7, 2) NULL,
+    [NoMaxLimit]       BIT            NOT NULL,
     [PaidPercent]      DECIMAL (5, 2) NULL,
     [Sequence]         SMALLINT       NOT NULL);
+
+
 

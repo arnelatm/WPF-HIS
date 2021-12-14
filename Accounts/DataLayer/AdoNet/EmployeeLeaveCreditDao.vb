@@ -20,6 +20,7 @@ Namespace DataLayer.AdoNet
                                   "LeaveIdNo," &
                                   "MaxCarryOver," &
                                   "MaxLimit," &
+                                  "NoMaxLimit," &
                                   "PaidPercent," &
                                   "Sequence"
 
@@ -64,6 +65,7 @@ Namespace DataLayer.AdoNet
             .LeaveIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("LeaveIdNo")),
             .MaxCarryOver = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("MaxCarryOver")),
             .MaxLimit = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("MaxLimit")),
+            .NoMaxLimit = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("NoMaxLimit")),
             .PaidPercent = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("PaidPercent")),
             .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("Sequence"))
            }
@@ -82,6 +84,15 @@ Namespace DataLayer.AdoNet
                                 IIf(filter Is Nothing, "", " WHERE " & filter)
             Dim x As EmployeeLeaveCredit = Db.Read(sql, Make).FirstOrDefault()
             Return x
+        End Function
+
+        Public Function GetLeaveCredit(employeeIdNo As Int32, leaveIdNo As Int16) As EmployeeLeaveCredit 
+            Dim sql As String =
+                    " SELECT " & FieldList &
+                    " FROM EmployeeLeaveCredit" &
+                    " WHERE EmployeeIdNo = @employeeIdNo and LeaveIdNo = @LeaveIdNo"                     
+            Dim params() As Object = {"@EmployeeIdNo", employeeIdNo, "@LeaveIdNo", leaveIdNo}
+            Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
     End Class
