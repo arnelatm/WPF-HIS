@@ -15,6 +15,7 @@
         Public Property LeaveIdNo As Int16
         Public Property MaxCarryOver As Decimal
         Public Property MaxLimit As Decimal
+        Public Property NoMaxLimit As Boolean
         Public Property PaidPercent As Decimal
         Public Property Sequence As Int16
 

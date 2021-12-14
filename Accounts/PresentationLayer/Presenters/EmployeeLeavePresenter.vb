@@ -14,8 +14,8 @@ Namespace PresentationLayer.Presenters
 
         Private _userHasAccess As Boolean = False
         Private _userIsASupervisor As Boolean = False
-        Private _holiday As Boolean
-        Private _holidayService As New AccountsService("Holiday")
+        Private ReadOnly _holiday As Boolean
+        Private ReadOnly _holidayService As New AccountsService("Holiday")
         Private _leaveService As New AccountsService("Leave")
         Private _holidayModel As New HolidayModel
 
@@ -169,8 +169,9 @@ Namespace PresentationLayer.Presenters
             Dim retValue As Boolean = False
             Dim employeeLeaveModelList = New List(Of EmployeeLeaveModel)
             Dim employeeLeaveService = New AccountsService("EmployeeLeave")
+            Dim employeeLeaveCreditService = New AccountsService("EmployeeLeaveCredit")
             Dim noOfRequestedDays As Short
-            Dim noOfDaysInHoliday As Long = DateAndTime.DateDiff(DateInterval.Day, _holidayModel.DateStart, _holidayModel.DateEnd) + 1
+            Dim noOfDaysAllowed As Long = DateAndTime.DateDiff(DateInterval.Day, _holidayModel.DateStart, _holidayModel.DateEnd) + 1
             noOfRequestedDays = DateDiff(DateInterval.Day, View.StartDate, View.EndDate) + 1
             Dim records = employeeLeaveService.GetEmployeeHolidayLeaves(View.EmployeeIdNo, View.HolidayIdNo)
             If records Is Nothing OrElse records.Count = 0 Then
@@ -181,7 +182,7 @@ Namespace PresentationLayer.Presenters
                 For Each item In records
                     noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
                 Next
-                If (noOfAppliedDays + noOfRequestedDays) <= noOfDaysInHoliday Then
+                If (noOfAppliedDays + noOfRequestedDays) <= noOfDaysAllowed Then
                     ' check for overlapping dates
                     Dim overlappingDates As Boolean = False
                     Dim overlapIdNo As Int32 = 0
@@ -202,7 +203,7 @@ Namespace PresentationLayer.Presenters
                         retValue = True
                     End If
                 Else
-                    If noOfDaysInHoliday = 1 Then
+                    If noOfDaysAllowed = 1 Then
                         MessageBox.Show("Sorry there is already an open holiday leave request for this employee and holiday.")
                     Else
                         MessageBox.Show("Sorry either this employee has already consumed the allotted leave days for this holiday or the applied days leave plus the existing leaves will exceed the allotted days for this holiday.")
