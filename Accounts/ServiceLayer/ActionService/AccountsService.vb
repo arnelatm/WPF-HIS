@@ -303,6 +303,10 @@ Namespace ServiceLayer.ActionService
             Return DataDao.GetHolidayTransferItems(employeeIdNo, holidayIdNo)
         End Function
 
+        Public Function GetLeaveCredit(ByVal employeeIdNo As Int32, ByVal leaveIdNo As Int16)
+            Return DataDao.GetLeaveCredit(employeeIdNo, leaveIdNo)
+        End Function
+
         'Public Function GetCustomerOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)
         '    Return GetOpenInvoices(Of TM)(idNo)
         'End Function

@@ -1208,7 +1208,7 @@ Public Class BfMain
                                                 dataGridView.CurrentCell.OwningColumn.DataPropertyName,
                                                 dataGridView.CurrentCell.OwningColumn.Name,
                                                 dataGridView.CurrentCell.Value))
-
+        bindingSource.ResetBindings(False)
     End Sub
 
     Public Sub RunSubForm(Of TF, TP)(data As Object, subFormParent As Form)

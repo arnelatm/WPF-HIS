@@ -671,6 +671,18 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub DgvLeaveCredits_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewLeaveCredits.CellEndEdit
             ProcessCellEndEdit(DataGridViewLeaveCredits, bsLeaveCredits)
+            'With DataGridViewLeaveCredits
+            '    If .CurrentRow IsNot Nothing Then
+            '        Select Case .CurrentCell.OwningColumn.Name
+            '            Case $"dgvCumulative"
+            '                bsLeaveCredits.ResetBindings(False)
+            '                'if bsLeaveCredits.Current.Cumulative Then
+            '                '    bsLeaveCredits.Current.
+            '                'End If
+            '        End Select
+            '    End If
+            'End With
+            'bsLeaveCredits.ResetBindings(False)
         End Sub
 
     End Class
