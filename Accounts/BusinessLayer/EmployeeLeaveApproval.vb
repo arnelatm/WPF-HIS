@@ -11,7 +11,7 @@ Namespace BusinessLayer
         Public Sub New()
             ' establish business rules
             If GetRules().Count() = 0 Then
-                AddRule(New ValidateRequired("EnteredBy"))
+                AddRule(New ValidateRequired("ApprovedBy"))
                 AddRule(New ValidateRequired("Status"))
             End If
         End Sub

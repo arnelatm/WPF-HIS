@@ -192,17 +192,18 @@
         Me.IdNoDataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.DataGridViewLeaveCredits = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.bsLeaveCredits = New System.Windows.Forms.BindingSource(Me.components)
         Me.dgvSequenceLeaveCredits = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         Me.dgvLeaveAllowed = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
         Me.dgvPaidPercent = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
         Me.dgvCumulative = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.dgvMaxCarryOver = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
+        Me.NoMaxLimit = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
         Me.dgvMaxLimit = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
         Me.dgvAccumulatedLeave = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
         Me.dgvEmployeeIdNoLeaveCredits = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvIdNoLeaveCredits = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.bsLeaveCredits = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -241,14 +242,14 @@
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.floMainData)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1078, 502)
-        Me.SplitContainer1.SplitterDistance = 335
+        Me.SplitContainer1.Size = New System.Drawing.Size(1020, 502)
+        Me.SplitContainer1.SplitterDistance = 316
         '
         'FormTreeView
         '
         Me.FormTreeView.LineColor = System.Drawing.Color.Black
         Me.FormTreeView.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.FormTreeView.Size = New System.Drawing.Size(335, 502)
+        Me.FormTreeView.Size = New System.Drawing.Size(316, 502)
         '
         'ImageListTreeView
         '
@@ -284,7 +285,7 @@
         Me.floMainData.Dock = System.Windows.Forms.DockStyle.Fill
         Me.floMainData.Location = New System.Drawing.Point(0, 0)
         Me.floMainData.Name = "floMainData"
-        Me.floMainData.Size = New System.Drawing.Size(733, 502)
+        Me.floMainData.Size = New System.Drawing.Size(694, 502)
         Me.floMainData.TabIndex = 9
         '
         'lblIdNo
@@ -343,7 +344,7 @@
         Me.lblEmployeeCode.Location = New System.Drawing.Point(250, 1)
         Me.lblEmployeeCode.Margin = New System.Windows.Forms.Padding(1)
         Me.lblEmployeeCode.Name = "lblEmployeeCode"
-        Me.lblEmployeeCode.Size = New System.Drawing.Size(305, 23)
+        Me.lblEmployeeCode.Size = New System.Drawing.Size(318, 23)
         Me.lblEmployeeCode.TabIndex = 219
         Me.lblEmployeeCode.Text = "Employee Code"
         Me.lblEmployeeCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -367,7 +368,7 @@
         Me.txtEmployeeCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtEmployeeCode.ForeColor = System.Drawing.Color.Black
         Me.txtEmployeeCode.LinkedLabel = Me.lblEmployeeCode
-        Me.txtEmployeeCode.Location = New System.Drawing.Point(557, 1)
+        Me.txtEmployeeCode.Location = New System.Drawing.Point(570, 1)
         Me.txtEmployeeCode.Margin = New System.Windows.Forms.Padding(1)
         Me.txtEmployeeCode.MaximumValue = Nothing
         Me.txtEmployeeCode.MinimumValue = Nothing
@@ -422,7 +423,7 @@
         Me.txtEmployeeName.OldValue = Nothing
         Me.txtEmployeeName.ReadOnly = true
         Me.txtEmployeeName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtEmployeeName.Size = New System.Drawing.Size(476, 23)
+        Me.txtEmployeeName.Size = New System.Drawing.Size(490, 23)
         Me.txtEmployeeName.TabIndex = 2
         Me.txtEmployeeName.Translatable = false
         Me.txtEmployeeName.ValueIsMandatory = true
@@ -471,7 +472,7 @@
         Me.txtEmployeeNameAra.ReadOnly = true
         Me.txtEmployeeNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtEmployeeNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtEmployeeNameAra.Size = New System.Drawing.Size(476, 23)
+        Me.txtEmployeeNameAra.Size = New System.Drawing.Size(490, 23)
         Me.txtEmployeeNameAra.TabIndex = 3
         Me.txtEmployeeNameAra.Translatable = false
         Me.txtEmployeeNameAra.ValueIsMandatory = true
@@ -3167,7 +3168,7 @@
         Me.DataGridViewLeaveCredits.AutoGenerateColumns = false
         Me.DataGridViewLeaveCredits.BegFindValue = Nothing
         Me.DataGridViewLeaveCredits.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewLeaveCredits.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceLeaveCredits, Me.dgvLeaveIdNo, Me.dgvLeaveAllowed, Me.dgvPaidPercent, Me.dgvCumulative, Me.dgvMaxCarryOver, Me.dgvMaxLimit, Me.dgvAccumulatedLeave, Me.dgvEmployeeIdNoLeaveCredits, Me.dgvIdNoLeaveCredits})
+        Me.DataGridViewLeaveCredits.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceLeaveCredits, Me.dgvLeaveIdNo, Me.dgvLeaveAllowed, Me.dgvPaidPercent, Me.dgvCumulative, Me.dgvMaxCarryOver, Me.NoMaxLimit, Me.dgvMaxLimit, Me.dgvAccumulatedLeave, Me.dgvEmployeeIdNoLeaveCredits, Me.dgvIdNoLeaveCredits})
         Me.DataGridViewLeaveCredits.DataSource = Me.bsLeaveCredits
         DataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle34.BackColor = System.Drawing.Color.White
@@ -3206,6 +3207,10 @@
         Me.DataGridViewLeaveCredits.Size = New System.Drawing.Size(663, 355)
         Me.DataGridViewLeaveCredits.TabIndex = 0
         Me.DataGridViewLeaveCredits.Translatable = true
+        '
+        'bsLeaveCredits
+        '
+        Me.bsLeaveCredits.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeLeaveCreditModel)
         '
         'dgvSequenceLeaveCredits
         '
@@ -3289,6 +3294,24 @@
         Me.dgvMaxCarryOver.Translatable = false
         Me.dgvMaxCarryOver.Width = 50
         '
+        'NoMaxLimit
+        '
+        Me.NoMaxLimit.BegFindValue = Nothing
+        Me.NoMaxLimit.DataPropertyName = "NoMaxLimit"
+        Me.NoMaxLimit.EditingMode = false
+        Me.NoMaxLimit.EndFindValue = Nothing
+        Me.NoMaxLimit.FieldDescription = Nothing
+        Me.NoMaxLimit.FieldName = Nothing
+        Me.NoMaxLimit.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.NoMaxLimit.FindEnabled = false
+        Me.NoMaxLimit.HeaderText = "No Max. Limit"
+        Me.NoMaxLimit.IgnoreCase = false
+        Me.NoMaxLimit.Name = "NoMaxLimit"
+        Me.NoMaxLimit.ReadOnly = true
+        Me.NoMaxLimit.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.NoMaxLimit.Translatable = false
+        Me.NoMaxLimit.Width = 40
+        '
         'dgvMaxLimit
         '
         Me.dgvMaxLimit.DataPropertyName = "MaxLimit"
@@ -3339,14 +3362,10 @@
         Me.dgvIdNoLeaveCredits.ReadOnly = true
         Me.dgvIdNoLeaveCredits.Visible = false
         '
-        'bsLeaveCredits
-        '
-        Me.bsLeaveCredits.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeLeaveCreditModel)
-        '
         'EmployeeEntryTv
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
-        Me.ClientSize = New System.Drawing.Size(1078, 555)
+        Me.ClientSize = New System.Drawing.Size(1020, 555)
         Me.Name = "EmployeeEntryTv"
         Me.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.Text = "Employee Maintenance Form"
@@ -3518,16 +3537,6 @@ End Sub
         Friend WithEvents TabPage1 As TabPage
         Friend WithEvents bsLeaveCredits As BindingSource
         Friend WithEvents DataGridViewLeaveCredits As Libraries.CBaseControlsLibrary.CDataGridView
-        Friend WithEvents dgvSequenceLeaveCredits As DataGridViewTextBoxColumn
-        Friend WithEvents dgvLeaveIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
-        Friend WithEvents dgvLeaveAllowed As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
-        Friend WithEvents dgvPaidPercent As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
-        Friend WithEvents dgvCumulative As DataGridViewCheckBoxColumn
-        Friend WithEvents dgvMaxCarryOver As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
-        Friend WithEvents dgvMaxLimit As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
-        Friend WithEvents dgvAccumulatedLeave As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
-        Friend WithEvents dgvEmployeeIdNoLeaveCredits As DataGridViewTextBoxColumn
-        Friend WithEvents dgvIdNoLeaveCredits As DataGridViewTextBoxColumn
         Friend WithEvents lblPicture As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents imgPicture As Libraries.CBaseControlsLibrary.CPictureBox
         Friend WithEvents CLabel4 As Libraries.CBaseControlsLibrary.CLabel
@@ -3536,5 +3545,16 @@ End Sub
         Friend WithEvents cboSupervisorIdNo As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents CLabel5 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents chkSupervisor As Libraries.CBaseControlsLibrary.CCheckBox
+        Friend WithEvents dgvSequenceLeaveCredits As DataGridViewTextBoxColumn
+        Friend WithEvents dgvLeaveIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
+        Friend WithEvents dgvLeaveAllowed As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
+        Friend WithEvents dgvPaidPercent As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
+        Friend WithEvents dgvCumulative As DataGridViewCheckBoxColumn
+        Friend WithEvents dgvMaxCarryOver As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
+        Friend WithEvents NoMaxLimit As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
+        Friend WithEvents dgvMaxLimit As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
+        Friend WithEvents dgvAccumulatedLeave As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
+        Friend WithEvents dgvEmployeeIdNoLeaveCredits As DataGridViewTextBoxColumn
+        Friend WithEvents dgvIdNoLeaveCredits As DataGridViewTextBoxColumn
     End Class
 End NameSpace

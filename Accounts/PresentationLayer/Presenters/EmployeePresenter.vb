@@ -349,6 +349,17 @@ Namespace PresentationLayer.Presenters
                             If Not empLeaveCredit.Cumulative Then
                                 empLeaveCredit.MaxCarryOver = 0
                                 empLeaveCredit.MaxLimit = 0
+                                empLeaveCredit.NoMaxLimit = False
+                            Else
+                                empLeaveCredit.NoMaxLimit = True
+                                empLeaveCredit.MaxLimit = 0
+                            End If
+                        Case $"NoMaxLimit"
+                            Dim empLeaveCredit As EmployeeLeaveCreditView = eventType.BindingSource.Current
+                            If empLeaveCredit.NoMaxLimit Then
+                                empLeaveCredit.MaxLimit = 0
+                            Else
+
                             End If
                     End Select
                 End If
@@ -373,8 +384,8 @@ Namespace PresentationLayer.Presenters
                 Return True
             ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "EmployeePhone", "EmployeeIdNo") Then
                 Return True
-            'ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "ErDetails_View", "EmployeeIdNo") Then
-            '    Return True
+                'ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "ErDetails_View", "EmployeeIdNo") Then
+                '    Return True
             ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "ErJournal", "EmployeeIdNo") Then
                 Return True
             ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "HolidayTransferItem", "EmployeeIdNo") Then

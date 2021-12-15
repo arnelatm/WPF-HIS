@@ -11,6 +11,7 @@
 
 
 
+
 CREATE PROCEDURE  [dbo].[UpdateEmployeeLeaveCreditTVP]
   @MParam EmployeeLeaveCreditUpdate READONLY, @GroupIdNo as INT
 AS 
@@ -29,7 +30,8 @@ SET a.AccumulatedLeave = B.AccumulatedLeave,
 	a.LeaveAllowed = B.LeaveAllowed,
 	a.LeaveIdNo = B.LeaveIdNo,
 	a.MaxCarryOver = B.MaxCarryOver,
-	a.MaxLimit= B.MaxLimit,
+	a.MaxLimit = B.MaxLimit,
+	a.NoMaxLimit = B.NoMaxLimit,
 	a.PaidPercent = B.PaidPercent,
 	a.[Sequence] = B.[Sequence]	
 from EmployeeLeaveCredit a INNER JOIN @MParam As b

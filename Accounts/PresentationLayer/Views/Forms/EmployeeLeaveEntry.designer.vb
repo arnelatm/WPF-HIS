@@ -62,6 +62,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.DataGridViewApprovalHistory = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.bsEmployeeLeaveApproval = New System.Windows.Forms.BindingSource(Me.components)
+        Me.bsEmployeeLeaveApprovalHistory = New System.Windows.Forms.BindingSource(Me.components)
         Me.dgvApprovalIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvItemIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvDateCreated = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -69,13 +71,11 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvLeaveStatus = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         Me.dgvNote = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.EmployeeLeaveIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.bsEmployeeLeaveApprovalHistory = New System.Windows.Forms.BindingSource(Me.components)
-        Me.bsEmployeeLeaveApproval = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout2.SuspendLayout
         CType(Me.DataGridViewApprovalHistory,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.bsEmployeeLeaveApprovalHistory,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.bsEmployeeLeaveApproval,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.bsEmployeeLeaveApprovalHistory,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'TranslatorDAC
@@ -631,6 +631,10 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewApprovalHistory.ShowInsertColumnWhenEditing = true
         Me.DataGridViewApprovalHistory.Translatable = true
         '
+        'bsEmployeeLeaveApprovalHistory
+        '
+        Me.bsEmployeeLeaveApprovalHistory.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeLeaveApprovalHistoryModel)
+        '
         'dgvApprovalIdNo
         '
         Me.dgvApprovalIdNo.BegFindValue = Nothing
@@ -751,10 +755,6 @@ Namespace PresentationLayer.Views.Forms
         Me.EmployeeLeaveIdNo.Name = "EmployeeLeaveIdNo"
         Me.EmployeeLeaveIdNo.ReadOnly = true
         '
-        'bsEmployeeLeaveApprovalHistory
-        '
-        Me.bsEmployeeLeaveApprovalHistory.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeLeaveApprovalHistoryModel)
-        '
         'EmployeeLeaveEntry
         '
         resources.ApplyResources(Me, "$this")
@@ -766,8 +766,8 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout2.ResumeLayout(false)
         Me.CFlowLayout2.PerformLayout
         CType(Me.DataGridViewApprovalHistory,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsEmployeeLeaveApprovalHistory,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.bsEmployeeLeaveApproval,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.bsEmployeeLeaveApprovalHistory,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -799,6 +799,8 @@ End Sub
         Friend WithEvents bsEmployeeLeaveApproval As BindingSource
         Friend WithEvents bsEmployeeLeaveApprovalHistory As BindingSource
         Friend WithEvents CLabel1 As CLabel
+        Friend WithEvents lblHolidayName As CLabel
+        Public WithEvents cboHolidayIdNo As CaComboBox
         Friend WithEvents dgvApprovalIdNo As CDgvTextColumn
         Friend WithEvents dgvItemIdNo As CDgvTextColumn
         Friend WithEvents dgvDateCreated As CDgvTextColumn
@@ -806,7 +808,5 @@ End Sub
         Friend WithEvents dgvLeaveStatus As CDgvComboBoxColumn
         Friend WithEvents dgvNote As CDgvTextColumn
         Friend WithEvents EmployeeLeaveIdNo As DataGridViewTextBoxColumn
-        Friend WithEvents lblHolidayName As CLabel
-        Public WithEvents cboHolidayIdNo As CaComboBox
     End Class
 End Namespace
