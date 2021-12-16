@@ -31,6 +31,10 @@ Namespace PresentationLayer.Presenters
             Return False
         End Function
 
+        Protected Overrides Sub CreateDataSources()
+            CreateEnumDataSource(Of LeaveCycleSelection)("LeaveCycle")
+        End Sub
+
     End Class
 
 End Namespace

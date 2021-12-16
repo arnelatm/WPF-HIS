@@ -36,6 +36,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property LeaveCycle As String Implements ILeaveView.LeaveCycle
+            Get
+                Return cboLeaveCycle.GetValue()
+            End Get
+            Set(value As String)
+                cboLeaveCycle.SetValue(value)
+            End Set
+        End Property
+
         Public Property LeaveName As String Implements ILeaveView.LeaveName
             Get
                 Return txtLeaveName.Text
@@ -158,6 +167,7 @@ Namespace PresentationLayer.Views.Forms
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
                 {"LeaveCode", txtLeaveCode},
+                {"LeaveCycle", cboLeaveCycle},
                 {"LeaveName", txtLeaveName},
                 {"LeaveNameAra", txtLeaveNameAra},
                 {"LeaveAllowed", txtLeaveAllowed},

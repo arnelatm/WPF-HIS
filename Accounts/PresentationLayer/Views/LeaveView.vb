@@ -120,6 +120,15 @@ Namespace PresentationLayer.Views
             End Set
         End Property
 
+        Public Property LeaveCycle As String Implements ILeaveView.LeaveCycle
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As String)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
     End Class
 
 End Namespace

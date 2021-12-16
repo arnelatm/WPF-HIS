@@ -54,6 +54,8 @@ Namespace PresentationLayer.Views.Forms
         Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblNoMaxLimit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkNoMaxLimit = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+        Me.lblLeaveCycle = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboLeaveCycle = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -93,6 +95,7 @@ Namespace PresentationLayer.Views.Forms
         'TableLayoutPanel1
         '
         resources.ApplyResources(Me.TableLayoutPanel1, "TableLayoutPanel1")
+        Me.TableLayoutPanel1.Controls.Add(Me.lblLeaveCycle, 0, 10)
         Me.TableLayoutPanel1.Controls.Add(Me.lblHoliday, 2, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.chkHoliday, 2, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.lblNotes, 0, 14)
@@ -101,8 +104,8 @@ Namespace PresentationLayer.Views.Forms
         Me.TableLayoutPanel1.Controls.Add(Me.lblMaxLimit, 2, 12)
         Me.TableLayoutPanel1.Controls.Add(Me.txtMaxCarryOver, 2, 11)
         Me.TableLayoutPanel1.Controls.Add(Me.lblMaxCarryOver, 2, 10)
-        Me.TableLayoutPanel1.Controls.Add(Me.chkCumulative, 0, 11)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblCumulative, 0, 10)
+        Me.TableLayoutPanel1.Controls.Add(Me.chkCumulative, 1, 11)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblCumulative, 1, 10)
         Me.TableLayoutPanel1.Controls.Add(Me.txtPaidPercent, 2, 9)
         Me.TableLayoutPanel1.Controls.Add(Me.lblPaidPercent, 2, 8)
         Me.TableLayoutPanel1.Controls.Add(Me.txtLeaveAllowed, 0, 9)
@@ -117,6 +120,7 @@ Namespace PresentationLayer.Views.Forms
         Me.TableLayoutPanel1.Controls.Add(Me.lblCode, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.lblNoMaxLimit, 0, 12)
         Me.TableLayoutPanel1.Controls.Add(Me.chkNoMaxLimit, 0, 13)
+        Me.TableLayoutPanel1.Controls.Add(Me.cboLeaveCycle, 0, 11)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         '
         'lblHoliday
@@ -529,6 +533,51 @@ Namespace PresentationLayer.Views.Forms
         Me.chkNoMaxLimit.Translatable = false
         Me.chkNoMaxLimit.UseVisualStyleBackColor = false
         '
+        'lblLeaveCycle
+        '
+        resources.ApplyResources(Me.lblLeaveCycle, "lblLeaveCycle")
+        Me.lblLeaveCycle.DisplayOnly = true
+        Me.lblLeaveCycle.EditingMode = false
+        Me.lblLeaveCycle.Name = "lblLeaveCycle"
+        Me.lblLeaveCycle.Translatable = true
+        '
+        'cboLeaveCycle
+        '
+        Me.cboLeaveCycle.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.cboLeaveCycle.BegFindValue = Nothing
+        Me.cboLeaveCycle.ChangingSearchValueOnly = false
+        Me.cboLeaveCycle.CurrentSearchTerm = ""
+        Me.cboLeaveCycle.DefaultValue = Nothing
+        Me.cboLeaveCycle.DisplayMember = "Name"
+        Me.cboLeaveCycle.EditingMode = true
+        Me.cboLeaveCycle.EndFindValue = Nothing
+        Me.cboLeaveCycle.FieldDescription = Nothing
+        Me.cboLeaveCycle.FieldName = Nothing
+        Me.cboLeaveCycle.FilterRule = Nothing
+        Me.cboLeaveCycle.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboLeaveCycle.FindEnabled = false
+        resources.ApplyResources(Me.cboLeaveCycle, "cboLeaveCycle")
+        Me.cboLeaveCycle.FormattingEnabled = true
+        Me.cboLeaveCycle.HideWhenNotEditingOrAdding = false
+        Me.cboLeaveCycle.IgnoreCase = false
+        Me.cboLeaveCycle.LinkedLabel = Nothing
+        Me.cboLeaveCycle.Name = "cboLeaveCycle"
+        Me.cboLeaveCycle.OldValue = 0
+        Me.cboLeaveCycle.OriginalDataSource = Nothing
+        Me.cboLeaveCycle.OriginalList = Nothing
+        Me.cboLeaveCycle.OverrideDropDownStyleList = false
+        Me.cboLeaveCycle.PreviousSearchTerm = Nothing
+        Me.cboLeaveCycle.PropertySelector = Nothing
+        Me.cboLeaveCycle.ReadOnlyCombo = false
+        Me.cboLeaveCycle.SuggestBoxHeight = 200
+        Me.cboLeaveCycle.SuggestListOrderRule = Nothing
+        Me.cboLeaveCycle.TextToSearch = Nothing
+        Me.cboLeaveCycle.Translatable = false
+        Me.cboLeaveCycle.ValueIsMandatory = false
+        Me.cboLeaveCycle.ValueIsNullable = false
+        Me.cboLeaveCycle.ValueIsNumeric = false
+        Me.cboLeaveCycle.ValueMember = "IdNo"
+        '
         'LeaveEntryTv
         '
         resources.ApplyResources(Me, "$this")
@@ -572,5 +621,7 @@ End Sub
         Friend WithEvents chkHoliday As CCheckBox
         Friend WithEvents lblNoMaxLimit As CLabel
         Friend WithEvents chkNoMaxLimit As CCheckBox
+        Friend WithEvents lblLeaveCycle As CLabel
+        Friend WithEvents cboLeaveCycle As CaComboBox
     End Class
 End Namespace
