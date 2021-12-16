@@ -538,6 +538,12 @@
     <Compile Include="PresentationLayer\Views\Forms\EmployeeIdPrinting.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReport.Designer.vb">
+      <DependentUpon>ShiftDailyReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\TransactionSummary.designer.vb">
       <DependentUpon>TransactionSummary.vb</DependentUpon>
     </Compile>
@@ -1260,6 +1266,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\RecurringPayElementEntry.resx">
       <DependentUpon>RecurringPayElementEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReport.resx">
+      <DependentUpon>ShiftDailyReport.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\TransactionSummary.resx">
       <DependentUpon>TransactionSummary.vb</DependentUpon>

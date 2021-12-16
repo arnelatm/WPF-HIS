@@ -23,7 +23,7 @@ Public Class SecurityGroupPresenter(Of TM As New)
         TableName = "SecurityGroup_View"
         SortOrderKey = "SortKey"
         TreeViewMainField = "SecurityGroupName"
-        'TreeViewSecondaryField = "SecurityGroupCode"
+        TreeViewSecondaryField = "SecurityGroupCode"
         ParentFieldName = "ParentIdNo"
 
         DtInsertTable.Columns.Add("Editable", GetType(Boolean))

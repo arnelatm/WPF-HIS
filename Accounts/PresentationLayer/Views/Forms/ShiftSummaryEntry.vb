@@ -120,6 +120,7 @@ Namespace PresentationLayer.Views.Forms
             txtTotal.Text = FormatMoney(Cash + Cards)
         End Sub
 
+
     End Class
 
 End Namespace
