@@ -35,7 +35,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Overrides Sub GoPrintRecord()
-            Dim reportTitle = Messaging.TranslateCaption("Shift Summary Report")
+            Dim reportTitle = Messaging.TranslateCaption("Cash Receipt")
             Dim language As String
             Dim curCulture = CultureInfo.CurrentCulture
             Dim establishmentName As String

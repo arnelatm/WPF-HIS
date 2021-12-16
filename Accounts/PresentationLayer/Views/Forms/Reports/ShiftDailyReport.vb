@@ -33,7 +33,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                 Dim reportTitle As String
                 Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpBeginningDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
                 Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpEndingDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
-                reportName = Messaging.TranslateCaption($"Shift Summary Daily Report")
+                reportName = Messaging.TranslateCaption($"Shift Summary Report")
                 reportTitle = Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName, "beginningDate", bDate, "endingDate", eDate})
                 Dim cFormCulture = FormCulture
                 If Strings.Left(cFormCulture.Name, 2) = "ar" Then

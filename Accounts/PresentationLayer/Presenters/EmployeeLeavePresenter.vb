@@ -186,9 +186,9 @@ Namespace PresentationLayer.Presenters
             'End If
             If employeeLeaveCreditModel IsNot Nothing Then
                 If employeeLeaveCreditModel.Cumulative Then
-                    noOfDaysAllowed = employeeLeaveCreditModel.LeaveAllowed
-                Else
                     noOfDaysAllowed = employeeLeaveCreditModel.AccumulatedLeave
+                Else
+                    noOfDaysAllowed = employeeLeaveCreditModel.LeaveAllowed
                 End If
             Else
                 If leaveModel.Cumulative Then
