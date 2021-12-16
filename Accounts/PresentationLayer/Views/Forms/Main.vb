@@ -1137,6 +1137,9 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of EmployeeLeaveEntry, EmployeeLeavePresenter(Of EmployeeLeaveModel), Boolean)(True)
         End Sub
 
+        Private Sub ShiftDailySummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemShiftDailySummary.Click
+            RunForm(Of ShiftDailyReport)()
+        End Sub
     End Class
 
 End Namespace

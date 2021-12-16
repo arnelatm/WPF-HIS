@@ -186,7 +186,7 @@ Namespace PresentationLayer.Views.Forms
 
                 'txtMaxLimit.DisplayOnly = True
             Else
-                If Not btnEdit.Checked Then
+                If Not btnEdit.Enabled Then
                     txtMaxLimit.Enabled = True
                     If Cumulative AndAlso MaxLimit < LeaveAllowed Then
                         MaxLimit = LeaveAllowed
