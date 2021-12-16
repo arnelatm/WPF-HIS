@@ -380,3 +380,10 @@ Public Enum AbsenceTypeSelection
     <EnumCode("1")> Absent
     <EnumCode("2")> Late
 End Enum
+
+Public Enum LeaveCycleSelection
+    <EnumCode("")> NotSpecified
+    <EnumCode("1")> ResetsYearly
+    <EnumCode("2")> OnceOnly
+    <EnumCode("3")> AsNeeded
+End Enum
