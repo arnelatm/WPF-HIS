@@ -381,7 +381,7 @@ Public Enum AbsenceTypeSelection
     <EnumCode("2")> Late
 End Enum
 
-Public Enum LeaveApplicationSelection
+Public Enum LeaveCycleSelection
     <EnumCode("")> NotSpecified
     <EnumCode("1")> ResetsYearly
     <EnumCode("2")> OnceOnly

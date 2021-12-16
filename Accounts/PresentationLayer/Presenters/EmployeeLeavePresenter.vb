@@ -177,6 +177,13 @@ Namespace PresentationLayer.Presenters
             Dim noOfRequestedDays As Short
             Dim employeeLeaveCreditModel As EmployeeLeaveCreditModel = employeeLeaveCreditService.GetLeaveCredit(View.EmployeeIdNo, View.LeaveIdNo)
             Dim noOfDaysAllowed As Long
+            'Dim noOfDefaultDaysAllowed As Long
+            Dim leaveModel As LeaveModel = _leaveService.GetRecordByIdNo(Of LeaveModel)(View.LeaveIdNo)
+            'If leaveModel.Cumulative Then
+            '    noOfDefaultDaysAllowed = 0
+            'Else
+            '    noOfDefaultDaysAllowed = leaveModel.LeaveAllowed
+            'End If
             If employeeLeaveCreditModel IsNot Nothing Then
                 If employeeLeaveCreditModel.Cumulative Then
                     noOfDaysAllowed = employeeLeaveCreditModel.LeaveAllowed
@@ -184,7 +191,6 @@ Namespace PresentationLayer.Presenters
                     noOfDaysAllowed = employeeLeaveCreditModel.AccumulatedLeave
                 End If
             Else
-                Dim leaveModel As LeaveModel = _leaveService.GetRecordByIdNo(Of LeaveModel)(View.LeaveIdNo)
                 If leaveModel.Cumulative Then
                     noOfDaysAllowed = 0
                 Else
@@ -204,8 +210,19 @@ Namespace PresentationLayer.Presenters
                 ' check if no. of days for leave is not yet exceeded
                 Dim noOfAppliedDays As Int16 = 0
                 Dim noOfUsedLeaveDays As Int16 = 0
+                Dim leaveYear As Int16 = Year(View.StartDate)
                 If employeeLeaveCreditModel.Cumulative Then
                     For Each item As EmployeeLeaveModel In records
+                        noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
+                    Next
+                Else
+                    For Each item As EmployeeLeaveModel In records
+                        If leaveModel.LeaveCycle = LeaveCycleSelection.ResetsYearly Then
+                            If Year(View.StartDate) = leaveYear Then
+                                noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
+                            End If
+                        End If
+
                         noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
                     Next
                 End If

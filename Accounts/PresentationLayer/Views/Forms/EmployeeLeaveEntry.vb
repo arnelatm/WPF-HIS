@@ -1,6 +1,5 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
