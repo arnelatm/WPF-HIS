@@ -649,7 +649,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub UpdateOiTotals()
+        Public Sub UpdateOiTotals()
             If _apFooter IsNot Nothing Then
                 _apFooter.CalculateTotals()
                 Applied = _apFooter.Value("dgvAmount")

@@ -5,7 +5,7 @@ Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class BulkHolidayTransferEntry
+    Public Class HolidayTransferEntry
         Implements IHolidayTransferView
 
         Private _holidayTransferItems As New List(Of HolidayTransferItemView)

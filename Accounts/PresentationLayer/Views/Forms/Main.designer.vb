@@ -108,7 +108,7 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemEmployeeAbsenceLate = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemHolidayEntry = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemEmployeeLeaveApproval = New System.Windows.Forms.ToolStripMenuItem()
-        Me.BulkEmployeeHolidayTransferToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemEmployeeHolidayTransfer = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemPayrollTransaction = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemPayrollEntry = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemRecurringPayrollEntry = New System.Windows.Forms.ToolStripMenuItem()
@@ -146,6 +146,8 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemCashIncomePerDoctorService = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemNumberOfCashPatientsPerDoctor = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemBlankReport = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemLaboratory = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemFoodDeliveryMedicalReportSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemARAging = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemAPAging = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemCheckPrinting = New System.Windows.Forms.ToolStripMenuItem()
@@ -589,7 +591,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemHR
         '
-        Me.ToolStripMenuItemHR.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemEmployeeLeaveNonHoliday, Me.ToolStripMenuItemEmployeeLeaveHoliday, Me.ToolStripMenuItemEmployeeAbsenceLate, Me.ToolStripMenuItemHolidayEntry, Me.ToolStripMenuItemEmployeeLeaveApproval, Me.BulkEmployeeHolidayTransferToolStripMenuItem})
+        Me.ToolStripMenuItemHR.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemEmployeeLeaveNonHoliday, Me.ToolStripMenuItemEmployeeLeaveHoliday, Me.ToolStripMenuItemEmployeeAbsenceLate, Me.ToolStripMenuItemHolidayEntry, Me.ToolStripMenuItemEmployeeLeaveApproval, Me.ToolStripMenuItemEmployeeHolidayTransfer})
         Me.ToolStripMenuItemHR.Name = "ToolStripMenuItemHR"
         resources.ApplyResources(Me.ToolStripMenuItemHR, "ToolStripMenuItemHR")
         '
@@ -618,10 +620,10 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemEmployeeLeaveApproval.Name = "ToolStripMenuItemEmployeeLeaveApproval"
         resources.ApplyResources(Me.ToolStripMenuItemEmployeeLeaveApproval, "ToolStripMenuItemEmployeeLeaveApproval")
         '
-        'BulkEmployeeHolidayTransferToolStripMenuItem
+        'ToolStripMenuItemEmployeeHolidayTransfer
         '
-        Me.BulkEmployeeHolidayTransferToolStripMenuItem.Name = "BulkEmployeeHolidayTransferToolStripMenuItem"
-        resources.ApplyResources(Me.BulkEmployeeHolidayTransferToolStripMenuItem, "BulkEmployeeHolidayTransferToolStripMenuItem")
+        Me.ToolStripMenuItemEmployeeHolidayTransfer.Name = "ToolStripMenuItemEmployeeHolidayTransfer"
+        resources.ApplyResources(Me.ToolStripMenuItemEmployeeHolidayTransfer, "ToolStripMenuItemEmployeeHolidayTransfer")
         '
         'ToolStripMenuItemPayrollTransaction
         '
@@ -796,7 +798,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemIGroupReports
         '
-        Me.ToolStripMenuItemIGroupReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCashIncomePerDoctorService, Me.ToolStripMenuItemNumberOfCashPatientsPerDoctor, Me.ToolStripMenuItemBlankReport})
+        Me.ToolStripMenuItemIGroupReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCashIncomePerDoctorService, Me.ToolStripMenuItemNumberOfCashPatientsPerDoctor, Me.ToolStripMenuItemBlankReport, Me.ToolStripMenuItemLaboratory})
         Me.ToolStripMenuItemIGroupReports.Name = "ToolStripMenuItemIGroupReports"
         resources.ApplyResources(Me.ToolStripMenuItemIGroupReports, "ToolStripMenuItemIGroupReports")
         '
@@ -814,6 +816,17 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.ToolStripMenuItemBlankReport.Name = "ToolStripMenuItemBlankReport"
         resources.ApplyResources(Me.ToolStripMenuItemBlankReport, "ToolStripMenuItemBlankReport")
+        '
+        'ToolStripMenuItemLaboratory
+        '
+        Me.ToolStripMenuItemLaboratory.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemFoodDeliveryMedicalReportSummary})
+        Me.ToolStripMenuItemLaboratory.Name = "ToolStripMenuItemLaboratory"
+        resources.ApplyResources(Me.ToolStripMenuItemLaboratory, "ToolStripMenuItemLaboratory")
+        '
+        'ToolStripMenuItemFoodDeliveryMedicalReportSummary
+        '
+        Me.ToolStripMenuItemFoodDeliveryMedicalReportSummary.Name = "ToolStripMenuItemFoodDeliveryMedicalReportSummary"
+        resources.ApplyResources(Me.ToolStripMenuItemFoodDeliveryMedicalReportSummary, "ToolStripMenuItemFoodDeliveryMedicalReportSummary")
         '
         'ToolStripMenuItemARAging
         '
@@ -1205,9 +1218,11 @@ End Sub
         Friend WithEvents ToolStripMenuItemEmployeeAbsenceLate As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemHolidayEntry As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemEmployeeLeaveApproval As ToolStripMenuItem
-        Friend WithEvents BulkEmployeeHolidayTransferToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemEmployeeHolidayTransfer As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemEmployeeLeaveHoliday As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemReceptionReports As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemShiftDailySummary As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemLaboratory As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemFoodDeliveryMedicalReportSummary As ToolStripMenuItem
     End Class
 End NameSpace

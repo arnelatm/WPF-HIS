@@ -1129,8 +1129,8 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of EmployeeLeaveApprovalEntry, EmployeeLeaveApprovalPresenter(Of EmployeeLeaveModel))()
         End Sub
 
-        Private Sub BulkEmployeeHolidayTransferToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles BulkEmployeeHolidayTransferToolStripMenuItem.Click
-            RunForm(Of BulkHolidayTransferEntry, HolidayTransferPresenter(Of HolidayTransferModel))()
+        Private Sub EmployeeHolidayTransferToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeHolidayTransfer.Click
+            RunForm(Of HolidayTransferEntry, HolidayTransferPresenter(Of HolidayTransferModel))()
         End Sub
 
         Private Sub ToolStripMenuItemHolidayTransferAvailment_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeLeaveHoliday.Click
@@ -1139,6 +1139,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ShiftDailySummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemShiftDailySummary.Click
             RunForm(Of ShiftDailyReport)()
+        End Sub
+
+        Private Sub ToolStripMenuItemFoodDeliveryMedicalReportSummary_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemFoodDeliveryMedicalReportSummary.Click
+            RunForm(Of IBFoodDeliverySummary)()
         End Sub
     End Class
 

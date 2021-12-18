@@ -1105,7 +1105,7 @@ Namespace PresentationLayer.Presenters
                             eventType.BindingSource.Current.Balance = eventType.BindingSource.Current.PreviousBalance - eventType.BindingSource.Current.Amount - eventType.BindingSource.Current.DiscountTaken
                             CallByName(View, "UpdateOiTotals", CallType.Method)
                         Case $"DiscountTaken"
-                            eventType.BindingSource.Current.Balance = eventType.BindingSource.Current.PreviousBalance - eventType.BindingSource.Current.Amount - eventType.BindingSource.Current.Amount
+                            eventType.BindingSource.Current.Balance = eventType.BindingSource.Current.PreviousBalance - eventType.BindingSource.Current.Amount - eventType.BindingSource.Current.DiscountTaken
                             CallByName(View, "UpdateOiTotals", CallType.Method)
                         Case $"Balance"
                             SendKeys.Send("{DOWN}")
