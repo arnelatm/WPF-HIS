@@ -389,6 +389,7 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewJournalItems.FirstRowDeletionEnabled = false
         Me.DataGridViewJournalItems.FirstRowInsertionEnabled = false
         Me.DataGridViewJournalItems.IgnoreCase = false
+        Me.DataGridViewJournalItems.IsDirty = false
         Me.DataGridViewJournalItems.Location = New System.Drawing.Point(13, 203)
         Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
         Me.DataGridViewJournalItems.ReadOnly = true
@@ -1202,6 +1203,7 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewDjOiItems.FirstRowDeletionEnabled = false
         Me.DataGridViewDjOiItems.FirstRowInsertionEnabled = false
         Me.DataGridViewDjOiItems.IgnoreCase = false
+        Me.DataGridViewDjOiItems.IsDirty = false
         Me.DataGridViewDjOiItems.Location = New System.Drawing.Point(13, 549)
         Me.DataGridViewDjOiItems.MinimumSize = New System.Drawing.Size(996, 335)
         Me.DataGridViewDjOiItems.Name = "DataGridViewDjOiItems"
@@ -2010,7 +2012,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'btnPrintPcReplenishment
         '
-        Me.btnPrintPcReplenishment.DesignerSelected = true
+        Me.btnPrintPcReplenishment.DesignerSelected = false
         Me.btnPrintPcReplenishment.ImageIndex = 0
         Me.btnPrintPcReplenishment.Location = New System.Drawing.Point(445, 3)
         Me.btnPrintPcReplenishment.Name = "btnPrintPcReplenishment"

@@ -275,10 +275,14 @@ Namespace PresentationLayer.Views.Forms
             RunSubForm(Of EmployeeAbsenceEntry, EmployeeAbsencePresenter(Of EmployeeAbsenceModel))(IdNo, ParentForm)
         End Sub
 
-        Private Sub CButton2_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles CButton2.ClickButtonArea
-            RunSubForm(Of EmployeeLeaveEntry, EmployeeLeavePresenter(Of EmployeeLeaveModel))(ParentForm)
+        Private Sub CButton2_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnNonHolidayLeave.ClickButtonArea
+            RunSubForm(Of EmployeeLeaveEntry, EmployeeLeavePresenter(Of EmployeeLeaveModel), Boolean)(ParentForm, False)
+            'RunSubForm(Of EmployeeLeaveEntry, EmployeeLeavePresenter(Of EmployeeLeaveModel))(ParentForm)
         End Sub
 
+        Private Sub btnHolidayLeave_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnHolidayLeave.ClickButtonArea
+            RunSubForm(Of EmployeeLeaveEntry, EmployeeLeavePresenter(Of EmployeeLeaveModel), Boolean)(ParentForm, True)
+        End Sub
     End Class
 
 End Namespace

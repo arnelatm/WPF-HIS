@@ -4,7 +4,7 @@ Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms.Reports
 
-    Public Class CashIncomePerDoctorPerService
+    Public Class IBFoodDeliverySummary
 
         Public Property MainTableName As String
         Protected SortOrderKey As String
@@ -32,7 +32,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                 Dim cEndDate As String
                 cBegDate = Format(dtpBeginningDate.Value, "yyyy/MM/dd")
                 cEndDate = Format(dtpEndingDate.Value, "yyyy/MM/dd")
-                Dim cForm As New ReportFormIGroup("Food Delivery Medical Report Summary.Rpt", FormCulture, cBegDate, "BeginningDate", cEndDate, "EndingDate")
+                Dim cForm As New ReportFormIGroup($"IB Food Delivery Summary.Rpt", FormCulture, cBegDate, "BeginningDate", cEndDate, "EndingDate")
                 cForm.Show()
             Else
                 Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
