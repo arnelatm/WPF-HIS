@@ -41,6 +41,9 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
 
     'Public Shadows Event BeforeMappingData(dataModel As TM)
 
+    Public Sub New()
+    End Sub
+
     Public Sub New(itemView As IView)
         MyBase.New(itemView)
         InitializeTreeViewIfPresent()
@@ -133,7 +136,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
 
     Protected TreeViewList
     Protected TreeViewMainField As String
-    Protected TreeViewSecondaryField As String 
+    Protected TreeViewSecondaryField As String
     Protected ParentFieldName As String = ""
     Protected WithEvents FormTreeView As TreeView
     Protected NodeToDelete As TreeNode

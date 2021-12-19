@@ -19,6 +19,10 @@ Namespace PresentationLayer.Presenters
         Private _leaveService As New AccountsService("Leave")
         Private _holidayModel As New HolidayModel
 
+        Public Sub New()
+            MyBase.New()
+        End Sub
+
         Public Sub New(itemView As IEmployeeLeaveView, holiday As Boolean)
             MyBase.New(itemView)
             Service = New AccountsService("EmployeeLeave")

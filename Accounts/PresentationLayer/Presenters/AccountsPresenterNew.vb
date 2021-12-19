@@ -11,6 +11,10 @@ Namespace PresentationLayer.Presenters
     Public Class AccountsPresenterNew(Of TV As AATM.PresentationLayer.Views.IView, TM As New)
         Inherits CommonPresenterNew(Of TV, TM)
 
+        Public Sub New()
+            MyBase.New()
+        End Sub
+
         Public Sub New(itemView As AATM.PresentationLayer.Views.IView)
             MyBase.New(itemView)
         End Sub
