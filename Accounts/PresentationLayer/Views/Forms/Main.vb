@@ -1020,32 +1020,41 @@ Namespace PresentationLayer.Views.Forms
         Private Overloads Sub RunForm(Of TV)()
             Dim childMdiForm = Activator.CreateInstance(GetType(TV))
             childMdiForm.MdiParent = Me
-            childMdiForm.TopMost = True
+            'childMdiForm.TopMost = True
             childMdiForm.Show()
         End Sub
 
         Private Overloads Sub RunForm(Of TV, TX)(param As TX)
             Dim childMdiForm = Activator.CreateInstance(GetType(TV), param)
             childMdiForm.MdiParent = Me
-            childMdiForm.TopMost = True
+            'childMdiForm.TopMost = True
             childMdiForm.Show()
         End Sub
 
         Private Overloads Sub RunForm(Of TV, TP)()
             Dim childMdiForm = Activator.CreateInstance(GetType(TV))
             Dim pType As Type = GetType(TP)
-            childMdiForm.Presenter = Activator.CreateInstance(pType, {childMdiForm})
             childMdiForm.MdiParent = Me
-            For Each form In Me.MdiChildren
-                If Not form.Equals(childMdiForm) Then
-                    form.WindowState = FormWindowState.Minimized
-                    'form.SendToBack()
-                    'form.TopMost = False
-                End If
-            Next
-            childMdiForm.Show()
+            childMdiForm.Presenter = Activator.CreateInstance(pType, {childMdiForm})
+            'For Each form In Me.MdiChildren
+            '    If Not form.Equals(childMdiForm) Then
+            '        'form.WindowState = FormWindowState.Minimized
+            '        form.SendToBack()
+            '        form.TopMost = False
+            '        form.WindowState = FormWindowState.Normal
+            '    End If
+            'Next
+            'childMdiForm.Activate()
+            childMdiForm.Select()
             'childMdiForm.BringToFront()
             'childMdiForm.TopMost = True
+            childMdiForm.Show()
+            'childMdiForm.btnLast.PerformClick()
+            'childMdiForm.Select()
+            'ActivateMdiChild(childMdiForm)
+            'childMdiFOrm.Activate()
+            'Me.LayoutMdi(MdiLayout.Cascade)
+            'childMdiForm.Refresh()
             'childMdiForm.WindowState = FormWindowState.Minimized
             'childMdiForm.WindowState = FormWindowState.Normal
         End Sub
@@ -1055,7 +1064,7 @@ Namespace PresentationLayer.Views.Forms
             Dim pType As Type = GetType(TP)
             childMdiForm.Presenter = Activator.CreateInstance(pType, {childMdiForm, param})
             childMdiForm.MdiParent = Me
-            childMdiForm.TopMost = True
+            'childMdiForm.TopMost = True
             childMdiForm.Show()
         End Sub
 

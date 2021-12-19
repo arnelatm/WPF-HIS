@@ -18,7 +18,7 @@ Public Class CFormEntry
     Public ShowWaitForm As BackgroundWorker(Of String)
     Protected Const TurnOff As Boolean = False
     Protected Shared _resetEvent As AutoResetEvent = New AutoResetEvent(False)
-    Protected FirstControl As Control
+    Public FirstControl As Control
     Protected ParentFieldName As String = ""
     Protected RecordDateTimeStampValue As Object
     Protected SingleData As Boolean = False
@@ -534,7 +534,7 @@ Public Class CFormEntry
             If GlobalVariables.UserName.ToLower() <> $"arnel" Then
                 HideButton(btnDebug)
             End If
-            CenterForm(Me)
+            'CenterForm(Me)
             'UpdateNavigationButtonDisplay(False, False)
         End If
     End Sub
