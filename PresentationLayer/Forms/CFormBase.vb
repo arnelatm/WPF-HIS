@@ -323,7 +323,7 @@ Public Class CFormBase
             If GlobalVariables.UserName.ToLower() <> $"arnel" Then
                 HideButton(btnDebug)
             End If
-            CenterForm(Me)
+            'CenterForm(Me)
         End If
     End Sub
 
