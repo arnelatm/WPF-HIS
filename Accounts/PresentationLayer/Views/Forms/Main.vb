@@ -91,7 +91,6 @@ Namespace PresentationLayer.Views.Forms
             End If
             SetupMapper()
             Presenter = New UserPresenter(Of UserModel)(Me)
-
             'Dim builder As Autofac.ContainerBuilder = New ContainerBuilder()
             'builder.RegisterType(Of RecurringPayElementPresenter)().[As](Of ISalaryLoanSchedulePresenter)()
             'Dim x = builder.Build()
@@ -1021,12 +1020,14 @@ Namespace PresentationLayer.Views.Forms
         Private Overloads Sub RunForm(Of TV)()
             Dim childMdiForm = Activator.CreateInstance(GetType(TV))
             childMdiForm.MdiParent = Me
+            childMdiForm.TopMost = True
             childMdiForm.Show()
         End Sub
 
         Private Overloads Sub RunForm(Of TV, TX)(param As TX)
             Dim childMdiForm = Activator.CreateInstance(GetType(TV), param)
             childMdiForm.MdiParent = Me
+            childMdiForm.TopMost = True
             childMdiForm.Show()
         End Sub
 
@@ -1035,7 +1036,18 @@ Namespace PresentationLayer.Views.Forms
             Dim pType As Type = GetType(TP)
             childMdiForm.Presenter = Activator.CreateInstance(pType, {childMdiForm})
             childMdiForm.MdiParent = Me
+            For Each form In Me.MdiChildren
+                If Not form.Equals(childMdiForm) Then
+                    form.WindowState = FormWindowState.Minimized
+                    'form.SendToBack()
+                    'form.TopMost = False
+                End If
+            Next
             childMdiForm.Show()
+            'childMdiForm.BringToFront()
+            'childMdiForm.TopMost = True
+            'childMdiForm.WindowState = FormWindowState.Minimized
+            'childMdiForm.WindowState = FormWindowState.Normal
         End Sub
 
         Private Overloads Sub RunForm(Of TV, TP, TX)(param As TX)
@@ -1043,6 +1055,7 @@ Namespace PresentationLayer.Views.Forms
             Dim pType As Type = GetType(TP)
             childMdiForm.Presenter = Activator.CreateInstance(pType, {childMdiForm, param})
             childMdiForm.MdiParent = Me
+            childMdiForm.TopMost = True
             childMdiForm.Show()
         End Sub
 
@@ -1144,6 +1157,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemFoodDeliveryMedicalReportSummary_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemFoodDeliveryMedicalReportSummary.Click
             RunForm(Of IBFoodDeliverySummary)()
         End Sub
+
     End Class
 
 End Namespace

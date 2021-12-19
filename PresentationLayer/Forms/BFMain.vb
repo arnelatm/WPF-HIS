@@ -519,7 +519,6 @@ Public Class BfMain
         Next
     End Sub
 
-
     Private Sub TranslateTabControl(ByRef cTabControl As CTabControl)
         For Each tabPage As TabPage In cTabControl.TabPages
             Dim r As Int16
@@ -1217,6 +1216,7 @@ Public Class BfMain
         Dim pType As Type = GetType(TP)
         childForm.Presenter = Activator.CreateInstance(pType, {childForm})
         childForm.MdiParent = subFormParent
+        childForm.TopMost = True
         childForm.Show()
     End Sub
 
@@ -1225,6 +1225,7 @@ Public Class BfMain
         Dim pType As Type = GetType(TP)
         childMdiForm.Presenter = Activator.CreateInstance(pType, {childMdiForm})
         childMdiForm.MdiParent = Me
+        childMdiForm.TopMost = True
         childMdiForm.Show()
     End Sub
 
@@ -1234,16 +1235,17 @@ Public Class BfMain
         Dim pType As Type = GetType(TP)
         childForm.Presenter = Activator.CreateInstance(pType, {childForm})
         childForm.MdiParent = subFormParent
+        childForm.TopMost = True
         childForm.Show()
     End Sub
 
-    Public Sub RunSubForm(Of TF, TP, TX)(subFormParent As Form, param as TX)
-        Dim childForm = Activator.CreateInstance(GetType(TF), param)
-        Activator.CreateInstance(GetType(TP), {childForm})
+    Public Sub RunSubForm(Of TF, TP, TX)(ByRef subFormParent As Form, param As TX)
+        Dim childMdiForm = Activator.CreateInstance(GetType(TF), param)
         Dim pType As Type = GetType(TP)
-        childForm.Presenter = Activator.CreateInstance(pType, {childForm, param})
-        childForm.MdiParent = subFormParent
-        childForm.Show()
+        childMdiForm.Presenter = Activator.CreateInstance(pType, {childMdiForm, param})
+        childMdiForm.MdiParent = subFormParent
+        childMdiForm.TopMost = True
+        childMdiForm.Show()
     End Sub
 
 End Class

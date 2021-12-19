@@ -26,23 +26,23 @@ Namespace PresentationLayer.Views.Forms
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PayrollEntryTv))
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle27 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle25 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle26 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle29 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle30 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtPayrollName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -63,17 +63,26 @@ Namespace PresentationLayer.Views.Forms
         Me.tbpAttendance = New System.Windows.Forms.TabPage()
         Me.DataGridViewPayrollAttendance = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.dgvDaysVacationLeave = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
+        Me.dgvDaysTotal = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
+        Me.tbpOvertime = New System.Windows.Forms.TabPage()
+        Me.DataGridViewPayrollOvertime = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.btnInitializeOvertime = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.btnInitializeAttendance = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.btnEmployeeAbsenceEntry = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.btnNonHolidayLeave = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.btnHolidayLeave = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.btnGenerateRegularPayElements = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.btnViewPayrollReport = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.ProgressBar = New System.Windows.Forms.ProgressBar()
         Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         Me.dgvDaysAbsentWoPay = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
         Me.dgvDaysAbsentWithPay = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
-        Me.dgvDaysVacationLeave = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
         Me.dgvDaysOff = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
         Me.dgvDaysPresent = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
-        Me.dgvDaysTotal = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
         Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsPayrollAttendance = New System.Windows.Forms.BindingSource(Me.components)
-        Me.tbpOvertime = New System.Windows.Forms.TabPage()
-        Me.DataGridViewPayrollOvertime = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.dgvSequenceOvertime = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvEmployeeIdNoOt = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         Me.OvertimeRegularDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
@@ -82,15 +91,6 @@ Namespace PresentationLayer.Views.Forms
         Me.PayrollIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IdNoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsPayrollOvertime = New System.Windows.Forms.BindingSource(Me.components)
-        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.btnInitializeOvertime = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.btnInitializeAttendance = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.btnEmployeeAbsenceEntry = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.btnNonHolidayLeave = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.btnGenerateRegularPayElements = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.btnViewPayrollReport = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.ProgressBar = New System.Windows.Forms.ProgressBar()
-        Me.btnHolidayLeave = New AATM.Libraries.CBaseControlsLibrary.CButton()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -101,11 +101,11 @@ Namespace PresentationLayer.Views.Forms
         Me.tbcPayroll.SuspendLayout
         Me.tbpAttendance.SuspendLayout
         CType(Me.DataGridViewPayrollAttendance,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.bsPayrollAttendance,System.ComponentModel.ISupportInitialize).BeginInit
         Me.tbpOvertime.SuspendLayout
         CType(Me.DataGridViewPayrollOvertime,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.bsPayrollOvertime,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout1.SuspendLayout
+        CType(Me.bsPayrollAttendance,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.bsPayrollOvertime,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'SplitContainer1
@@ -525,21 +525,21 @@ Namespace PresentationLayer.Views.Forms
         'DataGridViewPayrollAttendance
         '
         Me.DataGridViewPayrollAttendance.AllowUserToAddRows = false
-        DataGridViewCellStyle18.BackColor = System.Drawing.Color.FloralWhite
-        Me.DataGridViewPayrollAttendance.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle18
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
+        Me.DataGridViewPayrollAttendance.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridViewPayrollAttendance.AutoGenerateColumns = false
         Me.DataGridViewPayrollAttendance.BegFindValue = Nothing
         Me.DataGridViewPayrollAttendance.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewPayrollAttendance.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvEmployeeIdNo, Me.dgvDaysAbsentWoPay, Me.dgvDaysAbsentWithPay, Me.dgvDaysVacationLeave, Me.dgvDaysOff, Me.dgvDaysPresent, Me.dgvDaysTotal, Me.IdNoDataGridViewTextBoxColumn})
         Me.DataGridViewPayrollAttendance.DataSource = Me.bsPayrollAttendance
-        DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle27.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle27.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle27.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewPayrollAttendance.DefaultCellStyle = DataGridViewCellStyle27
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewPayrollAttendance.DefaultCellStyle = DataGridViewCellStyle10
         Me.DataGridViewPayrollAttendance.DgvFooter = Nothing
         Me.DataGridViewPayrollAttendance.DisplayOnly = false
         Me.DataGridViewPayrollAttendance.Ea = Nothing
@@ -572,9 +572,9 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.dgvSequence.BegFindValue = Nothing
         Me.dgvSequence.DataPropertyName = "Sequence"
-        DataGridViewCellStyle19.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle19.ForeColor = System.Drawing.Color.Black
-        Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle19
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+        Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgvSequence.DisplayOnly = true
         Me.dgvSequence.EditingMode = false
         Me.dgvSequence.EndFindValue = Nothing
@@ -591,60 +591,13 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvSequence.Translatable = false
         Me.dgvSequence.Width = 30
         '
-        'dgvEmployeeIdNo
-        '
-        Me.dgvEmployeeIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.dgvEmployeeIdNo.DataPropertyName = "EmployeeIdNo"
-        DataGridViewCellStyle20.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle20.ForeColor = System.Drawing.Color.Black
-        Me.dgvEmployeeIdNo.DefaultCellStyle = DataGridViewCellStyle20
-        Me.dgvEmployeeIdNo.EditingMode = false
-        Me.dgvEmployeeIdNo.HeaderText = "EmployeeIdNo"
-        Me.dgvEmployeeIdNo.Name = "dgvEmployeeIdNo"
-        Me.dgvEmployeeIdNo.ReadOnly = true
-        Me.dgvEmployeeIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvEmployeeIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.dgvEmployeeIdNo.Translatable = false
-        '
-        'dgvDaysAbsentWoPay
-        '
-        Me.dgvDaysAbsentWoPay.DataPropertyName = "DaysAbsentWithoutPay"
-        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle21.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle21.ForeColor = System.Drawing.Color.Black
-        Me.dgvDaysAbsentWoPay.DefaultCellStyle = DataGridViewCellStyle21
-        Me.dgvDaysAbsentWoPay.EditingMode = false
-        Me.dgvDaysAbsentWoPay.HeaderText = "Days Leave w/o Pay"
-        Me.dgvDaysAbsentWoPay.Name = "dgvDaysAbsentWoPay"
-        Me.dgvDaysAbsentWoPay.ReadOnly = true
-        Me.dgvDaysAbsentWoPay.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvDaysAbsentWoPay.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.dgvDaysAbsentWoPay.Translatable = false
-        Me.dgvDaysAbsentWoPay.Width = 60
-        '
-        'dgvDaysAbsentWithPay
-        '
-        Me.dgvDaysAbsentWithPay.DataPropertyName = "DaysAbsentWithPay"
-        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle22.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle22.ForeColor = System.Drawing.Color.Black
-        Me.dgvDaysAbsentWithPay.DefaultCellStyle = DataGridViewCellStyle22
-        Me.dgvDaysAbsentWithPay.EditingMode = false
-        Me.dgvDaysAbsentWithPay.HeaderText = "Days Leave with Pay"
-        Me.dgvDaysAbsentWithPay.Name = "dgvDaysAbsentWithPay"
-        Me.dgvDaysAbsentWithPay.ReadOnly = true
-        Me.dgvDaysAbsentWithPay.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvDaysAbsentWithPay.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.dgvDaysAbsentWithPay.Translatable = false
-        Me.dgvDaysAbsentWithPay.Width = 60
-        '
         'dgvDaysVacationLeave
         '
         Me.dgvDaysVacationLeave.DataPropertyName = "DaysVacationLeave"
-        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle23.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle23.ForeColor = System.Drawing.Color.Black
-        Me.dgvDaysVacationLeave.DefaultCellStyle = DataGridViewCellStyle23
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+        Me.dgvDaysVacationLeave.DefaultCellStyle = DataGridViewCellStyle6
         Me.dgvDaysVacationLeave.EditingMode = false
         Me.dgvDaysVacationLeave.HeaderText = "Days Vacation Leave"
         Me.dgvDaysVacationLeave.Name = "dgvDaysVacationLeave"
@@ -652,46 +605,13 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvDaysVacationLeave.Translatable = false
         Me.dgvDaysVacationLeave.Width = 60
         '
-        'dgvDaysOff
-        '
-        Me.dgvDaysOff.DataPropertyName = "DaysOff"
-        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle24.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle24.ForeColor = System.Drawing.Color.Black
-        Me.dgvDaysOff.DefaultCellStyle = DataGridViewCellStyle24
-        Me.dgvDaysOff.EditingMode = false
-        Me.dgvDaysOff.HeaderText = "Days Off"
-        Me.dgvDaysOff.Name = "dgvDaysOff"
-        Me.dgvDaysOff.ReadOnly = true
-        Me.dgvDaysOff.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvDaysOff.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.dgvDaysOff.Translatable = false
-        Me.dgvDaysOff.Width = 60
-        '
-        'dgvDaysPresent
-        '
-        Me.dgvDaysPresent.DataPropertyName = "DaysPresent"
-        DataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle25.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle25.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle25.Format = "#####0.00"
-        Me.dgvDaysPresent.DefaultCellStyle = DataGridViewCellStyle25
-        Me.dgvDaysPresent.EditingMode = false
-        Me.dgvDaysPresent.HeaderText = "Days Present"
-        Me.dgvDaysPresent.Name = "dgvDaysPresent"
-        Me.dgvDaysPresent.ReadOnly = true
-        Me.dgvDaysPresent.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvDaysPresent.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.dgvDaysPresent.Translatable = false
-        Me.dgvDaysPresent.Width = 60
-        '
         'dgvDaysTotal
         '
         Me.dgvDaysTotal.DataPropertyName = "DaysTotal"
-        DataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle26.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle26.ForeColor = System.Drawing.Color.Black
-        Me.dgvDaysTotal.DefaultCellStyle = DataGridViewCellStyle26
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
+        Me.dgvDaysTotal.DefaultCellStyle = DataGridViewCellStyle9
         Me.dgvDaysTotal.EditingMode = false
         Me.dgvDaysTotal.HeaderText = "Days Total"
         Me.dgvDaysTotal.Name = "dgvDaysTotal"
@@ -700,18 +620,6 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvDaysTotal.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         Me.dgvDaysTotal.Translatable = false
         Me.dgvDaysTotal.Width = 60
-        '
-        'IdNoDataGridViewTextBoxColumn
-        '
-        Me.IdNoDataGridViewTextBoxColumn.DataPropertyName = "IdNo"
-        Me.IdNoDataGridViewTextBoxColumn.HeaderText = "IdNo"
-        Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
-        Me.IdNoDataGridViewTextBoxColumn.ReadOnly = true
-        Me.IdNoDataGridViewTextBoxColumn.Visible = false
-        '
-        'bsPayrollAttendance
-        '
-        Me.bsPayrollAttendance.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.AttendanceItemModel)
         '
         'tbpOvertime
         '
@@ -726,21 +634,21 @@ Namespace PresentationLayer.Views.Forms
         '
         'DataGridViewPayrollOvertime
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-        Me.DataGridViewPayrollOvertime.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FloralWhite
+        Me.DataGridViewPayrollOvertime.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle11
         Me.DataGridViewPayrollOvertime.AutoGenerateColumns = false
         Me.DataGridViewPayrollOvertime.BegFindValue = Nothing
         Me.DataGridViewPayrollOvertime.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewPayrollOvertime.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceOvertime, Me.dgvEmployeeIdNoOt, Me.OvertimeRegularDataGridViewTextBoxColumn, Me.OvertimeHolidayDataGridViewTextBoxColumn, Me.OvertimeSpecialDataGridViewTextBoxColumn, Me.PayrollIdNoDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn1})
         Me.DataGridViewPayrollOvertime.DataSource = Me.bsPayrollOvertime
-        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle32.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle32.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle32.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewPayrollOvertime.DefaultCellStyle = DataGridViewCellStyle32
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle17.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewPayrollOvertime.DefaultCellStyle = DataGridViewCellStyle17
         Me.DataGridViewPayrollOvertime.DgvFooter = Nothing
         Me.DataGridViewPayrollOvertime.DisplayOnly = false
         Me.DataGridViewPayrollOvertime.Dock = System.Windows.Forms.DockStyle.Fill
@@ -769,107 +677,6 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewPayrollOvertime.Size = New System.Drawing.Size(754, 358)
         Me.DataGridViewPayrollOvertime.TabIndex = 0
         Me.DataGridViewPayrollOvertime.Translatable = true
-        '
-        'dgvSequenceOvertime
-        '
-        Me.dgvSequenceOvertime.BegFindValue = Nothing
-        Me.dgvSequenceOvertime.DataPropertyName = "Sequence"
-        DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
-        Me.dgvSequenceOvertime.DefaultCellStyle = DataGridViewCellStyle10
-        Me.dgvSequenceOvertime.EditingMode = false
-        Me.dgvSequenceOvertime.EndFindValue = Nothing
-        Me.dgvSequenceOvertime.FieldDescription = Nothing
-        Me.dgvSequenceOvertime.FieldName = Nothing
-        Me.dgvSequenceOvertime.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.dgvSequenceOvertime.FindEnabled = false
-        Me.dgvSequenceOvertime.HeaderText = "Seq"
-        Me.dgvSequenceOvertime.IgnoreCase = false
-        Me.dgvSequenceOvertime.Name = "dgvSequenceOvertime"
-        Me.dgvSequenceOvertime.ReadOnly = true
-        Me.dgvSequenceOvertime.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvSequenceOvertime.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.dgvSequenceOvertime.Translatable = false
-        '
-        'dgvEmployeeIdNoOt
-        '
-        Me.dgvEmployeeIdNoOt.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.dgvEmployeeIdNoOt.DataPropertyName = "EmployeeIdNo"
-        DataGridViewCellStyle28.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle28.ForeColor = System.Drawing.Color.Black
-        Me.dgvEmployeeIdNoOt.DefaultCellStyle = DataGridViewCellStyle28
-        Me.dgvEmployeeIdNoOt.EditingMode = false
-        Me.dgvEmployeeIdNoOt.HeaderText = "Employee Name"
-        Me.dgvEmployeeIdNoOt.Name = "dgvEmployeeIdNoOt"
-        Me.dgvEmployeeIdNoOt.ReadOnly = true
-        Me.dgvEmployeeIdNoOt.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvEmployeeIdNoOt.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.dgvEmployeeIdNoOt.Translatable = false
-        '
-        'OvertimeRegularDataGridViewTextBoxColumn
-        '
-        Me.OvertimeRegularDataGridViewTextBoxColumn.DataPropertyName = "OvertimeRegular"
-        DataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle29.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle29.ForeColor = System.Drawing.Color.Black
-        Me.OvertimeRegularDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle29
-        Me.OvertimeRegularDataGridViewTextBoxColumn.EditingMode = false
-        Me.OvertimeRegularDataGridViewTextBoxColumn.HeaderText = "Regular Overtime"
-        Me.OvertimeRegularDataGridViewTextBoxColumn.Name = "OvertimeRegularDataGridViewTextBoxColumn"
-        Me.OvertimeRegularDataGridViewTextBoxColumn.ReadOnly = true
-        Me.OvertimeRegularDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.OvertimeRegularDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.OvertimeRegularDataGridViewTextBoxColumn.Translatable = false
-        '
-        'OvertimeHolidayDataGridViewTextBoxColumn
-        '
-        Me.OvertimeHolidayDataGridViewTextBoxColumn.DataPropertyName = "OvertimeHoliday"
-        DataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle30.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle30.ForeColor = System.Drawing.Color.Black
-        Me.OvertimeHolidayDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle30
-        Me.OvertimeHolidayDataGridViewTextBoxColumn.EditingMode = false
-        Me.OvertimeHolidayDataGridViewTextBoxColumn.HeaderText = "Holiday Overtime"
-        Me.OvertimeHolidayDataGridViewTextBoxColumn.Name = "OvertimeHolidayDataGridViewTextBoxColumn"
-        Me.OvertimeHolidayDataGridViewTextBoxColumn.ReadOnly = true
-        Me.OvertimeHolidayDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.OvertimeHolidayDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.OvertimeHolidayDataGridViewTextBoxColumn.Translatable = false
-        '
-        'OvertimeSpecialDataGridViewTextBoxColumn
-        '
-        Me.OvertimeSpecialDataGridViewTextBoxColumn.DataPropertyName = "OvertimeSpecial"
-        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle31.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle31.ForeColor = System.Drawing.Color.Black
-        Me.OvertimeSpecialDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle31
-        Me.OvertimeSpecialDataGridViewTextBoxColumn.EditingMode = false
-        Me.OvertimeSpecialDataGridViewTextBoxColumn.HeaderText = "Special Overtime"
-        Me.OvertimeSpecialDataGridViewTextBoxColumn.Name = "OvertimeSpecialDataGridViewTextBoxColumn"
-        Me.OvertimeSpecialDataGridViewTextBoxColumn.ReadOnly = true
-        Me.OvertimeSpecialDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.OvertimeSpecialDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.OvertimeSpecialDataGridViewTextBoxColumn.Translatable = false
-        '
-        'PayrollIdNoDataGridViewTextBoxColumn
-        '
-        Me.PayrollIdNoDataGridViewTextBoxColumn.DataPropertyName = "PayrollIdNo"
-        Me.PayrollIdNoDataGridViewTextBoxColumn.HeaderText = "PayrollIdNo"
-        Me.PayrollIdNoDataGridViewTextBoxColumn.Name = "PayrollIdNoDataGridViewTextBoxColumn"
-        Me.PayrollIdNoDataGridViewTextBoxColumn.ReadOnly = true
-        Me.PayrollIdNoDataGridViewTextBoxColumn.Visible = false
-        '
-        'IdNoDataGridViewTextBoxColumn1
-        '
-        Me.IdNoDataGridViewTextBoxColumn1.DataPropertyName = "IdNo"
-        Me.IdNoDataGridViewTextBoxColumn1.HeaderText = "IdNo"
-        Me.IdNoDataGridViewTextBoxColumn1.Name = "IdNoDataGridViewTextBoxColumn1"
-        Me.IdNoDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.IdNoDataGridViewTextBoxColumn1.Visible = false
-        '
-        'bsPayrollOvertime
-        '
-        Me.bsPayrollOvertime.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.OtWorkHourModel)
         '
         'CFlowLayout1
         '
@@ -935,6 +742,18 @@ Namespace PresentationLayer.Views.Forms
         Me.btnNonHolidayLeave.TabIndex = 176
         Me.btnNonHolidayLeave.Text = "Enter Employee Non Holiday Leaves"
         '
+        'btnHolidayLeave
+        '
+        Me.btnHolidayLeave.DesignerSelected = false
+        Me.btnHolidayLeave.ImageIndex = 0
+        Me.btnHolidayLeave.Location = New System.Drawing.Point(395, 3)
+        Me.btnHolidayLeave.Name = "btnHolidayLeave"
+        Me.btnHolidayLeave.OriginalImageName = Nothing
+        Me.btnHolidayLeave.SecurityKey = ""
+        Me.btnHolidayLeave.Size = New System.Drawing.Size(102, 66)
+        Me.btnHolidayLeave.TabIndex = 177
+        Me.btnHolidayLeave.Text = "Enter Employee Holiday Leaves"
+        '
         'btnGenerateRegularPayElements
         '
         Me.btnGenerateRegularPayElements.DesignerSelected = false
@@ -968,17 +787,198 @@ Namespace PresentationLayer.Views.Forms
         Me.ProgressBar.TabIndex = 148
         Me.ProgressBar.Visible = false
         '
-        'btnHolidayLeave
+        'dgvEmployeeIdNo
         '
-        Me.btnHolidayLeave.DesignerSelected = true
-        Me.btnHolidayLeave.ImageIndex = 0
-        Me.btnHolidayLeave.Location = New System.Drawing.Point(395, 3)
-        Me.btnHolidayLeave.Name = "btnHolidayLeave"
-        Me.btnHolidayLeave.OriginalImageName = Nothing
-        Me.btnHolidayLeave.SecurityKey = ""
-        Me.btnHolidayLeave.Size = New System.Drawing.Size(102, 66)
-        Me.btnHolidayLeave.TabIndex = 177
-        Me.btnHolidayLeave.Text = "Enter Employee Holiday Leaves"
+        Me.dgvEmployeeIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.dgvEmployeeIdNo.DataPropertyName = "EmployeeIdNo"
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+        Me.dgvEmployeeIdNo.DefaultCellStyle = DataGridViewCellStyle3
+        Me.dgvEmployeeIdNo.EditingMode = false
+        Me.dgvEmployeeIdNo.HeaderText = "EmployeeIdNo"
+        Me.dgvEmployeeIdNo.Name = "dgvEmployeeIdNo"
+        Me.dgvEmployeeIdNo.ReadOnly = true
+        Me.dgvEmployeeIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvEmployeeIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.dgvEmployeeIdNo.Translatable = false
+        '
+        'dgvDaysAbsentWoPay
+        '
+        Me.dgvDaysAbsentWoPay.DataPropertyName = "DaysAbsentWithoutPay"
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+        Me.dgvDaysAbsentWoPay.DefaultCellStyle = DataGridViewCellStyle4
+        Me.dgvDaysAbsentWoPay.EditingMode = false
+        Me.dgvDaysAbsentWoPay.HeaderText = "Days Leave w/o Pay"
+        Me.dgvDaysAbsentWoPay.Name = "dgvDaysAbsentWoPay"
+        Me.dgvDaysAbsentWoPay.ReadOnly = true
+        Me.dgvDaysAbsentWoPay.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvDaysAbsentWoPay.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.dgvDaysAbsentWoPay.Translatable = false
+        Me.dgvDaysAbsentWoPay.Width = 60
+        '
+        'dgvDaysAbsentWithPay
+        '
+        Me.dgvDaysAbsentWithPay.DataPropertyName = "DaysAbsentWithPay"
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+        Me.dgvDaysAbsentWithPay.DefaultCellStyle = DataGridViewCellStyle5
+        Me.dgvDaysAbsentWithPay.EditingMode = false
+        Me.dgvDaysAbsentWithPay.HeaderText = "Days Leave with Pay"
+        Me.dgvDaysAbsentWithPay.Name = "dgvDaysAbsentWithPay"
+        Me.dgvDaysAbsentWithPay.ReadOnly = true
+        Me.dgvDaysAbsentWithPay.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvDaysAbsentWithPay.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.dgvDaysAbsentWithPay.Translatable = false
+        Me.dgvDaysAbsentWithPay.Width = 60
+        '
+        'dgvDaysOff
+        '
+        Me.dgvDaysOff.DataPropertyName = "DaysOff"
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
+        Me.dgvDaysOff.DefaultCellStyle = DataGridViewCellStyle7
+        Me.dgvDaysOff.EditingMode = false
+        Me.dgvDaysOff.HeaderText = "Days Off"
+        Me.dgvDaysOff.Name = "dgvDaysOff"
+        Me.dgvDaysOff.ReadOnly = true
+        Me.dgvDaysOff.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvDaysOff.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.dgvDaysOff.Translatable = false
+        Me.dgvDaysOff.Width = 60
+        '
+        'dgvDaysPresent
+        '
+        Me.dgvDaysPresent.DataPropertyName = "DaysPresent"
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle8.Format = "#####0.00"
+        Me.dgvDaysPresent.DefaultCellStyle = DataGridViewCellStyle8
+        Me.dgvDaysPresent.EditingMode = false
+        Me.dgvDaysPresent.HeaderText = "Days Present"
+        Me.dgvDaysPresent.Name = "dgvDaysPresent"
+        Me.dgvDaysPresent.ReadOnly = true
+        Me.dgvDaysPresent.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvDaysPresent.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.dgvDaysPresent.Translatable = false
+        Me.dgvDaysPresent.Width = 60
+        '
+        'IdNoDataGridViewTextBoxColumn
+        '
+        Me.IdNoDataGridViewTextBoxColumn.DataPropertyName = "IdNo"
+        Me.IdNoDataGridViewTextBoxColumn.HeaderText = "IdNo"
+        Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
+        Me.IdNoDataGridViewTextBoxColumn.ReadOnly = true
+        Me.IdNoDataGridViewTextBoxColumn.Visible = false
+        '
+        'bsPayrollAttendance
+        '
+        Me.bsPayrollAttendance.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.AttendanceItemModel)
+        '
+        'dgvSequenceOvertime
+        '
+        Me.dgvSequenceOvertime.BegFindValue = Nothing
+        Me.dgvSequenceOvertime.DataPropertyName = "Sequence"
+        DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
+        Me.dgvSequenceOvertime.DefaultCellStyle = DataGridViewCellStyle12
+        Me.dgvSequenceOvertime.EditingMode = false
+        Me.dgvSequenceOvertime.EndFindValue = Nothing
+        Me.dgvSequenceOvertime.FieldDescription = Nothing
+        Me.dgvSequenceOvertime.FieldName = Nothing
+        Me.dgvSequenceOvertime.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvSequenceOvertime.FindEnabled = false
+        Me.dgvSequenceOvertime.HeaderText = "Seq"
+        Me.dgvSequenceOvertime.IgnoreCase = false
+        Me.dgvSequenceOvertime.Name = "dgvSequenceOvertime"
+        Me.dgvSequenceOvertime.ReadOnly = true
+        Me.dgvSequenceOvertime.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvSequenceOvertime.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvSequenceOvertime.Translatable = false
+        '
+        'dgvEmployeeIdNoOt
+        '
+        Me.dgvEmployeeIdNoOt.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.dgvEmployeeIdNoOt.DataPropertyName = "EmployeeIdNo"
+        DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
+        Me.dgvEmployeeIdNoOt.DefaultCellStyle = DataGridViewCellStyle13
+        Me.dgvEmployeeIdNoOt.EditingMode = false
+        Me.dgvEmployeeIdNoOt.HeaderText = "Employee Name"
+        Me.dgvEmployeeIdNoOt.Name = "dgvEmployeeIdNoOt"
+        Me.dgvEmployeeIdNoOt.ReadOnly = true
+        Me.dgvEmployeeIdNoOt.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvEmployeeIdNoOt.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.dgvEmployeeIdNoOt.Translatable = false
+        '
+        'OvertimeRegularDataGridViewTextBoxColumn
+        '
+        Me.OvertimeRegularDataGridViewTextBoxColumn.DataPropertyName = "OvertimeRegular"
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
+        Me.OvertimeRegularDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle14
+        Me.OvertimeRegularDataGridViewTextBoxColumn.EditingMode = false
+        Me.OvertimeRegularDataGridViewTextBoxColumn.HeaderText = "Regular Overtime"
+        Me.OvertimeRegularDataGridViewTextBoxColumn.Name = "OvertimeRegularDataGridViewTextBoxColumn"
+        Me.OvertimeRegularDataGridViewTextBoxColumn.ReadOnly = true
+        Me.OvertimeRegularDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.OvertimeRegularDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.OvertimeRegularDataGridViewTextBoxColumn.Translatable = false
+        '
+        'OvertimeHolidayDataGridViewTextBoxColumn
+        '
+        Me.OvertimeHolidayDataGridViewTextBoxColumn.DataPropertyName = "OvertimeHoliday"
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
+        Me.OvertimeHolidayDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle15
+        Me.OvertimeHolidayDataGridViewTextBoxColumn.EditingMode = false
+        Me.OvertimeHolidayDataGridViewTextBoxColumn.HeaderText = "Holiday Overtime"
+        Me.OvertimeHolidayDataGridViewTextBoxColumn.Name = "OvertimeHolidayDataGridViewTextBoxColumn"
+        Me.OvertimeHolidayDataGridViewTextBoxColumn.ReadOnly = true
+        Me.OvertimeHolidayDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.OvertimeHolidayDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.OvertimeHolidayDataGridViewTextBoxColumn.Translatable = false
+        '
+        'OvertimeSpecialDataGridViewTextBoxColumn
+        '
+        Me.OvertimeSpecialDataGridViewTextBoxColumn.DataPropertyName = "OvertimeSpecial"
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle16.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black
+        Me.OvertimeSpecialDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle16
+        Me.OvertimeSpecialDataGridViewTextBoxColumn.EditingMode = false
+        Me.OvertimeSpecialDataGridViewTextBoxColumn.HeaderText = "Special Overtime"
+        Me.OvertimeSpecialDataGridViewTextBoxColumn.Name = "OvertimeSpecialDataGridViewTextBoxColumn"
+        Me.OvertimeSpecialDataGridViewTextBoxColumn.ReadOnly = true
+        Me.OvertimeSpecialDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.OvertimeSpecialDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.OvertimeSpecialDataGridViewTextBoxColumn.Translatable = false
+        '
+        'PayrollIdNoDataGridViewTextBoxColumn
+        '
+        Me.PayrollIdNoDataGridViewTextBoxColumn.DataPropertyName = "PayrollIdNo"
+        Me.PayrollIdNoDataGridViewTextBoxColumn.HeaderText = "PayrollIdNo"
+        Me.PayrollIdNoDataGridViewTextBoxColumn.Name = "PayrollIdNoDataGridViewTextBoxColumn"
+        Me.PayrollIdNoDataGridViewTextBoxColumn.ReadOnly = true
+        Me.PayrollIdNoDataGridViewTextBoxColumn.Visible = false
+        '
+        'IdNoDataGridViewTextBoxColumn1
+        '
+        Me.IdNoDataGridViewTextBoxColumn1.DataPropertyName = "IdNo"
+        Me.IdNoDataGridViewTextBoxColumn1.HeaderText = "IdNo"
+        Me.IdNoDataGridViewTextBoxColumn1.Name = "IdNoDataGridViewTextBoxColumn1"
+        Me.IdNoDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.IdNoDataGridViewTextBoxColumn1.Visible = false
+        '
+        'bsPayrollOvertime
+        '
+        Me.bsPayrollOvertime.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.OtWorkHourModel)
         '
         'PayrollEntryTv
         '
@@ -997,11 +997,11 @@ Namespace PresentationLayer.Views.Forms
         Me.tbcPayroll.ResumeLayout(false)
         Me.tbpAttendance.ResumeLayout(false)
         CType(Me.DataGridViewPayrollAttendance,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsPayrollAttendance,System.ComponentModel.ISupportInitialize).EndInit
         Me.tbpOvertime.ResumeLayout(false)
         CType(Me.DataGridViewPayrollOvertime,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsPayrollOvertime,System.ComponentModel.ISupportInitialize).EndInit
         Me.CFlowLayout1.ResumeLayout(false)
+        CType(Me.bsPayrollAttendance,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.bsPayrollOvertime,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
         Me.PerformLayout
 

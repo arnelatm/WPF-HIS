@@ -12,6 +12,10 @@ Namespace PresentationLayer.Presenters
     Public MustInherit Class CommonPresenterNew(Of TV As IView, TM As New)
         Inherits Presenter(Of TV, TM)
 
+        Public Sub New()
+            MyBase.New()
+        End Sub
+
         'Shared Sub New()
         '    DefaultFieldValueService = New Service("DefaultFieldValue")
         'End Sub
