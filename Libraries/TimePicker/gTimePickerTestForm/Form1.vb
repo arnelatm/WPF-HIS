@@ -1,14 +1,20 @@
 Public Class Form1
 
+#Disable Warning BC30590 ' Event 'TimePicked' cannot be found.
     Private Sub GTimePicker2_TimePicked(ByVal sender As System.Object) Handles GTimePicker2.TimePicked
+#Enable Warning BC30590 ' Event 'TimePicked' cannot be found.
         TextBox1.Text = GTimePicker2.ToStringAMPM
     End Sub
 
+#Disable Warning BC30590 ' Event 'TimePicked' cannot be found.
     Private Sub GTimePicker1_TimePicked(ByVal sender As System.Object) Handles GTimePicker1.TimePicked
+#Enable Warning BC30590 ' Event 'TimePicked' cannot be found.
         Label1.Text = "You picked " & GTimePicker1.Time
     End Sub
 
+#Disable Warning BC30590 ' Event 'ValueOrNullChanged' cannot be found.
     Private Sub GDateTimePicker2_ValueOrNullChanged(ByVal sender As System.Object) Handles GDateTimePicker2.ValueOrNullChanged
+#Enable Warning BC30590 ' Event 'ValueOrNullChanged' cannot be found.
         UpdateDateTime()
     End Sub
 
@@ -16,7 +22,9 @@ Public Class Form1
         TextBox2.Text = String.Concat(GDateTimePicker2.ValueToString(DateTimePickerFormat.Long), " ", GTimePicker4.ToStringAMPM)
     End Sub
 
+#Disable Warning BC30590 ' Event 'TimePicked' cannot be found.
     Private Sub GTimePicker4_TimePicked(ByVal sender As System.Object) Handles GTimePicker4.TimePicked
+#Enable Warning BC30590 ' Event 'TimePicked' cannot be found.
         UpdateDateTime()
     End Sub
 
@@ -44,7 +52,9 @@ Public Class Form1
         GDateTimePicker1.gFormatString = TextBox4.Text
     End Sub
 
+#Disable Warning BC30590 ' Event 'ValueOrNullChanged' cannot be found.
     Private Sub GDateTimePicker1_ValueOrNullChanged(ByVal sender As Object) Handles GDateTimePicker1.ValueOrNullChanged
+#Enable Warning BC30590 ' Event 'ValueOrNullChanged' cannot be found.
         TextBox3.Text = GDateTimePicker1.ValueToString(OutputString)
     End Sub
 
@@ -87,7 +97,9 @@ Public Class Form1
         End If
     End Sub
 
+#Disable Warning BC30590 ' Event 'TimePicked' cannot be found.
     Private Sub GTimePickerCntrl1_TimePicked(ByVal sender As System.Object) Handles GTimePickerCntrl1.TimePicked
+#Enable Warning BC30590 ' Event 'TimePicked' cannot be found.
         tTime = String.Format("{0:0#}:{1:0#} {2}", _
                     GTimePickerCntrl1.Hour, _
                     GTimePickerCntrl1.Minute, _

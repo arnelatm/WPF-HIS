@@ -101,12 +101,6 @@
     <Compile Include="CalendarUtilities.vb" />
     <Compile Include="CurrencyInfo.vb" />
     <Compile Include="Extensions.vb" />
-    <Compile Include="Form1.designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Form1.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="GenClass.vb" />
     <Compile Include="GlobalFunctions.vb" />
     <Compile Include="GlobalSubs.vb" />
@@ -136,9 +130,6 @@
     <Compile Include="ValidationFunctions.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>

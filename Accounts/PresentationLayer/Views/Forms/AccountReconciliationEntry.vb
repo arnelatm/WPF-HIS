@@ -29,7 +29,7 @@ Namespace PresentationLayer.Views.Forms
         Private _previousBegValueSearch As Decimal?
         Private _previousEndValueSearch As Decimal?
         Private _previousColumnSearch As Int16
-        Private _progressDisplayForm As Form1
+        'Private _progressDisplayForm As Form1
 
         Public Event ReconciliationAccountChangedEvent(sender As Object, bindingSource As BindingSource) Implements IAccountReconciliationView.ReconciliationAccountChangedEvent
 

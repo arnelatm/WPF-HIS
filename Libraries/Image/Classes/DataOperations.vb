@@ -262,12 +262,20 @@ Namespace Classes
         Public Function SaveImage(idNo As Int32, picture As Image) As Boolean
             Dim retValue As Object = Nothing
             Dim tryAgain As Boolean
+#Disable Warning BC30451 ' 'CreateConnection' is not declared. It may be inaccessible due to its protection level.
             Using connection = CreateConnection()
+#Enable Warning BC30451 ' 'CreateConnection' is not declared. It may be inaccessible due to its protection level.
                 '_waitForm.Show()
                 Do While True
                     tryAgain = False
                     Try
+#Disable Warning BC30451 ' 'CreateCommand' is not declared. It may be inaccessible due to its protection level.
+#Disable Warning BC30451 ' 'parms' is not declared. It may be inaccessible due to its protection level.
+#Disable Warning BC30112 ' 'System.Data.Sql' is a namespace and cannot be used as an expression.
                         Using command = CreateCommand(sql, connection, parms)
+#Enable Warning BC30112 ' 'System.Data.Sql' is a namespace and cannot be used as an expression.
+#Enable Warning BC30451 ' 'parms' is not declared. It may be inaccessible due to its protection level.
+#Enable Warning BC30451 ' 'CreateCommand' is not declared. It may be inaccessible due to its protection level.
                             retValue = command.ExecuteNonQuery()
                         End Using
                     Catch ex As SqlException
@@ -278,7 +286,9 @@ Namespace Classes
                                 "NOT Saved", MessageBoxButtons.OK, MessageBoxIcon.Hand)
                             retValue = -1
                         Else
+#Disable Warning BC30451 ' 'TryToCatchError' is not declared. It may be inaccessible due to its protection level.
                             Select Case TryToCatchError(ex)
+#Enable Warning BC30451 ' 'TryToCatchError' is not declared. It may be inaccessible due to its protection level.
                                 Case DialogResult.Cancel
                                     retValue = -1
                                     '
@@ -303,7 +313,9 @@ Namespace Classes
                     End If
                 Loop
             End Using
+#Disable Warning BC30512 ' Option Strict On disallows implicit conversions from 'Object' to 'Boolean'.
             Return retValue
+#Enable Warning BC30512 ' Option Strict On disallows implicit conversions from 'Object' to 'Boolean'.
 
         End Function
 

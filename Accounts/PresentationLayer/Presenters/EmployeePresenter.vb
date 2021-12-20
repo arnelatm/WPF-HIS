@@ -62,6 +62,7 @@ Namespace PresentationLayer.Presenters
                                             {"LeaveIdNo", GetType(Int16)},
                                             {"MaxCarryOver", GetType(Decimal)},
                                             {"MaxLimit", GetType(Decimal)},
+                                            {"NoMaxLimit", GetType(Boolean)},
                                             {"PaidPercent", GetType(Decimal)},
                                             {"Sequence", GetType(Int16)}
                                                          })
@@ -92,6 +93,7 @@ Namespace PresentationLayer.Presenters
                                             {"LeaveIdNo", GetType(Int16)},
                                             {"MaxCarryOver", GetType(Decimal)},
                                             {"MaxLimit", GetType(Decimal)},
+                                            {"NoMaxLimit", GetType(Boolean)},
                                             {"PaidPercent", GetType(Decimal)},
                                             {"Sequence", GetType(Int16)}})
 
