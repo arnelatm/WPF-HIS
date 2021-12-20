@@ -466,12 +466,6 @@
     <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveApprovalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Form1.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\FormDataViewer.Designer.vb">
       <DependentUpon>FormDataViewer.vb</DependentUpon>
     </Compile>
@@ -1229,9 +1223,6 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\EmployeeLeaveApprovalEntry.resx">
       <DependentUpon>EmployeeLeaveApprovalEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\FormDataViewer.resx">
       <DependentUpon>FormDataViewer.vb</DependentUpon>
     </EmbeddedResource>
@@ -1610,6 +1601,7 @@
       <LastGenOutput>NewSettings.Designer.vb</LastGenOutput>
     </None>
     <None Include="packages.config" />
+    <None Include="PresentationLayer\Views\app-Ibn-Server.config" />
     <None Include="ServiceLayer\app-Ibn-Server.config" />
   </ItemGroup>
   <ItemGroup>

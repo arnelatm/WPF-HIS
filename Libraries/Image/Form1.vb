@@ -71,7 +71,9 @@ Public Class Form1
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+#Disable Warning BC30451 ' 'idNo' is not declared. It may be inaccessible due to its protection level.
         _ops.SaveImage(idNo, PictureBoxForSingleClick.Image)
+#Enable Warning BC30451 ' 'idNo' is not declared. It may be inaccessible due to its protection level.
     End Sub
 
 End Class

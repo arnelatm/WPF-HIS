@@ -779,14 +779,28 @@ Partial Class Form1
 
 End Sub
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+#Disable Warning BC30002 ' Type 'gTimePickerControl.gTimePicker' is not defined.
     Friend WithEvents GTimePicker1 As gTimePickerControl.gTimePicker
+#Enable Warning BC30002 ' Type 'gTimePickerControl.gTimePicker' is not defined.
+#Disable Warning BC30002 ' Type 'gTimePickerControl.gTimePicker' is not defined.
     Friend WithEvents GTimePicker2 As gTimePickerControl.gTimePicker
+#Enable Warning BC30002 ' Type 'gTimePickerControl.gTimePicker' is not defined.
+#Disable Warning BC30002 ' Type 'gTimePickerControl.gTimePicker' is not defined.
     Friend WithEvents GTimePicker3 As gTimePickerControl.gTimePicker
+#Enable Warning BC30002 ' Type 'gTimePickerControl.gTimePicker' is not defined.
     Friend WithEvents Label1 As System.Windows.Forms.Label
+#Disable Warning BC30002 ' Type 'gTimePickerControl.gTimePicker' is not defined.
     Friend WithEvents GTimePicker5 As gTimePickerControl.gTimePicker
+#Enable Warning BC30002 ' Type 'gTimePickerControl.gTimePicker' is not defined.
+#Disable Warning BC30002 ' Type 'gTimePickerControl.gTimePicker' is not defined.
     Friend WithEvents GTimePicker4 As gTimePickerControl.gTimePicker
+#Enable Warning BC30002 ' Type 'gTimePickerControl.gTimePicker' is not defined.
+#Disable Warning BC30002 ' Type 'gTimePickerControl.gTimePicker' is not defined.
     Friend WithEvents GTimePicker6 As gTimePickerControl.gTimePicker
+#Enable Warning BC30002 ' Type 'gTimePickerControl.gTimePicker' is not defined.
+#Disable Warning BC30002 ' Type 'gTimePickerControl.gTimePicker' is not defined.
     Friend WithEvents GTimePicker7 As gTimePickerControl.gTimePicker
+#Enable Warning BC30002 ' Type 'gTimePickerControl.gTimePicker' is not defined.
     Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
@@ -798,8 +812,12 @@ End Sub
     Friend WithEvents RadioButton3 As System.Windows.Forms.RadioButton
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents Button2 As System.Windows.Forms.Button
+#Disable Warning BC30002 ' Type 'gTimePickerControl.gDateTimePicker' is not defined.
     Friend WithEvents GDateTimePicker1 As gTimePickerControl.gDateTimePicker
+#Enable Warning BC30002 ' Type 'gTimePickerControl.gDateTimePicker' is not defined.
+#Disable Warning BC30002 ' Type 'gTimePickerControl.gDateTimePicker' is not defined.
     Friend WithEvents GDateTimePicker2 As gTimePickerControl.gDateTimePicker
+#Enable Warning BC30002 ' Type 'gTimePickerControl.gDateTimePicker' is not defined.
     Friend WithEvents RadioButton1 As System.Windows.Forms.RadioButton
     Friend WithEvents RadioButton6 As System.Windows.Forms.RadioButton
     Friend WithEvents RadioButton2 As System.Windows.Forms.RadioButton
@@ -812,7 +830,9 @@ End Sub
     Friend WithEvents chkMidMins As System.Windows.Forms.CheckBox
     Friend WithEvents chk24Hour As System.Windows.Forms.CheckBox
     Friend WithEvents chkTrueHour As System.Windows.Forms.CheckBox
+#Disable Warning BC30002 ' Type 'gTimePickerControl.gTimePickerCntrl' is not defined.
     Friend WithEvents GTimePickerCntrl1 As gTimePickerControl.gTimePickerCntrl
+#Enable Warning BC30002 ' Type 'gTimePickerControl.gTimePickerCntrl' is not defined.
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label

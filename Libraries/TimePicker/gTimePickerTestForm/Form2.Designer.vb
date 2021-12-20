@@ -239,13 +239,27 @@ Partial Class Form2
         Me.PerformLayout()
 
     End Sub
+#Disable Warning BC30002 ' Type 'gTimePickerControl.gDateTimePicker' is not defined.
     Friend WithEvents GDateTimePicker3 As gTimePickerControl.gDateTimePicker
+#Enable Warning BC30002 ' Type 'gTimePickerControl.gDateTimePicker' is not defined.
+#Disable Warning BC30002 ' Type 'gTimePickerControl.gDateTimePicker' is not defined.
     Friend WithEvents GDateTimePicker4 As gTimePickerControl.gDateTimePicker
+#Enable Warning BC30002 ' Type 'gTimePickerControl.gDateTimePicker' is not defined.
+#Disable Warning BC30002 ' Type 'gTimePickerControl.gDateTimePicker' is not defined.
     Friend WithEvents GDateTimePicker5 As gTimePickerControl.gDateTimePicker
+#Enable Warning BC30002 ' Type 'gTimePickerControl.gDateTimePicker' is not defined.
+#Disable Warning BC30002 ' Type 'gTimePickerControl.gDateTimePicker' is not defined.
     Friend WithEvents GDateTimePicker6 As gTimePickerControl.gDateTimePicker
+#Enable Warning BC30002 ' Type 'gTimePickerControl.gDateTimePicker' is not defined.
     Friend WithEvents Label1 As System.Windows.Forms.Label
+#Disable Warning BC30002 ' Type 'gTimePickerControl.gDateTimePicker' is not defined.
     Friend WithEvents GDateTimePicker7 As gTimePickerControl.gDateTimePicker
+#Enable Warning BC30002 ' Type 'gTimePickerControl.gDateTimePicker' is not defined.
     Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+#Disable Warning BC30002 ' Type 'gTimePickerControl.gDateTimePicker' is not defined.
     Friend WithEvents GDateTimePicker1 As gTimePickerControl.gDateTimePicker
+#Enable Warning BC30002 ' Type 'gTimePickerControl.gDateTimePicker' is not defined.
+#Disable Warning BC30002 ' Type 'gTimePickerControl.gTimePicker' is not defined.
     Friend WithEvents GTimePicker1 As gTimePickerControl.gTimePicker
+#Enable Warning BC30002 ' Type 'gTimePickerControl.gTimePicker' is not defined.
 End Class

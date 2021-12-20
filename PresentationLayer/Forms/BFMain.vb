@@ -14,7 +14,7 @@ Public Class BfMain
 
     Dim _originalText As String
 
-    '    Dim _menuLevel As String = ""
+    '    Dim _menuLevel As String = " " 
     Private _textDisplayLanguage As String
 
     Protected _addSecurityObject As Boolean = False

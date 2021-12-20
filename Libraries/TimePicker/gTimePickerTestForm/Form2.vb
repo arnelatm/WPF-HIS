@@ -40,7 +40,9 @@ Public Class Form2
 
     End Sub
 
+#Disable Warning BC30590 ' Event 'ValueOrNullChanged' cannot be found.
     Private Sub GDateTimePicker1_ValueOrNullChanged(ByVal sender As System.Object) Handles GDateTimePicker1.ValueOrNullChanged
+#Enable Warning BC30590 ' Event 'ValueOrNullChanged' cannot be found.
         GDateTimePicker1.DataBindings.Item("gValue").WriteValue()
         SetDateNullText()
     End Sub
