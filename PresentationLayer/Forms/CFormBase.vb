@@ -4,7 +4,6 @@ Imports System.Globalization
 Imports System.Threading
 Imports System.Windows.Forms
 Imports AATM.Libraries
-Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events

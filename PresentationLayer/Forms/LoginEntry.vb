@@ -1,6 +1,5 @@
 ﻿Imports System.ComponentModel
 Imports System.Windows.Forms
-Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Presenters
