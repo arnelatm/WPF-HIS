@@ -1163,7 +1163,7 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of ShiftDailyReport)()
         End Sub
 
-        Private Sub ToolStripMenuItemFoodDeliveryMedicalReportSummary_Click(sender As Object, e As EventArgs) Handles FoodDeliveryMedicalReportSummaryToolStripMenuItem.Click
+        Private Sub ToolStripMenuItemFoodDeliveryMedicalReportSummary_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemFoodDeliveryMedicalReportSummary.Click
             RunForm(Of IBFoodDeliverySummary)()
         End Sub
 

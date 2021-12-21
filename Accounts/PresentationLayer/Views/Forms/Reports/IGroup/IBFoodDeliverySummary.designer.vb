@@ -33,6 +33,8 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.cboSelectedReport = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout1.SuspendLayout
         Me.SuspendLayout
@@ -132,10 +134,12 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.CFlowLayout1.Controls.Add(Me.dtpBeginningDate)
         Me.CFlowLayout1.Controls.Add(Me.lblEndingDate)
         Me.CFlowLayout1.Controls.Add(Me.dtpEndingDate)
+        Me.CFlowLayout1.Controls.Add(Me.CLabel3)
+        Me.CFlowLayout1.Controls.Add(Me.cboSelectedReport)
         Me.CFlowLayout1.Location = New System.Drawing.Point(12, 37)
         Me.CFlowLayout1.Name = "CFlowLayout1"
         Me.CFlowLayout1.Padding = New System.Windows.Forms.Padding(10)
-        Me.CFlowLayout1.Size = New System.Drawing.Size(318, 81)
+        Me.CFlowLayout1.Size = New System.Drawing.Size(318, 127)
         Me.CFlowLayout1.TabIndex = 26
         '
         'CLabel2
@@ -170,9 +174,9 @@ Namespace PresentationLayer.Views.Forms.Reports
         '
         'btnOk
         '
-        Me.btnOk.DesignerSelected = false
+        Me.btnOk.DesignerSelected = true
         Me.btnOk.ImageIndex = 0
-        Me.btnOk.Location = New System.Drawing.Point(66, 124)
+        Me.btnOk.Location = New System.Drawing.Point(65, 184)
         Me.btnOk.Name = "btnOk"
         Me.btnOk.OriginalImageName = Nothing
         Me.btnOk.SecurityKey = ""
@@ -184,7 +188,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         '
         Me.btnCancel.DesignerSelected = false
         Me.btnCancel.ImageIndex = 0
-        Me.btnCancel.Location = New System.Drawing.Point(172, 124)
+        Me.btnCancel.Location = New System.Drawing.Point(171, 184)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.OriginalImageName = Nothing
         Me.btnCancel.SecurityKey = ""
@@ -192,9 +196,65 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.btnCancel.TabIndex = 28
         Me.btnCancel.Text = "Cancel"
         '
+        'cboSelectedReport
+        '
+        Me.cboSelectedReport.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.cboSelectedReport.BegFindValue = Nothing
+        Me.cboSelectedReport.ChangingSearchValueOnly = false
+        Me.cboSelectedReport.CurrentSearchTerm = ""
+        Me.cboSelectedReport.DefaultValue = Nothing
+        Me.cboSelectedReport.DisplayMember = "Name"
+        Me.cboSelectedReport.EditingMode = true
+        Me.cboSelectedReport.EndFindValue = Nothing
+        Me.cboSelectedReport.FieldDescription = Nothing
+        Me.cboSelectedReport.FieldName = Nothing
+        Me.cboSelectedReport.FilterRule = Nothing
+        Me.cboSelectedReport.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboSelectedReport.FindEnabled = false
+        Me.cboSelectedReport.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.cboSelectedReport.FormattingEnabled = true
+        Me.cboSelectedReport.HideWhenNotEditingOrAdding = false
+        Me.cboSelectedReport.IgnoreCase = false
+        Me.cboSelectedReport.Items.AddRange(New Object() {"Iqama Test", "Health Card Test", "Driving License Test", "Food Delivery Test"})
+        Me.cboSelectedReport.LinkedLabel = Nothing
+        Me.cboSelectedReport.Location = New System.Drawing.Point(11, 92)
+        Me.cboSelectedReport.Margin = New System.Windows.Forms.Padding(1)
+        Me.cboSelectedReport.Name = "cboSelectedReport"
+        Me.cboSelectedReport.OldValue = 0
+        Me.cboSelectedReport.OriginalDataSource = Nothing
+        Me.cboSelectedReport.OriginalList = Nothing
+        Me.cboSelectedReport.OverrideDropDownStyleList = false
+        Me.cboSelectedReport.PreviousSearchTerm = Nothing
+        Me.cboSelectedReport.PropertySelector = Nothing
+        Me.cboSelectedReport.ReadOnlyCombo = false
+        Me.cboSelectedReport.Size = New System.Drawing.Size(285, 24)
+        Me.cboSelectedReport.SuggestBoxHeight = 200
+        Me.cboSelectedReport.SuggestListOrderRule = Nothing
+        Me.cboSelectedReport.TabIndex = 25
+        Me.cboSelectedReport.TextToSearch = Nothing
+        Me.cboSelectedReport.Translatable = false
+        Me.cboSelectedReport.ValueIsMandatory = false
+        Me.cboSelectedReport.ValueIsNullable = false
+        Me.cboSelectedReport.ValueIsNumeric = false
+        Me.cboSelectedReport.ValueMember = "IdNo"
+        '
+        'CLabel3
+        '
+        Me.CLabel3.DisplayOnly = true
+        Me.CLabel3.EditingMode = false
+        Me.CLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.CLabel3.Location = New System.Drawing.Point(11, 65)
+        Me.CLabel3.Margin = New System.Windows.Forms.Padding(1)
+        Me.CLabel3.Name = "CLabel3"
+        Me.CLabel3.Size = New System.Drawing.Size(171, 25)
+        Me.CLabel3.TabIndex = 26
+        Me.CLabel3.Text = "Select Test to print"
+        Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.CLabel3.Translatable = true
+        '
         'IBFoodDeliverySummary
         '
-        Me.ClientSize = New System.Drawing.Size(332, 167)
+        Me.ClientSize = New System.Drawing.Size(332, 221)
         Me.Controls.Add(Me.CLabel2)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnOk)
@@ -216,5 +276,7 @@ End Sub
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
+        Friend WithEvents CLabel3 As CLabel
+        Friend WithEvents cboSelectedReport As CaComboBox
     End Class
 End NameSpace
