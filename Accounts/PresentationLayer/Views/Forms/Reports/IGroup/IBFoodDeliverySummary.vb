@@ -30,9 +30,11 @@ Namespace PresentationLayer.Views.Forms.Reports
             If dtpBeginningDate.Value <= dtpEndingDate.Value Then
                 Dim cBegDate As String
                 Dim cEndDate As String
+                Dim selection As Int16
+                selection = cboSelectedReport.SelectedIndex
                 cBegDate = Format(dtpBeginningDate.Value, "yyyy/MM/dd")
                 cEndDate = Format(dtpEndingDate.Value, "yyyy/MM/dd")
-                Dim cForm As New ReportFormIGroup($"IB Food Delivery Summary.Rpt", FormCulture, cBegDate, "BeginningDate", cEndDate, "EndingDate")
+                Dim cForm As New ReportFormIGroup($"Diagnostic Test Summary.Rpt", FormCulture, cBegDate, "BeginningDate", cEndDate, "EndingDate", selection, "SelectedReport")
                 cForm.Show()
             Else
                 Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
