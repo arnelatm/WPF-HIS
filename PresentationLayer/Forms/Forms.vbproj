@@ -149,14 +149,14 @@
     </Compile>
     <Compile Include="CrReportViewer.Designer.vb">
       <DependentUpon>CrReportViewer.vb</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="CrReportViewer.vb">
       <SubType>Form</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="CrystalDecisions\ReportAppServer\CommonControls.vb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="FormHelpers.vb" />
     <Compile Include="HijriCalendarForm.Designer.vb">
@@ -212,7 +212,7 @@
     <EmbeddedResource Include="CrReportViewer.resx">
       <DependentUpon>CrReportViewer.vb</DependentUpon>
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="HijriCalendarForm.resx">
       <DependentUpon>HijriCalendarForm.vb</DependentUpon>
@@ -231,10 +231,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <AdditionalFiles Include="..\..\..\HIS\DependencyValidationAccounts\DependencyValidation1.layerdiagram">
-      <Link>DependencyValidation1.layerdiagram</Link>
-      <Visible>False</Visible>
-    </AdditionalFiles>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
