@@ -666,10 +666,10 @@
     <Compile Include="PresentationLayer\Views\Forms\PettyCashClosingEntry.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\IBFoodDeliverySummary.designer.vb">
-      <DependentUpon>IBFoodDeliverySummary.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\DiagnosticTestSummary.designer.vb">
+      <DependentUpon>DiagnosticTestSummary.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\IBFoodDeliverySummary.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\DiagnosticTestSummary.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\CashIncomePerDoctorPerService.designer.vb">
@@ -1377,8 +1377,8 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ErSummary.resx">
       <DependentUpon>ErSummary.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\IBFoodDeliverySummary.resx">
-      <DependentUpon>IBFoodDeliverySummary.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\DiagnosticTestSummary.resx">
+      <DependentUpon>DiagnosticTestSummary.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\CashIncomePerDoctorPerService.resx">

@@ -4,7 +4,7 @@ Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms.Reports
 
-    Public Class IBFoodDeliverySummary
+    Public Class DiagnosticTestSummary
 
         Public Property MainTableName As String
         Protected SortOrderKey As String
@@ -20,10 +20,10 @@ Namespace PresentationLayer.Views.Forms.Reports
             SortOrderKey = "IdNo"
             Presenter = New ReportPresenter(Me)
             Dim currentDate = Now()
+            currentDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, currentDate.Month, currentDate.Day)
             ' returns previous month last day
-            Dim endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, currentDate.Month, 0)
-            dtpEndingDate.Value = endDate
-            dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(endDate.Year, endDate.Month, 1)
+            dtpEndingDate.Value = currentDate.AddDays(-1)
+            dtpBeginningDate.Value = dtpEndingDate.Value
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
@@ -31,11 +31,13 @@ Namespace PresentationLayer.Views.Forms.Reports
                 Dim cBegDate As String
                 Dim cEndDate As String
                 Dim selection As Int16
-                selection = cboSelectedReport.SelectedIndex
-                cBegDate = Format(dtpBeginningDate.Value, "yyyy/MM/dd")
-                cEndDate = Format(dtpEndingDate.Value, "yyyy/MM/dd")
-                Dim cForm As New ReportFormIGroup($"Diagnostic Test Summary.Rpt", FormCulture, cBegDate, "BeginningDate", cEndDate, "EndingDate", selection, "SelectedReport")
-                cForm.Show()
+                selection = cboReportSelector.SelectedIndex + 1
+                If selection > 0 Then
+                    cBegDate = Format(dtpBeginningDate.Value, "yyyy/MM/dd")
+                    cEndDate = Format(dtpEndingDate.Value, "yyyy/MM/dd")
+                    Dim cForm As New ReportFormIGroup($"Diagnostic Test Summary.Rpt", FormCulture, cBegDate, "BeginningDate", cEndDate, "EndingDate", selection, "ReportNumber")
+                    cForm.Show()
+                End If
             Else
                 Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
             End If

@@ -137,10 +137,8 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function GetEmployeeLeaves(employeeIdNo As Int32, leaveIdNo As Int16, Optional filterSelection As String = "")
-            Dim sql As String
-            If filterSelection Is Nothing OrElse filterSelection = "" Then
-                sql = "SELECT " & FieldList & " FROM [EmployeeLeave_View] where EmployeeIdNo = @employeeIdNo and LeaveIdNo = @leaveIdNo"
-            End If
+            Dim sql As String 
+            sql = "SELECT " & FieldList & " FROM [EmployeeLeave_View] where EmployeeIdNo = @employeeIdNo and LeaveIdNo = @leaveIdNo"
             If filterSelection = "All" Then
                 sql += " and LeaveStatus in (" &
                        EnumToCode(LeaveStatusSelection.SupervisorApproved) & "," &
@@ -181,4 +179,4 @@ Namespace DataLayer.AdoNet
     End Class
 
 
-End Namespace            End If
+End Namespace
