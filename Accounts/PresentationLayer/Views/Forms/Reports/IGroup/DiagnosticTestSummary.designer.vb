@@ -2,7 +2,7 @@
 
 Namespace PresentationLayer.Views.Forms.Reports
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-    Partial Class IBFoodDeliverySummary
+    Partial Class DiagnosticTestSummary
         Inherits AATM.PresentationLayer.Forms.BFMain
 
         'Form overrides dispose to clean up the component list.
@@ -23,18 +23,18 @@ Namespace PresentationLayer.Views.Forms.Reports
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(IBFoodDeliverySummary))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DiagnosticTestSummary))
         Me.lblEndingDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpEndingDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.dtpBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboReportSelector = New AATM.Libraries.CBaseControlsLibrary.CComboBox()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.cboSelectedReport = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout1.SuspendLayout
         Me.SuspendLayout
@@ -135,12 +135,57 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.CFlowLayout1.Controls.Add(Me.lblEndingDate)
         Me.CFlowLayout1.Controls.Add(Me.dtpEndingDate)
         Me.CFlowLayout1.Controls.Add(Me.CLabel3)
-        Me.CFlowLayout1.Controls.Add(Me.cboSelectedReport)
+        Me.CFlowLayout1.Controls.Add(Me.cboReportSelector)
         Me.CFlowLayout1.Location = New System.Drawing.Point(12, 37)
         Me.CFlowLayout1.Name = "CFlowLayout1"
         Me.CFlowLayout1.Padding = New System.Windows.Forms.Padding(10)
-        Me.CFlowLayout1.Size = New System.Drawing.Size(318, 127)
+        Me.CFlowLayout1.Size = New System.Drawing.Size(318, 129)
         Me.CFlowLayout1.TabIndex = 26
+        '
+        'CLabel3
+        '
+        Me.CLabel3.DisplayOnly = true
+        Me.CLabel3.EditingMode = false
+        Me.CLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.CLabel3.Location = New System.Drawing.Point(11, 65)
+        Me.CLabel3.Margin = New System.Windows.Forms.Padding(1)
+        Me.CLabel3.Name = "CLabel3"
+        Me.CLabel3.Size = New System.Drawing.Size(285, 25)
+        Me.CLabel3.TabIndex = 26
+        Me.CLabel3.Text = "Select Test to print"
+        Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.CLabel3.Translatable = true
+        '
+        'cboReportSelector
+        '
+        Me.cboReportSelector.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
+        Me.cboReportSelector.BackColor = System.Drawing.Color.White
+        Me.cboReportSelector.DefaultValue = Nothing
+        Me.cboReportSelector.DisplayOnly = false
+        Me.cboReportSelector.EditingMode = true
+        Me.cboReportSelector.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.cboReportSelector.Font = New System.Drawing.Font("Arial", 10!)
+        Me.cboReportSelector.ForeColor = System.Drawing.Color.Black
+        Me.cboReportSelector.FormattingEnabled = true
+        Me.cboReportSelector.HideWhenNotEditingOrAdding = false
+        Me.cboReportSelector.Items.AddRange(New Object() {"Iqama Test", "Health Card Test", "Driver License Test", "Food Delivery Driver Test"})
+        Me.cboReportSelector.LinkedLabel = Nothing
+        Me.cboReportSelector.Location = New System.Drawing.Point(11, 92)
+        Me.cboReportSelector.Margin = New System.Windows.Forms.Padding(1)
+        Me.cboReportSelector.MaximumValue = Nothing
+        Me.cboReportSelector.MinimumValue = Nothing
+        Me.cboReportSelector.Name = "cboReportSelector"
+        Me.cboReportSelector.OldValue = 0
+        Me.cboReportSelector.OriginalDataSource = Nothing
+        Me.cboReportSelector.OriginalDropDownStyle = 1
+        Me.cboReportSelector.OriginalList = Nothing
+        Me.cboReportSelector.ReadOnlyCombo = false
+        Me.cboReportSelector.Size = New System.Drawing.Size(285, 24)
+        Me.cboReportSelector.TabIndex = 27
+        Me.cboReportSelector.Translatable = false
+        Me.cboReportSelector.ValueIsMandatory = false
+        Me.cboReportSelector.ValueIsNullable = false
+        Me.cboReportSelector.ValueIsNumeric = false
         '
         'CLabel2
         '
@@ -154,7 +199,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.CLabel2.Name = "CLabel2"
         Me.CLabel2.Size = New System.Drawing.Size(321, 25)
         Me.CLabel2.TabIndex = 26
-        Me.CLabel2.Text = "Food Delivery Medical Summary"
+        Me.CLabel2.Text = "Diagnostic Test Summary"
         Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.CLabel2.Translatable = true
         '
@@ -174,7 +219,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         '
         'btnOk
         '
-        Me.btnOk.DesignerSelected = true
+        Me.btnOk.DesignerSelected = false
         Me.btnOk.ImageIndex = 0
         Me.btnOk.Location = New System.Drawing.Point(65, 184)
         Me.btnOk.Name = "btnOk"
@@ -196,63 +241,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.btnCancel.TabIndex = 28
         Me.btnCancel.Text = "Cancel"
         '
-        'cboSelectedReport
-        '
-        Me.cboSelectedReport.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.cboSelectedReport.BegFindValue = Nothing
-        Me.cboSelectedReport.ChangingSearchValueOnly = false
-        Me.cboSelectedReport.CurrentSearchTerm = ""
-        Me.cboSelectedReport.DefaultValue = Nothing
-        Me.cboSelectedReport.DisplayMember = "Name"
-        Me.cboSelectedReport.EditingMode = true
-        Me.cboSelectedReport.EndFindValue = Nothing
-        Me.cboSelectedReport.FieldDescription = Nothing
-        Me.cboSelectedReport.FieldName = Nothing
-        Me.cboSelectedReport.FilterRule = Nothing
-        Me.cboSelectedReport.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboSelectedReport.FindEnabled = false
-        Me.cboSelectedReport.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.cboSelectedReport.FormattingEnabled = true
-        Me.cboSelectedReport.HideWhenNotEditingOrAdding = false
-        Me.cboSelectedReport.IgnoreCase = false
-        Me.cboSelectedReport.Items.AddRange(New Object() {"Iqama Test", "Health Card Test", "Driving License Test", "Food Delivery Test"})
-        Me.cboSelectedReport.LinkedLabel = Nothing
-        Me.cboSelectedReport.Location = New System.Drawing.Point(11, 92)
-        Me.cboSelectedReport.Margin = New System.Windows.Forms.Padding(1)
-        Me.cboSelectedReport.Name = "cboSelectedReport"
-        Me.cboSelectedReport.OldValue = 0
-        Me.cboSelectedReport.OriginalDataSource = Nothing
-        Me.cboSelectedReport.OriginalList = Nothing
-        Me.cboSelectedReport.OverrideDropDownStyleList = false
-        Me.cboSelectedReport.PreviousSearchTerm = Nothing
-        Me.cboSelectedReport.PropertySelector = Nothing
-        Me.cboSelectedReport.ReadOnlyCombo = false
-        Me.cboSelectedReport.Size = New System.Drawing.Size(285, 24)
-        Me.cboSelectedReport.SuggestBoxHeight = 200
-        Me.cboSelectedReport.SuggestListOrderRule = Nothing
-        Me.cboSelectedReport.TabIndex = 25
-        Me.cboSelectedReport.TextToSearch = Nothing
-        Me.cboSelectedReport.Translatable = false
-        Me.cboSelectedReport.ValueIsMandatory = false
-        Me.cboSelectedReport.ValueIsNullable = false
-        Me.cboSelectedReport.ValueIsNumeric = false
-        Me.cboSelectedReport.ValueMember = "IdNo"
-        '
-        'CLabel3
-        '
-        Me.CLabel3.DisplayOnly = true
-        Me.CLabel3.EditingMode = false
-        Me.CLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.CLabel3.Location = New System.Drawing.Point(11, 65)
-        Me.CLabel3.Margin = New System.Windows.Forms.Padding(1)
-        Me.CLabel3.Name = "CLabel3"
-        Me.CLabel3.Size = New System.Drawing.Size(171, 25)
-        Me.CLabel3.TabIndex = 26
-        Me.CLabel3.Text = "Select Test to print"
-        Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.CLabel3.Translatable = true
-        '
-        'IBFoodDeliverySummary
+        'DiagnosticTestSummary
         '
         Me.ClientSize = New System.Drawing.Size(332, 221)
         Me.Controls.Add(Me.CLabel2)
@@ -260,8 +249,8 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.Controls.Add(Me.btnOk)
         Me.Controls.Add(Me.CFlowLayout1)
         Me.Controls.Add(Me.CLabel1)
-        Me.Name = "IBFoodDeliverySummary"
-        Me.Text = "Food Delivery Medical Summary"
+        Me.Name = "DiagnosticTestSummary"
+        Me.Text = "Diagnostic Test Summary"
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.CFlowLayout1.ResumeLayout(false)
         Me.ResumeLayout(false)
@@ -277,6 +266,6 @@ End Sub
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents CLabel3 As CLabel
-        Friend WithEvents cboSelectedReport As CaComboBox
+        Friend WithEvents cboReportSelector As CComboBox
     End Class
 End NameSpace

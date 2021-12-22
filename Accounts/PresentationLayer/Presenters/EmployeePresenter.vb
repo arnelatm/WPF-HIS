@@ -358,10 +358,27 @@ Namespace PresentationLayer.Presenters
                             End If
                         Case $"NoMaxLimit"
                             Dim empLeaveCredit As EmployeeLeaveCreditView = eventType.BindingSource.Current
-                            If empLeaveCredit.NoMaxLimit Then
+                            if Not empLeaveCredit.Cumulative Then
+                                Beep()
+                                empLeaveCredit.NoMaxLimit = False
+                            End If
+                        Case $"MaxLimit"
+                            Dim empLeaveCredit As EmployeeLeaveCreditView = eventType.BindingSource.Current
+                            if Not empLeaveCredit.Cumulative Then
+                                Beep()
                                 empLeaveCredit.MaxLimit = 0
-                            Else
-
+                            End If
+                        Case $"MaxCarryOver"
+                            Dim empLeaveCredit As EmployeeLeaveCreditView = eventType.BindingSource.Current
+                            if Not empLeaveCredit.Cumulative Then
+                                Beep()
+                                empLeaveCredit.MaxCarryOver = 0
+                            End If
+                        Case $"AccumulatedLeave"
+                            Dim empLeaveCredit As EmployeeLeaveCreditView = eventType.BindingSource.Current
+                            if Not empLeaveCredit.Cumulative Then
+                                Beep()
+                                empLeaveCredit.AccumulatedLeave = 0
                             End If
                     End Select
                 End If

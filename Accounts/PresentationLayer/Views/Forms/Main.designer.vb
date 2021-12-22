@@ -145,9 +145,8 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemIGroupReports = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemCashIncomePerDoctorService = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemNumberOfCashPatientsPerDoctor = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemDailyDiagnosticSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemBlankReport = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemLaboratory = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemFoodDeliveryMedicalReportSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemARAging = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemAPAging = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemCheckPrinting = New System.Windows.Forms.ToolStripMenuItem()
@@ -798,7 +797,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemIGroupReports
         '
-        Me.ToolStripMenuItemIGroupReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCashIncomePerDoctorService, Me.ToolStripMenuItemNumberOfCashPatientsPerDoctor, Me.ToolStripMenuItemLaboratory, Me.ToolStripMenuItemBlankReport})
+        Me.ToolStripMenuItemIGroupReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCashIncomePerDoctorService, Me.ToolStripMenuItemNumberOfCashPatientsPerDoctor, Me.ToolStripMenuItemDailyDiagnosticSummary, Me.ToolStripMenuItemBlankReport})
         Me.ToolStripMenuItemIGroupReports.Name = "ToolStripMenuItemIGroupReports"
         resources.ApplyResources(Me.ToolStripMenuItemIGroupReports, "ToolStripMenuItemIGroupReports")
         '
@@ -812,21 +811,15 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemNumberOfCashPatientsPerDoctor.Name = "ToolStripMenuItemNumberOfCashPatientsPerDoctor"
         resources.ApplyResources(Me.ToolStripMenuItemNumberOfCashPatientsPerDoctor, "ToolStripMenuItemNumberOfCashPatientsPerDoctor")
         '
+        'ToolStripMenuItemDailyDiagnosticSummary
+        '
+        Me.ToolStripMenuItemDailyDiagnosticSummary.Name = "ToolStripMenuItemDailyDiagnosticSummary"
+        resources.ApplyResources(Me.ToolStripMenuItemDailyDiagnosticSummary, "ToolStripMenuItemDailyDiagnosticSummary")
+        '
         'ToolStripMenuItemBlankReport
         '
         Me.ToolStripMenuItemBlankReport.Name = "ToolStripMenuItemBlankReport"
         resources.ApplyResources(Me.ToolStripMenuItemBlankReport, "ToolStripMenuItemBlankReport")
-        '
-        'ToolStripMenuItemLaboratory
-        '
-        Me.ToolStripMenuItemLaboratory.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemFoodDeliveryMedicalReportSummary})
-        Me.ToolStripMenuItemLaboratory.Name = "ToolStripMenuItemLaboratory"
-        resources.ApplyResources(Me.ToolStripMenuItemLaboratory, "ToolStripMenuItemLaboratory")
-        '
-        'ToolStripMenuItemFoodDeliveryMedicalReportSummary
-        '
-        Me.ToolStripMenuItemFoodDeliveryMedicalReportSummary.Name = "ToolStripMenuItemFoodDeliveryMedicalReportSummary"
-        resources.ApplyResources(Me.ToolStripMenuItemFoodDeliveryMedicalReportSummary, "ToolStripMenuItemFoodDeliveryMedicalReportSummary")
         '
         'ToolStripMenuItemARAging
         '
@@ -1222,7 +1215,6 @@ End Sub
         Friend WithEvents ToolStripMenuItemEmployeeLeaveHoliday As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemReceptionReports As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemShiftDailySummary As ToolStripMenuItem
-        Friend WithEvents ToolStripMenuItemLaboratory As ToolStripMenuItem
-        Friend WithEvents ToolStripMenuItemFoodDeliveryMedicalReportSummary As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemDailyDiagnosticSummary As ToolStripMenuItem
     End Class
 End NameSpace
