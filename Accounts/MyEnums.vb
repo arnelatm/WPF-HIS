@@ -355,6 +355,7 @@ Public Enum LeaveStatusSelection
     <EnumCode("2")> SupervisorApproved
     <EnumCode("3")> Disapproved
     <EnumCode("4")> Approved
+    <EnumCode("5")> Used
 End Enum
 
 Public Enum SupervisorApprovalSelection

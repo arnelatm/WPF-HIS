@@ -136,12 +136,31 @@ Namespace DataLayer.AdoNet
             Return data
         End Function
 
-        Public Function GetEmployeeLeaves(employeeIdNo As Int32, leaveIdNo As Int16)
-            Dim sql As String = "SELECT " & FieldList &
-                                " FROM [EmployeeLeave_View] where EmployeeIdNo = @employeeIdNo and LeaveIdNo = @leaveIdNo and LeaveStatus in (" &
+        Public Function GetEmployeeLeaves(employeeIdNo As Int32, leaveIdNo As Int16, Optional filterSelection As String = "")
+            Dim sql As String
+            If filterSelection Is Nothing OrElse filterSelection = "" Then
+                sql = "SELECT " & FieldList & " FROM [EmployeeLeave_View] where EmployeeIdNo = @employeeIdNo and LeaveIdNo = @leaveIdNo"
+            End If
+            If filterSelection = "All" Then
+                sql += " and LeaveStatus in (" &
+                       EnumToCode(LeaveStatusSelection.SupervisorApproved) & "," &
+                       EnumToCode(LeaveStatusSelection.Approved) & "," &
+                       EnumToCode(LeaveStatusSelection.Used) & "," &
+                       EnumToCode(LeaveStatusSelection.Submitted) & ")"
+            ElseIf filterSelection = "Active" Then
+                sql += " and LeaveStatus in (" &
                                 EnumToCode(LeaveStatusSelection.SupervisorApproved) & "," &
                                 EnumToCode(LeaveStatusSelection.Approved) & "," &
                                 EnumToCode(LeaveStatusSelection.Submitted) & ")"
+            End If
+            Dim params() As Object = {"@employeeIdNo", employeeIdNo, "@LeaveIdNo", leaveIdNo}
+            Dim data = Db.Read(sql, Make, params).ToList()
+            Return data
+        End Function
+
+        Public Function GetAllEmployeeLeaves(employeeIdNo As Int32, leaveIdNo As Int16)
+            Dim sql As String = "SELECT " & FieldList &
+                                " FROM [EmployeeLeave_View] where EmployeeIdNo = @employeeIdNo and LeaveIdNo = @leaveIdNo "
             Dim params() As Object = {"@employeeIdNo", employeeIdNo, "@LeaveIdNo", leaveIdNo}
             Dim data = Db.Read(sql, Make, params).ToList()
             Return data
@@ -161,4 +180,5 @@ Namespace DataLayer.AdoNet
 
     End Class
 
-End Namespace
+
+End Namespace            End If

@@ -183,11 +183,14 @@ Namespace PresentationLayer.Presenters
             Dim noOfDaysAllowed As Long
             'Dim noOfDefaultDaysAllowed As Long
             Dim leaveModel As LeaveModel = _leaveService.GetRecordByIdNo(Of LeaveModel)(View.LeaveIdNo)
-            'If leaveModel.Cumulative Then
-            '    noOfDefaultDaysAllowed = 0
-            'Else
-            '    noOfDefaultDaysAllowed = leaveModel.LeaveAllowed
-            'End If
+            If leaveModel.LeaveCycle = LeaveCycleSelection.ResetsYearly Then
+
+            ElseIf leaveModel.LeaveCycle = LeaveCycleSelection.AsNeeded Then
+
+            ElseIf leaveModel.LeaveCycle = LeaveCycleSelection.OnceOnly Then
+
+            End If
+
             If employeeLeaveCreditModel IsNot Nothing Then
                 If employeeLeaveCreditModel.Cumulative Then
                     noOfDaysAllowed = employeeLeaveCreditModel.AccumulatedLeave
@@ -202,7 +205,7 @@ Namespace PresentationLayer.Presenters
                 End If
             End If
             noOfRequestedDays = DateDiff(DateInterval.Day, View.StartDate, View.EndDate) + 1
-            Dim records As List(Of EmployeeLeaveModel) = employeeLeaveService.GetEmployeeLeaves(View.EmployeeIdNo, View.LeaveIdNo)
+            Dim records As List(Of EmployeeLeaveModel) = employeeLeaveService.GetEmployeeLeaves(View.EmployeeIdNo, View.LeaveIdNo, "Active")
             If records Is Nothing OrElse records.Count = 0 Then
                 If noOfRequestedDays <= noOfDaysAllowed Then
                     retValue = True
@@ -220,15 +223,15 @@ Namespace PresentationLayer.Presenters
                         noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
                     Next
                 Else
-                    For Each item As EmployeeLeaveModel In records
-                        If leaveModel.LeaveCycle = LeaveCycleSelection.ResetsYearly Then
+                    If leaveModel.LeaveCycle = LeaveCycleSelection.ResetsYearly Then
+                        For Each item As EmployeeLeaveModel In records
                             If Year(View.StartDate) = leaveYear Then
                                 noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
                             End If
-                        End If
 
-                        noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
-                    Next
+                            noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
+                        Next
+                    End If
                 End If
 
                 If (noOfAppliedDays + noOfRequestedDays) <= noOfDaysAllowed Then
