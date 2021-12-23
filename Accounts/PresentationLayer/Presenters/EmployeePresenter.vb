@@ -346,37 +346,87 @@ Namespace PresentationLayer.Presenters
                             Dim employeePayElement As EmployeePayElementView = eventType.BindingSource.Current
                             amount = ComputePayAmount(View.PayFrequency, employeePayElement.Rate, eventType.EnteredValue)
                             employeePayElement.Amount = amount
+                        'Case $"LeaveCycle"
+                        '    Dim empLeaveCredit As EmployeeLeaveCreditView = eventType.BindingSource.Current
+                        '    Dim leaveDao As New LeaveDao
+                        '    Dim leave As Leave = leaveDao.GetRecordByIdNo(empLeaveCredit.IdNo)
+                        '    If leave.LeaveCycle = EnumToCode(LeaveCycleSelection.OnceOnly) Or leave.LeaveCycle = EnumToCode(LeaveCycleSelection.AsNeeded) then
+                        '        empLeaveCredit.MaxCarryOver = 0
+                        '        empLeaveCredit.MaxLimit = 0
+                        '        empLeaveCredit.NoMaxLimit = False
+                        '    Else
+                        '        empLeaveCredit.NoMaxLimit = True
+                        '        empLeaveCredit.MaxLimit = 0
+                        '    End If
+                        Case $"LeaveIdNo"
+                            Dim empLeaveCredit As EmployeeLeaveCreditView = eventType.BindingSource.Current
+                            Dim leaveDao As New LeaveDao
+                            Dim leave As Leave = leaveDao.GetRecordByIdNo(empLeaveCredit.LeaveIdNo)
+                            'If empLeaveCredit.LeaveAllowed
+                            empLeaveCredit.LeaveAllowed = leave.LeaveAllowed
+                            empLeaveCredit.MaxCarryOver = leave.MaxCarryOver
+                            empLeaveCredit.MaxLimit = leave.MaxLimit
+                            empLeaveCredit.NoMaxLimit = leave.NoMaxLimit
+                            empLeaveCredit.Cumulative = leave.Cumulative
+                            empLeaveCredit.PaidPercent = leave.PaidPercent
+                            'End If
+                            'If leave.LeaveCycle = EnumToCode(LeaveCycleSelection.OnceOnly) Or leave.LeaveCycle = EnumToCode(LeaveCycleSelection.AsNeeded) Then
+                            '    empLeaveCredit.MaxCarryOver = 0
+                            '    empLeaveCredit.MaxLimit = 0
+                            '    empLeaveCredit.NoMaxLimit = False
+                            '    empLeaveCredit.Cumulative = False
+                            '    Beep()
+                            'Else
+                            '    If Not empLeaveCredit.Cumulative Then
+                            '        empLeaveCredit.MaxCarryOver = 0
+                            '        empLeaveCredit.MaxLimit = 0
+                            '        empLeaveCredit.NoMaxLimit = False
+                            '    Else
+                            '        empLeaveCredit.NoMaxLimit = True
+                            '        empLeaveCredit.MaxLimit = 0
+                            '    End If
+                            'End If
                         Case $"Cumulative"
                             Dim empLeaveCredit As EmployeeLeaveCreditView = eventType.BindingSource.Current
-                            If Not empLeaveCredit.Cumulative Then
+                            Dim leaveDao As New LeaveDao
+                            Dim leave As Leave = leaveDao.GetRecordByIdNo(empLeaveCredit.LeaveIdNo)
+                            If leave.LeaveCycle = EnumToCode(LeaveCycleSelection.OnceOnly) Or leave.LeaveCycle = EnumToCode(LeaveCycleSelection.AsNeeded) Then
                                 empLeaveCredit.MaxCarryOver = 0
                                 empLeaveCredit.MaxLimit = 0
                                 empLeaveCredit.NoMaxLimit = False
+                                empLeaveCredit.Cumulative = False
+                                Beep()
                             Else
-                                empLeaveCredit.NoMaxLimit = True
-                                empLeaveCredit.MaxLimit = 0
+                                If Not empLeaveCredit.Cumulative Then
+                                    empLeaveCredit.MaxCarryOver = 0
+                                    empLeaveCredit.MaxLimit = 0
+                                    empLeaveCredit.NoMaxLimit = False
+                                Else
+                                    empLeaveCredit.NoMaxLimit = True
+                                    empLeaveCredit.MaxLimit = 0
+                                End If
                             End If
                         Case $"NoMaxLimit"
                             Dim empLeaveCredit As EmployeeLeaveCreditView = eventType.BindingSource.Current
-                            if Not empLeaveCredit.Cumulative Then
+                            If Not empLeaveCredit.Cumulative Then
                                 Beep()
                                 empLeaveCredit.NoMaxLimit = False
                             End If
                         Case $"MaxLimit"
                             Dim empLeaveCredit As EmployeeLeaveCreditView = eventType.BindingSource.Current
-                            if Not empLeaveCredit.Cumulative Then
+                            If Not empLeaveCredit.Cumulative Then
                                 Beep()
                                 empLeaveCredit.MaxLimit = 0
                             End If
                         Case $"MaxCarryOver"
                             Dim empLeaveCredit As EmployeeLeaveCreditView = eventType.BindingSource.Current
-                            if Not empLeaveCredit.Cumulative Then
+                            If Not empLeaveCredit.Cumulative Then
                                 Beep()
                                 empLeaveCredit.MaxCarryOver = 0
                             End If
                         Case $"AccumulatedLeave"
                             Dim empLeaveCredit As EmployeeLeaveCreditView = eventType.BindingSource.Current
-                            if Not empLeaveCredit.Cumulative Then
+                            If Not empLeaveCredit.Cumulative Then
                                 Beep()
                                 empLeaveCredit.AccumulatedLeave = 0
                             End If

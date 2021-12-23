@@ -185,16 +185,7 @@ Namespace PresentationLayer.Views.Forms
                 If Not btnEdit.Enabled Then
                     MaxLimit = 0
                     txtMaxLimit.Enabled = False
-                    'txtMaxCarryOver.Enabled = True
-                    'chkNoMaxLimit.Enabled = True
                 End If
-                'txtMaxLimit.Text = 0
-                'if Not btnEdit.Enabled
-                '    txtMaxLimit.Enabled = False
-                'End If
-                'txtMaxLimit.DisplayOnly = False
-
-                'txtMaxLimit.DisplayOnly = True
             Else
                 If Not btnEdit.Enabled Then
                     txtMaxLimit.Enabled = True
@@ -204,75 +195,48 @@ Namespace PresentationLayer.Views.Forms
                         MaxLimit = 0
                     End If
                 End If
-                'txtMaxCarryOver.Enabled = False
-                'chkNoMaxLimit.Enabled = False
-                'If btnEdit.Enabled Then
-                '    txtMaxLimit.DisplayOnly = True
-                'Else
-                '    txtMaxLimit.DisplayOnly = False
-                'End If
             End If
-            'If btnEdit.Enabled Then
-            '    txtMaxLimit.DisplayOnly = True
-            '    chkNoMaxLimit.DisplayOnly = True
-            'Else
-            '    If Cumulative Then
-            '        chkNoMaxLimit.DisplayOnly = False
-            '    Else
-            '        chkNoMaxLimit.DisplayOnly = True
-            '    End If
-            'End If
-            'If chkNoMaxLimit.Checked Then
-            '    txtMaxLimit.Text = 0
-            '    txtMaxLimit.DisplayOnly = False
-            'Else
-            '    If MaxLimit < LeaveAllowed Then
-            '        MaxLimit = LeaveAllowed
-            '    End If
-            '    If btnEdit.Enabled Then
-            '        txtMaxLimit.DisplayOnly = True
-            '    Else
-            '        txtMaxLimit.DisplayOnly = False
-            '    End If
-            'End If
-            'If btnEdit.Enabled Then
-            '    txtMaxLimit.DisplayOnly = True
-            '    chkNoMaxLimit.DisplayOnly = True
-            'Else
-            '    If Cumulative Then
-            '        chkNoMaxLimit.DisplayOnly = False
-            '    Else
-            '        chkNoMaxLimit.DisplayOnly = True
-            '    End If
-            'End If
         End Sub
 
         Private Sub CbCumulativeValueChanged() Handles chkCumulative.CheckedChanged
             If chkCumulative.Checked Then
                 If Not btnEdit.Enabled Then
-                    'txtMaxCarryOver.DisplayOnly = False
                     NoMaxLimit = True
                     MaxCarryOver = LeaveAllowed
                     MaxLimit = 0
                     chkNoMaxLimit.Enabled = True
                     txtMaxCarryOver.Enabled = True
-                    'chkNoMaxLimit.DisplayOnly = False
-                    'txtMaxLimit.DisplayOnly = True
                 End If
             Else
                 MaxCarryOver = 0
                 MaxLimit = 0
-                'chkNoMaxLimit.DisplayOnly = False
                 chkNoMaxLimit.Checked = False
                 chkNoMaxLimit.Enabled = False
                 txtMaxCarryOver.Enabled = False
                 txtMaxLimit.Enabled = False
-                'txtMaxCarryOver.DisplayOnly = True
-                'txtMaxLimit.DisplayOnly = True
-                'chkNoMaxLimit.DisplayOnly = True
             End If
         End Sub
 
+        Private Sub CbLeaveCycleSelectedIndexChanged(sender As Object, e As EventArgs) Handles cboLeaveCycle.SelectedIndexChanged
+            If cboLeaveCycle.SelectedValue = EnumToCode(LeaveCycleSelection.OnceOnly) or cboLeaveCycle.SelectedValue = EnumToCode(LeaveCycleSelection.AsNeeded) Then
+                If Not btnEdit.Enabled Then
+                    chkCumulative.Checked = False
+                    NoMaxLimit = False
+                    MaxCarryOver = 0
+                    MaxLimit = 0
+                    chkNoMaxLimit.Enabled = False
+                    txtMaxCarryOver.Enabled = False
+                    chkCumulative.Enabled = False
+                    txtMaxLimit.Enabled = False
+                End If
+            Else
+                If Not btnEdit.Enabled Then
+                    'chkNoMaxLimit.Enabled = True
+                    'txtMaxCarryOver.Enabled = True
+                    chkCumulative.Enabled = True
+                End If
+            End If
+        End Sub
     End Class
 
 End Namespace
