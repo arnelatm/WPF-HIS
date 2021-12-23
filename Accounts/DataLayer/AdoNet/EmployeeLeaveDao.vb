@@ -137,7 +137,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function GetEmployeeLeaves(employeeIdNo As Int32, leaveIdNo As Int16, Optional filterSelection As String = "")
-            Dim sql As String 
+            Dim sql As String
             sql = "SELECT " & FieldList & " FROM [EmployeeLeave_View] where EmployeeIdNo = @employeeIdNo and LeaveIdNo = @leaveIdNo"
             If filterSelection = "All" Then
                 sql += " and LeaveStatus in (" &
@@ -153,6 +153,19 @@ Namespace DataLayer.AdoNet
             End If
             Dim params() As Object = {"@employeeIdNo", employeeIdNo, "@LeaveIdNo", leaveIdNo}
             Dim data = Db.Read(sql, Make, params).ToList()
+            Return data
+        End Function
+
+        Public Function GetOverlappingLeave(employeeIdNo As Int32, beginningDate As Date, endingDate As Date) As EmployeeLeave
+            Dim sql As String
+            sql = "SELECT " & FieldList & " FROM [EmployeeLeave_View] where EmployeeIdNo = @employeeIdNo and LeaveIdNo = @leaveIdNo and LeaveStatus in (" &
+                       EnumToCode(LeaveStatusSelection.SupervisorApproved) & "," &
+                       EnumToCode(LeaveStatusSelection.Approved) & "," &
+                       EnumToCode(LeaveStatusSelection.Used) & "," &
+                       EnumToCode(LeaveStatusSelection.Submitted) & ")" &
+                       " and (StartDate >= @BeginningDate and EndDate <= @BeginningDate ) or (StartDate >= @EndingDate and EndDate <= @EndingDate )"
+            Dim params() As Object = {"@employeeIdNo", employeeIdNo, "@BeginningDate", beginningDate, "@EndingDate", endingDate}
+            Dim data = Db.Read(sql, Make, params).FirstOrDefault()
             Return data
         End Function
 

@@ -674,8 +674,24 @@ Namespace PresentationLayer.Views.Forms
             'With DataGridViewLeaveCredits
             '    If .CurrentRow IsNot Nothing Then
             '        Select Case .CurrentCell.OwningColumn.Name
-            '            Case $"dgvCumulative"
-            '                bsLeaveCredits.ResetBindings(False)
+            '            Case $"LeaveIdNo"
+            '                'If leave.LeaveCycle = EnumToCode(LeaveCycleSelection.OnceOnly) Or leave.LeaveCycle = EnumToCode(LeaveCycleSelection.AsNeeded) Then
+            '                '    empLeaveCredit.MaxCarryOver = 0
+            '                '    empLeaveCredit.MaxLimit = 0
+            '                '    empLeaveCredit.NoMaxLimit = False
+            '                '    empLeaveCredit.Cumulative = False
+            '                '    Beep()
+            '                'Else
+            '                '    If Not empLeaveCredit.Cumulative Then
+            '                '        empLeaveCredit.MaxCarryOver = 0
+            '                '        empLeaveCredit.MaxLimit = 0
+            '                '        empLeaveCredit.NoMaxLimit = False
+            '                '    Else
+            '                '        empLeaveCredit.NoMaxLimit = True
+            '                '        empLeaveCredit.MaxLimit = 0
+            '                '    End If
+            '                'End If
+            '                'bsLeaveCredits.ResetBindings(False)
             '                'if bsLeaveCredits.Current.Cumulative Then
             '                '    bsLeaveCredits.Current.
             '                'End If

@@ -30,6 +30,7 @@ Namespace PresentationLayer.Views.Forms
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(LeaveEntryTv))
         Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.lblLeaveCycle = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblHoliday = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkHoliday = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -54,7 +55,6 @@ Namespace PresentationLayer.Views.Forms
         Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblNoMaxLimit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkNoMaxLimit = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-        Me.lblLeaveCycle = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboLeaveCycle = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
@@ -122,6 +122,14 @@ Namespace PresentationLayer.Views.Forms
         Me.TableLayoutPanel1.Controls.Add(Me.chkNoMaxLimit, 0, 13)
         Me.TableLayoutPanel1.Controls.Add(Me.cboLeaveCycle, 0, 11)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        '
+        'lblLeaveCycle
+        '
+        resources.ApplyResources(Me.lblLeaveCycle, "lblLeaveCycle")
+        Me.lblLeaveCycle.DisplayOnly = true
+        Me.lblLeaveCycle.EditingMode = false
+        Me.lblLeaveCycle.Name = "lblLeaveCycle"
+        Me.lblLeaveCycle.Translatable = true
         '
         'lblHoliday
         '
@@ -533,22 +541,15 @@ Namespace PresentationLayer.Views.Forms
         Me.chkNoMaxLimit.Translatable = false
         Me.chkNoMaxLimit.UseVisualStyleBackColor = false
         '
-        'lblLeaveCycle
-        '
-        resources.ApplyResources(Me.lblLeaveCycle, "lblLeaveCycle")
-        Me.lblLeaveCycle.DisplayOnly = true
-        Me.lblLeaveCycle.EditingMode = false
-        Me.lblLeaveCycle.Name = "lblLeaveCycle"
-        Me.lblLeaveCycle.Translatable = true
-        '
         'cboLeaveCycle
         '
-        Me.cboLeaveCycle.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.cboLeaveCycle.BackColor = System.Drawing.Color.White
         Me.cboLeaveCycle.BegFindValue = Nothing
         Me.cboLeaveCycle.ChangingSearchValueOnly = false
         Me.cboLeaveCycle.CurrentSearchTerm = ""
         Me.cboLeaveCycle.DefaultValue = Nothing
         Me.cboLeaveCycle.DisplayMember = "Name"
+        resources.ApplyResources(Me.cboLeaveCycle, "cboLeaveCycle")
         Me.cboLeaveCycle.EditingMode = true
         Me.cboLeaveCycle.EndFindValue = Nothing
         Me.cboLeaveCycle.FieldDescription = Nothing
@@ -556,7 +557,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboLeaveCycle.FilterRule = Nothing
         Me.cboLeaveCycle.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.cboLeaveCycle.FindEnabled = false
-        resources.ApplyResources(Me.cboLeaveCycle, "cboLeaveCycle")
+        Me.cboLeaveCycle.ForeColor = System.Drawing.Color.Black
         Me.cboLeaveCycle.FormattingEnabled = true
         Me.cboLeaveCycle.HideWhenNotEditingOrAdding = false
         Me.cboLeaveCycle.IgnoreCase = false
