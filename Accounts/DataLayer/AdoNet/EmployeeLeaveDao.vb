@@ -126,7 +126,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function GetEmployeeHolidayLeaves(employeeIdNo As Int32, holidayIdNo As Int16)
-            Dim sql As String = "SELECT " & FieldList & 'IdNo, EmployeeIdNo" &
+            Dim sql As String = "SELECT EnteredBy,DateCreated,EmployeeIdNo,EndDate,FullDay,HolidayIdNo,IdNo,LeaveIdNo,LeaveReason,LeaveStatus,StartDate,SupervisorIdNo " &
                   " FROM [EmployeeLeave_View] where EmployeeIdNo = @employeeIdNo and HolidayIdNo = @holidayIdNo and LeaveStatus in (" &
                   EnumToCode(LeaveStatusSelection.SupervisorApproved) & "," &
                   EnumToCode(LeaveStatusSelection.Approved) & "," &
@@ -158,12 +158,14 @@ Namespace DataLayer.AdoNet
 
         Public Function GetOverlappingLeave(employeeIdNo As Int32, beginningDate As Date, endingDate As Date) As EmployeeLeave
             Dim sql As String
-            sql = "SELECT " & FieldList & " FROM [EmployeeLeave_View] where EmployeeIdNo = @employeeIdNo and LeaveIdNo = @leaveIdNo and LeaveStatus in (" &
+            sql = "Select " & FieldList & " From [EmployeeLeave_View] " &
+                  "where EmployeeIdNo = @employeeIdNo and " &
+                  "(@BeginningDate <= EndDate) and (@EndingDate >= StartDate) and " & 
+                  "LeaveStatus in (" &
                        EnumToCode(LeaveStatusSelection.SupervisorApproved) & "," &
                        EnumToCode(LeaveStatusSelection.Approved) & "," &
                        EnumToCode(LeaveStatusSelection.Used) & "," &
-                       EnumToCode(LeaveStatusSelection.Submitted) & ")" &
-                       " and (StartDate >= @BeginningDate and EndDate <= @BeginningDate ) or (StartDate >= @EndingDate and EndDate <= @EndingDate )"
+                       EnumToCode(LeaveStatusSelection.Submitted) & ")"
             Dim params() As Object = {"@employeeIdNo", employeeIdNo, "@BeginningDate", beginningDate, "@EndingDate", endingDate}
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
             Return data
