@@ -18,6 +18,7 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _holidayService As New AccountsService("Holiday")
         Private _leaveService As New AccountsService("Leave")
         Private _holidayModel As New HolidayModel
+        Private _employeeLeaveService = New AccountsService("EmployeeLeave")
 
         Public Sub New()
             MyBase.New()
@@ -113,6 +114,8 @@ Namespace PresentationLayer.Presenters
         Private Function IsHolidayLeaveValid() As Boolean
             Dim retValue As Boolean = False
             If _holidayModel.DateStart >= View.StartDate AndAlso _holidayModel.DateEnd <= View.EndDate Then
+                ' check for overlapping dates
+                retValue = NoOverlappingDates()
                 retValue = True
             Else
                 'Look for holidayTransfers
@@ -142,24 +145,7 @@ Namespace PresentationLayer.Presenters
                         Next
                         If (noOfAppliedDays + noOfRequestedDays) <= noOfDaysInHoliday Then
                             ' check for overlapping dates
-                            Dim overlappingDates As Boolean = False
-                            Dim overlapIdNo As Int32 = 0
-                            For Each item In records
-                                If View.StartDate >= item.StartDate And View.StartDate <= item.EndDate Then
-                                    overlappingDates = True
-                                    overlapIdNo = item.IdNo
-                                    Exit For
-                                ElseIf View.EndDate >= item.StartDate And View.EndDate <= item.EndDate Then
-                                    overlappingDates = True
-                                    overlapIdNo = item.IdNo
-                                    Exit For
-                                End If
-                            Next
-                            If overlappingDates Then
-                                MessageBox.Show("The applied date for this holiday leave overlaps with an existing leave application. See Leave Application Number #" & overlapIdNo.ToString("N0"))
-                            Else
-                                retValue = True
-                            End If
+                            retValue = NoOverlappingDates()
                         Else
                             If noOfDaysInHoliday = 1 Then
                                 MessageBox.Show("Sorry there is already an open holiday leave request for this employee and holiday.")
@@ -174,16 +160,14 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Function IsLeaveValid() As Boolean
-            Dim retValue As Boolean = False
+            Dim retValue As Boolean = True
             Dim employeeLeaveModelList = New List(Of EmployeeLeaveModel)
-            Dim employeeLeaveService = New AccountsService("EmployeeLeave")
             Dim employeeLeaveCreditService = New AccountsService("EmployeeLeaveCredit")
             Dim noOfRequestedDays As Short
             Dim employeeLeaveCreditModel As EmployeeLeaveCreditModel = employeeLeaveCreditService.GetLeaveCredit(View.EmployeeIdNo, View.LeaveIdNo)
             Dim noOfDaysAllowed As Long
             'Dim noOfDefaultDaysAllowed As Long
             Dim leaveModel As LeaveModel = _leaveService.GetRecordByIdNo(Of LeaveModel)(View.LeaveIdNo)
-
             If employeeLeaveCreditModel IsNot Nothing Then
                 If employeeLeaveCreditModel.Cumulative Then
                     noOfDaysAllowed = employeeLeaveCreditModel.AccumulatedLeave
@@ -199,16 +183,16 @@ Namespace PresentationLayer.Presenters
             End If
             If noOfRequestedDays > noOfDaysAllowed Then
                 MessageBox.Show("Sorry, the number of days applied exceeds the number of allowed leave days.")
+                retValue = False
             Else
-                Dim records As List(Of EmployeeLeaveModel)
+                retValue = NoOverlappingDates()
+            End If
+            If retValue Then
+                Dim records As New List(Of EmployeeLeaveModel)
                 If leaveModel.LeaveCycle = LeaveCycleSelection.ResetsYearly Then
-
                 ElseIf leaveModel.LeaveCycle = LeaveCycleSelection.AsNeeded Then
-                    If Not LeaveOverlaps(records) Then
-                        retValue = True
-                    End If
                 ElseIf leaveModel.LeaveCycle = LeaveCycleSelection.OnceOnly Then
-                    records = employeeLeaveService.GetEmployeeLeaves(View.EmployeeIdNo, View.LeaveIdNo, "All")
+                    records = _employeeLeaveService.GetEmployeeLeaves(View.EmployeeIdNo, View.LeaveIdNo, "All")
                     If records Is Nothing OrElse records.Count = 0 Then
                         retValue = True
                     Else
@@ -226,7 +210,6 @@ Namespace PresentationLayer.Presenters
                         End If
                     End If
                 End If
-
                 noOfRequestedDays = DateDiff(DateInterval.Day, View.StartDate, View.EndDate) + 1
                 If records Is Nothing OrElse records.Count = 0 Then
                     If noOfRequestedDays <= noOfDaysAllowed Then
@@ -284,11 +267,19 @@ Namespace PresentationLayer.Presenters
                         End If
                     End If
                 End If
-
+                retValue = True
             End If
-            retValue = True
-
             Return retValue
+        End Function
+
+        Private Function NoOverlappingDates() As Boolean
+            Dim noOverlap As Boolean = True
+            Dim overlappingLeave As EmployeeLeaveModel = _employeeLeaveService.GetOverlappingLeave(View.EmployeeIdNo, View.StartDate, View.EndDate)
+            If overlappingLeave.IdNo > 0 Then
+                MessageBox.Show("The applied date for this leave overlaps with an existing leave application. See Leave Application Number #" & overlappingLeave.IdNo.ToString("N0"))
+                noOverlap = False
+            End If
+            Return noOverlap
         End Function
 
         Private Function LeaveOverlaps(records As List(Of EmployeeLeaveModel))
