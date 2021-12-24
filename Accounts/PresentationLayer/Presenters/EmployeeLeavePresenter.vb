@@ -16,9 +16,9 @@ Namespace PresentationLayer.Presenters
         Private _userIsASupervisor As Boolean = False
         Private ReadOnly _holiday As Boolean
         Private ReadOnly _holidayService As New AccountsService("Holiday")
-        Private _leaveService As New AccountsService("Leave")
+        Private ReadOnly _leaveService As New AccountsService("Leave")
         Private _holidayModel As New HolidayModel
-        Private _employeeLeaveService = New AccountsService("EmployeeLeave")
+        Private ReadOnly _employeeLeaveService = New AccountsService("EmployeeLeave")
 
         Public Sub New()
             MyBase.New()
@@ -112,45 +112,111 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Function IsHolidayLeaveValid() As Boolean
-            Dim retValue As Boolean = False
-            If _holidayModel.DateStart >= View.StartDate AndAlso _holidayModel.DateEnd <= View.EndDate Then
-                ' check for overlapping dates
-                retValue = NoOverlappingDates()
-                retValue = True
-            Else
-                'Look for holidayTransfers
-                Dim noOfDaysInHoliday As Long = DateAndTime.DateDiff(DateInterval.Day, _holidayModel.DateStart, _holidayModel.DateEnd) + 1
-                Dim htService = New AccountsService("HolidayTransferItem")
-                Dim nDays As Long = 0
-                Dim holidayTransfers = htService.GetHolidayTransferItems(View.EmployeeIdNo, View.HolidayIdNo)
-                If holidayTransfers Is Nothing OrElse holidayTransfers.Count() = 0 Then
-                    MessageBox.Show($"Sorry you don't have a holiday transfer request for this holiday.")
+            Dim retValue As Boolean = True
+            ' check for overlapping dates
+            If NoOverlappingDates() Then
+                If _holidayModel.DateStart >= View.StartDate AndAlso _holidayModel.DateEnd <= View.EndDate Then
+                    ' applied date is within the said holiday
+                    retValue = True
                 Else
-                    Dim employeeLeaveModelList = New List(Of EmployeeLeaveModel)
-                    Dim employeeLeaveService = New AccountsService("EmployeeLeave")
-                    Dim noOfRequestedDays As Short
-                    noOfRequestedDays = DateDiff(DateInterval.Day, View.StartDate, View.EndDate) + 1
-                    Dim records = employeeLeaveService.GetEmployeeHolidayLeaves(View.EmployeeIdNo, View.HolidayIdNo)
-                    If records Is Nothing OrElse records.Count = 0 Then
-                        If noOfRequestedDays <= noOfDaysInHoliday Then
-                            retValue = True
-                        Else
-                            MessageBox.Show("Sorry, the number of days applied exceeds the number of days of the holiday.")
-                        End If
+                    'Look for holidayTransfers
+                    Dim noOfDaysInHoliday As Long = DateAndTime.DateDiff(DateInterval.Day, _holidayModel.DateStart, _holidayModel.DateEnd) + 1
+                    Dim htService = New AccountsService("HolidayTransferItem")
+                    Dim nDays As Long = 0
+                    Dim holidayTransfers = htService.GetHolidayTransferItems(View.EmployeeIdNo, View.HolidayIdNo)
+                    If holidayTransfers Is Nothing OrElse holidayTransfers.Count() = 0 Then
+                        MessageBox.Show($"Sorry you don't have a holiday transfer request for this holiday.")
                     Else
+                        Dim employeeLeaveModelList = New List(Of EmployeeLeaveModel)
+                        Dim employeeLeaveService = New AccountsService("EmployeeLeave")
+                        Dim noOfRequestedDays As Short
+                        noOfRequestedDays = DateDiff(DateInterval.Day, View.StartDate, View.EndDate) + 1
+                        Dim records = employeeLeaveService.GetEmployeeHolidayLeaves(View.EmployeeIdNo, View.HolidayIdNo)
+                        If records Is Nothing OrElse records.Count = 0 Then
+                            If noOfRequestedDays <= noOfDaysInHoliday Then
+                                retValue = True
+                            Else
+                                MessageBox.Show("Sorry, the number of days applied exceeds the number of days of the holiday.")
+                            End If
+                        Else
+                            ' check if no. of days for leave is not yet exceeded
+                            Dim noOfAppliedDays As Int16 = 0
+                            For Each item In records
+                                noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
+                            Next
+                            If (noOfAppliedDays + noOfRequestedDays) <= noOfDaysInHoliday Then
+                                ' check for overlapping dates
+                                retValue = NoOverlappingDates()
+                            Else
+                                If noOfDaysInHoliday = 1 Then
+                                    MessageBox.Show("Sorry there is already an open holiday leave request for this employee and holiday.")
+                                Else
+                                    MessageBox.Show("Sorry either this employee has already consumed the allotted leave days for this holiday or the applied days leave plus the existing leaves will exceed the allotted days for this holiday.")
+                                End If
+                            End If
+                        End If
+                    End If
+                End If
+            Else
+                retValue = False
+            End If
+            Return retValue
+        End Function
+
+        Private Function IsLeaveValid() As Boolean
+            Dim retValue As Boolean = True
+            If NoOverlappingDates() Then
+                Dim leaveModel As LeaveModel = _leaveService.GetRecordByIdNo(Of LeaveModel)(View.LeaveIdNo)
+                Dim noOfDaysAllowed As Long = GetNoOfDaysAllowed(leaveModel)
+                Dim noOfRequestedDays As Long = DateDiff(DateInterval.Day, View.StartDate, View.EndDate) + 1
+                Dim employeeLeaveCreditModel As EmployeeLeaveCreditModel
+                If RequestedLeaveDaysOk(noOfDaysAllowed, noOfRequestedDays) Then
+                    Dim records As New List(Of EmployeeLeaveModel)
+                    If leaveModel.LeaveCycle = LeaveCycleSelection.ResetsYearly Then
                         ' check if no. of days for leave is not yet exceeded
                         Dim noOfAppliedDays As Int16 = 0
-                        For Each item In records
-                            noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
-                        Next
-                        If (noOfAppliedDays + noOfRequestedDays) <= noOfDaysInHoliday Then
-                            ' check for overlapping dates
-                            retValue = NoOverlappingDates()
+                        Dim noOfUsedLeaveDays As Int16 = 0
+                        Dim leaveYear As Int16 = Year(View.StartDate)
+                        records = _employeeLeaveService.GetEmployeeLeaves(View.EmployeeIdNo, View.LeaveIdNo, "ActiveYear", leaveYear)
+                        If employeeLeaveCreditModel.Cumulative Then
+                            For Each item As EmployeeLeaveModel In records
+                                noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
+                            Next
                         Else
-                            If noOfDaysInHoliday = 1 Then
-                                MessageBox.Show("Sorry there is already an open holiday leave request for this employee and holiday.")
+                            If leaveModel.LeaveCycle = LeaveCycleSelection.ResetsYearly Then
+                                For Each item As EmployeeLeaveModel In records
+                                    If Year(View.StartDate) = leaveYear Then
+                                        noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
+                                    End If
+
+                                    noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
+                                Next
+                            End If
+                        End If
+                        If (noOfAppliedDays + noOfRequestedDays) <= noOfDaysAllowed Then
+                            retValue = True
+                        Else
+                            MessageBox.Show("Sorry either this employee has already consumed the allotted leave days for this Leave or the applied days leave plus the existing leaves will exceed the allotted days for this leave.")
+                        End If
+                    ElseIf leaveModel.LeaveCycle = LeaveCycleSelection.AsNeeded Then
+                        ' always allow as long as leave days doesn't exceed Allowed Days
+                        ' unless there are other mitigating circumstances that should be programmed.
+                    ElseIf leaveModel.LeaveCycle = LeaveCycleSelection.OnceOnly Then
+                        records = _employeeLeaveService.GetEmployeeLeaves(View.EmployeeIdNo, View.LeaveIdNo, "All")
+                        If records Is Nothing OrElse records.Count = 0 Then
+                            retValue = True
+                        Else
+                            ' check if no. of days for leave is not yet exceeded
+                            Dim noOfAppliedDays As Int16 = 0
+                            For Each item As EmployeeLeaveModel In records
+                                noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
+                            Next
+                            If (noOfAppliedDays + noOfRequestedDays) <= noOfDaysAllowed Then
+                                If Not LeaveOverlaps(records) Then
+                                    retValue = True
+                                End If
                             Else
-                                MessageBox.Show("Sorry either this employee has already consumed the allotted leave days for this holiday or the applied days leave plus the existing leaves will exceed the allotted days for this holiday.")
+                                MessageBox.Show("Sorry either this employee has already consumed the allotted leave days for this Leave or the applied days leave plus the existing leaves will exceed the allotted days for this leave.")
                             End If
                         End If
                     End If
@@ -159,15 +225,19 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
-        Private Function IsLeaveValid() As Boolean
-            Dim retValue As Boolean = True
-            Dim employeeLeaveModelList = New List(Of EmployeeLeaveModel)
-            Dim employeeLeaveCreditService = New AccountsService("EmployeeLeaveCredit")
-            Dim noOfRequestedDays As Short
-            Dim employeeLeaveCreditModel As EmployeeLeaveCreditModel = employeeLeaveCreditService.GetLeaveCredit(View.EmployeeIdNo, View.LeaveIdNo)
+        Private Function RequestedLeaveDaysOk(noOfDaysAllowed As Long, noOfRequestedDays As Long) As Boolean
+            Dim leaveDaysOk As Boolean = True
+            If noOfRequestedDays > noOfDaysAllowed Then
+                MessageBox.Show($"Sorry, the number of days applied exceeds the number of allowed leave days.")
+                leaveDaysOk = False
+            End If
+            Return leaveDaysOk
+        End Function
+
+        Private Function GetNoOfDaysAllowed(leaveModel As LeaveModel) As Long
             Dim noOfDaysAllowed As Long
-            'Dim noOfDefaultDaysAllowed As Long
-            Dim leaveModel As LeaveModel = _leaveService.GetRecordByIdNo(Of LeaveModel)(View.LeaveIdNo)
+            Dim employeeLeaveCreditService = New AccountsService("EmployeeLeaveCredit")
+            Dim employeeLeaveCreditModel As EmployeeLeaveCreditModel = employeeLeaveCreditService.GetLeaveCredit(View.EmployeeIdNo, View.LeaveIdNo)
             If employeeLeaveCreditModel IsNot Nothing Then
                 If employeeLeaveCreditModel.Cumulative Then
                     noOfDaysAllowed = employeeLeaveCreditModel.AccumulatedLeave
@@ -181,95 +251,7 @@ Namespace PresentationLayer.Presenters
                     noOfDaysAllowed = leaveModel.LeaveAllowed
                 End If
             End If
-            If noOfRequestedDays > noOfDaysAllowed Then
-                MessageBox.Show("Sorry, the number of days applied exceeds the number of allowed leave days.")
-                retValue = False
-            Else
-                retValue = NoOverlappingDates()
-            End If
-            If retValue Then
-                Dim records As New List(Of EmployeeLeaveModel)
-                If leaveModel.LeaveCycle = LeaveCycleSelection.ResetsYearly Then
-                ElseIf leaveModel.LeaveCycle = LeaveCycleSelection.AsNeeded Then
-                ElseIf leaveModel.LeaveCycle = LeaveCycleSelection.OnceOnly Then
-                    records = _employeeLeaveService.GetEmployeeLeaves(View.EmployeeIdNo, View.LeaveIdNo, "All")
-                    If records Is Nothing OrElse records.Count = 0 Then
-                        retValue = True
-                    Else
-                        ' check if no. of days for leave is not yet exceeded
-                        Dim noOfAppliedDays As Int16 = 0
-                        For Each item As EmployeeLeaveModel In records
-                            noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
-                        Next
-                        If (noOfAppliedDays + noOfRequestedDays) <= noOfDaysAllowed Then
-                            If Not LeaveOverlaps(records) Then
-                                retValue = True
-                            End If
-                        Else
-                            MessageBox.Show("Sorry either this employee has already consumed the allotted leave days for this Leave or the applied days leave plus the existing leaves will exceed the allotted days for this leave.")
-                        End If
-                    End If
-                End If
-                noOfRequestedDays = DateDiff(DateInterval.Day, View.StartDate, View.EndDate) + 1
-                If records Is Nothing OrElse records.Count = 0 Then
-                    If noOfRequestedDays <= noOfDaysAllowed Then
-                        retValue = True
-                    Else
-                        MessageBox.Show("Sorry, the number of days applied exceeds the number of allowed leave days.")
-                    End If
-                    retValue = True
-                Else
-                    ' check if no. of days for leave is not yet exceeded
-                    Dim noOfAppliedDays As Int16 = 0
-                    Dim noOfUsedLeaveDays As Int16 = 0
-                    Dim leaveYear As Int16 = Year(View.StartDate)
-                    If employeeLeaveCreditModel.Cumulative Then
-                        For Each item As EmployeeLeaveModel In records
-                            noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
-                        Next
-                    Else
-                        If leaveModel.LeaveCycle = LeaveCycleSelection.ResetsYearly Then
-                            For Each item As EmployeeLeaveModel In records
-                                If Year(View.StartDate) = leaveYear Then
-                                    noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
-                                End If
-
-                                noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
-                            Next
-                        End If
-                    End If
-
-                    If (noOfAppliedDays + noOfRequestedDays) <= noOfDaysAllowed Then
-                        ' check for overlapping dates
-                        Dim overlappingDates As Boolean = False
-                        Dim overlapIdNo As Int32 = 0
-                        For Each item In records
-                            If View.StartDate >= item.StartDate And View.StartDate <= item.EndDate Then
-                                overlappingDates = True
-                                overlapIdNo = item.IdNo
-                                Exit For
-                            ElseIf View.EndDate >= item.StartDate And View.EndDate <= item.EndDate Then
-                                overlappingDates = True
-                                overlapIdNo = item.IdNo
-                                Exit For
-                            End If
-                        Next
-                        If overlappingDates Then
-                            MessageBox.Show("The applied date for this leave overlaps with an existing leave application. See Leave Application Number #" & overlapIdNo.ToString("N0"))
-                        Else
-                            retValue = True
-                        End If
-                    Else
-                        If noOfDaysAllowed = 1 Then
-                            MessageBox.Show("Sorry there is already an open leave request for this employee and holiday.")
-                        Else
-                            MessageBox.Show("Sorry either this employee has already consumed the allotted leave days for this Leave or the applied days leave plus the existing leaves will exceed the allotted days for this leave.")
-                        End If
-                    End If
-                End If
-                retValue = True
-            End If
-            Return retValue
+            Return noOfDaysAllowed
         End Function
 
         Private Function NoOverlappingDates() As Boolean

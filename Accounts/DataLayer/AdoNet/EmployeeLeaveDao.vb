@@ -136,8 +136,9 @@ Namespace DataLayer.AdoNet
             Return data
         End Function
 
-        Public Function GetEmployeeLeaves(employeeIdNo As Int32, leaveIdNo As Int16, Optional filterSelection As String = "")
+        Public Function GetEmployeeLeaves(employeeIdNo As Int32, leaveIdNo As Short, Optional filterSelection As String = "", Optional leaveYear As Short = 0) As List(Of EmployeeLeave)
             Dim sql As String
+            Dim params() As Object
             sql = "SELECT " & FieldList & " FROM [EmployeeLeave_View] where EmployeeIdNo = @employeeIdNo and LeaveIdNo = @leaveIdNo"
             If filterSelection = "All" Then
                 sql += " and LeaveStatus in (" &
@@ -145,22 +146,34 @@ Namespace DataLayer.AdoNet
                        EnumToCode(LeaveStatusSelection.Approved) & "," &
                        EnumToCode(LeaveStatusSelection.Used) & "," &
                        EnumToCode(LeaveStatusSelection.Submitted) & ")"
+                params = {"@employeeIdNo", employeeIdNo, "@LeaveIdNo", leaveIdNo}
+                Return Db.Read(sql, Make, params).ToList()
+            ElseIf filterSelection = "ActiveYear" Then
+                sql += " and LeaveStatus in (" &
+                       EnumToCode(LeaveStatusSelection.SupervisorApproved) & "," &
+                       EnumToCode(LeaveStatusSelection.Approved) & "," &
+                       EnumToCode(LeaveStatusSelection.Used) & "," &
+                       EnumToCode(LeaveStatusSelection.Submitted) & ")" &
+                       " and Year(StartDate) = @LeaveYear "
+                params = {"@employeeIdNo", employeeIdNo, "@LeaveIdNo", leaveIdNo, "@LeaveYear", leaveYear}
+                Return Db.Read(sql, Make, params).ToList()
             ElseIf filterSelection = "Active" Then
                 sql += " and LeaveStatus in (" &
-                                EnumToCode(LeaveStatusSelection.SupervisorApproved) & "," &
-                                EnumToCode(LeaveStatusSelection.Approved) & "," &
-                                EnumToCode(LeaveStatusSelection.Submitted) & ")"
+                       EnumToCode(LeaveStatusSelection.SupervisorApproved) & "," &
+                       EnumToCode(LeaveStatusSelection.Approved) & "," &
+                       EnumToCode(LeaveStatusSelection.Used) & "," &
+                       EnumToCode(LeaveStatusSelection.Submitted) & ")"
+                params = {"@employeeIdNo", employeeIdNo, "@LeaveIdNo", leaveIdNo}
+                Return Db.Read(sql, Make, params).ToList()
             End If
-            Dim params() As Object = {"@employeeIdNo", employeeIdNo, "@LeaveIdNo", leaveIdNo}
-            Dim data = Db.Read(sql, Make, params).ToList()
-            Return data
+            Return Nothing
         End Function
 
         Public Function GetOverlappingLeave(employeeIdNo As Int32, beginningDate As Date, endingDate As Date) As EmployeeLeave
             Dim sql As String
             sql = "Select " & FieldList & " From [EmployeeLeave_View] " &
                   "where EmployeeIdNo = @employeeIdNo and " &
-                  "(@BeginningDate <= EndDate) and (@EndingDate >= StartDate) and " & 
+                  "(@BeginningDate <= EndDate) and (@EndingDate >= StartDate) and " &
                   "LeaveStatus in (" &
                        EnumToCode(LeaveStatusSelection.SupervisorApproved) & "," &
                        EnumToCode(LeaveStatusSelection.Approved) & "," &
@@ -192,6 +205,5 @@ Namespace DataLayer.AdoNet
             }
 
     End Class
-
 
 End Namespace
