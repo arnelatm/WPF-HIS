@@ -141,14 +141,14 @@ Namespace ServiceLayer.ActionService
             Return model
         End Function
 
-        Friend Function GetEmployeeLeaves(idNo As Integer, leaveIdNo As Short, Optional filterSelection As String = "") As List(Of EmployeeLeaveModel)
+        Public Function GetEmployeeLeaves(idNo As Integer, leaveIdNo As Short, Optional filterSelection As String = "") As List(Of EmployeeLeaveModel)
             Dim records = DataDao.GetEmployeeLeaves(idNo, leaveIdNo, filterSelection)
             Dim model As New List(Of EmployeeLeaveModel)
             GlobalVariables.Mapper.Map(records, model)
             Return model
         End Function
 
-        Friend Function GetOverlappingLeave(employeeIdNo As Int32, beginningDate As Date, endingDate As Date) As EmployeeLeaveModel
+        Public Function GetOverlappingLeave(employeeIdNo As Int32, beginningDate As Date, endingDate As Date) As EmployeeLeaveModel
             Dim records = DataDao.GetOverlappingLeave(employeeIdNo, beginningDate, endingDate)
             Dim model As New EmployeeLeaveModel
             GlobalVariables.Mapper.Map(records, model)
