@@ -11,14 +11,15 @@ Namespace BusinessLayer
         Public Sub New()
             ' establish business rules
             If GetRules().Count() = 0 Then
-                AddRule(New ValidateRequired("LeaveIdNo"))
+                AddRule(New ValidateRequired("EmployeeLeaveIdNo"))
                 AddRule(New ValidateRequired("Status"))
             End If
         End Sub
 
         Public Property IdNo As Int32
+        Public Property EmployeeLeaveApprovalIdNo As Int32
         Public Property EmployeeLeaveIdNo As Int16
-        Public Property Notes As String
+        Public Property Note As String
         Public Property Status As String
     End Class
 

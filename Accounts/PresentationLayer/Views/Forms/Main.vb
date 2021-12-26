@@ -1148,7 +1148,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemEmployeeLeaveApproval_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeLeaveApproval.Click
-            RunForm(Of EmployeeLeaveApprovalEntry, EmployeeLeaveApprovalPresenter(Of EmployeeLeaveModel))()
+            RunForm(Of EmployeeLeaveApprovalEntry, EmployeeLeaveApprovalPresenter(Of EmployeeLeaveApprovalModel))()
         End Sub
 
         Private Sub EmployeeHolidayTransferToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeHolidayTransfer.Click

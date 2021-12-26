@@ -21,8 +21,8 @@ Namespace PresentationLayer.Presenters
             Service = New AccountsService("EmployeeLeaveApproval")
             TableName = "EmployeeLeaveApproval"
             SortOrderKey = "IdNo"
-            AskBeforeSave = True
-            DisableSaveMemento = True
+            'AskBeforeSave = True
+            'DisableSaveMemento = True
             '_holiday = holiday
             'AddHandler view.ClearAllEmployee, AddressOf OnClearAllEmployeeId
             'AddHandler view.ApprovalCheckedEvent, AddressOf OnApprovalCheckedEvent
@@ -39,10 +39,10 @@ Namespace PresentationLayer.Presenters
                 filter += " and LeaveStatus <> '" + EnumToCode(LeaveStatusSelection.SupervisorApproved) + "' and EmployeeIdNo <> " & employeeIdNo.ToString()
                 filter += " and SuperVisorIdNo = " + employeeIdNo.ToString()
             End If
-            Dim employeeLeaveList As List(Of EmployeeLeave) = Service.GetDaoRecords(filter)
-            Dim employeeLeaveListModel As New List(Of EmployeeLeaveModel)
-            GlobalVariables.Mapper.Map(employeeLeaveList, employeeLeaveListModel)
-            GlobalVariables.Mapper.Map(employeeLeaveListModel, View.EmployeeLeaveList)
+            'Dim employeeLeaveList As List(Of EmployeeLeave) = Service.GetDaoRecords(filter)
+            'Dim employeeLeaveListModel As New List(Of EmployeeLeaveModel)
+            'GlobalVariables.Mapper.Map(employeeLeaveList, employeeLeaveListModel)
+            'GlobalVariables.Mapper.Map(employeeLeaveListModel, View.EmployeeLeaveApprovalItems)
             CreateLookupData("Employee", "EmployeeList")
             CreateDataSource("User", "ApprovedBy", {"IdNo", "UserName"})
             CreateLookupData("Leave", "LeaveList")
@@ -62,7 +62,7 @@ Namespace PresentationLayer.Presenters
                                                           {"Note", GetType(String)},
                                                           {"Status", GetType(Int32)}
                                                           })
-                For Each leave As IEmployeeLeaveView In View.EmployeeLeaveList
+                For Each leave As IEmployeeLeaveView In View.EmployeeLeaveApprovalItems
                     If leave.Approve Or leave.Disapprove Then
                         Dim workRow As DataRow
                         workRow = _dtEmployeeLeaveApproval.NewRow()
@@ -101,7 +101,7 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Function ChangesMade() As Boolean
             Dim retVal As Boolean = False
-            For Each item In View.EmployeeLeaveList
+            For Each item In View.EmployeeLeaveApprovalItems
                 If item.Approve Or item.Disapprove Then
                     retVal = True
                     Exit For
@@ -112,7 +112,7 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim valid As Boolean = True
-            For Each leave As IEmployeeLeaveView In View.EmployeeLeaveList
+            For Each leave As IEmployeeLeaveView In View.EmployeeLeaveApprovalItems
                 If leave.Disapprove Then
                     If leave.ApprovalNote Is Nothing OrElse leave.ApprovalNote.Trim() = "" Then
                         Messaging.Show(True, "MsgEmptyApprovalNote", {"leaveNumber", leave.IdNo.ToString()})

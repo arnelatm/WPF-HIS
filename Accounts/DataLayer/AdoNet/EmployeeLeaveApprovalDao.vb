@@ -30,7 +30,12 @@ Namespace DataLayer.AdoNet
                     " FROM [EmployeeLeaveApproval]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
-            Return _db.Read(sql, Make, params).FirstOrDefault()
+            Dim data = _db.Read(sql, Make, params).FirstOrDefault()
+            If data IsNot Nothing Then
+                Dim employeeLeaveApprovalItemDao = New EmployeeLeaveApprovalItemDao
+                data.EmployeeLeaveApprovalItems = employeeLeaveApprovalItemDao.GetRecordsWithGroupIdNo(idNo,"employeeLeaveApprovalIdNo")
+            End If
+            Return data
         End Function
 
         Public Function GetLeaveStatus(idNo As Object) As String
