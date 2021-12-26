@@ -268,6 +268,7 @@
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeLeaveDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeLeaveApprovalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\EmployeeLeaveApprovalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\HolidayTransferDao.vb" />
     <Compile Include="DataLayer\AdoNet\HolidayTransferItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\ShiftSummaryDao.vb" />
@@ -595,6 +596,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IHolidayItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IHolidayTransferView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IHolidayAvailmentView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeLeaveApprovalItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IShiftSummaryView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeePayElementView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IJournalPrefixView.vb" />

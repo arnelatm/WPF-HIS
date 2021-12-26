@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class EmployeeLeaveApprovalEntry
-    Inherits AATM.PresentationLayer.Forms.CFormBase
+    Inherits AATM.PresentationLayer.Forms.CFormEntry
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _

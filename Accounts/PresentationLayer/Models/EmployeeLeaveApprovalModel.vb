@@ -10,6 +10,7 @@ Namespace PresentationLayer.Models
         Public Property DateCreated As DateTime
         Public Property ApprovedBy As Int32
         Public Property IdNo As Int32
+        Public Property EmployeeLeaveApprovalItems As List(Of EmployeeLeaveApprovalItemModel)
         'Public Property EmployeeLeaveIdNo As Int16
         'Public Property Notes As String
         'Public Property Status As String
