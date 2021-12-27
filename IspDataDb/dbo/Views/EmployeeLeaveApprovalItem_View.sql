@@ -1,12 +1,13 @@
-﻿CREATE VIEW dbo.EmployeeLeave_View
+﻿CREATE VIEW dbo.EmployeeLeaveApprovalItem_View
 AS
-SELECT        dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.IdNo, dbo.EmployeeLeave.LeaveIdNo, dbo.EmployeeLeave.StartDate, dbo.EmployeeLeave.EndDate, dbo.EmployeeLeave.FullDay, dbo.EmployeeLeave.EnteredBy, 
-                         dbo.EmployeeLeave.LeaveReason, dbo.EmployeeLeave.DateCreated, dbo.EmployeeLeave.DateTimeStamp, dbo.EmployeeLeave.HolidayIdNo, dbo.EmployeeLeaveLatestApproval_View.SupervisorIdNo, 
-                         dbo.EmployeeLeaveLatestApproval_View.LatestStatusUpdate, dbo.EmployeeLeaveLatestApproval_View.ApprovalNote, dbo.EmployeeLeaveLatestApproval_View.LeaveStatus
-FROM            dbo.EmployeeLeave LEFT OUTER JOIN
-                         dbo.EmployeeLeaveLatestApproval_View ON dbo.EmployeeLeave.IdNo = dbo.EmployeeLeaveLatestApproval_View.EmployeeLeaveIdNo
+SELECT        b.EnteredBy, b.LeaveIdNo, b.StartDate, b.EndDate, b.FullDay, a.Status AS LeaveStatus, a.ApprovalNote, a.EmployeeLeaveApprovalIdNo, b.EmployeeIdNo, b.DateCreated, b.LeaveReason, c.SupervisorIdNo, c.EmployeeName, 
+                         c.EmployeeNameAra, d.LeaveName, d.LeaveNameAra, a.EmployeeLeaveIdNo
+FROM            dbo.EmployeeLeave AS b INNER JOIN
+                         dbo.EmployeeLeaveApprovalItem AS a ON b.IdNo = a.EmployeeLeaveIdNo INNER JOIN
+                         dbo.Employee AS c ON b.EmployeeIdNo = c.IdNo INNER JOIN
+                         dbo.Leave AS d ON a.EmployeeLeaveIdNo = d.IdNo
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeave_View';
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveApprovalItem_View';
 
 
 GO
@@ -15,7 +16,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[45] 4[15] 2[29] 3) )"
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -81,22 +82,42 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "EmployeeLeave"
+         Begin Table = "b"
             Begin Extent = 
-               Top = 6
-               Left = 38
-               Bottom = 335
-               Right = 211
+               Top = 126
+               Left = 315
+               Bottom = 413
+               Right = 481
             End
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "EmployeeLeaveLatestApproval_View"
+         Begin Table = "c"
             Begin Extent = 
                Top = 6
-               Left = 249
-               Bottom = 379
-               Right = 710
+               Left = 547
+               Bottom = 335
+               Right = 745
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "d"
+            Begin Extent = 
+               Top = 17
+               Left = 783
+               Bottom = 327
+               Right = 956
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "a"
+            Begin Extent = 
+               Top = 7
+               Left = 32
+               Bottom = 264
+               Right = 261
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -111,9 +132,9 @@ Begin DesignProperties =
    End
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
-         Column = 1440
-         Alias = 900
-         Table = 1170
+         Column = 3375
+         Alias = 2655
+         Table = 2220
          Output = 720
          Append = 1400
          NewValue = 1170
@@ -127,15 +148,5 @@ Begin DesignProperties =
       End
    End
 End
-', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeave_View';
-
-
-
-
-
-
-
-
-
-
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveApprovalItem_View';
 

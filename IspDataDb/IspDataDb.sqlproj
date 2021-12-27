@@ -499,6 +499,12 @@
     <Build Include="dbo\Views\HolidayTransferItemList_View.sql" />
     <Build Include="dbo\Views\Holiday_View.sql" />
     <Build Include="dbo\Views\OriginalCaption_View.sql" />
+    <Build Include="dbo\Views\EmployeeLeaveLatestApproval_Viewxxxx.sql" />
+    <Build Include="dbo\Views\EmployeeLeaveApprovalItem_View.sql" />
+    <Build Include="dbo\Views\EmployeeLeave_ViewBackup.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateEmployeeLeaveApprovalItemTVP.sql" />
+    <Build Include="dbo\Stored Procedures\EmployeeLeaveApprovalItemTVP.sql" />
+    <Build Include="dbo\User Defined Types\EmployeeLeaveApprovalItemUpdate.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

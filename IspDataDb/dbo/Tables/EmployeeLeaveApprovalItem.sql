@@ -3,7 +3,9 @@
     [EmployeeLeaveApprovalIdNo] INT            NULL,
     [EmployeeLeaveIdNo]         INT            NULL,
     [Status]                    CHAR (1)       NULL,
-    [Note]                      NVARCHAR (100) NULL,
+    [ApprovalNote]              NVARCHAR (100) NULL,
     CONSTRAINT [PK_EmployeeLeaveStatusItem] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
