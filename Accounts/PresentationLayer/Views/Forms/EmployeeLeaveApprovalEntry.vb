@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+﻿Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
@@ -7,7 +8,7 @@ Imports AATM.PresentationLayer.Events
 Public Class EmployeeLeaveApprovalEntry
     Implements IEmployeeLeaveApprovalView
 
-    Private _employeeLeaveApprovalItems As New List(Of IEmployeeLeaveApprovalItemView)
+    Private _employeeLeaveApprovalItems As New List(Of EmployeeLeaveApprovalItemView)
 
     Public Event ApprovalCheckedEvent(sender As Object) Implements IEmployeeLeaveApprovalView.ApprovalCheckedEvent
 
@@ -17,7 +18,7 @@ Public Class EmployeeLeaveApprovalEntry
         ' Add any initialization after the InitializeComponent() call.
     End Sub
 
-    Public Property EmployeeLeaveApprovalItems As List(Of IEmployeeLeaveApprovalItemView) Implements IEmployeeLeaveApprovalView.EmployeeLeaveApprovalItems
+    Public Property EmployeeLeaveApprovalItems As List(Of EmployeeLeaveApprovalItemView) Implements IEmployeeLeaveApprovalView.EmployeeLeaveApprovalItems
         Get
             Return _employeeLeaveApprovalItems
         End Get
@@ -69,7 +70,7 @@ Public Class EmployeeLeaveApprovalEntry
 
 #End Region
 
-    Private Sub BindEmployeeLeaveList()
+    Public Sub BindEmployeeLeaveList()
         SuspendLayout()
         bsEmployeeLeave.DataSource = Nothing
         DataGridViewEmployeeLeave.ShowInsertColumnWhenEditing = False
@@ -108,15 +109,15 @@ Public Class EmployeeLeaveApprovalEntry
         ResumeLayout()
     End Sub
 
-    Private Sub EmployeeLeaveApproval_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        DataGridViewEmployeeLeave.Refresh()
-        If EmployeeLeaveApprovalItems.Count() = 0 Then
-            Messaging.Show(True, "MsgNoLeavesToApprove")
-        Else
-            BindEmployeeLeaveList()
-        End If
-        btnEdit.Visible = False
-    End Sub
+    'Private Sub EmployeeLeaveApproval_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    '    DataGridViewEmployeeLeave.Refresh()
+    '    If EmployeeLeaveApprovalItems.Count() = 0 Then
+    '        Messaging.Show(True, "MsgNoLeavesToApprove")
+    '    Else
+    '        BindEmployeeLeaveList()
+    '    End If
+    '    btnEdit.Visible = False
+    'End Sub
 
     'Private Sub EmployeeLeaveApproval_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
     '    bsEmployeeLeave.ResetBindings(True)
@@ -125,10 +126,10 @@ Public Class EmployeeLeaveApprovalEntry
     '    'dtpDateCreated.Value = Now()
     'End Sub
 
-    'Private Sub DgvEarning_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellEndEdit
-    '    ProcessCellEndEdit(DataGridViewEmployeeLeave, bsEmployeeLeave)
-    '    bsEmployeeLeave.ResetBindings(False)
-    'End Sub
+    Private Sub DgvEarning_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellEndEdit
+        ProcessCellEndEdit(DataGridViewEmployeeLeave, bsEmployeeLeave)
+        bsEmployeeLeave.ResetBindings(False)
+    End Sub
 
     Private Sub CheckBoxValueChanged() Handles DataGridViewEmployeeLeave.CellValueChanged
         If TypeOf DataGridViewEmployeeLeave.CurrentCell Is DataGridViewCheckBoxCell Then

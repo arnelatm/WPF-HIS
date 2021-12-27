@@ -230,17 +230,15 @@ Namespace PresentationLayer.Views.Forms
                 dgvApprovedBy.DisplayMember = "Name"
                 dgvApprovedBy.ValueMember = "IdNo"
                 dgvApprovedBy.DisplayStyleForCurrentCellOnly = True
-                dgvApprovedBy.DisplayOnly = True
-                dgvLeaveStatus.DataSource = LeaveStatusList
+                dgvLeaveStatus.DisplayOnly = True
                 dgvLeaveStatus.DisplayMember = "Name"
                 dgvLeaveStatus.ValueMember = "Code"
                 dgvLeaveStatus.DisplayStyleForCurrentCellOnly = True
+                dgvApprovedBy.DisplayOnly = True
                 dgvApprovalIdNo.DisplayOnly = True
                 dgvDateCreated.DisplayOnly = True
                 dgvApprovedBy.DisplayOnly = True
                 dgvItemIdNo.DisplayOnly = True
-                dgvNote.DisplayOnly = True
-                dgvLeaveStatus.DisplayOnly = True
             End With
             ResumeLayout()
         End Sub
