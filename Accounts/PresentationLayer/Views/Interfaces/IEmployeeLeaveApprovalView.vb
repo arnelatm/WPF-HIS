@@ -9,7 +9,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property IdNo As Int32
         Property ApprovedBy As Int32
         Property DateCreated As DateTime?
-        Property EmployeeLeaveApprovalItems As List(Of IEmployeeLeaveApprovalItemView)
+        Property EmployeeLeaveApprovalItems As List(Of EmployeeLeaveApprovalItemView)
         Property EmployeeList As List(Of Lookup.LookupData)
         Property LeaveList As List(Of Lookup.LookupData)
         Property LeaveStatusList As List(Of Lookup.LookupData)
