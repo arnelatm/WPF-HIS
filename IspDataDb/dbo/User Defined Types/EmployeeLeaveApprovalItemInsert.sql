@@ -1,6 +1,8 @@
 ﻿CREATE TYPE [dbo].[EmployeeLeaveApprovalItemInsert] AS TABLE (
+    [ApprovalNote]              NVARCHAR (50) NULL,
     [EmployeeLeaveApprovalIdNo] INT           NOT NULL,
     [EmployeeLeaveIdNo]         INT           NOT NULL,
-    [Note]                      NVARCHAR (50) NULL,
     [Status]                    CHAR (1)      NOT NULL);
+
+
 
