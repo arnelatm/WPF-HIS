@@ -9,11 +9,11 @@ Namespace PresentationLayer.Models
     Public Class EmployeeLeaveApprovalItemModel
 
         Public Property ApprovalNote As String
+        Public Property EmployeeLeaveIdNo As Int32
         Public Property EmployeeIdNo As Int32
         Public Property EmployeeName As String
         Public Property EmployeeNameAra As String
         Public Property EmployeeLeaveApprovalIdNo As Int32
-        Public Property EmployeeLeaveIdNo As Int16
         Public Property EndDate As Date
         Public Property EnteredBy As Int32
         Public Property FullDay As Boolean

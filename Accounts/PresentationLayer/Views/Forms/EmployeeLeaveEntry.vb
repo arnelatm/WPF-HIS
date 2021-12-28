@@ -20,9 +20,11 @@ Namespace PresentationLayer.Views.Forms
             _nfi = GlobalVariables.DefaultNumberFormatInfo
             _holiday = holiday
             If holiday Then
+                Text = MessagingLibrary.Messaging.TranslateCaption("Employee Holiday Leave Maintenance Form")
                 lblLeaveName.Visible = False
                 cboLeaveIdNo.Visible = False
             Else
+                Text = MessagingLibrary.Messaging.TranslateCaption("Employee Non-Holiday Leave Maintenance Form")
                 lblHolidayName.Visible = False
                 cboHolidayIdNo.Visible = False
             End If
@@ -100,10 +102,15 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property LeaveStatus As String Implements IEmployeeLeaveView.LeaveStatus
             Get
-                Return cboLeaveStatus.GetValue()
+                return cboLeaveStatus.GetValue()                
             End Get
             Set
-                cboLeaveStatus.SetValue(Value)
+                cboLeaveStatus.SetValue(value)
+                'Dim status As String = value
+                'If status Is Nothing Then
+                '    status = "0"
+                'End If
+                'cboLeaveStatus.SetValue(status)                                
             End Set
         End Property
 
@@ -134,7 +141,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property SupervisorIdNo As Int32 Implements IEmployeeLeaveView.SupervisorIdNo
+        Public Property SupervisorIdNo As Int32? Implements IEmployeeLeaveView.SupervisorIdNo
         Public Property Disapprove As Boolean Implements IEmployeeLeaveView.Disapprove
         Public Property ApprovalNote As String Implements IEmployeeLeaveView.ApprovalNote
         Public Property Approve As Boolean Implements IEmployeeLeaveView.Approve

@@ -1,4 +1,6 @@
 ﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
@@ -87,7 +89,7 @@ Namespace DataLayer.AdoNet
             .LeaveReason = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveReason")),
             .LeaveStatus = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveStatus")),
             .StartDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("StartDate")),
-            .SupervisorIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("SupervisorIdNo"))
+            .SupervisorIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32?)(reader("SupervisorIdNo"))
             }
 
         Private Function Take(employeeLeave As EmployeeLeave) As Object()
@@ -121,8 +123,13 @@ Namespace DataLayer.AdoNet
                                 "EmployeeLeaveIdNo," &
                                 "IdNo," &
                                 "LeaveStatus" &
-                                " From LeaveApproval_View where EmployeeLeaveIdNo = " & idNo.ToString()
-            Return Db.Read(sql, MakeLeaveApprovalHistory).ToList()
+                                " From LeaveApproval_View where EmployeeLeaveIdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
+            Dim data = Db.Read(sql, MakeLeaveApprovalHistory, params).ToList()
+            'If data Is Nothing OrElse data.Count() = 0 Then
+            '    Return Nothing
+            'End If
+            Return data
         End Function
 
         Public Function GetEmployeeHolidayLeaves(employeeIdNo As Int32, holidayIdNo As Int16)
@@ -195,11 +202,11 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly MakeLeaveApprovalHistory As Func(Of IDataReader, EmployeeLeaveApprovalHistory) =
                                     Function(reader) _
             New EmployeeLeaveApprovalHistory() With {
-            .ApprovedBy = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("ApprovedBy")),
+            .ApprovedBy = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32?)(reader("ApprovedBy")),
             .ApprovalDate = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("ApprovalDate")),
             .ApprovalNote = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ApprovalNote")),
-            .ApprovalIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeLeaveApprovalIdNo")),
-            .EmployeeLeaveIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeLeaveIdNo")),
+            .ApprovalIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32?)(reader("EmployeeLeaveApprovalIdNo")),
+            .EmployeeLeaveIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("EmployeeLeaveIdNo")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .LeaveStatus = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveStatus"))
             }

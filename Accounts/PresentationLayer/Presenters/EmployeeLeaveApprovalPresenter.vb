@@ -29,7 +29,7 @@ Namespace PresentationLayer.Presenters
             'AddHandler view.ApprovalCheckedEvent, AddressOf OnApprovalCheckedEvent
             CreateDataTable(_dtEmployeeLeaveApproval, {{"ApprovalNote", GetType(String)},
                                           {"EmployeeLeaveApprovalIdNo", GetType(Int32)},
-                                          {"EmployeeLeaveIdNo", GetType(Int16)},
+                                          {"EmployeeLeaveIdNo", GetType(Int32)},
                                           {"Status", GetType(Int32)}
                                           })
         End Sub
@@ -56,7 +56,8 @@ Namespace PresentationLayer.Presenters
             View.DateCreated = Now()
             Dim filter As String = "LeaveStatus <> '" + EnumToCode(LeaveStatusSelection.Approved) + "' and " &
                          "LeaveStatus <> '" + EnumToCode(LeaveStatusSelection.Disapproved) + "' and " &
-                         "LeaveStatus <> '" + EnumToCode(LeaveStatusSelection.Cancelled) + "'"
+                         "LeaveStatus <> '" + EnumToCode(LeaveStatusSelection.Used) + "' and " &
+                         "LeaveStatus <> '" + EnumToCode(LeaveStatusSelection.Cancelled) + "'" 
             If IsUserASupervisor() Then
                 Dim employeeIdNo As Int32
                 employeeIdNo = Service.GetUserEmployeeIdNo()

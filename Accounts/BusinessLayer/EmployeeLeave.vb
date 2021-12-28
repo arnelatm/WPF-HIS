@@ -33,7 +33,7 @@ Namespace BusinessLayer
         Public Property LeaveReason As String
         Public Property LeaveStatus As String
         Public Property StartDate As DateTime
-        Public Property SupervisorIdNo As Int32
+        Public Property SupervisorIdNo As Int32?
         Public Property ApprovalHistory As List(Of EmployeeLeaveApprovalHistory)
 
     End Class

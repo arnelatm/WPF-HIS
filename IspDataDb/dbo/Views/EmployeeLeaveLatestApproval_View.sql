@@ -1,7 +1,7 @@
 ﻿CREATE VIEW dbo.EmployeeLeaveLatestApproval_View
 AS
 SELECT        a.LeaveIdNo, a.StartDate, a.EndDate, a.FullDay, b.EmployeeLeaveIdNo, b.LatestStatusUpdate, dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.LeaveReason, dbo.Employee.SupervisorIdNo, 
-                         a.EmployeeLeaveApprovalIdNo, a.LeaveStatus, a.ApprovedBy, a.EnteredBy, a.ApprovalNote, a.LeaveDate, a.ApprovalDate
+                         a.EmployeeLeaveApprovalIdNo, ISNULL(a.LeaveStatus, '0') AS LeaveStatus, a.ApprovedBy, a.EnteredBy, a.ApprovalNote, a.LeaveDate, a.ApprovalDate, a.IdNo
 FROM            dbo.Employee RIGHT OUTER JOIN
                          dbo.EmployeeLeave RIGHT OUTER JOIN
                          dbo.EmployeeLeaveApprovalList_View AS a LEFT OUTER JOIN
@@ -19,7 +19,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[57] 4[36] 2[3] 3) )"
+         Configuration = "(H (1[35] 4[60] 2[3] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -135,7 +135,7 @@ Begin DesignProperties =
    End
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
-         Column = 2715
+         Column = 3540
          Alias = 3405
          Table = 3300
          Output = 720
@@ -152,6 +152,8 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveLatestApproval_View';
+
+
 
 
 

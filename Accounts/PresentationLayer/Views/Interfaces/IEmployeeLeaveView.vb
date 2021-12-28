@@ -18,7 +18,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property LeaveReason As String
         Property LeaveStatus As String
         Property StartDate As DateTime
-        Property SupervisorIdNo As Int32
+        Property SupervisorIdNo As Int32?
         Property Approve As Boolean
         Property Disapprove As Boolean
         Property ApprovalNote As String

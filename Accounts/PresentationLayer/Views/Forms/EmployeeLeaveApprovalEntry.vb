@@ -18,15 +18,6 @@ Public Class EmployeeLeaveApprovalEntry
         ' Add any initialization after the InitializeComponent() call.
     End Sub
 
-    Public Property EmployeeLeaveApprovalItems As List(Of EmployeeLeaveApprovalItemView) Implements IEmployeeLeaveApprovalView.EmployeeLeaveApprovalItems
-        Get
-            Return _employeeLeaveApprovalItems
-        End Get
-        Set
-            _employeeLeaveApprovalItems = Value
-            BindEmployeeLeaveList()
-        End Set
-    End Property
 
     Public Property EmployeeList As List(Of Lookup.LookupData) Implements IEmployeeLeaveApprovalView.EmployeeList
 
@@ -68,6 +59,17 @@ Public Class EmployeeLeaveApprovalEntry
         End Set
     End Property
 
+   
+    Public Property EmployeeLeaveApprovalItems As List(Of EmployeeLeaveApprovalItemView) Implements IEmployeeLeaveApprovalView.EmployeeLeaveApprovalItems
+        Get
+            Return _employeeLeaveApprovalItems
+        End Get
+        Set
+            _employeeLeaveApprovalItems = Value
+            BindEmployeeLeaveList()
+        End Set
+    End Property
+
 #End Region
 
     Public Sub BindEmployeeLeaveList()
@@ -98,6 +100,7 @@ Public Class EmployeeLeaveApprovalEntry
             dgvLeaveStatus.ValueMember = "Code"
             dgvLeaveStatus.DisplayMember = "Name"
             dgvLeaveStatus.DisplayStyleForCurrentCellOnly = True
+            dgvDateCreated.DisplayOnly = True
             dgvApprove.DisplayOnly = False
             dgvFullDay.DisplayOnly = True
             dgvEndDate.DisplayOnly = True
@@ -105,6 +108,7 @@ Public Class EmployeeLeaveApprovalEntry
             dgvFullDay.DisplayOnly = True
             dgvStartDate.DisplayOnly = True
             dgvFullDay.DisplayOnly = True
+            dgvEmployeeLeaveIdNo.DisplayOnly = True
         End With
         ResumeLayout()
     End Sub
@@ -150,4 +154,7 @@ Public Class EmployeeLeaveApprovalEntry
             }
     End Sub
 
+    Private Sub CheckBoxValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellValueChanged
+
+    End Sub
 End Class

@@ -18,6 +18,7 @@ Namespace DataLayer.AdoNet
             End If
             Dim sql As String = "SELECT " &
                     "ApprovalNote," &
+                    "EmployeeLeaveIdNo," &
                     "EmployeeIdNo," &
                     "EmployeeName," &
                     "EmployeeNameAra," &
@@ -52,6 +53,7 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New EmployeeLeaveApprovalItem() With {
             .ApprovalNote = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ApprovalNote")),
+            .EmployeeLeaveIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeLeaveIdNo")),
             .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
             .EmployeeName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeName")),
             .EmployeeNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeNameAra")),
