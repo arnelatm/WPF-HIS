@@ -17,7 +17,6 @@ Namespace BusinessLayer
         End Sub
 
         Public Property ApprovalNote As String
-        Public Property DateCreated As Date
         Public Property EmployeeIdNo As Int32
         Public Property EmployeeName As String
         Public Property EmployeeNameAra As String
@@ -27,6 +26,7 @@ Namespace BusinessLayer
         Public Property EnteredBy As Int32
         Public Property FullDay As Boolean
         Public Property IdNo As Int32
+        Public Property LeaveDate As Date
         Public Property LeaveIdNo As Int16
         Public Property LeaveName As String
         Public Property LeaveNameAra As String

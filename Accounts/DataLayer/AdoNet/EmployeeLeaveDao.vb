@@ -115,9 +115,9 @@ Namespace DataLayer.AdoNet
         Public Function GetEmployeeLeaveHistory(ByVal idNo As Int32) As List(Of EmployeeLeaveApprovalHistory)
             Dim sql As String = "SELECT " &
                                 "ApprovedBy," &
+                                "ApprovalDate," &
                                 "ApprovalNote," &
                                 "EmployeeLeaveApprovalIdNo," &
-                                "DateCreated," &
                                 "EmployeeLeaveIdNo," &
                                 "IdNo," &
                                 "LeaveStatus" &
@@ -196,9 +196,9 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New EmployeeLeaveApprovalHistory() With {
             .ApprovedBy = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("ApprovedBy")),
+            .ApprovalDate = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("ApprovalDate")),
             .ApprovalNote = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ApprovalNote")),
             .ApprovalIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeLeaveApprovalIdNo")),
-            .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("DateCreated")),
             .EmployeeLeaveIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeLeaveIdNo")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .LeaveStatus = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveStatus"))

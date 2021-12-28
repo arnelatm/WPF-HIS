@@ -1,17 +1,14 @@
-﻿
-CREATE VIEW [dbo].[EmployeeLeaveApproval_View]
+﻿CREATE VIEW dbo.EmployeeLeaveApproval_View
 AS
-SELECT      a.IdNo, a.LeaveIdNo, a.StartDate, a.EndDate, a.FullDay, b.EmployeeLeaveIdNo, b.LatestStatusUpdate, dbo.EmployeeLeave.DateCreated, dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.LeaveReason, 
-            dbo.Employee.SupervisorIdNo, a.EmployeeLeaveApprovalIdNo, a.LeaveStatus, a.ApprovedBy, a.LeaveStatusDate, a.EnteredBy, a.ApprovalNote
-FROM        dbo.EmployeeLeaveApprovalList_View AS a 
-			LEFT OUTER JOIN (SELECT c.EmployeeLeaveIdNo, MAX(d.DateCreated) AS LatestStatusUpdate
-                               FROM dbo.EmployeeLeaveApprovalItem AS c 
-							   LEFT OUTER JOIN dbo.EmployeeLeaveApproval AS d 
-							   ON c.EmployeeLeaveApprovalIdNo = d.IdNo
-                               GROUP BY c.EmployeeLeaveIdNo) AS b 
-			ON a.IdNo = b.EmployeeLeaveIdNo AND a.LeaveStatusDate = b.LatestStatusUpdate 
-			LEFT OUTER JOIN dbo.EmployeeLeave ON a.IdNo = dbo.EmployeeLeave.IdNo 
-			LEFT OUTER JOIN dbo.Employee ON dbo.EmployeeLeave.EmployeeIdNo = dbo.Employee.IdNo
+SELECT        a.IdNo, a.LeaveIdNo, a.StartDate, a.EndDate, a.FullDay, b.EmployeeLeaveIdNo, b.LatestStatusUpdate, dbo.EmployeeLeave.DateCreated, dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.LeaveReason, 
+                         dbo.Employee.SupervisorIdNo, a.EmployeeLeaveApprovalIdNo, a.LeaveStatus, a.ApprovedBy, a.LeaveDate, a.EnteredBy, a.ApprovalNote, a.ApprovalDate
+FROM            dbo.EmployeeLeaveApprovalList_View AS a LEFT OUTER JOIN
+                             (SELECT        c.EmployeeLeaveIdNo, MAX(d.DateCreated) AS LatestStatusUpdate
+                               FROM            dbo.EmployeeLeaveApprovalItem AS c LEFT OUTER JOIN
+                                                         dbo.EmployeeLeaveApproval AS d ON c.EmployeeLeaveApprovalIdNo = d.IdNo
+                               GROUP BY c.EmployeeLeaveIdNo) AS b ON a.IdNo = b.EmployeeLeaveIdNo AND a.LeaveDate = b.LatestStatusUpdate LEFT OUTER JOIN
+                         dbo.EmployeeLeave ON a.IdNo = dbo.EmployeeLeave.IdNo LEFT OUTER JOIN
+                         dbo.Employee ON dbo.EmployeeLeave.EmployeeIdNo = dbo.Employee.IdNo
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveApproval_View';
 

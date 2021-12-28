@@ -33,7 +33,7 @@ Namespace DataLayer.AdoNet
             Dim data = _db.Read(sql, Make, params).FirstOrDefault()
             If data IsNot Nothing Then
                 Dim employeeLeaveApprovalItemDao = New EmployeeLeaveApprovalItemDao
-                data.EmployeeLeaveApprovalItems = employeeLeaveApprovalItemDao.GetRecordsWithGroupIdNo(idNo,"employeeLeaveApprovalIdNo")
+                data.EmployeeLeaveApprovalItems = employeeLeaveApprovalItemDao.GetRecordsWithGroupIdNo(idNo, "employeeLeaveApprovalIdNo")
             End If
             Return data
         End Function
@@ -63,7 +63,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetDaoRecords(Optional filter As String = Nothing) As List(Of EmployeeLeaveApprovalItem) Implements IDaoGetRecords(Of EmployeeLeaveApprovalItem).GetDaoRecords
             Dim sql As String = "SELECT " &
-                                "DateCreated," &
+                                "LeaveDate," &
                                 "EmployeeIdNo," &
                                 "EndDate," &
                                 "EnteredBy," &
@@ -82,7 +82,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly MakeApproval As Func(Of IDataReader, EmployeeLeaveApprovalItem) =
                                     Function(reader) _
             New EmployeeLeaveApprovalItem() With {
-            .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("DateCreated")),
+            .LeaveDate = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("DateCreated")),
             .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
             .EndDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("EndDate")),
             .EnteredBy = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EnteredBy")),
@@ -105,7 +105,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String = "SELECT " &
                                 "ApprovalIdNo," &
                                 "ApprovalNote," &
-                                "DateCreated," &
+                                "ApprovalDate," &
                                 "ApprovedBy," &
                                 "IdNo," &
                                 "Status" &
@@ -119,10 +119,10 @@ Namespace DataLayer.AdoNet
             New EmployeeLeaveApprovalHistory() With {
             .ApprovalIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("ApprovalIdNo")),
             .ApprovalNote = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ApprovalNote")),
-            .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("DateCreated")),
+            .ApprovalDate = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("ApprovalDate")),
             .ApprovedBy = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("ApprovedBy")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
-            .LeaveStatus = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveStatus"))            
+            .LeaveStatus = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveStatus"))
             }
 
     End Class

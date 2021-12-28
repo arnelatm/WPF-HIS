@@ -18,7 +18,6 @@ Namespace DataLayer.AdoNet
             End If
             Dim sql As String = "SELECT " &
                     "ApprovalNote," &
-                    "DateCreated," &
                     "EmployeeIdNo," &
                     "EmployeeName," &
                     "EmployeeNameAra," &
@@ -26,6 +25,7 @@ Namespace DataLayer.AdoNet
                     "EnteredBy," &
                     "FullDay," &
                     "IdNo," &
+                    "LeaveDate," &
                     "LeaveIdNo," &
                     "LeaveName," &
                     "LeaveNameAra," &
@@ -52,7 +52,6 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New EmployeeLeaveApprovalItem() With {
             .ApprovalNote = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ApprovalNote")),
-            .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("DateCreated")),
             .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
             .EmployeeName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeName")),
             .EmployeeNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmployeeNameAra")),
@@ -60,6 +59,7 @@ Namespace DataLayer.AdoNet
             .EnteredBy = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EnteredBy")),
             .FullDay = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("FullDay")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
+            .LeaveDate = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("LeaveDate")),
             .LeaveIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("LeaveIdNo")),
             .LeaveName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveName")),
             .LeaveNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveNameAra")),

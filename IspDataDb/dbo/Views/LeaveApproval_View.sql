@@ -1,9 +1,9 @@
 ﻿CREATE VIEW dbo.LeaveApproval_View
 AS
 SELECT        dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.LeaveIdNo, dbo.EmployeeLeave.StartDate, dbo.EmployeeLeave.EndDate, dbo.EmployeeLeave.FullDay, dbo.EmployeeLeave.EnteredBy, 
-                         dbo.EmployeeLeave.LeaveReason, dbo.EmployeeLeave.DateCreated, dbo.EmployeeLeaveApproval.ApprovedBy, dbo.EmployeeLeaveApprovalItem.Status AS LeaveStatus, dbo.EmployeeLeaveApprovalItem.ApprovalNote, 
-                         dbo.EmployeeLeaveApproval.DateCreated AS LeaveStatusDate, dbo.Employee.SupervisorIdNo, dbo.EmployeeLeave.DateTimeStamp, dbo.EmployeeLeaveApprovalItem.EmployeeLeaveApprovalIdNo, 
-                         dbo.EmployeeLeaveApprovalItem.EmployeeLeaveIdNo, dbo.EmployeeLeaveApprovalItem.IdNo
+                         dbo.EmployeeLeave.LeaveReason, dbo.EmployeeLeave.DateCreated AS LeaveDate, dbo.EmployeeLeaveApproval.ApprovedBy, dbo.EmployeeLeaveApprovalItem.Status AS LeaveStatus, 
+                         dbo.EmployeeLeaveApprovalItem.ApprovalNote, dbo.EmployeeLeaveApproval.DateCreated AS ApprovalDate, dbo.Employee.SupervisorIdNo, dbo.EmployeeLeave.DateTimeStamp, 
+                         dbo.EmployeeLeaveApprovalItem.EmployeeLeaveApprovalIdNo, dbo.EmployeeLeaveApprovalItem.EmployeeLeaveIdNo, dbo.EmployeeLeaveApprovalItem.IdNo
 FROM            dbo.EmployeeLeaveApproval RIGHT OUTER JOIN
                          dbo.EmployeeLeaveApprovalItem ON dbo.EmployeeLeaveApproval.IdNo = dbo.EmployeeLeaveApprovalItem.EmployeeLeaveApprovalIdNo LEFT OUTER JOIN
                          dbo.EmployeeLeave LEFT OUTER JOIN
@@ -89,7 +89,7 @@ Begin DesignProperties =
                Top = 15
                Left = 321
                Bottom = 145
-               Right = 494
+               Right = 554
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -112,7 +112,7 @@ Begin DesignProperties =
                Right = 491
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 3
          End
          Begin Table = "Employee"
             Begin Extent = 
@@ -136,7 +136,7 @@ Begin DesignProperties =
       Begin ColumnWidths = 11
          Column = 2880
          Alias = 2310
-         Table = 1170
+         Table = 3600
          Output = 720
          Append = 1400
          NewValue = 1170
@@ -151,4 +151,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'LeaveApproval_View';
+
+
 

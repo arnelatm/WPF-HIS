@@ -690,33 +690,6 @@
   <data name="&gt;&gt;cboLeaveStatus.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
-  <data name="btnHistory.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="btnHistory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>463, 245</value>
-  </data>
-  <data name="btnHistory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 25</value>
-  </data>
-  <data name="btnHistory.TabIndex" type="System.Int32, mscorlib">
-    <value>301</value>
-  </data>
-  <data name="btnHistory.Text" xml:space="preserve">
-    <value>View History</value>
-  </data>
-  <data name="&gt;&gt;btnHistory.Name" xml:space="preserve">
-    <value>btnHistory</value>
-  </data>
-  <data name="&gt;&gt;btnHistory.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CButton, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;btnHistory.Parent" xml:space="preserve">
-    <value>CFlowLayout2</value>
-  </data>
-  <data name="&gt;&gt;btnHistory.ZOrder" xml:space="preserve">
-    <value>18</value>
-  </data>
   <data name="lblenteredBy.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -724,7 +697,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblenteredBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 274</value>
+    <value>11, 269</value>
   </data>
   <data name="lblenteredBy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -751,7 +724,7 @@
     <value>CFlowLayout2</value>
   </data>
   <data name="&gt;&gt;lblenteredBy.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>18</value>
   </data>
   <data name="cboenteredBy.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -760,7 +733,7 @@
     <value>False</value>
   </data>
   <data name="cboenteredBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 274</value>
+    <value>203, 269</value>
   </data>
   <data name="cboenteredBy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -784,7 +757,7 @@
     <value>CFlowLayout2</value>
   </data>
   <data name="&gt;&gt;cboenteredBy.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>19</value>
   </data>
   <data name="lblDateCreated.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -793,7 +766,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 300</value>
+    <value>11, 295</value>
   </data>
   <data name="lblDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -820,13 +793,13 @@
     <value>CFlowLayout2</value>
   </data>
   <data name="&gt;&gt;lblDateCreated.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>20</value>
   </data>
   <data name="txtDateCreated.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 300</value>
+    <value>203, 295</value>
   </data>
   <data name="txtDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -847,7 +820,7 @@
     <value>CFlowLayout2</value>
   </data>
   <data name="&gt;&gt;txtDateCreated.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>21</value>
   </data>
   <data name="CLabel1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
@@ -856,7 +829,7 @@
     <value>NoControl</value>
   </data>
   <data name="CLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 325</value>
+    <value>11, 320</value>
   </data>
   <data name="CLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -883,16 +856,22 @@
     <value>CFlowLayout2</value>
   </data>
   <data name="&gt;&gt;CLabel1.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>22</value>
   </data>
   <metadata name="dgvApprovalIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="dgvApprovalIdNo.HeaderText" xml:space="preserve">
-    <value>Approval Id No.</value>
+    <value>App. Id No.</value>
   </data>
   <data name="dgvApprovalIdNo.Width" type="System.Int32, mscorlib">
     <value>50</value>
+  </data>
+  <metadata name="dgvApprovalDate.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dgvApprovalDate.HeaderText" xml:space="preserve">
+    <value>Date</value>
   </data>
   <data name="dgvItemIdNo.HeaderText" xml:space="preserve">
     <value>Item ID No.</value>
@@ -900,20 +879,26 @@
   <data name="dgvItemIdNo.Width" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <data name="dgvDateCreated.HeaderText" xml:space="preserve">
-    <value>Date</value>
-  </data>
   <metadata name="dgvApprovedBy.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="dgvApprovedBy.HeaderText" xml:space="preserve">
-    <value>ApprovedBy</value>
+    <value>Approved / Disapproved By</value>
   </data>
   <metadata name="dgvLeaveStatus.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="dgvLeaveStatus.HeaderText" xml:space="preserve">
-    <value>LeaveStatus</value>
+    <value>Approval / Disapproval Status</value>
+  </data>
+  <data name="dgvLeaveStatus.Width" type="System.Int32, mscorlib">
+    <value>120</value>
+  </data>
+  <metadata name="dgvApprovalNote.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dgvApprovalNote.HeaderText" xml:space="preserve">
+    <value>Approval / Disapproval Note</value>
   </data>
   <metadata name="EmployeeLeaveIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -928,7 +913,7 @@
     <value>873, 17</value>
   </metadata>
   <data name="DataGridViewApprovalHistory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 352</value>
+    <value>13, 347</value>
   </data>
   <data name="DataGridViewApprovalHistory.Size" type="System.Drawing.Size, System.Drawing">
     <value>608, 274</value>
@@ -946,7 +931,7 @@
     <value>CFlowLayout2</value>
   </data>
   <data name="&gt;&gt;DataGridViewApprovalHistory.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>23</value>
   </data>
   <data name="CFlowLayout2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1047,34 +1032,22 @@
   <data name="&gt;&gt;MyErrorProvider.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;bsEmployeeLeaveApproval.Name" xml:space="preserve">
-    <value>bsEmployeeLeaveApproval</value>
-  </data>
-  <data name="&gt;&gt;bsEmployeeLeaveApproval.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bsEmployeeLeaveApprovalHistory.Name" xml:space="preserve">
-    <value>bsEmployeeLeaveApprovalHistory</value>
-  </data>
-  <data name="&gt;&gt;bsEmployeeLeaveApprovalHistory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;dgvApprovalIdNo.Name" xml:space="preserve">
     <value>dgvApprovalIdNo</value>
   </data>
   <data name="&gt;&gt;dgvApprovalIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="&gt;&gt;dgvApprovalDate.Name" xml:space="preserve">
+    <value>dgvApprovalDate</value>
+  </data>
+  <data name="&gt;&gt;dgvApprovalDate.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;dgvItemIdNo.Name" xml:space="preserve">
     <value>dgvItemIdNo</value>
   </data>
   <data name="&gt;&gt;dgvItemIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dgvDateCreated.Name" xml:space="preserve">
-    <value>dgvDateCreated</value>
-  </data>
-  <data name="&gt;&gt;dgvDateCreated.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvApprovedBy.Name" xml:space="preserve">
@@ -1089,11 +1062,29 @@
   <data name="&gt;&gt;dgvLeaveStatus.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="&gt;&gt;dgvApprovalNote.Name" xml:space="preserve">
+    <value>dgvApprovalNote</value>
+  </data>
+  <data name="&gt;&gt;dgvApprovalNote.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;EmployeeLeaveIdNo.Name" xml:space="preserve">
     <value>EmployeeLeaveIdNo</value>
   </data>
   <data name="&gt;&gt;EmployeeLeaveIdNo.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bsEmployeeLeaveApprovalHistory.Name" xml:space="preserve">
+    <value>bsEmployeeLeaveApprovalHistory</value>
+  </data>
+  <data name="&gt;&gt;bsEmployeeLeaveApprovalHistory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bsEmployeeLeaveApproval.Name" xml:space="preserve">
+    <value>bsEmployeeLeaveApproval</value>
+  </data>
+  <data name="&gt;&gt;bsEmployeeLeaveApproval.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EmployeeLeaveEntry</value>

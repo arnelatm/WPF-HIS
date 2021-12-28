@@ -10,7 +10,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private ReadOnly _nfi As NumberFormatInfo
         Private _humanResourceUser As Boolean
-        Private _approvalHistory As List(Of IEmployeeLeaveApprovalHistoryView)
+        Private _approvalHistory As List(Of EmployeeLeaveApprovalHistoryView)
         Private _holiday As Boolean
 
         Public Sub New(ByVal holiday As Boolean)
@@ -141,11 +141,11 @@ Namespace PresentationLayer.Views.Forms
         Public Property Users As List(Of Lookup.LookupData) Implements IEmployeeLeaveView.Users
         Public Property LeaveStatusList As List(Of Lookup.LookupData) Implements IEmployeeLeaveView.LeaveStatusList
 
-        Public Property ApprovalHistory As List(Of IEmployeeLeaveApprovalHistoryView) Implements IEmployeeLeaveView.ApprovalHistory
+        Public Property ApprovalHistory As List(Of EmployeeLeaveApprovalHistoryView) Implements IEmployeeLeaveView.ApprovalHistory
             Get
                 Return _approvalHistory
             End Get
-            Set(value As List(Of IEmployeeLeaveApprovalHistoryView))
+            Set(value As List(Of EmployeeLeaveApprovalHistoryView))
                 _approvalHistory = value
                 BindApprovalLeaveHistory()
             End Set
@@ -209,7 +209,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub BtnHistory_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnHistory.ClickButtonArea
+        Private Sub BtnHistory_ClickButtonArea(Sender As Object, e As MouseEventArgs)
 
         End Sub
 
@@ -230,13 +230,14 @@ Namespace PresentationLayer.Views.Forms
                 dgvApprovedBy.DisplayMember = "Name"
                 dgvApprovedBy.ValueMember = "IdNo"
                 dgvApprovedBy.DisplayStyleForCurrentCellOnly = True
+                dgvLeaveStatus.DataSource = LeaveStatusList
                 dgvLeaveStatus.DisplayOnly = True
                 dgvLeaveStatus.DisplayMember = "Name"
                 dgvLeaveStatus.ValueMember = "Code"
                 dgvLeaveStatus.DisplayStyleForCurrentCellOnly = True
                 dgvApprovedBy.DisplayOnly = True
                 dgvApprovalIdNo.DisplayOnly = True
-                dgvDateCreated.DisplayOnly = True
+                dgvApprovalDate.DisplayOnly = True
                 dgvApprovedBy.DisplayOnly = True
                 dgvItemIdNo.DisplayOnly = True
             End With
