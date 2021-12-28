@@ -8,11 +8,11 @@ Namespace PresentationLayer.Models
     ''' </summary>
     Public Class EmployeeLeaveApprovalHistoryModel
 
+        Public Property ApprovalDate As DateTime?
         Public Property ApprovalIdNo As Int32
         Public Property ApprovalNote As String
-        Public Property DateCreated As DateTime?
-        Public Property EmployeeLeaveIdNo As Int16
         Public Property ApprovedBy As Int32
+        Public Property EmployeeLeaveIdNo As Int16
         Public Property IdNo As Int32
         Public Property LeaveStatus As String
 

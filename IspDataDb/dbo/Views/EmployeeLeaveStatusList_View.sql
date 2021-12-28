@@ -1,7 +1,7 @@
-﻿CREATE VIEW dbo.EmployeeLeaveApprovalList_View
+CREATE VIEW dbo.EmployeeLeaveApprovalList_View
 AS
-SELECT        b.EnteredBy, b.LeaveIdNo, b.StartDate, b.EndDate, b.FullDay, a.Status AS LeaveStatus, a.EmployeeLeaveApprovalIdNo, b.EmployeeIdNo, b.DateCreated AS LeaveStatusDate, c.ApprovedBy, b.LeaveReason, a.ApprovalNote, 
-                         c.DateCreated AS DateApproved, a.EmployeeLeaveIdNo
+SELECT        b.IdNo, b.EnteredBy, b.LeaveIdNo, b.StartDate, b.EndDate, b.FullDay, a.Status AS LeaveStatus, a.EmployeeLeaveApprovalIdNo, b.EmployeeIdNo, b.DateCreated AS LeaveDate, c.ApprovedBy, b.LeaveReason, a.ApprovalNote, 
+                         c.DateCreated AS ApprovalDate, a.EmployeeLeaveIdNo
 FROM            dbo.EmployeeLeave AS b INNER JOIN
                          dbo.EmployeeLeaveApprovalItem AS a ON b.IdNo = a.EmployeeLeaveIdNo INNER JOIN
                          dbo.EmployeeLeaveApproval AS c ON a.EmployeeLeaveApprovalIdNo = c.IdNo
@@ -15,7 +15,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[41] 4[43] 2[3] 3) )"
+         Configuration = "(H (1[41] 4[32] 2[9] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -81,32 +81,32 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "c"
+         Begin Table = "b"
             Begin Extent = 
-               Top = 3
-               Left = 550
-               Bottom = 322
-               Right = 723
+               Top = 6
+               Left = 38
+               Bottom = 321
+               Right = 211
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "a"
             Begin Extent = 
-               Top = 0
-               Left = 41
-               Bottom = 283
-               Right = 270
+               Top = 26
+               Left = 308
+               Bottom = 326
+               Right = 555
             End
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "b"
+         Begin Table = "c"
             Begin Extent = 
-               Top = 97
-               Left = 349
-               Bottom = 384
-               Right = 515
+               Top = 27
+               Left = 614
+               Bottom = 333
+               Right = 820
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -121,9 +121,9 @@ Begin DesignProperties =
    End
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
-         Column = 3375
-         Alias = 2880
-         Table = 2220
+         Column = 1440
+         Alias = 2565
+         Table = 1170
          Output = 720
          Append = 1400
          NewValue = 1170
@@ -138,12 +138,4 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveApprovalList_View';
-
-
-
-
-
-
-
-
 
