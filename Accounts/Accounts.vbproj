@@ -1546,6 +1546,7 @@
       <Link>.editorconfig</Link>
     </None>
     <None Include="app.config" />
+    <None Include="appIspadmin2.config" />
     <None Include="appx.config" />
     <None Include="appMarcelo.config" />
     <None Include="appOkMarceloPC.config" />
@@ -1574,6 +1575,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeEarningModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeIdModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeLeaveApprovalHistoryModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeLeaveApprovalItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeLeaveCreditModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeLeaveModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeModel.datasource" />

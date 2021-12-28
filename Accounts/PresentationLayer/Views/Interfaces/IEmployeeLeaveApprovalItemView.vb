@@ -6,11 +6,11 @@ Namespace PresentationLayer.Views.Interfaces
         Inherits IView
 
         Property ApprovalNote As String
+        Property EmployeeLeaveIdNo As Int32
         Property EmployeeIdNo As Int32
         Property EmployeeName As String
         Property EmployeeNameAra As String
         Property EmployeeLeaveApprovalIdNo As Int32
-        Property EmployeeLeaveIdNo As Int16
         Property EndDate As Date
         Property EnteredBy As Int32
         Property FullDay As Boolean

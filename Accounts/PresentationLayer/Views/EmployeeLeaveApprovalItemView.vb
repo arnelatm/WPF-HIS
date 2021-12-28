@@ -10,11 +10,11 @@ Namespace PresentationLayer.Views
         End Sub
 
         Public Property ApprovalNote As String Implements IEmployeeLeaveApprovalItemView.ApprovalNote
+        Public Property EmployeeLeaveIdNo As Integer Implements IEmployeeLeaveApprovalItemView.EmployeeLeaveIdNo
         Public Property EmployeeIdNo As Integer Implements IEmployeeLeaveApprovalItemView.EmployeeIdNo
         Public Property EmployeeName As String Implements IEmployeeLeaveApprovalItemView.EmployeeName
         Public Property EmployeeNameAra As String Implements IEmployeeLeaveApprovalItemView.EmployeeNameAra
         Public Property EmployeeLeaveApprovalIdNo As Integer Implements IEmployeeLeaveApprovalItemView.EmployeeLeaveApprovalIdNo
-        Public Property EmployeeLeaveIdNo As Short Implements IEmployeeLeaveApprovalItemView.EmployeeLeaveIdNo
         Public Property EndDate As Date Implements IEmployeeLeaveApprovalItemView.EndDate
         Public Property EnteredBy As Integer Implements IEmployeeLeaveApprovalItemView.EnteredBy
         Public Property FullDay As Boolean Implements IEmployeeLeaveApprovalItemView.FullDay

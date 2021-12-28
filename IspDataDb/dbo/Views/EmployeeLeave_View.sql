@@ -1,10 +1,13 @@
-﻿CREATE VIEW dbo.EmployeeLeave_View
+﻿
+CREATE VIEW [dbo].[EmployeeLeave_View]
 AS
 SELECT        dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.IdNo, dbo.EmployeeLeave.LeaveIdNo, dbo.EmployeeLeave.StartDate, dbo.EmployeeLeave.EndDate, dbo.EmployeeLeave.FullDay, dbo.EmployeeLeave.EnteredBy, 
-                         dbo.EmployeeLeave.LeaveReason, dbo.EmployeeLeave.DateCreated, dbo.EmployeeLeave.DateTimeStamp, dbo.EmployeeLeave.HolidayIdNo, dbo.EmployeeLeaveLatestApproval_View.SupervisorIdNo, 
-                         dbo.EmployeeLeaveLatestApproval_View.LatestStatusUpdate, dbo.EmployeeLeaveLatestApproval_View.ApprovalNote, dbo.EmployeeLeaveLatestApproval_View.LeaveStatus
-FROM            dbo.EmployeeLeave LEFT OUTER JOIN
-                         dbo.EmployeeLeaveLatestApproval_View ON dbo.EmployeeLeave.IdNo = dbo.EmployeeLeaveLatestApproval_View.EmployeeLeaveIdNo
+                         dbo.EmployeeLeave.LeaveReason, dbo.EmployeeLeave.DateCreated, dbo.EmployeeLeave.DateTimeStamp, dbo.EmployeeLeave.HolidayIdNo, dbo.EmployeeLeave.DateCreated AS LeaveDate, 
+                         dbo.EmployeeLeave.IdNo AS EmployeeLeaveIdNo, dbo.Employee.SupervisorIdNo, IsNull(dbo.LatestApproval_View.LeaveStatus,'0') as LeaveStatus, dbo.LatestApproval_View.DateCreated AS LatestStatusUpdate, dbo.LatestApproval_View.ApprovedBy, 
+                         dbo.LatestApproval_View.EmployeeLeaveApprovalIdNo
+FROM            dbo.EmployeeLeave INNER JOIN
+                         dbo.Employee ON dbo.EmployeeLeave.EmployeeIdNo = dbo.Employee.IdNo LEFT OUTER JOIN
+                         dbo.LatestApproval_View ON dbo.EmployeeLeave.IdNo = dbo.LatestApproval_View.EmployeeLeaveIdNo
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeave_View';
 
@@ -15,7 +18,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[45] 4[15] 2[29] 3) )"
+         Configuration = "(H (1[61] 4[26] 2[6] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -91,12 +94,22 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "EmployeeLeaveLatestApproval_View"
+         Begin Table = "Employee"
             Begin Extent = 
                Top = 6
-               Left = 249
-               Bottom = 379
-               Right = 710
+               Left = 748
+               Bottom = 264
+               Right = 946
+            End
+            DisplayFlags = 280
+            TopColumn = 41
+         End
+         Begin Table = "LatestApproval_View"
+            Begin Extent = 
+               Top = 140
+               Left = 251
+               Bottom = 363
+               Right = 538
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -108,13 +121,33 @@ Begin DesignProperties =
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
+      Begin ColumnWidths = 18
+         Width = 284
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+         Width = 1500
+      End
    End
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
-         Column = 1440
-         Alias = 900
-         Table = 1170
-         Output = 720
+         Column = 1980
+         Alias = 2910
+         Table = 4275
+         Output = 1470
          Append = 1400
          NewValue = 1170
          SortType = 1350
@@ -128,6 +161,12 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeave_View';
+
+
+
+
+
+
 
 
 
