@@ -1166,6 +1166,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemLaboratory_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDailyDiagnosticSummary.Click
             RunForm(Of DiagnosticTestSummary)()
         End Sub
+
+        Private Sub ToolStripMenuItemEmployeeLeaveReport_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeLeaveReport.Click
+           RunForm(Of StatementOfLeave)()
+        End Sub
     End Class
 
 End Namespace

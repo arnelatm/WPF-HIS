@@ -129,10 +129,7 @@ Namespace PresentationLayer.Presenters
             Dim retValue As Boolean = True
             ' check for overlapping dates
             If NoOverlappingDates() Then
-                If _holidayModel.DateStart >= View.StartDate AndAlso _holidayModel.DateEnd <= View.EndDate Then
-                    ' applied date is within the said holiday
-                    retValue = True
-                Else
+                If Not (_holidayModel.DateStart >= View.StartDate AndAlso _holidayModel.DateEnd <= View.EndDate) Then
                     'Look for holidayTransfers
                     Dim noOfDaysInHoliday As Long = DateAndTime.DateDiff(DateInterval.Day, _holidayModel.DateStart, _holidayModel.DateEnd) + 1
                     Dim htService = New AccountsService("HolidayTransferItem")
@@ -140,6 +137,7 @@ Namespace PresentationLayer.Presenters
                     Dim holidayTransfers = htService.GetHolidayTransferItems(View.EmployeeIdNo, View.HolidayIdNo)
                     If holidayTransfers Is Nothing OrElse holidayTransfers.Count() = 0 Then
                         MessageBox.Show($"Sorry you don't have a holiday transfer request for this holiday.")
+                        retValue = False
                     Else
                         Dim employeeLeaveModelList = New List(Of EmployeeLeaveModel)
                         Dim employeeLeaveService = New AccountsService("EmployeeLeave")
@@ -151,6 +149,7 @@ Namespace PresentationLayer.Presenters
                                 retValue = True
                             Else
                                 MessageBox.Show("Sorry, the number of days applied exceeds the number of days of the holiday.")
+                                retValue = False
                             End If
                         Else
                             ' check if no. of days for leave is not yet exceeded
@@ -167,6 +166,7 @@ Namespace PresentationLayer.Presenters
                                 Else
                                     MessageBox.Show("Sorry either this employee has already consumed the allotted leave days for this holiday or the applied days leave plus the existing leaves will exceed the allotted days for this holiday.")
                                 End If
+                                retValue = false
                             End If
                         End If
                     End If
@@ -197,7 +197,7 @@ Namespace PresentationLayer.Presenters
                             'If employeeLeaveCreditModel.Cumulative Then
                             'no record of accumulated leave treat as non-cumulative
                             'End if
-                            records = _employeeLeaveService.GetEmployeeLeaves(View.EmployeeIdNo, View.LeaveIdNo, "ActiveYear")
+                            records = _employeeLeaveService.GetEmployeeLeaves(View.EmployeeIdNo, View.LeaveIdNo, "ActiveYear", Year(View.EndDate))
                             For Each item As EmployeeLeaveModel In records
                                 noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
                             Next

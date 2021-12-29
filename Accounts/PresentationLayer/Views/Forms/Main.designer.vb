@@ -187,6 +187,7 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemEmployeeLeaveReport = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.AccountsMenu.SuspendLayout
@@ -854,7 +855,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemHRReports
         '
-        Me.ToolStripMenuItemHRReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemEmployeeIDPrinting})
+        Me.ToolStripMenuItemHRReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemEmployeeIDPrinting, Me.ToolStripMenuItemEmployeeLeaveReport})
         Me.ToolStripMenuItemHRReports.Name = "ToolStripMenuItemHRReports"
         resources.ApplyResources(Me.ToolStripMenuItemHRReports, "ToolStripMenuItemHRReports")
         '
@@ -1031,6 +1032,11 @@ Namespace PresentationLayer.Views.Forms
         '
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
+        '
+        'ToolStripMenuItemEmployeeLeaveReport
+        '
+        Me.ToolStripMenuItemEmployeeLeaveReport.Name = "ToolStripMenuItemEmployeeLeaveReport"
+        resources.ApplyResources(Me.ToolStripMenuItemEmployeeLeaveReport, "ToolStripMenuItemEmployeeLeaveReport")
         '
         'Main
         '
@@ -1216,5 +1222,6 @@ End Sub
         Friend WithEvents ToolStripMenuItemReceptionReports As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemShiftDailySummary As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDailyDiagnosticSummary As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemEmployeeLeaveReport As ToolStripMenuItem
     End Class
 End NameSpace
