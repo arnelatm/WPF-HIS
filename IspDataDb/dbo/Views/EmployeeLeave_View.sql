@@ -1,15 +1,17 @@
-﻿
-CREATE VIEW [dbo].[EmployeeLeave_View]
+﻿CREATE VIEW dbo.EmployeeLeave_View
 AS
 SELECT        dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.IdNo, dbo.EmployeeLeave.LeaveIdNo, dbo.EmployeeLeave.StartDate, dbo.EmployeeLeave.EndDate, dbo.EmployeeLeave.FullDay, dbo.EmployeeLeave.EnteredBy, 
                          dbo.EmployeeLeave.LeaveReason, dbo.EmployeeLeave.DateCreated, dbo.EmployeeLeave.DateTimeStamp, dbo.EmployeeLeave.HolidayIdNo, dbo.EmployeeLeave.DateCreated AS LeaveDate, 
-                         dbo.EmployeeLeave.IdNo AS EmployeeLeaveIdNo, dbo.Employee.SupervisorIdNo, IsNull(dbo.LatestApproval_View.LeaveStatus,'0') as LeaveStatus, dbo.LatestApproval_View.DateCreated AS LatestStatusUpdate, dbo.LatestApproval_View.ApprovedBy, 
-                         dbo.LatestApproval_View.EmployeeLeaveApprovalIdNo
+                         dbo.EmployeeLeave.IdNo AS EmployeeLeaveIdNo, dbo.Employee.SupervisorIdNo, ISNULL(dbo.LatestApproval_View.LeaveStatus, '0') AS LeaveStatus, dbo.LatestApproval_View.DateCreated AS LatestStatusUpdate, 
+                         dbo.LatestApproval_View.ApprovedBy, dbo.LatestApproval_View.EmployeeLeaveApprovalIdNo, dbo.Leave.Holiday
 FROM            dbo.EmployeeLeave INNER JOIN
                          dbo.Employee ON dbo.EmployeeLeave.EmployeeIdNo = dbo.Employee.IdNo LEFT OUTER JOIN
+                         dbo.Leave ON dbo.EmployeeLeave.LeaveIdNo = dbo.Leave.IdNo LEFT OUTER JOIN
                          dbo.LatestApproval_View ON dbo.EmployeeLeave.IdNo = dbo.LatestApproval_View.EmployeeLeaveIdNo
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeave_View';
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeave_View';
+
+
 
 
 GO
@@ -114,6 +116,16 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
          End
+         Begin Table = "Leave"
+            Begin Extent = 
+               Top = 272
+               Left = 608
+               Bottom = 486
+               Right = 781
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
       End
    End
    Begin SQLPane = 
@@ -147,7 +159,29 @@ Begin DesignProperties =
          Column = 1980
          Alias = 2910
          Table = 4275
-         Output = 1470
+         Output = 147', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeave_View';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'0
          Append = 1400
          NewValue = 1170
          SortType = 1350
@@ -161,20 +195,4 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeave_View';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
