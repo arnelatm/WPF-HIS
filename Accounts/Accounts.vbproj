@@ -546,6 +546,12 @@
     <Compile Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReport.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\StatementOfLeave.designer.vb">
+      <DependentUpon>StatementOfLeave.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\StatementOfLeave.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\TransactionSummary.designer.vb">
       <DependentUpon>TransactionSummary.vb</DependentUpon>
     </Compile>
@@ -1274,6 +1280,9 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReport.resx">
       <DependentUpon>ShiftDailyReport.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\StatementOfLeave.resx">
+      <DependentUpon>StatementOfLeave.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\TransactionSummary.resx">
       <DependentUpon>TransactionSummary.vb</DependentUpon>
     </EmbeddedResource>
@@ -1545,8 +1554,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="appIspadmin2.config" />
     <None Include="app.config" />
+    <None Include="appIspadmin2.config" />
     <None Include="appx.config" />
     <None Include="appMarcelo.config" />
     <None Include="appOkMarceloPC.config" />

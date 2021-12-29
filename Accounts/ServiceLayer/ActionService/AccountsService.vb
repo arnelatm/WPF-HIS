@@ -141,8 +141,8 @@ Namespace ServiceLayer.ActionService
             Return model
         End Function
 
-        Public Function GetEmployeeLeaves(idNo As Integer, leaveIdNo As Short, Optional filterSelection As String = "") As List(Of EmployeeLeaveModel)
-            Dim records = DataDao.GetEmployeeLeaves(idNo, leaveIdNo, filterSelection)
+        Public Function GetEmployeeLeaves(idNo As Integer, leaveIdNo As Short, Optional filterSelection As String = "", Optional leaveYear As Short = 0) As List(Of EmployeeLeaveModel)
+            Dim records = DataDao.GetEmployeeLeaves(idNo, leaveIdNo, filterSelection, leaveYear)
             Dim model As New List(Of EmployeeLeaveModel)
             GlobalVariables.Mapper.Map(records, model)
             Return model

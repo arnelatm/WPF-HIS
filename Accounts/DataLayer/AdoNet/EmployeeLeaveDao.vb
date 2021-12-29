@@ -135,7 +135,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function GetEmployeeHolidayLeaves(employeeIdNo As Int32, holidayIdNo As Int16)
-            Dim sql As String = "SELECT EnteredBy,DateCreated,EmployeeIdNo,EndDate,FullDay,HolidayIdNo,IdNo,LeaveIdNo,LeaveReason,LeaveStatus,StartDate,SupervisorIdNo " &
+            Dim sql As String = "SELECT EnteredBy,DateCreated,EmployeeIdNo,EndDate,FullDay,Holiday,HolidayIdNo,IdNo,LeaveIdNo,LeaveReason,LeaveStatus,StartDate,SupervisorIdNo " &
                   " FROM [EmployeeLeave_View] where EmployeeIdNo = @employeeIdNo and HolidayIdNo = @holidayIdNo and LeaveStatus in (" &
                   EnumToCode(LeaveStatusSelection.SupervisorApproved) & "," &
                   EnumToCode(LeaveStatusSelection.Approved) & "," &
