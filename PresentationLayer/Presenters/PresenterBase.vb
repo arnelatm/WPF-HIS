@@ -1844,9 +1844,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             If inform Then
                 Dim securityKeyMessage = Messaging.TranslateCaption(securityKey)
                 Dim message = Messaging.GetParametrizedMessage(True, "MsgNoAccessToSecurity", {"securityKey", securityKeyMessage})
-                'Dim curCulture = CultureInfo.CurrentCulture
-                'Dim language As String = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-                Messaging.Show(False, message)
+                Messaging.Show(message)
             End If
         End If
         Return hasAccess

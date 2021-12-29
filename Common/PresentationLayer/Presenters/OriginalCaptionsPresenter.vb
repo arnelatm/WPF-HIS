@@ -13,7 +13,7 @@ Namespace PresentationLayer.Presenters
             TableName = "OriginalCaptions"
             SortOrderKey = "Caption"
             TreeViewMainField = "Caption"
-            'TreeViewSecondaryField = Nothing
+            TreeViewSecondaryField = ""
         End Sub
 
         Public Function GetOriginalCaptionsList(Optional ByVal sortKey As String = "") As List(Of TM)

@@ -11,15 +11,15 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _nfi As NumberFormatInfo
         Private _humanResourceUser As Boolean
         Private _approvalHistory As List(Of EmployeeLeaveApprovalHistoryView)
-        Private _holiday As Boolean
+        Private _holidayLeave As Boolean
 
-        Public Sub New(ByVal holiday As Boolean)
+        Public Sub New(ByVal holidayLeave As Boolean)
             ' This call is required by the designer.
             InitializeComponent()
             FirstControl = cboEmployeeIdNo
             _nfi = GlobalVariables.DefaultNumberFormatInfo
-            _holiday = holiday
-            If holiday Then
+            _holidayLeave = holidayLeave
+            If Holiday Then
                 Text = MessagingLibrary.Messaging.TranslateCaption("Employee Holiday Leave Maintenance Form")
                 lblLeaveName.Visible = False
                 cboLeaveIdNo.Visible = False
@@ -102,15 +102,15 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property LeaveStatus As String Implements IEmployeeLeaveView.LeaveStatus
             Get
-                return cboLeaveStatus.GetValue()                
+                Return cboLeaveStatus.GetValue()
             End Get
             Set
-                cboLeaveStatus.SetValue(value)
+                cboLeaveStatus.SetValue(Value)
                 'Dim status As String = value
                 'If status Is Nothing Then
                 '    status = "0"
                 'End If
-                'cboLeaveStatus.SetValue(status)                                
+                'cboLeaveStatus.SetValue(status)
             End Set
         End Property
 
@@ -157,6 +157,8 @@ Namespace PresentationLayer.Views.Forms
                 BindApprovalLeaveHistory()
             End Set
         End Property
+
+        Public Property Holiday As Boolean Implements IEmployeeLeaveView.Holiday
 
 #End Region
 

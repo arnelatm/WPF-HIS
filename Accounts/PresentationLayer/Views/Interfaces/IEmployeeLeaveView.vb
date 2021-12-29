@@ -12,6 +12,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property EmployeeIdNo As Integer
         Property EndDate As DateTime
         Property FullDay As Boolean
+        Property Holiday As Boolean
         Property HolidayIdNo As Int16
         Property IdNo As Int32
         Property LeaveIdNo As Int16
