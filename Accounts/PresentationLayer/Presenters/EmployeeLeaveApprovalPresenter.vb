@@ -13,6 +13,7 @@ Namespace PresentationLayer.Presenters
 
         Private ReadOnly _journalItemService
         Private ReadOnly _EmployeeIdsService
+
         'Private _holiday As Boolean
         Private _dtEmployeeLeaveApproval As New DataTable
 
@@ -57,7 +58,7 @@ Namespace PresentationLayer.Presenters
             Dim filter As String = "LeaveStatus <> '" + EnumToCode(LeaveStatusSelection.Approved) + "' and " &
                          "LeaveStatus <> '" + EnumToCode(LeaveStatusSelection.Disapproved) + "' and " &
                          "LeaveStatus <> '" + EnumToCode(LeaveStatusSelection.Used) + "' and " &
-                         "LeaveStatus <> '" + EnumToCode(LeaveStatusSelection.Cancelled) + "'" 
+                         "LeaveStatus <> '" + EnumToCode(LeaveStatusSelection.Cancelled) + "'"
             If IsUserASupervisor() Then
                 Dim employeeIdNo As Int32
                 employeeIdNo = Service.GetUserEmployeeIdNo()
@@ -112,7 +113,6 @@ Namespace PresentationLayer.Presenters
         '        Next row
         '        retVal = Service.ExecuteTvpSp("InsertEmployeeLeaveApprovalItemTvp", _dtEmployeeLeaveApproval)
         '    End If
-
 
         'End Sub
 
@@ -192,6 +192,12 @@ Namespace PresentationLayer.Presenters
             Next
             Return valid
         End Function
+
+        Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
+            Dim type As Type = View.GetType
+            Messaging.Show(True, "MsgEditingNotAllowed")
+            CancelEdit = True
+        End Sub
 
     End Class
 

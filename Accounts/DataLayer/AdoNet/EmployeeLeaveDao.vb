@@ -21,6 +21,7 @@ Namespace DataLayer.AdoNet
                                   "EmployeeIdNo," &
                                   "EndDate," &
                                   "FullDay," &
+                                  "Holiday," &
                                   "HolidayIdNo," &
                                   "IdNo," &
                                   "LeaveIdNo," &
@@ -83,6 +84,7 @@ Namespace DataLayer.AdoNet
             .EmployeeIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
             .EndDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("EndDate")),
             .FullDay = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("FullDay")),
+            .Holiday = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Holiday")),
             .HolidayIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("HolidayIdNo")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .LeaveIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("LeaveIdNo")),

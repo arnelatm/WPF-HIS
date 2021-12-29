@@ -15,22 +15,23 @@ Namespace PresentationLayer.Presenters
         Private _userHasAccess As Boolean = False
         Private _userIsASupervisor As Boolean = False
         Private _holidayModel As New HolidayModel
-        Private ReadOnly _holiday As Boolean
+        Private ReadOnly _holidayLeave As Boolean
         Private ReadOnly _holidayService As New AccountsService("Holiday")
         Private ReadOnly _leaveService As New AccountsService("Leave")
         Private ReadOnly _employeeLeaveCreditService = New AccountsService("EmployeeLeaveCredit")
         Private ReadOnly _employeeLeaveService = New AccountsService("EmployeeLeave")
+
         Public Sub New()
             MyBase.New()
         End Sub
 
-        Public Sub New(itemView As IEmployeeLeaveView, holiday As Boolean)
+        Public Sub New(itemView As IEmployeeLeaveView, holidayLeave As Boolean)
             MyBase.New(itemView)
             Service = New AccountsService("EmployeeLeave")
-            TableName = "EmployeeLeave"
+            TableName = "EmployeeLeave_View"
             SortOrderKey = "IdNo"
             WithTreeView = False
-            _holiday = holiday
+            _holidayLeave = holidayLeave
         End Sub
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
@@ -42,6 +43,11 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Overrides Sub EntryFormLoaded()
+            If _holidayLeave Then
+                DataFilter = "Holiday = 1"
+            Else
+                DataFilter = "Holiday = 0"
+            End If
             If UserHasAccess("HumanResources") Then
                 _userHasAccess = True
             Else
@@ -53,9 +59,9 @@ Namespace PresentationLayer.Presenters
                     If MainFieldsDictionary.TryGetValue("EmployeeIdNo", control) Then
                         CallByName(control, "DisplayOnly", CallType.Set, True)
                     End If
-                    DataFilter = "EmployeeIdNo = " & employeeIdNo.ToString()
+                    DataFilter += " and EmployeeIdNo = " & employeeIdNo.ToString()
                 Else
-                    DataFilter = "SupervisorIdNo = " & employeeIdNo.ToString() + " or EmployeeIdNo = " & employeeIdNo.ToString()
+                    DataFilter += " and (SupervisorIdNo = " & employeeIdNo.ToString() + " or EmployeeIdNo = " & employeeIdNo.ToString() & ")"
                 End If
             End If
         End Sub
@@ -72,7 +78,7 @@ Namespace PresentationLayer.Presenters
                 CreateDataSource("Employee", "EmployeeIdNo", "IdNo = " + employeeIdNo.ToString())
             End If
             CreateDataSource("User", "EnteredBy", {"IdNo", "UserName"})
-            If _holiday Then
+            If _holidayLeave Then
                 CreateDataSource("Leave", "LeaveIdNo", "Holiday = 1")
                 CreateDataSource("Holiday_View", "HolidayIdNo", {"IdNo", "HolidayName", "DateStart"})
             Else
@@ -89,11 +95,19 @@ Namespace PresentationLayer.Presenters
             If View.LeaveStatus <> EnumToCode(LeaveStatusSelection.Submitted) Then
                 Messaging.Show(True, "MsgLeaveAlreadyActed", {"approvalAction", CodeToEnum(Of LeaveStatusSelection)(View.LeaveStatus).ToString()})
                 CancelEdit = True
+            ElseIf View.EnteredBy <> GlobalVariables.UserIdNo Then
+                If Not UserHasAccess("HumanResources") Then
+
+                    Dim securityKeyMessage = Messaging.TranslateCaption("HumanResources")
+                    Dim message = Messaging.GetParametrizedMessage(True, "MsgNoAccessToSecurity", {"securityKey", securityKeyMessage})
+                    Messaging.Show(message)
+                    CancelEdit = True
+                End If
             End If
         End Sub
 
         Public Sub OnBeforeValidate() Handles MyBase.BeforeValidate
-            If _holiday Then
+            If _holidayLeave Then
                 _holidayModel = _holidayService.GetRecordByIdNo(Of HolidayModel)(View.HolidayIdNo)
                 View.LeaveIdNo = _holidayModel.LeaveIdNo
             End If
@@ -102,7 +116,7 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = False
             If MyBase.IsBizDataValid() Then
-                If Not _holiday Then
+                If Not _holidayLeave Then
                     retValue = IsLeaveValid()
                 Else
                     retValue = IsHolidayLeaveValid()
@@ -181,7 +195,7 @@ Namespace PresentationLayer.Presenters
                             ' check if no. of days for leave is not yet exceeded
                             Dim leaveYear As Int16 = Year(View.StartDate)
                             'If employeeLeaveCreditModel.Cumulative Then
-                            'no record of accumulated leave treat as non-cumulative 
+                            'no record of accumulated leave treat as non-cumulative
                             'End if
                             records = _employeeLeaveService.GetEmployeeLeaves(View.EmployeeIdNo, View.LeaveIdNo, "ActiveYear")
                             For Each item As EmployeeLeaveModel In records
@@ -255,7 +269,6 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
-
         'Private Function GetLeaveCreditModel(employeeIdNo As Int32, leaveIdNo As Int16, leaveModel As LeaveModel) As EmployeeLeaveCreditModel
         '    Dim employeeLeaveCreditModel As EmployeeLeaveCreditModel
         '    employeeLeaveCreditModel = _employeeLeaveCreditService.GetLeaveCredit(employeeIdNo, leaveIdNo)
@@ -273,7 +286,6 @@ Namespace PresentationLayer.Presenters
         '    End If
         '    Return employeeLeaveCreditModel
         'End Function
-
 
         Private Function RequestedLeaveDaysOk(noOfDaysAllowed As Long, noOfRequestedDays As Long) As Boolean
             Dim leaveDaysOk As Boolean = True
@@ -333,12 +345,12 @@ Namespace PresentationLayer.Presenters
             Dim returnValue As Boolean = False
             If CheckDependentRecords(Of Int32)(View.IdNo, "EmployeeLeaveApprovalItem", "EmployeeLeaveApprovalIdNo") Then
                 Return True
-            'ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "PayElementAccount", "PayElementIdNo") Then
-            '    Return True
-            'ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "PayElementItem", "PayElementIdNo") Then
-            '    Return True
-            'ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "RecurringPayElement", "PayElementIdNo") Then
-            '    Return True
+                'ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "PayElementAccount", "PayElementIdNo") Then
+                '    Return True
+                'ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "PayElementItem", "PayElementIdNo") Then
+                '    Return True
+                'ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "RecurringPayElement", "PayElementIdNo") Then
+                '    Return True
             End If
             Return False
         End Function

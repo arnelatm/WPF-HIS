@@ -14,7 +14,7 @@ Namespace PresentationLayer.Presenters
             TableName = "OriginalMessages"
             SortOrderKey = "MessageKey"
             TreeViewMainField = "MessageKey"
-            'TreeViewSecondaryField = Nothing
+            TreeViewSecondaryField = ""
             OriginalModel = New TM()
             DbDataDao = New OriginalMessagesDao
         End Sub
