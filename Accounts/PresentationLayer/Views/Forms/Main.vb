@@ -1170,6 +1170,14 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemEmployeeLeaveReport_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeLeaveReport.Click
            RunForm(Of StatementOfLeave)()
         End Sub
+
+        Private Sub ToolStripMenuItemEmployeeInformation_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeInformation.Click
+            RunForm(Of EmployeeInfo)()
+        End Sub
+
+        Private Sub SimplePasswordGeneratorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SimplePasswordGeneratorToolStripMenuItem.Click
+            PasswordGenerator.Show()
+        End Sub
     End Class
 
 End Namespace

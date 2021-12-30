@@ -7,6 +7,8 @@ Namespace PresentationLayer.Presenters
     Public Class ReportPresenter
         Inherits AccountsPresenterNew(Of IView, AccountModel)
 
+        'Public UserIsSupervisor As Boolean
+
         Public Sub New(view As IView)
             MyBase.New(view)
             TableName = "Account"
@@ -14,7 +16,9 @@ Namespace PresentationLayer.Presenters
             TableName = "Account"
             SortOrderKey = "IdNo"
             WithTreeView = False
+            'UserIsSupervisor = IsUserASupervisor()
         End Sub
+
 
     End Class
 

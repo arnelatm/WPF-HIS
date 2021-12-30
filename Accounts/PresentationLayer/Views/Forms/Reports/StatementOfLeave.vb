@@ -39,7 +39,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                 'If Strings.Left(FormCulture.Name, 2) = "ar" Then
                 '    cForm = New ReportFormNew("Statement of Employee Loans Arabic.rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboEmployeeIdNo.SelectedItem.IdNo, "EmployeeIdNo", cboEmployeeIdNo.Text, "DisplayName")
                 'Else
-                    cForm = New ReportFormNew("Statement of Employee Leaves.rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "DateStart", dtpEndingDate.Value, "DateEnd", cboEmployeeIdNo.SelectedItem.IdNo, "EmployeeIdNo", cboEmployeeIdNo.Text, "DisplayName")
+                cForm = New ReportFormNew("Statement of Employee Leaves.rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "DateStart", dtpEndingDate.Value, "DateEnd", cboEmployeeIdNo.SelectedItem.IdNo, "EmployeeIdNo", cboEmployeeIdNo.Text, "DisplayName")
                 'End If
                 cForm.Show()
             Else
@@ -49,6 +49,20 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
             Close()
+        End Sub
+
+        Private Sub StatementOfLeave_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            Dim showAll As Boolean = False
+            If Presenter.UserHasAccess("HumanResources") Then
+                Presenter.CreateDataSource("Employee", cboEmployeeIdNo)
+            Else
+                Dim employeeIdNo = Presenter.GetUserEmployeeIdNo()
+                If Presenter.IsUserASupervisor() Then
+                    Presenter.CreateDataSource("Employee", cboEmployeeIdNo, "SupervisorIdNo = " & employeeIdNo.ToString() & " or IdNo = " & employeeIdNo.ToString())
+                Else
+                    Presenter.CreateDataSource("Employee", cboEmployeeIdNo, "IdNo = " & employeeIdNo.ToString())
+                End If
+            End If
         End Sub
 
     End Class

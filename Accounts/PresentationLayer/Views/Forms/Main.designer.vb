@@ -155,6 +155,8 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemBankTransferReport = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemHRReports = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemEmployeeIDPrinting = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemEmployeeLeaveReport = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemEmployeeInformation = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemReceptionReports = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemShiftDailySummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemUtilities = New System.Windows.Forms.ToolStripMenuItem()
@@ -187,7 +189,7 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemEmployeeLeaveReport = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SimplePasswordGeneratorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.AccountsMenu.SuspendLayout
@@ -855,7 +857,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemHRReports
         '
-        Me.ToolStripMenuItemHRReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemEmployeeIDPrinting, Me.ToolStripMenuItemEmployeeLeaveReport})
+        Me.ToolStripMenuItemHRReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemEmployeeIDPrinting, Me.ToolStripMenuItemEmployeeLeaveReport, Me.ToolStripMenuItemEmployeeInformation})
         Me.ToolStripMenuItemHRReports.Name = "ToolStripMenuItemHRReports"
         resources.ApplyResources(Me.ToolStripMenuItemHRReports, "ToolStripMenuItemHRReports")
         '
@@ -863,6 +865,16 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.ToolStripMenuItemEmployeeIDPrinting.Name = "ToolStripMenuItemEmployeeIDPrinting"
         resources.ApplyResources(Me.ToolStripMenuItemEmployeeIDPrinting, "ToolStripMenuItemEmployeeIDPrinting")
+        '
+        'ToolStripMenuItemEmployeeLeaveReport
+        '
+        Me.ToolStripMenuItemEmployeeLeaveReport.Name = "ToolStripMenuItemEmployeeLeaveReport"
+        resources.ApplyResources(Me.ToolStripMenuItemEmployeeLeaveReport, "ToolStripMenuItemEmployeeLeaveReport")
+        '
+        'ToolStripMenuItemEmployeeInformation
+        '
+        Me.ToolStripMenuItemEmployeeInformation.Name = "ToolStripMenuItemEmployeeInformation"
+        resources.ApplyResources(Me.ToolStripMenuItemEmployeeInformation, "ToolStripMenuItemEmployeeInformation")
         '
         'ToolStripMenuItemReceptionReports
         '
@@ -877,7 +889,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemUtilities
         '
-        Me.ToolStripMenuItemUtilities.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemUpdateMenuSecurityObjects, Me.ToolStripMenuItemRecreateSecurityObjectMenu, Me.ToolStripMenuItemTransactionNotesTranslator})
+        Me.ToolStripMenuItemUtilities.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemUpdateMenuSecurityObjects, Me.ToolStripMenuItemRecreateSecurityObjectMenu, Me.ToolStripMenuItemTransactionNotesTranslator, Me.SimplePasswordGeneratorToolStripMenuItem})
         Me.ToolStripMenuItemUtilities.Name = "ToolStripMenuItemUtilities"
         resources.ApplyResources(Me.ToolStripMenuItemUtilities, "ToolStripMenuItemUtilities")
         '
@@ -1033,10 +1045,10 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
-        'ToolStripMenuItemEmployeeLeaveReport
+        'SimplePasswordGeneratorToolStripMenuItem
         '
-        Me.ToolStripMenuItemEmployeeLeaveReport.Name = "ToolStripMenuItemEmployeeLeaveReport"
-        resources.ApplyResources(Me.ToolStripMenuItemEmployeeLeaveReport, "ToolStripMenuItemEmployeeLeaveReport")
+        Me.SimplePasswordGeneratorToolStripMenuItem.Name = "SimplePasswordGeneratorToolStripMenuItem"
+        resources.ApplyResources(Me.SimplePasswordGeneratorToolStripMenuItem, "SimplePasswordGeneratorToolStripMenuItem")
         '
         'Main
         '
@@ -1223,5 +1235,7 @@ End Sub
         Friend WithEvents ToolStripMenuItemShiftDailySummary As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDailyDiagnosticSummary As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemEmployeeLeaveReport As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemEmployeeInformation As ToolStripMenuItem
+        Friend WithEvents SimplePasswordGeneratorToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace

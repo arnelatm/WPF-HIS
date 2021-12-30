@@ -118,11 +118,15 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function IsUserASupervisor()
-            Dim employeeIdNo As Int32 = Service.GetField(Of Integer, Integer)(GlobalVariables.UserIdNo, "User", "IdNo", "EmployeeIdNo")
+            Dim employeeIdNo As Int32 = GetUserEmployeeIdNo() 
             If employeeIdNo > 0 Then
                 Return Service.GetField(Of Boolean, Int32)(employeeIdNo, "Employee", "IdNo", "Supervisor")
             End If
             Return False
+        End Function
+
+        Public Function GetUserEmployeeIdNo() As Int32
+            Return Service.GetField(Of Integer, Integer)(GlobalVariables.UserIdNo, "User", "IdNo", "EmployeeIdNo")
         End Function
 
         'Public Sub AddNewItemOnBindingSource(Of TS As New)(ByVal e As System.ComponentModel.AddingNewEventArgs, bindingSource As BindingSource, dataGridView As DataGridView) Implements IAccountsPresenter.AddNewItemOnBindingSource
