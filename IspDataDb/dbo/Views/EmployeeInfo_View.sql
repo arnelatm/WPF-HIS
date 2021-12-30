@@ -26,38 +26,38 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @leve
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'ayFlags = 280
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "Country"
             Begin Extent = 
-               Top = 534
-               Left = 38
-               Bottom = 664
-               Right = 220
+               Top = 290
+               Left = 1040
+               Bottom = 517
+               Right = 1222
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "Employee_1"
             Begin Extent = 
-               Top = 534
-               Left = 258
-               Bottom = 664
-               Right = 456
+               Top = 482
+               Left = 437
+               Bottom = 704
+               Right = 635
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 2
          End
          Begin Table = "PayGroup"
             Begin Extent = 
                Top = 6
-               Left = 486
-               Bottom = 241
-               Right = 677
+               Left = 356
+               Bottom = 136
+               Right = 547
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 2
          End
       End
    End
@@ -69,8 +69,8 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'ayFlags = 
    End
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
-         Column = 1440
-         Alias = 900
+         Column = 1860
+         Alias = 1320
          Table = 1170
          Output = 720
          Append = 1400
@@ -88,13 +88,15 @@ End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeInfo_View';
 
 
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+         Configuration = "(H (1[78] 4[17] 2[5] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -162,70 +164,72 @@ Begin DesignProperties =
       Begin Tables = 
          Begin Table = "Employee"
             Begin Extent = 
-               Top = 6
-               Left = 38
-               Bottom = 136
-               Right = 236
+               Top = 52
+               Left = 1
+               Bottom = 668
+               Right = 318
             End
             DisplayFlags = 280
-            TopColumn = 36
+            TopColumn = 7
          End
          Begin Table = "EmployeePhone"
             Begin Extent = 
-               Top = 6
-               Left = 274
-               Bottom = 136
-               Right = 448
+               Top = 464
+               Left = 881
+               Bottom = 646
+               Right = 1055
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 3
          End
          Begin Table = "Religion"
             Begin Extent = 
-               Top = 138
-               Left = 38
-               Bottom = 268
-               Right = 220
+               Top = 349
+               Left = 621
+               Bottom = 644
+               Right = 803
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "Department"
             Begin Extent = 
-               Top = 138
-               Left = 258
-               Bottom = 268
-               Right = 460
+               Top = 6
+               Left = 851
+               Bottom = 136
+               Right = 1053
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "Designation"
             Begin Extent = 
-               Top = 270
-               Left = 38
-               Bottom = 400
-               Right = 278
+               Top = 72
+               Left = 1070
+               Bottom = 298
+               Right = 1310
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "Bank"
             Begin Extent = 
-               Top = 402
-               Left = 38
-               Bottom = 532
-               Right = 211
+               Top = 138
+               Left = 631
+               Bottom = 268
+               Right = 804
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 2
          End
          Begin Table = "Country_1"
             Begin Extent = 
-               Top = 402
-               Left = 249
-               Bottom = 532
-               Right = 431
+               Top = 138
+               Left = 842
+               Bottom = 268
+               Right = 1024
             End
-            Displ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeInfo_View';
+            ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeInfo_View';
+
+
 
