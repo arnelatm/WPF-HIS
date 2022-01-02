@@ -203,7 +203,7 @@ Namespace PresentationLayer.Presenters
                 View.PayrollName = PayrollText & " " & View.StartDate.ToString() & " to " & View.EndDate.ToString()
                 View.PayrollNameAra = Messaging.TranslateCaption(PayrollText, "ar-SA") & " " & GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
             End If
-            View.PayrollCode = "M" + View.EndDate.ToString("yyMM")
+            View.PayrollCode = "M" + cdate(view.enddate).ToString("yyMM")
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
