@@ -810,8 +810,6 @@ Namespace PresentationLayer.Views.Forms
                 Dim maxOpenForms As String = GlobalVariables.MaximumOpenForms.ToString()
                 Messaging.Show(True, "MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open", {"maxOpenForms", maxOpenForms})
             Else
-                'CallByName(formEntry, "MdiParent", CallType.Set, Me)
-                'CallByName(formEntry, "Show", CallType.Method)
                 Invoker.SetProperty(formEntry, "MdiParent", {Me})
                 Invoker.InvokeFunction(formEntry, "Show")
             End If
@@ -1019,53 +1017,30 @@ Namespace PresentationLayer.Views.Forms
 
         Private Overloads Sub RunForm(Of TV)()
             Dim childMdiForm = Activator.CreateInstance(GetType(TV))
-            childMdiForm.MdiParent = Me
-            'childMdiForm.TopMost = True
-            childMdiForm.Show()
+            ShowEntryForm(childMdiForm)
         End Sub
 
         Private Overloads Sub RunForm(Of TV, TX)(param As TX)
             Dim childMdiForm = Activator.CreateInstance(GetType(TV), param)
-            childMdiForm.MdiParent = Me
-            'childMdiForm.TopMost = True
-            childMdiForm.Show()
+            ShowEntryForm(childMdiForm)
         End Sub
 
         Private Overloads Sub RunForm(Of TV, TP)()
             Dim childMdiForm = Activator.CreateInstance(GetType(TV))
             Dim pType As Type = GetType(TP)
-            childMdiForm.MdiParent = Me
             childMdiForm.Presenter = Activator.CreateInstance(pType, {childMdiForm})
-            'For Each form In Me.MdiChildren
-            '    If Not form.Equals(childMdiForm) Then
-            '        'form.WindowState = FormWindowState.Minimized
-            '        form.SendToBack()
-            '        form.TopMost = False
-            '        form.WindowState = FormWindowState.Normal
-            '    End If
-            'Next
-            'childMdiForm.Activate()
-            childMdiForm.Select()
-            'childMdiForm.BringToFront()
-            'childMdiForm.TopMost = True
-            childMdiForm.Show()
-            'childMdiForm.btnLast.PerformClick()
-            'childMdiForm.Select()
-            'ActivateMdiChild(childMdiForm)
-            'childMdiFOrm.Activate()
-            'Me.LayoutMdi(MdiLayout.Cascade)
-            'childMdiForm.Refresh()
-            'childMdiForm.WindowState = FormWindowState.Minimized
-            'childMdiForm.WindowState = FormWindowState.Normal
+            ShowEntryForm(childMdiForm)
+            'Invoker.SetProperty(childMdiForm, "MdiParent", {Me})
+            'Invoker.InvokeFunction(childMdiForm, "Show")
+            ''childMdiForm.MdiParent = Me
+            'childMdiForm.Show()
         End Sub
 
         Private Overloads Sub RunForm(Of TV, TP, TX)(param As TX)
             Dim childMdiForm = Activator.CreateInstance(GetType(TV), param)
             Dim pType As Type = GetType(TP)
             childMdiForm.Presenter = Activator.CreateInstance(pType, {childMdiForm, param})
-            childMdiForm.MdiParent = Me
-            'childMdiForm.TopMost = True
-            childMdiForm.Show()
+            ShowEntryForm(childMdiForm)
         End Sub
 
         Private Sub UpdateMenuSecurityObjectsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUpdateMenuSecurityObjects.Click
@@ -1168,7 +1143,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemEmployeeLeaveReport_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeLeaveReport.Click
-           RunForm(Of StatementOfLeave)()
+            RunForm(Of StatementOfLeave)()
         End Sub
 
         Private Sub ToolStripMenuItemEmployeeInformation_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeInformation.Click

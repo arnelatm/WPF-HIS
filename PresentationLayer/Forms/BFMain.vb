@@ -1215,9 +1215,8 @@ Public Class BfMain
         Activator.CreateInstance(GetType(TP), {childForm})
         Dim pType As Type = GetType(TP)
         childForm.Presenter = Activator.CreateInstance(pType, {childForm})
-        childForm.MdiParent = subFormParent
-        'childForm.TopMost = True
         childForm.Show()
+        childForm.MdiParent = subFormParent
     End Sub
 
     Public Sub RunSubForm(Of TV, TP)()
@@ -1225,7 +1224,6 @@ Public Class BfMain
         Dim pType As Type = GetType(TP)
         childMdiForm.Presenter = Activator.CreateInstance(pType, {childMdiForm})
         childMdiForm.MdiParent = Me
-        'childMdiForm.TopMost = True
         childMdiForm.Show()
     End Sub
 
@@ -1234,17 +1232,15 @@ Public Class BfMain
         Activator.CreateInstance(GetType(TP), {childForm})
         Dim pType As Type = GetType(TP)
         childForm.Presenter = Activator.CreateInstance(pType, {childForm})
-        childForm.MdiParent = subFormParent
-        'childForm.TopMost = True
         childForm.Show()
+        childForm.MdiParent = subFormParent
     End Sub
 
     Public Sub RunSubForm(Of TF, TP, TX)(ByRef subFormParent As Form, param As TX)
         Dim childMdiForm = Activator.CreateInstance(GetType(TF), param)
+        childMdiForm.MdiParent = subFormParent
         Dim pType As Type = GetType(TP)
         childMdiForm.Presenter = Activator.CreateInstance(pType, {childMdiForm, param})
-        childMdiForm.MdiParent = subFormParent
-        'childMdiForm.TopMost = True
         childMdiForm.Show()
     End Sub
 

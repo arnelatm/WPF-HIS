@@ -48,7 +48,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateSpecialAccountDataSource("AccountIdNo", {EnumToCode(SpecialAccountSelection.CheckingAccount), EnumToCode(SpecialAccountSelection.CheckingAccount)})
+            CreateSpecialAccountDataSource("AccountIdNo", {EnumToCode(SpecialAccountSelection.CheckingAccount), EnumToCode(SpecialAccountSelection.CheckingAccount), EnumToCode(SpecialAccountSelection.Cash)})
             CreateSpecialAccountDataSource("PcAccountIdNo", {EnumToCode(SpecialAccountSelection.PettyCashAccount)})
             CreateEnumDataSource(Of PayTypeSelection)("PayType")
         End Sub

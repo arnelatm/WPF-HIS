@@ -13,10 +13,11 @@ Namespace PresentationLayer.Presenters
             MyBase.New(view)
             Service = New CommonService("Department")
             TableName = "Department_View"
+            TableBaseName = "Department"
             ParentFieldName = "ParentIdNo"
             TreeViewMainField = "DepartmentName"
             ParentFieldName = "ParentIdNo"
-            'TreeViewSecondaryField = "DepartmentCode"
+            TreeViewSecondaryField = "DepartmentCode"
             SortOrderKey = "SortKey"
         End Sub
 

@@ -77,7 +77,7 @@ Namespace PresentationLayer.Presenters
             MyBase.New(view)
             Service = New AccountsService("Payroll")
             TreeViewMainField = "PayrollName"
-            'TreeViewSecondaryField = "PayrollCode"
+            TreeViewSecondaryField = "PayrollCode"
             TableName = "Payroll"
             SortOrderKey = "EndDate"
 

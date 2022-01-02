@@ -22,7 +22,7 @@ Namespace PresentationLayer.Presenters
             WithTreeView = False
             _closingEntry = closingEntry
             Service = New AccountsService("GeneralJournal")
-
+            TableBaseName = "GeneralJournal"
             If Not view.ClosingJournal Then
                 TableName = "GeneralJournalNormal_View"
             Else

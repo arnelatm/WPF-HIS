@@ -98,6 +98,7 @@
         Me.txtBalance = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.btnActivate = New AATM.Libraries.CBaseControlsLibrary.CButton()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -1552,7 +1553,7 @@
         Me.lblOpeningBalance.EditingMode = false
         Me.lblOpeningBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblOpeningBalance.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblOpeningBalance.Location = New System.Drawing.Point(11, 366)
+        Me.lblOpeningBalance.Location = New System.Drawing.Point(11, 365)
         Me.lblOpeningBalance.Margin = New System.Windows.Forms.Padding(1)
         Me.lblOpeningBalance.Name = "lblOpeningBalance"
         Me.lblOpeningBalance.Size = New System.Drawing.Size(153, 23)
@@ -1578,7 +1579,7 @@
         Me.txtOpeningBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtOpeningBalance.ForeColor = System.Drawing.Color.Black
         Me.txtOpeningBalance.LinkedLabel = Me.lblOpeningBalance
-        Me.txtOpeningBalance.Location = New System.Drawing.Point(166, 366)
+        Me.txtOpeningBalance.Location = New System.Drawing.Point(166, 365)
         Me.txtOpeningBalance.Margin = New System.Windows.Forms.Padding(1)
         Me.txtOpeningBalance.MaximumValue = Nothing
         Me.txtOpeningBalance.MinimumValue = Nothing
@@ -1598,7 +1599,7 @@
         Me.lblSettlementDueDays.EditingMode = false
         Me.lblSettlementDueDays.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblSettlementDueDays.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSettlementDueDays.Location = New System.Drawing.Point(363, 366)
+        Me.lblSettlementDueDays.Location = New System.Drawing.Point(363, 365)
         Me.lblSettlementDueDays.Margin = New System.Windows.Forms.Padding(1)
         Me.lblSettlementDueDays.Name = "lblSettlementDueDays"
         Me.lblSettlementDueDays.Size = New System.Drawing.Size(244, 23)
@@ -1626,7 +1627,7 @@
         Me.txtSettlementDueDays.ForeColor = System.Drawing.Color.Black
         Me.txtSettlementDueDays.IgnoreNullCheck = true
         Me.txtSettlementDueDays.LinkedLabel = Me.lblSettlementDueDays
-        Me.txtSettlementDueDays.Location = New System.Drawing.Point(609, 366)
+        Me.txtSettlementDueDays.Location = New System.Drawing.Point(609, 365)
         Me.txtSettlementDueDays.Margin = New System.Windows.Forms.Padding(1)
         Me.txtSettlementDueDays.MaximumValue = Nothing
         Me.txtSettlementDueDays.MinimumValue = Nothing
@@ -1645,7 +1646,7 @@
         Me.lblPaymentDueDays.EditingMode = false
         Me.lblPaymentDueDays.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblPaymentDueDays.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPaymentDueDays.Location = New System.Drawing.Point(11, 391)
+        Me.lblPaymentDueDays.Location = New System.Drawing.Point(11, 390)
         Me.lblPaymentDueDays.Margin = New System.Windows.Forms.Padding(1)
         Me.lblPaymentDueDays.Name = "lblPaymentDueDays"
         Me.lblPaymentDueDays.Size = New System.Drawing.Size(153, 23)
@@ -1672,7 +1673,7 @@
         Me.txtPaymentDueDays.ForeColor = System.Drawing.Color.Black
         Me.txtPaymentDueDays.IgnoreNullCheck = true
         Me.txtPaymentDueDays.LinkedLabel = Me.lblPaymentDueDays
-        Me.txtPaymentDueDays.Location = New System.Drawing.Point(166, 391)
+        Me.txtPaymentDueDays.Location = New System.Drawing.Point(166, 390)
         Me.txtPaymentDueDays.Margin = New System.Windows.Forms.Padding(1)
         Me.txtPaymentDueDays.MaximumValue = Nothing
         Me.txtPaymentDueDays.MinimumValue = Nothing
@@ -1691,7 +1692,7 @@
         Me.lblSettlementDiscount.EditingMode = false
         Me.lblSettlementDiscount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblSettlementDiscount.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSettlementDiscount.Location = New System.Drawing.Point(271, 391)
+        Me.lblSettlementDiscount.Location = New System.Drawing.Point(271, 390)
         Me.lblSettlementDiscount.Margin = New System.Windows.Forms.Padding(1)
         Me.lblSettlementDiscount.Name = "lblSettlementDiscount"
         Me.lblSettlementDiscount.Size = New System.Drawing.Size(238, 23)
@@ -1718,7 +1719,7 @@
         Me.txtSettlementDiscount.ForeColor = System.Drawing.Color.Black
         Me.txtSettlementDiscount.IgnoreNullCheck = true
         Me.txtSettlementDiscount.LinkedLabel = Me.lblSettlementDiscount
-        Me.txtSettlementDiscount.Location = New System.Drawing.Point(511, 391)
+        Me.txtSettlementDiscount.Location = New System.Drawing.Point(511, 390)
         Me.txtSettlementDiscount.Margin = New System.Windows.Forms.Padding(1)
         Me.txtSettlementDiscount.MaximumValue = Nothing
         Me.txtSettlementDiscount.MinimumValue = Nothing
@@ -1738,7 +1739,7 @@
         Me.CLabel3.EditingMode = false
         Me.CLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.CLabel3.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.CLabel3.Location = New System.Drawing.Point(553, 391)
+        Me.CLabel3.Location = New System.Drawing.Point(553, 390)
         Me.CLabel3.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel3.Name = "CLabel3"
         Me.CLabel3.Size = New System.Drawing.Size(17, 23)
@@ -1753,7 +1754,7 @@
         Me.lblActive.EditingMode = false
         Me.lblActive.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblActive.Location = New System.Drawing.Point(572, 391)
+        Me.lblActive.Location = New System.Drawing.Point(572, 390)
         Me.lblActive.Margin = New System.Windows.Forms.Padding(1)
         Me.lblActive.Name = "lblActive"
         Me.lblActive.Size = New System.Drawing.Size(118, 23)
@@ -1784,7 +1785,7 @@
         Me.chkActive.IgnoreCase = false
         Me.chkActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.chkActive.LinkedLabel = Me.lblActive
-        Me.chkActive.Location = New System.Drawing.Point(692, 391)
+        Me.chkActive.Location = New System.Drawing.Point(692, 390)
         Me.chkActive.Margin = New System.Windows.Forms.Padding(1)
         Me.chkActive.Name = "chkActive"
         Me.chkActive.NoLabel = true
@@ -1803,7 +1804,7 @@
         Me.lblDateAccountOpen.EditingMode = false
         Me.lblDateAccountOpen.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblDateAccountOpen.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDateAccountOpen.Location = New System.Drawing.Point(11, 416)
+        Me.lblDateAccountOpen.Location = New System.Drawing.Point(11, 415)
         Me.lblDateAccountOpen.Margin = New System.Windows.Forms.Padding(1)
         Me.lblDateAccountOpen.Name = "lblDateAccountOpen"
         Me.lblDateAccountOpen.Size = New System.Drawing.Size(153, 23)
@@ -1823,7 +1824,7 @@
         Me.dtpDateAccountOpen.Font = New System.Drawing.Font("Tahoma", 9.75!)
         Me.dtpDateAccountOpen.ForeColor = System.Drawing.Color.Black
         Me.dtpDateAccountOpen.LinkedLabel = Nothing
-        Me.dtpDateAccountOpen.Location = New System.Drawing.Point(165, 415)
+        Me.dtpDateAccountOpen.Location = New System.Drawing.Point(165, 414)
         Me.dtpDateAccountOpen.Margin = New System.Windows.Forms.Padding(0)
         Me.dtpDateAccountOpen.Name = "dtpDateAccountOpen"
         Me.dtpDateAccountOpen.ReadOnlyDp = false
@@ -1844,7 +1845,7 @@
         Me.lblAccountStatus.EditingMode = false
         Me.lblAccountStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblAccountStatus.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblAccountStatus.Location = New System.Drawing.Point(295, 416)
+        Me.lblAccountStatus.Location = New System.Drawing.Point(295, 415)
         Me.lblAccountStatus.Margin = New System.Windows.Forms.Padding(1)
         Me.lblAccountStatus.Name = "lblAccountStatus"
         Me.lblAccountStatus.Size = New System.Drawing.Size(214, 20)
@@ -1876,7 +1877,7 @@
         Me.cacAccountStatus.IgnoreCase = false
         Me.cacAccountStatus.IntegralHeight = false
         Me.cacAccountStatus.LinkedLabel = Nothing
-        Me.cacAccountStatus.Location = New System.Drawing.Point(511, 416)
+        Me.cacAccountStatus.Location = New System.Drawing.Point(511, 415)
         Me.cacAccountStatus.Margin = New System.Windows.Forms.Padding(1)
         Me.cacAccountStatus.Name = "cacAccountStatus"
         Me.cacAccountStatus.OldValue = 0
@@ -1903,7 +1904,7 @@
         Me.lblNotes.EditingMode = false
         Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblNotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNotes.Location = New System.Drawing.Point(11, 443)
+        Me.lblNotes.Location = New System.Drawing.Point(11, 442)
         Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.lblNotes.Name = "lblNotes"
         Me.lblNotes.Size = New System.Drawing.Size(153, 23)
@@ -1931,7 +1932,7 @@
         Me.txtBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtBalance.ForeColor = System.Drawing.Color.Black
         Me.txtBalance.LinkedLabel = Me.lblOpeningBalance
-        Me.txtBalance.Location = New System.Drawing.Point(166, 443)
+        Me.txtBalance.Location = New System.Drawing.Point(166, 442)
         Me.txtBalance.Margin = New System.Windows.Forms.Padding(1)
         Me.txtBalance.MaximumValue = Nothing
         Me.txtBalance.MinimumValue = Nothing
@@ -1951,7 +1952,7 @@
         Me.CLabel1.EditingMode = false
         Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.CLabel1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.CLabel1.Location = New System.Drawing.Point(11, 468)
+        Me.CLabel1.Location = New System.Drawing.Point(11, 467)
         Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel1.Name = "CLabel1"
         Me.CLabel1.Size = New System.Drawing.Size(153, 23)
@@ -1978,7 +1979,7 @@
         Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
-        Me.txtNotes.Location = New System.Drawing.Point(166, 468)
+        Me.txtNotes.Location = New System.Drawing.Point(166, 467)
         Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.txtNotes.MaximumValue = Nothing
         Me.txtNotes.MinimumValue = Nothing
@@ -1992,14 +1993,28 @@
         Me.txtNotes.Translatable = false
         Me.txtNotes.ValueIsMandatory = true
         '
+        'btnActivate
+        '
+        Me.btnActivate.DesignerSelected = false
+        Me.btnActivate.ImageIndex = 0
+        Me.btnActivate.Location = New System.Drawing.Point(619, -4)
+        Me.btnActivate.Name = "btnActivate"
+        Me.btnActivate.OriginalImageName = Nothing
+        Me.btnActivate.SecurityKey = ""
+        Me.btnActivate.Size = New System.Drawing.Size(90, 25)
+        Me.btnActivate.TabIndex = 5
+        Me.btnActivate.Text = "Activate"
+        '
         'SupplierEntryTv
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.ClientSize = New System.Drawing.Size(1078, 555)
+        Me.Controls.Add(Me.btnActivate)
         Me.Name = "SupplierEntryTv"
         Me.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.Text = "Supplier Maintenance Form"
-        Me.ViewDisplayName = ""
+        Me.Controls.SetChildIndex(Me.SplitContainer1, 0)
+        Me.Controls.SetChildIndex(Me.btnActivate, 0)
         Me.SplitContainer1.Panel1.ResumeLayout(false)
         Me.SplitContainer1.Panel2.ResumeLayout(false)
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).EndInit
@@ -2088,5 +2103,6 @@ End Sub
         Friend WithEvents txtBalance As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtNotes As Libraries.CBaseControlsLibrary.CTextBox
+        Public WithEvents btnActivate As Libraries.CBaseControlsLibrary.CButton
     End Class
 End NameSpace

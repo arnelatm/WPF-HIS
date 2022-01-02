@@ -274,6 +274,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Property
 
     Public Property TableName As String
+    Public Property TableBaseName As String
 
     Public Property TableProperties As Array
 
@@ -414,7 +415,11 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Dim retValue As Integer
         Try
             Using scope As New TransactionScope(TransactionScopeOption.Required, New TimeSpan(0, 1, 0))
-                retValue = Service.DeleteRecord(idNo, TableName)
+                Dim cTableName As String = TableBaseName
+                If TableBaseName Is Nothing Or TableBaseName = "" Then
+                    TableBaseName = TableName
+                End If
+                retValue = Service.DeleteRecord(idNo, TableBaseName)
                 If retValue > 0 Then
                     If Ea IsNot Nothing Then
                         Ea.PublishEvent(New RecordDeleted(idNo))

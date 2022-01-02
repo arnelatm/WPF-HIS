@@ -505,6 +505,14 @@ Public Class CCustomDateTimePicker
         End If
     End Sub
 
+    Public Function GetTime()
+        Return txtTime.Text
+    End Function
+
+    Public Sub SetCurrentTime(cTime As String)
+        txtTime.SetTime(cTime)
+    End Sub
+
     Private _txtDateAlreadyFocused As Boolean
 
     Private Sub TxtDate_OnGotFocus(sender As Object, e As EventArgs) Handles txtDate.GotFocus
