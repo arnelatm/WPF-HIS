@@ -106,13 +106,15 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub dtpDateStart_ValueChanged(sender As Object, e As EventArgs) Handles dtpDateStart.Validated
             If dtpDateEnd.Value Is Nothing OrElse dtpDateEnd.Value < dtpDateStart.Value Then
-                dtpDateEnd.Value = dtpDateStart.Value
+                dim time = dtpDateStart.GetTime()
+                dtpDateEnd.SetCurrentTime(time)
             End If
         End Sub
 
         Private Sub dtpDateEnd_ValueChanged(sender As Object, e As EventArgs) Handles dtpDateEnd.Validated
             If dtpDateStart.Value Is Nothing OrElse dtpDateStart.Value > dtpDateEnd.Value Then
-                dtpDateStart.Value = dtpDateEnd.Value
+                dim time = dtpDateEnd.GetTime()
+                dtpDateStart.SetCurrentTime(time)
             End If
         End Sub
 

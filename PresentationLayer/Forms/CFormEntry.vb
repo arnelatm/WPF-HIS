@@ -82,6 +82,7 @@ Public Class CFormEntry
                 SwitchUiLanguage(True)
             End If
         End If
+        Me.Activate()
         Parent.ResumeDrawing()
     End Sub
 

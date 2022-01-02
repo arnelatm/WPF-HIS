@@ -16,6 +16,7 @@ Namespace PresentationLayer.Presenters
         Public Sub New(itemView As IHolidayAvailmentView)
             MyBase.New(itemView)
             Service = New AccountsService("EmployeeLeave")
+            TableBaseName = "EmployeeLeave"
             TableName = "EmployeeLeave_View"
             SortOrderKey = "IdNo"
             WithTreeView = False

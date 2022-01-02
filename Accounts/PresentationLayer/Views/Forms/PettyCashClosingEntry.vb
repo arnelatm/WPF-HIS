@@ -277,20 +277,22 @@ Namespace PresentationLayer.Views.Forms
             _pcFooter.SetText("DgvPayeeName", "Totals ->")
         End Sub
 
-        Private Sub PettyCashClosing_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-            Presenter.GoAddRecord()
-            Presenter.GetOpenPettyCash()
-            If cboPcAccountIdNo.SelectedValue Is Nothing Or cboPcAccountIdNo.SelectedValue <= 0 Then
-                cboPcAccountIdNo.SelectedValue = _defaultAccount
-            End If
-            If Presenter.PcAccountCount = 1 Then
-                cboPcAccountIdNo.DisplayOnly = True
-                cboPcAccountIdNo.TabStop = False
-            End If
-            bsPcJournals.ResetBindings(True)
-            cboPcAccountIdNo.Refresh()
-            _pcFooter.CalculateTotals()
-        End Sub
+        'Private Sub PettyCashClosing_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        '    Presenter.GoAddRecord()
+        '    Presenter.GetOpenPettyCash()
+        '    cboAccountIdNo.SelectedValue = -1
+        '    txtAmount.Text = 0
+        '    'If cboPcAccountIdNo.SelectedValue Is Nothing Or cboPcAccountIdNo.SelectedValue <= 0 Then
+        '        cboPcAccountIdNo.SelectedValue = _defaultAccount
+        '    'End If
+        '    If Presenter.PcAccountCount = 1 Then
+        '        cboPcAccountIdNo.DisplayOnly = True
+        '        cboPcAccountIdNo.TabStop = False
+        '    End If
+        '    bsPcJournals.ResetBindings(True)
+        '    cboPcAccountIdNo.Refresh()
+        '    _pcFooter.CalculateTotals()
+        'End Sub
 
         Private Sub btnSelectAll_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnSelectAll.ClickButtonArea
             RaiseEvent ClearAllPcJournal(bsPcJournals, True)
@@ -316,6 +318,23 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private Sub PettyCashClosingEntry_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+            DEBUGGER.BREAK()
+            Presenter.GoAddRecord()
+            Presenter.GetOpenPettyCash()
+            cboAccountIdNo.SelectedValue = -1
+            txtAmount.Text = 0
+            'If cboPcAccountIdNo.SelectedValue Is Nothing Or cboPcAccountIdNo.SelectedValue <= 0 Then
+            cboPcAccountIdNo.SelectedValue = _defaultAccount
+            'End If
+            If Presenter.PcAccountCount = 1 Then
+                cboPcAccountIdNo.DisplayOnly = True
+                cboPcAccountIdNo.TabStop = False
+            End If
+            bsPcJournals.ResetBindings(True)
+            cboPcAccountIdNo.Refresh()
+            _pcFooter.CalculateTotals()
+        End Sub
     End Class
 
 End Namespace

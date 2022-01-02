@@ -15,10 +15,11 @@ Namespace PresentationLayer.Presenters
             MyBase.New(itemView)
             AddHandler View.ParentIdUpdated, AddressOf OnParentIdUpdated
             Service = New AccountsService("Account")
+            TableBaseName = "Account"
             TableName = "Account_View"
             SortOrderKey = "SortKey"
             TreeViewMainField = "AccountName"
-            'TreeViewSecondaryField = "AccountCode"
+            TreeViewSecondaryField = "AccountCode"
             ParentFieldName = "ParentIdNo"
         End Sub
 

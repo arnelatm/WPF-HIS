@@ -413,6 +413,9 @@ Namespace PresentationLayer.Views.Forms
                 }
         End Sub
 
+        Private Sub btnActivate_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnActivate.ClickButtonArea
+            Me.Activate()
+        End Sub
     End Class
 
 End Namespace

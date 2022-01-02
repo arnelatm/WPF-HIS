@@ -11,9 +11,10 @@ Namespace PresentationLayer.Presenters
         Public Sub New(itemView As IPayGroupView)
             MyBase.New(itemView)
             Service = New AccountsService("PayGroup")
+            TableBaseName = "PayGroup"
             TableName = "PayGroup_View"
             TreeViewMainField = "PayGroupName"
-            'TreeViewSecondaryField = "PayGroupCode"
+            TreeViewSecondaryField = "PayGroupCode"
             SortOrderKey = "SortKey"
             ParentFieldName = "ParentIdNo"
         End Sub
