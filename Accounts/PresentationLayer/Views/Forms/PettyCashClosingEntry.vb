@@ -319,7 +319,6 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PettyCashClosingEntry_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-            DEBUGGER.BREAK()
             Presenter.GoAddRecord()
             Presenter.GetOpenPettyCash()
             cboAccountIdNo.SelectedValue = -1

@@ -31,7 +31,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnGenerateCsvFile(idNo As Int32)
-            Dim fileName = "Payroll for " + Year(View.EndDate).ToString() + Month(View.EndDate).ToString().Trim() + ".csv"
+            Dim fileName = "Payroll for " + Year(View.EndDate).ToString() + Strings.Right("0"+Month(View.EndDate).ToString().Trim(),2) + ".csv"
             Dim csvFilePath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\" & fileName 'Path to create or existing file
             Try
 
