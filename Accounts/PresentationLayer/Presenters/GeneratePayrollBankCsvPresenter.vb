@@ -31,7 +31,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnGenerateCsvFile(idNo As Int32)
-            Dim fileName = "Payroll for " + Year(View.EndDate).ToString() + Strings.Right("0"+Month(View.EndDate).ToString().Trim(),2) + ".csv"
+            Dim fileName = "Payroll for " + Year(View.EndDate).ToString() + Strings.Right("0" + Month(View.EndDate).ToString().Trim(), 2) + ".csv"
             Dim csvFilePath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\" & fileName 'Path to create or existing file
             Try
 
@@ -46,16 +46,22 @@ Namespace PresentationLayer.Presenters
                 Dim lineNumber As Int32 = 2
                 Dim errors As String = ""
                 Dim errorNumber As Int32 = 0
+                Dim netPay As Decimal = 0
                 For Each item In payroll
                     If i = 11 Then
-                        outFile.WriteLine(lineText)
+                        If netPay <> 0 Then
+                            outFile.WriteLine(lineText)
+                            lineNumber += 1
+                        End If
                         lineText = item.ToString()
-                        lineNumber += 1
                         i = 0
                     Else
                         If i = 0 Then
                             lineText = item.ToString()
                         Else
+                            If i = 2 Then
+                                netPay = item
+                            End If
                             If TypeOf item Is Decimal Then
                                 lineText += "," & Math.Round(item, 2).ToString()
                             Else

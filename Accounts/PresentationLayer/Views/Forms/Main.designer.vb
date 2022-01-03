@@ -163,6 +163,7 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemUpdateMenuSecurityObjects = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemRecreateSecurityObjectMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemTransactionNotesTranslator = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SimplePasswordGeneratorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemIndex = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
@@ -189,7 +190,7 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SimplePasswordGeneratorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemIncomeVatSummary = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.AccountsMenu.SuspendLayout
@@ -800,7 +801,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemIGroupReports
         '
-        Me.ToolStripMenuItemIGroupReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCashIncomePerDoctorService, Me.ToolStripMenuItemNumberOfCashPatientsPerDoctor, Me.ToolStripMenuItemDailyDiagnosticSummary, Me.ToolStripMenuItemBlankReport})
+        Me.ToolStripMenuItemIGroupReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCashIncomePerDoctorService, Me.ToolStripMenuItemNumberOfCashPatientsPerDoctor, Me.ToolStripMenuItemDailyDiagnosticSummary, Me.ToolStripMenuItemBlankReport, Me.ToolStripMenuItemIncomeVatSummary})
         Me.ToolStripMenuItemIGroupReports.Name = "ToolStripMenuItemIGroupReports"
         resources.ApplyResources(Me.ToolStripMenuItemIGroupReports, "ToolStripMenuItemIGroupReports")
         '
@@ -907,6 +908,11 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.ToolStripMenuItemTransactionNotesTranslator.Name = "ToolStripMenuItemTransactionNotesTranslator"
         resources.ApplyResources(Me.ToolStripMenuItemTransactionNotesTranslator, "ToolStripMenuItemTransactionNotesTranslator")
+        '
+        'SimplePasswordGeneratorToolStripMenuItem
+        '
+        Me.SimplePasswordGeneratorToolStripMenuItem.Name = "SimplePasswordGeneratorToolStripMenuItem"
+        resources.ApplyResources(Me.SimplePasswordGeneratorToolStripMenuItem, "SimplePasswordGeneratorToolStripMenuItem")
         '
         'ToolStripMenuItemHelp
         '
@@ -1045,10 +1051,10 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
-        'SimplePasswordGeneratorToolStripMenuItem
+        'ToolStripMenuItemIncomeVatSummary
         '
-        Me.SimplePasswordGeneratorToolStripMenuItem.Name = "SimplePasswordGeneratorToolStripMenuItem"
-        resources.ApplyResources(Me.SimplePasswordGeneratorToolStripMenuItem, "SimplePasswordGeneratorToolStripMenuItem")
+        Me.ToolStripMenuItemIncomeVatSummary.Name = "ToolStripMenuItemIncomeVatSummary"
+        resources.ApplyResources(Me.ToolStripMenuItemIncomeVatSummary, "ToolStripMenuItemIncomeVatSummary")
         '
         'Main
         '
@@ -1237,5 +1243,6 @@ End Sub
         Friend WithEvents ToolStripMenuItemEmployeeLeaveReport As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemEmployeeInformation As ToolStripMenuItem
         Friend WithEvents SimplePasswordGeneratorToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemIncomeVatSummary As ToolStripMenuItem
     End Class
 End NameSpace

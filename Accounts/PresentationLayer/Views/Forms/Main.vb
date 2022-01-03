@@ -1153,6 +1153,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub SimplePasswordGeneratorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SimplePasswordGeneratorToolStripMenuItem.Click
             PasswordGenerator.Show()
         End Sub
+
+        Private Sub IncomeSummaryVatReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemIncomeVatSummary.Click
+            RunForm(Of EmployeeInfo)()
+        End Sub
     End Class
 
 End Namespace
