@@ -1,0 +1,90 @@
+﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Events
+
+Namespace PresentationLayer.Views.Forms
+
+    Public Class ReportSelectorForm
+        Implements IReportSelectorView
+
+        Private _reportList As New List(Of IReportView)
+
+        'Public Event EmployeeIdCheckedEvent(sender As Object) Implements IReportListView.EmployeeIdCheckedEvent
+
+        Public Sub New()
+            MyBase.New()
+            ' This call is required by the designer.
+            InitializeComponent()
+            ' Add any initialization after the InitializeComponent() call.
+            Me.Text = Messaging.TranslateCaption("Report Selector")
+            FormToolStrip.Visible = False
+        End Sub
+
+#Region "Field Items"
+
+        Private Property ReportList As List(Of IReportView) Implements IReportSelectorView.ReportList
+            Get
+                Return _reportList
+            End Get
+            Set
+                _reportList = Value
+                BindReportList()
+            End Set
+        End Property
+
+        Public Property IdNo As Short Implements IReportSelectorView.IdNo
+
+        Public Property QueryForm As String Implements IReportSelectorView.QueryForm
+
+        Public Property ReportCode As String Implements IReportSelectorView.ReportCode
+        Public Property ReportFileName As String Implements IReportSelectorView.ReportFileName
+
+        Private Property IReportSelectorView_ReportName As String Implements IReportSelectorView.ReportName
+
+        Public Property ReportNameAra As String Implements IReportSelectorView.ReportNameAra
+
+        Public Property ReportTitle As String Implements IReportSelectorView.ReportTitle
+
+        Public Property ReportTitleAra As String Implements IReportSelectorView.ReportTitleAra
+
+
+#End Region
+
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
+                {}
+        End Sub
+
+        Private Sub BindReportList()
+            SuspendLayout()
+            bsReportList.DataSource = Nothing
+            DataGridViewReportList.Refresh()
+            bsReportList.DataSource = ReportList
+            bsReportList.AllowNew = True
+            With DataGridViewReportList
+                .AutoGenerateColumns = False
+                .DataSource = bsReportList
+            End With
+            With DataGridViewReportList.Columns
+                dgvIdNo.DisplayOnly = True
+                'dgvEmployeeName.DisplayOnly = True
+                'dgvNationalIdNo.DisplayOnly = True
+                'dgvPicture.ImageLayout = DataGridViewImageCellLayout.Stretch
+            End With
+            ResumeLayout()
+        End Sub
+
+        Private Sub ReportSelector_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            DataGridViewReportList.Refresh()
+            BindReportList()
+        End Sub
+
+        Private Sub ReportSelector_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+            bsReportList.ResetBindings(True)
+            PublishClickedButton(ButtonClicked.Edit)
+        End Sub
+
+
+    End Class
+
+End Namespace

@@ -2,8 +2,9 @@
 
 Namespace PresentationLayer.Views.Interfaces
 
-    Public Interface IReportView
+    Public Interface IReportSelectorView
         Inherits IView
+        
         Property IdNo As Int16
         Property QueryForm As String
         Property ReportCode As String
@@ -12,6 +13,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property ReportNameAra As String
         Property ReportTitle As String
         Property ReportTitleAra As String        
+        Property ReportList As List(Of IReportView)
+
     End Interface
 
 End Namespace

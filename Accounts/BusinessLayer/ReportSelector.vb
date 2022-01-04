@@ -4,7 +4,7 @@ Imports AATM.BusinessLayer.BusinessRules
 
 Namespace BusinessLayer
 
-    Public Class Report
+    Public Class ReportSelector
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
@@ -26,7 +26,7 @@ Namespace BusinessLayer
         Public Property ReportNameAra As String
         Public Property ReportTitle As String
         Public Property ReportTitleAra As String
-        
+        Public Property ReportList As List(Of Report)
 
     End Class
 

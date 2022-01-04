@@ -6,7 +6,7 @@ Namespace PresentationLayer.Models
     '''     The Model in MVP design pattern.
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
-    Public Class ReportModel
+    Public Class ReportSelectorModel
         'Implements IModelNew
 
         Public Property Errors As List(Of String)
@@ -18,6 +18,7 @@ Namespace PresentationLayer.Models
         Public Property ReportNameAra As String
         Public Property ReportTitle As String
         Public Property ReportTitleAra As String
+        Public Property ReportList As List(Of ReportModel)
     End Class
 
 End Namespace
