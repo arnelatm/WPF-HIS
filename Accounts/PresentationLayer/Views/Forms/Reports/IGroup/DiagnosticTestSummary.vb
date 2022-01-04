@@ -35,7 +35,11 @@ Namespace PresentationLayer.Views.Forms.Reports
                 If selection > 0 Then
                     cBegDate = Format(dtpBeginningDate.Value, "yyyy/MM/dd")
                     cEndDate = Format(dtpEndingDate.Value, "yyyy/MM/dd")
-                    Dim cForm As New ReportFormIGroup($"Diagnostic Test Summary.Rpt", FormCulture, cBegDate, "BeginningDate", cEndDate, "EndingDate", selection, "ReportNumber")
+                    Dim parameter As New ArrayList
+                    parameter.Add({"BeginningDate",cBegDate})
+                    parameter.Add({"EndDate",cEndDate})
+                    parameter.Add({"ReportNumber",Selection})
+                    Dim cForm As New ReportFormIGroup($"Diagnostic Test Summary.Rpt", FormCulture, parameter)
                     cForm.Show()
                 End If
             Else
