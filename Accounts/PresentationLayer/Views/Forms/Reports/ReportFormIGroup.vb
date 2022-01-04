@@ -7,7 +7,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
     Public Class ReportFormIGroup
 
-        Public Sub New(ByVal fileName As String, formCulture As CultureInfo, ByVal ParamArray args() As Object)
+        Public Sub New(ByVal fileName As String, formCulture As CultureInfo, ByVal ParamArray args() As ArrayList)
 
             ' This call is required by the designer.
             InitializeComponent()
@@ -22,9 +22,8 @@ Namespace PresentationLayer.Views.Forms.Reports
             Presenter = New ReportPresenter(Me)
             'Dim companyName =
             'Dim companyNameAra =
-            For i = 0 To args.Length - 1 Step 2
-                Dim value = args(i)
-                Report.SetParameterValue(args(i + 1).ToString(), ConvertObjectToType(value))
+            For i = 0 To args(0).Count()-1 Step 2
+                Report.SetParameterValue(Args(0)(i),args(0)(i+1))
             Next
             Report.SetParameterValue("Language", language)
             Report.SetParameterValue("EstablishmentName", Presenter.GetRecordField("Establishment", "EstablishmentName"))

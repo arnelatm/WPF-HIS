@@ -32,7 +32,12 @@ Namespace PresentationLayer.Views.Forms.Reports
                 Dim cEndDate As String
                 cBegDate = Format(dtpBeginningDate.Value, "yyyy/MM/dd")
                 cEndDate = Format(dtpEndingDate.Value, "yyyy/MM/dd")
-                Dim cForm As New ReportFormIGroup("Food Delivery Medical Report Summary.Rpt", FormCulture, cBegDate, "BeginningDate", cEndDate, "EndingDate")
+                Dim parameter As New ArrayList
+                parameter.Add("BeginningDate")
+                parameter.Add(cBegDate)
+                parameter.Add("EndingDate")
+                parameter.Add(cEndDate)
+                Dim cForm As New ReportFormIGroup("Cash Income Summary Per Month Per Service Per Doctor.Rpt", FormCulture, parameter)
                 cForm.Show()
             Else
                 Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")

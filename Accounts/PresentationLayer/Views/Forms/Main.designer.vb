@@ -147,6 +147,7 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemNumberOfCashPatientsPerDoctor = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemDailyDiagnosticSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemBlankReport = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemIncomeVatSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemARAging = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemAPAging = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemCheckPrinting = New System.Windows.Forms.ToolStripMenuItem()
@@ -190,7 +191,6 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemIncomeVatSummary = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.AccountsMenu.SuspendLayout
@@ -661,7 +661,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemReports
         '
-        Me.ToolStripMenuItemReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemStatementOfAccountsPayable, Me.ToolStripMenuItemStatementOfAccountsReceivable, Me.ToolStripMenuItemStatementOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfAccountsPayable, Me.ToolStripMenuItemSummaryOfAccountsReceivable, Me.ToolStripMenuItemTrialBalance, Me.ToolStripMenuItemBalanceSheet, Me.ToolStripMenuItemIncomeStatement, Me.ToolStripMenuItemAccountingtLists, Me.ToolStripMenuItemIGroupReports, Me.ToolStripMenuItemARAging, Me.ToolStripMenuItemAPAging, Me.ToolStripMenuItemCheckPrinting, Me.ToolStripMenuItemPayrollReport, Me.ToolStripMenuItemHRReports, Me.ToolStripMenuItemReceptionReports})
+        Me.ToolStripMenuItemReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemStatementOfAccountsPayable, Me.ToolStripMenuItemStatementOfAccountsReceivable, Me.ToolStripMenuItemStatementOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfAccountsPayable, Me.ToolStripMenuItemSummaryOfAccountsReceivable, Me.ToolStripMenuItemTrialBalance, Me.ToolStripMenuItemBalanceSheet, Me.ToolStripMenuItemIncomeStatement, Me.ToolStripMenuItemAccountingtLists, Me.ToolStripMenuItemARAging, Me.ToolStripMenuItemIGroupReports, Me.ToolStripMenuItemAPAging, Me.ToolStripMenuItemCheckPrinting, Me.ToolStripMenuItemPayrollReport, Me.ToolStripMenuItemHRReports, Me.ToolStripMenuItemReceptionReports})
         Me.ToolStripMenuItemReports.Name = "ToolStripMenuItemReports"
         resources.ApplyResources(Me.ToolStripMenuItemReports, "ToolStripMenuItemReports")
         '
@@ -824,6 +824,11 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.ToolStripMenuItemBlankReport.Name = "ToolStripMenuItemBlankReport"
         resources.ApplyResources(Me.ToolStripMenuItemBlankReport, "ToolStripMenuItemBlankReport")
+        '
+        'ToolStripMenuItemIncomeVatSummary
+        '
+        Me.ToolStripMenuItemIncomeVatSummary.Name = "ToolStripMenuItemIncomeVatSummary"
+        resources.ApplyResources(Me.ToolStripMenuItemIncomeVatSummary, "ToolStripMenuItemIncomeVatSummary")
         '
         'ToolStripMenuItemARAging
         '
@@ -1050,11 +1055,6 @@ Namespace PresentationLayer.Views.Forms
         '
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
-        '
-        'ToolStripMenuItemIncomeVatSummary
-        '
-        Me.ToolStripMenuItemIncomeVatSummary.Name = "ToolStripMenuItemIncomeVatSummary"
-        resources.ApplyResources(Me.ToolStripMenuItemIncomeVatSummary, "ToolStripMenuItemIncomeVatSummary")
         '
         'Main
         '

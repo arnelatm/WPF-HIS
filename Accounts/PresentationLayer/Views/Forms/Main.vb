@@ -1154,8 +1154,12 @@ Namespace PresentationLayer.Views.Forms
             PasswordGenerator.Show()
         End Sub
 
-        Private Sub IncomeSummaryVatReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemIncomeVatSummary.Click
-            RunForm(Of EmployeeInfo)()
+        Private Sub ToolStripMenuItemIncomeSummaryVatReport_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemIncomeVatSummary.Click
+            Dim parameters As New ArrayList
+            parameters.Add("Revenue Sale Vat Report Summary")
+            parameters.Add("ReportTitle")
+            parameters.Add("Revenue/Sale Vat Report Summary")
+            RunForm(Of DateRangeEntry, ArrayList)(parameters)
         End Sub
     End Class
 

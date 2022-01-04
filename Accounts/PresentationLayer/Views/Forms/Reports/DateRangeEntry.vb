@@ -10,9 +10,10 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Public Property MainTableName As String
         Protected SortOrderKey As String
-        Private _reportFileName as String
+        Private _reportFileName As String
+        Private _reportParameters As New ArrayList
 
-        Public Sub New(reportFileName as String)
+        Public Sub New(parameters As ArrayList)
 
             ' This call is required by the designer.
             InitializeComponent()
@@ -25,7 +26,12 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim today = Now()
             dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
             dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
-            _reportFileName = reportFileName
+            _reportFileName = parameters(0)
+            If parameters.Count() > 1 Then
+                For i = 1 To parameters.Count() - 1
+                    _reportParameters.Add(parameters(i))
+                Next
+            End If
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
@@ -38,10 +44,22 @@ Namespace PresentationLayer.Views.Forms.Reports
                 reportName = Messaging.TranslateCaption($"Shift Summary Report")
                 reportTitle = Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName, "beginningDate", bDate, "endingDate", eDate})
                 Dim cFormCulture = FormCulture
+                Dim parameters As New ArrayList
+                parameters.Add("BeginningDate")
+                parameters.Add(dtpEndingDate.Value)
+                parameters.Add("EndingDate")
+                parameters.Add(dtpEndingDate.Value)
+                If _reportParameters.Count() > 1 Then
+                    For i = 0 To _reportParameters.Count() - 1
+                        parameters.Add(_reportParameters(i))
+                    Next
+                End If
                 If Strings.Left(cFormCulture.Name, 2) = "ar" Then
-                    cForm = New ReportFormNew(_reportFileName+".rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate" )
+                    cForm = New ReportFormIGroup(_reportFileName + ".rpt", FormCulture, parameters)
+                    'cForm = New ReportFormIGroup(_reportFileName + ".rpt", FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", _reportParameters)
                 Else
-                    cForm = New ReportFormNew(_reportFileName+".rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate" )
+                    cForm = New ReportFormIGroup(_reportFileName + ".rpt", FormCulture, parameters)
+                    'cForm = New ReportFormIGroup(_reportFileName + ".rpt", FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", _reportParameters)
                 End If
                 cForm.Show()
             Else
