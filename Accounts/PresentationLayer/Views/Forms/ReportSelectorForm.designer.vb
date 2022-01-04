@@ -1,0 +1,172 @@
+﻿Imports AATM.Libraries.CBaseControlsLibrary
+Imports AATM.PresentationLayer.Forms
+
+Namespace PresentationLayer.Views.Forms
+    <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+    Partial Class ReportSelectorForm
+        Inherits CFormBase
+
+        'Form overrides dispose to clean up the component list.
+        <System.Diagnostics.DebuggerNonUserCode()>
+        Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+            MyBase.Dispose(disposing)
+        End Sub
+
+        'Required by the Windows Form Designer
+        Private components As System.ComponentModel.IContainer
+
+        'NOTE: The following procedure is required by the Windows Form Designer
+        'It can be modified using the Windows Form Designer.  
+        'Do not modify it using the code editor.
+        <System.Diagnostics.DebuggerStepThrough()>
+        Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReportSelectorForm))
+        Me.DataGridViewReportList = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.ReportName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.bsReportList = New System.Windows.Forms.BindingSource(Me.components)
+        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.DataGridViewReportList,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.bsReportList,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.SuspendLayout
+        '
+        'TranslatorDAC
+        '
+        Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
+        '
+        'AppDataDAC
+        '
+        Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
+        '
+        'DataGridViewReportList
+        '
+        Me.DataGridViewReportList.AllowUserToAddRows = false
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
+        Me.DataGridViewReportList.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.DataGridViewReportList.AutoGenerateColumns = false
+        Me.DataGridViewReportList.BegFindValue = Nothing
+        Me.DataGridViewReportList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridViewReportList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ReportName, Me.dgvIdNo})
+        Me.DataGridViewReportList.DataSource = Me.bsReportList
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewReportList.DefaultCellStyle = DataGridViewCellStyle3
+        Me.DataGridViewReportList.DgvFooter = Nothing
+        Me.DataGridViewReportList.DisplayOnly = false
+        Me.DataGridViewReportList.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridViewReportList.Ea = Nothing
+        Me.DataGridViewReportList.EditingMode = false
+        Me.DataGridViewReportList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+        Me.DataGridViewReportList.EndFindValue = Nothing
+        Me.DataGridViewReportList.FieldDescription = Nothing
+        Me.DataGridViewReportList.FieldName = Nothing
+        Me.DataGridViewReportList.FieldsDictionary = Nothing
+        Me.DataGridViewReportList.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.DataGridViewReportList.FindEnabled = false
+        Me.DataGridViewReportList.FirstRowDeletionEnabled = true
+        Me.DataGridViewReportList.FirstRowInsertionEnabled = true
+        Me.DataGridViewReportList.IgnoreCase = false
+        Me.DataGridViewReportList.IsDirty = false
+        Me.DataGridViewReportList.Location = New System.Drawing.Point(0, 53)
+        Me.DataGridViewReportList.Name = "DataGridViewReportList"
+        Me.DataGridViewReportList.ReadOnly = true
+        Me.DataGridViewReportList.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.DataGridViewReportList.SecurityKey = ""
+        Me.DataGridViewReportList.SequenceColumn = "dgvSequence"
+        Me.DataGridViewReportList.SequenceFieldName = "Sequence"
+        Me.DataGridViewReportList.ShowFooter = false
+        Me.DataGridViewReportList.ShowInsertColumnWhenEditing = false
+        Me.DataGridViewReportList.Size = New System.Drawing.Size(476, 510)
+        Me.DataGridViewReportList.TabIndex = 11
+        Me.DataGridViewReportList.Translatable = true
+        '
+        'ReportName
+        '
+        Me.ReportName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.ReportName.DataPropertyName = "ReportName"
+        Me.ReportName.HeaderText = "Report Name"
+        Me.ReportName.Name = "ReportName"
+        Me.ReportName.ReadOnly = true
+        '
+        'dgvIdNo
+        '
+        Me.dgvIdNo.BegFindValue = Nothing
+        Me.dgvIdNo.DataPropertyName = "IdNo"
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+        Me.dgvIdNo.DefaultCellStyle = DataGridViewCellStyle2
+        Me.dgvIdNo.EditingMode = false
+        Me.dgvIdNo.EndFindValue = Nothing
+        Me.dgvIdNo.FieldDescription = Nothing
+        Me.dgvIdNo.FieldName = Nothing
+        Me.dgvIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvIdNo.FindEnabled = false
+        Me.dgvIdNo.HeaderText = "IdNo"
+        Me.dgvIdNo.IgnoreCase = false
+        Me.dgvIdNo.Name = "dgvIdNo"
+        Me.dgvIdNo.ReadOnly = true
+        Me.dgvIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvIdNo.Translatable = false
+        Me.dgvIdNo.Visible = false
+        Me.dgvIdNo.Width = 50
+        '
+        'bsReportList
+        '
+        Me.bsReportList.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.ReportModel)
+        '
+        'ReportSelector
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
+        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"),System.Drawing.Image)
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile
+        Me.ClientSize = New System.Drawing.Size(476, 563)
+        Me.Controls.Add(Me.DataGridViewReportList)
+        Me.MinimumSize = New System.Drawing.Size(300, 590)
+        Me.Name = "ReportSelector"
+        Me.Text = "Report Selector"
+        Me.Controls.SetChildIndex(Me.DataGridViewReportList, 0)
+        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.DataGridViewReportList,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.bsReportList,System.ComponentModel.ISupportInitialize).EndInit
+        Me.ResumeLayout(false)
+        Me.PerformLayout
+
+End Sub
+        Friend WithEvents bsReportList As Windows.Forms.BindingSource
+        Friend WithEvents JournalItemIdNoDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
+        Friend WithEvents OpenInvoiceIdNoDataGridViewTextBoxColumn1 As Windows.Forms.DataGridViewTextBoxColumn
+        Friend WithEvents dgvSequenceCad As CDgvTextColumn
+        Friend WithEvents DataGridViewTextBoxColumn4 As Windows.Forms.DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewTextBoxColumn5 As Windows.Forms.DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewCheckBoxColumn1 As Windows.Forms.DataGridViewCheckBoxColumn
+        Friend WithEvents PcsIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents IdNoDataGridViewTextBoxColumn As CDgvTextColumn
+        Friend WithEvents EmployeeNameDataGridViewTextBoxColumn As CDgvTextColumn
+        Friend WithEvents NationalIdNoDataGridViewTextBoxColumn As CDgvTextColumn
+        Friend WithEvents PictureDataGridViewImageColumn As DataGridViewImageColumn
+        Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewImageColumn1 As DataGridViewImageColumn
+        Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewTextBoxColumn8 As DataGridViewTextBoxColumn
+        Friend WithEvents DataGridViewImageColumn2 As DataGridViewImageColumn
+        Friend WithEvents DataGridViewReportList As CDataGridView
+        Friend WithEvents ReportName As DataGridViewTextBoxColumn
+        Friend WithEvents dgvIdNo As CDgvTextColumn
+    End Class
+End Namespace

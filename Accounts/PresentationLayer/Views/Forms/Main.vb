@@ -1150,7 +1150,7 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of EmployeeInfo)()
         End Sub
 
-        Private Sub SimplePasswordGeneratorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SimplePasswordGeneratorToolStripMenuItem.Click
+        Private Sub SimplePasswordGeneratorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSimplePasswordGenerator.Click
             PasswordGenerator.Show()
         End Sub
 
@@ -1160,6 +1160,14 @@ Namespace PresentationLayer.Views.Forms
             parameters.Add("ReportTitle")
             parameters.Add("Revenue/Sale Vat Report Summary")
             RunForm(Of DateRangeEntry, ArrayList)(parameters)
+        End Sub
+
+        Private Sub ReportSelectorToolStripMenuItem_Click(sender As Object, e As EventArgs) 
+
+        End Sub
+
+        Private Sub ToolStripMenuItemReportSelector_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemReportSelector.Click
+            RunForm(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel))()
         End Sub
     End Class
 
