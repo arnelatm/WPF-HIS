@@ -31,14 +31,6 @@ Namespace AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = "SystemViewName") As List(Of DefaultFieldValue) _
-            Implements IDefaultFieldValueDao.GetAll
-            Dim sql As String =
-                    "SELECT " & FieldList &
-                    " FROM [DefaultFieldValue_View] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
         Public Function UpdateRecord(ByRef defaultFieldValue As DefaultFieldValue) As Integer _
             Implements IDefaultFieldValueDao.UpdateRecord
             Dim sql As String =

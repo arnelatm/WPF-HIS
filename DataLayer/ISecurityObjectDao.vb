@@ -5,8 +5,8 @@ Public Interface ISecurityObjectDao
     ' gets a specific SecurityObject
     Function GetRecordByIdNo(idNo) As SecurityObject
 
-    ' gets a sorted list of all SecurityObjects
-    Function GetAll(Optional ByVal sortExpression As String = "SecurityObjectName") As List(Of SecurityObject)
+    '' gets a sorted list of all SecurityObjects
+    'Function GetAll(Optional ByVal sortExpression As String = "SecurityObjectName") As List(Of SecurityObject)
 
     ' Add a SecurityObject
     Function AddRecord(ByRef securityObject As SecurityObject) As Integer

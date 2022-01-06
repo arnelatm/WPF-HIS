@@ -9,11 +9,11 @@ Namespace DataLayer.AdoNet
 
     Public Class SupplierDao
         Inherits CommonDao
-        Implements IDaoAll(Of Supplier), IDaoContacts(Of Supplier), IDaoAutoCode
+        Implements iDao(Of Supplier), IDaoContacts(Of Supplier), IDaoAutoCode
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordByIdNo(idNo) As Supplier Implements IDaoAll(Of Supplier).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As Supplier Implements iDao(Of Supplier).GetRecordByIdNo
             Dim sql As String =
                     "SELECT " &
                     "AccountStatus," &
@@ -61,18 +61,7 @@ Namespace DataLayer.AdoNet
             'Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Supplier) _
-            Implements IDaoAll(Of Supplier).GetAll
-            If sortExpression Is Nothing Then
-                sortExpression = "SupplierName ASC"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, SupplierCode, SupplierName, SupplierNameAra " &
-                    "   FROM [Supplier] order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function UpdateRecord(ByRef supplier As Supplier) As Integer Implements IDaoAll(Of Supplier).UpdateRecord
+        Public Function UpdateRecord(ByRef supplier As Supplier) As Integer Implements iDao(Of Supplier).UpdateRecord
             Dim sql As String =
                     "UPDATE [Supplier] " &
                     "SET " &
@@ -115,7 +104,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(supplier))
         End Function
 
-        Public Function AddRecord(ByRef supplier As Supplier) As Integer Implements IDaoAll(Of Supplier).AddRecord
+        Public Function AddRecord(ByRef supplier As Supplier) As Integer Implements iDao(Of Supplier).AddRecord
             Dim sql As String =
                     "INSERT INTO [Supplier] (" &
                     "AccountStatus," &

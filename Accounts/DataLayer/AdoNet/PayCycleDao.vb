@@ -9,11 +9,11 @@ Namespace DataLayer.AdoNet
 
     Public Class PayCycleDao
         Inherits CommonDao
-        Implements IDaoAll(Of PayCycle)
+        Implements iDao(Of PayCycle)
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordByIdNo(idNo) As PayCycle Implements IDaoAll(Of PayCycle).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As PayCycle Implements iDao(Of PayCycle).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, PayFrequency, PayCycleCode, PayCycleName, PayCycleNameAra, Notes " &
                     "   FROM [PayCycle]" &
@@ -22,18 +22,7 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of PayCycle) _
-            Implements IDaoAll(Of PayCycle).GetAll
-            If sortExpression = Nothing Then
-                sortExpression = "PayCycleName ASC"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, PayCycleCode, PayCycleName, PayCycleNameAra" &
-                    "   FROM [PayCycle] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function UpdateRecord(ByRef PayCycle As PayCycle) As Integer Implements IDaoAll(Of PayCycle).UpdateRecord
+        Public Function UpdateRecord(ByRef PayCycle As PayCycle) As Integer Implements iDao(Of PayCycle).UpdateRecord
             Dim sql As String =
                     " UPDATE [PayCycle] Set " &
                     " PayFrequency = @PayFrequency," &
@@ -45,7 +34,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(PayCycle))
         End Function
 
-        Public Function AddRecord(ByRef PayCycle As PayCycle) As Integer Implements IDaoAll(Of PayCycle).AddRecord
+        Public Function AddRecord(ByRef PayCycle As PayCycle) As Integer Implements iDao(Of PayCycle).AddRecord
             Dim sql As String =
                     " INSERT INTO [PayCycle] " &
                     " (PayFrequency,PayCycleCode,PayCycleName,PayCycleNameAra,Notes) " &

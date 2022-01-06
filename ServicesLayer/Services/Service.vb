@@ -99,19 +99,19 @@ Namespace Services
         Public Property DataBo As Object
         Public Property DataDao As Object
 
-        Private ReadOnly Property SecurityGroupDao As IDaoAll(Of SecurityGroup)
+        Private ReadOnly Property SecurityGroupDao As IDao(Of SecurityGroup)
             Get
                 Return Factory.CreateDao("SecurityGroup")
             End Get
         End Property
 
-        Private ReadOnly Property SecurityObjectDao As IDaoAll(Of SecurityObject)
+        Private ReadOnly Property SecurityObjectDao As IDao(Of SecurityObject)
             Get
                 Return Factory.CreateDao("SecurityObject")
             End Get
         End Property
 
-        Private ReadOnly Property UserDao As IDaoAll(Of User)
+        Private ReadOnly Property UserDao As IDao(Of User)
             Get
                 Return Factory.CreateDao("User")
             End Get
@@ -334,9 +334,9 @@ Namespace Services
             Return DataDao.DelUpdateTvp(dtTable, groupKey)
         End Function
 
-        Public Overloads Function GetAll(Optional ByRef sortKey As String = Nothing) Implements IService.GetAll
-            Return DataDao.GetAll(sortKey)
-        End Function
+        'Public Overloads Function GetAll(Optional ByRef sortKey As String = Nothing) Implements IService.GetAll
+        '    Return DataDao.GetAll(sortKey)
+        'End Function
 
         Public Function GetControlSecurityIdNo(searchValue As String, Optional menu As Boolean = False) As String Implements IService.GetControlSecurityIdNo
             Return BaseDao.GetControlSecurityIdNo(searchValue, menu)

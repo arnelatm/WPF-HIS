@@ -9,11 +9,11 @@ Namespace DataLayer.AdoNet
 
     Public Class BankDao
         Inherits CommonDao
-        Implements IDaoAll(Of Bank)
+        Implements iDao(Of Bank)
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordByIdNo(idNo) As Bank Implements IDaoAll(Of Bank).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As Bank Implements iDao(Of Bank).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, BankCode, BankName, BankNameAra, Notes" &
                     "   FROM [Bank]" &
@@ -22,18 +22,7 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Bank) _
-            Implements IDaoAll(Of Bank).GetAll
-            If sortExpression = Nothing Then
-                sortExpression = "BankName ASC"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, BankCode, BankName, BankNameAra, Notes" &
-                    "   FROM [Bank] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function UpdateRecord(ByRef bank As Bank) As Integer Implements IDaoAll(Of Bank).UpdateRecord
+        Public Function UpdateRecord(ByRef bank As Bank) As Integer Implements iDao(Of Bank).UpdateRecord
             Dim sql As String =
                     " UPDATE [Bank]" &
                     "    SET BankCode = @BankCode," &
@@ -44,7 +33,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(bank))
         End Function
 
-        Public Function AddRecord(ByRef bank As Bank) As Integer Implements IDaoAll(Of Bank).AddRecord
+        Public Function AddRecord(ByRef bank As Bank) As Integer Implements iDao(Of Bank).AddRecord
             Dim sql As String =
                     " INSERT INTO [Bank] " &
                     " (BankCode,BankName,BankNameAra,Notes) " &

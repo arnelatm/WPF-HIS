@@ -6,7 +6,7 @@ Namespace AdoNet
 
     Public Class SecurityGroupDao
         Inherits BaseDao
-        Implements IDaoAll(Of SecurityGroup), IDaoChild(Of GroupAccess)
+        Implements IDao(Of SecurityGroup), IDaoChild(Of GroupAccess)
 
         Private ReadOnly Db As New Db()
 
@@ -21,17 +21,6 @@ Namespace AdoNet
                 data.GroupAccesses = GetRecordsWithGroupIdNo(idNo, "FullPathName")
             End If
             Return data
-        End Function
-
-        Private Function GetAll(Optional sortExpression As String = Nothing) As List(Of SecurityGroup) _
-            Implements IDaoAll(Of SecurityGroup).GetAll
-            If sortExpression Is Nothing Then
-                sortExpression = "SecurityGroupName ASC"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, Notes, ParentIdNo, SecurityGroupCode, SecurityGroupName, SecurityGroupNameAra" &
-                    "   FROM [SecurityGroup] order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
         End Function
 
         Public Function UpdateRecord(ByRef securityGroup As SecurityGroup) As Integer _

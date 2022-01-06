@@ -9,11 +9,11 @@ Namespace DataLayer.AdoNet
 
     Public Class DepositTypeDao1
         Inherits CommonDao
-        Implements IDaoAll(Of DepositType)
+        Implements iDao(Of DepositType)
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordByIdNo(idNo) As DepositType Implements IDaoAll(Of DepositType).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As DepositType Implements iDao(Of DepositType).GetRecordByIdNo
             Dim sql As String =
                     "SELECT " &
                     "AccountIdNo," &
@@ -33,27 +33,7 @@ Namespace DataLayer.AdoNet
             Return x
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of DepositType) _
-            Implements IDaoAll(Of DepositType).GetAll
-            If sortExpression Is Nothing Then
-                sortExpression = "DepositTypeName ASC"
-            End If
-            Dim sql As String = " SELECT " &
-                    "AccountIdNo," &
-                    "BankChargesAccountIdNo," &
-                    "BankChargesVatAccountIdNo," &
-                    "DepositTypeCode," &
-                    "DepositTypeName," &
-                    "DepositTypeNameAra," &
-                    "IdNo," &
-                    "Notes," &
-                    "Rate," &
-                    "WithBankCharges" &
-                    " FROM [DepositType] order by DepositTypeName"
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function UpdateRecord(ByRef depositType As DepositType) As Integer Implements IDaoAll(Of DepositType).UpdateRecord
+        Public Function UpdateRecord(ByRef depositType As DepositType) As Integer Implements iDao(Of DepositType).UpdateRecord
             Dim sql As String =
                     "UPDATE [DepositType] SET " &
                     "AccountIdNo = @AccountIdNo," &
@@ -69,7 +49,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(depositType))
         End Function
 
-        Public Function AddRecord(ByRef depositType As DepositType) As Integer Implements IDaoAll(Of DepositType).AddRecord
+        Public Function AddRecord(ByRef depositType As DepositType) As Integer Implements iDao(Of DepositType).AddRecord
             Dim sql As String =
                     "INSERT INTO [DepositType] (" &
                     "AccountIdNo," &

@@ -8,7 +8,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class PayElementDao
-        Implements IDao(Of PayElement), IDaoAll(Of PayElement), IDaoGetRecords(Of PayElement), IDaoGetRecord(Of PayElement)
+        Implements IDao(Of PayElement), IDaoGetRecords(Of PayElement), IDaoGetRecord(Of PayElement)
 
         Private Const FieldList = "AccountIdNo," &
                                   "Active," &
@@ -159,13 +159,6 @@ Namespace DataLayer.AdoNet
                                     "@Unit", PayElement.Unit,
                                     "@UsePayGroups", PayElement.UsePayGroups
                                 }
-        End Function
-
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of PayElement) Implements IDaoAll(Of PayElement).GetAll
-            Dim sql As String =
-                    "SELECT " & FieldList &
-                    " FROM [PayElement]"
-            Return _db.Read(sql, Make).ToList()
         End Function
 
         Public Function GetDaoRecords(Optional filter As String = Nothing) As List(Of PayElement) Implements IDaoGetRecords(Of PayElement).GetDaoRecords

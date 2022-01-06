@@ -9,11 +9,11 @@ Namespace DataLayer.AdoNet
 
     Public Class DesignationDao
         Inherits CommonDao
-        Implements IDaoAll(Of Designation), IDaoAutoCode
+        Implements iDao(Of Designation), IDaoAutoCode
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordByIdNo(idNo) As Designation Implements IDaoAll(Of Designation).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As Designation Implements iDao(Of Designation).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, DesignationCode, DesignationName, DesignationNameFemale, DesignationNameAra, DesignationNameFemaleAra, Notes" &
                     "   FROM [Designation]" &
@@ -22,17 +22,7 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Designation) Implements IDaoAll(Of Designation).GetAll
-            If sortExpression Is Nothing Then
-                sortExpression = "DesignationName ASC"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, DesignationCode, DesignationName, DesignationNameAra, Notes" &
-                    "   FROM [Designation] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function UpdateRecord(ByRef designation As Designation) As Integer Implements IDaoAll(Of Designation).UpdateRecord
+        Public Function UpdateRecord(ByRef designation As Designation) As Integer Implements iDao(Of Designation).UpdateRecord
             Dim sql As String =
                     " UPDATE [Designation]" &
                     "    SET DesignationCode = @DesignationCode," &
@@ -46,7 +36,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(designation))
         End Function
 
-        Public Function AddRecord(ByRef designation As Designation) As Integer Implements IDaoAll(Of Designation).AddRecord
+        Public Function AddRecord(ByRef designation As Designation) As Integer Implements iDao(Of Designation).AddRecord
             Dim sql As String =
                     " INSERT INTO [Designation] " &
                     " (DesignationCode,DesignationName,DesignationNameFemale,DesignationNameAra,DesignationNameFemaleAra,Notes) " &

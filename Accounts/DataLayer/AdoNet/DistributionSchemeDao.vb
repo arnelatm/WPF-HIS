@@ -9,11 +9,11 @@ Namespace DataLayer.AdoNet
 
     Public Class DistributionSchemeDao
         Inherits CommonDao
-        Implements IDaoAll(Of DistributionScheme)
+        Implements iDao(Of DistributionScheme)
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordByIdNo(idNo) As DistributionScheme Implements IDaoAll(Of DistributionScheme).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As DistributionScheme Implements iDao(Of DistributionScheme).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, DistributionSchemeName, DistributionSchemeNameAra, DistributionSchemeCode, ValidityStartDate,  ValidityEndDate, Notes" &
                     "   FROM [DistributionScheme]" &
@@ -22,19 +22,8 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of DistributionScheme) _
-            Implements IDaoAll(Of DistributionScheme).GetAll
-            If sortExpression Is Nothing Then
-                sortExpression = "IdNo"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, DistributionSchemeCode, DistributionSchemeName, DistributionSchemeNameAra " &
-                    "   FROM [DistributionScheme] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
         Public Function UpdateRecord(ByRef distributionScheme As DistributionScheme) As Integer _
-            Implements IDaoAll(Of DistributionScheme).UpdateRecord
+            Implements iDao(Of DistributionScheme).UpdateRecord
             Dim sql As String =
                     " UPDATE [DistributionScheme]" &
                     "    SET DistributionSchemeName = @DistributionSchemeName," &
@@ -48,7 +37,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function AddRecord(ByRef distributionScheme As DistributionScheme) As Integer _
-            Implements IDaoAll(Of DistributionScheme).AddRecord
+            Implements iDao(Of DistributionScheme).AddRecord
             Dim sql As String =
                     " INSERT INTO [DistributionScheme] " &
                     " (DistributionSchemeName,DistributionSchemeNameAra,DistributionSchemeCode,ValidityStartDate,ValidityEndDate,Notes) " &

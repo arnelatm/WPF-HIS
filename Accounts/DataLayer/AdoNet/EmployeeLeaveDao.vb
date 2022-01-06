@@ -12,7 +12,7 @@ Namespace DataLayer.AdoNet
 
     Public Class EmployeeLeaveDao
         Inherits CommonDao
-        Implements IDaoAll(Of EmployeeLeave)
+        Implements IDao(Of EmployeeLeave)
 
         Private ReadOnly Db As New Db()
 
@@ -30,7 +30,7 @@ Namespace DataLayer.AdoNet
                                   "StartDate," &
                                   "SupervisorIdNo"
 
-        Public Function GetRecordByIdNo(idNo) As EmployeeLeave Implements IDaoAll(Of EmployeeLeave).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As EmployeeLeave Implements IDao(Of EmployeeLeave).GetRecordByIdNo
             Dim sql As String = "SELECT " & FieldList &
                     " FROM EmployeeLeave_View" &
                     " WHERE IdNo = @IdNo"
@@ -42,18 +42,7 @@ Namespace DataLayer.AdoNet
             Return data
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of EmployeeLeave) _
-            Implements IDaoAll(Of EmployeeLeave).GetAll
-            If sortExpression = Nothing Then
-                sortExpression = " ASC"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, EmployeeIdNo" &
-                    "   FROM [EmployeeLeave_View] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function UpdateRecord(ByRef EmployeeLeave As EmployeeLeave) As Integer Implements IDaoAll(Of EmployeeLeave).UpdateRecord
+        Public Function UpdateRecord(ByRef EmployeeLeave As EmployeeLeave) As Integer Implements IDao(Of EmployeeLeave).UpdateRecord
             Dim sql As String =
                     " UPDATE [EmployeeLeave]" &
                     " SET EnteredBy = @EnteredBy," &
@@ -68,7 +57,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(EmployeeLeave))
         End Function
 
-        Public Function AddRecord(ByRef EmployeeLeave As EmployeeLeave) As Integer Implements IDaoAll(Of EmployeeLeave).AddRecord
+        Public Function AddRecord(ByRef EmployeeLeave As EmployeeLeave) As Integer Implements IDao(Of EmployeeLeave).AddRecord
             Dim sql As String =
                     " INSERT INTO [EmployeeLeave] " &
                     " (EnteredBy,EmployeeIdNo,EndDate,FullDay,HolidayIdNo,LeaveIdNo,LeaveReason,StartDate) " &
@@ -108,13 +97,21 @@ Namespace DataLayer.AdoNet
                                 }
         End Function
 
-        Public Function GetEmployeeLeaveList(Optional sortExpression As String = Nothing) As List(Of EmployeeLeave)
-            If sortExpression Is Nothing Then
-                sortExpression = "EmployeeName ASC"
-            End If
-            Dim sql As String = " SELECT " & FieldList & " From EmployeeLeave Order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
+        'Public Function GetEmployeeLeaveList(Optional sortExpression As String = Nothing) As List(Of EmployeeLeave) Implements IDaoList(Of EmployeeLeave).GetList
+        '    If sortExpression Is Nothing Then
+        '        sortExpression = "EmployeeName ASC"
+        '    End If
+        '    Dim sql As String = " SELECT " & FieldList & " From EmployeeLeave Order by " & sortExpression
+        '    Return Db.Read(sql, Make).ToList()
+        'End Function
+
+        'Public Function GetAllEmployeeLeaves(employeeIdNo As Int32, leaveIdNo As Int16) As List(Of EmployeeLeave) 
+        '    Dim sql As String = "SELECT " & FieldList &
+        '                        " FROM [EmployeeLeave_View] where EmployeeIdNo = @employeeIdNo and LeaveIdNo = @leaveIdNo "
+        '    Dim params() As Object = {"@employeeIdNo", employeeIdNo, "@LeaveIdNo", leaveIdNo}
+        '    Dim data = Db.Read(sql, Make, params).ToList()
+        '    Return data
+        'End Function
 
         Public Function GetEmployeeLeaveHistory(ByVal idNo As Int32) As List(Of EmployeeLeaveApprovalHistory)
             Dim sql As String = "SELECT " &
@@ -193,13 +190,6 @@ Namespace DataLayer.AdoNet
             Return data
         End Function
 
-        Public Function GetAllEmployeeLeaves(employeeIdNo As Int32, leaveIdNo As Int16)
-            Dim sql As String = "SELECT " & FieldList &
-                                " FROM [EmployeeLeave_View] where EmployeeIdNo = @employeeIdNo and LeaveIdNo = @leaveIdNo "
-            Dim params() As Object = {"@employeeIdNo", employeeIdNo, "@LeaveIdNo", leaveIdNo}
-            Dim data = Db.Read(sql, Make, params).ToList()
-            Return data
-        End Function
 
         Private Shared ReadOnly MakeLeaveApprovalHistory As Func(Of IDataReader, EmployeeLeaveApprovalHistory) =
                                     Function(reader) _

@@ -8,11 +8,11 @@ Namespace DataLayer.AdoNet
 
     Public Class DepartmentDao
         Inherits CommonDao
-        Implements IDaoAll(Of Department)
+        Implements iDao(Of Department)
 
         Private db As New Db()
 
-        Public Function GetRecordByIdNo(idNo) As Department Implements IDaoAll(Of Department).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As Department Implements iDao(Of Department).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, DepartmentCode, DepartmentName, DepartmentNameAra, ParentIdNo, Notes, RevCostCenterIdNo, SortKey" &
                     "   FROM [Department_View]" &
@@ -22,25 +22,7 @@ Namespace DataLayer.AdoNet
             Return x
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Department) _
-            Implements IDaoAll(Of Department).GetAll
-            If sortExpression = Nothing Then
-                sortExpression = "SortKey ASC"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, DepartmentCode, DepartmentName, DepartmentNameAra, ParentIdNo, Notes, RevCostCenterIdNo, SortKey" &
-                    "   FROM [Department_View] order by '" + sortExpression + "'"
-            Return db.Read(sql, _make).ToList()
-        End Function
-
-        'Public Function GetAll(Optional ByVal sortExpression As String = "DepartmentName ASC") As List(Of Department) Implements IDaoAll(Of Department).GetAll
-        '    Dim sql As String =
-        '        " SELECT IdNo, DepartmentCode, DepartmentName, DepartmentNameAra, ParentIdNo, Notes, RevCostCenterIdNo, RevCostCenterIdNo" &
-        '        "   FROM [Department_View] " & "order by sortKey"
-        '    Return _db.Read(sql, _make).ToList()
-        'End Function
-
-        Public Function AddRecord(ByRef department As Department) As Integer Implements IDaoAll(Of Department).AddRecord
+        Public Function AddRecord(ByRef department As Department) As Integer Implements iDao(Of Department).AddRecord
             Dim sql As String =
                     "INSERT INTO [Department] " &
                     "(DepartmentCode,DepartmentName,DepartmentNameAra,ParentIdNo,Notes,RevCostCenterIdNo) VALUES " &
@@ -49,7 +31,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function UpdateRecord(ByRef department As Department) As Integer _
-            Implements IDaoAll(Of Department).UpdateRecord
+            Implements iDao(Of Department).UpdateRecord
             Dim sql As String =
                     " UPDATE [Department]" &
                     "    SET DepartmentCode = @DepartmentCode," &

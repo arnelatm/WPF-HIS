@@ -9,11 +9,11 @@ Namespace DataLayer.AdoNet
 
     Public Class JournalPrefixDao
         Inherits CommonDao
-        Implements IDaoAll(Of JournalPrefix)
+        Implements iDao(Of JournalPrefix)
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordByIdNo(idNo) As JournalPrefix Implements IDaoAll(Of JournalPrefix).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As JournalPrefix Implements iDao(Of JournalPrefix).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, JournalCode, JournalName, JournalNameAra, JournalCodeAra" &
                     "   FROM [JournalPrefix]" &
@@ -22,18 +22,7 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of JournalPrefix) _
-            Implements IDaoAll(Of JournalPrefix).GetAll
-            If sortExpression = Nothing Then
-                sortExpression = " ASC"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, JournalCode" &
-                    "   FROM [JournalPrefix] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function UpdateRecord(ByRef JournalPrefix As JournalPrefix) As Integer Implements IDaoAll(Of JournalPrefix).UpdateRecord
+        Public Function UpdateRecord(ByRef JournalPrefix As JournalPrefix) As Integer Implements iDao(Of JournalPrefix).UpdateRecord
             Dim sql As String =
                     " UPDATE [JournalPrefix]" &
                     " SET JournalCode = @JournalCode," &
@@ -44,7 +33,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(JournalPrefix))
         End Function
 
-        Public Function AddRecord(ByRef JournalPrefix As JournalPrefix) As Integer Implements IDaoAll(Of JournalPrefix).AddRecord
+        Public Function AddRecord(ByRef JournalPrefix As JournalPrefix) As Integer Implements iDao(Of JournalPrefix).AddRecord
             Dim sql As String =
                     " INSERT INTO [JournalPrefix] " &
                     " (JournalCode,JournalNameAra,JournalCodeAra,JournalName) " &

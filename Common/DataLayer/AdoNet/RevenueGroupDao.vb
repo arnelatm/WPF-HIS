@@ -8,11 +8,11 @@ Namespace DataLayer.AdoNet
 
     Public Class RevenueGroupDao
         Inherits CommonDao
-        Implements IDaoAll(Of RevenueGroup)
+        Implements iDao(Of RevenueGroup)
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordByIdNo(idNo) As RevenueGroup Implements IDaoAll(Of RevenueGroup).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As RevenueGroup Implements iDao(Of RevenueGroup).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, ParentIdNo, RevenueGroupCode, RevenueGroupName, RevenueGroupNameAra, LevelNumber, Notes, SortKey" &
                     "   FROM [RevenueGroup_View]" &
@@ -21,27 +21,8 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of RevenueGroup) _
-            Implements IDaoAll(Of RevenueGroup).GetAll
-            If sortExpression Is Nothing Then
-                sortExpression = "SortKey"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, ParentIdNo, RevenueGroupCode, RevenueGroupName, RevenueGroupNameAra, LevelNumber, Notes, SortKey" &
-                    "   FROM [RevenueGroup_View] order by '" + sortExpression = "'"
-            Return _db.Read(sql, Make).ToList()
-        End Function
-
-        'Public Function GetAll(Optional sortExpression As String = "RevenueGroupName ASC") As List(Of RevenueGroup) _
-        '    Implements IDaoAll(Of RevenueGroup).GetAll
-        '    Dim sql As String =
-        '            " SELECT IdNo, ParentIdNo, RevenueGroupCode, RevenueGroupName, RevenueGroupNameAra, LevelNumber, Notes, SortKey" &
-        '            "   FROM [RevenueGroup] " & "order by " & sortExpression
-        '    Return Db.Read(sql, Make).ToList()
-        'End Function
-
         Public Function UpdateRecord(ByRef revenueGroup As RevenueGroup) As Integer _
-            Implements IDaoAll(Of RevenueGroup).UpdateRecord
+            Implements iDao(Of RevenueGroup).UpdateRecord
             Dim sql As String =
                     " UPDATE [RevenueGroup]" &
                     "    SET ParentIdNo = @ParentIdNo," &
@@ -55,7 +36,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function AddRecord(ByRef revenueGroup As RevenueGroup) As Integer _
-            Implements IDaoAll(Of RevenueGroup).AddRecord
+            Implements iDao(Of RevenueGroup).AddRecord
             Dim sql As String =
                     " INSERT INTO [RevenueGroup] " &
                     " (ParentIdNo,RevenueGroupCode,RevenueGroupName,RevenueGroupNameAra,Notes) " &

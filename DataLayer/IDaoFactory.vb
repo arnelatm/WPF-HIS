@@ -9,13 +9,13 @@ Public Interface IDaoFactory
     ReadOnly Property DefaultFieldValueDao As IDefaultFieldValueDao
     ReadOnly Property TblColPropDao As ITblColPropDao
     ReadOnly Property SaltDao As ISaltDao
-    ReadOnly Property UserDao As IDaoAll(Of User)
+    'ReadOnly Property UserDao As IDaoAll(Of User)
 
     'ReadOnly Property SecurityObjectDao As ISecurityObjectDao
     ReadOnly Property GroupAccessDao As IDaoChild(Of GroupAccess)
 
-    ReadOnly Property SecurityGroupDao As IDaoAll(Of SecurityGroup)
-    ReadOnly Property SecurityObjectDao As IDaoAll(Of SecurityObject)
+    'ReadOnly Property SecurityGroupDao As IDaoAll(Of SecurityGroup)
+    'ReadOnly Property SecurityObjectDao As IDaoAll(Of SecurityObject)
 
     Function CreateDao(classBasename As String, ParamArray arguments As Object())
 

@@ -11,36 +11,33 @@
 
 End Interface
 
-Public Interface IDaoGetRecordByIdNo(Of TBiz)
+Public Interface IDaoGetListByIdNo(Of TBiz)
 
     ' gets a specific record data
-    Function GetRecordByIdNo(idNo) As List(Of TBiz)
+    Function GetListByIdNo(idNo) As List(Of TBiz)
 
 End Interface
 
-Public Interface IDaoRead(Of TBiz)
+'Public Interface IDaoRead(Of TBiz)
 
-    ' gets a specific record data
-    Function GetRecordByIdNo(idNo) As TBiz
+'    ' gets a specific record data
+'    Function GetRecordByIdNo(idNo) As TBiz
 
-    Function GetAll(Optional ByVal sortExpression As String = Nothing) As List(Of TBiz)
+'End Interface
 
-End Interface
+'Public Interface IDaoAllOnly(Of TBiz)
 
-Public Interface IDaoAllOnly(Of TBiz)
+'    ' gets a specific record data
+'    Function GetAll(Optional ByVal sortExpression As String = Nothing) As List(Of TBiz)
 
-    ' gets a specific record data
-    Function GetAll(Optional ByVal sortExpression As String = Nothing) As List(Of TBiz)
+'End Interface
 
-End Interface
+'Public Interface IDaoAll(Of TBiz)
 
-Public Interface IDaoAll(Of TBiz)
-    Inherits IDao(Of TBiz)
+'    ' gets a specific record data
+'    Function GetAll(Optional ByVal sortExpression As String = Nothing) As List(Of TBiz)
 
-    ' gets a specific record data
-    Function GetAll(Optional ByVal sortExpression As String = Nothing) As List(Of TBiz)
-
-End Interface
+'End Interface
 
 Public Interface IDaoList(Of TBiz)
 

@@ -27,7 +27,7 @@ Namespace Services
 
         Function FindFieldContinue(tableName As String, idNo As Int32, sortOrderKey As String) As Integer
 
-        Function GetAll(ByRef Optional sortKey As String = Nothing) As Object
+        'Function GetAll(ByRef Optional sortKey As String = Nothing) As Object
 
         'Function GetDefaultFieldValues(ByVal tableName As String)
 

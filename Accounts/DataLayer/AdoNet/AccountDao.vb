@@ -9,11 +9,11 @@ Namespace DataLayer.AdoNet
 
     Public Class AccountDao
         Inherits CommonDao
-        Implements IDaoAll(Of Account), IDaoAccount
+        Implements iDao(Of Account), IDaoAccount
 
         Private Db As New Db()
 
-        Public Function GetRecordByIdNo(idNo) As Account Implements IDaoAll(Of Account).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As Account Implements iDao(Of Account).GetRecordByIdNo
             Dim sql As String =
                     "SELECT " &
                     "AccountCode," &
@@ -68,19 +68,7 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make).ToList()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Account) _
-            Implements IDaoAll(Of Account).GetAll
-            If sortExpression Is Nothing Then
-                sortExpression = "AccountName Asc"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, ParentIdNo, AccountCode, AccountName, AccountNameAra, AccountGroup, DetailAccount, NormalBalance, " &
-                    " PayeeType, WithReconciliation, Active, Notes, LevelNumber, SortKey" &
-                    "   FROM [Account_View] order by sortKey"
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function UpdateRecord(ByRef account As Account) As Integer Implements IDaoAll(Of Account).UpdateRecord
+        Public Function UpdateRecord(ByRef account As Account) As Integer Implements iDao(Of Account).UpdateRecord
             Dim sql As String =
                     "UPDATE [Account] SET " &
                     "AccountCode = @AccountCode," &
@@ -99,7 +87,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(account))
         End Function
 
-        Public Function AddRecord(ByRef account As Account) As Integer Implements IDaoAll(Of Account).AddRecord
+        Public Function AddRecord(ByRef account As Account) As Integer Implements iDao(Of Account).AddRecord
             Dim sql As String =
                     "INSERT INTO [Account] (" &
                     "AccountCode," &

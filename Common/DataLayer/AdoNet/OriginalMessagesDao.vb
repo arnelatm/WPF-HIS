@@ -8,12 +8,12 @@ Namespace DataLayer.AdoNet
 
     Public Class OriginalMessagesDao
         Inherits CommonDao
-        Implements IDaoAll(Of OriginalMessages)
+        Implements iDao(Of OriginalMessages), IDaoList(Of OriginalMessages)
 
         Private ReadOnly _db As New Db
 
         Public Function GetRecordByIdNo(idNo) As OriginalMessages _
-            Implements IDaoAll(Of OriginalMessages).GetRecordByIdNo
+            Implements iDao(Of OriginalMessages).GetRecordByIdNo
             Dim sql As String = "select	o.[IdNo], " &
                                 "o.[MessageKey], " &
                                 "o.[Message], " &
@@ -33,19 +33,8 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of OriginalMessages) _
-            Implements IDaoAll(Of OriginalMessages).GetAll
-            If sortExpression Is Nothing Then
-                sortExpression = "MessageKey"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, MessageKey, Message, Caption, Notes" &
-                    "   FROM [OriginalMessages] " & "order by " & sortExpression
-            Return _db.Read(sql, Make).ToList()
-        End Function
-
         Public Function UpdateRecord(ByRef originalMessages As OriginalMessages) As Integer _
-            Implements IDaoAll(Of OriginalMessages).UpdateRecord
+            Implements iDao(Of OriginalMessages).UpdateRecord
             Dim sql As String =
                     " UPDATE [OriginalMessages]" &
                     "    SET MessageKey = @MessageKey," &
@@ -82,7 +71,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function AddRecord(ByRef originalMessage As OriginalMessages) As Integer _
-            Implements IDaoAll(Of OriginalMessages).AddRecord
+            Implements iDao(Of OriginalMessages).AddRecord
             Dim sql As String =
                     " INSERT INTO [OriginalMessages] " &
                     " (MessageKey,Message,Caption,Notes) " &
@@ -131,6 +120,23 @@ Namespace DataLayer.AdoNet
                                  "@TranslatedCaption", translatedMessage.TranslatedCaption}
         End Function
 
+        Public Function GetList(Optional sortExpression As String = Nothing) As List(Of OriginalMessages) Implements IDaoList(Of OriginalMessages).GetList
+            Dim sql As String = "select	o.[IdNo], " &
+                                "o.[MessageKey], " &
+                                "o.[Message], " &
+                                "o.[Caption], " &
+                                "o.Notes, " &
+                                "t.[IdNo] AS 'IdNoTranslated', " &
+                                "t.LanguageIdNo, " &
+                                "t.TranslatedMessage, " &
+                                "t.TranslatedCaption " &
+                                "FROM [dbo].[OriginalMessages] o " &
+                                "Left JOIN dbo.TranslatedMessages t " &
+                                "ON o.IdNo = t.MessageIdNo " &
+                                "Left JOIN dbo.Languages l " &
+                                "ON t.LanguageIdNo = l.IdNo " 
+            Return _db.Read(sql, Make).ToList()
+        End Function
     End Class
 
 End Namespace

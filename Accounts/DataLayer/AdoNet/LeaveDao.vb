@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
 
     Public Class LeaveDao
         Inherits CommonDao
-        Implements IDaoAll(Of Leave)
+        Implements iDao(Of Leave)
 
         Private ReadOnly Db As New Db()
 
@@ -28,7 +28,7 @@ Namespace DataLayer.AdoNet
                     "Notes," &
                     "PaidPercent"
 
-        Public Function GetRecordByIdNo(idNo) As Leave Implements IDaoAll(Of Leave).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As Leave Implements iDao(Of Leave).GetRecordByIdNo
             Dim sql As String =
                     " SELECT " & FieldList &
                     " FROM [Leave]" &
@@ -37,16 +37,7 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Leave) _
-            Implements IDaoAll(Of Leave).GetAll
-            If sortExpression = Nothing Then
-                sortExpression = "LeaveName ASC"
-            End If
-            Dim sql As String = "Select " & FieldList & " FROM [Leave] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function UpdateRecord(ByRef leave As Leave) As Integer Implements IDaoAll(Of Leave).UpdateRecord
+        Public Function UpdateRecord(ByRef leave As Leave) As Integer Implements iDao(Of Leave).UpdateRecord
             Dim sql As String =
                     " UPDATE [Leave] SET " &
                     " Cumulative = @Cumulative," &
@@ -65,7 +56,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(leave))
         End Function
 
-        Public Function AddRecord(ByRef leave As Leave) As Integer Implements IDaoAll(Of Leave).AddRecord
+        Public Function AddRecord(ByRef leave As Leave) As Integer Implements iDao(Of Leave).AddRecord
             Dim sql As String =
                     " INSERT INTO [Leave] " &
                     " (Cumulative,Holiday,LeaveAllowed,LeaveCode,LeaveCycle,LeaveName,LeaveNameAra,MaxCarryOver,MaxLimit,NoMaxLimit,Notes,PaidPercent)" &

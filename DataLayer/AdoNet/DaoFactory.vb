@@ -38,24 +38,24 @@ Namespace AdoNet
             End Get
         End Property
 
-        Public ReadOnly Property SecurityGroupDao As IDaoAll(Of SecurityGroup) Implements IDaoFactory.SecurityGroupDao
-            Get
-                Return New SecurityGroupDao()
-            End Get
-        End Property
+        'Public ReadOnly Property SecurityGroupDao As IDaoAll(Of SecurityGroup) Implements IDaoFactory.SecurityGroupDao
+        '    Get
+        '        Return New SecurityGroupDao()
+        '    End Get
+        'End Property
 
-        Public ReadOnly Property SecurityObjectDao As IDaoAll(Of SecurityObject) _
-            Implements IDaoFactory.SecurityObjectDao
-            Get
-                Return New SecurityObjectDao()
-            End Get
-        End Property
+        'Public ReadOnly Property SecurityObjectDao As IDaoAll(Of SecurityObject) _
+        '    Implements IDaoFactory.SecurityObjectDao
+        '    Get
+        '        Return New SecurityObjectDao()
+        '    End Get
+        'End Property
 
-        Private ReadOnly Property UserDao As IDaoAll(Of User) Implements IDaoFactory.UserDao
-            Get
-                Return New UserDao()
-            End Get
-        End Property
+        'Private ReadOnly Property UserDao As IDaoAll(Of User) Implements IDaoFactory.UserDao
+        '    Get
+        '        Return New UserDao()
+        '    End Get
+        'End Property
 
         Public Overridable Function CreateDao(classBasename As String, ParamArray arguments As Object()) As Object Implements IDaoFactory.CreateDao
             Dim className = $"AATM.DataLayer.AdoNet." + classBasename + "Dao"

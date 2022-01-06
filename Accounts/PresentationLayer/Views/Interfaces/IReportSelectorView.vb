@@ -14,7 +14,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property ReportTitle As String
         Property ReportTitleAra As String        
         Property ReportList As List(Of IReportView)
-
+        Event ReportDoubleClickEvent(IdNo As Int16)
     End Interface
 
 End Namespace

@@ -9,11 +9,11 @@ Namespace DataLayer.AdoNet
 
     Public Class PayGroupDao
         Inherits CommonDao
-        Implements IDaoAll(Of PayGroup)
+        Implements iDao(Of PayGroup)
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordByIdNo(idNo) As PayGroup Implements IDaoAll(Of PayGroup).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As PayGroup Implements iDao(Of PayGroup).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, ParentIdNo, PayGroupCode, PayGroupName, PayGroupNameAra, LevelNumber, Notes, SortKey" &
                     "   FROM PayGroup_View " &
@@ -22,19 +22,8 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of PayGroup) _
-            Implements IDaoAll(Of PayGroup).GetAll
-            If sortExpression = Nothing Then
-                sortExpression = "SortKey ASC"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, ParentIdNo, PayGroupCode, PayGroupName, PayGroupNameAra, LevelNumber, Notes, SortKey" &
-                    "   FROM PayGroup_View order by sortKey"
-            Return _db.Read(sql, Make).ToList()
-        End Function
-
         Public Function UpdateRecord(ByRef PayGroup As PayGroup) As Integer _
-            Implements IDaoAll(Of PayGroup).UpdateRecord
+            Implements iDao(Of PayGroup).UpdateRecord
             Dim sql As String =
                     " UPDATE [PayGroup]" &
                     "    SET ParentIdNo = @ParentIdNo," &
@@ -47,7 +36,7 @@ Namespace DataLayer.AdoNet
             Return _db.Update(sql, Take(PayGroup))
         End Function
 
-        Public Function AddRecord(ByRef PayGroup As PayGroup) As Integer Implements IDaoAll(Of PayGroup).AddRecord
+        Public Function AddRecord(ByRef PayGroup As PayGroup) As Integer Implements iDao(Of PayGroup).AddRecord
             Dim sql As String =
                     " INSERT INTO [PayGroup] " &
                     " (ParentIdNo,PayGroupCode,PayGroupName,PayGroupNameAra,Notes) " &

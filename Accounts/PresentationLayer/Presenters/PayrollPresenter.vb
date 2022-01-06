@@ -217,8 +217,6 @@ Namespace PresentationLayer.Presenters
             View.PayFrequency = GetFieldWithIdNo(View.PayCycleIdNo, "PayCycle", "PayFrequency")
             Dim employeeFilter = "PayCycleIdNo = " & View.PayCycleIdNo.ToString() & " And Active = 1"
             Dim activeEmployees = GetRecords("Employee", "EmployeeName", {"IdNo", "EmployeeName", "HiredDate", "ReleasedDate"}, employeeFilter)
-            'Dim earningDao = New EarningDao
-            'Dim earnings = earningDao.GetAll()
             Dim numberOfEmployees = Int(activeEmployees.Count() / 4)
             Dim daysInPeriod As Long
             Dim daysOffInPeriod As Long

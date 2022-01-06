@@ -8,11 +8,11 @@ Namespace DataLayer.AdoNet
 
     Public Class BranchDao
         Inherits CommonDao
-        Implements IDaoAll(Of Branch)
+        Implements iDao(Of Branch)
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordByIdNo(idNo) As Branch Implements IDaoAll(Of Branch).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As Branch Implements iDao(Of Branch).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, BranchCode, BranchName, BranchNameAra, Notes" &
                     "   FROM [Branch]" &
@@ -21,18 +21,8 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Branch) _
-            Implements IDaoAll(Of Branch).GetAll
-            If sortExpression Is Nothing Then
-                sortExpression = "BranchName"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, BranchCode, BranchName, BranchNameAra, Notes" &
-                    "   FROM [Branch] " & "order by " & sortExpression
-            Return _db.Read(sql, Make).ToList()
-        End Function
 
-        Public Function UpdateRecord(ByRef branch As Branch) As Integer Implements IDaoAll(Of Branch).UpdateRecord
+        Public Function UpdateRecord(ByRef branch As Branch) As Integer Implements iDao(Of Branch).UpdateRecord
             Dim sql As String =
                     " UPDATE [Branch]" &
                     "    SET BranchCode = @BranchCode," &
@@ -44,7 +34,7 @@ Namespace DataLayer.AdoNet
             Return _db.Update(sql, Take(branch))
         End Function
 
-        Public Function AddRecord(ByRef branch As Branch) As Integer Implements IDaoAll(Of Branch).AddRecord
+        Public Function AddRecord(ByRef branch As Branch) As Integer Implements iDao(Of Branch).AddRecord
             Dim sql As String =
                     " INSERT INTO [Branch] " &
                     " (BranchCode,BranchName,BranchNameAra,Notes) " &

@@ -8,12 +8,12 @@ Namespace DataLayer.AdoNet
 
     Public Class OriginalCaptionsDao
         Inherits CommonDao
-        Implements IDaoAll(Of OriginalCaptions)
+        Implements iDao(Of OriginalCaptions) ', IDaoList(Of OriginalCaptions)
 
         Private ReadOnly _db As New Db
 
         Public Function GetRecordByIdNo(idNo) As OriginalCaptions _
-            Implements IDaoAll(Of OriginalCaptions).GetRecordByIdNo
+            Implements iDao(Of OriginalCaptions).GetRecordByIdNo
             Dim sql As String = "select o.[IdNo]," &
                                 "o.[Caption] , " &
                                 "t.[IdNo] AS 'IdNoTranslated'," &
@@ -29,19 +29,19 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of OriginalCaptions) _
-            Implements IDaoAll(Of OriginalCaptions).GetAll
-            If sortExpression Is Nothing Then
-                sortExpression = "Caption"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, Caption" &
-                    "   FROM [OriginalCaptions] " & "order by " & sortExpression
-            Return _db.Read(sql, Make).ToList()
-        End Function
+        'Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of OriginalCaptions) _
+        '    Implements iDaoAll(Of OriginalCaptions).GetAll
+        '    If sortExpression Is Nothing Then
+        '        sortExpression = "Caption"
+        '    End If
+        '    Dim sql As String =
+        '            " SELECT IdNo, Caption" &
+        '            "   FROM [OriginalCaptions] " & "order by " & sortExpression
+        '    Return _db.Read(sql, Make).ToList()
+        'End Function
 
         Public Function UpdateRecord(ByRef originalCaptions As OriginalCaptions) As Integer _
-            Implements IDaoAll(Of OriginalCaptions).UpdateRecord
+            Implements iDao(Of OriginalCaptions).UpdateRecord
             Dim retVal As Integer = 0
             Dim sql As String = "UPDATE [OriginalCaptions] " &
                     "Set Caption = @Caption " &
@@ -69,7 +69,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function AddRecord(ByRef originalCaptions As OriginalCaptions) As Integer _
-            Implements IDaoAll(Of OriginalCaptions).AddRecord
+            Implements iDao(Of OriginalCaptions).AddRecord
             Dim sql As String = "INSERT INTO [OriginalCaptions] " &
                     "(Caption) " &
                     "VALUES (@Caption) "

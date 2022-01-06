@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
 
     Public Class ShiftSummaryDao
         Inherits CommonDao
-        Implements IDaoAll(Of ShiftSummary), IDaoGetRecords(Of ShiftSummary)
+        Implements iDao(Of ShiftSummary), IDaoGetRecords(Of ShiftSummary)
 
         Private ReadOnly Db As New Db()
 
@@ -21,7 +21,7 @@ Namespace DataLayer.AdoNet
                                   "IdNo," &
                                   "UserIdNo"
 
-        Public Function GetRecordByIdNo(idNo) As ShiftSummary Implements IDaoAll(Of ShiftSummary).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As ShiftSummary Implements iDao(Of ShiftSummary).GetRecordByIdNo
             Dim sql As String =
                     " SELECT " & FieldList &
                     "   FROM ShiftSummary" &
@@ -30,18 +30,7 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of ShiftSummary) _
-            Implements IDaoAll(Of ShiftSummary).GetAll
-            If sortExpression = Nothing Then
-                sortExpression = " ASC"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, UserIdNo" &
-                    "   FROM [ShiftSummary] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function UpdateRecord(ByRef ShiftSummary As ShiftSummary) As Integer Implements IDaoAll(Of ShiftSummary).UpdateRecord
+        Public Function UpdateRecord(ByRef ShiftSummary As ShiftSummary) As Integer Implements iDao(Of ShiftSummary).UpdateRecord
             Dim sql As String =
                     "UPDATE [ShiftSummary] Set " &
                     "Cards = @Cards, " &
@@ -53,7 +42,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(ShiftSummary))
         End Function
 
-        Public Function AddRecord(ByRef ShiftSummary As ShiftSummary) As Integer Implements IDaoAll(Of ShiftSummary).AddRecord
+        Public Function AddRecord(ByRef ShiftSummary As ShiftSummary) As Integer Implements iDao(Of ShiftSummary).AddRecord
             Dim sql As String =
                     "INSERT INTO [ShiftSummary] " &
                     "(Cash,Cards,DateEnd,DateStart,UserIdNo) " &
