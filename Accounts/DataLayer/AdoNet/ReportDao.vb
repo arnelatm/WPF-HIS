@@ -52,7 +52,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function GetList(Optional sortExpression As String = Nothing) As List(Of Report) Implements IDaoList(Of Report).GetList
-            If sortExpression Is Nothing Then
+            If sortExpression Is Nothing or sortExpression = "" Then
                 sortExpression = "ReportName ASC"
             End If
             Dim sql As String =
