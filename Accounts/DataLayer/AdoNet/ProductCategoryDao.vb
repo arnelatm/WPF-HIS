@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
 
     Public Class ProductCategoryDao
         Inherits CommonDao
-        Implements IDaoAll(Of ProductCategory)
+        Implements iDao(Of ProductCategory)
 
         Private ReadOnly Db As New Db()
 
@@ -17,7 +17,7 @@ Namespace DataLayer.AdoNet
 
         End Sub
 
-        Public Function GetRecordByIdNo(idNo) As ProductCategory Implements IDaoAll(Of ProductCategory).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As ProductCategory Implements iDao(Of ProductCategory).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, ProductCategoryCode, ProductCategoryName, ProductCategoryNameAra, Notes" &
                     "   FROM [ProductCategory]" &
@@ -26,18 +26,7 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of ProductCategory) _
-            Implements IDaoAll(Of ProductCategory).GetAll
-            If sortExpression Is Nothing Then
-                sortExpression = "ProductCategoryName ASC"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, ProductCategoryCode, ProductCategoryName, ProductCategoryNameAra, Notes" &
-                    "   FROM [ProductCategory] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function UpdateRecord(ByRef productCategory As ProductCategory) As Integer Implements IDaoAll(Of ProductCategory).UpdateRecord
+        Public Function UpdateRecord(ByRef productCategory As ProductCategory) As Integer Implements iDao(Of ProductCategory).UpdateRecord
             Dim sql As String =
                     " UPDATE [ProductCategory]" &
                     "    SET ProductCategoryCode = @ProductCategoryCode," &
@@ -49,7 +38,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(productCategory))
         End Function
 
-        Public Function AddRecord(ByRef productCategory As ProductCategory) As Integer Implements IDaoAll(Of ProductCategory).AddRecord
+        Public Function AddRecord(ByRef productCategory As ProductCategory) As Integer Implements iDao(Of ProductCategory).AddRecord
             Dim sql As String =
                     " INSERT INTO [ProductCategory] " &
                     " (ProductCategoryCode,ProductCategoryName,ProductCategoryNameAra,Notes) " &

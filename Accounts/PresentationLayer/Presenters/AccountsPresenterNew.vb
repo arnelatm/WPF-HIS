@@ -31,7 +31,7 @@ Namespace PresentationLayer.Presenters
             Dim depositTypeService As New AccountsService("DepositType")
             Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of DepositTypeModel)("DepositTypeName", cModel)
             Dim depositType As List(Of DepositType)
-            depositType = depositTypeService.GetAll(newSortOrderKey)
+            depositType = depositTypeService.GetList(Of DepositType)(newSortOrderKey)
             GlobalVariables.Mapper.Map(depositType, cModelList)
             Return cModelList
         End Function

@@ -9,7 +9,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private _reportList As New List(Of IReportView)
 
-        'Public Event EmployeeIdCheckedEvent(sender As Object) Implements IReportListView.EmployeeIdCheckedEvent
+        Public Event ReportDoubleClickEvent(IdNo As Int16) Implements IReportSelectorView.ReportDoubleClickEvent
 
         Public Sub New()
             MyBase.New()
@@ -32,7 +32,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property IdNo As Short Implements IReportSelectorView.IdNo
+        Public Property IdNo As Int16 Implements IReportSelectorView.IdNo
 
         Public Property QueryForm As String Implements IReportSelectorView.QueryForm
 
@@ -85,6 +85,18 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
 
+        'Private Sub DataGridViewReportList_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportList.CellContentDoubleClick
+        '    Debugger.Break()
+        'End Sub
+
+        Private Sub DataGridViewReportList_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportList.CellDoubleClick
+            IdNo = DataGridViewReportList.Rows(e.RowIndex).Cells("dgvIdNo").Value
+            RaiseEvent ReportDoubleClickEvent(IdNo)
+        End Sub
+
+        'Private Sub DataGridViewReportList_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridViewReportList.CellMouseDoubleClick
+        '    Debugger.Break()
+        'End Sub
     End Class
 
 End Namespace

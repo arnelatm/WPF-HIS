@@ -5,8 +5,8 @@ Public Interface IUserDao
     ' this is a database-independent interface. Implementations are database specific
     ' ** DAO Pattern
 
-    ' gets a sorted list of all Users
-    Function GetAll(Optional ByVal sortExpression As String = "UserName ASC") As List(Of User)
+    '' gets a sorted list of all Users
+    'Function GetAll(Optional ByVal sortExpression As String = "UserName ASC") As List(Of User)
 
     ' gets a specific User
     Function GetRecordByIdNo(idNo) As User

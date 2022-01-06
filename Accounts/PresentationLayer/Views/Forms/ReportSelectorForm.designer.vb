@@ -52,6 +52,8 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewReportList.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridViewReportList.AutoGenerateColumns = false
         Me.DataGridViewReportList.BegFindValue = Nothing
+        Me.DataGridViewReportList.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.DataGridViewReportList.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.DataGridViewReportList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewReportList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ReportName, Me.dgvIdNo})
         Me.DataGridViewReportList.DataSource = Me.bsReportList
@@ -64,7 +66,7 @@ Namespace PresentationLayer.Views.Forms
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DataGridViewReportList.DefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridViewReportList.DgvFooter = Nothing
-        Me.DataGridViewReportList.DisplayOnly = false
+        Me.DataGridViewReportList.DisplayOnly = true
         Me.DataGridViewReportList.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridViewReportList.Ea = Nothing
         Me.DataGridViewReportList.EditingMode = false
@@ -82,6 +84,8 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewReportList.Location = New System.Drawing.Point(0, 53)
         Me.DataGridViewReportList.Name = "DataGridViewReportList"
         Me.DataGridViewReportList.ReadOnly = true
+        Me.DataGridViewReportList.RowHeadersVisible = false
+        Me.DataGridViewReportList.RowHeadersWidth = 4
         Me.DataGridViewReportList.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.DataGridViewReportList.SecurityKey = ""
         Me.DataGridViewReportList.SequenceColumn = "dgvSequence"
@@ -127,7 +131,7 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.bsReportList.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.ReportModel)
         '
-        'ReportSelector
+        'ReportSelectorForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"),System.Drawing.Image)
@@ -135,7 +139,7 @@ Namespace PresentationLayer.Views.Forms
         Me.ClientSize = New System.Drawing.Size(476, 563)
         Me.Controls.Add(Me.DataGridViewReportList)
         Me.MinimumSize = New System.Drawing.Size(300, 590)
-        Me.Name = "ReportSelector"
+        Me.Name = "ReportSelectorForm"
         Me.Text = "Report Selector"
         Me.Controls.SetChildIndex(Me.DataGridViewReportList, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit

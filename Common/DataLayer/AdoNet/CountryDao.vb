@@ -8,15 +8,15 @@ Namespace DataLayer.AdoNet
 
     Public Class CountryDao
         Inherits CommonDao
-        Implements IDaoAll(Of Country)
+        Implements iDao(Of Country)
 
         Private ReadOnly _db As New Db()
 
-        'Public Function GetCountryByName(countryName As String) As Country Implements IDaoAll(Of Country).GetCountryByName
+        'Public Function GetCountryByName(countryName As String) As Country Implements iDao(Of Country).GetCountryByName
         '    Throw New NotImplementedException
         'End Function
 
-        Public Function GetRecordByIdNo(idNo) As Country Implements IDaoAll(Of Country).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As Country Implements iDao(Of Country).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, CountryCode, CountryName, CountryNameAra, Nationality, NationalityAra, Flag32, Flag128, ISOA3, ISON, CountryTelCode" &
                     "   FROM [Country]" &
@@ -25,18 +25,7 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Country) _
-            Implements IDaoAll(Of Country).GetAll
-            If sortExpression = Nothing Then
-                sortExpression = "CountryName ASC"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, CountryCode, CountryName, CountryNameAra, Nationality, NationalityAra, Flag32, Flag128, ISOA3, ISON, CountryTelCode" &
-                    "   FROM [Country] order by " & sortExpression
-            Return _db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function UpdateRecord(ByRef country As Country) As Integer Implements IDaoAll(Of Country).UpdateRecord
+        Public Function UpdateRecord(ByRef country As Country) As Integer Implements iDao(Of Country).UpdateRecord
             Dim sql As String =
                     " UPDATE [Country] SET" &
                     " CountryCode = @CountryCode," &
@@ -54,7 +43,7 @@ Namespace DataLayer.AdoNet
             Return _db.Update(sql, Take(country))
         End Function
 
-        Public Function AddRecord(ByRef country As Country) As Integer Implements IDaoAll(Of Country).AddRecord
+        Public Function AddRecord(ByRef country As Country) As Integer Implements iDao(Of Country).AddRecord
             Dim sql As String =
                     " INSERT INTO [Country] " &
                     " (CountryCode, CountryName,CountryNameAra,Nationality,NationalityAra,Flag32,Flag128,IsoA3,IsoN,CountryTelCode) " &

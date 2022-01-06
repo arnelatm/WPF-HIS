@@ -1,4 +1,5 @@
-﻿Imports System.ComponentModel
+﻿
+Imports System.ComponentModel
 Imports System.Globalization
 Imports System.Transactions
 Imports AATM.Accounts.PresentationLayer.Models

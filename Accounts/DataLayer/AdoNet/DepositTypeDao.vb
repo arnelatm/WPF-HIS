@@ -9,14 +9,10 @@ Namespace DataLayer.AdoNet
 
     Public Class DepositTypeDao
         Inherits CommonDao
-        Implements IDaoAll(Of DepositType)
+        Implements iDao(Of DepositType), IDaoList(Of DepositType)
 
         Private ReadOnly Db As New Db()
-
-        Public Function GetRecordByIdNo(idNo) As DepositType Implements IDaoAll(Of DepositType).GetRecordByIdNo
-            Dim sql As String =
-                    "SELECT " &
-                    "AccountIdNo," &
+        Private ReadOnly FieldList = "AccountIdNo," &
                     "BankChargesAccountIdNo," &
                     "BankChargesVatAccountIdNo," &
                     "DepositTypeCode," &
@@ -25,35 +21,16 @@ Namespace DataLayer.AdoNet
                     "IdNo," &
                     "Notes," &
                     "Rate," &
-                    "WithBankCharges" &
-                    " FROM [DepositType]" &
-                    " WHERE IdNo = @IdNo"
+                    "WithBankCharges"
+
+
+        Public Function GetRecordByIdNo(idNo) As DepositType Implements iDao(Of DepositType).GetRecordByIdNo
+            Dim sql As String = "SELECT " & FieldList & " FROM [DepositType]" & " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
-            Dim x = Db.Read(sql, Make, params).FirstOrDefault()
-            Return x
+            Return Db.Read(sql, Make, params).FirstOrDefault()            
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of DepositType) _
-            Implements IDaoAll(Of DepositType).GetAll
-            If sortExpression Is Nothing Then
-                sortExpression = "DepositTypeName ASC"
-            End If
-            Dim sql As String = " SELECT " &
-                    "AccountIdNo," &
-                    "BankChargesAccountIdNo," &
-                    "BankChargesVatAccountIdNo," &
-                    "DepositTypeCode," &
-                    "DepositTypeName," &
-                    "DepositTypeNameAra," &
-                    "IdNo," &
-                    "Notes," &
-                    "Rate," &
-                    "WithBankCharges" &
-                    " FROM [DepositType] order by DepositTypeName"
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function UpdateRecord(ByRef depositType As DepositType) As Integer Implements IDaoAll(Of DepositType).UpdateRecord
+        Public Function UpdateRecord(ByRef depositType As DepositType) As Integer Implements iDao(Of DepositType).UpdateRecord
             Dim sql As String =
                     "UPDATE [DepositType] SET " &
                     "AccountIdNo = @AccountIdNo," &
@@ -69,7 +46,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(depositType))
         End Function
 
-        Public Function AddRecord(ByRef depositType As DepositType) As Integer Implements IDaoAll(Of DepositType).AddRecord
+        Public Function AddRecord(ByRef depositType As DepositType) As Integer Implements iDao(Of DepositType).AddRecord
             Dim sql As String =
                     "INSERT INTO [DepositType] (" &
                     "AccountIdNo," &
@@ -123,6 +100,11 @@ Namespace DataLayer.AdoNet
                                     "@Rate", depositType.Rate,
                                     "@WithBankCharges", depositType.WithBankCharges
                                 }
+        End Function
+
+        Public Function GetList(Optional sortExpression As String = Nothing) As List(Of DepositType) Implements IDaoList(Of DepositType).GetList
+            Dim sql As String = "SELECT " & FieldList & " FROM [DepositType]" 
+            Return Db.Read(sql, Make).ToList()
         End Function
 
     End Class

@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
 
     Public Class RecurringPayElementDao
         Inherits CommonDao
-        Implements IDaoAll(Of RecurringPayElement), IDaoGetRecords(Of RecurringPayElement)
+        Implements iDao(Of RecurringPayElement), IDaoGetRecords(Of RecurringPayElement)
 
         Private ReadOnly Db As New Db()
 
@@ -22,7 +22,7 @@ Namespace DataLayer.AdoNet
                                   "TotalAmount," &
                                   "DateCreated"
 
-        Public Function GetRecordByIdNo(idNo) As RecurringPayElement Implements IDaoAll(Of RecurringPayElement).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As RecurringPayElement Implements iDao(Of RecurringPayElement).GetRecordByIdNo
             Dim sql As String =
                     " SELECT " & FieldList &
                     "   FROM [RecurringPayElement_View]" &
@@ -31,18 +31,7 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of RecurringPayElement) _
-            Implements IDaoAll(Of RecurringPayElement).GetAll
-            If sortExpression = Nothing Then
-                sortExpression = " ASC"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, EmployeeIdNo" &
-                    "   FROM [RecurringPayElement] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function UpdateRecord(ByRef recurringPayElement As RecurringPayElement) As Integer Implements IDaoAll(Of RecurringPayElement).UpdateRecord
+        Public Function UpdateRecord(ByRef recurringPayElement As RecurringPayElement) As Integer Implements iDao(Of RecurringPayElement).UpdateRecord
             Dim sql As String =
                     " UPDATE [RecurringPayElement]" &
                     " SET EmployeeIdNo = @EmployeeIdNo," &
@@ -54,7 +43,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(recurringPayElement))
         End Function
 
-        Public Function AddRecord(ByRef recurringPayElement As RecurringPayElement) As Integer Implements IDaoAll(Of RecurringPayElement).AddRecord
+        Public Function AddRecord(ByRef recurringPayElement As RecurringPayElement) As Integer Implements iDao(Of RecurringPayElement).AddRecord
             Dim sql As String =
                     " INSERT INTO [RecurringPayElement] " &
                     " (EmployeeIdNo,StartDate,PayElementIdNo,PeriodicPayment,Amount) " &

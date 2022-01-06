@@ -23,7 +23,7 @@ Namespace DataLayer.AdoNet
             DboTvpInsertFileName = "dbo.InsertDistributionSchemeItemTVP"
         End Sub
 
-        'Public Function GetRecordByIdNo(idNo) As DistributionSchemeItem Implements IDaoAll(Of DistributionSchemeItem).GetRecordByIdNo
+        'Public Function GetRecordByIdNo(idNo) As DistributionSchemeItem Implements iDao(Of DistributionSchemeItem).GetRecordByIdNo
         '    Dim sql As String =
         '            " SELECT IdNo, DistributionSchemeIdNo, Sequence, RevCostCenterIdNo, Percentage" &
         '            "   FROM " & TableName &
@@ -41,14 +41,6 @@ Namespace DataLayer.AdoNet
             Dim params() As Object = {"@DistributionSchemeIdNo", distributionSchemeIdNo}
             Return Db.Read(sql, Make, params).ToList()
         End Function
-
-        'Public Function GetAll(Optional sortExpression As String = "IdNo") As List(Of DistributionSchemeItem) _
-        '    Implements IDaoAll(Of DistributionSchemeItem)
-        '    Dim sql As String =
-        '            " SELECT IdNo, DistributionSchemeIdNo,  " &
-        '            "   FROM " & TableName & " order by " & sortExpression
-        '    Return Db.Read(sql, Make).ToList()
-        'End Function
 
         Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of DistributionSchemeItem) Implements IDaoChild(Of DistributionSchemeItem).GetRecordsWithGroupIdNo
             If sortExpression Is Nothing Then

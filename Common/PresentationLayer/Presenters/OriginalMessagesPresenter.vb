@@ -24,7 +24,7 @@ Namespace PresentationLayer.Presenters
         Public Function GetOriginalMessagesList(Optional ByVal sortKey As String = "") As List(Of TM)
             Dim xModel As New TM
             Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TM)(sortKey, xModel)
-            Dim modelData = Service.GetAll(Of TM)(newSortOrderKey)
+            Dim modelData = Service.GetList(Of TM)(newSortOrderKey)
             If TreeViewList IsNot Nothing And TreeViewList.Count > 0 Then
                 TreeViewList.Clear()
             End If

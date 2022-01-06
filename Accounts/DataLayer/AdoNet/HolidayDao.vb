@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
 
     Public Class HolidayDao
         Inherits CommonDao
-        Implements IDaoAll(Of Holiday)
+        Implements iDao(Of Holiday)
 
         Private ReadOnly Db As New Db()
 
@@ -26,7 +26,7 @@ Namespace DataLayer.AdoNet
         '"PayrollStartDate," &
         '"PayrollEndDate"
 
-        Public Function GetRecordByIdNo(idNo) As Holiday Implements IDaoAll(Of Holiday).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As Holiday Implements iDao(Of Holiday).GetRecordByIdNo
             Dim sql As String =
                     "SELECT " & FieldList &
                     " FROM Holiday" &
@@ -35,17 +35,7 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Holiday) _
-            Implements IDaoAll(Of Holiday).GetAll
-            If sortExpression = Nothing Then
-                sortExpression = "StartDate ASC"
-            End If
-            Dim sql As String = "SELECT IdNo, HolidayIdNo" &
-                " FROM [Holiday] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function UpdateRecord(ByRef holiday As Holiday) As Integer Implements IDaoAll(Of Holiday).UpdateRecord
+        Public Function UpdateRecord(ByRef holiday As Holiday) As Integer Implements iDao(Of Holiday).UpdateRecord
             Dim sql As String =
                     " UPDATE [Holiday] SET " &
                     " DateEnd = @DateEnd," &
@@ -56,7 +46,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(holiday))
         End Function
 
-        Public Function AddRecord(ByRef holiday As Holiday) As Integer Implements IDaoAll(Of Holiday).AddRecord
+        Public Function AddRecord(ByRef holiday As Holiday) As Integer Implements iDao(Of Holiday).AddRecord
             Dim sql As String = " INSERT INTO [Holiday] " &
                     " (DateEnd,DateStart,EnteredBy,LeaveIdNo)" &
                     " VALUES (@DateEnd,@DateStart,@EnteredBy,@LeaveIdNo)"

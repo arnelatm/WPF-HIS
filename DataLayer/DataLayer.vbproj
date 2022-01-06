@@ -86,7 +86,6 @@
     <Compile Include="DaoFactories.vb" />
     <Compile Include="IBaseDao.vb" />
     <Compile Include="IDaoFactory.vb" />
-    <Compile Include="IDataDao.vb" />
     <Compile Include="IDefaultFieldValueDao.vb" />
     <Compile Include="ISaltDao.vb" />
     <Compile Include="ITblColPropDao.vb" />

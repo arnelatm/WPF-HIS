@@ -8,7 +8,7 @@ Namespace DataLayer.AdoNet
 
     Public Class EmployeeLeaveCreditDao
         Inherits AccountsDao
-        Implements IDaoChild(Of EmployeeLeaveCredit), IDaoGetRecordByIdNo(Of EmployeeLeaveCredit), IDaoGetRecords(Of EmployeeLeaveCredit), IDaoGetRecord(Of EmployeeLeaveCredit)
+        Implements IDaoChild(Of EmployeeLeaveCredit), IDaoGetListByIdNo(Of EmployeeLeaveCredit), IDaoGetRecords(Of EmployeeLeaveCredit), IDaoGetRecord(Of EmployeeLeaveCredit)
 
         Private ReadOnly Db As New Db()
 
@@ -45,7 +45,7 @@ Namespace DataLayer.AdoNet
             Return Db.InsertTvp("InsertEmployeeLeaveCreditTVP", tvpTable)
         End Function
 
-        Public Function GetRecordByIdNo(idNo As Object) As List(Of EmployeeLeaveCredit) Implements IDaoGetRecordByIdNo(Of EmployeeLeaveCredit).GetRecordByIdNo
+        Public Function GetListByIdNo(idNo As Object) As List(Of EmployeeLeaveCredit) Implements IDaoGetListByIdNo(Of EmployeeLeaveCredit).GetListByIdNo
             Dim sql As String =
                     "SELECT Top 1 " & FieldList &
                     " FROM [EmployeeLeaveCredit_View]" &

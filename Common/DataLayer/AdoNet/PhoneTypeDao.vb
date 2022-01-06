@@ -8,11 +8,11 @@ Namespace DataLayer.AdoNet
 
     Public Class PhoneTypeDao
         Inherits CommonDao
-        Implements IDaoAll(Of PhoneType)
+        Implements iDao(Of PhoneType)
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordByIdNo(idNo) As PhoneType Implements IDaoAll(Of PhoneType).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As PhoneType Implements iDao(Of PhoneType).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, PhoneTypeCode, PhoneTypeName, PhoneTypeNameAra, Notes" &
                     "   FROM [PhoneType]" &
@@ -21,19 +21,8 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of PhoneType) _
-            Implements IDaoAll(Of PhoneType).GetAll
-            If sortExpression Is Nothing Then
-                sortExpression = "PhoneTypeName"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, PhoneTypeCode, PhoneTypeName, PhoneTypeNameAra, Notes" &
-                    "   FROM [PhoneType] " & "order by " & sortExpression
-            Return _db.Read(sql, Make).ToList()
-        End Function
-
         Public Function UpdateRecord(ByRef phoneType As PhoneType) As Integer _
-            Implements IDaoAll(Of PhoneType).UpdateRecord
+            Implements iDao(Of PhoneType).UpdateRecord
             Dim sql As String =
                     " UPDATE [PhoneType]" &
                     "    SET PhoneTypeCode = @PhoneTypeCode," &
@@ -45,7 +34,7 @@ Namespace DataLayer.AdoNet
             Return _db.Update(sql, Take(phoneType))
         End Function
 
-        Public Function AddRecord(ByRef phoneType As PhoneType) As Integer Implements IDaoAll(Of PhoneType).AddRecord
+        Public Function AddRecord(ByRef phoneType As PhoneType) As Integer Implements iDao(Of PhoneType).AddRecord
             Dim sql As String =
                     " INSERT INTO [PhoneType] " &
                     " (PhoneTypeCode,PhoneTypeName,PhoneTypeNameAra,Notes) " &

@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
 
     Public Class BasicDao
         Inherits CommonDao
-        Implements IDaoAll(Of Basic)
+        Implements iDao(Of Basic)
 
         Private ReadOnly Db As New Db()
         Private ReadOnly _tableOrViewName As String
@@ -18,7 +18,7 @@ Namespace DataLayer.AdoNet
             _tableOrViewName = tableName.ToString()
         End Sub
 
-        Public Function GetRecordByIdNo(idNo) As Basic Implements IDaoAll(Of Basic).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As Basic Implements iDao(Of Basic).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, Code, Name, NameAra" &
                     "   FROM " & _tableOrViewName &
@@ -27,18 +27,7 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Basic) _
-            Implements IDaoAll(Of Basic).GetAll
-            If sortExpression = Nothing Then
-                sortExpression = "Name ASC"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, Code, Name, NameAra" &
-                    "   FROM " & _tableOrViewName & " order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function UpdateRecord(ByRef Basic As Basic) As Integer Implements IDaoAll(Of Basic).UpdateRecord
+        Public Function UpdateRecord(ByRef Basic As Basic) As Integer Implements iDao(Of Basic).UpdateRecord
             Dim sql As String =
                     " UPDATE " & _tableOrViewName &
                     "    SET Code = @Code," &
@@ -48,7 +37,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(Basic))
         End Function
 
-        Public Function AddRecord(ByRef Basic As Basic) As Integer Implements IDaoAll(Of Basic).AddRecord
+        Public Function AddRecord(ByRef Basic As Basic) As Integer Implements iDao(Of Basic).AddRecord
             Dim sql As String =
                     " INSERT INTO " & _tableOrViewName &
                     " (Code,Name,NameAra) " &

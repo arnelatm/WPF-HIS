@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
 
     Public Class PayrollDao
         Inherits CommonDao
-        Implements IDaoAll(Of Payroll)
+        Implements IDao(Of Payroll)
 
         Private ReadOnly Db As New Db()
 
@@ -23,7 +23,7 @@ Namespace DataLayer.AdoNet
                                       "PayFrequency," &
                                       "StartDate"
 
-        Public Function GetRecordByIdNo(idNo) As Payroll Implements IDaoAll(Of Payroll).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As Payroll Implements iDao(Of Payroll).GetRecordByIdNo
             Dim sql As String =
                     " SELECT " & FieldList &
                     " FROM [Payroll_View]" &
@@ -45,17 +45,7 @@ Namespace DataLayer.AdoNet
             Return data
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Payroll) _
-            Implements IDaoAll(Of Payroll).GetAll
-            If sortExpression = Nothing Then
-                sortExpression = "StartDate ASC"
-            End If
-            Dim sql As String = "SELECT IdNo, PayrollName, PayrollNameAra, StartDate, EndDate" &
-                    " FROM [Payroll] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function UpdateRecord(ByRef Payroll As Payroll) As Integer Implements IDaoAll(Of Payroll).UpdateRecord
+        Public Function UpdateRecord(ByRef Payroll As Payroll) As Integer Implements iDao(Of Payroll).UpdateRecord
             Dim sql As String =
                     " UPDATE [Payroll] SET " &
                     " EndDate = @EndDate," &
@@ -68,7 +58,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(Payroll))
         End Function
 
-        Public Function AddRecord(ByRef Payroll As Payroll) As Integer Implements IDaoAll(Of Payroll).AddRecord
+        Public Function AddRecord(ByRef Payroll As Payroll) As Integer Implements iDao(Of Payroll).AddRecord
             Dim sql As String =
                     " INSERT INTO [Payroll] " &
                     " (PayrollCode,PayrollName,PayrollNameAra,StartDate,EndDate,PayCycleIdNo)" &

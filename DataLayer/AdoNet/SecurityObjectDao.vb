@@ -6,7 +6,7 @@ Namespace AdoNet
 
     Public Class SecurityObjectDao
         Inherits BaseDao
-        Implements IDaoAll(Of SecurityObject)
+        Implements IDao(Of SecurityObject)
 
         Private ReadOnly _db As New Db()
 
@@ -34,21 +34,13 @@ Namespace AdoNet
         End Function
 
         Public Function GetRecordByIdNo(idNo) As SecurityObject _
-            Implements IDaoAll(Of SecurityObject).GetRecordByIdNo
+            Implements IDao(Of SecurityObject).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, ParentIdNo, SecurityObjectCode, SecurityObjectName, SecurityObjectNameAra,SystemViewIdNo,ManuallyAdded,Notes" &
                     "   FROM [SecurityObject]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Return _db.Read(sql, _make, params).FirstOrDefault()
-        End Function
-
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of SecurityObject) _
-            Implements IDaoAll(Of SecurityObject).GetAll
-            Dim sql As String =
-                    " SELECT IdNo, ParentIdNo, SecurityObjectCode, SecurityObjectName, SecurityObjectNameAra, SystemViewIdNo, ManuallyAdded, Notes" &
-                    "   FROM [SecurityObject] " & "order by " & sortExpression
-            Return _db.Read(sql, _make).ToList()
         End Function
 
         Public Function AddRecord(ByRef recordData As SecurityObject) As Integer _

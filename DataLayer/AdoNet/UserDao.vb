@@ -6,7 +6,7 @@ Namespace AdoNet
     ' ** DAO Pattern
     Public Class UserDao
         Inherits BaseDao
-        Implements IDaoAll(Of User)
+        Implements IDao(Of User)
 
         Private ReadOnly Db As New Db()
 
@@ -26,17 +26,6 @@ Namespace AdoNet
         'Public Function GetUserByName(fullName As String) As User Implements IDao(Of User).GetUserByName
         '    Throw New NotImplementedException
         'End Function
-
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of User) _
-            Implements IDaoAll(Of User).GetAll
-            If sortExpression Is Nothing Then
-                sortExpression = "UserName ASC"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, UserName, EmployeeIdNo, Password, SecurityGroupIdNo " &
-                    "   FROM [User] order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
 
         Public Function AddRecord(ByRef user As User) As Integer Implements IDao(Of User).AddRecord
             Dim sql As String =

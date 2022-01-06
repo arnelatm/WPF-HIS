@@ -8,11 +8,11 @@ Namespace DataLayer.AdoNet
 
     Public Class ReligionDao
         Inherits CommonDao
-        Implements IDaoAll(Of Religion)
+        Implements iDao(Of Religion)
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordByIdNo(idNo) As Religion Implements IDaoAll(Of Religion).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As Religion Implements iDao(Of Religion).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, ReligionCode, ReligionName, ReligionNameAra, Notes" &
                     "   FROM [Religion]" &
@@ -21,18 +21,7 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Religion) _
-            Implements IDaoAll(Of Religion).GetAll
-            If sortExpression Is Nothing Then
-                sortExpression = "ReligionName"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, ReligionCode, ReligionName, ReligionNameAra, Notes" &
-                    "   FROM [Religion] " & "order by " & sortExpression
-            Return _db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function UpdateRecord(ByRef religion As Religion) As Integer Implements IDaoAll(Of Religion).UpdateRecord
+        Public Function UpdateRecord(ByRef religion As Religion) As Integer Implements iDao(Of Religion).UpdateRecord
             Dim sql As String =
                     " UPDATE [Religion]" &
                     "    SET ReligionCode = @ReligionCode," &
@@ -44,7 +33,7 @@ Namespace DataLayer.AdoNet
             Return _db.Update(sql, Take(religion))
         End Function
 
-        Public Function AddRecord(ByRef religion As Religion) As Integer Implements IDaoAll(Of Religion).AddRecord
+        Public Function AddRecord(ByRef religion As Religion) As Integer Implements iDao(Of Religion).AddRecord
             Dim sql As String =
                     " INSERT INTO [Religion] " &
                     " (ReligionCode,ReligionName,ReligionNameAra,Notes) " &

@@ -9,11 +9,11 @@ Namespace DataLayer.AdoNet
 
     Public Class CustomerDao
         Inherits CommonDao
-        Implements IDaoAll(Of Customer), IDaoContacts(Of Customer), IDaoAutoCode
+        Implements iDao(Of Customer), IDaoContacts(Of Customer), IDaoAutoCode
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordByIdNo(idNo) As Customer Implements IDaoAll(Of Customer).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As Customer Implements iDao(Of Customer).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, CustomerCode, CustomerName, CustomerNameAra, ContactPerson, ContactDesignation, Street, District, TownCity, " &
                     " ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Mobile, Fax, Email, Website, VatNumber, CrNumber, AccountStatus, " &
@@ -28,18 +28,7 @@ Namespace DataLayer.AdoNet
             'Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of Customer) _
-            Implements IDaoAll(Of Customer).GetAll
-            If sortExpression Is Nothing Then
-                sortExpression = "CustomerName ASC"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, CustomerCode, CustomerName, CustomerNameAra " &
-                    "   FROM [Customer] order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function UpdateRecord(ByRef customer As Customer) As Integer Implements IDaoAll(Of Customer).UpdateRecord
+        Public Function UpdateRecord(ByRef customer As Customer) As Integer Implements iDao(Of Customer).UpdateRecord
             Dim sql As String =
                     " UPDATE [Customer]" &
                     "   SET CustomerCode = @CustomerCode," &
@@ -83,7 +72,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(customer))
         End Function
 
-        Public Function AddRecord(ByRef customer As Customer) As Integer Implements IDaoAll(Of Customer).AddRecord
+        Public Function AddRecord(ByRef customer As Customer) As Integer Implements iDao(Of Customer).AddRecord
             Dim sql As String =
                     " INSERT INTO [Customer] " &
                     "        (CustomerCode,CustomerName,CustomerNameAra,ContactPerson,ContactDesignation,Street,District,TownCity," &

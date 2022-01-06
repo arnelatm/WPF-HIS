@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
 
     Public Class EmployeeAbsenceDao
         Inherits CommonDao
-        Implements IDaoAll(Of EmployeeAbsence), IDaoChild(Of EmployeeAbsence)
+        Implements iDao(Of EmployeeAbsence), IDaoChild(Of EmployeeAbsence)
 
         Private ReadOnly Db As New Db()
 
@@ -23,7 +23,7 @@ Namespace DataLayer.AdoNet
                                       "PayrollIdNo," &
                                       "UserName"
 
-        Public Function GetRecordByIdNo(idNo) As EmployeeAbsence Implements IDaoAll(Of EmployeeAbsence).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As EmployeeAbsence Implements iDao(Of EmployeeAbsence).GetRecordByIdNo
             Dim sql As String =
                     " SELECT " & FieldList &
                     " FROM [EmployeeAbsence_View]" &
@@ -32,17 +32,7 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of EmployeeAbsence) _
-            Implements IDaoAll(Of EmployeeAbsence).GetAll
-            If sortExpression = Nothing Then
-                sortExpression = "StartDate ASC"
-            End If
-            Dim sql As String = "SELECT IdNo, EmployeeIdNo" &
-                " FROM [EmployeeAbsence] " & "order by " & sortExpression
-            Return Db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function UpdateRecord(ByRef EmployeeAbsence As EmployeeAbsence) As Integer Implements IDaoAll(Of EmployeeAbsence).UpdateRecord
+        Public Function UpdateRecord(ByRef EmployeeAbsence As EmployeeAbsence) As Integer Implements iDao(Of EmployeeAbsence).UpdateRecord
             Dim sql As String =
                     " UPDATE [EmployeeAbsence] SET " &
                     " AbsenceReason = @AbsenceReason," &
@@ -55,7 +45,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(EmployeeAbsence))
         End Function
 
-        Public Function AddRecord(ByRef EmployeeAbsence As EmployeeAbsence) As Integer Implements IDaoAll(Of EmployeeAbsence).AddRecord
+        Public Function AddRecord(ByRef EmployeeAbsence As EmployeeAbsence) As Integer Implements iDao(Of EmployeeAbsence).AddRecord
             Dim sql As String = " INSERT INTO [EmployeeAbsence] " &
                     " (AbsenceReason,AbsenceType,AddedByUser,EmployeeIdNo,EquivalentHours,PayrollIdNo)" &
                     " VALUES (@AbsenceReason,@AbsenceType,@AddedByUser,@EmployeeIdNo,@EquivalentHours,@PayrollIdNo) "

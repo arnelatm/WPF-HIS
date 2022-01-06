@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
 
     Public Class EmployeePayElementDao
         Inherits AccountsDao
-        Implements IDaoChild(Of EmployeePayElement), IDaoGetRecordByIdNo(Of EmployeePayElement), IDaoGetRecords(Of EmployeePayElement), IDaoGetRecord(Of EmployeePayElement)
+        Implements IDaoChild(Of EmployeePayElement), IDaoGetListByIdNo(Of EmployeePayElement), IDaoGetRecords(Of EmployeePayElement), IDaoGetRecord(Of EmployeePayElement)
 
         Private ReadOnly Db As New Db()
 
@@ -47,7 +47,7 @@ Namespace DataLayer.AdoNet
             Return Db.InsertTvp("InsertEmployeePayElementTVP", tvpTable)
         End Function
 
-        Public Function GetRecordByIdNo(idNo As Object) As List(Of EmployeePayElement) Implements IDaoGetRecordByIdNo(Of EmployeePayElement).GetRecordByIdNo
+        Public Function GetListByIdNo(idNo As Object) As List(Of EmployeePayElement) Implements IDaoGetListByIdNo(Of EmployeePayElement).GetListByIdNo
             Dim sql As String =
                     "SELECT Top 1 " & FieldList &
                     " FROM [EmployeePayElement_View]" &

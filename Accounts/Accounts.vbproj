@@ -273,6 +273,7 @@
     <Compile Include="DataLayer\AdoNet\EmployeeLeaveApprovalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\HolidayTransferDao.vb" />
     <Compile Include="DataLayer\AdoNet\HolidayTransferItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\ReportDao.vb" />
     <Compile Include="DataLayer\AdoNet\ShiftSummaryDao.vb" />
     <Compile Include="DataLayer\AdoNet\HolidayDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeAbsenceDao.vb" />
@@ -403,7 +404,6 @@
     <Compile Include="PresentationLayer\Models\PensionSchemeModel.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenterNew.vb" />
-    <Compile Include="PresentationLayer\Presenters\Class1.vb" />
     <Compile Include="PresentationLayer\Presenters\CustomerPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ReportSelectorPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeeLeaveApprovalPresenter.vb" />
@@ -545,10 +545,12 @@
     <Compile Include="PresentationLayer\Views\Forms\PasswordGenerator.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\ReportSelector.designer.vb">
-      <DependentUpon>ReportSelector.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\ReportSelectorForm.designer.vb">
+      <DependentUpon>ReportSelectorForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\ReportSelector.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\ReportSelectorForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\NumberofCashPatientsPerDoctorPerDay - Copy.designer.vb">
       <DependentUpon>NumberofCashPatientsPerDoctorPerDay - Copy.vb</DependentUpon>
     </Compile>
@@ -649,12 +651,6 @@
     <Compile Include="PresentationLayer\Views\EmployeeLeaveApprovalHistoryView.vb" />
     <Compile Include="PresentationLayer\Views\PcJournalView.vb" />
     <Compile Include="PresentationLayer\Views\PayElementItemView.vb" />
-    <Compile Include="PresentationLayer\Views\Forms\CustomerEntryBound.Designer.vb">
-      <DependentUpon>CustomerEntryBound.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\CustomerEntryBound.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementView.vb" />
     <Compile Include="PresentationLayer\Views\OtWorkHourView.vb" />
@@ -1236,9 +1232,6 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\CheckPrinting.resx">
       <DependentUpon>CheckPrinting.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\CustomerEntryBound.resx">
-      <DependentUpon>CustomerEntryBound.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\CustomerEntryTv.resx">
       <DependentUpon>CustomerEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -1306,8 +1299,8 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\RecurringPayElementEntry.resx">
       <DependentUpon>RecurringPayElementEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\ReportSelector.resx">
-      <DependentUpon>ReportSelector.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\ReportSelectorForm.resx">
+      <DependentUpon>ReportSelectorForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\NumberofCashPatientsPerDoctorPerDay - Copy.resx">
       <DependentUpon>NumberofCashPatientsPerDoctorPerDay - Copy.vb</DependentUpon>

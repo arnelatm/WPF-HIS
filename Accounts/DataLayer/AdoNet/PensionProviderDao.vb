@@ -9,11 +9,11 @@ Namespace DataLayer.AdoNet
 
     Public Class PensionProviderDao
         Inherits CommonDao
-        Implements IDaoAll(Of PensionProvider)
+        Implements iDao(Of PensionProvider)
 
         Private ReadOnly _db As New Db()
 
-        Public Function GetRecordByIdNo(idNo) As PensionProvider Implements IDaoAll(Of PensionProvider).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As PensionProvider Implements iDao(Of PensionProvider).GetRecordByIdNo
             Dim sql As String =
                     "SELECT " &
                     "Active," &
@@ -50,18 +50,7 @@ Namespace DataLayer.AdoNet
             'Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetAll(Optional sortExpression As String = Nothing) As List(Of PensionProvider) _
-            Implements IDaoAll(Of PensionProvider).GetAll
-            If sortExpression Is Nothing Then
-                sortExpression = "PensionProviderName ASC"
-            End If
-            Dim sql As String =
-                    " SELECT IdNo, PensionProviderCode, PensionProviderName, PensionProviderNameAra " &
-                    "   FROM [PensionProvider] order by " & sortExpression
-            Return _db.Read(sql, Make).ToList()
-        End Function
-
-        Public Function UpdateRecord(ByRef pensionProvider As PensionProvider) As Integer Implements IDaoAll(Of PensionProvider).UpdateRecord
+        Public Function UpdateRecord(ByRef pensionProvider As PensionProvider) As Integer Implements iDao(Of PensionProvider).UpdateRecord
             Dim sql As String =
                     "UPDATE [PensionProvider] SET " &
                     "Active = @Active," &
@@ -92,7 +81,7 @@ Namespace DataLayer.AdoNet
             Return _db.Update(sql, Take(pensionProvider))
         End Function
 
-        Public Function AddRecord(ByRef pensionProvider As PensionProvider) As Integer Implements IDaoAll(Of PensionProvider).AddRecord
+        Public Function AddRecord(ByRef pensionProvider As PensionProvider) As Integer Implements iDao(Of PensionProvider).AddRecord
             Dim sql As String =
                     "INSERT INTO [PensionProvider] (" &
                     "Active," &
