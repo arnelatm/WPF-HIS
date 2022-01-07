@@ -36,9 +36,9 @@ Namespace PresentationLayer.Views.Forms.Reports
                     cBegDate = Format(dtpBeginningDate.Value, "yyyy/MM/dd")
                     cEndDate = Format(dtpEndingDate.Value, "yyyy/MM/dd")
                     Dim parameter As New ArrayList
-                    parameter.Add({"BeginningDate",cBegDate})
-                    parameter.Add({"EndDate",cEndDate})
-                    parameter.Add({"ReportNumber",Selection})
+                    parameter.Add({"BeginningDate", cBegDate})
+                    parameter.Add({"EndingDate", cEndDate})
+                    parameter.Add({"ReportNumber", selection})
                     Dim cForm As New ReportFormIGroup($"Diagnostic Test Summary.Rpt", FormCulture, parameter)
                     cForm.Show()
                 End If
