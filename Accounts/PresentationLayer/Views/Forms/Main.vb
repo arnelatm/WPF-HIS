@@ -1157,18 +1157,22 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemIncomeSummaryVatReport_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemIncomeVatSummary.Click
             Dim parameters As New ArrayList
             parameters.Add("Revenue Sale Vat Report Summary")
-            parameters.Add("ReportTitle")
-            parameters.Add("Revenue/Sale Vat Report Summary")
+            parameters.Add({"ReportTitle", "Revenue/Sale Vat Report Summary"})
             RunForm(Of DateRangeEntry, ArrayList)(parameters)
         End Sub
 
-        Private Sub ReportSelectorToolStripMenuItem_Click(sender As Object, e As EventArgs) 
+        Private Sub ReportSelectorToolStripMenuItem_Click(sender As Object, e As EventArgs)
 
         End Sub
 
-        Private Sub ToolStripMenuItemReportSelector_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemReportSelector.Click
-            RunForm(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel))()
+        Private Sub ToolStripMenuItemReportSelector_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountingReports.Click
+            RunForm(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)($"IGACC")
         End Sub
+
+        Private Sub LaboratoryReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLaboratoryReports.Click
+            RunForm(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)($"IGLAB")
+        End Sub
+
     End Class
 
 End Namespace

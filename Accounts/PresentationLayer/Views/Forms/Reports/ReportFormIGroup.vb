@@ -2,6 +2,7 @@
 Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
+Imports CrystalDecisions.Shared
 
 Namespace PresentationLayer.Views.Forms.Reports
 
@@ -20,14 +21,13 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim language As String
             language = Strings.Left(formCulture.Name, formCulture.Name.IndexOf("-", StringComparison.Ordinal))
             Presenter = New ReportPresenter(Me)
-            'Dim companyName =
-            'Dim companyNameAra =
-            For i = 0 To args.Count() - 1 Step 2
-                Report.SetParameterValue(args(i)(0), args(i)(1))
+            For i = 0 To args.Count() - 1
+                Dim parameterName As String = args(i)(0)
+                Dim parameterValue = args(i)(1)
+                Report.SetParameterValue(parameterName, parameterValue)
             Next
             Report.SetParameterValue("Language", language)
             Report.SetParameterValue("EstablishmentName", Presenter.GetRecordField("Establishment", "EstablishmentName"))
-            Report.SetParameterValue("EstablishmentNameAra", Presenter.GetRecordField("Establishment", "EstablishmentNameAra"))
             Report.DataSourceConnections.Clear()
             ProcessReport()
 

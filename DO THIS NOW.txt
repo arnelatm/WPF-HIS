@@ -1,3 +1,7 @@
-Revise Statement of AP to include enddate in the report, it currently is not adding the end date in the report.
-
+﻿Revise Statement of AP to include enddate in the report, it currently is not adding the end date in the report.
+Check for IsNot Nothing or 
 Edit 'MsgNoAccessToSecurity' parameter to securityKey from securityMessage
+
+add rptForTheDay Message
+{reportName} for {day}
+{reportName} ل {day} ل

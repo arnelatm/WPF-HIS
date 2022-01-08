@@ -13,10 +13,9 @@ Namespace PresentationLayer.Presenters
     Public Class ReportSelectorPresenter(Of TM As New)
         Inherits CommonPresenterNew(Of IReportSelectorView, TM)
 
-        'Private ReadOnly _journalItemService
-        'Private ReadOnly _ReportIdsService
+        Private ReadOnly _reportGroup As String
 
-        Public Sub New(view As IReportSelectorView)
+        Public Sub New(view As IReportSelectorView, reportGroup As String)
             MyBase.New(view)
             WithTreeView = False
             Service = New AccountsService("Report")
@@ -24,80 +23,65 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "ReportName"
             AskBeforeSave = True
             DisableSaveMemento = True
+            _reportGroup = reportGroup
             AddHandler view.ReportDoubleClickEvent, AddressOf OnReportDoubleClickEvent
-
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            Dim reportList As List(Of ReportModel) = Service.GetList(Of ReportModel)
+            Dim reportList As List(Of ReportModel) = Service.GetListParametrized(Of ReportModel)(_reportGroup)
             GlobalVariables.Mapper.Map(reportList, View.ReportList)
         End Sub
 
-        'Private Sub OnReportIdCheckedEvent(sender As Object)
-        '    sender.Print = Not sender.Print
-        'End Sub
-
         Public Overrides Sub GoPrintRecord()
-            'Dim transactionNumber As Int32
-            'transactionNumber = Service.GetNextSeries("ReportSelectorSeries")
-            Dim dtIdPrinting As New DataTable
-            CreateDataTable(dtIdPrinting, {{"ReportIdNo", GetType(Int32)},
-                                           {"TransactionNumber", GetType(Int32)}
-                                           })
-            'For Each Report As IReportView In View.ReportIdList
-            '    Dim workRow As DataRow
-            '    workRow = dtIdPrinting.NewRow()
-            '    workRow("ReportIdNo") = Report.IdNo
-            '    workRow("TransactionNumber") = transactionNumber
-            '    dtIdPrinting.Rows.Add(workRow)
-            'Next
-            'Dim retVal = Service.ExecuteTvpSp("InsertReportSelectorTvp", dtIdPrinting)
+            'Dim dtIdPrinting As New DataTable
+            'CreateDataTable(dtIdPrinting, {{"ReportIdNo", GetType(Int32)},
+            '                               {"TransactionNumber", GetType(Int32)}
+            '                               })
             Dim cForm
             cForm = New ReportForm(View.ReportFileName)
             cForm.Show()
         End Sub
 
-        Public Sub OnReportDoubleClickEvent(idNo As Int16)
-            Dim report As ReportModel = Service.GetRecordByIdNo(Of ReportModel)(idNo)
-
-            Dim parameters As New ArrayList
-
-            parameters.Add(report.ReportFileName)
-            parameters.Add("ReportTitle")
-            parameters.Add(Messaging.TranslateCaption(report.ReportTitle))
-
+        Public Sub OnReportDoubleClickEvent(reportIdNo As Int16)
+            Dim report As ReportModel = Service.GetRecordByIdNo(Of ReportModel)(reportIdNo)
+            'Dim parameters As New ArrayList
+            'parameters.Add({"ReportTitle", Messaging.TranslateCaption(report.ReportTitle)})
             Dim queryForm As String = report.QueryForm
-            Dim f As Form = FormFunctions.GetFormByName(queryForm, parameters)
+            Dim f As Form = FormFunctions.GetFormByName(queryForm, report)
             f.Show()
-
         End Sub
 
     End Class
 
-
-
     Public Class FormFunctions
-        Public Shared Function GetFormByName(ByVal FormName As String) As Form
-            'first try: in case the full namespace has been provided (as it should ;-) )
-            Dim T As Type = Type.GetType(FormName, False)
-            'if not found, search for it
-            If T Is Nothing Then T = FindType(FormName)
-            'if still not found, throw exception
-            If T Is Nothing Then Throw New Exception(FormName + " could not be found")
+
+        Public Shared Function GetFormByName(ByVal formName As String) As Form
+            Dim T As Type = GetFormObjectByName(formName)
             Return CType(Activator.CreateInstance(T), Form)
         End Function
 
-        Public Shared Function GetFormByName(ByVal FormName As String, parameter As ArrayList) As Form
+        Private Shared Function GetFormObjectByName(formName As String) As Type
             'first try: in case the full namespace has been provided (as it should ;-) )
-            Dim T As Type = Type.GetType(FormName, False)
+            Dim T As Type = Type.GetType(formName, False)
             'if not found, search for it
-            If T Is Nothing Then T = FindType(FormName)
+            If T Is Nothing Then T = FindType(formName)
             'if still not found, throw exception
-            If T Is Nothing Then Throw New Exception(FormName + " could not be found")
-            Return CType(Activator.CreateInstance(T, parameter), Form)
+            If T Is Nothing Then Throw New Exception(formName + " could not be found")
+            Return T
+        End Function
+
+        'Public Shared Function GetFormByName(ByVal formName As String, parameter As ArrayList) As Form
+        '    Dim T As Type = GetFormObjectByName(formName)
+        '    Return CType(Activator.CreateInstance(T, parameter), Form)
+        'End Function
+
+        Public Shared Function GetFormByName(ByVal formName As String, report As ReportModel) As Form
+            Dim T As Type = GetFormObjectByName(formName)
+            Return CType(Activator.CreateInstance(T, report), Form)
         End Function
 
 #Region "Assemblies and types"
+
         Public Shared Function GetAllAssemblies() As ArrayList
             Dim al As New ArrayList
             Dim a As [Assembly] = [Assembly].GetEntryAssembly()
@@ -132,7 +116,9 @@ Namespace PresentationLayer.Presenters
             Next
             Return Nothing
         End Function
+
 #End Region
+
     End Class
 
     'example call:
@@ -140,5 +126,3 @@ Namespace PresentationLayer.Presenters
     'f.Show()
 
 End Namespace
-
-

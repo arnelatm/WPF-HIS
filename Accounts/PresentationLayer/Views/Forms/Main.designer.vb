@@ -160,7 +160,8 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemEmployeeInformation = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemReceptionReports = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemShiftDailySummary = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemReportSelector = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemAccountingReports = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemLaboratoryReports = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemUtilities = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemUpdateMenuSecurityObjects = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemRecreateSecurityObjectMenu = New System.Windows.Forms.ToolStripMenuItem()
@@ -662,7 +663,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemReports
         '
-        Me.ToolStripMenuItemReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemStatementOfAccountsPayable, Me.ToolStripMenuItemStatementOfAccountsReceivable, Me.ToolStripMenuItemStatementOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfAccountsPayable, Me.ToolStripMenuItemSummaryOfAccountsReceivable, Me.ToolStripMenuItemTrialBalance, Me.ToolStripMenuItemBalanceSheet, Me.ToolStripMenuItemIncomeStatement, Me.ToolStripMenuItemAccountingtLists, Me.ToolStripMenuItemARAging, Me.ToolStripMenuItemIGroupReports, Me.ToolStripMenuItemAPAging, Me.ToolStripMenuItemCheckPrinting, Me.ToolStripMenuItemPayrollReport, Me.ToolStripMenuItemHRReports, Me.ToolStripMenuItemReceptionReports, Me.ToolStripMenuItemReportSelector})
+        Me.ToolStripMenuItemReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemStatementOfAccountsPayable, Me.ToolStripMenuItemStatementOfAccountsReceivable, Me.ToolStripMenuItemStatementOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfAccountsPayable, Me.ToolStripMenuItemSummaryOfAccountsReceivable, Me.ToolStripMenuItemTrialBalance, Me.ToolStripMenuItemBalanceSheet, Me.ToolStripMenuItemIncomeStatement, Me.ToolStripMenuItemAccountingtLists, Me.ToolStripMenuItemARAging, Me.ToolStripMenuItemIGroupReports, Me.ToolStripMenuItemAPAging, Me.ToolStripMenuItemCheckPrinting, Me.ToolStripMenuItemPayrollReport, Me.ToolStripMenuItemHRReports, Me.ToolStripMenuItemReceptionReports, Me.ToolStripMenuItemAccountingReports, Me.ToolStripMenuItemLaboratoryReports})
         Me.ToolStripMenuItemReports.Name = "ToolStripMenuItemReports"
         resources.ApplyResources(Me.ToolStripMenuItemReports, "ToolStripMenuItemReports")
         '
@@ -894,10 +895,15 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemShiftDailySummary.Name = "ToolStripMenuItemShiftDailySummary"
         resources.ApplyResources(Me.ToolStripMenuItemShiftDailySummary, "ToolStripMenuItemShiftDailySummary")
         '
-        'ToolStripMenuItemReportSelector
+        'ToolStripMenuItemAccountingReports
         '
-        Me.ToolStripMenuItemReportSelector.Name = "ToolStripMenuItemReportSelector"
-        resources.ApplyResources(Me.ToolStripMenuItemReportSelector, "ToolStripMenuItemReportSelector")
+        Me.ToolStripMenuItemAccountingReports.Name = "ToolStripMenuItemAccountingReports"
+        resources.ApplyResources(Me.ToolStripMenuItemAccountingReports, "ToolStripMenuItemAccountingReports")
+        '
+        'ToolStripMenuItemLaboratoryReports
+        '
+        Me.ToolStripMenuItemLaboratoryReports.Name = "ToolStripMenuItemLaboratoryReports"
+        resources.ApplyResources(Me.ToolStripMenuItemLaboratoryReports, "ToolStripMenuItemLaboratoryReports")
         '
         'ToolStripMenuItemUtilities
         '
@@ -1250,6 +1256,7 @@ End Sub
         Friend WithEvents ToolStripMenuItemEmployeeInformation As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemSimplePasswordGenerator As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemIncomeVatSummary As ToolStripMenuItem
-        Friend WithEvents ToolStripMenuItemReportSelector As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemAccountingReports As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemLaboratoryReports As ToolStripMenuItem
     End Class
 End NameSpace
