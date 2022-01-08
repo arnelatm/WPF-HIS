@@ -9,9 +9,10 @@ Namespace DataLayer.AdoNet
 
     Public Class DepositTypeDao
         Inherits CommonDao
-        Implements iDao(Of DepositType), IDaoList(Of DepositType)
+        Implements IDao(Of DepositType), IDaoList(Of DepositType)
 
         Private ReadOnly Db As New Db()
+
         Private ReadOnly FieldList = "AccountIdNo," &
                     "BankChargesAccountIdNo," &
                     "BankChargesVatAccountIdNo," &
@@ -23,14 +24,13 @@ Namespace DataLayer.AdoNet
                     "Rate," &
                     "WithBankCharges"
 
-
-        Public Function GetRecordByIdNo(idNo) As DepositType Implements iDao(Of DepositType).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As DepositType Implements IDao(Of DepositType).GetRecordByIdNo
             Dim sql As String = "SELECT " & FieldList & " FROM [DepositType]" & " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
-            Return Db.Read(sql, Make, params).FirstOrDefault()            
+            Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function UpdateRecord(ByRef depositType As DepositType) As Integer Implements iDao(Of DepositType).UpdateRecord
+        Public Function UpdateRecord(ByRef depositType As DepositType) As Integer Implements IDao(Of DepositType).UpdateRecord
             Dim sql As String =
                     "UPDATE [DepositType] SET " &
                     "AccountIdNo = @AccountIdNo," &
@@ -46,7 +46,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(depositType))
         End Function
 
-        Public Function AddRecord(ByRef depositType As DepositType) As Integer Implements iDao(Of DepositType).AddRecord
+        Public Function AddRecord(ByRef depositType As DepositType) As Integer Implements IDao(Of DepositType).AddRecord
             Dim sql As String =
                     "INSERT INTO [DepositType] (" &
                     "AccountIdNo," &
@@ -103,7 +103,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function GetList(Optional sortExpression As String = Nothing) As List(Of DepositType) Implements IDaoList(Of DepositType).GetList
-            Dim sql As String = "SELECT " & FieldList & " FROM [DepositType]" 
+            Dim sql As String = "SELECT " & FieldList & " FROM [DepositType]"
             Return Db.Read(sql, Make).ToList()
         End Function
 

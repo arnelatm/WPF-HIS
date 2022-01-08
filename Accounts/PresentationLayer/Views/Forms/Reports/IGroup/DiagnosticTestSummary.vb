@@ -38,7 +38,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                     Dim parameter As New ArrayList
                     parameter.Add({"BeginningDate", cBegDate})
                     parameter.Add({"EndingDate", cEndDate})
-                    parameter.Add({"ReportNumber", selection})
+                    parameter.Add({"ReportNumber", selection.ToString()})
                     Dim cForm As New ReportFormIGroup($"Diagnostic Test Summary.Rpt", FormCulture, parameter)
                     cForm.Show()
                 End If

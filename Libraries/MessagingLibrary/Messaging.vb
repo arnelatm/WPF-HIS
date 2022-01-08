@@ -225,12 +225,12 @@ Public Class Messaging
         Return Messaging.ReplaceValues(cMessage, variables)
     End Function
 
-    Public Shared Function SelectReportName(ByVal reportName As String, ByVal beginningDate As Date, ByVal endingDate As Date, ByVal FormCulture As Globalization.CultureInfo, Optional ByVal periodCode As String = "")
+    Public Shared Function SelectReportName(ByVal reportName As String, ByVal beginningDate As Date, ByVal endingDate As Date, ByVal formCulture As Globalization.CultureInfo, Optional ByVal periodCode As String = "")
         If periodCode = "Y" Then
             Return Messaging.GetParametrizedMessage(True, "RptForTheYear", {"reportName", reportName, "year", GregorianYear(endingDate).ToString})
         ElseIf periodCode = "M" Then
             Dim monthName As String
-            If Left(FormCulture.Name, 2) = "ar" Then
+            If Left(formCulture.Name, 2) = "ar" Then
                 monthName = GlobalFunctions.GregorianMonthNameArabic(GregorianMonth(endingDate))
             Else
                 monthName = GlobalFunctions.GregorianMonthName(GregorianMonth(endingDate))
@@ -238,7 +238,7 @@ Public Class Messaging
             Return Messaging.GetParametrizedMessage(True, "RptForTheMonth", {"reportName", reportName, "monthName", monthName, "year", Year(endingDate).ToString()})
         ElseIf periodCode = "Q" Then
             Dim nMonth = GregorianMonth(endingDate)
-            Dim quarter = Int(nMonth / 3 + 0.8)
+            Dim quarter As Integer = Int(nMonth / 3 + 0.8)
             Dim cYear = GregorianYear(endingDate).ToString
             Dim cQuarter As String
             If quarter = 1 Then
@@ -263,15 +263,19 @@ Public Class Messaging
             End If
             Return Messaging.GetParametrizedMessage(True, "RptForTheSemester", {"reportName", reportName, "semesterName", cSemester, "year", cYear})
         Else
-            If GregorianDay(beginningDate) = 1 And GregorianDay(endingDate) = 31 And GregorianMonth(beginningDate) = 1 And GregorianMonth(endingDate) = 12 And GregorianYear(beginningDate) = GregorianYear(endingDate) Then
+            If beginningDate = endingDate Then
+                Dim cDay As String
+                cDay = beginningDate.ToString($"dd MMMMM yyyy")
+                Return Messaging.GetParametrizedMessage(True, "RptForTheDay", {"reportName", reportName, "day", cDay})
+            ElseIf GregorianDay(beginningDate) = 1 And GregorianDay(endingDate) = 31 And GregorianMonth(beginningDate) = 1 And GregorianMonth(endingDate) = 12 And GregorianYear(beginningDate) = GregorianYear(endingDate) Then
                 Return Messaging.GetParametrizedMessage(True, "RptForTheYear", {"reportName", reportName, "year", GregorianYear(endingDate).ToString})
             ElseIf GregorianDay(beginningDate) = 1 And GregorianDay(DateAdd("d", 1, endingDate)) = 1 And GregorianMonth(beginningDate) = GregorianMonth(endingDate) And GregorianYear(beginningDate) = GregorianYear(endingDate) Then
                 Dim monthName As String
                 Dim cYear = GregorianYear(endingDate).ToString
-                If Left(FormCulture.Name, 2) = "ar" Then
+                If Left(formCulture.Name, 2) = "ar" Then
                     monthName = GlobalFunctions.GregorianMonthNameArabic(GregorianMonth(endingDate))
                 Else
-                    monthName = FormCulture.DateTimeFormat.MonthGenitiveNames(GregorianMonth(endingDate) - 1)
+                    monthName = formCulture.DateTimeFormat.MonthGenitiveNames(GregorianMonth(endingDate) - 1)
                 End If
                 Return Messaging.GetParametrizedMessage(True, "RptForTheMonth", {"reportName", reportName, "monthName", monthName, "year", cYear})
             End If

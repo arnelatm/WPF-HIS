@@ -9,12 +9,14 @@ Namespace DataLayer.AdoNet
 
     Public Class ReportDao
         Inherits CommonDao
-        Implements IDao(Of Report), IDaoList(Of Report)
-
+        Implements IDao(Of Report), IDaoListParametrized(Of Report)
 
         Private ReadOnly Db As New Db()
+
         Private Const FieldList = "IdNo," &
                                     "QueryForm," &
+                                    "QueryFormParameters," &
+                                    "QueryParameters," &
                                     "ReportCode," &
                                     "ReportFileName," &
                                     "ReportName," &
@@ -22,19 +24,19 @@ Namespace DataLayer.AdoNet
                                     "ReportTitle," &
                                     "ReportTitleAra"
 
-
         Private Shared ReadOnly Make As Func(Of IDataReader, Report) =
                                     Function(reader) _
             New Report() With {
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .QueryForm = Extensions.AsString(reader("QueryForm")),
+            .QueryFormParameters = Extensions.AsString(reader("QueryFormParameters")),
+            .QueryParameters = Extensions.AsString(reader("QueryParameters")),
             .ReportCode = Extensions.AsString(reader("ReportCode")),
             .ReportFileName = Extensions.AsString(reader("ReportFileName")),
             .ReportName = Extensions.AsString(reader("ReportName")),
             .ReportNameAra = Extensions.AsString(reader("ReportNameAra")),
             .ReportTitle = Extensions.AsString(reader("ReportTitle"))
             }
-
 
         Public Function AddRecord(ByRef recordData As Report) As Integer Implements IDao(Of Report).AddRecord
             Throw New NotImplementedException()
@@ -46,24 +48,29 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordByIdNo(idNo As Object) As Report Implements IDao(Of Report).GetRecordByIdNo
             Dim sql As String = "SELECT " & FieldList & " from Report" &
-                    " WHERE IdNo = @IdNo"
+                    " WHERE IdNo = @IdNo "
             Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function GetList(Optional sortExpression As String = Nothing) As List(Of Report) Implements IDaoList(Of Report).GetList
-            If sortExpression Is Nothing or sortExpression = "" Then
-                sortExpression = "ReportName ASC"
+        Public Function GetListParametrized(parameter As Object, Optional sortExpression As String = Nothing) As List(Of Report) Implements IDaoListParametrized(Of Report).GetListParametrized
+            Dim reportGroup As String = parameter
+            Dim params() As Object = {"@Parameter", reportGroup}
+            Dim sql As String
+            If sortExpression Is Nothing Or sortExpression = "" Then
+                sql = " SELECT IdNo, ReportName" &
+                      " FROM [Report] where Active = 1 and ReportGroup = @Parameter order by ReportOrder"
+                Return Db.Read(sql, MakeList, params).ToList()
+            Else
+                sql = " SELECT IdNo, ReportName" &
+                      " FROM [Report] where Active = 1 and ReportGroup = @Parameter order by " & sortExpression
             End If
-            Dim sql As String =
-                    " SELECT IdNo, ReportName" &
-                    " FROM [Report] where Active = 1 order by " & sortExpression
-            Return db.Read(sql, MakeList).ToList()
+            Return Db.Read(sql, MakeList, params).ToList()
         End Function
 
         Private Shared ReadOnly MakeList As Func(Of IDataReader, Report) = Function(reader) New Report() With {
             .ReportName = Extensions.AsString(reader("ReportName")),
-            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo"))    
+            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo"))
         }
 
     End Class

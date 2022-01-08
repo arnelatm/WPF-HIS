@@ -46,6 +46,12 @@ Public Interface IDaoList(Of TBiz)
 
 End Interface
 
+Public Interface IDaoListParametrized(Of TBiz)
+
+    Function GetListParametrized(parameter As Object, Optional ByVal sortExpression As String = Nothing) As List(Of TBiz)
+
+End Interface
+
 Public Interface IDaoChild(Of TBiz)
     ' gets a specific record data
 

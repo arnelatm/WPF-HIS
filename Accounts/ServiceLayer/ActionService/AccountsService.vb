@@ -65,9 +65,16 @@ Namespace ServiceLayer.ActionService
             Return model
         End Function
 
-        Public Function GetList(Of TM)(Optional SortOrder As String = "")
+        Public Function GetList(Of TM)(Optional sortOrder As String = "")
             Dim model As New List(Of TM)
             Dim records = DataDao.GetList(sortOrder)
+            GlobalVariables.Mapper.Map(records, model)
+            Return model
+        End Function
+
+        Public Function GetListParametrized(Of TM)(parameter As Object, Optional sortOrder As String = "")
+            Dim model As New List(Of TM)
+            Dim records = DataDao.GetListParametrized(parameter, sortOrder)
             GlobalVariables.Mapper.Map(records, model)
             Return model
         End Function

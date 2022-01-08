@@ -505,6 +505,8 @@
     <Build Include="dbo\User Defined Types\EmployeeLeaveApprovalItemUpdate.sql" />
     <Build Include="dbo\Views\LatestApproval_View.sql" />
     <Build Include="dbo\Views\EmployeeInfo_View.sql" />
+    <Build Include="dbo\Tables\ReportMaster.sql" />
+    <Build Include="dbo\Tables\Report.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
