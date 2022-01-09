@@ -54,14 +54,36 @@ Namespace PresentationLayer.Presenters
         End Sub
 
 
-        Private Sub OnPcJournalCheckedEvent(sender As Object)
+        Private Sub OnPcJournalCheckedEvent(sender As Object, all As Boolean, clear As Boolean, dataBindingSource As BindingSource)
             If EditMode Or AddMode Then
+                ProcessPettyCashRequest(sender, all, clear, dataBindingSource)
+                'If sender.PcClosed Then
+                '    View.Amount -= sender.Amount
+                'Else
+                '    View.Amount += sender.Amount
+                'End If
+                View.Applied = View.Amount
+            End If
+        End Sub
+
+        Public Sub ProcessPettyCashRequest(sender As Object, all As Boolean, close As Boolean, dataBindingSource As BindingSource)
+            If all Then
+                View.Amount = 0
+                For Each item In dataBindingSource
+                    If close Then
+                        item.PcClosed = True
+                        View.Amount += item.Amount
+                    Else
+                        item.PcClosed = False
+                    End If
+                Next
+                dataBindingSource.ResetBindings(False)
+            Else
                 If sender.PcClosed Then
-                    View.Amount -= sender.Amount
-                Else
                     View.Amount += sender.Amount
+                Else
+                    View.Amount -= sender.Amount
                 End If
-                sender.PcClosed = Not sender.PcClosed
             End If
         End Sub
 

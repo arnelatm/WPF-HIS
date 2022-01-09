@@ -39,7 +39,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim reportPaths As String = ConfigurationManager.AppSettings.Get($"ReportPathsIGroup")
             Dim uid As String = ConfigurationManager.AppSettings.Get("UID")
             Dim pwd As String = ConfigurationManager.AppSettings.Get("PWD")
-            Dim server As String = ConfigurationManager.AppSettings.Get("ServerTranslator1")
+            Dim server As String = ConfigurationManager.AppSettings.Get("ServerTranslator")
             Dim database As String = ConfigurationManager.AppSettings.Get("DATABASEIGroup")
 
             Report.Load(reportPaths & ReportFileName)

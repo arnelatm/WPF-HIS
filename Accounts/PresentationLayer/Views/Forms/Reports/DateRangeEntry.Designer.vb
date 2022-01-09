@@ -151,7 +151,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.CLabel2.Name = "CLabel2"
         Me.CLabel2.Size = New System.Drawing.Size(351, 25)
         Me.CLabel2.TabIndex = 26
-        Me.CLabel2.Text = "Shift Daily Report"
+        Me.CLabel2.Text = "Date Range Selection"
         Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.CLabel2.Translatable = true
         '
@@ -171,7 +171,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         '
         'btnOk
         '
-        Me.btnOk.DesignerSelected = true
+        Me.btnOk.DesignerSelected = false
         Me.btnOk.ImageIndex = 0
         Me.btnOk.Location = New System.Drawing.Point(87, 121)
         Me.btnOk.Name = "btnOk"
@@ -201,7 +201,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.Controls.Add(Me.CFlowLayout1)
         Me.Controls.Add(Me.CLabel1)
         Me.Name = "DateRangeEntry"
-        Me.Text = "Shift Daily Report"
+        Me.Text = "Date Range Selection"
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.CFlowLayout1.ResumeLayout(false)
         Me.ResumeLayout(false)

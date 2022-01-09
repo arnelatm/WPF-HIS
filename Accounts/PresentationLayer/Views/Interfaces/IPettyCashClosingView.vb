@@ -24,7 +24,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property TransactionDate As Date?
         Property PcClosingJournals As List(Of PcClosingJournalView)
         Property JournalItems As List(Of JournalItemView)
-        Event PcJournalCheckedEvent(sender As Object)
+        Event PcJournalCheckedEvent(sender As Object, all As Boolean, clear As Boolean, bindingSource As BindingSource)
         Event ClearAllPcJournal(sender As Object, clear As Boolean)
         'ReadOnly Property TotalCredits As Decimal
         'ReadOnly Property TotalDebits As Decimal
