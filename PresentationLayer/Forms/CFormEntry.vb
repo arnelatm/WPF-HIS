@@ -210,6 +210,16 @@ Public Class CFormEntry
             btnAdd.Visible = False
             btnFind.Visible = False
             HideNavigatorButtons = True
+            If adding Or editing Then
+                btnQuit.Enabled = False
+                btnSave.Enabled = True
+                btnUndo.Enabled = True
+            Else
+                btnEdit.Enabled = True
+                btnQuit.Enabled = True
+                btnSave.Enabled = False
+                btnUndo.Enabled = False
+            End If
         Else
             If adding Or editing Then
                 btnFirst.Enabled = False

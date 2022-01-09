@@ -43,7 +43,6 @@ Namespace PresentationLayer.Presenters
             AskBeforeSave = True
 
             AddHandler view.PcJournalCheckedEvent, AddressOf OnPcJournalCheckedEvent
-            AddHandler view.ClearAllPcJournal, AddressOf OnClearAllPcJournal
 
         End Sub
 
@@ -57,11 +56,6 @@ Namespace PresentationLayer.Presenters
         Private Sub OnPcJournalCheckedEvent(sender As Object, all As Boolean, clear As Boolean, dataBindingSource As BindingSource)
             If EditMode Or AddMode Then
                 ProcessPettyCashRequest(sender, all, clear, dataBindingSource)
-                'If sender.PcClosed Then
-                '    View.Amount -= sender.Amount
-                'Else
-                '    View.Amount += sender.Amount
-                'End If
                 View.Applied = View.Amount
             End If
         End Sub
@@ -94,17 +88,17 @@ Namespace PresentationLayer.Presenters
             GlobalVariables.Mapper.Map(modelData, View.PcClosingJournals)
         End Sub
 
-        Private Sub OnClearAllPcJournal(ByVal bsPcClosingJournal As BindingSource, clear As Boolean)
-            Dim total As Decimal = 0
-            For Each item In bsPcClosingJournal
-                item.PcClosed = clear
-                If clear Then
-                    total += item.Amount
-                End If
-            Next item
-            View.Amount = total
-            View.Applied = total
-        End Sub
+        'Private Sub OnClearAllPcJournal(ByVal bsPcClosingJournal As BindingSource, clear As Boolean)
+        '    Dim total As Decimal = 0
+        '    For Each item In bsPcClosingJournal
+        '        item.PcClosed = clear
+        '        If clear Then
+        '            total += item.Amount
+        '        End If
+        '    Next item
+        '    View.Amount = total
+        '    View.Applied = total
+        'End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             AddMode = True

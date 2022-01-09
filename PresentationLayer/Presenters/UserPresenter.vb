@@ -53,7 +53,7 @@ Public Class UserPresenter(Of TM As New)
     End Function
 
     Public Function SaveNewPassword(newPassword As String)
-        Dim userIdNo = Convert.ToInt16(Service.GetRecordFieldWithKey(newPassword.Trim(), "User", "UserName", "IdNo"))
+        Dim userIdNo = Convert.ToInt16(Service.GetRecordFieldWithKey(View.UserName.Trim(), "User", "UserName", "IdNo"))
         Return _serviceLogin.SavePassword(userIdNo, newPassword.Trim())
     End Function
 
