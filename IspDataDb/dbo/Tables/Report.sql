@@ -1,15 +1,15 @@
 ﻿CREATE TABLE [dbo].[Report] (
     [IdNo]                  SMALLINT       IDENTITY (1, 1) NOT NULL,
     [ReportCode]            VARCHAR (5)    NULL,
-    [ReportName]            VARCHAR (50)   NULL,
-    [ReportNameAra]         NVARCHAR (50)  NULL,
+    [ReportName]            VARCHAR (200)  NULL,
+    [ReportNameAra]         NVARCHAR (200) NULL,
     [BranchID]              VARCHAR (15)   NULL,
     [ReportGroup]           VARCHAR (10)   NULL,
     [ReportNo]              NUMERIC (5)    NOT NULL,
     [ReportOrder]           NUMERIC (5)    NULL,
-    [ReportFileName]        VARCHAR (75)   NULL,
-    [ReportTitle]           VARCHAR (100)  NULL,
-    [ReportTitleAra]        NVARCHAR (100) NULL,
+    [ReportFileName]        VARCHAR (200)  NULL,
+    [ReportTitle]           VARCHAR (200)  NULL,
+    [ReportTitleAra]        NVARCHAR (200) NULL,
     [ReportHeadingEnglish1] VARCHAR (75)   NOT NULL,
     [ReportHeadingEnglish2] VARCHAR (75)   NULL,
     [ReportHeadingArabic1]  NVARCHAR (75)  NOT NULL,
@@ -34,4 +34,6 @@
     [Active]                BIT            NULL,
     CONSTRAINT [PK_ReportCreator] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 

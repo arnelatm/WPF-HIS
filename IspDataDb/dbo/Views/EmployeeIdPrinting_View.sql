@@ -1,8 +1,9 @@
 ﻿CREATE VIEW dbo.EmployeeIdPrinting_View
 AS
-SELECT        dbo.EmployeeIdPrinting.EmployeeIdNo, dbo.Employee.EmployeeCode, dbo.Employee.Title, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.Employee.Gender, dbo.Employee.NationalIdNo, 
-                         dbo.Employee.BloodType, dbo.EmployeeIdPrinting.TransactionNumber, dbo.Country.NationalityAra, dbo.Employee.NationalityCode, dbo.Employee.DesignationIdNo, dbo.Designation.DesignationNameAra, 
-                         dbo.Designation.DesignationNameFemaleAra, dbo.Employee.Picture, dbo.Designation.DesignationNameFemale, dbo.Designation.DesignationName
+SELECT        dbo.EmployeeIdPrinting.EmployeeIdNo, dbo.Employee.EmployeeCode, ISNULL(dbo.Employee.Title, '') AS Title, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.Employee.Gender, 
+                         dbo.Employee.NationalIdNo, dbo.Employee.BloodType, dbo.EmployeeIdPrinting.TransactionNumber, dbo.Country.NationalityAra, dbo.Employee.NationalityCode, dbo.Employee.DesignationIdNo, 
+                         dbo.Designation.DesignationNameAra, dbo.Designation.DesignationNameFemaleAra, dbo.Employee.Picture, dbo.Designation.DesignationNameFemale, dbo.Designation.DesignationName, dbo.EmployeeIdPrinting.IdNo, 
+                         dbo.Country.CountryNameAra
 FROM            dbo.Employee LEFT OUTER JOIN
                          dbo.Country ON dbo.Employee.NationalityCode = dbo.Country.CountryCode COLLATE SQL_Latin1_General_CP1_CI_AS LEFT OUTER JOIN
                          dbo.Designation ON dbo.Employee.DesignationIdNo = dbo.Designation.IdNo RIGHT OUTER JOIN
@@ -93,6 +94,16 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 4
          End
+         Begin Table = "Country"
+            Begin Extent = 
+               Top = 7
+               Left = 519
+               Bottom = 332
+               Right = 701
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
          Begin Table = "Designation"
             Begin Extent = 
                Top = 21
@@ -109,16 +120,6 @@ Begin DesignProperties =
                Left = 38
                Bottom = 273
                Right = 232
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "Country"
-            Begin Extent = 
-               Top = 7
-               Left = 519
-               Bottom = 332
-               Right = 701
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -150,4 +151,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeIdPrinting_View';
+
+
 
