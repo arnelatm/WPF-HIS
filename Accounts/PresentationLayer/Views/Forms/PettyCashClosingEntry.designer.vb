@@ -48,7 +48,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvPayeeNameAra = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.bsPcJournals = New System.Windows.Forms.BindingSource(Me.components)
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.btnUnselectAll = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.txtPayeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblPayee = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -352,7 +352,7 @@ Namespace PresentationLayer.Views.Forms
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TableLayoutPanel1.Controls.Add(Me.CButton1, 1, 6)
+        Me.TableLayoutPanel1.Controls.Add(Me.btnUnselectAll, 1, 6)
         Me.TableLayoutPanel1.Controls.Add(Me.txtPayeeName, 6, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.lblPayee, 5, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.lblTransactionDate, 0, 0)
@@ -388,17 +388,17 @@ Namespace PresentationLayer.Views.Forms
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(983, 589)
         Me.TableLayoutPanel1.TabIndex = 5
         '
-        'CButton1
+        'btnUnselectAll
         '
-        Me.CButton1.DesignerSelected = false
-        Me.CButton1.ImageIndex = 0
-        Me.CButton1.Location = New System.Drawing.Point(122, 563)
-        Me.CButton1.Name = "CButton1"
-        Me.CButton1.OriginalImageName = Nothing
-        Me.CButton1.SecurityKey = "ClosePettyCash"
-        Me.CButton1.Size = New System.Drawing.Size(90, 23)
-        Me.CButton1.TabIndex = 15
-        Me.CButton1.Text = "Unselect All"
+        Me.btnUnselectAll.DesignerSelected = false
+        Me.btnUnselectAll.ImageIndex = 0
+        Me.btnUnselectAll.Location = New System.Drawing.Point(122, 563)
+        Me.btnUnselectAll.Name = "btnUnselectAll"
+        Me.btnUnselectAll.OriginalImageName = Nothing
+        Me.btnUnselectAll.SecurityKey = "ClosePettyCash"
+        Me.btnUnselectAll.Size = New System.Drawing.Size(90, 23)
+        Me.btnUnselectAll.TabIndex = 15
+        Me.btnUnselectAll.Text = "Unselect All"
         '
         'txtPayeeName
         '
@@ -940,7 +940,7 @@ End Sub
         Friend WithEvents txtAmount As CTextBox
         Friend WithEvents txtPayeeName As CTextBox
         Friend WithEvents lblPayee As CLabel
-        Friend WithEvents CButton1 As CButton
+        Friend WithEvents btnUnselectAll As CButton
         Friend WithEvents btnSelectAll As CButton
         Friend WithEvents CLabel3 As CLabel
         Friend WithEvents cboPayType As CaComboBox

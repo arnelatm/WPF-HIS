@@ -249,7 +249,7 @@ Namespace PresentationLayer.Views.Forms
             childMdiForm.Show()
         End Sub
 
-        Private Sub CashIncomePerDoctorServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCashIncomePerDoctorService.Click
+        Private Sub CashIncomePerDoctorServiceToolStripMenuItem_Click(sender As Object, e As EventArgs) 
             RunForm(Of CashIncomePerDoctorPerService)()
         End Sub
 
@@ -373,7 +373,7 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of IncomeStatement, String)("M")
         End Sub
 
-        Private Sub NumberOfCashPatientsPerDoctorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemNumberOfCashPatientsPerDoctor.Click
+        Private Sub NumberOfCashPatientsPerDoctorToolStripMenuItem_Click(sender As Object, e As EventArgs) 
             RunForm(Of NumberOfCashPatientsPerDoctorPerDay)()
         End Sub
 
@@ -487,7 +487,7 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of SupplierEntryTv, SupplierPresenter(Of SupplierModel))()
         End Sub
 
-        Private Sub TestToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBlankReport.Click
+        Private Sub TestToolStripMenuItem1_Click(sender As Object, e As EventArgs) 
             Dim cForm As New ReportFormTest("Blank Report.Rpt")
             cForm.Show()
         End Sub
@@ -1138,7 +1138,7 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of ShiftDailyReport)()
         End Sub
 
-        Private Sub ToolStripMenuItemLaboratory_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDailyDiagnosticSummary.Click
+        Private Sub ToolStripMenuItemLaboratory_Click(sender As Object, e As EventArgs) 
             RunForm(Of DiagnosticTestSummary)()
         End Sub
 
@@ -1154,7 +1154,7 @@ Namespace PresentationLayer.Views.Forms
             PasswordGenerator.Show()
         End Sub
 
-        Private Sub ToolStripMenuItemIncomeSummaryVatReport_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemIncomeVatSummary.Click
+        Private Sub ToolStripMenuItemIncomeSummaryVatReport_Click(sender As Object, e As EventArgs) 
             Dim parameters As New ArrayList
             parameters.Add("Revenue Sale Vat Report Summary")
             parameters.Add({"ReportTitle", "Revenue/Sale Vat Report Summary"})
@@ -1165,14 +1165,17 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
-        Private Sub ToolStripMenuItemReportSelector_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountingReports.Click
-            RunForm(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)($"IGACC")
-        End Sub
+        'Private Sub ToolStripMenuItemReportSelector_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountingReports.Click
+        '    RunForm(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)($"IGACC")
+        'End Sub
 
         Private Sub LaboratoryReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLaboratoryReports.Click
             RunForm(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)($"IGLAB")
         End Sub
 
+        Private Sub SalesReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSalesReports.Click
+            RunForm(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)($"IGSALE")
+        End Sub
     End Class
 
 End Namespace
