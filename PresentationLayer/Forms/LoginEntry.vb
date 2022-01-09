@@ -55,12 +55,15 @@ Public Class LoginEntry
             btn_Login.Text = Messaging.TranslateCaption("Save")
             textNewPassword.Text = Space(20)
             textConfirmation.Text = Space(20)
+            textBoxPassword.Text = Space(20)
             textNewPassword.Editable = True
             textConfirmation.Editable = True
+            textBoxUserName.DisplayOnly = True
             ' Presenter.EnableEdit()
             Height = 388
             floPasswordEntry.Height = 134
         Else
+            textBoxUserName.DisplayOnly = False
             Height = 342
             floPasswordEntry.Height = 134 - 46
         End If
@@ -113,7 +116,7 @@ Public Class LoginEntry
                 If Not _changingPassword Then
                     AfterSuccessfulLogin()
                 Else
-                    If SaveNewPassword() > 0 Then
+                    If Presenter.SaveNewPassword(textNewPassword.Text.Trim()) > 0 Then
                         textBoxPassword = textNewPassword
                         AfterSuccessfulLogin()
                     End If
@@ -175,11 +178,16 @@ Public Class LoginEntry
     End Sub
 
     Private Sub FormLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        _textBoxUserName.ReadOnly = False
+        If _changingPassword Then
+            _textBoxUserName.ReadOnly = True
+            _textBoxUserName.DisplayOnly = True
+        Else
+            _textBoxUserName.ReadOnly = False
+            _textBoxUserName.DisplayOnly = False
+        End If
         _textBoxPassword.ReadOnly = False
         _textConfirmation.ReadOnly = False
         _textNewPassword.ReadOnly = False
-        _textBoxUserName.DisplayOnly = False
         _textBoxPassword.DisplayOnly = False
         _textNewPassword.DisplayOnly = False
         _textConfirmation.DisplayOnly = False

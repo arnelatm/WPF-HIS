@@ -18,8 +18,6 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event PcJournalCheckedEvent(sender As Object, all As Boolean, clear As Boolean, dataBindingSource As BindingSource) Implements IPettyCashClosingView.PcJournalCheckedEvent
 
-        Public Event ClearAllPcJournal(sender As Object, clear As Boolean) Implements IPettyCashClosingView.ClearAllPcJournal
-
         Public Sub New()
             MyBase.New()
             ' This call is required by the designer.
@@ -209,8 +207,6 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-
-
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
@@ -274,38 +270,23 @@ Namespace PresentationLayer.Views.Forms
             }
             _pcFooter.ColumnToSum("dgvAmount") = True
             _pcFooter.SetText("DgvPayeeName", "Totals ->")
-        End Sub
 
-        'Private Sub PettyCashClosing_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-        '    Presenter.GoAddRecord()
-        '    Presenter.GetOpenPettyCash()
-        '    cboAccountIdNo.SelectedValue = -1
-        '    txtAmount.Text = 0
-        '    'If cboPcAccountIdNo.SelectedValue Is Nothing Or cboPcAccountIdNo.SelectedValue <= 0 Then
-        '        cboPcAccountIdNo.SelectedValue = _defaultAccount
-        '    'End If
-        '    If Presenter.PcAccountCount = 1 Then
-        '        cboPcAccountIdNo.DisplayOnly = True
-        '        cboPcAccountIdNo.TabStop = False
-        '    End If
-        '    bsPcJournals.ResetBindings(True)
-        '    cboPcAccountIdNo.Refresh()
-        '    _pcFooter.CalculateTotals()
-        'End Sub
+            btnEdit.Visible = False
+            btnFilter.Visible = False
+            btnDelete.Visible = False
+            btnNew.Visible = False
+            btnOpen.Visible = False
+            TurnOnInputs()
+
+        End Sub
 
         Private Sub btnSelectAll_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnSelectAll.ClickButtonArea
             RaiseEvent PcJournalCheckedEvent(sender, True, True, bsPcJournals)
-            'RaiseEvent ClearAllPcJournal(bsPcJournals, True)
-            'bsPcJournals.ResetBindings(False)
         End Sub
 
         Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnUnselectAll.ClickButtonArea
-            RaiseEvent PcJournalCheckedEvent(sender, True, False, bsPcJournals)
-            'RaiseEvent ClearAllPcJournal(bsPcJournals, False)
-            'bsPcJournals.ResetBindings(False)
+            RaiseEvent PcJournalCheckedEvent(sender, True, False, bsPcJournals)        
         End Sub
-
-
 
         Private Sub PettyCashClosingEntry_Shown(sender As Object, e As EventArgs) Handles Me.Shown
             Presenter.GoAddRecord()
@@ -324,27 +305,15 @@ Namespace PresentationLayer.Views.Forms
             _pcFooter.CalculateTotals()
         End Sub
 
-        'Private Sub DataGridViewReconciliationItems_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReconciliationItems.CellContentClick
-        '    If DataGridViewReconciliationItems.CurrentCell IsNot Nothing AndAlso (Presenter.EditMode Or Presenter.AddMode) Then
-        '        With DataGridViewReconciliationItems.CurrentCell
-        '            Select Case .OwningColumn.Name.ToLower()
-        '                Case $"dgvcleared"
-        '                    Dim selectedRow = DataGridViewReconciliationItems.Rows(.RowIndex).DataBoundItem
-        '                    RaiseEvent ReconciliationClearEvent(selectedRow, False, .Value, bsAccountReconciliationItems)
-        '            End Select
-        '        End With
-        '    End If
-        'End Sub
-
         Private Sub DataGridViewPcJournalsCell_ContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPcJournals.CellContentClick
             If DataGridViewPcJournals.CurrentCell IsNot Nothing AndAlso (Presenter.EditMode Or Presenter.AddMode) Then
                 With DataGridViewPcJournals.CurrentCell
                     Select Case .OwningColumn.Name.ToLower()
                         Case $"dgvpcclosed"
-                            'If Not DataGridViewPcJournals.DisplayOnly Then
+                            If Not DataGridViewPcJournals.DisplayOnly Then
                                 Dim selectedRow = DataGridViewPcJournals.Rows(.RowIndex).DataBoundItem
                                 RaiseEvent PcJournalCheckedEvent(selectedRow, False, .Value, bsPcJournals)
-                            'End If
+                            End If
                     End Select
                 End With
             End If

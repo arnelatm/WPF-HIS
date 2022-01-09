@@ -1285,6 +1285,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Main.resx">
       <DependentUpon>Main.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\GeneratePayrollBankCsv.resx">
       <DependentUpon>GeneratePayrollBankCsv.vb</DependentUpon>
