@@ -114,6 +114,7 @@ Namespace PresentationLayer.Presenters
             CreateDataSource("PayCycle", "PayCycleIdNo")
             CreateDataSource("PayGroup", "PayGroupIdNo")
             CreateDataSource("Employee", "SupervisorIdNo", "Supervisor=1")
+            CreateListDataSource("List", "Title","NameTitle")
             CreateEnumData(Of PayRateUnitSelection)(View.Unit)
             CreateLookupData("PhoneType", "PhoneTypes")
             CreateLookupData("Leave", "Leaves")

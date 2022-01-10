@@ -221,7 +221,7 @@ Namespace PresentationLayer.Views.Forms
             With DataGridViewPayrollAttendance
                 If .CurrentRow() IsNot Nothing Then
                     Dim nIndex = .CurrentRow.Index
-                    PayrollAttendance(nIndex).DaysPresent = PayrollAttendance(nIndex).DaysTotal - PayrollAttendance(nIndex).DaysOff - PayrollAttendance(nIndex).DaysAbsentWithPay - PayrollAttendance(nIndex).DaysAbsentWithoutPay - PayrollAttendance(nIndex).DaysVacationLeave
+                    PayrollAttendance(nIndex).DaysPresent = PayrollAttendance(nIndex).DaysTotal - PayrollAttendance(nIndex).DaysOff - PayrollAttendance(nIndex).DaysAbsentWithPay - PayrollAttendance(nIndex).DaysAbsentWithoutPay - PayrollAttendance(nIndex).DaysVacationLeave                   
                     'PayrollAttendance(nIndex).DaysAbsentWithoutPay = PayrollAttendance(nIndex).DaysTotal - PayrollAttendance(nIndex).DaysOff - PayrollAttendance(nIndex).DaysAbsentWithPay - PayrollAttendance(nIndex).DaysPresent
                 End If
             End With
