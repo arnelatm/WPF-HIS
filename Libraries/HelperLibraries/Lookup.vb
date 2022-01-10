@@ -44,7 +44,11 @@ Public Class Lookup
             CodeField = TableName + "Code"
         End If
         SortKey = NameField
-        FieldsToShow = {"IdNo", NameField, CodeField}
+        If TableName = "List" Then
+            FieldsToShow = {"IdNo",NameField}
+        Else
+            FieldsToShow = {"IdNo", NameField, CodeField}
+        End If       
         FilterKey = filter
     End Sub
 

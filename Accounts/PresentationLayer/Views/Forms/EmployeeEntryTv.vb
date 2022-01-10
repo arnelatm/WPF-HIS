@@ -400,6 +400,13 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property Title As String Implements IEmployeeView.Title
+            Get
+                Return cboTitle.GetNullableValue(Of String)
+            End Get
+            Set
+                cboTitle.SetValue(Value)
+            End Set
+        End Property
 
         Public Property TownCity As String Implements IEmployeeView.TownCity
             Get
@@ -500,6 +507,7 @@ Namespace PresentationLayer.Views.Forms
          {"Street", txtStreet},
          {"Supervisor", chkSupervisor},
          {"SupervisorIdNo", cboSupervisorIdNo},
+         {"Title", cboTitle},
          {"TownCity", txtTownCity},
          {"ZipCode", txtZipCode}
         }

@@ -203,7 +203,7 @@ Namespace PresentationLayer.Presenters
                 View.PayrollName = PayrollText & " " & View.StartDate.ToString() & " to " & View.EndDate.ToString()
                 View.PayrollNameAra = Messaging.TranslateCaption(PayrollText, "ar-SA") & " " & GetMonthNamesInCulture(arabicCulture)(Month(View.EndDate)) & " " & Year(View.EndDate).ToString()
             End If
-            View.PayrollCode = "M" + cdate(view.enddate).ToString("yyMM")
+            View.PayrollCode = "M" + CDate(View.EndDate).ToString("yyMM")
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
@@ -230,7 +230,7 @@ Namespace PresentationLayer.Presenters
             Dim absences As List(Of EmployeeAbsenceModel) = absenceService.GetRecordsWithGroupIdNo(Of EmployeeAbsenceModel)(View.IdNo, "IdNo")
             seq = View.PayrollAttendance.Count() + absences.Count() + 1
             daysInPeriod = DateDiff(DateInterval.Day, Convert.ToDateTime(View.StartDate), Convert.ToDateTime(View.EndDate)) + 1
-            daysOffInPeriod = FridaysInPeriod(View.StartDate, View.EndDate)
+            daysOffInPeriod = ComputeDaysOff(View.StartDate, View.EndDate)
             If View.PayrollAttendance.Any() Then
                 _reinitialize = True
             Else
@@ -245,7 +245,7 @@ Namespace PresentationLayer.Presenters
                 empName = activeEmployees(i * 4 - 3)
                 dateHired = activeEmployees(i * 4 - 2)
                 dateReleased = IIf(IsDBNull(activeEmployees(i * 4 - 1)), Nothing, activeEmployees(i * 4 - 1))
-                'If empId = 331 Then
+                'If empId >= 512 Then
                 '    Debugger.Break()
                 'End If
                 If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased >= View.StartDate OrElse dateReleased > View.EndDate) Then
@@ -418,13 +418,18 @@ Namespace PresentationLayer.Presenters
             Else
                 If dateReleased Is Nothing OrElse dateReleased > View.EndDate Then
                     eDate = View.EndDate
+                    daysTotal = DateDiff(DateInterval.Day, dateHired, eDate) + 1
+                    daysOff = ComputeDaysOff(dateHired, eDate)
                 Else
                     Dim dDate As Date ' need to do this because Date? type is not accepted by DateAdd function
+                    Dim sDate As Date
+                    sDate = View.StartDate
                     dDate = dateReleased
                     eDate = DateAdd(DateInterval.Day, -1, dDate)
+                    daysTotal = DateDiff(DateInterval.Day, sDate, eDate) + 1
+                    daysOff = ComputeDaysOff(sDate, eDate)
                 End If
-                daysTotal = DateDiff(DateInterval.Day, dateHired, eDate) + 1
-                daysOff = FridaysInPeriod(dateHired, eDate)
+
             End If
         End Sub
 
@@ -435,6 +440,7 @@ Namespace PresentationLayer.Presenters
                 retVal = UpdateChildData(_otWorkHourService, DtOtUpdateTable, DtOtInsertTable, passedValue, "PayrollIdNo")
             End If
         End Sub
+
 
         Private Sub AttendanceItemFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("DaysAbsentWithoutPay") = itemDataView.DaysAbsentWithoutPay
@@ -469,10 +475,11 @@ Namespace PresentationLayer.Presenters
             Return True
         End Function
 
-        Public Shared Function FridaysInPeriod(ByVal begDate As Date, endDate As Date) As Integer
+        Public Shared Function ComputeDaysOff(ByVal begDate As Date, endDate As Date) As Integer
             Dim count As Integer
             Dim d As DateTime = begDate
             Do Until d = endDate
+                ' for now assume everyone has Days off on Friday
                 If d.DayOfWeek = DayOfWeek.Friday Then
                     count += 1
                 End If
@@ -1264,6 +1271,22 @@ Namespace PresentationLayer.Presenters
         '    End If
         '    Return otAmount
         'End Function
+
+
+        Protected Overrides Function IsBizDataValid() As Boolean
+            Dim retValue = True
+            If MyBase.IsBizDataValid() Then
+                For Each item In View.PayrollAttendance
+                    if item.DaysPresent < 0 then
+                        'Messaging.Show("MsgNegativeDaysPresent")
+                        Messaging.ShowParametrizedMessage(True, "MsgNegativeDaysPresent", {"lineNumber", item.Sequence.ToString()})
+                        retValue = False
+                        exit for
+                    End If
+                Next
+            End If
+            Return retValue
+        End Function
 
     End Class
 

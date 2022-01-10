@@ -1,15 +1,20 @@
-﻿CREATE VIEW dbo.EmployeeIdPrinting_View
+﻿
+
+CREATE VIEW [dbo].[EmployeeIdPrinting_View]
 AS
-SELECT        dbo.EmployeeIdPrinting.EmployeeIdNo, dbo.Employee.EmployeeCode, ISNULL(dbo.Employee.Title, '') AS Title, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.Employee.Gender, 
-                         dbo.Employee.NationalIdNo, dbo.Employee.BloodType, dbo.EmployeeIdPrinting.TransactionNumber, dbo.Country.NationalityAra, dbo.Employee.NationalityCode, dbo.Employee.DesignationIdNo, 
-                         dbo.Designation.DesignationNameAra, dbo.Designation.DesignationNameFemaleAra, dbo.Employee.Picture, dbo.Designation.DesignationNameFemale, dbo.Designation.DesignationName, dbo.EmployeeIdPrinting.IdNo, 
-                         dbo.Country.CountryNameAra
-FROM            dbo.Employee LEFT OUTER JOIN
-                         dbo.Country ON dbo.Employee.NationalityCode = dbo.Country.CountryCode COLLATE SQL_Latin1_General_CP1_CI_AS LEFT OUTER JOIN
-                         dbo.Designation ON dbo.Employee.DesignationIdNo = dbo.Designation.IdNo RIGHT OUTER JOIN
-                         dbo.EmployeeIdPrinting ON dbo.Employee.IdNo = dbo.EmployeeIdPrinting.EmployeeIdNo
+SELECT        dbo.EmployeeIdPrinting.EmployeeIdNo, dbo.Employee.EmployeeCode, dbo.Employee.EmployeeName, dbo.Employee.EmployeeNameAra, dbo.Employee.Gender, dbo.Employee.NationalIdNo, dbo.Employee.BloodType, 
+                         dbo.EmployeeIdPrinting.TransactionNumber, dbo.Country.NationalityAra, dbo.Employee.NationalityCode, dbo.Employee.DesignationIdNo, dbo.Designation.DesignationNameAra, IsNull(dbo.Designation.DesignationNameFemaleAra,dbo.Designation.DesignationNameFemaleAra) as DesignationNameFemaleAra, 
+                         dbo.Employee.Picture, IsNull(dbo.Designation.DesignationNameFemale,dbo.Designation.DesignationName) as DesignationNameFemale, dbo.Designation.DesignationName, dbo.EmployeeIdPrinting.IdNo, dbo.Country.CountryNameAra, ISNULL(dbo.List.ListName, '') AS Title, 
+                         ISNULL(dbo.List.ListNameAra, '') AS TitleAra, dbo.List.ListName, dbo.List.ListNameAra
+FROM            dbo.Employee 
+				LEFT OUTER JOIN dbo.List ON dbo.Employee.Title = dbo.List.IdNo and dbo.List.ListIdNo = 1 
+				LEFT OUTER JOIN dbo.Country ON dbo.Employee.NationalityCode = dbo.Country.CountryCode COLLATE SQL_Latin1_General_CP1_CI_AS 
+				LEFT OUTER JOIN dbo.Designation ON dbo.Employee.DesignationIdNo = dbo.Designation.IdNo 
+				RIGHT OUTER JOIN dbo.EmployeeIdPrinting ON dbo.Employee.IdNo = dbo.EmployeeIdPrinting.EmployeeIdNo
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeIdPrinting_View';
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeIdPrinting_View';
+
+
 
 
 GO
@@ -18,7 +23,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[58] 4[3] 2[20] 3) )"
+         Configuration = "(H (1[65] 4[23] 2[3] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -92,7 +97,17 @@ Begin DesignProperties =
                Right = 468
             End
             DisplayFlags = 280
-            TopColumn = 4
+            TopColumn = 0
+         End
+         Begin Table = "List"
+            Begin Extent = 
+               Top = 302
+               Left = 779
+               Bottom = 611
+               Right = 949
+            End
+            DisplayFlags = 280
+            TopColumn = 0
          End
          Begin Table = "Country"
             Begin Extent = 
@@ -134,8 +149,8 @@ Begin DesignProperties =
    End
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
-         Column = 1440
-         Alias = 900
+         Column = 3345
+         Alias = 3600
          Table = 1170
          Output = 720
          Append = 1400
@@ -146,11 +161,17 @@ Begin DesignProperties =
          Filter = 1350
          Or = 1350
          Or = 1350
-         Or = 1350
+     ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeIdPrinting_View';
+
+
+
+
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'    Or = 1350
       End
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeIdPrinting_View';
-
-
 

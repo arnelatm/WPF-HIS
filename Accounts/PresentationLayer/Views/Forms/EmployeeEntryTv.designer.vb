@@ -205,6 +205,7 @@
         Me.dgvEmployeeIdNoLeaveCredits = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvIdNoLeaveCredits = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsLeaveCredits = New System.Windows.Forms.BindingSource(Me.components)
+        Me.cboTitle = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -279,6 +280,7 @@
         Me.floMainData.Controls.Add(Me.lblEmployeeCode)
         Me.floMainData.Controls.Add(Me.txtEmployeeCode)
         Me.floMainData.Controls.Add(Me.lblEmployeeName)
+        Me.floMainData.Controls.Add(Me.cboTitle)
         Me.floMainData.Controls.Add(Me.txtEmployeeName)
         Me.floMainData.Controls.Add(Me.lblEmployeeNameAra)
         Me.floMainData.Controls.Add(Me.txtEmployeeNameAra)
@@ -416,7 +418,7 @@
         Me.txtEmployeeName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtEmployeeName.ForeColor = System.Drawing.Color.Black
         Me.txtEmployeeName.LinkedLabel = Me.lblEmployeeName
-        Me.txtEmployeeName.Location = New System.Drawing.Point(186, 26)
+        Me.txtEmployeeName.Location = New System.Drawing.Point(270, 26)
         Me.txtEmployeeName.Margin = New System.Windows.Forms.Padding(1)
         Me.txtEmployeeName.MaximumValue = Nothing
         Me.txtEmployeeName.MinimumValue = Nothing
@@ -424,7 +426,7 @@
         Me.txtEmployeeName.OldValue = Nothing
         Me.txtEmployeeName.ReadOnly = true
         Me.txtEmployeeName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtEmployeeName.Size = New System.Drawing.Size(490, 23)
+        Me.txtEmployeeName.Size = New System.Drawing.Size(405, 23)
         Me.txtEmployeeName.TabIndex = 2
         Me.txtEmployeeName.Translatable = false
         Me.txtEmployeeName.ValueIsMandatory = true
@@ -3368,6 +3370,47 @@
         '
         Me.bsLeaveCredits.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeLeaveCreditModel)
         '
+        'cboTitle
+        '
+        Me.cboTitle.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.cboTitle.BegFindValue = Nothing
+        Me.cboTitle.ChangingSearchValueOnly = false
+        Me.cboTitle.CurrentSearchTerm = ""
+        Me.cboTitle.DefaultValue = Nothing
+        Me.cboTitle.DisplayMember = "Name"
+        Me.cboTitle.EditingMode = true
+        Me.cboTitle.EndFindValue = Nothing
+        Me.cboTitle.FieldDescription = Nothing
+        Me.cboTitle.FieldName = Nothing
+        Me.cboTitle.FilterRule = Nothing
+        Me.cboTitle.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboTitle.FindEnabled = false
+        Me.cboTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.cboTitle.FormattingEnabled = true
+        Me.cboTitle.HideWhenNotEditingOrAdding = false
+        Me.cboTitle.IgnoreCase = false
+        Me.cboTitle.LinkedLabel = Nothing
+        Me.cboTitle.Location = New System.Drawing.Point(186, 26)
+        Me.cboTitle.Margin = New System.Windows.Forms.Padding(1)
+        Me.cboTitle.Name = "cboTitle"
+        Me.cboTitle.OldValue = 0
+        Me.cboTitle.OriginalDataSource = Nothing
+        Me.cboTitle.OriginalList = Nothing
+        Me.cboTitle.OverrideDropDownStyleList = false
+        Me.cboTitle.PreviousSearchTerm = Nothing
+        Me.cboTitle.PropertySelector = Nothing
+        Me.cboTitle.ReadOnlyCombo = false
+        Me.cboTitle.Size = New System.Drawing.Size(82, 24)
+        Me.cboTitle.SuggestBoxHeight = 200
+        Me.cboTitle.SuggestListOrderRule = Nothing
+        Me.cboTitle.TabIndex = 222
+        Me.cboTitle.TextToSearch = Nothing
+        Me.cboTitle.Translatable = false
+        Me.cboTitle.ValueIsMandatory = false
+        Me.cboTitle.ValueIsNullable = false
+        Me.cboTitle.ValueIsNumeric = false
+        Me.cboTitle.ValueMember = "IdNo"
+        '
         'EmployeeEntryTv
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
@@ -3562,5 +3605,6 @@ End Sub
         Friend WithEvents dgvAccumulatedLeave As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
         Friend WithEvents dgvEmployeeIdNoLeaveCredits As DataGridViewTextBoxColumn
         Friend WithEvents dgvIdNoLeaveCredits As DataGridViewTextBoxColumn
+        Friend WithEvents cboTitle As Libraries.CBaseControlsLibrary.CaComboBox
     End Class
 End NameSpace
