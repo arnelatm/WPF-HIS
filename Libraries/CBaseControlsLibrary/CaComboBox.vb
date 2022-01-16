@@ -553,6 +553,8 @@ Public Class CaComboBox
         End If
     End Sub
 
+    Public Property DataValue
+
     Private Sub IdNoSearch(value As Object)
         Dim returnValue As Int32
         Dim found As Boolean = False
@@ -560,7 +562,19 @@ Public Class CaComboBox
         If DataSource IsNot Nothing Then
             For Each item In DataSource
                 If item.IdNo = value Then
-                    SelectedItem = DataSource(i)
+                    'SelectedIndex = i
+                    'Dim lReadOnlyCombo As Boolean = Visible
+                    If Visible Then
+                        SelectedItem = DataSource(i)
+                    Else
+                        SelectedItem = DataSource(i)
+                    End If
+                    '    Visible = True
+                    '    DisplayOnly = False
+                    '    ReadOnlyCombo = False
+                    '    SelectedItem = DataSource(i)
+                    '    Visible = False
+                    'End If
                     found = True
                     Exit For
                 End If

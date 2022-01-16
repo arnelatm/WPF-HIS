@@ -68,6 +68,7 @@
         Me.lblEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboTitle = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.txtEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblEmployeeNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtEmployeeNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
@@ -205,7 +206,6 @@
         Me.dgvEmployeeIdNoLeaveCredits = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvIdNoLeaveCredits = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsLeaveCredits = New System.Windows.Forms.BindingSource(Me.components)
-        Me.cboTitle = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -400,6 +400,50 @@
         Me.lblEmployeeName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.lblEmployeeName.Translatable = true
         '
+        'cboTitle
+        '
+        Me.cboTitle.BackColor = System.Drawing.Color.White
+        Me.cboTitle.BegFindValue = Nothing
+        Me.cboTitle.ChangingSearchValueOnly = false
+        Me.cboTitle.CurrentSearchTerm = ""
+        Me.cboTitle.DataValue = Nothing
+        Me.cboTitle.DefaultValue = Nothing
+        Me.cboTitle.DisplayMember = "Name"
+        Me.cboTitle.EditingMode = true
+        Me.cboTitle.EndFindValue = Nothing
+        Me.cboTitle.FieldDescription = Nothing
+        Me.cboTitle.FieldName = Nothing
+        Me.cboTitle.FilterRule = Nothing
+        Me.cboTitle.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboTitle.FindEnabled = false
+        Me.cboTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.cboTitle.ForeColor = System.Drawing.Color.Black
+        Me.cboTitle.FormattingEnabled = true
+        Me.cboTitle.HideWhenNotEditingOrAdding = false
+        Me.cboTitle.IgnoreCase = false
+        Me.cboTitle.IntegralHeight = false
+        Me.cboTitle.LinkedLabel = Nothing
+        Me.cboTitle.Location = New System.Drawing.Point(186, 26)
+        Me.cboTitle.Margin = New System.Windows.Forms.Padding(1)
+        Me.cboTitle.Name = "cboTitle"
+        Me.cboTitle.OldValue = 0
+        Me.cboTitle.OriginalDataSource = Nothing
+        Me.cboTitle.OriginalList = Nothing
+        Me.cboTitle.OverrideDropDownStyleList = false
+        Me.cboTitle.PreviousSearchTerm = Nothing
+        Me.cboTitle.PropertySelector = Nothing
+        Me.cboTitle.ReadOnlyCombo = false
+        Me.cboTitle.Size = New System.Drawing.Size(82, 24)
+        Me.cboTitle.SuggestBoxHeight = 200
+        Me.cboTitle.SuggestListOrderRule = Nothing
+        Me.cboTitle.TabIndex = 222
+        Me.cboTitle.TextToSearch = Nothing
+        Me.cboTitle.Translatable = false
+        Me.cboTitle.ValueIsMandatory = false
+        Me.cboTitle.ValueIsNullable = false
+        Me.cboTitle.ValueIsNumeric = false
+        Me.cboTitle.ValueMember = "IdNo"
+        '
         'txtEmployeeName
         '
         Me.txtEmployeeName.BackColor = System.Drawing.Color.White
@@ -438,7 +482,7 @@
         Me.lblEmployeeNameAra.EditingMode = false
         Me.lblEmployeeNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblEmployeeNameAra.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblEmployeeNameAra.Location = New System.Drawing.Point(1, 51)
+        Me.lblEmployeeNameAra.Location = New System.Drawing.Point(1, 52)
         Me.lblEmployeeNameAra.Margin = New System.Windows.Forms.Padding(1)
         Me.lblEmployeeNameAra.Name = "lblEmployeeNameAra"
         Me.lblEmployeeNameAra.Size = New System.Drawing.Size(183, 23)
@@ -466,7 +510,7 @@
         Me.txtEmployeeNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtEmployeeNameAra.ForeColor = System.Drawing.Color.Black
         Me.txtEmployeeNameAra.LinkedLabel = Me.lblEmployeeNameAra
-        Me.txtEmployeeNameAra.Location = New System.Drawing.Point(186, 51)
+        Me.txtEmployeeNameAra.Location = New System.Drawing.Point(186, 52)
         Me.txtEmployeeNameAra.Margin = New System.Windows.Forms.Padding(1)
         Me.txtEmployeeNameAra.MaximumValue = Nothing
         Me.txtEmployeeNameAra.MinimumValue = Nothing
@@ -492,7 +536,7 @@
         Me.tbcEmployee.Controls.Add(Me.tbpPhones)
         Me.tbcEmployee.Controls.Add(Me.TabPage1)
         Me.tbcEmployee.HotTrack = true
-        Me.tbcEmployee.Location = New System.Drawing.Point(3, 78)
+        Me.tbcEmployee.Location = New System.Drawing.Point(3, 79)
         Me.tbcEmployee.Name = "tbcEmployee"
         Me.tbcEmployee.SelectedIndex = 0
         Me.tbcEmployee.Size = New System.Drawing.Size(677, 387)
@@ -593,6 +637,7 @@
         Me.cacGender.BegFindValue = Nothing
         Me.cacGender.ChangingSearchValueOnly = false
         Me.cacGender.CurrentSearchTerm = ""
+        Me.cacGender.DataValue = Nothing
         Me.cacGender.DefaultValue = Nothing
         Me.cacGender.DisplayMember = "Name"
         Me.cacGender.EditingMode = false
@@ -652,6 +697,7 @@
         Me.cacMaritalStatus.BegFindValue = Nothing
         Me.cacMaritalStatus.ChangingSearchValueOnly = false
         Me.cacMaritalStatus.CurrentSearchTerm = ""
+        Me.cacMaritalStatus.DataValue = Nothing
         Me.cacMaritalStatus.DefaultValue = Nothing
         Me.cacMaritalStatus.DisplayMember = "Name"
         Me.cacMaritalStatus.EditingMode = false
@@ -711,6 +757,7 @@
         Me.cacNationalityCode.BegFindValue = Nothing
         Me.cacNationalityCode.ChangingSearchValueOnly = false
         Me.cacNationalityCode.CurrentSearchTerm = ""
+        Me.cacNationalityCode.DataValue = Nothing
         Me.cacNationalityCode.DefaultValue = Nothing
         Me.cacNationalityCode.DisplayMember = "Name"
         Me.cacNationalityCode.EditingMode = false
@@ -770,6 +817,7 @@
         Me.cacReligionIdNo.BegFindValue = Nothing
         Me.cacReligionIdNo.ChangingSearchValueOnly = false
         Me.cacReligionIdNo.CurrentSearchTerm = ""
+        Me.cacReligionIdNo.DataValue = Nothing
         Me.cacReligionIdNo.DefaultValue = Nothing
         Me.cacReligionIdNo.DisplayMember = "Name"
         Me.cacReligionIdNo.EditingMode = false
@@ -918,6 +966,7 @@
         Me.cboBloodType.BegFindValue = Nothing
         Me.cboBloodType.ChangingSearchValueOnly = false
         Me.cboBloodType.CurrentSearchTerm = ""
+        Me.cboBloodType.DataValue = Nothing
         Me.cboBloodType.DefaultValue = Nothing
         Me.cboBloodType.DisplayMember = "Name"
         Me.cboBloodType.EditingMode = false
@@ -1328,6 +1377,7 @@
         Me.cacCountryCode.BegFindValue = Nothing
         Me.cacCountryCode.ChangingSearchValueOnly = false
         Me.cacCountryCode.CurrentSearchTerm = ""
+        Me.cacCountryCode.DataValue = Nothing
         Me.cacCountryCode.DefaultValue = Nothing
         Me.cacCountryCode.DisplayMember = "Name"
         Me.cacCountryCode.EditingMode = false
@@ -1780,6 +1830,7 @@
         Me.cacDepartmentIdNo.BegFindValue = Nothing
         Me.cacDepartmentIdNo.ChangingSearchValueOnly = false
         Me.cacDepartmentIdNo.CurrentSearchTerm = ""
+        Me.cacDepartmentIdNo.DataValue = Nothing
         Me.cacDepartmentIdNo.DefaultValue = Nothing
         Me.cacDepartmentIdNo.DisplayMember = "Name"
         Me.cacDepartmentIdNo.EditingMode = false
@@ -1839,6 +1890,7 @@
         Me.cacDesignationIdNo.BegFindValue = Nothing
         Me.cacDesignationIdNo.ChangingSearchValueOnly = false
         Me.cacDesignationIdNo.CurrentSearchTerm = ""
+        Me.cacDesignationIdNo.DataValue = Nothing
         Me.cacDesignationIdNo.DefaultValue = Nothing
         Me.cacDesignationIdNo.DisplayMember = "Name"
         Me.cacDesignationIdNo.EditingMode = false
@@ -1899,6 +1951,7 @@
         Me.cboSponsorType.BegFindValue = Nothing
         Me.cboSponsorType.ChangingSearchValueOnly = false
         Me.cboSponsorType.CurrentSearchTerm = ""
+        Me.cboSponsorType.DataValue = Nothing
         Me.cboSponsorType.DefaultValue = Nothing
         Me.cboSponsorType.DisplayMember = "Name"
         Me.cboSponsorType.EditingMode = false
@@ -1959,6 +2012,7 @@
         Me.cboSupervisorIdNo.BegFindValue = Nothing
         Me.cboSupervisorIdNo.ChangingSearchValueOnly = false
         Me.cboSupervisorIdNo.CurrentSearchTerm = ""
+        Me.cboSupervisorIdNo.DataValue = Nothing
         Me.cboSupervisorIdNo.DefaultValue = Nothing
         Me.cboSupervisorIdNo.DisplayMember = "Name"
         Me.cboSupervisorIdNo.EditingMode = false
@@ -2160,6 +2214,7 @@
         Me.cboPaymentMethod.BegFindValue = Nothing
         Me.cboPaymentMethod.ChangingSearchValueOnly = false
         Me.cboPaymentMethod.CurrentSearchTerm = ""
+        Me.cboPaymentMethod.DataValue = Nothing
         Me.cboPaymentMethod.DefaultValue = Nothing
         Me.cboPaymentMethod.DisplayMember = "Name"
         Me.cboPaymentMethod.EditingMode = false
@@ -2221,6 +2276,7 @@
         Me.cacBankIdNo.BegFindValue = Nothing
         Me.cacBankIdNo.ChangingSearchValueOnly = false
         Me.cacBankIdNo.CurrentSearchTerm = ""
+        Me.cacBankIdNo.DataValue = Nothing
         Me.cacBankIdNo.DefaultValue = Nothing
         Me.cacBankIdNo.DisplayMember = "Name"
         Me.cacBankIdNo.EditingMode = false
@@ -2269,6 +2325,7 @@
         Me.lblBankAccountNo.Location = New System.Drawing.Point(4, 56)
         Me.lblBankAccountNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblBankAccountNo.Name = "lblBankAccountNo"
+        Me.lblBankAccountNo.SecurityKey = "EPI"
         Me.lblBankAccountNo.Size = New System.Drawing.Size(185, 23)
         Me.lblBankAccountNo.TabIndex = 218
         Me.lblBankAccountNo.Text = "Account No."
@@ -2315,6 +2372,7 @@
         Me.lblOpeningBalance.Location = New System.Drawing.Point(4, 81)
         Me.lblOpeningBalance.Margin = New System.Windows.Forms.Padding(1)
         Me.lblOpeningBalance.Name = "lblOpeningBalance"
+        Me.lblOpeningBalance.SecurityKey = "EPI"
         Me.lblOpeningBalance.Size = New System.Drawing.Size(185, 23)
         Me.lblOpeningBalance.TabIndex = 284
         Me.lblOpeningBalance.Text = "Open. Bal. (Cash Adv.)"
@@ -2363,6 +2421,7 @@
         Me.lblBalance.Location = New System.Drawing.Point(4, 106)
         Me.lblBalance.Margin = New System.Windows.Forms.Padding(1)
         Me.lblBalance.Name = "lblBalance"
+        Me.lblBalance.SecurityKey = "EPI"
         Me.lblBalance.Size = New System.Drawing.Size(185, 23)
         Me.lblBalance.TabIndex = 285
         Me.lblBalance.Text = "Cash Advance Balance"
@@ -2411,6 +2470,7 @@
         Me.lblIban.Location = New System.Drawing.Point(4, 131)
         Me.lblIban.Margin = New System.Windows.Forms.Padding(1)
         Me.lblIban.Name = "lblIban"
+        Me.lblIban.SecurityKey = "EPI"
         Me.lblIban.Size = New System.Drawing.Size(185, 23)
         Me.lblIban.TabIndex = 220
         Me.lblIban.Text = "IBAN Number"
@@ -2470,6 +2530,7 @@
         Me.cboPayCycleidNo.BegFindValue = Nothing
         Me.cboPayCycleidNo.ChangingSearchValueOnly = false
         Me.cboPayCycleidNo.CurrentSearchTerm = ""
+        Me.cboPayCycleidNo.DataValue = Nothing
         Me.cboPayCycleidNo.DefaultValue = Nothing
         Me.cboPayCycleidNo.DisplayMember = "Name"
         Me.cboPayCycleidNo.EditingMode = false
@@ -2531,6 +2592,7 @@
         Me.cboPayGroupIdNo.BegFindValue = Nothing
         Me.cboPayGroupIdNo.ChangingSearchValueOnly = false
         Me.cboPayGroupIdNo.CurrentSearchTerm = ""
+        Me.cboPayGroupIdNo.DataValue = Nothing
         Me.cboPayGroupIdNo.DefaultValue = Nothing
         Me.cboPayGroupIdNo.DisplayMember = "Name"
         Me.cboPayGroupIdNo.EditingMode = false
@@ -2579,6 +2641,7 @@
         Me.lblDutyHours.Location = New System.Drawing.Point(4, 208)
         Me.lblDutyHours.Margin = New System.Windows.Forms.Padding(1)
         Me.lblDutyHours.Name = "lblDutyHours"
+        Me.lblDutyHours.SecurityKey = "EPI"
         Me.lblDutyHours.Size = New System.Drawing.Size(185, 23)
         Me.lblDutyHours.TabIndex = 292
         Me.lblDutyHours.Text = "Duty Hours"
@@ -3369,47 +3432,6 @@
         'bsLeaveCredits
         '
         Me.bsLeaveCredits.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeLeaveCreditModel)
-        '
-        'cboTitle
-        '
-        Me.cboTitle.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.cboTitle.BegFindValue = Nothing
-        Me.cboTitle.ChangingSearchValueOnly = false
-        Me.cboTitle.CurrentSearchTerm = ""
-        Me.cboTitle.DefaultValue = Nothing
-        Me.cboTitle.DisplayMember = "Name"
-        Me.cboTitle.EditingMode = true
-        Me.cboTitle.EndFindValue = Nothing
-        Me.cboTitle.FieldDescription = Nothing
-        Me.cboTitle.FieldName = Nothing
-        Me.cboTitle.FilterRule = Nothing
-        Me.cboTitle.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboTitle.FindEnabled = false
-        Me.cboTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.cboTitle.FormattingEnabled = true
-        Me.cboTitle.HideWhenNotEditingOrAdding = false
-        Me.cboTitle.IgnoreCase = false
-        Me.cboTitle.LinkedLabel = Nothing
-        Me.cboTitle.Location = New System.Drawing.Point(186, 26)
-        Me.cboTitle.Margin = New System.Windows.Forms.Padding(1)
-        Me.cboTitle.Name = "cboTitle"
-        Me.cboTitle.OldValue = 0
-        Me.cboTitle.OriginalDataSource = Nothing
-        Me.cboTitle.OriginalList = Nothing
-        Me.cboTitle.OverrideDropDownStyleList = false
-        Me.cboTitle.PreviousSearchTerm = Nothing
-        Me.cboTitle.PropertySelector = Nothing
-        Me.cboTitle.ReadOnlyCombo = false
-        Me.cboTitle.Size = New System.Drawing.Size(82, 24)
-        Me.cboTitle.SuggestBoxHeight = 200
-        Me.cboTitle.SuggestListOrderRule = Nothing
-        Me.cboTitle.TabIndex = 222
-        Me.cboTitle.TextToSearch = Nothing
-        Me.cboTitle.Translatable = false
-        Me.cboTitle.ValueIsMandatory = false
-        Me.cboTitle.ValueIsNullable = false
-        Me.cboTitle.ValueIsNumeric = false
-        Me.cboTitle.ValueMember = "IdNo"
         '
         'EmployeeEntryTv
         '

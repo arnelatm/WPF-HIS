@@ -1002,7 +1002,9 @@ Namespace PresentationLayer.Presenters
             Else
                 checkAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
             End If
-            Dim cForm As New ReportForm("Check Printing.Rpt", checkAmountInWords, "CheckAmountInWords", GetPayeeName(View.PayeeIdNo), "PayeeName", View.CheckDate, "CheckDate", Convert.ToDecimal(View.Amount), "CheckAmount", language, "Language", View.Notes, "Notes")
+            Dim reportFileName As String
+            reportFileName = "Check Printing" & View.AccountIdNo.ToString() & ".Rpt"
+            Dim cForm As New ReportForm(reportFileName, checkAmountInWords, "CheckAmountInWords", GetPayeeName(View.PayeeIdNo), "PayeeName", View.CheckDate, "CheckDate", Convert.ToDecimal(View.Amount), "CheckAmount", language, "Language", View.Notes, "Notes")
             cForm.Show()
         End Sub
 
