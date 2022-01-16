@@ -291,6 +291,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayType.ChangingSearchValueOnly = false
         Me.tlpDisbursement.SetColumnSpan(Me.cboPayType, 2)
         Me.cboPayType.CurrentSearchTerm = ""
+        Me.cboPayType.DataValue = Nothing
         Me.cboPayType.DefaultValue = "0"
         Me.cboPayType.DisplayMember = "Name"
         Me.cboPayType.EditingMode = false
@@ -691,6 +692,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAccountIdNo.ChangingSearchValueOnly = false
         Me.tlpDisbursement.SetColumnSpan(Me.cboAccountIdNo, 6)
         Me.cboAccountIdNo.CurrentSearchTerm = ""
+        Me.cboAccountIdNo.DataValue = Nothing
         Me.cboAccountIdNo.DefaultValue = ""
         Me.cboAccountIdNo.DisplayMember = "Name"
         Me.cboAccountIdNo.EditingMode = false
@@ -798,6 +800,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboDiscountAccountIdNo.ChangingSearchValueOnly = false
         Me.tlpDisbursement.SetColumnSpan(Me.cboDiscountAccountIdNo, 6)
         Me.cboDiscountAccountIdNo.CurrentSearchTerm = ""
+        Me.cboDiscountAccountIdNo.DataValue = Nothing
         Me.cboDiscountAccountIdNo.DefaultValue = Nothing
         Me.cboDiscountAccountIdNo.DisplayMember = "Name"
         Me.cboDiscountAccountIdNo.EditingMode = false
@@ -1574,6 +1577,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPaymentType.ChangingSearchValueOnly = false
         Me.tlpDisbursement.SetColumnSpan(Me.cboPaymentType, 5)
         Me.cboPaymentType.CurrentSearchTerm = ""
+        Me.cboPaymentType.DataValue = Nothing
         Me.cboPaymentType.DefaultValue = "0"
         Me.cboPaymentType.DisplayMember = "Name"
         Me.cboPaymentType.EditingMode = false
@@ -1695,6 +1699,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayeeIdNo.ChangingSearchValueOnly = false
         Me.tlpDisbursement.SetColumnSpan(Me.cboPayeeIdNo, 8)
         Me.cboPayeeIdNo.CurrentSearchTerm = ""
+        Me.cboPayeeIdNo.DataValue = Nothing
         Me.cboPayeeIdNo.DefaultValue = Nothing
         Me.cboPayeeIdNo.DisplayMember = "Name"
         Me.cboPayeeIdNo.EditingMode = true
@@ -1984,7 +1989,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'btnPrintCheck
         '
-        Me.btnPrintCheck.DesignerSelected = false
+        Me.btnPrintCheck.DesignerSelected = true
         Me.btnPrintCheck.ImageIndex = 0
         Me.btnPrintCheck.Location = New System.Drawing.Point(288, 3)
         Me.btnPrintCheck.Name = "btnPrintCheck"

@@ -138,7 +138,7 @@ Namespace AdoNet
                 If Not (filter Is Nothing OrElse filter = "") Then
                     sql &= "(" & filter.Trim() & ") and " & findableControl.FieldName.Trim() & " "
                 End If
-                If findableControl.BegFindValue Is Nothing Or findableControl.BegFindValue = "" Then
+                If findableControl.BegFindValue Is Nothing Then ' Or findableControl.BegFindValue = "" Then
                     sql &= " " & findableControl.FieldName & " Is Null or "
                     searchString = findableControl.EndFindValue
                     sql &= findableControl.FieldName.Trim() & " <= @searchString"

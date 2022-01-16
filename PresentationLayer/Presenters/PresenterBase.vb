@@ -1638,11 +1638,11 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             'If TypeOf cCtrl Is CTextBox OrElse TypeOf cCtrl Is TextBox Then
             '    SetPropertyValue(cCtrl, "PasswordChar", Convert.ToChar("*"))
             If TypeOf cCtrl Is CTabPage Then
-                Dim tabControlObj As CTabControl
-                Dim tabPageObj As CTabPage
-                tabControlObj = cCtrl.Parent
-                tabPageObj = cCtrl
-                tabControlObj.TabPages.Remove(cCtrl)
+                'Dim tabControlObj As CTabControl
+                'Dim tabPageObj As CTabPage
+                'tabControlObj = cCtrl.Parent
+                'tabPageObj = cCtrl
+                'tabControlObj.TabPages.Remove(cCtrl)
             Else
                 SetPropertyValue(cCtrl, "Visible", False)
             End If
