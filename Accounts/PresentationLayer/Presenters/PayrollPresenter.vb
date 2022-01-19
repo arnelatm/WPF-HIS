@@ -441,7 +441,6 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-
         Private Sub AttendanceItemFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("DaysAbsentWithoutPay") = itemDataView.DaysAbsentWithoutPay
             workRow("DaysAbsentWithPay") = itemDataView.DaysAbsentWithPay
@@ -596,10 +595,10 @@ Namespace PresentationLayer.Presenters
             Dim counter As Integer = 0
             progressDisplayForm.Show()
             progressDisplayForm.InitializeDisplay(payrollDetailsModel.Count() + 2)
-            If regenerate Then
-                Dim savedPayrollPayElements As List(Of PayrollPayElement) = _payrollPayElementsService.GetRecordsWithGroupIdNo(Of PayrollPayElement)(_payrollIdNo)
-                GlobalVariables.Mapper.Map(savedPayrollPayElements, _savedPayrollPayElements)
-            End If
+            'If regenerate Then
+            '    Dim savedPayrollPayElements As List(Of PayrollPayElement) = _payrollPayElementsService.GetRecordsWithGroupIdNo(Of PayrollPayElement)(_payrollIdNo)
+            '    GlobalVariables.Mapper.Map(savedPayrollPayElements, _savedPayrollPayElements)
+            'End If
             Dim otWorkHoursService As New AccountsService("OtWorkHour")
             Dim otWorkHours As List(Of OtWorkHour) = otWorkHoursService.GetRecordsWithGroupIdNo(Of OtWorkHour)(_payrollIdNo)
             GlobalVariables.Mapper.Map(otWorkHours, _otWorkHoursModel)
@@ -634,6 +633,9 @@ Namespace PresentationLayer.Presenters
                 Else
                     payrollDetailIdNo = payrollDetail.IdNo
                 End If
+                'If payrollDetailModel.EmployeeIdNo = 10 Then
+                '    Debugger.Break()
+                'End If
                 GenerateRegularPayElements(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
                 GenerateComputedPayElements(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
                 GenerateGlobalPayElements(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
@@ -875,6 +877,10 @@ Namespace PresentationLayer.Presenters
             For Each earning As PayElementModel In _computedPayElements
                 If earning.Active Then
                     Dim amount As Decimal
+                    'If earning.PayElementCode = "VPD" Then
+                    '    Debugger.Break()
+                    'End If
+
                     amount = CalculateComputedPayElement(employeeIdNo, earning)
                     If Not regenerate Then
                         AddPayElement(employeeIdNo, amount, earning.IdNo, 0, payrollDetailIdNo, Nothing)
@@ -1272,16 +1278,15 @@ Namespace PresentationLayer.Presenters
         '    Return otAmount
         'End Function
 
-
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue = True
             If MyBase.IsBizDataValid() Then
                 For Each item In View.PayrollAttendance
-                    if item.DaysPresent < 0 then
+                    If item.DaysPresent < 0 Then
                         'Messaging.Show("MsgNegativeDaysPresent")
                         Messaging.ShowParametrizedMessage(True, "MsgNegativeDaysPresent", {"lineNumber", item.Sequence.ToString()})
                         retValue = False
-                        exit for
+                        Exit For
                     End If
                 Next
             End If

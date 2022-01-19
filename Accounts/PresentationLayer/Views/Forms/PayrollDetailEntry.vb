@@ -223,6 +223,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvEarningIdNo.DataSource = _PayEarningsByCode
                 dgvEarningIdNo.DisplayMember = "Name"
                 dgvEarningIdNo.ValueMember = "IdNo"
+                dgvEarningGenerated.DisplayOnly = True
                 dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
                 .Refresh()
                 .AutoGenerateColumns = False
@@ -241,6 +242,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvDeductionIdNo.DataSource = _PayDeductionsByCode
                 dgvDeductionIdNo.DisplayMember = "Name"
                 dgvDeductionIdNo.ValueMember = "IdNo"
+                dgvDeductionGenerated.DisplayOnly = True
                 dgvDeductionIdNo.DisplayStyleForCurrentCellOnly = True
                 .Refresh()
                 .AutoGenerateColumns = False
