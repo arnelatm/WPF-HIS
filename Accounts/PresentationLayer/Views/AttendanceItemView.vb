@@ -70,6 +70,7 @@ Namespace PresentationLayer.Views
         Public Property IdNo As Int32 Implements IAttendanceItemView.IdNo
         Public Property PayrollIdNo As Int16 Implements IAttendanceItemView.PayrollIdNo
         Public Property Sequence As Int16 Implements IAttendanceItemView.Sequence
+        Public Property Selected As Boolean Implements IAttendanceItemView.Selected
 
     End Class
 

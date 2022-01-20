@@ -27,6 +27,7 @@ Namespace PresentationLayer.Views.Interfaces
         Event InitializePayroll(sender As Object)
 
         Event SelectedPayrollChanged(payrollIdNo As Int16)
+        Event ClearAllEmployee(sender As Object, clear As Boolean)
 
     End Interface
 

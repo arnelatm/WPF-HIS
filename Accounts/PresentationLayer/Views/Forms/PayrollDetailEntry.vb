@@ -195,6 +195,8 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property SponsorType As String Implements IPayrollDetailView.SponsorType
 
+        Public Property Selected As Boolean Implements IPayrollDetailView.Selected
+
         'Public Property PayPeriodDescription As String
 
 #End Region
