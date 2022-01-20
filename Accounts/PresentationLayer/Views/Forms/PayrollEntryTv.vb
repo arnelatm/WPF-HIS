@@ -141,6 +141,7 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Public Event InitializeAttendance(sender As Object) Implements IPayrollView.InitializeAttendance
+        'Public Event ReprocessAttendance(sender As Object) Implements IPayrollView.ReprocessAttendance
 
         Public Event InitializeOvertime(sender As Object) Implements IPayrollView.InitializeOvertime
 
@@ -151,6 +152,8 @@ Namespace PresentationLayer.Views.Forms
         Public Event GenerateCsvFile(payrollIdNo As Int16) Implements IPayrollView.GenerateCsvFile
 
         Public Event SelectedPayrollChanged(payrollIdNo As Int16) Implements IPayrollView.SelectedPayrollChanged
+
+        Public Event ClearAllEmployee(sender As Object, clear As Boolean) Implements IPayrollView.ClearAllEmployee
 
         Private Sub BindPayrollAttendance()
             SuspendLayout()
@@ -221,7 +224,7 @@ Namespace PresentationLayer.Views.Forms
             With DataGridViewPayrollAttendance
                 If .CurrentRow() IsNot Nothing Then
                     Dim nIndex = .CurrentRow.Index
-                    PayrollAttendance(nIndex).DaysPresent = PayrollAttendance(nIndex).DaysTotal - PayrollAttendance(nIndex).DaysOff - PayrollAttendance(nIndex).DaysAbsentWithPay - PayrollAttendance(nIndex).DaysAbsentWithoutPay - PayrollAttendance(nIndex).DaysVacationLeave                   
+                    PayrollAttendance(nIndex).DaysPresent = PayrollAttendance(nIndex).DaysTotal - PayrollAttendance(nIndex).DaysOff - PayrollAttendance(nIndex).DaysAbsentWithPay - PayrollAttendance(nIndex).DaysAbsentWithoutPay - PayrollAttendance(nIndex).DaysVacationLeave
                     'PayrollAttendance(nIndex).DaysAbsentWithoutPay = PayrollAttendance(nIndex).DaysTotal - PayrollAttendance(nIndex).DaysOff - PayrollAttendance(nIndex).DaysAbsentWithPay - PayrollAttendance(nIndex).DaysPresent
                 End If
             End With
@@ -283,6 +286,20 @@ Namespace PresentationLayer.Views.Forms
             RunSubForm(Of EmployeeLeaveEntry, EmployeeLeavePresenter(Of EmployeeLeaveModel), Boolean)(ParentForm, True)
         End Sub
 
+        Private Sub CButton1_ClickButtonArea_1(Sender As Object, e As MouseEventArgs)
+            'RaiseEvent ReprocessAttendance(Me)
+            'bsPayrollAttendance.ResetBindings(False)
+        End Sub
+
+        Private Sub CButton1_ClickButtonArea_2(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
+            RaiseEvent ClearAllEmployee(bsPayrollAttendance, True)
+            bsPayrollAttendance.ResetBindings(False)
+        End Sub
+
+        Private Sub CButton2_ClickButtonArea_1(Sender As Object, e As MouseEventArgs) Handles CButton2.ClickButtonArea
+            RaiseEvent ClearAllEmployee(bsPayrollAttendance, False)
+            bsPayrollAttendance.ResetBindings(False)
+        End Sub
     End Class
 
 End Namespace

@@ -16,6 +16,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property DaysTotal As Decimal
         Property DaysVacationLeave As Decimal
         Property PayrollIdNo As Int16
+        Property Selected As Boolean
         Property Sequence As Int16
     End Interface
 

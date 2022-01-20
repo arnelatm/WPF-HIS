@@ -17,6 +17,7 @@
         Public Property DaysTotal As Decimal
         Public Property DaysVacationLeave As Decimal
         Public Property PayrollIdNo As Int16
+        Public Property Selected As Boolean
         Public Property Sequence As Int16
         Property Errors As List(Of String)
 

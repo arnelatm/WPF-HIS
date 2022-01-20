@@ -21,6 +21,7 @@
         Public Property PaymentMethod as String
         Public Property SponsorType as String
         Public Property StartDate As Date
+        Public Property Selected As Boolean
     End Class
 
 End Namespace
