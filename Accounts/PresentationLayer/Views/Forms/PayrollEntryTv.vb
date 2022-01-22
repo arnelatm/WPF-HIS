@@ -234,15 +234,18 @@ Namespace PresentationLayer.Views.Forms
             UpdateButtonText()
             btnInitializeAttendance.Enabled = True
             btnInitializeOvertime.Enabled = True
+            btnGenerateRegularPayElements.Enabled = True
         End Sub
 
         Private Sub UpdateButtonText()
             If PayrollAttendance.Count() = 0 Then
                 btnInitializeAttendance.Text = Messaging.TranslateCaption("Initialize Attendance")
                 btnInitializeOvertime.Text = Messaging.TranslateCaption("Initialize Overtime")
+                btnGenerateRegularPayElements.Text = Messaging.TranslateCaption("Generate Employee Earnings / Deductions")
             Else
                 btnInitializeAttendance.Text = Messaging.TranslateCaption("Re-Process Attendance")
                 btnInitializeOvertime.Text = Messaging.TranslateCaption("Re-Process Overtime")
+                btnGenerateRegularPayElements.Text = Messaging.TranslateCaption("Re-generate Selected Employee Earnings / Deductions")
             End If
         End Sub
 
@@ -250,6 +253,7 @@ Namespace PresentationLayer.Views.Forms
             UpdateButtonText()
             btnInitializeAttendance.Enabled = False
             btnInitializeOvertime.Enabled = False
+            btnGenerateRegularPayElements.Enabled = False
         End Sub
 
         Private Sub OnInitializeAttendance_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnInitializeAttendance.ClickButtonArea
@@ -264,6 +268,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub BtnGeneratePayElements_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnGenerateRegularPayElements.ClickButtonArea
             RaiseEvent GenerateRegularPayElements(Me)
+            btnEdit.Enabled = True
+            btnAdd.Enabled = True
+
+            TurnOffInputs()
         End Sub
 
         Private Sub BtnViewPayrollReport_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewPayrollReport.ClickButtonArea
@@ -300,6 +308,19 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent ClearAllEmployee(bsPayrollAttendance, False)
             bsPayrollAttendance.ResetBindings(False)
         End Sub
+
+        
+        Private Sub DataGridView_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPayrollAttendance.CellEndEdit
+            With DataGridViewPayrollAttendance
+                If .CurrentRow IsNot Nothing Then
+                    if .CurrentCell.OwningColumn.Name.ToLower() <> "dgvselected" Then
+                        btnGenerateRegularPayElements.Enabled = False
+                    End If                   
+                End If
+            End With
+        End Sub
+
+
     End Class
 
 End Namespace

@@ -528,6 +528,9 @@ Namespace PresentationLayer.Presenters
         'End Sub
 
         Public Sub GenerateRegularPayElements()
+            'If ChangesMade() Then
+            '    Messaging.Show(True,"MsgSaveFirstBeforeGeneration")
+            'Else
             _payrollIdNo = View.IdNo
             If View.PayrollAttendance.Count() = 0 And View.PayrollOvertime.Count() = 0 Then
                 Messaging.Show(True, "MsgEmptyEmployeeAttendanceOt")
@@ -555,6 +558,7 @@ Namespace PresentationLayer.Presenters
                     End If
                 End If
             End If
+            'End If
         End Sub
 
         Private Sub ProcessPayroll(ByRef regenerate As Boolean)
@@ -631,7 +635,7 @@ Namespace PresentationLayer.Presenters
             Dim processedPayrollDetailsModel As New List(Of PayrollDetailModel)
             'GlobalVariables.Mapper.Map(payrollDetails, payrollDetailsModel)
             For Each payrollDetailModel In payrollDetailsModel
-                If payrollDetailModel.Selected Then
+                If (Not regenerate) Or payrollDetailModel.Selected Then
                     Dim payrollDetail As New PayrollDetail
                     GlobalVariables.Mapper.Map(payrollDetailModel, payrollDetail)
                     If payrollDetail.IdNo = 0 Then
@@ -663,7 +667,6 @@ Namespace PresentationLayer.Presenters
                         dtPayrollPayElementInsertTable.Rows.Add(dataRow)
                     Else
                         dataRow = dtPayrollPayElementUpdateTable.NewRow()
-                        dataRow = dtPayrollPayElementUpdateTable.NewRow()
                         dataRow("Amount") = item.Amount
                         dataRow("Generated") = True
                         dataRow("IdNo") = item.IdNo
@@ -673,32 +676,29 @@ Namespace PresentationLayer.Presenters
                         dtPayrollPayElementUpdateTable.Rows.Add(dataRow)
                     End If
                 Next
-                If regenerate Then
-                    Dim savedPayrollPayElements As List(Of PayrollPayElement) = _payrollPayElementsService.GetRecordsWithGroupIdNo(Of PayrollPayElement)(_payrollIdNo)
-                    GlobalVariables.Mapper.Map(savedPayrollPayElements, _savedPayrollPayElements)
-                End If
+                Dim savedPayrollPayElements As List(Of PayrollPayElement) = _payrollPayElementsService.GetRecordsWithGroupIdNo(Of PayrollPayElement)(_payrollIdNo)
+                GlobalVariables.Mapper.Map(savedPayrollPayElements, _savedPayrollPayElements)
                 For Each item In _savedPayrollPayElements
                     Dim dataRow As DataRow
                     If Not item.Generated Then
-                        Dim payrollDetail As PayrollDetailModel
-                        payrollDetail = payrollDetailsModel.Find(Function(c) c.EmployeeIdNo = item.EmployeeIdNo)
-                        If payrollDetail IsNot Nothing Then
-                            dataRow = dtPayrollPayElementUpdateTable.NewRow()
-                            dataRow("Amount") = item.Amount
-                            dataRow("Generated") = False
-                            dataRow("IdNo") = item.IdNo
-                            dataRow("PayElementIdNo") = item.PayElementIdNo
-                            dataRow("PayrollDetailIdNo") = item.PayrollDetailIdNo
-                            dataRow("RecurringPayElementIdNo") = item.RecurringPayElementIdNo
-                            dtPayrollPayElementUpdateTable.Rows.Add(dataRow)
-                        End If
+                        ' add all manually added (or non-generated) payroll elements
+                        dataRow = dtPayrollPayElementUpdateTable.NewRow()
+                        dataRow("Amount") = item.Amount
+                        dataRow("Generated") = False
+                        dataRow("IdNo") = item.IdNo
+                        dataRow("PayElementIdNo") = item.PayElementIdNo
+                        dataRow("PayrollDetailIdNo") = item.PayrollDetailIdNo
+                        dataRow("RecurringPayElementIdNo") = item.RecurringPayElementIdNo
+                        dtPayrollPayElementUpdateTable.Rows.Add(dataRow)
                     Else
+                        ' generated item
                         Dim payrollDetail As PayrollDetailModel
                         payrollDetail = payrollDetailsModel.Find(Function(c) c.EmployeeIdNo = item.EmployeeIdNo)
-                        If payrollDetail IsNot Nothing Then
+                        If Not payrollDetail.Selected Then
+                            ' 
                             dataRow = dtPayrollPayElementUpdateTable.NewRow()
                             dataRow("Amount") = item.Amount
-                            dataRow("Generated") = False
+                            dataRow("Generated") = True
                             dataRow("IdNo") = item.IdNo
                             dataRow("PayElementIdNo") = item.PayElementIdNo
                             dataRow("PayrollDetailIdNo") = item.PayrollDetailIdNo
@@ -1053,24 +1053,31 @@ Namespace PresentationLayer.Presenters
                 Next
             Else
                 For Each employeeAttendance In View.PayrollAttendance
-                    'If employeeAttendance.Selected Then
-                    '    Debugger.Break()
-                    'End If
-                    payrollDetail = savedPayrollDetailsModel.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = employeeAttendance.EmployeeIdNo)
+                    ' add only selected records and re-process information
+                    If employeeAttendance.Selected Then
+                        payrollDetail = savedPayrollDetailsModel.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = employeeAttendance.EmployeeIdNo)
+                        If payrollDetail Is Nothing Then
+                            payrollDetail = New PayrollDetailModel
+                            payrollDetail.EmployeeIdNo = employeeAttendance.EmployeeIdNo
+                            payrollDetail.PayrollIdNo = View.IdNo
+                            payrollDetail.Selected = True
+                            If payrollDetail.SponsorType <> EnumToCode(SponsorTypeSelection.Others) And payrollDetail.SponsorType <> EnumToCode(SponsorTypeSelection.Sponsor) And payrollDetail.PaymentMethod = EnumToCode(PayrollPaymentMethodSelection.BankTransfer) Then
+                                payrollDetail.BankTransfer = True
+                            Else
+                                payrollDetail.BankTransfer = False
+                            End If
+                        Else
+                            payrollDetail.Selected = employeeAttendance.Selected
+                        End If
+                        payrollDetailsModel.Add(payrollDetail)
+                    End If
+                Next
+                For Each item In savedPayrollDetailsModel
+                    ' add non selected records as-is, selected records are already added above
+                    payrollDetail = payrollDetailsModel.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = item.EmployeeIdNo)
                     If payrollDetail Is Nothing Then
-                        payrollDetail = New PayrollDetailModel
-                        payrollDetail.EmployeeIdNo = employeeAttendance.EmployeeIdNo
-                        payrollDetail.PayrollIdNo = View.IdNo
-                        payrollDetail.Selected = True
-                    Else
-                        payrollDetail.Selected = employeeAttendance.Selected
+                        payrollDetailsModel.Add(item)
                     End If
-                    If payrollDetail.SponsorType <> EnumToCode(SponsorTypeSelection.Others) And payrollDetail.SponsorType <> EnumToCode(SponsorTypeSelection.Sponsor) And payrollDetail.PaymentMethod = EnumToCode(PayrollPaymentMethodSelection.BankTransfer) Then
-                        payrollDetail.BankTransfer = True
-                    Else
-                        payrollDetail.BankTransfer = False
-                    End If
-                    payrollDetailsModel.Add(payrollDetail)
                 Next
             End If
             For Each employeeAttendance In View.PayrollOvertime
