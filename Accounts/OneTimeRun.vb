@@ -126,6 +126,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgNoHolidayAvailmentToApprove", "Either No holiday availment are currently applied or all available holiday availment have already been acted upon.", "Error")
         Messaging.AddMessage("MsgSeeTableEntry", "See entry on {tableName} with ID Number #{idNumber}", "Error")
         Messaging.AddMessage("MsgNegativeDaysPresent","Negative Days Present entry found on line number '<{lineNumber}>'. Please correct the error before saving.","Error")
+        Messaging.AddMessage("MsgSaveFirstBeforeGeneration","Please save first before generating payroll.","Error")
     End Sub
 
     'Public Shared Sub CreateEnums()
