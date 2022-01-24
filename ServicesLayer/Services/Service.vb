@@ -399,6 +399,13 @@ Namespace Services
             Return DataDao.GetDaoRecords(filter)
         End Function
 
+        Public Function GetDaoRecords(Of TM)(Optional filter As String = Nothing)
+            Dim dataModel As New List(Of TM)
+            Dim bizData = DataDao.GetDaoRecords(filter)
+            GlobalVariables.Mapper.Map(bizData, dataModel)
+            Return dataModel
+        End Function
+
         Public Function UpdateInsertTvp(ByRef updateTvpTable As DataTable, ByRef insertTvpTable As DataTable, ByVal groupIdNo As Integer) As Integer Implements IService.UpdateInsertTvp
             Return DataDao.UpdateInsertTvp(updateTvpTable, insertTvpTable, groupIdNo)
         End Function
