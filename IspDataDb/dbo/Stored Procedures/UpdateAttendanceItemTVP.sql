@@ -14,6 +14,7 @@
 
 
 
+
 CREATE PROCEDURE  [dbo].[UpdateAttendanceItemTVP]
   @MParam AttendanceItemUpdate READONLY, @GroupIdNo as INT
 AS 
@@ -30,6 +31,7 @@ SET	a.DaysAbsentWithoutPay = b.DaysAbsentWithoutPay,
 	a.DaysAbsentWithPay = b.DaysAbsentWithPay,
 	a.DaysOff = b.DaysOff,
 	a.DaysPresent = b.DaysPresent,
+	a.DaysTotal = b.DaysTotal,
     a.DaysVacationLeave = b.DaysVacationLeave,
 	a.EmployeeIdNo = b.EmployeeIdNo,
 	a.PayrollIdNo = @GroupIdNo,

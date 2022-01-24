@@ -270,8 +270,8 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent GenerateRegularPayElements(Me)
             btnEdit.Enabled = True
             btnAdd.Enabled = True
-
             TurnOffInputs()
+            'Close()
         End Sub
 
         Private Sub BtnViewPayrollReport_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewPayrollReport.ClickButtonArea

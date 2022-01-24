@@ -7,9 +7,12 @@
     [DaysAbsentWithoutPay] DECIMAL (8, 4)  NULL,
     [DaysVacationLeave]    DECIMAL (18, 4) NULL,
     [DaysOff]              DECIMAL (8, 4)  NULL,
+    [DaysTotal]            DECIMAL (8, 4)  NULL,
     [Sequence]             SMALLINT        NULL,
     CONSTRAINT [PK_AttendanceItem] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
