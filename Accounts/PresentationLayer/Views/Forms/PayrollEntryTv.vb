@@ -271,7 +271,8 @@ Namespace PresentationLayer.Views.Forms
             btnEdit.Enabled = True
             btnAdd.Enabled = True
             TurnOffInputs()
-            'Close()
+            Close()
+            RunSubForm(Of PayrollDetailEntry, PayrollDetailPresenter(Of PayrollDetailModel))(IdNo, ParentForm)
         End Sub
 
         Private Sub BtnViewPayrollReport_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnViewPayrollReport.ClickButtonArea
