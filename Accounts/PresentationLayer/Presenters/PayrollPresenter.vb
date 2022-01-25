@@ -632,14 +632,18 @@ Namespace PresentationLayer.Presenters
                     'Dim dataRow As DataRow
                     Dim payrollAttendance As AttendanceItemView
                     payrollAttendance = View.PayrollAttendance.Find(Function(c) c.EmployeeIdNo = item.EmployeeIdNo)
-                    If payrollAttendance.Selected Then
-                        If item.Generated Then
-                            ' ignore these records they have already been regenerated
+                    If payrollAttendance Is Nothing Then
+                        _payrollPayElements.Add(item)
+                    Else
+                        If payrollAttendance.Selected Then
+                            If item.Generated Then
+                                ' ignore these records they have already been regenerated
+                            Else
+                                _payrollPayElements.Add(item)
+                            End If
                         Else
                             _payrollPayElements.Add(item)
                         End If
-                    Else
-                        _payrollPayElements.Add(item)
                     End If
                 Next
                 For Each item In _payrollPayElements
@@ -718,34 +722,32 @@ Namespace PresentationLayer.Presenters
             For Each empPayElement As EmployeePayElementModel In empPayElementsModel
                 Dim payElement As New PayElementModel
                 payElement = _payElementsService.GetRecordByIdNo(Of PayElementModel)(empPayElement.PayElementIdNo)
-                If payElement.Active Then
-                    'Dim payElementModel As New PayElementModel
-                    'GlobalVariables.Mapper.Map(payElement, payElementModel)
-                    If payElement.CalculationType = _fixedAmountType Then
-                        amount = ComputePayAmount(_payFrequency, empPayElement.Amount, empPayElement.Unit)
+                'Dim payElementModel As New PayElementModel
+                'GlobalVariables.Mapper.Map(payElement, payElementModel)
+                If payElement.CalculationType = _fixedAmountType Then
+                    amount = ComputePayAmount(_payFrequency, empPayElement.Amount, empPayElement.Unit)
+                    If Not regenerate Then
+                        AddPayElement(employeeIdNo, amount, payElement.IdNo, 0, payrollDetailIdNo, Nothing)
+                    Else
+                        UpdatePayElement(employeeIdNo, amount, payElement.IdNo, payrollDetailIdNo, Nothing)
+                    End If
+                ElseIf payElement.CalculationType = _fixedRateType Then
+                    Dim rate As Decimal = empPayElement.Rate
+                    If rate <> 0 Then
+                        Dim qty As Decimal
+                        If payElement.QuantityType = _overtimeRegularType OrElse
+                            payElement.QuantityType = _overtimeHolidayType OrElse
+                            payElement.QuantityType = _overTimeSpecialType OrElse
+                            payElement.QuantityType = _hoursWorkedType Then
+                            qty = ComputeQuantity(empPayElement.EmployeeIdNo, payElement.QuantityType)
+                        Else
+                            qty = ComputeQuantity(empPayElement.EmployeeIdNo, payElement.QuantityType)
+                        End If
+                        amount = rate * qty
                         If Not regenerate Then
                             AddPayElement(employeeIdNo, amount, payElement.IdNo, 0, payrollDetailIdNo, Nothing)
                         Else
                             UpdatePayElement(employeeIdNo, amount, payElement.IdNo, payrollDetailIdNo, Nothing)
-                        End If
-                    ElseIf payElement.CalculationType = _fixedRateType Then
-                        Dim rate As Decimal = empPayElement.Rate
-                        If rate <> 0 Then
-                            Dim qty As Decimal
-                            If payElement.QuantityType = _overtimeRegularType OrElse
-                                payElement.QuantityType = _overtimeHolidayType OrElse
-                                payElement.QuantityType = _overTimeSpecialType OrElse
-                                payElement.QuantityType = _hoursWorkedType Then
-                                qty = ComputeQuantity(empPayElement.EmployeeIdNo, payElement.QuantityType)
-                            Else
-                                qty = ComputeQuantity(empPayElement.EmployeeIdNo, payElement.QuantityType)
-                            End If
-                            amount = rate * qty
-                            If Not regenerate Then
-                                AddPayElement(employeeIdNo, amount, payElement.IdNo, 0, payrollDetailIdNo, Nothing)
-                            Else
-                                UpdatePayElement(employeeIdNo, amount, payElement.IdNo, payrollDetailIdNo, Nothing)
-                            End If
                         End If
                     End If
                 End If
