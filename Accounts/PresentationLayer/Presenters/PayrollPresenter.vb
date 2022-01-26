@@ -1020,7 +1020,7 @@ Namespace PresentationLayer.Presenters
                     Dim newPayrollDetail As New PayrollDetailModel
                     newPayrollDetail.EmployeeIdNo = currentPayrollAttendance.EmployeeIdNo
                     newPayrollDetail.PayrollIdNo = View.IdNo
-                    employee = Service.GetFieldWithIdNo(currentPayrollAttendance.EmployeeIdNo, "Employee", "SponsorType,PaymentMethod")
+                    employee = Service.GetFieldsWithIdNo(currentPayrollAttendance.EmployeeIdNo, "Employee", "SponsorType,PaymentMethod")
                     If employee.SponsorType <> EnumToCode(SponsorTypeSelection.Others) And employee.SponsorType <> EnumToCode(SponsorTypeSelection.Sponsor) And employee.PaymentMethod = EnumToCode(PayrollPaymentMethodSelection.BankTransfer) Then
                         newPayrollDetail.BankTransfer = True
                     Else
