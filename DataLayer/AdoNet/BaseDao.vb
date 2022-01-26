@@ -322,7 +322,7 @@ Namespace AdoNet
 
         Public Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object Implements IBaseDao.GetFieldWithIdNo
             Dim sql As String =
-                    " Select top 1 " & returnFieldName & " FROM [" & tableName & "] " &
+                    " Select " & returnFieldName & " FROM [" & tableName & "] " &
                     " Where IdNo = @IdNo "
             Dim params() As Object = {"@IdNo", idNo}
             Return _db.Scalar(sql, params)
