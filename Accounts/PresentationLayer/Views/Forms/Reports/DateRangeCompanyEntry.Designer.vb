@@ -2,7 +2,7 @@
 
 Namespace PresentationLayer.Views.Forms.Reports
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-    Partial Class DateRangeEntry
+    Partial Class DateRangeCompanyEntry
         Inherits AATM.PresentationLayer.Forms.BFMain
 
         'Form overrides dispose to clean up the component list.
@@ -23,13 +23,15 @@ Namespace PresentationLayer.Views.Forms.Reports
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DateRangeEntry))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DateRangeCompanyEntry))
         Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpEndingDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.dtpBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboInsuranceIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -133,9 +135,11 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.CFlowLayout1.Controls.Add(Me.dtpBeginningDate)
         Me.CFlowLayout1.Controls.Add(Me.CLabel3)
         Me.CFlowLayout1.Controls.Add(Me.dtpEndingDate)
+        Me.CFlowLayout1.Controls.Add(Me.CLabel4)
+        Me.CFlowLayout1.Controls.Add(Me.cboInsuranceIdNo)
         Me.CFlowLayout1.Location = New System.Drawing.Point(12, 12)
         Me.CFlowLayout1.Name = "CFlowLayout1"
-        Me.CFlowLayout1.Size = New System.Drawing.Size(354, 89)
+        Me.CFlowLayout1.Size = New System.Drawing.Size(541, 119)
         Me.CFlowLayout1.TabIndex = 26
         '
         'CLabel2
@@ -149,11 +153,69 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.CLabel2.Location = New System.Drawing.Point(1, 1)
         Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel2.Name = "CLabel2"
-        Me.CLabel2.Size = New System.Drawing.Size(351, 25)
+        Me.CLabel2.Size = New System.Drawing.Size(540, 25)
         Me.CLabel2.TabIndex = 26
         Me.CLabel2.Text = "Date Range Selection"
         Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.CLabel2.Translatable = true
+        '
+        'CLabel4
+        '
+        Me.CLabel4.DisplayOnly = true
+        Me.CLabel4.EditingMode = false
+        Me.CLabel4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.CLabel4.Location = New System.Drawing.Point(1, 82)
+        Me.CLabel4.Margin = New System.Windows.Forms.Padding(1)
+        Me.CLabel4.Name = "CLabel4"
+        Me.CLabel4.Size = New System.Drawing.Size(150, 25)
+        Me.CLabel4.TabIndex = 27
+        Me.CLabel4.Text = "Company"
+        Me.CLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.CLabel4.Translatable = true
+        '
+        'cboInsuranceIdNo
+        '
+        Me.cboInsuranceIdNo.BackColor = System.Drawing.Color.White
+        Me.cboInsuranceIdNo.BegFindValue = Nothing
+        Me.cboInsuranceIdNo.ChangingSearchValueOnly = false
+        Me.cboInsuranceIdNo.CurrentSearchTerm = ""
+        Me.cboInsuranceIdNo.DataValue = Nothing
+        Me.cboInsuranceIdNo.DefaultValue = Nothing
+        Me.cboInsuranceIdNo.DisplayMember = "Name"
+        Me.cboInsuranceIdNo.EditingMode = true
+        Me.cboInsuranceIdNo.EndFindValue = Nothing
+        Me.cboInsuranceIdNo.FieldDescription = Nothing
+        Me.cboInsuranceIdNo.FieldName = Nothing
+        Me.cboInsuranceIdNo.FilterRule = Nothing
+        Me.cboInsuranceIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboInsuranceIdNo.FindEnabled = false
+        Me.cboInsuranceIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.cboInsuranceIdNo.ForeColor = System.Drawing.Color.Black
+        Me.cboInsuranceIdNo.FormattingEnabled = true
+        Me.cboInsuranceIdNo.HideWhenNotEditingOrAdding = false
+        Me.cboInsuranceIdNo.IgnoreCase = false
+        Me.cboInsuranceIdNo.IntegralHeight = false
+        Me.cboInsuranceIdNo.LinkedLabel = Nothing
+        Me.cboInsuranceIdNo.Location = New System.Drawing.Point(153, 82)
+        Me.cboInsuranceIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.cboInsuranceIdNo.Name = "cboInsuranceIdNo"
+        Me.cboInsuranceIdNo.OldValue = 0
+        Me.cboInsuranceIdNo.OriginalDataSource = Nothing
+        Me.cboInsuranceIdNo.OriginalList = Nothing
+        Me.cboInsuranceIdNo.OverrideDropDownStyleList = false
+        Me.cboInsuranceIdNo.PreviousSearchTerm = Nothing
+        Me.cboInsuranceIdNo.PropertySelector = Nothing
+        Me.cboInsuranceIdNo.ReadOnlyCombo = false
+        Me.cboInsuranceIdNo.Size = New System.Drawing.Size(379, 24)
+        Me.cboInsuranceIdNo.SuggestBoxHeight = 200
+        Me.cboInsuranceIdNo.SuggestListOrderRule = Nothing
+        Me.cboInsuranceIdNo.TabIndex = 28
+        Me.cboInsuranceIdNo.TextToSearch = Nothing
+        Me.cboInsuranceIdNo.Translatable = false
+        Me.cboInsuranceIdNo.ValueIsMandatory = false
+        Me.cboInsuranceIdNo.ValueIsNullable = false
+        Me.cboInsuranceIdNo.ValueIsNumeric = false
+        Me.cboInsuranceIdNo.ValueMember = "IdNo"
         '
         'CLabel1
         '
@@ -173,7 +235,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         '
         Me.btnOk.DesignerSelected = false
         Me.btnOk.ImageIndex = 0
-        Me.btnOk.Location = New System.Drawing.Point(87, 121)
+        Me.btnOk.Location = New System.Drawing.Point(12, 148)
         Me.btnOk.Name = "btnOk"
         Me.btnOk.OriginalImageName = Nothing
         Me.btnOk.SecurityKey = ""
@@ -185,7 +247,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         '
         Me.btnCancel.DesignerSelected = false
         Me.btnCancel.ImageIndex = 0
-        Me.btnCancel.Location = New System.Drawing.Point(209, 121)
+        Me.btnCancel.Location = New System.Drawing.Point(454, 148)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.OriginalImageName = Nothing
         Me.btnCancel.SecurityKey = ""
@@ -193,14 +255,14 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.btnCancel.TabIndex = 28
         Me.btnCancel.Text = "Cancel"
         '
-        'DateRangeEntry
+        'DateRangeCompanyEntry
         '
-        Me.ClientSize = New System.Drawing.Size(376, 160)
+        Me.ClientSize = New System.Drawing.Size(554, 187)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnOk)
         Me.Controls.Add(Me.CFlowLayout1)
         Me.Controls.Add(Me.CLabel1)
-        Me.Name = "DateRangeEntry"
+        Me.Name = "DateRangeCompanyEntry"
         Me.Text = "Date Range Selection"
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.CFlowLayout1.ResumeLayout(false)
@@ -216,5 +278,7 @@ End Sub
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
+        Friend WithEvents CLabel4 As CLabel
+        Friend WithEvents cboInsuranceIdNo As CaComboBox
     End Class
 End Namespace
