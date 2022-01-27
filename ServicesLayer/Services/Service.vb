@@ -703,6 +703,20 @@ Namespace Services
             Return BaseDao.GetRecordFieldsFiltered(tableName, fieldList, filter)
         End Function
 
+
+        Public Sub SaveConnectionString()
+            DataDao.SaveConnectionString()
+        End Sub
+
+
+        Public Sub RestoreConnectionString()
+            DataDao.RestoreConnectionString()
+        End Sub
+
+        Public Sub SetConnectionString(connectionName As String)
+            DataDao.SetConnectionString(connectionName)
+        End Sub
+
 #End Region
 
     End Class

@@ -1051,10 +1051,25 @@ Namespace AdoNet
             Return _db.Read(sql, MakeMasterList).ToList()
         End Function
 
+        Public Sub SaveConnectionString()
+            _db.SaveConnectionString()
+        End Sub
+
+
+        Public Sub RestoreConnectionString()
+            _db.RestoreConnectionString()
+        End Sub
+
+        Public Sub SetConnectionString(connectionName As String)
+            _db.SetConnectionString(connectionName)
+        End Sub
+
+
         Private Shared ReadOnly MakeMasterList As Func(Of IDataReader, GenericData) = Function(reader) New GenericData() With {
             .Code = Extensions.AsString(reader("Code")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Name = Extensions.AsString(reader("Name"))}
+
 
     End Class
 

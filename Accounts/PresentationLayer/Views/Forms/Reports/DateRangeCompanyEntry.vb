@@ -1,6 +1,7 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
@@ -52,6 +53,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             endValue = GetCodedDate(defEnd)
             dtpBeginningDate.Value = begValue
             dtpEndingDate.Value = endValue
+            cboInsuranceIdNo.DataSource = InsuranceList
 
         End Sub
 
@@ -106,6 +108,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                 parameters.Add({"ReportTitle", Messaging.TranslateCaption(reportTitle)})
                 parameters.Add({"BeginningDate", dtpBeginningDate.Value})
                 parameters.Add({"EndingDate", dtpEndingDate.Value})
+                parameters.Add({"InsuranceId", cboInsuranceIdNo.SelectedValue})
                 If _reportModel.QueryParameters IsNot Nothing AndAlso _reportModel.QueryParameters <> "" Then
                     Dim rParameters As String = _reportModel.QueryParameters
                     Dim aParameters As String() = rParameters.Split(","c)
@@ -134,6 +137,9 @@ Namespace PresentationLayer.Views.Forms.Reports
         Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
             Close()
         End Sub
+
+        Public Property InsuranceList As List(Of Lookup.LookupData)
+
 
     End Class
 
