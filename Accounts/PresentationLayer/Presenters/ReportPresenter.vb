@@ -35,9 +35,11 @@ Namespace PresentationLayer.Presenters
             TableName = "Account"
             SortOrderKey = "IdNo"
             WithTreeView = False
-            CreateLookupData("InsuranceDetails", "InsuranceId", {"InsuranceId","NameEnglish"},"NameEnglish", Nothing)
+            Service.SaveConnectionString()
+            Service.SetConnectionString("IGROUPCLINIC")
+            CreateLookupData("InsuranceDetails", "InsuranceList", {"InsuranceId","NameEnglish"},"NameEnglish", Nothing)
+            Service.RestoreConnectionString()
         End Sub
-
 
     End Class
 

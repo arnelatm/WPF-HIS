@@ -17,7 +17,7 @@ Namespace AdoNet
         Private ReadOnly Factory As DbProviderFactory = DbProviderFactories.GetFactory("System.Data.SqlClient")
 
         'Private _exInfo As ExceptionDispatchInfo
-        Private Property ConnectionString As String
+        Private Shared ConnectionString As String
 
         'Private _waitForm As LoadingForm
 
@@ -53,6 +53,22 @@ Namespace AdoNet
         Public Function GetConnectionString()
             Return ConnectionString
         End Function
+
+
+        Public Sub SetConnectionString(connectionName As String)
+             ConnectionString = ConfigurationManager.ConnectionStrings(connectionName).ConnectionString
+        End Sub
+
+
+        Private _savedConnectionString As String 
+
+        Public Sub SaveConnectionString()
+            _savedConnectionString = connectionString
+        End Sub
+
+        Public Sub RestoreConnectionString()
+            ConnectionString = _savedConnectionString
+        End Sub
 
         Public Function SqlRead(sql As String, ParamArray ByVal params() As Object)
             Dim arrayResult As New ArrayList
