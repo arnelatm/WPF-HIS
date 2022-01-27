@@ -22,4 +22,23 @@ Namespace PresentationLayer.Presenters
 
     End Class
 
+    
+    Public Class DateRangeCompanyPresenter
+        Inherits AccountsPresenterNew(Of IView, AccountModel)
+
+        'Public UserIsSupervisor As Boolean
+
+        Public Sub New(view As IView)
+            MyBase.New(view)
+            TableName = "Account"
+            Service = New AccountsService("Account")
+            TableName = "Account"
+            SortOrderKey = "IdNo"
+            WithTreeView = False
+            CreateLookupData("InsuranceDetails", "InsuranceId", {"InsuranceId","NameEnglish"},"NameEnglish", Nothing)
+        End Sub
+
+
+    End Class
+
 End Namespace

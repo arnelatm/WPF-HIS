@@ -27,7 +27,7 @@ Namespace PresentationLayer.Views.Forms
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReportSelectorForm))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReportSelectorForm2))
         Me.DataGridViewReportList = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.ReportName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -47,6 +47,9 @@ Namespace PresentationLayer.Views.Forms
         Me.CCustomDateTimePicker1 = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.CCustomDateTimePicker2 = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.CLabel6 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.CaComboBox1 = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.CaComboBox2 = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.DataGridViewReportList,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.bsReportList,System.ComponentModel.ISupportInitialize).BeginInit
@@ -231,6 +234,7 @@ Namespace PresentationLayer.Views.Forms
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25!))
+        Me.TableLayoutPanel1.Controls.Add(Me.CLabel6, 0, 6)
         Me.TableLayoutPanel1.Controls.Add(Me.CLabel1, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.CLabel2, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.lblReportName, 0, 2)
@@ -239,6 +243,8 @@ Namespace PresentationLayer.Views.Forms
         Me.TableLayoutPanel1.Controls.Add(Me.CCustomDateTimePicker1, 1, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.CCustomDateTimePicker2, 3, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.CLabel5, 0, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.CaComboBox1, 1, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.CaComboBox2, 1, 6)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -248,9 +254,9 @@ Namespace PresentationLayer.Views.Forms
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(464, 137)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(491, 365)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'CLabel1
@@ -264,7 +270,7 @@ Namespace PresentationLayer.Views.Forms
         Me.CLabel1.Location = New System.Drawing.Point(1, 1)
         Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel1.Name = "CLabel1"
-        Me.CLabel1.Size = New System.Drawing.Size(462, 32)
+        Me.CLabel1.Size = New System.Drawing.Size(489, 32)
         Me.CLabel1.TabIndex = 0
         Me.CLabel1.Text = "RECEPTION REPORTS"
         Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -296,7 +302,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblReportName.Location = New System.Drawing.Point(1, 54)
         Me.lblReportName.Margin = New System.Windows.Forms.Padding(1)
         Me.lblReportName.Name = "lblReportName"
-        Me.lblReportName.Size = New System.Drawing.Size(462, 17)
+        Me.lblReportName.Size = New System.Drawing.Size(489, 17)
         Me.lblReportName.TabIndex = 2
         Me.lblReportName.Text = "Report Name"
         Me.lblReportName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -323,7 +329,7 @@ Namespace PresentationLayer.Views.Forms
         Me.CLabel4.DisplayOnly = true
         Me.CLabel4.EditingMode = false
         Me.CLabel4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.CLabel4.Location = New System.Drawing.Point(233, 73)
+        Me.CLabel4.Location = New System.Drawing.Point(245, 73)
         Me.CLabel4.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel4.Name = "CLabel4"
         Me.CLabel4.Size = New System.Drawing.Size(71, 17)
@@ -342,7 +348,7 @@ Namespace PresentationLayer.Views.Forms
         Me.CCustomDateTimePicker1.EditsAllowed = false
         Me.CCustomDateTimePicker1.ForeColor = System.Drawing.Color.Black
         Me.CCustomDateTimePicker1.LinkedLabel = Nothing
-        Me.CCustomDateTimePicker1.Location = New System.Drawing.Point(117, 73)
+        Me.CCustomDateTimePicker1.Location = New System.Drawing.Point(123, 73)
         Me.CCustomDateTimePicker1.Margin = New System.Windows.Forms.Padding(1)
         Me.CCustomDateTimePicker1.Name = "CCustomDateTimePicker1"
         Me.CCustomDateTimePicker1.ReadOnlyDp = false
@@ -367,7 +373,7 @@ Namespace PresentationLayer.Views.Forms
         Me.CCustomDateTimePicker2.EditsAllowed = false
         Me.CCustomDateTimePicker2.ForeColor = System.Drawing.Color.Black
         Me.CCustomDateTimePicker2.LinkedLabel = Nothing
-        Me.CCustomDateTimePicker2.Location = New System.Drawing.Point(349, 73)
+        Me.CCustomDateTimePicker2.Location = New System.Drawing.Point(367, 73)
         Me.CCustomDateTimePicker2.Margin = New System.Windows.Forms.Padding(1)
         Me.CCustomDateTimePicker2.Name = "CCustomDateTimePicker2"
         Me.CCustomDateTimePicker2.ReadOnlyDp = false
@@ -397,7 +403,108 @@ Namespace PresentationLayer.Views.Forms
         Me.CLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.CLabel5.Translatable = true
         '
-        'ReportSelectorForm
+        'CLabel6
+        '
+        Me.CLabel6.AutoSize = true
+        Me.CLabel6.DisplayOnly = true
+        Me.CLabel6.EditingMode = false
+        Me.CLabel6.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.CLabel6.Location = New System.Drawing.Point(1, 121)
+        Me.CLabel6.Margin = New System.Windows.Forms.Padding(1)
+        Me.CLabel6.Name = "CLabel6"
+        Me.CLabel6.Size = New System.Drawing.Size(71, 17)
+        Me.CLabel6.TabIndex = 8
+        Me.CLabel6.Text = "Company:"
+        Me.CLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.CLabel6.Translatable = true
+        '
+        'CaComboBox1
+        '
+        Me.CaComboBox1.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.CaComboBox1.BegFindValue = Nothing
+        Me.CaComboBox1.ChangingSearchValueOnly = false
+        Me.TableLayoutPanel1.SetColumnSpan(Me.CaComboBox1, 3)
+        Me.CaComboBox1.CurrentSearchTerm = ""
+        Me.CaComboBox1.DataValue = Nothing
+        Me.CaComboBox1.DefaultValue = Nothing
+        Me.CaComboBox1.DisplayMember = "Name"
+        Me.CaComboBox1.EditingMode = true
+        Me.CaComboBox1.EndFindValue = Nothing
+        Me.CaComboBox1.FieldDescription = Nothing
+        Me.CaComboBox1.FieldName = Nothing
+        Me.CaComboBox1.FilterRule = Nothing
+        Me.CaComboBox1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.CaComboBox1.FindEnabled = false
+        Me.CaComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.CaComboBox1.FormattingEnabled = true
+        Me.CaComboBox1.HideWhenNotEditingOrAdding = false
+        Me.CaComboBox1.IgnoreCase = false
+        Me.CaComboBox1.LinkedLabel = Nothing
+        Me.CaComboBox1.Location = New System.Drawing.Point(123, 98)
+        Me.CaComboBox1.Margin = New System.Windows.Forms.Padding(1)
+        Me.CaComboBox1.Name = "CaComboBox1"
+        Me.CaComboBox1.OldValue = 0
+        Me.CaComboBox1.OriginalDataSource = Nothing
+        Me.CaComboBox1.OriginalList = Nothing
+        Me.CaComboBox1.OverrideDropDownStyleList = false
+        Me.CaComboBox1.PreviousSearchTerm = Nothing
+        Me.CaComboBox1.PropertySelector = Nothing
+        Me.CaComboBox1.ReadOnlyCombo = false
+        Me.CaComboBox1.Size = New System.Drawing.Size(367, 24)
+        Me.CaComboBox1.SuggestBoxHeight = 200
+        Me.CaComboBox1.SuggestListOrderRule = Nothing
+        Me.CaComboBox1.TabIndex = 9
+        Me.CaComboBox1.TextToSearch = Nothing
+        Me.CaComboBox1.Translatable = false
+        Me.CaComboBox1.ValueIsMandatory = false
+        Me.CaComboBox1.ValueIsNullable = false
+        Me.CaComboBox1.ValueIsNumeric = false
+        Me.CaComboBox1.ValueMember = "IdNo"
+        '
+        'CaComboBox2
+        '
+        Me.CaComboBox2.BackColor = System.Drawing.Color.White
+        Me.CaComboBox2.BegFindValue = Nothing
+        Me.CaComboBox2.ChangingSearchValueOnly = false
+        Me.TableLayoutPanel1.SetColumnSpan(Me.CaComboBox2, 3)
+        Me.CaComboBox2.CurrentSearchTerm = ""
+        Me.CaComboBox2.DataValue = Nothing
+        Me.CaComboBox2.DefaultValue = Nothing
+        Me.CaComboBox2.DisplayMember = "Name"
+        Me.CaComboBox2.EditingMode = true
+        Me.CaComboBox2.EndFindValue = Nothing
+        Me.CaComboBox2.FieldDescription = Nothing
+        Me.CaComboBox2.FieldName = Nothing
+        Me.CaComboBox2.FilterRule = Nothing
+        Me.CaComboBox2.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.CaComboBox2.FindEnabled = false
+        Me.CaComboBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.CaComboBox2.FormattingEnabled = true
+        Me.CaComboBox2.HideWhenNotEditingOrAdding = false
+        Me.CaComboBox2.IgnoreCase = false
+        Me.CaComboBox2.LinkedLabel = Nothing
+        Me.CaComboBox2.Location = New System.Drawing.Point(123, 121)
+        Me.CaComboBox2.Margin = New System.Windows.Forms.Padding(1)
+        Me.CaComboBox2.Name = "CaComboBox2"
+        Me.CaComboBox2.OldValue = 0
+        Me.CaComboBox2.OriginalDataSource = Nothing
+        Me.CaComboBox2.OriginalList = Nothing
+        Me.CaComboBox2.OverrideDropDownStyleList = false
+        Me.CaComboBox2.PreviousSearchTerm = Nothing
+        Me.CaComboBox2.PropertySelector = Nothing
+        Me.CaComboBox2.ReadOnlyCombo = false
+        Me.CaComboBox2.Size = New System.Drawing.Size(367, 24)
+        Me.CaComboBox2.SuggestBoxHeight = 200
+        Me.CaComboBox2.SuggestListOrderRule = Nothing
+        Me.CaComboBox2.TabIndex = 10
+        Me.CaComboBox2.TextToSearch = Nothing
+        Me.CaComboBox2.Translatable = false
+        Me.CaComboBox2.ValueIsMandatory = false
+        Me.CaComboBox2.ValueIsNullable = false
+        Me.CaComboBox2.ValueIsNumeric = false
+        Me.CaComboBox2.ValueMember = "IdNo"
+        '
+        'ReportSelectorForm2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"),System.Drawing.Image)
@@ -405,7 +512,7 @@ Namespace PresentationLayer.Views.Forms
         Me.ClientSize = New System.Drawing.Size(984, 563)
         Me.Controls.Add(Me.CTabControl1)
         Me.MinimumSize = New System.Drawing.Size(300, 590)
-        Me.Name = "ReportSelectorForm"
+        Me.Name = "ReportSelectorForm2"
         Me.Text = "Report Selector"
         Me.Controls.SetChildIndex(Me.CTabControl1, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
@@ -464,5 +571,8 @@ End Sub
         Friend WithEvents CCustomDateTimePicker1 As CCustomDateTimePicker
         Friend WithEvents CCustomDateTimePicker2 As CCustomDateTimePicker
         Friend WithEvents CLabel5 As CLabel
+        Friend WithEvents CLabel6 As CLabel
+        Friend WithEvents CaComboBox1 As CaComboBox
+        Friend WithEvents CaComboBox2 As CaComboBox
     End Class
 End Namespace
