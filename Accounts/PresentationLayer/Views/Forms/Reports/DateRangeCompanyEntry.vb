@@ -49,8 +49,26 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim defEnd = lParameters(2)
             Dim begValue As Date
             Dim endValue As Date
-            begValue = GetCodedDate(defStart)
-            endValue = GetCodedDate(defEnd)
+            Dim dStart As Date = GetCodedDate(defStart)
+            Dim dEnd As Date = GetCodedDate(defEnd)
+            Select Case _period
+                Case "M"
+                    begValue = GregorianDateSerial(Year(dStart), Month(dStart), 1)
+                    endValue = AsMonthEndDate(dEnd)
+                Case "Y"
+                    begValue = GregorianDateSerial(Year(dStart), 1, 1)
+                    endValue = GregorianDateSerial(Year(dEnd), 12, 31)
+                Case "Q"
+                    Dim monthNumber As Int16 = Month(dEnd)
+                    Dim quarter = IIf(monthNumber < 4,1,IIf(monthNumber < 7,2,IIf(monthNumber < 10,3,4)))
+                    begValue = GregorianDateSerial(Year(dStart), quarter*3-2, 1)
+                    endValue = AsMonthEndDate(GregorianDateSerial(Year(dEnd), quarter*3, 1))
+                Case "S"
+                    Dim monthNumber As Int16 = Month(dEnd)
+                    Dim semester = IIf(monthNumber < 7,1,2)
+                    begValue = GregorianDateSerial(Year(dStart), semester*6-5, 1)
+                    endValue = AsMonthEndDate(GregorianDateSerial(Year(dEnd), semester*6, 1))
+            End Select
             dtpBeginningDate.Value = begValue
             dtpEndingDate.Value = endValue
             cboInsuranceIdNo.DataSource = InsuranceList

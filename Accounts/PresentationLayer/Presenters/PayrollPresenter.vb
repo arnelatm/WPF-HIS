@@ -178,6 +178,8 @@ Namespace PresentationLayer.Presenters
             CreateLookupData("Employee", "Employees")
         End Sub
 
+        
+
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             Dim nIdNoMax As Int32
             Dim maxRecord As PayrollModel
