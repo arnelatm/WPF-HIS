@@ -12,6 +12,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private _payrollAttendance As New List(Of AttendanceItemView)
         Private _payrollOvertime As New List(Of OtWorkHourView)
+        Private ReadOnly _payCycles As New List(Of IPayCycleView)
 
         Public Sub New()
             ' This call is required by the designer.
@@ -61,6 +62,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 cboPayCycleIdNo.SetValue(Value)
+                
             End Set
         End Property
 
@@ -120,13 +122,6 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property PayFrequency As Char Implements IPayrollView.PayFrequency
-        '    Get
-        '        Return _payFrequency
-        '    End Get
-        '    Set(value As PayFrequencySelection)
-        '        _payFrequency = value
-        '    End Set
-        'End Property
 
         Public Property PayrollAttendance As List(Of AttendanceItemView) Implements IPayrollView.PayrollAttendance
             Get
@@ -141,6 +136,7 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Public Event InitializeAttendance(sender As Object) Implements IPayrollView.InitializeAttendance
+
         'Public Event ReprocessAttendance(sender As Object) Implements IPayrollView.ReprocessAttendance
 
         Public Event InitializeOvertime(sender As Object) Implements IPayrollView.InitializeOvertime
@@ -198,6 +194,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CacPayCycleIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPayCycleIdNo.SelectedIndexChanged
             RaiseEvent InitializePayroll(Me)
+            PayFrequency = cboPayCycleIdNo.DataSource.Find(Function(c) c.IdNo = PayCycleIdNo)().PayFrequency
             If CodeToEnum(Of PayFrequencySelection)(PayFrequency) = PayFrequencySelection.Monthly Then
                 dtpStartDate.DisplayOnly = True
                 dtpEndDate.DisplayOnly = True
@@ -310,17 +307,15 @@ Namespace PresentationLayer.Views.Forms
             bsPayrollAttendance.ResetBindings(False)
         End Sub
 
-        
         Private Sub DataGridView_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPayrollAttendance.CellEndEdit
             With DataGridViewPayrollAttendance
                 If .CurrentRow IsNot Nothing Then
-                    if .CurrentCell.OwningColumn.Name.ToLower() <> "dgvselected" Then
+                    If .CurrentCell.OwningColumn.Name.ToLower() <> "dgvselected" Then
                         btnGenerateRegularPayElements.Enabled = False
-                    End If                   
+                    End If
                 End If
             End With
         End Sub
-
 
     End Class
 
