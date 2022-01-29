@@ -1013,9 +1013,9 @@ Namespace PresentationLayer.Presenters
             Dim savedPayrollDetails As New List(Of PayrollDetailModel)
             'Dim savedPayrollDetailsModel As New List(Of PayrollDetailModel)
             savedPayrollDetails = _payrollDetailsService.GetRecordsWithGroupIdNo(Of PayrollDetailModel)(_payrollIdNo)
+            Dim employee As Object
             'GlobalVariables.Mapper.Map(savedPayrollDetails, savedPayrollDetailsModel)
             If savedPayrollDetails.Count() = 0 Then
-                Dim employee As Object
                 For Each currentPayrollAttendance In View.PayrollAttendance
                     Dim newPayrollDetail As New PayrollDetailModel
                     newPayrollDetail.EmployeeIdNo = currentPayrollAttendance.EmployeeIdNo
@@ -1033,26 +1033,28 @@ Namespace PresentationLayer.Presenters
                 For Each currentPayrollAttendance In View.PayrollAttendance
                     ' add only selected records and re-process information
                     If currentPayrollAttendance.Selected Then
-                        savedPayrollDetail = savedPayrollDetails.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = currentPayrollAttendance.EmployeeIdNo)
-                        If savedPayrollDetail Is Nothing Then
-                            savedPayrollDetail = New PayrollDetailModel
-                            savedPayrollDetail.EmployeeIdNo = currentPayrollAttendance.EmployeeIdNo
-                            savedPayrollDetail.PayrollIdNo = View.IdNo
-                        End If
-                        If savedPayrollDetail.SponsorType <> EnumToCode(SponsorTypeSelection.Others) And savedPayrollDetail.SponsorType <> EnumToCode(SponsorTypeSelection.Sponsor) And savedPayrollDetail.PaymentMethod = EnumToCode(PayrollPaymentMethodSelection.BankTransfer) Then
-                            savedPayrollDetail.BankTransfer = True
+                        Dim newPayrollDetail As New PayrollDetailModel
+                        newPayrollDetail.EmployeeIdNo = currentPayrollAttendance.EmployeeIdNo
+                        newPayrollDetail.PayrollIdNo = View.IdNo
+                        employee = Service.GetFieldsWithIdNo(currentPayrollAttendance.EmployeeIdNo, "Employee", "SponsorType,PaymentMethod")
+                        If employee.SponsorType <> EnumToCode(SponsorTypeSelection.Others) And employee.SponsorType <> EnumToCode(SponsorTypeSelection.Sponsor) And employee.PaymentMethod = EnumToCode(PayrollPaymentMethodSelection.BankTransfer) Then
+                            newPayrollDetail.BankTransfer = True
                         Else
-                            savedPayrollDetail.BankTransfer = False
+                            newPayrollDetail.BankTransfer = False
                         End If
-                        savedPayrollDetail.Selected = True
-                        _payrollDetailsModel.Add(savedPayrollDetail)
+                        newPayrollDetail.Selected = True
+                        _payrollDetailsModel.Add(newPayrollDetail)
                     End If
                 Next
                 For Each item In savedPayrollDetails
                     ' add non selected records as-is, selected records are already added above
-                    savedPayrollDetail = _payrollDetailsModel.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = item.EmployeeIdNo)
-                    If savedPayrollDetail Is Nothing Then
+                    Dim newPayrollDetail As New PayrollDetailModel
+                    newPayrollDetail = _payrollDetailsModel.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = item.EmployeeIdNo)
+                    If newPayrollDetail Is Nothing Then
+                        ' item not yet in the 'selected' records, add it
                         _payrollDetailsModel.Add(item)
+                    Else
+                        ' already added, just ignore them
                     End If
                 Next
             End If
