@@ -62,7 +62,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 cboPayCycleIdNo.SetValue(Value)
-                
+
             End Set
         End Property
 
@@ -138,7 +138,6 @@ Namespace PresentationLayer.Views.Forms
         Public Event InitializeAttendance(sender As Object) Implements IPayrollView.InitializeAttendance
 
         'Public Event ReprocessAttendance(sender As Object) Implements IPayrollView.ReprocessAttendance
-
         Public Event InitializeOvertime(sender As Object) Implements IPayrollView.InitializeOvertime
 
         Public Event GenerateRegularPayElements(sender As Object) Implements IPayrollView.GenerateRegularPayElements
@@ -150,6 +149,8 @@ Namespace PresentationLayer.Views.Forms
         Public Event SelectedPayrollChanged(payrollIdNo As Int16) Implements IPayrollView.SelectedPayrollChanged
 
         Public Event ClearAllEmployee(sender As Object, clear As Boolean) Implements IPayrollView.ClearAllEmployee
+
+        Public Event PayCycleChanged(sender As Object) Implements IPayrollView.PayCycleChanged
 
         Private Sub BindPayrollAttendance()
             SuspendLayout()
@@ -193,8 +194,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CacPayCycleIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPayCycleIdNo.SelectedIndexChanged
-            RaiseEvent InitializePayroll(Me)
-            PayFrequency = cboPayCycleIdNo.DataSource.Find(Function(c) c.IdNo = PayCycleIdNo)().PayFrequency
+            RaiseEvent PayCycleChanged(Me)
             If CodeToEnum(Of PayFrequencySelection)(PayFrequency) = PayFrequencySelection.Monthly Then
                 dtpStartDate.DisplayOnly = True
                 dtpEndDate.DisplayOnly = True
@@ -256,6 +256,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub OnInitializeAttendance_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnInitializeAttendance.ClickButtonArea
             RaiseEvent InitializeAttendance(Me)
             bsPayrollAttendance.ResetBindings(False)
+            btnGenerateRegularPayElements.Enabled = False
         End Sub
 
         Private Sub InitializeOvertime_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnInitializeOvertime.ClickButtonArea
@@ -310,7 +311,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub DataGridView_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPayrollAttendance.CellEndEdit
             With DataGridViewPayrollAttendance
                 If .CurrentRow IsNot Nothing Then
-                    If .CurrentCell.OwningColumn.Name.ToLower() <> "dgvselected" Then
+                    If .CurrentCell.OwningColumn.Name.ToLower() <> $"dgvselected" Then
                         btnGenerateRegularPayElements.Enabled = False
                     End If
                 End If

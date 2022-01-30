@@ -66,12 +66,20 @@ Namespace PresentationLayer.Views.Forms
         Protected SortOrderKey As String
 
         Public Event InitializeAttendance(sender As Object) Implements IPayrollView.InitializeAttendance
+
         Public Event InitializeOvertime(sender As Object) Implements IPayrollView.InitializeOvertime
+
         Public Event GenerateRegularPayElements(sender As Object) Implements IPayrollView.GenerateRegularPayElements
+
         Public Event InitializePayroll(sender As Object) Implements IPayrollView.InitializePayroll
+
         Public Event GenerateCsvFile(payrollIdNo As Int16) Implements IPayrollView.GenerateCsvFile
+
         Public Event SelectedPayrollChanged(payrollIdNo As Int16) Implements IPayrollView.SelectedPayrollChanged
+
         Public Event ClearAllEmployee(sender As Object, clear As Boolean) Implements IPayrollView.ClearAllEmployee
+
+        Public Event PayCycleChanged(sender As Object) Implements IPayrollView.PayCycleChanged
 
         Public Sub New()
             ' This call is required by the designer.

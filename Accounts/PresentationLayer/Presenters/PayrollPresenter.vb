@@ -89,6 +89,7 @@ Namespace PresentationLayer.Presenters
             AddHandler view.InitializeOvertime, AddressOf InitializeOvertime
             AddHandler view.GenerateRegularPayElements, AddressOf GenerateRegularPayElements
             AddHandler view.ClearAllEmployee, AddressOf OnClearAllEmployeeId
+            AddHandler view.PayCycleChanged, AddressOf OnPayCycleChanged
 
             CreateDataTable(DtInsertTable, {{"DaysAbsentWithoutPay", GetType(Decimal)},
                                             {"DaysAbsentWithPay", GetType(Decimal)},
@@ -147,6 +148,10 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
+        Private Sub OnPayCycleChanged(sender As Object)
+            View.PayFrequency = Service.GetField(Of String, Int16)(View.PayCycleIdNo, "PayCycle", "IdNo", "PayFrequency")
+        End Sub
+
         Public Sub InitializeMonthlyPayroll(payCycleRecord As PayCycleModel)
             If View.StartDate Is Nothing And View.EndDate Is Nothing Then
                 If payCycleRecord.PayCycleCode = "Month" Then
@@ -177,8 +182,6 @@ Namespace PresentationLayer.Presenters
             CreateDataSource("PayCycle", "PayCycleIdNo")
             CreateLookupData("Employee", "Employees")
         End Sub
-
-        
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             Dim nIdNoMax As Int32
@@ -222,8 +225,8 @@ Namespace PresentationLayer.Presenters
         Public Sub InitializeAttendance()
             View.PayFrequency = GetFieldWithIdNo(View.PayCycleIdNo, "PayCycle", "PayFrequency")
             Dim employeeFilter = "PayCycleIdNo = " & View.PayCycleIdNo.ToString() ' & " And Active = 1"
-            Dim activeEmployees = GetRecords("Employee", "EmployeeName", {"IdNo", "EmployeeName", "HiredDate", "ReleasedDate"}, employeeFilter)
-            Dim numberOfEmployees = Int(activeEmployees.Count() / 4)
+            Dim employees = GetRecords("Employee", "EmployeeName", {"IdNo", "EmployeeName", "HiredDate", "ReleasedDate"}, employeeFilter)
+            Dim numberOfEmployees = Int(employees.Count() / 4)
             Dim daysInPeriod As Long
             Dim daysOffInPeriod As Long
             Dim seq As Integer
@@ -248,22 +251,22 @@ Namespace PresentationLayer.Presenters
             progressDisplayForm.InitializeDisplay(numberOfEmployees + absences.Count)
             seq = 1
             If _reinitialize Then
-                Dim oldEmpAttendance As New List(Of AttendanceItemView)
-                GlobalVariables.Mapper.Map(View.PayrollAttendance, oldEmpAttendance)
+                Dim currentEmpAttendance As New List(Of AttendanceItemView)
+                GlobalVariables.Mapper.Map(View.PayrollAttendance, currentEmpAttendance)
                 Dim i As Int16 = 1
                 seq = 1
                 View.PayrollAttendance.Clear()
                 For i = 1 To numberOfEmployees
-                    empId = activeEmployees(i * 4 - 4)
-                    empName = activeEmployees(i * 4 - 3)
-                    dateHired = activeEmployees(i * 4 - 2)
-                    dateReleased = IIf(IsDBNull(activeEmployees(i * 4 - 1)), Nothing, activeEmployees(i * 4 - 1))
+                    empId = employees(i * 4 - 4)
+                    empName = employees(i * 4 - 3)
+                    dateHired = employees(i * 4 - 2)
+                    dateReleased = IIf(IsDBNull(employees(i * 4 - 1)), Nothing, employees(i * 4 - 1))
                     'If empId = 331 Then
                     '    Debugger.Break()
                     'End If
-                    If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased >= View.StartDate OrElse dateReleased > View.EndDate) Then
+                    If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased > View.StartDate) Then
                         Dim empAttendance As AttendanceItemView
-                        empAttendance = oldEmpAttendance.Find(Function(c) c.EmployeeIdNo = empId)
+                        empAttendance = currentEmpAttendance.Find(Function(c) c.EmployeeIdNo = empId)
                         If empAttendance IsNot Nothing Then
                             If empAttendance.Selected Then
                                 UpdateEmployeeAttendance(empAttendance, dateHired, dateReleased, empId, empName, daysInPeriod, daysOffInPeriod, seq)
@@ -293,13 +296,13 @@ Namespace PresentationLayer.Presenters
                 Next
             Else
                 For i = 1 To numberOfEmployees
-                    empId = activeEmployees(i * 4 - 4)
-                    empName = activeEmployees(i * 4 - 3)
-                    dateHired = activeEmployees(i * 4 - 2)
-                    dateReleased = IIf(IsDBNull(activeEmployees(i * 4 - 1)), Nothing, activeEmployees(i * 4 - 1))
-                    If empId = 331 Then
-                        Debugger.Break()
-                    End If
+                    empId = employees(i * 4 - 4)
+                    empName = employees(i * 4 - 3)
+                    dateHired = employees(i * 4 - 2)
+                    dateReleased = IIf(IsDBNull(employees(i * 4 - 1)), Nothing, employees(i * 4 - 1))
+                    'If empId = 331 Then
+                    '    Debugger.Break()
+                    'End If
                     If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased >= View.StartDate OrElse dateReleased > View.EndDate) Then
                         AddEmployeeAttendance(dateHired, dateReleased, empId, empName, daysInPeriod, daysOffInPeriod, seq)
                         seq = seq + 1
@@ -396,10 +399,31 @@ Namespace PresentationLayer.Presenters
             empAttendance.EmployeeIdNo = empId
             empAttendance.EmployeeName = empName
             empAttendance.Sequence = seq
-            empAttendance.DaysAbsentWithoutPay = 0
-            empAttendance.DaysAbsentWithPay = 0
-            empAttendance.DaysVacationLeave = 0
-            empAttendance.DaysPresent = daysTotal - daysOff
+
+            If dateHired <= View.StartDate AndAlso (dateReleased Is Nothing OrElse dateReleased > View.EndDate) Then
+                empAttendance.DaysAbsentWithoutPay = 0
+                empAttendance.DaysAbsentWithPay = 0
+                empAttendance.DaysVacationLeave = 0
+                empAttendance.DaysPresent = daysTotal - daysOff
+            Else
+                If dateReleased Is Nothing OrElse dateReleased > View.EndDate Then
+                    Dim sDate As Date
+                    sDate = View.StartDate
+                    empAttendance.DaysAbsentWithoutPay = DateDiff(DateInterval.Day, sDate, dateHired)
+                    empAttendance.DaysAbsentWithPay = 0
+                    empAttendance.DaysVacationLeave = 0
+                    empAttendance.DaysPresent = daysTotal - empAttendance.DaysAbsentWithoutPay - daysOff
+                Else
+                    Dim rDate As Date ' need to do this because Date? type is not accepted by DateAdd function
+                    Dim eDate As Date
+                    rDate = dateReleased
+                    eDate = View.EndDate
+                    empAttendance.DaysAbsentWithoutPay = DateDiff(DateInterval.Day, rDate, eDate) + 1
+                    empAttendance.DaysAbsentWithPay = 0
+                    empAttendance.DaysVacationLeave = 0
+                    empAttendance.DaysPresent = daysTotal - empAttendance.DaysAbsentWithoutPay - daysOff
+                End If
+            End If
             View.PayrollAttendance.Add(empAttendance)
         End Sub
 
@@ -413,10 +437,31 @@ Namespace PresentationLayer.Presenters
             empAttendance.EmployeeIdNo = empId
             empAttendance.EmployeeName = empName
             empAttendance.Sequence = seq
-            empAttendance.DaysAbsentWithoutPay = 0
-            empAttendance.DaysAbsentWithPay = 0
-            empAttendance.DaysVacationLeave = 0
-            empAttendance.DaysPresent = daysTotal - daysOff
+
+            If dateHired <= View.StartDate AndAlso (dateReleased Is Nothing OrElse dateReleased > View.EndDate) Then
+                empAttendance.DaysAbsentWithoutPay = 0
+                empAttendance.DaysAbsentWithPay = 0
+                empAttendance.DaysVacationLeave = 0
+                empAttendance.DaysPresent = daysTotal - daysOff
+            Else
+                If dateReleased Is Nothing OrElse dateReleased > View.EndDate Then
+                    Dim sDate As Date
+                    sDate = View.StartDate
+                    empAttendance.DaysAbsentWithoutPay = DateDiff(DateInterval.Day, sDate, dateHired)
+                    empAttendance.DaysAbsentWithPay = 0
+                    empAttendance.DaysVacationLeave = 0
+                    empAttendance.DaysPresent = daysTotal - empAttendance.DaysAbsentWithoutPay - daysOff
+                Else
+                    Dim rDate As Date ' need to do this because Date? type is not accepted by DateAdd function
+                    Dim eDate As Date
+                    rDate = dateReleased
+                    eDate = View.EndDate
+                    empAttendance.DaysAbsentWithoutPay = DateDiff(DateInterval.Day, rDate, eDate) + 1
+                    empAttendance.DaysAbsentWithPay = 0
+                    empAttendance.DaysVacationLeave = 0
+                    empAttendance.DaysPresent = daysTotal - empAttendance.DaysAbsentWithoutPay - daysOff
+                End If
+            End If
             View.PayrollAttendance.Add(empAttendance)
         End Sub
 
@@ -427,17 +472,17 @@ Namespace PresentationLayer.Presenters
             View.PayrollOvertime.Add(empOvertime)
         End Sub
 
-        Public Sub InitializeEmployeeAttendance(ByRef empAttendance As AttendanceItemView, ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal daysInPeriod As Int16, ByVal daysOffInPeriod As Int16)
-            Dim daysOff As Int16
-            Dim daysTotal As Int16
-            ComputeTotalDaysNOff(daysTotal, daysOff, dateHired, dateReleased, daysInPeriod, daysOffInPeriod)
-            empAttendance.DaysTotal = daysTotal
-            empAttendance.DaysOff = daysOff
-            empAttendance.DaysAbsentWithoutPay = 0
-            empAttendance.DaysAbsentWithPay = 0
-            'empAttendance.DaysVacationLeave = 0
-            empAttendance.DaysPresent = empAttendance.DaysTotal - empAttendance.DaysOff - empAttendance.DaysAbsentWithPay - empAttendance.DaysAbsentWithoutPay - empAttendance.DaysVacationLeave
-        End Sub
+        'Public Sub InitializeEmployeeAttendance(ByRef empAttendance As AttendanceItemView, ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal daysInPeriod As Int16, ByVal daysOffInPeriod As Int16)
+        '    Dim daysOff As Int16
+        '    Dim daysTotal As Int16
+        '    ComputeTotalDaysNOff(daysTotal, daysOff, dateHired, dateReleased, daysInPeriod, daysOffInPeriod)
+        '    empAttendance.DaysTotal = daysTotal
+        '    empAttendance.DaysOff = daysOff
+        '    empAttendance.DaysAbsentWithoutPay = 0
+        '    empAttendance.DaysAbsentWithPay = 0
+        '    'empAttendance.DaysVacationLeave = 0
+        '    empAttendance.DaysPresent = empAttendance.DaysTotal - empAttendance.DaysOff - empAttendance.DaysAbsentWithPay - empAttendance.DaysAbsentWithoutPay - empAttendance.DaysVacationLeave
+        'End Sub
 
         Private Sub ComputeTotalDaysNOff(ByRef daysTotal As Int16, ByRef daysOff As Int16, ByVal dateHired As Date, ByVal dateReleased As Date?, ByVal daysInPeriod As Int16, ByVal daysOffInPeriod As Int16)
             Dim eDate As Date
@@ -450,15 +495,13 @@ Namespace PresentationLayer.Presenters
                     daysTotal = DateDiff(DateInterval.Day, dateHired, eDate) + 1
                     daysOff = ComputeDaysOff(dateHired, eDate)
                 Else
-                    Dim dDate As Date ' need to do this because Date? type is not accepted by DateAdd function
+                    Dim rDate As Date ' need to do this because Date? type is not accepted by DateAdd function
                     Dim sDate As Date
                     sDate = View.StartDate
-                    dDate = dateReleased
-                    eDate = DateAdd(DateInterval.Day, -1, dDate)
-                    daysTotal = DateDiff(DateInterval.Day, sDate, eDate) + 1
-                    daysOff = ComputeDaysOff(sDate, eDate)
+                    rDate = dateReleased
+                    daysTotal = daysInPeriod
+                    daysOff = ComputeDaysOff(sDate, rDate)
                 End If
-
             End If
         End Sub
 
@@ -1034,31 +1077,33 @@ Namespace PresentationLayer.Presenters
             Else
                 For Each currentPayrollAttendance In View.PayrollAttendance
                     ' add only selected records and re-process information
-                    If currentPayrollAttendance.Selected Then
-                        Dim newPayrollDetail As New PayrollDetailModel
-                        newPayrollDetail.EmployeeIdNo = currentPayrollAttendance.EmployeeIdNo
-                        newPayrollDetail.PayrollIdNo = View.IdNo
-                        employee = Service.GetFieldsWithIdNo(currentPayrollAttendance.EmployeeIdNo, "Employee", "SponsorType,PaymentMethod")
-                        If employee.SponsorType <> EnumToCode(SponsorTypeSelection.Others) And employee.SponsorType <> EnumToCode(SponsorTypeSelection.Sponsor) And employee.PaymentMethod = EnumToCode(PayrollPaymentMethodSelection.BankTransfer) Then
-                            newPayrollDetail.BankTransfer = True
-                        Else
-                            newPayrollDetail.BankTransfer = False
-                        End If
-                        newPayrollDetail.Selected = True
-                        _payrollDetailsModel.Add(newPayrollDetail)
-                    End If
-                Next
-                For Each item In savedPayrollDetails
-                    ' add non selected records as-is, selected records are already added above
                     Dim newPayrollDetail As New PayrollDetailModel
-                    newPayrollDetail = _payrollDetailsModel.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = item.EmployeeIdNo)
-                    If newPayrollDetail Is Nothing Then
-                        ' item not yet in the 'selected' records, add it
-                        _payrollDetailsModel.Add(item)
-                    Else
-                        ' already added, just ignore them
+                    newPayrollDetail.EmployeeIdNo = currentPayrollAttendance.EmployeeIdNo
+                    savedPayrollDetail = savedPayrollDetails.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = currentPayrollAttendance.EmployeeIdNo)
+                    If savedPayrollDetail IsNot Nothing Then
+                        newPayrollDetail.IdNo = savedPayrollDetail.IdNo
                     End If
+                    employee = Service.GetFieldsWithIdNo(currentPayrollAttendance.EmployeeIdNo, "Employee", "SponsorType,PaymentMethod")
+                    If employee.SponsorType <> EnumToCode(SponsorTypeSelection.Others) And employee.SponsorType <> EnumToCode(SponsorTypeSelection.Sponsor) And employee.PaymentMethod = EnumToCode(PayrollPaymentMethodSelection.BankTransfer) Then
+                        newPayrollDetail.BankTransfer = True
+                    Else
+                        newPayrollDetail.BankTransfer = False
+                    End If
+                    newPayrollDetail.Selected = currentPayrollAttendance.Selected
+                    _payrollDetailsModel.Add(newPayrollDetail)
                 Next
+                'For Each item In savedPayrollDetails
+                '    ' add non selected records as-is, selected records are already added above
+                '    Dim newPayrollDetail As New PayrollDetailModel
+                '    newPayrollDetail = _payrollDetailsModel.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = item.EmployeeIdNo)
+                '    If newPayrollDetail Is Nothing Then
+                '        ' item not yet in the 'selected' records, add it
+                '        _payrollDetailsModel.Add(item)
+                '    Else
+                '        Dim x = 1
+                '        ' already added, just ignore them
+                '    End If
+                'Next
             End If
             For Each employeeAttendance In View.PayrollOvertime
                 savedPayrollDetail = _payrollDetailsModel.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = employeeAttendance.EmployeeIdNo)
