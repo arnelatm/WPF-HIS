@@ -807,8 +807,18 @@ Namespace PresentationLayer.Presenters
             If _recurringPayElements.Any Then
                 Dim amount As Decimal
                 For Each recurringPayElement As RecurringPayElementModel In _recurringPayElements
-                    If recurringPayElement.TotalAmount < recurringPayElement.Amount Then
-                        amount = Math.Min(recurringPayElement.Amount - recurringPayElement.TotalAmount, recurringPayElement.PeriodicPayment)
+                    Dim currentAmount As Decimal = 0
+                    If regenerate Then
+                        Dim payrollPayElement As PayrollPayElementModel = _savedPayrollPayElements.Find(Function(value As PayrollPayElementModel)
+                                                                                                            Return value.EmployeeIdNo = employeeIdNo And value.RecurringPayElementIdNo = recurringPayElement.IdNo
+                                                                                                        End Function)
+                        If payrollPayElement IsNot Nothing Then
+                            currentAmount = payrollPayElement.Amount
+                        End If
+
+                    End If
+                    If (recurringPayElement.TotalAmount - currentAmount) < recurringPayElement.Amount Then
+                        amount = Math.Min(recurringPayElement.Amount - (recurringPayElement.TotalAmount - currentAmount), recurringPayElement.PeriodicPayment)
                         If Not regenerate Then
                             AddPayElement(employeeIdNo, amount, recurringPayElement.PayElementIdNo, 0, payrollDetailIdNo, recurringPayElement.IdNo)
                         Else
