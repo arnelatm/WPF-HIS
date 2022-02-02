@@ -5,8 +5,12 @@
     [StartDate]       DATE       NULL,
     [PayElementIdNo]  SMALLINT   NULL,
     [PeriodicPayment] MONEY      NULL,
+    [RecurrType]      CHAR (1)   NULL,
+    [Active]          BIT        NULL,
     [DateCreated]     DATETIME   CONSTRAINT [DF_RecurringPayElement_DateCreated] DEFAULT (getdate()) NULL,
     [DateTimeStamp]   ROWVERSION NULL,
     CONSTRAINT [PK_RecurringPayElement] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
