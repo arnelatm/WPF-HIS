@@ -388,3 +388,11 @@ Public Enum LeaveCycleSelection
     <EnumCode("2")> OnceOnly
     <EnumCode("3")> AsNeeded
 End Enum
+
+Public Enum RecurrTypeSelection
+
+    <EnumCode("A")> WhileActive
+    <EnumCode("P")> UntilAmountPaid
+    <EnumCode("B")> BetweenDate
+    
+End Enum

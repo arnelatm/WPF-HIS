@@ -659,8 +659,6 @@ Namespace PresentationLayer.Presenters
                 Dim payrollDetailIdNo As Int32
                 For Each payrollDetailModel In _payrollDetailsModel
                     If payrollDetailModel.Selected Then
-                        'Dim payrollDetail As New PayrollDetail
-                        'GlobalVariables.Mapper.Map(payrollDetailModel, payrollDetail)
                         If payrollDetailModel.IdNo = 0 Then
                             payrollDetailIdNo = _payrollDetailsService.AddRecord(payrollDetailModel)
                         Else
@@ -671,8 +669,6 @@ Namespace PresentationLayer.Presenters
                     counter = counter + 1
                     progressDisplayForm.UpdateProgressBar(counter)
                 Next
-
-                'GlobalVariables.Mapper.Map(savedPayrollPayElements, _savedPayrollPayElements)
                 For Each item In _savedPayrollPayElements
                     'Dim dataRow As DataRow
                     Dim payrollAttendance As AttendanceItemView
@@ -711,16 +707,12 @@ Namespace PresentationLayer.Presenters
                     End If
                 Next
             Else
-                Dim payrollDetailIdNo As Int32
+                ' payrolldetails already saved and generated 
+                ' so re-read the saved data because we need their linked idno for the
+                ' payrollpayelementdetails
+                _payrollDetailsModel = _payrollDetailsService.GetRecordsWithGroupIdNo(Of PayrollDetailModel)(_payrollIdNo)
                 For Each payrollDetailModel In _payrollDetailsModel
-                    'Dim payrollDetail As New PayrollDetail
-                    'GlobalVariables.Mapper.Map(payrollDetailModel, payrollDetail)
-                    If payrollDetailModel.IdNo = 0 Then
-                        payrollDetailIdNo = _payrollDetailsService.AddRecord(payrollDetailModel)
-                    Else
-                        payrollDetailIdNo = payrollDetailModel.IdNo
-                    End If
-                    CreatePayrollPayElements(payrollDetailModel, regenerate, payrollDetailIdNo)
+                    CreatePayrollPayElements(payrollDetailModel, regenerate, payrollDetailModel.IdNo)
                     counter = counter + 1
                     progressDisplayForm.UpdateProgressBar(counter)
                 Next
