@@ -95,16 +95,36 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property Active As Boolean Implements IRecurringPayElementView.Active
+            Get
+                Return chkActive.Checked
+            End Get
+            Set
+                chkActive.Checked = Value
+            End Set
+        End Property
+
+        Public Property RecurrType As String Implements IRecurringPayElementView.RecurrType
+            Get
+                Return cboRecurrType.GetValue()
+            End Get
+            Set
+                cboRecurrType.SetValue(Value)
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
+                {"Active", chkActive},
                 {"Amount", txtAmount},
                 {"EmployeeIdNo", cboEmployeeIdNo},
                 {"IdNo", TxtIdNo},
                 {"PayElementIdNo", cboPayElementIdNo},
                 {"PeriodicPayment", txtPeriodicPayment},
+                {"RecurrType", cboRecurrType},
                 {"StartDate", dtpStartDate}
                 }
         End Sub
