@@ -32,21 +32,23 @@ Namespace PresentationLayer.Views.Forms
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.lblLimitAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtLimitAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpStartDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-        Me.lblPeriodicPayment = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtPeriodicPayment = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.lblPeriodicAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtPeriodicAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblPayElementName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboPayElementIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.lblRecurType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboRecurType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.dtpEndDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblTotalAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtTotalAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblRecurrType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboRecurrType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
@@ -148,42 +150,42 @@ Namespace PresentationLayer.Views.Forms
         Me.cboEmployeeIdNo.ValueIsNumeric = false
         Me.cboEmployeeIdNo.ValueMember = "IdNo"
         '
-        'lblAmount
+        'lblLimitAmount
         '
-        Me.lblAmount.BackColor = System.Drawing.Color.Transparent
-        Me.lblAmount.DisplayOnly = true
-        Me.lblAmount.EditingMode = false
-        resources.ApplyResources(Me.lblAmount, "lblAmount")
-        Me.lblAmount.Name = "lblAmount"
-        Me.lblAmount.Translatable = true
+        Me.lblLimitAmount.BackColor = System.Drawing.Color.Transparent
+        Me.lblLimitAmount.DisplayOnly = true
+        Me.lblLimitAmount.EditingMode = false
+        resources.ApplyResources(Me.lblLimitAmount, "lblLimitAmount")
+        Me.lblLimitAmount.Name = "lblLimitAmount"
+        Me.lblLimitAmount.Translatable = true
         '
-        'txtAmount
+        'txtLimitAmount
         '
-        Me.txtAmount.BackColor = System.Drawing.Color.White
-        Me.txtAmount.BegFindValue = Nothing
-        Me.txtAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtAmount.ComputedValue = false
-        Me.txtAmount.CustomFormat = Nothing
-        Me.txtAmount.DataBoundControl = true
-        Me.txtAmount.EditingMode = true
-        Me.txtAmount.EndFindValue = Nothing
-        Me.txtAmount.FieldDescription = Nothing
-        Me.txtAmount.FieldName = Nothing
-        Me.txtAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtAmount.FindEnabled = false
-        Me.CFlowLayout2.SetFlowBreak(Me.txtAmount, true)
-        resources.ApplyResources(Me.txtAmount, "txtAmount")
-        Me.txtAmount.ForeColor = System.Drawing.Color.Black
-        Me.txtAmount.LinkedLabel = Me.lblAmount
-        Me.txtAmount.MaximumValue = Nothing
-        Me.txtAmount.MinimumValue = Nothing
-        Me.txtAmount.Name = "txtAmount"
-        Me.txtAmount.OldValue = Nothing
-        Me.txtAmount.ReadOnly = true
-        Me.txtAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtAmount.Translatable = false
-        Me.txtAmount.ValueIsMandatory = true
-        Me.txtAmount.ValueIsNumeric = true
+        Me.txtLimitAmount.BackColor = System.Drawing.Color.White
+        Me.txtLimitAmount.BegFindValue = Nothing
+        Me.txtLimitAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtLimitAmount.ComputedValue = false
+        Me.txtLimitAmount.CustomFormat = Nothing
+        Me.txtLimitAmount.DataBoundControl = true
+        Me.txtLimitAmount.EditingMode = true
+        Me.txtLimitAmount.EndFindValue = Nothing
+        Me.txtLimitAmount.FieldDescription = Nothing
+        Me.txtLimitAmount.FieldName = Nothing
+        Me.txtLimitAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtLimitAmount.FindEnabled = false
+        Me.CFlowLayout2.SetFlowBreak(Me.txtLimitAmount, true)
+        resources.ApplyResources(Me.txtLimitAmount, "txtLimitAmount")
+        Me.txtLimitAmount.ForeColor = System.Drawing.Color.Black
+        Me.txtLimitAmount.LinkedLabel = Me.lblLimitAmount
+        Me.txtLimitAmount.MaximumValue = Nothing
+        Me.txtLimitAmount.MinimumValue = Nothing
+        Me.txtLimitAmount.Name = "txtLimitAmount"
+        Me.txtLimitAmount.OldValue = Nothing
+        Me.txtLimitAmount.ReadOnly = true
+        Me.txtLimitAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.txtLimitAmount.Translatable = false
+        Me.txtLimitAmount.ValueIsMandatory = true
+        Me.txtLimitAmount.ValueIsNumeric = true
         '
         'lblStartDate
         '
@@ -217,42 +219,42 @@ Namespace PresentationLayer.Views.Forms
         Me.dtpStartDate.ValueIsMandatory = false
         Me.dtpStartDate.ValueIsNullable = false
         '
-        'lblPeriodicPayment
+        'lblPeriodicAmount
         '
-        Me.lblPeriodicPayment.BackColor = System.Drawing.Color.Transparent
-        Me.lblPeriodicPayment.DisplayOnly = true
-        Me.lblPeriodicPayment.EditingMode = false
-        resources.ApplyResources(Me.lblPeriodicPayment, "lblPeriodicPayment")
-        Me.lblPeriodicPayment.Name = "lblPeriodicPayment"
-        Me.lblPeriodicPayment.Translatable = true
+        Me.lblPeriodicAmount.BackColor = System.Drawing.Color.Transparent
+        Me.lblPeriodicAmount.DisplayOnly = true
+        Me.lblPeriodicAmount.EditingMode = false
+        resources.ApplyResources(Me.lblPeriodicAmount, "lblPeriodicAmount")
+        Me.lblPeriodicAmount.Name = "lblPeriodicAmount"
+        Me.lblPeriodicAmount.Translatable = true
         '
-        'txtPeriodicPayment
+        'txtPeriodicAmount
         '
-        Me.txtPeriodicPayment.BackColor = System.Drawing.Color.White
-        Me.txtPeriodicPayment.BegFindValue = Nothing
-        Me.txtPeriodicPayment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtPeriodicPayment.ComputedValue = false
-        Me.txtPeriodicPayment.CustomFormat = Nothing
-        Me.txtPeriodicPayment.DataBoundControl = true
-        Me.txtPeriodicPayment.EditingMode = true
-        Me.txtPeriodicPayment.EndFindValue = Nothing
-        Me.txtPeriodicPayment.FieldDescription = Nothing
-        Me.txtPeriodicPayment.FieldName = Nothing
-        Me.txtPeriodicPayment.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtPeriodicPayment.FindEnabled = false
-        Me.CFlowLayout2.SetFlowBreak(Me.txtPeriodicPayment, true)
-        resources.ApplyResources(Me.txtPeriodicPayment, "txtPeriodicPayment")
-        Me.txtPeriodicPayment.ForeColor = System.Drawing.Color.Black
-        Me.txtPeriodicPayment.LinkedLabel = Me.lblPeriodicPayment
-        Me.txtPeriodicPayment.MaximumValue = Nothing
-        Me.txtPeriodicPayment.MinimumValue = Nothing
-        Me.txtPeriodicPayment.Name = "txtPeriodicPayment"
-        Me.txtPeriodicPayment.OldValue = Nothing
-        Me.txtPeriodicPayment.ReadOnly = true
-        Me.txtPeriodicPayment.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtPeriodicPayment.Translatable = false
-        Me.txtPeriodicPayment.ValueIsMandatory = true
-        Me.txtPeriodicPayment.ValueIsNumeric = true
+        Me.txtPeriodicAmount.BackColor = System.Drawing.Color.White
+        Me.txtPeriodicAmount.BegFindValue = Nothing
+        Me.txtPeriodicAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtPeriodicAmount.ComputedValue = false
+        Me.txtPeriodicAmount.CustomFormat = Nothing
+        Me.txtPeriodicAmount.DataBoundControl = true
+        Me.txtPeriodicAmount.EditingMode = true
+        Me.txtPeriodicAmount.EndFindValue = Nothing
+        Me.txtPeriodicAmount.FieldDescription = Nothing
+        Me.txtPeriodicAmount.FieldName = Nothing
+        Me.txtPeriodicAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtPeriodicAmount.FindEnabled = false
+        Me.CFlowLayout2.SetFlowBreak(Me.txtPeriodicAmount, true)
+        resources.ApplyResources(Me.txtPeriodicAmount, "txtPeriodicAmount")
+        Me.txtPeriodicAmount.ForeColor = System.Drawing.Color.Black
+        Me.txtPeriodicAmount.LinkedLabel = Me.lblPeriodicAmount
+        Me.txtPeriodicAmount.MaximumValue = Nothing
+        Me.txtPeriodicAmount.MinimumValue = Nothing
+        Me.txtPeriodicAmount.Name = "txtPeriodicAmount"
+        Me.txtPeriodicAmount.OldValue = Nothing
+        Me.txtPeriodicAmount.ReadOnly = true
+        Me.txtPeriodicAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.txtPeriodicAmount.Translatable = false
+        Me.txtPeriodicAmount.ValueIsMandatory = true
+        Me.txtPeriodicAmount.ValueIsNumeric = true
         '
         'lblDateCreated
         '
@@ -299,14 +301,16 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout2.Controls.Add(Me.cboEmployeeIdNo)
         Me.CFlowLayout2.Controls.Add(Me.lblPayElementName)
         Me.CFlowLayout2.Controls.Add(Me.cboPayElementIdNo)
-        Me.CFlowLayout2.Controls.Add(Me.lblRecurrType)
-        Me.CFlowLayout2.Controls.Add(Me.cboRecurrType)
-        Me.CFlowLayout2.Controls.Add(Me.lblAmount)
-        Me.CFlowLayout2.Controls.Add(Me.txtAmount)
-        Me.CFlowLayout2.Controls.Add(Me.lblPeriodicPayment)
-        Me.CFlowLayout2.Controls.Add(Me.txtPeriodicPayment)
+        Me.CFlowLayout2.Controls.Add(Me.lblRecurType)
+        Me.CFlowLayout2.Controls.Add(Me.cboRecurType)
+        Me.CFlowLayout2.Controls.Add(Me.lblPeriodicAmount)
+        Me.CFlowLayout2.Controls.Add(Me.txtPeriodicAmount)
+        Me.CFlowLayout2.Controls.Add(Me.lblLimitAmount)
+        Me.CFlowLayout2.Controls.Add(Me.txtLimitAmount)
         Me.CFlowLayout2.Controls.Add(Me.lblStartDate)
         Me.CFlowLayout2.Controls.Add(Me.dtpStartDate)
+        Me.CFlowLayout2.Controls.Add(Me.lblEndDate)
+        Me.CFlowLayout2.Controls.Add(Me.dtpEndDate)
         Me.CFlowLayout2.Controls.Add(Me.lblTotalAmount)
         Me.CFlowLayout2.Controls.Add(Me.txtTotalAmount)
         Me.CFlowLayout2.Controls.Add(Me.CLabel2)
@@ -365,6 +369,87 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayElementIdNo.ValueIsNumeric = false
         Me.cboPayElementIdNo.ValueMember = "IdNo"
         '
+        'lblRecurType
+        '
+        Me.lblRecurType.BackColor = System.Drawing.Color.Transparent
+        Me.lblRecurType.DisplayOnly = true
+        Me.lblRecurType.EditingMode = false
+        resources.ApplyResources(Me.lblRecurType, "lblRecurType")
+        Me.lblRecurType.Name = "lblRecurType"
+        Me.lblRecurType.Translatable = true
+        '
+        'cboRecurType
+        '
+        Me.cboRecurType.BackColor = System.Drawing.Color.White
+        Me.cboRecurType.BegFindValue = Nothing
+        Me.cboRecurType.ChangingSearchValueOnly = false
+        Me.cboRecurType.CurrentSearchTerm = ""
+        Me.cboRecurType.DataValue = Nothing
+        Me.cboRecurType.DefaultValue = Nothing
+        Me.cboRecurType.DisplayMember = "Name"
+        Me.cboRecurType.EditingMode = true
+        Me.cboRecurType.EndFindValue = Nothing
+        Me.cboRecurType.FieldDescription = Nothing
+        Me.cboRecurType.FieldName = Nothing
+        Me.cboRecurType.FilterRule = Nothing
+        Me.cboRecurType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboRecurType.FindEnabled = false
+        Me.CFlowLayout2.SetFlowBreak(Me.cboRecurType, true)
+        resources.ApplyResources(Me.cboRecurType, "cboRecurType")
+        Me.cboRecurType.ForeColor = System.Drawing.Color.Black
+        Me.cboRecurType.FormattingEnabled = true
+        Me.cboRecurType.HideWhenNotEditingOrAdding = false
+        Me.cboRecurType.IgnoreCase = false
+        Me.cboRecurType.LinkedLabel = Me.lblEmployeeIdNo
+        Me.cboRecurType.Name = "cboRecurType"
+        Me.cboRecurType.OldValue = 0
+        Me.cboRecurType.OriginalDataSource = Nothing
+        Me.cboRecurType.OriginalList = Nothing
+        Me.cboRecurType.OverrideDropDownStyleList = false
+        Me.cboRecurType.PreviousSearchTerm = Nothing
+        Me.cboRecurType.PropertySelector = Nothing
+        Me.cboRecurType.ReadOnlyCombo = false
+        Me.cboRecurType.SuggestBoxHeight = 200
+        Me.cboRecurType.SuggestListOrderRule = Nothing
+        Me.cboRecurType.TextToSearch = Nothing
+        Me.cboRecurType.Translatable = false
+        Me.cboRecurType.ValueIsMandatory = false
+        Me.cboRecurType.ValueIsNullable = false
+        Me.cboRecurType.ValueIsNumeric = false
+        Me.cboRecurType.ValueMember = "Code"
+        '
+        'lblEndDate
+        '
+        Me.lblEndDate.BackColor = System.Drawing.Color.Transparent
+        Me.lblEndDate.DisplayOnly = true
+        Me.lblEndDate.EditingMode = false
+        resources.ApplyResources(Me.lblEndDate, "lblEndDate")
+        Me.lblEndDate.Name = "lblEndDate"
+        Me.lblEndDate.Translatable = true
+        '
+        'dtpEndDate
+        '
+        Me.dtpEndDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+        Me.dtpEndDate.DefaultValue = Nothing
+        Me.dtpEndDate.DisplayOnly = false
+        Me.dtpEndDate.DtpDefaultValue = Nothing
+        Me.dtpEndDate.EditingMode = true
+        Me.dtpEndDate.EditsAllowed = false
+        Me.CFlowLayout2.SetFlowBreak(Me.dtpEndDate, true)
+        Me.dtpEndDate.ForeColor = System.Drawing.Color.Black
+        Me.dtpEndDate.LinkedLabel = Me.lblEndDate
+        resources.ApplyResources(Me.dtpEndDate, "dtpEndDate")
+        Me.dtpEndDate.Name = "dtpEndDate"
+        Me.dtpEndDate.ReadOnlyDp = false
+        Me.dtpEndDate.SecurityKey = Nothing
+        Me.dtpEndDate.ShowLongDate = false
+        Me.dtpEndDate.ShowTime = false
+        Me.dtpEndDate.TargetCalendar = Nothing
+        Me.dtpEndDate.Translatable = false
+        Me.dtpEndDate.Value = Nothing
+        Me.dtpEndDate.ValueIsMandatory = false
+        Me.dtpEndDate.ValueIsNullable = false
+        '
         'lblTotalAmount
         '
         Me.lblTotalAmount.BackColor = System.Drawing.Color.Transparent
@@ -403,55 +488,6 @@ Namespace PresentationLayer.Views.Forms
         Me.txtTotalAmount.ValueIsMandatory = true
         Me.txtTotalAmount.ValueIsNumeric = true
         '
-        'lblRecurrType
-        '
-        Me.lblRecurrType.BackColor = System.Drawing.Color.Transparent
-        Me.lblRecurrType.DisplayOnly = true
-        Me.lblRecurrType.EditingMode = false
-        resources.ApplyResources(Me.lblRecurrType, "lblRecurrType")
-        Me.lblRecurrType.Name = "lblRecurrType"
-        Me.lblRecurrType.Translatable = true
-        '
-        'cboRecurrType
-        '
-        Me.cboRecurrType.BackColor = System.Drawing.Color.White
-        Me.cboRecurrType.BegFindValue = Nothing
-        Me.cboRecurrType.ChangingSearchValueOnly = false
-        Me.cboRecurrType.CurrentSearchTerm = ""
-        Me.cboRecurrType.DataValue = Nothing
-        Me.cboRecurrType.DefaultValue = Nothing
-        Me.cboRecurrType.DisplayMember = "Name"
-        Me.cboRecurrType.EditingMode = true
-        Me.cboRecurrType.EndFindValue = Nothing
-        Me.cboRecurrType.FieldDescription = Nothing
-        Me.cboRecurrType.FieldName = Nothing
-        Me.cboRecurrType.FilterRule = Nothing
-        Me.cboRecurrType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboRecurrType.FindEnabled = false
-        Me.CFlowLayout2.SetFlowBreak(Me.cboRecurrType, true)
-        resources.ApplyResources(Me.cboRecurrType, "cboRecurrType")
-        Me.cboRecurrType.ForeColor = System.Drawing.Color.Black
-        Me.cboRecurrType.FormattingEnabled = true
-        Me.cboRecurrType.HideWhenNotEditingOrAdding = false
-        Me.cboRecurrType.IgnoreCase = false
-        Me.cboRecurrType.LinkedLabel = Me.lblEmployeeIdNo
-        Me.cboRecurrType.Name = "cboRecurrType"
-        Me.cboRecurrType.OldValue = 0
-        Me.cboRecurrType.OriginalDataSource = Nothing
-        Me.cboRecurrType.OriginalList = Nothing
-        Me.cboRecurrType.OverrideDropDownStyleList = false
-        Me.cboRecurrType.PreviousSearchTerm = Nothing
-        Me.cboRecurrType.PropertySelector = Nothing
-        Me.cboRecurrType.ReadOnlyCombo = false
-        Me.cboRecurrType.SuggestBoxHeight = 200
-        Me.cboRecurrType.SuggestListOrderRule = Nothing
-        Me.cboRecurrType.TextToSearch = Nothing
-        Me.cboRecurrType.Translatable = false
-        Me.cboRecurrType.ValueIsMandatory = false
-        Me.cboRecurrType.ValueIsNullable = false
-        Me.cboRecurrType.ValueIsNumeric = false
-        Me.cboRecurrType.ValueMember = "IdNo"
-        '
         'CLabel2
         '
         Me.CLabel2.BackColor = System.Drawing.Color.Transparent
@@ -463,7 +499,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'chkActive
         '
-        Me.chkActive.BackColor = System.Drawing.Color.Transparent
+        Me.chkActive.BackColor = System.Drawing.Color.White
         Me.chkActive.BegFindValue = Nothing
         Me.chkActive.DisplayOnly = false
         Me.chkActive.EditingMode = true
@@ -474,6 +510,7 @@ Namespace PresentationLayer.Views.Forms
         Me.chkActive.FindEnabled = false
         resources.ApplyResources(Me.chkActive, "chkActive")
         Me.CFlowLayout2.SetFlowBreak(Me.chkActive, true)
+        Me.chkActive.ForeColor = System.Drawing.Color.Black
         Me.chkActive.IFindableControl_FindEnabled = false
         Me.chkActive.IgnoreCase = false
         Me.chkActive.LinkedLabel = Nothing
@@ -503,12 +540,12 @@ End Sub
         Public WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblEmployeeIdNo As CLabel
         Public WithEvents cboEmployeeIdNo As CaComboBox
-        Friend WithEvents lblAmount As CLabel
-        Public WithEvents txtAmount As CTextBox
+        Friend WithEvents lblLimitAmount As CLabel
+        Public WithEvents txtLimitAmount As CTextBox
         Friend WithEvents lblStartDate As CLabel
         Public WithEvents dtpStartDate As CCustomDateTimePicker
-        Friend WithEvents lblPeriodicPayment As CLabel
-        Public WithEvents txtPeriodicPayment As CTextBox
+        Friend WithEvents lblPeriodicAmount As CLabel
+        Public WithEvents txtPeriodicAmount As CTextBox
         Friend WithEvents lblDateCreated As CLabel
         Public WithEvents txtDateCreated As CTextBox
         Friend WithEvents CFlowLayout2 As CFlowLayout
@@ -516,9 +553,11 @@ End Sub
         Public WithEvents cboPayElementIdNo As CaComboBox
         Friend WithEvents lblTotalAmount As CLabel
         Public WithEvents txtTotalAmount As CTextBox
-        Friend WithEvents lblRecurrType As CLabel
-        Public WithEvents cboRecurrType As CaComboBox
+        Friend WithEvents lblRecurType As CLabel
+        Public WithEvents cboRecurType As CaComboBox
         Friend WithEvents CLabel2 As CLabel
         Friend WithEvents chkActive As CCheckBox
+        Friend WithEvents lblEndDate As CLabel
+        Public WithEvents dtpEndDate As CCustomDateTimePicker
     End Class
 End Namespace

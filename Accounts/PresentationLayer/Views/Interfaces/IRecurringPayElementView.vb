@@ -6,13 +6,14 @@ Namespace PresentationLayer.Views.Interfaces
         Inherits IView
 
         Property Active As Boolean
-        Property Amount As Decimal
         Property DateCreated As DateTime?
         Property EmployeeIdNo As Int32
+        Property EndDate As Date?
         Property IdNo As Int32
+        Property LimitAmount As Decimal
         Property PayElementIdNo As Int16
-        Property PeriodicPayment As Decimal
-        Property RecurrType As String
+        Property PeriodicAmount As Decimal
+        Property RecurType As String
         Property StartDate As Date?
         Property TotalAmount As Decimal
 

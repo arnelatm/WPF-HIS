@@ -5,7 +5,7 @@
     [Amount]                  MONEY    NULL,
     [Active]                  BIT      NULL,
     [RecurringPayElementIdNo] INT      NULL,
-    [RecurrType]              CHAR (1) NULL,
+    [RecurType]              CHAR (1) NULL,
     [Generated]               BIT      NULL
 );
 

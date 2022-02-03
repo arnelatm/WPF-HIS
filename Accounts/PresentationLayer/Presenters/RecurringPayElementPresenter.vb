@@ -16,7 +16,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateEnumDataSource(Of RecurrTypeSelection)("RecurrType")
+            CreateEnumDataSource(Of RecurTypeSelection)("RecurType")
             CreateDataSource("Employee", "EmployeeIdNo")
             CreateDataSource("PayElement", "PayElementIdNo")
         End Sub

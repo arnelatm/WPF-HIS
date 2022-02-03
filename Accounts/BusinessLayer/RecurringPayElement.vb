@@ -14,23 +14,23 @@ Namespace BusinessLayer
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("EmployeeIdNo"))
                 AddRule(New ValidateRequired("StartDate"))
-                AddRule(New ValidateRequired("RecurrType"))
-                AddRule(New ValidateContent("Amount", 0, ValidationOperator.GreaterThan, ValidationDataType.Decimal))
-                AddRule(New ValidateContent("PeriodicPayment", 0, ValidationOperator.GreaterThan, ValidationDataType.Decimal))
-                AddRule(New ValidateCompare("Amount", "PeriodicPayment", ValidationOperator.GreaterThan, ValidationDataType.Decimal))
+                AddRule(New ValidateRequired("RecurType"))
+                'AddRule(New ValidateContent("LimitAmount", 0, ValidationOperator.GreaterThan, ValidationDataType.Decimal))
+                AddRule(New ValidateContent("PeriodicAmount", 0, ValidationOperator.GreaterThan, ValidationDataType.Decimal))
+                'AddRule(New ValidateCompare("LimitAmount", "PeriodicAmount", ValidationOperator.GreaterThan, ValidationDataType.Decimal))
             End If
 
         End Sub
 
-
         Public Property Active As Boolean
-        Public Property Amount As Decimal
+        Public Property LimitAmount As Decimal
         Public Property DateCreated As DateTime?
         Public Property EmployeeIdNo As Int32
+        Public Property EndDate As Date?
         Public Property IdNo As Int32
         Public Property PayElementIdNo As Int16
-        Public Property PeriodicPayment As Decimal
-        Public Property RecurrType As String
+        Public Property PeriodicAmount As Decimal
+        Public Property RecurType As String
         Public Property StartDate As Date?
         Public Property TotalAmount As Decimal
 

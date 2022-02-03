@@ -707,7 +707,7 @@ Namespace PresentationLayer.Presenters
                     End If
                 Next
             Else
-                ' payrolldetails already saved and generated 
+                ' payrolldetails already saved and generated
                 ' so re-read the saved data because we need their linked idno for the
                 ' payrollpayelementdetails
                 _payrollDetailsModel = _payrollDetailsService.GetRecordsWithGroupIdNo(Of PayrollDetailModel)(_payrollIdNo)
@@ -809,14 +809,34 @@ Namespace PresentationLayer.Presenters
                         End If
 
                     End If
-                    If (recurringPayElement.TotalAmount - currentAmount) < recurringPayElement.Amount Then
-                        amount = Math.Min(recurringPayElement.Amount - (recurringPayElement.TotalAmount - currentAmount), recurringPayElement.PeriodicPayment)
-                        If Not regenerate Then
-                            AddPayElement(employeeIdNo, amount, recurringPayElement.PayElementIdNo, 0, payrollDetailIdNo, recurringPayElement.IdNo)
-                        Else
-                            UpdatePayElement(employeeIdNo, amount, recurringPayElement.PayElementIdNo, payrollDetailIdNo, recurringPayElement.IdNo)
-                        End If
-                    End If
+                    Select Case recurringPayElement.RecurType
+                        Case EnumToCode(RecurTypeSelection.UpToLimitAmount)
+                            If (recurringPayElement.TotalAmount - currentAmount) < recurringPayElement.LimitAmount Then
+                                amount = Math.Min(recurringPayElement.LimitAmount - (recurringPayElement.TotalAmount - currentAmount), recurringPayElement.PeriodicAmount)
+                                If Not regenerate Then
+                                    AddPayElement(employeeIdNo, amount, recurringPayElement.PayElementIdNo, 0, payrollDetailIdNo, recurringPayElement.IdNo)
+                                Else
+                                    UpdatePayElement(employeeIdNo, amount, recurringPayElement.PayElementIdNo, payrollDetailIdNo, recurringPayElement.IdNo)
+                                End If
+                            End If
+                        Case EnumToCode(RecurTypeSelection.UpToEndDate)
+                            If recurringPayElement.EndDate <= View.EndDate Then
+                                If Not regenerate Then
+                                    AddPayElement(employeeIdNo, recurringPayElement.PeriodicAmount, recurringPayElement.PayElementIdNo, 0, payrollDetailIdNo, recurringPayElement.IdNo)
+                                Else
+                                    UpdatePayElement(employeeIdNo, recurringPayElement.PeriodicAmount, recurringPayElement.PayElementIdNo, payrollDetailIdNo, recurringPayElement.IdNo)
+                                End If
+                            End If
+                        Case EnumToCode(RecurTypeSelection.WhileActive)
+                            If recurringPayElement.Active Then
+                                If Not regenerate Then
+                                    AddPayElement(employeeIdNo, recurringPayElement.PeriodicAmount, recurringPayElement.PayElementIdNo, 0, payrollDetailIdNo, recurringPayElement.IdNo)
+                                Else
+                                    UpdatePayElement(employeeIdNo, recurringPayElement.PeriodicAmount, recurringPayElement.PayElementIdNo, payrollDetailIdNo, recurringPayElement.IdNo)
+                                End If
+                            End If
+                    End Select
+
                 Next
             End If
         End Sub
