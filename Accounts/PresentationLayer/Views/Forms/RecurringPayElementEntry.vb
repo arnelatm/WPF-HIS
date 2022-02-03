@@ -131,6 +131,7 @@ Namespace PresentationLayer.Views.Forms
                 {"Amount", txtLimitAmount},
                 {"EmployeeIdNo", cboEmployeeIdNo},
                 {"IdNo", TxtIdNo},
+                {"LimitAmount", txtLimitAmount},
                 {"PayElementIdNo", cboPayElementIdNo},
                 {"PeriodicAmount", txtPeriodicAmount},
                 {"RecurType", cboRecurType},
@@ -157,6 +158,30 @@ Namespace PresentationLayer.Views.Forms
                     lblLimitAmount.Visible = False
             End Select
         End Sub
+
+        Protected Overrides Sub BeforeEdit()
+            If TotalAmount > 0 Then
+                dtpEndDate.DisplayOnly = True
+                dtpStartDate.DisplayOnly = True
+                txtLimitAmount.DisplayOnly = True
+                txtPeriodicAmount.DisplayOnly = True
+                cboEmployeeIdNo.DisplayOnly = True
+                cboRecurType.DisplayOnly = True
+                cboPayElementIdNo.DisplayOnly = True
+            Else
+                dtpEndDate.DisplayOnly = False
+                dtpStartDate.DisplayOnly = False
+                txtLimitAmount.DisplayOnly = False
+                txtPeriodicAmount.DisplayOnly = False
+                cboEmployeeIdNo.DisplayOnly = False
+                cboEmployeeIdNo.DisplayOnly = False
+                cboRecurType.DisplayOnly = False
+                cboPayElementIdNo.DisplayOnly = False
+            End If
+            Refresh()
+        End Sub
+
+
 
     End Class
 

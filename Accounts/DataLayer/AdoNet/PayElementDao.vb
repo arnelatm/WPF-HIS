@@ -59,7 +59,7 @@ Namespace DataLayer.AdoNet
             If retValue Is Nothing Then
                 Dim setupName As String = Messaging.TranslateCaption("Use Pay Groups")
                 Dim groupSetting As String = "Payroll"
-                Messaging.ShowParametrizedMessage(True, "MsgSettingNotSet", {"setupName", setupName, "minimumValue", groupSetting, "maximumValue", groupSetting})
+                Messaging.ShowPmMessage(True, "MsgSettingNotSet", {"setupName", setupName, "minimumValue", groupSetting, "maximumValue", groupSetting})
                 Return False
             End If
             If retValue = "1" Then

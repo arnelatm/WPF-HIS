@@ -334,7 +334,7 @@ Namespace PresentationLayer.Presenters
                     For Each item In View.JournalItems
                         If item.AccountIdNo Is Nothing Or item.AccountIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
                             Dim lineNumber As String = item.Sequence.ToString()
-                            Messaging.ShowParametrizedMessage(True, "MsgBlankAccountIdNotAllowed", {"lineNumber", lineNumber})
+                            Messaging.ShowPmMessage(True, "MsgBlankAccountIdNotAllowed", {"lineNumber", lineNumber})
                             retValue = False
                             Exit For
                         End If
@@ -1064,7 +1064,7 @@ Namespace PresentationLayer.Presenters
                     If cPosted Then
                         Dim description As String = ""
                         description = Messaging.TranslateCaption("Petty Cash Replenishment")
-                        Messaging.ShowParametrizedMessage(True, "MsgDeleteEntryNotAllowed", {"description", description})
+                        Messaging.ShowPmMessage(True, "MsgDeleteEntryNotAllowed", {"description", description})
                         retVal = False
                     End If
                 End If

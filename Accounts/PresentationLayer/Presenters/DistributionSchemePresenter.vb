@@ -82,7 +82,7 @@ Namespace PresentationLayer.Presenters
                         totalPercentage += item.Percentage
                         If item.RevCostCenterIdNo = 0 Then
                             Dim lineNumber = Format(item.Sequence, "0")
-                            Messaging.ShowParametrizedMessage(True, "MsgBlankRevenueCostCenter", {"lineNumber", lineNumber})
+                            Messaging.ShowPmMessage(True, "MsgBlankRevenueCostCenter", {"lineNumber", lineNumber})
                             retValue = False
                             Exit For
                         End If

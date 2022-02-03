@@ -194,12 +194,6 @@ Namespace PresentationLayer.Presenters
             Return valid
         End Function
 
-        Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
-            Dim type As Type = View.GetType
-            Messaging.Show(True, "MsgEditingNotAllowed")
-            CancelEdit = True
-        End Sub
-
     End Class
 
 End Namespace

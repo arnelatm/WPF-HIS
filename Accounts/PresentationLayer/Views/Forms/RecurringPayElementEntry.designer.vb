@@ -273,6 +273,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtDateCreated.ComputedValue = false
         Me.txtDateCreated.CustomFormat = Nothing
         Me.txtDateCreated.DataBoundControl = true
+        Me.txtDateCreated.DisplayOnly = true
         Me.txtDateCreated.EditingMode = true
         Me.txtDateCreated.EndFindValue = Nothing
         Me.txtDateCreated.FieldDescription = Nothing

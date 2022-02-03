@@ -276,7 +276,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub cboCalculationType_ValueChanged(sender As Object, e As EventArgs) Handles cboCalculationType.SelectionChangeCommitted, cboCalculationType.Validated
             If cboCalculationType.Focused Then
                 If IsCalcTypeItemDisabled(cboCalculationType.SelectedIndex) Then
-                    Messaging.ShowParametrizedMessage(True, "MsgSelectedValueNotAllowed", {cboPayElementType.LinkedLabel.Text, "field1", cboCalculationType.LinkedLabel.Text, "field2"})
+                    Messaging.ShowPmMessage(True, "MsgSelectedValueNotAllowed", {cboPayElementType.LinkedLabel.Text, "field1", cboCalculationType.LinkedLabel.Text, "field2"})
                     cboCalculationType.SelectedValue = -1
                 ElseIf cboCalculationType.SelectedValue = EnumToCode(CalculationTypeSelection.FixedAmount) Then
                     QuantityType = EnumToCode(QuantityTypeSelection.NotNeeded)
@@ -310,7 +310,7 @@ Namespace PresentationLayer.Views.Forms
             If cboCalculationType.Focused Then
                 If IsQtyTypeItemDisabled(cboCalculationType.SelectedIndex) Then
                     Dim description As String = DirectCast(cboCalculationType, ILinkedLabel).GetControlDescription()
-                    Messaging.ShowParametrizedMessage(True, "MsgSelectedValueNotAllowed",
+                    Messaging.ShowPmMessage(True, "MsgSelectedValueNotAllowed",
                                                       {DirectCast(cboCalculationType, ILinkedLabel).GetControlDescription(), "field1",
                                                        DirectCast(cboQuantityType, ILinkedLabel).GetControlDescription(), "field2"})
                     cboCalculationType.SelectedValue = -1

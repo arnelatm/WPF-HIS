@@ -389,7 +389,7 @@ Namespace PresentationLayer.Views.Forms
             If Presenter.CrAccountCount = 0 Then
                 Dim accountName As String
                 accountName = Messaging.TranslateCaption("Cash")
-                Messaging.ShowParametrizedMessage(True, "MsgNoSpecialAccount", {"specialAccountName", accountName})
+                Messaging.ShowPmMessage(True, "MsgNoSpecialAccount", {"specialAccountName", accountName})
                 Presenter.GoQuit()
             End If
             BindCsrOiItem()

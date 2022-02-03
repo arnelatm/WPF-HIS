@@ -198,9 +198,10 @@ Public Class CCustomDateTimePicker
         End Get
         Set
             _displayOnly = Value
-            txtTime.txbTime.DisplayOnly = Value
-            txtDate.DisplayOnly = Value
-            txtLongDate.DisplayOnly = Value
+            'txtTime.txbTime.DisplayOnly = Value
+            'txtDate.DisplayOnly = Value
+            'txtLongDate.DisplayOnly = Value
+            ReadOnlyDp = value
             If _displayOnly Then
                 dtp.Visible = False
             Else
@@ -236,7 +237,10 @@ Public Class CCustomDateTimePicker
             _readOnlyDp = Value
             txtDate.DisplayOnly = Value
             txtLongDate.DisplayOnly = Value
+            txtTime.txbTime.DisplayOnly = Value
             'txtTime.DisplayOnly = Value
+            Refresh()
+            
         End Set
     End Property
 

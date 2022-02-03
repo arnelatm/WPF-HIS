@@ -795,7 +795,7 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _recurringPayElementService As New AccountsService("RecurringPayElement")
 
         Private Sub GenerateRecurringPayElements(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
-            _recurringPayElements = _recurringPayElementService.GetDaoRecords(Of RecurringPayElementModel)("TotalAmount < Amount and StartDate <= '" + View.StartDate.ToString() + "' and EmployeeIdNo = " & employeeIdNo.ToString())
+            _recurringPayElements = _recurringPayElementService.GetDaoRecords(Of RecurringPayElementModel)("TotalAmount < Amount and StartDate <= '" + View.StartDate.ToString() + "' and EmployeeIdNo = " & employeeIdNo.ToString() + " active = 1")
             If _recurringPayElements.Any Then
                 Dim amount As Decimal
                 For Each recurringPayElement As RecurringPayElementModel In _recurringPayElements
@@ -828,12 +828,10 @@ Namespace PresentationLayer.Presenters
                                 End If
                             End If
                         Case EnumToCode(RecurTypeSelection.WhileActive)
-                            If recurringPayElement.Active Then
-                                If Not regenerate Then
-                                    AddPayElement(employeeIdNo, recurringPayElement.PeriodicAmount, recurringPayElement.PayElementIdNo, 0, payrollDetailIdNo, recurringPayElement.IdNo)
-                                Else
-                                    UpdatePayElement(employeeIdNo, recurringPayElement.PeriodicAmount, recurringPayElement.PayElementIdNo, payrollDetailIdNo, recurringPayElement.IdNo)
-                                End If
+                            If Not regenerate Then
+                                AddPayElement(employeeIdNo, recurringPayElement.PeriodicAmount, recurringPayElement.PayElementIdNo, 0, payrollDetailIdNo, recurringPayElement.IdNo)
+                            Else
+                                UpdatePayElement(employeeIdNo, recurringPayElement.PeriodicAmount, recurringPayElement.PayElementIdNo, payrollDetailIdNo, recurringPayElement.IdNo)
                             End If
                     End Select
 
@@ -1406,7 +1404,7 @@ Namespace PresentationLayer.Presenters
                 For Each item In View.PayrollAttendance
                     If item.DaysPresent < 0 Then
                         'Messaging.Show("MsgNegativeDaysPresent")
-                        Messaging.ShowParametrizedMessage(True, "MsgNegativeDaysPresent", {"lineNumber", item.Sequence.ToString()})
+                        Messaging.ShowPmMessage(True, "MsgNegativeDaysPresent", {"lineNumber", item.Sequence.ToString()})
                         retValue = False
                         Exit For
                     End If
