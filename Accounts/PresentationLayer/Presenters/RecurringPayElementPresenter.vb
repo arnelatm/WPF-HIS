@@ -1,6 +1,8 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 
@@ -28,6 +30,39 @@ Namespace PresentationLayer.Presenters
             End If
             Return False
         End Function
+
+        Protected Overrides Function IsBizDataValid() As Boolean
+            Dim retValue = False
+            If MyBase.IsBizDataValid() Then
+                Select Case View.RecurType
+                    Case EnumToCode(RecurTypeSelection.UpToEndDate)
+                        If View.EndDate Is Nothing Then
+                            Messaging.ShowPmMessage(True, "MsgRequiredField", {"fieldName", Messaging.TranslateCaption("End Date")})
+                        ElseIf View.EndDate < View.StartDate Then
+                            Messaging.ShowPmMessage(True, "MsgMustBeGreaterThan", {"fieldName1", Messaging.TranslateCaption("End Date"), "fieldName2", Messaging.TranslateCaption("Start Date")})
+                        Else
+                            retValue = True
+                        End If
+                    Case EnumToCode(RecurTypeSelection.UpToLimitAmount)
+                        If View.LimitAmount = 0 Then
+                            Messaging.ShowPmMessage(True, "MsgRequiredField", {"fieldName", Messaging.TranslateCaption("Limit Amount")})
+                        ElseIf View.LimitAmount < View.PeriodicAmount Then
+                            Messaging.ShowPmMessage(True, "MsgMustBeGreaterThan", {"fieldName1", Messaging.TranslateCaption("Limit Amount"), "fieldName2", Messaging.TranslateCaption("Periodic Amount")})
+                        Else
+                            retValue = True
+                        End If
+                    Case Else
+                        retValue = True
+                End Select
+            End If
+            Return retValue
+        End Function
+
+        Protected Function BeforeEditing()
+
+
+        End Function
+
 
     End Class
 

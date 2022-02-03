@@ -358,7 +358,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Dim endDateStr As String = endDate.ToShortDateString()
         If targetDate < startDate Or targetDate > endDate Then
             Dim variables = {"dateField", dateField, "startDate", startDateStr, "endDate", endDateStr}
-            Messaging.ShowParametrizedMessage(True, "MsgInvalidDate", variables)
+            Messaging.ShowPmMessage(True, "MsgInvalidDate", variables)
             retValue = DialogResult.No
         Else
             retValue = DialogResult.Yes
@@ -455,7 +455,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         If retValue Is Nothing Then
             Dim setupName As String = Messaging.TranslateCaption(description)
             Dim groupSetting As String = group
-            Messaging.ShowParametrizedMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
+            Messaging.ShowPmMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
             Return Nothing
         End If
         Return retValue
@@ -482,7 +482,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         If retValue Is Nothing Then
             Dim setupName As String = Messaging.TranslateCaption("Use Revenue/Cost Centers")
             Dim groupSetting As String = "Company"
-            Messaging.ShowParametrizedMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
+            Messaging.ShowPmMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
             Return Nothing
         End If
         If retValue = "0" Then
@@ -609,7 +609,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         If retValue Is Nothing Then
             Dim setupName As String = Messaging.TranslateCaption("Use Departments")
             Dim groupSetting As String = "Company"
-            Messaging.ShowParametrizedMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
+            Messaging.ShowPmMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
             Return Nothing
         End If
         If retValue = "0" Then

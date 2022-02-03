@@ -16,6 +16,7 @@ Public Class CMaskedTextBox
     Private _editingMode As Boolean = False
     Private _searchField As String
     Private _translatable As Boolean = False
+    Private _displayOnly As Boolean 
 
     <Bindable(True)>
     <Category("Properties")>
@@ -72,9 +73,26 @@ Public Class CMaskedTextBox
     <Bindable(True)>
     <Category("Properties")>
     <DefaultValue(GetType(Boolean))>
-    <Description("Set to True to specify that this control is mandatory.")>
+    <Description("Set to True to specify that this control is readonly.")>
     <Browsable(True)>
     Public Property DisplayOnly As Boolean
+        Get
+            Return _displayOnly
+        End Get
+        Set(value As Boolean)
+            If _displayOnly = value Then Exit Property
+            _displayOnly = value
+            If value Then
+                [ReadOnly] = True
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            Else
+                [ReadOnly] = False
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            End If
+        End Set
+    End Property
 
     <Bindable(True)>
     <Category("Properties")>

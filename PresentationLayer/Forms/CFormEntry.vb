@@ -180,15 +180,15 @@ Public Class CFormEntry
 
     Public Overridable Sub TurnOffInputs()
         Inputs(False)
-        RaiseEvent InputsTurnedOff()
+        'RaiseEvent InputsTurnedOff()
     End Sub
 
     Public Overridable Sub TurnOnInputs()
         Inputs(True)
-        RaiseEvent InputsTurnedOn()
-        If FirstControl IsNot Nothing Then
-            FirstControl.Focus()
-        End If
+        'RaiseEvent InputsTurnedOn()
+        'If FirstControl IsNot Nothing Then
+        '    FirstControl.Focus()
+        'End If
     End Sub
 
     'Protected Overridable Sub CreateDataSources()
@@ -327,11 +327,16 @@ Public Class CFormEntry
         PublishClickedButton(ButtonClicked.Delete)
     End Sub
 
+    Protected Overridable Sub BeforeEdit()
+
+    End Sub
+
     Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
         PublishClickedButton(ButtonClicked.Edit)
+        BeforeEdit()
         'If EditMode Then
         '    TurnOnInputs()
         'End If

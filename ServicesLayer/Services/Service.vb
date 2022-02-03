@@ -685,7 +685,7 @@ Namespace Services
             If retValue Is Nothing Then
                 Dim setupName As String = Messaging.TranslateCaption("Use Pay Groups")
                 Dim groupSetting As String = "Payroll"
-                Messaging.ShowParametrizedMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
+                Messaging.ShowPmMessage(True, "MsgSettingNotSet", {"setupName", setupName, "groupSetting", groupSetting})
                 Return Nothing
             End If
             If retValue = "1" Then

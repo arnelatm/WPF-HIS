@@ -22,7 +22,7 @@ Namespace PresentationLayer.Presenters
                 If cPosted Then
                     Dim description As String = ""
                     description = Messaging.TranslateCaption("Posted")
-                    Messaging.ShowParametrizedMessage(True, "MsgDeleteEntryNotAllowed", {"description", description})
+                    Messaging.ShowPmMessage(True, "MsgDeleteEntryNotAllowed", {"description", description})
                     retVal = False
                 End If
             End If

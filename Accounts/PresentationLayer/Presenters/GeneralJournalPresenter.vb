@@ -150,7 +150,7 @@ Namespace PresentationLayer.Presenters
                             Dim lineNumber As String = item.Sequence.ToString()
                             Dim entryNames As String = Messaging.TranslateCaption("Accounts Payable") + "/" + Messaging.TranslateCaption("Accounts Receivable") + "/" + Messaging.TranslateCaption("Employee Accounts")
                             Dim variables = {"lineNumber", lineNumber, "entryNames", entryNames}
-                            Messaging.ShowParametrizedMessage(True, "MsgAccountsNotAllowed", variables)
+                            Messaging.ShowPmMessage(True, "MsgAccountsNotAllowed", variables)
                             retValue = False
                         End If
                     Next

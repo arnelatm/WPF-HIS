@@ -96,14 +96,14 @@ Namespace PresentationLayer.Views.Forms
                     Dim isNumeric As Boolean = Decimal.TryParse(targetValue, num)
                     If Not isNumeric Then
                         Dim variables = {"FieldName", originalValue.name}
-                        Messaging.ShowParametrizedMessage(True, "MsgOnlyNumbersAllowed", variables)
+                        Messaging.ShowPmMessage(True, "MsgOnlyNumbersAllowed", variables)
                         Return originalValue.Text
                     End If
                     Select Case x.Name
                         Case "Byte"
                             If num < 0 OrElse num > 255 Then
                                 Dim variables = {"FieldName", originalValue.Name}
-                                Messaging.ShowParametrizedMessage(True, "MsgNumeric0to255Only", variables)
+                                Messaging.ShowPmMessage(True, "MsgNumeric0to255Only", variables)
                                 Return originalValue.Text
                             End If
                             Return num.ToString()
