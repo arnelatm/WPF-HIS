@@ -389,10 +389,10 @@ Public Enum LeaveCycleSelection
     <EnumCode("3")> AsNeeded
 End Enum
 
-Public Enum RecurrTypeSelection
+Public Enum RecurTypeSelection
 
     <EnumCode("A")> WhileActive
-    <EnumCode("P")> UntilAmountPaid
-    <EnumCode("B")> BetweenDate
-    
+    <EnumCode("L")> UpToLimitAmount
+    <EnumCode("D")> UpToEndDate
+
 End Enum

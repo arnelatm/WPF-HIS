@@ -654,7 +654,7 @@
         Me.cacGender.HideWhenNotEditingOrAdding = false
         Me.cacGender.IgnoreCase = false
         Me.cacGender.IntegralHeight = false
-        Me.cacGender.LinkedLabel = Me.lblMaritalStatus
+        Me.cacGender.LinkedLabel = Me.lblGender
         Me.cacGender.Location = New System.Drawing.Point(176, 91)
         Me.cacGender.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
         Me.cacGender.Name = "cacGender"

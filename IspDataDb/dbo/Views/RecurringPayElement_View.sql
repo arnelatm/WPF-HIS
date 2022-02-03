@@ -4,10 +4,10 @@ CREATE VIEW [dbo].[RecurringPayElement_View]
 AS
 SELECT a.[IdNo]
       ,a.[EmployeeIdNo]
-      ,a.[Amount]
+      ,a.[LimitAmount]
       ,a.[StartDate]
 	  ,a.[PayElementIdNo]
-	  ,a.[PeriodicPayment]
+	  ,a.[PeriodicAmount]
 	  ,IsNull(b.TotalAmount,0) as 'TotalAmount'
 	  ,a.[DateCreated]
 	  FROM [RecurringPayElement] as a
