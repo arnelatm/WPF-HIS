@@ -123,19 +123,25 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "IspDataDb", "IspDataDb\IspD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQueries", "{E0336D98-67DC-4134-9508-7F5598295FEC}"
 	ProjectSection(SolutionItems) = preProject
+		Append a table to a new table.sql = Append a table to a new table.sql
+		Check for Duplicate Item RegistraTION pHARMACY.txt = Check for Duplicate Item RegistraTION pHARMACY.txt
 		CreateEditReset Sequence.sql = CreateEditReset Sequence.sql
 		DeleteDuplicates.sql = DeleteDuplicates.sql
 		EditingSqlQuery.sql = EditingSqlQuery.sql
 		Extract Varchar Fields to Images.sql = Extract Varchar Fields to Images.sql
 		Find all object references for a specific object.sql = Find all object references for a specific object.sql
 		Look for tables containing field name.sql = Look for tables containing field name.sql
+		Query tables for Creation Date.sql = Query tables for Creation Date.sql
 		QueryAvailableIdentityFieldSpace.sql = QueryAvailableIdentityFieldSpace.sql
 		QueryWrongAccountsInReconciliation.sql = QueryWrongAccountsInReconciliation.sql
+		REplace field with a sequential number.sql = REplace field with a sequential number.sql
 		ResetIdentityField.sql = ResetIdentityField.sql
 		Reverse bit values.sql = Reverse bit values.sql
 		SearchDatabaseForASpecificColumnName.sql = SearchDatabaseForASpecificColumnName.sql
 		SqlQuery_2.sql = SqlQuery_2.sql
 		TextFile1.txt = TextFile1.txt
+		Update Query with Join.sql = Update Query with Join.sql
+		Update TradeName.sql = Update TradeName.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateIspdata", "CreateIspdata", "{D0B2F203-4601-4F73-89C4-C5A6FF4D4B99}"

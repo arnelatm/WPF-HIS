@@ -1,0 +1,7 @@
+select a.*,i.ItemNameEnglish,i.Price_Cash,b.* from ItemRegistration a
+inner join DuplicateItemRegistration b 
+on a.RegistrationNo = b.RegistrationNo
+inner join ItemDetails i
+on a.Item_code = i.Item_Code
+where b.registrationNo is not Null and i.BranchId = '01'
+order by a.registrationNo

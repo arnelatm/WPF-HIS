@@ -795,7 +795,7 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _recurringPayElementService As New AccountsService("RecurringPayElement")
 
         Private Sub GenerateRecurringPayElements(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
-            _recurringPayElements = _recurringPayElementService.GetDaoRecords(Of RecurringPayElementModel)("TotalAmount < Amount and StartDate <= '" + View.StartDate.ToString() + "' and EmployeeIdNo = " & employeeIdNo.ToString() + " active = 1")
+            _recurringPayElements = _recurringPayElementService.GetDaoRecords(Of RecurringPayElementModel)("TotalAmount < LimitAmount and StartDate <= '" + View.StartDate.ToString() + "' and EmployeeIdNo = " & employeeIdNo.ToString() + " and active = 1")
             If _recurringPayElements.Any Then
                 Dim amount As Decimal
                 For Each recurringPayElement As RecurringPayElementModel In _recurringPayElements

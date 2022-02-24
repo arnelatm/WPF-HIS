@@ -1,13 +1,17 @@
 ﻿
 
+
 CREATE VIEW [dbo].[RecurringPayElement_View]
 AS
-SELECT a.[IdNo]
+SELECT a.Active
+	  ,a.[IdNo]
       ,a.[EmployeeIdNo]
+	  ,a.[EndDate]
       ,a.[LimitAmount]
       ,a.[StartDate]
 	  ,a.[PayElementIdNo]
 	  ,a.[PeriodicAmount]
+	  ,a.[RecurType]
 	  ,IsNull(b.TotalAmount,0) as 'TotalAmount'
 	  ,a.[DateCreated]
 	  FROM [RecurringPayElement] as a
