@@ -269,7 +269,8 @@ Namespace PresentationLayer.Views.Forms
             btnEdit.Enabled = True
             btnAdd.Enabled = True
             TurnOffInputs()
-            Close()
+            'Dim x = IdNo
+            'Close()
             RunSubForm(Of PayrollDetailEntry, PayrollDetailPresenter(Of PayrollDetailModel))(IdNo, ParentForm)
         End Sub
 
