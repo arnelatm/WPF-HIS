@@ -1419,6 +1419,140 @@ Namespace PresentationLayer.Presenters
             Next item
         End Sub
 
+        Public Sub PostPayroll()
+            _payrollIdNo = View.IdNo
+            If View.PayrollAttendance.Count() = 0 And View.PayrollOvertime.Count() = 0 Then
+                Messaging.Show(True, "MsgEmptyEmployeeAttendanceOt")
+            Else
+                Dim dtGeneralJournalItem As New DataTable
+                Dim dtPayrollPayElementUpdateTable As New DataTable
+                _payrollPayElements = New List(Of PayrollPayElementModel)
+                CreateDataTable(dtGeneralJournalItem, {{"AccountIdNo", GetType(Int16)},
+                                                       {"Credit", GetType(Decimal)},
+                                                       {"Debit", GetType(Decimal)},
+                                                       {"JournalIdNo", GetType(Int32)},
+                                                       {"Notes", GetType(String)},
+                                                       {"RevCostCenterIdNo", GetType(Int16)},
+                                                       {"Sequence", GetType(Int16)}})
+
+                Dim progressDisplayForm = New CBaseControlsLibrary.DisplayProgressForm
+                Dim counter As Integer = 0
+                _savedPayrollPayElements = _payrollPayElementsService.GetRecordsWithGroupIdNo(Of PayrollPayElementModel)(_payrollIdNo)
+                progressDisplayForm.Show()
+                progressDisplayForm.InitializeDisplay(_savedPayrollPayElements.Count())
+
+                Dim payrollDetailIdNo As Int32
+                Dim payElementIdNo As Int16
+                For Each payrollPayElement In _savedPayrollPayElements
+                    payElementIdNo = payrollPayElement.PayElementIdNo
+
+                    If PayrollDetailModel.IdNo = 0 Then
+                        payrollDetailIdNo = _payrollDetailsService.AddRecord(PayrollDetailModel)
+                    Else
+                        payrollDetailIdNo = PayrollDetailModel.IdNo
+                    End If
+                    CreatePayrollPayElements(PayrollDetailModel, regenerate, payrollDetailIdNo)
+                    counter = counter + 1
+                    progressDisplayForm.UpdateProgressBar(counter)
+                Next
+
+
+
+                Dim counter As Integer = 0
+                Dim progressDisplayForm = New CBaseControlsLibrary.DisplayProgressForm
+                progressDisplayForm.Show()
+                progressDisplayForm.InitializeDisplay(_payrollDetailsModel.Count() + 2)
+                If regenerate Then
+                    _savedPayrollPayElements = _payrollPayElementsService.GetRecordsWithGroupIdNo(Of PayrollPayElementModel)(_payrollIdNo)
+                    Dim payrollDetailIdNo As Int32
+                    For Each payrollDetailModel In _payrollDetailsModel
+                        If payrollDetailModel.Selected Then
+                            If payrollDetailModel.IdNo = 0 Then
+                                payrollDetailIdNo = _payrollDetailsService.AddRecord(payrollDetailModel)
+                            Else
+                                payrollDetailIdNo = payrollDetailModel.IdNo
+                            End If
+                            CreatePayrollPayElements(payrollDetailModel, regenerate, payrollDetailIdNo)
+                        End If
+                        counter = counter + 1
+                        progressDisplayForm.UpdateProgressBar(counter)
+                    Next
+                    For Each item In _savedPayrollPayElements
+                        'Dim dataRow As DataRow
+                        Dim payrollAttendance As AttendanceItemView
+                        payrollAttendance = View.PayrollAttendance.Find(Function(c) c.EmployeeIdNo = item.EmployeeIdNo)
+                        If payrollAttendance Is Nothing Then
+                            _payrollPayElements.Add(item)
+                        Else
+                            If payrollAttendance.Selected Then
+                                If item.Generated Then
+                                    ' ignore these records they have already been regenerated
+                                Else
+                                    _payrollPayElements.Add(item)
+                                End If
+                            Else
+                                _payrollPayElements.Add(item)
+                            End If
+                        End If
+                    Next
+                    For Each item In _payrollPayElements
+                        Dim dataRow As DataRow
+                        If item.IdNo = 0 Then
+                            dataRow = dtGeneralJournalItem.NewRow()
+                        Else
+                            dataRow = dtPayrollPayElementUpdateTable.NewRow()
+                            dataRow("IdNo") = item.IdNo
+                        End If
+                        dataRow("Amount") = item.Amount
+                        dataRow("Generated") = item.Generated
+                        dataRow("PayElementIdNo") = item.PayElementIdNo
+                        dataRow("PayrollDetailIdNo") = item.PayrollDetailIdNo
+                        dataRow("RecurringPayElementIdNo") = item.RecurringPayElementIdNo
+                        If item.IdNo = 0 Then
+                            dtGeneralJournalItem.Rows.Add(dataRow)
+                        Else
+                            dtPayrollPayElementUpdateTable.Rows.Add(dataRow)
+                        End If
+                    Next
+                Else
+                    ' payrolldetails already saved and generated
+                    ' so re-read the saved data because we need their linked idno for the
+                    ' payrollpayelementdetails
+                    _payrollDetailsModel = _payrollDetailsService.GetRecordsWithGroupIdNo(Of PayrollDetailModel)(_payrollIdNo)
+                    For Each payrollDetailModel In _payrollDetailsModel
+                        CreatePayrollPayElements(payrollDetailModel, regenerate, payrollDetailModel.IdNo)
+                        counter = counter + 1
+                        progressDisplayForm.UpdateProgressBar(counter)
+                    Next
+                    For Each item In _payrollPayElements
+                        Dim dataRow As DataRow
+                        dataRow = dtGeneralJournalItem.NewRow()
+                        dataRow("Amount") = item.Amount
+                        dataRow("Generated") = True
+                        dataRow("PayElementIdNo") = item.PayElementIdNo
+                        dataRow("PayrollDetailIdNo") = item.PayrollDetailIdNo
+                        dataRow("RecurringPayElementIdNo") = item.RecurringPayElementIdNo
+                        dtGeneralJournalItem.Rows.Add(dataRow)
+                    Next
+                End If
+                counter = counter + 1
+                If regenerate Then
+                    _payrollPayElementsService.UpdateInsertTvp(dtPayrollPayElementUpdateTable, dtGeneralJournalItem, _payrollIdNo)
+                Else
+                    _payrollPayElementsService.InsertTvp(dtGeneralJournalItem)
+                End If
+                dtPayrollPayElementUpdateTable.Clear()
+                dtGeneralJournalItem.Clear()
+                _payrollPayElements.Clear()
+                progressDisplayForm.UpdateProgressBar(counter + 1)
+                progressDisplayForm.Close()
+                'Messaging.Show(True, "MsgPayrollGenerationCompleted")
+                Beep()
+            End If
+            'End If
+        End Sub
+
+
     End Class
 
 End Namespace

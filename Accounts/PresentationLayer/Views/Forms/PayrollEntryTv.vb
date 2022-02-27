@@ -319,6 +319,15 @@ Namespace PresentationLayer.Views.Forms
             End With
         End Sub
 
+        Private Sub CButton3_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton3.ClickButtonArea
+            RaiseEvent PostPayroll(Me)
+            btnEdit.Enabled = True
+            btnAdd.Enabled = True
+            TurnOffInputs()
+            'Dim x = IdNo
+            'Close()
+            RunSubForm(Of PayrollDetailEntry, PayrollDetailPresenter(Of PayrollDetailModel))(IdNo, ParentForm)
+        End Sub
     End Class
 
 End Namespace
