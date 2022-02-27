@@ -95,6 +95,7 @@ Namespace PresentationLayer.Views.Forms
         Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.CButton2 = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.ProgressBar = New System.Windows.Forms.ProgressBar()
+        Me.CButton3 = New AATM.Libraries.CBaseControlsLibrary.CButton()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -912,6 +913,7 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout1.Controls.Add(Me.btnViewPayrollReport)
         Me.CFlowLayout1.Controls.Add(Me.CButton1)
         Me.CFlowLayout1.Controls.Add(Me.CButton2)
+        Me.CFlowLayout1.Controls.Add(Me.CButton3)
         Me.CFlowLayout1.Controls.Add(Me.ProgressBar)
         Me.CFlowLayout1.Location = New System.Drawing.Point(13, 543)
         Me.CFlowLayout1.Name = "CFlowLayout1"
@@ -1045,6 +1047,19 @@ Namespace PresentationLayer.Views.Forms
         Me.ProgressBar.TabIndex = 148
         Me.ProgressBar.Visible = false
         '
+        'CButton3
+        '
+        Me.CButton3.DesignerSelected = true
+        Me.CButton3.Font = New System.Drawing.Font("Arial Narrow", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.CButton3.ImageIndex = 0
+        Me.CButton3.Location = New System.Drawing.Point(166, 49)
+        Me.CButton3.Name = "CButton3"
+        Me.CButton3.OriginalImageName = Nothing
+        Me.CButton3.SecurityKey = ""
+        Me.CButton3.Size = New System.Drawing.Size(109, 23)
+        Me.CButton3.TabIndex = 180
+        Me.CButton3.Text = "Post Payroll"
+        '
         'PayrollEntryTv
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
@@ -1125,5 +1140,6 @@ End Sub
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents CButton1 As CButton
         Friend WithEvents CButton2 As CButton
+        Friend WithEvents CButton3 As CButton
     End Class
 End Namespace
