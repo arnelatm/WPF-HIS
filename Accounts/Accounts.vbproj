@@ -210,6 +210,7 @@
     <Compile Include="BusinessLayer\EmployeeLeaveApprovalHistory.vb" />
     <Compile Include="BusinessLayer\EmployeeLeaveApprovalItem.vb" />
     <Compile Include="BusinessLayer\EmployeePayElement.vb" />
+    <Compile Include="BusinessLayer\IGroup\ItemDetails.vb" />
     <Compile Include="BusinessLayer\JournalPrefix.vb" />
     <Compile Include="BusinessLayer\EmployeeLeave.vb" />
     <Compile Include="BusinessLayer\EmployeeAbsence.vb" />
@@ -276,6 +277,7 @@
     <Compile Include="DataLayer\AdoNet\EmployeeLeaveApprovalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\HolidayTransferDao.vb" />
     <Compile Include="DataLayer\AdoNet\HolidayTransferItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\IGroup\ItemDetailsDao.vb" />
     <Compile Include="DataLayer\AdoNet\ReportDao.vb" />
     <Compile Include="DataLayer\AdoNet\ShiftSummaryDao.vb" />
     <Compile Include="DataLayer\AdoNet\HolidayDao.vb" />
@@ -373,6 +375,7 @@
     <Compile Include="PresentationLayer\Models\HolidayAvailmentModel.vb" />
     <Compile Include="PresentationLayer\Models\HolidayTransferModel.vb" />
     <Compile Include="PresentationLayer\Models\HolidayTransferAvailmentModel.vb" />
+    <Compile Include="PresentationLayer\Models\IGroup\ItemDetailsModel.vb" />
     <Compile Include="PresentationLayer\Models\ReportSelectorModel.vb" />
     <Compile Include="PresentationLayer\Models\ReportModel.vb" />
     <Compile Include="PresentationLayer\Models\ShiftSummaryModel.vb" />
@@ -408,6 +411,7 @@
     <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenterNew.vb" />
     <Compile Include="PresentationLayer\Presenters\CustomerPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\IGroup\ItemDetailsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ReportSelectorPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeeLeaveApprovalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeeIdPrintingPresenter.vb" />
@@ -498,6 +502,12 @@
       <DependentUpon>HolidayEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\HolidayEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsEntry.Designer.vb">
+      <DependentUpon>ItemDetailsEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\JournalPrefixEntry.designer.vb">
@@ -656,6 +666,7 @@
     <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IItemDetailsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IHolidayAvailmentApprovalHistoryView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeLeaveApprovalHistoryView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeLeaveApprovalView.vb" />
@@ -1282,6 +1293,9 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\HolidayEntry.resx">
       <DependentUpon>HolidayEntry.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsEntry.resx">
+      <DependentUpon>ItemDetailsEntry.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\JournalPrefixEntry.resx">
       <DependentUpon>JournalPrefixEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -1810,5 +1824,6 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

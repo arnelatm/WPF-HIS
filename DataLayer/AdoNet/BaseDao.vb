@@ -20,15 +20,23 @@ Namespace AdoNet
         Public Sub New()
         End Sub
 
+        Public Overridable Function GetDb()
+            Return _db
+        End Function
+
+        Public Overridable Function GetPrimaryFieldName()
+            Return "IdNo"
+        End Function
+
         Public Function CheckIfUnique(searchValue As String, tableName As String, searchFieldName As String,
                                       currentIdNo As Int64) As String _
             Implements IBaseDao.CheckIfUnique
             Dim sql As String =
                     " Select count(*) FROM [" & tableName & "] " &
                     " Where " & searchFieldName & " = @SearchValue " &
-                    " and IdNo <> @currentIdNo "
+                    " and " & GetPrimaryFieldName() & " <> @currentIdNo "
             Dim params() As Object = {"@SearchValue", searchValue, "@currentIdNo", currentIdNo}
-            Dim nCount = _db.Scalar(sql, params)
+            Dim nCount = GetDb().Scalar(sql, params)
             Return Not nCount > 0
         End Function
 
@@ -41,7 +49,7 @@ Namespace AdoNet
                     " Where " & searchFieldName1 & " = @SearchValue1 and " & searchFieldName2 & " = '" & searchValue2 &
                     "'"
             Dim params() As Object = {"@SearchValue1", searchValue1, "@SearchValue2", searchValue2}
-            Return _db.Scalar(sql, params).ToString()
+            Return GetDb().Scalar(sql, params).ToString()
         End Function
 
         Public Function CountRecordWithKey(searchValue As String, tableName As String, searchFieldName As String) _
@@ -51,7 +59,7 @@ Namespace AdoNet
                     " Select Count(*) FROM [" & tableName & "] " &
                     " Where " & searchFieldName & " = @SearchValue "
             Dim params() As Object = {"@SearchValue", searchValue}
-            Return _db.Scalar(sql, params)
+            Return GetDb().Scalar(sql, params)
         End Function
 
         Public Function DeleteRecord(idNo As Int32, tableName As String) As Int32 _
@@ -59,8 +67,8 @@ Namespace AdoNet
             'Dim cTableName = GetPhysicalTableName(tableName)
             Dim sql As String =
                     " Delete FROM [" & tableName & "] " &
-                    " Where IdNo = " & idNo
-            Return _db.Delete(sql)
+                    " Where " & GetPrimaryFieldName & " = " & idNo
+            Return GetDb().Delete(sql)
         End Function
 
         'Private Shared Function GetPhysicalTableName(pTableName As String) As String
@@ -96,13 +104,13 @@ Namespace AdoNet
         '    Dim params() As Object = {"@SearchString", searchString}
         '    _lastFindQuery = sql
         '    _lastFindParms = params
-        '    retVal = _db.Scalar(sql & " order by IdNo ", params)
+        '    retVal = GetDb().Scalar(sql & " order by IdNo ", params)
         '    Return retVal
         'End Function
 
         Public Function FindFieldNew(tableName As String, findableControl As IFindableControl, sortOrderKey As String, Optional filter As String = Nothing) As Integer Implements IBaseDao.FindFieldNew
             Dim retVal As Integer
-            Dim sql As String = " SELECT IdNo FROM [" & tableName & "] " & " Where "
+            Dim sql As String = " SELECT " & GetPrimaryFieldName() & " FROM [" & tableName & "] " & " Where "
             Dim params As String() = Nothing
             Dim searchString As String
             If findableControl.FindDataType = IFindableControl.DataTypeEnum.String Then
@@ -159,7 +167,7 @@ Namespace AdoNet
                 searchString = IIf(findableControl.BegFindValue, "1", "0")
                 params = {"@SearchString", searchString}
             End If
-            retVal = _db.Scalar(sql & " order by " & sortOrderKey, params)
+            retVal = GetDb().Scalar(sql & " order by " & sortOrderKey, params)
             _lastFindQuery = sql
             _lastFindParms = params
             Return retVal
@@ -168,7 +176,7 @@ Namespace AdoNet
         Public Function FindDateField(tableName As String, findableControl As IFindableControl, sortOrderKey As String, Optional filter As String = Nothing) As Integer Implements IBaseDao.FindDateField
             Dim retVal As Integer
             Dim searchString As String
-            Dim sql As String = " SELECT IdNo FROM [" & tableName & "] Where "
+            Dim sql As String = " SELECT " & GetPrimaryFieldName() & " FROM [" & tableName & "] Where "
             If Not (filter Is Nothing OrElse filter = "") Then
                 sql = sql & "(" & filter.Trim() & ") and "
             End If
@@ -195,7 +203,7 @@ Namespace AdoNet
             End If
             sql = sql & searchString
             _lastFindQuery = sql
-            retVal = _db.Scalar(sql & " order by " & sortOrderKey)
+            retVal = GetDb().Scalar(sql & " order by " & sortOrderKey)
             Return retVal
         End Function
 
@@ -221,7 +229,7 @@ Namespace AdoNet
         '        Dim params() As Object = {"@SearchString", searchString}
         '        _lastFindQuery = sql
         '        _lastFindParms = params
-        '        retVal = _db.Scalar(sql & " order by IdNo ", params)
+        '        retVal = GetDb().Scalar(sql & " order by IdNo ", params)
         '    End If
         '    Return retVal
         'End Function
@@ -235,8 +243,8 @@ Namespace AdoNet
             Else
                 Dim sql As String
                 Dim sortValue As Object
-                sql = "Select " & sortOrderKey & " from " & tableName & " where  IdNo = " & lastIdNo.ToString()
-                sortValue = _db.Scalar(sql)
+                sql = "Select " & sortOrderKey & " from " & tableName & " where  " & GetPrimaryFieldName() & " = " & lastIdNo.ToString()
+                sortValue = GetDb().Scalar(sql)
                 sql = _lastFindQuery
                 Dim params As String()
                 If _lastFindParms Is Nothing Then
@@ -249,9 +257,9 @@ Namespace AdoNet
                     params(params.Length - 1) = sortValue
                 End If
                 If lastIdNo > 0 Then
-                    retVal = _db.Scalar(sql & " and " & sortOrderKey & "> @sortValue order by " & sortOrderKey, params)
+                    retVal = GetDb().Scalar(sql & " and " & sortOrderKey & "> @sortValue order by " & sortOrderKey, params)
                 Else
-                    retVal = _db.Scalar(sql & " order by " & sortOrderKey, params)
+                    retVal = GetDb().Scalar(sql & " order by " & sortOrderKey, params)
                 End If
             End If
             Return retVal
@@ -265,7 +273,7 @@ Namespace AdoNet
                 sql = "Select Top 1 IdNo FROM SecurityObject_View1 Where SecurityObjectName = @SearchValue"
             End If
             Dim params() As Object = {"@SearchValue", searchValue}
-            Dim retVal = _db.Scalar(sql, params)
+            Dim retVal = _db.SecurityScalar(sql, params)
             If retVal Is Nothing Then
                 Return Nothing
             End If
@@ -277,7 +285,7 @@ Namespace AdoNet
                     " Select " & returnFieldName & " FROM [" & tableName & "] " &
                     " Where " & searchFieldName & " = @SearchValue "
             Dim params() As Object = {"@SearchValue", searchValue}
-            Dim retVal = _db.Scalar(sql, params)
+            Dim retVal = GetDb().Scalar(sql, params)
             If retVal Is Nothing Or IsDBNull(retVal) Then
                 Return Nothing
             End If
@@ -313,7 +321,7 @@ Namespace AdoNet
             If filter IsNot Nothing Then
                 sql = sql & " and (" & filter & ")"
             End If
-            Dim retVal = _db.Scalar(sql, params)
+            Dim retVal = GetDb().Scalar(sql, params)
             If retVal Is Nothing Or IsDBNull(retVal) Then
                 Return Nothing
             End If
@@ -323,16 +331,16 @@ Namespace AdoNet
         Public Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object Implements IBaseDao.GetFieldWithIdNo
             Dim sql As String =
                     " Select " & returnFieldName & " FROM [" & tableName & "] " &
-                    " Where IdNo = @IdNo "
+                    " Where " & GetPrimaryFieldName() & " = @IdNo "
             Dim params() As Object = {"@IdNo", idNo}
-            Return _db.Scalar(sql, params)
+            Return GetDb().Scalar(sql, params)
         End Function
 
         Public Function GetFieldsWithIdNo(idNo As Object, tableName As String, fieldsList As String) As ExpandoObject Implements IBaseDao.GetFieldsWithIdNo
-            Dim sql As String = " Select top 1 " & fieldsList & " FROM [" & tableName & "] " & " Where IdNo = @IdNo "
+            Dim sql As String = " Select top 1 " & fieldsList & " FROM [" & tableName & "] " & " Where " & GetPrimaryFieldName() & " = @IdNo "
             Dim params() As Object = {"@IdNo", idNo}
             Dim values As Object
-            values = _db.SqlRead(sql, params)
+            values = GetDb().SqlRead(sql, params)
             Dim fields = fieldsList.Split(",")
             Dim obj As New ExpandoObject
             Dim i As Int16 = 0
@@ -348,7 +356,7 @@ Namespace AdoNet
                     " Select " & fieldList & " FROM [" & tableName & "] " &
                     " Where " & filter
             Dim values As Object
-            values = _db.SqlRead(sql)
+            values = GetDb().SqlRead(sql)
             Dim fields = fieldList.Split(",")
             Dim obj As Object
             obj = New ExpandoObject
@@ -365,7 +373,7 @@ Namespace AdoNet
         '            " Select " & fieldList & " FROM [" & tableName & "] " &
         '            " Where " & filter
         '    Dim values As Object
-        '    values = _db.SqlRead(sql)
+        '    values = GetDb().SqlRead(sql)
         '    Dim fields2 = fieldList.Split(",")
         '    Dim dataCount = Values.Count()
         '    Dim fieldCount = fields2.Count()
@@ -410,7 +418,7 @@ Namespace AdoNet
             Else
                 sql = " Select " & fieldList & " From " & spName & " (" & filter & ") Order By " & sortKey
             End If
-            Return _db.SqlRead(sql)
+            Return GetDb().SqlRead(sql)
         End Function
 
         'Public Function GetParametrizedSpRecords(spName As String, ParamArray parameters As Array()) As Object Implements IBaseDao.GetParametrizedSpRecords
@@ -424,7 +432,7 @@ Namespace AdoNet
         '    Else
         '        sql = " Select " & fieldList & " From " & spName & " (" & filter & ") Order By " & sortKey
         '    End If
-        '    Return _db.SqlRead(sql)
+        '    Return GetDb().SqlRead(sql)
         'End Function
 
         Public Sub CreateDynamicObject(ByRef obj As ExpandoObject, ByVal propertyName As String, ByVal propertyValue As Object)
@@ -442,10 +450,10 @@ Namespace AdoNet
                 Return 0
             Else
                 Dim sql As String =
-                        " Select IdNo FROM [" & tableName & "] " & filterKey & " order by " & sortOrder &
+                        " Select " & GetPrimaryFieldName() & " FROM [" & tableName & "] " & filterKey & " order by " & sortOrder &
                         " OFFSET " & recordNo - 1 & " ROWS fetch Next 1 ROWS ONLY"
                 Dim x As Object
-                x = _db.Scalar(sql)
+                x = GetDb().Scalar(sql)
                 If x Is DBNull.Value Then
                     If recordNo > 0 Then
                         ' return the last record
@@ -457,8 +465,8 @@ Namespace AdoNet
                             sortOrder = sortOrder.Trim() + " DESC"
                         End If
                         sortOrder = Replace(sortOrder, " DESC", " ASC", )
-                        sql = "Select TOP 1 IdNo FROM [" & tableName & "] " & filterKey & " order by " & sortOrder
-                        x = _db.Scalar(sql)
+                        sql = "Select TOP 1 " & GetPrimaryFieldName() & " FROM [" & tableName & "] " & filterKey & " order by " & sortOrder
+                        x = GetDb().Scalar(sql)
                     Else
                         Return 0
                     End If
@@ -482,7 +490,7 @@ Namespace AdoNet
                 sql = " Select Top 1 SortKey FROM " & tableName &
                       " Where len(RTrim(SortKey)) <= 4" &
                       " order by SortKey DESC "
-                Dim cResult = _db.Scalar(sql)
+                Dim cResult = GetDb().Scalar(sql)
                 If cResult Is Nothing Then
                     Return ""
                 End If
@@ -494,7 +502,7 @@ Namespace AdoNet
                       searchValue.Trim().Length + 4 &
                       " order by SortKey DESC "
                 Dim parms() As Object = {"@SearchValue", searchValue}
-                Return _db.Scalar(sql, parms)
+                Return GetDb().Scalar(sql, parms)
             End If
         End Function
 
@@ -505,7 +513,7 @@ Namespace AdoNet
             Else
                 sql = " SELECT Top 1 " & returnFieldName & " from " & tableName & " where " & filter & " order by " & searchFieldName & " Desc"
             End If
-            Return _db.Scalar(sql)
+            Return GetDb().Scalar(sql)
         End Function
 
         Public Function GetRecordCount(tableName As String, Optional filter As String = Nothing) As Integer _
@@ -516,7 +524,7 @@ Namespace AdoNet
             Else
                 sql = "Select Count(*) FROM [" & tableName & "] " + IIf(filter Is Nothing, "", " where " & filter)
             End If
-            Return _db.Scalar(sql)
+            Return GetDb().Scalar(sql)
         End Function
 
         Public Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, dateTimeStampField As String) _
@@ -524,17 +532,17 @@ Namespace AdoNet
             Implements IBaseDao.GetRecordDateTimeStamp
             Dim sql As String =
                     " Select top 1 " & dateTimeStampField & " FROM [" & tableName & "] " &
-                    " Where IdNo = @IdNo "
+                    " Where " & GetPrimaryFieldName() & " = @IdNo "
             Dim params() As Object = {"@IdNo", idNo}
             Dim retValue As Object
-            retValue = _db.Scalar(sql, params)
+            retValue = GetDb().Scalar(sql, params)
             Return retValue
             'Return System.Text.Encoding.ASCII.GetString(retValue)
         End Function
 
         Public Function GetRecordField(tableName As String, returnFieldName As String) As Object Implements IBaseDao.GetRecordField
             Dim sql As String = " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] "
-            Dim retVal = _db.Scalar(sql)
+            Dim retVal = GetDb().Scalar(sql)
             Return retVal
         End Function
 
@@ -546,7 +554,7 @@ Namespace AdoNet
                     " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] " &
                     " Where " & searchFieldName1 & " = @SearchValue1 and " & searchFieldName2 & " = @SearchValue2 "
             Dim params() As Object = {"@SearchValue1", searchValue1, "@SearchValue2", searchValue2}
-            Dim retVal = _db.Scalar(sql, params)
+            Dim retVal = GetDb().Scalar(sql, params)
             If retVal Is Nothing Or IsDBNull(retVal) Then
                 Return Nothing
             End If
@@ -560,7 +568,7 @@ Namespace AdoNet
                     " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] " &
                     " Where " & searchFieldName & " = @SearchValue "
             Dim params() As Object = {"@SearchValue", searchValue}
-            Dim retVal = _db.Scalar(sql, params)
+            Dim retVal = GetDb().Scalar(sql, params)
             If retVal Is Nothing Or IsDBNull(retVal) Then
                 Return Nothing
             End If
@@ -580,7 +588,7 @@ Namespace AdoNet
                     " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] " &
                     " Where " & searchFieldName & " = @SearchValue "
             Dim params() As Object = {"@SearchValue", searchValue}
-            Dim retVal = _db.Scalar(sql, params)
+            Dim retVal = GetDb().Scalar(sql, params)
             If retVal Is Nothing Or IsDBNull(retVal) Then
                 Return Nothing
             End If
@@ -593,7 +601,7 @@ Namespace AdoNet
                     " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] " &
                     " Where " & searchFieldName & " = @SearchValue "
             Dim params() As Object = {"@SearchValue", searchValue}
-            Dim retVal = _db.Scalar(sql, params)
+            Dim retVal = GetDb().Scalar(sql, params)
             If retVal Is Nothing Or IsDBNull(retVal) Then
                 Return Nothing
             End If
@@ -604,8 +612,8 @@ Namespace AdoNet
             Implements IBaseDao.GetRecordPosition
             Dim sql As String =
                     " Select Count(*) FROM [" & tableName & "] " &
-                    " Where IdNo < " & idNo
-            Return _db.Scalar(sql)
+                    " Where " & GetPrimaryFieldName() & " < " & idNo
+            Return GetDb().Scalar(sql)
         End Function
 
         Public Function GetRecordPositionByName(tableName As String, sortField As String, nameValue As String) _
@@ -614,7 +622,7 @@ Namespace AdoNet
             Dim sql As String =
                     " Select Count(*) FROM [" & tableName & "] " &
                     " Where " & sortField & "< '" & nameValue & "'"
-            Return _db.Scalar(sql)
+            Return GetDb().Scalar(sql)
         End Function
 
         Public Function GetRecords(tableName As String, sortKey As String, fieldNames As String(), Optional filterKey As String = Nothing) As Object Implements IBaseDao.GetRecords
@@ -633,7 +641,7 @@ Namespace AdoNet
                     sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey & " order by " & sortKey
                 End If
             End If
-            Return _db.SqlRead(sql)
+            Return GetDb().SqlRead(sql)
         End Function
 
         'Public Function GetRecordsByField(tableName As String, sortKey As String, fieldNames As String(), Optional filter As String = Nothing) As Object Implements IBaseDao.GetRecordsByField
@@ -653,12 +661,12 @@ Namespace AdoNet
         '    Else
         '        sql = " SELECT " & fields & " from [" & tableName & "] " & filterKey & " order by " & sortKey
         '    End If
-        '    Return _db.SqlRead(sql)
+        '    Return GetDb().SqlRead(sql)
         'End Function
 
         Public Function FieldExistsInTable(tableName As String, fieldName As String) As Boolean Implements IBaseDao.FieldExistInTable
             Dim retValue As Boolean
-            retValue = _db.FieldExistInTable(tableName, fieldName)
+            retValue = GetDb().FieldExistInTable(tableName, fieldName)
             Return retValue
         End Function
 
@@ -668,7 +676,7 @@ Namespace AdoNet
         '        fields = Strings.Left(fields, Len(fields) - 1)
         '    End If
         '    Dim sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey
-        '    Return _db.SqlRead(sql)
+        '    Return GetDb().SqlRead(sql)
         'End Function
 
         'Public Function GetFieldsFiltered(tableName As String, sortKey As String, filter As String, ByVal ParamArray fieldNames() As String) Implements IBaseDao.GetFieldsFiltered
@@ -677,7 +685,7 @@ Namespace AdoNet
         '        fields = Strings.Left(fields, Len(fields) - 1)
         '    End If
         '    Dim sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey & " where " & filter
-        '    Return _db.SqlRead(sql)
+        '    Return GetDb().SqlRead(sql)
         'End Function
 
         Public Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer Implements IBaseDao.GetSortedRecordPosition
@@ -689,8 +697,8 @@ Namespace AdoNet
             End If
             Dim sql As String = " Select count(*) From [" & tableName & "] where " & IIf(filterKey = "", "", "(" & filterKey & ") and ") _
                                                 & " " & sortOrder & " <= (Select " & sortOrder & " from [" & tableName & "] where " &
-                                                IIf(filterKey = "", "", "(" & filterKey & ") and ") & " IdNo = " & idNo & ") "
-            Dim recordPosition = _db.Scalar(sql) ' + 1
+                                                IIf(filterKey = "", "", "(" & filterKey & ") and ") & GetPrimaryFieldName() & " = " & idNo & ") "
+            Dim recordPosition = GetDb().Scalar(sql) ' + 1
             Dim recCount = GetRecordCount(tableName, filterKey)
             If recordPosition > recCount Then
                 recordPosition = recCount
@@ -719,7 +727,7 @@ Namespace AdoNet
             Dim sql As String =
                     " Select " & returnFieldName & " FROM [" & tableName & "] " &
                     " Where " & condition
-            Dim x = _db.Scalar(sql)
+            Dim x = GetDb().Scalar(sql)
             If IsDBNull(x) Or x Is Nothing Then
                 Return Nothing
             End If
@@ -735,7 +743,7 @@ Namespace AdoNet
                     {"@SecurityObjectIdNo", securityObjectIdNo, "@SecurityGroupIdNo", securityGroupIdNo}
             Dim sql =
                     " SELECT top 1 Visible, Editable FROM GroupAccess where SecurityObjectIdNo = @SecurityObjectIdNo and SecurityGroupIdNo = @SecurityGroupIdNo"
-            Return _db.SqlRead(sql, params)
+            Return _db.SqlReadSecurity(sql, params)
         End Function
 
         '        Catch ex As Exception
@@ -748,12 +756,12 @@ Namespace AdoNet
                       "Left Join SecurityObject " &
                       "on GroupAccess.SecurityObjectIdNo = SecurityObject.IdNo " &
                       "where SecurityObject.SecurityObjectName = @securityObjectName and GroupAccess.SecurityGroupIdNo = @SecurityGroupIdNo"
-            Return _db.SqlRead(sql, params)
+            Return _db.SqlReadSecurity(sql, params)
         End Function
 
         Public Function AddSecurityObject(securityObject As SecurityObject) As Integer Implements IBaseDao.AddSecurityObject
             Dim sql = "Insert into SecurityObject (securityObjectName,systemViewIdNo,parentIdNo) VALUES (@SecurityObjectName,@SystemViewIdNo,@ParentIdNo)"
-            Return _db.Insert(sql, TakeSecurityObject(securityObject))
+            Return GetDb().Insert(sql, TakeSecurityObject(securityObject))
         End Function
 
         Public Function InitializeSecurityObject() As Integer Implements IBaseDao.InitializeSecurityObject
@@ -776,9 +784,9 @@ Namespace AdoNet
                                                  Optional ByVal timeStampedField As String = "DateTimeStamp") As Boolean _
                     Implements IBaseDao.HasRecordChanged
             Dim sql As String = " Select count(*) FROM [" & tableName & "] " &
-                                " Where IdNo = @IdNo and timeStampedField = @timeStampValue "
+                                " Where " & GetPrimaryFieldName() & " = @IdNo and timeStampedField = @timeStampValue "
             Dim params() As Object = {"@IdNo", idNo, "@timeStampValue", timeStampValue}
-            Dim nCount = _db.Scalar(sql, params)
+            Dim nCount = GetDb().Scalar(sql, params)
             Return Not nCount > 0
         End Function
 
@@ -787,7 +795,7 @@ Namespace AdoNet
         '            " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] " &
         '            " Where " & searchFieldName & " = @SearchValue "
         '    Dim params() As Object = {"@SearchValue", searchValue}
-        '    Dim retVal = _db.Scalar(sql, params)
+        '    Dim retVal = GetDb().Scalar(sql, params)
         '    If retVal Is Nothing Or IsDBNull(retVal) Then
         '        Return Nothing
         '    End If
@@ -808,7 +816,7 @@ Namespace AdoNet
             '    "where TC.constraint_type = 'Unique' and cc.TABLE_NAME = @TableName and cc.COLUMN_NAME = @FieldName "
             Dim params() As Object = {"@TableName", tableName, "@FieldName", fieldName}
             Dim nCount As Integer
-            nCount = _db.Scalar(sql, params)
+            nCount = GetDb().Scalar(sql, params)
             If nCount > 0 Then
                 Return True
             Else
@@ -822,8 +830,8 @@ Namespace AdoNet
             Dim sql As String =
                     " Update [" & tableName & "] " &
                     " Set " & fieldName & " = @Value" &
-                    " where IdNo = " & idNo
-            Return _db.Update(sql, {"@Value", value})
+                    " where " & GetPrimaryFieldName() & " = " & idNo
+            Return GetDb().Update(sql, {"@Value", value})
         End Function
 
         Public Function GenericUpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) As Integer _
@@ -831,15 +839,15 @@ Namespace AdoNet
             Dim sql As String =
                     " Update [" & tableName & "] " &
                     " Set " & fieldName & " = @Value" &
-                    " where IdNo = " & idNo
-            Return _db.Update(sql, {"@Value", value})
+                    " where " & GetPrimaryFieldName() & " = " & idNo
+            Return GetDb().Update(sql, {"@Value", value})
         End Function
 
         Public Function GetFieldType(tableName As String, fieldName As String) As Object Implements IBaseDao.GetFieldType
             Dim value As Object
             Dim sql As String = "Select DATA_TYPE From INFORMATION_SCHEMA.COLUMNS Where TABLE_NAME = @tableName AND COLUMN_NAME = @fieldName"
             Dim params() As Object = {"@TableName", tableName, "@FieldName", fieldName}
-            value = _db.Scalar(sql, params)
+            value = GetDb().Scalar(sql, params)
             Return value
         End Function
 
@@ -928,7 +936,7 @@ Namespace AdoNet
             Dim retValue As Integer
             retValue = 0
             Dim transactionName = seriesName
-            Using connection As New SqlConnection(_db.GetConnectionString)
+            Using connection As New SqlConnection(GetDb().GetConnectionString)
                 connection.Open()
 
                 Dim command As SqlCommand = connection.CreateCommand()
@@ -976,7 +984,7 @@ Namespace AdoNet
             Dim retVal As Integer
             Dim sql As String
             sql = "SELECT NEXT VALUE FOR " & seriesName.Trim() ' & ".CountBy1"
-            retVal = _db.Scalar(sql)
+            retVal = GetDb().Scalar(sql)
             Return retVal
         End Function
 
@@ -984,17 +992,17 @@ Namespace AdoNet
             Dim retVal As Integer
             Dim sql As String
             sql = "SELECT NEXT VALUE FOR " & seriesName.Trim() ' & ".CountBy1"
-            retVal = _db.Scalar(sql)
+            retVal = GetDb().Scalar(sql)
             Return retVal
         End Function
 
         'Execute a Table Valued Parameter Stored Procedure
         Public Function ExecuteTvpSp(ByRef procedureName As String, dataTable As DataTable) As Int32 Implements IBaseDao.ExecuteTvpSp
-            Return _db.InsertTvp(procedureName, dataTable)
+            Return GetDb().InsertTvp(procedureName, dataTable)
         End Function
 
         'Public Overloads Function GetDataSet(ByVal storedProcedureName As String, ByVal paramList As Dictionary(Of String, String)) As DataSet Implements IBaseDao.GetDataSet
-        '    Using conn As SqlConnection = New SqlConnection(_db.GetConnectionString)
+        '    Using conn As SqlConnection = New SqlConnection(GetDb().GetConnectionString)
         '        Dim cmd As SqlCommand = New SqlCommand()
         '        cmd.CommandType = CommandType.StoredProcedure
         '        cmd.CommandText = storedProcedureName
@@ -1013,7 +1021,7 @@ Namespace AdoNet
         'End Function
 
         Public Function GetDataSet(ByVal storedProcedureName As String, parameters As Object) As DataSet Implements IBaseDao.GetDataSet
-            Using conn As SqlConnection = New SqlConnection(_db.GetConnectionString)
+            Using conn As SqlConnection = New SqlConnection(GetDb().GetConnectionString)
                 Dim cmd As SqlCommand = New SqlCommand()
                 cmd.CommandType = CommandType.StoredProcedure
                 cmd.CommandText = storedProcedureName
@@ -1048,21 +1056,22 @@ Namespace AdoNet
                     sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey & " order by " & sortKey
                 End If
             End If
-            Return _db.Read(sql, MakeMasterList).ToList()
+            Return GetDb().Read(sql, MakeMasterList).ToList()
         End Function
 
         Public Sub SaveConnectionString()
-            _db.SaveConnectionString()
+            GetDb().SaveConnectionString()
         End Sub
 
 
         Public Sub RestoreConnectionString()
-            _db.RestoreConnectionString()
+            GetDb().RestoreConnectionString()
         End Sub
 
         Public Sub SetConnectionString(connectionName As String)
-            _db.SetConnectionString(connectionName)
+            GetDb().SetConnectionString(connectionName)
         End Sub
+
 
 
         Private Shared ReadOnly MakeMasterList As Func(Of IDataReader, GenericData) = Function(reader) New GenericData() With {

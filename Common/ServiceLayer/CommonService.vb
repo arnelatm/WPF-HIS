@@ -23,9 +23,13 @@ Namespace ServiceLayer
             End If
         End Sub
 
-        Protected Overrides Sub CreateDao(objectName As String, Optional daoParam As Object = Nothing)
+        Protected Overrides Sub CreateDao(objectName As String, Optional daoParam As Object = Nothing, Optional connection As String = Nothing)
             If daoParam Is Nothing OrElse daoParam.Length = 0 Then
-                DataDao = DaoFactoryCommonFactory.CreateDao(objectName)
+                If connection Is Nothing Then
+                    DataDao = DaoFactoryCommonFactory.CreateDao(objectName)
+                Else
+                    DataDao = DaoFactoryCommonFactory.CreateDao(objectName, Nothing, connection)
+                End If
             Else
                 DataDao = DaoFactoryCommonFactory.CreateDao(objectName, daoParam)
             End If

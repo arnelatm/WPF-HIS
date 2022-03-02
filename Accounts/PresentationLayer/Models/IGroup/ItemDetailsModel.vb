@@ -1,0 +1,28 @@
+﻿Imports AATM.PresentationLayer.Models
+
+Namespace PresentationLayer.Models
+
+    ''' <summary>
+    '''     The Model in MVP design pattern.
+    '''     Implements IModel and communicates with WCF Service.
+    ''' </summary>
+    Public Class ItemDetailsModel
+        'Implements IModelNew
+
+        Public Property BranchID As String
+        Public Property Category As String
+        Public Property Created_By_Branch 
+        Public Property IdNo As Int32
+        Public Property Item_status As String 
+        Public Property ItemDetailsCode As String
+        Public Property ItemDetailsName As String
+        Public Property ItemGroup As String
+        Public Property Pack1 As Int16
+        Public Property Pack2 As Int16
+        Public Property Pack3 As Int16
+        Public Property SaleStrip As String
+        Public Property UserId As String
+
+    End Class
+
+End Namespace

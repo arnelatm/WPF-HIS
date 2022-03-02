@@ -188,6 +188,8 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemIGroup = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemPharmacyItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.AccountsMenu.SuspendLayout
@@ -329,7 +331,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemMasters
         '
-        Me.ToolStripMenuItemMasters.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemGeneral, Me.ToolStripMenuItemSecurity, Me.ToolStripMenuItemEmployee, Me.ToolStripMenuItemTranslations, Me.ToolStripMenuItemPayroll, Me.ToolStripMenuItemSupplierVendors, Me.ToolStripMenuItemCustomerClients})
+        Me.ToolStripMenuItemMasters.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemGeneral, Me.ToolStripMenuItemSecurity, Me.ToolStripMenuItemEmployee, Me.ToolStripMenuItemTranslations, Me.ToolStripMenuItemPayroll, Me.ToolStripMenuItemSupplierVendors, Me.ToolStripMenuItemCustomerClients, Me.ToolStripMenuItemIGroup})
         Me.ToolStripMenuItemMasters.Name = "ToolStripMenuItemMasters"
         resources.ApplyResources(Me.ToolStripMenuItemMasters, "ToolStripMenuItemMasters")
         '
@@ -1037,6 +1039,17 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
+        'ToolStripMenuItemIGroup
+        '
+        Me.ToolStripMenuItemIGroup.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPharmacyItem})
+        Me.ToolStripMenuItemIGroup.Name = "ToolStripMenuItemIGroup"
+        resources.ApplyResources(Me.ToolStripMenuItemIGroup, "ToolStripMenuItemIGroup")
+        '
+        'ToolStripMenuItemPharmacyItem
+        '
+        Me.ToolStripMenuItemPharmacyItem.Name = "ToolStripMenuItemPharmacyItem"
+        resources.ApplyResources(Me.ToolStripMenuItemPharmacyItem, "ToolStripMenuItemPharmacyItem")
+        '
         'Main
         '
         Me.AllowDrop = true
@@ -1222,5 +1235,7 @@ End Sub
         Friend WithEvents ToolStripMenuItemAccountingReports As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemLaboratoryReports As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemSalesReports As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemIGroup As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemPharmacyItem As ToolStripMenuItem
     End Class
 End NameSpace

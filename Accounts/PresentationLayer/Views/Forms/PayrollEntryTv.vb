@@ -320,7 +320,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CButton3_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton3.ClickButtonArea
-            RaiseEvent PostPayroll(Me)
+            'RaiseEvent PostPayroll(Me)
             btnEdit.Enabled = True
             btnAdd.Enabled = True
             TurnOffInputs()
