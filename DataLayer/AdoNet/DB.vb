@@ -17,7 +17,8 @@ Namespace AdoNet
         Private ReadOnly Factory As DbProviderFactory = DbProviderFactories.GetFactory("System.Data.SqlClient")
 
         'Private _exInfo As ExceptionDispatchInfo
-        Private Shared ConnectionString As String
+        Private _connectionString As String
+        Private Shared SecurityConnectionString As String
 
         'Private _waitForm As LoadingForm
 
@@ -28,52 +29,106 @@ Namespace AdoNet
             'AddHandler showWaitForm.RunWorkerCompleted, AddressOf showWaitForm_RunWorkerCompletedHandler
 
             If conn Is Nothing Then
-                ConnectionString = GlobalVariables.DacConnectionString
-                Dim connectionName As String = "ISPDATA"
+                _connectionString = GlobalVariables.DacConnectionString
+                'Dim connectionName As String = "ISPDATA"
                 'ConnectionString = ConfigurationManager.ConnectionStrings(connectionName).ConnectionString
-                If ConnectionString Is Nothing Then
-                    Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
-                    If computerName = $"ISPADMIN2" Then
-                        connectionName = "ISPDATA2"
-                    ElseIf computerName = $"MARCELO-DELL" Then
-                        connectionName = "ISPDATA3"
-                    End If
-                    ConnectionString = ConfigurationManager.ConnectionStrings(connectionName).ConnectionString
-                End If
+                'If ConnectionString Is Nothing Then
+                '    Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
+                '    If computerName = $"ISPADMIN2" Then
+                '        connectionName = "ISPDATA2"
+                '    ElseIf computerName = $"MARCELO-DELL" Then
+                '        connectionName = "ISPDATA3"
+                '    End If
+                '    ConnectionString = ConfigurationManager.ConnectionStrings(connectionName).ConnectionString
+                'End If
+                SecurityConnectionString = GlobalVariables.DacConnectionString    
             Else
                 'If conn = "TRANSLATIONS" Then
                 '    Debugger.Break()
                 'End If
-                ConnectionString = ConfigurationManager.ConnectionStrings(conn).ConnectionString
-                Dim x = ConnectionString
-                MessageBox.Show(x)
+                _connectionString = ConfigurationManager.ConnectionStrings(conn).ConnectionString
+                'SecurityConnectionString = ConfigurationManager.ConnectionStrings(conn).ConnectionString
+                'Dim x = ConnectionString
+                'MessageBox.Show(x)
             End If
+
+
         End Sub
 
         Public Function GetConnectionString()
-            Return ConnectionString
+            Return _connectionString
         End Function
 
+        Public Function GetSecurityConnectionString()
+            Return SecurityConnectionString
+        End Function
 
         Public Sub SetConnectionString(connectionName As String)
-             ConnectionString = ConfigurationManager.ConnectionStrings(connectionName).ConnectionString
+            _ConnectionString = ConfigurationManager.ConnectionStrings(connectionName).ConnectionString
         End Sub
 
+        'Public Sub SetSecurityConnectionString(connectionName As String)
+        '    SecurityConnectionString = ConfigurationManager.ConnectionStrings("ISPDATA").ConnectionString
+        'End Sub
 
-        Private _savedConnectionString As String 
+        Private _savedConnectionString As String
 
         Public Sub SaveConnectionString()
-            _savedConnectionString = connectionString
+            _savedConnectionString = _connectionString
         End Sub
 
         Public Sub RestoreConnectionString()
-            ConnectionString = _savedConnectionString
+            _connectionString = _savedConnectionString
         End Sub
 
         Public Function SqlRead(sql As String, ParamArray ByVal params() As Object)
             Dim arrayResult As New ArrayList
             Dim tryAgain As Boolean
             '_waitForm.Show()
+            Using connection = CreateConnection()
+                '_waitForm.Show()
+                Do While True
+                    Try
+                        tryAgain = False
+                        Using command = CreateCommand(sql, connection, params)
+                            Using reader = command.ExecuteReader()
+                                While reader.Read()
+                                    For i = 0 To CType(reader, IDataRecord).FieldCount - 1
+                                        arrayResult.Add(reader(i))
+                                    Next
+                                End While
+                            End Using
+                        End Using
+                    Catch ex As Exception
+                        '_waitForm.Close()
+                        Select Case TryToCatchError(ex)
+                            Case DialogResult.Cancel
+                                'Exit Do
+                            Case DialogResult.Retry
+                                ' do nothing
+                                tryAgain = True
+                                '_waitForm.Show()
+                            Case Else
+                                MessageBox.Show(ex.Message)
+                                Throw
+                        End Select
+                    Finally
+                        '_waitForm.Close()
+                    End Try
+                    If Not tryAgain Then
+                        Exit Do
+                    End If
+                Loop
+            End Using
+            '_waitForm.Close()
+            Return arrayResult
+        End Function
+
+        Public Function SqlReadSecurity(sql As String, ParamArray ByVal params() As Object)
+            Dim arrayResult As New ArrayList
+            Dim tryAgain As Boolean
+            '_waitForm.Show()
+
             Using connection = CreateConnection()
                 '_waitForm.Show()
                 Do While True
@@ -344,6 +399,54 @@ Namespace AdoNet
             Dim tryAgain As Boolean
             '_waitForm.Show()
             Using connection = CreateConnection()
+                '_waitForm.Show()
+                Do While True
+                    tryAgain = False
+                    Try
+                        Using command = CreateCommand(sql, connection, params)
+                            'Dim thread as New Thread(
+                            '    Sub()
+                            'showWaitForm.RunWorkerAsync(command)
+                            '    End Sub
+                            '    )
+                            'thread.Start()
+                            'thread.Join()
+                            'showWaitForm.RunWorkerAsync(command)
+                            c = command.ExecuteScalar()
+                        End Using
+                    Catch ex As Exception
+                        '_waitForm.Close()
+                        Select Case TryToCatchError(ex)
+                            Case DialogResult.Cancel
+                                'Exit Do
+                            Case DialogResult.Retry
+                                tryAgain = True
+                                '_waitForm.Show()
+                            Case Else
+                                MessageBox.Show(ex.Message)
+                                'Throw
+                        End Select
+                    Finally
+                        '_waitForm.Close()
+                    End Try
+                    If Not tryAgain Then
+                        Exit Do
+                    End If
+                Loop
+            End Using
+            '_waitForm.Close()
+            'if c Is nothing Then
+            '    Return ""
+            'End If
+            Return c
+        End Function
+
+        
+        Public Function SecurityScalar(sql As String, ParamArray ByVal params() As Object) As Object
+            Dim c As Object = Nothing
+            Dim tryAgain As Boolean
+            
+            Using connection = CreateSecurityConnection()
                 '_waitForm.Show()
                 Do While True
                     tryAgain = False
@@ -901,7 +1004,7 @@ Namespace AdoNet
                 tryAgain = False
                 Try
                     connection = Factory.CreateConnection()
-                    connection.ConnectionString = ConnectionString
+                    connection.ConnectionString = _connectionString
                     connection.Open()
                 Catch ex As Exception
                     '_waitForm.Close()
@@ -927,6 +1030,40 @@ Namespace AdoNet
             Return connection
         End Function
 
+        Private Function CreateSecurityConnection() As DbConnection
+            Dim connection As DbConnection = Nothing
+            ' ** Factory pattern in action
+            Dim tryAgain As Boolean
+            '_waitForm.Show()
+            Do While True
+                tryAgain = False
+                Try
+                    connection = Factory.CreateConnection()
+                    connection.ConnectionString = SecurityConnectionString
+                    connection.Open()
+                Catch ex As Exception
+                    '_waitForm.Close()
+                    Select Case TryToCatchError(ex)
+                        Case DialogResult.Cancel
+                            'Exit Do
+                        Case DialogResult.Retry
+                            ' do nothing
+                            tryAgain = True
+                            '_waitForm.Show()
+                        Case Else
+                            MessageBox.Show(ex.Message)
+                            Throw
+                    End Select
+                Finally
+                    '_waitForm.Close()
+                End Try
+                If Not tryAgain Then
+                    Exit Do
+                End If
+            Loop
+            '_waitForm.Close()
+            Return connection
+        End Function
         ' creates a connection object
 
         'Private Function CreateConnection() As DbConnection
@@ -1065,7 +1202,7 @@ Namespace AdoNet
         Public Function ExecuteCommands(transactionName As String, commands As Object) As Integer
             Dim retValue As Integer
             retValue = 0
-            Using connection As New SqlConnection(ConnectionString)
+            Using connection As New SqlConnection(_connectionString)
                 connection.Open()
 
                 Dim command As SqlCommand = connection.CreateCommand()
@@ -1111,7 +1248,7 @@ Namespace AdoNet
         Public Function ExecuteSqlTransaction(transactionName As String, sql1 As String, Optional sql2 As String = "") As Integer
             Dim retValue As Integer
             retValue = 0
-            Using connection As New SqlConnection(ConnectionString)
+            Using connection As New SqlConnection(_connectionString)
                 connection.Open()
 
                 Dim command As SqlCommand = connection.CreateCommand()

@@ -152,7 +152,8 @@ Public Class MappingProfileAccounts
         CreateMap(Of ShiftSummaryModel, IShiftSummaryView)().ReverseMap()
         CreateMap(Of Report, ReportModel)().ReverseMap()
         CreateMap(Of ReportModel, IReportView)().ReverseMap()
-
+        CreateMap(Of ItemDetails, ItemDetailsModel)().ReverseMap()
+        CreateMap(Of ItemDetailsModel, IItemDetailsView)().ReverseMap()
     End Sub
 
     'CreateMap(Of List(Of JournalItem), List(Of JournalItemModel))().ReverseMap()

@@ -151,7 +151,7 @@ Namespace PresentationLayer.Presenters
         Private Sub OnPayCycleChanged(sender As Object)
             View.PayFrequency = Service.GetField(Of String, Int16)(View.PayCycleIdNo, "PayCycle", "IdNo", "PayFrequency")
         End Sub
-        find
+
         Public Sub InitializeMonthlyPayroll(payCycleRecord As PayCycleModel)
             If View.StartDate Is Nothing And View.EndDate Is Nothing Then
                 If payCycleRecord.PayCycleCode = "Month" Then

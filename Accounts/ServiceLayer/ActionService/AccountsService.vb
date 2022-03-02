@@ -16,9 +16,9 @@ Namespace ServiceLayer.ActionService
 
         Protected Service As Object
 
-        Public Sub New(objectName As String, Optional bizParam As Object = Nothing, Optional daoParam As Object = Nothing)
+        Public Sub New(objectName As String, Optional bizParam As Object = Nothing, Optional daoParam As Object = Nothing, Optional connection As String = Nothing)
             CreateBusinessObject(objectName, bizParam)
-            CreateDao(objectName, daoParam)
+            CreateDao(objectName, daoParam, connection)
         End Sub
 
         Protected Overrides Sub CreateBusinessObject(objectName As String, Optional bizParam As Object = Nothing)
@@ -35,11 +35,15 @@ Namespace ServiceLayer.ActionService
             End If
         End Sub
 
-        Protected Overrides Sub CreateDao(objectName As String, Optional daoParam As Object = Nothing)
+        Protected Overrides Sub CreateDao(objectName As String, Optional daoParam As Object = Nothing, Optional connection As String = Nothing)
             If daoParam IsNot Nothing AndAlso daoParam.Length > 0 Then
                 DataDao = DaoFactoryAccounts.CreateDao(objectName, daoParam)
             Else
-                DataDao = DaoFactoryAccounts.CreateDao(objectName)
+                If connection Is Nothing Then
+                    DataDao = DaoFactoryAccounts.CreateDao(objectName)                    
+                Else
+                    DataDao = DaoFactoryAccounts.CreateDao(objectName, Nothing, connection)
+                End If                
             End If
             If DataDao IsNot Nothing Then
                 If objectName = "Basic" Then

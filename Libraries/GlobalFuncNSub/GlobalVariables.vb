@@ -1,6 +1,7 @@
 ﻿Imports System.Configuration
 Imports System.Drawing
 Imports System.Globalization
+Imports System.Windows.Forms
 Imports Autofac
 
 Public Class GlobalVariables
@@ -215,20 +216,23 @@ Public Class GlobalVariables
             Try
                 If _dacConnectionString Is Nothing Then
                     _dacConnectionString = ConfigurationManager.ConnectionStrings("ISPDATA").ConnectionString
-                    If _dacConnectionString Is Nothing Or _dacConnectionString = "" Then
-                        Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
-                        If computerName = $"ISPADMIN2" Then
-                            _dacConnectionString = ConfigurationManager.ConnectionStrings("ISPDATA2").ConnectionString
-                        ElseIf computerName = "MARCELO-DELL" Then
-                            _dacConnectionString = ConfigurationManager.ConnectionStrings("ISPDATA3").ConnectionString
-                        Else
-                            _dacConnectionString = "Data Source=IBN-SERVER;Initial Catalog=ISPDATA;Persist Security Info=True;User ID=igroupadmin;Password=igss@123"
-                        End If
-                    End If
+                    'If _dacConnectionString Is Nothing Or _dacConnectionString = "" Then
+                    '    Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
+                    '    If computerName = $"ISPADMIN2" Then
+                    '        _dacConnectionString = ConfigurationManager.ConnectionStrings("ISPDATA2").ConnectionString
+                    '    ElseIf computerName = "MARCELO-DELL" Then
+                    '        _dacConnectionString = ConfigurationManager.ConnectionStrings("ISPDATA3").ConnectionString
+                    '    Else
+                    '        _dacConnectionString = "Data Source=IBN-SERVER;Initial Catalog=ISPDATA;Persist Security Info=True;User ID=igroupadmin;Password=igss@123"
+                    '    End If
+                    'End If
                 End If
             Catch
                 _dacConnectionString = "Data Source=IBN-SERVER;Initial Catalog=ISPDATA;Persist Security Info=True;User ID=igroupadmin;Password=igss@123"
             End Try
+            If _dacConnectionString Is Nothing Then
+                Debugger.Break()
+            End If
             Return _dacConnectionString
         End Get
         Set(value As String)
@@ -260,17 +264,19 @@ Public Class GlobalVariables
             Try
                 _dacServer = ConfigurationManager.AppSettings.Get("ServerTranslator") ' SQL only
                 If _dacServer Is Nothing Or _dacServer = "" Then
-                    Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
-                    If computerName = $"ISPADMIN2" Then
-                        _dacServer = ConfigurationManager.AppSettings.Get("ServerTranslator2")
-                    ElseIf computerName = "MARCELO-DELL" Then
-                        _dacServer = ConfigurationManager.AppSettings.Get("ServerTranslator3")
-                    Else
-                        _dacServer = "IBN-SERVER"
-                    End If
+                    Debugger.Break()
+                    MessageBox.Show("Error, Invalid Configuration File. Missing 'ServerTranslator'")
+                    'Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
+                    'If computerName = $"ISPADMIN2" Then
+                    '    _dacServer = ConfigurationManager.AppSettings.Get("ServerTranslator2")
+                    'ElseIf computerName = "MARCELO-DELL" Then
+                    '    _dacServer = ConfigurationManager.AppSettings.Get("ServerTranslator3")
+                    'Else
+                    '    _dacServer = "IBN-SERVER"
+                    'End If
                 End If
             Catch
-                _dacServer = "IBN-SERVER"
+                MessageBox.Show("Error, Invalid Configuration File. Missing 'ServerTranslator'")
             End Try
             Return _dacServer
         End Get
@@ -284,17 +290,18 @@ Public Class GlobalVariables
             Try
                 _dacServerType = ConfigurationManager.AppSettings.Get("ServerType") ' SQL only
                 If _dacServerType Is Nothing Or _dacServerType = "" Then
-                    Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
-                    If computerName = $"ISPADMIN2" Then
-                        _dacServerType = ConfigurationManager.AppSettings.Get("ServerType2")
-                    ElseIf computerName = "MARCELO-DELL" Then
-                        _dacServerType = ConfigurationManager.AppSettings.Get("ServerType3")
-                    Else
-                        _dacServerType = "server"
-                    End If
+                    MessageBox.Show("Error, Invalid Configuration File. Missing 'ServerType'")
+                    'Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
+                    'If computerName = $"ISPADMIN2" Then
+                    '    _dacServerType = ConfigurationManager.AppSettings.Get("ServerType2")
+                    'ElseIf computerName = "MARCELO-DELL" Then
+                    '    _dacServerType = ConfigurationManager.AppSettings.Get("ServerType3")
+                    'Else
+                    '    _dacServerType = "server"
+                    'End If
                 End If
             Catch
-                _dacServerType = "server"
+                MessageBox.Show("Error, Invalid Configuration File. Missing 'ServerType'")
             End Try
             Return _dacServerType
         End Get
@@ -308,17 +315,19 @@ Public Class GlobalVariables
             Try
                 _dacDatabase = ConfigurationManager.AppSettings.Get("Database")
                 If _dacDatabase Is Nothing Or _dacDatabase = "" Then
-                    Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
-                    If computerName = $"ISPADMIN2" Then
-                        _dacDatabase = ConfigurationManager.AppSettings.Get("DatabaseTranslator2")
-                    ElseIf computerName = "MARCELO-DELL" Then
-                        _dacDatabase = ConfigurationManager.AppSettings.Get("DatabaseTranslator3")
-                    Else
-                        _dacDatabase = "ISPDATA"
-                    End If
+                    MessageBox.Show("Error, Invalid Configuration File. Missing 'Database'")
+                    'Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
+                    'If computerName = $"ISPADMIN2" Then
+                    '    _dacDatabase = ConfigurationManager.AppSettings.Get("DatabaseTranslator2")
+                    'ElseIf computerName = "MARCELO-DELL" Then
+                    '    _dacDatabase = ConfigurationManager.AppSettings.Get("DatabaseTranslator3")
+                    'Else
+                    '    _dacDatabase = "ISPDATA"
+                    'End If
                 End If
             Catch
-                _dacDatabase = "ISPDATA"
+                MessageBox.Show("Error, Invalid Configuration File. Missing 'Database'")
+                '_dacDatabase = "ISPDATA"
             End Try
             Return _dacDatabase
         End Get
@@ -332,10 +341,11 @@ Public Class GlobalVariables
             Try
                 _dacUid = ConfigurationManager.AppSettings.Get("UIDTranslator") ' SQL, MDB
                 If _dacUid Is Nothing Then
-                    _dacUid = "iGroupAdmin"
+                    MessageBox.Show("Error, Invalid Configuration File. Missing 'UIDTranslator'")
                 End If
             Catch
-                _dacUid = "iGroupAdmin"
+                MessageBox.Show("Error, Invalid Configuration File. Missing 'UIDTranslator'")
+                '_dacUid = "iGroupAdmin"
             End Try
             Return _dacUid
         End Get
@@ -348,11 +358,14 @@ Public Class GlobalVariables
         Get
             Try
                 _dacPassword = ConfigurationManager.AppSettings.Get("PWDTranslator") ' SQL, MDB
+                
                 If _dacPassword Is Nothing Then
-                    _dacPassword = "igss@123"
+                    MessageBox.Show("Error, Invalid Configuration File. Missing 'PWDTranslator'")
+                    '_dacPassword = "igss@123"
                 End If
             Catch
-                _dacPassword = "igss@123"
+                MessageBox.Show("Error, Invalid Configuration File. Missing 'PWDTranslator'")
+                '_dacPassword = "igss@123"
             End Try
             Return _dacPassword
         End Get
@@ -366,10 +379,11 @@ Public Class GlobalVariables
             Try
                 _dacFileName = ConfigurationManager.AppSettings.Get("FileNameTranslator") ' MDB, DBF
                 If _dacFileName Is Nothing Then
-                    _dacFileName = ""
+                    MessageBox.Show("Error, Invalid Configuration File. Missing 'FileNameTranslator'")
                 End If
             Catch
-                _dacFileName = ""
+                MessageBox.Show("Error, Invalid Configuration File. Missing 'FileNameTranslator'")
+                '_dacFileName = ""
             End Try
             Return _dacFileName
         End Get

@@ -19,7 +19,7 @@ Namespace DataLayer.AdoNet
             If arguments Is Nothing Or arguments.Length = 0 Then
                 dao = Activator.CreateInstance(tType)
             Else
-                dao = Activator.CreateInstance(tType, arguments)
+                dao = Activator.CreateInstance(tType, arguments)                
             End If
             Return dao
         End Function
