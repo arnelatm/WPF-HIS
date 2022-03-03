@@ -12,7 +12,7 @@ Namespace BusinessLayer
             ' establish business rules
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("ItemDetailsName"))
-                AddRule(New ValidateRequired("ItemDetailsCode"))
+                'AddRule(New ValidateRequired("ItemDetailsCode"))
             End If
             'Dim user As Object = New ExpandoObject()
             'user.Add("IdNo", 0I)

@@ -73,6 +73,7 @@
         Me.TxtIdNo.ComputedValue = false
         Me.TxtIdNo.CustomFormat = Nothing
         Me.TxtIdNo.DataBoundControl = true
+        Me.TxtIdNo.DisplayOnly = true
         Me.TxtIdNo.EditingMode = true
         Me.TxtIdNo.EndFindValue = Nothing
         Me.TxtIdNo.FieldDescription = Nothing
@@ -88,6 +89,7 @@
         Me.TxtIdNo.MinimumValue = Nothing
         Me.TxtIdNo.Name = "TxtIdNo"
         Me.TxtIdNo.OldValue = Nothing
+        Me.TxtIdNo.ReadOnly = true
         Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.TxtIdNo.Size = New System.Drawing.Size(88, 23)
         Me.TxtIdNo.TabIndex = 0
@@ -161,6 +163,7 @@
         Me.TxtItemDetailsCode.ComputedValue = false
         Me.TxtItemDetailsCode.CustomFormat = Nothing
         Me.TxtItemDetailsCode.DataBoundControl = true
+        Me.TxtItemDetailsCode.DisplayOnly = true
         Me.TxtItemDetailsCode.EditingMode = true
         Me.TxtItemDetailsCode.EndFindValue = Nothing
         Me.TxtItemDetailsCode.FieldDescription = Nothing
@@ -176,6 +179,7 @@
         Me.TxtItemDetailsCode.MinimumValue = Nothing
         Me.TxtItemDetailsCode.Name = "TxtItemDetailsCode"
         Me.TxtItemDetailsCode.OldValue = Nothing
+        Me.TxtItemDetailsCode.ReadOnly = true
         Me.TxtItemDetailsCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.TxtItemDetailsCode.Size = New System.Drawing.Size(88, 23)
         Me.TxtItemDetailsCode.TabIndex = 5

@@ -58,6 +58,12 @@ Namespace DataLayer
 
     End Interface
 
+    Public Interface IDaoAutoCode2
+
+        Function GenerateCode(idNo As Integer) As String
+
+    End Interface
+
     Public Interface IDaoGetRecords(Of TM)
 
         Function GetDaoRecords(Optional filter As String = Nothing) As List(Of TM)
