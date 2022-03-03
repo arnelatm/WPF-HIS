@@ -20,6 +20,13 @@ Namespace AdoNet
         Public Sub New()
         End Sub
 
+        Public ReadOnly Property BaseDb As Db
+            Get
+                Return _db
+            End Get
+        End Property
+
+
         Public Overridable Function GetDb()
             Return _db
         End Function
