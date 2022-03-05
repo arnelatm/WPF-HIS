@@ -1245,7 +1245,7 @@ Namespace AdoNet
             Return retValue
         End Function
 
-        Public Function ExecuteSqlTransaction(transactionName As String, sql1 As String, Optional sql2 As String = "") As Integer
+        Public Function ExecuteSqlTransaction(transactionName As String, sql1 As String, Optional sql2 As String = "", Optional returnValue As Object = Nothing) As Integer
             Dim retValue As Integer
             retValue = 0
             Using connection As New SqlConnection(_connectionString)

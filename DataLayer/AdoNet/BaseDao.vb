@@ -74,7 +74,7 @@ Namespace AdoNet
             'Dim cTableName = GetPhysicalTableName(tableName)
             Dim sql As String =
                     " Delete FROM [" & tableName & "] " &
-                    " Where " & GetPrimaryFieldName & " = " & idNo
+                    " Where " & GetPrimaryFieldName() & " = " & idNo
             Return GetDb().Delete(sql)
         End Function
 
@@ -1085,6 +1085,14 @@ Namespace AdoNet
             .Code = Extensions.AsString(reader("Code")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Name = Extensions.AsString(reader("Name"))}
+
+
+
+        Public Function InsertRecord(tableName As String, fields As Object(), values As Object()) As Integer Implements IBaseDao.InsertRecord
+            Dim fieldList as String =  String.Join(",", fields)
+            Dim sql As String = "Insert into " & tableName & "(" & fieldList & ") values (" & values.ToString() & ")"
+            Return GetDb().Scalar(sql)
+        End Function
 
 
     End Class

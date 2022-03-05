@@ -9,10 +9,6 @@ Namespace DataLayer.AdoNet
         Public Sub New()
         End Sub
 
-        Public Function UpdateCode(db As Db, tableName As String, idFieldName As String, idNo As Integer) As Object Implements ICommonDao.UpdateCode
-            Throw New NotImplementedException()
-        End Function
-
         Protected Function UpdateCode(db As Db, tableName As String, codeFieldName As String, idFieldName As String, idNo As Integer) Implements ICommonDao.UpdateCode
             Dim sql1 As String
             Dim sql2 As String
@@ -20,7 +16,7 @@ Namespace DataLayer.AdoNet
             Dim series = tableName
             Dim maxlength As Int16
             Dim prefix As String
-            
+
             If BaseDb.Scalar("Select Count(*) from Series where SeriesName = '" & series & "'") < 1 Then
                 'nothing to set no data.
             Else
@@ -35,20 +31,19 @@ Namespace DataLayer.AdoNet
                 If Not IsDBNull(nValue) Then
                     sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & tableName & "'"
                     sql2 = "Update [" & tableName & "] set " & codeFieldName & " = (select value from series where seriesName = '" & tableName & "') where " & idFieldName & " = " & idNo
-                    retVal = BaseDb.ExecuteSqlTransaction("GenerateCode" + tableName, sql1, sql2)
+                    retVal = BaseDb.ExecuteSqlTransaction("UpdateCode" + tableName, sql1, sql2)
                 Else
                     ' use IdNo as code
                     Dim code As String
                     code = prefix & Right(StrDup(maxlength, "0") & idNo.ToString().Trim(), maxlength)
                     sql1 = "Update " & tableName & " set " & codeFieldName & " = '" & code & "' where IdNo = " & idNo
-                    retVal = db.Scalar(sql1)
+                    retVal = GetDb().Scalar(sql1)
                 End If
             End If
             Return retVal
         End Function
 
         Protected Function GetNextCode(tableName As String, idNo As Integer) As String Implements ICommonDao.GetNextCode
-            Dim sql1 As String
             Dim series = tableName
             Dim maxlength As Int16
             Dim prefix As String
@@ -56,6 +51,9 @@ Namespace DataLayer.AdoNet
             If BaseDb.Scalar("Select Count(*) from Series where SeriesName = '" & series & "'") < 1 Then
                 'nothing to set no data.
             Else
+                Dim Sql As String = "select top 1 (Convert(int,item_Code) + 1) from ItemDetails t " &   
+                                    "where branchId = '01' and not exists (select 1 from ItemDetails t2 where branchId = '01' and Convert(Int,t2.item_Code) = Convert(int,t.item_Code) + 1)" & 
+                                    "order by Convert(int,item_Code)"
                 Dim x = BaseDb.Scalar("select prefix from series where seriesName = '" & series & "'")
                 If IsDBNull(x) Then
                     prefix = ""
@@ -63,14 +61,9 @@ Namespace DataLayer.AdoNet
                     prefix = x
                 End If
                 maxlength = BaseDb.Scalar("Select MaxLength from Series where SeriesName = '" & series & "'")
-                Dim nValue = BaseDb.Scalar("Select Value from Series where SeriesName = '" & series & "'")
-                If Not IsDBNull(nValue) Then
-                    sql1 = "select value from series where seriesName = '" & tableName & "'"
-                    code = BaseDb.Scalar(sql1)
-                    sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & tableName & "'"
-                    BaseDb.Scalar(sql1)
-                    'sql2 = "Update [" & tableName & "] set " & codeFieldName & " = (select value from series where seriesName = '" & tableName & "') where " & idFieldName & " = " & idNo
-                    'retVal = BaseDb.ExecuteSqlTransaction("GenerateCode" + tableName, sql1, sql2)
+                Dim nValue = GetDb().Scalar(sql)
+                If Not IsDBNull(nValue) or nValue Is Nothing then                 
+                    code = Right(StrDup(maxlength, "0") & nValue.ToString().Trim(), maxlength)
                 Else
                     code = prefix & Right(StrDup(maxlength, "0") & idNo.ToString().Trim(), maxlength)
                 End If

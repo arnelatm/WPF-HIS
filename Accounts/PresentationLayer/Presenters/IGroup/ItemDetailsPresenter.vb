@@ -32,6 +32,10 @@ Namespace PresentationLayer.Presenters
             Return Service.UpdateCode("ItemDetails", idNo)
         End Function
 
+        Public Sub OnAfterSaveItemDetails() Handles Me.AfterSave
+            Return Service.G
+        End Sub
+
     End Class
 
 End Namespace

@@ -14,6 +14,7 @@ Namespace PresentationLayer.Views.Forms
 
             ' This call is required by the designer.
             InitializeComponent()
+            FirstControl = TxtItemDetailsName
 
         End Sub
 
