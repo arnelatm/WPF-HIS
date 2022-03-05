@@ -279,7 +279,7 @@ Namespace PresentationLayer.Presenters
             Return Nothing
         End Function
 
-        Public Sub UpdateCode(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
+        Public Sub RecordAddedUpdated(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             'Dim passedValue As Integer = retVal
             If retVal >= 0 And IsEmpty(View.EmployeeCode) Then
                 retVal = Service.GenerateCode(View.IdNo)
