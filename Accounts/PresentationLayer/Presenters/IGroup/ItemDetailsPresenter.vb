@@ -33,7 +33,10 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Sub OnAfterSaveItemDetails() Handles Me.AfterSave
-            Return Service.G
+            Dim sql = "INSERT StockPositionCurrent ([BranchID], [Item_Code], [Batch], [Expiry], [WarehouseID]) VALUES " &
+                                                "('01', @Item_Code, '000',@Expiry,'01')"
+            Dim params = {"@Item_Code", View.ItemDetailsCode, "@Expiry", Now}
+            Service.Insert(sql, params)
         End Sub
 
     End Class
