@@ -370,6 +370,12 @@ Namespace Services
             Return DataDao.AddRecord(DataBo)
         End Function
 
+        Public Function InsertRecord(tableName As String, fieldList As Object(), values As Object(), fieldTypes As Object()) As Integer Implements IService.InsertRecord
+            Dim nCount = DataDao.InsertRecord(tableName,fieldList,values,fieldTypes)
+            Return Not nCount > 0
+        End Function
+
+
         Public Function DelUpdateTvp(dtTable As DataTable, ByVal groupKey As Integer) As Integer Implements IService.DelUpdateTvp
             Return DataDao.DelUpdateTvp(dtTable, groupKey)
         End Function

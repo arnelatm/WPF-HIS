@@ -107,7 +107,8 @@ Public Interface IBaseDao
 
     Function GetDataSet(storedProcedureName As String, parameters As Object) As DataSet
 
-    Function InsertRecord(tableName As String, fields As Object(), Values As Object()) As Integer
+    Function InsertRecord(tableName As String, fields As Object(), Values As Object(), fieldTypes As Object()) As Integer
+    'Function ExecuteCommand() As Integer
 
     'Function GetRecords(tableName As String, fieldList As String, filter As String) As ExpandoObject
 End Interface
