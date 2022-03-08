@@ -797,6 +797,8 @@ Namespace AdoNet
             Return Not nCount > 0
         End Function
 
+
+
         'Public Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) Implements IBaseDao.GetRecordFieldWithKeyG
         '    Dim sql As String =
         '            " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] " &
@@ -1088,11 +1090,18 @@ Namespace AdoNet
 
 
 
-        Public Function InsertRecord(tableName As String, fields As Object(), values As Object()) As Integer Implements IBaseDao.InsertRecord
-            Dim fieldList as String =  String.Join(",", fields)
-            Dim sql As String = "Insert into " & tableName & "(" & fieldList & ") values (" & values.ToString() & ")"
+        Public Function InsertRecord(tableName As String, fields As Object(), values As Object(), fieldTypes As Object()) As Integer Implements IBaseDao.InsertRecord
+            Dim fieldList As String = String.Join(",", fields)
+            Dim valuesList as String  = ""
+            Dim sql As String = "Insert into " & tableName & "(" & fieldList & ") values (" & valuesList & ")"
+            For each item In fieldTypes
+                valuesList = valuesList
+            Next
             Return GetDb().Scalar(sql)
         End Function
+
+
+
 
 
     End Class

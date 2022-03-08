@@ -114,7 +114,7 @@ Namespace Services
         Function GetDataSet(storedProcedureName As String, parameters As Object) As DataSet
 
         Function GetFieldOnMaxField(searchFieldName As String, tableName As String, returnFieldName As String, Optional filter As String = Nothing) As Object
-
+        Function InsertRecord(tableName As String, fieldList As Object(), values As Object(), fieldType As Object()) As Integer
     End Interface
 
 End Namespace

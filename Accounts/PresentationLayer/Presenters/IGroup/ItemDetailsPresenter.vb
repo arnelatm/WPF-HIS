@@ -8,7 +8,7 @@ Namespace PresentationLayer.Presenters
 
     Public Class ItemDetailsPresenter(Of TM As New)
         Inherits CommonPresenterNew(Of IItemDetailsView, TM)
-        Implements IDaoAutoCode2
+        'Implements IDaoAutoCode2
 
         Public Sub New(itemView As IItemDetailsView)
             MyBase.New(itemView)
@@ -28,15 +28,14 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Function GenerateCode(idNo As Integer) As String Implements IDaoAutoCode2.GenerateCode
-            Return Service.UpdateCode("ItemDetails", idNo)
-        End Function
+        'Public Function GenerateCode(idNo As Integer) As String Implements IDaoAutoCode2.GenerateCode
+        '    Return Service.UpdateCode("ItemDetails", idNo)
+        'End Function
 
         Public Sub OnAfterSaveItemDetails() Handles Me.AfterSave
-            Dim sql = "INSERT StockPositionCurrent ([BranchID], [Item_Code], [Batch], [Expiry], [WarehouseID]) VALUES " &
-                                                "('01', @Item_Code, '000',@Expiry,'01')"
-            Dim params = {"@Item_Code", View.ItemDetailsCode, "@Expiry", Now}
-            Service.Insert(sql, params)
+            Service.InsertRecord("StockPOsitionCurrent",{"BranchID","Item_Code","Batch","Expiry","WarehouseID","PCSQty","CashPrice","CreditPrice","CostPrice","PurchaseNo","TmpStock"},
+                                                        {"01",View.ItemDetailsCode,"000","'" & Now & "'","01",0,0,0,0,0,0},
+                                                        {"String","String","String","DateTime","String","Decimal","Decimal","Decimal","Decimal","Decimal","Decimal"})                       
         End Sub
 
     End Class
