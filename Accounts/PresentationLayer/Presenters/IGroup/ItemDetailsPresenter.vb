@@ -34,7 +34,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnAfterSaveItemDetails() Handles Me.AfterSave
             Service.InsertRecord("StockPOsitionCurrent",{"BranchID","Item_Code","Batch","Expiry","WarehouseID","PCSQty","CashPrice","CreditPrice","CostPrice","PurchaseNo","TmpStock"},
-                                                        {"01",View.ItemDetailsCode,"000","'" & Now & "'","01",0,0,0,0,0,0},
+                                                        {"01",View.ItemDetailsCode,"000",Now(),"01",0,0,0,0,0,0},
                                                         {"String","String","String","DateTime","String","Decimal","Decimal","Decimal","Decimal","Decimal","Decimal"})                       
         End Sub
 
