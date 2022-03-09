@@ -1092,12 +1092,35 @@ Namespace AdoNet
 
         Public Function InsertRecord(tableName As String, fields As Object(), values As Object(), fieldTypes As Object()) As Integer Implements IBaseDao.InsertRecord
             Dim fieldList As String = String.Join(",", fields)
-            Dim valuesList as String  = ""
-            Dim sql As String = "Insert into " & tableName & "(" & fieldList & ") values (" & valuesList & ")"
-            For each item In fieldTypes
-                valuesList = valuesList
+            Dim valuesList As String = ""
+            Dim parameters As New Object()
+            Dim i As Int16
+            For Each value In values
+                If i > 0 Then
+                    valuesList = valuesList + ","
+                End If
+                valuesList = valuesList + "@" + fields(i)
+                parameters.Add("@" + fields(i))
+                parameters.Add(values(i))
+                i = i + 1
             Next
-            Return GetDb().Scalar(sql)
+            'For Each value In values
+            '    If i > 0 Then
+            '        valuesList = valuesList + ","
+            '    End If
+            '    If fieldTypes(i) = "String" Then
+            '        valuesList = valuesList + "'" + value + "'"
+            '    ElseIf fieldTypes(i) = "Date" Or fieldTypes(i) = "DateTime" Then
+            '        valuesList = valuesList + "@" + fields(i)
+            '        parameters = parameters + "@"+fields(i)
+            '    Else
+            '        valuesList = valuesList + value.ToString()
+            '    End If
+            '    valuesList = valuesList
+            '    i = i + 1
+            'Next
+            Dim sql As String = "Insert into " & tableName & " (" & fieldList & ") values (" & valuesList & ")"
+            Return GetDb().Scalar(sql, parameters)
         End Function
 
 
