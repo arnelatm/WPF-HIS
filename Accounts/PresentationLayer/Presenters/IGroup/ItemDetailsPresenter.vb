@@ -21,6 +21,12 @@ Namespace PresentationLayer.Presenters
             WithTreeView = False
         End Sub
 
+        Protected Overrides Sub CreateDataSources()
+            CreateDataSource("DrugDosageForm_View", "DosageForm",{"DosageForm"},"DosageForm")
+            CreateDataSource("DrugUnitOfVolume_View", "UnitOfVolume",{"UnitOfVolume"},"UnitOfVolume")
+            CreateDataSource("DrugUnitOfStrength_View", "UnitOfStrength",{"UnitOfStrength"},"UnitOfStrength")
+            CreateDataSource("DrugPackageType_View", "PackageType",{"PackageType"},"PackageType")
+        End Sub
 
         Private Sub OnBeforeSave() Handles MyBase.BeforeSave
             If View.ItemDetailsCode Is Nothing Or View.ItemDetailsCode = "" Then
@@ -33,10 +39,11 @@ Namespace PresentationLayer.Presenters
         'End Function
 
         Public Sub OnAfterSaveItemDetails() Handles Me.AfterSave
-            Service.InsertRecord("StockPOsitionCurrent",{"BranchID","Item_Code","Batch","Expiry","WarehouseID","PCSQty","CashPrice","CreditPrice","CostPrice","PurchaseNo","TmpStock"},
-                                                        {"01",View.ItemDetailsCode,"000",Now(),"01",0,0,0,0,0,0},
-                                                        {"String","String","String","DateTime","String","Decimal","Decimal","Decimal","Decimal","Decimal","Decimal"})                       
+            Service.InsertRecord("StockPOsitionCurrent", {"BranchID", "Item_Code", "Batch", "Expiry", "WarehouseID", "PCSQty", "CashPrice", "CreditPrice", "CostPrice", "PurchaseNo", "TmpStock"},
+                                                        {"String", "String", "String", "DateTime", "String", "Decimal", "Decimal", "Decimal", "Decimal", "Decimal", "Decimal"},
+                                                        {"01", View.ItemDetailsCode, "000", Now(), "01", 0, 0, 0, 0, 0, 0})
         End Sub
+
 
     End Class
 

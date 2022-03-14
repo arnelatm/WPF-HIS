@@ -9,13 +9,14 @@ Namespace DataLayer.AdoNet
 
     Public Class ItemDetailsDao
         Inherits CommonDao
-        Implements iDao(Of ItemDetails), IDaoAutoCode
+        Implements IDao(Of ItemDetails), IDaoAutoCode
 
         Private _db As New Db("IGROUPCLINIC")
 
         Private FieldList As String = "BranchID," &
                                       "Category," &
                                       "Created_By_Branch," &
+                                      "DosageForm," &
                                       "Item_Code," &
                                       "Item_Status," &
                                       "ItemGroup," &
@@ -23,9 +24,15 @@ Namespace DataLayer.AdoNet
                                       "Pack1," &
                                       "Pack2," &
                                       "Pack3," &
+                                      "PackageSize," &
+                                      "PackageType," &
                                       "Primary_Key," &
                                       "SaleStrip," &
-                                      "UserId"
+                                      "StrengthValue," &
+                                      "UnitOfStrength," &
+                                      "UnitOfVolume," &
+                                      "UserId," &
+                                      "Volume"
 
         'Public Sub New(ParamArray arguments As Object())
         '    Db.SetConnectionString("IGROUPCLINIC")
@@ -39,16 +46,16 @@ Namespace DataLayer.AdoNet
             Return "Primary_Key"
         End Function
 
-        Public Function GetRecordByIdNo(idNo) As ItemDetails Implements iDao(Of ItemDetails).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As ItemDetails Implements IDao(Of ItemDetails).GetRecordByIdNo
             Dim sql As String =
                     "SELECT " & FieldList &
-                    " FROM ItemDetails" &
+                    " FROM ItemDetails_View" &
                     " WHERE Primary_Key = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function UpdateRecord(ByRef ItemDetails As ItemDetails) As Integer Implements iDao(Of ItemDetails).UpdateRecord
+        Public Function UpdateRecord(ByRef ItemDetails As ItemDetails) As Integer Implements IDao(Of ItemDetails).UpdateRecord
             Dim sql As String =
                     " UPDATE [ItemDetails] SET " &
                     " BranchID = @BranchID," &
@@ -66,7 +73,7 @@ Namespace DataLayer.AdoNet
             Return _db.Update(sql, Take(ItemDetails))
         End Function
 
-        Public Function AddRecord(ByRef ItemDetails As ItemDetails) As Integer Implements iDao(Of ItemDetails).AddRecord
+        Public Function AddRecord(ByRef ItemDetails As ItemDetails) As Integer Implements IDao(Of ItemDetails).AddRecord
             Dim sql As String = " INSERT INTO [ItemDetails] " &
                     " (BranchID,Category,Created_By_Branch,Item_Code,Item_Status,ItemGroup,ItemNameEnglish,Pack1,Pack2,Pack3,SaleStrip,UserId)" &
                     " VALUES (@BranchID,@Category,@Created_By_Branch,@ItemDetailsCode,@Item_Status,@ItemGroup,@ItemDetailsName,@Pack1,@Pack2,@Pack3,@SaleStrip,@UserId)"
@@ -79,16 +86,22 @@ Namespace DataLayer.AdoNet
             .BranchID = Extensions.AsString(reader("BranchID")),
             .Category = Extensions.AsString(reader("Category")),
             .Created_By_Branch = Extensions.AsString(reader("Created_By_Branch")),
-            .ItemDetailsCode = Extensions.AsString(reader("Item_Code")),
-            .Item_Status = Extensions.AsString(reader("Item_Status")),
-            .ItemGroup = Extensions.AsString(reader("ItemGroup")),
-            .ItemDetailsName = Extensions.AsString(reader("ItemNameEnglish")),
+            .DosageForm = Extensions.AsString(reader("DosageForm")),
             .IdNo = Extensions.AsId(Of Int32)(reader("Primary_Key")),
+            .Item_status = Extensions.AsString(reader("Item_Status")),
+            .ItemDetailsCode = Extensions.AsString(reader("Item_Code")),
+            .ItemDetailsName = Extensions.AsString(reader("ItemNameEnglish")),
+            .ItemGroup = Extensions.AsString(reader("ItemGroup")),
             .Pack1 = Extensions.AsInt(Of Int16)(reader("Pack1")),
             .Pack2 = Extensions.AsInt(Of Int16)(reader("Pack2")),
             .Pack3 = Extensions.AsInt(Of Int16)(reader("Pack3")),
-            .SaleStrip = Extensions.AsString(reader("SaleStrip")),
-            .UserId = Extensions.AsString(reader("UserId"))
+            .PackageSize = Extensions.AsString(reader("PackageSize")),
+            .PackageType = Extensions.AsString(reader("PackageType")),
+            .StrengthValue = Extensions.AsString(reader("StrengthValue")),
+            .UnitOfStrength = Extensions.AsString(reader("UnitOfStrength")),
+            .UnitOfVolume = Extensions.AsString(reader("UnitOfVolume")),
+            .UserId = Extensions.AsString(reader("UserId")),
+            .Volume = Extensions.AsString(reader("Volume"))
             }
 
         Private Function Take(ItemDetails As ItemDetails) As Object()
@@ -98,7 +111,7 @@ Namespace DataLayer.AdoNet
                             "Created_By_Branch", ItemDetails.Created_By_Branch,
                             "ItemDetailsCode", ItemDetails.ItemDetailsCode,
                             "ItemGroup", ItemDetails.ItemGroup,
-                            "Item_Status", ItemDetails.Item_Status,
+                            "Item_Status", ItemDetails.Item_status,
                             "ItemDetailsName", ItemDetails.ItemDetailsName,
                             "IdNo", ItemDetails.IdNo,
                             "Pack1", ItemDetails.Pack1,
@@ -146,6 +159,18 @@ Namespace DataLayer.AdoNet
         '    End If
         '    Return retVal
         'End Function
+
+        Public Overrides Function GetActualFieldName(fieldName As String)
+            Dim actualFieldName As String
+            If fieldName = "ItemDetailsCode" Then
+                actualFieldName = "Item_Code"
+            Elseif fieldName = "ItemDetailsName" then
+                actualFieldName = "ItemNameEnglish"
+            Else
+                actualFieldName = fieldName
+            End If
+            Return actualFieldName
+        End Function
 
     End Class
 

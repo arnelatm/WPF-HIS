@@ -122,12 +122,12 @@ Namespace AdoNet
             Dim searchString As String
             If findableControl.FindDataType = IFindableControl.DataTypeEnum.String Then
                 If findableControl.BegFindValue Is Nothing OrElse findableControl.BegFindValue = "" Then
-                    sql &= " (" & findableControl.FieldName & " Is Null or " & findableControl.FieldName & " = '') "
+                    sql &= " (" & GetActualFieldName(findableControl.FieldName) & " Is Null or " & GetActualFieldName(findableControl.FieldName) & " = '') "
                 Else
                     If Not (filter Is Nothing OrElse filter = "") Then
-                        sql &= "(" & filter.Trim() & ")" & " and " & findableControl.FieldName.Trim() & " "
+                        sql &= "(" & filter.Trim() & ")" & " and " & GetActualFieldName(findableControl.FieldName).Trim() & " "
                     Else
-                        sql &= findableControl.FieldName.Trim()
+                        sql &= GetActualFieldName(findableControl.FieldName).Trim()
                     End If
                     If findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField Then
                         searchString = "%" & RTrim(findableControl.BegFindValue) + "%"
@@ -143,38 +143,38 @@ Namespace AdoNet
                 End If
             ElseIf findableControl.FindDataType = IFindableControl.DataTypeEnum.Date Then
                 If Not (filter Is Nothing OrElse filter = "") Then
-                    sql &= "(" & filter.Trim() & ") and " & findableControl.FieldName.Trim() & " "
+                    sql &= "(" & filter.Trim() & ") and " & GetActualFieldName(findableControl.FieldName).Trim() & " "
                 End If
-                sql &= findableControl.FieldName.Trim()
-                retVal = FindDateField(tableName, findableControl, sortOrderKey, filter)
+                sql &= GetActualFieldName(findableControl.FieldName).Trim()
+                retVal = FindDateField(tableName, findableControl, GetActualFieldName(sortOrderKey), filter)
                 Return retVal
             ElseIf findableControl.FindDataType = IFindableControl.DataTypeEnum.Integer Or
                    findableControl.FindDataType = IFindableControl.DataTypeEnum.Decimal Then
                 If Not (filter Is Nothing OrElse filter = "") Then
-                    sql &= "(" & filter.Trim() & ") and " & findableControl.FieldName.Trim() & " "
+                    sql &= "(" & filter.Trim() & ") and " & GetActualFieldName(findableControl.FieldName).Trim() & " "
                 End If
                 If findableControl.BegFindValue Is Nothing Then ' Or findableControl.BegFindValue = "" Then
-                    sql &= " " & findableControl.FieldName & " Is Null or "
+                    sql &= " " & GetActualFieldName(findableControl.FieldName) & " Is Null or "
                     searchString = findableControl.EndFindValue
-                    sql &= findableControl.FieldName.Trim() & " <= @searchString"
-                    params = {"@SearchString", searchString, "@sortOrderKey", sortOrderKey}
+                    sql &= GetActualFieldName(findableControl.FieldName).Trim() & " <= @searchString"
+                    params = {"@SearchString", searchString, "@sortOrderKey", GetActualFieldName(sortOrderKey)}
                 ElseIf findableControl.EndFindValue Is Nothing Or findableControl.EndFindValue = "" Then
-                    sql &= findableControl.FieldName.Trim()
+                    sql &= GetActualFieldName(findableControl.FieldName).Trim()
                     searchString = findableControl.BegFindValue
                     sql &= " >= @searchString "
                     params = {"@SearchString", searchString}
                 Else
                     searchString = findableControl.BegFindValue
                     Dim searchString2 = findableControl.EndFindValue
-                    sql &= findableControl.FieldName.Trim() & ">= @searchString and " & findableControl.FieldName.Trim() & " <= @searchString2"
-                    params = {"@SearchString", searchString, "@searchString2", searchString2, "@sortOrderKey", sortOrderKey}
+                    sql &= GetActualFieldName(findableControl.FieldName).Trim() & ">= @searchString and " & GetActualFieldName(findableControl.FieldName).Trim() & " <= @searchString2"
+                    params = {"@SearchString", searchString, "@searchString2", searchString2, "@sortOrderKey", GetActualFieldName(sortOrderKey)}
                 End If
             ElseIf findableControl.SearchMode = IFindableControl.SearchModeEnum.CheckBox Then
-                sql &= findableControl.FieldName.Trim() & " = @SearchString"
+                sql &= GetActualFieldName(findableControl.FieldName).Trim() & " = @SearchString"
                 searchString = IIf(findableControl.BegFindValue, "1", "0")
                 params = {"@SearchString", searchString}
             End If
-            retVal = GetDb().Scalar(sql & " order by " & sortOrderKey, params)
+            retVal = GetDb().Scalar(sql & " order by " & GetActualFieldName(sortOrderKey), params)
             _lastFindQuery = sql
             _lastFindParms = params
             Return retVal
@@ -193,19 +193,19 @@ Namespace AdoNet
                 If dEndDate IsNot Nothing Then
                     Dim dEDate As Date = Convert.ToDateTime(dEndDate)
                     dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, dEDate)
-                    searchString = findableControl.FieldName & " < '" & dEDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "'"
+                    searchString = GetActualFieldName(findableControl.FieldName) & " < '" & dEDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "'"
                 Else
-                    searchString = findableControl.FieldName & " Is Null"
+                    searchString = GetActualFieldName(findableControl.FieldName) & " Is Null"
                 End If
             Else
                 Dim dBDate As Date = Convert.ToDateTime(dBegDate)
                 Dim dEDate As Date
                 If dEndDate Is Nothing Then
                     'dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, dBDate)
-                    searchString = findableControl.FieldName & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "'"
+                    searchString = GetActualFieldName(findableControl.FieldName) & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "'"
                 Else
                     dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, Convert.ToDateTime(dEndDate))
-                    searchString = findableControl.FieldName & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & findableControl.FieldName & " < '" & dEDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
+                    searchString = GetActualFieldName(findableControl.FieldName) & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & findableControl.FieldName & " < '" & dEDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
                 End If
             End If
             sql = sql & searchString
@@ -1090,18 +1090,30 @@ Namespace AdoNet
 
 
 
-        Public Function InsertRecord(tableName As String, fields As Object(), values As Object(), fieldTypes As Object()) As Integer Implements IBaseDao.InsertRecord
+        Public Function InsertRecord(tableName As String, fields As Object(), fieldTypes As Object(), ParamArray values() As Object) As Integer Implements IBaseDao.InsertRecord
             Dim fieldList As String = String.Join(",", fields)
             Dim valuesList As String = ""
-            Dim parameters As New Object()
+            Dim parameters As New List(Of Object)
             Dim i As Int16
             For Each value In values
                 If i > 0 Then
                     valuesList = valuesList + ","
                 End If
                 valuesList = valuesList + "@" + fields(i)
+
                 parameters.Add("@" + fields(i))
-                parameters.Add(values(i))
+                If fieldTypes(i) = "String" Then
+                    parameters.Add(values(i))
+                ElseIf fieldTypes(i) = "Date" Then
+                    parameters.Add(Date.Parse(value))
+                ElseIf fieldTypes(i) = "DateTime" Then
+                    parameters.Add(DateTime.Parse(value))
+                ElseIf fieldTypes(i) = "Decimal" Then
+                    parameters.Add(Decimal.Parse(value))
+                ElseIf fieldTypes(i) = "Integer" Then
+                    parameters.Add(Integer.Parse(value))
+                End If
+
                 i = i + 1
             Next
             'For Each value In values
@@ -1119,12 +1131,14 @@ Namespace AdoNet
             '    valuesList = valuesList
             '    i = i + 1
             'Next
+            Dim array As Object() = parameters.ToArray()
             Dim sql As String = "Insert into " & tableName & " (" & fieldList & ") values (" & valuesList & ")"
             Return GetDb().Scalar(sql, parameters)
         End Function
 
-
-
+        Public Overridable Function GetActualFieldName(fieldName As String)
+            Return fieldName
+        End Function
 
 
     End Class

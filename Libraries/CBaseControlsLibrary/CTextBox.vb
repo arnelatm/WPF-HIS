@@ -469,7 +469,7 @@ Public Class CTextBox
             If formLocation.Y + searchForm.Height > screenRectangle.Height Then
                 formLocation.Y = pnt.Y - searchForm.Height + Height
             End If
-            FieldName = Name.Substring(3)
+            FieldName = Name.Substring(3)            
             searchForm.Location = formLocation
             Dim x = Invoker.InvokeFunction(myForm, "GetFieldType", {FieldName})
             FindDataType = GetObjectDataType(x)
