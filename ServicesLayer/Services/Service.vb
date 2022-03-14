@@ -299,11 +299,16 @@ Namespace Services
                         }
                     tlData.Add(tData)
                 Next
-            Else
+            ElseIf fieldCount = 2 Then
                 For i = 1 To Int(data.Count / 2)
                     Dim tData As New Lookup.LookupData With {.IdNo = data(i * 2 - 2),
                             .Name = data(i * 2 - 1) & " | " & data(i * 2 - 2)
                             }
+                    tlData.Add(tData)
+                Next
+            Else
+                For i = 0 To Int(data.Count)-1
+                    Dim tData As New Lookup.LookupData With { .Name = If(IsDbNull(data(i)),"",data(i))}
                     tlData.Add(tData)
                 Next
             End If
@@ -371,7 +376,7 @@ Namespace Services
         End Function
 
         Public Function InsertRecord(tableName As String, fieldList As Object(), values As Object(), fieldTypes As Object()) As Integer Implements IService.InsertRecord
-            Dim nCount = DataDao.InsertRecord(tableName,fieldList,values,fieldTypes)
+            Dim nCount = DataDao.InsertRecord(tableName, fieldList, values, fieldTypes)
             Return Not nCount > 0
         End Function
 

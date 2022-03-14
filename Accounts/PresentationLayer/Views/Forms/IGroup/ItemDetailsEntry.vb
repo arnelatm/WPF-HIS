@@ -1,8 +1,7 @@
-﻿Imports AATM.Accounts.PresentationLayer.Presenters
+﻿Imports System.Configuration
+Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Forms
 
@@ -10,11 +9,29 @@ Namespace PresentationLayer.Views.Forms
         Implements IItemDetailsView
 
 
+        Private _nfi As NumberFormatInfo
+
         Public Sub New()
 
             ' This call is required by the designer.
             InitializeComponent()
             FirstControl = TxtItemDetailsName
+
+            Dim numberDecimalDigits = 4
+            Dim numberDecimalSeparator = ConfigurationManager.AppSettings("DefaultNumberDecimalSeparator")
+            Dim numberGroupSeparator = ConfigurationManager.AppSettings("DefaultNumberGroupSeparator")
+            _nfi = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
+            _nfi.NumberDecimalDigits = 4
+            If numberDecimalSeparator Is Nothing Then
+                _nfi.NumberDecimalSeparator = "."
+            Else
+                _nfi.NumberDecimalSeparator = numberDecimalSeparator
+            End If
+            If numberGroupSeparator Is Nothing Then
+                _nfi.NumberGroupSeparator = ","
+            Else
+                _nfi.NumberGroupSeparator = numberGroupSeparator
+            End If
 
         End Sub
 
@@ -150,6 +167,84 @@ Namespace PresentationLayer.Views.Forms
                 _category = value
             End Set
         End Property
+
+        Public Property UnitOfStrength As String Implements IItemDetailsView.UnitOfStrength
+            Get
+                Return cboUnitOfStrength.GetNullableValue(Of String)
+            End Get
+            Set(value As String)
+                cboUnitOfStrength.SetValue(value)
+            End Set
+        End Property
+
+        Public Property UnitOfVolume As String Implements IItemDetailsView.UnitOfVolume
+            Get
+                Return cboUnitOfVolume.GetNullableValue(Of String)
+            End Get
+            Set(value As String)
+                cboUnitOfVolume.SetValue(value)
+            End Set
+        End Property
+
+        Public Property PackageType As String Implements IItemDetailsView.PackageType
+            Get
+                Return cboPackageType.GetNullableValue(Of String)
+            End Get
+            Set(value As String)
+                cboPackageType.SetValue(value)
+            End Set
+        End Property
+
+        Public Property DosageForm As String Implements IItemDetailsView.DosageForm
+            Get
+                Return cboDosageForm.GetNullableValue(Of String)
+            End Get
+            Set(value As String)
+                cboDosageForm.SetValue(value)
+            End Set
+        End Property
+
+        Public Property Volume As Decimal? Implements IItemDetailsView.Volume
+            Get
+                Return txtVolume.Text.ToDecimalNumber(_nfi)
+            End Get
+            Set
+                txtVolume.Text = Value
+            End Set
+        End Property
+
+        Public Property StrengthValue As String Implements IItemDetailsView.StrengthValue
+            Get
+                Return txtStrengthValue.Text
+            End Get
+            Set(value As String)
+                txtStrengthValue.Text = value
+            End Set
+        End Property
+
+        Public Property PackageSize As Decimal? Implements IItemDetailsView.PackageSize
+            Get
+                Return txtStrengthValue.Text.ToDecimalNumber(_nfi)
+            End Get
+            Set(value As Decimal?)
+                txtPackageSize.Text = value
+            End Set
+        End Property
+
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
+                {{"DosageForm", cboDosageForm },
+                {"IdNo", txtIdNo},
+                {"ItemDetailsCode", txtItemDetailsCode},
+                {"ItemDetailsName", txtItemDetailsName},
+                {"PackageSize", txtPackageSize},
+                {"PackageType", cboPackageType},
+                {"StrengthValue", txtStrengthValue},
+                {"UnitOfStrength", cboUnitOfStrength},
+                {"UnitOfVolume", cboUnitOfVolume},
+                {"Volume", txtVolume}
+                }
+        End Sub
 
 #End Region
 
