@@ -53,7 +53,6 @@
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.BackColor = System.Drawing.Color.Transparent
-        Me.TableLayoutPanel1.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
         Me.TableLayoutPanel1.ColumnCount = 3
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150!))
@@ -473,7 +472,7 @@
         Me.cboPackageType.ValueIsMandatory = false
         Me.cboPackageType.ValueIsNullable = false
         Me.cboPackageType.ValueIsNumeric = false
-        Me.cboPackageType.ValueMember = "IdNo"
+        Me.cboPackageType.ValueMember = "Name"
         '
         'cboUnitOfVolume
         '
@@ -592,7 +591,7 @@
         Me.cboDosageForm.ValueIsMandatory = false
         Me.cboDosageForm.ValueIsNullable = false
         Me.cboDosageForm.ValueIsNumeric = false
-        Me.cboDosageForm.ValueMember = "IdNo"
+        Me.cboDosageForm.ValueMember = "Name"
         '
         'cboUnitOfStrength
         '
@@ -637,7 +636,7 @@
         Me.cboUnitOfStrength.ValueIsMandatory = false
         Me.cboUnitOfStrength.ValueIsNullable = false
         Me.cboUnitOfStrength.ValueIsNumeric = false
-        Me.cboUnitOfStrength.ValueMember = "IdNo"
+        Me.cboUnitOfStrength.ValueMember = "Name"
         '
         'txtStrengthValue
         '

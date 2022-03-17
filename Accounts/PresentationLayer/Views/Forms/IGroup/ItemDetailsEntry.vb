@@ -59,7 +59,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Overloads Property ItemNameEnglish As String Implements IItemDetailsView.ItemDetailsName
+        Public Overloads Property ItemDetailsName As String Implements IItemDetailsView.ItemDetailsName
             Get
                 Return TxtItemDetailsName.Text
             End Get
@@ -75,6 +75,15 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As String)
                 _itemGroup = value
+            End Set
+        End Property
+
+        Public Overloads Property GenericName As String Implements IItemDetailsView.GenericName
+            Get
+                Return TxtGenericName.Text
+            End Get
+            Set
+                TxtGenericName.Text = Value
             End Set
         End Property
 
@@ -233,10 +242,10 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
-                {{"DosageForm", cboDosageForm },
-                {"IdNo", txtIdNo},
-                {"ItemDetailsCode", txtItemDetailsCode},
-                {"ItemDetailsName", txtItemDetailsName},
+                {{"DosageForm", cboDosageForm},
+                {"IdNo", TxtIdNo},
+                {"ItemDetailsCode", TxtItemDetailsCode},
+                {"ItemDetailsName", TxtItemDetailsName},
                 {"PackageSize", txtPackageSize},
                 {"PackageType", cboPackageType},
                 {"StrengthValue", txtStrengthValue},

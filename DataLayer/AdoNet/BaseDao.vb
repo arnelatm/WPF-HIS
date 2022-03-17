@@ -1133,7 +1133,7 @@ Namespace AdoNet
             'Next
             Dim array As Object() = parameters.ToArray()
             Dim sql As String = "Insert into " & tableName & " (" & fieldList & ") values (" & valuesList & ")"
-            Return GetDb().Scalar(sql, parameters)
+            Return GetDb().Scalar(sql, array)
         End Function
 
         Public Overridable Function GetActualFieldName(fieldName As String)

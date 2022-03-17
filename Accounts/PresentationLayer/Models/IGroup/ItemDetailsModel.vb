@@ -13,6 +13,7 @@ Namespace PresentationLayer.Models
         Public Property Category As String
         Public Property Created_By_Branch
         Public Property DosageForm As String
+        Public Property GenericName As String
         Public Property IdNo As Int32
         Public Property Item_status As String
         Public Property ItemDetailsCode As String
@@ -21,8 +22,8 @@ Namespace PresentationLayer.Models
         Public Property Pack1 As Int16
         Public Property Pack2 As Int16
         Public Property Pack3 As Int16
-        PUblic Property PackageSize As Decimal?
-        PUblic Property PackageType As String
+        Public Property PackageSize As Decimal?
+        Public Property PackageType As String
         Public Property SaleStrip As String
         Public Property StrengthValue As String
         Public Property UnitOfStrength As String

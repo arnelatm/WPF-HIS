@@ -549,6 +549,8 @@ Public Class CaComboBox
                 End If
             ElseIf ValueMember.ToLower() = "code" Then
                 CodeSearch(value)
+            Else
+                Text = value
             End If
         End If
     End Sub
