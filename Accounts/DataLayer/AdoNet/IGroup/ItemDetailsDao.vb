@@ -17,6 +17,7 @@ Namespace DataLayer.AdoNet
                                       "Category," &
                                       "Created_By_Branch," &
                                       "DosageForm," &
+                                      "GenericName," &
                                       "Item_Code," &
                                       "Item_Status," &
                                       "ItemGroup," &
@@ -62,14 +63,14 @@ Namespace DataLayer.AdoNet
                     " Category = @Category," &
                     " Created_By_Branch = @Created_By_Branch," &
                     " Item_Code = @ItemDetailsCode," &
-                    " Item_Status = @ItemStatus," &
+                    " Item_Status = @Item_Status," &
                     " ItemGroup = @ItemGroup," &
                     " ItemNameEnglish = @ItemDetailsName," &
                     " Pack1 = @Pack1," &
                     " Pack2 = @Pack2," &
                     " Pack3 = @Pack3," &
                     " UserID = @UserId" &
-                    " WHERE IdNo = @IdNo"
+                    " WHERE Primary_Key = @IdNo"
             Return _db.Update(sql, Take(ItemDetails))
         End Function
 
@@ -87,6 +88,7 @@ Namespace DataLayer.AdoNet
             .Category = Extensions.AsString(reader("Category")),
             .Created_By_Branch = Extensions.AsString(reader("Created_By_Branch")),
             .DosageForm = Extensions.AsString(reader("DosageForm")),
+            .GenericName = Extensions.AsString(reader("GenericName")),
             .IdNo = Extensions.AsId(Of Int32)(reader("Primary_Key")),
             .Item_status = Extensions.AsString(reader("Item_Status")),
             .ItemDetailsCode = Extensions.AsString(reader("Item_Code")),

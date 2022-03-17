@@ -9,6 +9,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Category As String
         Property Created_By_Branch As String
         Property DosageForm As String
+        Property GenericName As String
         Property IdNo As Int32
         Property Item_Status As String
         Property ItemDetailsCode As String
