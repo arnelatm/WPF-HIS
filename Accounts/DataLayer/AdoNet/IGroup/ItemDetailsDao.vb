@@ -78,7 +78,14 @@ Namespace DataLayer.AdoNet
             Dim sql As String = " INSERT INTO [ItemDetails] " &
                     " (BranchID,Category,Created_By_Branch,Item_Code,Item_Status,ItemGroup,ItemNameEnglish,Pack1,Pack2,Pack3,SaleStrip,UserId)" &
                     " VALUES (@BranchID,@Category,@Created_By_Branch,@ItemDetailsCode,@Item_Status,@ItemGroup,@ItemDetailsName,@Pack1,@Pack2,@Pack3,@SaleStrip,@UserId)"
-            Return _db.Insert(sql, Take(ItemDetails))
+            Dim retval As Integer 
+            retval = _db.Insert(sql, Take(ItemDetails))
+            If retval > 0 Then
+                Dim sql2 = " INSERT INTO DrugList " &
+                    " (BranchID,Category,Created_By_Branch,Item_Code,Item_Status,ItemGroup,ItemNameEnglish,Pack1,Pack2,Pack3,SaleStrip,UserId)" &
+                    " VALUES (@BranchID,@Category,@Created_By_Branch,@ItemDetailsCode,@Item_Status,@ItemGroup,@ItemDetailsName,@Pack1,@Pack2,@Pack3,@SaleStrip,@UserId)"
+            End If
+            Return retval
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, ItemDetails) =
