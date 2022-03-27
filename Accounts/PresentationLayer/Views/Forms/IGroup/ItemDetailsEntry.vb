@@ -80,10 +80,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Overloads Property GenericName As String Implements IItemDetailsView.GenericName
             Get
-                Return TxtGenericName.Text
+                Return txtGenericName.Text
             End Get
             Set
-                TxtGenericName.Text = Value
+                txtGenericName.Text = Value
             End Set
         End Property
 
@@ -144,6 +144,15 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As String)
                 _category = value
+            End Set
+        End Property
+
+        Public Property RegistrationNo As String Implements IItemDetailsView.RegistrationNo
+            Get
+                Return txtRegistrationNo.Text
+            End Get
+            Set
+                txtRegistrationNo.Text = Value
             End Set
         End Property
 
@@ -213,12 +222,20 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Volume As Decimal? Implements IItemDetailsView.Volume
+        Public Property Volume As Double? Implements IItemDetailsView.Volume
             Get
-                Return txtVolume.Text.ToDecimalNumber(_nfi)
+                If txtVolume.Text Is Nothing Then
+                    Return Nothing
+                Else
+                    Return txtVolume.Text.ToDoubleNumber(_nfi)
+                End If
             End Get
             Set
-                txtVolume.Text = Value
+                if value Is Nothing then
+                    txtVolume.Text = ""
+                else
+                    txtVolume.Text = Value
+                End If                
             End Set
         End Property
 
@@ -231,12 +248,20 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PackageSize As Decimal? Implements IItemDetailsView.PackageSize
+        Public Property PackageSize As Double? Implements IItemDetailsView.PackageSize
             Get
-                Return txtStrengthValue.Text.ToDecimalNumber(_nfi)
+                If txtPackageSize.Text Is Nothing Then
+                    Return Nothing
+                Else
+                    Return txtPackageSize.Text.ToDoubleNumber(_nfi)
+                End If
             End Get
-            Set(value As Decimal?)
-                txtPackageSize.Text = value
+            Set
+                If Value Is Nothing Then
+                    txtPackageSize.Text = ""
+                Else
+                    txtPackageSize.Text = Value
+                End If                
             End Set
         End Property
 

@@ -18,14 +18,15 @@ Namespace PresentationLayer.Views.Interfaces
         Property Pack1 As Int16
         Property Pack2 As Int16
         Property Pack3 As Int16
-        Property PackageSize As Decimal?
+        Property PackageSize As Double?
         Property PackageType As String
+        Property RegistrationNo As String
         Property SaleStrip As String
         Property StrengthValue As String
         Property UnitOfStrength As String
         Property UnitOfVolume As String
         Property UserId As String
-        Property Volume As Decimal?
+        Property Volume As Double?
     End Interface
 
 End Namespace
