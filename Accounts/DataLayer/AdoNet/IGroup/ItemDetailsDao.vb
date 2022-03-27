@@ -28,6 +28,7 @@ Namespace DataLayer.AdoNet
                                       "PackageSize," &
                                       "PackageType," &
                                       "Primary_Key," &
+                                      "RegistrationNo," &
                                       "SaleStrip," &
                                       "StrengthValue," &
                                       "UnitOfStrength," &
@@ -78,12 +79,17 @@ Namespace DataLayer.AdoNet
             Dim sql As String = " INSERT INTO [ItemDetails] " &
                     " (BranchID,Category,Created_By_Branch,Item_Code,Item_Status,ItemGroup,ItemNameEnglish,Pack1,Pack2,Pack3,SaleStrip,UserId)" &
                     " VALUES (@BranchID,@Category,@Created_By_Branch,@ItemDetailsCode,@Item_Status,@ItemGroup,@ItemDetailsName,@Pack1,@Pack2,@Pack3,@SaleStrip,@UserId)"
-            Dim retval As Integer 
+            Dim retval As Integer
             retval = _db.Insert(sql, Take(ItemDetails))
             If retval > 0 Then
                 Dim sql2 = " INSERT INTO DrugList " &
-                    " (BranchID,Category,Created_By_Branch,Item_Code,Item_Status,ItemGroup,ItemNameEnglish,Pack1,Pack2,Pack3,SaleStrip,UserId)" &
-                    " VALUES (@BranchID,@Category,@Created_By_Branch,@ItemDetailsCode,@Item_Status,@ItemGroup,@ItemDetailsName,@Pack1,@Pack2,@Pack3,@SaleStrip,@UserId)"
+                    " ([RegistrationNo],[Generic Name],[Trade Name],[Strength Value],[Unit Of Strength],[Dosage Form],[Volume],[Unit of Volume],[Package Size],[Package Type])" &
+                    " VALUES (@RegistrationNo,@GenericName,@TradeName,@StrengthValue,@UnitOfStrength,@DosageForm,@Volume,@UnitOfVolume,@PackageSize,@PackageType)"
+                _db.InsertNoId(sql2, TakeDrug(ItemDetails))
+                Dim sql3 = " INSERT INTO ItemRegistration " &
+                    " ([Item_Code],[RegistrationNo],[Strength]" &
+                    " VALUES (@ItemDetailsCode,@RegistrationNo,@Strength)"
+                _db.InsertNoId(sql2, TakeRegistration(ItemDetails))
             End If
             Return retval
         End Function
@@ -104,13 +110,14 @@ Namespace DataLayer.AdoNet
             .Pack1 = Extensions.AsInt(Of Int16)(reader("Pack1")),
             .Pack2 = Extensions.AsInt(Of Int16)(reader("Pack2")),
             .Pack3 = Extensions.AsInt(Of Int16)(reader("Pack3")),
-            .PackageSize = Extensions.AsString(reader("PackageSize")),
+            .PackageSize = Extensions.AsNullable(Of Decimal)(reader("PackageSize")),
             .PackageType = Extensions.AsString(reader("PackageType")),
+            .RegistrationNo = Extensions.AsString(reader("RegistrationNo")),
             .StrengthValue = Extensions.AsString(reader("StrengthValue")),
             .UnitOfStrength = Extensions.AsString(reader("UnitOfStrength")),
             .UnitOfVolume = Extensions.AsString(reader("UnitOfVolume")),
             .UserId = Extensions.AsString(reader("UserId")),
-            .Volume = Extensions.AsString(reader("Volume"))
+            .Volume = Extensions.AsNullable(Of Decimal)(reader("Volume"))
             }
 
         Private Function Take(ItemDetails As ItemDetails) As Object()
@@ -130,6 +137,28 @@ Namespace DataLayer.AdoNet
                             "UserId", ItemDetails.UserId
                             }
         End Function
+
+        Private Function TakeDrug(ItemDetails As ItemDetails) As Object()
+            Return New Object() {"ItemDetailsCode", ItemDetails.ItemDetailsCode,
+                                 "RegistrationNo", IIf(ItemDetails.RegistrationNo Is Nothing Or ItemDetails.RegistrationNo = "", "X-" + ItemDetails.ItemDetailsCode, ItemDetails.RegistrationNo),
+                                 "Strength", IIf(ItemDetails.StrengthValue.Contains(","),ItemDetails.StrengthValue.Split(",")(0),Convert( ItemDetails.StrengthValue
+                                 }
+        End Function
+
+        Private Function TakeRegistration(ItemDetails As ItemDetails) As Object()
+            Return New Object() {"RegistrationNo", IIf(ItemDetails.RegistrationNo Is Nothing Or ItemDetails.RegistrationNo = "", "X-" + ItemDetails.ItemDetailsCode, ItemDetails.RegistrationNo),
+                                 "GenericName", ItemDetails.GenericName,
+                                 "TradeName", ItemDetails.ItemDetailsName,
+                                 "StrengthValue", ItemDetails.StrengthValue,
+                                 "UnitOfStrength", ItemDetails.UnitOfStrength,
+                                 "DosageForm", ItemDetails.DosageForm,
+                                 "Volume", ItemDetails.Volume,
+                                 "UnitOfVolume", ItemDetails.UnitOfVolume,
+                                 "PackageSize", ItemDetails.PackageSize,
+                                 "PackageType", ItemDetails.PackageType
+                                 }
+        End Function
+
 
         Public Function GenerateCode(idNo As Integer) As String Implements IDaoAutoCode.GenerateCode
             Return GetNextCode("ItemDetails", idNo)
@@ -173,7 +202,7 @@ Namespace DataLayer.AdoNet
             Dim actualFieldName As String
             If fieldName = "ItemDetailsCode" Then
                 actualFieldName = "Item_Code"
-            Elseif fieldName = "ItemDetailsName" then
+            ElseIf fieldName = "ItemDetailsName" Then
                 actualFieldName = "ItemNameEnglish"
             Else
                 actualFieldName = fieldName

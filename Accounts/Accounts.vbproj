@@ -1125,6 +1125,12 @@
       <DependentUpon>General Journal.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\HR Employee Info.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HR Employee Info.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\IGroup\Cash Income Summary Per Month Per Service Per Doctor.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1177,6 +1183,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Statement of Accounts Receivable.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Statement of Employee Leaves.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Statement of Employee Leaves.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Statement of Employee Loans Arabic.vb">
@@ -1558,6 +1570,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>General Journal.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\HR Employee Info.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>HR Employee Info.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\IGroup\Cash Income Summary Per Month Per Service Per Doctor.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Cash Income Summary Per Month Per Service Per Doctor.vb</LastGenOutput>
@@ -1593,6 +1609,10 @@
     <EmbeddedResource Include="Reports\Statement of Accounts Receivable.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Statement of Accounts Receivable.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Statement of Employee Leaves.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Statement of Employee Leaves.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Statement of Employee Loans Arabic.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

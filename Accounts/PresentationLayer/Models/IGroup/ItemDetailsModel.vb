@@ -22,14 +22,15 @@ Namespace PresentationLayer.Models
         Public Property Pack1 As Int16
         Public Property Pack2 As Int16
         Public Property Pack3 As Int16
-        Public Property PackageSize As Decimal?
+        Public Property PackageSize As Double?
         Public Property PackageType As String
+        Public Property RegistrationNo As String
         Public Property SaleStrip As String
         Public Property StrengthValue As String
         Public Property UnitOfStrength As String
         Public Property UnitOfVolume As String
         Public Property UserId As String
-        Public Property Volume As Decimal?
+        Public Property Volume As Double?
 
     End Class
 

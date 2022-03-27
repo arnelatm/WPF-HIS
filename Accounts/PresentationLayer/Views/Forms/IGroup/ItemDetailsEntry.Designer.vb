@@ -22,6 +22,7 @@
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.lblRegistrationCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtGenericName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -45,7 +46,8 @@
         Me.cboDosageForm = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.cboUnitOfStrength = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.txtStrengthValue = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CCheckBox1 = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+        Me.txtRegistrationNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.chkSupervisor = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.TableLayoutPanel1.SuspendLayout
         Me.SuspendLayout
@@ -57,6 +59,7 @@
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.Controls.Add(Me.lblRegistrationCode, 0, 13)
         Me.TableLayoutPanel1.Controls.Add(Me.txtGenericName, 1, 4)
         Me.TableLayoutPanel1.Controls.Add(Me.TxtIdNo, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.lblIdNo, 0, 0)
@@ -80,10 +83,11 @@
         Me.TableLayoutPanel1.Controls.Add(Me.cboDosageForm, 1, 7)
         Me.TableLayoutPanel1.Controls.Add(Me.cboUnitOfStrength, 1, 6)
         Me.TableLayoutPanel1.Controls.Add(Me.txtStrengthValue, 1, 5)
-        Me.TableLayoutPanel1.Controls.Add(Me.CCheckBox1, 1, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtRegistrationNo, 1, 13)
+        Me.TableLayoutPanel1.Controls.Add(Me.chkSupervisor, 1, 3)
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 57)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 13
+        Me.TableLayoutPanel1.RowCount = 14
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -97,8 +101,24 @@
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(557, 301)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(557, 329)
         Me.TableLayoutPanel1.TabIndex = 5
+        '
+        'lblRegistrationCode
+        '
+        Me.lblRegistrationCode.AutoSize = true
+        Me.lblRegistrationCode.DisplayOnly = true
+        Me.lblRegistrationCode.EditingMode = false
+        Me.lblRegistrationCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblRegistrationCode.Location = New System.Drawing.Point(1, 299)
+        Me.lblRegistrationCode.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblRegistrationCode.Name = "lblRegistrationCode"
+        Me.lblRegistrationCode.Size = New System.Drawing.Size(138, 17)
+        Me.lblRegistrationCode.TabIndex = 33
+        Me.lblRegistrationCode.Text = "Registration Number"
+        Me.lblRegistrationCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblRegistrationCode.Translatable = true
         '
         'txtGenericName
         '
@@ -153,7 +173,7 @@
         Me.TxtIdNo.MaximumValue = Nothing
         Me.TxtIdNo.MinimumValue = Nothing
         Me.TxtIdNo.Name = "TxtIdNo"
-        Me.TxtIdNo.OldValue = Nothing
+        Me.TxtIdNo.OldValue = ""
         Me.TxtIdNo.ReadOnly = true
         Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.TxtIdNo.Size = New System.Drawing.Size(148, 23)
@@ -517,7 +537,7 @@
         Me.cboUnitOfVolume.ValueIsMandatory = false
         Me.cboUnitOfVolume.ValueIsNullable = false
         Me.cboUnitOfVolume.ValueIsNumeric = false
-        Me.cboUnitOfVolume.ValueMember = "IdNo"
+        Me.cboUnitOfVolume.ValueMember = "Name"
         '
         'txtVolume
         '
@@ -666,39 +686,72 @@
         Me.txtStrengthValue.TabIndex = 24
         Me.txtStrengthValue.Translatable = false
         '
-        'CCheckBox1
+        'txtRegistrationNo
         '
-        Me.CCheckBox1.BackColor = System.Drawing.Color.White
-        Me.CCheckBox1.BegFindValue = Nothing
-        Me.CCheckBox1.DisplayOnly = false
-        Me.CCheckBox1.EditingMode = true
-        Me.CCheckBox1.EndFindValue = Nothing
-        Me.CCheckBox1.FieldDescription = Nothing
-        Me.CCheckBox1.FieldName = Nothing
-        Me.CCheckBox1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.CCheckBox1.FindEnabled = true
-        Me.CCheckBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.CCheckBox1.Font = New System.Drawing.Font("Segoe UI", 9!)
-        Me.CCheckBox1.ForeColor = System.Drawing.Color.Black
-        Me.CCheckBox1.IFindableControl_FindEnabled = false
-        Me.CCheckBox1.IgnoreCase = false
-        Me.CCheckBox1.LinkedLabel = Nothing
-        Me.CCheckBox1.Location = New System.Drawing.Point(153, 78)
-        Me.CCheckBox1.Name = "CCheckBox1"
-        Me.CCheckBox1.NoLabel = true
-        Me.CCheckBox1.OldValue = Nothing
-        Me.CCheckBox1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.CCheckBox1.Size = New System.Drawing.Size(13, 13)
-        Me.CCheckBox1.TabIndex = 32
-        Me.CCheckBox1.Text = "CCheckBox1"
-        Me.CCheckBox1.Translatable = false
-        Me.CCheckBox1.UseVisualStyleBackColor = false
+        Me.txtRegistrationNo.BackColor = System.Drawing.Color.White
+        Me.txtRegistrationNo.BegFindValue = Nothing
+        Me.txtRegistrationNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtRegistrationNo.ComputedValue = false
+        Me.txtRegistrationNo.CustomFormat = Nothing
+        Me.txtRegistrationNo.DataBoundControl = true
+        Me.txtRegistrationNo.EditingMode = true
+        Me.txtRegistrationNo.EndFindValue = Nothing
+        Me.txtRegistrationNo.FieldDescription = Nothing
+        Me.txtRegistrationNo.FieldName = Nothing
+        Me.txtRegistrationNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtRegistrationNo.FindEnabled = true
+        Me.txtRegistrationNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.txtRegistrationNo.ForeColor = System.Drawing.Color.Black
+        Me.txtRegistrationNo.LinkedLabel = Nothing
+        Me.txtRegistrationNo.Location = New System.Drawing.Point(151, 299)
+        Me.txtRegistrationNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtRegistrationNo.MaximumValue = Nothing
+        Me.txtRegistrationNo.MinimumValue = Nothing
+        Me.txtRegistrationNo.Name = "txtRegistrationNo"
+        Me.txtRegistrationNo.OldValue = Nothing
+        Me.txtRegistrationNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.txtRegistrationNo.Size = New System.Drawing.Size(148, 23)
+        Me.txtRegistrationNo.TabIndex = 34
+        Me.txtRegistrationNo.Translatable = false
+        '
+        'chkSupervisor
+        '
+        Me.chkSupervisor.Appearance = System.Windows.Forms.Appearance.Button
+        Me.chkSupervisor.AutoCheck = false
+        Me.chkSupervisor.BackColor = System.Drawing.Color.White
+        Me.chkSupervisor.BegFindValue = Nothing
+        Me.chkSupervisor.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.chkSupervisor.DisplayOnly = false
+        Me.chkSupervisor.EditingMode = false
+        Me.chkSupervisor.EndFindValue = Nothing
+        Me.chkSupervisor.FieldDescription = Nothing
+        Me.chkSupervisor.FieldName = Nothing
+        Me.chkSupervisor.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.chkSupervisor.FindEnabled = true
+        Me.chkSupervisor.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.chkSupervisor.Font = New System.Drawing.Font("Segoe UI", 9!)
+        Me.chkSupervisor.ForeColor = System.Drawing.Color.Black
+        Me.chkSupervisor.IFindableControl_FindEnabled = false
+        Me.chkSupervisor.IgnoreCase = false
+        Me.chkSupervisor.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.chkSupervisor.LinkedLabel = Nothing
+        Me.chkSupervisor.Location = New System.Drawing.Point(151, 76)
+        Me.chkSupervisor.Margin = New System.Windows.Forms.Padding(1)
+        Me.chkSupervisor.Name = "chkSupervisor"
+        Me.chkSupervisor.NoLabel = false
+        Me.chkSupervisor.OldValue = ""
+        Me.chkSupervisor.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.chkSupervisor.Size = New System.Drawing.Size(13, 13)
+        Me.chkSupervisor.TabIndex = 35
+        Me.chkSupervisor.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.chkSupervisor.Translatable = false
+        Me.chkSupervisor.UseVisualStyleBackColor = false
         '
         'ItemDetailsEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
-        Me.ClientSize = New System.Drawing.Size(581, 373)
+        Me.ClientSize = New System.Drawing.Size(581, 432)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Name = "ItemDetailsEntry"
         Me.Controls.SetChildIndex(Me.TableLayoutPanel1, 0)
@@ -734,6 +787,8 @@ End Sub
         Friend WithEvents txtVolume As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents cboDosageForm As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents CCheckBox1 As Libraries.CBaseControlsLibrary.CCheckBox
+        Friend WithEvents lblRegistrationCode As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents txtRegistrationNo As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents chkSupervisor As Libraries.CBaseControlsLibrary.CCheckBox
     End Class
 End Namespace

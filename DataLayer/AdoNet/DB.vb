@@ -41,7 +41,7 @@ Namespace AdoNet
                 '    End If
                 '    ConnectionString = ConfigurationManager.ConnectionStrings(connectionName).ConnectionString
                 'End If
-                SecurityConnectionString = GlobalVariables.DacConnectionString    
+                SecurityConnectionString = GlobalVariables.DacConnectionString
             Else
                 'If conn = "TRANSLATIONS" Then
                 '    Debugger.Break()
@@ -64,7 +64,7 @@ Namespace AdoNet
         End Function
 
         Public Sub SetConnectionString(connectionName As String)
-            _ConnectionString = ConfigurationManager.ConnectionStrings(connectionName).ConnectionString
+            _connectionString = ConfigurationManager.ConnectionStrings(connectionName).ConnectionString
         End Sub
 
         'Public Sub SetSecurityConnectionString(connectionName As String)
@@ -441,11 +441,11 @@ Namespace AdoNet
             Return c
         End Function
 
-        
+
         Public Function SecurityScalar(sql As String, ParamArray ByVal params() As Object) As Object
             Dim c As Object = Nothing
             Dim tryAgain As Boolean
-            
+
             Using connection = CreateSecurityConnection()
                 '_waitForm.Show()
                 Do While True
@@ -608,6 +608,84 @@ Namespace AdoNet
                 Loop
             End Using
             Return retValue
+        End Function
+
+
+        Public Function InsertNoId(sql As String, ParamArray ByVal params() As Object) As Integer
+            Dim retValue As Int32
+            Dim tryAgain As Boolean
+            retValue = -1
+            Using connection = CreateConnection()
+                '_waitForm.Show()
+                Do While True
+                    tryAgain = False
+                    Using command = CreateCommand(sql, connection, params)
+                        Try
+                            '' ExecuteScalar returns the first column of the result set and since this is usually the IdNo this will return 0
+                            '' because IdNo=0 for inserted records. THat is why the need for the ";SELECT SCOPE_IDENTITY();" to return the
+                            '' Identity column (since this is usually the IdNo) this will return the IdNo of the newly added record.
+                            command.ExecuteScalar()
+                        Catch ex As SqlException
+                            If ex.Number = 2627 OrElse ex.Number = 2601 Then
+                                'Violation of UNIQUE KEY constraint <constraint name>. Cannot insert duplicate key in object <Table>. The duplicate key value is (<duplicate entry text>). The statement has been terminated.
+                                Dim test As String = ex.Message
+                                Dim reg = New Regex("'.*?'")
+                                Dim matches = reg.Matches(test)
+                                Dim tableName = matches(0).ToString()
+                                Dim indexName = matches(1).ToString()
+                                reg = New Regex("\(.*?\)")
+                                matches = reg.Matches(test)
+                                Dim duplicateValue = matches(0).ToString()
+                                Dim variables =
+                                        {"tableName", tableName, "indexName", indexName, "duplicateValue",
+                                         duplicateValue}
+                                Messaging.Show(True, "MsgDuplicateKeyValueViolation",
+                                               "Cannot insert duplicate key row in object {tableName} with unique index {indexName}. The duplicate key value is {duplicateValue}!",
+                                               "Unique Key Violation", variables, MessageBoxButtons.OK,
+                                               MessageBoxIcon.Error, MessageBoxDefaultButton.Button1)
+                                retValue = -2  '' to indicate Unique Key Violation for now.
+                            ElseIf ex.Number = 515 Then
+                                MessageBox.Show(ex.Message & " Record not added ")
+                                retValue = -1
+                            Else
+                                '_waitForm.Close()
+                                Select Case TryToCatchError(ex)
+                                    Case DialogResult.Cancel
+                                        retValue = -1
+                                        'Exit Do
+                                    Case DialogResult.Retry
+                                        tryAgain = True
+                                        '_waitForm.Show()
+                                    Case Else
+                                        retValue = -1
+                                        MessageBox.Show(ex.Message)
+                                        Throw
+                                End Select
+                            End If
+                        Catch ex As Exception
+                            '_waitForm.Close()
+                            Select Case TryToCatchError(ex)
+                                Case DialogResult.Cancel
+                                    retValue = -1
+                                    Exit Do
+                                Case DialogResult.Retry
+                                    tryAgain = True
+                                    '_waitForm.Show()
+                                Case Else
+                                    retValue = -1
+                                    MessageBox.Show(ex.Message)
+                                    'Throw
+                            End Select
+                        Finally
+                            '_waitForm.Close()
+                        End Try
+                        If Not tryAgain Then
+                            Exit Do
+                        End If
+                    End Using
+                Loop
+            End Using
+            Return 0
         End Function
 
         ' update an existing record
