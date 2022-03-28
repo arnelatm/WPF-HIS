@@ -31,7 +31,8 @@ Namespace PresentationLayer.Models
         Public Property UnitOfVolume As String
         Public Property UserId As String
         Public Property Volume As Double?
-
+        Public Property PrescriptionDrug as Boolean
+        Public Property RouteOfAdministration as String
     End Class
 
 End Namespace

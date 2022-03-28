@@ -26,6 +26,7 @@ Namespace PresentationLayer.Presenters
             CreateDataSource("DrugUnitOfVolume_View", "UnitOfVolume",{"UnitOfVolume"},"UnitOfVolume")
             CreateDataSource("DrugUnitOfStrength_View", "UnitOfStrength",{"UnitOfStrength"},"UnitOfStrength")
             CreateDataSource("DrugPackageType_View", "PackageType",{"PackageType"},"PackageType")
+            CreateDataSource("DrugRouteOfAdministration_View", "RouteOfAdministration",{"RouteOfAdministration"},"RouteOfAdministration")
         End Sub
 
         Private Sub OnBeforeSave() Handles MyBase.BeforeSave
