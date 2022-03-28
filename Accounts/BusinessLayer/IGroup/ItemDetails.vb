@@ -12,15 +12,13 @@ Namespace BusinessLayer
             ' establish business rules
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("ItemDetailsName"))
+                AddRule(New ValidateIfRequired("GenericName", "PrescriptionDrug", ValidationDataType.Boolean, ValidationOperator.Equal, True))
+                AddRule(New ValidateIfRequired("DosageForm", "PrescriptionDrug", ValidationDataType.Boolean, ValidationOperator.Equal, True))
+                AddRule(New ValidateIfRequired("PackageType", "PrescriptionDrug", ValidationDataType.Boolean, ValidationOperator.Equal, True))
+                AddRule(New ValidateIfRequired("PackageSize", "PrescriptionDrug", ValidationDataType.Boolean, ValidationOperator.Equal, True))
+                AddRule(New ValidateIfRequired("RouteOfAdministration", "PrescriptionDrug", ValidationDataType.Boolean, ValidationOperator.Equal, True))
                 'AddRule(New ValidateRequired("ItemDetailsCode"))
             End If
-            'Dim user As Object = New ExpandoObject()
-            'user.Add("IdNo", 0I)
-            'user.Add("Age",25)
-            'user.Add("Married",True)
-            'user.Name = "John Doe"
-            'user.Age = 42
-            'user.Code = {"a","b"}
 
         End Sub
 
@@ -46,7 +44,8 @@ Namespace BusinessLayer
         Public Property UnitOfVolume As String
         Public Property UserId As String
         Public Property Volume As Double?
-
+        Public Property PrescriptionDrug as Boolean
+        PUblic Property RouteOfAdministration as String
 
     End Class
 

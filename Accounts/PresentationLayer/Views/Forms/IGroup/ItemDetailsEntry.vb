@@ -222,6 +222,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property RouteOfAdministration As String Implements IItemDetailsView.RouteOfAdministration
+            Get
+                Return cboRouteOfAdministration.GetNullableValue(Of String)
+            End Get
+            Set(value As String)
+                cboRouteOfAdministration.SetValue(value)
+            End Set
+        End Property
+
         Public Property Volume As Double? Implements IItemDetailsView.Volume
             Get
                 If txtVolume.Text Is Nothing Then
@@ -231,11 +240,11 @@ Namespace PresentationLayer.Views.Forms
                 End If
             End Get
             Set
-                if value Is Nothing then
+                If Value Is Nothing Then
                     txtVolume.Text = ""
-                else
+                Else
                     txtVolume.Text = Value
-                End If                
+                End If
             End Set
         End Property
 
@@ -261,23 +270,63 @@ Namespace PresentationLayer.Views.Forms
                     txtPackageSize.Text = ""
                 Else
                     txtPackageSize.Text = Value
-                End If                
+                End If
+            End Set
+        End Property
+
+        Public Property PrescriptionDrug As Boolean Implements IItemDetailsView.PrescriptionDrug
+            Get
+                Return chkPrescriptionDrug.Checked
+            End Get
+            Set
+                chkPrescriptionDrug.Checked = Value
             End Set
         End Property
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {{"DosageForm", cboDosageForm},
+                {"GenericName", txtGenericName},
                 {"IdNo", TxtIdNo},
                 {"ItemDetailsCode", TxtItemDetailsCode},
                 {"ItemDetailsName", TxtItemDetailsName},
                 {"PackageSize", txtPackageSize},
                 {"PackageType", cboPackageType},
+                {"PrescriptionDrug", chkPrescriptionDrug},
+                {"RegistrationNo", txtRegistrationNo},
+                {"RouteOfAdministration", cboRouteOfAdministration},
                 {"StrengthValue", txtStrengthValue},
                 {"UnitOfStrength", cboUnitOfStrength},
                 {"UnitOfVolume", cboUnitOfVolume},
                 {"Volume", txtVolume}
                 }
+        End Sub
+
+        Protected Overrides Sub BeforeEdit()
+            If Strings.Left(RegistrationNo,1) <> "X" Then
+                cboDosageForm.DisplayOnly = True
+                txtGenericName.DisplayOnly = True
+                txtPackageSize.DisplayOnly = True
+                cboPackageType.DisplayOnly = True
+                txtRegistrationNo.DisplayOnly = True
+                cboRouteOfAdministration.DisplayOnly = True
+                txtStrengthValue.DisplayOnly = True
+                cboUnitOfStrength.DisplayOnly = True
+                cboUnitOfVolume.DisplayOnly = True
+                txtVolume.DisplayOnly = True
+            Else
+                cboDosageForm.DisplayOnly = False
+                txtGenericName.DisplayOnly = False
+                txtPackageSize.DisplayOnly = False
+                cboPackageType.DisplayOnly = False
+                txtRegistrationNo.DisplayOnly = False
+                cboRouteOfAdministration.DisplayOnly = False
+                txtStrengthValue.DisplayOnly = False
+                cboUnitOfStrength.DisplayOnly = False
+                cboUnitOfVolume.DisplayOnly = False
+                txtVolume.DisplayOnly = False
+            End If
+            Refresh()
         End Sub
 
 #End Region

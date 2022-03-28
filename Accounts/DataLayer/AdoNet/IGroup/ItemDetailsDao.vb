@@ -29,6 +29,7 @@ Namespace DataLayer.AdoNet
                                       "PackageType," &
                                       "Primary_Key," &
                                       "RegistrationNo," &
+                                      "RouteOfAdministration," &
                                       "SaleStrip," &
                                       "StrengthValue," &
                                       "UnitOfStrength," &
@@ -83,13 +84,13 @@ Namespace DataLayer.AdoNet
             retval = _db.Insert(sql, Take(ItemDetails))
             If retval > 0 Then
                 Dim sql2 = " INSERT INTO DrugList " &
-                    " ([RegistrationNo],[Generic Name],[Trade Name],[Strength Value],[Unit Of Strength],[Dosage Form],[Volume],[Unit of Volume],[Package Size],[Package Type])" &
-                    " VALUES (@RegistrationNo,@GenericName,@TradeName,@StrengthValue,@UnitOfStrength,@DosageForm,@Volume,@UnitOfVolume,@PackageSize,@PackageType)"
+                    " ([RegistrationNo],[Generic Name],[Trade Name],[Route Of Administration],[Strength Value],[Unit Of Strength],[Dosage Form],[Volume],[Unit of Volume],[Package Size],[Package Type])" &
+                    " VALUES (@RegistrationNo,@GenericName,@TradeName,@RouteOfAdministration,@StrengthValue,@UnitOfStrength,@DosageForm,@Volume,@UnitOfVolume,@PackageSize,@PackageType)"
                 _db.InsertNoId(sql2, TakeDrug(ItemDetails))
                 Dim sql3 = " INSERT INTO ItemRegistration " &
-                    " ([Item_Code],[RegistrationNo],[Strength]" &
+                    " ([Item_Code],[RegistrationNo],[Strength])" &
                     " VALUES (@ItemDetailsCode,@RegistrationNo,@Strength)"
-                _db.InsertNoId(sql2, TakeRegistration(ItemDetails))
+                _db.InsertNoId(sql3, TakeRegistration(ItemDetails))
             End If
             Return retval
         End Function
@@ -113,6 +114,7 @@ Namespace DataLayer.AdoNet
             .PackageSize = Extensions.AsNullable(Of Decimal)(reader("PackageSize")),
             .PackageType = Extensions.AsString(reader("PackageType")),
             .RegistrationNo = Extensions.AsString(reader("RegistrationNo")),
+            .RouteOfAdministration = Extensions.AsString(reader("RouteOfAdministration")),
             .StrengthValue = Extensions.AsString(reader("StrengthValue")),
             .UnitOfStrength = Extensions.AsString(reader("UnitOfStrength")),
             .UnitOfVolume = Extensions.AsString(reader("UnitOfVolume")),
@@ -139,16 +141,10 @@ Namespace DataLayer.AdoNet
         End Function
 
         Private Function TakeDrug(ItemDetails As ItemDetails) As Object()
-            Return New Object() {"ItemDetailsCode", ItemDetails.ItemDetailsCode,
-                                 "RegistrationNo", IIf(ItemDetails.RegistrationNo Is Nothing Or ItemDetails.RegistrationNo = "", "X-" + ItemDetails.ItemDetailsCode, ItemDetails.RegistrationNo),
-                                 "Strength", IIf(ItemDetails.StrengthValue.Contains(","),ItemDetails.StrengthValue.Split(",")(0),Convert( ItemDetails.StrengthValue
-                                 }
-        End Function
-
-        Private Function TakeRegistration(ItemDetails As ItemDetails) As Object()
             Return New Object() {"RegistrationNo", IIf(ItemDetails.RegistrationNo Is Nothing Or ItemDetails.RegistrationNo = "", "X-" + ItemDetails.ItemDetailsCode, ItemDetails.RegistrationNo),
                                  "GenericName", ItemDetails.GenericName,
                                  "TradeName", ItemDetails.ItemDetailsName,
+                                 "RouteOfAdministration", ItemDetails.RouteOfAdministration,
                                  "StrengthValue", ItemDetails.StrengthValue,
                                  "UnitOfStrength", ItemDetails.UnitOfStrength,
                                  "DosageForm", ItemDetails.DosageForm,
@@ -159,6 +155,15 @@ Namespace DataLayer.AdoNet
                                  }
         End Function
 
+        Private Function TakeRegistration(ItemDetails As ItemDetails) As Object()
+            Dim number As Decimal = 0
+            Dim sStrength as String = Split(ItemDetails.StrengthValue, ",")(0)
+            Decimal.TryParse(sStrength, number) 
+            Return New Object() {"RegistrationNo", IIf(ItemDetails.RegistrationNo Is Nothing Or ItemDetails.RegistrationNo = "", "X-" + ItemDetails.ItemDetailsCode, ItemDetails.RegistrationNo),
+                                 "ItemDetailsCode", ItemDetails.ItemDetailsCode,
+                                 "Strength", number 
+                                 }
+        End Function
 
         Public Function GenerateCode(idNo As Integer) As String Implements IDaoAutoCode.GenerateCode
             Return GetNextCode("ItemDetails", idNo)
