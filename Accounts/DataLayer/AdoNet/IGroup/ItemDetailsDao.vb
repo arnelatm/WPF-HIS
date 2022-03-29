@@ -73,7 +73,27 @@ Namespace DataLayer.AdoNet
                     " Pack3 = @Pack3," &
                     " UserID = @UserId" &
                     " WHERE Primary_Key = @IdNo"
-            Return _db.Update(sql, Take(ItemDetails))
+            Dim retval as Integer
+            retval = _db.Update(sql, Take(ItemDetails))
+            if retVAL > 0 AND Strings.Left(itemdetails.RegistrationNo,1) = "X" THEN
+                Dim sql1 As String = "UPDATE [DrugList] SET " &
+                    " [Dosage Form] = @DosageForm," &
+                    " [Generic Name] = @GenericName," &
+                    " [Package Size] = @PackageSize," &
+                    " [Package Type] = @PackageType," &
+                    " [Route Of Administration] = @RouteOfAdministration," &
+                    " [Strength Value] = @StrengthValue," &
+                    " [Trade Name] = @ItemDetailsName," &
+                    " [Unit Of Strength] = @UnitOfStrength," &
+                    " [Unit Of Volume] = @UnitOfVolume," &
+                    " [Volume] = @Volume" &
+                    " WHERE RegistrationNo = @RegistrationNo"
+                _db.Update(sql1, TakeDrug(ItemDetails))
+               Dim sql3 = "UPDATE ItemRegistration SET " &
+                    " Strength = @Strength"
+                _db.Update(sql3, TakeRegistration(ItemDetails))
+            End If
+            return retval
         End Function
 
         Public Function AddRecord(ByRef ItemDetails As ItemDetails) As Integer Implements IDao(Of ItemDetails).AddRecord
@@ -141,17 +161,18 @@ Namespace DataLayer.AdoNet
         End Function
 
         Private Function TakeDrug(ItemDetails As ItemDetails) As Object()
-            Return New Object() {"RegistrationNo", IIf(ItemDetails.RegistrationNo Is Nothing Or ItemDetails.RegistrationNo = "", "X-" + ItemDetails.ItemDetailsCode, ItemDetails.RegistrationNo),
+            Return New Object() {
+                                 "DosageForm", ItemDetails.DosageForm,
                                  "GenericName", ItemDetails.GenericName,
-                                 "TradeName", ItemDetails.ItemDetailsName,
+                                 "ItemDetailsName", ItemDetails.ItemDetailsName,
+                                 "PackageSize", ItemDetails.PackageSize,
+                                 "PackageType", ItemDetails.PackageType,
+                                 "RegistrationNo", IIf(ItemDetails.RegistrationNo Is Nothing Or ItemDetails.RegistrationNo = "", "X-" + ItemDetails.ItemDetailsCode, ItemDetails.RegistrationNo),
                                  "RouteOfAdministration", ItemDetails.RouteOfAdministration,
                                  "StrengthValue", ItemDetails.StrengthValue,
                                  "UnitOfStrength", ItemDetails.UnitOfStrength,
-                                 "DosageForm", ItemDetails.DosageForm,
-                                 "Volume", ItemDetails.Volume,
                                  "UnitOfVolume", ItemDetails.UnitOfVolume,
-                                 "PackageSize", ItemDetails.PackageSize,
-                                 "PackageType", ItemDetails.PackageType
+                                 "Volume", ItemDetails.Volume
                                  }
         End Function
 
