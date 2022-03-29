@@ -1,0 +1,52 @@
+﻿
+CREATE VIEW 	ItemPurchaseOrder_View
+ 
+AS
+SELECT  a.Trans_Key,
+	a.BranchID,
+	a.TransType,
+	a.TransSeries,
+	a.TransNo,
+	a.TransDate,
+	a.HijriDate,
+	a.PurchaseFrom,
+	a.SupplierID,
+	a.CurrencyCode,
+	a.ConversionRate,
+	a.SalesmanID,
+	a.Remarks,
+	a.PostInPurchase,
+	a.PurchaseGrossAmt,
+	a.PurchaseCostAmt,
+	a.PurchaseSaleAmt,
+	a.EnteredBy,
+	a.CheckedBy,
+	a.ApprovedBy,
+	a.UserID,
+   	a.Create_Date,
+	a.MachineID,
+	b.SlNo,
+	b.Item_Code,
+	b.pack1,
+	b.pack2,
+	b.pack3,
+	b.UserQty,
+	b.BonusQty,
+	b.Unit,
+	b.TotalQty,
+	b.QtyInBox,
+	b.QtyInPcs,
+	b.Amount,
+	b.Discount,
+	b.Discount2,
+	b.PurchasePrice,
+	b.CostPrice,
+	b.SellingPrice,
+	c.ItemNameEnglish,
+	d.SupplierNameEnglish,
+	d.fax,
+	d.email
+From PurchaseOrderGroup A
+LEFT OUTER JOIN PurchaseOrderDetails B ON A.Trans_Key = B.Group_Key AND A.BranchID = B.BranchID
+LEFT OUTER JOIN ItemDetails C ON B.Item_Code = C.Item_Code AND A.BranchID = C.BranchID
+LEFT OUTER JOIN SupplierDetails D ON A.SupplierID = D.SupplierID 
