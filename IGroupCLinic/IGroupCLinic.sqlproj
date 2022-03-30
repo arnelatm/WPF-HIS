@@ -856,5 +856,9 @@
     <Build Include="dbo\Stored Procedures\uSpWSL_CLAIM_DIAGNOSIS.sql" />
     <Build Include="dbo\Stored Procedures\uSpWSL_GENINFO.sql" />
     <Build Include="dbo\Stored Procedures\uSpWSL_INVOICES.sql" />
+    <Build Include="dbo\Views\ItemInventoryAveCost_View.sql" />
+    <Build Include="dbo\Functions\BranchInventoryDate_Func.sql" />
+    <Build Include="dbo\Functions\AveInventoryDate_Func.sql" />
+    <Build Include="dbo\Functions\AveInventoryData_Func.sql" />
   </ItemGroup>
 </Project>

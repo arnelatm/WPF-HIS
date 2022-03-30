@@ -836,6 +836,9 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private Sub DataGridViewJournalItems_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellContentClick
+
+        End Sub
     End Class
 
 End Namespace

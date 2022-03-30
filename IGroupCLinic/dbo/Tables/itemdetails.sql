@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[itemdetails] (
+﻿CREATE TABLE [dbo].[ItemDetails] (
     [BranchID]             VARCHAR (15)   NOT NULL,
     [Primary_Key]          INT            IDENTITY (1, 1) NOT NULL,
     [itemid]               VARCHAR (4)    NULL,
@@ -33,8 +33,8 @@
     [Pack1]                NUMERIC (2)    NULL,
     [Pack2]                NUMERIC (3)    NULL,
     [Pack3]                NUMERIC (4)    NULL,
-    [SaleStrip]            CHAR (1)       NULL,
-    [SalePcs]              CHAR (1)       NULL,
+    [SaleStrip]            CHAR (1)       DEFAULT ('Y') NULL,
+    [SalePcs]              CHAR (1)       DEFAULT ('N') NULL,
     [Reporting_Dept]       VARCHAR (10)   NULL,
     [Acct_Dept]            VARCHAR (10)   NULL,
     [Price_Cost]           NUMERIC (7, 2) NULL,
@@ -45,7 +45,7 @@
     [Discount_Credit]      NUMERIC (7, 2) NULL,
     [Price_Staff]          NUMERIC (7, 2) NULL,
     [Discount_Staff]       NUMERIC (7, 2) NULL,
-    [Credit_Patient_Allow] CHAR (1)       NULL,
+    [Credit_Patient_Allow] CHAR (1)       DEFAULT ('Y') NULL,
     [RO_Qty]               NUMERIC (7)    NULL,
     [Max_Qty]              NUMERIC (7)    NULL,
     [Min_Qty]              NUMERIC (7)    NULL,
@@ -59,12 +59,19 @@
     [Blocked_Reason]       VARCHAR (50)   NULL,
     [Blocked_DateUpto]     VARCHAR (10)   NULL,
     [Remarks]              VARCHAR (100)  NULL,
-    [Create_date]          DATETIME       NULL,
+    [Create_date]          DATETIME       DEFAULT (getdate()) NULL,
     [UserId]               VARCHAR (15)   NULL,
-    [MachineId]            VARCHAR (20)   NULL,
+    [MachineId]            VARCHAR (20)   DEFAULT (host_name()) NULL,
     [Created_By_Branch]    VARCHAR (15)   NOT NULL,
-    [VATApplicable]        INT            NULL,
-    [VatPercent]           NUMERIC (5, 2) NULL,
-    [DateTimeStamp]        ROWVERSION     NULL
+    [VATApplicable]        INT            DEFAULT ((0)) NULL,
+    [VatPercent]           NUMERIC (5, 2) DEFAULT ((0)) NULL,
+    PRIMARY KEY CLUSTERED ([Primary_Key] ASC)
 );
+
+
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IDX_ItemDetails]
+    ON [dbo].[ItemDetails]([Item_Code] ASC, [BranchID] ASC);
 
