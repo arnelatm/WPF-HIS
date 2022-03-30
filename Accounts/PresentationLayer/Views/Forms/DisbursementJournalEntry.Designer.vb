@@ -55,7 +55,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPayType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+        Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
         Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
         Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
         Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
@@ -1989,7 +1989,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'btnPrintCheck
         '
-        Me.btnPrintCheck.DesignerSelected = true
+        Me.btnPrintCheck.DesignerSelected = false
         Me.btnPrintCheck.ImageIndex = 0
         Me.btnPrintCheck.Location = New System.Drawing.Point(288, 3)
         Me.btnPrintCheck.Name = "btnPrintCheck"
@@ -2176,23 +2176,6 @@ End Sub
         Friend WithEvents lblCdJournalIdNo As CLabel
         Friend WithEvents txtCdJournalIdNo As CTextBox
         Friend WithEvents btnPrintPcReplenishment As CButton
-        Friend WithEvents dgvSequence As CDgvTextColumn
-        Friend WithEvents dgvAccountIdNo As CDgvComboBoxColumn
-        Friend WithEvents dgvDebit As CdgvMoneyColumn
-        Friend WithEvents dgvCredit As CdgvMoneyColumn
-        Friend WithEvents dgvRevCostCenterIdNo As CDgvComboBoxColumn
-        Friend WithEvents dgvNotes As CDgvTextColumn
-        Friend WithEvents DiscountTakenDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents JournalIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents OpenInvoiceIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents OriginalAmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents PaidAmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents dgvVatAmount As CdgvMoneyColumn
-        Friend WithEvents dgvPayeeType As DataGridViewTextBoxColumn
-        Friend WithEvents dgvSpecialAccount As CDgvTextColumn
-        Friend WithEvents AccountNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents CancelledDataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
         Friend WithEvents chkPcClosed As UcCheckBox
         Friend WithEvents chkPosted As UcCheckBox
         Friend WithEvents chkApproved As UcCheckBox
@@ -2210,5 +2193,22 @@ End Sub
         Friend WithEvents dgvDiscountTaken As CdgvMoneyColumn
         Friend WithEvents dgvBalance As CdgvMoneyColumn
         Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
+        Friend WithEvents dgvSequence As CDgvTextColumn
+        Friend WithEvents dgvAccountIdNo As CaDgvComboBoxColumn
+        Friend WithEvents dgvDebit As CdgvMoneyColumn
+        Friend WithEvents dgvCredit As CdgvMoneyColumn
+        Friend WithEvents dgvRevCostCenterIdNo As CDgvComboBoxColumn
+        Friend WithEvents dgvNotes As CDgvTextColumn
+        Friend WithEvents DiscountTakenDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents JournalIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents OpenInvoiceIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents OriginalAmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents PaidAmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents dgvVatAmount As CdgvMoneyColumn
+        Friend WithEvents dgvPayeeType As DataGridViewTextBoxColumn
+        Friend WithEvents dgvSpecialAccount As CDgvTextColumn
+        Friend WithEvents AccountNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents CancelledDataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
     End Class
 End Namespace

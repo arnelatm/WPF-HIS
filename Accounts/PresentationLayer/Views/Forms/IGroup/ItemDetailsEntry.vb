@@ -303,30 +303,33 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overrides Sub BeforeEdit()
-            If Strings.Left(RegistrationNo,1) <> "X" Then
-                cboDosageForm.DisplayOnly = True
-                txtGenericName.DisplayOnly = True
-                txtPackageSize.DisplayOnly = True
-                cboPackageType.DisplayOnly = True
-                txtRegistrationNo.DisplayOnly = True
-                cboRouteOfAdministration.DisplayOnly = True
-                txtStrengthValue.DisplayOnly = True
-                cboUnitOfStrength.DisplayOnly = True
-                cboUnitOfVolume.DisplayOnly = True
-                txtVolume.DisplayOnly = True
+            If Strings.Left(RegistrationNo, 1) <> "X" Then
+                SetDisplayOnly(True)
             Else
-                cboDosageForm.DisplayOnly = False
-                txtGenericName.DisplayOnly = False
-                txtPackageSize.DisplayOnly = False
-                cboPackageType.DisplayOnly = False
-                txtRegistrationNo.DisplayOnly = False
-                cboRouteOfAdministration.DisplayOnly = False
-                txtStrengthValue.DisplayOnly = False
-                cboUnitOfStrength.DisplayOnly = False
-                cboUnitOfVolume.DisplayOnly = False
-                txtVolume.DisplayOnly = False
+                SetDisplayOnly(False)
             End If
             Refresh()
+        End Sub
+
+        Private Sub SetDisplayOnly(value As Boolean)
+            cboDosageForm.DisplayOnly = value
+            txtGenericName.DisplayOnly = value
+            txtPackageSize.DisplayOnly = value
+            cboPackageType.DisplayOnly = value
+            txtRegistrationNo.DisplayOnly = value
+            cboRouteOfAdministration.DisplayOnly = value
+            txtStrengthValue.DisplayOnly = value
+            cboUnitOfStrength.DisplayOnly = value
+            cboUnitOfVolume.DisplayOnly = value
+            txtVolume.DisplayOnly = value
+        End Sub
+
+        Private Sub chkPrescriptionDrug_CheckedChanged(sender As Object, e As EventArgs) Handles chkPrescriptionDrug.CheckedChanged
+            If chkPrescriptionDrug.Checked Then
+                SetDisplayOnly(False)
+            Else
+                SetDisplayOnly(True)
+            End If
         End Sub
 
 #End Region
