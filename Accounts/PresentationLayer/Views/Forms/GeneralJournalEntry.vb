@@ -192,13 +192,10 @@ Namespace PresentationLayer.Views.Forms
                 dgvAccountIdNo.DataSource = _AccountsByCode
                 dgvAccountIdNo.DisplayMember = "Name"
                 dgvAccountIdNo.ValueMember = "IdNo"
-                dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvAccountIdNo.AutoComplete = True
                 dgvRevCostCenterIdNo.DataSource = RevCostCentersByCode
                 dgvRevCostCenterIdNo.DisplayMember = "Name"
                 dgvRevCostCenterIdNo.ValueMember = "idNo"
-                dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
             End With
             'ResumeLayout()

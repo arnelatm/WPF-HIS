@@ -169,9 +169,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvRevCostCenterIdNo.DataSource = RevCostCentersByCode
                 dgvRevCostCenterIdNo.DisplayMember = "Name"
                 dgvRevCostCenterIdNo.ValueMember = "idNo"
-                dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvRevCostCenterIdNo.AutoComplete = True
             End With
         End Sub
 

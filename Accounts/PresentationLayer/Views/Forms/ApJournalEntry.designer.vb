@@ -161,6 +161,7 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewJournalItems.FirstRowDeletionEnabled = false
         Me.DataGridViewJournalItems.FirstRowInsertionEnabled = false
         Me.DataGridViewJournalItems.IgnoreCase = false
+        Me.DataGridViewJournalItems.IsDirty = false
         Me.DataGridViewJournalItems.Location = New System.Drawing.Point(3, 3)
         Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
         Me.DataGridViewJournalItems.ReadOnly = true
@@ -200,6 +201,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'dgvAccountIdNo
         '
+        Me.dgvAccountIdNo.AutoComplete = false
         Me.dgvAccountIdNo.DataPropertyName = "AccountIdNo"
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
@@ -263,6 +265,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'dgvRevCostCenterIdNo
         '
+        Me.dgvRevCostCenterIdNo.AutoComplete = false
         Me.dgvRevCostCenterIdNo.DataPropertyName = "RevCostCenterIdNo"
         DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
@@ -623,6 +626,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboSupplierIdNo.BegFindValue = Nothing
         Me.cboSupplierIdNo.ChangingSearchValueOnly = false
         Me.cboSupplierIdNo.CurrentSearchTerm = ""
+        Me.cboSupplierIdNo.DataValue = Nothing
         Me.cboSupplierIdNo.DefaultValue = Nothing
         Me.cboSupplierIdNo.DisplayMember = "Name"
         Me.cboSupplierIdNo.EditingMode = true
@@ -682,6 +686,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboTransactionType.BegFindValue = Nothing
         Me.cboTransactionType.ChangingSearchValueOnly = false
         Me.cboTransactionType.CurrentSearchTerm = ""
+        Me.cboTransactionType.DataValue = Nothing
         Me.cboTransactionType.DefaultValue = "0"
         Me.cboTransactionType.DisplayMember = "Name"
         Me.cboTransactionType.EditingMode = false
@@ -915,6 +920,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAccountIdNo.BegFindValue = Nothing
         Me.cboAccountIdNo.ChangingSearchValueOnly = false
         Me.cboAccountIdNo.CurrentSearchTerm = ""
+        Me.cboAccountIdNo.DataValue = Nothing
         Me.cboAccountIdNo.DefaultValue = ""
         Me.cboAccountIdNo.DisplayMember = "Name"
         Me.cboAccountIdNo.EditingMode = false
@@ -1476,6 +1482,14 @@ End Sub
         Friend WithEvents CLabel2 As CLabel
         Friend WithEvents BalanceDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents cboSupplierIdNo As CaComboBox
+        Friend WithEvents txtDateCreated As CTextBox
+        Friend WithEvents chkApproved As UcCheckBox
+        Friend WithEvents chkCancelled As UcCheckBox
+        Friend WithEvents chkPosted As UcCheckBox
+        Friend WithEvents txtTotalCredits As CTextBox
+        Friend WithEvents txtTotalDebits As CTextBox
+        Friend WithEvents txtVatAmount As CTextBox
         Friend WithEvents dgvSequence As CDgvTextColumn
         Friend WithEvents dgvAccountIdNo As CDgvComboBoxColumn
         Friend WithEvents dgvDebit As CdgvMoneyColumn
@@ -1490,16 +1504,8 @@ End Sub
         Friend WithEvents PayeeTypeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents dgvPaidAmount As DataGridViewTextBoxColumn
         Friend WithEvents dgvDiscountTaken As DataGridViewTextBoxColumn
-        Friend WithEvents ItemVatAmount As DataGridViewTextBoxColumn
         Friend WithEvents OpenInvoiceIdNo As DataGridViewTextBoxColumn
         Friend WithEvents dgvSpecialAccount As DataGridViewTextBoxColumn
-        Friend WithEvents cboSupplierIdNo As CaComboBox
-        Friend WithEvents txtDateCreated As CTextBox
-        Friend WithEvents chkApproved As UcCheckBox
-        Friend WithEvents chkCancelled As UcCheckBox
-        Friend WithEvents chkPosted As UcCheckBox
-        Friend WithEvents txtTotalCredits As CTextBox
-        Friend WithEvents txtTotalDebits As CTextBox
-        Friend WithEvents txtVatAmount As CTextBox
+        Friend WithEvents ItemVatAmount As DataGridViewTextBoxColumn
     End Class
 End NameSpace

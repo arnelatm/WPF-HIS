@@ -13,7 +13,7 @@ Public Class CDgvComboBoxColumn
     Public Sub New()
         '' Specify the column to use your custom cell class...
         CellTemplate = New CDgvComboBoxCell()
-
+        AutoComplete = False
     End Sub
 
     Public Overrides Property CellTemplate() As DataGridViewCell
@@ -32,12 +32,6 @@ Public Class CDgvComboBoxColumn
 
         End Set
     End Property
-
-    'Public Overrides Function Clone() As Object
-    '    MyBase.Clone()
-    '    Dim copy As EcbComboBoxCell = TryCast(MyBase.Clone(), EcbComboBoxCell)
-    '    Return copy
-    'End Function
 
     <Bindable(True)>
     <Category("Custom Properties")>

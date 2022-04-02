@@ -96,18 +96,8 @@
     </Compile>
     <Compile Include="BlendItemsConverter.vb" />
     <Compile Include="BlendTypeEditor.vb" />
-    <Compile Include="CaDgvComboBox.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="CaDgvComboBoxCell.vb" />
-    <Compile Include="CdDgvComboBoxColumn.vb" />
-    <Compile Include="CaDgvComboBoxColumn.vb" />
     <Compile Include="cBlendItems.vb" />
     <Compile Include="cblPointer.vb" />
-    <Compile Include="CdDgvComboBoxCell.vb" />
-    <Compile Include="CdDgvComboBoxEditingControl.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="CPictureBox.Designer.vb">
       <DependentUpon>CPictureBox.vb</DependentUpon>
     </Compile>
@@ -323,8 +313,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CustomComboBox.vb" />
-    <Compile Include="DataGridViewCaComboBoxCell.vb" />
-    <Compile Include="DataGridViewExtensions.vb" />
     <Compile Include="dgvfooter.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -345,11 +333,6 @@
     </Compile>
     <Compile Include="DropDowngTimeEditor.vb">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="EcbComboBoxCell.vb" />
-    <Compile Include="EcbComboBoxColumn.vb" />
-    <Compile Include="EcbComboBoxEditingControl.vb">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ErrorProviderExendedOrig.vb" />
     <Compile Include="ErrorProviderExtended.vb">
@@ -493,9 +476,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BFGregorianCalendar.resx">
       <DependentUpon>BFGregorianCalendar.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CaDgvComboBox.resx">
-      <DependentUpon>CaDgvComboBox.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CPictureBox.resx">
       <DependentUpon>CPictureBox.vb</DependentUpon>

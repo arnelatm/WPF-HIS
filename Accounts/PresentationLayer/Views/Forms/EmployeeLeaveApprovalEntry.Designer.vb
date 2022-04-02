@@ -47,7 +47,7 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.bsEmployeeLeave = New System.Windows.Forms.BindingSource(Me.components)
         Me.dgvEmployeeLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvDateCreated = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+        Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         Me.dgvFullDay = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
         Me.dgvStartDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvEndDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -593,7 +593,7 @@ End Sub
     Friend WithEvents DataGridViewEmployeeLeave As Libraries.CBaseControlsLibrary.CDataGridView
     Friend WithEvents dgvEmployeeLeaveIdNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
     Friend WithEvents dgvDateCreated As Libraries.CBaseControlsLibrary.CDgvTextColumn
-    Friend WithEvents dgvEmployeeIdNo As Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn
+    Friend WithEvents dgvEmployeeIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
     Friend WithEvents dgvFullDay As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
     Friend WithEvents dgvStartDate As Libraries.CBaseControlsLibrary.CDgvTextColumn
     Friend WithEvents dgvEndDate As Libraries.CBaseControlsLibrary.CDgvTextColumn

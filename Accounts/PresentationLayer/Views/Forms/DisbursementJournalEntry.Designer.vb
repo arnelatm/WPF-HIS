@@ -116,10 +116,10 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsDjOiItems = New System.Windows.Forms.BindingSource(Me.components)
         Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaDgvComboBoxColumn()
+        Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
         Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-        Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CdDgvComboBoxColumn()
+        Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.DiscountTakenDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -1866,7 +1866,6 @@ Namespace PresentationLayer.Views.Forms
         '
         'dgvAccountIdNo
         '
-        Me.dgvAccountIdNo.AutoComplete = false
         Me.dgvAccountIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.dgvAccountIdNo.DataPropertyName = "AccountIdNo"
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
@@ -1932,7 +1931,6 @@ Namespace PresentationLayer.Views.Forms
         '
         'dgvRevCostCenterIdNo
         '
-        Me.dgvRevCostCenterIdNo.AutoComplete = false
         Me.dgvRevCostCenterIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
         Me.dgvRevCostCenterIdNo.DataPropertyName = "RevCostCenterIdNo"
         DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
@@ -2196,10 +2194,10 @@ End Sub
         Friend WithEvents dgvBalance As CdgvMoneyColumn
         Friend WithEvents DataGridViewTextBoxColumn6 As DataGridViewTextBoxColumn
         Friend WithEvents dgvSequence As CDgvTextColumn
-        Friend WithEvents dgvAccountIdNo As CaDgvComboBoxColumn
+        Friend WithEvents dgvAccountIdNo As CDgvComboBoxColumn
         Friend WithEvents dgvDebit As CdgvMoneyColumn
         Friend WithEvents dgvCredit As CdgvMoneyColumn
-        Friend WithEvents dgvRevCostCenterIdNo As CdDgvComboBoxColumn
+        Friend WithEvents dgvRevCostCenterIdNo As CDgvComboBoxColumn
         Friend WithEvents dgvNotes As CDgvTextColumn
         Friend WithEvents DiscountTakenDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn

@@ -233,13 +233,10 @@ Namespace PresentationLayer.Views.Forms
                     dgvAccountIdNo.DataSource = AccountsByCode
                     dgvAccountIdNo.DisplayMember = "Name"
                     dgvAccountIdNo.ValueMember = "IdNo"
-                    dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                     dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
-                    dgvAccountIdNo.AutoComplete = True
                     dgvRevCostCenterIdNo.DataSource = RevCostCentersByCode
                     dgvRevCostCenterIdNo.DisplayMember = "Name"
                     dgvRevCostCenterIdNo.ValueMember = "idNo"
-                    dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                     dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
                 End If
             End With
@@ -263,9 +260,7 @@ Namespace PresentationLayer.Views.Forms
                     dgvDepositTypeIdNo.DataSource = DepositTypesByCode
                     dgvDepositTypeIdNo.DisplayMember = "Name"
                     dgvDepositTypeIdNo.ValueMember = "IdNo"
-                    dgvDepositTypeIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                     dgvDepositTypeIdNo.DisplayStyleForCurrentCellOnly = True
-                    dgvDepositTypeIdNo.AutoComplete = True
                     dgvComputedBankCharge.DisplayOnly = True
                     dgvComputedVat.DisplayOnly = True
                     dgvRate.DisplayOnly = True
