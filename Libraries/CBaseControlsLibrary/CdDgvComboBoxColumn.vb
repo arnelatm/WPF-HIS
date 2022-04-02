@@ -2,7 +2,7 @@
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
-Public Class CaDgvComboBoxColumn
+Public Class CdDgvComboBoxColumn
     Inherits DataGridViewComboBoxColumn
     Implements IEntryControl
 

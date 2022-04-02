@@ -100,9 +100,14 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CaDgvComboBoxCell.vb" />
+    <Compile Include="CdDgvComboBoxColumn.vb" />
     <Compile Include="CaDgvComboBoxColumn.vb" />
     <Compile Include="cBlendItems.vb" />
     <Compile Include="cblPointer.vb" />
+    <Compile Include="CdDgvComboBoxCell.vb" />
+    <Compile Include="CdDgvComboBoxEditingControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CPictureBox.Designer.vb">
       <DependentUpon>CPictureBox.vb</DependentUpon>
     </Compile>
