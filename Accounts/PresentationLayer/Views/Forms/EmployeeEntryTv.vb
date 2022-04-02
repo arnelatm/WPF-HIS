@@ -532,7 +532,6 @@ Namespace PresentationLayer.Views.Forms
                 dgvDeductionIdNo.DataSource = DeductionsByName
                 dgvDeductionIdNo.DisplayMember = "Name"
                 dgvDeductionIdNo.ValueMember = "IdNo"
-                dgvDeductionIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvDeductionIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvDeductionUnit.DataSource = Unit
                 dgvDeductionUnit.ValueMember = "Code"
@@ -559,7 +558,6 @@ Namespace PresentationLayer.Views.Forms
                 dgvEarningIdNo.DataSource = EarningsByName
                 dgvEarningIdNo.DisplayMember = "Name"
                 dgvEarningIdNo.ValueMember = "IdNo"
-                dgvEarningIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvEarningIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvEarningUnit.DataSource = Unit
                 dgvEarningUnit.ValueMember = "Code"
@@ -588,12 +586,10 @@ Namespace PresentationLayer.Views.Forms
                 dgvPhoneTypeIdNo.DataSource = PhoneTypes
                 dgvPhoneTypeIdNo.DisplayMember = "Name"
                 dgvPhoneTypeIdNo.ValueMember = "IdNo"
-                dgvPhoneTypeIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvCountryTelIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvCountryTelIdNo.DataSource = CountryTelCodes
                 dgvCountryTelIdNo.DisplayMember = "Name"
                 dgvCountryTelIdNo.ValueMember = "IdNo"
-                dgvCountryTelIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvCountryTelIdNo.DisplayStyleForCurrentCellOnly = True
             End With
             If GlobalVariables.RightToLeftLayout Then
@@ -622,7 +618,6 @@ Namespace PresentationLayer.Views.Forms
                 dgvLeaveIdNo.DataSource = Leaves
                 dgvLeaveIdNo.DisplayMember = "Name"
                 dgvLeaveIdNo.ValueMember = "IdNo"
-                dgvLeaveIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
             End With
         End Sub
 

@@ -502,15 +502,11 @@ Namespace PresentationLayer.Views.Forms
                 dgvAccountIdNo.DataSource = AccountsByCode
                 dgvAccountIdNo.DisplayMember = "Name"
                 dgvAccountIdNo.ValueMember = "IdNo"
-                'dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
-                'dgvAccountIdNo.AutoComplete = True
                 dgvRevCostCenterIdNo.DataSource = RevCostCentersByCode
                 dgvRevCostCenterIdNo.DisplayMember = "Name"
                 dgvRevCostCenterIdNo.ValueMember = "idNo"
-                'dgvRevCostCenterIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
-                'dgvRevCostCenterIdNo.AutoComplete = True
             End With
             ResumeLayout()
         End Sub

@@ -28,31 +28,15 @@ Namespace PresentationLayer.Views.Forms
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ArJournalEntry))
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ArJournalEntry))
         Me.floArJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
-        Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-        Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-        Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
-        Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvPaidAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dgvDiscountTaken = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CancelledDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.dgvIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.JournalIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.OriginalAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PayeeTypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SpecialAccountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
         Me.floArJournalHeader = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -94,6 +78,22 @@ Namespace PresentationLayer.Views.Forms
         Me.floFullEntryArea = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.txtTotalDebits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+        Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+        Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+        Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+        Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.dgvPaidAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dgvDiscountTaken = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CancelledDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.dgvIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.JournalIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OriginalAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PayeeTypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SpecialAccountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         LocalizableContent1 = New AATM.Libraries.LocalizationUtilities.LocalizableContent()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floArJournalItems.SuspendLayout
@@ -149,6 +149,7 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewJournalItems.FirstRowDeletionEnabled = false
         Me.DataGridViewJournalItems.FirstRowInsertionEnabled = false
         Me.DataGridViewJournalItems.IgnoreCase = false
+        Me.DataGridViewJournalItems.IsDirty = false
         Me.DataGridViewJournalItems.Location = New System.Drawing.Point(3, 3)
         Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
         Me.DataGridViewJournalItems.ReadOnly = true
@@ -161,209 +162,6 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewJournalItems.Size = New System.Drawing.Size(1015, 280)
         Me.DataGridViewJournalItems.TabIndex = 0
         Me.DataGridViewJournalItems.Translatable = true
-        '
-        'dgvSequence
-        '
-        Me.dgvSequence.BegFindValue = Nothing
-        Me.dgvSequence.DataPropertyName = "Sequence"
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-        Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
-        Me.dgvSequence.DisplayOnly = true
-        Me.dgvSequence.EditingMode = false
-        Me.dgvSequence.EndFindValue = Nothing
-        Me.dgvSequence.FieldDescription = Nothing
-        Me.dgvSequence.FieldName = Nothing
-        Me.dgvSequence.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.dgvSequence.FindEnabled = false
-        Me.dgvSequence.HeaderText = "Seq."
-        Me.dgvSequence.IgnoreCase = false
-        Me.dgvSequence.Name = "dgvSequence"
-        Me.dgvSequence.ReadOnly = true
-        Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvSequence.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.dgvSequence.Translatable = false
-        Me.dgvSequence.Width = 40
-        '
-        'dgvAccountIdNo
-        '
-        Me.dgvAccountIdNo.DataPropertyName = "AccountIdNo"
-        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-        Me.dgvAccountIdNo.DefaultCellStyle = DataGridViewCellStyle3
-        Me.dgvAccountIdNo.DisplayStyleForCurrentCellOnly = true
-        Me.dgvAccountIdNo.EditingMode = false
-        Me.dgvAccountIdNo.HeaderText = "Account Code-Name"
-        Me.dgvAccountIdNo.Name = "dgvAccountIdNo"
-        Me.dgvAccountIdNo.ReadOnly = true
-        Me.dgvAccountIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvAccountIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.dgvAccountIdNo.Translatable = false
-        Me.dgvAccountIdNo.Width = 200
-        '
-        'dgvDebit
-        '
-        Me.dgvDebit.BegFindValue = Nothing
-        Me.dgvDebit.DataPropertyName = "Debit"
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle4.Format = "###,##0.00"
-        Me.dgvDebit.DefaultCellStyle = DataGridViewCellStyle4
-        Me.dgvDebit.EditingMode = false
-        Me.dgvDebit.EndFindValue = Nothing
-        Me.dgvDebit.FieldDescription = Nothing
-        Me.dgvDebit.FieldName = Nothing
-        Me.dgvDebit.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.dgvDebit.FindEnabled = false
-        Me.dgvDebit.HeaderText = "Debit"
-        Me.dgvDebit.Name = "dgvDebit"
-        Me.dgvDebit.ReadOnly = true
-        Me.dgvDebit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvDebit.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.dgvDebit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.dgvDebit.Translatable = false
-        '
-        'dgvCredit
-        '
-        Me.dgvCredit.BegFindValue = Nothing
-        Me.dgvCredit.DataPropertyName = "Credit"
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle5.Format = "###,##0.00"
-        Me.dgvCredit.DefaultCellStyle = DataGridViewCellStyle5
-        Me.dgvCredit.EditingMode = false
-        Me.dgvCredit.EndFindValue = Nothing
-        Me.dgvCredit.FieldDescription = Nothing
-        Me.dgvCredit.FieldName = Nothing
-        Me.dgvCredit.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.dgvCredit.FindEnabled = false
-        Me.dgvCredit.HeaderText = "Credit"
-        Me.dgvCredit.Name = "dgvCredit"
-        Me.dgvCredit.ReadOnly = true
-        Me.dgvCredit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvCredit.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.dgvCredit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.dgvCredit.Translatable = false
-        '
-        'dgvRevCostCenterIdNo
-        '
-        Me.dgvRevCostCenterIdNo.DataPropertyName = "RevCostCenterIdNo"
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-        Me.dgvRevCostCenterIdNo.DefaultCellStyle = DataGridViewCellStyle6
-        Me.dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = true
-        Me.dgvRevCostCenterIdNo.EditingMode = false
-        Me.dgvRevCostCenterIdNo.HeaderText = "Revenue/Cost Center Code-Name"
-        Me.dgvRevCostCenterIdNo.Name = "dgvRevCostCenterIdNo"
-        Me.dgvRevCostCenterIdNo.ReadOnly = true
-        Me.dgvRevCostCenterIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvRevCostCenterIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.dgvRevCostCenterIdNo.Translatable = false
-        Me.dgvRevCostCenterIdNo.Width = 200
-        '
-        'dgvNotes
-        '
-        Me.dgvNotes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.dgvNotes.BegFindValue = Nothing
-        Me.dgvNotes.DataPropertyName = "Notes"
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
-        Me.dgvNotes.DefaultCellStyle = DataGridViewCellStyle7
-        Me.dgvNotes.EditingMode = false
-        Me.dgvNotes.EndFindValue = Nothing
-        Me.dgvNotes.FieldDescription = Nothing
-        Me.dgvNotes.FieldName = Nothing
-        Me.dgvNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.dgvNotes.FindEnabled = false
-        Me.dgvNotes.HeaderText = "Notes"
-        Me.dgvNotes.IgnoreCase = false
-        Me.dgvNotes.Name = "dgvNotes"
-        Me.dgvNotes.ReadOnly = true
-        Me.dgvNotes.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.dgvNotes.Translatable = false
-        '
-        'dgvPaidAmount
-        '
-        Me.dgvPaidAmount.DataPropertyName = "PaidAmount"
-        Me.dgvPaidAmount.HeaderText = "PaidAmount"
-        Me.dgvPaidAmount.Name = "dgvPaidAmount"
-        Me.dgvPaidAmount.ReadOnly = true
-        Me.dgvPaidAmount.Visible = false
-        '
-        'dgvDiscountTaken
-        '
-        Me.dgvDiscountTaken.DataPropertyName = "DiscountTaken"
-        Me.dgvDiscountTaken.HeaderText = "DiscountTaken"
-        Me.dgvDiscountTaken.Name = "dgvDiscountTaken"
-        Me.dgvDiscountTaken.ReadOnly = true
-        Me.dgvDiscountTaken.Visible = false
-        '
-        'AccountNameDataGridViewTextBoxColumn
-        '
-        Me.AccountNameDataGridViewTextBoxColumn.DataPropertyName = "AccountName"
-        Me.AccountNameDataGridViewTextBoxColumn.HeaderText = "AccountName"
-        Me.AccountNameDataGridViewTextBoxColumn.Name = "AccountNameDataGridViewTextBoxColumn"
-        Me.AccountNameDataGridViewTextBoxColumn.ReadOnly = true
-        Me.AccountNameDataGridViewTextBoxColumn.Visible = false
-        '
-        'CancelledDataGridViewCheckBoxColumn
-        '
-        Me.CancelledDataGridViewCheckBoxColumn.DataPropertyName = "Cancelled"
-        Me.CancelledDataGridViewCheckBoxColumn.HeaderText = "Cancelled"
-        Me.CancelledDataGridViewCheckBoxColumn.Name = "CancelledDataGridViewCheckBoxColumn"
-        Me.CancelledDataGridViewCheckBoxColumn.ReadOnly = true
-        Me.CancelledDataGridViewCheckBoxColumn.Visible = false
-        '
-        'dgvIdNo
-        '
-        Me.dgvIdNo.DataPropertyName = "IdNo"
-        Me.dgvIdNo.HeaderText = "IdNo"
-        Me.dgvIdNo.Name = "dgvIdNo"
-        Me.dgvIdNo.ReadOnly = true
-        Me.dgvIdNo.Visible = false
-        '
-        'JournalIdNoDataGridViewTextBoxColumn
-        '
-        Me.JournalIdNoDataGridViewTextBoxColumn.DataPropertyName = "JournalIdNo"
-        Me.JournalIdNoDataGridViewTextBoxColumn.HeaderText = "JournalIdNo"
-        Me.JournalIdNoDataGridViewTextBoxColumn.Name = "JournalIdNoDataGridViewTextBoxColumn"
-        Me.JournalIdNoDataGridViewTextBoxColumn.ReadOnly = true
-        Me.JournalIdNoDataGridViewTextBoxColumn.Visible = false
-        '
-        'OpenInvoiceIdNoDataGridViewTextBoxColumn
-        '
-        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.DataPropertyName = "OpenInvoiceIdNo"
-        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.HeaderText = "OpenInvoiceIdNo"
-        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.Name = "OpenInvoiceIdNoDataGridViewTextBoxColumn"
-        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.ReadOnly = true
-        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.Visible = false
-        '
-        'OriginalAmountDataGridViewTextBoxColumn
-        '
-        Me.OriginalAmountDataGridViewTextBoxColumn.DataPropertyName = "OriginalAmount"
-        Me.OriginalAmountDataGridViewTextBoxColumn.HeaderText = "OriginalAmount"
-        Me.OriginalAmountDataGridViewTextBoxColumn.Name = "OriginalAmountDataGridViewTextBoxColumn"
-        Me.OriginalAmountDataGridViewTextBoxColumn.ReadOnly = true
-        Me.OriginalAmountDataGridViewTextBoxColumn.Visible = false
-        '
-        'PayeeTypeDataGridViewTextBoxColumn
-        '
-        Me.PayeeTypeDataGridViewTextBoxColumn.DataPropertyName = "PayeeType"
-        Me.PayeeTypeDataGridViewTextBoxColumn.HeaderText = "PayeeType"
-        Me.PayeeTypeDataGridViewTextBoxColumn.Name = "PayeeTypeDataGridViewTextBoxColumn"
-        Me.PayeeTypeDataGridViewTextBoxColumn.ReadOnly = true
-        Me.PayeeTypeDataGridViewTextBoxColumn.Visible = false
-        '
-        'SpecialAccountDataGridViewTextBoxColumn
-        '
-        Me.SpecialAccountDataGridViewTextBoxColumn.DataPropertyName = "SpecialAccount"
-        Me.SpecialAccountDataGridViewTextBoxColumn.HeaderText = "SpecialAccount"
-        Me.SpecialAccountDataGridViewTextBoxColumn.Name = "SpecialAccountDataGridViewTextBoxColumn"
-        Me.SpecialAccountDataGridViewTextBoxColumn.ReadOnly = true
-        Me.SpecialAccountDataGridViewTextBoxColumn.Visible = false
         '
         'bsJournalItems
         '
@@ -600,6 +398,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboCustomerIdNo.BegFindValue = Nothing
         Me.cboCustomerIdNo.ChangingSearchValueOnly = false
         Me.cboCustomerIdNo.CurrentSearchTerm = ""
+        Me.cboCustomerIdNo.DataValue = Nothing
         Me.cboCustomerIdNo.DefaultValue = Nothing
         Me.cboCustomerIdNo.DisplayMember = "Name"
         Me.cboCustomerIdNo.EditingMode = false
@@ -660,6 +459,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboTransactionType.BegFindValue = Nothing
         Me.cboTransactionType.ChangingSearchValueOnly = false
         Me.cboTransactionType.CurrentSearchTerm = ""
+        Me.cboTransactionType.DataValue = Nothing
         Me.cboTransactionType.DefaultValue = "0"
         Me.cboTransactionType.DisplayMember = "Name"
         Me.cboTransactionType.EditingMode = false
@@ -852,6 +652,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAccountIdNo.BegFindValue = Nothing
         Me.cboAccountIdNo.ChangingSearchValueOnly = false
         Me.cboAccountIdNo.CurrentSearchTerm = ""
+        Me.cboAccountIdNo.DataValue = Nothing
         Me.cboAccountIdNo.DefaultValue = ""
         Me.cboAccountIdNo.DisplayMember = "Name"
         Me.cboAccountIdNo.EditingMode = false
@@ -1314,6 +1115,209 @@ Namespace PresentationLayer.Views.Forms
         Me.txtTotalCredits.Translatable = false
         Me.txtTotalCredits.Visible = false
         '
+        'dgvSequence
+        '
+        Me.dgvSequence.BegFindValue = Nothing
+        Me.dgvSequence.DataPropertyName = "Sequence"
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+        Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
+        Me.dgvSequence.DisplayOnly = true
+        Me.dgvSequence.EditingMode = false
+        Me.dgvSequence.EndFindValue = Nothing
+        Me.dgvSequence.FieldDescription = Nothing
+        Me.dgvSequence.FieldName = Nothing
+        Me.dgvSequence.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvSequence.FindEnabled = false
+        Me.dgvSequence.HeaderText = "Seq."
+        Me.dgvSequence.IgnoreCase = false
+        Me.dgvSequence.Name = "dgvSequence"
+        Me.dgvSequence.ReadOnly = true
+        Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvSequence.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvSequence.Translatable = false
+        Me.dgvSequence.Width = 40
+        '
+        'dgvAccountIdNo
+        '
+        Me.dgvAccountIdNo.DataPropertyName = "AccountIdNo"
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+        Me.dgvAccountIdNo.DefaultCellStyle = DataGridViewCellStyle3
+        Me.dgvAccountIdNo.DisplayStyleForCurrentCellOnly = true
+        Me.dgvAccountIdNo.EditingMode = false
+        Me.dgvAccountIdNo.HeaderText = "Account Code-Name"
+        Me.dgvAccountIdNo.Name = "dgvAccountIdNo"
+        Me.dgvAccountIdNo.ReadOnly = true
+        Me.dgvAccountIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvAccountIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.dgvAccountIdNo.Translatable = false
+        Me.dgvAccountIdNo.Width = 200
+        '
+        'dgvDebit
+        '
+        Me.dgvDebit.BegFindValue = Nothing
+        Me.dgvDebit.DataPropertyName = "Debit"
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle4.Format = "###,##0.00"
+        Me.dgvDebit.DefaultCellStyle = DataGridViewCellStyle4
+        Me.dgvDebit.EditingMode = false
+        Me.dgvDebit.EndFindValue = Nothing
+        Me.dgvDebit.FieldDescription = Nothing
+        Me.dgvDebit.FieldName = Nothing
+        Me.dgvDebit.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvDebit.FindEnabled = false
+        Me.dgvDebit.HeaderText = "Debit"
+        Me.dgvDebit.Name = "dgvDebit"
+        Me.dgvDebit.ReadOnly = true
+        Me.dgvDebit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvDebit.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvDebit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.dgvDebit.Translatable = false
+        '
+        'dgvCredit
+        '
+        Me.dgvCredit.BegFindValue = Nothing
+        Me.dgvCredit.DataPropertyName = "Credit"
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle5.Format = "###,##0.00"
+        Me.dgvCredit.DefaultCellStyle = DataGridViewCellStyle5
+        Me.dgvCredit.EditingMode = false
+        Me.dgvCredit.EndFindValue = Nothing
+        Me.dgvCredit.FieldDescription = Nothing
+        Me.dgvCredit.FieldName = Nothing
+        Me.dgvCredit.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvCredit.FindEnabled = false
+        Me.dgvCredit.HeaderText = "Credit"
+        Me.dgvCredit.Name = "dgvCredit"
+        Me.dgvCredit.ReadOnly = true
+        Me.dgvCredit.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvCredit.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvCredit.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.dgvCredit.Translatable = false
+        '
+        'dgvRevCostCenterIdNo
+        '
+        Me.dgvRevCostCenterIdNo.DataPropertyName = "RevCostCenterIdNo"
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+        Me.dgvRevCostCenterIdNo.DefaultCellStyle = DataGridViewCellStyle6
+        Me.dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = true
+        Me.dgvRevCostCenterIdNo.EditingMode = false
+        Me.dgvRevCostCenterIdNo.HeaderText = "Revenue/Cost Center Code-Name"
+        Me.dgvRevCostCenterIdNo.Name = "dgvRevCostCenterIdNo"
+        Me.dgvRevCostCenterIdNo.ReadOnly = true
+        Me.dgvRevCostCenterIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvRevCostCenterIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.dgvRevCostCenterIdNo.Translatable = false
+        Me.dgvRevCostCenterIdNo.Width = 200
+        '
+        'dgvNotes
+        '
+        Me.dgvNotes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.dgvNotes.BegFindValue = Nothing
+        Me.dgvNotes.DataPropertyName = "Notes"
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
+        Me.dgvNotes.DefaultCellStyle = DataGridViewCellStyle7
+        Me.dgvNotes.EditingMode = false
+        Me.dgvNotes.EndFindValue = Nothing
+        Me.dgvNotes.FieldDescription = Nothing
+        Me.dgvNotes.FieldName = Nothing
+        Me.dgvNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvNotes.FindEnabled = false
+        Me.dgvNotes.HeaderText = "Notes"
+        Me.dgvNotes.IgnoreCase = false
+        Me.dgvNotes.Name = "dgvNotes"
+        Me.dgvNotes.ReadOnly = true
+        Me.dgvNotes.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvNotes.Translatable = false
+        '
+        'dgvPaidAmount
+        '
+        Me.dgvPaidAmount.DataPropertyName = "PaidAmount"
+        Me.dgvPaidAmount.HeaderText = "PaidAmount"
+        Me.dgvPaidAmount.Name = "dgvPaidAmount"
+        Me.dgvPaidAmount.ReadOnly = true
+        Me.dgvPaidAmount.Visible = false
+        '
+        'dgvDiscountTaken
+        '
+        Me.dgvDiscountTaken.DataPropertyName = "DiscountTaken"
+        Me.dgvDiscountTaken.HeaderText = "DiscountTaken"
+        Me.dgvDiscountTaken.Name = "dgvDiscountTaken"
+        Me.dgvDiscountTaken.ReadOnly = true
+        Me.dgvDiscountTaken.Visible = false
+        '
+        'AccountNameDataGridViewTextBoxColumn
+        '
+        Me.AccountNameDataGridViewTextBoxColumn.DataPropertyName = "AccountName"
+        Me.AccountNameDataGridViewTextBoxColumn.HeaderText = "AccountName"
+        Me.AccountNameDataGridViewTextBoxColumn.Name = "AccountNameDataGridViewTextBoxColumn"
+        Me.AccountNameDataGridViewTextBoxColumn.ReadOnly = true
+        Me.AccountNameDataGridViewTextBoxColumn.Visible = false
+        '
+        'CancelledDataGridViewCheckBoxColumn
+        '
+        Me.CancelledDataGridViewCheckBoxColumn.DataPropertyName = "Cancelled"
+        Me.CancelledDataGridViewCheckBoxColumn.HeaderText = "Cancelled"
+        Me.CancelledDataGridViewCheckBoxColumn.Name = "CancelledDataGridViewCheckBoxColumn"
+        Me.CancelledDataGridViewCheckBoxColumn.ReadOnly = true
+        Me.CancelledDataGridViewCheckBoxColumn.Visible = false
+        '
+        'dgvIdNo
+        '
+        Me.dgvIdNo.DataPropertyName = "IdNo"
+        Me.dgvIdNo.HeaderText = "IdNo"
+        Me.dgvIdNo.Name = "dgvIdNo"
+        Me.dgvIdNo.ReadOnly = true
+        Me.dgvIdNo.Visible = false
+        '
+        'JournalIdNoDataGridViewTextBoxColumn
+        '
+        Me.JournalIdNoDataGridViewTextBoxColumn.DataPropertyName = "JournalIdNo"
+        Me.JournalIdNoDataGridViewTextBoxColumn.HeaderText = "JournalIdNo"
+        Me.JournalIdNoDataGridViewTextBoxColumn.Name = "JournalIdNoDataGridViewTextBoxColumn"
+        Me.JournalIdNoDataGridViewTextBoxColumn.ReadOnly = true
+        Me.JournalIdNoDataGridViewTextBoxColumn.Visible = false
+        '
+        'OpenInvoiceIdNoDataGridViewTextBoxColumn
+        '
+        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.DataPropertyName = "OpenInvoiceIdNo"
+        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.HeaderText = "OpenInvoiceIdNo"
+        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.Name = "OpenInvoiceIdNoDataGridViewTextBoxColumn"
+        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.ReadOnly = true
+        Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.Visible = false
+        '
+        'OriginalAmountDataGridViewTextBoxColumn
+        '
+        Me.OriginalAmountDataGridViewTextBoxColumn.DataPropertyName = "OriginalAmount"
+        Me.OriginalAmountDataGridViewTextBoxColumn.HeaderText = "OriginalAmount"
+        Me.OriginalAmountDataGridViewTextBoxColumn.Name = "OriginalAmountDataGridViewTextBoxColumn"
+        Me.OriginalAmountDataGridViewTextBoxColumn.ReadOnly = true
+        Me.OriginalAmountDataGridViewTextBoxColumn.Visible = false
+        '
+        'PayeeTypeDataGridViewTextBoxColumn
+        '
+        Me.PayeeTypeDataGridViewTextBoxColumn.DataPropertyName = "PayeeType"
+        Me.PayeeTypeDataGridViewTextBoxColumn.HeaderText = "PayeeType"
+        Me.PayeeTypeDataGridViewTextBoxColumn.Name = "PayeeTypeDataGridViewTextBoxColumn"
+        Me.PayeeTypeDataGridViewTextBoxColumn.ReadOnly = true
+        Me.PayeeTypeDataGridViewTextBoxColumn.Visible = false
+        '
+        'SpecialAccountDataGridViewTextBoxColumn
+        '
+        Me.SpecialAccountDataGridViewTextBoxColumn.DataPropertyName = "SpecialAccount"
+        Me.SpecialAccountDataGridViewTextBoxColumn.HeaderText = "SpecialAccount"
+        Me.SpecialAccountDataGridViewTextBoxColumn.Name = "SpecialAccountDataGridViewTextBoxColumn"
+        Me.SpecialAccountDataGridViewTextBoxColumn.ReadOnly = true
+        Me.SpecialAccountDataGridViewTextBoxColumn.Visible = false
+        '
         'ArJournalEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
@@ -1377,6 +1381,14 @@ End Sub
         Friend WithEvents CLabel2 As CLabel
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents BalanceDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
+        Friend WithEvents lblVatAmount As CLabel
+        Friend WithEvents txtVatAmount As CTextBox
+        Friend WithEvents chkCancelled As UcCheckBox
+        Friend WithEvents chkApproved As UcCheckBox
+        Friend WithEvents chkPosted As UcCheckBox
+        Friend WithEvents txtDateCreated As CCustomDateTimePicker
+        Friend WithEvents txtTotalDebits As CTextBox
+        Friend WithEvents txtTotalCredits As CTextBox
         Friend WithEvents dgvSequence As CDgvTextColumn
         Friend WithEvents dgvAccountIdNo As CDgvComboBoxColumn
         Friend WithEvents dgvDebit As CdgvMoneyColumn
@@ -1393,13 +1405,5 @@ End Sub
         Friend WithEvents OriginalAmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents PayeeTypeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents SpecialAccountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents lblVatAmount As CLabel
-        Friend WithEvents txtVatAmount As CTextBox
-        Friend WithEvents chkCancelled As UcCheckBox
-        Friend WithEvents chkApproved As UcCheckBox
-        Friend WithEvents chkPosted As UcCheckBox
-        Friend WithEvents txtDateCreated As CCustomDateTimePicker
-        Friend WithEvents txtTotalDebits As CTextBox
-        Friend WithEvents txtTotalCredits As CTextBox
     End Class
 End NameSpace

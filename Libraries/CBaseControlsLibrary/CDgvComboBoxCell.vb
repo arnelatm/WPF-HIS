@@ -6,6 +6,7 @@ Public Class CDgvComboBoxCell
 
     Public Sub New()
         MyBase.New()
+        AutoComplete = False
     End Sub
 
     ' You must override the EditType property to return the cell's

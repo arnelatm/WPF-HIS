@@ -365,7 +365,6 @@ Namespace PresentationLayer.Views.Forms
                 dgvAccountIdNo.DataSource = AccountsByCode
                 dgvAccountIdNo.DisplayMember = "Name"
                 dgvAccountIdNo.ValueMember = "IdNo"
-                dgvAccountIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
             End With
         End Sub
@@ -432,7 +431,6 @@ Namespace PresentationLayer.Views.Forms
                 dgvPayElementIdNo.DataSource = PayElementsByCode
                 dgvPayElementIdNo.DisplayMember = "Name"
                 dgvPayElementIdNo.ValueMember = "IdNo"
-                dgvPayElementIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
                 dgvPayElementIdNo.DisplayStyleForCurrentCellOnly = True
                 dgvFactorType.DataSource = FactorTypeByCode
                 dgvFactorType.ValueMember = "Code"

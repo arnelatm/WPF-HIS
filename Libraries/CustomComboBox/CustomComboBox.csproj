@@ -44,9 +44,6 @@
     <Compile Include="DropdownControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="EasyCompletionBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringMatcher.cs" />
   </ItemGroup>
