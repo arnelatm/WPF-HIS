@@ -149,7 +149,7 @@
         Me.cboRouteOfAdministration.Size = New System.Drawing.Size(482, 24)
         Me.cboRouteOfAdministration.SuggestBoxHeight = 200
         Me.cboRouteOfAdministration.SuggestListOrderRule = Nothing
-        Me.cboRouteOfAdministration.TabIndex = 36
+        Me.cboRouteOfAdministration.TabIndex = 12
         Me.cboRouteOfAdministration.TextToSearch = Nothing
         Me.cboRouteOfAdministration.Translatable = false
         Me.cboRouteOfAdministration.ValueIsMandatory = false
@@ -796,7 +796,7 @@
         Me.txtRegistrationNo.OldValue = ""
         Me.txtRegistrationNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtRegistrationNo.Size = New System.Drawing.Size(125, 23)
-        Me.txtRegistrationNo.TabIndex = 35
+        Me.txtRegistrationNo.TabIndex = 13
         Me.txtRegistrationNo.Translatable = false
         '
         'lblRegistrationCode

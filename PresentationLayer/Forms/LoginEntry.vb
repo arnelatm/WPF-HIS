@@ -31,7 +31,7 @@ Public Class LoginEntry
         ' Add any initialization after the InitializeComponent() call.
         _cancelLogin = False
         AddHandler FormClosing, AddressOf FormLogin_Closing
-        textBoxUserName.Text = $"Arnel" 'Environment.UserName
+        'textBoxUserName.Text = Environment.UserName
 
         UserName = My.Settings.UserName
         Password = My.Settings.Oterkis
@@ -53,12 +53,13 @@ Public Class LoginEntry
             textNewPassword.DisplayOnly = False
             textConfirmation.DisplayOnly = False
             btn_Login.Text = Messaging.TranslateCaption("Save")
-            textNewPassword.Text = Space(20)
-            textConfirmation.Text = Space(20)
-            textBoxPassword.Text = Space(20)
+            textNewPassword.Text = "" 'Space(20)
+            textConfirmation.Text = "" 'Space(20)
+            textBoxPassword.Text = "" 'Space(20)
             textNewPassword.Editable = True
             textConfirmation.Editable = True
             textBoxUserName.DisplayOnly = True
+            Refresh()
             ' Presenter.EnableEdit()
             Height = 388
             floPasswordEntry.Height = 134

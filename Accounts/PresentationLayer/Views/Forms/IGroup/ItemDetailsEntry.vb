@@ -279,7 +279,7 @@ Namespace PresentationLayer.Views.Forms
                 Return chkPrescriptionDrug.Checked
             End Get
             Set
-                chkPrescriptionDrug.Checked = Value
+                chkPrescriptionDrug.Checked = Value                
             End Set
         End Property
 

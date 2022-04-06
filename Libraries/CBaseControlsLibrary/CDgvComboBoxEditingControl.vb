@@ -188,14 +188,14 @@ Public Class CDgvComboBoxEditingControl
         suggestLbForm.Width = Width + 2
         suggestLbForm.StartPosition = FormStartPosition.Manual
         pnt = Parent.PointToScreen(Location)
-        If GlobalVariables.RightToLeftLayout Then
-            formLocation = New Point(pnt.X - suggestLbForm.Width)
-            If formLocation.X < 0 Then
-                formLocation.X = pnt.X - suggestLbForm.Width
-            End If
-        Else
+        'If GlobalVariables.RightToLeftLayout Then
+        '    formLocation = New Point(pnt.X - suggestLbForm.Width)
+        '    If formLocation.X < 0 Then
+        '        formLocation.X = pnt.X - suggestLbForm.Width
+        '    End If
+        'Else
             formLocation = New Point(pnt.X, pnt.Y + Height)
-        End If
+        'End If
         suggestLbForm.Location = formLocation
     End Sub
 

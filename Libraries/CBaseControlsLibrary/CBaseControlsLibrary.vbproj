@@ -473,6 +473,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BFCalendarUmAlQura.resx">
       <DependentUpon>BFCalendarUmAlQura.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="BFGregorianCalendar.resx">
       <DependentUpon>BFGregorianCalendar.vb</DependentUpon>
