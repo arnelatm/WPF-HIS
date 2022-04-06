@@ -8,6 +8,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class PettyCashClosingDao
+        Inherits AccountsDao
         Implements IDao(Of PettyCashClosing), IDaoJournals(Of PettyCashClosing)
 
         Private ReadOnly _db As New Db()

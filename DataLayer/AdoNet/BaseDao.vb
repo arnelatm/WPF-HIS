@@ -1,7 +1,6 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Dynamic
 Imports System.Globalization
-Imports AATM.BusinessLayer
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.MessagingLibrary
@@ -671,7 +670,7 @@ Namespace AdoNet
         '    Return GetDb().SqlRead(sql)
         'End Function
 
-        Public Function FieldExistsInTable(tableName As String, fieldName As String) As Boolean Implements IBaseDao.FieldExistInTable
+        Public Function FieldExistInTable(tableName As String, fieldName As String) As Boolean Implements IBaseDao.FieldExistInTable
             Dim retValue As Boolean
             retValue = GetDb().FieldExistInTable(tableName, fieldName)
             Return retValue

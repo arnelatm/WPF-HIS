@@ -8,6 +8,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class ErJournalDao
+        Inherits AccountsDao
         Implements IDao(Of ErJournal), IDaoJournals(Of ErJournal) ', IDaoChild(Of JournalItem)
 
         Private ReadOnly _db As New Db()

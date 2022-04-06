@@ -51,13 +51,15 @@ Public Class Dac
         '        serverType = ConfigurationManager.AppSettings.Get("ServerType3") ' SQL only
         '    End If
         'End If
-        DacAccessType = GlobalVariables.DacAccessType
-        DacServer = GlobalVariables.DacServer
-        DacServerType = GlobalVariables.DacServerType
-        DacDatabase = GlobalVariables.DacDatabase
-        DacUid = GlobalVariables.DacUid
-        DacPassword = GlobalVariables.DacPassword
-        DacFileName = GlobalVariables.DacFileName
+        If LicenseManager.UsageMode <> LicenseUsageMode.Designtime Then
+            DacAccessType = GlobalVariables.DacAccessType
+            DacServer = GlobalVariables.DacServer
+            DacServerType = GlobalVariables.DacServerType
+            DacDatabase = GlobalVariables.DacDatabase
+            DacUid = GlobalVariables.DacUid
+            DacPassword = GlobalVariables.DacPassword
+            DacFileName = GlobalVariables.DacFileName
+        End If
 
     End Sub
 

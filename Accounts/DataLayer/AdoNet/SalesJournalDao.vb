@@ -9,6 +9,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class SalesJournalDao
+        Inherits AccountsDao
         Implements IDao(Of SalesJournal), IDaoJournals(Of SalesJournal) ', IDaoChild(Of JournalItem)
 
         ' ReSharper disable once InconsistentNaming

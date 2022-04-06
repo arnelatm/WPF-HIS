@@ -55,9 +55,7 @@ Namespace DataLayer.AdoNet
                     " FROM ItemDetails_View" &
                     " WHERE Primary_Key = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
-            Dim value As ItemDetails = _db.Read(sql, Make, params).FirstOrDefault()
-            value.PrescriptionDrug = IIf(value.RegistrationNo="" Or value.RegistrationNo Is Nothing,False,True)
-            Return value
+            Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
         Public Function UpdateRecord(ByRef ItemDetails As ItemDetails) As Integer Implements IDao(Of ItemDetails).UpdateRecord
@@ -107,7 +105,7 @@ Namespace DataLayer.AdoNet
             If retval > 0 Then
                 Dim sql2 = " INSERT INTO DrugList " &
                     " ([RegistrationNo],[Generic Name],[Trade Name],[Route Of Administration],[Strength Value],[Unit Of Strength],[Dosage Form],[Volume],[Unit of Volume],[Package Size],[Package Type])" &
-                    " VALUES (@RegistrationNo,@GenericName,@TradeName,@RouteOfAdministration,@StrengthValue,@UnitOfStrength,@DosageForm,@Volume,@UnitOfVolume,@PackageSize,@PackageType)"
+                    " VALUES (@RegistrationNo,@GenericName,@ItemDetailsName,@RouteOfAdministration,@StrengthValue,@UnitOfStrength,@DosageForm,@Volume,@UnitOfVolume,@PackageSize,@PackageType)"
                 _db.InsertNoId(sql2, TakeDrug(ItemDetails))
                 Dim sql3 = " INSERT INTO ItemRegistration " &
                     " ([Item_Code],[RegistrationNo],[Strength])" &
@@ -166,7 +164,7 @@ Namespace DataLayer.AdoNet
             Return New Object() {
                                  "DosageForm", ItemDetails.DosageForm,
                                  "GenericName", ItemDetails.GenericName,
-                                 "TradeName", ItemDetails.ItemDetailsName,
+                                 "ItemDetailsName", ItemDetails.ItemDetailsName,
                                  "PackageSize", ItemDetails.PackageSize,
                                  "PackageType", ItemDetails.PackageType,
                                  "RegistrationNo", IIf(ItemDetails.RegistrationNo Is Nothing Or ItemDetails.RegistrationNo = "", "X-" + ItemDetails.ItemDetailsCode, ItemDetails.RegistrationNo),
