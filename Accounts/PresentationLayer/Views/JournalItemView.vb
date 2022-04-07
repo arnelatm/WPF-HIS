@@ -69,6 +69,7 @@ Namespace PresentationLayer.Views
         Public Property PaidAmount As Decimal Implements IJournalItemView.PaidAmount
 
         Public Property PayeeType As String Implements IJournalItemView.PayeeType
+        Public Property PayIdNo As Int32 Implements IJournalItemView.PayIdNo
 
         Public Property RevCostCenterIdNo As Int16 Implements IJournalItemView.RevCostCenterIdNo
 

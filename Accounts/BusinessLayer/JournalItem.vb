@@ -22,6 +22,7 @@ Namespace BusinessLayer
         Public Property OpenInvoiceIdNo As Int32
         Public Property PaidAmount As Decimal
         Public Property PayeeType As String
+        Public Property PayIdNo as Int32
         Public Property RevCostCenterIdNo As Int16
         Public Property Sequence As Int16
         Public Property SpecialAccount As String

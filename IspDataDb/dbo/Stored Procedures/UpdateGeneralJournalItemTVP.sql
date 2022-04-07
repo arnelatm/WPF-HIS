@@ -26,6 +26,7 @@ SET a.AccountIdNo = B.AccountIdNo,
 	a.Debit = B.Debit,
 	a.JournalIdNo = @GroupIdNo,
 	a.Notes = B.Notes,
+	a.PayIdNo = b.PayIdNo,
 	a.RevCostCenterIdNo = B.RevCostCenterIdNo,
 	a.[Sequence] = B.[Sequence]
 from [dbo].GeneralJournalItem A INNER JOIN @MParam As B
