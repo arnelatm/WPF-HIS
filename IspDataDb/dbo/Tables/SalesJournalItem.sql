@@ -7,9 +7,12 @@
     [Debit]             MONEY          CONSTRAINT [DF_SalesJournalItem_Debit] DEFAULT ((0)) NOT NULL,
     [Credit]            MONEY          CONSTRAINT [DF_SalesJournalItem_Credit] DEFAULT ((0)) NOT NULL,
     [RevCostCenterIdNo] SMALLINT       CONSTRAINT [DF_SalesJournalItem_ProfitCenterIdNo] DEFAULT ((0)) NULL,
+    [PayIdNo]           INT            NULL,
     [Posted]            BIT            CONSTRAINT [DF_SalesJournalItem_Posted] DEFAULT ((0)) NOT NULL,
     CONSTRAINT [PK_SalesJournalItemsIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

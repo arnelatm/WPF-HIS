@@ -6,11 +6,14 @@
     [Debit]             MONEY          CONSTRAINT [DF_ErJournalItem_Debit] DEFAULT ((0)) NOT NULL,
     [Credit]            MONEY          CONSTRAINT [DF_ErJournalItem_Credit] DEFAULT ((0)) NOT NULL,
     [RevCostCenterIdNo] SMALLINT       CONSTRAINT [DF_ErJournalItem_ProfitCenterIdNo] DEFAULT ((0)) NULL,
+    [PayIdNo]           INT            NULL,
     [Notes]             NVARCHAR (300) NULL,
     [Posted]            BIT            CONSTRAINT [DF_ErJournalItem_Posted] DEFAULT ((0)) NOT NULL,
     [DateTimeStamp]     ROWVERSION     NOT NULL,
     CONSTRAINT [PK_ErJournalItemsIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

@@ -5,6 +5,7 @@ Namespace AdoNet
     ' ** DAO Pattern
 
     Public Class DefaultFieldValueDao
+        Inherits BaseDao
         Implements IDefaultFieldValueDao
 
         Const FieldList As String = "DataType," &

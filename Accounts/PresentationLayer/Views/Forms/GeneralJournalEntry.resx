@@ -863,10 +863,10 @@
     <value>Account Code - Name</value>
   </data>
   <data name="dgvAccountIdNo.MinimumWidth" type="System.Int32, mscorlib">
-    <value>300</value>
+    <value>250</value>
   </data>
   <data name="dgvAccountIdNo.Width" type="System.Int32, mscorlib">
-    <value>300</value>
+    <value>250</value>
   </data>
   <metadata name="dgvDebit.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -893,10 +893,10 @@
     <value>Revenue/Cost Center Code-Name</value>
   </data>
   <data name="dgvRevCostCenterIdNo.MinimumWidth" type="System.Int32, mscorlib">
-    <value>200</value>
+    <value>150</value>
   </data>
   <data name="dgvRevCostCenterIdNo.Width" type="System.Int32, mscorlib">
-    <value>200</value>
+    <value>150</value>
   </data>
   <metadata name="dgvNotes.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -2287,7 +2287,7 @@
     <value>PayIdNoDataGridViewTextBoxColumn</value>
   </data>
   <data name="&gt;&gt;PayIdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>GeneralJournalEntry</value>

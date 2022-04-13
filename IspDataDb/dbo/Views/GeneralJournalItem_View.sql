@@ -17,7 +17,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[73] 4[3] 2[6] 3) )"
+         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -87,7 +87,7 @@ Begin DesignProperties =
             Begin Extent = 
                Top = 6
                Left = 38
-               Bottom = 341
+               Bottom = 335
                Right = 231
             End
             DisplayFlags = 280
@@ -95,20 +95,20 @@ Begin DesignProperties =
          End
          Begin Table = "Account"
             Begin Extent = 
-               Top = 120
-               Left = 282
-               Bottom = 612
-               Right = 481
+               Top = 138
+               Left = 38
+               Bottom = 268
+               Right = 237
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "ApOpenInvoice"
             Begin Extent = 
-               Top = 5
-               Left = 888
-               Bottom = 380
-               Right = 1065
+               Top = 6
+               Left = 269
+               Bottom = 136
+               Right = 446
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -140,4 +140,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'GeneralJournalItem_View';
+
+
 
