@@ -60,8 +60,8 @@ Namespace PresentationLayer.Views.Forms.Reports
                 valid = False
             End If
             If valid Then
-                reportTitle = Messaging.SelectReportName(reportName, beginningDate, endingDate, FormCulture, _period)
-                cForm = New ReportFormNew("Balance Sheet.Rpt", reportTitle, FormCulture, beginningDate, "BeginningDate", endingDate, "EndingDate", AccountBalanceYear, "AccountBalanceYear", begDataDate, "BegDataDate", lastFiscalYearDate, "LastFiscalYearDate")
+                reportTitle = Messaging.SelectReportName(reportName, beginningDate, endingDate, curCulture, _period)
+                cForm = New ReportFormNew("Balance Sheet.Rpt", reportTitle, curCulture, beginningDate, "BeginningDate", endingDate, "EndingDate", AccountBalanceYear, "AccountBalanceYear", begDataDate, "BegDataDate", lastFiscalYearDate, "LastFiscalYearDate")
                 cForm.Show()
             End If
             CultureInfo.CurrentCulture = curCulture

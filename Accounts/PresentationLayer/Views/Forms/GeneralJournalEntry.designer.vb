@@ -70,7 +70,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SpecialAccount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PayIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PayIdNoDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floJournalHeader.SuspendLayout
         Me.CFlowLayout1.SuspendLayout
@@ -703,10 +703,15 @@ Namespace PresentationLayer.Views.Forms
         '
         'PayIdNoDataGridViewTextBoxColumn
         '
+        Me.PayIdNoDataGridViewTextBoxColumn.AutoComplete = false
         Me.PayIdNoDataGridViewTextBoxColumn.DataPropertyName = "PayIdNo"
+        Me.PayIdNoDataGridViewTextBoxColumn.EditingMode = false
         resources.ApplyResources(Me.PayIdNoDataGridViewTextBoxColumn, "PayIdNoDataGridViewTextBoxColumn")
         Me.PayIdNoDataGridViewTextBoxColumn.Name = "PayIdNoDataGridViewTextBoxColumn"
         Me.PayIdNoDataGridViewTextBoxColumn.ReadOnly = true
+        Me.PayIdNoDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.PayIdNoDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.PayIdNoDataGridViewTextBoxColumn.Translatable = false
         '
         'GeneralJournalEntry
         '
@@ -768,6 +773,6 @@ End Sub
         Friend WithEvents dgvNotes As CDgvTextColumn
         Friend WithEvents dgvIdNo As DataGridViewTextBoxColumn
         Friend WithEvents SpecialAccount As DataGridViewTextBoxColumn
-        Friend WithEvents PayIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents PayIdNoDataGridViewTextBoxColumn As CDgvComboBoxColumn
     End Class
 End NameSpace
