@@ -37,9 +37,9 @@ Namespace PresentationLayer.Views.Forms.Reports
                 reportName = Messaging.TranslateCaption("Statement of Accounts Receivable")
                 reportTitle = Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName, "beginningDate", bDate, "endingDate", eDate})
                 If Strings.Left(FormCulture.Name, 2) = "ar" Then
-                    cForm = New ReportFormNew("Statement of Accounts Receivable Arabic.Rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboCustomerIdNo.SelectedItem.IdNo, "CustomerIdNo", cboCustomerIdNo.Text, "DisplayName")
+                    cForm = New ReportFormNew("Statement of Accounts Receivable Arabic.Rpt", reportTitle, CultureInfo.CurrentCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboCustomerIdNo.SelectedItem.IdNo, "CustomerIdNo", cboCustomerIdNo.Text, "DisplayName")
                 Else
-                    cForm = New ReportFormNew("Statement of Accounts Receivable.Rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboCustomerIdNo.SelectedItem.IdNo, "CustomerIdNo", cboCustomerIdNo.Text, "DisplayName")
+                    cForm = New ReportFormNew("Statement of Accounts Receivable.Rpt", reportTitle, CultureInfo.CurrentCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboCustomerIdNo.SelectedItem.IdNo, "CustomerIdNo", cboCustomerIdNo.Text, "DisplayName")
                 End If
                 cForm.Show()
             Else

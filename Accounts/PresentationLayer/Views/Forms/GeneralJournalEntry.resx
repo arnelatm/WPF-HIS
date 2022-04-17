@@ -364,6 +364,9 @@
   <data name="CLabel2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
+  <data name="CLabel2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="CLabel2.Location" type="System.Drawing.Point, System.Drawing">
     <value>292, 26</value>
   </data>
@@ -397,6 +400,9 @@
   <data name="chkClosingJournal.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
+  <data name="chkClosingJournal.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="chkClosingJournal.Location" type="System.Drawing.Point, System.Drawing">
     <value>529, 28</value>
   </data>
@@ -426,6 +432,9 @@
   </data>
   <data name="lblClosing.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblClosing.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblClosing.Location" type="System.Drawing.Point, System.Drawing">
     <value>546, 26</value>
@@ -550,6 +559,9 @@
   <data name="chkPosted.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
+  <data name="chkPosted.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="chkPosted.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
@@ -579,6 +591,9 @@
   </data>
   <data name="CLabel3.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="CLabel3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="CLabel3.Location" type="System.Drawing.Point, System.Drawing">
     <value>20, 1</value>
@@ -616,6 +631,9 @@
   <data name="chkCancelled.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
+  <data name="chkCancelled.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="chkCancelled.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 22</value>
   </data>
@@ -645,6 +663,9 @@
   </data>
   <data name="lblCancelled.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblCancelled.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblCancelled.Location" type="System.Drawing.Point, System.Drawing">
     <value>20, 20</value>
@@ -682,6 +703,9 @@
   <data name="chkApproved.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
+  <data name="chkApproved.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="chkApproved.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 41</value>
   </data>
@@ -711,6 +735,9 @@
   </data>
   <data name="lblApproved.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblApproved.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblApproved.Location" type="System.Drawing.Point, System.Drawing">
     <value>20, 39</value>
@@ -921,9 +948,6 @@
   </data>
   <data name="SpecialAccount.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
-  </data>
-  <data name="PayIdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>PayIdNo</value>
   </data>
   <metadata name="bsJournalItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>675, 17</value>
@@ -2282,12 +2306,6 @@
   </data>
   <data name="&gt;&gt;SpecialAccount.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;PayIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>PayIdNoDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;PayIdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>GeneralJournalEntry</value>

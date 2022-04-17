@@ -30,6 +30,7 @@ Namespace PresentationLayer.Presenters
             DtInsertTable.Columns.Add("Debit", GetType(Decimal))
             DtInsertTable.Columns.Add("JournalIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Notes", GetType(String))
+            DtInsertTable.Columns.Add("PayIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("RevCostCenterIdNo", GetType(Int16))
             DtInsertTable.Columns.Add("Sequence", GetType(Int16))
 
@@ -39,6 +40,7 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("JournalIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Notes", GetType(String))
+            DtUpdateTable.Columns.Add("PayIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("RevCostCenterIdNo", GetType(Int16))
             DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
 
@@ -64,6 +66,7 @@ Namespace PresentationLayer.Presenters
             workRow("AccountIdNo") = itemDataView.AccountIdNo
             workRow("Debit") = itemDataView.Debit
             workRow("Credit") = itemDataView.Credit
+            workRow("PayIdNo") = itemDataView.PayIdNo
             workRow("RevCostCenterIdNo") = itemDataView.RevCostCenterIdNo
             workRow("Notes") = If(itemDataView.Notes, "")
         End Sub

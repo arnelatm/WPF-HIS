@@ -27,14 +27,14 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
             Dim curCulture = CultureInfo.CurrentCulture
-            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+            'CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim beginningDate As Date?
             Dim endingDate As Date?
             Dim lastFiscalYearDate As Date
             Dim AccountBalanceYear As Integer
             Dim begDataDate As Date
             Dim language As String
-            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
+            language = Strings.Left(CultureInfo.CurrentCulture.Name, CultureInfo.CurrentCulture.Name.IndexOf("-"))
             lastFiscalYearDate = Presenter.GetRecordFieldWithKeyG(Of Date)("LastFiscalYearEnd", "LastPosting", "TransactionName", "lastPostingDate")
             beginningDate = IIf(dtpBeginningDate.Value Is Nothing, dtpEndingDate.Value, dtpBeginningDate.Value)
             endingDate = dtpEndingDate.Value
@@ -58,8 +58,8 @@ Namespace PresentationLayer.Views.Forms.Reports
                 valid = False
             End If
             If valid Then
-                reportTitle = Messaging.SelectReportName(reportName, beginningDate, endingDate, FormCulture, _period)
-                cForm = New ReportFormNew("Income Statement.Rpt", reportTitle, FormCulture, beginningDate, "BeginningDate", dtpEndingDate.Value, "EndingDate")
+                reportTitle = Messaging.SelectReportName(reportName, beginningDate, endingDate, curCulture, _period)
+                cForm = New ReportFormNew("Income Statement.Rpt", reportTitle, curCulture, beginningDate, "BeginningDate", dtpEndingDate.Value, "EndingDate")
                 cForm.Show()
             End If
             CultureInfo.CurrentCulture = curCulture

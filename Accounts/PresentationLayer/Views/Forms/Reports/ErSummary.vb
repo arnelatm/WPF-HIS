@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Presenters
+﻿Imports System.Globalization
+Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
@@ -30,8 +31,8 @@ Namespace PresentationLayer.Views.Forms.Reports
             If dtpBeginningDate.Value <= dtpEndingDate.Value Then
                 Dim reportName = Messaging.TranslateCaption("Summary of Employee Loans")
                 Dim reportTitle As String
-                reportTitle = Messaging.SelectReportName(reportName, dtpBeginningDate.Value, dtpEndingDate.Value, FormCulture)
-                Dim cForm As New ReportFormNew("Summary of Employee Loans.Rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", chkIncludeZeroBalances.Checked, "IncludeZeroBalance")
+                reportTitle = Messaging.SelectReportName(reportName, dtpBeginningDate.Value, dtpEndingDate.Value, CultureInfo.CurrentCulture)
+                Dim cForm As New ReportFormNew("Summary of Employee Loans.Rpt", reportTitle, CultureInfo.CurrentCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", chkIncludeZeroBalances.Checked, "IncludeZeroBalance")
                 cForm.Show()
             Else
                 Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")

@@ -142,7 +142,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                 '    Next
                 'End If
                 'If Strings.Left(cFormCulture.Name, 2) = "ar" Then
-                cForm = New ReportFormIGroup(_reportModel.ReportFileName + ".rpt", FormCulture, parameters)
+                cForm = New ReportFormIGroup(_reportModel.ReportFileName + ".rpt", CultureInfo.CurrentCulture, parameters)
                 'Else
                 '    cForm = New ReportFormIGroup(_reportModel.ReportFileName + ".rpt", FormCulture, parameters)
                 'End If

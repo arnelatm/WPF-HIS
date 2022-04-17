@@ -37,9 +37,9 @@ Namespace PresentationLayer.Views.Forms.Reports
                 reportTitle = Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName, "beginningDate", bDate, "endingDate", eDate})
                 Dim cFormCulture = FormCulture
                 If Strings.Left(cFormCulture.Name, 2) = "ar" Then
-                    cForm = New ReportFormNew("Shift Summary Daily Report.Rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate" )
+                    cForm = New ReportFormNew("Shift Summary Daily Report.Rpt", reportTitle, CultureInfo.CurrentCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate" )
                 Else
-                    cForm = New ReportFormNew("Shift Summary Daily Report.Rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate" )
+                    cForm = New ReportFormNew("Shift Summary Daily Report.Rpt", reportTitle, CultureInfo.CurrentCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate" )
                 End If
                 cForm.Show()
             Else

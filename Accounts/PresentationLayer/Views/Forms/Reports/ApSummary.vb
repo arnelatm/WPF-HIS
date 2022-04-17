@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Presenters
+﻿Imports System.Globalization
+Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
@@ -27,11 +28,12 @@ Namespace PresentationLayer.Views.Forms.Reports
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
+            Dim curCulture = CultureInfo.CurrentCulture
             If dtpBeginningDate.Value <= dtpEndingDate.Value Then
                 Dim reportName = Messaging.TranslateCaption("Summary of Accounts Payable")
                 Dim reportTitle As String
                 reportTitle = Messaging.SelectReportName(reportName, dtpBeginningDate.Value, dtpEndingDate.Value, FormCulture)
-                Dim cForm As New ReportFormNew("Summary of Accounts Payable.Rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", chkIncludeZeroBalances.Checked, "IncludeZeroBalance")
+                Dim cForm As New ReportFormNew("Summary of Accounts Payable.Rpt", reportTitle, curCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", chkIncludeZeroBalances.Checked, "IncludeZeroBalance")
                 cForm.Show()
             Else
                 Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
