@@ -56,6 +56,7 @@ Namespace PresentationLayer.Presenters
                                             {"Debit", GetType(Decimal)},
                                             {"JournalIdNo", GetType(Int32)},
                                             {"Notes", GetType(String)},
+                                            {"PayIdNo", GetType(Int32)},
                                             {"RevCostCenterIdNo", GetType(Int16)},
                                             {"Sequence", GetType(Int16)}
                                             })
@@ -66,6 +67,7 @@ Namespace PresentationLayer.Presenters
                                             {"IdNo", GetType(Int32)},
                                             {"JournalIdNo", GetType(Int32)},
                                             {"Notes", GetType(String)},
+                                            {"PayIdNo", GetType(Int32)},
                                             {"RevCostCenterIdNo", GetType(Int16)},
                                             {"Sequence", GetType(Int16)}
                                             })
@@ -875,6 +877,7 @@ Namespace PresentationLayer.Presenters
             workRow("Debit") = itemDataView.Debit
             workRow("JournalIdNo") = View.IdNo
             workRow("Notes") = itemDataView.Notes
+            workRow("PayIdNo") = itemDataView.PayIdNo
             workRow("RevCostCenteridNo") = itemDataView.RevCostCenterIdNo
         End Sub
 

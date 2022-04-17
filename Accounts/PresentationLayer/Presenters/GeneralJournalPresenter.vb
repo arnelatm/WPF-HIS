@@ -54,7 +54,12 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Sub CreateDataSources()
             CreateLookupData("Account", "AccountsByCode", "DetailAccount=1")
             CreateLookupData("RevCostCenter", "RevCostCentersByCode")
+            CreateLookupData("Payee_View","PayeeByCode")
+            CreateLookupData("Payee_View", "CustomerByCode", "PayeeType = 'C'")
+            CreateLookupData("Payee_View", "SupplierByCode", "PayeeType = 'S'")
+            CreateLookupData("Payee_View", "EmployeeByCode", "PayeeType = 'E'")
         End Sub
+
 
         Public Overrides Sub GoPrintRecord()
             Dim totalCreditAmount As String

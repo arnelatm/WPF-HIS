@@ -37,9 +37,9 @@ Namespace PresentationLayer.Views.Forms.Reports
                 reportName = Messaging.TranslateCaption("Statement of Employee Loans")
                 reportTitle = Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName, "beginningDate", bDate, "endingDate", eDate})
                 If Strings.Left(FormCulture.Name, 2) = "ar" Then
-                    cForm = New ReportFormNew("Statement of Employee Loans Arabic.rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboEmployeeIdNo.SelectedItem.IdNo, "EmployeeIdNo", cboEmployeeIdNo.Text, "DisplayName")
+                    cForm = New ReportFormNew("Statement of Employee Loans Arabic.rpt", reportTitle, CultureInfo.CurrentCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboEmployeeIdNo.SelectedItem.IdNo, "EmployeeIdNo", cboEmployeeIdNo.Text, "DisplayName")
                 Else
-                    cForm = New ReportFormNew("Statement of Employee Loans.rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboEmployeeIdNo.SelectedItem.IdNo, "EmployeeIdNo", cboEmployeeIdNo.Text, "DisplayName")
+                    cForm = New ReportFormNew("Statement of Employee Loans.rpt", reportTitle, CultureInfo.CurrentCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboEmployeeIdNo.SelectedItem.IdNo, "EmployeeIdNo", cboEmployeeIdNo.Text, "DisplayName")
                 End If
                 cForm.Show()
             Else

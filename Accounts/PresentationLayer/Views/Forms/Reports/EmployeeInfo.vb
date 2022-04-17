@@ -29,7 +29,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim reportTitle As String
             reportName = Messaging.TranslateCaption("Statement of Employee Leaves")
             reportTitle = Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName})
-            cForm = New ReportFormNew("HR Employee Info.rpt", reportTitle, FormCulture, cboEmployeeIdNo.SelectedItem.IdNo, "EmployeeIdNo")
+            cForm = New ReportFormNew("HR Employee Info.rpt", reportTitle, CultureInfo.CurrentCulture, cboEmployeeIdNo.SelectedItem.IdNo, "EmployeeIdNo")
             cForm.Show()
         End Sub
 

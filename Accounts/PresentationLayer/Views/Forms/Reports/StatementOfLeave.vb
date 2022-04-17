@@ -39,7 +39,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                 'If Strings.Left(FormCulture.Name, 2) = "ar" Then
                 '    cForm = New ReportFormNew("Statement of Employee Loans Arabic.rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboEmployeeIdNo.SelectedItem.IdNo, "EmployeeIdNo", cboEmployeeIdNo.Text, "DisplayName")
                 'Else
-                cForm = New ReportFormNew("Statement of Employee Leaves.rpt", reportTitle, FormCulture, dtpBeginningDate.Value, "DateStart", dtpEndingDate.Value, "DateEnd", cboEmployeeIdNo.SelectedItem.IdNo, "EmployeeIdNo", cboEmployeeIdNo.Text, "DisplayName")
+                cForm = New ReportFormNew("Statement of Employee Leaves.rpt", reportTitle, CultureInfo.CurrentCulture, dtpBeginningDate.Value, "DateStart", dtpEndingDate.Value, "DateEnd", cboEmployeeIdNo.SelectedItem.IdNo, "EmployeeIdNo", cboEmployeeIdNo.Text, "DisplayName")
                 'End If
                 cForm.Show()
             Else

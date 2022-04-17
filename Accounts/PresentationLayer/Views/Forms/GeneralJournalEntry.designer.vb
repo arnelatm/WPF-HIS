@@ -58,10 +58,10 @@ Namespace PresentationLayer.Views.Forms
         Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpDateCreated = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
         Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.txtTotalDebits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
         Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
@@ -70,23 +70,14 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SpecialAccount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PayIdNoDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.floJournalHeader.SuspendLayout
         Me.CFlowLayout1.SuspendLayout
         Me.CFlowLayout2.SuspendLayout
         CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout4.SuspendLayout
+        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
-        '
-        'TranslatorDAC
-        '
-        Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
-        '
-        'AppDataDAC
-        '
-        Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
         '
         'floJournalHeader
         '
@@ -469,7 +460,7 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewJournalItems.BackgroundColor = System.Drawing.SystemColors.Window
         Me.DataGridViewJournalItems.BegFindValue = Nothing
         Me.DataGridViewJournalItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvRevCostCenterIdNo, Me.dgvNotes, Me.dgvIdNo, Me.SpecialAccount, Me.PayIdNoDataGridViewTextBoxColumn})
+        Me.DataGridViewJournalItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvAccountIdNo, Me.dgvDebit, Me.dgvCredit, Me.dgvRevCostCenterIdNo, Me.dgvNotes, Me.dgvIdNo, Me.SpecialAccount})
         Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
         DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
@@ -504,10 +495,6 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewJournalItems.ShowFooter = false
         Me.DataGridViewJournalItems.ShowInsertColumnWhenEditing = true
         Me.DataGridViewJournalItems.Translatable = true
-        '
-        'bsJournalItems
-        '
-        Me.bsJournalItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.JournalItemModel)
         '
         'CFlowLayout4
         '
@@ -564,6 +551,10 @@ Namespace PresentationLayer.Views.Forms
         Me.txtTotalCredits.OldValue = Nothing
         Me.txtTotalCredits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtTotalCredits.Translatable = false
+        '
+        'bsJournalItems
+        '
+        Me.bsJournalItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.JournalItemModel)
         '
         'dgvSequence
         '
@@ -701,18 +692,6 @@ Namespace PresentationLayer.Views.Forms
         Me.SpecialAccount.Name = "SpecialAccount"
         Me.SpecialAccount.ReadOnly = true
         '
-        'PayIdNoDataGridViewTextBoxColumn
-        '
-        Me.PayIdNoDataGridViewTextBoxColumn.AutoComplete = false
-        Me.PayIdNoDataGridViewTextBoxColumn.DataPropertyName = "PayIdNo"
-        Me.PayIdNoDataGridViewTextBoxColumn.EditingMode = false
-        resources.ApplyResources(Me.PayIdNoDataGridViewTextBoxColumn, "PayIdNoDataGridViewTextBoxColumn")
-        Me.PayIdNoDataGridViewTextBoxColumn.Name = "PayIdNoDataGridViewTextBoxColumn"
-        Me.PayIdNoDataGridViewTextBoxColumn.ReadOnly = true
-        Me.PayIdNoDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.PayIdNoDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.PayIdNoDataGridViewTextBoxColumn.Translatable = false
-        '
         'GeneralJournalEntry
         '
         resources.ApplyResources(Me, "$this")
@@ -730,8 +709,8 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout2.ResumeLayout(false)
         Me.CFlowLayout2.PerformLayout
         CType(Me.DataGridViewJournalItems,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).EndInit
         Me.CFlowLayout4.ResumeLayout(false)
+        CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -773,6 +752,5 @@ End Sub
         Friend WithEvents dgvNotes As CDgvTextColumn
         Friend WithEvents dgvIdNo As DataGridViewTextBoxColumn
         Friend WithEvents SpecialAccount As DataGridViewTextBoxColumn
-        Friend WithEvents PayIdNoDataGridViewTextBoxColumn As CDgvComboBoxColumn
     End Class
 End NameSpace
