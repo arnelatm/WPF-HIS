@@ -9,6 +9,7 @@ Public Class SecurityObjectPresenter(Of TM As New)
         MyBase.New(view)
         Service = New Service("SecurityObject")
         TableName = "SecurityObject_View"
+        TableBaseName = "SecurityObject"
         SortOrderKey = "SortKey"
         TreeViewMainField = "SecurityObjectName"
         TreeViewSecondaryField = "IdNo"

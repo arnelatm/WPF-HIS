@@ -2158,7 +2158,7 @@
         Me.tbpPayroll.Location = New System.Drawing.Point(4, 22)
         Me.tbpPayroll.Name = "tbpPayroll"
         Me.tbpPayroll.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpPayroll.SecurityKey = "EPI"
+        Me.tbpPayroll.SecurityKey = "EmployeePayInfo"
         Me.tbpPayroll.Size = New System.Drawing.Size(669, 361)
         Me.tbpPayroll.TabIndex = 2
         Me.tbpPayroll.Text = "Payroll Information"
@@ -2201,7 +2201,7 @@
         Me.lblPaymentMethod.Location = New System.Drawing.Point(4, 4)
         Me.lblPaymentMethod.Margin = New System.Windows.Forms.Padding(1)
         Me.lblPaymentMethod.Name = "lblPaymentMethod"
-        Me.lblPaymentMethod.SecurityKey = "EPI"
+        Me.lblPaymentMethod.SecurityKey = "EmployeePayInfo"
         Me.lblPaymentMethod.Size = New System.Drawing.Size(185, 23)
         Me.lblPaymentMethod.TabIndex = 288
         Me.lblPaymentMethod.Text = "Payment Method"
@@ -2242,7 +2242,7 @@
         Me.cboPaymentMethod.PreviousSearchTerm = Nothing
         Me.cboPaymentMethod.PropertySelector = Nothing
         Me.cboPaymentMethod.ReadOnlyCombo = false
-        Me.cboPaymentMethod.SecurityKey = "EPI"
+        Me.cboPaymentMethod.SecurityKey = "EmployeePayInfo"
         Me.cboPaymentMethod.Size = New System.Drawing.Size(402, 24)
         Me.cboPaymentMethod.SuggestBoxHeight = 200
         Me.cboPaymentMethod.SuggestListOrderRule = Nothing
@@ -2263,7 +2263,7 @@
         Me.lblBankIdNo.Location = New System.Drawing.Point(4, 30)
         Me.lblBankIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblBankIdNo.Name = "lblBankIdNo"
-        Me.lblBankIdNo.SecurityKey = "EPI"
+        Me.lblBankIdNo.SecurityKey = "EmployeePayInfo"
         Me.lblBankIdNo.Size = New System.Drawing.Size(185, 23)
         Me.lblBankIdNo.TabIndex = 216
         Me.lblBankIdNo.Text = "Bank Name"
@@ -2304,7 +2304,7 @@
         Me.cacBankIdNo.PreviousSearchTerm = Nothing
         Me.cacBankIdNo.PropertySelector = Nothing
         Me.cacBankIdNo.ReadOnlyCombo = false
-        Me.cacBankIdNo.SecurityKey = "EPI"
+        Me.cacBankIdNo.SecurityKey = "EmployeePayInfo"
         Me.cacBankIdNo.Size = New System.Drawing.Size(402, 24)
         Me.cacBankIdNo.SuggestBoxHeight = 200
         Me.cacBankIdNo.SuggestListOrderRule = Nothing
@@ -2325,7 +2325,7 @@
         Me.lblBankAccountNo.Location = New System.Drawing.Point(4, 56)
         Me.lblBankAccountNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblBankAccountNo.Name = "lblBankAccountNo"
-        Me.lblBankAccountNo.SecurityKey = "EPI"
+        Me.lblBankAccountNo.SecurityKey = "EmployeePayInfo"
         Me.lblBankAccountNo.Size = New System.Drawing.Size(185, 23)
         Me.lblBankAccountNo.TabIndex = 218
         Me.lblBankAccountNo.Text = "Account No."
@@ -2358,7 +2358,7 @@
         Me.txtBankAccountNo.OldValue = Nothing
         Me.txtBankAccountNo.ReadOnly = true
         Me.txtBankAccountNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtBankAccountNo.SecurityKey = "EPI"
+        Me.txtBankAccountNo.SecurityKey = "EmployeePayInfo"
         Me.txtBankAccountNo.Size = New System.Drawing.Size(200, 23)
         Me.txtBankAccountNo.TabIndex = 3
         Me.txtBankAccountNo.Translatable = false
@@ -2372,7 +2372,7 @@
         Me.lblOpeningBalance.Location = New System.Drawing.Point(4, 81)
         Me.lblOpeningBalance.Margin = New System.Windows.Forms.Padding(1)
         Me.lblOpeningBalance.Name = "lblOpeningBalance"
-        Me.lblOpeningBalance.SecurityKey = "EPI"
+        Me.lblOpeningBalance.SecurityKey = "EmployeePayInfo"
         Me.lblOpeningBalance.Size = New System.Drawing.Size(185, 23)
         Me.lblOpeningBalance.TabIndex = 284
         Me.lblOpeningBalance.Text = "Open. Bal. (Cash Adv.)"
@@ -2406,7 +2406,7 @@
         Me.txtOpeningBalance.OldValue = Nothing
         Me.txtOpeningBalance.ReadOnly = true
         Me.txtOpeningBalance.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtOpeningBalance.SecurityKey = "EPI"
+        Me.txtOpeningBalance.SecurityKey = "EmployeePayInfo"
         Me.txtOpeningBalance.Size = New System.Drawing.Size(93, 23)
         Me.txtOpeningBalance.TabIndex = 4
         Me.txtOpeningBalance.Translatable = false
@@ -2421,7 +2421,7 @@
         Me.lblBalance.Location = New System.Drawing.Point(4, 106)
         Me.lblBalance.Margin = New System.Windows.Forms.Padding(1)
         Me.lblBalance.Name = "lblBalance"
-        Me.lblBalance.SecurityKey = "EPI"
+        Me.lblBalance.SecurityKey = "EmployeePayInfo"
         Me.lblBalance.Size = New System.Drawing.Size(185, 23)
         Me.lblBalance.TabIndex = 285
         Me.lblBalance.Text = "Cash Advance Balance"
@@ -2455,7 +2455,7 @@
         Me.txtBalance.OldValue = Nothing
         Me.txtBalance.ReadOnly = true
         Me.txtBalance.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtBalance.SecurityKey = "EPI"
+        Me.txtBalance.SecurityKey = "EmployeePayInfo"
         Me.txtBalance.Size = New System.Drawing.Size(93, 23)
         Me.txtBalance.TabIndex = 5
         Me.txtBalance.Translatable = false
@@ -2470,7 +2470,7 @@
         Me.lblIban.Location = New System.Drawing.Point(4, 131)
         Me.lblIban.Margin = New System.Windows.Forms.Padding(1)
         Me.lblIban.Name = "lblIban"
-        Me.lblIban.SecurityKey = "EPI"
+        Me.lblIban.SecurityKey = "EmployeePayInfo"
         Me.lblIban.Size = New System.Drawing.Size(185, 23)
         Me.lblIban.TabIndex = 220
         Me.lblIban.Text = "IBAN Number"
@@ -2503,7 +2503,7 @@
         Me.txtIban.OldValue = Nothing
         Me.txtIban.ReadOnly = true
         Me.txtIban.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtIban.SecurityKey = "EPI"
+        Me.txtIban.SecurityKey = "EmployeePayInfo"
         Me.txtIban.Size = New System.Drawing.Size(200, 23)
         Me.txtIban.TabIndex = 6
         Me.txtIban.Translatable = false
@@ -2517,7 +2517,7 @@
         Me.lblPayCycleIdNo.Location = New System.Drawing.Point(4, 156)
         Me.lblPayCycleIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblPayCycleIdNo.Name = "lblPayCycleIdNo"
-        Me.lblPayCycleIdNo.SecurityKey = "EPI"
+        Me.lblPayCycleIdNo.SecurityKey = "EmployeePayInfo"
         Me.lblPayCycleIdNo.Size = New System.Drawing.Size(185, 23)
         Me.lblPayCycleIdNo.TabIndex = 286
         Me.lblPayCycleIdNo.Text = "Pay Cycle"
@@ -2558,7 +2558,7 @@
         Me.cboPayCycleidNo.PreviousSearchTerm = Nothing
         Me.cboPayCycleidNo.PropertySelector = Nothing
         Me.cboPayCycleidNo.ReadOnlyCombo = false
-        Me.cboPayCycleidNo.SecurityKey = "EPI"
+        Me.cboPayCycleidNo.SecurityKey = "EmployeePayInfo"
         Me.cboPayCycleidNo.Size = New System.Drawing.Size(201, 24)
         Me.cboPayCycleidNo.SuggestBoxHeight = 200
         Me.cboPayCycleidNo.SuggestListOrderRule = Nothing
@@ -2579,7 +2579,7 @@
         Me.lblPayGroupIdNo.Location = New System.Drawing.Point(4, 182)
         Me.lblPayGroupIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblPayGroupIdNo.Name = "lblPayGroupIdNo"
-        Me.lblPayGroupIdNo.SecurityKey = "EPI"
+        Me.lblPayGroupIdNo.SecurityKey = "EmployeePayInfo"
         Me.lblPayGroupIdNo.Size = New System.Drawing.Size(185, 23)
         Me.lblPayGroupIdNo.TabIndex = 290
         Me.lblPayGroupIdNo.Text = "Pay Group"
@@ -2620,7 +2620,7 @@
         Me.cboPayGroupIdNo.PreviousSearchTerm = Nothing
         Me.cboPayGroupIdNo.PropertySelector = Nothing
         Me.cboPayGroupIdNo.ReadOnlyCombo = false
-        Me.cboPayGroupIdNo.SecurityKey = "EPI"
+        Me.cboPayGroupIdNo.SecurityKey = "EmployeePayInfo"
         Me.cboPayGroupIdNo.Size = New System.Drawing.Size(201, 24)
         Me.cboPayGroupIdNo.SuggestBoxHeight = 200
         Me.cboPayGroupIdNo.SuggestListOrderRule = Nothing
@@ -2641,7 +2641,7 @@
         Me.lblDutyHours.Location = New System.Drawing.Point(4, 208)
         Me.lblDutyHours.Margin = New System.Windows.Forms.Padding(1)
         Me.lblDutyHours.Name = "lblDutyHours"
-        Me.lblDutyHours.SecurityKey = "EPI"
+        Me.lblDutyHours.SecurityKey = "EmployeePayInfo"
         Me.lblDutyHours.Size = New System.Drawing.Size(185, 23)
         Me.lblDutyHours.TabIndex = 292
         Me.lblDutyHours.Text = "Duty Hours"
@@ -2674,7 +2674,7 @@
         Me.txtDutyHours.OldValue = Nothing
         Me.txtDutyHours.ReadOnly = true
         Me.txtDutyHours.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtDutyHours.SecurityKey = "EPI"
+        Me.txtDutyHours.SecurityKey = "EmployeePayInfo"
         Me.txtDutyHours.Size = New System.Drawing.Size(93, 23)
         Me.txtDutyHours.TabIndex = 291
         Me.txtDutyHours.Translatable = false
@@ -2765,6 +2765,7 @@
         '
         'dgvEarningIdNo
         '
+        Me.dgvEarningIdNo.AutoComplete = false
         Me.dgvEarningIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.dgvEarningIdNo.DataPropertyName = "PayElementIdNo"
         DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
@@ -2796,6 +2797,7 @@
         '
         'dgvEarningUnit
         '
+        Me.dgvEarningUnit.AutoComplete = false
         Me.dgvEarningUnit.DataPropertyName = "Unit"
         DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
@@ -2933,6 +2935,7 @@
         '
         'dgvDeductionIdNo
         '
+        Me.dgvDeductionIdNo.AutoComplete = false
         Me.dgvDeductionIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.dgvDeductionIdNo.DataPropertyName = "PayElementIdNo"
         DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
@@ -2972,6 +2975,7 @@
         '
         'dgvDeductionUnit
         '
+        Me.dgvDeductionUnit.AutoComplete = false
         Me.dgvDeductionUnit.DataPropertyName = "Unit"
         DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black
@@ -3106,6 +3110,7 @@
         '
         'dgvPhoneTypeIdNo
         '
+        Me.dgvPhoneTypeIdNo.AutoComplete = false
         Me.dgvPhoneTypeIdNo.DataPropertyName = "PhoneTypeIdNo"
         DataGridViewCellStyle22.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle22.ForeColor = System.Drawing.Color.Black
@@ -3120,6 +3125,7 @@
         '
         'dgvCountryTelIdNo
         '
+        Me.dgvCountryTelIdNo.AutoComplete = false
         Me.dgvCountryTelIdNo.DataPropertyName = "CountryTelIdNo"
         DataGridViewCellStyle23.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle23.ForeColor = System.Drawing.Color.Black
@@ -3284,6 +3290,7 @@
         '
         'dgvLeaveIdNo
         '
+        Me.dgvLeaveIdNo.AutoComplete = false
         Me.dgvLeaveIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.dgvLeaveIdNo.DataPropertyName = "LeaveIdNo"
         DataGridViewCellStyle28.BackColor = System.Drawing.Color.White
