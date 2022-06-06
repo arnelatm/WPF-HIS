@@ -90,6 +90,8 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemPensionSchemes = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemSupplierVendors = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemCustomerClients = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemIGroup = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemPharmacyItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemTransactions = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemPettyCash = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemCashDisbursementEntry = New System.Windows.Forms.ToolStripMenuItem()
@@ -152,6 +154,7 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemEmployeeIDPrinting = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemEmployeeLeaveReport = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemEmployeeInformation = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemEmployeeMedicalReport = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemReceptionReports = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemShiftDailySummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemAccountingReports = New System.Windows.Forms.ToolStripMenuItem()
@@ -188,8 +191,6 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemIGroup = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemPharmacyItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.AccountsMenu.SuspendLayout
@@ -530,6 +531,17 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemCustomerClients.Name = "ToolStripMenuItemCustomerClients"
         resources.ApplyResources(Me.ToolStripMenuItemCustomerClients, "ToolStripMenuItemCustomerClients")
         '
+        'ToolStripMenuItemIGroup
+        '
+        Me.ToolStripMenuItemIGroup.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPharmacyItem})
+        Me.ToolStripMenuItemIGroup.Name = "ToolStripMenuItemIGroup"
+        resources.ApplyResources(Me.ToolStripMenuItemIGroup, "ToolStripMenuItemIGroup")
+        '
+        'ToolStripMenuItemPharmacyItem
+        '
+        Me.ToolStripMenuItemPharmacyItem.Name = "ToolStripMenuItemPharmacyItem"
+        resources.ApplyResources(Me.ToolStripMenuItemPharmacyItem, "ToolStripMenuItemPharmacyItem")
+        '
         'ToolStripMenuItemTransactions
         '
         Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPettyCash, Me.ToolStripMenuItemCashDisbursementEntry, Me.ToolStripMenuItemAccountsPayableEntry, Me.ToolStripMenuItemAccountsReceivableEntry, Me.ToolStripMenuItemCashReceiptEntry, Me.ToolStripMenuItemEmployeeReceivable, Me.ToolStripMenuItemGeneralJournalEntry, Me.ToolStripMenuItemSalesJournalEntry, Me.ToolStripMenuItemAccountReconciliation, Me.ToolStripMenuItemPostPettyCashAccount, Me.ToolStripMenuItemClosing, Me.ToolStripMenuItemHR, Me.ToolStripMenuItemPayrollTransaction, Me.ToolStripMenuItemShiftSummaryEntry, Me.ToolStripSeparator2, Me.ToolStripMenuItemClosePettyCashFund})
@@ -831,7 +843,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemHRReports
         '
-        Me.ToolStripMenuItemHRReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemEmployeeIDPrinting, Me.ToolStripMenuItemEmployeeLeaveReport, Me.ToolStripMenuItemEmployeeInformation})
+        Me.ToolStripMenuItemHRReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemEmployeeIDPrinting, Me.ToolStripMenuItemEmployeeLeaveReport, Me.ToolStripMenuItemEmployeeInformation, Me.ToolStripMenuItemEmployeeMedicalReport})
         Me.ToolStripMenuItemHRReports.Name = "ToolStripMenuItemHRReports"
         resources.ApplyResources(Me.ToolStripMenuItemHRReports, "ToolStripMenuItemHRReports")
         '
@@ -849,6 +861,11 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.ToolStripMenuItemEmployeeInformation.Name = "ToolStripMenuItemEmployeeInformation"
         resources.ApplyResources(Me.ToolStripMenuItemEmployeeInformation, "ToolStripMenuItemEmployeeInformation")
+        '
+        'ToolStripMenuItemEmployeeMedicalReport
+        '
+        Me.ToolStripMenuItemEmployeeMedicalReport.Name = "ToolStripMenuItemEmployeeMedicalReport"
+        resources.ApplyResources(Me.ToolStripMenuItemEmployeeMedicalReport, "ToolStripMenuItemEmployeeMedicalReport")
         '
         'ToolStripMenuItemReceptionReports
         '
@@ -1039,17 +1056,6 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
-        'ToolStripMenuItemIGroup
-        '
-        Me.ToolStripMenuItemIGroup.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPharmacyItem})
-        Me.ToolStripMenuItemIGroup.Name = "ToolStripMenuItemIGroup"
-        resources.ApplyResources(Me.ToolStripMenuItemIGroup, "ToolStripMenuItemIGroup")
-        '
-        'ToolStripMenuItemPharmacyItem
-        '
-        Me.ToolStripMenuItemPharmacyItem.Name = "ToolStripMenuItemPharmacyItem"
-        resources.ApplyResources(Me.ToolStripMenuItemPharmacyItem, "ToolStripMenuItemPharmacyItem")
-        '
         'Main
         '
         Me.AllowDrop = true
@@ -1237,5 +1243,6 @@ End Sub
         Friend WithEvents ToolStripMenuItemSalesReports As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemIGroup As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemPharmacyItem As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemEmployeeMedicalReport As ToolStripMenuItem
     End Class
 End NameSpace

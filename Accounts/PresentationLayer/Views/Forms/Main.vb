@@ -1089,7 +1089,7 @@ Namespace PresentationLayer.Views.Forms
                 If TypeOf dropDownItem Is ToolStripMenuItem Then
                     Dim parentMenuName = pParentMenuName
                     If dropDownItem.Name.SubString(0, 17) <> "ToolStripMenuItem" Then
-                        Debugger.Break()
+                        'Debugger.Break()
                         MessageBox.Show($"Invalid ToolStripMenuItem Name <" + dropDownItem.Name.SubString(0, 17) + ">!")
                     End If
                     parentIdNo = UpdateSecurityObject(Of ToolStripMenuItem)(dropDownItem, parentMenuName, pParentIdNo, 17)
@@ -1179,6 +1179,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub DrugListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPharmacyItem.Click
             RunForm(Of ItemDetailsEntry, ItemDetailsPresenter(Of ItemDetailsModel))()
+        End Sub
+
+        Private Sub EmployeeMedicalReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeMedicalReport.Click
+            RunForm(Of EmployeeMedicalReport)()
         End Sub
     End Class
 
