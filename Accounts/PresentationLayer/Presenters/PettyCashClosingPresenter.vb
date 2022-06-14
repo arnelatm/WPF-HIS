@@ -32,6 +32,7 @@ Namespace PresentationLayer.Presenters
                                             {"Debit", GetType(Decimal)},
                                             {"JournalIdNo", GetType(Int32)},
                                             {"Notes", GetType(String)},
+                                            {"PayIdNo", GetType(Int32)},
                                             {"RevCostCenterIdNo", GetType(Int16)},
                                             {"Sequence", GetType(Int16)}
                                             })
