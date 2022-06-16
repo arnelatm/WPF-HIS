@@ -191,20 +191,14 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemLaboratory = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemCbcResultRetrieval = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.AccountsMenu.SuspendLayout
         Me.contextMenuStripMember.SuspendLayout
         Me.contextMenuStrip1.SuspendLayout
         Me.SuspendLayout
-        '
-        'TranslatorDAC
-        '
-        Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
-        '
-        'AppDataDAC
-        '
-        Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
         '
         'imageListMember
         '
@@ -544,7 +538,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemTransactions
         '
-        Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPettyCash, Me.ToolStripMenuItemCashDisbursementEntry, Me.ToolStripMenuItemAccountsPayableEntry, Me.ToolStripMenuItemAccountsReceivableEntry, Me.ToolStripMenuItemCashReceiptEntry, Me.ToolStripMenuItemEmployeeReceivable, Me.ToolStripMenuItemGeneralJournalEntry, Me.ToolStripMenuItemSalesJournalEntry, Me.ToolStripMenuItemAccountReconciliation, Me.ToolStripMenuItemPostPettyCashAccount, Me.ToolStripMenuItemClosing, Me.ToolStripMenuItemHR, Me.ToolStripMenuItemPayrollTransaction, Me.ToolStripMenuItemShiftSummaryEntry, Me.ToolStripSeparator2, Me.ToolStripMenuItemClosePettyCashFund})
+        Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPettyCash, Me.ToolStripMenuItemCashDisbursementEntry, Me.ToolStripMenuItemAccountsPayableEntry, Me.ToolStripMenuItemAccountsReceivableEntry, Me.ToolStripMenuItemCashReceiptEntry, Me.ToolStripMenuItemEmployeeReceivable, Me.ToolStripMenuItemGeneralJournalEntry, Me.ToolStripMenuItemSalesJournalEntry, Me.ToolStripMenuItemAccountReconciliation, Me.ToolStripMenuItemPostPettyCashAccount, Me.ToolStripMenuItemClosing, Me.ToolStripMenuItemHR, Me.ToolStripMenuItemPayrollTransaction, Me.ToolStripMenuItemShiftSummaryEntry, Me.ToolStripSeparator2, Me.ToolStripMenuItemClosePettyCashFund, Me.ToolStripMenuItemLaboratory})
         Me.ToolStripMenuItemTransactions.Name = "ToolStripMenuItemTransactions"
         resources.ApplyResources(Me.ToolStripMenuItemTransactions, "ToolStripMenuItemTransactions")
         '
@@ -1056,6 +1050,17 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
+        'ToolStripMenuItemLaboratory
+        '
+        Me.ToolStripMenuItemLaboratory.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCbcResultRetrieval})
+        Me.ToolStripMenuItemLaboratory.Name = "ToolStripMenuItemLaboratory"
+        resources.ApplyResources(Me.ToolStripMenuItemLaboratory, "ToolStripMenuItemLaboratory")
+        '
+        'ToolStripMenuItemCbcResultRetrieval
+        '
+        Me.ToolStripMenuItemCbcResultRetrieval.Name = "ToolStripMenuItemCbcResultRetrieval"
+        resources.ApplyResources(Me.ToolStripMenuItemCbcResultRetrieval, "ToolStripMenuItemCbcResultRetrieval")
+        '
         'Main
         '
         Me.AllowDrop = true
@@ -1244,5 +1249,7 @@ End Sub
         Friend WithEvents ToolStripMenuItemIGroup As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemPharmacyItem As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemEmployeeMedicalReport As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemLaboratory As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemCbcResultRetrieval As ToolStripMenuItem
     End Class
 End NameSpace
