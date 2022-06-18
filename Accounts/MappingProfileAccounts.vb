@@ -154,7 +154,13 @@ Public Class MappingProfileAccounts
         CreateMap(Of ReportModel, IReportView)().ReverseMap()
         CreateMap(Of ItemDetails, ItemDetailsModel)().ReverseMap()
         CreateMap(Of ItemDetailsModel, IItemDetailsView)().ReverseMap()
+        CreateMap(Of Lab_InvoiceGroup, Lab_InvoiceGroupModel)().ReverseMap()
+        CreateMap(Of Lab_InvoiceGroupModel, ILab_InvoiceGroupView)().ReverseMap()
+        CreateMap(Of Lab_InvoiceDetails, Lab_InvoiceDetailsModel)().ReverseMap()
+        CreateMap(Of Lab_InvoiceDetailsModel, Lab_InvoiceDetailsView)().ReverseMap()
+
     End Sub
+
 
     'CreateMap(Of List(Of JournalItem), List(Of JournalItemModel))().ReverseMap()
     'CreateMap(Of List(Of JournalItemModel), IJournalItemsView)().ReverseMap()

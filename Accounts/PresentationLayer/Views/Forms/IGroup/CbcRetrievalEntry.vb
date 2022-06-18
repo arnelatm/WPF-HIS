@@ -1,6 +1,8 @@
 ﻿Imports System.Configuration
 Imports System.Globalization
 Imports System.IO
+Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
@@ -8,17 +10,20 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Views.Forms
 
     Public Class CbcRetrievalEntry
-        Implements ICbcRetrievalView
+        Implements ILab_InvoiceGroupView
 
 
         Private _nfi As NumberFormatInfo
+        Private _labInvoiceDetails As List(Of Lab_InvoiceDetailsView)
+
+        Public Event RetrieveLabResultRequested() Implements ILab_InvoiceGroupView.RetrieveLabResultRequested
 
         Public Sub New()
 
             ' This call is required by the designer.
             InitializeComponent()
             'FirstControl = txtInvoiceNo
-
+            Presenter = New Lab_InvoiceGroupPresenter(Of Lab_InvoiceGroupModel)(Me)
             Dim numberDecimalDigits = 4
             Dim numberDecimalSeparator = ConfigurationManager.AppSettings("DefaultNumberDecimalSeparator")
             Dim numberGroupSeparator = ConfigurationManager.AppSettings("DefaultNumberGroupSeparator")
@@ -34,6 +39,7 @@ Namespace PresentationLayer.Views.Forms
             Else
                 _nfi.NumberGroupSeparator = numberGroupSeparator
             End If
+
             'TurnOnInputs()
 
         End Sub
@@ -288,70 +294,108 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
 #Region "Field Items"
-        Public Property InvoiceNo As String Implements ICbcRetrievalView.InvoiceNo
+        Public Property InvoiceNo As String Implements ILab_InvoiceGroupView.InvoiceNo
             Get
-                Throw New NotImplementedException()
+                Return txtInvoiceNo.Text
             End Get
             Set(value As String)
-                Throw New NotImplementedException()
+                txtInvoiceNo.Text = value
             End Set
         End Property
 
-        Public Property InvoiceType As String Implements ICbcRetrievalView.InvoiceType
+        Public Property InvoiceType As String Implements ILab_InvoiceGroupView.InvoiceType
             Get
-                Throw New NotImplementedException()
+                Return txtInvoiceTypeDisplay.Text
             End Get
             Set(value As String)
-                Throw New NotImplementedException()
+                txtInvoiceTypeDisplay.Text = value
+                If value = "CA" Then
+                    txtInvoiceTypeDisplay.Text = "Cash"
+                Else
+                    txtInvoiceTypeDisplay.Text = "Credit"
+                End If
             End Set
         End Property
 
-        Public Property InvoiceDate As Date Implements ICbcRetrievalView.InvoiceDate
+        Public Property InvoiceDate As Date Implements ILab_InvoiceGroupView.InvoiceDate
             Get
-                Throw New NotImplementedException()
+                Return txtInvoiceDate.Text
             End Get
             Set(value As Date)
-                Throw New NotImplementedException()
+                txtInvoiceDate.Text = value
             End Set
         End Property
 
-        Public Property PatientNameEnglish As String Implements ICbcRetrievalView.PatientNameEnglish
+        Public Property PatientNameEnglish As String Implements ILab_InvoiceGroupView.PatientNameEnglish
             Get
-                Throw New NotImplementedException()
+                Return txtPatientNameEnglish.Text
             End Get
             Set(value As String)
-                Throw New NotImplementedException()
+                txtPatientNameEnglish.Text = value
             End Set
         End Property
 
-        Public Property Age As Short Implements ICbcRetrievalView.Age
+        Public Property PatientName As String Implements ILab_InvoiceGroupView.PatientName
             Get
-                Throw New NotImplementedException()
+                Return txtPatientName.Text
             End Get
-            Set(value As Short)
-                Throw New NotImplementedException()
+            Set(value As String)
+                txtPatientName.Text = value
             End Set
         End Property
 
-        Public Property AgeYMD As String Implements ICbcRetrievalView.AgeYMD
+        Public Property Age As Decimal Implements ILab_InvoiceGroupView.Age
             Get
-                Throw New NotImplementedException()
+                Return txtAge.Text
+            End Get
+            Set(value As Decimal)
+                txtAge.Text = value
+            End Set
+        End Property
+
+        Public Property AgeYMD As String Implements ILab_InvoiceGroupView.AgeYMD
+            Get
+                Return txtAgeYmd.Text
             End Get
             Set(value As String)
-                Throw New NotImplementedException()
+                txtAgeYmd.Text = value
             End Set
         End Property
 
-        Public Property Sex As String Implements ICbcRetrievalView.Sex
+        Public Property Sex As String Implements ILab_InvoiceGroupView.Sex
             Get
-                Throw New NotImplementedException()
+                Return txtSex.Text
             End Get
             Set(value As String)
-                Throw New NotImplementedException()
+                txtSexDisplay.Text = value
+                If value = "M" Then
+                    txtSexDisplay.Text = "Male"
+                Else
+                    txtSexDisplay.Text = "Female"
+                End If
+            End Set
+        End Property
+
+        Public Property RegistrationNo As Decimal Implements ILab_InvoiceGroupView.RegistrationNo
+            Get
+                Return txtRegistrationNo.Text
+            End Get
+            Set(value As Decimal)
+                txtRegistrationNo.Text = value
+            End Set
+        End Property
+
+
+        Public Property SampleNo As String Implements ILab_InvoiceGroupView.SampleNo
+            Get
+                Return txtSampleNo.Text
+            End Get
+            Set(value As String)
+                txtSampleNo.Text = value
             End Set
         End Property
 
-        Public Property Wbc As String Implements ICbcRetrievalView.Wbc
+        Public Property Wbc As String Implements ILab_InvoiceGroupView.Wbc
             Get
                 Throw New NotImplementedException()
             End Get
@@ -360,7 +404,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property NE As String Implements ICbcRetrievalView.NE
+        Public Property NE As String Implements ILab_InvoiceGroupView.NE
             Get
                 Throw New NotImplementedException()
             End Get
@@ -369,7 +413,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Ly As String Implements ICbcRetrievalView.Ly
+        Public Property Ly As String Implements ILab_InvoiceGroupView.Ly
             Get
                 Throw New NotImplementedException()
             End Get
@@ -378,7 +422,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Mo As String Implements ICbcRetrievalView.Mo
+        Public Property Mo As String Implements ILab_InvoiceGroupView.Mo
             Get
                 Throw New NotImplementedException()
             End Get
@@ -387,7 +431,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Eo As String Implements ICbcRetrievalView.Eo
+        Public Property Eo As String Implements ILab_InvoiceGroupView.Eo
             Get
                 Throw New NotImplementedException()
             End Get
@@ -396,7 +440,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Ba As String Implements ICbcRetrievalView.Ba
+        Public Property Ba As String Implements ILab_InvoiceGroupView.Ba
             Get
                 Throw New NotImplementedException()
             End Get
@@ -405,7 +449,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Rbc As String Implements ICbcRetrievalView.Rbc
+        Public Property Rbc As String Implements ILab_InvoiceGroupView.Rbc
             Get
                 Throw New NotImplementedException()
             End Get
@@ -414,7 +458,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Hgb As String Implements ICbcRetrievalView.Hgb
+        Public Property Hgb As String Implements ILab_InvoiceGroupView.Hgb
             Get
                 Throw New NotImplementedException()
             End Get
@@ -423,7 +467,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Hct As String Implements ICbcRetrievalView.Hct
+        Public Property Hct As String Implements ILab_InvoiceGroupView.Hct
             Get
                 Throw New NotImplementedException()
             End Get
@@ -432,7 +476,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Mcv As String Implements ICbcRetrievalView.Mcv
+        Public Property Mcv As String Implements ILab_InvoiceGroupView.Mcv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -441,7 +485,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Mch As String Implements ICbcRetrievalView.Mch
+        Public Property Mch As String Implements ILab_InvoiceGroupView.Mch
             Get
                 Throw New NotImplementedException()
             End Get
@@ -450,7 +494,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Mchc As String Implements ICbcRetrievalView.Mchc
+        Public Property Mchc As String Implements ILab_InvoiceGroupView.Mchc
             Get
                 Throw New NotImplementedException()
             End Get
@@ -459,7 +503,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Rdwcv As String Implements ICbcRetrievalView.Rdwcv
+        Public Property Rdwcv As String Implements ILab_InvoiceGroupView.Rdwcv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -468,7 +512,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Rdwcd As String Implements ICbcRetrievalView.Rdwcd
+        Public Property Rdwcd As String Implements ILab_InvoiceGroupView.Rdwcd
             Get
                 Throw New NotImplementedException()
             End Get
@@ -477,7 +521,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Plt As String Implements ICbcRetrievalView.Plt
+        Public Property Plt As String Implements ILab_InvoiceGroupView.Plt
             Get
                 Throw New NotImplementedException()
             End Get
@@ -486,7 +530,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Pct As String Implements ICbcRetrievalView.Pct
+        Public Property Pct As String Implements ILab_InvoiceGroupView.Pct
             Get
                 Throw New NotImplementedException()
             End Get
@@ -495,7 +539,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Mpv As String Implements ICbcRetrievalView.Mpv
+        Public Property Mpv As String Implements ILab_InvoiceGroupView.Mpv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -504,7 +548,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Pdw As String Implements ICbcRetrievalView.Pdw
+        Public Property Pdw As String Implements ILab_InvoiceGroupView.Pdw
             Get
                 Throw New NotImplementedException()
             End Get
@@ -513,7 +557,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property WbcNv As String Implements ICbcRetrievalView.WbcNv
+        Public Property WbcNv As String Implements ILab_InvoiceGroupView.WbcNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -522,7 +566,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property NENv As String Implements ICbcRetrievalView.NENv
+        Public Property NENv As String Implements ILab_InvoiceGroupView.NENv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -531,7 +575,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property LyNv As String Implements ICbcRetrievalView.LyNv
+        Public Property LyNv As String Implements ILab_InvoiceGroupView.LyNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -540,7 +584,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property MoNv As String Implements ICbcRetrievalView.MoNv
+        Public Property MoNv As String Implements ILab_InvoiceGroupView.MoNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -549,7 +593,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property EoNv As String Implements ICbcRetrievalView.EoNv
+        Public Property EoNv As String Implements ILab_InvoiceGroupView.EoNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -558,7 +602,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property BaNv As String Implements ICbcRetrievalView.BaNv
+        Public Property BaNv As String Implements ILab_InvoiceGroupView.BaNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -567,7 +611,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property RbcNv As String Implements ICbcRetrievalView.RbcNv
+        Public Property RbcNv As String Implements ILab_InvoiceGroupView.RbcNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -576,7 +620,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property HgbNv As String Implements ICbcRetrievalView.HgbNv
+        Public Property HgbNv As String Implements ILab_InvoiceGroupView.HgbNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -585,7 +629,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property HctNv As String Implements ICbcRetrievalView.HctNv
+        Public Property HctNv As String Implements ILab_InvoiceGroupView.HctNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -594,7 +638,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property McvNv As String Implements ICbcRetrievalView.McvNv
+        Public Property McvNv As String Implements ILab_InvoiceGroupView.McvNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -603,7 +647,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property MchNv As String Implements ICbcRetrievalView.MchNv
+        Public Property MchNv As String Implements ILab_InvoiceGroupView.MchNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -612,7 +656,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property MchcNv As String Implements ICbcRetrievalView.MchcNv
+        Public Property MchcNv As String Implements ILab_InvoiceGroupView.MchcNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -621,7 +665,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property RdwcvNv As String Implements ICbcRetrievalView.RdwcvNv
+        Public Property RdwcvNv As String Implements ILab_InvoiceGroupView.RdwcvNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -630,7 +674,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property RdwcdNv As String Implements ICbcRetrievalView.RdwcdNv
+        Public Property RdwcdNv As String Implements ILab_InvoiceGroupView.RdwcdNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -639,7 +683,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PltNv As String Implements ICbcRetrievalView.PltNv
+        Public Property PltNv As String Implements ILab_InvoiceGroupView.PltNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -648,7 +692,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PctNv As String Implements ICbcRetrievalView.PctNv
+        Public Property PctNv As String Implements ILab_InvoiceGroupView.PctNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -657,7 +701,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property MpvNv As String Implements ICbcRetrievalView.MpvNv
+        Public Property MpvNv As String Implements ILab_InvoiceGroupView.MpvNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -666,7 +710,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PdwNv As String Implements ICbcRetrievalView.PdwNv
+        Public Property PdwNv As String Implements ILab_InvoiceGroupView.PdwNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -675,7 +719,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property WbcR As String Implements ICbcRetrievalView.WbcR
+        Public Property WbcR As String Implements ILab_InvoiceGroupView.WbcR
             Get
                 Throw New NotImplementedException()
             End Get
@@ -684,7 +728,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property NeR As String Implements ICbcRetrievalView.NeR
+        Public Property NeR As String Implements ILab_InvoiceGroupView.NeR
             Get
                 Throw New NotImplementedException()
             End Get
@@ -693,7 +737,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property LyR As String Implements ICbcRetrievalView.LyR
+        Public Property LyR As String Implements ILab_InvoiceGroupView.LyR
             Get
                 Throw New NotImplementedException()
             End Get
@@ -702,7 +746,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property MoR As String Implements ICbcRetrievalView.MoR
+        Public Property MoR As String Implements ILab_InvoiceGroupView.MoR
             Get
                 Throw New NotImplementedException()
             End Get
@@ -711,7 +755,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property EoR As String Implements ICbcRetrievalView.EoR
+        Public Property EoR As String Implements ILab_InvoiceGroupView.EoR
             Get
                 Throw New NotImplementedException()
             End Get
@@ -720,7 +764,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property BaR As String Implements ICbcRetrievalView.BaR
+        Public Property BaR As String Implements ILab_InvoiceGroupView.BaR
             Get
                 Throw New NotImplementedException()
             End Get
@@ -729,7 +773,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property RbcR As String Implements ICbcRetrievalView.RbcR
+        Public Property RbcR As String Implements ILab_InvoiceGroupView.RbcR
             Get
                 Throw New NotImplementedException()
             End Get
@@ -738,7 +782,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property HgbR As String Implements ICbcRetrievalView.HgbR
+        Public Property HgbR As String Implements ILab_InvoiceGroupView.HgbR
             Get
                 Throw New NotImplementedException()
             End Get
@@ -747,7 +791,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property HctR As String Implements ICbcRetrievalView.HctR
+        Public Property HctR As String Implements ILab_InvoiceGroupView.HctR
             Get
                 Throw New NotImplementedException()
             End Get
@@ -756,7 +800,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property McvR As String Implements ICbcRetrievalView.McvR
+        Public Property McvR As String Implements ILab_InvoiceGroupView.McvR
             Get
                 Throw New NotImplementedException()
             End Get
@@ -765,7 +809,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property MchR As String Implements ICbcRetrievalView.MchR
+        Public Property MchR As String Implements ILab_InvoiceGroupView.MchR
             Get
                 Throw New NotImplementedException()
             End Get
@@ -774,7 +818,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property MchcR As String Implements ICbcRetrievalView.MchcR
+        Public Property MchcR As String Implements ILab_InvoiceGroupView.MchcR
             Get
                 Throw New NotImplementedException()
             End Get
@@ -783,7 +827,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property RdwcvR As String Implements ICbcRetrievalView.RdwcvR
+        Public Property RdwcvR As String Implements ILab_InvoiceGroupView.RdwcvR
             Get
                 Throw New NotImplementedException()
             End Get
@@ -792,7 +836,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property RdwcdR As String Implements ICbcRetrievalView.RdwcdR
+        Public Property RdwcdR As String Implements ILab_InvoiceGroupView.RdwcdR
             Get
                 Throw New NotImplementedException()
             End Get
@@ -801,7 +845,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PltR As String Implements ICbcRetrievalView.PltR
+        Public Property PltR As String Implements ILab_InvoiceGroupView.PltR
             Get
                 Throw New NotImplementedException()
             End Get
@@ -810,7 +854,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PctR As String Implements ICbcRetrievalView.PctR
+        Public Property PctR As String Implements ILab_InvoiceGroupView.PctR
             Get
                 Throw New NotImplementedException()
             End Get
@@ -819,7 +863,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property MpvR As String Implements ICbcRetrievalView.MpvR
+        Public Property MpvR As String Implements ILab_InvoiceGroupView.MpvR
             Get
                 Throw New NotImplementedException()
             End Get
@@ -828,7 +872,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PdwR As String Implements ICbcRetrievalView.PdwR
+        Public Property PdwR As String Implements ILab_InvoiceGroupView.PdwR
             Get
                 Throw New NotImplementedException()
             End Get
@@ -837,7 +881,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property WbcRNv As String Implements ICbcRetrievalView.WbcRNv
+        Public Property WbcRNv As String Implements ILab_InvoiceGroupView.WbcRNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -846,7 +890,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property NeRNv As String Implements ICbcRetrievalView.NeRNv
+        Public Property NeRNv As String Implements ILab_InvoiceGroupView.NeRNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -855,7 +899,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property LyRNv As String Implements ICbcRetrievalView.LyRNv
+        Public Property LyRNv As String Implements ILab_InvoiceGroupView.LyRNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -864,7 +908,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property MoRNv As String Implements ICbcRetrievalView.MoRNv
+        Public Property MoRNv As String Implements ILab_InvoiceGroupView.MoRNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -873,7 +917,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property EoRNv As String Implements ICbcRetrievalView.EoRNv
+        Public Property EoRNv As String Implements ILab_InvoiceGroupView.EoRNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -882,7 +926,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property BaRNv As String Implements ICbcRetrievalView.BaRNv
+        Public Property BaRNv As String Implements ILab_InvoiceGroupView.BaRNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -891,7 +935,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property RbcRNv As String Implements ICbcRetrievalView.RbcRNv
+        Public Property RbcRNv As String Implements ILab_InvoiceGroupView.RbcRNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -900,7 +944,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property HgbRNv As String Implements ICbcRetrievalView.HgbRNv
+        Public Property HgbRNv As String Implements ILab_InvoiceGroupView.HgbRNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -909,7 +953,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property HctRNv As String Implements ICbcRetrievalView.HctRNv
+        Public Property HctRNv As String Implements ILab_InvoiceGroupView.HctRNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -918,7 +962,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property McvRNv As String Implements ICbcRetrievalView.McvRNv
+        Public Property McvRNv As String Implements ILab_InvoiceGroupView.McvRNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -927,7 +971,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property MchRNv As String Implements ICbcRetrievalView.MchRNv
+        Public Property MchRNv As String Implements ILab_InvoiceGroupView.MchRNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -936,7 +980,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property MchcRNv As String Implements ICbcRetrievalView.MchcRNv
+        Public Property MchcRNv As String Implements ILab_InvoiceGroupView.MchcRNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -945,7 +989,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property RdwcvRNv As String Implements ICbcRetrievalView.RdwcvRNv
+        Public Property RdwcvRNv As String Implements ILab_InvoiceGroupView.RdwcvRNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -954,7 +998,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property RdwcdRNv As String Implements ICbcRetrievalView.RdwcdRNv
+        Public Property RdwcdRNv As String Implements ILab_InvoiceGroupView.RdwcdRNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -963,7 +1007,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PltRNv As String Implements ICbcRetrievalView.PltRNv
+        Public Property PltRNv As String Implements ILab_InvoiceGroupView.PltRNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -972,7 +1016,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PctRNv As String Implements ICbcRetrievalView.PctRNv
+        Public Property PctRNv As String Implements ILab_InvoiceGroupView.PctRNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -981,7 +1025,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property MpvRNv As String Implements ICbcRetrievalView.MpvRNv
+        Public Property MpvRNv As String Implements ILab_InvoiceGroupView.MpvRNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -990,7 +1034,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PdwRNv As String Implements ICbcRetrievalView.PdwRNv
+        Public Property PdwRNv As String Implements ILab_InvoiceGroupView.PdwRNv
             Get
                 Throw New NotImplementedException()
             End Get
@@ -999,12 +1043,30 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Remarks As String Implements ICbcRetrievalView.Remarks
+        Public Property Remarks As String Implements ILab_InvoiceGroupView.Remarks
             Get
                 Throw New NotImplementedException()
             End Get
             Set(value As String)
                 Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property LabInvoiceDetails As List(Of Lab_InvoiceDetailsView) Implements ILab_InvoiceGroupView.LabInvoiceDetails
+            Get
+                Return _labInvoiceDetails
+            End Get
+            Set(value As List(Of Lab_InvoiceDetailsView))
+                _labInvoiceDetails = value
+            End Set
+        End Property
+
+        Public Property Status As Integer Implements ILab_InvoiceGroupView.Status
+            Get
+                Return txtStatusDisplay.Text
+            End Get
+            Set(value As Integer)
+                txtStatusDisplay.Text = value
             End Set
         End Property
 
@@ -1019,6 +1081,69 @@ Namespace PresentationLayer.Views.Forms
             If Not CopyFileResultsToView(sFiles, filePath) Then
                 Messaging.Show("No result with that invoice number was found on [" + filePath + "]")
             End If
+            RaiseEvent RetrieveLabResultRequested()
+            AssigValuesToDisplay()
+        End Sub
+
+        Private Sub AssigValuesToDisplay()
+            For Each item In LabInvoiceDetails
+                Select Case item.SlNo
+                    Case 1
+                        txtWbcR.Text = item.Result1
+                        txtWbcRNv.Text = item.Suffix1
+                    Case 2
+                        txtNER.Text = item.Result1
+                        txtNERNv.Text = item.Suffix1
+                    Case 3
+                        txtLYR.Text = item.Result1
+                        txtLYRNv.Text = item.Suffix1
+                    Case 4
+                        txtMOR.Text = item.Result1
+                        txtMORNv.Text = item.Suffix1
+                    Case 5
+                        txtEOR.Text = item.Result1
+                        txtEORNv.Text = item.Suffix1
+                    Case 6
+                        txtBAR.Text = item.Result1
+                        txtBARNv.Text = item.Suffix1
+                    Case 8
+                        txtRbcR.Text = item.Result1
+                        txtRbcRNv.Text = item.Suffix1
+                    Case 9
+                        txtHgbR.Text = item.Result1
+                        txtHgbRNv.Text = item.Suffix1
+                    Case 10
+                        txtHctR.Text = item.Result1
+                        txtHctRNv.Text = item.Suffix1
+                    Case 11
+                        txtMcvR.Text = item.Result1
+                        txtMcvRNv.Text = item.Suffix1
+                    Case 12
+                        txtMchR.Text = item.Result1
+                        txtMchRNv.Text = item.Suffix1
+                    Case 13
+                        txtMchcR.Text = item.Result1
+                        txtMchcRNv.Text = item.Suffix1
+                    Case 14
+                        txtRdwcvR.Text = item.Result1
+                        txtRdwcvRNv.Text = item.Suffix1
+                    Case 15
+                        txtRdwsdR.Text = item.Result1
+                        txtRdwsdRNv.Text = item.Suffix1
+                    Case 17
+                        txtPltR.Text = item.Result1
+                        txtPltRNv.Text = item.Suffix1
+                    Case 18
+                        txtPctR.Text = item.Result1
+                        txtPctRNv.Text = item.Suffix1
+                    Case 19
+                        txtMpvR.Text = item.Result1
+                        txtMpvRNv.Text = item.Suffix1
+                    Case 20
+                        txtPdwR.Text = item.Result1
+                        txtPdwRNv.Text = item.Suffix1
+                End Select
+            Next
         End Sub
 
         Private Function CopyFileResultsToView(sFiles() As String, filePath As String) As Boolean
@@ -1035,12 +1160,12 @@ Namespace PresentationLayer.Views.Forms
                 Dim cbcReportSelector As New CbcReportSelector(sFiles, filePath, txtInvoiceNo.Text)
                 Dim result = cbcReportSelector.ShowDialog()
                 If result = DialogResult.OK Then
-                    Dim cPatern = sFiles(cbcReportSelector.SelectedIndex).Substring(filePath.Length+1)
+                    Dim cPatern = sFiles(cbcReportSelector.SelectedIndex).Substring(filePath.Length + 1)
                     Dim cFile = Directory.GetFileSystemEntries(filePath, cPatern)
                     GetResultOnFile(cFile, aFileResults, aCBCResults)
                     success = True
                 Else
-                    success = false
+                    success = False
                 End If
             Else
                 success = False
@@ -1057,13 +1182,13 @@ Namespace PresentationLayer.Views.Forms
             End Using
             FileResultsToCbcResults(aFileResults, aCBCResults)
             txtPatientName.Text = aFileResults(143)
-            txtGender.Text = aFileResults(144)
+            txtSexDisplay.Text = aFileResults(144)
         End Sub
 
         Private Sub GetResultOnServer(invoiceNumber As Int32)
-            Dim serverResult As ICbcRetrievalView 
+            Dim serverResult As ILab_InvoiceGroupView
             serverResult = Presenter.GetResult(invoiceNumber)
-            
+
         End Sub
 
         Private Sub FileResultsToCbcResults(aFileResults() As String, aCBCResults() As String)

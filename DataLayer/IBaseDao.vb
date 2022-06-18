@@ -9,7 +9,10 @@ Public Interface IBaseDao
         As String
 
     Function CountRecordWith2Key(searchValue1 As Integer, searchValue2 As String, tableName As String,
-                                 searchFieldName1 As String, searchFieldName2 As String) As Integer
+                                 searchFieldName1 As String, searchFieldName2 As String) As Int32
+
+    'Function CountRecordWith2KeyG(Of T1, T2, T3)(searchValue1 As T1, searchValue2 As T2, tableName As String,
+    '                             searchFieldName1 As String, searchFieldName2 As String) As T3
 
     Function CountRecordWithKey(searchValue As String, tableName As String, searchFieldName As String) As Integer
 
@@ -54,6 +57,9 @@ Public Interface IBaseDao
     Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String,
                                     searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) _
         As String
+
+
+    Function GetRecordFieldWith2KeyG(Of T1, T2, T3)(searchValue1 As T1, SEARCHvALUE2 As T2, tableName As String, searchFieldName1 As String, searchFieldName2 as String, returnFieldName As String) As T3
 
     Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String,
                                        returnFieldName As String) As String

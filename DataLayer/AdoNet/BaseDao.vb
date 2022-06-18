@@ -58,6 +58,15 @@ Namespace AdoNet
             Return GetDb().Scalar(sql, params).ToString()
         End Function
 
+
+        'Public Function CountRecordFieldWith2KeyG(Of T1, T2, T3)(searchValue1 As T1, searchValue2 As T2, tableName As String, searchFieldName1 As String, searchFieldName2 As String) As T3 Implements IBaseDao.CountRecordFieldWith2KeyG
+        '    Dim searchFieldValue1 As String = ConvertToString(Of T1)(searchValue1)
+        '    Dim searchFieldValue2 As String = ConvertToString(Of T2)(searchValue2)
+        '    Dim sql As String = "Select Count(*) FROM [" & tableName & "] " & "Where @searchFieldName1 = @SearchFieldValue1 and @searchFieldName2 = @searchFieldValue2 "
+        '    Dim params() As Object = {"@SearchFieldName1", searchFieldName1, "@SearchFieldName2", searchFieldName2, "@searchFieldValue1", searchFieldValue1, "@searchFieldValue2", searchFieldValue2}
+        '    Return GetDb().Scalar(sql, params)
+        'End Function
+
         Public Function CountRecordWithKey(searchValue As String, tableName As String, searchFieldName As String) _
             As Integer _
             Implements IBaseDao.CountRecordWithKey
@@ -334,6 +343,31 @@ Namespace AdoNet
             Return retVal
         End Function
 
+        Public Function ConvertToString(Of T1)(value As T1) As String
+            Dim tType As Type = value.GetType
+            Dim result As String = ""
+            If tType = GetType(String) OrElse tType = GetType(Decimal) OrElse tType = GetType(Int32) OrElse tType = GetType(Int16) OrElse tType = GetType(Int64) OrElse
+                                  tType = GetType(UInt16) OrElse tType = GetType(UInt32) OrElse tType = GetType(UInt64) Then
+                result = value.ToString()
+            ElseIf tType = GetType(Boolean) Then
+                Dim boolSearch As Boolean = Convert.ToBoolean(value)
+                If boolSearch Then
+                    boolSearch = 1
+                Else
+                    boolSearch = 0
+                End If
+                result = boolSearch
+            ElseIf tType = GetType(Date) Then
+                Dim dDate As DateTime = Convert.ToDateTime(value)
+                Dim dateSearch1 As String = dDate.ToString()
+            Else
+                result = value.ToString()
+            End If
+            Return result
+        End Function
+
+
+
         Public Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object Implements IBaseDao.GetFieldWithIdNo
             Dim sql As String =
                     " Select " & returnFieldName & " FROM [" & tableName & "] " &
@@ -579,6 +613,21 @@ Namespace AdoNet
                 Return Nothing
             End If
             Return retVal.ToString()
+        End Function
+
+        Public Function GetRecordFieldWith2KeyG(Of T1, T2, T3)(searchValue1 As T1, searchValue2 As T2, tableName As String,
+                                       searchFieldName1 As String, searchFieldName2 As String,
+                                       returnFieldName As String) As T3 Implements IBaseDao.GetRecordFieldWith2KeyG
+            Dim searchVal1 As String = ConvertToString(Of T1)(searchValue1)
+            Dim searchVal2 As String = ConvertToString(Of T2)(searchValue2)
+            Dim sql As String = " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] " &
+                    " Where " & searchFieldName1 & " = @SearchVal1 and " & searchFieldName2 & " = @SearchVal2 "
+            Dim params() As Object = {"@SearchVal1", searchVal1, "@SearchVal2", searchVal2}
+            Dim retVal = GetDb().Scalar(sql, params)
+            If retVal Is Nothing Or IsDBNull(retVal) Then
+                Return Nothing
+            End If
+            Return retVal
         End Function
 
         'Public  Function GetFirstDependentRecord(ByVal SearchValue As String, ByVal TableName As String, ByVal SearchFieldName As String, ByVal ReturnFieldName As String) As Integer
