@@ -533,6 +533,10 @@ Namespace Services
             Return DataDao.GetRecordFieldWith2Key(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2, returnFieldName)
         End Function
 
+        Public Function GetRecordFieldWith2KeyG(Of T1, T2, T3)(searchValue1 As T1, searchValue2 As T2, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As T3 Implements IService.GetRecordFieldWith2KeyG
+            Return DataDao.GetRecordFieldWith2KeyG(Of T1, T2, T3)(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2, returnFieldName)
+        End Function
+
         Public Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As String Implements IService.GetRecordFieldWithKey
             Return DataDao.GetRecordFieldWithKey(searchValue, tableName, searchFieldName, returnFieldName)
         End Function

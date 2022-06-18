@@ -210,7 +210,7 @@
     <Compile Include="BusinessLayer\EmployeeLeaveApprovalHistory.vb" />
     <Compile Include="BusinessLayer\EmployeeLeaveApprovalItem.vb" />
     <Compile Include="BusinessLayer\EmployeePayElement.vb" />
-    <Compile Include="BusinessLayer\IGroup\CbcRetrieval.vb" />
+    <Compile Include="BusinessLayer\IGroup\Lab_InvoiceGroup.vb" />
     <Compile Include="BusinessLayer\IGroup\ItemDetails.vb" />
     <Compile Include="BusinessLayer\JournalPrefix.vb" />
     <Compile Include="BusinessLayer\EmployeeLeave.vb" />
@@ -278,7 +278,7 @@
     <Compile Include="DataLayer\AdoNet\EmployeeLeaveApprovalItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\HolidayTransferDao.vb" />
     <Compile Include="DataLayer\AdoNet\HolidayTransferItemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\IGroup\CbcRetrievalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\IGroup\Lab_InvoiceGroupDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\ItemDetailsDao.vb" />
     <Compile Include="DataLayer\AdoNet\ReportDao.vb" />
     <Compile Include="DataLayer\AdoNet\ShiftSummaryDao.vb" />
@@ -377,7 +377,7 @@
     <Compile Include="PresentationLayer\Models\HolidayAvailmentModel.vb" />
     <Compile Include="PresentationLayer\Models\HolidayTransferModel.vb" />
     <Compile Include="PresentationLayer\Models\HolidayTransferAvailmentModel.vb" />
-    <Compile Include="PresentationLayer\Models\IGroup\ItemDetailsModel - Copy.vb" />
+    <Compile Include="PresentationLayer\Models\IGroup\Lab_InvoiceGroupModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\ItemDetailsModel.vb" />
     <Compile Include="PresentationLayer\Models\ReportSelectorModel.vb" />
     <Compile Include="PresentationLayer\Models\ReportModel.vb" />
@@ -414,7 +414,7 @@
     <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenterNew.vb" />
     <Compile Include="PresentationLayer\Presenters\CustomerPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\IGroup\CbcRetrievalPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\IGroup\Lab_InvoiceGroupPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\ItemDetailsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ReportSelectorPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeeLeaveApprovalPresenter.vb" />
@@ -688,7 +688,7 @@
     <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\ICbcRetrievalView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\ILab_InvoiceGroupView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IItemDetailsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IHolidayAvailmentApprovalHistoryView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeLeaveApprovalHistoryView.vb" />
@@ -716,6 +716,7 @@
     <Compile Include="PresentationLayer\Views\EmployeeIdView.vb" />
     <Compile Include="PresentationLayer\Views\HolidayTransferItemView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeLeaveApprovalHistoryView.vb" />
+    <Compile Include="PresentationLayer\Views\Lab_InvoiceDetailsView.vb" />
     <Compile Include="PresentationLayer\Views\PcJournalView.vb" />
     <Compile Include="PresentationLayer\Views\PayElementItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementItemView.vb" />
@@ -1679,8 +1680,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app Ispadmin2.config" />
     <None Include="app.config" />
+    <None Include="app Ispadmin2.config" />
     <None Include="app-Isp-Server.config" />
     <None Include="appIspadmin2.config" />
     <None Include="app-MarceloPC.config" />

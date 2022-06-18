@@ -1186,7 +1186,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemCbcResultRetrieval_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCbcResultRetrieval.Click
-            RunForm(Of CbcRetrievalEntry)()
+            RunForm(Of CbcRetrievalEntry, Lab_InvoiceGroupPresenter(Of Lab_InvoiceGroupModel))()
+            'RunForm(Of CbcRetrievalEntry)()
         End Sub
     End Class
 
