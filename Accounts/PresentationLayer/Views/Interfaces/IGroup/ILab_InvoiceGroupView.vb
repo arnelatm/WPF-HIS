@@ -93,7 +93,7 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface ILab_InvoiceGroupView
         Inherits IView
 
-        Property InvoiceNo As String
+        Property InvoiceNo As Decimal
         Property InvoiceType As String
         Property InvoiceDate As Date
         Property PatientNameEnglish As String
