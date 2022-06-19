@@ -40,265 +40,14 @@ Namespace PresentationLayer.Views.Forms
                 _nfi.NumberGroupSeparator = numberGroupSeparator
             End If
 
-            'TurnOnInputs()
-
         End Sub
 
-#Region "Field Items Old"
-
-        'Public Property IdNo As Int32 Implements IItemDetailsView.IdNo
-        '    Get
-        '        If txtInvoiceNo.Text <> "" Then
-        '            Return Convert.ToInt32(txtInvoiceNo.Text)
-        '        Else
-        '            Return 0
-        '        End If
-        '    End Get
-        '    Set
-        '        txtInvoiceNo.Text = Convert.ToString(Value)
-        '    End Set
-        'End Property
-
-        'Public Property ItemDetailsCode As String Implements IItemDetailsView.ItemDetailsCode
-        '    Get
-        '        Return txtInvoiceType.Text
-        '    End Get
-        '    Set
-        '        txtInvoiceType.Text = If(Value, "")
-        '    End Set
-        'End Property
-
-        'Public Overloads Property ItemDetailsName As String Implements IItemDetailsView.ItemDetailsName
-        '    Get
-        '        Return TxtItemDetailsName.Text
-        '    End Get
-        '    Set
-        '        TxtItemDetailsName.Text = Value
-        '    End Set
-        'End Property
-
-        'Private _itemGroup = "MD"
-        'Public Property ItemGroup As String Implements IItemDetailsView.ItemGroup
-        '    Get
-        '        Return "MD"
-        '    End Get
-        '    Set(value As String)
-        '        _itemGroup = value
-        '    End Set
-        'End Property
-
-        'Public Overloads Property GenericName As String Implements IItemDetailsView.GenericName
-        '    Get
-        '        Return txtGenericName.Text
-        '    End Get
-        '    Set
-        '        txtGenericName.Text = Value
-        '    End Set
-        'End Property
-
-        'Private _pack1 As Short
-        'Public Property Pack1 As Short Implements IItemDetailsView.Pack1
-        '    Get
-        '        Return 1
-        '    End Get
-        '    Set(value As Short)
-        '        _pack1 = value
-        '    End Set
-        'End Property
-
-        'Private _pack2 As Short
-        'Public Property Pack2 As Short Implements IItemDetailsView.Pack2
-        '    Get
-        '        Return 1
-        '    End Get
-        '    Set(value As Short)
-        '        _pack2 = value
-        '    End Set
-        'End Property
-
-        'Private _pack3 As Short
-        'Public Property Pack3 As Short Implements IItemDetailsView.Pack3
-        '    Get
-        '        Return 1
-        '    End Get
-        '    Set(value As Short)
-        '        _pack3 = value
-        '    End Set
-        'End Property
-
-        'Private _branchID As String
-        'Public Property BranchID As String Implements IItemDetailsView.BranchID
-        '    Get
-        '        Return "01"
-        '    End Get
-        '    Set(value As String)
-        '        _branchID = value
-        '    End Set
-        'End Property
-
-        'Private _created_By_Branch As String
-        'Public Property Created_By_Branch As String Implements IItemDetailsView.Created_By_Branch
-        '    Get
-        '        Return "01"
-        '    End Get
-        '    Set(value As String)
-        '        _category = value
-        '    End Set
-        'End Property
-
-        'Private _category As String
-        'Public Property Category As String Implements IItemDetailsView.Category
-        '    Get
-        '        Return "XX"
-        '    End Get
-        '    Set(value As String)
-        '        _category = value
-        '    End Set
-        'End Property
-
-        'Public Property RegistrationNo As String Implements IItemDetailsView.RegistrationNo
-        '    Get
-        '        Return txtHgb.Text
-        '    End Get
-        '    Set
-        '        txtHgb.Text = Value
-        '    End Set
-        'End Property
-
-        'Private _saleStrip As String
-        'Public Property SaleStrip As String Implements IItemDetailsView.SaleStrip
-        '    Get
-        '        Return "N"
-        '    End Get
-        '    Set(value As String)
-        '        _category = value
-        '    End Set
-        'End Property
-
-        'Private _Item_Status As String
-        'Public Property Item_Status As String Implements IItemDetailsView.Item_Status
-        '    Get
-        '        Return "S"
-        '    End Get
-        '    Set(value As String)
-        '        _category = value
-        '    End Set
-        'End Property
-
-        'Private _userID As String
-        'Public Property UserID As String Implements IItemDetailsView.UserId
-        '    Get
-        '        Return GlobalVariables.UserName
-        '    End Get
-        '    Set(value As String)
-        '        _category = value
-        '    End Set
-        'End Property
-
-        'Public Property UnitOfStrength As String Implements IItemDetailsView.UnitOfStrength
-        '    Get
-        '        Return cboUnitOfStrength.GetNullableValue(Of String)
-        '    End Get
-        '    Set(value As String)
-        '        cboUnitOfStrength.SetValue(value)
-        '    End Set
-        'End Property
-
-        'Public Property UnitOfVolume As String Implements IItemDetailsView.UnitOfVolume
-        '    Get
-        '        Return cboUnitOfVolume.GetNullableValue(Of String)
-        '    End Get
-        '    Set(value As String)
-        '        cboUnitOfVolume.SetValue(value)
-        '    End Set
-        'End Property
-
-        'Public Property PackageType As String Implements IItemDetailsView.PackageType
-        '    Get
-        '        Return cboPackageType.GetNullableValue(Of String)
-        '    End Get
-        '    Set(value As String)
-        '        cboPackageType.SetValue(value)
-        '    End Set
-        'End Property
-
-        'Public Property DosageForm As String Implements IItemDetailsView.DosageForm
-        '    Get
-        '        Return cboDosageForm.GetNullableValue(Of String)
-        '    End Get
-        '    Set(value As String)
-        '        cboDosageForm.SetValue(value)
-        '    End Set
-        'End Property
-
-        'Public Property RouteOfAdministration As String Implements IItemDetailsView.RouteOfAdministration
-        '    Get
-        '        Return cboRouteOfAdministration.GetNullableValue(Of String)
-        '    End Get
-        '    Set(value As String)
-        '        cboRouteOfAdministration.SetValue(value)
-        '    End Set
-        'End Property
-
-        'Public Property Volume As Double? Implements IItemDetailsView.Volume
-        '    Get
-        '        If txtMO.Text Is Nothing Then
-        '            Return Nothing
-        '        Else
-        '            Return txtMO.Text.ToDoubleNumber(_nfi)
-        '        End If
-        '    End Get
-        '    Set
-        '        If Value Is Nothing Then
-        '            txtMO.Text = ""
-        '        Else
-        '            txtMO.Text = Value
-        '        End If
-        '    End Set
-        'End Property
-
-        'Public Property StrengthValue As String Implements IItemDetailsView.StrengthValue
-        '    Get
-        '        Return txtWbc.Text
-        '    End Get
-        '    Set(value As String)
-        '        txtWbc.Text = value
-        '    End Set
-        'End Property
-
-        'Public Property PackageSize As Double? Implements IItemDetailsView.PackageSize
-        '    Get
-        '        If txtRbc.Text Is Nothing Then
-        '            Return Nothing
-        '        Else
-        '            Return txtRbc.Text.ToDoubleNumber(_nfi)
-        '        End If
-        '    End Get
-        '    Set
-        '        If Value Is Nothing Then
-        '            txtRbc.Text = ""
-        '        Else
-        '            txtRbc.Text = Value
-        '        End If
-        '    End Set
-        'End Property
-
-        'Public Property PrescriptionDrug As Boolean Implements IItemDetailsView.PrescriptionDrug
-        '    Get
-        '        Return chkPrescriptionDrug.Checked
-        '    End Get
-        '    Set
-        '        chkPrescriptionDrug.Checked = Value                
-        '    End Set
-        'End Property
-#End Region
-
 #Region "Field Items"
-        Public Property InvoiceNo As String Implements ILab_InvoiceGroupView.InvoiceNo
+        Public Property InvoiceNo As Decimal Implements ILab_InvoiceGroupView.InvoiceNo
             Get
                 Return txtInvoiceNo.Text
             End Get
-            Set(value As String)
+            Set(value As Decimal)
                 txtInvoiceNo.Text = value
             End Set
         End Property
@@ -350,6 +99,18 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As Decimal)
                 txtAge.Text = value
+                If AgeYMD = "Y" Then
+                    txtAgeDisplay.Text = value.ToString() + "Year(s)"
+                ElseIf AgeYMD = "M" Then
+                    txtAgeDisplay.Text = value.ToString() + "Month(s)"
+                ElseIf AgeYMD = "W" Then
+                    txtAgeDisplay.Text = value.ToString() + "Week(s)"
+                ElseIf AgeYMD = "D" Then
+                    txtAgeDisplay.Text = value.ToString() + "Day(s)"
+                Else
+                    txtAgeDisplay.Text = value.ToString() + "Year(s)"
+                End If
+
             End Set
         End Property
 
@@ -367,7 +128,7 @@ Namespace PresentationLayer.Views.Forms
                 Return txtSex.Text
             End Get
             Set(value As String)
-                txtSexDisplay.Text = value
+                txtSex.Text = value
                 If value = "M" Then
                     txtSexDisplay.Text = "Male"
                 Else
@@ -1063,10 +824,19 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Status As Integer Implements ILab_InvoiceGroupView.Status
             Get
-                Return txtStatusDisplay.Text
+                Return txtStatus.Text
             End Get
             Set(value As Integer)
-                txtStatusDisplay.Text = value
+                txtStatus.Text = value
+                If value = 1 Then
+                    txtStatusDisplay.Text = "Incomplete"
+                ElseIf value = 2 Then
+                    txtStatusDisplay.Text = "Partially Incomplete"
+                ElseIf value = 3 Then
+                    txtStatusDisplay.Text = "Complete"
+                Else
+                    txtStatusDisplay.Text = "Unknown"
+                End If
             End Set
         End Property
 
@@ -1144,11 +914,118 @@ Namespace PresentationLayer.Views.Forms
                         txtPdwRNv.Text = item.Suffix1
                 End Select
             Next
+            SetNormalValues()
+        End Sub
+
+        Private Sub SetNormalValues()
+            Dim nAge As Decimal
+            Select Case AgeYMD
+                Case "Y"
+                    nAge = txtAge.Text
+                Case "M"
+                    nAge = txtAge.Text / 12
+                Case = "W"
+                    nAge = txtAge.Text / 365.25
+                Case = "D"
+                    nAge = txtAge.Text * 7 / 365.25
+                Case Else
+                    nAge = 12
+            End Select
+            Select Case nAge
+                Case <= 1
+                    txtWbcNv.Text = "4.5 - 20.0 (10^3/µL)"
+                    txtNENv.Text = "37 - 70 %"
+                    txtLYNv.Text = "40 - 65 %"
+                    txtMONv.Text = "0 - 12 %"
+                    txtEONv.Text = "0 - 8 %"
+                    txtBANv.Text = "0 - 3 %"
+
+                    txtRbcNv.Text = "3.9 - 5.9 (10^6 /µL)"
+                    txtHgbNv.Text = "14 - 18 g/dL"
+                    txtHctNv.Text = "32 - 55 %"
+                    txtMcvNv.Text = "80 - 100 fL"
+                    txtMchNv.Text = "31 - 37 pg"
+                    txtMchcNv.Text = "31 - 35 g/dL"
+                    txtRdwcvNv.Text = "11.5 - 18.7 %"
+                    txtRdwsdNv.Text = "39 - 46 fL"
+
+                    txtPltNv.Text = "150 - 450 (10^3/µL)"
+                    txtPctNv.Text = "0.16 - 0.33 %"
+                    txtMpvNv.Text = "6.2 - 12.4 fL"
+                    txtPdwNv.Text = "12.5 - 17 %"
+                Case <= 11
+                    txtWbcNv.Text = "4.5 - 13.0 (10^3/µL)"
+                    txtNENv.Text = "30 - 65 %"
+                    txtLYNv.Text = "20 - 65 %"
+                    txtMONv.Text = "0 - 12 %"
+                    txtEONv.Text = "0 - 8 %"
+                    txtBANv.Text = "0 - 3 %"
+
+                    txtRbcNv.Text = "3.8 - 5.4 (10^6/µL)"
+                    txtHgbNv.Text = "11 - 16 g/dL"
+                    txtHctNv.Text = "32 - 42 %"
+                    txtMcvNv.Text = "72 - 86.6 fL"
+                    txtMchNv.Text = "25 - 32 pg"
+                    txtMchcNv.Text = "32 - 36 g/dL"
+                    txtRdwcvNv.Text = "11.5 - 15.0 %"
+                    txtRdwsdNv.Text = "39 - 46 fL"
+
+                    txtPltNv.Text = "150 - 400 (10^3/µL)"
+                    txtPctNv.Text = "0.16 - 0.33"
+                    txtMpvNv.Text = "7 - 11 fL"
+                    txtPdwNv.Text = "15 - 17"
+
+                Case >= 12
+                    If txtSex.Text = "F" Then
+                        txtWbcNv.Text = "4 - 10 (10^3/µL)"
+                        txtNENv.Text = "37 - 65 %"
+                        txtLYNv.Text = "16 - 51 %"
+                        txtMONv.Text = "0 - 12 %"
+                        txtEONv.Text = "0 - 8 %"
+                        txtBANv.Text = "0 - 3 %"
+
+                        txtRbcNv.Text = "3.85 - 5.2 (10^6/µL)"
+                        txtHgbNv.Text = "11.5 - 16 g/dL"
+                        txtHctNv.Text = "34.7 - 46 %"
+                        txtMcvNv.Text = "80 - 97 fL"
+                        txtMchNv.Text = "26 - 34 pg"
+                        txtMchcNv.Text = "31 - 36 g/dL"
+                        txtRdwcvNv.Text = "11.5 - 15.0 %"
+                        txtRdwsdNv.Text = "39 - 46 fL"
+
+                        txtPltNv.Text = "150 - 350 (10^3/µL)"
+                        txtPctNv.Text = "0.16 - 0.33 %"
+                        txtMpvNv.Text = "6.5 - 12.4 fL"
+                        txtPdwNv.Text = "15 - 17 %"
+
+                    Else
+                        txtWbcNv.Text = "4 - 10 (10^3/µL)"
+                        txtNENv.Text = "37 - 65 %"
+                        txtLYNv.Text = "16 - 51 %"
+                        txtMONv.Text = "0 - 12 %"
+                        txtEONv.Text = "0 - 8 %"
+                        txtBANv.Text = "0 - 3 %"
+
+                        txtRbcNv.Text = "4.31 - 6.4 (10^6/µL)"
+                        txtHgbNv.Text = "13.6 - 18.0 g/dL"
+                        txtHctNv.Text = "39.8 - 52.0 %"
+                        txtMcvNv.Text = "80 - 97 fL"
+                        txtMchNv.Text = "26 - 34 pg"
+                        txtMchcNv.Text = "31 - 36 g/dL"
+                        txtRdwcvNv.Text = "11.5 - 15.0 %"
+                        txtRdwsdNv.Text = "39 - 46 fL"
+
+                        txtPltNv.Text = "150 - 350 (10^3/µL)"
+                        txtPctNv.Text = "0.16 - 0.33 %"
+                        txtMpvNv.Text = "6.5 - 12.4 fL"
+                        txtPdwNv.Text = "15 - 17 %"
+                    End If
+            End Select
         End Sub
 
         Private Function CopyFileResultsToView(sFiles() As String, filePath As String) As Boolean
             Dim success As Boolean
-            Dim aFileResults(144) As String
+            Dim aFileResults(146) As String
             Dim aCBCResults(19) As String
 
             'sFiles = Folder.GetFiles(cFilePath + "*.csv",IO.SearchOption.AllDirectories)
@@ -1176,13 +1053,14 @@ Namespace PresentationLayer.Views.Forms
         Private Sub GetResultOnFile(sFiles() As String, aFileResults() As String, aCBCResults() As String)
             Dim lineCount = File.ReadAllLines(sFiles(0)).Length
             Using file As New IO.StreamReader(sFiles(0))
-                For i As Integer = 1 To 144
+                For i As Integer = 1 To 146
                     aFileResults(i) = file.ReadLine()
                 Next
             End Using
             FileResultsToCbcResults(aFileResults, aCBCResults)
             txtPatientName.Text = aFileResults(143)
-            txtSexDisplay.Text = aFileResults(144)
+            txtSexF.Text = aFileResults(144)
+            txtAgeF.Text = aFileResults(146)
         End Sub
 
         Private Sub GetResultOnServer(invoiceNumber As Int32)
@@ -1193,11 +1071,11 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub FileResultsToCbcResults(aFileResults() As String, aCBCResults() As String)
             aCBCResults(CBCEnum.Wbc) = aFileResults(15)
-            aCBCResults(CBCEnum.NE) = aFileResults(16)
-            aCBCResults(CBCEnum.LY) = aFileResults(17)
-            aCBCResults(CBCEnum.MO) = aFileResults(18)
-            aCBCResults(CBCEnum.EO) = aFileResults(19)
-            aCBCResults(CBCEnum.BA) = aFileResults(20)
+            aCBCResults(CBCEnum.NE) = aFileResults(16) 
+            aCBCResults(CBCEnum.LY) = aFileResults(17) 
+            aCBCResults(CBCEnum.MO) = aFileResults(18) 
+            aCBCResults(CBCEnum.EO) = aFileResults(19) 
+            aCBCResults(CBCEnum.BA) = aFileResults(20) 
             aCBCResults(CBCEnum.Rbc) = aFileResults(26)
             aCBCResults(CBCEnum.Hgb) = aFileResults(27)
             aCBCResults(CBCEnum.Hct) = aFileResults(28)
@@ -1214,24 +1092,24 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CbcResultsToView(aCBCResults() As String)
-            txtWbc.Text = aCBCResults(CBCEnum.Wbc)
-            txtNE.Text = aCBCResults(CBCEnum.NE)
-            txtLY.Text = aCBCResults(CBCEnum.Wbc)
-            txtMO.Text = aCBCResults(CBCEnum.MO)
-            txtEO.Text = aCBCResults(CBCEnum.EO)
-            txtBA.Text = aCBCResults(CBCEnum.BA)
-            txtRbc.Text = aCBCResults(CBCEnum.Rbc)
-            txtHgb.Text = aCBCResults(CBCEnum.Hgb)
-            txtHct.Text = aCBCResults(CBCEnum.Hct)
-            txtMcv.Text = aCBCResults(CBCEnum.Mcv)
-            txtMch.Text = aCBCResults(CBCEnum.Mch)
-            txtMchc.Text = aCBCResults(CBCEnum.Mchc)
-            txtRdwcv.Text = aCBCResults(CBCEnum.Rdwcv)
-            txtRdwsd.Text = aCBCResults(CBCEnum.Rdwsd)
-            txtPlt.Text = aCBCResults(CBCEnum.Plt)
-            txtPct.Text = aCBCResults(CBCEnum.Pct)
-            txtMpv.Text = aCBCResults(CBCEnum.Mpv)
-            txtPdw.Text = aCBCResults(CBCEnum.Pdw)
+            txtWbc.Text = aCBCResults(CBCEnum.Wbc) + " 10^3/µL"
+            txtNE.Text = aCBCResults(CBCEnum.NE) + "%"
+            txtLY.Text = aCBCResults(CBCEnum.LY) + "%"
+            txtMO.Text = aCBCResults(CBCEnum.MO) + "%"
+            txtEO.Text = aCBCResults(CBCEnum.EO) + "%"
+            txtBA.Text = aCBCResults(CBCEnum.BA) + "%"
+            txtRbc.Text = aCBCResults(CBCEnum.Rbc) + " 10^6/µL"
+            txtHgb.Text = aCBCResults(CBCEnum.Hgb) + " g/dL"
+            txtHct.Text = aCBCResults(CBCEnum.Hct) + "%"
+            txtMcv.Text = aCBCResults(CBCEnum.Mcv) + " fL"
+            txtMch.Text = aCBCResults(CBCEnum.Mch) + " pg"
+            txtMchc.Text = aCBCResults(CBCEnum.Mchc) + " g/dL"
+            txtRdwcv.Text = aCBCResults(CBCEnum.Rdwcv) + "%"
+            txtRdwsd.Text = aCBCResults(CBCEnum.Rdwsd) + " fL"
+            txtPlt.Text = aCBCResults(CBCEnum.Plt) + " 10^3/µL"
+            txtPct.Text = aCBCResults(CBCEnum.Pct) + "%"
+            txtMpv.Text = aCBCResults(CBCEnum.Mpv) + " fL"
+            txtPdw.Text = aCBCResults(CBCEnum.Pdw) + "%"
         End Sub
 
         'Protected Overrides Sub CreateMainFieldsDictionary()
@@ -1304,7 +1182,6 @@ Namespace PresentationLayer.Views.Forms
             Mpv
             Pdw
         End Enum
-
 
 #End Region
 

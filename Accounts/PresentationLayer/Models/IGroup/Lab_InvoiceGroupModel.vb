@@ -7,31 +7,9 @@ Namespace PresentationLayer.Models
     ''     Implements IModel and communicates with WCF Service.
     '' </summary>
 
-    'Public Class CbcRetrievalModel
-    '    'Implements IModelNew
-
-    '    Property WbcR As String
-    '    Property NeR As String
-    '    Property LyR As String
-    '    Property MoR As String
-    '    Property EoR As String
-    '    Property BaR As String
-    '    Property RbcR As String
-    '    Property HgbR As String
-    '    Property HctR As String
-    '    Property McvR As String
-    '    Property MchR As String
-    '    Property MchcR As String
-    '    Property RdwcvR As String
-    '    Property RdwcdR As String
-    '    Property PltR As String
-    '    Property PctR As String
-    '    Property MpvR As String
-    '    Property PdwR As String
-    'End Class
-
+  
     Public Class Lab_InvoiceGroupModel
-        Property InvoiceNo As String
+        Property InvoiceNo As Decimal
         Property InvoiceType As String
         Property InvoiceDate As Date
         Property PatientNameEnglish As String
