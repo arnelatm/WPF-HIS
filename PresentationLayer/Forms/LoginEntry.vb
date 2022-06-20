@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Windows.Forms
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Presenters
@@ -32,9 +33,13 @@ Public Class LoginEntry
         _cancelLogin = False
         AddHandler FormClosing, AddressOf FormLogin_Closing
         'textBoxUserName.Text = Environment.UserName
-
-        UserName = My.Settings.UserName
-        Password = My.Settings.Oterkis
+        If changePassword Then
+            UserName = GlobalVariables.UserName
+            Password = ""
+        Else
+            UserName = My.Settings.UserName
+            Password = My.Settings.Oterkis
+        End If
 
         _rememberPassword = My.Settings.RememberPassword
         If UserName IsNot Nothing Then
