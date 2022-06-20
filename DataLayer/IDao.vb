@@ -75,7 +75,7 @@ Public Interface IDaoChildUpdateOnly(Of TBiz)
 
     Function GetRecordsWithGroupIdNo(idNo, Optional ByVal sortExpression = Nothing) As List(Of TBiz)
 
-    Function DelUpdateTvp(ByRef tvpTable As DataTable, ByVal groupIdNo As Integer) As Integer
+    'Function DelUpdateTvp(ByRef tvpTable As DataTable, ByVal groupIdNo As Integer) As Integer
 
 End Interface
 
@@ -90,5 +90,12 @@ Public Interface IDaoTvp(Of TBiz)
     ' gets a specific record data
 
     Function UpdateInsertTvp(ByRef updateTvpTable As DataTable, ByRef insertTvpTable As DataTable, ByVal groupIdNo As Integer) As Integer
+
+End Interface
+
+Public Interface IDaoUpdateDataTable
+
+    ' updae the table given the DataTable
+    Function UpdateTable(Of T)(data As DataTable, groupKey As T) As T
 
 End Interface

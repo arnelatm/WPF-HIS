@@ -469,7 +469,7 @@ Public Class CTextBox
             If formLocation.Y + searchForm.Height > screenRectangle.Height Then
                 formLocation.Y = pnt.Y - searchForm.Height + Height
             End If
-            FieldName = Name.Substring(3)            
+            FieldName = Name.Substring(3)
             searchForm.Location = formLocation
             Dim x = Invoker.InvokeFunction(myForm, "GetFieldType", {FieldName})
             FindDataType = GetObjectDataType(x)
@@ -529,9 +529,11 @@ Public Class CTextBox
 
     Private Sub CTextBox_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If e.KeyCode = Keys.Enter Then
-            SendKeys.Send("{TAB}")
-            e.Handled = True
-            e.SuppressKeyPress = True
+            If Not AcceptsReturn Then
+                SendKeys.Send("{TAB}")
+                e.Handled = True
+                e.SuppressKeyPress = True
+            End If
         End If
     End Sub
 
@@ -542,7 +544,7 @@ Public Class CTextBox
         Return True
     End Function
 
-    Public Function GetDecimalValue As Decimal
+    Public Function GetDecimalValue() As Decimal
         If Text <> "" Then
             Return Convert.ToDecimal(Text)
         Else

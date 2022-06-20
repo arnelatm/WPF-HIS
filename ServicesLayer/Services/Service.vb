@@ -434,14 +434,17 @@ Namespace Services
             Return DataBo.IsValid()
         End Function
 
-        Public Function TransactionUpdate(Of TBiz)(ByRef model As TBiz) As Integer _
-                    Implements IService.TransactionUpdate
+        Public Function TransactionUpdate(Of TBiz)(ByRef model As TBiz) As Integer Implements IService.TransactionUpdate
             Return DataDao.TransactionUpdate(model)
         End Function
 
         Public Function UpdateRecord(ByVal model) As Integer Implements IService.UpdateRecord
             GlobalVariables.Mapper.Map(model, DataBo)
             Return DataDao.UpdateRecord(DataBo)
+        End Function
+
+        Public Function UpdateTable(ByRef data As DataTable, ByVal groupIdNo As Integer) As Integer Implements IService.UpdateTable
+            Return DataDao.UpdateRecord(data, groupIdNo)
         End Function
 
         Public Function UpdateRecordWithIdNo(Of T)(ByVal idNo As Int32, ByVal tableName As String, ByVal fieldName As String, ByRef value As T) As Integer Implements IService.UpdateRecordWithIdNo

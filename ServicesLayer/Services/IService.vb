@@ -116,6 +116,7 @@ Namespace Services
 
         Function GetFieldOnMaxField(searchFieldName As String, tableName As String, returnFieldName As String, Optional filter As String = Nothing) As Object
         Function InsertRecord(tableName As String, fieldList As Object(), values As Object(), fieldType As Object()) As Integer
+        Function UpdateTable(ByRef data As DataTable, groupIdNo As Integer) As Integer
     End Interface
 
 End Namespace

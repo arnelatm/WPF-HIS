@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="ContainerConfig.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Autofac" Version="6.2.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Libraries\AatmInterfaces\AatmInterfaces.vbproj" />
+		<ProjectReference Include="..\..\Libraries\LocalizationUtilities\LocalizationUtilities.csproj" />
+	</ItemGroup>
+</Project>
