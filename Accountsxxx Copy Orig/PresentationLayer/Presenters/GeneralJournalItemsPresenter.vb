@@ -1,0 +1,71 @@
+﻿Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Libraries.GlobalFuncNSub
+
+Namespace PresentationLayer.Presenters
+
+    Public Class GeneralJournalItemsPresenter(Of TM As New)
+        Inherits AccountsPresenterNew(Of IJournalItemsView, JournalItemModel)
+
+        Public Sub New(view As IJournalItemsView)
+            MyBase.New(view)
+            Service = New AccountsService("JournalItem")
+            TableName = "JournalItem"
+            SortOrderKey = "Sequence"
+        End Sub
+
+        Public Property ChangesMadeInJournalItem As Boolean = False
+
+        'Public Overloads Function DataIsValid(ByRef journalItems As List(Of JournalItemModel))
+        '    Dim retVal = True
+        '    For Each item In journalItems
+        '        If item.Debit = 0 And item.Credit = 0 Then
+        '            MessageBox.Show(Format("Error in line {0:N0}. Cannot save entries with zero debit and credit amount. See line ", item.Sequence))
+        '            retVal = False
+        '            Exit For
+        '        ElseIf item.AccountIdNo = 0 Then
+        '            MessageBox.Show(Format("Error in line {0:N0}. Cannot save entries with blank account id", item.Sequence))
+        '            retVal = False
+        '            Exit For
+        '        Else
+        '            Dim enumPayeeType = CodeToEnum(Of PayeeTypeSelection)(Model.GetRecordFieldWithKey(item.AccountIdNo, "Account", "IdNo", "PayeeType"))
+        '            If enumPayeeType = PayeeTypeSelection.Employee Or enumPayeeType = PayeeTypeSelection.Customer Or enumPayeeType = PayeeTypeSelection.Supplier Then
+        '                MessageBox.Show(String.Format("Error in line {0:N0} Sorry the account entered is either a Customer/Employee/Supplier Account. Such entries are not allowed for General Journal.", item.Sequence))
+        '                retVal = False
+        '            End If
+        '        End If
+        '    Next
+        '    Return retVal
+        'End Function
+
+        ''' <summary>
+        '''     Displays list of  Journal Items.
+        ''' </summary>
+        ''' <param name="journalIdNo">JournalIdNo id to display.</param>
+        Public Overloads Sub Display(journalIdNo As Int32)
+            View.JournalItems = Service.GetRecordsWithGroupIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
+        End Sub
+
+        Public Overloads Function Save(ByRef dtInsert As DataTable, ByRef dtUpdate As DataTable,
+                                       journalIdNo As Int32)
+            Dim insertReturnValue
+            Dim updateReturnValue
+            Dim retVal
+            updateReturnValue = Service.DelUpdateTvp(dtUpdate, journalIdNo)
+            If updateReturnValue >= 0 AndAlso dtInsert.Rows.Count > 0 Then
+                insertReturnValue = Service.InsertTvp(dtInsert)
+                If insertReturnValue >= 0 Then
+                    retVal = updateReturnValue + insertReturnValue
+                Else
+                    retVal = insertReturnValue
+                End If
+            Else
+                retVal = updateReturnValue
+            End If
+            Return retVal
+        End Function
+
+    End Class
+
+End Namespace

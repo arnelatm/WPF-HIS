@@ -1,0 +1,59 @@
+﻿Imports AATM.Libraries
+Imports AATM.PresentationLayer.Views
+
+Namespace PresentationLayer.Views.Interfaces
+
+    Public Interface IEmployeeView
+        Inherits IView
+        Property Active As Boolean
+        Property BankAccountNo As String
+        Property BankIdNo As Int16?
+        Property Balance As Decimal
+        Property BloodType As String
+        Property BirthDate As Date?
+        Property CountryCode As String
+        Property DepartmentIdNo As Int16?
+        Property DesignationIdNo As Int16?
+        Property District As String
+        Property DutyHours As Decimal
+        Property Email As String
+        Property EmployeeCode As String
+        Property EmployeeName As String
+        Property EmployeeNameAra As String
+        Property Gender As String
+        Property HiredDate As Date?
+        Property Iban As String
+        Property IdNo As Int32
+        Property MaritalStatus As String
+        Property NationalIdNo As String
+        Property NationalityCode As String
+        Property Notes As String
+        Property OpeningBalance As Decimal
+        Property PayCycleIdNo As Int16?
+        Property PayGroupIdNo As Int16?
+        Property PaymentMethod As Char
+        Property PoBox As String
+        Property ProvinceState As String
+        Property ReleasedDate As Date?
+        Property ReligionIdNo As Int16?
+        Property Street As String
+        Property Supervisor As Boolean
+        Property SupervisorIdNo As Int32
+        Property Title As String
+        Property TownCity As String
+        Property ZipCode As String
+        Property PayFrequency As PayFrequencySelection
+        Property SponsorType As Char
+        Property RegularEmployeeDeductions As List(Of EmployeePayElementView)
+        Property RegularEmployeeEarnings As List(Of EmployeePayElementView)
+        Property EmployeePhones As List(Of EmployeePhoneView)
+        Property EmployeeLeaveCredits As List(Of EmployeeLeaveCreditView)
+        Property Picture As Image
+        Property PhoneTypes As List(Of Lookup.LookupData)
+        Property Leaves As List(Of Lookup.LookupData)
+        Property DeductionsByName As List(Of Lookup.LookupData)
+        Property EarningsByName As List(Of Lookup.LookupData)
+        Property Unit As List(Of Lookup.LookupData)
+    End Interface
+
+End Namespace
