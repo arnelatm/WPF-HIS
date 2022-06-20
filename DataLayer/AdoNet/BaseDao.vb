@@ -908,6 +908,16 @@ Namespace AdoNet
             Return value
         End Function
 
+        
+        Public Function UpdateRecordWithKey(Of T1, T2)(tableName As String, keyFieldName As String, keyFieldValue As T1, fieldNameToReplace As String, replaceValue As T2) As Integer _
+            Implements IBaseDao.UpdateRecordWithKey
+            Dim sql As String =
+                    " Update " & tableName & 
+                    " Set " & fieldNameToReplace & " = @replaceValue" &
+                    " where " & KeyFieldName & " = @keyFieldValue"
+            Return GetDb().Update(sql, {"@keyFieldValue", keyFieldValue, "@replaceValue", replaceValue})
+        End Function
+
         'Private Sub ExecuteSqlTransaction(ByVal connectionString As String)
         '    Using connection As New SqlConnection(connectionString)
         '        connection.Open()

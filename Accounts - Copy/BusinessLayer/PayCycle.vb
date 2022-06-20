@@ -1,0 +1,27 @@
+﻿' Category business object
+' ** Enterprise Design Pattern: Domain Model, Identity Field
+Imports AATM.BusinessLayer.BusinessRules
+
+Namespace BusinessLayer
+
+    Public Class PayCycle
+        Inherits AATM.BusinessLayer.BusinessObject
+
+        ' ** Enterprise Design Pattern: Identity field pattern
+        Public Sub New()
+            ' establish business rules
+            If GetRules().Count() = 0 Then
+                AddRule(New ValidateRequired("PayCycleName"))
+                AddRule(New ValidateRequired("PayCycleCode"))
+            End If
+        End Sub
+
+        Public Property IdNo As Int16
+        Public Property PayFrequency As Char
+        Public Property PayCycleCode As String
+        Public Property PayCycleName As String
+        Public Property PayCycleNameAra As String
+        Public Property Notes As String
+    End Class
+
+End Namespace
