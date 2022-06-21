@@ -30,7 +30,7 @@ Namespace PresentationLayer.Presenters
             Service.RestoreConnectionString()
             WithTreeView = False
             CreateDataTables()
-            AddHandler View.RetrieveLabResultRequested, AddressOf RetrievelabResult
+            AddHandler View.RetrieveLabResultRequested, AddressOf RetrieveLabResult
             AddHandler View.SaveResultRequested, AddressOf SaveResult
         End Sub
 
@@ -65,8 +65,6 @@ Namespace PresentationLayer.Presenters
 
         Public Sub RetrieveLabResult()
             _idNo = Service.GetRecordFieldWith2KeyG(Of Decimal, String, Decimal)(View.InvoiceNo, "CBCNK", "Lab_InvoiceGroup", "InvoiceNo", "InvestigationId", "Trans_Key")
-            'Dim labInvoiceGroupDao = New Lab_InvoiceGroupDao
-
             Dim labInvoiceGroup As New Lab_InvoiceGroupModel
             labInvoiceGroup = Service.GetRecordByIdNo(Of Lab_InvoiceGroupModel)(_idNo)
             GlobalVariables.Mapper.Map(labInvoiceGroup, View)
@@ -74,16 +72,37 @@ Namespace PresentationLayer.Presenters
 
         Private _idNo As Decimal
 
-        Public Sub SaveResult()
-
+        Public Function SaveResult() As Int32
+            Dim retVal As Int32
             Dim idNo As Decimal = Service.GetRecordFieldWith2KeyG(Of Decimal, String, Decimal)(View.InvoiceNo, "CBCNK", "Lab_InvoiceGroup", "InvoiceNo", "InvestigationId", "Trans_Key")
             'Dim labInvoiceGroupDao = New Lab_InvoiceGroupDao
+            retVal = UpdateLabInvoiceGroup()
+            If retVal >= 0 Then
+                retVal = UpdateLabInvoiceDetails()
+            End If
+            Return retVal
+        End Function
+
+        Private Function UpdateLabInvoiceDetails() As Int32
+            Dim retVal As Int32
+            retVal = Service.DataDao.UpdateRecordWithKey(Of Decimal, String)("Lab_InvoiceGroup", "Trans_Key", _idNo, "Remarks", View.Remarks)
+            If retVal >= 0 Then
+                retVal = Service.DataDao.UpdateRecordWithKey(Of Decimal, Integer)("Lab_InvoiceGroup", "Trans_Key", _idNo, "Status", 2)
+            End If
+            If retVal >= 0 Then
+                View.Status = 2I
+            End If
+            Return retVal
+        End Function
+
+        Private Function UpdateLabInvoiceGroup() As Int32
+            Dim retVal As Int32
             Dim labInvoiceGroup As New Lab_InvoiceGroupModel
-            labInvoiceGroup = Service.GetRecordByIdNo(Of Lab_InvoiceGroupModel)(idNo)
+            labInvoiceGroup = Service.GetRecordByIdNo(Of Lab_InvoiceGroupModel)(_idNo)
             DtLab_InvoiceDetailsUpdateTable.Clear()
             AddResult(View.Wbc, View.WbcNv, 1)
             AddResult(View.NE, View.NENv, 2)
-            AddResult(View.Ly, View.LyNv, 3)           
+            AddResult(View.Ly, View.LyNv, 3)
             AddResult(View.Mo, View.MoNv, 4)
             AddResult(View.Eo, View.EoNv, 5)
             AddResult(View.Ba, View.BaNv, 6)
@@ -101,9 +120,9 @@ Namespace PresentationLayer.Presenters
             AddResult(View.Pct, View.PctNv, 18)
             AddResult(View.Mpv, View.MpvNv, 19)
             AddResult(View.Pdw, View.PdwNv, 20)
-            Service.DataDao.UpdateTable(DtLab_InvoiceDetailsUpdateTable, _idNo)
-            Service.DataDao.UpdateRecordWithKey(Of Decimal, String)("Lab_InvoiceGroup", "Trans_Key", _idNo, "Remarks", View.Remarks) 
-        End Sub
+            retVal = Service.DataDao.UpdateTable(DtLab_InvoiceDetailsUpdateTable, _idNo)
+            Return retVal
+        End Function
 
         Private Sub AddResult(result As String, normalValue As String, serialNo As Decimal)
             Dim R As DataRow = DtLab_InvoiceDetailsUpdateTable.NewRow

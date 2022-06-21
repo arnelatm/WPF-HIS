@@ -542,16 +542,18 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As Integer)
                 txtStatus.Text = value
-                btnTransferResults.Enabled = True
                 If value = 0 Then
                     txtStatusDisplay.Text = "Incomplete"
+                    btnTransferResults.Enabled = True
                 ElseIf value = 1 Then
                     txtStatusDisplay.Text = "Partially Incomplete"
+                    btnTransferResults.Enabled = True
                 ElseIf value = 2 Then
                     txtStatusDisplay.Text = "Complete"
                     btnTransferResults.Enabled = False
                 Else
                     txtStatusDisplay.Text = "Unknown"
+                    btnTransferResults.Enabled = False
                 End If
             End Set
         End Property
@@ -902,9 +904,6 @@ Namespace PresentationLayer.Views.Forms
             RetrieveResult()
         End Sub
 
-        Private Sub txtRemarks_TextChanged(sender As Object, e As EventArgs) Handles txtRemarks.TextChanged
-
-        End Sub
     End Class
 
 
