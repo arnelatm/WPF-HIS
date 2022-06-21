@@ -62,20 +62,21 @@ Namespace DataLayer.AdoNet
             }
 
 
-        Public Function UpdateTable(Of T)(data As DataTable, groupKey As T) As T Implements IDaoUpdateDataTable.UpdateTable
-            Dim retVal As T
+        Public Function UpdateTable(Of T)(data As DataTable, groupKey As T) As Integer Implements IDaoUpdateDataTable.UpdateTable
+            Dim retVal As Integer
             Dim sql = ""
             Dim params() As Object
+            Dim commands As New List(Of Object)
             For i = 0 To 19
                 sql = "Update Lab_InvoiceDetails Set Result1 = @Result1, suffix1 = @Suffix1 where group_key = @group_Key and slno = @SlNo"
                 params = {"@Result1", data.Rows(i).Item(3), "@Suffix1", data.Rows(i).Item(4), "@SlNo", data.Rows(i).Item(0), "@Group_Key", groupKey}
-                retVal = _db.Scalar(sql, params)
+                commands.Add({sql, params})
             Next
+            retVal = _db.ExecuteCommandsWithParameter("updateLabInvoices", commands)
             Return retVal
         End Function
 
     End Class
-
 
     Public Class Lab_InvoiceDetailsDao
         Inherits AccountsDao
