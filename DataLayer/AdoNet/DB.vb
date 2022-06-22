@@ -1323,7 +1323,7 @@ Namespace AdoNet
             Return retValue
         End Function
 
-        Public Function ExecuteCommandsWithParameter(transactionName As String, commandsWithParameters As Object) As Integer
+        Public Function ExecuteNonQueryCommands(transactionName As String, commandsWithParameters As List(Of DaoCommand)) As Integer
             Dim retValue As Integer
             retValue = 0
             Using connection As New SqlConnection(_connectionString)
@@ -1335,17 +1335,17 @@ Namespace AdoNet
                     Dim command = Factory.CreateCommand()
                     command.Connection = connection
                     command.Transaction = transaction
-                    For Each item In commandsWithParameters
+                    retValue = 0
+                    For Each item as DaoCommand In commandsWithParameters
                         command.Parameters.Clear()
-                        command.CommandText = item(0)
-                        If item(1) IsNot Nothing AndAlso item(1).Length() > 0 Then
-                            command.AddParameters(item(1))
+                        command.CommandText = item.CommandText
+                        If item.Parameters IsNot Nothing AndAlso item.Parameters.Length() > 0 Then
+                            command.AddParameters(item.Parameters)
                         End If
-                        command.ExecuteNonQuery()
+                        retValue += command.ExecuteNonQuery()
                     Next
                     ' Attempt to commit the transaction.
-                    transaction.Commit()
-                    retValue = 1
+                    transaction.Commit()                    
                 Catch ex As Exception
                     MessageBox.Show("Commit Exception Type: " & ex.GetType().ToString())
                     MessageBox.Show("  Message: {0}", ex.Message)

@@ -96,6 +96,16 @@ End Interface
 Public Interface IDaoUpdateDataTable
 
     ' updae the table given the DataTable
-    Function UpdateTable(Of T)(data As DataTable, groupKey As T) As Integer
+    Function UpdateTable(Of T)(data As Object(), groupKey As T) As Integer
+
+
+End Interface
+
+
+Public Interface IDaoUpdateTable(Of TBiz)
+
+    ' updae the table given the DataTable
+    Function UpdateTable(Of T)(data As List(Of TBiz), groupKey As T) As Integer
+
 
 End Interface
