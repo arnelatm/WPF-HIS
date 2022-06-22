@@ -3598,7 +3598,7 @@
         '
         'btnTransferResults
         '
-        Me.btnTransferResults.DesignerSelected = false
+        Me.btnTransferResults.DesignerSelected = true
         Me.btnTransferResults.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.btnTransferResults.ImageIndex = 0
         Me.btnTransferResults.Location = New System.Drawing.Point(280, 564)

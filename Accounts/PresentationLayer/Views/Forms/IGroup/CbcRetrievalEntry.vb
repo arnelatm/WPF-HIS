@@ -63,8 +63,10 @@ Namespace PresentationLayer.Views.Forms
                 txtInvoiceTypeDisplay.Text = value
                 If value = "CA" Then
                     txtInvoiceTypeDisplay.Text = "Cash"
-                Else
+                ElseIf value = "CR" Then
                     txtInvoiceTypeDisplay.Text = "Credit"
+                Else
+                    txtInvoiceTypeDisplay.Text = ""
                 End If
             End Set
         End Property
@@ -115,7 +117,7 @@ Namespace PresentationLayer.Views.Forms
                 ElseIf AgeYMD = "D" Then
                     txtAgeDisplay.Text = value.ToString() + IIf(value <= 1, " day", " days")
                 Else
-                    txtAgeDisplay.Text = value.ToString() + IIf(value <= 1, " year", " years")
+                    txtAgeDisplay.Text = ""
                 End If
 
             End Set
@@ -138,8 +140,10 @@ Namespace PresentationLayer.Views.Forms
                 txtSex.Text = value
                 If value = "M" Then
                     txtSexDisplay.Text = "Male"
-                Else
+                ElseIf value = "F" Then
                     txtSexDisplay.Text = "Female"
+                Else
+                    txtSexDisplay.Text = ""
                 End If
             End Set
         End Property
@@ -491,41 +495,167 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property WbcR As String Implements ILab_InvoiceGroupView.WbcR
-        Public Property NeR As String Implements ILab_InvoiceGroupView.NeR
+            Get
+                Return txtWbcR.Text
+            End Get
+            Set(value As String)
+                txtWbcR.Text = value
+            End Set
+        End Property
+
+        Public Property NER As String Implements ILab_InvoiceGroupView.NeR
+            Get
+                Return txtNER.Text
+            End Get
+            Set(value As String)
+                txtNER.Text = value
+            End Set
+        End Property
+
         Public Property LyR As String Implements ILab_InvoiceGroupView.LyR
+            Get
+                Return txtLYR.Text
+            End Get
+            Set(value As String)
+                txtLYR.Text = value
+            End Set
+        End Property
+
         Public Property MoR As String Implements ILab_InvoiceGroupView.MoR
+            Get
+                Return txtMOR.Text
+            End Get
+            Set(value As String)
+                txtMOR.Text = value
+            End Set
+        End Property
+
         Public Property EoR As String Implements ILab_InvoiceGroupView.EoR
+            Get
+                Return txtEOR.Text
+            End Get
+            Set(value As String)
+                txtEOR.Text = value
+            End Set
+        End Property
+
         Public Property BaR As String Implements ILab_InvoiceGroupView.BaR
+            Get
+                Return txtBAR.Text
+            End Get
+            Set(value As String)
+                txtBAR.Text = value
+            End Set
+        End Property
+
         Public Property RbcR As String Implements ILab_InvoiceGroupView.RbcR
+            Get
+                Return txtRbcR.Text
+            End Get
+            Set(value As String)
+                txtRbcR.Text = value
+            End Set
+        End Property
+
         Public Property HgbR As String Implements ILab_InvoiceGroupView.HgbR
+            Get
+                Return txtHgbR.Text
+            End Get
+            Set(value As String)
+                txtHgbR.Text = value
+            End Set
+        End Property
+
         Public Property HctR As String Implements ILab_InvoiceGroupView.HctR
+            Get
+                Return txtHctR.Text
+            End Get
+            Set(value As String)
+                txtHctR.Text = value
+            End Set
+        End Property
+
         Public Property McvR As String Implements ILab_InvoiceGroupView.McvR
+            Get
+                Return txtMcvR.Text
+            End Get
+            Set(value As String)
+                txtMcvR.Text = value
+            End Set
+        End Property
+
         Public Property MchR As String Implements ILab_InvoiceGroupView.MchR
+            Get
+                Return txtMchR.Text
+            End Get
+            Set(value As String)
+                txtMchR.Text = value
+            End Set
+        End Property
+
         Public Property MchcR As String Implements ILab_InvoiceGroupView.MchcR
+            Get
+                Return txtMchcR.Text
+            End Get
+            Set(value As String)
+                txtMchcR.Text = value
+            End Set
+        End Property
+
         Public Property RdwcvR As String Implements ILab_InvoiceGroupView.RdwcvR
-        Public Property RdwcdR As String Implements ILab_InvoiceGroupView.RdwsdR
+            Get
+                Return txtRdwcvR.Text
+            End Get
+            Set(value As String)
+                txtRdwcvR.Text = value
+            End Set
+        End Property
+
+        Public Property RdwsdR As String Implements ILab_InvoiceGroupView.RdwsdR
+            Get
+                Return txtRdwsdR.Text
+            End Get
+            Set(value As String)
+                txtRdwsdR.Text = value
+            End Set
+        End Property
+
         Public Property PltR As String Implements ILab_InvoiceGroupView.PltR
+            Get
+                Return txtPltR.Text
+            End Get
+            Set(value As String)
+                txtPltR.Text = value
+            End Set
+        End Property
+
         Public Property PctR As String Implements ILab_InvoiceGroupView.PctR
+            Get
+                Return txtPctR.Text
+            End Get
+            Set(value As String)
+                txtPctR.Text = value
+            End Set
+        End Property
+
         Public Property MpvR As String Implements ILab_InvoiceGroupView.MpvR
+            Get
+                Return txtMpvR.Text
+            End Get
+            Set(value As String)
+                txtMpvR.Text = value
+            End Set
+        End Property
+
         Public Property PdwR As String Implements ILab_InvoiceGroupView.PdwR
-        Public Property WbcRNv As String Implements ILab_InvoiceGroupView.WbcRNv
-        Public Property NeRNv As String Implements ILab_InvoiceGroupView.NeRNv
-        Public Property LyRNv As String Implements ILab_InvoiceGroupView.LyRNv
-        Public Property MoRNv As String Implements ILab_InvoiceGroupView.MoRNv
-        Public Property EoRNv As String Implements ILab_InvoiceGroupView.EoRNv
-        Public Property BaRNv As String Implements ILab_InvoiceGroupView.BaRNv
-        Public Property RbcRNv As String Implements ILab_InvoiceGroupView.RbcRNv
-        Public Property HgbRNv As String Implements ILab_InvoiceGroupView.HgbRNv
-        Public Property HctRNv As String Implements ILab_InvoiceGroupView.HctRNv
-        Public Property McvRNv As String Implements ILab_InvoiceGroupView.McvRNv
-        Public Property MchRNv As String Implements ILab_InvoiceGroupView.MchRNv
-        Public Property MchcRNv As String Implements ILab_InvoiceGroupView.MchcRNv
-        Public Property RdwcvRNv As String Implements ILab_InvoiceGroupView.RdwcvRNv
-        Public Property RdwcdRNv As String Implements ILab_InvoiceGroupView.RdwsdRNv
-        Public Property PltRNv As String Implements ILab_InvoiceGroupView.PltRNv
-        Public Property PctRNv As String Implements ILab_InvoiceGroupView.PctRNv
-        Public Property MpvRNv As String Implements ILab_InvoiceGroupView.MpvRNv
-        Public Property PdwRNv As String Implements ILab_InvoiceGroupView.PdwRNv
+            Get
+                Return txtPdwR.Text
+            End Get
+            Set(value As String)
+                txtPdwR.Text = value
+            End Set
+        End Property
+
         Public Property Remarks As String Implements ILab_InvoiceGroupView.Remarks
             Get
                 Return txtRemarks.Text
@@ -534,6 +664,170 @@ Namespace PresentationLayer.Views.Forms
                 txtRemarks.Text = value
             End Set
         End Property
+
+
+        Public Property WbcRNv As String Implements ILab_InvoiceGroupView.WbcRNv
+            Get
+                Return txtWbcRNv.Text
+            End Get
+            Set(value As String)
+                txtWbcRNv.Text = value
+            End Set
+        End Property
+
+        Public Property NERNv As String Implements ILab_InvoiceGroupView.NeRNv
+            Get
+                Return txtNERNv.Text
+            End Get
+            Set(value As String)
+                txtNERNv.Text = value
+            End Set
+        End Property
+
+        Public Property LyRNv As String Implements ILab_InvoiceGroupView.LyRNv
+            Get
+                Return txtLYRNv.Text
+            End Get
+            Set(value As String)
+                txtLYRNv.Text = value
+            End Set
+        End Property
+
+        Public Property MoRNv As String Implements ILab_InvoiceGroupView.MoRNv
+            Get
+                Return txtMORNv.Text
+            End Get
+            Set(value As String)
+                txtMORNv.Text = value
+            End Set
+        End Property
+
+        Public Property EoRNv As String Implements ILab_InvoiceGroupView.EoRNv
+            Get
+                Return txtEORNv.Text
+            End Get
+            Set(value As String)
+                txtEORNv.Text = value
+            End Set
+        End Property
+
+        Public Property BaRNv As String Implements ILab_InvoiceGroupView.BaRNv
+            Get
+                Return txtBARNv.Text
+            End Get
+            Set(value As String)
+                txtBARNv.Text = value
+            End Set
+        End Property
+
+        Public Property RbcRNv As String Implements ILab_InvoiceGroupView.RbcRNv
+            Get
+                Return txtRbcRNv.Text
+            End Get
+            Set(value As String)
+                txtRbcRNv.Text = value
+            End Set
+        End Property
+
+        Public Property HgbRNv As String Implements ILab_InvoiceGroupView.HgbRNv
+            Get
+                Return txtHgbRNv.Text
+            End Get
+            Set(value As String)
+                txtHgbRNv.Text = value
+            End Set
+        End Property
+
+        Public Property HctRNv As String Implements ILab_InvoiceGroupView.HctRNv
+            Get
+                Return txtHctRNv.Text
+            End Get
+            Set(value As String)
+                txtHctRNv.Text = value
+            End Set
+        End Property
+
+        Public Property McvRNv As String Implements ILab_InvoiceGroupView.McvRNv
+            Get
+                Return txtMcvRNv.Text
+            End Get
+            Set(value As String)
+                txtMcvRNv.Text = value
+            End Set
+        End Property
+
+        Public Property MchRNv As String Implements ILab_InvoiceGroupView.MchRNv
+            Get
+                Return txtMchRNv.Text
+            End Get
+            Set(value As String)
+                txtMchRNv.Text = value
+            End Set
+        End Property
+
+        Public Property MchcRNv As String Implements ILab_InvoiceGroupView.MchcRNv
+            Get
+                Return txtMchcRNv.Text
+            End Get
+            Set(value As String)
+                txtMchcRNv.Text = value
+            End Set
+        End Property
+
+        Public Property RdwcvRNv As String Implements ILab_InvoiceGroupView.RdwcvRNv
+            Get
+                Return txtRdwcvRNv.Text
+            End Get
+            Set(value As String)
+                txtRdwcvRNv.Text = value
+            End Set
+        End Property
+
+        Public Property RdwsdRNv As String Implements ILab_InvoiceGroupView.RdwsdRNv
+            Get
+                Return txtRdwsdRNv.Text
+            End Get
+            Set(value As String)
+                txtRdwsdRNv.Text = value
+            End Set
+        End Property
+
+        Public Property PltRNv As String Implements ILab_InvoiceGroupView.PltRNv
+            Get
+                Return txtPltRNv.Text
+            End Get
+            Set(value As String)
+                txtPltRNv.Text = value
+            End Set
+        End Property
+
+        Public Property PctRNv As String Implements ILab_InvoiceGroupView.PctRNv
+            Get
+                Return txtPctRNv.Text
+            End Get
+            Set(value As String)
+                txtPctRNv.Text = value
+            End Set
+        End Property
+
+        Public Property MpvRNv As String Implements ILab_InvoiceGroupView.MpvRNv
+            Get
+                Return txtMpvRNv.Text
+            End Get
+            Set(value As String)
+                txtMpvRNv.Text = value
+            End Set
+        End Property
+
+        Public Property PdwRNv As String Implements ILab_InvoiceGroupView.PdwRNv
+            Get
+                Return txtPdwRNv.Text
+            End Get
+            Set(value As String)
+                txtPdwRNv.Text = value
+            End Set
+        End Property
+
         Public Property LabInvoiceDetails As List(Of Lab_InvoiceDetailsView) Implements ILab_InvoiceGroupView.LabInvoiceDetails
 
         Public Property Status As Integer Implements ILab_InvoiceGroupView.Status
@@ -561,339 +855,314 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-        'Private Sub btnRetrieve_ClickButtonArea_1(Sender As Object, e As MouseEventArgs) Handles btnRetrieve.ClickButtonArea
-        '    RaiseEvent RetrieveLabResultRequested()
-        '    AssigValuesToDisplay()
+        Private Sub btnRetrieve_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnRetrieve.ClickButtonArea
+            RaiseEvent RetrieveLabResultRequested()
+            If LabInvoiceDetails.Count() = 0 Then
+                btnRetrieve.Enabled = False
+            End If
+        End Sub
+
+        'Private Sub AssigValuesToDisplay()
+        '    For Each item In LabInvoiceDetails
+        '        Select Case item.SlNo
+        '            Case 1
+        '                txtWbcR.Text = item.Result1
+        '                txtWbcRNv.Text = item.Suffix1
+        '            Case 2
+        '                txtNER.Text = item.Result1
+        '                txtNERNv.Text = item.Suffix1
+        '            Case 3
+        '                txtLYR.Text = item.Result1
+        '                txtLYRNv.Text = item.Suffix1
+        '            Case 4
+        '                txtMOR.Text = item.Result1
+        '                txtMORNv.Text = item.Suffix1
+        '            Case 5
+        '                txtEOR.Text = item.Result1
+        '                txtEORNv.Text = item.Suffix1
+        '            Case 6
+        '                txtBAR.Text = item.Result1
+        '                txtBARNv.Text = item.Suffix1
+        '            Case 8
+        '                txtRbcR.Text = item.Result1
+        '                txtRbcRNv.Text = item.Suffix1
+        '            Case 9
+        '                txtHgbR.Text = item.Result1
+        '                txtHgbRNv.Text = item.Suffix1
+        '            Case 10
+        '                txtHctR.Text = item.Result1
+        '                txtHctRNv.Text = item.Suffix1
+        '            Case 11
+        '                txtMcvR.Text = item.Result1
+        '                txtMcvRNv.Text = item.Suffix1
+        '            Case 12
+        '                txtMchR.Text = item.Result1
+        '                txtMchRNv.Text = item.Suffix1
+        '            Case 13
+        '                txtMchcR.Text = item.Result1
+        '                txtMchcRNv.Text = item.Suffix1
+        '            Case 14
+        '                txtRdwcvR.Text = item.Result1
+        '                txtRdwcvRNv.Text = item.Suffix1
+        '            Case 15
+        '                txtRdwsdR.Text = item.Result1
+        '                txtRdwsdRNv.Text = item.Suffix1
+        '            Case 17
+        '                txtPltR.Text = item.Result1
+        '                txtPltRNv.Text = item.Suffix1
+        '            Case 18
+        '                txtPctR.Text = item.Result1
+        '                txtPctRNv.Text = item.Suffix1
+        '            Case 19
+        '                txtMpvR.Text = item.Result1
+        '                txtMpvRNv.Text = item.Suffix1
+        '            Case 20
+        '                txtPdwR.Text = item.Result1
+        '                txtPdwRNv.Text = item.Suffix1
+        '        End Select
+        '    Next
+        '    SetNormalValues()
+        '    Messaging.Show("Data successfully retrieved!")
         'End Sub
 
-        Private Sub btnRetrieve_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnRetrieve.ClickButtonArea
-            RetrieveResult()
-        End Sub
+        'Private Sub SetNormalValues()
+        '    Dim nAge As Decimal
+        '    Select Case AgeYMD
+        '        Case "Y"
+        '            nAge = txtAge.Text
+        '        Case "M"
+        '            nAge = txtAge.Text / 12
+        '        Case = "W"
+        '            nAge = txtAge.Text / 365.25
+        '        Case = "D"
+        '            nAge = txtAge.Text * 7 / 365.25
+        '        Case Else
+        '            nAge = 12
+        '    End Select
+        '    Select Case nAge
+        '        Case <= 1
+        '            txtWbcNv.Text = "4.5 - 20.0 (10^3/µL)"
+        '            txtNENv.Text = "37 - 70 %"
+        '            txtLYNv.Text = "40 - 65 %"
+        '            txtMONv.Text = "0 - 12 %"
+        '            txtEONv.Text = "0 - 8 %"
+        '            txtBANv.Text = "0 - 3 %"
 
-        Private Sub RetrieveResult()
-            If InvoiceNo = 0 Then
-                Messaging.Show("Sorry you must enter the invoice number to be retrieved.")
-            Else
-                Dim filePath As String = "\\laboratory5\drivec\NihonKohden"
-                Dim sFiles As String()
-                Dim pattern As String = "*_" + txtInvoiceNo.Text.ToString() + ".csv"
-                sFiles = Directory.GetFileSystemEntries(filePath, pattern)
-                If Not CopyFileResultsToView(sFiles, filePath) Then
-                    Messaging.Show("No result with that invoice number was found on [" + filePath + "]")
-                    Dim allControls As New List(Of Control)
-                    allControls = FindControlRecursive(allControls, Me)
-                    For Each cCtrl As Control In allControls
-                        If TypeOf cCtrl Is CTextBox Then
-                            cCtrl.Text = ""
-                        End If
-                    Next
-                Else
-                    RaiseEvent RetrieveLabResultRequested()
-                    AssigValuesToDisplay()
-                End If
-            End If
-        End Sub
+        '            txtRbcNv.Text = "3.9 - 5.9 (10^6 /µL)"
+        '            txtHgbNv.Text = "14 - 18 g/dL"
+        '            txtHctNv.Text = "32 - 55 %"
+        '            txtMcvNv.Text = "80 - 100 fL"
+        '            txtMchNv.Text = "31 - 37 pg"
+        '            txtMchcNv.Text = "31 - 35 g/dL"
+        '            txtRdwcvNv.Text = "11.5 - 18.7 %"
+        '            txtRdwsdNv.Text = "39 - 46 fL"
 
-        Private Sub AssigValuesToDisplay()
-            For Each item In LabInvoiceDetails
-                Select Case item.SlNo
-                    Case 1
-                        txtWbcR.Text = item.Result1
-                        txtWbcRNv.Text = item.Suffix1
-                    Case 2
-                        txtNER.Text = item.Result1
-                        txtNERNv.Text = item.Suffix1
-                    Case 3
-                        txtLYR.Text = item.Result1
-                        txtLYRNv.Text = item.Suffix1
-                    Case 4
-                        txtMOR.Text = item.Result1
-                        txtMORNv.Text = item.Suffix1
-                    Case 5
-                        txtEOR.Text = item.Result1
-                        txtEORNv.Text = item.Suffix1
-                    Case 6
-                        txtBAR.Text = item.Result1
-                        txtBARNv.Text = item.Suffix1
-                    Case 8
-                        txtRbcR.Text = item.Result1
-                        txtRbcRNv.Text = item.Suffix1
-                    Case 9
-                        txtHgbR.Text = item.Result1
-                        txtHgbRNv.Text = item.Suffix1
-                    Case 10
-                        txtHctR.Text = item.Result1
-                        txtHctRNv.Text = item.Suffix1
-                    Case 11
-                        txtMcvR.Text = item.Result1
-                        txtMcvRNv.Text = item.Suffix1
-                    Case 12
-                        txtMchR.Text = item.Result1
-                        txtMchRNv.Text = item.Suffix1
-                    Case 13
-                        txtMchcR.Text = item.Result1
-                        txtMchcRNv.Text = item.Suffix1
-                    Case 14
-                        txtRdwcvR.Text = item.Result1
-                        txtRdwcvRNv.Text = item.Suffix1
-                    Case 15
-                        txtRdwsdR.Text = item.Result1
-                        txtRdwsdRNv.Text = item.Suffix1
-                    Case 17
-                        txtPltR.Text = item.Result1
-                        txtPltRNv.Text = item.Suffix1
-                    Case 18
-                        txtPctR.Text = item.Result1
-                        txtPctRNv.Text = item.Suffix1
-                    Case 19
-                        txtMpvR.Text = item.Result1
-                        txtMpvRNv.Text = item.Suffix1
-                    Case 20
-                        txtPdwR.Text = item.Result1
-                        txtPdwRNv.Text = item.Suffix1
-                End Select
-            Next
-            SetNormalValues()
-        End Sub
+        '            txtPltNv.Text = "150 - 450 (10^3/µL)"
+        '            txtPctNv.Text = "0.16 - 0.33 %"
+        '            txtMpvNv.Text = "6.2 - 12.4 fL"
+        '            txtPdwNv.Text = "12.5 - 17 %"
+        '        Case <= 11
+        '            txtWbcNv.Text = "4.5 - 13.0 (10^3/µL)"
+        '            txtNENv.Text = "30 - 65 %"
+        '            txtLYNv.Text = "20 - 65 %"
+        '            txtMONv.Text = "0 - 12 %"
+        '            txtEONv.Text = "0 - 8 %"
+        '            txtBANv.Text = "0 - 3 %"
 
-        Private Sub SetNormalValues()
-            Dim nAge As Decimal
-            Select Case AgeYMD
-                Case "Y"
-                    nAge = txtAge.Text
-                Case "M"
-                    nAge = txtAge.Text / 12
-                Case = "W"
-                    nAge = txtAge.Text / 365.25
-                Case = "D"
-                    nAge = txtAge.Text * 7 / 365.25
-                Case Else
-                    nAge = 12
-            End Select
-            Select Case nAge
-                Case <= 1
-                    txtWbcNv.Text = "4.5 - 20.0 (10^3/µL)"
-                    txtNENv.Text = "37 - 70 %"
-                    txtLYNv.Text = "40 - 65 %"
-                    txtMONv.Text = "0 - 12 %"
-                    txtEONv.Text = "0 - 8 %"
-                    txtBANv.Text = "0 - 3 %"
+        '            txtRbcNv.Text = "3.8 - 5.4 (10^6/µL)"
+        '            txtHgbNv.Text = "11 - 16 g/dL"
+        '            txtHctNv.Text = "32 - 42 %"
+        '            txtMcvNv.Text = "72 - 86.6 fL"
+        '            txtMchNv.Text = "25 - 32 pg"
+        '            txtMchcNv.Text = "32 - 36 g/dL"
+        '            txtRdwcvNv.Text = "11.5 - 15.0 %"
+        '            txtRdwsdNv.Text = "39 - 46 fL"
 
-                    txtRbcNv.Text = "3.9 - 5.9 (10^6 /µL)"
-                    txtHgbNv.Text = "14 - 18 g/dL"
-                    txtHctNv.Text = "32 - 55 %"
-                    txtMcvNv.Text = "80 - 100 fL"
-                    txtMchNv.Text = "31 - 37 pg"
-                    txtMchcNv.Text = "31 - 35 g/dL"
-                    txtRdwcvNv.Text = "11.5 - 18.7 %"
-                    txtRdwsdNv.Text = "39 - 46 fL"
+        '            txtPltNv.Text = "150 - 400 (10^3/µL)"
+        '            txtPctNv.Text = "0.16 - 0.33"
+        '            txtMpvNv.Text = "7 - 11 fL"
+        '            txtPdwNv.Text = "15 - 17"
 
-                    txtPltNv.Text = "150 - 450 (10^3/µL)"
-                    txtPctNv.Text = "0.16 - 0.33 %"
-                    txtMpvNv.Text = "6.2 - 12.4 fL"
-                    txtPdwNv.Text = "12.5 - 17 %"
-                Case <= 11
-                    txtWbcNv.Text = "4.5 - 13.0 (10^3/µL)"
-                    txtNENv.Text = "30 - 65 %"
-                    txtLYNv.Text = "20 - 65 %"
-                    txtMONv.Text = "0 - 12 %"
-                    txtEONv.Text = "0 - 8 %"
-                    txtBANv.Text = "0 - 3 %"
+        '        Case >= 12
+        '            If txtSex.Text = "F" Then
+        '                txtWbcNv.Text = "4 - 10 (10^3/µL)"
+        '                txtNENv.Text = "37 - 65 %"
+        '                txtLYNv.Text = "16 - 51 %"
+        '                txtMONv.Text = "0 - 12 %"
+        '                txtEONv.Text = "0 - 8 %"
+        '                txtBANv.Text = "0 - 3 %"
 
-                    txtRbcNv.Text = "3.8 - 5.4 (10^6/µL)"
-                    txtHgbNv.Text = "11 - 16 g/dL"
-                    txtHctNv.Text = "32 - 42 %"
-                    txtMcvNv.Text = "72 - 86.6 fL"
-                    txtMchNv.Text = "25 - 32 pg"
-                    txtMchcNv.Text = "32 - 36 g/dL"
-                    txtRdwcvNv.Text = "11.5 - 15.0 %"
-                    txtRdwsdNv.Text = "39 - 46 fL"
+        '                txtRbcNv.Text = "3.85 - 5.2 (10^6/µL)"
+        '                txtHgbNv.Text = "11.5 - 16 g/dL"
+        '                txtHctNv.Text = "34.7 - 46 %"
+        '                txtMcvNv.Text = "80 - 97 fL"
+        '                txtMchNv.Text = "26 - 34 pg"
+        '                txtMchcNv.Text = "31 - 36 g/dL"
+        '                txtRdwcvNv.Text = "11.5 - 15.0 %"
+        '                txtRdwsdNv.Text = "39 - 46 fL"
 
-                    txtPltNv.Text = "150 - 400 (10^3/µL)"
-                    txtPctNv.Text = "0.16 - 0.33"
-                    txtMpvNv.Text = "7 - 11 fL"
-                    txtPdwNv.Text = "15 - 17"
+        '                txtPltNv.Text = "150 - 350 (10^3/µL)"
+        '                txtPctNv.Text = "0.16 - 0.33 %"
+        '                txtMpvNv.Text = "6.5 - 12.4 fL"
+        '                txtPdwNv.Text = "15 - 17 %"
 
-                Case >= 12
-                    If txtSex.Text = "F" Then
-                        txtWbcNv.Text = "4 - 10 (10^3/µL)"
-                        txtNENv.Text = "37 - 65 %"
-                        txtLYNv.Text = "16 - 51 %"
-                        txtMONv.Text = "0 - 12 %"
-                        txtEONv.Text = "0 - 8 %"
-                        txtBANv.Text = "0 - 3 %"
+        '            Else
+        '                txtWbcNv.Text = "4 - 10 (10^3/µL)"
+        '                txtNENv.Text = "37 - 65 %"
+        '                txtLYNv.Text = "16 - 51 %"
+        '                txtMONv.Text = "0 - 12 %"
+        '                txtEONv.Text = "0 - 8 %"
+        '                txtBANv.Text = "0 - 3 %"
 
-                        txtRbcNv.Text = "3.85 - 5.2 (10^6/µL)"
-                        txtHgbNv.Text = "11.5 - 16 g/dL"
-                        txtHctNv.Text = "34.7 - 46 %"
-                        txtMcvNv.Text = "80 - 97 fL"
-                        txtMchNv.Text = "26 - 34 pg"
-                        txtMchcNv.Text = "31 - 36 g/dL"
-                        txtRdwcvNv.Text = "11.5 - 15.0 %"
-                        txtRdwsdNv.Text = "39 - 46 fL"
+        '                txtRbcNv.Text = "4.31 - 6.4 (10^6/µL)"
+        '                txtHgbNv.Text = "13.6 - 18.0 g/dL"
+        '                txtHctNv.Text = "39.8 - 52.0 %"
+        '                txtMcvNv.Text = "80 - 97 fL"
+        '                txtMchNv.Text = "26 - 34 pg"
+        '                txtMchcNv.Text = "31 - 36 g/dL"
+        '                txtRdwcvNv.Text = "11.5 - 15.0 %"
+        '                txtRdwsdNv.Text = "39 - 46 fL"
 
-                        txtPltNv.Text = "150 - 350 (10^3/µL)"
-                        txtPctNv.Text = "0.16 - 0.33 %"
-                        txtMpvNv.Text = "6.5 - 12.4 fL"
-                        txtPdwNv.Text = "15 - 17 %"
+        '                txtPltNv.Text = "150 - 350 (10^3/µL)"
+        '                txtPctNv.Text = "0.16 - 0.33 %"
+        '                txtMpvNv.Text = "6.5 - 12.4 fL"
+        '                txtPdwNv.Text = "15 - 17 %"
+        '            End If
+        '    End Select
+        'End Sub
 
-                    Else
-                        txtWbcNv.Text = "4 - 10 (10^3/µL)"
-                        txtNENv.Text = "37 - 65 %"
-                        txtLYNv.Text = "16 - 51 %"
-                        txtMONv.Text = "0 - 12 %"
-                        txtEONv.Text = "0 - 8 %"
-                        txtBANv.Text = "0 - 3 %"
+        'Private Function CopyFileResultsToView(sFiles() As String, filePath As String) As Boolean
+        '    Dim success As Boolean
+        '    Dim aFileResults(146) As String
+        '    Dim aCBCResults(19) As String
 
-                        txtRbcNv.Text = "4.31 - 6.4 (10^6/µL)"
-                        txtHgbNv.Text = "13.6 - 18.0 g/dL"
-                        txtHctNv.Text = "39.8 - 52.0 %"
-                        txtMcvNv.Text = "80 - 97 fL"
-                        txtMchNv.Text = "26 - 34 pg"
-                        txtMchcNv.Text = "31 - 36 g/dL"
-                        txtRdwcvNv.Text = "11.5 - 15.0 %"
-                        txtRdwsdNv.Text = "39 - 46 fL"
+        '    'sFiles = Folder.GetFiles(cFilePath + "*.csv",IO.SearchOption.AllDirectories)
+        '    If sFiles.Count() = 1 Then
+        '        GetResultOnFile(sFiles, aFileResults, aCBCResults)
+        '        success = True
+        '    ElseIf sFiles.Count() > 1 Then
+        '        Messaging.Show("Multiple results found on file, please manually select the record you want to transfer")
+        '        Dim cbcReportSelector As New CbcReportSelector(sFiles, filePath, txtInvoiceNo.Text)
+        '        Dim result = cbcReportSelector.ShowDialog()
+        '        If result = DialogResult.OK Then
+        '            Dim cPatern = sFiles(cbcReportSelector.SelectedIndex).Substring(filePath.Length + 1)
+        '            Dim cFile = Directory.GetFileSystemEntries(filePath, cPatern)
+        '            GetResultOnFile(cFile, aFileResults, aCBCResults)
+        '            success = True
+        '        Else
+        '            success = False
+        '        End If
+        '    Else
+        '        success = False
+        '    End If
+        '    Return success
+        'End Function
 
-                        txtPltNv.Text = "150 - 350 (10^3/µL)"
-                        txtPctNv.Text = "0.16 - 0.33 %"
-                        txtMpvNv.Text = "6.5 - 12.4 fL"
-                        txtPdwNv.Text = "15 - 17 %"
-                    End If
-            End Select
-        End Sub
+        'Private Sub GetResultOnFile(sFiles() As String, aFileResults() As String, aCBCResults() As String)
+        '    Dim lineCount = File.ReadAllLines(sFiles(0)).Length
+        '    Using file As New IO.StreamReader(sFiles(0))
+        '        For i As Integer = 1 To 146
+        '            aFileResults(i) = file.ReadLine()
+        '        Next
+        '    End Using
+        '    FileResultsToCbcResults(aFileResults, aCBCResults)
+        '    txtPatientName.Text = aFileResults(143)
+        '    txtSexF.Text = aFileResults(144)
+        '    txtAgeF.Text = aFileResults(146)
+        ''End Sub
 
-        Private Function CopyFileResultsToView(sFiles() As String, filePath As String) As Boolean
-            Dim success As Boolean
-            Dim aFileResults(146) As String
-            Dim aCBCResults(19) As String
+        'Private Sub FileResultsToCbcResults(aFileResults() As String, aCBCResults() As String)
+        '    aCBCResults(CBCEnum.Wbc) = aFileResults(15)
+        '    aCBCResults(CBCEnum.NE) = aFileResults(16)
+        '    aCBCResults(CBCEnum.LY) = aFileResults(17)
+        '    aCBCResults(CBCEnum.MO) = aFileResults(18)
+        '    aCBCResults(CBCEnum.EO) = aFileResults(19)
+        '    aCBCResults(CBCEnum.BA) = aFileResults(20)
+        '    aCBCResults(CBCEnum.Rbc) = aFileResults(26)
+        '    aCBCResults(CBCEnum.Hgb) = aFileResults(27)
+        '    aCBCResults(CBCEnum.Hct) = aFileResults(28)
+        '    aCBCResults(CBCEnum.Mcv) = aFileResults(29)
+        '    aCBCResults(CBCEnum.Mch) = aFileResults(30)
+        '    aCBCResults(CBCEnum.Mchc) = aFileResults(31)
+        '    aCBCResults(CBCEnum.Rdwcv) = aFileResults(32)
+        '    aCBCResults(CBCEnum.Rdwsd) = aFileResults(49)
+        '    aCBCResults(CBCEnum.Plt) = aFileResults(33)
+        '    aCBCResults(CBCEnum.Pct) = aFileResults(34)
+        '    aCBCResults(CBCEnum.Mpv) = aFileResults(35)
+        '    aCBCResults(CBCEnum.Pdw) = aFileResults(36)
+        '    CbcResultsToView(aCBCResults)
+        'End Sub
 
-            'sFiles = Folder.GetFiles(cFilePath + "*.csv",IO.SearchOption.AllDirectories)
-            If sFiles.Count() = 1 Then
-                GetResultOnFile(sFiles, aFileResults, aCBCResults)
-                success = True
-            ElseIf sFiles.Count() > 1 Then
-                Messaging.Show("Multiple results found on file, please manually select the record you want to transfer")
-                Dim cbcReportSelector As New CbcReportSelector(sFiles, filePath, txtInvoiceNo.Text)
-                Dim result = cbcReportSelector.ShowDialog()
-                If result = DialogResult.OK Then
-                    Dim cPatern = sFiles(cbcReportSelector.SelectedIndex).Substring(filePath.Length + 1)
-                    Dim cFile = Directory.GetFileSystemEntries(filePath, cPatern)
-                    GetResultOnFile(cFile, aFileResults, aCBCResults)
-                    success = True
-                Else
-                    success = False
-                End If
-            Else
-                success = False
-            End If
-            Return success
-        End Function
+        'Private Function StripNonNumbers(value As String)
+        '    Dim num As String
+        '    num = Regex.Replace(value, "[^0-9.]", "")
+        '    Return num
+        'End Function
 
-        Private Sub GetResultOnFile(sFiles() As String, aFileResults() As String, aCBCResults() As String)
-            Dim lineCount = File.ReadAllLines(sFiles(0)).Length
-            Using file As New IO.StreamReader(sFiles(0))
-                For i As Integer = 1 To 146
-                    aFileResults(i) = file.ReadLine()
-                Next
-            End Using
-            FileResultsToCbcResults(aFileResults, aCBCResults)
-            txtPatientName.Text = aFileResults(143)
-            txtSexF.Text = aFileResults(144)
-            txtAgeF.Text = aFileResults(146)
-        End Sub
-
-        Private Sub FileResultsToCbcResults(aFileResults() As String, aCBCResults() As String)
-            aCBCResults(CBCEnum.Wbc) = aFileResults(15)
-            aCBCResults(CBCEnum.NE) = aFileResults(16)
-            aCBCResults(CBCEnum.LY) = aFileResults(17)
-            aCBCResults(CBCEnum.MO) = aFileResults(18)
-            aCBCResults(CBCEnum.EO) = aFileResults(19)
-            aCBCResults(CBCEnum.BA) = aFileResults(20)
-            aCBCResults(CBCEnum.Rbc) = aFileResults(26)
-            aCBCResults(CBCEnum.Hgb) = aFileResults(27)
-            aCBCResults(CBCEnum.Hct) = aFileResults(28)
-            aCBCResults(CBCEnum.Mcv) = aFileResults(29)
-            aCBCResults(CBCEnum.Mch) = aFileResults(30)
-            aCBCResults(CBCEnum.Mchc) = aFileResults(31)
-            aCBCResults(CBCEnum.Rdwcv) = aFileResults(32)
-            aCBCResults(CBCEnum.Rdwsd) = aFileResults(49)
-            aCBCResults(CBCEnum.Plt) = aFileResults(33)
-            aCBCResults(CBCEnum.Pct) = aFileResults(34)
-            aCBCResults(CBCEnum.Mpv) = aFileResults(35)
-            aCBCResults(CBCEnum.Pdw) = aFileResults(36)
-            CbcResultsToView(aCBCResults)
-        End Sub
-
-        Private Function StripNonNumbers(value As String)
-            Dim num As String
-            num = Regex.Replace(value, "[^0-9.]", "")
-            Return num
-        End Function
-
-        Private Function StripAsterisk(value As String)
-            Dim num As String
-            num = value.Replace("*", String.Empty)
-            Return num
-        End Function
+        'Private Function StripAsterisk(value As String)
+        '    Dim num As String
+        '    num = value.Replace("*", String.Empty)
+        '    Return num
+        'End Function
 
 
-        Private Function RemoveDigits(ByVal S As String) As String
-            Dim txt As String
-            txt = Regex.Replace(S, "\d", "")
-            txt = txt.Replace(".", String.Empty)
-            Return txt
-        End Function
+        'Private Function RemoveDigits(ByVal S As String) As String
+        '    Dim txt As String
+        '    txt = Regex.Replace(S, "\d", "")
+        '    txt = txt.Replace(".", String.Empty)
+        '    Return txt
+        'End Function
 
-        Private Function Transform(ByVal value As String, suffix As String) As String
-            Dim retVal As String
-            retVal = StripNonNumbers(value)
-            retVal = (retVal + suffix).PadRight(25, " ")
-            retVal = retVal + RemoveDigits(value)
-            retVal = Trim(StripAsterisk(retVal))
-            Return retVal
-        End Function
+        'Private Function Transform(ByVal value As String, suffix As String) As String
+        '    Dim retVal As String
+        '    retVal = StripNonNumbers(value)
+        '    retVal = (retVal + suffix).PadRight(25, " ")
+        '    retVal = retVal + RemoveDigits(value)
+        '    retVal = Trim(StripAsterisk(retVal))
+        '    Return retVal
+        'End Function
 
-        Private Sub CbcResultsToView(aCBCResults() As String)
-            txtWbc.Text = Transform(aCBCResults(CBCEnum.Wbc), " 10^3/µL")
-            txtNE.Text = Transform(aCBCResults(CBCEnum.NE), "%")
-            txtLY.Text = Transform(aCBCResults(CBCEnum.LY), "%")
-            txtMO.Text = Transform(aCBCResults(CBCEnum.MO), "%")
-            txtEO.Text = Transform(aCBCResults(CBCEnum.EO), "%")
-            txtBA.Text = Transform(aCBCResults(CBCEnum.BA), "%")
-            txtRbc.Text = Transform(aCBCResults(CBCEnum.Rbc), " 10^6/µL")
-            txtHgb.Text = Transform(aCBCResults(CBCEnum.Hgb), " g/dL")
-            txtHct.Text = Transform(aCBCResults(CBCEnum.Hct), "%")
-            txtMcv.Text = Transform(aCBCResults(CBCEnum.Mcv), " fL")
-            txtMch.Text = Transform(aCBCResults(CBCEnum.Mch), " pg")
-            txtMchc.Text = Transform(aCBCResults(CBCEnum.Mchc), " g/dL")
-            txtRdwcv.Text = Transform(aCBCResults(CBCEnum.Rdwcv), "%")
-            txtRdwsd.Text = Transform(aCBCResults(CBCEnum.Rdwsd), " fL")
-            txtPlt.Text = Transform(aCBCResults(CBCEnum.Plt), " 10^3/µL")
-            txtPct.Text = Transform(aCBCResults(CBCEnum.Pct), "%")
-            txtMpv.Text = Transform(aCBCResults(CBCEnum.Mpv), " fL")
-            txtPdw.Text = Transform(aCBCResults(CBCEnum.Pdw), "%")
-        End Sub
+        'Private Sub CbcResultsToView(aCBCResults() As String)
+        '    txtWbc.Text = Transform(aCBCResults(CBCEnum.Wbc), " 10^3/µL")
+        '    txtNE.Text = Transform(aCBCResults(CBCEnum.NE), "%")
+        '    txtLY.Text = Transform(aCBCResults(CBCEnum.LY), "%")
+        '    txtMO.Text = Transform(aCBCResults(CBCEnum.MO), "%")
+        '    txtEO.Text = Transform(aCBCResults(CBCEnum.EO), "%")
+        '    txtBA.Text = Transform(aCBCResults(CBCEnum.BA), "%")
+        '    txtRbc.Text = Transform(aCBCResults(CBCEnum.Rbc), " 10^6/µL")
+        '    txtHgb.Text = Transform(aCBCResults(CBCEnum.Hgb), " g/dL")
+        '    txtHct.Text = Transform(aCBCResults(CBCEnum.Hct), "%")
+        '    txtMcv.Text = Transform(aCBCResults(CBCEnum.Mcv), " fL")
+        '    txtMch.Text = Transform(aCBCResults(CBCEnum.Mch), " pg")
+        '    txtMchc.Text = Transform(aCBCResults(CBCEnum.Mchc), " g/dL")
+        '    txtRdwcv.Text = Transform(aCBCResults(CBCEnum.Rdwcv), "%")
+        '    txtRdwsd.Text = Transform(aCBCResults(CBCEnum.Rdwsd), " fL")
+        '    txtPlt.Text = Transform(aCBCResults(CBCEnum.Plt), " 10^3/µL")
+        '    txtPct.Text = Transform(aCBCResults(CBCEnum.Pct), "%")
+        '    txtMpv.Text = Transform(aCBCResults(CBCEnum.Mpv), " fL")
+        '    txtPdw.Text = Transform(aCBCResults(CBCEnum.Pdw), "%")
+        'End Sub
 
-        Public Enum CBCEnum
-            Wbc
-            LY
-            NE
-            MO
-            EO
-            BA
-            Rbc
-            Hgb
-            Hct
-            Mcv
-            Mch
-            Mchc
-            Rdwcv
-            Rdwsd
-            Plt
-            Pct
-            Mpv
-            Pdw
-        End Enum
+        'Public Enum CBCEnum
+        '    Wbc
+        '    LY
+        '    NE
+        '    MO
+        '    EO
+        '    BA
+        '    Rbc
+        '    Hgb
+        '    Hct
+        '    Mcv
+        '    Mch
+        '    Mchc
+        '    Rdwcv
+        '    Rdwsd
+        '    Plt
+        '    Pct
+        '    Mpv
+        '    Pdw
+        'End Enum
 
 
         Private Sub btnTransferResults_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnTransferResults.ClickButtonArea
@@ -901,7 +1170,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub txtInvoiceNo_Leave(sender As Object, e As EventArgs) Handles txtInvoiceNo.Leave
-            RetrieveResult()
+            RaiseEvent RetrieveLabResultRequested()
         End Sub
 
     End Class

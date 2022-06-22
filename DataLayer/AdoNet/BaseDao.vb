@@ -908,13 +908,13 @@ Namespace AdoNet
             Return value
         End Function
 
-        
+
         Public Function UpdateRecordWithKey(Of T1, T2)(tableName As String, keyFieldName As String, keyFieldValue As T1, fieldNameToReplace As String, replaceValue As T2) As Integer _
             Implements IBaseDao.UpdateRecordWithKey
             Dim sql As String =
-                    " Update " & tableName & 
+                    " Update " & tableName &
                     " Set " & fieldNameToReplace & " = @replaceValue" &
-                    " where " & KeyFieldName & " = @keyFieldValue"
+                    " where " & keyFieldName & " = @keyFieldValue"
             Return GetDb().Update(sql, {"@keyFieldValue", keyFieldValue, "@replaceValue", replaceValue})
         End Function
 
@@ -1198,6 +1198,18 @@ Namespace AdoNet
             Return fieldName
         End Function
 
+
+    End Class
+
+    Public Class DaoCommand
+
+        Public Property CommandText As String
+        Public Property Parameters As Array
+
+        Public Sub Add(commandText As String, parameters As Array)
+            Me.CommandText = commandText
+            Me.Parameters = parameters
+        End Sub
 
     End Class
 
