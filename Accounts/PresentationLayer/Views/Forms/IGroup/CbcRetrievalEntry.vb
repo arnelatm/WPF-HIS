@@ -55,6 +55,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property InvoiceNoF As String Implements ILab_InvoiceGroupView.InvoiceNoF
+            Get
+                Return txtInvoiceNoF.Text                
+            End Get
+            Set(value As String)
+                txtInvoiceNoF.Text = value
+            End Set
+        End Property
+
         Public Property InvoiceType As String Implements ILab_InvoiceGroupView.InvoiceType
             Get
                 Return txtInvoiceTypeDisplay.Text
@@ -852,13 +861,35 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property AgeF As String Implements ILab_InvoiceGroupView.AgeF
+            Get
+                Return txtAgeF.Text
+            End Get
+            Set(value As String)
+                txtAgeF.Text = value
+            End Set
+        End Property
+
+        Public Property SexF As String Implements ILab_InvoiceGroupView.SexF
+            Get
+                Return txtSexF.Text
+            End Get
+            Set(value As String)
+                txtSexF.Text = value
+            End Set
+        End Property
+
 
 #End Region
 
         Private Sub btnRetrieve_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnRetrieve.ClickButtonArea
+            RetrievelabResult()
+        End Sub
+
+        Private Sub RetrievelabResult()
             RaiseEvent RetrieveLabResultRequested()
-            If LabInvoiceDetails.Count() = 0 Then
-                btnRetrieve.Enabled = False
+            If LabInvoiceDetails Is Nothing OrElse LabInvoiceDetails.Count() = 0 Then
+                btnTransferResults.Enabled = False
             End If
         End Sub
 
@@ -1169,8 +1200,8 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent SaveResultRequested()
         End Sub
 
-        Private Sub txtInvoiceNo_Leave(sender As Object, e As EventArgs) Handles txtInvoiceNo.Leave
-            RaiseEvent RetrieveLabResultRequested()
+        Private Sub txtInvoiceNo_Leave(sender As Object, e As EventArgs) Handles txtInvoiceNoF.Leave
+            RetrieveLabResult()
         End Sub
 
     End Class

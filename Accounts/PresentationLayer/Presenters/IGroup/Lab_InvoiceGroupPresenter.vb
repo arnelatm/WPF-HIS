@@ -66,14 +66,14 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub RetrieveLabResult()
-            If View.InvoiceNo = 0 Then
+            If View.InvoiceNoF Is Nothing Or View.InvoiceNoF  = "" Then
                 Messaging.Show("Sorry you must enter the invoice number to be retrieved.")
                 BlankOutResults()
             Else
                 If RetrieveCbcMachineResults() Then
                     RetrieveCurrentSystemResult()
                     If View.LabInvoiceDetails.Count() <> 0 Then
-                        AssigValuesToDisplay()
+                        Messaging.Show("Data successfully retrieved!")
                     Else
                         Messaging.Show("No CBC result generated for that invoice number. Please generate first a blank CBC Report before attempting to transfer result!")
                         View.LabInvoiceDetails.Clear()
@@ -90,7 +90,8 @@ Namespace PresentationLayer.Presenters
             Dim retVal As Boolean = False
             Dim filePath As String = "\\laboratory5\drivec\NihonKohden"
             Dim sFiles As String()
-            Dim pattern As String = "*_" + View.InvoiceNo.ToString() + ".csv"
+            Dim pattern As String = "*_" + View.InvoiceNoF + ".csv"
+            View.InvoiceNo = Val(StripNonNumbers(View.InvoiceNoF))
             sFiles = Directory.GetFileSystemEntries(filePath, pattern)
             If sFiles.Length > 0 Then
                 If CopyFileResultsToView(sFiles, filePath) Then
@@ -105,10 +106,14 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Sub RetrieveCurrentSystemResult()
+            'Dim invNo As Decimal
+            'invNo = Val(View.InvoiceNoF)
+            'View.InvoiceNo = invNo
             _idNo = Service.GetRecordFieldWith2KeyG(Of Decimal, String, Decimal)(View.InvoiceNo, "CBCNK", "Lab_InvoiceGroup", "InvoiceNo", "InvestigationId", "Trans_Key")
             Dim labInvoiceGroup As New Lab_InvoiceGroupModel
             labInvoiceGroup = Service.GetRecordByIdNo(Of Lab_InvoiceGroupModel)(_idNo)
             GlobalVariables.Mapper.Map(labInvoiceGroup, View)
+            AssigValuesToDisplay()
         End Sub
 
         Private Function CopyFileResultsToView(sFiles() As String, filePath As String) As Boolean
@@ -147,8 +152,8 @@ Namespace PresentationLayer.Presenters
             End Using
             FileResultsToCbcResults(aFileResults, aCBCResults)
             View.PatientName = aFileResults(143)
-            View.Sex = aFileResults(144)
-            View.Age = aFileResults(146)
+            View.SexF = aFileResults(144)
+            View.AgeF = aFileResults(146)
         End Sub
 
         Private Sub EmptyResults()
@@ -239,6 +244,8 @@ Namespace PresentationLayer.Presenters
             View.InvoiceDate = nothing
             View.RegistrationNo = 0
             View.PatientNameEnglish = ""
+            View.SexF = ""
+            View.AgeF = ""
         End Sub
 
         Private Sub FileResultsToCbcResults(aFileResults() As String, aCBCResults() As String)
@@ -357,6 +364,7 @@ Namespace PresentationLayer.Presenters
                 retVal = UpdateLabInvoiceDetails()
             End If
             If retVal >= 0 Then
+                RetrieveCurrentSystemResult()
                 Messaging.Show("CBC Results successfully transferred!")
             End If
             Return retVal
@@ -512,7 +520,6 @@ Namespace PresentationLayer.Presenters
                     End Select
                 Next
                 SetNormalValues()
-                Messaging.Show("Data successfully retrieved!")
             End If
         End Sub
 

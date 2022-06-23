@@ -13,8 +13,8 @@ Namespace PresentationLayer.Models
         Property InvoiceType As String
         Property InvoiceDate As Date
         Property PatientNameEnglish As String
-        Property Age As Int16
         Property AgeYMD As String
+        Property Age As Int16
         Property Sex As String
         Property RegistrationNo as Decimal
         Property Remarks as String

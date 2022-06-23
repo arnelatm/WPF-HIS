@@ -10,12 +10,12 @@ Namespace BusinessLayer
         Property InvoiceType As String
         Property InvoiceDate As Date
         Property PatientNameEnglish As String
-        Property Age As Int16
         Property AgeYMD As String
+        Property Age As Int16
         Property Sex As String
-        Property RegistrationNo as Decimal
-        Property SampleNo as String
-        Property Status as Int32
+        Property RegistrationNo As Decimal
+        Property SampleNo As String
+        Property Status As Int32
         Property Remarks As String
         Property LabInvoiceDetails As List(Of Lab_InvoiceDetails)
     End Class

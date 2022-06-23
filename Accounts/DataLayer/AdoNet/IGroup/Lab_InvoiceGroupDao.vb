@@ -19,8 +19,8 @@ Namespace DataLayer.AdoNet
                                       "PatientNameEnglish," &
                                       "InvoiceType," &
                                       "TransDate," &
-                                      "Age," &
                                       "AgeYMD," &
+                                      "Age," &
                                       "Sex," &
                                       "SampleNo," &
                                       "Status," &
@@ -54,8 +54,8 @@ Namespace DataLayer.AdoNet
             .PatientNameEnglish = Extensions.AsString(reader("PatientNameEnglish")),
             .InvoiceType = Extensions.AsString(reader("InvoiceType")),
             .InvoiceDate = CType(Extensions.AsString(reader("TransDate")), Date),
-            .Age = Extensions.AsDecimal(reader("Age")),
             .AgeYMD = Extensions.AsString(reader("AgeYMD")),
+            .Age = Extensions.AsDecimal(reader("Age")),
             .Sex = Extensions.AsString(reader("Sex")),
             .RegistrationNo = Extensions.AsString(reader("RegistrationNo")),
             .Remarks = Extensions.AsString(reader("Remarks")),
