@@ -6,12 +6,13 @@ Namespace PresentationLayer.Views.Interfaces
         Inherits IView
 
         Property InvoiceNo As Decimal
+        Property InvoiceNoF As String
         Property InvoiceType As String
         Property InvoiceDate As Date
         Property PatientNameEnglish As String
         Property PatientName As String
-        Property Age As Decimal
         Property AgeYMD As String
+        Property Age As Decimal
         Property Sex As String
         Property RegistrationNo as Decimal
         Property SampleNo as String
@@ -89,6 +90,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property MpvRNv As String
         Property PdwRNv As String
         Property Remarks As String
+        Property AgeF As String
+        Property SexF As String
         Property LabInvoiceDetails As List(Of Lab_InvoiceDetailsView)
         Event RetrieveLabResultRequested()
         Event SaveResultRequested()

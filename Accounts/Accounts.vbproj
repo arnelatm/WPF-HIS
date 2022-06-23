@@ -1680,8 +1680,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app Ispadmin2.config" />
+    <None Include="app.config" />
     <None Include="app-Isp-Server.config" />
     <None Include="appIspadmin2.config" />
     <None Include="app-MarceloPC.config" />
