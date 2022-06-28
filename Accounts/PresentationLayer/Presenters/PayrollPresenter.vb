@@ -35,6 +35,7 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _endDate As Date
         Private _payFrequency As PayFrequencySelection
         Private _payrollIdNo As Int16
+        Const RegularDutyHours As Int32 = 8
 
         Private ReadOnly _deductionComputationMethod As String = "1"
         Private ReadOnly _dtPayrollDetailInsertTable As New DataTable
@@ -225,13 +226,14 @@ Namespace PresentationLayer.Presenters
         Public Sub InitializeAttendance()
             View.PayFrequency = GetFieldWithIdNo(View.PayCycleIdNo, "PayCycle", "PayFrequency")
             Dim employeeFilter = "PayCycleIdNo = " & View.PayCycleIdNo.ToString() ' & " And Active = 1"
-            Dim employees = GetRecords("Employee", "EmployeeName", {"IdNo", "EmployeeName", "HiredDate", "ReleasedDate"}, employeeFilter)
-            Dim numberOfEmployees = Int(employees.Count() / 4)
+            Dim employees = GetRecords("Employee", "EmployeeName", {"IdNo", "EmployeeName", "HiredDate", "ReleasedDate", "DutyHours"}, employeeFilter)
+            Dim numberOfEmployees = Int(employees.Count() / 5)
             Dim daysInPeriod As Long
             Dim daysOffInPeriod As Long
             Dim seq As Integer
             Dim dateHired As Date
             Dim dateReleased As Date?
+            Dim dutyHours As Int32
             Dim empId As Int32
             Dim empName As String
             Dim empFound As Boolean = False
@@ -257,10 +259,11 @@ Namespace PresentationLayer.Presenters
                 seq = 1
                 View.PayrollAttendance.Clear()
                 For i = 1 To numberOfEmployees
-                    empId = employees(i * 4 - 4)
-                    empName = employees(i * 4 - 3)
-                    dateHired = employees(i * 4 - 2)
-                    dateReleased = IIf(IsDBNull(employees(i * 4 - 1)), Nothing, employees(i * 4 - 1))
+                    empId = employees(i * 5 - 5)
+                    empName = employees(i * 5 - 4)
+                    dateHired = employees(i * 5 - 3)
+                    dateReleased = IIf(IsDBNull(employees(i * 5 - 2)), Nothing, employees(i * 5 - 2))
+                    dutyHours = employees(i * 5 - 1)
                     'If empId = 331 Then
                     '    Debugger.Break()
                     'End If
@@ -296,10 +299,11 @@ Namespace PresentationLayer.Presenters
                 Next
             Else
                 For i = 1 To numberOfEmployees
-                    empId = employees(i * 4 - 4)
-                    empName = employees(i * 4 - 3)
-                    dateHired = employees(i * 4 - 2)
-                    dateReleased = IIf(IsDBNull(employees(i * 4 - 1)), Nothing, employees(i * 4 - 1))
+                    empId = employees(i * 5 - 5)
+                    empName = employees(i * 5 - 4)
+                    dateHired = employees(i * 5 - 3)
+                    dateReleased = IIf(IsDBNull(employees(i * 5 - 2)), Nothing, employees(i * 5 - 2))
+                    dutyHours = employees(i * 5 - 1)
                     'If empId = 331 Then
                     '    Debugger.Break()
                     'End If
@@ -316,8 +320,8 @@ Namespace PresentationLayer.Presenters
                 Dim empAttendance As AttendanceItemView
                 empAttendance = View.PayrollAttendance.Find(Function(c) c.EmployeeIdNo = empIdNo)
                 If empAttendance IsNot Nothing Then
-                    empAttendance.DaysAbsentWithoutPay += Math.Round(absence.EquivalentHours / 8, 4)
-                    empAttendance.DaysPresent -= Math.Round(absence.EquivalentHours / 8, 4)
+                    empAttendance.DaysAbsentWithoutPay += Math.Round(absence.EquivalentHours / RegularDutyHours * dutyHours, 4)
+                    empAttendance.DaysPresent -= Math.Round(absence.EquivalentHours / RegularDutyHours * dutyHours, 4)
                 End If
                 counter = counter + 1
                 progressDisplayForm.UpdateProgressBar(counter)

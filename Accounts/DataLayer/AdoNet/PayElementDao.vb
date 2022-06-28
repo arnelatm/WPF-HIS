@@ -8,6 +8,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class PayElementDao
+        Inherits AccountsDao
         Implements IDao(Of PayElement), IDaoGetRecords(Of PayElement), IDaoGetRecord(Of PayElement)
 
         Private Const FieldList = "AccountIdNo," &
