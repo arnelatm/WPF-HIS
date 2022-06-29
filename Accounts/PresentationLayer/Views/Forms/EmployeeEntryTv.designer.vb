@@ -206,6 +206,8 @@
         Me.dgvEmployeeIdNoLeaveCredits = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvIdNoLeaveCredits = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsLeaveCredits = New System.Windows.Forms.BindingSource(Me.components)
+        Me.lblActualDutyHours = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtActualDutyHours = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -2185,6 +2187,8 @@
         Me.floPayroll.Controls.Add(Me.cboPayGroupIdNo)
         Me.floPayroll.Controls.Add(Me.lblDutyHours)
         Me.floPayroll.Controls.Add(Me.txtDutyHours)
+        Me.floPayroll.Controls.Add(Me.lblActualDutyHours)
+        Me.floPayroll.Controls.Add(Me.txtActualDutyHours)
         Me.floPayroll.Dock = System.Windows.Forms.DockStyle.Fill
         Me.floPayroll.Location = New System.Drawing.Point(3, 3)
         Me.floPayroll.Name = "floPayroll"
@@ -2644,7 +2648,7 @@
         Me.lblDutyHours.SecurityKey = "EmployeePayInfo"
         Me.lblDutyHours.Size = New System.Drawing.Size(185, 23)
         Me.lblDutyHours.TabIndex = 292
-        Me.lblDutyHours.Text = "Duty Hours"
+        Me.lblDutyHours.Text = "Paid Duty Hours"
         Me.lblDutyHours.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.lblDutyHours.Translatable = true
         '
@@ -3440,6 +3444,54 @@
         '
         Me.bsLeaveCredits.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeLeaveCreditModel)
         '
+        'lblActualDutyHours
+        '
+        Me.lblActualDutyHours.DisplayOnly = true
+        Me.lblActualDutyHours.EditingMode = false
+        Me.lblActualDutyHours.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblActualDutyHours.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblActualDutyHours.Location = New System.Drawing.Point(4, 233)
+        Me.lblActualDutyHours.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblActualDutyHours.Name = "lblActualDutyHours"
+        Me.lblActualDutyHours.SecurityKey = "EmployeePayInfo"
+        Me.lblActualDutyHours.Size = New System.Drawing.Size(185, 23)
+        Me.lblActualDutyHours.TabIndex = 293
+        Me.lblActualDutyHours.Text = "Actual Duty Hours"
+        Me.lblActualDutyHours.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblActualDutyHours.Translatable = true
+        '
+        'txtActualDutyHours
+        '
+        Me.txtActualDutyHours.BackColor = System.Drawing.Color.White
+        Me.txtActualDutyHours.BegFindValue = Nothing
+        Me.txtActualDutyHours.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtActualDutyHours.ComputedValue = false
+        Me.txtActualDutyHours.CustomFormat = Nothing
+        Me.txtActualDutyHours.DataBoundControl = true
+        Me.txtActualDutyHours.EditingMode = false
+        Me.txtActualDutyHours.EndFindValue = Nothing
+        Me.txtActualDutyHours.FieldDescription = Nothing
+        Me.txtActualDutyHours.FieldName = Nothing
+        Me.txtActualDutyHours.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtActualDutyHours.FindEnabled = true
+        Me.floPayroll.SetFlowBreak(Me.txtActualDutyHours, true)
+        Me.txtActualDutyHours.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.txtActualDutyHours.ForeColor = System.Drawing.Color.Black
+        Me.txtActualDutyHours.LinkedLabel = Me.lblActualDutyHours
+        Me.txtActualDutyHours.Location = New System.Drawing.Point(191, 233)
+        Me.txtActualDutyHours.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtActualDutyHours.MaximumValue = Nothing
+        Me.txtActualDutyHours.MinimumValue = Nothing
+        Me.txtActualDutyHours.Name = "txtActualDutyHours"
+        Me.txtActualDutyHours.OldValue = Nothing
+        Me.txtActualDutyHours.ReadOnly = true
+        Me.txtActualDutyHours.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.txtActualDutyHours.SecurityKey = "EmployeePayInfo"
+        Me.txtActualDutyHours.Size = New System.Drawing.Size(93, 23)
+        Me.txtActualDutyHours.TabIndex = 294
+        Me.txtActualDutyHours.Translatable = false
+        Me.txtActualDutyHours.ValueIsNumeric = true
+        '
         'EmployeeEntryTv
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
@@ -3635,5 +3687,7 @@ End Sub
         Friend WithEvents dgvEmployeeIdNoLeaveCredits As DataGridViewTextBoxColumn
         Friend WithEvents dgvIdNoLeaveCredits As DataGridViewTextBoxColumn
         Friend WithEvents cboTitle As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents lblActualDutyHours As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents txtActualDutyHours As Libraries.CBaseControlsLibrary.CTextBox
     End Class
 End NameSpace

@@ -19,7 +19,7 @@ Namespace DataLayer.AdoNet
         Public Function GetRecordByIdNo(idNo) As Employee Implements IDao(Of Employee).GetRecordByIdNo
             Dim sql As String =
                     " SELECT IdNo, EmployeeCode, Title, EmployeeName, EmployeeNameAra, Gender, BirthDate, BloodType, MaritalStatus, NationalityCode, ReligionIdNo, NationalIdNo, Street, District, TownCity, " &
-                    " ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, DutyHours, HiredDate, ReleasedDate, " &
+                    " ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, DutyHours, ActualDutyHours, HiredDate, ReleasedDate, " &
                     " ArAccountIdNo, BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, PayCycleIdNo, PayGroupIdNo, PaymentMethod, SponsorType, Supervisor, SupervisorIdNo, Active, Picture" &
                     "   FROM [Employee]" &
                     " WHERE IdNo = @IdNo"
@@ -67,6 +67,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " UPDATE [Employee] SET " &
                     " Active = @Active," &
+                    " ActualDutyHours = @ActualDutyHours," &
                     " Balance = @Balance," &
                     " BankAccountNo = @BankAccountNo," &
                     " BankIdNo = @BankIdNo," &
@@ -115,10 +116,10 @@ Namespace DataLayer.AdoNet
                     " INSERT INTO [Employee] " &
                     "        (Title, EmployeeCode, EmployeeName, EmployeeNameAra, Gender, BirthDate, BloodType, MaritalStatus, NationalIdNo, ReligionIdNo, Street, District, TownCity, " &
                     "         ProvinceState, CountryCode, PoBox, ZipCode, Phone1, Phone2, Email, DepartmentIdNo, DesignationIdNo, HiredDate, ReleasedDate, " &
-                    "         BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, DutyHours, PayCycleIdNo, PayGroupIdNo, PaymentMethod, SponsorType, Supervisor, SupervisorIdNo, Active, Picture)" &
+                    "         BankIdNo, BankAccountNo, Iban, Notes, OpeningBalance, Balance, DutyHours, ActualDutyHours, PayCycleIdNo, PayGroupIdNo, PaymentMethod, SponsorType, Supervisor, SupervisorIdNo, Active, Picture)" &
                     " VALUES (@Title, @EmployeeCode, @EmployeeName, @EmployeeNameAra, @Gender, @BirthDate, @BloodType, @MaritalStatus, @NationalIdNo, @ReligionIdNo, @Street, @District, @TownCity, " &
                     "         @ProvinceState, @CountryCode, @PoBox, @ZipCode, @Phone1, @Phone2, @Email, @DepartmentIdNo, @DesignationIdNo, @HiredDate, @ReleasedDate, " &
-                    "         @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @DutyHours, @PayCycleIdNo, @PayGroupIdNo, @PaymentMethod, @SponsorType, @Supervisor, @SupervisorIdNo, @Active, @Picture)"
+                    "         @BankIdNo, @BankAccountNo, @Iban, @Notes, @OpeningBalance, @Balance, @DutyHours, @ActualDutyHours, @PayCycleIdNo, @PayGroupIdNo, @PaymentMethod, @SponsorType, @Supervisor, @SupervisorIdNo, @Active, @Picture)"
             Return _db.Insert(sql, Take(employee))
         End Function
 
@@ -126,6 +127,7 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New Employee() With {
             .Active = Extensions.AsBool(reader("Active")),
+            .ActualDutyHours = Extensions.AsDecimal(reader("ActualDutyHours")),
             .Balance = Extensions.AsDecimal(reader("Balance")),
             .BankAccountNo = Extensions.AsString(reader("BankAccountNo")),
             .BankIdNo = Extensions.AsNullable(Of Int16?)(reader("BankIdNo")),
@@ -135,7 +137,7 @@ Namespace DataLayer.AdoNet
             .DepartmentIdNo = Extensions.AsNullable(Of Int16?)(reader("DepartmentIdNo")),
             .DesignationIdNo = Extensions.AsNullable(Of Int16?)(reader("DesignationIdNo")),
             .District = Extensions.AsString(reader("District")),
-            .DutyHours = Extensions.AsString(reader("DutyHours")),
+            .DutyHours = Extensions.AsDecimal(reader("DutyHours")),
             .Email = Extensions.AsString(reader("Email")),
             .EmployeeCode = Extensions.AsString(reader("EmployeeCode")),
             .EmployeeName = Extensions.AsString(reader("EmployeeName")),
@@ -178,6 +180,7 @@ Namespace DataLayer.AdoNet
         Private Function Take(ByRef employee As Employee) As Object()
             Return New Object() {
                                     "@Active", employee.Active,
+                                    "@ActualDutyHours", employee.ActualDutyHours,
                                     "@Balance", employee.Balance,
                                     "@BankAccountNo", employee.BankAccountNo,
                                     "@BankIdNo", employee.BankIdNo,

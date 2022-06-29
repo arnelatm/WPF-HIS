@@ -195,6 +195,7 @@ Public Enum FactorTypeSelection
     <EnumCode("M")> MultiplyBasePaymentRate
     <EnumCode("P")> PercentOfBasePaymentRate
     <EnumCode("D")> DivideBasePaymentRate
+    <EnumCode("H")> MultiplyComplementOfDutyRatio
 End Enum
 
 'Public Enum FactorTypeSelection

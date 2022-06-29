@@ -199,6 +199,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboReportGroupIdNo.ChangingSearchValueOnly = false
         Me.tlpPayElement.SetColumnSpan(Me.cboReportGroupIdNo, 2)
         Me.cboReportGroupIdNo.CurrentSearchTerm = ""
+        Me.cboReportGroupIdNo.DataValue = Nothing
         Me.cboReportGroupIdNo.DefaultValue = Nothing
         Me.cboReportGroupIdNo.DisplayMember = "Name"
         resources.ApplyResources(Me.cboReportGroupIdNo, "cboReportGroupIdNo")
@@ -245,6 +246,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayElementKind.BegFindValue = Nothing
         Me.cboPayElementKind.ChangingSearchValueOnly = false
         Me.cboPayElementKind.CurrentSearchTerm = ""
+        Me.cboPayElementKind.DataValue = Nothing
         Me.cboPayElementKind.DefaultValue = Nothing
         Me.cboPayElementKind.DisplayMember = "Name"
         resources.ApplyResources(Me.cboPayElementKind, "cboPayElementKind")
@@ -572,6 +574,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboQuantityType.ChangingSearchValueOnly = false
         Me.tlpCalculation.SetColumnSpan(Me.cboQuantityType, 2)
         Me.cboQuantityType.CurrentSearchTerm = ""
+        Me.cboQuantityType.DataValue = Nothing
         Me.cboQuantityType.DefaultValue = Nothing
         Me.cboQuantityType.DisplayMember = "Name"
         resources.ApplyResources(Me.cboQuantityType, "cboQuantityType")
@@ -611,6 +614,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboCalculationType.ChangingSearchValueOnly = false
         Me.tlpCalculation.SetColumnSpan(Me.cboCalculationType, 3)
         Me.cboCalculationType.CurrentSearchTerm = ""
+        Me.cboCalculationType.DataValue = Nothing
         Me.cboCalculationType.DefaultValue = Nothing
         Me.cboCalculationType.DisplayMember = "Name"
         resources.ApplyResources(Me.cboCalculationType, "cboCalculationType")
@@ -738,6 +742,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboBasePaymentIdNo.ChangingSearchValueOnly = false
         Me.tlpCalculation.SetColumnSpan(Me.cboBasePaymentIdNo, 3)
         Me.cboBasePaymentIdNo.CurrentSearchTerm = ""
+        Me.cboBasePaymentIdNo.DataValue = Nothing
         Me.cboBasePaymentIdNo.DefaultValue = Nothing
         Me.cboBasePaymentIdNo.DisplayMember = "Name"
         resources.ApplyResources(Me.cboBasePaymentIdNo, "cboBasePaymentIdNo")
@@ -834,6 +839,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboFactorType.ChangingSearchValueOnly = false
         Me.tlpCalculation.SetColumnSpan(Me.cboFactorType, 2)
         Me.cboFactorType.CurrentSearchTerm = ""
+        Me.cboFactorType.DataValue = Nothing
         Me.cboFactorType.DefaultValue = Nothing
         Me.cboFactorType.DisplayMember = "Name"
         resources.ApplyResources(Me.cboFactorType, "cboFactorType")
@@ -921,6 +927,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboUnit.BegFindValue = Nothing
         Me.cboUnit.ChangingSearchValueOnly = false
         Me.cboUnit.CurrentSearchTerm = ""
+        Me.cboUnit.DataValue = Nothing
         Me.cboUnit.DefaultValue = Nothing
         Me.cboUnit.DisplayMember = "Name"
         resources.ApplyResources(Me.cboUnit, "cboUnit")
@@ -968,6 +975,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayElementType.ChangingSearchValueOnly = false
         Me.tlpCalculation.SetColumnSpan(Me.cboPayElementType, 3)
         Me.cboPayElementType.CurrentSearchTerm = ""
+        Me.cboPayElementType.DataValue = Nothing
         Me.cboPayElementType.DefaultValue = Nothing
         Me.cboPayElementType.DisplayMember = "Name"
         resources.ApplyResources(Me.cboPayElementType, "cboPayElementType")
@@ -1072,6 +1080,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAccountIdNo.ChangingSearchValueOnly = false
         Me.tlpPostingAccounts.SetColumnSpan(Me.cboAccountIdNo, 2)
         Me.cboAccountIdNo.CurrentSearchTerm = ""
+        Me.cboAccountIdNo.DataValue = Nothing
         Me.cboAccountIdNo.DefaultValue = Nothing
         Me.cboAccountIdNo.DisplayMember = "Name"
         resources.ApplyResources(Me.cboAccountIdNo, "cboAccountIdNo")
@@ -1146,9 +1155,11 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewPayElementAccounts.FirstRowDeletionEnabled = true
         Me.DataGridViewPayElementAccounts.FirstRowInsertionEnabled = true
         Me.DataGridViewPayElementAccounts.IgnoreCase = false
+        Me.DataGridViewPayElementAccounts.IsDirty = false
         Me.DataGridViewPayElementAccounts.Name = "DataGridViewPayElementAccounts"
         Me.DataGridViewPayElementAccounts.ReadOnly = true
         Me.DataGridViewPayElementAccounts.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.DataGridViewPayElementAccounts.SecurityKey = ""
         Me.DataGridViewPayElementAccounts.SequenceColumn = "dgvSequence"
         Me.DataGridViewPayElementAccounts.SequenceFieldName = "Sequence"
         Me.DataGridViewPayElementAccounts.ShowFooter = false
@@ -1179,6 +1190,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'dgvPayGroupIdNo
         '
+        Me.dgvPayGroupIdNo.AutoComplete = false
         Me.dgvPayGroupIdNo.DataPropertyName = "PayGroupIdNo"
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
@@ -1193,6 +1205,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'dgvAccountIdNo
         '
+        Me.dgvAccountIdNo.AutoComplete = false
         Me.dgvAccountIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.dgvAccountIdNo.DataPropertyName = "AccountIdNo"
         DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
@@ -1278,9 +1291,11 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewPayElementItems.FirstRowDeletionEnabled = true
         Me.DataGridViewPayElementItems.FirstRowInsertionEnabled = true
         Me.DataGridViewPayElementItems.IgnoreCase = false
+        Me.DataGridViewPayElementItems.IsDirty = false
         Me.DataGridViewPayElementItems.Name = "DataGridViewPayElementItems"
         Me.DataGridViewPayElementItems.ReadOnly = true
         Me.DataGridViewPayElementItems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.DataGridViewPayElementItems.SecurityKey = ""
         Me.DataGridViewPayElementItems.SequenceColumn = "dgvSequenceSummary"
         Me.DataGridViewPayElementItems.SequenceFieldName = "Sequence"
         Me.DataGridViewPayElementItems.ShowFooter = false
@@ -1311,6 +1326,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'dgvPayElementIdNo
         '
+        Me.dgvPayElementIdNo.AutoComplete = false
         Me.dgvPayElementIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.dgvPayElementIdNo.DataPropertyName = "PayElementIdNo"
         DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
@@ -1347,6 +1363,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'dgvFactorType
         '
+        Me.dgvFactorType.AutoComplete = false
         Me.dgvFactorType.DataPropertyName = "FactorType"
         DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black

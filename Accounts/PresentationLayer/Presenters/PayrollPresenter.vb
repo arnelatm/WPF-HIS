@@ -1,5 +1,4 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
@@ -35,7 +34,6 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _endDate As Date
         Private _payFrequency As PayFrequencySelection
         Private _payrollIdNo As Int16
-        Const RegularDutyHours As Int32 = 8
 
         Private ReadOnly _deductionComputationMethod As String = "1"
         Private ReadOnly _dtPayrollDetailInsertTable As New DataTable
@@ -53,10 +51,10 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _globalType = EnumToCode(PayElementTypeSelection.Global)
         Private ReadOnly _computedType = EnumToCode(PayElementTypeSelection.Computed)
         Private ReadOnly _onDemandType = EnumToCode(PayElementTypeSelection.OnDemand)
-        Private ReadOnly _factorType = EnumToCode(CalculationTypeSelection.Factor)
-        Private ReadOnly _fixedAmountType = EnumToCode(CalculationTypeSelection.FixedAmount)
-        Private ReadOnly _fixedRateType = EnumToCode(CalculationTypeSelection.FixedRate)
-        Private ReadOnly _variableType = EnumToCode(CalculationTypeSelection.Variable)
+        Private ReadOnly _calcTypeFactor = EnumToCode(CalculationTypeSelection.Factor)
+        Private ReadOnly _calcTypeFixedAmount = EnumToCode(CalculationTypeSelection.FixedAmount)
+        Private ReadOnly _calcTypeFixedRate = EnumToCode(CalculationTypeSelection.FixedRate)
+        Private ReadOnly _calcTypeVariable = EnumToCode(CalculationTypeSelection.Variable)
         Private ReadOnly _daysOffType = EnumToCode(QuantityTypeSelection.DaysOff)
         Private ReadOnly _daysPresentType = EnumToCode(QuantityTypeSelection.DaysPresent)
         Private ReadOnly _daysLeaveWithoutPayType = EnumToCode(QuantityTypeSelection.DaysLeaveWithoutPay)
@@ -72,6 +70,7 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _factorPercentType = EnumToCode(FactorTypeSelection.PercentOfBasePaymentRate)
         Private ReadOnly _factorMultiplyType = EnumToCode(FactorTypeSelection.MultiplyBasePaymentRate)
         Private ReadOnly _factorDivideType = EnumToCode(FactorTypeSelection.DivideBasePaymentRate)
+        Private ReadOnly _factorComplementDutyHoursRatio = EnumToCode(FactorTypeSelection.MultiplyComplementOfDutyRatio)
         Private ReadOnly _serviceAccounts
         Private _roundToWholeNumber As Boolean = True
 
@@ -227,13 +226,14 @@ Namespace PresentationLayer.Presenters
             View.PayFrequency = GetFieldWithIdNo(View.PayCycleIdNo, "PayCycle", "PayFrequency")
             Dim employeeFilter = "PayCycleIdNo = " & View.PayCycleIdNo.ToString() ' & " And Active = 1"
             Dim employees = GetRecords("Employee", "EmployeeName", {"IdNo", "EmployeeName", "HiredDate", "ReleasedDate", "DutyHours"}, employeeFilter)
-            Dim numberOfEmployees = Int(employees.Count() / 5)
+            Dim numberOfEmployees = Int(employees.Count() / 6)
             Dim daysInPeriod As Long
             Dim daysOffInPeriod As Long
             Dim seq As Integer
             Dim dateHired As Date
             Dim dateReleased As Date?
             Dim dutyHours As Int32
+            Dim actualDutyHours As Int32
             Dim empId As Int32
             Dim empName As String
             Dim empFound As Boolean = False
@@ -259,14 +259,12 @@ Namespace PresentationLayer.Presenters
                 seq = 1
                 View.PayrollAttendance.Clear()
                 For i = 1 To numberOfEmployees
-                    empId = employees(i * 5 - 5)
-                    empName = employees(i * 5 - 4)
-                    dateHired = employees(i * 5 - 3)
-                    dateReleased = IIf(IsDBNull(employees(i * 5 - 2)), Nothing, employees(i * 5 - 2))
-                    dutyHours = employees(i * 5 - 1)
-                    'If empId = 331 Then
-                    '    Debugger.Break()
-                    'End If
+                    empId = employees(i * 6 - 6)
+                    empName = employees(i * 6 - 5)
+                    dateHired = employees(i * 6 - 4)
+                    dateReleased = IIf(IsDBNull(employees(i * 6 - 3)), Nothing, employees(i * 6 - 3))
+                    dutyHours = employees(i * 6 - 2)
+                    actualDutyHours = employees(i * 6 - 1)
                     If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased > View.StartDate) Then
                         Dim empAttendance As AttendanceItemView
                         empAttendance = currentEmpAttendance.Find(Function(c) c.EmployeeIdNo = empId)
@@ -299,11 +297,12 @@ Namespace PresentationLayer.Presenters
                 Next
             Else
                 For i = 1 To numberOfEmployees
-                    empId = employees(i * 5 - 5)
-                    empName = employees(i * 5 - 4)
-                    dateHired = employees(i * 5 - 3)
-                    dateReleased = IIf(IsDBNull(employees(i * 5 - 2)), Nothing, employees(i * 5 - 2))
-                    dutyHours = employees(i * 5 - 1)
+                    empId = employees(i * 6 - 6)
+                    empName = employees(i * 6 - 5)
+                    dateHired = employees(i * 6 - 4)
+                    dateReleased = IIf(IsDBNull(employees(i * 6 - 3)), Nothing, employees(i * 6 - 3))
+                    dutyHours = employees(i * 6 - 2)
+                    actualDutyHours = employees(i * 6 - 1)
                     'If empId = 331 Then
                     '    Debugger.Break()
                     'End If
@@ -320,8 +319,8 @@ Namespace PresentationLayer.Presenters
                 Dim empAttendance As AttendanceItemView
                 empAttendance = View.PayrollAttendance.Find(Function(c) c.EmployeeIdNo = empIdNo)
                 If empAttendance IsNot Nothing Then
-                    empAttendance.DaysAbsentWithoutPay += Math.Round(absence.EquivalentHours / RegularDutyHours * dutyHours, 4)
-                    empAttendance.DaysPresent -= Math.Round(absence.EquivalentHours / RegularDutyHours * dutyHours, 4)
+                    empAttendance.DaysAbsentWithoutPay += Math.Round(absence.EquivalentHours / dutyHours * actualDutyHours, 4)
+                    empAttendance.DaysPresent -= Math.Round(absence.EquivalentHours / dutyHours * actualDutyHours, 4)
                 End If
                 counter = counter + 1
                 progressDisplayForm.UpdateProgressBar(counter)
@@ -747,13 +746,14 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub CreatePayrollPayElements(payrollDetail As PayrollDetailModel, regenerate As Boolean, payrollDetailIdNo As Integer)
-            GenerateRegularPayElements(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
-            GenerateComputedPayElements(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
+            Dim dutyHoursRatio As Decimal = GetEmployeeDutyHoursRatio(payrollDetail.EmployeeIdNo)
+            GenerateRegularPayElements(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo, dutyHoursRatio)
+            GenerateComputedPayElements(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo, dutyHoursRatio)
             GenerateGlobalPayElements(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
             GenerateRecurringPayElements(regenerate, payrollDetail.EmployeeIdNo, payrollDetailIdNo)
         End Sub
 
-        Private Sub GenerateRegularPayElements(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
+        Private Sub GenerateRegularPayElements(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32, dutyHoursRatio As Decimal)
             Dim empPayElementsModel As New List(Of EmployeePayElementModel)
             Dim employeePayElementsService As New AccountsService("EmployeePayElement")
             empPayElementsModel = employeePayElementsService.GetRecordsWithGroupIdNo(Of EmployeePayElementModel)(employeeIdNo)
@@ -765,14 +765,14 @@ Namespace PresentationLayer.Presenters
                 payElement = _payElementsService.GetRecordByIdNo(Of PayElementModel)(empPayElement.PayElementIdNo)
                 'Dim payElementModel As New PayElementModel
                 'GlobalVariables.Mapper.Map(payElement, payElementModel)
-                If payElement.CalculationType = _fixedAmountType Then
+                If payElement.CalculationType = _calcTypeFixedAmount Then
                     amount = ComputePayAmount(_payFrequency, empPayElement.Amount, empPayElement.Unit)
                     If Not regenerate Then
                         AddPayElement(employeeIdNo, amount, payElement.IdNo, 0, payrollDetailIdNo, Nothing)
                     Else
                         UpdatePayElement(employeeIdNo, amount, payElement.IdNo, payrollDetailIdNo, Nothing)
                     End If
-                ElseIf payElement.CalculationType = _fixedRateType Then
+                ElseIf payElement.CalculationType = _calcTypeFixedRate Then
                     Dim rate As Decimal = empPayElement.Rate
                     If rate <> 0 Then
                         Dim qty As Decimal
@@ -781,6 +781,12 @@ Namespace PresentationLayer.Presenters
                             payElement.QuantityType = _overTimeSpecialType OrElse
                             payElement.QuantityType = _hoursWorkedType Then
                             qty = ComputeQuantity(empPayElement.EmployeeIdNo, payElement.QuantityType)
+                        ElseIf payElement.QuantityType = _daysLeaveWithoutPayType OrElse
+                            payElement.QuantityType = _daysLeaveWithPayType OrElse
+                            payElement.QuantityType = _daysOffType OrElse
+                            payElement.QuantityType = _daysPaidType OrElse
+                            payElement.QuantityType = _daysVacationType Then
+                            qty = ComputeQuantity(empPayElement.EmployeeIdNo, payElement.QuantityType, dutyHoursRatio)
                         Else
                             qty = ComputeQuantity(empPayElement.EmployeeIdNo, payElement.QuantityType)
                         End If
@@ -943,7 +949,7 @@ Namespace PresentationLayer.Presenters
         '    _payrollPayElements.Add(payrollPayElement)
         'End Sub
 
-        Private Sub GenerateComputedPayElements(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32)
+        Private Sub GenerateComputedPayElements(regenerate As Boolean, employeeIdNo As Int32, payrollDetailIdNo As Int32, dutyHoursRatio As Decimal)
             For Each earning As PayElementModel In _computedPayElements
                 If earning.Active Then
                     Dim amount As Decimal
@@ -951,7 +957,7 @@ Namespace PresentationLayer.Presenters
                     '    Debugger.Break()
                     'End If
 
-                    amount = CalculateComputedPayElement(employeeIdNo, earning)
+                    amount = CalculateComputedPayElement(employeeIdNo, earning, dutyHoursRatio)
                     If Not regenerate Then
                         AddPayElement(employeeIdNo, amount, earning.IdNo, 0, payrollDetailIdNo, Nothing)
                     Else
@@ -973,45 +979,47 @@ Namespace PresentationLayer.Presenters
             Next
         End Sub
 
-        Private Function CalculateComputedPayElement(employeeIdNo As Int32, earning As PayElementModel) As Decimal
+        Private Function CalculateComputedPayElement(employeeIdNo As Int32, payElement As PayElementModel, dutyHoursRatio As Decimal) As Decimal
             Dim amount As Decimal
             Dim rate As Decimal
-            If earning.CalculationType = _fixedRateType Then
-                Dim payElementModel As PayrollPayElementModel = _payrollPayElements.Find(Function(p As PayrollPayElementModel) p.EmployeeIdNo = employeeIdNo And p.PayElementIdNo = earning.IdNo)
+            If payElement.CalculationType = _calcTypeFixedRate Then
+                Dim payElementModel As PayrollPayElementModel = _payrollPayElements.Find(Function(p As PayrollPayElementModel) p.EmployeeIdNo = employeeIdNo And p.PayElementIdNo = payElement.IdNo)
                 If payElementModel IsNot Nothing Then
-                    rate = ComputePayAmount(_payFrequency, payElementModel.Amount, earning.Unit)
-                    Dim qty As Decimal = ComputeQuantity(employeeIdNo, earning.Unit)
+                    rate = ComputePayAmount(_payFrequency, payElementModel.Amount, payElement.Unit)
+                    Dim qty As Decimal = ComputeQuantity(employeeIdNo, payElement.Unit)
                     amount = rate * qty
                 Else
                     amount = 0
                 End If
-            ElseIf earning.CalculationType = _factorType Then
-                Dim bpEarning As PayElementModel = _payElementsService.GetRecordByIdNo(Of PayElementModel)(earning.BasePaymentIdNo)
+            ElseIf payElement.CalculationType = _calcTypeFactor Then
+                Dim bpEarning As PayElementModel = _payElementsService.GetRecordByIdNo(Of PayElementModel)(payElement.BasePaymentIdNo)
                 If bpEarning.Summary Then
                     Dim bpAmount As Decimal
-                    bpAmount = ComputeSummaryAmount(employeeIdNo, earning.BasePaymentIdNo)
-                    rate = ComputeFactoredAmount(bpAmount, earning.FactorValue, earning.FactorType)
-                    Dim qty = ComputeQuantity(employeeIdNo, earning.QuantityType)
+                    bpAmount = ComputeSummaryAmount(employeeIdNo, payElement.BasePaymentIdNo)
+                    rate = ComputeFactoredAmount(employeeIdNo, bpAmount, payElement.FactorValue, payElement.FactorType, dutyHoursRatio)
+                    Dim qty = ComputeQuantity(employeeIdNo, payElement.QuantityType, dutyHoursRatio)
                     amount = qty * rate
                     If amount > bpAmount Then
                         amount = bpAmount
                     End If
                 Else
-                    Dim bpPayElementModel As PayrollPayElementModel = _payrollPayElements.Find(Function(p As PayrollPayElementModel) p.EmployeeIdNo = employeeIdNo And p.PayElementIdNo = earning.BasePaymentIdNo)
+                    Dim bpPayElementModel As PayrollPayElementModel = _payrollPayElements.Find(Function(p As PayrollPayElementModel) p.EmployeeIdNo = employeeIdNo And p.PayElementIdNo = payElement.BasePaymentIdNo)
                     If bpPayElementModel IsNot Nothing Then
-                        Dim qty = ComputeQuantity(employeeIdNo, earning.QuantityType)
-                        Dim bpAmount = ComputeFactoredAmount(bpPayElementModel.Amount, earning.FactorValue, earning.FactorType)
+
+                        Dim qty = ComputeQuantity(employeeIdNo, payElement.QuantityType)
+                        Dim bpAmount = ComputeFactoredAmount(employeeIdNo, bpPayElementModel.Amount, payElement.FactorValue, payElement.FactorType, dutyHoursRatio)
                         amount = qty * bpAmount
                         If amount > bpPayElementModel.Amount Then
                             amount = bpPayElementModel.Amount
                         End If
+
                     End If
                 End If
             End If
             Return amount
         End Function
 
-        Private Function ComputeFactoredAmount(amount As Decimal, factorValue As Decimal, factorType As String)
+        Private Function ComputeFactoredAmount(employeeIdNo As Int32, amount As Decimal, factorValue As Decimal, factorType As String, dutyHoursRatio As Decimal)
             Dim factoredAmount As Decimal
             If factorType = _factorPercentType Then
                 factoredAmount = amount * factorValue * 0.01D
@@ -1021,8 +1029,15 @@ Namespace PresentationLayer.Presenters
                 If factorValue <> 0 Then
                     factoredAmount = amount / factorValue
                 End If
+            ElseIf factorType = _factorComplementDutyHoursRatio Then
+                factoredAmount = amount * (1 - dutyHoursRatio)
             End If
             Return factoredAmount
+        End Function
+
+        Private Function GetEmployeeDutyHoursRatio(employeeIdNo As Int32)
+            Dim employee As Object = Service.GetFieldsWithIdNo(employeeIdNo, "Employee", "DutyHours,ActualDutyHours")
+            Return employee.ActualDutyHours / employee.DutyHours
         End Function
 
         Private Function ComputeSummaryAmount(employeeIdNo As Int32, earningIdNo As Int16) As Decimal
@@ -1059,23 +1074,23 @@ Namespace PresentationLayer.Presenters
             Return factoredAmount
         End Function
 
-        Private Function ComputeDeductionAmount(deduction As PayElementModel, daysAbsentWithoutPay As Decimal, basePayment As EmployeePayElementModel) As Decimal
-            'Debugger.Break()
-            Dim daysToCompute As Decimal
-            Dim amount As Decimal
-            If _deductionComputationMethod = "DaysInMonth" Then
-                daysToCompute = daysAbsentWithoutPay
-                amount = Math.Round(basePayment.Amount / _daysInTheMonth * daysToCompute, 2)
-            ElseIf _deductionComputationMethod = "30Days" Then
-                If daysAbsentWithoutPay <= 15D Then
-                    daysToCompute = daysAbsentWithoutPay
-                Else
-                    daysToCompute = 30D - (CDec(DateTime.DaysInMonth(Year(_endDate), Month(_endDate))) - daysAbsentWithoutPay)
-                End If
-                amount = Math.Round(basePayment.Amount / 30D * daysToCompute, 2)
-            End If
-            Return amount
-        End Function
+        'Private Function ComputeDeductionAmount(deduction As PayElementModel, daysAbsentWithoutPay As Decimal, basePayment As EmployeePayElementModel) As Decimal
+        '    'Debugger.Break()
+        '    Dim daysToCompute As Decimal
+        '    Dim amount As Decimal
+        '    If _deductionComputationMethod = "DaysInMonth" Then
+        '        daysToCompute = daysAbsentWithoutPay
+        '        amount = Math.Round(basePayment.Amount / _daysInTheMonth * daysToCompute, 2)
+        '    ElseIf _deductionComputationMethod = "30Days" Then
+        '        If daysAbsentWithoutPay <= 15D Then
+        '            daysToCompute = daysAbsentWithoutPay
+        '        Else
+        '            daysToCompute = 30D - (CDec(DateTime.DaysInMonth(Year(_endDate), Month(_endDate))) - daysAbsentWithoutPay)
+        '        End If
+        '        amount = Math.Round(basePayment.Amount / 30D * daysToCompute, 2)
+        '    End If
+        '    Return amount
+        'End Function
 
         Private Sub CreatePayrollDetails()
             Dim savedPayrollDetail As New PayrollDetailModel
@@ -1315,23 +1330,23 @@ Namespace PresentationLayer.Presenters
         '    Return amount * factor
         'End Function
 
-        Private Function ComputeQuantity(employeeIdNo As Int32, quantityType As String)
+        Private Function ComputeQuantity(employeeIdNo As Int32, quantityType As String, Optional dutyRatio As Decimal = 1)
             Dim quantity As Decimal?
             If quantityType = _hoursWorkedType Then
                 quantity = GetOtWorkHourValues(employeeIdNo, "HoursWorked")
             ElseIf quantityType = _daysLeaveWithPayType Then
-                quantity = GetAttendanceValues(employeeIdNo, "DaysAbsentWithPay")
+                quantity = GetAttendanceValues(employeeIdNo, "DaysAbsentWithPay") * dutyRatio
             ElseIf quantityType = _daysOffType Then
-                quantity = GetAttendanceValues(employeeIdNo, "DaysOff")
+                quantity = GetAttendanceValues(employeeIdNo, "DaysOff") * dutyRatio
             ElseIf quantityType = _daysPresentType Then
-                quantity = GetAttendanceValues(employeeIdNo, "DaysPresent")
+                quantity = GetAttendanceValues(employeeIdNo, "DaysPresent") * dutyRatio
             ElseIf quantityType = _daysLeaveWithoutPayType Then
-                quantity = GetAttendanceValues(employeeIdNo, "DaysAbsentWithoutPay")
+                quantity = GetAttendanceValues(employeeIdNo, "DaysAbsentWithoutPay") * dutyRatio
             ElseIf quantityType = _daysVacationType Then
-                quantity = GetAttendanceValues(employeeIdNo, "DaysVacationLeave")
+                quantity = GetAttendanceValues(employeeIdNo, "DaysVacationLeave") * dutyRatio
             ElseIf quantityType = _daysPaidType Then
                 Dim attendanceItem As AttendanceItemModel = _attendanceItemService.GetRecordByIdNo(Of AttendanceItemModel)(employeeIdNo)
-                quantity = attendanceItem.DaysPresent + attendanceItem.DaysAbsentWithPay + attendanceItem.DaysOff + attendanceItem.DaysVacationLeave
+                quantity = (attendanceItem.DaysPresent + attendanceItem.DaysAbsentWithPay + attendanceItem.DaysOff + attendanceItem.DaysVacationLeave) * dutyRatio
             ElseIf quantityType = _overtimeRegularType Then
                 quantity = GetOtWorkHourValues(employeeIdNo, "OvertimeRegular")
             ElseIf quantityType = _overtimeHolidayType Then
@@ -1429,7 +1444,7 @@ Namespace PresentationLayer.Presenters
                 Messaging.Show(True, "MsgEmptyEmployeeAttendanceOt")
             Else
                 Dim payelementsModel As New List(Of PayElementModel)
-                payElementsModel = _payElementsService.GetDaoRecords()    
+                payelementsModel = _payElementsService.GetDaoRecords()
                 Dim progressDisplayForm = New CBaseControlsLibrary.DisplayProgressForm
                 Dim counter As Integer = 0
                 _savedPayrollPayElements = _payrollPayElementsService.GetRecordsWithGroupIdNo(Of PayrollPayElementModel)(_payrollIdNo)
@@ -1439,7 +1454,7 @@ Namespace PresentationLayer.Presenters
                 Dim payElementIdNo As Int16
                 'For Each payrollPayElement In _savedPayrollPayElements
                 '    payElementIdNo = payrollPayElement.PayElementIdNo
-                    
+
                 '    If PayrollDetailModel.IdNo = 0 Then
                 '        payrollDetailIdNo = _payrollDetailsService.AddRecord(PayrollDetailModel)
                 '    Else

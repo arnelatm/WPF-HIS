@@ -15,6 +15,8 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("EmployeeName"))
                 AddRule(New ValidateRequired("EmployeeNameAra"))
                 AddRule(New ValidateRequired("HiredDate"))
+                AddRule(New ValidateRange("ActualDutyHours", 1, 24, ValidationDataType.Decimal))
+                AddRule(New ValidateRange("DutyHours", 1, 24, ValidationDataType.Decimal))
                 'AddRule(New ValidateRequired("EmployeeCode"))
                 'AddRule(New ValidateRequired("PaymentMethod"))
                 AddRule(New ValidateEmail("Email"))
@@ -24,6 +26,7 @@ Namespace BusinessLayer
         End Sub
 
         Public Property Active As Boolean
+        Public Property ActualDutyHours As Decimal
         Public Property ArAccountIdNo As Int16?
         Public Property Balance As Decimal
         Public Property BankAccountNo As String

@@ -11,6 +11,7 @@ Namespace PresentationLayer.Models
 
         Public Property Errors As List(Of String)
         Public Property Active As Boolean
+        Public Property ActualDutyHours As Decimal
         Public Property ArAccountIdNo As Int16?
         Public Property BankAccountNo As String
         Public Property Balance As Decimal
