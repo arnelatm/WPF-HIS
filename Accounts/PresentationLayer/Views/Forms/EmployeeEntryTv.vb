@@ -470,12 +470,22 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property ActualDutyHours As Decimal Implements IEmployeeView.ActualDutyHours
+            Get
+                Return NumParser(Of Decimal)(txtActualDutyHours.Text)
+            End Get
+            Set
+                txtActualDutyHours.Text = FormatDecimalNumber(Value)
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
         {
          {"Active", chkActive},
+         {"ActualDutyHours", txtActualDutyHours},
          {"Balance", txtBalance},
          {"BankAccountNo", txtBankAccountNo},
          {"BankIdNo", cacBankIdNo},

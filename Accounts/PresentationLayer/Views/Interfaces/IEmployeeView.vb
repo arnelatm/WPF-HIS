@@ -6,6 +6,7 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface IEmployeeView
         Inherits IView
         Property Active As Boolean
+        Property ActualDutyHours As Decimal
         Property BankAccountNo As String
         Property BankIdNo As Int16?
         Property Balance As Decimal
