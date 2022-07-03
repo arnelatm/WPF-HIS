@@ -1,0 +1,328 @@
+﻿
+
+
+
+
+
+
+
+
+
+
+
+CREATE VIEW [dbo].[GlLedgersAp_View]	
+  AS
+(SELECT 'GJ' Collate SQL_Latin1_General_CP1_CI_AS AS 'JournalCode'
+	  ,a.[IdNo]
+      ,[Sequence]
+	  ,[JournalIdNo]
+      ,a.[AccountIdNo]
+	  ,ch.[AccountCode]
+      ,a.[Debit]
+      ,a.[Credit]
+	  ,[RevCostCenterIdNo]
+      ,a.[Notes]  COLLATE Arabic_CI_AS AS 'Notes'
+	  ,a.[Posted]
+	  ,[TransactionDate] 
+      ,[ReferenceNo] COLLATE Arabic_CI_AS AS 'ReferenceNo'
+	  ,'' COLLATE Arabic_CI_AS AS 'DocumentNumber'
+	  ,LTrim(Coalesce(a.[Notes],' ', b.[Notes])) COLLATE Arabic_CI_AS AS 'PayDescription'
+	  ,LTrim(Coalesce(a.[Notes],' ', b.[Notes])) COLLATE Arabic_CI_AS AS 'PayDescriptionAra'
+	  ,[ClosingJournal]
+	  ,0 as 'SCEIdNo'
+  FROM [dbo].[GeneralJournalItem] a
+  LEFT OUTER JOIN dbo.GeneralJournal b
+  on a.JournalIdNo = b.IdNo
+  LEFT OUTER JOIN dbo.Account ch
+  ON a.AccountIdNo = ch.IdNo
+)
+UNION
+(SELECT 'AP' Collate SQL_Latin1_General_CP1_CI_AS
+	  ,a.[IdNo]
+      ,[Sequence]
+      ,[JournalIdNo]
+      ,a.[AccountIdNo]
+	  ,ch.AccountCode
+      ,a.[Debit]
+      ,a.[Credit]
+      ,[RevCostCenterIdNo]
+      ,a.[Notes]
+      ,a.[Posted]
+	  ,[TransactionDate]
+      ,[ReferenceNo] 
+	  ,[InvoiceNo] 
+	  ,[SupplierName] 
+	  ,[SupplierNameAra] 
+	  ,CAST(0 AS BIT) 
+	  ,b.SupplierIdNo
+  FROM [dbo].[ApJournalItem] a
+  LEFT OUTER JOIN dbo.[ApJournal] b
+  on a.JournalIdNo = b.IdNo 
+  LEFT OUTER JOIN dbo.[Supplier] c
+  on b.SupplierIdNo = c.IdNo 
+  LEFT OUTER JOIN dbo.Account ch
+  ON a.AccountIdNo = ch.IdNo
+)
+UNION
+(SELECT 'AR' Collate SQL_Latin1_General_CP1_CI_AS
+	  ,a.[IdNo]
+      ,[Sequence]
+      ,[JournalIdNo]
+      ,a.[AccountIdNo]
+	  ,ch.AccountCode
+      ,a.[Debit]
+      ,a.[Credit]
+      ,[RevCostCenterIdNo]
+      ,a.[Notes]
+      ,a.[Posted]
+	  ,[TransactionDate]
+      ,[ReferenceNo]
+	  ,[InvoiceNo] AS 'DocumentNumber'
+	  ,[CustomerName]
+	  ,[CustomerNameAra]
+	  ,CAST(0 AS BIT)
+	  ,b.CustomerIdNo
+  FROM [dbo].[ArJournalItem] a
+  LEFT OUTER JOIN dbo.ArJournal b
+  on a.JournalIdNo = b.IdNo 
+  LEFT OUTER JOIN dbo.[Customer] c
+  on b.CustomerIdNo = c.IdNo 
+  LEFT OUTER JOIN dbo.Account ch
+  ON a.AccountIdNo = ch.IdNo
+)
+UNION
+(SELECT 'ER' Collate SQL_Latin1_General_CP1_CI_AS
+	  ,a.[IdNo]
+      ,[Sequence]
+      ,[JournalIdNo]
+      ,a.[AccountIdNo]
+	  ,ch.AccountCode
+      ,a.[Debit]
+      ,a.[Credit]
+      ,[RevCostCenterIdNo]
+      ,a.[Notes]
+      ,a.[Posted]
+	  ,[TransactionDate]
+      ,[ReferenceNo]
+	  ,[ReferenceNo] AS 'DocumentNumber'
+	  ,[EmployeeName]
+	  ,[EmployeeNameAra]
+	  ,CAST(0 AS BIT)
+	  ,b.EmployeeIdNo
+  FROM [dbo].[ErJournalItem] a
+  LEFT OUTER JOIN dbo.ErJournal b
+  on a.JournalIdNo = b.IdNo 
+  LEFT OUTER JOIN dbo.[Employee] e
+  on b.EmployeeIdNO = e.IdNo 
+  LEFT OUTER JOIN dbo.Account ch
+  ON a.AccountIdNo = ch.IdNo
+)
+UNION
+(SELECT 'CK' Collate SQL_Latin1_General_CP1_CI_AS
+	  ,a.[IdNo]
+      ,[Sequence]
+	  ,[JournalIdNo]
+      ,a.[AccountIdNo]
+	  ,ch.AccountCode
+      ,a.[Debit]
+      ,a.[Credit]
+	  ,[RevCostCenterIdNo]
+      ,a.[Notes]
+	  ,a.[Posted]
+	  ,[TransactionDate]
+      ,[ReferenceNo]
+	  ,Coalesce('Chk#' + [CheckNumber],'')
+	  ,CASE
+			WHEN b.PaymentType = 'A' then s.SupplierName
+			WHEN b.PaymentType = 'R' then c.CustomerName
+			WHEN b.PaymentType = 'S' then s.SupplierName
+			WHEN b.PaymentType = 'E' then e.EmployeeName
+			WHEN b.PaymentType = 'O' then b.PayeeName
+			ELSE b.PayeeName
+	   END
+	  ,CASE
+			WHEN b.PaymentType = 'A' then s.SupplierNameAra
+			WHEN b.PaymentType = 'R' then c.CustomerNameAra
+			WHEN b.PaymentType = 'S' then s.SupplierNameAra
+			WHEN b.PaymentType = 'E' then e.EmployeeNameAra
+			WHEN b.PaymentType = 'O' then b.PayeeName
+			ELSE b.PayeeName
+	   END
+	   ,CAST(0 AS BIT)
+	   ,b.PayeeIdNo
+  FROM [dbo].[CkJournalItem] a
+  LEFT OUTER JOIN dbo.CkJournal b
+  on a.JournalIdNo = b.IdNo
+  LEFT OUTER JOIN dbo.[Customer] c
+  on b.PayeeIdNo = c.IdNo 
+  LEFT OUTER JOIN dbo.[Supplier] s
+  on b.PayeeIdNo = s.IdNo 
+  LEFT OUTER JOIN dbo.[Employee] e
+  on b.PayeeIdNo = e.IDNo 
+  LEFT OUTER JOIN dbo.Account ch
+  ON a.AccountIdNo = ch.IdNo
+)
+UNION
+(SELECT 'CD' Collate SQL_Latin1_General_CP1_CI_AS
+	  ,a.[IdNo]
+      ,[Sequence]
+	  ,[JournalIdNo]
+      ,a.[AccountIdNo]
+	  ,ch.AccountCode
+      ,a.[Debit]
+      ,a.[Credit]
+	  ,[RevCostCenterIdNo]
+      ,a.[Notes]
+	  ,a.[Posted]
+	  ,[TransactionDate]
+      ,[ReferenceNo]
+	  ,'Inv#'+[ORNUMBER] 
+	  ,CASE
+			WHEN b.PaymentType = 'A' then s.SupplierName
+			WHEN b.PaymentType = 'R' then c.CustomerName
+			WHEN b.PaymentType = 'S' then s.SupplierName
+			WHEN b.PaymentType = 'E' then e.EmployeeName
+			WHEN b.PaymentType = 'O' then b.PayeeName
+			ELSE b.PayeeName
+	   END
+	  ,CASE
+			WHEN b.PaymentType = 'A' then s.SupplierNameAra
+			WHEN b.PaymentType = 'R' then c.CustomerNameAra
+			WHEN b.PaymentType = 'S' then s.SupplierNameAra
+			WHEN b.PaymentType = 'E' then e.EmployeeNameAra
+			WHEN b.PaymentType = 'O' then b.PayeeName
+			ELSE b.PayeeName
+	   END
+	  ,CAST(0 AS BIT)
+	  ,b.PayeeIdNo
+  FROM [dbo].[CdJournalItem] a
+  LEFT OUTER JOIN dbo.CdJournal b
+  on a.JournalIdNo = b.IdNo
+  LEFT OUTER JOIN dbo.[Customer] c
+  on b.PayeeIdNo = c.IdNo 
+  LEFT OUTER JOIN dbo.[Supplier] s
+  on b.PayeeIdNo = s.IdNo 
+  LEFT OUTER JOIN dbo.[Employee] e
+  on b.PayeeIdNo = e.IDNo 
+  LEFT OUTER JOIN dbo.Account ch
+  ON a.AccountIdNo = ch.IdNo
+)
+UNION
+(SELECT 'CR' Collate SQL_Latin1_General_CP1_CI_AS
+	  ,a.[IdNo]
+      ,[Sequence]
+	  ,[JournalIdNo]
+      ,a.[AccountIdNo]
+	  ,ch.AccountCode
+      ,a.[Debit]
+      ,a.[Credit]
+	  ,[RevCostCenterIdNo]
+      ,a.[Notes]
+	  ,a.[Posted]
+	  ,[TransactionDate]
+      ,[ReferenceNo]
+	  ,Case
+		When [ORNUMBER] IS NULL AND [CheckNumber] IS NULL Then ''
+		When [ORNUMBER] IS NULL Then 'Chk#'+RTrim([CheckNumber])
+		ELSE 'OR# ' + RTrim([ORNUMBER]) + ' / Chk#' + RTrim([CheckNumber])
+	   End
+	  ,CASE
+			WHEN b.PayorType = 'A' then c.CustomerName
+			WHEN b.PayorType = 'C' then c.CustomerName
+			WHEN b.PayorType = 'R' then s.SupplierName
+			WHEN b.PayorType = 'E' then e.EmployeeName
+			WHEN b.PayorType = 'O' then b.PayorName
+			ELSE b.PayorName
+	   END
+	  ,CASE
+			WHEN b.PayorType = 'A' then c.CustomerNameAra
+			WHEN b.PayorType = 'C' then c.CustomerNameAra
+			WHEN b.PayorType = 'R' then s.SupplierNameAra
+			WHEN b.PayorType = 'E' then e.EmployeeNameAra
+			WHEN b.PayorType = 'O' then b.PayorName
+			ELSE b.PayorName
+	   END
+	  ,CAST(0 AS BIT)
+	  ,b.PayorIdNo
+  FROM [dbo].[CashReceiptJournalItem] a
+  LEFT OUTER JOIN dbo.CashReceiptJournal b
+  on a.JournalIdNo = b.IdNo
+  LEFT OUTER JOIN dbo.[Customer] c
+  on b.PayorIdNo = c.IdNo 
+  LEFT OUTER JOIN dbo.[Supplier] s
+  on b.PayorIdNo = s.IdNo 
+  LEFT OUTER JOIN dbo.[Employee] e
+  on b.PayorIdNo = e.IDNo 
+  LEFT OUTER JOIN dbo.Account ch
+  ON a.AccountIdNo = ch.IdNo
+)
+UNION
+(SELECT 'PC'
+	  ,a.[IdNo]
+      ,[Sequence]
+	  ,[JournalIdNo]
+      ,a.[AccountIdNo]
+	  ,ch.AccountCode
+      ,a.[Debit]
+      ,a.[Credit]
+	  ,[RevCostCenterIdNo]
+      ,a.[Notes]
+	  ,a.[Posted]
+	  ,[TransactionDate]
+      ,[ReferenceNo]
+	  ,'Inv#'+[ORNUMBER] 
+	  ,CASE
+			WHEN b.PaymentType = 'A' then s.SupplierName
+			WHEN b.PaymentType = 'R' then c.CustomerName
+			WHEN b.PaymentType = 'S' then s.SupplierName
+			WHEN b.PaymentType = 'E' then e.EmployeeName
+			WHEN b.PaymentType = 'O' then b.PayeeName
+			ELSE b.PayeeName
+	   END
+	  ,CASE
+			WHEN b.PaymentType = 'A' then s.SupplierNameAra
+			WHEN b.PaymentType = 'R' then c.CustomerNameAra
+			WHEN b.PaymentType = 'S' then s.SupplierNameAra
+			WHEN b.PaymentType = 'E' then e.EmployeeNameAra
+			WHEN b.PaymentType = 'O' then b.PayeeName
+			ELSE b.PayeeName
+	   END
+	  ,CAST(0 AS BIT)
+	  ,b.PayeeIdNo
+  FROM [dbo].[PcJournalItem] a
+  LEFT OUTER JOIN dbo.PcJournal b
+  on a.JournalIdNo = b.IdNo
+  LEFT OUTER JOIN dbo.[Customer] c
+  on b.PayeeIdNo = c.IdNo 
+  LEFT OUTER JOIN dbo.[Supplier] s
+  on b.PayeeIdNo = s.IdNo 
+  LEFT OUTER JOIN dbo.[Employee] e
+  on b.PayeeIdNo = e.IDNo 
+  LEFT OUTER JOIN dbo.Account ch
+  ON a.AccountIdNo = ch.IdNo
+)
+UNION
+(SELECT 'SJ'
+	  ,a.[IdNo]
+      ,[Sequence]
+	  ,[JournalIdNo]
+      ,a.[AccountIdNo]
+	  ,ch.AccountCode
+      ,a.[Debit]
+      ,a.[Credit]
+	  ,[RevCostCenterIdNo]
+      ,a.[Notes]
+	  ,a.[Posted]
+	  ,[TransactionDate]
+      ,[ReferenceNo]
+	  ,''
+	  ,LTrim(Coalesce(a.[Notes],' ', b.[Notes]))
+	  ,LTrim(Coalesce(a.[Notes],' ', b.[Notes]))
+	  ,CAST(0 AS BIT)
+	  ,0
+  FROM [dbo].[SalesJournalItem] a
+  LEFT OUTER JOIN dbo.SalesJournal b
+  on a.JournalIdNo = b.Idno
+  LEFT OUTER JOIN dbo.Account ch
+  ON a.AccountIdNo = ch.IdNo
+)
