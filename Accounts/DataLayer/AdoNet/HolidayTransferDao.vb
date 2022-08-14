@@ -1,4 +1,5 @@
 ﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 
@@ -7,6 +8,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class HolidayTransferDao
+        Inherits CommonDao
         Implements IDao(Of HolidayTransfer), IDaoGetRecords(Of HolidayTransferItem)
 
         Private ReadOnly _db As New Db()
