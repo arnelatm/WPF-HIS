@@ -138,6 +138,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboEmployeeIdNo.BegFindValue = Nothing
         Me.cboEmployeeIdNo.ChangingSearchValueOnly = false
         Me.cboEmployeeIdNo.CurrentSearchTerm = ""
+        Me.cboEmployeeIdNo.DataValue = Nothing
         Me.cboEmployeeIdNo.DefaultValue = Nothing
         Me.cboEmployeeIdNo.DisplayMember = "Name"
         Me.cboEmployeeIdNo.EditingMode = true
@@ -285,6 +286,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboLeaveIdNo.BegFindValue = Nothing
         Me.cboLeaveIdNo.ChangingSearchValueOnly = false
         Me.cboLeaveIdNo.CurrentSearchTerm = ""
+        Me.cboLeaveIdNo.DataValue = Nothing
         Me.cboLeaveIdNo.DefaultValue = Nothing
         Me.cboLeaveIdNo.DisplayMember = "Name"
         Me.cboLeaveIdNo.EditingMode = true
@@ -333,6 +335,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboHolidayIdNo.BegFindValue = Nothing
         Me.cboHolidayIdNo.ChangingSearchValueOnly = false
         Me.cboHolidayIdNo.CurrentSearchTerm = ""
+        Me.cboHolidayIdNo.DataValue = Nothing
         Me.cboHolidayIdNo.DefaultValue = Nothing
         Me.cboHolidayIdNo.DisplayMember = "Name"
         Me.cboHolidayIdNo.EditingMode = true
@@ -482,6 +485,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboLeaveStatus.BegFindValue = Nothing
         Me.cboLeaveStatus.ChangingSearchValueOnly = false
         Me.cboLeaveStatus.CurrentSearchTerm = ""
+        Me.cboLeaveStatus.DataValue = Nothing
         Me.cboLeaveStatus.DefaultValue = Nothing
         Me.cboLeaveStatus.DisplayMember = "Name"
         Me.cboLeaveStatus.DisplayOnly = true
@@ -532,6 +536,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboenteredBy.BegFindValue = Nothing
         Me.cboenteredBy.ChangingSearchValueOnly = false
         Me.cboenteredBy.CurrentSearchTerm = ""
+        Me.cboenteredBy.DataValue = Nothing
         Me.cboenteredBy.DefaultValue = Nothing
         Me.cboenteredBy.DisplayMember = "Name"
         Me.cboenteredBy.DisplayOnly = true
@@ -688,6 +693,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'dgvApprovedBy
         '
+        Me.dgvApprovedBy.AutoComplete = false
         Me.dgvApprovedBy.DataPropertyName = "ApprovedBy"
         DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
@@ -703,6 +709,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'dgvLeaveStatus
         '
+        Me.dgvLeaveStatus.AutoComplete = false
         Me.dgvLeaveStatus.DataPropertyName = "LeaveStatus"
         DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
