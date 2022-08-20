@@ -159,7 +159,7 @@ Namespace AdoNet
             ElseIf findableControl.FindDataType = IFindableControl.DataTypeEnum.Integer Or
                    findableControl.FindDataType = IFindableControl.DataTypeEnum.Decimal Then
                 If Not (filter Is Nothing OrElse filter = "") Then
-                    sql &= "(" & filter.Trim() & ") and " & GetActualFieldName(findableControl.FieldName).Trim() & " "
+                    sql &= "(" & filter.Trim() & ") and " '& GetActualFieldName(findableControl.FieldName).Trim() & " "
                 End If
                 If findableControl.BegFindValue Is Nothing Then ' Or findableControl.BegFindValue = "" Then
                     sql &= " " & GetActualFieldName(findableControl.FieldName) & " Is Null or "
