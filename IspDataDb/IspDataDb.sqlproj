@@ -512,6 +512,13 @@
     <Build Include="dbo\Tables\List_1.sql" />
     <Build Include="dbo\Tables\EstablishmentName.sql" />
     <Build Include="dbo\Stored Procedures\spAccountReconciliationItems.sql" />
+    <Build Include="dbo\Tables\Payee_2.sql" />
+    <Build Include="dbo\Views\Payee_View_2.sql" />
+    <Build Include="dbo\Views\GlLedgersSCE_View_1.sql" />
+    <Build Include="dbo\Views\GlLedgersAp_View_1.sql" />
+    <Build Include="dbo\Views\EmployeeInfo_View3_2.sql" />
+    <Build Include="dbo\Views\EmployeeInfo_View2_2.sql" />
+    <Build Include="dbo\Views\EmployeeIdPrintinData_View_1.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
