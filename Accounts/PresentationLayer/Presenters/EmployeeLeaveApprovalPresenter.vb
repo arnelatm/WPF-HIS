@@ -9,7 +9,7 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Presenters
 
     Public Class EmployeeLeaveApprovalPresenter(Of TM As New)
-        Inherits AccountsPresenterNew(Of IEmployeeLeaveApprovalView, TM)
+        Inherits AccountsPresenter(Of IEmployeeLeaveApprovalView, TM)
 
         Private ReadOnly _journalItemService
         Private ReadOnly _EmployeeIdsService

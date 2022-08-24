@@ -106,8 +106,29 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Function IsAccountsReceivableAccount(ByVal accountIdNo As Int16)
-            Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = EnumToCode(SpecialAccountSelection.AccountsReceivable)
+        Public Overrides Function IsOkToEditRecord() As Boolean
+            Dim result As Boolean = True
+            If ReconciledEntriesExist(View.JournalItems, "AR") Then
+                result = False
+            Else
+                If DependentRecordExist() Then
+                    result = False
+                End If
+            End If
+            Return result
+        End Function
+
+        Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
+            Dim returnValue As Boolean = False
+            For Each item In View.JournalItems
+                If IsAccountsReceivableAccount(item.AccountIdNo) Then
+                    Dim arOpenInvoiceNumber As Int32 = GetArOpenInvoiceNumber(item.IdNo)
+                    If CheckDependentRecords(Of Int32)(arOpenInvoiceNumber, "CsrOiItem", "ArOpenInvoiceIdNo") Then
+                        Return True
+                    End If
+                End If
+            Next
+            Return False
         End Function
 
         Private Function RemoveDeletedArOpenInvoices(retVal As Integer, newJournalItem As List(Of JournalItemModel)) As Integer
@@ -291,6 +312,14 @@ Namespace PresentationLayer.Presenters
             End If
             Dim cForm As New ReportForm("Accounts Receivable Journal.Rpt", View.IdNo, "ArJournalIdNo", transactionAmount, "TotalArAmountInWords", totalArAmount, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
+        End Sub
+
+        Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
+            ' ReSharper disable once VBUseMethodAny.1
+            If View.JournalItems IsNot Nothing And View.JournalItems.Count() > 0 Then
+                DtUpdateTable.Clear()
+                _arJournalItemService.DelUpdateTvp(DtUpdateTable, idNo)
+            End If
         End Sub
 
         Public Sub UpdateDueDate()

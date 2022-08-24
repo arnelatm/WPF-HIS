@@ -7,7 +7,7 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Presenters
 
     Public Class HolidayAvailmentPresenter(Of TM As New)
-        Inherits AccountsPresenterNew(Of IHolidayAvailmentView, TM)
+        Inherits AccountsPresenter(Of IHolidayAvailmentView, TM)
         'Implements ISubscriber(Of EntryFormLoaded)
 
         Private _userHasAccess As Boolean = False

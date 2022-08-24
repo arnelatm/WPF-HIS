@@ -412,7 +412,7 @@
     <Compile Include="PresentationLayer\Models\PensionProviderModel.vb" />
     <Compile Include="PresentationLayer\Models\PensionSchemeModel.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
-    <Compile Include="PresentationLayer\Presenters\AccountsPresenterNew.vb" />
+    <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CustomerPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\Lab_InvoiceGroupPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\ItemDetailsPresenter.vb" />
@@ -1681,8 +1681,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app Ispadmin2.config" />
     <None Include="app.config" />
+    <None Include="app Ispadmin2.config" />
     <None Include="app-Isp-Server.config" />
     <None Include="appIspadmin2.config" />
     <None Include="app-MarceloPC.config" />

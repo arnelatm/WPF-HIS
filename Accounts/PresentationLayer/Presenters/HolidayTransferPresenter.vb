@@ -10,7 +10,7 @@ Imports Autofac.Core
 Namespace PresentationLayer.Presenters
 
     Public Class HolidayTransferPresenter(Of TM As New)
-        Inherits AccountsPresenterNew(Of IHolidayTransferView, HolidayTransferModel)
+        Inherits AccountsPresenter(Of IHolidayTransferView, HolidayTransferModel)
         'Implements ISubscriber(Of ViewButtonClicked)
 
         Protected DtInsertTable As New DataTable

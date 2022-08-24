@@ -939,18 +939,59 @@ Namespace PresentationLayer.Presenters
         '    Return dView
         'End Function
 
+        'Public Overrides Function IsOkToEditRecord() As Boolean
+        '    Dim result As Boolean = True
+        '    Dim reconciledDao = New ReconciledDao
+        '    For Each item In View.JournalItems
+        '        If reconciledDao.IsItemReconciled("CR", item.IdNo) Then
+        '            Messaging.Show(True, "MsgEditingOfReconciledNotAllowed")
+        '            result = False
+        '            Exit For
+        '        End If
+        '    Next
+        '    Return result
+        'End Function
+
         Public Overrides Function IsOkToEditRecord() As Boolean
             Dim result As Boolean = True
-            Dim reconciledDao = New ReconciledDao
-            For Each item In View.JournalItems
-                If reconciledDao.IsItemReconciled("CR", item.IdNo) Then
-                    Messaging.Show(True, "MsgEditingOfReconciledNotAllowed")
-                    result = False
-                    Exit For
-                End If
-            Next
+            If ReconciledEntriesExist(View.JournalItems, "CR") Then
+                result = False
+                'Else
+                '    If DependentRecordExist() Then
+                '        result = False
+                '    End If
+            End If
             Return result
         End Function
+
+        Public Overrides Function IsOkToDeleteRecord() As Boolean
+            Dim retValue As Boolean = True
+            If MyBase.IsOkToDeleteRecord Then
+                If ReconciledEntriesExist(View.JournalItems, "CR") Then
+                    retValue = False
+                End If
+            End If
+            Return retValue
+        End Function
+
+        'Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
+        '    Dim returnValue As Boolean = False
+        '    For Each item In View.JournalItems
+        '        If IsAccountsReceivableAccount(item.AccountIdNo) Then
+        '            Dim apOpenInvoiceNumber As Int32 = GetApOpenInvoiceNumber(item.IdNo)
+        '            If CheckDependentRecords(Of Int32)(apOpenInvoiceNumber, "CdOiItem", "ApOpenInvoiceIdNo") Then
+        '                Return True
+        '            End If
+        '        End If
+        '        If IsAccountsPayableAccount(View.AccountIdNo) Then
+        '            Dim apOpenInvoiceNumber As Int32 = GetApOpenInvoiceNumber(item.IdNo)
+        '            If CheckDependentRecords(Of Int32)(apOpenInvoiceNumber, "CdOiItem", "ApOpenInvoiceIdNo") Then
+        '                Return True
+        '            End If
+        '        End If
+        '    Next
+        '    Return False
+        'End Function
 
     End Class
 

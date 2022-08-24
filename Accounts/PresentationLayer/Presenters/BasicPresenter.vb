@@ -6,7 +6,7 @@ Imports AATM.Libraries
 Namespace PresentationLayer.Presenters
 
     Public Class BasicPresenter(Of TM As New)
-        Inherits AccountsPresenterNew(Of IBasicView, TM)
+        Inherits AccountsPresenter(Of IBasicView, TM)
 
         Private ReadOnly PresenterView
 

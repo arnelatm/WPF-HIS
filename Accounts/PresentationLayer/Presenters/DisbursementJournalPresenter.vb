@@ -204,15 +204,18 @@ Namespace PresentationLayer.Presenters
                 Messaging.Show(True, "MsgEditingOfClosedPcRecordNotAllowed")
                 result = False
             Else
-                Dim reconciledDao = New ReconciledDao
-                For Each item In View.JournalItems
-                    'Dim reconciledData As Reconciled = reconciledDao.GetReconciledItem(JournalCode, item.IdNo)
-                    If reconciledDao.IsItemReconciled(JournalCode, item.IdNo) Then
-                        Messaging.Show(True, "MsgEditingOfReconciledNotAllowed")
-                        result = False
-                        Exit For
-                    End If
-                Next
+                If ReconciledEntriesExist(View.JournalItems, JournalCode) Then
+                    result = False
+                End If
+                'Dim reconciledDao = New ReconciledDao
+                'For Each item In View.JournalItems
+                '    'Dim reconciledData As Reconciled = reconciledDao.GetReconciledItem(JournalCode, item.IdNo)
+                '    If reconciledDao.IsItemReconciled(JournalCode, item.IdNo) Then
+                '        Messaging.Show(True, "MsgEditingOfReconciledNotAllowed")
+                '        result = False
+                '        Exit For
+                '    End If
+                'Next
             End If
             Return result
         End Function
@@ -1068,6 +1071,11 @@ Namespace PresentationLayer.Presenters
                         Dim description As String = ""
                         description = Messaging.TranslateCaption("Petty Cash Replenishment")
                         Messaging.ShowPmMessage(True, "MsgDeleteEntryNotAllowed", {"description", description})
+                        retVal = False
+                    End If
+                End If
+                If retVal Then
+                    If ReconciledEntriesExist(View.JournalItems, "CD") Then
                         retVal = False
                     End If
                 End If

@@ -7,7 +7,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Presenters
 
     Public Class AccountReconciliationItemsPresenter
-        Inherits AccountsPresenterNew(Of IAccountReconciliationItemsView, AccountReconciliationItemModel)
+        Inherits AccountsPresenter(Of IAccountReconciliationItemsView, AccountReconciliationItemModel)
 
         Public ParentViewList As List(Of AccountReconciliationItemModel)
         Private ReadOnly _vatRate As Decimal = GlobalVariables.VatRate() / 100D

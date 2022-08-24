@@ -5,7 +5,7 @@ Imports AATM.Accounts.ServiceLayer.ActionService
 Namespace PresentationLayer.Presenters
 
     Public Class CsrOiItemsPresenter(Of TM As New)
-        Inherits AccountsPresenterNew(Of ICsrOiItemsView, CsrOiItemModel)
+        Inherits AccountsPresenter(Of ICsrOiItemsView, CsrOiItemModel)
 
         Public Sub New(view As ICsrOiItemsView)
             MyBase.New(view)

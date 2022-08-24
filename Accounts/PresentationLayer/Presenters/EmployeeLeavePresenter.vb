@@ -9,7 +9,7 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Presenters
 
     Public Class EmployeeLeavePresenter(Of TM As New)
-        Inherits AccountsPresenterNew(Of IEmployeeLeaveView, TM)
+        Inherits AccountsPresenter(Of IEmployeeLeaveView, TM)
         'Implements ISubscriber(Of EntryFormLoaded)
 
         Private _userHasAccess As Boolean = False

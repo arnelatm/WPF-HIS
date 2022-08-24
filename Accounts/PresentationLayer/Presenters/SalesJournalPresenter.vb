@@ -285,6 +285,14 @@ Namespace PresentationLayer.Presenters
             cForm.Show()
         End Sub
 
+        Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
+            ' ReSharper disable once VBUseMethodAny.1
+            If View.JournalItems IsNot Nothing And View.JournalItems.Count() > 0 Then
+                DtUpdateTable.Clear()
+                _salesJournalItemService.DelUpdateTvp(DtUpdateTable, idNo)
+            End If
+        End Sub
+
         Public Sub RecomputeBankCharges(salesDeposit As SalesDepositView)
             If salesDeposit.DepositTypeIdNo <> 0 Then
                 Dim depositType As New DepositTypeModel

@@ -5,8 +5,8 @@ Imports AATM.Libraries
 
 Namespace PresentationLayer.Presenters
 
-    Public Class AttendancePresenter
-        Inherits AccountsPresenterNew(Of IAttendanceItemView, AttendanceItemModel)
+    Public Class AttendancePresenter(Of TM)
+        Inherits AccountsPresenter(Of IAttendanceItemView, AttendanceItemModel)
 
         Public Sub New(itemView As IAttendanceItemView)
             MyBase.New(itemView)

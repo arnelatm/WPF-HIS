@@ -5,7 +5,7 @@ Imports AATM.Accounts.ServiceLayer.ActionService
 Namespace PresentationLayer.Presenters
 
     Public Class PensionRatesPresenter(Of TM As New)
-        Inherits AccountsPresenterNew(Of IPensionRatesView, PensionRateModel)
+        Inherits AccountsPresenter(Of IPensionRatesView, PensionRateModel)
 
         Public ParentViewList As List(Of PensionRateModel)
 
