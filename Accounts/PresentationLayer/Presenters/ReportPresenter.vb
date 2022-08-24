@@ -5,7 +5,7 @@ Imports AATM.PresentationLayer.Views
 Namespace PresentationLayer.Presenters
 
     Public Class ReportPresenter
-        Inherits AccountsPresenterNew(Of IView, AccountModel)
+        Inherits AccountsPresenter(Of IView, AccountModel)
 
         'Public UserIsSupervisor As Boolean
 
@@ -24,7 +24,7 @@ Namespace PresentationLayer.Presenters
 
     
     Public Class DateRangeCompanyPresenter
-        Inherits AccountsPresenterNew(Of IView, AccountModel)
+        Inherits AccountsPresenter(Of IView, AccountModel)
 
         'Public UserIsSupervisor As Boolean
 

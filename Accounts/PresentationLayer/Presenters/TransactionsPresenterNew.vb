@@ -7,7 +7,7 @@ Imports AATM.PresentationLayer.Views
 Namespace PresentationLayer.Presenters
 
     Public Class TransactionsPresenterNew(Of TV As IView, TM As New)
-        Inherits AccountsPresenterNew(Of TV, TM)
+        Inherits AccountsPresenter(Of TV, TM)
         Implements ISubscriber(Of ValidatingData)
 
         Public Sub New(itemView As IView)
@@ -15,16 +15,20 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Overrides Function IsOkToDeleteRecord() As Boolean
-            Dim type As Type = View.GetType
             Dim retVal As Boolean = True
-            If type.GetProperty("Posted") IsNot Nothing Then
-                Dim cPosted = CallByName(View, "Posted", CallType.Get)
-                If cPosted Then
-                    Dim description As String = ""
-                    description = Messaging.TranslateCaption("Posted")
-                    Messaging.ShowPmMessage(True, "MsgDeleteEntryNotAllowed", {"description", description})
-                    retVal = False
+            If MyBase.IsOkToDeleteRecord() Then
+                Dim type As Type = View.GetType
+                If type.GetProperty("Posted") IsNot Nothing Then
+                    Dim cPosted = CallByName(View, "Posted", CallType.Get)
+                    If cPosted Then
+                        Dim description As String = ""
+                        description = Messaging.TranslateCaption("Posted")
+                        Messaging.ShowPmMessage(True, "MsgDeleteEntryNotAllowed", {"description", description})
+                        retVal = False
+                    End If
                 End If
+            Else
+                retVal = False
             End If
             Return retVal
         End Function

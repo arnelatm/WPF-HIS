@@ -5,7 +5,7 @@ Imports AATM.Accounts.ServiceLayer.ActionService
 Namespace PresentationLayer.Presenters
 
     Public Class CashReceiptJournalItemsPresenter(Of TM As New)
-        Inherits AccountsPresenterNew(Of IJournalItemsView, JournalItemModel)
+        Inherits AccountsPresenter(Of IJournalItemsView, JournalItemModel)
 
         Public ParentViewList As List(Of JournalItemModel)
 

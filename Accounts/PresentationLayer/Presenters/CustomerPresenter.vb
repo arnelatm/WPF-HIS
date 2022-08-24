@@ -6,7 +6,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Presenters
 
     Public Class CustomerPresenter(Of TM As New)
-        Inherits AccountsPresenterNew(Of ICustomerView, TM)
+        Inherits AccountsPresenter(Of ICustomerView, TM)
 
         Public ParentViewList As List(Of TM)
 

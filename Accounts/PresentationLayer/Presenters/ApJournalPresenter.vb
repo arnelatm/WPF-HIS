@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
@@ -110,8 +111,29 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Function IsAccountsPayableAccount(ByVal accountIdNo As Int16)
-            Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = EnumToCode(SpecialAccountSelection.AccountsPayable)
+        Public Overrides Function IsOkToEditRecord() As Boolean
+            Dim result As Boolean = True
+            If ReconciledEntriesExist(View.JournalItems, "AP") Then
+                result = False
+            Else
+                If DependentRecordExist() Then
+                    result = False
+                End If
+            End If
+            Return result
+        End Function
+
+        Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
+            Dim returnValue As Boolean = False
+            For Each item In View.JournalItems
+                If IsAccountsPayableAccount(item.AccountIdNo) Then
+                    Dim apOpenInvoiceNumber As Int32 = GetApOpenInvoiceNumber(item.IdNo)
+                    If CheckDependentRecords(Of Int32)(apOpenInvoiceNumber, "CdOiItem", "ApOpenInvoiceIdNo") Then
+                        Return True
+                    End If
+                End If
+            Next
+            Return False
         End Function
 
         Private Function RemoveDeletedApOpenInvoices(retVal As Integer, newJournalItem As List(Of JournalItemModel)) As Integer
@@ -289,10 +311,6 @@ Namespace PresentationLayer.Presenters
             Else
                 transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
             End If
-            'View.TotalCredits = 0
-            'For Each item In View.JournalItems
-            '    View.TotalCredits = View.TotalCredits + item.Credit
-            'Next
             If language = "ar" Then
                 totalApAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
             Else
@@ -300,6 +318,14 @@ Namespace PresentationLayer.Presenters
             End If
             Dim cForm As New ReportForm("Accounts Payable Journal.Rpt", View.IdNo, "ApJournalIdNo", transactionAmount, "ApAmountInWords", totalApAmount, "TotalLineAmountInWords", language, "Language")
             cForm.Show()
+        End Sub
+
+        Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
+            ' ReSharper disable once VBUseMethodAny.1
+            If View.JournalItems IsNot Nothing And View.JournalItems.Count() > 0 Then
+                DtUpdateTable.Clear()
+                _apJournalItemService.DelUpdateTvp(DtUpdateTable, idNo)
+            End If
         End Sub
 
         Public Sub UpdateDueDate()
@@ -361,17 +387,6 @@ Namespace PresentationLayer.Presenters
             Return False
         End Function
 
-        'Public Overrides Function IsOkToEditRecord() As Boolean
-        '    Dim retVal As Boolean = True
-        '    If MyBase.IsOkToEditRecord() Then
-        '        If CallByName(View, "chkApproved.DisplayOnly", CallType.Get) Then
-        '            retVal = False
-        '        End If
-        '        Return retVal
-        '    End If
-        '    Return retVal
-        'End Function
-
         Public Sub OnApJournalDataChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
             With eventType.BindingSource
                 If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
@@ -393,6 +408,16 @@ Namespace PresentationLayer.Presenters
                 End If
             End With
         End Sub
+
+        Public Overrides Function IsOkToDeleteRecord() As Boolean
+            Dim retValue As Boolean = True
+            If MyBase.IsOkToDeleteRecord Then
+                If ReconciledEntriesExist(View.JournalItems, "AP") Then
+                    retValue = False
+                End If
+            End If
+            Return retValue
+        End Function
 
     End Class
 

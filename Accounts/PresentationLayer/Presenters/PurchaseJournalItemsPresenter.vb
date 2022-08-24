@@ -7,7 +7,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Presenters
 
     Public Class PurchaseJournalItemsPresenter(Of TM As New)
-        Inherits AccountsPresenterNew(Of IJournalItemsView, JournalItemModel)
+        Inherits AccountsPresenter(Of IJournalItemsView, JournalItemModel)
 
         Public ParentViewList As List(Of JournalItemModel)
 

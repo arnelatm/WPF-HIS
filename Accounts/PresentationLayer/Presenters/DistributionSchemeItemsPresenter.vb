@@ -6,7 +6,7 @@ Imports AATM.Libraries
 Namespace PresentationLayer.Presenters
 
     Public Class DistributionSchemeItemsPresenter
-        Inherits AccountsPresenterNew(Of IDistributionSchemeItemsView, DistributionSchemeItemModel)
+        Inherits AccountsPresenter(Of IDistributionSchemeItemsView, DistributionSchemeItemModel)
 
         Private Shared _changesMadeInDataGrid As Boolean = False
 

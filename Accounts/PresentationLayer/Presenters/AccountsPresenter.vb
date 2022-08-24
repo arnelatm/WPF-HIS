@@ -1,55 +1,220 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.DataLayer.AdoNet
+Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.PresentationLayer.Views
+Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Presenters
 
-    Public Class AccountsPresenter(Of T As IView, TM As New)
-        Inherits CommonPresenter(Of T, TM)
-
-        'Protected Shared Property ModelApOpenInvoice As
-        'IModelOpenInvoice
-        'Private Property ModelArOpenInvoice ' As IModelOpenInvoice
-        'Private Property ModelCashCode ' As IModelCashCode
-
-        Public Sub New(itemView As T)
-            MyBase.New(itemView)
-        End Sub
+    Public Class AccountsPresenter(Of TV As AATM.PresentationLayer.Views.IView, TM As New)
+        Inherits CommonPresenterNew(Of TV, TM)
 
         Public Sub New()
             MyBase.New()
         End Sub
 
-        Public Overrides Sub Initializer(objectName As String, Optional bizParams As Object = Nothing, Optional daoParams As Object = Nothing)
-            TableName = objectName
-            SortOrderKey = objectName + "Name"
-            Service = New ModelAccounts(objectName, bizParams, daoParams)
-            OriginalModel = New TM
-            DataModel = New TM
+        Public Sub New(itemView As AATM.PresentationLayer.Views.IView)
+            MyBase.New(itemView)
         End Sub
 
-        Public Overrides Sub InitializerWithTv(baseClassName As String, Optional bizParams As Object = Nothing, Optional daoParams As Object = Nothing)
-            TreeViewMainField = baseClassName + "Name"
-            TreeViewSecondaryField = baseClassName + "Code"
-            TreeViewList = New List(Of TM)
-            Initializer(baseClassName, bizParams, daoParams)
-            If TreeViewParentIdField IsNot Nothing Then
-                SortOrderKey = "SortKey"
+        Public Sub CreateSpecialAccountDataSource(fieldName As String, specialAccountArray As String())
+            Dim filter As String
+            filter = CreateSpecialAccountFilterKey(specialAccountArray)
+            CreateDataSource("Account", fieldName, filter)
+        End Sub
+
+        Public Function GetDepositTypeModel() As List(Of DepositTypeModel)
+            Dim cModel As New DepositTypeModel
+            Dim cModelList As New List(Of DepositTypeModel)
+            Dim depositTypeService As New AccountsService("DepositType")
+            Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of DepositTypeModel)("DepositTypeName", cModel)
+            Dim depositType As List(Of DepositType)
+            depositType = depositTypeService.GetList(Of DepositType)(newSortOrderKey)
+            GlobalVariables.Mapper.Map(depositType, cModelList)
+            Return cModelList
+        End Function
+
+        Public Function GetAccount(idNo As String)
+            Dim accountService As New AccountsService("Account")
+            Return accountService.GetRecordByIdNo(Of AccountModel)(idNo)
+        End Function
+
+        Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
+            Dim arOpenInvoiceService As New AccountsService("ArOpenInvoice")
+            Dim arOpenInvoiceModel As New ArOpenInvoiceModel With {
+                    .JournalCode = journalCode,
+                    .JournalIdNo = journalItem.JournalIdNo,
+                    .JournalItemIdNo = journalItem.IdNo
+                    }
+            Return arOpenInvoiceService.AddRecord(arOpenInvoiceModel)
+        End Function
+
+        Public Function AddApOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
+            Dim apOpenInvoiceService As New AccountsService("ApOpenInvoice")
+            Dim apOpenInvoiceModel As New ApOpenInvoiceModel With {
+                    .JournalCode = journalCode,
+                    .JournalIdNo = journalItem.JournalIdNo,
+                    .JournalItemIdNo = journalItem.IdNo
+                    }
+            Return apOpenInvoiceService.AddRecord(apOpenInvoiceModel)
+        End Function
+
+        Public Function UpdateInputVatAmount(journalItems As List(Of JournalItemView)) As Decimal
+            Dim tiVatAmount As Decimal = 0
+            Dim inputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatInput)
+            For Each item In journalItems
+                If item.SpecialAccount = inputVatAccount Then
+                    tiVatAmount = tiVatAmount + item.Debit - item.Credit
+                End If
+            Next
+            Return tiVatAmount
+        End Function
+
+        Public Function UpdateOutputVatAmount(journalItems As List(Of JournalItemView))
+            Dim toVatAmount As Decimal = 0
+            Dim outputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatOutput)
+            For Each item In journalItems
+                If item.SpecialAccount = outputVatAccount Then
+                    toVatAmount = toVatAmount + item.Credit - item.Debit
+                End If
+            Next
+            Return toVatAmount
+        End Function
+
+        Public Sub MakeDebitAmount(journalItem As JournalItemView, amount As Decimal?)
+            If amount Is Nothing OrElse amount >= 0 Then
+                journalItem.Credit = 0
+            ElseIf amount < 0 Then
+                journalItem.Credit = amount * -1
+                journalItem.Debit = 0
             End If
         End Sub
 
-        'Public Sub CheckIfEditable() Handles MyBase.BeforeEdit
-        '    Dim type As Type = View.GetType
-        '    If type.GetProperty("Posted") IsNot Nothing Then
-        '        Dim cPosted = CallByName(View, "Posted", CallType.Get)
-        '        If cPosted Then
-        '            Messaging.Show(True, "MsgEditingOfPostedRecordNotAllowed", $"This record has already been posted. Edits not allowed!", "Posted Entry")
-        '            CancelEdit = True
-        '        End If
+        Public Sub MakeCreditAmount(journalItem As JournalItemView, amount As Decimal?)
+            If amount Is Nothing OrElse amount >= 0 Then
+                journalItem.Debit = 0
+            ElseIf amount < 0 Then
+                journalItem.Debit = amount * -1
+                journalItem.Credit = 0
+            End If
+        End Sub
+
+        Public Sub MakePayTypeAndSpecialAccount(journalItem As JournalItemView, accountIdNo As Int16?)
+            Dim account As AccountModel
+            If accountIdNo Is Nothing Or accountIdNo <= 0 Then
+                journalItem.JournalIdNo = 0
+                journalItem.SpecialAccount = Nothing
+                journalItem.PayeeType = Nothing
+                journalItem.AccountName = ""
+            Else
+                account = GetAccount(accountIdNo)
+                journalItem.AccountIdNo = accountIdNo
+                journalItem.SpecialAccount = account.SpecialAccount
+                journalItem.PayeeType = account.PayeeType
+                journalItem.AccountName = account.AccountName
+            End If
+        End Sub
+
+        Public Function IsUserASupervisor()
+            Dim employeeIdNo As Int32 = GetUserEmployeeIdNo()
+            If employeeIdNo > 0 Then
+                Return Service.GetField(Of Boolean, Int32)(employeeIdNo, "Employee", "IdNo", "Supervisor")
+            End If
+            Return False
+        End Function
+
+        Public Function GetUserEmployeeIdNo() As Int32
+            Return Service.GetField(Of Integer, Integer)(GlobalVariables.UserIdNo, "User", "IdNo", "EmployeeIdNo")
+        End Function
+
+        'Public Sub AddNewItemOnBindingSource(Of TS As New)(ByVal e As System.ComponentModel.AddingNewEventArgs, bindingSource As BindingSource, dataGridView As DataGridView) Implements IAccountsPresenter.AddNewItemOnBindingSource
+        '    e.NewObject = New TS
+        '    ' work around for error on datagrid entry on lastrow please do not remove.
+        '    ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
+        '    ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
+        '    ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again
+        '    If dataGridView.Rows.Count = bindingSource.Count Then
+        '        bindingSource.RemoveAt(bindingSource.Count - 1)
         '    End If
         'End Sub
+
+        'Public Function GetBizRules(childProperty) Implements IAccountsPresenter.GetBizRules
+        '    Dim viewName = childProperty.GetType.GenericTypeArguments(0).Name
+        '    Dim bizName As String = Strings.Left(viewName, Len(viewName) - 4)
+        '    ' is standard naming convention to name the view as the object with 'View' as appended name so to get value just remove 'View'
+        '    Dim bModel As New ModelAccounts(bizName)
+        '    Return bModel.GetBizObjectRules()
+        'End Function
+
+        'Public Function GetBizObject(childProperty) Implements IAccountsPresenter.GetBizObject
+        '    Dim viewName = childProperty.GetType.GenericTypeArguments(0).Name
+        '    Dim bizName As String = Strings.Left(viewName, Len(viewName) - 4)
+        '    ' is standard naming convention to name the view as the object with 'View' as appended name so to get value just remove 'View'
+        '    Dim bModel As New ModelAccounts(bizName)
+        '    Return bModel.DataService.DataBo
+        'End Function
+
+        'Public Function ValidateDataBoundGrid(Of TMG As New)(viewProperty As Object, dataGridView As DataGridView, dictionary As Dictionary(Of String, Object), Optional tabPage As TabPage = Nothing) Implements IAccountsPresenter.ValidateDataBoundGrid
+        '    Dim errorFound As Boolean = False
+        '    Dim rules = GetBizRules(viewProperty)
+        '    Dim bo = GetBizObject(viewProperty)
+        '    For Each rule In rules
+        '        For Each col In dataGridView.Columns()
+        '            Dim colName = col.DataPropertyName
+        '            If rule.Property = colName Then
+        '                For Each row As DataGridViewRow In dataGridView.Rows
+        '                    Dim model As New TMG
+        '                    If row.Index() >= 0 AndAlso row.Index() < dataGridView.RowCount() - 1 Then
+        '                        GlobalVariables.Mapper.Map(viewProperty(row.Index()), model)
+        '                        GlobalVariables.Mapper.Map(model, bo)
+        '                        If Not bo.IsRuleValid(rule) Then
+        '                            Dim obj As New Object
+        '                            dictionary.TryGetValue(rule.Property, obj)
+        '                            row.Cells(obj.Name).ErrorText = rule.Error
+        '                            errorFound = True
+        '                        End If
+        '                    End If
+        '                Next
+        '            End If
+        '        Next
+        '    Next
+        '    If errorFound Then
+        '        If tabPage IsNot Nothing Then
+        '            tabPage.ImageIndex = 0
+        '        Else
+        '            tabPage.ImageIndex = -1
+        '        End If
+        '    Else
+        '        If tabPage IsNot Nothing Then
+        '            tabPage.ImageIndex = -1
+        '        End If
+        '    End If
+        '    Return Not errorFound
+        'End Function
+
+        'Protected Sub New()
+        '    MyBase.New()
+        'End Sub
+
+        'Protected Function IsChildValid2(Of Tcm)(bizName, childProperty) As Boolean
+        '    Dim retValue As Boolean = True
+        '    Dim sModel As New List(Of Tcm)
+        '    Dim esModel As New ModelAccounts(bizName)
+        '    Dim dModel = GlobalVariables.Mapper.Map(childProperty, sModel)
+        '    For Each item In sModel
+        '        If Not esModel.IsValid(item) Then
+        '            retValue = False
+        '        End If
+        '    Next
+        '    If Not retValue Then
+        '        AddToParentError(esModel.GetBizObjectErrors)
+        '    End If
+        '    Return retValue
+        'End Function
 
         Public Sub SetSupplierVatNumber(ByRef currentVatNumber As String, idNo As String, override As Boolean)
             If IsEmpty(currentVatNumber) Or override Then
@@ -62,461 +227,96 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Function GetSupplierPaymentDueDays(idNo As String)
-            Return GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "PaymentDueDays")
+        'Public Function IsAccountsReceivableAccount(ByVal accountIdNo As Int16)
+        '    Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = "AR"
+        'End Function
+
+        'Public Function IsInputVatAccount(ByVal accountIdNo As Int16)
+        '    Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = "VI"
+        'End Function
+
+        'Public Function GetAdvancesToSupplierAccountIdNo()
+        '    Return GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.AdvancesToSupplier), "Account", "SpecialAccount", "IdNo")
+        'End Function
+
+        Public Function GetAccountTypesList(accountType As String, Optional ByVal sortKey As String = "AccountName")
+            Dim values = accountType.Split(",")
+            Dim lookupFilterKey = ""
+            For Each account In values
+                If lookupFilterKey <> "" Then
+                    lookupFilterKey = lookupFilterKey + " Or "
+                End If
+                lookupFilterKey = lookupFilterKey + "SpecialAccount = '" & account & "'"
+            Next
+            Return GetLookup("Account", sortKey, lookupFilterKey)
         End Function
 
-        Public Function GetSupplierSettlementDiscount(idNo As String)
-            Return GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "SettlementDiscount")
+        Public Function GetApOpenInvoiceNumber(journalItemIdNo As Int32) As Int32
+            Dim idNo As Int32
+            idNo = Service.GetRecordFieldWith2KeyG(Of String, Int32, Int32)("AP", journalItemIdNo, "ApOpenInvoice", "JournalCode", "JournalItemIdNo", "IdNo")
+            Return idNo
         End Function
 
-        Public Function GetSupplierSettlementDueDays(idNo As String)
-            Return GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "SettlementDueDays")
+        Public Function GetArOpenInvoiceNumber(journalItemIdNo As Int32) As Int32
+            Dim idNo As Int32
+            idNo = Service.GetRecordFieldWith2KeyG(Of String, Int32, Int32)("AR", journalItemIdNo, "ArOpenInvoice", "JournalCode", "JournalItemIdNo", "IdNo")
+            Return idNo
         End Function
 
-        Public Function GetCustomerPaymentDueDays(idNo As String)
-            Return GetRecordFieldWithKey(idNo, "Customer", "IdNo", "PaymentDueDays")
-        End Function
+        'Public Function ArOpenInvoiceExists(ByVal journalCode As String, ByVal idNo As Integer) As Boolean
+        '    Return Model.CountRecordWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode", "JournalItemIdNo")
+        'End Function
 
-        Public Function GetCustomerSettlementDiscount(idNo As String)
-            Return GetRecordFieldWithKey(idNo, "Customer", "IdNo", "SettlementDiscount")
-        End Function
+        'Public Function ArCollectionExists(ByVal journalCode As String, ByVal idNo As Integer) As Boolean
+        '    Dim arOpenInvoiceIdNo As Integer
+        '    arOpenInvoiceIdNo = Model.GetRecordFieldWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode",
+        '                                                     "JournalItemIdNo", "IdNo")
+        '    Return Model.CountRecordWithKey(arOpenInvoiceIdNo, "CsrOiItem", "ArOpenInvoiceIdNo") > 0
+        'End Function
 
-        Public Function GetCustomerSettlementDueDays(idNo As String)
-            Return GetRecordFieldWithKey(idNo, "Customer", "IdNo", "SettlementDueDays")
-        End Function
+        'Public Function GetEndingGlBalance(ByVal accountIdNo As Int16, ByVal reconciliationDate As Date) As Decimal
+        '    Return DataModel.GetEndingGlBalance(accountIdNo, reconciliationDate)
+        'End Function
+
+        'Protected Function IsChildValid(Of Tcm)(childProperty) As Boolean
+        '    Dim retValue As Boolean = True
+        '    Dim bizObjectList As New List(Of Tcm)
+        '    Dim viewName = childProperty.GetType.GenericTypeArguments(0).Name
+        '    Dim bizName As String = Strings.Left(viewName, Len(viewName) - 4)
+        '    ' is standard naming convention to name the view as the object with 'View' as appended name so to get value just remove 'View'
+        '    Dim model As New ModelAccounts(bizName)
+        '    Dim dModel = GlobalVariables.Mapper.Map(childProperty, bizObjectList)
+        '    For Each item In bizObjectList
+        '        If Not model.IsValid(item) Then
+        '            retValue = False
+        '            AddToParentError(model.GetBizObjectErrors)
+        '            Exit For
+        '        End If
+        '    Next
+        '    Return retValue
+        'End Function
 
         Public Function IsAccountsPayableAccount(ByVal accountIdNo As Int16)
-            Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = "AP"
+            Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = EnumToCode(SpecialAccountSelection.AccountsPayable)
         End Function
 
         Public Function IsAccountsReceivableAccount(ByVal accountIdNo As Int16)
-            Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = "AR"
+            Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = EnumToCode(SpecialAccountSelection.AccountsReceivable)
         End Function
 
-        Public Function IsInputVatAccount(ByVal accountIdNo As Int16)
-            Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = "VI"
-        End Function
-
-        'Public Function GetAdvancesToSupplierAccountIdNo()
-        '    Return GetRecordFieldWithKey("AS", "Account", "SpecialAccount", "IdNo")
-        'End Function
-
-        Public Function GetCustomerAdvancesAccountIdNo()
-            Return GetRecordFieldWithKey("CA", "Account", "SpecialAccount", "IdNo")
-        End Function
-
-        'Public Function GetRegularEarningsByCode()
-        '    Return GetRecordFieldWithKey("CA", "Account", "SpecialAccount", "IdNo")
-        'End Function
-
-        'Public Function GetRegularDeductionsByCode()
-        '    Return GetRecordFieldWithKey("CA", "Account", "SpecialAccount", "IdNo")
-        'End Function
-
-        Public Function GetAccount(idNo As String)
-            Dim accountModel As New ModelAccounts("Account")
-            Return accountModel.GetRecordByIdNo(Of AccountModel)(idNo)
-        End Function
-
-        Public Function AddArOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
-            Dim modelArOpenInvoice As New ModelAccounts("ArOpenInvoice")
-            Dim arOpenInvoiceModel As New ArOpenInvoiceModel With {
-                    .JournalCode = journalCode,
-                    .JournalIdNo = journalItem.JournalIdNo,
-                    .JournalItemIdNo = journalItem.IdNo
-                    }
-            Return modelArOpenInvoice.AddRecord(Of ArOpenInvoiceModel)(arOpenInvoiceModel)
-        End Function
-
-        Public Function AddApOpenInvoice(ByVal journalItem As JournalItemModel, ByVal journalCode As String) As Integer
-            Dim modelApOpenInvoice As New ModelAccounts("ApOpenInvoice")
-            Dim apOpenInvoiceModel As New ApOpenInvoiceModel With {
-                    .JournalCode = journalCode,
-                    .JournalIdNo = journalItem.JournalIdNo,
-                    .JournalItemIdNo = journalItem.IdNo
-                    }
-            Return modelApOpenInvoice.AddRecord(Of ApOpenInvoiceModel)(apOpenInvoiceModel)
-        End Function
-
-        Public Function DeleteApOpenInvoice(ByRef idNo As Int32)
-            Dim retVal As Integer = 0
-            If idNo <> 0 Then
-                Dim modelApOpenInvoice As New ModelAccounts("ApOpenInvoice")
-                retVal = modelApOpenInvoice.DeleteRecord(idNo, "ApOpenInvoice")
-            End If
-            Return retVal
-        End Function
-
-        Public Function ArOpenInvoiceExists(ByVal journalCode As String, ByVal idNo As Integer) As Boolean
-            Return Model.CountRecordWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode", "JournalItemIdNo")
-        End Function
-
-        Public Function ArCollectionExists(ByVal journalCode As String, ByVal idNo As Integer) As Boolean
-            Dim arOpenInvoiceIdNo As Integer
-            arOpenInvoiceIdNo = Model.GetRecordFieldWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode",
-                                                             "JournalItemIdNo", "IdNo")
-            Return Model.CountRecordWithKey(arOpenInvoiceIdNo, "CsrOiItem", "ArOpenInvoiceIdNo") > 0
-        End Function
-
-        Public Function ApPaymentExists(ByVal journalCode As String, ByVal idNo As Integer) As Boolean
-            Dim apOpenInvoiceIdNo As Integer
-            apOpenInvoiceIdNo = Model.GetRecordFieldWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode",
-                                                             "JournalItemIdNo", "IdNo")
-            If Model.CountRecordWithKey(apOpenInvoiceIdNo, "CdOiItem", "ApOpenInvoiceIdNo") > 0 Then
-                Return True
-            ElseIf Model.CountRecordWithKey(apOpenInvoiceIdNo, "CkOiItem", "ApOpenInvoiceIdNo") > 0 Then
-                Return True
-            ElseIf Model.CountRecordWithKey(apOpenInvoiceIdNo, "PcOiItem", "ApOpenInvoiceIdNo") > 0 Then
-                Return True
-            End If
-            Return False
-        End Function
-
-        Public Function DeleteArOpenInvoice(ByRef idNo As Int32) As String
-            Dim modelArOpenInvoice As New ModelAccounts("ArOpenInvoice")
-            If Model.CountRecordWithKey(idNo, "CsrOiItem", "ArOpenInvoiceIdNo") = 0 Then
-                Return modelArOpenInvoice.DeleteRecord(idNo, "ArOpenInvoice")
-            End If
-            Return 0
-        End Function
-
-        Public Function GetDepositTypeModel() As List(Of DepositTypeModel)
-            Dim modelDepositType As New ModelAccounts("DepositType")
-            Return modelDepositType.GetAll(Of DepositTypeModel)("DepositTypeName")
-        End Function
-
-        Public Function GetIntPhoneCodes(Optional ByVal sortKey As String = "CountryName")
-            Return GetLookup("Country", "CountryName", {"IdNo", "CountryName", "CountryTelCode"})
-        End Function
-
-        Public Function GetEndingGlBalance(ByVal accountIdNo As Int16, ByVal reconciliationDate As Date) As Decimal
-            Return DataModel.GetEndingGlBalance(accountIdNo, reconciliationDate)
-        End Function
-
-        Public Function GetAdvancePaymentOpenInvoice(ByVal journalCode As String, ByVal idNo As Int32)
-            Return _
-                Model.GetRecordFieldWith2Key(idNo, journalCode, "ApOpenInvoice", "JournalItemIdNo", "JournalCode",
-                                             "IdNo")
-        End Function
-
-        Public Function GetAdvanceCollectionOpenInvoice(ByVal journalCode As String, ByVal idNo As Int32)
-            Return _
-                Model.GetRecordFieldWith2Key(idNo, journalCode, "ArOpenInvoice", "JournalItemIdNo", "JournalCode",
-                                             "IdNo")
-        End Function
-
-        Public Function UpdateInputVatAmount(journalItems As List(Of IJournalItemView))
-            Dim tiVatAmount As Decimal = 0
-            Dim inputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatInput)
+        Public Function ReconciledEntriesExist(journalItems As List(Of JournalItemView), journalCode As String) As Boolean
+            Dim result As Boolean = False
+            Dim reconciledDao = New ReconciledDao
             For Each item In journalItems
-                If item.SpecialAccount = inputVatAccount Then
-                    tiVatAmount = tiVatAmount + item.Debit - item.Credit
-                End If
-            Next
-            Return tiVatAmount
-        End Function
-
-        Public Function UpdateOutputVatAmount(journalItems As List(Of IJournalItemView))
-            Dim toVatAmount As Decimal = 0
-            Dim outputVatAccount As String = GlobalFunctions.EnumToCode(SpecialAccountSelection.VatOutput)
-            For Each item In journalItems
-                If item.SpecialAccount = outputVatAccount Then
-                    toVatAmount = toVatAmount + item.Credit - item.Debit
-                End If
-            Next
-            Return toVatAmount
-        End Function
-
-        'Public Sub MakeSpAcctNPayType(journalItems As List(Of IJournalItemView), accountIdNo As Int16, nIndex As Int16)
-        '    Dim account As AccountModel
-        '    journalItems(nIndex).AccountIdNo = accountIdNo
-        '    account = GetAccount(accountIdNo)
-        '    journalItems(nIndex).SpecialAccount = account.SpecialAccount
-        '    journalItems(nIndex).PayeeType = account.PayeeType
-        'End Sub
-
-        Public Sub MakeDebitAmount(journalItem As IJournalItemView, amount As Decimal?)
-            If amount Is Nothing OrElse amount >= 0 Then
-                journalItem.Credit = 0
-            ElseIf amount < 0 Then
-                journalItem.Credit = amount * -1
-                journalItem.Debit = 0
-            End If
-        End Sub
-
-        Public Sub MakeCreditAmount(journalItem As IJournalItemView, amount As Decimal?)
-            If amount Is Nothing OrElse amount >= 0 Then
-                journalItem.Debit = 0
-            ElseIf amount < 0 Then
-                journalItem.Debit = amount * -1
-                journalItem.Credit = 0
-            End If
-        End Sub
-
-        Public Sub MakePayTypeAndSpecialAccount(journalItem As IJournalItemView, accountIdNo As Int16?)
-            Dim account As AccountModel
-            If accountIdNo Is Nothing Or accountIdNo <= 0 Then
-                journalItem.JournalIdNo = 0
-                journalItem.SpecialAccount = Nothing
-                journalItem.PayeeType = Nothing
-            Else
-                account = GetAccount(accountIdNo)
-                journalItem.AccountIdNo = accountIdNo
-                journalItem.SpecialAccount = account.SpecialAccount
-                journalItem.PayeeType = account.PayeeType
-            End If
-        End Sub
-
-        Public Sub AddNewItemOnBindingSource(Of TS As New)(ByVal e As System.ComponentModel.AddingNewEventArgs, bindingSource As BindingSource, dataGridView As DataGridView)
-            e.NewObject = New TS
-            ' work around for error on datagrid entry on lastrow please do not remove.
-            ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
-            ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
-            ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again
-            If dataGridView.Rows.Count = bindingSource.Count Then
-                bindingSource.RemoveAt(bindingSource.Count - 1)
-            End If
-        End Sub
-
-        Protected Function IsChildValid(Of Tcm)(childProperty) As Boolean
-            Dim retValue As Boolean = True
-            Dim bizObjectList As New List(Of Tcm)
-            Dim viewName = childProperty.GetType.GenericTypeArguments(0).Name
-            Dim bizName As String = Strings.Left(viewName, Len(viewName) - 4)
-            ' is standard naming convention to name the view as the object with 'View' as appended name so to get value just remove 'View'
-            Dim model As New ModelAccounts(bizName)
-            Dim dModel = GlobalVariables.Mapper.Map(childProperty, bizObjectList)
-            For Each item In bizObjectList
-                If Not model.IsValid(item) Then
-                    retValue = False
-                    AddToParentError(model.GetBizObjectErrors)
+                'Dim reconciledData As Reconciled = reconciledDao.GetReconciledItem(JournalCode, item.IdNo)
+                If reconciledDao.IsItemReconciled(journalCode, item.IdNo) Then
+                    Messaging.Show(True, "MsgEditingOfReconciledNotAllowed")
+                    result = True
                     Exit For
                 End If
             Next
-            Return retValue
+            Return result
         End Function
-
-        Public Function GetBizRules(childProperty)
-            Dim viewName = childProperty.GetType.GenericTypeArguments(0).Name
-            Dim bizName As String = Strings.Left(viewName, Len(viewName) - 4)
-            ' is standard naming convention to name the view as the object with 'View' as appended name so to get value just remove 'View'
-            Dim bModel As New ModelAccounts(bizName)
-            Return bModel.GetBizObjectRules()
-        End Function
-
-        Public Function GetBizObject(childProperty)
-            Dim viewName = childProperty.GetType.GenericTypeArguments(0).Name
-            Dim bizName As String = Strings.Left(viewName, Len(viewName) - 4)
-            ' is standard naming convention to name the view as the object with 'View' as appended name so to get value just remove 'View'
-            Dim bModel As New ModelAccounts(bizName)
-            Return bModel.DataService.DataBo
-        End Function
-
-        Protected Function IsChildValid2(Of Tcm)(bizName, childProperty) As Boolean
-            Dim retValue As Boolean = True
-            Dim sModel As New List(Of Tcm)
-            Dim esModel As New ModelAccounts(bizName)
-            Dim dModel = GlobalVariables.Mapper.Map(childProperty, sModel)
-            For Each item In sModel
-                If Not esModel.IsValid(item) Then
-                    retValue = False
-                End If
-            Next
-            If Not retValue Then
-                AddToParentError(esModel.GetBizObjectErrors)
-            End If
-            Return retValue
-        End Function
-
-        'Public Overrides Function ValidateView()
-        '    Dim valid As Boolean
-        '    valid = ValidateDataBoundGrid(PayElementItems, DataGridViewPayElementItems, _eSumFieldsDict, tbpSummaryDetail) And
-        '            ValidateDataBoundGrid(PayElementAccounts, DataGridViewPayElementAccounts, _eAccFieldsDict, tbpAccountPosting)
-        '    Return valid
-        'End Function
-
-        Public Function ValidateDataBoundGrid(Of TMG As New)(viewProperty As Object, dataGridView As DataGridView, dictionary As Dictionary(Of String, Object), Optional tabPage As TabPage = Nothing)
-            Dim errorFound As Boolean = False
-            Dim rules = GetBizRules(viewProperty)
-            Dim bo = GetBizObject(viewProperty)
-            For Each rule In rules
-                For Each col In dataGridView.Columns()
-                    Dim colName = col.DataPropertyName
-                    If rule.Property = colName Then
-                        For Each row As DataGridViewRow In dataGridView.Rows
-                            Dim model As New TMG
-                            If row.Index() >= 0 AndAlso row.Index() < dataGridView.RowCount() - 1 Then
-                                GlobalVariables.Mapper.Map(viewProperty(row.Index()), model)
-                                GlobalVariables.Mapper.Map(model, bo)
-                                If Not bo.IsRuleValid(rule) Then
-                                    Dim obj As New Object
-                                    If dictionary.TryGetValue(rule.Property, obj) Then
-                                        row.Cells(obj.Name).ErrorText = rule.Error
-                                    End If
-                                    errorFound = True
-                                End If
-                            End If
-                        Next
-                    End If
-                Next
-            Next
-            If errorFound Then
-                If tabPage IsNot Nothing Then
-                    tabPage.ImageIndex = 0
-                Else
-                    tabPage.ImageIndex = -1
-                End If
-            Else
-                If tabPage IsNot Nothing Then
-                    tabPage.ImageIndex = -1
-                End If
-            End If
-            Return Not errorFound
-        End Function
-
-        'Private ReadOnly _monthType = EnumToCode(PayRateUnitSelection.Month)
-        'Private ReadOnly _semiMonthType = EnumToCode(PayRateUnitSelection.SemiMonth)
-        'Private ReadOnly _yearType = EnumToCode(PayRateUnitSelection.Year)
-        'Private ReadOnly _semiYearType = EnumToCode(PayRateUnitSelection.SemiYear)
-        'Private ReadOnly _quarterType = EnumToCode(PayRateUnitSelection.Quarter)
-        'Private ReadOnly _weekType = EnumToCode(PayRateUnitSelection.Week)
-        'Private ReadOnly _dayType = EnumToCode(PayRateUnitSelection.Day)
-        'Private ReadOnly _biWeekType = EnumToCode(PayRateUnitSelection.BiWeek)
-
-        'Public Function ComputePayAmount(payFrequency As PayFrequencySelection, amount As Decimal, unit As String) As Decimal
-        '    Dim factor As Decimal
-        '    Select Case payFrequency
-        '        Case PayFrequencySelection.Monthly
-        '            If unit = _monthType Then
-        '                factor = 1D
-        '            ElseIf unit = _semiMonthType Then
-        '                factor = 2D
-        '            ElseIf unit = _yearType Then
-        '                factor = 1D / 12D
-        '            ElseIf unit = _semiYearType Then
-        '                factor = 1D / 6D
-        '            ElseIf unit = _quarterType Then
-        '                factor = 1D / 3D
-        '            ElseIf unit = _weekType Then
-        '                factor = 13D / 2D
-        '            ElseIf unit = _dayType Then
-        '                factor = 30D
-        '            ElseIf unit = _biWeekType Then
-        '                factor = 13D / 6D
-        '            End If
-        '        Case PayFrequencySelection.Yearly
-        '            If unit = _monthType Then
-        '                factor = 12D
-        '            ElseIf unit = _semiMonthType Then
-        '                factor = 24D
-        '            ElseIf unit = _yearType Then
-        '                factor = 1D
-        '            ElseIf unit = _semiYearType Then
-        '                factor = 2D
-        '            ElseIf unit = _quarterType Then
-        '                factor = 4D
-        '            ElseIf unit = _weekType Then
-        '                factor = 52D
-        '            ElseIf unit = _dayType Then
-        '                factor = 365D
-        '            ElseIf unit = _biWeekType Then
-        '                factor = 26D
-        '            End If
-        '        Case PayFrequencySelection.SemiYearly
-        '            If unit = _monthType Then
-        '                factor = 6D
-        '            ElseIf unit = _semiMonthType Then
-        '                factor = 12D
-        '            ElseIf unit = _yearType Then
-        '                factor = 1D / 2D
-        '            ElseIf unit = _semiYearType Then
-        '                factor = 1D
-        '            ElseIf unit = _quarterType Then
-        '                factor = 2D
-        '            ElseIf unit = _weekType Then
-        '                factor = 26D
-        '            ElseIf unit = _dayType Then
-        '                factor = 365D / 2D
-        '            ElseIf unit = _biWeekType Then
-        '                factor = 13D
-        '            End If
-        '        Case PayFrequencySelection.Quarterly
-        '            If unit = _monthType Then
-        '                factor = 3D
-        '            ElseIf unit = _semiMonthType Then
-        '                factor = 6D
-        '            ElseIf unit = _yearType Then
-        '                factor = 1D / 4D
-        '            ElseIf unit = _semiYearType Then
-        '                factor = 1D / 2D
-        '            ElseIf unit = _quarterType Then
-        '                factor = 1D
-        '            ElseIf unit = _weekType Then
-        '                factor = 13D
-        '            ElseIf unit = _dayType Then
-        '                factor = 365D / 4D
-        '            ElseIf unit = _biWeekType Then
-        '                factor = 13D / 2D
-        '            End If
-        '        Case PayFrequencySelection.SemiMonthly
-        '            If unit = _monthType Then
-        '                factor = 1D / 2D
-        '            ElseIf unit = _semiMonthType Then
-        '                factor = 1D
-        '            ElseIf unit = _yearType Then
-        '                factor = 1D / 24D
-        '            ElseIf unit = _semiYearType Then
-        '                factor = 1D / 12D
-        '            ElseIf unit = _quarterType Then
-        '                factor = 1D / 6D
-        '            ElseIf unit = _weekType Then
-        '                factor = 13D / 4D
-        '            ElseIf unit = _dayType Then
-        '                factor = 15D
-        '            ElseIf unit = _biWeekType Then
-        '                factor = 13D / 12D
-        '            End If
-        '        Case PayFrequencySelection.Weekly
-        '            If unit = _monthType Then
-        '                factor = 12D / 52D
-        '            ElseIf unit = _semiMonthType Then
-        '                factor = 24D / 52D
-        '            ElseIf unit = _yearType Then
-        '                factor = 1D / 52D
-        '            ElseIf unit = _semiYearType Then
-        '                factor = 1D / 26D
-        '            ElseIf unit = _quarterType Then
-        '                factor = 1D / 13D
-        '            ElseIf unit = _weekType Then
-        '                factor = 1D
-        '            ElseIf unit = _dayType Then
-        '                factor = 7D
-        '            ElseIf unit = _biWeekType Then
-        '                factor = 1D / 2D
-        '            End If
-        '        Case PayFrequencySelection.Daily
-        '            If unit = _monthType Then
-        '                factor = 1D / 30D
-        '            ElseIf unit = _semiMonthType Then
-        '                factor = 1D / 15D
-        '            ElseIf unit = _yearType Then
-        '                factor = 1D / 360D
-        '            ElseIf unit = _semiYearType Then
-        '                factor = 1D / 180D
-        '            ElseIf unit = _quarterType Then
-        '                factor = 1D / 90D
-        '            ElseIf unit = _weekType Then
-        '                factor = 1D / 7D
-        '            ElseIf unit = _dayType Then
-        '                factor = 1D
-        '            ElseIf unit = _biWeekType Then
-        '                factor = 1D / 14D
-        '            End If
-
-        '    End Select
-        '    Return amount * factor
-        'End Function
 
     End Class
 
