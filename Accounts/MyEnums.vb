@@ -73,13 +73,19 @@ Public Enum DebitCreditSelection
 End Enum
 
 Public Enum DocumentTypeSelection
-    NotSpecified
-    Employee
-    Establishment
-    Supplier
-    Client
-    Patient
-    Others
+    <EnumCode("")> NotSpecified
+    <EnumCode("E")> Employee
+    <EnumCode("T")> Establishment
+    <EnumCode("S")> Supplier
+    <EnumCode("C")> Customer
+    <EnumCode("P")> Patient
+    <EnumCode("O")> Others
+End Enum
+
+Public Enum ImageTypeSelection
+    <EnumCode("")> NotSpecified
+    <EnumCode("J")> JPG
+    <EnumCode("P")> PDF
 End Enum
 
 'Public Enum DeductionTypeSelection

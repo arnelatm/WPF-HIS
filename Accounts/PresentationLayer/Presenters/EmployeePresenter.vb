@@ -23,9 +23,12 @@ Namespace PresentationLayer.Presenters
         Protected DtEmpLeaveCreditUpdateTable As New DataTable
         Protected DtPhoneInsertTable As New DataTable
         Protected DtPhoneUpdateTable As New DataTable
+        Protected DtDocumentInsertTable As New DataTable
+        Protected DtDocumentUpdateTable As New DataTable
         Private ReadOnly _employeePayElementService As New AccountsService("EmployeePayElement")
-        Private ReadOnly _employeePhoneService As New AccountsService("EmployeePhone")
+        Private ReadOnly _employeeDocumentService As New AccountsService("EmployeeDocument")
         Private ReadOnly _employeeLeaveCreditService As New AccountsService("EmployeeLeaveCredit")
+        Private ReadOnly _employeePhoneService As New AccountsService("EmployeePhone")
 
         Public Sub New(itemView As IEmployeeView)
             MyBase.New(itemView)
@@ -46,6 +49,15 @@ Namespace PresentationLayer.Presenters
                                              {"Sequence", GetType(Int16)},
                                              {"Unit", GetType(String)}}
                                              )
+
+            CreateDataTable(DtDocumentInsertTable, {
+                                 {"DocumentIdNo", GetType(Int16)},
+                                 {"DocumentNumber", GetType(String)},
+                                 {"EmployeeIdNo", GetType(Int16)},
+                                 {"ExpiryDate", GetType(Date)},
+                                 {"IssueDate", GetType(Date)},
+                                 {"Image", GetType(Image)},
+                                 {"Sequence", GetType(Int16)}})
 
             CreateDataTable(DtPhoneInsertTable, {{"AreaCode", GetType(String)},
                                              {"CountryTelIdNo", GetType(Int16)},
@@ -84,6 +96,17 @@ Namespace PresentationLayer.Presenters
                                              {"Sequence", GetType(Int16)}
                                             })
 
+            CreateDataTable(DtDocumentUpdateTable, {
+                                 {"DocumentIdNo", GetType(Int16)},
+                                 {"DocumentNumber", GetType(String)},
+                                 {"EmployeeIdNo", GetType(Int16)},
+                                 {"ExpiryDate", GetType(Date)},
+                                 {"IdNo", GetType(Int32)},
+                                 {"IssueDate", GetType(Date)},
+                                 {"Image", GetType(Image)},
+                                 {"Sequence", GetType(Int16)}})
+
+
             CreateDataTable(DtEmpLeaveCreditUpdateTable, {
                                             {"AccumulatedLeave", GetType(Decimal)},
                                             {"Cumulative", GetType(Boolean)},
@@ -114,9 +137,10 @@ Namespace PresentationLayer.Presenters
             CreateDataSource("PayCycle", "PayCycleIdNo")
             CreateDataSource("PayGroup", "PayGroupIdNo")
             CreateDataSource("Employee", "SupervisorIdNo", "Supervisor=1")
-            CreateListDataSource("List", "Title","NameTitle")
+            CreateListDataSource("List", "Title", "NameTitle")
             CreateEnumData(Of PayRateUnitSelection)(View.Unit)
             CreateLookupData("PhoneType", "PhoneTypes")
+            CreateLookupData("Document", "Documents")
             CreateLookupData("Leave", "Leaves")
             CreateLookupData("PayElement", "DeductionsByName", "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
             CreateLookupData("PayElement", "EarningsByName", "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
@@ -153,6 +177,7 @@ Namespace PresentationLayer.Presenters
                 employeePayElements.AddRange(View.RegularEmployeeDeductions)
                 ViewToDataTables(employeePayElements, DtEmpPayElementInsertTable, DtEmpPayElementUpdateTable, AddressOf EmpPayElementFillData, AddressOf EmpPayElementFilter)
                 ViewToDataTables(View.EmployeePhones, DtPhoneInsertTable, DtPhoneUpdateTable, AddressOf PhoneFillData, AddressOf PhoneFilter)
+                ViewToDataTables(View.EmployeeDocuments, DtDocumentInsertTable, DtDocumentUpdateTable, AddressOf DocumentFillData, AddressOf DocumentFilter)
                 ViewToDataTables(View.EmployeeLeaveCredits, DtEmpLeaveCreditInsertTable, DtEmpLeaveCreditUpdateTable, AddressOf EmpLeaveCreditFillData, AddressOf EmpLeaveCreditFilter)
                 If IsEmpty(View.HiredDate) Then
                     View.HiredDate = Today()
@@ -166,6 +191,16 @@ Namespace PresentationLayer.Presenters
             workRow("PayElementIdNo") = itemDataView.PayElementIdNo
             workRow("Rate") = itemDataView.Rate
             workRow("Unit") = itemDataView.Unit
+            workRow("Sequence") = itemDataView.Sequence
+        End Sub
+
+        Private Sub DocumentFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
+            workRow("DocumentNumber") = itemDataView.DocumentNumber
+            workRow("DocumentIdNo") = itemDataView.DocumentIdNo
+            workRow("EmployeeIdNo") = View.IdNo
+            workRow("IssueDate") = itemDataView.IssueDate
+            workRow("ExpiryDate") = itemDataView.ExpiryDate
+            workRow("Image") = itemDataView.Image
             workRow("Sequence") = itemDataView.Sequence
         End Sub
 
@@ -196,6 +231,14 @@ Namespace PresentationLayer.Presenters
             Return False
         End Function
 
+        Public Function DocumentFilter(ByVal obj As EmployeeDocumentView) As Boolean
+            If obj.DocumentIdNo <> 0 Then
+                Return True
+            End If
+            Return False
+        End Function
+
+
         Public Function PhoneFilter(ByVal obj As EmployeePhoneView) As Boolean
             If obj.PhoneNumber <> "" Then
                 Return True
@@ -216,7 +259,10 @@ Namespace PresentationLayer.Presenters
             If retVal >= 0 Then
                 retVal = UpdateChildData(_employeePhoneService, DtPhoneUpdateTable, DtPhoneInsertTable, passedValue, "EmployeeIdNo")
                 If retVal >= 0 Then
-                    retVal = UpdateChildData(_employeeLeaveCreditService, DtEmpLeaveCreditUpdateTable, DtEmpLeaveCreditInsertTable, passedValue, "EmployeeIdNo")
+                    retVal = UpdateChildData(_employeeDocumentService, DtDocumentUpdateTable, DtDocumentInsertTable, passedValue, "EmployeeIdNo")
+                    If retVal >= 0 Then
+                        retVal = UpdateChildData(_employeeLeaveCreditService, DtEmpLeaveCreditUpdateTable, DtEmpLeaveCreditInsertTable, passedValue, "EmployeeIdNo")
+                    End If
                 End If
             End If
         End Sub
@@ -456,6 +502,8 @@ Namespace PresentationLayer.Presenters
                 Return True
                 'ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "ErDetails_View", "EmployeeIdNo") Then
                 '    Return True
+            ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "EmployeeDocument", "EmployeeIdNo") Then
+                Return True
             ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "ErJournal", "EmployeeIdNo") Then
                 Return True
             ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "HolidayTransferItem", "EmployeeIdNo") Then

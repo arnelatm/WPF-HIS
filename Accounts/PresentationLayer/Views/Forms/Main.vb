@@ -1189,6 +1189,10 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of CbcRetrievalEntry, Lab_InvoiceGroupPresenter(Of Lab_InvoiceGroupModel))()
             'RunForm(Of CbcRetrievalEntry)()
         End Sub
+
+        Private Sub ToolStripMenuItemDocuments_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDocuments.Click
+            RunForm(Of DocumentEntryTv, DocumentPresenter(Of DocumentModel))()
+        End Sub
     End Class
 
 End Namespace

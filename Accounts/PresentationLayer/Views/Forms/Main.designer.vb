@@ -117,6 +117,8 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemShiftSummaryEntry = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.ToolStripMenuItemClosePettyCashFund = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemLaboratory = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemCbcResultRetrieval = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemReports = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemStatementOfAccountsPayable = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemStatementOfAccountsReceivable = New System.Windows.Forms.ToolStripMenuItem()
@@ -191,8 +193,7 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemLaboratory = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemCbcResultRetrieval = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemDocuments = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.AccountsMenu.SuspendLayout
@@ -332,7 +333,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemGeneral
         '
-        Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemCategories, Me.ToolStripMenuItemItems, Me.ToolStripMenuItemDefaultFieldValues, Me.ToolStripMenuItemSalesDepositTypes})
+        Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemDocuments, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemCategories, Me.ToolStripMenuItemItems, Me.ToolStripMenuItemDefaultFieldValues, Me.ToolStripMenuItemSalesDepositTypes})
         Me.ToolStripMenuItemGeneral.Name = "ToolStripMenuItemGeneral"
         resources.ApplyResources(Me.ToolStripMenuItemGeneral, "ToolStripMenuItemGeneral")
         '
@@ -663,6 +664,17 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.ToolStripMenuItemClosePettyCashFund.Name = "ToolStripMenuItemClosePettyCashFund"
         resources.ApplyResources(Me.ToolStripMenuItemClosePettyCashFund, "ToolStripMenuItemClosePettyCashFund")
+        '
+        'ToolStripMenuItemLaboratory
+        '
+        Me.ToolStripMenuItemLaboratory.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCbcResultRetrieval})
+        Me.ToolStripMenuItemLaboratory.Name = "ToolStripMenuItemLaboratory"
+        resources.ApplyResources(Me.ToolStripMenuItemLaboratory, "ToolStripMenuItemLaboratory")
+        '
+        'ToolStripMenuItemCbcResultRetrieval
+        '
+        Me.ToolStripMenuItemCbcResultRetrieval.Name = "ToolStripMenuItemCbcResultRetrieval"
+        resources.ApplyResources(Me.ToolStripMenuItemCbcResultRetrieval, "ToolStripMenuItemCbcResultRetrieval")
         '
         'ToolStripMenuItemReports
         '
@@ -1050,16 +1062,10 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
-        'ToolStripMenuItemLaboratory
+        'ToolStripMenuItemDocuments
         '
-        Me.ToolStripMenuItemLaboratory.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCbcResultRetrieval})
-        Me.ToolStripMenuItemLaboratory.Name = "ToolStripMenuItemLaboratory"
-        resources.ApplyResources(Me.ToolStripMenuItemLaboratory, "ToolStripMenuItemLaboratory")
-        '
-        'ToolStripMenuItemCbcResultRetrieval
-        '
-        Me.ToolStripMenuItemCbcResultRetrieval.Name = "ToolStripMenuItemCbcResultRetrieval"
-        resources.ApplyResources(Me.ToolStripMenuItemCbcResultRetrieval, "ToolStripMenuItemCbcResultRetrieval")
+        Me.ToolStripMenuItemDocuments.Name = "ToolStripMenuItemDocuments"
+        resources.ApplyResources(Me.ToolStripMenuItemDocuments, "ToolStripMenuItemDocuments")
         '
         'Main
         '
@@ -1251,5 +1257,6 @@ End Sub
         Friend WithEvents ToolStripMenuItemEmployeeMedicalReport As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemLaboratory As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemCbcResultRetrieval As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemDocuments As ToolStripMenuItem
     End Class
 End NameSpace

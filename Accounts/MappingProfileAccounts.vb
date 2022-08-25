@@ -158,6 +158,8 @@ Public Class MappingProfileAccounts
         CreateMap(Of Lab_InvoiceGroupModel, ILab_InvoiceGroupView)().ReverseMap()
         CreateMap(Of Lab_InvoiceDetails, Lab_InvoiceDetailsModel)().ReverseMap()
         CreateMap(Of Lab_InvoiceDetailsModel, Lab_InvoiceDetailsView)().ReverseMap()
+        CreateMap(Of Document, DocumentModel)().ReverseMap()
+        CreateMap(Of DocumentModel, IDocumentView)().ReverseMap()
 
     End Sub
 
