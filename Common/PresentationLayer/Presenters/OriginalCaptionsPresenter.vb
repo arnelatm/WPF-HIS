@@ -5,7 +5,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Presenters
 
     Public Class OriginalCaptionsPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IOriginalCaptionsView, TM)
+        Inherits CommonPresenter(Of IOriginalCaptionsView, TM)
 
         Public Sub New(view As IOriginalCaptionsView)
             MyBase.New(view)

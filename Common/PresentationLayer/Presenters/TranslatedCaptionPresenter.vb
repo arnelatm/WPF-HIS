@@ -7,7 +7,7 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Presenters
 
     Public Class TranslatedCaptionPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of ITranslatedCaptionView, TM)
+        Inherits CommonPresenter(Of ITranslatedCaptionView, TM)
 
         Private Property Dac
 

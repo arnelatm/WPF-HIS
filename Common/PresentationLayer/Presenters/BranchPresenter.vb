@@ -4,7 +4,7 @@ Imports AATM.Common.ServiceLayer
 Namespace PresentationLayer.Presenters
 
     Public Class BranchPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IBranchView, TM)
+        Inherits CommonPresenter(Of IBranchView, TM)
 
         Public Sub New(view As IBranchView)
             MyBase.New(view)

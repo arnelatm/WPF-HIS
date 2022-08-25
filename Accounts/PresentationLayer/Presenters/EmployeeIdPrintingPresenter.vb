@@ -9,7 +9,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Presenters
 
     Public Class EmployeeIdPrintingPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IEmployeeIdListView, TM)
+        Inherits CommonPresenter(Of IEmployeeIdListView, TM)
 
         'Private ReadOnly _journalItemService
         'Private ReadOnly _EmployeeIdsService

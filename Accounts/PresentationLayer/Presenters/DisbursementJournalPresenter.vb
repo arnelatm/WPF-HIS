@@ -14,7 +14,7 @@ Imports AATM.PresentationLayer.Events
 Namespace PresentationLayer.Presenters
 
     Public Class DisbursementJournalPresenter(Of TM As New)
-        Inherits TransactionsPresenterNew(Of IDisbursementJournalView, TM)
+        Inherits TransactionsPresenter(Of IDisbursementJournalView, TM)
         Implements ISubscriber(Of DataChanged)
 
         Private ReadOnly _advancesToSupplierAccountIdNo As Int16
@@ -195,30 +195,6 @@ Namespace PresentationLayer.Presenters
                 End If
             Next
         End Sub
-
-        Public Overrides Function IsOkToEditRecord() As Boolean
-            Dim result As Boolean = True
-            Dim type As Type = View.GetType
-            Dim cPcClosed = CallByName(View, "PcClosed", CallType.Get)
-            If cPcClosed Then
-                Messaging.Show(True, "MsgEditingOfClosedPcRecordNotAllowed")
-                result = False
-            Else
-                If ReconciledEntriesExist(View.JournalItems, JournalCode) Then
-                    result = False
-                End If
-                'Dim reconciledDao = New ReconciledDao
-                'For Each item In View.JournalItems
-                '    'Dim reconciledData As Reconciled = reconciledDao.GetReconciledItem(JournalCode, item.IdNo)
-                '    If reconciledDao.IsItemReconciled(JournalCode, item.IdNo) Then
-                '        Messaging.Show(True, "MsgEditingOfReconciledNotAllowed")
-                '        result = False
-                '        Exit For
-                '    End If
-                'Next
-            End If
-            Return result
-        End Function
 
         'Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
         '    Dim type As Type = View.GetType
@@ -1061,30 +1037,6 @@ Namespace PresentationLayer.Presenters
             Return payee
         End Function
 
-        Public Overrides Function IsOkToDeleteRecord() As Boolean
-            Dim type As Type = View.GetType
-            Dim retVal As Boolean = True
-            If MyBase.IsOkToDeleteRecord() Then
-                If type.GetProperty("PcClosed") IsNot Nothing Then
-                    Dim cPosted = CallByName(View, "PcClosed", CallType.Get)
-                    If cPosted Then
-                        Dim description As String = ""
-                        description = Messaging.TranslateCaption("Petty Cash Replenishment")
-                        Messaging.ShowPmMessage(True, "MsgDeleteEntryNotAllowed", {"description", description})
-                        retVal = False
-                    End If
-                End If
-                If retVal Then
-                    If ReconciledEntriesExist(View.JournalItems, "CD") Then
-                        retVal = False
-                    End If
-                End If
-            Else
-                retVal = False
-            End If
-            Return retVal
-        End Function
-
         Private Sub OnBeforeMappingData(ByVal dataModel As Object) Handles MyBase.BeforeMappingData
             ' need to do this because the Mapping source part of this program maps the PayeeIdNo first before
             ' the DepositType so in order to override this part we need to retrieve the DepositType first
@@ -1135,6 +1087,54 @@ Namespace PresentationLayer.Presenters
         Private Sub UpdateVatAmount(data As List(Of JournalItemView))
             View.VatAmount = UpdateInputVatAmount(data)
         End Sub
+
+        Public Overrides Function IsOkToEditRecord() As Boolean
+            Dim result As Boolean = True
+            Dim type As Type = View.GetType
+            Dim cPcClosed = CallByName(View, "PcClosed", CallType.Get)
+            If cPcClosed Then
+                Messaging.Show(True, "MsgEditingOfClosedPcRecordNotAllowed")
+                result = False
+            Else
+                If ReconciledEntriesExist(View.JournalItems, JournalCode) Then
+                    result = False
+                End If
+                'Dim reconciledDao = New ReconciledDao
+                'For Each item In View.JournalItems
+                '    'Dim reconciledData As Reconciled = reconciledDao.GetReconciledItem(JournalCode, item.IdNo)
+                '    If reconciledDao.IsItemReconciled(JournalCode, item.IdNo) Then
+                '        Messaging.Show(True, "MsgEditingOfReconciledNotAllowed")
+                '        result = False
+                '        Exit For
+                '    End If
+                'Next
+            End If
+            Return result
+        End Function
+
+        Public Overrides Function IsOkToDeleteRecord() As Boolean
+            Dim type As Type = View.GetType
+            Dim retVal As Boolean = True
+            If MyBase.IsOkToDeleteRecord() Then
+                If type.GetProperty("PcClosed") IsNot Nothing Then
+                    Dim cPosted = CallByName(View, "PcClosed", CallType.Get)
+                    If cPosted Then
+                        Dim description As String = ""
+                        description = Messaging.TranslateCaption("Petty Cash Replenishment")
+                        Messaging.ShowPmMessage(True, "MsgDeleteEntryNotAllowed", {"description", description})
+                        retVal = False
+                    End If
+                End If
+                If retVal Then
+                    If ReconciledEntriesExist(View.JournalItems, "CD") Then
+                        retVal = False
+                    End If
+                End If
+            Else
+                retVal = False
+            End If
+            Return retVal
+        End Function
 
     End Class
 

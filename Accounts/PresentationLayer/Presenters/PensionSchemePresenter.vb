@@ -5,7 +5,7 @@ Imports AATM.Common.PresentationLayer.Presenters
 Namespace PresentationLayer.Presenters
 
     Public Class PensionSchemePresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IPensionSchemeView, TM)
+        Inherits CommonPresenter(Of IPensionSchemeView, TM)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable

@@ -7,7 +7,7 @@ Imports AATM.ServicesLayer.Services
 Namespace PresentationLayer.Presenters
 
     Public Class TranslatedMessagesPresenter
-        Inherits CommonPresenterNew(Of ITranslatedMessagesView, TranslatedMessagesModel)
+        Inherits CommonPresenter(Of ITranslatedMessagesView, TranslatedMessagesModel)
 
         Private Property Dac
 

@@ -4,7 +4,7 @@ Imports AATM.Common.ServiceLayer
 Namespace PresentationLayer.Presenters
 
     Public Class ReligionPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IReligionView, TM)
+        Inherits CommonPresenter(Of IReligionView, TM)
 
         Public Sub New(view As IReligionView)
             MyBase.New(view)

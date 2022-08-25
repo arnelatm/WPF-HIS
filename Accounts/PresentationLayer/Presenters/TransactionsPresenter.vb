@@ -6,25 +6,29 @@ Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
-    Public Class TransactionsPresenter(Of T As IView, TM As New)
-        Inherits AccountsPresenter(Of T, TM)
+    Public Class TransactionsPresenter(Of TV As IView, TM As New)
+        Inherits AccountsPresenter(Of TV, TM)
         Implements ISubscriber(Of ValidatingData)
 
-        Public Sub New(itemView As T)
+        Public Sub New(itemView As IView)
             MyBase.New(itemView)
         End Sub
 
         Public Overrides Function IsOkToDeleteRecord() As Boolean
-            Dim type As Type = View.GetType
             Dim retVal As Boolean = True
-            If type.GetProperty("Posted") IsNot Nothing Then
-                Dim cPosted = CallByName(View, "Posted", CallType.Get)
-                If cPosted Then
-                    Dim description As String = ""
-                    description = Messaging.TranslateCaption("Posted")
-                    Messaging.ShowParametrizedMessage(True, "MsgDeleteEntryNotAllowed", {"description", description})
-                    retVal = False
+            If MyBase.IsOkToDeleteRecord() Then
+                Dim type As Type = View.GetType
+                If type.GetProperty("Posted") IsNot Nothing Then
+                    Dim cPosted = CallByName(View, "Posted", CallType.Get)
+                    If cPosted Then
+                        Dim description As String = ""
+                        description = Messaging.TranslateCaption("Posted")
+                        Messaging.ShowPmMessage(True, "MsgDeleteEntryNotAllowed", {"description", description})
+                        retVal = False
+                    End If
                 End If
+            Else
+                retVal = False
             End If
             Return retVal
         End Function
@@ -87,7 +91,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function GetLocalizedPrefix(journalCode As String)
-            Return Model.GetField(journalCode, "JournalPrefix", "JournalCode", "JournalCodeAra")
+            Return Service.GetField(journalCode, "JournalPrefix", "JournalCode", "JournalCodeAra")
         End Function
 
     End Class

@@ -11,7 +11,7 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Presenters
 
     Public Class CashReceiptJournalPresenter(Of TM As New)
-        Inherits TransactionsPresenterNew(Of ICashReceiptJournalView, TM)
+        Inherits TransactionsPresenter(Of ICashReceiptJournalView, TM)
 
         Private ReadOnly _advancesToCustomerAccountIdNo As Int16
         Protected DtInsertTable As New DataTable

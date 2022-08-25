@@ -7,7 +7,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Presenters
 
     Public Class EmployeeAbsencePresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IEmployeeAbsenceView, TM)
+        Inherits CommonPresenter(Of IEmployeeAbsenceView, TM)
 
         Private ReadOnly _payrollService As New AccountsService("Payroll")
         Private ReadOnly _endDate As Date

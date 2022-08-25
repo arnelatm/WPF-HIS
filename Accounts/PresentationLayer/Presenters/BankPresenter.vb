@@ -6,7 +6,7 @@ Imports AATM.PresentationLayer.Presenters
 Namespace PresentationLayer.Presenters
 
     Public Class BankPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IBankView, TM)
+        Inherits CommonPresenter(Of IBankView, TM)
 
         Public Sub New(itemView As IBankView)
             MyBase.New(itemView)

@@ -11,7 +11,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Presenters
 
     Public Class PayrollDetailPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IPayrollDetailView, TM)
+        Inherits CommonPresenter(Of IPayrollDetailView, TM)
 
         Protected DtPayElementInsertTable As New DataTable
         Protected DtPayElementUpdateTable As New DataTable

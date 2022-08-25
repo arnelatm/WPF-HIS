@@ -6,7 +6,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Presenters
 
     Public Class PurchaseItemPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IPurchaseItemView, TM)
+        Inherits CommonPresenter(Of IPurchaseItemView, TM)
 
         Public Sub New(view As IPurchaseItemView)
             MyBase.New(view)

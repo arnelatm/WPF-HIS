@@ -9,7 +9,7 @@ Imports AATM.PresentationLayer.Events
 Namespace PresentationLayer.Presenters
 
     Public Class LeavePresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of ILeaveView, LeaveModel)
+        Inherits CommonPresenter(Of ILeaveView, LeaveModel)
         Implements ISubscriber(Of AATM.PresentationLayer.Events.DataChanged)
 
         Public Sub New(view As ILeaveView)

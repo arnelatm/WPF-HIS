@@ -5,7 +5,7 @@ Imports AATM.Common.PresentationLayer.Presenters
 Namespace PresentationLayer.Presenters
 
     Public Class PensionProviderPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IPensionProviderView, TM)
+        Inherits CommonPresenter(Of IPensionProviderView, TM)
 
         Public Sub New(view As IPensionProviderView)
             MyBase.New(view)

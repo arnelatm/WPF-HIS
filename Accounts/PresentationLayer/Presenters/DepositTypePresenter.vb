@@ -5,7 +5,7 @@ Imports AATM.Common.PresentationLayer.Presenters
 Namespace PresentationLayer.Presenters
 
     Public Class DepositTypePresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IDepositTypeView, TM)
+        Inherits CommonPresenter(Of IDepositTypeView, TM)
 
         Public Sub New(view As IDepositTypeView)
             MyBase.New(view)

@@ -8,7 +8,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Presenters
 
     Public Class DesignationPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IDesignationView, TM)
+        Inherits CommonPresenter(Of IDesignationView, TM)
 
         Public ParentViewList As List(Of TM)
 

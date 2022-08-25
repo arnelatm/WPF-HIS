@@ -6,7 +6,7 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Presenters
 
     Public Class DistributionSchemePresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IDistributionSchemeView, TM)
+        Inherits CommonPresenter(Of IDistributionSchemeView, TM)
 
         Public ParentViewList As List(Of TM)
         Protected DtInsertTable As New DataTable

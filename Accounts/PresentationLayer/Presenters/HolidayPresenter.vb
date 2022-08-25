@@ -6,7 +6,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Presenters
 
     Public Class HolidayPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IHolidayView, TM)
+        Inherits CommonPresenter(Of IHolidayView, TM)
 
         Public Sub New(itemView As IHolidayView)
             MyBase.New(itemView)

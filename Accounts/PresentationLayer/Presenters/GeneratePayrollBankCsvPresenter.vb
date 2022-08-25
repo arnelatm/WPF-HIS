@@ -10,7 +10,7 @@ Imports Microsoft.Office.Interop
 Namespace PresentationLayer.Presenters
 
     Public Class GeneratePayrollBankCsvPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IPayrollView, TM)
+        Inherits CommonPresenter(Of IPayrollView, TM)
 
         Private ReadOnly _nfi As NumberFormatInfo
 
