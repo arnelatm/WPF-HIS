@@ -47,10 +47,12 @@ Namespace PresentationLayer.Views.Interfaces
         Property SponsorType As Char
         Property RegularEmployeeDeductions As List(Of EmployeePayElementView)
         Property RegularEmployeeEarnings As List(Of EmployeePayElementView)
+        Property EmployeeDocuments As List(Of EmployeeDocumentView)
         Property EmployeePhones As List(Of EmployeePhoneView)
         Property EmployeeLeaveCredits As List(Of EmployeeLeaveCreditView)
         Property Picture As Image
         Property PhoneTypes As List(Of Lookup.LookupData)
+        Property Documents As List(Of Lookup.LookupData)
         Property Leaves As List(Of Lookup.LookupData)
         Property DeductionsByName As List(Of Lookup.LookupData)
         Property EarningsByName As List(Of Lookup.LookupData)

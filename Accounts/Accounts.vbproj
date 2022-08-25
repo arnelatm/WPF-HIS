@@ -203,6 +203,8 @@
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
+    <Compile Include="BusinessLayer\Document.vb" />
+    <Compile Include="BusinessLayer\EmployeeDocument.vb" />
     <Compile Include="BusinessLayer\HolidayAvailmentApprovalHistory.vb" />
     <Compile Include="BusinessLayer\HolidayTransferAvailment.vb" />
     <Compile Include="BusinessLayer\HolidayTransferItem.vb" />
@@ -273,9 +275,11 @@
     <Compile Include="BusinessLayer\Supplier.vb" />
     <Compile Include="ContainerConfig.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
+    <Compile Include="DataLayer\AdoNet\DocumentDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeLeaveDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeLeaveApprovalDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeLeaveApprovalItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\EmployeeDocumentDao.vb" />
     <Compile Include="DataLayer\AdoNet\HolidayTransferDao.vb" />
     <Compile Include="DataLayer\AdoNet\HolidayTransferItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\Lab_InvoiceGroupDao.vb" />
@@ -368,7 +372,9 @@
       <DependentUpon>NewSettings.settings</DependentUpon>
     </Compile>
     <Compile Include="OneTimeRun.vb" />
+    <Compile Include="PresentationLayer\Models\DocumentModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeeIdModel.vb" />
+    <Compile Include="PresentationLayer\Models\EmployeeDocumentModel.vb" />
     <Compile Include="PresentationLayer\Models\HolidayAvailmentApprovalHistoryModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeeLeaveApprovalItemModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeeLeaveApprovalHistoryModel.vb" />
@@ -414,6 +420,7 @@
     <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CustomerPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\DocumentPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\Lab_InvoiceGroupPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\ItemDetailsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ReportSelectorPresenter.vb" />
@@ -448,6 +455,7 @@
     <Compile Include="PresentationLayer\Views\EmployeeLeaveApprovalItemView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeLeaveCreditView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeePayElementView.vb" />
+    <Compile Include="PresentationLayer\Views\EmployeeDocumentView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\ApJournalEntry.designer.vb">
       <DependentUpon>ApJournalEntry.vb</DependentUpon>
     </Compile>
@@ -464,6 +472,12 @@
       <DependentUpon>CustomerEntryTv.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\CustomerEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\DocumentEntryTv.Designer.vb">
+      <DependentUpon>DocumentEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\DocumentEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTv.designer.vb">
@@ -688,6 +702,8 @@
     <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Interfaces\IDocumentView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeDocumentView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\ILab_InvoiceGroupView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IItemDetailsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IHolidayAvailmentApprovalHistoryView.vb" />
@@ -1305,6 +1321,9 @@
       <DependentUpon>CheckPrinter.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\DocumentEntryTv.resx">
+      <DependentUpon>DocumentEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\DisbursementJournalEntry.resx">
       <DependentUpon>DisbursementJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
@@ -1681,8 +1700,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app Ispadmin2.config" />
+    <None Include="app.config" />
     <None Include="app-Isp-Server.config" />
     <None Include="appIspadmin2.config" />
     <None Include="app-MarceloPC.config" />
@@ -1710,6 +1729,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EarningModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EarningSummaryModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeDeductionModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeDocumentModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeEarningModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeIdModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeLeaveApprovalHistoryModel.datasource" />

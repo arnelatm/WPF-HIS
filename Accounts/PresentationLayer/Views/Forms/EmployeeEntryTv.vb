@@ -12,6 +12,7 @@ Namespace PresentationLayer.Views.Forms
         Private _regularEmployeeDeductions As List(Of EmployeePayElementView)
         Private _regularEmployeeEarnings As List(Of EmployeePayElementView)
         Private _employeeLeaveCredits As List(Of EmployeeLeaveCreditView)
+        Private _employeeDocuments As List(Of EmployeeDocumentView)
         Private _employeePhones As List(Of EmployeePhoneView)
 
         'Private _unit As List(Of Lookup.LookupData)
@@ -37,6 +38,7 @@ Namespace PresentationLayer.Views.Forms
 
 #Region "Fields"
 
+        Public Property Documents As List(Of Lookup.LookupData) Implements IEmployeeView.Documents
         Public Property PhoneTypes As List(Of Lookup.LookupData) Implements IEmployeeView.PhoneTypes
         Public Property Leaves As List(Of Lookup.LookupData) Implements IEmployeeView.Leaves
         Public Property DeductionsByName As List(Of Lookup.LookupData) Implements IEmployeeView.DeductionsByName
@@ -202,6 +204,16 @@ Namespace PresentationLayer.Views.Forms
             Set
                 _employeePhones = Value
                 BindEmployeePhone()
+            End Set
+        End Property
+
+        Public Property EmployeeDocuments As List(Of EmployeeDocumentView) Implements IEmployeeView.EmployeeDocuments
+            Get
+                Return _employeeDocuments
+            End Get
+            Set
+                _employeeDocuments = Value
+                BindEmployeeDocument()
             End Set
         End Property
 
@@ -609,6 +621,28 @@ Namespace PresentationLayer.Views.Forms
                 dgvFullPhoneAra.Visible = False
                 dgvFullPhone.Visible = True
             End If
+            'ResumeLayout()
+        End Sub
+
+
+        Private Sub BindEmployeeDocument()
+            'SuspendLayout()
+            bsDocuments.DataSource = Nothing
+            DataGridViewDocuments.Refresh()
+            bsDocuments.DataSource = EmployeeDocuments
+            bsDocuments.AllowNew = True
+            With DataGridViewDocuments
+                .Refresh()
+                .AutoGenerateColumns = False
+                .DataSource = bsDocuments
+                .Refresh()
+            End With
+            With DataGridViewDocuments.Columns
+                dgvDocumentIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvDocumentIdNo.DataSource = Documents
+                dgvDocumentIdNo.DisplayMember = "Name"
+                dgvDocumentIdNo.ValueMember = "IdNo"
+            End With
             'ResumeLayout()
         End Sub
 

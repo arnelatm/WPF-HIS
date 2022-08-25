@@ -59,6 +59,14 @@
         Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle43 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle37 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle38 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle39 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle40 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle41 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle42 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.bsPhones = New System.Windows.Forms.BindingSource(Me.components)
         Me.bsEarnings = New System.Windows.Forms.BindingSource(Me.components)
         Me.bsDeductions = New System.Windows.Forms.BindingSource(Me.components)
@@ -162,6 +170,8 @@
         Me.cboPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblDutyHours = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDutyHours = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.lblActualDutyHours = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtActualDutyHours = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.tbpEarnings = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
         Me.DataGridViewEarnings = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.dgvSequenceEarning = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -206,8 +216,17 @@
         Me.dgvEmployeeIdNoLeaveCredits = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvIdNoLeaveCredits = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsLeaveCredits = New System.Windows.Forms.BindingSource(Me.components)
-        Me.lblActualDutyHours = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtActualDutyHours = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.tbpDocuments = New System.Windows.Forms.TabPage()
+        Me.DataGridViewDocuments = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.bsDocuments = New System.Windows.Forms.BindingSource(Me.components)
+        Me.dgvDocumentSequence = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dgvDocumentIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+        Me.dgvNumber = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.dgvIssueDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.dgvExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.dgvImage = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.IdNoDataGridViewTextBoxColumn1 = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -238,6 +257,9 @@
         Me.TabPage1.SuspendLayout
         CType(Me.DataGridViewLeaveCredits,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.bsLeaveCredits,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.tbpDocuments.SuspendLayout
+        CType(Me.DataGridViewDocuments,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.bsDocuments,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'SplitContainer1
@@ -537,6 +559,7 @@
         Me.tbcEmployee.Controls.Add(Me.tbpDeductions)
         Me.tbcEmployee.Controls.Add(Me.tbpPhones)
         Me.tbcEmployee.Controls.Add(Me.TabPage1)
+        Me.tbcEmployee.Controls.Add(Me.tbpDocuments)
         Me.tbcEmployee.HotTrack = true
         Me.tbcEmployee.Location = New System.Drawing.Point(3, 79)
         Me.tbcEmployee.Name = "tbcEmployee"
@@ -2684,6 +2707,54 @@
         Me.txtDutyHours.Translatable = false
         Me.txtDutyHours.ValueIsNumeric = true
         '
+        'lblActualDutyHours
+        '
+        Me.lblActualDutyHours.DisplayOnly = true
+        Me.lblActualDutyHours.EditingMode = false
+        Me.lblActualDutyHours.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.lblActualDutyHours.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblActualDutyHours.Location = New System.Drawing.Point(4, 233)
+        Me.lblActualDutyHours.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblActualDutyHours.Name = "lblActualDutyHours"
+        Me.lblActualDutyHours.SecurityKey = "EmployeePayInfo"
+        Me.lblActualDutyHours.Size = New System.Drawing.Size(185, 23)
+        Me.lblActualDutyHours.TabIndex = 293
+        Me.lblActualDutyHours.Text = "Actual Duty Hours"
+        Me.lblActualDutyHours.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblActualDutyHours.Translatable = true
+        '
+        'txtActualDutyHours
+        '
+        Me.txtActualDutyHours.BackColor = System.Drawing.Color.White
+        Me.txtActualDutyHours.BegFindValue = Nothing
+        Me.txtActualDutyHours.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtActualDutyHours.ComputedValue = false
+        Me.txtActualDutyHours.CustomFormat = Nothing
+        Me.txtActualDutyHours.DataBoundControl = true
+        Me.txtActualDutyHours.EditingMode = false
+        Me.txtActualDutyHours.EndFindValue = Nothing
+        Me.txtActualDutyHours.FieldDescription = Nothing
+        Me.txtActualDutyHours.FieldName = Nothing
+        Me.txtActualDutyHours.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtActualDutyHours.FindEnabled = true
+        Me.floPayroll.SetFlowBreak(Me.txtActualDutyHours, true)
+        Me.txtActualDutyHours.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.txtActualDutyHours.ForeColor = System.Drawing.Color.Black
+        Me.txtActualDutyHours.LinkedLabel = Me.lblActualDutyHours
+        Me.txtActualDutyHours.Location = New System.Drawing.Point(191, 233)
+        Me.txtActualDutyHours.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtActualDutyHours.MaximumValue = Nothing
+        Me.txtActualDutyHours.MinimumValue = Nothing
+        Me.txtActualDutyHours.Name = "txtActualDutyHours"
+        Me.txtActualDutyHours.OldValue = Nothing
+        Me.txtActualDutyHours.ReadOnly = true
+        Me.txtActualDutyHours.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.txtActualDutyHours.SecurityKey = "EmployeePayInfo"
+        Me.txtActualDutyHours.Size = New System.Drawing.Size(93, 23)
+        Me.txtActualDutyHours.TabIndex = 294
+        Me.txtActualDutyHours.Translatable = false
+        Me.txtActualDutyHours.ValueIsNumeric = true
+        '
         'tbpEarnings
         '
         Me.tbpEarnings.BackgroundImage = CType(resources.GetObject("tbpEarnings.BackgroundImage"),System.Drawing.Image)
@@ -3444,53 +3515,202 @@
         '
         Me.bsLeaveCredits.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeLeaveCreditModel)
         '
-        'lblActualDutyHours
+        'tbpDocuments
         '
-        Me.lblActualDutyHours.DisplayOnly = true
-        Me.lblActualDutyHours.EditingMode = false
-        Me.lblActualDutyHours.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblActualDutyHours.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblActualDutyHours.Location = New System.Drawing.Point(4, 233)
-        Me.lblActualDutyHours.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblActualDutyHours.Name = "lblActualDutyHours"
-        Me.lblActualDutyHours.SecurityKey = "EmployeePayInfo"
-        Me.lblActualDutyHours.Size = New System.Drawing.Size(185, 23)
-        Me.lblActualDutyHours.TabIndex = 293
-        Me.lblActualDutyHours.Text = "Actual Duty Hours"
-        Me.lblActualDutyHours.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblActualDutyHours.Translatable = true
+        Me.tbpDocuments.Controls.Add(Me.DataGridViewDocuments)
+        Me.tbpDocuments.Location = New System.Drawing.Point(4, 22)
+        Me.tbpDocuments.Name = "tbpDocuments"
+        Me.tbpDocuments.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpDocuments.Size = New System.Drawing.Size(669, 361)
+        Me.tbpDocuments.TabIndex = 8
+        Me.tbpDocuments.Text = "Documents"
+        Me.tbpDocuments.UseVisualStyleBackColor = true
         '
-        'txtActualDutyHours
+        'DataGridViewDocuments
         '
-        Me.txtActualDutyHours.BackColor = System.Drawing.Color.White
-        Me.txtActualDutyHours.BegFindValue = Nothing
-        Me.txtActualDutyHours.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtActualDutyHours.ComputedValue = false
-        Me.txtActualDutyHours.CustomFormat = Nothing
-        Me.txtActualDutyHours.DataBoundControl = true
-        Me.txtActualDutyHours.EditingMode = false
-        Me.txtActualDutyHours.EndFindValue = Nothing
-        Me.txtActualDutyHours.FieldDescription = Nothing
-        Me.txtActualDutyHours.FieldName = Nothing
-        Me.txtActualDutyHours.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtActualDutyHours.FindEnabled = true
-        Me.floPayroll.SetFlowBreak(Me.txtActualDutyHours, true)
-        Me.txtActualDutyHours.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtActualDutyHours.ForeColor = System.Drawing.Color.Black
-        Me.txtActualDutyHours.LinkedLabel = Me.lblActualDutyHours
-        Me.txtActualDutyHours.Location = New System.Drawing.Point(191, 233)
-        Me.txtActualDutyHours.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtActualDutyHours.MaximumValue = Nothing
-        Me.txtActualDutyHours.MinimumValue = Nothing
-        Me.txtActualDutyHours.Name = "txtActualDutyHours"
-        Me.txtActualDutyHours.OldValue = Nothing
-        Me.txtActualDutyHours.ReadOnly = true
-        Me.txtActualDutyHours.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtActualDutyHours.SecurityKey = "EmployeePayInfo"
-        Me.txtActualDutyHours.Size = New System.Drawing.Size(93, 23)
-        Me.txtActualDutyHours.TabIndex = 294
-        Me.txtActualDutyHours.Translatable = false
-        Me.txtActualDutyHours.ValueIsNumeric = true
+        DataGridViewCellStyle36.BackColor = System.Drawing.Color.FloralWhite
+        Me.DataGridViewDocuments.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle36
+        Me.DataGridViewDocuments.AutoGenerateColumns = false
+        Me.DataGridViewDocuments.BegFindValue = Nothing
+        Me.DataGridViewDocuments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridViewDocuments.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvDocumentSequence, Me.dgvDocumentIdNo, Me.dgvNumber, Me.dgvIssueDate, Me.dgvExpiryDate, Me.dgvImage, Me.dgvEmployeeIdNo, Me.IdNoDataGridViewTextBoxColumn1})
+        Me.DataGridViewDocuments.DataSource = Me.bsDocuments
+        DataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle43.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle43.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle43.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle43.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle43.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle43.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewDocuments.DefaultCellStyle = DataGridViewCellStyle43
+        Me.DataGridViewDocuments.DgvFooter = Nothing
+        Me.DataGridViewDocuments.DisplayOnly = false
+        Me.DataGridViewDocuments.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridViewDocuments.Ea = Nothing
+        Me.DataGridViewDocuments.EditingMode = false
+        Me.DataGridViewDocuments.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+        Me.DataGridViewDocuments.EndFindValue = Nothing
+        Me.DataGridViewDocuments.FieldDescription = Nothing
+        Me.DataGridViewDocuments.FieldName = Nothing
+        Me.DataGridViewDocuments.FieldsDictionary = Nothing
+        Me.DataGridViewDocuments.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.DataGridViewDocuments.FindEnabled = false
+        Me.DataGridViewDocuments.FirstRowDeletionEnabled = true
+        Me.DataGridViewDocuments.FirstRowInsertionEnabled = true
+        Me.DataGridViewDocuments.IgnoreCase = false
+        Me.DataGridViewDocuments.IsDirty = false
+        Me.DataGridViewDocuments.Location = New System.Drawing.Point(3, 3)
+        Me.DataGridViewDocuments.Name = "DataGridViewDocuments"
+        Me.DataGridViewDocuments.ReadOnly = true
+        Me.DataGridViewDocuments.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.DataGridViewDocuments.SecurityKey = ""
+        Me.DataGridViewDocuments.SequenceColumn = "dgvSequenceLeaveCredits"
+        Me.DataGridViewDocuments.SequenceFieldName = "Sequence"
+        Me.DataGridViewDocuments.ShowCellErrors = false
+        Me.DataGridViewDocuments.ShowFooter = false
+        Me.DataGridViewDocuments.ShowInsertColumnWhenEditing = true
+        Me.DataGridViewDocuments.Size = New System.Drawing.Size(663, 355)
+        Me.DataGridViewDocuments.TabIndex = 1
+        Me.DataGridViewDocuments.Translatable = true
+        '
+        'bsDocuments
+        '
+        Me.bsDocuments.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeDocumentModel)
+        '
+        'dgvDocumentSequence
+        '
+        Me.dgvDocumentSequence.DataPropertyName = "EmployeeIdNo"
+        Me.dgvDocumentSequence.HeaderText = "Seq"
+        Me.dgvDocumentSequence.Name = "dgvDocumentSequence"
+        Me.dgvDocumentSequence.ReadOnly = true
+        Me.dgvDocumentSequence.Width = 45
+        '
+        'dgvDocumentIdNo
+        '
+        Me.dgvDocumentIdNo.AutoComplete = false
+        Me.dgvDocumentIdNo.DataPropertyName = "DocumentIdNo"
+        DataGridViewCellStyle37.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle37.ForeColor = System.Drawing.Color.Black
+        Me.dgvDocumentIdNo.DefaultCellStyle = DataGridViewCellStyle37
+        Me.dgvDocumentIdNo.EditingMode = false
+        Me.dgvDocumentIdNo.HeaderText = "DocumentIdNo"
+        Me.dgvDocumentIdNo.Name = "dgvDocumentIdNo"
+        Me.dgvDocumentIdNo.ReadOnly = true
+        Me.dgvDocumentIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvDocumentIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.dgvDocumentIdNo.Translatable = false
+        '
+        'dgvNumber
+        '
+        Me.dgvNumber.BegFindValue = Nothing
+        Me.dgvNumber.DataPropertyName = "Number"
+        DataGridViewCellStyle38.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle38.ForeColor = System.Drawing.Color.Black
+        Me.dgvNumber.DefaultCellStyle = DataGridViewCellStyle38
+        Me.dgvNumber.EditingMode = false
+        Me.dgvNumber.EndFindValue = Nothing
+        Me.dgvNumber.FieldDescription = Nothing
+        Me.dgvNumber.FieldName = Nothing
+        Me.dgvNumber.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvNumber.FindEnabled = false
+        Me.dgvNumber.HeaderText = "Number"
+        Me.dgvNumber.IgnoreCase = false
+        Me.dgvNumber.Name = "dgvNumber"
+        Me.dgvNumber.ReadOnly = true
+        Me.dgvNumber.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvNumber.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvNumber.Translatable = false
+        '
+        'dgvIssueDate
+        '
+        Me.dgvIssueDate.BegFindValue = Nothing
+        Me.dgvIssueDate.DataPropertyName = "IssueDate"
+        DataGridViewCellStyle39.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle39.ForeColor = System.Drawing.Color.Black
+        Me.dgvIssueDate.DefaultCellStyle = DataGridViewCellStyle39
+        Me.dgvIssueDate.EditingMode = false
+        Me.dgvIssueDate.EndFindValue = Nothing
+        Me.dgvIssueDate.FieldDescription = Nothing
+        Me.dgvIssueDate.FieldName = Nothing
+        Me.dgvIssueDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvIssueDate.FindEnabled = false
+        Me.dgvIssueDate.HeaderText = "IssueDate"
+        Me.dgvIssueDate.IgnoreCase = false
+        Me.dgvIssueDate.Name = "dgvIssueDate"
+        Me.dgvIssueDate.ReadOnly = true
+        Me.dgvIssueDate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvIssueDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvIssueDate.Translatable = false
+        '
+        'dgvExpiryDate
+        '
+        Me.dgvExpiryDate.BegFindValue = Nothing
+        Me.dgvExpiryDate.DataPropertyName = "ExpiryDate"
+        DataGridViewCellStyle40.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle40.ForeColor = System.Drawing.Color.Black
+        Me.dgvExpiryDate.DefaultCellStyle = DataGridViewCellStyle40
+        Me.dgvExpiryDate.EditingMode = false
+        Me.dgvExpiryDate.EndFindValue = Nothing
+        Me.dgvExpiryDate.FieldDescription = Nothing
+        Me.dgvExpiryDate.FieldName = Nothing
+        Me.dgvExpiryDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvExpiryDate.FindEnabled = false
+        Me.dgvExpiryDate.HeaderText = "ExpiryDate"
+        Me.dgvExpiryDate.IgnoreCase = false
+        Me.dgvExpiryDate.Name = "dgvExpiryDate"
+        Me.dgvExpiryDate.ReadOnly = true
+        Me.dgvExpiryDate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvExpiryDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvExpiryDate.Translatable = false
+        '
+        'dgvImage
+        '
+        Me.dgvImage.DataPropertyName = "Image"
+        Me.dgvImage.HeaderText = "Image"
+        Me.dgvImage.Name = "dgvImage"
+        Me.dgvImage.ReadOnly = true
+        Me.dgvImage.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        '
+        'dgvEmployeeIdNo
+        '
+        Me.dgvEmployeeIdNo.BegFindValue = Nothing
+        Me.dgvEmployeeIdNo.DataPropertyName = "EmployeeIdNo"
+        DataGridViewCellStyle41.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle41.ForeColor = System.Drawing.Color.Black
+        Me.dgvEmployeeIdNo.DefaultCellStyle = DataGridViewCellStyle41
+        Me.dgvEmployeeIdNo.EditingMode = false
+        Me.dgvEmployeeIdNo.EndFindValue = Nothing
+        Me.dgvEmployeeIdNo.FieldDescription = Nothing
+        Me.dgvEmployeeIdNo.FieldName = Nothing
+        Me.dgvEmployeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvEmployeeIdNo.FindEnabled = false
+        Me.dgvEmployeeIdNo.HeaderText = "EmployeeIdNo"
+        Me.dgvEmployeeIdNo.IgnoreCase = false
+        Me.dgvEmployeeIdNo.Name = "dgvEmployeeIdNo"
+        Me.dgvEmployeeIdNo.ReadOnly = true
+        Me.dgvEmployeeIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvEmployeeIdNo.Translatable = false
+        '
+        'IdNoDataGridViewTextBoxColumn1
+        '
+        Me.IdNoDataGridViewTextBoxColumn1.BegFindValue = Nothing
+        Me.IdNoDataGridViewTextBoxColumn1.DataPropertyName = "IdNo"
+        DataGridViewCellStyle42.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle42.ForeColor = System.Drawing.Color.Black
+        Me.IdNoDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle42
+        Me.IdNoDataGridViewTextBoxColumn1.EditingMode = false
+        Me.IdNoDataGridViewTextBoxColumn1.EndFindValue = Nothing
+        Me.IdNoDataGridViewTextBoxColumn1.FieldDescription = Nothing
+        Me.IdNoDataGridViewTextBoxColumn1.FieldName = Nothing
+        Me.IdNoDataGridViewTextBoxColumn1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.IdNoDataGridViewTextBoxColumn1.FindEnabled = false
+        Me.IdNoDataGridViewTextBoxColumn1.HeaderText = "IdNo"
+        Me.IdNoDataGridViewTextBoxColumn1.IgnoreCase = false
+        Me.IdNoDataGridViewTextBoxColumn1.Name = "IdNoDataGridViewTextBoxColumn1"
+        Me.IdNoDataGridViewTextBoxColumn1.ReadOnly = true
+        Me.IdNoDataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.IdNoDataGridViewTextBoxColumn1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.IdNoDataGridViewTextBoxColumn1.Translatable = false
         '
         'EmployeeEntryTv
         '
@@ -3535,6 +3755,9 @@
         Me.TabPage1.ResumeLayout(false)
         CType(Me.DataGridViewLeaveCredits,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.bsLeaveCredits,System.ComponentModel.ISupportInitialize).EndInit
+        Me.tbpDocuments.ResumeLayout(false)
+        CType(Me.DataGridViewDocuments,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.bsDocuments,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -3689,5 +3912,20 @@ End Sub
         Friend WithEvents cboTitle As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents lblActualDutyHours As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtActualDutyHours As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents tbpDocuments As TabPage
+        Friend WithEvents DataGridViewDocuments As Libraries.CBaseControlsLibrary.CDataGridView
+        Friend WithEvents bsDocuments As BindingSource
+        Friend WithEvents dgvEmployeeDocumentIdNo As DataGridViewTextBoxColumn
+        Friend WithEvents dgvDocumentNote As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents IdNo As DataGridViewTextBoxColumn
+        Friend WithEvents Notes As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents dgvDocumentSequence As DataGridViewTextBoxColumn
+        Friend WithEvents dgvDocumentIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
+        Friend WithEvents dgvNumber As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents dgvIssueDate As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents dgvExpiryDate As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents dgvImage As DataGridViewImageColumn
+        Friend WithEvents dgvEmployeeIdNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents IdNoDataGridViewTextBoxColumn1 As Libraries.CBaseControlsLibrary.CDgvTextColumn
     End Class
 End NameSpace
