@@ -54,7 +54,7 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Sub CreateDataSources()
             CreateLookupData("Account", "AccountsByCode", "DetailAccount=1")
             CreateLookupData("RevCostCenter", "RevCostCentersByCode")
-            CreateLookupData("Payee_View","PayeeByCode")
+            CreateLookupData("Payee_View", "PayeeByCode")
             CreateLookupData("Payee_View", "CustomerByCode", "PayeeType = 'C'")
             CreateLookupData("Payee_View", "SupplierByCode", "PayeeType = 'S'")
             CreateLookupData("Payee_View", "EmployeeByCode", "PayeeType = 'E'")
@@ -178,6 +178,17 @@ Namespace PresentationLayer.Presenters
                 End If
             Next
             Return result
+        End Function
+
+
+        Public Overrides Function IsOkToDeleteRecord() As Boolean
+            Dim retValue As Boolean = True
+            If MyBase.IsOkToDeleteRecord Then
+                If ReconciledEntriesExist(View.JournalItems, "GJ") Then
+                    retValue = False
+                End If
+            End If
+            Return retValue
         End Function
 
     End Class
