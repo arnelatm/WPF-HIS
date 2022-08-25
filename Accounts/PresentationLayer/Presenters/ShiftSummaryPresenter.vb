@@ -9,7 +9,7 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Presenters
 
     Public Class ShiftSummaryPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IShiftSummaryView, TM)
+        Inherits CommonPresenter(Of IShiftSummaryView, TM)
 
 
         Public userCanEdit As Boolean = False

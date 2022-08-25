@@ -11,7 +11,7 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Presenters
 
     Public Class AccountsPresenter(Of TV As AATM.PresentationLayer.Views.IView, TM As New)
-        Inherits CommonPresenterNew(Of TV, TM)
+        Inherits CommonPresenter(Of TV, TM)
 
         Public Sub New()
             MyBase.New()

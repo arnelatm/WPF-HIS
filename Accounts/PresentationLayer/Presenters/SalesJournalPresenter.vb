@@ -13,7 +13,7 @@ Imports AATM.PresentationLayer.Events
 Namespace PresentationLayer.Presenters
 
     Public Class SalesJournalPresenter(Of TM As New)
-        Inherits TransactionsPresenterNew(Of ISalesJournalView, TM)
+        Inherits TransactionsPresenter(Of ISalesJournalView, TM)
         Implements ISubscriber(Of DataChanged)
 
         Protected DtInsertTable As New DataTable
@@ -342,6 +342,20 @@ Namespace PresentationLayer.Presenters
                 End If
             Next
             Return result
+        End Function
+
+        Public Overrides Function IsOkToDeleteRecord() As Boolean
+            Dim retVal As Boolean = True
+            If MyBase.IsOkToDeleteRecord() Then
+                If retVal Then
+                    If ReconciledEntriesExist(View.JournalItems, "SJ") Then
+                        retVal = False
+                    End If
+                End If
+            Else
+                retVal = False
+            End If
+            Return retVal
         End Function
 
     End Class

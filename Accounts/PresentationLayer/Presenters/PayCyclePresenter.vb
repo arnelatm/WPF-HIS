@@ -5,7 +5,7 @@ Imports AATM.Common.PresentationLayer.Presenters
 Namespace PresentationLayer.Presenters
 
     Public Class PayCyclePresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IPayCycleView, TM)
+        Inherits CommonPresenter(Of IPayCycleView, TM)
 
         Public Sub New(view As IPayCycleView)
             MyBase.New(view)

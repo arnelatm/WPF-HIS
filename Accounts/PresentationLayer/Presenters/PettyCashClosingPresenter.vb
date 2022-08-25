@@ -8,7 +8,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Presenters
 
     Public Class PettyCashClosingPresenter(Of TM As New)
-        Inherits TransactionsPresenterNew(Of IPettyCashClosingView, TM)
+        Inherits TransactionsPresenter(Of IPettyCashClosingView, TM)
 
         Private _jiFooter As DgvFooter
         Protected DtInsertTable As New DataTable

@@ -11,7 +11,7 @@ Imports System.Reflection
 Namespace PresentationLayer.Presenters
 
     Public Class ReportSelectorPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IReportSelectorView, TM)
+        Inherits CommonPresenter(Of IReportSelectorView, TM)
 
         Private ReadOnly _reportGroup As String
 

@@ -4,7 +4,7 @@ Imports AATM.Common.ServiceLayer
 Namespace PresentationLayer.Presenters
 
     Public Class PhoneTypePresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IPhoneTypeView, TM)
+        Inherits CommonPresenter(Of IPhoneTypeView, TM)
 
         Public Sub New(itemView As IPhoneTypeView)
             MyBase.New(itemView)

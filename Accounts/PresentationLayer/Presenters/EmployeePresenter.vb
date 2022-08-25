@@ -13,7 +13,7 @@ Imports AATM.PresentationLayer.Events
 Namespace PresentationLayer.Presenters
 
     Public Class EmployeePresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IEmployeeView, TM)
+        Inherits CommonPresenter(Of IEmployeeView, TM)
         Implements ISubscriber(Of PayCycleIdNoChanged),
                    ISubscriber(Of DataChanged)
 

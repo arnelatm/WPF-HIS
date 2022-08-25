@@ -5,7 +5,7 @@ Imports AATM.Common.PresentationLayer.Presenters
 Namespace PresentationLayer.Presenters
 
     Public Class JournalPrefixPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IJournalPrefixView, TM)
+        Inherits CommonPresenter(Of IJournalPrefixView, TM)
 
         Public Sub New(view As IJournalPrefixView)
             MyBase.New(view)

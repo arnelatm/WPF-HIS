@@ -4,7 +4,7 @@ Imports AATM.Common.ServiceLayer
 Namespace PresentationLayer.Presenters
 
     Public Class RevCostCenterPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IRevCostCenterView, TM)
+        Inherits CommonPresenter(Of IRevCostCenterView, TM)
 
         Public ParentViewList As List(Of TM)
 

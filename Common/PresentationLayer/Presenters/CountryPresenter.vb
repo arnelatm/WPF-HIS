@@ -5,7 +5,7 @@ Imports AATM.PresentationLayer.Presenters
 Namespace PresentationLayer.Presenters
 
     Public Class CountryPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of ICountryView, TM)
+        Inherits CommonPresenter(Of ICountryView, TM)
 
         Public ParentViewList As List(Of TM)
 

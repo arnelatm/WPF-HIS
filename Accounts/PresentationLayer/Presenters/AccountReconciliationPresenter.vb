@@ -15,7 +15,7 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Presenters
 
     Public Class AccountReconciliationPresenter(Of TM As New)
-        Inherits TransactionsPresenterNew(Of IAccountReconciliationView, TM)
+        Inherits TransactionsPresenter(Of IAccountReconciliationView, TM)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable

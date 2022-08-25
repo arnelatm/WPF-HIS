@@ -7,7 +7,7 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Presenters
 
     Public Class RecurringPayElementPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IRecurringPayElementView, TM)
+        Inherits CommonPresenter(Of IRecurringPayElementView, TM)
 
         Public Sub New(itemView As IRecurringPayElementView)
             MyBase.New(itemView)

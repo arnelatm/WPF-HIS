@@ -5,7 +5,7 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Presenters
 
     Public Class DepartmentPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IDepartmentView, TM)
+        Inherits CommonPresenter(Of IDepartmentView, TM)
 
         Public ParentViewList As List(Of TM)
 

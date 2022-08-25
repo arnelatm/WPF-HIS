@@ -6,7 +6,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Namespace PresentationLayer.Presenters
 
     Public Class OriginalMessagesPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IOriginalMessagesView, TM)
+        Inherits CommonPresenter(Of IOriginalMessagesView, TM)
 
         Public Sub New(view As IOriginalMessagesView)
             MyBase.New(view)

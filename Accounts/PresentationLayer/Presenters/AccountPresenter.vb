@@ -7,7 +7,7 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Presenters
 
     Public Class AccountPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IAccountView, TM)
+        Inherits CommonPresenter(Of IAccountView, TM)
 
         Public ParentViewList As List(Of TM)
 

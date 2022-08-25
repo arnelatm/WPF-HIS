@@ -4,7 +4,7 @@ Imports AATM.Common.ServiceLayer
 Namespace PresentationLayer.Presenters
 
     Public Class RevenueGroupPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IRevenueGroupView, TM)
+        Inherits CommonPresenter(Of IRevenueGroupView, TM)
 
         Public ParentViewList As List(Of TM)
 

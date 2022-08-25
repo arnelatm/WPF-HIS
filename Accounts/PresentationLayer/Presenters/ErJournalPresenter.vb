@@ -12,7 +12,7 @@ Imports AATM.PresentationLayer.Events
 Namespace PresentationLayer.Presenters
 
     Public Class ErJournalPresenter(Of TM As New)
-        Inherits TransactionsPresenterNew(Of IErJournalView, TM)
+        Inherits TransactionsPresenter(Of IErJournalView, TM)
         Implements ISubscriber(Of DataChanged)
 
         Protected DtInsertTable As New DataTable

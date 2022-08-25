@@ -15,7 +15,7 @@ Imports AATM.PresentationLayer.Presenters
 Namespace PresentationLayer.Presenters
 
     Public Class Lab_InvoiceGroupPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of ILab_InvoiceGroupView, TM)
+        Inherits CommonPresenter(Of ILab_InvoiceGroupView, TM)
 
         Protected DtLab_InvoiceDetailsUpdateTable As New DataTable
         Protected DtLab_InvoiceDetailsInsertTable As New DataTable

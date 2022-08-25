@@ -5,7 +5,7 @@ Imports AATM.Common.PresentationLayer.Presenters
 Namespace PresentationLayer.Presenters
 
     Public Class ProductCategoryPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IProductCategoryView, TM)
+        Inherits CommonPresenter(Of IProductCategoryView, TM)
 
         Public Sub New(view As IProductCategoryView)
             MyBase.New(view)

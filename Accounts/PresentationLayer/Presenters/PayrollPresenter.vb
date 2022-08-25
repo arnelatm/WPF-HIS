@@ -11,7 +11,7 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Presenters
 
     Public Class PayrollPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IPayrollView, TM)
+        Inherits CommonPresenter(Of IPayrollView, TM)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable

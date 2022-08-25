@@ -6,7 +6,7 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Presenters
 
     Public Class PayGroupPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IPayGroupView, TM)
+        Inherits CommonPresenter(Of IPayGroupView, TM)
 
         Public Sub New(itemView As IPayGroupView)
             MyBase.New(itemView)

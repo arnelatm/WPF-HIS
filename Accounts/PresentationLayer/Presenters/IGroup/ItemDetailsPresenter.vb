@@ -7,7 +7,7 @@ Imports AATM.PresentationLayer.Presenters
 Namespace PresentationLayer.Presenters
 
     Public Class ItemDetailsPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IItemDetailsView, TM)
+        Inherits CommonPresenter(Of IItemDetailsView, TM)
         'Implements IDaoAutoCode2
 
         Public Sub New(itemView As IItemDetailsView)

@@ -7,7 +7,7 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Presenters
 
     Public Class PayElementPresenter(Of TM As New)
-        Inherits CommonPresenterNew(Of IPayElementView, TM)
+        Inherits CommonPresenter(Of IPayElementView, TM)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
