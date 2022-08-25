@@ -106,31 +106,6 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Overrides Function IsOkToEditRecord() As Boolean
-            Dim result As Boolean = True
-            If ReconciledEntriesExist(View.JournalItems, "AR") Then
-                result = False
-            Else
-                If DependentRecordExist() Then
-                    result = False
-                End If
-            End If
-            Return result
-        End Function
-
-        Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
-            Dim returnValue As Boolean = False
-            For Each item In View.JournalItems
-                If IsAccountsReceivableAccount(item.AccountIdNo) Then
-                    Dim arOpenInvoiceNumber As Int32 = GetArOpenInvoiceNumber(item.IdNo)
-                    If CheckDependentRecords(Of Int32)(arOpenInvoiceNumber, "CsrOiItem", "ArOpenInvoiceIdNo") Then
-                        Return True
-                    End If
-                End If
-            Next
-            Return False
-        End Function
-
         Private Function RemoveDeletedArOpenInvoices(retVal As Integer, newJournalItem As List(Of JournalItemModel)) As Integer
             Dim deletedRecord As Boolean
             Dim oldJournalItem As List(Of JournalItemModel)
@@ -385,6 +360,41 @@ Namespace PresentationLayer.Presenters
                 End If
             End With
         End Sub
+
+        Public Overrides Function IsOkToEditRecord() As Boolean
+            Dim result As Boolean = True
+            If ReconciledEntriesExist(View.JournalItems, "AR") Then
+                result = False
+            Else
+                If DependentRecordExist() Then
+                    result = False
+                End If
+            End If
+            Return result
+        End Function
+
+        Public Overrides Function IsOkToDeleteRecord() As Boolean
+            Dim retValue As Boolean = True
+            If MyBase.IsOkToDeleteRecord Then
+                If ReconciledEntriesExist(View.JournalItems, "AR") Then
+                    retValue = False
+                End If
+            End If
+            Return retValue
+        End Function
+
+        Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
+            Dim returnValue As Boolean = False
+            For Each item In View.JournalItems
+                If IsAccountsReceivableAccount(item.AccountIdNo) Then
+                    Dim arOpenInvoiceNumber As Int32 = GetArOpenInvoiceNumber(item.IdNo)
+                    If CheckDependentRecords(Of Int32)(arOpenInvoiceNumber, "CsrOiItem", "ArOpenInvoiceIdNo") Then
+                        Return True
+                    End If
+                End If
+            Next
+            Return False
+        End Function
 
     End Class
 

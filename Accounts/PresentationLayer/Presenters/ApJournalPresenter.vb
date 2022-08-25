@@ -111,31 +111,6 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Overrides Function IsOkToEditRecord() As Boolean
-            Dim result As Boolean = True
-            If ReconciledEntriesExist(View.JournalItems, "AP") Then
-                result = False
-            Else
-                If DependentRecordExist() Then
-                    result = False
-                End If
-            End If
-            Return result
-        End Function
-
-        Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
-            Dim returnValue As Boolean = False
-            For Each item In View.JournalItems
-                If IsAccountsPayableAccount(item.AccountIdNo) Then
-                    Dim apOpenInvoiceNumber As Int32 = GetApOpenInvoiceNumber(item.IdNo)
-                    If CheckDependentRecords(Of Int32)(apOpenInvoiceNumber, "CdOiItem", "ApOpenInvoiceIdNo") Then
-                        Return True
-                    End If
-                End If
-            Next
-            Return False
-        End Function
-
         Private Function RemoveDeletedApOpenInvoices(retVal As Integer, newJournalItem As List(Of JournalItemModel)) As Integer
             Dim deletedRecord As Boolean
             Dim oldJournalItem As List(Of JournalItemModel)
@@ -409,6 +384,18 @@ Namespace PresentationLayer.Presenters
             End With
         End Sub
 
+        Public Overrides Function IsOkToEditRecord() As Boolean
+            Dim result As Boolean = True
+            If ReconciledEntriesExist(View.JournalItems, "AP") Then
+                result = False
+            Else
+                If DependentRecordExist() Then
+                    result = False
+                End If
+            End If
+            Return result
+        End Function
+
         Public Overrides Function IsOkToDeleteRecord() As Boolean
             Dim retValue As Boolean = True
             If MyBase.IsOkToDeleteRecord Then
@@ -418,6 +405,20 @@ Namespace PresentationLayer.Presenters
             End If
             Return retValue
         End Function
+
+        Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
+            Dim returnValue As Boolean = False
+            For Each item In View.JournalItems
+                If IsAccountsPayableAccount(item.AccountIdNo) Then
+                    Dim apOpenInvoiceNumber As Int32 = GetApOpenInvoiceNumber(item.IdNo)
+                    If CheckDependentRecords(Of Int32)(apOpenInvoiceNumber, "CdOiItem", "ApOpenInvoiceIdNo") Then
+                        Return True
+                    End If
+                End If
+            Next
+            Return False
+        End Function
+
 
     End Class
 
