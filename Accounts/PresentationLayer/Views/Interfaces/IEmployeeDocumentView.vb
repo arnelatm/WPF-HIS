@@ -4,14 +4,14 @@ Namespace PresentationLayer.Views.Interfaces
 
     Public Interface IEmployeeDocumentView
         Inherits IView
-        Property IdNo As Int16
-        Property EmployeeIdNo As Int16
         Property DocumentIdNo As Int16
+        Property DocumentImage As Int32
+        Property DocumentNumber As String
+        Property EmployeeIdNo As Int32
         Property ExpiryDate As Date?
+        Property IdNo As Int32
         Property IssueDate As Date?
-        Property Number As String
-        Property Notes As String
-        Property Image As Image
+        Property Sequence As Int16
     End Interface
 
 End Namespace

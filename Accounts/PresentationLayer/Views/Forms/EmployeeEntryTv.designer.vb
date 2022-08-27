@@ -60,13 +60,14 @@
         Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle43 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle44 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle37 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle38 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle39 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle40 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle41 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle42 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle43 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.bsPhones = New System.Windows.Forms.BindingSource(Me.components)
         Me.bsEarnings = New System.Windows.Forms.BindingSource(Me.components)
         Me.bsDeductions = New System.Windows.Forms.BindingSource(Me.components)
@@ -224,7 +225,7 @@
         Me.dgvNumber = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvIssueDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvImage = New System.Windows.Forms.DataGridViewImageColumn()
+        Me.dgvImage = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.IdNoDataGridViewTextBoxColumn1 = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
@@ -3535,14 +3536,14 @@
         Me.DataGridViewDocuments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewDocuments.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvDocumentSequence, Me.dgvDocumentIdNo, Me.dgvNumber, Me.dgvIssueDate, Me.dgvExpiryDate, Me.dgvImage, Me.dgvEmployeeIdNo, Me.IdNoDataGridViewTextBoxColumn1})
         Me.DataGridViewDocuments.DataSource = Me.bsDocuments
-        DataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle43.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle43.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        DataGridViewCellStyle43.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle43.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle43.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle43.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewDocuments.DefaultCellStyle = DataGridViewCellStyle43
+        DataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle44.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle44.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle44.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle44.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle44.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle44.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewDocuments.DefaultCellStyle = DataGridViewCellStyle44
         Me.DataGridViewDocuments.DgvFooter = Nothing
         Me.DataGridViewDocuments.DisplayOnly = false
         Me.DataGridViewDocuments.Dock = System.Windows.Forms.DockStyle.Fill
@@ -3588,12 +3589,13 @@
         'dgvDocumentIdNo
         '
         Me.dgvDocumentIdNo.AutoComplete = false
+        Me.dgvDocumentIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.dgvDocumentIdNo.DataPropertyName = "DocumentIdNo"
         DataGridViewCellStyle37.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle37.ForeColor = System.Drawing.Color.Black
         Me.dgvDocumentIdNo.DefaultCellStyle = DataGridViewCellStyle37
         Me.dgvDocumentIdNo.EditingMode = false
-        Me.dgvDocumentIdNo.HeaderText = "DocumentIdNo"
+        Me.dgvDocumentIdNo.HeaderText = "Document Type"
         Me.dgvDocumentIdNo.Name = "dgvDocumentIdNo"
         Me.dgvDocumentIdNo.ReadOnly = true
         Me.dgvDocumentIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
@@ -3634,7 +3636,7 @@
         Me.dgvIssueDate.FieldName = Nothing
         Me.dgvIssueDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvIssueDate.FindEnabled = false
-        Me.dgvIssueDate.HeaderText = "IssueDate"
+        Me.dgvIssueDate.HeaderText = "Issue Date"
         Me.dgvIssueDate.IgnoreCase = false
         Me.dgvIssueDate.Name = "dgvIssueDate"
         Me.dgvIssueDate.ReadOnly = true
@@ -3655,7 +3657,7 @@
         Me.dgvExpiryDate.FieldName = Nothing
         Me.dgvExpiryDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.dgvExpiryDate.FindEnabled = false
-        Me.dgvExpiryDate.HeaderText = "ExpiryDate"
+        Me.dgvExpiryDate.HeaderText = "Expiry Date"
         Me.dgvExpiryDate.IgnoreCase = false
         Me.dgvExpiryDate.Name = "dgvExpiryDate"
         Me.dgvExpiryDate.ReadOnly = true
@@ -3665,19 +3667,33 @@
         '
         'dgvImage
         '
-        Me.dgvImage.DataPropertyName = "Image"
+        Me.dgvImage.BegFindValue = Nothing
+        Me.dgvImage.DataPropertyName = "DocumentImage"
+        DataGridViewCellStyle41.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle41.ForeColor = System.Drawing.Color.Black
+        Me.dgvImage.DefaultCellStyle = DataGridViewCellStyle41
+        Me.dgvImage.EditingMode = false
+        Me.dgvImage.EndFindValue = Nothing
+        Me.dgvImage.FieldDescription = Nothing
+        Me.dgvImage.FieldName = Nothing
+        Me.dgvImage.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvImage.FindEnabled = false
         Me.dgvImage.HeaderText = "Image"
+        Me.dgvImage.IgnoreCase = false
         Me.dgvImage.Name = "dgvImage"
         Me.dgvImage.ReadOnly = true
         Me.dgvImage.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvImage.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvImage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.dgvImage.Translatable = false
         '
         'dgvEmployeeIdNo
         '
         Me.dgvEmployeeIdNo.BegFindValue = Nothing
         Me.dgvEmployeeIdNo.DataPropertyName = "EmployeeIdNo"
-        DataGridViewCellStyle41.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle41.ForeColor = System.Drawing.Color.Black
-        Me.dgvEmployeeIdNo.DefaultCellStyle = DataGridViewCellStyle41
+        DataGridViewCellStyle42.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle42.ForeColor = System.Drawing.Color.Black
+        Me.dgvEmployeeIdNo.DefaultCellStyle = DataGridViewCellStyle42
         Me.dgvEmployeeIdNo.EditingMode = false
         Me.dgvEmployeeIdNo.EndFindValue = Nothing
         Me.dgvEmployeeIdNo.FieldDescription = Nothing
@@ -3690,14 +3706,15 @@
         Me.dgvEmployeeIdNo.ReadOnly = true
         Me.dgvEmployeeIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.dgvEmployeeIdNo.Translatable = false
+        Me.dgvEmployeeIdNo.Visible = false
         '
         'IdNoDataGridViewTextBoxColumn1
         '
         Me.IdNoDataGridViewTextBoxColumn1.BegFindValue = Nothing
         Me.IdNoDataGridViewTextBoxColumn1.DataPropertyName = "IdNo"
-        DataGridViewCellStyle42.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle42.ForeColor = System.Drawing.Color.Black
-        Me.IdNoDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle42
+        DataGridViewCellStyle43.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle43.ForeColor = System.Drawing.Color.Black
+        Me.IdNoDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle43
         Me.IdNoDataGridViewTextBoxColumn1.EditingMode = false
         Me.IdNoDataGridViewTextBoxColumn1.EndFindValue = Nothing
         Me.IdNoDataGridViewTextBoxColumn1.FieldDescription = Nothing
@@ -3711,6 +3728,7 @@
         Me.IdNoDataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.IdNoDataGridViewTextBoxColumn1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.IdNoDataGridViewTextBoxColumn1.Translatable = false
+        Me.IdNoDataGridViewTextBoxColumn1.Visible = false
         '
         'EmployeeEntryTv
         '
@@ -3917,14 +3935,12 @@ End Sub
         Friend WithEvents bsDocuments As BindingSource
         Friend WithEvents dgvEmployeeDocumentIdNo As DataGridViewTextBoxColumn
         Friend WithEvents dgvDocumentNote As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents IdNo As DataGridViewTextBoxColumn
-        Friend WithEvents Notes As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvDocumentSequence As DataGridViewTextBoxColumn
         Friend WithEvents dgvDocumentIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvNumber As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvIssueDate As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvExpiryDate As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvImage As DataGridViewImageColumn
+        Friend WithEvents dgvImage As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvEmployeeIdNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn1 As Libraries.CBaseControlsLibrary.CDgvTextColumn
     End Class

@@ -55,6 +55,7 @@ Namespace PresentationLayer.Models
         Public Property PayFrequency As PayFrequencySelection
         Public Property RegularEmployeeDeductions As List(Of EmployeePayElementModel)
         Public Property RegularEmployeeEarnings As List(Of EmployeePayElementModel)
+        Public Property EmployeeDocuments As List(Of EmployeeDocumentModel)
         Public Property EmployeePhones As List(Of EmployeePhoneModel)
         Public Property EmployeeLeaveCredits As List(Of EmployeeLeaveCreditModel)
         Public Property Picture As Image

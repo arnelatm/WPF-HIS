@@ -18,13 +18,14 @@ Namespace DataLayer.AdoNet
             End If
             Dim sql As String =
                     "SELECT " &
-                    "EmployeeIdNo," &
                     "DocumentIdNo," &
+                    "DocumentImage," &
                     "DocumentNumber," &
-                    "IssueDate," &
+                    "EmployeeIdNo," &
                     "ExpiryDate," &
                     "IdNo," &
-                    "Sequence" &
+                    "IssueDate," &                                      
+                    "Sequence" &                   
                     " FROM EmployeeDocument" &
                     " WHERE EmployeeIdNo = @IdNo" &
                     " ORDER BY " & sortExpression
@@ -43,12 +44,13 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, EmployeeDocument) =
                                     Function(reader) _
             New EmployeeDocument() With {
-            .EmployeeIdNo = Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .DocumentIdNo = Extensions.AsInt(Of Int16)(reader("DocumentIdNo")),
             .DocumentNumber = Extensions.AsString(reader("DocumentNumber")),
-            .IssueDate = Extensions.AsDate(reader("IssueDate")),
+            .DocumentImage = Extensions.AsInt(Of Int32)(reader("DocumentImage")),
+            .EmployeeIdNo = Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
             .ExpiryDate = Extensions.AsDate(reader("ExpiryDate")),            
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .IssueDate = Extensions.AsDate(reader("IssueDate")),
             .Sequence = Extensions.AsInt(Of Int16)(reader("Sequence"))
            }
 

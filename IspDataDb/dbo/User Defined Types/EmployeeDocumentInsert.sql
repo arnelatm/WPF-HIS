@@ -1,9 +1,13 @@
 ﻿CREATE TYPE [dbo].[EmployeeDocumentInsert] AS TABLE (
-    [EmployeeIdNo]   INT             NULL,
     [DocumentIdNo]   SMALLINT        NULL,
+    [DocumentImage]  INT             NULL,
     [DocumentNumber] VARCHAR (30)    NULL,
-    [IssueDate]      DATE            NULL,
+    [EmployeeIdNo]   INT             NULL,
     [ExpiryDate]     DATE            NULL,
-    [Image]          VARBINARY (MAX) NULL,
+    [IssueDate]      DATE            NULL,
     [Sequence]       TINYINT         NOT NULL);
+
+
+
+
 
