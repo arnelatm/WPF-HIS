@@ -5,7 +5,9 @@
     [DocumentNumber] VARCHAR (30)    NULL,
     [IssueDate]      DATE            NULL,
     [ExpiryDate]     DATE            NULL,
-    [Image]          VARBINARY (MAX) NULL,
+    [DocumentImage]  INT             NULL,
     [Sequence]       TINYINT         NOT NULL,
     PRIMARY KEY CLUSTERED ([IDNo] ASC));
+
+
 

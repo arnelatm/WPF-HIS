@@ -524,6 +524,7 @@
     <Build Include="dbo\Stored Procedures\InsertEmployeeDocumentTVP.sql" />
     <Build Include="dbo\User Defined Types\EmployeeDocumentUpdate.sql" />
     <Build Include="dbo\User Defined Types\EmployeeDocumentInsert.sql" />
+    <Build Include="dbo\Tables\DataImages.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

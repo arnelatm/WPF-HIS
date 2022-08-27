@@ -52,11 +52,11 @@ Namespace PresentationLayer.Presenters
 
             CreateDataTable(DtDocumentInsertTable, {
                                  {"DocumentIdNo", GetType(Int16)},
+                                 {"DocumentImage", GetType(Int32)},
                                  {"DocumentNumber", GetType(String)},
-                                 {"EmployeeIdNo", GetType(Int16)},
+                                 {"EmployeeIdNo", GetType(Int32)},
                                  {"ExpiryDate", GetType(Date)},
-                                 {"IssueDate", GetType(Date)},
-                                 {"Image", GetType(Image)},
+                                 {"IssueDate", GetType(Date)},                                
                                  {"Sequence", GetType(Int16)}})
 
             CreateDataTable(DtPhoneInsertTable, {{"AreaCode", GetType(String)},
@@ -98,12 +98,12 @@ Namespace PresentationLayer.Presenters
 
             CreateDataTable(DtDocumentUpdateTable, {
                                  {"DocumentIdNo", GetType(Int16)},
+                                 {"DocumentImage", GetType(Int32)},
                                  {"DocumentNumber", GetType(String)},
-                                 {"EmployeeIdNo", GetType(Int16)},
+                                 {"EmployeeIdNo", GetType(Int32)},
                                  {"ExpiryDate", GetType(Date)},
                                  {"IdNo", GetType(Int32)},
                                  {"IssueDate", GetType(Date)},
-                                 {"Image", GetType(Image)},
                                  {"Sequence", GetType(Int16)}})
 
 
@@ -195,12 +195,12 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub DocumentFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
-            workRow("DocumentNumber") = itemDataView.DocumentNumber
             workRow("DocumentIdNo") = itemDataView.DocumentIdNo
+            workRow("DocumentImage") = itemDataView.DocumentImage
+            workRow("DocumentNumber") = itemDataView.DocumentNumber
             workRow("EmployeeIdNo") = View.IdNo
-            workRow("IssueDate") = itemDataView.IssueDate
             workRow("ExpiryDate") = itemDataView.ExpiryDate
-            workRow("Image") = itemDataView.Image
+            workRow("IssueDate") = itemDataView.IssueDate
             workRow("Sequence") = itemDataView.Sequence
         End Sub
 
