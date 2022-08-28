@@ -203,6 +203,7 @@
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
+    <Compile Include="BusinessLayer\DataImage.vb" />
     <Compile Include="BusinessLayer\Document.vb" />
     <Compile Include="BusinessLayer\EmployeeDocument.vb" />
     <Compile Include="BusinessLayer\HolidayAvailmentApprovalHistory.vb" />
@@ -275,6 +276,7 @@
     <Compile Include="BusinessLayer\Supplier.vb" />
     <Compile Include="ContainerConfig.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
+    <Compile Include="DataLayer\AdoNet\DataImageDao.vb" />
     <Compile Include="DataLayer\AdoNet\DocumentDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeLeaveDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeLeaveApprovalDao.vb" />
@@ -372,6 +374,7 @@
       <DependentUpon>NewSettings.settings</DependentUpon>
     </Compile>
     <Compile Include="OneTimeRun.vb" />
+    <Compile Include="PresentationLayer\Models\DataImageModel.vb" />
     <Compile Include="PresentationLayer\Models\DocumentModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeeIdModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeeDocumentModel.vb" />
@@ -702,6 +705,7 @@
     <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Interfaces\IDataImageView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDocumentView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeDocumentView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\ILab_InvoiceGroupView.vb" />

@@ -1,7 +1,10 @@
 ﻿Imports System.Globalization
+Imports System.IO
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
 
@@ -712,6 +715,87 @@ Namespace PresentationLayer.Views.Forms
             DisplayPhoneTab()
         End Sub
 
+        Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDocuments.CellClick
+            Try
+                With DataGridViewDocuments
+                    If .CurrentCell IsNot Nothing Then
+                        If .CurrentCell.OwningColumn.Name() = "dgvImageButton" Then
+                            If DataGridViewDocuments.EditingMode Then
+                                GetDocumentImage(.CurrentCell.Value)
+                            Else
+                                Messaging.Show("View Mode")
+                            End If
+
+                        End If
+                    End If
+                End With
+            Catch ex As Exception
+                Messaging.Show("error")
+            End Try
+
+        End Sub
+
+        Private Sub GetDocumentImage(value As Object)
+            If DataGridViewDocuments.EditingMode Then
+                'Dim fd As OpenFileDialog = New OpenFileDialog()
+                'Dim strFileName As String = Nothing
+                'Dim docimage As Image
+                'Dim maxImageSize = 2000000
+                Dim cPictureViewer As New CPictureViewer(DataGridViewDocuments.CurrentRow.Cells("dgvFileName").Value , EmployeeName & " " & DataGridViewDocuments.CurrentRow.Cells("dgvDocumentIdNo").EditedFormattedValue)
+                cPictureViewer.ShowDialog()
+                If cPictureViewer.DialogResult = DialogResult.OK Then
+                    DataGridViewDocuments.CurrentRow.Cells("dgvFileName").Value = cPictureViewer.ImageFileName
+                    'Dim fileInfo As New FileInfo(cPictureViewer.ImageFileName)
+                    'Dim fileExtension = fileInfo.Extension
+                    'DataGridViewDocuments.CurrentRow.Cells("dgvFileName").Value = fileInfo.FullName
+                    'Dim filePathAndName As String = GlobalFuncNSub.GetTempFileName(fileExtension)
+                    'docimage = Drawing.Image.FromFile(cPictureViewer.ImageFileName)
+                    'Dim fileInfo As New FileInfo(cPictureViewer.ImageFileName)
+                    'Dim length As Long = fileInfo.Length
+                    'If maxImageSize > 0 Then
+                    '    If fileInfo.Length > maxImageSize Then
+                    '        docimage.Dispose()
+                    '        docimage = Nothing
+                    '        Dim fileExtension = fileInfo.Extension
+                    '        Dim path As String = GlobalFuncNSub.GetTempFileName(fileExtension)
+                    '        Dim resizer As ImageResizer = New ImageResizer(maxImageSize, cPictureViewer.ImageFileName, path)
+                    '        If Not resizer.ScaleImage() Then
+                    '            MessageBox.Show("Cannot scale image to " & maxImageSize.ToString() & $" bytes size. Either select a smaller file size or resize the image manually to less than or equal to " & maxImageSize.ToString() & " bytes.")
+                    '        End If
+                    '        docimage = Drawing.Image.FromFile(path)
+                    '    End If
+                    'End If
+                End If
+
+                'Using fd As OpenFileDialog = New OpenFileDialog()
+                'fd.Title = $"Open File Dialog"
+                'fd.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)
+                'fd.Filter = $"Image Files(*.BMP;*.JPG;*.GIF;*.JPEG;*.TIFF;*.PNG)|*.BMP;*.JPG;*.JPEG;*.GIF;*.TIFF;*.PNG"
+                'fd.FilterIndex = 1
+                'fd.RestoreDirectory = True
+                'If fd.ShowDialog() = DialogResult.OK Then
+                '    strFileName = fd.FileName
+                '    docimage = Drawing.Image.FromFile(strFileName)
+                '    Dim fileInfo As New FileInfo(strFileName)
+                '    Dim length As Long = fileInfo.Length
+                '    If MaxImageSize > 0 Then
+                '        If fileInfo.Length > MaxImageSize Then
+                '            docImage.Dispose()
+                '            docImage = Nothing
+                '            Dim fileExtension = fileInfo.Extension
+                '            Dim path As String = GlobalFuncNSub.GetTempFileName(fileExtension)
+                '            Dim resizer As ImageResizer = New ImageResizer(MaxImageSize, strFileName, path)
+                '            If Not resizer.ScaleImage() Then
+                '                MessageBox.Show("Cannot scale image to " & maxImageSize.ToString() & $" bytes size. Either select a smaller file size or resize the image manually to less than or equal to " & MaxImageSize.ToString() & " bytes.")
+                '            End If
+                '            docImage = Drawing.Image.FromFile(path)
+                '        End If
+                '    End If
+                'End If
+                'End Using
+            End If
+        End Sub
+
         Private Sub DgvEarning_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEarnings.CellEndEdit
             ProcessCellEndEdit(DataGridViewEarnings, bsEarnings)
         End Sub
@@ -752,6 +836,6 @@ Namespace PresentationLayer.Views.Forms
             'bsLeaveCredits.ResetBindings(False)
         End Sub
 
-     End Class
+    End Class
 
 End Namespace
