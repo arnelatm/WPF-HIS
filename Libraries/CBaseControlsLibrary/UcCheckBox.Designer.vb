@@ -26,12 +26,12 @@ Partial Class UcCheckBox
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.checkBox = New AATM.Libraries.CBaseControlsLibrary.CCheckBoxNew()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.CFlowLayout1.SuspendLayout()
-        Me.SuspendLayout()
+        Me.CFlowLayout1.SuspendLayout
+        Me.SuspendLayout
         '
         'CFlowLayout1
         '
-        Me.CFlowLayout1.AutoSize = True
+        Me.CFlowLayout1.AutoSize = true
         Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
         Me.CFlowLayout1.Controls.Add(Me.checkBox)
         Me.CFlowLayout1.Controls.Add(Me.CLabel1)
@@ -44,17 +44,17 @@ Partial Class UcCheckBox
         '
         Me.checkBox.BegFindValue = Nothing
         Me.checkBox.BoxSize = New System.Drawing.Size(14, 14)
-        Me.checkBox.DisplayOnly = False
-        Me.checkBox.EditingMode = True
+        Me.checkBox.DisplayOnly = false
+        Me.checkBox.EditingMode = true
         Me.checkBox.EndFindValue = Nothing
         Me.checkBox.FieldDescription = Nothing
         Me.checkBox.FieldName = Nothing
         Me.checkBox.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.checkBox.FindEnabled = False
+        Me.checkBox.FindEnabled = false
         Me.checkBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.checkBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.checkBox.IFindableControl_FindEnabled = False
-        Me.checkBox.IgnoreCase = False
+        Me.checkBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.checkBox.IFindableControl_FindEnabled = false
+        Me.checkBox.IgnoreCase = false
         Me.checkBox.LinkedLabel = Nothing
         Me.checkBox.Location = New System.Drawing.Point(3, 3)
         Me.checkBox.Name = "checkBox"
@@ -62,15 +62,15 @@ Partial Class UcCheckBox
         Me.checkBox.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.ExactValue
         Me.checkBox.Size = New System.Drawing.Size(14, 14)
         Me.checkBox.TabIndex = 1
-        Me.checkBox.Translatable = True
-        Me.checkBox.UseVisualStyleBackColor = True
+        Me.checkBox.Translatable = true
+        Me.checkBox.UseVisualStyleBackColor = true
         '
         'CLabel1
         '
-        Me.CLabel1.AutoSize = True
-        Me.CLabel1.DisplayOnly = True
-        Me.CLabel1.EditingMode = False
-        Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.CLabel1.AutoSize = true
+        Me.CLabel1.DisplayOnly = true
+        Me.CLabel1.EditingMode = false
+        Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.CLabel1.Location = New System.Drawing.Point(21, 1)
         Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel1.Name = "CLabel1"
@@ -78,23 +78,23 @@ Partial Class UcCheckBox
         Me.CLabel1.TabIndex = 0
         Me.CLabel1.Text = "CLabel"
         Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.CLabel1.Translatable = True
+        Me.CLabel1.Translatable = true
         '
         'UcCheckBox
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.Color.Transparent
         Me.Controls.Add(Me.CFlowLayout1)
         Me.Name = "UcCheckBox"
         Me.Size = New System.Drawing.Size(85, 21)
-        Me.CFlowLayout1.ResumeLayout(False)
-        Me.CFlowLayout1.PerformLayout()
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        Me.CFlowLayout1.ResumeLayout(false)
+        Me.CFlowLayout1.PerformLayout
+        Me.ResumeLayout(false)
+        Me.PerformLayout
 
-    End Sub
+End Sub
 
     Friend WithEvents CFlowLayout1 As CFlowLayout
     Friend WithEvents CLabel1 As CLabel

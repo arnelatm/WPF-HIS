@@ -104,6 +104,12 @@
     <Compile Include="CFormBase.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CPictureViewer.Designer.vb">
+      <DependentUpon>CPictureViewer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CPictureViewer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CFormEntry.Designer.vb">
       <DependentUpon>CFormEntry.vb</DependentUpon>
     </Compile>
@@ -177,6 +183,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CFormBase.resx">
       <DependentUpon>CFormBase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CPictureViewer.resx">
+      <DependentUpon>CPictureViewer.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CFormEntry.resx">
       <DependentUpon>CFormEntry.vb</DependentUpon>
