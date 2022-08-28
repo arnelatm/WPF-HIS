@@ -3582,7 +3582,7 @@
         '
         'dgvDocumentSequence
         '
-        Me.dgvDocumentSequence.DataPropertyName = "EmployeeIdNo"
+        Me.dgvDocumentSequence.DataPropertyName = "Sequence"
         Me.dgvDocumentSequence.HeaderText = "Seq"
         Me.dgvDocumentSequence.Name = "dgvDocumentSequence"
         Me.dgvDocumentSequence.ReadOnly = true
