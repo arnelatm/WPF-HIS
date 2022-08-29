@@ -199,8 +199,8 @@ Namespace PresentationLayer.Presenters
             workRow("DocumentImage") = itemDataView.DocumentImage
             workRow("DocumentNumber") = itemDataView.DocumentNumber
             workRow("EmployeeIdNo") = View.IdNo
-            workRow("ExpiryDate") = itemDataView.ExpiryDate
-            workRow("IssueDate") = itemDataView.IssueDate
+            workRow("ExpiryDate") = IIf(itemDataView.ExpiryDate Is Nothing, DBNull.Value, itemDataView.ExpiryDate)
+            workRow("IssueDate") = IIf(itemDataView.IssueDate Is Nothing, DBNull.Value, itemDataView.IssueDate)
             workRow("Sequence") = itemDataView.Sequence
         End Sub
 
