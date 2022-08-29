@@ -746,6 +746,10 @@ Namespace PresentationLayer.Views.Forms
                 cPictureViewer.ShowDialog()
                 If cPictureViewer.DialogResult = DialogResult.OK Then
                     DataGridViewDocuments.CurrentRow.Cells("dgvFileName").Value = cPictureViewer.ImageFileName
+                    If cPictureViewer.ImageFileName IsNot Nothing Then
+                        DataGridViewDocuments.CurrentRow.Cells("dgvImage").Value = -1
+                    End If
+
                     'Dim fileInfo As New FileInfo(cPictureViewer.ImageFileName)
                     'Dim fileExtension = fileInfo.Extension
                     'DataGridViewDocuments.CurrentRow.Cells("dgvFileName").Value = fileInfo.FullName

@@ -6,6 +6,8 @@ Namespace PresentationLayer.Views
     Public Class EmployeeDocumentView
         Implements IEmployeeDocumentView
 
+        Private _sequence As Int16
+
         Public Property IdNo As Int32 Implements IEmployeeDocumentView.IdNo
 
         Public Property EmployeeIdNo As Int32 Implements IEmployeeDocumentView.EmployeeIdNo
@@ -21,6 +23,13 @@ Namespace PresentationLayer.Views
 
         Public Property Errors As List(Of String) Implements IView.Errors
         Public Property Sequence As Int16 Implements IEmployeeDocumentView.Sequence
+            Get
+                Return _sequence
+            End Get
+            Set(value As Int16)
+                _sequence = value
+            End Set
+        End Property
 
     End Class
 

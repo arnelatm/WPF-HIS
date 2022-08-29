@@ -156,8 +156,8 @@ Public Class CDataGvBs
             'Dim sequence = CallByName(value, sequenceFieldName, CallType.Get)
             Dim sequence = Invoker.GetProperty(value, sequenceFieldName)
             If sequence > i + 1 Then
-                'CallByName(value, sequenceFieldName, CallType.Set, sequence - 1)
-                Invoker.SetProperty(value, sequenceFieldName, {sequence - 1})
+                CallByName(value, sequenceFieldName, CallType.Set, sequence - 1)
+                'Invoker.SetProperty(value, sequenceFieldName, {sequence - 1})
             End If
         Next
     End Sub
@@ -170,11 +170,11 @@ Public Class CDataGvBs
                 'Dim sequence = CallByName(o, sequenceFieldName, CallType.Get)
                 Dim sequence = Invoker.GetProperty(o, sequenceFieldName)
                 If sequence = 0 Then
-                    'CallByName(o, sequenceFieldName, CallType.Set, i)
-                    Invoker.SetProperty(o, sequenceFieldName, {i})
+                    CallByName(o, sequenceFieldName, CallType.Set, i)
+                    'Invoker.SetProperty(o, sequenceFieldName, {i})
                 ElseIf sequence >= i Then
-                    'CallByName(o, sequenceFieldName, CallType.Set, sequence + 1)
-                    Invoker.SetProperty(o, sequenceFieldName, {sequence + 1})
+                    CallByName(o, sequenceFieldName, CallType.Set, sequence + 1)
+                    'Invoker.SetProperty(o, sequenceFieldName, {sequence + 1})
                 End If
             End If
         Next
@@ -276,8 +276,8 @@ Public Class CDataGvBs
 
     Private Sub DataGridView_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles Me.CellValueChanged
         'RaiseEvent ChangesMade(Me, EventArgs.Empty)
-        'CallByName(CurrentRow.Cells("dgvInsColumn"), "Image", CallType.Set, Images.InsertRowImage)
-        Invoker.SetProperty(CurrentRow.Cells("dgvInsColumn"), "Image", {Images.InsertRowImage})
+        CallByName(CurrentRow.Cells("dgvInsColumn"), "Image", CallType.Set, Images.InsertRowImage)
+        'Invoker.SetProperty(CurrentRow.Cells("dgvInsColumn"), "Image", {Images.InsertRowImage})
     End Sub
 
     Private Sub DataGridView_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles Me.DataError
