@@ -10,7 +10,7 @@ Namespace PresentationLayer.Views
 
         Public Property EmployeeIdNo As Int32 Implements IEmployeeDocumentView.EmployeeIdNo
 
-        Public Property DocumentIdNo As Short Implements IEmployeeDocumentView.DocumentIdNo
+        Public Property DocumentIdNo As Int16 Implements IEmployeeDocumentView.DocumentIdNo
         Public Property DocumentNumber As String Implements IEmployeeDocumentView.DocumentNumber
 
         Public Property ExpiryDate As Date? Implements IEmployeeDocumentView.ExpiryDate

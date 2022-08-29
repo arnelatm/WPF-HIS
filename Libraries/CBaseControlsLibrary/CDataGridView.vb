@@ -250,8 +250,8 @@ Public Class CDataGridView
                         'Dim sequence = CallByName(record, SequenceFieldName, CallType.Get)
                         Dim sequence = Invoker.GetProperty(record, SequenceFieldName)
                         If sequence > i + 1 Then
-                            'CallByName(record, SequenceFieldName, CallType.Set, sequence - 1)
-                            Invoker.SetProperty(record, SequenceFieldName, {sequence - 1})
+                            CallByName(record, SequenceFieldName, CallType.Set, sequence - 1)
+                            'Invoker.SetProperty(record, SequenceFieldName, {sequence - 1})
                         End If
                     Next
                 End If

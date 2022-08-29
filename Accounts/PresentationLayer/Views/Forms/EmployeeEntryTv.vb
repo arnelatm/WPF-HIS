@@ -645,6 +645,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvDocumentIdNo.DataSource = Documents
                 dgvDocumentIdNo.DisplayMember = "Name"
                 dgvDocumentIdNo.ValueMember = "IdNo"
+                dgvSequenceDocument.DisplayOnly = True
             End With
             'ResumeLayout()
         End Sub

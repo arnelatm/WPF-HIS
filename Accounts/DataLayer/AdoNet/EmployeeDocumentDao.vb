@@ -48,9 +48,9 @@ Namespace DataLayer.AdoNet
             .DocumentNumber = Extensions.AsString(reader("DocumentNumber")),
             .DocumentImage = Extensions.AsInt(Of Int32)(reader("DocumentImage")),
             .EmployeeIdNo = Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
-            .ExpiryDate = Extensions.AsDate(reader("ExpiryDate")),            
+            .ExpiryDate = Extensions.AsNullable(Of Date)(reader("ExpiryDate")),            
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
-            .IssueDate = Extensions.AsDate(reader("IssueDate")),
+            .IssueDate = Extensions.AsNullable(Of Date)(reader("IssueDate")),
             .Sequence = Extensions.AsInt(Of Int16)(reader("Sequence"))
            }
 
