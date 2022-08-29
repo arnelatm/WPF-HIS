@@ -56,7 +56,7 @@ Namespace PresentationLayer.Presenters
                                  {"DocumentNumber", GetType(String)},
                                  {"EmployeeIdNo", GetType(Int32)},
                                  {"ExpiryDate", GetType(Date)},
-                                 {"IssueDate", GetType(Date)},                                
+                                 {"IssueDate", GetType(Date)},
                                  {"Sequence", GetType(Int16)}})
 
             CreateDataTable(DtPhoneInsertTable, {{"AreaCode", GetType(String)},
@@ -260,6 +260,35 @@ Namespace PresentationLayer.Presenters
                 retVal = UpdateChildData(_employeePhoneService, DtPhoneUpdateTable, DtPhoneInsertTable, passedValue, "EmployeeIdNo")
                 If retVal >= 0 Then
                     retVal = UpdateChildData(_employeeDocumentService, DtDocumentUpdateTable, DtDocumentInsertTable, passedValue, "EmployeeIdNo")
+                    For Each item In View.EmployeeDocuments
+                        If item.DocumentImage = -1 Then
+                            ' item has changed need to save the picture
+                            Dim diDao As New DataImageDao
+                            Dim diImage As New DataImage
+                            Dim myImage As New PictureBox
+                            'myImage.Image = Drawing.Image.FromFile(item.strFileName)
+                            'Dim strFileName As String = fd.FileName
+                            'Me.Image = Drawing.Image.FromFile(strFileName)
+                            'Dim fileInfo As New FileInfo(strFileName)
+                            'Dim length As Long = fileInfo.Length
+                            'If MaxImageSize > 0 Then
+                            '    If fileInfo.Length > MaxImageSize Then
+                            '        Image.Dispose()
+                            '        Image = Nothing
+                            '        Dim fileExtension = fileInfo.Extension
+                            '        Dim path As String = GlobalFuncNSub.GetTempFileName(fileExtension)
+                            '        Dim resizer As ImageResizer = New ImageResizer(MaxImageSize, strFileName, path)
+                            '        If Not resizer.ScaleImage() Then
+                            '            MessageBox.Show("Cannot scale image to " & MaxImageSize.ToString() & $" bytes size. Either select a smaller file size or resize the image manually to less than or equal to " & MaxImageSize.ToString() & " bytes.")
+                            '        End If
+                            '        Image = Drawing.Image.FromFile(path)
+                            '    End If
+                            'End If
+
+
+                            diDao.AddRecord(diImage)
+                        End If
+                    Next
                     If retVal >= 0 Then
                         retVal = UpdateChildData(_employeeLeaveCreditService, DtEmpLeaveCreditUpdateTable, DtEmpLeaveCreditInsertTable, passedValue, "EmployeeIdNo")
                     End If

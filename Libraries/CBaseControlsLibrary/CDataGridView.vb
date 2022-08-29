@@ -67,8 +67,8 @@ Public Class CDataGridView
 
     Private Sub DataGridView_DataSourceChanged(sender As Object, e As EventArgs) Handles Me.DataSourceChanged
         If Columns(SequenceColumn) IsNot Nothing Then
-            'CallByName(Columns(SequenceColumn), "DisplayOnly", CallType.Set, True)
-            Invoker.SetProperty(Columns(SequenceColumn), "DisplayOnly", True)
+            CallByName(Columns(SequenceColumn), "DisplayOnly", CallType.Set, True)
+            'Invoker.SetProperty(Columns(SequenceColumn), "DisplayOnly", True)
         End If
         If ShowFooter Then
             DgvFooter = New DgvFooter(Me) With {
@@ -247,17 +247,27 @@ Public Class CDataGridView
                 'If CallByName(myBindingSource.Current, SequenceFieldName, CallType.Get) IsNot Nothing Then
                 If Invoker.GetProperty(myBindingSource.Current, SequenceFieldName) IsNot Nothing Then
                     For Each record In myBindingSource
-                        'Dim sequence = CallByName(record, SequenceFieldName, CallType.Get)
-                        Dim sequence = Invoker.GetProperty(record, SequenceFieldName)
+                        Dim sequence = CallByName(record, SequenceFieldName, CallType.Get)
+                        'Dim sequence = Invoker.GetProperty(record, SequenceFieldName)
                         If sequence > i + 1 Then
                             CallByName(record, SequenceFieldName, CallType.Set, sequence - 1)
-                            'Invoker.SetProperty(record, SequenceFieldName, {sequence - 1})
+                            'Dim sq = sequence - 1
+                            'sequence = Invoker.GetProperty(record, SequenceFieldName)
+                            'Dim y = record.GetType().InvokeMember("Sequence", Reflection.BindingFlags.GetProperty, Nothing, record, Nothing)
+                            'Dim x = record.GetType().InvokeMember("Sequence", Reflection.BindingFlags.SetProperty, Nothing, record, Nothing)
+                            'record.GetType().InvokeMember("Sequence", Reflection.BindingFlags.SetProperty Or Reflection.BindingFlags.Public Or Reflection.BindingFlags.SetField Or Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.IgnoreCase or Reflection.BindingFlags.Instance Or Reflection.BindingFlags.SetField, Nothing, record, New Object() { 1 })
+                            'Dim x As New Form
+                            'x.GetType().InvokeMember("Text", Reflection.BindingFlags.SetProperty, Nothing, x, New Object() { "MyText" })
+                           ' (sName,  SetPublicNonPublicPropertyFieldFlags , Nothing, oObject, yArguments )
+                           ' Invoker.SetPublicPropertyOnly(record, SequenceFieldName, new Object() { 1 })
                         End If
                     Next
                 End If
-            Catch
+            Catch ex As Exception
                 ' missing member
+                Dim x = ex
             End Try
+
         End If
 
     End Sub
@@ -270,8 +280,8 @@ Public Class CDataGridView
             If Invoker.GetProperty(myBindingSource.Current, SequenceFieldName) IsNot Nothing Then
                 For Each o In myBindingSource
                     If o IsNot Nothing Then
-                        Dim sequence = CallByName(o, SequenceFieldName, CallType.Get)
-                        'Dim sequence = Invoker.GetProperty(o, SequenceFieldName)
+                        'Dim sequence = CallByName(o, SequenceFieldName, CallType.Get)
+                        Dim sequence = Invoker.GetProperty(o, SequenceFieldName)
                         If sequence = 0 Then
                             CallByName(o, SequenceFieldName, CallType.Set, i)
                             'Invoker.SetProperty(o, SequenceFieldName, {i})
