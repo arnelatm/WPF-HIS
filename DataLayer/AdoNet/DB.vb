@@ -1502,7 +1502,7 @@ Namespace AdoNet
                     ' if null, set to DbNull
 
                     If TypeOf parms(i + 1) Is Image Then
-                        Dim imageParameter As SqlParameter = New SqlParameter("@imgdata", SqlDbType.Image)
+                        Dim imageParameter As SqlParameter = New SqlParameter("@Image", SqlDbType.Image)
                         imageParameter.Value = DBNull.Value
                         command.Parameters.Add(imageParameter)
                     Else
