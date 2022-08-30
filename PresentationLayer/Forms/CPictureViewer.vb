@@ -61,7 +61,8 @@ Public Class CPictureViewer
     Private Sub btnClose_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnClose.ClickButtonArea
         'Dim docImage As Image
         DialogResult = DialogResult.OK
-        ImageFileName = OpenFileDialog1.FileName
+        ImageFileName = CPictureBox1.ImageLocation()
+        'ImageFileName = OpenFileDialog1.FileName
         'Using fd As OpenFileDialog = OpenFileDialog1
         '    'fd.Title = $"Open File Dialog"
         '    'fd.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)

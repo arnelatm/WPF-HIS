@@ -165,6 +165,10 @@ Public Class MappingProfileAccounts
         CreateMap(Of EmployeeDocument, EmployeeDocumentModel)().ReverseMap()
         CreateMap(Of EmployeeDocumentModel, EmployeeDocumentView)()
 
+        CreateMap(Of IDataImageView, DataImageModel)()
+        CreateMap(Of DataImage, DataImageModel)().ReverseMap()
+        CreateMap(Of DataImageModel, IDataImageView )().ReverseMap()
+
     End Sub
 
 

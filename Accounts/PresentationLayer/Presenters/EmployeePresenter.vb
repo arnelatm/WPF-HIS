@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.BusinessLayer
+﻿Imports System.IO
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
@@ -51,8 +52,8 @@ Namespace PresentationLayer.Presenters
                                              )
 
             CreateDataTable(DtDocumentInsertTable, {
+                                 {"DataImageIdNo", GetType(Int32)},
                                  {"DocumentIdNo", GetType(Int16)},
-                                 {"DocumentImage", GetType(Int32)},
                                  {"DocumentNumber", GetType(String)},
                                  {"EmployeeIdNo", GetType(Int32)},
                                  {"ExpiryDate", GetType(Date)},
@@ -97,8 +98,8 @@ Namespace PresentationLayer.Presenters
                                             })
 
             CreateDataTable(DtDocumentUpdateTable, {
+                                 {"DataImageIdNo", GetType(Int32)},
                                  {"DocumentIdNo", GetType(Int16)},
-                                 {"DocumentImage", GetType(Int32)},
                                  {"DocumentNumber", GetType(String)},
                                  {"EmployeeIdNo", GetType(Int32)},
                                  {"ExpiryDate", GetType(Date)},
@@ -195,8 +196,8 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub DocumentFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
+            workRow("DataImageIdNo") = itemDataView.DataImageIdNo
             workRow("DocumentIdNo") = itemDataView.DocumentIdNo
-            workRow("DocumentImage") = itemDataView.DocumentImage
             workRow("DocumentNumber") = itemDataView.DocumentNumber
             workRow("EmployeeIdNo") = View.IdNo
             workRow("ExpiryDate") = IIf(itemDataView.ExpiryDate Is Nothing, DBNull.Value, itemDataView.ExpiryDate)
@@ -259,36 +260,36 @@ Namespace PresentationLayer.Presenters
             If retVal >= 0 Then
                 retVal = UpdateChildData(_employeePhoneService, DtPhoneUpdateTable, DtPhoneInsertTable, passedValue, "EmployeeIdNo")
                 If retVal >= 0 Then
-                    retVal = UpdateChildData(_employeeDocumentService, DtDocumentUpdateTable, DtDocumentInsertTable, passedValue, "EmployeeIdNo")
                     For Each item In View.EmployeeDocuments
-                        If item.DocumentImage = -1 Then
+                        If item.DataImageIdNo <= 0 Then
                             ' item has changed need to save the picture
                             Dim diDao As New DataImageDao
                             Dim diImage As New DataImage
                             Dim myImage As New PictureBox
-                            'myImage.Image = Drawing.Image.FromFile(item.strFileName)
-                            'Dim strFileName As String = fd.FileName
-                            'Me.Image = Drawing.Image.FromFile(strFileName)
-                            'Dim fileInfo As New FileInfo(strFileName)
-                            'Dim length As Long = fileInfo.Length
-                            'If MaxImageSize > 0 Then
-                            '    If fileInfo.Length > MaxImageSize Then
-                            '        Image.Dispose()
-                            '        Image = Nothing
-                            '        Dim fileExtension = fileInfo.Extension
-                            '        Dim path As String = GlobalFuncNSub.GetTempFileName(fileExtension)
-                            '        Dim resizer As ImageResizer = New ImageResizer(MaxImageSize, strFileName, path)
-                            '        If Not resizer.ScaleImage() Then
-                            '            MessageBox.Show("Cannot scale image to " & MaxImageSize.ToString() & $" bytes size. Either select a smaller file size or resize the image manually to less than or equal to " & MaxImageSize.ToString() & " bytes.")
-                            '        End If
-                            '        Image = Drawing.Image.FromFile(path)
-                            '    End If
-                            'End If
-
-
-                            diDao.AddRecord(diImage)
+                            myImage.Image = Drawing.Image.FromFile(item.ImageFileName)
+                            Dim fileInfo As New FileInfo(item.ImageFileName)
+                            Dim length As Long = fileInfo.Length
+                            Dim maxImageSize As Decimal = 3000000
+                            If maxImageSize > 0 Then
+                                'Dim fileExtension = fileInfo.Extension
+                                'Dim path As String = GlobalFuncNSub.GetTempFileName(fileExtension)
+                                If fileInfo.Length > maxImageSize Then                                   
+                                    Dim resizer As ImageResizer = New ImageResizer(maxImageSize, item.ImageFileName, item.ImageFileName)
+                                    If Not resizer.ScaleImage() Then
+                                        MessageBox.Show("Cannot scale image to " & maxImageSize.ToString() & $" bytes size. Either select a smaller file size or resize the image manually to less than or equal to " & maxImageSize.ToString() & " bytes.")
+                                    Else
+                                        diImage.Image = Drawing.Image.FromFile(item.ImageFileName)                                   
+                                        item.DataImageIdNo = diDao.AddRecord(diImage)
+                                    End If                                    
+                                Else
+                                    Dim image As Image = Drawing.Image.FromFile(item.ImageFileName)
+                                    diImage.Image = image
+                                    item.DataImageIdNo = diDao.AddRecord(diImage)
+                                End If                                
+                            End If
                         End If
                     Next
+                    retVal = UpdateChildData(_employeeDocumentService, DtDocumentUpdateTable, DtDocumentInsertTable, passedValue, "EmployeeIdNo")
                     If retVal >= 0 Then
                         retVal = UpdateChildData(_employeeLeaveCreditService, DtEmpLeaveCreditUpdateTable, DtEmpLeaveCreditInsertTable, passedValue, "EmployeeIdNo")
                     End If

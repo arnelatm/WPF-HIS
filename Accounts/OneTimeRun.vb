@@ -128,6 +128,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgNegativeDaysPresent","Negative Days Present entry found on line number '<{lineNumber}>'. Please correct the error before saving.","Error")
         Messaging.AddMessage("MsgSaveFirstBeforeGeneration","Please save first before generating payroll.","Error")
         Messaging.AddMessage("MsgMustBeGreaterThan","Sorry the entered value in field '<{fieldName1}> must be greater than '<{fieldName2}>.'","Error")
+        Messaging.AddMessage("MsgNoImageEntered","Sorry no image entered for this document","Error")
     End Sub
 
     'Public Shared Sub CreateEnums()

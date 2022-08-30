@@ -1,5 +1,8 @@
 ﻿Imports System.Globalization
 Imports System.IO
+Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.DataLayer.AdoNet
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
@@ -720,34 +723,86 @@ Namespace PresentationLayer.Views.Forms
             Try
                 With DataGridViewDocuments
                     If .CurrentCell IsNot Nothing Then
+                        Dim index As Int16 = .CurrentCell.RowIndex()
                         If .CurrentCell.OwningColumn.Name() = "dgvImageButton" Then
                             If DataGridViewDocuments.EditingMode Then
-                                GetDocumentImage(.CurrentCell.Value)
+                                If EmployeeDocuments(index).DataImageIdNo > 0 Then
+                                    GetDocumentImage(index, EmployeeDocuments(index).DataImageIdNo)
+                                Else
+                                    GetDocumentImage(index, EmployeeDocuments(index).DataImageIdNo)
+                                End If
                             Else
-                                Messaging.Show("View Mode")
+                                If EmployeeDocuments(index).DataImageIdNo > 0 Then
+                                    Dim tempFileName As String = CreateFileFromDataImage(EmployeeDocuments(index).DataImageIdNo)
+                                    Dim cPictureViewer As New CPictureViewer(tempFileName, EmployeeName & " " & DataGridViewDocuments.CurrentRow.Cells("dgvDocumentIdNo").EditedFormattedValue)
+                                    cPictureViewer.ShowDialog()
+                                Else
+                                    If Not .EditingMode Then
+                                        Messaging.Show(True, "MsgNoImageEntered")
+                                    End If
+                                End If
                             End If
-
                         End If
                     End If
                 End With
+
+                'With DataGridViewDocuments
+                '    If .CurrentCell IsNot Nothing Then
+                '        If .CurrentCell.OwningColumn.Name() = "dgvImageButton" Then
+                '            If DataGridViewDocuments.EditingMode Then
+                '                GetDocumentImage(.CurrentRow.Index, .CurrentCell.Value)
+                '            Else
+                '                If .CurrentRow.Cells("dgvImage").Value <> 0 Then
+                '                    Dim dao = New DataImageDao
+                '                    Dim recordIdNo = .CurrentRow.Cells("dgvImage").Value
+                '                    Dim dataImage As DataImage = dao.GetRecordByIdNo(recordIdNo)
+                '                    'Dim iImage As New Image = dataImage.Image
+                '                    Dim tempFileName As String = System.IO.Path.GetRandomFileName()
+                '                    tempFileName = tempFileName.Right(tempFileName.Length - 4) + ".jpeg"
+                '                    Dim saveImage As New Bitmap(dataImage.Image)
+                '                    saveImage.Save(tempFileName, Imaging.ImageFormat.Jpeg)
+                '                    Dim cPictureViewer As New CPictureViewer(tempFileName, EmployeeName & " " & DataGridViewDocuments.CurrentRow.Cells("dgvDocumentIdNo").EditedFormattedValue)
+                '                    cPictureViewer.ShowDialog()
+                '                End If
+                '            End If
+
+                '        End If
+                '    End If
+                'End With
             Catch ex As Exception
                 Messaging.Show("error")
             End Try
 
         End Sub
 
-        Private Sub GetDocumentImage(value As Object)
+        Private Function CreateFileFromDataImage(imageIdNo As Short) As String
+            Dim dao = New DataImageDao
+            Dim dataImage As DataImage = dao.GetRecordByIdNo(imageIdNo)
+            Dim tempFileName As String = System.IO.Path.GetRandomFileName()
+            tempFileName = tempFileName + ".jpeg"
+            Dim saveImage As New Bitmap(dataImage.Image)
+            saveImage.Save(tempFileName, Imaging.ImageFormat.Jpeg)
+            Return tempFileName
+        End Function
+
+        Private Sub GetDocumentImage(index As Int16, value As Object)
             If DataGridViewDocuments.EditingMode Then
                 'Dim fd As OpenFileDialog = New OpenFileDialog()
                 'Dim strFileName As String = Nothing
                 'Dim docimage As Image
                 'Dim maxImageSize = 2000000
-                Dim cPictureViewer As New CPictureViewer(DataGridViewDocuments.CurrentRow.Cells("dgvFileName").Value , EmployeeName & " " & DataGridViewDocuments.CurrentRow.Cells("dgvDocumentIdNo").EditedFormattedValue)
+                If EmployeeDocuments(index).DataImageIdNo > 0 Then
+                    EmployeeDocuments(index).ImageFileName = CreateFileFromDataImage(EmployeeDocuments(index).DataImageIdNo)
+                End If
+                Dim documentFileName = EmployeeDocuments(DataGridViewDocuments.CurrentRow.Index).ImageFileName
+                Dim cPictureViewer As New CPictureViewer(documentFileName, EmployeeName & " " & DataGridViewDocuments.CurrentRow.Cells("dgvDocumentIdNo").EditedFormattedValue)
                 cPictureViewer.ShowDialog()
                 If cPictureViewer.DialogResult = DialogResult.OK Then
-                    DataGridViewDocuments.CurrentRow.Cells("dgvFileName").Value = cPictureViewer.ImageFileName
                     If cPictureViewer.ImageFileName IsNot Nothing Then
-                        DataGridViewDocuments.CurrentRow.Cells("dgvImage").Value = -1
+                        'DataGridViewDocuments.CurrentRow.Cells("dgvFileName").Value = cPictureViewer.ImageFileName               
+                        EmployeeDocuments(index).ImageFileName = cPictureViewer.ImageFileName
+                        'EmployeeDocuments.Item(index).DataImageIdNo = -1
+                        'DataGridViewDocuments.CurrentRow.Cells("dgvImage").Value = -1
                     End If
 
                     'Dim fileInfo As New FileInfo(cPictureViewer.ImageFileName)

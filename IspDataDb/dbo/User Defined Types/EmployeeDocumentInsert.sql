@@ -1,6 +1,6 @@
 ﻿CREATE TYPE [dbo].[EmployeeDocumentInsert] AS TABLE (
+    [DataImageIdNo]  INT             NULL,
     [DocumentIdNo]   SMALLINT        NULL,
-    [DocumentImage]  INT             NULL,
     [DocumentNumber] VARCHAR (30)    NULL,
     [EmployeeIdNo]   INT             NULL,
     [ExpiryDate]     DATE            NULL,

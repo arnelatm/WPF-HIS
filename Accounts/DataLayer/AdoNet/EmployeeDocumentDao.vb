@@ -18,8 +18,8 @@ Namespace DataLayer.AdoNet
             End If
             Dim sql As String =
                     "SELECT " &
+                    "DataImageIdNo," &
                     "DocumentIdNo," &
-                    "DocumentImage," &
                     "DocumentNumber," &
                     "EmployeeIdNo," &
                     "ExpiryDate," &
@@ -44,12 +44,12 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, EmployeeDocument) =
                                     Function(reader) _
             New EmployeeDocument() With {
+            .DataImageIdNo = Extensions.AsInt(Of Int32)(reader("DataImageIdNo")),
             .DocumentIdNo = Extensions.AsInt(Of Int16)(reader("DocumentIdNo")),
             .DocumentNumber = Extensions.AsString(reader("DocumentNumber")),
-            .DocumentImage = Extensions.AsInt(Of Int32)(reader("DocumentImage")),
             .EmployeeIdNo = Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
-            .ExpiryDate = Extensions.AsNullable(Of Date)(reader("ExpiryDate")),            
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .ExpiryDate = Extensions.AsNullable(Of Date)(reader("ExpiryDate")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),           
             .IssueDate = Extensions.AsNullable(Of Date)(reader("IssueDate")),
             .Sequence = Extensions.AsInt(Of Int16)(reader("Sequence"))
            }

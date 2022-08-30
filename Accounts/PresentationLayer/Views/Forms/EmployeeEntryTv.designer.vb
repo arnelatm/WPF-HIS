@@ -220,6 +220,7 @@
         Me.bsLeaveCredits = New System.Windows.Forms.BindingSource(Me.components)
         Me.tbpDocuments = New System.Windows.Forms.TabPage()
         Me.DataGridViewDocuments = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.bsDocuments = New System.Windows.Forms.BindingSource(Me.components)
         Me.dgvSequenceDocument = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvDocumentIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         Me.dgvNumber = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -230,7 +231,6 @@
         Me.dgvImage = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.IdNoDataGridViewTextBoxColumn1 = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.bsDocuments = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -3577,6 +3577,10 @@
         Me.DataGridViewDocuments.TabIndex = 1
         Me.DataGridViewDocuments.Translatable = true
         '
+        'bsDocuments
+        '
+        Me.bsDocuments.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeDocumentModel)
+        '
         'dgvSequenceDocument
         '
         Me.dgvSequenceDocument.BegFindValue = Nothing
@@ -3758,10 +3762,6 @@
         Me.IdNoDataGridViewTextBoxColumn1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.IdNoDataGridViewTextBoxColumn1.Translatable = false
         Me.IdNoDataGridViewTextBoxColumn1.Visible = false
-        '
-        'bsDocuments
-        '
-        Me.bsDocuments.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeDocumentModel)
         '
         'EmployeeEntryTv
         '
