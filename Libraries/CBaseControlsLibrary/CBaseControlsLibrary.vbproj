@@ -98,6 +98,8 @@
     <Compile Include="BlendTypeEditor.vb" />
     <Compile Include="cBlendItems.vb" />
     <Compile Include="cblPointer.vb" />
+    <Compile Include="CDgvCalendar.vb" />
+    <Compile Include="CDgvDtpColumn.vb" />
     <Compile Include="CPictureBox.Designer.vb">
       <DependentUpon>CPictureBox.vb</DependentUpon>
     </Compile>
