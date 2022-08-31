@@ -4,7 +4,7 @@ Public Class CDgvDtpColumn
     Inherits DataGridViewColumn
 
     Public Sub New()
-        MyBase.New(New CdgvDtpCell())
+        MyBase.New(New CDgvDtpCell())
     End Sub
 
     Public Overrides Property CellTemplate() As DataGridViewCell
@@ -15,9 +15,9 @@ Public Class CDgvDtpColumn
 
             ' Ensure that the cell used for the template is a CalendarCell.
             If (value IsNot Nothing) AndAlso
-                Not value.GetType().IsAssignableFrom(GetType(CdgvDtpCell)) _
+                Not value.GetType().IsAssignableFrom(GetType(CDgvDtpCell)) _
                 Then
-                Throw New InvalidCastException("Must be a CalendarCell")
+                Throw New InvalidCastException("Must be a CDgvDtpCell")
             End If
             MyBase.CellTemplate = value
 
@@ -26,7 +26,7 @@ Public Class CDgvDtpColumn
 
 End Class
 
-Public Class CdgvDtpCell
+Public Class CDgvDtpCell
     Inherits DataGridViewTextBoxCell
 
     Public Sub New()
@@ -34,79 +34,91 @@ Public Class CdgvDtpCell
         Me.Style.Format = "d"
     End Sub
 
+    ' You must also override this method to initialize the ComboBox instance...
+    ' This method will be called each time a cell in the column enters edit-mode,
+    ' so you can fill the ComboBox instance based on the value of the edited cell
     Public Overrides Sub InitializeEditingControl(ByVal rowIndex As Integer,
         ByVal initialFormattedValue As Object,
         ByVal dataGridViewCellStyle As DataGridViewCellStyle)
 
         ' Set the value of the editing control to the current cell value.
-        MyBase.InitializeEditingControl(rowIndex, initialFormattedValue,
-            dataGridViewCellStyle)
+        MyBase.InitializeEditingControl(rowIndex, initialFormattedValue, dataGridViewCellStyle)
 
-        Dim ctl As CDgvDtpEditingControl =
-            CType(DataGridView.EditingControl, CDgvDtpEditingControl)
+        Dim ctl As CDgvDtpEditingControl = CType(DataGridView.EditingControl, CDgvDtpEditingControl)
+
+        ' Make sure you have an instance...
+        'If ctl IsNot Nothing Then
+        ' Populate the TextBox, passing the instance as a parameter
+        ' Set the value of the editing control instance to the current cell value.
 
         ' Use the default row value when Value property is null.
         If (Me.Value Is Nothing) Then
-            ctl.Value = CType(Me.DefaultNewRowValue, DateTime)
+            ctl.Value = CType(Me.DefaultNewRowValue, DateTime?)
         Else
-            ctl.Value = CType(Me.Value, DateTime)
+            ctl.Value = CType(Me.Value, DateTime?)
         End If
+        'End If
+
     End Sub
 
+    ' You must override the EditType property to return the cell's
+    ' editing control type, which is your custom control class...
     Public Overrides ReadOnly Property EditType() As Type
         Get
-            ' Return the type of the editing control that CalendarCell uses.
+            ' Return the type of the editing control that cDgvDtpCell uses.
             Return GetType(CDgvDtpEditingControl)
         End Get
     End Property
 
     Public Overrides ReadOnly Property ValueType() As Type
         Get
-            ' Return the type of the value that CalendarCell contains.
-            Return GetType(DateTime)
+            ' Return the type of the value that CDgvDtpCell contains.
+            Return GetType(DateTime?)
         End Get
     End Property
 
     Public Overrides ReadOnly Property DefaultNewRowValue() As Object
         Get
             ' Use the current date and time as the default value.
-            Return DateTime.Now
+            Return Nothing
         End Get
     End Property
 
+    'Public Property CellEditingControl As CDgvDtpEditingControl
+
 End Class
 
-Class CDgvDtpEditingControl
+Public Class CDgvDtpEditingControl
     Inherits CCustomDateTimePicker
     Implements IDataGridViewEditingControl
 
-    Private dataGridViewControl As DataGridView
-    Private valueIsChanged As Boolean = False
-    Private rowIndexNum As Integer
+    Private _valueIsChanged As Boolean = False
+    Private _rowIndexNum As Integer
+    Private _dataGridViewControl As DataGridView
 
     Public Sub New()
-        'Me.Format = DateTimePickerFormat.Short
+        'Me. Format = DateTimePickerFormat.Short
     End Sub
 
     Public Property EditingControlFormattedValue() As Object _
         Implements IDataGridViewEditingControl.EditingControlFormattedValue
 
         Get
-            If Value Is Nothing Then
+            If Text Is Nothing Then
                 Return Nothing
             End If
-            Return CDate(Me.Value).ToShortDateString()
+            Return CDate(Me.Text).ToShortDateString()
         End Get
 
         Set(ByVal value As Object)
             Try
-                ' This will throw an exception of the string is 
+                ' This will throw an exception of the string is
                 ' null, empty, or not in the format of a date.
                 Me.Value = DateTime.Parse(CStr(value))
             Catch
                 ' In the case of an exception, just use the default
                 ' value so we're not left with a null value.
-                Me.Value = DateTime.Now
+                Me.Value = Nothing
             End Try
         End Set
 
@@ -119,7 +131,7 @@ Class CDgvDtpEditingControl
         If Value Is Nothing Then
             Return Nothing
         End If
-        Return CDate(Me.Value).ToShortDateString()
+        Return CDate(Value).ToShortDateString()
 
     End Function
 
@@ -133,16 +145,13 @@ Class CDgvDtpEditingControl
 
     End Sub
 
-    Public Property EditingControlRowIndex() As Integer _
-        Implements IDataGridViewEditingControl.EditingControlRowIndex
-
+    Public Property EditingControlRowIndex As Integer Implements IDataGridViewEditingControl.EditingControlRowIndex
         Get
-            Return rowIndexNum
+            Return _rowIndexNum
         End Get
         Set(ByVal value As Integer)
-            rowIndexNum = value
+            _rowIndexNum = value
         End Set
-
     End Property
 
     Public Function EditingControlWantsInputKey(ByVal key As Keys,
@@ -181,26 +190,21 @@ Class CDgvDtpEditingControl
 
     Public Property EditingControlDataGridView() As DataGridView _
         Implements IDataGridViewEditingControl.EditingControlDataGridView
-
         Get
-            Return dataGridViewControl
+            Return _dataGridViewControl
         End Get
         Set(ByVal value As DataGridView)
-            dataGridViewControl = value
+            _dataGridViewControl = value
         End Set
-
     End Property
 
-    Public Property EditingControlValueChanged() As Boolean _
-        Implements IDataGridViewEditingControl.EditingControlValueChanged
-
+    Public Property EditingControlValueChanged As Boolean Implements IDataGridViewEditingControl.EditingControlValueChanged
         Get
-            Return valueIsChanged
+            Return _valueIsChanged
         End Get
         Set(ByVal value As Boolean)
-            valueIsChanged = value
+            _valueIsChanged = value
         End Set
-
     End Property
 
     Public ReadOnly Property EditingControlCursor() As Cursor _
@@ -212,14 +216,15 @@ Class CDgvDtpEditingControl
 
     End Property
 
-    'Protected Overrides Sub OnValueChanged(ByVal eventargs As EventArgs)
+    Protected Overrides Sub OnValueChanged(sender As Object, ByVal eventargs As EventArgs)
 
-    '    ' Notify the DataGridView that the contents of the cell have changed.
-    '    valueIsChanged = True
-    '    Me.EditingControlDataGridView.NotifyCurrentCellDirty(True)
-    '    MyBase.OnValueChanged(eventargs)
+        ' Notify the DataGridView that the contents of the cell have changed.
+        _valueIsChanged = True
+        'Dim dgv As DataGridView = Parent
+        Me.EditingControlDataGridView.NotifyCurrentCellDirty(True)
+        MyBase.OnValueChanged(sender, eventargs)
 
-    'End Sub
+    End Sub
 
 End Class
 

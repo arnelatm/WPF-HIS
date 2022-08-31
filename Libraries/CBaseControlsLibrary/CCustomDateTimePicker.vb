@@ -201,7 +201,7 @@ Public Class CCustomDateTimePicker
             'txtTime.txbTime.DisplayOnly = Value
             'txtDate.DisplayOnly = Value
             'txtLongDate.DisplayOnly = Value
-            ReadOnlyDp = value
+            ReadOnlyDp = Value
             If _displayOnly Then
                 dtp.Visible = False
             Else
@@ -240,7 +240,7 @@ Public Class CCustomDateTimePicker
             txtTime.txbTime.DisplayOnly = Value
             'txtTime.DisplayOnly = Value
             Refresh()
-            
+
         End Set
     End Property
 
@@ -720,7 +720,7 @@ Public Class CCustomDateTimePicker
         ToggleTargetCulture()
     End Sub
 
-    Private Sub OnValueChanged(sender As Object, e As EventArgs) Handles txtDate.TextChanged, txtLongDate.TextChanged
+    Protected Overridable Sub OnValueChanged(sender As Object, e As EventArgs) Handles txtDate.TextChanged, txtLongDate.TextChanged
         RaiseEvent ValueChanged(sender, e)
     End Sub
 

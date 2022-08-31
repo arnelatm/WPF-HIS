@@ -1,10 +1,10 @@
 ﻿Imports System.Windows.Forms
 
-Public Class CalendarColumn
+Public Class CDgvDtpCalendarColumn
     Inherits DataGridViewColumn
 
     Public Sub New()
-        MyBase.New(New CalendarCell())
+        MyBase.New(New CDgvDtpCalendarCell())
     End Sub
 
     Public Overrides Property CellTemplate() As DataGridViewCell
@@ -13,11 +13,11 @@ Public Class CalendarColumn
         End Get
         Set(ByVal value As DataGridViewCell)
 
-            ' Ensure that the cell used for the template is a CalendarCell.
+            ' Ensure that the cell used for the template is a CdgvDtpCalendarCell.
             If (value IsNot Nothing) AndAlso
-                Not value.GetType().IsAssignableFrom(GetType(CalendarCell)) _
+                Not value.GetType().IsAssignableFrom(GetType(CDgvDtpCalendarCell)) _
                 Then
-                Throw New InvalidCastException("Must be a CalendarCell")
+                Throw New InvalidCastException("Must be a CDgvDtpCalendarCell")
             End If
             MyBase.CellTemplate = value
 
@@ -26,12 +26,12 @@ Public Class CalendarColumn
 
 End Class
 
-Public Class CalendarCell
+Public Class CDgvDtpCalendarCell
     Inherits DataGridViewTextBoxCell
 
     Public Sub New()
         ' Use the short date format.
-        Me.Style.Format = "d"
+        'Me.Style.Format = "d"
     End Sub
 
     Public Overrides Sub InitializeEditingControl(ByVal rowIndex As Integer,
@@ -42,8 +42,8 @@ Public Class CalendarCell
         MyBase.InitializeEditingControl(rowIndex, initialFormattedValue,
             dataGridViewCellStyle)
 
-        Dim ctl As CalendarEditingControl =
-            CType(DataGridView.EditingControl, CalendarEditingControl)
+        Dim ctl As CDgvDtpCalendarEditingControl =
+            CType(DataGridView.EditingControl, CDgvDtpCalendarEditingControl)
 
         ' Use the default row value when Value property is null.
         If (Me.Value Is Nothing) Then
@@ -60,14 +60,14 @@ Public Class CalendarCell
 
     Public Overrides ReadOnly Property EditType() As Type
         Get
-            ' Return the type of the editing control that CalendarCell uses.
-            Return GetType(CalendarEditingControl)
+            ' Return the type of the editing control that CDgvDtpCalendarCell uses.
+            Return GetType(CDgvDtpCalendarEditingControl)
         End Get
     End Property
 
     Public Overrides ReadOnly Property ValueType() As Type
         Get
-            ' Return the type of the value that CalendarCell contains.
+            ' Return the type of the value that CDgvDtpCalendarCell contains.
             Return GetType(DateTime?)
         End Get
     End Property
@@ -82,8 +82,8 @@ Public Class CalendarCell
 
 End Class
 
-Class CalendarEditingControl
-    Inherits DateTimePicker
+Class CDgvDtpCalendarEditingControl
+    Inherits CDateTimePickerNullable
     Implements IDataGridViewEditingControl
 
     'Private dataGridViewControl As DataGridView
@@ -94,6 +94,7 @@ Class CalendarEditingControl
 
     Public Sub New()
         Me.Format = DateTimePickerFormat.Short
+        Me.ShowCheckBox = True
     End Sub
 
     Public Property EditingControlFormattedValue() As Object _
@@ -212,43 +213,13 @@ Class CalendarEditingControl
     End Property
 
     Protected Overrides Sub OnValueChanged(ByVal eventargs As EventArgs)
-
         ' Notify the DataGridView that the contents of the cell have changed.
         valueIsChanged = True
+        'If Not Checked Then
+        '    Value = Nothing
+        'End If
         Me.EditingControlDataGridView.NotifyCurrentCellDirty(True)
         MyBase.OnValueChanged(eventargs)
-
-    End Sub
-
-End Class
-
-Public Class Form1
-    Inherits Form
-
-    Private dataGridView1 As New DataGridView()
-
-    <STAThreadAttribute()>
-    Public Shared Sub Main()
-        Application.Run(New Form1())
-    End Sub
-
-    Public Sub New()
-        Me.dataGridView1.Dock = DockStyle.Fill
-        Me.Controls.Add(Me.dataGridView1)
-        Me.Text = "DataGridView calendar column demo"
-    End Sub
-
-    Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) _
-        Handles Me.Load
-
-        Dim col As New CalendarColumn()
-        Me.dataGridView1.Columns.Add(col)
-        Me.dataGridView1.RowCount = 5
-        Dim row As DataGridViewRow
-        For Each row In Me.dataGridView1.Rows
-            row.Cells(0).Value = DateTime.Now
-        Next row
-
     End Sub
 
 End Class

@@ -258,8 +258,8 @@ Public Class CDataGridView
                             'record.GetType().InvokeMember("Sequence", Reflection.BindingFlags.SetProperty Or Reflection.BindingFlags.Public Or Reflection.BindingFlags.SetField Or Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.IgnoreCase or Reflection.BindingFlags.Instance Or Reflection.BindingFlags.SetField, Nothing, record, New Object() { 1 })
                             'Dim x As New Form
                             'x.GetType().InvokeMember("Text", Reflection.BindingFlags.SetProperty, Nothing, x, New Object() { "MyText" })
-                           ' (sName,  SetPublicNonPublicPropertyFieldFlags , Nothing, oObject, yArguments )
-                           ' Invoker.SetPublicPropertyOnly(record, SequenceFieldName, new Object() { 1 })
+                            ' (sName,  SetPublicNonPublicPropertyFieldFlags , Nothing, oObject, yArguments )
+                            ' Invoker.SetPublicPropertyOnly(record, SequenceFieldName, new Object() { 1 })
                         End If
                     Next
                 End If
@@ -474,12 +474,15 @@ Public Class CDataGridView
     '        ParentofGridChangedHandler.Invoke(Me, e)
     '    End If
     'End Sub
-    Private Sub DataGridViewGroupAccesses_CurrentCellChanged(sender As Object, e As EventArgs) Handles MyBase.CurrentCellChanged
-        If _dgvInsertColumnIndex <= 0 Then Exit Sub
-        If (CurrentRow IsNot Nothing) AndAlso EditingMode AndAlso (_dgvInsertColumnIndex >= 1) Then
-            CurrentRow.Cells(_dgvInsertColumnIndex).Value = Images.InsertRowImage
-        End If
-    End Sub
+
+    'Private Sub DataGridViewGroupAccesses_CurrentCellChanged(sender As Object, e As EventArgs) Handles MyBase.CurrentCellChanged
+    '    If _dgvInsertColumnIndex <= 0 Then Exit Sub
+    '    If (CurrentRow IsNot Nothing) AndAlso EditingMode AndAlso (_dgvInsertColumnIndex >= 1) Then
+    '        If Images.InsertRowImage <> CurrentRow.Cells(_dgvInsertColumnIndex).Value Then
+    '            CurrentRow.Cells(_dgvInsertColumnIndex).Value = Images.InsertRowImage
+    '        End If
+    '    End If
+    'End Sub
 
     Private Function GetFirstEditableColumn() As Integer
         If _firstEditableColumn < 0 Then
