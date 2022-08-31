@@ -4,6 +4,8 @@ Namespace PresentationLayer.Views.Interfaces
 
     Public Interface IEmployeeDocumentView
         Inherits IView
+
+        Property Changed As Boolean
         Property DataImageIdNo As Int32
         Property DocumentIdNo As Int16
         Property DocumentNumber As String

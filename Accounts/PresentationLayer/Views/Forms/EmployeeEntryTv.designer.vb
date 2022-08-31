@@ -228,7 +228,7 @@
         Me.dgvExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvImageButton = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.dgvFileName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dgvImage = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.dgvDataImageIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.IdNoDataGridViewTextBoxColumn1 = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
@@ -3537,7 +3537,7 @@
         Me.DataGridViewDocuments.AutoGenerateColumns = false
         Me.DataGridViewDocuments.BegFindValue = Nothing
         Me.DataGridViewDocuments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewDocuments.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceDocument, Me.dgvDocumentIdNo, Me.dgvNumber, Me.dgvIssueDate, Me.dgvExpiryDate, Me.dgvImageButton, Me.dgvFileName, Me.dgvImage, Me.dgvEmployeeIdNo, Me.IdNoDataGridViewTextBoxColumn1})
+        Me.DataGridViewDocuments.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequenceDocument, Me.dgvDocumentIdNo, Me.dgvNumber, Me.dgvIssueDate, Me.dgvExpiryDate, Me.dgvImageButton, Me.dgvFileName, Me.dgvDataImageIdNo, Me.dgvEmployeeIdNo, Me.IdNoDataGridViewTextBoxColumn1})
         Me.DataGridViewDocuments.DataSource = Me.bsDocuments
         DataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle45.BackColor = System.Drawing.Color.White
@@ -3697,28 +3697,28 @@
         Me.dgvFileName.ReadOnly = true
         Me.dgvFileName.Visible = false
         '
-        'dgvImage
+        'dgvDataImageIdNo
         '
-        Me.dgvImage.BegFindValue = Nothing
-        Me.dgvImage.DataPropertyName = "DocumentImage"
+        Me.dgvDataImageIdNo.BegFindValue = Nothing
+        Me.dgvDataImageIdNo.DataPropertyName = "DataImageIdNo"
         DataGridViewCellStyle42.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle42.ForeColor = System.Drawing.Color.Black
-        Me.dgvImage.DefaultCellStyle = DataGridViewCellStyle42
-        Me.dgvImage.EditingMode = false
-        Me.dgvImage.EndFindValue = Nothing
-        Me.dgvImage.FieldDescription = Nothing
-        Me.dgvImage.FieldName = Nothing
-        Me.dgvImage.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.dgvImage.FindEnabled = false
-        Me.dgvImage.HeaderText = "Image"
-        Me.dgvImage.IgnoreCase = false
-        Me.dgvImage.Name = "dgvImage"
-        Me.dgvImage.ReadOnly = true
-        Me.dgvImage.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvImage.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.dgvImage.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.dgvImage.Translatable = false
-        Me.dgvImage.Visible = false
+        Me.dgvDataImageIdNo.DefaultCellStyle = DataGridViewCellStyle42
+        Me.dgvDataImageIdNo.EditingMode = false
+        Me.dgvDataImageIdNo.EndFindValue = Nothing
+        Me.dgvDataImageIdNo.FieldDescription = Nothing
+        Me.dgvDataImageIdNo.FieldName = Nothing
+        Me.dgvDataImageIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.dgvDataImageIdNo.FindEnabled = false
+        Me.dgvDataImageIdNo.HeaderText = "DataImageIdNo"
+        Me.dgvDataImageIdNo.IgnoreCase = false
+        Me.dgvDataImageIdNo.Name = "dgvDataImageIdNo"
+        Me.dgvDataImageIdNo.ReadOnly = true
+        Me.dgvDataImageIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvDataImageIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.dgvDataImageIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+        Me.dgvDataImageIdNo.Translatable = false
+        Me.dgvDataImageIdNo.Visible = false
         '
         'dgvEmployeeIdNo
         '
@@ -3975,7 +3975,7 @@ End Sub
         Friend WithEvents dgvExpiryDate As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvImageButton As DataGridViewButtonColumn
         Friend WithEvents dgvFileName As DataGridViewTextBoxColumn
-        Friend WithEvents dgvImage As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents dgvDataImageIdNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvEmployeeIdNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn1 As Libraries.CBaseControlsLibrary.CDgvTextColumn
     End Class
