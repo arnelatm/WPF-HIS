@@ -8,6 +8,7 @@ Namespace PresentationLayer.Views
 
         Private _imageFileName as String
 
+        Public Property Changed As Boolean Implements IEmployeeDocumentView.Changed
         Public Property DataImageIdNo As Int32 Implements IEmployeeDocumentView.DataImageIdNo
         Public Property DocumentIdNo As Int16 Implements IEmployeeDocumentView.DocumentIdNo
         Public Property DocumentNumber As String Implements IEmployeeDocumentView.DocumentNumber
@@ -21,10 +22,10 @@ Namespace PresentationLayer.Views
             End Get
             Set(value As String)
                 if DataImageIdNo <= 0 then
-                    if value isNot Nothing andalso value <> "" then
-                        if Not DataImageIdNo > 0 then
-                            DataImageIdNo = -1
-                        End If
+                    if value isNot Nothing 
+                        DataImageIdNo = -1
+                    elseif value = "" then
+                        DataImageIdNo = 0
                     End If
                 End If
                 _imageFileName = value

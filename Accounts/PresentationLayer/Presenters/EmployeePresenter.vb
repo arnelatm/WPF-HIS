@@ -176,12 +176,12 @@ Namespace PresentationLayer.Presenters
                 Dim employeePayElements As New List(Of EmployeePayElementView)
                 employeePayElements.AddRange(View.RegularEmployeeEarnings)
                 employeePayElements.AddRange(View.RegularEmployeeDeductions)
-                
+
                 ViewToDataTables(employeePayElements, DtEmpPayElementInsertTable, DtEmpPayElementUpdateTable, AddressOf EmpPayElementFillData, AddressOf EmpPayElementFilter)
                 ViewToDataTables(View.EmployeePhones, DtPhoneInsertTable, DtPhoneUpdateTable, AddressOf PhoneFillData, AddressOf PhoneFilter)
                 ViewToDataTables(View.EmployeeLeaveCredits, DtEmpLeaveCreditInsertTable, DtEmpLeaveCreditUpdateTable, AddressOf EmpLeaveCreditFillData, AddressOf EmpLeaveCreditFilter)
                 SaveDocumentImages()
-                ViewToDataTables(View.EmployeeDocuments, DtDocumentInsertTable, DtDocumentUpdateTable, AddressOf DocumentFillData, AddressOf DocumentFilter)              
+                ViewToDataTables(View.EmployeeDocuments, DtDocumentInsertTable, DtDocumentUpdateTable, AddressOf DocumentFillData, AddressOf DocumentFilter)
                 If IsEmpty(View.HiredDate) Then
                     View.HiredDate = Today()
                 End If
@@ -273,34 +273,56 @@ Namespace PresentationLayer.Presenters
 
         Private Sub SaveDocumentImages()
             For Each item In View.EmployeeDocuments
-                If item.DataImageIdNo <= 0 Then
-                    ' item has changed need to save the picture
-                    Dim diDao As New DataImageDao
+                If item.Changed Then
+                    ' item has changed need to save the image
                     Dim diImage As New DataImage
-                    Dim myImage As New PictureBox
-                    myImage.Image = Drawing.Image.FromFile(item.ImageFileName)
-                    Dim fileInfo As New FileInfo(item.ImageFileName)
-                    Dim length As Long = fileInfo.Length
-                    Dim maxImageSize As Decimal = 3000000
-                    If maxImageSize > 0 Then
-                        'Dim fileExtension = fileInfo.Extension
-                        'Dim path As String = GlobalFuncNSub.GetTempFileName(fileExtension)
-                        If fileInfo.Length > maxImageSize Then
-                            Dim resizer As ImageResizer = New ImageResizer(maxImageSize, item.ImageFileName, item.ImageFileName)
-                            If Not resizer.ScaleImage() Then
-                                MessageBox.Show("Cannot scale image to " & maxImageSize.ToString() & $" bytes size. Either select a smaller file size or resize the image manually to less than or equal to " & maxImageSize.ToString() & " bytes.")
+                    If IsEmpty(item.ImageFileName) Then
+                        If item.DataImageIdNo > 0 Then
+                            diImage.IdNo = item.IdNo
+                            diImage.Image = Nothing
+                            SaveDataImage(item, diImage, Nothing)
+                        End If
+                    Else
+                        Dim fileInfo As New FileInfo(item.ImageFileName)
+                        Dim length As Long = fileInfo.Length
+                        Dim maxImageSize As Decimal = 3000000
+                        If maxImageSize > 0 Then
+                            If fileInfo.Length > maxImageSize Then
+                                Dim resizer As ImageResizer = New ImageResizer(maxImageSize, item.ImageFileName, item.ImageFileName)
+                                If Not resizer.ScaleImage() Then
+                                    MessageBox.Show("Cannot scale image to " & maxImageSize.ToString() & $" bytes size. Either select a smaller file size or resize the image manually to less than or equal to " & maxImageSize.ToString() & " bytes.")
+                                Else
+                                    If IsEmpty(item.ImageFileName) Then
+                                        diImage.Image = Nothing
+                                    Else
+                                        diImage.Image = Drawing.Image.FromFile(item.ImageFileName)
+                                    End If
+                                    SaveDataImage(item, diImage, item.ImageFileName)
+                                End If
                             Else
-                                diImage.Image = Drawing.Image.FromFile(item.ImageFileName)
-                                item.DataImageIdNo = diDao.AddRecord(diImage)
+                                diImage.IdNo = item.DataImageIdNo
+                                SaveDataImage(item, diImage, item.ImageFileName)
                             End If
-                        Else
-                            Dim image As Image = Drawing.Image.FromFile(item.ImageFileName)
-                            diImage.Image = image
-                            item.DataImageIdNo = diDao.AddRecord(diImage)
                         End If
                     End If
                 End If
             Next
+        End Sub
+
+        Private Shared Sub SaveDataImage(ByRef employeeDocumentView As EmployeeDocumentView, ByRef diImage As DataImage, ByVal imageFileName As String)
+            Dim diDao As New DataImageDao
+            If IsEmpty(employeeDocumentView.ImageFileName) Then
+                If diImage.IdNo > 0 Then
+                    diDao.DeleteRecord(diImage.IdNo, "DataImage")
+                End If
+            Else
+                diImage.Image = IIf(IsEmpty(employeeDocumentView.ImageFileName), CObj(DBNull.Value), Drawing.Image.FromFile(imageFileName))
+                If employeeDocumentView.DataImageIdNo > 0 Then
+                    employeeDocumentView.DataImageIdNo = diDao.UpdateRecord(diImage)
+                Else
+                    employeeDocumentView.DataImageIdNo = diDao.AddRecord(diImage)
+                End If
+            End If
         End Sub
 
         Protected Overrides Function IsBizDataValid() As Boolean

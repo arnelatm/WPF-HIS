@@ -5,6 +5,7 @@
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
     Public Class EmployeeDocumentModel
+        Public Property Changed As Boolean
         Public Property DataImageIdNo As Int32
         Public Property DocumentIdNo As Int16
         Public Property DocumentNumber As String

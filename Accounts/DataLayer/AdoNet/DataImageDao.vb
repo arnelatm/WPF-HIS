@@ -46,7 +46,8 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(DataImage As DataImage) As Object()
             Return New Object() {
-                        "@Image", ToSqlImage(DataImage.Image)
+                    "@IdNo", DataImage.IdNo,
+                    "@Image", ToSqlImage(DataImage.Image)                        
                     }
             'Return New Object() {
             '                        "@Image", ToSqlImage(DataImage.Image)

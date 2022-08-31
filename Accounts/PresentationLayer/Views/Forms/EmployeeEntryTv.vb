@@ -751,9 +751,11 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub GetDocumentImage(index As Int16)
             Dim documentFileName As String = Nothing
+            Dim originalDocumentFileName As String = Nothing
             If EmployeeDocuments(index).DataImageIdNo > 0 Then
+                originalDocumentFileName = CreateFileFromDataImage(EmployeeDocuments(index).DataImageIdNo)
                 If EmployeeDocuments(index).ImageFileName Is Nothing OrElse EmployeeDocuments(index).ImageFileName = "" Then
-                    documentFileName = CreateFileFromDataImage(EmployeeDocuments(index).DataImageIdNo)
+                    documentFileName = originalDocumentFileName
                 Else
                     documentFileName = EmployeeDocuments(index).ImageFileName
                 End If
@@ -761,7 +763,17 @@ Namespace PresentationLayer.Views.Forms
             Dim remarks As String = EmployeeName & " " & DataGridViewDocuments.CurrentRow.Cells("dgvDocumentIdNo").EditedFormattedValue
             Dim imageFileName As String = SelectImage(documentFileName, remarks)
             If imageFileName IsNot Nothing Then
+                Dim changed As Boolean = EmployeeDocuments(index).Changed
                 EmployeeDocuments(index).ImageFileName = imageFileName
+                If imageFileName <> originalDocumentFileName Then
+                    EmployeeDocuments(index).Changed = True
+                Else
+                    EmployeeDocuments(index).Changed = False
+                End If
+                If imageFileName = "" Then
+                    ' the user selected to clear the image
+                    EmployeeDocuments(index).DataImageIdNo = 0
+                End If
             End If
         End Sub
 
