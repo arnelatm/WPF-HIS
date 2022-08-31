@@ -94,21 +94,21 @@ Partial Class CPictureViewer
         '
         'btnShow
         '
-        Me.btnShow.DesignerSelected = false
+        Me.btnShow.DesignerSelected = true
         Me.btnShow.ImageIndex = 0
-        Me.btnShow.Location = New System.Drawing.Point(462, 3)
+        Me.btnShow.Location = New System.Drawing.Point(440, 3)
         Me.btnShow.Name = "btnShow"
         Me.btnShow.OriginalImageName = Nothing
         Me.btnShow.SecurityKey = ""
-        Me.btnShow.Size = New System.Drawing.Size(111, 25)
+        Me.btnShow.Size = New System.Drawing.Size(133, 25)
         Me.btnShow.TabIndex = 0
-        Me.btnShow.Text = "Open Image"
+        Me.btnShow.Text = "Select New Image"
         '
         'btnClear
         '
         Me.btnClear.DesignerSelected = false
         Me.btnClear.ImageIndex = 0
-        Me.btnClear.Location = New System.Drawing.Point(327, 3)
+        Me.btnClear.Location = New System.Drawing.Point(305, 3)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.OriginalImageName = Nothing
         Me.btnClear.SecurityKey = ""
@@ -120,7 +120,7 @@ Partial Class CPictureViewer
         '
         Me.btnCancel.DesignerSelected = false
         Me.btnCancel.ImageIndex = 0
-        Me.btnCancel.Location = New System.Drawing.Point(210, 3)
+        Me.btnCancel.Location = New System.Drawing.Point(188, 3)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.OriginalImageName = Nothing
         Me.btnCancel.SecurityKey = ""
@@ -130,10 +130,10 @@ Partial Class CPictureViewer
         '
         'btnClose
         '
-        Me.btnClose.DesignerSelected = true
+        Me.btnClose.DesignerSelected = false
         Me.CFlowLayout1.SetFlowBreak(Me.btnClose, true)
         Me.btnClose.ImageIndex = 0
-        Me.btnClose.Location = New System.Drawing.Point(114, 3)
+        Me.btnClose.Location = New System.Drawing.Point(92, 3)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.OriginalImageName = Nothing
         Me.btnClose.SecurityKey = ""

@@ -20,16 +20,8 @@ Namespace PresentationLayer.Views.Forms
         Private _employeeLeaveCredits As List(Of EmployeeLeaveCreditView)
         Private _employeeDocuments As List(Of EmployeeDocumentView)
         Private _employeePhones As List(Of EmployeePhoneView)
-
-        'Private _unit As List(Of Lookup.LookupData)
-        'Private _deductionsByName As List(Of Lookup.LookupData)
-        'Private _leaves As List(Of Lookup.LookupData)
-        'Private _earningsByName As List(Of Lookup.LookupData)
         Private _fileSizeTooLarge As Boolean = False
-
         Private ReadOnly _nfi As NumberFormatInfo
-
-        'Public Overrides Property ViewDisplayName as String = "EmployeeEntryTv"
 
         Public Sub New()
 
@@ -499,51 +491,8 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-        Protected Overrides Sub CreateMainFieldsDictionary()
-            MainFieldsDictionary = New Dictionary(Of String, Object) From
-        {
-         {"Active", chkActive},
-         {"ActualDutyHours", txtActualDutyHours},
-         {"Balance", txtBalance},
-         {"BankAccountNo", txtBankAccountNo},
-         {"BankIdNo", cacBankIdNo},
-         {"BirthDate", dtpBirthDate},
-         {"BloodType", cboBloodType},
-         {"CountryCode", cacCountryCode},
-         {"DepartmentIdNo", cacDepartmentIdNo},
-         {"DesignationIdNo", cacDesignationIdNo},
-         {"District", txtDistrict},
-         {"DutyHours", txtDutyHours},
-         {"Email", txtEmail},
-         {"EmployeeCode", txtEmployeeCode},
-         {"EmployeeName", txtEmployeeName},
-         {"EmployeeNameAra", txtEmployeeNameAra},
-         {"Gender", cacGender},
-         {"HiredDate", dtpHiredDate},
-         {"Iban", txtIban},
-         {"IdNo", TxtIdNo},
-         {"MaritalStatus", cacMaritalStatus},
-         {"NationalIdNo", txtNationalIdNo},
-         {"NationalityCode", cacNationalityCode},
-         {"Notes", txtNotes},
-         {"OpeningBalance", txtOpeningBalance},
-         {"PayCycleIdNo", cboPayCycleidNo},
-         {"PayGroupIdNo", cboPayGroupIdNo},
-         {"PaymentMethod", cboPaymentMethod},
-         {"Picture", imgPicture},
-         {"PoBox", txtPoBox},
-         {"ProvinceState", txtProvinceState},
-         {"ReleasedDate", dtpReleasedDate},
-         {"ReligionIdNo", cacReligionIdNo},
-         {"SponsorType", cboSponsorType},
-         {"Street", txtStreet},
-         {"Supervisor", chkSupervisor},
-         {"SupervisorIdNo", cboSupervisorIdNo},
-         {"Title", cboTitle},
-         {"TownCity", txtTownCity},
-         {"ZipCode", txtZipCode}
-        }
-        End Sub
+
+#Region "DataBindings"
 
         Private Sub BindEmployeeDeduction()
             bsDeductions.DataSource = Nothing
@@ -671,6 +620,53 @@ Namespace PresentationLayer.Views.Forms
                 dgvLeaveIdNo.ValueMember = "IdNo"
             End With
         End Sub
+#End Region
+
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
+        {
+         {"Active", chkActive},
+         {"ActualDutyHours", txtActualDutyHours},
+         {"Balance", txtBalance},
+         {"BankAccountNo", txtBankAccountNo},
+         {"BankIdNo", cacBankIdNo},
+         {"BirthDate", dtpBirthDate},
+         {"BloodType", cboBloodType},
+         {"CountryCode", cacCountryCode},
+         {"DepartmentIdNo", cacDepartmentIdNo},
+         {"DesignationIdNo", cacDesignationIdNo},
+         {"District", txtDistrict},
+         {"DutyHours", txtDutyHours},
+         {"Email", txtEmail},
+         {"EmployeeCode", txtEmployeeCode},
+         {"EmployeeName", txtEmployeeName},
+         {"EmployeeNameAra", txtEmployeeNameAra},
+         {"Gender", cacGender},
+         {"HiredDate", dtpHiredDate},
+         {"Iban", txtIban},
+         {"IdNo", TxtIdNo},
+         {"MaritalStatus", cacMaritalStatus},
+         {"NationalIdNo", txtNationalIdNo},
+         {"NationalityCode", cacNationalityCode},
+         {"Notes", txtNotes},
+         {"OpeningBalance", txtOpeningBalance},
+         {"PayCycleIdNo", cboPayCycleidNo},
+         {"PayGroupIdNo", cboPayGroupIdNo},
+         {"PaymentMethod", cboPaymentMethod},
+         {"Picture", imgPicture},
+         {"PoBox", txtPoBox},
+         {"ProvinceState", txtProvinceState},
+         {"ReleasedDate", dtpReleasedDate},
+         {"ReligionIdNo", cacReligionIdNo},
+         {"SponsorType", cboSponsorType},
+         {"Street", txtStreet},
+         {"Supervisor", chkSupervisor},
+         {"SupervisorIdNo", cboSupervisorIdNo},
+         {"Title", cboTitle},
+         {"TownCity", txtTownCity},
+         {"ZipCode", txtZipCode}
+        }
+        End Sub
 
         Private Sub DataGridViewPhoneDisplay_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPhoneDisplay.CellContentClick
             DisplayPhoneTab()
@@ -679,8 +675,6 @@ Namespace PresentationLayer.Views.Forms
         Private Sub DisplayPhoneTab()
             If Not tbcEmployee.Controls.Contains(tbpPhones) Then
                 tbpPhones.Parent = tbcEmployee
-                'EmployeeTabControl.TabPages.Add(tbpPhones)
-                'tbpPhones.Controls.Add(DataGridViewPhones)
             End If
             tbcEmployee.SelectTab(tbpPhones)
         End Sub
@@ -726,49 +720,19 @@ Namespace PresentationLayer.Views.Forms
                         Dim index As Int16 = .CurrentCell.RowIndex()
                         If .CurrentCell.OwningColumn.Name() = "dgvImageButton" Then
                             If DataGridViewDocuments.EditingMode Then
-                                If EmployeeDocuments(index).DataImageIdNo > 0 Then
-                                    GetDocumentImage(index, EmployeeDocuments(index).DataImageIdNo)
-                                Else
-                                    GetDocumentImage(index, EmployeeDocuments(index).DataImageIdNo)
-                                End If
+                                GetDocumentImage(index)
                             Else
                                 If EmployeeDocuments(index).DataImageIdNo > 0 Then
                                     Dim tempFileName As String = CreateFileFromDataImage(EmployeeDocuments(index).DataImageIdNo)
-                                    Dim cPictureViewer As New CPictureViewer(tempFileName, EmployeeName & " " & DataGridViewDocuments.CurrentRow.Cells("dgvDocumentIdNo").EditedFormattedValue)
-                                    cPictureViewer.ShowDialog()
+                                    Dim remarks = DataGridViewDocuments.CurrentRow.Cells("dgvDocumentIdNo").EditedFormattedValue
+                                    DisplayImage(tempFileName, EmployeeName & " " & remarks)
                                 Else
-                                    If Not .EditingMode Then
-                                        Messaging.Show(True, "MsgNoImageEntered")
-                                    End If
+                                    Messaging.Show(True, "MsgNoImageEntered")
                                 End If
                             End If
                         End If
                     End If
                 End With
-
-                'With DataGridViewDocuments
-                '    If .CurrentCell IsNot Nothing Then
-                '        If .CurrentCell.OwningColumn.Name() = "dgvImageButton" Then
-                '            If DataGridViewDocuments.EditingMode Then
-                '                GetDocumentImage(.CurrentRow.Index, .CurrentCell.Value)
-                '            Else
-                '                If .CurrentRow.Cells("dgvImage").Value <> 0 Then
-                '                    Dim dao = New DataImageDao
-                '                    Dim recordIdNo = .CurrentRow.Cells("dgvImage").Value
-                '                    Dim dataImage As DataImage = dao.GetRecordByIdNo(recordIdNo)
-                '                    'Dim iImage As New Image = dataImage.Image
-                '                    Dim tempFileName As String = System.IO.Path.GetRandomFileName()
-                '                    tempFileName = tempFileName.Right(tempFileName.Length - 4) + ".jpeg"
-                '                    Dim saveImage As New Bitmap(dataImage.Image)
-                '                    saveImage.Save(tempFileName, Imaging.ImageFormat.Jpeg)
-                '                    Dim cPictureViewer As New CPictureViewer(tempFileName, EmployeeName & " " & DataGridViewDocuments.CurrentRow.Cells("dgvDocumentIdNo").EditedFormattedValue)
-                '                    cPictureViewer.ShowDialog()
-                '                End If
-                '            End If
-
-                '        End If
-                '    End If
-                'End With
             Catch ex As Exception
                 Messaging.Show("error")
             End Try
@@ -785,76 +749,40 @@ Namespace PresentationLayer.Views.Forms
             Return tempFileName
         End Function
 
-        Private Sub GetDocumentImage(index As Int16, value As Object)
-            If DataGridViewDocuments.EditingMode Then
-                'Dim fd As OpenFileDialog = New OpenFileDialog()
-                'Dim strFileName As String = Nothing
-                'Dim docimage As Image
-                'Dim maxImageSize = 2000000
-                If EmployeeDocuments(index).DataImageIdNo > 0 Then
-                    EmployeeDocuments(index).ImageFileName = CreateFileFromDataImage(EmployeeDocuments(index).DataImageIdNo)
+        Private Sub GetDocumentImage(index As Int16)
+            Dim documentFileName As String = Nothing
+            If EmployeeDocuments(index).DataImageIdNo > 0 Then
+                If EmployeeDocuments(index).ImageFileName Is Nothing OrElse EmployeeDocuments(index).ImageFileName = "" Then
+                    documentFileName = CreateFileFromDataImage(EmployeeDocuments(index).DataImageIdNo)
+                Else
+                    documentFileName = EmployeeDocuments(index).ImageFileName
                 End If
-                Dim documentFileName = EmployeeDocuments(DataGridViewDocuments.CurrentRow.Index).ImageFileName
-                Dim cPictureViewer As New CPictureViewer(documentFileName, EmployeeName & " " & DataGridViewDocuments.CurrentRow.Cells("dgvDocumentIdNo").EditedFormattedValue)
-                cPictureViewer.ShowDialog()
-                If cPictureViewer.DialogResult = DialogResult.OK Then
-                    If cPictureViewer.ImageFileName IsNot Nothing Then
-                        'DataGridViewDocuments.CurrentRow.Cells("dgvFileName").Value = cPictureViewer.ImageFileName               
-                        EmployeeDocuments(index).ImageFileName = cPictureViewer.ImageFileName
-                        'EmployeeDocuments.Item(index).DataImageIdNo = -1
-                        'DataGridViewDocuments.CurrentRow.Cells("dgvImage").Value = -1
-                    End If
-
-                    'Dim fileInfo As New FileInfo(cPictureViewer.ImageFileName)
-                    'Dim fileExtension = fileInfo.Extension
-                    'DataGridViewDocuments.CurrentRow.Cells("dgvFileName").Value = fileInfo.FullName
-                    'Dim filePathAndName As String = GlobalFuncNSub.GetTempFileName(fileExtension)
-                    'docimage = Drawing.Image.FromFile(cPictureViewer.ImageFileName)
-                    'Dim fileInfo As New FileInfo(cPictureViewer.ImageFileName)
-                    'Dim length As Long = fileInfo.Length
-                    'If maxImageSize > 0 Then
-                    '    If fileInfo.Length > maxImageSize Then
-                    '        docimage.Dispose()
-                    '        docimage = Nothing
-                    '        Dim fileExtension = fileInfo.Extension
-                    '        Dim path As String = GlobalFuncNSub.GetTempFileName(fileExtension)
-                    '        Dim resizer As ImageResizer = New ImageResizer(maxImageSize, cPictureViewer.ImageFileName, path)
-                    '        If Not resizer.ScaleImage() Then
-                    '            MessageBox.Show("Cannot scale image to " & maxImageSize.ToString() & $" bytes size. Either select a smaller file size or resize the image manually to less than or equal to " & maxImageSize.ToString() & " bytes.")
-                    '        End If
-                    '        docimage = Drawing.Image.FromFile(path)
-                    '    End If
-                    'End If
-                End If
-
-                'Using fd As OpenFileDialog = New OpenFileDialog()
-                'fd.Title = $"Open File Dialog"
-                'fd.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures)
-                'fd.Filter = $"Image Files(*.BMP;*.JPG;*.GIF;*.JPEG;*.TIFF;*.PNG)|*.BMP;*.JPG;*.JPEG;*.GIF;*.TIFF;*.PNG"
-                'fd.FilterIndex = 1
-                'fd.RestoreDirectory = True
-                'If fd.ShowDialog() = DialogResult.OK Then
-                '    strFileName = fd.FileName
-                '    docimage = Drawing.Image.FromFile(strFileName)
-                '    Dim fileInfo As New FileInfo(strFileName)
-                '    Dim length As Long = fileInfo.Length
-                '    If MaxImageSize > 0 Then
-                '        If fileInfo.Length > MaxImageSize Then
-                '            docImage.Dispose()
-                '            docImage = Nothing
-                '            Dim fileExtension = fileInfo.Extension
-                '            Dim path As String = GlobalFuncNSub.GetTempFileName(fileExtension)
-                '            Dim resizer As ImageResizer = New ImageResizer(MaxImageSize, strFileName, path)
-                '            If Not resizer.ScaleImage() Then
-                '                MessageBox.Show("Cannot scale image to " & maxImageSize.ToString() & $" bytes size. Either select a smaller file size or resize the image manually to less than or equal to " & MaxImageSize.ToString() & " bytes.")
-                '            End If
-                '            docImage = Drawing.Image.FromFile(path)
-                '        End If
-                '    End If
-                'End If
-                'End Using
+            End If
+            Dim remarks As String = EmployeeName & " " & DataGridViewDocuments.CurrentRow.Cells("dgvDocumentIdNo").EditedFormattedValue
+            Dim imageFileName As String = SelectImage(documentFileName, remarks)
+            If imageFileName IsNot Nothing Then
+                EmployeeDocuments(index).ImageFileName = imageFileName
             End If
         End Sub
+
+
+        Private Sub DisplayImage(cFileName As String, cRemarks As String)
+            If cFileName Is Nothing Or cFileName = "" Then
+                Messaging.Show(True, "MsgNoImageEntered")
+            Else
+                Dim cPictureViewer As New CPictureViewer(cFileName, cRemarks, True)
+                cPictureViewer.ShowDialog()
+            End If
+        End Sub
+
+        Private Function SelectImage(cFileName As String, cRemarks As String) As String
+            Dim cPictureViewer As New CPictureViewer(cFileName, cRemarks, False)
+            Dim dialogResult As DialogResult = cPictureViewer.ShowDialog()
+            If dialogResult = DialogResult.OK Then
+                Return cPictureViewer.ImageFileName
+            End If
+            Return Nothing
+        End Function
 
         Private Sub DgvEarning_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEarnings.CellEndEdit
             ProcessCellEndEdit(DataGridViewEarnings, bsEarnings)
@@ -866,34 +794,6 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub DgvLeaveCredits_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewLeaveCredits.CellEndEdit
             ProcessCellEndEdit(DataGridViewLeaveCredits, bsLeaveCredits)
-            'With DataGridViewLeaveCredits
-            '    If .CurrentRow IsNot Nothing Then
-            '        Select Case .CurrentCell.OwningColumn.Name
-            '            Case $"LeaveIdNo"
-            '                'If leave.LeaveCycle = EnumToCode(LeaveCycleSelection.OnceOnly) Or leave.LeaveCycle = EnumToCode(LeaveCycleSelection.AsNeeded) Then
-            '                '    empLeaveCredit.MaxCarryOver = 0
-            '                '    empLeaveCredit.MaxLimit = 0
-            '                '    empLeaveCredit.NoMaxLimit = False
-            '                '    empLeaveCredit.Cumulative = False
-            '                '    Beep()
-            '                'Else
-            '                '    If Not empLeaveCredit.Cumulative Then
-            '                '        empLeaveCredit.MaxCarryOver = 0
-            '                '        empLeaveCredit.MaxLimit = 0
-            '                '        empLeaveCredit.NoMaxLimit = False
-            '                '    Else
-            '                '        empLeaveCredit.NoMaxLimit = True
-            '                '        empLeaveCredit.MaxLimit = 0
-            '                '    End If
-            '                'End If
-            '                'bsLeaveCredits.ResetBindings(False)
-            '                'if bsLeaveCredits.Current.Cumulative Then
-            '                '    bsLeaveCredits.Current.
-            '                'End If
-            '        End Select
-            '    End If
-            'End With
-            'bsLeaveCredits.ResetBindings(False)
         End Sub
 
     End Class
