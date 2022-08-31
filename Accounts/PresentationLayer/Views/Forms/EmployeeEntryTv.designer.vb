@@ -224,8 +224,8 @@
         Me.dgvSequenceDocument = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvDocumentIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         Me.dgvNumber = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvIssueDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.dgvIssueDate = New AATM.Libraries.CBaseControlsLibrary.CDgvDtpColumn()
+        Me.dgvExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CDgvDtpColumn()
         Me.dgvImageButton = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.dgvFileName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvDataImageIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -3642,53 +3642,37 @@
         '
         'dgvIssueDate
         '
-        Me.dgvIssueDate.BegFindValue = Nothing
         Me.dgvIssueDate.DataPropertyName = "IssueDate"
         DataGridViewCellStyle40.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle40.ForeColor = System.Drawing.Color.Black
         Me.dgvIssueDate.DefaultCellStyle = DataGridViewCellStyle40
-        Me.dgvIssueDate.EditingMode = false
-        Me.dgvIssueDate.EndFindValue = Nothing
-        Me.dgvIssueDate.FieldDescription = Nothing
-        Me.dgvIssueDate.FieldName = Nothing
-        Me.dgvIssueDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.dgvIssueDate.FindEnabled = false
         Me.dgvIssueDate.HeaderText = "Issue Date"
-        Me.dgvIssueDate.IgnoreCase = false
         Me.dgvIssueDate.Name = "dgvIssueDate"
         Me.dgvIssueDate.ReadOnly = true
         Me.dgvIssueDate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvIssueDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.dgvIssueDate.Translatable = false
+        Me.dgvIssueDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'dgvExpiryDate
         '
-        Me.dgvExpiryDate.BegFindValue = Nothing
         Me.dgvExpiryDate.DataPropertyName = "ExpiryDate"
         DataGridViewCellStyle41.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle41.ForeColor = System.Drawing.Color.Black
         Me.dgvExpiryDate.DefaultCellStyle = DataGridViewCellStyle41
-        Me.dgvExpiryDate.EditingMode = false
-        Me.dgvExpiryDate.EndFindValue = Nothing
-        Me.dgvExpiryDate.FieldDescription = Nothing
-        Me.dgvExpiryDate.FieldName = Nothing
-        Me.dgvExpiryDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.dgvExpiryDate.FindEnabled = false
         Me.dgvExpiryDate.HeaderText = "Expiry Date"
-        Me.dgvExpiryDate.IgnoreCase = false
         Me.dgvExpiryDate.Name = "dgvExpiryDate"
         Me.dgvExpiryDate.ReadOnly = true
         Me.dgvExpiryDate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvExpiryDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.dgvExpiryDate.Translatable = false
+        Me.dgvExpiryDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'dgvImageButton
         '
+        Me.dgvImageButton.DataPropertyName = "DataImageIdNo"
         Me.dgvImageButton.HeaderText = "Image"
         Me.dgvImageButton.Name = "dgvImageButton"
         Me.dgvImageButton.ReadOnly = true
         Me.dgvImageButton.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.dgvImageButton.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.dgvImageButton.Width = 40
         '
         'dgvFileName
         '
@@ -3971,8 +3955,8 @@ End Sub
         Friend WithEvents dgvSequenceDocument As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvDocumentIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvNumber As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvIssueDate As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvExpiryDate As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents dgvIssueDate As Libraries.CBaseControlsLibrary.CDgvDtpColumn
+        Friend WithEvents dgvExpiryDate As Libraries.CBaseControlsLibrary.CDgvDtpColumn
         Friend WithEvents dgvImageButton As DataGridViewButtonColumn
         Friend WithEvents dgvFileName As DataGridViewTextBoxColumn
         Friend WithEvents dgvDataImageIdNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
