@@ -176,10 +176,12 @@ Namespace PresentationLayer.Presenters
                 Dim employeePayElements As New List(Of EmployeePayElementView)
                 employeePayElements.AddRange(View.RegularEmployeeEarnings)
                 employeePayElements.AddRange(View.RegularEmployeeDeductions)
+                
                 ViewToDataTables(employeePayElements, DtEmpPayElementInsertTable, DtEmpPayElementUpdateTable, AddressOf EmpPayElementFillData, AddressOf EmpPayElementFilter)
                 ViewToDataTables(View.EmployeePhones, DtPhoneInsertTable, DtPhoneUpdateTable, AddressOf PhoneFillData, AddressOf PhoneFilter)
-                ViewToDataTables(View.EmployeeDocuments, DtDocumentInsertTable, DtDocumentUpdateTable, AddressOf DocumentFillData, AddressOf DocumentFilter)
                 ViewToDataTables(View.EmployeeLeaveCredits, DtEmpLeaveCreditInsertTable, DtEmpLeaveCreditUpdateTable, AddressOf EmpLeaveCreditFillData, AddressOf EmpLeaveCreditFilter)
+                SaveDocumentImages()
+                ViewToDataTables(View.EmployeeDocuments, DtDocumentInsertTable, DtDocumentUpdateTable, AddressOf DocumentFillData, AddressOf DocumentFilter)              
                 If IsEmpty(View.HiredDate) Then
                     View.HiredDate = Today()
                 End If
@@ -260,41 +262,45 @@ Namespace PresentationLayer.Presenters
             If retVal >= 0 Then
                 retVal = UpdateChildData(_employeePhoneService, DtPhoneUpdateTable, DtPhoneInsertTable, passedValue, "EmployeeIdNo")
                 If retVal >= 0 Then
-                    For Each item In View.EmployeeDocuments
-                        If item.DataImageIdNo <= 0 Then
-                            ' item has changed need to save the picture
-                            Dim diDao As New DataImageDao
-                            Dim diImage As New DataImage
-                            Dim myImage As New PictureBox
-                            myImage.Image = Drawing.Image.FromFile(item.ImageFileName)
-                            Dim fileInfo As New FileInfo(item.ImageFileName)
-                            Dim length As Long = fileInfo.Length
-                            Dim maxImageSize As Decimal = 3000000
-                            If maxImageSize > 0 Then
-                                'Dim fileExtension = fileInfo.Extension
-                                'Dim path As String = GlobalFuncNSub.GetTempFileName(fileExtension)
-                                If fileInfo.Length > maxImageSize Then                                   
-                                    Dim resizer As ImageResizer = New ImageResizer(maxImageSize, item.ImageFileName, item.ImageFileName)
-                                    If Not resizer.ScaleImage() Then
-                                        MessageBox.Show("Cannot scale image to " & maxImageSize.ToString() & $" bytes size. Either select a smaller file size or resize the image manually to less than or equal to " & maxImageSize.ToString() & " bytes.")
-                                    Else
-                                        diImage.Image = Drawing.Image.FromFile(item.ImageFileName)                                   
-                                        item.DataImageIdNo = diDao.AddRecord(diImage)
-                                    End If                                    
-                                Else
-                                    Dim image As Image = Drawing.Image.FromFile(item.ImageFileName)
-                                    diImage.Image = image
-                                    item.DataImageIdNo = diDao.AddRecord(diImage)
-                                End If                                
-                            End If
-                        End If
-                    Next
+
                     retVal = UpdateChildData(_employeeDocumentService, DtDocumentUpdateTable, DtDocumentInsertTable, passedValue, "EmployeeIdNo")
                     If retVal >= 0 Then
                         retVal = UpdateChildData(_employeeLeaveCreditService, DtEmpLeaveCreditUpdateTable, DtEmpLeaveCreditInsertTable, passedValue, "EmployeeIdNo")
                     End If
                 End If
             End If
+        End Sub
+
+        Private Sub SaveDocumentImages()
+            For Each item In View.EmployeeDocuments
+                If item.DataImageIdNo <= 0 Then
+                    ' item has changed need to save the picture
+                    Dim diDao As New DataImageDao
+                    Dim diImage As New DataImage
+                    Dim myImage As New PictureBox
+                    myImage.Image = Drawing.Image.FromFile(item.ImageFileName)
+                    Dim fileInfo As New FileInfo(item.ImageFileName)
+                    Dim length As Long = fileInfo.Length
+                    Dim maxImageSize As Decimal = 3000000
+                    If maxImageSize > 0 Then
+                        'Dim fileExtension = fileInfo.Extension
+                        'Dim path As String = GlobalFuncNSub.GetTempFileName(fileExtension)
+                        If fileInfo.Length > maxImageSize Then
+                            Dim resizer As ImageResizer = New ImageResizer(maxImageSize, item.ImageFileName, item.ImageFileName)
+                            If Not resizer.ScaleImage() Then
+                                MessageBox.Show("Cannot scale image to " & maxImageSize.ToString() & $" bytes size. Either select a smaller file size or resize the image manually to less than or equal to " & maxImageSize.ToString() & " bytes.")
+                            Else
+                                diImage.Image = Drawing.Image.FromFile(item.ImageFileName)
+                                item.DataImageIdNo = diDao.AddRecord(diImage)
+                            End If
+                        Else
+                            Dim image As Image = Drawing.Image.FromFile(item.ImageFileName)
+                            diImage.Image = image
+                            item.DataImageIdNo = diDao.AddRecord(diImage)
+                        End If
+                    End If
+                End If
+            Next
         End Sub
 
         Protected Overrides Function IsBizDataValid() As Boolean
