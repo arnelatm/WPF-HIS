@@ -220,10 +220,9 @@
         Me.bsLeaveCredits = New System.Windows.Forms.BindingSource(Me.components)
         Me.tbpDocuments = New System.Windows.Forms.TabPage()
         Me.DataGridViewDocuments = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.bsDocuments = New System.Windows.Forms.BindingSource(Me.components)
-        Me.dgvSequenceDocument = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvDocumentIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
-        Me.dgvNumber = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvSequenceDocument = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvDocumentIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvNumber = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvIssueDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvImageButton = New System.Windows.Forms.DataGridViewButtonColumn()
@@ -231,6 +230,7 @@
             Me.dgvDataImageIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.IdNoDataGridViewTextBoxColumn1 = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.bsDocuments = New System.Windows.Forms.BindingSource(Me.components)
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -735,7 +735,7 @@
             Me.cacMaritalStatus.FieldName = Nothing
             Me.cacMaritalStatus.FilterRule = Nothing
             Me.cacMaritalStatus.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cacMaritalStatus.FindEnabled = False
+            Me.cacMaritalStatus.FindEnabled = True
             Me.floPersonal.SetFlowBreak(Me.cacMaritalStatus, True)
             Me.cacMaritalStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cacMaritalStatus.ForeColor = System.Drawing.Color.Black
@@ -3577,10 +3577,6 @@
             Me.DataGridViewDocuments.TabIndex = 1
             Me.DataGridViewDocuments.Translatable = True
             '
-            'bsDocuments
-            '
-            Me.bsDocuments.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeDocumentModel)
-            '
             'dgvSequenceDocument
             '
             Me.dgvSequenceDocument.BegFindValue = Nothing
@@ -3685,89 +3681,93 @@
             'dgvImageButton
             '
             Me.dgvImageButton.DataPropertyName = "DataImageIdNo"
-        Me.dgvImageButton.HeaderText = "Image"
-        Me.dgvImageButton.Name = "dgvImageButton"
-        Me.dgvImageButton.ReadOnly = true
-        Me.dgvImageButton.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvImageButton.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.dgvImageButton.Width = 40
-        '
-        'dgvFileName
-        '
-        Me.dgvFileName.HeaderText = "FileName"
-        Me.dgvFileName.Name = "dgvFileName"
-        Me.dgvFileName.ReadOnly = true
-        Me.dgvFileName.Visible = false
-        '
-        'dgvDataImageIdNo
-        '
-        Me.dgvDataImageIdNo.BegFindValue = Nothing
-        Me.dgvDataImageIdNo.DataPropertyName = "DataImageIdNo"
-        DataGridViewCellStyle42.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle42.ForeColor = System.Drawing.Color.Black
-        Me.dgvDataImageIdNo.DefaultCellStyle = DataGridViewCellStyle42
-        Me.dgvDataImageIdNo.EditingMode = false
-        Me.dgvDataImageIdNo.EndFindValue = Nothing
-        Me.dgvDataImageIdNo.FieldDescription = Nothing
-        Me.dgvDataImageIdNo.FieldName = Nothing
-        Me.dgvDataImageIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.dgvDataImageIdNo.FindEnabled = false
-        Me.dgvDataImageIdNo.HeaderText = "DataImageIdNo"
-        Me.dgvDataImageIdNo.IgnoreCase = false
-        Me.dgvDataImageIdNo.Name = "dgvDataImageIdNo"
-        Me.dgvDataImageIdNo.ReadOnly = true
-        Me.dgvDataImageIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvDataImageIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.dgvDataImageIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
-        Me.dgvDataImageIdNo.Translatable = false
-        Me.dgvDataImageIdNo.Visible = false
-        '
-        'dgvEmployeeIdNo
-        '
-        Me.dgvEmployeeIdNo.BegFindValue = Nothing
-        Me.dgvEmployeeIdNo.DataPropertyName = "EmployeeIdNo"
-        DataGridViewCellStyle43.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle43.ForeColor = System.Drawing.Color.Black
-        Me.dgvEmployeeIdNo.DefaultCellStyle = DataGridViewCellStyle43
-        Me.dgvEmployeeIdNo.EditingMode = false
-        Me.dgvEmployeeIdNo.EndFindValue = Nothing
-        Me.dgvEmployeeIdNo.FieldDescription = Nothing
-        Me.dgvEmployeeIdNo.FieldName = Nothing
-        Me.dgvEmployeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.dgvEmployeeIdNo.FindEnabled = false
-        Me.dgvEmployeeIdNo.HeaderText = "EmployeeIdNo"
-        Me.dgvEmployeeIdNo.IgnoreCase = false
-        Me.dgvEmployeeIdNo.Name = "dgvEmployeeIdNo"
-        Me.dgvEmployeeIdNo.ReadOnly = true
-        Me.dgvEmployeeIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.dgvEmployeeIdNo.Translatable = false
-        Me.dgvEmployeeIdNo.Visible = false
-        '
-        'IdNoDataGridViewTextBoxColumn1
-        '
-        Me.IdNoDataGridViewTextBoxColumn1.BegFindValue = Nothing
-        Me.IdNoDataGridViewTextBoxColumn1.DataPropertyName = "IdNo"
-        DataGridViewCellStyle44.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle44.ForeColor = System.Drawing.Color.Black
-        Me.IdNoDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle44
-        Me.IdNoDataGridViewTextBoxColumn1.EditingMode = false
-        Me.IdNoDataGridViewTextBoxColumn1.EndFindValue = Nothing
-        Me.IdNoDataGridViewTextBoxColumn1.FieldDescription = Nothing
-        Me.IdNoDataGridViewTextBoxColumn1.FieldName = Nothing
-        Me.IdNoDataGridViewTextBoxColumn1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.IdNoDataGridViewTextBoxColumn1.FindEnabled = false
-        Me.IdNoDataGridViewTextBoxColumn1.HeaderText = "IdNo"
-        Me.IdNoDataGridViewTextBoxColumn1.IgnoreCase = false
-        Me.IdNoDataGridViewTextBoxColumn1.Name = "IdNoDataGridViewTextBoxColumn1"
-        Me.IdNoDataGridViewTextBoxColumn1.ReadOnly = true
-        Me.IdNoDataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.IdNoDataGridViewTextBoxColumn1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.IdNoDataGridViewTextBoxColumn1.Translatable = false
-        Me.IdNoDataGridViewTextBoxColumn1.Visible = false
-        '
-        'EmployeeEntryTv
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
+            Me.dgvImageButton.HeaderText = "Image"
+            Me.dgvImageButton.Name = "dgvImageButton"
+            Me.dgvImageButton.ReadOnly = True
+            Me.dgvImageButton.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvImageButton.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvImageButton.Width = 40
+            '
+            'dgvFileName
+            '
+            Me.dgvFileName.HeaderText = "FileName"
+            Me.dgvFileName.Name = "dgvFileName"
+            Me.dgvFileName.ReadOnly = True
+            Me.dgvFileName.Visible = False
+            '
+            'dgvDataImageIdNo
+            '
+            Me.dgvDataImageIdNo.BegFindValue = Nothing
+            Me.dgvDataImageIdNo.DataPropertyName = "DataImageIdNo"
+            DataGridViewCellStyle42.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle42.ForeColor = System.Drawing.Color.Black
+            Me.dgvDataImageIdNo.DefaultCellStyle = DataGridViewCellStyle42
+            Me.dgvDataImageIdNo.EditingMode = False
+            Me.dgvDataImageIdNo.EndFindValue = Nothing
+            Me.dgvDataImageIdNo.FieldDescription = Nothing
+            Me.dgvDataImageIdNo.FieldName = Nothing
+            Me.dgvDataImageIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvDataImageIdNo.FindEnabled = False
+            Me.dgvDataImageIdNo.HeaderText = "DataImageIdNo"
+            Me.dgvDataImageIdNo.IgnoreCase = False
+            Me.dgvDataImageIdNo.Name = "dgvDataImageIdNo"
+            Me.dgvDataImageIdNo.ReadOnly = True
+            Me.dgvDataImageIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvDataImageIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvDataImageIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
+            Me.dgvDataImageIdNo.Translatable = False
+            Me.dgvDataImageIdNo.Visible = False
+            '
+            'dgvEmployeeIdNo
+            '
+            Me.dgvEmployeeIdNo.BegFindValue = Nothing
+            Me.dgvEmployeeIdNo.DataPropertyName = "EmployeeIdNo"
+            DataGridViewCellStyle43.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle43.ForeColor = System.Drawing.Color.Black
+            Me.dgvEmployeeIdNo.DefaultCellStyle = DataGridViewCellStyle43
+            Me.dgvEmployeeIdNo.EditingMode = False
+            Me.dgvEmployeeIdNo.EndFindValue = Nothing
+            Me.dgvEmployeeIdNo.FieldDescription = Nothing
+            Me.dgvEmployeeIdNo.FieldName = Nothing
+            Me.dgvEmployeeIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvEmployeeIdNo.FindEnabled = False
+            Me.dgvEmployeeIdNo.HeaderText = "EmployeeIdNo"
+            Me.dgvEmployeeIdNo.IgnoreCase = False
+            Me.dgvEmployeeIdNo.Name = "dgvEmployeeIdNo"
+            Me.dgvEmployeeIdNo.ReadOnly = True
+            Me.dgvEmployeeIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvEmployeeIdNo.Translatable = False
+            Me.dgvEmployeeIdNo.Visible = False
+            '
+            'IdNoDataGridViewTextBoxColumn1
+            '
+            Me.IdNoDataGridViewTextBoxColumn1.BegFindValue = Nothing
+            Me.IdNoDataGridViewTextBoxColumn1.DataPropertyName = "IdNo"
+            DataGridViewCellStyle44.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle44.ForeColor = System.Drawing.Color.Black
+            Me.IdNoDataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle44
+            Me.IdNoDataGridViewTextBoxColumn1.EditingMode = False
+            Me.IdNoDataGridViewTextBoxColumn1.EndFindValue = Nothing
+            Me.IdNoDataGridViewTextBoxColumn1.FieldDescription = Nothing
+            Me.IdNoDataGridViewTextBoxColumn1.FieldName = Nothing
+            Me.IdNoDataGridViewTextBoxColumn1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.IdNoDataGridViewTextBoxColumn1.FindEnabled = False
+            Me.IdNoDataGridViewTextBoxColumn1.HeaderText = "IdNo"
+            Me.IdNoDataGridViewTextBoxColumn1.IgnoreCase = False
+            Me.IdNoDataGridViewTextBoxColumn1.Name = "IdNoDataGridViewTextBoxColumn1"
+            Me.IdNoDataGridViewTextBoxColumn1.ReadOnly = True
+            Me.IdNoDataGridViewTextBoxColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.IdNoDataGridViewTextBoxColumn1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.IdNoDataGridViewTextBoxColumn1.Translatable = False
+            Me.IdNoDataGridViewTextBoxColumn1.Visible = False
+            '
+            'bsDocuments
+            '
+            Me.bsDocuments.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeDocumentModel)
+            '
+            'EmployeeEntryTv
+            '
+            Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.ClientSize = New System.Drawing.Size(1020, 555)
         Me.Name = "EmployeeEntryTv"
         Me.RightToLeft = System.Windows.Forms.RightToLeft.No

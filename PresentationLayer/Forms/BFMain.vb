@@ -1197,7 +1197,10 @@ Public Class BfMain
     End Function
 
     Public Function GetFieldType(fieldName As String) As Type
-        Return Invoker.GetProperty(Me, fieldName).GetType
+        If Invoker.GetProperty(Me, fieldName) IsNot Nothing Then
+            Return Invoker.GetProperty(Me, fieldName).GetType
+        End If
+        Return Nothing
     End Function
 
     Protected Sub ProcessCellEndEdit(dataGridView As DataGridView, bindingSource As BindingSource)

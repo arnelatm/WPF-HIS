@@ -796,7 +796,12 @@ Public Class CaComboBox
         End If
         Dim x = CallByName(myForm, "GetFieldType", CallType.Method, {FieldName})
         'Dim x = Invoker.InvokeProperty(myForm, "GetFieldType", CallType.Method, {FieldName})
+        'If x IsNot Nothing Then
         FindDataType = GetObjectDataType(x)
+        'Else
+        'Dim y = Invoker.InvokeProperty(myForm, "GetFieldType", CallType.Method, {FieldName})
+        'FindDataType = GetObjectDataType(y)
+        'End If
         searchForm.ShowDialog()
         'CallByName(myForm, "FindFieldNew", CallType.Method, Me)
         Invoker.InvokeFunction(myForm, "FindFieldNew", {Me})

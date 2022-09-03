@@ -4,11 +4,11 @@ Namespace PresentationLayer.Views.Interfaces
 
     Public Interface IDocumentView
         Inherits IView
-        Property IdNo As Int16
         Property DocumentCode As String
         Property DocumentName As String
         Property DocumentNameAra As String
         Property DocumentType As String
+        Property IdNo As Int16
         Property ImageType As String
         Property NeedsExpiryDate As Boolean
         Property NeedsIssueDate As Boolean

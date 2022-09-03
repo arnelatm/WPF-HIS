@@ -1193,6 +1193,11 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemDocuments_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDocuments.Click
             RunForm(Of DocumentEntryTv, DocumentPresenter(Of DocumentModel))()
         End Sub
+
+        Private Sub TestFormToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TestFormToolStripMenuItem.Click
+            Dim cForm As New TestForm
+            cForm.Show()
+        End Sub
     End Class
 
 End Namespace

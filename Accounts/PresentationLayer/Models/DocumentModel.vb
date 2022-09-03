@@ -6,12 +6,12 @@
     ''' </summary>
     Public Class DocumentModel
 
-        Public Property Errors As List(Of String)
-        Public Property IdNo As Int16
         Public Property DocumentCode As String
         Public Property DocumentName As String
         Public Property DocumentNameAra As String
         Public Property DocumentType As String
+        Public Property Errors As List(Of String)
+        Public Property IdNo As Int16
         Public Property ImageType As String
         Public Property NeedsExpiryDate As Boolean
         Public Property NeedsIssueDate As Boolean

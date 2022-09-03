@@ -11,12 +11,24 @@ Namespace DataLayer.AdoNet
         Inherits CommonDao
         Implements iDao(Of Document), IDaoAutoCode
 
+        Private Const FieldList = "DocumentCode," &
+                                  "DocumentName," &
+                                  "DocumentNameAra," &
+                                  "DocumentType," &
+                                  "IdNo," &
+                                  "ImageType," &
+                                  "NeedsExpiryDate," &
+                                  "NeedsIssueDate," &
+                                  "NeedsNumber," &
+                                  "Notes"
+
         Private ReadOnly Db As New Db()
 
         Public Function GetRecordByIdNo(idNo) As Document Implements iDao(Of Document).GetRecordByIdNo
             Dim sql As String =
-                    " SELECT IdNo, DocumentCode, DocumentName, DocumentNameAra, DocumentType, ImageType, NeedsNumber, NeedsIssueDate, NeedsExpiryDate, Notes" &
-                    "   FROM [Document]" &
+                    "SELECT " &
+                    FieldList &
+                    " FROM [Document]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).FirstOrDefault()
@@ -30,49 +42,65 @@ Namespace DataLayer.AdoNet
                     "        DocumentNameAra = @DocumentNameAra," &
                     "        DocumentType = @DocumentType," &
                     "        ImageType = @ImageType," &
-                    "        NeedsNumber = @NeedsNumber," &
-                    "        NeedsIssueDate = @NeedsIssueDate," &
                     "        NeedsExpiryDate = @NeedsExpiryDate," &
+                    "        NeedsIssueDate = @NeedsIssueDate," &
+                    "        NeedsNumber = @NeedsNumber," &
                     "        Notes = @Notes" &
-                    "  WHERE IdNo = @IdNo"
-
+                    "  WHERE IdNo = @IdNo "
             Return Db.Update(sql, Take(Document))
         End Function
 
         Public Function AddRecord(ByRef Document As Document) As Integer Implements iDao(Of Document).AddRecord
-            Dim sql As String =
-                    " INSERT INTO [Document] " &
-                    " (DocumentCode,DocumentName,DocumentNameAra,DocumentType,ImageType,NeedsNumber,NeedsIssueDate,NeedsExpiryDate,Notes) " &
-                    " VALUES (@DocumentCode,@DocumentName,@DocumentNameAra,@DocumentType,@ImageType,@NeedsNumber,@NeedsIssueDate,@NeedsExpiryDate,@Notes) "
+            Dim sql As String = "INSERT INTO [Document] (" &
+                                  "DocumentCode," &
+                                  "DocumentName," &
+                                  "DocumentNameAra," &
+                                  "DocumentType," &
+                                  "ImageType," &
+                                  "NeedsExpiryDate," &
+                                  "NeedsIssueDate," &
+                                  "NeedsNumber," &
+                                  "Notes" &
+                                  ") VALUES (" &
+                                  "@DocumentCode," &
+                                  "@DocumentName," &
+                                  "@DocumentNameAra," &
+                                  "@DocumentType," &
+                                  "@ImageType," &
+                                  "@NeedsExpiryDate," &
+                                  "@NeedsIssueDate," &
+                                  "@NeedsNumber," &
+                                  "@Notes" &
+                                  ")"
             Return Db.Insert(sql, Take(Document))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, Document) =
                                     Function(reader) _
             New Document() With {
-            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .DocumentCode = Extensions.AsString(reader("DocumentCode")),
             .DocumentName = Extensions.AsString(reader("DocumentName")),
             .DocumentNameAra = Extensions.AsString(reader("DocumentNameAra")),
             .DocumentType = Extensions.AsString(reader("DocumentType")),
+            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .ImageType = Extensions.AsString(reader("ImageType")),
-            .NeedsNumber = Extensions.AsBool(reader("NeedsNumber")),
-            .NeedsIssueDate = Extensions.AsBool(reader("NeedsIssueDate")),
             .NeedsExpiryDate = Extensions.AsBool(reader("NeedsExpiryDate")),
+            .NeedsIssueDate = Extensions.AsBool(reader("NeedsIssueDate")),
+            .NeedsNumber = Extensions.AsBool(reader("NeedsNumber")),
             .Notes = Extensions.AsString(reader("Notes"))
             }
 
         Private Function Take(Document As Document) As Object()
             Return New Object() {
-                                    "@IdNo", Document.IdNo,
                                     "@DocumentCode", Document.DocumentCode,
                                     "@DocumentName", Document.DocumentName,
                                     "@DocumentNameAra", Document.DocumentNameAra,
                                     "@DocumentType", Document.DocumentType,
+                                    "@IdNo", Document.IdNo,
                                     "@ImageType", Document.ImageType,
-                                    "@NeedsNumber", Document.NeedsNumber,
-                                    "@NeedsIssueDate", Document.NeedsIssueDate,
                                     "@NeedsExpiryDate", Document.NeedsExpiryDate,
+                                    "@NeedsIssueDate", Document.NeedsIssueDate,
+                                    "@NeedsNumber", Document.NeedsNumber,
                                     "@Notes", Document.Notes
                                 }
         End Function
