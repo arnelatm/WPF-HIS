@@ -141,7 +141,7 @@ Namespace PresentationLayer.Presenters
             CreateListDataSource("List", "Title", "NameTitle")
             CreateEnumData(Of PayRateUnitSelection)(View.Unit)
             CreateLookupData("PhoneType", "PhoneTypes")
-            CreateLookupData("Document", "Documents")
+            CreateLookupData("Document", "Documents", "DocumentType = '" + EnumToCode(DocumentTypeSelection.Employee) + "'")
             CreateLookupData("Leave", "Leaves")
             CreateLookupData("PayElement", "DeductionsByName", "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
             CreateLookupData("PayElement", "EarningsByName", "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")

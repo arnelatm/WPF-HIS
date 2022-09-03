@@ -10,13 +10,33 @@ Public Class CFindForm
     Private _searchPlace As SearchPlaceEnum
     Private _begDateToSearch As Date?
     Private _endDateToSearch As Date?
+    Private _formPosition As Point
+    Private _controlHeight As Int16
+    Private _controlWidth As Int16
     Private ReadOnly _findableControl As IFindableControl
+
 
     Public Sub New(findableControl As IFindableControl)
 
         ' This call is required by the designer.
         InitializeComponent()
         _findableControl = findableControl
+        Dim ctrl As Control
+        Dim formPoint As Point
+        Dim ctrlPoint As Point
+        ctrl = DirectCast(findableControl, Control)
+        'ctrlPoint = New Point(ctrl.Location.X + ctrl.Width, ctrl.Location.Y)
+        'formPoint = ctrl.PointToScreen(ctrlPoint)
+        _formPosition.X = formPoint.X
+        _formPosition.Y = formPoint.Y
+        _controlHeight = ctrl.Height
+        _controlWidth = ctrl.Width
+
+        Dim pnt As Point = ctrl.PointToScreen(New Point(0 + ctrl.Width, 0))
+        _formPosition.X = pnt.X
+        _formPosition.Y = pnt.Y
+        'pnt = Me.PointToClient(pnt)
+
         'If findableControl.SearchMode = "String" Then
         '    _searchMode = SearchModeEnum.TextBox
         'ElseIf findableControl.SearchMode = "ComboBox" Then
@@ -137,22 +157,36 @@ Public Class CFindForm
         Dim pnt As Point
         Dim formLocation As Point
         Dim screenRectangle As Rectangle
+        SetFormSize()
         screenRectangle = Screen.PrimaryScreen.WorkingArea
         StartPosition = FormStartPosition.Manual
-        pnt = MousePosition
+        pnt = _formPosition
         If GlobalVariables.RightToLeftLayout Then
-            formLocation = New Point(pnt.X - Width, pnt.Y + Height)
-            If formLocation.X < 0 Then
-                formLocation.X = pnt.X
-            End If
+            formLocation = New Point(pnt.X - Width - _controlWidth, pnt.Y)
         Else
             formLocation = New Point(pnt.X, pnt.Y)
-            If formLocation.X + Width > screenRectangle.Width Then
-                formLocation.X = pnt.X - Width
-            End If
+        End If
+        Dim horizontalCoordinateOutsideScreen As Boolean = False
+        If formLocation.X < 0 Then
+            formLocation.X = 0
+            horizontalCoordinateOutsideScreen = True
+        End If
+
+        If formLocation.X + Width > screenRectangle.Width Then
+            formLocation.X = screenRectangle.Width - Width
+            horizontalCoordinateOutsideScreen = True
+            ' set to true if form will not fit on the right
+        End If
+        If formLocation.Y < 0 Then
+            formLocation.Y = 0
         End If
         If formLocation.Y + Height > screenRectangle.Height Then
-            formLocation.Y = pnt.Y - Height
+            formLocation.Y = formLocation.Y - Height
+        Else
+            If horizontalCoordinateOutsideScreen Then
+                ' move down so as not to cover the field to be searched
+                formLocation.Y = formLocation.Y + _controlHeight
+            End If
         End If
         Location = formLocation
     End Sub
@@ -182,73 +216,21 @@ Public Class CFindForm
         Else
             SetupDisplay()
         End If
-
-        'If _findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
-        '    lblLookFor1.Visible = False
-        '    lblLookFor2.Visible = True
-        '    lblLookFor3.Visible = False
-        '    lblLookFor4.Visible = False
-        '    TxtTextToSearch.Visible = False
-        '    cboTextToSearch.Visible = True
-        '    RBtnAnywhere.Visible = False
-        '    RBtnStart.Visible = False
-        '    RBtnExactMatch.Visible = False
-        '    cboTextToSearch.DataSource = _findableControl.FindDataSource
-        '    cboTextToSearch.DisplayMember = _findableControl.FindDisplayMember
-        '    cboTextToSearch.ValueMember = _findableControl.FindValueMember
-        '    dtpBegDate.Visible = False
-        '    dtpEndDate.Visible = False
-        '    lblTo.Visible = False
-        '    chkChecked.Visible = False
-        '    Height = 140
-        'ElseIf _findableControl.SearchMode = IFindableControl.SearchModeEnum.TextBox Then
-        '    lblLookFor1.Visible = True
-        '    lblLookFor2.Visible = False
-        '    lblLookFor3.Visible = False
-        '    lblLookFor4.Visible = False
-        '    TxtTextToSearch.Visible = True
-        '    cboTextToSearch.Visible = False
-        '    RBtnAnywhere.Visible = True
-        '    RBtnStart.Visible = True
-        '    RBtnExactMatch.Visible = True
-        '    dtpBegDate.Visible = False
-        '    dtpEndDate.Visible = False
-        '    lblTo.Visible = False
-        '    chkChecked.Visible = False
-        '    Height = 220
-        'ElseIf _findableControl.SearchMode = IFindableControl.SearchModeEnum.Date Then
-        '    dtpBegDate.Visible = True
-        '    dtpEndDate.Visible = True
-        '    lblLookFor1.Visible = False
-        '    lblLookFor2.Visible = False
-        '    lblLookFor3.Visible = True
-        '    lblLookFor4.Visible = False
-        '    TxtTextToSearch.Visible = False
-        '    cboTextToSearch.Visible = False
-        '    RBtnExactMatch.Visible = False
-        '    RBtnAnywhere.Visible = False
-        '    RBtnStart.Visible = False
-        '    lblTo.Visible = True
-        '    chkChecked.Visible = False
-        '    Height = 135
-        'ElseIf _findableControl.SearchMode = IFindableControl.SearchModeEnum.CheckBox Then
-        '    lblLookFor4.Visible = True
-        '    chkChecked.Visible = True
-        '    dtpBegDate.Visible = False
-        '    dtpEndDate.Visible = False
-        '    lblLookFor1.Visible = False
-        '    lblLookFor2.Visible = False
-        '    lblLookFor3.Visible = False
-        '    TxtTextToSearch.Visible = False
-        '    cboTextToSearch.Visible = False
-        '    RBtnExactMatch.Visible = False
-        '    RBtnAnywhere.Visible = False
-        '    RBtnStart.Visible = False
-        '    lblTo.Visible = False
-        '    Height = 150
-        '    Width = 200
-        'End If
     End Sub
+
+    Private Sub SetFormSize()
+        If _findableControl.FindDataType = IFindableControl.DataTypeEnum.String Then
+            Height = 270
+        ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Date Then
+            Height = 160
+        ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Decimal Or _findableControl.FindDataType = IFindableControl.DataTypeEnum.Integer Then
+            Height = 160
+        ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Boolean Then
+            Height = 175
+            Width = 200
+        End If
+    End Sub
+
 
     Private Sub SetupDisplay()
         If _findableControl.FindDataType = IFindableControl.DataTypeEnum.String Then
@@ -271,7 +253,6 @@ Public Class CFindForm
             lblIgnoreCase.Visible = True
             chkIgnoreCase.Visible = True
             TxtTextToSearch.Focus()
-            Height = 270
         ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Date Then
             dtpBegDate.Visible = True
             dtpEndDate.Visible = True
@@ -290,7 +271,6 @@ Public Class CFindForm
             chkChecked.Visible = False
             txtBegValue.Visible = False
             txtEndValue.Visible = False
-            Height = 160
         ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Decimal Or
                    _findableControl.FindDataType = IFindableControl.DataTypeEnum.Integer Then
             dtpBegDate.Visible = False
@@ -306,7 +286,6 @@ Public Class CFindForm
             txtEndValue.Visible = True
             txtBegValue.Focus()
             txtBegValue.Select()
-            Height = 160
         ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Boolean Then
             'lblLookFor4.Visible = True
             chkChecked.Visible = True
@@ -323,8 +302,6 @@ Public Class CFindForm
             lblTo1.Visible = False
             txtBegValue.Visible = False
             txtEndValue.Visible = False
-            Height = 175
-            Width = 200
         End If
     End Sub
 

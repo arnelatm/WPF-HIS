@@ -225,7 +225,7 @@ Namespace PresentationLayer.Presenters
         Public Sub InitializeAttendance()
             View.PayFrequency = GetFieldWithIdNo(View.PayCycleIdNo, "PayCycle", "PayFrequency")
             Dim employeeFilter = "PayCycleIdNo = " & View.PayCycleIdNo.ToString() ' & " And Active = 1"
-            Dim employees = GetRecords("Employee", "EmployeeName", {"IdNo", "EmployeeName", "HiredDate", "ReleasedDate", "DutyHours"}, employeeFilter)
+            Dim employees = GetRecords("Employee", "EmployeeName", {"IdNo", "EmployeeName", "HiredDate", "ReleasedDate", "DutyHours", "ActualDutyHours"}, employeeFilter)
             Dim numberOfEmployees = Int(employees.Count() / 6)
             Dim daysInPeriod As Long
             Dim daysOffInPeriod As Long

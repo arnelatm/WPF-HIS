@@ -41,416 +41,424 @@ Namespace PresentationLayer.Views.Forms
         Me.lblImageType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboImageType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.chkNeedsNumber = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-        Me.chkNeedsIssueDate = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-        Me.chkNeedsExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-        CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.SplitContainer1.Panel1.SuspendLayout
-        Me.SplitContainer1.Panel2.SuspendLayout
-        Me.SplitContainer1.SuspendLayout
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.floDataDisplay.SuspendLayout
-        Me.SuspendLayout
-        '
-        'SplitContainer1
-        '
-        '
-        'SplitContainer1.Panel2
-        '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.floDataDisplay)
-        resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
-        '
-        'FormTreeView
-        '
-        Me.FormTreeView.LineColor = System.Drawing.Color.Black
-        resources.ApplyResources(Me.FormTreeView, "FormTreeView")
-        '
-        'ImageListTreeView
-        '
-        Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"),System.Windows.Forms.ImageListStreamer)
-        Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
-        Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
-        '
-        'TxtIdNo
-        '
-        Me.TxtIdNo.BackColor = System.Drawing.Color.White
-        Me.TxtIdNo.BegFindValue = Nothing
-        Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtIdNo.ComputedValue = false
-        Me.TxtIdNo.CustomFormat = Nothing
-        Me.TxtIdNo.DataBoundControl = true
-        Me.TxtIdNo.DisplayOnly = true
-        Me.TxtIdNo.EditingMode = true
-        Me.TxtIdNo.EndFindValue = Nothing
-        Me.TxtIdNo.FieldDescription = Nothing
-        Me.TxtIdNo.FieldName = Nothing
-        Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.TxtIdNo.FindEnabled = true
-        Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, true)
-        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
-        Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
-        Me.TxtIdNo.LinkedLabel = Me.lblIdNo
-        Me.TxtIdNo.MaximumValue = Nothing
-        Me.TxtIdNo.MinimumValue = Nothing
-        Me.TxtIdNo.Name = "TxtIdNo"
-        Me.TxtIdNo.OldValue = Nothing
-        Me.TxtIdNo.ReadOnly = true
-        Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.TxtIdNo.TabStop = false
-        Me.TxtIdNo.Translatable = false
-        Me.TxtIdNo.ValueIsNumeric = true
-        '
-        'lblIdNo
-        '
-        Me.lblIdNo.DisplayOnly = true
-        Me.lblIdNo.EditingMode = false
-        resources.ApplyResources(Me.lblIdNo, "lblIdNo")
-        Me.lblIdNo.Name = "lblIdNo"
-        Me.lblIdNo.Translatable = true
-        '
-        'txtDocumentCode
-        '
-        Me.txtDocumentCode.BackColor = System.Drawing.Color.White
-        Me.txtDocumentCode.BegFindValue = Nothing
-        Me.txtDocumentCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtDocumentCode.ComputedValue = false
-        Me.txtDocumentCode.CustomFormat = Nothing
-        Me.txtDocumentCode.DataBoundControl = true
-        Me.txtDocumentCode.EditingMode = false
-        Me.txtDocumentCode.EndFindValue = Nothing
-        Me.txtDocumentCode.FieldDescription = Nothing
-        Me.txtDocumentCode.FieldName = Nothing
-        Me.txtDocumentCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtDocumentCode.FindEnabled = true
-        Me.floDataDisplay.SetFlowBreak(Me.txtDocumentCode, true)
-        resources.ApplyResources(Me.txtDocumentCode, "txtDocumentCode")
-        Me.txtDocumentCode.ForeColor = System.Drawing.Color.Black
-        Me.txtDocumentCode.LinkedLabel = Me.lblDocumentCode
-        Me.txtDocumentCode.MaximumValue = Nothing
-        Me.txtDocumentCode.MinimumValue = Nothing
-        Me.txtDocumentCode.Name = "txtDocumentCode"
-        Me.txtDocumentCode.OldValue = Nothing
-        Me.txtDocumentCode.ReadOnly = true
-        Me.txtDocumentCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtDocumentCode.Translatable = false
-        Me.txtDocumentCode.ValueIsMandatory = true
-        '
-        'lblDocumentCode
-        '
-        Me.lblDocumentCode.DisplayOnly = true
-        Me.lblDocumentCode.EditingMode = false
-        resources.ApplyResources(Me.lblDocumentCode, "lblDocumentCode")
-        Me.lblDocumentCode.Name = "lblDocumentCode"
-        Me.lblDocumentCode.Translatable = true
-        '
-        'txtDocumentName
-        '
-        Me.txtDocumentName.BackColor = System.Drawing.Color.White
-        Me.txtDocumentName.BegFindValue = Nothing
-        Me.txtDocumentName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtDocumentName.ComputedValue = false
-        Me.txtDocumentName.CustomFormat = Nothing
-        Me.txtDocumentName.DataBoundControl = true
-        Me.txtDocumentName.EditingMode = false
-        Me.txtDocumentName.EndFindValue = Nothing
-        Me.txtDocumentName.FieldDescription = Nothing
-        Me.txtDocumentName.FieldName = Nothing
-        Me.txtDocumentName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtDocumentName.FindEnabled = true
-        Me.floDataDisplay.SetFlowBreak(Me.txtDocumentName, true)
-        resources.ApplyResources(Me.txtDocumentName, "txtDocumentName")
-        Me.txtDocumentName.ForeColor = System.Drawing.Color.Black
-        Me.txtDocumentName.LinkedLabel = Me.lblDocumentCode
-        Me.txtDocumentName.MaximumValue = Nothing
-        Me.txtDocumentName.MinimumValue = Nothing
-        Me.txtDocumentName.Name = "txtDocumentName"
-        Me.txtDocumentName.OldValue = Nothing
-        Me.txtDocumentName.ReadOnly = true
-        Me.txtDocumentName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtDocumentName.Translatable = false
-        Me.txtDocumentName.ValueIsMandatory = true
-        '
-        'txtNotes
-        '
-        Me.txtNotes.BackColor = System.Drawing.Color.White
-        Me.txtNotes.BegFindValue = Nothing
-        Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtNotes.ComputedValue = false
-        Me.txtNotes.CustomFormat = Nothing
-        Me.txtNotes.DataBoundControl = true
-        Me.txtNotes.EditingMode = false
-        Me.txtNotes.EndFindValue = Nothing
-        Me.txtNotes.FieldDescription = Nothing
-        Me.txtNotes.FieldName = Nothing
-        Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtNotes.FindEnabled = true
-        resources.ApplyResources(Me.txtNotes, "txtNotes")
-        Me.txtNotes.ForeColor = System.Drawing.Color.Black
-        Me.txtNotes.LinkedLabel = Me.lblNotes
-        Me.txtNotes.MaximumValue = Nothing
-        Me.txtNotes.MinimumValue = Nothing
-        Me.txtNotes.Name = "txtNotes"
-        Me.txtNotes.OldValue = Nothing
-        Me.txtNotes.ReadOnly = true
-        Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtNotes.Translatable = false
-        Me.txtNotes.ValueIsMandatory = true
-        '
-        'lblNotes
-        '
-        Me.lblNotes.DisplayOnly = true
-        Me.lblNotes.EditingMode = false
-        resources.ApplyResources(Me.lblNotes, "lblNotes")
-        Me.lblNotes.Name = "lblNotes"
-        Me.lblNotes.Translatable = true
-        '
-        'floDataDisplay
-        '
-        resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
-        Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
-        Me.floDataDisplay.Controls.Add(Me.lblIdNo)
-        Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
-        Me.floDataDisplay.Controls.Add(Me.lblDocumentCode)
-        Me.floDataDisplay.Controls.Add(Me.txtDocumentCode)
-        Me.floDataDisplay.Controls.Add(Me.lblDocumentName)
-        Me.floDataDisplay.Controls.Add(Me.txtDocumentName)
-        Me.floDataDisplay.Controls.Add(Me.lblDocumentNameAra)
-        Me.floDataDisplay.Controls.Add(Me.txtDocumentNameAra)
-        Me.floDataDisplay.Controls.Add(Me.lblDocumentType)
-        Me.floDataDisplay.Controls.Add(Me.cboDocumentType)
-        Me.floDataDisplay.Controls.Add(Me.lblImageType)
-        Me.floDataDisplay.Controls.Add(Me.cboImageType)
-        Me.floDataDisplay.Controls.Add(Me.CLabel1)
-        Me.floDataDisplay.Controls.Add(Me.chkNeedsNumber)
-        Me.floDataDisplay.Controls.Add(Me.CLabel2)
-        Me.floDataDisplay.Controls.Add(Me.chkNeedsIssueDate)
-        Me.floDataDisplay.Controls.Add(Me.CLabel3)
-        Me.floDataDisplay.Controls.Add(Me.chkNeedsExpiryDate)
-        Me.floDataDisplay.Controls.Add(Me.lblNotes)
-        Me.floDataDisplay.Controls.Add(Me.txtNotes)
-        Me.floDataDisplay.Name = "floDataDisplay"
-        '
-        'lblDocumentName
-        '
-        Me.lblDocumentName.DisplayOnly = true
-        Me.lblDocumentName.EditingMode = false
-        resources.ApplyResources(Me.lblDocumentName, "lblDocumentName")
-        Me.lblDocumentName.Name = "lblDocumentName"
-        Me.lblDocumentName.Translatable = true
-        '
-        'lblDocumentNameAra
-        '
-        Me.lblDocumentNameAra.DisplayOnly = true
-        Me.lblDocumentNameAra.EditingMode = false
-        resources.ApplyResources(Me.lblDocumentNameAra, "lblDocumentNameAra")
-        Me.lblDocumentNameAra.Name = "lblDocumentNameAra"
-        Me.lblDocumentNameAra.Translatable = true
-        '
-        'txtDocumentNameAra
-        '
-        Me.txtDocumentNameAra.BackColor = System.Drawing.Color.White
-        Me.txtDocumentNameAra.BegFindValue = Nothing
-        Me.txtDocumentNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtDocumentNameAra.ComputedValue = false
-        Me.txtDocumentNameAra.CustomFormat = Nothing
-        Me.txtDocumentNameAra.DataBoundControl = true
-        Me.txtDocumentNameAra.EditingMode = false
-        Me.txtDocumentNameAra.EndFindValue = Nothing
-        Me.txtDocumentNameAra.EnglishControl = Me.txtDocumentName
-        Me.txtDocumentNameAra.FieldDescription = Nothing
-        Me.txtDocumentNameAra.FieldName = Nothing
-        Me.txtDocumentNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtDocumentNameAra.FindEnabled = true
-        Me.floDataDisplay.SetFlowBreak(Me.txtDocumentNameAra, true)
-        resources.ApplyResources(Me.txtDocumentNameAra, "txtDocumentNameAra")
-        Me.txtDocumentNameAra.ForeColor = System.Drawing.Color.Black
-        Me.txtDocumentNameAra.LinkedLabel = Me.lblDocumentNameAra
-        Me.txtDocumentNameAra.MaximumValue = Nothing
-        Me.txtDocumentNameAra.MinimumValue = Nothing
-        Me.txtDocumentNameAra.Name = "txtDocumentNameAra"
-        Me.txtDocumentNameAra.OldValue = Nothing
-        Me.txtDocumentNameAra.ReadOnly = true
-        Me.txtDocumentNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtDocumentNameAra.Translatable = false
-        '
-        'lblDocumentType
-        '
-        Me.lblDocumentType.DisplayOnly = true
-        Me.lblDocumentType.EditingMode = false
-        resources.ApplyResources(Me.lblDocumentType, "lblDocumentType")
-        Me.lblDocumentType.Name = "lblDocumentType"
-        Me.lblDocumentType.Translatable = true
-        '
-        'cboDocumentType
-        '
-        Me.cboDocumentType.BackColor = System.Drawing.Color.White
-        Me.cboDocumentType.BegFindValue = Nothing
-        Me.cboDocumentType.ChangingSearchValueOnly = false
-        Me.cboDocumentType.CurrentSearchTerm = ""
-        Me.cboDocumentType.DataValue = Nothing
-        Me.cboDocumentType.DefaultValue = Nothing
-        Me.cboDocumentType.DisplayMember = "Name"
-        Me.cboDocumentType.EditingMode = true
-        Me.cboDocumentType.EndFindValue = Nothing
-        Me.cboDocumentType.FieldDescription = Nothing
-        Me.cboDocumentType.FieldName = Nothing
-        Me.cboDocumentType.FilterRule = Nothing
-        Me.cboDocumentType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboDocumentType.FindEnabled = false
-        Me.floDataDisplay.SetFlowBreak(Me.cboDocumentType, true)
-        resources.ApplyResources(Me.cboDocumentType, "cboDocumentType")
-        Me.cboDocumentType.ForeColor = System.Drawing.Color.Black
-        Me.cboDocumentType.FormattingEnabled = true
-        Me.cboDocumentType.HideWhenNotEditingOrAdding = false
-        Me.cboDocumentType.IgnoreCase = false
-        Me.cboDocumentType.LinkedLabel = Nothing
-        Me.cboDocumentType.Name = "cboDocumentType"
-        Me.cboDocumentType.OldValue = 0
-        Me.cboDocumentType.OriginalDataSource = Nothing
-        Me.cboDocumentType.OriginalList = Nothing
-        Me.cboDocumentType.OverrideDropDownStyleList = false
-        Me.cboDocumentType.PreviousSearchTerm = Nothing
-        Me.cboDocumentType.PropertySelector = Nothing
-        Me.cboDocumentType.ReadOnlyCombo = false
-        Me.cboDocumentType.SuggestBoxHeight = 200
-        Me.cboDocumentType.SuggestListOrderRule = Nothing
-        Me.cboDocumentType.TextToSearch = Nothing
-        Me.cboDocumentType.Translatable = false
-        Me.cboDocumentType.ValueIsMandatory = false
-        Me.cboDocumentType.ValueIsNullable = false
-        Me.cboDocumentType.ValueIsNumeric = false
-        Me.cboDocumentType.ValueMember = "IdNo"
-        '
-        'lblImageType
-        '
-        Me.lblImageType.DisplayOnly = true
-        Me.lblImageType.EditingMode = false
-        resources.ApplyResources(Me.lblImageType, "lblImageType")
-        Me.lblImageType.Name = "lblImageType"
-        Me.lblImageType.Translatable = true
-        '
-        'cboImageType
-        '
-        Me.cboImageType.BackColor = System.Drawing.Color.White
-        Me.cboImageType.BegFindValue = Nothing
-        Me.cboImageType.ChangingSearchValueOnly = false
-        Me.cboImageType.CurrentSearchTerm = ""
-        Me.cboImageType.DataValue = Nothing
-        Me.cboImageType.DefaultValue = Nothing
-        Me.cboImageType.DisplayMember = "Name"
-        Me.cboImageType.EditingMode = true
-        Me.cboImageType.EndFindValue = Nothing
-        Me.cboImageType.FieldDescription = Nothing
-        Me.cboImageType.FieldName = Nothing
-        Me.cboImageType.FilterRule = Nothing
-        Me.cboImageType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboImageType.FindEnabled = false
-        Me.floDataDisplay.SetFlowBreak(Me.cboImageType, true)
-        resources.ApplyResources(Me.cboImageType, "cboImageType")
-        Me.cboImageType.ForeColor = System.Drawing.Color.Black
-        Me.cboImageType.FormattingEnabled = true
-        Me.cboImageType.HideWhenNotEditingOrAdding = false
-        Me.cboImageType.IgnoreCase = false
-        Me.cboImageType.LinkedLabel = Nothing
-        Me.cboImageType.Name = "cboImageType"
-        Me.cboImageType.OldValue = 0
-        Me.cboImageType.OriginalDataSource = Nothing
-        Me.cboImageType.OriginalList = Nothing
-        Me.cboImageType.OverrideDropDownStyleList = false
-        Me.cboImageType.PreviousSearchTerm = Nothing
-        Me.cboImageType.PropertySelector = Nothing
-        Me.cboImageType.ReadOnlyCombo = false
-        Me.cboImageType.SuggestBoxHeight = 200
-        Me.cboImageType.SuggestListOrderRule = Nothing
-        Me.cboImageType.TextToSearch = Nothing
-        Me.cboImageType.Translatable = false
-        Me.cboImageType.ValueIsMandatory = false
-        Me.cboImageType.ValueIsNullable = false
-        Me.cboImageType.ValueIsNumeric = false
-        Me.cboImageType.ValueMember = "IdNo"
-        '
-        'CLabel1
-        '
-        Me.CLabel1.DisplayOnly = true
-        Me.CLabel1.EditingMode = false
-        resources.ApplyResources(Me.CLabel1, "CLabel1")
-        Me.CLabel1.Name = "CLabel1"
-        Me.CLabel1.Translatable = true
-        '
-        'CLabel2
-        '
-        Me.CLabel2.DisplayOnly = true
-        Me.CLabel2.EditingMode = false
-        resources.ApplyResources(Me.CLabel2, "CLabel2")
-        Me.CLabel2.Name = "CLabel2"
-        Me.CLabel2.Translatable = true
-        '
-        'CLabel3
-        '
-        Me.CLabel3.DisplayOnly = true
-        Me.CLabel3.EditingMode = false
-        resources.ApplyResources(Me.CLabel3, "CLabel3")
-        Me.CLabel3.Name = "CLabel3"
-        Me.CLabel3.Translatable = true
-        '
-        'chkNeedsNumber
-        '
-        resources.ApplyResources(Me.chkNeedsNumber, "chkNeedsNumber")
-        Me.chkNeedsNumber.AutoCheck = false
-        Me.chkNeedsNumber.BackColor = System.Drawing.Color.White
-        Me.chkNeedsNumber.BegFindValue = Nothing
-        Me.chkNeedsNumber.DisplayOnly = false
-        Me.chkNeedsNumber.EditingMode = false
-        Me.chkNeedsNumber.EndFindValue = Nothing
-        Me.chkNeedsNumber.FieldDescription = Nothing
-        Me.chkNeedsNumber.FieldName = Nothing
-        Me.chkNeedsNumber.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.chkNeedsNumber.FindEnabled = true
-        Me.floDataDisplay.SetFlowBreak(Me.chkNeedsNumber, true)
-        Me.chkNeedsNumber.ForeColor = System.Drawing.Color.Black
-        Me.chkNeedsNumber.IFindableControl_FindEnabled = false
-        Me.chkNeedsNumber.IgnoreCase = false
-        Me.chkNeedsNumber.LinkedLabel = Nothing
-        Me.chkNeedsNumber.Name = "chkNeedsNumber"
-        Me.chkNeedsNumber.NoLabel = false
-        Me.chkNeedsNumber.OldValue = ""
-        Me.chkNeedsNumber.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.chkNeedsNumber.Translatable = false
-        Me.chkNeedsNumber.UseVisualStyleBackColor = false
-        '
-        'chkNeedsIssueDate
-        '
-        resources.ApplyResources(Me.chkNeedsIssueDate, "chkNeedsIssueDate")
-        Me.chkNeedsIssueDate.AutoCheck = false
-        Me.chkNeedsIssueDate.BackColor = System.Drawing.Color.White
-        Me.chkNeedsIssueDate.BegFindValue = Nothing
-        Me.chkNeedsIssueDate.DisplayOnly = false
-        Me.chkNeedsIssueDate.EditingMode = false
-        Me.chkNeedsIssueDate.EndFindValue = Nothing
-        Me.chkNeedsIssueDate.FieldDescription = Nothing
-        Me.chkNeedsIssueDate.FieldName = Nothing
-        Me.chkNeedsIssueDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.chkNeedsIssueDate.FindEnabled = true
-        Me.floDataDisplay.SetFlowBreak(Me.chkNeedsIssueDate, true)
-        Me.chkNeedsIssueDate.ForeColor = System.Drawing.Color.Black
-        Me.chkNeedsIssueDate.IFindableControl_FindEnabled = false
-        Me.chkNeedsIssueDate.IgnoreCase = false
-        Me.chkNeedsIssueDate.LinkedLabel = Nothing
-        Me.chkNeedsIssueDate.Name = "chkNeedsIssueDate"
-        Me.chkNeedsIssueDate.NoLabel = false
-        Me.chkNeedsIssueDate.OldValue = ""
-        Me.chkNeedsIssueDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.chkNeedsIssueDate.Translatable = false
-        Me.chkNeedsIssueDate.UseVisualStyleBackColor = false
-        '
-        'chkNeedsExpiryDate
-        '
-        resources.ApplyResources(Me.chkNeedsExpiryDate, "chkNeedsExpiryDate")
-        Me.chkNeedsExpiryDate.AutoCheck = false
-        Me.chkNeedsExpiryDate.BackColor = System.Drawing.Color.White
-        Me.chkNeedsExpiryDate.BegFindValue = Nothing
+            Me.chkNeedsNumber = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkNeedsIssueDate = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkNeedsExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.SplitContainer1.Panel1.SuspendLayout()
+            Me.SplitContainer1.Panel2.SuspendLayout()
+            Me.SplitContainer1.SuspendLayout()
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.floDataDisplay.SuspendLayout()
+            Me.SuspendLayout()
+            '
+            'SplitContainer1
+            '
+            '
+            'SplitContainer1.Panel2
+            '
+            Me.SplitContainer1.Panel2.Controls.Add(Me.floDataDisplay)
+            resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
+            '
+            'FormTreeView
+            '
+            Me.FormTreeView.LineColor = System.Drawing.Color.Black
+            resources.ApplyResources(Me.FormTreeView, "FormTreeView")
+            '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
+            Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
+            '
+            'TranslatorDAC
+            '
+            Me.TranslatorDAC.Cs = ""
+            '
+            'AppDataDAC
+            '
+            Me.AppDataDAC.Cs = ""
+            '
+            'TxtIdNo
+            '
+            Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BegFindValue = Nothing
+            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TxtIdNo.ComputedValue = False
+            Me.TxtIdNo.CustomFormat = Nothing
+            Me.TxtIdNo.DataBoundControl = True
+            Me.TxtIdNo.DisplayOnly = True
+            Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.EndFindValue = Nothing
+            Me.TxtIdNo.FieldDescription = Nothing
+            Me.TxtIdNo.FieldName = Nothing
+            Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.TxtIdNo.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, True)
+            resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
+            Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+            Me.TxtIdNo.LinkedLabel = Me.lblIdNo
+            Me.TxtIdNo.MaximumValue = Nothing
+            Me.TxtIdNo.MinimumValue = Nothing
+            Me.TxtIdNo.Name = "TxtIdNo"
+            Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.TxtIdNo.TabStop = False
+            Me.TxtIdNo.Translatable = False
+            Me.TxtIdNo.ValueIsNumeric = True
+            '
+            'lblIdNo
+            '
+            Me.lblIdNo.DisplayOnly = True
+            Me.lblIdNo.EditingMode = False
+            resources.ApplyResources(Me.lblIdNo, "lblIdNo")
+            Me.lblIdNo.Name = "lblIdNo"
+            Me.lblIdNo.Translatable = True
+            '
+            'txtDocumentCode
+            '
+            Me.txtDocumentCode.BackColor = System.Drawing.Color.White
+            Me.txtDocumentCode.BegFindValue = Nothing
+            Me.txtDocumentCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDocumentCode.ComputedValue = False
+            Me.txtDocumentCode.CustomFormat = Nothing
+            Me.txtDocumentCode.DataBoundControl = True
+            Me.txtDocumentCode.EditingMode = False
+            Me.txtDocumentCode.EndFindValue = Nothing
+            Me.txtDocumentCode.FieldDescription = Nothing
+            Me.txtDocumentCode.FieldName = Nothing
+            Me.txtDocumentCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtDocumentCode.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtDocumentCode, True)
+            resources.ApplyResources(Me.txtDocumentCode, "txtDocumentCode")
+            Me.txtDocumentCode.ForeColor = System.Drawing.Color.Black
+            Me.txtDocumentCode.LinkedLabel = Me.lblDocumentCode
+            Me.txtDocumentCode.MaximumValue = Nothing
+            Me.txtDocumentCode.MinimumValue = Nothing
+            Me.txtDocumentCode.Name = "txtDocumentCode"
+            Me.txtDocumentCode.OldValue = Nothing
+            Me.txtDocumentCode.ReadOnly = True
+            Me.txtDocumentCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtDocumentCode.Translatable = False
+            Me.txtDocumentCode.ValueIsMandatory = True
+            '
+            'lblDocumentCode
+            '
+            Me.lblDocumentCode.DisplayOnly = True
+            Me.lblDocumentCode.EditingMode = False
+            resources.ApplyResources(Me.lblDocumentCode, "lblDocumentCode")
+            Me.lblDocumentCode.Name = "lblDocumentCode"
+            Me.lblDocumentCode.Translatable = True
+            '
+            'txtDocumentName
+            '
+            Me.txtDocumentName.BackColor = System.Drawing.Color.White
+            Me.txtDocumentName.BegFindValue = Nothing
+            Me.txtDocumentName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDocumentName.ComputedValue = False
+            Me.txtDocumentName.CustomFormat = Nothing
+            Me.txtDocumentName.DataBoundControl = True
+            Me.txtDocumentName.EditingMode = False
+            Me.txtDocumentName.EndFindValue = Nothing
+            Me.txtDocumentName.FieldDescription = Nothing
+            Me.txtDocumentName.FieldName = Nothing
+            Me.txtDocumentName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtDocumentName.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtDocumentName, True)
+            resources.ApplyResources(Me.txtDocumentName, "txtDocumentName")
+            Me.txtDocumentName.ForeColor = System.Drawing.Color.Black
+            Me.txtDocumentName.LinkedLabel = Me.lblDocumentCode
+            Me.txtDocumentName.MaximumValue = Nothing
+            Me.txtDocumentName.MinimumValue = Nothing
+            Me.txtDocumentName.Name = "txtDocumentName"
+            Me.txtDocumentName.OldValue = Nothing
+            Me.txtDocumentName.ReadOnly = True
+            Me.txtDocumentName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtDocumentName.Translatable = False
+            Me.txtDocumentName.ValueIsMandatory = True
+            '
+            'txtNotes
+            '
+            Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BegFindValue = Nothing
+            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtNotes.ComputedValue = False
+            Me.txtNotes.CustomFormat = Nothing
+            Me.txtNotes.DataBoundControl = True
+            Me.txtNotes.EditingMode = False
+            Me.txtNotes.EndFindValue = Nothing
+            Me.txtNotes.FieldDescription = Nothing
+            Me.txtNotes.FieldName = Nothing
+            Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtNotes.FindEnabled = True
+            resources.ApplyResources(Me.txtNotes, "txtNotes")
+            Me.txtNotes.ForeColor = System.Drawing.Color.Black
+            Me.txtNotes.LinkedLabel = Me.lblNotes
+            Me.txtNotes.MaximumValue = Nothing
+            Me.txtNotes.MinimumValue = Nothing
+            Me.txtNotes.Name = "txtNotes"
+            Me.txtNotes.OldValue = Nothing
+            Me.txtNotes.ReadOnly = True
+            Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtNotes.Translatable = False
+            Me.txtNotes.ValueIsMandatory = True
+            '
+            'lblNotes
+            '
+            Me.lblNotes.DisplayOnly = True
+            Me.lblNotes.EditingMode = False
+            resources.ApplyResources(Me.lblNotes, "lblNotes")
+            Me.lblNotes.Name = "lblNotes"
+            Me.lblNotes.Translatable = True
+            '
+            'floDataDisplay
+            '
+            resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
+            Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
+            Me.floDataDisplay.Controls.Add(Me.lblIdNo)
+            Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
+            Me.floDataDisplay.Controls.Add(Me.lblDocumentCode)
+            Me.floDataDisplay.Controls.Add(Me.txtDocumentCode)
+            Me.floDataDisplay.Controls.Add(Me.lblDocumentName)
+            Me.floDataDisplay.Controls.Add(Me.txtDocumentName)
+            Me.floDataDisplay.Controls.Add(Me.lblDocumentNameAra)
+            Me.floDataDisplay.Controls.Add(Me.txtDocumentNameAra)
+            Me.floDataDisplay.Controls.Add(Me.lblDocumentType)
+            Me.floDataDisplay.Controls.Add(Me.cboDocumentType)
+            Me.floDataDisplay.Controls.Add(Me.lblImageType)
+            Me.floDataDisplay.Controls.Add(Me.cboImageType)
+            Me.floDataDisplay.Controls.Add(Me.CLabel1)
+            Me.floDataDisplay.Controls.Add(Me.chkNeedsNumber)
+            Me.floDataDisplay.Controls.Add(Me.CLabel2)
+            Me.floDataDisplay.Controls.Add(Me.chkNeedsIssueDate)
+            Me.floDataDisplay.Controls.Add(Me.CLabel3)
+            Me.floDataDisplay.Controls.Add(Me.chkNeedsExpiryDate)
+            Me.floDataDisplay.Controls.Add(Me.lblNotes)
+            Me.floDataDisplay.Controls.Add(Me.txtNotes)
+            Me.floDataDisplay.Name = "floDataDisplay"
+            '
+            'lblDocumentName
+            '
+            Me.lblDocumentName.DisplayOnly = True
+            Me.lblDocumentName.EditingMode = False
+            resources.ApplyResources(Me.lblDocumentName, "lblDocumentName")
+            Me.lblDocumentName.Name = "lblDocumentName"
+            Me.lblDocumentName.Translatable = True
+            '
+            'lblDocumentNameAra
+            '
+            Me.lblDocumentNameAra.DisplayOnly = True
+            Me.lblDocumentNameAra.EditingMode = False
+            resources.ApplyResources(Me.lblDocumentNameAra, "lblDocumentNameAra")
+            Me.lblDocumentNameAra.Name = "lblDocumentNameAra"
+            Me.lblDocumentNameAra.Translatable = True
+            '
+            'txtDocumentNameAra
+            '
+            Me.txtDocumentNameAra.BackColor = System.Drawing.Color.White
+            Me.txtDocumentNameAra.BegFindValue = Nothing
+            Me.txtDocumentNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDocumentNameAra.ComputedValue = False
+            Me.txtDocumentNameAra.CustomFormat = Nothing
+            Me.txtDocumentNameAra.DataBoundControl = True
+            Me.txtDocumentNameAra.EditingMode = False
+            Me.txtDocumentNameAra.EndFindValue = Nothing
+            Me.txtDocumentNameAra.EnglishControl = Me.txtDocumentName
+            Me.txtDocumentNameAra.FieldDescription = Nothing
+            Me.txtDocumentNameAra.FieldName = Nothing
+            Me.txtDocumentNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtDocumentNameAra.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtDocumentNameAra, True)
+            resources.ApplyResources(Me.txtDocumentNameAra, "txtDocumentNameAra")
+            Me.txtDocumentNameAra.ForeColor = System.Drawing.Color.Black
+            Me.txtDocumentNameAra.LinkedLabel = Me.lblDocumentNameAra
+            Me.txtDocumentNameAra.MaximumValue = Nothing
+            Me.txtDocumentNameAra.MinimumValue = Nothing
+            Me.txtDocumentNameAra.Name = "txtDocumentNameAra"
+            Me.txtDocumentNameAra.OldValue = Nothing
+            Me.txtDocumentNameAra.ReadOnly = True
+            Me.txtDocumentNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtDocumentNameAra.Translatable = False
+            '
+            'lblDocumentType
+            '
+            Me.lblDocumentType.DisplayOnly = True
+            Me.lblDocumentType.EditingMode = False
+            resources.ApplyResources(Me.lblDocumentType, "lblDocumentType")
+            Me.lblDocumentType.Name = "lblDocumentType"
+            Me.lblDocumentType.Translatable = True
+            '
+            'cboDocumentType
+            '
+            Me.cboDocumentType.BackColor = System.Drawing.Color.White
+            Me.cboDocumentType.BegFindValue = Nothing
+            Me.cboDocumentType.ChangingSearchValueOnly = False
+            Me.cboDocumentType.CurrentSearchTerm = ""
+            Me.cboDocumentType.DataValue = Nothing
+            Me.cboDocumentType.DefaultValue = Nothing
+            Me.cboDocumentType.DisplayMember = "Name"
+            Me.cboDocumentType.EditingMode = True
+            Me.cboDocumentType.EndFindValue = Nothing
+            Me.cboDocumentType.FieldDescription = Nothing
+            Me.cboDocumentType.FieldName = Nothing
+            Me.cboDocumentType.FilterRule = Nothing
+            Me.cboDocumentType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboDocumentType.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.cboDocumentType, True)
+            resources.ApplyResources(Me.cboDocumentType, "cboDocumentType")
+            Me.cboDocumentType.ForeColor = System.Drawing.Color.Black
+            Me.cboDocumentType.FormattingEnabled = True
+            Me.cboDocumentType.HideWhenNotEditingOrAdding = False
+            Me.cboDocumentType.IgnoreCase = False
+            Me.cboDocumentType.LinkedLabel = Me.lblDocumentType
+            Me.cboDocumentType.Name = "cboDocumentType"
+            Me.cboDocumentType.OldValue = 0
+            Me.cboDocumentType.OriginalDataSource = Nothing
+            Me.cboDocumentType.OriginalList = Nothing
+            Me.cboDocumentType.OverrideDropDownStyleList = False
+            Me.cboDocumentType.PreviousSearchTerm = Nothing
+            Me.cboDocumentType.PropertySelector = Nothing
+            Me.cboDocumentType.ReadOnlyCombo = False
+            Me.cboDocumentType.SuggestBoxHeight = 200
+            Me.cboDocumentType.SuggestListOrderRule = Nothing
+            Me.cboDocumentType.TextToSearch = Nothing
+            Me.cboDocumentType.Translatable = False
+            Me.cboDocumentType.ValueIsMandatory = False
+            Me.cboDocumentType.ValueIsNullable = False
+            Me.cboDocumentType.ValueIsNumeric = False
+            Me.cboDocumentType.ValueMember = "Code"
+            '
+            'lblImageType
+            '
+            Me.lblImageType.DisplayOnly = True
+            Me.lblImageType.EditingMode = False
+            resources.ApplyResources(Me.lblImageType, "lblImageType")
+            Me.lblImageType.Name = "lblImageType"
+            Me.lblImageType.Translatable = True
+            '
+            'cboImageType
+            '
+            Me.cboImageType.BackColor = System.Drawing.Color.White
+            Me.cboImageType.BegFindValue = Nothing
+            Me.cboImageType.ChangingSearchValueOnly = False
+            Me.cboImageType.CurrentSearchTerm = ""
+            Me.cboImageType.DataValue = Nothing
+            Me.cboImageType.DefaultValue = Nothing
+            Me.cboImageType.DisplayMember = "Name"
+            Me.cboImageType.EditingMode = True
+            Me.cboImageType.EndFindValue = Nothing
+            Me.cboImageType.FieldDescription = Nothing
+            Me.cboImageType.FieldName = Nothing
+            Me.cboImageType.FilterRule = Nothing
+            Me.cboImageType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboImageType.FindEnabled = False
+            Me.floDataDisplay.SetFlowBreak(Me.cboImageType, True)
+            resources.ApplyResources(Me.cboImageType, "cboImageType")
+            Me.cboImageType.ForeColor = System.Drawing.Color.Black
+            Me.cboImageType.FormattingEnabled = True
+            Me.cboImageType.HideWhenNotEditingOrAdding = False
+            Me.cboImageType.IgnoreCase = False
+            Me.cboImageType.LinkedLabel = Nothing
+            Me.cboImageType.Name = "cboImageType"
+            Me.cboImageType.OldValue = 0
+            Me.cboImageType.OriginalDataSource = Nothing
+            Me.cboImageType.OriginalList = Nothing
+            Me.cboImageType.OverrideDropDownStyleList = False
+            Me.cboImageType.PreviousSearchTerm = Nothing
+            Me.cboImageType.PropertySelector = Nothing
+            Me.cboImageType.ReadOnlyCombo = False
+            Me.cboImageType.SuggestBoxHeight = 200
+            Me.cboImageType.SuggestListOrderRule = Nothing
+            Me.cboImageType.TextToSearch = Nothing
+            Me.cboImageType.Translatable = False
+            Me.cboImageType.ValueIsMandatory = False
+            Me.cboImageType.ValueIsNullable = False
+            Me.cboImageType.ValueIsNumeric = False
+            Me.cboImageType.ValueMember = "Code"
+            '
+            'CLabel1
+            '
+            Me.CLabel1.DisplayOnly = True
+            Me.CLabel1.EditingMode = False
+            resources.ApplyResources(Me.CLabel1, "CLabel1")
+            Me.CLabel1.Name = "CLabel1"
+            Me.CLabel1.Translatable = True
+            '
+            'chkNeedsNumber
+            '
+            resources.ApplyResources(Me.chkNeedsNumber, "chkNeedsNumber")
+            Me.chkNeedsNumber.AutoCheck = False
+            Me.chkNeedsNumber.BackColor = System.Drawing.Color.White
+            Me.chkNeedsNumber.BegFindValue = Nothing
+            Me.chkNeedsNumber.DisplayOnly = False
+            Me.chkNeedsNumber.EditingMode = False
+            Me.chkNeedsNumber.EndFindValue = Nothing
+            Me.chkNeedsNumber.FieldDescription = Nothing
+            Me.chkNeedsNumber.FieldName = Nothing
+            Me.chkNeedsNumber.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkNeedsNumber.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.chkNeedsNumber, True)
+            Me.chkNeedsNumber.ForeColor = System.Drawing.Color.Black
+            Me.chkNeedsNumber.IFindableControl_FindEnabled = False
+            Me.chkNeedsNumber.IgnoreCase = False
+            Me.chkNeedsNumber.LinkedLabel = Nothing
+            Me.chkNeedsNumber.Name = "chkNeedsNumber"
+            Me.chkNeedsNumber.NoLabel = False
+            Me.chkNeedsNumber.OldValue = ""
+            Me.chkNeedsNumber.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkNeedsNumber.Translatable = False
+            Me.chkNeedsNumber.UseVisualStyleBackColor = False
+            '
+            'CLabel2
+            '
+            Me.CLabel2.DisplayOnly = True
+            Me.CLabel2.EditingMode = False
+            resources.ApplyResources(Me.CLabel2, "CLabel2")
+            Me.CLabel2.Name = "CLabel2"
+            Me.CLabel2.Translatable = True
+            '
+            'chkNeedsIssueDate
+            '
+            resources.ApplyResources(Me.chkNeedsIssueDate, "chkNeedsIssueDate")
+            Me.chkNeedsIssueDate.AutoCheck = False
+            Me.chkNeedsIssueDate.BackColor = System.Drawing.Color.White
+            Me.chkNeedsIssueDate.BegFindValue = Nothing
+            Me.chkNeedsIssueDate.DisplayOnly = False
+            Me.chkNeedsIssueDate.EditingMode = False
+            Me.chkNeedsIssueDate.EndFindValue = Nothing
+            Me.chkNeedsIssueDate.FieldDescription = Nothing
+            Me.chkNeedsIssueDate.FieldName = Nothing
+            Me.chkNeedsIssueDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkNeedsIssueDate.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.chkNeedsIssueDate, True)
+            Me.chkNeedsIssueDate.ForeColor = System.Drawing.Color.Black
+            Me.chkNeedsIssueDate.IFindableControl_FindEnabled = False
+            Me.chkNeedsIssueDate.IgnoreCase = False
+            Me.chkNeedsIssueDate.LinkedLabel = Nothing
+            Me.chkNeedsIssueDate.Name = "chkNeedsIssueDate"
+            Me.chkNeedsIssueDate.NoLabel = False
+            Me.chkNeedsIssueDate.OldValue = ""
+            Me.chkNeedsIssueDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkNeedsIssueDate.Translatable = False
+            Me.chkNeedsIssueDate.UseVisualStyleBackColor = False
+            '
+            'CLabel3
+            '
+            Me.CLabel3.DisplayOnly = True
+            Me.CLabel3.EditingMode = False
+            resources.ApplyResources(Me.CLabel3, "CLabel3")
+            Me.CLabel3.Name = "CLabel3"
+            Me.CLabel3.Translatable = True
+            '
+            'chkNeedsExpiryDate
+            '
+            resources.ApplyResources(Me.chkNeedsExpiryDate, "chkNeedsExpiryDate")
+            Me.chkNeedsExpiryDate.AutoCheck = False
+            Me.chkNeedsExpiryDate.BackColor = System.Drawing.Color.White
+            Me.chkNeedsExpiryDate.BegFindValue = Nothing
         Me.chkNeedsExpiryDate.DisplayOnly = false
         Me.chkNeedsExpiryDate.EditingMode = false
         Me.chkNeedsExpiryDate.EndFindValue = Nothing

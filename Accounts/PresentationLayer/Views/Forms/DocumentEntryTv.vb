@@ -112,11 +112,14 @@ Namespace PresentationLayer.Views.Forms
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
                 {"DocumentCode", txtDocumentCode},
-                {"ImageType", cboImageType},
                 {"DocumentName", txtDocumentName},
                 {"DocumentNameAra", txtDocumentNameAra},
                 {"DocumentType", cboDocumentType},
                 {"IdNo", TxtIdNo},
+                {"ImageType", cboImageType},
+                {"NeedsExpiryDate", chkNeedsExpiryDate},
+                {"NeedsIssueDate", chkNeedsIssueDate},
+                {"NeedsNumber", chkNeedsNumber},
                 {"Notes", txtNotes}
                 }
         End Sub

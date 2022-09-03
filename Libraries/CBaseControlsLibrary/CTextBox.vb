@@ -30,6 +30,7 @@ Public Class CTextBox
         DataBoundControl = True
         BorderStyle = BorderStyle.FixedSingle
         ContextMenuStrip = _contextMenuStrip1
+        ShortcutsEnabled = True
         AcceptsTab = False
         AcceptsReturn = False
         Margin = New Padding(1)
@@ -117,7 +118,7 @@ Public Class CTextBox
         End Get
         Set
             _editable = Value
-            DisplayOnly = Value
+            'DisplayOnly = Value
         End Set
     End Property
 
@@ -364,17 +365,17 @@ Public Class CTextBox
 
 #End Region
 
-    Private Sub TextBox1_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
-        HandleMouseUp(sender, e)
-    End Sub
+    'Private Sub TextBox1_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
+    '    HandleMouseUp(sender, e)
+    'End Sub
 
-    Private Sub HandleMouseUp(control As Object, e As MouseEventArgs)
+    'Private Sub HandleMouseUp(control As Object, e As MouseEventArgs)
 
-        ' Checking the Mouse right Button
-        If e.Button = MouseButtons.Right Then
-            control.ContextMenuStrip.Show(control, New Point(e.X, e.Y))
-        End If
-    End Sub
+    '    ' Checking the Mouse right Button
+    '    If e.Button = MouseButtons.Right Then
+    '        control.ContextMenuStrip.Show(control, New Point(e.X, e.Y))
+    '    End If
+    'End Sub
 
     Private Sub HandlePopup(sender As Object, e As EventArgs) Handles _contextMenuStrip1.Opening
         ContextHandler(sender, e)

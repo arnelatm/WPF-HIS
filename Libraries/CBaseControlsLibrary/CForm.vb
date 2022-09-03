@@ -147,12 +147,12 @@ Public Class CForm
                     'e.SuppressKeyPress = True
                 Case Keys.C
                     CopyText()
-                    'e.SuppressKeyPress = True
+                    e.SuppressKeyPress = True
                 Case Keys.X
                     CutText()
-                    'e.SuppressKeyPress = True
+                    e.SuppressKeyPress = True
                 Case Keys.A
-                    SelectAllText()
+                    'SelectAllText()
                     'e.SuppressKeyPress = True
                 Case Else
                     'e.SuppressKeyPress = False
@@ -170,6 +170,7 @@ Public Class CForm
     End Sub
 
     Protected Sub CutText()
+        MessageBox.Show(ActiveControl.[GetType]().ToString())
         If ActiveControl.[GetType]() = GetType(TextBox) OrElse ActiveControl.[GetType]() = GetType(CTextBox) Then
             Dim textBox As TextBox = CType(ActiveControl, TextBox)
             textBox.Cut()
