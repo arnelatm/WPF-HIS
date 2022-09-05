@@ -1121,13 +1121,14 @@ Namespace PresentationLayer.Presenters
                     savedPayrollDetail = savedPayrollDetails.Find(Function(pd As PayrollDetailModel) pd.EmployeeIdNo = currentPayrollAttendance.EmployeeIdNo)
                     If savedPayrollDetail IsNot Nothing Then
                         newPayrollDetail.IdNo = savedPayrollDetail.IdNo
+                        newPayrollDetail.BankTransfer = savedPayrollDetail.BankTransfer
                     End If
                     employee = Service.GetFieldsWithIdNo(currentPayrollAttendance.EmployeeIdNo, "Employee", "SponsorType,PaymentMethod")
-                    If employee.SponsorType <> EnumToCode(SponsorTypeSelection.Others) And employee.SponsorType <> EnumToCode(SponsorTypeSelection.Sponsor) And employee.PaymentMethod = EnumToCode(PayrollPaymentMethodSelection.BankTransfer) Then
-                        newPayrollDetail.BankTransfer = True
-                    Else
-                        newPayrollDetail.BankTransfer = False
-                    End If
+                    'If employee.SponsorType <> EnumToCode(SponsorTypeSelection.Others) And employee.SponsorType <> EnumToCode(SponsorTypeSelection.Sponsor) And employee.PaymentMethod = EnumToCode(PayrollPaymentMethodSelection.BankTransfer) Then
+                    '    newPayrollDetail.BankTransfer = True
+                    'Else
+                    '    newPayrollDetail.BankTransfer = False
+                    'End If
                     newPayrollDetail.Selected = currentPayrollAttendance.Selected
                     _payrollDetailsModel.Add(newPayrollDetail)
                 Next
