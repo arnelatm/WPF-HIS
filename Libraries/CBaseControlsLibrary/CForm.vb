@@ -170,7 +170,7 @@ Public Class CForm
     End Sub
 
     Protected Sub CutText()
-        MessageBox.Show(ActiveControl.[GetType]().ToString())
+        'MessageBox.Show(ActiveControl.[GetType]().ToString())
         If ActiveControl.[GetType]() = GetType(TextBox) OrElse ActiveControl.[GetType]() = GetType(CTextBox) Then
             Dim textBox As TextBox = CType(ActiveControl, TextBox)
             textBox.Cut()
