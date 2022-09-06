@@ -61,42 +61,15 @@ Namespace PresentationLayer.Views.Forms
                 GlobalFunctions.SetCulture(GlobalVariables.AppCultureInfo.ToString())
                 GlobalVariables.AppCultureInfo = CultureInfo.CurrentCulture
                 GlobalVariables.AppCurrentCultureInfo = CultureInfo.CurrentCulture
-
-                'Dim mirroredLanguage = My.Settings.MirroredLanguage
-                'If mirroredLanguage Then
-                '    GlobalFunctions.SetCulture(GlobalVariables.DefaultMirroredCultureInfoStr)
-                '    SetLanguageChangeButtons()
-                '    SwitchUiLanguage(False)
-                'End If
-
-                'If GlobalVariables.PreferredLanguage = $"English (إنجليزي)" Then
-                '    GlobalVariables.RightToLeftLayout = False
-                'ElseIf GlobalVariables.PreferredLanguage = $"Arabic (عربي)" Then
-                '    GlobalVariables.RightToLeftLayout = True
-                'Else
                 If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
                     GlobalVariables.RightToLeftLayout = True
                 Else
                     GlobalVariables.RightToLeftLayout = False
                 End If
-                'End If
                 SetLanguageChangeButtons()
-                'Else
-                '    If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-                '        GlobalVariables.RightToLeftLayout = True
-                '    Else
-                '        GlobalVariables.RightToLeftLayout = False
-                '    End If
-                '    SetLanguageChangeButtons()
             End If
             SetupMapper()
             Presenter = New UserPresenter(Of UserModel)(Me)
-            'Dim builder As Autofac.ContainerBuilder = New ContainerBuilder()
-            'builder.RegisterType(Of RecurringPayElementPresenter)().[As](Of ISalaryLoanSchedulePresenter)()
-            'Dim x = builder.Build()
-            '_salaryLoanSchedulePresenter = x.Resolve(Of ISalaryLoanSchedulePresenter)
-            'GlobalVariables.EventAggregator = New EventAggregator
-
         End Sub
 
         Public Event FormCultureChanged()
@@ -232,10 +205,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub BankTransferToolStripMenuItem_Click(sender As Object, e As EventArgs)
-            Dim childMdiForm = New DisbursementJournalEntry("CdJournal")
-            childMdiForm.Presenter = New DisbursementJournalPresenter(Of DisbursementJournalModel)(childMdiForm, "CdJournal")
-            childMdiForm.MdiParent = Me
-            childMdiForm.Show()
+            Dim formToRun = New DisbursementJournalEntry("CdJournal")
+            formToRun.Presenter = New DisbursementJournalPresenter(Of DisbursementJournalModel)(formToRun, "CdJournal")
+            formToRun.Show()
         End Sub
 
         Private Sub BranchesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBranches.Click
@@ -243,10 +215,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CashDisbursementEntryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCashDisbursementEntry.Click
-            Dim childMdiForm = New DisbursementJournalEntry("CdJournal")
-            childMdiForm.Presenter = New DisbursementJournalPresenter(Of DisbursementJournalModel)(childMdiForm, "CdJournal")
-            childMdiForm.MdiParent = Me
-            childMdiForm.Show()
+            Dim formToRun = New DisbursementJournalEntry("CdJournal")
+            formToRun.Presenter = New DisbursementJournalPresenter(Of DisbursementJournalModel)(formToRun, "CdJournal")
+            formToRun.Show()
         End Sub
 
         Private Sub CashIncomePerDoctorServiceToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -267,12 +238,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CheckPrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCheckPrinting.Click
-            'RunForm(Of CheckPrinter, DisbursementJournalPresenter(Of DisbursementJournalModel))()
-            Dim childMdiForm As CheckPrinter
-            childMdiForm = New CheckPrinter() With {
-                .MdiParent = Me
-                }
-            childMdiForm.Show()
+            Dim formToRun As CheckPrinter
+            formToRun = New CheckPrinter()
+            formToRun.Show()
         End Sub
 
         Private Sub ClosePettyCashFundToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemClosePettyCashFund.Click
@@ -285,9 +253,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CreateAllMessagesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCreateAllMessages.Click
             Dim x = New OneTimeRun
-            'Debugger.Break()
             OneTimeRun.CreateAllMessages()
-            'OneTimeRun.CreateEnums()
         End Sub
 
         Private Sub CustomerClientsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
@@ -300,11 +266,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CustomToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTBCustom.Click
-            Dim childMdiForm As TrialBalance
-            childMdiForm = New TrialBalance("C") With {
-                .MdiParent = Me
-                }
-            childMdiForm.Show()
+            Dim formToRun As TrialBalance
+            formToRun = New TrialBalance("C")
+            formToRun.Show()
         End Sub
 
         Private Sub DefaultFieldValuesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDefaultFieldValues.Click
@@ -398,10 +362,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PettyCashToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPettyCash.Click
-            Dim childMdiForm = New DisbursementJournalEntry("PcJournal")
-            childMdiForm.Presenter = New DisbursementJournalPresenter(Of DisbursementJournalModel)(childMdiForm, "PcJournal")
-            childMdiForm.MdiParent = Me
-            childMdiForm.Show()
+            RunForm(Of DisbursementJournalEntry, DisbursementJournalPresenter(Of DisbursementJournalModel), String)("PcJournal")
         End Sub
 
         Private Sub PhoneTypesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPhoneTypes.Click
@@ -436,13 +397,6 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of BasicEntry, BasicPresenter(Of BasicModel))()
         End Sub
 
-        '''' <summary>
-        ''''     Opens the about dialog window.
-        '''' </summary>
-        'Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAbout.Click
-        '    Dim form = New FormAbout()
-        '    form.ShowDialog()
-        'End Sub
         Private Sub SalesDepositTypesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSalesDepositTypes.Click
             RunForm(Of DepositTypeEntryTv, DepositTypePresenter(Of DepositTypeModel))()
         End Sub
@@ -581,10 +535,6 @@ Namespace PresentationLayer.Views.Forms
         Private Sub BankTransferReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBankTransferReport.Click
             RunForm(Of GeneratePayrollBankCsv, GeneratePayrollBankCsvPresenter(Of PayrollModel))()
         End Sub
-
-        'Private Sub EmployeeAbsencesLateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeAbsencesLate.Click
-        '    RunForm(Of EmployeeAbsenceEntry, EmployeeAbsencePresenter(Of EmployeeAbsenceModel))()
-        'End Sub
 
         Private Sub ToolStripMenuItemPostPettyCashAccount_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPostPettyCashAccount.Click
             RunForm(Of PettyCashClosingEntry, PettyCashClosingPresenter(Of PettyCashClosingModel))()
@@ -810,7 +760,6 @@ Namespace PresentationLayer.Views.Forms
                 Dim maxOpenForms As String = GlobalVariables.MaximumOpenForms.ToString()
                 Messaging.Show(True, "MsgTooManyFormsOpen", "Too many forms open. You can only open up to {maxOpenForms} forms at the same time.", "Too many forms open", {"maxOpenForms", maxOpenForms})
             Else
-                Invoker.SetProperty(formEntry, "MdiParent", {Me})
                 Invoker.InvokeFunction(formEntry, "Show")
             End If
         End Sub
@@ -871,39 +820,6 @@ Namespace PresentationLayer.Views.Forms
                 GlobalVariables.RightToLeftLayout = False
             End If
             SwitchUiLanguage(True)
-            'TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
-            'GetNSaveCaptions()
-            'ToolStripButtonArabic.Visible = True
-            'ToolStripButtonEnglish.Visible = False
-
-            'TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
-            'If GlobalFunctions.IsCultureOk(TextDisplayLanguage) Then
-            '    CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage)
-            'Else
-            '    TextDisplayLanguage = CultureInfo.CurrentCulture.Name
-            'End If
-            'ToolStripButtonArabic.Visible = True
-            'ToolStripButtonEnglish.Visible = False
-            'GlobalVariables.RightToLeftLayout = False
-            'If CultureInfo.CurrentUICulture.Name <> CultureInfo.CurrentCulture.Name Then
-            '    CultureInfo.CurrentUICulture = CultureInfo.CurrentCulture
-            'End If
-            'CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CurrentCulture
-            'If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-            '    'GlobalVariables.RightToLeftLayout = True
-            '    RightToLeftLayout = True
-            '    RightToLeft = RightToLeft.Yes
-            'Else
-            '    'GlobalVariables.RightToLeftLayout = False
-            '    RightToLeftLayout = False
-            '    RightToLeft = RightToLeft.No
-            'End If
-            'TextDisplayLanguage = CultureInfo.CurrentCulture.ToString()
-            'GlobalVariables.AppCurrentCultureInfo = New CultureInfo(TextDisplayLanguage)
-            ''If GlobalFunctions.NeedToTranslateText(TextDisplayLanguage) Then
-            'TranslateForm()
-            ''End If
-            ''Refresh()
         End Sub
 
         Private Sub ToolStripButtonRTL_Click(sender As Object, e As EventArgs) Handles ToolStripButtonArabic.Click
@@ -911,33 +827,6 @@ Namespace PresentationLayer.Views.Forms
                 GlobalVariables.RightToLeftLayout = True
             End If
             SwitchUiLanguage(False)
-            'TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
-            'GetNSaveCaptions()
-            'ToolStripButtonArabic.Visible = False
-            'ToolStripButtonEnglish.Visible = True
-            'TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
-            'If GlobalFunctions.IsCultureOk(TextDisplayLanguage) Then
-            '    CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage)
-            'Else
-            '    TextDisplayLanguage = CultureInfo.CurrentCulture.Name
-            'End If
-            'ToolStripButtonArabic.Visible = False
-            'ToolStripButtonEnglish.Visible = True
-            'GlobalVariables.RightToLeftLayout = True
-            'If CultureInfo.CurrentUICulture.Name <> CultureInfo.CurrentCulture.Name Then
-            '    CultureInfo.CurrentUICulture = CultureInfo.CurrentCulture
-            'End If
-            'CultureInfo.DefaultThreadCurrentCulture = CultureInfo.CurrentCulture
-            'If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
-            '    RightToLeftLayout = True
-            '    RightToLeft = RightToLeft.Yes
-            'Else
-            '    RightToLeftLayout = False
-            '    RightToLeft = RightToLeft.No
-            'End If
-            'TextDisplayLanguage = CultureInfo.CurrentCulture.ToString()
-            'GlobalVariables.AppCurrentCultureInfo = New CultureInfo(TextDisplayLanguage)
-            'TranslateForm()
         End Sub
 
         Private Sub ToolStripMenuItemChangePassword_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemChangePassword.Click
@@ -955,14 +844,6 @@ Namespace PresentationLayer.Views.Forms
                         LogStatus = LoginStatus.LoggedOut
                     End If
                     ToolStripButtonExit.Enabled = True
-                    'If LogStatus = LoginStatus.LoggedIn Then
-                    '    Dim mirroredLanguage = My.Settings.MirroredLanguage
-                    '    If mirroredLanguage Then
-                    '        GlobalFunctions.SetCulture(GlobalVariables.DefaultMirroredCultureInfoStr)
-                    '        SetLanguageChangeButtons()
-                    '        SwitchUiLanguage(False)
-                    '    End If
-                    'End If
                 Catch ex As TypeInitializationException
                     MessageBox.Show("Invalid Connection String, specified connection String doesn't exist.",
                                     "Connection String Error!", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -972,27 +853,6 @@ Namespace PresentationLayer.Views.Forms
                     LogStatus = LoginStatus.LoggedIn
                 End Try
             End Using
-            'Using form As New LoginEntry(True)
-            '    Try
-            '        If form.ShowDialog() = DialogResult.OK Then
-            '            If form.LoginOk Then
-            '                LogStatus = LoginStatus.LoggedIn
-            '            Else
-            '                Messaging.Show(True, "MsgOldPasswordError")
-            '                LogStatus = LoginStatus.LoggedOut
-            '            End If
-            '        Else
-            '            LogStatus = LoginStatus.LoggedOut
-            '        End If
-            '        ToolStripButtonExit.Enabled = True
-            '    Catch ex As TypeInitializationException
-            '        MessageBox.Show("Invalid Connection String, specified connection string doesn't exist.",
-            '                        "Connection String Error!", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            '        ErrLogger.LogError(ex, True)
-            '    Catch ex As Exception
-            '        LogStatus = LoginStatus.LoggedIn
-            '    End Try
-            'End Using
         End Sub
 
         Private Sub ToolStripMenuItemEmployeeLeave_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeLeaveNonHoliday.Click
@@ -1016,38 +876,33 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Overloads Sub RunForm(Of TV)()
-            Dim childMdiForm = Activator.CreateInstance(GetType(TV))
-            ShowEntryForm(childMdiForm)
+            Dim formToRun = Activator.CreateInstance(GetType(TV))
+            ShowEntryForm(formToRun)
         End Sub
 
         Private Overloads Sub RunForm(Of TV, TX)(param As TX)
-            Dim childMdiForm = Activator.CreateInstance(GetType(TV), param)
-            ShowEntryForm(childMdiForm)
+            Dim formToRun = Activator.CreateInstance(GetType(TV), param)
+            ShowEntryForm(formToRun)
         End Sub
 
+
         Private Overloads Sub RunForm(Of TV, TP)()
-            Dim childMdiForm = Activator.CreateInstance(GetType(TV))
+            Dim formToRun = Activator.CreateInstance(GetType(TV))
             Dim pType As Type = GetType(TP)
-            childMdiForm.Presenter = Activator.CreateInstance(pType, {childMdiForm})
-            ShowEntryForm(childMdiForm)
-            'Invoker.SetProperty(childMdiForm, "MdiParent", {Me})
-            'Invoker.InvokeFunction(childMdiForm, "Show")
-            ''childMdiForm.MdiParent = Me
-            'childMdiForm.Show()
+            formToRun.Presenter = Activator.CreateInstance(pType, {formToRun})
+            Invoker.InvokeFunction(formToRun, "Show")
         End Sub
 
         Private Overloads Sub RunForm(Of TV, TP, TX)(param As TX)
-            Dim childMdiForm = Activator.CreateInstance(GetType(TV), param)
+            Dim formToRun = Activator.CreateInstance(GetType(TV), param)
             Dim pType As Type = GetType(TP)
-            childMdiForm.Presenter = Activator.CreateInstance(pType, {childMdiForm, param})
-            ShowEntryForm(childMdiForm)
+            formToRun.Presenter = Activator.CreateInstance(pType, {formToRun, param})
+            ShowEntryForm(formToRun)
         End Sub
 
         Private Sub UpdateMenuSecurityObjectsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUpdateMenuSecurityObjects.Click
             Dim allControls As New List(Of Control)
-            'Dim nRecCount = Presenter.GetRecordCount("SecurityObject")
             If GlobalVariables.UserName.ToLower() = $"arnel" Then
-                'Dim addSecurityObject As Boolean = False
                 For Each cCtrl As Control In FindControlRecursive(allControls, Me)
                     UpdateMenuSecurity(cCtrl)
                 Next
@@ -1089,16 +944,14 @@ Namespace PresentationLayer.Views.Forms
                 If TypeOf dropDownItem Is ToolStripMenuItem Then
                     Dim parentMenuName = pParentMenuName
                     If dropDownItem.Name.SubString(0, 17) <> "ToolStripMenuItem" Then
-                        'Debugger.Break()
+                        Debugger.Break()
                         MessageBox.Show($"Invalid ToolStripMenuItem Name <" + dropDownItem.Name.SubString(0, 17) + ">!")
                     End If
                     parentIdNo = UpdateSecurityObject(Of ToolStripMenuItem)(dropDownItem, parentMenuName, pParentIdNo, 17)
                     If dropDownItem.HasDropDown Then
-                        'Dim childSubMenuName As String = pParentMenuName + " > " + Mid(dropDownItem.Name, 18)
                         UpdateChildMenuSecurityObjects(dropDownItem.DropDownItems, pParentMenuName, parentIdNo)
                     End If
                 ElseIf TypeOf dropDownItem Is ToolStripButton Then
-                    'Dim childSubMenuName = pParentMenuName + " > " + Mid(dropDownItem.Name, 16)
                     If dropDownItem.Name.Length > 15 AndAlso dropDownItem.Name.SubString(0, 15) <> "ToolStripButton" Then
                         Debugger.Break()
                         MessageBox.Show($"Invalid ToolStripButton Name <" + dropDownItem.Name.SubString(0, 15) + ">!")
@@ -1161,14 +1014,6 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of DateRangeEntry, ArrayList)(parameters)
         End Sub
 
-        Private Sub ReportSelectorToolStripMenuItem_Click(sender As Object, e As EventArgs)
-
-        End Sub
-
-        'Private Sub ToolStripMenuItemReportSelector_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountingReports.Click
-        '    RunForm(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)($"IGACC")
-        'End Sub
-
         Private Sub LaboratoryReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLaboratoryReports.Click
             RunForm(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)($"IGLAB")
         End Sub
@@ -1187,7 +1032,6 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ToolStripMenuItemCbcResultRetrieval_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCbcResultRetrieval.Click
             RunForm(Of CbcRetrievalEntry, Lab_InvoiceGroupPresenter(Of Lab_InvoiceGroupModel))()
-            'RunForm(Of CbcRetrievalEntry)()
         End Sub
 
         Private Sub ToolStripMenuItemDocuments_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDocuments.Click
@@ -1195,8 +1039,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub TestFormToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TestFormToolStripMenuItem.Click
-            Dim cForm As New TestForm
-            cForm.Show()
+            Dim formToRun = Activator.CreateInstance(GetType(TestForm))
+            formToRun.Presenter = New DepartmentPresenter(Of DepartmentModel)(formToRun)
+            formToRun.Show()
         End Sub
     End Class
 
