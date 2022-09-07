@@ -48,8 +48,6 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtFlag32 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.LblFlag128 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtFlag128 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
-            Me.TextBox1 = New System.Windows.Forms.TextBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -105,8 +103,6 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.Controls.Add(Me.TxtFlag32)
             Me.floDataDisplay.Controls.Add(Me.LblFlag128)
             Me.floDataDisplay.Controls.Add(Me.TxtFlag128)
-            Me.floDataDisplay.Controls.Add(Me.CButton1)
-            Me.floDataDisplay.Controls.Add(Me.TextBox1)
             Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Fill
             Me.floDataDisplay.Location = New System.Drawing.Point(0, 0)
             Me.floDataDisplay.MinimumSize = New System.Drawing.Size(440, 300)
@@ -636,25 +632,6 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtFlag128.TabIndex = 10
             Me.TxtFlag128.Translatable = False
             '
-            'CButton1
-            '
-            Me.CButton1.DesignerSelected = False
-            Me.CButton1.ImageIndex = 0
-            Me.CButton1.Location = New System.Drawing.Point(13, 288)
-            Me.CButton1.Name = "CButton1"
-            Me.CButton1.OriginalImageName = Nothing
-            Me.CButton1.SecurityKey = ""
-            Me.CButton1.Size = New System.Drawing.Size(90, 25)
-            Me.CButton1.TabIndex = 172
-            Me.CButton1.Text = "CButton1"
-            '
-            'TextBox1
-            '
-            Me.TextBox1.Location = New System.Drawing.Point(109, 288)
-            Me.TextBox1.Name = "TextBox1"
-            Me.TextBox1.Size = New System.Drawing.Size(100, 20)
-            Me.TextBox1.TabIndex = 173
-            '
             'CountryEntryTv
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -698,7 +675,5 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents TxtFlag32 As CTextBox
         Friend WithEvents TxtCountryTelCode As CTextBox
         Friend WithEvents TxtIdNo As CTextBox
-        Friend WithEvents CButton1 As CButton
-        Friend WithEvents TextBox1 As TextBox
     End Class
 End Namespace

@@ -46,7 +46,7 @@ Public Class CFormEntry
         'MyBase.New()
         ' This call is required by the designer.
         InitializeComponent()
-        KeyPreview = True
+        'KeyPreview = True
         DoubleBuffered = True
 
         ' Add any initialization after the InitializeComponent() call.
@@ -486,28 +486,28 @@ Public Class CFormEntry
         CloseForm()
     End Sub
 
-    Private Sub CFormEntry_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
-        If e.KeyCode = Keys.F10 Then
-            If btnSave.Enabled Then
-                e.SuppressKeyPress = True
-                e.Handled = True
-                PublishClickedButton(ButtonClicked.Save)
-            Else
-                Beep()
-            End If
-        ElseIf e.KeyCode = Keys.F2 Then
-            If btnSave.Enabled Then
-                e.SuppressKeyPress = True
-                e.Handled = True
-                PublishClickedButton(ButtonClicked.Edit)
-            Else
-                Beep()
-            End If
-        ElseIf e.KeyCode = Keys.Enter Then
+    'Private Sub CFormEntry_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+    '    If e.KeyCode = Keys.F10 Then
+    '        If btnSave.Enabled Then
+    '            e.SuppressKeyPress = True
+    '            e.Handled = True
+    '            PublishClickedButton(ButtonClicked.Save)
+    '        Else
+    '            Beep()
+    '        End If
+    '    ElseIf e.KeyCode = Keys.F2 Then
+    '        If btnSave.Enabled Then
+    '            e.SuppressKeyPress = True
+    '            e.Handled = True
+    '            PublishClickedButton(ButtonClicked.Edit)
+    '        Else
+    '            Beep()
+    '        End If
+    '    ElseIf e.KeyCode = Keys.Enter Then
 
-            e.Handled = False
-        End If
-    End Sub
+    '        e.Handled = False
+    '    End If
+    'End Sub
 
     Private Sub CFormEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If _firstLoadSwitch = 0 Then

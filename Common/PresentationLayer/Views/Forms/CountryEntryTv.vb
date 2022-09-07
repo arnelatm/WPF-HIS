@@ -119,12 +119,13 @@ Namespace PresentationLayer.Views.Forms
                 }
         End Sub
 
-        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
+        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs)
             txtCountryName.DisplayOnly = False
             txtCountryName.ReadOnly = False
             txtCountryName.EditingMode = True
             txtCountryName.ShortcutsEnabled = True
         End Sub
+
     End Class
 
 End Namespace

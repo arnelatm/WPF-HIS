@@ -19,7 +19,7 @@ Public Class CForm
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
-        KeyPreview = True
+        'KeyPreview = True
     End Sub
 
     Public Property MenuFormName As String
@@ -138,29 +138,29 @@ Public Class CForm
     '    End If
     'End Sub
 
-    Private Sub CForm_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyUp
-        If e.Modifiers = Keys.Control Then
-            Select Case e.KeyCode
-                Case Keys.V
-                    'paste already working (builtin) no need to Paste Text again.
-                    'PasteText(e)
-                    'e.SuppressKeyPress = True
-                Case Keys.C
-                    CopyText()
-                    e.SuppressKeyPress = True
-                Case Keys.X
-                    CutText()
-                    e.SuppressKeyPress = True
-                Case Keys.A
-                    'SelectAllText()
-                    'e.SuppressKeyPress = True
-                Case Else
-                    'e.SuppressKeyPress = False
-            End Select
-        Else
-            'e.SuppressKeyPress = False
-        End If
-    End Sub
+    'Private Sub CForm_KeyUp(ByVal sender As Object, ByVal e As KeyEventArgs) Handles MyBase.KeyUp
+    '    If e.Modifiers = Keys.Control Then
+    '        Select Case e.KeyCode
+    '            Case Keys.V
+    '                'paste already working (builtin) no need to Paste Text again.
+    '                'PasteText(e)
+    '                'e.SuppressKeyPress = True
+    '            Case Keys.C
+    '                CopyText()
+    '                e.SuppressKeyPress = True
+    '            Case Keys.X
+    '                CutText()
+    '                e.SuppressKeyPress = True
+    '            Case Keys.A
+    '                'SelectAllText()
+    '                'e.SuppressKeyPress = True
+    '            Case Else
+    '                'e.SuppressKeyPress = False
+    '        End Select
+    '    Else
+    '        'e.SuppressKeyPress = False
+    '    End If
+    'End Sub
 
     Protected Sub SelectAllText()
         If ActiveControl.[GetType]() = GetType(TextBox) OrElse ActiveControl.[GetType]() = GetType(CTextBox) Then
