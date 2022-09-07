@@ -14,8 +14,8 @@ Public Class BForm
         BackColor = SystemColors.Desktop
         BackgroundImage = Images.GreenGradientBackgroundLarge
         BackgroundImageLayout = ImageLayout.Stretch
-        KeyPreview = True
         Application.EnableVisualStyles()
+
     End Sub
 
     'Public Sub New()
