@@ -109,6 +109,7 @@ Namespace PresentationLayer.Views.Forms
                 {"RevCostCenterNameAra", txtRevCostCenterNameAra},
                 {"IdNo", TxtIdNo},
                 {"ParentIdNo", cacParentIdNo},
+                {"RcType", cacRcType},
                 {"Notes", txtNotes}
                 }
         End Sub

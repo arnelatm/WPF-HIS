@@ -15,7 +15,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IDistributionSchemeView)
             MyBase.New(view)
-
+            WithTreeView = False
             Service = New AccountsService("DistributionScheme")
             TableName = "DistributionScheme"
             SortOrderKey = "DistributionSchemeName"
