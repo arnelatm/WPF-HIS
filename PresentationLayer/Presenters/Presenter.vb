@@ -161,18 +161,14 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
 
     Public Function GetTreeViewData()
         Dim cModel As New TM
-        'Dim newSortOrderKey As String = GetTranslatedSortOrderKey(Of TM)(SortOrderKey, cModel)
-        'Dim treeMainFieldName = TranslateField(Of TM)(TreeViewMainField, cModel)
         Dim lookupObj As New Lookup(TableName, DataFilter)
         lookupObj.NameField = TreeViewMainField
         If TreeViewSecondaryField Is Nothing Then
-            lookupObj.CodeField = TableName + "Code"
-            TreeViewSecondaryField = TableName + "Code"
+            lookupObj = ChangeTvSecondaryFieldIfView(lookupObj)
         End If
         If SortOrderKey IsNot Nothing Then
             lookupObj.SortKey = SortOrderKey
         End If
-        'lookupObj.FieldsToShow = {"IdNo", lookupObj.NameField, lookupObj.CodeField}
         If ParentFieldName Is Nothing OrElse ParentFieldName = "" Then
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then
                 lookupObj.FieldsToShow = {IdFieldName, TreeViewMainField}
@@ -189,6 +185,13 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
             End If
             Return Service.GetHLookup(lookupObj)
         End If
+    End Function
+
+    Private Function ChangeTvSecondaryFieldIfView(lookupObj As Lookup) As Lookup
+        If Right(TableName, 5) = "_View" Then
+            TreeViewSecondaryField = Left(TableName, TableName.Length - 5) + "Code"
+        End If
+        Return lookupObj
     End Function
 
     Protected Overloads Sub AddRecordToTreeHierarchical(dataNode As Object, parentChanged As Boolean, treeViewTableName As TreeView)
