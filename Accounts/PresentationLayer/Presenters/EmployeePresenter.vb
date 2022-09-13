@@ -107,7 +107,6 @@ Namespace PresentationLayer.Presenters
                                  {"IssueDate", GetType(Date)},
                                  {"Sequence", GetType(Int16)}})
 
-
             CreateDataTable(DtEmpLeaveCreditUpdateTable, {
                                             {"AccumulatedLeave", GetType(Decimal)},
                                             {"Cumulative", GetType(Boolean)},
@@ -240,7 +239,6 @@ Namespace PresentationLayer.Presenters
             End If
             Return False
         End Function
-
 
         Public Function PhoneFilter(ByVal obj As EmployeePhoneView) As Boolean
             If obj.PhoneNumber <> "" Then
@@ -534,6 +532,11 @@ Namespace PresentationLayer.Presenters
                             If Not empLeaveCredit.Cumulative Then
                                 Beep()
                                 empLeaveCredit.AccumulatedLeave = 0
+                            End If
+                        Case $"IssueDate"
+                            Dim empDocument As EmployeeDocumentView = eventType.BindingSource.Current
+                            If empDocument.IssueDate = "" Then
+                                empDocument.IssueDate = Nothing
                             End If
                     End Select
                 End If

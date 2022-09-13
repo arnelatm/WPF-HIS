@@ -34,30 +34,37 @@ Public Class CDgvDtpCalendarCell
         'Me.Style.Format = "d"
     End Sub
 
+    ' You must also override this method to initialize the ComboBox instance...
+    ' This method will be called each time a cell in the column enters edit-mode,
+    ' so you can fill the ComboBox instance based on the value of the edited cell
     Public Overrides Sub InitializeEditingControl(ByVal rowIndex As Integer,
         ByVal initialFormattedValue As Object,
         ByVal dataGridViewCellStyle As DataGridViewCellStyle)
 
         ' Set the value of the editing control to the current cell value.
-        MyBase.InitializeEditingControl(rowIndex, initialFormattedValue,
-            dataGridViewCellStyle)
+        MyBase.InitializeEditingControl(rowIndex, initialFormattedValue, dataGridViewCellStyle)
 
-        Dim ctl As CDgvDtpCalendarEditingControl =
-            CType(DataGridView.EditingControl, CDgvDtpCalendarEditingControl)
+        Dim ctl As CDgvDtpEditingControl = CType(DataGridView.EditingControl, CDgvDtpEditingControl)
+
+        ' Make sure you have an instance...
+        'If ctl IsNot Nothing Then
+        ' Populate the TextBox, passing the instance as a parameter
+        ' Set the value of the editing control instance to the current cell value.
 
         ' Use the default row value when Value property is null.
         If (Me.Value Is Nothing) Then
-            ctl.Value = CType(Me.DefaultNewRowValue, DateTime?)
+            ctl.Value = CType(DefaultNewRowValue, DateTime?)
         Else
             Try
                 ctl.Value = CType(Me.Value, DateTime?)
             Catch ex As Exception
                 ctl.Value = Now()
             End Try
-
         End If
     End Sub
 
+    ' You must override the EditType property to return the cell's
+    ' editing control type, which is your custom control class...
     Public Overrides ReadOnly Property EditType() As Type
         Get
             ' Return the type of the editing control that CDgvDtpCalendarCell uses.
@@ -86,9 +93,7 @@ Class CDgvDtpCalendarEditingControl
     Inherits CDateTimePickerNullable
     Implements IDataGridViewEditingControl
 
-    'Private dataGridViewControl As DataGridView
     Private valueIsChanged As Boolean = False
-
     Private rowIndexNum As Integer
     Private dataGridViewControl As DataGridView
 
@@ -181,26 +186,22 @@ Class CDgvDtpCalendarEditingControl
 
     Public Property EditingControlDataGridView() As DataGridView _
         Implements IDataGridViewEditingControl.EditingControlDataGridView
-
         Get
             Return dataGridViewControl
         End Get
         Set(ByVal value As DataGridView)
             dataGridViewControl = value
         End Set
-
     End Property
 
     Public Property EditingControlValueChanged() As Boolean _
         Implements IDataGridViewEditingControl.EditingControlValueChanged
-
         Get
             Return valueIsChanged
         End Get
         Set(ByVal value As Boolean)
             valueIsChanged = value
         End Set
-
     End Property
 
     Public ReadOnly Property EditingControlCursor() As Cursor _

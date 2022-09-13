@@ -806,6 +806,10 @@ Namespace PresentationLayer.Views.Forms
             ProcessCellEndEdit(DataGridViewLeaveCredits, bsLeaveCredits)
         End Sub
 
+        Private Sub DgvDocuments_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDocuments.CellEndEdit
+            ProcessCellEndEdit(DataGridViewLeaveCredits, bsLeaveCredits)
+        End Sub
+
     End Class
 
 End Namespace

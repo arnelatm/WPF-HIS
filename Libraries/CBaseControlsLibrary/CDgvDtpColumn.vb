@@ -53,12 +53,14 @@ Public Class CDgvDtpCell
 
         ' Use the default row value when Value property is null.
         If (Me.Value Is Nothing) Then
-            ctl.Value = CType(Me.DefaultNewRowValue, DateTime?)
+            ctl.Value = CType(DefaultNewRowValue, DateTime?)
         Else
-            ctl.Value = CType(Me.Value, DateTime?)
+            Try
+                ctl.Value = CType(Me.Value, DateTime?)
+            Catch ex As Exception
+                ctl.Value = Now()
+            End Try
         End If
-        'End If
-
     End Sub
 
     ' You must override the EditType property to return the cell's
@@ -83,8 +85,6 @@ Public Class CDgvDtpCell
             Return Nothing
         End Get
     End Property
-
-    'Public Property CellEditingControl As CDgvDtpEditingControl
 
 End Class
 
@@ -129,7 +129,7 @@ Public Class CDgvDtpEditingControl
         Implements IDataGridViewEditingControl.GetEditingControlFormattedValue
 
         If Value Is Nothing Then
-            Return Nothing
+            Return ""
         End If
         Return CDate(Value).ToShortDateString()
 
@@ -221,7 +221,9 @@ Public Class CDgvDtpEditingControl
         ' Notify the DataGridView that the contents of the cell have changed.
         _valueIsChanged = True
         'Dim dgv As DataGridView = Parent
-        Me.EditingControlDataGridView.NotifyCurrentCellDirty(True)
+        If EditingControlDataGridView IsNot Nothing Then
+            Me.EditingControlDataGridView.NotifyCurrentCellDirty(True)
+        End If
         MyBase.OnValueChanged(sender, eventargs)
 
     End Sub
