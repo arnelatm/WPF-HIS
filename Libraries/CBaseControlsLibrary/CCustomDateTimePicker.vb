@@ -492,7 +492,7 @@ Public Class CCustomDateTimePicker
 
     Private Sub InformUserOfInvalidDate()
         ToolTip1.ToolTipTitle = "Input Rejected"
-        Dim calendarName As String = Messaging.TranslateCaption(True, CalendarNameInEnglish(_targetCulture))
+        Dim calendarName As String = Messaging.TranslateCaption(CalendarNameInEnglish(_targetCulture))
         Messaging.ShowPmMessage(True, "MsgErroneousDate", {"enteredDate", txtDate.Text, "calendarName", calendarName})
     End Sub
 
@@ -545,8 +545,8 @@ Public Class CCustomDateTimePicker
     Private Sub TxtDate_OnGotFocus(sender As Object, e As EventArgs) Handles txtDate.GotFocus
         ' Select all text only if the mouse isn't down.
         ' This makes tabbing to the textbox give focus.
-        If Value <> _lastDate Then
-            _lastDate = Value
+        If _value <> _lastDate Then
+            _lastDate = _value
         End If
         txtDate.InsertKeyMode = InsertKeyMode.Overwrite
         'If MouseButtons = MouseButtons.None Then
