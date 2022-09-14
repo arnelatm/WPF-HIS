@@ -419,24 +419,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="TdpDateTime.designer.vb">
-      <DependentUpon>TdpDateTime.vb</DependentUpon>
-    </Compile>
-    <Compile Include="TdpDateTime.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="TdpDateTimePicker.Designer.vb">
-      <DependentUpon>TdpDateTimePicker.vb</DependentUpon>
-    </Compile>
-    <Compile Include="TdpDateTimePicker.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="tdpDateTimePickerCI.Designer.vb">
-      <DependentUpon>tdpDateTimePickerCI.vb</DependentUpon>
-    </Compile>
-    <Compile Include="tdpDateTimePickerCI.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="tdpGregorian.Designer.vb">
       <DependentUpon>tdpGregorian.vb</DependentUpon>
     </Compile>
@@ -576,15 +558,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TdpDateTime.resx">
-      <DependentUpon>TdpDateTime.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TdpDateTimePicker.resx">
-      <DependentUpon>TdpDateTimePicker.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="tdpDateTimePickerCI.resx">
-      <DependentUpon>tdpDateTimePickerCI.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="tdpGregorian.resx">
       <DependentUpon>tdpGregorian.vb</DependentUpon>

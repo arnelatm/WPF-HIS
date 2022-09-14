@@ -24,8 +24,8 @@ Namespace DataLayer.AdoNet
                     "EmployeeIdNo," &
                     "ExpiryDate," &
                     "IdNo," &
-                    "IssueDate," &                                      
-                    "Sequence" &                   
+                    "IssueDate," &
+                    "Sequence" &
                     " FROM EmployeeDocument" &
                     " WHERE EmployeeIdNo = @IdNo" &
                     " ORDER BY " & sortExpression
@@ -48,9 +48,9 @@ Namespace DataLayer.AdoNet
             .DocumentIdNo = Extensions.AsInt(Of Int16)(reader("DocumentIdNo")),
             .DocumentNumber = Extensions.AsString(reader("DocumentNumber")),
             .EmployeeIdNo = Extensions.AsId(Of Int32)(reader("EmployeeIdNo")),
-            .ExpiryDate = Extensions.AsNullable(Of Date)(reader("ExpiryDate")),
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),           
-            .IssueDate = Extensions.AsNullable(Of Date)(reader("IssueDate")),
+            .ExpiryDate = Extensions.AsNullable(Of Date?)(reader("ExpiryDate")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .IssueDate = Extensions.AsNullable(Of Date?)(reader("IssueDate")),
             .Sequence = Extensions.AsInt(Of Int16)(reader("Sequence"))
            }
 

@@ -56,7 +56,7 @@ Namespace DataLayer.AdoNet
                     " WHERE Primary_Key = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim value As ItemDetails = _db.Read(sql, Make, params).FirstOrDefault()
-            value.PrescriptionDrug = IIf(value.RegistrationNo="" Or value.RegistrationNo Is Nothing,False,True)
+            value.PrescriptionDrug = IIf(value.RegistrationNo = "" Or value.RegistrationNo Is Nothing, False, True)
             Return value
         End Function
 
@@ -75,9 +75,9 @@ Namespace DataLayer.AdoNet
                     " Pack3 = @Pack3," &
                     " UserID = @UserId" &
                     " WHERE Primary_Key = @IdNo"
-            Dim retval as Integer
+            Dim retval As Integer
             retval = _db.Update(sql, Take(ItemDetails))
-            if retVAL > 0 AND Strings.Left(itemdetails.RegistrationNo,1) = "X" THEN
+            If retval > 0 And Strings.Left(ItemDetails.RegistrationNo, 1) = "X" Then
                 Dim sql1 As String = "UPDATE [DrugList] SET " &
                     " [Dosage Form] = @DosageForm," &
                     " [Generic Name] = @GenericName," &
@@ -91,11 +91,11 @@ Namespace DataLayer.AdoNet
                     " [Volume] = @Volume" &
                     " WHERE RegistrationNo = @RegistrationNo"
                 _db.Update(sql1, TakeDrug(ItemDetails))
-               Dim sql3 = "UPDATE ItemRegistration SET " &
-                    " Strength = @Strength"
+                Dim sql3 = "UPDATE ItemRegistration SET " &
+                     " Strength = @Strength"
                 _db.Update(sql3, TakeRegistration(ItemDetails))
             End If
-            return retval
+            Return retval
         End Function
 
         Public Function AddRecord(ByRef ItemDetails As ItemDetails) As Integer Implements IDao(Of ItemDetails).AddRecord
@@ -133,7 +133,7 @@ Namespace DataLayer.AdoNet
             .Pack1 = Extensions.AsInt(Of Int16)(reader("Pack1")),
             .Pack2 = Extensions.AsInt(Of Int16)(reader("Pack2")),
             .Pack3 = Extensions.AsInt(Of Int16)(reader("Pack3")),
-            .PackageSize = Extensions.AsNullable(Of Decimal)(reader("PackageSize")),
+            .PackageSize = Extensions.AsNullable(Of Decimal?)(reader("PackageSize")),
             .PackageType = Extensions.AsString(reader("PackageType")),
             .RegistrationNo = Extensions.AsString(reader("RegistrationNo")),
             .RouteOfAdministration = Extensions.AsString(reader("RouteOfAdministration")),
@@ -141,7 +141,7 @@ Namespace DataLayer.AdoNet
             .UnitOfStrength = Extensions.AsString(reader("UnitOfStrength")),
             .UnitOfVolume = Extensions.AsString(reader("UnitOfVolume")),
             .UserId = Extensions.AsString(reader("UserId")),
-            .Volume = Extensions.AsNullable(Of Decimal)(reader("Volume"))
+            .Volume = Extensions.AsNullable(Of Decimal?)(reader("Volume"))
             }
 
         Private Function Take(ItemDetails As ItemDetails) As Object()
@@ -180,18 +180,17 @@ Namespace DataLayer.AdoNet
 
         Private Function TakeRegistration(ItemDetails As ItemDetails) As Object()
             Dim number As Decimal = 0
-            Dim sStrength as String = Split(ItemDetails.StrengthValue, ",")(0)
-            Decimal.TryParse(sStrength, number) 
+            Dim sStrength As String = Split(ItemDetails.StrengthValue, ",")(0)
+            Decimal.TryParse(sStrength, number)
             Return New Object() {"RegistrationNo", IIf(ItemDetails.RegistrationNo Is Nothing Or ItemDetails.RegistrationNo = "", "X-" + ItemDetails.ItemDetailsCode, ItemDetails.RegistrationNo),
                                  "ItemDetailsCode", ItemDetails.ItemDetailsCode,
-                                 "Strength", number 
+                                 "Strength", number
                                  }
         End Function
 
         Public Function GenerateCode(idNo As Integer) As String Implements IDaoAutoCode.GenerateCode
             Return GetNextCode("ItemDetails", idNo)
         End Function
-
 
         'Protected Function UpdateCode(db As Db, tableName As String, codeFieldName As String, idFieldName As String, idNo As Integer) Implements ICommonDao.UpdateCode
         '    Dim sql1 As String

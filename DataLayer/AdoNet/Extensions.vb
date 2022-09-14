@@ -63,18 +63,16 @@ Namespace AdoNet
             If obj.Equals(DBNull.Value) Or obj Is Nothing Then
                 Return Nothing
             End If
-            Dim x As Type = GetType(T)
-            Dim u As Type = Nullable.GetUnderlyingType(x)
-
-            If u IsNot Nothing Then
-                Return If((obj Is Nothing), Nothing, CType(Convert.ChangeType(obj, u), T))
+            Dim objType As Type = GetType(T)
+            Dim objUnderlyingTYpe As Type = Nullable.GetUnderlyingType(objType)
+            If objUnderlyingTYpe IsNot Nothing Then
+                Return If((obj Is Nothing), Nothing, CType(Convert.ChangeType(obj, objUnderlyingTYpe), T))
             Else
-                Return CType(Convert.ChangeType(obj, x), T)
+                Return Convert.ChangeType(obj, objType)
             End If
         End Function
 
         ' transform object into double data type
-
         <Extension>
         Public Function AsDouble(item As Object, Optional ByVal defaultDouble As Double = Nothing) As Double
             If item Is Nothing Then
@@ -321,7 +319,7 @@ Namespace AdoNet
             Else
                 Dim ms As New IO.MemoryStream(CType(cPicture, Byte())) 'This is correct...
                 Dim returnImage As Image = Image.FromStream(ms, True)
-                return returnImage
+                Return returnImage
 
                 'Dim imageData = CType(cPicture, Byte())
                 'Dim img As Image = Nothing

@@ -358,7 +358,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Dim endDateStr As String = endDate.ToShortDateString()
         If targetDate < startDate Or targetDate > endDate Then
             Dim variables = {"dateField", dateField, "startDate", startDateStr, "endDate", endDateStr}
-            Messaging.ShowPmMessage(True, "MsgInvalidDate", variables)
+            Messaging.ShowPmMessage(True, "MsgDateNotInRange", variables)
             retValue = DialogResult.No
         Else
             retValue = DialogResult.Yes
@@ -1865,8 +1865,8 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         RaiseEvent LanguageChanged()
     End Sub
 
-    Public Sub CreateListDataSource(ByVal sourceTableName As String, ByVal fieldName As String, byVal listName As String)
-        SetListDataSource(sourceTableName, GetControlName(fieldName), listName )
+    Public Sub CreateListDataSource(ByVal sourceTableName As String, ByVal fieldName As String, ByVal listName As String)
+        SetListDataSource(sourceTableName, GetControlName(fieldName), listName)
     End Sub
 
     Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal fieldName As String)
@@ -1901,8 +1901,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         SetDataSource(sourceTableName, control, Nothing, Nothing, Nothing)
     End Sub
 
-
-
     Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal control As Control, Optional ByVal filter As String = Nothing)
         SetDataSource(sourceTableName, control, Nothing, Nothing, filter)
     End Sub
@@ -1932,7 +1930,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Invoker.SetProperty(control, "DataSource", {data})
     End Sub
 
-
     Protected Function SetLookupObject(dataTableName As String, control As Control, Optional dataFields As String() = Nothing, Optional sortKey As String = Nothing, Optional filter As String = Nothing) As Lookup
         Dim lookupObj As New Lookup(dataTableName)
         If dataFields IsNot Nothing Then
@@ -1949,7 +1946,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Protected Function SetLookupListObject(dataTableName As String, control As Control, listName As String) As Lookup
         Dim lookupObj As New Lookup(dataTableName)
-        Dim dataFields = {"ListIdNo","ListName","ListCode"}
+        Dim dataFields = {"ListIdNo", "ListName", "ListCode"}
         lookupObj.SortKey = "ListName"
         Dim listIdNo As Int16 = Service.GetField(Of Int16, String)(listName, "ListGroup", "ListName", "IdNo")
         lookupObj.FilterKey = "ListIdNo=" & listIdNo.ToString()

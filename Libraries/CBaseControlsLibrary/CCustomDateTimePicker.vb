@@ -442,7 +442,7 @@ Public Class CCustomDateTimePicker
 
     Public Property Value As DateTime?
         Get
-            Dim retVal As DateTime?
+            Dim retVal As DateTime? = Nothing
             Try
                 If txtDate.Text <> "" And txtDate.Text.TrimEnd() <> EmptyMask Then
                     If txtTime.Visible Then
@@ -451,11 +451,18 @@ Public Class CCustomDateTimePicker
                     Else
                         retVal = Convert.ToDateTime(txtDate.Text, _targetCulture)
                     End If
-                Else
-                    retVal = Nothing
                 End If
             Catch ex As Exception
-                retVal = Nothing
+                ToolTip1.ToolTipTitle = "Input Rejected"
+                ToolTip1.Show(
+                    "You entry [" & txtDate.Text & "] is not a valid date for the " &
+                    CultureInfo.CurrentCulture.DateTimeFormat.NativeCalendarName() & ". Reverting to previous value!", txtDate, 0, 20, 5000)
+                txtDate.Text = PadWithZeroSingleDigitDate(CalendarDateToShortDateString(_lastDate, _targetCulture))
+                Dim dDate As DateTime? = _lastDate
+                txtDate.Focus()
+                If txtDate.Text <> "" And txtDate.Text.TrimEnd() <> EmptyMask Then
+                    retVal = Convert.ToDateTime(txtDate.Text, _targetCulture)
+                End If
             End Try
             Return retVal
         End Get
@@ -522,7 +529,9 @@ Public Class CCustomDateTimePicker
     Private Sub TxtDate_OnGotFocus(sender As Object, e As EventArgs) Handles txtDate.GotFocus
         ' Select all text only if the mouse isn't down.
         ' This makes tabbing to the textbox give focus.
-        _lastDate = Value
+        If Value <> _lastDate Then
+            _lastDate = Value
+        End If
         txtDate.InsertKeyMode = InsertKeyMode.Overwrite
         'If MouseButtons = MouseButtons.None Then
         txtDate.SelectAll()
@@ -544,28 +553,28 @@ Public Class CCustomDateTimePicker
         'End If
     End Sub
 
-    Private Sub TxtDate_Validating(sender As Object, e As CancelEventArgs) Handles txtDate.Validating
-        If txtDate.Text = "" OrElse txtDate.Text.TrimEnd() = EmptyMask Then Exit Sub
-        If txtDate.Text.Length = MaxLength Then
-            If IsDateValidForTargetCulture(txtDate.Text, _targetCulture) Then Exit Sub
-            e.Cancel = True
-        Else
-            e.Cancel = True
-        End If
-        Beep()
-        ToolTip1.ToolTipTitle = "Input Rejected"
-        ToolTip1.Show(
-            "You entry [" & txtDate.Text & "] is not a valid date for the " &
-            CultureInfo.CurrentCulture.DateTimeFormat.NativeCalendarName() & ". Reverting to previous value!", txtDate, 0, 20, 5000)
-        Dim dDate As DateTime? = _lastDate
-        If dDate Is Nothing Then
-            txtDate.Text = ""
-        Else
-            txtDate.Text = PadWithZeroSingleDigitDate(CalendarDateToShortDateString(_lastDate, _targetCulture))
-        End If
-        txtDate.Focus()
-        e.Cancel = True
-    End Sub
+    'Private Sub TxtDate_Validating(sender As Object, e As CancelEventArgs) Handles txtDate.Validating
+    '    If txtDate.Text = "" OrElse txtDate.Text.TrimEnd() = EmptyMask Then Exit Sub
+    '    If txtDate.Text.Length = MaxLength Then
+    '        If IsDateValidForTargetCulture(txtDate.Text, _targetCulture) Then Exit Sub
+    '        e.Cancel = True
+    '    Else
+    '        e.Cancel = True
+    '    End If
+    '    'Beep()
+    '    'ToolTip1.ToolTipTitle = "Input Rejected"
+    '    'ToolTip1.Show(
+    '    '    "You entry [" & txtDate.Text & "] is not a valid date for the " &
+    '    '    CultureInfo.CurrentCulture.DateTimeFormat.NativeCalendarName() & ". Reverting to previous value!", txtDate, 0, 20, 5000)
+    '    'Dim dDate As DateTime? = _lastDate
+    '    'If dDate Is Nothing Then
+    '    '    txtDate.Text = ""
+    '    'Else
+    '    '    txtDate.Text = PadWithZeroSingleDigitDate(CalendarDateToShortDateString(_lastDate, _targetCulture))
+    '    'End If
+    '    'txtDate.Focus()
+    '    e.Cancel = True
+    'End Sub
 
     Private Sub TxtDate_Validated(sender As Object, e As EventArgs) Handles txtDate.Validated
         If Not txtDate.ReadOnly Then

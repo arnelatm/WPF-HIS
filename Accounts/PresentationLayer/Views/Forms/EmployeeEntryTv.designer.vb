@@ -225,7 +225,7 @@
             Me.dgvDocumentIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvNumber = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvIssueDate = New AATM.Libraries.CBaseControlsLibrary.CDgvDtpColumn()
-            Me.dgvExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CDgvDtpCalendarColumn()
+            Me.dgvExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CDgvDtpColumn()
             Me.dgvImageButton = New System.Windows.Forms.DataGridViewButtonColumn()
             Me.dgvFileName = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvDataImageIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -3754,7 +3754,7 @@
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.ClientSize = New System.Drawing.Size(1020, 555)
             Me.Name = "EmployeeEntryTv"
-        Me.RightToLeft = System.Windows.Forms.RightToLeft.No
+            Me.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.Text = "Employee Maintenance Form"
         Me.ViewDisplayName = "EmployeeEntryTv"
         Me.SplitContainer1.Panel1.ResumeLayout(false)
@@ -3958,7 +3958,7 @@ End Sub
         Friend WithEvents dgvDocumentIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvNumber As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvIssueDate As Libraries.CBaseControlsLibrary.CDgvDtpColumn
-        Friend WithEvents dgvExpiryDate As Libraries.CBaseControlsLibrary.CDgvDtpCalendarColumn
+        Friend WithEvents dgvExpiryDate As Libraries.CBaseControlsLibrary.CDgvDtpColumn
         Friend WithEvents dgvImageButton As DataGridViewButtonColumn
         Friend WithEvents dgvFileName As DataGridViewTextBoxColumn
         Friend WithEvents dgvDataImageIdNo As Libraries.CBaseControlsLibrary.CDgvTextColumn

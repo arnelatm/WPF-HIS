@@ -127,12 +127,10 @@ Public Class CDgvDtpEditingControl
     Public Function GetEditingControlFormattedValue(ByVal context _
         As DataGridViewDataErrorContexts) As Object _
         Implements IDataGridViewEditingControl.GetEditingControlFormattedValue
-
         If Value Is Nothing Then
             Return ""
         End If
         Return CDate(Value).ToShortDateString()
-
     End Function
 
     Public Sub ApplyCellStyleToEditingControl(ByVal dataGridViewCellStyle As _

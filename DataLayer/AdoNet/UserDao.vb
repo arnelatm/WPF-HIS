@@ -50,7 +50,7 @@ Namespace AdoNet
             New User() With {
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .UserName = Extensions.AsString(reader("UserName")),
-            .EmployeeIdNo = Extensions.AsNullable(Of Int32)(reader("EmployeeIdNo")),
+            .EmployeeIdNo = Extensions.AsNullable(Of Int32?)(reader("EmployeeIdNo")),
             .Password = Extensions.AsString(reader("Password")),
             .SecurityGroupIdNo = Extensions.AsInt(Of Int16)(reader("SecurityGroupIdNo"))}
 
