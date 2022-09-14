@@ -5,6 +5,7 @@ Imports System.Text.RegularExpressions
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.GlobalResources
+Imports AATM.Libraries.MessagingLibrary
 
 Public Class CCustomDateTimePicker
     Implements IEntryControl, ILinkedLabel
@@ -453,10 +454,7 @@ Public Class CCustomDateTimePicker
                     End If
                 End If
             Catch ex As Exception
-                ToolTip1.ToolTipTitle = "Input Rejected"
-                ToolTip1.Show(
-                    "You entry [" & txtDate.Text & "] is not a valid date for the " &
-                    CultureInfo.CurrentCulture.DateTimeFormat.NativeCalendarName() & ". Reverting to previous value!", txtDate, 0, 20, 5000)
+                InformUserOfInvalidDate()
                 txtDate.Text = PadWithZeroSingleDigitDate(CalendarDateToShortDateString(_lastDate, _targetCulture))
                 Dim dDate As DateTime? = _lastDate
                 txtDate.Focus()
@@ -491,6 +489,24 @@ Public Class CCustomDateTimePicker
             End Try
         End Set
     End Property
+
+    Private Sub InformUserOfInvalidDate()
+        ToolTip1.ToolTipTitle = "Input Rejected"
+        Dim calendarName As String = Messaging.TranslateCaption(True, CalendarNameInEnglish(_targetCulture))
+        Messaging.ShowPmMessage(True, "MsgErroneousDate", {"enteredDate", txtDate.Text, "calendarName", calendarName})
+    End Sub
+
+    Private Function CalendarNameInEnglish(targetCulture As CultureInfo)
+        Dim calendarName As String = ""
+        If targetCulture.DateTimeFormat.NativeCalendarName = "تقويم ام القرى" Then
+            calendarName = $"Umm al-Qura Calendar"
+        ElseIf targetCulture.DateTimeFormat.NativeCalendarName = "التقويم الهجري" Then
+            calendarName = $"Hijri Calendar"
+        Else
+            calendarName = targetCulture.DateTimeFormat.NativeCalendarName
+        End If
+        Return calendarName
+    End Function
 
     'Private Sub txtTime_GotFocus(sender As Object, e As EventArgs) Handles txtTime.GotFocus
     '    If txtDate.Text <> "" And txtDate.Text <> EmptyMask Then
@@ -553,28 +569,25 @@ Public Class CCustomDateTimePicker
         'End If
     End Sub
 
-    'Private Sub TxtDate_Validating(sender As Object, e As CancelEventArgs) Handles txtDate.Validating
-    '    If txtDate.Text = "" OrElse txtDate.Text.TrimEnd() = EmptyMask Then Exit Sub
-    '    If txtDate.Text.Length = MaxLength Then
-    '        If IsDateValidForTargetCulture(txtDate.Text, _targetCulture) Then Exit Sub
-    '        e.Cancel = True
-    '    Else
-    '        e.Cancel = True
-    '    End If
-    '    'Beep()
-    '    'ToolTip1.ToolTipTitle = "Input Rejected"
-    '    'ToolTip1.Show(
-    '    '    "You entry [" & txtDate.Text & "] is not a valid date for the " &
-    '    '    CultureInfo.CurrentCulture.DateTimeFormat.NativeCalendarName() & ". Reverting to previous value!", txtDate, 0, 20, 5000)
-    '    'Dim dDate As DateTime? = _lastDate
-    '    'If dDate Is Nothing Then
-    '    '    txtDate.Text = ""
-    '    'Else
-    '    '    txtDate.Text = PadWithZeroSingleDigitDate(CalendarDateToShortDateString(_lastDate, _targetCulture))
-    '    'End If
-    '    'txtDate.Focus()
-    '    e.Cancel = True
-    'End Sub
+    Private Sub TxtDate_Validating(sender As Object, e As CancelEventArgs) Handles txtDate.Validating
+        If txtDate.Text = "" OrElse txtDate.Text.TrimEnd() = EmptyMask Then Exit Sub
+        If txtDate.Text.Length = MaxLength Then
+            If IsDateValidForTargetCulture(txtDate.Text, _targetCulture) Then Exit Sub
+            e.Cancel = True
+        Else
+            e.Cancel = True
+        End If
+        Beep()
+        InformUserOfInvalidDate()
+        Dim dDate As DateTime? = _lastDate
+        If dDate Is Nothing Then
+            txtDate.Text = ""
+        Else
+            txtDate.Text = PadWithZeroSingleDigitDate(CalendarDateToShortDateString(_lastDate, _targetCulture))
+        End If
+        txtDate.Focus()
+        e.Cancel = True
+    End Sub
 
     Private Sub TxtDate_Validated(sender As Object, e As EventArgs) Handles txtDate.Validated
         If Not txtDate.ReadOnly Then
@@ -585,16 +598,8 @@ Public Class CCustomDateTimePicker
                 Exit Sub
             End If
             Dim dDate As DateTime
-            'Dim sTime As String
             dDate = Convert.ToDateTime(txtDate.Text, _targetCulture)
-            'Try
-            '    'dtp.Value = dDate
-            'Catch ex As Exception
-            '    'dtp.Value = dtp.MinDate
-            'End Try
             txtLongDate.Text = dDate.ToLongDateString
-            'sTime = dDate.TimeOfDay.ToString
-            'txtTime.Text = String.Format("{0:HH:mm:ss}", sTime)
         End If
     End Sub
 
