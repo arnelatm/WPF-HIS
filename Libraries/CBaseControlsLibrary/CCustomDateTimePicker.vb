@@ -426,7 +426,7 @@ Public Class CCustomDateTimePicker
 
     Public Overrides Property Text As String
         Get
-            If Value.HasValue Then
+            If _value.HasValue Then
                 If txtTime.Visible Then
                     Return CalendarDateToShortDateString(Value, _targetCulture) + " " + txtTime.Text
                 Else
@@ -437,7 +437,7 @@ Public Class CCustomDateTimePicker
             End If
         End Get
         Set(myValue As String)
-            Value = Convert.ToDateTime(myValue, _targetCulture)
+            _value = Convert.ToDateTime(myValue, _targetCulture)
         End Set
     End Property
 
@@ -493,7 +493,9 @@ Public Class CCustomDateTimePicker
     Private Sub InformUserOfInvalidDate()
         ToolTip1.ToolTipTitle = "Input Rejected"
         Dim calendarName As String = Messaging.TranslateCaption(CalendarNameInEnglish(_targetCulture))
-        Messaging.ShowPmMessage(True, "MsgErroneousDate", {"enteredDate", txtDate.Text, "calendarName", calendarName})
+        Dim cText = txtDate.Text
+        Dim cCalendarName As String = calendarName
+        Messaging.ShowPmMessage(True, "MsgErroneousDate", {"enteredDate", cText, "calendarName", cCalendarName})
     End Sub
 
     Private Function CalendarNameInEnglish(targetCulture As CultureInfo)

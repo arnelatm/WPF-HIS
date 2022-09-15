@@ -162,6 +162,11 @@ Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "AatmInterfaces", "Libraries
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "IGroupClinic", "IGroupClinic\IGroupClinic.sqlproj", "{DCEF7901-C148-46C6-AA76-4022007160F7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Problems And Solutions", "Problems And Solutions", "{981A0171-5E5E-461E-A09A-DE12F781F288}"
+	ProjectSection(SolutionItems) = preProject
+		code 0x0000011b - printng error.txt = code 0x0000011b - printng error.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -293,6 +298,7 @@ Global
 		{E0336D98-67DC-4134-9508-7F5598295FEC} = {0598D101-4147-476C-98FF-8C78D96B971E}
 		{D0B2F203-4601-4F73-89C4-C5A6FF4D4B99} = {0598D101-4147-476C-98FF-8C78D96B971E}
 		{DA82FB86-4F87-4E6E-B460-6141FE79AC23} = {A6C79BF6-2C34-4AEA-9845-360F48976962}
+		{981A0171-5E5E-461E-A09A-DE12F781F288} = {0598D101-4147-476C-98FF-8C78D96B971E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {433E9001-0D97-4552-9BF4-6FED04B194AE}

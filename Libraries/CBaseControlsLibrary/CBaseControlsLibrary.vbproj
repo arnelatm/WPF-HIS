@@ -101,7 +101,7 @@
     <Compile Include="CDateTimePickerNullable.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CDgvDtpCalendar.vb" />
+    <Compile Include="CDgvDtpCalendarUnused.vb" />
     <Compile Include="CDgvCalendar.vb" />
     <Compile Include="CDgvDtpColumn.vb" />
     <Compile Include="CPictureBox.Designer.vb">

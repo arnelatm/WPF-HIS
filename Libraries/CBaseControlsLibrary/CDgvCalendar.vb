@@ -120,8 +120,11 @@ Class CalendarEditingControl
     Public Function GetEditingControlFormattedValue(ByVal context _
         As DataGridViewDataErrorContexts) As Object _
         Implements IDataGridViewEditingControl.GetEditingControlFormattedValue
-
-        Return Me.Value.ToShortDateString()
+        'If Value Is Nothing Then
+        '    Return Nothing
+        'End If
+        'Return Me.Value.ToShortDateString()
+        Return Value
 
     End Function
 
