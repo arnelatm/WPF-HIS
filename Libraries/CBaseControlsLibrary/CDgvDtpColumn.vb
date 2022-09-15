@@ -116,8 +116,6 @@ Public Class CDgvDtpEditingControl
                 ' null, empty, or not in the format of a date.
                 Me.Value = DateTime.Parse(CStr(value))
             Catch
-                ' In the case of an exception, just use the default
-                ' value so we're not left with a null value.
                 Me.Value = Nothing
             End Try
         End Set
@@ -128,9 +126,16 @@ Public Class CDgvDtpEditingControl
         As DataGridViewDataErrorContexts) As Object _
         Implements IDataGridViewEditingControl.GetEditingControlFormattedValue
         If Value Is Nothing Then
-            Return ""
+            Return Nothing
         End If
         Return CDate(Value).ToShortDateString()
+        'Dim dateValue As DateTime?
+        'Try
+        '    dateValue = CDate(Value).ToShortDateString()
+        'Catch ex As Exception
+        '    Return Nothing
+        'End Try
+        'Return dateValue
     End Function
 
     Public Sub ApplyCellStyleToEditingControl(ByVal dataGridViewCellStyle As _
@@ -225,6 +230,7 @@ Public Class CDgvDtpEditingControl
         MyBase.OnValueChanged(sender, eventargs)
 
     End Sub
+
 
 End Class
 
