@@ -1,6 +1,9 @@
 ﻿CREATE TABLE [dbo].[LastPosting] (
-    [IdNo]            INT          NULL,
+    [IdNo]            INT          IDENTITY (1, 1) NOT NULL,
     [LastPostingDate] DATE         NULL,
-    [TransactionName] VARCHAR (25) NULL
+    [TransactionName] VARCHAR (25) NULL,
+    CONSTRAINT [PK_LastPosting] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 

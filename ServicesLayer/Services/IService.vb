@@ -37,12 +37,15 @@ Namespace Services
 
         Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM
 
+        Function GetIdNoWithName(Of T)(tableName As String, itemName As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As T
+
         Function GetRecordCount(tableName As String, Optional filter As String = Nothing) As Integer
 
         Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, Optional ByVal dateTimeStampField As String = "DateTimeStamp") As Object
 
         Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As String
-        Function GetRecordFieldWith2Keyg(oF T1, T2, T3)(searchValue1 As T1, searchValue2 As T2, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As T3
+
+        Function GetRecordFieldWith2Keyg(Of T1, T2, T3)(searchValue1 As T1, searchValue2 As T2, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As T3
 
         Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As String
 
@@ -54,13 +57,13 @@ Namespace Services
 
         Function FieldExistInTable(ByVal tableName As String, ByVal fieldName As String) As Boolean
 
-        Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal fields As String(), Optional filterKey As String = Nothing) As Object
+        Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal Optional fields As String() = Nothing, Optional filterKey As String = Nothing) As Object
 
         Function GetRecordsWithGroupIdNo(Of TM)(ByVal idNo, Optional ByRef sortKey = Nothing) As List(Of TM)
 
         Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object
 
-        Function GetFieldsWithIdNo(idNo As Object, tableName As String, fields As String) As Object
+        Function GetFieldsWithIdNo(idNo As Object, tableName As String, fields As String, Optional primaryFieldName As String = Nothing) As Object
 
         Function GetSpRecords(spName As String, fields As String, sortKey As String, filter As String) As Object
 
@@ -115,8 +118,19 @@ Namespace Services
         Function GetDataSet(storedProcedureName As String, parameters As Object) As DataSet
 
         Function GetFieldOnMaxField(searchFieldName As String, tableName As String, returnFieldName As String, Optional filter As String = Nothing) As Object
+
         Function InsertRecord(tableName As String, fieldList As Object(), values As Object(), fieldType As Object()) As Integer
+
         Function UpdateTable(ByRef data As DataTable, groupIdNo As Integer) As Integer
+
+        Function GetIcIdNoWithName(groupCode As CodeGroupSelection, itemName As String) As Integer
+
+        Function GetPrintSetupIdNo(reportName As String) As Integer
+
+        Function GetIcNameWithIdNo(groupCode As CodeGroupSelection, idNo As Int32) As String
+        Function CountRecordWith3Key(Of S1, S2, S3)(tableName As String, searchFieldName1 As String, searchFieldName2 As String, searchFieldName3 As String, searchValue1 As S1, searchValue2 As S2, searchValue3 As S3) As Integer
+        Function GetRecordFieldWith3Keyg(Of T1, T2, T3, R)(tableName As String, searchValue1 As T1, searchValue2 As T2, searchValue3 As T3, searchFieldName1 As String, searchFieldName2 As String, searchFieldName3 As String, returnFieldName As String) As R
+        Function GetRecordsDataTable(tableName As String, sortKey As String, Optional fields() As String = Nothing, Optional filterKey As String = Nothing) As DataTable
     End Interface
 
 End Namespace

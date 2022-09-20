@@ -77,7 +77,11 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DateCreated As DateTime? Implements IApJournalView.DateCreated
             Get
-                Return Convert.ToDateTime(txtDateCreated.Text)
+                Try
+                    Return Convert.ToDateTime(txtDateCreated.Text)
+                Catch ex As Exception
+                    Return Nothing
+                End Try
             End Get
             Set
                 If Value.HasValue Then
@@ -94,7 +98,6 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 dtpDueDate.Value = Value
-                'End If
             End Set
         End Property
 
@@ -391,7 +394,7 @@ Namespace PresentationLayer.Views.Forms
             UpdateTotals()
         End Sub
 
-        Private Sub OnTransactionDateValueChanged(sender As Object, e As EventArgs) Handles dtpTransactionDate.ValueChanged
+        Private Sub OnTransactionDateValidated(sender As Object, e As EventArgs) Handles dtpTransactionDate.Validated
             Presenter.UpdateDueDate()
             Presenter.UpdateEarlySettlementValues()
             Presenter.UpdateSupplierDate()
@@ -438,7 +441,6 @@ Namespace PresentationLayer.Views.Forms
                 End If
             End If
         End Sub
-
 
     End Class
 

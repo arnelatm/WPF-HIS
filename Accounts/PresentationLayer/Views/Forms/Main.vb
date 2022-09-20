@@ -1,14 +1,17 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
 Imports System.Threading
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Common
+Imports AATM.Common.Models
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.PresentationLayer.Views.Forms
+Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.Libraries
 Imports AATM.Libraries.ErrorsAndEvents
 Imports AATM.Libraries.GlobalFuncNSub
@@ -70,6 +73,8 @@ Namespace PresentationLayer.Views.Forms
             End If
             SetupMapper()
             Presenter = New UserPresenter(Of UserModel)(Me)
+            GlobalVariables.EstablishmentName = Presenter.EstablishmentName
+            GlobalVariables.EstablishmentNameAra = Presenter.EstablishmentNameAra
         End Sub
 
         Public Event FormCultureChanged()
@@ -96,7 +101,7 @@ Namespace PresentationLayer.Views.Forms
                     allControls = FindControlRecursive(allControls, Me)
                     GlobalVariables.IsUserLoggedIn = True
                     SecurityGroupIdNo = GlobalVariables.SecurityGroupIdNo
-                    If GlobalVariables.UserName.ToLower() = $"arnel" Then
+                    If UserIsASuperAdministrator() Then
                         GlobalSubs.ShowAndEnableMenuItems(AccountsMenu)
                         If _addSecurityObject Then
                             For Each cCtrl As Control In allControls
@@ -719,7 +724,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub RecreateSecurityObjectMenuToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemRecreateSecurityObjectMenu.Click
             Dim allControls As New List(Of Control)
             Dim nRecCount = Presenter.GetRecordCount("SecurityObject")
-            If GlobalVariables.UserName.ToLower() = $"arnel" Then
+            If UserIsASuperAdministrator() Then
                 Dim addSecurityObject As Boolean = False
                 If nRecCount <= 12 Then
                     If nRecCount = 0 Then
@@ -885,7 +890,6 @@ Namespace PresentationLayer.Views.Forms
             ShowEntryForm(formToRun)
         End Sub
 
-
         Private Overloads Sub RunForm(Of TV, TP)()
             Dim formToRun = Activator.CreateInstance(GetType(TV))
             Dim pType As Type = GetType(TP)
@@ -902,7 +906,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateMenuSecurityObjectsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUpdateMenuSecurityObjects.Click
             Dim allControls As New List(Of Control)
-            If GlobalVariables.UserName.ToLower() = $"arnel" Then
+            If UserIsASuperAdministrator() Then
                 For Each cCtrl As Control In FindControlRecursive(allControls, Me)
                     UpdateMenuSecurity(cCtrl)
                 Next
@@ -1007,13 +1011,6 @@ Namespace PresentationLayer.Views.Forms
             PasswordGenerator.Show()
         End Sub
 
-        Private Sub ToolStripMenuItemIncomeSummaryVatReport_Click(sender As Object, e As EventArgs)
-            Dim parameters As New ArrayList
-            parameters.Add("Revenue Sale Vat Report Summary")
-            parameters.Add({"ReportTitle", "Revenue/Sale Vat Report Summary"})
-            RunForm(Of DateRangeEntry, ArrayList)(parameters)
-        End Sub
-
         Private Sub LaboratoryReportsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLaboratoryReports.Click
             RunForm(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)($"IGLAB")
         End Sub
@@ -1026,7 +1023,7 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of ItemDetailsEntry, ItemDetailsPresenter(Of ItemDetailsModel))()
         End Sub
 
-        Private Sub EmployeeMedicalReportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeMedicalReport.Click
+        Private Sub ToolStripMenuItemEmployeeMedicalReport_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeMedicalReport.Click
             RunForm(Of EmployeeMedicalReport)()
         End Sub
 
@@ -1038,11 +1035,81 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of DocumentEntryTv, DocumentPresenter(Of DocumentModel))()
         End Sub
 
-        Private Sub TestFormToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TestFormToolStripMenuItem.Click
-            Dim formToRun = Activator.CreateInstance(GetType(TestForm))
-            formToRun.Presenter = New DepartmentPresenter(Of DepartmentModel)(formToRun)
-            formToRun.Show()
+        Private Sub TestFormToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTestForm.Click
+            Dim form As New TestForm3
+            form.Show()
+            'Dim formToRun = Activator.CreateInstance(GetType(TestForm))
+            'formToRun.Presenter = New DepartmentPresenter(Of DepartmentModel)(formToRun)
+            'formToRun.Show()
         End Sub
+
+        Private Sub ToolStripMenuItemPMRReports_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPMRReports.Click
+            RunForm(Of PmrInvestigationRequestForm, PmrInvestigationPresenter(Of PmrInvestigationModel))()
+        End Sub
+
+        Private Sub ToolStripMenuItemVATReport_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemVATReport.Click
+            Dim parameters As New ArrayList
+            parameters.Add("Revenue Sale Vat Report Summary")
+            parameters.Add({"ReportTitle", "Revenue/Sale Vat Report Summary"})
+            RunForm(Of DateRangeEntry, ArrayList)(parameters)
+        End Sub
+
+        Private Sub ToolStripMenuItemIGroup_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemIGroup.Click
+
+        End Sub
+
+        Private Sub ToolStripMenuItemCodeGroup_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCodeGroup.Click
+            RunForm(Of CodeGroupEntryTv, CodeGroupPresenter(Of CodeGroupModel))()
+        End Sub
+
+        Private Sub ToolStripMenuItemItemCode_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemItemCode.Click
+            RunForm(Of ItemCodeEntryTv, ItemCodePresenter(Of ItemCodeModel))()
+        End Sub
+
+        Private Sub ToolStripMenuItemDoctor_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDoctor.Click
+            RunForm(Of DoctorEntryTv, DoctorPresenter(Of DoctorModel))()
+        End Sub
+
+        Private Property PrintJobView As IPrintJobView
+
+        Private Sub PrintReport(reportFileName As String, databaseConnectionName As String, Optional args() As Object = Nothing)
+            Dim prPresenter As New PrintReportPresenter()
+            prPresenter.PrintReport(reportFileName, databaseConnectionName, args)
+        End Sub
+
+        Private Sub ToolStripMenuItemPrintJobs_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPrinters.Click
+            RunForm(Of PrinterEntryTv, PrinterPresenter(Of PrinterModel))()
+        End Sub
+
+        Private Sub ToolStripMenuItemStockInventory_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStockInventory.Click
+            RunForm(Of StockInventoryEntry, StockInventoryPresenter(Of StockInventoryModel))()
+        End Sub
+
+        Private Sub ToolStripMenuItemDrugSale_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDrugSale.Click
+            RunForm(Of DrugSaleEntry, DrugSalePresenter(Of DrugSaleModel))()
+        End Sub
+
+        Private Sub ToolStripMenuItemDrugAcceptance_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDrugAcceptance.Click
+            RunForm(Of DrugAcceptEntry, DrugAcceptPresenter(Of DrugAcceptModel))()
+        End Sub
+
+        Private Sub ToolStripMenuItemPharmacyBarcodePrinting_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPharmacyBarcodePrinting.Click
+            Dim args As Object() = {Environment.MachineName, "Workstation"}
+            PrintReport("BarcodePharmacy.Rpt", $"IGROUP", args)
+        End Sub
+
+        Private Sub ToolStripMenuItemGenerateDailyDrugTransferFile_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemGenerateDailyDrugTransferFile.Click
+            RunForm(Of GenerateDrugSale)()
+        End Sub
+
+        Private Sub ToolStripMenuItemGenerateDrugAcceptanceFile_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemGenerateDrugAcceptanceFile.Click
+            RunForm(Of GenerateDrugCsv, String)("DrugAccept")
+        End Sub
+
+        Private Sub ToolStripMenuItemItemMatcher_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemItemMatcher.Click
+            RunForm(Of GTinMatcherEntry, GTinMatcherPresenter(Of GTinMatcherModel))()
+        End Sub
+
     End Class
 
 End Namespace

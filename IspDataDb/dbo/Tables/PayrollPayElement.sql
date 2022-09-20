@@ -5,8 +5,11 @@
     [Amount]                  MONEY    NULL,
     [Active]                  BIT      NULL,
     [RecurringPayElementIdNo] INT      NULL,
-    [Generated]               BIT      NULL
+    [Generated]               BIT      NULL,
+    CONSTRAINT [PK_PayrollPayElement] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

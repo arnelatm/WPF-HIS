@@ -13,19 +13,21 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <PublishUrl>D:\AATM\Publish\</PublishUrl>
+    <Install>false</Install>
+    <InstallFrom>Unc</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <InstallUrl>\\Marcelo-dell\d\Publish\</InstallUrl>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -65,6 +67,18 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>83D567CB13D78FDC6F832BC96D01A0832E238E21</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Accounts_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=6.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
@@ -136,6 +150,8 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="ShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <HintPath>..\packages\CrystalReports.ShockwaveFlashObjects.13.0.4000\lib\net40\ShockwaveFlashObjects.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -148,6 +164,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.7.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
@@ -166,6 +183,7 @@
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -203,9 +221,16 @@
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
+    <Compile Include="BusinessLayer\IGroup\DrugAccept.vb" />
+    <Compile Include="BusinessLayer\IGroup\DrugSale.vb" />
+    <Compile Include="BusinessLayer\IGroup\GTinMatcher.vb" />
+    <Compile Include="BusinessLayer\IGroup\StockInventory.vb" />
+    <Compile Include="BusinessLayer\ItemCode.vb" />
+    <Compile Include="BusinessLayer\CodeGroup.vb" />
     <Compile Include="BusinessLayer\DataImage.vb" />
     <Compile Include="BusinessLayer\Document.vb" />
     <Compile Include="BusinessLayer\EmployeeDocument.vb" />
+    <Compile Include="BusinessLayer\Doctor.vb" />
     <Compile Include="BusinessLayer\HolidayAvailmentApprovalHistory.vb" />
     <Compile Include="BusinessLayer\HolidayTransferAvailment.vb" />
     <Compile Include="BusinessLayer\HolidayTransferItem.vb" />
@@ -213,6 +238,9 @@
     <Compile Include="BusinessLayer\EmployeeLeaveApprovalHistory.vb" />
     <Compile Include="BusinessLayer\EmployeeLeaveApprovalItem.vb" />
     <Compile Include="BusinessLayer\EmployeePayElement.vb" />
+    <Compile Include="BusinessLayer\IGroup\PmrInvestigation.vb" />
+    <Compile Include="BusinessLayer\IGroup\PmrPatientDisplay.vb" />
+    <Compile Include="BusinessLayer\IGroup\Patient.vb" />
     <Compile Include="BusinessLayer\IGroup\Lab_InvoiceGroup.vb" />
     <Compile Include="BusinessLayer\IGroup\ItemDetails.vb" />
     <Compile Include="BusinessLayer\JournalPrefix.vb" />
@@ -276,6 +304,13 @@
     <Compile Include="BusinessLayer\Supplier.vb" />
     <Compile Include="ContainerConfig.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
+    <Compile Include="DataLayer\AdoNet\DoctorDao.vb" />
+    <Compile Include="DataLayer\AdoNet\IGroup\DrugAcceptDao.vb" />
+    <Compile Include="DataLayer\AdoNet\IGroup\DrugTransactionDao.vb" />
+    <Compile Include="DataLayer\AdoNet\IGroup\DrugSaleDao.vb" />
+    <Compile Include="DataLayer\AdoNet\IGroup\StockInventoryDao.vb" />
+    <Compile Include="DataLayer\AdoNet\ItemCodeDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CodeGroupDao.vb" />
     <Compile Include="DataLayer\AdoNet\DataImageDao.vb" />
     <Compile Include="DataLayer\AdoNet\DocumentDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeLeaveDao.vb" />
@@ -284,6 +319,7 @@
     <Compile Include="DataLayer\AdoNet\EmployeeDocumentDao.vb" />
     <Compile Include="DataLayer\AdoNet\HolidayTransferDao.vb" />
     <Compile Include="DataLayer\AdoNet\HolidayTransferItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\IGroup\PmrInvestigationDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\Lab_InvoiceGroupDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\ItemDetailsDao.vb" />
     <Compile Include="DataLayer\AdoNet\ReportDao.vb" />
@@ -345,6 +381,12 @@
     <Compile Include="DataLayer\AdoNet\JournalItemDao.vb" />
     <Compile Include="DataLayer\IAccountsDao.vb" />
     <Compile Include="DataLayer\IDaoFactoryAccounts.vb" />
+    <Compile Include="Form1.Designer.vb">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form2.Designer.vb">
       <DependentUpon>Form2.vb</DependentUpon>
     </Compile>
@@ -374,6 +416,13 @@
       <DependentUpon>NewSettings.settings</DependentUpon>
     </Compile>
     <Compile Include="OneTimeRun.vb" />
+    <Compile Include="PresentationLayer\Models\IGroup\DrugAcceptModel.vb" />
+    <Compile Include="PresentationLayer\Models\IGroup\DrugSaleModel.vb" />
+    <Compile Include="PresentationLayer\Models\IGroup\GTinMatcherModel.vb" />
+    <Compile Include="PresentationLayer\Models\IGroup\StockInventoryModel.vb" />
+    <Compile Include="PresentationLayer\Models\ItemCodeModel.vb" />
+    <Compile Include="PresentationLayer\Models\CodeGroupModel.vb" />
+    <Compile Include="PresentationLayer\Models\DoctorModel.vb" />
     <Compile Include="PresentationLayer\Models\DataImageModel.vb" />
     <Compile Include="PresentationLayer\Models\DocumentModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeeIdModel.vb" />
@@ -386,6 +435,9 @@
     <Compile Include="PresentationLayer\Models\HolidayAvailmentModel.vb" />
     <Compile Include="PresentationLayer\Models\HolidayTransferModel.vb" />
     <Compile Include="PresentationLayer\Models\HolidayTransferAvailmentModel.vb" />
+    <Compile Include="PresentationLayer\Models\IGroup\PatientModel.vb" />
+    <Compile Include="PresentationLayer\Models\IGroup\PMRInvestigationModel.vb" />
+    <Compile Include="PresentationLayer\Models\IGroup\PMRPatientDisplayModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\Lab_InvoiceGroupModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\ItemDetailsModel.vb" />
     <Compile Include="PresentationLayer\Models\ReportSelectorModel.vb" />
@@ -422,8 +474,16 @@
     <Compile Include="PresentationLayer\Models\PensionSchemeModel.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\DoctorPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\IGroup\DrugAcceptPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\IGroup\DrugSalePresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\IGroup\GTinMatcherPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\IGroup\StockInventoryPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\ItemCodePresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\CodeGroupPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CustomerPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DocumentPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\IGroup\PmrInvestigationPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\Lab_InvoiceGroupPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\ItemDetailsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ReportSelectorPresenter.vb" />
@@ -469,6 +529,60 @@
       <DependentUpon>ArJournalEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\ArJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\DoctorEntry.Designer.vb">
+      <DependentUpon>DoctorEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\DoctorEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\TestForm3.Designer.vb">
+      <DependentUpon>TestForm3.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\TestForm3.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\DrugAcceptEntry.Designer.vb">
+      <DependentUpon>DrugAcceptEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\DrugAcceptEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\DrugSaleEntry.Designer.vb">
+      <DependentUpon>DrugSaleEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\DrugSaleEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\GTinScanner.Designer.vb">
+      <DependentUpon>GTinScanner.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\GTinScanner.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\GTinMatcherEntry.Designer.vb">
+      <DependentUpon>GTinMatcherEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\GTinMatcherEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\StockInventoryEntry.Designer.vb">
+      <DependentUpon>StockInventoryEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\StockInventoryEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\ItemCodeEntry.Designer.vb">
+      <DependentUpon>ItemCodeEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\ItemCodeEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\CodeGroupEntryTv.Designer.vb">
+      <DependentUpon>CodeGroupEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\CodeGroupEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\CustomerEntryTv.Designer.vb">
@@ -529,6 +643,18 @@
       <DependentUpon>CbcRetrievalEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\CbcRetrievalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrReportSelector.designer.vb">
+      <DependentUpon>PmrReportSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrReportSelector.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationRequestForm.Designer.vb">
+      <DependentUpon>PmrInvestigationRequestForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationRequestForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsEntry.Designer.vb">
@@ -615,6 +741,12 @@
     <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\CbcReportSelector.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\GenerateDrugCsv.Designer.vb">
+      <DependentUpon>GenerateDrugCsv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\GenerateDrugCsv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\NumberofCashPatientsPerDoctorPerDay - Copy.designer.vb">
       <DependentUpon>NumberofCashPatientsPerDoctorPerDay - Copy.vb</DependentUpon>
     </Compile>
@@ -625,6 +757,12 @@
       <DependentUpon>DateRangeEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\DateRangeEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\GenerateDrugSale.Designer.vb">
+      <DependentUpon>GenerateDrugSale.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\GenerateDrugSale.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\ReportFormIGroup.Designer.vb">
@@ -705,15 +843,20 @@
     <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\TestForm.Designer.vb">
-      <DependentUpon>TestForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\TestForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="PresentationLayer\Views\IGroup\PmrPatientDisplayView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IDrugAcceptView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IDrugSaleView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IGTinMatcherView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IStockInventoryView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IItemCode.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\ICodeGroup.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IDoctorView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDataImageView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDocumentView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeDocumentView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IPmrInvestigationView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IPmrPatientDisplayView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IPmrPatientView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\ILab_InvoiceGroupView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IItemDetailsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IHolidayAvailmentApprovalHistoryView.vb" />
@@ -748,12 +891,6 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementView.vb" />
     <Compile Include="PresentationLayer\Views\OtWorkHourView.vb" />
-    <Compile Include="PresentationLayer\Views\Forms\Test.Designer.vb">
-      <DependentUpon>Test.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Test.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PayrollDetailEntry.Designer.vb">
       <DependentUpon>PayrollDetailEntry.vb</DependentUpon>
     </Compile>
@@ -1121,10 +1258,28 @@
       <DependentUpon>Accounts Receivable Journal.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\Aging of Accounts Payable.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Aging of Accounts Payable.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Aging of Accounts Receivable.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Aging of Accounts Receivable.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\Balance Sheet.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Balance Sheet.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Bank Transfer Journal.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Bank Transfer Journal.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Cash Disbursement Journal.vb">
@@ -1145,10 +1300,70 @@
       <DependentUpon>Check Disbursement Journal.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\Check Printing Independent.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Check Printing Independent.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Check Printing NCB.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Check Printing NCB.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Check Printing Original.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Check Printing Original.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Check Printing Riyad Bank.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Check Printing Riyad Bank.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Check Printing.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Check Printing.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Check Printing106.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Check Printing106.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Check Printing107.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Check Printing107.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Check Printing127.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Check Printing127.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Check PrintingOldPortrait.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Check PrintingOldPortrait.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\Clinic Cost Summary.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Clinic Cost Summary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\CompanyMonthlyInvoice.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CompanyMonthlyInvoice.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Cost of Sales Report.vb">
@@ -1161,6 +1376,36 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CrystalReport1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Daily Shift Summary Report.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Daily Shift Summary Report.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Employee ID Report Data.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Employee ID Report Data.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Employee ID Report.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Employee ID Report.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Employee Medical Report All.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Employee Medical Report All.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Employee Medical Report.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Employee Medical Report.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Employee Receivable Journal.vb">
@@ -1181,10 +1426,130 @@
       <DependentUpon>HR Employee Info.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\HR Id Printing.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HR Id Printing.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\HR Id PrintingData.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HR Id PrintingData.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\IB Food Delivery Summary.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IB Food Delivery Summary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\IGroup\BarcodePharmacy.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BarcodePharmacy.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\IGroup\Cash Income Summary Per Month Per Service Per Doctor.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Cash Income Summary Per Month Per Service Per Doctor.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\IGroup\Combined Total Income &amp; Vat Summary Report All.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Combined Total Income &amp; Vat Summary Report All.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\IGroup\DCBillPrint.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DCBillPrint.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\IGroup\DCBillPrintWithCOrrector.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DCBillPrintWithCOrrector.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\IGroup\Detailed Invoices Printing Per Company.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Detailed Invoices Printing Per Company.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\IGroup\Diagnostic Test Summary.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Diagnostic Test Summary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\IGroup\IBLabSamplePrinting.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IBLabSamplePrinting.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\IGroup\Invoice List Per Company.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Invoice List Per Company.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\IGroup\Invoices List Per Company.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Invoices List Per Company.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\IGroup\List of Cash Company Clients.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>List of Cash Company Clients.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\IGroup\No of Diagnostic Test services per Month.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>No of Diagnostic Test services per Month.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\IGroup\Number of Laboratory &amp; Xray Patients Excluding Diagnostic Services per Doctor per Month.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Number of Laboratory &amp; Xray Patients Excluding Diagnostic Services per Doctor per Month.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\IGroup\Number of Laboratory &amp; Xray Patients per Doctor per Month.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Number of Laboratory &amp; Xray Patients per Doctor per Month.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\IGroup\Number of Laboratory &amp; Xray Services per Month.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Number of Laboratory &amp; Xray Services per Month.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\IGroup\Number of New Patients per Doctor per Day per Nationality.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Number of New Patients per Doctor per Day per Nationality.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\IGroup\Number of New Patients per Doctor per Day.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Number of New Patients per Doctor per Day.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\IGroup\Number of New Patients per Doctor per Month per Nationality.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Number of New Patients per Doctor per Month per Nationality.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\IGroup\Number of Patients per Doctor per Day.vb">
@@ -1193,16 +1558,88 @@
       <DependentUpon>Number of Patients per Doctor per Day.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\IGroup\Number of Patients per Doctor per Month.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Number of Patients per Doctor per Month.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\IGroup\PMR Doctors Form.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PMR Doctors Form.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\IGroup\PMR UCAF.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PMR UCAF.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\IGroup\Statement of Employee Payroll.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Statement of Employee Payroll.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\Income Statement.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Income Statement.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\Medical Report.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Medical Report.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Opened Petty Cash Report.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Opened Petty Cash Report.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Petty Cash Detailed Report.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Petty Cash Detailed Report.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\Petty Cash Disbursement Journal.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Petty Cash Disbursement Journal.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Petty Cash Replenishment Journal.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Petty Cash Replenishment Journal.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Petty Cash Replenishment Report.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Petty Cash Replenishment Report.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\PMRPharmacyMedicinePrescription.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PMRPharmacyMedicinePrescription.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Revenue Sale Vat Report Summary.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Revenue Sale Vat Report Summary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Sales Journal Daily Report.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sales Journal Daily Report.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Sales Journal.vb">
@@ -1215,6 +1652,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SampleQrCodeGeneration.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Shift Summary Daily Report.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Shift Summary Daily Report.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\Shift Summary Report.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Shift Summary Report.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Statement of Accounts Payable.vb">
@@ -1277,6 +1726,54 @@
       <DependentUpon>Trial Balance.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\VAT\01-Simplified Combined Total Income &amp; Vat Summary Report All.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>01-Simplified Combined Total Income &amp; Vat Summary Report All.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\VAT\02-Self Sale-Revenue.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>02-Self Sale-Revenue.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\VAT\03-Total Output VAT Report.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>03-Total Output VAT Report.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\VAT\04-Total Purchases Report.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>04-Total Purchases Report.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\VAT\Daily Simplified Combined Total Income &amp; Vat Summary Report All.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Daily Simplified Combined Total Income &amp; Vat Summary Report All.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\VAT\Revenue Except Self Sale.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Revenue Except Self Sale.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\VAT\Sale-Revenue Except Self Sale.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sale-Revenue Except Self Sale.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\VAT\Sales Except Self Sale.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sales Except Self Sale.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ServiceLayer\ActionService\AccountsModule.vb" />
     <Compile Include="ServiceLayer\ActionService\IServiceAccounts.vb" />
     <Compile Include="ServiceLayer\ActionService\AccountsService.vb" />
@@ -1289,6 +1786,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.en-GB.resx" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -1305,6 +1805,37 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ArJournalEntry.resx">
       <DependentUpon>ArJournalEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\DoctorEntry.resx">
+      <DependentUpon>DoctorEntry.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\TestForm3.resx">
+      <DependentUpon>TestForm3.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\DrugAcceptEntry.resx">
+      <DependentUpon>DrugAcceptEntry.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\DrugSaleEntry.resx">
+      <DependentUpon>DrugSaleEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\GTinScanner.resx">
+      <DependentUpon>GTinScanner.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\GTinMatcherEntry.resx">
+      <DependentUpon>GTinMatcherEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\StockInventoryEntry.resx">
+      <DependentUpon>StockInventoryEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\ItemCodeEntry.resx">
+      <DependentUpon>ItemCodeEntry.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\CodeGroupEntryTv.resx">
+      <DependentUpon>CodeGroupEntryTv.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\BankEntryTv.resx">
       <DependentUpon>BankEntryTv.vb</DependentUpon>
@@ -1339,6 +1870,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\EmployeeEntryTv.resx">
       <DependentUpon>EmployeeEntryTv.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\HolidayTransferEntry.resx">
       <DependentUpon>HolidayTransferEntry.vb</DependentUpon>
@@ -1360,6 +1892,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\CbcRetrievalEntry.resx">
       <DependentUpon>CbcRetrievalEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\PmrReportSelector.resx">
+      <DependentUpon>PmrReportSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationRequestForm.resx">
+      <DependentUpon>PmrInvestigationRequestForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsEntry.resx">
       <DependentUpon>ItemDetailsEntry.vb</DependentUpon>
@@ -1415,11 +1953,17 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\CbcReportSelector.resx">
       <DependentUpon>CbcReportSelector.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\GenerateDrugCsv.resx">
+      <DependentUpon>GenerateDrugCsv.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\NumberofCashPatientsPerDoctorPerDay - Copy.resx">
       <DependentUpon>NumberofCashPatientsPerDoctorPerDay - Copy.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\DateRangeEntry.resx">
       <DependentUpon>DateRangeEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\GenerateDrugSale.resx">
+      <DependentUpon>GenerateDrugSale.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ReportFormIGroup.resx">
       <DependentUpon>ReportFormIGroup.vb</DependentUpon>
@@ -1460,9 +2004,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\SupplierEntryTv.resx">
       <DependentUpon>SupplierEntryTv.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Test.resx">
-      <DependentUpon>Test.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PayrollDetailEntry.resx">
       <DependentUpon>PayrollDetailEntry.vb</DependentUpon>
@@ -1575,9 +2116,6 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\StatementOfAp.resx">
       <DependentUpon>StatementOfAp.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\TestForm.resx">
-      <DependentUpon>TestForm.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\LeaveView.resx">
       <DependentUpon>LeaveView.vb</DependentUpon>
     </EmbeddedResource>
@@ -1601,9 +2139,21 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Accounts Receivable Journal.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Aging of Accounts Payable.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Aging of Accounts Payable.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Aging of Accounts Receivable.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Aging of Accounts Receivable.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Balance Sheet.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Balance Sheet.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Bank Transfer Journal.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Bank Transfer Journal.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Cash Disbursement Journal.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1617,9 +2167,49 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Check Disbursement Journal.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Check Printing Independent.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Check Printing Independent.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Check Printing NCB.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Check Printing NCB.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Check Printing Original.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Check Printing Original.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Check Printing Riyad Bank.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Check Printing Riyad Bank.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Check Printing.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Check Printing.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Check Printing106.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Check Printing106.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Check Printing107.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Check Printing107.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Check Printing127.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Check Printing127.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Check PrintingOldPortrait.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Check PrintingOldPortrait.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Clinic Cost Summary.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Clinic Cost Summary.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\CompanyMonthlyInvoice.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CompanyMonthlyInvoice.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Cost of Sales Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1628,6 +2218,26 @@
     <EmbeddedResource Include="Reports\CrystalReport1.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CrystalReport1.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Daily Shift Summary Report.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Daily Shift Summary Report.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Employee ID Report Data.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Employee ID Report Data.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Employee ID Report.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Employee ID Report.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Employee Medical Report All.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Employee Medical Report All.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Employee Medical Report.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Employee Medical Report.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Employee Receivable Journal.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1641,21 +2251,152 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>HR Employee Info.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\HR Id Printing.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>HR Id Printing.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\HR Id PrintingData.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>HR Id PrintingData.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IB Food Delivery Summary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>IB Food Delivery Summary.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IGroup\BarcodePharmacy.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>BarcodePharmacy.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\IGroup\Cash Income Summary Per Month Per Service Per Doctor.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Cash Income Summary Per Month Per Service Per Doctor.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IGroup\Combined Total Income &amp; Vat Summary Report All.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Combined Total Income &amp; Vat Summary Report All.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IGroup\DCBillPrint.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DCBillPrint.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IGroup\DCBillPrintWithCOrrector.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>DCBillPrintWithCOrrector.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IGroup\Detailed Invoices Printing Per Company.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Detailed Invoices Printing Per Company.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IGroup\Diagnostic Test Summary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Diagnostic Test Summary.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IGroup\IBLabSamplePrinting.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>IBLabSamplePrinting.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IGroup\Invoice List Per Company.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Invoice List Per Company.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IGroup\Invoices List Per Company.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Invoices List Per Company.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IGroup\List of Cash Company Clients.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>List of Cash Company Clients.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IGroup\No of Diagnostic Test services per Month.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>No of Diagnostic Test services per Month.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IGroup\Number of Laboratory &amp; Xray Patients Excluding Diagnostic Services per Doctor per Month.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Number of Laboratory &amp; Xray Patients Excluding Diagnostic Services per Doctor per Month.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IGroup\Number of Laboratory &amp; Xray Patients per Doctor per Month.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Number of Laboratory &amp; Xray Patients per Doctor per Month.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IGroup\Number of Laboratory &amp; Xray Services per Month.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Number of Laboratory &amp; Xray Services per Month.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IGroup\Number of New Patients per Doctor per Day per Nationality.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Number of New Patients per Doctor per Day per Nationality.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IGroup\Number of New Patients per Doctor per Day.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Number of New Patients per Doctor per Day.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IGroup\Number of New Patients per Doctor per Month per Nationality.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Number of New Patients per Doctor per Month per Nationality.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\IGroup\Number of Patients per Doctor per Day.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Number of Patients per Doctor per Day.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IGroup\Number of Patients per Doctor per Month.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Number of Patients per Doctor per Month.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IGroup\PMR Doctors Form.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PMR Doctors Form.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IGroup\PMR UCAF.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PMR UCAF.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\IGroup\Statement of Employee Payroll.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Statement of Employee Payroll.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Income Statement.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Income Statement.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Local Statement of Employee Loans.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Medical Report.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Medical Report.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Opened Petty Cash Report.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Opened Petty Cash Report.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Petty Cash Detailed Report.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Petty Cash Detailed Report.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Petty Cash Disbursement Journal.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Petty Cash Disbursement Journal.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Petty Cash Replenishment Journal.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Petty Cash Replenishment Journal.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Petty Cash Replenishment Report.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Petty Cash Replenishment Report.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\PMRPharmacyMedicinePrescription.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PMRPharmacyMedicinePrescription.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Revenue Sale Vat Report Summary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Revenue Sale Vat Report Summary.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Sales Journal Daily Report.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Sales Journal Daily Report.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Sales Journal.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1664,6 +2405,14 @@
     <EmbeddedResource Include="Reports\SampleQrCodeGeneration.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SampleQrCodeGeneration.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Shift Summary Daily Report.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Shift Summary Daily Report.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Shift Summary Report.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Shift Summary Report.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Statement of Accounts Payable.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1705,6 +2454,38 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Trial Balance.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\VAT\01-Simplified Combined Total Income &amp; Vat Summary Report All.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>01-Simplified Combined Total Income &amp; Vat Summary Report All.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\VAT\02-Self Sale-Revenue.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>02-Self Sale-Revenue.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\VAT\03-Total Output VAT Report.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>03-Total Output VAT Report.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\VAT\04-Total Purchases Report.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>04-Total Purchases Report.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\VAT\Daily Simplified Combined Total Income &amp; Vat Summary Report All.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Daily Simplified Combined Total Income &amp; Vat Summary Report All.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\VAT\Revenue Except Self Sale.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Revenue Except Self Sale.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\VAT\Sale-Revenue Except Self Sale.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Sale-Revenue Except Self Sale.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\VAT\Sales Except Self Sale.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Sales Except Self Sale.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="SetSettings.resx">
       <DependentUpon>SetSettings.vb</DependentUpon>
     </EmbeddedResource>
@@ -1713,13 +2494,12 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app Ispadmin2.config" />
+    <None Include="Accounts_TemporaryKey.pfx" />
     <None Include="app.config" />
+    <None Include="app-Marcelo-Dell.config" />
+    <None Include="app-Ispadmin2.config" />
     <None Include="app-Isp-Server.config" />
-    <None Include="appIspadmin2.config" />
-    <None Include="app-MarceloPC.config" />
     <None Include="appx.config" />
-    <None Include="appOkMarceloPC.config" />
     <None Include="app-Ibn-Server.config" />
     <None Include="appOrig.config" />
     <None Include="My Project\app.manifest" />
@@ -1754,6 +2534,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.GeneralJournalModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.HolidayTransferItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.HolidayTransferItemModel1.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.IGroup.PmrPatientDisplayModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.JournalItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.OvertimeItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PayElementAccountModel.datasource" />
@@ -1807,6 +2588,10 @@
     <ProjectReference Include="..\Libraries\CBaseControlsLibrary\CBaseControlsLibrary.vbproj">
       <Project>{f991561a-78f8-487c-a873-e6436b41d801}</Project>
       <Name>CBaseControlsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\CrystalReportsHelper\CrystalReportsHelper.vbproj">
+      <Project>{8F2BB05A-C065-4E1B-9B1A-D4F600C0DB62}</Project>
+      <Name>CrystalReportsHelper</Name>
     </ProjectReference>
     <ProjectReference Include="..\Libraries\ErrorsAndEvents\ErrorsAndEvents.vbproj">
       <Project>{abbf2275-7dff-4724-98f9-71a2fd10b471}</Project>

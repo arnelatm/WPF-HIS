@@ -1,5 +1,6 @@
 ﻿Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Common.BusinessLayer
+Imports AATM.Common.Models
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.PresentationLayer.Models
@@ -51,6 +52,10 @@ Public Class MappingProfileCommon
         CreateMap(Of UserModel, IUserView).ReverseMap()
         CreateMap(Of DefaultFieldValue, DefaultFieldValueModel).ReverseMap()
         CreateMap(Of DefaultFieldValueModel, IDefaultFieldValueView).ReverseMap()
+        CreateMap(Of Printer, PrinterModel).ReverseMap()
+        CreateMap(Of PrinterModel, IPrinterView).ReverseMap()
+        CreateMap(Of PrintJob, PrintJobModel).ReverseMap()
+        CreateMap(Of PrintJobModel, IPrintJobView).ReverseMap()
 
         'destination >= destination.Value, opt >= opt.NullSubstitute("Other Value")));;
 

@@ -65,7 +65,7 @@ Partial Class gTimePicker
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.Controls.Add(Me.txbTime)
         Me.Name = "gTimePicker"
-        Me.Size = New System.Drawing.Size(51, 18)
+        Me.Size = New System.Drawing.Size(115, 23)
         Me.ResumeLayout(false)
         Me.PerformLayout
 

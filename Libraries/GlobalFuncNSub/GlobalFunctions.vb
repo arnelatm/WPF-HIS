@@ -1,9 +1,11 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
+Imports System.Drawing.Printing
 Imports System.Globalization
 Imports System.IO
 Imports System.Linq.Expressions
 Imports System.Net.Mail
+Imports System.Printing
 Imports System.Reflection
 Imports System.Text
 Imports System.Text.RegularExpressions
@@ -24,6 +26,9 @@ Public Module GlobalFunctions
         Dim curCulture As CultureInfo = CultureInfo.CurrentCulture
         CultureInfo.CurrentCulture = targetCulture
         Try
+            If TypeOf targetCulture.Calendar Is System.Globalization.UmAlQuraCalendar Or TypeOf targetCulture.Calendar Is System.Globalization.HijriCalendar Then
+                targetCulture.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy"
+            End If
             shortDateString = givenDate.ToShortDateString()
         Catch ex As Exception
             shortDateString = Nothing
@@ -41,6 +46,7 @@ Public Module GlobalFunctions
         For Each optionalCalendar In targetCulture.OptionalCalendars
             If TypeOf optionalCalendar Is HijriCalendar Then
                 returnValue = True
+                Exit For
             End If
         Next
         Return returnValue
@@ -764,6 +770,9 @@ Public Module GlobalFunctions
             newShortDate = Nothing
         Else
             newShortDate = Regex.Replace(shortDate, "\b\d\b", "0$&")
+            ' \b - boundary non , \d - digit
+            ' replacement $& - include the rest of the string
+            ' 0 - add 0 to the matched string
         End If
         Return newShortDate
     End Function
@@ -1087,20 +1096,22 @@ Public Module GlobalFunctions
 
     Public Sub MoveToGridView(ByVal dgv As DataGridView, ByVal columnName As String)
         If dgv IsNot Nothing AndAlso dgv.Visible Then
-            If dgv.CurrentCell Is Nothing Then
-                dgv.Focus()
-                If dgv.CurrentCell Is Nothing Then
-                    If dgv.Columns(columnName) IsNot Nothing And dgv.Rows.Count() > 0 Then
-                        dgv.CurrentCell = dgv(dgv.Columns(columnName).Index(), 0)
+            With dgv
+                .Focus()
+                If .CurrentCell Is Nothing Then
+                    If .CurrentCell Is Nothing Then
+                        If .Columns(columnName) IsNot Nothing And .Rows.Count() > 0 Then
+                            .CurrentCell = dgv(.Columns(columnName).Index(), 0)
+                        End If
+                    End If
+                Else
+                    If .Columns(columnName) IsNot Nothing Then
+                        If .Columns(columnName) IsNot Nothing And .Rows.Count() > 0 Then
+                            .CurrentCell = dgv(.Columns(columnName).Index(), 0)
+                        End If
                     End If
                 End If
-            Else
-                If dgv.Columns(columnName) IsNot Nothing Then
-                    If dgv.Columns(columnName) IsNot Nothing And dgv.Rows.Count() > 0 Then
-                        dgv.CurrentCell = dgv(dgv.Columns(columnName).Index(), 0)
-                    End If
-                End If
-            End If
+            End With
         End If
 
     End Sub
@@ -1279,9 +1290,10 @@ Public Module GlobalFunctions
     End Function
 
     Public Function GetTempFileName(ByVal extension As String) As String
+        Dim fileName As String = Nothing
         Dim attempt As Integer = 0
         While True
-            Dim fileName As String = Path.GetRandomFileName()
+            fileName = Path.GetRandomFileName()
             fileName = Path.ChangeExtension(fileName, extension)
             fileName = Path.Combine(Path.GetTempPath(), fileName)
             Try
@@ -1290,14 +1302,68 @@ Public Module GlobalFunctions
                 Return fileName
             Catch ex As IOException
                 If System.Threading.Interlocked.Increment(attempt) = 10 Then Throw New IOException("No unique temporary file name is available.", ex)
-                Return Nothing
             End Try
         End While
+        Return Nothing
     End Function
 
     Public Function AsMonthEndDate(dDate As DateTime) As Date
         Dim firstDayOfMonth As New DateTime(dDate.Year, dDate.Month, 1)
         Return firstDayOfMonth.AddMonths(1).AddDays(-1)
+    End Function
+
+    Public Function UserIsASuperAdministrator()
+        If GlobalVariables.UserName.ToLower() = $"arnel" Then
+            Return True
+        End If
+        Return False
+    End Function
+
+    Public Function UserIsADeveloper()
+        If GlobalVariables.UserName.ToLower() = $"arnel" Then
+            Return True
+        End If
+        Return False
+    End Function
+
+    Public Function GetPrinterPaperSources()
+        Dim paperSources As New Collection
+        Dim printDoc As New PrintDocument
+        Dim pkSource As Drawing.Printing.PaperSource
+        For i = 0 To printDoc.PrinterSettings.PaperSources.Count - 1
+            pkSource = printDoc.PrinterSettings.PaperSources.Item(i)
+            paperSources.Add(pkSource)
+        Next
+        Return paperSources
+    End Function
+
+    Public Function GetInstalledPrinters() As ArrayList
+        Dim installedPrinters As New ArrayList
+        For Each Printer In PrinterSettings.InstalledPrinters
+            installedPrinters.Add(Printer)
+        Next
+        Return installedPrinters
+    End Function
+
+    Public Function GetNetworkPrinters() As PrintQueueCollection
+        Dim server = New PrintServer()
+        'Console.WriteLine("Listing Shared Printers")
+
+        Dim queues = server.GetPrintQueues() '; {EnumeratedPrintQueueTypes. , EnumeratedPrintQueueTypes.Connections})
+
+        'For Each item In queues
+        '    Console.WriteLine(item.FullName)
+        'Next
+
+        'Console.WriteLine(vbLf & "Listing Local Printers Now")
+        'queues = server.GetPrintQueues({EnumeratedPrintQueueTypes.Shared})
+
+        'For Each item In queues
+        '    Console.WriteLine(item.FullName)
+        'Next
+
+        Return queues
+        'Console.ReadLine()
     End Function
 
     'Public Function AsGMonthEndDate(dDate As DateTime) As Date
@@ -1307,5 +1373,99 @@ Public Module GlobalFunctions
     '    Return firstDayOfMonth.AddMonths(1).AddDays(-1)
     'End Function
 
+    Public Function GetPrinterPageInfo(ByVal printerName As String) As PageSettings
+        Dim settings As PrinterSettings
+
+        If String.IsNullOrEmpty(printerName) Then
+
+            For Each printer In PrinterSettings.InstalledPrinters
+                settings = New PrinterSettings()
+                settings.PrinterName = printer.ToString()
+                If settings.IsDefaultPrinter Then Return settings.DefaultPageSettings
+            Next
+
+            Return Nothing
+        End If
+
+        settings = New PrinterSettings()
+        settings.PrinterName = printerName
+        Return settings.DefaultPageSettings
+
+    End Function
+
+    Public Sub ProcessQrCode(cQrCodeText As String, ByRef gTin As String, ByRef batchNo As String, ByRef expiry As String, ByRef serializationNo As String, ByRef manufacture As String)
+        Dim dataLength = Len(cQrCodeText)
+        Dim i As Int16 = 0
+        Dim ai As String = Mid(cQrCodeText, 1, 2)
+        Dim lastPosition As Int16 = 2
+        gTin = Nothing
+        serializationNo = Nothing
+        batchNo = Nothing
+        expiry = Nothing
+        manufacture = Nothing
+        While lastPosition < dataLength
+            Select Case ai
+                Case "01" 'GTin
+                    gTin = Mid(cQrCodeText, lastPosition + 1, 14)
+                    lastPosition += 14
+                Case "17" 'Expiry Date
+                    expiry = Mid(cQrCodeText, lastPosition + 1, 6)
+                    If expiry.Right(2) = "00" Then
+                        expiry = Mid(expiry, 1, 4) + "01"
+                    End If
+                    lastPosition += 6
+                Case "11" 'manufacture date
+                    manufacture = Mid(cQrCodeText, lastPosition + 1, 6)
+                    lastPosition += 6
+                Case "10" ' Batch Number
+                    For i = lastPosition + 1 To dataLength
+                        If Mid(cQrCodeText, i, 4) = "<GS>" Or Mid(cQrCodeText, i, 1) = ChrW(13) Or i >= dataLength Then ' separator
+                            If i >= dataLength Then
+                                batchNo = Mid(cQrCodeText, lastPosition + 1)
+                            Else
+                                batchNo = Mid(cQrCodeText, lastPosition + 1, i - lastPosition - 1)
+                            End If
+                            lastPosition = i + 3
+                            Exit For
+                        End If
+                    Next
+                    'MessageBox.Show("Batch No = " + batchNo)
+                Case "21" ' Serialization No.
+                    For i = lastPosition + 1 To dataLength
+                        If Mid(cQrCodeText, i, 4) = "<GS>" Or Mid(cQrCodeText, i, 1) = ChrW(13) Or i >= dataLength Then
+                            If i >= dataLength Then
+                                serializationNo = Mid(cQrCodeText, lastPosition + 1)
+                            Else
+                                serializationNo = Mid(cQrCodeText, lastPosition + 1, i - lastPosition - 1)
+                            End If
+                            lastPosition = i + 3
+                            Exit For
+                        End If
+                    Next
+                    'MessageBox.Show("Serialization No = " + serializationNo)
+            End Select
+            If lastPosition >= dataLength Then
+                Exit While
+            Else
+                ai = Mid(cQrCodeText, lastPosition + 1, 2)
+                If ai = vbLf Or ai = vbCrLf Or ai = vbLf & vbCr Then
+                    Exit While
+                End If
+                lastPosition += 2
+            End If
+        End While
+    End Sub
+
+    ''' <summary>
+    '''     handles null or blank values for string type
+    ''' </summary>
+    ''' <param name="argObj">string value to handle</param>
+    ''' <returns>returns string</returns>
+    Public Function NoDbNull(argObj As Object) As Object
+        If argObj Is Nothing OrElse argObj.Equals(DBNull.Value) Then
+            Return Nothing
+        End If
+        Return argObj
+    End Function
 
 End Module

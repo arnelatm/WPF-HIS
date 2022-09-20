@@ -1,0 +1,15 @@
+﻿Imports AATM.PresentationLayer.Views
+
+Namespace PresentationLayer.Views.Interfaces
+
+    Public Interface IItemCodeView
+        Inherits IView
+        Property IdNo As Int32
+        Property ItemCodeCode As String
+        Property ItemCodeName As String
+        Property ItemCodeNameAra As String
+        Property CodeGroupIdNo As Int16
+        Property Note As String
+    End Interface
+
+End Namespace

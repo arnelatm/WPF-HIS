@@ -17,32 +17,22 @@ Public Class CDgvComboBoxCell
         End Get
     End Property
 
+
     ' You must also override this method to initialize the ComboBox instance...
     ' This method will be called each time a cell in the column enters edit-mode,
     ' so you can fill the ComboBox instance based on the value of the edited cell
-    Public Overrides Sub InitializeEditingControl(ByVal rowIndex As Integer, ByVal formattedValue As Object, ByVal cellStyle As DataGridViewCellStyle)
+    Public Overrides Sub InitializeEditingControl(ByVal pRowIndex As Integer, ByVal pFormattedValue As Object, ByVal cellStyle As DataGridViewCellStyle)
 
         ' Call base...
-        MyBase.InitializeEditingControl(rowIndex, formattedValue, cellStyle)
+        MyBase.InitializeEditingControl(pRowIndex, pFormattedValue, cellStyle)
 
-        ' Convert the cell's EditingControl to your custom ComboBox type...
         CellEditingControl = CType(DataGridView.EditingControl, CDgvComboBoxEditingControl)
+        CellEditingControl.DropDownStyle = ComboBoxStyle.DropDown
+        CellEditingControl.AutoCompleteMode = AutoCompleteMode.SuggestAppend
 
-        ' Make sure you have an instance...
-        If CellEditingControl IsNot Nothing Then
-            ' Populate the ComboBox, passing the instance as a parameter
-
-            ' Set the value of the editing control instance to the current cell value.
-            If Value Is Nothing Then
-                CellEditingControl.SelectedIndex = -1
-            Else
-                CellEditingControl.SelectedValue = Value
-            End If
-            CellEditingControl.DropDownStyle = ComboBoxStyle.DropDown
-            CellEditingControl.AutoCompleteMode = AutoCompleteMode.SuggestAppend
-        End If
     End Sub
 
     Public Property CellEditingControl As CDgvComboBoxEditingControl
 
 End Class
+

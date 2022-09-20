@@ -1,8 +1,11 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
+Imports AATM.PresentationLayer.Forms
+Imports AATM.ServicesLayer.Services
 
 Namespace PresentationLayer.Views.Forms.Reports
 
@@ -29,21 +32,26 @@ Namespace PresentationLayer.Views.Forms.Reports
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
-            Dim cForm
             If dtpBeginningDate.Value <= dtpEndingDate.Value Then
                 Dim reportName As String
                 Dim reportTitle As String
+                Dim fileName As String
                 Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpBeginningDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
                 Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpEndingDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
                 reportName = Messaging.TranslateCaption("Statement of Accounts Payable")
                 reportTitle = Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName, "beginningDate", bDate, "endingDate", eDate})
-                Dim cFormCulture = FormCulture
-                If Strings.Left(cFormCulture.Name, 2) = "ar" Then
-                    cForm = New ReportFormNew("Statement of Accounts Payable Arabic.Rpt", reportTitle, CultureInfo.CurrentCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo", cboSupplierIdNo.Text, "DisplayName")
+                If Strings.Left(FormCulture.Name, 2) = "ar" Then
+                    fileName = "Statement of Accounts Payable Arabic.Rpt"
                 Else
-                    cForm = New ReportFormNew("Statement of Accounts Payable.Rpt", reportTitle, CultureInfo.CurrentCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo", cboSupplierIdNo.Text, "DisplayName")
+                    fileName = "Statement of Accounts Payable.Rpt"
                 End If
-                cForm.Show()
+                Dim args As Object() = {dtpBeginningDate.Value, "BeginningDate",
+                                      dtpEndingDate.Value, "EndingDate",
+                                      cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo",
+                                      cboSupplierIdNo.Text, "DisplayName"}
+
+                Ea.PublishEvent(New ShowReportRequested(fileName, reportTitle, FormCulture, $"ISPDATA", args))
+                'Presenter.ShowReport(fileName, reportTitle, FormCulture, "A4", $"ISPDATA", args)
             Else
                 Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
             End If

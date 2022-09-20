@@ -11,12 +11,11 @@ Public Class CMaskedTextBox
     Private _defaultVal As String
     Private _isNumeric As Boolean
     Private _oldValue As String
-    Private _editsAllowed As Boolean = False
     Private WithEvents ContextMenuStrip1 As New ContextMenuStrip
     Private _editingMode As Boolean = False
-    Private _searchField As String
     Private _translatable As Boolean = False
-    Private _displayOnly As Boolean 
+    Private _displayOnly As Boolean
+    Private _oldText As String
 
     <Bindable(True)>
     <Category("Properties")>
@@ -24,13 +23,6 @@ Public Class CMaskedTextBox
     <Description("Set to True to specify that this control will only accept numeric values.")>
     <Browsable(True)>
     Public Property ValueIsNumeric As Boolean
-        Get
-            Return _isNumeric
-        End Get
-        Set
-            _isNumeric = Value
-        End Set
-    End Property
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
@@ -45,6 +37,19 @@ Public Class CMaskedTextBox
     Public Property MaximumValue As Decimal? = Nothing
 
     Public Property DateTimePickerParent As Control = Nothing
+
+    Public Sub New()
+        MyBase.New()
+        'Dim myCIintl As New CultureInfo("en-GB", False)
+        Text = ""
+        Width = 200
+        DisplayOnly = False
+        CausesValidation = True
+        'Culture = myCIintl
+        BackColor = SystemColors.ControlLight
+        ContextMenuStrip = ContextMenuStrip1
+        InsertKeyMode = InsertKeyMode.Overwrite
+    End Sub
 
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get
@@ -137,34 +142,6 @@ Public Class CMaskedTextBox
     <Description("Specify here the displayed field name to search")>
     <Browsable(True)>
     Public Property SearchField As String
-        Get
-            Return _searchField
-        End Get
-        Set(value As String)
-            _searchField = value
-        End Set
-    End Property
-
-    'Public Property OldValue() As String
-    '    Get
-    '        Return _OldValue
-    '    End Get
-    '    Set(ByVal value As String)
-    '        _OldValue = value
-    '    End Set
-    'End Property
-
-    Public Sub New()
-        MyBase.New()
-        'Dim myCIintl As New CultureInfo("en-GB", False)
-        Text = ""
-        Width = 200
-        DisplayOnly = False
-        CausesValidation = True
-        'Culture = myCIintl
-        BackColor = SystemColors.ControlLight
-        ContextMenuStrip = ContextMenuStrip1
-    End Sub
 
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
         If EditingMode And Not DisplayOnly Then
@@ -174,6 +151,9 @@ Public Class CMaskedTextBox
             ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         End If
+        _oldText = Text
+        SetPosition()
+        SendKeys.Send("{Home}")
     End Sub
 
     Public Sub LeaveHandler(sender As Object, e As EventArgs) Handles MyBase.Leave
@@ -186,34 +166,29 @@ Public Class CMaskedTextBox
         End If
     End Sub
 
-    'Public Sub DisableHandler(Sender As Object, e As EventArgs) Handles MyBase.EnabledChanged
-    '    ForeColor = CType(IIf(Enabled, Color.Black, SystemColors.ControlLight), Color)
-    '    BackColor = CType(IIf(Enabled, Color.White, SystemColors.ControlLight), Color)
-    'End Sub
-
     Public Sub CMaskedTextBox_Validating(sender As Object, e As CancelEventArgs) Handles MyBase.Validating
-        'Dim errorMsg As String
-        'If ValueIsNumeric Then
-        '    If Not IsNumeric(Text) Then
-        '        If ValueIsNullable And (Text.Trim() = "" Or Text.Trim() = EmptyMask) Then
-        '            Text = Nothing
-        '            '' nothing to do
-        '            ' blank values allowed for nullable fields
-        '        Else
-        '            e.Cancel = True
-        '            errorMsg = "Sorry, only numeric values allowed for this field! The value <" + Text + "> is Not allowed. Reverting to previous value."
-        '            MessageBox.Show(errorMsg)
-        '            Undo()
-        '            'MyErrorProvider.ShowErrorMessage(ErrorMsg)
-        '        End If
-        '    End If
-        'Else
-        '    If ValueIsNullable And (Text.Trim() = "" Or Text.TrimEnd() = EmptyMask) Then
-        '        Text = Nothing
-        '        '' nothing to do
-        '        ' blank values allowed for nullable fields
-        '    End If
-        'End If
+        Dim errorMsg As String
+        If ValueIsNumeric Then
+            If Not IsNumeric(Text) Then
+                If ValueIsNullable And (Text.Trim() = "" Or Text.Trim() = EmptyMask) Then
+                    Text = Nothing
+                    '' nothing to do
+                    ' blank values allowed for nullable fields
+                Else
+                    e.Cancel = True
+                    errorMsg = "Sorry, only numeric values allowed for this field! The value <" + Text + "> is Not allowed. Reverting to previous value."
+                    MessageBox.Show(errorMsg)
+                    Undo()
+                    'MyErrorProvider.ShowErrorMessage(ErrorMsg)
+                End If
+            End If
+            'Else
+            '    If ValueIsNullable And (Text.Trim() = "" Or Text.TrimEnd() = EmptyMask) Then
+            '        Text = Nothing
+            '        '' nothing to do
+            '        ' blank values allowed for nullable fields
+            '    End If
+        End If
     End Sub
 
 #Region "Declarations#"
@@ -304,7 +279,6 @@ Public Class CMaskedTextBox
         ContextMenuStrip1.Items.Add(menuItemDelete)
         menuItemDelete.ShortcutKeys = Keys.Delete
         menuItemDelete.ShortcutKeyDisplayString = "Delete"
-        'menuItemDelete.Enabled = (IIf(SampleTextBox.SelectionLength = 0, False, True))
         AddHandler menuItemDelete.Click, AddressOf MenuItemDelete_Click
 
         ContextMenuStrip1.Items.Add(separator)
@@ -315,7 +289,6 @@ Public Class CMaskedTextBox
         ContextMenuStrip1.Items.Add(menuItemSelectAll)
         menuItemSelectAll.ShortcutKeys = Keys.Control Or Keys.A
         menuItemSelectAll.ShortcutKeyDisplayString = "Ctrl-A"
-        'menuItemSelectAll.Enabled = (IIf(SampleTextBox.SelectionLength = SampleTextBox.Text.Length Or SampleTextBox.SelectionLength = SampleTextBox.Text.Trim.Length, False, True))
         AddHandler menuItemSelectAll.Click, AddressOf MenuItemSelectAll_Click
 
         ContextMenuStrip1.Items.Add(separator)
@@ -363,10 +336,6 @@ Public Class CMaskedTextBox
         Invoker.InvokeFunction(myForm, "FindFieldNew", {Me})
     End Sub
 
-    'Public Function GetTextToSearch() As String
-    '    Return _textToSearch
-    'End Function
-
     Private Sub MenuItemCut_Click()
         Cut()
     End Sub
@@ -396,20 +365,24 @@ Public Class CMaskedTextBox
         End If
     End Sub
 
-    Private Sub CMaskedTextBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles MyBase.KeyPress
-        If e.KeyChar = Chr(13) Then
-            e.Handled = True
-            SendKeys.SendWait("{TAB}")
+    Private Sub MaskedTextBox1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Click
+        SetPosition()
+    End Sub
+
+    Public Sub SetPosition()
+        InsertKeyMode = InsertKeyMode.Overwrite
+        If Text Is Nothing OrElse Text = "" OrElse Text = EmptyMask Then
+            SelectionStart = 0
+            SelectionLength = 0
+        ElseIf SelectionStart >= Text.Length Then
+            SelectionStart = Text.Length - 1
         End If
     End Sub
 
-    'Private Sub CMaskedTextBox_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+    'Private Sub CMaskedTextBox_KeyPress(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
     '    If e.KeyCode = Keys.Enter Then
-    '            SendKeys.SendWait("{TAB}")
     '        e.Handled = True
-    '        e.SuppressKeyPress = True
-    '        'SendKeys.Send("{TAB}")
-    '        'SendKeys.SendWait("{TAB}")
+    '        SendKeys.Send("{TAB}")
     '    End If
     'End Sub
 
@@ -422,18 +395,7 @@ Public Class CMaskedTextBox
         End Set
     End Property
 
-    'Public Sub MakeEditable(editableControl As Boolean) Implements IEntryControl.MakeEditable
-    '    EditsAllowed = Not editableControl
-    'End Sub
-
     Public Property EditsAllowed As Boolean
-        Get
-            Return _editsAllowed
-        End Get
-        Set(value As Boolean)
-            _editsAllowed = value
-        End Set
-    End Property
 
 #Region "FindableControl"
 
@@ -489,15 +451,4 @@ Public Class CMaskedTextBox
 
 #End Region
 
-    'Public Sub MakeVisible(visibleControl As Boolean) Implements IEntryControl.MakeVisible
-    '    MakeVisible(visibleControl)
-    'End Sub
-
-    'Public Sub MakeViewable(ViewableControl As Boolean) Implements IEntryControl.MakeViewable
-    '    ' not applicable
-    'End Sub
-
-    'Public Sub MakeSelectable(selectableControl As Boolean) Implements IEntryControl.MakeSelectable
-    '    Enabled = selectableControl
-    'End Sub
 End Class

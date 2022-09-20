@@ -23,10 +23,6 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
 
-            ' Set KeyPreview object to true to allow the form to process
-            ' the key before the control with focus processes it.
-            KeyPreview = True
-
             'MainTableName = "DistributionScheme"
             'TvMainFieldName = "DistributionSchemeName"
             'TvSecondaryFieldName = "DistributionSchemeCode"

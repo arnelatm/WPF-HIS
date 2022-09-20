@@ -15,7 +15,6 @@ Public Class CFindForm
     Private _controlWidth As Int16
     Private ReadOnly _findableControl As IFindableControl
 
-
     Public Sub New(findableControl As IFindableControl)
 
         ' This call is required by the designer.
@@ -23,7 +22,7 @@ Public Class CFindForm
         _findableControl = findableControl
         Dim ctrl As Control
         Dim formPoint As Point
-        Dim ctrlPoint As Point
+        'Dim ctrlPoint As Point
         ctrl = DirectCast(findableControl, Control)
         'ctrlPoint = New Point(ctrl.Location.X + ctrl.Width, ctrl.Location.Y)
         'formPoint = ctrl.PointToScreen(ctrlPoint)
@@ -230,7 +229,6 @@ Public Class CFindForm
             Width = 200
         End If
     End Sub
-
 
     Private Sub SetupDisplay()
         If _findableControl.FindDataType = IFindableControl.DataTypeEnum.String Then

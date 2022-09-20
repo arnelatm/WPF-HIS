@@ -1,6 +1,5 @@
 ﻿' Category business object
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
-Imports AATM.BusinessLayer.BusinessRules
 
 Namespace BusinessLayer
 
@@ -27,4 +26,5 @@ Namespace BusinessLayer
         Property Result1 As String
         Property Suffix1 As String
     End Class
+
 End Namespace

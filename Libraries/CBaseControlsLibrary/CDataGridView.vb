@@ -11,7 +11,6 @@ Public Class CDataGridView
     Inherits DataGridView
     Implements IEntryControl, IFindableControl
 
-    Private _displayOnly As Boolean
     Private _dgvInsertColumnIndex As Integer = -1
     Private _editingMode As Boolean
     Private _translatable As Boolean = True
@@ -19,12 +18,12 @@ Public Class CDataGridView
     Private _firstVisibleColumn As Integer = -1
     Private _insertColumnAdded As Boolean = False
     Private _lastEditableColumn As Integer = -1
+    Private _origEditMode As DataGridViewEditMode
 
     Public Sub New()
         MyBase.New()
         DoubleBuffered = True
         Enabled = True
-        EditMode = DataGridViewEditMode.EditOnKeystroke
         BackColor = Drawing.SystemColors.ControlLight
         DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
         DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
@@ -32,6 +31,8 @@ Public Class CDataGridView
         ShowEditingIcon = True
         ShowCellErrors = True
         ShowRowErrors = True
+        _origEditMode = EditMode
+
     End Sub
 
     Public Event ChangesMade As EventHandler
@@ -55,13 +56,6 @@ Public Class CDataGridView
     <Description("Set to True to specify that this control is readonly.")>
     <Browsable(True)>
     Public Property DisplayOnly As Boolean
-        Get
-            Return _displayOnly
-        End Get
-        Set(value As Boolean)
-            _displayOnly = value
-        End Set
-    End Property
 
     Public Property Ea As EventAggregator
 
@@ -99,7 +93,9 @@ Public Class CDataGridView
             Next
             If value Then
                 If ShowInsertColumnWhenEditing Then
-                    AddInsertColumn()
+                    If Not DisplayOnly Then
+                        AddInsertColumn()
+                    End If
                 End If
             Else
                 RemoveInsertColumn()
@@ -107,23 +103,25 @@ Public Class CDataGridView
             If ShowFooter Then
                 If DgvFooter Is Nothing Then
                     DgvFooter = New DgvFooter(Me) With {
-                    .AutoCalc = True
-                }
+                        .AutoCalc = True
+                        }
                 End If
                 DgvFooter.CalculateTotals()
             End If
         End Set
     End Property
 
-    'Private Sub DataGridView_CellEnter(ByVal sender As Object,
-    '                                    ByVal e As DataGridViewCellEventArgs) _
-    '    Handles Me.CellEnter
-    '    If Columns(SequenceColumn) IsNot Nothing Then
-    '        If CurrentCell.ColumnIndex() = Columns(SequenceColumn).Index() Then
-    '            SendKeys.Send("{TAB}")
-    '        End If
-    '    End If
-    'End Sub
+    Private Sub DataGridView_CellEnter(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles Me.CellEnter
+        If CurrentCell IsNot Nothing AndAlso TypeOf (CurrentCell) Is CDgvDtpCell Then
+            EditMode = DataGridViewEditMode.EditOnEnter
+        End If
+    End Sub
+
+    Private Sub dataGridView1_CellLeave(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles Me.CellLeave
+        If CurrentCell IsNot Nothing AndAlso TypeOf CurrentCell Is CDgvDtpCell Then
+            EditMode = _origEditMode
+        End If
+    End Sub
 
     Public ReadOnly Property FirstEditableColumn As Integer
         Get
@@ -269,7 +267,6 @@ Public Class CDataGridView
             End Try
 
         End If
-
     End Sub
 
     Public Sub ReSequenceDgvAfterInsert()
@@ -295,45 +292,102 @@ Public Class CDataGridView
         Catch ex As Exception
 
         End Try
-
     End Sub
 
-    Protected Overrides Function ProcessDialogKey(ByVal keyData As Keys) As Boolean ' Extract the key code from the key value.
+    'Public Property ErrorMessageKey As String = Nothing
+    'Public Property ErrorMessageParameters As Array = Nothing
+
+    Protected Overrides Function ProcessDialogKey(ByVal keyData As Keys) As Boolean
+        ' handles
+        ' Extract the key code from the key value.
         Dim key As Keys = keyData And Keys.KeyCode
-        If key = Keys.Enter And CurrentCell IsNot Nothing Then
-            Dim currentColumnIndex As Int16
-            currentColumnIndex = CurrentCell.ColumnIndex()
-            If currentColumnIndex = LastEditableColumn And currentColumnIndex < ColumnCount() Then
-                If CurrentCell.RowIndex() + 1 < RowCount() Then
-                    CurrentCell = Me(FirstEditableColumn, CurrentCellAddress.Y + 1)
-                    Return True
-                End If
-            End If
-            ProcessTabKey(keyData)
-            Return True
-            'Dim currentColumnIndex As Int16
-            'currentColumnIndex = CurrentCell.ColumnIndex()
-            'If currentColumnIndex < LastEditableColumn Then
-            '    ' Handle the ENTER key as if it were a tab ARROW key
-            '    Return ProcessTabKey(keyData)
-            'ElseIf currentColumnIndex = LastEditableColumn Then
-            '    ' go to next row on the first editable column
-            '    If CurrentCell.RowIndex() >= RowCount() Then
-            '        CurrentCell = Me(FirstEditableColumn, RowCount() - 1)
-            '    Else
-            '        Return ProcessTabKey(keyData)
-            '    End If
-            '    Return True
-            'Else
-            '    Return MyBase.ProcessDialogKey(keyData)
-            'End If
-        Else
-            Return MyBase.ProcessDialogKey(keyData)
+
+        ' Handle the ENTER key as if it were a RIGHT ARROW key.
+        If key = Keys.Enter Then
+            Return MoveToNextCell(keyData)
         End If
+
+        Return MyBase.ProcessDialogKey(keyData)
     End Function
 
+    Protected Overrides Function ProcessDataGridViewKey(ByVal e As System.Windows.Forms.KeyEventArgs) As Boolean
+
+        ' Handle the ENTER key as if it were a RIGHT ARROW key.
+        If e.KeyCode = Keys.Enter Then
+            Return MoveToNextCell(e.KeyData)
+            'Dim currentColumnIndex As Int16
+            'currentColumnIndex = CurrentCell.ColumnIndex()
+            'If currentColumnIndex = LastEditableColumn And currentColumnIndex < ColumnCount() Then
+            '    If CurrentCell.RowIndex() + 1 < RowCount() Then
+            '        CurrentCell = Me(FirstEditableColumn, CurrentCellAddress.Y + 1)
+            '        Return True
+            '    End If
+            'End If
+            'Return Me.ProcessTabKey(e.KeyData)
+        End If
+
+        Return MyBase.ProcessDataGridViewKey(e)
+    End Function
+
+    Private Function MoveToNextCell(keyData As Keys) As Boolean
+
+        Dim currentColumnIndex As Int16
+        currentColumnIndex = CurrentCell.ColumnIndex()
+        If currentColumnIndex = LastEditableColumn And currentColumnIndex < ColumnCount() Then
+            If CurrentCell.RowIndex() + 1 < RowCount() Then
+                ' hack need next line because currentcell not changing properly dont know why.
+                'ProcessTabKey(keyData)
+                CurrentCell = Me(FirstEditableColumn, CurrentCell.RowIndex() + 1)
+                Return (keyData)
+            End If
+        End If
+        Return Me.ProcessTabKey(keyData)
+    End Function
+
+    'Protected Overrides Function ProcessDialogKey(ByVal keyData As Keys) As Boolean ' Extract the key code from the key value.
+    '    Dim key As Keys = keyData And Keys.KeyCode
+    '    If key = Keys.Enter And CurrentCell IsNot Nothing Then
+    '        Dim currentColumnIndex As Int16
+    '        currentColumnIndex = CurrentCell.ColumnIndex()
+    '        If currentColumnIndex = LastEditableColumn And currentColumnIndex < ColumnCount() Then
+    '            If CurrentCell.RowIndex() + 1 < RowCount() Then
+    '                CurrentCell = Me(FirstEditableColumn, CurrentCellAddress.Y + 1)
+    '                Return True
+    '            End If
+    '        End If
+    '        ProcessTabKey(keyData)
+    '        If ErrorMessageKey IsNot Nothing Then
+    '            If ErrorMessageParameters Is Nothing Then
+    '                Messaging.Show(True, ErrorMessageKey)
+    '            Else
+    '                Messaging.ShowPmMessage(True, ErrorMessageKey, ErrorMessageParameters)
+    '            End If
+    '        End If
+    '        ErrorMessageKey = Nothing
+    '        Return True
+    '        'Dim currentColumnIndex As Int16
+    '        'currentColumnIndex = CurrentCell.ColumnIndex()
+    '        'If currentColumnIndex < LastEditableColumn Then
+    '        '    ' Handle the ENTER key as if it were a tab ARROW key
+    '        '    Return ProcessTabKey(keyData)
+    '        'ElseIf currentColumnIndex = LastEditableColumn Then
+    '        '    ' go to next row on the first editable column
+    '        '    If CurrentCell.RowIndex() >= RowCount() Then
+    '        '        CurrentCell = Me(FirstEditableColumn, RowCount() - 1)
+    '        '    Else
+    '        '        Return ProcessTabKey(keyData)
+    '        '    End If
+    '        '    Return True
+    '        'Else
+    '        '    Return MyBase.ProcessDialogKey(keyData)
+    '        'End If
+    '    Else
+    '        Return MyBase.ProcessDialogKey(keyData)
+    '    End If
+    'End Function
+
     Private Sub cDataGridView_DefaultValuesNeeded(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowEventArgs) Handles Me.DefaultValuesNeeded
-        If EditMode And (SequenceColumn IsNot Nothing AndAlso SequenceColumn <> "") Then
+        If (SequenceColumn IsNot Nothing AndAlso SequenceColumn <> "") Then
             If Columns(SequenceColumn) IsNot Nothing Then
                 Dim nRowColumn = Columns(SequenceColumn).Index()
                 With e.Row
@@ -390,7 +444,6 @@ Public Class CDataGridView
         Catch ex As Exception
             Windows.MessageBox.Show("error")
         End Try
-
     End Sub
 
     'Private Sub DataGridView_CellEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles Me.CellEnter
@@ -427,38 +480,43 @@ Public Class CDataGridView
 
     Private Sub DataGridView_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles Me.DataError
 
-        Try
-        Catch ex As Exception
-            If (e.Context = DataGridViewDataErrorContexts.Formatting) OrElse (e.Context = DataGridViewDataErrorContexts.PreferredSize) OrElse (e.Context = DataGridViewDataErrorContexts.Display) OrElse (e.Context = DataGridViewDataErrorContexts.Display) Then
-                Debugger.Break()
-                ' ignore error
-            Else
-                Debugger.Break()
-                Forms.MessageBox.Show("Error happened " & e.Context.ToString())
-                If (e.Context = DataGridViewDataErrorContexts.Commit) Then
-                    Debugger.Break()
-                    Forms.MessageBox.Show("Commit error")
-                End If
-                If (e.Context = DataGridViewDataErrorContexts.CurrentCellChange) Then
-                    Forms.MessageBox.Show("Cell change")
-                End If
-                If (e.Context = DataGridViewDataErrorContexts.Parsing) Then
-                    Forms.MessageBox.Show("parsing error")
-                End If
-                If (e.Context = DataGridViewDataErrorContexts.LeaveControl) Then
-                    Debugger.Break()
-                    Forms.MessageBox.Show("leave control error")
-                End If
+        'Try
+        'Catch ex As Exception
+        If (e.Context = DataGridViewDataErrorContexts.Formatting) OrElse (e.Context = DataGridViewDataErrorContexts.PreferredSize) OrElse (e.Context = DataGridViewDataErrorContexts.Display) OrElse (e.Context = DataGridViewDataErrorContexts.Display) Then
+            'Debugger.Break()
+            ' ignore error
+        Else
+            'Debugger.Break()
+            'Forms.MessageBox.Show("Error happened " & e.Context.ToString())
+            If e.Context.HasFlag(DataGridViewDataErrorContexts.Parsing) Then
+                'Forms.MessageBox.Show("Error happened " & e.Context.ToString())
 
-                If (TypeOf (e.Exception) Is ConstraintException) Then
-                    Debugger.Break()
-                    Dim view As DataGridView = CType(sender, DataGridView)
-                    view.Rows(e.RowIndex).ErrorText = "an error"
-                    view.Rows(e.RowIndex).Cells(e.ColumnIndex).ErrorText = "an error"
-                    e.ThrowException = False
+                Dim editControl As Object = Me.EditingControl
+                If TypeOf (editControl) Is CDgvDtpEditingControl Then
+                    Dim x As CDgvDtpEditingControl = DirectCast(editControl, CDgvDtpEditingControl)
+                    x.InformUserOfInvalidDate()
                 End If
             End If
-        End Try
+            'If e.Context.HasFlag(DataGridViewDataErrorContexts.CurrentCellChange) Then
+            '    Forms.MessageBox.Show("Cell change")
+            'End If
+            'If e.Context.HasFlag(DataGridViewDataErrorContexts.Parsing) Then
+            '    Forms.MessageBox.Show("parsing error")
+            'End If
+            'If e.Context.HasFlag(DataGridViewDataErrorContexts.LeaveControl) Then
+            '    Debugger.Break()
+            '    Forms.MessageBox.Show("leave control error")
+            'End If
+
+            'If (TypeOf (e.Exception) Is ConstraintException) Then
+            '    Debugger.Break()
+            '    Dim view As DataGridView = CType(sender, DataGridView)
+            '    view.Rows(e.RowIndex).ErrorText = "an error"
+            '    view.Rows(e.RowIndex).Cells(e.ColumnIndex).ErrorText = "an error"
+            '    e.ThrowException = False
+            'End If
+        End If
+        'End Try
     End Sub
 
     Private Sub DataGridView1_RowHeaderMouseClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles Me.RowHeaderMouseClick
@@ -611,55 +669,79 @@ Public Class CDataGridView
     '    SendKeys.Send("{TAB}")
     '    SendKeys.Send("{UP}")
     'End Sub
-    Private Overloads Sub OnKeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
-        Try
-            If CurrentCell IsNot Nothing Then
-                Dim iColumn As Integer = CurrentCell.ColumnIndex
-                Dim iRow As Integer = Math.Min(CurrentCell.RowIndex, RowCount() - 1)
-                Select Case e.KeyData
-                    Case Keys.Enter
-                        SendKeys.Send("{TAB}")
-                        e.Handled = True
-                    Case Keys.Tab
-                        If EditingMode Then
-                            If iColumn = Columns.Count() - 1 OrElse iColumn = LastEditableColumn() OrElse iColumn = Columns.IndexOf(Columns("dgvInsertColumn")) Then
-                                ' if on the last editable column, move to the first editable column on the next row
-                                Dim r = Math.Min(iRow + 1, RowCount() - 1)
-                                Dim vc = FirstVisibleColumn
-                                Dim ec = FirstEditableColumn
-                                Dim c = If(ec > 0, ec, vc)
-                                CurrentCell = Me(c, r)
-                                e.Handled = True
-                            End If
-                        End If
 
-                    Case Else
-                        e.Handled = False
-                End Select
-            End If
-        Catch ex As Exception
-            Forms.MessageBox.Show(ex.Message)
-        End Try
-        'Return
-    End Sub
+    'Private Overloads Sub OnKeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+    '    Try
+    '        If CurrentCell IsNot Nothing Then
+    '            Dim iColumn As Integer = CurrentCell.ColumnIndex
+    '            Dim iRow As Integer = Math.Min(CurrentCell.RowIndex, RowCount() - 1)
+    '            Select Case e.KeyData
+    '                Case Keys.Enter
+    '                    SendKeys.Send("{TAB}")
+    '                    e.Handled = True
+    '                Case Keys.Tab
+    '                    If EditingMode Then
+    '                        If iColumn = Columns.Count() - 1 OrElse iColumn = LastEditableColumn() OrElse iColumn = Columns.IndexOf(Columns("dgvInsertColumn")) Then
+    '                            ' if on the last editable column, move to the first editable column on the next row
+    '                            Dim r = Math.Min(iRow + 1, RowCount() - 1)
+    '                            Dim vc = FirstVisibleColumn
+    '                            Dim ec = FirstEditableColumn
+    '                            Dim c = If(ec > 0, ec, vc)
+    '                            CurrentCell = Me(c, r)
+    '                            e.Handled = True
+    '                        End If
+    '                    End If
+
+    '                Case Else
+    '                    e.Handled = False
+    '            End Select
+    '        End If
+    '    Catch ex As Exception
+    '        Forms.MessageBox.Show(ex.Message)
+    '    End Try
+    '    'Return
+    'End Sub
+
+    'Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, keyData As System.Windows.Forms.Keys) As Boolean
+    '    If msg.WParam.ToInt32() = CInt(Keys.Enter) Then
+    '        SendKeys.Send("{Tab}")
+    '        Return True
+    '    End If
+    '    Return MyBase.ProcessCmdKey(msg, keyData)
+    'End Function
 
     'Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
-    '    Dim icolumn As Integer = CurrentCell.ColumnIndex + 1
-    '    Dim irow As Integer = CurrentCell.RowIndex + 1
+    '    Dim icolumn As Integer = CurrentCell.ColumnIndex
+    '    Dim irow As Integer = CurrentCell.RowIndex
     '    If keyData = Keys.Enter Then
-
-    '        If icolumn = Columns.Count Then
+    '        If icolumn = Columns.Count - 1 Then
     '            CurrentCell = Me(FirstVisibleColumn, Math.Min(irow, RowCount() - 1))
     '        Else
-    '            CurrentCell = Me(icolumn, irow - 1)
+    '            Dim selected As Boolean = False
+    '            For i = icolumn + 1 To Columns.Count() - 1
+    '                If Me(i, irow).Visible AndAlso Not (Me(i, irow).OwningColumn.Name = "dgvInsertColumn") Then
+    '                    CurrentCell = Me(i, irow)
+    '                    selected = True
+    '                    Exit For
+    '                End If
+    '            Next
+    '            If Not selected Then
+    '                If irow + 1 <= Rows.Count - 1 Then
+    '                    For i = 0 To Columns.Count - 1
+    '                        If Me(i, irow + 1).Visible AndAlso Not (Me(i, irow + 1).OwningColumn.DataPropertyName.ToLower() = "sequence") Then
+    '                            CurrentCell = Me(i, irow + 1)
+    '                            Exit For
+    '                        End If
+    '                    Next
+    '                End If
+    '            End If
     '        End If
-
     '        Return True
     '    Else
     '        If keyData = Keys.Down And irow = RowCount() - 1 Then
     '            Try
     '                CurrentCell = Me(FirstVisibleColumn, Math.Min(irow, RowCount() - 1))
-    '                if CurrentCell.OwningColumn.DataPropertyName.ToLower() = "sequence" Then
+    '                If CurrentCell.OwningColumn.DataPropertyName.ToLower() = "sequence" Then
     '                    CurrentCell.Value = RowCount()
     '                End If
     '            Catch ex As Exception
@@ -670,6 +752,7 @@ Public Class CDataGridView
     '            Return MyBase.ProcessCmdKey(msg, keyData)
     '        End If
     '    End If
+    '    Return Nothing
     'End Function
 
     'Protected Overrides Function ProcessDataGridViewKey(ByVal e As System.Windows.Forms.KeyEventArgs) As Boolean
@@ -769,6 +852,11 @@ Public Class CDataGridView
             ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             'cb.DropDownHeight = Height
+        ElseIf TypeOf e.Control Is CCustomDateTimePicker Then
+            Dim cDtp As CCustomDateTimePicker
+            cDtp = e.Control
+            e.CellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            e.CellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         End If
     End Sub
 
@@ -824,7 +912,6 @@ Public Class CDataGridView
                 End If
             End If
         End If
-
     End Sub
 
     Private Sub On_CellPainting(ByVal sender As Object, ByVal e As DataGridViewCellPaintingEventArgs) Handles Me.CellPainting
@@ -832,14 +919,10 @@ Public Class CDataGridView
             If TypeOf Me.Columns(e.ColumnIndex) Is CDgvCheckBoxColumn Then
                 Dim value = DirectCast(e.FormattedValue, Nullable(Of Boolean))
                 If Not EditingMode Then
-                    e.Paint(e.CellBounds, DataGridViewPaintParts.All And
-                                          Not (DataGridViewPaintParts.ContentForeground))
-                    Dim state = IIf((value.HasValue And value.Value),
-                                    VisualStyles.CheckBoxState.CheckedDisabled,
-                                    VisualStyles.CheckBoxState.UncheckedDisabled)
+                    e.Paint(e.CellBounds, DataGridViewPaintParts.All And Not (DataGridViewPaintParts.ContentForeground))
+                    Dim state = IIf((value.HasValue And value.Value), VisualStyles.CheckBoxState.CheckedDisabled, VisualStyles.CheckBoxState.UncheckedDisabled)
                     Dim size = RadioButtonRenderer.GetGlyphSize(e.Graphics, state)
-                    Dim location = New Point((e.CellBounds.Width - size.Width) / 2,
-                                             (e.CellBounds.Height - size.Height) / 2)
+                    Dim location = New Point((e.CellBounds.Width - size.Width) / 2, (e.CellBounds.Height - size.Height) / 2)
                     location.Offset(e.CellBounds.Location)
                     CheckBoxRenderer.DrawCheckBox(e.Graphics, location, state)
                     e.Handled = True
@@ -899,5 +982,29 @@ Public Class CDataGridView
             IsDirty = True
         End If
     End Sub
+
+    Public Function SearchGrid(value As Object, searchField As String, Optional returnField As String = Nothing) As Object
+        Dim retValue As Object = Nothing
+        If value IsNot DBNull.Value Or value IsNot Nothing Then
+            ClearSelection()
+            For Each row As DataGridViewRow In Rows
+                Dim x As Object = row.Cells(searchField).Value
+                If x Is Nothing Or x Is DBNull.Value Then
+                    ' nothing to do
+                Else
+                    If row.Cells(searchField).Value = value Then
+                        If returnField IsNot Nothing Then
+                            retValue = row.Cells(returnField).Value
+                        End If
+                        row.Selected = True
+                        FirstDisplayedScrollingRowIndex = row.Index
+                        CurrentCell = Rows(row.Index).Cells(0)
+                        Exit For
+                    End If
+                End If
+            Next
+        End If
+        Return retValue
+    End Function
 
 End Class

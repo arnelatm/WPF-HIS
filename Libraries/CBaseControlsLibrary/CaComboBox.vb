@@ -550,7 +550,10 @@ Public Class CaComboBox
             ElseIf ValueMember.ToLower() = "code" Then
                 CodeSearch(value)
             Else
-                Text = value
+                NameSearch(value)
+                'SelectedValue = value
+                'Text = value
+                'SelectedText = value
             End If
         End If
     End Sub
@@ -600,6 +603,29 @@ Public Class CaComboBox
         If DataSource IsNot Nothing Then
             For Each item In DataSource
                 If item.Code = value Then
+                    SelectedItem = DataSource(i)
+                    found = True
+                    Exit For
+                End If
+                i += 1
+            Next
+            If Not found Then
+                If value IsNot Nothing Then
+                    Text = value
+                End If
+                SelectedIndex = -1
+            End If
+        Else
+            SelectedIndex = -1
+        End If
+    End Sub
+
+    Private Sub NameSearch(value As Object)
+        Dim found As Boolean = False
+        Dim i = 0
+        If DataSource IsNot Nothing Then
+            For Each item In DataSource
+                If item.Name = value Then
                     SelectedItem = DataSource(i)
                     found = True
                     Exit For

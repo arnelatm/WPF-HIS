@@ -220,7 +220,6 @@
         Me.bsLeaveCredits = New System.Windows.Forms.BindingSource(Me.components)
         Me.tbpDocuments = New System.Windows.Forms.TabPage()
         Me.DataGridViewDocuments = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.bsDocuments = New System.Windows.Forms.BindingSource(Me.components)
             Me.dgvSequenceDocument = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvDocumentIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvNumber = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -231,6 +230,7 @@
             Me.dgvDataImageIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.IdNoDataGridViewTextBoxColumn1 = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.bsDocuments = New System.Windows.Forms.BindingSource(Me.components)
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -902,6 +902,7 @@
             '
             'dtpBirthDate
             '
+            Me.dtpBirthDate.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
             Me.dtpBirthDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
             Me.dtpBirthDate.DefaultValue = Nothing
             Me.dtpBirthDate.DisplayOnly = False
@@ -919,9 +920,8 @@
             Me.dtpBirthDate.SecurityKey = Nothing
             Me.dtpBirthDate.ShowLongDate = False
             Me.dtpBirthDate.ShowTime = False
-            Me.dtpBirthDate.Size = New System.Drawing.Size(132, 24)
+            Me.dtpBirthDate.Size = New System.Drawing.Size(118, 24)
             Me.dtpBirthDate.TabIndex = 5
-            Me.dtpBirthDate.TabStop = False
             Me.dtpBirthDate.TargetCalendar = CType(resources.GetObject("dtpBirthDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpBirthDate.Translatable = False
             Me.dtpBirthDate.Value = Nothing
@@ -1172,7 +1172,7 @@
             Me.DataGridViewPhoneDisplay.DisplayOnly = False
             Me.DataGridViewPhoneDisplay.Ea = Nothing
             Me.DataGridViewPhoneDisplay.EditingMode = False
-            Me.DataGridViewPhoneDisplay.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewPhoneDisplay.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
             Me.DataGridViewPhoneDisplay.EndFindValue = Nothing
             Me.DataGridViewPhoneDisplay.FieldDescription = Nothing
             Me.DataGridViewPhoneDisplay.FieldName = Nothing
@@ -1771,6 +1771,7 @@
             '
             'dtpHiredDate
             '
+            Me.dtpHiredDate.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
             Me.dtpHiredDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
             Me.dtpHiredDate.DefaultValue = Nothing
             Me.dtpHiredDate.DisplayOnly = False
@@ -1788,7 +1789,7 @@
             Me.dtpHiredDate.SecurityKey = Nothing
             Me.dtpHiredDate.ShowLongDate = False
             Me.dtpHiredDate.ShowTime = False
-            Me.dtpHiredDate.Size = New System.Drawing.Size(131, 24)
+            Me.dtpHiredDate.Size = New System.Drawing.Size(118, 24)
             Me.dtpHiredDate.TabIndex = 0
             Me.dtpHiredDate.TargetCalendar = CType(resources.GetObject("dtpHiredDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpHiredDate.Translatable = False
@@ -1813,6 +1814,7 @@
             '
             'dtpReleasedDate
             '
+            Me.dtpReleasedDate.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
             Me.dtpReleasedDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
             Me.dtpReleasedDate.DefaultValue = Nothing
             Me.dtpReleasedDate.DisplayOnly = False
@@ -1830,7 +1832,7 @@
             Me.dtpReleasedDate.SecurityKey = Nothing
             Me.dtpReleasedDate.ShowLongDate = False
             Me.dtpReleasedDate.ShowTime = False
-            Me.dtpReleasedDate.Size = New System.Drawing.Size(131, 24)
+            Me.dtpReleasedDate.Size = New System.Drawing.Size(118, 24)
             Me.dtpReleasedDate.TabIndex = 1
             Me.dtpReleasedDate.TargetCalendar = CType(resources.GetObject("dtpReleasedDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpReleasedDate.Translatable = False
@@ -2026,7 +2028,7 @@
             Me.lblSupervisorIdNo.EditingMode = False
             Me.lblSupervisorIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblSupervisorIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblSupervisorIdNo.Location = New System.Drawing.Point(4, 134)
+            Me.lblSupervisorIdNo.Location = New System.Drawing.Point(4, 135)
             Me.lblSupervisorIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblSupervisorIdNo.Name = "lblSupervisorIdNo"
             Me.lblSupervisorIdNo.Size = New System.Drawing.Size(175, 24)
@@ -2059,7 +2061,7 @@
             Me.cboSupervisorIdNo.IgnoreCase = False
             Me.cboSupervisorIdNo.IntegralHeight = False
             Me.cboSupervisorIdNo.LinkedLabel = Nothing
-            Me.cboSupervisorIdNo.Location = New System.Drawing.Point(180, 134)
+            Me.cboSupervisorIdNo.Location = New System.Drawing.Point(180, 135)
             Me.cboSupervisorIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
             Me.cboSupervisorIdNo.Name = "cboSupervisorIdNo"
             Me.cboSupervisorIdNo.OldValue = 0
@@ -2086,7 +2088,7 @@
             Me.CLabel5.EditingMode = False
             Me.CLabel5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.CLabel5.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.CLabel5.Location = New System.Drawing.Point(4, 160)
+            Me.CLabel5.Location = New System.Drawing.Point(4, 162)
             Me.CLabel5.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel5.Name = "CLabel5"
             Me.CLabel5.Size = New System.Drawing.Size(175, 24)
@@ -2117,7 +2119,7 @@
             Me.chkSupervisor.IgnoreCase = False
             Me.chkSupervisor.ImeMode = System.Windows.Forms.ImeMode.NoControl
             Me.chkSupervisor.LinkedLabel = Me.CLabel5
-            Me.chkSupervisor.Location = New System.Drawing.Point(181, 160)
+            Me.chkSupervisor.Location = New System.Drawing.Point(181, 162)
             Me.chkSupervisor.Margin = New System.Windows.Forms.Padding(1)
             Me.chkSupervisor.Name = "chkSupervisor"
             Me.chkSupervisor.NoLabel = False
@@ -2135,7 +2137,7 @@
             Me.lblActive.EditingMode = False
             Me.lblActive.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblActive.Location = New System.Drawing.Point(4, 186)
+            Me.lblActive.Location = New System.Drawing.Point(4, 188)
             Me.lblActive.Margin = New System.Windows.Forms.Padding(1)
             Me.lblActive.Name = "lblActive"
             Me.lblActive.Size = New System.Drawing.Size(175, 24)
@@ -2166,7 +2168,7 @@
             Me.chkActive.IgnoreCase = False
             Me.chkActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
             Me.chkActive.LinkedLabel = Me.lblActive
-            Me.chkActive.Location = New System.Drawing.Point(181, 186)
+            Me.chkActive.Location = New System.Drawing.Point(181, 188)
             Me.chkActive.Margin = New System.Windows.Forms.Padding(1)
             Me.chkActive.Name = "chkActive"
             Me.chkActive.NoLabel = False
@@ -3577,10 +3579,6 @@
             Me.DataGridViewDocuments.TabIndex = 1
             Me.DataGridViewDocuments.Translatable = True
             '
-            'bsDocuments
-            '
-            Me.bsDocuments.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeDocumentModel)
-            '
             'dgvSequenceDocument
             '
             Me.dgvSequenceDocument.BegFindValue = Nothing
@@ -3646,11 +3644,13 @@
             DataGridViewCellStyle40.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle40.ForeColor = System.Drawing.Color.Black
             Me.dgvIssueDate.DefaultCellStyle = DataGridViewCellStyle40
+            Me.dgvIssueDate.EditingMode = False
             Me.dgvIssueDate.HeaderText = "Issue Date"
             Me.dgvIssueDate.Name = "dgvIssueDate"
             Me.dgvIssueDate.ReadOnly = True
             Me.dgvIssueDate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvIssueDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvIssueDate.Translatable = False
             Me.dgvIssueDate.Width = 120
             '
             'dgvExpiryDate
@@ -3659,11 +3659,13 @@
             DataGridViewCellStyle41.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle41.ForeColor = System.Drawing.Color.Black
             Me.dgvExpiryDate.DefaultCellStyle = DataGridViewCellStyle41
+            Me.dgvExpiryDate.EditingMode = False
             Me.dgvExpiryDate.HeaderText = "Expiry Date"
             Me.dgvExpiryDate.Name = "dgvExpiryDate"
             Me.dgvExpiryDate.ReadOnly = True
             Me.dgvExpiryDate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvExpiryDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvExpiryDate.Translatable = False
             Me.dgvExpiryDate.Width = 120
             '
             'dgvImageButton
@@ -3749,17 +3751,21 @@
             Me.IdNoDataGridViewTextBoxColumn1.Translatable = False
             Me.IdNoDataGridViewTextBoxColumn1.Visible = False
             '
+            'bsDocuments
+            '
+            Me.bsDocuments.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeDocumentModel)
+            '
             'EmployeeEntryTv
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.ClientSize = New System.Drawing.Size(1020, 555)
             Me.Name = "EmployeeEntryTv"
             Me.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.Text = "Employee Maintenance Form"
-        Me.ViewDisplayName = "EmployeeEntryTv"
-        Me.SplitContainer1.Panel1.ResumeLayout(false)
-        Me.SplitContainer1.Panel2.ResumeLayout(false)
-        Me.SplitContainer1.Panel2.PerformLayout
+            Me.Text = "Employee Maintenance Form"
+            Me.ViewDisplayName = "EmployeeEntryTv"
+            Me.SplitContainer1.Panel1.ResumeLayout(False)
+            Me.SplitContainer1.Panel2.ResumeLayout(False)
+            Me.SplitContainer1.Panel2.PerformLayout
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).EndInit
         Me.SplitContainer1.ResumeLayout(false)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit

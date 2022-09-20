@@ -18,7 +18,6 @@ Public Class EmployeeLeaveApprovalEntry
         ' Add any initialization after the InitializeComponent() call.
     End Sub
 
-
     Public Property EmployeeList As List(Of Lookup.LookupData) Implements IEmployeeLeaveApprovalView.EmployeeList
 
     Public Property LeaveList As List(Of Lookup.LookupData) Implements IEmployeeLeaveApprovalView.LeaveList
@@ -59,7 +58,6 @@ Public Class EmployeeLeaveApprovalEntry
         End Set
     End Property
 
-   
     Public Property EmployeeLeaveApprovalItems As List(Of EmployeeLeaveApprovalItemView) Implements IEmployeeLeaveApprovalView.EmployeeLeaveApprovalItems
         Get
             Return _employeeLeaveApprovalItems
@@ -154,7 +152,4 @@ Public Class EmployeeLeaveApprovalEntry
             }
     End Sub
 
-    Private Sub CheckBoxValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewEmployeeLeave.CellValueChanged
-
-    End Sub
 End Class

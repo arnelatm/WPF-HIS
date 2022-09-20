@@ -8,7 +8,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
     Public Class ReportFormIGroup
 
-        Public Sub New(ByVal fileName As String, formCulture As CultureInfo, args As Object)
+        Public Sub New(ByVal fileName As String, formCulture As CultureInfo, args As Object, Optional printJobName As String = Nothing)
 
             ' This call is required by the designer.
             InitializeComponent()
@@ -21,14 +21,17 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim language As String
             language = Strings.Left(formCulture.Name, formCulture.Name.IndexOf("-", StringComparison.Ordinal))
             Presenter = New ReportPresenter(Me)
-            For i = 0 To args.Count() - 1
-                Dim parameterName As String = args(i)(0)
-                Dim parameterValue = args(i)(1)
-                Report.SetParameterValue(parameterName, parameterValue)
-            Next
+            If args IsNot Nothing AndAlso args.Count > 0 Then
+                For i = 0 To args.Count() - 1
+                    Dim parameterName As String = args(i)(0)
+                    Dim parameterValue = args(i)(1)
+                    Report.SetParameterValue(parameterName, parameterValue)
+                Next
+            End If
             Report.SetParameterValue("Language", language)
             Report.SetParameterValue("EstablishmentName", Presenter.GetRecordField("Establishment", "EstablishmentName"))
             Report.DataSourceConnections.Clear()
+            SetPrintOption(printJobName)
             ProcessReport()
 
         End Sub
@@ -50,6 +53,16 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             End If
 
+        End Sub
+
+
+        Public Sub SetPrintOption(printJobName As String)
+            If printJobName IsNot Nothing Then
+                Report.PrintOptions.PrinterName = "Ad"
+                'Report.PrintOptions.PaperSize = 257
+                Report.PrintOptions.PaperOrientation = PaperOrientation.DefaultPaperOrientation
+                Report.PrintOptions.PaperSource = PaperSource.Auto
+            End If
         End Sub
 
     End Class

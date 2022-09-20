@@ -1,7 +1,6 @@
 ﻿Imports System.IO
 Imports System.Text.RegularExpressions
 Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.DataLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
@@ -10,7 +9,6 @@ Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Presenters
 
@@ -66,7 +64,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub RetrieveLabResult()
-            If View.InvoiceNoF Is Nothing Or View.InvoiceNoF  = "" Then
+            If View.InvoiceNoF Is Nothing Or View.InvoiceNoF = "" Then
                 Messaging.Show("Sorry you must enter the invoice number to be retrieved.")
                 BlankOutResults()
             Else
@@ -241,7 +239,7 @@ Namespace PresentationLayer.Presenters
             View.Status = 0
             View.InvoiceType = ""
             View.SampleNo = ""
-            View.InvoiceDate = nothing
+            View.InvoiceDate = Nothing
             View.RegistrationNo = 0
             View.PatientNameEnglish = ""
             View.SexF = ""
@@ -288,7 +286,6 @@ Namespace PresentationLayer.Presenters
             num = value.Replace("*", String.Empty)
             Return num
         End Function
-
 
         Private Function RemoveDigits(ByVal value As String) As String
             If value Is Nothing Then
@@ -452,7 +449,6 @@ Namespace PresentationLayer.Presenters
         '                                                {"01", View.ItemDetailsCode, "000", Now(), "01", 0, 0, 0, 0, 0, 0})
         'End Sub
 
-
         'Public Sub GetServerResults(invoiceNo As Integer)
         '    Dim cbcRetrievalDao As New CbcRetrievalDao
         '    Dim lab_InvoiceGroup As Lab_InvoiceGroup = cbcRetrievalDao.GetRecordByIdNo(invoiceNo)
@@ -603,7 +599,6 @@ Namespace PresentationLayer.Presenters
                         View.PctNv = "0.16 - 0.33 %"
                         View.MpvNv = "6.5 - 12.4 fL"
                         View.PdwNv = "15 - 17 %"
-
                     Else
                         View.WbcNv = "4 - 10 (10^3/µL)"
                         View.NENv = "37 - 65 %"
@@ -628,6 +623,7 @@ Namespace PresentationLayer.Presenters
                     End If
             End Select
         End Sub
+
     End Class
 
 End Namespace

@@ -1,13 +1,14 @@
 ﻿Imports System.Configuration
 Imports System.Globalization
+Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
 
     Public Class ItemDetailsEntry
         Implements IItemDetailsView
-
 
         Private _nfi As NumberFormatInfo
 
@@ -34,6 +35,12 @@ Namespace PresentationLayer.Views.Forms
             End If
 
         End Sub
+
+        Public Event FinderValueChanged(itemIdNo As Int16) Implements IItemDetailsView.FinderValueChanged
+
+        Public Event GTinValueChanged(sender As DataGridView, gTinValue As String) Implements IItemDetailsView.GTinValueChanged
+
+        Public Property ItemDetailsByName As List(Of Lookup.LookupData)
 
 #Region "Field Items"
 
@@ -69,6 +76,7 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Private _itemGroup = "MD"
+
         Public Property ItemGroup As String Implements IItemDetailsView.ItemGroup
             Get
                 Return "MD"
@@ -88,6 +96,7 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Private _pack1 As Short
+
         Public Property Pack1 As Short Implements IItemDetailsView.Pack1
             Get
                 Return 1
@@ -98,6 +107,7 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Private _pack2 As Short
+
         Public Property Pack2 As Short Implements IItemDetailsView.Pack2
             Get
                 Return 1
@@ -108,6 +118,7 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Private _pack3 As Short
+
         Public Property Pack3 As Short Implements IItemDetailsView.Pack3
             Get
                 Return 1
@@ -118,6 +129,7 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Private _branchID As String
+
         Public Property BranchID As String Implements IItemDetailsView.BranchID
             Get
                 Return "01"
@@ -127,25 +139,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Private _created_By_Branch As String
-        Public Property Created_By_Branch As String Implements IItemDetailsView.Created_By_Branch
-            Get
-                Return "01"
-            End Get
-            Set(value As String)
-                _category = value
-            End Set
-        End Property
-
         Private _category As String
-        Public Property Category As String Implements IItemDetailsView.Category
-            Get
-                Return "XX"
-            End Get
-            Set(value As String)
-                _category = value
-            End Set
-        End Property
 
         Public Property RegistrationNo As String Implements IItemDetailsView.RegistrationNo
             Get
@@ -153,36 +147,6 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 txtRegistrationNo.Text = Value
-            End Set
-        End Property
-
-        Private _saleStrip As String
-        Public Property SaleStrip As String Implements IItemDetailsView.SaleStrip
-            Get
-                Return "N"
-            End Get
-            Set(value As String)
-                _category = value
-            End Set
-        End Property
-
-        Private _Item_Status As String
-        Public Property Item_Status As String Implements IItemDetailsView.Item_Status
-            Get
-                Return "S"
-            End Get
-            Set(value As String)
-                _category = value
-            End Set
-        End Property
-
-        Private _userID As String
-        Public Property UserID As String Implements IItemDetailsView.UserId
-            Get
-                Return GlobalVariables.UserName
-            End Get
-            Set(value As String)
-                _category = value
             End Set
         End Property
 
@@ -279,9 +243,39 @@ Namespace PresentationLayer.Views.Forms
                 Return chkPrescriptionDrug.Checked
             End Get
             Set
-                chkPrescriptionDrug.Checked = Value                
+                chkPrescriptionDrug.Checked = Value
             End Set
         End Property
+
+        Public Property GTIN As String Implements IItemDetailsView.GTIN
+            Get
+                Return txtGTIN.Text
+            End Get
+            Set(value As String)
+                txtGTIN.Text = value
+                RaiseEvent GTinValueChanged(Nothing, value)
+            End Set
+        End Property
+
+        Public Property Price_Cash As Decimal? Implements IItemDetailsView.Price_Cash
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Decimal?)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property QtyOnHand As Decimal? Implements IItemDetailsView.QtyOnHand
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Decimal?)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+#End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
@@ -332,7 +326,21 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-#End Region
+        Private Sub ItemDetailsEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            cboItemFinder.DataSource = ItemDetailsByName
+            cboItemFinder.EditingMode = True
+        End Sub
+
+        Private Sub cboItemFinder_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboItemFinder.SelectedIndexChanged
+            RaiseEvent FinderValueChanged(cboItemFinder.SelectedItem.IdNo)
+        End Sub
+
+        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnScanQrCode.ClickButtonArea
+            Dim gTinScanner As New GTinScanner
+            gTinScanner.ShowDialog()
+            txtGTIN.Text = gTinScanner.GTin
+            gTinScanner.Close()
+        End Sub
 
     End Class
 

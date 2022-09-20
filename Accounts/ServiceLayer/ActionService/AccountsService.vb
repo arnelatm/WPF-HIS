@@ -40,10 +40,10 @@ Namespace ServiceLayer.ActionService
                 DataDao = DaoFactoryAccounts.CreateDao(objectName, daoParam)
             Else
                 If connection Is Nothing Then
-                    DataDao = DaoFactoryAccounts.CreateDao(objectName)                    
+                    DataDao = DaoFactoryAccounts.CreateDao(objectName)
                 Else
                     DataDao = DaoFactoryAccounts.CreateDao(objectName, Nothing, connection)
-                End If                
+                End If
             End If
             If DataDao IsNot Nothing Then
                 If objectName = "Basic" Then
@@ -320,7 +320,10 @@ Namespace ServiceLayer.ActionService
         End Function
 
         Public Function GetUserEmployeeIdNo()
+            SaveConnectionString()
+            SetConnectionString($"ISPDATA")
             Dim employeeIdNo As Int32 = GetField(Of Integer, Integer)(GlobalVariables.UserIdNo, "User", "IdNo", "EmployeeIdNo")
+            RestoreConnectionString()
             Return employeeIdNo
         End Function
 

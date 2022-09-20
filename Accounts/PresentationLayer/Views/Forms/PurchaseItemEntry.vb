@@ -224,10 +224,6 @@ Namespace PresentationLayer.Views.Forms
         }
         End Sub
 
-        Private Sub PurchaseItemEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            KeyPreview = True
-        End Sub
-
     End Class
 
 End Namespace

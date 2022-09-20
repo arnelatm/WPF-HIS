@@ -53,7 +53,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -75,6 +77,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessLayer\Branch.vb" />
+    <Compile Include="BusinessLayer\Printer.vb" />
+    <Compile Include="BusinessLayer\PrintJob.vb" />
     <Compile Include="BusinessLayer\RevCostCenter.vb" />
     <Compile Include="BusinessLayer\Country.vb" />
     <Compile Include="BusinessLayer\Department.vb" />
@@ -87,6 +91,8 @@
     <Compile Include="BusinessLayer\TranslatedMessages.vb" />
     <Compile Include="DataLayer\AdoNet\BranchDao.vb" />
     <Compile Include="DataLayer\AdoNet\CommonDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PrinterDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PrintJobDao.vb" />
     <Compile Include="DataLayer\AdoNet\DaoFactoryCommon.vb" />
     <Compile Include="DataLayer\AdoNet\RevCostCenterDao.vb" />
     <Compile Include="DataLayer\AdoNet\CountryDao.vb" />
@@ -107,7 +113,24 @@
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
     <Compile Include="MyEnums.vb" />
+    <Compile Include="PresentationLayer\Models\PrinterModel.vb" />
+    <Compile Include="PresentationLayer\Models\PrintJobModel.vb" />
+    <Compile Include="PresentationLayer\Presenters\PrinterPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\PrintReportPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\PrintJobPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CommonPresenter.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\PrinterEntryTv.Designer.vb">
+      <DependentUpon>PrinterEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\PrinterEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\PrintJobEntryTv.Designer.vb">
+      <DependentUpon>PrintJobEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\PrintJobEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DefaultFieldValueEntryTv.Designer.vb">
       <DependentUpon>DefaultFieldValueEntryTv.vb</DependentUpon>
     </Compile>
@@ -186,6 +209,8 @@
     <Compile Include="PresentationLayer\Views\Forms\SecurityGroupEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Interfaces\IPrinterVIew.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IPrintJobVIew.vb" />
     <Compile Include="PresentationLayer\Views\SecurityGroupView.Designer.vb">
       <DependentUpon>SecurityGroupView.vb</DependentUpon>
     </Compile>
@@ -256,6 +281,14 @@
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\PrinterEntryTv.resx">
+      <DependentUpon>PrinterEntryTv.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\PrintJobEntryTv.resx">
+      <DependentUpon>PrintJobEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\DefaultFieldValueEntryTv.ar-SA.resx">
@@ -364,6 +397,10 @@
     <ProjectReference Include="..\Libraries\CBaseControlsLibrary\CBaseControlsLibrary.vbproj">
       <Project>{F991561A-78F8-487C-A873-E6436B41D801}</Project>
       <Name>CBaseControlsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\CrystalReportsHelper\CrystalReportsHelper.vbproj">
+      <Project>{8F2BB05A-C065-4E1B-9B1A-D4F600C0DB62}</Project>
+      <Name>CrystalReportsHelper</Name>
     </ProjectReference>
     <ProjectReference Include="..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
       <Project>{B56FDCD3-8B48-4859-983B-07FFA242673D}</Project>

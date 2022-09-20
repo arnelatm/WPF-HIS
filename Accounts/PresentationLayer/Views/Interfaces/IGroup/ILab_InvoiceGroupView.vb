@@ -1,7 +1,7 @@
 ﻿Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Interfaces
-       
+
     Public Interface ILab_InvoiceGroupView
         Inherits IView
 
@@ -14,9 +14,9 @@ Namespace PresentationLayer.Views.Interfaces
         Property AgeYMD As String
         Property Age As Decimal
         Property Sex As String
-        Property RegistrationNo as Decimal
-        Property SampleNo as String
-        Property Status as Int32
+        Property RegistrationNo As Decimal
+        Property SampleNo As String
+        Property Status As Int32
         Property Wbc As String
         Property NE As String
         Property Ly As String
@@ -93,8 +93,11 @@ Namespace PresentationLayer.Views.Interfaces
         Property AgeF As String
         Property SexF As String
         Property LabInvoiceDetails As List(Of Lab_InvoiceDetailsView)
+
         Event RetrieveLabResultRequested()
+
         Event SaveResultRequested()
+
     End Interface
 
     Public Interface ILab_InvoiceDetailsView
