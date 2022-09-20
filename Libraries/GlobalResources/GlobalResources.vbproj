@@ -221,5 +221,9 @@
   <ItemGroup>
     <None Include="Resources\arabic.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Image1.png" />
+    <Content Include="Resources\btnPrint.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

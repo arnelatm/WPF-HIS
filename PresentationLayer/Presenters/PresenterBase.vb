@@ -44,6 +44,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Protected OriginalModel
     Protected SortOrderKey As String = "IdNo"
     Protected DataFilter As String = Nothing
+    Protected PromptOnSavedRecord As Boolean = False
     Private _tableDefaultFieldValueList As List(Of DefaultFieldValueModel)
     Protected DefaultFieldValueService As New DefaultFieldValueService
     Public Property ViewDefaultFieldValues As List(Of DefaultFieldValueModel)
@@ -128,7 +129,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             Select Case item.DataType
                 Case DataTypeSelection.StringType
                     Invoker.SetProperty(View, item.FieldName, item.DefaultValue)
-                Case DataTypeSelection.AccountType
+                Case DataTypeSelection.CharType
                     Invoker.SetProperty(View, item.FieldName, item.DefaultValue)
                 Case DataTypeSelection.IntegerType
                     Invoker.SetProperty(View, item.FieldName, CInt(item.DefaultValue))
@@ -534,6 +535,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Dim lookupObj As New Lookup(pTableName, pFilter)
         lookupObj.FieldsToShow = pFieldsToShow
         lookupObj.FilterKey = pFilter
+        lookupObj.SortKey = pFieldsToShow(1)
         Return Service.GetLookup(lookupObj)
     End Function
 
@@ -849,7 +851,11 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End If
         If retVal < 0 Then
         Else
-            Messaging.Show(True, "MsgRecordSuccessfullySaved")
+            If PromptOnSavedRecord Then
+                Messaging.Show(True, "MsgRecordSuccessfullySaved")
+            Else
+                Messaging.MessageTimeOutNowait("Record Saved", "Record Saved", 1)
+            End If
             If AddMode Then
                 RecordPositionNumber = GetSortedRecordPosition(retVal)
             Else
@@ -1189,7 +1195,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             Debugger.Break()
 
         End Try
-
         Return retValue
     End Function
 
@@ -1310,6 +1315,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                 Beep()
                 Messaging.MessageKey = "ValidationErrors"
                 Messaging.Show("Record not saved!" & Environment.NewLine & _dataErrors, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                eventType.ValidData = False
                 'ShowErrors("Record not saved!" & Environment.NewLine & _dataErrors)
             End If
         End If
@@ -1618,7 +1624,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                     isVisible = controlSecurityValues(0)
                     isEditable = controlSecurityValues(1)
                 Else
-                    If GlobalVariables.UserName.ToLower() = $"arnel" Then
+                    If UserIsASuperAdministrator() Then
                         isVisible = True
                         isEditable = True
                     Else
@@ -1678,7 +1684,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Function
 
     Private Sub SetMenuSecurity(cControl As Object, controlSecurityKey As String)
-        If GlobalVariables.UserName = $"Arnel" Then
+        If UserIsASuperAdministrator() Then
             ' make all editable and visible regardless of security values
             cControl.Enabled = True
             cControl.Visible = True
@@ -1838,7 +1844,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Public Function UserHasAccess(securityKey As String, Optional inform As Boolean = False) As Boolean
         Dim hasAccess As Boolean
-        If GlobalVariables.UserName.ToUpper() = $"ARNEL" Then
+        If UserIsASuperAdministrator() Then
             hasAccess = True
         Else
             Dim controlSecurityValues As ArrayList
@@ -1903,6 +1909,12 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal control As Control, Optional ByVal filter As String = Nothing)
         SetDataSource(sourceTableName, control, Nothing, Nothing, filter)
+    End Sub
+
+    Public Sub CreateDataSourceGroupCode(ByVal fieldName As String, groupCode As String)
+        Dim idNo As Int16
+        idNo = Service.GetRecordFieldWithKeyG(Of Int16, String)(groupCode, "CodeGroup", "CodeGroupCode", "IdNo")
+        CreateDataSource("ItemCode", fieldName, Nothing, Nothing, "CodeGroupIdNo = " & idNo.ToString())
     End Sub
 
     Protected Function GetControlName(ByVal fieldName As String) As CaComboBox
@@ -2038,7 +2050,7 @@ End Class
 Public Enum DataTypeSelection
     BooleanType = 0
     ByteType = 1
-    AccountType = 2
+    CharType = 2
     DateType = 3
     DecimalType = 4
     DoubleType = 5

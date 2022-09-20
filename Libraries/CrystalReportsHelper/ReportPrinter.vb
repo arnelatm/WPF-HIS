@@ -1,0 +1,173 @@
+﻿Imports System.Configuration
+Imports System.Drawing.Printing
+Imports System.Windows.Forms
+Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary.Messaging
+Imports CrystalDecisions.CrystalReports.Engine
+Imports CrystalDecisions.Shared
+Imports PaperSize = CrystalDecisions.Shared.PaperSize
+
+Public Class ReportPrinter
+    Private Const DefaultConnection As String = "ISPDATA"
+    Private ReadOnly _report As New ReportDocument
+
+    Private _reportPath As String
+    Private _uid As String
+    Private _pwd As String
+    Private _server As String
+    Private _database As String
+
+    Public Sub New()
+    End Sub
+
+    Public Sub New(pReportFileName As String, Optional pDataBaseConnectionName As String = DefaultConnection, Optional args() As Object = Nothing)
+        ReportFileName = pReportFileName
+        DataBaseConnectionName = pDataBaseConnectionName
+        SetReportProperties(pReportFileName)
+        If args IsNot Nothing Then
+            SetParameterValue(args)
+        End If
+    End Sub
+
+    Public Sub SetReportProperties(pReportFileName As String)
+        Select Case DataBaseConnectionName
+            Case Nothing
+                UseDefaultConnection()
+            Case $"ISPDATA"
+                UseDefaultConnection()
+            Case $"IGROUP"
+                UseIGroupConnection()
+            Case Else
+                MessageBox.Show($"No database connection specified or connection name not recognized.")
+                Debugger.Break()
+                Return
+        End Select
+        _report.Load(_reportPath & pReportFileName)
+        If _report.DataSourceConnections.Count > 0 Then
+            _report.DataSourceConnections(0).SetConnection(_server, _database, _uid, _pwd)
+        End If
+    End Sub
+
+    Private Sub UseDefaultConnection()
+        _reportPath = ConfigurationManager.AppSettings.Get("ReportPaths")
+        _uid = ConfigurationManager.AppSettings.Get("UID")
+        _pwd = ConfigurationManager.AppSettings.Get("PWD")
+        _server = ConfigurationManager.AppSettings.Get("ServerTranslator")
+        _database = ConfigurationManager.AppSettings.Get("Database")
+    End Sub
+
+    Private Sub UseIGroupConnection()
+        _reportPath = ConfigurationManager.AppSettings.Get("ReportPathsIGroup")
+        _uid = ConfigurationManager.AppSettings.Get("UID")
+        _pwd = ConfigurationManager.AppSettings.Get("PWD")
+        _server = ConfigurationManager.AppSettings.Get("ServerTranslator")
+        _database = ConfigurationManager.AppSettings.Get("DatabaseIGroup")
+    End Sub
+
+    Public Property ReportFileName() As String
+
+    Public Property PrintJobName() As String
+
+    Public Property DataBaseConnectionName() As String
+
+    Public Property Args() As Object
+
+    Public Sub Load(reportPaths As String, cReportFileName As String)
+        _report.Load(reportPaths & cReportFileName)
+    End Sub
+
+    Public Overloads Sub SetPrintOption()
+        Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
+        If PrintJobName IsNot Nothing Then
+            Select Case PrintJobName
+                Case Nothing OrElse "" OrElse "Default"
+                    _report.PrintOptions.PaperSize = PaperSize.PaperA4
+                    _report.PrintOptions.PaperOrientation = PaperOrientation.DefaultPaperOrientation
+                Case "A4P"
+                    _report.PrintOptions.PaperSize = PaperSize.PaperA4
+                    _report.PrintOptions.PaperOrientation = PaperOrientation.Portrait
+                Case "A4L"
+                    _report.PrintOptions.PaperSize = PaperSize.PaperA4
+                    _report.PrintOptions.PaperOrientation = PaperOrientation.Landscape
+                Case "A5P"
+                    _report.PrintOptions.PaperSize = PaperSize.PaperA5
+                    _report.PrintOptions.PaperOrientation = PaperOrientation.DefaultPaperOrientation
+                Case "A5L"
+                    _report.PrintOptions.PaperSize = PaperSize.PaperA5
+                    _report.PrintOptions.PaperOrientation = PaperOrientation.Landscape
+                Case "PhItemBarCode"
+                    _report.PrintOptions.PaperSize = 257
+                    _report.PrintOptions.PaperOrientation = PaperOrientation.DefaultPaperOrientation
+            End Select
+        End If
+    End Sub
+
+    Public Overloads Sub SetPrintOption(printerName As String, paperSizeName As String, paperOrientation As Int16?, paperSource As Int16?)
+        If printerName IsNot Nothing Then
+            Dim dPrinterName As String = _report.PrintOptions.PrinterName
+            Dim noPrinter As Boolean = _report.PrintOptions.NoPrinter
+            Try
+                _report.PrintOptions.NoPrinter = False
+                _report.PrintOptions.PrinterName = printerName
+            Catch ex As Exception
+                MessageTimeOut("The Printer <" & printerName & "> doesn't exist on this system, using Default Printer.", "Invalid Printer Setup", 5)
+                _report.PrintOptions.NoPrinter = noPrinter
+                _report.PrintOptions.PrinterName = dPrinterName
+            End Try
+        End If
+        If paperSizeName IsNot Nothing Then
+            SetPaperSize(paperSizeName)
+        End If
+        If paperOrientation IsNot Nothing Then
+            Dim dPaperOrientation As Int16 = _report.PrintOptions.PaperOrientation
+            Try
+                _report.PrintOptions.PaperOrientation = paperOrientation
+            Catch ex As Exception
+                _report.PrintOptions.PaperOrientation = dPaperOrientation
+            End Try
+        End If
+        If paperSource IsNot Nothing Then
+            Dim dPaperSource As Int16
+            dPaperSource = _report.PrintOptions.PaperSource
+            Try
+                _report.PrintOptions.PaperSource = paperSource
+            Catch ex As Exception
+                _report.PrintOptions.PaperSource = dPaperSource
+            End Try
+        End If
+    End Sub
+
+    Private Sub SetPaperSize(paperName As String)
+        Dim docToPrint As New System.Drawing.Printing.PrintDocument()
+        docToPrint.PrinterSettings.PrinterName = _report.PrintOptions.PrinterName
+        For i = 0 To docToPrint.PrinterSettings.PaperSizes.Count - 1
+            Dim rawKind As Integer
+            If docToPrint.PrinterSettings.PaperSizes(i).PaperName = paperName Then
+                rawKind = CInt(docToPrint.PrinterSettings.PaperSizes(i).GetType().GetField("kind", Reflection.BindingFlags.Instance Or Reflection.BindingFlags.NonPublic).GetValue(docToPrint.PrinterSettings.PaperSizes(i)))
+                _report.PrintOptions.PaperSize = rawKind
+                Exit For
+            End If
+        Next
+    End Sub
+
+    Public Sub PrintReport(Optional copies As Int16 = 1, Optional collate As Boolean = False, Optional startPage As Int16 = 0, Optional endPage As Int16 = 0)
+        _report.PrintToPrinter(copies, collate, startPage, endPage)
+    End Sub
+
+    Public Sub SetParameterValue(args() As Object)
+        For i = 0 To args.Length - 1 Step 2
+            Dim value As Object = GlobalFunctions.ConvertObjectToType(args(i))
+            Dim name As String = args(i + 1).ToString()
+            _report.SetParameterValue(name, value)
+        Next
+    End Sub
+
+    Public Sub ClearDataSourceConnections()
+        _report.DataSourceConnections.Clear()
+    End Sub
+
+    Public Function GetReportSource() As CrystalDecisions.CrystalReports.Engine.ReportDocument
+        Return _report
+    End Function
+
+End Class

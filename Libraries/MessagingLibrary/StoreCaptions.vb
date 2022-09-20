@@ -369,6 +369,7 @@ Public Class StoreCaptions
             Dim howMany As Int32 = _dAc1.ExecScalar(Of Int32)(cmd)
             If howMany = 0 Then
                 cmd = "INSERT INTO OriginalCaptions (caption) values ( '" + t + "')"
+                'cmd = "INSERT INTO OriginalCaptions (caption) values ( @t )"
                 _dAc1.ExecCmd(cmd)
             End If
         End If

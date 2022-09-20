@@ -380,7 +380,6 @@ Namespace Services
             Return Not nCount > 0
         End Function
 
-
         Public Function DelUpdateTvp(dtTable As DataTable, ByVal groupKey As Integer) As Integer Implements IService.DelUpdateTvp
             Return DataDao.DelUpdateTvp(dtTable, groupKey)
         End Function
@@ -397,6 +396,29 @@ Namespace Services
                 GlobalVariables.Mapper.Map(record, modelOfPresenter)
             End If
             Return modelOfPresenter
+        End Function
+
+        'Public Function GetIdNoWithName(Of T)(tableName As String, itemName As String) As T Implements IService.GetIdNoWithName
+        '    Dim idNo As T = DataDao.GetIdNoWithName(Of T)(tableName, itemName)
+        '    Return idNo
+        'End Function
+
+        Public Function GetIdNoWithName(Of T)(tableName As String, fieldValue As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As T Implements IService.GetIdNoWithName
+            Dim idNo As T = DataDao.GetIdNoWithName(Of T)(tableName, fieldValue, fieldName, idFieldName)
+            Return idNo
+        End Function
+
+
+        Public Function GetIcIdNoWithName(codeGroupSelection As CodeGroupSelection, itemName As String) As Integer Implements IService.GetIcIdNoWithName
+            Return DataDao.GetIcIdNoWithIName(codeGroupSelection, itemName)
+        End Function
+
+        Public Function GetIcNameWithIdNo(codeGroupSelection As CodeGroupSelection, idNo As Int32) As String Implements IService.GetIcNameWithIdNo
+            Return DataDao.GetIcNameWithIdNo(codeGroupSelection, idNo)
+        End Function
+
+        Public Function GetPrintSetupIdNo(reportName As String) As Integer Implements IService.GetPrintSetupIdNo
+            Return DataDao.GetPrintSetupIdNo(reportName)
         End Function
 
         Public Function GetRecordsWithGroupIdNo(Of TM)(idNo, Optional ByRef sortKey = Nothing) As List(Of TM) Implements IService.GetRecordsWithGroupIdNo
@@ -475,6 +497,10 @@ Namespace Services
             Return DataDao.CountRecordWithKey(searchValue, tableName, searchFieldName)
         End Function
 
+        Public Function CountRecordWith3Key(Of S1, S2, S3)(tableName As String, searchFieldName1 As String, searchFieldName2 As String, searchFieldName3 As String, searchValue1 As S1, searchValue2 As S2, searchValue3 As S3) As Integer Implements IService.CountRecordWith3Key
+            Return DataDao.CountRecordWith3Key(Of S1, S2, S3)(tableName, searchFieldName1, searchFieldName2, searchFieldName3, searchValue1, searchValue2, searchValue3)
+        End Function
+
         Public Function DeleteRecord(idNo As Int32, tableName As String) As Integer _
             Implements IService.DeleteRecord
             Return DataDao.DeleteRecord(idNo, tableName)
@@ -496,8 +522,8 @@ Namespace Services
             Return DataDao.GetFieldWithIdNo(idNo, tableName, returnFieldName)
         End Function
 
-        Public Function GetFieldsWithIdNo(idNo As Object, tableName As String, fields As String) As Object Implements IService.GetFieldsWithIdNo
-            Return DataDao.GetFieldsWithIdNo(idNo, tableName, fields)
+        Public Function GetFieldsWithIdNo(idNo As Object, tableName As String, fields As String, Optional primaryFieldName As String = Nothing) As Object Implements IService.GetFieldsWithIdNo
+            Return DataDao.GetFieldsWithIdNo(idNo, tableName, fields, primaryFieldName)
         End Function
 
         Public Function GetSpRecords(spName As String, fields As String, sortKey As String, filter As String) As Object Implements IService.GetSpRecords
@@ -508,7 +534,7 @@ Namespace Services
             Return DataDao.GetDataSet(storedProcedureName, parameters)
         End Function
 
-        Public Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal fields As String(), Optional filterKey As String = Nothing) As Object Implements IService.GetRecords
+        Public Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal Optional fields As String() = Nothing, Optional filterKey As String = Nothing) As Object Implements IService.GetRecords
             Return DataDao.GetRecords(tableName, sortKey, fields, filterKey)
         End Function
 
@@ -536,8 +562,12 @@ Namespace Services
             Return DataDao.GetRecordFieldWith2Key(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2, returnFieldName)
         End Function
 
-        Public Function GetRecordFieldWith2KeyG(Of T1, T2, T3)(searchValue1 As T1, searchValue2 As T2, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As T3 Implements IService.GetRecordFieldWith2KeyG
+        Public Function GetRecordFieldWith2KeyG(Of T1, T2, T3)(searchValue1 As T1, searchValue2 As T2, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As T3 Implements IService.GetRecordFieldWith2Keyg
             Return DataDao.GetRecordFieldWith2KeyG(Of T1, T2, T3)(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2, returnFieldName)
+        End Function
+
+        Public Function GetRecordFieldWith3KeyG(Of T1, T2, T3, R)(tableName As String, searchValue1 As T1, searchValue2 As T2, searchValue3 As T3, searchFieldName1 As String, searchFieldName2 As String, searchFieldName3 As String, returnFieldName As String) As R Implements IService.GetRecordFieldWith3Keyg
+            Return DataDao.GetRecordFieldWith3KeyG(Of T1, T2, T3, R)(tableName, searchValue1, searchValue2, searchValue3, searchFieldName1, searchFieldName2, searchFieldName3, returnFieldName)
         End Function
 
         Public Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As String Implements IService.GetRecordFieldWithKey
@@ -579,8 +609,6 @@ Namespace Services
         Public Function HasRecordChanged(idNo As Int32, tableName As String, timeStampedValue As Object, Optional ByVal timeStampField As String = "DateTimeStamp") As Boolean Implements IService.HasRecordChanged
             Return DataDao.HasRecordChanged(idNo, tableName, timeStampedValue, timeStampField)
         End Function
-
-
 
         'Private ReadOnly _hasher As New SHA1CryptoServiceProvider()
 
@@ -685,11 +713,9 @@ Namespace Services
             Return DataDao.GetRecordFieldsFiltered(tableName, fieldList, filter)
         End Function
 
-
         Public Sub SaveConnectionString()
             DataDao.SaveConnectionString()
         End Sub
-
 
         Public Sub RestoreConnectionString()
             DataDao.RestoreConnectionString()
@@ -698,6 +724,25 @@ Namespace Services
         Public Sub SetConnectionString(connectionName As String)
             DataDao.SetConnectionString(connectionName)
         End Sub
+
+        Public Function GetParametrized(Of TM As New)(parameter As Object, Optional sortOrder As String = "")
+            Dim modelOfPresenter As New TM
+            Dim record = DataDao.GetParametrized(parameter, sortOrder)
+            If record IsNot Nothing Then
+                GlobalVariables.Mapper.Map(record, modelOfPresenter)
+            End If
+            Return modelOfPresenter
+        End Function
+
+
+        Public Function GetDataTable(tableName As String, Optional sortField As String = Nothing, Optional fieldList As String = Nothing, Optional filter As String = Nothing) As DataTable
+            Return DataDao.GetDataTable(tableName, sortField, fieldList, filter)
+        End Function
+
+        Public Function GetDataTable(sqlCommand As String) As DataTable
+            Return DataDao.GetDataTable(sqlCommand)
+        End Function
+
 
 #End Region
 
@@ -722,11 +767,14 @@ Namespace Services
         Public Function InitializeSecurityObject() As Integer Implements IService.InitializeSecurityObject
             Return BaseDao.InitializeSecurityObject()
         End Function
-                
+
         Public Function GetControlSecurityIdNo(searchValue As String, Optional menu As Boolean = False) As String Implements IService.GetControlSecurityIdNo
             Return BaseDao.GetControlSecurityIdNo(searchValue, menu)
         End Function
 
+        Public Function GetRecordsDataTable(tableName As String, sortKey As String, Optional fields() As String = Nothing, Optional filterKey As String = Nothing) As DataTable Implements IService.GetRecordsDataTable
+            Return BaseDao.GetRecordsDataTable(tableName, sortKey, fields, filterKey)
+        End Function
 
 #End Region
 

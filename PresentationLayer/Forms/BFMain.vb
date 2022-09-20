@@ -604,7 +604,7 @@ Public Class BfMain
 
     Private Shared Sub SetControlVisibility(ByRef cCtrl As Control, controlVisible As Boolean)
         ' if Visible is false, Don't show the controls content by masking content with '*' asterisk
-        If GlobalVariables.UserName = $"Arnel" Then
+        If UserIsASuperAdministrator() Then
             SetPropertyValue(cCtrl, "Visible", True)
         ElseIf controlVisible Then
             SetPropertyValue(cCtrl, "Visible", True)
@@ -641,7 +641,7 @@ Public Class BfMain
     '        toolStripMenuItem.Enabled = False
     '        toolStripMenuItem.Visible = True
     '    End If
-    '    If GlobalVariables.UserName = $"Arnel" Then
+    '    If UserIsASuperAdministrator() Then
     '        ' make all editable and visible regardless of security values
     '        toolStripMenuItem.Enabled = True
     '        toolStripMenuItem.Visible = True
@@ -650,7 +650,7 @@ Public Class BfMain
     'End Function
 
     Private Sub SetMenuSecurity(cControl As Object, controlSecurityKey As String)
-        If GlobalVariables.UserName = $"Arnel" Then
+        If UserIsASuperAdministrator() Then
             ' make all editable and visible regardless of security values
             cControl.Enabled = True
             cControl.Visible = True
@@ -954,7 +954,7 @@ Public Class BfMain
     '                obj.Visible = True
     '            End If
     '        Next
-    '        If GlobalVariables.UserName = $"Arnel" Then
+    '        If UserIsASuperAdministrator() Then
     '            ' override values regardless of security values
     '            For Each obj As Object In dropDownItems
     '                obj.Enabled = True
@@ -1175,6 +1175,25 @@ Public Class BfMain
         Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, sortField, fields, filter))
     End Sub
 
+    Protected Overloads Sub CreateLookupDataTable(tableName As String, targetProperty As String)
+        Ea.PublishEvent(New GetLookupDataTableRequested(tableName, Me, targetProperty))
+    End Sub
+
+    Protected Overloads Sub CreateLookupDataTable(tableName As String, targetProperty As String, filter As String)
+        Ea.PublishEvent(New GetLookupDataTableRequested(tableName, Me, targetProperty, filter))
+    End Sub
+
+    Protected Overloads Sub CreateLookupDataTable(tableName As String, targetProperty As String, sortKey As String, filter As String)
+        Ea.PublishEvent(New GetLookupDataTableRequested(tableName, Me, targetProperty, sortKey, filter))
+    End Sub
+
+    Protected Overloads Sub CreateLookupDataTable(tableName As String, targetProperty As String, fields As String(), Optional filter As String = Nothing)
+        Ea.PublishEvent(New GetLookupDataTableRequested(tableName, Me, targetProperty, fields, filter))
+    End Sub
+
+    Protected Overloads Sub CreateLookupDataTable(tableName As String, targetProperty As String, sortField As String, fields As String(), Optional filter As String = Nothing)
+        Ea.PublishEvent(New GetLookupDataTableRequested(tableName, Me, targetProperty, sortField, fields, filter))
+    End Sub
     Public Sub CreateEnumDataSource(Of TE)(ByRef comboControl As CaComboBox)
         comboControl.DataSource = GetEnumData(Of TE)()
     End Sub

@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Reflection
 Imports System.Windows.Forms
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
@@ -51,11 +52,16 @@ Public Class CDgvTextColumn
             _editingMode = value
             If value Then
                 If DisplayOnly Then
-                    [ReadOnly] = True
+                    If Not [ReadOnly] Then
+                        ' need to do this because of error when setting sequence column ReadOnly property
+                        [ReadOnly] = True
+                    End If
                     DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                     DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 Else
-                    [ReadOnly] = False
+                    If [ReadOnly] Then
+                        [ReadOnly] = False
+                    End If
                     DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                     DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
                     [ReadOnly] = False

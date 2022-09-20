@@ -87,13 +87,17 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DateCreated As DateTime? Implements IArJournalView.DateCreated
             Get
-                Return Convert.ToDateTime(txtDateCreated.Text)
+                Try
+                    Return Convert.ToDateTime(txtDateCreated.Text)
+                Catch ex As Exception
+                    Return Nothing
+                End Try
             End Get
             Set
                 If Value.HasValue Then
-                    txtDateCreated.Text = Value
+                    txtDateCreated.Value = Value
                 Else
-                    txtDateCreated.Text = Date.Now().ToString()
+                    txtDateCreated.Value = Date.Now().ToString()
                 End If
             End Set
         End Property
@@ -370,10 +374,9 @@ Namespace PresentationLayer.Views.Forms
             UpdateTotals()
         End Sub
 
-        Private Sub OnTransactionDateValueChanged(sender As Object, e As EventArgs) Handles dtpTransactionDate.ValueChanged
+        Private Sub OnTransactionDateValidated(sender As Object, e As EventArgs) Handles dtpTransactionDate.Validated
             Presenter.UpdateDueDate()
             Presenter.UpdateEarlySettlementValues()
-            'Presenter.UpdateSupplierDate()
         End Sub
 
         Private Function PaymentOrDiscountMade()
@@ -417,9 +420,6 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub DataGridViewJournalItems_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellContentClick
-
-        End Sub
     End Class
 
 End Namespace

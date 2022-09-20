@@ -1,4 +1,5 @@
-﻿Imports System.Globalization
+﻿
+Imports System.Globalization
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
@@ -489,7 +490,6 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-
 #Region "DataBindings"
 
         Private Sub BindEmployeeDeduction()
@@ -577,7 +577,6 @@ Namespace PresentationLayer.Views.Forms
             'ResumeLayout()
         End Sub
 
-
         Private Sub BindEmployeeDocument()
             'SuspendLayout()
             bsDocuments.DataSource = Nothing
@@ -618,6 +617,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvLeaveIdNo.ValueMember = "IdNo"
             End With
         End Sub
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -757,24 +757,27 @@ Namespace PresentationLayer.Views.Forms
                 Else
                     documentFileName = EmployeeDocuments(index).ImageFileName
                 End If
+            ElseIf EmployeeDocuments(index).DataImageIdNo < 0 Then
+                documentFileName = EmployeeDocuments(index).ImageFileName
             End If
             Dim remarks As String = EmployeeName & " " & DataGridViewDocuments.CurrentRow.Cells("dgvDocumentIdNo").EditedFormattedValue
-            Dim imageFileName As String = SelectImage(documentFileName, remarks)
-            If imageFileName IsNot Nothing Then
-                Dim changed As Boolean = EmployeeDocuments(index).Changed
-                EmployeeDocuments(index).ImageFileName = imageFileName
-                If imageFileName <> originalDocumentFileName Then
-                    EmployeeDocuments(index).Changed = True
-                Else
-                    EmployeeDocuments(index).Changed = False
-                End If
-                If imageFileName = "" Then
-                    ' the user selected to clear the image
-                    EmployeeDocuments(index).DataImageIdNo = 0
-                End If
+            Dim imageFileName As String = Nothing
+            'If documentFileName IsNot Nothing Then
+            imageFileName = SelectImage(documentFileName, remarks)
+
+            'End If
+            Dim changed As Boolean = EmployeeDocuments(index).Changed
+            EmployeeDocuments(index).ImageFileName = imageFileName
+            If imageFileName <> originalDocumentFileName Then
+                EmployeeDocuments(index).Changed = True
+            Else
+                EmployeeDocuments(index).Changed = False
+            End If
+            If imageFileName = "" Then
+                ' the user selected to clear the image
+                EmployeeDocuments(index).DataImageIdNo = 0
             End If
         End Sub
-
 
         Private Sub DisplayImage(cFileName As String, cRemarks As String)
             If cFileName Is Nothing Or cFileName = "" Then
@@ -790,6 +793,10 @@ Namespace PresentationLayer.Views.Forms
             Dim dialogResult As DialogResult = cPictureViewer.ShowDialog()
             If dialogResult = DialogResult.OK Then
                 Return cPictureViewer.ImageFileName
+            ElseIf dialogResult = DialogResult.Cancel Then
+                Return cFileName
+            ElseIf dialogResult = DialogResult.Abort Then
+
             End If
             Return Nothing
         End Function

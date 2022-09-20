@@ -23,7 +23,6 @@ Public Class GlobalVariables
     Private Shared _lookupSetting As String = "CodeAndName"
     Private Shared _vatRate As Decimal = 0D
     Private Shared _showDataDifferenceWhenSaving As Boolean?
-
     'Private Shared _defaultMirroredLanguageIdNo As Int32
     Private Shared _defaultMirroredCultureInfoStr As String
 
@@ -58,6 +57,10 @@ Public Class GlobalVariables
     Public Shared Property SecurityGroupIdNo As Int16 = 0
 
     Public Shared Property UserIdNo As Int32
+
+    Public Shared Property EstablishmentName As String
+    Public Shared Property EstablishmentNameAra As String
+
 
 #Region "Colors"
 

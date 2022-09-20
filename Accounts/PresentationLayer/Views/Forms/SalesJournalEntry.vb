@@ -300,7 +300,6 @@ Namespace PresentationLayer.Views.Forms
             Else
                 txtJournalCode.Text = "SJ"
             End If
-            KeyPreview = True
             _jiFooter = New DgvFooter(DataGridViewJournalItems) With {
                 .AutoCalc = True
             }

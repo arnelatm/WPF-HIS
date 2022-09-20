@@ -3,6 +3,7 @@ Imports System.Dynamic
 Imports System.Globalization
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries.AatmInterfaces
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace AdoNet
@@ -10,6 +11,7 @@ Namespace AdoNet
     Public Class BaseDao
         Implements IBaseDao
 
+        Private Const ConnectionNameConstant As String = "ISPDATA"
         Private ReadOnly _db As New Db()
 
         Private _lastFindParms As Object
@@ -24,7 +26,6 @@ Namespace AdoNet
                 Return _db
             End Get
         End Property
-
 
         Public Overridable Function GetDb()
             Return _db
@@ -58,14 +59,15 @@ Namespace AdoNet
             Return GetDb().Scalar(sql, params).ToString()
         End Function
 
-
-        'Public Function CountRecordFieldWith2KeyG(Of T1, T2, T3)(searchValue1 As T1, searchValue2 As T2, tableName As String, searchFieldName1 As String, searchFieldName2 As String) As T3 Implements IBaseDao.CountRecordFieldWith2KeyG
-        '    Dim searchFieldValue1 As String = ConvertToString(Of T1)(searchValue1)
-        '    Dim searchFieldValue2 As String = ConvertToString(Of T2)(searchValue2)
-        '    Dim sql As String = "Select Count(*) FROM [" & tableName & "] " & "Where @searchFieldName1 = @SearchFieldValue1 and @searchFieldName2 = @searchFieldValue2 "
-        '    Dim params() As Object = {"@SearchFieldName1", searchFieldName1, "@SearchFieldName2", searchFieldName2, "@searchFieldValue1", searchFieldValue1, "@searchFieldValue2", searchFieldValue2}
-        '    Return GetDb().Scalar(sql, params)
-        'End Function
+        Public Function CountRecordWith3Key(Of S1, S2, S3)(tableName As String, searchFieldName1 As String, searchFieldName2 As String, searchFieldName3 As String, searchValue1 As S1, searchValue2 As S2, searchValue3 As S3) As Integer Implements IBaseDao.CountRecordWith3Key
+            Dim searchVal1 As String = ConvertToString(Of S1)(searchValue1)
+            Dim searchVal2 As String = ConvertToString(Of S2)(searchValue2)
+            Dim searchVal3 As String = ConvertToString(Of S3)(searchValue3)
+            Dim sql As String = " Select COUNT(*) FROM [" & tableName & "] " &
+                    " Where " & searchFieldName1 & " = @SearchVal1 and " & searchFieldName2 & " = @SearchVal2 and " & searchFieldName3 & " = @SearchVal3 "
+            Dim params() As Object = {"@SearchVal1", searchVal1, "@SearchVal2", searchVal2, "@SearchVal3", searchVal3}
+            Return GetDb().Scalar(sql, params)
+        End Function
 
         Public Function CountRecordWithKey(searchValue As String, tableName As String, searchFieldName As String) _
             As Integer _
@@ -80,10 +82,19 @@ Namespace AdoNet
         Public Function DeleteRecord(idNo As Int32, tableName As String) As Int32 _
             Implements IBaseDao.DeleteRecord
             'Dim cTableName = GetPhysicalTableName(tableName)
-            Dim sql As String =
+            If tableName.Right(5) = "_View" Then
+                Dim l As Int16 = Len(tableName)
+                Dim sql As String =
+                    " Delete FROM [" & Left(tableName, Len(tableName) - 5) & "] " &
+                    " Where " & GetPrimaryFieldName() & " = " & idNo
+                Return GetDb().Delete(sql)
+            Else
+                Dim sql As String =
                     " Delete FROM [" & tableName & "] " &
                     " Where " & GetPrimaryFieldName() & " = " & idNo
-            Return GetDb().Delete(sql)
+                Return GetDb().Delete(sql)
+            End If
+
         End Function
 
         'Private Shared Function GetPhysicalTableName(pTableName As String) As String
@@ -366,8 +377,6 @@ Namespace AdoNet
             Return result
         End Function
 
-
-
         Public Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object Implements IBaseDao.GetFieldWithIdNo
             Dim sql As String =
                     " Select " & returnFieldName & " FROM [" & tableName & "] " &
@@ -376,19 +385,25 @@ Namespace AdoNet
             Return GetDb().Scalar(sql, params)
         End Function
 
-        Public Function GetFieldsWithIdNo(idNo As Object, tableName As String, fieldsList As String) As ExpandoObject Implements IBaseDao.GetFieldsWithIdNo
-            Dim sql As String = " Select top 1 " & fieldsList & " FROM [" & tableName & "] " & " Where " & GetPrimaryFieldName() & " = @IdNo "
+        Public Function GetFieldsWithIdNo(idNo As Object, tableName As String, fieldsList As String, Optional primaryFieldName As String = Nothing) As ExpandoObject Implements IBaseDao.GetFieldsWithIdNo
+            If primaryFieldName Is Nothing Then
+                primaryFieldName = GetPrimaryFieldName()
+            End If
+            Dim sql As String = " Select top 1 " & fieldsList & " FROM [" & tableName & "] " & " Where " & primaryFieldName & " = @IdNo "
             Dim params() As Object = {"@IdNo", idNo}
             Dim values As Object
             values = GetDb().SqlRead(sql, params)
-            Dim fields = fieldsList.Split(",")
-            Dim obj As New ExpandoObject
-            Dim i As Int16 = 0
-            For Each item In fields
-                CreateDynamicObject(obj, item, values(i))
-                i = i + 1
-            Next
-            Return obj
+            If values.Count() > 0 Then
+                Dim fields = fieldsList.Split(",")
+                Dim obj As New ExpandoObject
+                Dim i As Int16 = 0
+                For Each item In fields
+                    CreateDynamicObject(obj, item, values(i))
+                    i = i + 1
+                Next
+                Return obj
+            End If
+            Return Nothing
         End Function
 
         Public Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String) As ExpandoObject Implements IBaseDao.GetRecordFieldsFiltered
@@ -406,6 +421,38 @@ Namespace AdoNet
                 i = i + 1
             Next
             Return obj
+        End Function
+
+        Public Function GetIdNoWithName(Of T)(tableName As String, fieldValue As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As T Implements IBaseDao.GetIdNoWithName
+            If idFieldName Is Nothing Then
+                idFieldName = "IdNo"
+            End If
+            If fieldName Is Nothing Then
+                fieldName = tableName + "Name"
+            End If
+            Dim sql As String = "Select Top 1 " & idFieldName & " FROM " & tableName & " where " & fieldName & " =  @FieldValue"
+            Dim params() As Object = {"@FieldValue", fieldValue}
+            Return GetDb().Scalar(sql, params)
+        End Function
+
+        Public Function GetIcIdNoWithName(codeGroupSelection As CodeGroupSelection, fieldValue As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As Int32 Implements IBaseDao.GetIcIdNoWithName
+            Dim codeGroupIdNo = Convert.ToInt32(codeGroupSelection)
+            Dim sql As String = "Select Top 1 IdNo from ItemCode where IdNo = @FieldValue and CodeGroupIdNo = @CodeGroupIdNo"
+            Dim params() As Object = {"@FieldValue", fieldValue, "@CodeGroupIdNo", codeGroupIdNo}
+            Return GetDb().Scalar(sql, params)
+        End Function
+
+        Public Function GetIcNameWithIdNo(codeGroupSelection As CodeGroupSelection, fieldValue As Int32, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As String Implements IBaseDao.GetIcNameWithIdNo
+            Dim codeGroupIdNo = Convert.ToInt32(codeGroupSelection)
+            Dim sql As String = "Select Top 1 ItemCodeName from ItemCode where IdNo = @FieldValue and CodeGroupIdNo = @CodeGroupIdNo"
+            Dim params() As Object = {"@FieldValue", fieldValue, "@CodeGroupIdNo", codeGroupIdNo}
+            Return GetDb().Scalar(sql, params)
+        End Function
+
+        Public Function GetPrintSetupIdNo(reportFileName As String) As Int32 Implements IBaseDao.GetPrintSetupIdNo
+            Dim sql As String = "Select Top 1 PrintSetupIdNo from ReportFile where ReportFileName = @reportFileName"
+            Dim params() As Object = {"@ReportFileName", reportFileName}
+            Return GetDb().Scalar(sql, params)
         End Function
 
         'Public Function GetRecords(tableName As String, fieldList As String, filter As String) As ExpandoObject Implements IBaseDao.GetRecords
@@ -476,7 +523,10 @@ Namespace AdoNet
         'End Function
 
         Public Sub CreateDynamicObject(ByRef obj As ExpandoObject, ByVal propertyName As String, ByVal propertyValue As Object)
-            CType(obj, IDictionary(Of String, Object))(propertyName) = propertyValue
+            Dim name As String = propertyName.Replace(" ", "")
+            name = name.Replace("[", "")
+            name = name.Replace("]", "")
+            CType(obj, IDictionary(Of String, Object))(name) = propertyValue
         End Sub
 
         Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer Implements IBaseDao.GetIdNoOfSortedPositionNumber
@@ -539,7 +589,7 @@ Namespace AdoNet
                 searchValue = searchValue.Trim()
                 sql = "Select Top 1 SortKey FROM " & tableName &
                       " Where SortKey Like @SearchValue + '%' and len(RTrim(SortKey)) <= " &
-                      searchValue.Trim().Length + 4 &
+            searchValue.Trim().Length + 4 &
                       " order by SortKey DESC "
                 Dim parms() As Object = {"@SearchValue", searchValue}
                 Return GetDb().Scalar(sql, parms)
@@ -630,6 +680,21 @@ Namespace AdoNet
             Return retVal
         End Function
 
+        Public Function GetRecordFieldWith3KeyG(Of S1, S2, S3, R1)(tableName As String, searchValue1 As S1, searchValue2 As S2, searchValue3 As S3,
+                                       searchFieldName1 As String, searchFieldName2 As String, searchFieldName3 As String, returnFieldName As String) As R1 Implements IBaseDao.GetRecordFieldWith3KeyG
+            Dim searchVal1 As String = ConvertToString(Of S1)(searchValue1)
+            Dim searchVal2 As String = ConvertToString(Of S2)(searchValue2)
+            Dim searchVal3 As String = ConvertToString(Of S3)(searchValue3)
+            Dim sql As String = " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] " &
+                    " Where " & searchFieldName1 & " = @SearchVal1 and " & searchFieldName2 & " = @SearchVal2 and " & searchFieldName3 & " = @SearchVal3 "
+            Dim params() As Object = {"@searchVal1", searchVal1, "@searchVal2", searchVal2, "@searchVal3", searchVal3}
+            Dim retVal = GetDb().Scalar(sql, params)
+            If retVal Is Nothing Or IsDBNull(retVal) Then
+                Return Nothing
+            End If
+            Return retVal
+        End Function
+
         'Public  Function GetFirstDependentRecord(ByVal SearchValue As String, ByVal TableName As String, ByVal SearchFieldName As String, ByVal ReturnFieldName As String) As Integer
         '    Dim sql As String =
         '        " Select Top 1 " & ReturnFieldName & " FROM [" & TableName & "] " &
@@ -680,8 +745,13 @@ Namespace AdoNet
             Return GetDb().Scalar(sql)
         End Function
 
-        Public Function GetRecords(tableName As String, sortKey As String, fieldNames As String(), Optional filterKey As String = Nothing) As Object Implements IBaseDao.GetRecords
-            Dim fields = String.Join(",", fieldNames)
+        Public Function GetRecords(tableName As String, sortKey As String, Optional fieldNames As String() = Nothing, Optional filterKey As String = Nothing) As Object Implements IBaseDao.GetRecords
+            Dim fields As String
+            If fieldNames Is Nothing Then
+                fields = "*"
+            Else
+                fields = String.Join(",", fieldNames)
+            End If
             Dim sql As String
             If filterKey Is Nothing Or filterKey = "" Then
                 If sortKey Is Nothing Or sortKey = "" Then
@@ -697,6 +767,30 @@ Namespace AdoNet
                 End If
             End If
             Return GetDb().SqlRead(sql)
+        End Function
+
+        Public Function GetRecordsDataTable(tableName As String, sortKey As String, Optional fieldNames As String() = Nothing, Optional filterKey As String = Nothing) As Object Implements IBaseDao.GetRecordsDataTable
+            Dim fields As String
+            If fieldNames Is Nothing Then
+                fields = "*"
+            Else
+                fields = String.Join(",", fieldNames)
+            End If
+            Dim sql As String
+            If filterKey Is Nothing Or filterKey = "" Then
+                If sortKey Is Nothing Or sortKey = "" Then
+                    sql = " SELECT " & fields & " from [" & tableName & "]"
+                Else
+                    sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey
+                End If
+            Else
+                If sortKey Is Nothing Or sortKey = "" Then
+                    sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey
+                Else
+                    sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey & " order by " & sortKey
+                End If
+            End If
+            Return CreateDataTable(sql)
         End Function
 
         'Public Function GetRecordsByField(tableName As String, sortKey As String, fieldNames As String(), Optional filter As String = Nothing) As Object Implements IBaseDao.GetRecordsByField
@@ -845,19 +939,6 @@ Namespace AdoNet
             Return Not nCount > 0
         End Function
 
-
-
-        'Public Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) Implements IBaseDao.GetRecordFieldWithKeyG
-        '    Dim sql As String =
-        '            " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] " &
-        '            " Where " & searchFieldName & " = @SearchValue "
-        '    Dim params() As Object = {"@SearchValue", searchValue}
-        '    Dim retVal = GetDb().Scalar(sql, params)
-        '    If retVal Is Nothing Or IsDBNull(retVal) Then
-        '        Return Nothing
-        '    End If
-        '    Return retVal
-        'End Function
         Public Function IsFieldUnique(tableName As String, fieldName As String) As Boolean _
             Implements IBaseDao.IsFieldUnique
             Dim sql As String
@@ -907,7 +988,6 @@ Namespace AdoNet
             value = GetDb().Scalar(sql, params)
             Return value
         End Function
-
 
         Public Function UpdateRecordWithKey(Of T1, T2)(tableName As String, keyFieldName As String, keyFieldValue As T1, fieldNameToReplace As String, replaceValue As T2) As Integer _
             Implements IBaseDao.UpdateRecordWithKey
@@ -1130,23 +1210,18 @@ Namespace AdoNet
             GetDb().SaveConnectionString()
         End Sub
 
-
         Public Sub RestoreConnectionString()
             GetDb().RestoreConnectionString()
         End Sub
 
-        Public Sub SetConnectionString(connectionName As String)
+        Public Sub SetConnectionString(Optional connectionName As String = ConnectionNameConstant)
             GetDb().SetConnectionString(connectionName)
         End Sub
-
-
 
         Private Shared ReadOnly MakeMasterList As Func(Of IDataReader, GenericData) = Function(reader) New GenericData() With {
             .Code = Extensions.AsString(reader("Code")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Name = Extensions.AsString(reader("Name"))}
-
-
 
         Public Function InsertRecord(tableName As String, fields As Object(), fieldTypes As Object(), ParamArray values() As Object) As Integer Implements IBaseDao.InsertRecord
             Dim fieldList As String = String.Join(",", fields)
@@ -1198,6 +1273,41 @@ Namespace AdoNet
             Return fieldName
         End Function
 
+        Public Function GetDataTable(ByVal sqlCommand As String) As DataTable
+            Return CreateDataTable(sqlCommand)
+        End Function
+
+        Public Function GetDataTable(tableName As String, Optional sortField As String = Nothing, Optional fieldsList As String = Nothing, Optional filter As String = Nothing) As DataTable Implements IBaseDao.GetDataTable
+            Dim dataConnection As SqlConnection = New SqlConnection(GetDb().GetConnectionString)
+            Dim sqlCommand As String
+            If fieldsList Is Nothing Then
+                sqlCommand = "Select * from " + tableName
+            Else
+                sqlCommand = "Select " + fieldsList + " from " + tableName
+            End If
+            If filter IsNot Nothing Then
+                sqlCommand = sqlCommand + " where " + filter
+            End If
+            If sortField IsNot Nothing Then
+                sqlCommand = sqlCommand + " order by " + sortField
+            End If
+            Return CreateDataTable(sqlCommand)
+        End Function
+
+        Private Function CreateDataTable(sqlCommand As String) As DataTable
+            Dim dataConnection As SqlConnection = New SqlConnection(GetDb().GetConnectionString)
+            Dim command As New SqlCommand(sqlCommand, dataConnection)
+            Dim adapter As SqlDataAdapter = New SqlDataAdapter()
+            adapter.SelectCommand = command
+            Dim table As New DataTable
+            table.Locale = System.Globalization.CultureInfo.InvariantCulture
+            adapter.Fill(table)
+            Return table
+        End Function
+
+        Public Function GetDataValue(sqlCommand As String) As Object
+            Return GetDb().Scalar(sqlCommand)
+        End Function
 
     End Class
 
@@ -1206,7 +1316,7 @@ Namespace AdoNet
         Public Property CommandText As String
         Public Property Parameters As Array
 
-        Public Sub Add(commandText As String, parameters As Array)
+        Public Sub Add(commandText As String, parameters As Object())
             Me.CommandText = commandText
             Me.Parameters = parameters
         End Sub

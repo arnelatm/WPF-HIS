@@ -61,7 +61,6 @@ Namespace BusinessRules
                         Dim tMin As Date = Date.Parse(Min.ToString())
                         Dim tMax As Date = Date.Parse(Max.ToString())
                         Dim tVal As Date = IIf(value Is Nothing, Date.MinValue, Date.Parse(value))
-
                         Return (tVal.TrimMilliseconds() >= tMin.TrimMilliseconds() AndAlso tVal.TrimMilliseconds() <= tMax.TrimMilliseconds())
 
                     Case ValidationDataType.String

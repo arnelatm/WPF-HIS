@@ -160,17 +160,49 @@ Public Class MappingProfileAccounts
         CreateMap(Of Lab_InvoiceDetailsModel, Lab_InvoiceDetailsView)().ReverseMap()
         CreateMap(Of Document, DocumentModel)().ReverseMap()
         CreateMap(Of DocumentModel, IDocumentView)().ReverseMap()
-        
+
         CreateMap(Of IEmployeeDocumentView, EmployeeDocumentModel)()
         CreateMap(Of EmployeeDocument, EmployeeDocumentModel)().ReverseMap()
         CreateMap(Of EmployeeDocumentModel, EmployeeDocumentView)()
 
+        CreateMap(Of CodeGroup, CodeGroupModel)().ReverseMap()
+        CreateMap(Of CodeGroupModel, ICodeGroupView)().ReverseMap()
+
         CreateMap(Of IDataImageView, DataImageModel)()
         CreateMap(Of DataImage, DataImageModel)().ReverseMap()
-        CreateMap(Of DataImageModel, IDataImageView )().ReverseMap()
+        CreateMap(Of DataImageModel, IDataImageView)().ReverseMap()
+
+        CreateMap(Of PmrInvestigation, PmrInvestigationModel)().ReverseMap()
+        CreateMap(Of PmrInvestigationModel, IPmrInvestigationView)().ReverseMap()
+
+        CreateMap(Of ItemCode, ItemCodeModel)().ReverseMap()
+        CreateMap(Of ItemCodeModel, IItemCodeView)().ReverseMap()
+
+        CreateMap(Of DrugSale, DrugSaleModel)().ReverseMap()
+        CreateMap(Of DrugSaleModel, IDrugSaleView)().ReverseMap()
+
+        CreateMap(Of DrugAccept, DrugAcceptModel)().ReverseMap()
+        CreateMap(Of DrugAcceptModel, IDrugAcceptView)().ReverseMap()
+
+        CreateMap(Of CodeGroup, CodeGroupModel)().ReverseMap()
+        CreateMap(Of CodeGroupModel, ICodeGroupView)().ReverseMap()
+
+        CreateMap(Of Doctor, DoctorModel)().ReverseMap()
+        CreateMap(Of DoctorModel, IDoctorView)().ReverseMap()
+
+        CreateMap(Of PmrPatientDisplay, PmrPatientDisplayModel)().ReverseMap()
+        CreateMap(Of PmrPatientDisplayModel, IPmrPatientDisplayView)().ReverseMap()
+        CreateMap(Of PmrPatientDisplayModel, PmrPatientDisplayView)().ReverseMap()
+
+        CreateMap(Of StockInventory, StockInventoryModel)().ReverseMap()
+        CreateMap(Of StockInventoryModel, IStockInventoryView)().ReverseMap()
+
+        CreateMap(Of GTinMatcher, GTinMatcherModel)().ReverseMap()
+        CreateMap(Of GTinMatcherModel, IGTinMatcherView)().ReverseMap()
+
+        'CreateMap(Of PmrPatientDisplayModel, PmrPatientDisplayView)()
 
     End Sub
-
 
     'CreateMap(Of List(Of JournalItem), List(Of JournalItemModel))().ReverseMap()
     'CreateMap(Of List(Of JournalItemModel), IJournalItemsView)().ReverseMap()

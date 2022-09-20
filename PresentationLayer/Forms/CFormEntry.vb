@@ -22,6 +22,7 @@ Public Class CFormEntry
     Protected ParentFieldName As String = ""
     Protected RecordDateTimeStampValue As Object
     Protected SingleData As Boolean = False
+    Protected AutoAddOnSave As Boolean = False
 
     Private _debugSwitch As Byte = 0
 
@@ -46,7 +47,6 @@ Public Class CFormEntry
         'MyBase.New()
         ' This call is required by the designer.
         InitializeComponent()
-        'KeyPreview = True
         DoubleBuffered = True
 
         ' Add any initialization after the InitializeComponent() call.
@@ -395,12 +395,6 @@ Public Class CFormEntry
     End Sub
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        'Dim adding As Boolean
-        'If AddMode Then
-        '    adding = True
-        'Else
-        '    adding = False
-        'End If
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
@@ -416,26 +410,15 @@ Public Class CFormEntry
         Dim saveData As New SaveDataRequested(Me)
         If Ea IsNot Nothing Then
             Ea.PublishEvent(saveData)
-            'Ea.PublishEvent(New SaveDataRequested(Me))
         End If
-        'If EditMode Or AddMode Then
-        '    TurnOnInputs()
-        'Else
-        '    TurnOffInputs()
-        '    UpdateNavigationButtonDisplay(False, False)
-        '    If adding Then
-        '        If Messaging.Show(True, "AskAddAnotherRecord", "Do you want to add another record?",
-        '        "Please confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
-        '                MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
-        '            AddMode = True
-        '            PublishClickedButton(ButtonClicked.Add)
-        '            Inputs(True)
-        '            UpdateNavigationButtonDisplay(False, True)
-        '        End If
-        '    End If
-        'End If
-        If saveData.ValidData And QuitOnSave Then
-            Close()
+        If saveData.ValidData Then
+            If QuitOnSave Then
+                Close()
+            Else
+                If AutoAddOnSave Then
+                    btnAdd.PerformClick()
+                End If
+            End If
         End If
     End Sub
 
@@ -510,6 +493,7 @@ Public Class CFormEntry
     'End Sub
 
     Private Sub CFormEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         If _firstLoadSwitch = 0 Then
             GetNSaveCaptions()
             _firstLoadSwitch = 1
@@ -522,6 +506,7 @@ Public Class CFormEntry
             If Ea IsNot Nothing Then
                 Ea.PublishEvent(New EntryFormLoaded(Me))
             End If
+            'Debugger.Break()
             PublishClickedButton(ButtonClicked.Last)
             Inputs(False)
             If SingleData Or HideNavigatorButtons Then
@@ -547,7 +532,7 @@ Public Class CFormEntry
             If FirstControl IsNot Nothing Then
                 FirstControl.Focus()
             End If
-            If GlobalVariables.UserName.ToLower() <> $"arnel" Then
+            If Not UserIsASuperAdministrator() Then
                 HideButton(btnDebug)
             End If
             'CenterForm(Me)

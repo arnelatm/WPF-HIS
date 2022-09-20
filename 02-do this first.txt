@@ -1,0 +1,27 @@
+delete purchase item 8413 - pharmacy
+delete purchase item 8334 - pharmacy 
+
+make trans_key a primary key
+*******************************************************************
+USE [iGroupClinic]
+GO
+
+/****** Object:  View [dbo].[DrugAccept_View]    Script Date: 14/11/2022 9:41:56 am ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE VIEW [dbo].[DrugAccept_View]
+AS
+SELECT      dbo.DrugAccept.IdNo, dbo.DrugAccept.AcceptDate, dbo.DrugAccept.GTIN, dbo.DrugAccept.Expiry, dbo.DrugAccept.BatchNo, dbo.DrugAccept.SerializationNo, dbo.DrugAccept.DateTimeStamp, dbo.ItemDetails.Item_Code, 
+            dbo.ItemDetails.ItemNameEnglish, LTrim(DBO.DrugList.[Trade name])+' '+LTrim(dbo.DrugList.[Package size])+' '+LTrim([Strength value])+' '+Trim([Unit of strength])+' '+LTrim(dbo.DrugList.[Package type]) as DrugName
+FROM        dbo.DrugAccept 
+LEFT JOIN	dbo.ItemDetails 
+ON dbo.DrugAccept.GTIN = dbo.ItemDetails.GTIN
+LEFT JOIN	dbo.DrugList 
+ON dbo.DrugAccept.GTIN = dbo.DrugList.GTIN
+GO
+*******************************************************************

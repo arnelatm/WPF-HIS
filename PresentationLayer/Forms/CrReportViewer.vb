@@ -16,23 +16,6 @@ Public Class CrReportViewer
         ' This call is required by the designer.
         InitializeComponent()
 
-        ' Add any initialization after the InitializeComponent() call.
-
-        'Dim valArray As Array = [Enum].GetValues(GetType(CeLocale))
-        'Dim lstCeLocale As New ListBox
-        'For Each obj As Object In valArray
-        '    lstCeLocale.Items.Add(obj)
-        'Next
-
-        '_myCeLocale = CeLocale.ceLocaleArabicSaudiArabia
-
-        '_myCeLocale = ceLocal
-
-        'Try
-        '    Report.ReportClientDocument.LocaleID = _myCeLocale
-        'Catch ex As Exception
-        '    MessageBox.Show("ERROR: " & ex.Message)
-        'End Try
 
     End Sub
 
