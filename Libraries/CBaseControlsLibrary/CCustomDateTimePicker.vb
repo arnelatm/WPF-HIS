@@ -89,6 +89,26 @@ Public Class CCustomDateTimePicker
         End Set
     End Property
 
+    Private _calendarCulture As CultureInfo
+
+    Public Property CalendarCulture As CultureInfo
+        Get
+            Dim cCalendarCulture As CultureInfo
+            Select Case btnCalendarType.Text
+                Case Strings.HijriCalendarMarker
+                    cCalendarCulture = CultureInfo.CreateSpecificCulture("ar-SA")
+                Case Strings.UmAlQuraCalendarMarker
+                    cCalendarCulture = CultureInfo.CreateSpecificCulture("ar-SA")
+                Case Else
+                    cCalendarCulture = CultureInfo.CreateSpecificCulture("en-GB")
+            End Select
+            Return cCalendarCulture
+        End Get
+        Set(tValue As CultureInfo)
+            _calendarCulture = tValue
+        End Set
+    End Property
+
     Public Sub SetupCalendarDisplay()
         SetTargetCulture()
         SetDateEntryMask()
@@ -463,13 +483,25 @@ Public Class CCustomDateTimePicker
         End Set
     End Property
 
-    Private Sub InformUserOfInvalidDate()
+    Public Sub InformUserOfInvalidDate()
         ToolTip1.ToolTipTitle = "Input Rejected"
         Dim calendarName As String = Messaging.TranslateCaption(CalendarNameInEnglish(_targetCulture))
         Dim cText = txtDate.Text
         Dim cCalendarName As String = calendarName
+        ToolTip1.ToolTipTitle = "Input Rejected"
         Messaging.ShowPmMessage(True, "MsgErroneousDate", {"enteredDate", cText, "calendarName", cCalendarName})
     End Sub
+
+
+    Public Function GetErrorMessage()
+        Dim errorMessage As String = ""
+        ToolTip1.ToolTipTitle = "Input Rejected"
+        Dim calendarName As String = Messaging.TranslateCaption(CalendarNameInEnglish(_targetCulture))
+        Dim cText = txtDate.Text
+        Dim cCalendarName As String = calendarName
+        errorMessage = Messaging.GetParametrizedMessage(True, "MsgErroneousDate", {"enteredDate", cText, "calendarName", cCalendarName})
+        Return errorMessage
+    End Function
 
     Private Sub InformUserOfInvalidTime()
         ToolTip1.ToolTipTitle = "Input Rejected"
@@ -559,6 +591,7 @@ Public Class CCustomDateTimePicker
         End If
         '_txtDateAlreadyFocused = False
         txtDate.InsertKeyMode = InsertKeyMode.Overwrite
+        txtDate.SelectAll()
     End Sub
 
     Public Sub CDtpPicker_Validating(sender As Object, e As CancelEventArgs) Handles txtDate.Validating, txtLongDate.Validating, txtTime.Validating

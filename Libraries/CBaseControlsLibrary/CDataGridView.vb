@@ -298,6 +298,8 @@ Public Class CDataGridView
 
     End Sub
 
+    Public Property ErrorMessage As String = Nothing
+
     Protected Overrides Function ProcessDialogKey(ByVal keyData As Keys) As Boolean ' Extract the key code from the key value.
         Dim key As Keys = keyData And Keys.KeyCode
         If key = Keys.Enter And CurrentCell IsNot Nothing Then
@@ -310,6 +312,9 @@ Public Class CDataGridView
                 End If
             End If
             ProcessTabKey(keyData)
+            If ErrorMessage IsNot Nothing Then
+                Windows.MessageBox.Show(ErrorMessage)
+            End If
             Return True
             'Dim currentColumnIndex As Int16
             'currentColumnIndex = CurrentCell.ColumnIndex()

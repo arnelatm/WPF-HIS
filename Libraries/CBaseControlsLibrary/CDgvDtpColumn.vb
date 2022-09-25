@@ -1,4 +1,6 @@
-﻿Imports System.Windows.Forms
+﻿Imports System.Globalization
+Imports System.Windows.Forms
+Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CDgvDtpColumn
     Inherits DataGridViewColumn
@@ -95,6 +97,7 @@ Public Class CDgvDtpEditingControl
     Private _valueIsChanged As Boolean = False
     Private _rowIndexNum As Integer
     Private _dataGridViewControl As DataGridView
+    Private _switch As Int32 = 0
 
     Public Sub New()
         'Me. Format = DateTimePickerFormat.Short
@@ -125,10 +128,57 @@ Public Class CDgvDtpEditingControl
     Public Function GetEditingControlFormattedValue(ByVal context _
         As DataGridViewDataErrorContexts) As Object _
         Implements IDataGridViewEditingControl.GetEditingControlFormattedValue
-        If Value Is Nothing Then
-            Return Nothing
-        End If
-        Return CDate(Value).ToShortDateString()
+        Dim efValue As String
+        efValue = txtDate.Text
+        Dim retVal As String = ""
+        Try
+
+            If Not ShowLongDate Then
+                If txtDate.Text Is Nothing OrElse txtDate.Text = "" OrElse txtDate.Text.TrimEnd() = EmptyMask Then
+                    txtTime.Text = ""
+                    txtLongDate.Text = ""
+                    retVal = ""
+                Else
+                    Dim cText As String
+                    cText = GlobalFunctions.PadWithZeroSingleDigitDate(DateTime.Parse(txtDate.Text).ToShortDateString())
+                    If ShowTime Then
+                        cText += " " + txtTime.GetMilitaryTime()
+                    End If
+                    retVal = Convert.ToDateTime(cText, CalendarCulture)
+                End If
+            Else
+                Dim cText As String
+                If txtLongDate.Text Is Nothing OrElse txtLongDate.Text.Trim() = "" Then
+                    txtTime.Text = ""
+                    txtDate.Text = ""
+                    retVal = Nothing
+                ElseIf ShowTime Then
+                    cText = PadWithZeroSingleDigitDate(DateTime.Parse(txtLongDate.Text).ToShortDateString()) + " " + txtTime.GetMilitaryTime()
+                    retVal = Convert.ToDateTime(cText, CalendarCulture)
+                Else
+                    retVal = Convert.ToDateTime(PadWithZeroSingleDigitDate(DateTime.Parse(txtLongDate.Text).ToShortDateString()), CalendarCulture)
+                End If
+            End If
+            _switch = 0
+        Catch ex As Exception
+            'If ex.HResult <> _switch Then
+            DirectCast(Me.EditingControlDataGridView, AATM.Libraries.CBaseControlsLibrary.CDataGridView).ErrorMessage = GetErrorMessage()
+            'End If
+            '_switch = ex.HResult
+            retVal = Nothing
+        End Try
+        Return retVal
+
+
+
+
+        'Return EditingControlFormattedValue
+        'If Value Is Nothing Then
+        '    'this is important to return empty string ("") to force focus to the next control. otherwise if you return
+        '    'nothing (null value) the control won't loose focus.
+        '    Return ""
+        'End If
+        'Return CDate(Value).ToShortDateString()
         'Dim dateValue As DateTime?
         'Try
         '    dateValue = CDate(Value).ToShortDateString()
