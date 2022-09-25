@@ -163,6 +163,7 @@ Public Class CDgvDtpEditingControl
 
         ' Let the DateTimePicker handle the keys listed.
         Select Case key And Keys.KeyCode
+
             Case Keys.Left, Keys.Up, Keys.Down, Keys.Right,
                 Keys.Home, Keys.End, Keys.PageDown, Keys.PageUp
 
@@ -191,15 +192,7 @@ Public Class CDgvDtpEditingControl
 
     End Property
 
-    Public Property EditingControlDataGridView() As DataGridView _
-        Implements IDataGridViewEditingControl.EditingControlDataGridView
-        Get
-            Return _dataGridViewControl
-        End Get
-        Set(ByVal value As DataGridView)
-            _dataGridViewControl = value
-        End Set
-    End Property
+    Public Property EditingControlDataGridView() As DataGridView Implements IDataGridViewEditingControl.EditingControlDataGridView
 
     Public Property EditingControlValueChanged As Boolean Implements IDataGridViewEditingControl.EditingControlValueChanged
         Get
@@ -230,7 +223,6 @@ Public Class CDgvDtpEditingControl
         MyBase.OnValueChanged(sender, eventargs)
 
     End Sub
-
 
 End Class
 

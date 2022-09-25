@@ -220,7 +220,6 @@
         Me.bsLeaveCredits = New System.Windows.Forms.BindingSource(Me.components)
         Me.tbpDocuments = New System.Windows.Forms.TabPage()
         Me.DataGridViewDocuments = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.bsDocuments = New System.Windows.Forms.BindingSource(Me.components)
             Me.dgvSequenceDocument = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvDocumentIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvNumber = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -231,6 +230,7 @@
             Me.dgvDataImageIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.IdNoDataGridViewTextBoxColumn1 = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.bsDocuments = New System.Windows.Forms.BindingSource(Me.components)
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -921,7 +921,6 @@
             Me.dtpBirthDate.ShowTime = False
             Me.dtpBirthDate.Size = New System.Drawing.Size(132, 24)
             Me.dtpBirthDate.TabIndex = 5
-            Me.dtpBirthDate.TabStop = False
             Me.dtpBirthDate.TargetCalendar = CType(resources.GetObject("dtpBirthDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpBirthDate.Translatable = False
             Me.dtpBirthDate.Value = Nothing
@@ -3577,10 +3576,6 @@
             Me.DataGridViewDocuments.TabIndex = 1
             Me.DataGridViewDocuments.Translatable = True
             '
-            'bsDocuments
-            '
-            Me.bsDocuments.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeDocumentModel)
-            '
             'dgvSequenceDocument
             '
             Me.dgvSequenceDocument.BegFindValue = Nothing
@@ -3749,13 +3744,17 @@
             Me.IdNoDataGridViewTextBoxColumn1.Translatable = False
             Me.IdNoDataGridViewTextBoxColumn1.Visible = False
             '
+            'bsDocuments
+            '
+            Me.bsDocuments.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeeDocumentModel)
+            '
             'EmployeeEntryTv
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.ClientSize = New System.Drawing.Size(1020, 555)
             Me.Name = "EmployeeEntryTv"
             Me.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.Text = "Employee Maintenance Form"
+            Me.Text = "Employee Maintenance Form"
         Me.ViewDisplayName = "EmployeeEntryTv"
         Me.SplitContainer1.Panel1.ResumeLayout(false)
         Me.SplitContainer1.Panel2.ResumeLayout(false)

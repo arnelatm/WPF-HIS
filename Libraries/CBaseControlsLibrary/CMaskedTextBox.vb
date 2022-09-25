@@ -11,12 +11,11 @@ Public Class CMaskedTextBox
     Private _defaultVal As String
     Private _isNumeric As Boolean
     Private _oldValue As String
-    Private _editsAllowed As Boolean = False
     Private WithEvents ContextMenuStrip1 As New ContextMenuStrip
     Private _editingMode As Boolean = False
-    Private _searchField As String
     Private _translatable As Boolean = False
-    Private _displayOnly As Boolean 
+    Private _displayOnly As Boolean
+    Private _oldText As String
 
     <Bindable(True)>
     <Category("Properties")>
@@ -24,13 +23,6 @@ Public Class CMaskedTextBox
     <Description("Set to True to specify that this control will only accept numeric values.")>
     <Browsable(True)>
     Public Property ValueIsNumeric As Boolean
-        Get
-            Return _isNumeric
-        End Get
-        Set
-            _isNumeric = Value
-        End Set
-    End Property
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
@@ -137,22 +129,6 @@ Public Class CMaskedTextBox
     <Description("Specify here the displayed field name to search")>
     <Browsable(True)>
     Public Property SearchField As String
-        Get
-            Return _searchField
-        End Get
-        Set(value As String)
-            _searchField = value
-        End Set
-    End Property
-
-    'Public Property OldValue() As String
-    '    Get
-    '        Return _OldValue
-    '    End Get
-    '    Set(ByVal value As String)
-    '        _OldValue = value
-    '    End Set
-    'End Property
 
     Public Sub New()
         MyBase.New()
@@ -174,6 +150,7 @@ Public Class CMaskedTextBox
             ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         End If
+        _oldText = Text
     End Sub
 
     Public Sub LeaveHandler(sender As Object, e As EventArgs) Handles MyBase.Leave
@@ -192,28 +169,28 @@ Public Class CMaskedTextBox
     'End Sub
 
     Public Sub CMaskedTextBox_Validating(sender As Object, e As CancelEventArgs) Handles MyBase.Validating
-        'Dim errorMsg As String
-        'If ValueIsNumeric Then
-        '    If Not IsNumeric(Text) Then
-        '        If ValueIsNullable And (Text.Trim() = "" Or Text.Trim() = EmptyMask) Then
-        '            Text = Nothing
-        '            '' nothing to do
-        '            ' blank values allowed for nullable fields
-        '        Else
-        '            e.Cancel = True
-        '            errorMsg = "Sorry, only numeric values allowed for this field! The value <" + Text + "> is Not allowed. Reverting to previous value."
-        '            MessageBox.Show(errorMsg)
-        '            Undo()
-        '            'MyErrorProvider.ShowErrorMessage(ErrorMsg)
-        '        End If
-        '    End If
-        'Else
-        '    If ValueIsNullable And (Text.Trim() = "" Or Text.TrimEnd() = EmptyMask) Then
-        '        Text = Nothing
-        '        '' nothing to do
-        '        ' blank values allowed for nullable fields
-        '    End If
-        'End If
+        Dim errorMsg As String
+        If ValueIsNumeric Then
+            If Not IsNumeric(Text) Then
+                If ValueIsNullable And (Text.Trim() = "" Or Text.Trim() = EmptyMask) Then
+                    Text = Nothing
+                    '' nothing to do
+                    ' blank values allowed for nullable fields
+                Else
+                    e.Cancel = True
+                    errorMsg = "Sorry, only numeric values allowed for this field! The value <" + Text + "> is Not allowed. Reverting to previous value."
+                    MessageBox.Show(errorMsg)
+                    Undo()
+                    'MyErrorProvider.ShowErrorMessage(ErrorMsg)
+                End If
+            End If
+            'Else
+            '    If ValueIsNullable And (Text.Trim() = "" Or Text.TrimEnd() = EmptyMask) Then
+            '        Text = Nothing
+            '        '' nothing to do
+            '        ' blank values allowed for nullable fields
+            '    End If
+        End If
     End Sub
 
 #Region "Declarations#"
@@ -396,22 +373,26 @@ Public Class CMaskedTextBox
         End If
     End Sub
 
-    Private Sub CMaskedTextBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles MyBase.KeyPress
-        If e.KeyChar = Chr(13) Then
-            e.Handled = True
-            SendKeys.SendWait("{TAB}")
-        End If
-    End Sub
-
-    'Private Sub CMaskedTextBox_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
-    '    If e.KeyCode = Keys.Enter Then
-    '            SendKeys.SendWait("{TAB}")
+    'Private Sub CMaskedTextBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles MyBase.KeyPress
+    '    If e.KeyChar = Chr(13) Then
     '        e.Handled = True
-    '        e.SuppressKeyPress = True
-    '        'SendKeys.Send("{TAB}")
-    '        'SendKeys.SendWait("{TAB}")
+    '        SendKeys.Send("{TAB}")
+    '        '    ElseIf e.e.Control AndAlso e.KeyCode = Keys.Z Then
+    '        '        '        Text = _oldText
+    '        '        '    End If
     '    End If
     'End Sub
+
+    Private Sub CMaskedTextBox_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            SendKeys.Send("{TAB}")
+            e.Handled = True
+            e.SuppressKeyPress = True
+            'ElseIf e.Control AndAlso e.KeyCode = Keys.Z Then
+            '    'If e.Control AndAlso e.KeyCode = Keys.Z Then
+            '    Text = _oldText
+        End If
+    End Sub
 
     Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
@@ -427,13 +408,6 @@ Public Class CMaskedTextBox
     'End Sub
 
     Public Property EditsAllowed As Boolean
-        Get
-            Return _editsAllowed
-        End Get
-        Set(value As Boolean)
-            _editsAllowed = value
-        End Set
-    End Property
 
 #Region "FindableControl"
 

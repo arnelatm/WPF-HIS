@@ -494,7 +494,7 @@ Public Class CFormEntry
     '            PublishClickedButton(ButtonClicked.Save)
     '        Else
     '            Beep()
-    '        End If
+    '        End Ifd
     '    ElseIf e.KeyCode = Keys.F2 Then
     '        If btnSave.Enabled Then
     '            e.SuppressKeyPress = True
