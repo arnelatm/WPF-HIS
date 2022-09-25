@@ -16,16 +16,12 @@ Public Class CCustomDateTimePicker
     Private ReadOnly _origCulture As CultureInfo
     Private _ltrCulture As CultureInfo
     Public MaxLength As Integer
-    Private _valueIsNullable As Boolean
     Private _displayOnly As Boolean = False
     Private _translatable As Boolean = False
     Private _readOnlyDp As Boolean = False
-    Private _defaultValue As DateTime? = Nothing
-    Private _dtpDefaultValue As DateTime? = Nothing
     Private _isMandatory As Boolean
     Private _textToSearch As String
     Private _searchPlace As Char
-    Private _securityKey As String
     Private _minimumDate As DateTime?
     Private _lastDate As DateTime? = Today()
     Private _origCultureStr As String
@@ -37,7 +33,6 @@ Public Class CCustomDateTimePicker
     Private _cultureInfoDisplayName As String = ""
     Private _targetCultureName As String = ""
     Private _targetCulture As CultureInfo
-    Private _targetCalendar As Calendar
     Private _calendarType As GlobalSubs.CalendarToUse = CalendarToUse.Gregorian
     Private _longDateWidth As Integer = 110
     Private _dateWidth As Integer = 76
@@ -47,7 +42,6 @@ Public Class CCustomDateTimePicker
     Private _timeWidth As Integer = 76
     Private _showTime As Boolean = False
     Private _showLongDate As Boolean = False
-    Private _editsAllowed As Boolean = False
     Private _editingMode As Boolean = True
 
     Private WithEvents _contextMenuStrip1 As New ContextMenuStrip
@@ -164,13 +158,6 @@ Public Class CCustomDateTimePicker
     <Description("The Default Value that this control will have if initialized or cleared.")>
     <Browsable(True)>
     Public Property DefaultValue As DateTime?
-        Get
-            Return _defaultValue
-        End Get
-        Set
-            _defaultValue = Value
-        End Set
-    End Property
 
     <Bindable(True)>
     <Category("Properties")>
@@ -179,13 +166,6 @@ Public Class CCustomDateTimePicker
     <Description("The Default Value that the datetimepicker control will show if value is empty or invalid date.")>
     <Browsable(True)>
     Public Property DtpDefaultValue As DateTime?
-        Get
-            Return _dtpDefaultValue
-        End Get
-        Set
-            _dtpDefaultValue = Value
-        End Set
-    End Property
 
     <Bindable(True)>
     <Category("Properties")>
@@ -303,13 +283,6 @@ Public Class CCustomDateTimePicker
     <Description("Security Key to use for this control.")>
     <Browsable(True)>
     Public Property SecurityKey As String
-        Get
-            Return _securityKey
-        End Get
-        Set
-            _securityKey = Value
-        End Set
-    End Property
 
     <Bindable(True)>
     <Category("Properties")>
@@ -317,13 +290,6 @@ Public Class CCustomDateTimePicker
     <Description("Are null (nothing) dates allowed?")>
     <Browsable(True)>
     Public Property ValueIsNullable As Boolean
-        Get
-            Return _valueIsNullable
-        End Get
-        Set
-            _valueIsNullable = Value
-        End Set
-    End Property
 
     <Bindable(True)>
     <Category("Properties")>
@@ -406,13 +372,6 @@ Public Class CCustomDateTimePicker
     End Sub
 
     Public Property TargetCalendar As Calendar
-        Get
-            Return _targetCalendar
-        End Get
-        Set
-            _targetCalendar = Value
-        End Set
-    End Property
 
     Public Overrides Property BackColor As Color
         Get
@@ -443,50 +402,64 @@ Public Class CCustomDateTimePicker
 
     Public Property Value As DateTime?
         Get
-            Dim retVal As DateTime? = Nothing
+            Dim retVal As DateTime?
             Try
-                If txtDate.Text <> "" And txtDate.Text.TrimEnd() <> EmptyMask Then
-                    If txtTime.Visible Then
-                        Dim cText As String = txtDate.Text + " " + txtTime.GetMilitaryTime()
+                If Not ShowLongDate Then
+                    If txtDate.Text Is Nothing OrElse txtDate.Text = "" OrElse txtDate.Text.TrimEnd() = EmptyMask Then
+                        txtTime.Text = ""
+                        txtLongDate.Text = ""
+                        retVal = Nothing
+                    Else
+                        Dim cText As String
+                        cText = PadWithZeroSingleDigitDate(DateTime.Parse(txtDate.Text).ToShortDateString())
+                        If ShowTime Then
+                            cText += " " + txtTime.GetMilitaryTime()
+                        End If
+                        retVal = Convert.ToDateTime(cText, _targetCulture)
+                    End If
+                Else
+                    Dim cText As String
+                    If txtLongDate.Text Is Nothing OrElse txtLongDate.Text.Trim() = "" Then
+                        txtTime.Text = ""
+                        txtDate.Text = ""
+                        retVal = Nothing
+                    ElseIf ShowTime Then
+                        cText = PadWithZeroSingleDigitDate(DateTime.Parse(txtLongDate.Text).ToShortDateString()) + " " + txtTime.GetMilitaryTime()
                         retVal = Convert.ToDateTime(cText, _targetCulture)
                     Else
-                        retVal = Convert.ToDateTime(txtDate.Text, _targetCulture)
+                        retVal = Convert.ToDateTime(PadWithZeroSingleDigitDate(DateTime.Parse(txtLongDate.Text).ToShortDateString()), _targetCulture)
                     End If
                 End If
             Catch ex As Exception
-                InformUserOfInvalidDate()
-                txtDate.Text = PadWithZeroSingleDigitDate(CalendarDateToShortDateString(_lastDate, _targetCulture))
-                Dim dDate As DateTime? = _lastDate
-                txtDate.Focus()
-                If txtDate.Text <> "" And txtDate.Text.TrimEnd() <> EmptyMask Then
-                    retVal = Convert.ToDateTime(txtDate.Text, _targetCulture)
-                End If
+                retVal = Nothing
             End Try
             Return retVal
         End Get
+
         Set(dValue As DateTime?)
-            Try
-                If Not IsNothing(dValue) Then
-                    txtDate.Text = PadWithZeroSingleDigitDate(CalendarDateToShortDateString(dValue, _targetCulture))
-                    Dim cTime As String = String.Format("{0:HH:mm}", dValue)
-                    txtTime.SetTime(cTime)
-                    If cTime < "12:00" Then
-                        txtTime.Text = IIf(cTime.Substring(0, 2) = "00", "12" + cTime.Substring(2), cTime)
-                    Else
-                        Dim cPmTime = (Int(cTime.Substring(0, 2)) - 12).ToString().PadLeft(2, "0") + cTime.Substring(2)
-                        txtTime.Text = IIf(cPmTime.Substring(0, 2) = "00", "12" + cPmTime.Substring(2), cPmTime)
-                    End If
+            'Try
+            If Not IsNothing(dValue) Then
+                txtDate.Text = PadWithZeroSingleDigitDate(CalendarDateToShortDateString(dValue, _targetCulture))
+                Dim cTime As String = String.Format("{0:HH:mm}", dValue)
+                txtTime.SetTime(cTime)
+                If cTime < "12:00" Then
+                    txtTime.Text = IIf(cTime.Substring(0, 2) = "00", "12" + cTime.Substring(2), cTime)
                 Else
-                    txtDate.Text = ""
-                    txtTime.Text = "00:00"
+                    Dim cPmTime = (Int(cTime.Substring(0, 2)) - 12).ToString().PadLeft(2, "0") + cTime.Substring(2)
+                    txtTime.Text = IIf(cPmTime.Substring(0, 2) = "00", "12" + cPmTime.Substring(2), cPmTime)
                 End If
-                _value = dValue
-            Catch ex As Exception
-                Beep()
-                ''dtp.Value = dtp.MinDate
-                txtDate.Text = Nothing
-                _value = Nothing
-            End Try
+            Else
+                txtDate.Text = ""
+                txtTime.Text = ""
+                txtLongDate.Text = ""
+            End If
+            _value = dValue
+            'Catch ex As Exception
+            '    Beep()
+            '    ''dtp.Value = dtp.MinDate
+            '    txtDate.Text = Nothing
+            '    _value = Nothing
+            'End Try
         End Set
     End Property
 
@@ -496,6 +469,11 @@ Public Class CCustomDateTimePicker
         Dim cText = txtDate.Text
         Dim cCalendarName As String = calendarName
         Messaging.ShowPmMessage(True, "MsgErroneousDate", {"enteredDate", cText, "calendarName", cCalendarName})
+    End Sub
+
+    Private Sub InformUserOfInvalidTime()
+        ToolTip1.ToolTipTitle = "Input Rejected"
+        Messaging.Show(True, "MsgErroneousTime")
     End Sub
 
     Private Function CalendarNameInEnglish(targetCulture As CultureInfo)
@@ -520,19 +498,19 @@ Public Class CCustomDateTimePicker
     '    txtTime.SelectionLength = 8
     'End Sub
 
-    Private Sub TxtTime_Validating(sender As Object, e As CancelEventArgs)
-        If _
-            (txtDate.Text = "" Or txtDate.Text.TrimEnd = EmptyMask) AndAlso
-            (txtTime.Text = "  :  :" Or txtTime.Text = "") Then Exit Sub
-        Dim sPattern = "([0-1]\d|2[0-3]):([0-5]\d)(:([0-5]\d))$"
-        Dim match As New Regex(sPattern)
-        Dim bIsMatch As Boolean = match.IsMatch(sender.text)
-        If bIsMatch = False Then
-            'txtTime.SelectionStart = 0
-            'txtTime.SelectionLength = 8
-            e.Cancel = True
-        End If
-    End Sub
+    'Private Sub TxtTime_Validating(sender As Object, e As CancelEventArgs)
+    '    If _
+    '        (txtDate.Text = "" Or txtDate.Text.TrimEnd = EmptyMask) AndAlso
+    '        (txtTime.Text = "  :  :" Or txtTime.Text = "") Then Exit Sub
+    '    Dim sPattern = "([0-1]\d|2[0-3]):([0-5]\d)(:([0-5]\d))$"
+    '    Dim match As New Regex(sPattern)
+    '    Dim bIsMatch As Boolean = match.IsMatch(sender.text)
+    '    If bIsMatch = False Then
+    '        'txtTime.SelectionStart = 0
+    '        'txtTime.SelectionLength = 8
+    '        e.Cancel = True
+    '    End If
+    'End Sub
 
     Public Function GetTime()
         Return txtTime.Text
@@ -544,95 +522,191 @@ Public Class CCustomDateTimePicker
 
     Private _txtDateAlreadyFocused As Boolean
 
-    Private Sub TxtDate_OnGotFocus(sender As Object, e As EventArgs) Handles txtDate.GotFocus
-        ' Select all text only if the mouse isn't down.
-        ' This makes tabbing to the textbox give focus.
-        If _value <> _lastDate Then
-            _lastDate = _value
-        End If
-        txtDate.InsertKeyMode = InsertKeyMode.Overwrite
-        'If MouseButtons = MouseButtons.None Then
-        txtDate.SelectAll()
-        _txtDateAlreadyFocused = True
-        'End If
-    End Sub
+    'Private Sub TxtDate_OnGotFocus(sender As Object, e As EventArgs) Handles txtDate.GotFocus
+    '    ' Select all text only if the mouse isn't down.
+    '    ' This makes tabbing to the textbox give focus.
+    '    If _value <> _lastDate Then
+    '        _lastDate = _value
+    '    End If
+    '    txtDate.InsertKeyMode = InsertKeyMode.Overwrite
+    '    'If MouseButtons = MouseButtons.None Then
+    '    txtDate.SelectAll()
+    '    _txtDateAlreadyFocused = True
+    '    'End If
+    'End Sub
 
-    Private Sub TxtDate_Leave(sender As Object, e As EventArgs) Handles txtDate.Leave
-        _txtDateAlreadyFocused = False
-        txtDate.InsertKeyMode = InsertKeyMode.Default
-    End Sub
-
-    Private Sub TxtDate_KeyDown(sender As Object, e As KeyEventArgs) Handles txtDate.KeyDown
-        ' The balloon tip is visible for five seconds; if the user types any data before it disappears, collapse it ourselves.
-        ToolTip1.Hide(txtDate)
-        'If e.KeyCode = Keys.Enter Then
-        '    SendKeys.SendWait("{TAB}")
-        '    e.Handled = True
-        'End If
-    End Sub
-
-    Private Sub TxtDate_Validating(sender As Object, e As CancelEventArgs) Handles txtDate.Validating
-        If txtDate.Text = "" OrElse txtDate.Text.TrimEnd() = EmptyMask Then Exit Sub
-        If txtDate.Text.Length = MaxLength Then
-            If IsDateValidForTargetCulture(txtDate.Text, _targetCulture) Then Exit Sub
-            e.Cancel = True
+    Private Sub OnDtp_Enter(sender As Object, e As EventArgs) Handles MyBase.Enter
+        If txtDate.Text Is Nothing OrElse txtDate.Text = "" OrElse txtDate.Text.TrimEnd() = EmptyMask Then
+            _lastDate = Nothing
         Else
-            e.Cancel = True
-        End If
-        Beep()
-        InformUserOfInvalidDate()
-        Dim dDate As DateTime? = _lastDate
-        If dDate Is Nothing Then
-            txtDate.Text = ""
-        Else
-            txtDate.Text = PadWithZeroSingleDigitDate(CalendarDateToShortDateString(_lastDate, _targetCulture))
-        End If
-        txtDate.Focus()
-        e.Cancel = True
-    End Sub
-
-    Private Sub TxtDate_Validated(sender As Object, e As EventArgs) Handles txtDate.Validated
-        If Not txtDate.ReadOnly Then
-            If txtDate.Text = "" OrElse txtDate.Text.TrimEnd() = EmptyMask Then
-                txtLongDate.Text = ""
-                txtTime.Text = ""
-                _programmaticChange = False
-                Exit Sub
+            Dim dDate As DateTime?
+            If txtTime.Visible Then
+                Dim cText As String = txtDate.Text + " " + txtTime.GetMilitaryTime()
+                Try
+                    dDate = Convert.ToDateTime(cText, _targetCulture)
+                    _lastDate = dDate
+                Catch ex As Exception
+                    ' do not assign
+                End Try
+            Else
+                Try
+                    dDate = Convert.ToDateTime(txtDate.Text, _targetCulture)
+                    _lastDate = dDate
+                Catch ex As Exception
+                    ' don't assign invalid values use the last value
+                End Try
             End If
-            Dim dDate As DateTime
-            dDate = Convert.ToDateTime(txtDate.Text, _targetCulture)
-            txtLongDate.Text = dDate.ToLongDateString
+        End If
+        '_txtDateAlreadyFocused = False
+        txtDate.InsertKeyMode = InsertKeyMode.Overwrite
+    End Sub
+
+    Public Sub CDtpPicker_Validating(sender As Object, e As CancelEventArgs) Handles txtDate.Validating, txtLongDate.Validating, txtTime.Validating
+        If Not ShowLongDate Then
+            If txtDate.Text Is Nothing OrElse txtDate.Text = EmptyMask OrElse txtDate.Text = "" Then
+                If ShowTime Then
+                    txtTime.Text = Nothing
+                End If
+                e.Cancel = False
+            Else
+                Dim cText As String = txtDate.Text
+                Try
+                    Dim dDateTime = Convert.ToDateTime(cText, _targetCulture)
+                    If ShowTime Then
+                        If (txtTime.Text = $"  :  :" Or txtTime.Text = "") Then Exit Sub
+                        Dim sPattern = "([0-1]\d|2[0-3]):([0-5]\d)(:([0-5]\d))$"
+                        Dim match As New Regex(sPattern)
+                        Dim bIsMatch As Boolean = match.IsMatch(sender.text)
+                        If bIsMatch = False Then
+                            e.Cancel = True
+                            InformUserOfInvalidTime()
+                        End If
+                    End If
+                Catch ex As Exception
+                    e.Cancel = True
+                    InformUserOfInvalidDate()
+                End Try
+            End If
+        Else
+
         End If
     End Sub
 
-    Private Sub TxtLongDate_Validating(sender As Object, e As CancelEventArgs) Handles txtLongDate.Validating
-        Dim tDate As String = txtLongDate.Text
-        Try
-            If tDate.Trim() = "" Then
+    Private Sub OnDtp_Validated(sender As Object, e As EventArgs) Handles txtDate.Validated, txtLongDate.Validated, txtTime.Validated
+        If Not ShowLongDate Then
+            If Not txtDate.ReadOnly Then
+                If txtDate.Text Is Nothing OrElse txtDate.Text = "" OrElse txtDate.Text.TrimEnd() = EmptyMask Then
+                    txtLongDate.Text = ""
+                    txtTime.Text = ""
+                    '_programmaticChange = False
+                End If
+            End If
+        Else
+            Dim tDate As String = txtLongDate.Text
+            If tDate Is Nothing OrElse tDate.Trim() = "" Then
                 txtTime.Text = ""
                 txtDate.Text = ""
-                Exit Sub
             End If
-            txtDate.Text = PadWithZeroSingleDigitDate(DateTime.Parse(tDate).ToShortDateString())
-            If IsDate(txtDate.Text) Then Exit Sub
-            e.Cancel = True
-        Catch
-            MessageBox.Show("The Value you [" & tDate & "] entered is invalid. Reverting to previous value!")
-            Dim dDate As DateTime = Value
-            txtLongDate.Text = dDate.ToLongDateString
-            txtLongDate.Focus()
-            e.Cancel = True
-        End Try
+        End If
     End Sub
 
-    Private Sub TxtLongDate_Validated(sender As Object, e As EventArgs) Handles txtLongDate.Validated
-        If txtLongDate.Text.Trim = "" Then Exit Sub
-        Dim tDate As String = txtLongDate.Text
-        Dim curCulture = CultureInfo.CurrentCulture
-        CultureInfo.CurrentCulture = _targetCulture
-        txtDate.Text = PadWithZeroSingleDigitDate(DateTime.Parse(tDate).ToShortDateString)
-        CultureInfo.CurrentCulture = curCulture
-    End Sub
+    'Private Sub OnTdp_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+    '    ' The balloon tip is visible for five seconds; if the user types any data before it disappears, collapse it ourselves.
+    '    'ToolTip1.Hide(txtDate)
+    '    If e.KeyCode = Keys.Enter Then
+    '        SendKeys.SendWait("{TAB}")
+    '        e.Handled = True
+    '    ElseIf e.Control AndAlso e.KeyCode = Keys.Z Then
+    '        e.Handled = True
+    '        Value = _lastDate
+    '    End If
+    'End Sub
+
+    'Private Sub OnTdp_Validating(sender As Object, e As CancelEventArgs) Handles MyBase.Validating
+    '    If txtDate.Text = "" OrElse txtDate.Text.TrimEnd() = EmptyMask Then Exit Sub
+    '    If txtDate.Text.Length = MaxLength Then
+    '        If IsDateValidForTargetCulture(txtDate.Text, _targetCulture) Then Exit Sub
+    '        e.Cancel = True
+    '    Else
+    '        e.Cancel = True
+    '    End If
+    '    Beep()
+    '    InformUserOfInvalidDate()
+    '    Dim dDate As DateTime? = _lastDate
+    '    If dDate Is Nothing Then
+    '        txtDate.Text = ""
+    '    Else
+    '        txtDate.Text = PadWithZeroSingleDigitDate(CalendarDateToShortDateString(_lastDate, _targetCulture))
+    '    End If
+    '    ' txtDate.Focus()
+    '    e.Cancel = True
+    'End Sub
+
+    'Private Sub TxtDate_Leave(sender As Object, e As EventArgs) Handles txtDate.Leave
+    '    _txtDateAlreadyFocused = False
+    '    txtDate.InsertKeyMode = InsertKeyMode.Default
+    'End Sub
+
+    'Private Sub OnTdp_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+    '    ' The balloon tip is visible for five seconds; if the user types any data before it disappears, collapse it ourselves.
+    '    'ToolTip1.Hide(txtDate)
+    '    If e.KeyCode = Keys.Enter Then
+    '        SendKeys.SendWait("{TAB}")
+    '        e.Handled = True
+    '    ElseIf e.Control AndAlso e.KeyCode = Keys.Z Then
+    '        e.Handled = True
+    '        Value = _lastDate
+    '    End If
+    'End Sub
+
+    'Private Sub TxtDate_Validating(sender As Object, e As CancelEventArgs) Handles txtDate.Validating
+    '    If txtDate.Text = "" OrElse txtDate.Text.TrimEnd() = EmptyMask Then Exit Sub
+    '    If txtDate.Text.Length = MaxLength Then
+    '        If IsDateValidForTargetCulture(txtDate.Text, _targetCulture) Then Exit Sub
+    '        e.Cancel = True
+    '    Else
+    '        e.Cancel = True
+    '    End If
+    '    Beep()
+    '    InformUserOfInvalidDate()
+    '    Dim dDate As DateTime? = _lastDate
+    '    If dDate Is Nothing Then
+    '        txtDate.Text = ""
+    '    Else
+    '        txtDate.Text = PadWithZeroSingleDigitDate(CalendarDateToShortDateString(_lastDate, _targetCulture))
+    '    End If
+    '    txtDate.Focus()
+    '    e.Cancel = True
+    'End Sub
+
+    'Private Sub TxtLongDate_Validating(sender As Object, e As CancelEventArgs) Handles txtLongDate.Validating
+    '    Dim tDate As String = txtLongDate.Text
+    '    Try
+    '        If tDate.Trim() = "" Then
+    '            txtTime.Text = ""
+    '            txtDate.Text = ""
+    '            Exit Sub
+    '        End If
+    '        txtDate.Text = PadWithZeroSingleDigitDate(DateTime.Parse(tDate).ToShortDateString())
+    '        If IsDate(txtDate.Text) Then Exit Sub
+    '        e.Cancel = True
+    '    Catch
+    '        e.Cancel = True
+    '        MessageBox.Show("The Value you [" & tDate & "] entered is invalid. Reverting to previous value!")
+    '        Dim dDate As DateTime = Value
+    '        txtLongDate.Text = dDate.ToLongDateString
+    '        txtLongDate.Focus()
+    '    End Try
+    'End Sub
+
+    'Private Sub TxtLongDate_Validated(sender As Object, e As EventArgs) Handles txtLongDate.Validated
+    '    If txtLongDate.Text.Trim = "" Then Exit Sub
+    '    Dim tDate As String = txtLongDate.Text
+    '    Dim curCulture = CultureInfo.CurrentCulture
+    '    CultureInfo.CurrentCulture = _targetCulture
+    '    txtDate.Text = PadWithZeroSingleDigitDate(DateTime.Parse(tDate).ToShortDateString)
+    '    CultureInfo.CurrentCulture = curCulture
+    'End Sub
 
     Private Sub Dtp_Click(sender As Object, e As EventArgs) Handles dtp.Click
         Dim retVal As DialogResult
@@ -714,13 +788,6 @@ Public Class CCustomDateTimePicker
     End Sub
 
     Public Property EditsAllowed As Boolean
-        Get
-            Return _editsAllowed
-        End Get
-        Set
-            _editsAllowed = Value
-        End Set
-    End Property
 
     'Public Sub MakeEditable(editableControl As Boolean) Implements IEntryControl.MakeEditable
     '    EditsAllowed = Not editableControl
@@ -736,11 +803,11 @@ Public Class CCustomDateTimePicker
         ToggleTargetCulture()
     End Sub
 
-    Protected Overridable Sub OnValueChanged(sender As Object, e As EventArgs) Handles txtDate.TextChanged, txtLongDate.TextChanged
+    Protected Overridable Sub OnValueChanged(sender As Object, e As EventArgs) Handles txtLongDate.TextChanged, txtDate.TextChanged
         RaiseEvent ValueChanged(sender, e)
     End Sub
 
-    Private Sub dtpReconciliationDate_EnabledChanged(sender As Object, e As EventArgs) Handles Me.EnabledChanged
+    Private Sub dtpReconciliationDate_EnabledChanged(sender As Object, e As EventArgs) Handles MyBase.EnabledChanged
         txtDate.Enabled = Me.Enabled
         txtLongDate.Enabled = Me.Enabled
         txtTime.Enabled = Me.Enabled
@@ -760,16 +827,37 @@ Public Class CCustomDateTimePicker
         Value = _lastDate
     End Sub
 
-    Public Function DateChanged()
-        If Value = _lastDate Then
-            Return False
-        End If
-        Return True
-    End Function
+    'Public Function DateChanged()
+    '    If Value = _lastDate Then
+    '        Return False
+    '    End If
+    '    Return True
+    'End Function
 
     Private Sub CCustomDateTimePicker_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txtDate.FieldName = Name.Substring(3)
         txtDate.DateField = True
+    End Sub
+
+    'Private Sub CCustomDateTimePicker_KeyPress(sender As Object, e As KeyPressEventArgs) Handles MyBase.KeyPress
+    '    If e.KeyChar = Chr(13) Then
+    '        SendKeys.SendWait("{TAB}")
+    '        e.Handled = True
+    '    ElseIf e.Control AndAlso e.KeyCode = Keys.Z Then
+    '        e.Handled = True
+    '        Value = _lastDate
+    '    End If
+    'End Sub
+
+    Private Sub CCustomDateTimePicker_KeyDown(sender As Object, e As KeyEventArgs) Handles txtDate.KeyDown, txtLongDate.KeyDown, txtTime.KeyDown
+        'ToolTip1.Hide(txtDate)
+        If e.KeyCode = Keys.Enter Then
+            SendKeys.SendWait("{TAB}")
+            e.Handled = True
+        ElseIf e.Control AndAlso e.KeyCode = Keys.Z Then
+            e.Handled = True
+            Value = _lastDate
+        End If
     End Sub
 
     'Protected Sub ContextHandler(sender As Object, e As EventArgs)
