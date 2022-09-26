@@ -379,12 +379,12 @@ Public Class CMaskedTextBox
         End If
     End Sub
 
-    Private Sub CMaskedTextBox_KeyPress(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            e.Handled = True
-            SendKeys.Send("{TAB}")
-        End If
-    End Sub
+    'Private Sub CMaskedTextBox_KeyPress(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+    '    If e.KeyCode = Keys.Enter Then
+    '        e.Handled = True
+    '        SendKeys.Send("{TAB}")
+    '    End If
+    'End Sub
 
     Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
