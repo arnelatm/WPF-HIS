@@ -161,29 +161,33 @@ Public Class CDgvDtpEditingControl
             End If
             _switch = 0
         Catch ex As Exception
-            'If ex.HResult <> _switch Then
-            DirectCast(Me.EditingControlDataGridView, AATM.Libraries.CBaseControlsLibrary.CDataGridView).ErrorMessage = GetErrorMessage()
-            'End If
-            '_switch = ex.HResult
+            PassErrorMessageToGrid()
             retVal = Nothing
         End Try
         Return retVal
 
-        'Return EditingControlFormattedValue
-        'If Value Is Nothing Then
-        '    'this is important to return empty string ("") to force focus to the next control. otherwise if you return
-        '    'nothing (null value) the control won't loose focus.
-        '    Return ""
-        'End If
-        'Return CDate(Value).ToShortDateString()
-        'Dim dateValue As DateTime?
-        'Try
-        '    dateValue = CDate(Value).ToShortDateString()
-        'Catch ex As Exception
-        '    Return Nothing
-        'End Try
-        'Return dateValue
     End Function
+
+    Private Sub PassErrorMessageToGrid()
+        Dim errorMessage As String = ""
+        ToolTip1.ToolTipTitle = "Input Rejected"
+        Dim calendarName As String = MessagingLibrary.Messaging.TranslateCaption(CalendarNameInEnglish(CalendarCulture))
+        Dim cText = txtDate.Text
+        Dim cCalendarName As String = calendarName
+        Dim myGridView As CDataGridView = DirectCast(Me.EditingControlDataGridView, AATM.Libraries.CBaseControlsLibrary.CDataGridView)
+        myGridView.ErrorMessageKey = "MsgErroneousDate"
+        myGridView.ErrorMessageParameters = {"enteredDate", cText, "calendarName", cCalendarName}
+    End Sub
+
+    'Public Function GetErrorMessage()
+    '    Dim errorMessage As String = ""
+    '    ToolTip1.ToolTipTitle = "Input Rejected"
+    '    Dim calendarName As String = MessagingLibrary.Messaging.TranslateCaption(CalendarNameInEnglish(CalendarCulture))
+    '    Dim cText = txtDate.Text
+    '    Dim cCalendarName As String = calendarName
+    '    errorMessage = MessagingLibrary.Messaging.GetParametrizedMessage(True, "MsgErroneousDate", {"enteredDate", cText, "calendarName", cCalendarName})
+    '    Return errorMessage
+    'End Function
 
     Public Sub ApplyCellStyleToEditingControl(ByVal dataGridViewCellStyle As _
         DataGridViewCellStyle) _
