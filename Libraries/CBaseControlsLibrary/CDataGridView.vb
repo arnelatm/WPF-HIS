@@ -622,66 +622,92 @@ Public Class CDataGridView
     '    SendKeys.Send("{TAB}")
     '    SendKeys.Send("{UP}")
     'End Sub
-    Private Overloads Sub OnKeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
-        Try
-            If CurrentCell IsNot Nothing Then
-                Dim iColumn As Integer = CurrentCell.ColumnIndex
-                Dim iRow As Integer = Math.Min(CurrentCell.RowIndex, RowCount() - 1)
-                Select Case e.KeyData
-                    Case Keys.Enter
-                        SendKeys.Send("{TAB}")
-                        e.Handled = True
-                    Case Keys.Tab
-                        If EditingMode Then
-                            If iColumn = Columns.Count() - 1 OrElse iColumn = LastEditableColumn() OrElse iColumn = Columns.IndexOf(Columns("dgvInsertColumn")) Then
-                                ' if on the last editable column, move to the first editable column on the next row
-                                Dim r = Math.Min(iRow + 1, RowCount() - 1)
-                                Dim vc = FirstVisibleColumn
-                                Dim ec = FirstEditableColumn
-                                Dim c = If(ec > 0, ec, vc)
-                                CurrentCell = Me(c, r)
-                                e.Handled = True
-                            End If
-                        End If
 
-                    Case Else
-                        e.Handled = False
-                End Select
-            End If
-        Catch ex As Exception
-            Forms.MessageBox.Show(ex.Message)
-        End Try
-        'Return
-    End Sub
 
-    'Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
-    '    Dim icolumn As Integer = CurrentCell.ColumnIndex + 1
-    '    Dim irow As Integer = CurrentCell.RowIndex + 1
-    '    If keyData = Keys.Enter Then
+    'Private Overloads Sub OnKeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+    '    Try
+    '        If CurrentCell IsNot Nothing Then
+    '            Dim iColumn As Integer = CurrentCell.ColumnIndex
+    '            Dim iRow As Integer = Math.Min(CurrentCell.RowIndex, RowCount() - 1)
+    '            Select Case e.KeyData
+    '                Case Keys.Enter
+    '                    SendKeys.Send("{TAB}")
+    '                    e.Handled = True
+    '                Case Keys.Tab
+    '                    If EditingMode Then
+    '                        If iColumn = Columns.Count() - 1 OrElse iColumn = LastEditableColumn() OrElse iColumn = Columns.IndexOf(Columns("dgvInsertColumn")) Then
+    '                            ' if on the last editable column, move to the first editable column on the next row
+    '                            Dim r = Math.Min(iRow + 1, RowCount() - 1)
+    '                            Dim vc = FirstVisibleColumn
+    '                            Dim ec = FirstEditableColumn
+    '                            Dim c = If(ec > 0, ec, vc)
+    '                            CurrentCell = Me(c, r)
+    '                            e.Handled = True
+    '                        End If
+    '                    End If
 
-    '        If icolumn = Columns.Count Then
-    '            CurrentCell = Me(FirstVisibleColumn, Math.Min(irow, RowCount() - 1))
-    '        Else
-    '            CurrentCell = Me(icolumn, irow - 1)
+    '                Case Else
+    '                    e.Handled = False
+    '            End Select
     '        End If
+    '    Catch ex As Exception
+    '        Forms.MessageBox.Show(ex.Message)
+    '    End Try
+    '    'Return
+    'End Sub
 
+
+    'Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, keyData As System.Windows.Forms.Keys) As Boolean
+    '    If msg.WParam.ToInt32() = CInt(Keys.Enter) Then
+    '        SendKeys.Send("{Tab}")
     '        Return True
-    '    Else
-    '        If keyData = Keys.Down And irow = RowCount() - 1 Then
-    '            Try
-    '                CurrentCell = Me(FirstVisibleColumn, Math.Min(irow, RowCount() - 1))
-    '                if CurrentCell.OwningColumn.DataPropertyName.ToLower() = "sequence" Then
-    '                    CurrentCell.Value = RowCount()
-    '                End If
-    '            Catch ex As Exception
-
-    '            End Try
-
-    '        Else
-    '            Return MyBase.ProcessCmdKey(msg, keyData)
-    '        End If
     '    End If
+    '    Return MyBase.ProcessCmdKey(msg, keyData)
     'End Function
+
+    Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
+        Dim icolumn As Integer = CurrentCell.ColumnIndex
+        Dim irow As Integer = CurrentCell.RowIndex
+        If keyData = Keys.Enter Then
+            If icolumn = Columns.Count - 1 Then
+                CurrentCell = Me(FirstVisibleColumn, Math.Min(irow, RowCount() - 1))
+            Else
+                Dim selected As Boolean = False
+                For i = icolumn + 1 To Columns.Count() - 1
+                    If Me(i, irow).Visible AndAlso Not (Me(i, irow).OwningColumn.Name = "dgvInsertColumn") Then
+                        CurrentCell = Me(i, irow)
+                        selected = True
+                        Exit For
+                    End If
+                Next
+                If Not selected Then
+                    If irow + 1 <= Rows.Count - 1 Then
+                        For i = 0 To Columns.Count - 1
+                            If Me(i, irow + 1).Visible AndAlso Not (Me(i, irow + 1).OwningColumn.DataPropertyName.ToLower() = "sequence") Then
+                                CurrentCell = Me(i, irow + 1)
+                                Exit For
+                            End If
+                        Next
+                    End If
+                End If
+            End If
+            Return True
+        Else
+            If keyData = Keys.Down And irow = RowCount() - 1 Then
+                Try
+                    CurrentCell = Me(FirstVisibleColumn, Math.Min(irow, RowCount() - 1))
+                    If CurrentCell.OwningColumn.DataPropertyName.ToLower() = "sequence" Then
+                        CurrentCell.Value = RowCount()
+                    End If
+                Catch ex As Exception
+
+                End Try
+
+            Else
+                Return MyBase.ProcessCmdKey(msg, keyData)
+            End If
+        End If
+    End Function
 
     'Protected Overrides Function ProcessDataGridViewKey(ByVal e As System.Windows.Forms.KeyEventArgs) As Boolean
     '    ' Handle the ENTER key as if it were a tab key.
