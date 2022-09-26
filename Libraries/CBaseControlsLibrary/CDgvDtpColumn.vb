@@ -169,9 +169,6 @@ Public Class CDgvDtpEditingControl
         End Try
         Return retVal
 
-
-
-
         'Return EditingControlFormattedValue
         'If Value Is Nothing Then
         '    'this is important to return empty string ("") to force focus to the next control. otherwise if you return
@@ -214,8 +211,9 @@ Public Class CDgvDtpEditingControl
         ' Let the DateTimePicker handle the keys listed.
         Select Case key And Keys.KeyCode
 
-            Case Keys.Left, Keys.Up, Keys.Down, Keys.Right,
-                Keys.Home, Keys.End, Keys.PageDown, Keys.PageUp
+            Case Keys.Enter, Keys.Left, Keys.Right, Keys.Home, Keys.End
+                ' Keys.Up, Keys.Down
+                '    Keys.Home, Keys.End, Keys.PageDown, Keys.PageUp
 
                 Return True
 
