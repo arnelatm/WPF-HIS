@@ -153,6 +153,7 @@ Public Class CMaskedTextBox
         End If
         _oldText = Text
         SetPosition()
+        SendKeys.Send("{Home}")
     End Sub
 
     Public Sub LeaveHandler(sender As Object, e As EventArgs) Handles MyBase.Leave
@@ -373,8 +374,8 @@ Public Class CMaskedTextBox
         If Text Is Nothing OrElse Text = "" OrElse Text = EmptyMask Then
             SelectionStart = 0
             SelectionLength = 0
-        ElseIf SelectionStart > Text.Length Then
-            SelectionStart = Text.Length
+        ElseIf SelectionStart >= Text.Length Then
+            SelectionStart = Text.Length - 1
         End If
     End Sub
 

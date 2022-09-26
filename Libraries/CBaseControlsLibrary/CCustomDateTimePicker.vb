@@ -27,7 +27,6 @@ Public Class CCustomDateTimePicker
     Private _origCultureStr As String
     Private _tmpValueChanged As Boolean = False
     Private _dtpDropCount As Integer = 0
-    Private _programmaticChange As Boolean = False
     Private _initialized As Boolean = False
     Private _curCulture As CultureInfo
     Private _cultureInfoDisplayName As String = ""
@@ -476,22 +475,14 @@ Public Class CCustomDateTimePicker
         Messaging.ShowPmMessage(True, "MsgErroneousDate", {"enteredDate", cText, "calendarName", cCalendarName})
     End Sub
 
-    Public Function GetErrorMessage()
-        Dim errorMessage As String = ""
-        ToolTip1.ToolTipTitle = "Input Rejected"
-        Dim calendarName As String = Messaging.TranslateCaption(CalendarNameInEnglish(_targetCulture))
-        Dim cText = txtDate.Text
-        Dim cCalendarName As String = calendarName
-        errorMessage = Messaging.GetParametrizedMessage(True, "MsgErroneousDate", {"enteredDate", cText, "calendarName", cCalendarName})
-        Return errorMessage
-    End Function
+
 
     Private Sub InformUserOfInvalidTime()
         ToolTip1.ToolTipTitle = "Input Rejected"
         Messaging.Show(True, "MsgErroneousTime")
     End Sub
 
-    Private Function CalendarNameInEnglish(targetCulture As CultureInfo)
+    Public Function CalendarNameInEnglish(targetCulture As CultureInfo)
         Dim calendarName As String = ""
         If targetCulture.DateTimeFormat.NativeCalendarName = "تقويم ام القرى" Then
             calendarName = $"Umm al-Qura Calendar"
@@ -512,7 +503,6 @@ Public Class CCustomDateTimePicker
     End Sub
 
     Private Sub OnDtp_Enter(sender As Object, e As EventArgs) Handles MyBase.Enter
-        txtDate.SetPosition()
         If txtDate.Text Is Nothing OrElse txtDate.Text = "" OrElse txtDate.Text.TrimEnd() = EmptyMask Then
             _lastDate = Nothing
         Else
@@ -534,6 +524,7 @@ Public Class CCustomDateTimePicker
                 End Try
             End If
         End If
+        txtDate.SetPosition()
     End Sub
 
     Public Sub CDtpPicker_Validating(sender As Object, e As CancelEventArgs) Handles txtDate.Validating, txtLongDate.Validating, txtTime.Validating
@@ -605,7 +596,6 @@ Public Class CCustomDateTimePicker
                 If txtDate.Text Is Nothing OrElse txtDate.Text = "" OrElse txtDate.Text.TrimEnd() = EmptyMask Then
                     txtLongDate.Text = ""
                     txtTime.Text = ""
-                    '_programmaticChange = False
                 Else
                     txtDate.Text = PadWithZeroSingleDigitDate(DateTime.Parse(txtDate.Text).ToShortDateString())
                 End If
