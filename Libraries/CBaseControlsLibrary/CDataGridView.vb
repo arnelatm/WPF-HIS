@@ -315,6 +315,7 @@ Public Class CDataGridView
             If ErrorMessage IsNot Nothing Then
                 Windows.MessageBox.Show(ErrorMessage)
             End If
+            ErrorMessage = Nothing
             Return True
             'Dim currentColumnIndex As Int16
             'currentColumnIndex = CurrentCell.ColumnIndex()

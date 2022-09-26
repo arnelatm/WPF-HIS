@@ -134,7 +134,8 @@ Public Class CForm
         If e.KeyCode = Keys.Enter Then
             e.SuppressKeyPress = True
             e.Handled = True
-            SendKeys.SendWait("{TAB}")
+            ProcessTabKey(True)
+            'SendKeys.SendWait("{TAB}")
         End If
     End Sub
 

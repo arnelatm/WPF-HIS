@@ -50,6 +50,8 @@ Partial Class TestForm
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtSortKey = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.CMaskedTextBox1 = New AATM.Libraries.CBaseControlsLibrary.CMaskedTextBox()
+        Me.CMaskedTextBox2 = New AATM.Libraries.CBaseControlsLibrary.CMaskedTextBox()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -174,6 +176,8 @@ Partial Class TestForm
         Me.CFlowLayout1.Controls.Add(Me.txtNotes)
         Me.CFlowLayout1.Controls.Add(Me.txtSortKey)
         Me.CFlowLayout1.Controls.Add(Me.TextBox2)
+        Me.CFlowLayout1.Controls.Add(Me.CMaskedTextBox1)
+        Me.CFlowLayout1.Controls.Add(Me.CMaskedTextBox2)
         Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CFlowLayout1.Location = New System.Drawing.Point(0, 0)
         Me.CFlowLayout1.MaximumSize = New System.Drawing.Size(631, 0)
@@ -572,6 +576,72 @@ Partial Class TestForm
         Me.txtSortKey.ValueIsMandatory = True
         Me.txtSortKey.Visible = False
         '
+        'CMaskedTextBox1
+        '
+        Me.CMaskedTextBox1.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.CMaskedTextBox1.BegFindValue = Nothing
+        Me.CMaskedTextBox1.DateField = False
+        Me.CMaskedTextBox1.DateTimePickerParent = Nothing
+        Me.CMaskedTextBox1.DefaultValue = Nothing
+        Me.CMaskedTextBox1.DisplayOnly = False
+        Me.CMaskedTextBox1.EditingMode = False
+        Me.CMaskedTextBox1.EditsAllowed = False
+        Me.CMaskedTextBox1.EmptyMask = ""
+        Me.CMaskedTextBox1.EndFindValue = Nothing
+        Me.CMaskedTextBox1.FieldDescription = Nothing
+        Me.CMaskedTextBox1.FieldName = Nothing
+        Me.CMaskedTextBox1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[Date]
+        Me.CMaskedTextBox1.FindEnabled = False
+        Me.CMaskedTextBox1.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite
+        Me.CMaskedTextBox1.LinkedLabel = Nothing
+        Me.CMaskedTextBox1.Location = New System.Drawing.Point(326, 227)
+        Me.CMaskedTextBox1.MaximumValue = Nothing
+        Me.CMaskedTextBox1.MinimumValue = Nothing
+        Me.CMaskedTextBox1.Name = "CMaskedTextBox1"
+        Me.CMaskedTextBox1.SearchField = Nothing
+        Me.CMaskedTextBox1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.CMaskedTextBox1.SecurityKey = Nothing
+        Me.CMaskedTextBox1.Size = New System.Drawing.Size(200, 20)
+        Me.CMaskedTextBox1.TabIndex = 172
+        Me.CMaskedTextBox1.Translatable = False
+        Me.CMaskedTextBox1.ValueIsMandatory = False
+        Me.CMaskedTextBox1.ValueIsNullable = False
+        Me.CMaskedTextBox1.ValueIsNumeric = False
+        '
+        'CMaskedTextBox2
+        '
+        Me.CMaskedTextBox2.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.CMaskedTextBox2.BegFindValue = Nothing
+        Me.CMaskedTextBox2.DateField = False
+        Me.CMaskedTextBox2.DateTimePickerParent = Nothing
+        Me.CMaskedTextBox2.DefaultValue = Nothing
+        Me.CMaskedTextBox2.DisplayOnly = False
+        Me.CMaskedTextBox2.EditingMode = False
+        Me.CMaskedTextBox2.EditsAllowed = False
+        Me.CMaskedTextBox2.EmptyMask = ""
+        Me.CMaskedTextBox2.EndFindValue = Nothing
+        Me.CMaskedTextBox2.FieldDescription = Nothing
+        Me.CMaskedTextBox2.FieldName = Nothing
+        Me.CMaskedTextBox2.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[Date]
+        Me.CMaskedTextBox2.FindEnabled = False
+        Me.CMaskedTextBox2.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite
+        Me.CMaskedTextBox2.LinkedLabel = Nothing
+        Me.CMaskedTextBox2.Location = New System.Drawing.Point(3, 253)
+        Me.CMaskedTextBox2.Mask = "00/00/0000"
+        Me.CMaskedTextBox2.MaximumValue = Nothing
+        Me.CMaskedTextBox2.MinimumValue = Nothing
+        Me.CMaskedTextBox2.Name = "CMaskedTextBox2"
+        Me.CMaskedTextBox2.SearchField = Nothing
+        Me.CMaskedTextBox2.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.CMaskedTextBox2.SecurityKey = Nothing
+        Me.CMaskedTextBox2.Size = New System.Drawing.Size(171, 20)
+        Me.CMaskedTextBox2.TabIndex = 173
+        Me.CMaskedTextBox2.Translatable = False
+        Me.CMaskedTextBox2.ValidatingType = GetType(Date)
+        Me.CMaskedTextBox2.ValueIsMandatory = False
+        Me.CMaskedTextBox2.ValueIsNullable = False
+        Me.CMaskedTextBox2.ValueIsNumeric = False
+        '
         'TestForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -627,4 +697,6 @@ Partial Class TestForm
     Friend WithEvents lblNotes As CLabel
     Friend WithEvents txtNotes As CTextBox
     Friend WithEvents txtSortKey As CTextBox
+    Friend WithEvents CMaskedTextBox1 As CMaskedTextBox
+    Friend WithEvents CMaskedTextBox2 As CMaskedTextBox
 End Class

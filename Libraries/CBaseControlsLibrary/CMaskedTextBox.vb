@@ -38,6 +38,19 @@ Public Class CMaskedTextBox
 
     Public Property DateTimePickerParent As Control = Nothing
 
+    Public Sub New()
+        MyBase.New()
+        'Dim myCIintl As New CultureInfo("en-GB", False)
+        Text = ""
+        Width = 200
+        DisplayOnly = False
+        CausesValidation = True
+        'Culture = myCIintl
+        BackColor = SystemColors.ControlLight
+        ContextMenuStrip = ContextMenuStrip1
+        InsertKeyMode = InsertKeyMode.Overwrite
+    End Sub
+
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get
             Return _editingMode
@@ -130,18 +143,6 @@ Public Class CMaskedTextBox
     <Browsable(True)>
     Public Property SearchField As String
 
-    Public Sub New()
-        MyBase.New()
-        'Dim myCIintl As New CultureInfo("en-GB", False)
-        Text = ""
-        Width = 200
-        DisplayOnly = False
-        CausesValidation = True
-        'Culture = myCIintl
-        BackColor = SystemColors.ControlLight
-        ContextMenuStrip = ContextMenuStrip1
-    End Sub
-
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
         If EditingMode And Not DisplayOnly Then
             ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
@@ -151,6 +152,7 @@ Public Class CMaskedTextBox
             BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         End If
         _oldText = Text
+        SetPosition()
     End Sub
 
     Public Sub LeaveHandler(sender As Object, e As EventArgs) Handles MyBase.Leave
@@ -162,11 +164,6 @@ Public Class CMaskedTextBox
             BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         End If
     End Sub
-
-    'Public Sub DisableHandler(Sender As Object, e As EventArgs) Handles MyBase.EnabledChanged
-    '    ForeColor = CType(IIf(Enabled, Color.Black, SystemColors.ControlLight), Color)
-    '    BackColor = CType(IIf(Enabled, Color.White, SystemColors.ControlLight), Color)
-    'End Sub
 
     Public Sub CMaskedTextBox_Validating(sender As Object, e As CancelEventArgs) Handles MyBase.Validating
         Dim errorMsg As String
@@ -281,7 +278,6 @@ Public Class CMaskedTextBox
         ContextMenuStrip1.Items.Add(menuItemDelete)
         menuItemDelete.ShortcutKeys = Keys.Delete
         menuItemDelete.ShortcutKeyDisplayString = "Delete"
-        'menuItemDelete.Enabled = (IIf(SampleTextBox.SelectionLength = 0, False, True))
         AddHandler menuItemDelete.Click, AddressOf MenuItemDelete_Click
 
         ContextMenuStrip1.Items.Add(separator)
@@ -292,7 +288,6 @@ Public Class CMaskedTextBox
         ContextMenuStrip1.Items.Add(menuItemSelectAll)
         menuItemSelectAll.ShortcutKeys = Keys.Control Or Keys.A
         menuItemSelectAll.ShortcutKeyDisplayString = "Ctrl-A"
-        'menuItemSelectAll.Enabled = (IIf(SampleTextBox.SelectionLength = SampleTextBox.Text.Length Or SampleTextBox.SelectionLength = SampleTextBox.Text.Trim.Length, False, True))
         AddHandler menuItemSelectAll.Click, AddressOf MenuItemSelectAll_Click
 
         ContextMenuStrip1.Items.Add(separator)
@@ -340,10 +335,6 @@ Public Class CMaskedTextBox
         Invoker.InvokeFunction(myForm, "FindFieldNew", {Me})
     End Sub
 
-    'Public Function GetTextToSearch() As String
-    '    Return _textToSearch
-    'End Function
-
     Private Sub MenuItemCut_Click()
         Cut()
     End Sub
@@ -373,24 +364,24 @@ Public Class CMaskedTextBox
         End If
     End Sub
 
-    'Private Sub CMaskedTextBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles MyBase.KeyPress
-    '    If e.KeyChar = Chr(13) Then
-    '        e.Handled = True
-    '        SendKeys.Send("{TAB}")
-    '        '    ElseIf e.e.Control AndAlso e.KeyCode = Keys.Z Then
-    '        '        '        Text = _oldText
-    '        '        '    End If
-    '    End If
-    'End Sub
+    Private Sub MaskedTextBox1_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Click
+        SetPosition()
+    End Sub
 
-    Private Sub CMaskedTextBox_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+    Public Sub SetPosition()
+        InsertKeyMode = InsertKeyMode.Overwrite
+        If Text Is Nothing OrElse Text = "" OrElse Text = EmptyMask Then
+            SelectionStart = 0
+            SelectionLength = 0
+        ElseIf SelectionStart > Text.Length Then
+            SelectionStart = Text.Length
+        End If
+    End Sub
+
+    Private Sub CMaskedTextBox_KeyPress(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
         If e.KeyCode = Keys.Enter Then
-            SendKeys.Send("{TAB}")
             e.Handled = True
-            e.SuppressKeyPress = True
-            'ElseIf e.Control AndAlso e.KeyCode = Keys.Z Then
-            '    'If e.Control AndAlso e.KeyCode = Keys.Z Then
-            '    Text = _oldText
+            SendKeys.Send("{TAB}")
         End If
     End Sub
 
@@ -402,10 +393,6 @@ Public Class CMaskedTextBox
             _translatable = value
         End Set
     End Property
-
-    'Public Sub MakeEditable(editableControl As Boolean) Implements IEntryControl.MakeEditable
-    '    EditsAllowed = Not editableControl
-    'End Sub
 
     Public Property EditsAllowed As Boolean
 
@@ -463,15 +450,4 @@ Public Class CMaskedTextBox
 
 #End Region
 
-    'Public Sub MakeVisible(visibleControl As Boolean) Implements IEntryControl.MakeVisible
-    '    MakeVisible(visibleControl)
-    'End Sub
-
-    'Public Sub MakeViewable(ViewableControl As Boolean) Implements IEntryControl.MakeViewable
-    '    ' not applicable
-    'End Sub
-
-    'Public Sub MakeSelectable(selectableControl As Boolean) Implements IEntryControl.MakeSelectable
-    '    Enabled = selectableControl
-    'End Sub
 End Class
