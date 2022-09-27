@@ -489,7 +489,6 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-
 #Region "DataBindings"
 
         Private Sub BindEmployeeDeduction()
@@ -577,7 +576,6 @@ Namespace PresentationLayer.Views.Forms
             'ResumeLayout()
         End Sub
 
-
         Private Sub BindEmployeeDocument()
             'SuspendLayout()
             bsDocuments.DataSource = Nothing
@@ -618,6 +616,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvLeaveIdNo.ValueMember = "IdNo"
             End With
         End Sub
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -774,7 +773,6 @@ Namespace PresentationLayer.Views.Forms
                 End If
             End If
         End Sub
-
 
         Private Sub DisplayImage(cFileName As String, cRemarks As String)
             If cFileName Is Nothing Or cFileName = "" Then

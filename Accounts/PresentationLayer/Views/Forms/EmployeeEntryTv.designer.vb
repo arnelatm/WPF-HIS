@@ -1171,7 +1171,6 @@
             Me.DataGridViewPhoneDisplay.DisplayOnly = False
             Me.DataGridViewPhoneDisplay.Ea = Nothing
             Me.DataGridViewPhoneDisplay.EditingMode = False
-            Me.DataGridViewPhoneDisplay.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             Me.DataGridViewPhoneDisplay.EndFindValue = Nothing
             Me.DataGridViewPhoneDisplay.FieldDescription = Nothing
             Me.DataGridViewPhoneDisplay.FieldName = Nothing
@@ -3551,7 +3550,7 @@
             Me.DataGridViewDocuments.Dock = System.Windows.Forms.DockStyle.Fill
             Me.DataGridViewDocuments.Ea = Nothing
             Me.DataGridViewDocuments.EditingMode = False
-            Me.DataGridViewDocuments.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewDocuments.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
             Me.DataGridViewDocuments.EndFindValue = Nothing
             Me.DataGridViewDocuments.FieldDescription = Nothing
             Me.DataGridViewDocuments.FieldName = Nothing
