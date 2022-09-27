@@ -475,8 +475,6 @@ Public Class CCustomDateTimePicker
         Messaging.ShowPmMessage(True, "MsgErroneousDate", {"enteredDate", cText, "calendarName", cCalendarName})
     End Sub
 
-
-
     Private Sub InformUserOfInvalidTime()
         ToolTip1.ToolTipTitle = "Input Rejected"
         Messaging.Show(True, "MsgErroneousTime")
@@ -715,9 +713,8 @@ Public Class CCustomDateTimePicker
     End Sub
 
     Private Sub CCustomDateTimePicker_KeyDown(sender As Object, e As KeyEventArgs) Handles txtDate.KeyDown, txtLongDate.KeyDown, txtTime.KeyDown
-        'ToolTip1.Hide(txtDate)
         If e.KeyCode = Keys.Enter Then
-            ProcessTabKey(True)
+            SendKeys.Send("{TAB}")
             e.Handled = True
         ElseIf e.Control AndAlso e.KeyCode = Keys.Z Then
             e.Handled = True

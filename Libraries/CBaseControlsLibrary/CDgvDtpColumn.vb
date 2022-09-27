@@ -1,13 +1,28 @@
-﻿Imports System.Globalization
+﻿Imports System.ComponentModel
+Imports System.Globalization
 Imports System.Windows.Forms
+Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CDgvDtpColumn
     Inherits DataGridViewColumn
+    Implements IEntryControl
+
+    Private _displayOnly As Boolean
+    Private _editingMode As Boolean
+    Private _translatable As Boolean = False
 
     Public Sub New()
-        MyBase.New(New CDgvDtpCell())
+        CellTemplate = New CDgvDtpCell()
     End Sub
+
+    Public Overrides Function Clone() As Object
+        Dim copy As CDgvDtpColumn = TryCast(MyBase.Clone(), CDgvDtpColumn)
+        copy.DisplayOnly = DisplayOnly
+        copy.EditingMode = EditingMode
+        copy.Translatable = Translatable
+        Return copy
+    End Function
 
     Public Overrides Property CellTemplate() As DataGridViewCell
         Get
@@ -26,19 +41,79 @@ Public Class CDgvDtpColumn
         End Set
     End Property
 
+    ' ReSharper disable once LocalizableElement
+    <DisplayName("DisplayOnly")>
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)>
+    <EditorBrowsable(EditorBrowsableState.Always), Bindable(True)>
+    <Description("Set to True to specify that this control's value cannot be edited or changed.")>
+    <Browsable(True)>
+    Public Property DisplayOnly As Boolean
+        Get
+            Return _displayOnly
+        End Get
+        Set(value As Boolean)
+            _displayOnly = value
+            If value Then
+                _editingMode = True
+            End If
+        End Set
+    End Property
+
+    Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
+        Get
+            Return _editingMode
+        End Get
+        Set(value As Boolean)
+            _editingMode = value
+            If value Then
+                If DisplayOnly Then
+                    [ReadOnly] = True
+                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                Else
+                    [ReadOnly] = False
+                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                    [ReadOnly] = False
+                End If
+            Else
+                [ReadOnly] = True
+                DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            End If
+        End Set
+    End Property
+
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
+        Get
+            Return False
+        End Get
+        Set(value As Boolean)
+            _translatable = value
+        End Set
+
+    End Property
+
 End Class
 
 Public Class CDgvDtpCell
     Inherits DataGridViewTextBoxCell
+    Implements IEntryControl
+
+    Private _editingMode As Boolean
+    Private _displayOnly As Boolean
+    Private _translatable As Boolean = False
 
     Public Sub New()
         ' Use the short date format.
         Me.Style.Format = "d"
     End Sub
 
-    ' You must also override this method to initialize the ComboBox instance...
+    ' You must also override this method to initialize the CDgvDtpColumn instance...
     ' This method will be called each time a cell in the column enters edit-mode,
-    ' so you can fill the ComboBox instance based on the value of the edited cell
+    ' so you can fill the CDgvDtpColumn instance based on the value of the edited cell
     Public Overrides Sub InitializeEditingControl(ByVal rowIndex As Integer,
         ByVal initialFormattedValue As Object,
         ByVal dataGridViewCellStyle As DataGridViewCellStyle)
@@ -65,6 +140,24 @@ Public Class CDgvDtpCell
         End If
     End Sub
 
+    Public Property CellEditingControl As CDgvDtpEditingControl
+
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to True to specify that this control is Read Only .")>
+    <Browsable(True)>
+    Public Property DisplayOnly As Boolean
+        Get
+            Return _displayOnly
+        End Get
+        Set(val As Boolean)
+            _displayOnly = val
+            If val Then
+                _editingMode = True
+            End If
+        End Set
+    End Property
+
     ' You must override the EditType property to return the cell's
     ' editing control type, which is your custom control class...
     Public Overrides ReadOnly Property EditType() As Type
@@ -86,6 +179,33 @@ Public Class CDgvDtpCell
             ' Use the current date and time as the default value.
             Return Nothing
         End Get
+    End Property
+
+    Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
+        Get
+            Return _editingMode
+        End Get
+        Set(eValue As Boolean)
+            _editingMode = Value
+            If eValue Or DisplayOnly Then
+                Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                [ReadOnly] = True
+            Else
+                Style.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                Style.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                [ReadOnly] = False
+            End If
+        End Set
+    End Property
+
+    Public Property Translatable As Boolean Implements IEntryControl.Translatable
+        Get
+            Return False
+        End Get
+        Set(tValue As Boolean)
+            _translatable = tValue
+        End Set
     End Property
 
 End Class
@@ -161,33 +281,12 @@ Public Class CDgvDtpEditingControl
             End If
             _switch = 0
         Catch ex As Exception
-            PassErrorMessageToGrid()
+            'PassErrorMessageToGrid()
             retVal = Nothing
         End Try
         Return retVal
 
     End Function
-
-    Private Sub PassErrorMessageToGrid()
-        Dim errorMessage As String = ""
-        ToolTip1.ToolTipTitle = "Input Rejected"
-        Dim calendarName As String = MessagingLibrary.Messaging.TranslateCaption(CalendarNameInEnglish(CalendarCulture))
-        Dim cText = txtDate.Text
-        Dim cCalendarName As String = calendarName
-        Dim myGridView As CDataGridView = DirectCast(Me.EditingControlDataGridView, AATM.Libraries.CBaseControlsLibrary.CDataGridView)
-        myGridView.ErrorMessageKey = "MsgErroneousDate"
-        myGridView.ErrorMessageParameters = {"enteredDate", cText, "calendarName", cCalendarName}
-    End Sub
-
-    'Public Function GetErrorMessage()
-    '    Dim errorMessage As String = ""
-    '    ToolTip1.ToolTipTitle = "Input Rejected"
-    '    Dim calendarName As String = MessagingLibrary.Messaging.TranslateCaption(CalendarNameInEnglish(CalendarCulture))
-    '    Dim cText = txtDate.Text
-    '    Dim cCalendarName As String = calendarName
-    '    errorMessage = MessagingLibrary.Messaging.GetParametrizedMessage(True, "MsgErroneousDate", {"enteredDate", cText, "calendarName", cCalendarName})
-    '    Return errorMessage
-    'End Function
 
     Public Sub ApplyCellStyleToEditingControl(ByVal dataGridViewCellStyle As _
         DataGridViewCellStyle) _
@@ -200,13 +299,6 @@ Public Class CDgvDtpEditingControl
     End Sub
 
     Public Property EditingControlRowIndex As Integer Implements IDataGridViewEditingControl.EditingControlRowIndex
-        Get
-            Return _rowIndexNum
-        End Get
-        Set(ByVal value As Integer)
-            _rowIndexNum = value
-        End Set
-    End Property
 
     Public Function EditingControlWantsInputKey(ByVal key As Keys,
         ByVal dataGridViewWantsInputKey As Boolean) As Boolean _
@@ -230,6 +322,16 @@ Public Class CDgvDtpEditingControl
     Public Sub PrepareEditingControlForEdit(ByVal selectAll As Boolean) _
         Implements IDataGridViewEditingControl.PrepareEditingControlForEdit
 
+        Focus()
+        If selectAll Then
+            If ShowLongDate Then
+                txtLongDate.SelectAll()
+            Else
+                txtDate.InsertKeyMode = InsertKeyMode.Overwrite
+                txtDate.SelectAll()
+            End If
+            Focus()
+        End If
         ' No preparation needs to be done.
 
     End Sub
