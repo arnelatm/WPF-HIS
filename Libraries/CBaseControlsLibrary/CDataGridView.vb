@@ -376,7 +376,7 @@ Public Class CDataGridView
     'End Function
 
     Private Sub cDataGridView_DefaultValuesNeeded(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowEventArgs) Handles Me.DefaultValuesNeeded
-        If EditMode And (SequenceColumn IsNot Nothing AndAlso SequenceColumn <> "") Then
+        If (SequenceColumn IsNot Nothing AndAlso SequenceColumn <> "") Then
             If Columns(SequenceColumn) IsNot Nothing Then
                 Dim nRowColumn = Columns(SequenceColumn).Index()
                 With e.Row
