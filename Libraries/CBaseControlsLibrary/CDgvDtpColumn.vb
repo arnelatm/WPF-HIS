@@ -120,25 +120,108 @@ Public Class CDgvDtpCell
 
         ' Set the value of the editing control to the current cell value.
         MyBase.InitializeEditingControl(rowIndex, initialFormattedValue, dataGridViewCellStyle)
-
         Dim ctl As CDgvDtpEditingControl = CType(DataGridView.EditingControl, CDgvDtpEditingControl)
+        If ctl IsNot Nothing Then
+            If (GetInheritedState(rowIndex) And DataGridViewElementStates.Selected) = DataGridViewElementStates.Selected Then
+                Me.DataGridView.EditingPanel.BackColor = dataGridViewCellStyle.SelectionBackColor
+            End If
+            ' Populate the TextBox, passing the instance as a parameter
+            ' Set the value of the editing control instance to the current cell value.
 
-        ' Make sure you have an instance...
-        'If ctl IsNot Nothing Then
-        ' Populate the TextBox, passing the instance as a parameter
-        ' Set the value of the editing control instance to the current cell value.
+            Dim initialFormattedValueStr As String = TryCast(initialFormattedValue, String)
 
-        ' Use the default row value when Value property is null.
-        If (Me.Value Is Nothing) Then
-            ctl.Value = CType(DefaultNewRowValue, DateTime?)
-        Else
-            Try
-                ctl.Value = CType(Me.Value, DateTime?)
-            Catch ex As Exception
-                ctl.Value = Now()
-            End Try
+            If initialFormattedValueStr Is Nothing Then
+                initialFormattedValueStr = String.Empty
+                ctl.Value = CType(DefaultNewRowValue, DateTime?)
+            Else
+                Try
+                    ctl.Value = CType(initialFormattedValueStr, DateTime?)
+                Catch ex As Exception
+                    ctl.Value = Nothing
+                End Try
+            End If
+
+            'If (Me.Value Is Nothing) Then
+            '    ctl.Value = CType(DefaultNewRowValue, DateTime?)
+            'Else
+            '    Try
+            '        ctl.Value = CType(Me.Value, DateTime?)
+            '    Catch ex As Exception
+            '        ctl.Value = Now()
+            '    End Try
+            'End If
         End If
     End Sub
+
+    'Public Overrides Sub InitializeEditingControl(ByVal rowIndex As Integer, ByVal initialFormattedValue As Object, ByVal dataGridViewCellStyle As DataGridViewCellStyle)
+    '    'Debug.Assert(Me.DataGridView IsNot Nothing AndAlso Me.DataGridView.EditingPanel IsNot Nothing AndAlso Me.DataGridView.EditingControl IsNot Nothing)
+    '    'Debug.Assert(Not Me.[ReadOnly])
+    '    MyBase.InitializeEditingControl(rowIndex, initialFormattedValue, dataGridViewCellStyle)
+    '    Dim ctl As CDgvDtpEditingControl = TryCast(Me.DataGridView.EditingControl, CDgvDtpEditingControl)
+
+    '    If ctl IsNot Nothing Then
+
+    '        If (GetInheritedState(rowIndex) And DataGridViewElementStates.Selected) = DataGridViewElementStates.Selected Then
+    '            Me.DataGridView.EditingPanel.BackColor = dataGridViewCellStyle.SelectionBackColor
+    '        End If
+
+    '        'Dim h As IntPtr
+
+    '        'If ComboBox.ParentInternal IsNot Nothing Then
+    '        '    h = ComboBox.ParentInternal.Handle
+    '        'End If
+
+    '        'h = ComboBox.Handle
+    '        'ComboBox.DropDownStyle = ComboBoxStyle.DropDownList
+    '        'ComboBox.FormattingEnabled = True
+    '        'ComboBox.MaxDropDownItems = Me.MaxDropDownItems
+    '        'ComboBox.DropDownWidth = Me.DropDownWidth
+    '        'ComboBox.DataSource = Nothing
+    '        'ComboBox.ValueMember = Nothing
+    '        'ComboBox.Items.Clear()
+    '        'ComboBox.DataSource = Me.DataSource
+    '        'ComboBox.DisplayMember = Me.DisplayMember
+    '        'ComboBox.ValueMember = Me.ValueMember
+
+    '        'If Me.HasItems AndAlso Me.DataSource Is Nothing AndAlso Me.Items.Count > 0 Then
+    '        '    ComboBox.Items.AddRange(Me.Items.InnerArray.ToArray())
+    '        'End If
+
+    '        'ComboBox.Sorted = Me.Sorted
+    '        'ComboBox.FlatStyle = Me.FlatStyle
+
+    '        'If Me.AutoComplete Then
+    '        '    ComboBox.AutoCompleteSource = AutoCompleteSource.ListItems
+    '        '    ComboBox.AutoCompleteMode = AutoCompleteMode.Append
+    '        'Else
+    '        '    ComboBox.AutoCompleteMode = AutoCompleteMode.None
+    '        '    ComboBox.AutoCompleteSource = AutoCompleteSource.None
+    '        'End If
+
+    '        'Dim initialFormattedValueStr As String = TryCast(initialFormattedValue, String)
+
+    '        'If initialFormattedValueStr Is Nothing Then
+    '        '    initialFormattedValueStr = String.Empty
+    '        'End If
+
+    '        'ComboBox.Text = initialFormattedValueStr
+
+    '        'If (Me.flags And DATAGRIDVIEWCOMBOBOXCELL_dropDownHookedUp) = &H0 Then
+    '        '    ComboBox.DropDown += New EventHandler(ComboBox_DropDown)
+    '        '    Me.flags = Me.flags Or CByte(DATAGRIDVIEWCOMBOBOXCELL_dropDownHookedUp)
+    '        'End If
+
+    '        'cachedDropDownWidth = -1
+    '        'Me.EditingComboBox = TryCast(Me.DataGridView.EditingControl, DataGridViewComboBoxEditingControl)
+
+    '        'If GetHeight(rowIndex) > 21 Then
+    '        '    Dim rectBottomSection As Rectangle = Me.DataGridView.GetCellDisplayRectangle(Me.ColumnIndex, rowIndex, True)
+    '        '    rectBottomSection.Y += 21
+    '        '    rectBottomSection.Height -= 21
+    '        '    Me.DataGridView.Invalidate(rectBottomSection)
+    '        'End If
+    '    End If
+    'End Sub
 
     Public Property CellEditingControl As CDgvDtpEditingControl
 
