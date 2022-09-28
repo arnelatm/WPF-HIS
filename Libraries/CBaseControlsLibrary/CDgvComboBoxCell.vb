@@ -17,9 +17,6 @@ Public Class CDgvComboBoxCell
         End Get
     End Property
 
-    Public Overrides Sub InitializeEditingControl(ByVal rowIndex As Integer, ByVal formattedValue As Object, ByVal cellStyle As DataGridViewCellStyle)
-
-    End Sub
 
     '' You must also override this method to initialize the ComboBox instance...
     '' This method will be called each time a cell in the column enters edit-mode,
