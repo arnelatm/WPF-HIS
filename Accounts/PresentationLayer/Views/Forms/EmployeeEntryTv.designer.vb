@@ -902,6 +902,7 @@
             '
             'dtpBirthDate
             '
+            Me.dtpBirthDate.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
             Me.dtpBirthDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
             Me.dtpBirthDate.DefaultValue = Nothing
             Me.dtpBirthDate.DisplayOnly = False
@@ -1171,6 +1172,7 @@
             Me.DataGridViewPhoneDisplay.DisplayOnly = False
             Me.DataGridViewPhoneDisplay.Ea = Nothing
             Me.DataGridViewPhoneDisplay.EditingMode = False
+            Me.DataGridViewPhoneDisplay.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
             Me.DataGridViewPhoneDisplay.EndFindValue = Nothing
             Me.DataGridViewPhoneDisplay.FieldDescription = Nothing
             Me.DataGridViewPhoneDisplay.FieldName = Nothing
@@ -1769,6 +1771,7 @@
             '
             'dtpHiredDate
             '
+            Me.dtpHiredDate.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
             Me.dtpHiredDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
             Me.dtpHiredDate.DefaultValue = Nothing
             Me.dtpHiredDate.DisplayOnly = False
@@ -1779,7 +1782,7 @@
             Me.dtpHiredDate.Font = New System.Drawing.Font("Tahoma", 9.75!)
             Me.dtpHiredDate.ForeColor = System.Drawing.Color.Black
             Me.dtpHiredDate.LinkedLabel = Nothing
-            Me.dtpHiredDate.Location = New System.Drawing.Point(179, 3)
+            Me.dtpHiredDate.Location = New System.Drawing.Point(3, 3)
             Me.dtpHiredDate.Margin = New System.Windows.Forms.Padding(0)
             Me.dtpHiredDate.Name = "dtpHiredDate"
             Me.dtpHiredDate.ReadOnlyDp = False
@@ -1800,7 +1803,7 @@
             Me.lblReleasedDate.EditingMode = False
             Me.lblReleasedDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblReleasedDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblReleasedDate.Location = New System.Drawing.Point(4, 30)
+            Me.lblReleasedDate.Location = New System.Drawing.Point(4, 4)
             Me.lblReleasedDate.Margin = New System.Windows.Forms.Padding(1)
             Me.lblReleasedDate.Name = "lblReleasedDate"
             Me.lblReleasedDate.Size = New System.Drawing.Size(174, 24)
@@ -1811,6 +1814,7 @@
             '
             'dtpReleasedDate
             '
+            Me.dtpReleasedDate.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
             Me.dtpReleasedDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
             Me.dtpReleasedDate.DefaultValue = Nothing
             Me.dtpReleasedDate.DisplayOnly = False
@@ -1821,7 +1825,7 @@
             Me.dtpReleasedDate.Font = New System.Drawing.Font("Tahoma", 9.75!)
             Me.dtpReleasedDate.ForeColor = System.Drawing.Color.Black
             Me.dtpReleasedDate.LinkedLabel = Nothing
-            Me.dtpReleasedDate.Location = New System.Drawing.Point(179, 29)
+            Me.dtpReleasedDate.Location = New System.Drawing.Point(3, 3)
             Me.dtpReleasedDate.Margin = New System.Windows.Forms.Padding(0)
             Me.dtpReleasedDate.Name = "dtpReleasedDate"
             Me.dtpReleasedDate.ReadOnlyDp = False
@@ -1842,7 +1846,7 @@
             Me.lblDepartmentIdNo.EditingMode = False
             Me.lblDepartmentIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblDepartmentIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblDepartmentIdNo.Location = New System.Drawing.Point(4, 56)
+            Me.lblDepartmentIdNo.Location = New System.Drawing.Point(4, 4)
             Me.lblDepartmentIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblDepartmentIdNo.Name = "lblDepartmentIdNo"
             Me.lblDepartmentIdNo.Size = New System.Drawing.Size(174, 24)
@@ -1875,7 +1879,7 @@
             Me.cacDepartmentIdNo.IgnoreCase = False
             Me.cacDepartmentIdNo.IntegralHeight = False
             Me.cacDepartmentIdNo.LinkedLabel = Me.lblDepartmentIdNo
-            Me.cacDepartmentIdNo.Location = New System.Drawing.Point(179, 56)
+            Me.cacDepartmentIdNo.Location = New System.Drawing.Point(3, 4)
             Me.cacDepartmentIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
             Me.cacDepartmentIdNo.Name = "cacDepartmentIdNo"
             Me.cacDepartmentIdNo.OldValue = 0
@@ -1902,7 +1906,7 @@
             Me.CLabel2.EditingMode = False
             Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.CLabel2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.CLabel2.Location = New System.Drawing.Point(4, 82)
+            Me.CLabel2.Location = New System.Drawing.Point(4, 4)
             Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel2.Name = "CLabel2"
             Me.CLabel2.Size = New System.Drawing.Size(175, 24)
@@ -1935,7 +1939,7 @@
             Me.cacDesignationIdNo.IgnoreCase = False
             Me.cacDesignationIdNo.IntegralHeight = False
             Me.cacDesignationIdNo.LinkedLabel = Nothing
-            Me.cacDesignationIdNo.Location = New System.Drawing.Point(180, 82)
+            Me.cacDesignationIdNo.Location = New System.Drawing.Point(3, 4)
             Me.cacDesignationIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
             Me.cacDesignationIdNo.Name = "cacDesignationIdNo"
             Me.cacDesignationIdNo.OldValue = 0
@@ -1962,7 +1966,7 @@
             Me.lblSponsorType.EditingMode = False
             Me.lblSponsorType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblSponsorType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblSponsorType.Location = New System.Drawing.Point(4, 108)
+            Me.lblSponsorType.Location = New System.Drawing.Point(4, 4)
             Me.lblSponsorType.Margin = New System.Windows.Forms.Padding(1)
             Me.lblSponsorType.Name = "lblSponsorType"
             Me.lblSponsorType.SecurityKey = "EPI"
@@ -1996,7 +2000,7 @@
             Me.cboSponsorType.IgnoreCase = False
             Me.cboSponsorType.IntegralHeight = False
             Me.cboSponsorType.LinkedLabel = Me.lblSponsorType
-            Me.cboSponsorType.Location = New System.Drawing.Point(179, 108)
+            Me.cboSponsorType.Location = New System.Drawing.Point(3, 4)
             Me.cboSponsorType.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
             Me.cboSponsorType.Name = "cboSponsorType"
             Me.cboSponsorType.OldValue = 0
@@ -2024,7 +2028,7 @@
             Me.lblSupervisorIdNo.EditingMode = False
             Me.lblSupervisorIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblSupervisorIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblSupervisorIdNo.Location = New System.Drawing.Point(4, 134)
+            Me.lblSupervisorIdNo.Location = New System.Drawing.Point(4, 4)
             Me.lblSupervisorIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblSupervisorIdNo.Name = "lblSupervisorIdNo"
             Me.lblSupervisorIdNo.Size = New System.Drawing.Size(175, 24)
@@ -2057,7 +2061,7 @@
             Me.cboSupervisorIdNo.IgnoreCase = False
             Me.cboSupervisorIdNo.IntegralHeight = False
             Me.cboSupervisorIdNo.LinkedLabel = Nothing
-            Me.cboSupervisorIdNo.Location = New System.Drawing.Point(180, 134)
+            Me.cboSupervisorIdNo.Location = New System.Drawing.Point(3, 4)
             Me.cboSupervisorIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
             Me.cboSupervisorIdNo.Name = "cboSupervisorIdNo"
             Me.cboSupervisorIdNo.OldValue = 0
@@ -2084,7 +2088,7 @@
             Me.CLabel5.EditingMode = False
             Me.CLabel5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.CLabel5.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.CLabel5.Location = New System.Drawing.Point(4, 160)
+            Me.CLabel5.Location = New System.Drawing.Point(4, 4)
             Me.CLabel5.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel5.Name = "CLabel5"
             Me.CLabel5.Size = New System.Drawing.Size(175, 24)
@@ -2115,7 +2119,7 @@
             Me.chkSupervisor.IgnoreCase = False
             Me.chkSupervisor.ImeMode = System.Windows.Forms.ImeMode.NoControl
             Me.chkSupervisor.LinkedLabel = Me.CLabel5
-            Me.chkSupervisor.Location = New System.Drawing.Point(181, 160)
+            Me.chkSupervisor.Location = New System.Drawing.Point(4, 4)
             Me.chkSupervisor.Margin = New System.Windows.Forms.Padding(1)
             Me.chkSupervisor.Name = "chkSupervisor"
             Me.chkSupervisor.NoLabel = False
@@ -2133,7 +2137,7 @@
             Me.lblActive.EditingMode = False
             Me.lblActive.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblActive.Location = New System.Drawing.Point(4, 186)
+            Me.lblActive.Location = New System.Drawing.Point(4, 4)
             Me.lblActive.Margin = New System.Windows.Forms.Padding(1)
             Me.lblActive.Name = "lblActive"
             Me.lblActive.Size = New System.Drawing.Size(175, 24)
@@ -2164,7 +2168,7 @@
             Me.chkActive.IgnoreCase = False
             Me.chkActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
             Me.chkActive.LinkedLabel = Me.lblActive
-            Me.chkActive.Location = New System.Drawing.Point(181, 186)
+            Me.chkActive.Location = New System.Drawing.Point(4, 4)
             Me.chkActive.Margin = New System.Windows.Forms.Padding(1)
             Me.chkActive.Name = "chkActive"
             Me.chkActive.NoLabel = False
@@ -3640,11 +3644,13 @@
             DataGridViewCellStyle40.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle40.ForeColor = System.Drawing.Color.Black
             Me.dgvIssueDate.DefaultCellStyle = DataGridViewCellStyle40
+            Me.dgvIssueDate.EditingMode = False
             Me.dgvIssueDate.HeaderText = "Issue Date"
             Me.dgvIssueDate.Name = "dgvIssueDate"
             Me.dgvIssueDate.ReadOnly = True
             Me.dgvIssueDate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvIssueDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvIssueDate.Translatable = False
             Me.dgvIssueDate.Width = 120
             '
             'dgvExpiryDate
@@ -3653,11 +3659,13 @@
             DataGridViewCellStyle41.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle41.ForeColor = System.Drawing.Color.Black
             Me.dgvExpiryDate.DefaultCellStyle = DataGridViewCellStyle41
+            Me.dgvExpiryDate.EditingMode = False
             Me.dgvExpiryDate.HeaderText = "Expiry Date"
             Me.dgvExpiryDate.Name = "dgvExpiryDate"
             Me.dgvExpiryDate.ReadOnly = True
             Me.dgvExpiryDate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvExpiryDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvExpiryDate.Translatable = False
             Me.dgvExpiryDate.Width = 120
             '
             'dgvImageButton
@@ -3754,8 +3762,8 @@
             Me.Name = "EmployeeEntryTv"
             Me.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.Text = "Employee Maintenance Form"
-        Me.ViewDisplayName = "EmployeeEntryTv"
-        Me.SplitContainer1.Panel1.ResumeLayout(false)
+            Me.ViewDisplayName = "EmployeeEntryTv"
+            Me.SplitContainer1.Panel1.ResumeLayout(false)
         Me.SplitContainer1.Panel2.ResumeLayout(false)
         Me.SplitContainer1.Panel2.PerformLayout
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).EndInit

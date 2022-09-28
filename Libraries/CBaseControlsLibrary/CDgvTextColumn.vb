@@ -51,11 +51,23 @@ Public Class CDgvTextColumn
             _editingMode = value
             If value Then
                 If DisplayOnly Then
-                    [ReadOnly] = True
+                    Try
+                        Me.[ReadOnly] = True
+                    Catch ex As Exception
+                        'Debugger.Break()
+                        'ignore error
+                    End Try
+
                     DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                     DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 Else
-                    [ReadOnly] = False
+                    Try
+                        Me.[ReadOnly] = False
+                    Catch ex As Exception
+                        'Debugger.Break()
+                        'ignore error
+                    End Try
+
                     DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                     DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
                     [ReadOnly] = False

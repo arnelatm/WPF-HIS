@@ -104,7 +104,6 @@
     <Compile Include="CDgvDtpCalendarUnused.vb" />
     <Compile Include="CDgvCalendar.vb" />
     <Compile Include="CDgvDtpColumn.vb" />
-    <Compile Include="CMaskedTextBox1.vb" />
     <Compile Include="CPictureBox.Designer.vb">
       <DependentUpon>CPictureBox.vb</DependentUpon>
     </Compile>

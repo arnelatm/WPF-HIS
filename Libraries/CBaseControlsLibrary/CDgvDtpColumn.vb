@@ -30,7 +30,7 @@ Public Class CDgvDtpColumn
         End Get
         Set(ByVal value As DataGridViewCell)
 
-            ' Ensure that the cell used for the template is a CalendarCell.
+            ' Ensure that the cell used for the template is a CDgvDtpCell.
             If (value IsNot Nothing) AndAlso
                 Not value.GetType().IsAssignableFrom(GetType(CDgvDtpCell)) _
                 Then

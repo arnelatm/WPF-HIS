@@ -11,7 +11,6 @@ Public Class CDataGridView
     Inherits DataGridView
     Implements IEntryControl, IFindableControl
 
-    Private _displayOnly As Boolean
     Private _dgvInsertColumnIndex As Integer = -1
     Private _editingMode As Boolean
     Private _translatable As Boolean = True
@@ -55,13 +54,6 @@ Public Class CDataGridView
     <Description("Set to True to specify that this control is readonly.")>
     <Browsable(True)>
     Public Property DisplayOnly As Boolean
-        Get
-            Return _displayOnly
-        End Get
-        Set(value As Boolean)
-            _displayOnly = value
-        End Set
-    End Property
 
     Public Property Ea As EventAggregator
 
@@ -107,8 +99,8 @@ Public Class CDataGridView
             If ShowFooter Then
                 If DgvFooter Is Nothing Then
                     DgvFooter = New DgvFooter(Me) With {
-                    .AutoCalc = True
-                }
+                        .AutoCalc = True
+                        }
                 End If
                 DgvFooter.CalculateTotals()
             End If
@@ -269,7 +261,6 @@ Public Class CDataGridView
             End Try
 
         End If
-
     End Sub
 
     Public Sub ReSequenceDgvAfterInsert()
@@ -295,15 +286,12 @@ Public Class CDataGridView
         Catch ex As Exception
 
         End Try
-
     End Sub
 
     'Public Property ErrorMessageKey As String = Nothing
     'Public Property ErrorMessageParameters As Array = Nothing
 
-    <System.Security.Permissions.UIPermission(
-        System.Security.Permissions.SecurityAction.LinkDemand,
-        Window:=System.Security.Permissions.UIPermissionWindow.AllWindows)>
+    <System.Security.Permissions.UIPermission(System.Security.Permissions.SecurityAction.LinkDemand, Window:=System.Security.Permissions.UIPermissionWindow.AllWindows)>
     Protected Overrides Function ProcessDialogKey(ByVal keyData As Keys) As Boolean
         ' handles
         ' Extract the key code from the key value.
@@ -315,22 +303,25 @@ Public Class CDataGridView
         End If
 
         Return MyBase.ProcessDialogKey(keyData)
-
     End Function
 
-    <System.Security.Permissions.SecurityPermission(
-        System.Security.Permissions.SecurityAction.LinkDemand, Flags:=
-        System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)>
-    Protected Overrides Function ProcessDataGridViewKey(
-        ByVal e As System.Windows.Forms.KeyEventArgs) As Boolean
+    <System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.LinkDemand, Flags:=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)>
+    Protected Overrides Function ProcessDataGridViewKey(ByVal e As System.Windows.Forms.KeyEventArgs) As Boolean
 
         ' Handle the ENTER key as if it were a RIGHT ARROW key.
         If e.KeyCode = Keys.Enter Then
+            Dim currentColumnIndex As Int16
+            currentColumnIndex = CurrentCell.ColumnIndex()
+            If currentColumnIndex = LastEditableColumn And currentColumnIndex < ColumnCount() Then
+                If CurrentCell.RowIndex() + 1 < RowCount() Then
+                    CurrentCell = Me(FirstEditableColumn, CurrentCellAddress.Y + 1)
+                    Return True
+                End If
+            End If
             Return Me.ProcessTabKey(e.KeyData)
         End If
 
         Return MyBase.ProcessDataGridViewKey(e)
-
     End Function
 
     'Protected Overrides Function ProcessDialogKey(ByVal keyData As Keys) As Boolean ' Extract the key code from the key value.
@@ -433,7 +424,6 @@ Public Class CDataGridView
         Catch ex As Exception
             Windows.MessageBox.Show("error")
         End Try
-
     End Sub
 
     'Private Sub DataGridView_CellEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles Me.CellEnter
@@ -902,7 +892,6 @@ Public Class CDataGridView
                 End If
             End If
         End If
-
     End Sub
 
     Private Sub On_CellPainting(ByVal sender As Object, ByVal e As DataGridViewCellPaintingEventArgs) Handles Me.CellPainting
@@ -910,14 +899,10 @@ Public Class CDataGridView
             If TypeOf Me.Columns(e.ColumnIndex) Is CDgvCheckBoxColumn Then
                 Dim value = DirectCast(e.FormattedValue, Nullable(Of Boolean))
                 If Not EditingMode Then
-                    e.Paint(e.CellBounds, DataGridViewPaintParts.All And
-                                          Not (DataGridViewPaintParts.ContentForeground))
-                    Dim state = IIf((value.HasValue And value.Value),
-                                    VisualStyles.CheckBoxState.CheckedDisabled,
-                                    VisualStyles.CheckBoxState.UncheckedDisabled)
+                    e.Paint(e.CellBounds, DataGridViewPaintParts.All And Not (DataGridViewPaintParts.ContentForeground))
+                    Dim state = IIf((value.HasValue And value.Value), VisualStyles.CheckBoxState.CheckedDisabled, VisualStyles.CheckBoxState.UncheckedDisabled)
                     Dim size = RadioButtonRenderer.GetGlyphSize(e.Graphics, state)
-                    Dim location = New Point((e.CellBounds.Width - size.Width) / 2,
-                                             (e.CellBounds.Height - size.Height) / 2)
+                    Dim location = New Point((e.CellBounds.Width - size.Width) / 2, (e.CellBounds.Height - size.Height) / 2)
                     location.Offset(e.CellBounds.Location)
                     CheckBoxRenderer.DrawCheckBox(e.Graphics, location, state)
                     e.Handled = True
@@ -977,5 +962,4 @@ Public Class CDataGridView
             IsDirty = True
         End If
     End Sub
-
 End Class
