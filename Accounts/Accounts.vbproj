@@ -1339,6 +1339,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\EmployeeEntryTv.resx">
       <DependentUpon>EmployeeEntryTv.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\HolidayTransferEntry.resx">
       <DependentUpon>HolidayTransferEntry.vb</DependentUpon>
