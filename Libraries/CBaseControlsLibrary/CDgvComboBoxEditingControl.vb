@@ -220,4 +220,38 @@ Public Class CDgvComboBoxEditingControl
         Return SelectedValue
     End Function
 
+    'Public Overrides Function EditingControlWantsInputKey(ByVal keyData As Keys, ByVal dataGridViewWantsInputKey As Boolean) As Boolean
+    '    Return (keyData And Keys.KeyCode) = Keys.Down OrElse (keyData And Keys.KeyCode) = Keys.Up OrElse Me.DroppedDown AndAlso (keyData And Keys.KeyCode) = Keys.Escape OrElse (keyData And Keys.KeyCode) = Keys.[Return] OrElse Not dataGridViewWantsInputKey
+    'End Function
+
+
+    Public Overrides Function EditingControlWantsInputKey(ByVal key As Keys, ByVal dataGridViewWantsInputKey As Boolean) As Boolean
+
+        ' Let the DateTimePicker handle the keys listed.
+        Select Case key And Keys.KeyCode
+
+            Case Keys.Return, Keys.Escape
+                If DroppedDown Then
+                    Return True
+                Else
+                    Return dataGridViewWantsInputKey
+                End If
+
+            'Case Keys.Left, Keys.Right, Keys.Home, Keys.End
+            '    '    Keys.Home, Keys.End, Keys.PageDown, Keys.PageUp
+            '    Return True
+
+            Case Keys.PageDown, Keys.PageUp, Keys.Up, Keys.Down
+                If DroppedDown Then
+                    Return True
+                Else
+                    Return False
+                End If
+
+            Case Else
+                Return Not dataGridViewWantsInputKey
+        End Select
+
+    End Function
+
 End Class

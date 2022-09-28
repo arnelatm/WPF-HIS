@@ -87,19 +87,27 @@ Namespace PresentationLayer.Presenters
 
         Public Sub MakeDebitAmount(journalItem As JournalItemView, amount As Decimal?)
             If amount Is Nothing OrElse amount >= 0 Then
+                If journalItem.Credit <> 0 Then
                 journalItem.Credit = 0
+                End If
             ElseIf amount < 0 Then
                 journalItem.Credit = amount * -1
+                If journalItem.Debit <> 0 Then
                 journalItem.Debit = 0
+                End If
             End If
         End Sub
 
         Public Sub MakeCreditAmount(journalItem As JournalItemView, amount As Decimal?)
-            If amount Is Nothing OrElse amount >= 0 Then
-                journalItem.Debit = 0
+            If amount Is Nothing OrElse amount > 0 Then
+                If journalItem.Debit <> 0 Then
+                    journalItem.Debit = 0
+                End If
             ElseIf amount < 0 Then
                 journalItem.Debit = amount * -1
-                journalItem.Credit = 0
+                If journalItem.Credit <> 0 Then
+                    journalItem.Credit = 0
+                End If
             End If
         End Sub
 

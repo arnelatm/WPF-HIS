@@ -29,7 +29,9 @@ Namespace PresentationLayer.Views
             Set(value As Decimal)
                 If value > 0 Then
                     _credit = value
-                    Debit = 0
+                    If Debit <> 0 Then
+                        Debit = 0
+                    End If
                 ElseIf value < 0 Then
                     _credit = 0
                     Debit = Math.Abs(value)
@@ -46,7 +48,9 @@ Namespace PresentationLayer.Views
             Set(value As Decimal)
                 If value > 0 Then
                     _debit = value
-                    Credit = 0
+                    If Credit <> 0 Then
+                        Credit = 0
+                    End If
                 ElseIf value < 0 Then
                     _debit = 0
                     Credit = Math.Abs(value)
