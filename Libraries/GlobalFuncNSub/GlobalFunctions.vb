@@ -24,6 +24,9 @@ Public Module GlobalFunctions
         Dim curCulture As CultureInfo = CultureInfo.CurrentCulture
         CultureInfo.CurrentCulture = targetCulture
         Try
+            If TypeOf targetCulture.Calendar Is System.Globalization.UmAlQuraCalendar Or TypeOf targetCulture.Calendar Is System.Globalization.HijriCalendar Then
+                targetCulture.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy"
+            End If
             shortDateString = givenDate.ToShortDateString()
         Catch ex As Exception
             shortDateString = Nothing
@@ -765,6 +768,9 @@ Public Module GlobalFunctions
             newShortDate = Nothing
         Else
             newShortDate = Regex.Replace(shortDate, "\b\d\b", "0$&")
+            ' \b - boundary non , \d - digit
+            ' replacement $& - include the rest of the string
+            ' 0 - add 0 to the matched string
         End If
         Return newShortDate
     End Function

@@ -395,7 +395,7 @@ Namespace PresentationLayer.Views.Forms
             UpdateTotals()
         End Sub
 
-        Private Sub OnTransactionDateValueChanged(sender As Object, e As EventArgs) Handles dtpTransactionDate.ValueChanged
+        Private Sub OnTransactionDateValidated(sender As Object, e As EventArgs) Handles dtpTransactionDate.Validated
             Presenter.UpdateDueDate()
             Presenter.UpdateEarlySettlementValues()
             Presenter.UpdateSupplierDate()
