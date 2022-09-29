@@ -719,6 +719,9 @@ Public Class CCustomDateTimePicker
         ElseIf e.Control AndAlso e.KeyCode = Keys.Z Then
             e.Handled = True
             Value = _lastDate
+        ElseIf e.KeyCode = Keys.Escape Then
+            e.Handled = True
+            Value = _lastDate
         End If
     End Sub
 

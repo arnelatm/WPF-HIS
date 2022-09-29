@@ -18,12 +18,12 @@ Public Class CDataGridView
     Private _firstVisibleColumn As Integer = -1
     Private _insertColumnAdded As Boolean = False
     Private _lastEditableColumn As Integer = -1
+    Private _origEditMode As DataGridViewEditMode
 
     Public Sub New()
         MyBase.New()
         DoubleBuffered = True
         Enabled = True
-        EditMode = DataGridViewEditMode.EditOnEnter
         BackColor = Drawing.SystemColors.ControlLight
         DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
         DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
@@ -31,6 +31,8 @@ Public Class CDataGridView
         ShowEditingIcon = True
         ShowCellErrors = True
         ShowRowErrors = True
+        _origEditMode = EditMode
+
     End Sub
 
     Public Event ChangesMade As EventHandler
@@ -107,15 +109,17 @@ Public Class CDataGridView
         End Set
     End Property
 
-    'Private Sub DataGridView_CellEnter(ByVal sender As Object,
-    '                                    ByVal e As DataGridViewCellEventArgs) _
-    '    Handles Me.CellEnter
-    '    If Columns(SequenceColumn) IsNot Nothing Then
-    '        If CurrentCell.ColumnIndex() = Columns(SequenceColumn).Index() Then
-    '            SendKeys.Send("{TAB}")
-    '        End If
-    '    End If
-    'End Sub
+    Private Sub DataGridView_CellEnter(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles Me.CellEnter
+        If CurrentCell IsNot Nothing AndAlso TypeOf (CurrentCell) Is CDgvDtpCell Then
+            EditMode = DataGridViewEditMode.EditOnEnter
+        End If
+    End Sub
+
+    Private Sub dataGridView1_CellLeave(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles Me.CellLeave
+        If CurrentCell IsNot Nothing AndAlso TypeOf CurrentCell Is CDgvDtpCell Then
+            EditMode = _origEditMode
+        End If
+    End Sub
 
     Public ReadOnly Property FirstEditableColumn As Integer
         Get
@@ -291,7 +295,6 @@ Public Class CDataGridView
     'Public Property ErrorMessageKey As String = Nothing
     'Public Property ErrorMessageParameters As Array = Nothing
 
-    <System.Security.Permissions.UIPermission(System.Security.Permissions.SecurityAction.LinkDemand, Window:=System.Security.Permissions.UIPermissionWindow.AllWindows)>
     Protected Overrides Function ProcessDialogKey(ByVal keyData As Keys) As Boolean
         ' handles
         ' Extract the key code from the key value.
@@ -299,29 +302,44 @@ Public Class CDataGridView
 
         ' Handle the ENTER key as if it were a RIGHT ARROW key.
         If key = Keys.Enter Then
-            Return Me.ProcessTabKey(keyData)
+            Return MoveToNextCell(keyData)
         End If
 
         Return MyBase.ProcessDialogKey(keyData)
     End Function
 
-    <System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.LinkDemand, Flags:=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)>
     Protected Overrides Function ProcessDataGridViewKey(ByVal e As System.Windows.Forms.KeyEventArgs) As Boolean
 
         ' Handle the ENTER key as if it were a RIGHT ARROW key.
         If e.KeyCode = Keys.Enter Then
-            Dim currentColumnIndex As Int16
-            currentColumnIndex = CurrentCell.ColumnIndex()
-            If currentColumnIndex = LastEditableColumn And currentColumnIndex < ColumnCount() Then
-                If CurrentCell.RowIndex() + 1 < RowCount() Then
-                    CurrentCell = Me(FirstEditableColumn, CurrentCellAddress.Y + 1)
-                    Return True
-                End If
-            End If
-            Return Me.ProcessTabKey(e.KeyData)
+            Return MoveToNextCell(e.KeyData)
+            'Dim currentColumnIndex As Int16
+            'currentColumnIndex = CurrentCell.ColumnIndex()
+            'If currentColumnIndex = LastEditableColumn And currentColumnIndex < ColumnCount() Then
+            '    If CurrentCell.RowIndex() + 1 < RowCount() Then
+            '        CurrentCell = Me(FirstEditableColumn, CurrentCellAddress.Y + 1)
+            '        Return True
+            '    End If
+            'End If
+            'Return Me.ProcessTabKey(e.KeyData)
         End If
 
         Return MyBase.ProcessDataGridViewKey(e)
+    End Function
+
+    Private Function MoveToNextCell(keyData As Keys) As Boolean
+
+        Dim currentColumnIndex As Int16
+        currentColumnIndex = CurrentCell.ColumnIndex()
+        If currentColumnIndex = LastEditableColumn And currentColumnIndex < ColumnCount() Then
+            If CurrentCell.RowIndex() + 1 < RowCount() Then
+                ' hack need next line because currentcell not changing properly dont know why.
+                'ProcessTabKey(keyData)
+                CurrentCell = Me(FirstEditableColumn, CurrentCell.RowIndex() + 1)
+                Return (keyData)
+            End If
+        End If
+        Return Me.ProcessTabKey(keyData)
     End Function
 
     'Protected Overrides Function ProcessDialogKey(ByVal keyData As Keys) As Boolean ' Extract the key code from the key value.
@@ -962,4 +980,5 @@ Public Class CDataGridView
             IsDirty = True
         End If
     End Sub
+
 End Class
