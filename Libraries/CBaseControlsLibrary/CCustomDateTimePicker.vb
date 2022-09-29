@@ -80,9 +80,9 @@ Public Class CCustomDateTimePicker
         Get
             Return _calendarType
         End Get
-        Set
-            If _calendarType <> Value Then
-                _calendarType = Value
+        Set(cValue As CalendarToUse)
+            If _calendarType <> cValue Then
+                _calendarType = cValue
                 SetupCalendarDisplay()
             End If
         End Set
@@ -133,7 +133,7 @@ Public Class CCustomDateTimePicker
         Select Case CalendarType
             Case CalendarToUse.Hijri
                 TargetCalendar = New HijriCalendar()
-                If Not CultureSupportUmAlQura(_targetCulture) Then
+                If Not CultureSupportHijri(_targetCulture) Then
                     _targetCulture = CultureInfo.CreateSpecificCulture("ar-SA")
                 End If
                 btnCalendarType.Text = Strings.HijriCalendarMarker
@@ -196,9 +196,9 @@ Public Class CCustomDateTimePicker
         Get
             Return _displayOnly
         End Get
-        Set
-            _displayOnly = Value
-            ReadOnlyDp = Value
+        Set(dValue As Boolean)
+            _displayOnly = dValue
+            ReadOnlyDp = dValue
             If _displayOnly Then
                 dtp.Visible = False
             Else
@@ -230,11 +230,11 @@ Public Class CCustomDateTimePicker
         Get
             Return _readOnlyDp
         End Get
-        Set
-            _readOnlyDp = Value
-            txtDate.DisplayOnly = Value
-            txtLongDate.DisplayOnly = Value
-            txtTime.txbTime.DisplayOnly = Value
+        Set(dValue As Boolean)
+            _readOnlyDp = dValue
+            txtDate.DisplayOnly = dValue
+            txtLongDate.DisplayOnly = dValue
+            txtTime.txbTime.DisplayOnly = dValue
             Refresh()
 
         End Set
@@ -244,12 +244,12 @@ Public Class CCustomDateTimePicker
         Get
             Return _editingMode
         End Get
-        Set
-            _editingMode = Value
-            'txtTime.EditingMode = Value
-            txtDate.EditingMode = Value
-            txtLongDate.EditingMode = Value
-            If Value Then
+        Set(eValue As Boolean)
+            _editingMode = eValue
+            'txtTime.EditingMode = eValue
+            txtDate.EditingMode = eValue
+            txtLongDate.EditingMode = eValue
+            If eValue Then
                 If DisplayOnly Then
                     ReadOnlyDp = True
                     ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
@@ -283,13 +283,6 @@ Public Class CCustomDateTimePicker
     <Description("Set to True to specify that this control is mandatory.")>
     <Browsable(True)>
     Public Property ValueIsMandatory As Boolean
-        Get
-            Return _isMandatory
-        End Get
-        Set
-            _isMandatory = Value
-        End Set
-    End Property
 
     <Bindable(True)>
     <Category("Properties")>
@@ -387,9 +380,9 @@ Public Class CCustomDateTimePicker
         Get
             Return txtDate.BackColor
         End Get
-        Set
-            txtDate.BackColor = Value
-            txtTime.BackColor = Value
+        Set(cValue As Color)
+            txtDate.BackColor = cValue
+            txtTime.BackColor = cValue
         End Set
     End Property
 

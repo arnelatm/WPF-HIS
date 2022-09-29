@@ -77,7 +77,11 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DateCreated As DateTime? Implements IApJournalView.DateCreated
             Get
-                Return Convert.ToDateTime(txtDateCreated.Text)
+                Try
+                    Return Convert.ToDateTime(txtDateCreated.Text)
+                Catch ex As Exception
+                    Return Nothing
+                End Try
             End Get
             Set
                 If Value.HasValue Then
