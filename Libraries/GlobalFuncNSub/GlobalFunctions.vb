@@ -1087,20 +1087,22 @@ Public Module GlobalFunctions
 
     Public Sub MoveToGridView(ByVal dgv As DataGridView, ByVal columnName As String)
         If dgv IsNot Nothing AndAlso dgv.Visible Then
-            If dgv.CurrentCell Is Nothing Then
-                dgv.Focus()
-                If dgv.CurrentCell Is Nothing Then
-                    If dgv.Columns(columnName) IsNot Nothing And dgv.Rows.Count() > 0 Then
-                        dgv.CurrentCell = dgv(dgv.Columns(columnName).Index(), 0)
+            With dgv
+                .Focus()
+                If .CurrentCell Is Nothing Then
+                    If .CurrentCell Is Nothing Then
+                        If .Columns(columnName) IsNot Nothing And .Rows.Count() > 0 Then
+                            .CurrentCell = dgv(.Columns(columnName).Index(), 0)
+                        End If
+                    End If
+                Else
+                    If dgv.Columns(columnName) IsNot Nothing Then
+                        If dgv.Columns(columnName) IsNot Nothing And dgv.Rows.Count() > 0 Then
+                            dgv.CurrentCell = dgv(dgv.Columns(columnName).Index(), 0)
+                        End If
                     End If
                 End If
-            Else
-                If dgv.Columns(columnName) IsNot Nothing Then
-                    If dgv.Columns(columnName) IsNot Nothing And dgv.Rows.Count() > 0 Then
-                        dgv.CurrentCell = dgv(dgv.Columns(columnName).Index(), 0)
-                    End If
-                End If
-            End If
+            End With
         End If
 
     End Sub
@@ -1306,6 +1308,5 @@ Public Module GlobalFunctions
     '    Dim firstDayOfMonth As New DateTime(dDate.Year, dDate.Month, 1)
     '    Return firstDayOfMonth.AddMonths(1).AddDays(-1)
     'End Function
-
 
 End Module
