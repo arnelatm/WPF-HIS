@@ -41,6 +41,7 @@ Public Module GlobalFunctions
         For Each optionalCalendar In targetCulture.OptionalCalendars
             If TypeOf optionalCalendar Is HijriCalendar Then
                 returnValue = True
+                Exit For
             End If
         Next
         Return returnValue

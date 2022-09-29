@@ -25,7 +25,7 @@ Partial Class CCustomDateTimePicker
     '<System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim TimeColors2 As AATM.Libraries.CBaseControlsLibrary.TimeColors = New AATM.Libraries.CBaseControlsLibrary.TimeColors()
+        Dim TimeColors1 As AATM.Libraries.CBaseControlsLibrary.TimeColors = New AATM.Libraries.CBaseControlsLibrary.TimeColors()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.floDatePicker = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.txtLongDate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -97,6 +97,7 @@ Partial Class CCustomDateTimePicker
         Me.txtDate.FindEnabled = False
         Me.txtDate.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtDate.ForeColor = System.Drawing.Color.Black
+        Me.txtDate.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite
         Me.txtDate.LinkedLabel = Nothing
         Me.txtDate.Location = New System.Drawing.Point(110, 0)
         Me.txtDate.Margin = New System.Windows.Forms.Padding(0)
@@ -116,7 +117,7 @@ Partial Class CCustomDateTimePicker
         'btnCalendarType
         '
         Me.btnCalendarType.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.btnCalendarType.DesignerSelected = False
+        Me.btnCalendarType.DesignerSelected = True
         Me.btnCalendarType.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCalendarType.ImageIndex = 0
         Me.btnCalendarType.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -171,21 +172,21 @@ Partial Class CCustomDateTimePicker
         Me.txtTime.TextForeColor = System.Drawing.Color.Black
         Me.txtTime.Time = "07:00"
         Me.txtTime.TimeAMPM = AATM.Libraries.CBaseControlsLibrary.gTimePickerCntrl.eTimeAMPM.am
-        TimeColors2.BackGround = System.Drawing.Color.White
-        TimeColors2.Box = System.Drawing.Color.White
-        TimeColors2.DisplayTime = System.Drawing.Color.Red
-        TimeColors2.FaceInner = System.Drawing.Color.White
-        TimeColors2.FaceOuter = System.Drawing.Color.LightGoldenrodYellow
-        TimeColors2.FrameInner = System.Drawing.Color.AliceBlue
-        TimeColors2.FrameOuter = System.Drawing.Color.CornflowerBlue
-        TimeColors2.Hour = System.Drawing.Color.DarkBlue
-        TimeColors2.HourHand = System.Drawing.Color.DarkBlue
-        TimeColors2.Minute = System.Drawing.Color.Blue
-        TimeColors2.MinuteHand = System.Drawing.Color.OrangeRed
-        TimeColors2.MinutePlus = System.Drawing.Color.LightSlateGray
-        TimeColors2.TimeAMPM_OFF = System.Drawing.Color.LightSteelBlue
-        TimeColors2.TimeAMPM_ON = System.Drawing.Color.MediumBlue
-        Me.txtTime.TimeColors = TimeColors2
+        TimeColors1.BackGround = System.Drawing.Color.White
+        TimeColors1.Box = System.Drawing.Color.White
+        TimeColors1.DisplayTime = System.Drawing.Color.Red
+        TimeColors1.FaceInner = System.Drawing.Color.White
+        TimeColors1.FaceOuter = System.Drawing.Color.LightGoldenrodYellow
+        TimeColors1.FrameInner = System.Drawing.Color.AliceBlue
+        TimeColors1.FrameOuter = System.Drawing.Color.CornflowerBlue
+        TimeColors1.Hour = System.Drawing.Color.DarkBlue
+        TimeColors1.HourHand = System.Drawing.Color.DarkBlue
+        TimeColors1.Minute = System.Drawing.Color.Blue
+        TimeColors1.MinuteHand = System.Drawing.Color.OrangeRed
+        TimeColors1.MinutePlus = System.Drawing.Color.LightSlateGray
+        TimeColors1.TimeAMPM_OFF = System.Drawing.Color.LightSteelBlue
+        TimeColors1.TimeAMPM_ON = System.Drawing.Color.MediumBlue
+        Me.txtTime.TimeColors = TimeColors1
         Me.txtTime.TrueHour = true
         '
         'CCustomDateTimePicker
