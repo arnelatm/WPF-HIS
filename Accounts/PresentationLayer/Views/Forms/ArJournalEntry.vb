@@ -374,10 +374,9 @@ Namespace PresentationLayer.Views.Forms
             UpdateTotals()
         End Sub
 
-        Private Sub OnTransactionDateValueChanged(sender As Object, e As EventArgs) Handles dtpTransactionDate.ValueChanged
+        Private Sub OnTransactionDateValidated(sender As Object, e As EventArgs) Handles dtpTransactionDate.Validated
             Presenter.UpdateDueDate()
             Presenter.UpdateEarlySettlementValues()
-            'Presenter.UpdateSupplierDate()
         End Sub
 
         Private Function PaymentOrDiscountMade()
@@ -424,6 +423,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub DataGridViewJournalItems_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellContentClick
 
         End Sub
+
     End Class
 
 End Namespace

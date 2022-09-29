@@ -116,7 +116,7 @@ Public Class CCustomDateTimePicker
     Public Sub SetDateEntryMask()
         Dim dateMask As String
         Dim tempDate As DateTime
-        tempDate = #2018-12-31#
+        tempDate = #2022-07-31#
         If _targetCulture.Name = "ar-SA" Then
             dateMask = Regex.Replace(CalendarDateToShortDateString(tempDate, _targetCulture), "\d", "0")
         Else
@@ -136,12 +136,14 @@ Public Class CCustomDateTimePicker
                 If Not CultureSupportHijri(_targetCulture) Then
                     _targetCulture = CultureInfo.CreateSpecificCulture("ar-SA")
                 End If
+                _targetCulture.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy"
                 btnCalendarType.Text = Strings.HijriCalendarMarker
             Case CalendarToUse.UmAlQura
                 TargetCalendar = New UmAlQuraCalendar()
                 If Not CultureSupportUmAlQura(_targetCulture) Then
                     _targetCulture = CultureInfo.CreateSpecificCulture("ar-SA")
                 End If
+                _targetCulture.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy"
                 btnCalendarType.Text = Strings.UmAlQuraCalendarMarker
             Case Else
                 TargetCalendar = New GregorianCalendar()
@@ -152,7 +154,6 @@ Public Class CCustomDateTimePicker
     End Sub
 
     Private Sub ToggleTargetCulture()
-        Dim myValue = Value
         Select Case CalendarType
             Case CalendarToUse.Hijri
                 CalendarType = CalendarToUse.Gregorian
@@ -167,7 +168,83 @@ Public Class CCustomDateTimePicker
                 CalendarType = CalendarToUse.Gregorian
                 SetTargetCulture()
         End Select
-        Value = myValue
+        SetValueDisplay()
+    End Sub
+
+    Private Function GetDate()
+        Dim retVal As DateTime?
+        If Not ShowLongDate Then
+            If txtDate.Text Is Nothing OrElse txtDate.Text = "" OrElse txtDate.Text.TrimEnd() = EmptyMask Then
+                txtTime.Text = ""
+                txtLongDate.Text = ""
+                retVal = Nothing
+            Else
+                Dim tCalendar As Calendar
+                Dim tCulture As CultureInfo
+                Select Case btnCalendarType.Text
+                    Case Strings.HijriCalendarMarker
+                        tCulture = CultureInfo.CreateSpecificCulture("ar-SA")
+                        tCulture.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy"
+                        tCalendar = New HijriCalendar()
+                    Case Strings.UmAlQuraCalendarMarker
+                        tCulture = CultureInfo.CreateSpecificCulture("ar-SA")
+                        tCulture.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy"
+                        tCalendar = New UmAlQuraCalendar()
+                    Case Else
+                        tCulture = CultureInfo.CreateSpecificCulture("en-GB")
+                        tCalendar = New GregorianCalendar()
+                End Select
+                tCulture.DateTimeFormat.Calendar = tCalendar
+                Dim cText As String
+                cText = PadWithZeroSingleDigitDate(DateTime.Parse(txtDate.Text).ToShortDateString())
+                If ShowTime Then
+                    cText += " " + txtTime.GetMilitaryTime()
+                End If
+                retVal = Convert.ToDateTime(cText, tCulture)
+            End If
+        Else
+            Dim tCalendar As Calendar
+            Dim tCulture As CultureInfo
+            Select Case btnCalendarType.Text
+                Case Strings.HijriCalendarMarker
+                    tCulture = CultureInfo.CreateSpecificCulture("ar-SA")
+                    tCulture.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy"
+                    tCalendar = New HijriCalendar()
+                Case Strings.UmAlQuraCalendarMarker
+                    tCulture = CultureInfo.CreateSpecificCulture("ar-SA")
+                    tCulture.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy"
+                    tCalendar = New UmAlQuraCalendar()
+                Case Else
+                    tCulture = CultureInfo.CreateSpecificCulture("en-GB")
+                    tCalendar = New GregorianCalendar()
+            End Select
+            tCulture.DateTimeFormat.Calendar = tCalendar
+            Dim cText As String
+            cText = PadWithZeroSingleDigitDate(DateTime.Parse(txtDate.Text).ToShortDateString())
+            If ShowTime Then
+                cText += " " + txtTime.GetMilitaryTime()
+            End If
+            retVal = Convert.ToDateTime(cText, tCulture)
+        End If
+        Return retVal
+    End Function
+
+    Private Sub SetValueDisplay()
+        If Not IsNothing(_value) Then
+            txtDate.Text = PadWithZeroSingleDigitDate(CalendarDateToShortDateString(_value, _targetCulture))
+            Dim cTime As String = String.Format("{0:HH:mm}", _value)
+            txtTime.SetTime(cTime)
+            If cTime < "12:00" Then
+                txtTime.Text = IIf(cTime.Substring(0, 2) = "00", "12" + cTime.Substring(2), cTime)
+            Else
+                Dim cPmTime = (Int(cTime.Substring(0, 2)) - 12).ToString().PadLeft(2, "0") + cTime.Substring(2)
+                txtTime.Text = IIf(cPmTime.Substring(0, 2) = "00", "12" + cPmTime.Substring(2), cPmTime)
+            End If
+        Else
+            txtDate.Text = ""
+            txtTime.Text = ""
+            txtLongDate.Text = ""
+        End If
     End Sub
 
     <Bindable(True)>
@@ -361,8 +438,8 @@ Public Class CCustomDateTimePicker
             txtTime.Width = _timeWidth
             txtTime.Visible = True
             txtTime.Width = _timeWidth
-            If Value IsNot Nothing Then
-                txtTime.Text = String.Format("{0:HH:mm}", Value)
+            If _value IsNot Nothing Then
+                txtTime.Text = String.Format("{0:HH:mm}", _value)
             End If
         Else
             txtTime.TabStop = False
@@ -390,9 +467,9 @@ Public Class CCustomDateTimePicker
         Get
             If _value.HasValue Then
                 If txtTime.Visible Then
-                    Return CalendarDateToShortDateString(Value, _targetCulture) + " " + txtTime.Text
+                    Return CalendarDateToShortDateString(_value, _targetCulture) + " " + txtTime.Text
                 Else
-                    Return CalendarDateToShortDateString(Value, _targetCulture)
+                    Return CalendarDateToShortDateString(_value, _targetCulture)
                 End If
             Else
                 Return Nothing
@@ -405,38 +482,7 @@ Public Class CCustomDateTimePicker
 
     Public Property Value As DateTime?
         Get
-            Dim retVal As DateTime?
-            Try
-                If Not ShowLongDate Then
-                    If txtDate.Text Is Nothing OrElse txtDate.Text = "" OrElse txtDate.Text.TrimEnd() = EmptyMask Then
-                        txtTime.Text = ""
-                        txtLongDate.Text = ""
-                        retVal = Nothing
-                    Else
-                        Dim cText As String
-                        cText = PadWithZeroSingleDigitDate(DateTime.Parse(txtDate.Text).ToShortDateString())
-                        If ShowTime Then
-                            cText += " " + txtTime.GetMilitaryTime()
-                        End If
-                        retVal = Convert.ToDateTime(cText, _targetCulture)
-                    End If
-                Else
-                    Dim cText As String
-                    If txtLongDate.Text Is Nothing OrElse txtLongDate.Text.Trim() = "" Then
-                        txtTime.Text = ""
-                        txtDate.Text = ""
-                        retVal = Nothing
-                    ElseIf ShowTime Then
-                        cText = PadWithZeroSingleDigitDate(DateTime.Parse(txtLongDate.Text).ToShortDateString()) + " " + txtTime.GetMilitaryTime()
-                        retVal = Convert.ToDateTime(cText, _targetCulture)
-                    Else
-                        retVal = Convert.ToDateTime(PadWithZeroSingleDigitDate(DateTime.Parse(txtLongDate.Text).ToShortDateString()), _targetCulture)
-                    End If
-                End If
-            Catch ex As Exception
-                retVal = Nothing
-            End Try
-            Return retVal
+            Return GetDate()
         End Get
 
         Set(dValue As DateTime?)
@@ -621,8 +667,8 @@ Public Class CCustomDateTimePicker
                 calendarForm.Dispose()
                 Exit Do
             ElseIf retVal = DialogResult.Retry Then
-                Dim dNullableDate As DateTime?
-                dNullableDate = Value
+                'Dim dNullableDate As DateTime?
+                'dNullableDate = _value
                 ' need to save the value to a temporary variable
                 ' because changing the CalendarType (in below code)
                 ' clears the value of the current entered date stored in 'Value'
@@ -644,9 +690,11 @@ Public Class CCustomDateTimePicker
                         CalendarType = CalendarToUse.Gregorian
                 End Select
                 ' restore previous Date value
-                Value = dNullableDate
+                'Value = dNullableDate
                 SetTargetCulture()
-                Refresh()
+                SetValueDisplay()
+                'Refresh()
+
                 calendarForm.Dispose()
                 CultureInfo.CurrentCulture = _origCulture
                 calendarForm = New CCalendar(Value, CalendarType)
@@ -683,6 +731,9 @@ Public Class CCustomDateTimePicker
     Public Property EditsAllowed As Boolean
 
     Private Sub BtnCalendarType_Click(sender As Object, e As EventArgs) Handles btnCalendarType.Click
+        If Not ReadOnlyDp Then
+            _value = GetDate()
+        End If
         ToggleTargetCulture()
     End Sub
 
