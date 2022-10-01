@@ -766,6 +766,14 @@ Public Class CCustomDateTimePicker
         ElseIf e.KeyCode = Keys.Escape Then
             e.Handled = True
             Value = _lastDate
+        ElseIf e.KeyCode = Keys.Left Then
+            If txtDate.SelectionStart = 0 Then
+                SendKeys.Send("+{TAB}")
+            End If
+        ElseIf e.KeyCode = Keys.Right Then
+            If txtDate.SelectionStart >= txtDate.TextLength Then
+                SendKeys.Send("{TAB}")
+            End If
         End If
     End Sub
 

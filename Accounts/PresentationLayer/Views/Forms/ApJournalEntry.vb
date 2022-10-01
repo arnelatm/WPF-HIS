@@ -98,7 +98,6 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 dtpDueDate.Value = Value
-                'End If
             End Set
         End Property
 

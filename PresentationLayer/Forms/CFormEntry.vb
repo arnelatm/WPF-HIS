@@ -46,7 +46,6 @@ Public Class CFormEntry
         'MyBase.New()
         ' This call is required by the designer.
         InitializeComponent()
-        'KeyPreview = True
         DoubleBuffered = True
 
         ' Add any initialization after the InitializeComponent() call.

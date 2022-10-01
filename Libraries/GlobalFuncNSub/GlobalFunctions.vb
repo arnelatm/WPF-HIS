@@ -1103,9 +1103,9 @@ Public Module GlobalFunctions
                         End If
                     End If
                 Else
-                    If dgv.Columns(columnName) IsNot Nothing Then
-                        If dgv.Columns(columnName) IsNot Nothing And dgv.Rows.Count() > 0 Then
-                            dgv.CurrentCell = dgv(dgv.Columns(columnName).Index(), 0)
+                    If .Columns(columnName) IsNot Nothing Then
+                        If .Columns(columnName) IsNot Nothing And .Rows.Count() > 0 Then
+                            .CurrentCell = dgv(.Columns(columnName).Index(), 0)
                         End If
                     End If
                 End If

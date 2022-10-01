@@ -316,7 +316,8 @@ Namespace PresentationLayer.Presenters
             Else
                 diImage.Image = IIf(IsEmpty(employeeDocumentView.ImageFileName), CObj(DBNull.Value), Drawing.Image.FromFile(imageFileName))
                 If employeeDocumentView.DataImageIdNo > 0 Then
-                    employeeDocumentView.DataImageIdNo = diDao.UpdateRecord(diImage)
+                    diDao.UpdateRecord(diImage)
+                    'employeeDocumentView.DataImageIdNo =
                 Else
                     employeeDocumentView.DataImageIdNo = diDao.AddRecord(diImage)
                 End If

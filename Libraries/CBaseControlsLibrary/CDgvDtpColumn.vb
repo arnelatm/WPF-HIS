@@ -390,6 +390,13 @@ Public Class CDgvDtpEditingControl
         ' Let the DateTimePicker handle the keys listed.
         Select Case key And Keys.KeyCode
 
+            'Case Keys.Left
+            '    If txtDate.SelectionStart = 0 Or txtDate.SelectionStart >= txtDate.TextLength Then
+            '        Return dataGridViewWantsInputKey
+            '    Else
+            '        Return True
+            '    End If
+
             Case Keys.Enter, Keys.Left, Keys.Right, Keys.Home, Keys.End
                 ' Keys.Up, Keys.Down
                 '    Keys.Home, Keys.End, Keys.PageDown, Keys.PageUp
