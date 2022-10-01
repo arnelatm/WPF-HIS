@@ -128,7 +128,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             Select Case item.DataType
                 Case DataTypeSelection.StringType
                     Invoker.SetProperty(View, item.FieldName, item.DefaultValue)
-                Case DataTypeSelection.AccountType
+                Case DataTypeSelection.CharType
                     Invoker.SetProperty(View, item.FieldName, item.DefaultValue)
                 Case DataTypeSelection.IntegerType
                     Invoker.SetProperty(View, item.FieldName, CInt(item.DefaultValue))
@@ -2038,7 +2038,7 @@ End Class
 Public Enum DataTypeSelection
     BooleanType = 0
     ByteType = 1
-    AccountType = 2
+    CharType = 2
     DateType = 3
     DecimalType = 4
     DoubleType = 5

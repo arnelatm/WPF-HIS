@@ -1,5 +1,7 @@
 ﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.BusinessLayer.IGroup
 Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Models.IGroup
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AutoMapper
@@ -160,14 +162,18 @@ Public Class MappingProfileAccounts
         CreateMap(Of Lab_InvoiceDetailsModel, Lab_InvoiceDetailsView)().ReverseMap()
         CreateMap(Of Document, DocumentModel)().ReverseMap()
         CreateMap(Of DocumentModel, IDocumentView)().ReverseMap()
-        
+
         CreateMap(Of IEmployeeDocumentView, EmployeeDocumentModel)()
         CreateMap(Of EmployeeDocument, EmployeeDocumentModel)().ReverseMap()
         CreateMap(Of EmployeeDocumentModel, EmployeeDocumentView)()
 
         CreateMap(Of IDataImageView, DataImageModel)()
         CreateMap(Of DataImage, DataImageModel)().ReverseMap()
-        CreateMap(Of DataImageModel, IDataImageView )().ReverseMap()
+        CreateMap(Of DataImageModel, IDataImageView)().ReverseMap()
+
+        CreateMap(Of IPmrInvestigationView, PmrInvestigationModel)()
+        CreateMap(Of PmrInvestigation, PmrInvestigationModel)().ReverseMap()
+        CreateMap(Of DataImageModel, IDataImageView)().ReverseMap()
 
     End Sub
 

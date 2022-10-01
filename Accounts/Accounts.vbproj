@@ -213,6 +213,7 @@
     <Compile Include="BusinessLayer\EmployeeLeaveApprovalHistory.vb" />
     <Compile Include="BusinessLayer\EmployeeLeaveApprovalItem.vb" />
     <Compile Include="BusinessLayer\EmployeePayElement.vb" />
+    <Compile Include="BusinessLayer\IGroup\PmrInvestigation.vb" />
     <Compile Include="BusinessLayer\IGroup\Lab_InvoiceGroup.vb" />
     <Compile Include="BusinessLayer\IGroup\ItemDetails.vb" />
     <Compile Include="BusinessLayer\JournalPrefix.vb" />
@@ -386,6 +387,7 @@
     <Compile Include="PresentationLayer\Models\HolidayAvailmentModel.vb" />
     <Compile Include="PresentationLayer\Models\HolidayTransferModel.vb" />
     <Compile Include="PresentationLayer\Models\HolidayTransferAvailmentModel.vb" />
+    <Compile Include="PresentationLayer\Models\IGroup\PMRInvestigationModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\Lab_InvoiceGroupModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\ItemDetailsModel.vb" />
     <Compile Include="PresentationLayer\Models\ReportSelectorModel.vb" />
@@ -529,6 +531,12 @@
       <DependentUpon>CbcRetrievalEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\CbcRetrievalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationRequestForm.Designer.vb">
+      <DependentUpon>PmrInvestigationRequestForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationRequestForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsEntry.Designer.vb">
@@ -714,6 +722,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IDataImageView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDocumentView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeDocumentView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IPmrInvestigationView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\ILab_InvoiceGroupView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IItemDetailsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IHolidayAvailmentApprovalHistoryView.vb" />
@@ -1362,6 +1371,9 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\CbcRetrievalEntry.resx">
       <DependentUpon>CbcRetrievalEntry.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationRequestForm.resx">
+      <DependentUpon>PmrInvestigationRequestForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsEntry.resx">
       <DependentUpon>ItemDetailsEntry.vb</DependentUpon>
     </EmbeddedResource>
@@ -1714,9 +1726,9 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="app.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Isp-Server.config" />
-    <None Include="app.config" />
     <None Include="app-MarceloPC.config" />
     <None Include="appx.config" />
     <None Include="appOkMarceloPC.config" />
