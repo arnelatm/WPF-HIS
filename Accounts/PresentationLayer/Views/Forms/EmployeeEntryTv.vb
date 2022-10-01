@@ -756,21 +756,25 @@ Namespace PresentationLayer.Views.Forms
                 Else
                     documentFileName = EmployeeDocuments(index).ImageFileName
                 End If
+            ElseIf EmployeeDocuments(index).DataImageIdNo < 0 Then
+                documentFileName = EmployeeDocuments(index).ImageFileName
             End If
             Dim remarks As String = EmployeeName & " " & DataGridViewDocuments.CurrentRow.Cells("dgvDocumentIdNo").EditedFormattedValue
-            Dim imageFileName As String = SelectImage(documentFileName, remarks)
-            If imageFileName IsNot Nothing Then
-                Dim changed As Boolean = EmployeeDocuments(index).Changed
-                EmployeeDocuments(index).ImageFileName = imageFileName
-                If imageFileName <> originalDocumentFileName Then
-                    EmployeeDocuments(index).Changed = True
-                Else
-                    EmployeeDocuments(index).Changed = False
-                End If
-                If imageFileName = "" Then
-                    ' the user selected to clear the image
-                    EmployeeDocuments(index).DataImageIdNo = 0
-                End If
+            Dim imageFileName As String = Nothing
+            'If documentFileName IsNot Nothing Then
+            imageFileName = SelectImage(documentFileName, remarks)
+
+            'End If
+            Dim changed As Boolean = EmployeeDocuments(index).Changed
+            EmployeeDocuments(index).ImageFileName = imageFileName
+            If imageFileName <> originalDocumentFileName Then
+                EmployeeDocuments(index).Changed = True
+            Else
+                EmployeeDocuments(index).Changed = False
+            End If
+            If imageFileName = "" Then
+                ' the user selected to clear the image
+                EmployeeDocuments(index).DataImageIdNo = 0
             End If
         End Sub
 
@@ -788,6 +792,10 @@ Namespace PresentationLayer.Views.Forms
             Dim dialogResult As DialogResult = cPictureViewer.ShowDialog()
             If dialogResult = DialogResult.OK Then
                 Return cPictureViewer.ImageFileName
+            ElseIf dialogResult = DialogResult.Cancel Then
+                Return cFileName
+            ElseIf dialogResult = DialogResult.Abort Then
+
             End If
             Return Nothing
         End Function

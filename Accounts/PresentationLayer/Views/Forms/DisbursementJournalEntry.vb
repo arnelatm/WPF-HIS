@@ -418,7 +418,6 @@ Namespace PresentationLayer.Views.Forms
             Else
                 txtJournalCode.Text = Presenter.JournalCode
             End If
-            KeyPreview = True
             _jiFooter = New DgvFooter(DataGridViewJournalItems) With {
                 .AutoCalc = True
             }
@@ -835,6 +834,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub DataGridViewJournalItems_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellContentClick
 
         End Sub
+
     End Class
 
 End Namespace

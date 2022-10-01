@@ -33,7 +33,6 @@ Public Class CFormBase
 
     Public Sub New()
         InitializeComponent()
-        'KeyPreview = True
         DoubleBuffered = True
     End Sub
 
