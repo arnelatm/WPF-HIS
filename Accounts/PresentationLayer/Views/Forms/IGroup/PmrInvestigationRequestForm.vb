@@ -37,6 +37,15 @@ Namespace PresentationLayer.Views.Forms.IGroup
             End Set
         End Property
 
+        Public Property Investigations As List(Of LabInvoiceDetails)
+            Get
+
+            End Get
+            Set(value As List(Of LabInvoiceDetailsView)
+
+            End Set
+        End Property
+
         Public Property PatientName As String Implements IPmrInvestigationView.PatientName
             Get
                 Throw New NotImplementedException()
