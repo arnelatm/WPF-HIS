@@ -9,7 +9,8 @@ Namespace BusinessLayer.IGroup
         Property Series As String
         Property PatientName As String
         Property Gender As String
-        Property LabInvoiceDetails As List(Of Lab_InvoiceDetails)
+        Property DoctorCode As String
+
     End Class
 
 End Namespace
