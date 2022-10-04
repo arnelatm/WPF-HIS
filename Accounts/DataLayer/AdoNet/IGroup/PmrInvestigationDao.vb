@@ -43,7 +43,7 @@ Namespace DataLayer.AdoNet
             Dim transactionDate As String = parameter(1)
             Dim sql As String = "SELECT EmpNameEnglish from EmployeeDetails where EmpId = '" + doctorId.ToString() + "'"
             Dim data As New PmrInvestigation
-            data = _db.Read(sql, Make)
+            data = _db.Read(sql, Make).FirstOrDefault()
             sql = "SELECT [CreateDate], [File No], [Inv Type], [Name], [Status], [Token], [Type] from PmrPatientDisplay where [DoctorId] = @doctorId and [TransactionDate] = @transactionDate and Token <> 0"
             data.PmrPatientDisplay = _db.Read(sql, MakePmrPatientDetails).ToList()
             Return data
