@@ -1,5 +1,6 @@
 ﻿Imports System.Configuration
 Imports System.Globalization
+Imports AATM.Accounts.BusinessLayer.IGroup
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces.IGroup
 Imports AATM.Libraries.GlobalFuncNSub
@@ -9,103 +10,87 @@ Namespace PresentationLayer.Views.Forms.IGroup
     Public Class PmrInvestigationRequestForm
         Implements IPmrInvestigationView
 
-        Private _nfi As NumberFormatInfo
+        Private Event RetrieveInvestigations()
+        Public Event GetDoctorPatientsRequested() Implements IPmrInvestigationView.GetDoctorPatientsRequested
+        Private _pmrPatientsDisplay As List(Of IPmrPatientDisplayView)
 
         Public Sub New()
 
             ' This call is required by the designer.
             InitializeComponent()
-            FirstControl = dtpTransactionDate
+            dtpTransactionDate.Value = "2022/02/26"
+            txtDoctorId.Text = "209"
+            ' Add any initialization after the InitializeComponent() call.
+            'RaiseEvent RetrieveInvestigations()
 
         End Sub
 
-        Public Property RegistrationNo As Integer Implements IPmrInvestigationView.RegistrationNo
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As Integer)
-                Throw New NotImplementedException()
-            End Set
-        End Property
 
-        Public Property Series As String Implements IPmrInvestigationView.Series
+        Public Property DoctorId As String Implements IPmrInvestigationView.DoctorID
             Get
-                Throw New NotImplementedException()
+                Return txtDoctorId.Text
             End Get
             Set(value As String)
-                Throw New NotImplementedException()
+                txtDoctorId.Text = value
             End Set
         End Property
 
-        Public Property Investigations As List(Of LabInvoiceDetails)
+
+        Public Property DoctorName As String Implements IPmrInvestigationView.DoctorName
             Get
-
-            End Get
-            Set(value As List(Of LabInvoiceDetailsView)
-
-            End Set
-        End Property
-
-        Public Property PatientName As String Implements IPmrInvestigationView.PatientName
-            Get
-                Throw New NotImplementedException()
+                Return txtDoctorName.Text
             End Get
             Set(value As String)
-                Throw New NotImplementedException()
+                txtDoctorName.Text = value
             End Set
         End Property
 
-        Public Property Gender As String Implements IPmrInvestigationView.Gender
+        Public Property TransactionDate As String Implements IPmrInvestigationView.TransactionDate
             Get
-                Throw New NotImplementedException()
+                Return dtpTransactionDate.Value
             End Get
             Set(value As String)
-                Throw New NotImplementedException()
+                dtpTransactionDate.Value = value
             End Set
         End Property
 
-        Protected Overrides Sub CreateMainFieldsDictionary()
-            MainFieldsDictionary = New Dictionary(Of String, Object) From
-                {{"TransactionDate", dtpTransactonDate},
-                {"GenericName", txtGenericName},
-                {"IdNo", TxtIdNo},
-                {"ItemDetailsCode", TxtItemDetailsCode},
-                {"ItemDetailsName", TxtItemDetailsName},
-                {"PackageSize", txtPackageSize},
-                {"PackageType", cboPackageType},
-                {"PrescriptionDrug", chkPrescriptionDrug},
-                {"RegistrationNo", txtRegistrationNo},
-                {"RouteOfAdministration", cboRouteOfAdministration},
-                {"StrengthValue", txtStrengthValue},
-                {"UnitOfStrength", cboUnitOfStrength},
-                {"UnitOfVolume", cboUnitOfVolume},
-                {"Volume", txtVolume}
-                }
+        Public Property PmrPatientsDisplay As List(Of IPmrPatientDisplayView) Implements IPmrInvestigationView.PmrPatientsDisplay
+            Get
+                Return _pmrPatientsDisplay
+            End Get
+            Set
+                _pmrPatientsDisplay = Value
+                BindPmrPatientDisplay()
+            End Set
+        End Property
+
+        Private Sub BindPmrPatientDisplay()
+            SuspendLayout()
+            bsPmrPatientDisplay.DataSource = Nothing
+            DataGridViewPmrPatientDisplay.Refresh()
+            bsPmrPatientDisplay.DataSource = PmrPatientsDisplay
+            bsPmrPatientDisplay.AllowNew = True
+            With DataGridViewPmrPatientDisplay
+                .AutoGenerateColumns = False
+                .DataSource = bsPmrPatientDisplay
+            End With
+            With DataGridViewPmrPatientDisplay.Columns
+                'dgvSequence.DisplayOnly = True
+                'dgvAccountIdNo.DataSource = AccountsByCode
+                'dgvAccountIdNo.DisplayMember = "Name"
+                'dgvAccountIdNo.ValueMember = "IdNo"
+                'dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
+                'dgvRevCostCenterIdNo.DataSource = RevCostCentersByCode
+                'dgvRevCostCenterIdNo.DisplayMember = "Name"
+                'dgvRevCostCenterIdNo.ValueMember = "idNo"
+                'dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
+            End With
+            ResumeLayout()
         End Sub
 
-        Protected Overrides Sub BeforeEdit()
-            If Strings.Left(RegistrationNo, 1) <> "X" Then
-                SetDisplayOnly(True)
-            Else
-                SetDisplayOnly(False)
-            End If
-            Refresh()
+        Private Sub btnRefresh_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnRefresh.ClickButtonArea
+            RaiseEvent GetDoctorPatientsRequested()
         End Sub
-
-        Private Sub SetDisplayOnly(value As Boolean)
-            cboDosageForm.DisplayOnly = value
-            txtGenericName.DisplayOnly = value
-            txtPackageSize.DisplayOnly = value
-            cboPackageType.DisplayOnly = value
-            txtRegistrationNo.DisplayOnly = value
-            cboRouteOfAdministration.DisplayOnly = value
-            txtStrengthValue.DisplayOnly = value
-            cboUnitOfStrength.DisplayOnly = value
-            cboUnitOfVolume.DisplayOnly = value
-            txtVolume.DisplayOnly = value
-        End Sub
-
-
     End Class
 
 End Namespace

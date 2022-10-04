@@ -2,7 +2,9 @@
 Imports System.Globalization
 Imports System.Threading
 Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Models.IGroup
 Imports AATM.Accounts.PresentationLayer.Presenters
+Imports AATM.Accounts.PresentationLayer.Views.Forms.IGroup
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Common
@@ -1042,6 +1044,10 @@ Namespace PresentationLayer.Views.Forms
             Dim formToRun = Activator.CreateInstance(GetType(TestForm))
             formToRun.Presenter = New DepartmentPresenter(Of DepartmentModel)(formToRun)
             formToRun.Show()
+        End Sub
+
+        Private Sub ToolStripMenuItemPMRReports_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPMRReports.Click
+            RunForm(Of PmrInvestigationRequestForm, PmrInvestigationPresenter(Of PmrInvestigationModel))()
         End Sub
     End Class
 
