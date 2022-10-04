@@ -6,7 +6,7 @@ Namespace PresentationLayer.Models.IGroup
     '''     The Model in MVP design pattern.
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
-    Public Class PmrInvestigationModel
+    Public Class PmrPatientDisplayModel
 
         Public Property [Token] As String
         Public Property [Status] As String

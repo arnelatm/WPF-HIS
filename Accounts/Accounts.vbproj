@@ -214,6 +214,8 @@
     <Compile Include="BusinessLayer\EmployeeLeaveApprovalItem.vb" />
     <Compile Include="BusinessLayer\EmployeePayElement.vb" />
     <Compile Include="BusinessLayer\IGroup\PmrInvestigation.vb" />
+    <Compile Include="BusinessLayer\IGroup\PmrPatientDisplay.vb" />
+    <Compile Include="BusinessLayer\IGroup\Patient.vb" />
     <Compile Include="BusinessLayer\IGroup\Lab_InvoiceGroup.vb" />
     <Compile Include="BusinessLayer\IGroup\ItemDetails.vb" />
     <Compile Include="BusinessLayer\JournalPrefix.vb" />
@@ -285,6 +287,7 @@
     <Compile Include="DataLayer\AdoNet\EmployeeDocumentDao.vb" />
     <Compile Include="DataLayer\AdoNet\HolidayTransferDao.vb" />
     <Compile Include="DataLayer\AdoNet\HolidayTransferItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\IGroup\PmrInvestigationDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\Lab_InvoiceGroupDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\ItemDetailsDao.vb" />
     <Compile Include="DataLayer\AdoNet\ReportDao.vb" />
@@ -387,7 +390,9 @@
     <Compile Include="PresentationLayer\Models\HolidayAvailmentModel.vb" />
     <Compile Include="PresentationLayer\Models\HolidayTransferModel.vb" />
     <Compile Include="PresentationLayer\Models\HolidayTransferAvailmentModel.vb" />
+    <Compile Include="PresentationLayer\Models\IGroup\PatientModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\PMRInvestigationModel.vb" />
+    <Compile Include="PresentationLayer\Models\IGroup\PMRPatientDisplayModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\Lab_InvoiceGroupModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\ItemDetailsModel.vb" />
     <Compile Include="PresentationLayer\Models\ReportSelectorModel.vb" />
@@ -426,6 +431,7 @@
     <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CustomerPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DocumentPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\IGroup\PmrInvestigationPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\Lab_InvoiceGroupPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\ItemDetailsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ReportSelectorPresenter.vb" />
@@ -719,10 +725,14 @@
     <Compile Include="PresentationLayer\Views\Forms\TestForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\IGroup\PmrInvestigationView.vb" />
+    <Compile Include="PresentationLayer\Views\IGroup\PmrPatientDisplayView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDataImageView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDocumentView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeDocumentView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IPmrInvestigationView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IPmrPatientDisplayView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IPmrPatientView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\ILab_InvoiceGroupView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IItemDetailsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IHolidayAvailmentApprovalHistoryView.vb" />
@@ -1766,6 +1776,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.GeneralJournalModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.HolidayTransferItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.HolidayTransferItemModel1.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.IGroup.PmrPatientDisplayModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.JournalItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.OvertimeItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PayElementAccountModel.datasource" />

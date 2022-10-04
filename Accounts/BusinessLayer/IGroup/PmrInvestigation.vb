@@ -1,15 +1,14 @@
 ﻿' Category business object
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
-
-
-Namespace BusinessLayer.IGroup
+Namespace BusinessLayer
 
     Public Class PmrInvestigation
-        Property RegistrationNo As Int32
-        Property Series As String
-        Property PatientName As String
-        Property Gender As String
-        Property DoctorCode As String
+        Inherits AATM.BusinessLayer.BusinessObject
+
+        Property DoctorID As String
+        Property DoctorName As String
+        Property TransactionDate As String
+        Property PmrPatientDisplay As List(Of PmrPatientDisplay)
 
     End Class
 

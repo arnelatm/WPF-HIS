@@ -699,6 +699,13 @@ Namespace Services
             DataDao.SetConnectionString(connectionName)
         End Sub
 
+        Public Function GetParametrized(Of TM)(parameter As Object, Optional sortOrder As String = "")
+            Dim model As New List(Of TM)
+            Dim records = DataDao.GetParametrized(parameter, sortOrder)
+            GlobalVariables.Mapper.Map(records, model)
+            Return model
+        End Function
+
 #End Region
 
 #Region "BaseDao Functions"
