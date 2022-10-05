@@ -1,6 +1,4 @@
-﻿
-
-Namespace PresentationLayer.Models
+﻿Namespace PresentationLayer.Models
 
     ''' <summary>
     '''     The Model in MVP design pattern.
@@ -8,13 +6,13 @@ Namespace PresentationLayer.Models
     ''' </summary>
     Public Class PmrPatientDisplayModel
 
-        Public Property [Token] As String
-        Public Property [Status] As String
-        Public Property [File_No] As String
-        Public Property [Name] As String
-        Public Property [Type] As String
-        Public Property [Inv_Type] As String
         Public Property [CreateDate] As DateTime
+        Public Property [Name] As String
+        Public Property [Status] As Boolean
+        Public Property [Token] As String
+        Public Property PType As String
+        Public Property FileNo As String
+        Public Property InvType As String
 
     End Class
 

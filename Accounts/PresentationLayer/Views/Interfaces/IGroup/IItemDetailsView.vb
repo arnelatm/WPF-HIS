@@ -27,8 +27,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property UnitOfVolume As String
         Property UserId As String
         Property Volume As Double?
-        Property PrescriptionDrug as Boolean
-        Property RouteOfAdministration as String
+        Property PrescriptionDrug As Boolean
+        Property RouteOfAdministration As String
     End Interface
 
 End Namespace

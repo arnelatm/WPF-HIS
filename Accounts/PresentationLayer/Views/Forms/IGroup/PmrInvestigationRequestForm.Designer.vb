@@ -1,4 +1,4 @@
-﻿Namespace PresentationLayer.Views.Forms.IGroup
+﻿Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class PmrInvestigationRequestForm
 
@@ -36,19 +36,20 @@
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDoctorId = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtDoctorName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.btnRefresh = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.DataGridViewPmrPatientDisplay = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.CTextBox1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.imgList = New System.Windows.Forms.ImageList(Me.components)
+            Me.bsPmrPatientDisplay = New System.Windows.Forms.BindingSource(Me.components)
             Me.TokenDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.StatusDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
             Me.FileNoDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.NameDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.TypeDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvPType = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.InvTypeDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.CreateDateDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.bsPmrPatientDisplay = New System.Windows.Forms.BindingSource(Me.components)
-            Me.btnRefresh = New AATM.Libraries.CBaseControlsLibrary.CButton()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout1.SuspendLayout()
             CType(Me.DataGridViewPmrPatientDisplay, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -141,6 +142,18 @@
             Me.txtDoctorName.TabIndex = 8
             Me.txtDoctorName.Translatable = False
             '
+            'btnRefresh
+            '
+            Me.btnRefresh.DesignerSelected = False
+            Me.btnRefresh.ImageIndex = 0
+            Me.btnRefresh.Location = New System.Drawing.Point(667, 3)
+            Me.btnRefresh.Name = "btnRefresh"
+            Me.btnRefresh.OriginalImageName = Nothing
+            Me.btnRefresh.SecurityKey = ""
+            Me.btnRefresh.Size = New System.Drawing.Size(90, 25)
+            Me.btnRefresh.TabIndex = 11
+            Me.btnRefresh.Text = "Refresh"
+            '
             'CLabel1
             '
             Me.CLabel1.DisplayOnly = True
@@ -189,7 +202,7 @@
             Me.DataGridViewPmrPatientDisplay.AutoGenerateColumns = False
             Me.DataGridViewPmrPatientDisplay.BegFindValue = Nothing
             Me.DataGridViewPmrPatientDisplay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewPmrPatientDisplay.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TokenDataGridViewTextBoxColumn, Me.StatusDataGridViewTextBoxColumn, Me.FileNoDataGridViewTextBoxColumn, Me.NameDataGridViewTextBoxColumn, Me.TypeDataGridViewTextBoxColumn, Me.InvTypeDataGridViewTextBoxColumn, Me.CreateDateDataGridViewTextBoxColumn})
+            Me.DataGridViewPmrPatientDisplay.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TokenDataGridViewTextBoxColumn, Me.StatusDataGridViewTextBoxColumn, Me.FileNoDataGridViewTextBoxColumn, Me.NameDataGridViewTextBoxColumn, Me.dgvPType, Me.InvTypeDataGridViewTextBoxColumn, Me.CreateDateDataGridViewTextBoxColumn})
             Me.DataGridViewPmrPatientDisplay.DataSource = Me.bsPmrPatientDisplay
             DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
             DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
@@ -255,6 +268,16 @@
             Me.CTextBox1.TabIndex = 9
             Me.CTextBox1.Translatable = False
             '
+            'imgList
+            '
+            Me.imgList.ImageStream = CType(resources.GetObject("imgList.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.imgList.TransparentColor = System.Drawing.Color.Transparent
+            Me.imgList.Images.SetKeyName(0, "btnPrint.png")
+            '
+            'bsPmrPatientDisplay
+            '
+            Me.bsPmrPatientDisplay.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PmrPatientDisplayModel)
+            '
             'TokenDataGridViewTextBoxColumn
             '
             Me.TokenDataGridViewTextBoxColumn.BegFindValue = Nothing
@@ -306,7 +329,7 @@
             'FileNoDataGridViewTextBoxColumn
             '
             Me.FileNoDataGridViewTextBoxColumn.BegFindValue = Nothing
-            Me.FileNoDataGridViewTextBoxColumn.DataPropertyName = "File_No"
+            Me.FileNoDataGridViewTextBoxColumn.DataPropertyName = "FileNo"
             DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
             Me.FileNoDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle4
@@ -316,7 +339,7 @@
             Me.FileNoDataGridViewTextBoxColumn.FieldName = Nothing
             Me.FileNoDataGridViewTextBoxColumn.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.FileNoDataGridViewTextBoxColumn.FindEnabled = False
-            Me.FileNoDataGridViewTextBoxColumn.HeaderText = "File_No"
+            Me.FileNoDataGridViewTextBoxColumn.HeaderText = "FileNo"
             Me.FileNoDataGridViewTextBoxColumn.IgnoreCase = False
             Me.FileNoDataGridViewTextBoxColumn.Name = "FileNoDataGridViewTextBoxColumn"
             Me.FileNoDataGridViewTextBoxColumn.ReadOnly = True
@@ -346,31 +369,32 @@
             Me.NameDataGridViewTextBoxColumn.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.NameDataGridViewTextBoxColumn.Translatable = False
             '
-            'TypeDataGridViewTextBoxColumn
+            'dgvPType
             '
-            Me.TypeDataGridViewTextBoxColumn.BegFindValue = Nothing
-            Me.TypeDataGridViewTextBoxColumn.DataPropertyName = "Type"
+            Me.dgvPType.BegFindValue = Nothing
+            Me.dgvPType.DataPropertyName = "PType"
             DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-            Me.TypeDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle6
-            Me.TypeDataGridViewTextBoxColumn.EditingMode = False
-            Me.TypeDataGridViewTextBoxColumn.EndFindValue = Nothing
-            Me.TypeDataGridViewTextBoxColumn.FieldDescription = Nothing
-            Me.TypeDataGridViewTextBoxColumn.FieldName = Nothing
-            Me.TypeDataGridViewTextBoxColumn.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.TypeDataGridViewTextBoxColumn.FindEnabled = False
-            Me.TypeDataGridViewTextBoxColumn.HeaderText = "Type"
-            Me.TypeDataGridViewTextBoxColumn.IgnoreCase = False
-            Me.TypeDataGridViewTextBoxColumn.Name = "TypeDataGridViewTextBoxColumn"
-            Me.TypeDataGridViewTextBoxColumn.ReadOnly = True
-            Me.TypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.TypeDataGridViewTextBoxColumn.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.TypeDataGridViewTextBoxColumn.Translatable = False
+            Me.dgvPType.DefaultCellStyle = DataGridViewCellStyle6
+            Me.dgvPType.EditingMode = False
+            Me.dgvPType.EndFindValue = Nothing
+            Me.dgvPType.FieldDescription = Nothing
+            Me.dgvPType.FieldName = Nothing
+            Me.dgvPType.FillWeight = 60.0!
+            Me.dgvPType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvPType.FindEnabled = False
+            Me.dgvPType.HeaderText = "Patient Type"
+            Me.dgvPType.IgnoreCase = False
+            Me.dgvPType.Name = "dgvPType"
+            Me.dgvPType.ReadOnly = True
+            Me.dgvPType.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvPType.Translatable = False
+            Me.dgvPType.Width = 60
             '
             'InvTypeDataGridViewTextBoxColumn
             '
             Me.InvTypeDataGridViewTextBoxColumn.BegFindValue = Nothing
-            Me.InvTypeDataGridViewTextBoxColumn.DataPropertyName = "Inv_Type"
+            Me.InvTypeDataGridViewTextBoxColumn.DataPropertyName = "InvType"
             DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
             Me.InvTypeDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle7
@@ -380,13 +404,14 @@
             Me.InvTypeDataGridViewTextBoxColumn.FieldName = Nothing
             Me.InvTypeDataGridViewTextBoxColumn.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.InvTypeDataGridViewTextBoxColumn.FindEnabled = False
-            Me.InvTypeDataGridViewTextBoxColumn.HeaderText = "Inv_Type"
+            Me.InvTypeDataGridViewTextBoxColumn.HeaderText = "Invoice Type"
             Me.InvTypeDataGridViewTextBoxColumn.IgnoreCase = False
             Me.InvTypeDataGridViewTextBoxColumn.Name = "InvTypeDataGridViewTextBoxColumn"
             Me.InvTypeDataGridViewTextBoxColumn.ReadOnly = True
             Me.InvTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.InvTypeDataGridViewTextBoxColumn.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.InvTypeDataGridViewTextBoxColumn.Translatable = False
+            Me.InvTypeDataGridViewTextBoxColumn.Width = 70
             '
             'CreateDateDataGridViewTextBoxColumn
             '
@@ -394,6 +419,7 @@
             Me.CreateDateDataGridViewTextBoxColumn.DataPropertyName = "CreateDate"
             DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle8.Format = "hh:mm tt"
             Me.CreateDateDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle8
             Me.CreateDateDataGridViewTextBoxColumn.EditingMode = False
             Me.CreateDateDataGridViewTextBoxColumn.EndFindValue = Nothing
@@ -401,29 +427,14 @@
             Me.CreateDateDataGridViewTextBoxColumn.FieldName = Nothing
             Me.CreateDateDataGridViewTextBoxColumn.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.CreateDateDataGridViewTextBoxColumn.FindEnabled = False
-            Me.CreateDateDataGridViewTextBoxColumn.HeaderText = "CreateDate"
+            Me.CreateDateDataGridViewTextBoxColumn.HeaderText = "Time"
             Me.CreateDateDataGridViewTextBoxColumn.IgnoreCase = False
             Me.CreateDateDataGridViewTextBoxColumn.Name = "CreateDateDataGridViewTextBoxColumn"
             Me.CreateDateDataGridViewTextBoxColumn.ReadOnly = True
             Me.CreateDateDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.CreateDateDataGridViewTextBoxColumn.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.CreateDateDataGridViewTextBoxColumn.Translatable = False
-            '
-            'bsPmrPatientDisplay
-            '
-            Me.bsPmrPatientDisplay.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PmrPatientDisplayModel)
-            '
-            'btnRefresh
-            '
-            Me.btnRefresh.DesignerSelected = True
-            Me.btnRefresh.ImageIndex = 0
-            Me.btnRefresh.Location = New System.Drawing.Point(667, 3)
-            Me.btnRefresh.Name = "btnRefresh"
-            Me.btnRefresh.OriginalImageName = Nothing
-            Me.btnRefresh.SecurityKey = ""
-            Me.btnRefresh.Size = New System.Drawing.Size(90, 25)
-            Me.btnRefresh.TabIndex = 11
-            Me.btnRefresh.Text = "Refresh"
+            Me.CreateDateDataGridViewTextBoxColumn.Width = 80
             '
             'PmrInvestigationRequestForm
             '
@@ -460,13 +471,15 @@
         Friend WithEvents TransDateEnglishDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents txtDoctorId As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CTextBox1 As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents btnRefresh As Libraries.CBaseControlsLibrary.CButton
+        Friend WithEvents TypeDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents imgList As ImageList
         Friend WithEvents TokenDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents StatusDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
         Friend WithEvents FileNoDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents NameDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents TypeDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents dgvPType As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents InvTypeDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents CreateDateDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents btnRefresh As Libraries.CBaseControlsLibrary.CButton
     End Class
 End Namespace

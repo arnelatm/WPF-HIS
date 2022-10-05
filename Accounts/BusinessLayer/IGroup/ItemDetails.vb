@@ -35,8 +35,8 @@ Namespace BusinessLayer
         Public Property Pack1 As Int16
         Public Property Pack2 As Int16
         Public Property Pack3 As Int16
-        PUblic Property PackageSize As Double?
-        PUblic Property PackageType As String
+        Public Property PackageSize As Double?
+        Public Property PackageType As String
         Public Property RegistrationNo As String
         Public Property SaleStrip As String
         Public Property StrengthValue As String
@@ -44,8 +44,8 @@ Namespace BusinessLayer
         Public Property UnitOfVolume As String
         Public Property UserId As String
         Public Property Volume As Double?
-        Public Property PrescriptionDrug as Boolean
-        PUblic Property RouteOfAdministration as String
+        Public Property PrescriptionDrug As Boolean
+        Public Property RouteOfAdministration As String
 
     End Class
 

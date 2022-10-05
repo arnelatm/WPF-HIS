@@ -1,6 +1,4 @@
-﻿
-
-Namespace PresentationLayer.Models.IGroup
+﻿Namespace PresentationLayer.Models
 
     ''' <summary>
     '''     The Model in MVP design pattern.

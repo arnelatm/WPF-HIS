@@ -2,9 +2,7 @@
 Imports System.Globalization
 Imports System.Threading
 Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Models.IGroup
 Imports AATM.Accounts.PresentationLayer.Presenters
-Imports AATM.Accounts.PresentationLayer.Views.Forms.IGroup
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Common
@@ -887,7 +885,6 @@ Namespace PresentationLayer.Views.Forms
             ShowEntryForm(formToRun)
         End Sub
 
-
         Private Overloads Sub RunForm(Of TV, TP)()
             Dim formToRun = Activator.CreateInstance(GetType(TV))
             Dim pType As Type = GetType(TP)
@@ -1049,6 +1046,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemPMRReports_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPMRReports.Click
             RunForm(Of PmrInvestigationRequestForm, PmrInvestigationPresenter(Of PmrInvestigationModel))()
         End Sub
+
     End Class
 
 End Namespace

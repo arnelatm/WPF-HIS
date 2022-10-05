@@ -1,8 +1,6 @@
-﻿Imports AATM.Accounts.DataLayer
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
-Imports AATM.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Presenters
 
@@ -14,7 +12,7 @@ Namespace PresentationLayer.Presenters
             MyBase.New(itemView)
             Service = New AccountsService("ItemDetails") ', Nothing ,Nothing, "IGROUPCLINIC")
             'Service.SaveConnectionString()
-            'Service.SetConnectionString("IGROUPCLINIC")                    
+            'Service.SetConnectionString("IGROUPCLINIC")
             TableName = "ItemDetails"
             SortOrderKey = "ItemNameEnglish"
             'Service.RestoreConnectionString()
@@ -22,11 +20,11 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateDataSource("DrugDosageForm_View", "DosageForm",{"DosageForm"},"DosageForm")
-            CreateDataSource("DrugUnitOfVolume_View", "UnitOfVolume",{"UnitOfVolume"},"UnitOfVolume")
-            CreateDataSource("DrugUnitOfStrength_View", "UnitOfStrength",{"UnitOfStrength"},"UnitOfStrength")
-            CreateDataSource("DrugPackageType_View", "PackageType",{"PackageType"},"PackageType")
-            CreateDataSource("DrugRouteOfAdministration_View", "RouteOfAdministration",{"RouteOfAdministration"},"RouteOfAdministration")
+            CreateDataSource("DrugDosageForm_View", "DosageForm", {"DosageForm"}, "DosageForm")
+            CreateDataSource("DrugUnitOfVolume_View", "UnitOfVolume", {"UnitOfVolume"}, "UnitOfVolume")
+            CreateDataSource("DrugUnitOfStrength_View", "UnitOfStrength", {"UnitOfStrength"}, "UnitOfStrength")
+            CreateDataSource("DrugPackageType_View", "PackageType", {"PackageType"}, "PackageType")
+            CreateDataSource("DrugRouteOfAdministration_View", "RouteOfAdministration", {"RouteOfAdministration"}, "RouteOfAdministration")
         End Sub
 
         Private Sub OnBeforeSave() Handles MyBase.BeforeSave
@@ -44,7 +42,6 @@ Namespace PresentationLayer.Presenters
                                                         {"String", "String", "String", "DateTime", "String", "Decimal", "Decimal", "Decimal", "Decimal", "Decimal", "Decimal"},
                                                         {"01", View.ItemDetailsCode, "000", Now(), "01", 0, 0, 0, 0, 0, 0})
         End Sub
-
 
     End Class
 
