@@ -11,9 +11,9 @@ Namespace BusinessLayer
         Property [Status] As String
         Property [File_No] As String
         Property [Name] As String
-        Property [Type]
-        Property [Inv_Type]
-        Property [CreateDate]
+        Property [Type] As String
+        Property [Inv_Type] As String
+        Property [CreateDate] As DateTime
     End Class
 
 End Namespace

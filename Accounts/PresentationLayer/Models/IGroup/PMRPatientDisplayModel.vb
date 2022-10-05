@@ -1,6 +1,6 @@
 ﻿
 
-Namespace PresentationLayer.Models.IGroup
+Namespace PresentationLayer.Models
 
     ''' <summary>
     '''     The Model in MVP design pattern.
@@ -12,9 +12,9 @@ Namespace PresentationLayer.Models.IGroup
         Public Property [Status] As String
         Public Property [File_No] As String
         Public Property [Name] As String
-        Public Property [Type]
-        Public Property [Inv_Type]
-        Public Property [CreateDate]
+        Public Property [Type] As String
+        Public Property [Inv_Type] As String
+        Public Property [CreateDate] As DateTime
 
     End Class
 

@@ -39,13 +39,17 @@ Namespace DataLayer.AdoNet
         'End Function
 
         Public Function GetParametrized(parameter As Object, Optional sortExpression As String = Nothing) As PmrInvestigation Implements IDaoParametrized(Of PmrInvestigation).GetParametrized
-            Dim doctorId As String = parameter(0)
-            Dim transactionDate As String = parameter(1)
+            Dim doctorId As String = parameter(0).ToString()
+            Dim transactionDate As Date = parameter(1)
+            Dim dateString As String = transactionDate.ToString("yyyy/MM/dd", System.Globalization.CultureInfo.InvariantCulture)
             Dim sql As String = "SELECT EmpNameEnglish from EmployeeDetails where EmpId = '" + doctorId.ToString() + "'"
-            Dim data As New PmrInvestigation
+            Dim data As New PmrInvestigation  
             data = _db.Read(sql, Make).FirstOrDefault()
-            sql = "SELECT [CreateDate], [File No], [Inv Type], [Name], [Status], [Token], [Type] from PmrPatientDisplay where [DoctorId] = @doctorId and [TransactionDate] = @transactionDate and Token <> 0"
-            data.PmrPatientDisplay = _db.Read(sql, MakePmrPatientDetails).ToList()
+            data.DoctorID = doctorId
+            data.TransactionDate = transactionDate
+            Dim params() As Object = {"@DoctorId", doctorId, "@TransactionDate", dateString} 
+            sql = "SELECT [CreateDate], [File No], [Inv Type], [Name], [Status], [Token], [Type] from PmrPatientDisplay_View where doctorid = @DoctorId and [TransDateEnglish] = @TransactionDate and Token <> 0 order by Cast(token as int) desc"
+            data.PmrPatientDisplay = _db.Read(sql, MakePmrPatientDetails, params).ToList()
             Return data
         End Function
 
@@ -57,10 +61,10 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly MakePmrPatientDetails As Func(Of IDataReader, PmrPatientDisplay) = Function(reader) New PmrPatientDisplay() With
             {
             .CreateDate = Extensions.AsDateTime(reader("CreateDate")),
-            .File_No = Extensions.AsString(reader("File_No")),
-            .Inv_Type = Extensions.AsString(reader("Inv_Type")),
-            .Name = CType(Extensions.AsString(reader("Name")), Date),
-            .Status = Extensions.AsBool(reader("Status")),
+            .File_No = Extensions.AsString(reader("File No")),
+            .Inv_Type = Extensions.AsString(reader("Inv Type")),
+            .Name = Extensions.AsString(reader("Name")),
+            .Status = Extensions.AsChar(reader("Status")),
             .Token = Extensions.AsInt(Of Int16)(reader("Token")),
             .Type = Extensions.AsBool(reader("Type"))
             }

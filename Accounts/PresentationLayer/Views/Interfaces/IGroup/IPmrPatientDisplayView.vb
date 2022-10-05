@@ -1,6 +1,6 @@
 ﻿Imports AATM.PresentationLayer.Views
 
-Namespace PresentationLayer.Views.Interfaces.IGroup
+Namespace PresentationLayer.Views.Interfaces
 
     Public Interface IPmrPatientDisplayView
         Inherits IView
@@ -9,9 +9,9 @@ Namespace PresentationLayer.Views.Interfaces.IGroup
         Property [Status] As String
         Property [File_No] As String
         Property [Name] As String
-        Property [Type]
-        Property [Inv_Type]
-        Property [CreateDate]
+        Property [Type] As String
+        Property [Inv_Type] As String
+        Property [CreateDate] As DateTime
 
     End Interface
 
