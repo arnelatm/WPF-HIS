@@ -17,9 +17,9 @@ Namespace DataLayer.AdoNet
             Return _db
         End Function
 
-        Public Overrides Function GetPrimaryFieldName()
-            Return "Trans_Key"
-        End Function
+        'Public Overrides Function GetPrimaryFieldName()
+        '    Return "Trans_Key"
+        'End Function
 
         Public Function GetParametrized(parameter As Object, Optional sortExpression As String = Nothing) As PmrInvestigation Implements IDaoParametrized(Of PmrInvestigation).GetParametrized
             Dim doctorId As String = parameter(0).ToString()
@@ -31,7 +31,7 @@ Namespace DataLayer.AdoNet
             data.DoctorID = doctorId
             data.TransactionDate = transactionDate
             Dim params() As Object = {"@DoctorId", doctorId, "@TransactionDate", dateString}
-            sql = $"SELECT [CreateDate], [File No], [Inv Type], [Name], [Status], [Token], [Type] from PmrPatientDisplay_View where doctorid = @DoctorId and [TransDateEnglish] = @TransactionDate and Token <> 0 order by Cast(token as int) desc"
+            sql = $"SELECT [InvoiceDate], [File No], [Inv Type], [Name], [Status], [Token], [Type], [Trans_Key] from PmrPatientDisplay_View where doctorid = @DoctorId and [TransDateEnglish] = @TransactionDate and Token <> 0 order by Cast(token as int) desc"
             data.PmrPatientsDisplay = _db.Read(sql, MakePmrPatientDetails, params).ToList()
             Return data
         End Function
@@ -43,13 +43,14 @@ Namespace DataLayer.AdoNet
 
         Private Shared ReadOnly MakePmrPatientDetails As Func(Of IDataReader, PmrPatientDisplay) = Function(reader) New PmrPatientDisplay() With
             {
-            .CreateDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("CreateDate")),
+            .InvoiceDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("InvoiceDate")),
             .FileNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("File No")),
             .InvType = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Inv Type")),
             .Name = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Name")),
             .Status = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Status")),
             .Token = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("Token")),
-            .PType = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Type"))
+            .PType = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Type")),
+            .TransKey = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("Trans_Key"))
             }
 
     End Class

@@ -1,6 +1,7 @@
 ﻿Imports System.Configuration
 Imports System.Globalization
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.GlobalFuncNSub
@@ -23,8 +24,20 @@ Namespace PresentationLayer.Views.Forms
 
             ' This call is required by the designer.
             InitializeComponent()
-            dtpTransactionDate.Value = "2022/01/06"
+            dtpTransactionDate.Value = Today()
             txtDoctorId.Text = "209"
+
+            With DataGridViewPmrPatientDisplay
+                .DefaultCellStyle.ForeColor = Color.Black
+                .BackColor = Color.White
+                .AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke
+                Dim dgvPrintColumn As New DataGridViewImageColumn
+                .Columns.Insert(.Columns.Count, dgvPrintColumn)
+                dgvPrintColumn.Image = imgList.Images(0)
+                dgvPrintColumn.Width = 30
+                dgvPrintColumn.Name = "dgvPrintColumn"
+                dgvPrintColumn.HeaderText = Messaging.TranslateCaption("Print")
+            End With
 
         End Sub
 
@@ -75,17 +88,7 @@ Namespace PresentationLayer.Views.Forms
                 .AutoGenerateColumns = False
                 .DataSource = bsPmrPatientDisplay
             End With
-            With DataGridViewPmrPatientDisplay
-                .DefaultCellStyle.ForeColor = Color.Black
-                .BackColor = Color.White
-                .AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke
-                Dim dgvPrintColumn As New DataGridViewImageColumn
-                .Columns.Insert(.Columns.Count, dgvPrintColumn)
-                dgvPrintColumn.Image = imgList.Images(0)
-                dgvPrintColumn.Width = 30
-                dgvPrintColumn.Name = "dgvPrintColumn"
-                dgvPrintColumn.HeaderText = Messaging.TranslateCaption("Print")
-            End With
+
             ResumeLayout()
         End Sub
 
@@ -104,10 +107,6 @@ Namespace PresentationLayer.Views.Forms
             btnFilter.Visible = False
         End Sub
 
-        Private Sub dtpTransactionDate_Validated(sender As Object, e As EventArgs) Handles dtpTransactionDate.Validated
-            RaiseEvent GetDoctorPatientsRequested()
-        End Sub
-
         Private Sub dataGridView1_CellFormatting(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs) Handles DataGridViewPmrPatientDisplay.CellFormatting
             For Each myRow As DataGridViewRow In DataGridViewPmrPatientDisplay.Rows
                 If myRow.Cells("dgvPType").Value = "Old" Then
@@ -117,6 +116,23 @@ Namespace PresentationLayer.Views.Forms
                 End If
                 myRow.DefaultCellStyle.BackColor = Color.White
             Next
+        End Sub
+
+        Private Sub dtpTransactionDate_Validated(sender As Object, e As EventArgs) Handles dtpTransactionDate.Validated
+            RaiseEvent GetDoctorPatientsRequested()
+        End Sub
+
+
+        Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPmrPatientDisplay.CellClick
+            With DataGridViewPmrPatientDisplay
+                If .CurrentCell IsNot Nothing And .CurrentCell.OwningColumn.Name() = $"dgvPrintColumn" Then
+                    Dim transKey As Int32 = .CurrentRow.Cells("dgvTransKey").Value
+                    Dim parameter As New ArrayList
+                    parameter.Add("TransKey")
+                    parameter.Add(transKey)
+                    Dim cForm As New ReportFormIGroup($"PMR Doctors Form.Rpt", FormCulture, parameter)
+                End If
+            End With
         End Sub
 
     End Class

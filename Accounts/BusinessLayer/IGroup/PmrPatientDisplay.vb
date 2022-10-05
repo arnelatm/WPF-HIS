@@ -6,13 +6,15 @@ Namespace BusinessLayer
     Public Class PmrPatientDisplay
         Inherits AATM.BusinessLayer.BusinessObject
 
-        Property [CreateDate] As DateTime
-        Property [Name] As String
-        Property [Status] As Boolean
-        Property [Token] As String
-        Property PType As String
-        Property FileNo As String
-        Property InvType As String
+        Public Property InvoiceDate As DateTime
+        Public Property [Name] As String
+        Public Property [Status] As Boolean
+        Public Property [Token] As String
+        Public Property PType As String
+        Public Property FileNo As String
+        Public Property InvType As String
+        Public Property TransKey As Integer
+
 
     End Class
 
