@@ -6,13 +6,14 @@
     ''' </summary>
     Public Class PmrPatientDisplayModel
 
-        Public Property [CreateDate] As DateTime
+        Public Property InvoiceDate As DateTime
         Public Property [Name] As String
         Public Property [Status] As Boolean
         Public Property [Token] As String
         Public Property PType As String
         Public Property FileNo As String
         Public Property InvType As String
+        Public Property TransKey As Integer
 
     End Class
 

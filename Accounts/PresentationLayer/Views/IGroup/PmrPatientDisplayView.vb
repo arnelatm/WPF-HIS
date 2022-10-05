@@ -11,7 +11,8 @@ Namespace PresentationLayer.Views.Interfaces
         Public Property Name As String Implements IPmrPatientDisplayView.Name
         Public Property PType As String Implements IPmrPatientDisplayView.PType
         Public Property InvType As String Implements IPmrPatientDisplayView.InvType
-        Public Property CreateDate As DateTime Implements IPmrPatientDisplayView.CreateDate
+        Public Property InvoiceDate As DateTime Implements IPmrPatientDisplayView.InvoiceDate
+        Public Property TransKey As Int32 Implements IPmrPatientDisplayView.TransKey
         Public Property Errors As List(Of String) Implements IView.Errors
 
     End Class
