@@ -1,6 +1,4 @@
-﻿Imports AATM.PresentationLayer.Models
-
-Namespace PresentationLayer.Models
+﻿Namespace PresentationLayer.Models
 
     ''' <summary>
     '''     The Model in MVP design pattern.
@@ -31,8 +29,8 @@ Namespace PresentationLayer.Models
         Public Property UnitOfVolume As String
         Public Property UserId As String
         Public Property Volume As Double?
-        Public Property PrescriptionDrug as Boolean
-        Public Property RouteOfAdministration as String
+        Public Property PrescriptionDrug As Boolean
+        Public Property RouteOfAdministration As String
     End Class
 
 End Namespace

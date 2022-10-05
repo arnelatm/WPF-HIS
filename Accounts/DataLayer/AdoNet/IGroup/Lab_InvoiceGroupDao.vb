@@ -3,7 +3,6 @@ Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.GlobalFuncNSub
-Imports Extensions = AATM.DataLayer.AdoNet.Extensions
 
 Namespace DataLayer.AdoNet
     ' Data access object for CbcRetrieval
@@ -46,23 +45,21 @@ Namespace DataLayer.AdoNet
             Return data
         End Function
 
-
         Private Shared ReadOnly Make As Func(Of IDataReader, Lab_InvoiceGroup) =
                             Function(reader) _
             New Lab_InvoiceGroup() With {
-            .InvoiceNo = Extensions.AsString(reader("InvoiceNo")),
-            .PatientNameEnglish = Extensions.AsString(reader("PatientNameEnglish")),
-            .InvoiceType = Extensions.AsString(reader("InvoiceType")),
-            .InvoiceDate = CType(Extensions.AsString(reader("TransDate")), Date),
-            .AgeYMD = Extensions.AsString(reader("AgeYMD")),
-            .Age = Extensions.AsDecimal(reader("Age")),
-            .Sex = Extensions.AsString(reader("Sex")),
-            .RegistrationNo = Extensions.AsString(reader("RegistrationNo")),
-            .Remarks = Extensions.AsString(reader("Remarks")),
-            .SampleNo = Extensions.AsString(reader("SampleNo")),
-            .Status = Extensions.AsInt(Of Int32)(reader("Status"))
+            .InvoiceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("InvoiceNo")),
+            .PatientNameEnglish = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PatientNameEnglish")),
+            .InvoiceType = AATM.DataLayer.AdoNet.Extensions.AsString(reader("InvoiceType")),
+            .InvoiceDate = CType(AATM.DataLayer.AdoNet.Extensions.AsString(reader("TransDate")), Date),
+            .AgeYMD = AATM.DataLayer.AdoNet.Extensions.AsString(reader("AgeYMD")),
+            .Age = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Age")),
+            .Sex = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Sex")),
+            .RegistrationNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("RegistrationNo")),
+            .Remarks = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Remarks")),
+            .SampleNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("SampleNo")),
+            .Status = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("Status"))
             }
-
 
         'Public Function UpdateTable2(Of T)(data As DataTable, groupKey As T) As Integer Implements IDaoUpdateDataTable.UpdateTable2
         '    Dim retVal As Integer
@@ -119,7 +116,6 @@ Namespace DataLayer.AdoNet
                                       "SlNo," &
                                       "Suffix1"
 
-
         Public Overrides Function GetDB()
             Return _db
         End Function
@@ -172,12 +168,11 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, Lab_InvoiceDetails) =
                                     Function(reader) _
             New Lab_InvoiceDetails() With {
-            .SlNo = Extensions.AsDecimal(reader("SlNo")),
-            .Diagnosis1 = Extensions.AsString(reader("Diagnosis1")),
-            .Result1 = Extensions.AsString(reader("Result1")),
-            .Suffix1 = Extensions.AsString(reader("Suffix1"))
+            .SlNo = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("SlNo")),
+            .Diagnosis1 = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Diagnosis1")),
+            .Result1 = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Result1")),
+            .Suffix1 = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Suffix1"))
            }
-
 
     End Class
 

@@ -1,32 +1,34 @@
 ﻿Imports System.Configuration
 Imports System.Globalization
-Imports AATM.Accounts.BusinessLayer.IGroup
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces.IGroup
+Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.GlobalResources
+Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Views
 
-Namespace PresentationLayer.Views.Forms.IGroup
+Namespace PresentationLayer.Views.Forms
 
     Public Class PmrInvestigationRequestForm
         Implements IPmrInvestigationView
 
-        Private Event RetrieveInvestigations()
         Public Event GetDoctorPatientsRequested() Implements IPmrInvestigationView.GetDoctorPatientsRequested
-        Private _pmrPatientsDisplay As List(Of IPmrPatientDisplayView)
+
+        Public Event PrintReportRequested(rowIndex As Short) Implements IPmrInvestigationView.PrintReportRequested
+
+        Private _pmrPatientsDisplay As New List(Of PmrPatientDisplayView)
 
         Public Sub New()
 
             ' This call is required by the designer.
             InitializeComponent()
-            dtpTransactionDate.Value = "2022/02/26"
+            dtpTransactionDate.Value = "2022/01/06"
             txtDoctorId.Text = "209"
-            ' Add any initialization after the InitializeComponent() call.
-            'RaiseEvent RetrieveInvestigations()
 
         End Sub
 
-
-        Public Property DoctorId As String Implements IPmrInvestigationView.DoctorID
+        Public Property DoctorId As String Implements IPmrInvestigationView.DoctorId
             Get
                 Return txtDoctorId.Text
             End Get
@@ -34,7 +36,6 @@ Namespace PresentationLayer.Views.Forms.IGroup
                 txtDoctorId.Text = value
             End Set
         End Property
-
 
         Public Property DoctorName As String Implements IPmrInvestigationView.DoctorName
             Get
@@ -45,16 +46,16 @@ Namespace PresentationLayer.Views.Forms.IGroup
             End Set
         End Property
 
-        Public Property TransactionDate As String Implements IPmrInvestigationView.TransactionDate
+        Public Property TransactionDate As Date? Implements IPmrInvestigationView.TransactionDate
             Get
                 Return dtpTransactionDate.Value
             End Get
-            Set(value As String)
+            Set(value As Date?)
                 dtpTransactionDate.Value = value
             End Set
         End Property
 
-        Public Property PmrPatientsDisplay As List(Of IPmrPatientDisplayView) Implements IPmrInvestigationView.PmrPatientsDisplay
+        Public Property PmrPatientsDisplay As List(Of PmrPatientDisplayView) Implements IPmrInvestigationView.PmrPatientsDisplay
             Get
                 Return _pmrPatientsDisplay
             End Get
@@ -74,16 +75,16 @@ Namespace PresentationLayer.Views.Forms.IGroup
                 .AutoGenerateColumns = False
                 .DataSource = bsPmrPatientDisplay
             End With
-            With DataGridViewPmrPatientDisplay.Columns
-                'dgvSequence.DisplayOnly = True
-                'dgvAccountIdNo.DataSource = AccountsByCode
-                'dgvAccountIdNo.DisplayMember = "Name"
-                'dgvAccountIdNo.ValueMember = "IdNo"
-                'dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
-                'dgvRevCostCenterIdNo.DataSource = RevCostCentersByCode
-                'dgvRevCostCenterIdNo.DisplayMember = "Name"
-                'dgvRevCostCenterIdNo.ValueMember = "idNo"
-                'dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
+            With DataGridViewPmrPatientDisplay
+                .DefaultCellStyle.ForeColor = Color.Black
+                .BackColor = Color.White
+                .AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke
+                Dim dgvPrintColumn As New DataGridViewImageColumn
+                .Columns.Insert(.Columns.Count, dgvPrintColumn)
+                dgvPrintColumn.Image = imgList.Images(0)
+                dgvPrintColumn.Width = 30
+                dgvPrintColumn.Name = "dgvPrintColumn"
+                dgvPrintColumn.HeaderText = Messaging.TranslateCaption("Print")
             End With
             ResumeLayout()
         End Sub
@@ -91,6 +92,33 @@ Namespace PresentationLayer.Views.Forms.IGroup
         Private Sub btnRefresh_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnRefresh.ClickButtonArea
             RaiseEvent GetDoctorPatientsRequested()
         End Sub
+
+        Private Sub PmrInvestigationRequestForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            RaiseEvent GetDoctorPatientsRequested()
+            dtpTransactionDate.EditingMode = True
+            btnSave.Visible = False
+            btnEdit.Visible = False
+            btnUndo.Visible = False
+            btnEdit.Visible = False
+            btnUndo.Visible = False
+            btnFilter.Visible = False
+        End Sub
+
+        Private Sub dtpTransactionDate_Validated(sender As Object, e As EventArgs) Handles dtpTransactionDate.Validated
+            RaiseEvent GetDoctorPatientsRequested()
+        End Sub
+
+        Private Sub dataGridView1_CellFormatting(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs) Handles DataGridViewPmrPatientDisplay.CellFormatting
+            For Each myRow As DataGridViewRow In DataGridViewPmrPatientDisplay.Rows
+                If myRow.Cells("dgvPType").Value = "Old" Then
+                    myRow.DefaultCellStyle.ForeColor = Color.Coral
+                Else
+                    myRow.DefaultCellStyle.ForeColor = Color.DarkGreen
+                End If
+                myRow.DefaultCellStyle.BackColor = Color.White
+            Next
+        End Sub
+
     End Class
 
 End Namespace

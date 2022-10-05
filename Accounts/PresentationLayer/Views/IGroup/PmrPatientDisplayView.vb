@@ -1,16 +1,16 @@
 ﻿Imports AATM.PresentationLayer.Views
 
-Namespace PresentationLayer.Views.Interfaces.IGroup
+Namespace PresentationLayer.Views.Interfaces
 
     Public Class PmrPatientDisplayView
         Implements IPmrPatientDisplayView
 
         Public Property Token As String Implements IPmrPatientDisplayView.Token
-        Public Property Status As String Implements IPmrPatientDisplayView.Status
-        Public Property File_No As String Implements IPmrPatientDisplayView.File_No
+        Public Property Status As Boolean Implements IPmrPatientDisplayView.Status
+        Public Property FileNo As String Implements IPmrPatientDisplayView.FileNo
         Public Property Name As String Implements IPmrPatientDisplayView.Name
-        Public Property Type As String Implements IPmrPatientDisplayView.Type
-        Public Property Inv_Type As String Implements IPmrPatientDisplayView.Inv_Type
+        Public Property PType As String Implements IPmrPatientDisplayView.PType
+        Public Property InvType As String Implements IPmrPatientDisplayView.InvType
         Public Property CreateDate As DateTime Implements IPmrPatientDisplayView.CreateDate
         Public Property Errors As List(Of String) Implements IView.Errors
 

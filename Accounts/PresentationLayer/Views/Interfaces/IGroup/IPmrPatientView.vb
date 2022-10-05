@@ -1,6 +1,6 @@
 ﻿Imports AATM.PresentationLayer.Views
 
-Namespace PresentationLayer.Views.Interfaces.IGroup
+Namespace PresentationLayer.Views.Interfaces
 
     Public Interface IPatientView
         Inherits IView

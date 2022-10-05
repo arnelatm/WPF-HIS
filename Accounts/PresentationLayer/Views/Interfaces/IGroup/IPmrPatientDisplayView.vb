@@ -5,13 +5,13 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface IPmrPatientDisplayView
         Inherits IView
 
-        Property [Token] As String
-        Property [Status] As String
-        Property [File_No] As String
-        Property [Name] As String
-        Property [Type] As String
-        Property [Inv_Type] As String
         Property [CreateDate] As DateTime
+        Property [Name] As String
+        Property [Status] As Boolean
+        Property [Token] As String
+        Property PType As String
+        Property FileNo As String
+        Property InvType As String
 
     End Interface
 

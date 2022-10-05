@@ -1,8 +1,7 @@
 ﻿' Category business object
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
 
-
-Namespace BusinessLayer.IGroup
+Namespace BusinessLayer
 
     Public Class Patient
         Property RegistrationNo As Int32

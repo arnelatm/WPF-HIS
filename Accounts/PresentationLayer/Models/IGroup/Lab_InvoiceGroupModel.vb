@@ -1,13 +1,10 @@
-﻿Imports AATM.PresentationLayer.Models
-
-Namespace PresentationLayer.Models
+﻿Namespace PresentationLayer.Models
 
     '' <summary>
     ''     The Model in MVP design pattern.
     ''     Implements IModel and communicates with WCF Service.
     '' </summary>
 
-  
     Public Class Lab_InvoiceGroupModel
         Property InvoiceNo As Decimal
         Property InvoiceType As String
@@ -16,10 +13,10 @@ Namespace PresentationLayer.Models
         Property AgeYMD As String
         Property Age As Int16
         Property Sex As String
-        Property RegistrationNo as Decimal
-        Property Remarks as String
-        Property SampleNo as String
-        Property Status as Int32
+        Property RegistrationNo As Decimal
+        Property Remarks As String
+        Property SampleNo As String
+        Property Status As Int32
         Property LabInvoiceDetails As List(Of Lab_InvoiceDetailsModel)
     End Class
 

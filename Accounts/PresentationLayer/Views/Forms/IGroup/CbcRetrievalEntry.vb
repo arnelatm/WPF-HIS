@@ -15,7 +15,9 @@ Namespace PresentationLayer.Views.Forms
         Implements ILab_InvoiceGroupView
 
         Private _nfi As NumberFormatInfo
+
         Private Event RetrieveLabResultRequested() Implements ILab_InvoiceGroupView.RetrieveLabResultRequested
+
         Private Event SaveResultRequested() Implements ILab_InvoiceGroupView.SaveResultRequested
 
         Public Sub New()
@@ -42,22 +44,23 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
 #Region "Field Items"
+
         Public Property InvoiceNo As Decimal Implements ILab_InvoiceGroupView.InvoiceNo
             Get
-                If txtInvoiceNo.Text Is Nothing Or txtInvoiceNo.Text = "" Then
+                If TxtInvoiceNo.Text Is Nothing Or TxtInvoiceNo.Text = "" Then
                     Return 0
                 Else
-                    Return txtInvoiceNo.Text
+                    Return TxtInvoiceNo.Text
                 End If
             End Get
             Set(value As Decimal)
-                txtInvoiceNo.Text = value
+                TxtInvoiceNo.Text = value
             End Set
         End Property
 
         Public Property InvoiceNoF As String Implements ILab_InvoiceGroupView.InvoiceNoF
             Get
-                Return txtInvoiceNoF.Text                
+                Return txtInvoiceNoF.Text
             End Get
             Set(value As String)
                 txtInvoiceNoF.Text = value
@@ -168,7 +171,6 @@ Namespace PresentationLayer.Views.Forms
                 txtRegistrationNo.Text = value
             End Set
         End Property
-
 
         Public Property SampleNo As String Implements ILab_InvoiceGroupView.SampleNo
             Get
@@ -674,7 +676,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-
         Public Property WbcRNv As String Implements ILab_InvoiceGroupView.WbcRNv
             Get
                 Return txtWbcRNv.Text
@@ -878,7 +879,6 @@ Namespace PresentationLayer.Views.Forms
                 txtSexF.Text = value
             End Set
         End Property
-
 
 #End Region
 
@@ -1136,7 +1136,6 @@ Namespace PresentationLayer.Views.Forms
         '    Return num
         'End Function
 
-
         'Private Function RemoveDigits(ByVal S As String) As String
         '    Dim txt As String
         '    txt = Regex.Replace(S, "\d", "")
@@ -1195,18 +1194,14 @@ Namespace PresentationLayer.Views.Forms
         '    Pdw
         'End Enum
 
-
         Private Sub btnTransferResults_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnTransferResults.ClickButtonArea
             RaiseEvent SaveResultRequested()
         End Sub
 
         Private Sub txtInvoiceNo_Leave(sender As Object, e As EventArgs) Handles txtInvoiceNoF.Leave
-            RetrieveLabResult()
+            RetrievelabResult()
         End Sub
 
     End Class
-
-
-
 
 End Namespace

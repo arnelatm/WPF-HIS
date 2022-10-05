@@ -1,4 +1,4 @@
-﻿
+﻿Imports AATM.Accounts.BusinessLayer
 
 Namespace PresentationLayer.Models
 
@@ -10,8 +10,8 @@ Namespace PresentationLayer.Models
 
         Public Property DoctorID As String
         Public Property DoctorName As String
-        Public Property TransactionDate As String
-        Public Property PmrPatientDisplay As List(Of AATM.Accounts.BusinessLayer.PmrPatientDisplay)
+        Public Property TransactionDate As Date?
+        Public Property PmrPatientsDisplay As List(Of PmrPatientDisplayModel)
 
     End Class
 

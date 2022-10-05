@@ -1,5 +1,7 @@
 ﻿' Category business object
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
+Imports AATM.Accounts.BusinessLayer
+
 Namespace BusinessLayer
 
     Public Class PmrInvestigation
@@ -10,8 +12,8 @@ Namespace BusinessLayer
 
         Property DoctorID As String
         Property DoctorName As String
-        Property TransactionDate As String
-        Property PmrPatientDisplay As List(Of PmrPatientDisplay)
+        Property TransactionDate As Date
+        Property PmrPatientsDisplay As List(Of PmrPatientDisplay)
 
     End Class
 

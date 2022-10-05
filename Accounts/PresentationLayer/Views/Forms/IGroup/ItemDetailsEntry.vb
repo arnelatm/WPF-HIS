@@ -8,7 +8,6 @@ Namespace PresentationLayer.Views.Forms
     Public Class ItemDetailsEntry
         Implements IItemDetailsView
 
-
         Private _nfi As NumberFormatInfo
 
         Public Sub New()
@@ -69,6 +68,7 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Private _itemGroup = "MD"
+
         Public Property ItemGroup As String Implements IItemDetailsView.ItemGroup
             Get
                 Return "MD"
@@ -88,6 +88,7 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Private _pack1 As Short
+
         Public Property Pack1 As Short Implements IItemDetailsView.Pack1
             Get
                 Return 1
@@ -98,6 +99,7 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Private _pack2 As Short
+
         Public Property Pack2 As Short Implements IItemDetailsView.Pack2
             Get
                 Return 1
@@ -108,6 +110,7 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Private _pack3 As Short
+
         Public Property Pack3 As Short Implements IItemDetailsView.Pack3
             Get
                 Return 1
@@ -118,6 +121,7 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Private _branchID As String
+
         Public Property BranchID As String Implements IItemDetailsView.BranchID
             Get
                 Return "01"
@@ -128,6 +132,7 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Private _created_By_Branch As String
+
         Public Property Created_By_Branch As String Implements IItemDetailsView.Created_By_Branch
             Get
                 Return "01"
@@ -138,6 +143,7 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Private _category As String
+
         Public Property Category As String Implements IItemDetailsView.Category
             Get
                 Return "XX"
@@ -157,6 +163,7 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Private _saleStrip As String
+
         Public Property SaleStrip As String Implements IItemDetailsView.SaleStrip
             Get
                 Return "N"
@@ -167,6 +174,7 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Private _Item_Status As String
+
         Public Property Item_Status As String Implements IItemDetailsView.Item_Status
             Get
                 Return "S"
@@ -177,6 +185,7 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Private _userID As String
+
         Public Property UserID As String Implements IItemDetailsView.UserId
             Get
                 Return GlobalVariables.UserName
@@ -279,7 +288,7 @@ Namespace PresentationLayer.Views.Forms
                 Return chkPrescriptionDrug.Checked
             End Get
             Set
-                chkPrescriptionDrug.Checked = Value                
+                chkPrescriptionDrug.Checked = Value
             End Set
         End Property
 
