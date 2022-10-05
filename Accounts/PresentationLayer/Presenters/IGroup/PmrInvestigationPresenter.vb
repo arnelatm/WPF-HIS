@@ -1,16 +1,18 @@
 ﻿Imports AATM.Accounts.DataLayer
-Imports AATM.Accounts.PresentationLayer.Models.IGroup
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces.IGroup
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Presenters
+Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Accounts.PresentationLayer.Views.Interface
 
 Namespace PresentationLayer.Presenters
 
     Public Class PmrInvestigationPresenter(Of TM As New)
-        Inherits CommonPresenter(Of IPmrInvestigationView, TM)
+        Inherits CommonPresenter(Of AATM.Accounts.PresentationLayer.Views.Interfaces.IPmrInvestigationView, TM)
 
         Public Sub New(itemView As IPmrInvestigationView)
             MyBase.New(itemView)
@@ -25,9 +27,10 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub GetDoctorsPatients()
-            Dim pmrInvestigations As PmrInvestigationModel
-            pmrInvestigations = Service.GetParametrized(Of PmrInvestigationModel)({View.DoctorID, View.TransactionDate})
-            GlobalVariables.Mapper.Map(pmrInvestigations, View)
+            Dim pmrPatients As New CPmrInvestigationModel
+            pmrPatients = Service.GetParametrized(Of PmrInvestigationModel)({View.DoctorID, View.TransactionDate})
+            GlobalVariables.Mapper.Map(pmrPatients, View)
+            'GlobalVariables.Mapper.Map(pmrPatients, View)
         End Sub
     End Class
 

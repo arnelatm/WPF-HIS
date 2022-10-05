@@ -699,11 +699,13 @@ Namespace Services
             DataDao.SetConnectionString(connectionName)
         End Sub
 
-        Public Function GetParametrized(Of TM)(parameter As Object, Optional sortOrder As String = "")
-            Dim model As New List(Of TM)
-            Dim records = DataDao.GetParametrized(parameter, sortOrder)
-            GlobalVariables.Mapper.Map(records, model)
-            Return model
+        Public Function GetParametrized(Of TM As New)(parameter As Object, Optional sortOrder As String = "")
+            Dim modelOfPresenter As New TM 
+            Dim record = DataDao.GetParametrized(parameter, sortOrder)
+            If record IsNot Nothing Then
+                GlobalVariables.Mapper.Map(record, modelOfPresenter)
+            End If
+            Return modelOfPresenter
         End Function
 
 #End Region

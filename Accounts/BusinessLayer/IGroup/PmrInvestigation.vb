@@ -5,6 +5,9 @@ Namespace BusinessLayer
     Public Class PmrInvestigation
         Inherits AATM.BusinessLayer.BusinessObject
 
+        Public Sub New()
+        End Sub
+
         Property DoctorID As String
         Property DoctorName As String
         Property TransactionDate As String

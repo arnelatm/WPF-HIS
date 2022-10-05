@@ -411,7 +411,7 @@
             '
             'bsPmrPatientDisplay
             '
-            Me.bsPmrPatientDisplay.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.IGroup.PmrPatientDisplayModel)
+            Me.bsPmrPatientDisplay.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PmrPatientDisplayModel)
             '
             'btnRefresh
             '

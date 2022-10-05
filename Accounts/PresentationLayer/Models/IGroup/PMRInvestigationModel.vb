@@ -1,6 +1,6 @@
 ﻿
 
-Namespace PresentationLayer.Models.IGroup
+Namespace PresentationLayer.Models
 
     ''' <summary>
     '''     The Model in MVP design pattern.
@@ -8,13 +8,10 @@ Namespace PresentationLayer.Models.IGroup
     ''' </summary>
     Public Class PmrInvestigationModel
 
-        Public Property [Token] As String
-        Public Property [Status] As String
-        Public Property [File_No] As String
-        Public Property [Name] As String
-        Public Property [Type]
-        Public Property [Inv_Type]
-        Public Property [CreateDate]
+        Public Property DoctorID As String
+        Public Property DoctorName As String
+        Public Property TransactionDate As String
+        Public Property PmrPatientDisplay As List(Of AATM.Accounts.BusinessLayer.PmrPatientDisplay)
 
     End Class
 
