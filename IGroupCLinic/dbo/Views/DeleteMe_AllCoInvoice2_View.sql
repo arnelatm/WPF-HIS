@@ -76,5 +76,4 @@ from 	CoInvoices_View a
 	left outer join MedicalServices  		d on b.ServiceID=d.ServiceID and a.BranchID=d.BranchID
 	left outer join EmployeeDetails 		e on a.DoctorID=e.EmpID
 	left outer join CountryMaster 			f on a.CountryIOTA COLLATE database_default  =f.CountryIOTA  COLLATE database_default  
-	left outer join InsuranceServicePriceList    	n on b.ServiceID = n.ServiceID AND n.InsuranceID = a.InsuranceGroupID 
-
+	left outer join InsuranceServicePriceList    	n on b.ServiceID = n.ServiceID AND n.InsuranceID = a.InsuranceGroupID

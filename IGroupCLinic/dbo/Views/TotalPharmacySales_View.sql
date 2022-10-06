@@ -23,4 +23,3 @@ CREATE VIEW TotalPharmacySales_View
 	   ) as TBQty
 from ItemDetails as c WHERE c.BRANCHID= '01'
 	 )
-

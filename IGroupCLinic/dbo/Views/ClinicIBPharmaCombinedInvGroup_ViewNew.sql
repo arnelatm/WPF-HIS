@@ -19,5 +19,3 @@ CREATE VIEW [dbo].[ClinicIBPharmaCombinedInvGroup_ViewNew]
 		  left join insuranceDetails as INS
 		  on PH.InsuranceID=INS.InsuranceID	  
 			  ) )
-
-

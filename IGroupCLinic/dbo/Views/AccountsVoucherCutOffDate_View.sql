@@ -1,61 +1,33 @@
-﻿
-CREATE VIEW AccountsVoucherCutOffDate_View
- 
+﻿CREATE VIEW [dbo].[AccountsVoucherCutOffDate_View] (
+    [Trans_Key],
+    [BranchID],
+    [FinYear],
+    [TransNo],
+    [VDate],
+    [VType],
+    [RefType],
+    [RefNo],
+    [CostCentreID],
+    [SlNo],
+    [DrCr],
+    [LedgerID],
+    [LedgerNameEnglish],
+    [LedgerNameArabic],
+    [ParentID],
+    [GroupNameEnglish],
+    [GroupNameArabic],
+    [DrAmt],
+    [CrAmt],
+    [EntryDescription],
+    [VDescription],
+    [UserID],
+    [Create_date],
+    [MachineID],
+    [CCNameEnglish],
+    [Status]
+)
+WITH ENCRYPTION
 AS
-select 
-	Trans_Key,
-	BranchID,
-	FinYear,
-	TransNo,
-	VDate,
-	VType,
-	RefType,
-	RefNo,
-	CostCentreID,
-	SlNo,
-	DrCr,
-	LedgerID,
-	LedgerNameEnglish,
-	LedgerNameArabic,
-	ParentID,
-	GroupNameEnglish,
-	GroupNameArabic,
-	DrAmt,
-	CrAmt,
-	EntryDescription,
-	VDescription,
-	UserID,
-	Create_date,
-	MachineID,
-	CCNameEnglish,
-	Status 
-from AccountsVoucher_View a
-union all
-select 
-	Trans_Key,
-	BranchID,
-	FinYear,
-	TransNo,
-	VDate,
-	VType,
-	RefType,
-	RefNo,
-	CostCentreID,
-	SlNo,
-	DrCr,
-	LedgerID,
-	LedgerNameEnglish,
-	LedgerNameArabic, 
-	ParentID,
-	GroupNameEnglish,
-	GroupNameArabic,
-	case when DrCr  = 'D' then drAmt  else 0 end as DrAmt,
-	case when DrCr  = 'C' then CrAmt  else 0 end as CrAmt,
-	EntryDescription,
-	VDescription,
-	UserID,
-	Create_date,
-	MachineID,
-	CCNameEnglish,
-	status
-from AccountsCutOffDateOPB
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

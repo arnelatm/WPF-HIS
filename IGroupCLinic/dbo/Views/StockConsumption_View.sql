@@ -53,5 +53,3 @@ UNION
   on TD.Group_Key = TG.Trans_Key
   left join itemdetails as it5
   on td.Item_Code = it5.Item_Code and td.BranchID = it5.BranchID)
-  
-

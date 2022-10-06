@@ -1,8 +1,11 @@
 ﻿
-CREATE VIEW ClinicInvoice_View
+
+
+
+CREATE VIEW [dbo].[ClinicInvoice_View]
  
 AS
-	select a.BranchID         	,
+		select a.BranchID         	,
 	a.trans_key    			,
 	c.series			,
 	c.RegistrationDate		,
@@ -17,6 +20,7 @@ AS
 	a.InsuranceID 			,
 	a.InsuranceGroupID  		,
 	a.InsuranceNameEnglish         	,
+	h.NameArabic         	,
 	a.NormalDiscountAmt 		,
 	a.PreviousBalanceAmt 		,
 	a.DeductibleAmt 		,
@@ -34,7 +38,7 @@ AS
 	a.Reject			,
 	a.RejectDate			,
 	a.UserID 			,
-	a.MachineID	,
+	a.MachineID + '|' + a.UserID as MachineID,
 	a.CreditCardID,
 	a.CreditCardNo,
 	a.CreditCardExpiry,
@@ -62,7 +66,7 @@ AS
 	c.Sex				,
 	c.CountryIOTA			,
 	case when n.serviceID is null then d.ServiceNameEnglish else n.ServiceNameEnglish end as ServiceNameEnglish	,
-	case when n.serviceID is null or d.ServiceNameArabic is null or d.ServiceNameArabic = '' then d.ServiceNameArabic else n.ServiceNameEnglish  end as ServiceNameArabic,
+	case when (n.serviceID is null or d.ServiceNameArabic is null or d.ServiceNameArabic = '') then d.ServiceNameEnglish else d.ServiceNameArabic  end as ServiceNameArabic,
 	e.EmpNameEnglish		,
 	e.EmpNameArabic 		,
 	f.CountryNameEng		,
@@ -73,7 +77,7 @@ AS
 	c.PhoneR			,
 	c.Address1			,
 	c.Address2			,
-	c.City				,
+	c.City,
 	k.NameEnglish as GroupName      ,
 	h.GroupInsuranceID		,
 	l.NameEnglish as activeInsName	,
@@ -86,7 +90,8 @@ AS
 	n.ServiceID	as insServiceID	,
 	n.ServiceNameEnglish as InsServiceNameEnglish,
 	case when (d.DepartmentID = 'INJ' and a.InsuranceID = '') or (d.DepartmentID = 'VAC' and a.insuranceID = '') then 'Y' else 'N' end as PrintDept,
-	a.ReferenceNo as ApprovalNo
+	a.ReferenceNo as ApprovalNo,
+	DBO.currency_conversion(a.BillAmt) as AmtWordArabic
 from 	ClinicInvoiceGroup 				a
 	left outer join ClinicInvoiceDetails 		b on a.Trans_key=b.Group_key and a.BranchID=b.BranchID
 	left outer join PatientDetails 			c on a.RegistrationNo=c.RegistrationNo and upper(a.RegistrationType)=upper(c.PatientType) 

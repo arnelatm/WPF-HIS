@@ -1,4 +1,5 @@
-﻿CREATE View PMRPatientDisplay_View
+﻿
+CREATE View [dbo].[PMRPatientDisplay_View]
  
 as 
 SELECT 
@@ -14,7 +15,8 @@ SELECT
 	d.RegistrationDate,
 	a.transdateenglish,
 	a.doctorid,
-	Host_name() as MachineID
+	Host_name() as MachineID,
+	min(a.create_date) as InvoiceDate
 FROM ClinicInvoiceGroup a 
 left outer join ClinicInvoiceDetails b on a.Trans_Key = b.Group_Key
 left outer join patientdetails d on a.registrationno = d.registrationno and a.registrationtype = d.patienttype 

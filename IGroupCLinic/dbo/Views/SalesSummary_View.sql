@@ -1,14 +1,13 @@
-﻿
-CREATE VIEW SalesSummary_View
- 
+﻿CREATE VIEW [dbo].[SalesSummary_View] (
+    [TransNBR],
+    [TransType],
+    [TransDateEnglish],
+    [Gross],
+    [BillAmt],
+    [Cost]
+)
+WITH ENCRYPTION
 AS
-SELECT 
-	TransNBR,
-	TransType,
-	TransDateEnglish,
-	sum(Qty*SalePrice) as Gross,
-	sum(BillAmt) as BillAmt,
-	sum(Qty*CostPrice) as Cost 
-FROM PharmacySales_View 
---Where TransDateEnglish BETWEEN '2013/06/01' AND '2013/06/31'
-Group By TransNBR,TransType,TransDateEnglish 
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

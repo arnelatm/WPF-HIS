@@ -26,4 +26,3 @@ CREATE VIEW [dbo].[MOHReportServices_View]
   left join MedicalServices as c
   on a.ItemCode = c.ServiceID
   where a.Rejected = 0 and not invSource='Pharmacy' )
-

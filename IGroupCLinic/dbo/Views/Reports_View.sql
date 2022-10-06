@@ -1,13 +1,10 @@
-﻿
-CREATE VIEW 	Reports_View
- 
+﻿CREATE VIEW [dbo].[Reports_View] (
+    [reportID],
+    [ReportNo],
+    [reportTitle]
+)
+WITH ENCRYPTION
 AS
-SELECT 	a.reportID,
-	a.ReportNo,
-	a.ReportTitleEnglish AS reportTitle 
-FROM ReportCreator a LEFT OUTER JOIN ReportMaster b ON a.ReportID = b.ReportID WHERE b.Activate = 'Y'
-UNION ALL
-SELECT	a.ReportID,
-	0 AS ReportNo,
-	a.Department AS ReportTitle 
-FROM ReportMaster a WHERE a.Activate = 'Y'
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

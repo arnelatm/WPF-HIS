@@ -14,5 +14,4 @@ SELECT [BranchID]
       ,[CostPrice]
       ,[PurchaseNo]
   FROM [dbo].[StockPositionCurrent] 
-  WHERE WAREHOUSEID='01' AND BranchID = '02' 
-
+  WHERE WAREHOUSEID='01' AND BranchID = '02'

@@ -1,4 +1,5 @@
 ﻿
+
 CREATE VIEW [dbo].[ItemMovement_View]
   AS
 (SELECT 
@@ -199,7 +200,7 @@ UNION
 	DD.Item_Code,
 	DD.Batch,
 	DD.Expiry,
-	(DD.PCSQty*-1)/(iif(left(DD.unit,1)='B',1,iif(left(DD.unit,1)='S',it6.pack2,it6.pack2*it6.pack3))),
+	(DD.PCSQty*-1)/	iif(DD.unit='B',it6.pack2*it6.pack3,(iif(DD.unit='S',it6.pack2,it6.pack2*it6.pack3))),
 	DD.CostPrice*(iif(left(DD.unit,1)='B',1,iif(left(DD.unit,1)='S',it6.pack2,it6.pack2*it6.pack3))),
 	it6.ItemNameEnglish,
 	it6.pack1,
@@ -212,5 +213,3 @@ UNION
   left join itemdetails as IT6
   on DD.Item_Code = IT6.ITEM_Code and DD.BranchID = it6.BranchID
   where DG.BranchFrom = IT6.BranchID )
-
-

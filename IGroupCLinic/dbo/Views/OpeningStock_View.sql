@@ -1,12 +1,36 @@
-﻿CREATE VIEW OpeningStock_View
- 
+﻿CREATE VIEW [dbo].[OpeningStock_View] (
+    [BranchID],
+    [SlNo],
+    [StockDate],
+    [warehouseid],
+    [Item_Code],
+    [Batch],
+    [Expiry],
+    [CostPrice],
+    [SellingPrice],
+    [QtyBox],
+    [QtyStrips],
+    [QtyPcs],
+    [QtyBadBox],
+    [QtyBadStrips],
+    [QtyBadPcs],
+    [TQtyGood],
+    [TQtyBad],
+    [Stock_Type],
+    [PageNo],
+    [Loc_Row],
+    [Loc_Col],
+    [Remarks],
+    [UserID],
+    [Create_date],
+    [machineID],
+    [ItemNameEnglish],
+    [Pack2],
+    [Pack3],
+    [ItemGroup]
+)
+WITH ENCRYPTION
 AS
-Select 
-	a.*,
-	b.ItemNameEnglish,
-	b.Pack2,
-	b.Pack3,
-	c.ItemNameEnglish as ItemGroup
-From StockPosition a
-Left Outer Join ItemDetails b on a.Item_Code = b.Item_Code and a.BranchID = b.BranchID
-Left Outer Join ItemGroupMaster c on b.itemgroup = c.itemid
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

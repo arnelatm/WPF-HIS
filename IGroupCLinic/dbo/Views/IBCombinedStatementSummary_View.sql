@@ -30,5 +30,3 @@ CREATE VIEW [dbo].[IBCombinedStatementSummary_View]
   on a.doctorid = c.empid
   where a.Rejected = 0
   group by invSource,saletype,invoicetype,a.Group_Key,transdateenglish,Transnbr,a.userid,b.UserNameEnglish,a.doctorid,c.EmpNameEnglish)
-
-

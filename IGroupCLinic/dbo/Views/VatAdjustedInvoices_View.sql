@@ -64,8 +64,3 @@ CREATE VIEW [dbo].[VatAdjustedInvoices_View]
 	  ,[ItemGrossPrice] -[AdjItemDiscount] + [VATAmt] - iif([VATAmt]=0,0,([ItemGrossPrice] -[AdjItemDiscount] + [VATAmt])/1.05*.05) as 'AdjExtAmt'
   FROM AllInvoicesVatAdjusted_View
   )
-
-
-
-
-

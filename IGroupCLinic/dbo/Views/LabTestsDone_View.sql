@@ -34,5 +34,3 @@ CREATE VIEW [dbo].[LabTestsDone_View] as
   left join MedicalServices as MS
   on INV.ItemCode = MS.ServiceID
   WHERE MS.CostCentre = '201' or ms.costcentre = '301' AND INV.BRANCHID='02' and Rejected = 0
-
-

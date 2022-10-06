@@ -1,37 +1,23 @@
-﻿CREATE VIEW ClinicStatementView
- 
+﻿CREATE VIEW [dbo].[ClinicStatementView] (
+    [BranchID],
+    [TransType],
+    [BillType],
+    [TransNBR],
+    [TransDateEnglish],
+    [RegistrationType],
+    [RegistrationNo],
+    [InsuranceCardNo],
+    [GrossAmt],
+    [DiscAmt],
+    [DeductibleAmt],
+    [ExtraDiscountAmt],
+    [DeductibleDiscountAmt],
+    [RoundOffAmt],
+    [PatientNameEnglish],
+    [InsuranceNameEnglish]
+)
+WITH ENCRYPTION
 AS
-SELECT
-	BranchID,
-	TransType,
-	BillType,
-	TransNBR,
-	TransDateEnglish,
-	RegistrationType,
-	RegistrationNo,
-	InsCardNo as InsuranceCardNo,
-	sum(qty*saleprice) as GrossAmt,
-	sum(DiscountPer * Qty * SalePrice /100) as DiscAmt,
-	DeductibleAmt,
-	ExtraDiscountAmt,
-	DeductibleDiscountAmt,
-	RoundOffAmt,
-	PatientNameEnglish,
-	InsuranceNameEnglish
-from ClinicInvoice_view where (Reject is null or Reject = 0)
-group by
-	BranchID,
-	TransType,
-	BillType,
-	TransNBR,
-	TransDateEnglish,
-	RegistrationType,
-	RegistrationNo,
-	InsCardNo,
-	DeductibleAmt,
-	RoundOffAmt,
-	ExtraDiscountAmt,
-	DeductibleDiscountAmt,
-	PatientNameEnglish,
-	InsuranceNameEnglish 
---order by registrationno,transnbr
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

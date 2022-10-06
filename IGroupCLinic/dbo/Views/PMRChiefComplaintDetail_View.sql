@@ -1,9 +1,12 @@
-﻿
-CREATE view 	PMRChiefComplaintDetail_View
- 
-as 
-select 		a.*,
-		b.ComplaintNameEnglish,
-		b.ComplaintNameArabic
-from		PMRChiefComplaintSPatient	A
-left outer join	PMRChiefComplaints		B ON a.ComplaintID=b.ComplaintID
+﻿CREATE VIEW [dbo].[PMRChiefComplaintDetail_View] (
+    [Trans_Key],
+    [RowNBR],
+    [ComplaintID],
+    [ComplaintNameEnglish],
+    [ComplaintNameArabic]
+)
+WITH ENCRYPTION
+AS
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

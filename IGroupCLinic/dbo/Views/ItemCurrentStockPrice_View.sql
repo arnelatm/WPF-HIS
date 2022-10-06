@@ -1,15 +1,11 @@
-﻿
-CREATE VIEW 	ItemCurrentStockPrice_View
- 
+﻿CREATE VIEW [dbo].[ItemCurrentStockPrice_View] (
+    [BranchID],
+    [Item_Code],
+    [CashPrice],
+    [ItemName]
+)
+WITH ENCRYPTION
 AS
-SELECT 	a.BranchID,
-	a.Item_Code,
-	max(a.cashprice) as CashPrice,
-	b.ItemNameEnglish as ItemName
-From StockPositionCurrent a
-Left Outer Join ItemDetails b on b.Item_code = a.Item_code and a.branchid = b.branchid
-group by 
-	a.branchid,
-	a.item_code,
-	b.itemnameenglish
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
 

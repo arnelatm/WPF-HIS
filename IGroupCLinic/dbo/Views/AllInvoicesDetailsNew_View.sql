@@ -157,5 +157,3 @@ UNION
   FROM [iGroupClinic].[dbo].[PharmacyInvoiceDetails] as PHD
   inner join dbo.PharmacyInvoiceGroup as PHG
   on PHD.Group_Key = PHG.Trans_Key)
-
-

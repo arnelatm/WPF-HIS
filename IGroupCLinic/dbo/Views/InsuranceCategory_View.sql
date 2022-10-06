@@ -1,9 +1,13 @@
-﻿
-CREATE VIEW InsuranceCategory_View
- 
+﻿CREATE VIEW [dbo].[InsuranceCategory_View] (
+    [BranchID],
+    [InsuranceType],
+    [InsuranceID],
+    [CategoryID],
+    [NameEnglish],
+    [NameArabic]
+)
+WITH ENCRYPTION
 AS
-SELECT  a.*,
-	b.ItemNameEnglish as NameEnglish,
-	b.ItemNameArabic as NameArabic
-FROM InsuranceCategory a
-LEFT OUTER JOIN DeductibleClassMaster b ON a.CategoryID = b.ItemID 
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

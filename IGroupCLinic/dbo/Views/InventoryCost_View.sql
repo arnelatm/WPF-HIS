@@ -204,6 +204,3 @@ FROM [iGroupClinic].[dbo].[StockDestroyedDetails] AS DD
 left join StockDestroyedGroup as DG ON DD.Group_Key = DG.Primary_Key
 left join itemdetails as IT6 on DD.Item_Code = IT6.ITEM_Code and DD.BranchID = it6.BranchID
 where DG.BranchFrom = IT6.BranchID AND dd.PostInStock ='Y'
-
-
-

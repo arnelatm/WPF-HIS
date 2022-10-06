@@ -72,7 +72,3 @@ CREATE VIEW [dbo].[AllInvoicesVatAdjustedFinal_View]
 		  ) As 'VAdjVatExemption'
   FROM [iGroupClinic].[dbo].[AllInvoicesVatAdjusted2_View]
 )
-
-
-
-

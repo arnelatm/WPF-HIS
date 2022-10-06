@@ -6,6 +6,9 @@ SELECT        a.BranchID, a.FileNo, a.EmpID, a.AttendenceID, a.EmpNameEnglish, a
 FROM            dbo.HREmployee_View AS a LEFT OUTER JOIN
                          PatientImagesDatabase.dbo.EmployeeDocuments AS b ON a.EmpID = b.EmpID AND b.DocumentID = '005'
 WHERE        (b.Photo IS NOT NULL)
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeIdentification3';
+
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
@@ -126,8 +129,4 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeIdentification3';
-
-
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeIdentification3';
 

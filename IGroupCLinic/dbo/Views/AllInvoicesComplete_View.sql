@@ -162,4 +162,3 @@ UNION
   inner join dbo.PharmacyInvoiceGroup as PHG
   left outer join PatientDetails AS PT on phg.RegistrationNo=pt.RegistrationNo and upper(phg.RegistrationType)=upper(pt.PatientType) and phg.BranchID=pt.BranchID
   on PHD.Group_Key = PHG.Trans_Key)
-

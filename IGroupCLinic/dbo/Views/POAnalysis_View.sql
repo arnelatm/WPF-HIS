@@ -56,6 +56,3 @@ CREATE VIEW [dbo].[POAnalysis_View]
        on a.group_key = b.Trans_Key and a.BranchID = b.BranchID 
     left join itemdetails as c
        on a.Item_Code = c.Item_Code and a.BranchID = c.BranchID)
-
-
-

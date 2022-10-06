@@ -1,16 +1,16 @@
-﻿
-CREATE VIEW AccountsGroup_View
- 
+﻿CREATE VIEW [dbo].[AccountsGroup_View] (
+    [GroupID],
+    [GroupNameEnglish],
+    [GroupNameArabic],
+    [ParentID],
+    [ParentNameEnglish],
+    [ParentNameArabic],
+    [GroupStatus],
+    [OpeningBalance],
+    [ClosingBalance]
+)
+WITH ENCRYPTION
 AS
-select 	a.GroupID,
-	a.GroupNameEnglish,
-	a.GroupNameArabic,
-	a.ParentID,
-	b.GroupNameEnglish as ParentNameEnglish,
-	b.GroupNameArabic as ParentNameArabic,
-	Case when a.GroupStatus = 1 then 'Active'
-		else 'Deactive' end as GroupStatus,
-	a.OpeningBalance,
-	a.ClosingBalance
-From AccountsGroup a
-Left outer join AccountsGroup b on b.GroupID = a.parentID
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

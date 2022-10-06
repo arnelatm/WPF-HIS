@@ -1,31 +1,20 @@
-﻿CREATE VIEW PharmacyStatementView
- 
+﻿CREATE VIEW [dbo].[PharmacyStatementView] (
+    [BranchID],
+    [TransType],
+    [BillType],
+    [TransNBR],
+    [TransDateEnglish],
+    [RegistrationType],
+    [RegistrationNo],
+    [InsuranceCardNo],
+    [GrossAmt],
+    [DiscAmt],
+    [DeductibleAmt],
+    [PatientNameEnglish],
+    [InsuranceNameEnglish]
+)
+WITH ENCRYPTION
 AS
-SELECT
-	BranchID,
-	TransType,
-	BillType,
-	TransNBR,
-	TransDateEnglish,
-	RegistrationType,
-	RegistrationNo,
-	InsuranceCardNo,
-	sum(qty*saleprice) as GrossAmt,
-	sum(DiscountPer * Qty * SalePrice /100) as DiscAmt,
-	DeductibleAmt,
-	PatientNameEnglish,
-	InsuranceNameEnglish
-from pharmacysales_view 
-group by
-	BranchID,
-	TransType,
-	BillType,
-	TransNBR,
-	TransDateEnglish,
-	RegistrationType,
-	RegistrationNo,
-	InsuranceCardNo,
-	DeductibleAmt,
-	PatientNameEnglish,
-	InsuranceNameEnglish 
---order by registrationno,transnbr
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

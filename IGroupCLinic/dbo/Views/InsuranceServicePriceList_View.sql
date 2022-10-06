@@ -1,24 +1,23 @@
-﻿
-CREATE VIEW InsuranceServicePriceList_View
- 
+﻿CREATE VIEW [dbo].[InsuranceServicePriceList_View] (
+    [BranchID],
+    [insuranceid],
+    [ServiceID],
+    [servicenameenglish],
+    [ServiceNameArabic],
+    [DepartmentID],
+    [DepartmentNameEnglish],
+    [DepartmentNameArabic],
+    [DepartmentGroupID],
+    [GroupNameEnglish],
+    [GroupNameArabic],
+    [price],
+    [discountpercent],
+    [discountamt],
+    [Status],
+    [remarks]
+)
+WITH ENCRYPTION
 AS
-SELECT	a.BranchID,
-	a.insuranceid,
-	a.ServiceID,
-	case when d.ServiceNameEnglish is null then a.ServiceNameEnglish else d.ServiceNameEnglish end as servicenameenglish,
-	d.ServiceNameArabic,
-	a.DepartmentID,
-	b.DepartmentNameEnglish,
-	b.DepartmentNameArabic,
-	b.DepartmentGroupID,
-	c.GroupNameEnglish,
-	c.GroupNameArabic,
-	a.price,
-	a.discountpercent,
-	a.discountamt,
-	d.Status,
-	d.remarks
-from insuranceservicepricelist a
-left outer join MedicalDepartments b on a.DepartmentID = b.DepartmentID
-left outer join MedicalDepartmentGroups c on b.DepartmentGroupID = c.DepartmentGroupID
-left outer join MedicalServices d on a.ServiceID = d.ServiceID AND a.DepartmentID = d.DepartmentID
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

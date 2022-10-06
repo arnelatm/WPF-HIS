@@ -79,12 +79,3 @@ CREATE VIEW [dbo].[AllInvoicesVatAdjusted2_View]
 									) As 'AdjExtAmt'
   FROM AllInvoicesVatAdjusted1_View
   )
-
-
-
-
-
-
-
-
-

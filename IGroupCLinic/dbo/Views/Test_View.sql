@@ -155,5 +155,3 @@ group by b.BranchID,
 	b.RoundOffAmt,
 	a.SaleStatus,
 	h.underinsuranceid
-
-

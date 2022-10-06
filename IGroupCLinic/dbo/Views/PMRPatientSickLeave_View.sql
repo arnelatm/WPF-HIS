@@ -3,6 +3,9 @@ AS
 SELECT        dbo.PMRPatientSickLeave.*, dbo.PatientDetails.PatientNameEnglish AS Expr1, dbo.PatientDetails.PatientNameArabic AS Expr2
 FROM            dbo.PMRPatientSickLeave INNER JOIN
                          dbo.PatientDetails ON dbo.PMRPatientSickLeave.RegistrationNo = dbo.PatientDetails.RegistrationNo AND dbo.PMRPatientSickLeave.PatientType = dbo.PatientDetails.PatientType
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PMRPatientSickLeave_View';
+
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
@@ -123,8 +126,4 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PMRPatientSickLeave_View';
-
-
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PMRPatientSickLeave_View';
 

@@ -35,4 +35,4 @@ select 		a.Trans_Key,
 from		PMRPatientTreatment A
 left outer join	MedicalServices		B ON a.item_code=b.ServiceID
 left outer join InsuranceAltServicePriceList C on a.Item_Code = c.ServiceID AND a.InsuranceGroupID = c.InsuranceID
-left outer join	MedicalDepartments 	E ON a.departmentID=e.DepartmentID 
+left outer join	MedicalDepartments 	E ON a.departmentID=e.DepartmentID

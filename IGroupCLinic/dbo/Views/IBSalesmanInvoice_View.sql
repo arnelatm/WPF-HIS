@@ -1,7 +1,58 @@
-﻿CREATE VIEW IBSalesmanInvoice_View
- 
+﻿CREATE VIEW [dbo].[IBSalesmanInvoice_View] (
+    [Trans_Key],
+    [BranchID],
+    [IBType],
+    [RegistrationNo],
+    [PatientName],
+    [TransType],
+    [TransNBR],
+    [TransDateEnglish],
+    [TransDateHijri],
+    [DeliveryDate],
+    [CompanyID],
+    [DoctorID],
+    [Border_Iqama],
+    [SponsorID],
+    [Profession],
+    [CountryIOTA],
+    [BaladiyaExpiration],
+    [Phone],
+    [SponsorPhone],
+    [DOB],
+    [Age],
+    [AgeYMD],
+    [Sex],
+    [LabReportNo],
+    [LabReportResult],
+    [LabUnfitReason],
+    [XrayReportNo],
+    [XrayReportResult],
+    [CardStatus],
+    [CardIssueDate],
+    [TokenNo],
+    [GrossAmt],
+    [DiscountAmt],
+    [TotalVATAmt],
+    [NetAmt],
+    [ExtraDiscountPer],
+    [ExtraDiscountAmt],
+    [Remarks],
+    [Posted],
+    [Accepted],
+    [AcceptedNo],
+    [Rejected],
+    [RejectedDate],
+    [Finishied],
+    [UserID],
+    [Create_Date],
+    [MachineID],
+    [SponsorName],
+    [SalesmanID],
+    [LabSeries],
+    [SalesManNameEnglish]
+)
+WITH ENCRYPTION
 AS
-Select a.*,
-		b.SalesManNameEnglish
-From IBDocuments_View a
-left outer join SalesmanDetails b on a.SalesmanID = b.SalesmanID 
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

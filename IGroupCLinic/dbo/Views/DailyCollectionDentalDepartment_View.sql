@@ -1,8 +1,51 @@
-﻿
-CREATE VIEW DailyCollectionDentalDepartment_View
- 
+﻿CREATE VIEW [dbo].[DailyCollectionDentalDepartment_View] (
+    [BranchID],
+    [Trans_Key],
+    [BillType],
+    [TransNBR],
+    [TransDateEnglish],
+    [RegistrationNo],
+    [RegistrationDate],
+    [RegistrationType],
+    [PatientNameEnglish],
+    [DoctorID],
+    [DoctorNameEnglish],
+    [InsuranceID],
+    [InsuranceNameEnglish],
+    [InsuranceGroupID],
+    [InsuranceTPA],
+    [ExtraDiscountPercent],
+    [ExtradiscountAmt],
+    [RoundOffAmt],
+    [Reject],
+    [UserID],
+    [UserNameEnglish],
+    [GrossCON],
+    [GrossMCT],
+    [GrossXRY],
+    [GrossLAB],
+    [GrossDNT],
+    [GrossOPH],
+    [GrossCMD],
+    [GrossPHR],
+    [DiscCON],
+    [DiscMCT],
+    [DiscXRY],
+    [DiscLAB],
+    [DiscDNT],
+    [DiscOPH],
+    [DiscCMD],
+    [DiscPHR],
+    [CLNdedAmt],
+    [CLNdedDiscAmt],
+    [CLNExtraDiscAmt],
+    [PHRdedAmt],
+    [PHRdedDiscAmt],
+    [PHRExtraDiscAmt],
+    [InvoiceType]
+)
+WITH ENCRYPTION
 AS
-SELECT
-	b.*
-From DentalDoctors a
-LEFT OUTER JOIN DailyCollectionDepartmentWiseClinic_View b ON a.DoctorID = b.DoctorID
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

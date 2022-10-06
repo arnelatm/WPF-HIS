@@ -65,10 +65,9 @@
     [Created_By_Branch]    VARCHAR (15)   NOT NULL,
     [VATApplicable]        INT            DEFAULT ((0)) NULL,
     [VatPercent]           NUMERIC (5, 2) DEFAULT ((0)) NULL,
+    [DateTimeStamp]        ROWVERSION     NULL,
     PRIMARY KEY CLUSTERED ([Primary_Key] ASC)
 );
-
-
 
 
 GO

@@ -1,13 +1,23 @@
-﻿CREATE VIEW CurrentStockRegister_View
- 
+﻿CREATE VIEW [dbo].[CurrentStockRegister_View] (
+    [BranchID],
+    [Item_Code],
+    [Batch],
+    [Expiry],
+    [WarehouseID],
+    [PCSQty],
+    [CashPrice],
+    [CreditPrice],
+    [CostPrice],
+    [PurchaseNo],
+    [TmpStock],
+    [ItemNameEnglish],
+    [Pack2],
+    [Pack3],
+    [ItemGroup],
+    [ean_code]
+)
+WITH ENCRYPTION
 AS
-SELECT 	A.*,
-	B.ItemNameEnglish,
-	b.Pack2,
-	b.Pack3,
-	c.ItemNameEnglish as ItemGroup,
-	B.ean_code  
-FROM StockPositionCurrent a
-Left Outer Join ItemDetails b on a.Item_code = b.Item_Code and a.BranchID = b.BranchID
-left Outer Join ItemGroupMaster c on b.Itemgroup = c.itemID
-where a.pcsqty <> 0
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

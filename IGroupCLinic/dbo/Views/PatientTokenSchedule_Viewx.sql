@@ -7,6 +7,9 @@ SELECT        dbo.BookingShiftDetails.LunchStart, dbo.BookingShiftDetails.LunchE
                          dbo.PatientTokenSchedule.DoctorId AS Expr1, dbo.PatientTokenSchedule.Trans_key AS Expr2, dbo.BookingShiftDetails.DoctorId
 FROM            dbo.BookingShiftDetails INNER JOIN
                          dbo.PatientTokenSchedule ON dbo.BookingShiftDetails.ShiftId = dbo.PatientTokenSchedule.ShiftId
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PatientTokenSchedule_Viewx';
+
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
@@ -138,8 +141,4 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PatientTokenSchedule_Viewx';
-
-
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PatientTokenSchedule_Viewx';
 

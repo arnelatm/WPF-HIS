@@ -1,14 +1,28 @@
-﻿CREATE VIEW ItemPurchaseReturn_View
- 
+﻿CREATE VIEW [dbo].[ItemPurchaseReturn_View] (
+    [Trans_Key],
+    [BranchID],
+    [WarehouseID],
+    [SupplierID],
+    [TransNo],
+    [TransType],
+    [TransDate],
+    [ReturnType],
+    [PurchaseNo],
+    [SaleAmount],
+    [CostAmount],
+    [PostInStock],
+    [PostInAccounts],
+    [Remarks],
+    [UserID],
+    [Create_Date],
+    [MachineID],
+    [Item_Code],
+    [SupplierNameEnglish],
+    [WarehouseNameEnglish],
+    [ItemNameEnglish]
+)
+WITH ENCRYPTION
 AS
-select 
-		a.*,
-		b.Item_Code,
-		c.SupplierNameEnglish,
-		d.WarehouseNameEnglish,
-		e.ItemNameEnglish    
-from PurchaseReturnGroup a
-left outer Join PurchaseReturnDetails b on a.Trans_Key = b.Group_key 
-left outer join SupplierDetails c on a.SupplierID = c.SupplierID 
-left outer join WarehouseDetails d on a.WarehouseID = d.WareHouseID and a.BranchID = d.BranchID 
-left outer join ItemDetails e on b.Item_Code = e.Item_Code and a.BranchID = e.BranchID 
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

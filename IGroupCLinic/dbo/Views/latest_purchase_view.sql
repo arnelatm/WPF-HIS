@@ -8,5 +8,3 @@ as
   left join PurchaseGroup b
   on a.Group_key = b.Trans_Key and a.BranchID = b.BranchID
   group by a.branchid,a.item_code,b.transdate,costprice)
-
-

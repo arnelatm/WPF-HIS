@@ -25,4 +25,3 @@ CREATE VIEW [dbo].[IBCombinedStatementSummaryPh_View]
   left outer join usersbank b on a.UserID = b.UserID  
     where a.invSource = 'Pharmacy'
   group by invSource,saletype,invoicetype,Group_key,transdateenglish,Transnbr,a.userid,b.UserNameEnglish)
-

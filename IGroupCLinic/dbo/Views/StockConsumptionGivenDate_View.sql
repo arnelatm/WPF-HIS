@@ -17,4 +17,3 @@ select itm.BranchTo,itm.warehouseTo,itm.Category,itm.item_code,
 from StockConsumption_View as itm
 where itm.transDate >= '2018/09/01' and itm.TransDate <= '2018/09/31'
 group by itm.branchto,itm.WareHouseTo,itm.Category,itm.Item_Code
-

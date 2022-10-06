@@ -1,18 +1,18 @@
-﻿
-CREATE VIEW 	StockPositionReturn_View
- 
+﻿CREATE VIEW [dbo].[StockPositionReturn_View] (
+    [BranchID],
+    [WarehouseID],
+    [item_code],
+    [batch],
+    [expiry],
+    [Qty],
+    [CashPrice],
+    [CostPrice],
+    [Pack2],
+    [Pack3],
+    [QtyInBox]
+)
+WITH ENCRYPTION
 AS
-SELECT	 	a.BranchID			,
-		a.WarehouseID			,
-		a.item_code			,
-		a.batch			        ,
-		a.expiry			,
-		(a.PCSQty-a.TMPStock) as Qty    ,
-		a.CashPrice			,
-		a.CostPrice     		,
-		b.Pack2				,
-		b.Pack3				,
-		(case a.PCSQty When 0 Then 0 Else CONVERT(numeric(10,4),a.PCSQty/(b.Pack2*b.Pack3)) End) as QtyInBox
-FROM 		StockPositionCurrent a, ItemDetails b
-WHERE 		a.Item_Code=b.Item_Code and a.BranchID=b.BranchID
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
 

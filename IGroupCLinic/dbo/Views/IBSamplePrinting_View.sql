@@ -7,4 +7,4 @@ Select a.*,
 		b.TakenDate,
 		b.TakenTime
 From IBInvoice_View  a
-left outer join IBLabSampleTaken b on a.Trans_Key  = b.Trans_Key 
+left outer join IBLabSampleTaken b on a.Trans_Key  = b.Trans_Key

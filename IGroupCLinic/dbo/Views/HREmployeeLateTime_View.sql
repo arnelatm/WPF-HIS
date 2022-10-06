@@ -1,16 +1,14 @@
-﻿
-CREATE VIEW HREmployeeLateTime_View
- 
+﻿CREATE VIEW [dbo].[HREmployeeLateTime_View] (
+    [empID],
+    [EmpNameEnglish],
+    [DepartmentID],
+    [Department],
+    [PeriodMonth],
+    [PeriodYear],
+    [LateHrs]
+)
+WITH ENCRYPTION
 AS
-SELECT 	a.empID,
-	a.EmpNameEnglish,
-	a.DepartmentID,
-	c.Department,
-	b.PeriodMonth,
-	b.PeriodYear,
-	b.LateHrs
-From HREmployeeDetails a
-LEFT OUTER JOIN HRLateHrs b on a.BranchID = b.BranchID 
-			 AND a.EmpID = b.EmpID 
-LEFT OUTER JOIN EmployeeDepartment C on a.DepartmentID = c.DeptID
-WHERE	 a.ServiceStatus = 1
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

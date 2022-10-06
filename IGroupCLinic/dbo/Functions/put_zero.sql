@@ -34,5 +34,3 @@ BEGIN
 	
 	RETURN 	@final_number
 END
-
-

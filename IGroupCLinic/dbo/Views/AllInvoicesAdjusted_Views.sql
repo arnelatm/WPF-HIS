@@ -53,4 +53,3 @@ CREATE VIEW [dbo].[AllInvoicesAdjusted_Views]
   	  ,[Series]
 	  ,Round(iif(TBillAmt=0,itemGrossPrice,iif(invGrossAmt=0,0,ItemGrossPrice/InvGrossAmt*[AdjInvExtraDisc])+ItemDiscountAmt),2) AS 'AdjItemDiscount'
   FROM [iGroupClinic].[dbo].[AllInvoicesDetailsComplete_View])
-

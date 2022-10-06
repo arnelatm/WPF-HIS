@@ -30,9 +30,3 @@ on c.InvestigationID = b.InvestigationID
 left outer join Lab_InvoiceGroup d 
 on a.TransNBR = d.InvoiceNo and a.ServiceID in (Select ServiceID From 
 Lab_DiagnosisItemServices Where InvestigationID = d.InvestigationID)
-
-
-
-
-
-

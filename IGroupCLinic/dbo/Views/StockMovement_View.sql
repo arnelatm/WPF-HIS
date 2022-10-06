@@ -1,69 +1,17 @@
-﻿
-CREATE VIEW StockMovement_View
- 
+﻿CREATE VIEW [dbo].[StockMovement_View] (
+    [BranchID],
+    [WarehouseID],
+    [transNo],
+    [TransDate],
+    [Item_Code],
+    [PcsQty],
+    [TransType],
+    [pack2],
+    [pack3],
+    [ItemNameEnglish]
+)
+WITH ENCRYPTION
 AS
-SELECT 	a.BranchID ,
-	a.WarehouseID , 
-	0 as transNo ,
-	(select lastStocktakingDate from systemsettings) as TransDate ,
-	a.Item_Code ,
-	sum((a.QtyBox*b.Pack2*b.Pack3)+(a.QtyStrips*b.Pack3)+QtyPcs) as PcsQty ,
-	'OS' as TransType ,
-	b.pack2 ,
-	b.pack3 ,
-	b.ItemNameEnglish
-FROM StockPosition a
-Left Outer Join ItemDetails b on a.Item_Code = b.Item_Code and a.BranchID = b.BranchID
-Where a.StockDate >= (SELECT LastStockTakingDate from SystemSettings)
-group by
-	a.branchid,
-	a.warehouseid,
-	a.item_code,
-	b.pack2,
-	b.pack3,
-	b.itemnameenglish
-union all
-select 	BranchID,
-	(select DefaultWareHouseID from systemsettings) as WareHouseID,
-	TransNbr as TransNo,
-	TransDateEnglish as TransDate,
-	Item_Code,
-	case when unit='Box' then qty*pack2*pack3 
-	     else case when Unit= 'Strip' then qty*pack3
-	     else qty end end as PCSQty,
-	case when BillType = 'SALE INVOICE' THEN 'SL' ELSE 'SR' END AS TransType,
-	pack2,
-	pack3,
-	ItemNameEnglish
-From pharmacysales_View  
-where transdateenglish >=(select laststocktakingdate from systemsettings)
-union all
-select 	BranchID,
-	(select DefaultWareHouseID from systemsettings) as WareHouseID,
-	TransNo,
-	TransDate,
-	Item_Code,
-	case when Unit = 'B' then TotalQty * pack2 * pack3 
-	     else case when Unit = 'S' then TotalQty * pack3 
-	     else TotalQty end end as PCSQty,
-	TransType,
-	pack2,
-	pack3,
-	ItemNameEnglish
-From itempurchase_view 
-where transdate >=(select laststocktakingdate from systemsettings)
-union all
-select a.BranchID,
-	(select DefaultWareHouseID from systemsettings) as WareHouseID,
-	a.TransNo,
-	a.TransDate,
-	a.Item_Code,
-	ABS(a.NQty - a.PQty) as PCSQty,
-	CASE WHEN a.NQty - a.PQty > 0 THEN
-	'ADD' ELSE 'LESS' END as TransType,
-	b.pack2,
-	b.pack3,
-	b.itemnameenglish	
-FROM stockadjustment a
-Left Outer Join ItemDetails b on a.Item_Code = b.Item_Code and a.BranchID = b.BranchID
-Where transdate >=(select laststocktakingdate from systemsettings)
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

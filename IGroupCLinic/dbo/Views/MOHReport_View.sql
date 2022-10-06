@@ -21,6 +21,3 @@ CREATE VIEW [dbo].[MOHReport_View]
   LEFT JOIN   PatientDetails AS B 
   ON A.RegistrationNo = B.RegistrationNo AND A.RegistrationType = B.PatientType
   where a.Rejected = 0 and not invSource='Pharmacy')
-
-
-

@@ -1,17 +1,36 @@
-﻿CREATE view 	PMRMedicalRecord_View
- 
-as 
-select 		a.*,
-			b.patientnameenglish as patient ,
-			b.age,
-			b.sex,
-			b.ageYMD,
-			b.iqamano,
-			d.EmpNameEnglish,
-			e.countrynameeng,
-			f.nameenglish
-from 		PMRMedicalReport a	
-left outer join PatientDetails	b on a.RegistrationNo=b.RegistrationNo and a.series=b.series 
-left outer join EmployeeDetails	d on a.doctorID =d.empID
-left outer join CountryMaster 	e on b.CountryIOTA  =e.CountryIOTA 
-left outer join InsuranceDetails f on a.InsuranceID=f.InsuranceID
+﻿CREATE VIEW [dbo].[PMRMedicalRecord_View] (
+    [Trans_Key],
+    [Series],
+    [RegistrationNo],
+    [TransNBR],
+    [TransDateEnglish],
+    [DoctorID],
+    [InsuranceID],
+    [InsuranceGroupID],
+    [Salutation],
+    [Complaining],
+    [Investigation],
+    [Diagnosis],
+    [TreatmentNow],
+    [TreatmentFurther],
+    [Appointment],
+    [SickLeaveFrom],
+    [SickLeaveUpto],
+    [BackToWork],
+    [UserID],
+    [Create_Date],
+    [MachineID],
+    [patient],
+    [age],
+    [sex],
+    [ageYMD],
+    [iqamano],
+    [EmpNameEnglish],
+    [countrynameeng],
+    [nameenglish]
+)
+WITH ENCRYPTION
+AS
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

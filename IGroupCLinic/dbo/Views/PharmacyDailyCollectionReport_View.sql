@@ -1,25 +1,18 @@
-﻿
-CREATE VIEW PharmacyDailyCollectionReport_View
- 
+﻿CREATE VIEW [dbo].[PharmacyDailyCollectionReport_View] (
+    [BranchID],
+    [TransDateEnglish],
+    [AcCode],
+    [DepartmentNameEnglish],
+    [SalesCode],
+    [CostOfGoodsCode],
+    [InventoryCode],
+    [GrossAmt],
+    [DiscountAmt],
+    [DeductibleAmt],
+    [CostAmt]
+)
+WITH ENCRYPTION
 AS
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
 
-select
-	BranchID,
-	TransDateEnglish,
-	AcCode,
-	DepartmentNameEnglish,
-	SalesCode,
-	CostOfGoodsCode,
-	InventoryCode, 
-	SUM(GrossAmt+RoundOffAmt) as GrossAmt, 
-    SUM(DiscountAmt) as DiscountAmt,
-	SUM(DeductibleAmt)as DeductibleAmt,
-	SUM(CostAmt) as CostAmt
-from PharmacyDailyCollectionCalculation_View
-group by BranchID,
-	 TransDateEnglish,
-     AcCode,
-	 departmentnameenglish,
-	 SalesCode,
-	 CostOfGoodsCode,
-	 InventoryCode

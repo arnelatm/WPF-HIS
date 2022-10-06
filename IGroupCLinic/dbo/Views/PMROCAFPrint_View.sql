@@ -1,17 +1,75 @@
-﻿
-CREATE view 	PMROCAFPrint_View --EMR_OCAF_Print_View
- 
-as 
-select 		a.*,
-			b.PatientNameEnglish ,
-			b.age,
-			b.sex,
-			b.AgeYMD ,
-			c.countrynameeng,
-			d.EmpNameEnglish,
-			e.nameenglish as company
-from 		PMROpthalDetails		A
-left outer join PatientDetails 			B on a.registrationNo =b.registrationNo and a.series=b.series
-left outer join CountryMaster 			C on b.CountryIOTA =c.CountryIOTA 
-left outer join EmployeeDetails			D on a.doctorid  =d.empid 
-left outer join InsuranceDetails		E on b.inscocode  =e.insuranceid
+﻿CREATE VIEW [dbo].[PMROCAFPrint_View] (
+    [Trans_key],
+    [TransDateEnglish],
+    [PatientType],
+    [Series],
+    [RegistrationNo],
+    [DoctorID],
+    [Dist_SP_R],
+    [Dist_CY_R],
+    [Dist_AX_R],
+    [Dist_PR_R],
+    [Dist_VA_R],
+    [Dist_PD_R],
+    [Dist_SP_N],
+    [Dist_CY_N],
+    [Dist_AX_N],
+    [Dist_PR_N],
+    [Dist_VA_N],
+    [Dist_PD_N],
+    [Near_SP_L],
+    [Near_CY_L],
+    [Near_AX_L],
+    [Near_PR_L],
+    [Near_VA_L],
+    [Near_PD_L],
+    [Near_SP_N],
+    [Near_CY_N],
+    [Near_AX_N],
+    [Near_PR_N],
+    [Near_VA_N],
+    [Near_PD_N],
+    [Bifocal1],
+    [Vertex],
+    [Bifocal2],
+    [RegularLenseType],
+    [Multicoated],
+    [Varilux],
+    [Light],
+    [Aspheric],
+    [Bifocal],
+    [Medium],
+    [Lenticular],
+    [SingleVision],
+    [Dark],
+    [SafetyThickness],
+    [AntiReflecting],
+    [Photosensitive],
+    [HighIndex],
+    [Colored],
+    [AntiScratch],
+    [ContactLenseType],
+    [Frames],
+    [ipd],
+    [color_ipd],
+    [comment_ipd],
+    [NoOfPairs],
+    [CostLense],
+    [CostFrame],
+    [remarks],
+    [UserID],
+    [Create_Date],
+    [MachineID],
+    [PatientNameEnglish],
+    [age],
+    [sex],
+    [AgeYMD],
+    [countrynameeng],
+    [EmpNameEnglish],
+    [company]
+)
+WITH ENCRYPTION
+AS
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

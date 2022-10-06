@@ -4,6 +4,14 @@
 
 
 
+
+
+
+
+
+
+
+
 CREATE view [dbo].[ItemInventory_View]
 AS
 (select itm.BranchID,itm.warehouseid,itm.item_code,
@@ -23,4 +31,3 @@ AS
 from ItemMovement_View as itm
 where itm.TransDate <= '2021/12/31'
 group by BranchID,item_code,warehouseid)
-

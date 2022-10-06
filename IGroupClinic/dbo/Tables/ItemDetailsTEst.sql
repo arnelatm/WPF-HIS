@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[NewItemDetails] (
+﻿CREATE TABLE [dbo].[ItemDetailsTEst] (
     [BranchID]             VARCHAR (15)   NOT NULL,
     [Primary_Key]          INT            IDENTITY (1, 1) NOT NULL,
     [itemid]               VARCHAR (4)    NULL,
@@ -6,6 +6,7 @@
     [Item_Code]            VARCHAR (15)   NOT NULL,
     [ABC_Class]            VARCHAR (10)   NULL,
     [ItemNameEnglish]      VARCHAR (50)   NOT NULL,
+    [ItemNameEnglishNew]   VARCHAR (50)   NULL,
     [ItemNameArabic]       VARCHAR (50)   NULL,
     [ItemGroup]            VARCHAR (5)    NULL,
     [SubstanceGroup]       VARCHAR (5)    NULL,

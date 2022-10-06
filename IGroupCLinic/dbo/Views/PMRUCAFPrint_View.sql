@@ -1,52 +1,73 @@
-﻿CREATE view 	PMRUCAFPrint_View --EMR_UCAF_Print_View
- 
-as 
-select 		a.*,
-			b.rownbr,
-			b.item_code,
-			b.qty,
-			b.unit,
-			b.saleprice,
-			b.discountper,
-			b.discountamt,
-			b.billamt,
-			b.itemnameenglish as item_name_e,
-			b.itemnamearabic as item_name_a,
-			PatientNameEnglish as patient ,
-			c.age,
-			c.sex,
-			c.ageYMD,
-			c.iqamano,
-			d.empNameEnglish,
-			e.countrynameeng,
-			D.DeptID as DepartmentID 			
-from 		PMRPatientGeneralInfo 			a	
-left outer join PMRInvestigationDetail_View 	b on a.trans_key=b.trans_key 
-left outer join PatientDetails				c on a.registrationno=c.registrationno and a.series=c.series 
-left outer join EmployeeDetails				d on a.doctorid =d.empid
-left outer join CountryMaster	 			e on c.countryiota  =e.countryiota 
-union all
-select 		a.*,
-			b.rownbr,
-			b.item_code,
-			b.qty,
-			b.unit,
-			b.saleprice,
-			b.discountper,
-			b.discountamt,
-			b.billamt,
-			b.itemnameenglish as item_name_e,
-			b.itemnamearabic as item_name_a,
-			PatientNameEnglish as patient ,
-			c.age,
-			c.sex,
-			c.ageymd,
-			c.iqamano,
-			d.empnameenglish,
-			e.countrynameeng,
-			d.DeptID as DepartmentID 			
-from 		PMRPatientGeneralInfo 			a	
-left outer join PMRMedicineDetails_View 		b on a.Trans_key=b.Trans_key 
-left outer join PatientDetails				c on a.registrationno=c.registrationno and a.series=c.series 
-left outer join EmployeeDetails				d on a.doctorid =d.empID
-left outer join CountryMaster 				e on c.CountryIOTA  =e.CountryIOTA 
+﻿CREATE VIEW [dbo].[PMRUCAFPrint_View] (
+    [Trans_Key],
+    [TransNBR],
+    [TransType],
+    [TransDateEnglish],
+    [PatientType],
+    [BillType],
+    [Series],
+    [RegistrationNo],
+    [TokenNo],
+    [InsuranceID],
+    [InsuranceGroupID],
+    [DoctorID],
+    [bp],
+    [Breathing],
+    [Height],
+    [Weight],
+    [Temprature],
+    [PulseRate],
+    [Respiratory],
+    [VisitNo],
+    [VisitType],
+    [DurationOfIllness],
+    [DurationYMD],
+    [AdmissionType],
+    [FixedAlergies],
+    [DrugAlergies],
+    [OtherAlergies],
+    [ChiefComplaint],
+    [NoteAlergies],
+    [SignificantSign],
+    [OtherCondition],
+    [Diagnosis],
+    [DX_Code1],
+    [DX_Code2],
+    [DX_Code3],
+    [DX_Code4],
+    [MedicationNote],
+    [IllnessType],
+    [Lmp],
+    [LmpDate],
+    [Cmf],
+    [CmfNote],
+    [Los],
+    [Eda],
+    [DoctorRemark],
+    [UserID],
+    [Create_Date],
+    [MachineID],
+    [rownbr],
+    [item_code],
+    [qty],
+    [unit],
+    [saleprice],
+    [discountper],
+    [discountamt],
+    [billamt],
+    [item_name_e],
+    [item_name_a],
+    [patient],
+    [age],
+    [sex],
+    [ageYMD],
+    [iqamano],
+    [empNameEnglish],
+    [countrynameeng],
+    [DepartmentID]
+)
+WITH ENCRYPTION
+AS
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+
