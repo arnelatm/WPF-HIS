@@ -31,7 +31,7 @@ Namespace DataLayer.AdoNet
             data.DoctorID = doctorId
             data.TransactionDate = transactionDate
             Dim params() As Object = {"@DoctorId", doctorId, "@TransactionDate", dateString}
-            sql = $"SELECT [InvoiceDate], [File No], [Inv Type], [Name], [Status], [Token], [Type], [Trans_Key] from PmrPatientDisplay_View where doctorid = @DoctorId and [TransDateEnglish] = @TransactionDate and Token <> 0 order by Cast(token as int) desc"
+            sql = $"SELECT [PmrDate], [FileNo], [FileType], [PatientName], [Status], [Token], [PType], [LastConsDate], [Trans_Key], [InvTime] from PmrDoctorsGenForm_View where doctorid = @DoctorId and PmrDate = @TransactionDate order by Cast(token as int) desc"
             data.PmrPatientsDisplay = _db.Read(sql, MakePmrPatientDetails, params).ToList()
             Return data
         End Function
@@ -43,13 +43,15 @@ Namespace DataLayer.AdoNet
 
         Private Shared ReadOnly MakePmrPatientDetails As Func(Of IDataReader, PmrPatientDisplay) = Function(reader) New PmrPatientDisplay() With
             {
-            .InvoiceDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("InvoiceDate")),
-            .FileNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("File No")),
-            .InvType = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Inv Type")),
-            .Name = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Name")),
+            .InvoiceDate = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PmrDate")),
+            .FileNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("FileNo")),
+            .InvType = AATM.DataLayer.AdoNet.Extensions.AsString(reader("FileType")),
+            .Name = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PatientName")),
             .Status = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Status")),
             .Token = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("Token")),
-            .PType = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Type")),
+            .PType = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PType")),
+            .LastConsDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("LastConsDate")),
+            .InvTime = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("InvTime")),
             .TransKey = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("Trans_Key"))
             }
 

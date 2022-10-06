@@ -12,7 +12,9 @@ Namespace PresentationLayer.Views.Interfaces
         Property PType As String
         Property FileNo As String
         Property InvType As String
+        Property LastConsDate As Date
         Property TransKey As Integer
+        Property InvTime As Date
 
     End Interface
 
