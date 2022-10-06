@@ -1,12 +1,49 @@
-﻿
-CREATE VIEW InsuranceSummary_View
- 
+﻿CREATE VIEW [dbo].[InsuranceSummary_View] (
+    [Trans_Key],
+    [TrType],
+    [BranchID],
+    [InsuranceGroupID],
+    [InsuranceID],
+    [NameEnglish],
+    [UnderInsuranceID],
+    [Policy],
+    [SeqNo],
+    [InsCardNo],
+    [RegistrationNo],
+    [PatientNameEnglish],
+    [TransNBR],
+    [TransDateEnglish],
+    [ApprovalNo],
+    [ICD10],
+    [Diagnosis1],
+    [Diagnosis2],
+    [Diagnosis3],
+    [ClinicalData],
+    [ClaimType],
+    [ServiceID],
+    [ServiceDescription],
+    [ServiceDate],
+    [DoctorID],
+    [DoctorNameEnglish],
+    [Qty],
+    [Amount],
+    [Gross],
+    [Discount],
+    [ADiscount],
+    [Deductible],
+    [Net],
+    [UserID],
+    [Create_Date],
+    [MachineID],
+    [InsSoapNo],
+    [InsSoapCode],
+    [CoInsuranceNameEnglish],
+    [ProviderCode],
+    [ClaimNo],
+    [Logo]
+)
+WITH ENCRYPTION
 AS
-SELECT  
-	a.*,
---	0 AS CLAIMNO,
-	case when b.AltServiceID is null then 0 else 1 end as ClaimNo,
-	c.Logo 
-from insuranceprocesseddata_view a
-left outer join InsuranceConsultations_View b on a.serviceid = b.altserviceid and a.InsuranceGroupID = b.InsuranceID
-left outer join InsuranceCoLogo c on a.InsuranceGroupID = c.InsuranceID
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

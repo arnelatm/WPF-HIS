@@ -1,23 +1,18 @@
-﻿
-CREATE VIEW DoctorsMIS_View
- 
+﻿CREATE VIEW [dbo].[DoctorsMIS_View] (
+    [RegistrationNo],
+    [DoctorID],
+    [GrossAmt],
+    [DeductibleAmt],
+    [Discount],
+    [ExtraDiscount],
+    [RoundOff],
+    [BillAmt],
+    [EmpNameEnglish],
+    [CountryIOTA],
+    [CountryNameEng]
+)
+WITH ENCRYPTION
 AS
-SELECT 
-	DISTINCT(RegistrationNo),
-	DoctorID,
-	sum(Qty*SalePrice) as GrossAmt,
-	sum(DeductibleAmt) as DeductibleAmt,
-	sum(NormalDiscountAmt) as Discount,
-	sum(ExtraDiscountAmt) as ExtraDiscount,
-	sum(RoundOffAmt) as RoundOff,
-	sum(BillAmt) as BillAmt,
-	EmpNameEnglish,
-	CountryIOTA,
-	CountryNameEng
-FROM clinicInvoice_view 
-WHERE Reject<> 1
-GROUP BY REGISTRATIONNO,
-	DOCTORID,
-	EmpNameEnglish,
-	CountryIOTA,
-	CountryNameEng
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

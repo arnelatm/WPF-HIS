@@ -9,6 +9,3 @@ create view PharmacyItmQTySoldNQTyOnHand_View as
     left join TotalPharmacySales_View as d
       on d.item_code = a.item_code 
     where a.BranchID = '01')
-
-
-

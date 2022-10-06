@@ -22,4 +22,4 @@ as
   b.DeductedAmt
 From HREmployeeInstallmentGroup a
 left outer join HREmployeeInstallmentDetails b on a.Trans_Key = b.Group_Key 
-left outer join HREmployeeDetails c on a.EmpID = c.EmpID 
+left outer join HREmployeeDetails c on a.EmpID = c.EmpID

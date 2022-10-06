@@ -4,6 +4,9 @@ SELECT        dbo.PayrollSummary_View.PeriodMonth, dbo.PayrollSummary_View.empid
                          dbo.PayrollSummary_View.Amount, dbo.EmployeeDetails.EmpNameEnglish, dbo.EmployeeDetails.DeptID
 FROM            dbo.PayrollSummary_View INNER JOIN
                          dbo.EmployeeDetails ON dbo.PayrollSummary_View.empid = dbo.EmployeeDetails.EmpID
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeePayrollSummary_View';
+
 
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
@@ -124,8 +127,4 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeePayrollSummary_View';
-
-
-GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeePayrollSummary_View';
 

@@ -1,8 +1,72 @@
-﻿
-CREATE VIEW PRItemList_View
- 
+﻿CREATE VIEW [dbo].[PRItemList_View] (
+    [BranchID],
+    [Primary_Key],
+    [itemid],
+    [ean_code],
+    [Item_Code],
+    [ABC_Class],
+    [ItemNameEnglish],
+    [ItemNameArabic],
+    [ItemGroup],
+    [SubstanceGroup],
+    [Category],
+    [Content1],
+    [Content2],
+    [Content3],
+    [Content4],
+    [Content5],
+    [Dosage_Adult],
+    [Dosage_Pediatric],
+    [Dosage_Toddler],
+    [Dosage_Infant],
+    [Can_used_Pregnancy],
+    [Indications],
+    [Contra_Indications],
+    [Manufacturer],
+    [Made_In_Country],
+    [Local_Agent],
+    [Supplier1],
+    [Supplier2],
+    [Supplier3],
+    [Supplier4],
+    [Supplier5],
+    [Pack1],
+    [Pack2],
+    [Pack3],
+    [SaleStrip],
+    [SalePcs],
+    [Reporting_Dept],
+    [Acct_Dept],
+    [Price_Cost],
+    [Disc_Per],
+    [Price_Cash],
+    [Discount_Cash],
+    [Price_Credit],
+    [Discount_Credit],
+    [Price_Staff],
+    [Discount_Staff],
+    [Credit_Patient_Allow],
+    [RO_Qty],
+    [Max_Qty],
+    [Min_Qty],
+    [Qty_Reserved],
+    [Bin_Row],
+    [Bin_Col],
+    [Last_Purchase],
+    [Last_Selling],
+    [Item_Status],
+    [Item_Blocked],
+    [Blocked_Reason],
+    [Blocked_DateUpto],
+    [Remarks],
+    [Create_date],
+    [UserId],
+    [MachineId],
+    [Created_By_Branch],
+    [TransNo]
+)
+WITH ENCRYPTION
 AS
-select a.*,c.TransNo
-from itemdetails a 
-left outer join purchaseDetails b on a.item_code = b.Item_code and a.BranchID = b.BranchID
-left outer join purchasegroup c on b.Group_Key = c.Trans_Key AND a.BranchID = c.BranchID
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

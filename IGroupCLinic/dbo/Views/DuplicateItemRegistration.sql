@@ -26,4 +26,4 @@ SELECT TOP (1000) a.[RegistrationNo]
 	  ,d.[Volume]
 	  ,d.[Unit of Volume]
 HAVING COUNT(a.RegistrationNo)>1
-  order by a.RegistrationNo 
+  order by a.RegistrationNo

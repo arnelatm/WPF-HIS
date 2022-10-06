@@ -1,28 +1,21 @@
-﻿
-CREATE VIEW ClinicDailyCollectionReport_View
- 
+﻿CREATE VIEW [dbo].[ClinicDailyCollectionReport_View] (
+    [BranchID],
+    [TransDateEnglish],
+    [AcCode],
+    [DepartmentNameEnglish],
+    [SalesCode],
+    [CostOfGoodsCode],
+    [InventoryCode],
+    [GrossAmt],
+    [DiscountAmt],
+    [DeductibleAmt],
+    [CostAmt],
+    [DiscountOnDeductible],
+    [ExtraDiscountAmt],
+    [RoundOffAmt]
+)
+WITH ENCRYPTION
 AS
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
 
-select
-	BranchID,
-	TransDateEnglish,
-	AcCode,
-	DepartmentNameEnglish,
-	SalesCode,
-	CostOfGoodsCode,
-	InventoryCode, 
-	SUM(GrossAmt) as GrossAmt, 
-	SUM(DiscountAmt+DiscountOnDeductible+ExtraDiscountAmt) AS DiscountAmt, 
-	SUM(DeductibleAmt) as DeductibleAmt,
-	SUM(CostAmt) as CostAmt,
-	SUM(DiscountOnDeductible) as DiscountOnDeductible,
-	SUM(ExtraDiscountAmt) as ExtraDiscountAmt,
-	SUM(RoundOffAmt) as RoundOffAmt
-from ClinicDailyCollectionCalculation_View
-group by BranchID,
-	 TransDateEnglish,
-   	 AcCode,
-	 DepartmentNameEnglish,
-	 SalesCode,
-	 CostOfGoodsCode,
-	 InventoryCode

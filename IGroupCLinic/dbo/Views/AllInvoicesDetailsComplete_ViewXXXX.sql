@@ -234,11 +234,3 @@ UNION
   on phd.Item_Code = itd.Item_Code and phd.BranchID = itd.branchid 
   left outer join countrymaster as CM
   on pt.countryiota = cm.countryIota)
- 
-
-
-
-
-
-
-

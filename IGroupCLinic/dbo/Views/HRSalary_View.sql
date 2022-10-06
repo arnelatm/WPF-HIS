@@ -1,12 +1,40 @@
-﻿
-CREATE VIEW HRSalary_View
- 
+﻿CREATE VIEW [dbo].[HRSalary_View] (
+    [BranchID],
+    [Group_Key],
+    [PeriodMonth],
+    [PeriodYear],
+    [EmpID],
+    [Basic],
+    [MonthDays],
+    [Absence],
+    [Presence],
+    [Salary],
+    [OTHrs],
+    [OTRate],
+    [OTAmt],
+    [HRA],
+    [Food],
+    [Transport],
+    [Uniform],
+    [Washing],
+    [Education],
+    [YearlyBonus],
+    [Medical],
+    [ServiceBenefits],
+    [ServiceBenefitsReserve],
+    [Vacation],
+    [Others],
+    [SalaryAdvance],
+    [LoanAmt],
+    [InterestRate],
+    [GOSI],
+    [OthersLess],
+    [EmpNameEnglish],
+    [DepartmentID],
+    [Department]
+)
+WITH ENCRYPTION
 AS
-SELECT 	a.*,
-	b.EmpNameEnglish,
-	b.DepartmentID,
-	c.Department
-from HRPayrollDetails a
-left outer join HREmployeeDetails b on a.EmpID = b.EmpID AND a.BranchID = b.BranchID
-left outer join EmployeeDepartment c on b.DepartmentID = c.DeptID
-Where b.ServiceStatus = 1
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

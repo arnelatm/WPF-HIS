@@ -100,14 +100,3 @@ UNION
   inner join dbo.PharmacyInvoiceGroup as PHG
   on PHD.Group_Key = PHG.Trans_Key
   )
-  
-
-
-
-
-
-
-
-
-
-

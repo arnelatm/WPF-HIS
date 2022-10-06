@@ -121,5 +121,3 @@ i.InsuranceType = 'I'
 outer apply (select top 1 * from
 StockPositionCurrent where CashPrice > 0 and
 branchid='01' and b.Item_Code = Item_Code ) l
-
-

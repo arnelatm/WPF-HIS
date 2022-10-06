@@ -57,6 +57,3 @@ CREATE VIEW [dbo].[AllInvoicesVatAdjusted_ViewOrignal]
       ,[Series]
       ,Round(iif(TBillAmt=0,itemGrossPrice,iif(invGrossAmt=0,0,ItemGrossPrice/InvGrossAmt*[AdjInvExtraDisc])+ItemDiscountAmt),2) AS 'AdjItemDiscount'  	  	  
   FROM AllInvoicesDetailsComplete_View)
-
-
-

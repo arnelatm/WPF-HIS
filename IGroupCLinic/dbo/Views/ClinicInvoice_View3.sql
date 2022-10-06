@@ -105,4 +105,3 @@ from 	ClinicInvoiceGroup 				a
 	left outer join InsuranceDetails		m on h.UnderInsuranceID=m.InsuranceID  and upper(left(h.insurancetype,4))=upper(left(m.insurancetype,4))
 	left outer join InsuranceServicePriceList    	n on b.ServiceID = n.ServiceID AND n.InsuranceID = a.InsuranceGroupID 
 	left outer join MedicalDepartments		g on g.DepartmentID = (case when n.serviceID is null then d.departmentID else n.DepartmentID end)
-

@@ -16,4 +16,3 @@ SELECT [Group_Key]
   on a.group_key=b.Trans_key where
   b.transdateenglish > '2020/12/31'
   group by group_key,transnbr,b.VATAmt,b.Netamt,b.ExtraDiscountAmt,b.VATExemption
-

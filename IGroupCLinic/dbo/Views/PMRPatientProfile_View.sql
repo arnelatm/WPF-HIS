@@ -252,4 +252,4 @@ left outer join PatientDetails e on a.RegistrationNo = e.RegistrationNo and a.Se
 left outer join EmployeeDetails f on a.DoctorID = f.EMPID
 left outer join CountryMaster g on e.countryiota = g.countryiota
 left outer join MedicalDepartments h on f.DeptID = h.DepartmentID 
-left outer join InsuranceDetails i on e.InsCoCode = i.InsuranceID 
+left outer join InsuranceDetails i on e.InsCoCode = i.InsuranceID

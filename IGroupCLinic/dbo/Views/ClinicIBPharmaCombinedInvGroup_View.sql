@@ -17,6 +17,3 @@
 		  left join insuranceDetails as INS
 		  on PH.InsuranceID=INS.InsuranceID	  
 			  ) )
-
-
-

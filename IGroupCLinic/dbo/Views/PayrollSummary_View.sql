@@ -14,4 +14,4 @@ SELECT empid, dbo.HRPayrollDetails.PeriodMonth, dbo.HRPayrollDetails.PeriodYear,
 union 
 SELECT empid, dbo.HRPayrollDetails.PeriodMonth, dbo.HRPayrollDetails.PeriodYear, 'D' as PayType, 'Loan Amount' as PayName, LoanAmt*-1 as Amount FROM dbo.HRPayrollDetails 
 union 
-SELECT empid, dbo.HRPayrollDetails.PeriodMonth, dbo.HRPayrollDetails.PeriodYear, 'D' as PayType, 'Other Deduction' as PayName, OthersLess*-1 as Amount  FROM dbo.HRPayrollDetails 
+SELECT empid, dbo.HRPayrollDetails.PeriodMonth, dbo.HRPayrollDetails.PeriodYear, 'D' as PayType, 'Other Deduction' as PayName, OthersLess*-1 as Amount  FROM dbo.HRPayrollDetails

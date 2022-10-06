@@ -1,16 +1,10 @@
-﻿CREATE 	PROCEDURE uSpWSL_CLAIM_DIAGNOSIS 
-        ( 
-          @DateFrom as varchar(10),
-          @DateUpto as varchar(10),
-          @TPA as varchar(15) 
-        )
- 
-AS 
-DECLARE @SQLString varchar(8000) 
-SET @SQLString = 'INSERT INTO WASEELDB..WSL_CLAIM_DIAGNOSIS 
-SELECT PROVCLAIMNO,DIAGNOSISCODE,DIAGNOSISDESC 
-FROM WSL_CLAIM_DIAGNOSIS_View
-WHERE [INSURANCEID] = "' + @TPA +'" AND [TRANSDATEENGLISH] Between "' + @DateFrom +'" AND "'+ @DateUpto + '" '
-EXECUTE(@SQLString)
-SET QUOTED_IDENTIFIER ON
-SET NOCOUNT OFF
+﻿CREATE PROCEDURE [dbo].[uSpWSL_CLAIM_DIAGNOSIS]
+@DateFrom VARCHAR (10), @DateUpto VARCHAR (10), @TPA VARCHAR (15)
+WITH ENCRYPTION
+AS
+BEGIN
+--The script body was encrypted and cannot be reproduced here.
+    RETURN
+END
+
+

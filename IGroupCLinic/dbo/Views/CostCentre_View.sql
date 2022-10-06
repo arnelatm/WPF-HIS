@@ -1,17 +1,24 @@
-﻿
-CREATE VIEW CostCentre_View
- 
+﻿CREATE VIEW [dbo].[CostCentre_View] (
+    [BranchID],
+    [AccountID],
+    [CCNameEnglish],
+    [CCNameArabic],
+    [AcSalesLedgerID],
+    [AcCOGSLedgerID],
+    [AcInventoryLedgerID],
+    [AcDepartmentID],
+    [Remark],
+    [UserID],
+    [Create_Date],
+    [MachineID],
+    [SalesLedger],
+    [CostOfGodsLedger],
+    [InventoryLedger],
+    [Department],
+    [GroupDepartment]
+)
+WITH ENCRYPTION
 AS
- select 
-	 a.* ,
-	 b.LedgerNameEnglish as SalesLedger,
-	 c.LedgerNameEnglish as CostOfGodsLedger,
-	 d.LedgerNameEnglish as InventoryLedger,
-	 e.DepartmentNameEnglish as Department,
-	 f.GroupNameEnglish as GroupDepartment
- from CostCentre a
- left outer join AccountsLedger b on a.AcSalesLedgerID = b.LedgerID 
- left outer join AccountsLedger c on a.AcCOGSLedgerID  = c.LedgerID 
- left outer join AccountsLedger d on a.AcInventoryLedgerID  = d.LedgerID 
- left outer join MedicalDepartments  e on a.AcDepartmentID  = e.DepartmentID  
- left outer join MedicalDepartmentGroups  f on f.DepartmentGroupID  = e.DepartmentGroupID  
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

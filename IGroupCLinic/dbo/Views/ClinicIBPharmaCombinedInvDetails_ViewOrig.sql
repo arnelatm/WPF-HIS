@@ -43,9 +43,3 @@
 			left join InsuranceDetails AS ins
 			on PHG.InsuranceID = INS.InsuranceID)
 	)
-
-
-
-
-
-

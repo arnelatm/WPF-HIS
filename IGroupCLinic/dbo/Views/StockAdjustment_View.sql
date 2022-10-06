@@ -1,10 +1,34 @@
-﻿
-CREATE VIEW StockAdjustment_View
- 
+﻿CREATE VIEW [dbo].[StockAdjustment_View] (
+    [BranchID],
+    [TransNo],
+    [TransDate],
+    [SlNo],
+    [WarehouseID],
+    [Item_Code],
+    [Batch],
+    [Expiry],
+    [CostPrice],
+    [SellingPrice],
+    [SPriceNew],
+    [PQtyBox],
+    [PQtyStrip],
+    [PQtyPcs],
+    [pQty],
+    [NQtyBox],
+    [NQtyStrip],
+    [NQtyPcs],
+    [NQty],
+    [rec_type],
+    [stk_update],
+    [remarks],
+    [UserID],
+    [Create_Date],
+    [MachineID],
+    [ItemNameEnglish],
+    [WarehouseNameEnglish]
+)
+WITH ENCRYPTION
 AS
-select 	a.*,
-	b.ItemNameEnglish,
-	c.WarehouseNameEnglish 
-from StockAdjustment a
-left outer join ItemDetails b on a.Item_Code = b.Item_Code AND a.BranchID = b.BranchID
-left outer join WareHouseDetails c on a.WarehouseID = c.WarehouseID and a.BranchID  = c.BranchID  
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

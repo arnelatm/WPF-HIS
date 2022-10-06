@@ -14,6 +14,3 @@ on purchasedetails.item_code = latest_purchase.item_code
 inner join purchasegroup 
 on purchasedetails.Group_key = PurchaseGroup.Trans_Key
 and PurchaseGroup.TransDate = latest_purchase.Created_at)
-
-  
-    

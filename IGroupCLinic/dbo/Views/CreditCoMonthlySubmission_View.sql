@@ -1,32 +1,18 @@
-﻿CREATE VIEW CreditCoMonthlySubmission_View
- 
+﻿CREATE VIEW [dbo].[CreditCoMonthlySubmission_View] (
+    [transnbr],
+    [registrationno],
+    [transdateenglish],
+    [qty],
+    [saleprice],
+    [discountper],
+    [discountamt],
+    [patientnameenglish],
+    [servicenameenglish],
+    [INSURANCEGROUPID],
+    [TransType]
+)
+WITH ENCRYPTION
 AS
-select 
-	transnbr,
-	registrationno,
-	transdateenglish,
-	qty,
-	saleprice,
-	discountper,
-	discountamt,
-	patientnameenglish,
-	servicenameenglish,
-	INSURANCEID AS INSURANCEGROUPID,
-	'Clinic' as TransType
-from clinicinvoice_view 
---where transdateenglish between '2014/05/01' and '2014/05/31' and insuranceid = '1008'
-union all
-select 
-	transnbr,
-	registrationno,
-	transdateenglish,
-	qty,
-	saleprice,
-	discountper,
-	discountamt,
-	patientnameenglish,
-	itemnameenglish as servicenameenglish,
-	INSURANCEID AS INSURANCEGROUPID,
-	'Pharmacy' as TransType
-from pharmacysales_view 
---where transdateenglish between '2014/05/01' and '2014/05/31' and insuranceid = '1008'
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

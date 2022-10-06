@@ -1,24 +1,33 @@
-﻿
-CREATE VIEW HRReArrangeAttendence_View
- 
+﻿CREATE VIEW [dbo].[HRReArrangeAttendence_View] (
+    [EmpID],
+    [ShiftID],
+    [Date],
+    [Time1],
+    [Time2],
+    [Time3],
+    [Time4],
+    [ShiftDirect],
+    [OverNight],
+    [PrevDay],
+    [NextDay],
+    [IndexKey],
+    [AttendenceID],
+    [DepartmentID],
+    [punchNecessary],
+    [DutyHRS],
+    [EmpMarketing],
+    [SundayOff],
+    [MondayOff],
+    [TuesDayOff],
+    [WednesDayOff],
+    [ThursDayOff],
+    [FriDayOff],
+    [SaturDayOff],
+    [LeaveType],
+    [Department]
+)
+WITH ENCRYPTION
 AS
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
 
-select 	a.*,
-	c.AttendenceID,
-	c.DepartmentID,
-	c.punchNecessary,
-	c.DutyHRS,
-	c.EmpMarketing,
-	c.SundayOff,
-	c.MondayOff,
-	c.TuesDayOff,
-	c.WednesDayOff,
-	c.ThursDayOff,
-	c.FriDayOff,
-	c.SaturDayOff,
-	d.LeaveType,
-	e.Department
-from HRScratchFile1 a
-left outer join HREmployeeDetails c on a.EmpID = c.empID
-left outer join HREmployeeLeaveDetails d on a.EmpID = d.EmpID AND a.Date BETWEEN d.DateFrom AND d.DateUpto
-left outer join EmployeeDepartment e on c.DepartmentID = e.DeptID

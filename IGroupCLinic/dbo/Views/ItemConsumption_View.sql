@@ -19,4 +19,3 @@ AS
 from ItemMovement_View as itm
 where itm.TransDate <= '2018/01/31' and itm.TransDate >= '2018/01/01' and itm.TransType = 'WHTransfer'
 group by BranchID,item_code,warehouseid)
-

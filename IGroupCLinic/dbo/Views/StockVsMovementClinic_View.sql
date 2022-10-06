@@ -14,9 +14,3 @@ CREATE VIEW [dbo].[StockVsMovementClinic_View]
     FROM itemdetails as IT
 
 )
-
-
-
-
-
-

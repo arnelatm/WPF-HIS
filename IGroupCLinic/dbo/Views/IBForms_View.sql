@@ -1,13 +1,61 @@
-﻿
-CREATE VIEW IBForms_View
- 
+﻿CREATE VIEW [dbo].[IBForms_View] (
+    [Trans_Key],
+    [BranchID],
+    [IBType],
+    [RegistrationNo],
+    [PatientName],
+    [TransType],
+    [TransNBR],
+    [TransDateEnglish],
+    [TransDateHijri],
+    [DeliveryDate],
+    [CompanyID],
+    [DoctorID],
+    [Border_Iqama],
+    [SponsorID],
+    [Profession],
+    [CountryIOTA],
+    [BaladiyaExpiration],
+    [Phone],
+    [SponsorPhone],
+    [DOB],
+    [Age],
+    [AgeYMD],
+    [Sex],
+    [LabReportNo],
+    [LabReportResult],
+    [LabUnfitReason],
+    [XrayReportNo],
+    [XrayReportResult],
+    [CardStatus],
+    [CardIssueDate],
+    [TokenNo],
+    [GrossAmt],
+    [DiscountAmt],
+    [NetAmt],
+    [ExtraDiscountPer],
+    [ExtraDiscountAmt],
+    [Remarks],
+    [Posted],
+    [Accepted],
+    [AcceptedNo],
+    [Rejected],
+    [RejectedDate],
+    [Finishied],
+    [UserID],
+    [Create_Date],
+    [MachineID],
+    [SponsorName],
+    [SalesmanID],
+    [LabSeries],
+    [VATAmt],
+    [VATExemption],
+    [BranchNameEnglish],
+    [BranchNameArabic],
+    [CountryNameEng]
+)
+WITH ENCRYPTION
 AS
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
 
-Select a.*,
-		b.BranchNameEnglish,
-		b.BranchNameArabic,
-		c.CountryNameEng 
-From IBInvoiceGroup a
-Left Outer Join BranchDetails b on a.BranchID  = b.branchID 
-left outer join CountryMaster c on a.CountryIOTA = c.CountryIOTA 
-left outer join IQAMAProfessionMaster d on a.Profession = d.ItemID 

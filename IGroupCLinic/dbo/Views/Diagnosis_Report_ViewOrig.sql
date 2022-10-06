@@ -63,4 +63,3 @@ left outer join InsuranceDetails 		e on a.insuranceid=e.insuranceid
 left outer join Lab_DiagnosisMasterDetails 		f on a.investigationid=f.investigationid
 left outer join PatientDetails g on a.PatientType = g.PatientType and a.RegistrationNo = g.RegistrationNo 
 where not b.columnnos is null
-

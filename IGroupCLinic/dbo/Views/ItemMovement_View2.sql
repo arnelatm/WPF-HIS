@@ -48,4 +48,4 @@ UNION
 		  ON DD.Group_Key = DG.Primary_Key
 		left join itemdetails as IT6
 	      on DD.Item_Code = IT6.ITEM_Code and DD.BranchID = it6.BranchID
-		   where DG.BranchFrom = IT6.BranchID )   
+		   where DG.BranchFrom = IT6.BranchID )

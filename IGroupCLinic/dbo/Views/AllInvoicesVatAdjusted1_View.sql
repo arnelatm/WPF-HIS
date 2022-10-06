@@ -90,6 +90,3 @@ CREATE VIEW [dbo].[AllInvoicesVatAdjusted1_View]
 						))
 			AS 'AdjExtendedAmtPlusVat'	 
   FROM AllInvoicesDetailsComplete_View)
-
-
-

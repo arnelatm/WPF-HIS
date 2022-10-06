@@ -1,15 +1,16 @@
-﻿
-CREATE view 	Item_Batch_All_View
- 
-as
-select 		a.branchid				,
-		a.warehouseid				,
-		a.item_code			,
-		a.batch			,
-		a.expiry			,
-		(a.pcsqty) as StockQty,
-		a.cashprice			,
-		a.costprice     			,
-		b.itemnameenglish
-from 		stockpositioncurrent a
-left outer join itemdetails b on a.item_code = b.item_code and a.branchid = b.branchid
+﻿CREATE VIEW [dbo].[Item_Batch_All_View] (
+    [branchid],
+    [warehouseid],
+    [item_code],
+    [batch],
+    [expiry],
+    [StockQty],
+    [cashprice],
+    [costprice],
+    [itemnameenglish]
+)
+WITH ENCRYPTION
+AS
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

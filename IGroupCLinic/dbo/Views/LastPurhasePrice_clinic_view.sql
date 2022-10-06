@@ -8,4 +8,3 @@ left join purchasegroup b
 on a.group_key = b.trans_key
 where a.branchid='02') as subquery 
 where rn=1
-

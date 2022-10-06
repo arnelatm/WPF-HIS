@@ -61,6 +61,3 @@ UNION
       ,isnull([VATAmt],0) as 'TotVatAmt'
 	  ,0 as 'Rejected'
   FROM [iGroupClinic].[dbo].[PharmacyInvoiceGroup]
-
-
-

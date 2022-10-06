@@ -27,4 +27,4 @@ left outer join InsuranceDetails d on a.CompanyID = d.InsuranceID and d.Insuranc
 left outer join IBProfessions e on a.Profession  = e.ProfessionName 
 left outer join CountryMaster f on a.CountryIOTA = f.CountryIOTA 
 left outer join MedicalServices g on b.ServiceID = g.ServiceID 
-left outer join SalesmanDetails h on a.SalesmanID = h.SalesmanID 
+left outer join SalesmanDetails h on a.SalesmanID = h.SalesmanID

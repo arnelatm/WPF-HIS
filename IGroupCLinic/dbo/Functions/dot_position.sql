@@ -38,5 +38,3 @@ BEGIN
 	RETURN @position
 
 END
-
-

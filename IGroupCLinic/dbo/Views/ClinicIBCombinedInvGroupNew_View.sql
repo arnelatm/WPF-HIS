@@ -52,4 +52,3 @@ CREATE VIEW [dbo].[ClinicIBCombinedInvGroupNew_View]
           on CIG.RegistrationType=PD.PatientType and CIG.RegistrationNo=PD.RegistrationNo
 	   ) 
 	 )
-

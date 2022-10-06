@@ -16,7 +16,3 @@
   sum(BillAmt) as 'InvBillAmt'
   FROM [iGroupClinic].[dbo].[AllInvoicesDetails_View]
   group by invSource,group_key,transdateenglish,Transnbr)
-  
-
-
-

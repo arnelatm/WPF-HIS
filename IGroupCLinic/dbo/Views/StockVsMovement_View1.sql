@@ -14,9 +14,3 @@ CREATE VIEW [dbo].[StockVsMovement_View1]
     FROM itemdetails as IT
 
 )
-
-
-
-
-
-

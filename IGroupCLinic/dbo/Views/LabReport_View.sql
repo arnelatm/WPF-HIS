@@ -1,28 +1,26 @@
-﻿
-CREATE VIEW LabReport_View
- 
+﻿CREATE VIEW [dbo].[LabReport_View] (
+    [TransType],
+    [TransNo],
+    [TransDate],
+    [SampleNo],
+    [ServiceID],
+    [InvestigationID],
+    [InvoiceType],
+    [InvoiceNo],
+    [InvoiceDate],
+    [RegistrationNo],
+    [PatientNameEnglish],
+    [Age],
+    [Sex],
+    [DoctorID],
+    [EmpNameEnglish],
+    [InvestigationName],
+    [UserID],
+    [Status],
+    [ServiceNameEnglish]
+)
+WITH ENCRYPTION
 AS
-select 
-	case when a.TransType = 'CA' then 'Cash' else 'Credit' end as TransType,
-	a.TransNo,
-	a.TransDate,
-	a.SampleNo,
-	a.ServiceID,
-	a.InvestigationID,
-	case when a.InvoiceType='CA' then 'Cash' else 'Credit' end as InvoiceType,
-	a.InvoiceNo,
-	a.InvoiceDate,
-	a.RegistrationNo,
-	a.PatientNameEnglish,
-	str(a.age)+' '+ case when a.AgeYMD='Y' then 'Years' else case when a.AgeYMD = 'M' then 'Months' Else 'Days' end end as Age,
-	case when a.Sex='M' then 'Male' else 'Female' end as Sex,
-	a.DoctorID,
-	b.EmpNameEnglish,
-	c.InvestigationName,
-	a.UserID,
-	a.Status ,
-	d.ServiceNameEnglish 
-from lab_invoicegroup a
-left outer join EmployeeDetails b on a.DoctorID = b.EmpID
-left outer join lab_diagnosismasterdetails c on a.InvestigationID = c.InvestigationID
-left outer join MedicalServices  d on a.ServiceID  = d.ServiceID 
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

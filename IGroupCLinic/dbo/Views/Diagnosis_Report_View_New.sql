@@ -70,4 +70,3 @@ left outer join Lab_DiagnosisMasterDetails 		f on a.investigationid=f.investigat
 left outer join PatientDetails g on a.PatientType = g.PatientType and a.RegistrationNo = g.RegistrationNo 
 left outer join Lab_SampleCollectionGroup h on a.sampleNo = h.SampleNo
 where not b.columnnos is null
-

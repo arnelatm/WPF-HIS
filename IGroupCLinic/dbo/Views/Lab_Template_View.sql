@@ -1,8 +1,9 @@
-﻿
-CREATE view 	Lab_Template_View
- 
-as
-select
-Distinct(TemplateID) as TemplateID,
-TemplateName
-from Lab_InvestigationTemplate 
+﻿CREATE VIEW [dbo].[Lab_Template_View] (
+    [TemplateID],
+    [TemplateName]
+)
+WITH ENCRYPTION
+AS
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

@@ -1,18 +1,22 @@
-﻿CREATE VIEW ClinicDailyPatientList_View
- 
+﻿
+CREATE VIEW [dbo].[ClinicDailyPatientList_View]
 AS
-SELECT 
+SELECT
 	DISTINCT(a.RegistrationNo),
 	a.RegistrationType as PatientType,
-	b.Series ,
+	b.Series,
 	a.Transdateenglish,
 	b.patientnameenglish,
 	b.countryiota,
 	c.countrynameeng,
 	b.mobile,
 	a.DoctorID,
-	d.EmpNameEnglish 
+	d.EmpNameEnglish,
+	b.Age,
+	b.AgeYMD,
+	e.CCNameEnglish as 'ClinicName'
 from clinicinvoicegroup a
-left outer join patientdetails b on a.RegistrationNo = b.RegistrationNo AND upper(a.RegistrationType) = upper(b.PatientType)
-left outer join countrymaster c on c.countryiota = b.countryiota
-left outer join EmployeeDetails d on a.DoctorID = d.EmpID 
+left outer join patientdetails b on a.RegistrationNo = b.RegistrationNo AND upper(a.RegistrationType)=upper(b.PatientType)
+left outer join countrymaster c on c.countryiota =b.countryiota
+left outer join EmployeeDetails d on a.DoctorID=d.EmpID
+left outer join CostCentre e on e.AccountID = a.DoctorID

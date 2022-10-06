@@ -66,8 +66,3 @@ UNION
    	  ,0 as 'TotVatExemption'
 	  ,0 as 'Rejected'
   FROM [iGroupClinic].[dbo].[PharmacyInvoiceGroup]
-
-
-
-
-

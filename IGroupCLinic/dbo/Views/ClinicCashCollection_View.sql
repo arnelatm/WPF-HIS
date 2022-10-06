@@ -1,26 +1,16 @@
-﻿CREATE VIEW ClinicCashCollection_View
- 
+﻿CREATE VIEW [dbo].[ClinicCashCollection_View] (
+    [BranchID],
+    [Trans_key],
+    [TransNbr],
+    [TransDateEnglish],
+    [GrossAmt],
+    [NormalDiscountAmt],
+    [DeductibleAmt],
+    [ExtraDiscountAmt],
+    [RoundOffAmt]
+)
+WITH ENCRYPTION
 AS
-Select 
-	BranchID ,
-	Trans_key,
-	TransNbr,
-	TransDateEnglish,
-	Sum(Qty*Saleprice) as GrossAmt,
-	NormalDiscountAmt,
-	DeductibleAmt,
-	ExtraDiscountAmt,
-	RoundOffAmt   
-From ClinicInvoice_View 
-Where (Reject is null or Reject = '0') 
-and  (CreditCardNo='' or CreditCardNo is null) 
-AND BillType = 'CA'  
-Group By
-	BranchID ,
-	Trans_Key,
-	TransNBR,
-	TransDateEnglish,
-	NormalDiscountAmt,
-	DeductibleAmt,
-	ExtraDiscountAmt,
-	RoundOffAmt   
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

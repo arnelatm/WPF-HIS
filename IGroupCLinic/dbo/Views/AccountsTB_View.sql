@@ -1,26 +1,17 @@
-﻿
-CREATE VIEW AccountsTB_View 
- 
+﻿CREATE VIEW [dbo].[AccountsTB_View] (
+    [BranchID],
+    [vDate],
+    [LedgerID],
+    [LedgerNameEnglish],
+    [LedgerNameArabic],
+    [ParentID],
+    [GroupNameEnglish],
+    [groupnamearabic],
+    [dramt],
+    [cramt]
+)
+WITH ENCRYPTION
 AS
-select 	BranchID,
-	vDate,
-       	LedgerID,
-       	LedgerNameEnglish,
-		LedgerNameArabic, 
-       	ParentID,
-       	GroupNameEnglish,
-		groupnamearabic,
-       	sum(dramt) as dramt,
-       	sum(cramt) as cramt
-from 
-	AccountsVoucher_View
-    Where Status = 1
-group by
-	BranchID,
-	vDate,
-    	LedgerID,
-    	LedgerNameEnglish,
-		LedgerNameArabic, 
-    	ParentID,
-    	GroupNameEnglish,
-		GroupNameArabic 
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
+

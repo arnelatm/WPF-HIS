@@ -105,6 +105,7 @@
     [PreStockEntry]                 CHAR (1)        NULL,
     [LABStatusMaintain]             INT             NULL,
     [TakeRoundOffAmt]               INT             NULL,
-    [DiscAmt]                       NUMERIC (10, 2) NULL
+    [DiscAmt]                       NUMERIC (10, 2) NULL,
+    [PMRAllPatientDisplay]          INT             NULL
 );
 

@@ -100,4 +100,3 @@ UNION
   inner join dbo.IBInvoiceGroup as ibg
   Left Outer join dbo.InsuranceDetails Ins on ibg.CompanyID = ins.InsuranceID
   on ibd.Group_Key = ibg.Trans_Key)
-

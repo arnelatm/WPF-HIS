@@ -15,11 +15,3 @@ from StockPositionCurrent as STK
 JOIN ITEMDETAILS AS IT
 ON STK.ITEM_CODE = IT.ITEM_CODE and stk.branchid=it.branchid
 GROUP BY STK.BRANCHID,STK.ITEM_CODE,STK.WAREHOUSEID,it.ItemNameEnglish,it.pack1,it.pack2,it.pack3)
-
-
-
-
-
-
-
-

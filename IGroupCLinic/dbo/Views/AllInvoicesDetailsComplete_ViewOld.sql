@@ -189,5 +189,3 @@ UNION
   on phg.InsuranceID = COMP.InsuranceID
   inner join dbo.ItemDetails as itd
   on phd.Item_Code = itd.Item_Code)
-
-

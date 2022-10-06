@@ -1,46 +1,41 @@
-﻿
-CREATE VIEW XryInvoiceGroup_View
- 
+﻿CREATE VIEW [dbo].[XryInvoiceGroup_View] (
+    [BranchID],
+    [Trans_Key],
+    [TransType],
+    [TransNBR],
+    [TransDateEnglish],
+    [InvoiceType],
+    [InvoiceNBR],
+    [InvoiceDateEnglish],
+    [RegistrationType],
+    [RegistrationNo],
+    [RegistrationDate],
+    [DoctorID],
+    [PatientName],
+    [PatientNameArabic],
+    [CountryID],
+    [Age],
+    [YMD],
+    [DOB],
+    [PatientID],
+    [PhoneNo],
+    [InsuranceID],
+    [InsuranceNameEnglish],
+    [DeductionCategoryID],
+    [InsuranceGroupID],
+    [InvestigationID],
+    [InvestigationName],
+    [InvestigationDescription],
+    [Reject],
+    [RejectDate],
+    [EmpNameEnglish],
+    [Sex],
+    [InsuranceGroupName],
+    [DeductionCategory],
+    [ServiceID]
+)
+WITH ENCRYPTION
 AS
-SELECT
-	a.BranchID,
-	a.Trans_Key,	
-	a.TransType,
-	a.TransNBR,
-	a.TransDateEnglish,
-	a.InvoiceType,
-	a.InvoiceNBR,
-	a.InvoiceDateEnglish,
-	a.RegistrationType,
-	a.RegistrationNo,
-	a.RegistrationDate,
-	a.DoctorID,
-	a.PatientName,
-	a.PatientNameArabic,
-	a.CountryID,
-	a.Age,
-	a.YMD,
-	a.DOB,
-	a.PatientID,
-	a.PhoneNo,
-	a.InsuranceID,
-	a.InsuranceNameEnglish,
-	a.DeductionCategoryID,
-	a.InsuranceGroupID,
-	a.InvestigationID,
-	a.InvestigationName,
-	a.InvestigationDescription,
-	a.Reject,
-	a.RejectDate,
-	b.EmpNameEnglish,
-	case when f.sex = 'M' then 'Male' Else 'Female' end As Sex,
-	c.NameEnglish as InsuranceGroupName,
-	d.ItemNameEnglish as DeductionCategory,
-	e.ServiceID
-From 	XryInvoiceGroup a
-LEFT OUTER JOIN EmployeeDetails b on a.DoctorID = b.EmpID
-LEFT OUTER JOIN InsuranceDetails c on a.InsuranceID = c.InsuranceID AND c.InsuranceType = 'TPA'
-LEFT OUTER JOIN DeductibleClassMaster d on a.DeductionCategoryID = d.ItemID 
-LEFT OUTER JOIN XryInvestigationServices e on a.InvestigationID  = e.InvestigationID 
-LEFT OUTER JOIN PatientDetails f on a.RegistrationType = f.PatientType and a.RegistrationNo = f.RegistrationNo 
+SELECT NULL AS [NullColumn]
+--The script body was encrypted and cannot be reproduced here.;
 

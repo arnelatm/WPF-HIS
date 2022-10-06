@@ -14,11 +14,3 @@ CREATE VIEW [dbo].[StockVsMovementClup_View]
     FROM itemdetails as IT
 
 )
-
-
-
-
-
-
-
-
