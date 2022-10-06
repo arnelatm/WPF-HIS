@@ -50,10 +50,12 @@
     [SupervisorIdNo]      INT             NULL,
     [Picture]             VARBINARY (MAX) NULL,
     [Active]              BIT             NULL,
-    [Create_Date]         DATETIME        NULL,
+    [Create_Date]         DATETIME        CONSTRAINT [DF_Employee_Create_Date] DEFAULT (getdate()) NULL,
     [DateTimeStamp]       ROWVERSION      NULL,
     CONSTRAINT [PK_EmployeeIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

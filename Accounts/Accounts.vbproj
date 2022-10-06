@@ -203,9 +203,12 @@
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
+    <Compile Include="BusinessLayer\ItemCode.vb" />
+    <Compile Include="BusinessLayer\CodeGroup.vb" />
     <Compile Include="BusinessLayer\DataImage.vb" />
     <Compile Include="BusinessLayer\Document.vb" />
     <Compile Include="BusinessLayer\EmployeeDocument.vb" />
+    <Compile Include="BusinessLayer\Doctor.vb" />
     <Compile Include="BusinessLayer\HolidayAvailmentApprovalHistory.vb" />
     <Compile Include="BusinessLayer\HolidayTransferAvailment.vb" />
     <Compile Include="BusinessLayer\HolidayTransferItem.vb" />
@@ -279,6 +282,8 @@
     <Compile Include="BusinessLayer\Supplier.vb" />
     <Compile Include="ContainerConfig.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
+    <Compile Include="DataLayer\AdoNet\ItemCodeDao.vb" />
+    <Compile Include="DataLayer\AdoNet\CodeGroupDao.vb" />
     <Compile Include="DataLayer\AdoNet\DataImageDao.vb" />
     <Compile Include="DataLayer\AdoNet\DocumentDao.vb" />
     <Compile Include="DataLayer\AdoNet\EmployeeLeaveDao.vb" />
@@ -378,6 +383,9 @@
       <DependentUpon>NewSettings.settings</DependentUpon>
     </Compile>
     <Compile Include="OneTimeRun.vb" />
+    <Compile Include="PresentationLayer\Models\ItemCodeModel.vb" />
+    <Compile Include="PresentationLayer\Models\CodeGroupModel.vb" />
+    <Compile Include="PresentationLayer\Models\DoctorModel.vb" />
     <Compile Include="PresentationLayer\Models\DataImageModel.vb" />
     <Compile Include="PresentationLayer\Models\DocumentModel.vb" />
     <Compile Include="PresentationLayer\Models\EmployeeIdModel.vb" />
@@ -429,6 +437,8 @@
     <Compile Include="PresentationLayer\Models\PensionSchemeModel.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\ItemCodePresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\CodeGroupPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CustomerPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DocumentPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\PmrInvestigationPresenter.vb" />
@@ -477,6 +487,18 @@
       <DependentUpon>ArJournalEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\ArJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\ItemCodeEntry.Designer.vb">
+      <DependentUpon>ItemCodeEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\ItemCodeEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\CodeGroupEntryTv.Designer.vb">
+      <DependentUpon>CodeGroupEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\CodeGroupEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\CustomerEntryTv.Designer.vb">
@@ -732,6 +754,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\IGroup\PmrPatientDisplayView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IItemCode.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\ICodeGroup.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IDoctorView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDataImageView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDocumentView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeDocumentView.vb" />
@@ -1329,6 +1354,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ArJournalEntry.resx">
       <DependentUpon>ArJournalEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\ItemCodeEntry.resx">
+      <DependentUpon>ItemCodeEntry.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\CodeGroupEntryTv.resx">
+      <DependentUpon>CodeGroupEntryTv.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\BankEntryTv.resx">
       <DependentUpon>BankEntryTv.vb</DependentUpon>
