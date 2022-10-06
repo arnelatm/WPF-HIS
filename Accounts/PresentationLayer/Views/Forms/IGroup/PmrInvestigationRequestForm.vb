@@ -109,7 +109,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub dataGridView1_CellFormatting(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs) Handles DataGridViewPmrPatientDisplay.CellFormatting
             For Each myRow As DataGridViewRow In DataGridViewPmrPatientDisplay.Rows
-                If myRow.Cells("dgvPType").Value = "Old" Then
+                If myRow.Cells("dgvFileType").Value = "Old" Then
                     myRow.DefaultCellStyle.ForeColor = Color.Coral
                 Else
                     myRow.DefaultCellStyle.ForeColor = Color.DarkGreen
@@ -128,9 +128,9 @@ Namespace PresentationLayer.Views.Forms
                 If .CurrentCell IsNot Nothing And .CurrentCell.OwningColumn.Name() = $"dgvPrintColumn" Then
                     Dim transKey As Int32 = .CurrentRow.Cells("dgvTransKey").Value
                     Dim parameter As New ArrayList
-                    parameter.Add("TransKey")
-                    parameter.Add(transKey)
+                    parameter.Add({"TransKey", transKey})
                     Dim cForm As New ReportFormIGroup($"PMR Doctors Form.Rpt", FormCulture, parameter)
+                    cForm.Show()
                 End If
             End With
         End Sub

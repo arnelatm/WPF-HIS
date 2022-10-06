@@ -14,6 +14,8 @@
         Public Property FileNo As String
         Public Property InvType As String
         Public Property TransKey As Integer
+        Public Property LastConsDate As Date
+        Public Property InvTime As Date
 
     End Class
 

@@ -24,30 +24,32 @@
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PmrInvestigationRequestForm))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.btnRefresh = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.imgList = New System.Windows.Forms.ImageList(Me.components)
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-            Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.DataGridViewPmrPatientDisplay = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.bsPmrPatientDisplay = New System.Windows.Forms.BindingSource(Me.components)
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDoctorId = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDoctorName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.bsPmrPatientDisplay = New System.Windows.Forms.BindingSource(Me.components)
+            Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.TokenDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.StatusDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
             Me.FileNoDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.NameDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvPType = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvFileType = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.InvTypeDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvTime = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvTransKey = New System.Windows.Forms.DataGridViewTextBoxColumn()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
@@ -109,33 +111,6 @@
             Me.TableLayoutPanel1.Size = New System.Drawing.Size(781, 493)
             Me.TableLayoutPanel1.TabIndex = 17
             '
-            'dtpTransactionDate
-            '
-            Me.dtpTransactionDate.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
-            Me.dtpTransactionDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-            Me.TableLayoutPanel1.SetColumnSpan(Me.dtpTransactionDate, 2)
-            Me.dtpTransactionDate.DefaultValue = Nothing
-            Me.dtpTransactionDate.DisplayOnly = False
-            Me.dtpTransactionDate.DtpDefaultValue = Nothing
-            Me.dtpTransactionDate.EditingMode = True
-            Me.dtpTransactionDate.EditsAllowed = False
-            Me.dtpTransactionDate.ForeColor = System.Drawing.Color.Black
-            Me.dtpTransactionDate.LinkedLabel = Nothing
-            Me.dtpTransactionDate.Location = New System.Drawing.Point(174, 32)
-            Me.dtpTransactionDate.Margin = New System.Windows.Forms.Padding(1)
-            Me.dtpTransactionDate.Name = "dtpTransactionDate"
-            Me.dtpTransactionDate.ReadOnlyDp = False
-            Me.dtpTransactionDate.SecurityKey = Nothing
-            Me.dtpTransactionDate.ShowLongDate = False
-            Me.dtpTransactionDate.ShowTime = False
-            Me.dtpTransactionDate.Size = New System.Drawing.Size(119, 23)
-            Me.dtpTransactionDate.TabIndex = 12
-            Me.dtpTransactionDate.TargetCalendar = CType(resources.GetObject("dtpTransactionDate.TargetCalendar"), System.Globalization.Calendar)
-            Me.dtpTransactionDate.Translatable = False
-            Me.dtpTransactionDate.Value = Nothing
-            Me.dtpTransactionDate.ValueIsMandatory = False
-            Me.dtpTransactionDate.ValueIsNullable = False
-            '
             'DataGridViewPmrPatientDisplay
             '
             DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
@@ -143,17 +118,17 @@
             Me.DataGridViewPmrPatientDisplay.AutoGenerateColumns = False
             Me.DataGridViewPmrPatientDisplay.BegFindValue = Nothing
             Me.DataGridViewPmrPatientDisplay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewPmrPatientDisplay.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TokenDataGridViewTextBoxColumn, Me.StatusDataGridViewTextBoxColumn, Me.FileNoDataGridViewTextBoxColumn, Me.NameDataGridViewTextBoxColumn, Me.dgvPType, Me.InvTypeDataGridViewTextBoxColumn, Me.dgvTransKey})
+            Me.DataGridViewPmrPatientDisplay.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TokenDataGridViewTextBoxColumn, Me.StatusDataGridViewTextBoxColumn, Me.FileNoDataGridViewTextBoxColumn, Me.NameDataGridViewTextBoxColumn, Me.dgvFileType, Me.InvTypeDataGridViewTextBoxColumn, Me.dgvTime, Me.dgvTransKey})
             Me.TableLayoutPanel1.SetColumnSpan(Me.DataGridViewPmrPatientDisplay, 4)
             Me.DataGridViewPmrPatientDisplay.DataSource = Me.bsPmrPatientDisplay
-            DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewPmrPatientDisplay.DefaultCellStyle = DataGridViewCellStyle8
+            DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewPmrPatientDisplay.DefaultCellStyle = DataGridViewCellStyle9
             Me.DataGridViewPmrPatientDisplay.DgvFooter = Nothing
             Me.DataGridViewPmrPatientDisplay.DisplayOnly = False
             Me.DataGridViewPmrPatientDisplay.Dock = System.Windows.Forms.DockStyle.Fill
@@ -181,6 +156,10 @@
             Me.DataGridViewPmrPatientDisplay.Size = New System.Drawing.Size(775, 431)
             Me.DataGridViewPmrPatientDisplay.TabIndex = 11
             Me.DataGridViewPmrPatientDisplay.Translatable = True
+            '
+            'bsPmrPatientDisplay
+            '
+            Me.bsPmrPatientDisplay.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PmrPatientDisplayModel)
             '
             'CLabel1
             '
@@ -266,9 +245,32 @@
             Me.txtDoctorName.TabIndex = 15
             Me.txtDoctorName.Translatable = False
             '
-            'bsPmrPatientDisplay
+            'dtpTransactionDate
             '
-            Me.bsPmrPatientDisplay.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PmrPatientDisplayModel)
+            Me.dtpTransactionDate.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
+            Me.dtpTransactionDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.TableLayoutPanel1.SetColumnSpan(Me.dtpTransactionDate, 2)
+            Me.dtpTransactionDate.DefaultValue = Nothing
+            Me.dtpTransactionDate.DisplayOnly = False
+            Me.dtpTransactionDate.DtpDefaultValue = Nothing
+            Me.dtpTransactionDate.EditingMode = True
+            Me.dtpTransactionDate.EditsAllowed = False
+            Me.dtpTransactionDate.ForeColor = System.Drawing.Color.Black
+            Me.dtpTransactionDate.LinkedLabel = Nothing
+            Me.dtpTransactionDate.Location = New System.Drawing.Point(174, 32)
+            Me.dtpTransactionDate.Margin = New System.Windows.Forms.Padding(1)
+            Me.dtpTransactionDate.Name = "dtpTransactionDate"
+            Me.dtpTransactionDate.ReadOnlyDp = False
+            Me.dtpTransactionDate.SecurityKey = Nothing
+            Me.dtpTransactionDate.ShowLongDate = False
+            Me.dtpTransactionDate.ShowTime = False
+            Me.dtpTransactionDate.Size = New System.Drawing.Size(119, 23)
+            Me.dtpTransactionDate.TabIndex = 12
+            Me.dtpTransactionDate.TargetCalendar = CType(resources.GetObject("dtpTransactionDate.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpTransactionDate.Translatable = False
+            Me.dtpTransactionDate.Value = Nothing
+            Me.dtpTransactionDate.ValueIsMandatory = False
+            Me.dtpTransactionDate.ValueIsNullable = False
             '
             'TokenDataGridViewTextBoxColumn
             '
@@ -338,6 +340,7 @@
             Me.FileNoDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.FileNoDataGridViewTextBoxColumn.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.FileNoDataGridViewTextBoxColumn.Translatable = False
+            Me.FileNoDataGridViewTextBoxColumn.Width = 80
             '
             'NameDataGridViewTextBoxColumn
             '
@@ -361,27 +364,27 @@
             Me.NameDataGridViewTextBoxColumn.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.NameDataGridViewTextBoxColumn.Translatable = False
             '
-            'dgvPType
+            'dgvFileType
             '
-            Me.dgvPType.BegFindValue = Nothing
-            Me.dgvPType.DataPropertyName = "PType"
+            Me.dgvFileType.BegFindValue = Nothing
+            Me.dgvFileType.DataPropertyName = "InvType"
             DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-            Me.dgvPType.DefaultCellStyle = DataGridViewCellStyle6
-            Me.dgvPType.EditingMode = False
-            Me.dgvPType.EndFindValue = Nothing
-            Me.dgvPType.FieldDescription = Nothing
-            Me.dgvPType.FieldName = Nothing
-            Me.dgvPType.FillWeight = 60.0!
-            Me.dgvPType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvPType.FindEnabled = False
-            Me.dgvPType.HeaderText = "Patient Type"
-            Me.dgvPType.IgnoreCase = False
-            Me.dgvPType.Name = "dgvPType"
-            Me.dgvPType.ReadOnly = True
-            Me.dgvPType.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvPType.Translatable = False
-            Me.dgvPType.Width = 60
+            Me.dgvFileType.DefaultCellStyle = DataGridViewCellStyle6
+            Me.dgvFileType.EditingMode = False
+            Me.dgvFileType.EndFindValue = Nothing
+            Me.dgvFileType.FieldDescription = Nothing
+            Me.dgvFileType.FieldName = Nothing
+            Me.dgvFileType.FillWeight = 60.0!
+            Me.dgvFileType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvFileType.FindEnabled = False
+            Me.dgvFileType.HeaderText = "Patient Type"
+            Me.dgvFileType.IgnoreCase = False
+            Me.dgvFileType.Name = "dgvFileType"
+            Me.dgvFileType.ReadOnly = True
+            Me.dgvFileType.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvFileType.Translatable = False
+            Me.dgvFileType.Width = 60
             '
             'InvTypeDataGridViewTextBoxColumn
             '
@@ -404,6 +407,16 @@
             Me.InvTypeDataGridViewTextBoxColumn.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.InvTypeDataGridViewTextBoxColumn.Translatable = False
             Me.InvTypeDataGridViewTextBoxColumn.Width = 70
+            '
+            'dgvTime
+            '
+            Me.dgvTime.DataPropertyName = "InvTime"
+            DataGridViewCellStyle8.Format = "hh:mm tt"
+            DataGridViewCellStyle8.NullValue = Nothing
+            Me.dgvTime.DefaultCellStyle = DataGridViewCellStyle8
+            Me.dgvTime.HeaderText = "Time"
+            Me.dgvTime.Name = "dgvTime"
+            Me.dgvTime.ReadOnly = True
             '
             'dgvTransKey
             '
@@ -458,8 +471,9 @@
         Friend WithEvents StatusDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
         Friend WithEvents FileNoDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents NameDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvPType As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents dgvFileType As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents InvTypeDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents dgvTime As DataGridViewTextBoxColumn
         Friend WithEvents dgvTransKey As DataGridViewTextBoxColumn
     End Class
 End Namespace

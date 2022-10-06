@@ -539,6 +539,12 @@
     <Compile Include="PresentationLayer\Views\Forms\IGroup\CbcRetrievalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrReportSelector.designer.vb">
+      <DependentUpon>PmrReportSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrReportSelector.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationRequestForm.Designer.vb">
       <DependentUpon>PmrInvestigationRequestForm.vb</DependentUpon>
     </Compile>
@@ -1379,6 +1385,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\CbcRetrievalEntry.resx">
       <DependentUpon>CbcRetrievalEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\PmrReportSelector.resx">
+      <DependentUpon>PmrReportSelector.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationRequestForm.resx">
       <DependentUpon>PmrInvestigationRequestForm.vb</DependentUpon>
