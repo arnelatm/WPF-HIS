@@ -526,6 +526,8 @@
     <Build Include="dbo\User Defined Types\EmployeeDocumentInsert.sql" />
     <Build Include="dbo\Tables\DataImage.sql" />
     <Build Include="dbo\Tables\Payee2.sql" />
+    <Build Include="dbo\Tables\CodeGroup.sql" />
+    <Build Include="dbo\Tables\ItemCode.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
