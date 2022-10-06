@@ -138,6 +138,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQuer
 		Extract Varchar Fields to Images.sql = Extract Varchar Fields to Images.sql
 		Find all object references for a specific object.sql = Find all object references for a specific object.sql
 		Look for tables containing field name.sql = Look for tables containing field name.sql
+		Query Sql Database for a certain name.sql = Query Sql Database for a certain name.sql
 		Query tables for Creation Date.sql = Query tables for Creation Date.sql
 		QueryAvailableIdentityFieldSpace.sql = QueryAvailableIdentityFieldSpace.sql
 		QueryWrongAccountsInReconciliation.sql = QueryWrongAccountsInReconciliation.sql
