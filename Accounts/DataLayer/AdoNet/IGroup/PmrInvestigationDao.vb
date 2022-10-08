@@ -31,7 +31,7 @@ Namespace DataLayer.AdoNet
             data.DoctorID = doctorId
             data.TransactionDate = transactionDate
             Dim params() As Object = {"@DoctorId", doctorId, "@TransactionDate", dateString}
-            sql = $"SELECT [PmrDate], [FileNo], [FileType], [PatientName], [Status], [Token], [PType], [LastConsDate], [Trans_Key], [InvTime] from PmrDoctorsGenForm_View where doctorid = @DoctorId and PmrDate = @TransactionDate order by Cast(token as int) desc"
+            sql = $"SELECT [PmrDate], [FileNo], [FileType], [PatientName], [Status], [TokenNo], [PType], [LastConsDate], [Trans_Key], [InvTime] from PmrDoctorsGenForm_View where doctorid = @DoctorId and PmrDate = @TransactionDate and not tokenno is null order by tokenno desc"
             data.PmrPatientsDisplay = _db.Read(sql, MakePmrPatientDetails, params).ToList()
             Return data
         End Function
@@ -48,7 +48,7 @@ Namespace DataLayer.AdoNet
             .InvType = AATM.DataLayer.AdoNet.Extensions.AsString(reader("FileType")),
             .Name = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PatientName")),
             .Status = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Status")),
-            .Token = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("Token")),
+            .Token = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("TokenNo")),
             .PType = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PType")),
             .LastConsDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("LastConsDate")),
             .InvTime = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("InvTime")),
