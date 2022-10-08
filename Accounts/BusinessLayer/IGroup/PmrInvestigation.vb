@@ -10,7 +10,7 @@ Namespace BusinessLayer
         Public Sub New()
         End Sub
 
-        Property DoctorID As String
+        Property DoctorCode As String
         Property DoctorName As String
         Property TransactionDate As Date
         Property PmrPatientsDisplay As List(Of PmrPatientDisplay)

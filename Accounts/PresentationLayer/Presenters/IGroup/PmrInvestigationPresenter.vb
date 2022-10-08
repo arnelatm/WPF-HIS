@@ -18,24 +18,29 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "Trans_Key"
             Service.RestoreConnectionString()
             WithTreeView = False
+            AddHandler View.DoctorCodeRequested, AddressOf GetDoctorCode
             AddHandler View.GetDoctorPatientsRequested, AddressOf GetDoctorsPatients
-            AddHandler View.PrintReportRequested, AddressOf PrintReport
+
         End Sub
 
         Private Sub GetDoctorsPatients()
             Dim pmrPatients As New PmrInvestigationModel
-            pmrPatients = Service.GetParametrized(Of PmrInvestigationModel)({View.DoctorId, View.TransactionDate})
-            'GlobalVariables.Mapper.Map(pmrPatients.PmrPatientsDisplay, View.PmrPatientsDisplay)
+            pmrPatients = Service.GetParametrized(Of PmrInvestigationModel)({View.DoctorCode, View.TransactionDate})
             GlobalVariables.Mapper.Map(pmrPatients, View)
-            'GlobalVariables.Mapper.Map(pmrPatients, View)
+        End Sub
+
+        Private Sub GetDoctorCode(ByRef drId As String)
+            Dim employeeIdNo As Int32
+            employeeIdNo = Service.GetUserEmployeeIdNo()
+            Service.SetConnectionString($"ISPDATA")
+            drId = Service.GetField(Of String, Int32)(employeeIdNo, "Doctor", "EmployeeIdNo", "DoctorCode")
+            Service.RestoreConnectionString()
         End Sub
 
         Private Sub PrintReport()
             Dim pmrPatients As New PmrInvestigationModel
-            pmrPatients = Service.GetParametrized(Of PmrInvestigationModel)({View.DoctorId, View.TransactionDate})
-            'GlobalVariables.Mapper.Map(pmrPatients.PmrPatientsDisplay, View.PmrPatientsDisplay)
+            pmrPatients = Service.GetParametrized(Of PmrInvestigationModel)({View.DoctorCode, View.TransactionDate})
             GlobalVariables.Mapper.Map(pmrPatients, View)
-            'GlobalVariables.Mapper.Map(pmrPatients, View)
         End Sub
 
     End Class

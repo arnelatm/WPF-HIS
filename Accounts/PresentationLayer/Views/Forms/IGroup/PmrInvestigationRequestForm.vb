@@ -1,13 +1,6 @@
-﻿Imports System.Configuration
-Imports System.Globalization
-Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
+﻿Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.DataLayer.AdoNet
-Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.Libraries.GlobalResources
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Forms
 
@@ -16,16 +9,16 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event GetDoctorPatientsRequested() Implements IPmrInvestigationView.GetDoctorPatientsRequested
 
-        Public Event PrintReportRequested(rowIndex As Short) Implements IPmrInvestigationView.PrintReportRequested
+        Public Event DoctorCodeRequested(ByRef drId As String) Implements IPmrInvestigationView.DoctorCodeRequested
 
         Private _pmrPatientsDisplay As New List(Of PmrPatientDisplayView)
+        Private _doctorId As String
 
         Public Sub New()
 
             ' This call is required by the designer.
             InitializeComponent()
             dtpTransactionDate.Value = Today()
-            txtDoctorId.Text = "209"
 
             With DataGridViewPmrPatientDisplay
                 .DefaultCellStyle.ForeColor = Color.Black
@@ -41,13 +34,22 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
-        Public Property DoctorId As String Implements IPmrInvestigationView.DoctorId
+        Private _doctorCode As String
+
+        Public Property DoctorCode As String Implements IPmrInvestigationView.DoctorCode
             Get
-                Return txtDoctorId.Text
+                Return _doctorCode
             End Get
             Set(value As String)
                 txtDoctorId.Text = value
+                _doctorCode = value
             End Set
+        End Property
+
+        Public ReadOnly Property SeriesDataGridViewTextBoxColumnProperty As DataGridViewTextBoxColumn
+            Get
+                Return SeriesDataGridViewTextBoxColumn
+            End Get
         End Property
 
         Public Property DoctorName As String Implements IPmrInvestigationView.DoctorName
@@ -97,6 +99,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PmrInvestigationRequestForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            Dim drCode As String = ""
+            RaiseEvent DoctorCodeRequested(drCode)
+            DoctorCode = drCode
             RaiseEvent GetDoctorPatientsRequested()
             dtpTransactionDate.EditingMode = True
             btnSave.Visible = False
@@ -121,7 +126,6 @@ Namespace PresentationLayer.Views.Forms
         Private Sub dtpTransactionDate_Validated(sender As Object, e As EventArgs) Handles dtpTransactionDate.Validated
             RaiseEvent GetDoctorPatientsRequested()
         End Sub
-
 
         Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPmrPatientDisplay.CellClick
             With DataGridViewPmrPatientDisplay
