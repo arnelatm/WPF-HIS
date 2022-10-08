@@ -37,9 +37,9 @@ Namespace PresentationLayer.Views.Forms
             Me.txtItemCodeNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.lblItemCodeNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.cboCodeGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboCodeGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -231,16 +231,17 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.Controls.Add(Me.txtItemCodeNameAra)
             Me.floDataDisplay.Name = "floDataDisplay"
             '
-            'CFlowLayout1
+            'CLabel1
             '
-            Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
-            Me.CFlowLayout1.Controls.Add(Me.floDataDisplay)
-            resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
-            Me.CFlowLayout1.Name = "CFlowLayout1"
+            Me.CLabel1.DisplayOnly = True
+            Me.CLabel1.EditingMode = False
+            resources.ApplyResources(Me.CLabel1, "CLabel1")
+            Me.CLabel1.Name = "CLabel1"
+            Me.CLabel1.Translatable = True
             '
             'cboCodeGroupIdNo
             '
-            Me.cboCodeGroupIdNo.BackColor = System.Drawing.SystemColors.ControlLight
+            Me.cboCodeGroupIdNo.BackColor = System.Drawing.Color.White
             Me.cboCodeGroupIdNo.BegFindValue = Nothing
             Me.cboCodeGroupIdNo.ChangingSearchValueOnly = False
             Me.cboCodeGroupIdNo.CurrentSearchTerm = ""
@@ -256,6 +257,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboCodeGroupIdNo.FindEnabled = False
             Me.floDataDisplay.SetFlowBreak(Me.cboCodeGroupIdNo, True)
             resources.ApplyResources(Me.cboCodeGroupIdNo, "cboCodeGroupIdNo")
+            Me.cboCodeGroupIdNo.ForeColor = System.Drawing.Color.Black
             Me.cboCodeGroupIdNo.FormattingEnabled = True
             Me.cboCodeGroupIdNo.HideWhenNotEditingOrAdding = False
             Me.cboCodeGroupIdNo.IgnoreCase = False
@@ -277,13 +279,12 @@ Namespace PresentationLayer.Views.Forms
             Me.cboCodeGroupIdNo.ValueIsNumeric = False
             Me.cboCodeGroupIdNo.ValueMember = "IdNo"
             '
-            'CLabel1
+            'CFlowLayout1
             '
-            Me.CLabel1.DisplayOnly = True
-            Me.CLabel1.EditingMode = False
-            resources.ApplyResources(Me.CLabel1, "CLabel1")
-            Me.CLabel1.Name = "CLabel1"
-            Me.CLabel1.Translatable = True
+            Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
+            Me.CFlowLayout1.Controls.Add(Me.floDataDisplay)
+            resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
+            Me.CFlowLayout1.Name = "CFlowLayout1"
             '
             'ItemCodeEntryTv
             '

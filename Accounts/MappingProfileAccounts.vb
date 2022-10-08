@@ -181,6 +181,9 @@ Public Class MappingProfileAccounts
         CreateMap(Of CodeGroup, CodeGroupModel)().ReverseMap()
         CreateMap(Of CodeGroupModel, ICodeGroupView)().ReverseMap()
 
+        CreateMap(Of Doctor, DoctorModel)().ReverseMap()
+        CreateMap(Of DoctorModel, IDoctorView)().ReverseMap()
+
         CreateMap(Of PmrPatientDisplay, PmrPatientDisplayModel)().ReverseMap()
         CreateMap(Of PmrPatientDisplayModel, IPmrPatientDisplayView)().ReverseMap()
         CreateMap(Of PmrPatientDisplayModel, PmrPatientDisplayView)().ReverseMap()

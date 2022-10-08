@@ -1827,6 +1827,8 @@
             '
             'dtpDateAccountOpen
             '
+            Me.dtpDateAccountOpen.AutoSize = True
+            Me.dtpDateAccountOpen.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.dtpDateAccountOpen.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
             Me.dtpDateAccountOpen.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
             Me.dtpDateAccountOpen.DefaultValue = Nothing
@@ -1844,7 +1846,7 @@
             Me.dtpDateAccountOpen.SecurityKey = Nothing
             Me.dtpDateAccountOpen.ShowLongDate = False
             Me.dtpDateAccountOpen.ShowTime = False
-            Me.dtpDateAccountOpen.Size = New System.Drawing.Size(118, 24)
+            Me.dtpDateAccountOpen.Size = New System.Drawing.Size(127, 36)
             Me.dtpDateAccountOpen.TabIndex = 31
             Me.dtpDateAccountOpen.TargetCalendar = CType(resources.GetObject("dtpDateAccountOpen.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpDateAccountOpen.Translatable = False
@@ -1858,10 +1860,10 @@
             Me.lblAccountStatus.EditingMode = False
             Me.lblAccountStatus.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblAccountStatus.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblAccountStatus.Location = New System.Drawing.Point(284, 415)
+            Me.lblAccountStatus.Location = New System.Drawing.Point(293, 415)
             Me.lblAccountStatus.Margin = New System.Windows.Forms.Padding(1)
             Me.lblAccountStatus.Name = "lblAccountStatus"
-            Me.lblAccountStatus.Size = New System.Drawing.Size(224, 20)
+            Me.lblAccountStatus.Size = New System.Drawing.Size(218, 20)
             Me.lblAccountStatus.TabIndex = 238
             Me.lblAccountStatus.Text = "Account Status"
             Me.lblAccountStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1891,7 +1893,7 @@
             Me.cacAccountStatus.IgnoreCase = False
             Me.cacAccountStatus.IntegralHeight = False
             Me.cacAccountStatus.LinkedLabel = Nothing
-            Me.cacAccountStatus.Location = New System.Drawing.Point(510, 415)
+            Me.cacAccountStatus.Location = New System.Drawing.Point(513, 415)
             Me.cacAccountStatus.Margin = New System.Windows.Forms.Padding(1)
             Me.cacAccountStatus.Name = "cacAccountStatus"
             Me.cacAccountStatus.OldValue = 0
@@ -1918,7 +1920,7 @@
             Me.lblNotes.EditingMode = False
             Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblNotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblNotes.Location = New System.Drawing.Point(11, 441)
+            Me.lblNotes.Location = New System.Drawing.Point(11, 451)
             Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
             Me.lblNotes.Name = "lblNotes"
             Me.lblNotes.Size = New System.Drawing.Size(153, 23)
@@ -1946,7 +1948,7 @@
             Me.txtBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtBalance.ForeColor = System.Drawing.Color.Black
             Me.txtBalance.LinkedLabel = Me.lblOpeningBalance
-            Me.txtBalance.Location = New System.Drawing.Point(166, 441)
+            Me.txtBalance.Location = New System.Drawing.Point(166, 451)
             Me.txtBalance.Margin = New System.Windows.Forms.Padding(1)
             Me.txtBalance.MaximumValue = Nothing
             Me.txtBalance.MinimumValue = Nothing
@@ -1966,7 +1968,7 @@
             Me.CLabel1.EditingMode = False
             Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.CLabel1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.CLabel1.Location = New System.Drawing.Point(11, 466)
+            Me.CLabel1.Location = New System.Drawing.Point(11, 476)
             Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel1.Name = "CLabel1"
             Me.CLabel1.Size = New System.Drawing.Size(153, 23)
@@ -1993,7 +1995,7 @@
             Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
             Me.txtNotes.LinkedLabel = Nothing
-            Me.txtNotes.Location = New System.Drawing.Point(166, 466)
+            Me.txtNotes.Location = New System.Drawing.Point(166, 476)
             Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
             Me.txtNotes.MaximumValue = Nothing
             Me.txtNotes.MinimumValue = Nothing
