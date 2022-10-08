@@ -34,7 +34,7 @@ Public Class CCustomDateTimePicker
     Private _targetCulture As CultureInfo
     Private _calendarType As GlobalSubs.CalendarToUse = CalendarToUse.Gregorian
     Private _longDateWidth As Integer = 110
-    Private _dateWidth As Integer = 76
+    Private _dateWidth As Integer = 80
     Private _totalWidth As Integer = 0
     Private _buttonWidth As Integer = 21
     Private _btnCalendarTypeWidth As Integer = 15
@@ -196,7 +196,7 @@ Public Class CCustomDateTimePicker
                 End Select
                 tCulture.DateTimeFormat.Calendar = tCalendar
                 Dim cText As String
-                cText = PadWithZeroSingleDigitDate(DateTime.Parse(txtDate.Text).ToShortDateString())
+                cText = PadWithZeroSingleDigitDate(txtDate.Text)
                 If ShowTime Then
                     cText += " " + txtTime.GetMilitaryTime()
                 End If
@@ -446,9 +446,9 @@ Public Class CCustomDateTimePicker
             txtTime.Width = 0
             txtTime.Visible = False
         End If
-        Dim totalWidth As Integer = 7 + If(ShowLongDate, _longDateWidth, 0) + txtDate.Width + IIf(DisplayOnly, 0, dtp.Width) + If(ShowTime, _timeWidth, 0) + btnCalendarType.Width
-        Width = totalWidth
+        Dim totalWidth As Integer = If(ShowLongDate, _longDateWidth, 0) + txtDate.Width + IIf(DisplayOnly, 0, dtp.Width) + If(ShowTime, _timeWidth, 0) + btnCalendarType.Width
         floDatePicker.Width = totalWidth
+        Width = totalWidth
     End Sub
 
     Public Property TargetCalendar As Calendar
@@ -652,6 +652,7 @@ Public Class CCustomDateTimePicker
         Dim calendarForm = New CCalendar(Value, CalendarType) With {
                 .RightToLeftLayout = GlobalVariables.RightToLeftLayout
                 }
+        MessageBox.Show(txtDate.Width)
         Do While True
 
             SetCalendarLocation(calendarForm)
@@ -754,6 +755,7 @@ Public Class CCustomDateTimePicker
     Private Sub CCustomDateTimePicker_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txtDate.FieldName = Name.Substring(3)
         txtDate.DateField = True
+        txtDate.Width = _dateWidth
     End Sub
 
     Private Sub CCustomDateTimePicker_KeyDown(sender As Object, e As KeyEventArgs) Handles txtDate.KeyDown, txtLongDate.KeyDown, txtTime.KeyDown
@@ -777,4 +779,7 @@ Public Class CCustomDateTimePicker
         End If
     End Sub
 
+    Private Sub txtDate_RightToLeftChanged(sender As Object, e As EventArgs) Handles txtDate.RightToLeftChanged
+        txtDate.TextAlign = HorizontalAlignment.Left
+    End Sub
 End Class

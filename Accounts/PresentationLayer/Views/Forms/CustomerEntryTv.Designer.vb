@@ -1226,6 +1226,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacCountryCode.BegFindValue = Nothing
             Me.cacCountryCode.ChangingSearchValueOnly = False
             Me.cacCountryCode.CurrentSearchTerm = ""
+            Me.cacCountryCode.DataValue = Nothing
             Me.cacCountryCode.DefaultValue = Nothing
             Me.cacCountryCode.DisplayMember = "Name"
             Me.cacCountryCode.EditingMode = False
@@ -1266,6 +1267,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacBankIdNo.BegFindValue = Nothing
             Me.cacBankIdNo.ChangingSearchValueOnly = False
             Me.cacBankIdNo.CurrentSearchTerm = ""
+            Me.cacBankIdNo.DataValue = Nothing
             Me.cacBankIdNo.DefaultValue = Nothing
             Me.cacBankIdNo.DisplayMember = "Name"
             Me.cacBankIdNo.EditingMode = False
@@ -1305,6 +1307,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacRevAccountIdNo.BegFindValue = Nothing
             Me.cacRevAccountIdNo.ChangingSearchValueOnly = False
             Me.cacRevAccountIdNo.CurrentSearchTerm = ""
+            Me.cacRevAccountIdNo.DataValue = Nothing
             Me.cacRevAccountIdNo.DefaultValue = Nothing
             Me.cacRevAccountIdNo.DisplayMember = "Name"
             Me.cacRevAccountIdNo.EditingMode = False
@@ -1343,6 +1346,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacArAccountIdNo.BegFindValue = Nothing
             Me.cacArAccountIdNo.ChangingSearchValueOnly = False
             Me.cacArAccountIdNo.CurrentSearchTerm = ""
+            Me.cacArAccountIdNo.DataValue = Nothing
             Me.cacArAccountIdNo.DefaultValue = Nothing
             Me.cacArAccountIdNo.DisplayMember = "Name"
             Me.cacArAccountIdNo.EditingMode = False
@@ -1382,6 +1386,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacPaymentMethod.BegFindValue = Nothing
             Me.cacPaymentMethod.ChangingSearchValueOnly = False
             Me.cacPaymentMethod.CurrentSearchTerm = ""
+            Me.cacPaymentMethod.DataValue = Nothing
             Me.cacPaymentMethod.DefaultValue = Nothing
             Me.cacPaymentMethod.DisplayMember = "Name"
             Me.cacPaymentMethod.EditingMode = False
@@ -1429,6 +1434,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacDiscountSchemeIdNo.BegFindValue = Nothing
             Me.cacDiscountSchemeIdNo.ChangingSearchValueOnly = False
             Me.cacDiscountSchemeIdNo.CurrentSearchTerm = ""
+            Me.cacDiscountSchemeIdNo.DataValue = Nothing
             Me.cacDiscountSchemeIdNo.DefaultValue = Nothing
             Me.cacDiscountSchemeIdNo.DisplayMember = "Name"
             Me.cacDiscountSchemeIdNo.EditingMode = False
@@ -1463,6 +1469,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'dtpDateAccountOpen
             '
+            Me.dtpDateAccountOpen.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
             Me.dtpDateAccountOpen.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
             Me.dtpDateAccountOpen.DefaultValue = Nothing
             Me.dtpDateAccountOpen.DisplayOnly = False
@@ -1490,6 +1497,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cacAccountStatus.BegFindValue = Nothing
             Me.cacAccountStatus.ChangingSearchValueOnly = False
             Me.cacAccountStatus.CurrentSearchTerm = ""
+            Me.cacAccountStatus.DataValue = Nothing
             Me.cacAccountStatus.DefaultValue = Nothing
             Me.cacAccountStatus.DisplayMember = "Name"
             Me.cacAccountStatus.EditingMode = False
