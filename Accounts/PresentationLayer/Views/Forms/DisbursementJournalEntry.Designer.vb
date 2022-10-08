@@ -1478,7 +1478,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpCheckDate.SecurityKey = Nothing
             Me.dtpCheckDate.ShowLongDate = False
             Me.dtpCheckDate.ShowTime = False
-            Me.dtpCheckDate.Size = New System.Drawing.Size(112, 25)
+            Me.dtpCheckDate.Size = New System.Drawing.Size(113, 25)
             Me.dtpCheckDate.TabIndex = 13
             Me.dtpCheckDate.TargetCalendar = Nothing
             Me.dtpCheckDate.Translatable = False
@@ -1767,7 +1767,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpTransactionDate.SecurityKey = Nothing
             Me.dtpTransactionDate.ShowLongDate = False
             Me.dtpTransactionDate.ShowTime = False
-            Me.dtpTransactionDate.Size = New System.Drawing.Size(112, 25)
+            Me.dtpTransactionDate.Size = New System.Drawing.Size(113, 25)
             Me.dtpTransactionDate.TabIndex = 3
             Me.dtpTransactionDate.TargetCalendar = Nothing
             Me.dtpTransactionDate.Translatable = False

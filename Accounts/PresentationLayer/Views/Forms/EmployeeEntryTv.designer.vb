@@ -920,7 +920,7 @@
             Me.dtpBirthDate.SecurityKey = Nothing
             Me.dtpBirthDate.ShowLongDate = False
             Me.dtpBirthDate.ShowTime = False
-            Me.dtpBirthDate.Size = New System.Drawing.Size(132, 24)
+            Me.dtpBirthDate.Size = New System.Drawing.Size(118, 24)
             Me.dtpBirthDate.TabIndex = 5
             Me.dtpBirthDate.TargetCalendar = CType(resources.GetObject("dtpBirthDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpBirthDate.Translatable = False
@@ -1789,7 +1789,7 @@
             Me.dtpHiredDate.SecurityKey = Nothing
             Me.dtpHiredDate.ShowLongDate = False
             Me.dtpHiredDate.ShowTime = False
-            Me.dtpHiredDate.Size = New System.Drawing.Size(131, 24)
+            Me.dtpHiredDate.Size = New System.Drawing.Size(118, 24)
             Me.dtpHiredDate.TabIndex = 0
             Me.dtpHiredDate.TargetCalendar = CType(resources.GetObject("dtpHiredDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpHiredDate.Translatable = False
@@ -1832,7 +1832,7 @@
             Me.dtpReleasedDate.SecurityKey = Nothing
             Me.dtpReleasedDate.ShowLongDate = False
             Me.dtpReleasedDate.ShowTime = False
-            Me.dtpReleasedDate.Size = New System.Drawing.Size(131, 24)
+            Me.dtpReleasedDate.Size = New System.Drawing.Size(118, 24)
             Me.dtpReleasedDate.TabIndex = 1
             Me.dtpReleasedDate.TargetCalendar = CType(resources.GetObject("dtpReleasedDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpReleasedDate.Translatable = False
@@ -1966,7 +1966,7 @@
             Me.lblSponsorType.EditingMode = False
             Me.lblSponsorType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblSponsorType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblSponsorType.Location = New System.Drawing.Point(4, 109)
+            Me.lblSponsorType.Location = New System.Drawing.Point(4, 108)
             Me.lblSponsorType.Margin = New System.Windows.Forms.Padding(1)
             Me.lblSponsorType.Name = "lblSponsorType"
             Me.lblSponsorType.SecurityKey = "EPI"
@@ -2000,7 +2000,7 @@
             Me.cboSponsorType.IgnoreCase = False
             Me.cboSponsorType.IntegralHeight = False
             Me.cboSponsorType.LinkedLabel = Me.lblSponsorType
-            Me.cboSponsorType.Location = New System.Drawing.Point(179, 109)
+            Me.cboSponsorType.Location = New System.Drawing.Point(179, 108)
             Me.cboSponsorType.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
             Me.cboSponsorType.Name = "cboSponsorType"
             Me.cboSponsorType.OldValue = 0
@@ -2028,7 +2028,7 @@
             Me.lblSupervisorIdNo.EditingMode = False
             Me.lblSupervisorIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblSupervisorIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblSupervisorIdNo.Location = New System.Drawing.Point(4, 136)
+            Me.lblSupervisorIdNo.Location = New System.Drawing.Point(4, 135)
             Me.lblSupervisorIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblSupervisorIdNo.Name = "lblSupervisorIdNo"
             Me.lblSupervisorIdNo.Size = New System.Drawing.Size(175, 24)
@@ -2061,7 +2061,7 @@
             Me.cboSupervisorIdNo.IgnoreCase = False
             Me.cboSupervisorIdNo.IntegralHeight = False
             Me.cboSupervisorIdNo.LinkedLabel = Nothing
-            Me.cboSupervisorIdNo.Location = New System.Drawing.Point(180, 136)
+            Me.cboSupervisorIdNo.Location = New System.Drawing.Point(180, 135)
             Me.cboSupervisorIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
             Me.cboSupervisorIdNo.Name = "cboSupervisorIdNo"
             Me.cboSupervisorIdNo.OldValue = 0
@@ -2088,7 +2088,7 @@
             Me.CLabel5.EditingMode = False
             Me.CLabel5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.CLabel5.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.CLabel5.Location = New System.Drawing.Point(4, 163)
+            Me.CLabel5.Location = New System.Drawing.Point(4, 162)
             Me.CLabel5.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel5.Name = "CLabel5"
             Me.CLabel5.Size = New System.Drawing.Size(175, 24)
@@ -2119,7 +2119,7 @@
             Me.chkSupervisor.IgnoreCase = False
             Me.chkSupervisor.ImeMode = System.Windows.Forms.ImeMode.NoControl
             Me.chkSupervisor.LinkedLabel = Me.CLabel5
-            Me.chkSupervisor.Location = New System.Drawing.Point(181, 163)
+            Me.chkSupervisor.Location = New System.Drawing.Point(181, 162)
             Me.chkSupervisor.Margin = New System.Windows.Forms.Padding(1)
             Me.chkSupervisor.Name = "chkSupervisor"
             Me.chkSupervisor.NoLabel = False
@@ -2137,7 +2137,7 @@
             Me.lblActive.EditingMode = False
             Me.lblActive.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblActive.Location = New System.Drawing.Point(4, 189)
+            Me.lblActive.Location = New System.Drawing.Point(4, 188)
             Me.lblActive.Margin = New System.Windows.Forms.Padding(1)
             Me.lblActive.Name = "lblActive"
             Me.lblActive.Size = New System.Drawing.Size(175, 24)
@@ -2168,7 +2168,7 @@
             Me.chkActive.IgnoreCase = False
             Me.chkActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
             Me.chkActive.LinkedLabel = Me.lblActive
-            Me.chkActive.Location = New System.Drawing.Point(181, 189)
+            Me.chkActive.Location = New System.Drawing.Point(181, 188)
             Me.chkActive.Margin = New System.Windows.Forms.Padding(1)
             Me.chkActive.Name = "chkActive"
             Me.chkActive.NoLabel = False
@@ -3764,8 +3764,8 @@
             Me.Text = "Employee Maintenance Form"
             Me.ViewDisplayName = "EmployeeEntryTv"
             Me.SplitContainer1.Panel1.ResumeLayout(False)
-            Me.SplitContainer1.Panel2.ResumeLayout(false)
-        Me.SplitContainer1.Panel2.PerformLayout
+            Me.SplitContainer1.Panel2.ResumeLayout(False)
+            Me.SplitContainer1.Panel2.PerformLayout
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).EndInit
         Me.SplitContainer1.ResumeLayout(false)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit

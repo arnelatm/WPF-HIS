@@ -1,4 +1,5 @@
-﻿Imports System.Globalization
+﻿
+Imports System.Globalization
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces

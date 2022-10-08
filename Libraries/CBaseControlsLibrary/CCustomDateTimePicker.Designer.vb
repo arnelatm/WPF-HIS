@@ -38,6 +38,7 @@ Partial Class CCustomDateTimePicker
         '
         'floDatePicker
         '
+        Me.floDatePicker.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.floDatePicker.BackColor = System.Drawing.Color.Transparent
         Me.floDatePicker.Controls.Add(Me.txtLongDate)
         Me.floDatePicker.Controls.Add(Me.txtDate)
@@ -47,11 +48,12 @@ Partial Class CCustomDateTimePicker
         Me.floDatePicker.Location = New System.Drawing.Point(0, 0)
         Me.floDatePicker.Margin = New System.Windows.Forms.Padding(0)
         Me.floDatePicker.Name = "floDatePicker"
-        Me.floDatePicker.Size = New System.Drawing.Size(309, 23)
+        Me.floDatePicker.Size = New System.Drawing.Size(353, 23)
         Me.floDatePicker.TabIndex = 21
         '
         'txtLongDate
         '
+        Me.txtLongDate.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.txtLongDate.BackColor = System.Drawing.Color.White
         Me.txtLongDate.BegFindValue = Nothing
         Me.txtLongDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -67,7 +69,7 @@ Partial Class CCustomDateTimePicker
         Me.txtLongDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.txtLongDate.ForeColor = System.Drawing.Color.Black
         Me.txtLongDate.LinkedLabel = Nothing
-        Me.txtLongDate.Location = New System.Drawing.Point(0, 0)
+        Me.txtLongDate.Location = New System.Drawing.Point(0, 1)
         Me.txtLongDate.Margin = New System.Windows.Forms.Padding(0)
         Me.txtLongDate.MaximumValue = Nothing
         Me.txtLongDate.MinimumValue = Nothing
@@ -81,6 +83,7 @@ Partial Class CCustomDateTimePicker
         '
         'txtDate
         '
+        Me.txtDate.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.txtDate.BackColor = System.Drawing.Color.White
         Me.txtDate.BegFindValue = Nothing
         Me.txtDate.DateField = False
@@ -99,7 +102,7 @@ Partial Class CCustomDateTimePicker
         Me.txtDate.ForeColor = System.Drawing.Color.Black
         Me.txtDate.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite
         Me.txtDate.LinkedLabel = Nothing
-        Me.txtDate.Location = New System.Drawing.Point(110, 0)
+        Me.txtDate.Location = New System.Drawing.Point(110, 1)
         Me.txtDate.Margin = New System.Windows.Forms.Padding(0)
         Me.txtDate.MaximumValue = Nothing
         Me.txtDate.MinimumValue = Nothing
@@ -107,7 +110,7 @@ Partial Class CCustomDateTimePicker
         Me.txtDate.SearchField = Nothing
         Me.txtDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtDate.SecurityKey = Nothing
-        Me.txtDate.Size = New System.Drawing.Size(75, 23)
+        Me.txtDate.Size = New System.Drawing.Size(80, 23)
         Me.txtDate.TabIndex = 15
         Me.txtDate.Translatable = False
         Me.txtDate.ValueIsMandatory = False
@@ -116,35 +119,37 @@ Partial Class CCustomDateTimePicker
         '
         'btnCalendarType
         '
+        Me.btnCalendarType.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.btnCalendarType.BackColor = System.Drawing.SystemColors.ButtonFace
-        Me.btnCalendarType.DesignerSelected = True
+        Me.btnCalendarType.DesignerSelected = False
         Me.btnCalendarType.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCalendarType.ImageIndex = 0
         Me.btnCalendarType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnCalendarType.Location = New System.Drawing.Point(185, 0)
+        Me.btnCalendarType.Location = New System.Drawing.Point(190, 1)
         Me.btnCalendarType.Margin = New System.Windows.Forms.Padding(0)
         Me.btnCalendarType.Name = "btnCalendarType"
         Me.btnCalendarType.OriginalImageName = Nothing
         Me.btnCalendarType.SecurityKey = ""
-        Me.btnCalendarType.Size = New System.Drawing.Size(18, 19)
+        Me.btnCalendarType.Size = New System.Drawing.Size(18, 23)
         Me.btnCalendarType.TabIndex = 21
         Me.btnCalendarType.TabStop = False
         Me.btnCalendarType.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
         '
         'dtp
         '
+        Me.dtp.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.dtp.BackColor = System.Drawing.SystemColors.ButtonFace
         Me.dtp.DesignerSelected = False
         Me.dtp.Font = New System.Drawing.Font("Tahoma", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtp.Image = Global.AATM.Libraries.CBaseControlsLibrary.My.Resources.Resources.Calendar18x18
         Me.dtp.ImageIndex = 0
         Me.dtp.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.dtp.Location = New System.Drawing.Point(203, 0)
+        Me.dtp.Location = New System.Drawing.Point(208, 1)
         Me.dtp.Margin = New System.Windows.Forms.Padding(0)
         Me.dtp.Name = "dtp"
         Me.dtp.OriginalImageName = Nothing
         Me.dtp.SecurityKey = ""
-        Me.dtp.Size = New System.Drawing.Size(21, 19)
+        Me.dtp.Size = New System.Drawing.Size(21, 23)
         Me.dtp.TabIndex = 19
         Me.dtp.TabStop = False
         Me.dtp.Text = ""
@@ -152,9 +157,10 @@ Partial Class CCustomDateTimePicker
         '
         'txtTime
         '
+        Me.txtTime.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.txtTime.ButtonForeColor = System.Drawing.Color.DarkSlateBlue
         Me.txtTime.Hr24 = False
-        Me.txtTime.Location = New System.Drawing.Point(227, 0)
+        Me.txtTime.Location = New System.Drawing.Point(232, 0)
         Me.txtTime.Margin = New System.Windows.Forms.Padding(3, 0, 3, 3)
         Me.txtTime.Name = "txtTime"
         Me.txtTime.NullColorA = System.Drawing.Color.LightSteelBlue
@@ -164,7 +170,7 @@ Partial Class CCustomDateTimePicker
         Me.txtTime.NullTextInFront = False
         Me.txtTime.oldTimeAmPM = AATM.Libraries.CBaseControlsLibrary.gTimePickerCntrl.eTimeAMPM.am
         Me.txtTime.ShowMidMins = True
-        Me.txtTime.Size = New System.Drawing.Size(77, 23)
+        Me.txtTime.Size = New System.Drawing.Size(115, 23)
         Me.txtTime.TabIndex = 22
         Me.txtTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
         Me.txtTime.TextBackColor = System.Drawing.Color.White
@@ -187,16 +193,16 @@ Partial Class CCustomDateTimePicker
         TimeColors1.TimeAMPM_OFF = System.Drawing.Color.LightSteelBlue
         TimeColors1.TimeAMPM_ON = System.Drawing.Color.MediumBlue
         Me.txtTime.TimeColors = TimeColors1
-        Me.txtTime.TrueHour = true
+        Me.txtTime.TrueHour = True
         '
         'CCustomDateTimePicker
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.floDatePicker)
         Me.Margin = New System.Windows.Forms.Padding(1)
         Me.Name = "CCustomDateTimePicker"
-        Me.Size = New System.Drawing.Size(309, 23)
+        Me.Size = New System.Drawing.Size(347, 23)
         Me.floDatePicker.ResumeLayout(false)
         Me.floDatePicker.PerformLayout
         Me.ResumeLayout(false)
