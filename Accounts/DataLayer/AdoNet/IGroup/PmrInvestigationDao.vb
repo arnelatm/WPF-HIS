@@ -22,16 +22,16 @@ Namespace DataLayer.AdoNet
         'End Function
 
         Public Function GetParametrized(parameter As Object, Optional sortExpression As String = Nothing) As PmrInvestigation Implements IDaoParametrized(Of PmrInvestigation).GetParametrized
-            Dim doctorId As String = parameter(0).ToString()
+            Dim doctorCode As String = parameter(0).ToString()
             Dim transactionDate As Date? = parameter(1)
             Dim dateString As String = CDate(transactionDate).ToString("yyyy/MM/dd", System.Globalization.CultureInfo.InvariantCulture)
-            Dim sql As String = "SELECT EmpNameEnglish from EmployeeDetails where EmpId = '" + doctorId.ToString() + "'"
+            Dim sql As String = "SELECT EmpNameEnglish from EmployeeDetails where EmpId = '" + doctorCode.ToString() + "'"
             Dim data As New PmrInvestigation
             data = _db.Read(sql, Make).FirstOrDefault()
-            data.DoctorID = doctorId
+            data.DoctorCode = doctorCode
             data.TransactionDate = transactionDate
-            Dim params() As Object = {"@DoctorId", doctorId, "@TransactionDate", dateString}
-            sql = $"SELECT [PmrDate], [FileNo], [FileType], [PatientName], [Status], [TokenNo], [PType], [LastConsDate], [Trans_Key], [InvTime] from PmrDoctorsGenForm_View where doctorid = @DoctorId and PmrDate = @TransactionDate and not tokenno is null order by tokenno desc"
+            Dim params() As Object = {"@DoctorId", doctorCode, "@TransactionDate", dateString}
+            sql = $"SELECT Distinct [PmrDate], [FileNo], [FileType], [PatientName], [Status], [TokenNo], [PType], [LastConsDate], [Trans_Key], [InvTime] from PmrDoctorsGenForm_View where doctorid = @DoctorId and PmrDate = @TransactionDate and not (trans_key is Null and tokenno = 0) order by tokenno desc"
             data.PmrPatientsDisplay = _db.Read(sql, MakePmrPatientDetails, params).ToList()
             Return data
         End Function

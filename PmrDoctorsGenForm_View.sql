@@ -1,7 +1,7 @@
 ﻿USE [iGroupClinic]
 GO
 
-/****** Object:  View [dbo].[PMRDoctorsGenForm_View]    Script Date: 08/10/2022 12:11:39 pm ******/
+/****** Object:  View [dbo].[PMRDoctorsGenForm_View]    Script Date: 09/10/2022 1:17:35 am ******/
 SET ANSI_NULLS ON
 GO
 
@@ -12,29 +12,30 @@ GO
 
 
 
+
+
+
 ALTER view 	[dbo].[PMRDoctorsGenForm_View]
  
 as 
 SELECT a.DoctorId,
-	a.PMRDateEnglish as PmrDate, 
+	a.TransDateEnglish as PmrDate, 
 	a.RegistrationNo as FileNo, 
-	case when a.PMRDateEnglish = b.RegistrationDate then 'New' else 'Old' end as [FileType],
-	f.PatientType as PType,
+	max(a.TokenNo) as TokenNo,
+	a.TransType as PType,
 	b.PatientNameEnglish as PatientName,
-	Cast(a.TokenNo as Int) as Token, 
-	IIf(Cast(a.TokenNo as Int)=0,0,1) as Status,
+	case when a.TransDateEnglish = b.RegistrationDate then 'New' else 'Old' end as [FileType],
+	g.Trans_Key,
 	b.LastConsDate,
-	a.Trans_Key,
-	(SELECT top 1 MIN( g.Create_Date)
-              FROM ClinicInvoiceGroup g
-              WHERE a.RegistrationNo = g.RegistrationNo and a.DoctorId = g.DoctorId and a.RegistrationNo = g.RegistrationNo and f.PatientType = g.RegistrationType and a.PMRDateEnglish = g.TransDateEnglish) as InvTime,
-	(SELECT top 1 Max( g.TokenNo)
-              FROM ClinicInvoiceGroup g
-              WHERE a.RegistrationNo = g.RegistrationNo and a.DoctorId = g.DoctorId and a.RegistrationNo = g.RegistrationNo and f.PatientType = g.RegistrationType and a.PMRDateEnglish = g.TransDateEnglish) as TokenNo
-FROM PMRTokenDetails a
-left outer join PatientDetails b on a.Series = b.Series AND a.RegistrationNo = b.RegistrationNo
-left outer join EmployeeDetails e on a.DoctorID = e.EmpID
-left outer join [PMRPatientGeneralInfo_View] f on f.TransDateEnglish = a.PMRDateEnglish AND f.DoctorID = a.DoctorID AND f.TokenNo = a.TokenNo 
+	Min(a.Create_Date) as InvTime,
+	IIf(Cast(Max(a.TokenNo) as Int)=0,0,1) as Status
+FROM clinicInvoiceGroup  a
+left outer join PatientDetails b on a.RegistrationType = b.PatientType AND a.RegistrationNo = b.RegistrationNo
+left outer join [PMRPatientGeneralInfo_View] f on f.TransDateEnglish = a.TransDateEnglish AND f.DoctorID = a.DoctorID AND f.TokenNo = a.TokenNo 
+LEFT OUTER JOIN PMRTokenDetails G ON f.trans_key = g.Trans_Key and a.RegistrationNo = g.RegistrationNo and f.Trans_key is not null
+group by a.DoctorId,a.TransDateEnglish,a.RegistrationNo,a.TransType,b.RegistrationDate,b.PatientNameEnglish,b.LastConsDate,b.LastConsDate,g.Trans_Key
+
+
 GO
 
 

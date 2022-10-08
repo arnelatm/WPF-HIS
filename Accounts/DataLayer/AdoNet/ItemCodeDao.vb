@@ -53,6 +53,7 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(ItemCode As ItemCode) As Object()
             Return New Object() {
+                                    "@IdNo", ItemCode.IdNo,
                                     "@ItemCodeCode", ItemCode.ItemCodeCode,
                                     "@ItemCodeName", ItemCode.ItemCodeName,
                                     "@ItemCodeNameAra", ItemCode.ItemCodeNameAra,

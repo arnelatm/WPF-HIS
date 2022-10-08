@@ -8,7 +8,7 @@ Namespace PresentationLayer.Models
     ''' </summary>
     Public Class PmrInvestigationModel
 
-        Public Property DoctorID As String
+        Public Property DoctorCode As String
         Public Property DoctorName As String
         Public Property TransactionDate As Date?
         Public Property PmrPatientsDisplay As List(Of PmrPatientDisplayModel)

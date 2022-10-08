@@ -17,7 +17,7 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Sub CreateDataSources()
             CreateDataSource("Employee", "EmployeeIdNo")
-            CreateDataSourceGroupCode("ItemCode", "SpecialtyIdNo", "DRSP")
+            CreateDataSourceGroupCode("ItemCode", "SpecialtyIdNo", $"DRSP")
         End Sub
 
         Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
