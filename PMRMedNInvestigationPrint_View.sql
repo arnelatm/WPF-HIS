@@ -1,12 +1,13 @@
 ﻿USE [iGroupClinic]
 GO
 
-/****** Object:  View [dbo].[PMRMedNInvestigationPrint_View]    Script Date: 08/10/2022 9:01:21 am ******/
+/****** Object:  View [dbo].[PMRMedNInvestigationPrint_View]    Script Date: 08/10/2022 12:10:39 pm ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -208,6 +209,104 @@ select
 	b.InvestigationRemark
 from 	PMRPatientGeneralInfo			A	
 left outer join PMRPatientInvestigation B on a.trans_key=b.Trans_key 
+left outer join PatientDetails 			C on a.registrationno =c.registrationno and a.series=c.series
+left outer join CountryMaster 			D on c.countryiota =d.countryiota 
+left outer join EmployeeDetails			E on a.doctorid  =e.empid 
+left outer join InsuranceDetails 		F on a.insuranceid  =f.insuranceid
+left outer join MedicalServices         G on B.Item_Code = g.ServiceID 
+left outer join PmrClinicInvoiceGenerated  h on a.Trans_Key = h.PMRTrans_Key AND b.item_Code = h.ServiceID
+where ServiceNameEnglish Is Not Null OR ServiceNameEnglish <> ''
+UNION
+select 	
+	iiF(G.ServiceGroup='201','LAB',IIF(G.ServiceGroup='202' OR G.ServiceGroup ='210','XRY','ER ')) AS InvestigationCode,
+	a.[Trans_Key], 
+	a.[TransNBR],
+	a.[TransType],
+	a.[TransDateEnglish],
+	a.[PatientType],
+	a.[BillType],
+	a.[Series],
+	a.[RegistrationNo],
+	a.[TokenNo],
+	a.[InsuranceID],
+	a.[InsuranceGroupID],
+	a.[DoctorID],
+	a.[bp],
+	a.[Breathing],
+	a.[Height],
+	a.[Weight],
+	a.[Temprature],
+	a.[PulseRate],
+	a.[Respiratory],
+	a.[VisitNo],
+	a.[VisitType],
+	a.[DurationOfIllness],
+	a.[DurationYMD],
+	a.[AdmissionType],
+	a.[FixedAlergies],
+	a.[DrugAlergies],
+	a.[OtherAlergies],
+	a.[ChiefComplaint],
+	CAST(a.[NoteAlergies] AS NVARCHAR(MAX)),
+	a.[SignificantSign],
+	a.[OtherCondition],
+	Cast(a.[Diagnosis] as NVarchar(max)),
+	a.[DX_Code1],
+	a.[DX_Code2],
+	a.[DX_Code3],
+	a.[DX_Code4],
+	Cast(a.[MedicationNote] as NVarChar(max)),
+	a.[IllnessType],
+	a.[Lmp],
+	a.[LmpDate],
+	a.[Cmf],
+	Cast(a.[CmfNote] as NVarChar(Max)),
+	a.[Los],
+	a.[Eda],
+	Cast(a.[DoctorRemark] as NVarChar(Max)),
+	a.[UserID],
+	a.[Create_Date],
+	a.[MachineID],
+	b.RowNBR,
+	b.Item_Code,
+	b.Qty,
+	b.Unit,
+	b.SalePrice,
+	b.DiscountPer,
+	b.DiscountAmt,
+	b.BillAmt,
+	g.ServiceNameEnglish as ItemNameEnglish,
+	g.ServiceNameArabic as ItemNameArabic,
+	'', 
+	'',
+	'',
+	'',
+	c.PatientNameEnglish ,
+	c.Age,
+	c.Sex,
+	c.AgeYMD ,
+	c.Mobile,
+	c.IqamaNo,
+	d.CountryNameEng,
+	e.EMPNameEnglish,
+	e.OPDNo ,
+	f.NameEnglish as Company,
+	NULL,
+	h.Printed,
+	c.InsCardExpiry,
+	'',
+	'',
+	'',
+    '',
+    '',
+    '',
+    0,
+    '',
+    '',
+    '',
+	b.Remark
+from 	PMRPatientGeneralInfo			A	
+left outer join PMRTreatmentDetail_View B on a.trans_key=b.Trans_key 
 left outer join PatientDetails 			C on a.registrationno =c.registrationno and a.series=c.series
 left outer join CountryMaster 			D on c.countryiota =d.countryiota 
 left outer join EmployeeDetails			E on a.doctorid  =e.empid 
