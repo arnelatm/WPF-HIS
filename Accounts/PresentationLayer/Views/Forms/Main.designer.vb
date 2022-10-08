@@ -91,6 +91,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemPensionSchemes = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemSupplierVendors = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemCustomerClients = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemItemCode = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemCodeGroup = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemIGroup = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPharmacyItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -198,7 +199,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemItemCode = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDoctor = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -332,7 +333,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemMasters
             '
-            Me.ToolStripMenuItemMasters.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemGeneral, Me.ToolStripMenuItemSecurity, Me.ToolStripMenuItemEmployee, Me.ToolStripMenuItemTranslations, Me.ToolStripMenuItemPayroll, Me.ToolStripMenuItemSupplierVendors, Me.ToolStripMenuItemCustomerClients, Me.ToolStripMenuItemItemCode, Me.ToolStripMenuItemCodeGroup, Me.ToolStripMenuItemIGroup})
+            Me.ToolStripMenuItemMasters.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemGeneral, Me.ToolStripMenuItemSecurity, Me.ToolStripMenuItemEmployee, Me.ToolStripMenuItemTranslations, Me.ToolStripMenuItemPayroll, Me.ToolStripMenuItemDoctor, Me.ToolStripMenuItemSupplierVendors, Me.ToolStripMenuItemCustomerClients, Me.ToolStripMenuItemItemCode, Me.ToolStripMenuItemCodeGroup, Me.ToolStripMenuItemIGroup})
             Me.ToolStripMenuItemMasters.Name = "ToolStripMenuItemMasters"
             resources.ApplyResources(Me.ToolStripMenuItemMasters, "ToolStripMenuItemMasters")
             '
@@ -535,6 +536,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemCustomerClients.Name = "ToolStripMenuItemCustomerClients"
             resources.ApplyResources(Me.ToolStripMenuItemCustomerClients, "ToolStripMenuItemCustomerClients")
+            '
+            'ToolStripMenuItemItemCode
+            '
+            Me.ToolStripMenuItemItemCode.Name = "ToolStripMenuItemItemCode"
+            resources.ApplyResources(Me.ToolStripMenuItemItemCode, "ToolStripMenuItemItemCode")
             '
             'ToolStripMenuItemCodeGroup
             '
@@ -1092,10 +1098,10 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'ToolStripMenuItemItemCode
+            'ToolStripMenuItemDoctor
             '
-            Me.ToolStripMenuItemItemCode.Name = "ToolStripMenuItemItemCode"
-            resources.ApplyResources(Me.ToolStripMenuItemItemCode, "ToolStripMenuItemItemCode")
+            Me.ToolStripMenuItemDoctor.Name = "ToolStripMenuItemDoctor"
+            resources.ApplyResources(Me.ToolStripMenuItemDoctor, "ToolStripMenuItemDoctor")
             '
             'Main
             '
@@ -1108,7 +1114,7 @@ Namespace PresentationLayer.Views.Forms
             Me.IsMdiContainer = True
             Me.MenuFormName = "Menu"
             Me.Name = "Main"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+            Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.ToolStrip.ResumeLayout(false)
         Me.ToolStrip.PerformLayout
@@ -1293,5 +1299,6 @@ End Sub
         Friend WithEvents ToolStripMenuItemVATReport As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemCodeGroup As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemItemCode As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemDoctor As ToolStripMenuItem
     End Class
 End NameSpace

@@ -1905,6 +1905,12 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         SetDataSource(sourceTableName, control, Nothing, Nothing, filter)
     End Sub
 
+    Public Sub CreateDataSourceGroupCode(ByVal sourceTableName As String, ByVal fieldName As String, groupCode As String)
+        Dim idNo As Int16
+        idNo = Service.GetRecordFieldWithKeyG(Of Int16, String)(groupCode, "CodeGroup", "CodeGroupCode", "IdNo")
+        CreateDataSource(sourceTableName, fieldName, Nothing, Nothing, "CodeGroupIdNo = " & idNo.ToString())
+    End Sub
+
     Protected Function GetControlName(ByVal fieldName As String) As CaComboBox
         Dim control As Control = Nothing
         If Not MainFieldsDictionary.TryGetValue(fieldName, control) Then

@@ -446,9 +446,9 @@ Public Class CCustomDateTimePicker
             txtTime.Width = 0
             txtTime.Visible = False
         End If
-        Dim totalWidth As Integer = If(ShowLongDate, _longDateWidth, 0) + txtDate.Width + IIf(DisplayOnly, 0, dtp.Width) + If(ShowTime, _timeWidth, 0) + btnCalendarType.Width
-        floDatePicker.Width = totalWidth
-        Width = totalWidth
+        'Dim totalWidth As Integer = 6 + If(ShowLongDate, _longDateWidth, 0) + txtDate.Width + _buttonWidth + If(ShowTime, _timeWidth, 0) + btnCalendarType.Width
+        'floDatePicker.Width = totalWidth
+        'Width = floDatePicker.Width
     End Sub
 
     Public Property TargetCalendar As Calendar

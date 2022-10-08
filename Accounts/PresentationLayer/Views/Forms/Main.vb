@@ -1058,6 +1058,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemItemCode_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemItemCode.Click
             RunForm(Of ItemCodeEntryTv, ItemCodePresenter(Of ItemCodeModel))()
         End Sub
+
+        Private Sub ToolStripMenuItemDoctor_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDoctor.Click
+            RunForm(Of DoctorEntryTv, DoctorPresenter(Of DoctorModel))()
+        End Sub
     End Class
 
 End Namespace

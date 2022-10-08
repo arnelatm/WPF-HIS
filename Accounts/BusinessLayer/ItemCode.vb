@@ -17,8 +17,8 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property IdNo As Int16
-        Public Property CodeGroupIdNo As Int32
+        Public Property IdNo As Int32
+        Public Property CodeGroupIdNo As Int16
         Public Property ItemCodeCode As String
         Public Property ItemCodeName As String
         Public Property ItemCodeNameAra As String

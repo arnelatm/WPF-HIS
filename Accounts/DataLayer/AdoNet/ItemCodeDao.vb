@@ -44,7 +44,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, ItemCode) =
                                     Function(reader) _
             New ItemCode() With {
-            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .ItemCodeCode = Extensions.AsString(reader("ItemCodeCode")),
             .ItemCodeName = Extensions.AsString(reader("ItemCodeName")),
             .ItemCodeNameAra = Extensions.AsString(reader("ItemCodeNameAra")),
@@ -56,7 +56,6 @@ Namespace DataLayer.AdoNet
                                     "@ItemCodeCode", ItemCode.ItemCodeCode,
                                     "@ItemCodeName", ItemCode.ItemCodeName,
                                     "@ItemCodeNameAra", ItemCode.ItemCodeNameAra,
-                                    "@IdNo", ItemCode.IdNo,
                                     "@CodeGroupIdNo", ItemCode.CodeGroupIdNo
                                 }
         End Function
