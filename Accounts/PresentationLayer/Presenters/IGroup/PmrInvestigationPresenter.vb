@@ -25,6 +25,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub GetDoctorsPatients()
             Dim pmrPatients As New PmrInvestigationModel
+            Dim transactionDateString As String = View.TransactionDate
             pmrPatients = Service.GetParametrized(Of PmrInvestigationModel)({View.DoctorCode, View.TransactionDate})
             GlobalVariables.Mapper.Map(pmrPatients, View)
         End Sub
