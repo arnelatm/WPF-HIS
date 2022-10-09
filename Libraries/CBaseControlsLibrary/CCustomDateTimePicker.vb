@@ -634,7 +634,7 @@ Public Class CCustomDateTimePicker
                     txtLongDate.Text = ""
                     txtTime.Text = ""
                 Else
-                    txtDate.Text = PadWithZeroSingleDigitDate(DateTime.Parse(txtDate.Text).ToShortDateString())
+                    txtDate.Text = PadWithZeroSingleDigitDate(txtDate.Text)
                 End If
             End If
         Else
@@ -782,4 +782,5 @@ Public Class CCustomDateTimePicker
     Private Sub txtDate_RightToLeftChanged(sender As Object, e As EventArgs) Handles txtDate.RightToLeftChanged
         txtDate.TextAlign = HorizontalAlignment.Left
     End Sub
+
 End Class
