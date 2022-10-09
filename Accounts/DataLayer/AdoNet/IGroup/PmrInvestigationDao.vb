@@ -50,8 +50,8 @@ Namespace DataLayer.AdoNet
             .Status = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Status")),
             .Token = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("TokenNo")),
             .PType = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PType")),
-            .LastConsDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("LastConsDate")),
-            .InvTime = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("InvTime")),
+            .LastConsDate = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LastConsDate")),
+            .InvTime = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("InvTime")),
             .TransKey = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("Trans_Key"))
             }
 
