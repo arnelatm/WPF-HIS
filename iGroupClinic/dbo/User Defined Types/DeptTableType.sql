@@ -1,0 +1,4 @@
+﻿CREATE TYPE [dbo].[DeptTableType] AS TABLE (
+    [DNAME] VARCHAR (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [LOC]   VARCHAR (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL);
+

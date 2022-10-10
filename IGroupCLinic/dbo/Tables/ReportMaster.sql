@@ -8,8 +8,3 @@
     [Activate]     VARCHAR (1)  DEFAULT ('N') NULL
 );
 
-
-GO
-CREATE CLUSTERED INDEX [IDX_ReportMaster]
-    ON [dbo].[ReportMaster]([ReportID] ASC);
-
