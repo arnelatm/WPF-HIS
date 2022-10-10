@@ -1,5 +1,4 @@
-﻿
-CREATE Procedure [dbo].[spFieldExistInTable]
+﻿CREATE Procedure [dbo].[spFieldExistInTable]
 @tableName as nVarChar(50),
 @fieldName as nVarChar(50)
 as

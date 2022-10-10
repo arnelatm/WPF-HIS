@@ -1,1 +1,0 @@
-﻿CREATE VIEW MOHReport_View4 AS SELECT DISTINCT(CAST(A.RegistrationNo AS VARCHAR) + A.RegistrationType) AS 'FileNoNType', A.REGISTRATIONTYPE, B.Sex, IIF(B.CountryIOTA LIKE 'SAU','SAUDI','NON-SAUDI') AS 'Nationality' FROM ClinicInvoiceGroup AS A LEFT OUTER JOIN PatientDetails AS B ON A.RegistrationNo = B.RegistrationNo AND A.RegistrationType = B.PatientType
