@@ -1,0 +1,2 @@
+﻿
+CREATE VIEW [dbo].[MOHIBReport_View] as SELECT DISTINCT(CAST(A.RegistrationNo AS VARCHAR)) AS 'FileNoNType',a.border_iqama, B.Sex, IIF(B.CountryIOTA LIKE 'SAU','SAUDI','NON-SAUDI') AS 'Nationality' FROM IBInvoiceGroup AS A LEFT OUTER JOIN PatientDetails AS B ON A.RegistrationNo = B.RegistrationNo
