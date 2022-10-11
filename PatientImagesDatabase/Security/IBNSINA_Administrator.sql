@@ -1,0 +1,2 @@
+﻿CREATE USER [IBNSINA\Administrator];
+
