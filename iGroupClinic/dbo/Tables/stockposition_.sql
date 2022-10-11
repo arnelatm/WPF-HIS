@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[stockposition$] (
+    [branchid]     VARCHAR (15)   NULL,
+    [slno]         FLOAT (53)     NULL,
+    [stockdate]    VARCHAR (10)   NULL,
+    [warehouseid]  VARCHAR (15)   NULL,
+    [item_code]    VARCHAR (15)   NULL,
+    [batch]        FLOAT (53)     NULL,
+    [expiry]       VARCHAR (10)   NULL,
+    [costprice]    FLOAT (53)     NULL,
+    [sellingprice] FLOAT (53)     NULL,
+    [qtybox]       FLOAT (53)     NULL,
+    [qtystrips]    FLOAT (53)     NULL,
+    [qtypcs]       FLOAT (53)     NULL,
+    [qtybadbox]    FLOAT (53)     NULL,
+    [qtybadstrips] FLOAT (53)     NULL,
+    [qtybadpcs]    FLOAT (53)     NULL,
+    [tqtygood]     FLOAT (53)     NULL,
+    [tqtybad]      FLOAT (53)     NULL,
+    [stock_type]   NVARCHAR (255) NULL,
+    [pageno]       FLOAT (53)     NULL,
+    [loc_row]      NVARCHAR (255) NULL,
+    [loc_col]      FLOAT (53)     NULL,
+    [remarks]      NVARCHAR (255) NULL,
+    [userid]       NVARCHAR (255) NULL,
+    [create_date]  DATETIME       NULL,
+    [machineid]    NVARCHAR (255) NULL
+);
+
