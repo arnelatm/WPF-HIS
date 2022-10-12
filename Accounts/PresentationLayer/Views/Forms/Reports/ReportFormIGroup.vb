@@ -21,11 +21,13 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim language As String
             language = Strings.Left(formCulture.Name, formCulture.Name.IndexOf("-", StringComparison.Ordinal))
             Presenter = New ReportPresenter(Me)
-            For i = 0 To args.Count() - 1
-                Dim parameterName As String = args(i)(0)
-                Dim parameterValue = args(i)(1)
-                Report.SetParameterValue(parameterName, parameterValue)
-            Next
+            If args.Length > 0 Then
+                For i = 0 To args.Count() - 1
+                    Dim parameterName As String = args(i)(0)
+                    Dim parameterValue = args(i)(1)
+                    Report.SetParameterValue(parameterName, parameterValue)
+                Next
+            End If
             Report.SetParameterValue("Language", language)
             Report.SetParameterValue("EstablishmentName", Presenter.GetRecordField("Establishment", "EstablishmentName"))
             Report.DataSourceConnections.Clear()

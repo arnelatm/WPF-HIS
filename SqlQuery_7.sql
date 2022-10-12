@@ -1,6 +1,4 @@
-﻿
-
-CREATE view [dbo].[PatientProfile_View] as 
+﻿CREATE view [dbo].[PatientProfile_View] as 
 Select a.Branchid,
 a.Trans_key,
 c.series,
@@ -68,4 +66,5 @@ left outer join InsuranceDetails k on a.InsuranceGroupID=k.InsuranceID
 left outer join InsuranceDetails l on h.GroupInsuranceID=l.InsuranceID
 left outer join insuranceDetails m on h.UnderInsuranceID=m.InsuranceID
 left outer join InsuranceServicePRiceList n on b.ServiceID=n.ServiceID and n.InsuranceID = a.InsuranceGroupID
+GO
 

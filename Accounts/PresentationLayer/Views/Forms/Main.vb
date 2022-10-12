@@ -1062,6 +1062,17 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemDoctor_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDoctor.Click
             RunForm(Of DoctorEntryTv, DoctorPresenter(Of DoctorModel))()
         End Sub
+
+        Private Sub PharmacyBarcodePrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPharmacyBarcodePrinting.Click
+            Dim cForm
+            Dim reportName As String
+            Dim reportTitle As String
+            reportName = ""
+            reportTitle = ""
+            Dim cFormCulture = FormCulture
+            cForm = New ReportFormIGroup("BarcodePharmacy.Rpt", CultureInfo.CurrentCulture, {})
+            cForm.Show()
+        End Sub
     End Class
 
 End Namespace
