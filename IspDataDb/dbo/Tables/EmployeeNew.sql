@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[EmployeeNew] (
-    [IdNo]            INT           NOT NULL,
+    [IdNo]            INT           IDENTITY (1, 1) NOT NULL,
     [BranchID]        INT           NULL,
     [EmployeeCode]    VARCHAR (10)  NULL,
     [Title]           VARCHAR (25)  NULL,
@@ -36,6 +36,9 @@
     [Balance]         MONEY         NULL,
     [Active]          BIT           NULL,
     [Create_Date]     DATETIME      NULL,
-    [DateTimeStamp]   ROWVERSION    NULL
+    [DateTimeStamp]   ROWVERSION    NULL,
+    CONSTRAINT [PK_EmployeeNew] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 

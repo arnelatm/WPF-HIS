@@ -1070,7 +1070,8 @@ Namespace PresentationLayer.Views.Forms
             reportName = ""
             reportTitle = ""
             Dim cFormCulture = FormCulture
-            cForm = New ReportFormIGroup("BarcodePharmacy.Rpt", CultureInfo.CurrentCulture, {})
+            cForm = New ReportFormIGroup("BarcodePharmacy.Rpt", CultureInfo.CurrentCulture, {}, "PhItemBarCode")
+            Dim computerName As String = System.Windows.Forms.SystemInformation.ComputerName
             cForm.Show()
         End Sub
     End Class
