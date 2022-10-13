@@ -8,7 +8,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
     Public Class ReportFormIGroup
 
-        Public Sub New(ByVal fileName As String, formCulture As CultureInfo, args As Object)
+        Public Sub New(ByVal fileName As String, formCulture As CultureInfo, args As Object, Optional printJobName As String = Nothing)
 
             ' This call is required by the designer.
             InitializeComponent()
@@ -31,6 +31,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Report.SetParameterValue("Language", language)
             Report.SetParameterValue("EstablishmentName", Presenter.GetRecordField("Establishment", "EstablishmentName"))
             Report.DataSourceConnections.Clear()
+            SetPrintOption(printJobName)
             ProcessReport()
 
         End Sub
@@ -52,6 +53,16 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             End If
 
+        End Sub
+
+
+        Public Sub SetPrintOption(printJobName As String)
+            If printJobName IsNot Nothing Then
+                Report.PrintOptions.PrinterName = "Ad"
+                'Report.PrintOptions.PaperSize = 257
+                Report.PrintOptions.PaperOrientation = PaperOrientation.DefaultPaperOrientation
+                Report.PrintOptions.PaperSource = PaperSource.Auto
+            End If
         End Sub
 
     End Class

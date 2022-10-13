@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[countryf] (
-    [ID]            INT             NOT NULL,
+    [IdNo]          INT             IDENTITY (1, 1) NOT NULL,
     [enabled]       TINYINT         CONSTRAINT [DF__countryf__enable__44FF419A] DEFAULT ('1') NOT NULL,
     [code3l]        VARCHAR (3)     COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     [code2l]        VARCHAR (2)     COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
@@ -11,6 +11,9 @@
     [longitude]     DECIMAL (11, 8) CONSTRAINT [DF__countryf__longit__49C3F6B7] DEFAULT (NULL) NULL,
     [flag032]       IMAGE           NULL,
     [flag123]       IMAGE           NULL,
-    [zoom]          TINYINT         CONSTRAINT [DF__countryf__zoom__4AB81AF0] DEFAULT (NULL) NULL
+    [zoom]          TINYINT         CONSTRAINT [DF__countryf__zoom__4AB81AF0] DEFAULT (NULL) NULL,
+    CONSTRAINT [PK_countryf] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
