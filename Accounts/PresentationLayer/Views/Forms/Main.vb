@@ -18,6 +18,7 @@ Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views.Interfaces
 Imports AutoMapper
+Imports CrystalReportsHelper
 
 Namespace PresentationLayer.Views.Forms
 
@@ -1064,16 +1065,11 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PharmacyBarcodePrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPharmacyBarcodePrinting.Click
-            Dim cForm
-            Dim reportName As String
-            Dim reportTitle As String
-            reportName = ""
-            reportTitle = ""
-            Dim cFormCulture = FormCulture
-            cForm = New ReportFormIGroup("BarcodePharmacy.Rpt", CultureInfo.CurrentCulture, {}, "PhItemBarCode")
-            Dim computerName As String = System.Windows.Forms.SystemInformation.ComputerName
-            cForm.Show()
+            Dim report As New ReportPrinter($"IGROUP", "BarcodePharmacy.Rpt")
+            report.SetPrintOption("PhItemBarCode")
+            'PrintReport("BarcodePharmacy.Rpt", CultureInfo.CurrentCulture, {}, "PhItemBarCode")
         End Sub
+
     End Class
 
 End Namespace

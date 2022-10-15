@@ -2,7 +2,7 @@
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
 Imports AATM.BusinessLayer.BusinessRules
 
-Namespace BusinessLayer
+Namespace BusinessObjects
 
     Public Class PrintJob
         Inherits AATM.BusinessLayer.BusinessObject
