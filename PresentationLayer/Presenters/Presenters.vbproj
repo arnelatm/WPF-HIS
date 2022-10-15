@@ -51,6 +51,7 @@
       <HintPath>..\..\packages\CompareNETObjects.4.67.0\lib\net472\KellermanSoftware.Compare-NET-Objects.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Transactions" />

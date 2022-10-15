@@ -204,7 +204,6 @@
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
-    <Compile Include="BusinessLayer\PrintJobAssignment.vb" />
     <Compile Include="BusinessLayer\ItemCode.vb" />
     <Compile Include="BusinessLayer\CodeGroup.vb" />
     <Compile Include="BusinessLayer\DataImage.vb" />
@@ -1791,9 +1790,9 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Isp-Server.config" />
+    <None Include="app.config" />
     <None Include="app-MarceloPC.config" />
     <None Include="appx.config" />
     <None Include="appOkMarceloPC.config" />
@@ -1885,6 +1884,10 @@
     <ProjectReference Include="..\Libraries\CBaseControlsLibrary\CBaseControlsLibrary.vbproj">
       <Project>{f991561a-78f8-487c-a873-e6436b41d801}</Project>
       <Name>CBaseControlsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\CrystalReportsHelper\CrystalReportsHelper.vbproj">
+      <Project>{8F2BB05A-C065-4E1B-9B1A-D4F600C0DB62}</Project>
+      <Name>CrystalReportsHelper</Name>
     </ProjectReference>
     <ProjectReference Include="..\Libraries\ErrorsAndEvents\ErrorsAndEvents.vbproj">
       <Project>{abbf2275-7dff-4724-98f9-71a2fd10b471}</Project>
