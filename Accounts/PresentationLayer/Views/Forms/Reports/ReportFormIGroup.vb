@@ -21,7 +21,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim language As String
             language = Strings.Left(formCulture.Name, formCulture.Name.IndexOf("-", StringComparison.Ordinal))
             Presenter = New ReportPresenter(Me)
-            If args.Length > 0 Then
+            If args IsNot Nothing AndAlso args.Count > 0 Then
                 For i = 0 To args.Count() - 1
                     Dim parameterName As String = args(i)(0)
                     Dim parameterValue = args(i)(1)
