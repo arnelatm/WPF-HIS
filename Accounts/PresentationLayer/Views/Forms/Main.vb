@@ -1065,8 +1065,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PharmacyBarcodePrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPharmacyBarcodePrinting.Click
-            Dim report As New ReportPrinter($"IGROUP", "BarcodePharmacy.Rpt")
-            report.SetPrintOption("PhItemBarCode")
+            Dim report As New ReportPrinter($"IGROUP", "BarcodePharmacy.Rpt", "PhItemBarCode")
+            report.PrintReport()
+            'report.SetPrintOption("PhItemBarCode")
             'PrintReport("BarcodePharmacy.Rpt", CultureInfo.CurrentCulture, {}, "PhItemBarCode")
         End Sub
 
