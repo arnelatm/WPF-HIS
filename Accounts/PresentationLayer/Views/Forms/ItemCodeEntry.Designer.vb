@@ -40,6 +40,8 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboCodeGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.txtNote = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.LblNote = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -131,7 +133,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtItemCodeCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtItemCodeCode.Translatable = False
             Me.txtItemCodeCode.ValueIsMandatory = True
-            Me.txtItemCodeCode.ValueIsUnique = True
             '
             'lblItemCodeCode
             '
@@ -229,6 +230,8 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.Controls.Add(Me.txtItemCodeName)
             Me.floDataDisplay.Controls.Add(Me.lblItemCodeNameAra)
             Me.floDataDisplay.Controls.Add(Me.txtItemCodeNameAra)
+            Me.floDataDisplay.Controls.Add(Me.LblNote)
+            Me.floDataDisplay.Controls.Add(Me.txtNote)
             Me.floDataDisplay.Name = "floDataDisplay"
             '
             'CLabel1
@@ -286,6 +289,42 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
             Me.CFlowLayout1.Name = "CFlowLayout1"
             '
+            'txtNote
+            '
+            Me.txtNote.BackColor = System.Drawing.Color.White
+            Me.txtNote.BegFindValue = Nothing
+            Me.txtNote.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtNote.ComputedValue = False
+            Me.txtNote.CustomFormat = Nothing
+            Me.txtNote.DataBoundControl = True
+            Me.txtNote.EditingMode = False
+            Me.txtNote.EndFindValue = Nothing
+            Me.txtNote.FieldDescription = Nothing
+            Me.txtNote.FieldName = Nothing
+            Me.txtNote.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtNote.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtNote, True)
+            resources.ApplyResources(Me.txtNote, "txtNote")
+            Me.txtNote.ForeColor = System.Drawing.Color.Black
+            Me.txtNote.LinkedLabel = Me.lblItemCodeName
+            Me.txtNote.MaximumValue = Nothing
+            Me.txtNote.MinimumValue = Nothing
+            Me.txtNote.Name = "txtNote"
+            Me.txtNote.OldValue = Nothing
+            Me.txtNote.ReadOnly = True
+            Me.txtNote.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtNote.Translatable = False
+            Me.txtNote.ValueIsMandatory = True
+            Me.txtNote.ValueIsUnique = True
+            '
+            'LblNote
+            '
+            Me.LblNote.DisplayOnly = True
+            Me.LblNote.EditingMode = False
+            resources.ApplyResources(Me.LblNote, "LblNote")
+            Me.LblNote.Name = "LblNote"
+            Me.LblNote.Translatable = True
+            '
             'ItemCodeEntryTv
             '
             resources.ApplyResources(Me, "$this")
@@ -314,5 +353,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents cboCodeGroupIdNo As CaComboBox
+        Friend WithEvents LblNote As CLabel
+        Friend WithEvents txtNote As CTextBox
     End Class
 End Namespace

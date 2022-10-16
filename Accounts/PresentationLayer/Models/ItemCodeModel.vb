@@ -15,6 +15,7 @@ Namespace PresentationLayer.Models
         Public Property ItemCodeName As String
         Public Property ItemCodeNameAra As String
         Public Property CodeGroupIdNo As Int16
+        Public Property Note As Int16
     End Class
 
 End Namespace

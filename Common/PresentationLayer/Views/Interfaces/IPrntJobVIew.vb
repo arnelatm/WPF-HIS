@@ -11,10 +11,7 @@ Namespace PresentationLayer.Views.Interface
         Property PaperSize As Int32
         Property PaperSource As Int16
         Property PrinterName As String
-        Property PrintJobCode As String
         Property PrintJobName As String
-        Property PrintJobNameAra As String
-
 
     End Interface
 

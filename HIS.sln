@@ -87,6 +87,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{5DC97E00
 		HomeSqlIspdata.sql = HomeSqlIspdata.sql
 		Important Information to Know.txt = Important Information to Know.txt
 		InsertCheckDisbursementJournalItemTVP.sql = InsertCheckDisbursementJournalItemTVP.sql
+		PaperSize.txt = PaperSize.txt
 		PayGroups.sql = PayGroups.sql
 		PMRDoctorsGenForm_View.sql = PMRDoctorsGenForm_View.sql
 		PMRMedNInvestigationPrint_View.sql = PMRMedNInvestigationPrint_View.sql

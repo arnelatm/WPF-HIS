@@ -15,7 +15,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordByIdNo(idNo) As ItemCode Implements IDao(Of ItemCode).GetRecordByIdNo
             Dim sql As String =
-                    " SELECT IdNo, ItemCodeCode, ItemCodeName, ItemCodeNameAra, CodeGroupIdNo" &
+                    " SELECT IdNo, ItemCodeCode, ItemCodeName, ItemCodeNameAra, CodeGroupIdNo, Note " &
                     "   FROM [ItemCode]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -28,7 +28,8 @@ Namespace DataLayer.AdoNet
                     "    SET ItemCodeCode = @ItemCodeCode," &
                     "        ItemCodeName = @ItemCodeName," &
                     "        ItemCodeNameAra = @ItemCodeNameAra," &
-                    "        CodeGroupIdNo = @CodeGroupIdNo" &
+                    "        CodeGroupIdNo = @CodeGroupIdNo," &
+                    "        Note = @Note" &
                     "  WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(ItemCode))
         End Function
@@ -36,8 +37,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef ItemCode As ItemCode) As Integer Implements IDao(Of ItemCode).AddRecord
             Dim sql As String =
                     " INSERT INTO [ItemCode] " &
-                    " (ItemCodeCode,ItemCodeName,ItemCodeNameAra,CodeGroupIdNo) " &
-                    " VALUES (@ItemCodeCode,@ItemCodeName,@ItemCodeNameAra,@CodeGroupIdNo) "
+                    " (ItemCodeCode,ItemCodeName,ItemCodeNameAra,CodeGroupIdNo,Note) " &
+                    " VALUES (@ItemCodeCode,@ItemCodeName,@ItemCodeNameAra,@CodeGroupIdNo,@Note) "
             Return Db.Insert(sql, Take(ItemCode))
         End Function
 
@@ -48,7 +49,8 @@ Namespace DataLayer.AdoNet
             .ItemCodeCode = Extensions.AsString(reader("ItemCodeCode")),
             .ItemCodeName = Extensions.AsString(reader("ItemCodeName")),
             .ItemCodeNameAra = Extensions.AsString(reader("ItemCodeNameAra")),
-            .CodeGroupIdNo = Extensions.AsInt(Of Int16)(reader("CodeGroupIdNo"))
+            .CodeGroupIdNo = Extensions.AsInt(Of Int16)(reader("CodeGroupIdNo")),
+            .Note = Extensions.AsString(reader("Note"))
             }
 
         Private Function Take(ItemCode As ItemCode) As Object()
@@ -57,7 +59,8 @@ Namespace DataLayer.AdoNet
                                     "@ItemCodeCode", ItemCode.ItemCodeCode,
                                     "@ItemCodeName", ItemCode.ItemCodeName,
                                     "@ItemCodeNameAra", ItemCode.ItemCodeNameAra,
-                                    "@CodeGroupIdNo", ItemCode.CodeGroupIdNo
+                                    "@CodeGroupIdNo", ItemCode.CodeGroupIdNo,
+                                    "@Note", ItemCode.Note
                                 }
         End Function
 

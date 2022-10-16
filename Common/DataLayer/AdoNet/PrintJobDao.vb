@@ -12,53 +12,66 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
+        Private Const FieldList = "ComputerName," &
+                                  "IdNo," &
+                                  "PaperOrientation," &
+                                  "PaperSize," &
+                                  "PaperSource," &
+                                  "PrinterName," &
+                                  "PrintJobName"
+
         'Public Function GetPrintJobByName(PrintJobName As String) As PrintJob Implements iDao(Of PrintJob).GetPrintJobByName
         '    Throw New NotImplementedException
         'End Function
 
         Public Function GetRecordByIdNo(idNo) As PrintJob Implements IDao(Of PrintJob).GetRecordByIdNo
-            Dim sql As String =
-                    " SELECT IdNo, PrintJobCode, PrintJobName, PrintJobNameAra" &
-                    "   FROM [PrintJob]" &
-                    " WHERE IdNo = @IdNo"
+            Dim sql As String = "Select " & FieldList & " FROM [PrintJob] " &
+                    "WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
         Public Function UpdateRecord(ByRef PrintJob As PrintJob) As Integer Implements IDao(Of PrintJob).UpdateRecord
             Dim sql As String =
-                    " UPDATE [PrintJob] SET" &
-                    " PrintJobCode = @PrintJobCode," &
-                    " PrintJobName = @PrintJobName," &
-                    " PrintJobNameAra = @PrintJobNameAra," &
-                    " WHERE IdNo = @IdNo"
-
+                    "UPDATE [PrintJob] SET " &
+                    "ComputerName = @ComputerName, " &
+                    "PaperOrientation = @PaperOrientation, " &
+                    "PaperSize = @PaperSize, " &
+                    "PaperSource = @PaperSource, " &
+                    "PrinterName = @PrinterName, " &
+                    "PrintJobName = @PrintJobName " &
+                    "WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(PrintJob))
         End Function
 
-        Public Function AddRecord(ByRef PrintJob As PrintJob) As Integer Implements IDao(Of PrintJob).AddRecord
+        Public Function AddRecord(ByRef printJob As PrintJob) As Integer Implements IDao(Of PrintJob).AddRecord
             Dim sql As String =
                     " INSERT INTO [PrintJob] " &
-                    " (PrintJobCode, PrintJobName,PrintJobNameAra,) " &
-                    " VALUES (@PrintJobCode,@PrintJobName,@PrintJobNameAra)"
-            Return _db.Insert(sql, Take(PrintJob))
+                    " (ComputerName,PaperOrientation,PaperSize,PaperSource,PrinterName,PrintJobName) " &
+                    " VALUES (@ComputerName,@PaperOrientation,@PaperSize,@PaperSource,@PrinterName,@PrintJobName)"
+            Return _db.Insert(sql, Take(printJob))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, PrintJob) =
                                     Function(reader) _
             New PrintJob() With {
-            .PrintJobCode = Extensions.AsString(reader("PrintJobCode")),
-            .PrintJobName = Extensions.AsString(reader("PrintJobName")),
-            .PrintJobNameAra = Extensions.AsString(reader("PrintJobNameAra")),
-            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo"))
+            .ComputerName = Extensions.AsString(reader("ComputerName")),
+            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
+            .PaperOrientation = Extensions.AsInt(Of Int16)(reader("PaperOrientation")),
+            .PaperSize = Extensions.AsInt(Of Int16)(reader("PaperSize")),
+            .PaperSource = Extensions.AsInt(Of Int16)(reader("PaperSource")),
+            .PrinterName = Extensions.AsString(reader("PrinterName")),
+            .PrintJobName = Extensions.AsString(reader("PrintJobName"))
             }
 
-        Private Function Take(PrintJob As PrintJob) As Object()
+        Private Function Take(printJob As PrintJob) As Object()
             Return New Object() {
-                                    "@PrintJobCode", PrintJob.PrintJobCode,
-                                    "@PrintJobName", PrintJob.PrintJobName,
-                                    "@PrintJobNameAra", PrintJob.PrintJobNameAra,
-                                    "@IdNo", PrintJob.IdNo
+                                    "@ComputerName", printJob.ComputerName,
+                                    "@PaperOrientation", printJob.PaperOrientation,
+                                    "@PaperSize", printJob.PaperSize,
+                                    "@PaperSource", printJob.PaperSource,
+                                    "@PrinterName", printJob.PrinterName,
+                                    "@PrintJobName", printJob.PrintJobName
                                 }
         End Function
 

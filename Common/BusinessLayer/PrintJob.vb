@@ -13,7 +13,7 @@ Namespace BusinessLayer
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("PrintJobName"))
                 AddRule(New ValidateRequired("PrintJobCode"))
-                AddRule(New ValidateRequired("PrnterName"))
+                AddRule(New ValidateRequired("PrinterName"))
             End If
         End Sub
 
@@ -23,9 +23,7 @@ Namespace BusinessLayer
         Public Property PaperSize As Int32
         Public Property PaperSource As Int16
         Public Property PrinterName As String
-        Public Property PrintJobCode As String
         Public Property PrintJobName As String
-        Public Property PrintJobNameAra As String
 
     End Class
 

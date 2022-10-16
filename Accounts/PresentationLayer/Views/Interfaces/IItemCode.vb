@@ -9,6 +9,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property ItemCodeName As String
         Property ItemCodeNameAra As String
         Property CodeGroupIdNo As Int16
+        Property Note As String
     End Interface
 
 End Namespace

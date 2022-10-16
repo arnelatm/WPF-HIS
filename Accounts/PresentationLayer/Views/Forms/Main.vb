@@ -6,9 +6,11 @@ Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Common
+Imports AATM.Common.Models
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.PresentationLayer.Views.Forms
+Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.Libraries
 Imports AATM.Libraries.ErrorsAndEvents
 Imports AATM.Libraries.GlobalFuncNSub
@@ -1064,11 +1066,15 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of DoctorEntryTv, DoctorPresenter(Of DoctorModel))()
         End Sub
 
+        Private Property PrintJobView As IPrintJobView
+
+        Private Sub PrintReport(databaseConnectionName As String, reportName As String, jobName As String)
+            Dim pjPresenter As New PrintJobPresenter()
+            pjPresenter.PrintReport(databaseConnectionName, reportName, jobName)
+        End Sub
+
         Private Sub PharmacyBarcodePrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPharmacyBarcodePrinting.Click
-            Dim report As New ReportPrinter($"IGROUP", "BarcodePharmacy.Rpt", "PhItemBarCode")
-            report.PrintReport()
-            'report.SetPrintOption("PhItemBarCode")
-            'PrintReport("BarcodePharmacy.Rpt", CultureInfo.CurrentCulture, {}, "PhItemBarCode")
+            PrintReport($"IGROUP", "BarcodePharmacy.Rpt", "PhItemBarCode")
         End Sub
 
     End Class
