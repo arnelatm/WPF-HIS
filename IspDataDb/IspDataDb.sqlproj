@@ -528,7 +528,6 @@
     <Build Include="dbo\Tables\ItemCode.sql" />
     <Build Include="dbo\Tables\Doctor.sql" />
     <Build Include="dbo\Views\Doctor_View.sql" />
-    <Build Include="dbo\Tables\PrintJobAssignment.sql" />
     <Build Include="dbo\Tables\PrintJob_1.sql" />
   </ItemGroup>
   <ItemGroup>

@@ -57,9 +57,9 @@ Namespace DataLayer.AdoNet
             New PrintJob() With {
             .ComputerName = Extensions.AsString(reader("ComputerName")),
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
-            .PaperOrientation = Extensions.AsInt(Of Int16)(reader("PaperOrientation")),
-            .PaperSize = Extensions.AsInt(Of Int16)(reader("PaperSize")),
-            .PaperSource = Extensions.AsInt(Of Int16)(reader("PaperSource")),
+            .PaperOrientation = Extensions.AsNullable(Of Int32?)(reader("PaperOrientation")),
+            .PaperSize = Extensions.AsNullable(Of Int16?)(reader("PaperSize")),
+            .PaperSource = Extensions.AsNullable(Of Int16?)(reader("PaperSource")),
             .PrinterName = Extensions.AsString(reader("PrinterName")),
             .PrintJobName = Extensions.AsString(reader("PrintJobName"))
             }
