@@ -7,9 +7,9 @@ Namespace PresentationLayer.Views.Interface
 
         Property ComputerName As String
         Property IdNo As Int16
-        Property PaperOrientation As String
-        Property PaperSize As Int32
-        Property PaperSource As Int16
+        Property PaperOrientation As Int16?
+        Property PaperSize As Int32?
+        Property PaperSource As Int16?
         Property PrinterName As String
         Property PrintJobName As String
 

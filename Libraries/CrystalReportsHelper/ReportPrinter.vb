@@ -65,24 +65,16 @@ Public Class ReportPrinter
         If printerName IsNot Nothing Then
             Report.PrintOptions.NoPrinter = False
             Report.PrintOptions.PrinterName = printerName
-            Report.PrintOptions.DissociatePageSizeAndPrinterPaperSize = True
-            'Dim margins As PageMargins
-            'margins = Report.PrintOptions.PageMargins
-            'margins.bottomMargin = 0
-            'margins.leftMargin = 0
-            'margins.rightMargin = 0
-            'margins.topMargin = 0
-            'Report.PrintOptions.PageMargins = margins
         End If
-        'If paperSize IsNot Nothing Then
-        '    Report.PrintOptions.PaperSize = paperSize
-        'End If
+        If paperSize IsNot Nothing Then
+            Report.PrintOptions.PaperSize = paperSize
+        End If
         If paperOrientation IsNot Nothing Then
             Report.PrintOptions.PaperOrientation = paperOrientation
         End If
-        'If paperSource IsNot Nothing Then
-        '    Report.PrintOptions.PaperSource = paperSource
-        'End If
+        If paperSource IsNot Nothing Then
+            Report.PrintOptions.PaperSource = paperSource
+        End If
     End Sub
 
     Public Sub PrintReport(Optional copies As Int16 = 1, Optional collate As Boolean = False, Optional startPage As Int16 = 0, Optional endPage As Int16 = 0)
