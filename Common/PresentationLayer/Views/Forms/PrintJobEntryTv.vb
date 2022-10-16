@@ -10,7 +10,7 @@ Namespace PresentationLayer.Views.Forms
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
-            FirstControl = txtPrintJobCode
+            FirstControl = cboPrintJobName
             ' Add any initialization after the InitializeComponent() call.
         End Sub
 
@@ -25,105 +25,75 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PrintJobCode As String Implements IPrintJobView.PrintJobCode
-            Get
-                Return txtPrintJobCode.Text
-            End Get
-            Set
-                txtPrintJobCode.Text = Value
-            End Set
-        End Property
-
         Public Property PrintJobName As String Implements IPrintJobView.PrintJobName
             Get
-                Return txtPrintJobName.Text
+                Return cboPrintJobName.GetValue()
             End Get
             Set
-                txtPrintJobName.Text = Value
-            End Set
-        End Property
-
-        Public Property PrintJobNameAra As String Implements IPrintJobView.PrintJobNameAra
-            Get
-                Return txtPrintJobNameAra.Text
-            End Get
-            Set
-                txtPrintJobNameAra.Text = Value
+                cboPrintJobName.SetValue(Value)
             End Set
         End Property
 
         Public Property ComputerName As String Implements IPrintJobView.ComputerName
             Get
-                Throw New NotImplementedException()
+                Return cboComputerName.GetValue()
             End Get
-            Set(value As String)
-                Throw New NotImplementedException()
+            Set
+                cboComputerName.SetValue(Value)
             End Set
         End Property
 
         Public Property PaperSize As Integer Implements IPrintJobView.PaperSize
             Get
-                Throw New NotImplementedException()
+                Return cboPaperSize.GetValue()
             End Get
-            Set(value As Integer)
-                Throw New NotImplementedException()
+            Set
+                cboPaperSize.SetValue(Value)
             End Set
         End Property
 
         Public Property PaperSource As Short Implements IPrintJobView.PaperSource
             Get
-                Throw New NotImplementedException()
+                Return cboPaperSource.GetValue()
             End Get
-            Set(value As Short)
-                Throw New NotImplementedException()
+            Set
+                cboPaperSource.SetValue(Value)
             End Set
         End Property
 
         Public Property PrinterName As String Implements IPrintJobView.PrinterName
             Get
-                Throw New NotImplementedException()
+                Return cboPrinterName.GetValue()
             End Get
-            Set(value As String)
-                Throw New NotImplementedException()
+            Set
+                cboPrinterName.SetValue(Value)
             End Set
         End Property
 
         Public Property PaperOrientation As String Implements IPrintJobView.PaperOrientation
             Get
-                Throw New NotImplementedException()
+                Return cboPaperOrientation.GetValue()
             End Get
-            Set(value As String)
-                Throw New NotImplementedException()
+            Set
+                cboPaperOrientation.SetValue(Value)
             End Set
         End Property
-
 
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
-                {"PrintJobCode", txtPrintJobCode},
-                {"PrintJobName", txtPrintJobName},
-                {"PrintJobNameAra", txtPrintJobNameAra},
-                {"IdNo", TxtIdNo}
+                {"ComputerName", cboComputerName},
+                {"IdNo", TxtIdNo},
+                {"PaperOrientation", cboPaperOrientation},
+                {"PaperSize", cboPaperSize},
+                {"PaperSource", cboPaperSource},
+                {"PrinterName", cboPrinterName},
+                {"PrintJobName", cboPrintJobName}
                 }
         End Sub
 
-        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs)
-            txtPrintJobName.DisplayOnly = False
-            txtPrintJobName.ReadOnly = False
-            txtPrintJobName.EditingMode = True
-            txtPrintJobName.ShortcutsEnabled = True
-        End Sub
-
-        Private Sub CLabel1_Click(sender As Object, e As EventArgs) Handles LblPaperSource.Click
-
-        End Sub
-
-        Private Sub CTextBoxArabic2_TextChanged(sender As Object, e As EventArgs) Handles CTextBoxArabic2.TextChanged
-
-        End Sub
     End Class
 
 End Namespace

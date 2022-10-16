@@ -110,6 +110,7 @@
     </Compile>
     <Compile Include="MyEnums.vb" />
     <Compile Include="PresentationLayer\Models\PrintJobModel.vb" />
+    <Compile Include="PresentationLayer\Presenters\PrintJobPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CommonPresenter.vb" />
     <Compile Include="PresentationLayer\Views\Forms\PrintJobEntryTv.Designer.vb">
       <DependentUpon>PrintJobEntryTv.vb</DependentUpon>
@@ -378,6 +379,10 @@
     <ProjectReference Include="..\Libraries\CBaseControlsLibrary\CBaseControlsLibrary.vbproj">
       <Project>{F991561A-78F8-487C-A873-E6436B41D801}</Project>
       <Name>CBaseControlsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Libraries\CrystalReportsHelper\CrystalReportsHelper.vbproj">
+      <Project>{8F2BB05A-C065-4E1B-9B1A-D4F600C0DB62}</Project>
+      <Name>CrystalReportsHelper</Name>
     </ProjectReference>
     <ProjectReference Include="..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">
       <Project>{B56FDCD3-8B48-4859-983B-07FFA242673D}</Project>

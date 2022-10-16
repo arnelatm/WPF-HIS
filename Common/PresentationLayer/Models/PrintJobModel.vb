@@ -10,9 +10,7 @@
         Public Property PaperSize As Int32
         Public Property PaperSource As Int16
         Public Property PrinterName As String
-        Public Property PrintJobCode As String
         Public Property PrintJobName As String
-        Public Property PrintJobNameAra As String
 
     End Class
 

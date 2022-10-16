@@ -22,6 +22,7 @@ Namespace BusinessLayer
         Public Property ItemCodeCode As String
         Public Property ItemCodeName As String
         Public Property ItemCodeNameAra As String
+        Public Property Note As String
         Public Property DateCreated As Date
 
     End Class

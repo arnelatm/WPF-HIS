@@ -60,6 +60,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property Note As String Implements IItemCodeView.Note
+            Get
+                Return txtNote.Text
+            End Get
+            Set
+                txtNote.Text = Value
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -69,7 +78,8 @@ Namespace PresentationLayer.Views.Forms
                 {"ItemCodeName", txtItemCodeName},
                 {"ItemCodeNameAra", txtItemCodeNameAra},
                 {"IdNo", TxtIdNo},
-                {"CodeGroupIdNo", cboCodeGroupIdNo}
+                {"CodeGroupIdNo", cboCodeGroupIdNo},
+                {"Note", txtNote}
                 }
         End Sub
 
