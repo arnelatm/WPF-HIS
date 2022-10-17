@@ -19,10 +19,8 @@ Namespace PresentationLayer.Presenters
             'UserIsSupervisor = IsUserASupervisor()
         End Sub
 
-
     End Class
 
-    
     Public Class DateRangeCompanyPresenter
         Inherits AccountsPresenter(Of IView, AccountModel)
 
@@ -37,7 +35,7 @@ Namespace PresentationLayer.Presenters
             WithTreeView = False
             Service.SaveConnectionString()
             Service.SetConnectionString("IGROUPCLINIC")
-            CreateLookupData("InsuranceDetails", "InsuranceList", {"InsuranceId","NameEnglish"},"NameEnglish", Nothing)
+            CreateLookupData("InsuranceDetails", "InsuranceList", {"InsuranceId", "NameEnglish"}, "NameEnglish", Nothing)
             Service.RestoreConnectionString()
         End Sub
 

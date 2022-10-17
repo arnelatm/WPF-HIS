@@ -1,6 +1,8 @@
 ﻿Imports System.Configuration
+Imports System.Globalization
 Imports System.Windows.Forms
 Imports AATM.Libraries.CrystalReportsHelper
+Imports AATM.Libraries.GlobalFuncNSub
 Imports CrystalDecisions.ReportAppServer.DataDefModel
 
 Public Class CrViewer
@@ -18,37 +20,43 @@ Public Class CrViewer
 
     End Sub
 
+    Public Sub New(ByVal fileName As String, ByVal reportTitle As String, formCulture As CultureInfo, ByVal ParamArray args() As Object)
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        Text = fileName
+        ReportFileName = fileName
+        Report.ReportFileName = ReportFileName
+        GetReportProperties()
+        Dim language As String
+        Dim establishmentName As String
+
+        language = Microsoft.VisualBasic.Strings.Left(formCulture.Name, formCulture.Name.IndexOf("-", StringComparison.Ordinal))
+        If language <> "ar" Then
+            establishmentName = GlobalVariables.EstablishmentName
+        Else
+            establishmentName = GlobalVariables.EstablishmentNameAra
+        End If
+
+        Report.SetParameterValue(args)
+        Report.SetParameterValue(reportTitle, "ReportTitle")
+        Report.SetParameterValue(establishmentName, "EstablishmentName")
+        Report.SetParameterValue(language, "Language")
+        Report.ClearDataSourceConnections()
+        ProcessReport()
+
+    End Sub
+
+    Public Shadows Sub Load()
+
+    End Sub
+
     Public Property ReportFileName As String
 
     Protected Sub GetReportProperties()
-        Dim reportPaths As String = ConfigurationManager.AppSettings.Get("ReportPaths")
-        Dim uid As String = ConfigurationManager.AppSettings.Get("UID")
-        Dim pwd As String = ConfigurationManager.AppSettings.Get("PWD")
-        Dim server As String = ConfigurationManager.AppSettings.Get("ServerTranslator")
-        Dim database As String = ConfigurationManager.AppSettings.Get("DATABASE")
-
-        If reportPaths Is Nothing Or reportPaths = "" Then
-            Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
-            If computerName = $"ISPADMIN2" Then
-                reportPaths = ConfigurationManager.AppSettings.Get("ReportPaths2")
-                server = ConfigurationManager.AppSettings.Get("ServerTranslator2")
-            ElseIf computerName = "MARCELO-DELL" Then
-                reportPaths = ConfigurationManager.AppSettings.Get("ReportPaths3")
-                server = ConfigurationManager.AppSettings.Get("ServerTranslator3")
-            Else
-                reportPaths = ConfigurationManager.AppSettings.Get("ReportPaths1")
-                server = ConfigurationManager.AppSettings.Get("ServerTranslator1")
-            End If
-        End If
-        'MessageBox.Show(reportPaths & ReportFileName)
-        Report.Load(reportPaths, ReportFileName)
-
-        If Report.DataSourceConnections.Count > 0 Then
-
-            Report.DataSourceConnections(0).SetConnection(server, database, uid, pwd)
-
-        End If
-
+        Report.SetReportProperties()
     End Sub
 
     Protected Sub ProcessReport()
@@ -63,13 +71,19 @@ Public Class CrViewer
         With CrystalReportViewer1
             .Visible = True
             .BringToFront()
-            .ReportSource = Report
+            .ReportSource = Report.GetReportSource()
             .SetProductLocale(CInt(ceCulture))
             .Refresh()
         End With
-
         btnQuit.Visible = True
+    End Sub
 
+    Public Sub SetDb(Optional dbCName As String = Nothing)
+        Report.DataBaseConnectionName = IIf(dbCName Is Nothing, $"ISPDATA", dbCName)
+    End Sub
+
+    Public Sub SetPrintJob(Optional printJobName As String = "Default")
+        Report.PrintJobName = printJobName
     End Sub
 
     Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click

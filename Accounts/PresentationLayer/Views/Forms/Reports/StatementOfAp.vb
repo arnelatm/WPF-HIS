@@ -1,8 +1,11 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
+Imports AATM.PresentationLayer.Forms
+Imports AATM.ServicesLayer.Services
 
 Namespace PresentationLayer.Views.Forms.Reports
 
@@ -38,15 +41,24 @@ Namespace PresentationLayer.Views.Forms.Reports
                 reportName = Messaging.TranslateCaption("Statement of Accounts Payable")
                 reportTitle = Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName, "beginningDate", bDate, "endingDate", eDate})
                 Dim cFormCulture = FormCulture
-                If Strings.Left(cFormCulture.Name, 2) = "ar" Then
-                    cForm = New ReportFormNew("Statement of Accounts Payable Arabic.Rpt", reportTitle, CultureInfo.CurrentCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo", cboSupplierIdNo.Text, "DisplayName")
-                Else
-                    cForm = New ReportFormNew("Statement of Accounts Payable.Rpt", reportTitle, CultureInfo.CurrentCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo", cboSupplierIdNo.Text, "DisplayName")
-                End If
-                cForm.Show()
+                OpenCrViewer(cFormCulture, reportTitle)
             Else
                 Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
             End If
+        End Sub
+
+        Private Sub OpenCrViewer(cFormCulture As CultureInfo, reportTitle As String)
+            'Dim pjPresenter = New PrintJobPresenter()
+            'pjPresenter.ViewReport()
+            Dim cForm As CrViewer
+            If Strings.Left(cFormCulture.Name, 2) = "ar" Then
+                cForm = New CrViewer("Statement of Accounts Payable Arabic.Rpt", reportTitle, CultureInfo.CurrentCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo", cboSupplierIdNo.Text, "DisplayName")
+            Else
+                cForm = New CrViewer("Statement of Accounts Payable.Rpt", reportTitle, CultureInfo.CurrentCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo", cboSupplierIdNo.Text, "DisplayName")
+            End If
+            cForm.SetDb()
+            cForm.SetPrintJob("A4")
+            cForm.Show()
         End Sub
 
         Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
