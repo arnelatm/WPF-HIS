@@ -1,7 +1,6 @@
 ﻿Imports System.Configuration
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
-Imports CrystalDecisions.ReportAppServer.CommonControls
 Imports CrystalDecisions.Shared
 
 Public Class ReportPrinter
