@@ -1,5 +1,7 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports System.Globalization
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.PresentationLayer.Forms
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
@@ -17,6 +19,13 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "IdNo"
             WithTreeView = False
             'UserIsSupervisor = IsUserASupervisor()
+        End Sub
+
+        Public Sub ViewReport(reportFileName As String, reportTitle As String, cFormCulture As CultureInfo, ParamArray args() As Object)
+            Dim cForm As New CrViewer(reportFileName, reportTitle, cFormCulture, args)
+            cForm.SetDb()
+            cForm.SetPrintJob("A4")
+            cForm.Show()
         End Sub
 
     End Class
