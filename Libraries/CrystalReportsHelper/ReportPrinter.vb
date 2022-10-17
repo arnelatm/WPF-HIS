@@ -6,7 +6,11 @@ Public Class ReportPrinter
     Private Property Report As New CrystalDecisions.CrystalReports.Engine.ReportDocument
     Private Property ReportFileName As String
 
-    Public Sub New(dataBaseConnectionName As String, reportFileName As String, printJobName As String)
+    Public Sub New()
+
+    End Sub
+
+    Public Sub New(printJobName As String, reportFileName As String, dataBaseConnectionName As String)
         Dim reportPaths As String = ""
         Dim uid As String = ""
         Dim pwd As String = ""
@@ -32,6 +36,11 @@ Public Class ReportPrinter
         End If
         'SetPrintOption(printJobName)
         Me.ReportFileName = reportFileName
+    End Sub
+
+
+    Public Sub Load(reportPaths As String, reportFileName As String)
+        Report.Load(reportPaths & reportFileName)
     End Sub
 
     Public Overloads Sub SetPrintOption(printJobName As String)
@@ -80,5 +89,43 @@ Public Class ReportPrinter
     Public Sub PrintReport(Optional copies As Int16 = 1, Optional collate As Boolean = False, Optional startPage As Int16 = 0, Optional endPage As Int16 = 0)
         Report.PrintToPrinter(copies, collate, startPage, endPage)
     End Sub
+
+
+    'Private Sub ViewReport(reportFileName As String, reportTitle As String, cCulture As CultureInfo, ParamArray args() As Object)
+    '    Dim cForm As Object
+
+
+    '    cForm = New ReportFormNew(reportFileName, reportTitle, cCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo", cboSupplierIdNo.Text, "DisplayName")
+    '    cForm.Show()
+
+
+    'Public Sub ViewReport(ByVal fileName As String, ByVal reportTitle As String, formCulture As CultureInfo, ByVal ParamArray args() As Object)
+
+
+    '    GetReportProperties()
+
+    '    Dim language As String
+    '    Dim establishmentName As String
+    '    Presenter = New ReportPresenter(Me)
+    '    language = Strings.Left(formCulture.Name, formCulture.Name.IndexOf("-", StringComparison.Ordinal))
+    '    If language <> "ar" Then
+    '        establishmentName = Presenter.GetRecordField("Establishment", "EstablishmentName")
+    '    Else
+    '        establishmentName = Presenter.GetRecordField("Establishment", "EstablishmentNameAra")
+    '    End If
+
+    '    For i = 0 To args.Length - 1 Step 2
+    '        Dim value As Object = args(i)
+    '        Report.SetParameterValue(args(i + 1).ToString(), ConvertObjectToType(value))
+    '    Next
+    '    Report.SetParameterValue("ReportTitle", reportTitle)
+    '    Report.SetParameterValue("EstablishmentName", establishmentName)
+    '    Report.SetParameterValue("Language", language)
+    '    Report.DataSourceConnections.Clear()
+    '    ProcessReport()
+
+    'End Sub
+
+    Public Property MainTableName As String
 
 End Class

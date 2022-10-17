@@ -1,5 +1,6 @@
 ﻿Imports AATM.Common.Models
 Imports AATM.Common.ServiceLayer
+Imports AATM.Libraries.CrystalReportsHelper
 Imports CrystalReportsHelper
 
 Namespace PresentationLayer.Presenters
@@ -23,9 +24,9 @@ Namespace PresentationLayer.Presenters
             report.PrintReport()
         End Sub
 
-        Public Overloads Sub ReportPrinter(databaseConnectionName As String, reportName As String, printJobName As String,
+        Public Overloads Sub ReportPrinter(reportName As String, printJobName As String, databaseConnectionName As String,
                                            Optional copies As Int16 = 1, Optional collate As Boolean = False, Optional startPage As Int16 = 0, Optional endPage As Int16 = 0)
-            Dim report As New ReportPrinter(databaseConnectionName, reportName, printJobName)
+            Dim report As New ReportPrinter(reportName, printJobName, databaseConnectionName)
             report.PrintReport(copies, collate, startPage, endPage)
         End Sub
 
