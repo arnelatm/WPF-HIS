@@ -73,6 +73,8 @@ Namespace PresentationLayer.Views.Forms
             End If
             SetupMapper()
             Presenter = New UserPresenter(Of UserModel)(Me)
+            GlobalVariables.EstablishmentName = Presenter.EstablishmentName
+            GlobalVariables.EstablishmentNameAra = Presenter.EstablishmentNameAra
         End Sub
 
         Public Event FormCultureChanged()
@@ -1068,13 +1070,13 @@ Namespace PresentationLayer.Views.Forms
 
         Private Property PrintJobView As IPrintJobView
 
-        Private Sub PrintReport(databaseConnectionName As String, reportName As String, jobName As String)
+        Private Sub PrintReport(reportName As String, jobName As String, databaseConnectionName As String)
             Dim pjPresenter As New PrintJobPresenter()
-            pjPresenter.PrintReport(databaseConnectionName, reportName, jobName)
+            pjPresenter.PrintReport(reportName, jobName, databaseConnectionName)
         End Sub
 
         Private Sub PharmacyBarcodePrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPharmacyBarcodePrinting.Click
-            PrintReport($"IGROUP", "BarcodePharmacy.Rpt", "PhItemBarCode")
+            PrintReport("BarcodePharmacy.Rpt", "PhItemBarCode", $"IGROUP")
         End Sub
 
     End Class

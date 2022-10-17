@@ -173,6 +173,10 @@
       <Project>{F991561A-78F8-487C-A873-E6436B41D801}</Project>
       <Name>CBaseControlsLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GlobalFuncNSub\GlobalFuncNSub.vbproj">
+      <Project>{B56FDCD3-8B48-4859-983B-07FFA242673D}</Project>
+      <Name>GlobalFuncNSub</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

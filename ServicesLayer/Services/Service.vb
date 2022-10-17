@@ -380,7 +380,6 @@ Namespace Services
             Return Not nCount > 0
         End Function
 
-
         Public Function DelUpdateTvp(dtTable As DataTable, ByVal groupKey As Integer) As Integer Implements IService.DelUpdateTvp
             Return DataDao.DelUpdateTvp(dtTable, groupKey)
         End Function
@@ -536,7 +535,7 @@ Namespace Services
             Return DataDao.GetRecordFieldWith2Key(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2, returnFieldName)
         End Function
 
-        Public Function GetRecordFieldWith2KeyG(Of T1, T2, T3)(searchValue1 As T1, searchValue2 As T2, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As T3 Implements IService.GetRecordFieldWith2KeyG
+        Public Function GetRecordFieldWith2KeyG(Of T1, T2, T3)(searchValue1 As T1, searchValue2 As T2, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As T3 Implements IService.GetRecordFieldWith2Keyg
             Return DataDao.GetRecordFieldWith2KeyG(Of T1, T2, T3)(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2, returnFieldName)
         End Function
 
@@ -579,8 +578,6 @@ Namespace Services
         Public Function HasRecordChanged(idNo As Int32, tableName As String, timeStampedValue As Object, Optional ByVal timeStampField As String = "DateTimeStamp") As Boolean Implements IService.HasRecordChanged
             Return DataDao.HasRecordChanged(idNo, tableName, timeStampedValue, timeStampField)
         End Function
-
-
 
         'Private ReadOnly _hasher As New SHA1CryptoServiceProvider()
 
@@ -685,11 +682,9 @@ Namespace Services
             Return DataDao.GetRecordFieldsFiltered(tableName, fieldList, filter)
         End Function
 
-
         Public Sub SaveConnectionString()
             DataDao.SaveConnectionString()
         End Sub
-
 
         Public Sub RestoreConnectionString()
             DataDao.RestoreConnectionString()
@@ -700,7 +695,7 @@ Namespace Services
         End Sub
 
         Public Function GetParametrized(Of TM As New)(parameter As Object, Optional sortOrder As String = "")
-            Dim modelOfPresenter As New TM 
+            Dim modelOfPresenter As New TM
             Dim record = DataDao.GetParametrized(parameter, sortOrder)
             If record IsNot Nothing Then
                 GlobalVariables.Mapper.Map(record, modelOfPresenter)
@@ -731,11 +726,10 @@ Namespace Services
         Public Function InitializeSecurityObject() As Integer Implements IService.InitializeSecurityObject
             Return BaseDao.InitializeSecurityObject()
         End Function
-                
+
         Public Function GetControlSecurityIdNo(searchValue As String, Optional menu As Boolean = False) As String Implements IService.GetControlSecurityIdNo
             Return BaseDao.GetControlSecurityIdNo(searchValue, menu)
         End Function
-
 
 #End Region
 
