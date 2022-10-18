@@ -6,7 +6,6 @@ Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Common
-Imports AATM.Common.Models
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.PresentationLayer.Views.Forms
@@ -20,7 +19,6 @@ Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views.Interfaces
 Imports AutoMapper
-Imports CrystalReportsHelper
 
 Namespace PresentationLayer.Views.Forms
 
@@ -1070,9 +1068,9 @@ Namespace PresentationLayer.Views.Forms
 
         Private Property PrintJobView As IPrintJobView
 
-        Private Sub PrintReport(reportName As String, jobName As String, databaseConnectionName As String)
+        Private Sub PrintReport(reportFileName As String, jobName As String, databaseConnectionName As String)
             Dim pjPresenter As New PrintJobPresenter()
-            pjPresenter.PrintReport(reportName, jobName, databaseConnectionName)
+            pjPresenter.PrintReport(reportFileName, jobName, databaseConnectionName)
         End Sub
 
         Private Sub PharmacyBarcodePrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPharmacyBarcodePrinting.Click

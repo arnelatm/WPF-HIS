@@ -1,6 +1,8 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Common.BusinessLayer
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Forms
 Imports AATM.PresentationLayer.Views
 
@@ -21,11 +23,23 @@ Namespace PresentationLayer.Presenters
             'UserIsSupervisor = IsUserASupervisor()
         End Sub
 
-        Public Sub ViewReport(reportFileName As String, reportTitle As String, cFormCulture As CultureInfo, ParamArray args() As Object)
+        Public Function MakeCrViewer(reportFileName As String, reportTitle As String, cFormCulture As CultureInfo, ParamArray args() As Object) As CrViewer
             Dim cForm As New CrViewer(reportFileName, reportTitle, cFormCulture, args)
-            cForm.SetDb()
-            cForm.SetPrintJob("A4")
+            Return cForm
+        End Function
+
+        Public Sub ShowReport(cForm As CrViewer, printJob As String, dbConnectionName As String)
+            With cForm.Report
+                .PrintJobName = printJob
+                .DataBaseConnectionName = dbConnectionName
+            End With
+            Dim pjPresenter As New PrintJobPresenter()
+            pjPresenter.SetPrintJob()
             cForm.Show()
+        End Sub
+
+        Public Sub ShowReport(crViewerForm As Object)
+            crViewerForm.Show()
         End Sub
 
     End Class

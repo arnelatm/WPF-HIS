@@ -1,7 +1,5 @@
 ﻿Imports System.ComponentModel
-Imports System.Drawing
-Imports System.Windows.Forms
-Imports AATM.LIBRARIES.CBaseControlsLibrary
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports CrystalDecisions.Windows.Forms
 Imports Microsoft.VisualBasic.CompilerServices
 
@@ -40,8 +38,7 @@ Partial Class CrViewer
         Me.btnOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btnOk.BackColor = System.Drawing.Color.Transparent
         Me.btnOk.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.btnOk.DesignerSelected = True
-        Me.btnOk.DisplayOnly = False
+        Me.btnOk.DesignerSelected = False
         Me.btnOk.ImageIndex = 0
         Me.btnOk.Location = New System.Drawing.Point(106, 187)
         Me.btnOk.Name = "btnOk"
@@ -58,7 +55,6 @@ Partial Class CrViewer
         Me.btnCancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnCancel.DesignerSelected = False
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.DisplayOnly = False
         Me.btnCancel.ImageIndex = 0
         Me.btnCancel.Location = New System.Drawing.Point(187, 187)
         Me.btnCancel.Name = "btnCancel"
@@ -90,7 +86,6 @@ Partial Class CrViewer
         Me.btnQuit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.btnQuit.DesignerSelected = False
         Me.btnQuit.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnQuit.DisplayOnly = False
         Me.btnQuit.Image = CType(resources.GetObject("btnQuit.Image"), System.Drawing.Image)
         Me.btnQuit.ImageIndex = 0
         Me.btnQuit.Location = New System.Drawing.Point(353, 0)
