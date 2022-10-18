@@ -1,7 +1,9 @@
 ﻿Imports System.Configuration
+Imports System.Drawing.Printing
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 Imports CrystalDecisions.Shared
+Imports PaperSize = CrystalDecisions.Shared.PaperSize
 
 Public Class ReportPrinter
     Private Const DefaultConnection As String = "ISPDATA"
@@ -14,7 +16,6 @@ Public Class ReportPrinter
     Private _database As String
 
     Public Sub New()
-
     End Sub
 
     Public Sub New(pPrintJobName As String, pReportFileName As String, Optional pDataBaseConnectionName As String = DefaultConnection)
@@ -96,19 +97,43 @@ Public Class ReportPrinter
     End Sub
 
     Public Overloads Sub SetPrintOption(printerName As String, paperSize As Int16?, paperOrientation As Int16?, paperSource As Int16?)
-        Dim computerName = System.Windows.Forms.SystemInformation.ComputerName
         If printerName IsNot Nothing Then
-            _report.PrintOptions.NoPrinter = False
-            _report.PrintOptions.PrinterName = printerName
+            Dim dPrinterName As String = _report.PrintOptions.PrinterName
+            Dim noPrinter As Boolean = _report.PrintOptions.NoPrinter
+            Try
+                _report.PrintOptions.NoPrinter = False
+                _report.PrintOptions.PrinterName = printerName
+            Catch ex As Exception
+                MessageTimeOut("The Printer <" & printerName & "> doesn't exist on this system, using Default Printer.", "Invalid Printer Setup", 5)
+                _report.PrintOptions.NoPrinter = noPrinter
+                _report.PrintOptions.PrinterName = dPrinterName
+            End Try
         End If
         If paperSize IsNot Nothing Then
-            _report.PrintOptions.PaperSize = paperSize
+            Dim dPaperSize As Int32
+            paperSize = _report.PrintOptions.PaperSize
+            Try
+                _report.PrintOptions.PaperSize = paperSize
+            Catch ex As Exception
+                _report.PrintOptions.PaperSize = dPaperSize
+            End Try
         End If
         If paperOrientation IsNot Nothing Then
-            _report.PrintOptions.PaperOrientation = paperOrientation
+            Dim dPaperOrientation As Int16 = _report.PrintOptions.PaperOrientation
+            Try
+                _report.PrintOptions.PaperOrientation = paperOrientation
+            Catch ex As Exception
+                _report.PrintOptions.PaperOrientation = dPaperOrientation
+            End Try
         End If
         If paperSource IsNot Nothing Then
-            _report.PrintOptions.PaperSource = paperSource
+            Dim dPaperSource As Int16
+            dPaperSource = _report.PrintOptions.PaperSource
+            Try
+                _report.PrintOptions.PaperSource = paperSource
+            Catch ex As Exception
+                _report.PrintOptions.PaperSource = dPaperSource
+            End Try
         End If
     End Sub
 
@@ -132,38 +157,30 @@ Public Class ReportPrinter
         Return _report
     End Function
 
-    'Private Sub ViewReport(reportFileName As String, reportTitle As String, cCulture As CultureInfo, ParamArray args() As Object)
-    '    Dim cForm As Object
 
-    '    cForm = New ReportFormNew(reportFileName, reportTitle, cCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo", cboSupplierIdNo.Text, "DisplayName")
-    '    cForm.Show()
+    Public Function GetInstalledPrinters()
+        Dim installedPrinters As New Collection
+        For Each Printer In PrinterSettings.InstalledPrinters
+            installedPrinters.Add(Printer)
+        Next
+        Return installedPrinters
+    End Function
 
-    'Public Sub ViewReport(ByVal fileName As String, ByVal reportTitle As String, formCulture As CultureInfo, ByVal ParamArray args() As Object)
+    Public Function GetPrinterPaperSources()
+        Dim paperSources As New Collection
+        Dim printDoc As New PrintDocument
+        Dim pkSource As Drawing.Printing.PaperSource
+        For i = 0 To printDoc.PrinterSettings.PaperSources.Count - 1
+            pkSource = printDoc.PrinterSettings.PaperSources.Item(i)
+            paperSources.Add(pkSource)
+        Next
+        Return paperSources
+    End Function
 
-    '    GetReportProperties()
-
-    '    Dim language As String
-    '    Dim establishmentName As String
-    '    Presenter = New ReportPresenter(Me)
-    '    language = Strings.Left(formCulture.Name, formCulture.Name.IndexOf("-", StringComparison.Ordinal))
-    '    If language <> "ar" Then
-    '        establishmentName = Presenter.GetRecordField("Establishment", "EstablishmentName")
-    '    Else
-    '        establishmentName = Presenter.GetRecordField("Establishment", "EstablishmentNameAra")
-    '    End If
-
-    '    For i = 0 To args.Length - 1 Step 2
-    '        Dim value As Object = args(i)
-    '        _report.SetParameterValue(args(i + 1).ToString(), ConvertObjectToType(value))
-    '    Next
-    '    _report.SetParameterValue("ReportTitle", reportTitle)
-    '    _report.SetParameterValue("EstablishmentName", establishmentName)
-    '    _report.SetParameterValue("Language", language)
-    '    _report.DataSourceConnections.Clear()
-    '    ProcessReport()
-
-    'End Sub
-
-    Public Property MainTableName As String
+    Public Function MessageTimeOut(sMessage As String, sTitle As String, iSeconds As Integer) As Boolean
+        Dim Shell = CreateObject("WScript.Shell")
+        Shell.Run("mshta.exe vbscript:close(CreateObject(""WScript.shell"").Popup(""" & sMessage & """," & iSeconds & ",""" & sTitle & """))")
+        MessageTimeOut = True
+    End Function
 
 End Class

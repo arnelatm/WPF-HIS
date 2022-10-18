@@ -1,6 +1,8 @@
-﻿Imports AATM.Common.Models
+﻿Imports System.Drawing.Printing
+Imports AATM.Common.Models
 Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries.CrystalReportsHelper
+Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Presenters
 
@@ -13,45 +15,44 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub PrintReport(reportName As String, printJobName As String, databaseConnectionName As String)
-            'Dim computerName As String = Environment.MachineName
-            'Dim pjModel As New PrintJobModel
-            'pjModel.ComputerName = Environment.MachineName
-            'Dim idNo As Int32 = _service.GetRecordFieldWith2KeyG(Of String, String, Int32)(computerName, printJobName, "PrintJob", "ComputerName", "PrintJobName", "IdNo")
-            'pjModel = _service.GetRecordByIdNo(Of PrintJobModel)(idNo)
-            'Dim report As New ReportPrinter(databaseConnectionName, reportName, printJobName)
-            'report.SetPrintOption(pjModel.PrinterName, pjModel.PaperSize, pjModel.PaperOrientation, pjModel.PaperSource)
-            'report.PrintReport()
             SetPrintOption(True, reportName, printJobName, databaseConnectionName)
         End Sub
 
-        Private Sub SetPrintOption(showViewer As Boolean, reportName As String, printJobName As String, databaseConnectionName As String)
+        Public Sub ViewReport(viewer As CrViewer, printJobName As String, databaseConnectionName As String)
+            SetPrintJob(viewer, printJobName, databaseConnectionName)
+        End Sub
+
+        Public Sub SetPrintJob(viewer As CrViewer, printJobName As String, databaseConnectionName As String)
             Dim computerName As String = Environment.MachineName
             Dim pjModel As New PrintJobModel
             pjModel.ComputerName = Environment.MachineName
             Dim idNo As Int32 = _service.GetRecordFieldWith2KeyG(Of String, String, Int32)(computerName, printJobName, "PrintJob", "ComputerName", "PrintJobName", "IdNo")
             pjModel = _service.GetRecordByIdNo(Of PrintJobModel)(idNo)
-            SetPrintJob(showViewer, reportName, printJobName, databaseConnectionName, pjModel)
+            viewer.Report.SetPrintOption(pjModel.PrinterName, pjModel.PaperSize, pjModel.PaperOrientation, pjModel.PaperSource)
+        End Sub
+
+        Private Sub SetPrintOption(showViewer As Boolean, reportFileName As String, printJobName As String, databaseConnectionName As String)
+            Dim computerName As String = Environment.MachineName
+            Dim pjModel As New PrintJobModel
+            pjModel.ComputerName = Environment.MachineName
+            Dim idNo As Int32 = _service.GetRecordFieldWith2KeyG(Of String, String, Int32)(computerName, printJobName, "PrintJob", "ComputerName", "PrintJobName", "IdNo")
+            pjModel = _service.GetRecordByIdNo(Of PrintJobModel)(idNo)
+            Dim report As New ReportPrinter(databaseConnectionName, reportFileName, printJobName)
+            report.SetPrintOption(pjModel.PrinterName, pjModel.PaperSize, pjModel.PaperOrientation, pjModel.PaperSource)
             If showViewer Then
-
-            End If
-        End Sub
-
-        Public Sub SetPrintJob(report As ReportPrinter, reportName As String, printJobName As String, databaseConnectionName As String)
-            Dim computerName As String = Environment.MachineName
-            Dim pjModel As New PrintJobModel
-            pjModel.ComputerName = Environment.MachineName
-            Dim idNo As Int32 = _service.GetRecordFieldWith2KeyG(Of String, String, Int32)(computerName, printJobName, "PrintJob", "ComputerName", "PrintJobName", "IdNo")
-            pjModel = _service.GetRecordByIdNo(Of PrintJobModel)(idNo)
-            report.SetPrintOption(pjModel.PrinterName, pjModel.PaperSize, pjModel.PaperOrientation, pjModel.PaperSource)
-        End Sub
-
-        Private Shared Sub SetPrinterOption(showViewer As Boolean, reportName As String, printJobName As String, databaseConnectionName As String, pjModel As PrintJobModel)
-            Dim report As New ReportPrinter(databaseConnectionName, reportName, printJobName)
-            report.SetPrintOption(pjModel.PrinterName, pjModel.PaperSize, pjModel.PaperOrientation, pjModel.PaperSource)
-            If Not showViewer Then
                 report.PrintReport()
             End If
         End Sub
+
+
+
+        'Private Shared Sub SetPrinterOption(showViewer As Boolean, reportName As String, printJobName As String, databaseConnectionName As String, pjModel As PrintJobModel)
+        '    Dim report As New ReportPrinter(databaseConnectionName, reportName, printJobName)
+        '    report.SetPrintOption(pjModel.PrinterName, pjModel.PaperSize, pjModel.PaperOrientation, pjModel.PaperSource)
+        '    If Not showViewer Then
+        '        report.PrintReport()
+        '    End If
+        'End Sub
 
         Public Overloads Sub ReportPrinter(reportName As String, printJobName As String, databaseConnectionName As String,
                                            Optional copies As Int16 = 1, Optional collate As Boolean = False, Optional startPage As Int16 = 0, Optional endPage As Int16 = 0)
@@ -62,6 +63,7 @@ Namespace PresentationLayer.Presenters
         Public Function GetService()
             Return _service
         End Function
+
 
     End Class
 
