@@ -21,10 +21,10 @@ Public Class ReportPrinter
         PrintJobName = pPrintJobName
         ReportFileName = pReportFileName
         DataBaseConnectionName = pDataBaseConnectionName
-        SetReportProperties()
+        SetReportProperties(pReportFileName)
     End Sub
 
-    Public Sub SetReportProperties()
+    Public Sub SetReportProperties(pReportFileName As String)
         Select Case DataBaseConnectionName
             Case Nothing
                 UseDefaultConnection()
@@ -37,7 +37,7 @@ Public Class ReportPrinter
                 Debugger.Break()
                 Return
         End Select
-        _report.Load(_reportPath & ReportFileName)
+        _report.Load(_reportPath & pReportFileName)
         If _report.DataSourceConnections.Count > 0 Then
             _report.DataSourceConnections(0).SetConnection(_server, _database, _uid, _pwd)
         End If

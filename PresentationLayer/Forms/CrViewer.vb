@@ -3,6 +3,7 @@ Imports System.Globalization
 Imports System.Windows.Forms
 Imports AATM.Libraries.CrystalReportsHelper
 Imports AATM.Libraries.GlobalFuncNSub
+Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.ReportAppServer.DataDefModel
 
 Public Class CrViewer
@@ -20,46 +21,50 @@ Public Class CrViewer
 
     End Sub
 
-    Public Sub New(ByVal fileName As String, ByVal reportTitle As String, formCulture As CultureInfo, ByVal ParamArray args() As Object)
+    'Public Sub New(ByVal fileName As String, ByVal reportTitle As String, formCulture As CultureInfo, ByVal ParamArray args() As Object)
+    Public Sub New(reportFileName As String, reportTitle As String, formCulture As CultureInfo, ParamArray args() As Object)
 
         ' This call is required by the designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        Text = fileName
-        ReportFileName = fileName
-        Report.ReportFileName = ReportFileName
-        GetReportProperties()
-        Dim language As String
-        Dim establishmentName As String
+        Text = reportTitle
+        Report.SetReportProperties(reportFileName)
+        Report.ReportFileName = reportFileName
+        SetParameters(reportTitle, formCulture, args)
+        Report.ClearDataSourceConnections()
+        SetupCrViewer()
 
+    End Sub
+
+    Private Sub SetParameters(reportTitle As String, formCulture As CultureInfo, args As Object())
+        Dim language As String
         language = Microsoft.VisualBasic.Strings.Left(formCulture.Name, formCulture.Name.IndexOf("-", StringComparison.Ordinal))
+        Dim establishmentName As String = GetEstablishmentName(formCulture, language)
+        Report.SetParameterValue(args)
+        Report.SetParameterValue(reportTitle, "ReportTitle")
+        Report.SetParameterValue(establishmentName, "EstablishmentName")
+        Report.SetParameterValue(language, "Language")
+    End Sub
+
+    Private Function GetEstablishmentName(cFormCulture As CultureInfo, language As String) As String
+        Dim establishmentName As String
+        language = Microsoft.VisualBasic.Strings.Left(cFormCulture.Name, cFormCulture.Name.IndexOf("-", StringComparison.Ordinal))
         If language <> "ar" Then
             establishmentName = GlobalVariables.EstablishmentName
         Else
             establishmentName = GlobalVariables.EstablishmentNameAra
         End If
+        Return establishmentName
+    End Function
 
-        Report.SetParameterValue(args)
-        Report.SetParameterValue(reportTitle, "ReportTitle")
-        Report.SetParameterValue(establishmentName, "EstablishmentName")
-        Report.SetParameterValue(language, "Language")
-        Report.ClearDataSourceConnections()
-        ProcessReport()
+    'Public Property ReportFileName As String
 
-    End Sub
+    'Protected Sub SetReportProperties()
+    '    Report.SetReportProperties()
+    'End Sub
 
-    Public Shadows Sub Load()
-
-    End Sub
-
-    Public Property ReportFileName As String
-
-    Protected Sub GetReportProperties()
-        Report.SetReportProperties()
-    End Sub
-
-    Protected Sub ProcessReport()
+    Protected Sub SetupCrViewer()
         WindowState = FormWindowState.Maximized
         Dim ceCulture As CeLocale
         If Me.FormCulture.Name.ToLower().Remove(2) = "ar" Then

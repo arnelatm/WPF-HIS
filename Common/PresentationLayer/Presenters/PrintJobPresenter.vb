@@ -12,25 +12,45 @@ Namespace PresentationLayer.Presenters
             _service = New CommonService("PrintJob")
         End Sub
 
-        Public Overloads Sub PrintReport(reportName As String, printJobName As String, databaseConnectionName As String)
-            Dim computerName As String = Environment.MachineName
-            Dim pjModel As New PrintJobModel
-            pjModel.ComputerName = Environment.MachineName
-            Dim idNo As Int32 = _service.GetRecordFieldWith2KeyG(Of String, String, Int32)(computerName, printJobName, "PrintJob", "ComputerName", "PrintJobName", "IdNo")
-            pjModel = _service.GetRecordByIdNo(Of PrintJobModel)(idNo)
-            Dim report As New ReportPrinter(databaseConnectionName, reportName, printJobName)
-            report.SetPrintOption(pjModel.PrinterName, pjModel.PaperSize, pjModel.PaperOrientation, pjModel.PaperSource)
-            report.PrintReport()
+        Public Sub PrintReport(reportName As String, printJobName As String, databaseConnectionName As String)
+            'Dim computerName As String = Environment.MachineName
+            'Dim pjModel As New PrintJobModel
+            'pjModel.ComputerName = Environment.MachineName
+            'Dim idNo As Int32 = _service.GetRecordFieldWith2KeyG(Of String, String, Int32)(computerName, printJobName, "PrintJob", "ComputerName", "PrintJobName", "IdNo")
+            'pjModel = _service.GetRecordByIdNo(Of PrintJobModel)(idNo)
+            'Dim report As New ReportPrinter(databaseConnectionName, reportName, printJobName)
+            'report.SetPrintOption(pjModel.PrinterName, pjModel.PaperSize, pjModel.PaperOrientation, pjModel.PaperSource)
+            'report.PrintReport()
+            SetPrintOption(True, reportName, printJobName, databaseConnectionName)
         End Sub
 
-        Public Overloads Sub ViewReport(databaseConnectionName As String, reportName As String, printJobName As String)
+        Private Sub SetPrintOption(showViewer As Boolean, reportName As String, printJobName As String, databaseConnectionName As String)
             Dim computerName As String = Environment.MachineName
             Dim pjModel As New PrintJobModel
             pjModel.ComputerName = Environment.MachineName
             Dim idNo As Int32 = _service.GetRecordFieldWith2KeyG(Of String, String, Int32)(computerName, printJobName, "PrintJob", "ComputerName", "PrintJobName", "IdNo")
             pjModel = _service.GetRecordByIdNo(Of PrintJobModel)(idNo)
+            SetPrintJob(showViewer, reportName, printJobName, databaseConnectionName, pjModel)
+            If showViewer Then
+
+            End If
+        End Sub
+
+        Public Sub SetPrintJob(report As ReportPrinter, reportName As String, printJobName As String, databaseConnectionName As String)
+            Dim computerName As String = Environment.MachineName
+            Dim pjModel As New PrintJobModel
+            pjModel.ComputerName = Environment.MachineName
+            Dim idNo As Int32 = _service.GetRecordFieldWith2KeyG(Of String, String, Int32)(computerName, printJobName, "PrintJob", "ComputerName", "PrintJobName", "IdNo")
+            pjModel = _service.GetRecordByIdNo(Of PrintJobModel)(idNo)
+            report.SetPrintOption(pjModel.PrinterName, pjModel.PaperSize, pjModel.PaperOrientation, pjModel.PaperSource)
+        End Sub
+
+        Private Shared Sub SetPrinterOption(showViewer As Boolean, reportName As String, printJobName As String, databaseConnectionName As String, pjModel As PrintJobModel)
             Dim report As New ReportPrinter(databaseConnectionName, reportName, printJobName)
             report.SetPrintOption(pjModel.PrinterName, pjModel.PaperSize, pjModel.PaperOrientation, pjModel.PaperSource)
+            If Not showViewer Then
+                report.PrintReport()
+            End If
         End Sub
 
         Public Overloads Sub ReportPrinter(reportName As String, printJobName As String, databaseConnectionName As String,
