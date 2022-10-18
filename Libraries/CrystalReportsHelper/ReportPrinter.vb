@@ -2,6 +2,7 @@
 Imports System.Drawing.Printing
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.Libraries.MessagingLibrary.Messaging
 Imports CrystalDecisions.Shared
 Imports PaperSize = CrystalDecisions.Shared.PaperSize
 
@@ -141,7 +142,7 @@ Public Class ReportPrinter
         _report.PrintToPrinter(copies, collate, startPage, endPage)
     End Sub
 
-    Public Sub SetParameterValue(ParamArray args() As Object)
+    Public Sub SetParameterValue(args As Array)
         For i = 0 To args.Length - 1 Step 2
             Dim value As Object = GlobalFunctions.ConvertObjectToType(args(i))
             Dim name As String = args(i + 1).ToString()
@@ -175,12 +176,6 @@ Public Class ReportPrinter
             paperSources.Add(pkSource)
         Next
         Return paperSources
-    End Function
-
-    Public Function MessageTimeOut(sMessage As String, sTitle As String, iSeconds As Integer) As Boolean
-        Dim Shell = CreateObject("WScript.Shell")
-        Shell.Run("mshta.exe vbscript:close(CreateObject(""WScript.shell"").Popup(""" & sMessage & """," & iSeconds & ",""" & sTitle & """))")
-        MessageTimeOut = True
     End Function
 
 End Class

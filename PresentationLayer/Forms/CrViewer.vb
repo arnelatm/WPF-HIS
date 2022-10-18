@@ -22,7 +22,7 @@ Public Class CrViewer
     End Sub
 
     'Public Sub New(ByVal fileName As String, ByVal reportTitle As String, formCulture As CultureInfo, ByVal ParamArray args() As Object)
-    Public Sub New(reportFileName As String, reportTitle As String, formCulture As CultureInfo, ParamArray args() As Object)
+    Public Sub New(reportFileName As String, reportTitle As String, formCulture As CultureInfo, args As Array)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -37,14 +37,14 @@ Public Class CrViewer
 
     End Sub
 
-    Private Sub SetParameters(reportTitle As String, formCulture As CultureInfo, args As Object())
+    Private Sub SetParameters(reportTitle As String, formCulture As CultureInfo, args As Object)
         Dim language As String
         language = Microsoft.VisualBasic.Strings.Left(formCulture.Name, formCulture.Name.IndexOf("-", StringComparison.Ordinal))
         Dim establishmentName As String = GetEstablishmentName(formCulture, language)
         Report.SetParameterValue(args)
-        Report.SetParameterValue(reportTitle, "ReportTitle")
-        Report.SetParameterValue(establishmentName, "EstablishmentName")
-        Report.SetParameterValue(language, "Language")
+        Report.SetParameterValue({reportTitle, "ReportTitle"})
+        Report.SetParameterValue({establishmentName, "EstablishmentName"})
+        Report.SetParameterValue({language, "Language"})
     End Sub
 
     Private Function GetEstablishmentName(cFormCulture As CultureInfo, language As String) As String

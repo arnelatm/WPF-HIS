@@ -177,6 +177,10 @@
       <Project>{B56FDCD3-8B48-4859-983B-07FFA242673D}</Project>
       <Name>GlobalFuncNSub</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MessagingLibrary\MessagingLibrary.vbproj">
+      <Project>{84437202-3e38-4f75-b8c1-4125852fc4ff}</Project>
+      <Name>MessagingLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -45,12 +45,13 @@ Namespace PresentationLayer.Views.Forms.Reports
                 Else
                     fileName = "Statement of Accounts Payable.Rpt"
                 End If
-                Dim args As Object = {dtpBeginningDate.Value, "BeginningDate",
+                Dim args As Array = {dtpBeginningDate.Value, "BeginningDate",
                                       dtpEndingDate.Value, "EndingDate",
                                       cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo",
                                       cboSupplierIdNo.Text, "DisplayName"}
-                Dim crViewerForm As CrViewer = Presenter.MakeCrViewer(fileName, reportTitle, FormCulture, args)
-                Presenter.ShowReport(crViewerForm, "A4", $"ISPDATA")
+
+                Ea.PublishEvent(New ShowReportRequested(fileName, reportTitle, FormCulture, "A4", $"ISPDATA", args))
+                'Presenter.ShowReport(fileName, reportTitle, FormCulture, "A4", $"ISPDATA", args)
             Else
                 Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
             End If
