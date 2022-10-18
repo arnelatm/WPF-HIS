@@ -20,7 +20,6 @@ Namespace PresentationLayer.Presenters
             TableName = "Account"
             SortOrderKey = "IdNo"
             WithTreeView = False
-            'UserIsSupervisor = IsUserASupervisor()
         End Sub
 
         Public Function MakeCrViewer(reportFileName As String, reportTitle As String, cFormCulture As CultureInfo, ParamArray args() As Object) As CrViewer
@@ -28,13 +27,9 @@ Namespace PresentationLayer.Presenters
             Return cForm
         End Function
 
-        Public Sub ShowReport(cForm As CrViewer, printJob As String, dbConnectionName As String)
-            With cForm.Report
-                .PrintJobName = printJob
-                .DataBaseConnectionName = dbConnectionName
-            End With
+        Public Sub ShowReport(cForm As CrViewer, printJobName As String, dbConnectionName As String)
             Dim pjPresenter As New PrintJobPresenter()
-            pjPresenter.SetPrintJob()
+            pjPresenter.ViewReport(cForm, printJobName, dbConnectionName)
             cForm.Show()
         End Sub
 
@@ -46,8 +41,6 @@ Namespace PresentationLayer.Presenters
 
     Public Class DateRangeCompanyPresenter
         Inherits AccountsPresenter(Of IView, AccountModel)
-
-        'Public UserIsSupervisor As Boolean
 
         Public Sub New(view As IView)
             MyBase.New(view)
