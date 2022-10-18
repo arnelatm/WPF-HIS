@@ -19,10 +19,6 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub ViewReport(viewer As CrViewer, printJobName As String, databaseConnectionName As String)
-            SetPrintJob(viewer, printJobName, databaseConnectionName)
-        End Sub
-
-        Public Sub SetPrintJob(viewer As CrViewer, printJobName As String, databaseConnectionName As String)
             Dim computerName As String = Environment.MachineName
             Dim pjModel As New PrintJobModel
             pjModel.ComputerName = Environment.MachineName
@@ -43,16 +39,6 @@ Namespace PresentationLayer.Presenters
                 report.PrintReport()
             End If
         End Sub
-
-
-
-        'Private Shared Sub SetPrinterOption(showViewer As Boolean, reportName As String, printJobName As String, databaseConnectionName As String, pjModel As PrintJobModel)
-        '    Dim report As New ReportPrinter(databaseConnectionName, reportName, printJobName)
-        '    report.SetPrintOption(pjModel.PrinterName, pjModel.PaperSize, pjModel.PaperOrientation, pjModel.PaperSource)
-        '    If Not showViewer Then
-        '        report.PrintReport()
-        '    End If
-        'End Sub
 
         Public Overloads Sub ReportPrinter(reportName As String, printJobName As String, databaseConnectionName As String,
                                            Optional copies As Int16 = 1, Optional collate As Boolean = False, Optional startPage As Int16 = 0, Optional endPage As Int16 = 0)

@@ -285,6 +285,17 @@ Public Class Messaging
         Return Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName, "beginningDate", bDate, "endingDate", eDate})
     End Function
 
+    'Public Function MessageTimeOut(sMessage As String, sTitle As String, iSeconds As Integer) As Boolean
+    '    Dim Shell = CreateObject("WScript.Shell")
+    '    Shell.Run("mshta.exe vbscript:close(CreateObject(""WScript.shell"").Popup(""" & sMessage & """," & iSeconds & ",""" & sTitle & """))")
+    '    MessageTimeOut = True
+    'End Function
+
+    Public Shared Sub MessageTimeOut(sMessage As String, sTitle As String, iSeconds As Integer)
+        Dim Shell = CreateObject("WScript.Shell")
+        Shell.Run("mshta.exe vbscript:close(CreateObject(""WScript.shell"").Popup(""" & sMessage & """," & iSeconds & ",""" & sTitle & """))")
+    End Sub
+
     'Public Shared Function SelectPeriodCaption(ByVal originalCaption As String, ByVal FormCulture As Globalization.CultureInfo, ByVal periodCode As String)
     '    Dim curCulture = CultureInfo.CurrentCulture
     '    If periodCode = "Y" Then
