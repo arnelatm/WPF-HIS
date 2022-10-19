@@ -29,6 +29,7 @@ Namespace DataLayer.AdoNet
             Dim data As New PmrInvestigation
             data = _db.Read(sql, Make).FirstOrDefault()
             data.DoctorCode = doctorCode
+            data.DoctorName = doctorCode
             data.TransactionDate = transactionDate
             Dim params() As Object = {"@DoctorId", doctorCode, "@TransactionDate", dateString}
             sql = $"SELECT Distinct [PmrDate], [FileNo], [FileType], [PatientName], [Status], [TokenNo], [PType], [LastConsDate], [Trans_Key], [InvTime] from PmrDoctorsGenForm_View where doctorid = @DoctorId and PmrDate = @TransactionDate and not (trans_key is Null and tokenno = 0) order by tokenno desc"

@@ -10,6 +10,7 @@ Namespace AdoNet
     Public Class BaseDao
         Implements IBaseDao
 
+        Private Const ConnectionNameConstant As String = "ISPDATA"
         Private ReadOnly _db As New Db()
 
         Private _lastFindParms As Object
@@ -24,7 +25,6 @@ Namespace AdoNet
                 Return _db
             End Get
         End Property
-
 
         Public Overridable Function GetDb()
             Return _db
@@ -57,7 +57,6 @@ Namespace AdoNet
             Dim params() As Object = {"@SearchValue1", searchValue1, "@SearchValue2", searchValue2}
             Return GetDb().Scalar(sql, params).ToString()
         End Function
-
 
         'Public Function CountRecordFieldWith2KeyG(Of T1, T2, T3)(searchValue1 As T1, searchValue2 As T2, tableName As String, searchFieldName1 As String, searchFieldName2 As String) As T3 Implements IBaseDao.CountRecordFieldWith2KeyG
         '    Dim searchFieldValue1 As String = ConvertToString(Of T1)(searchValue1)
@@ -365,8 +364,6 @@ Namespace AdoNet
             End If
             Return result
         End Function
-
-
 
         Public Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object Implements IBaseDao.GetFieldWithIdNo
             Dim sql As String =
@@ -845,8 +842,6 @@ Namespace AdoNet
             Return Not nCount > 0
         End Function
 
-
-
         'Public Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) Implements IBaseDao.GetRecordFieldWithKeyG
         '    Dim sql As String =
         '            " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] " &
@@ -907,7 +902,6 @@ Namespace AdoNet
             value = GetDb().Scalar(sql, params)
             Return value
         End Function
-
 
         Public Function UpdateRecordWithKey(Of T1, T2)(tableName As String, keyFieldName As String, keyFieldValue As T1, fieldNameToReplace As String, replaceValue As T2) As Integer _
             Implements IBaseDao.UpdateRecordWithKey
@@ -1130,23 +1124,18 @@ Namespace AdoNet
             GetDb().SaveConnectionString()
         End Sub
 
-
         Public Sub RestoreConnectionString()
             GetDb().RestoreConnectionString()
         End Sub
 
-        Public Sub SetConnectionString(connectionName As String)
+        Public Sub SetConnectionString(Optional connectionName As String = ConnectionNameConstant)
             GetDb().SetConnectionString(connectionName)
         End Sub
-
-
 
         Private Shared ReadOnly MakeMasterList As Func(Of IDataReader, GenericData) = Function(reader) New GenericData() With {
             .Code = Extensions.AsString(reader("Code")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Name = Extensions.AsString(reader("Name"))}
-
-
 
         Public Function InsertRecord(tableName As String, fields As Object(), fieldTypes As Object(), ParamArray values() As Object) As Integer Implements IBaseDao.InsertRecord
             Dim fieldList As String = String.Join(",", fields)
@@ -1197,7 +1186,6 @@ Namespace AdoNet
         Public Overridable Function GetActualFieldName(fieldName As String)
             Return fieldName
         End Function
-
 
     End Class
 

@@ -99,7 +99,7 @@ Namespace PresentationLayer.Views.Forms
                     allControls = FindControlRecursive(allControls, Me)
                     GlobalVariables.IsUserLoggedIn = True
                     SecurityGroupIdNo = GlobalVariables.SecurityGroupIdNo
-                    If GlobalVariables.UserName.ToLower() = $"arnel" Then
+                    If UserIsASuperAdministrator() Then
                         GlobalSubs.ShowAndEnableMenuItems(AccountsMenu)
                         If _addSecurityObject Then
                             For Each cCtrl As Control In allControls
@@ -722,7 +722,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub RecreateSecurityObjectMenuToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemRecreateSecurityObjectMenu.Click
             Dim allControls As New List(Of Control)
             Dim nRecCount = Presenter.GetRecordCount("SecurityObject")
-            If GlobalVariables.UserName.ToLower() = $"arnel" Then
+            If UserIsASuperAdministrator() Then
                 Dim addSecurityObject As Boolean = False
                 If nRecCount <= 12 Then
                     If nRecCount = 0 Then
@@ -904,7 +904,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateMenuSecurityObjectsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUpdateMenuSecurityObjects.Click
             Dim allControls As New List(Of Control)
-            If GlobalVariables.UserName.ToLower() = $"arnel" Then
+            If UserIsASuperAdministrator() Then
                 For Each cCtrl As Control In FindControlRecursive(allControls, Me)
                     UpdateMenuSecurity(cCtrl)
                 Next
