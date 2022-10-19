@@ -20,6 +20,7 @@ Namespace PresentationLayer.Presenters
             WithTreeView = False
             AddHandler View.DoctorCodeRequested, AddressOf GetDoctorCode
             AddHandler View.GetDoctorPatientsRequested, AddressOf GetDoctorsPatients
+            AddHandler View.GetPmrDataAccessRequested, AddressOf GetPMRDataAccess
 
         End Sub
 
@@ -56,6 +57,31 @@ Namespace PresentationLayer.Presenters
             GlobalVariables.Mapper.Map(pmrPatients, View)
         End Sub
 
+        Public Sub GetPMRDataAccess(ByRef dataAccessLevel As String)
+            dataAccessLevel = ""
+            dataAccessLevel += IIf(CanUserViewSecurity("PMRPrescription"), "1", "0")
+            dataAccessLevel += IIf(CanUserViewSecurity("PMRLab"), "1", "0")
+            dataAccessLevel += IIf(CanUserViewSecurity("PMRXray"), "1", "0")
+            dataAccessLevel += IIf(CanUserViewSecurity("PMREROther"), "1", "0")
+        End Sub
+
+        Private Function CanUserViewSecurity(securityKey As String) As String
+            If UserIsASuperAdministrator() Then
+                Return True
+            End If
+            Dim securityIdNo As Int16 = GetControlSecurityIdNo(securityKey)
+            Dim controlSecurityValues As ArrayList
+            Dim viewBit As Boolean
+            If securityIdNo <> 0 Then
+                controlSecurityValues = GetUserSecurity(Convert.ToInt16(securityIdNo), GlobalVariables.SecurityGroupIdNo)
+                If controlSecurityValues.Count > 0 Then
+                    ' Visible property stored in first element of the array
+                    viewBit = controlSecurityValues(0)
+                    ' Editable property stored in second element of the array
+                End If
+            End If
+            Return viewBit
+        End Function
     End Class
 
 End Namespace
