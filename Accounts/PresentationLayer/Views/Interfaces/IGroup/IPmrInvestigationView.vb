@@ -13,7 +13,7 @@ Namespace PresentationLayer.Views.Interfaces
         Event GetDoctorPatientsRequested()
 
         Event DoctorCodeRequested(ByRef drId As String)
-
+        Event GetPmrDataAccessRequested(ByRef drId As String)
     End Interface
 
 End Namespace

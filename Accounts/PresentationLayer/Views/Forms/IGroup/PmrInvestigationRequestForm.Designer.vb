@@ -62,7 +62,7 @@
             '
             Me.btnRefresh.DesignerSelected = False
             Me.btnRefresh.ImageIndex = 0
-            Me.btnRefresh.Location = New System.Drawing.Point(690, 3)
+            Me.btnRefresh.Location = New System.Drawing.Point(687, 3)
             Me.btnRefresh.Name = "btnRefresh"
             Me.btnRefresh.OriginalImageName = Nothing
             Me.btnRefresh.SecurityKey = ""
@@ -99,8 +99,7 @@
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel2, 0, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.btnRefresh, 3, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.dtpTransactionDate, 1, 1)
-            Me.TableLayoutPanel1.Controls.Add(Me.cboDoctorName, 2, 0)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtDoctorCode, 1, 0)
+            Me.TableLayoutPanel1.Controls.Add(Me.cboDoctorName, 1, 0)
             Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
             Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -259,6 +258,7 @@
             Me.cboDoctorName.BackColor = System.Drawing.Color.White
             Me.cboDoctorName.BegFindValue = Nothing
             Me.cboDoctorName.ChangingSearchValueOnly = False
+            Me.TableLayoutPanel1.SetColumnSpan(Me.cboDoctorName, 2)
             Me.cboDoctorName.CurrentSearchTerm = ""
             Me.cboDoctorName.DataValue = Nothing
             Me.cboDoctorName.DefaultValue = Nothing
@@ -277,7 +277,7 @@
             Me.cboDoctorName.IgnoreCase = False
             Me.cboDoctorName.IntegralHeight = False
             Me.cboDoctorName.LinkedLabel = Nothing
-            Me.cboDoctorName.Location = New System.Drawing.Point(256, 1)
+            Me.cboDoctorName.Location = New System.Drawing.Point(174, 1)
             Me.cboDoctorName.Margin = New System.Windows.Forms.Padding(1)
             Me.cboDoctorName.Name = "cboDoctorName"
             Me.cboDoctorName.OldValue = 0
@@ -287,7 +287,7 @@
             Me.cboDoctorName.PreviousSearchTerm = Nothing
             Me.cboDoctorName.PropertySelector = Nothing
             Me.cboDoctorName.ReadOnlyCombo = False
-            Me.cboDoctorName.Size = New System.Drawing.Size(430, 24)
+            Me.cboDoctorName.Size = New System.Drawing.Size(509, 24)
             Me.cboDoctorName.SuggestBoxHeight = 200
             Me.cboDoctorName.SuggestListOrderRule = Nothing
             Me.cboDoctorName.TabIndex = 15
@@ -315,7 +315,7 @@
             Me.txtDoctorCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDoctorCode.ForeColor = System.Drawing.Color.Black
             Me.txtDoctorCode.LinkedLabel = Nothing
-            Me.txtDoctorCode.Location = New System.Drawing.Point(174, 1)
+            Me.txtDoctorCode.Location = New System.Drawing.Point(693, 89)
             Me.txtDoctorCode.Margin = New System.Windows.Forms.Padding(1)
             Me.txtDoctorCode.MaximumValue = Nothing
             Me.txtDoctorCode.MinimumValue = Nothing
@@ -325,6 +325,7 @@
             Me.txtDoctorCode.Size = New System.Drawing.Size(80, 23)
             Me.txtDoctorCode.TabIndex = 16
             Me.txtDoctorCode.Translatable = False
+            Me.txtDoctorCode.Visible = False
             '
             'TokenDataGridViewTextBoxColumn
             '
@@ -451,8 +452,10 @@
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
             Me.ClientSize = New System.Drawing.Size(790, 553)
             Me.Controls.Add(Me.CFlowLayout2)
+            Me.Controls.Add(Me.txtDoctorCode)
             Me.Name = "PmrInvestigationRequestForm"
             Me.Text = "PMR Request Form"
+            Me.Controls.SetChildIndex(Me.txtDoctorCode, 0)
             Me.Controls.SetChildIndex(Me.CFlowLayout2, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.CFlowLayout2.ResumeLayout(False)

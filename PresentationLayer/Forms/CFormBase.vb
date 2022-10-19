@@ -36,12 +36,7 @@ Public Class CFormBase
     Public Sub New()
         InitializeComponent()
         DoubleBuffered = True
-        If QueryOnly Or SingleData Then
-            btnSave.Visible = False
-            btnEdit.Visible = False
-            btnUndo.Visible = False
-            btnFilter.Visible = False
-        End If
+
     End Sub
 
     Delegate Sub SafeCallDelegate(ByRef controlObject As Control, textString As String)
@@ -74,17 +69,26 @@ Public Class CFormBase
                 SwitchUiLanguage(True)
             End If
         End If
-        Parent.ResumeDrawing()
-    End Sub
-
-    Public Overridable Sub UpdateViewDisplay(editMode As Boolean, addMode As Boolean, recordPositionNumber As Integer, targetIdNo As Integer, recordCount As Integer)
         If QueryOnly Or SingleData Then
             TurnOnInputs()
             btnSave.Visible = False
             btnEdit.Visible = False
             btnUndo.Visible = False
             btnFilter.Visible = False
-        Else
+            btnOpen.Visible = False
+            btnNew.Visible = False
+        End If
+        Parent.ResumeDrawing()
+    End Sub
+
+    Public Overridable Sub UpdateViewDisplay(editMode As Boolean, addMode As Boolean, recordPositionNumber As Integer, targetIdNo As Integer, recordCount As Integer)
+        If Not (QueryOnly Or SingleData) Then
+            'TurnOnInputs()
+            'btnSave.Visible = False
+            'btnEdit.Visible = False
+            'btnUndo.Visible = False
+            'btnFilter.Visible = False
+            'Else
             If addMode Or editMode Then
                 TurnOnInputs()
             Else

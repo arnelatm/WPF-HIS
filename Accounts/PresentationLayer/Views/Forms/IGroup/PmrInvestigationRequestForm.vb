@@ -1,6 +1,5 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms
@@ -9,14 +8,16 @@ Namespace PresentationLayer.Views.Forms
         Implements IPmrInvestigationView
 
         Public Event GetDoctorPatientsRequested() Implements IPmrInvestigationView.GetDoctorPatientsRequested
-
         Public Event DoctorCodeRequested(ByRef drId As String) Implements IPmrInvestigationView.DoctorCodeRequested
+        Public Event GetPmrDataAccessRequested(ByRef dataAccessCode As String) Implements IPmrInvestigationView.GetPmrDataAccessRequested
 
         Private _pmrPatientsDisplay As New List(Of PmrPatientDisplayView)
         Private _doctorId As String
+        Private _dataAccessLevel As String = ""
+
 
         Public Sub New()
-
+            'MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             SingleData = True
@@ -26,23 +27,17 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub DisplaySetup()
             dtpTransactionDate.Value = Today()
-            With DataGridViewPmrPatientDisplay
-                .DefaultCellStyle.ForeColor = Color.Black
-                .BackColor = Color.White
-                .AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke
-                Dim dgvPrintColumn As New DataGridViewImageColumn
-                .Columns.Insert(.Columns.Count, dgvPrintColumn)
-                dgvPrintColumn.Image = imgList.Images(0)
-                dgvPrintColumn.Width = 30
-                dgvPrintColumn.Name = "dgvPrintColumn"
-                dgvPrintColumn.HeaderText = Messaging.TranslateCaption("Print")
-            End With
-            'btnSave.Visible = False
-            'btnEdit.Visible = False
-            'btnUndo.Visible = False
-            'btnFilter.Visible = False
-            'btnSave.Visible = False
         End Sub
+
+        Private Function AddDgColumn(dgvColumnName As DataGridViewImageColumn, dgvName As String, caption As String) As Boolean
+            With DataGridViewPmrPatientDisplay
+                .Columns.Insert(.Columns.Count, dgvColumnName)
+                dgvColumnName.Image = imgList.Images(0)
+                dgvColumnName.Width = 35
+                dgvColumnName.Name = dgvName
+                dgvColumnName.HeaderText = Messaging.TranslateCaption(caption)
+            End With
+        End Function
 
         Private _doctorCode As String
 
@@ -122,14 +117,42 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PmrInvestigationRequestForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            RaiseEvent GetPmrDataAccessRequested(_dataAccessLevel)
+            With DataGridViewPmrPatientDisplay
+                .DefaultCellStyle.ForeColor = Color.Black
+                .BackColor = Color.White
+                .AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke
+                If Mid(_dataAccessLevel, 1, 1) = "1" Then
+                    Dim dgvPharma As New DataGridViewImageColumn
+                    AddDgColumn(dgvPharma, "dgvPharma", "Pharm")
+                End If
+                If Mid(_dataAccessLevel, 2, 1) = "1" Then
+                    Dim dgvLab As New DataGridViewImageColumn
+                    AddDgColumn(dgvLab, "dgvLab", "Lab")
+                End If
+                If Mid(_dataAccessLevel, 3, 1) = "1" Then
+                    Dim dgvXray As New DataGridViewImageColumn
+                    AddDgColumn(dgvXray, "dgvXray", "XRay")
+                End If
+                If Mid(_dataAccessLevel, 4, 1) = "1" Then
+                    Dim dgvOther As New DataGridViewImageColumn
+                    AddDgColumn(dgvOther, "dgvOther", "Other")
+                End If
+                If _dataAccessLevel = "1111" Then
+                    Dim dgvAll As New DataGridViewImageColumn
+                    AddDgColumn(dgvAll, "dgvAll", "All")
+                End If
+            End With
+
             Dim drCode As String = ""
             RaiseEvent DoctorCodeRequested(drCode)
             If drCode IsNot Nothing Then
                 DoctorCode = drCode
                 RaiseEvent GetDoctorPatientsRequested()
-                dtpTransactionDate.EditingMode = True
+                cboDoctorName.DisplayOnly = True
+                'dtpTransactionDate.EditingMode = True
             Else
-                btnEdit.PerformClick()
+                'btnEdit.PerformClick()
                 cboDoctorName.DisplayOnly = False
                 dtpTransactionDate.DisplayOnly = False
             End If
@@ -152,11 +175,25 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPmrPatientDisplay.CellClick
             With DataGridViewPmrPatientDisplay
-                If .CurrentCell IsNot Nothing And .CurrentCell.OwningColumn.Name() = $"dgvPrintColumn" Then
+                Dim whichToPrint As Int16 = 0
+                If .CurrentCell IsNot Nothing And .CurrentCell.OwningColumn.Name() = $"dgvPharma" Then
+                    whichToPrint = 1
+                ElseIf .CurrentCell IsNot Nothing And .CurrentCell.OwningColumn.Name() = $"dgvLab" Then
+                    whichToPrint = 2
+                ElseIf .CurrentCell IsNot Nothing And .CurrentCell.OwningColumn.Name() = $"dgvXray" Then
+                    whichToPrint = 3
+                ElseIf .CurrentCell IsNot Nothing And .CurrentCell.OwningColumn.Name() = $"dgvOther" Then
+                    whichToPrint = 4
+                ElseIf .CurrentCell IsNot Nothing And .CurrentCell.OwningColumn.Name() = $"dgvAll" Then
+                    whichToPrint = 5
+                End If
+                If whichToPrint > 0 Then
                     Dim transKey As Int32 = .CurrentRow.Cells("dgvTransKey").Value
                     Dim parameter As New ArrayList
                     parameter.Add({"TransKey", transKey})
-                    Dim cForm As New ReportFormIGroup($"PMR Doctors Form.Rpt", FormCulture, parameter)
+                    parameter.Add({"DataAccessLevel", _dataAccessLevel})
+                    parameter.Add({"WhichToPrint", whichToPrint})
+                    Dim cForm As New ReportFormIGroup($"PMR Doctors Form2.Rpt", FormCulture, parameter)
                     cForm.Show()
                 End If
             End With
