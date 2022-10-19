@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms
@@ -18,8 +19,13 @@ Namespace PresentationLayer.Views.Forms
 
             ' This call is required by the designer.
             InitializeComponent()
-            dtpTransactionDate.Value = Today()
+            SingleData = True
+            QueryOnly = True
+            DisplaySetup()
+        End Sub
 
+        Private Sub DisplaySetup()
+            dtpTransactionDate.Value = Today()
             With DataGridViewPmrPatientDisplay
                 .DefaultCellStyle.ForeColor = Color.Black
                 .BackColor = Color.White
@@ -31,18 +37,30 @@ Namespace PresentationLayer.Views.Forms
                 dgvPrintColumn.Name = "dgvPrintColumn"
                 dgvPrintColumn.HeaderText = Messaging.TranslateCaption("Print")
             End With
-
+            'btnSave.Visible = False
+            'btnEdit.Visible = False
+            'btnUndo.Visible = False
+            'btnFilter.Visible = False
+            'btnSave.Visible = False
         End Sub
 
         Private _doctorCode As String
 
         Public Property DoctorCode As String Implements IPmrInvestigationView.DoctorCode
             Get
-                Return _doctorCode
+                Return cboDoctorName.GetValue()
             End Get
             Set(value As String)
-                txtDoctorId.Text = value
-                _doctorCode = value
+                cboDoctorName.SetValue(value)
+            End Set
+        End Property
+
+        Public Property DoctorName As String Implements IPmrInvestigationView.DoctorName
+            Get
+                Return cboDoctorName.GetValue()
+            End Get
+            Set(value As String)
+                cboDoctorName.SetValue(value)
             End Set
         End Property
 
@@ -52,14 +70,14 @@ Namespace PresentationLayer.Views.Forms
             End Get
         End Property
 
-        Public Property DoctorName As String Implements IPmrInvestigationView.DoctorName
-            Get
-                Return txtDoctorName.Text
-            End Get
-            Set(value As String)
-                txtDoctorName.Text = value
-            End Set
-        End Property
+        'Public Property DoctorName As String Implements IPmrInvestigationView.DoctorName
+        '    Get
+        '        Return cboDoctorName.Text
+        '    End Get
+        '    Set(value As String)
+        '        txtDoctorName.Text = value
+        '    End Set
+        'End Property
 
         Public Property TransactionDate As Date? Implements IPmrInvestigationView.TransactionDate
             Get
@@ -95,21 +113,26 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub btnRefresh_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnRefresh.ClickButtonArea
-            RaiseEvent GetDoctorPatientsRequested()
+            If DoctorCode IsNot Nothing Then
+                RaiseEvent GetDoctorPatientsRequested()
+            Else
+                PmrPatientsDisplay.Clear()
+                DataGridViewPmrPatientDisplay.Refresh()
+            End If
         End Sub
 
         Private Sub PmrInvestigationRequestForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             Dim drCode As String = ""
             RaiseEvent DoctorCodeRequested(drCode)
-            DoctorCode = drCode
-            RaiseEvent GetDoctorPatientsRequested()
-            dtpTransactionDate.EditingMode = True
-            btnSave.Visible = False
-            btnEdit.Visible = False
-            btnUndo.Visible = False
-            btnEdit.Visible = False
-            btnUndo.Visible = False
-            btnFilter.Visible = False
+            If drCode IsNot Nothing Then
+                DoctorCode = drCode
+                RaiseEvent GetDoctorPatientsRequested()
+                dtpTransactionDate.EditingMode = True
+            Else
+                btnEdit.PerformClick()
+                cboDoctorName.DisplayOnly = False
+                dtpTransactionDate.DisplayOnly = False
+            End If
         End Sub
 
         Private Sub dataGridView1_CellFormatting(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs) Handles DataGridViewPmrPatientDisplay.CellFormatting
@@ -137,6 +160,24 @@ Namespace PresentationLayer.Views.Forms
                     cForm.Show()
                 End If
             End With
+        End Sub
+
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
+                {
+                {"DoctorCode", txtDoctorCode},
+                {"DoctorName", cboDoctorName}
+                }
+        End Sub
+
+        Private Sub cboDoctorName_Validated(sender As Object, e As EventArgs) Handles cboDoctorName.SelectionChangeCommitted, cboDoctorName.Leave
+            If String.IsNullOrEmpty(cboDoctorName.SelectedValue) Then
+                PmrPatientsDisplay = Nothing
+                txtDoctorCode.Text = ""
+            Else
+                txtDoctorCode.Text = cboDoctorName.SelectedValue
+                RaiseEvent GetDoctorPatientsRequested()
+            End If
         End Sub
 
     End Class

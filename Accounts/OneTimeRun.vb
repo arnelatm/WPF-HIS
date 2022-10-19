@@ -131,6 +131,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgNoImageEntered", "Sorry no image entered for this document", "Error")
         Messaging.AddMessage("MsgErroneousDate", "You entry <{enteredDate}> is not a valid date for the <{calendarName}>! Press Ctrl-Z to revert to previous value.", "Error")
         Messaging.AddMessage("MsgErroneousTime", "The time you entered is not a valid time! Press Ctrl-Z to revert to previous value.", "Error")
+        Messaging.AddMessage("MsgNonDoctorUser", "Sorry, you are not a doctor. Only doctors have access to this module.", "Error")
     End Sub
 
     'Public Shared Sub CreateEnums()

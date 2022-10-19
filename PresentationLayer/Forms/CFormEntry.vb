@@ -546,7 +546,7 @@ Public Class CFormEntry
             If FirstControl IsNot Nothing Then
                 FirstControl.Focus()
             End If
-            If GlobalVariables.UserName.ToLower() <> $"arnel" Then
+            If Not UserIsASuperAdministrator() Then
                 HideButton(btnDebug)
             End If
             'CenterForm(Me)

@@ -604,7 +604,7 @@ Public Class BfMain
 
     Private Shared Sub SetControlVisibility(ByRef cCtrl As Control, controlVisible As Boolean)
         ' if Visible is false, Don't show the controls content by masking content with '*' asterisk
-        If GlobalVariables.UserName = $"Arnel" Then
+        If UserIsASuperAdministrator() Then
             SetPropertyValue(cCtrl, "Visible", True)
         ElseIf controlVisible Then
             SetPropertyValue(cCtrl, "Visible", True)
@@ -641,7 +641,7 @@ Public Class BfMain
     '        toolStripMenuItem.Enabled = False
     '        toolStripMenuItem.Visible = True
     '    End If
-    '    If GlobalVariables.UserName = $"Arnel" Then
+    '    If UserIsASuperAdministrator() Then
     '        ' make all editable and visible regardless of security values
     '        toolStripMenuItem.Enabled = True
     '        toolStripMenuItem.Visible = True
@@ -650,7 +650,7 @@ Public Class BfMain
     'End Function
 
     Private Sub SetMenuSecurity(cControl As Object, controlSecurityKey As String)
-        If GlobalVariables.UserName = $"Arnel" Then
+        If UserIsASuperAdministrator() Then
             ' make all editable and visible regardless of security values
             cControl.Enabled = True
             cControl.Visible = True
@@ -954,7 +954,7 @@ Public Class BfMain
     '                obj.Visible = True
     '            End If
     '        Next
-    '        If GlobalVariables.UserName = $"Arnel" Then
+    '        If UserIsASuperAdministrator() Then
     '            ' override values regardless of security values
     '            For Each obj As Object In dropDownItems
     '                obj.Enabled = True

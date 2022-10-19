@@ -19,7 +19,7 @@ Public Class ReportPrinter
     Public Sub New()
     End Sub
 
-    Public Sub New(pPrintJobName As String, pReportFileName As String, Optional pDataBaseConnectionName As String = DefaultConnection)
+    Public Sub New(pReportFileName As String, pPrintJobName As String, Optional pDataBaseConnectionName As String = DefaultConnection)
         PrintJobName = pPrintJobName
         ReportFileName = pReportFileName
         DataBaseConnectionName = pDataBaseConnectionName
@@ -157,7 +157,6 @@ Public Class ReportPrinter
     Public Function GetReportSource() As CrystalDecisions.CrystalReports.Engine.ReportDocument
         Return _report
     End Function
-
 
     Public Function GetInstalledPrinters()
         Dim installedPrinters As New Collection

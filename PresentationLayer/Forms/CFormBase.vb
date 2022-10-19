@@ -18,6 +18,8 @@ Public Class CFormBase
     Protected FirstControl As Control
     Protected ParentFieldName As String = ""
     Protected RecordDateTimeStampValue As Object
+    Protected SingleData As Boolean = False
+    Protected QueryOnly As Boolean = False
     Private _debugSwitch As Byte = 0
     Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
     Private _editingMode As Boolean = False
@@ -34,6 +36,12 @@ Public Class CFormBase
     Public Sub New()
         InitializeComponent()
         DoubleBuffered = True
+        If QueryOnly Or SingleData Then
+            btnSave.Visible = False
+            btnEdit.Visible = False
+            btnUndo.Visible = False
+            btnFilter.Visible = False
+        End If
     End Sub
 
     Delegate Sub SafeCallDelegate(ByRef controlObject As Control, textString As String)
@@ -70,10 +78,18 @@ Public Class CFormBase
     End Sub
 
     Public Overridable Sub UpdateViewDisplay(editMode As Boolean, addMode As Boolean, recordPositionNumber As Integer, targetIdNo As Integer, recordCount As Integer)
-        If addMode Or editMode Then
+        If QueryOnly Or SingleData Then
             TurnOnInputs()
+            btnSave.Visible = False
+            btnEdit.Visible = False
+            btnUndo.Visible = False
+            btnFilter.Visible = False
         Else
-            TurnOffInputs()
+            If addMode Or editMode Then
+                TurnOnInputs()
+            Else
+                TurnOffInputs()
+            End If
         End If
         RaiseEvent AfterUpdateView()
     End Sub
@@ -135,29 +151,50 @@ Public Class CFormBase
     End Sub
 
     Protected Sub UpdateNavigationButtonDisplay(editing As Boolean, adding As Boolean, recordPositionNumber As Integer, recordCount As Integer)
-        If adding Or editing Then
-            btnEdit.Enabled = False
-            btnPrint.Enabled = False
-            btnQuit.Enabled = False
-            btnFilter.Enabled = False
-            btnSave.Enabled = True
-            btnUndo.Enabled = True
-        Else
-            btnEdit.Enabled = True
-            btnPrint.Enabled = True
-            btnQuit.Enabled = True
-            btnFilter.Enabled = True
-            btnSave.Enabled = False
-            btnUndo.Enabled = False
-        End If
-        If recordCount = 0 Then
-            btnEdit.Enabled = False
-            btnPrint.Enabled = False
-            btnUndo.Enabled = False
-            If adding Or editing Then
-                btnSave.Enabled = True
+        If SingleData Or QueryOnly Then
+            HideNavigatorButtons = True
+            If QueryOnly Then
+                btnSave.Visible = False
+                btnEdit.Visible = False
+                btnUndo.Visible = False
+                btnFilter.Visible = False
             Else
+                If adding Or editing Then
+                    btnQuit.Enabled = False
+                    btnSave.Enabled = True
+                    btnUndo.Enabled = True
+                Else
+                    btnEdit.Enabled = True
+                    btnQuit.Enabled = True
+                    btnSave.Enabled = False
+                    btnUndo.Enabled = False
+                End If
+            End If
+        Else
+            If adding Or editing Then
+                btnEdit.Enabled = False
+                btnPrint.Enabled = False
+                btnQuit.Enabled = False
+                btnFilter.Enabled = False
+                btnSave.Enabled = True
+                btnUndo.Enabled = True
+            Else
+                btnEdit.Enabled = True
+                btnPrint.Enabled = True
+                btnQuit.Enabled = True
+                btnFilter.Enabled = True
                 btnSave.Enabled = False
+                btnUndo.Enabled = False
+            End If
+            If recordCount = 0 Then
+                btnEdit.Enabled = False
+                btnPrint.Enabled = False
+                btnUndo.Enabled = False
+                If adding Or editing Then
+                    btnSave.Enabled = True
+                Else
+                    btnSave.Enabled = False
+                End If
             End If
         End If
     End Sub
@@ -318,7 +355,7 @@ Public Class CFormBase
             If FirstControl IsNot Nothing Then
                 FirstControl.Focus()
             End If
-            If GlobalVariables.UserName.ToLower() <> $"arnel" Then
+            If Not UserIsASuperAdministrator() Then
                 HideButton(btnDebug)
             End If
             'CenterForm(Me)

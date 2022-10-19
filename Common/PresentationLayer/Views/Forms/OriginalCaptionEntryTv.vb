@@ -12,7 +12,7 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             FirstControl = txtCaption
             ' Add any initialization after the InitializeComponent() call.
-            If GlobalVariables.UserName.ToLower() = $"arnel" Then
+            If UserIsASuperAdministrator() Then
                 txtCaption.DisplayOnly = False
             End If
         End Sub
@@ -64,7 +64,7 @@ Namespace PresentationLayer.Views.Forms
 #End Region
 
         Private Sub OriginalCaptionsEntryTv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-            If GlobalVariables.UserName.ToLower() <> $"arnel" Then
+            If Not UserIsASuperAdministrator() Then
                 HideButton(btnDelete)
             End If
         End Sub

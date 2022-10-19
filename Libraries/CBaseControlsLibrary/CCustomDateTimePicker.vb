@@ -652,7 +652,6 @@ Public Class CCustomDateTimePicker
         Dim calendarForm = New CCalendar(Value, CalendarType) With {
                 .RightToLeftLayout = GlobalVariables.RightToLeftLayout
                 }
-        MessageBox.Show(txtDate.Width)
         Do While True
 
             SetCalendarLocation(calendarForm)

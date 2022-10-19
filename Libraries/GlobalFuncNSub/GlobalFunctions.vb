@@ -1309,6 +1309,20 @@ Public Module GlobalFunctions
         Return firstDayOfMonth.AddMonths(1).AddDays(-1)
     End Function
 
+    Public Function UserIsASuperAdministrator()
+        If GlobalVariables.UserName.ToLower() = $"arnel" Then
+            Return True
+        End If
+        Return False
+    End Function
+
+    Public Function UserIsADeveloper()
+        If GlobalVariables.UserName.ToLower() = $"arnel" Then
+            Return True
+        End If
+        Return False
+    End Function
+
     'Public Function AsGMonthEndDate(dDate As DateTime) As Date
     '    ' return the gregorian month end date
     '    Dim gregorianDate As Date = dDate
