@@ -1,2 +1,0 @@
-﻿CREATE USER [Arnel] WITHOUT LOGIN;
-
