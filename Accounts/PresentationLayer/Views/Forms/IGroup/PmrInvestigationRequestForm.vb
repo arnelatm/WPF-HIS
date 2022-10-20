@@ -193,7 +193,7 @@ Namespace PresentationLayer.Views.Forms
                     parameter.Add({"TransKey", transKey})
                     parameter.Add({"DataAccessLevel", _dataAccessLevel})
                     parameter.Add({"WhichToPrint", whichToPrint})
-                    Dim cForm As New ReportFormIGroup($"PMR Doctors Form2.Rpt", FormCulture, parameter)
+                    Dim cForm As New ReportFormIGroup($"PMR Doctors Form.Rpt", FormCulture, parameter)
                     cForm.Show()
                 End If
             End With
