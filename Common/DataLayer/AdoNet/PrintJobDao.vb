@@ -31,7 +31,7 @@ Namespace DataLayer.AdoNet
             Return _db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function UpdateRecord(ByRef PrintJob As PrintJob) As Integer Implements IDao(Of PrintJob).UpdateRecord
+        Public Function UpdateRecord(ByRef printJob As PrintJob) As Integer Implements IDao(Of PrintJob).UpdateRecord
             Dim sql As String =
                     "UPDATE [PrintJob] SET " &
                     "ComputerName = @ComputerName, " &
@@ -41,7 +41,7 @@ Namespace DataLayer.AdoNet
                     "PrinterName = @PrinterName, " &
                     "PrintJobName = @PrintJobName " &
                     "WHERE IdNo = @IdNo"
-            Return _db.Update(sql, Take(PrintJob))
+            Return _db.Update(sql, Take(printJob))
         End Function
 
         Public Function AddRecord(ByRef printJob As PrintJob) As Integer Implements IDao(Of PrintJob).AddRecord
@@ -58,8 +58,8 @@ Namespace DataLayer.AdoNet
             .ComputerName = Extensions.AsString(reader("ComputerName")),
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .PaperOrientation = Extensions.AsNullable(Of Int32?)(reader("PaperOrientation")),
-            .PaperSize = Extensions.AsNullable(Of Int16?)(reader("PaperSize")),
-            .PaperSource = Extensions.AsNullable(Of Int16?)(reader("PaperSource")),
+            .PaperSize = Extensions.AsNullable(Of Int32?)(reader("PaperSize")),
+            .PaperSource = Extensions.AsNullable(Of Int32?)(reader("PaperSource")),
             .PrinterName = Extensions.AsString(reader("PrinterName")),
             .PrintJobName = Extensions.AsString(reader("PrintJobName"))
             }

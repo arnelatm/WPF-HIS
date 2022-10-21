@@ -24,14 +24,15 @@ Namespace PresentationLayer.Presenters
 
         Public Sub ShowReport(reportFileName As String, reportTitle As String, cFormCulture As CultureInfo, printJobName As String, dbConnectionName As String, args As Array)
             Dim crViewerForm As New CrViewer(reportFileName, reportTitle, cFormCulture, args)
-            Dim pjPresenter As New PrintJobPresenter()
-            pjPresenter.ViewReport(crViewerForm, printJobName, dbConnectionName)
+            Dim prPresenter As New PrintPresenter()
+            prPresenter.ViewReport(crViewerForm, printJobName, dbConnectionName)
             crViewerForm.Show()
         End Sub
 
         Public Sub OnShowReportRequested(ByRef eventType As ShowReportRequested) Implements ISubscriber(Of ShowReportRequested).OnEventHandler
             ShowReport(eventType.reportFileName, eventType.reportTitle, eventType.FormCulture, eventType.PrintJobName, eventType.DbConnName, eventType.Args)
         End Sub
+
     End Class
 
     Public Class DateRangeCompanyPresenter

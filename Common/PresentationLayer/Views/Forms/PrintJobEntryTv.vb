@@ -1,5 +1,7 @@
-﻿Imports AATM.Common.PresentationLayer.Presenters
+﻿Imports System.Printing
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.PresentationLayer.Views.Interface
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
@@ -25,7 +27,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PrintJobName As String Implements IPrintJobView.PrintJobName
+        Public Property PrintJobName As Int32? Implements IPrintJobView.PrintJobName
             Get
                 Return cboPrintJobName.GetValue()
             End Get
@@ -36,10 +38,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property ComputerName As String Implements IPrintJobView.ComputerName
             Get
-                Return cboComputerName.GetValue()
+                Return txtComputerName.Text
             End Get
             Set
-                cboComputerName.SetValue(Value)
+                txtComputerName.Text = Value
             End Set
         End Property
 
@@ -52,7 +54,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PaperSource As Int16? Implements IPrintJobView.PaperSource
+        Public Property PaperSource As Int32? Implements IPrintJobView.PaperSource
             Get
                 Return cboPaperSource.GetValue()
             End Get
@@ -63,14 +65,14 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PrinterName As String Implements IPrintJobView.PrinterName
             Get
-                Return cboPrinterName.GetValue()
+                Return txtPrinterName.Text
             End Get
             Set
-                cboPrinterName.SetValue(Value)
+                txtPrinterName.Text = Value
             End Set
         End Property
 
-        Public Property PaperOrientation As Int16? Implements IPrintJobView.PaperOrientation
+        Public Property PaperOrientation As Int32? Implements IPrintJobView.PaperOrientation
             Get
                 Return cboPaperOrientation.GetValue()
             End Get
@@ -84,14 +86,21 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
-                {"ComputerName", cboComputerName},
+                {"ComputerName", txtComputerName},
                 {"IdNo", TxtIdNo},
                 {"PaperOrientation", cboPaperOrientation},
                 {"PaperSize", cboPaperSize},
                 {"PaperSource", cboPaperSource},
-                {"PrinterName", cboPrinterName},
+                {"PrinterName", txtPrinterName},
                 {"PrintJobName", cboPrintJobName}
                 }
+        End Sub
+
+        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrinters.ClickButtonArea
+            'Dim myForm = New CListSelector(btnPrinters, GetInstalledPrinters())
+            Dim queue As PrintQueueCollection = GlobalFunctions.GetNetworkPrinters()
+            'Dim myForm = New CListSelector(btnPrinters, DirectCast(ArrayList))
+            'myForm.Show()
         End Sub
 
     End Class

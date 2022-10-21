@@ -29,16 +29,17 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblPrintJobName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.LblComputerName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.LblPaperSource = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.LblPaperSize = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.LblPaperOrientation = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboPrintJobName = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.cboComputerName = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.cboPrinterName = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.LblComputerName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtComputerName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblPrinterName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPrinterName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.btnPrinters = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.LblPaperSource = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboPaperSource = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.LblPaperSize = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboPaperSize = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.LblPaperOrientation = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboPaperOrientation = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
@@ -54,13 +55,13 @@ Namespace PresentationLayer.Views.Forms
             'SplitContainer1.Panel2
             '
             Me.SplitContainer1.Panel2.Controls.Add(Me.floDataDisplay)
-            Me.SplitContainer1.Size = New System.Drawing.Size(687, 312)
-            Me.SplitContainer1.SplitterDistance = 228
+            Me.SplitContainer1.Size = New System.Drawing.Size(723, 312)
+            Me.SplitContainer1.SplitterDistance = 239
             '
             'FormTreeView
             '
             Me.FormTreeView.LineColor = System.Drawing.Color.Black
-            Me.FormTreeView.Size = New System.Drawing.Size(228, 312)
+            Me.FormTreeView.Size = New System.Drawing.Size(239, 312)
             '
             'ImageListTreeView
             '
@@ -78,9 +79,10 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.Controls.Add(Me.lblPrintJobName)
             Me.floDataDisplay.Controls.Add(Me.cboPrintJobName)
             Me.floDataDisplay.Controls.Add(Me.LblComputerName)
-            Me.floDataDisplay.Controls.Add(Me.cboComputerName)
-            Me.floDataDisplay.Controls.Add(Me.CLabel1)
-            Me.floDataDisplay.Controls.Add(Me.cboPrinterName)
+            Me.floDataDisplay.Controls.Add(Me.txtComputerName)
+            Me.floDataDisplay.Controls.Add(Me.lblPrinterName)
+            Me.floDataDisplay.Controls.Add(Me.txtPrinterName)
+            Me.floDataDisplay.Controls.Add(Me.btnPrinters)
             Me.floDataDisplay.Controls.Add(Me.LblPaperSource)
             Me.floDataDisplay.Controls.Add(Me.cboPaperSource)
             Me.floDataDisplay.Controls.Add(Me.LblPaperSize)
@@ -92,7 +94,7 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.MinimumSize = New System.Drawing.Size(440, 300)
             Me.floDataDisplay.Name = "floDataDisplay"
             Me.floDataDisplay.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
-            Me.floDataDisplay.Size = New System.Drawing.Size(449, 312)
+            Me.floDataDisplay.Size = New System.Drawing.Size(474, 312)
             Me.floDataDisplay.TabIndex = 148
             '
             'lblIdNo
@@ -104,7 +106,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo.Location = New System.Drawing.Point(11, 11)
             Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblIdNo.Name = "lblIdNo"
-            Me.lblIdNo.Size = New System.Drawing.Size(184, 23)
+            Me.lblIdNo.Size = New System.Drawing.Size(144, 23)
             Me.lblIdNo.TabIndex = 150
             Me.lblIdNo.Text = "Print Job ID No."
             Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -127,8 +129,8 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, True)
             Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
-            Me.TxtIdNo.LinkedLabel = Nothing
-            Me.TxtIdNo.Location = New System.Drawing.Point(197, 11)
+            Me.TxtIdNo.LinkedLabel = Me.lblIdNo
+            Me.TxtIdNo.Location = New System.Drawing.Point(157, 11)
             Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.TxtIdNo.MaximumValue = Nothing
             Me.TxtIdNo.MinimumValue = Nothing
@@ -149,91 +151,11 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPrintJobName.Location = New System.Drawing.Point(11, 36)
             Me.lblPrintJobName.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPrintJobName.Name = "lblPrintJobName"
-            Me.lblPrintJobName.Size = New System.Drawing.Size(184, 23)
+            Me.lblPrintJobName.Size = New System.Drawing.Size(144, 23)
             Me.lblPrintJobName.TabIndex = 153
             Me.lblPrintJobName.Text = "Print Job Name"
             Me.lblPrintJobName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblPrintJobName.Translatable = True
-            '
-            'LblComputerName
-            '
-            Me.LblComputerName.DisplayOnly = True
-            Me.LblComputerName.EditingMode = False
-            Me.LblComputerName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.MyErrorProvider.SetIconAlignment(Me.LblComputerName, System.Windows.Forms.ErrorIconAlignment.TopLeft)
-            Me.LblComputerName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.LblComputerName.Location = New System.Drawing.Point(11, 62)
-            Me.LblComputerName.Margin = New System.Windows.Forms.Padding(1)
-            Me.LblComputerName.Name = "LblComputerName"
-            Me.LblComputerName.Size = New System.Drawing.Size(184, 23)
-            Me.LblComputerName.TabIndex = 157
-            Me.LblComputerName.Text = "Computer Name"
-            Me.LblComputerName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.LblComputerName.Translatable = True
-            '
-            'CLabel1
-            '
-            Me.CLabel1.DisplayOnly = True
-            Me.CLabel1.EditingMode = False
-            Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.MyErrorProvider.SetIconAlignment(Me.CLabel1, System.Windows.Forms.ErrorIconAlignment.TopLeft)
-            Me.CLabel1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.CLabel1.Location = New System.Drawing.Point(11, 88)
-            Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel1.Name = "CLabel1"
-            Me.CLabel1.Size = New System.Drawing.Size(184, 23)
-            Me.CLabel1.TabIndex = 165
-            Me.CLabel1.Text = "Printer Name"
-            Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.CLabel1.Translatable = True
-            '
-            'LblPaperSource
-            '
-            Me.LblPaperSource.DisplayOnly = True
-            Me.LblPaperSource.EditingMode = False
-            Me.LblPaperSource.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.MyErrorProvider.SetIconAlignment(Me.LblPaperSource, System.Windows.Forms.ErrorIconAlignment.TopLeft)
-            Me.LblPaperSource.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.LblPaperSource.Location = New System.Drawing.Point(11, 114)
-            Me.LblPaperSource.Margin = New System.Windows.Forms.Padding(1)
-            Me.LblPaperSource.Name = "LblPaperSource"
-            Me.LblPaperSource.Size = New System.Drawing.Size(184, 23)
-            Me.LblPaperSource.TabIndex = 159
-            Me.LblPaperSource.Text = "Paper Source"
-            Me.LblPaperSource.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.LblPaperSource.Translatable = True
-            '
-            'LblPaperSize
-            '
-            Me.LblPaperSize.DisplayOnly = True
-            Me.LblPaperSize.EditingMode = False
-            Me.LblPaperSize.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.MyErrorProvider.SetIconAlignment(Me.LblPaperSize, System.Windows.Forms.ErrorIconAlignment.TopLeft)
-            Me.LblPaperSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.LblPaperSize.Location = New System.Drawing.Point(11, 140)
-            Me.LblPaperSize.Margin = New System.Windows.Forms.Padding(1)
-            Me.LblPaperSize.Name = "LblPaperSize"
-            Me.LblPaperSize.Size = New System.Drawing.Size(184, 23)
-            Me.LblPaperSize.TabIndex = 161
-            Me.LblPaperSize.Text = "Paper Size"
-            Me.LblPaperSize.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.LblPaperSize.Translatable = True
-            '
-            'LblPaperOrientation
-            '
-            Me.LblPaperOrientation.DisplayOnly = True
-            Me.LblPaperOrientation.EditingMode = False
-            Me.LblPaperOrientation.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.MyErrorProvider.SetIconAlignment(Me.LblPaperOrientation, System.Windows.Forms.ErrorIconAlignment.TopLeft)
-            Me.LblPaperOrientation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.LblPaperOrientation.Location = New System.Drawing.Point(11, 166)
-            Me.LblPaperOrientation.Margin = New System.Windows.Forms.Padding(1)
-            Me.LblPaperOrientation.Name = "LblPaperOrientation"
-            Me.LblPaperOrientation.Size = New System.Drawing.Size(184, 23)
-            Me.LblPaperOrientation.TabIndex = 163
-            Me.LblPaperOrientation.Text = "Paper Orientation"
-            Me.LblPaperOrientation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.LblPaperOrientation.Translatable = True
             '
             'cboPrintJobName
             '
@@ -251,12 +173,15 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPrintJobName.FilterRule = Nothing
             Me.cboPrintJobName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPrintJobName.FindEnabled = False
+            Me.floDataDisplay.SetFlowBreak(Me.cboPrintJobName, True)
             Me.cboPrintJobName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboPrintJobName.ForeColor = System.Drawing.Color.Black
             Me.cboPrintJobName.FormattingEnabled = True
             Me.cboPrintJobName.HideWhenNotEditingOrAdding = False
             Me.cboPrintJobName.IgnoreCase = False
-            Me.cboPrintJobName.LinkedLabel = Nothing
-            Me.cboPrintJobName.Location = New System.Drawing.Point(197, 36)
+            Me.cboPrintJobName.IntegralHeight = False
+            Me.cboPrintJobName.LinkedLabel = Me.lblPrintJobName
+            Me.cboPrintJobName.Location = New System.Drawing.Point(157, 36)
             Me.cboPrintJobName.Margin = New System.Windows.Forms.Padding(1)
             Me.cboPrintJobName.Name = "cboPrintJobName"
             Me.cboPrintJobName.OldValue = 0
@@ -269,7 +194,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPrintJobName.Size = New System.Drawing.Size(221, 24)
             Me.cboPrintJobName.SuggestBoxHeight = 200
             Me.cboPrintJobName.SuggestListOrderRule = Nothing
-            Me.cboPrintJobName.TabIndex = 166
+            Me.cboPrintJobName.TabIndex = 1
             Me.cboPrintJobName.TextToSearch = Nothing
             Me.cboPrintJobName.Translatable = False
             Me.cboPrintJobName.ValueIsMandatory = False
@@ -277,89 +202,123 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPrintJobName.ValueIsNumeric = False
             Me.cboPrintJobName.ValueMember = "IdNo"
             '
-            'cboComputerName
+            'LblComputerName
             '
-            Me.cboComputerName.BackColor = System.Drawing.Color.White
-            Me.cboComputerName.BegFindValue = Nothing
-            Me.cboComputerName.ChangingSearchValueOnly = False
-            Me.cboComputerName.CurrentSearchTerm = ""
-            Me.cboComputerName.DataValue = Nothing
-            Me.cboComputerName.DefaultValue = Nothing
-            Me.cboComputerName.DisplayMember = "Name"
-            Me.cboComputerName.EditingMode = True
-            Me.cboComputerName.EndFindValue = Nothing
-            Me.cboComputerName.FieldDescription = Nothing
-            Me.cboComputerName.FieldName = Nothing
-            Me.cboComputerName.FilterRule = Nothing
-            Me.cboComputerName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboComputerName.FindEnabled = False
-            Me.cboComputerName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cboComputerName.FormattingEnabled = True
-            Me.cboComputerName.HideWhenNotEditingOrAdding = False
-            Me.cboComputerName.IgnoreCase = False
-            Me.cboComputerName.LinkedLabel = Nothing
-            Me.cboComputerName.Location = New System.Drawing.Point(197, 62)
-            Me.cboComputerName.Margin = New System.Windows.Forms.Padding(1)
-            Me.cboComputerName.Name = "cboComputerName"
-            Me.cboComputerName.OldValue = 0
-            Me.cboComputerName.OriginalDataSource = Nothing
-            Me.cboComputerName.OriginalList = Nothing
-            Me.cboComputerName.OverrideDropDownStyleList = False
-            Me.cboComputerName.PreviousSearchTerm = Nothing
-            Me.cboComputerName.PropertySelector = Nothing
-            Me.cboComputerName.ReadOnlyCombo = False
-            Me.cboComputerName.Size = New System.Drawing.Size(221, 24)
-            Me.cboComputerName.SuggestBoxHeight = 200
-            Me.cboComputerName.SuggestListOrderRule = Nothing
-            Me.cboComputerName.TabIndex = 167
-            Me.cboComputerName.TextToSearch = Nothing
-            Me.cboComputerName.Translatable = False
-            Me.cboComputerName.ValueIsMandatory = False
-            Me.cboComputerName.ValueIsNullable = False
-            Me.cboComputerName.ValueIsNumeric = False
-            Me.cboComputerName.ValueMember = "IdNo"
+            Me.LblComputerName.DisplayOnly = True
+            Me.LblComputerName.EditingMode = False
+            Me.LblComputerName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.MyErrorProvider.SetIconAlignment(Me.LblComputerName, System.Windows.Forms.ErrorIconAlignment.TopLeft)
+            Me.LblComputerName.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.LblComputerName.Location = New System.Drawing.Point(11, 62)
+            Me.LblComputerName.Margin = New System.Windows.Forms.Padding(1)
+            Me.LblComputerName.Name = "LblComputerName"
+            Me.LblComputerName.Size = New System.Drawing.Size(144, 23)
+            Me.LblComputerName.TabIndex = 157
+            Me.LblComputerName.Text = "Computer Name"
+            Me.LblComputerName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.LblComputerName.Translatable = True
             '
-            'cboPrinterName
+            'txtComputerName
             '
-            Me.cboPrinterName.BackColor = System.Drawing.Color.White
-            Me.cboPrinterName.BegFindValue = Nothing
-            Me.cboPrinterName.ChangingSearchValueOnly = False
-            Me.cboPrinterName.CurrentSearchTerm = ""
-            Me.cboPrinterName.DataValue = Nothing
-            Me.cboPrinterName.DefaultValue = Nothing
-            Me.cboPrinterName.DisplayMember = "Name"
-            Me.cboPrinterName.EditingMode = True
-            Me.cboPrinterName.EndFindValue = Nothing
-            Me.cboPrinterName.FieldDescription = Nothing
-            Me.cboPrinterName.FieldName = Nothing
-            Me.cboPrinterName.FilterRule = Nothing
-            Me.cboPrinterName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboPrinterName.FindEnabled = False
-            Me.cboPrinterName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cboPrinterName.FormattingEnabled = True
-            Me.cboPrinterName.HideWhenNotEditingOrAdding = False
-            Me.cboPrinterName.IgnoreCase = False
-            Me.cboPrinterName.LinkedLabel = Nothing
-            Me.cboPrinterName.Location = New System.Drawing.Point(197, 88)
-            Me.cboPrinterName.Margin = New System.Windows.Forms.Padding(1)
-            Me.cboPrinterName.Name = "cboPrinterName"
-            Me.cboPrinterName.OldValue = 0
-            Me.cboPrinterName.OriginalDataSource = Nothing
-            Me.cboPrinterName.OriginalList = Nothing
-            Me.cboPrinterName.OverrideDropDownStyleList = False
-            Me.cboPrinterName.PreviousSearchTerm = Nothing
-            Me.cboPrinterName.PropertySelector = Nothing
-            Me.cboPrinterName.ReadOnlyCombo = False
-            Me.cboPrinterName.Size = New System.Drawing.Size(221, 24)
-            Me.cboPrinterName.SuggestBoxHeight = 200
-            Me.cboPrinterName.SuggestListOrderRule = Nothing
-            Me.cboPrinterName.TabIndex = 168
-            Me.cboPrinterName.TextToSearch = Nothing
-            Me.cboPrinterName.Translatable = False
-            Me.cboPrinterName.ValueIsMandatory = False
-            Me.cboPrinterName.ValueIsNullable = False
-            Me.cboPrinterName.ValueIsNumeric = False
-            Me.cboPrinterName.ValueMember = "IdNo"
+            Me.txtComputerName.BackColor = System.Drawing.Color.White
+            Me.txtComputerName.BegFindValue = Nothing
+            Me.txtComputerName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtComputerName.ComputedValue = False
+            Me.txtComputerName.CustomFormat = Nothing
+            Me.txtComputerName.DataBoundControl = True
+            Me.txtComputerName.EditingMode = True
+            Me.txtComputerName.EndFindValue = Nothing
+            Me.txtComputerName.FieldDescription = Nothing
+            Me.txtComputerName.FieldName = Nothing
+            Me.txtComputerName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtComputerName.FindEnabled = False
+            Me.floDataDisplay.SetFlowBreak(Me.txtComputerName, True)
+            Me.txtComputerName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtComputerName.ForeColor = System.Drawing.Color.Black
+            Me.txtComputerName.LinkedLabel = Nothing
+            Me.txtComputerName.Location = New System.Drawing.Point(157, 62)
+            Me.txtComputerName.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtComputerName.MaximumValue = Nothing
+            Me.txtComputerName.MinimumValue = Nothing
+            Me.txtComputerName.Name = "txtComputerName"
+            Me.txtComputerName.OldValue = Nothing
+            Me.txtComputerName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtComputerName.Size = New System.Drawing.Size(221, 23)
+            Me.txtComputerName.TabIndex = 2
+            Me.txtComputerName.Translatable = False
+            '
+            'lblPrinterName
+            '
+            Me.lblPrinterName.DisplayOnly = True
+            Me.lblPrinterName.EditingMode = False
+            Me.lblPrinterName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.MyErrorProvider.SetIconAlignment(Me.lblPrinterName, System.Windows.Forms.ErrorIconAlignment.TopLeft)
+            Me.lblPrinterName.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblPrinterName.Location = New System.Drawing.Point(11, 87)
+            Me.lblPrinterName.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPrinterName.Name = "lblPrinterName"
+            Me.lblPrinterName.Size = New System.Drawing.Size(144, 23)
+            Me.lblPrinterName.TabIndex = 165
+            Me.lblPrinterName.Text = "Printer Name"
+            Me.lblPrinterName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPrinterName.Translatable = True
+            '
+            'txtPrinterName
+            '
+            Me.txtPrinterName.BackColor = System.Drawing.Color.White
+            Me.txtPrinterName.BegFindValue = Nothing
+            Me.txtPrinterName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtPrinterName.ComputedValue = False
+            Me.txtPrinterName.CustomFormat = Nothing
+            Me.txtPrinterName.DataBoundControl = True
+            Me.txtPrinterName.EditingMode = True
+            Me.txtPrinterName.EndFindValue = Nothing
+            Me.txtPrinterName.FieldDescription = Nothing
+            Me.txtPrinterName.FieldName = Nothing
+            Me.txtPrinterName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtPrinterName.FindEnabled = False
+            Me.txtPrinterName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtPrinterName.ForeColor = System.Drawing.Color.Black
+            Me.txtPrinterName.LinkedLabel = Nothing
+            Me.txtPrinterName.Location = New System.Drawing.Point(157, 87)
+            Me.txtPrinterName.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtPrinterName.MaximumValue = Nothing
+            Me.txtPrinterName.MinimumValue = Nothing
+            Me.txtPrinterName.Name = "txtPrinterName"
+            Me.txtPrinterName.OldValue = Nothing
+            Me.txtPrinterName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtPrinterName.Size = New System.Drawing.Size(221, 23)
+            Me.txtPrinterName.TabIndex = 4
+            Me.txtPrinterName.Translatable = False
+            '
+            'btnPrinters
+            '
+            Me.btnPrinters.DesignerSelected = True
+            Me.floDataDisplay.SetFlowBreak(Me.btnPrinters, True)
+            Me.btnPrinters.ImageIndex = 0
+            Me.btnPrinters.Location = New System.Drawing.Point(382, 89)
+            Me.btnPrinters.Name = "btnPrinters"
+            Me.btnPrinters.OriginalImageName = Nothing
+            Me.btnPrinters.SecurityKey = ""
+            Me.btnPrinters.Size = New System.Drawing.Size(74, 21)
+            Me.btnPrinters.TabIndex = 173
+            Me.btnPrinters.Text = "Printers"
+            '
+            'LblPaperSource
+            '
+            Me.LblPaperSource.DisplayOnly = True
+            Me.LblPaperSource.EditingMode = False
+            Me.LblPaperSource.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.MyErrorProvider.SetIconAlignment(Me.LblPaperSource, System.Windows.Forms.ErrorIconAlignment.TopLeft)
+            Me.LblPaperSource.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.LblPaperSource.Location = New System.Drawing.Point(11, 114)
+            Me.LblPaperSource.Margin = New System.Windows.Forms.Padding(1)
+            Me.LblPaperSource.Name = "LblPaperSource"
+            Me.LblPaperSource.Size = New System.Drawing.Size(144, 23)
+            Me.LblPaperSource.TabIndex = 159
+            Me.LblPaperSource.Text = "Paper Source"
+            Me.LblPaperSource.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.LblPaperSource.Translatable = True
             '
             'cboPaperSource
             '
@@ -377,12 +336,15 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaperSource.FilterRule = Nothing
             Me.cboPaperSource.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPaperSource.FindEnabled = False
+            Me.floDataDisplay.SetFlowBreak(Me.cboPaperSource, True)
             Me.cboPaperSource.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboPaperSource.ForeColor = System.Drawing.Color.Black
             Me.cboPaperSource.FormattingEnabled = True
             Me.cboPaperSource.HideWhenNotEditingOrAdding = False
             Me.cboPaperSource.IgnoreCase = False
-            Me.cboPaperSource.LinkedLabel = Nothing
-            Me.cboPaperSource.Location = New System.Drawing.Point(197, 114)
+            Me.cboPaperSource.IntegralHeight = False
+            Me.cboPaperSource.LinkedLabel = Me.LblPaperSource
+            Me.cboPaperSource.Location = New System.Drawing.Point(157, 114)
             Me.cboPaperSource.Margin = New System.Windows.Forms.Padding(1)
             Me.cboPaperSource.Name = "cboPaperSource"
             Me.cboPaperSource.OldValue = 0
@@ -395,13 +357,29 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaperSource.Size = New System.Drawing.Size(221, 24)
             Me.cboPaperSource.SuggestBoxHeight = 200
             Me.cboPaperSource.SuggestListOrderRule = Nothing
-            Me.cboPaperSource.TabIndex = 169
+            Me.cboPaperSource.TabIndex = 5
             Me.cboPaperSource.TextToSearch = Nothing
             Me.cboPaperSource.Translatable = False
             Me.cboPaperSource.ValueIsMandatory = False
             Me.cboPaperSource.ValueIsNullable = False
             Me.cboPaperSource.ValueIsNumeric = False
             Me.cboPaperSource.ValueMember = "IdNo"
+            '
+            'LblPaperSize
+            '
+            Me.LblPaperSize.DisplayOnly = True
+            Me.LblPaperSize.EditingMode = False
+            Me.LblPaperSize.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.MyErrorProvider.SetIconAlignment(Me.LblPaperSize, System.Windows.Forms.ErrorIconAlignment.TopLeft)
+            Me.LblPaperSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.LblPaperSize.Location = New System.Drawing.Point(11, 140)
+            Me.LblPaperSize.Margin = New System.Windows.Forms.Padding(1)
+            Me.LblPaperSize.Name = "LblPaperSize"
+            Me.LblPaperSize.Size = New System.Drawing.Size(144, 23)
+            Me.LblPaperSize.TabIndex = 161
+            Me.LblPaperSize.Text = "Paper Size"
+            Me.LblPaperSize.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.LblPaperSize.Translatable = True
             '
             'cboPaperSize
             '
@@ -419,12 +397,15 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaperSize.FilterRule = Nothing
             Me.cboPaperSize.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPaperSize.FindEnabled = False
+            Me.floDataDisplay.SetFlowBreak(Me.cboPaperSize, True)
             Me.cboPaperSize.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboPaperSize.ForeColor = System.Drawing.Color.Black
             Me.cboPaperSize.FormattingEnabled = True
             Me.cboPaperSize.HideWhenNotEditingOrAdding = False
             Me.cboPaperSize.IgnoreCase = False
-            Me.cboPaperSize.LinkedLabel = Nothing
-            Me.cboPaperSize.Location = New System.Drawing.Point(197, 140)
+            Me.cboPaperSize.IntegralHeight = False
+            Me.cboPaperSize.LinkedLabel = Me.LblPaperSource
+            Me.cboPaperSize.Location = New System.Drawing.Point(157, 140)
             Me.cboPaperSize.Margin = New System.Windows.Forms.Padding(1)
             Me.cboPaperSize.Name = "cboPaperSize"
             Me.cboPaperSize.OldValue = 0
@@ -437,13 +418,29 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaperSize.Size = New System.Drawing.Size(221, 24)
             Me.cboPaperSize.SuggestBoxHeight = 200
             Me.cboPaperSize.SuggestListOrderRule = Nothing
-            Me.cboPaperSize.TabIndex = 170
+            Me.cboPaperSize.TabIndex = 6
             Me.cboPaperSize.TextToSearch = Nothing
             Me.cboPaperSize.Translatable = False
             Me.cboPaperSize.ValueIsMandatory = False
             Me.cboPaperSize.ValueIsNullable = False
             Me.cboPaperSize.ValueIsNumeric = False
             Me.cboPaperSize.ValueMember = "IdNo"
+            '
+            'LblPaperOrientation
+            '
+            Me.LblPaperOrientation.DisplayOnly = True
+            Me.LblPaperOrientation.EditingMode = False
+            Me.LblPaperOrientation.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.MyErrorProvider.SetIconAlignment(Me.LblPaperOrientation, System.Windows.Forms.ErrorIconAlignment.TopLeft)
+            Me.LblPaperOrientation.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.LblPaperOrientation.Location = New System.Drawing.Point(11, 166)
+            Me.LblPaperOrientation.Margin = New System.Windows.Forms.Padding(1)
+            Me.LblPaperOrientation.Name = "LblPaperOrientation"
+            Me.LblPaperOrientation.Size = New System.Drawing.Size(144, 23)
+            Me.LblPaperOrientation.TabIndex = 163
+            Me.LblPaperOrientation.Text = "Paper Orientation"
+            Me.LblPaperOrientation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.LblPaperOrientation.Translatable = True
             '
             'cboPaperOrientation
             '
@@ -462,11 +459,13 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaperOrientation.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPaperOrientation.FindEnabled = False
             Me.cboPaperOrientation.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboPaperOrientation.ForeColor = System.Drawing.Color.Black
             Me.cboPaperOrientation.FormattingEnabled = True
             Me.cboPaperOrientation.HideWhenNotEditingOrAdding = False
             Me.cboPaperOrientation.IgnoreCase = False
-            Me.cboPaperOrientation.LinkedLabel = Nothing
-            Me.cboPaperOrientation.Location = New System.Drawing.Point(197, 166)
+            Me.cboPaperOrientation.IntegralHeight = False
+            Me.cboPaperOrientation.LinkedLabel = Me.LblPaperOrientation
+            Me.cboPaperOrientation.Location = New System.Drawing.Point(157, 166)
             Me.cboPaperOrientation.Margin = New System.Windows.Forms.Padding(1)
             Me.cboPaperOrientation.Name = "cboPaperOrientation"
             Me.cboPaperOrientation.OldValue = 0
@@ -479,7 +478,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaperOrientation.Size = New System.Drawing.Size(221, 24)
             Me.cboPaperOrientation.SuggestBoxHeight = 200
             Me.cboPaperOrientation.SuggestListOrderRule = Nothing
-            Me.cboPaperOrientation.TabIndex = 171
+            Me.cboPaperOrientation.TabIndex = 7
             Me.cboPaperOrientation.TextToSearch = Nothing
             Me.cboPaperOrientation.Translatable = False
             Me.cboPaperOrientation.ValueIsMandatory = False
@@ -490,7 +489,7 @@ Namespace PresentationLayer.Views.Forms
             'PrintJobEntryTv
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.ClientSize = New System.Drawing.Size(687, 365)
+            Me.ClientSize = New System.Drawing.Size(723, 365)
             Me.MinimumSize = New System.Drawing.Size(703, 404)
             Me.Name = "PrintJobEntryTv"
             Me.Text = "Print Job Maintenance Form"
@@ -514,13 +513,14 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents LblPaperSource As CLabel
         Friend WithEvents LblPaperSize As CLabel
         Friend WithEvents LblPaperOrientation As CLabel
-        Friend WithEvents CLabel1 As CLabel
+        Friend WithEvents lblPrinterName As CLabel
         Friend WithEvents lblPrintJobName As CLabel
         Friend WithEvents cboPrintJobName As CaComboBox
-        Friend WithEvents cboComputerName As CaComboBox
-        Friend WithEvents cboPrinterName As CaComboBox
         Friend WithEvents cboPaperSource As CaComboBox
         Friend WithEvents cboPaperSize As CaComboBox
         Friend WithEvents cboPaperOrientation As CaComboBox
+        Friend WithEvents txtComputerName As CTextBox
+        Friend WithEvents txtPrinterName As CTextBox
+        Friend WithEvents btnPrinters As CButton
     End Class
 End Namespace

@@ -104,6 +104,12 @@
     <Compile Include="CDgvDtpCalendarUnused.vb" />
     <Compile Include="CDgvCalendar.vb" />
     <Compile Include="CDgvDtpColumn.vb" />
+    <Compile Include="CListSelector.designer.vb">
+      <DependentUpon>CListSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CListSelector.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CPictureBox.Designer.vb">
       <DependentUpon>CPictureBox.vb</DependentUpon>
     </Compile>
@@ -465,6 +471,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BFGregorianCalendar.resx">
       <DependentUpon>BFGregorianCalendar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CListSelector.resx">
+      <DependentUpon>CListSelector.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CPictureBox.resx">
       <DependentUpon>CPictureBox.vb</DependentUpon>

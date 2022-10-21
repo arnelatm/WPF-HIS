@@ -168,6 +168,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemLaboratoryReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemSalesReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPMRReports = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemPharmacyBarcodePrinting = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemUtilities = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemUpdateMenuSecurityObjects = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemRecreateSecurityObjectMenu = New System.Windows.Forms.ToolStripMenuItem()
@@ -200,7 +201,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemPharmacyBarcodePrinting = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemPrintJobs = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -340,7 +341,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemGeneral
             '
-            Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemDocuments, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemCategories, Me.ToolStripMenuItemItems, Me.ToolStripMenuItemDefaultFieldValues, Me.ToolStripMenuItemSalesDepositTypes})
+            Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemDocuments, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemCategories, Me.ToolStripMenuItemItems, Me.ToolStripMenuItemDefaultFieldValues, Me.ToolStripMenuItemSalesDepositTypes, Me.ToolStripMenuItemPrintJobs})
             Me.ToolStripMenuItemGeneral.Name = "ToolStripMenuItemGeneral"
             resources.ApplyResources(Me.ToolStripMenuItemGeneral, "ToolStripMenuItemGeneral")
             '
@@ -936,6 +937,11 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemPMRReports.Name = "ToolStripMenuItemPMRReports"
             resources.ApplyResources(Me.ToolStripMenuItemPMRReports, "ToolStripMenuItemPMRReports")
             '
+            'ToolStripMenuItemPharmacyBarcodePrinting
+            '
+            Me.ToolStripMenuItemPharmacyBarcodePrinting.Name = "ToolStripMenuItemPharmacyBarcodePrinting"
+            resources.ApplyResources(Me.ToolStripMenuItemPharmacyBarcodePrinting, "ToolStripMenuItemPharmacyBarcodePrinting")
+            '
             'ToolStripMenuItemUtilities
             '
             Me.ToolStripMenuItemUtilities.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemUpdateMenuSecurityObjects, Me.ToolStripMenuItemRecreateSecurityObjectMenu, Me.ToolStripMenuItemTransactionNotesTranslator, Me.ToolStripMenuItemSimplePasswordGenerator, Me.ToolStripMenuItemTestForm})
@@ -1104,10 +1110,10 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'ToolStripMenuItemPharmacyBarcodePrinting
+            'ToolStripMenuItemPrintJobs
             '
-            Me.ToolStripMenuItemPharmacyBarcodePrinting.Name = "ToolStripMenuItemPharmacyBarcodePrinting"
-            resources.ApplyResources(Me.ToolStripMenuItemPharmacyBarcodePrinting, "ToolStripMenuItemPharmacyBarcodePrinting")
+            Me.ToolStripMenuItemPrintJobs.Name = "ToolStripMenuItemPrintJobs"
+            resources.ApplyResources(Me.ToolStripMenuItemPrintJobs, "ToolStripMenuItemPrintJobs")
             '
             'Main
             '
@@ -1123,8 +1129,8 @@ Namespace PresentationLayer.Views.Forms
             Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ToolStrip.ResumeLayout(False)
-            Me.ToolStrip.PerformLayout
-        Me.AccountsMenu.ResumeLayout(false)
+            Me.ToolStrip.PerformLayout()
+            Me.AccountsMenu.ResumeLayout(false)
         Me.AccountsMenu.PerformLayout
         Me.contextMenuStripMember.ResumeLayout(false)
         Me.contextMenuStrip1.ResumeLayout(false)
@@ -1307,5 +1313,6 @@ End Sub
         Friend WithEvents ToolStripMenuItemItemCode As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDoctor As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemPharmacyBarcodePrinting As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemPrintJobs As ToolStripMenuItem
     End Class
 End NameSpace

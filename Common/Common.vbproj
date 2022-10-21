@@ -54,6 +54,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -110,6 +111,7 @@
     </Compile>
     <Compile Include="MyEnums.vb" />
     <Compile Include="PresentationLayer\Models\PrintJobModel.vb" />
+    <Compile Include="PresentationLayer\Presenters\PrintPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PrintJobPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CommonPresenter.vb" />
     <Compile Include="PresentationLayer\Views\Forms\PrintJobEntryTv.Designer.vb">
