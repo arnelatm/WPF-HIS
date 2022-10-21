@@ -1,9 +1,11 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
+Imports System.Drawing.Printing
 Imports System.Globalization
 Imports System.IO
 Imports System.Linq.Expressions
 Imports System.Net.Mail
+Imports System.Printing
 Imports System.Reflection
 Imports System.Text
 Imports System.Text.RegularExpressions
@@ -1321,6 +1323,45 @@ Public Module GlobalFunctions
             Return True
         End If
         Return False
+    End Function
+
+    Public Function GetPrinterPaperSources()
+        Dim paperSources As New Collection
+        Dim printDoc As New PrintDocument
+        Dim pkSource As Drawing.Printing.PaperSource
+        For i = 0 To printDoc.PrinterSettings.PaperSources.Count - 1
+            pkSource = printDoc.PrinterSettings.PaperSources.Item(i)
+            paperSources.Add(pkSource)
+        Next
+        Return paperSources
+    End Function
+
+    Public Function GetInstalledPrinters() As ArrayList
+        Dim installedPrinters As New ArrayList
+        For Each Printer In PrinterSettings.InstalledPrinters
+            installedPrinters.Add(Printer)
+        Next
+        Return installedPrinters
+    End Function
+
+    Public Function GetNetworkPrinters() As PrintQueueCollection
+        Dim server = New PrintServer()
+        'Console.WriteLine("Listing Shared Printers")
+        Dim queues = server.GetPrintQueues({EnumeratedPrintQueueTypes.[Shared], EnumeratedPrintQueueTypes.Connections})
+
+        'For Each item In queues
+        '    Console.WriteLine(item.FullName)
+        'Next
+
+        'Console.WriteLine(vbLf & "Listing Local Printers Now")
+        queues = server.GetPrintQueues({EnumeratedPrintQueueTypes.Local})
+
+        'For Each item In queues
+        '    Console.WriteLine(item.FullName)
+        'Next
+
+        Return queues
+        'Console.ReadLine()
     End Function
 
     'Public Function AsGMonthEndDate(dDate As DateTime) As Date

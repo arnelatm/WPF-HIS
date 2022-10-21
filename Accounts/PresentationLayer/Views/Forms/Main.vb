@@ -6,6 +6,7 @@ Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Common
+Imports AATM.Common.Models
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.PresentationLayer.Views.Forms
@@ -1073,8 +1074,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PrintReport(reportFileName As String, jobName As String, databaseConnectionName As String)
-            Dim pjPresenter As New PrintJobPresenter()
-            pjPresenter.PrintReport(reportFileName, jobName, databaseConnectionName)
+            Dim prPresenter As New PrintPresenter()
+            prPresenter.PrintReport(reportFileName, jobName, databaseConnectionName)
+        End Sub
+
+        Private Sub ToolStripMenuItemPrintJobs_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPrintJobs.Click
+            RunForm(Of PrintJobEntryTv, PrintJobPresenter(Of PrintJobModel))()
         End Sub
 
     End Class

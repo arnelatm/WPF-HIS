@@ -158,23 +158,4 @@ Public Class ReportPrinter
         Return _report
     End Function
 
-    Public Function GetInstalledPrinters()
-        Dim installedPrinters As New Collection
-        For Each Printer In PrinterSettings.InstalledPrinters
-            installedPrinters.Add(Printer)
-        Next
-        Return installedPrinters
-    End Function
-
-    Public Function GetPrinterPaperSources()
-        Dim paperSources As New Collection
-        Dim printDoc As New PrintDocument
-        Dim pkSource As Drawing.Printing.PaperSource
-        For i = 0 To printDoc.PrinterSettings.PaperSources.Count - 1
-            pkSource = printDoc.PrinterSettings.PaperSources.Item(i)
-            paperSources.Add(pkSource)
-        Next
-        Return paperSources
-    End Function
-
 End Class
