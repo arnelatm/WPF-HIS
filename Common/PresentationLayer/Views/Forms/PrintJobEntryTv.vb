@@ -100,11 +100,16 @@ Namespace PresentationLayer.Views.Forms
             'Dim myForm = New CListSelector(btnPrinters, GetInstalledPrinters())
             Dim queue As PrintQueueCollection = GlobalFunctions.GetNetworkPrinters()
             Dim printers As New ArrayList
+            Dim computername As String = Environment.MachineName
             For Each item In queue
-                If item.ShareName Is Nothing Or item.ShareName = "" Then
+                If item.ShareName Is Nothing OrElse (item.ShareName = "") Then
                     printers.Add(item.Name)
                 Else
-                    printers.Add(item.ShareName)
+                    If item.HostingPrintServer.Name <> "\\" + computername Then
+                        printers.Add(item.HostingPrintServer.Name + "\" + item.ShareName)
+                    Else
+                        printers.Add(item.Name)
+                    End If
                 End If
             Next
             Dim myForm = New CListSelector(btnPrinters, printers)
