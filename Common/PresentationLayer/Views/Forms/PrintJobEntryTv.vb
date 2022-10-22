@@ -99,8 +99,16 @@ Namespace PresentationLayer.Views.Forms
         Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrinters.ClickButtonArea
             'Dim myForm = New CListSelector(btnPrinters, GetInstalledPrinters())
             Dim queue As PrintQueueCollection = GlobalFunctions.GetNetworkPrinters()
-            'Dim myForm = New CListSelector(btnPrinters, DirectCast(ArrayList))
-            'myForm.Show()
+            Dim printers As New ArrayList
+            For Each item In queue
+                If item.ShareName Is Nothing Or item.ShareName = "" Then
+                    printers.Add(item.Name)
+                Else
+                    printers.Add(item.ShareName)
+                End If
+            Next
+            Dim myForm = New CListSelector(btnPrinters, printers)
+            myForm.Show()
         End Sub
 
     End Class
