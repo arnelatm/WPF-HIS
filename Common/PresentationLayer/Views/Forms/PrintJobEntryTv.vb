@@ -3,6 +3,7 @@ Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
+Imports System.Management
 
 Namespace PresentationLayer.Views.Forms
 
@@ -98,23 +99,64 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrinters.ClickButtonArea
             'Dim myForm = New CListSelector(btnPrinters, GetInstalledPrinters())
-            Dim queue As PrintQueueCollection = GlobalFunctions.GetNetworkPrinters()
-            Dim printers As New ArrayList
-            Dim computername As String = Environment.MachineName
-            For Each item In queue
-                If item.ShareName Is Nothing OrElse (item.ShareName = "") Then
-                    printers.Add(item.Name)
-                Else
-                    If item.HostingPrintServer.Name <> "\\" + computername Then
-                        printers.Add(item.HostingPrintServer.Name + "\" + item.ShareName)
-                    Else
-                        printers.Add(item.Name)
-                    End If
-                End If
-            Next
+            Dim printers As ArrayList = GetNetPrinters()
+
+            'Dim computername As String = Environment.MachineName
+            'For Each item In printers
+            '    'If item.ShareName Is Nothing OrElse (item.ShareName = "") Then
+            '    '    printers.Add(item.Name)
+            '    'Else
+            '    '    If item.HostingPrintServer.Name <> "\\" + computername Then
+            '    '        printers.Add(item.HostingPrintServer.Name + "\" + item.ShareName)
+            '    'Else
+            '    printers.Add(item)
+            '    'End If
+            '    'End If
+            'Next
+            'Dim myForm = New CListSelector(btnPrinters, printers)
             Dim myForm = New CListSelector(btnPrinters, printers)
             myForm.Show()
         End Sub
+
+        Private Function GetNetPrinters() As ArrayList
+            ' Use the ObjectQuery to get the list of configured printers
+            Dim printers As New ArrayList
+            Dim oQuery As System.Management.ObjectQuery = New System.Management.ObjectQuery("SELECT * FROM Win32_Printer")
+
+            Dim moSearcher As System.Management.ManagementObjectSearcher = New System.Management.ManagementObjectSearcher(oQuery)
+
+            Dim moc As System.Management.ManagementObjectCollection = moSearcher.Get()
+
+            For Each mo As ManagementObject In moc
+                Dim pdc As System.Management.PropertyDataCollection = mo.Properties
+                For Each pd As System.Management.PropertyData In pdc
+                    If CBool(mo("Network")) Then
+                        printers.Add(mo(pd.Name))
+                    End If
+                Next pd
+            Next mo
+            Return printers
+        End Function
+
+        'Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrinters.ClickButtonArea
+        '    'Dim myForm = New CListSelector(btnPrinters, GetInstalledPrinters())
+        '    Dim queue As PrintQueueCollection = GlobalFunctions.GetNetworkPrinters()
+        '    Dim printers As New ArrayList
+        '    Dim computername As String = Environment.MachineName
+        '    For Each item In queue
+        '        If item.ShareName Is Nothing OrElse (item.ShareName = "") Then
+        '            printers.Add(item.Name)
+        '        Else
+        '            If item.HostingPrintServer.Name <> "\\" + computername Then
+        '                printers.Add(item.HostingPrintServer.Name + "\" + item.ShareName)
+        '            Else
+        '                printers.Add(item.Name)
+        '            End If
+        '        End If
+        '    Next
+        '    Dim myForm = New CListSelector(btnPrinters, printers)
+        '    myForm.Show()
+        'End Sub
 
     End Class
 
