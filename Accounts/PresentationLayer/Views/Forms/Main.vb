@@ -1074,12 +1074,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PrintReport(reportFileName As String, jobName As String, databaseConnectionName As String)
-            Dim prPresenter As New PrintPresenter()
+            Dim prPresenter As New PrintReportPresenter()
             prPresenter.PrintReport(reportFileName, jobName, databaseConnectionName)
         End Sub
 
-        Private Sub ToolStripMenuItemPrintJobs_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPrintJobs.Click
-            RunForm(Of PrintJobEntryTv, PrintJobPresenter(Of PrintJobModel))()
+        Private Sub ToolStripMenuItemPrintJobs_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPrinters.Click
+            RunForm(Of PrinterEntryTv, PrinterPresenter(Of PrinterModel))()
         End Sub
 
     End Class

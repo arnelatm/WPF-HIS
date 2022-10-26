@@ -1347,14 +1347,15 @@ Public Module GlobalFunctions
     Public Function GetNetworkPrinters() As PrintQueueCollection
         Dim server = New PrintServer()
         'Console.WriteLine("Listing Shared Printers")
-        Dim queues = server.GetPrintQueues({EnumeratedPrintQueueTypes.[Shared], EnumeratedPrintQueueTypes.Connections})
+
+        Dim queues = server.GetPrintQueues() '; {EnumeratedPrintQueueTypes. , EnumeratedPrintQueueTypes.Connections})
 
         'For Each item In queues
         '    Console.WriteLine(item.FullName)
         'Next
 
         'Console.WriteLine(vbLf & "Listing Local Printers Now")
-        queues = server.GetPrintQueues({EnumeratedPrintQueueTypes.Local})
+        'queues = server.GetPrintQueues({EnumeratedPrintQueueTypes.Shared})
 
         'For Each item In queues
         '    Console.WriteLine(item.FullName)

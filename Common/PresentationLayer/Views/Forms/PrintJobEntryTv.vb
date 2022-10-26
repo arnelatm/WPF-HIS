@@ -66,10 +66,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PrinterName As String Implements IPrintJobView.PrinterName
             Get
-                Return txtPrinterName.Text
+                Return cboPrinterName.Text
             End Get
             Set
-                txtPrinterName.Text = Value
+                cboPrinterName.Text = Value
             End Set
         End Property
 
@@ -92,30 +92,31 @@ Namespace PresentationLayer.Views.Forms
                 {"PaperOrientation", cboPaperOrientation},
                 {"PaperSize", cboPaperSize},
                 {"PaperSource", cboPaperSource},
-                {"PrinterName", txtPrinterName},
+                {"PrinterName", cboPrinterName},
                 {"PrintJobName", cboPrintJobName}
                 }
         End Sub
 
-        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrinters.ClickButtonArea
-            'Dim myForm = New CListSelector(btnPrinters, GetInstalledPrinters())
-            Dim printersQueue As PrintQueueCollection = GlobalFunctions.GetNetworkPrinters()
-            Dim printers As New ArrayList
-            Dim computername As String = Environment.MachineName
-            For Each item As PrintQueue In printersQueue
-                'if item.sharename is nothing orelse (item.sharename = "") then
-                '    printers.add(item.name)
-                'else
-                '    if item.hostingprintserver.name <> "\\" + computername then
-                '        printers.add(item.hostingprintserver.name + "\" + item.sharename)
-                'else
-                printers.Add(item.Name + " | " + item.QueuePort.Name)
-                'end if
-                'end if
-            Next
-            Dim myForm = New CListSelector(btnPrinters, printers)
-            myForm.Show()
-        End Sub
+        'Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrinters.ClickButtonArea
+        '    'Dim myForm = New CListSelector(btnPrinters, GetInstalledPrinters())
+        '    Dim printersQueue As PrintQueueCollection = GlobalFunctions.GetNetworkPrinters()
+        '    Dim printers As New ArrayList
+        '    Dim computername As String = Environment.MachineName
+        '    For Each item As PrintQueue In printersQueue
+        '        'if item.sharename is nothing orelse (item.sharename = "") then
+        '        '    printers.add(item.name)
+        '        'else
+        '        '    if item.hostingprintserver.name <> "\\" + computername then
+        '        '        printers.add(item.hostingprintserver.name + "\" + item.sharename)
+        '        'else
+        '        printers.Add(item.Name + " | " + item.QueuePort.Name)
+        '        'end if
+        '        'end if
+        '    Next
+        '    Dim myForm = New CListSelector(btnPrinters, printers)
+        '    myForm.Show()
+        'End Sub
+
 
         'Private Function GetNetPrinters() As ArrayList
         '    ' Use the ObjectQuery to get the list of configured printers
