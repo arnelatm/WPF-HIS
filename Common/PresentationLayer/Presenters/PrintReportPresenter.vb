@@ -5,7 +5,7 @@ Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Presenters
 
-    Public Class PrintPresenter
+    Public Class PrintReportPresenter
 
         Private ReadOnly _service As Object
 
