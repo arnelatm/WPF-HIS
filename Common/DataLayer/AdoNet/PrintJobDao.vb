@@ -12,15 +12,15 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Private Const FieldList = "ComputerName," &
+        Private Const FieldList = "ComputerIdNo," &
                                   "IdNo," &
                                   "PaperOrientation," &
                                   "PaperSize," &
                                   "PaperSource," &
-                                  "PrinterName," &
-                                  "PrintJobName"
+                                  "PrinterIdNo," &
+                                  "PrintJobIdNo"
 
-        'Public Function GetPrintJobByName(PrintJobName As String) As PrintJob Implements iDao(Of PrintJob).GetPrintJobByName
+        'Public Function GetPrintJobByName(PrintJobIdNo As String) As PrintJob Implements iDao(Of PrintJob).GetPrintJobByName
         '    Throw New NotImplementedException
         'End Function
 
@@ -34,12 +34,12 @@ Namespace DataLayer.AdoNet
         Public Function UpdateRecord(ByRef printJob As PrintJob) As Integer Implements IDao(Of PrintJob).UpdateRecord
             Dim sql As String =
                     "UPDATE [PrintJob] SET " &
-                    "ComputerName = @ComputerName, " &
+                    "ComputerIdNo = @ComputerIdNo, " &
                     "PaperOrientation = @PaperOrientation, " &
                     "PaperSize = @PaperSize, " &
                     "PaperSource = @PaperSource, " &
-                    "PrinterName = @PrinterName, " &
-                    "PrintJobName = @PrintJobName " &
+                    "PrinterIdNo = @PrinterIdNo, " &
+                    "PrintJobIdNo = @PrintJobIdNo " &
                     "WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(printJob))
         End Function
@@ -47,31 +47,31 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef printJob As PrintJob) As Integer Implements IDao(Of PrintJob).AddRecord
             Dim sql As String =
                     " INSERT INTO [PrintJob] " &
-                    " (ComputerName,PaperOrientation,PaperSize,PaperSource,PrinterName,PrintJobName) " &
-                    " VALUES (@ComputerName,@PaperOrientation,@PaperSize,@PaperSource,@PrinterName,@PrintJobName)"
+                    " (ComputerIdNo,PaperOrientation,PaperSize,PaperSource,PrinterIdNo,PrintJobIdNo) " &
+                    " VALUES (@ComputerIdNo,@PaperOrientation,@PaperSize,@PaperSource,@PrinterIdNo,@PrintJobIdNo)"
             Return _db.Insert(sql, Take(printJob))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, PrintJob) =
                                     Function(reader) _
             New PrintJob() With {
-            .ComputerName = Extensions.AsString(reader("ComputerName")),
+            .ComputerIdNo = Extensions.AsInt(Of Int16?)(reader("ComputerIdNo")),
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .PaperOrientation = Extensions.AsNullable(Of Int32?)(reader("PaperOrientation")),
             .PaperSize = Extensions.AsNullable(Of Int32?)(reader("PaperSize")),
             .PaperSource = Extensions.AsNullable(Of Int32?)(reader("PaperSource")),
-            .PrinterName = Extensions.AsString(reader("PrinterName")),
-            .PrintJobName = Extensions.AsString(reader("PrintJobName"))
+            .PrinterIdNo = Extensions.AsNullable(Of Int16?)(reader("PrinterIdNo")),
+            .PrintJobIdNo = Extensions.AsNullable(Of Int32?)(reader("PrintJobIdNo"))
             }
 
         Private Function Take(printJob As PrintJob) As Object()
             Return New Object() {
-                                    "@ComputerName", printJob.ComputerName,
+                                    "@ComputerIdNo", printJob.ComputerIdNo,
                                     "@PaperOrientation", printJob.PaperOrientation,
                                     "@PaperSize", printJob.PaperSize,
                                     "@PaperSource", printJob.PaperSource,
-                                    "@PrinterName", printJob.PrinterName,
-                                    "@PrintJobName", printJob.PrintJobName
+                                    "@PrinterIdNo", printJob.PrinterIdNo,
+                                    "@PrintJobIdNo", printJob.PrintJobIdNo
                                 }
         End Function
 

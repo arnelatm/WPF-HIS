@@ -398,6 +398,11 @@ Namespace Services
             Return modelOfPresenter
         End Function
 
+        Public Function GetIdNoWithName(Of T)(tableName As String, itemName As String) As T Implements IService.GetIdNoWithName
+            Dim idNo As T = DataDao.GetIdNoWithName(Of T)(tableName, itemName)
+            Return idNo
+        End Function
+
         Public Function GetRecordsWithGroupIdNo(Of TM)(idNo, Optional ByRef sortKey = Nothing) As List(Of TM) Implements IService.GetRecordsWithGroupIdNo
             Dim bizData = DataDao.GetRecordsWithGroupIdNo(idNo, sortKey)
             Dim dataModel As New List(Of TM)

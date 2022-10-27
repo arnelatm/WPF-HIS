@@ -58,8 +58,7 @@ Public Interface IBaseDao
                                     searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) _
         As String
 
-
-    Function GetRecordFieldWith2KeyG(Of T1, T2, T3)(searchValue1 As T1, SEARCHvALUE2 As T2, tableName As String, searchFieldName1 As String, searchFieldName2 as String, returnFieldName As String) As T3
+    Function GetRecordFieldWith2KeyG(Of T1, T2, T3)(searchValue1 As T1, SEARCHvALUE2 As T2, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As T3
 
     Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String,
                                        returnFieldName As String) As String
@@ -113,8 +112,11 @@ Public Interface IBaseDao
 
     Function GetDataSet(storedProcedureName As String, parameters As Object) As DataSet
 
-    Function InsertRecord(tableName As String, fields As Object(),  fieldTypes As Object(), ParamArray Values() As Object) As Integer
+    Function InsertRecord(tableName As String, fields As Object(), fieldTypes As Object(), ParamArray Values() As Object) As Integer
+
     Function UpdateRecordWithKey(Of T1, T2)(tableName As String, keyFieldName As String, keyFieldValue As T1, fieldToReplace As String, replaceValue As T2) As Integer
+
+    Function GetIdNoWithName(Of T)(tableName As String, fieldValue As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As T
 
     'Function ExecuteCommand() As Integer
 

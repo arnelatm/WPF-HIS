@@ -11,19 +11,18 @@ Namespace BusinessLayer
         Public Sub New()
             ' establish business rules
             If GetRules().Count() = 0 Then
-                AddRule(New ValidateRequired("PrintJobName"))
-                AddRule(New ValidateRequired("PrintJobCode"))
-                AddRule(New ValidateRequired("PrinterName"))
+                AddRule(New ValidateRequired("ComputerIdNo"))
+                AddRule(New ValidateRequired("PrintJobIdNo"))
             End If
         End Sub
 
-        Public Property ComputerName As String
+        Public Property ComputerIdNo As Int16
         Public Property IdNo As Int16
         Public Property PaperOrientation As Int32?
         Public Property PaperSize As Int32?
         Public Property PaperSource As Int32?
-        Public Property PrinterName As String
-        Public Property PrintJobName As Int32?
+        Public Property PrinterIdNo As Int16?
+        Public Property PrintJobIdNo As Int32?
 
     End Class
 

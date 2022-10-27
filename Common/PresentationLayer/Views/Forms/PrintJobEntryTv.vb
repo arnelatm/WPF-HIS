@@ -37,12 +37,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property ComputerName As String Implements IPrintJobView.ComputerName
+        Public Property ComputerIdNo As Int16 Implements IPrintJobView.ComputerIdNo
             Get
-                Return txtComputerName.Text
+                Return cboComputerIdNo.GetValue()
             End Get
             Set
-                txtComputerName.Text = Value
+                cboComputerIdNo.SetValue(Value)
             End Set
         End Property
 
@@ -64,12 +64,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PrinterName As String Implements IPrintJobView.PrinterName
+        Public Property PrinterIdNo As Int16? Implements IPrintJobView.PrinterIdNo
             Get
-                Return cboPrinterName.Text
+                Return cboPrinterIdNo.GetValue()
             End Get
             Set
-                cboPrinterName.Text = Value
+                cboPrinterIdNo.SetValue(Value)
             End Set
         End Property
 
@@ -87,12 +87,12 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
-                {"ComputerName", txtComputerName},
+                {"ComputerIdNo", cboComputerIdNo},
                 {"IdNo", TxtIdNo},
                 {"PaperOrientation", cboPaperOrientation},
                 {"PaperSize", cboPaperSize},
                 {"PaperSource", cboPaperSource},
-                {"PrinterName", cboPrinterName},
+                {"PrinterIdNo", cboPrinterIdNo},
                 {"PrintJobName", cboPrintJobName}
                 }
         End Sub
@@ -101,12 +101,12 @@ Namespace PresentationLayer.Views.Forms
         '    'Dim myForm = New CListSelector(btnPrinters, GetInstalledPrinters())
         '    Dim printersQueue As PrintQueueCollection = GlobalFunctions.GetNetworkPrinters()
         '    Dim printers As New ArrayList
-        '    Dim computername As String = Environment.MachineName
+        '    Dim ComputerIdNo As String = Environment.MachineName
         '    For Each item As PrintQueue In printersQueue
         '        'if item.sharename is nothing orelse (item.sharename = "") then
         '        '    printers.add(item.name)
         '        'else
-        '        '    if item.hostingprintserver.name <> "\\" + computername then
+        '        '    if item.hostingprintserver.name <> "\\" + ComputerIdNo then
         '        '        printers.add(item.hostingprintserver.name + "\" + item.sharename)
         '        'else
         '        printers.Add(item.Name + " | " + item.QueuePort.Name)
@@ -116,7 +116,6 @@ Namespace PresentationLayer.Views.Forms
         '    Dim myForm = New CListSelector(btnPrinters, printers)
         '    myForm.Show()
         'End Sub
-
 
         'Private Function GetNetPrinters() As ArrayList
         '    ' Use the ObjectQuery to get the list of configured printers
@@ -142,13 +141,13 @@ Namespace PresentationLayer.Views.Forms
         '    'Dim myForm = New CListSelector(btnPrinters, GetInstalledPrinters())
         '    Dim queue As PrintQueueCollection = GlobalFunctions.GetNetworkPrinters()
         '    Dim printers As New ArrayList
-        '    Dim computername As String = Environment.MachineName
+        '    Dim ComputerIdNo As String = Environment.MachineName
         '    For Each item In queue
         '        printers.Add(item.Name + ":" + item.QueuePort.Name)
         '        'If item.ShareName Is Nothing OrElse (item.ShareName = "") Then
         '        '    printers.Add(item.Name)
         '        'Else
-        '        '    If item.HostingPrintServer.Name <> "\\" + computername Then
+        '        '    If item.HostingPrintServer.Name <> "\\" + ComputerIdNo Then
         '        '        printers.Add(item.HostingPrintServer.Name + "\" + item.ShareName)
         '        '    Else
         '        '        printers.Add(item.Name)
