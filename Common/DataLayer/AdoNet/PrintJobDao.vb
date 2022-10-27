@@ -18,9 +18,9 @@ Namespace DataLayer.AdoNet
                                   "PaperSize," &
                                   "PaperSource," &
                                   "PrinterIdNo," &
-                                  "PrintJobIdNo"
+                                  "PrintSetupIdNo"
 
-        'Public Function GetPrintJobByName(PrintJobIdNo As String) As PrintJob Implements iDao(Of PrintJob).GetPrintJobByName
+        'Public Function GetPrintJobByName(PrintSetupIdNo As String) As PrintJob Implements iDao(Of PrintJob).GetPrintJobByName
         '    Throw New NotImplementedException
         'End Function
 
@@ -39,7 +39,7 @@ Namespace DataLayer.AdoNet
                     "PaperSize = @PaperSize, " &
                     "PaperSource = @PaperSource, " &
                     "PrinterIdNo = @PrinterIdNo, " &
-                    "PrintJobIdNo = @PrintJobIdNo " &
+                    "PrintSetupIdNo = @PrintSetupIdNo " &
                     "WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(printJob))
         End Function
@@ -47,8 +47,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef printJob As PrintJob) As Integer Implements IDao(Of PrintJob).AddRecord
             Dim sql As String =
                     " INSERT INTO [PrintJob] " &
-                    " (ComputerIdNo,PaperOrientation,PaperSize,PaperSource,PrinterIdNo,PrintJobIdNo) " &
-                    " VALUES (@ComputerIdNo,@PaperOrientation,@PaperSize,@PaperSource,@PrinterIdNo,@PrintJobIdNo)"
+                    " (ComputerIdNo,PaperOrientation,PaperSize,PaperSource,PrinterIdNo,PrintSetupIdNo) " &
+                    " VALUES (@ComputerIdNo,@PaperOrientation,@PaperSize,@PaperSource,@PrinterIdNo,@PrintSetupIdNo)"
             Return _db.Insert(sql, Take(printJob))
         End Function
 
@@ -61,7 +61,7 @@ Namespace DataLayer.AdoNet
             .PaperSize = Extensions.AsNullable(Of Int32?)(reader("PaperSize")),
             .PaperSource = Extensions.AsNullable(Of Int32?)(reader("PaperSource")),
             .PrinterIdNo = Extensions.AsNullable(Of Int16?)(reader("PrinterIdNo")),
-            .PrintJobIdNo = Extensions.AsNullable(Of Int32?)(reader("PrintJobIdNo"))
+            .PrintSetupIdNo = Extensions.AsNullable(Of Int32?)(reader("PrintSetupIdNo"))
             }
 
         Private Function Take(printJob As PrintJob) As Object()
@@ -71,7 +71,7 @@ Namespace DataLayer.AdoNet
                                     "@PaperSize", printJob.PaperSize,
                                     "@PaperSource", printJob.PaperSource,
                                     "@PrinterIdNo", printJob.PrinterIdNo,
-                                    "@PrintJobIdNo", printJob.PrintJobIdNo
+                                    "@PrintSetupIdNo", printJob.PrintSetupIdNo
                                 }
         End Function
 

@@ -19,8 +19,7 @@ Public Class ReportPrinter
     Public Sub New()
     End Sub
 
-    Public Sub New(pReportFileName As String, pPrintJobName As String, Optional pDataBaseConnectionName As String = DefaultConnection)
-        PrintJobName = pPrintJobName
+    Public Sub New(pReportFileName As String, Optional pDataBaseConnectionName As String = DefaultConnection)
         ReportFileName = pReportFileName
         DataBaseConnectionName = pDataBaseConnectionName
         SetReportProperties(pReportFileName)

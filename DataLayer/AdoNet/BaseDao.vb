@@ -3,6 +3,7 @@ Imports System.Dynamic
 Imports System.Globalization
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries.AatmInterfaces
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace AdoNet
@@ -412,10 +413,21 @@ Namespace AdoNet
             If fieldName Is Nothing Then
                 fieldName = tableName + "Name"
             End If
-            'Dim sql As String = "Select Top 1 @IdFieldName FROM @TableName Where @FieldName = @FieldValue"
-            'Dim params() As Object = {"@TableName", tableName, "@FieldName", fieldName, "@IdFieldName", idFieldName, "@FieldValue", fieldValue}
             Dim sql As String = "Select Top 1 " & idFieldName & " FROM " & tableName & " where " & fieldName & " =  @FieldValue"
             Dim params() As Object = {"@FieldValue", fieldValue}
+            Return GetDb().Scalar(sql, params)
+        End Function
+
+        Public Function GetIcIdNoWithName(codeGroup As CodeGroupSelection, fieldValue As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As Int32 Implements IBaseDao.GetIcIdNoWithName
+            Dim codeGroupCode As String = GlobalFunctions.EnumToCode(codeGroup)
+            Dim sql As String = "Select Top 1 IdNo from ItemCode where ItemCodeName = @FieldValue and CodeGroupCode = @CodeGroupCode"
+            Dim params() As Object = {"@FieldValue", fieldValue, "@CodeGroupCode", codeGroupCode}
+            Return GetDb().Scalar(sql, params)
+        End Function
+
+        Public Function GetPrintSetupIdNo(reportFileName As String) As Int32 Implements IBaseDao.GetPrintSetupIdNo
+            Dim sql As String = "Select Top 1 PrintSetupIdNo from Report where ReportFileName = @reportFileName"
+            Dim params() As Object = {"@ReportFileName", reportFileName}
             Return GetDb().Scalar(sql, params)
         End Function
 

@@ -22,7 +22,7 @@ Namespace BusinessLayer
         Public Property PaperSize As Int32?
         Public Property PaperSource As Int32?
         Public Property PrinterIdNo As Int16?
-        Public Property PrintJobIdNo As Int32?
+        Public Property PrintSetupIdNo As Int32?
 
     End Class
 

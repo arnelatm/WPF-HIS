@@ -117,6 +117,8 @@ Public Interface IBaseDao
     Function UpdateRecordWithKey(Of T1, T2)(tableName As String, keyFieldName As String, keyFieldValue As T1, fieldToReplace As String, replaceValue As T2) As Integer
 
     Function GetIdNoWithName(Of T)(tableName As String, fieldValue As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As T
+    Function GetIcIdNoWithName(codeGroup As CodeGroupSelection, fieldValue As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As Int32
+    Function GetPrintSetupIdNo(reportFileName As String) As Integer
 
     'Function ExecuteCommand() As Integer
 

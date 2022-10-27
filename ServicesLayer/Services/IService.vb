@@ -122,7 +122,8 @@ Namespace Services
         Function InsertRecord(tableName As String, fieldList As Object(), values As Object(), fieldType As Object()) As Integer
 
         Function UpdateTable(ByRef data As DataTable, groupIdNo As Integer) As Integer
-
+        Function GetIcIdNoWithName(groupCode As CodeGroupSelection, itemName As String) As Integer
+        Function GetPrintSetupIdNo(reportName As String) As Integer
     End Interface
 
 End Namespace
