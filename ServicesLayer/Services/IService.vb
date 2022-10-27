@@ -37,12 +37,15 @@ Namespace Services
 
         Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM
 
+        Function GetIdNoWithName(Of T)(tableName As String, itemName As String) As T
+
         Function GetRecordCount(tableName As String, Optional filter As String = Nothing) As Integer
 
         Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, Optional ByVal dateTimeStampField As String = "DateTimeStamp") As Object
 
         Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As String
-        Function GetRecordFieldWith2Keyg(oF T1, T2, T3)(searchValue1 As T1, searchValue2 As T2, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As T3
+
+        Function GetRecordFieldWith2Keyg(Of T1, T2, T3)(searchValue1 As T1, searchValue2 As T2, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As T3
 
         Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As String
 
@@ -115,8 +118,11 @@ Namespace Services
         Function GetDataSet(storedProcedureName As String, parameters As Object) As DataSet
 
         Function GetFieldOnMaxField(searchFieldName As String, tableName As String, returnFieldName As String, Optional filter As String = Nothing) As Object
+
         Function InsertRecord(tableName As String, fieldList As Object(), values As Object(), fieldType As Object()) As Integer
+
         Function UpdateTable(ByRef data As DataTable, groupIdNo As Integer) As Integer
+
     End Interface
 
 End Namespace

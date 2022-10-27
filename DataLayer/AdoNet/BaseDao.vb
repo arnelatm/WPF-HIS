@@ -405,6 +405,20 @@ Namespace AdoNet
             Return obj
         End Function
 
+        Public Function GetIdNoWithName(Of T)(tableName As String, fieldValue As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As T Implements IBaseDao.GetIdNoWithName
+            If idFieldName Is Nothing Then
+                idFieldName = "IdNo"
+            End If
+            If fieldName Is Nothing Then
+                fieldName = tableName + "Name"
+            End If
+            'Dim sql As String = "Select Top 1 @IdFieldName FROM @TableName Where @FieldName = @FieldValue"
+            'Dim params() As Object = {"@TableName", tableName, "@FieldName", fieldName, "@IdFieldName", idFieldName, "@FieldValue", fieldValue}
+            Dim sql As String = "Select Top 1 " & idFieldName & " FROM " & tableName & " where " & fieldName & " =  @FieldValue"
+            Dim params() As Object = {"@FieldValue", fieldValue}
+            Return GetDb().Scalar(sql, params)
+        End Function
+
         'Public Function GetRecords(tableName As String, fieldList As String, filter As String) As ExpandoObject Implements IBaseDao.GetRecords
         '    Dim sql As String =
         '            " Select " & fieldList & " FROM [" & tableName & "] " &
@@ -536,7 +550,7 @@ Namespace AdoNet
                 searchValue = searchValue.Trim()
                 sql = "Select Top 1 SortKey FROM " & tableName &
                       " Where SortKey Like @SearchValue + '%' and len(RTrim(SortKey)) <= " &
-                      searchValue.Trim().Length + 4 &
+            searchValue.Trim().Length + 4 &
                       " order by SortKey DESC "
                 Dim parms() As Object = {"@SearchValue", searchValue}
                 Return GetDb().Scalar(sql, parms)

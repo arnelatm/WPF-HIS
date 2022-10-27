@@ -1290,9 +1290,10 @@ Public Module GlobalFunctions
     End Function
 
     Public Function GetTempFileName(ByVal extension As String) As String
+        Dim fileName As String = Nothing
         Dim attempt As Integer = 0
         While True
-            Dim fileName As String = Path.GetRandomFileName()
+            fileName = Path.GetRandomFileName()
             fileName = Path.ChangeExtension(fileName, extension)
             fileName = Path.Combine(Path.GetTempPath(), fileName)
             Try
@@ -1301,9 +1302,9 @@ Public Module GlobalFunctions
                 Return fileName
             Catch ex As IOException
                 If System.Threading.Interlocked.Increment(attempt) = 10 Then Throw New IOException("No unique temporary file name is available.", ex)
-                Return Nothing
             End Try
         End While
+        Return Nothing
     End Function
 
     Public Function AsMonthEndDate(dDate As DateTime) As Date

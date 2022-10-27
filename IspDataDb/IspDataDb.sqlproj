@@ -529,6 +529,9 @@
     <Build Include="dbo\Tables\Doctor.sql" />
     <Build Include="dbo\Views\Doctor_View.sql" />
     <Build Include="dbo\Tables\PrintJob_1.sql" />
+    <Build Include="dbo\Tables\ReportIGroup.sql" />
+    <Build Include="dbo\Tables\Printer.sql" />
+    <Build Include="dbo\Tables\Computer.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
