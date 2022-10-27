@@ -13,7 +13,7 @@ Namespace PresentationLayer.Views.Forms
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
-            FirstControl = cboPrintJobName
+            FirstControl = cboPrintSetupIdNo
             ' Add any initialization after the InitializeComponent() call.
         End Sub
 
@@ -30,10 +30,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PrintJobName As Int32? Implements IPrintJobView.PrintJobName
             Get
-                Return cboPrintJobName.GetValue()
+                Return cboPrintSetupIdNo.GetValue()
             End Get
             Set
-                cboPrintJobName.SetValue(Value)
+                cboPrintSetupIdNo.SetValue(Value)
             End Set
         End Property
 
@@ -93,7 +93,7 @@ Namespace PresentationLayer.Views.Forms
                 {"PaperSize", cboPaperSize},
                 {"PaperSource", cboPaperSource},
                 {"PrinterIdNo", cboPrinterIdNo},
-                {"PrintJobName", cboPrintJobName}
+                {"PrintJobName", cboPrintSetupIdNo}
                 }
         End Sub
 
