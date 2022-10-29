@@ -426,7 +426,7 @@ Namespace AdoNet
         End Function
 
         Public Function GetPrintSetupIdNo(reportFileName As String) As Int32 Implements IBaseDao.GetPrintSetupIdNo
-            Dim sql As String = "Select Top 1 PrintSetupIdNo from Report where ReportFileName = @reportFileName"
+            Dim sql As String = "Select Top 1 PrintSetupIdNo from ReportFiles where ReportFileName = @reportFileName"
             Dim params() As Object = {"@ReportFileName", reportFileName}
             Return GetDb().Scalar(sql, params)
         End Function
