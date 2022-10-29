@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Report] (
+﻿CREATE TABLE [dbo].[ReportFiles] (
     [IdNo]           SMALLINT       IDENTITY (1, 1) NOT NULL,
     [ReportFileName] VARCHAR (200)  NULL,
     [ReportTitle]    VARCHAR (200)  NULL,
@@ -8,12 +8,4 @@
     [DateCreated]    DATE           CONSTRAINT [DF__Report__Creat__2E7BCEF5] DEFAULT (getdate()) NULL,
     CONSTRAINT [PK_Report] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
-
-
-
-
-
-
-
-
 

@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[ReportIGroup] (
+﻿CREATE TABLE [dbo].[Report] (
     [IdNo]                  SMALLINT       IDENTITY (1, 1) NOT NULL,
     [ReportCode]            VARCHAR (5)    NULL,
     [ReportName]            VARCHAR (200)  NULL,
@@ -34,4 +34,14 @@
     [Active]                BIT            NULL,
     CONSTRAINT [PK_ReportCreator] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
+
+
+
+
+
+
+
+
 

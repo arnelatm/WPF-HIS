@@ -19,7 +19,6 @@ Namespace PresentationLayer.Presenters
             TreeViewSecondaryField = "PrinterCode"
             AddHandler view.CheckPrinterClicked, AddressOf OnCheckPrinterClicked
 
-
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -27,7 +26,6 @@ Namespace PresentationLayer.Presenters
             CreateDataSourceGroupCode("DefaultPaperSize", "PPSZ")
             CreateDataSourceGroupCode("DefaultPaperSource", "PPSR")
         End Sub
-
 
         Private Sub OnCheckPrinterClicked(sender As Object)
             'Dim prPresenter As New PrintReportPresenter()
@@ -46,6 +44,11 @@ Namespace PresentationLayer.Presenters
                     MessageBox.Show("Printer OK")
                     Dim data = GetPrinterPageInfo(printer)
                     Debugger.Break()
+                    Dim supportedPaperSize As String = ""
+                    For Each item As PaperSize In data.PrinterSettings.PaperSizes
+                        supportedPaperSize += item.PaperName + item.PaperName + vbCrLf
+                    Next
+                    MessageBox.Show(supportedPaperSize)
                 Else
                     MessageBox.Show("Printer doesn't exist")
                 End If
