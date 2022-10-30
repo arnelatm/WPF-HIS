@@ -504,7 +504,7 @@
     <Build Include="dbo\Views\LatestApproval_View.sql" />
     <Build Include="dbo\Views\EmployeeInfo_View.sql" />
     <Build Include="dbo\Tables\ReportMaster.sql" />
-    <Build Include="dbo\Tables\Report.sql" />
+    <Build Include="dbo\Tables\ReportFiles.sql" />
     <Build Include="dbo\Tables\ListGroup_1.sql" />
     <Build Include="dbo\Tables\ListCoded_1.sql" />
     <Build Include="dbo\Tables\List_1.sql" />
@@ -529,9 +529,9 @@
     <Build Include="dbo\Tables\Doctor.sql" />
     <Build Include="dbo\Views\Doctor_View.sql" />
     <Build Include="dbo\Tables\PrintJob_1.sql" />
-    <Build Include="dbo\Tables\ReportIGroup.sql" />
     <Build Include="dbo\Tables\Printer.sql" />
     <Build Include="dbo\Tables\Computer.sql" />
+    <Build Include="dbo\Tables\ReportFiles_1.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
