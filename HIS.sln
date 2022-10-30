@@ -132,6 +132,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQuer
 		Append a table to a new table.sql = Append a table to a new table.sql
 		Check for Duplicate Item RegistraTION pHARMACY.txt = Check for Duplicate Item RegistraTION pHARMACY.txt
 		CreateEditReset Sequence.sql = CreateEditReset Sequence.sql
+		Delete or restore Archirodon.sql = Delete or restore Archirodon.sql
 		DeleteDuplicates.sql = DeleteDuplicates.sql
 		EditingSqlQuery.sql = EditingSqlQuery.sql
 		Extract Varchar Fields to Images.sql = Extract Varchar Fields to Images.sql
