@@ -1220,7 +1220,7 @@ Namespace AdoNet
         Public Property CommandText As String
         Public Property Parameters As Array
 
-        Public Sub Add(commandText As String, parameters As Array)
+        Public Sub Add(commandText As String, parameters As Object())
             Me.CommandText = commandText
             Me.Parameters = parameters
         End Sub

@@ -45,7 +45,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                 Else
                     fileName = "Statement of Accounts Payable.Rpt"
                 End If
-                Dim args As Array = {dtpBeginningDate.Value, "BeginningDate",
+                Dim args As Object() = {dtpBeginningDate.Value, "BeginningDate",
                                       dtpEndingDate.Value, "EndingDate",
                                       cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo",
                                       cboSupplierIdNo.Text, "DisplayName"}
