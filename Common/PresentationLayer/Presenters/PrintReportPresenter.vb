@@ -27,7 +27,7 @@ Namespace PresentationLayer.Presenters
             'Dim printJobIdNo As Int32 = _service.GetIcIdNoWithName(AATM.DataLayer.CodeGroupSelection.PrintJobSetting, printJobName)
             'Dim printerIdNo As Int16 = GetPrinterIdNo(pjModel, printSetupIdNo)
             'Dim printerIdNo As Int16 = _service.GetIdNoWithName(Of Int16)("Printer", )
-            pjModel = _service.GetRecordByIdNo(Of PrintJobModel)(printerIdNo)
+            pjModel = _service.GetRecordByIdNo(Of PrintJobModel)(printSetupIdNo)
             printer = _service.GetRecordByIdNo(pjModel.PrinterIdNo)
             report.SetPrintOption(printer.PrinterName, pjModel.PaperSize, pjModel.PaperOrientation, pjModel.PaperSource)
             If print Then
