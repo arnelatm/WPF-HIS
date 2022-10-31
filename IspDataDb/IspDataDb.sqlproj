@@ -532,6 +532,7 @@
     <Build Include="dbo\Tables\Printer.sql" />
     <Build Include="dbo\Tables\Computer.sql" />
     <Build Include="dbo\Tables\ReportFiles_1.sql" />
+    <Build Include="dbo\Tables\ReportFile.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
