@@ -8,13 +8,14 @@ Namespace PresentationLayer.Views.Forms
         Implements IPmrInvestigationView
 
         Public Event GetDoctorPatientsRequested() Implements IPmrInvestigationView.GetDoctorPatientsRequested
+
         Public Event DoctorCodeRequested(ByRef drId As String) Implements IPmrInvestigationView.DoctorCodeRequested
+
         Public Event GetPmrDataAccessRequested(ByRef dataAccessCode As String) Implements IPmrInvestigationView.GetPmrDataAccessRequested
 
         Private _pmrPatientsDisplay As New List(Of PmrPatientDisplayView)
         Private _doctorId As String
         Private _dataAccessLevel As String = ""
-
 
         Public Sub New()
             'MyBase.New()
@@ -29,7 +30,7 @@ Namespace PresentationLayer.Views.Forms
             dtpTransactionDate.Value = Today()
         End Sub
 
-        Private Function AddDgColumn(dgvColumnName As DataGridViewImageColumn, dgvName As String, caption As String) As Boolean
+        Private Sub AddDgColumn(dgvColumnName As DataGridViewImageColumn, dgvName As String, caption As String)
             With DataGridViewPmrPatientDisplay
                 .Columns.Insert(.Columns.Count, dgvColumnName)
                 dgvColumnName.Image = imgList.Images(0)
@@ -37,7 +38,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvColumnName.Name = dgvName
                 dgvColumnName.HeaderText = Messaging.TranslateCaption(caption)
             End With
-        End Function
+        End Sub
 
         Private _doctorCode As String
 

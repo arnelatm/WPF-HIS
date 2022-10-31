@@ -96,7 +96,7 @@ Public Class ReportPrinter
         End If
     End Sub
 
-    Public Overloads Sub SetPrintOption(printerName As String, paperSize As Int16?, paperOrientation As Int16?, paperSource As Int16?)
+    Public Overloads Sub SetPrintOption(printerName As String, paperSizeName As String, paperOrientation As Int16?, paperSource As Int16?)
         If printerName IsNot Nothing Then
             Dim dPrinterName As String = _report.PrintOptions.PrinterName
             Dim noPrinter As Boolean = _report.PrintOptions.NoPrinter
@@ -109,14 +109,8 @@ Public Class ReportPrinter
                 _report.PrintOptions.PrinterName = dPrinterName
             End Try
         End If
-        If paperSize IsNot Nothing Then
-            Dim dPaperSize As Int32
-            paperSize = _report.PrintOptions.PaperSize
-            Try
-                _report.PrintOptions.PaperSize = paperSize
-            Catch ex As Exception
-                _report.PrintOptions.PaperSize = dPaperSize
-            End Try
+        If paperSizeName IsNot Nothing Then
+            SetPaperSize(paperSizeName)
         End If
         If paperOrientation IsNot Nothing Then
             Dim dPaperOrientation As Int16 = _report.PrintOptions.PaperOrientation
@@ -137,11 +131,24 @@ Public Class ReportPrinter
         End If
     End Sub
 
+    Private Sub SetPaperSize(paperName As String)
+        Dim docToPrint As New System.Drawing.Printing.PrintDocument()
+        docToPrint.PrinterSettings.PrinterName = _report.PrintOptions.PrinterName
+        For i = 0 To docToPrint.PrinterSettings.PaperSizes.Count - 1
+            Dim rawKind As Integer
+            If docToPrint.PrinterSettings.PaperSizes(i).PaperName = paperName Then
+                rawKind = CInt(docToPrint.PrinterSettings.PaperSizes(i).GetType().GetField("kind", Reflection.BindingFlags.Instance Or Reflection.BindingFlags.NonPublic).GetValue(docToPrint.PrinterSettings.PaperSizes(i)))
+                _report.PrintOptions.PaperSize = rawKind
+                Exit For
+            End If
+        Next
+    End Sub
+
     Public Sub PrintReport(Optional copies As Int16 = 1, Optional collate As Boolean = False, Optional startPage As Int16 = 0, Optional endPage As Int16 = 0)
         _report.PrintToPrinter(copies, collate, startPage, endPage)
     End Sub
 
-    Public Sub SetParameterValue(args As Array)
+    Public Sub SetParameterValue(args() As Object)
         For i = 0 To args.Length - 1 Step 2
             Dim value As Object = GlobalFunctions.ConvertObjectToType(args(i))
             Dim name As String = args(i + 1).ToString()

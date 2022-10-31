@@ -404,7 +404,11 @@ Namespace Services
         End Function
 
         Public Function GetIcIdNoWithName(groupCode As CodeGroupSelection, itemName As String) As Integer Implements IService.GetIcIdNoWithName
-            Return DataDao.GetIcIdNoWithName(groupCode, itemName)
+            Return DataDao.GetIcIdNoWithIName(groupCode, itemName)
+        End Function
+
+        Public Function GetIcNameWithIdNo(groupCode As CodeGroupSelection, idNo As Int32) As String Implements IService.GetIcNameWithIdNo
+            Return DataDao.GetIcIdNoWithName(groupCode, idNo)
         End Function
 
         Public Function GetPrintSetupIdNo(reportName As String) As Integer Implements IService.GetPrintSetupIdNo

@@ -7,15 +7,14 @@ Public Class PmrReportSelector
 
     Private ReadOnly _findableControl As IFindableControl
 
-
     Public Sub New(findableControl As IFindableControl)
 
         ' This call is required by the designer.
         InitializeComponent()
         _findableControl = findableControl
         Dim ctrl As Control
-        Dim formPoint As Point
-        Dim ctrlPoint As Point
+        'Dim formPoint As Point
+        'Dim ctrlPoint As Point
         ctrl = DirectCast(findableControl, Control)
         ' Add any initialization after the InitializeComponent() call.
 
