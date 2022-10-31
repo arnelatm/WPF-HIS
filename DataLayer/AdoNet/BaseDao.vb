@@ -418,9 +418,10 @@ Namespace AdoNet
             Return GetDb().Scalar(sql, params)
         End Function
 
-        Public Function GetIcIdNoWithName(codeGroupIdNo As CodeGroupSelection, fieldValue As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As Int32 Implements IBaseDao.GetIcIdNoWithName
+        Public Function GetIcIdNoWithName(codeGroupSelection As CodeGroupSelection, fieldValue As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As Int32 Implements IBaseDao.GetIcIdNoWithName
             'Dim codeGroupCode As String = GlobalFunctions.EnumToCode(codeGroup)
-            Dim sql As String = "Select Top 1 IdNo from ItemCode where ItemCodeName = @FieldValue and CodeGroupIdNo = @CodeGroupIdNo"
+            Dim codeGroupIdNo = Convert.ToInt32(codeGroupSelection)
+            Dim sql As String = "Select Top 1 IdNo from ItemCode where IdNo = @FieldValue and CodeGroupIdNo = @CodeGroupIdNo"
             Dim params() As Object = {"@FieldValue", fieldValue, "@CodeGroupIdNo", codeGroupIdNo}
             Return GetDb().Scalar(sql, params)
         End Function
@@ -433,7 +434,7 @@ Namespace AdoNet
         End Function
 
         Public Function GetPrintSetupIdNo(reportFileName As String) As Int32 Implements IBaseDao.GetPrintSetupIdNo
-            Dim sql As String = "Select Top 1 PrintSetupIdNo from ReportFiles where ReportFileName = @reportFileName"
+            Dim sql As String = "Select Top 1 PrintSetupIdNo from ReportFile where ReportFileName = @reportFileName"
             Dim params() As Object = {"@ReportFileName", reportFileName}
             Return GetDb().Scalar(sql, params)
         End Function

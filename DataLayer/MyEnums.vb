@@ -6,6 +6,6 @@ Public Enum CodeGroupSelection
     <EnumCode("PPSZ")> PaperSize
     <EnumCode("PPOR")> PaperOrientation
     <EnumCode("PPSR")> PaperSource
-    <EnumCode("PJST")> PrintJobSetting
+    <EnumCode("PSET")> PrintSetUp
 
 End Enum
