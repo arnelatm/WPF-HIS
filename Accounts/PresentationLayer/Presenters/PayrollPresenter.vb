@@ -1451,8 +1451,8 @@ Namespace PresentationLayer.Presenters
                 _savedPayrollPayElements = _payrollPayElementsService.GetRecordsWithGroupIdNo(Of PayrollPayElementModel)(_payrollIdNo)
                 progressDisplayForm.Show()
                 progressDisplayForm.InitializeDisplay(_savedPayrollPayElements.Count())
-                Dim payrollDetailIdNo As Int32
-                Dim payElementIdNo As Int16
+                'Dim payrollDetailIdNo As Int32
+                'Dim payElementIdNo As Int16
                 'For Each payrollPayElement In _savedPayrollPayElements
                 '    payElementIdNo = payrollPayElement.PayElementIdNo
 
@@ -1465,8 +1465,6 @@ Namespace PresentationLayer.Presenters
                 '    counter = counter + 1
                 '    progressDisplayForm.UpdateProgressBar(counter)
                 'Next
-
-
 
                 'Dim counter As Integer = 0
                 'Dim progressDisplayForm = New CBaseControlsLibrary.DisplayProgressForm
@@ -1561,7 +1559,6 @@ Namespace PresentationLayer.Presenters
             End If
             'End If
         End Sub
-
 
     End Class
 

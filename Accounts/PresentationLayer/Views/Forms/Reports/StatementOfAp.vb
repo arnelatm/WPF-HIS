@@ -50,7 +50,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                                       cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo",
                                       cboSupplierIdNo.Text, "DisplayName"}
 
-                Ea.PublishEvent(New ShowReportRequested(fileName, reportTitle, FormCulture, "A4", $"ISPDATA", args))
+                Ea.PublishEvent(New ShowReportRequested(fileName, reportTitle, FormCulture, $"ISPDATA", args))
                 'Presenter.ShowReport(fileName, reportTitle, FormCulture, "A4", $"ISPDATA", args)
             Else
                 Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")

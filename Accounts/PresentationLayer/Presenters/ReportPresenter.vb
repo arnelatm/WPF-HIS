@@ -22,15 +22,19 @@ Namespace PresentationLayer.Presenters
             WithTreeView = False
         End Sub
 
-        Public Sub ShowReport(reportFileName As String, reportTitle As String, cFormCulture As CultureInfo, printJobName As String, dbConnectionName As String, args As Array)
+        Public Sub ShowReport(reportFileName As String, reportTitle As String, cFormCulture As CultureInfo, dbConnectionName As String, args As Object)
             Dim crViewerForm As New CrViewer(reportFileName, reportTitle, cFormCulture, args)
             Dim prPresenter As New PrintReportPresenter()
-            prPresenter.ViewReport(crViewerForm, printJobName, dbConnectionName)
+            prPresenter.ViewReport(crViewerForm, dbConnectionName)
             crViewerForm.Show()
         End Sub
 
         Public Sub OnShowReportRequested(ByRef eventType As ShowReportRequested) Implements ISubscriber(Of ShowReportRequested).OnEventHandler
-            ShowReport(eventType.reportFileName, eventType.reportTitle, eventType.FormCulture, eventType.PrintJobName, eventType.DbConnName, eventType.Args)
+            ShowReport(eventType.reportFileName, eventType.reportTitle, eventType.FormCulture, eventType.DbConnName, eventType.Args)
+        End Sub
+
+        Protected Overrides Sub Finalize()
+            MyBase.Finalize()
         End Sub
 
     End Class
@@ -57,11 +61,10 @@ End Namespace
 
 Public Class ShowReportRequested
 
-    Public Sub New(reportfileName As String, reportTitle As String, cFormCulture As CultureInfo, printJobName As String, dbConnName As String, args As Array)
-        Me.reportFileName = reportfileName
+    Public Sub New(reportFileName As String, reportTitle As String, cFormCulture As CultureInfo, dbConnName As String, args As Array)
+        Me.reportFileName = reportFileName
         Me.reportTitle = reportTitle
         Me.FormCulture = cFormCulture
-        Me.PrintJobName = printJobName
         Me.DbConnName = dbConnName
         Me.Args = args
     End Sub
@@ -69,7 +72,6 @@ Public Class ShowReportRequested
     Public Property reportFileName As String
     Public Property reportTitle As String
     Public Property FormCulture As CultureInfo
-    Public Property PrintJobName As String
     Public Property DbConnName As String
     Public Property Args As Array
 

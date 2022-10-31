@@ -119,6 +119,7 @@ Public Interface IBaseDao
     Function GetIdNoWithName(Of T)(tableName As String, fieldValue As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As T
     Function GetIcIdNoWithName(codeGroup As CodeGroupSelection, fieldValue As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As Int32
     Function GetPrintSetupIdNo(reportFileName As String) As Integer
+    Function GetIcNameWithIdNo(codeGroup As CodeGroupSelection, fieldValue As Integer, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As String
 
     'Function ExecuteCommand() As Integer
 

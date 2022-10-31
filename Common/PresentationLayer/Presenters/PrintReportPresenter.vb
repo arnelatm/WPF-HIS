@@ -1,5 +1,6 @@
 ﻿Imports AATM.Common.Models
 Imports AATM.Common.ServiceLayer
+Imports AATM.DataLayer
 Imports AATM.Libraries.CrystalReportsHelper
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Forms
@@ -24,13 +25,16 @@ Namespace PresentationLayer.Presenters
             Dim printer As PrinterModel = Nothing
             Dim computerName As String = Environment.MachineName
             Dim printSetupIdNo As Int32 = _service.GetPrintSetupIdNo(reportFileName)
-            pjModel.ComputerIdNo = _service.GetIdNoWithName(Of Int16)("Computer", computerName)
-            Dim printJobIdNo As Int32 = GetPrintJobIdNo(pjModel, printSetupIdNo)
-            pjModel = _service.GetRecordByIdNo(Of PrintJobModel)(printJobIdNo)
-            Dim printerName As String = _service.GetFieldWithIdNo(pjModel.PrinterIdNo, "Printer", "PrinterName")
-            Dim hostOrIpName As String = _service.GetFieldWithIdNo(pjModel.IdNo, "Printer", "HostOrIpName")
-            Dim printerSharedName As String = IIf(GlobalFunctions.IsEmpty(hostOrIpName), printerName, "\\" & hostOrIpName & "\" & printerName)
-            report.SetPrintOption(printerSharedName, pjModel.PaperSize, pjModel.PaperOrientation, pjModel.PaperSource)
+            If printSetupIdNo <> 0 Then
+                pjModel.ComputerIdNo = _service.GetIdNoWithName(Of Int16)("Computer", computerName)
+                Dim printJobIdNo As Int32 = GetPrintJobIdNo(pjModel, printSetupIdNo)
+                pjModel = _service.GetRecordByIdNo(Of PrintJobModel)(printJobIdNo)
+                Dim printerName As String = _service.GetFieldWithIdNo(pjModel.PrinterIdNo, "Printer", "PrinterName")
+                Dim hostOrIpName As String = _service.GetFieldWithIdNo(pjModel.IdNo, "Printer", "HostOrIpName")
+                Dim printerSharedName As String = IIf(GlobalFunctions.IsEmpty(hostOrIpName), printerName, "\\" & hostOrIpName & "\" & printerName)
+                Dim paperSizeName As String = _service.GetIcNameWithIdNo(CodeGroupSelection.PaperSize, pjModel.PrinterSetupIdNo)
+                report.SetPrintOption(printerSharedName, paperSizeName, pjModel.PaperOrientation, pjModel.PaperSource)
+            End If
             If print Then
                 report.PrintReport(copies, collate, startPage, endPage)
             End If
@@ -40,8 +44,8 @@ Namespace PresentationLayer.Presenters
             Return _service.GetRecordFieldWith2KeyG(Of Int16, Int16, Int16)(pjModel.ComputerIdNo, printSetupIdNo, "PrintJob", "ComputerIdNo", "PrintSetupIdNo", "IdNo")
         End Function
 
-        Public Sub ViewReport(viewer As CrViewer, printJobName As String, databaseConnectionName As String)
-            ProcessReport(viewer.Report.ReportFileName, printJobName, databaseConnectionName, True)
+        Public Sub ViewReport(viewer As CrViewer, databaseConnectionName As String)
+            ProcessReport(viewer.Report.ReportFileName, databaseConnectionName, False)
             'Dim computerName As String = Environment.MachineName
             'Dim computerIdNo As Int16 = _service.GetIdNoWithName("Computer", computerName)
             'Dim pjModel As New PrintJobModel

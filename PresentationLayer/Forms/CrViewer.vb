@@ -1,9 +1,7 @@
-﻿Imports System.Configuration
-Imports System.Globalization
+﻿Imports System.Globalization
 Imports System.Windows.Forms
 Imports AATM.Libraries.CrystalReportsHelper
 Imports AATM.Libraries.GlobalFuncNSub
-Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.ReportAppServer.DataDefModel
 
 Public Class CrViewer
@@ -22,7 +20,7 @@ Public Class CrViewer
     End Sub
 
     'Public Sub New(ByVal fileName As String, ByVal reportTitle As String, formCulture As CultureInfo, ByVal ParamArray args() As Object)
-    Public Sub New(reportFileName As String, reportTitle As String, formCulture As CultureInfo, args As Array)
+    Public Sub New(reportFileName As String, reportTitle As String, formCulture As CultureInfo, args As Object)
 
         ' This call is required by the designer.
         InitializeComponent()
