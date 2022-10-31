@@ -1070,12 +1070,13 @@ Namespace PresentationLayer.Views.Forms
         Private Property PrintJobView As IPrintJobView
 
         Private Sub PharmacyBarcodePrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPharmacyBarcodePrinting.Click
-            PrintReport("BarcodePharmacy.Rpt", $"IGROUP")
+            Dim args As Object() = {Environment.MachineName, "Workstation"}
+            PrintReport("BarcodePharmacy2.Rpt", $"IGROUP", args)
         End Sub
 
-        Private Sub PrintReport(reportFileName As String, databaseConnectionName As String)
+        Private Sub PrintReport(reportFileName As String, databaseConnectionName As String, Optional args() As Object = Nothing)
             Dim prPresenter As New PrintReportPresenter()
-            prPresenter.PrintReport(reportFileName, databaseConnectionName)
+            prPresenter.PrintReport(reportFileName, databaseConnectionName, args)
         End Sub
 
         Private Sub ToolStripMenuItemPrintJobs_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPrinters.Click

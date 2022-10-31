@@ -15,12 +15,12 @@ Namespace PresentationLayer.Presenters
             _service = New CommonService("PrintJob")
         End Sub
 
-        Public Sub PrintReport(reportFileName As String, databaseConnectionName As String, Optional copies As Int16 = 1, Optional collate As Boolean = False, Optional startPage As Int16 = 0, Optional endPage As Int16 = 0)
-            ProcessReport(reportFileName, databaseConnectionName, True, copies, collate, startPage, endPage)
+        Public Sub PrintReport(reportFileName As String, databaseConnectionName As String, Optional args() As Object = Nothing, Optional copies As Int16 = 1, Optional collate As Boolean = False, Optional startPage As Int16 = 0, Optional endPage As Int16 = 0)
+            ProcessReport(reportFileName, databaseConnectionName, True, args, copies, collate, startPage, endPage)
         End Sub
 
-        Private Sub ProcessReport(reportFileName As String, databaseConnectionName As String, print As Boolean, Optional copies As Int16 = 1, Optional collate As Boolean = False, Optional startPage As Int16 = 0, Optional endPage As Int16 = 0)
-            Dim report As New ReportPrinter(reportFileName, databaseConnectionName)
+        Private Sub ProcessReport(reportFileName As String, databaseConnectionName As String, print As Boolean, Optional args() As Object = Nothing, Optional copies As Int16 = 1, Optional collate As Boolean = False, Optional startPage As Int16 = 0, Optional endPage As Int16 = 0)
+            Dim report As New ReportPrinter(reportFileName, databaseConnectionName, args)
             Dim pjModel As New PrintJobModel
             Dim printer As PrinterModel = Nothing
             Dim computerName As String = Environment.MachineName
@@ -32,7 +32,7 @@ Namespace PresentationLayer.Presenters
                 Dim printerName As String = _service.GetFieldWithIdNo(pjModel.PrinterIdNo, "Printer", "PrinterName")
                 Dim hostOrIpName As String = _service.GetFieldWithIdNo(pjModel.IdNo, "Printer", "HostOrIpName")
                 Dim printerSharedName As String = IIf(GlobalFunctions.IsEmpty(hostOrIpName), printerName, "\\" & hostOrIpName & "\" & printerName)
-                Dim paperSizeName As String = _service.GetIcNameWithIdNo(CodeGroupSelection.PaperSize, pjModel.PrinterSetupIdNo)
+                Dim paperSizeName As String = _service.GetIcNameWithIdNo(CodeGroupSelection.PaperSize, pjModel.PaperSize)
                 report.SetPrintOption(printerSharedName, paperSizeName, pjModel.PaperOrientation, pjModel.PaperSource)
             End If
             If print Then

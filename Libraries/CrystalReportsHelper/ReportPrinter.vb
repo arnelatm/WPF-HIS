@@ -3,12 +3,13 @@ Imports System.Drawing.Printing
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary.Messaging
+Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 Imports PaperSize = CrystalDecisions.Shared.PaperSize
 
 Public Class ReportPrinter
     Private Const DefaultConnection As String = "ISPDATA"
-    Private ReadOnly _report As New CrystalDecisions.CrystalReports.Engine.ReportDocument
+    Private ReadOnly _report As New ReportDocument
 
     Private _reportPath As String
     Private _uid As String
@@ -19,10 +20,13 @@ Public Class ReportPrinter
     Public Sub New()
     End Sub
 
-    Public Sub New(pReportFileName As String, Optional pDataBaseConnectionName As String = DefaultConnection)
+    Public Sub New(pReportFileName As String, Optional pDataBaseConnectionName As String = DefaultConnection, Optional args() As Object = Nothing)
         ReportFileName = pReportFileName
         DataBaseConnectionName = pDataBaseConnectionName
         SetReportProperties(pReportFileName)
+        If args IsNot Nothing Then
+            SetParameterValue(args)
+        End If
     End Sub
 
     Public Sub SetReportProperties(pReportFileName As String)
@@ -65,6 +69,8 @@ Public Class ReportPrinter
     Public Property PrintJobName() As String
 
     Public Property DataBaseConnectionName() As String
+
+    Public Property Args() As Object
 
     Public Sub Load(reportPaths As String, cReportFileName As String)
         _report.Load(reportPaths & cReportFileName)
