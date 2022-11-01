@@ -900,7 +900,6 @@
             Me.txtGTIN.ComputedValue = False
             Me.txtGTIN.CustomFormat = Nothing
             Me.txtGTIN.DataBoundControl = True
-            Me.txtGTIN.DisplayOnly = True
             Me.txtGTIN.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtGTIN.EditingMode = True
             Me.txtGTIN.EndFindValue = Nothing
@@ -917,7 +916,6 @@
             Me.txtGTIN.MinimumValue = Nothing
             Me.txtGTIN.Name = "txtGTIN"
             Me.txtGTIN.OldValue = ""
-            Me.txtGTIN.ReadOnly = True
             Me.txtGTIN.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtGTIN.Size = New System.Drawing.Size(148, 23)
             Me.txtGTIN.TabIndex = 35
