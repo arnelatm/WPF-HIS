@@ -6,13 +6,17 @@ Namespace PresentationLayer.Views.Interface
         Inherits IView
 
         Property DefaultPaperOrientation As Int32?
-        Property DefaultPaperSize As Int32?
+        Property DefaultPaperSize As String
         Property DefaultPaperSource As Int32?
         Property HostOrIpName As String
         Property IdNo As Int16
         Property PrinterCode As String
         Property PrinterName As String
+
         Event CheckPrinterClicked(sender As Object)
+
+        Event PrinterChanged(sender As Object)
+
     End Interface
 
 End Namespace

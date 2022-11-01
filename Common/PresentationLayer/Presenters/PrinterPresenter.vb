@@ -1,6 +1,8 @@
 ﻿Imports System.Drawing.Printing
 Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.Common.ServiceLayer
+Imports AATM.Libraries
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
@@ -18,13 +20,14 @@ Namespace PresentationLayer.Presenters
             TreeViewMainField = "PrinterName"
             TreeViewSecondaryField = "PrinterCode"
             AddHandler view.CheckPrinterClicked, AddressOf OnCheckPrinterClicked
+            AddHandler view.PrinterChanged, AddressOf OnPrinterChanged
 
         End Sub
 
         Protected Overrides Sub CreateDataSources()
             CreateDataSourceGroupCode("DefaultPaperOrientation", "PPOR")
-            CreateDataSourceGroupCode("DefaultPaperSize", "PPSZ")
-            CreateDataSourceGroupCode("DefaultPaperSource", "PPSR")
+            'CreateDataSourceGroupCode("DefaultPaperSize", "PPSZ")
+            'CreateDataSourceGroupCode("DefaultPaperSource", "PPSR")
         End Sub
 
         Private Sub OnCheckPrinterClicked(sender As Object)
@@ -58,24 +61,61 @@ Namespace PresentationLayer.Presenters
             'View.PayFrequency = Service.GetField(Of String, Int16)(View.PayCycleIdNo, "PayCycle", "IdNo", "PayFrequency")
         End Sub
 
-        Public Shared Function GetPrinterPageInfo(ByVal printerName As String) As PageSettings
-            Dim settings As PrinterSettings
+        Private Sub OnPrinterChanged(sender As Object)
+            SetPrinterSupportedPaper(View.PrinterName)
+            SetPrinterSupportedSources(View.PrinterName)
+        End Sub
 
-            If String.IsNullOrEmpty(printerName) Then
+        Private Sub SetPrinterSupportedPaper(pPrinterName As String)
+            Dim data = GetPrinterPageInfo(pPrinterName)
+            Dim paperSizeLookup As New List(Of Lookup.LookupData)
+            Dim index As Int16 = 0
+            For Each item As PaperSize In data.PrinterSettings.PaperSizes
+                Dim dbLookup = New Lookup.LookupData
+                dbLookup.IdNo = item.RawKind
+                dbLookup.Name = item.PaperName
+                dbLookup.Code = item.Kind
+                dbLookup.Index = index
+                paperSizeLookup.Add(dbLookup)
+                index += 1
+            Next
+            GetControlName("DefaultPaperSize").DataSource = paperSizeLookup
+        End Sub
 
-                For Each printer In PrinterSettings.InstalledPrinters
-                    settings = New PrinterSettings()
-                    settings.PrinterName = printer.ToString()
-                    If settings.IsDefaultPrinter Then Return settings.DefaultPageSettings
-                Next
+        Private Sub SetPrinterSupportedSources(pPrinterName As String)
+            Dim data = GetPrinterPageInfo(pPrinterName)
+            Dim paperSourceLookup As New List(Of Lookup.LookupData)
+            Dim index As Int16 = 0
+            For Each item As PaperSource In data.PrinterSettings.PaperSources
+                Dim dbLookup = New Lookup.LookupData
+                dbLookup.IdNo = item.RawKind
+                dbLookup.Name = item.SourceName
+                dbLookup.Code = item.Kind
+                dbLookup.Index = index
+                paperSourceLookup.Add(dbLookup)
+                index += 1
+            Next
+            GetControlName("DefaultPaperSource").DataSource = paperSourceLookup
+        End Sub
 
-                Return Nothing
-            End If
+        'Public Shared Function GetPrinterPageInfo(ByVal printerName As String) As PageSettings
+        '    Dim settings As PrinterSettings
 
-            settings = New PrinterSettings()
-            settings.PrinterName = printerName
-            Return settings.DefaultPageSettings
-        End Function
+        '    If String.IsNullOrEmpty(printerName) Then
+
+        '        For Each printer In PrinterSettings.InstalledPrinters
+        '            settings = New PrinterSettings()
+        '            settings.PrinterName = printer.ToString()
+        '            If settings.IsDefaultPrinter Then Return settings.DefaultPageSettings
+        '        Next
+
+        '        Return Nothing
+        '    End If
+
+        '    settings = New PrinterSettings()
+        '    settings.PrinterName = printerName
+        '    Return settings.DefaultPageSettings
+        'End Function
 
         'Public Shared Function GetPrinterPageInfo(printer As String) As PageSettings
         '    Return GetPrinterPageInfo(printer)

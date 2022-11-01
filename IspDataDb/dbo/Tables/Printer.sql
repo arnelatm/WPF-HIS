@@ -5,7 +5,7 @@
     [HostOrIpName]            VARCHAR (100) NULL,
     [DefaultPaperSource]      TINYINT       NULL,
     [DefaultPaperOrientation] TINYINT       NULL,
-    [DefaultPaperSize]        INT           NULL,
+    [DefaultPaperSize]        VARCHAR (20)  NULL,
     [DateTimeStamp]           ROWVERSION    NULL,
     CONSTRAINT [PK_PrinterAssignment] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );

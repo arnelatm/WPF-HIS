@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Drawing.Printing
 Imports System.Reflection
 Imports System.Reflection.Emit
 Imports System.Transactions
