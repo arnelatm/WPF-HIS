@@ -2393,10 +2393,10 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="app.config" />
     <None Include="app-Marcelo-Dell.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Isp-Server.config" />
-    <None Include="app.config" />
     <None Include="appx.config" />
     <None Include="app-Ibn-Server.config" />
     <None Include="appOrig.config" />

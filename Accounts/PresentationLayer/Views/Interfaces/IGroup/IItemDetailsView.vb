@@ -10,6 +10,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Created_By_Branch As String
         Property DosageForm As String
         Property GenericName As String
+        Property GTIN As String
         Property IdNo As Int32
         Property Item_Status As String
         Property ItemDetailsCode As String
@@ -29,6 +30,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property Volume As Double?
         Property PrescriptionDrug As Boolean
         Property RouteOfAdministration As String
+        Event FinderValueChanged(itemIdNo As Int16)
+
     End Interface
 
 End Namespace

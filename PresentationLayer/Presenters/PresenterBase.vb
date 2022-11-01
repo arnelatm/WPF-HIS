@@ -535,6 +535,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Dim lookupObj As New Lookup(pTableName, pFilter)
         lookupObj.FieldsToShow = pFieldsToShow
         lookupObj.FilterKey = pFilter
+        lookupObj.SortKey = pFieldsToShow(1)
         Return Service.GetLookup(lookupObj)
     End Function
 

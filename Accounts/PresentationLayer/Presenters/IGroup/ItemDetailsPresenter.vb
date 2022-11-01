@@ -17,6 +17,7 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "ItemNameEnglish"
             'Service.RestoreConnectionString()
             WithTreeView = False
+            AddHandler View.FinderValueChanged, AddressOf OnFinderValueChanged
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -25,6 +26,13 @@ Namespace PresentationLayer.Presenters
             CreateDataSource("DrugUnitOfStrength_View", "UnitOfStrength", {"UnitOfStrength"}, "UnitOfStrength")
             CreateDataSource("DrugPackageType_View", "PackageType", {"PackageType"}, "PackageType")
             CreateDataSource("DrugRouteOfAdministration_View", "RouteOfAdministration", {"RouteOfAdministration"}, "RouteOfAdministration")
+            CreateLookupData("ItemDetails", "ItemDetailsByName", {"Primary_Key", "ItemNameEnglish", "Item_Code"}, "BranchId='01'")
+        End Sub
+
+        Public Sub OnFinderValueChanged(idNo As Int16)
+            If idNo <> 0 Then
+                RecordPositionNumber = GetSortedRecordPosition(idNo)
+            End If
         End Sub
 
         Private Sub OnBeforeSave() Handles MyBase.BeforeSave

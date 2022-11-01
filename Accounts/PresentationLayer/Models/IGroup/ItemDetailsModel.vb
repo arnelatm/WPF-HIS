@@ -12,6 +12,7 @@
         Public Property Created_By_Branch
         Public Property DosageForm As String
         Public Property GenericName As String
+        Public Property GTIN As String
         Public Property IdNo As Int32
         Public Property Item_status As String
         Public Property ItemDetailsCode As String
