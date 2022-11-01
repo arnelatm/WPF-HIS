@@ -1373,4 +1373,23 @@ Public Module GlobalFunctions
     '    Return firstDayOfMonth.AddMonths(1).AddDays(-1)
     'End Function
 
+    Public Function GetPrinterPageInfo(ByVal printerName As String) As PageSettings
+        Dim settings As PrinterSettings
+
+        If String.IsNullOrEmpty(printerName) Then
+
+            For Each printer In PrinterSettings.InstalledPrinters
+                settings = New PrinterSettings()
+                settings.PrinterName = printer.ToString()
+                If settings.IsDefaultPrinter Then Return settings.DefaultPageSettings
+            Next
+
+            Return Nothing
+        End If
+
+        settings = New PrinterSettings()
+        settings.PrinterName = printerName
+        Return settings.DefaultPageSettings
+    End Function
+
 End Module

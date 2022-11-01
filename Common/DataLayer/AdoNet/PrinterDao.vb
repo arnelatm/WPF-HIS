@@ -18,8 +18,8 @@ Namespace DataLayer.AdoNet
                                   "HostOrIpName," &
                                   "IdNo," &
                                   "PrinterCode," &
-                                  "PrinterName" 
-                                  
+                                  "PrinterName"
+
         'Public Function GetPrinterByName(PrinterName As String) As Printer Implements iDao(Of Printer).GetPrinterByName
         '    Throw New NotImplementedException
         'End Function
@@ -57,7 +57,7 @@ Namespace DataLayer.AdoNet
             New Printer() With {
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .DefaultPaperOrientation = Extensions.AsNullable(Of Int32?)(reader("DefaultPaperOrientation")),
-            .DefaultPaperSize = Extensions.AsNullable(Of Int32?)(reader("DefaultPaperSize")),
+            .DefaultPaperSize = Extensions.AsString(reader("DefaultPaperSize")),
             .DefaultPaperSource = Extensions.AsNullable(Of Int32?)(reader("DefaultPaperSource")),
             .HostOrIpName = Extensions.AsString(reader("HostOrIpName")),
             .PrinterCode = Extensions.AsString(reader("PrinterCode")),
