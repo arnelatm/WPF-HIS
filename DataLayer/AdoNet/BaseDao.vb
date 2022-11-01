@@ -419,17 +419,16 @@ Namespace AdoNet
         End Function
 
         Public Function GetIcIdNoWithName(codeGroupSelection As CodeGroupSelection, fieldValue As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As Int32 Implements IBaseDao.GetIcIdNoWithName
-            'Dim codeGroupCode As String = GlobalFunctions.EnumToCode(codeGroup)
             Dim codeGroupIdNo = Convert.ToInt32(codeGroupSelection)
             Dim sql As String = "Select Top 1 IdNo from ItemCode where IdNo = @FieldValue and CodeGroupIdNo = @CodeGroupIdNo"
             Dim params() As Object = {"@FieldValue", fieldValue, "@CodeGroupIdNo", codeGroupIdNo}
             Return GetDb().Scalar(sql, params)
         End Function
 
-        Public Function GetIcCodeWithIdNo(codeGroup As CodeGroupSelection, fieldValue As Int32, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As String Implements IBaseDao.GetIcNameWithIdNo
-            Dim codeGroupCode As String = GlobalFunctions.EnumToCode(codeGroup)
-            Dim sql As String = "Select Top 1 ItemCodeName from ItemCode where IdNo = @FieldValue and CodeGroupCode = @CodeGroupCode"
-            Dim params() As Object = {"@FieldValue", fieldValue, "@CodeGroupCode", codeGroupCode}
+        Public Function GetIcNameWithIdNo(codeGroupSelection As CodeGroupSelection, fieldValue As Int32, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As String Implements IBaseDao.GetIcNameWithIdNo
+            Dim codeGroupIdNo = Convert.ToInt32(codeGroupSelection)
+            Dim sql As String = "Select Top 1 ItemCodeName from ItemCode where IdNo = @FieldValue and CodeGroupIdNo = @CodeGroupIdNo"
+            Dim params() As Object = {"@FieldValue", fieldValue, "@CodeGroupIdNo", codeGroupIdNo}
             Return GetDb().Scalar(sql, params)
         End Function
 

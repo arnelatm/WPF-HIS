@@ -1071,7 +1071,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub PharmacyBarcodePrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPharmacyBarcodePrinting.Click
             Dim args As Object() = {Environment.MachineName, "Workstation"}
-            PrintReport("BarcodePharmacy2.Rpt", $"IGROUP", args)
+            PrintReport("BarcodePharmacy.Rpt", $"IGROUP", args)
         End Sub
 
         Private Sub PrintReport(reportFileName As String, databaseConnectionName As String, Optional args() As Object = Nothing)
