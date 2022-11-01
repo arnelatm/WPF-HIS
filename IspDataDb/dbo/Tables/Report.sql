@@ -35,13 +35,3 @@
     CONSTRAINT [PK_ReportCreator] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
 
-
-
-
-
-
-
-
-
-
-

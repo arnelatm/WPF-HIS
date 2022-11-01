@@ -26,22 +26,24 @@ Namespace PresentationLayer.Presenters
             Dim computerName As String = Environment.MachineName
             Dim printSetupIdNo As Int32 = _service.GetPrintSetupIdNo(reportFileName)
             If printSetupIdNo <> 0 Then
-                pjModel.ComputerIdNo = _service.GetIdNoWithName(Of Int16)("Computer", computerName)
-                Dim printJobIdNo As Int32 = GetPrintJobIdNo(pjModel, printSetupIdNo)
-                pjModel = _service.GetRecordByIdNo(Of PrintJobModel)(printJobIdNo)
-                Dim printerName As String = _service.GetFieldWithIdNo(pjModel.PrinterIdNo, "Printer", "PrinterName")
-                Dim hostOrIpName As String = _service.GetFieldWithIdNo(pjModel.IdNo, "Printer", "HostOrIpName")
-                Dim printerSharedName As String = IIf(GlobalFunctions.IsEmpty(hostOrIpName), printerName, "\\" & hostOrIpName & "\" & printerName)
-                Dim paperSizeName As String = _service.GetIcNameWithIdNo(CodeGroupSelection.PaperSize, pjModel.PaperSize)
-                report.SetPrintOption(printerSharedName, paperSizeName, pjModel.PaperOrientation, pjModel.PaperSource)
-            End If
-            If print Then
-                report.PrintReport(copies, collate, startPage, endPage)
+                Dim computerIdNo As Int16 = _service.GetIdNoWithName(Of Int16)("Computer", computerName)
+                Dim printJobIdNo As Int32 = GetPrintJobIdNo(computerIdNo, printSetupIdNo)
+                If Not (computerIdNo = 0 Or printJobIdNo = 0) Then
+                    pjModel = _service.GetRecordByIdNo(Of PrintJobModel)(printJobIdNo)
+                    Dim printerName As String = _service.GetFieldWithIdNo(pjModel.PrinterIdNo, "Printer", "PrinterName").ToString()  ' force null value to empty string
+                    Dim hostOrIpName As String = _service.GetFieldWithIdNo(pjModel.IdNo, "Printer", "HostOrIpName").ToString()
+                    Dim printerSharedName As String = IIf(GlobalFunctions.IsEmpty(hostOrIpName), printerName, "\\" & hostOrIpName & "\" & printerName)
+                    Dim paperSizeName As String = _service.GetIcNameWithIdNo(CodeGroupSelection.PaperSize, pjModel.PaperSize)
+                    report.SetPrintOption(printerSharedName, paperSizeName, pjModel.PaperOrientation, pjModel.PaperSource)
+                End If
+                If print Then
+                    report.PrintReport(copies, collate, startPage, endPage)
+                End If
             End If
         End Sub
 
-        Private Function GetPrintJobIdNo(ByRef pjModel As PrintJobModel, printSetupIdNo As Integer) As Short
-            Return _service.GetRecordFieldWith2KeyG(Of Int16, Int16, Int16)(pjModel.ComputerIdNo, printSetupIdNo, "PrintJob", "ComputerIdNo", "PrintSetupIdNo", "IdNo")
+        Private Function GetPrintJobIdNo(computerIdNo As Int16, printSetupIdNo As Integer) As Short
+            Return _service.GetRecordFieldWith2KeyG(Of Int16, Int16, Int16)(computerIdNo, printSetupIdNo, "PrintJob", "ComputerIdNo", "PrintSetupIdNo", "IdNo")
         End Function
 
         Public Sub ViewReport(viewer As CrViewer, databaseConnectionName As String)

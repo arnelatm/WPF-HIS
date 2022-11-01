@@ -403,12 +403,12 @@ Namespace Services
             Return idNo
         End Function
 
-        Public Function GetIcIdNoWithName(groupCode As CodeGroupSelection, itemName As String) As Integer Implements IService.GetIcIdNoWithName
-            Return DataDao.GetIcIdNoWithIName(groupCode, itemName)
+        Public Function GetIcIdNoWithName(codeGroupSelection As CodeGroupSelection, itemName As String) As Integer Implements IService.GetIcIdNoWithName
+            Return DataDao.GetIcIdNoWithIName(codeGroupSelection, itemName)
         End Function
 
-        Public Function GetIcNameWithIdNo(groupCode As CodeGroupSelection, idNo As Int32) As String Implements IService.GetIcNameWithIdNo
-            Return DataDao.GetIcIdNameWithIdNo(groupCode, idNo)
+        Public Function GetIcNameWithIdNo(codeGroupSelection As CodeGroupSelection, idNo As Int32) As String Implements IService.GetIcNameWithIdNo
+            Return DataDao.GetIcNameWithIdNo(codeGroupSelection, idNo)
         End Function
 
         Public Function GetPrintSetupIdNo(reportName As String) As Integer Implements IService.GetPrintSetupIdNo
