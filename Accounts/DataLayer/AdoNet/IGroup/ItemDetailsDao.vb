@@ -18,6 +18,7 @@ Namespace DataLayer.AdoNet
                                       "Created_By_Branch," &
                                       "DosageForm," &
                                       "GenericName," &
+                                      "GTIN," &
                                       "Item_Code," &
                                       "Item_Status," &
                                       "ItemGroup," &
@@ -66,6 +67,7 @@ Namespace DataLayer.AdoNet
                     " BranchID = @BranchID," &
                     " Category = @Category," &
                     " Created_By_Branch = @Created_By_Branch," &
+                    " GTIN = @GTIN," &
                     " Item_Code = @ItemDetailsCode," &
                     " Item_Status = @Item_Status," &
                     " ItemGroup = @ItemGroup," &
@@ -100,8 +102,8 @@ Namespace DataLayer.AdoNet
 
         Public Function AddRecord(ByRef ItemDetails As ItemDetails) As Integer Implements IDao(Of ItemDetails).AddRecord
             Dim sql As String = " INSERT INTO [ItemDetails] " &
-                    " (BranchID,Category,Created_By_Branch,Item_Code,Item_Status,ItemGroup,ItemNameEnglish,Pack1,Pack2,Pack3,SaleStrip,UserId)" &
-                    " VALUES (@BranchID,@Category,@Created_By_Branch,@ItemDetailsCode,@Item_Status,@ItemGroup,@ItemDetailsName,@Pack1,@Pack2,@Pack3,@SaleStrip,@UserId)"
+                    " (BranchID,Category,Created_By_Branch,GTIN,Item_Code,Item_Status,ItemGroup,ItemNameEnglish,Pack1,Pack2,Pack3,SaleStrip,UserId)" &
+                    " VALUES (@BranchID,@Category,@Created_By_Branch,@GTIN,@ItemDetailsCode,@Item_Status,@ItemGroup,@ItemDetailsName,@Pack1,@Pack2,@Pack3,@SaleStrip,@UserId)"
             Dim retval As Integer
             retval = _db.Insert(sql, Take(ItemDetails))
             If retval > 0 Then
@@ -125,6 +127,7 @@ Namespace DataLayer.AdoNet
             .Created_By_Branch = Extensions.AsString(reader("Created_By_Branch")),
             .DosageForm = Extensions.AsString(reader("DosageForm")),
             .GenericName = Extensions.AsString(reader("GenericName")),
+            .GTIN = Extensions.AsString(reader("GTIN")),
             .IdNo = Extensions.AsId(Of Int32)(reader("Primary_Key")),
             .Item_status = Extensions.AsString(reader("Item_Status")),
             .ItemDetailsCode = Extensions.AsString(reader("Item_Code")),
@@ -149,6 +152,7 @@ Namespace DataLayer.AdoNet
                             "BranchID", ItemDetails.BranchID,
                             "Category", ItemDetails.Category,
                             "Created_By_Branch", ItemDetails.Created_By_Branch,
+                            "GTIN", ItemDetails.GTIN,
                             "ItemDetailsCode", ItemDetails.ItemDetailsCode,
                             "ItemGroup", ItemDetails.ItemGroup,
                             "Item_Status", ItemDetails.Item_status,

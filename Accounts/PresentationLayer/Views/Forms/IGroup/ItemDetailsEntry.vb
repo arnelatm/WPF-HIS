@@ -1,6 +1,7 @@
 ﻿Imports System.Configuration
 Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
@@ -33,6 +34,12 @@ Namespace PresentationLayer.Views.Forms
             End If
 
         End Sub
+
+        Public Event FinderValueChanged(itemIdNo As Int16) Implements IItemDetailsView.FinderValueChanged
+
+
+        Public Property ItemDetailsByName As List(Of Lookup.LookupData)
+
 
 #Region "Field Items"
 
@@ -292,6 +299,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property GTIN As String Implements IItemDetailsView.GTIN
+            Get
+                Return txtGTIN.Text
+            End Get
+            Set(value As String)
+                txtGTIN.Text = value
+            End Set
+        End Property
+
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {{"DosageForm", cboDosageForm},
@@ -341,7 +357,17 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private Sub ItemDetailsEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            cboItemFinder.DataSource = ItemDetailsByName
+            cboItemFinder.EditingMode = True
+        End Sub
+
+        Private Sub cboItemFinder_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboItemFinder.SelectedIndexChanged
+            RaiseEvent FinderValueChanged(cboItemFinder.SelectedItem.IdNo)
+        End Sub
+
 #End Region
+
 
     End Class
 
