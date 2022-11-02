@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
 Imports System.Threading
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
@@ -1081,6 +1082,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ToolStripMenuItemPrintJobs_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPrinters.Click
             RunForm(Of PrinterEntryTv, PrinterPresenter(Of PrinterModel))()
+        End Sub
+
+        Private Sub ToolStripMenuItemStockInventory_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStockInventory.Click
+            RunForm(Of StockInventoryEntry, StockInventoryPresenter(Of StockInventoryModel))()
         End Sub
 
     End Class
