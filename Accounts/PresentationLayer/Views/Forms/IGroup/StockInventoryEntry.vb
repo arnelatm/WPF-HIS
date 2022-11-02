@@ -94,10 +94,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Expiry As Date Implements IStockInventoryView.Expiry
             Get
-                Return txtExpiry.Text
+                Return dtpExpiry.Value
             End Get
-            Set(value As Date)
-                txtExpiry.Text = value
+            Set
+                dtpExpiry.Value = Value
             End Set
         End Property
 
@@ -139,10 +139,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property SerialNo As String Implements IStockInventoryView.SerialNo
             Get
-                Return txtExpiry.Text
+                Return txtSerialNo.Text
             End Get
             Set(value As String)
-                txtExpiry.Text = value
+                txtSerialNo.Text = value
             End Set
         End Property
 
@@ -151,7 +151,7 @@ Namespace PresentationLayer.Views.Forms
                 {{"Batch", txtBatch},
                 {"BranchId", txtBranchId},
                 {"CashPrice", txtCashPrice},
-                {"Expiry", txtExpiry},
+                {"Expiry", dtpExpiry},
                 {"GTIN", txtGTIN},
                 {"IdNo", TxtIdNo},
                 {"Item_Code", TxtItem_Code},
