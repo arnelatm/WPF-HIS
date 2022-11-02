@@ -188,6 +188,9 @@ Public Class MappingProfileAccounts
         CreateMap(Of PmrPatientDisplayModel, IPmrPatientDisplayView)().ReverseMap()
         CreateMap(Of PmrPatientDisplayModel, PmrPatientDisplayView)().ReverseMap()
 
+        CreateMap(Of StockInventory, StockInventoryModel)().ReverseMap()
+        CreateMap(Of StockInventoryModel, IStockInventoryView)().ReverseMap()
+
         'CreateMap(Of PmrPatientDisplayModel, PmrPatientDisplayView)()
 
     End Sub
