@@ -41,7 +41,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function UpdateRecord(ByRef StockInventory As StockInventory) As Integer Implements IDao(Of StockInventory).UpdateRecord
-            Dim sql As String = " UPDATE [StockInventory] SET " &
+            Dim sql As String = " UPDATE StockPositionCurrent SET " &
                     " Batch = @Batch, " &
                     " Expiry = @Expiry," &
                     " SerialNo = @SerialNo"
@@ -67,8 +67,9 @@ Namespace DataLayer.AdoNet
             .Batch = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Batch")),
             .BranchID = AATM.DataLayer.AdoNet.Extensions.AsString(reader("BranchID")),
             .CashPrice = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("CashPrice")),
+            .Expiry = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("Expiry")),
             .GTIN = AATM.DataLayer.AdoNet.Extensions.AsString(reader("GTIN")),
-            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("Primary_Key")),
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .Item_Code = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Item_Code")),
             .ItemNameEnglish = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ItemNameEnglish")),
             .PurchaseNo = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("PurchaseNo")),

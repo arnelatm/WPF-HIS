@@ -21,6 +21,7 @@
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(StockInventoryEntry))
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.lblItemNameEnglish = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtItemNameEnglish = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -39,11 +40,11 @@
             Me.lblQuantity = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblExpiry = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtQuantity = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtExpiry = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblGTIN = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtGTIN = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.cboItemFinder = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.txtBranchId = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.dtpExpiry = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.TableLayoutPanel1.SuspendLayout()
             Me.SuspendLayout()
@@ -56,6 +57,7 @@
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 173.0!))
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150.0!))
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 318.0!))
+            Me.TableLayoutPanel1.Controls.Add(Me.dtpExpiry, 1, 5)
             Me.TableLayoutPanel1.Controls.Add(Me.lblItemNameEnglish, 0, 3)
             Me.TableLayoutPanel1.Controls.Add(Me.txtItemNameEnglish, 1, 3)
             Me.TableLayoutPanel1.Controls.Add(Me.txtCashPrice, 1, 7)
@@ -73,7 +75,6 @@
             Me.TableLayoutPanel1.Controls.Add(Me.lblExpiry, 0, 5)
             Me.TableLayoutPanel1.Controls.Add(Me.lblBatch, 0, 4)
             Me.TableLayoutPanel1.Controls.Add(Me.txtQuantity, 1, 8)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtExpiry, 1, 5)
             Me.TableLayoutPanel1.Controls.Add(Me.lblGTIN, 0, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.txtGTIN, 1, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.cboItemFinder, 3, 0)
@@ -162,7 +163,7 @@
             Me.txtCashPrice.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtCashPrice.ForeColor = System.Drawing.Color.Black
             Me.txtCashPrice.LinkedLabel = Me.lblCashPrice
-            Me.txtCashPrice.Location = New System.Drawing.Point(174, 177)
+            Me.txtCashPrice.Location = New System.Drawing.Point(174, 175)
             Me.txtCashPrice.Margin = New System.Windows.Forms.Padding(1)
             Me.txtCashPrice.MaximumValue = Nothing
             Me.txtCashPrice.MinimumValue = Nothing
@@ -179,7 +180,7 @@
             Me.lblCashPrice.DisplayOnly = True
             Me.lblCashPrice.EditingMode = False
             Me.lblCashPrice.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblCashPrice.Location = New System.Drawing.Point(1, 177)
+            Me.lblCashPrice.Location = New System.Drawing.Point(1, 175)
             Me.lblCashPrice.Margin = New System.Windows.Forms.Padding(1)
             Me.lblCashPrice.Name = "lblCashPrice"
             Me.lblCashPrice.Size = New System.Drawing.Size(86, 17)
@@ -206,7 +207,7 @@
             Me.txtSerialNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtSerialNo.ForeColor = System.Drawing.Color.Black
             Me.txtSerialNo.LinkedLabel = Me.lblSerialNo
-            Me.txtSerialNo.Location = New System.Drawing.Point(174, 152)
+            Me.txtSerialNo.Location = New System.Drawing.Point(174, 150)
             Me.txtSerialNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtSerialNo.MaximumValue = Nothing
             Me.txtSerialNo.MinimumValue = Nothing
@@ -223,7 +224,7 @@
             Me.lblSerialNo.DisplayOnly = True
             Me.lblSerialNo.EditingMode = False
             Me.lblSerialNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblSerialNo.Location = New System.Drawing.Point(1, 152)
+            Me.lblSerialNo.Location = New System.Drawing.Point(1, 150)
             Me.lblSerialNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblSerialNo.Name = "lblSerialNo"
             Me.lblSerialNo.Size = New System.Drawing.Size(139, 17)
@@ -250,7 +251,7 @@
             Me.txtPurchaseNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPurchaseNo.ForeColor = System.Drawing.Color.Black
             Me.txtPurchaseNo.LinkedLabel = Me.lblPurchaseNo
-            Me.txtPurchaseNo.Location = New System.Drawing.Point(174, 227)
+            Me.txtPurchaseNo.Location = New System.Drawing.Point(174, 225)
             Me.txtPurchaseNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPurchaseNo.MaximumValue = Nothing
             Me.txtPurchaseNo.MinimumValue = Nothing
@@ -267,7 +268,7 @@
             Me.lblPurchaseNo.DisplayOnly = True
             Me.lblPurchaseNo.EditingMode = False
             Me.lblPurchaseNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblPurchaseNo.Location = New System.Drawing.Point(1, 227)
+            Me.lblPurchaseNo.Location = New System.Drawing.Point(1, 225)
             Me.lblPurchaseNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPurchaseNo.Name = "lblPurchaseNo"
             Me.lblPurchaseNo.Size = New System.Drawing.Size(122, 17)
@@ -417,7 +418,7 @@
             Me.lblQuantity.DisplayOnly = True
             Me.lblQuantity.EditingMode = False
             Me.lblQuantity.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblQuantity.Location = New System.Drawing.Point(1, 202)
+            Me.lblQuantity.Location = New System.Drawing.Point(1, 200)
             Me.lblQuantity.Margin = New System.Windows.Forms.Padding(1)
             Me.lblQuantity.Name = "lblQuantity"
             Me.lblQuantity.Size = New System.Drawing.Size(61, 17)
@@ -459,7 +460,7 @@
             Me.txtQuantity.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtQuantity.ForeColor = System.Drawing.Color.Black
             Me.txtQuantity.LinkedLabel = Me.lblQuantity
-            Me.txtQuantity.Location = New System.Drawing.Point(174, 202)
+            Me.txtQuantity.Location = New System.Drawing.Point(174, 200)
             Me.txtQuantity.Margin = New System.Windows.Forms.Padding(1)
             Me.txtQuantity.MaximumValue = Nothing
             Me.txtQuantity.MinimumValue = Nothing
@@ -469,35 +470,6 @@
             Me.txtQuantity.Size = New System.Drawing.Size(148, 23)
             Me.txtQuantity.TabIndex = 9
             Me.txtQuantity.Translatable = False
-            '
-            'txtExpiry
-            '
-            Me.txtExpiry.BackColor = System.Drawing.Color.White
-            Me.txtExpiry.BegFindValue = Nothing
-            Me.txtExpiry.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtExpiry.ComputedValue = False
-            Me.txtExpiry.CustomFormat = Nothing
-            Me.txtExpiry.DataBoundControl = True
-            Me.txtExpiry.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.txtExpiry.EditingMode = True
-            Me.txtExpiry.EndFindValue = Nothing
-            Me.txtExpiry.FieldDescription = Nothing
-            Me.txtExpiry.FieldName = Nothing
-            Me.txtExpiry.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtExpiry.FindEnabled = True
-            Me.txtExpiry.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtExpiry.ForeColor = System.Drawing.Color.Black
-            Me.txtExpiry.LinkedLabel = Me.lblExpiry
-            Me.txtExpiry.Location = New System.Drawing.Point(174, 127)
-            Me.txtExpiry.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtExpiry.MaximumValue = Nothing
-            Me.txtExpiry.MinimumValue = Nothing
-            Me.txtExpiry.Name = "txtExpiry"
-            Me.txtExpiry.OldValue = Nothing
-            Me.txtExpiry.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtExpiry.Size = New System.Drawing.Size(148, 23)
-            Me.txtExpiry.TabIndex = 6
-            Me.txtExpiry.Translatable = False
             '
             'lblGTIN
             '
@@ -616,6 +588,34 @@
             Me.txtBranchId.Translatable = False
             Me.txtBranchId.Visible = False
             '
+            'dtpExpiry
+            '
+            Me.dtpExpiry.AutoSize = True
+            Me.dtpExpiry.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.dtpExpiry.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
+            Me.dtpExpiry.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpExpiry.DefaultValue = Nothing
+            Me.dtpExpiry.DisplayOnly = False
+            Me.dtpExpiry.DtpDefaultValue = Nothing
+            Me.dtpExpiry.EditingMode = True
+            Me.dtpExpiry.EditsAllowed = False
+            Me.dtpExpiry.ForeColor = System.Drawing.Color.Black
+            Me.dtpExpiry.LinkedLabel = Me.lblExpiry
+            Me.dtpExpiry.Location = New System.Drawing.Point(173, 126)
+            Me.dtpExpiry.Margin = New System.Windows.Forms.Padding(0)
+            Me.dtpExpiry.Name = "dtpExpiry"
+            Me.dtpExpiry.ReadOnlyDp = False
+            Me.dtpExpiry.SecurityKey = Nothing
+            Me.dtpExpiry.ShowLongDate = False
+            Me.dtpExpiry.ShowTime = False
+            Me.dtpExpiry.Size = New System.Drawing.Size(118, 23)
+            Me.dtpExpiry.TabIndex = 45
+            Me.dtpExpiry.TargetCalendar = CType(resources.GetObject("dtpExpiry.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpExpiry.Translatable = False
+            Me.dtpExpiry.Value = Nothing
+            Me.dtpExpiry.ValueIsMandatory = False
+            Me.dtpExpiry.ValueIsNullable = False
+            '
             'StockInventoryEntry
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -641,7 +641,6 @@
         Friend WithEvents lblItem_Code As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblBatch As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents TxtItem_Code As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents txtExpiry As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtBatch As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblExpiry As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblPurchaseNo As Libraries.CBaseControlsLibrary.CLabel
@@ -658,5 +657,6 @@
         Friend WithEvents txtCashPrice As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblCashPrice As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtBranchId As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents dtpExpiry As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
     End Class
 End Namespace
