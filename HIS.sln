@@ -129,6 +129,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "IspDataDb", "IspDataDb\IspD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQueries", "{E0336D98-67DC-4134-9508-7F5598295FEC}"
 	ProjectSection(SolutionItems) = preProject
+		Add constraint for not duplicate values including null values.sql = Add constraint for not duplicate values including null values.sql
 		Append a table to a new table.sql = Append a table to a new table.sql
 		Check for Duplicate Item RegistraTION pHARMACY.txt = Check for Duplicate Item RegistraTION pHARMACY.txt
 		CreateEditReset Sequence.sql = CreateEditReset Sequence.sql
@@ -138,6 +139,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQuer
 		Extract Varchar Fields to Images.sql = Extract Varchar Fields to Images.sql
 		Find all object references for a specific object.sql = Find all object references for a specific object.sql
 		Find All Tables without Primary KEy.sql = Find All Tables without Primary KEy.sql
+		Find duplicate fields in a table.sql = Find duplicate fields in a table.sql
 		Look for tables containing field name.sql = Look for tables containing field name.sql
 		Query Sql Database for a certain name.sql = Query Sql Database for a certain name.sql
 		Query tables for Creation Date.sql = Query tables for Creation Date.sql

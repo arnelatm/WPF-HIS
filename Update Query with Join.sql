@@ -4,3 +4,8 @@
   INNER JOIN dbo.Table2 AS t2
   ON t1.CommonField = t2.[Common Field]
   WHERE t1.BatchNo = '110';
+
+UPDATE DrugList
+SET DrugList.GTIN=DrugRegGTIN.GTIN
+FROM DrugList, DrugRegGTIN
+WHERE DrugList.RegistrationNo=DrugRegGTIN.RegistrationNo
