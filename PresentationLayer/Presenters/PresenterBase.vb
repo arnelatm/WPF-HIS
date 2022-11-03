@@ -933,10 +933,10 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         RecordDateTimeStampValue = GetRecordDateTimeStamp(TargetIdNo)
         modelData = Service.GetRecordByIdNo(Of TM)(idNo)
         RaiseEvent BeforeMappingData(modelData)
-        GlobalVariables.Mapper.Map(Of TM, TV)(modelData, View)
-        For Each child In ChildPresenters
-            child.UpdateViewDisplay(idNo)
-        Next
+        'GlobalVariables.Mapper.Map(Of TM, TV)(modelData, View)
+        'For Each child In ChildPresenters
+        '    child.UpdateViewDisplay(idNo)
+        'Next
         'End If
         ClearAllErrorMessages()
     End Sub

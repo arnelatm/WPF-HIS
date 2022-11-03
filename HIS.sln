@@ -95,6 +95,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{5DC97E00
 		PMRMedNInvestigationPrint_View.sql = PMRMedNInvestigationPrint_View.sql
 		ProfitCenter.sql = ProfitCenter.sql
 		SecurityTables.sql = SecurityTables.sql
+		SqlQuery_1.sql = SqlQuery_1.sql
 		SqlQuery_7.sql = SqlQuery_7.sql
 		TranslatedMessages_View.sql = TranslatedMessages_View.sql
 		UpdateCheckDisbursementJournalItemTVP.sql = UpdateCheckDisbursementJournalItemTVP.sql
