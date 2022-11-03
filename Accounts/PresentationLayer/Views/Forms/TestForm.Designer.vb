@@ -33,25 +33,22 @@ Partial Class TestForm
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblDepartmentCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDepartmentCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblDepartmentName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cacRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.lblRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtDepartmentNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
         Me.txtDepartmentName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblDepartmentNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDepartmentNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-        Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtSortKey = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CMaskedTextBox1 = New AATM.Libraries.CBaseControlsLibrary.CMaskedTextBox()
-        Me.CMaskedTextBox2 = New AATM.Libraries.CBaseControlsLibrary.CMaskedTextBox()
+        Me.lblDepartmentName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtDepartmentCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.lblDepartmentCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -79,6 +76,14 @@ Partial Class TestForm
         Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
         Me.ImageListTreeView.Images.SetKeyName(0, "TreeNode.ico")
         Me.ImageListTreeView.Images.SetKeyName(1, "openbriefcase.png")
+        '
+        'TranslatorDAC
+        '
+        Me.TranslatorDAC.Cs = ""
+        '
+        'AppDataDAC
+        '
+        Me.AppDataDAC.Cs = ""
         '
         'CTextBox1
         '
@@ -150,151 +155,205 @@ Partial Class TestForm
         Me.Label3.TabIndex = 5
         Me.Label3.Text = "TextBox"
         '
-        'TextBox2
+        'txtNotes
         '
-        Me.TextBox2.Location = New System.Drawing.Point(75, 227)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(245, 20)
-        Me.TextBox2.TabIndex = 2
+        Me.txtNotes.BackColor = System.Drawing.Color.White
+        Me.txtNotes.BegFindValue = Nothing
+        Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtNotes.ComputedValue = False
+        Me.txtNotes.CustomFormat = Nothing
+        Me.txtNotes.DataBoundControl = True
+        Me.txtNotes.EditingMode = False
+        Me.txtNotes.EndFindValue = Nothing
+        Me.txtNotes.FieldDescription = Nothing
+        Me.txtNotes.FieldName = Nothing
+        Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtNotes.FindEnabled = True
+        Me.CFlowLayout1.SetFlowBreak(Me.txtNotes, True)
+        Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.txtNotes.ForeColor = System.Drawing.Color.Black
+        Me.txtNotes.LinkedLabel = Nothing
+        Me.txtNotes.Location = New System.Drawing.Point(192, 163)
+        Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtNotes.MaximumValue = Nothing
+        Me.txtNotes.MinimumValue = Nothing
+        Me.txtNotes.Multiline = True
+        Me.txtNotes.Name = "txtNotes"
+        Me.txtNotes.OldValue = Nothing
+        Me.txtNotes.ReadOnly = True
+        Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.txtNotes.Size = New System.Drawing.Size(418, 60)
+        Me.txtNotes.TabIndex = 6
+        Me.txtNotes.Translatable = False
+        Me.txtNotes.ValueIsMandatory = True
         '
-        'CFlowLayout1
+        'lblNotes
         '
-        Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
-        Me.CFlowLayout1.Controls.Add(Me.lblIdNo)
-        Me.CFlowLayout1.Controls.Add(Me.TxtIdNo)
-        Me.CFlowLayout1.Controls.Add(Me.lblDepartmentCode)
-        Me.CFlowLayout1.Controls.Add(Me.txtDepartmentCode)
-        Me.CFlowLayout1.Controls.Add(Me.lblDepartmentName)
-        Me.CFlowLayout1.Controls.Add(Me.txtDepartmentName)
-        Me.CFlowLayout1.Controls.Add(Me.lblDepartmentNameAra)
-        Me.CFlowLayout1.Controls.Add(Me.txtDepartmentNameAra)
-        Me.CFlowLayout1.Controls.Add(Me.lblParentIdNo)
-        Me.CFlowLayout1.Controls.Add(Me.cacParentIdNo)
-        Me.CFlowLayout1.Controls.Add(Me.lblRevCostCenterIdNo)
-        Me.CFlowLayout1.Controls.Add(Me.cacRevCostCenterIdNo)
-        Me.CFlowLayout1.Controls.Add(Me.lblNotes)
-        Me.CFlowLayout1.Controls.Add(Me.txtNotes)
-        Me.CFlowLayout1.Controls.Add(Me.txtSortKey)
-        Me.CFlowLayout1.Controls.Add(Me.TextBox2)
-        Me.CFlowLayout1.Controls.Add(Me.CMaskedTextBox1)
-        Me.CFlowLayout1.Controls.Add(Me.CMaskedTextBox2)
-        Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CFlowLayout1.Location = New System.Drawing.Point(0, 0)
-        Me.CFlowLayout1.MaximumSize = New System.Drawing.Size(631, 0)
-        Me.CFlowLayout1.Name = "CFlowLayout1"
-        Me.CFlowLayout1.Padding = New System.Windows.Forms.Padding(0, 10, 0, 0)
-        Me.CFlowLayout1.Size = New System.Drawing.Size(631, 397)
-        Me.CFlowLayout1.TabIndex = 17
+        Me.lblNotes.DisplayOnly = True
+        Me.lblNotes.EditingMode = False
+        Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.lblNotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblNotes.Location = New System.Drawing.Point(1, 163)
+        Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblNotes.Name = "lblNotes"
+        Me.lblNotes.Size = New System.Drawing.Size(189, 23)
+        Me.lblNotes.TabIndex = 169
+        Me.lblNotes.Text = "Notes"
+        Me.lblNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblNotes.Translatable = True
         '
-        'lblIdNo
+        'cacRevCostCenterIdNo
         '
-        Me.lblIdNo.DisplayOnly = True
-        Me.lblIdNo.EditingMode = False
-        Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.lblIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblIdNo.Location = New System.Drawing.Point(1, 11)
-        Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblIdNo.Name = "lblIdNo"
-        Me.lblIdNo.Size = New System.Drawing.Size(189, 23)
-        Me.lblIdNo.TabIndex = 165
-        Me.lblIdNo.Text = "Department ID No."
-        Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblIdNo.Translatable = True
+        Me.cacRevCostCenterIdNo.BackColor = System.Drawing.Color.White
+        Me.cacRevCostCenterIdNo.BegFindValue = Nothing
+        Me.cacRevCostCenterIdNo.ChangingSearchValueOnly = False
+        Me.cacRevCostCenterIdNo.CurrentSearchTerm = ""
+        Me.cacRevCostCenterIdNo.DataValue = Nothing
+        Me.cacRevCostCenterIdNo.DefaultValue = Nothing
+        Me.cacRevCostCenterIdNo.DisplayMember = "Name"
+        Me.cacRevCostCenterIdNo.EditingMode = False
+        Me.cacRevCostCenterIdNo.EndFindValue = Nothing
+        Me.cacRevCostCenterIdNo.FieldDescription = Nothing
+        Me.cacRevCostCenterIdNo.FieldName = Nothing
+        Me.cacRevCostCenterIdNo.FilterRule = Nothing
+        Me.cacRevCostCenterIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cacRevCostCenterIdNo.FindEnabled = False
+        Me.CFlowLayout1.SetFlowBreak(Me.cacRevCostCenterIdNo, True)
+        Me.cacRevCostCenterIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.cacRevCostCenterIdNo.ForeColor = System.Drawing.Color.Black
+        Me.cacRevCostCenterIdNo.FormattingEnabled = True
+        Me.cacRevCostCenterIdNo.HideWhenNotEditingOrAdding = False
+        Me.cacRevCostCenterIdNo.IgnoreCase = False
+        Me.cacRevCostCenterIdNo.IntegralHeight = False
+        Me.cacRevCostCenterIdNo.LinkedLabel = Nothing
+        Me.cacRevCostCenterIdNo.Location = New System.Drawing.Point(192, 137)
+        Me.cacRevCostCenterIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.cacRevCostCenterIdNo.Name = "cacRevCostCenterIdNo"
+        Me.cacRevCostCenterIdNo.OldValue = 0
+        Me.cacRevCostCenterIdNo.OriginalDataSource = Nothing
+        Me.cacRevCostCenterIdNo.OriginalList = Nothing
+        Me.cacRevCostCenterIdNo.OverrideDropDownStyleList = False
+        Me.cacRevCostCenterIdNo.PreviousSearchTerm = Nothing
+        Me.cacRevCostCenterIdNo.PropertySelector = Nothing
+        Me.cacRevCostCenterIdNo.ReadOnlyCombo = False
+        Me.cacRevCostCenterIdNo.Size = New System.Drawing.Size(418, 24)
+        Me.cacRevCostCenterIdNo.SuggestBoxHeight = 200
+        Me.cacRevCostCenterIdNo.SuggestListOrderRule = Nothing
+        Me.cacRevCostCenterIdNo.TabIndex = 5
+        Me.cacRevCostCenterIdNo.TextToSearch = Nothing
+        Me.cacRevCostCenterIdNo.Translatable = False
+        Me.cacRevCostCenterIdNo.ValueIsMandatory = False
+        Me.cacRevCostCenterIdNo.ValueIsNullable = False
+        Me.cacRevCostCenterIdNo.ValueIsNumeric = False
+        Me.cacRevCostCenterIdNo.ValueMember = "IdNo"
         '
-        'TxtIdNo
+        'lblRevCostCenterIdNo
         '
-        Me.TxtIdNo.BackColor = System.Drawing.Color.White
-        Me.TxtIdNo.BegFindValue = Nothing
-        Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtIdNo.ComputedValue = False
-        Me.TxtIdNo.CustomFormat = Nothing
-        Me.TxtIdNo.DataBoundControl = True
-        Me.TxtIdNo.DisplayOnly = True
-        Me.TxtIdNo.EditingMode = True
-        Me.TxtIdNo.EndFindValue = Nothing
-        Me.TxtIdNo.FieldDescription = Nothing
-        Me.TxtIdNo.FieldName = Nothing
-        Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.TxtIdNo.FindEnabled = True
-        Me.CFlowLayout1.SetFlowBreak(Me.TxtIdNo, True)
-        Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
-        Me.TxtIdNo.LinkedLabel = Nothing
-        Me.TxtIdNo.Location = New System.Drawing.Point(192, 11)
-        Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
-        Me.TxtIdNo.MaximumValue = Nothing
-        Me.TxtIdNo.MinimumValue = Nothing
-        Me.TxtIdNo.Name = "TxtIdNo"
-        Me.TxtIdNo.OldValue = Nothing
-        Me.TxtIdNo.ReadOnly = True
-        Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.TxtIdNo.Size = New System.Drawing.Size(62, 23)
-        Me.TxtIdNo.TabIndex = 160
-        Me.TxtIdNo.TabStop = False
-        Me.TxtIdNo.Translatable = False
-        Me.TxtIdNo.ValueIsNumeric = True
+        Me.lblRevCostCenterIdNo.DisplayOnly = True
+        Me.lblRevCostCenterIdNo.EditingMode = False
+        Me.lblRevCostCenterIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.lblRevCostCenterIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblRevCostCenterIdNo.Location = New System.Drawing.Point(1, 137)
+        Me.lblRevCostCenterIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblRevCostCenterIdNo.Name = "lblRevCostCenterIdNo"
+        Me.lblRevCostCenterIdNo.Size = New System.Drawing.Size(189, 23)
+        Me.lblRevCostCenterIdNo.TabIndex = 171
+        Me.lblRevCostCenterIdNo.Text = "Revenue Cost Center"
+        Me.lblRevCostCenterIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblRevCostCenterIdNo.Translatable = True
         '
-        'lblDepartmentCode
+        'cacParentIdNo
         '
-        Me.lblDepartmentCode.DisplayOnly = True
-        Me.lblDepartmentCode.EditingMode = False
-        Me.lblDepartmentCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.lblDepartmentCode.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDepartmentCode.Location = New System.Drawing.Point(1, 36)
-        Me.lblDepartmentCode.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblDepartmentCode.Name = "lblDepartmentCode"
-        Me.lblDepartmentCode.Size = New System.Drawing.Size(189, 23)
-        Me.lblDepartmentCode.TabIndex = 166
-        Me.lblDepartmentCode.Text = "Department Code"
-        Me.lblDepartmentCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblDepartmentCode.Translatable = True
+        Me.cacParentIdNo.BackColor = System.Drawing.Color.White
+        Me.cacParentIdNo.BegFindValue = Nothing
+        Me.cacParentIdNo.ChangingSearchValueOnly = False
+        Me.cacParentIdNo.CurrentSearchTerm = ""
+        Me.cacParentIdNo.DataValue = Nothing
+        Me.cacParentIdNo.DefaultValue = Nothing
+        Me.cacParentIdNo.DisplayMember = "Name"
+        Me.cacParentIdNo.EditingMode = False
+        Me.cacParentIdNo.EndFindValue = Nothing
+        Me.cacParentIdNo.FieldDescription = Nothing
+        Me.cacParentIdNo.FieldName = Nothing
+        Me.cacParentIdNo.FilterRule = Nothing
+        Me.cacParentIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cacParentIdNo.FindEnabled = False
+        Me.CFlowLayout1.SetFlowBreak(Me.cacParentIdNo, True)
+        Me.cacParentIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.cacParentIdNo.ForeColor = System.Drawing.Color.Black
+        Me.cacParentIdNo.FormattingEnabled = True
+        Me.cacParentIdNo.HideWhenNotEditingOrAdding = False
+        Me.cacParentIdNo.IgnoreCase = False
+        Me.cacParentIdNo.IntegralHeight = False
+        Me.cacParentIdNo.LinkedLabel = Nothing
+        Me.cacParentIdNo.Location = New System.Drawing.Point(191, 111)
+        Me.cacParentIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.cacParentIdNo.Name = "cacParentIdNo"
+        Me.cacParentIdNo.OldValue = 0
+        Me.cacParentIdNo.OriginalDataSource = Nothing
+        Me.cacParentIdNo.OriginalList = Nothing
+        Me.cacParentIdNo.OverrideDropDownStyleList = False
+        Me.cacParentIdNo.PreviousSearchTerm = Nothing
+        Me.cacParentIdNo.PropertySelector = Nothing
+        Me.cacParentIdNo.ReadOnlyCombo = False
+        Me.cacParentIdNo.Size = New System.Drawing.Size(419, 24)
+        Me.cacParentIdNo.SuggestBoxHeight = 200
+        Me.cacParentIdNo.SuggestListOrderRule = Nothing
+        Me.cacParentIdNo.TabIndex = 3
+        Me.cacParentIdNo.TextToSearch = Nothing
+        Me.cacParentIdNo.Translatable = False
+        Me.cacParentIdNo.ValueIsMandatory = False
+        Me.cacParentIdNo.ValueIsNullable = False
+        Me.cacParentIdNo.ValueIsNumeric = False
+        Me.cacParentIdNo.ValueMember = "IdNo"
         '
-        'txtDepartmentCode
+        'lblParentIdNo
         '
-        Me.txtDepartmentCode.BackColor = System.Drawing.Color.White
-        Me.txtDepartmentCode.BegFindValue = Nothing
-        Me.txtDepartmentCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtDepartmentCode.ComputedValue = False
-        Me.txtDepartmentCode.CustomFormat = Nothing
-        Me.txtDepartmentCode.DataBoundControl = True
-        Me.txtDepartmentCode.EditingMode = False
-        Me.txtDepartmentCode.EndFindValue = Nothing
-        Me.txtDepartmentCode.FieldDescription = Nothing
-        Me.txtDepartmentCode.FieldName = Nothing
-        Me.txtDepartmentCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtDepartmentCode.FindEnabled = True
-        Me.CFlowLayout1.SetFlowBreak(Me.txtDepartmentCode, True)
-        Me.txtDepartmentCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.txtDepartmentCode.ForeColor = System.Drawing.Color.Black
-        Me.txtDepartmentCode.LinkedLabel = Nothing
-        Me.txtDepartmentCode.Location = New System.Drawing.Point(192, 36)
-        Me.txtDepartmentCode.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtDepartmentCode.MaximumValue = Nothing
-        Me.txtDepartmentCode.MinimumValue = Nothing
-        Me.txtDepartmentCode.Name = "txtDepartmentCode"
-        Me.txtDepartmentCode.OldValue = Nothing
-        Me.txtDepartmentCode.ReadOnly = True
-        Me.txtDepartmentCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtDepartmentCode.Size = New System.Drawing.Size(62, 23)
-        Me.txtDepartmentCode.TabIndex = 0
-        Me.txtDepartmentCode.Translatable = False
-        Me.txtDepartmentCode.ValueIsMandatory = True
-        Me.txtDepartmentCode.ValueIsUnique = True
+        Me.lblParentIdNo.DisplayOnly = True
+        Me.lblParentIdNo.EditingMode = False
+        Me.lblParentIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.lblParentIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblParentIdNo.Location = New System.Drawing.Point(0, 110)
+        Me.lblParentIdNo.Margin = New System.Windows.Forms.Padding(0)
+        Me.lblParentIdNo.Name = "lblParentIdNo"
+        Me.lblParentIdNo.Size = New System.Drawing.Size(190, 24)
+        Me.lblParentIdNo.TabIndex = 163
+        Me.lblParentIdNo.Text = "Parent Account"
+        Me.lblParentIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblParentIdNo.Translatable = True
         '
-        'lblDepartmentName
+        'txtDepartmentNameAra
         '
-        Me.lblDepartmentName.DisplayOnly = True
-        Me.lblDepartmentName.EditingMode = False
-        Me.lblDepartmentName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.lblDepartmentName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDepartmentName.Location = New System.Drawing.Point(1, 61)
-        Me.lblDepartmentName.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblDepartmentName.Name = "lblDepartmentName"
-        Me.lblDepartmentName.Size = New System.Drawing.Size(189, 23)
-        Me.lblDepartmentName.TabIndex = 167
-        Me.lblDepartmentName.Text = "Department Name"
-        Me.lblDepartmentName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblDepartmentName.Translatable = True
+        Me.txtDepartmentNameAra.BackColor = System.Drawing.Color.White
+        Me.txtDepartmentNameAra.BegFindValue = Nothing
+        Me.txtDepartmentNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtDepartmentNameAra.ComputedValue = False
+        Me.txtDepartmentNameAra.CustomFormat = Nothing
+        Me.txtDepartmentNameAra.DataBoundControl = True
+        Me.txtDepartmentNameAra.EditingMode = False
+        Me.txtDepartmentNameAra.EndFindValue = Nothing
+        Me.txtDepartmentNameAra.EnglishControl = Me.txtDepartmentName
+        Me.txtDepartmentNameAra.FieldDescription = Nothing
+        Me.txtDepartmentNameAra.FieldName = Nothing
+        Me.txtDepartmentNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtDepartmentNameAra.FindEnabled = True
+        Me.CFlowLayout1.SetFlowBreak(Me.txtDepartmentNameAra, True)
+        Me.txtDepartmentNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.txtDepartmentNameAra.ForeColor = System.Drawing.Color.Black
+        Me.txtDepartmentNameAra.LinkedLabel = Nothing
+        Me.txtDepartmentNameAra.Location = New System.Drawing.Point(192, 86)
+        Me.txtDepartmentNameAra.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtDepartmentNameAra.MaximumValue = Nothing
+        Me.txtDepartmentNameAra.MinimumValue = Nothing
+        Me.txtDepartmentNameAra.Name = "txtDepartmentNameAra"
+        Me.txtDepartmentNameAra.OldValue = Nothing
+        Me.txtDepartmentNameAra.ReadOnly = True
+        Me.txtDepartmentNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.txtDepartmentNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.txtDepartmentNameAra.Size = New System.Drawing.Size(418, 23)
+        Me.txtDepartmentNameAra.TabIndex = 2
+        Me.txtDepartmentNameAra.Translatable = False
+        Me.txtDepartmentNameAra.ValueIsUnique = True
         '
         'txtDepartmentName
         '
@@ -343,304 +402,153 @@ Partial Class TestForm
         Me.lblDepartmentNameAra.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.lblDepartmentNameAra.Translatable = True
         '
-        'txtDepartmentNameAra
+        'lblDepartmentName
         '
-        Me.txtDepartmentNameAra.BackColor = System.Drawing.Color.White
-        Me.txtDepartmentNameAra.BegFindValue = Nothing
-        Me.txtDepartmentNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtDepartmentNameAra.ComputedValue = False
-        Me.txtDepartmentNameAra.CustomFormat = Nothing
-        Me.txtDepartmentNameAra.DataBoundControl = True
-        Me.txtDepartmentNameAra.EditingMode = False
-        Me.txtDepartmentNameAra.EndFindValue = Nothing
-        Me.txtDepartmentNameAra.EnglishControl = Me.txtDepartmentName
-        Me.txtDepartmentNameAra.FieldDescription = Nothing
-        Me.txtDepartmentNameAra.FieldName = Nothing
-        Me.txtDepartmentNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtDepartmentNameAra.FindEnabled = True
-        Me.CFlowLayout1.SetFlowBreak(Me.txtDepartmentNameAra, True)
-        Me.txtDepartmentNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.txtDepartmentNameAra.ForeColor = System.Drawing.Color.Black
-        Me.txtDepartmentNameAra.LinkedLabel = Nothing
-        Me.txtDepartmentNameAra.Location = New System.Drawing.Point(192, 86)
-        Me.txtDepartmentNameAra.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtDepartmentNameAra.MaximumValue = Nothing
-        Me.txtDepartmentNameAra.MinimumValue = Nothing
-        Me.txtDepartmentNameAra.Name = "txtDepartmentNameAra"
-        Me.txtDepartmentNameAra.OldValue = Nothing
-        Me.txtDepartmentNameAra.ReadOnly = True
-        Me.txtDepartmentNameAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.txtDepartmentNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtDepartmentNameAra.Size = New System.Drawing.Size(418, 23)
-        Me.txtDepartmentNameAra.TabIndex = 2
-        Me.txtDepartmentNameAra.Translatable = False
-        Me.txtDepartmentNameAra.ValueIsUnique = True
+        Me.lblDepartmentName.DisplayOnly = True
+        Me.lblDepartmentName.EditingMode = False
+        Me.lblDepartmentName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.lblDepartmentName.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDepartmentName.Location = New System.Drawing.Point(1, 61)
+        Me.lblDepartmentName.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblDepartmentName.Name = "lblDepartmentName"
+        Me.lblDepartmentName.Size = New System.Drawing.Size(189, 23)
+        Me.lblDepartmentName.TabIndex = 167
+        Me.lblDepartmentName.Text = "Department Name"
+        Me.lblDepartmentName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblDepartmentName.Translatable = True
         '
-        'lblParentIdNo
+        'txtDepartmentCode
         '
-        Me.lblParentIdNo.DisplayOnly = True
-        Me.lblParentIdNo.EditingMode = False
-        Me.lblParentIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.lblParentIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblParentIdNo.Location = New System.Drawing.Point(0, 110)
-        Me.lblParentIdNo.Margin = New System.Windows.Forms.Padding(0)
-        Me.lblParentIdNo.Name = "lblParentIdNo"
-        Me.lblParentIdNo.Size = New System.Drawing.Size(190, 24)
-        Me.lblParentIdNo.TabIndex = 163
-        Me.lblParentIdNo.Text = "Parent Account"
-        Me.lblParentIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblParentIdNo.Translatable = True
+        Me.txtDepartmentCode.BackColor = System.Drawing.Color.White
+        Me.txtDepartmentCode.BegFindValue = Nothing
+        Me.txtDepartmentCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtDepartmentCode.ComputedValue = False
+        Me.txtDepartmentCode.CustomFormat = Nothing
+        Me.txtDepartmentCode.DataBoundControl = True
+        Me.txtDepartmentCode.EditingMode = False
+        Me.txtDepartmentCode.EndFindValue = Nothing
+        Me.txtDepartmentCode.FieldDescription = Nothing
+        Me.txtDepartmentCode.FieldName = Nothing
+        Me.txtDepartmentCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtDepartmentCode.FindEnabled = True
+        Me.CFlowLayout1.SetFlowBreak(Me.txtDepartmentCode, True)
+        Me.txtDepartmentCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.txtDepartmentCode.ForeColor = System.Drawing.Color.Black
+        Me.txtDepartmentCode.LinkedLabel = Nothing
+        Me.txtDepartmentCode.Location = New System.Drawing.Point(192, 36)
+        Me.txtDepartmentCode.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtDepartmentCode.MaximumValue = Nothing
+        Me.txtDepartmentCode.MinimumValue = Nothing
+        Me.txtDepartmentCode.Name = "txtDepartmentCode"
+        Me.txtDepartmentCode.OldValue = Nothing
+        Me.txtDepartmentCode.ReadOnly = True
+        Me.txtDepartmentCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.txtDepartmentCode.Size = New System.Drawing.Size(62, 23)
+        Me.txtDepartmentCode.TabIndex = 0
+        Me.txtDepartmentCode.Translatable = False
+        Me.txtDepartmentCode.ValueIsMandatory = True
+        Me.txtDepartmentCode.ValueIsUnique = True
         '
-        'cacParentIdNo
+        'lblDepartmentCode
         '
-        Me.cacParentIdNo.BackColor = System.Drawing.Color.White
-        Me.cacParentIdNo.BegFindValue = Nothing
-        Me.cacParentIdNo.ChangingSearchValueOnly = False
-        Me.cacParentIdNo.CurrentSearchTerm = ""
-        Me.cacParentIdNo.DataValue = Nothing
-        Me.cacParentIdNo.DefaultValue = Nothing
-        Me.cacParentIdNo.DisplayMember = "Name"
-        Me.cacParentIdNo.EditingMode = False
-        Me.cacParentIdNo.EndFindValue = Nothing
-        Me.cacParentIdNo.FieldDescription = Nothing
-        Me.cacParentIdNo.FieldName = Nothing
-        Me.cacParentIdNo.FilterRule = Nothing
-        Me.cacParentIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cacParentIdNo.FindEnabled = False
-        Me.CFlowLayout1.SetFlowBreak(Me.cacParentIdNo, True)
-        Me.cacParentIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.cacParentIdNo.ForeColor = System.Drawing.Color.Black
-        Me.cacParentIdNo.FormattingEnabled = True
-        Me.cacParentIdNo.HideWhenNotEditingOrAdding = False
-        Me.cacParentIdNo.IgnoreCase = False
-        Me.cacParentIdNo.IntegralHeight = False
-        Me.cacParentIdNo.LinkedLabel = Nothing
-        Me.cacParentIdNo.Location = New System.Drawing.Point(191, 111)
-        Me.cacParentIdNo.Margin = New System.Windows.Forms.Padding(1)
-        Me.cacParentIdNo.Name = "cacParentIdNo"
-        Me.cacParentIdNo.OldValue = 0
-        Me.cacParentIdNo.OriginalDataSource = Nothing
-        Me.cacParentIdNo.OriginalList = Nothing
-        Me.cacParentIdNo.OverrideDropDownStyleList = False
-        Me.cacParentIdNo.PreviousSearchTerm = Nothing
-        Me.cacParentIdNo.PropertySelector = Nothing
-        Me.cacParentIdNo.ReadOnlyCombo = False
-        Me.cacParentIdNo.Size = New System.Drawing.Size(419, 24)
-        Me.cacParentIdNo.SuggestBoxHeight = 200
-        Me.cacParentIdNo.SuggestListOrderRule = Nothing
-        Me.cacParentIdNo.TabIndex = 3
-        Me.cacParentIdNo.TextToSearch = Nothing
-        Me.cacParentIdNo.Translatable = False
-        Me.cacParentIdNo.ValueIsMandatory = False
-        Me.cacParentIdNo.ValueIsNullable = False
-        Me.cacParentIdNo.ValueIsNumeric = False
-        Me.cacParentIdNo.ValueMember = "IdNo"
+        Me.lblDepartmentCode.DisplayOnly = True
+        Me.lblDepartmentCode.EditingMode = False
+        Me.lblDepartmentCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.lblDepartmentCode.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblDepartmentCode.Location = New System.Drawing.Point(1, 36)
+        Me.lblDepartmentCode.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblDepartmentCode.Name = "lblDepartmentCode"
+        Me.lblDepartmentCode.Size = New System.Drawing.Size(189, 23)
+        Me.lblDepartmentCode.TabIndex = 166
+        Me.lblDepartmentCode.Text = "Department Code"
+        Me.lblDepartmentCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblDepartmentCode.Translatable = True
         '
-        'lblRevCostCenterIdNo
+        'TxtIdNo
         '
-        Me.lblRevCostCenterIdNo.DisplayOnly = True
-        Me.lblRevCostCenterIdNo.EditingMode = False
-        Me.lblRevCostCenterIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.lblRevCostCenterIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblRevCostCenterIdNo.Location = New System.Drawing.Point(1, 137)
-        Me.lblRevCostCenterIdNo.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblRevCostCenterIdNo.Name = "lblRevCostCenterIdNo"
-        Me.lblRevCostCenterIdNo.Size = New System.Drawing.Size(189, 23)
-        Me.lblRevCostCenterIdNo.TabIndex = 171
-        Me.lblRevCostCenterIdNo.Text = "Revenue Cost Center"
-        Me.lblRevCostCenterIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblRevCostCenterIdNo.Translatable = True
+        Me.TxtIdNo.BackColor = System.Drawing.Color.White
+        Me.TxtIdNo.BegFindValue = Nothing
+        Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TxtIdNo.ComputedValue = False
+        Me.TxtIdNo.CustomFormat = Nothing
+        Me.TxtIdNo.DataBoundControl = True
+        Me.TxtIdNo.DisplayOnly = True
+        Me.TxtIdNo.EditingMode = True
+        Me.TxtIdNo.EndFindValue = Nothing
+        Me.TxtIdNo.FieldDescription = Nothing
+        Me.TxtIdNo.FieldName = Nothing
+        Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.TxtIdNo.FindEnabled = True
+        Me.CFlowLayout1.SetFlowBreak(Me.TxtIdNo, True)
+        Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+        Me.TxtIdNo.LinkedLabel = Nothing
+        Me.TxtIdNo.Location = New System.Drawing.Point(192, 11)
+        Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.TxtIdNo.MaximumValue = Nothing
+        Me.TxtIdNo.MinimumValue = Nothing
+        Me.TxtIdNo.Name = "TxtIdNo"
+        Me.TxtIdNo.OldValue = Nothing
+        Me.TxtIdNo.ReadOnly = True
+        Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.TxtIdNo.Size = New System.Drawing.Size(62, 23)
+        Me.TxtIdNo.TabIndex = 160
+        Me.TxtIdNo.TabStop = False
+        Me.TxtIdNo.Translatable = False
+        Me.TxtIdNo.ValueIsNumeric = True
         '
-        'cacRevCostCenterIdNo
+        'lblIdNo
         '
-        Me.cacRevCostCenterIdNo.BackColor = System.Drawing.Color.White
-        Me.cacRevCostCenterIdNo.BegFindValue = Nothing
-        Me.cacRevCostCenterIdNo.ChangingSearchValueOnly = False
-        Me.cacRevCostCenterIdNo.CurrentSearchTerm = ""
-        Me.cacRevCostCenterIdNo.DataValue = Nothing
-        Me.cacRevCostCenterIdNo.DefaultValue = Nothing
-        Me.cacRevCostCenterIdNo.DisplayMember = "Name"
-        Me.cacRevCostCenterIdNo.EditingMode = False
-        Me.cacRevCostCenterIdNo.EndFindValue = Nothing
-        Me.cacRevCostCenterIdNo.FieldDescription = Nothing
-        Me.cacRevCostCenterIdNo.FieldName = Nothing
-        Me.cacRevCostCenterIdNo.FilterRule = Nothing
-        Me.cacRevCostCenterIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cacRevCostCenterIdNo.FindEnabled = False
-        Me.CFlowLayout1.SetFlowBreak(Me.cacRevCostCenterIdNo, True)
-        Me.cacRevCostCenterIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.cacRevCostCenterIdNo.ForeColor = System.Drawing.Color.Black
-        Me.cacRevCostCenterIdNo.FormattingEnabled = True
-        Me.cacRevCostCenterIdNo.HideWhenNotEditingOrAdding = False
-        Me.cacRevCostCenterIdNo.IgnoreCase = False
-        Me.cacRevCostCenterIdNo.IntegralHeight = False
-        Me.cacRevCostCenterIdNo.LinkedLabel = Nothing
-        Me.cacRevCostCenterIdNo.Location = New System.Drawing.Point(192, 137)
-        Me.cacRevCostCenterIdNo.Margin = New System.Windows.Forms.Padding(1)
-        Me.cacRevCostCenterIdNo.Name = "cacRevCostCenterIdNo"
-        Me.cacRevCostCenterIdNo.OldValue = 0
-        Me.cacRevCostCenterIdNo.OriginalDataSource = Nothing
-        Me.cacRevCostCenterIdNo.OriginalList = Nothing
-        Me.cacRevCostCenterIdNo.OverrideDropDownStyleList = False
-        Me.cacRevCostCenterIdNo.PreviousSearchTerm = Nothing
-        Me.cacRevCostCenterIdNo.PropertySelector = Nothing
-        Me.cacRevCostCenterIdNo.ReadOnlyCombo = False
-        Me.cacRevCostCenterIdNo.Size = New System.Drawing.Size(418, 24)
-        Me.cacRevCostCenterIdNo.SuggestBoxHeight = 200
-        Me.cacRevCostCenterIdNo.SuggestListOrderRule = Nothing
-        Me.cacRevCostCenterIdNo.TabIndex = 5
-        Me.cacRevCostCenterIdNo.TextToSearch = Nothing
-        Me.cacRevCostCenterIdNo.Translatable = False
-        Me.cacRevCostCenterIdNo.ValueIsMandatory = False
-        Me.cacRevCostCenterIdNo.ValueIsNullable = False
-        Me.cacRevCostCenterIdNo.ValueIsNumeric = False
-        Me.cacRevCostCenterIdNo.ValueMember = "IdNo"
+        Me.lblIdNo.DisplayOnly = True
+        Me.lblIdNo.EditingMode = False
+        Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.lblIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblIdNo.Location = New System.Drawing.Point(1, 11)
+        Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblIdNo.Name = "lblIdNo"
+        Me.lblIdNo.Size = New System.Drawing.Size(189, 23)
+        Me.lblIdNo.TabIndex = 165
+        Me.lblIdNo.Text = "Department ID No."
+        Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblIdNo.Translatable = True
         '
-        'lblNotes
+        'CFlowLayout1
         '
-        Me.lblNotes.DisplayOnly = True
-        Me.lblNotes.EditingMode = False
-        Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.lblNotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNotes.Location = New System.Drawing.Point(1, 163)
-        Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblNotes.Name = "lblNotes"
-        Me.lblNotes.Size = New System.Drawing.Size(189, 23)
-        Me.lblNotes.TabIndex = 169
-        Me.lblNotes.Text = "Notes"
-        Me.lblNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblNotes.Translatable = True
+        Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
+        Me.CFlowLayout1.Controls.Add(Me.lblIdNo)
+        Me.CFlowLayout1.Controls.Add(Me.TxtIdNo)
+        Me.CFlowLayout1.Controls.Add(Me.lblDepartmentCode)
+        Me.CFlowLayout1.Controls.Add(Me.txtDepartmentCode)
+        Me.CFlowLayout1.Controls.Add(Me.lblDepartmentName)
+        Me.CFlowLayout1.Controls.Add(Me.txtDepartmentName)
+        Me.CFlowLayout1.Controls.Add(Me.lblDepartmentNameAra)
+        Me.CFlowLayout1.Controls.Add(Me.txtDepartmentNameAra)
+        Me.CFlowLayout1.Controls.Add(Me.lblParentIdNo)
+        Me.CFlowLayout1.Controls.Add(Me.cacParentIdNo)
+        Me.CFlowLayout1.Controls.Add(Me.lblRevCostCenterIdNo)
+        Me.CFlowLayout1.Controls.Add(Me.cacRevCostCenterIdNo)
+        Me.CFlowLayout1.Controls.Add(Me.lblNotes)
+        Me.CFlowLayout1.Controls.Add(Me.txtNotes)
+        Me.CFlowLayout1.Controls.Add(Me.CButton1)
+        Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CFlowLayout1.Location = New System.Drawing.Point(0, 0)
+        Me.CFlowLayout1.MaximumSize = New System.Drawing.Size(631, 0)
+        Me.CFlowLayout1.Name = "CFlowLayout1"
+        Me.CFlowLayout1.Padding = New System.Windows.Forms.Padding(0, 10, 0, 0)
+        Me.CFlowLayout1.Size = New System.Drawing.Size(631, 397)
+        Me.CFlowLayout1.TabIndex = 17
         '
-        'txtNotes
+        'CButton1
         '
-        Me.txtNotes.BackColor = System.Drawing.Color.White
-        Me.txtNotes.BegFindValue = Nothing
-        Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtNotes.ComputedValue = False
-        Me.txtNotes.CustomFormat = Nothing
-        Me.txtNotes.DataBoundControl = True
-        Me.txtNotes.EditingMode = False
-        Me.txtNotes.EndFindValue = Nothing
-        Me.txtNotes.FieldDescription = Nothing
-        Me.txtNotes.FieldName = Nothing
-        Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtNotes.FindEnabled = True
-        Me.CFlowLayout1.SetFlowBreak(Me.txtNotes, True)
-        Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.txtNotes.ForeColor = System.Drawing.Color.Black
-        Me.txtNotes.LinkedLabel = Nothing
-        Me.txtNotes.Location = New System.Drawing.Point(192, 163)
-        Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtNotes.MaximumValue = Nothing
-        Me.txtNotes.MinimumValue = Nothing
-        Me.txtNotes.Multiline = True
-        Me.txtNotes.Name = "txtNotes"
-        Me.txtNotes.OldValue = Nothing
-        Me.txtNotes.ReadOnly = True
-        Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtNotes.Size = New System.Drawing.Size(418, 60)
-        Me.txtNotes.TabIndex = 6
-        Me.txtNotes.Translatable = False
-        Me.txtNotes.ValueIsMandatory = True
-        '
-        'txtSortKey
-        '
-        Me.txtSortKey.BackColor = System.Drawing.Color.White
-        Me.txtSortKey.BegFindValue = Nothing
-        Me.txtSortKey.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtSortKey.ComputedValue = False
-        Me.txtSortKey.CustomFormat = Nothing
-        Me.txtSortKey.DataBoundControl = True
-        Me.txtSortKey.EditingMode = True
-        Me.txtSortKey.Enabled = False
-        Me.txtSortKey.EndFindValue = Nothing
-        Me.txtSortKey.FieldDescription = Nothing
-        Me.txtSortKey.FieldName = Nothing
-        Me.txtSortKey.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtSortKey.FindEnabled = False
-        Me.txtSortKey.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.txtSortKey.ForeColor = System.Drawing.Color.Black
-        Me.txtSortKey.LinkedLabel = Nothing
-        Me.txtSortKey.Location = New System.Drawing.Point(0, 224)
-        Me.txtSortKey.Margin = New System.Windows.Forms.Padding(0)
-        Me.txtSortKey.MaximumValue = Nothing
-        Me.txtSortKey.MinimumValue = Nothing
-        Me.txtSortKey.Name = "txtSortKey"
-        Me.txtSortKey.OldValue = Nothing
-        Me.txtSortKey.ReadOnly = True
-        Me.txtSortKey.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtSortKey.Size = New System.Drawing.Size(72, 23)
-        Me.txtSortKey.TabIndex = 165
-        Me.txtSortKey.TabStop = False
-        Me.txtSortKey.Translatable = False
-        Me.txtSortKey.ValueIsMandatory = True
-        Me.txtSortKey.Visible = False
-        '
-        'CMaskedTextBox1
-        '
-        Me.CMaskedTextBox1.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.CMaskedTextBox1.BegFindValue = Nothing
-        Me.CMaskedTextBox1.DateField = False
-        Me.CMaskedTextBox1.DateTimePickerParent = Nothing
-        Me.CMaskedTextBox1.DefaultValue = Nothing
-        Me.CMaskedTextBox1.DisplayOnly = False
-        Me.CMaskedTextBox1.EditingMode = False
-        Me.CMaskedTextBox1.EditsAllowed = False
-        Me.CMaskedTextBox1.EmptyMask = ""
-        Me.CMaskedTextBox1.EndFindValue = Nothing
-        Me.CMaskedTextBox1.FieldDescription = Nothing
-        Me.CMaskedTextBox1.FieldName = Nothing
-        Me.CMaskedTextBox1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[Date]
-        Me.CMaskedTextBox1.FindEnabled = False
-        Me.CMaskedTextBox1.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite
-        Me.CMaskedTextBox1.LinkedLabel = Nothing
-        Me.CMaskedTextBox1.Location = New System.Drawing.Point(326, 227)
-        Me.CMaskedTextBox1.MaximumValue = Nothing
-        Me.CMaskedTextBox1.MinimumValue = Nothing
-        Me.CMaskedTextBox1.Name = "CMaskedTextBox1"
-        Me.CMaskedTextBox1.SearchField = Nothing
-        Me.CMaskedTextBox1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.CMaskedTextBox1.SecurityKey = Nothing
-        Me.CMaskedTextBox1.Size = New System.Drawing.Size(200, 20)
-        Me.CMaskedTextBox1.TabIndex = 172
-        Me.CMaskedTextBox1.Translatable = False
-        Me.CMaskedTextBox1.ValueIsMandatory = False
-        Me.CMaskedTextBox1.ValueIsNullable = False
-        Me.CMaskedTextBox1.ValueIsNumeric = False
-        '
-        'CMaskedTextBox2
-        '
-        Me.CMaskedTextBox2.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.CMaskedTextBox2.BegFindValue = Nothing
-        Me.CMaskedTextBox2.DateField = False
-        Me.CMaskedTextBox2.DateTimePickerParent = Nothing
-        Me.CMaskedTextBox2.DefaultValue = Nothing
-        Me.CMaskedTextBox2.DisplayOnly = False
-        Me.CMaskedTextBox2.EditingMode = False
-        Me.CMaskedTextBox2.EditsAllowed = False
-        Me.CMaskedTextBox2.EmptyMask = ""
-        Me.CMaskedTextBox2.EndFindValue = Nothing
-        Me.CMaskedTextBox2.FieldDescription = Nothing
-        Me.CMaskedTextBox2.FieldName = Nothing
-        Me.CMaskedTextBox2.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[Date]
-        Me.CMaskedTextBox2.FindEnabled = False
-        Me.CMaskedTextBox2.InsertKeyMode = System.Windows.Forms.InsertKeyMode.Overwrite
-        Me.CMaskedTextBox2.LinkedLabel = Nothing
-        Me.CMaskedTextBox2.Location = New System.Drawing.Point(3, 253)
-        Me.CMaskedTextBox2.Mask = "00/00/0000"
-        Me.CMaskedTextBox2.MaximumValue = Nothing
-        Me.CMaskedTextBox2.MinimumValue = Nothing
-        Me.CMaskedTextBox2.Name = "CMaskedTextBox2"
-        Me.CMaskedTextBox2.SearchField = Nothing
-        Me.CMaskedTextBox2.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.CMaskedTextBox2.SecurityKey = Nothing
-        Me.CMaskedTextBox2.Size = New System.Drawing.Size(171, 20)
-        Me.CMaskedTextBox2.TabIndex = 173
-        Me.CMaskedTextBox2.Translatable = False
-        Me.CMaskedTextBox2.ValidatingType = GetType(Date)
-        Me.CMaskedTextBox2.ValueIsMandatory = False
-        Me.CMaskedTextBox2.ValueIsNullable = False
-        Me.CMaskedTextBox2.ValueIsNumeric = False
+        Me.CButton1.DesignerSelected = True
+        Me.CButton1.ImageIndex = 0
+        Me.CButton1.Location = New System.Drawing.Point(3, 227)
+        Me.CButton1.Name = "CButton1"
+        Me.CButton1.OriginalImageName = Nothing
+        Me.CButton1.SecurityKey = ""
+        Me.CButton1.Size = New System.Drawing.Size(90, 25)
+        Me.CButton1.TabIndex = 172
+        Me.CButton1.Text = "CheckData"
         '
         'TestForm
         '
@@ -680,7 +588,6 @@ Partial Class TestForm
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents TextBox2 As TextBox
     Friend WithEvents CFlowLayout1 As CFlowLayout
     Friend WithEvents lblIdNo As CLabel
     Friend WithEvents TxtIdNo As CTextBox
@@ -696,7 +603,5 @@ Partial Class TestForm
     Friend WithEvents cacRevCostCenterIdNo As CaComboBox
     Friend WithEvents lblNotes As CLabel
     Friend WithEvents txtNotes As CTextBox
-    Friend WithEvents txtSortKey As CTextBox
-    Friend WithEvents CMaskedTextBox1 As CMaskedTextBox
-    Friend WithEvents CMaskedTextBox2 As CMaskedTextBox
+    Friend WithEvents CButton1 As CButton
 End Class
