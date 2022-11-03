@@ -1090,6 +1090,14 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of StockInventoryEntry, StockInventoryPresenter(Of StockInventoryModel))()
         End Sub
 
+        Private Sub ToolStripMenuItemDrugSale_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDrugSale.Click
+            RunForm(Of DrugSaleEntry, DrugSalePresenter(Of DrugSaleModel))()
+        End Sub
+
+        Private Sub ToolStripMenuItemGenerateDailyDrugTransfer_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemGenerateDailyDrugTransfer.Click
+            RunForm(Of GenerateDailyDrugSaleCsv, GenerateDailyDrugSaleCsvPresenter(Of DrugSale))()
+        End Sub
+
     End Class
 
 End Namespace

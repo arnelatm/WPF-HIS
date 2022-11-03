@@ -75,8 +75,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CButton1_ClickButtonArea_1(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
+
+            Dim fileReader As String
+            fileReader = My.Computer.FileSystem.ReadAllText("C:\temp\DrugQrCode.txt")
+
             Dim data As Byte()
-            data = convertQPToByteArray(txtBarcode.Text)
+            data = convertQPToByteArray(fileReader)
             Dim message As String = "Text Length = " + data.Count().ToString() + vbLf
             Dim myByte() As Byte = data
             Dim i As Int16 = 1
@@ -88,6 +92,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton2.ClickButtonArea
+            Dim fileReader As String
+            fileReader = My.Computer.FileSystem.ReadAllText("C:\temp\DrugQrCode.txt")
+
             Dim message As String = "Text Length = " + Len(txtNotes.Text).ToString() + vbLf
             For i = 1 To Len(txtNotes.Text)
                 Dim x = Mid(txtNotes.Text, i, 1)
@@ -126,8 +133,8 @@ Namespace PresentationLayer.Views.Forms
 
             Return binaryData
 
-
         End Function
+
     End Class
 
 End Namespace

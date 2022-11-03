@@ -1,6 +1,5 @@
 ﻿Public Class Form1
 
-
     Private Function convertQPToByteArray(ByVal qpString As String) As Byte()
         Dim c As Integer = 0
         Dim i As Integer = 0
@@ -31,20 +30,24 @@
 
         Return binaryData
 
-
     End Function
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
+        Dim fileReader As String
+        fileReader = My.Computer.FileSystem.ReadAllText("C:\temp\DrugQrCode.txt")
         Dim data As Byte()
-        data = convertQPToByteArray(txtBarcode.Text)
+        data = convertQPToByteArray(fileReader)
         Dim message As String = "Text Length = " + data.Count().ToString() + vbLf
         Dim myByte() As Byte = data
         Dim i As Int16 = 0
         For Each x In myByte
             i += 1
-            message += i.ToString("####") + " - " + Mid(txtBarcode.Text, i, 1) + vbLf
+            If i = 33 Then
+                Dim separator = Mid(fileReader, i, 1)
+            End If
+            message += i.ToString("####") + " - " + Mid(fileReader, i, 1) + vbLf
         Next
         MessageBox.Show(message)
     End Sub
+
 End Class
