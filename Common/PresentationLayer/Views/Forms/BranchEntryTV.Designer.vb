@@ -36,6 +36,9 @@ Namespace PresentationLayer.Views.Forms
             Me.lblBranchName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblBranchNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.txtBarcode = New System.Windows.Forms.TextBox()
+            Me.CButton2 = New AATM.Libraries.CBaseControlsLibrary.CButton()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -62,6 +65,14 @@ Namespace PresentationLayer.Views.Forms
             Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
             Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
             Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
+            '
+            'TranslatorDAC
+            '
+            Me.TranslatorDAC.Cs = ""
+            '
+            'AppDataDAC
+            '
+            Me.AppDataDAC.Cs = ""
             '
             'TxtIdNo
             '
@@ -183,7 +194,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtNotes.ComputedValue = False
             Me.txtNotes.CustomFormat = Nothing
-            Me.txtNotes.DataBoundControl = True
             Me.txtNotes.EditingMode = False
             Me.txtNotes.EndFindValue = Nothing
             Me.txtNotes.FieldDescription = Nothing
@@ -216,6 +226,9 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.Controls.Add(Me.txtBranchNameAra)
             Me.floDataDisplay.Controls.Add(Me.lblNotes)
             Me.floDataDisplay.Controls.Add(Me.txtNotes)
+            Me.floDataDisplay.Controls.Add(Me.CButton1)
+            Me.floDataDisplay.Controls.Add(Me.txtBarcode)
+            Me.floDataDisplay.Controls.Add(Me.CButton2)
             Me.floDataDisplay.Name = "floDataDisplay"
             '
             'lblIdNo
@@ -258,6 +271,29 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNotes.Name = "lblNotes"
             Me.lblNotes.Translatable = True
             '
+            'CButton1
+            '
+            Me.CButton1.DesignerSelected = False
+            Me.CButton1.ImageIndex = 0
+            resources.ApplyResources(Me.CButton1, "CButton1")
+            Me.CButton1.Name = "CButton1"
+            Me.CButton1.OriginalImageName = Nothing
+            Me.CButton1.SecurityKey = ""
+            '
+            'txtBarcode
+            '
+            resources.ApplyResources(Me.txtBarcode, "txtBarcode")
+            Me.txtBarcode.Name = "txtBarcode"
+            '
+            'CButton2
+            '
+            Me.CButton2.DesignerSelected = False
+            resources.ApplyResources(Me.CButton2, "CButton2")
+            Me.CButton2.ImageIndex = 0
+            Me.CButton2.Name = "CButton2"
+            Me.CButton2.OriginalImageName = Nothing
+            Me.CButton2.SecurityKey = ""
+            '
             'BranchEntryTv
             '
             resources.ApplyResources(Me, "$this")
@@ -268,11 +304,11 @@ Namespace PresentationLayer.Views.Forms
             Me.SplitContainer1.ResumeLayout(False)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.floDataDisplay.ResumeLayout(False)
-            Me.floDataDisplay.PerformLayout
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+            Me.floDataDisplay.PerformLayout()
+            Me.ResumeLayout(False)
+            Me.PerformLayout()
 
-End Sub
+        End Sub
         Friend WithEvents TxtIdNo As CTextBox
         Friend WithEvents txtBranchCode As CTextBox
         Friend WithEvents txtBranchName As CTextBox
@@ -284,5 +320,8 @@ End Sub
         Friend WithEvents lblBranchName As CLabel
         Friend WithEvents lblBranchNameAra As CLabel
         Friend WithEvents lblNotes As CLabel
+        Friend WithEvents CButton1 As CButton
+        Friend WithEvents txtBarcode As TextBox
+        Friend WithEvents CButton2 As CButton
     End Class
 End NameSpace

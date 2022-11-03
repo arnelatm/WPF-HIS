@@ -80,12 +80,21 @@ Public Class TestForm
 
     Public Property SortKey As String Implements IDepartmentView.SortKey
         Get
-            Return txtSortKey.Text
+            Throw New NotImplementedException()
         End Get
-        Set
-            txtSortKey.Text = Value
+        Set(value As String)
+            Throw New NotImplementedException()
         End Set
     End Property
+
+    'Public Property SortKey As String Implements IDepartmentView.SortKey
+    '    Get
+    '        Return txtSortKey.Text
+    '    End Get
+    '    Set
+    '        txtSortKey.Text = Value
+    '    End Set
+    'End Property
 
 #End Region
 
@@ -121,4 +130,10 @@ Public Class TestForm
     Private Sub Button1_Click(sender As Object, e As EventArgs)
         TurnEditOn()
     End Sub
+
+    Private Sub txtSortKey_TextChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+
 End Class

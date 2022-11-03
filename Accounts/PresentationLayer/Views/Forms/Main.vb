@@ -1036,9 +1036,11 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub TestFormToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTestForm.Click
-            Dim formToRun = Activator.CreateInstance(GetType(TestForm))
-            formToRun.Presenter = New DepartmentPresenter(Of DepartmentModel)(formToRun)
-            formToRun.Show()
+            Dim form As New Form1
+            Form1.Show()
+            'Dim formToRun = Activator.CreateInstance(GetType(TestForm))
+            'formToRun.Presenter = New DepartmentPresenter(Of DepartmentModel)(formToRun)
+            'formToRun.Show()
         End Sub
 
         Private Sub ToolStripMenuItemPMRReports_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPMRReports.Click
