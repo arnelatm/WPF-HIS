@@ -204,6 +204,7 @@
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
+    <Compile Include="BusinessLayer\IGroup\DrugMap.vb" />
     <Compile Include="BusinessLayer\IGroup\StockInventory.vb" />
     <Compile Include="BusinessLayer\ItemCode.vb" />
     <Compile Include="BusinessLayer\CodeGroup.vb" />
@@ -285,6 +286,7 @@
     <Compile Include="ContainerConfig.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\DoctorDao.vb" />
+    <Compile Include="DataLayer\AdoNet\IGroup\DrugMapDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\StockInventoryDao.vb" />
     <Compile Include="DataLayer\AdoNet\ItemCodeDao.vb" />
     <Compile Include="DataLayer\AdoNet\CodeGroupDao.vb" />
@@ -387,6 +389,7 @@
       <DependentUpon>NewSettings.settings</DependentUpon>
     </Compile>
     <Compile Include="OneTimeRun.vb" />
+    <Compile Include="PresentationLayer\Models\IGroup\DrugMap.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\StockInventoryModel.vb" />
     <Compile Include="PresentationLayer\Models\ItemCodeModel.vb" />
     <Compile Include="PresentationLayer\Models\CodeGroupModel.vb" />
@@ -500,6 +503,12 @@
       <DependentUpon>DoctorEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DoctorEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\DrugMapEntry.Designer.vb">
+      <DependentUpon>DrugMapEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\DrugMapEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\StockInventoryEntry.Designer.vb">
@@ -773,6 +782,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\IGroup\PmrPatientDisplayView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\DrugMap.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IStockInventoryView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IItemCode.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ICodeGroup.vb" />
@@ -1738,6 +1748,9 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\DoctorEntry.resx">
       <DependentUpon>DoctorEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\DrugMapEntry.resx">
+      <DependentUpon>DrugMapEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\StockInventoryEntry.resx">
       <DependentUpon>StockInventoryEntry.vb</DependentUpon>
