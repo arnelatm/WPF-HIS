@@ -152,7 +152,7 @@ Namespace PresentationLayer.Views.Forms
             txtItemNameEnglish.Text = ""
             TxtItem_Code.Text = ""
             dtpExpiry.Value = Today()
-            Process.Start("D:\AATM\QrDrugScanner\QrDrugScanner\bin\Debug\netcoreapp3.1\QrDrugScanner.exe")
+            Process.Start("C:\QrDrugScanner\QrDrugScanner.exe")
             Dim fileReader As String
             Refresh()
             Dim dteFutureDate As DateTime = Date.Now().AddSeconds(1)
