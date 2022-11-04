@@ -14,13 +14,17 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "IdNo"
             WithTreeView = False
             AddHandler View.FinderValueChanged, AddressOf OnFinderValueChanged
-
+            AddHandler View.GetDrugName, AddressOf OnGetDrugName
         End Sub
 
         Public Sub OnFinderValueChanged(idNo As Int16)
             If idNo <> 0 Then
                 RecordPositionNumber = GetSortedRecordPosition(idNo)
             End If
+        End Sub
+
+        Public Sub OnGetDrugName()
+            View.ItemNameEnglish = Service.GetField(View.GTin, "DrugList", "GTIN", "[Trade Name]")
         End Sub
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
