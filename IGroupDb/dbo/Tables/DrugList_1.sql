@@ -1,5 +1,7 @@
 ﻿CREATE TABLE [dbo].[DrugList] (
+    [IdNo]                    INT            IDENTITY (1, 1) NOT NULL,
     [RegistrationNo]          NVARCHAR (50)  NULL,
+    [GTIN]                    VARCHAR (14)   NULL,
     [Generic name]            NVARCHAR (150) NULL,
     [Trade name]              NVARCHAR (150) NULL,
     [Strength value]          NVARCHAR (50)  NULL,
@@ -27,6 +29,14 @@
     [Remarks]                 NVARCHAR (255) NULL,
     [Color]                   NVARCHAR (50)  NULL,
     [Shape]                   NVARCHAR (50)  NULL,
-    [DrugIdentification]      NVARCHAR (50)  NULL
+    [DrugIdentification]      NVARCHAR (50)  NULL,
+    CONSTRAINT [PK_DrugList] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [idx_DrugListGTIN_notnull]
+    ON [dbo].[DrugList]([GTIN] ASC) WHERE ([GTIN] IS NOT NULL);
 
