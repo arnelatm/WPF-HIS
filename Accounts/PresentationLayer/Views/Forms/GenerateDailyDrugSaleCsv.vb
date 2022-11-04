@@ -20,6 +20,8 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event GenerateCsvFile(salesDate As Date) Implements IDrugSaleView.GenerateCsvFile
 
+        Public Event GetDrugName() Implements IDrugSaleView.GetDrugName
+
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()

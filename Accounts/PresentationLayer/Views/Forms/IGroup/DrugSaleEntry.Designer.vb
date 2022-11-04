@@ -439,7 +439,7 @@
             '
             'CButton1
             '
-            Me.CButton1.DesignerSelected = True
+            Me.CButton1.DesignerSelected = False
             Me.CButton1.ImageIndex = 0
             Me.CButton1.Location = New System.Drawing.Point(326, 48)
             Me.CButton1.Name = "CButton1"

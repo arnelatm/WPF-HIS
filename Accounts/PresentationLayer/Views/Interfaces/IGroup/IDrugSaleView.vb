@@ -15,8 +15,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property SerializationNo As String
 
         Event FinderValueChanged(itemIdNo As Short)
-
         Event GenerateCsvFile(salesDate As Date)
+        Event GetDrugName()
 
     End Interface
 
