@@ -856,5 +856,10 @@
     <Build Include="dbo\Stored Procedures\spFieldExistInTable_1.sql" />
     <Build Include="dbo\Stored Procedures\Date2Date_ItemMovement_Proc_1.sql" />
     <Build Include="dbo\Stored Procedures\Date2Date_ItemMovement_FromStockDate_Proc_1.sql" />
+    <Build Include="dbo\Tables\DrugSale.sql" />
+    <Build Include="dbo\Tables\DrugRegGTIN.sql" />
+    <Build Include="dbo\Tables\DrugGTIN.sql" />
+    <Build Include="dbo\Views\DrugSale_View.sql" />
+    <Build Include="dbo\Functions\fnGetDrugSaleCsv.sql" />
   </ItemGroup>
 </Project>
