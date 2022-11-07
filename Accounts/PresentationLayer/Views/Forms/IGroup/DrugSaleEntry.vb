@@ -48,7 +48,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property IdNo As Int32 Implements IDrugSaleView.IdNo
             Get
-                Return NumParser(Of Int16)(TxtIdNo.Text)
+                Return NumParser(Of Int32)(TxtIdNo.Text)
             End Get
             Set
                 TxtIdNo.Text = Convert.ToString(Value)
@@ -113,7 +113,7 @@ Namespace PresentationLayer.Views.Forms
             Get
                 Return dtpSaleDate.Value
             End Get
-            Set(value As DateTime)
+            Set(value As Date)
                 dtpSaleDate.Value = value
             End Set
         End Property
@@ -142,89 +142,102 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
-            Dim fileName As String = "C:\temp\DrugQrCode.txt"
-            If File.Exists(fileName) Then
-                File.Delete(fileName)
-            End If
-            txtGTIN.Text = ""
-            txtBatchNo.Text = ""
-            txtSerializationNo.Text = ""
-            txtItemNameEnglish.Text = ""
-            TxtItem_Code.Text = ""
-            dtpExpiry.Value = Today()
-            Process.Start("C:\QrDrugScanner\QrDrugScanner.exe")
-            Dim fileReader As String
-            Refresh()
-            Dim dteFutureDate As DateTime = Date.Now().AddSeconds(1)
-            Threading.Thread.Sleep(5000) ' 500 milliseconds = 2 seconds
-            If File.Exists(fileName) Then
-                fileReader = My.Computer.FileSystem.ReadAllText(fileName)
-                Dim dataLength = Len(fileReader)
-                'Dim data As Byte()
-                'data = convertQPToByteArray(fileReader)
-                Dim message As String = "Text Length = " + Len(fileReader).ToString() + vbLf
-                'Dim myByte() As Byte = data
-                Dim i As Int16 = 0
-                Dim cGTIN = Mid(fileReader, 3, 14)
-                'MessageBox.Show("GTIN = " + GTIN)
-                Dim ai As String = Mid(fileReader, 17, 2)
-                Dim lastPosition As Int16 = 16
-                Dim cSerializationNo = ""
-                Dim cBatchNo = ""
-                Dim cExpiry
-                Dim yy As String = ""
-                Dim mm As String = ""
-                Dim dd As String = ""
+            Dim dataLength = Len(txtQrCode.Text)
+            'Dim data As Byte()
+            'data = convertQPToByteArray(txtQrCode.Text)
+            Dim message As String = "Text Length = " + Len(txtQrCode.Text).ToString() + vbLf
+            'Dim myByte() As Byte = data
+            Dim i As Int16 = 0
+            Dim cGTIN = Mid(txtQrCode.Text, 3, 14)
+            'MessageBox.Show("GTIN = " + GTIN)
+            Dim ai As String = Mid(txtQrCode.Text, 17, 2)
+            Dim lastPosition As Int16 = 18
+            Dim cSerializationNo = ""
+            Dim cBatchNo = ""
+            Dim yy As String = ""
+            Dim mm As String = ""
+            Dim dd As String = ""
 
-                While lastPosition < dataLength
-                    Select Case ai
-                        Case "17"
-                            lastPosition += 2
-                            yy = Mid(fileReader, lastPosition + 1, 2)
-                            mm = Mid(fileReader, lastPosition + 3, 2)
-                            dd = Mid(fileReader, lastPosition + 5, 2)
-                            Expiry = dd + "/" + mm + "/" + "20" + yy
-                            'MessageBox.Show("Expiry = " + expiry)
-                            lastPosition += 6
-                        Case "10"
-                            lastPosition += 2
-                            For i = lastPosition + 1 To dataLength
-                                If Mid(fileReader, i, 1) = ChrW(29) Then
-                                    cBatchNo = Mid(fileReader, lastPosition + 1, i - lastPosition - 1)
-                                    lastPosition = i
-                                    Exit For
-                                End If
-                            Next
+            While lastPosition < dataLength
+                Select Case ai
+                    Case "17"
+                        yy = Mid(txtQrCode.Text, lastPosition + 1, 2)
+                        mm = Mid(txtQrCode.Text, lastPosition + 3, 2)
+                        dd = Mid(txtQrCode.Text, lastPosition + 5, 2)
+                        'cExpiry = dd + "/" + mm + "/" + "20" + yy
+                        'MessageBox.Show("Expiry = " + expiry)
+                        lastPosition += 6
+                    Case "11" 'manufacture date
+                        ' don't need this data
+                        lastPosition += 6
+                    Case "10"
+                        For i = lastPosition + 1 To dataLength
+                            If Mid(txtQrCode.Text, i, 4) = "<GS>" Then ' separator
+                                cBatchNo = Mid(txtQrCode.Text, lastPosition + 1, i - lastPosition - 1)
+                                lastPosition = i + 3
+                                Exit For
+                            End If
+                        Next
                     'MessageBox.Show("Batch No = " + batchNo)
-                        Case "21"
-                            lastPosition += 2
-                            For i = lastPosition + 1 To dataLength
-                                If Mid(fileReader, i, 1) = ChrW(29) Or Mid(fileReader, i, 1) = ChrW(13) Or i >= dataLength Then
-                                    cSerializationNo = Mid(fileReader, lastPosition + 1, i - lastPosition - 1)
-                                    lastPosition = i
-                                    Exit For
-                                End If
-                            Next
-                            'MessageBox.Show("Serialization No = " + serializationNo)
-                    End Select
-                    If lastPosition >= dataLength Then
+                    Case "21"
+                        For i = lastPosition + 1 To dataLength
+                            If Mid(txtQrCode.Text, i, 4) = "<GS>" Or Mid(txtQrCode.Text, i, 1) = ChrW(13) Or i >= dataLength Then
+                                cSerializationNo = Mid(txtQrCode.Text, lastPosition + 1, i - lastPosition)
+                                lastPosition = i + 3
+                                Exit For
+                            End If
+                        Next
+                        'MessageBox.Show("Serialization No = " + serializationNo)
+                End Select
+                If lastPosition >= dataLength Then
+                    Exit While
+                Else
+                    ai = Mid(txtQrCode.Text, lastPosition + 1, 2)
+                    If ai = vbLf Or ai = vbCrLf Or ai = vbLf & vbCr Then
                         Exit While
-                    Else
-                        ai = Mid(fileReader, lastPosition + 1, 2)
-                        If ai = vbLf Or ai = vbCrLf Or ai = vbLf & vbCr Then
-                            Exit While
-                        End If
                     End If
-                End While
-                GTIN = cGTIN
-                BatchNo = cBatchNo
-                SerializationNo = cSerializationNo
-                Expiry = GbDateSerial(2000 + Val(yy), Val(mm), Val(dd))
-                RaiseEvent GetDrugName()
-                My.Computer.FileSystem.DeleteFile(fileName)
-            Else
-                MessageBox.Show("Please try again, barcode not detected")
-            End If
+                    lastPosition += 2
+                End If
+            End While
+            GTIN = cGTIN
+            BatchNo = cBatchNo
+            SerializationNo = cSerializationNo
+            Expiry = GbDateSerial(2000 + Val(yy), Val(mm), Val(dd))
+            RaiseEvent GetDrugName()
+        End Sub
+
+        Private Sub txtQrCode_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtQrCode.KeyPress
+
+            Dim i As Integer = Me.txtQrCode.SelectionStart 'save for later use
+
+            Select Case Asc(e.KeyChar)
+
+                'Case 4 'EOT
+
+                '    Me.txtQrCode.Text = Me.txtQrCode.Text.Insert(Me.txtQrCode.SelectionStart, "<EOT>")
+
+                '    Me.txtQrCode.SelectionStart = i + 5
+
+                '    e.Handled = True
+
+                Case 29 'GS
+
+                    Me.txtQrCode.Text = Me.txtQrCode.Text.Insert(Me.txtQrCode.SelectionStart, "<GS>")
+
+                    Me.txtQrCode.SelectionStart = i + 5
+
+                    e.Handled = True
+
+                    'Case 30 'RS
+
+                    '    Me.txtQrCode.Text = Me.txtQrCode.Text.Insert(Me.txtQrCode.SelectionStart, "<RS>")
+
+                    '    Me.txtQrCode.SelectionStart = i + 5
+
+                    '    e.Handled = True
+
+            End Select
+
         End Sub
 
         'Private Sub cboItemFinder_SelectedIndexChanged(sender As Object, e As EventArgs)

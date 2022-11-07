@@ -40,6 +40,10 @@
             Me.lblSaleDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpSaleDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtQrCode = New System.Windows.Forms.TextBox()
+            Me.lblManufactureDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.dtpManufactureDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.TableLayoutPanel1.SuspendLayout()
             Me.SuspendLayout()
@@ -52,35 +56,42 @@
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 173.0!))
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150.0!))
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 318.0!))
-            Me.TableLayoutPanel1.Controls.Add(Me.dtpExpiry, 1, 6)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblItemNameEnglish, 0, 4)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtItemNameEnglish, 1, 4)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtSerializationNo, 1, 7)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtBatchNo, 1, 5)
-            Me.TableLayoutPanel1.Controls.Add(Me.TxtIdNo, 1, 1)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblIdNo, 0, 1)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblItem_Code, 0, 3)
-            Me.TableLayoutPanel1.Controls.Add(Me.TxtItem_Code, 1, 3)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblSerialNo, 0, 7)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblExpiry, 0, 6)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblBatch, 0, 5)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblGTIN, 0, 2)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtGTIN, 1, 2)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblSaleDate, 0, 0)
-            Me.TableLayoutPanel1.Controls.Add(Me.dtpSaleDate, 1, 0)
-            Me.TableLayoutPanel1.Controls.Add(Me.CButton1, 2, 2)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblManufactureDate, 0, 7)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblItemNameEnglish, 0, 5)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtItemNameEnglish, 1, 5)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtSerializationNo, 1, 9)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtBatchNo, 1, 6)
+            Me.TableLayoutPanel1.Controls.Add(Me.TxtIdNo, 1, 2)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblIdNo, 0, 2)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblItem_Code, 0, 4)
+            Me.TableLayoutPanel1.Controls.Add(Me.TxtItem_Code, 1, 4)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblSerialNo, 0, 9)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblBatch, 0, 6)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblGTIN, 0, 3)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtGTIN, 1, 3)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblSaleDate, 0, 1)
+            Me.TableLayoutPanel1.Controls.Add(Me.dtpSaleDate, 1, 1)
+            Me.TableLayoutPanel1.Controls.Add(Me.CButton1, 2, 3)
+            Me.TableLayoutPanel1.Controls.Add(Me.CLabel1, 0, 0)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtQrCode, 1, 0)
+            Me.TableLayoutPanel1.Controls.Add(Me.dtpExpiry, 1, 8)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblExpiry, 0, 8)
+            Me.TableLayoutPanel1.Controls.Add(Me.dtpManufactureDate, 1, 7)
             Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 57)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-            Me.TableLayoutPanel1.RowCount = 8
+            Me.TableLayoutPanel1.RowCount = 11
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.Size = New System.Drawing.Size(641, 196)
+            Me.TableLayoutPanel1.Size = New System.Drawing.Size(641, 253)
             Me.TableLayoutPanel1.TabIndex = 5
             '
             'dtpExpiry
@@ -96,7 +107,7 @@
             Me.dtpExpiry.EditsAllowed = False
             Me.dtpExpiry.ForeColor = System.Drawing.Color.Black
             Me.dtpExpiry.LinkedLabel = Me.lblExpiry
-            Me.dtpExpiry.Location = New System.Drawing.Point(173, 151)
+            Me.dtpExpiry.Location = New System.Drawing.Point(173, 203)
             Me.dtpExpiry.Margin = New System.Windows.Forms.Padding(0)
             Me.dtpExpiry.Name = "dtpExpiry"
             Me.dtpExpiry.ReadOnlyDp = False
@@ -117,7 +128,7 @@
             Me.lblExpiry.DisplayOnly = True
             Me.lblExpiry.EditingMode = False
             Me.lblExpiry.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblExpiry.Location = New System.Drawing.Point(1, 152)
+            Me.lblExpiry.Location = New System.Drawing.Point(1, 204)
             Me.lblExpiry.Margin = New System.Windows.Forms.Padding(1)
             Me.lblExpiry.Name = "lblExpiry"
             Me.lblExpiry.Size = New System.Drawing.Size(80, 17)
@@ -132,7 +143,7 @@
             Me.lblItemNameEnglish.DisplayOnly = True
             Me.lblItemNameEnglish.EditingMode = False
             Me.lblItemNameEnglish.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblItemNameEnglish.Location = New System.Drawing.Point(1, 102)
+            Me.lblItemNameEnglish.Location = New System.Drawing.Point(1, 131)
             Me.lblItemNameEnglish.Margin = New System.Windows.Forms.Padding(1)
             Me.lblItemNameEnglish.Name = "lblItemNameEnglish"
             Me.lblItemNameEnglish.Size = New System.Drawing.Size(75, 17)
@@ -160,7 +171,7 @@
             Me.txtItemNameEnglish.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtItemNameEnglish.ForeColor = System.Drawing.Color.Black
             Me.txtItemNameEnglish.LinkedLabel = Me.lblItemNameEnglish
-            Me.txtItemNameEnglish.Location = New System.Drawing.Point(174, 102)
+            Me.txtItemNameEnglish.Location = New System.Drawing.Point(174, 131)
             Me.txtItemNameEnglish.Margin = New System.Windows.Forms.Padding(1)
             Me.txtItemNameEnglish.MaximumValue = Nothing
             Me.txtItemNameEnglish.MinimumValue = Nothing
@@ -189,7 +200,7 @@
             Me.txtSerializationNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtSerializationNo.ForeColor = System.Drawing.Color.Black
             Me.txtSerializationNo.LinkedLabel = Me.lblSerialNo
-            Me.txtSerializationNo.Location = New System.Drawing.Point(174, 175)
+            Me.txtSerializationNo.Location = New System.Drawing.Point(174, 227)
             Me.txtSerializationNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtSerializationNo.MaximumValue = Nothing
             Me.txtSerializationNo.MinimumValue = Nothing
@@ -206,7 +217,7 @@
             Me.lblSerialNo.DisplayOnly = True
             Me.lblSerialNo.EditingMode = False
             Me.lblSerialNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblSerialNo.Location = New System.Drawing.Point(1, 175)
+            Me.lblSerialNo.Location = New System.Drawing.Point(1, 227)
             Me.lblSerialNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblSerialNo.Name = "lblSerialNo"
             Me.lblSerialNo.Size = New System.Drawing.Size(139, 17)
@@ -233,7 +244,7 @@
             Me.txtBatchNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtBatchNo.ForeColor = System.Drawing.Color.Black
             Me.txtBatchNo.LinkedLabel = Me.lblBatch
-            Me.txtBatchNo.Location = New System.Drawing.Point(174, 127)
+            Me.txtBatchNo.Location = New System.Drawing.Point(174, 156)
             Me.txtBatchNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtBatchNo.MaximumValue = Nothing
             Me.txtBatchNo.MinimumValue = Nothing
@@ -250,7 +261,7 @@
             Me.lblBatch.DisplayOnly = True
             Me.lblBatch.EditingMode = False
             Me.lblBatch.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblBatch.Location = New System.Drawing.Point(1, 127)
+            Me.lblBatch.Location = New System.Drawing.Point(1, 156)
             Me.lblBatch.Margin = New System.Windows.Forms.Padding(1)
             Me.lblBatch.Name = "lblBatch"
             Me.lblBatch.Size = New System.Drawing.Size(98, 17)
@@ -277,7 +288,7 @@
             Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
             Me.TxtIdNo.LinkedLabel = Me.lblIdNo
-            Me.TxtIdNo.Location = New System.Drawing.Point(174, 21)
+            Me.TxtIdNo.Location = New System.Drawing.Point(174, 50)
             Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.TxtIdNo.MaximumValue = Nothing
             Me.TxtIdNo.MinimumValue = Nothing
@@ -295,7 +306,7 @@
             Me.lblIdNo.DisplayOnly = True
             Me.lblIdNo.EditingMode = False
             Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblIdNo.Location = New System.Drawing.Point(1, 21)
+            Me.lblIdNo.Location = New System.Drawing.Point(1, 50)
             Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblIdNo.Name = "lblIdNo"
             Me.lblIdNo.Size = New System.Drawing.Size(83, 17)
@@ -310,7 +321,7 @@
             Me.lblItem_Code.DisplayOnly = True
             Me.lblItem_Code.EditingMode = False
             Me.lblItem_Code.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblItem_Code.Location = New System.Drawing.Point(1, 77)
+            Me.lblItem_Code.Location = New System.Drawing.Point(1, 106)
             Me.lblItem_Code.Margin = New System.Windows.Forms.Padding(1)
             Me.lblItem_Code.Name = "lblItem_Code"
             Me.lblItem_Code.Size = New System.Drawing.Size(71, 17)
@@ -338,7 +349,7 @@
             Me.TxtItem_Code.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtItem_Code.ForeColor = System.Drawing.Color.Black
             Me.TxtItem_Code.LinkedLabel = Me.lblItem_Code
-            Me.TxtItem_Code.Location = New System.Drawing.Point(174, 77)
+            Me.TxtItem_Code.Location = New System.Drawing.Point(174, 106)
             Me.TxtItem_Code.Margin = New System.Windows.Forms.Padding(1)
             Me.TxtItem_Code.MaximumValue = Nothing
             Me.TxtItem_Code.MinimumValue = Nothing
@@ -356,7 +367,7 @@
             Me.lblGTIN.DisplayOnly = True
             Me.lblGTIN.EditingMode = False
             Me.lblGTIN.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblGTIN.Location = New System.Drawing.Point(1, 46)
+            Me.lblGTIN.Location = New System.Drawing.Point(1, 75)
             Me.lblGTIN.Margin = New System.Windows.Forms.Padding(1)
             Me.lblGTIN.Name = "lblGTIN"
             Me.lblGTIN.Size = New System.Drawing.Size(41, 17)
@@ -383,7 +394,7 @@
             Me.txtGTIN.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtGTIN.ForeColor = System.Drawing.Color.Black
             Me.txtGTIN.LinkedLabel = Me.lblGTIN
-            Me.txtGTIN.Location = New System.Drawing.Point(174, 46)
+            Me.txtGTIN.Location = New System.Drawing.Point(174, 75)
             Me.txtGTIN.Margin = New System.Windows.Forms.Padding(1)
             Me.txtGTIN.MaximumValue = Nothing
             Me.txtGTIN.MinimumValue = Nothing
@@ -400,7 +411,7 @@
             Me.lblSaleDate.DisplayOnly = True
             Me.lblSaleDate.EditingMode = False
             Me.lblSaleDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblSaleDate.Location = New System.Drawing.Point(1, 1)
+            Me.lblSaleDate.Location = New System.Drawing.Point(1, 27)
             Me.lblSaleDate.Margin = New System.Windows.Forms.Padding(1)
             Me.lblSaleDate.Name = "lblSaleDate"
             Me.lblSaleDate.Size = New System.Drawing.Size(77, 17)
@@ -422,14 +433,14 @@
             Me.dtpSaleDate.EditsAllowed = False
             Me.dtpSaleDate.ForeColor = System.Drawing.Color.Black
             Me.dtpSaleDate.LinkedLabel = Me.lblExpiry
-            Me.dtpSaleDate.Location = New System.Drawing.Point(173, 0)
+            Me.dtpSaleDate.Location = New System.Drawing.Point(173, 26)
             Me.dtpSaleDate.Margin = New System.Windows.Forms.Padding(0)
             Me.dtpSaleDate.Name = "dtpSaleDate"
             Me.dtpSaleDate.ReadOnlyDp = False
             Me.dtpSaleDate.SecurityKey = Nothing
             Me.dtpSaleDate.ShowLongDate = False
             Me.dtpSaleDate.ShowTime = False
-            Me.dtpSaleDate.Size = New System.Drawing.Size(118, 20)
+            Me.dtpSaleDate.Size = New System.Drawing.Size(118, 23)
             Me.dtpSaleDate.TabIndex = 47
             Me.dtpSaleDate.TargetCalendar = CType(resources.GetObject("dtpSaleDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpSaleDate.Translatable = False
@@ -441,7 +452,7 @@
             '
             Me.CButton1.DesignerSelected = False
             Me.CButton1.ImageIndex = 0
-            Me.CButton1.Location = New System.Drawing.Point(326, 48)
+            Me.CButton1.Location = New System.Drawing.Point(326, 77)
             Me.CButton1.Name = "CButton1"
             Me.CButton1.OriginalImageName = Nothing
             Me.CButton1.SecurityKey = ""
@@ -449,11 +460,78 @@
             Me.CButton1.TabIndex = 48
             Me.CButton1.Text = "Scan QR Code"
             '
+            'CLabel1
+            '
+            Me.CLabel1.AutoSize = True
+            Me.CLabel1.DisplayOnly = True
+            Me.CLabel1.EditingMode = False
+            Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel1.Location = New System.Drawing.Point(1, 1)
+            Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel1.Name = "CLabel1"
+            Me.CLabel1.Size = New System.Drawing.Size(97, 17)
+            Me.CLabel1.TabIndex = 49
+            Me.CLabel1.Text = "Scan Qr Code"
+            Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel1.Translatable = True
+            '
+            'txtQrCode
+            '
+            Me.TableLayoutPanel1.SetColumnSpan(Me.txtQrCode, 2)
+            Me.txtQrCode.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtQrCode.Location = New System.Drawing.Point(176, 3)
+            Me.txtQrCode.Name = "txtQrCode"
+            Me.txtQrCode.Size = New System.Drawing.Size(462, 20)
+            Me.txtQrCode.TabIndex = 50
+            '
+            'lblManufactureDate
+            '
+            Me.lblManufactureDate.AutoSize = True
+            Me.lblManufactureDate.DisplayOnly = True
+            Me.lblManufactureDate.EditingMode = False
+            Me.lblManufactureDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblManufactureDate.Location = New System.Drawing.Point(1, 181)
+            Me.lblManufactureDate.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblManufactureDate.Name = "lblManufactureDate"
+            Me.lblManufactureDate.Size = New System.Drawing.Size(121, 17)
+            Me.lblManufactureDate.TabIndex = 51
+            Me.lblManufactureDate.Text = "Manufacture Date"
+            Me.lblManufactureDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblManufactureDate.Translatable = True
+            '
+            'dtpManufactureDate
+            '
+            Me.dtpManufactureDate.AutoSize = True
+            Me.dtpManufactureDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.dtpManufactureDate.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
+            Me.dtpManufactureDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpManufactureDate.DefaultValue = Nothing
+            Me.dtpManufactureDate.DisplayOnly = False
+            Me.dtpManufactureDate.DtpDefaultValue = Nothing
+            Me.dtpManufactureDate.EditingMode = True
+            Me.dtpManufactureDate.EditsAllowed = False
+            Me.dtpManufactureDate.ForeColor = System.Drawing.Color.Black
+            Me.dtpManufactureDate.LinkedLabel = Me.lblManufactureDate
+            Me.dtpManufactureDate.Location = New System.Drawing.Point(173, 180)
+            Me.dtpManufactureDate.Margin = New System.Windows.Forms.Padding(0)
+            Me.dtpManufactureDate.Name = "dtpManufactureDate"
+            Me.dtpManufactureDate.ReadOnlyDp = False
+            Me.dtpManufactureDate.SecurityKey = Nothing
+            Me.dtpManufactureDate.ShowLongDate = False
+            Me.dtpManufactureDate.ShowTime = False
+            Me.dtpManufactureDate.Size = New System.Drawing.Size(118, 23)
+            Me.dtpManufactureDate.TabIndex = 52
+            Me.dtpManufactureDate.TargetCalendar = CType(resources.GetObject("dtpManufactureDate.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpManufactureDate.Translatable = False
+            Me.dtpManufactureDate.Value = Nothing
+            Me.dtpManufactureDate.ValueIsMandatory = False
+            Me.dtpManufactureDate.ValueIsNullable = False
+            '
             'DrugSaleEntry
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
-            Me.ClientSize = New System.Drawing.Size(663, 283)
+            Me.ClientSize = New System.Drawing.Size(663, 352)
             Me.Controls.Add(Me.TableLayoutPanel1)
             Me.Name = "DrugSaleEntry"
             Me.Text = "Item Details Entry"
@@ -484,5 +562,9 @@
         Friend WithEvents lblSaleDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dtpSaleDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
         Friend WithEvents CButton1 As Libraries.CBaseControlsLibrary.CButton
+        Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents txtQrCode As TextBox
+        Friend WithEvents lblManufactureDate As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents dtpManufactureDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
     End Class
 End Namespace

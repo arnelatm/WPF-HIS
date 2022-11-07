@@ -14,7 +14,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property SaleDate As Date
         Property SerializationNo As String
 
-        Event FinderValueChanged(itemIdNo As Short)
+        Event FinderValueChanged(itemIdNo As Int16)
         Event GenerateCsvFile(salesDate As Date)
         Event GetDrugName()
 
