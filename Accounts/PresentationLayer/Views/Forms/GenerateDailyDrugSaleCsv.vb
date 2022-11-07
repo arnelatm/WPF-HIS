@@ -11,7 +11,7 @@ Namespace PresentationLayer.Views.Forms
         Public Property MainTableName As String
 
         Public Property BatchNo As String Implements IDrugSaleView.BatchNo
-        Public Property Expiry As Date Implements IDrugSaleView.Expiry
+        Public Property Expiry As Date? Implements IDrugSaleView.Expiry
         Public Property GTin As String Implements IDrugSaleView.GTin
         Public Property IdNo As Integer Implements IDrugSaleView.IdNo
         Public Property Item_Code As String Implements IDrugSaleView.Item_Code
@@ -30,7 +30,7 @@ Namespace PresentationLayer.Views.Forms
             SaleDate = Today()
         End Sub
 
-        Public Property SaleDate As Date Implements IDrugSaleView.SaleDate
+        Public Property SaleDate As Date? Implements IDrugSaleView.SaleDate
             Get
                 Return dtpSaleDate.Value
             End Get
