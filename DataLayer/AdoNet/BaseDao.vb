@@ -80,10 +80,19 @@ Namespace AdoNet
         Public Function DeleteRecord(idNo As Int32, tableName As String) As Int32 _
             Implements IBaseDao.DeleteRecord
             'Dim cTableName = GetPhysicalTableName(tableName)
-            Dim sql As String =
+            If tableName.Right(5) = "_View" Then
+                Dim l As Int16 = Len(tableName)
+                Dim sql As String =
+                    " Delete FROM [" & Left(tableName, Len(tableName) - 5) & "] " &
+                    " Where " & GetPrimaryFieldName() & " = " & idNo
+                Return GetDb().Delete(sql)
+            Else
+                Dim sql As String =
                     " Delete FROM [" & tableName & "] " &
                     " Where " & GetPrimaryFieldName() & " = " & idNo
-            Return GetDb().Delete(sql)
+                Return GetDb().Delete(sql)
+            End If
+
         End Function
 
         'Private Shared Function GetPhysicalTableName(pTableName As String) As String

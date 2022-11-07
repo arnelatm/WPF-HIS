@@ -6,12 +6,12 @@ Namespace PresentationLayer.Views.Interfaces
         Inherits IView
 
         Property BatchNo As String
-        Property Expiry As Date
+        Property Expiry As Date?
         Property GTin As String
         Property IdNo As Int32
         Property Item_Code As String
         Property ItemNameEnglish As String
-        Property SaleDate As Date
+        Property SaleDate As Date?
         Property SerializationNo As String
 
         Event FinderValueChanged(itemIdNo As Int16)

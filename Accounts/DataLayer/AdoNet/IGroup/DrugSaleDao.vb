@@ -38,18 +38,20 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function UpdateRecord(ByRef drugSale As DrugSale) As Integer Implements IDao(Of DrugSale).UpdateRecord
-            Dim sql As String = " UPDATE StockPositionCurrent SET " &
+            Dim sql As String = " UPDATE DrugSale SET " &
                     " BatchNo = @BatchNo, " &
                     " Expiry = @Expiry," &
-                    " SerializationNo = @SerializationNo"
+                    " SerializationNo = @SerializationNo," &
+                    " Gtin = @GTin " &
+                    " where IdNo = @IdNo"
             Dim retVal As Integer
             retVal = _db.Update(sql, Take(drugSale))
-            If retVal > 0 And Not GlobalFunctions.IsEmpty(drugSale.GTin) Then
-                Dim sql1 As String = "UPDATE ItemDetails SET " &
-                    " GTin = @GTin" &
-                    " WHERE Item_Code = @Item_Code and BranchId = @BranchId"
-                _db.Update(sql1, Take(drugSale))
-            End If
+            'If retVal > 0 And Not GlobalFunctions.IsEmpty(drugSale.GTin) Then
+            '    Dim sql1 As String = "UPDATE ItemDetails SET " &
+            '        " GTin = @GTin" &
+            '        " WHERE Item_Code = @Item_Code and BranchId = @BranchId"
+            '    _db.Update(sql1, Take(drugSale))
+            'End If
             Return retVal
         End Function
 
@@ -65,12 +67,12 @@ Namespace DataLayer.AdoNet
                             Function(reader) _
             New DrugSale() With {
             .BatchNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("BatchNo")),
-            .Expiry = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("Expiry")),
+            .Expiry = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date)(reader("Expiry")),
             .GTin = AATM.DataLayer.AdoNet.Extensions.AsString(reader("GTin")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .Item_Code = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Item_Code")),
             .ItemNameEnglish = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ItemNameEnglish")),
-            .SaleDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("SaleDate")),
+            .SaleDate = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date)(reader("SaleDate")),
             .SerializationNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("SerializationNo"))
             }
 
@@ -79,6 +81,7 @@ Namespace DataLayer.AdoNet
                             "BatchNo", drugSale.BatchNo,
                             "Expiry", drugSale.Expiry,
                             "GTin", drugSale.GTin,
+                            "IdNo", drugSale.IdNo,
                             "SaleDate", drugSale.SaleDate,
                             "SerializationNo", drugSale.SerializationNo
                             }

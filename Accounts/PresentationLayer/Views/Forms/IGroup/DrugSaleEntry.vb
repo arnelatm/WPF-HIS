@@ -16,7 +16,7 @@ Namespace PresentationLayer.Views.Forms
 
             ' This call is required by the designer.
             InitializeComponent()
-            FirstControl = txtGTIN
+            FirstControl = txtQrCode
 
             Dim numberDecimalDigits = 4
             Dim numberDecimalSeparator = ConfigurationManager.AppSettings("DefaultNumberDecimalSeparator")
@@ -73,7 +73,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Expiry As Date Implements IDrugSaleView.Expiry
+        Public Property Expiry As Date? Implements IDrugSaleView.Expiry
             Get
                 Return dtpExpiry.Value
             End Get
@@ -109,11 +109,11 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property SaleDate As Date Implements IDrugSaleView.SaleDate
+        Public Property SaleDate As Date? Implements IDrugSaleView.SaleDate
             Get
                 Return dtpSaleDate.Value
             End Get
-            Set(value As Date)
+            Set(value As Date?)
                 dtpSaleDate.Value = value
             End Set
         End Property
@@ -163,11 +163,21 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent GetDrugName()
         End Sub
 
+        Private Sub EraseEntry()
+            GTIN = ""
+            BatchNo = ""
+            SerializationNo = ""
+            Expiry = Nothing
+            dtpManufactureDate.Value = Nothing
+            ItemNameEnglish = ""
+        End Sub
+
         Private Function MakeDate(stringDate As String) As Date
             Return GbDateSerial(2000 + Val(Mid(stringDate, 1, 2)), Val(Mid(stringDate, 3, 2)), Val(Mid(stringDate, 5, 2)))
         End Function
 
         Private Sub ProcessQrCode()
+            EraseEntry()
             Dim dataLength = Len(txtQrCode.Text)
             Dim i As Int16 = 0
             _cGTIN = Mid(txtQrCode.Text, 3, 14)
@@ -177,6 +187,9 @@ Namespace PresentationLayer.Views.Forms
                 Select Case ai
                     Case "17"
                         _cExpiry = Mid(txtQrCode.Text, lastPosition + 1, 6)
+                        If _cExpiry.Right(2) = "00" Then
+                            _cExpiry = Mid(txtQrCode.Text, 1, 4) + "01"
+                        End If
                         lastPosition += 6
                     Case "11" 'manufacture date
                         _cManufacture = Mid(txtQrCode.Text, lastPosition + 1, 6)
@@ -212,30 +225,28 @@ Namespace PresentationLayer.Views.Forms
             End While
         End Sub
 
-        Private Function MakeQrDate(cDateText As String)
-            Dim yy As String, mm As String, dd As String, startPosition As Short
-            yy = Mid(txtQrCode.Text, startPosition + 1, 2)
-            mm = Mid(txtQrCode.Text, startPosition + 3, 2)
-            dd = Mid(txtQrCode.Text, startPosition + 5, 2)
-            Return yy + "/" + mm + "/" + dd
-        End Function
+        'Private Function MakeQrDate(cDateText As String)
+        '    Dim yy As String, mm As String, dd As String, startPosition As Short
+        '    yy = Mid(txtQrCode.Text, startPosition + 1, 2)
+        '    mm = Mid(txtQrCode.Text, startPosition + 3, 2)
+        '    dd = Mid(txtQrCode.Text, startPosition + 5, 2)
+        '    Return yy + "/" + mm + "/" + dd
+        'End Function
 
         Private Function ValidValues()
             Dim formats() As String = {"dd/MM/yyyy"}
             Dim yy As String, mm As String, dd As String
-            Dim cExpiry As Date
             yy = Mid(_cExpiry, 1, 2)
             mm = Mid(_cExpiry, 3, 2)
             dd = Mid(_cExpiry, 5, 2)
             Dim textDate As String = dd + "/" + mm + "/" + (2000 + Val(yy)).ToString()
-            'Dim cExpiry As Date = GbDateSerial(2000 + Val(_yy), Val(_mm), Val(_dd))
-            ' this should work with all 3 strings above
-            If Not DateTime.TryParseExact(textDate, formats, Globalization.CultureInfo.InvariantCulture, DateTimeStyles.None, cExpiry) Then
-                MessageBox.Show("Invalid date value or format!")
+            Dim dDate As Date
+            If Not DateTime.TryParseExact(textDate, formats, Globalization.CultureInfo.InvariantCulture, DateTimeStyles.None, dDate) Then
+                MessageBox.Show("Invalid date value or format! <" + textDate + ">")
                 Return False
             End If
-            If cExpiry <= Today() Then
-                MessageBox.Show("Item is Expired!")
+            If dDate <= Today() Then
+                MessageBox.Show("Item is Expired. Can't sell or accept an expired drug.")
                 Return False
             End If
             If Len(_cGTIN) = 14 AndAlso Not IsNumeric(_cGTIN) Then
@@ -287,15 +298,58 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
-        'Private Sub txtQrCode_TextChanged(sender As Object, e As EventArgs) Handles txtQrCode.TextChanged
-        '    If ValidValues() Then
-        '        AssignQrCodeValues()
-        '    End If
-        'End Sub
+        Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton2.ClickButtonArea
+            EraseEntry()
+            txtQrCode.Text = ""
+            txtQrCode.Focus()
+        End Sub
 
-        'Private Sub cboItemFinder_SelectedIndexChanged(sender As Object, e As EventArgs)
-        '    RaiseEvent FinderValueChanged(cboItemFinder.SelectedItem.IdNo)
-        'End Sub
+        Private Sub DrugSaleEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            btnAdd.PerformClick()
+            txtQrCode.Focus()
+        End Sub
+
+        Private Sub txtQrCode_Validated(sender As Object, e As EventArgs) Handles txtQrCode.LostFocus
+            If Not (txtQrCode.Text Is Nothing Or txtQrCode.Text = "") Then
+                ProcessQrCode()
+                If ValidValues() Then
+                    AssignQrCodeValues()
+                End If
+            End If
+        End Sub
+
+        Private Sub btnValidate_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnValidate.ClickButtonArea
+            If Not ValidEntries() Then
+                MessageBox.Show("Please correct this record.")
+            Else
+                MessageBox.Show("Values are valid.")
+            End If
+        End Sub
+
+        Private Function ValidEntries()
+            Dim formats() As String = {"dd/MM/yyyy"}
+            If dtpExpiry.Value Is Nothing Then
+                MessageBox.Show("Expiry Date can't be empty!")
+                Return False
+            End If
+            If dtpExpiry.Value <= Today() Then
+                MessageBox.Show("Item is Expired. Can't sell or accept an expired drug.")
+                Return False
+            End If
+            If Len(GTIN) = 14 AndAlso Not IsNumeric(GTIN) Then
+                MessageBox.Show("Invalid GTIN <" + GTIN + ">")
+                Return False
+            End If
+            If Len(BatchNo) < 1 Then
+                MessageBox.Show("Batch Number cannot be empty!")
+                Return False
+            End If
+            If Len(SerializationNo) < 1 Then
+                MessageBox.Show("Serialization Number cannot be empty!")
+                Return False
+            End If
+            Return True
+        End Function
 
 #End Region
 
