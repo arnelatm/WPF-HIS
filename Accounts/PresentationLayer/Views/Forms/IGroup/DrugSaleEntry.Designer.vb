@@ -23,8 +23,7 @@
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DrugSaleEntry))
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-            Me.dtpExpiry = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-            Me.lblExpiry = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblManufactureDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblItemNameEnglish = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtItemNameEnglish = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtSerializationNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -39,10 +38,11 @@
             Me.txtGTIN = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblSaleDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpSaleDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
+            Me.lblExpiry = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtQrCode = New System.Windows.Forms.TextBox()
-            Me.lblManufactureDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.dtpExpiry = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.dtpManufactureDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.TableLayoutPanel1.SuspendLayout()
@@ -94,48 +94,20 @@
             Me.TableLayoutPanel1.Size = New System.Drawing.Size(641, 253)
             Me.TableLayoutPanel1.TabIndex = 5
             '
-            'dtpExpiry
+            'lblManufactureDate
             '
-            Me.dtpExpiry.AutoSize = True
-            Me.dtpExpiry.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-            Me.dtpExpiry.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
-            Me.dtpExpiry.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-            Me.dtpExpiry.DefaultValue = Nothing
-            Me.dtpExpiry.DisplayOnly = False
-            Me.dtpExpiry.DtpDefaultValue = Nothing
-            Me.dtpExpiry.EditingMode = True
-            Me.dtpExpiry.EditsAllowed = False
-            Me.dtpExpiry.ForeColor = System.Drawing.Color.Black
-            Me.dtpExpiry.LinkedLabel = Me.lblExpiry
-            Me.dtpExpiry.Location = New System.Drawing.Point(173, 203)
-            Me.dtpExpiry.Margin = New System.Windows.Forms.Padding(0)
-            Me.dtpExpiry.Name = "dtpExpiry"
-            Me.dtpExpiry.ReadOnlyDp = False
-            Me.dtpExpiry.SecurityKey = Nothing
-            Me.dtpExpiry.ShowLongDate = False
-            Me.dtpExpiry.ShowTime = False
-            Me.dtpExpiry.Size = New System.Drawing.Size(118, 23)
-            Me.dtpExpiry.TabIndex = 45
-            Me.dtpExpiry.TargetCalendar = CType(resources.GetObject("dtpExpiry.TargetCalendar"), System.Globalization.Calendar)
-            Me.dtpExpiry.Translatable = False
-            Me.dtpExpiry.Value = Nothing
-            Me.dtpExpiry.ValueIsMandatory = False
-            Me.dtpExpiry.ValueIsNullable = False
-            '
-            'lblExpiry
-            '
-            Me.lblExpiry.AutoSize = True
-            Me.lblExpiry.DisplayOnly = True
-            Me.lblExpiry.EditingMode = False
-            Me.lblExpiry.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblExpiry.Location = New System.Drawing.Point(1, 204)
-            Me.lblExpiry.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblExpiry.Name = "lblExpiry"
-            Me.lblExpiry.Size = New System.Drawing.Size(80, 17)
-            Me.lblExpiry.TabIndex = 11
-            Me.lblExpiry.Text = "Expiry Date"
-            Me.lblExpiry.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.lblExpiry.Translatable = True
+            Me.lblManufactureDate.AutoSize = True
+            Me.lblManufactureDate.DisplayOnly = True
+            Me.lblManufactureDate.EditingMode = False
+            Me.lblManufactureDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblManufactureDate.Location = New System.Drawing.Point(1, 181)
+            Me.lblManufactureDate.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblManufactureDate.Name = "lblManufactureDate"
+            Me.lblManufactureDate.Size = New System.Drawing.Size(121, 17)
+            Me.lblManufactureDate.TabIndex = 51
+            Me.lblManufactureDate.Text = "Manufacture Date"
+            Me.lblManufactureDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblManufactureDate.Translatable = True
             '
             'lblItemNameEnglish
             '
@@ -448,9 +420,24 @@
             Me.dtpSaleDate.ValueIsMandatory = False
             Me.dtpSaleDate.ValueIsNullable = False
             '
+            'lblExpiry
+            '
+            Me.lblExpiry.AutoSize = True
+            Me.lblExpiry.DisplayOnly = True
+            Me.lblExpiry.EditingMode = False
+            Me.lblExpiry.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblExpiry.Location = New System.Drawing.Point(1, 204)
+            Me.lblExpiry.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblExpiry.Name = "lblExpiry"
+            Me.lblExpiry.Size = New System.Drawing.Size(80, 17)
+            Me.lblExpiry.TabIndex = 11
+            Me.lblExpiry.Text = "Expiry Date"
+            Me.lblExpiry.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblExpiry.Translatable = True
+            '
             'CButton1
             '
-            Me.CButton1.DesignerSelected = False
+            Me.CButton1.DesignerSelected = True
             Me.CButton1.ImageIndex = 0
             Me.CButton1.Location = New System.Drawing.Point(326, 77)
             Me.CButton1.Name = "CButton1"
@@ -484,20 +471,33 @@
             Me.txtQrCode.Size = New System.Drawing.Size(462, 20)
             Me.txtQrCode.TabIndex = 50
             '
-            'lblManufactureDate
+            'dtpExpiry
             '
-            Me.lblManufactureDate.AutoSize = True
-            Me.lblManufactureDate.DisplayOnly = True
-            Me.lblManufactureDate.EditingMode = False
-            Me.lblManufactureDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblManufactureDate.Location = New System.Drawing.Point(1, 181)
-            Me.lblManufactureDate.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblManufactureDate.Name = "lblManufactureDate"
-            Me.lblManufactureDate.Size = New System.Drawing.Size(121, 17)
-            Me.lblManufactureDate.TabIndex = 51
-            Me.lblManufactureDate.Text = "Manufacture Date"
-            Me.lblManufactureDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.lblManufactureDate.Translatable = True
+            Me.dtpExpiry.AutoSize = True
+            Me.dtpExpiry.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.dtpExpiry.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
+            Me.dtpExpiry.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpExpiry.DefaultValue = Nothing
+            Me.dtpExpiry.DisplayOnly = False
+            Me.dtpExpiry.DtpDefaultValue = Nothing
+            Me.dtpExpiry.EditingMode = True
+            Me.dtpExpiry.EditsAllowed = False
+            Me.dtpExpiry.ForeColor = System.Drawing.Color.Black
+            Me.dtpExpiry.LinkedLabel = Me.lblExpiry
+            Me.dtpExpiry.Location = New System.Drawing.Point(173, 203)
+            Me.dtpExpiry.Margin = New System.Windows.Forms.Padding(0)
+            Me.dtpExpiry.Name = "dtpExpiry"
+            Me.dtpExpiry.ReadOnlyDp = False
+            Me.dtpExpiry.SecurityKey = Nothing
+            Me.dtpExpiry.ShowLongDate = False
+            Me.dtpExpiry.ShowTime = False
+            Me.dtpExpiry.Size = New System.Drawing.Size(118, 23)
+            Me.dtpExpiry.TabIndex = 45
+            Me.dtpExpiry.TargetCalendar = CType(resources.GetObject("dtpExpiry.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpExpiry.Translatable = False
+            Me.dtpExpiry.Value = Nothing
+            Me.dtpExpiry.ValueIsMandatory = False
+            Me.dtpExpiry.ValueIsNullable = False
             '
             'dtpManufactureDate
             '

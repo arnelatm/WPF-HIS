@@ -141,39 +141,50 @@ Namespace PresentationLayer.Views.Forms
             TxtItem_Code.DisplayOnly = value
         End Sub
 
+        Private _cGTIN As String = Nothing
+        Private _cSerializationNo As String = Nothing
+        Private _cBatchNo As String = Nothing
+        Private _cExpiry As String
+        Private _cManufacture As String
+
         Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
+            ProcessQrCode()
+            If ValidValues() Then
+                AssignQrCodeValues()
+            End If
+        End Sub
+
+        Private Sub AssignQrCodeValues()
+            GTIN = _cGTIN
+            BatchNo = _cBatchNo
+            SerializationNo = _cSerializationNo
+            dtpManufactureDate.Text = MakeDate(_cManufacture)
+            Expiry = MakeDate(_cExpiry)
+            RaiseEvent GetDrugName()
+        End Sub
+
+        Private Function MakeDate(stringDate As String) As Date
+            Return GbDateSerial(2000 + Val(Mid(stringDate, 1, 2)), Val(Mid(stringDate, 3, 2)), Val(Mid(stringDate, 5, 2)))
+        End Function
+
+        Private Sub ProcessQrCode()
             Dim dataLength = Len(txtQrCode.Text)
-            'Dim data As Byte()
-            'data = convertQPToByteArray(txtQrCode.Text)
-            Dim message As String = "Text Length = " + Len(txtQrCode.Text).ToString() + vbLf
-            'Dim myByte() As Byte = data
             Dim i As Int16 = 0
-            Dim cGTIN = Mid(txtQrCode.Text, 3, 14)
-            'MessageBox.Show("GTIN = " + GTIN)
+            _cGTIN = Mid(txtQrCode.Text, 3, 14)
             Dim ai As String = Mid(txtQrCode.Text, 17, 2)
             Dim lastPosition As Int16 = 18
-            Dim cSerializationNo = ""
-            Dim cBatchNo = ""
-            Dim yy As String = ""
-            Dim mm As String = ""
-            Dim dd As String = ""
-
             While lastPosition < dataLength
                 Select Case ai
                     Case "17"
-                        yy = Mid(txtQrCode.Text, lastPosition + 1, 2)
-                        mm = Mid(txtQrCode.Text, lastPosition + 3, 2)
-                        dd = Mid(txtQrCode.Text, lastPosition + 5, 2)
-                        'cExpiry = dd + "/" + mm + "/" + "20" + yy
-                        'MessageBox.Show("Expiry = " + expiry)
+                        _cExpiry = Mid(txtQrCode.Text, lastPosition + 1, 6)
                         lastPosition += 6
                     Case "11" 'manufacture date
-                        ' don't need this data
+                        _cManufacture = Mid(txtQrCode.Text, lastPosition + 1, 6)
                         lastPosition += 6
                     Case "10"
                         For i = lastPosition + 1 To dataLength
                             If Mid(txtQrCode.Text, i, 4) = "<GS>" Then ' separator
-                                cBatchNo = Mid(txtQrCode.Text, lastPosition + 1, i - lastPosition - 1)
+                                _cBatchNo = Mid(txtQrCode.Text, lastPosition + 1, i - lastPosition - 1)
                                 lastPosition = i + 3
                                 Exit For
                             End If
@@ -182,7 +193,7 @@ Namespace PresentationLayer.Views.Forms
                     Case "21"
                         For i = lastPosition + 1 To dataLength
                             If Mid(txtQrCode.Text, i, 4) = "<GS>" Or Mid(txtQrCode.Text, i, 1) = ChrW(13) Or i >= dataLength Then
-                                cSerializationNo = Mid(txtQrCode.Text, lastPosition + 1, i - lastPosition)
+                                _cSerializationNo = Mid(txtQrCode.Text, lastPosition + 1, i - lastPosition)
                                 lastPosition = i + 3
                                 Exit For
                             End If
@@ -199,12 +210,48 @@ Namespace PresentationLayer.Views.Forms
                     lastPosition += 2
                 End If
             End While
-            GTIN = cGTIN
-            BatchNo = cBatchNo
-            SerializationNo = cSerializationNo
-            Expiry = GbDateSerial(2000 + Val(yy), Val(mm), Val(dd))
-            RaiseEvent GetDrugName()
         End Sub
+
+        Private Function MakeQrDate(cDateText As String)
+            Dim yy As String, mm As String, dd As String, startPosition As Short
+            yy = Mid(txtQrCode.Text, startPosition + 1, 2)
+            mm = Mid(txtQrCode.Text, startPosition + 3, 2)
+            dd = Mid(txtQrCode.Text, startPosition + 5, 2)
+            Return yy + "/" + mm + "/" + dd
+        End Function
+
+        Private Function ValidValues()
+            Dim formats() As String = {"dd/MM/yyyy"}
+            Dim yy As String, mm As String, dd As String
+            Dim cExpiry As Date
+            yy = Mid(_cExpiry, 1, 2)
+            mm = Mid(_cExpiry, 3, 2)
+            dd = Mid(_cExpiry, 5, 2)
+            Dim textDate As String = dd + "/" + mm + "/" + (2000 + Val(yy)).ToString()
+            'Dim cExpiry As Date = GbDateSerial(2000 + Val(_yy), Val(_mm), Val(_dd))
+            ' this should work with all 3 strings above
+            If Not DateTime.TryParseExact(textDate, formats, Globalization.CultureInfo.InvariantCulture, DateTimeStyles.None, cExpiry) Then
+                MessageBox.Show("Invalid date value or format!")
+                Return False
+            End If
+            If cExpiry <= Today() Then
+                MessageBox.Show("Item is Expired!")
+                Return False
+            End If
+            If Len(_cGTIN) = 14 AndAlso Not IsNumeric(_cGTIN) Then
+                MessageBox.Show("Invalid GTIN <" + _cGTIN + ">")
+                Return False
+            End If
+            If Len(_cBatchNo) < 1 Then
+                MessageBox.Show("Batch Number cannot be empty!")
+                Return False
+            End If
+            If Len(_cSerializationNo) < 1 Then
+                MessageBox.Show("Serialization Number cannot be empty!")
+                Return False
+            End If
+            Return True
+        End Function
 
         Private Sub txtQrCode_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtQrCode.KeyPress
 
@@ -239,6 +286,12 @@ Namespace PresentationLayer.Views.Forms
             End Select
 
         End Sub
+
+        'Private Sub txtQrCode_TextChanged(sender As Object, e As EventArgs) Handles txtQrCode.TextChanged
+        '    If ValidValues() Then
+        '        AssignQrCodeValues()
+        '    End If
+        'End Sub
 
         'Private Sub cboItemFinder_SelectedIndexChanged(sender As Object, e As EventArgs)
         '    RaiseEvent FinderValueChanged(cboItemFinder.SelectedItem.IdNo)
