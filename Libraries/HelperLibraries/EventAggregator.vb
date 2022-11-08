@@ -1,6 +1,6 @@
 ﻿Imports System.Threading
 
-<DebuggerStepThrough()>
+'<DebuggerStepThrough()>
 Public Class EventAggregator
     Implements IEventAggregator
 

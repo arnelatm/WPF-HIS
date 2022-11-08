@@ -564,7 +564,7 @@
             '
             'btnValidate
             '
-            Me.btnValidate.DesignerSelected = True
+            Me.btnValidate.DesignerSelected = False
             Me.btnValidate.ImageIndex = 0
             Me.btnValidate.Location = New System.Drawing.Point(526, 316)
             Me.btnValidate.Name = "btnValidate"

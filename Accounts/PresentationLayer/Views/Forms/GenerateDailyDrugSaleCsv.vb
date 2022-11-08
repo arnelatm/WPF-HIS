@@ -39,6 +39,8 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property QrCode As String Implements IDrugSaleView.QrCode
+
         Private Sub GenerateDrugSaleBankCsv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             btnPrint.Visible = False
             btnSave.Visible = False
