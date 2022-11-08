@@ -13,9 +13,12 @@ Namespace PresentationLayer.Views.Interfaces
         Property ItemNameEnglish As String
         Property SaleDate As Date?
         Property SerializationNo As String
+        Property QrCode As String
 
         Event FinderValueChanged(itemIdNo As Int16)
+
         Event GenerateCsvFile(salesDate As Date)
+
         Event GetDrugName()
 
     End Interface

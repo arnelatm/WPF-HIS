@@ -894,6 +894,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Final", "Final", "{B721D695
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "IGroupDb", "IGroupDb\IGroupDb.sqlproj", "{801A8625-1E43-439B-ACB5-A47CB91645FE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ToDos", "ToDos", "{E4F0E91F-DE65-4117-B6A5-99AFD8AF8DC3}"
+	ProjectSection(SolutionItems) = preProject
+		01-DrugSale_View.sql = 01-DrugSale_View.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1044,6 +1049,7 @@ Global
 		{C90D3B3E-01F4-401D-8649-0563028668C7} = {56B69066-4EA7-454D-BE37-C492DD319E9C}
 		{2CC5D6D4-CEA0-4991-8859-559BDF3FC1C4} = {C90D3B3E-01F4-401D-8649-0563028668C7}
 		{B721D695-0745-49EA-9FED-FF713FBE7792} = {549000D0-E128-4B80-AEDA-C6AF4FCC2989}
+		{E4F0E91F-DE65-4117-B6A5-99AFD8AF8DC3} = {0598D101-4147-476C-98FF-8C78D96B971E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {433E9001-0D97-4552-9BF4-6FED04B194AE}

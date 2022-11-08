@@ -17,6 +17,7 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             FirstControl = txtQrCode
+            AutoAddOnSave = True
 
             Dim numberDecimalDigits = 4
             Dim numberDecimalSeparator = ConfigurationManager.AppSettings("DefaultNumberDecimalSeparator")
@@ -117,6 +118,17 @@ Namespace PresentationLayer.Views.Forms
                 dtpSaleDate.Value = value
             End Set
         End Property
+
+        Public Property QrCode As String Implements IDrugSaleView.QrCode
+            Get
+                Return txtQrCode.Text
+            End Get
+            Set(value As String)
+                txtQrCode.Text = value
+            End Set
+        End Property
+
+#End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
@@ -310,10 +322,14 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub txtQrCode_Validated(sender As Object, e As EventArgs) Handles txtQrCode.LostFocus
+            Dim saveData As Boolean = False
             If Not (txtQrCode.Text Is Nothing Or txtQrCode.Text = "") Then
-                ProcessQrCode()
-                If ValidValues() Then
-                    AssignQrCodeValues()
+                If txtQrCode.Text.Contains("<GS>") Then
+                    ProcessQrCode()
+                    If ValidValues() Then
+                        AssignQrCodeValues()
+                        saveData = True
+                    End If
                 End If
             End If
         End Sub
@@ -350,8 +366,6 @@ Namespace PresentationLayer.Views.Forms
             End If
             Return True
         End Function
-
-#End Region
 
     End Class
 

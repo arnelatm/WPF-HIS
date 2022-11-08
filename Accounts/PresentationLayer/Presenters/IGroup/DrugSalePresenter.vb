@@ -29,6 +29,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             View.SaleDate = Today()
+            View.QrCode = ""
         End Sub
 
     End Class

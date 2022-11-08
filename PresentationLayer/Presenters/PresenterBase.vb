@@ -1191,7 +1191,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             Debugger.Break()
 
         End Try
-
         Return retValue
     End Function
 
@@ -1312,6 +1311,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                 Beep()
                 Messaging.MessageKey = "ValidationErrors"
                 Messaging.Show("Record not saved!" & Environment.NewLine & _dataErrors, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                eventType.ValidData = False
                 'ShowErrors("Record not saved!" & Environment.NewLine & _dataErrors)
             End If
         End If
