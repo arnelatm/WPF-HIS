@@ -20,7 +20,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event GenerateCsvFile(salesDate As Date) Implements IDrugSaleView.GenerateCsvFile
 
-        Public Event GetDrugName() Implements IDrugSaleView.GetDrugName
+        'Public Event GetDrugName() Implements IDrugSaleView.GetDrugName
 
         Public Sub New()
             ' This call is required by the designer.
@@ -40,6 +40,7 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property QrCode As String Implements IDrugSaleView.QrCode
+        Public Property Manufacture As Date? Implements IDrugSaleView.Manufacture
 
         Private Sub GenerateDrugSaleBankCsv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             btnPrint.Visible = False
@@ -62,6 +63,10 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Public Event FinderValueChanged(itemIdNo As Short) Implements IDrugSaleView.FinderValueChanged
+        Public Event CheckDuplicateDrug(ByRef duplicate As Boolean) Implements IDrugSaleView.CheckDuplicateDrug
+        Public Event ClearEntry() Implements IDrugSaleView.ClearEntry
+        Public Event ValidateEntries() Implements IDrugSaleView.ValidateEntries
+        Public Event ValidateQrCode(ByRef valid As Boolean) Implements IDrugSaleView.ValidateQrCode
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             Dim txtBatchNo As New CTextBox

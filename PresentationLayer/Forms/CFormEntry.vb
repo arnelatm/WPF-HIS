@@ -506,7 +506,7 @@ Public Class CFormEntry
             If Ea IsNot Nothing Then
                 Ea.PublishEvent(New EntryFormLoaded(Me))
             End If
-            Debugger.Break()
+            'Debugger.Break()
             PublishClickedButton(ButtonClicked.Last)
             Inputs(False)
             If SingleData Or HideNavigatorButtons Then
