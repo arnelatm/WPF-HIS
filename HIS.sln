@@ -897,6 +897,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ToDos", "ToDos", "{E4F0E91F-DE65-4117-B6A5-99AFD8AF8DC3}"
 	ProjectSection(SolutionItems) = preProject
 		01-DrugSale_View.sql = 01-DrugSale_View.sql
+		Sample Data.txt = Sample Data.txt
 	EndProjectSection
 EndProject
 Global
