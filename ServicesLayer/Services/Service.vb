@@ -491,6 +491,10 @@ Namespace Services
             Return DataDao.CountRecordWithKey(searchValue, tableName, searchFieldName)
         End Function
 
+        Public Function CountRecordWith3Key(Of S1, S2, S3)(tableName As String, searchFieldName1 As String, searchFieldName2 As String, searchFieldName3 As String, searchValue1 As S1, searchValue2 As S2, searchValue3 As S3) As Integer Implements IService.CountRecordWith3Key
+            Return DataDao.CountRecordWith3Key(Of S1, S2, S3)(tableName, searchFieldName1, searchFieldName2, searchFieldName3, searchValue1, searchValue2, searchValue3)
+        End Function
+
         Public Function DeleteRecord(idNo As Int32, tableName As String) As Integer _
             Implements IService.DeleteRecord
             Return DataDao.DeleteRecord(idNo, tableName)
@@ -554,6 +558,10 @@ Namespace Services
 
         Public Function GetRecordFieldWith2KeyG(Of T1, T2, T3)(searchValue1 As T1, searchValue2 As T2, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As T3 Implements IService.GetRecordFieldWith2Keyg
             Return DataDao.GetRecordFieldWith2KeyG(Of T1, T2, T3)(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2, returnFieldName)
+        End Function
+
+        Public Function GetRecordFieldWith3KeyG(Of T1, T2, T3, R)(tableName As String, searchValue1 As T1, searchValue2 As T2, searchValue3 As T3, searchFieldName1 As String, searchFieldName2 As String, searchFieldName3 As String, returnFieldName As String) As R Implements IService.GetRecordFieldWith3Keyg
+            Return DataDao.GetRecordFieldWith3KeyG(Of T1, T2, T3, R)(tableName, searchValue1, searchValue2, searchValue3, searchFieldName1, searchFieldName2, searchFieldName3, returnFieldName)
         End Function
 
         Public Function GetRecordFieldWithKey(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As String Implements IService.GetRecordFieldWithKey

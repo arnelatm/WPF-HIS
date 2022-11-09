@@ -59,13 +59,16 @@ Namespace AdoNet
             Return GetDb().Scalar(sql, params).ToString()
         End Function
 
-        'Public Function CountRecordFieldWith2KeyG(Of T1, T2, T3)(searchValue1 As T1, searchValue2 As T2, tableName As String, searchFieldName1 As String, searchFieldName2 As String) As T3 Implements IBaseDao.CountRecordFieldWith2KeyG
-        '    Dim searchFieldValue1 As String = ConvertToString(Of T1)(searchValue1)
-        '    Dim searchFieldValue2 As String = ConvertToString(Of T2)(searchValue2)
-        '    Dim sql As String = "Select Count(*) FROM [" & tableName & "] " & "Where @searchFieldName1 = @SearchFieldValue1 and @searchFieldName2 = @searchFieldValue2 "
-        '    Dim params() As Object = {"@SearchFieldName1", searchFieldName1, "@SearchFieldName2", searchFieldName2, "@searchFieldValue1", searchFieldValue1, "@searchFieldValue2", searchFieldValue2}
-        '    Return GetDb().Scalar(sql, params)
-        'End Function
+        Public Function CountRecordWith3Key(Of S1, S2, S3)(tableName As String, searchFieldName1 As String, searchFieldName2 As String, searchFieldName3 As String, searchValue1 As S1, searchValue2 As S2, searchValue3 As S3) As Integer Implements IBaseDao.CountRecordWith3Key
+            Dim searchVal1 As String = ConvertToString(Of S1)(searchValue1)
+            Dim searchVal2 As String = ConvertToString(Of S2)(searchValue2)
+            Dim searchVal3 As String = ConvertToString(Of S3)(searchValue3)
+            Dim sql As String = " Select COUNT(*) FROM [" & tableName & "] " &
+                    " Where " & searchFieldName1 & " = @SearchVal1 and " & searchFieldName2 & " = @SearchVal2 and " & searchFieldName3 & " = @SearchVal3 "
+            Dim params() As Object = {"@SearchVal1", searchVal1, "@SearchVal2", searchVal2, "@SearchVal3", searchVal3}
+            Return GetDb().Scalar(sql, params)
+        End Function
+
 
         Public Function CountRecordWithKey(searchValue As String, tableName As String, searchFieldName As String) _
             As Integer _
@@ -77,6 +80,7 @@ Namespace AdoNet
             Return GetDb().Scalar(sql, params)
         End Function
 
+        
         Public Function DeleteRecord(idNo As Int32, tableName As String) As Int32 _
             Implements IBaseDao.DeleteRecord
             'Dim cTableName = GetPhysicalTableName(tableName)
@@ -662,6 +666,21 @@ Namespace AdoNet
             Dim sql As String = " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] " &
                     " Where " & searchFieldName1 & " = @SearchVal1 and " & searchFieldName2 & " = @SearchVal2 "
             Dim params() As Object = {"@SearchVal1", searchVal1, "@SearchVal2", searchVal2}
+            Dim retVal = GetDb().Scalar(sql, params)
+            If retVal Is Nothing Or IsDBNull(retVal) Then
+                Return Nothing
+            End If
+            Return retVal
+        End Function
+
+        Public Function GetRecordFieldWith3KeyG(Of S1, S2, S3, R1)(tableName As String, searchValue1 As S1, searchValue2 As S2, searchValue3 As S3,
+                                       searchFieldName1 As String, searchFieldName2 As String, searchFieldName3 As String, returnFieldName As String) As R1 Implements IBaseDao.GetRecordFieldWith3KeyG
+            Dim searchVal1 As String = ConvertToString(Of S1)(searchValue1)
+            Dim searchVal2 As String = ConvertToString(Of S2)(searchValue2)
+            Dim searchVal3 As String = ConvertToString(Of S3)(searchValue3)
+            Dim sql As String = " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] " &
+                    " Where " & searchFieldName1 & " = @SearchVal1 and " & searchFieldName2 & " = @SearchVal2 and " & searchFieldName3 & " = @SearchVal3 "
+            Dim params() As Object = {"@searchVal1", searchVal1, "@searchVal2", searchVal2, "@searchVal3", searchVal3}
             Dim retVal = GetDb().Scalar(sql, params)
             If retVal Is Nothing Or IsDBNull(retVal) Then
                 Return Nothing

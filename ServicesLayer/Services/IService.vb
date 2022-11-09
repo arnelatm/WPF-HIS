@@ -128,7 +128,8 @@ Namespace Services
         Function GetPrintSetupIdNo(reportName As String) As Integer
 
         Function GetIcNameWithIdNo(groupCode As CodeGroupSelection, idNo As Int32) As String
-
+        Function CountRecordWith3Key(Of S1, S2, S3)(tableName As String, searchFieldName1 As String, searchFieldName2 As String, searchFieldName3 As String, searchValue1 As S1, searchValue2 As S2, searchValue3 As S3) As Integer
+        Function GetRecordFieldWith3Keyg(Of T1, T2, T3, R)(tableName As String, searchValue1 As T1, searchValue2 As T2, searchValue3 As T3, searchFieldName1 As String, searchFieldName2 As String, searchFieldName3 As String, returnFieldName As String) As R
     End Interface
 
 End Namespace

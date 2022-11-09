@@ -14,13 +14,16 @@ Namespace PresentationLayer.Views.Interfaces
         Property SaleDate As Date?
         Property SerializationNo As String
         Property QrCode As String
-
+        Property Manufacture As Date?
         Event FinderValueChanged(itemIdNo As Int16)
 
         Event GenerateCsvFile(salesDate As Date)
 
-        Event GetDrugName()
-
+        'Event GetDrugName()
+        Event CheckDuplicateDrug(ByRef duplicate As Boolean)
+        Event ClearEntry()
+        Event ValidateEntries()
+        Event ValidateQrCode(ByRef valid As Boolean)
     End Interface
 
 End Namespace

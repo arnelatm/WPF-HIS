@@ -39,15 +39,16 @@
             Me.lblSaleDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpSaleDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblExpiry = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtQrCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtQrCode = New System.Windows.Forms.TextBox()
             Me.dtpExpiry = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-            Me.dtpManufactureDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-            Me.CButton2 = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.dtpManufacture = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
+            Me.btnClearEntry = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.btnValidate = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.qrCodeErrorProvider = New System.Windows.Forms.ErrorProvider(Me.components)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.TableLayoutPanel1.SuspendLayout()
+            CType(Me.qrCodeErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             '
             'TableLayoutPanel1
@@ -73,12 +74,11 @@
             Me.TableLayoutPanel1.Controls.Add(Me.txtGTIN, 1, 3)
             Me.TableLayoutPanel1.Controls.Add(Me.lblSaleDate, 0, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.dtpSaleDate, 1, 1)
-            Me.TableLayoutPanel1.Controls.Add(Me.CButton1, 2, 3)
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel1, 0, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.txtQrCode, 1, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.dtpExpiry, 1, 8)
             Me.TableLayoutPanel1.Controls.Add(Me.lblExpiry, 0, 8)
-            Me.TableLayoutPanel1.Controls.Add(Me.dtpManufactureDate, 1, 7)
+            Me.TableLayoutPanel1.Controls.Add(Me.dtpManufacture, 1, 7)
             Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 57)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             Me.TableLayoutPanel1.RowCount = 11
@@ -102,7 +102,7 @@
             Me.lblManufactureDate.DisplayOnly = True
             Me.lblManufactureDate.EditingMode = False
             Me.lblManufactureDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblManufactureDate.Location = New System.Drawing.Point(1, 180)
+            Me.lblManufactureDate.Location = New System.Drawing.Point(1, 174)
             Me.lblManufactureDate.Margin = New System.Windows.Forms.Padding(1)
             Me.lblManufactureDate.Name = "lblManufactureDate"
             Me.lblManufactureDate.Size = New System.Drawing.Size(121, 17)
@@ -117,7 +117,7 @@
             Me.lblItemNameEnglish.DisplayOnly = True
             Me.lblItemNameEnglish.EditingMode = False
             Me.lblItemNameEnglish.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblItemNameEnglish.Location = New System.Drawing.Point(1, 130)
+            Me.lblItemNameEnglish.Location = New System.Drawing.Point(1, 124)
             Me.lblItemNameEnglish.Margin = New System.Windows.Forms.Padding(1)
             Me.lblItemNameEnglish.Name = "lblItemNameEnglish"
             Me.lblItemNameEnglish.Size = New System.Drawing.Size(75, 17)
@@ -145,7 +145,7 @@
             Me.txtItemNameEnglish.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtItemNameEnglish.ForeColor = System.Drawing.Color.Black
             Me.txtItemNameEnglish.LinkedLabel = Me.lblItemNameEnglish
-            Me.txtItemNameEnglish.Location = New System.Drawing.Point(174, 130)
+            Me.txtItemNameEnglish.Location = New System.Drawing.Point(174, 124)
             Me.txtItemNameEnglish.Margin = New System.Windows.Forms.Padding(1)
             Me.txtItemNameEnglish.MaximumValue = Nothing
             Me.txtItemNameEnglish.MinimumValue = Nothing
@@ -174,7 +174,7 @@
             Me.txtSerializationNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtSerializationNo.ForeColor = System.Drawing.Color.Black
             Me.txtSerializationNo.LinkedLabel = Me.lblSerialNo
-            Me.txtSerializationNo.Location = New System.Drawing.Point(174, 226)
+            Me.txtSerializationNo.Location = New System.Drawing.Point(174, 220)
             Me.txtSerializationNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtSerializationNo.MaximumValue = Nothing
             Me.txtSerializationNo.MinimumValue = Nothing
@@ -191,7 +191,7 @@
             Me.lblSerialNo.DisplayOnly = True
             Me.lblSerialNo.EditingMode = False
             Me.lblSerialNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblSerialNo.Location = New System.Drawing.Point(1, 226)
+            Me.lblSerialNo.Location = New System.Drawing.Point(1, 220)
             Me.lblSerialNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblSerialNo.Name = "lblSerialNo"
             Me.lblSerialNo.Size = New System.Drawing.Size(139, 17)
@@ -218,7 +218,7 @@
             Me.txtBatchNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtBatchNo.ForeColor = System.Drawing.Color.Black
             Me.txtBatchNo.LinkedLabel = Me.lblBatch
-            Me.txtBatchNo.Location = New System.Drawing.Point(174, 155)
+            Me.txtBatchNo.Location = New System.Drawing.Point(174, 149)
             Me.txtBatchNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtBatchNo.MaximumValue = Nothing
             Me.txtBatchNo.MinimumValue = Nothing
@@ -235,7 +235,7 @@
             Me.lblBatch.DisplayOnly = True
             Me.lblBatch.EditingMode = False
             Me.lblBatch.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblBatch.Location = New System.Drawing.Point(1, 155)
+            Me.lblBatch.Location = New System.Drawing.Point(1, 149)
             Me.lblBatch.Margin = New System.Windows.Forms.Padding(1)
             Me.lblBatch.Name = "lblBatch"
             Me.lblBatch.Size = New System.Drawing.Size(98, 17)
@@ -295,7 +295,7 @@
             Me.lblItem_Code.DisplayOnly = True
             Me.lblItem_Code.EditingMode = False
             Me.lblItem_Code.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblItem_Code.Location = New System.Drawing.Point(1, 105)
+            Me.lblItem_Code.Location = New System.Drawing.Point(1, 99)
             Me.lblItem_Code.Margin = New System.Windows.Forms.Padding(1)
             Me.lblItem_Code.Name = "lblItem_Code"
             Me.lblItem_Code.Size = New System.Drawing.Size(71, 17)
@@ -323,7 +323,7 @@
             Me.TxtItem_Code.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtItem_Code.ForeColor = System.Drawing.Color.Black
             Me.TxtItem_Code.LinkedLabel = Me.lblItem_Code
-            Me.TxtItem_Code.Location = New System.Drawing.Point(174, 105)
+            Me.TxtItem_Code.Location = New System.Drawing.Point(174, 99)
             Me.TxtItem_Code.Margin = New System.Windows.Forms.Padding(1)
             Me.TxtItem_Code.MaximumValue = Nothing
             Me.TxtItem_Code.MinimumValue = Nothing
@@ -428,7 +428,7 @@
             Me.lblExpiry.DisplayOnly = True
             Me.lblExpiry.EditingMode = False
             Me.lblExpiry.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblExpiry.Location = New System.Drawing.Point(1, 203)
+            Me.lblExpiry.Location = New System.Drawing.Point(1, 197)
             Me.lblExpiry.Margin = New System.Windows.Forms.Padding(1)
             Me.lblExpiry.Name = "lblExpiry"
             Me.lblExpiry.Size = New System.Drawing.Size(80, 17)
@@ -436,18 +436,6 @@
             Me.lblExpiry.Text = "Expiry Date"
             Me.lblExpiry.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblExpiry.Translatable = True
-            '
-            'CButton1
-            '
-            Me.CButton1.DesignerSelected = False
-            Me.CButton1.ImageIndex = 0
-            Me.CButton1.Location = New System.Drawing.Point(326, 76)
-            Me.CButton1.Name = "CButton1"
-            Me.CButton1.OriginalImageName = Nothing
-            Me.CButton1.SecurityKey = ""
-            Me.CButton1.Size = New System.Drawing.Size(126, 25)
-            Me.CButton1.TabIndex = 48
-            Me.CButton1.Text = "Scan QR Code"
             '
             'CLabel1
             '
@@ -467,32 +455,16 @@
             'txtQrCode
             '
             Me.txtQrCode.BackColor = System.Drawing.Color.White
-            Me.txtQrCode.BegFindValue = Nothing
             Me.txtQrCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TableLayoutPanel1.SetColumnSpan(Me.txtQrCode, 2)
-            Me.txtQrCode.ComputedValue = False
-            Me.txtQrCode.CustomFormat = Nothing
-            Me.txtQrCode.DataBoundControl = True
             Me.txtQrCode.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.txtQrCode.EditingMode = True
-            Me.txtQrCode.EndFindValue = Nothing
-            Me.txtQrCode.FieldDescription = Nothing
-            Me.txtQrCode.FieldName = Nothing
-            Me.txtQrCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtQrCode.FindEnabled = False
             Me.txtQrCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtQrCode.ForeColor = System.Drawing.Color.Black
-            Me.txtQrCode.LinkedLabel = Nothing
             Me.txtQrCode.Location = New System.Drawing.Point(174, 1)
             Me.txtQrCode.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtQrCode.MaximumValue = Nothing
-            Me.txtQrCode.MinimumValue = Nothing
             Me.txtQrCode.Name = "txtQrCode"
-            Me.txtQrCode.OldValue = Nothing
-            Me.txtQrCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtQrCode.Size = New System.Drawing.Size(466, 23)
             Me.txtQrCode.TabIndex = 50
-            Me.txtQrCode.Translatable = False
             '
             'dtpExpiry
             '
@@ -507,7 +479,7 @@
             Me.dtpExpiry.EditsAllowed = False
             Me.dtpExpiry.ForeColor = System.Drawing.Color.Black
             Me.dtpExpiry.LinkedLabel = Me.lblExpiry
-            Me.dtpExpiry.Location = New System.Drawing.Point(173, 202)
+            Me.dtpExpiry.Location = New System.Drawing.Point(173, 196)
             Me.dtpExpiry.Margin = New System.Windows.Forms.Padding(0)
             Me.dtpExpiry.Name = "dtpExpiry"
             Me.dtpExpiry.ReadOnlyDp = False
@@ -522,45 +494,45 @@
             Me.dtpExpiry.ValueIsMandatory = False
             Me.dtpExpiry.ValueIsNullable = False
             '
-            'dtpManufactureDate
+            'dtpManufacture
             '
-            Me.dtpManufactureDate.AutoSize = True
-            Me.dtpManufactureDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-            Me.dtpManufactureDate.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
-            Me.dtpManufactureDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-            Me.dtpManufactureDate.DefaultValue = Nothing
-            Me.dtpManufactureDate.DisplayOnly = False
-            Me.dtpManufactureDate.DtpDefaultValue = Nothing
-            Me.dtpManufactureDate.EditingMode = True
-            Me.dtpManufactureDate.EditsAllowed = False
-            Me.dtpManufactureDate.ForeColor = System.Drawing.Color.Black
-            Me.dtpManufactureDate.LinkedLabel = Me.lblManufactureDate
-            Me.dtpManufactureDate.Location = New System.Drawing.Point(173, 179)
-            Me.dtpManufactureDate.Margin = New System.Windows.Forms.Padding(0)
-            Me.dtpManufactureDate.Name = "dtpManufactureDate"
-            Me.dtpManufactureDate.ReadOnlyDp = False
-            Me.dtpManufactureDate.SecurityKey = Nothing
-            Me.dtpManufactureDate.ShowLongDate = False
-            Me.dtpManufactureDate.ShowTime = False
-            Me.dtpManufactureDate.Size = New System.Drawing.Size(118, 23)
-            Me.dtpManufactureDate.TabIndex = 52
-            Me.dtpManufactureDate.TargetCalendar = CType(resources.GetObject("dtpManufactureDate.TargetCalendar"), System.Globalization.Calendar)
-            Me.dtpManufactureDate.Translatable = False
-            Me.dtpManufactureDate.Value = Nothing
-            Me.dtpManufactureDate.ValueIsMandatory = False
-            Me.dtpManufactureDate.ValueIsNullable = False
+            Me.dtpManufacture.AutoSize = True
+            Me.dtpManufacture.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.dtpManufacture.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
+            Me.dtpManufacture.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpManufacture.DefaultValue = Nothing
+            Me.dtpManufacture.DisplayOnly = False
+            Me.dtpManufacture.DtpDefaultValue = Nothing
+            Me.dtpManufacture.EditingMode = True
+            Me.dtpManufacture.EditsAllowed = False
+            Me.dtpManufacture.ForeColor = System.Drawing.Color.Black
+            Me.dtpManufacture.LinkedLabel = Me.lblManufactureDate
+            Me.dtpManufacture.Location = New System.Drawing.Point(173, 173)
+            Me.dtpManufacture.Margin = New System.Windows.Forms.Padding(0)
+            Me.dtpManufacture.Name = "dtpManufacture"
+            Me.dtpManufacture.ReadOnlyDp = False
+            Me.dtpManufacture.SecurityKey = Nothing
+            Me.dtpManufacture.ShowLongDate = False
+            Me.dtpManufacture.ShowTime = False
+            Me.dtpManufacture.Size = New System.Drawing.Size(118, 23)
+            Me.dtpManufacture.TabIndex = 52
+            Me.dtpManufacture.TargetCalendar = CType(resources.GetObject("dtpManufacture.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpManufacture.Translatable = False
+            Me.dtpManufacture.Value = Nothing
+            Me.dtpManufacture.ValueIsMandatory = False
+            Me.dtpManufacture.ValueIsNullable = False
             '
-            'CButton2
+            'btnClearEntry
             '
-            Me.CButton2.DesignerSelected = False
-            Me.CButton2.ImageIndex = 0
-            Me.CButton2.Location = New System.Drawing.Point(12, 316)
-            Me.CButton2.Name = "CButton2"
-            Me.CButton2.OriginalImageName = Nothing
-            Me.CButton2.SecurityKey = ""
-            Me.CButton2.Size = New System.Drawing.Size(126, 25)
-            Me.CButton2.TabIndex = 54
-            Me.CButton2.Text = "Clear Entry"
+            Me.btnClearEntry.DesignerSelected = False
+            Me.btnClearEntry.ImageIndex = 0
+            Me.btnClearEntry.Location = New System.Drawing.Point(12, 316)
+            Me.btnClearEntry.Name = "btnClearEntry"
+            Me.btnClearEntry.OriginalImageName = Nothing
+            Me.btnClearEntry.SecurityKey = ""
+            Me.btnClearEntry.Size = New System.Drawing.Size(126, 25)
+            Me.btnClearEntry.TabIndex = 54
+            Me.btnClearEntry.Text = "Clear Entry"
             '
             'btnValidate
             '
@@ -574,22 +546,27 @@
             Me.btnValidate.TabIndex = 55
             Me.btnValidate.Text = "Validate Entry"
             '
+            'qrCodeErrorProvider
+            '
+            Me.qrCodeErrorProvider.ContainerControl = Me
+            '
             'DrugSaleEntry
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
             Me.ClientSize = New System.Drawing.Size(663, 447)
             Me.Controls.Add(Me.btnValidate)
-            Me.Controls.Add(Me.CButton2)
+            Me.Controls.Add(Me.btnClearEntry)
             Me.Controls.Add(Me.TableLayoutPanel1)
             Me.Name = "DrugSaleEntry"
             Me.Text = "Item Details Entry"
             Me.Controls.SetChildIndex(Me.TableLayoutPanel1, 0)
-            Me.Controls.SetChildIndex(Me.CButton2, 0)
+            Me.Controls.SetChildIndex(Me.btnClearEntry, 0)
             Me.Controls.SetChildIndex(Me.btnValidate, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.TableLayoutPanel1.ResumeLayout(False)
             Me.TableLayoutPanel1.PerformLayout()
+            CType(Me.qrCodeErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
             Me.PerformLayout()
 
@@ -612,12 +589,12 @@
         Friend WithEvents dtpExpiry As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
         Friend WithEvents lblSaleDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dtpSaleDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
-        Friend WithEvents CButton1 As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtQrCode As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents txtQrCode As TextBox
         Friend WithEvents lblManufactureDate As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents dtpManufactureDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
-        Friend WithEvents CButton2 As Libraries.CBaseControlsLibrary.CButton
+        Friend WithEvents dtpManufacture As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
+        Friend WithEvents btnClearEntry As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnValidate As Libraries.CBaseControlsLibrary.CButton
+        Friend WithEvents qrCodeErrorProvider As ErrorProvider
     End Class
 End Namespace
