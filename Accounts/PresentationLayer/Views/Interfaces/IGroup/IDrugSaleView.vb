@@ -24,6 +24,8 @@ Namespace PresentationLayer.Views.Interfaces
         Event ClearEntry()
         Event ValidateEntries()
         Event ValidateQrCode(ByRef valid As Boolean)
+        Event SaveDrugSale()
+        Event AddDrugSale()
     End Interface
 
 End Namespace

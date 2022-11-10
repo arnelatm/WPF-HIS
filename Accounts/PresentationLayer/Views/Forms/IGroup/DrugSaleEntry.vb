@@ -11,11 +11,20 @@ Namespace PresentationLayer.Views.Forms
         Implements IDrugSaleView
 
         Public Event CheckDuplicateDrug(ByRef duplicate As Boolean) Implements IDrugSaleView.CheckDuplicateDrug
+
         Public Event ClearEntry() Implements IDrugSaleView.ClearEntry
+
         Public Event FinderValueChanged(itemIdNo As Int16) Implements IDrugSaleView.FinderValueChanged
+
         Public Event GenerateCsvFile(salesDate As Date) Implements IDrugSaleView.GenerateCsvFile
+
         Public Event ValidateEntries() Implements IDrugSaleView.ValidateEntries
+
         Public Event ValidateQrCode(ByRef valid As Boolean) Implements IDrugSaleView.ValidateQrCode
+
+        Public Event SaveDrugSale() Implements IDrugSaleView.SaveDrugSale
+
+        Public Event AddDrugSale() Implements IDrugSaleView.AddDrugSale
 
         Public Property DrugSaleByName As List(Of Lookup.LookupData)
 
@@ -194,7 +203,6 @@ Namespace PresentationLayer.Views.Forms
             txtQrCode.Focus()
         End Sub
 
-
         Private Sub btnValidate_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnValidate.ClickButtonArea
             RaiseEvent ValidateEntries()
         End Sub
@@ -209,6 +217,27 @@ Namespace PresentationLayer.Views.Forms
                 MessageBox.Show("Invalid QR Code!")
             End If
         End Sub
+
+        'Private Sub txtQrCode_Validated(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles txtQrCode.Validated
+        '    If txtQrCode.Text IsNot Nothing Then
+        '        RaiseEvent SaveDrugSale()
+        '    End If
+        'End Sub
+
+        Private Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
+            txtQrCode.Text = ""
+            dtpManufacture.Value = Nothing
+            txtQrCode.Focus()
+        End Sub
+
+        Private Sub txtQrCode_Validated(sender As Object, e As EventArgs) Handles txtQrCode.Validated
+            If Not IsEmpty(txtQrCode.Text) Then
+                RaiseEvent SaveDrugSale()
+                RaiseEvent AddDrugSale()
+                txtQrCode.Focus()
+            End If
+        End Sub
+
     End Class
 
 End Namespace
