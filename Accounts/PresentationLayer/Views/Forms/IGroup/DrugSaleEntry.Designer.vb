@@ -40,7 +40,7 @@
             Me.dtpSaleDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblExpiry = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtQrCode = New System.Windows.Forms.TextBox()
+            Me.txtQrCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.dtpExpiry = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.dtpManufacture = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.btnClearEntry = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -59,29 +59,32 @@
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 173.0!))
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150.0!))
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 318.0!))
-            Me.TableLayoutPanel1.Controls.Add(Me.lblManufactureDate, 0, 7)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblItemNameEnglish, 0, 5)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtItemNameEnglish, 1, 5)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtSerializationNo, 1, 9)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtBatchNo, 1, 6)
-            Me.TableLayoutPanel1.Controls.Add(Me.TxtIdNo, 1, 2)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblIdNo, 0, 2)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblItem_Code, 0, 4)
-            Me.TableLayoutPanel1.Controls.Add(Me.TxtItem_Code, 1, 4)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblSerialNo, 0, 9)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblBatch, 0, 6)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblGTIN, 0, 3)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtGTIN, 1, 3)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblManufactureDate, 0, 8)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblItemNameEnglish, 0, 6)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtItemNameEnglish, 1, 6)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtSerializationNo, 1, 10)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtBatchNo, 1, 7)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblItem_Code, 0, 5)
+            Me.TableLayoutPanel1.Controls.Add(Me.TxtItem_Code, 1, 5)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblSerialNo, 0, 10)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblBatch, 0, 7)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblGTIN, 0, 4)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtGTIN, 1, 4)
+            Me.TableLayoutPanel1.Controls.Add(Me.CLabel1, 0, 2)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtQrCode, 1, 2)
+            Me.TableLayoutPanel1.Controls.Add(Me.dtpExpiry, 1, 9)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblExpiry, 0, 9)
+            Me.TableLayoutPanel1.Controls.Add(Me.dtpManufacture, 1, 8)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblIdNo, 0, 0)
+            Me.TableLayoutPanel1.Controls.Add(Me.TxtIdNo, 1, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.lblSaleDate, 0, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.dtpSaleDate, 1, 1)
-            Me.TableLayoutPanel1.Controls.Add(Me.CLabel1, 0, 0)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtQrCode, 1, 0)
-            Me.TableLayoutPanel1.Controls.Add(Me.dtpExpiry, 1, 8)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblExpiry, 0, 8)
-            Me.TableLayoutPanel1.Controls.Add(Me.dtpManufacture, 1, 7)
             Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 57)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-            Me.TableLayoutPanel1.RowCount = 11
+            Me.TableLayoutPanel1.RowCount = 12
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -92,7 +95,6 @@
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.Size = New System.Drawing.Size(641, 253)
             Me.TableLayoutPanel1.TabIndex = 5
             '
@@ -153,7 +155,7 @@
             Me.txtItemNameEnglish.OldValue = Nothing
             Me.txtItemNameEnglish.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtItemNameEnglish.Size = New System.Drawing.Size(466, 23)
-            Me.txtItemNameEnglish.TabIndex = 4
+            Me.txtItemNameEnglish.TabIndex = 5
             Me.txtItemNameEnglish.Translatable = False
             '
             'txtSerializationNo
@@ -182,7 +184,7 @@
             Me.txtSerializationNo.OldValue = Nothing
             Me.txtSerializationNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtSerializationNo.Size = New System.Drawing.Size(148, 23)
-            Me.txtSerializationNo.TabIndex = 7
+            Me.txtSerializationNo.TabIndex = 9
             Me.txtSerializationNo.Translatable = False
             '
             'lblSerialNo
@@ -226,7 +228,7 @@
             Me.txtBatchNo.OldValue = ""
             Me.txtBatchNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtBatchNo.Size = New System.Drawing.Size(148, 23)
-            Me.txtBatchNo.TabIndex = 5
+            Me.txtBatchNo.TabIndex = 6
             Me.txtBatchNo.Translatable = False
             '
             'lblBatch
@@ -262,7 +264,7 @@
             Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
             Me.TxtIdNo.LinkedLabel = Me.lblIdNo
-            Me.TxtIdNo.Location = New System.Drawing.Point(174, 49)
+            Me.TxtIdNo.Location = New System.Drawing.Point(174, 1)
             Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.TxtIdNo.MaximumValue = Nothing
             Me.TxtIdNo.MinimumValue = Nothing
@@ -280,7 +282,7 @@
             Me.lblIdNo.DisplayOnly = True
             Me.lblIdNo.EditingMode = False
             Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblIdNo.Location = New System.Drawing.Point(1, 49)
+            Me.lblIdNo.Location = New System.Drawing.Point(1, 1)
             Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblIdNo.Name = "lblIdNo"
             Me.lblIdNo.Size = New System.Drawing.Size(83, 17)
@@ -332,7 +334,7 @@
             Me.TxtItem_Code.ReadOnly = True
             Me.TxtItem_Code.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtItem_Code.Size = New System.Drawing.Size(148, 23)
-            Me.TxtItem_Code.TabIndex = 3
+            Me.TxtItem_Code.TabIndex = 4
             Me.TxtItem_Code.Translatable = False
             '
             'lblGTIN
@@ -376,7 +378,7 @@
             Me.txtGTIN.OldValue = ""
             Me.txtGTIN.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtGTIN.Size = New System.Drawing.Size(148, 23)
-            Me.txtGTIN.TabIndex = 2
+            Me.txtGTIN.TabIndex = 3
             Me.txtGTIN.Translatable = False
             '
             'lblSaleDate
@@ -415,7 +417,7 @@
             Me.dtpSaleDate.ShowLongDate = False
             Me.dtpSaleDate.ShowTime = False
             Me.dtpSaleDate.Size = New System.Drawing.Size(118, 23)
-            Me.dtpSaleDate.TabIndex = 47
+            Me.dtpSaleDate.TabIndex = 2
             Me.dtpSaleDate.TargetCalendar = CType(resources.GetObject("dtpSaleDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpSaleDate.Translatable = False
             Me.dtpSaleDate.Value = Nothing
@@ -443,7 +445,7 @@
             Me.CLabel1.DisplayOnly = True
             Me.CLabel1.EditingMode = False
             Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel1.Location = New System.Drawing.Point(1, 1)
+            Me.CLabel1.Location = New System.Drawing.Point(1, 49)
             Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel1.Name = "CLabel1"
             Me.CLabel1.Size = New System.Drawing.Size(97, 17)
@@ -455,16 +457,32 @@
             'txtQrCode
             '
             Me.txtQrCode.BackColor = System.Drawing.Color.White
+            Me.txtQrCode.BegFindValue = Nothing
             Me.txtQrCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.TableLayoutPanel1.SetColumnSpan(Me.txtQrCode, 2)
+            Me.txtQrCode.ComputedValue = False
+            Me.txtQrCode.CustomFormat = Nothing
+            Me.txtQrCode.DataBoundControl = True
             Me.txtQrCode.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtQrCode.EditingMode = True
+            Me.txtQrCode.EndFindValue = Nothing
+            Me.txtQrCode.FieldDescription = Nothing
+            Me.txtQrCode.FieldName = Nothing
+            Me.txtQrCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtQrCode.FindEnabled = False
             Me.txtQrCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtQrCode.ForeColor = System.Drawing.Color.Black
-            Me.txtQrCode.Location = New System.Drawing.Point(174, 1)
+            Me.txtQrCode.LinkedLabel = Nothing
+            Me.txtQrCode.Location = New System.Drawing.Point(174, 49)
             Me.txtQrCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtQrCode.MaximumValue = Nothing
+            Me.txtQrCode.MinimumValue = Nothing
             Me.txtQrCode.Name = "txtQrCode"
+            Me.txtQrCode.OldValue = Nothing
+            Me.txtQrCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtQrCode.Size = New System.Drawing.Size(466, 23)
-            Me.txtQrCode.TabIndex = 50
+            Me.txtQrCode.TabIndex = 1
+            Me.txtQrCode.Translatable = False
             '
             'dtpExpiry
             '
@@ -487,7 +505,7 @@
             Me.dtpExpiry.ShowLongDate = False
             Me.dtpExpiry.ShowTime = False
             Me.dtpExpiry.Size = New System.Drawing.Size(118, 23)
-            Me.dtpExpiry.TabIndex = 45
+            Me.dtpExpiry.TabIndex = 8
             Me.dtpExpiry.TargetCalendar = CType(resources.GetObject("dtpExpiry.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpExpiry.Translatable = False
             Me.dtpExpiry.Value = Nothing
@@ -515,7 +533,7 @@
             Me.dtpManufacture.ShowLongDate = False
             Me.dtpManufacture.ShowTime = False
             Me.dtpManufacture.Size = New System.Drawing.Size(118, 23)
-            Me.dtpManufacture.TabIndex = 52
+            Me.dtpManufacture.TabIndex = 7
             Me.dtpManufacture.TargetCalendar = CType(resources.GetObject("dtpManufacture.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpManufacture.Translatable = False
             Me.dtpManufacture.Value = Nothing
@@ -554,7 +572,7 @@
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
-            Me.ClientSize = New System.Drawing.Size(663, 447)
+            Me.ClientSize = New System.Drawing.Size(663, 347)
             Me.Controls.Add(Me.btnValidate)
             Me.Controls.Add(Me.btnClearEntry)
             Me.Controls.Add(Me.TableLayoutPanel1)
@@ -590,7 +608,7 @@
         Friend WithEvents lblSaleDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dtpSaleDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtQrCode As TextBox
+        Friend WithEvents txtQrCode As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblManufactureDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dtpManufacture As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
         Friend WithEvents btnClearEntry As Libraries.CBaseControlsLibrary.CButton

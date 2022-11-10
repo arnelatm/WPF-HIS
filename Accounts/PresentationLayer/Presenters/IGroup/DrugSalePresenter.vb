@@ -19,6 +19,16 @@ Namespace PresentationLayer.Presenters
             AddHandler View.ClearEntry, AddressOf OnClearEntry
             AddHandler View.ValidateEntries, AddressOf OnValidateEntries
             AddHandler View.ValidateQrCode, AddressOf OnValidateQrCode
+            AddHandler View.SaveDrugSale, AddressOf OnSaveDrugSale
+            AddHandler View.AddDrugSale, AddressOf OnAddDrugSale
+        End Sub
+
+        Private Sub OnAddDrugSale()
+            GoAddRecord()
+        End Sub
+
+        Private Sub OnSaveDrugSale()
+            Save(View)
         End Sub
 
         Private Sub OnValidateEntries()
@@ -69,48 +79,51 @@ Namespace PresentationLayer.Presenters
             View.QrCode = ""
         End Sub
 
-        Private cGTin As String = Nothing
-        Private cSerializationNo As String = Nothing
-        Private cBatchNo As String = Nothing
-        Private cExpiry As String
-        Private cManufacture As String
+        Private _cGTin As String = Nothing
+        Private _cSerializationNo As String = Nothing
+        Private _cBatchNo As String = Nothing
+        Private _cExpiry As String = Nothing
+        Private _cManufacture As String = Nothing
 
-        Protected Overrides Function IsBizDataValid() As Boolean
-            Dim retValue = False
-            If MyBase.IsBizDataValid() Then
-                Dim saveData As Boolean = False
-                If Not (View.QrCode Is Nothing Or View.QrCode = "") Then
-                    If View.QrCode.Contains("<GS>") Then
-                        ProcessQrCode()
-                        If ValidValues() Then
-                            AssignQrCodeValues()
-                            ' don't allow duplicate values, item can only be sold once
-                            saveData = Not IsDrugAlreadySold()
-                        End If
-                    End If
-                End If
-                If saveData Then
-                    Dim control As Control = Nothing
-                    If Not MainFieldsDictionary.TryGetValue("QrCode", control) Then
-                        MyErrorProvider.SetError(control, "Drug already sold, cannot re-sale a drug.")
-                    Else
-                        Save(View)
-                    End If
-                End If
-            End If
-            Return retValue
-        End Function
+        'Protected Overrides Function IsBizDataValid() As Boolean
+        '    Dim retValue = False
+        '    If MyBase.IsBizDataValid() Then
+        '        Dim saveData As Boolean = False
+        '        If Not (View.QrCode Is Nothing Or View.QrCode = "") Then
+        '            If View.QrCode.Contains("<GS>") Then
+        '                ProcessQrCode()
+        '                AssignQrCodeValues()
+        '                If ValidValues() Then
+        '                    ' don't allow duplicate values, item can only be sold once
+        '                    saveData = Not IsDrugAlreadySold()
+        '                End If
+        '            End If
+        '        End If
+        '        If saveData Then
+        '            Dim control As Control = Nothing
+        '            If Not MainFieldsDictionary.TryGetValue("QrCode", control) Then
+        '                MyErrorProvider.SetError(control, "Drug already sold, cannot re-sale a drug.")
+        '            Else
+        '                Save(View)
+        '                retValue = True
+        '            End If
+        '        End If
+        '    End If
+        '    Return retValue
+        'End Function
 
         Public Sub OnValidateQrCode(ByRef valid As Boolean)
             valid = False
             If Not (View.QrCode Is Nothing Or View.QrCode = "") Then
                 If View.QrCode.Contains("<GS>") Then
                     ProcessQrCode()
+                    AssignQrCodeValues()
                     If ValidValues() Then
-                        AssignQrCodeValues()
                         ' don't allow duplicate values, item can only be sold once
                         valid = Not IsDrugAlreadySold()
                     End If
+                Else
+                    ClearEntry()
                 End If
             Else
                 valid = True
@@ -120,24 +133,32 @@ Namespace PresentationLayer.Presenters
         Private Sub ProcessQrCode()
             Dim dataLength = Len(View.QrCode)
             Dim i As Int16 = 0
-            cGTin = Mid(View.QrCode, 3, 14)
-            Dim ai As String = Mid(View.QrCode, 17, 2)
-            Dim lastPosition As Int16 = 18
+            Dim ai As String = Mid(View.QrCode, 1, 2)
+            Dim lastPosition As Int16 = 2
+            ClearEntry()
+            _cGTin = Nothing
+            _cSerializationNo = Nothing
+            _cBatchNo = Nothing
+            _cExpiry = Nothing
+            _cManufacture = Nothing
             While lastPosition < dataLength
                 Select Case ai
+                    Case "01"
+                        _cGTin = Mid(View.QrCode, lastPosition + 1, 14)
+                        lastPosition += 14
                     Case "17"
-                        cExpiry = Mid(View.QrCode, lastPosition + 1, 6)
-                        If Right(cExpiry, 2) = "00" Then
-                            cExpiry = Mid(View.QrCode, 1, 4) + "01"
+                        _cExpiry = Mid(View.QrCode, lastPosition + 1, 6)
+                        If Right(_cExpiry, 2) = "00" Then
+                            _cExpiry = Mid(_cExpiry, 1, 4) + "01"
                         End If
                         lastPosition += 6
                     Case "11" 'manufacture date
-                        cManufacture = Mid(View.QrCode, lastPosition + 1, 6)
+                        _cManufacture = Mid(View.QrCode, lastPosition + 1, 6)
                         lastPosition += 6
                     Case "10"
                         For i = lastPosition + 1 To dataLength
                             If Mid(View.QrCode, i, 4) = "<GS>" Then ' separator
-                                cBatchNo = Mid(View.QrCode, lastPosition + 1, i - lastPosition - 1)
+                                _cBatchNo = Mid(View.QrCode, lastPosition + 1, i - lastPosition - 1)
                                 lastPosition = i + 3
                                 Exit For
                             End If
@@ -146,7 +167,7 @@ Namespace PresentationLayer.Presenters
                     Case "21"
                         For i = lastPosition + 1 To dataLength
                             If Mid(View.QrCode, i, 4) = "<GS>" Or Mid(View.QrCode, i, 1) = ChrW(13) Or i >= dataLength Then
-                                cSerializationNo = Mid(View.QrCode, lastPosition + 1, i - lastPosition - 1)
+                                _cSerializationNo = Mid(View.QrCode, lastPosition + 1, i - lastPosition - 1)
                                 lastPosition = i + 3
                                 Exit For
                             End If
@@ -168,10 +189,10 @@ Namespace PresentationLayer.Presenters
         Private Function ValidValues()
             Dim formats() As String = {"dd/MM/yyyy"}
             Dim yy As String, mm As String, dd As String
-            yy = Mid(cExpiry, 1, 2)
-            mm = Mid(cExpiry, 3, 2)
-            dd = Mid(cExpiry, 5, 2)
-            Dim textDate As String = dd + "/" + mm + "/" + (2000 + Val(yy)).ToString()
+            yy = Mid(_cExpiry, 1, 2)
+            mm = Mid(_cExpiry, 3, 2)
+            dd = Mid(_cExpiry, 5, 2)
+            Dim textDate As String = dd + "/" + mm + "/" + IIf(IsEmpty(yy), "", (2000 + Val(yy)).ToString())
             Dim dDate As Date
             If Not DateTime.TryParseExact(textDate, formats, Globalization.CultureInfo.InvariantCulture, DateTimeStyles.None, dDate) Then
                 MessageBox.Show("Invalid date value or format! <" + textDate + ">")
@@ -181,15 +202,15 @@ Namespace PresentationLayer.Presenters
                 MessageBox.Show("Item is Expired. Can't sell or accept an expired drug.")
                 Return False
             End If
-            If Len(cGTin) = 14 AndAlso Not IsNumeric(cGTin) Then
-                MessageBox.Show("Invalid GTIN <" + cGTin + ">")
+            If Len(_cGTin) = 14 AndAlso Not IsNumeric(_cGTin) Then
+                MessageBox.Show("Invalid GTIN <" + _cGTin + ">")
                 Return False
             End If
-            If Len(cBatchNo) < 1 Then
+            If Len(_cBatchNo) < 1 Then
                 MessageBox.Show("Batch Number cannot be empty!")
                 Return False
             End If
-            If Len(cSerializationNo) < 1 Then
+            If Len(_cSerializationNo) < 1 Then
                 MessageBox.Show("Serialization Number cannot be empty!")
                 Return False
             End If
@@ -231,17 +252,21 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Sub AssignQrCodeValues()
-            View.GTin = cGTin
-            View.BatchNo = cBatchNo
-            View.SerializationNo = cSerializationNo
-            View.Manufacture = MakeDate(cManufacture)
-            View.Expiry = MakeDate(cExpiry)
+            View.GTin = _cGTin
+            View.BatchNo = _cBatchNo
+            View.SerializationNo = _cSerializationNo
+            View.Manufacture = MakeDate(_cManufacture)
+            View.Expiry = MakeDate(_cExpiry)
             View.ItemNameEnglish = GetDrugName()
             View.Item_Code = GetDrugCode()
         End Sub
 
         Private Function MakeDate(stringDate As String) As Date
-            Return GlobalFunctions.GbDateSerial(2000 + Val(Mid(stringDate, 1, 2)), Val(Mid(stringDate, 3, 2)), Val(Mid(stringDate, 5, 2)))
+            If IsEmpty(stringDate) Then
+                Return Nothing
+            Else
+                Return GlobalFunctions.GbDateSerial(2000 + Val(Mid(stringDate, 1, 2)), Val(Mid(stringDate, 3, 2)), Val(Mid(stringDate, 5, 2)))
+            End If
         End Function
 
     End Class

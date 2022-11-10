@@ -1095,7 +1095,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemGenerateDailyDrugTransfer_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemGenerateDailyDrugTransfer.Click
-            RunForm(Of GenerateDailyDrugSaleCsv, GenerateDailyDrugSaleCsvPresenter(Of DrugSale))()
+            RunForm(Of GenerateDrugSale)()
+            'RunForm(Of GenerateDailyDrugSaleCsv, GenerateDailyDrugSaleCsvPresenter(Of DrugSale))()
         End Sub
 
     End Class
