@@ -23,9 +23,9 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             MainTableName = "DrugSale"
             SortOrderKey = "IdNo"
-            Presenter = New ReportPresenter(Me)
+            'Presenter = New ReportPresenter(Me)
             Dim today = Now()
-            dtpSaleDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, 1, 1)
+            dtpSaleDate.Value = DateAdd(DateInterval.Day, -1, Now())
         End Sub
 
         Private Sub BtnOk_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
