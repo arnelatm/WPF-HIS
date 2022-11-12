@@ -143,10 +143,10 @@ Namespace PresentationLayer.Presenters
             _cManufacture = Nothing
             While lastPosition < dataLength
                 Select Case ai
-                    Case "01"
+                    Case "01" 'GTIN
                         _cGTin = Mid(View.QrCode, lastPosition + 1, 14)
                         lastPosition += 14
-                    Case "17"
+                    Case "17" 'Expiry Date
                         _cExpiry = Mid(View.QrCode, lastPosition + 1, 6)
                         If Right(_cExpiry, 2) = "00" Then
                             _cExpiry = Mid(_cExpiry, 1, 4) + "01"
@@ -155,19 +155,27 @@ Namespace PresentationLayer.Presenters
                     Case "11" 'manufacture date
                         _cManufacture = Mid(View.QrCode, lastPosition + 1, 6)
                         lastPosition += 6
-                    Case "10"
+                    Case "10" ' Batch Number
                         For i = lastPosition + 1 To dataLength
-                            If Mid(View.QrCode, i, 4) = "<GS>" Then ' separator
-                                _cBatchNo = Mid(View.QrCode, lastPosition + 1, i - lastPosition - 1)
+                            If Mid(View.QrCode, i, 4) = "<GS>" Or Mid(View.QrCode, i, 1) = ChrW(13) Or i >= dataLength Then ' separator
+                                If i >= dataLength Then
+                                    _cBatchNo = Mid(View.QrCode, lastPosition + 1)
+                                Else
+                                    _cBatchNo = Mid(View.QrCode, lastPosition + 1, i - lastPosition - 1)
+                                End If
                                 lastPosition = i + 3
                                 Exit For
                             End If
                         Next
                     'MessageBox.Show("Batch No = " + batchNo)
-                    Case "21"
+                    Case "21" ' Serialization No.
                         For i = lastPosition + 1 To dataLength
                             If Mid(View.QrCode, i, 4) = "<GS>" Or Mid(View.QrCode, i, 1) = ChrW(13) Or i >= dataLength Then
-                                _cSerializationNo = Mid(View.QrCode, lastPosition + 1, i - lastPosition - 1)
+                                If i >= dataLength Then
+                                    _cSerializationNo = Mid(View.QrCode, lastPosition + 1)
+                                Else
+                                    _cSerializationNo = Mid(View.QrCode, lastPosition + 1, i - lastPosition - 1)
+                                End If
                                 lastPosition = i + 3
                                 Exit For
                             End If
