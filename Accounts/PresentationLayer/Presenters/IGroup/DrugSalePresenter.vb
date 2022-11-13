@@ -21,6 +21,7 @@ Namespace PresentationLayer.Presenters
             AddHandler View.ValidateQrCode, AddressOf OnValidateQrCode
             AddHandler View.SaveDrugSale, AddressOf OnSaveDrugSale
             AddHandler View.AddDrugSale, AddressOf OnAddDrugSale
+            PromptOnSavedRecord = False
         End Sub
 
         Private Sub OnAddDrugSale()

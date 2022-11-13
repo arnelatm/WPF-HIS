@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[DrugList] (
+CREATE TABLE [dbo].[DrugList] (
     [IdNo]                    INT            IDENTITY (1, 1) NOT NULL,
     [RegistrationNo]          NVARCHAR (50)  NULL,
     [GTIN]                    VARCHAR (14)   NULL,
@@ -36,7 +36,14 @@
 
 
 
+
+
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [idx_DrugListGTIN_notnull]
-    ON [dbo].[DrugList]([GTIN] ASC) WHERE ([GTIN] IS NOT NULL);
+CREATE UNIQUE NONCLUSTERED INDEX [IX_DrugListRegNo]
+    ON [dbo].[DrugList]([IdNo] ASC);
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_DrugListGTIN]
+    ON [dbo].[DrugList]([IdNo] ASC);
 

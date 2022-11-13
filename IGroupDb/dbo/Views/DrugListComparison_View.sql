@@ -1,11 +1,14 @@
-﻿CREATE VIEW dbo.StockInventory_View
+﻿
+CREATE VIEW [dbo].[DrugListComparison_View]
 AS
-SELECT        A.IdNo, A.Item_Code, A.Batch, A.Expiry, A.SerialNo, A.PurchaseNo, A.PCSQty / B.Pack1 / B.Pack2 / B.Pack3 AS Quantity, A.CashPrice, B.ItemNameEnglish, B.GTIN, A.BranchID, A.DateTimeStamp
-FROM            dbo.StockPositionCurrent AS A INNER JOIN
-                         dbo.ItemDetails AS B ON A.Item_Code = B.Item_Code AND A.BranchID = B.BranchID
-WHERE        (A.BranchID = '01') AND (A.WarehouseID = '01') AND (B.ItemGroup = 'MD') AND (A.PCSQty <> 0)
+SELECT        dbo.DrugList.IdNo, dbo.DrugList.RegistrationNo, dbo.DrugList2020.REGISTRATIONNO AS RegistrationNo2, dbo.DrugList.GTIN, dbo.DrugList2020.GTIN AS GTin2, dbo.DrugList.[Trade name], 
+                         dbo.DrugList2020.[Trade name] AS [Trade name2], dbo.DrugList.[Strength value], dbo.DrugList2020.[Strength Value] AS [Strength Value2], dbo.DrugList.[Unit of strength], 
+                         dbo.DrugList2020.[Unit of strength] AS [Unit of Strength2], dbo.DrugList.Volume, dbo.DrugList2020.Volume AS Volume2, dbo.DrugList.[Unit of volume], dbo.DrugList2020.[Unit of volume] AS [Unit of volume2], 
+                         dbo.DrugList.[Dosage Form], dbo.DrugList2020.[Dosage form] AS [Dosage Form2], dbo.DrugList.[Package type], dbo.DrugList.[Package size]
+FROM            dbo.DrugList FULL OUTER JOIN
+                         dbo.DrugList2020 ON dbo.DrugList.RegistrationNo = dbo.DrugList2020.REGISTRATIONNO
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'StockInventory_View';
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'DrugListComparison_View';
 
 
 GO
@@ -14,7 +17,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+         Configuration = "(H (1[23] 4[62] 2[12] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -80,22 +83,22 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "A"
+         Begin Table = "DrugList"
             Begin Extent = 
                Top = 6
                Left = 38
-               Bottom = 335
-               Right = 208
+               Bottom = 489
+               Right = 259
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 2
          End
-         Begin Table = "B"
+         Begin Table = "Sept2020GTIN"
             Begin Extent = 
                Top = 6
-               Left = 246
-               Bottom = 136
-               Right = 447
+               Left = 297
+               Bottom = 465
+               Right = 482
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -107,22 +110,11 @@ Begin DesignProperties =
    Begin DataPane = 
       Begin ParameterDefaults = ""
       End
-      Begin ColumnWidths = 9
-         Width = 284
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-         Width = 1500
-      End
    End
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
-         Column = 1440
-         Alias = 900
+         Column = 2370
+         Alias = 4155
          Table = 1170
          Output = 720
          Append = 1400
@@ -137,7 +129,5 @@ Begin DesignProperties =
       End
    End
 End
-', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'StockInventory_View';
-
-
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'DrugListComparison_View';
 

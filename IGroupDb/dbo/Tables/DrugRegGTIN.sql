@@ -1,5 +1,7 @@
 ﻿CREATE TABLE [dbo].[DrugRegGTIN] (
-    [RegistrationNo] NVARCHAR (255) NULL,
-    [GTIN]           NVARCHAR (255) NULL
+    [RegistrationNo] NVARCHAR (50) NULL,
+    [GTIN]           VARCHAR (14)  NULL
 );
+
+
 
