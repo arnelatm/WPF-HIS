@@ -45,6 +45,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Protected OriginalModel
     Protected SortOrderKey As String = "IdNo"
     Protected DataFilter As String = Nothing
+    Protected PromptOnSavedRecord As Boolean = False
     Private _tableDefaultFieldValueList As List(Of DefaultFieldValueModel)
     Protected DefaultFieldValueService As New DefaultFieldValueService
     Public Property ViewDefaultFieldValues As List(Of DefaultFieldValueModel)
@@ -851,7 +852,11 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End If
         If retVal < 0 Then
         Else
-            Messaging.Show(True, "MsgRecordSuccessfullySaved")
+            If PromptOnSavedRecord Then
+                Messaging.Show(True, "MsgRecordSuccessfullySaved")
+            Else
+                Messaging.MessageTimeOut("Record Saved", "Record Saved", 1)
+            End If
             If AddMode Then
                 RecordPositionNumber = GetSortedRecordPosition(retVal)
             Else

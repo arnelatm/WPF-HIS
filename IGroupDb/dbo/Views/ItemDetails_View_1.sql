@@ -78,7 +78,7 @@ Begin DesignProperties =
    End
    Begin DiagramPane = 
       Begin Origin = 
-         Top = -96
+         Top = 0
          Left = 0
       End
       Begin Tables = 
@@ -110,7 +110,7 @@ Begin DesignProperties =
                Right = 259
             End
             DisplayFlags = 280
-            TopColumn = 5
+            TopColumn = 0
          End
       End
    End
@@ -139,4 +139,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ItemDetails_View';
+
+
 

@@ -37,10 +37,14 @@ Namespace PresentationLayer.Views.Forms.Reports
         End Sub
 
         Public Sub GenerateCsvFile(saleDate As Date)
-            Dim fileName = "DrugSale for " + Year(saleDate).ToString() + Strings.Right("0" + Month(saleDate).ToString().Trim(), 2) + ".csv"
-            Dim csvFilePath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\" & fileName 'Path to create or existing file
+            Dim fileName As String = "DrugSale for " + Year(saleDate).ToString() + Strings.Right("0" + Month(saleDate).ToString().Trim(), 2) + Strings.Right("0" + saleDate.Day.ToString().Trim(), 2) + ".csv"
+            Dim myDocPath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+            Dim drugSalePath = myDocPath + "\DrugSales"
+            If Not System.IO.Directory.Exists(drugSalePath) Then
+                System.IO.Directory.CreateDirectory(drugSalePath)
+            End If
+            Dim csvFilePath As String = drugSalePath & "\" + fileName 'Path to create or existing file
             Try
-
                 Dim outFile As IO.StreamWriter = My.Computer.FileSystem.OpenTextFileWriter(csvFilePath, False)
                 Dim sortKey As String = "IdNo"
                 Dim fieldList As String = $"GTIN,SerializationNo,BatchNo,Expiry"
