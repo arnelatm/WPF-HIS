@@ -1099,6 +1099,9 @@ Namespace PresentationLayer.Views.Forms
             'RunForm(Of GenerateDailyDrugSaleCsv, GenerateDailyDrugSaleCsvPresenter(Of DrugSale))()
         End Sub
 
+        Private Sub ToolStripMenuItemDrugAcceptance_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDrugAcceptance.Click
+            RunForm(Of DrugAcceptEntry, DrugAcceptPresenter(Of DrugAcceptModel))()
+        End Sub
     End Class
 
 End Namespace

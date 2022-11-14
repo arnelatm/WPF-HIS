@@ -855,7 +855,8 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             If PromptOnSavedRecord Then
                 Messaging.Show(True, "MsgRecordSuccessfullySaved")
             Else
-                Messaging.MessageTimeOut("Record Saved", "Record Saved", 1)
+                Beep()
+                Messaging.MessageTimeOutNowait("Record Saved", "Record Saved", 1)
             End If
             If AddMode Then
                 RecordPositionNumber = GetSortedRecordPosition(retVal)
