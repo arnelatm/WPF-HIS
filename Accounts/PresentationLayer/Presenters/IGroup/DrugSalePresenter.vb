@@ -219,7 +219,7 @@ Namespace PresentationLayer.Presenters
                 retVal = True
             End If
             If Not retVal Then
-                System.Media.SystemSounds.Hand.Play()
+                Beep()
                 MessageBox.Show(errorMessage)
             End If
             Return retVal

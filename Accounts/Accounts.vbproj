@@ -302,6 +302,7 @@
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\DoctorDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\DrugAcceptDao.vb" />
+    <Compile Include="DataLayer\AdoNet\IGroup\DrugTransactionDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\DrugSaleDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\StockInventoryDao.vb" />
     <Compile Include="DataLayer\AdoNet\ItemCodeDao.vb" />
@@ -714,6 +715,12 @@
       <DependentUpon>CbcReportSelector.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\CbcReportSelector.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\GenerateDrugCsv.Designer.vb">
+      <DependentUpon>GenerateDrugCsv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\GenerateDrugCsv.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\NumberofCashPatientsPerDoctorPerDay - Copy.designer.vb">
@@ -1923,6 +1930,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\CbcReportSelector.resx">
       <DependentUpon>CbcReportSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\GenerateDrugCsv.resx">
+      <DependentUpon>GenerateDrugCsv.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\NumberofCashPatientsPerDoctorPerDay - Copy.resx">
       <DependentUpon>NumberofCashPatientsPerDoctorPerDay - Copy.vb</DependentUpon>

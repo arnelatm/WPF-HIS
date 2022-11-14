@@ -1072,10 +1072,6 @@ Namespace PresentationLayer.Views.Forms
 
         Private Property PrintJobView As IPrintJobView
 
-        Private Sub PharmacyBarcodePrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPharmacyBarcodePrinting.Click
-            Dim args As Object() = {Environment.MachineName, "Workstation"}
-            PrintReport("BarcodePharmacy.Rpt", $"IGROUP", args)
-        End Sub
 
         Private Sub PrintReport(reportFileName As String, databaseConnectionName As String, Optional args() As Object = Nothing)
             Dim prPresenter As New PrintReportPresenter()
@@ -1094,13 +1090,21 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of DrugSaleEntry, DrugSalePresenter(Of DrugSaleModel))()
         End Sub
 
-        Private Sub ToolStripMenuItemGenerateDailyDrugTransfer_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemGenerateDailyDrugTransfer.Click
-            RunForm(Of GenerateDrugSale)()
-            'RunForm(Of GenerateDailyDrugSaleCsv, GenerateDailyDrugSaleCsvPresenter(Of DrugSale))()
-        End Sub
-
         Private Sub ToolStripMenuItemDrugAcceptance_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDrugAcceptance.Click
             RunForm(Of DrugAcceptEntry, DrugAcceptPresenter(Of DrugAcceptModel))()
+        End Sub
+
+        Private Sub ToolStripMenuItemPharmacyBarcodePrinting_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPharmacyBarcodePrinting.Click
+            Dim args As Object() = {Environment.MachineName, "Workstation"}
+            PrintReport("BarcodePharmacy.Rpt", $"IGROUP", args)
+        End Sub
+
+        Private Sub ToolStripMenuItemGenerateDailyDrugTransferFile_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemGenerateDailyDrugTransferFile.Click
+            RunForm(Of GenerateDrugSale)()
+        End Sub
+
+        Private Sub ToolStripMenuItemGenerateDrugAcceptanceFile_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemGenerateDrugAcceptanceFile.Click
+            RunForm(Of GenerateDrugCsv, String)("DrugAccept")
         End Sub
     End Class
 

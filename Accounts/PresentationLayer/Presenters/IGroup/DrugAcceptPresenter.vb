@@ -66,7 +66,7 @@ Namespace PresentationLayer.Presenters
             Return Service.GetField(View.GTin, "ItemDetails", "GTIN", "[Item_Code]")
         End Function
 
-        Public Function DrugAlreadySold(ByRef IdNo As Int32) As Boolean
+        Public Function DrugAlreadyAccepted(ByRef IdNo As Int32) As Boolean
             IdNo = Service.GetRecordFieldWith3KeyG(Of String, String, String, Int32)("DrugAccept", View.GTin, View.BatchNo, View.SerializationNo, "GTin", "BatchNo", "SerializationNo", "IdNo")
             If IdNo > 0 Then
                 Return True
@@ -94,15 +94,15 @@ Namespace PresentationLayer.Presenters
         '                ProcessQrCode()
         '                AssignQrCodeValues()
         '                If ValidValues() Then
-        '                    ' don't allow duplicate values, item can only be sold once
-        '                    saveData = Not IsDrugAlreadySold()
+        '                    ' don't allow duplicate values, item can only be Accepted once
+        '                    saveData = Not IsDrugAlreadyAccepted()
         '                End If
         '            End If
         '        End If
         '        If saveData Then
         '            Dim control As Control = Nothing
         '            If Not MainFieldsDictionary.TryGetValue("QrCode", control) Then
-        '                MyErrorProvider.SetError(control, "Drug already sold, cannot re-Accept a drug.")
+        '                MyErrorProvider.SetError(control, "Drug already Accepted, cannot re-Accept a drug.")
         '            Else
         '                Save(View)
         '                retValue = True
@@ -119,8 +119,8 @@ Namespace PresentationLayer.Presenters
                     ProcessQrCode()
                     AssignQrCodeValues()
                     If ValidValues() Then
-                        ' don't allow duplicate values, item can only be sold once
-                        valid = Not IsDrugAlreadySold()
+                        ' don't allow duplicate values, item can only be Accepted once
+                        valid = Not IsDrugAlreadyAccepted()
                     End If
                 Else
                     ClearEntry()
@@ -218,7 +218,7 @@ Namespace PresentationLayer.Presenters
                 retVal = True
             End If
             If Not retVal Then
-                System.Media.SystemSounds.Hand.Play()
+                Beep()
                 MessageBox.Show(errorMessage)
             End If
             Return retVal
@@ -249,10 +249,10 @@ Namespace PresentationLayer.Presenters
             Return True
         End Function
 
-        Private Function IsDrugAlreadySold() As Boolean
+        Private Function IsDrugAlreadyAccepted() As Boolean
             Dim idNo As Int32 = 0
-            If DrugAlreadySold(idNo) Then
-                MessageBox.Show("Duplicate Accept not allowed. This record has already been sold previously! See Record number <" + idNo.ToString("N0") + ">.")
+            If DrugAlreadyAccepted(idNo) Then
+                MessageBox.Show("Duplicate Accept not allowed. This record has already been accepted previously! See Record number <" + idNo.ToString("N0") + ">.")
                 Return True
             End If
             Return False
