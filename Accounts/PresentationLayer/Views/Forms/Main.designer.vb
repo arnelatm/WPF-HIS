@@ -173,7 +173,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemLaboratoryReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemSalesReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPMRReports = New System.Windows.Forms.ToolStripMenuItem()
-            Me.PharmacyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemPharmacyReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPharmacyBarcodePrinting = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemGenerateDailyDrugTransferFile = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemGenerateDrugAcceptanceFile = New System.Windows.Forms.ToolStripMenuItem()
@@ -739,7 +739,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemReports
             '
-            Me.ToolStripMenuItemReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemStatementOfAccountsPayable, Me.ToolStripMenuItemStatementOfAccountsReceivable, Me.ToolStripMenuItemStatementOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfAccountsPayable, Me.ToolStripMenuItemSummaryOfAccountsReceivable, Me.ToolStripMenuItemTrialBalance, Me.ToolStripMenuItemBalanceSheet, Me.ToolStripMenuItemIncomeStatement, Me.ToolStripMenuItemAccountingtLists, Me.ToolStripMenuItemARAging, Me.ToolStripMenuItemAPAging, Me.ToolStripMenuItemCheckPrinting, Me.ToolStripMenuItemVATReport, Me.ToolStripMenuItemPayrollReport, Me.ToolStripMenuItemHRReports, Me.ToolStripMenuItemReceptionReports, Me.ToolStripMenuItemAccountingReports, Me.ToolStripMenuItemLaboratoryReports, Me.ToolStripMenuItemSalesReports, Me.ToolStripMenuItemPMRReports, Me.PharmacyToolStripMenuItem})
+            Me.ToolStripMenuItemReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemStatementOfAccountsPayable, Me.ToolStripMenuItemStatementOfAccountsReceivable, Me.ToolStripMenuItemStatementOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfAccountsPayable, Me.ToolStripMenuItemSummaryOfAccountsReceivable, Me.ToolStripMenuItemTrialBalance, Me.ToolStripMenuItemBalanceSheet, Me.ToolStripMenuItemIncomeStatement, Me.ToolStripMenuItemAccountingtLists, Me.ToolStripMenuItemARAging, Me.ToolStripMenuItemAPAging, Me.ToolStripMenuItemCheckPrinting, Me.ToolStripMenuItemVATReport, Me.ToolStripMenuItemPayrollReport, Me.ToolStripMenuItemHRReports, Me.ToolStripMenuItemReceptionReports, Me.ToolStripMenuItemAccountingReports, Me.ToolStripMenuItemLaboratoryReports, Me.ToolStripMenuItemSalesReports, Me.ToolStripMenuItemPMRReports, Me.ToolStripMenuItemPharmacyReports})
             Me.ToolStripMenuItemReports.Name = "ToolStripMenuItemReports"
             resources.ApplyResources(Me.ToolStripMenuItemReports, "ToolStripMenuItemReports")
             '
@@ -970,11 +970,11 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemPMRReports.Name = "ToolStripMenuItemPMRReports"
             resources.ApplyResources(Me.ToolStripMenuItemPMRReports, "ToolStripMenuItemPMRReports")
             '
-            'PharmacyToolStripMenuItem
+            'ToolStripMenuItemPharmacyReports
             '
-            Me.PharmacyToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPharmacyBarcodePrinting, Me.ToolStripMenuItemGenerateDailyDrugTransferFile, Me.ToolStripMenuItemGenerateDrugAcceptanceFile})
-            Me.PharmacyToolStripMenuItem.Name = "PharmacyToolStripMenuItem"
-            resources.ApplyResources(Me.PharmacyToolStripMenuItem, "PharmacyToolStripMenuItem")
+            Me.ToolStripMenuItemPharmacyReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPharmacyBarcodePrinting, Me.ToolStripMenuItemGenerateDailyDrugTransferFile, Me.ToolStripMenuItemGenerateDrugAcceptanceFile})
+            Me.ToolStripMenuItemPharmacyReports.Name = "ToolStripMenuItemPharmacyReports"
+            resources.ApplyResources(Me.ToolStripMenuItemPharmacyReports, "ToolStripMenuItemPharmacyReports")
             '
             'ToolStripMenuItemPharmacyBarcodePrinting
             '
@@ -1361,7 +1361,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemPharmacy As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDrugSale As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDrugAcceptance As ToolStripMenuItem
-        Friend WithEvents PharmacyToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemPharmacyReports As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemPharmacyBarcodePrinting As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemGenerateDailyDrugTransferFile As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemGenerateDrugAcceptanceFile As ToolStripMenuItem
