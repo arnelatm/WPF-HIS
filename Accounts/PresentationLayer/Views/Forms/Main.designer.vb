@@ -173,6 +173,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemSalesReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPMRReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPharmacyBarcodePrinting = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemGenerateDailyDrugTransfer = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemUtilities = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemUpdateMenuSecurityObjects = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemRecreateSecurityObjectMenu = New System.Windows.Forms.ToolStripMenuItem()
@@ -205,7 +206,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemGenerateDailyDrugTransfer = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDrugAcceptance = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -720,7 +721,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemPharmacy
             '
-            Me.ToolStripMenuItemPharmacy.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemDrugSale})
+            Me.ToolStripMenuItemPharmacy.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemDrugSale, Me.ToolStripMenuItemDrugAcceptance})
             Me.ToolStripMenuItemPharmacy.Name = "ToolStripMenuItemPharmacy"
             resources.ApplyResources(Me.ToolStripMenuItemPharmacy, "ToolStripMenuItemPharmacy")
             '
@@ -967,6 +968,11 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemPharmacyBarcodePrinting.Name = "ToolStripMenuItemPharmacyBarcodePrinting"
             resources.ApplyResources(Me.ToolStripMenuItemPharmacyBarcodePrinting, "ToolStripMenuItemPharmacyBarcodePrinting")
             '
+            'ToolStripMenuItemGenerateDailyDrugTransfer
+            '
+            Me.ToolStripMenuItemGenerateDailyDrugTransfer.Name = "ToolStripMenuItemGenerateDailyDrugTransfer"
+            resources.ApplyResources(Me.ToolStripMenuItemGenerateDailyDrugTransfer, "ToolStripMenuItemGenerateDailyDrugTransfer")
+            '
             'ToolStripMenuItemUtilities
             '
             Me.ToolStripMenuItemUtilities.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemUpdateMenuSecurityObjects, Me.ToolStripMenuItemRecreateSecurityObjectMenu, Me.ToolStripMenuItemTransactionNotesTranslator, Me.ToolStripMenuItemSimplePasswordGenerator, Me.ToolStripMenuItemTestForm})
@@ -1135,10 +1141,10 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'ToolStripMenuItemGenerateDailyDrugTransfer
+            'ToolStripMenuItemDrugAcceptance
             '
-            Me.ToolStripMenuItemGenerateDailyDrugTransfer.Name = "ToolStripMenuItemGenerateDailyDrugTransfer"
-            resources.ApplyResources(Me.ToolStripMenuItemGenerateDailyDrugTransfer, "ToolStripMenuItemGenerateDailyDrugTransfer")
+            Me.ToolStripMenuItemDrugAcceptance.Name = "ToolStripMenuItemDrugAcceptance"
+            resources.ApplyResources(Me.ToolStripMenuItemDrugAcceptance, "ToolStripMenuItemDrugAcceptance")
             '
             'Main
             '
@@ -1147,7 +1153,7 @@ Namespace PresentationLayer.Views.Forms
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
             Me.Controls.Add(Me.ToolStrip)
-        Me.Controls.Add(Me.AccountsMenu)
+            Me.Controls.Add(Me.AccountsMenu)
         Me.IsMdiContainer = true
         Me.MenuFormName = "Menu"
         Me.Name = "Main"
@@ -1343,5 +1349,6 @@ End Sub
         Friend WithEvents ToolStripMenuItemPharmacy As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDrugSale As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemGenerateDailyDrugTransfer As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemDrugAcceptance As ToolStripMenuItem
     End Class
 End NameSpace

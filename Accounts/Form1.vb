@@ -34,7 +34,6 @@ Public Class Form1
 
     End Function
 
-
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim fileReader As String = txtBarcode.Text
         Dim dataLength = Len(fileReader)
@@ -59,7 +58,6 @@ Public Class Form1
                 Exit For
             End If
         Next
-
 
         While lastPosition < dataLength
             Select Case ai
@@ -101,10 +99,9 @@ Public Class Form1
                 End If
             End If
         End While
-        MessageBox.Show("GTIN = " + cGTIN + vbLf + "Expiry = " + GlobalFunctions.GbDateSerial(2000 + Val(yy), Val(mm), Val(dd)) + vbLf + "BatchNo = " + cBatchNo + vbLf + "Serialization No = " + cSerializationNo)
+        MessageBox.Show("GTIN = " + cGTIN + vbLf + "Expiry = " + GlobalFunctions.GbDateSerial(2000 + Val(yy), Val(mm), Val(dd)).ToString() + vbLf + "BatchNo = " + cBatchNo + vbLf + "Serialization No = " + cSerializationNo)
         MessageBox.Show(message)
     End Sub
-
 
     Private Sub txtBarcode_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtBarcode.KeyPress
 

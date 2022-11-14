@@ -181,6 +181,9 @@ Public Class MappingProfileAccounts
         CreateMap(Of DrugSale, DrugSaleModel)().ReverseMap()
         CreateMap(Of DrugSaleModel, IDrugSaleView)().ReverseMap()
 
+        CreateMap(Of DrugAccept, DrugAcceptModel)().ReverseMap()
+        CreateMap(Of DrugAcceptModel, IDrugAcceptView)().ReverseMap()
+
         CreateMap(Of CodeGroup, CodeGroupModel)().ReverseMap()
         CreateMap(Of CodeGroupModel, ICodeGroupView)().ReverseMap()
 
@@ -193,8 +196,6 @@ Public Class MappingProfileAccounts
 
         CreateMap(Of StockInventory, StockInventoryModel)().ReverseMap()
         CreateMap(Of StockInventoryModel, IStockInventoryView)().ReverseMap()
-
-
 
         'CreateMap(Of PmrPatientDisplayModel, PmrPatientDisplayView)()
 

@@ -1,34 +1,33 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
-    Public Class DrugSalePresenter(Of TM As New)
-        Inherits AccountsPresenter(Of IDrugSaleView, TM)
+    Public Class DrugAcceptPresenter(Of TM As New)
+        Inherits AccountsPresenter(Of IDrugAcceptView, TM)
 
-        Public Sub New(itemView As IDrugSaleView)
+        Public Sub New(itemView As IDrugAcceptView)
             MyBase.New(itemView)
-            Service = New AccountsService("DrugSale")
-            TableName = "DrugSale_View"
+            Service = New AccountsService("DrugAccept")
+            TableName = "DrugAccept_View"
             SortOrderKey = "IdNo"
             WithTreeView = False
             AddHandler View.FinderValueChanged, AddressOf OnFinderValueChanged
             AddHandler View.ClearEntry, AddressOf OnClearEntry
             AddHandler View.ValidateEntries, AddressOf OnValidateEntries
             AddHandler View.ValidateQrCode, AddressOf OnValidateQrCode
-            AddHandler View.SaveDrugSale, AddressOf OnSaveDrugSale
-            AddHandler View.AddDrugSale, AddressOf OnAddDrugSale
+            AddHandler View.SaveDrugAccept, AddressOf OnSaveDrugAccept
+            AddHandler View.AddDrugAccept, AddressOf OnAddDrugAccept
             PromptOnSavedRecord = False
         End Sub
 
-        Private Sub OnAddDrugSale()
+        Private Sub OnAddDrugAccept()
             GoAddRecord()
         End Sub
 
-        Private Sub OnSaveDrugSale()
+        Private Sub OnSaveDrugAccept()
             Save(View)
         End Sub
 
@@ -68,7 +67,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function DrugAlreadySold(ByRef IdNo As Int32) As Boolean
-            IdNo = Service.GetRecordFieldWith3KeyG(Of String, String, String, Int32)("DrugSale", View.GTin, View.BatchNo, View.SerializationNo, "GTin", "BatchNo", "SerializationNo", "IdNo")
+            IdNo = Service.GetRecordFieldWith3KeyG(Of String, String, String, Int32)("DrugAccept", View.GTin, View.BatchNo, View.SerializationNo, "GTin", "BatchNo", "SerializationNo", "IdNo")
             If IdNo > 0 Then
                 Return True
             End If
@@ -76,7 +75,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
-            View.SaleDate = Today()
+            View.AcceptDate = Today()
             View.QrCode = ""
         End Sub
 
@@ -103,7 +102,7 @@ Namespace PresentationLayer.Presenters
         '        If saveData Then
         '            Dim control As Control = Nothing
         '            If Not MainFieldsDictionary.TryGetValue("QrCode", control) Then
-        '                MyErrorProvider.SetError(control, "Drug already sold, cannot re-sale a drug.")
+        '                MyErrorProvider.SetError(control, "Drug already sold, cannot re-Accept a drug.")
         '            Else
         '                Save(View)
         '                retValue = True
@@ -253,7 +252,7 @@ Namespace PresentationLayer.Presenters
         Private Function IsDrugAlreadySold() As Boolean
             Dim idNo As Int32 = 0
             If DrugAlreadySold(idNo) Then
-                MessageBox.Show("Duplicate sale not allowed. This record has already been sold previously! See Record number <" + idNo.ToString("N0") + ">.")
+                MessageBox.Show("Duplicate Accept not allowed. This record has already been sold previously! See Record number <" + idNo.ToString("N0") + ">.")
                 Return True
             End If
             Return False

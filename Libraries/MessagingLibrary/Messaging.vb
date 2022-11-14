@@ -296,6 +296,20 @@ Public Class Messaging
         Shell.Run("mshta.exe vbscript:close(CreateObject(""WScript.shell"").Popup(""" & sMessage & """," & iSeconds & ",""" & sTitle & """))")
     End Sub
 
+    Public Shared Sub MessageTimeOutNowait(sMessage As String, sTitle As String, iSeconds As Integer)
+        Dim t As New System.Threading.Thread(AddressOf ShowMSG)
+        Dim messageParam As New WaitMessageParameters
+        messageParam.Message = sMessage
+        messageParam.Title = sTitle
+        messageParam.Seconds = iSeconds
+        t.Start(messageParam)
+    End Sub
+
+    Private Shared Sub ShowMSG(messageParam As WaitMessageParameters)
+        Dim Shell = CreateObject("WScript.Shell")
+        Shell.Run("mshta.exe vbscript:close(CreateObject(""WScript.shell"").Popup(""" & messageParam.Message & """," & messageParam.Seconds & ",""" & messageParam.Title & """))")
+    End Sub
+
     'Public Shared Function SelectPeriodCaption(ByVal originalCaption As String, ByVal FormCulture As Globalization.CultureInfo, ByVal periodCode As String)
     '    Dim curCulture = CultureInfo.CurrentCulture
     '    If periodCode = "Y" Then
@@ -367,4 +381,10 @@ Public Class Messaging
     '    Return retValue
     'End Function
 
+End Class
+
+Public Class WaitMessageParameters
+    Public Message As String
+    Public Title As String
+    Public Seconds As Integer
 End Class
