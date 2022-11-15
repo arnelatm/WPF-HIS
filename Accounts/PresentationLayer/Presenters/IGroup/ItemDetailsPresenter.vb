@@ -29,6 +29,17 @@ Namespace PresentationLayer.Presenters
             CreateLookupData("ItemDetails", "ItemDetailsByName", {"Primary_Key", "ItemNameEnglish", "Item_Code"}, "BranchId='01'")
         End Sub
 
+        Public Overrides Sub GoFilter()
+            If DataFilter Is Nothing Or DataFilter = "" Then
+                DataFilter = "Active = 1"
+            Else
+                DataFilter = ""
+            End If
+            DisplayTree()
+            GoFirstRecord()
+        End Sub
+
+
         Public Sub OnFinderValueChanged(idNo As Int16)
             If idNo <> 0 Then
                 RecordPositionNumber = GetSortedRecordPosition(idNo)

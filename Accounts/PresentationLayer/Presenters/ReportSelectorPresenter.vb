@@ -6,6 +6,7 @@ Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports System.Globalization
 Imports System.Reflection
 
 Namespace PresentationLayer.Presenters
@@ -47,8 +48,14 @@ Namespace PresentationLayer.Presenters
             'Dim parameters As New ArrayList
             'parameters.Add({"ReportTitle", Messaging.TranslateCaption(report.ReportTitle)})
             Dim queryForm As String = report.QueryForm
-            Dim f As Form = FormFunctions.GetFormByName(queryForm, report)
-            f.Show()
+            If queryForm Is Nothing Then
+                Dim cForm = New ReportFormIGroup(report.ReportFileName + ".rpt", CultureInfo.CurrentCulture, Nothing)
+                cForm.Show()
+            Else
+                Dim f As Form = FormFunctions.GetFormByName(queryForm, report)
+                f.Show()
+            End If
+
         End Sub
 
     End Class
