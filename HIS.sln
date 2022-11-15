@@ -135,6 +135,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQuer
 		Add constraint for not duplicate values including null values.sql = Add constraint for not duplicate values including null values.sql
 		Append a table to a new table.sql = Append a table to a new table.sql
 		Check for Duplicate Item RegistraTION pHARMACY.txt = Check for Duplicate Item RegistraTION pHARMACY.txt
+		Create Unique Index with null values.sql = Create Unique Index with null values.sql
 		CreateEditReset Sequence.sql = CreateEditReset Sequence.sql
 		Delete or restore Archirodon.sql = Delete or restore Archirodon.sql
 		DeleteDuplicates.sql = DeleteDuplicates.sql
