@@ -19,6 +19,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property DrugRouteOfAdministration As String
         Property DrugIdNo As Integer
         Property DrugList As Object
+        Event GetDataTable(ByRef drugListDataTable As DataTable)
+
     End Interface
 
 End Namespace

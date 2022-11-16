@@ -734,6 +734,16 @@ Namespace Services
             Return modelOfPresenter
         End Function
 
+
+        Public Function GetDataTable(tableName As String, Optional sortField As String = Nothing, Optional fieldList As String = Nothing, Optional filter As String = Nothing) As DataTable
+            Return DataDao.GetDataTable(tableName, sortField, fieldList, filter)
+        End Function
+
+        Public Function GetDataTable(sqlCommand As String) As DataTable
+            Return DataDao.GetDataTable(sqlCommand)
+        End Function
+
+
 #End Region
 
 #Region "BaseDao Functions"
