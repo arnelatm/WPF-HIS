@@ -1262,6 +1262,38 @@ Namespace AdoNet
             Return fieldName
         End Function
 
+        Public Function GetDataTable(ByVal sqlCommand As String) As DataTable
+            Return CreateDataTable(sqlCommand)
+        End Function
+
+        Public Function GetDataTable(tableName As String, Optional sortField As String = Nothing, Optional fieldsList As String = Nothing, Optional filter As String = Nothing) As DataTable Implements IBaseDao.GetDataTable
+            Dim dataConnection As SqlConnection = New SqlConnection(GetDb().GetConnectionString)
+            Dim sqlCommand As String
+            If fieldsList Is Nothing Then
+                sqlCommand = "Select * from " + tableName
+            Else
+                sqlCommand = "Select " + fieldsList + " from " + tableName
+            End If
+            If filter IsNot Nothing Then
+                sqlCommand = sqlCommand + " where " + filter
+            End If
+            If sortField IsNot Nothing Then
+                sqlCommand = sqlCommand + " order by " + sortField
+            End If
+            Return CreateDataTable(sqlCommand)
+        End Function
+
+        Private Function CreateDataTable(sqlCommand As String) As DataTable
+            Dim dataConnection As SqlConnection = New SqlConnection(GetDb().GetConnectionString)
+            Dim command As New SqlCommand(sqlCommand, dataConnection)
+            Dim adapter As SqlDataAdapter = New SqlDataAdapter()
+            adapter.SelectCommand = command
+            Dim table As New DataTable
+            table.Locale = System.Globalization.CultureInfo.InvariantCulture
+            adapter.Fill(table)
+            Return table
+        End Function
+
     End Class
 
     Public Class DaoCommand

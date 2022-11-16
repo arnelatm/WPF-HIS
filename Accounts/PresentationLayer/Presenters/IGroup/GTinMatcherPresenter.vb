@@ -19,6 +19,7 @@ Namespace PresentationLayer.Presenters
             WithTreeView = False
             AddHandler View.FinderValueChanged, AddressOf OnFinderValueChanged
             AddHandler View.GTinValueChanged, AddressOf OnGTinValueChanged
+            AddHandler View.GetDataTable, AddressOf OnGetDataTable
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -64,6 +65,10 @@ Namespace PresentationLayer.Presenters
                     View.Volume = obj.Volume
                 End If
             End If
+        End Sub
+
+        Public Sub OnGetDataTable(ByRef drugListDataTable As DataTable)
+            drugListDataTable = Service.GetDataTable("DrugList", "[Trade Name]")
         End Sub
 
         Private Sub OnBeforeSave() Handles MyBase.BeforeSave

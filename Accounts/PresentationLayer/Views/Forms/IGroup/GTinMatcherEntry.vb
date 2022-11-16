@@ -1,7 +1,6 @@
 ﻿Imports System.Configuration
 Imports System.Data.SqlClient
 Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
@@ -14,6 +13,10 @@ Namespace PresentationLayer.Views.Forms
         Private _nfi As NumberFormatInfo
         Private _drugList As Object
         Private bindingSource1 As New BindingSource()
+        Public Event FinderValueChanged(itemIdNo As Int16) Implements IItemDetailsView.FinderValueChanged
+        Public Event GTinValueChanged(itemIdNo As Int16) Implements IItemDetailsView.GTinValueChanged
+        Public Event GetDataTable(ByRef drugListDataTable As DataTable) Implements IGTinMatcherView.GetDataTable
+
 
         Public Sub New()
 
@@ -36,13 +39,11 @@ Namespace PresentationLayer.Views.Forms
             Else
                 _nfi.NumberGroupSeparator = numberGroupSeparator
             End If
-            InitializeDataGridView()
+
 
         End Sub
 
-        Public Event FinderValueChanged(itemIdNo As Int16) Implements IItemDetailsView.FinderValueChanged
 
-        Public Event GTinValueChanged(itemIdNo As Int16) Implements IItemDetailsView.GTinValueChanged
 
         Public Property ItemDetailsByName As List(Of Lookup.LookupData)
 
@@ -52,14 +53,15 @@ Namespace PresentationLayer.Views.Forms
                 With Me.DataGridView1
                     ' Automatically generate the DataGridView columns.
                     .AutoGenerateColumns = True
-
+                    Dim drugListDataTable As New DataTable
+                    RaiseEvent GetDataTable(drugListDataTable)
                     ' Set up the data source.
-                    bindingSource1.DataSource = GetData("Select * From DrugList")
+                    bindingSource1.DataSource = drugListDataTable
+
                     .DataSource = bindingSource1
 
                     ' Automatically resize the visible rows.
-                    .AutoSizeRowsMode =
-                    DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders
+                    .AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders
 
                     ' Set the DataGridView control's border.
                     .BorderStyle = BorderStyle.Fixed3D
@@ -518,6 +520,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
 
+        Private Sub GTinMatcher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            cboItemFinder.DataSource = ItemDetailsByName
+            cboItemFinder.EditingMode = True
+            InitializeDataGridView()
+        End Sub
+
         Private Sub cboItemFinder_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboItemFinder.SelectedIndexChanged
             RaiseEvent FinderValueChanged(cboItemFinder.SelectedItem.IdNo)
         End Sub
@@ -529,17 +537,17 @@ Namespace PresentationLayer.Views.Forms
             gTinScanner.Close()
         End Sub
 
-        Private Shared Function GetData(ByVal sqlCommand As String) As DataTable
-            Dim connectionString As String = "Data Source=IBN-SERVER;Initial Catalog=IGroupClinic;Persist Security Info=True;User ID=igroupadmin;Password=igss@123"
-            Dim northwindConnection As SqlConnection = New SqlConnection(connectionString)
-            Dim command As New SqlCommand(sqlCommand, northwindConnection)
-            Dim adapter As SqlDataAdapter = New SqlDataAdapter()
-            adapter.SelectCommand = command
-            Dim table As New DataTable
-            table.Locale = System.Globalization.CultureInfo.InvariantCulture
-            adapter.Fill(table)
-            Return table
-        End Function
+        'Private Shared Function GetData(ByVal sqlCommand As String) As DataTable
+        '    Dim connectionString As String = "Data Source=IBN-SERVER;Initial Catalog=IGroupClinic;Persist Security Info=True;User ID=igroupadmin;Password=igss@123"
+        '    Dim northwindConnection As SqlConnection = New SqlConnection(connectionString)
+        '    Dim command As New SqlCommand(sqlCommand, northwindConnection)
+        '    Dim adapter As SqlDataAdapter = New SqlDataAdapter()
+        '    adapter.SelectCommand = command
+        '    Dim table As New DataTable
+        '    table.Locale = System.Globalization.CultureInfo.InvariantCulture
+        '    adapter.Fill(table)
+        '    Return table
+        'End Function
 
 #End Region
 
