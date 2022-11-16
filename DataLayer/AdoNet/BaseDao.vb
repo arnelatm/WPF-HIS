@@ -747,8 +747,13 @@ Namespace AdoNet
             Return GetDb().Scalar(sql)
         End Function
 
-        Public Function GetRecords(tableName As String, sortKey As String, fieldNames As String(), Optional filterKey As String = Nothing) As Object Implements IBaseDao.GetRecords
-            Dim fields = String.Join(",", fieldNames)
+        Public Function GetRecords(tableName As String, sortKey As String, Optional fieldNames As String() = Nothing, Optional filterKey As String = Nothing) As Object Implements IBaseDao.GetRecords
+            Dim fields As String
+            If fieldNames Is Nothing Then
+                fields = "*"
+            Else
+                fields = String.Join(",", fieldNames)
+            End If
             Dim sql As String
             If filterKey Is Nothing Or filterKey = "" Then
                 If sortKey Is Nothing Or sortKey = "" Then

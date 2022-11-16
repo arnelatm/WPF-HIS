@@ -1,4 +1,5 @@
 ﻿Imports System.Configuration
+Imports System.Data.SqlClient
 Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
@@ -11,6 +12,8 @@ Namespace PresentationLayer.Views.Forms
         Implements IGTinMatcherView
 
         Private _nfi As NumberFormatInfo
+        Private _drugList As Object
+        Private bindingSource1 As New BindingSource()
 
         Public Sub New()
 
@@ -33,6 +36,7 @@ Namespace PresentationLayer.Views.Forms
             Else
                 _nfi.NumberGroupSeparator = numberGroupSeparator
             End If
+            InitializeDataGridView()
 
         End Sub
 
@@ -42,7 +46,46 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property ItemDetailsByName As List(Of Lookup.LookupData)
 
+        Private Sub InitializeDataGridView()
+            Try
+                ' Set up the DataGridView.
+                With Me.DataGridView1
+                    ' Automatically generate the DataGridView columns.
+                    .AutoGenerateColumns = True
+
+                    ' Set up the data source.
+                    bindingSource1.DataSource = GetData("Select * From DrugList")
+                    .DataSource = bindingSource1
+
+                    ' Automatically resize the visible rows.
+                    .AutoSizeRowsMode =
+                    DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders
+
+                    ' Set the DataGridView control's border.
+                    .BorderStyle = BorderStyle.Fixed3D
+
+                    ' Put the cells in edit mode when user enters them.
+                    .EditMode = DataGridViewEditMode.EditOnEnter
+                End With
+            Catch ex As SqlException
+                MessageBox.Show("To run this sample replace " _
+                & "connection.ConnectionString with a valid connection string" _
+                & "  to a Northwind database accessible to your system.",
+                "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                System.Threading.Thread.CurrentThread.Abort()
+            End Try
+        End Sub
+
 #Region "Field Items"
+
+        Public Property DrugList As Object Implements IGTinMatcherView.DrugList
+            Get
+                Return _drugList
+            End Get
+            Set
+                _drugList = Value
+            End Set
+        End Property
 
         Public Property IdNo As Int32 Implements IItemDetailsView.IdNo
             Get
@@ -474,10 +517,6 @@ Namespace PresentationLayer.Views.Forms
             txtVolume.DisplayOnly = value
         End Sub
 
-        Private Sub GTinMatcher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            cboItemFinder.DataSource = ItemDetailsByName
-            cboItemFinder.EditingMode = True
-        End Sub
 
         Private Sub cboItemFinder_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboItemFinder.SelectedIndexChanged
             RaiseEvent FinderValueChanged(cboItemFinder.SelectedItem.IdNo)
@@ -490,10 +529,17 @@ Namespace PresentationLayer.Views.Forms
             gTinScanner.Close()
         End Sub
 
-        Private Sub BindingNavigatorMoveNextItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorMoveNextItem.Click
-
-        End Sub
-
+        Private Shared Function GetData(ByVal sqlCommand As String) As DataTable
+            Dim connectionString As String = "Data Source=IBN-SERVER;Initial Catalog=IGroupClinic;Persist Security Info=True;User ID=igroupadmin;Password=igss@123"
+            Dim northwindConnection As SqlConnection = New SqlConnection(connectionString)
+            Dim command As New SqlCommand(sqlCommand, northwindConnection)
+            Dim adapter As SqlDataAdapter = New SqlDataAdapter()
+            adapter.SelectCommand = command
+            Dim table As New DataTable
+            table.Locale = System.Globalization.CultureInfo.InvariantCulture
+            adapter.Fill(table)
+            Return table
+        End Function
 
 #End Region
 

@@ -62,7 +62,7 @@
             Me.cboRouteOfAdministration = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.BindingNavigator1 = New System.Windows.Forms.BindingNavigator(Me.components)
+            Me.bnDrugList = New System.Windows.Forms.BindingNavigator(Me.components)
             Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton()
             Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel()
             Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton()
@@ -100,16 +100,18 @@
             Me.txtDrugPackageSize = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel18 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDrugRouteOfAdministration = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.DrugListDataGridView = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridView1 = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.lblSearcher = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.bsDrugList = New System.Windows.Forms.BindingSource(Me.components)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout1.SuspendLayout()
             Me.CFlowLayout2.SuspendLayout()
-            CType(Me.BindingNavigator1, System.ComponentModel.ISupportInitialize).BeginInit()
-            Me.BindingNavigator1.SuspendLayout()
-            CType(Me.DrugListDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bnDrugList, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.bnDrugList.SuspendLayout()
+            CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsDrugList, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             '
             'TxtIdNo
@@ -1025,7 +1027,7 @@
             'CFlowLayout2
             '
             Me.CFlowLayout2.BackColor = System.Drawing.Color.Transparent
-            Me.CFlowLayout2.Controls.Add(Me.BindingNavigator1)
+            Me.CFlowLayout2.Controls.Add(Me.bnDrugList)
             Me.CFlowLayout2.Controls.Add(Me.CLabel4)
             Me.CFlowLayout2.Controls.Add(Me.txtDrugIdNo)
             Me.CFlowLayout2.Controls.Add(Me.CLabel5)
@@ -1057,24 +1059,24 @@
             Me.CFlowLayout2.Size = New System.Drawing.Size(477, 359)
             Me.CFlowLayout2.TabIndex = 38
             '
-            'BindingNavigator1
+            'bnDrugList
             '
-            Me.BindingNavigator1.AddNewItem = Me.BindingNavigatorAddNewItem
-            Me.BindingNavigator1.AllowMerge = False
-            Me.BindingNavigator1.CountItem = Me.BindingNavigatorCountItem
-            Me.BindingNavigator1.DeleteItem = Me.BindingNavigatorDeleteItem
-            Me.CFlowLayout2.SetFlowBreak(Me.BindingNavigator1, True)
-            Me.BindingNavigator1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.BindingNavigatorSeparator2, Me.BindingNavigatorAddNewItem, Me.BindingNavigatorDeleteItem})
-            Me.BindingNavigator1.Location = New System.Drawing.Point(0, 0)
-            Me.BindingNavigator1.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
-            Me.BindingNavigator1.MoveLastItem = Me.BindingNavigatorMoveLastItem
-            Me.BindingNavigator1.MoveNextItem = Me.BindingNavigatorMoveNextItem
-            Me.BindingNavigator1.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
-            Me.BindingNavigator1.Name = "BindingNavigator1"
-            Me.BindingNavigator1.PositionItem = Me.BindingNavigatorPositionItem
-            Me.BindingNavigator1.Size = New System.Drawing.Size(286, 25)
-            Me.BindingNavigator1.TabIndex = 72
-            Me.BindingNavigator1.Text = "BindingNavigator1"
+            Me.bnDrugList.AddNewItem = Me.BindingNavigatorAddNewItem
+            Me.bnDrugList.AllowMerge = False
+            Me.bnDrugList.CountItem = Me.BindingNavigatorCountItem
+            Me.bnDrugList.DeleteItem = Me.BindingNavigatorDeleteItem
+            Me.CFlowLayout2.SetFlowBreak(Me.bnDrugList, True)
+            Me.bnDrugList.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.BindingNavigatorSeparator2, Me.BindingNavigatorAddNewItem, Me.BindingNavigatorDeleteItem})
+            Me.bnDrugList.Location = New System.Drawing.Point(0, 0)
+            Me.bnDrugList.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
+            Me.bnDrugList.MoveLastItem = Me.BindingNavigatorMoveLastItem
+            Me.bnDrugList.MoveNextItem = Me.BindingNavigatorMoveNextItem
+            Me.bnDrugList.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
+            Me.bnDrugList.Name = "bnDrugList"
+            Me.bnDrugList.PositionItem = Me.BindingNavigatorPositionItem
+            Me.bnDrugList.Size = New System.Drawing.Size(209, 25)
+            Me.bnDrugList.TabIndex = 72
+            Me.bnDrugList.Text = "BindingNavigator1"
             '
             'BindingNavigatorAddNewItem
             '
@@ -1725,12 +1727,12 @@
             Me.txtDrugRouteOfAdministration.TabIndex = 43
             Me.txtDrugRouteOfAdministration.Translatable = False
             '
-            'DrugListDataGridView
+            'DataGridView1
             '
             DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-            Me.DrugListDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-            Me.DrugListDataGridView.BegFindValue = Nothing
-            Me.DrugListDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            Me.DataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            Me.DataGridView1.BegFindValue = Nothing
+            Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
             DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1738,33 +1740,33 @@
             DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
             DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DrugListDataGridView.DefaultCellStyle = DataGridViewCellStyle2
-            Me.DrugListDataGridView.DgvFooter = Nothing
-            Me.DrugListDataGridView.DisplayOnly = False
-            Me.DrugListDataGridView.Ea = Nothing
-            Me.DrugListDataGridView.EditingMode = False
-            Me.DrugListDataGridView.EndFindValue = Nothing
-            Me.DrugListDataGridView.FieldDescription = Nothing
-            Me.DrugListDataGridView.FieldName = Nothing
-            Me.DrugListDataGridView.FieldsDictionary = Nothing
-            Me.DrugListDataGridView.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.DrugListDataGridView.FindEnabled = False
-            Me.DrugListDataGridView.FirstRowDeletionEnabled = True
-            Me.DrugListDataGridView.FirstRowInsertionEnabled = True
-            Me.DrugListDataGridView.IgnoreCase = False
-            Me.DrugListDataGridView.IsDirty = False
-            Me.DrugListDataGridView.Location = New System.Drawing.Point(4, 450)
-            Me.DrugListDataGridView.Name = "DrugListDataGridView"
-            Me.DrugListDataGridView.ReadOnly = True
-            Me.DrugListDataGridView.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.DrugListDataGridView.SecurityKey = ""
-            Me.DrugListDataGridView.SequenceColumn = "dgvSequence"
-            Me.DrugListDataGridView.SequenceFieldName = "Sequence"
-            Me.DrugListDataGridView.ShowFooter = False
-            Me.DrugListDataGridView.ShowInsertColumnWhenEditing = True
-            Me.DrugListDataGridView.Size = New System.Drawing.Size(954, 273)
-            Me.DrugListDataGridView.TabIndex = 39
-            Me.DrugListDataGridView.Translatable = True
+            Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle2
+            Me.DataGridView1.DgvFooter = Nothing
+            Me.DataGridView1.DisplayOnly = False
+            Me.DataGridView1.Ea = Nothing
+            Me.DataGridView1.EditingMode = False
+            Me.DataGridView1.EndFindValue = Nothing
+            Me.DataGridView1.FieldDescription = Nothing
+            Me.DataGridView1.FieldName = Nothing
+            Me.DataGridView1.FieldsDictionary = Nothing
+            Me.DataGridView1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.DataGridView1.FindEnabled = False
+            Me.DataGridView1.FirstRowDeletionEnabled = True
+            Me.DataGridView1.FirstRowInsertionEnabled = True
+            Me.DataGridView1.IgnoreCase = False
+            Me.DataGridView1.IsDirty = False
+            Me.DataGridView1.Location = New System.Drawing.Point(4, 450)
+            Me.DataGridView1.Name = "DataGridView1"
+            Me.DataGridView1.ReadOnly = True
+            Me.DataGridView1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.DataGridView1.SecurityKey = ""
+            Me.DataGridView1.SequenceColumn = "dgvSequence"
+            Me.DataGridView1.SequenceFieldName = "Sequence"
+            Me.DataGridView1.ShowFooter = False
+            Me.DataGridView1.ShowInsertColumnWhenEditing = True
+            Me.DataGridView1.Size = New System.Drawing.Size(954, 273)
+            Me.DataGridView1.TabIndex = 39
+            Me.DataGridView1.Translatable = True
             '
             'btnOk
             '
@@ -1799,7 +1801,7 @@
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
             Me.ClientSize = New System.Drawing.Size(962, 761)
             Me.Controls.Add(Me.btnOk)
-            Me.Controls.Add(Me.DrugListDataGridView)
+            Me.Controls.Add(Me.DataGridView1)
             Me.Controls.Add(Me.CFlowLayout2)
             Me.Controls.Add(Me.cboItemFinder)
             Me.Controls.Add(Me.CFlowLayout1)
@@ -1810,7 +1812,7 @@
             Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)
             Me.Controls.SetChildIndex(Me.cboItemFinder, 0)
             Me.Controls.SetChildIndex(Me.CFlowLayout2, 0)
-            Me.Controls.SetChildIndex(Me.DrugListDataGridView, 0)
+            Me.Controls.SetChildIndex(Me.DataGridView1, 0)
             Me.Controls.SetChildIndex(Me.btnOk, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1818,10 +1820,11 @@
             Me.CFlowLayout1.PerformLayout()
             Me.CFlowLayout2.ResumeLayout(False)
             Me.CFlowLayout2.PerformLayout()
-            CType(Me.BindingNavigator1, System.ComponentModel.ISupportInitialize).EndInit()
-            Me.BindingNavigator1.ResumeLayout(False)
-            Me.BindingNavigator1.PerformLayout()
-            CType(Me.DrugListDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bnDrugList, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.bnDrugList.ResumeLayout(False)
+            Me.bnDrugList.PerformLayout()
+            CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsDrugList, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
             Me.PerformLayout()
 
@@ -1858,7 +1861,7 @@
         Friend WithEvents txtPackageSize As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel3 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtGenericName As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents DrugListDataGridView As Libraries.CBaseControlsLibrary.CDataGridView
+        Friend WithEvents DataGridView1 As Libraries.CBaseControlsLibrary.CDataGridView
         Friend WithEvents CFlowLayout2 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents CLabel4 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtDrugIdNo As Libraries.CBaseControlsLibrary.CTextBox
@@ -1891,7 +1894,7 @@
         Friend WithEvents txtpack2 As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtpack3 As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
-        Friend WithEvents BindingNavigator1 As BindingNavigator
+        Friend WithEvents bnDrugList As BindingNavigator
         Friend WithEvents BindingNavigatorAddNewItem As ToolStripButton
         Friend WithEvents BindingNavigatorCountItem As ToolStripLabel
         Friend WithEvents BindingNavigatorDeleteItem As ToolStripButton
@@ -1905,5 +1908,6 @@
         Friend WithEvents BindingNavigatorSeparator2 As ToolStripSeparator
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblSearcher As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents bsDrugList As BindingSource
     End Class
 End Namespace
