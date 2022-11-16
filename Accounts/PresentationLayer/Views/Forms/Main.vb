@@ -1072,7 +1072,6 @@ Namespace PresentationLayer.Views.Forms
 
         Private Property PrintJobView As IPrintJobView
 
-
         Private Sub PrintReport(reportFileName As String, databaseConnectionName As String, Optional args() As Object = Nothing)
             Dim prPresenter As New PrintReportPresenter()
             prPresenter.PrintReport(reportFileName, databaseConnectionName, args)
@@ -1106,6 +1105,11 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemGenerateDrugAcceptanceFile_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemGenerateDrugAcceptanceFile.Click
             RunForm(Of GenerateDrugCsv, String)("DrugAccept")
         End Sub
+
+        Private Sub ToolStripMenuItemItemMatcher_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemItemMatcher.Click
+            RunForm(Of GTinMatcherEntry, GTinMatcherPresenter(Of GTinMatcherModel))()
+        End Sub
+
     End Class
 
 End Namespace

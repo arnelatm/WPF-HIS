@@ -30,7 +30,10 @@ Namespace PresentationLayer.Views.Interfaces
         Property Volume As Double?
         Property PrescriptionDrug As Boolean
         Property RouteOfAdministration As String
+
         Event FinderValueChanged(itemIdNo As Int16)
+
+        Event GTinValueChanged(itemIdNo As Short)
 
     End Interface
 

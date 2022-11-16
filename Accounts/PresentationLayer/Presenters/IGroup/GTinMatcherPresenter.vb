@@ -5,18 +5,14 @@ Imports AATM.Common.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Presenters
 
-    Public Class ItemDetailsPresenter(Of TM As New)
-        Inherits CommonPresenter(Of IItemDetailsView, TM)
-        'Implements IDaoAutoCode2
+    Public Class GTinMatcherPresenter(Of TM As New)
+        Inherits CommonPresenter(Of IGTinMatcherView, TM)
 
-        Public Sub New(itemView As IItemDetailsView)
+        Public Sub New(itemView As IGTinMatcherView)
             MyBase.New(itemView)
-            Service = New AccountsService("ItemDetails") ', Nothing ,Nothing, "IGROUPCLINIC")
-            'Service.SaveConnectionString()
-            'Service.SetConnectionString("IGROUPCLINIC")
+            Service = New AccountsService("ItemDetails")
             TableName = "ItemDetails"
             SortOrderKey = "ItemNameEnglish"
-            'Service.RestoreConnectionString()
             WithTreeView = False
             AddHandler View.FinderValueChanged, AddressOf OnFinderValueChanged
             AddHandler View.GTinValueChanged, AddressOf OnGTinValueChanged
@@ -33,7 +29,7 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Sub GoFilter()
             If DataFilter Is Nothing Or DataFilter = "" Then
-                DataFilter = "Active = 1"
+                DataFilter = "Active = 1 and ItemGroup = 'MD'"
             Else
                 DataFilter = ""
             End If
@@ -72,14 +68,21 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        'Public Function GenerateCode(idNo As Integer) As String Implements IDaoAutoCode2.GenerateCode
-        '    Return Service.UpdateCode("ItemDetails", idNo)
-        'End Function
-
         Public Sub OnAfterSaveItemDetails() Handles Me.AfterSave
-            Service.InsertRecord("StockPOsitionCurrent", {"BranchID", "Item_Code", "Batch", "Expiry", "WarehouseID", "PCSQty", "CashPrice", "CreditPrice", "CostPrice", "PurchaseNo", "TmpStock"},
+            Service.InsertRecord("StockPositionCurrent", {"BranchID", "Item_Code", "Batch", "Expiry", "WarehouseID", "PCSQty", "CashPrice", "CreditPrice", "CostPrice", "PurchaseNo", "TmpStock"},
                                                         {"String", "String", "String", "DateTime", "String", "Decimal", "Decimal", "Decimal", "Decimal", "Decimal", "Decimal"},
                                                         {"01", View.ItemDetailsCode, "000", Now(), "01", 0, 0, 0, 0, 0, 0})
+        End Sub
+
+        Public Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
+            View.DrugPackageSize = View.PackageSize
+            View.DrugPackageType = View.PackageType
+            View.DrugRegistrationNo = View.RegistrationNo
+            View.DrugRouteOfAdministration = View.RouteOfAdministration
+            View.DrugStrengthValue = View.StrengthValue
+            View.DrugUnitOfStrength = View.UnitOfStrength
+            View.DrugUnitOfVolume = View.UnitOfVolume
+            Dim idNo As Int32 = Service.Get
         End Sub
 
     End Class

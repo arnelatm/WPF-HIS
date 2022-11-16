@@ -54,8 +54,11 @@
             Me.lblGTIN = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtGTIN = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.cboItemFinder = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.btnScanQrCode = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.EventLog1 = New System.Diagnostics.EventLog()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.TableLayoutPanel1.SuspendLayout()
+            CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             '
             'TableLayoutPanel1
@@ -98,6 +101,7 @@
             Me.TableLayoutPanel1.Controls.Add(Me.lblGTIN, 0, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.txtGTIN, 1, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.cboItemFinder, 3, 0)
+            Me.TableLayoutPanel1.Controls.Add(Me.btnScanQrCode, 2, 1)
             Me.TableLayoutPanel1.Location = New System.Drawing.Point(12, 57)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             Me.TableLayoutPanel1.RowCount = 17
@@ -965,6 +969,25 @@
             Me.cboItemFinder.ValueIsNumeric = False
             Me.cboItemFinder.ValueMember = "Name"
             '
+            'btnScanQrCode
+            '
+            Me.btnScanQrCode.DesignerSelected = True
+            Me.btnScanQrCode.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.btnScanQrCode.ImageIndex = 0
+            Me.btnScanQrCode.Location = New System.Drawing.Point(323, 26)
+            Me.btnScanQrCode.Margin = New System.Windows.Forms.Padding(0)
+            Me.btnScanQrCode.Name = "btnScanQrCode"
+            Me.btnScanQrCode.OriginalImageName = Nothing
+            Me.btnScanQrCode.SecurityKey = ""
+            Me.btnScanQrCode.Size = New System.Drawing.Size(90, 20)
+            Me.btnScanQrCode.TabIndex = 39
+            Me.btnScanQrCode.Text = "Scan Qr Code"
+            Me.btnScanQrCode.TextMargin = New System.Windows.Forms.Padding(0)
+            '
+            'EventLog1
+            '
+            Me.EventLog1.SynchronizingObject = Me
+            '
             'ItemDetailsEntry
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -977,6 +1000,7 @@
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.TableLayoutPanel1.ResumeLayout(False)
             Me.TableLayoutPanel1.PerformLayout()
+            CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
             Me.PerformLayout()
 
@@ -1015,5 +1039,7 @@
         Friend WithEvents lblGTIN As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents CaComboBox2 As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents cboItemFinder As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents btnScanQrCode As Libraries.CBaseControlsLibrary.CButton
+        Friend WithEvents EventLog1 As EventLog
     End Class
 End Namespace

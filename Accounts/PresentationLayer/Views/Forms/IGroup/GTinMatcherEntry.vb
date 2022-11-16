@@ -7,8 +7,8 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class ItemDetailsEntry
-        Implements IItemDetailsView
+    Public Class GTinMatcherEntry
+        Implements IGTinMatcherView
 
         Private _nfi As NumberFormatInfo
 
@@ -99,10 +99,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Pack1 As Short Implements IItemDetailsView.Pack1
             Get
-                Return 1
+                Return txtPack1.Text
             End Get
             Set(value As Short)
-                _pack1 = value
+                txtPack1.Text = value
             End Set
         End Property
 
@@ -110,10 +110,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Pack2 As Short Implements IItemDetailsView.Pack2
             Get
-                Return 1
+                Return txtpack2.Text
             End Get
             Set(value As Short)
-                _pack2 = value
+                txtpack2.Text = value
             End Set
         End Property
 
@@ -121,10 +121,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Pack3 As Short Implements IItemDetailsView.Pack3
             Get
-                Return 1
+                Return txtpack3.Text
             End Get
             Set(value As Short)
-                _pack3 = value
+                txtpack3.Text = value
             End Set
         End Property
 
@@ -291,22 +291,24 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PrescriptionDrug As Boolean Implements IItemDetailsView.PrescriptionDrug
-            Get
-                Return chkPrescriptionDrug.Checked
-            End Get
-            Set
-                chkPrescriptionDrug.Checked = Value
-            End Set
-        End Property
-
         Public Property GTIN As String Implements IItemDetailsView.GTIN
             Get
                 Return txtGTIN.Text
             End Get
             Set(value As String)
                 txtGTIN.Text = value
-                RaiseEvent GTinValueChanged(IdNo)
+                'RaiseEvent GTinValueChanged(IdNo)
+            End Set
+        End Property
+
+        Public Property PrescriptionDrug As Boolean Implements IItemDetailsView.PrescriptionDrug
+
+        Public Property DrugTradeName As String Implements IGTinMatcherView.DrugTradeName
+            Get
+                Return txtDrugTradeName.Text
+            End Get
+            Set(value As String)
+                txtDrugTradeName.Text = value
             End Set
         End Property
 
@@ -317,9 +319,11 @@ Namespace PresentationLayer.Views.Forms
                 {"IdNo", TxtIdNo},
                 {"ItemDetailsCode", TxtItemDetailsCode},
                 {"ItemDetailsName", TxtItemDetailsName},
+                {"Pack1", txtPack1},
+                {"Pack2", txtpack2},
+                {"Pack3", txtpack3},
                 {"PackageSize", txtPackageSize},
                 {"PackageType", cboPackageType},
-                {"PrescriptionDrug", chkPrescriptionDrug},
                 {"RegistrationNo", txtRegistrationNo},
                 {"RouteOfAdministration", cboRouteOfAdministration},
                 {"StrengthValue", txtStrengthValue},
@@ -351,15 +355,7 @@ Namespace PresentationLayer.Views.Forms
             txtVolume.DisplayOnly = value
         End Sub
 
-        Private Sub chkPrescriptionDrug_CheckedChanged(sender As Object, e As EventArgs) Handles chkPrescriptionDrug.CheckedChanged
-            If chkPrescriptionDrug.Checked Then
-                SetDisplayOnly(False)
-            Else
-                SetDisplayOnly(True)
-            End If
-        End Sub
-
-        Private Sub ItemDetailsEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Private Sub GTinMatcher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             cboItemFinder.DataSource = ItemDetailsByName
             cboItemFinder.EditingMode = True
         End Sub

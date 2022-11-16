@@ -57,6 +57,9 @@ Namespace DataLayer.AdoNet
                     " WHERE Primary_Key = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim value As ItemDetails = _db.Read(sql, Make, params).FirstOrDefault()
+            If value Is Nothing Then
+                Return Nothing
+            End If
             value.PrescriptionDrug = IIf(value.RegistrationNo = "" Or value.RegistrationNo Is Nothing, False, True)
             Return value
         End Function
@@ -170,6 +173,7 @@ Namespace DataLayer.AdoNet
             Return New Object() {
                                  "DosageForm", ItemDetails.DosageForm,
                                  "GenericName", ItemDetails.GenericName,
+                                 "GTin", ItemDetails.GTIN,
                                  "TradeName", ItemDetails.ItemDetailsName,
                                  "PackageSize", ItemDetails.PackageSize,
                                  "PackageType", ItemDetails.PackageType,

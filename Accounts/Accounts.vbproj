@@ -150,6 +150,8 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="ShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <HintPath>..\packages\CrystalReports.ShockwaveFlashObjects.13.0.4000\lib\net40\ShockwaveFlashObjects.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -162,6 +164,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.7.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
@@ -220,6 +223,7 @@
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
     <Compile Include="BusinessLayer\IGroup\DrugAccept.vb" />
     <Compile Include="BusinessLayer\IGroup\DrugSale.vb" />
+    <Compile Include="BusinessLayer\IGroup\GTinMatcher.vb" />
     <Compile Include="BusinessLayer\IGroup\StockInventory.vb" />
     <Compile Include="BusinessLayer\ItemCode.vb" />
     <Compile Include="BusinessLayer\CodeGroup.vb" />
@@ -414,6 +418,7 @@
     <Compile Include="OneTimeRun.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\DrugAcceptModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\DrugSaleModel.vb" />
+    <Compile Include="PresentationLayer\Models\IGroup\GTinMatcherModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\StockInventoryModel.vb" />
     <Compile Include="PresentationLayer\Models\ItemCodeModel.vb" />
     <Compile Include="PresentationLayer\Models\CodeGroupModel.vb" />
@@ -472,6 +477,7 @@
     <Compile Include="PresentationLayer\Presenters\DoctorPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\DrugAcceptPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\DrugSalePresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\IGroup\GTinMatcherPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\StockInventoryPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ItemCodePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CodeGroupPresenter.vb" />
@@ -541,6 +547,18 @@
       <DependentUpon>DrugSaleEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\DrugSaleEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\GTinScanner.Designer.vb">
+      <DependentUpon>GTinScanner.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\GTinScanner.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\GTinMatcherEntry.Designer.vb">
+      <DependentUpon>GTinMatcherEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\GTinMatcherEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\StockInventoryEntry.Designer.vb">
@@ -828,6 +846,7 @@
     <Compile Include="PresentationLayer\Views\IGroup\PmrPatientDisplayView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IDrugAcceptView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IDrugSaleView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IGTinMatcherView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IStockInventoryView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IItemCode.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ICodeGroup.vb" />
@@ -1803,6 +1822,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\DrugSaleEntry.resx">
       <DependentUpon>DrugSaleEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\GTinScanner.resx">
+      <DependentUpon>GTinScanner.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\GTinMatcherEntry.resx">
+      <DependentUpon>GTinMatcherEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\StockInventoryEntry.resx">
       <DependentUpon>StockInventoryEntry.vb</DependentUpon>
