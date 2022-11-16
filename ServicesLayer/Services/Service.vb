@@ -398,10 +398,16 @@ Namespace Services
             Return modelOfPresenter
         End Function
 
-        Public Function GetIdNoWithName(Of T)(tableName As String, itemName As String) As T Implements IService.GetIdNoWithName
-            Dim idNo As T = DataDao.GetIdNoWithName(Of T)(tableName, itemName)
+        'Public Function GetIdNoWithName(Of T)(tableName As String, itemName As String) As T Implements IService.GetIdNoWithName
+        '    Dim idNo As T = DataDao.GetIdNoWithName(Of T)(tableName, itemName)
+        '    Return idNo
+        'End Function
+
+        Public Function GetIdNoWithName(Of T)(tableName As String, fieldValue As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As T Implements IService.GetIdNoWithName
+            Dim idNo As T = DataDao.GetIdNoWithName(Of T)(tableName, fieldValue, fieldName, idFieldName)
             Return idNo
         End Function
+
 
         Public Function GetIcIdNoWithName(codeGroupSelection As CodeGroupSelection, itemName As String) As Integer Implements IService.GetIcIdNoWithName
             Return DataDao.GetIcIdNoWithIName(codeGroupSelection, itemName)
@@ -516,8 +522,8 @@ Namespace Services
             Return DataDao.GetFieldWithIdNo(idNo, tableName, returnFieldName)
         End Function
 
-        Public Function GetFieldsWithIdNo(idNo As Object, tableName As String, fields As String) As Object Implements IService.GetFieldsWithIdNo
-            Return DataDao.GetFieldsWithIdNo(idNo, tableName, fields)
+        Public Function GetFieldsWithIdNo(idNo As Object, tableName As String, fields As String, Optional primaryFieldName As String = Nothing) As Object Implements IService.GetFieldsWithIdNo
+            Return DataDao.GetFieldsWithIdNo(idNo, tableName, fields, primaryFieldName)
         End Function
 
         Public Function GetSpRecords(spName As String, fields As String, sortKey As String, filter As String) As Object Implements IService.GetSpRecords

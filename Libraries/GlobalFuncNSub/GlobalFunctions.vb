@@ -1456,4 +1456,16 @@ Public Module GlobalFunctions
         End While
     End Sub
 
+    ''' <summary>
+    '''     handles null or blank values for string type
+    ''' </summary>
+    ''' <param name="argObj">string value to handle</param>
+    ''' <returns>returns string</returns>
+    Public Function NoDbNull(argObj As Object) As Object
+        If argObj.Equals(DBNull.Value) Then
+            Return Nothing
+        End If
+        Return argObj
+    End Function
+
 End Module

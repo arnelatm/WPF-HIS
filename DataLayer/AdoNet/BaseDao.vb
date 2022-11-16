@@ -80,7 +80,7 @@ Namespace AdoNet
             Return GetDb().Scalar(sql, params)
         End Function
 
-        
+
         Public Function DeleteRecord(idNo As Int32, tableName As String) As Int32 _
             Implements IBaseDao.DeleteRecord
             'Dim cTableName = GetPhysicalTableName(tableName)
@@ -387,19 +387,25 @@ Namespace AdoNet
             Return GetDb().Scalar(sql, params)
         End Function
 
-        Public Function GetFieldsWithIdNo(idNo As Object, tableName As String, fieldsList As String) As ExpandoObject Implements IBaseDao.GetFieldsWithIdNo
-            Dim sql As String = " Select top 1 " & fieldsList & " FROM [" & tableName & "] " & " Where " & GetPrimaryFieldName() & " = @IdNo "
+        Public Function GetFieldsWithIdNo(idNo As Object, tableName As String, fieldsList As String, Optional primaryFieldName As String = Nothing) As ExpandoObject Implements IBaseDao.GetFieldsWithIdNo
+            If primaryFieldName Is Nothing Then
+                primaryFieldName = GetPrimaryFieldName()
+            End If
+            Dim sql As String = " Select top 1 " & fieldsList & " FROM [" & tableName & "] " & " Where " & primaryFieldName & " = @IdNo "
             Dim params() As Object = {"@IdNo", idNo}
             Dim values As Object
             values = GetDb().SqlRead(sql, params)
-            Dim fields = fieldsList.Split(",")
-            Dim obj As New ExpandoObject
-            Dim i As Int16 = 0
-            For Each item In fields
-                CreateDynamicObject(obj, item, values(i))
-                i = i + 1
-            Next
-            Return obj
+            If values.Count() > 0 Then
+                Dim fields = fieldsList.Split(",")
+                Dim obj As New ExpandoObject
+                Dim i As Int16 = 0
+                For Each item In fields
+                    CreateDynamicObject(obj, item, values(i))
+                    i = i + 1
+                Next
+                Return obj
+            End If
+            Return Nothing
         End Function
 
         Public Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String) As ExpandoObject Implements IBaseDao.GetRecordFieldsFiltered
@@ -519,7 +525,10 @@ Namespace AdoNet
         'End Function
 
         Public Sub CreateDynamicObject(ByRef obj As ExpandoObject, ByVal propertyName As String, ByVal propertyValue As Object)
-            CType(obj, IDictionary(Of String, Object))(propertyName) = propertyValue
+            Dim name As String = propertyName.Replace(" ", "")
+            name = name.Replace("[", "")
+            name = name.Replace("]", "")
+            CType(obj, IDictionary(Of String, Object))(name) = propertyValue
         End Sub
 
         Public Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer Implements IBaseDao.GetIdNoOfSortedPositionNumber

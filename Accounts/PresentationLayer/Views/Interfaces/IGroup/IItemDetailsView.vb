@@ -26,7 +26,6 @@ Namespace PresentationLayer.Views.Interfaces
         Property StrengthValue As String
         Property UnitOfStrength As String
         Property UnitOfVolume As String
-        Property UserId As String
         Property Volume As Double?
         Property PrescriptionDrug As Boolean
         Property RouteOfAdministration As String
