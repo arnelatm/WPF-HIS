@@ -9,6 +9,8 @@ Namespace PresentationLayer.Presenters
     Public Class GTinMatcherPresenter(Of TM As New)
         Inherits CommonPresenter(Of IGTinMatcherView, TM)
 
+        Private _drugList As Object
+
         Public Sub New(itemView As IGTinMatcherView)
             MyBase.New(itemView)
             Service = New AccountsService("ItemDetails")
@@ -20,6 +22,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
+            View.DrugList = Service.GetRecords("DrugList", "[Trade Name]")
             CreateDataSource("DrugDosageForm_View", "DosageForm", {"DosageForm"}, "DosageForm")
             CreateDataSource("DrugUnitOfVolume_View", "UnitOfVolume", {"UnitOfVolume"}, "UnitOfVolume")
             CreateDataSource("DrugUnitOfStrength_View", "UnitOfStrength", {"UnitOfStrength"}, "UnitOfStrength")

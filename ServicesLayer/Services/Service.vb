@@ -534,7 +534,7 @@ Namespace Services
             Return DataDao.GetDataSet(storedProcedureName, parameters)
         End Function
 
-        Public Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal fields As String(), Optional filterKey As String = Nothing) As Object Implements IService.GetRecords
+        Public Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal Optional fields As String() = Nothing, Optional filterKey As String = Nothing) As Object Implements IService.GetRecords
             Return DataDao.GetRecords(tableName, sortKey, fields, filterKey)
         End Function
 

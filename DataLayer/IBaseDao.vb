@@ -48,7 +48,7 @@ Public Interface IBaseDao
     Function GetRecordFieldWithKeyG(Of TR, TS)(searchValue As TS, tableName As String, searchFieldName As String, returnFieldName As String) As TR
     Function GetRecordPosition(tableName As String, idNo As Int32) As Integer
     Function GetRecordPositionByName(tableName As String, sortField As String, nameValue As String) As Integer
-    Function GetRecords(tableName As String, sortKey As String, fieldNames As String(), Optional filterKey As String = Nothing) As Object
+    Function GetRecords(tableName As String, sortKey As String, Optional fieldNames As String() = Nothing, Optional filterKey As String = Nothing) As Object
     Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer
     Function GetSpRecords(spName As String, fieldList As String, sortKey As String, filter As String, ParamArray parameters As Array()) As Object
     Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList

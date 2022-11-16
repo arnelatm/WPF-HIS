@@ -57,7 +57,7 @@ Namespace Services
 
         Function FieldExistInTable(ByVal tableName As String, ByVal fieldName As String) As Boolean
 
-        Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal fields As String(), Optional filterKey As String = Nothing) As Object
+        Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal Optional fields As String() = Nothing, Optional filterKey As String = Nothing) As Object
 
         Function GetRecordsWithGroupIdNo(Of TM)(ByVal idNo, Optional ByRef sortKey = Nothing) As List(Of TM)
 

@@ -18,6 +18,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property DrugVolume As Double?
         Property DrugRouteOfAdministration As String
         Property DrugIdNo As Integer
+        Property DrugList As Object
     End Interface
 
 End Namespace
