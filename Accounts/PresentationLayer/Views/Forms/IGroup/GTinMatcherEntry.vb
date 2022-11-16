@@ -192,17 +192,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Private _userID As String
-
-        Public Property UserID As String Implements IItemDetailsView.UserId
-            Get
-                Return GlobalVariables.UserName
-            End Get
-            Set(value As String)
-                _category = value
-            End Set
-        End Property
-
         Public Property UnitOfStrength As String Implements IItemDetailsView.UnitOfStrength
             Get
                 Return cboUnitOfStrength.GetNullableValue(Of String)
@@ -301,7 +290,22 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+
+
         Public Property PrescriptionDrug As Boolean Implements IItemDetailsView.PrescriptionDrug
+
+        Public Property DrugIdNo As Int32 Implements IGTinMatcherView.DrugIdNo
+            Get
+                If txtDrugIdNo.Text Is Nothing Then
+                    Return 0
+                Else
+                    Return Convert.ToInt32(txtDrugIdNo.Text)
+                End If
+            End Get
+            Set
+                txtDrugIdNo.Text = Convert.ToInt32(Value)
+            End Set
+        End Property
 
         Public Property DrugTradeName As String Implements IGTinMatcherView.DrugTradeName
             Get
@@ -309,6 +313,121 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As String)
                 txtDrugTradeName.Text = value
+            End Set
+        End Property
+
+        Public Overloads Property DrugGenericName As String Implements IGTinMatcherView.DrugGenericName
+            Get
+                Return txtDrugGenericName.Text
+            End Get
+            Set
+                txtDrugGenericName.Text = Value
+            End Set
+        End Property
+
+        Public Property DrugRegistrationNo As String Implements IGTinMatcherView.DrugRegistrationNo
+            Get
+                Return txtDrugRegistrationNo.Text
+            End Get
+            Set
+                txtDrugRegistrationNo.Text = Value
+            End Set
+        End Property
+
+        Public Property DrugUnitOfStrength As String Implements IGTinMatcherView.DrugUnitOfStrength
+            Get
+                Return txtDrugUnitOfStrength.Text
+            End Get
+            Set(value As String)
+                txtDrugUnitOfStrength.Text = value
+            End Set
+        End Property
+
+        Public Property DrugUnitOfVolume As String Implements IGTinMatcherView.DrugUnitOfVolume
+            Get
+                Return txtDrugUnitOfVolume.Text
+            End Get
+            Set(value As String)
+                txtDrugUnitOfVolume.Text = value
+            End Set
+        End Property
+
+        Public Property DrugPackageType As String Implements IGTinMatcherView.DrugPackageType
+            Get
+                Return txtDrugPackageType.Text
+            End Get
+            Set(value As String)
+                txtDrugPackageType.Text = value
+            End Set
+        End Property
+
+        Public Property DrugDosageForm As String Implements IGTinMatcherView.DrugDosageForm
+            Get
+                Return txtDrugDosageForm.Text
+            End Get
+            Set(value As String)
+                txtDrugDosageForm.Text = value
+            End Set
+        End Property
+
+        Public Property DrugRouteOfAdministration As String Implements IGTinMatcherView.DrugRouteOfAdministration
+            Get
+                Return txtDrugRouteOfAdministration.Text
+            End Get
+            Set(value As String)
+                txtDrugRouteOfAdministration.Text = value
+            End Set
+        End Property
+
+        Public Property DrugVolume As Double? Implements IGTinMatcherView.DrugVolume
+            Get
+                If txtDrugVolume.Text Is Nothing Then
+                    Return Nothing
+                Else
+                    Return txtDrugVolume.Text.ToDoubleNumber(_nfi)
+                End If
+            End Get
+            Set
+                If Value Is Nothing Then
+                    txtDrugVolume.Text = ""
+                Else
+                    txtDrugVolume.Text = Value
+                End If
+            End Set
+        End Property
+
+        Public Property DrugStrengthValue As String Implements IGTinMatcherView.DrugStrengthValue
+            Get
+                Return txtDrugStrengthValue.Text
+            End Get
+            Set(value As String)
+                txtDrugStrengthValue.Text = value
+            End Set
+        End Property
+
+        Public Property DrugPackageSize As Double? Implements IGTinMatcherView.DrugPackageSize
+            Get
+                If txtDrugPackageSize.Text Is Nothing Then
+                    Return Nothing
+                Else
+                    Return txtDrugPackageSize.Text.ToDoubleNumber(_nfi)
+                End If
+            End Get
+            Set
+                If Value Is Nothing Then
+                    txtDrugPackageSize.Text = ""
+                Else
+                    txtDrugPackageSize.Text = Value
+                End If
+            End Set
+        End Property
+
+        Public Property DrugGTin As String Implements IGTinMatcherView.DrugGTin
+            Get
+                Return txtDrugGTin.Text
+            End Get
+            Set(value As String)
+                txtDrugGTin.Text = value
             End Set
         End Property
 
@@ -370,6 +489,11 @@ Namespace PresentationLayer.Views.Forms
             txtGTIN.Text = gTinScanner.GTin
             gTinScanner.Close()
         End Sub
+
+        Private Sub BindingNavigatorMoveNextItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorMoveNextItem.Click
+
+        End Sub
+
 
 #End Region
 

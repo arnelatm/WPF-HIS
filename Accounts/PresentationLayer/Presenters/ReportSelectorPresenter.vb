@@ -45,11 +45,21 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnReportDoubleClickEvent(reportIdNo As Int16)
             Dim report As ReportModel = Service.GetRecordByIdNo(Of ReportModel)(reportIdNo)
+            Dim parameters As New ArrayList
+            If report.QueryParameters IsNot Nothing AndAlso report.QueryParameters <> "" Then
+                Dim rParameters As String = report.QueryParameters
+                Dim aParameters As String() = rParameters.Split(","c)
+                For i = 0 To aParameters.Count() - 1 Step 2
+                    Dim parameterName = aParameters(i)
+                    Dim parameterValue = aParameters(i + 1)
+                    parameters.Add({parameterName, parameterValue})
+                Next
+            End If
             'Dim parameters As New ArrayList
             'parameters.Add({"ReportTitle", Messaging.TranslateCaption(report.ReportTitle)})
             Dim queryForm As String = report.QueryForm
             If queryForm Is Nothing Then
-                Dim cForm = New ReportFormIGroup(report.ReportFileName + ".rpt", CultureInfo.CurrentCulture, Nothing)
+                Dim cForm = New ReportFormIGroup(report.ReportFileName + ".rpt", CultureInfo.CurrentCulture, If(parameters.Count() = 0, Nothing, parameters))
                 cForm.Show()
             Else
                 Dim f As Form = FormFunctions.GetFormByName(queryForm, report)

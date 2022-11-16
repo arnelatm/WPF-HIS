@@ -5,6 +5,9 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface IGTinMatcherView
         Inherits IItemDetailsView
 
+        Property DrugGTin As String
+        Property DrugGenericName As String
+        Property DrugDosageForm As String
         Property DrugTradeName As String
         Property DrugPackageSize As Double?
         Property DrugPackageType As String
@@ -12,11 +15,9 @@ Namespace PresentationLayer.Views.Interfaces
         Property DrugStrengthValue As String
         Property DrugUnitOfStrength As String
         Property DrugUnitOfVolume As String
-        Property DrugUserId As String
         Property DrugVolume As Double?
-        Property DrugPrescriptionDrug As Boolean
         Property DrugRouteOfAdministration As String
-
+        Property DrugIdNo As Integer
     End Interface
 
 End Namespace

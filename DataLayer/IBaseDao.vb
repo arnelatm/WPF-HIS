@@ -22,7 +22,7 @@ Public Interface IBaseDao
     Function GetField(Of TR, TS)(searchValue As TS, tableName As String, searchFieldName As String, returnFieldName As String, Optional filter As String = Nothing) As TR
     Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object
     Function GetFieldOnMaxField(searchFieldName As String, tableName As String, returnFieldName As String, Optional filter As String = Nothing) As Object
-    Function GetFieldsWithIdNo(idNo As Object, tableName As String, fieldsList As String) As ExpandoObject
+    Function GetFieldsWithIdNo(idNo As Object, tableName As String, fieldsList As String, Optional primaryFieldName As String = Nothing) As ExpandoObject
     Function GetFieldType(tableName As String, fieldName As String) As Object
     Function GetFieldValue(Of TType)(sqlStatement As String, tableName As String, condition As String) As TType
     Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object

@@ -37,7 +37,7 @@ Namespace Services
 
         Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM
 
-        Function GetIdNoWithName(Of T)(tableName As String, itemName As String) As T
+        Function GetIdNoWithName(Of T)(tableName As String, itemName As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As T
 
         Function GetRecordCount(tableName As String, Optional filter As String = Nothing) As Integer
 
@@ -63,7 +63,7 @@ Namespace Services
 
         Function GetFieldWithIdNo(idNo As Object, tableName As String, returnFieldName As String) As Object
 
-        Function GetFieldsWithIdNo(idNo As Object, tableName As String, fields As String) As Object
+        Function GetFieldsWithIdNo(idNo As Object, tableName As String, fields As String, Optional primaryFieldName As String = Nothing) As Object
 
         Function GetSpRecords(spName As String, fields As String, sortKey As String, filter As String) As Object
 

@@ -41,7 +41,7 @@
             Me.lblName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtItemDetailsName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblGenericName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboRouteOfAdministration = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.txtGenericName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblRegistrationCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtRegistrationNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblDosageForm = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -59,7 +59,7 @@
             Me.cboPackageSize = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPackageSize = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtGenericName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.cboRouteOfAdministration = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.BindingNavigator1 = New System.Windows.Forms.BindingNavigator(Me.components)
@@ -100,7 +100,7 @@
             Me.txtDrugPackageSize = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel18 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDrugRouteOfAdministration = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.CDataGridView1 = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DrugListDataGridView = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.lblSearcher = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -109,7 +109,7 @@
             Me.CFlowLayout2.SuspendLayout()
             CType(Me.BindingNavigator1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.BindingNavigator1.SuspendLayout()
-            CType(Me.CDataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.DrugListDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             '
             'TxtIdNo
@@ -511,50 +511,34 @@
             Me.lblGenericName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblGenericName.Translatable = True
             '
-            'cboRouteOfAdministration
+            'txtGenericName
             '
-            Me.cboRouteOfAdministration.BackColor = System.Drawing.Color.White
-            Me.cboRouteOfAdministration.BegFindValue = Nothing
-            Me.cboRouteOfAdministration.ChangingSearchValueOnly = False
-            Me.cboRouteOfAdministration.CurrentSearchTerm = ""
-            Me.cboRouteOfAdministration.DataValue = Nothing
-            Me.cboRouteOfAdministration.DefaultValue = Nothing
-            Me.cboRouteOfAdministration.DisplayMember = "Name"
-            Me.cboRouteOfAdministration.EditingMode = True
-            Me.cboRouteOfAdministration.EndFindValue = Nothing
-            Me.cboRouteOfAdministration.FieldDescription = Nothing
-            Me.cboRouteOfAdministration.FieldName = Nothing
-            Me.cboRouteOfAdministration.FilterRule = Nothing
-            Me.cboRouteOfAdministration.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboRouteOfAdministration.FindEnabled = True
-            Me.CFlowLayout1.SetFlowBreak(Me.cboRouteOfAdministration, True)
-            Me.cboRouteOfAdministration.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cboRouteOfAdministration.ForeColor = System.Drawing.Color.Black
-            Me.cboRouteOfAdministration.FormattingEnabled = True
-            Me.cboRouteOfAdministration.HideWhenNotEditingOrAdding = False
-            Me.cboRouteOfAdministration.IgnoreCase = False
-            Me.cboRouteOfAdministration.IntegralHeight = False
-            Me.cboRouteOfAdministration.LinkedLabel = Nothing
-            Me.cboRouteOfAdministration.Location = New System.Drawing.Point(106, 330)
-            Me.cboRouteOfAdministration.Margin = New System.Windows.Forms.Padding(1)
-            Me.cboRouteOfAdministration.Name = "cboRouteOfAdministration"
-            Me.cboRouteOfAdministration.OldValue = 0
-            Me.cboRouteOfAdministration.OriginalDataSource = Nothing
-            Me.cboRouteOfAdministration.OriginalList = Nothing
-            Me.cboRouteOfAdministration.OverrideDropDownStyleList = False
-            Me.cboRouteOfAdministration.PreviousSearchTerm = Nothing
-            Me.cboRouteOfAdministration.PropertySelector = Nothing
-            Me.cboRouteOfAdministration.ReadOnlyCombo = False
-            Me.cboRouteOfAdministration.Size = New System.Drawing.Size(358, 24)
-            Me.cboRouteOfAdministration.SuggestBoxHeight = 200
-            Me.cboRouteOfAdministration.SuggestListOrderRule = Nothing
-            Me.cboRouteOfAdministration.TabIndex = 53
-            Me.cboRouteOfAdministration.TextToSearch = Nothing
-            Me.cboRouteOfAdministration.Translatable = False
-            Me.cboRouteOfAdministration.ValueIsMandatory = False
-            Me.cboRouteOfAdministration.ValueIsNullable = False
-            Me.cboRouteOfAdministration.ValueIsNumeric = False
-            Me.cboRouteOfAdministration.ValueMember = "Name"
+            Me.txtGenericName.BackColor = System.Drawing.Color.White
+            Me.txtGenericName.BegFindValue = Nothing
+            Me.txtGenericName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtGenericName.ComputedValue = False
+            Me.txtGenericName.CustomFormat = Nothing
+            Me.txtGenericName.DataBoundControl = True
+            Me.txtGenericName.EditingMode = True
+            Me.txtGenericName.EndFindValue = Nothing
+            Me.txtGenericName.FieldDescription = Nothing
+            Me.txtGenericName.FieldName = Nothing
+            Me.txtGenericName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtGenericName.FindEnabled = True
+            Me.CFlowLayout1.SetFlowBreak(Me.txtGenericName, True)
+            Me.txtGenericName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtGenericName.ForeColor = System.Drawing.Color.Black
+            Me.txtGenericName.LinkedLabel = Nothing
+            Me.txtGenericName.Location = New System.Drawing.Point(106, 101)
+            Me.txtGenericName.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtGenericName.MaximumValue = Nothing
+            Me.txtGenericName.MinimumValue = Nothing
+            Me.txtGenericName.Name = "txtGenericName"
+            Me.txtGenericName.OldValue = ""
+            Me.txtGenericName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtGenericName.Size = New System.Drawing.Size(358, 23)
+            Me.txtGenericName.TabIndex = 43
+            Me.txtGenericName.Translatable = False
             '
             'lblRegistrationCode
             '
@@ -979,41 +963,57 @@
             Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.CLabel3.Translatable = True
             '
-            'txtGenericName
+            'cboRouteOfAdministration
             '
-            Me.txtGenericName.BackColor = System.Drawing.Color.White
-            Me.txtGenericName.BegFindValue = Nothing
-            Me.txtGenericName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtGenericName.ComputedValue = False
-            Me.txtGenericName.CustomFormat = Nothing
-            Me.txtGenericName.DataBoundControl = True
-            Me.txtGenericName.EditingMode = True
-            Me.txtGenericName.EndFindValue = Nothing
-            Me.txtGenericName.FieldDescription = Nothing
-            Me.txtGenericName.FieldName = Nothing
-            Me.txtGenericName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtGenericName.FindEnabled = True
-            Me.CFlowLayout1.SetFlowBreak(Me.txtGenericName, True)
-            Me.txtGenericName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtGenericName.ForeColor = System.Drawing.Color.Black
-            Me.txtGenericName.LinkedLabel = Nothing
-            Me.txtGenericName.Location = New System.Drawing.Point(106, 101)
-            Me.txtGenericName.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtGenericName.MaximumValue = Nothing
-            Me.txtGenericName.MinimumValue = Nothing
-            Me.txtGenericName.Name = "txtGenericName"
-            Me.txtGenericName.OldValue = ""
-            Me.txtGenericName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtGenericName.Size = New System.Drawing.Size(358, 23)
-            Me.txtGenericName.TabIndex = 43
-            Me.txtGenericName.Translatable = False
+            Me.cboRouteOfAdministration.BackColor = System.Drawing.Color.White
+            Me.cboRouteOfAdministration.BegFindValue = Nothing
+            Me.cboRouteOfAdministration.ChangingSearchValueOnly = False
+            Me.cboRouteOfAdministration.CurrentSearchTerm = ""
+            Me.cboRouteOfAdministration.DataValue = Nothing
+            Me.cboRouteOfAdministration.DefaultValue = Nothing
+            Me.cboRouteOfAdministration.DisplayMember = "Name"
+            Me.cboRouteOfAdministration.EditingMode = True
+            Me.cboRouteOfAdministration.EndFindValue = Nothing
+            Me.cboRouteOfAdministration.FieldDescription = Nothing
+            Me.cboRouteOfAdministration.FieldName = Nothing
+            Me.cboRouteOfAdministration.FilterRule = Nothing
+            Me.cboRouteOfAdministration.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboRouteOfAdministration.FindEnabled = True
+            Me.CFlowLayout1.SetFlowBreak(Me.cboRouteOfAdministration, True)
+            Me.cboRouteOfAdministration.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboRouteOfAdministration.ForeColor = System.Drawing.Color.Black
+            Me.cboRouteOfAdministration.FormattingEnabled = True
+            Me.cboRouteOfAdministration.HideWhenNotEditingOrAdding = False
+            Me.cboRouteOfAdministration.IgnoreCase = False
+            Me.cboRouteOfAdministration.IntegralHeight = False
+            Me.cboRouteOfAdministration.LinkedLabel = Nothing
+            Me.cboRouteOfAdministration.Location = New System.Drawing.Point(106, 330)
+            Me.cboRouteOfAdministration.Margin = New System.Windows.Forms.Padding(1)
+            Me.cboRouteOfAdministration.Name = "cboRouteOfAdministration"
+            Me.cboRouteOfAdministration.OldValue = 0
+            Me.cboRouteOfAdministration.OriginalDataSource = Nothing
+            Me.cboRouteOfAdministration.OriginalList = Nothing
+            Me.cboRouteOfAdministration.OverrideDropDownStyleList = False
+            Me.cboRouteOfAdministration.PreviousSearchTerm = Nothing
+            Me.cboRouteOfAdministration.PropertySelector = Nothing
+            Me.cboRouteOfAdministration.ReadOnlyCombo = False
+            Me.cboRouteOfAdministration.Size = New System.Drawing.Size(358, 24)
+            Me.cboRouteOfAdministration.SuggestBoxHeight = 200
+            Me.cboRouteOfAdministration.SuggestListOrderRule = Nothing
+            Me.cboRouteOfAdministration.TabIndex = 53
+            Me.cboRouteOfAdministration.TextToSearch = Nothing
+            Me.cboRouteOfAdministration.Translatable = False
+            Me.cboRouteOfAdministration.ValueIsMandatory = False
+            Me.cboRouteOfAdministration.ValueIsNullable = False
+            Me.cboRouteOfAdministration.ValueIsNumeric = False
+            Me.cboRouteOfAdministration.ValueMember = "Name"
             '
             'CLabel2
             '
             Me.CLabel2.DisplayOnly = True
             Me.CLabel2.EditingMode = False
             Me.CLabel2.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CLabel2.Location = New System.Drawing.Point(1, 356)
+            Me.CLabel2.Location = New System.Drawing.Point(1, 357)
             Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel2.Name = "CLabel2"
             Me.CLabel2.Size = New System.Drawing.Size(103, 23)
@@ -1072,7 +1072,7 @@
             Me.BindingNavigator1.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
             Me.BindingNavigator1.Name = "BindingNavigator1"
             Me.BindingNavigator1.PositionItem = Me.BindingNavigatorPositionItem
-            Me.BindingNavigator1.Size = New System.Drawing.Size(209, 25)
+            Me.BindingNavigator1.Size = New System.Drawing.Size(286, 25)
             Me.BindingNavigator1.TabIndex = 72
             Me.BindingNavigator1.Text = "BindingNavigator1"
             '
@@ -1313,7 +1313,10 @@
             '
             Me.txtDrugGenericName.BackColor = System.Drawing.Color.White
             Me.txtDrugGenericName.BegFindValue = Nothing
-            Me.txtDrugGenericName.DefaultValue = Nothing
+            Me.txtDrugGenericName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDrugGenericName.ComputedValue = False
+            Me.txtDrugGenericName.CustomFormat = Nothing
+            Me.txtDrugGenericName.DataBoundControl = True
             Me.txtDrugGenericName.EditingMode = True
             Me.txtDrugGenericName.EndFindValue = Nothing
             Me.txtDrugGenericName.FieldDescription = Nothing
@@ -1326,21 +1329,21 @@
             Me.txtDrugGenericName.LinkedLabel = Nothing
             Me.txtDrugGenericName.Location = New System.Drawing.Point(105, 101)
             Me.txtDrugGenericName.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtDrugGenericName.MaximumValue = Nothing
+            Me.txtDrugGenericName.MinimumValue = Nothing
             Me.txtDrugGenericName.Name = "txtDrugGenericName"
-            Me.txtDrugGenericName.OldValue = 0
-            Me.txtDrugGenericName.Size = New System.Drawing.Size(368, 24)
+            Me.txtDrugGenericName.OldValue = "0"
+            Me.txtDrugGenericName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtDrugGenericName.Size = New System.Drawing.Size(368, 23)
             Me.txtDrugGenericName.TabIndex = 53
             Me.txtDrugGenericName.Translatable = False
-            Me.txtDrugGenericName.ValueIsMandatory = False
-            Me.txtDrugGenericName.ValueIsNullable = False
-            Me.txtDrugGenericName.ValueIsNumeric = False
             '
             'CLabel10
             '
             Me.CLabel10.DisplayOnly = True
             Me.CLabel10.EditingMode = False
             Me.CLabel10.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CLabel10.Location = New System.Drawing.Point(1, 127)
+            Me.CLabel10.Location = New System.Drawing.Point(1, 126)
             Me.CLabel10.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel10.Name = "CLabel10"
             Me.CLabel10.Size = New System.Drawing.Size(102, 23)
@@ -1367,7 +1370,7 @@
             Me.txtDrugRegistrationNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDrugRegistrationNo.ForeColor = System.Drawing.Color.Black
             Me.txtDrugRegistrationNo.LinkedLabel = Nothing
-            Me.txtDrugRegistrationNo.Location = New System.Drawing.Point(105, 127)
+            Me.txtDrugRegistrationNo.Location = New System.Drawing.Point(105, 126)
             Me.txtDrugRegistrationNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtDrugRegistrationNo.MaximumValue = Nothing
             Me.txtDrugRegistrationNo.MinimumValue = Nothing
@@ -1383,7 +1386,7 @@
             Me.CLabel11.DisplayOnly = True
             Me.CLabel11.EditingMode = False
             Me.CLabel11.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CLabel11.Location = New System.Drawing.Point(1, 152)
+            Me.CLabel11.Location = New System.Drawing.Point(1, 151)
             Me.CLabel11.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel11.Name = "CLabel11"
             Me.CLabel11.Size = New System.Drawing.Size(102, 23)
@@ -1396,7 +1399,10 @@
             '
             Me.txtDrugDosageForm.BackColor = System.Drawing.Color.White
             Me.txtDrugDosageForm.BegFindValue = Nothing
-            Me.txtDrugDosageForm.DefaultValue = Nothing
+            Me.txtDrugDosageForm.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDrugDosageForm.ComputedValue = False
+            Me.txtDrugDosageForm.CustomFormat = Nothing
+            Me.txtDrugDosageForm.DataBoundControl = True
             Me.txtDrugDosageForm.EditingMode = True
             Me.txtDrugDosageForm.EndFindValue = Nothing
             Me.txtDrugDosageForm.FieldDescription = Nothing
@@ -1407,23 +1413,23 @@
             Me.txtDrugDosageForm.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDrugDosageForm.ForeColor = System.Drawing.Color.Black
             Me.txtDrugDosageForm.LinkedLabel = Nothing
-            Me.txtDrugDosageForm.Location = New System.Drawing.Point(105, 152)
+            Me.txtDrugDosageForm.Location = New System.Drawing.Point(105, 151)
             Me.txtDrugDosageForm.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtDrugDosageForm.MaximumValue = Nothing
+            Me.txtDrugDosageForm.MinimumValue = Nothing
             Me.txtDrugDosageForm.Name = "txtDrugDosageForm"
-            Me.txtDrugDosageForm.OldValue = 0
-            Me.txtDrugDosageForm.Size = New System.Drawing.Size(368, 24)
+            Me.txtDrugDosageForm.OldValue = "0"
+            Me.txtDrugDosageForm.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtDrugDosageForm.Size = New System.Drawing.Size(368, 23)
             Me.txtDrugDosageForm.TabIndex = 65
             Me.txtDrugDosageForm.Translatable = False
-            Me.txtDrugDosageForm.ValueIsMandatory = False
-            Me.txtDrugDosageForm.ValueIsNullable = False
-            Me.txtDrugDosageForm.ValueIsNumeric = False
             '
             'CLabel12
             '
             Me.CLabel12.DisplayOnly = True
             Me.CLabel12.EditingMode = False
             Me.CLabel12.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CLabel12.Location = New System.Drawing.Point(1, 178)
+            Me.CLabel12.Location = New System.Drawing.Point(1, 176)
             Me.CLabel12.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel12.Name = "CLabel12"
             Me.CLabel12.Size = New System.Drawing.Size(102, 23)
@@ -1450,7 +1456,7 @@
             Me.txtDrugStrengthValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDrugStrengthValue.ForeColor = System.Drawing.Color.Black
             Me.txtDrugStrengthValue.LinkedLabel = Nothing
-            Me.txtDrugStrengthValue.Location = New System.Drawing.Point(105, 178)
+            Me.txtDrugStrengthValue.Location = New System.Drawing.Point(105, 176)
             Me.txtDrugStrengthValue.Margin = New System.Windows.Forms.Padding(1)
             Me.txtDrugStrengthValue.MaximumValue = Nothing
             Me.txtDrugStrengthValue.MinimumValue = Nothing
@@ -1466,7 +1472,7 @@
             Me.CLabel13.DisplayOnly = True
             Me.CLabel13.EditingMode = False
             Me.CLabel13.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CLabel13.Location = New System.Drawing.Point(1, 203)
+            Me.CLabel13.Location = New System.Drawing.Point(1, 201)
             Me.CLabel13.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel13.Name = "CLabel13"
             Me.CLabel13.Size = New System.Drawing.Size(102, 23)
@@ -1479,7 +1485,10 @@
             '
             Me.txtDrugUnitOfStrength.BackColor = System.Drawing.Color.White
             Me.txtDrugUnitOfStrength.BegFindValue = Nothing
-            Me.txtDrugUnitOfStrength.DefaultValue = Nothing
+            Me.txtDrugUnitOfStrength.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDrugUnitOfStrength.ComputedValue = False
+            Me.txtDrugUnitOfStrength.CustomFormat = Nothing
+            Me.txtDrugUnitOfStrength.DataBoundControl = True
             Me.txtDrugUnitOfStrength.EditingMode = True
             Me.txtDrugUnitOfStrength.EndFindValue = Nothing
             Me.txtDrugUnitOfStrength.FieldDescription = Nothing
@@ -1490,23 +1499,23 @@
             Me.txtDrugUnitOfStrength.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDrugUnitOfStrength.ForeColor = System.Drawing.Color.Black
             Me.txtDrugUnitOfStrength.LinkedLabel = Nothing
-            Me.txtDrugUnitOfStrength.Location = New System.Drawing.Point(105, 203)
+            Me.txtDrugUnitOfStrength.Location = New System.Drawing.Point(105, 201)
             Me.txtDrugUnitOfStrength.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtDrugUnitOfStrength.MaximumValue = Nothing
+            Me.txtDrugUnitOfStrength.MinimumValue = Nothing
             Me.txtDrugUnitOfStrength.Name = "txtDrugUnitOfStrength"
-            Me.txtDrugUnitOfStrength.OldValue = 0
-            Me.txtDrugUnitOfStrength.Size = New System.Drawing.Size(368, 24)
+            Me.txtDrugUnitOfStrength.OldValue = "0"
+            Me.txtDrugUnitOfStrength.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtDrugUnitOfStrength.Size = New System.Drawing.Size(368, 23)
             Me.txtDrugUnitOfStrength.TabIndex = 70
             Me.txtDrugUnitOfStrength.Translatable = False
-            Me.txtDrugUnitOfStrength.ValueIsMandatory = False
-            Me.txtDrugUnitOfStrength.ValueIsNullable = False
-            Me.txtDrugUnitOfStrength.ValueIsNumeric = False
             '
             'CLabel14
             '
             Me.CLabel14.DisplayOnly = True
             Me.CLabel14.EditingMode = False
             Me.CLabel14.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CLabel14.Location = New System.Drawing.Point(1, 229)
+            Me.CLabel14.Location = New System.Drawing.Point(1, 226)
             Me.CLabel14.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel14.Name = "CLabel14"
             Me.CLabel14.Size = New System.Drawing.Size(102, 23)
@@ -1533,7 +1542,7 @@
             Me.txtDrugVolume.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDrugVolume.ForeColor = System.Drawing.Color.Black
             Me.txtDrugVolume.LinkedLabel = Nothing
-            Me.txtDrugVolume.Location = New System.Drawing.Point(105, 229)
+            Me.txtDrugVolume.Location = New System.Drawing.Point(105, 226)
             Me.txtDrugVolume.Margin = New System.Windows.Forms.Padding(1)
             Me.txtDrugVolume.MaximumValue = Nothing
             Me.txtDrugVolume.MinimumValue = Nothing
@@ -1549,7 +1558,7 @@
             Me.CLabel15.DisplayOnly = True
             Me.CLabel15.EditingMode = False
             Me.CLabel15.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CLabel15.Location = New System.Drawing.Point(1, 254)
+            Me.CLabel15.Location = New System.Drawing.Point(1, 251)
             Me.CLabel15.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel15.Name = "CLabel15"
             Me.CLabel15.Size = New System.Drawing.Size(102, 23)
@@ -1562,7 +1571,10 @@
             '
             Me.txtDrugUnitOfVolume.BackColor = System.Drawing.Color.White
             Me.txtDrugUnitOfVolume.BegFindValue = Nothing
-            Me.txtDrugUnitOfVolume.DefaultValue = Nothing
+            Me.txtDrugUnitOfVolume.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDrugUnitOfVolume.ComputedValue = False
+            Me.txtDrugUnitOfVolume.CustomFormat = Nothing
+            Me.txtDrugUnitOfVolume.DataBoundControl = True
             Me.txtDrugUnitOfVolume.EditingMode = True
             Me.txtDrugUnitOfVolume.EndFindValue = Nothing
             Me.txtDrugUnitOfVolume.FieldDescription = Nothing
@@ -1573,23 +1585,23 @@
             Me.txtDrugUnitOfVolume.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDrugUnitOfVolume.ForeColor = System.Drawing.Color.Black
             Me.txtDrugUnitOfVolume.LinkedLabel = Nothing
-            Me.txtDrugUnitOfVolume.Location = New System.Drawing.Point(105, 254)
+            Me.txtDrugUnitOfVolume.Location = New System.Drawing.Point(105, 251)
             Me.txtDrugUnitOfVolume.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtDrugUnitOfVolume.MaximumValue = Nothing
+            Me.txtDrugUnitOfVolume.MinimumValue = Nothing
             Me.txtDrugUnitOfVolume.Name = "txtDrugUnitOfVolume"
-            Me.txtDrugUnitOfVolume.OldValue = 0
-            Me.txtDrugUnitOfVolume.Size = New System.Drawing.Size(368, 24)
+            Me.txtDrugUnitOfVolume.OldValue = "0"
+            Me.txtDrugUnitOfVolume.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtDrugUnitOfVolume.Size = New System.Drawing.Size(368, 23)
             Me.txtDrugUnitOfVolume.TabIndex = 68
             Me.txtDrugUnitOfVolume.Translatable = False
-            Me.txtDrugUnitOfVolume.ValueIsMandatory = False
-            Me.txtDrugUnitOfVolume.ValueIsNullable = False
-            Me.txtDrugUnitOfVolume.ValueIsNumeric = False
             '
             'CLabel16
             '
             Me.CLabel16.DisplayOnly = True
             Me.CLabel16.EditingMode = False
             Me.CLabel16.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CLabel16.Location = New System.Drawing.Point(1, 280)
+            Me.CLabel16.Location = New System.Drawing.Point(1, 276)
             Me.CLabel16.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel16.Name = "CLabel16"
             Me.CLabel16.Size = New System.Drawing.Size(102, 23)
@@ -1602,7 +1614,10 @@
             '
             Me.txtDrugPackageType.BackColor = System.Drawing.Color.White
             Me.txtDrugPackageType.BegFindValue = Nothing
-            Me.txtDrugPackageType.DefaultValue = Nothing
+            Me.txtDrugPackageType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDrugPackageType.ComputedValue = False
+            Me.txtDrugPackageType.CustomFormat = Nothing
+            Me.txtDrugPackageType.DataBoundControl = True
             Me.txtDrugPackageType.EditingMode = True
             Me.txtDrugPackageType.EndFindValue = Nothing
             Me.txtDrugPackageType.FieldDescription = Nothing
@@ -1613,23 +1628,23 @@
             Me.txtDrugPackageType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDrugPackageType.ForeColor = System.Drawing.Color.Black
             Me.txtDrugPackageType.LinkedLabel = Nothing
-            Me.txtDrugPackageType.Location = New System.Drawing.Point(105, 280)
+            Me.txtDrugPackageType.Location = New System.Drawing.Point(105, 276)
             Me.txtDrugPackageType.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtDrugPackageType.MaximumValue = Nothing
+            Me.txtDrugPackageType.MinimumValue = Nothing
             Me.txtDrugPackageType.Name = "txtDrugPackageType"
-            Me.txtDrugPackageType.OldValue = 0
-            Me.txtDrugPackageType.Size = New System.Drawing.Size(368, 24)
+            Me.txtDrugPackageType.OldValue = "0"
+            Me.txtDrugPackageType.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtDrugPackageType.Size = New System.Drawing.Size(368, 23)
             Me.txtDrugPackageType.TabIndex = 66
             Me.txtDrugPackageType.Translatable = False
-            Me.txtDrugPackageType.ValueIsMandatory = False
-            Me.txtDrugPackageType.ValueIsNullable = False
-            Me.txtDrugPackageType.ValueIsNumeric = False
             '
             'CLabel17
             '
             Me.CLabel17.DisplayOnly = True
             Me.CLabel17.EditingMode = False
             Me.CLabel17.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CLabel17.Location = New System.Drawing.Point(1, 306)
+            Me.CLabel17.Location = New System.Drawing.Point(1, 301)
             Me.CLabel17.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel17.Name = "CLabel17"
             Me.CLabel17.Size = New System.Drawing.Size(102, 23)
@@ -1656,7 +1671,7 @@
             Me.txtDrugPackageSize.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDrugPackageSize.ForeColor = System.Drawing.Color.Black
             Me.txtDrugPackageSize.LinkedLabel = Nothing
-            Me.txtDrugPackageSize.Location = New System.Drawing.Point(105, 306)
+            Me.txtDrugPackageSize.Location = New System.Drawing.Point(105, 301)
             Me.txtDrugPackageSize.Margin = New System.Windows.Forms.Padding(1)
             Me.txtDrugPackageSize.MaximumValue = Nothing
             Me.txtDrugPackageSize.MinimumValue = Nothing
@@ -1672,7 +1687,7 @@
             Me.CLabel18.DisplayOnly = True
             Me.CLabel18.EditingMode = False
             Me.CLabel18.Font = New System.Drawing.Font("Arial Narrow", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CLabel18.Location = New System.Drawing.Point(1, 331)
+            Me.CLabel18.Location = New System.Drawing.Point(1, 326)
             Me.CLabel18.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel18.Name = "CLabel18"
             Me.CLabel18.Size = New System.Drawing.Size(102, 23)
@@ -1699,7 +1714,7 @@
             Me.txtDrugRouteOfAdministration.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDrugRouteOfAdministration.ForeColor = System.Drawing.Color.Black
             Me.txtDrugRouteOfAdministration.LinkedLabel = Nothing
-            Me.txtDrugRouteOfAdministration.Location = New System.Drawing.Point(105, 331)
+            Me.txtDrugRouteOfAdministration.Location = New System.Drawing.Point(105, 326)
             Me.txtDrugRouteOfAdministration.Margin = New System.Windows.Forms.Padding(1)
             Me.txtDrugRouteOfAdministration.MaximumValue = Nothing
             Me.txtDrugRouteOfAdministration.MinimumValue = Nothing
@@ -1710,12 +1725,12 @@
             Me.txtDrugRouteOfAdministration.TabIndex = 43
             Me.txtDrugRouteOfAdministration.Translatable = False
             '
-            'CDataGridView1
+            'DrugListDataGridView
             '
             DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-            Me.CDataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-            Me.CDataGridView1.BegFindValue = Nothing
-            Me.CDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            Me.DrugListDataGridView.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            Me.DrugListDataGridView.BegFindValue = Nothing
+            Me.DrugListDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
             DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1723,33 +1738,33 @@
             DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
             DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.CDataGridView1.DefaultCellStyle = DataGridViewCellStyle2
-            Me.CDataGridView1.DgvFooter = Nothing
-            Me.CDataGridView1.DisplayOnly = False
-            Me.CDataGridView1.Ea = Nothing
-            Me.CDataGridView1.EditingMode = False
-            Me.CDataGridView1.EndFindValue = Nothing
-            Me.CDataGridView1.FieldDescription = Nothing
-            Me.CDataGridView1.FieldName = Nothing
-            Me.CDataGridView1.FieldsDictionary = Nothing
-            Me.CDataGridView1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.CDataGridView1.FindEnabled = False
-            Me.CDataGridView1.FirstRowDeletionEnabled = True
-            Me.CDataGridView1.FirstRowInsertionEnabled = True
-            Me.CDataGridView1.IgnoreCase = False
-            Me.CDataGridView1.IsDirty = False
-            Me.CDataGridView1.Location = New System.Drawing.Point(4, 450)
-            Me.CDataGridView1.Name = "CDataGridView1"
-            Me.CDataGridView1.ReadOnly = True
-            Me.CDataGridView1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.CDataGridView1.SecurityKey = ""
-            Me.CDataGridView1.SequenceColumn = "dgvSequence"
-            Me.CDataGridView1.SequenceFieldName = "Sequence"
-            Me.CDataGridView1.ShowFooter = False
-            Me.CDataGridView1.ShowInsertColumnWhenEditing = True
-            Me.CDataGridView1.Size = New System.Drawing.Size(954, 273)
-            Me.CDataGridView1.TabIndex = 39
-            Me.CDataGridView1.Translatable = True
+            Me.DrugListDataGridView.DefaultCellStyle = DataGridViewCellStyle2
+            Me.DrugListDataGridView.DgvFooter = Nothing
+            Me.DrugListDataGridView.DisplayOnly = False
+            Me.DrugListDataGridView.Ea = Nothing
+            Me.DrugListDataGridView.EditingMode = False
+            Me.DrugListDataGridView.EndFindValue = Nothing
+            Me.DrugListDataGridView.FieldDescription = Nothing
+            Me.DrugListDataGridView.FieldName = Nothing
+            Me.DrugListDataGridView.FieldsDictionary = Nothing
+            Me.DrugListDataGridView.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.DrugListDataGridView.FindEnabled = False
+            Me.DrugListDataGridView.FirstRowDeletionEnabled = True
+            Me.DrugListDataGridView.FirstRowInsertionEnabled = True
+            Me.DrugListDataGridView.IgnoreCase = False
+            Me.DrugListDataGridView.IsDirty = False
+            Me.DrugListDataGridView.Location = New System.Drawing.Point(4, 450)
+            Me.DrugListDataGridView.Name = "DrugListDataGridView"
+            Me.DrugListDataGridView.ReadOnly = True
+            Me.DrugListDataGridView.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.DrugListDataGridView.SecurityKey = ""
+            Me.DrugListDataGridView.SequenceColumn = "dgvSequence"
+            Me.DrugListDataGridView.SequenceFieldName = "Sequence"
+            Me.DrugListDataGridView.ShowFooter = False
+            Me.DrugListDataGridView.ShowInsertColumnWhenEditing = True
+            Me.DrugListDataGridView.Size = New System.Drawing.Size(954, 273)
+            Me.DrugListDataGridView.TabIndex = 39
+            Me.DrugListDataGridView.Translatable = True
             '
             'btnOk
             '
@@ -1784,7 +1799,7 @@
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
             Me.ClientSize = New System.Drawing.Size(962, 761)
             Me.Controls.Add(Me.btnOk)
-            Me.Controls.Add(Me.CDataGridView1)
+            Me.Controls.Add(Me.DrugListDataGridView)
             Me.Controls.Add(Me.CFlowLayout2)
             Me.Controls.Add(Me.cboItemFinder)
             Me.Controls.Add(Me.CFlowLayout1)
@@ -1795,7 +1810,7 @@
             Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)
             Me.Controls.SetChildIndex(Me.cboItemFinder, 0)
             Me.Controls.SetChildIndex(Me.CFlowLayout2, 0)
-            Me.Controls.SetChildIndex(Me.CDataGridView1, 0)
+            Me.Controls.SetChildIndex(Me.DrugListDataGridView, 0)
             Me.Controls.SetChildIndex(Me.btnOk, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1806,7 +1821,7 @@
             CType(Me.BindingNavigator1, System.ComponentModel.ISupportInitialize).EndInit()
             Me.BindingNavigator1.ResumeLayout(False)
             Me.BindingNavigator1.PerformLayout()
-            CType(Me.CDataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.DrugListDataGridView, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
             Me.PerformLayout()
 
@@ -1843,7 +1858,7 @@
         Friend WithEvents txtPackageSize As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel3 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtGenericName As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents CDataGridView1 As Libraries.CBaseControlsLibrary.CDataGridView
+        Friend WithEvents DrugListDataGridView As Libraries.CBaseControlsLibrary.CDataGridView
         Friend WithEvents CFlowLayout2 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents CLabel4 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtDrugIdNo As Libraries.CBaseControlsLibrary.CTextBox

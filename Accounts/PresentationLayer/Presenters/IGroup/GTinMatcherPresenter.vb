@@ -2,6 +2,7 @@
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
@@ -75,14 +76,39 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
-            View.DrugPackageSize = View.PackageSize
-            View.DrugPackageType = View.PackageType
-            View.DrugRegistrationNo = View.RegistrationNo
-            View.DrugRouteOfAdministration = View.RouteOfAdministration
-            View.DrugStrengthValue = View.StrengthValue
-            View.DrugUnitOfStrength = View.UnitOfStrength
-            View.DrugUnitOfVolume = View.UnitOfVolume
-            Dim idNo As Int32 = Service.Get
+            If View.GTIN IsNot Nothing Or View.GTIN <> "" Then
+                Dim idNo As Int32 = Service.GetIdNoWithName(Of Int32)("DrugList", View.GTIN, "GTin")
+                Dim drug As Object = Service.GetFieldsWithIdNo(idNo, "DrugList", "[IdNo],[Trade Name],[Generic Name],[GTIN],[Dosage Form],[Package Size],[Package Type],RegistrationNo,[Route Of Administration],[Strength Value],[Unit Of Strength],[Volume],[Unit Of Volume]", "IdNo")
+                If drug IsNot Nothing Then
+                    View.DrugIdNo = NoDbNull(drug.IdNo)
+                    View.DrugTradeName = NoDbNull(drug.TradeName)
+                    View.DrugGenericName = NoDbNull(drug.GenericName)
+                    View.DrugDosageForm = NoDbNull(drug.DosageForm)
+                    View.DrugRegistrationNo = NoDbNull(drug.RegistrationNo)
+                    View.DrugPackageType = NoDbNull(drug.PackageType)
+                    View.DrugPackageSize = NoDbNull(drug.PackageSize)
+                    View.DrugRouteOfAdministration = NoDbNull(drug.RouteOfAdministration)
+                    View.DrugStrengthValue = NoDbNull(drug.StrengthValue)
+                    View.DrugUnitOfStrength = NoDbNull(drug.UnitOfStrength)
+                    View.DrugUnitOfVolume = NoDbNull(drug.UnitOfVolume)
+                    View.DrugVolume = NoDbNull(drug.Volume)
+                    View.DrugGTin = NoDbNull(drug.GTin)
+                Else
+                    View.DrugIdNo = Nothing
+                    View.DrugTradeName = Nothing
+                    View.DrugGenericName = Nothing
+                    View.DrugDosageForm = Nothing
+                    View.DrugRegistrationNo = Nothing
+                    View.DrugPackageType = Nothing
+                    View.DrugPackageSize = Nothing
+                    View.DrugRouteOfAdministration = Nothing
+                    View.DrugStrengthValue = Nothing
+                    View.DrugUnitOfStrength = Nothing
+                    View.DrugUnitOfVolume = Nothing
+                    View.DrugVolume = Nothing
+                    View.DrugGTin = Nothing
+                End If
+            End If
         End Sub
 
     End Class

@@ -194,14 +194,14 @@ Namespace PresentationLayer.Views.Forms
 
         Private _userID As String
 
-        Public Property UserID As String Implements IItemDetailsView.UserId
-            Get
-                Return GlobalVariables.UserName
-            End Get
-            Set(value As String)
-                _category = value
-            End Set
-        End Property
+        'Public Property UserID As String Implements IItemDetailsView.UserId
+        '    Get
+        '        Return GlobalVariables.UserName
+        '    End Get
+        '    Set(value As String)
+        '        _category = value
+        '    End Set
+        'End Property
 
         Public Property UnitOfStrength As String Implements IItemDetailsView.UnitOfStrength
             Get
