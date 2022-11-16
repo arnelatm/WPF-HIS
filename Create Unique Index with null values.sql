@@ -1,3 +1,7 @@
 ﻿CREATE UNIQUE NONCLUSTERED INDEX idx_yourcolumn_notnull
 ON YourTable(yourcolumn)
 WHERE yourcolumn IS NOT NULL;
+
+CREATE UNIQUE NONCLUSTERED INDEX GTin
+ON DrugList(GTin)
+WHERE GTin IS NOT NULL;

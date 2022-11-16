@@ -1390,6 +1390,70 @@ Public Module GlobalFunctions
         settings = New PrinterSettings()
         settings.PrinterName = printerName
         Return settings.DefaultPageSettings
+
     End Function
+
+    Public Sub ProcessQrCode(cQrCodeText As String, ByRef gTin As String, ByRef batchNo As String, ByRef expiry As String, ByRef serializationNo As String, ByRef manufacture As String)
+        Dim dataLength = Len(cQrCodeText)
+        Dim i As Int16 = 0
+        Dim ai As String = Mid(cQrCodeText, 1, 2)
+        Dim lastPosition As Int16 = 2
+        gTin = Nothing
+        serializationNo = Nothing
+        batchNo = Nothing
+        expiry = Nothing
+        manufacture = Nothing
+        While lastPosition < dataLength
+            Select Case ai
+                Case "01" 'GTIN
+                    gTin = Mid(cQrCodeText, lastPosition + 1, 14)
+                    lastPosition += 14
+                Case "17" 'Expiry Date
+                    expiry = Mid(cQrCodeText, lastPosition + 1, 6)
+                    If expiry.Right(2) = "00" Then
+                        expiry = Mid(expiry, 1, 4) + "01"
+                    End If
+                    lastPosition += 6
+                Case "11" 'manufacture date
+                    manufacture = Mid(cQrCodeText, lastPosition + 1, 6)
+                    lastPosition += 6
+                Case "10" ' Batch Number
+                    For i = lastPosition + 1 To dataLength
+                        If Mid(cQrCodeText, i, 4) = "<GS>" Or Mid(cQrCodeText, i, 1) = ChrW(13) Or i >= dataLength Then ' separator
+                            If i >= dataLength Then
+                                batchNo = Mid(cQrCodeText, lastPosition + 1)
+                            Else
+                                batchNo = Mid(cQrCodeText, lastPosition + 1, i - lastPosition - 1)
+                            End If
+                            lastPosition = i + 3
+                            Exit For
+                        End If
+                    Next
+                    'MessageBox.Show("Batch No = " + batchNo)
+                Case "21" ' Serialization No.
+                    For i = lastPosition + 1 To dataLength
+                        If Mid(cQrCodeText, i, 4) = "<GS>" Or Mid(cQrCodeText, i, 1) = ChrW(13) Or i >= dataLength Then
+                            If i >= dataLength Then
+                                serializationNo = Mid(cQrCodeText, lastPosition + 1)
+                            Else
+                                serializationNo = Mid(cQrCodeText, lastPosition + 1, i - lastPosition - 1)
+                            End If
+                            lastPosition = i + 3
+                            Exit For
+                        End If
+                    Next
+                    'MessageBox.Show("Serialization No = " + serializationNo)
+            End Select
+            If lastPosition >= dataLength Then
+                Exit While
+            Else
+                ai = Mid(cQrCodeText, lastPosition + 1, 2)
+                If ai = vbLf Or ai = vbCrLf Or ai = vbLf & vbCr Then
+                    Exit While
+                End If
+                lastPosition += 2
+            End If
+        End While
+    End Sub
 
 End Module
