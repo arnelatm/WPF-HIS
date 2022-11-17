@@ -22,7 +22,7 @@ Namespace PresentationLayer.Views.Interfaces
 
         Event GetDataTable(ByRef drugListDataTable As DataTable)
 
-        Event DgvDoubleClicked(itemIdNo As Int32)
+        Event UpdateDrugDisplay(itemIdNo As Int32)
 
         'Event GTinMatcherValueChanged(sender As Object, gTinIdNo As Int32)
 
