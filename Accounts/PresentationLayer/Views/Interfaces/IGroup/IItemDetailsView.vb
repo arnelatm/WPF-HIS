@@ -18,6 +18,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Pack3 As Int16
         Property PackageSize As Double?
         Property PackageType As String
+        Property Price_Cash As Decimal
         Property RegistrationNo As String
         Property StrengthValue As String
         Property UnitOfStrength As String

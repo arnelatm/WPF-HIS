@@ -104,6 +104,8 @@
             Me.DataGridViewDrugs = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.lblSearcher = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblPrice_Cash = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPrice_Cash = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout1.SuspendLayout()
@@ -243,6 +245,8 @@
             Me.CFlowLayout1.Controls.Add(Me.TxtIdNo)
             Me.CFlowLayout1.Controls.Add(Me.lblCode)
             Me.CFlowLayout1.Controls.Add(Me.TxtItemDetailsCode)
+            Me.CFlowLayout1.Controls.Add(Me.lblPrice_Cash)
+            Me.CFlowLayout1.Controls.Add(Me.txtPrice_Cash)
             Me.CFlowLayout1.Controls.Add(Me.lblPacking)
             Me.CFlowLayout1.Controls.Add(Me.txtPack1)
             Me.CFlowLayout1.Controls.Add(Me.txtpack2)
@@ -280,13 +284,14 @@
             '
             'lblCode
             '
+            Me.lblCode.AutoSize = True
             Me.lblCode.DisplayOnly = True
             Me.lblCode.EditingMode = False
             Me.lblCode.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.lblCode.Location = New System.Drawing.Point(194, 1)
             Me.lblCode.Margin = New System.Windows.Forms.Padding(1)
             Me.lblCode.Name = "lblCode"
-            Me.lblCode.Size = New System.Drawing.Size(31, 23)
+            Me.lblCode.Size = New System.Drawing.Size(31, 16)
             Me.lblCode.TabIndex = 39
             Me.lblCode.Text = "Code"
             Me.lblCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -307,7 +312,6 @@
             Me.TxtItemDetailsCode.FieldName = "Item_Code"
             Me.TxtItemDetailsCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.TxtItemDetailsCode.FindEnabled = True
-            Me.CFlowLayout1.SetFlowBreak(Me.TxtItemDetailsCode, True)
             Me.TxtItemDetailsCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtItemDetailsCode.ForeColor = System.Drawing.Color.Black
             Me.TxtItemDetailsCode.LinkedLabel = Nothing
@@ -1015,7 +1019,7 @@
             Me.CLabel2.DisplayOnly = True
             Me.CLabel2.EditingMode = False
             Me.CLabel2.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CLabel2.Location = New System.Drawing.Point(1, 357)
+            Me.CLabel2.Location = New System.Drawing.Point(1, 356)
             Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel2.Name = "CLabel2"
             Me.CLabel2.Size = New System.Drawing.Size(103, 23)
@@ -1796,6 +1800,49 @@
             Me.lblSearcher.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblSearcher.Translatable = True
             '
+            'lblPrice_Cash
+            '
+            Me.lblPrice_Cash.AutoSize = True
+            Me.lblPrice_Cash.DisplayOnly = True
+            Me.lblPrice_Cash.EditingMode = False
+            Me.lblPrice_Cash.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblPrice_Cash.Location = New System.Drawing.Point(303, 1)
+            Me.lblPrice_Cash.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPrice_Cash.Name = "lblPrice_Cash"
+            Me.lblPrice_Cash.Size = New System.Drawing.Size(30, 16)
+            Me.lblPrice_Cash.TabIndex = 77
+            Me.lblPrice_Cash.Text = "Price"
+            Me.lblPrice_Cash.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPrice_Cash.Translatable = True
+            '
+            'txtPrice_Cash
+            '
+            Me.txtPrice_Cash.BackColor = System.Drawing.SystemColors.ControlLight
+            Me.txtPrice_Cash.BegFindValue = Nothing
+            Me.txtPrice_Cash.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtPrice_Cash.ComputedValue = False
+            Me.txtPrice_Cash.CustomFormat = Nothing
+            Me.txtPrice_Cash.DataBoundControl = True
+            Me.txtPrice_Cash.EditingMode = True
+            Me.txtPrice_Cash.EndFindValue = Nothing
+            Me.txtPrice_Cash.FieldDescription = Nothing
+            Me.txtPrice_Cash.FieldName = Nothing
+            Me.txtPrice_Cash.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtPrice_Cash.FindEnabled = False
+            Me.CFlowLayout1.SetFlowBreak(Me.txtPrice_Cash, True)
+            Me.txtPrice_Cash.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtPrice_Cash.LinkedLabel = Nothing
+            Me.txtPrice_Cash.Location = New System.Drawing.Point(335, 1)
+            Me.txtPrice_Cash.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtPrice_Cash.MaximumValue = Nothing
+            Me.txtPrice_Cash.MinimumValue = Nothing
+            Me.txtPrice_Cash.Name = "txtPrice_Cash"
+            Me.txtPrice_Cash.OldValue = Nothing
+            Me.txtPrice_Cash.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtPrice_Cash.Size = New System.Drawing.Size(100, 23)
+            Me.txtPrice_Cash.TabIndex = 78
+            Me.txtPrice_Cash.Translatable = False
+            '
             'GTinMatcherEntry
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1910,5 +1957,7 @@
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblSearcher As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents bsDrugList As BindingSource
+        Friend WithEvents lblPrice_Cash As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents txtPrice_Cash As Libraries.CBaseControlsLibrary.CTextBox
     End Class
 End Namespace

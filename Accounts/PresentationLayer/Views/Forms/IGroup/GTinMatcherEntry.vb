@@ -279,9 +279,16 @@ Namespace PresentationLayer.Views.Forms
             Set(value As String)
                 txtGTIN.Text = value
                 RaiseEvent GTinValueChanged(DataGridViewDrugs, value)
-
+                SelectRecordOnGrid(value)
             End Set
         End Property
+
+
+        Private Sub SelectRecordOnGrid(gTinValue As String)
+            If gTinValue IsNot Nothing Then
+                DataGridViewDrugs.SearchGrid(gTinValue, "GTin")
+            End If
+        End Sub
 
         Public Property PrescriptionDrug As Boolean Implements IItemDetailsView.PrescriptionDrug
 
@@ -422,6 +429,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property Price_Cash As Decimal Implements IItemDetailsView.Price_Cash
+            Get
+                Return txtPrice_Cash.Text
+            End Get
+            Set
+                txtPrice_Cash.Text = Value
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -455,6 +471,16 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub SetDisplayOnly(value As Boolean)
+            cboDosageForm.DisplayOnly = value
+            txtGenericName.DisplayOnly = value
+            txtPackageSize.DisplayOnly = value
+            cboPackageType.DisplayOnly = value
+            txtRegistrationNo.DisplayOnly = value
+            cboRouteOfAdministration.DisplayOnly = value
+            txtStrengthValue.DisplayOnly = value
+            cboUnitOfStrength.DisplayOnly = value
+            cboUnitOfVolume.DisplayOnly = value
+            txtVolume.DisplayOnly = value
             cboDosageForm.DisplayOnly = value
             txtGenericName.DisplayOnly = value
             txtPackageSize.DisplayOnly = value

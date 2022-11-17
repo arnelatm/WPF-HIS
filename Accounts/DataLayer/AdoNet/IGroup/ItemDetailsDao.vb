@@ -26,6 +26,7 @@ Namespace DataLayer.AdoNet
                                       "PackageSize," &
                                       "PackageType," &
                                       "Primary_Key," &
+                                      "Price_Cash," &
                                       "RegistrationNo," &
                                       "RouteOfAdministration," &
                                       "StrengthValue," &
@@ -62,35 +63,30 @@ Namespace DataLayer.AdoNet
         Public Function UpdateRecord(ByRef ItemDetails As ItemDetails) As Integer Implements IDao(Of ItemDetails).UpdateRecord
             Dim sql As String =
                     " UPDATE [ItemDetails] SET " &
-                    " BranchID = @BranchID," &
                     " GTin = @GTin," &
-                    " Item_Code = @ItemDetailsCode," &
                     " ItemGroup = @ItemGroup," &
                     " ItemNameEnglish = @ItemDetailsName," &
-                    " Pack1 = @Pack1," &
-                    " Pack2 = @Pack2," &
-                    " Pack3 = @Pack3," &
                     " WHERE Primary_Key = @IdNo"
             Dim retval As Integer
             retval = _db.Update(sql, Take(ItemDetails))
-            If retval > 0 And Strings.Left(ItemDetails.RegistrationNo, 1) = "X" Then
-                Dim sql1 As String = "UPDATE [DrugList] SET " &
-                    " [Dosage Form] = @DosageForm," &
-                    " [Generic Name] = @GenericName," &
-                    " [Package Size] = @PackageSize," &
-                    " [Package Type] = @PackageType," &
-                    " [Route Of Administration] = @RouteOfAdministration," &
-                    " [Strength Value] = @StrengthValue," &
-                    " [Trade Name] = @ItemDetailsName," &
-                    " [Unit Of Strength] = @UnitOfStrength," &
-                    " [Unit Of Volume] = @UnitOfVolume," &
-                    " [Volume] = @Volume" &
-                    " WHERE RegistrationNo = @RegistrationNo"
-                _db.Update(sql1, TakeDrug(ItemDetails))
-                Dim sql3 = "UPDATE ItemRegistration SET " &
-                     " Strength = @Strength"
-                _db.Update(sql3, TakeRegistration(ItemDetails))
-            End If
+            'If retval > 0 And Strings.Left(ItemDetails.RegistrationNo, 1) = "X" Then
+            '    Dim sql1 As String = "UPDATE [DrugList] SET " &
+            '        " [Dosage Form] = @DosageForm," &
+            '        " [Generic Name] = @GenericName," &
+            '        " [Package Size] = @PackageSize," &
+            '        " [Package Type] = @PackageType," &
+            '        " [Route Of Administration] = @RouteOfAdministration," &
+            '        " [Strength Value] = @StrengthValue," &
+            '        " [Trade Name] = @ItemDetailsName," &
+            '        " [Unit Of Strength] = @UnitOfStrength," &
+            '        " [Unit Of Volume] = @UnitOfVolume," &
+            '        " [Volume] = @Volume" &
+            '        " WHERE RegistrationNo = @RegistrationNo"
+            '    _db.Update(sql1, TakeDrug(ItemDetails))
+            '    Dim sql3 = "UPDATE ItemRegistration SET " &
+            '         " Strength = @Strength"
+            '    _db.Update(sql3, TakeRegistration(ItemDetails))
+            'End If
             Return retval
         End Function
 
@@ -100,16 +96,16 @@ Namespace DataLayer.AdoNet
                     " VALUES (@BranchID,@GTIN,@ItemDetailsCode,@ItemGroup,@ItemDetailsName,@Pack1,@Pack2,@Pack3)"
             Dim retval As Integer
             retval = _db.Insert(sql, Take(ItemDetails))
-            If retval > 0 Then
-                Dim sql2 = " INSERT INTO DrugList " &
-                    " ([RegistrationNo],[Generic Name],[Trade Name],[Route Of Administration],[Strength Value],[Unit Of Strength],[Dosage Form],[Volume],[Unit of Volume],[Package Size],[Package Type])" &
-                    " VALUES (@RegistrationNo,@GenericName,@TradeName,@RouteOfAdministration,@StrengthValue,@UnitOfStrength,@DosageForm,@Volume,@UnitOfVolume,@PackageSize,@PackageType)"
-                _db.InsertNoId(sql2, TakeDrug(ItemDetails))
-                Dim sql3 = " INSERT INTO ItemRegistration " &
-                    " ([Item_Code],[RegistrationNo],[Strength])" &
-                    " VALUES (@ItemDetailsCode,@RegistrationNo,@Strength)"
-                _db.InsertNoId(sql3, TakeRegistration(ItemDetails))
-            End If
+            'If retval > 0 Then
+            '    Dim sql2 = " INSERT INTO DrugList " &
+            '        " ([RegistrationNo],[Generic Name],[Trade Name],[Route Of Administration],[Strength Value],[Unit Of Strength],[Dosage Form],[Volume],[Unit of Volume],[Package Size],[Package Type])" &
+            '        " VALUES (@RegistrationNo,@GenericName,@TradeName,@RouteOfAdministration,@StrengthValue,@UnitOfStrength,@DosageForm,@Volume,@UnitOfVolume,@PackageSize,@PackageType)"
+            '    _db.InsertNoId(sql2, TakeDrug(ItemDetails))
+            '    Dim sql3 = " INSERT INTO ItemRegistration " &
+            '        " ([Item_Code],[RegistrationNo],[Strength])" &
+            '        " VALUES (@ItemDetailsCode,@RegistrationNo,@Strength)"
+            '    _db.InsertNoId(sql3, TakeRegistration(ItemDetails))
+            'End If
             Return retval
         End Function
 
@@ -129,6 +125,7 @@ Namespace DataLayer.AdoNet
             .Pack3 = Extensions.AsInt(Of Int16)(reader("Pack3")),
             .PackageSize = Extensions.AsNullable(Of Decimal?)(reader("PackageSize")),
             .PackageType = Extensions.AsString(reader("PackageType")),
+            .Price_Cash = Extensions.AsDecimal(reader("Price_Cash")),
             .RegistrationNo = Extensions.AsString(reader("RegistrationNo")),
             .RouteOfAdministration = Extensions.AsString(reader("RouteOfAdministration")),
             .StrengthValue = Extensions.AsString(reader("StrengthValue")),
@@ -147,36 +144,37 @@ Namespace DataLayer.AdoNet
                             "IdNo", ItemDetails.IdNo,
                             "Pack1", ItemDetails.Pack1,
                             "Pack2", ItemDetails.Pack2,
-                            "Pack3", ItemDetails.Pack3
+                            "Pack3", ItemDetails.Pack3,
+                            "Price_Cash", ItemDetails.Price_Cash
                             }
         End Function
 
-        Private Function TakeDrug(ItemDetails As ItemDetails) As Object()
-            Return New Object() {
-                                 "DosageForm", ItemDetails.DosageForm,
-                                 "GenericName", ItemDetails.GenericName,
-                                 "GTin", ItemDetails.GTin,
-                                 "TradeName", ItemDetails.ItemDetailsName,
-                                 "PackageSize", ItemDetails.PackageSize,
-                                 "PackageType", ItemDetails.PackageType,
-                                 "RegistrationNo", IIf(ItemDetails.RegistrationNo Is Nothing Or ItemDetails.RegistrationNo = "", "X-" + ItemDetails.ItemDetailsCode, ItemDetails.RegistrationNo),
-                                 "RouteOfAdministration", ItemDetails.RouteOfAdministration,
-                                 "StrengthValue", ItemDetails.StrengthValue,
-                                 "UnitOfStrength", ItemDetails.UnitOfStrength,
-                                 "UnitOfVolume", ItemDetails.UnitOfVolume,
-                                 "Volume", ItemDetails.Volume
-                                 }
-        End Function
+        'Private Function TakeDrug(ItemDetails As ItemDetails) As Object()
+        '    Return New Object() {
+        '                         "DosageForm", ItemDetails.DosageForm,
+        '                         "GenericName", ItemDetails.GenericName,
+        '                         "GTin", ItemDetails.GTin,
+        '                         "TradeName", ItemDetails.ItemDetailsName,
+        '                         "PackageSize", ItemDetails.PackageSize,
+        '                         "PackageType", ItemDetails.PackageType,
+        '                         "RegistrationNo", IIf(ItemDetails.RegistrationNo Is Nothing Or ItemDetails.RegistrationNo = "", "X-" + ItemDetails.ItemDetailsCode, ItemDetails.RegistrationNo),
+        '                         "RouteOfAdministration", ItemDetails.RouteOfAdministration,
+        '                         "StrengthValue", ItemDetails.StrengthValue,
+        '                         "UnitOfStrength", ItemDetails.UnitOfStrength,
+        '                         "UnitOfVolume", ItemDetails.UnitOfVolume,
+        '                         "Volume", ItemDetails.Volume
+        '                         }
+        'End Function
 
-        Private Function TakeRegistration(ItemDetails As ItemDetails) As Object()
-            Dim number As Decimal = 0
-            Dim sStrength As String = Split(ItemDetails.StrengthValue, ",")(0)
-            Decimal.TryParse(sStrength, number)
-            Return New Object() {"RegistrationNo", IIf(ItemDetails.RegistrationNo Is Nothing Or ItemDetails.RegistrationNo = "", "X-" + ItemDetails.ItemDetailsCode, ItemDetails.RegistrationNo),
-                                 "ItemDetailsCode", ItemDetails.ItemDetailsCode,
-                                 "Strength", number
-                                 }
-        End Function
+        'Private Function TakeRegistration(ItemDetails As ItemDetails) As Object()
+        '    Dim number As Decimal = 0
+        '    Dim sStrength As String = Split(ItemDetails.StrengthValue, ",")(0)
+        '    Decimal.TryParse(sStrength, number)
+        '    Return New Object() {"RegistrationNo", IIf(ItemDetails.RegistrationNo Is Nothing Or ItemDetails.RegistrationNo = "", "X-" + ItemDetails.ItemDetailsCode, ItemDetails.RegistrationNo),
+        '                         "ItemDetailsCode", ItemDetails.ItemDetailsCode,
+        '                         "Strength", number
+        '                         }
+        'End Function
 
         Public Function GenerateCode(idNo As Integer) As String Implements IDaoAutoCode.GenerateCode
             Return GetNextCode("ItemDetails", idNo)
