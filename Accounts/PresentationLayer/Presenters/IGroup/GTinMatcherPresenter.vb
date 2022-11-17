@@ -20,7 +20,17 @@ Namespace PresentationLayer.Presenters
             AddHandler View.FinderValueChanged, AddressOf OnFinderValueChanged
             AddHandler View.GTinValueChanged, AddressOf OnGTinValueChanged
             AddHandler View.GetDataTable, AddressOf OnGetDataTable
+            AddHandler View.DgvDoubleClicked, AddressOf OnDgvDoubleClicked
         End Sub
+
+        Private Sub OnDgvDoubleClicked(gTinIdNo As Integer)
+            Dim drug As Object = MakeDrug(gTinIdNo)
+            DisplayDrug(drug)
+        End Sub
+
+        Private Function MakeDrug(gTinIdNo As Integer) As Object
+            Return Service.GetFieldsWithIdNo(gTinIdNo, "DrugList", "IdNo,GTin,[Trade Name],[Dosage Form],[Generic Name],[Package Size],[Package Type],[RegistrationNo],[Route Of Administration],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume", "IdNo")
+        End Function
 
         Protected Overrides Sub CreateDataSources()
             View.DrugList = Service.GetRecords("DrugList", "[Trade Name]")
@@ -42,32 +52,89 @@ Namespace PresentationLayer.Presenters
             GoFirstRecord()
         End Sub
 
-        Public Sub OnFinderValueChanged(idNo As Int16)
+        Private Sub OnFinderValueChanged(idNo As Int16)
             If idNo <> 0 Then
                 RecordPositionNumber = GetSortedRecordPosition(idNo)
             End If
         End Sub
 
-        Public Sub OnGTinValueChanged(idNo As Int16)
+        Private Sub OnGTinValueChanged(idNo As Int16)
             If idNo <> 0 Then
-                If View.GTIN IsNot Nothing Then
-                    Dim gTinIdNo As Integer = Service.GetField("GTin", "DrugList")
-                    Dim obj As Object = Service.GetFieldsWithIdNo(idNo, {"DosageForm", "GenericName", "PackageSize", "PackageType", "RegistrationNo", "RouteOfAdministration", "StrengthValue", "UnitOfStrength", "UnitOfVolume", "Volume"})
-                    View.DosageForm = obj.DosageForm
-                    View.GenericName = obj.GenericName
-                    View.PackageSize = obj.PackageSize
-                    View.PackageType = obj.PackageType
-                    View.RegistrationNo = obj.RegistrationNo
-                    View.RouteOfAdministration = obj.RouteOfAdministration
-                    View.StrengthValue = obj.StrengthValue
-                    View.UnitOfStrength = obj.UnitOfStrength
-                    View.UnitOfVolume = obj.UnitOfVolume
-                    View.Volume = obj.Volume
+                Dim gTinIdNo As Integer = Service.GetField(Of Int32, Int32)(idNo, "GTin", "DrugList", "IdNo")
+                Dim drug As Object = MakeDrug(gTinIdNo)
+                If drug Is Nothing Then
+                    ClearItemDrugDisplay()
+                    ClearDrugDisplay()
+                Else
+                    DisplayDrug(drug)
+                    View.DosageForm = NoDbNull(drug.DosageForm)
+                    View.GenericName = NoDbNull(drug.GenericName)
+                    View.PackageSize = NoDbNull(drug.PackageSize)
+                    View.PackageType = NoDbNull(drug.PackageType)
+                    View.RegistrationNo = NoDbNull(drug.RegistrationNo)
+                    View.RouteOfAdministration = NoDbNull(drug.RouteOfAdministration)
+                    View.StrengthValue = NoDbNull(drug.StrengthValue)
+                    View.UnitOfStrength = NoDbNull(drug.UnitOfStrength)
+                    View.UnitOfVolume = NoDbNull(drug.UnitOfVolume)
+                    View.Volume = NoDbNull(drug.Volume)
                 End If
+            Else
+                ClearItemDrugDisplay()
+                ClearDrugDisplay()
             End If
         End Sub
 
-        Public Sub OnGetDataTable(ByRef drugListDataTable As DataTable)
+        Private Sub ClearItemDrugDisplay()
+            View.DosageForm = Nothing
+            View.GenericName = Nothing
+            View.PackageSize = Nothing
+            View.PackageType = Nothing
+            View.RegistrationNo = Nothing
+            View.RouteOfAdministration = Nothing
+            View.StrengthValue = Nothing
+            View.UnitOfStrength = Nothing
+            View.UnitOfVolume = Nothing
+            View.Volume = Nothing
+        End Sub
+
+        Private Sub DisplayDrug(drug As Object)
+            If drug Is Nothing Then
+                ClearDrugDisplay()
+            Else
+                View.DrugIdNo = NoDbNull(drug.IdNo)
+                View.DrugGTin = NoDbNull(drug.GTin)
+                View.DrugTradeName = NoDbNull(drug.TradeName)
+                View.DrugGenericName = NoDbNull(drug.GenericName)
+                View.DrugDosageForm = NoDbNull(drug.DosageForm)
+                View.DrugGenericName = NoDbNull(drug.GenericName)
+                View.DrugPackageSize = NoDbNull(drug.PackageSize)
+                View.DrugPackageType = NoDbNull(drug.PackageType)
+                View.DrugRegistrationNo = NoDbNull(drug.RegistrationNo)
+                View.DrugRouteOfAdministration = NoDbNull(drug.RouteOfAdministration)
+                View.DrugStrengthValue = NoDbNull(drug.StrengthValue)
+                View.DrugUnitOfStrength = NoDbNull(drug.UnitOfStrength)
+                View.DrugUnitOfVolume = NoDbNull(drug.UnitOfVolume)
+                View.DrugVolume = NoDbNull(drug.Volume)
+            End If
+        End Sub
+
+        Private Sub ClearDrugDisplay()
+            View.DrugIdNo = Nothing
+            View.DrugTradeName = Nothing
+            View.DrugGenericName = Nothing
+            View.DrugDosageForm = Nothing
+            View.DrugRegistrationNo = Nothing
+            View.DrugPackageType = Nothing
+            View.DrugPackageSize = Nothing
+            View.DrugRouteOfAdministration = Nothing
+            View.DrugStrengthValue = Nothing
+            View.DrugUnitOfStrength = Nothing
+            View.DrugUnitOfVolume = Nothing
+            View.DrugVolume = Nothing
+            View.DrugGTin = Nothing
+        End Sub
+
+        Private Sub OnGetDataTable(ByRef drugListDataTable As DataTable)
             drugListDataTable = Service.GetDataTable("DrugList", "[Trade Name]")
         End Sub
 
@@ -86,36 +153,24 @@ Namespace PresentationLayer.Presenters
         Public Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
             If View.GTIN IsNot Nothing Or View.GTIN <> "" Then
                 Dim idNo As Int32 = Service.GetIdNoWithName(Of Int32)("DrugList", View.GTIN, "GTin")
-                Dim drug As Object = Service.GetFieldsWithIdNo(idNo, "DrugList", "[IdNo],[Trade Name],[Generic Name],[GTIN],[Dosage Form],[Package Size],[Package Type],RegistrationNo,[Route Of Administration],[Strength Value],[Unit Of Strength],[Volume],[Unit Of Volume]", "IdNo")
-                If drug IsNot Nothing Then
-                    View.DrugIdNo = NoDbNull(drug.IdNo)
-                    View.DrugTradeName = NoDbNull(drug.TradeName)
-                    View.DrugGenericName = NoDbNull(drug.GenericName)
-                    View.DrugDosageForm = NoDbNull(drug.DosageForm)
-                    View.DrugRegistrationNo = NoDbNull(drug.RegistrationNo)
-                    View.DrugPackageType = NoDbNull(drug.PackageType)
-                    View.DrugPackageSize = NoDbNull(drug.PackageSize)
-                    View.DrugRouteOfAdministration = NoDbNull(drug.RouteOfAdministration)
-                    View.DrugStrengthValue = NoDbNull(drug.StrengthValue)
-                    View.DrugUnitOfStrength = NoDbNull(drug.UnitOfStrength)
-                    View.DrugUnitOfVolume = NoDbNull(drug.UnitOfVolume)
-                    View.DrugVolume = NoDbNull(drug.Volume)
-                    View.DrugGTin = NoDbNull(drug.GTin)
-                Else
-                    View.DrugIdNo = Nothing
-                    View.DrugTradeName = Nothing
-                    View.DrugGenericName = Nothing
-                    View.DrugDosageForm = Nothing
-                    View.DrugRegistrationNo = Nothing
-                    View.DrugPackageType = Nothing
-                    View.DrugPackageSize = Nothing
-                    View.DrugRouteOfAdministration = Nothing
-                    View.DrugStrengthValue = Nothing
-                    View.DrugUnitOfStrength = Nothing
-                    View.DrugUnitOfVolume = Nothing
-                    View.DrugVolume = Nothing
-                    View.DrugGTin = Nothing
-                End If
+                Dim drug As Object = Service.GetFieldsWithIdNo(idNo, "DrugList", "[IdNo],[Trade Name],[Generic Name],[GTin],[Dosage Form],[Package Size],[Package Type],RegistrationNo,[Route Of Administration],[Strength Value],[Unit Of Strength],[Volume],[Unit Of Volume]", "IdNo")
+                'If drug IsNot Nothing Then
+                DisplayDrug(drug)
+                'Else
+                '    View.DrugIdNo = Nothing
+                '    View.DrugTradeName = Nothing
+                '    View.DrugGenericName = Nothing
+                '    View.DrugDosageForm = Nothing
+                '    View.DrugRegistrationNo = Nothing
+                '    View.DrugPackageType = Nothing
+                '    View.DrugPackageSize = Nothing
+                '    View.DrugRouteOfAdministration = Nothing
+                '    View.DrugStrengthValue = Nothing
+                '    View.DrugUnitOfStrength = Nothing
+                '    View.DrugUnitOfVolume = Nothing
+                '    View.DrugVolume = Nothing
+                '    View.DrugGTin = Nothing
+                'End If
             End If
         End Sub
 

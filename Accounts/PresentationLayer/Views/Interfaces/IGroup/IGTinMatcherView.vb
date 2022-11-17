@@ -20,7 +20,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property DrugIdNo As Integer
         Property DrugList As Object
         Event GetDataTable(ByRef drugListDataTable As DataTable)
-
+        Event DgvDoubleClicked(itemIdNo As Short)
     End Interface
 
 End Namespace
