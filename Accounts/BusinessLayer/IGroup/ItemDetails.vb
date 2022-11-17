@@ -23,13 +23,10 @@ Namespace BusinessLayer
         End Sub
 
         Public Property BranchID As String
-        Public Property Category As String
-        Public Property Created_By_Branch
         Public Property DosageForm As String
         Public Property GenericName As String
-        Public Property GTIN As String
+        Public Property GTin As String
         Public Property IdNo As Int32
-        Public Property Item_status As String
         Public Property ItemDetailsCode As String
         Public Property ItemDetailsName As String
         Public Property ItemGroup As String

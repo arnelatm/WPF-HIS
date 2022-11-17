@@ -43,7 +43,6 @@ Public Class Form1
         'Dim myByte() As Byte = data
         Dim i As Int16 = 0
         Dim cGTIN = Mid(fileReader, 3, 14)
-        'MessageBox.Show("GTIN = " + GTIN)
         Dim ai As String = Mid(fileReader, 17, 2)
         Dim lastPosition As Int16 = 16
         Dim cSerializationNo = ""

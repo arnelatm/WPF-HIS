@@ -1015,7 +1015,7 @@
             Me.CLabel2.DisplayOnly = True
             Me.CLabel2.EditingMode = False
             Me.CLabel2.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CLabel2.Location = New System.Drawing.Point(1, 356)
+            Me.CLabel2.Location = New System.Drawing.Point(1, 357)
             Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel2.Name = "CLabel2"
             Me.CLabel2.Size = New System.Drawing.Size(103, 23)

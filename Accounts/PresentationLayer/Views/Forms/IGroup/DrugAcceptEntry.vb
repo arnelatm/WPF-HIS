@@ -52,7 +52,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property GTIN As String Implements IDrugAcceptView.GTin
+        Public Property GTin As String Implements IDrugAcceptView.GTin
             Get
                 Return txtGTIN.Text
             End Get

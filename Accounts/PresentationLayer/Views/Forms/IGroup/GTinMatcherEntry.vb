@@ -21,7 +21,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event DgvDoubleClick(gTinIdNo As Int32) Implements IGTinMatcherView.DgvDoubleClicked
 
-        Public Event GTinValueChanged(gTinValue As String) Implements IItemDetailsView.GTinValueChanged
+        Public Event GTinValueChanged(sender As DataGridView, gTinValue As String) Implements IItemDetailsView.GTinValueChanged
 
         Public Sub New()
 
@@ -175,56 +175,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Private _created_By_Branch As String
-
-        Public Property Created_By_Branch As String Implements IItemDetailsView.Created_By_Branch
-            Get
-                Return "01"
-            End Get
-            Set(value As String)
-                _category = value
-            End Set
-        End Property
-
-        Private _category As String
-
-        Public Property Category As String Implements IItemDetailsView.Category
-            Get
-                Return "XX"
-            End Get
-            Set(value As String)
-                _category = value
-            End Set
-        End Property
-
         Public Property RegistrationNo As String Implements IItemDetailsView.RegistrationNo
             Get
                 Return txtRegistrationNo.Text
             End Get
             Set
                 txtRegistrationNo.Text = Value
-            End Set
-        End Property
-
-        Private _saleStrip As String
-
-        Public Property SaleStrip As String Implements IItemDetailsView.SaleStrip
-            Get
-                Return "N"
-            End Get
-            Set(value As String)
-                _category = value
-            End Set
-        End Property
-
-        Private _Item_Status As String
-
-        Public Property Item_Status As String Implements IItemDetailsView.Item_Status
-            Get
-                Return "S"
-            End Get
-            Set(value As String)
-                _category = value
             End Set
         End Property
 
@@ -316,13 +272,13 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property GTIN As String Implements IItemDetailsView.GTIN
+        Public Property GTin As String Implements IItemDetailsView.GTIN
             Get
                 Return txtGTIN.Text
             End Get
             Set(value As String)
                 txtGTIN.Text = value
-                RaiseEvent GTinValueChanged(value)
+                RaiseEvent GTinValueChanged(DataGridViewDrugs, value)
             End Set
         End Property
 

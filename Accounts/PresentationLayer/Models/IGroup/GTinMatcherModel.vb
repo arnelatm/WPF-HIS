@@ -7,8 +7,6 @@
     Public Class GTinMatcherModel
         Inherits ItemDetailsModel
 
-        Public Property DrugTradeName As String
-
     End Class
 
 End Namespace

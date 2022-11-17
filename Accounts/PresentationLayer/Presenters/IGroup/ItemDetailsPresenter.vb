@@ -47,22 +47,22 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Sub OnGTinValueChanged(idNo As Int16)
-            If idNo <> 0 Then
-                If View.GTIN IsNot Nothing Then
-                    Dim gTinIdNo As Integer = Service.GetField("GTin", "DrugList")
-                    Dim obj As Object = Service.GetFieldsWithIdNo(idNo, "DrugList", "[Dosage Form],[Generic Name],[Package Size],[Package Type],[RegistrationNo],[Route Of Administration],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume")
-                    View.DosageForm = obj.DosageForm
-                    View.GenericName = obj.GenericName
-                    View.PackageSize = obj.PackageSize
-                    View.PackageType = obj.PackageType
-                    View.RegistrationNo = obj.RegistrationNo
-                    View.RouteOfAdministration = obj.RouteOfAdministration
-                    View.StrengthValue = obj.StrengthValue
-                    View.UnitOfStrength = obj.UnitOfStrength
-                    View.UnitOfVolume = obj.UnitOfVolume
-                    View.Volume = obj.Volume
-                End If
+        Public Sub OnGTinValueChanged(sender As Object, gTinValue As String)
+            If gTinValue IsNot Nothing Or gTinValue <> "" Then
+                Dim gTinIdNo As Integer = Service.GetField("GTin", "DrugList")
+                Dim obj As Object = Service.GetFieldsWithIdNo(gTinIdNo, "DrugList", "[Dosage Form],[Generic Name],[Package Size],[Package Type],[RegistrationNo],[Route Of Administration],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume")
+                View.DosageForm = obj.DosageForm
+                View.GenericName = obj.GenericName
+                View.PackageSize = obj.PackageSize
+                View.PackageType = obj.PackageType
+                View.RegistrationNo = obj.RegistrationNo
+                View.RouteOfAdministration = obj.RouteOfAdministration
+                View.StrengthValue = obj.StrengthValue
+                View.UnitOfStrength = obj.UnitOfStrength
+                View.UnitOfVolume = obj.UnitOfVolume
+                View.Volume = obj.Volume
+            Else
+
             End If
         End Sub
 
