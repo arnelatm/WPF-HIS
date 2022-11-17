@@ -1405,7 +1405,7 @@ Public Module GlobalFunctions
         manufacture = Nothing
         While lastPosition < dataLength
             Select Case ai
-                Case "01" 'GTIN
+                Case "01" 'GTin
                     gTin = Mid(cQrCodeText, lastPosition + 1, 14)
                     lastPosition += 14
                 Case "17" 'Expiry Date

@@ -42,7 +42,7 @@ Namespace DataLayer.AdoNet
                     " BatchNo = @BatchNo, " &
                     " Expiry = @Expiry," &
                     " SerializationNo = @SerializationNo," &
-                    " Gtin = @GTin " &
+                    " GTin = @GTin " &
                     " where IdNo = @IdNo"
             Dim retVal As Integer
             retVal = _db.Update(sql, Take(drugSale))

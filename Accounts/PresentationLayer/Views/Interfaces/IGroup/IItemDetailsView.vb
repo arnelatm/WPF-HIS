@@ -6,13 +6,10 @@ Namespace PresentationLayer.Views.Interfaces
         Inherits IView
 
         Property BranchID As String
-        Property Category As String
-        Property Created_By_Branch As String
         Property DosageForm As String
         Property GenericName As String
         Property GTIN As String
         Property IdNo As Int32
-        Property Item_Status As String
         Property ItemDetailsCode As String
         Property ItemDetailsName As String
         Property ItemGroup As String
@@ -22,7 +19,6 @@ Namespace PresentationLayer.Views.Interfaces
         Property PackageSize As Double?
         Property PackageType As String
         Property RegistrationNo As String
-        Property SaleStrip As String
         Property StrengthValue As String
         Property UnitOfStrength As String
         Property UnitOfVolume As String
@@ -32,7 +28,7 @@ Namespace PresentationLayer.Views.Interfaces
 
         Event FinderValueChanged(itemIdNo As Int16)
 
-        Event GTinValueChanged(gTinValue As String)
+        Event GTinValueChanged(sender As DataGridView, gTinValue As String)
 
     End Interface
 

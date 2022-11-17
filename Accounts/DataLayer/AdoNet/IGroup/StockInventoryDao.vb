@@ -18,7 +18,7 @@ Namespace DataLayer.AdoNet
                                       "BranchId," &
                                       "CashPrice," &
                                       "Expiry," &
-                                      "GTIN," &
+                                      "GTin," &
                                       "IdNo," &
                                       "Item_Code," &
                                       "ItemNameEnglish," &
@@ -49,7 +49,7 @@ Namespace DataLayer.AdoNet
             retVal = _db.Update(sql, Take(StockInventory))
             If retVal > 0 And Not GlobalFunctions.IsEmpty(StockInventory.GTIN) Then
                 Dim sql1 As String = "UPDATE ItemDetails SET " &
-                    " GTIN = @GTIN" &
+                    " GTin = @GTin" &
                     " WHERE Item_Code = @Item_Code and BranchId = @BranchId"
                 _db.Update(sql1, TakeItem(StockInventory))
             End If
@@ -68,7 +68,7 @@ Namespace DataLayer.AdoNet
             .BranchID = AATM.DataLayer.AdoNet.Extensions.AsString(reader("BranchID")),
             .CashPrice = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("CashPrice")),
             .Expiry = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("Expiry")),
-            .GTIN = AATM.DataLayer.AdoNet.Extensions.AsString(reader("GTIN")),
+            .GTIN = AATM.DataLayer.AdoNet.Extensions.AsString(reader("GTin")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .Item_Code = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Item_Code")),
             .ItemNameEnglish = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ItemNameEnglish")),
@@ -88,7 +88,7 @@ Namespace DataLayer.AdoNet
         Private Function TakeItem(StockInventory As StockInventory) As Object()
             Return New Object() {
                                  "Item_Code", StockInventory.Item_Code,
-                                 "GTIN", StockInventory.GTIN,
+                                 "GTin", StockInventory.GTIN,
                                  "BranchId", StockInventory.BranchID
                                  }
         End Function

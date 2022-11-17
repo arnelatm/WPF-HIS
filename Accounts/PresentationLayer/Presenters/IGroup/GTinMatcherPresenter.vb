@@ -1,4 +1,5 @@
 ﻿Imports System.Dynamic
+Imports System.Net.Http.Headers
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
@@ -24,7 +25,7 @@ Namespace PresentationLayer.Presenters
             AddHandler View.GTinValueChanged, AddressOf OnGTinValueChanged
         End Sub
 
-        Private Sub OnGTinValueChanged(gTinValue As String)
+        Private Sub OnGTinValueChanged(sender As DataGridView, gTinValue As String)
             If gTinValue Is Nothing Or gTinValue = "" Then
                 ClearDrugDisplay()
                 ClearItemDrugDisplay()
@@ -32,8 +33,27 @@ Namespace PresentationLayer.Presenters
                 Dim gTinIdNo As Integer = GetGTinIdNo(gTinValue)
                 Dim drug As Object = MakeDrug(gTinIdNo)
                 DisplayDrug(drug)
+                If sender IsNot Nothing Then
+                    SearchGrid(sender, gTinIdNo, "IdNo")
+                End If
             End If
         End Sub
+
+        Private Function SearchGrid(dataGridView As DataGridView, value As Object, searchField As String, Optional returnField As String = Nothing) As Object
+            Dim retValue As Object = Nothing
+            If value IsNot Nothing Then
+                dataGridView.ClearSelection()
+                For Each row As DataGridViewRow In dataGridView.Rows
+                    If row.Cells(searchField).Value = value Then
+                        retValue = row.Cells(returnField).Value
+                        row.Selected = True
+                        dataGridView.FirstDisplayedScrollingRowIndex = row.Index
+                        Exit For
+                    End If
+                Next
+            End If
+            Return retValue
+        End Function
 
         Private Function GetGTinIdNo(ByRef gTinValue As String) As Int32
             Return Service.GetField(Of Int32, String)(gTinValue, "DrugList", "GTin", "IdNo")
@@ -171,8 +191,8 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
             If View.GTIN IsNot Nothing Or View.GTIN <> "" Then
-                Dim idNo As Int32 = Service.GetIdNoWithName(Of Int32)("DrugList", View.GTIN, "GTin")
-                Dim drug As Object = Service.GetFieldsWithIdNo(idNo, "DrugList", "[IdNo],[Trade Name],[Generic Name],[GTin],[Dosage Form],[Package Size],[Package Type],RegistrationNo,[Route Of Administration],[Strength Value],[Unit Of Strength],[Volume],[Unit Of Volume]", "IdNo")
+                Dim drugIdNo As Int32 = Service.GetField(Of Int32, String)(View.GTIN, "DrugList", "GTin", "IdNo")
+                Dim drug As Object = Service.GetFieldsWithIdNo(drugIdNo, "DrugList", "[IdNo],[Trade Name],[Generic Name],[GTin],[Dosage Form],[Package Size],[Package Type],RegistrationNo,[Route Of Administration],[Strength Value],[Unit Of Strength],[Volume],[Unit Of Volume]", "IdNo")
                 'If drug IsNot Nothing Then
                 DisplayDrug(drug)
                 'Else
