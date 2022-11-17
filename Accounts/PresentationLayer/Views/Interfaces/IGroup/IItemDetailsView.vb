@@ -32,7 +32,7 @@ Namespace PresentationLayer.Views.Interfaces
 
         Event FinderValueChanged(itemIdNo As Int16)
 
-        Event GTinValueChanged(itemIdNo As Short)
+        Event GTinValueChanged(gTinValue As String)
 
     End Interface
 
