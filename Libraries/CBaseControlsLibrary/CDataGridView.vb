@@ -981,4 +981,23 @@ Public Class CDataGridView
         End If
     End Sub
 
+    Public Function SearchGrid(value As Object, searchField As String, Optional returnField As String = Nothing) As Object
+        Dim retValue As Object = Nothing
+        If value IsNot Nothing Then
+            ClearSelection()
+            For Each row As DataGridViewRow In Rows
+                If row.Cells(searchField).Value = value Then
+                    If returnField IsNot Nothing Then
+                        retValue = row.Cells(returnField).Value
+                    End If
+                    row.Selected = True
+                    FirstDisplayedScrollingRowIndex = row.Index
+                    CurrentCell = Rows(row.Index).Cells(0)
+                    Exit For
+                End If
+            Next
+        End If
+        Return retValue
+    End Function
+
 End Class

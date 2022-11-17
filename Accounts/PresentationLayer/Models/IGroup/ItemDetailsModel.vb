@@ -20,6 +20,7 @@
         Public Property Pack3 As Int16
         Public Property PackageSize As Double?
         Public Property PackageType As String
+        Public Property Price_Cash As String
         Public Property RegistrationNo As String
         Public Property SaleStrip As String
         Public Property StrengthValue As String

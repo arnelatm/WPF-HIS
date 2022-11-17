@@ -32,30 +32,8 @@ Namespace PresentationLayer.Presenters
                 Dim gTinIdNo As Integer = GetGTinIdNo(gTinValue)
                 Dim drug As Object = MakeDrug(gTinIdNo)
                 DisplayDrug(drug)
-                If sender IsNot Nothing And gTinIdNo <> 0 Then
-                    SearchGrid(sender, gTinIdNo, "IdNo")
-                End If
             End If
         End Sub
-
-        Private Function SearchGrid(dataGridView As DataGridView, value As Object, searchField As String, Optional returnField As String = Nothing) As Object
-            Dim retValue As Object = Nothing
-            If value IsNot Nothing Then
-                dataGridView.ClearSelection()
-                For Each row As DataGridViewRow In dataGridView.Rows
-                    If row.Cells(searchField).Value = value Then
-                        If returnField IsNot Nothing Then
-                            retValue = row.Cells(returnField).Value
-                        End If
-                        row.Selected = True
-                        dataGridView.FirstDisplayedScrollingRowIndex = row.Index
-                        dataGridView.CurrentCell = dataGridView.Rows(row.Index).Cells(0)
-                        Exit For
-                    End If
-                Next
-            End If
-            Return retValue
-        End Function
 
         Private Function GetGTinIdNo(ByRef gTinValue As String) As Int32
             Return Service.GetField(Of Int32, String)(gTinValue, "DrugList", "GTin", "IdNo")
