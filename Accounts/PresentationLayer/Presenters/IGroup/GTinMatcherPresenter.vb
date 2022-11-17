@@ -19,9 +19,8 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "ItemNameEnglish"
             WithTreeView = False
             AddHandler View.FinderValueChanged, AddressOf OnFinderValueChanged
-            'AddHandler View.GTinMatcherValueChanged, AddressOf OnGTinMatcherValueChanged
             AddHandler View.GetDataTable, AddressOf OnGetDataTable
-            AddHandler View.DgvDoubleClicked, AddressOf OnDgvDoubleClicked
+            AddHandler View.UpdateDrugDisplay, AddressOf OnUpdateDrugDisplay
             AddHandler View.GTinValueChanged, AddressOf OnGTinValueChanged
         End Sub
 
@@ -33,7 +32,7 @@ Namespace PresentationLayer.Presenters
                 Dim gTinIdNo As Integer = GetGTinIdNo(gTinValue)
                 Dim drug As Object = MakeDrug(gTinIdNo)
                 DisplayDrug(drug)
-                If sender IsNot Nothing Then
+                If sender IsNot Nothing And gTinIdNo <> 0 Then
                     SearchGrid(sender, gTinIdNo, "IdNo")
                 End If
             End If
@@ -45,9 +44,12 @@ Namespace PresentationLayer.Presenters
                 dataGridView.ClearSelection()
                 For Each row As DataGridViewRow In dataGridView.Rows
                     If row.Cells(searchField).Value = value Then
-                        retValue = row.Cells(returnField).Value
+                        If returnField IsNot Nothing Then
+                            retValue = row.Cells(returnField).Value
+                        End If
                         row.Selected = True
                         dataGridView.FirstDisplayedScrollingRowIndex = row.Index
+                        dataGridView.CurrentCell = dataGridView.Rows(row.Index).Cells(0)
                         Exit For
                     End If
                 Next
@@ -59,7 +61,7 @@ Namespace PresentationLayer.Presenters
             Return Service.GetField(Of Int32, String)(gTinValue, "DrugList", "GTin", "IdNo")
         End Function
 
-        Private Sub OnDgvDoubleClicked(gTinIdNo As Integer)
+        Private Sub OnUpdateDrugDisplay(gTinIdNo As Integer)
             Dim drug As Object = MakeDrug(gTinIdNo)
             DisplayDrug(drug)
         End Sub

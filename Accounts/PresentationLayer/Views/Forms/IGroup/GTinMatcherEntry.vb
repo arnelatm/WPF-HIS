@@ -19,7 +19,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event GetDataTable(ByRef drugListDataTable As DataTable) Implements IGTinMatcherView.GetDataTable
 
-        Public Event DgvDoubleClick(gTinIdNo As Int32) Implements IGTinMatcherView.DgvDoubleClicked
+        Public Event UpdateDrugDisplay(gTinIdNo As Int32) Implements IGTinMatcherView.UpdateDrugDisplay
 
         Public Event GTinValueChanged(sender As DataGridView, gTinValue As String) Implements IItemDetailsView.GTinValueChanged
 
@@ -44,7 +44,7 @@ Namespace PresentationLayer.Views.Forms
             Else
                 _nfi.NumberGroupSeparator = numberGroupSeparator
             End If
-
+            cboItemFinder.EditingMode = True
         End Sub
 
         Public Property ItemDetailsByName As List(Of Lookup.LookupData)
@@ -279,6 +279,7 @@ Namespace PresentationLayer.Views.Forms
             Set(value As String)
                 txtGTIN.Text = value
                 RaiseEvent GTinValueChanged(DataGridViewDrugs, value)
+
             End Set
         End Property
 
@@ -476,7 +477,7 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent FinderValueChanged(cboItemFinder.SelectedItem.IdNo)
         End Sub
 
-        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnScanQrCode.ClickButtonArea
+        Private Sub btnScanQrCode_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnScanQrCode.ClickButtonArea
             Dim gTinScanner As New GTinScanner
             gTinScanner.ShowDialog()
             txtGTIN.Text = gTinScanner.GTin
@@ -487,7 +488,7 @@ Namespace PresentationLayer.Views.Forms
             Dim dgvIdNo As Int32
             Dim curRow = DataGridViewDrugs.CurrentRow()
             dgvIdNo = curRow.Cells("IdNo").Value
-            RaiseEvent DgvDoubleClick(dgvIdNo)
+            RaiseEvent UpdateDrugDisplay(dgvIdNo)
         End Sub
 
         Private Sub DataGridViewDrugs_CellEnter(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDrugs.CellEnter
@@ -495,7 +496,7 @@ Namespace PresentationLayer.Views.Forms
             Dim curRow = DataGridViewDrugs.CurrentRow()
             If curRow IsNot Nothing Then
                 dgvIdNo = curRow.Cells("IdNo").Value
-                RaiseEvent DgvDoubleClick(dgvIdNo)
+                RaiseEvent UpdateDrugDisplay(dgvIdNo)
             End If
         End Sub
 
