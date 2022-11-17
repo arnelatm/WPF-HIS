@@ -13,10 +13,14 @@ Namespace PresentationLayer.Views.Forms
         Private _nfi As NumberFormatInfo
         Private _drugList As Object
         Private bindingSource1 As New BindingSource()
+
         Public Event FinderValueChanged(itemIdNo As Int16) Implements IItemDetailsView.FinderValueChanged
+
         Public Event GTinValueChanged(itemIdNo As Int16) Implements IItemDetailsView.GTinValueChanged
+
         Public Event GetDataTable(ByRef drugListDataTable As DataTable) Implements IGTinMatcherView.GetDataTable
 
+        Public Event DgvDoubleClick(itemIdNo As Int16) Implements IGTinMatcherView.DgvDoubleClicked
 
         Public Sub New()
 
@@ -40,10 +44,7 @@ Namespace PresentationLayer.Views.Forms
                 _nfi.NumberGroupSeparator = numberGroupSeparator
             End If
 
-
         End Sub
-
-
 
         Public Property ItemDetailsByName As List(Of Lookup.LookupData)
 
@@ -335,8 +336,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-
-
         Public Property PrescriptionDrug As Boolean Implements IItemDetailsView.PrescriptionDrug
 
         Public Property DrugIdNo As Int32 Implements IGTinMatcherView.DrugIdNo
@@ -519,7 +518,6 @@ Namespace PresentationLayer.Views.Forms
             txtVolume.DisplayOnly = value
         End Sub
 
-
         Private Sub GTinMatcher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             cboItemFinder.DataSource = ItemDetailsByName
             cboItemFinder.EditingMode = True
@@ -535,6 +533,14 @@ Namespace PresentationLayer.Views.Forms
             gTinScanner.ShowDialog()
             txtGTIN.Text = gTinScanner.GTin
             gTinScanner.Close()
+        End Sub
+
+        Private Sub DataGridView1_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentDoubleClick
+            Dim dgvIdNo As Int32
+            Dim x As DataGridViewCellEventArgs = e
+            Dim curRow = DataGridView1.CurrentRow()
+            dgvIdNo = curRow.Cells("IdNo").Value
+            RaiseEvent DgvDoubleClick(dgvIdNo)
         End Sub
 
         'Private Shared Function GetData(ByVal sqlCommand As String) As DataTable

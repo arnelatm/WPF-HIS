@@ -51,7 +51,7 @@ Namespace PresentationLayer.Presenters
             If idNo <> 0 Then
                 If View.GTIN IsNot Nothing Then
                     Dim gTinIdNo As Integer = Service.GetField("GTin", "DrugList")
-                    Dim obj As Object = Service.GetFieldsWithIdNo(idNo, {"DosageForm", "GenericName", "PackageSize", "PackageType", "RegistrationNo", "RouteOfAdministration", "StrengthValue", "UnitOfStrength", "UnitOfVolume", "Volume"})
+                    Dim obj As Object = Service.GetFieldsWithIdNo(idNo, "DrugList", "[Dosage Form],[Generic Name],[Package Size],[Package Type],[RegistrationNo],[Route Of Administration],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume")
                     View.DosageForm = obj.DosageForm
                     View.GenericName = obj.GenericName
                     View.PackageSize = obj.PackageSize
