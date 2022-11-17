@@ -12,15 +12,16 @@ Namespace PresentationLayer.Views.Forms
 
         Private _nfi As NumberFormatInfo
         Private _drugList As Object
-        Private bindingSource1 As New BindingSource()
 
         Public Event FinderValueChanged(itemIdNo As Int16) Implements IItemDetailsView.FinderValueChanged
 
-        Public Event GTinValueChanged(itemIdNo As Int16) Implements IItemDetailsView.GTinValueChanged
+        'Public Event GTinMatcherValueChanged(sender As Object, gTinIdNo As Int32) Implements IGTinMatcherView.GTinMatcherValueChanged
 
         Public Event GetDataTable(ByRef drugListDataTable As DataTable) Implements IGTinMatcherView.GetDataTable
 
-        Public Event DgvDoubleClick(itemIdNo As Int16) Implements IGTinMatcherView.DgvDoubleClicked
+        Public Event DgvDoubleClick(gTinIdNo As Int32) Implements IGTinMatcherView.DgvDoubleClicked
+
+        Public Event GTinValueChanged(gTinValue As String) Implements IItemDetailsView.GTinValueChanged
 
         Public Sub New()
 
@@ -49,34 +50,23 @@ Namespace PresentationLayer.Views.Forms
         Public Property ItemDetailsByName As List(Of Lookup.LookupData)
 
         Private Sub InitializeDataGridView()
-            Try
-                ' Set up the DataGridView.
-                With Me.DataGridView1
-                    ' Automatically generate the DataGridView columns.
-                    .AutoGenerateColumns = True
-                    Dim drugListDataTable As New DataTable
-                    RaiseEvent GetDataTable(drugListDataTable)
-                    ' Set up the data source.
-                    bindingSource1.DataSource = drugListDataTable
+            ' Set up the DataGridView.
+            With Me.DataGridViewDrugs
+                ' Automatically generate the DataGridView columns.
+                .AutoGenerateColumns = True
+                Dim drugListDataTable As New DataTable
+                RaiseEvent GetDataTable(drugListDataTable)
+                ' Set up the data source.
+                bsDrugList.DataSource = drugListDataTable
+                .DataSource = bsDrugList
+                ' Automatically resize the visible rows.
+                .AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders
+                ' Set the DataGridView control's border.
+                .BorderStyle = BorderStyle.Fixed3D
+                ' Put the cells in edit mode when user enters them.
+                DataGridViewDrugs.ReadOnly = True
+            End With
 
-                    .DataSource = bindingSource1
-
-                    ' Automatically resize the visible rows.
-                    .AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders
-
-                    ' Set the DataGridView control's border.
-                    .BorderStyle = BorderStyle.Fixed3D
-
-                    ' Put the cells in edit mode when user enters them.
-                    .EditMode = DataGridViewEditMode.EditOnEnter
-                End With
-            Catch ex As SqlException
-                MessageBox.Show("To run this sample replace " _
-                & "connection.ConnectionString with a valid connection string" _
-                & "  to a Northwind database accessible to your system.",
-                "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                System.Threading.Thread.CurrentThread.Abort()
-            End Try
         End Sub
 
 #Region "Field Items"
@@ -332,7 +322,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As String)
                 txtGTIN.Text = value
-                'RaiseEvent GTinValueChanged(IdNo)
+                RaiseEvent GTinValueChanged(value)
             End Set
         End Property
 
@@ -475,6 +465,8 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+#End Region
+
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {{"DosageForm", cboDosageForm},
@@ -535,27 +527,21 @@ Namespace PresentationLayer.Views.Forms
             gTinScanner.Close()
         End Sub
 
-        Private Sub DataGridView1_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentDoubleClick
+        Private Sub DataGridView1_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDrugs.CellContentDoubleClick
             Dim dgvIdNo As Int32
-            Dim x As DataGridViewCellEventArgs = e
-            Dim curRow = DataGridView1.CurrentRow()
+            Dim curRow = DataGridViewDrugs.CurrentRow()
             dgvIdNo = curRow.Cells("IdNo").Value
             RaiseEvent DgvDoubleClick(dgvIdNo)
         End Sub
 
-        'Private Shared Function GetData(ByVal sqlCommand As String) As DataTable
-        '    Dim connectionString As String = "Data Source=IBN-SERVER;Initial Catalog=IGroupClinic;Persist Security Info=True;User ID=igroupadmin;Password=igss@123"
-        '    Dim northwindConnection As SqlConnection = New SqlConnection(connectionString)
-        '    Dim command As New SqlCommand(sqlCommand, northwindConnection)
-        '    Dim adapter As SqlDataAdapter = New SqlDataAdapter()
-        '    adapter.SelectCommand = command
-        '    Dim table As New DataTable
-        '    table.Locale = System.Globalization.CultureInfo.InvariantCulture
-        '    adapter.Fill(table)
-        '    Return table
-        'End Function
-
-#End Region
+        Private Sub DataGridViewDrugs_CellEnter(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDrugs.CellEnter
+            Dim dgvIdNo As Int32
+            Dim curRow = DataGridViewDrugs.CurrentRow()
+            If curRow IsNot Nothing Then
+                dgvIdNo = curRow.Cells("IdNo").Value
+                RaiseEvent DgvDoubleClick(dgvIdNo)
+            End If
+        End Sub
 
     End Class
 

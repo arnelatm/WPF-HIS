@@ -69,7 +69,6 @@ Namespace AdoNet
             Return GetDb().Scalar(sql, params)
         End Function
 
-
         Public Function CountRecordWithKey(searchValue As String, tableName As String, searchFieldName As String) _
             As Integer _
             Implements IBaseDao.CountRecordWithKey
@@ -79,7 +78,6 @@ Namespace AdoNet
             Dim params() As Object = {"@SearchValue", searchValue}
             Return GetDb().Scalar(sql, params)
         End Function
-
 
         Public Function DeleteRecord(idNo As Int32, tableName As String) As Int32 _
             Implements IBaseDao.DeleteRecord
@@ -917,17 +915,6 @@ Namespace AdoNet
             Return Not nCount > 0
         End Function
 
-        'Public Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) Implements IBaseDao.GetRecordFieldWithKeyG
-        '    Dim sql As String =
-        '            " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] " &
-        '            " Where " & searchFieldName & " = @SearchValue "
-        '    Dim params() As Object = {"@SearchValue", searchValue}
-        '    Dim retVal = GetDb().Scalar(sql, params)
-        '    If retVal Is Nothing Or IsDBNull(retVal) Then
-        '        Return Nothing
-        '    End If
-        '    Return retVal
-        'End Function
         Public Function IsFieldUnique(tableName As String, fieldName As String) As Boolean _
             Implements IBaseDao.IsFieldUnique
             Dim sql As String

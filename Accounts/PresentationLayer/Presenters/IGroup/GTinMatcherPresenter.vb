@@ -18,10 +18,26 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "ItemNameEnglish"
             WithTreeView = False
             AddHandler View.FinderValueChanged, AddressOf OnFinderValueChanged
-            AddHandler View.GTinValueChanged, AddressOf OnGTinValueChanged
+            'AddHandler View.GTinMatcherValueChanged, AddressOf OnGTinMatcherValueChanged
             AddHandler View.GetDataTable, AddressOf OnGetDataTable
             AddHandler View.DgvDoubleClicked, AddressOf OnDgvDoubleClicked
+            AddHandler View.GTinValueChanged, AddressOf OnGTinValueChanged
         End Sub
+
+        Private Sub OnGTinValueChanged(gTinValue As String)
+            If gTinValue Is Nothing Or gTinValue = "" Then
+                ClearDrugDisplay()
+                ClearItemDrugDisplay()
+            Else
+                Dim gTinIdNo As Integer = GetGTinIdNo(gTinValue)
+                Dim drug As Object = MakeDrug(gTinIdNo)
+                DisplayDrug(drug)
+            End If
+        End Sub
+
+        Private Function GetGTinIdNo(ByRef gTinValue As String) As Int32
+            Return Service.GetField(Of Int32, String)(gTinValue, "DrugList", "GTin", "IdNo")
+        End Function
 
         Private Sub OnDgvDoubleClicked(gTinIdNo As Integer)
             Dim drug As Object = MakeDrug(gTinIdNo)
@@ -58,31 +74,34 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Sub OnGTinValueChanged(idNo As Int16)
-            If idNo <> 0 Then
-                Dim gTinIdNo As Integer = Service.GetField(Of Int32, Int32)(idNo, "GTin", "DrugList", "IdNo")
-                Dim drug As Object = MakeDrug(gTinIdNo)
-                If drug Is Nothing Then
-                    ClearItemDrugDisplay()
-                    ClearDrugDisplay()
-                Else
-                    DisplayDrug(drug)
-                    View.DosageForm = NoDbNull(drug.DosageForm)
-                    View.GenericName = NoDbNull(drug.GenericName)
-                    View.PackageSize = NoDbNull(drug.PackageSize)
-                    View.PackageType = NoDbNull(drug.PackageType)
-                    View.RegistrationNo = NoDbNull(drug.RegistrationNo)
-                    View.RouteOfAdministration = NoDbNull(drug.RouteOfAdministration)
-                    View.StrengthValue = NoDbNull(drug.StrengthValue)
-                    View.UnitOfStrength = NoDbNull(drug.UnitOfStrength)
-                    View.UnitOfVolume = NoDbNull(drug.UnitOfVolume)
-                    View.Volume = NoDbNull(drug.Volume)
-                End If
-            Else
-                ClearItemDrugDisplay()
-                ClearDrugDisplay()
-            End If
-        End Sub
+        'Private Sub OnGTinMatcherValueChanged(sender As DataGridView, gTin As String)
+        '    If gTin IsNot Nothing Or gTin <> "" Then
+        '        Dim gTinIdNo As Integer = GetGTinIdNo(gTin)
+        '        Dim drug As Object = MakeDrug(gTinIdNo)
+        '        If drug Is Nothing Then
+        '            ClearItemDrugDisplay()
+        '            ClearDrugDisplay()
+        '        Else
+        '            DisplayDrug(drug)
+        '            View.DosageForm = NoDbNull(drug.DosageForm)
+        '            View.GenericName = NoDbNull(drug.GenericName)
+        '            View.PackageSize = NoDbNull(drug.PackageSize)
+        '            View.PackageType = NoDbNull(drug.PackageType)
+        '            View.RegistrationNo = NoDbNull(drug.RegistrationNo)
+        '            View.RouteOfAdministration = NoDbNull(drug.RouteOfAdministration)
+        '            View.StrengthValue = NoDbNull(drug.StrengthValue)
+        '            View.UnitOfStrength = NoDbNull(drug.UnitOfStrength)
+        '            View.UnitOfVolume = NoDbNull(drug.UnitOfVolume)
+        '            View.Volume = NoDbNull(drug.Volume)
+        '            Dim searchValue = View.GTIN
+        '            Dim row = Enumerable.Where(Of DataGridViewRow)(sender.Rows.Cast(Of DataGridViewRow)(), Function(x) Not x.IsNewRow).FirstOrDefault(Function(x) CType(x.DataBoundItem, DataRowView)("GTin").ToString().Equals(searchValue))
+        '            sender.CurrentCell = row.Cells(0)
+        '        End If
+        '    Else
+        '        ClearItemDrugDisplay()
+        '        ClearDrugDisplay()
+        '    End If
+        'End Sub
 
         Private Sub ClearItemDrugDisplay()
             View.DosageForm = Nothing

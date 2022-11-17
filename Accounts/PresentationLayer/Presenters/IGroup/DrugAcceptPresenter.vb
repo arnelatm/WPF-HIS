@@ -59,11 +59,11 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Function GetDrugName() As String
-            Return Service.GetField(View.GTin, "DrugList", "GTIN", "[Trade Name]")
+            Return Service.GetField(Of String, String)(View.GTin, "DrugList", "GTin", "[Trade Name]")
         End Function
 
         Private Function GetDrugCode() As String
-            Return Service.GetField(View.GTin, "ItemDetails", "GTIN", "[Item_Code]")
+            Return Service.GetField(Of String, String)(View.GTin, "ItemDetails", "GTin", "[Item_Code]")
         End Function
 
         Public Function DrugAlreadyAccepted(ByRef IdNo As Int32) As Boolean

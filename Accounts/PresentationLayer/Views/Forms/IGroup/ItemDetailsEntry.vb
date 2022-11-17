@@ -38,7 +38,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event FinderValueChanged(itemIdNo As Int16) Implements IItemDetailsView.FinderValueChanged
 
-        Public Event GTinValueChanged(itemIdNo As Int16) Implements IItemDetailsView.GTinValueChanged
+        Public Event GTinValueChanged(gTinValue As String) Implements IItemDetailsView.GTinValueChanged
 
         Public Property ItemDetailsByName As List(Of Lookup.LookupData)
 
@@ -306,7 +306,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As String)
                 txtGTIN.Text = value
-                RaiseEvent GTinValueChanged(IdNo)
+                RaiseEvent GTinValueChanged(value)
             End Set
         End Property
 

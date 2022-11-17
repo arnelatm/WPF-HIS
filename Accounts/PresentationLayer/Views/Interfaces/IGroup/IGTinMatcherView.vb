@@ -19,8 +19,13 @@ Namespace PresentationLayer.Views.Interfaces
         Property DrugRouteOfAdministration As String
         Property DrugIdNo As Integer
         Property DrugList As Object
+
         Event GetDataTable(ByRef drugListDataTable As DataTable)
-        Event DgvDoubleClicked(itemIdNo As Short)
+
+        Event DgvDoubleClicked(itemIdNo As Int32)
+
+        'Event GTinMatcherValueChanged(sender As Object, gTinIdNo As Int32)
+
     End Interface
 
 End Namespace
