@@ -19,7 +19,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property DrugRouteOfAdministration As String
         Property DrugIdNo As Integer
         Property DrugList As Object
-
+        Property DrugPublicPrice As Decimal
+        Property QtyOnHand As Decimal
         Event GetDataTable(ByRef drugListDataTable As DataTable)
 
         Event UpdateDrugDisplay(itemIdNo As Int32)

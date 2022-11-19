@@ -429,12 +429,30 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Price_Cash As Decimal Implements IItemDetailsView.Price_Cash
+        Public Property DrugPublicPrice As Decimal Implements IGTinMatcherView.DrugPublicPrice
+            Get
+                Return txtDrugPublicPrice.Text
+            End Get
+            Set
+                txtDrugPublicPrice.Text = Value
+            End Set
+        End Property
+
+        Public Property Price_Cash As Decimal? Implements IItemDetailsView.Price_Cash
             Get
                 Return txtPrice_Cash.Text
             End Get
             Set
                 txtPrice_Cash.Text = Value
+            End Set
+        End Property
+
+        Public Property QtyOnHand As Decimal Implements IGTinMatcherView.QtyOnHand
+            Get
+                Return txtQtyOnHand.Text
+            End Get
+            Set
+                txtQtyOnHand.Text = Value
             End Set
         End Property
 

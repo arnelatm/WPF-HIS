@@ -257,6 +257,17 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property Price_Cash As Decimal? Implements IItemDetailsView.Price_Cash
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Decimal?)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+#End Region
+
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {{"DosageForm", cboDosageForm},
@@ -322,7 +333,6 @@ Namespace PresentationLayer.Views.Forms
             gTinScanner.Close()
         End Sub
 
-#End Region
 
     End Class
 

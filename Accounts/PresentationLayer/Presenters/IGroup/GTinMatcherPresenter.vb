@@ -1,5 +1,6 @@
 ﻿Imports System.Dynamic
 Imports System.Net.Http.Headers
+Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
@@ -29,23 +30,25 @@ Namespace PresentationLayer.Presenters
                 ClearDrugDisplay()
                 ClearItemDrugDisplay()
             Else
-                Dim gTinIdNo As Integer = GetGTinIdNo(gTinValue)
-                Dim drug As Object = MakeDrug(gTinIdNo)
+                Dim drugIdNo As Integer = GetDrugIdNo(gTinValue)
+                Dim drug As Object = MakeDrug(drugIdNo)
                 DisplayDrug(drug)
             End If
         End Sub
 
-        Private Function GetGTinIdNo(ByRef gTinValue As String) As Int32
+        Private Function GetDrugIdNo(ByRef gTinValue As String) As Int32
             Return Service.GetField(Of Int32, String)(gTinValue, "DrugList", "GTin", "IdNo")
         End Function
 
-        Private Sub OnUpdateDrugDisplay(gTinIdNo As Integer)
-            Dim drug As Object = MakeDrug(gTinIdNo)
+        Private Sub OnUpdateDrugDisplay(itemDetailIdNo As Integer)
+            Dim drug As Object = MakeDrug(itemDetailIdNo)
             DisplayDrug(drug)
+            Dim itemDao = New ItemDetailsDao()
+            View.QtyOnHand = itemDao.GetQtyOnHandBox(View.ItemDetailsCode)
         End Sub
 
-        Private Function MakeDrug(gTinIdNo As Integer) As Object
-            Return Service.GetFieldsWithIdNo(gTinIdNo, "DrugList", "IdNo,GTin,[Trade Name],[Dosage Form],[Generic Name],[Package Size],[Package Type],[RegistrationNo],[Route Of Administration],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume", "IdNo")
+        Private Function MakeDrug(drugIdNo As Integer) As Object
+            Return Service.GetFieldsWithIdNo(drugIdNo, "DrugList", "IdNo,GTin,[Trade Name],[Dosage Form],[Generic Name],[Package Size],[Package Type],[Public Price],[RegistrationNo],[Route Of Administration],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume", "IdNo")
         End Function
 
         Protected Overrides Sub CreateDataSources()
@@ -134,6 +137,7 @@ Namespace PresentationLayer.Presenters
                 View.DrugUnitOfStrength = NoDbNull(drug.UnitOfStrength)
                 View.DrugUnitOfVolume = NoDbNull(drug.UnitOfVolume)
                 View.DrugVolume = NoDbNull(drug.Volume)
+                View.DrugPublicPrice = NoDbNull(drug.PublicPrice)
             End If
         End Sub
 
@@ -151,6 +155,7 @@ Namespace PresentationLayer.Presenters
             View.DrugUnitOfVolume = Nothing
             View.DrugVolume = Nothing
             View.DrugGTin = Nothing
+            View.DrugPublicPrice = Nothing
         End Sub
 
         Private Sub OnGetDataTable(ByRef drugListDataTable As DataTable)
@@ -172,7 +177,7 @@ Namespace PresentationLayer.Presenters
         Public Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
             If View.GTIN IsNot Nothing Or View.GTIN <> "" Then
                 Dim drugIdNo As Int32 = Service.GetField(Of Int32, String)(View.GTIN, "DrugList", "GTin", "IdNo")
-                Dim drug As Object = Service.GetFieldsWithIdNo(drugIdNo, "DrugList", "[IdNo],[Trade Name],[Generic Name],[GTin],[Dosage Form],[Package Size],[Package Type],RegistrationNo,[Route Of Administration],[Strength Value],[Unit Of Strength],[Volume],[Unit Of Volume]", "IdNo")
+                Dim drug As Object = MakeDrug(drugIdNo) 'Service.GetFieldsWithIdNo(drugIdNo, "DrugList", "[IdNo],[Trade Name],[Generic Name],[GTin],[Dosage Form],[Package Size],[Package Type],[Public Price],RegistrationNo,[Route Of Administration],[Strength Value],[Unit Of Strength],[Volume],[Unit Of Volume]", "IdNo")
                 'If drug IsNot Nothing Then
                 DisplayDrug(drug)
                 'Else

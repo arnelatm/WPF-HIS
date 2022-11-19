@@ -9,7 +9,6 @@ Namespace BusinessLayer
 
         ' ** Enterprise Design Pattern: Identity field pattern
         Public Property DrugTradeName As String
-
         Public Property DrugPackageSize As Double?
         Public Property DrugPackageType As String
         Public Property DrugRegistrationNo As String
@@ -19,6 +18,7 @@ Namespace BusinessLayer
         Public Property DrugUserId As String
         Public Property DrugVolume As Double?
         Public Property DrugPrescriptionDrug As Boolean
+        Public Property DrugPrice As Decimal
         Public Property DrugRouteOfAdministration As String
 
     End Class

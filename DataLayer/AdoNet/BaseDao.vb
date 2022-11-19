@@ -1281,6 +1281,10 @@ Namespace AdoNet
             Return table
         End Function
 
+        Public Function GetDataValue(sqlCommand As String) As Object
+            Return GetDb().Scalar(sqlCommand)
+        End Function
+
     End Class
 
     Public Class DaoCommand
