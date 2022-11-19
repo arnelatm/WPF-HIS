@@ -21,7 +21,7 @@
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+            Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.CaComboBox2 = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.cboRouteOfAdministration = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.txtGenericName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -971,7 +971,7 @@
             '
             'btnScanQrCode
             '
-            Me.btnScanQrCode.DesignerSelected = True
+            Me.btnScanQrCode.DesignerSelected = False
             Me.btnScanQrCode.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.btnScanQrCode.ImageIndex = 0
             Me.btnScanQrCode.Location = New System.Drawing.Point(323, 26)

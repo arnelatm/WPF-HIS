@@ -33,6 +33,11 @@
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtItemDetailsCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblPrice_Cash = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPrice_Cash = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel6 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtQtyOnHand = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel9 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblPacking = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPack1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtpack2 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -77,6 +82,8 @@
             Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator()
             Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDrugIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblPublicPrice = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDrugPublicPrice = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDrugGTin = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel7 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -104,8 +111,6 @@
             Me.DataGridViewDrugs = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.lblSearcher = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblPrice_Cash = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtPrice_Cash = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout1.SuspendLayout()
@@ -247,6 +252,9 @@
             Me.CFlowLayout1.Controls.Add(Me.TxtItemDetailsCode)
             Me.CFlowLayout1.Controls.Add(Me.lblPrice_Cash)
             Me.CFlowLayout1.Controls.Add(Me.txtPrice_Cash)
+            Me.CFlowLayout1.Controls.Add(Me.CLabel6)
+            Me.CFlowLayout1.Controls.Add(Me.txtQtyOnHand)
+            Me.CFlowLayout1.Controls.Add(Me.CLabel9)
             Me.CFlowLayout1.Controls.Add(Me.lblPacking)
             Me.CFlowLayout1.Controls.Add(Me.txtPack1)
             Me.CFlowLayout1.Controls.Add(Me.txtpack2)
@@ -327,18 +335,121 @@
             Me.TxtItemDetailsCode.TabIndex = 38
             Me.TxtItemDetailsCode.Translatable = False
             '
+            'lblPrice_Cash
+            '
+            Me.lblPrice_Cash.AutoSize = True
+            Me.lblPrice_Cash.DisplayOnly = True
+            Me.lblPrice_Cash.EditingMode = False
+            Me.lblPrice_Cash.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblPrice_Cash.Location = New System.Drawing.Point(303, 1)
+            Me.lblPrice_Cash.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPrice_Cash.Name = "lblPrice_Cash"
+            Me.lblPrice_Cash.Size = New System.Drawing.Size(30, 16)
+            Me.lblPrice_Cash.TabIndex = 77
+            Me.lblPrice_Cash.Text = "Price"
+            Me.lblPrice_Cash.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPrice_Cash.Translatable = True
+            '
+            'txtPrice_Cash
+            '
+            Me.txtPrice_Cash.BackColor = System.Drawing.Color.White
+            Me.txtPrice_Cash.BegFindValue = Nothing
+            Me.txtPrice_Cash.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtPrice_Cash.ComputedValue = False
+            Me.txtPrice_Cash.CustomFormat = Nothing
+            Me.txtPrice_Cash.DataBoundControl = True
+            Me.txtPrice_Cash.EditingMode = True
+            Me.txtPrice_Cash.EndFindValue = Nothing
+            Me.txtPrice_Cash.FieldDescription = Nothing
+            Me.txtPrice_Cash.FieldName = Nothing
+            Me.txtPrice_Cash.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtPrice_Cash.FindEnabled = False
+            Me.CFlowLayout1.SetFlowBreak(Me.txtPrice_Cash, True)
+            Me.txtPrice_Cash.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtPrice_Cash.ForeColor = System.Drawing.Color.Black
+            Me.txtPrice_Cash.LinkedLabel = Nothing
+            Me.txtPrice_Cash.Location = New System.Drawing.Point(335, 1)
+            Me.txtPrice_Cash.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtPrice_Cash.MaximumValue = Nothing
+            Me.txtPrice_Cash.MinimumValue = Nothing
+            Me.txtPrice_Cash.Name = "txtPrice_Cash"
+            Me.txtPrice_Cash.OldValue = Nothing
+            Me.txtPrice_Cash.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtPrice_Cash.Size = New System.Drawing.Size(100, 23)
+            Me.txtPrice_Cash.TabIndex = 78
+            Me.txtPrice_Cash.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+            Me.txtPrice_Cash.Translatable = False
+            '
+            'CLabel6
+            '
+            Me.CLabel6.DisplayOnly = True
+            Me.CLabel6.EditingMode = False
+            Me.CLabel6.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.CLabel6.Location = New System.Drawing.Point(1, 26)
+            Me.CLabel6.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel6.Name = "CLabel6"
+            Me.CLabel6.Size = New System.Drawing.Size(103, 23)
+            Me.CLabel6.TabIndex = 79
+            Me.CLabel6.Text = "Quantity On Hand"
+            Me.CLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel6.Translatable = True
+            '
+            'txtQtyOnHand
+            '
+            Me.txtQtyOnHand.BackColor = System.Drawing.Color.White
+            Me.txtQtyOnHand.BegFindValue = Nothing
+            Me.txtQtyOnHand.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtQtyOnHand.ComputedValue = False
+            Me.txtQtyOnHand.CustomFormat = Nothing
+            Me.txtQtyOnHand.DataBoundControl = True
+            Me.txtQtyOnHand.EditingMode = True
+            Me.txtQtyOnHand.EndFindValue = Nothing
+            Me.txtQtyOnHand.FieldDescription = Nothing
+            Me.txtQtyOnHand.FieldName = Nothing
+            Me.txtQtyOnHand.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtQtyOnHand.FindEnabled = False
+            Me.txtQtyOnHand.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtQtyOnHand.ForeColor = System.Drawing.Color.Black
+            Me.txtQtyOnHand.LinkedLabel = Nothing
+            Me.txtQtyOnHand.Location = New System.Drawing.Point(106, 26)
+            Me.txtQtyOnHand.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtQtyOnHand.MaximumValue = Nothing
+            Me.txtQtyOnHand.MinimumValue = Nothing
+            Me.txtQtyOnHand.Name = "txtQtyOnHand"
+            Me.txtQtyOnHand.OldValue = Nothing
+            Me.txtQtyOnHand.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtQtyOnHand.Size = New System.Drawing.Size(86, 23)
+            Me.txtQtyOnHand.TabIndex = 80
+            Me.txtQtyOnHand.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+            Me.txtQtyOnHand.Translatable = False
+            '
+            'CLabel9
+            '
+            Me.CLabel9.AutoSize = True
+            Me.CLabel9.DisplayOnly = True
+            Me.CLabel9.EditingMode = False
+            Me.CLabel9.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.CLabel9.Location = New System.Drawing.Point(194, 26)
+            Me.CLabel9.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel9.Name = "CLabel9"
+            Me.CLabel9.Size = New System.Drawing.Size(24, 16)
+            Me.CLabel9.TabIndex = 81
+            Me.CLabel9.Text = "box"
+            Me.CLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel9.Translatable = True
+            '
             'lblPacking
             '
             Me.lblPacking.DisplayOnly = True
             Me.lblPacking.EditingMode = False
             Me.lblPacking.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblPacking.Location = New System.Drawing.Point(1, 26)
+            Me.lblPacking.Location = New System.Drawing.Point(220, 26)
             Me.lblPacking.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPacking.Name = "lblPacking"
-            Me.lblPacking.Size = New System.Drawing.Size(103, 23)
+            Me.lblPacking.Size = New System.Drawing.Size(113, 23)
             Me.lblPacking.TabIndex = 75
             Me.lblPacking.Text = "Packing"
-            Me.lblPacking.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPacking.TextAlign = System.Drawing.ContentAlignment.MiddleRight
             Me.lblPacking.Translatable = True
             '
             'txtPack1
@@ -359,7 +470,7 @@
             Me.txtPack1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPack1.ForeColor = System.Drawing.Color.Black
             Me.txtPack1.LinkedLabel = Nothing
-            Me.txtPack1.Location = New System.Drawing.Point(106, 26)
+            Me.txtPack1.Location = New System.Drawing.Point(335, 26)
             Me.txtPack1.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPack1.MaximumValue = Nothing
             Me.txtPack1.MinimumValue = Nothing
@@ -367,8 +478,9 @@
             Me.txtPack1.OldValue = Nothing
             Me.txtPack1.ReadOnly = True
             Me.txtPack1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPack1.Size = New System.Drawing.Size(86, 23)
+            Me.txtPack1.Size = New System.Drawing.Size(30, 23)
             Me.txtPack1.TabIndex = 72
+            Me.txtPack1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtPack1.Translatable = False
             '
             'txtpack2
@@ -389,7 +501,7 @@
             Me.txtpack2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtpack2.ForeColor = System.Drawing.Color.Black
             Me.txtpack2.LinkedLabel = Nothing
-            Me.txtpack2.Location = New System.Drawing.Point(194, 26)
+            Me.txtpack2.Location = New System.Drawing.Point(367, 26)
             Me.txtpack2.Margin = New System.Windows.Forms.Padding(1)
             Me.txtpack2.MaximumValue = Nothing
             Me.txtpack2.MinimumValue = Nothing
@@ -397,8 +509,9 @@
             Me.txtpack2.OldValue = Nothing
             Me.txtpack2.ReadOnly = True
             Me.txtpack2.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtpack2.Size = New System.Drawing.Size(86, 23)
+            Me.txtpack2.Size = New System.Drawing.Size(30, 23)
             Me.txtpack2.TabIndex = 73
+            Me.txtpack2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtpack2.Translatable = False
             '
             'txtpack3
@@ -416,11 +529,10 @@
             Me.txtpack3.FieldName = "Item_Code"
             Me.txtpack3.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtpack3.FindEnabled = True
-            Me.CFlowLayout1.SetFlowBreak(Me.txtpack3, True)
             Me.txtpack3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtpack3.ForeColor = System.Drawing.Color.Black
             Me.txtpack3.LinkedLabel = Nothing
-            Me.txtpack3.Location = New System.Drawing.Point(282, 26)
+            Me.txtpack3.Location = New System.Drawing.Point(399, 26)
             Me.txtpack3.Margin = New System.Windows.Forms.Padding(1)
             Me.txtpack3.MaximumValue = Nothing
             Me.txtpack3.MinimumValue = Nothing
@@ -428,8 +540,9 @@
             Me.txtpack3.OldValue = Nothing
             Me.txtpack3.ReadOnly = True
             Me.txtpack3.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtpack3.Size = New System.Drawing.Size(86, 23)
+            Me.txtpack3.Size = New System.Drawing.Size(30, 23)
             Me.txtpack3.TabIndex = 74
+            Me.txtpack3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtpack3.Translatable = False
             '
             'txtGTIN
@@ -791,6 +904,7 @@
             Me.txtVolume.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtVolume.Size = New System.Drawing.Size(148, 23)
             Me.txtVolume.TabIndex = 64
+            Me.txtVolume.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtVolume.Translatable = False
             '
             'lblUnitOfVolume
@@ -1034,6 +1148,8 @@
             Me.CFlowLayout2.Controls.Add(Me.bnDrugList)
             Me.CFlowLayout2.Controls.Add(Me.CLabel4)
             Me.CFlowLayout2.Controls.Add(Me.txtDrugIdNo)
+            Me.CFlowLayout2.Controls.Add(Me.lblPublicPrice)
+            Me.CFlowLayout2.Controls.Add(Me.txtDrugPublicPrice)
             Me.CFlowLayout2.Controls.Add(Me.CLabel5)
             Me.CFlowLayout2.Controls.Add(Me.txtDrugGTin)
             Me.CFlowLayout2.Controls.Add(Me.CLabel7)
@@ -1200,7 +1316,6 @@
             Me.txtDrugIdNo.FieldName = Nothing
             Me.txtDrugIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtDrugIdNo.FindEnabled = True
-            Me.CFlowLayout2.SetFlowBreak(Me.txtDrugIdNo, True)
             Me.txtDrugIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDrugIdNo.ForeColor = System.Drawing.Color.Black
             Me.txtDrugIdNo.LinkedLabel = Nothing
@@ -1215,6 +1330,51 @@
             Me.txtDrugIdNo.Size = New System.Drawing.Size(148, 23)
             Me.txtDrugIdNo.TabIndex = 0
             Me.txtDrugIdNo.Translatable = False
+            '
+            'lblPublicPrice
+            '
+            Me.lblPublicPrice.AutoSize = True
+            Me.lblPublicPrice.DisplayOnly = True
+            Me.lblPublicPrice.EditingMode = False
+            Me.lblPublicPrice.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblPublicPrice.Location = New System.Drawing.Point(255, 26)
+            Me.lblPublicPrice.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPublicPrice.Name = "lblPublicPrice"
+            Me.lblPublicPrice.Size = New System.Drawing.Size(40, 17)
+            Me.lblPublicPrice.TabIndex = 74
+            Me.lblPublicPrice.Text = "Price"
+            Me.lblPublicPrice.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPublicPrice.Translatable = True
+            '
+            'txtDrugPublicPrice
+            '
+            Me.txtDrugPublicPrice.BackColor = System.Drawing.Color.White
+            Me.txtDrugPublicPrice.BegFindValue = Nothing
+            Me.txtDrugPublicPrice.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDrugPublicPrice.ComputedValue = False
+            Me.txtDrugPublicPrice.CustomFormat = Nothing
+            Me.txtDrugPublicPrice.DataBoundControl = True
+            Me.txtDrugPublicPrice.EditingMode = True
+            Me.txtDrugPublicPrice.EndFindValue = Nothing
+            Me.txtDrugPublicPrice.FieldDescription = Nothing
+            Me.txtDrugPublicPrice.FieldName = Nothing
+            Me.txtDrugPublicPrice.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtDrugPublicPrice.FindEnabled = False
+            Me.CFlowLayout2.SetFlowBreak(Me.txtDrugPublicPrice, True)
+            Me.txtDrugPublicPrice.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtDrugPublicPrice.ForeColor = System.Drawing.Color.Black
+            Me.txtDrugPublicPrice.LinkedLabel = Nothing
+            Me.txtDrugPublicPrice.Location = New System.Drawing.Point(297, 26)
+            Me.txtDrugPublicPrice.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtDrugPublicPrice.MaximumValue = Nothing
+            Me.txtDrugPublicPrice.MinimumValue = Nothing
+            Me.txtDrugPublicPrice.Name = "txtDrugPublicPrice"
+            Me.txtDrugPublicPrice.OldValue = Nothing
+            Me.txtDrugPublicPrice.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtDrugPublicPrice.Size = New System.Drawing.Size(100, 23)
+            Me.txtDrugPublicPrice.TabIndex = 73
+            Me.txtDrugPublicPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+            Me.txtDrugPublicPrice.Translatable = False
             '
             'CLabel5
             '
@@ -1558,6 +1718,7 @@
             Me.txtDrugVolume.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtDrugVolume.Size = New System.Drawing.Size(148, 23)
             Me.txtDrugVolume.TabIndex = 64
+            Me.txtDrugVolume.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtDrugVolume.Translatable = False
             '
             'CLabel15
@@ -1800,49 +1961,6 @@
             Me.lblSearcher.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblSearcher.Translatable = True
             '
-            'lblPrice_Cash
-            '
-            Me.lblPrice_Cash.AutoSize = True
-            Me.lblPrice_Cash.DisplayOnly = True
-            Me.lblPrice_Cash.EditingMode = False
-            Me.lblPrice_Cash.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblPrice_Cash.Location = New System.Drawing.Point(303, 1)
-            Me.lblPrice_Cash.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblPrice_Cash.Name = "lblPrice_Cash"
-            Me.lblPrice_Cash.Size = New System.Drawing.Size(30, 16)
-            Me.lblPrice_Cash.TabIndex = 77
-            Me.lblPrice_Cash.Text = "Price"
-            Me.lblPrice_Cash.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.lblPrice_Cash.Translatable = True
-            '
-            'txtPrice_Cash
-            '
-            Me.txtPrice_Cash.BackColor = System.Drawing.SystemColors.ControlLight
-            Me.txtPrice_Cash.BegFindValue = Nothing
-            Me.txtPrice_Cash.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtPrice_Cash.ComputedValue = False
-            Me.txtPrice_Cash.CustomFormat = Nothing
-            Me.txtPrice_Cash.DataBoundControl = True
-            Me.txtPrice_Cash.EditingMode = True
-            Me.txtPrice_Cash.EndFindValue = Nothing
-            Me.txtPrice_Cash.FieldDescription = Nothing
-            Me.txtPrice_Cash.FieldName = Nothing
-            Me.txtPrice_Cash.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtPrice_Cash.FindEnabled = False
-            Me.CFlowLayout1.SetFlowBreak(Me.txtPrice_Cash, True)
-            Me.txtPrice_Cash.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtPrice_Cash.LinkedLabel = Nothing
-            Me.txtPrice_Cash.Location = New System.Drawing.Point(335, 1)
-            Me.txtPrice_Cash.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtPrice_Cash.MaximumValue = Nothing
-            Me.txtPrice_Cash.MinimumValue = Nothing
-            Me.txtPrice_Cash.Name = "txtPrice_Cash"
-            Me.txtPrice_Cash.OldValue = Nothing
-            Me.txtPrice_Cash.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPrice_Cash.Size = New System.Drawing.Size(100, 23)
-            Me.txtPrice_Cash.TabIndex = 78
-            Me.txtPrice_Cash.Translatable = False
-            '
             'GTinMatcherEntry
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1959,5 +2077,10 @@
         Friend WithEvents bsDrugList As BindingSource
         Friend WithEvents lblPrice_Cash As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtPrice_Cash As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents lblPublicPrice As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents txtDrugPublicPrice As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents CLabel6 As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents txtQtyOnHand As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents CLabel9 As Libraries.CBaseControlsLibrary.CLabel
     End Class
 End Namespace
