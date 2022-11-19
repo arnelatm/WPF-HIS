@@ -284,6 +284,61 @@ Public Class GetLookupDataRequested
     'Public Property TargetLookup As List(Of Lookup.LookupData)
 End Class
 
+Public Class GetLookupDataTableRequested
+
+    'Public Sub New(ByVal tableName As String, ByRef view As Control, ByRef targetLookup As List(Of Lookup.LookupData), ByVal Optional filter As String = Nothing)
+    '    Me.TableName = tableName
+    '    Me.TargetProperty = TargetProperty
+    '    Me.Filter = filter
+    '    Me.View = view
+    '    Me.TargetLookup = targetLookup
+    'End Sub
+
+    Public Sub New(ByVal targetSourceName As String)
+        Me.TargetSourceName = targetSourceName
+    End Sub
+
+    Public Sub New(ByVal tableName As String, ByRef view As Control, targetProperty As String, ByVal Optional filter As String = Nothing)
+        Me.TableName = tableName
+        Me.TargetProperty = targetProperty
+        Me.Filter = filter
+        Me.View = view
+    End Sub
+
+    Public Sub New(ByVal tableName As String, ByRef view As Control, targetProperty As String, ByVal sortKey As String, ByVal Optional filter As String = Nothing)
+        Me.TableName = tableName
+        Me.TargetProperty = targetProperty
+        Me.SortKey = sortKey
+        Me.Filter = filter
+        Me.View = view
+    End Sub
+
+    Public Sub New(ByVal tableName As String, ByRef view As Control, targetProperty As String, ByVal fields As String(), ByVal Optional filter As String = Nothing)
+        Me.TableName = tableName
+        Me.View = view
+        Me.TargetProperty = targetProperty
+        Me.Filter = filter
+        Me.Fields = fields
+    End Sub
+
+    Public Sub New(ByVal tableName As String, ByRef view As Control, targetProperty As String, ByVal sortKey As String, ByVal fields As String(), ByVal Optional filter As String = Nothing)
+        Me.TableName = tableName
+        Me.View = view
+        Me.TargetProperty = targetProperty
+        Me.Filter = filter
+        Me.SortKey = sortKey
+        Me.Fields = fields
+    End Sub
+
+    Public Property TableName As String
+    Public Property View As Control
+    Public Property TargetProperty As String
+    Public Property Fields As String()
+    Public Property Filter As String
+    Public Property SortKey As String
+    Public Property TargetSourceName As String
+    'Public Property TargetLookup As List(Of Lookup.LookupData)
+End Class
 Public Class GetEnumListRequested
 
     Public Sub New(ByRef enumList As Object, ByRef target As List(Of Lookup.LookupData))

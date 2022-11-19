@@ -30,6 +30,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                ISubscriber(Of SaveDataRequested),
                ISubscriber(Of GetDataSource),
                ISubscriber(Of GetLookupDataRequested),
+               ISubscriber(Of GetLookupDataTableRequested),
                ISubscriber(Of LanguageChanged)
 
     Public ChildPresenters As New List(Of Object)
@@ -547,6 +548,39 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         lookupObj.FilterKey = pFilter
         Return Service.GetLookup(lookupObj)
     End Function
+
+    Public Overloads Function GetLookupDataTable(lookupObj As DataTable) As DataTable
+        Return Service.GetLookupDataTable(lookupObj)
+    End Function
+
+    Public Overloads Function GetLookupDataTable(pTableName As String, Optional pFilter As String = Nothing) As DataTable
+        Dim lookupObj As New LookupTable(pTableName, pFilter)
+        Return Service.GetLookupDataTable(lookupObj)
+    End Function
+
+    Public Overloads Function GetLookupDataTable(pTableName As String, pSortKey As String, Optional pFilter As String = Nothing) As DataTable
+        Dim lookupObj As New LookupTable(pTableName, pFilter)
+        lookupObj.SortKey = pSortKey
+        lookupObj.FilterKey = pFilter
+        Return Service.GetLookupDataTable(lookupObj)
+    End Function
+
+    Public Overloads Function GetLookupDataTable(pTableName As String, pFieldsToShow As String(), Optional pFilter As String = Nothing) As DataTable
+        Dim lookupObj As New LookupTable(pTableName, pFilter)
+        lookupObj.FieldsToShow = pFieldsToShow
+        lookupObj.FilterKey = pFilter
+        lookupObj.SortKey = pFieldsToShow(1)
+        Return Service.GetLookupDataTable(lookupObj)
+    End Function
+
+    Public Overloads Function GetLookupDataTable(pTableName As String, pFieldsToShow As String(), pSortKey As String, Optional pFilter As String = Nothing) As DataTable
+        Dim lookupObj As New LookupTable(pTableName, pFilter)
+        lookupObj.FieldsToShow = pFieldsToShow
+        lookupObj.SortKey = pSortKey
+        lookupObj.FilterKey = pFilter
+        Return Service.GetLookupDataTable(lookupObj)
+    End Function
+
 
     Public Function GetOriginalModel() As TM
         Return OriginalModel
@@ -1843,6 +1877,19 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End If
     End Sub
 
+    Public Sub OnGetLookupDataRequestedTableHandler(ByRef eventType As GetLookupDataTableRequested) Implements ISubscriber(Of GetLookupDataTableRequested).OnEventHandler
+        If eventType.View IsNot Nothing Then
+            Dim data As DataTable
+            If eventType.Fields Is Nothing Then
+                data = GetLookupDataTable(eventType.TableName, eventType.SortKey, eventType.Filter)
+            Else
+                data = GetLookupDataTable(eventType.TableName, eventType.Fields, eventType.SortKey, eventType.Filter)
+            End If
+            Invoker.SetProperty(eventType.View, eventType.TargetProperty, {data})
+        End If
+    End Sub
+
+
     Public Function UserHasAccess(securityKey As String, Optional inform As Boolean = False) As Boolean
         Dim hasAccess As Boolean
         If UserIsASuperAdministrator() Then
@@ -2030,6 +2077,19 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Dim data As List(Of Lookup.LookupData)
         data = GetLookup(sourceTableName, fields, sortKey, filter)
         Invoker.SetProperty(View, targetProperty, {data})
+    End Sub
+
+
+    Protected Overloads Sub CreateLookupDataTable(sourceTableName As String, targetProperty As String, fields As String(), Optional filter As String = Nothing)
+        Dim data As DataTable
+        data = GetLookupDataTable(sourceTableName, fields, filter)
+        Invoker.SetProperty(View, targetProperty, data)
+    End Sub
+
+    Protected Overloads Sub CreateLookupDataTable(sourceTableName As String, targetProperty As String, fields As String(), sortKey As String, Optional filter As String = Nothing)
+        Dim data As DataTable
+        data = GetLookupDataTable(sourceTableName, fields, sortKey, filter)
+        Invoker.SetProperty(View, targetProperty, data)
     End Sub
 
     'Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String, sortField As String, fields As String(), Optional filter As String = Nothing)

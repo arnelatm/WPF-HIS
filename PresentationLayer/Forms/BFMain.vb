@@ -1175,6 +1175,25 @@ Public Class BfMain
         Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, sortField, fields, filter))
     End Sub
 
+    Protected Overloads Sub CreateLookupDataTable(tableName As String, targetProperty As String)
+        Ea.PublishEvent(New GetLookupDataTableRequested(tableName, Me, targetProperty))
+    End Sub
+
+    Protected Overloads Sub CreateLookupDataTable(tableName As String, targetProperty As String, filter As String)
+        Ea.PublishEvent(New GetLookupDataTableRequested(tableName, Me, targetProperty, filter))
+    End Sub
+
+    Protected Overloads Sub CreateLookupDataTable(tableName As String, targetProperty As String, sortKey As String, filter As String)
+        Ea.PublishEvent(New GetLookupDataTableRequested(tableName, Me, targetProperty, sortKey, filter))
+    End Sub
+
+    Protected Overloads Sub CreateLookupDataTable(tableName As String, targetProperty As String, fields As String(), Optional filter As String = Nothing)
+        Ea.PublishEvent(New GetLookupDataTableRequested(tableName, Me, targetProperty, fields, filter))
+    End Sub
+
+    Protected Overloads Sub CreateLookupDataTable(tableName As String, targetProperty As String, sortField As String, fields As String(), Optional filter As String = Nothing)
+        Ea.PublishEvent(New GetLookupDataTableRequested(tableName, Me, targetProperty, sortField, fields, filter))
+    End Sub
     Public Sub CreateEnumDataSource(Of TE)(ByRef comboControl As CaComboBox)
         comboControl.DataSource = GetEnumData(Of TE)()
     End Sub
