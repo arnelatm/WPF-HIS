@@ -44,10 +44,9 @@ Namespace PresentationLayer.Views.Forms
             Else
                 _nfi.NumberGroupSeparator = numberGroupSeparator
             End If
-            cboItemFinder.EditingMode = True
         End Sub
 
-        Public Property ItemDetailsByName As List(Of Lookup.LookupData)
+        Public Property ItemDetailsByName As DataTable
 
         Private Sub InitializeDataGridView()
             ' Set up the DataGridView.
@@ -513,12 +512,15 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub GTinMatcher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             cboItemFinder.DataSource = ItemDetailsByName
-            cboItemFinder.EditingMode = True
+            cboItemFinder.DisplayMember = "ItemNameEnglish"
+            cboItemFinder.ValueMember = "Primary_key"
+            cboItemFinder.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+            cboItemFinder.DropDownStyle = ComboBoxStyle.DropDownList
             InitializeDataGridView()
         End Sub
 
         Private Sub cboItemFinder_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboItemFinder.SelectedIndexChanged
-            RaiseEvent FinderValueChanged(cboItemFinder.SelectedItem.IdNo)
+            'RaiseEvent FinderValueChanged(cboItemFinder.SelectedItem.IdNo)
         End Sub
 
         Private Sub btnScanQrCode_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnScanQrCode.ClickButtonArea

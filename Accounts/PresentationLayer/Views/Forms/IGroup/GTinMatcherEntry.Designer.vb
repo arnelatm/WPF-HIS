@@ -27,7 +27,7 @@
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblGTIN = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboItemFinder = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboItemFinder = New ComboBox
             Me.btnScanQrCode = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.EventLog1 = New System.Diagnostics.EventLog()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -182,45 +182,16 @@
             'cboItemFinder
             '
             Me.cboItemFinder.BackColor = System.Drawing.Color.White
-            Me.cboItemFinder.BegFindValue = Nothing
-            Me.cboItemFinder.ChangingSearchValueOnly = False
-            Me.cboItemFinder.CurrentSearchTerm = ""
-            Me.cboItemFinder.DataValue = Nothing
-            Me.cboItemFinder.DefaultValue = Nothing
             Me.cboItemFinder.DisplayMember = "Name"
-            Me.cboItemFinder.EditingMode = True
-            Me.cboItemFinder.EndFindValue = Nothing
-            Me.cboItemFinder.FieldDescription = Nothing
-            Me.cboItemFinder.FieldName = Nothing
-            Me.cboItemFinder.FilterRule = Nothing
-            Me.cboItemFinder.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboItemFinder.FindEnabled = True
             Me.cboItemFinder.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cboItemFinder.ForeColor = System.Drawing.Color.Black
             Me.cboItemFinder.FormattingEnabled = True
-            Me.cboItemFinder.HideWhenNotEditingOrAdding = False
-            Me.cboItemFinder.IgnoreCase = False
             Me.cboItemFinder.IntegralHeight = False
-            Me.cboItemFinder.LinkedLabel = Nothing
             Me.cboItemFinder.Location = New System.Drawing.Point(110, 55)
             Me.cboItemFinder.Margin = New System.Windows.Forms.Padding(1)
             Me.cboItemFinder.Name = "cboItemFinder"
-            Me.cboItemFinder.OldValue = 0
-            Me.cboItemFinder.OriginalDataSource = Nothing
-            Me.cboItemFinder.OriginalList = Nothing
-            Me.cboItemFinder.OverrideDropDownStyleList = False
-            Me.cboItemFinder.PreviousSearchTerm = Nothing
-            Me.cboItemFinder.PropertySelector = Nothing
-            Me.cboItemFinder.ReadOnlyCombo = False
             Me.cboItemFinder.Size = New System.Drawing.Size(358, 24)
-            Me.cboItemFinder.SuggestBoxHeight = 200
-            Me.cboItemFinder.SuggestListOrderRule = Nothing
             Me.cboItemFinder.TabIndex = 37
-            Me.cboItemFinder.TextToSearch = Nothing
-            Me.cboItemFinder.Translatable = False
-            Me.cboItemFinder.ValueIsMandatory = False
-            Me.cboItemFinder.ValueIsNullable = False
-            Me.cboItemFinder.ValueIsNumeric = False
             Me.cboItemFinder.ValueMember = "Name"
             '
             'btnScanQrCode
@@ -1998,7 +1969,7 @@
         Friend WithEvents TxtIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblGTIN As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboItemFinder As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents cboItemFinder As ComboBox
         Friend WithEvents btnScanQrCode As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents EventLog1 As EventLog
         Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout

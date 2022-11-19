@@ -60,4 +60,5 @@ Public Interface IBaseDao
     Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) As Integer
     Function UpdateRecordWithKey(Of T1, T2)(tableName As String, keyFieldName As String, keyFieldValue As T1, fieldToReplace As String, replaceValue As T2) As Integer
     Function GetDataTable(tableName As String, Optional sortField As String = Nothing, Optional fieldsList As String = Nothing, Optional filter As String = Nothing) As DataTable
+    Function GetRecordsDataTable(tableName As String, sortKey As String, Optional fieldNames() As String = Nothing, Optional filterKey As String = Nothing) As Object
 End Interface

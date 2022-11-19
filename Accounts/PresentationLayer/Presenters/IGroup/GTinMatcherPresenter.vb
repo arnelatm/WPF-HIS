@@ -58,7 +58,7 @@ Namespace PresentationLayer.Presenters
             CreateDataSource("DrugUnitOfStrength_View", "UnitOfStrength", {"UnitOfStrength"}, "UnitOfStrength")
             CreateDataSource("DrugPackageType_View", "PackageType", {"PackageType"}, "PackageType")
             CreateDataSource("DrugRouteOfAdministration_View", "RouteOfAdministration", {"RouteOfAdministration"}, "RouteOfAdministration")
-            CreateLookupData("ItemDetails", "ItemDetailsByName", {"Primary_Key", "ItemNameEnglish", "Item_Code"}, "BranchId='01'")
+            CreateLookupDataTable("ItemDetails", "ItemDetailsByName", {"Primary_Key", "ItemNameEnglish", "Item_Code"}, "BranchId='01'")
         End Sub
 
         Public Overrides Sub GoFilter()
