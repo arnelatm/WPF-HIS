@@ -21,6 +21,7 @@
         Public Property PackageSize As Double?
         Public Property PackageType As String
         Public Property Price_Cash As Decimal?
+        Public Property QtyOnHand As Decimal?
         Public Property RegistrationNo As String
         Public Property SaleStrip As String
         Public Property StrengthValue As String

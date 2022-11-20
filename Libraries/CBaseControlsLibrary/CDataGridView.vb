@@ -983,17 +983,22 @@ Public Class CDataGridView
 
     Public Function SearchGrid(value As Object, searchField As String, Optional returnField As String = Nothing) As Object
         Dim retValue As Object = Nothing
-        If value IsNot Nothing Then
+        If value IsNot DBNull.Value Or value IsNot Nothing Or value <> "" Then
             ClearSelection()
             For Each row As DataGridViewRow In Rows
-                If row.Cells(searchField).Value = value Then
-                    If returnField IsNot Nothing Then
-                        retValue = row.Cells(returnField).Value
+                Dim x As Object = row.Cells(searchField).Value
+                If x Is Nothing Or x Is DBNull.Value Then
+                    ' nothing to do
+                Else
+                    If row.Cells(searchField).Value = value Then
+                        If returnField IsNot Nothing Then
+                            retValue = row.Cells(returnField).Value
+                        End If
+                        row.Selected = True
+                        FirstDisplayedScrollingRowIndex = row.Index
+                        CurrentCell = Rows(row.Index).Cells(0)
+                        Exit For
                     End If
-                    row.Selected = True
-                    FirstDisplayedScrollingRowIndex = row.Index
-                    CurrentCell = Rows(row.Index).Cells(0)
-                    Exit For
                 End If
             Next
         End If

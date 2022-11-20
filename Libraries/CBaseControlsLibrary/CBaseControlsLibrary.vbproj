@@ -98,6 +98,12 @@
     </Compile>
     <Compile Include="BlendItemsConverter.vb" />
     <Compile Include="BlendTypeEditor.vb" />
+    <Compile Include="CdComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CbComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="cBlendItems.vb" />
     <Compile Include="cblPointer.vb" />
     <Compile Include="CDateTimePickerNullable.vb">

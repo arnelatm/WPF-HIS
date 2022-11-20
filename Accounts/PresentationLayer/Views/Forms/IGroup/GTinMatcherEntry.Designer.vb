@@ -27,7 +27,7 @@
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblGTIN = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboItemFinder = New ComboBox
+            Me.cboItemFinder = New System.Windows.Forms.ComboBox()
             Me.btnScanQrCode = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.EventLog1 = New System.Diagnostics.EventLog()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -186,7 +186,6 @@
             Me.cboItemFinder.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cboItemFinder.ForeColor = System.Drawing.Color.Black
             Me.cboItemFinder.FormattingEnabled = True
-            Me.cboItemFinder.IntegralHeight = False
             Me.cboItemFinder.Location = New System.Drawing.Point(110, 55)
             Me.cboItemFinder.Margin = New System.Windows.Forms.Padding(1)
             Me.cboItemFinder.Name = "cboItemFinder"
@@ -1909,13 +1908,13 @@
             '
             Me.btnOk.DesignerSelected = False
             Me.btnOk.ImageIndex = 0
-            Me.btnOk.Location = New System.Drawing.Point(429, 729)
+            Me.btnOk.Location = New System.Drawing.Point(371, 729)
             Me.btnOk.Name = "btnOk"
             Me.btnOk.OriginalImageName = Nothing
             Me.btnOk.SecurityKey = ""
-            Me.btnOk.Size = New System.Drawing.Size(90, 25)
+            Me.btnOk.Size = New System.Drawing.Size(192, 25)
             Me.btnOk.TabIndex = 40
-            Me.btnOk.Text = "Ok"
+            Me.btnOk.Text = "Match Displayed Items"
             '
             'lblSearcher
             '

@@ -19,6 +19,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property PackageSize As Double?
         Property PackageType As String
         Property Price_Cash As Decimal?
+        Property QtyOnHand As Decimal?
         Property RegistrationNo As String
         Property StrengthValue As String
         Property UnitOfStrength As String

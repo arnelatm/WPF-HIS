@@ -266,6 +266,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property QtyOnHand As Decimal? Implements IItemDetailsView.QtyOnHand
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Decimal?)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()

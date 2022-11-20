@@ -277,14 +277,16 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As String)
                 txtGTIN.Text = value
-                RaiseEvent GTinValueChanged(DataGridViewDrugs, value)
-                SelectRecordOnGrid(value)
+                If Not (value Is DBNull.Value Or value Is Nothing Or value = "") Then
+                    RaiseEvent GTinValueChanged(DataGridViewDrugs, value)
+                    SelectRecordOnGrid(value)
+                End If
             End Set
         End Property
 
 
         Private Sub SelectRecordOnGrid(gTinValue As String)
-            If gTinValue IsNot Nothing Then
+            If gTinValue IsNot DBNull.Value Or gTinValue IsNot Nothing Or gTinValue = "" Then
                 DataGridViewDrugs.SearchGrid(gTinValue, "GTin")
             End If
         End Sub
@@ -439,19 +441,32 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Price_Cash As Decimal? Implements IItemDetailsView.Price_Cash
             Get
-                Return txtPrice_Cash.Text
+                If txtDrugPackageSize.Text Is Nothing Then
+                    Return 0
+                Else
+                    Return txtPrice_Cash.Text
+                End If
             End Get
             Set
-                txtPrice_Cash.Text = Value
+                txtPrice_Cash.Text = IIf(Value Is Nothing, "", Value)
             End Set
         End Property
 
-        Public Property QtyOnHand As Decimal Implements IGTinMatcherView.QtyOnHand
+        'Public Property QtyOnHand As Decimal? Implements IGTinMatcherView.QtyOnHand
+        '    Get
+        '        Return txtQtyOnHand.Text
+        '    End Get
+        '    Set
+        '        txtQtyOnHand.Text = IIf(Value Is Nothing, "", Value)
+        '    End Set
+        'End Property
+
+        Private Property QtyOnHand As Decimal? Implements IItemDetailsView.QtyOnHand
             Get
                 Return txtQtyOnHand.Text
             End Get
             Set
-                txtQtyOnHand.Text = Value
+                txtQtyOnHand.Text = IIf(Value Is Nothing, "", Value)
             End Set
         End Property
 
@@ -514,13 +529,15 @@ Namespace PresentationLayer.Views.Forms
             cboItemFinder.DataSource = ItemDetailsByName
             cboItemFinder.DisplayMember = "ItemNameEnglish"
             cboItemFinder.ValueMember = "Primary_key"
+            'cboItemFinder.AutoCompleteMode = AutoCompleteMode.None
+            'cboItemFinder.AutoCompleteSource = AutoCompleteSource.ListItems
             cboItemFinder.AutoCompleteMode = AutoCompleteMode.SuggestAppend
-            cboItemFinder.DropDownStyle = ComboBoxStyle.DropDownList
+            cboItemFinder.AutoCompleteSource = AutoCompleteSource.ListItems
             InitializeDataGridView()
         End Sub
 
         Private Sub cboItemFinder_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboItemFinder.SelectedIndexChanged
-            'RaiseEvent FinderValueChanged(cboItemFinder.SelectedItem.IdNo)
+            RaiseEvent FinderValueChanged(cboItemFinder.SelectedItem(1))
         End Sub
 
         Private Sub btnScanQrCode_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnScanQrCode.ClickButtonArea
@@ -546,6 +563,72 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private Sub btnOk_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
+            If DrugGTin IsNot Nothing Then
+                btnEdit.PerformClick()
+                txtGTIN.Text = txtDrugGTin.Text
+                txtGTIN.Refresh()
+                btnSave.PerformClick()
+            End If
+        End Sub
+
+        'Protected Overrides Sub cboItemFinder.OnTextUpdate(ByVal e As EventArgs)
+
+        'End Sub
+
+        'Private Sub cboitemfinder_textchanged(sender As Object, e As EventArgs) Handles cboItemFinder.TextUpdate
+        '    If cboItemFinder.SelectedIndex = -1 Then
+        '        ItemDetailsByName.DefaultView.RowFilter = "itemnameenglish like '%" & cboItemFinder.Text & "%'"
+        '    End If
+        'End Sub
+
     End Class
+
+
+    'Public Class CeComboBox
+    '    Inherits ComboBox
+
+    '    Private collectionList As DataTable
+
+    '    'Public Sub New()
+    '    '    collectionList = New List(Of Object)()
+    '    'End Sub
+
+    '    'Public Sub New(ByVal container As System.ComponentModel.IContainer)
+    '    '    Me.New()
+    '    '    container.Add(Me)
+    '    'End Sub
+
+    '    Protected Overrides Sub OnTextUpdate(ByVal e As EventArgs)
+    '        Try
+    '            collectionList = DataSource
+
+    '            Dim values As IList(Of Object) = collectionList.Where(Function(x) x.ToString().ToLower().Contains(Text.ToLower())).ToList()
+
+    '            While Items.Count > 0
+    '                Items.RemoveAt(0)
+    '            End While
+
+    '            Me.Items.AddRange(values.ToArray())
+    '            Me.DroppedDown = True
+    '            Cursor.Current = Cursors.[Default]
+    '        Catch ex As Exception
+    '            SelectedIndex = -1
+    '        End Try
+    '    End Sub
+
+    '    Protected Overrides Sub OnTextChanged(ByVal e As EventArgs)
+    '        If Me.Text = String.Empty Then
+    '            Items.Clear()
+    '            Me.Items.AddRange(collectionList.ToArray())
+    '        End If
+    '    End Sub
+
+    '    Protected Overrides Sub OnBindingContextChanged(ByVal e As EventArgs)
+    '        MyBase.OnBindingContextChanged(e)
+    '        collectionList = Me.Items.OfType(Of Object)().ToList()
+    '    End Sub
+
+    'End Class
 
 End Namespace
