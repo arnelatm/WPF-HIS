@@ -22,7 +22,7 @@ Public Class CFindForm
         _findableControl = findableControl
         Dim ctrl As Control
         Dim formPoint As Point
-        Dim ctrlPoint As Point
+        'Dim ctrlPoint As Point
         ctrl = DirectCast(findableControl, Control)
         'ctrlPoint = New Point(ctrl.Location.X + ctrl.Width, ctrl.Location.Y)
         'formPoint = ctrl.PointToScreen(ctrlPoint)

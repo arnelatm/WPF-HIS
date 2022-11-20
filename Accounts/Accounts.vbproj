@@ -537,6 +537,12 @@
     <Compile Include="PresentationLayer\Views\Forms\DoctorEntry.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\TestForm3.Designer.vb">
+      <DependentUpon>TestForm3.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\TestForm3.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\DrugAcceptEntry.Designer.vb">
       <DependentUpon>DrugAcceptEntry.vb</DependentUpon>
     </Compile>
@@ -837,12 +843,6 @@
     <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\TestForm.Designer.vb">
-      <DependentUpon>TestForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\TestForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\IGroup\PmrPatientDisplayView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IDrugAcceptView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IDrugSaleView.vb" />
@@ -891,12 +891,6 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementView.vb" />
     <Compile Include="PresentationLayer\Views\OtWorkHourView.vb" />
-    <Compile Include="PresentationLayer\Views\Forms\Test.Designer.vb">
-      <DependentUpon>Test.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Test.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\PayrollDetailEntry.Designer.vb">
       <DependentUpon>PayrollDetailEntry.vb</DependentUpon>
     </Compile>
@@ -1816,6 +1810,9 @@
       <DependentUpon>DoctorEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\TestForm3.resx">
+      <DependentUpon>TestForm3.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\DrugAcceptEntry.resx">
       <DependentUpon>DrugAcceptEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -2008,9 +2005,6 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\SupplierEntryTv.resx">
       <DependentUpon>SupplierEntryTv.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Test.resx">
-      <DependentUpon>Test.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PayrollDetailEntry.resx">
       <DependentUpon>PayrollDetailEntry.vb</DependentUpon>
     </EmbeddedResource>
@@ -2121,9 +2115,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\StatementOfAp.resx">
       <DependentUpon>StatementOfAp.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\TestForm.resx">
-      <DependentUpon>TestForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\LeaveView.resx">
       <DependentUpon>LeaveView.vb</DependentUpon>

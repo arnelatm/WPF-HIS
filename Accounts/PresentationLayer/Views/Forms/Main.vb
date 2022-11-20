@@ -1036,8 +1036,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub TestFormToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTestForm.Click
-            Dim form As New Form1
-            Form1.Show()
+            Dim form As New TestForm3
+            form.Show()
             'Dim formToRun = Activator.CreateInstance(GetType(TestForm))
             'formToRun.Presenter = New DepartmentPresenter(Of DepartmentModel)(formToRun)
             'formToRun.Show()

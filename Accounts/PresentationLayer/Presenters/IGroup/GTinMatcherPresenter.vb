@@ -16,7 +16,7 @@ Namespace PresentationLayer.Presenters
         Public Sub New(itemView As IGTinMatcherView)
             MyBase.New(itemView)
             Service = New AccountsService("ItemDetails")
-            TableName = "ItemDetails"
+            TableName = "ItemDetailsQty_View"
             SortOrderKey = "ItemNameEnglish"
             WithTreeView = False
             AddHandler View.FinderValueChanged, AddressOf OnFinderValueChanged
@@ -26,7 +26,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnGTinValueChanged(sender As DataGridView, gTinValue As String)
-            If gTinValue Is Nothing Or gTinValue = "" Then
+            If gTinValue Is DBNull.Value Or gTinValue Is Nothing Or gTinValue = "" Then
                 ClearDrugDisplay()
                 ClearItemDrugDisplay()
             Else
@@ -43,8 +43,8 @@ Namespace PresentationLayer.Presenters
         Private Sub OnUpdateDrugDisplay(itemDetailIdNo As Integer)
             Dim drug As Object = MakeDrug(itemDetailIdNo)
             DisplayDrug(drug)
-            Dim itemDao = New ItemDetailsDao()
-            View.QtyOnHand = itemDao.GetQtyOnHandBox(View.ItemDetailsCode)
+            'Dim itemDao = New ItemDetailsDao()
+            'View.QtyOnHand = itemDao.GetQtyOnHandBox(View.ItemDetailsCode)
         End Sub
 
         Private Function MakeDrug(drugIdNo As Integer) As Object
@@ -58,16 +58,16 @@ Namespace PresentationLayer.Presenters
             CreateDataSource("DrugUnitOfStrength_View", "UnitOfStrength", {"UnitOfStrength"}, "UnitOfStrength")
             CreateDataSource("DrugPackageType_View", "PackageType", {"PackageType"}, "PackageType")
             CreateDataSource("DrugRouteOfAdministration_View", "RouteOfAdministration", {"RouteOfAdministration"}, "RouteOfAdministration")
-            CreateLookupDataTable("ItemDetails", "ItemDetailsByName", {"Primary_Key", "ItemNameEnglish", "Item_Code"}, "BranchId='01'")
+            CreateLookupDataTable("ItemDetails", "ItemDetailsByName", {"ItemNameEnglish", "Primary_Key"}, "BranchId='01' and ItemGroup='MD'")
         End Sub
 
         Public Overrides Sub GoFilter()
             If DataFilter Is Nothing Or DataFilter = "" Then
-                DataFilter = "Active = 1 and ItemGroup = 'MD'"
+                DataFilter = "Active = 1 and ItemGroup = 'MD' and QtyOnHand <> 0 "
             Else
                 DataFilter = ""
             End If
-            DisplayTree()
+            'DisplayTree()
             GoFirstRecord()
         End Sub
 
