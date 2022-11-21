@@ -23,6 +23,7 @@ Namespace PresentationLayer.Presenters
             AddHandler View.GetDrugDataTable, AddressOf OnGetDrugDataTable
             AddHandler View.GetItemDataTable, AddressOf OnGetItemDataTable
             AddHandler View.UpdateDrugDisplay, AddressOf OnUpdateDrugDisplay
+            AddHandler View.UpdateItemDisplay, AddressOf OnUpdateItemDisplay
             AddHandler View.GTinValueChanged, AddressOf OnGTinValueChanged
         End Sub
 
@@ -44,6 +45,12 @@ Namespace PresentationLayer.Presenters
         Private Sub OnUpdateDrugDisplay(itemDetailIdNo As Integer)
             Dim drug As Object = MakeDrug(itemDetailIdNo)
             DisplayDrug(drug)
+            'Dim itemDao = New ItemDetailsDao()
+            'View.QtyOnHand = itemDao.GetQtyOnHandBox(View.ItemDetailsCode)
+        End Sub
+
+        Private Sub OnUpdateItemDisplay(idNo As Integer)
+            RecordPositionNumber = GetSortedRecordPosition(idNo)
             'Dim itemDao = New ItemDetailsDao()
             'View.QtyOnHand = itemDao.GetQtyOnHandBox(View.ItemDetailsCode)
         End Sub
