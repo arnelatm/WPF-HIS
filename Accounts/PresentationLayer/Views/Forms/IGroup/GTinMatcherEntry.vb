@@ -22,6 +22,7 @@ Namespace PresentationLayer.Views.Forms
         Public Event GetItemDataTable(ByRef drugListDataTable As DataTable) Implements IGTinMatcherView.GetItemDataTable
 
         Public Event UpdateDrugDisplay(gTinIdNo As Int32) Implements IGTinMatcherView.UpdateDrugDisplay
+        Public Event UpdateItemDisplay(gTinIdNo As Int32) Implements IGTinMatcherView.UpdateItemDisplay
 
         Public Event GTinValueChanged(sender As DataGridView, gTinValue As String) Implements IItemDetailsView.GTinValueChanged
 
@@ -114,8 +115,7 @@ Namespace PresentationLayer.Views.Forms
                 Return TxtItemDetailsCode.Text
             End Get
             Set
-                TxtItemDetailsCode.Text = If(Value, "")
-                SelectRecordOnItemGrid(Value)
+                TxtItemDetailsCode.Text = NoDbNull(Value)
             End Set
         End Property
 
@@ -303,14 +303,16 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Private Sub SelectRecordOnDrugGrid(gTinValue As String)
-            If gTinValue IsNot DBNull.Value Or gTinValue IsNot Nothing Or gTinValue = "" Then
+            If gTinValue IsNot DBNull.Value OrElse gTinValue IsNot Nothing OrElse gTinValue = "" Then
                 DataGridViewDrugs.SearchGrid(gTinValue, "GTin")
             End If
         End Sub
 
-        Private Sub SelectRecordOnItemGrid(itemCode As String)
-            If itemCode IsNot DBNull.Value Or itemCode IsNot Nothing Or itemCode = "" Then
-                DataGridViewItems.SearchGrid(itemCode, "Item_Code")
+        Private Sub SelectRecordOnItemGrid(idNo As Int32?)
+            If Not _startedByItemGrid Then
+                If Not (idNo Is Nothing OrElse idNo = 0) Then
+                    DataGridViewItems.SearchGrid(idNo, "Primary_Key")
+                End If
             End If
         End Sub
 
@@ -486,10 +488,18 @@ Namespace PresentationLayer.Views.Forms
 
         Private Property QtyOnHand As Decimal? Implements IItemDetailsView.QtyOnHand
             Get
-                Return txtQtyOnHand.Text
+                If txtQtyOnHand.Text Is Nothing Then
+                    Return Nothing
+                Else
+                    Return ToDecimalNumber(txtQtyOnHand.Text, _nfi)
+                End If
             End Get
             Set
-                txtQtyOnHand.Text = NoDbNull(Value)
+                If Value Is Nothing Then
+                    txtQtyOnHand.Text = Nothing
+                Else
+                    txtQtyOnHand.Text = NoDbNull(Value)
+                End If
             End Set
         End Property
 
@@ -581,6 +591,19 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private _startedByItemGrid As Boolean = False
+
+        Private Sub DataGridViewItems_CellEnter(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewItems.CellEnter
+            Dim dgvIdNo As Int32
+            Dim curRow = DataGridViewItems.CurrentRow()
+            If curRow IsNot Nothing Then
+                dgvIdNo = curRow.Cells("Primary_Key").Value
+                _startedByItemGrid = True
+                RaiseEvent UpdateItemDisplay(dgvIdNo)
+                _startedByItemGrid = False
+            End If
+        End Sub
+
         Private Sub btnOk_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
             If DrugGTin IsNot Nothing Then
                 btnEdit.PerformClick()
@@ -588,6 +611,10 @@ Namespace PresentationLayer.Views.Forms
                 txtGTIN.Refresh()
                 btnSave.PerformClick()
             End If
+        End Sub
+
+        Protected Overridable Sub OnAfterRecordChanged() Handles Me.AfterUpdateView
+            SelectRecordOnItemGrid(IdNo)
         End Sub
 
         'Protected Overrides Sub cboItemFinder.OnTextUpdate(ByVal e As EventArgs)
