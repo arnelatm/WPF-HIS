@@ -1857,8 +1857,12 @@
             '
             'DataGridViewDrugs
             '
+            Me.DataGridViewDrugs.AllowUserToAddRows = False
+            Me.DataGridViewDrugs.AllowUserToDeleteRows = False
             DataGridViewCellStyle3.BackColor = System.Drawing.Color.FloralWhite
             Me.DataGridViewDrugs.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
+            Me.DataGridViewDrugs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
+            Me.DataGridViewDrugs.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
             Me.DataGridViewDrugs.BegFindValue = Nothing
             Me.DataGridViewDrugs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -1910,8 +1914,13 @@
             '
             'DataGridViewItems
             '
+            Me.DataGridViewItems.AllowUserToAddRows = False
+            Me.DataGridViewItems.AllowUserToDeleteRows = False
+            Me.DataGridViewItems.AllowUserToResizeRows = False
             DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
             Me.DataGridViewItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            Me.DataGridViewItems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
+            Me.DataGridViewItems.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
             Me.DataGridViewItems.BegFindValue = Nothing
             Me.DataGridViewItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
             DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -1939,6 +1948,7 @@
             Me.DataGridViewItems.Location = New System.Drawing.Point(3, 372)
             Me.DataGridViewItems.Name = "DataGridViewItems"
             Me.DataGridViewItems.ReadOnly = True
+            Me.DataGridViewItems.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
             Me.DataGridViewItems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewItems.SecurityKey = ""
             Me.DataGridViewItems.SequenceColumn = "dgvSequence"
