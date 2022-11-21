@@ -1462,7 +1462,7 @@ Public Module GlobalFunctions
     ''' <param name="argObj">string value to handle</param>
     ''' <returns>returns string</returns>
     Public Function NoDbNull(argObj As Object) As Object
-        If argObj Is Nothing Or argObj.Equals(DBNull.Value) Then
+        If argObj Is Nothing OrElse argObj.Equals(DBNull.Value) Then
             Return Nothing
         End If
         Return argObj

@@ -342,7 +342,6 @@ Namespace PresentationLayer.Views.Forms
             gTinScanner.Close()
         End Sub
 
-
     End Class
 
 End Namespace

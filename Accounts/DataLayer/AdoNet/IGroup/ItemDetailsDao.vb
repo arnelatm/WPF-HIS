@@ -27,7 +27,6 @@ Namespace DataLayer.AdoNet
                                       "PackageType," &
                                       "Primary_Key," &
                                       "Price_Cash," &
-                                      "QtyOnHand," &
                                       "RegistrationNo," &
                                       "RouteOfAdministration," &
                                       "StrengthValue," &
@@ -126,7 +125,6 @@ Namespace DataLayer.AdoNet
             .PackageSize = Extensions.AsNullable(Of Decimal?)(reader("PackageSize")),
             .PackageType = Extensions.AsString(reader("PackageType")),
             .Price_Cash = Extensions.AsNullable(Of Decimal?)(reader("Price_Cash")),
-            .QtyOnHand = Extensions.AsNullable(Of Decimal?)(reader("QtyOnHand")),
             .RegistrationNo = Extensions.AsString(reader("RegistrationNo")),
             .RouteOfAdministration = Extensions.AsString(reader("RouteOfAdministration")),
             .StrengthValue = Extensions.AsString(reader("StrengthValue")),
@@ -214,14 +212,14 @@ Namespace DataLayer.AdoNet
         '    Return retVal
         'End Function
 
-        'Public Function GetQtyOnHandBox(itemCode As String) As Decimal?
-        '    Dim sqlCommand = "Select sum(PCSQty)/Pack2/pack3 FROM StockPositionCurrent_View where item_code = @itemCode and branchId='01' and warehouseid='01' group by item_code, pack2, pack3, branchid, warehouseid"
-        '    Dim qty As Decimal? = _db.Scalar(sqlCommand, {"@itemCode", itemCode})
-        '    If qty Is Nothing Then
-        '        Return 0
-        '    End If
-        '    Return qty
-        'End Function
+        Public Function GetQtyOnHandBox(itemCode As String) As Decimal?
+            Dim sqlCommand = "Select sum(PCSQty)/Pack2/pack3 FROM StockPositionCurrent_View where item_code = @itemCode and branchId='01' and warehouseid='01' group by item_code, pack2, pack3, branchid, warehouseid"
+            Dim qty As Decimal? = _db.Scalar(sqlCommand, {"@itemCode", itemCode})
+            If qty Is Nothing Then
+                Return 0
+            End If
+            Return qty
+        End Function
 
         Public Overrides Function GetActualFieldName(fieldName As String)
             Dim actualFieldName As String

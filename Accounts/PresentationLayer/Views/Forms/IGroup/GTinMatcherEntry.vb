@@ -18,6 +18,7 @@ Namespace PresentationLayer.Views.Forms
         'Public Event GTinMatcherValueChanged(sender As Object, gTinIdNo As Int32) Implements IGTinMatcherView.GTinMatcherValueChanged
 
         Public Event GetDrugDataTable(ByRef drugListDataTable As DataTable) Implements IGTinMatcherView.GetDrugDataTable
+
         Public Event GetItemDataTable(ByRef drugListDataTable As DataTable) Implements IGTinMatcherView.GetItemDataTable
 
         Public Event UpdateDrugDisplay(gTinIdNo As Int32) Implements IGTinMatcherView.UpdateDrugDisplay
@@ -47,7 +48,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Public Property ItemDetailsByName As DataTable
+        'Public Property ItemDetailsByName As DataTable
 
         Private Sub InitializeDataGridView()
             ' Set up the DataGridView.
@@ -60,7 +61,8 @@ Namespace PresentationLayer.Views.Forms
                 bsDrugList.DataSource = drugListDataTable
                 .DataSource = bsDrugList
                 ' Automatically resize the visible rows.
-                .AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders
+                '.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells
+                '.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells
                 ' Set the DataGridView control's border.
                 .BorderStyle = BorderStyle.Fixed3D
                 ' Put the cells in edit mode when user enters them.
@@ -75,7 +77,7 @@ Namespace PresentationLayer.Views.Forms
                 bsItemDetails.DataSource = itemDetailsDataTable
                 .DataSource = bsItemDetails
                 ' Automatically resize the visible rows.
-                .AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders
+                '.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders
                 ' Set the DataGridView control's border.
                 .BorderStyle = BorderStyle.Fixed3D
                 ' Put the cells in edit mode when user enters them.
@@ -300,7 +302,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-
         Private Sub SelectRecordOnDrugGrid(gTinValue As String)
             If gTinValue IsNot DBNull.Value Or gTinValue IsNot Nothing Or gTinValue = "" Then
                 DataGridViewDrugs.SearchGrid(gTinValue, "GTin")
@@ -488,7 +489,7 @@ Namespace PresentationLayer.Views.Forms
                 Return txtQtyOnHand.Text
             End Get
             Set
-                txtQtyOnHand.Text = IIf(Value Is Nothing, "", Value)
+                txtQtyOnHand.Text = NoDbNull(Value)
             End Set
         End Property
 
@@ -549,6 +550,8 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub GTinMatcher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             InitializeDataGridView()
+            bnDrugList.DeleteItem.Visible = False
+            bnDrugList.AddNewItem.Visible = False
         End Sub
 
         'Private Sub cboItemFinder_SelectedIndexChanged(sender As Object, e As EventArgs)
@@ -598,7 +601,6 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
     End Class
-
 
     'Public Class CeComboBox
     '    Inherits ComboBox

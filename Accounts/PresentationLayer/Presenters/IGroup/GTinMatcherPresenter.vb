@@ -59,7 +59,7 @@ Namespace PresentationLayer.Presenters
             CreateDataSource("DrugUnitOfStrength_View", "UnitOfStrength", {"UnitOfStrength"}, "UnitOfStrength")
             CreateDataSource("DrugPackageType_View", "PackageType", {"PackageType"}, "PackageType")
             CreateDataSource("DrugRouteOfAdministration_View", "RouteOfAdministration", {"RouteOfAdministration"}, "RouteOfAdministration")
-            CreateLookupDataTable("ItemDetails", "ItemDetailsByName", {"ItemNameEnglish", "Primary_Key"}, "BranchId='01' and ItemGroup='MD'")
+            'CreateLookupDataTable("ItemDetails", "ItemDetailsByName", {"ItemNameEnglish", "Primary_Key"}, "BranchId='01' and ItemGroup='MD'")
         End Sub
 
         Public Overrides Sub GoFilter()
@@ -160,11 +160,11 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnGetDrugDataTable(ByRef drugListDataTable As DataTable)
-            drugListDataTable = Service.GetDataTable("DrugList", "[Trade Name]")
+            drugListDataTable = Service.GetDataTable("DrugList", "[Trade Name]", "IdNo,GTin,[Trade Name],[Public Price],[Strength Value],[Unit of Strength],[Dosage Form],[Volume],[Unit of Volume],[Package Type],[Package Size]")
         End Sub
 
         Private Sub OnGetItemDataTable(ByRef itemDetailsDataTable As DataTable)
-            itemDetailsDataTable = Service.GetDataTable("ItemDetails", "ItemNameEnglish")
+            itemDetailsDataTable = Service.GetDataTable("ItemDetailsQty_View", "ItemNameEnglish", "Primary_Key,Item_Code,GTin,ItemNameEnglish,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand")
         End Sub
 
         Private Sub OnBeforeSave() Handles MyBase.BeforeSave
