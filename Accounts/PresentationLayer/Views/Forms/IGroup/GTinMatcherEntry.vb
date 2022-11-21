@@ -17,7 +17,8 @@ Namespace PresentationLayer.Views.Forms
 
         'Public Event GTinMatcherValueChanged(sender As Object, gTinIdNo As Int32) Implements IGTinMatcherView.GTinMatcherValueChanged
 
-        Public Event GetDataTable(ByRef drugListDataTable As DataTable) Implements IGTinMatcherView.GetDataTable
+        Public Event GetDrugDataTable(ByRef drugListDataTable As DataTable) Implements IGTinMatcherView.GetDrugDataTable
+        Public Event GetItemDataTable(ByRef drugListDataTable As DataTable) Implements IGTinMatcherView.GetItemDataTable
 
         Public Event UpdateDrugDisplay(gTinIdNo As Int32) Implements IGTinMatcherView.UpdateDrugDisplay
 
@@ -54,7 +55,7 @@ Namespace PresentationLayer.Views.Forms
                 ' Automatically generate the DataGridView columns.
                 .AutoGenerateColumns = True
                 Dim drugListDataTable As New DataTable
-                RaiseEvent GetDataTable(drugListDataTable)
+                RaiseEvent GetDrugDataTable(drugListDataTable)
                 ' Set up the data source.
                 bsDrugList.DataSource = drugListDataTable
                 .DataSource = bsDrugList
@@ -65,7 +66,21 @@ Namespace PresentationLayer.Views.Forms
                 ' Put the cells in edit mode when user enters them.
                 DataGridViewDrugs.ReadOnly = True
             End With
-
+            With Me.DataGridViewItems
+                ' Automatically generate the DataGridView columns.
+                .AutoGenerateColumns = True
+                Dim itemDetailsDataTable As New DataTable
+                RaiseEvent GetItemDataTable(itemDetailsDataTable)
+                ' Set up the data source.
+                bsItemDetails.DataSource = itemDetailsDataTable
+                .DataSource = bsItemDetails
+                ' Automatically resize the visible rows.
+                .AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders
+                ' Set the DataGridView control's border.
+                .BorderStyle = BorderStyle.Fixed3D
+                ' Put the cells in edit mode when user enters them.
+                DataGridViewItems.ReadOnly = True
+            End With
         End Sub
 
 #Region "Field Items"
@@ -98,6 +113,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 TxtItemDetailsCode.Text = If(Value, "")
+                SelectRecordOnItemGrid(Value)
             End Set
         End Property
 
@@ -279,15 +295,21 @@ Namespace PresentationLayer.Views.Forms
                 txtGTIN.Text = value
                 If Not (value Is DBNull.Value Or value Is Nothing Or value = "") Then
                     RaiseEvent GTinValueChanged(DataGridViewDrugs, value)
-                    SelectRecordOnGrid(value)
+                    SelectRecordOnDrugGrid(value)
                 End If
             End Set
         End Property
 
 
-        Private Sub SelectRecordOnGrid(gTinValue As String)
+        Private Sub SelectRecordOnDrugGrid(gTinValue As String)
             If gTinValue IsNot DBNull.Value Or gTinValue IsNot Nothing Or gTinValue = "" Then
                 DataGridViewDrugs.SearchGrid(gTinValue, "GTin")
+            End If
+        End Sub
+
+        Private Sub SelectRecordOnItemGrid(itemCode As String)
+            If itemCode IsNot DBNull.Value Or itemCode IsNot Nothing Or itemCode = "" Then
+                DataGridViewItems.SearchGrid(itemCode, "Item_Code")
             End If
         End Sub
 
@@ -526,19 +548,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub GTinMatcher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            cboItemFinder.DataSource = ItemDetailsByName
-            cboItemFinder.DisplayMember = "ItemNameEnglish"
-            cboItemFinder.ValueMember = "Primary_key"
-            'cboItemFinder.AutoCompleteMode = AutoCompleteMode.None
-            'cboItemFinder.AutoCompleteSource = AutoCompleteSource.ListItems
-            cboItemFinder.AutoCompleteMode = AutoCompleteMode.SuggestAppend
-            cboItemFinder.AutoCompleteSource = AutoCompleteSource.ListItems
             InitializeDataGridView()
         End Sub
 
-        Private Sub cboItemFinder_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboItemFinder.SelectedIndexChanged
-            RaiseEvent FinderValueChanged(cboItemFinder.SelectedItem(1))
-        End Sub
+        'Private Sub cboItemFinder_SelectedIndexChanged(sender As Object, e As EventArgs)
+        '    RaiseEvent FinderValueChanged(cboItemFinder.SelectedItem(1))
+        'End Sub
 
         Private Sub btnScanQrCode_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnScanQrCode.ClickButtonArea
             Dim gTinScanner As New GTinScanner

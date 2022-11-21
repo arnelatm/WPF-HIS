@@ -22,12 +22,13 @@
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(GTinMatcherEntry))
+            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblGTIN = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboItemFinder = New System.Windows.Forms.ComboBox()
             Me.btnScanQrCode = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.EventLog1 = New System.Diagnostics.EventLog()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -110,7 +111,9 @@
             Me.txtDrugRouteOfAdministration = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.DataGridViewDrugs = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
-            Me.lblSearcher = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.DataGridViewItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.bsItemDetails = New System.Windows.Forms.BindingSource(Me.components)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout1.SuspendLayout()
@@ -119,6 +122,9 @@
             Me.bnDrugList.SuspendLayout()
             CType(Me.bsDrugList, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.DataGridViewDrugs, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.DataGridViewItems, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.CFlowLayout3.SuspendLayout()
+            CType(Me.bsItemDetails, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             '
             'TxtIdNo
@@ -178,20 +184,6 @@
             Me.lblGTIN.Text = "GTIN"
             Me.lblGTIN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblGTIN.Translatable = True
-            '
-            'cboItemFinder
-            '
-            Me.cboItemFinder.BackColor = System.Drawing.Color.White
-            Me.cboItemFinder.DisplayMember = "Name"
-            Me.cboItemFinder.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cboItemFinder.ForeColor = System.Drawing.Color.Black
-            Me.cboItemFinder.FormattingEnabled = True
-            Me.cboItemFinder.Location = New System.Drawing.Point(110, 55)
-            Me.cboItemFinder.Margin = New System.Windows.Forms.Padding(1)
-            Me.cboItemFinder.Name = "cboItemFinder"
-            Me.cboItemFinder.Size = New System.Drawing.Size(358, 24)
-            Me.cboItemFinder.TabIndex = 37
-            Me.cboItemFinder.ValueMember = "Name"
             '
             'btnScanQrCode
             '
@@ -255,9 +247,9 @@
             Me.CFlowLayout1.Controls.Add(Me.CLabel3)
             Me.CFlowLayout1.Controls.Add(Me.cboRouteOfAdministration)
             Me.CFlowLayout1.Controls.Add(Me.CLabel2)
-            Me.CFlowLayout1.Location = New System.Drawing.Point(4, 84)
+            Me.CFlowLayout1.Location = New System.Drawing.Point(3, 3)
             Me.CFlowLayout1.Name = "CFlowLayout1"
-            Me.CFlowLayout1.Size = New System.Drawing.Size(471, 360)
+            Me.CFlowLayout1.Size = New System.Drawing.Size(476, 363)
             Me.CFlowLayout1.TabIndex = 6
             '
             'lblCode
@@ -1144,7 +1136,7 @@
             Me.CFlowLayout2.Controls.Add(Me.txtDrugPackageSize)
             Me.CFlowLayout2.Controls.Add(Me.CLabel18)
             Me.CFlowLayout2.Controls.Add(Me.txtDrugRouteOfAdministration)
-            Me.CFlowLayout2.Location = New System.Drawing.Point(481, 85)
+            Me.CFlowLayout2.Location = New System.Drawing.Point(485, 3)
             Me.CFlowLayout2.Name = "CFlowLayout2"
             Me.CFlowLayout2.Size = New System.Drawing.Size(477, 359)
             Me.CFlowLayout2.TabIndex = 38
@@ -1865,18 +1857,18 @@
             '
             'DataGridViewDrugs
             '
-            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewDrugs.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            DataGridViewCellStyle3.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewDrugs.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
             Me.DataGridViewDrugs.BegFindValue = Nothing
             Me.DataGridViewDrugs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewDrugs.DefaultCellStyle = DataGridViewCellStyle2
+            DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewDrugs.DefaultCellStyle = DataGridViewCellStyle4
             Me.DataGridViewDrugs.DgvFooter = Nothing
             Me.DataGridViewDrugs.DisplayOnly = False
             Me.DataGridViewDrugs.Ea = Nothing
@@ -1891,7 +1883,7 @@
             Me.DataGridViewDrugs.FirstRowInsertionEnabled = True
             Me.DataGridViewDrugs.IgnoreCase = False
             Me.DataGridViewDrugs.IsDirty = False
-            Me.DataGridViewDrugs.Location = New System.Drawing.Point(4, 450)
+            Me.DataGridViewDrugs.Location = New System.Drawing.Point(3, 523)
             Me.DataGridViewDrugs.Name = "DataGridViewDrugs"
             Me.DataGridViewDrugs.ReadOnly = True
             Me.DataGridViewDrugs.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -1900,7 +1892,7 @@
             Me.DataGridViewDrugs.SequenceFieldName = "Sequence"
             Me.DataGridViewDrugs.ShowFooter = False
             Me.DataGridViewDrugs.ShowInsertColumnWhenEditing = True
-            Me.DataGridViewDrugs.Size = New System.Drawing.Size(954, 273)
+            Me.DataGridViewDrugs.Size = New System.Drawing.Size(958, 145)
             Me.DataGridViewDrugs.TabIndex = 39
             Me.DataGridViewDrugs.Translatable = True
             '
@@ -1916,40 +1908,71 @@
             Me.btnOk.TabIndex = 40
             Me.btnOk.Text = "Match Displayed Items"
             '
-            'lblSearcher
+            'DataGridViewItems
             '
-            Me.lblSearcher.BackColor = System.Drawing.Color.Transparent
-            Me.lblSearcher.DisplayOnly = True
-            Me.lblSearcher.EditingMode = False
-            Me.lblSearcher.Font = New System.Drawing.Font("Arial Narrow", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.lblSearcher.Location = New System.Drawing.Point(0, 55)
-            Me.lblSearcher.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblSearcher.Name = "lblSearcher"
-            Me.lblSearcher.Size = New System.Drawing.Size(103, 23)
-            Me.lblSearcher.TabIndex = 77
-            Me.lblSearcher.Text = "Selector"
-            Me.lblSearcher.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.lblSearcher.Translatable = True
+            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            Me.DataGridViewItems.BegFindValue = Nothing
+            Me.DataGridViewItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewItems.DefaultCellStyle = DataGridViewCellStyle2
+            Me.DataGridViewItems.DgvFooter = Nothing
+            Me.DataGridViewItems.DisplayOnly = False
+            Me.DataGridViewItems.Ea = Nothing
+            Me.DataGridViewItems.EditingMode = False
+            Me.DataGridViewItems.EndFindValue = Nothing
+            Me.DataGridViewItems.FieldDescription = Nothing
+            Me.DataGridViewItems.FieldName = Nothing
+            Me.DataGridViewItems.FieldsDictionary = Nothing
+            Me.DataGridViewItems.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.DataGridViewItems.FindEnabled = False
+            Me.DataGridViewItems.FirstRowDeletionEnabled = True
+            Me.DataGridViewItems.FirstRowInsertionEnabled = True
+            Me.DataGridViewItems.IgnoreCase = False
+            Me.DataGridViewItems.IsDirty = False
+            Me.DataGridViewItems.Location = New System.Drawing.Point(3, 372)
+            Me.DataGridViewItems.Name = "DataGridViewItems"
+            Me.DataGridViewItems.ReadOnly = True
+            Me.DataGridViewItems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.DataGridViewItems.SecurityKey = ""
+            Me.DataGridViewItems.SequenceColumn = "dgvSequence"
+            Me.DataGridViewItems.SequenceFieldName = "Sequence"
+            Me.DataGridViewItems.ShowFooter = False
+            Me.DataGridViewItems.ShowInsertColumnWhenEditing = True
+            Me.DataGridViewItems.Size = New System.Drawing.Size(958, 145)
+            Me.DataGridViewItems.TabIndex = 78
+            Me.DataGridViewItems.Translatable = True
+            '
+            'CFlowLayout3
+            '
+            Me.CFlowLayout3.BackColor = System.Drawing.Color.Transparent
+            Me.CFlowLayout3.Controls.Add(Me.CFlowLayout1)
+            Me.CFlowLayout3.Controls.Add(Me.CFlowLayout2)
+            Me.CFlowLayout3.Controls.Add(Me.DataGridViewItems)
+            Me.CFlowLayout3.Controls.Add(Me.DataGridViewDrugs)
+            Me.CFlowLayout3.Location = New System.Drawing.Point(4, 57)
+            Me.CFlowLayout3.Margin = New System.Windows.Forms.Padding(0)
+            Me.CFlowLayout3.Name = "CFlowLayout3"
+            Me.CFlowLayout3.Size = New System.Drawing.Size(971, 669)
+            Me.CFlowLayout3.TabIndex = 79
             '
             'GTinMatcherEntry
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
-            Me.ClientSize = New System.Drawing.Size(962, 761)
+            Me.ClientSize = New System.Drawing.Size(984, 749)
+            Me.Controls.Add(Me.CFlowLayout3)
             Me.Controls.Add(Me.btnOk)
-            Me.Controls.Add(Me.DataGridViewDrugs)
-            Me.Controls.Add(Me.CFlowLayout2)
-            Me.Controls.Add(Me.cboItemFinder)
-            Me.Controls.Add(Me.CFlowLayout1)
-            Me.Controls.Add(Me.lblSearcher)
             Me.Name = "GTinMatcherEntry"
             Me.Text = "Item Details Entry"
-            Me.Controls.SetChildIndex(Me.lblSearcher, 0)
-            Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)
-            Me.Controls.SetChildIndex(Me.cboItemFinder, 0)
-            Me.Controls.SetChildIndex(Me.CFlowLayout2, 0)
-            Me.Controls.SetChildIndex(Me.DataGridViewDrugs, 0)
             Me.Controls.SetChildIndex(Me.btnOk, 0)
+            Me.Controls.SetChildIndex(Me.CFlowLayout3, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).EndInit()
             Me.CFlowLayout1.ResumeLayout(False)
@@ -1961,6 +1984,9 @@
             Me.bnDrugList.PerformLayout()
             CType(Me.bsDrugList, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.DataGridViewDrugs, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.DataGridViewItems, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.CFlowLayout3.ResumeLayout(False)
+            CType(Me.bsItemDetails, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
             Me.PerformLayout()
 
@@ -1968,7 +1994,6 @@
         Friend WithEvents TxtIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblGTIN As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboItemFinder As ComboBox
         Friend WithEvents btnScanQrCode As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents EventLog1 As EventLog
         Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout
@@ -2043,7 +2068,6 @@
         Friend WithEvents BindingNavigatorMoveLastItem As ToolStripButton
         Friend WithEvents BindingNavigatorSeparator2 As ToolStripSeparator
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents lblSearcher As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents bsDrugList As BindingSource
         Friend WithEvents lblPrice_Cash As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtPrice_Cash As Libraries.CBaseControlsLibrary.CTextBox
@@ -2052,5 +2076,8 @@
         Friend WithEvents CLabel6 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtQtyOnHand As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel9 As Libraries.CBaseControlsLibrary.CLabel
+        Friend WithEvents CFlowLayout3 As Libraries.CBaseControlsLibrary.CFlowLayout
+        Friend WithEvents DataGridViewItems As Libraries.CBaseControlsLibrary.CDataGridView
+        Friend WithEvents bsItemDetails As BindingSource
     End Class
 End Namespace

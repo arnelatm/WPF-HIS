@@ -20,7 +20,8 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "ItemNameEnglish"
             WithTreeView = False
             AddHandler View.FinderValueChanged, AddressOf OnFinderValueChanged
-            AddHandler View.GetDataTable, AddressOf OnGetDataTable
+            AddHandler View.GetDrugDataTable, AddressOf OnGetDrugDataTable
+            AddHandler View.GetItemDataTable, AddressOf OnGetItemDataTable
             AddHandler View.UpdateDrugDisplay, AddressOf OnUpdateDrugDisplay
             AddHandler View.GTinValueChanged, AddressOf OnGTinValueChanged
         End Sub
@@ -158,8 +159,12 @@ Namespace PresentationLayer.Presenters
             View.DrugPublicPrice = Nothing
         End Sub
 
-        Private Sub OnGetDataTable(ByRef drugListDataTable As DataTable)
+        Private Sub OnGetDrugDataTable(ByRef drugListDataTable As DataTable)
             drugListDataTable = Service.GetDataTable("DrugList", "[Trade Name]")
+        End Sub
+
+        Private Sub OnGetItemDataTable(ByRef itemDetailsDataTable As DataTable)
+            itemDetailsDataTable = Service.GetDataTable("ItemDetails", "ItemNameEnglish")
         End Sub
 
         Private Sub OnBeforeSave() Handles MyBase.BeforeSave

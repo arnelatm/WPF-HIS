@@ -21,7 +21,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property DrugList As Object
         Property DrugPublicPrice As Decimal
         'Property QtyOnHand As Decimal?
-        Event GetDataTable(ByRef drugListDataTable As DataTable)
+        Event GetDrugDataTable(ByRef drugListDataTable As DataTable)
+        Event GetItemDataTable(ByRef itemListDataTable As DataTable)
 
         Event UpdateDrugDisplay(itemIdNo As Int32)
 
