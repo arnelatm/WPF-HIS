@@ -211,8 +211,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Public Property Ea As EventAggregator
         Get
             Return CallByName(View, "Ea", CallType.Get)
-            'Return Invoker.GetField(View, "Ea")
-
         End Get
         Set(value As EventAggregator)
             _ea = value

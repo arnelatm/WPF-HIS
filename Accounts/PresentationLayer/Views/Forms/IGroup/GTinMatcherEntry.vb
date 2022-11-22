@@ -1,8 +1,6 @@
 ﻿Imports System.Configuration
-Imports System.Data.SqlClient
 Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
@@ -23,7 +21,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event UpdateDrugDisplay(gTinIdNo As Int32) Implements IGTinMatcherView.UpdateDrugDisplay
         Public Event UpdateItemDisplay(gTinIdNo As Int32) Implements IGTinMatcherView.UpdateItemDisplay
-
+        Public Event MatchGTinRequested(gTinNumber As String, itemDetailIdNo As Int32) Implements IGTinMatcherView.MatchGTinRequested
         Public Event GTinValueChanged(sender As DataGridView, gTinValue As String) Implements IItemDetailsView.GTinValueChanged
 
         Public Sub New()
@@ -606,10 +604,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub btnOk_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
             If DrugGTin IsNot Nothing Then
-                btnEdit.PerformClick()
-                txtGTIN.Text = txtDrugGTin.Text
-                txtGTIN.Refresh()
-                btnSave.PerformClick()
+                RaiseEvent MatchGTinRequested(DrugGTin, IdNo)
             End If
         End Sub
 
