@@ -25,6 +25,12 @@ Namespace PresentationLayer.Presenters
             AddHandler View.UpdateDrugDisplay, AddressOf OnUpdateDrugDisplay
             AddHandler View.UpdateItemDisplay, AddressOf OnUpdateItemDisplay
             AddHandler View.GTinValueChanged, AddressOf OnGTinValueChanged
+            AddHandler View.MatchGTinRequested, AddressOf OnMatchGTinRequested
+        End Sub
+
+        Private Sub OnMatchGTinRequested(gTinNumber As String, itemDetailIdNo As Integer)
+            Service.UpdateRecordWithIdNo(Of String)(View.IdNo, "ItemDetails", "GTIN", View.DrugGTin)
+            UpdateViewDisplay()
         End Sub
 
         Private Sub OnGTinValueChanged(sender As DataGridView, gTinValue As String)
@@ -71,7 +77,7 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Sub GoFilter()
             If DataFilter Is Nothing Or DataFilter = "" Then
-                DataFilter = "Active = 1 and ItemGroup = 'MD' and QtyOnHand <> 0 "
+                DataFilter = "ItemGroup = 'MD' and QtyOnHand <> 0 and BranchId = '01'"
             Else
                 DataFilter = ""
             End If
@@ -171,7 +177,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnGetItemDataTable(ByRef itemDetailsDataTable As DataTable)
-            itemDetailsDataTable = Service.GetDataTable("ItemDetailsQty_View", "ItemNameEnglish", "Primary_Key,Item_Code,GTin,ItemNameEnglish,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand")
+            itemDetailsDataTable = Service.GetDataTable("ItemDetailsQty_View", "ItemNameEnglish", "Primary_Key,Item_Code,GTin,ItemNameEnglish,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand", "BranchId='01' and ItemGroup='MD'")
         End Sub
 
         Private Sub OnBeforeSave() Handles MyBase.BeforeSave
