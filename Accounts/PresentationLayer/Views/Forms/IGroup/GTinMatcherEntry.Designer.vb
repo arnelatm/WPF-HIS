@@ -22,10 +22,10 @@
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(GTinMatcherEntry))
+            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblGTIN = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -1859,22 +1859,22 @@
             '
             Me.DataGridViewDrugs.AllowUserToAddRows = False
             Me.DataGridViewDrugs.AllowUserToDeleteRows = False
-            DataGridViewCellStyle3.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewDrugs.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
+            DataGridViewCellStyle5.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewDrugs.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle5
             Me.DataGridViewDrugs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
             Me.DataGridViewDrugs.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
             Me.DataGridViewDrugs.BegFindValue = Nothing
             Me.DataGridViewDrugs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewDrugs.DefaultCellStyle = DataGridViewCellStyle4
+            DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewDrugs.DefaultCellStyle = DataGridViewCellStyle6
             Me.DataGridViewDrugs.DgvFooter = Nothing
-            Me.DataGridViewDrugs.DisplayOnly = False
+            Me.DataGridViewDrugs.DisplayOnly = True
             Me.DataGridViewDrugs.Ea = Nothing
             Me.DataGridViewDrugs.EditingMode = False
             Me.DataGridViewDrugs.EndFindValue = Nothing
@@ -1917,22 +1917,22 @@
             Me.DataGridViewItems.AllowUserToAddRows = False
             Me.DataGridViewItems.AllowUserToDeleteRows = False
             Me.DataGridViewItems.AllowUserToResizeRows = False
-            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            DataGridViewCellStyle3.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
             Me.DataGridViewItems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
             Me.DataGridViewItems.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
             Me.DataGridViewItems.BegFindValue = Nothing
             Me.DataGridViewItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewItems.DefaultCellStyle = DataGridViewCellStyle2
+            DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewItems.DefaultCellStyle = DataGridViewCellStyle4
             Me.DataGridViewItems.DgvFooter = Nothing
-            Me.DataGridViewItems.DisplayOnly = False
+            Me.DataGridViewItems.DisplayOnly = True
             Me.DataGridViewItems.Ea = Nothing
             Me.DataGridViewItems.EditingMode = False
             Me.DataGridViewItems.EndFindValue = Nothing
@@ -1976,7 +1976,7 @@
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
-            Me.ClientSize = New System.Drawing.Size(984, 749)
+            Me.ClientSize = New System.Drawing.Size(984, 758)
             Me.Controls.Add(Me.CFlowLayout3)
             Me.Controls.Add(Me.btnOk)
             Me.Name = "GTinMatcherEntry"

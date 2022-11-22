@@ -93,7 +93,9 @@ Public Class CDataGridView
             Next
             If value Then
                 If ShowInsertColumnWhenEditing Then
-                    AddInsertColumn()
+                    If Not DisplayOnly Then
+                        AddInsertColumn()
+                    End If
                 End If
             Else
                 RemoveInsertColumn()
@@ -983,7 +985,7 @@ Public Class CDataGridView
 
     Public Function SearchGrid(value As Object, searchField As String, Optional returnField As String = Nothing) As Object
         Dim retValue As Object = Nothing
-        If value IsNot DBNull.Value Or value IsNot Nothing Or value <> "" Then
+        If value IsNot DBNull.Value Or value IsNot Nothing Then
             ClearSelection()
             For Each row As DataGridViewRow In Rows
                 Dim x As Object = row.Cells(searchField).Value
