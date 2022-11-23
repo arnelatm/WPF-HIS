@@ -20,17 +20,17 @@
         Public Property Pack3 As Int16
         Public Property PackageSize As Double?
         Public Property PackageType As String
+        Public Property PrescriptionDrug As Boolean
         Public Property Price_Cash As Decimal?
+        Public Property QtyOnHand As Decimal?
         Public Property RegistrationNo As String
+        Public Property RouteOfAdministration As String
         Public Property SaleStrip As String
         Public Property StrengthValue As String
         Public Property UnitOfStrength As String
         Public Property UnitOfVolume As String
         Public Property UserId As String
         Public Property Volume As Double?
-        Public Property PrescriptionDrug As Boolean
-        Public Property RouteOfAdministration As String
-        Public Property QtyOnHand As Decimal?
     End Class
 
 End Namespace
