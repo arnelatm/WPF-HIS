@@ -249,6 +249,54 @@ Public Class CTextBox
         End Set
     End Property
 
+    Public Sub SetValue(ByRef value)
+        If value Is DBNull.Value OrElse value Is Nothing Then
+            Text = Nothing
+        Else
+            Text = value
+        End If
+    End Sub
+
+    Public Function GetValue(value As Object) As Object
+        If Text Is Nothing Then
+            Return Nothing
+        End If
+        Select Case value.GetType()
+            Case GetType(String)
+                Return Text
+            Case GetType(Short), GetType(Short?) 'Int16
+                Return NumParser(Of Short)(Text)
+            Case GetType(Integer), GetType(Integer?) 'Int32
+                Return NumParser(Of Integer)(Text)
+            Case GetType(Decimal), GetType(Decimal?)
+                Return NumParser(Of Decimal)(Text)
+            Case GetType(Boolean), GetType(Boolean?)
+                Return BoolParser(Of Boolean)(Text)
+            Case GetType(DateTime), GetType(DateTime?)
+                Return DateParser(Of DateTime)(Text)
+            Case GetType(Date), GetType(Date?)
+                Return DateParser(Of Date)(Text)
+            Case GetType(Single), GetType(Single?)
+                Return NumParser(Of Single)(Text)
+            Case GetType(Double), GetType(Double?)
+                Return NumParser(Of Double)(Text)
+            Case GetType(Byte), GetType(Byte?)
+                Return NumParser(Of Byte)(Text)
+            Case GetType(SByte), GetType(SByte?)
+                Return NumParser(Of SByte)(Text)
+            Case GetType(Char), GetType(Char?)
+                Return Text
+            Case GetType(UInteger), GetType(UInteger?)
+                Return NumParser(Of Double)(Text)
+            Case GetType(ULong), GetType(ULong)
+                Return NumParser(Of ULong)(Text)
+            Case GetType(UShort), GetType(UShort)
+                Return NumParser(Of UShort)(Text)                
+        End Select
+        Return Text
+    End Function
+
+
 #Region "FindableControl"
 
     <Category("Custom Properties")>

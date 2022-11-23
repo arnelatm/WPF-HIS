@@ -246,18 +246,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Volume As Double? Implements IItemDetailsView.Volume
             Get
-                If txtVolume.Text Is Nothing Then
-                    Return Nothing
-                Else
-                    Return txtVolume.Text.ToDoubleNumber(_nfi)
-                End If
+                return txtVolume.GetValue(Volume)
             End Get
             Set
-                If Value Is Nothing Then
-                    txtVolume.Text = ""
-                Else
-                    txtVolume.Text = Value
-                End If
+                txtVolume.SetValue(Value)
             End Set
         End Property
 
@@ -272,18 +264,20 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PackageSize As Double? Implements IItemDetailsView.PackageSize
             Get
-                If txtPackageSize.Text Is Nothing Then
-                    Return Nothing
-                Else
-                    Return txtPackageSize.Text.ToDoubleNumber(_nfi)
-                End If
+                Return txtPackageSize.GetValue(PackageSize)
+                'If txtPackageSize.Text Is Nothing Then
+                '    Return Nothing
+                'Else
+                '    Return txtPackageSize.Text.ToDoubleNumber(_nfi)
+                'End If
             End Get
             Set
-                If Value Is Nothing Then
-                    txtPackageSize.Text = ""
-                Else
-                    txtPackageSize.Text = Value
-                End If
+                txtPackageSize.SetValue(value)
+                'If Value Is Nothing Then
+                '    txtPackageSize.Text = ""
+                'Else
+                '    txtPackageSize.Text = Value
+                'End If
             End Set
         End Property
 
@@ -474,15 +468,6 @@ Namespace PresentationLayer.Views.Forms
                 txtPrice_Cash.Text = IIf(Value Is Nothing, "", Value)
             End Set
         End Property
-
-        'Public Property QtyOnHand As Decimal? Implements IGTinMatcherView.QtyOnHand
-        '    Get
-        '        Return txtQtyOnHand.Text
-        '    End Get
-        '    Set
-        '        txtQtyOnHand.Text = IIf(Value Is Nothing, "", Value)
-        '    End Set
-        'End Property
 
         Private Property QtyOnHand As Decimal? Implements IItemDetailsView.QtyOnHand
             Get
