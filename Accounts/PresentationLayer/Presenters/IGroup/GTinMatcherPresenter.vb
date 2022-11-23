@@ -187,32 +187,18 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnAfterSaveItemDetails() Handles Me.AfterSave
-            Service.InsertRecord("StockPositionCurrent", {"BranchID", "Item_Code", "Batch", "Expiry", "WarehouseID", "PCSQty", "CashPrice", "CreditPrice", "CostPrice", "PurchaseNo", "TmpStock"},
+            If Service.RecordCount("StockPositionCurrent", "Item_Code", View.ItemDetailsCode, "BranchId = '02'") = 0 Then
+                Service.InsertRecord("StockPositionCurrent", {"BranchID", "Item_Code", "Batch", "Expiry", "WarehouseID", "PCSQty", "CashPrice", "CreditPrice", "CostPrice", "PurchaseNo", "TmpStock"},
                                                         {"String", "String", "String", "DateTime", "String", "Decimal", "Decimal", "Decimal", "Decimal", "Decimal", "Decimal"},
                                                         {"01", View.ItemDetailsCode, "000", Now(), "01", 0, 0, 0, 0, 0, 0})
+            End If
         End Sub
 
         Public Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
             If View.GTIN IsNot Nothing Or View.GTIN <> "" Then
                 Dim drugIdNo As Int32 = Service.GetField(Of Int32, String)(View.GTIN, "DrugList", "GTin", "IdNo")
-                Dim drug As Object = MakeDrug(drugIdNo) 'Service.GetFieldsWithIdNo(drugIdNo, "DrugList", "[IdNo],[Trade Name],[Generic Name],[GTin],[Dosage Form],[Package Size],[Package Type],[Public Price],RegistrationNo,[Route Of Administration],[Strength Value],[Unit Of Strength],[Volume],[Unit Of Volume]", "IdNo")
-                'If drug IsNot Nothing Then
+                Dim drug As Object = MakeDrug(drugIdNo)
                 DisplayDrug(drug)
-                'Else
-                '    View.DrugIdNo = Nothing
-                '    View.DrugTradeName = Nothing
-                '    View.DrugGenericName = Nothing
-                '    View.DrugDosageForm = Nothing
-                '    View.DrugRegistrationNo = Nothing
-                '    View.DrugPackageType = Nothing
-                '    View.DrugPackageSize = Nothing
-                '    View.DrugRouteOfAdministration = Nothing
-                '    View.DrugStrengthValue = Nothing
-                '    View.DrugUnitOfStrength = Nothing
-                '    View.DrugUnitOfVolume = Nothing
-                '    View.DrugVolume = Nothing
-                '    View.DrugGTin = Nothing
-                'End If
             End If
         End Sub
 

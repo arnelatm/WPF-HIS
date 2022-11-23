@@ -47,8 +47,8 @@ Namespace PresentationLayer.Presenters
             View.JournalItems = Service.GetRecordsWithGroupIdNo(Of JournalItemModel)(journalIdNo, "Sequence")
         End Sub
 
-        Public Overloads Function IsInputVatAccount(ByVal AccountIdNo As Int16)
-            If Service.CountRecordWith2Key(AccountIdNo, "VI", "AccountTypes", "AccountIdNo", "AccountTypes") > 0 Then
+        Public Overloads Function IsInputVatAccount(ByVal accountIdNo As Int16)
+            If Service.CountRecordWith2Key(Of Int16, String)("AccountTypes", "AccountIdNo", "AccountTypes", accountIdNo, "VI") > 0 Then
                 Return True
             End If
             Return False

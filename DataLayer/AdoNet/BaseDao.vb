@@ -47,35 +47,32 @@ Namespace AdoNet
             Return Not nCount > 0
         End Function
 
-        Public Function CountRecordWith2Key(searchValue1 As Integer, searchValue2 As String,
-                                            tableName As String, searchFieldName1 As String,
-                                            searchFieldName2 As String) As Integer _
-            Implements IBaseDao.CountRecordWith2Key
-            Dim sql As String =
-                    " Select Count(*) FROM [" & tableName & "] " &
-                    " Where " & searchFieldName1 & " = @SearchValue1 and " & searchFieldName2 & " = '" & searchValue2 &
-                    "'"
-            Dim params() As Object = {"@SearchValue1", searchValue1, "@SearchValue2", searchValue2}
-            Return GetDb().Scalar(sql, params).ToString()
-        End Function
-
-        Public Function CountRecordWith3Key(Of S1, S2, S3)(tableName As String, searchFieldName1 As String, searchFieldName2 As String, searchFieldName3 As String, searchValue1 As S1, searchValue2 As S2, searchValue3 As S3) As Integer Implements IBaseDao.CountRecordWith3Key
-            Dim searchVal1 As String = ConvertToString(Of S1)(searchValue1)
-            Dim searchVal2 As String = ConvertToString(Of S2)(searchValue2)
-            Dim searchVal3 As String = ConvertToString(Of S3)(searchValue3)
+        Public Function CountRecordWith3Key(Of TS1, TS2, TS3)(tableName As String, searchFieldName1 As String, searchFieldName2 As String, searchFieldName3 As String, searchValue1 As TS1, searchValue2 As TS2, searchValue3 As TS3) As Integer Implements IBaseDao.CountRecordWith3Key
+            Dim searchVal1 As String = ConvertToString(Of TS1)(searchValue1)
+            Dim searchVal2 As String = ConvertToString(Of TS2)(searchValue2)
+            Dim searchVal3 As String = ConvertToString(Of TS3)(searchValue3)
             Dim sql As String = " Select COUNT(*) FROM [" & tableName & "] " &
                     " Where " & searchFieldName1 & " = @SearchVal1 and " & searchFieldName2 & " = @SearchVal2 and " & searchFieldName3 & " = @SearchVal3 "
             Dim params() As Object = {"@SearchVal1", searchVal1, "@SearchVal2", searchVal2, "@SearchVal3", searchVal3}
             Return GetDb().Scalar(sql, params)
         End Function
 
-        Public Function CountRecordWithKey(searchValue As String, tableName As String, searchFieldName As String) _
-            As Integer _
-            Implements IBaseDao.CountRecordWithKey
+        Public Function CountRecordWith2Key(Of TS1, TS2)(tableName As String, searchFieldName1 As String, searchFieldName2 As String, searchValue1 As TS1, searchValue2 As TS2) As Integer Implements IBaseDao.CountRecordWith2Key
+            Dim searchVal1 As String = ConvertToString(Of TS1)(searchValue1)
+            Dim searchVal2 As String = ConvertToString(Of TS2)(searchValue2)
+
+            Dim sql As String = " Select COUNT(*) FROM [" & tableName & "] " &
+                                " Where " & searchFieldName1 & " = @SearchVal1 and " & searchFieldName2 & " = @SearchVal2 and "
+            Dim params() As Object = {"@SearchVal1", searchVal1, "@SearchVal2", searchVal2, "@SearchVal3"}
+            Return GetDb().Scalar(sql, params)
+        End Function
+
+        Public Function CountRecordWithKey(Of TS1)(tableName As String, searchFieldName As String, searchValue As TS1) As Integer Implements IBaseDao.CountRecordWithKey
+            Dim searchVal As String = ConvertToString(Of TS1)(searchValue)
             Dim sql As String =
                     " Select Count(*) FROM [" & tableName & "] " &
-                    " Where " & searchFieldName & " = @SearchValue "
-            Dim params() As Object = {"@SearchValue", searchValue}
+                    " Where " & searchFieldName & " = @searchVal "
+            Dim params() As Object = {"@searchVal", searchVal}
             Return GetDb().Scalar(sql, params)
         End Function
 
@@ -357,8 +354,7 @@ Namespace AdoNet
         Public Function ConvertToString(Of T1)(value As T1) As String
             Dim tType As Type = value.GetType
             Dim result As String = ""
-            If tType = GetType(String) OrElse tType = GetType(Decimal) OrElse tType = GetType(Int32) OrElse tType = GetType(Int16) OrElse tType = GetType(Int64) OrElse
-                                  tType = GetType(UInt16) OrElse tType = GetType(UInt32) OrElse tType = GetType(UInt64) Then
+            If tType = GetType(String) Then
                 result = value.ToString()
             ElseIf tType = GetType(Boolean) Then
                 Dim boolSearch As Boolean = Convert.ToBoolean(value)
@@ -371,7 +367,8 @@ Namespace AdoNet
             ElseIf tType = GetType(Date) Then
                 Dim dDate As DateTime = Convert.ToDateTime(value)
                 Dim dateSearch1 As String = dDate.ToString()
-            Else
+            Else 'OrElse tType = GetType(Decimal) OrElse tType = GetType(Int32) OrElse tType = GetType(Int16) OrElse tType = GetType(Int64) OrElse
+                '   tType = GetType(UInt16) OrElse tType = GetType(UInt32) OrElse tType = GetType(UInt64) Then
                 result = value.ToString()
             End If
             Return result

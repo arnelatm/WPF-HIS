@@ -134,7 +134,7 @@ Namespace PresentationLayer.Presenters
             Dim retVal As Integer = 0
             If idNo <> 0 Then
                 Dim arOpenInvoiceService As New AccountsService("ArOpenInvoice")
-                If arOpenInvoiceService.CountRecordWithKey(idNo, "CsrOiItem", "ArOpenInvoiceIdNo") = 0 Then
+                If arOpenInvoiceService.CountRecordWithKey(Of Integer)("CsrOiItem", "ArOpenInvoiceIdNo", idNo) = 0 Then
                     retVal = arOpenInvoiceService.DeleteRecord(idNo, "ArOpenInvoice")
                 End If
             End If
@@ -336,7 +336,7 @@ Namespace PresentationLayer.Presenters
             Dim arOpenInvoiceIdNo As Integer
             arOpenInvoiceIdNo = Service.GetRecordFieldWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode",
                                                              "JournalItemIdNo", "IdNo")
-            Return Service.CountRecordWithKey(arOpenInvoiceIdNo, "CsrOiItem", "ArOpenInvoiceIdNo") > 0
+            Return Service.CountRecordWithKey(Of Integer)("CsrOiItem", "ArOpenInvoiceIdNo", arOpenInvoiceIdNo) > 0
         End Function
 
         Public Sub OnApJournalDataChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
