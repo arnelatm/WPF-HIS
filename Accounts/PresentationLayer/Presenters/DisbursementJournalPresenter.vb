@@ -136,7 +136,7 @@ Namespace PresentationLayer.Presenters
                     Dim cdAccounts = GetAccountTypesList(accounts)
                     Return cdAccounts.Count()
                 End If
-                Return Service.CountRecordWithKey(specialAccount, "Account", "SpecialAccount")
+                Return Service.CountRecordWithKey(Of String)("Account", "SpecialAccount", specialAccount)
             End Get
         End Property
 
@@ -659,7 +659,7 @@ Namespace PresentationLayer.Presenters
 
         Private Function DeleteAdvancePaymentOpenInvoice(ByRef idNo As Int32) As String
             Dim arOpenInvoiceService As New AccountsService("ApOpenInvoice")
-            If Service.CountRecordWithKey(idNo, "ApOpenInvoice", "IdNo") > 0 Then
+            If Service.CountRecordWithKey(Of Integer)("ApOpenInvoice", "IdNo", idNo) > 0 Then
                 Return arOpenInvoiceService.DeleteRecord(idNo, "ApOpenInvoice")
             End If
             Return 0

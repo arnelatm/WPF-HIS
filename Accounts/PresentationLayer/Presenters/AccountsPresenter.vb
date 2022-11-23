@@ -88,12 +88,12 @@ Namespace PresentationLayer.Presenters
         Public Sub MakeDebitAmount(journalItem As JournalItemView, amount As Decimal?)
             If amount Is Nothing OrElse amount >= 0 Then
                 If journalItem.Credit <> 0 Then
-                journalItem.Credit = 0
+                    journalItem.Credit = 0
                 End If
             ElseIf amount < 0 Then
                 journalItem.Credit = amount * -1
                 If journalItem.Debit <> 0 Then
-                journalItem.Debit = 0
+                    journalItem.Debit = 0
                 End If
             End If
         End Sub
@@ -270,39 +270,6 @@ Namespace PresentationLayer.Presenters
             idNo = Service.GetRecordFieldWith2KeyG(Of String, Int32, Int32)("AR", journalItemIdNo, "ArOpenInvoice", "JournalCode", "JournalItemIdNo", "IdNo")
             Return idNo
         End Function
-
-        'Public Function ArOpenInvoiceExists(ByVal journalCode As String, ByVal idNo As Integer) As Boolean
-        '    Return Model.CountRecordWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode", "JournalItemIdNo")
-        'End Function
-
-        'Public Function ArCollectionExists(ByVal journalCode As String, ByVal idNo As Integer) As Boolean
-        '    Dim arOpenInvoiceIdNo As Integer
-        '    arOpenInvoiceIdNo = Model.GetRecordFieldWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode",
-        '                                                     "JournalItemIdNo", "IdNo")
-        '    Return Model.CountRecordWithKey(arOpenInvoiceIdNo, "CsrOiItem", "ArOpenInvoiceIdNo") > 0
-        'End Function
-
-        'Public Function GetEndingGlBalance(ByVal accountIdNo As Int16, ByVal reconciliationDate As Date) As Decimal
-        '    Return DataModel.GetEndingGlBalance(accountIdNo, reconciliationDate)
-        'End Function
-
-        'Protected Function IsChildValid(Of Tcm)(childProperty) As Boolean
-        '    Dim retValue As Boolean = True
-        '    Dim bizObjectList As New List(Of Tcm)
-        '    Dim viewName = childProperty.GetType.GenericTypeArguments(0).Name
-        '    Dim bizName As String = Strings.Left(viewName, Len(viewName) - 4)
-        '    ' is standard naming convention to name the view as the object with 'View' as appended name so to get value just remove 'View'
-        '    Dim model As New ModelAccounts(bizName)
-        '    Dim dModel = GlobalVariables.Mapper.Map(childProperty, bizObjectList)
-        '    For Each item In bizObjectList
-        '        If Not model.IsValid(item) Then
-        '            retValue = False
-        '            AddToParentError(model.GetBizObjectErrors)
-        '            Exit For
-        '        End If
-        '    Next
-        '    Return retValue
-        'End Function
 
         Public Function IsAccountsPayableAccount(ByVal accountIdNo As Int16)
             Return GetRecordFieldWithKey(accountIdNo, "Account", "IdNo", "SpecialAccount") = EnumToCode(SpecialAccountSelection.AccountsPayable)

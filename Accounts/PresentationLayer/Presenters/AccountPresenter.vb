@@ -53,7 +53,7 @@ Namespace PresentationLayer.Presenters
             If idNo Is Nothing Then
                 Return True
             End If
-            Return Service.CountRecordWithKey(idNo, "Account", "ParentIdNo") > 0
+            Return Service.CountRecordWithKey(Of Int16)("Account", "ParentIdNo", idNo) > 0
         End Function
 
         Public Function GetAccountNameOfChild(idNoToSearch As Integer) As String
