@@ -1,6 +1,8 @@
 ﻿Imports System.Configuration
 Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
@@ -10,6 +12,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private _nfi As NumberFormatInfo
         Private _drugList As Object
+        Private memoryCache As Cache
 
         Public Event FinderValueChanged(itemIdNo As Int16) Implements IItemDetailsView.FinderValueChanged
 
@@ -26,6 +29,8 @@ Namespace PresentationLayer.Views.Forms
         Public Event MatchGTinRequested(gTinNumber As String, itemDetailIdNo As Int32) Implements IGTinMatcherView.MatchGTinRequested
 
         Public Event GTinValueChanged(sender As DataGridView, gTinValue As String) Implements IItemDetailsView.GTinValueChanged
+
+        'Private WithEvents dataGridView1 As New CDataGridView()
 
         Public Sub New()
 
@@ -54,38 +59,59 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub InitializeDataGridView()
             ' Set up the DataGridView.
-            With Me.DataGridViewDrugs
-                ' Automatically generate the DataGridView columns.
-                .AutoGenerateColumns = True
-                Dim drugListDataTable As New DataTable
-                RaiseEvent GetDrugDataTable(drugListDataTable)
-                ' Set up the data source.
-                bsDrugList.DataSource = drugListDataTable
-                .DataSource = bsDrugList
-                ' Automatically resize the visible rows.
-                '.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells
-                '.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells
-                ' Set the DataGridView control's border.
-                .BorderStyle = BorderStyle.Fixed3D
-                ' Put the cells in edit mode when user enters them.
-                DataGridViewDrugs.ReadOnly = True
+            'With Me.DataGridViewDrugs
+            '    ' Automatically generate the DataGridView columns.
+            '    .AutoGenerateColumns = True
+            '    Dim drugListDataTable As New DataTable
+            '    RaiseEvent GetDrugDataTable(drugListDataTable)
+            '    ' Set up the data source.
+            '    bsDrugList.DataSource = drugListDataTable
+            '    .DataSource = bsDrugList
+            '    ' Automatically resize the visible rows.
+            '    '.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells
+            '    '.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells
+            '    ' Set the DataGridView control's border.
+            '    .BorderStyle = BorderStyle.Fixed3D
+            '    ' Put the cells in edit mode when user enters them.
+            '    DataGridViewDrugs.ReadOnly = True
+            'End With
+            'With Me
+            '    .AutoSize = True
+            '    .Controls.Add(Me.CDataGridView1)
+            '    .Text = "DataGridView virtual-mode just-in-time demo"
+            'End With
+            With Me.CDataGridView1
+                .Location = New Point(3, 980)
+                .Size = New Size(958, 145)
+                .Dock = DockStyle.None
+                .VirtualMode = True
+                .ReadOnly = True
+                .AllowUserToAddRows = False
+                .AllowUserToOrderColumns = False
+                .SelectionMode = DataGridViewSelectionMode.FullRowSelect
             End With
-            With Me.DataGridViewItems
-                ' Automatically generate the DataGridView columns.
-                .AutoGenerateColumns = True
-                Dim itemDetailsDataTable As New DataTable
-                RaiseEvent GetItemDataTable(itemDetailsDataTable)
-                ' Set up the data source.
-                bsItemDetails.DataSource = itemDetailsDataTable
-                .DataSource = bsItemDetails
-                ' Automatically resize the visible rows.
-                '.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders
-                ' Set the DataGridView control's border.
-                .BorderStyle = BorderStyle.Fixed3D
-                ' Put the cells in edit mode when user enters them.
-                DataGridViewItems.ReadOnly = True
-            End With
+
+            ' Create a DataRetriever and use it to create a Cache object
+            ' and to initialize the DataGridView columns and rows.
+            Dim table = "ItemDetails"
+            Dim retriever As New DataRetriever(table, "Primary_Key,Item_Code,GTin,ItemNameEnglish,Price_Cash,Pack1,Pack2,Pack3", "IGroupClinic")
+            memoryCache = New Cache(retriever, 16)
+            For Each column As DataColumn In retriever.Columns
+                CDataGridView1.Columns.Add(
+                    column.ColumnName, column.ColumnName)
+            Next
+            Me.CDataGridView1.RowCount = retriever.RowCount
+            Me.CDataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells)
+
         End Sub
+
+        Private Sub dataGridView1_CellValueNeeded(ByVal sender As Object, ByVal e As DataGridViewCellValueEventArgs) Handles CDataGridView1.CellValueNeeded
+            e.Value = memoryCache.RetrieveElement(e.RowIndex, e.ColumnIndex)
+        End Sub
+
+        'Private Sub dataGridView1_CellValueNeeded(sender As Object, e As DataGridViewCellValueEventArgs) Handles DataGridViewItems.CellValueNeeded
+        '    e.Value = memoryCache.RetrieveElement(e.RowIndex, e.ColumnIndex)
+        'End Sub
 
 #Region "Field Items"
 
@@ -291,25 +317,25 @@ Namespace PresentationLayer.Views.Forms
             Set(value As String)
                 txtGTIN.Text = value
                 If Not (value Is DBNull.Value Or value Is Nothing Or value = "") Then
-                    RaiseEvent GTinValueChanged(DataGridViewDrugs, value)
-                    SelectRecordOnDrugGrid(value)
+                    'RaiseEvent GTinValueChanged(DataGridViewDrugs, value)
+                    'SelectRecordOnDrugGrid(value)
                 End If
             End Set
         End Property
 
-        Private Sub SelectRecordOnDrugGrid(gTinValue As String)
-            If gTinValue IsNot DBNull.Value OrElse gTinValue IsNot Nothing OrElse gTinValue = "" Then
-                DataGridViewDrugs.SearchGrid(gTinValue, "GTin")
-            End If
-        End Sub
+        'Private Sub SelectRecordOnDrugGrid(gTinValue As String)
+        '    If gTinValue IsNot DBNull.Value OrElse gTinValue IsNot Nothing OrElse gTinValue = "" Then
+        '        DataGridViewDrugs.SearchGrid(gTinValue, "GTin")
+        '    End If
+        'End Sub
 
-        Private Sub SelectRecordOnItemGrid(idNo As Int32?)
-            If Not _startedByItemGrid Then
-                If Not (idNo Is Nothing OrElse idNo = 0) Then
-                    DataGridViewItems.SearchGrid(idNo, "Primary_Key")
-                End If
-            End If
-        End Sub
+        'Private Sub SelectRecordOnItemGrid(idNo As Int32?)
+        '    If Not _startedByItemGrid Then
+        '        If Not (idNo Is Nothing OrElse idNo = 0) Then
+        '            DataGridViewItems.SearchGrid(idNo, "Primary_Key")
+        '        End If
+        '    End If
+        'End Sub
 
         Public Property PrescriptionDrug As Boolean Implements IItemDetailsView.PrescriptionDrug
 
@@ -561,34 +587,34 @@ Namespace PresentationLayer.Views.Forms
             gTinScanner.Close()
         End Sub
 
-        Private Sub DataGridView1_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDrugs.CellContentDoubleClick
-            Dim dgvIdNo As Int32
-            Dim curRow = DataGridViewDrugs.CurrentRow()
-            dgvIdNo = curRow.Cells("IdNo").Value
-            RaiseEvent UpdateDrugDisplay(dgvIdNo)
-        End Sub
+        'Private Sub DataGridView1_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDrugs.CellContentDoubleClick
+        '    Dim dgvIdNo As Int32
+        '    Dim curRow = DataGridViewDrugs.CurrentRow()
+        '    dgvIdNo = curRow.Cells("IdNo").Value
+        '    RaiseEvent UpdateDrugDisplay(dgvIdNo)
+        'End Sub
 
-        Private Sub DataGridViewDrugs_CellEnter(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDrugs.CellEnter
-            Dim dgvIdNo As Int32
-            Dim curRow = DataGridViewDrugs.CurrentRow()
-            If curRow IsNot Nothing Then
-                dgvIdNo = curRow.Cells("IdNo").Value
-                RaiseEvent UpdateDrugDisplay(dgvIdNo)
-            End If
-        End Sub
+        'Private Sub DataGridViewDrugs_CellEnter(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDrugs.CellEnter
+        '    Dim dgvIdNo As Int32
+        '    Dim curRow = DataGridViewDrugs.CurrentRow()
+        '    If curRow IsNot Nothing Then
+        '        dgvIdNo = curRow.Cells("IdNo").Value
+        '        RaiseEvent UpdateDrugDisplay(dgvIdNo)
+        '    End If
+        'End Sub
 
         Private _startedByItemGrid As Boolean = False
 
-        Private Sub DataGridViewItems_CellEnter(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewItems.CellEnter
-            Dim dgvIdNo As Int32
-            Dim curRow = DataGridViewItems.CurrentRow()
-            If curRow IsNot Nothing Then
-                dgvIdNo = curRow.Cells("Primary_Key").Value
-                _startedByItemGrid = True
-                RaiseEvent UpdateItemDisplay(dgvIdNo)
-                _startedByItemGrid = False
-            End If
-        End Sub
+        'Private Sub DataGridViewItems_CellEnter(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewItems.CellEnter
+        '    Dim dgvIdNo As Int32
+        '    Dim curRow = DataGridViewItems.CurrentRow()
+        '    If curRow IsNot Nothing Then
+        '        dgvIdNo = curRow.Cells("Primary_Key").Value
+        '        _startedByItemGrid = True
+        '        RaiseEvent UpdateItemDisplay(dgvIdNo)
+        '        _startedByItemGrid = False
+        '    End If
+        'End Sub
 
         Private Sub btnOk_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
             If DrugGTin IsNot Nothing Then
@@ -597,7 +623,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Protected Overridable Sub OnAfterRecordChanged() Handles Me.AfterUpdateView
-            SelectRecordOnItemGrid(IdNo)
+            'SelectRecordOnItemGrid(IdNo)
         End Sub
 
         'Protected Overrides Sub cboItemFinder.OnTextUpdate(ByVal e As EventArgs)
