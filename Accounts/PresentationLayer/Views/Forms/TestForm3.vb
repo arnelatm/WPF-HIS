@@ -8,7 +8,7 @@ Imports AATM.Libraries.CBaseControlsLibrary
 Public Class TestForm3
     Inherits System.Windows.Forms.Form
 
-    Private WithEvents dataGridView1 As New DataGridView()
+    Private WithEvents dataGridView1 As New CDataGridView()
     Private memoryCache As Cache
 
     ' Specify a connection string. Replace the given value with a
