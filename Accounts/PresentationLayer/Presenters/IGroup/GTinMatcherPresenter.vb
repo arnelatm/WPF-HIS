@@ -20,8 +20,8 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "ItemNameEnglish"
             WithTreeView = False
             AddHandler View.FinderValueChanged, AddressOf OnFinderValueChanged
-            AddHandler View.GetDrugDataTable, AddressOf OnGetDrugDataTable
-            AddHandler View.GetItemDataTable, AddressOf OnGetItemDataTable
+            'AddHandler View.GetDrugDataTable, AddressOf OnGetDrugDataTable
+            'AddHandler View.GetItemDataTable, AddressOf OnGetItemDataTable
             AddHandler View.UpdateDrugDisplay, AddressOf OnUpdateDrugDisplay
             AddHandler View.UpdateItemDisplay, AddressOf OnUpdateItemDisplay
             AddHandler View.GTinValueChanged, AddressOf OnGTinValueChanged
@@ -66,7 +66,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Protected Overrides Sub CreateDataSources()
-            View.DrugList = Service.GetRecords("DrugList", "[Trade Name]")
+            'View.DrugList = Service.GetRecords("DrugList", "[Trade Name]")
             CreateDataSource("DrugDosageForm_View", "DosageForm", {"DosageForm"}, "DosageForm")
             CreateDataSource("DrugUnitOfVolume_View", "UnitOfVolume", {"UnitOfVolume"}, "UnitOfVolume")
             CreateDataSource("DrugUnitOfStrength_View", "UnitOfStrength", {"UnitOfStrength"}, "UnitOfStrength")
@@ -172,13 +172,13 @@ Namespace PresentationLayer.Presenters
             View.DrugPublicPrice = Nothing
         End Sub
 
-        Private Sub OnGetDrugDataTable(ByRef drugListDataTable As DataTable)
-            drugListDataTable = Service.GetDataTable("DrugList", "[Trade Name]", "IdNo,GTin,[Trade Name],[Public Price],[Strength Value],[Unit of Strength],[Dosage Form],[Volume],[Unit of Volume],[Package Type],[Package Size]")
-        End Sub
+        'Private Sub OnGetDrugDataTable(ByRef drugListDataTable As DataTable)
+        '    drugListDataTable = Service.GetDataTable("DrugList", "[Trade Name]", "IdNo,GTin,[Trade Name],[Public Price],[Strength Value],[Unit of Strength],[Dosage Form],[Volume],[Unit of Volume],[Package Type],[Package Size]")
+        'End Sub
 
-        Private Sub OnGetItemDataTable(ByRef itemDetailsDataTable As DataTable)
-            itemDetailsDataTable = Service.GetDataTable("ItemDetailsQty_View", "ItemNameEnglish", "Primary_Key,Item_Code,GTin,ItemNameEnglish,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand", "BranchId='01' and ItemGroup='MD'")
-        End Sub
+        'Private Sub OnGetItemDataTable(ByRef itemDetailsDataTable As DataTable)
+        '    itemDetailsDataTable = Service.GetDataTable("ItemDetailsQty_View", "ItemNameEnglish", "Primary_Key,Item_Code,GTin,ItemNameEnglish,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand", "BranchId='01' and ItemGroup='MD'")
+        'End Sub
 
         Private Sub OnBeforeSave() Handles MyBase.BeforeSave
             If View.ItemDetailsCode Is Nothing Or View.ItemDetailsCode = "" Then
