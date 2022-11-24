@@ -20,8 +20,11 @@ Namespace PresentationLayer.Views.Forms
         Public Event GetItemDataTable(ByRef drugListDataTable As DataTable) Implements IGTinMatcherView.GetItemDataTable
 
         Public Event UpdateDrugDisplay(gTinIdNo As Int32) Implements IGTinMatcherView.UpdateDrugDisplay
+
         Public Event UpdateItemDisplay(gTinIdNo As Int32) Implements IGTinMatcherView.UpdateItemDisplay
+
         Public Event MatchGTinRequested(gTinNumber As String, itemDetailIdNo As Int32) Implements IGTinMatcherView.MatchGTinRequested
+
         Public Event GTinValueChanged(sender As DataGridView, gTinValue As String) Implements IItemDetailsView.GTinValueChanged
 
         Public Sub New()
@@ -246,7 +249,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Volume As Double? Implements IItemDetailsView.Volume
             Get
-                return txtVolume.GetValue(Volume)
+                Return txtVolume.GetValue(Volume)
             End Get
             Set
                 txtVolume.SetValue(Value)
@@ -272,7 +275,7 @@ Namespace PresentationLayer.Views.Forms
                 'End If
             End Get
             Set
-                txtPackageSize.SetValue(value)
+                txtPackageSize.SetValue(Value)
                 'If Value Is Nothing Then
                 '    txtPackageSize.Text = ""
                 'Else

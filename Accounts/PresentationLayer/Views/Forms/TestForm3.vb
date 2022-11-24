@@ -3,6 +3,8 @@ Imports System.Data
 Imports System.Data.SqlClient
 Imports System.Drawing
 Imports System.Windows.Forms
+Imports AATM.DataLayer
+Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.CBaseControlsLibrary
 
 Public Class TestForm3
@@ -18,9 +20,7 @@ Public Class TestForm3
 
     Private table As String = "ItemDetails"
 
-    Private Sub VirtualJustInTimeDemo_Load(
-        ByVal sender As Object, ByVal e As EventArgs) _
-        Handles Me.Load
+    Private Sub VirtualJustInTimeDemo_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
 
         ' Initialize the form.
         With Me
@@ -43,7 +43,7 @@ Public Class TestForm3
         ' Create a DataRetriever and use it to create a Cache object
         ' and to initialize the DataGridView columns and rows.
         Try
-            Dim retriever As New DataRetriever(connectionString, table, "Primary_Key,Item_Code,GTin,ItemNameEnglish,Price_Cash,Pack1,Pack2,Pack3")
+            Dim retriever As New DataRetriever(table, "Primary_Key,Item_Code,GTin,ItemNameEnglish,Price_Cash,Pack1,Pack2,Pack3", "IGroupClinic")
             memoryCache = New Cache(retriever, 16)
             For Each column As DataColumn In retriever.Columns
                 dataGridView1.Columns.Add(
