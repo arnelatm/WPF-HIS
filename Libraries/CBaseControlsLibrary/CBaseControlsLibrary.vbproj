@@ -456,6 +456,7 @@
     </Compile>
     <Compile Include="ValidationControl.vb" />
     <Compile Include="ValidationControlCollection.vb" />
+    <Compile Include="VirtualDataGridView.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ATabPage.resx">
