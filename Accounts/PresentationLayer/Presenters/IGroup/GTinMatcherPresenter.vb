@@ -19,9 +19,6 @@ Namespace PresentationLayer.Presenters
             TableName = "ItemDetailsQty_View"
             SortOrderKey = "ItemNameEnglish"
             WithTreeView = False
-            AddHandler View.FinderValueChanged, AddressOf OnFinderValueChanged
-            'AddHandler View.GetDrugDataTable, AddressOf OnGetDrugDataTable
-            'AddHandler View.GetItemDataTable, AddressOf OnGetItemDataTable
             AddHandler View.UpdateDrugDisplay, AddressOf OnUpdateDrugDisplay
             AddHandler View.UpdateItemDisplay, AddressOf OnUpdateItemDisplay
             AddHandler View.GTinValueChanged, AddressOf OnGTinValueChanged
@@ -51,14 +48,10 @@ Namespace PresentationLayer.Presenters
         Private Sub OnUpdateDrugDisplay(itemDetailIdNo As Integer)
             Dim drug As Object = MakeDrug(itemDetailIdNo)
             DisplayDrug(drug)
-            'Dim itemDao = New ItemDetailsDao()
-            'View.QtyOnHand = itemDao.GetQtyOnHandBox(View.ItemDetailsCode)
         End Sub
 
         Private Sub OnUpdateItemDisplay(idNo As Integer)
             RecordPositionNumber = GetSortedRecordPosition(idNo)
-            'Dim itemDao = New ItemDetailsDao()
-            'View.QtyOnHand = itemDao.GetQtyOnHandBox(View.ItemDetailsCode)
         End Sub
 
         Private Function MakeDrug(drugIdNo As Integer) As Object
@@ -66,13 +59,11 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Protected Overrides Sub CreateDataSources()
-            'View.DrugList = Service.GetRecords("DrugList", "[Trade Name]")
             CreateDataSource("DrugDosageForm_View", "DosageForm", {"DosageForm"}, "DosageForm")
             CreateDataSource("DrugUnitOfVolume_View", "UnitOfVolume", {"UnitOfVolume"}, "UnitOfVolume")
             CreateDataSource("DrugUnitOfStrength_View", "UnitOfStrength", {"UnitOfStrength"}, "UnitOfStrength")
             CreateDataSource("DrugPackageType_View", "PackageType", {"PackageType"}, "PackageType")
             CreateDataSource("DrugRouteOfAdministration_View", "RouteOfAdministration", {"RouteOfAdministration"}, "RouteOfAdministration")
-            'CreateLookupDataTable("ItemDetails", "ItemDetailsByName", {"ItemNameEnglish", "Primary_Key"}, "BranchId='01' and ItemGroup='MD'")
         End Sub
 
         Public Overrides Sub GoFilter()
@@ -81,14 +72,7 @@ Namespace PresentationLayer.Presenters
             Else
                 DataFilter = ""
             End If
-            'DisplayTree()
             GoFirstRecord()
-        End Sub
-
-        Private Sub OnFinderValueChanged(idNo As Int16)
-            If idNo <> 0 Then
-                RecordPositionNumber = GetSortedRecordPosition(idNo)
-            End If
         End Sub
 
         'Private Sub OnGTinMatcherValueChanged(sender As DataGridView, gTin As String)
@@ -171,14 +155,6 @@ Namespace PresentationLayer.Presenters
             View.DrugGTin = Nothing
             View.DrugPublicPrice = Nothing
         End Sub
-
-        'Private Sub OnGetDrugDataTable(ByRef drugListDataTable As DataTable)
-        '    drugListDataTable = Service.GetDataTable("DrugList", "[Trade Name]", "IdNo,GTin,[Trade Name],[Public Price],[Strength Value],[Unit of Strength],[Dosage Form],[Volume],[Unit of Volume],[Package Type],[Package Size]")
-        'End Sub
-
-        'Private Sub OnGetItemDataTable(ByRef itemDetailsDataTable As DataTable)
-        '    itemDetailsDataTable = Service.GetDataTable("ItemDetailsQty_View", "ItemNameEnglish", "Primary_Key,Item_Code,GTin,ItemNameEnglish,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand", "BranchId='01' and ItemGroup='MD'")
-        'End Sub
 
         Private Sub OnBeforeSave() Handles MyBase.BeforeSave
             If View.ItemDetailsCode Is Nothing Or View.ItemDetailsCode = "" Then
