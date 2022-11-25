@@ -1,4 +1,4 @@
-﻿Imports System.Configuration
+Imports System.Configuration
 Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.DataLayer.AdoNet
@@ -17,6 +17,8 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event FinderValueChanged(itemIdNo As Int16) Implements IItemDetailsView.FinderValueChanged
 
+        'Public Event GTinMatcherValueChanged(sender As Object, gTinIdNo As Int32) Implements IGTinMatcherView.GTinMatcherValueChanged
+
         Public Event GetDrugDataTable(ByRef drugListDataTable As DataTable) Implements IGTinMatcherView.GetDrugDataTable
 
         Public Event GetItemDataTable(ByRef drugListDataTable As DataTable) Implements IGTinMatcherView.GetItemDataTable
@@ -28,6 +30,8 @@ Namespace PresentationLayer.Views.Forms
         Public Event MatchGTinRequested(gTinNumber As String, itemDetailIdNo As Int32) Implements IGTinMatcherView.MatchGTinRequested
 
         Public Event GTinValueChanged(sender As DataGridView, gTinValue As String) Implements IItemDetailsView.GTinValueChanged
+
+        'Private WithEvents dataGridView1 As New CDataGridView()
 
         Public Sub New()
 
@@ -52,7 +56,31 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        'Public Property ItemDetailsByName As DataTable
+
         Private Sub InitializeDataGridView()
+            ' Set up the DataGridView.
+            'With Me.DataGridViewDrugs
+            '    ' Automatically generate the DataGridView columns.
+            '    .AutoGenerateColumns = True
+            '    Dim drugListDataTable As New DataTable
+            '    RaiseEvent GetDrugDataTable(drugListDataTable)
+            '    ' Set up the data source.
+            '    bsDrugList.DataSource = drugListDataTable
+            '    .DataSource = bsDrugList
+            '    ' Automatically resize the visible rows.
+            '    '.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells
+            '    '.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells
+            '    ' Set the DataGridView control's border.
+            '    .BorderStyle = BorderStyle.Fixed3D
+            '    ' Put the cells in edit mode when user enters them.
+            '    DataGridViewDrugs.ReadOnly = True
+            'End With
+            'With Me
+            '    .AutoSize = True
+            '    .Controls.Add(Me.CDataGridView1)
+            '    .Text = "DataGridView virtual-mode just-in-time demo"
+            'End With
             With Me.DataGridViewItems
                 .Dock = DockStyle.None
                 .VirtualMode = True
@@ -71,21 +99,33 @@ Namespace PresentationLayer.Views.Forms
             End With
             ' Create a DataRetriever and use it to create a Cache object
             ' and to initialize the DataGridView columns and rows.
+            Dim retrieverItem As New DataRetriever("ItemDetailsQty_View", "ItemNameEnglish,Primary_Key,Item_Code,GTin,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand", "IGroupClinic")
+            For Each column As DataColumn In retrieverItem.Columns
+                DataGridViewItems.Columns.Add(column.ColumnName, column.ColumnName)
+            Next
+            memoryCacheItems = New Cache(retrieverItem, 16)
+            DataGridViewItems.RowCount = retrieverItem.RowCount
+            DataGridViewItems.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells)
+            memoryCacheItems.RetrieveElement(retrieverItem.RowCount(), 0)
 
-            CreateVirtualData(DataGridViewItems, memoryCacheItems, "ItemDetailsQty_View", "ItemNameEnglish,Primary_Key,Item_Code,GTin,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand", "IGroupClinic")
-            CreateVirtualData(DataGridViewDrugs, memoryCacheDrugs, "DrugList", "[Trade Name],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume,IdNo,GTin,[Package Size],[Package Type],[Public Price],[Dosage Form],[Generic Name],[RegistrationNo],[Route Of Administration]", "IGroupClinic")
+            Dim retrieverDrug As New DataRetriever("DrugList", "[Trade Name],IdNo,GTin,[Dosage Form],[Generic Name],[Package Size],[Package Type],[Public Price],[RegistrationNo],[Route Of Administration],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume", "IGroupClinic")
+            For Each column As DataColumn In retrieverDrug.Columns
+                DataGridViewItems.Columns.Add(column.ColumnName, column.ColumnName)
+            Next
+            memoryCacheItems = New Cache(retrieverDrug, 16)
+            DataGridViewItems.RowCount = retrieverDrug.RowCount
+            DataGridViewItems.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells)
+            memoryCacheItems.RetrieveElement(retrieverDrug.RowCount(), 0)
 
+            '_setupMode = True
+            'memoryCacheItems = CreateVirtualData(DataGridViewItems, memoryCacheItems, "ItemDetailsQty_View", "ItemNameEnglish,Primary_Key,Item_Code,GTin,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand", "IGroupClinic")
+            'memoryCacheDrugs = CreateVirtualData(DataGridViewDrugs, memoryCacheDrugs, "DrugList", "[Trade Name],IdNo,GTin,[Dosage Form],[Generic Name],[Package Size],[Package Type],[Public Price],[RegistrationNo],[Route Of Administration],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume", "IGroupClinic")
+            '_setupMode = False
         End Sub
 
-        Private Sub dataGridViewItems_CellValueNeeded(ByVal sender As Object, ByVal e As DataGridViewCellValueEventArgs) Handles DataGridViewItems.CellValueNeeded
-            e.Value = memoryCacheItems.RetrieveElement(e.RowIndex, e.ColumnIndex)
-        End Sub
+        'Private _setupMode As Boolean = False
 
-        Private Sub dataGridViewDrugs_CellValueNeeded(ByVal sender As Object, ByVal e As DataGridViewCellValueEventArgs) Handles DataGridViewDrugs.CellValueNeeded
-            e.Value = memoryCacheDrugs.RetrieveElement(e.RowIndex, e.ColumnIndex)
-        End Sub
-
-        Private Sub CreateVirtualData(ByRef dgv As CDataGridView, ByRef memoryCache As Cache, table As String, columnList As String, connectionName As String)
+        Private Function CreateVirtualData(dgv As CDataGridView, memoryCache As Cache, table As String, columnList As String, connectionName As String) As Cache
             Dim retriever As New DataRetriever(table, columnList, connectionName)
             For Each column As DataColumn In retriever.Columns
                 dgv.Columns.Add(column.ColumnName, column.ColumnName)
@@ -93,6 +133,20 @@ Namespace PresentationLayer.Views.Forms
             memoryCache = New Cache(retriever, 16)
             dgv.RowCount = retriever.RowCount
             dgv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells)
+            memoryCache.RetrieveElement(retriever.RowCount(), 0)
+            Return memoryCache
+        End Function
+
+        Private Sub dataGridViewItems_CellValueNeeded(ByVal sender As Object, ByVal e As DataGridViewCellValueEventArgs) Handles DataGridViewItems.CellValueNeeded
+            'If Not _setupMode Then
+            e.Value = memoryCacheItems.RetrieveElement(e.RowIndex, e.ColumnIndex)
+            'End If
+        End Sub
+
+        Private Sub dataGridViewDrugs_CellValueNeeded(ByVal sender As Object, ByVal e As DataGridViewCellValueEventArgs) Handles DataGridViewDrugs.CellValueNeeded
+            'If Not _setupMode Then
+            e.Value = memoryCacheDrugs.RetrieveElement(e.RowIndex, e.ColumnIndex)
+            'End If
         End Sub
 
 #Region "Field Items"
@@ -276,9 +330,19 @@ Namespace PresentationLayer.Views.Forms
         Public Property PackageSize As Double? Implements IItemDetailsView.PackageSize
             Get
                 Return txtPackageSize.GetValue(PackageSize)
+                'If txtPackageSize.Text Is Nothing Then
+                '    Return Nothing
+                'Else
+                '    Return txtPackageSize.Text.ToDoubleNumber(_nfi)
+                'End If
             End Get
             Set
                 txtPackageSize.SetValue(Value)
+                'If Value Is Nothing Then
+                '    txtPackageSize.Text = ""
+                'Else
+                '    txtPackageSize.Text = Value
+                'End If
             End Set
         End Property
 
@@ -288,6 +352,10 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As String)
                 txtGTIN.Text = value
+                If Not (value Is DBNull.Value Or value Is Nothing Or value = "") Then
+                    RaiseEvent GTinValueChanged(DataGridViewDrugs, value)
+                    SelectRecordOnDrugGrid(value)
+                End If
             End Set
         End Property
 
@@ -540,7 +608,13 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub GTinMatcher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             InitializeDataGridView()
+            bnDrugList.DeleteItem.Visible = False
+            bnDrugList.AddNewItem.Visible = False
         End Sub
+
+        'Private Sub cboItemFinder_SelectedIndexChanged(sender As Object, e As EventArgs)
+        '    RaiseEvent FinderValueChanged(cboItemFinder.SelectedItem(1))
+        'End Sub
 
         Private Sub btnScanQrCode_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnScanQrCode.ClickButtonArea
             Dim gTinScanner As New GTinScanner
@@ -549,18 +623,28 @@ Namespace PresentationLayer.Views.Forms
             gTinScanner.Close()
         End Sub
 
+        'Private Sub DataGridView1_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDrugs.CellContentDoubleClick
+        '    Dim dgvIdNo As Int32
+        '    Dim curRow = DataGridViewDrugs.CurrentRow()
+        '    dgvIdNo = curRow.Cells("IdNo").Value
+        '    RaiseEvent UpdateDrugDisplay(dgvIdNo)
+        'End Sub
+
         Private Sub DataGridViewDrugs_CellEnter(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDrugs.CellEnter
+            'If Not _setupMode Then
             Dim dgvIdNo As Int32
             Dim curRow = DataGridViewDrugs.CurrentRow()
             If curRow IsNot Nothing Then
                 dgvIdNo = curRow.Cells("IdNo").Value
                 RaiseEvent UpdateDrugDisplay(dgvIdNo)
             End If
+            'End If
         End Sub
 
         Private _startedByItemGrid As Boolean = False
 
         Private Sub DataGridViewItems_CellEnter(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewItems.CellEnter
+            'If Not _setupMode Then
             Dim dgvIdNo As Int32
             Dim curRow = DataGridViewItems.CurrentRow()
             If curRow IsNot Nothing Then
@@ -569,6 +653,7 @@ Namespace PresentationLayer.Views.Forms
                 RaiseEvent UpdateItemDisplay(dgvIdNo)
                 _startedByItemGrid = False
             End If
+            'End If
         End Sub
 
         Private Sub btnOk_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
@@ -582,6 +667,62 @@ Namespace PresentationLayer.Views.Forms
             SelectRecordOnItemGrid(IdNo)
         End Sub
 
+        'Protected Overrides Sub cboItemFinder.OnTextUpdate(ByVal e As EventArgs)
+
+        'End Sub
+
+        'Private Sub cboitemfinder_textchanged(sender As Object, e As EventArgs) Handles cboItemFinder.TextUpdate
+        '    If cboItemFinder.SelectedIndex = -1 Then
+        '        ItemDetailsByName.DefaultView.RowFilter = "itemnameenglish like '%" & cboItemFinder.Text & "%'"
+        '    End If
+        'End Sub
+
     End Class
+
+    'Public Class CeComboBox
+    '    Inherits ComboBox
+
+    '    Private collectionList As DataTable
+
+    '    'Public Sub New()
+    '    '    collectionList = New List(Of Object)()
+    '    'End Sub
+
+    '    'Public Sub New(ByVal container As System.ComponentModel.IContainer)
+    '    '    Me.New()
+    '    '    container.Add(Me)
+    '    'End Sub
+
+    '    Protected Overrides Sub OnTextUpdate(ByVal e As EventArgs)
+    '        Try
+    '            collectionList = DataSource
+
+    '            Dim values As IList(Of Object) = collectionList.Where(Function(x) x.ToString().ToLower().Contains(Text.ToLower())).ToList()
+
+    '            While Items.Count > 0
+    '                Items.RemoveAt(0)
+    '            End While
+
+    '            Me.Items.AddRange(values.ToArray())
+    '            Me.DroppedDown = True
+    '            Cursor.Current = Cursors.[Default]
+    '        Catch ex As Exception
+    '            SelectedIndex = -1
+    '        End Try
+    '    End Sub
+
+    '    Protected Overrides Sub OnTextChanged(ByVal e As EventArgs)
+    '        If Me.Text = String.Empty Then
+    '            Items.Clear()
+    '            Me.Items.AddRange(collectionList.ToArray())
+    '        End If
+    '    End Sub
+
+    '    Protected Overrides Sub OnBindingContextChanged(ByVal e As EventArgs)
+    '        MyBase.OnBindingContextChanged(e)
+    '        collectionList = Me.Items.OfType(Of Object)().ToList()
+    '    End Sub
+
+    'End Class
 
 End Namespace
