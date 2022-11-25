@@ -77,7 +77,7 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Sub GoFilter()
             If DataFilter Is Nothing Or DataFilter = "" Then
-                DataFilter = "ItemGroup = 'MD' and QtyOnHand <> 0 and BranchId = '01'"
+                DataFilter = "QtyOnHand <> 0"
             Else
                 DataFilter = ""
             End If

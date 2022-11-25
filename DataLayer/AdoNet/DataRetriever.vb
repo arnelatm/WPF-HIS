@@ -78,7 +78,12 @@ Namespace AdoNet
                     If Not firstColumn Then
                         commaSeparatedColumnNames.Append(", ")
                     End If
-                    commaSeparatedColumnNames.Append(column.ColumnName)
+                    If column.ColumnName.Contains(" ") Then
+                        commaSeparatedColumnNames.Append("[" & column.ColumnName & "]")
+                    Else
+                        commaSeparatedColumnNames.Append(column.ColumnName)
+                    End If
+
                     firstColumn = False
                 Next
 
@@ -101,20 +106,20 @@ Namespace AdoNet
                 columnToSortBy = Me.Columns(0).ColumnName
             End If
 
-            If Not Me.Columns(columnToSortBy).Unique Then
-                Throw New InvalidOperationException(String.Format(
-                    "Column {0} must contain unique values.", columnToSortBy))
-            End If
+            'If Not Me.Columns(columnToSortBy).Unique Then
+            '    Throw New InvalidOperationException(String.Format(
+            '        "Column {0} must contain unique values.", columnToSortBy))
+            'End If
 
             ' Retrieve the specified number of rows from the database, starting
             ' with the row specified by the lowerPageBoundary parameter.
             _command.CommandText =
                 "Select Top " & rowsPerPage & " " &
                 CommaSeparatedListOfColumnNames & " From " & _tableName &
-                " WHERE " & columnToSortBy & " NOT IN (SELECT TOP " &
-                lowerPageBoundary & " " & columnToSortBy & " From " &
-                _tableName & " Order By " & columnToSortBy &
-                ") Order By " & columnToSortBy
+                " WHERE [" & columnToSortBy & "] NOT IN (SELECT TOP " &
+                lowerPageBoundary & " [" & columnToSortBy & "] From " &
+                _tableName & " Order By [" & columnToSortBy &
+                "]) Order By [" & columnToSortBy & "]"
             adapter.SelectCommand = _command
 
             Dim table As New DataTable()
