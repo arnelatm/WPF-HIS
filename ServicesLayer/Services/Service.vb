@@ -141,6 +141,7 @@ Namespace Services
             Return tlData
         End Function
 
+
         Public Function GetListLookup(lookupObj As Lookup) As List(Of Lookup.LookupData)
             If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
                 Dim nameFieldArabic = lookupObj.NameField + "Ara"
@@ -215,6 +216,40 @@ Namespace Services
             lookupObj.SortKey = sortKey
             Return GetLookup(lookupObj)
         End Function
+
+        Public Function GetLookupDataTable(lookupObj As LookupTable, Optional hierarchical As Boolean = False) As DataTable
+            If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+                Dim nameFieldArabic = lookupObj.NameField + "Ara"
+                If FieldExistInTable(lookupObj.TableName, nameFieldArabic) Then
+                    If lookupObj.SortKey = lookupObj.NameField Then
+                        lookupObj.SortKey = nameFieldArabic
+                        Dim i As Integer = 0
+                        For Each field In lookupObj.FieldsToShow
+                            If field = lookupObj.NameField Then
+                                lookupObj.FieldsToShow(i) = nameFieldArabic
+                            End If
+                            i = i + 1
+                        Next
+                        lookupObj.NameField = nameFieldArabic
+                    End If
+                End If
+            End If
+            If Not hierarchical Then
+                Dim data = GetRecordsDataTable(lookupObj.TableName, lookupObj.SortKey, lookupObj.FieldsToShow, lookupObj.FilterKey)
+                'Dim lookupSetting = GlobalVariables.LookupSetting()
+                'If lookupSetting = "NameAndCode" Then
+                '    Return ProcessLookupTableByNameCode(data, lookupObj.FieldsToShow.Count())
+                'ElseIf lookupSetting = "CodeAndName" Then
+                '    Return ProcessLookupTableByCodeName(data, lookupObj.FieldsToShow.Count())
+                'ElseIf lookupSetting = "Name" Then
+                '    Return ProcessLookupTableByName(data, lookupObj.FieldsToShow.Count())
+                'Else
+                '    Return ProcessLookupTableByNameCode(data, lookupObj.FieldsToShow.Count())
+                'End If
+                Return data
+            End If
+        End Function
+
 
         'Public Function GetDefaultFieldValues(ByVal systemViewName As String) Implements IService.GetDefaultFieldValues
         '    Return DefaultFieldValueDao.GetTableDefaultValues(systemViewName)

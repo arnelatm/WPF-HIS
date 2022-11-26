@@ -2559,6 +2559,7 @@
     </None>
     <None Include="packages.config" />
     <None Include="PresentationLayer\Views\app-Ibn-Server.config" />
+    <None Include="ServiceLayer\app-Ibn-Server.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
