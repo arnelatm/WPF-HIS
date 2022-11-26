@@ -74,7 +74,7 @@ Namespace PresentationLayer.Views.Forms
 
             CreateVirtualData(DataGridViewItems, memoryCacheItems, "ItemDetailsQty_View", "ItemNameEnglish,Primary_Key,Item_Code,GTin,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand", "IGroupClinic")
             CreateVirtualData(DataGridViewDrugs, memoryCacheDrugs, "DrugList", "[Trade Name],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume,IdNo,GTin,[Package Size],[Package Type],[Public Price],[Dosage Form],[Generic Name],[RegistrationNo],[Route Of Administration]", "IGroupClinic")
-
+            BnItems.Refresh()
         End Sub
 
         Private Sub dataGridViewItems_CellValueNeeded(ByVal sender As Object, ByVal e As DataGridViewCellValueEventArgs) Handles DataGridViewItems.CellValueNeeded
@@ -540,6 +540,12 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub GTinMatcher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             InitializeDataGridView()
+            btnDrugBnDeleteItem.Visible = False
+            btnDrugBnAddNewItem.Visible = False
+            btnItemsBnDeleteItem.Visible = False
+            btnItemsBnAddNewItem.Visible = False
+            BnRefresh(DataGridViewItems)
+            BnRefresh(DataGridViewDrugs)
         End Sub
 
         Private Sub btnScanQrCode_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnScanQrCode.ClickButtonArea
@@ -580,6 +586,95 @@ Namespace PresentationLayer.Views.Forms
 
         Protected Overridable Sub OnAfterRecordChanged() Handles Me.AfterUpdateView
             SelectRecordOnItemGrid(IdNo)
+        End Sub
+
+        Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs)
+            MoveToRow(DataGridViewDrugs, -1)
+        End Sub
+
+        Private Sub CButton3_ClickButtonArea(sender As Object, e As MouseEventArgs)
+            MoveToRow(DataGridViewDrugs, +1)
+        End Sub
+
+        Private Sub CButton2_ClickButtonArea(sender As Object, e As MouseEventArgs)
+            DataGridViewDrugs.CurrentCell = DataGridViewDrugs(0, DataGridViewDrugs.RowCount() - 1)
+        End Sub
+
+        Private Sub CButton4_ClickButtonArea(sender As Object, e As MouseEventArgs)
+            DataGridViewDrugs.CurrentCell = DataGridViewDrugs(0, 0)
+        End Sub
+
+        Private Sub MoveToRow(dataGridView As CDataGridView, rowCount As Integer)
+            Dim nRow As Integer = dataGridView.CurrentRow.Index
+            With dataGridView
+                Dim col = .CurrentCell.ColumnIndex
+                Dim row = .CurrentCell.RowIndex
+                Dim nRows = .Rows.Count - 1
+                Dim nCol = .Columns.Count - 1
+                Dim nextRow = row + rowCount
+                If (nCol = col And nRows = row) Then
+                    .CurrentCell = dataGridView(0, 0)
+                ElseIf (nRows = row) Then
+                    .CurrentCell = dataGridView(col + 1, 0)
+                Else
+                    If nextRow > .RowCount() Then
+                        .CurrentCell = dataGridView(col, .RowCount() - 1)
+                    ElseIf nextRow < 0 Then
+                        .CurrentCell = dataGridView(col, 0)
+                    Else
+                        .CurrentCell = dataGridView(col, nextRow)
+                    End If
+                End If
+            End With
+            BnRefresh(dataGridView)
+        End Sub
+
+        Private Sub BindingNavigatorMoveFirstItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorMoveFirstItem.Click
+            DataGridViewDrugs.CurrentCell = DataGridViewDrugs(0, 0)
+            BnRefresh(DataGridViewDrugs)
+        End Sub
+
+        Private Sub BindingNavigatorMovePreviousItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorMovePreviousItem.Click
+            MoveToRow(DataGridViewDrugs, -1)
+        End Sub
+
+        Private Sub BindingNavigatorMoveNextItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorMoveNextItem.Click
+            MoveToRow(DataGridViewDrugs, +1)
+        End Sub
+
+        Private Sub BindingNavigatorMoveLastItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorMoveLastItem.Click
+            DataGridViewDrugs.CurrentCell = DataGridViewDrugs(0, DataGridViewDrugs.RowCount() - 1)
+            BnRefresh(DataGridViewDrugs)
+        End Sub
+
+        Private Sub btnFirstItem_Click(sender As Object, e As EventArgs) Handles btnFirstItem.Click
+            DataGridViewItems.CurrentCell = DataGridViewItems(0, 0)
+            BnRefresh(DataGridViewItems)
+        End Sub
+
+        Private Sub btnPrevItem_Click(sender As Object, e As EventArgs) Handles btnPrevItem.Click
+            MoveToRow(DataGridViewItems, -1)
+        End Sub
+
+        Private Sub btnNextItem_Click(sender As Object, e As EventArgs) Handles btnNextItem.Click
+            MoveToRow(DataGridViewItems, +1)
+        End Sub
+
+        Private Sub btnLastItem_Click(sender As Object, e As EventArgs) Handles btnLastItem.Click
+            DataGridViewItems.CurrentCell = DataGridViewItems(0, DataGridViewItems.RowCount() - 1)
+            BnRefresh(DataGridViewItems)
+        End Sub
+
+        Private Sub BnRefresh(dataGridView As CDataGridView)
+            If dataGridView.CurrentRow() IsNot Nothing Then
+                If dataGridView.Name = "DataGridViewItems" Then
+                    tsItemsCount.Text = "of " + (dataGridView.RowCount()).ToString()
+                    tsItemsCurrentRecord.Text = (dataGridView.CurrentRow.Index + 1).ToString()
+                Else
+                    tsDrugsCount.Text = "of " + (dataGridView.RowCount()).ToString()
+                    tsDrugsCurrentRecord.Text = (dataGridView.CurrentRow.Index + 1).ToString()
+                End If
+            End If
         End Sub
 
     End Class
