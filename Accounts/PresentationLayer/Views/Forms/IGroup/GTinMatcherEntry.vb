@@ -72,9 +72,13 @@ Namespace PresentationLayer.Views.Forms
             ' Create a DataRetriever and use it to create a Cache object
             ' and to initialize the DataGridView columns and rows.
 
+            MakeDataGridViews()
+            BnItems.Refresh()
+        End Sub
+
+        Private Sub MakeDataGridViews()
             DataGridViewItems.MakeDataRetrieverCache(memoryCacheItems, "ItemDetailsQty_View", "ItemNameEnglish,Primary_Key,Item_Code,GTin,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand", "IGroupClinic")
             DataGridViewDrugs.MakeDataRetrieverCache(memoryCacheDrugs, "DrugList", "[Trade Name],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume,IdNo,GTin,[Package Size],[Package Type],[Public Price],[Dosage Form],[Generic Name],[RegistrationNo],[Route Of Administration]", "IGroupClinic")
-            BnItems.Refresh()
         End Sub
 
         Private Sub dataGridViewItems_CellValueNeeded(ByVal sender As Object, ByVal e As DataGridViewCellValueEventArgs) Handles DataGridViewItems.CellValueNeeded
@@ -94,6 +98,12 @@ Namespace PresentationLayer.Views.Forms
         '    dgv.RowCount = retriever.RowCount
         '    dgv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells)
         'End Sub
+
+        Private Sub BtnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
+            DataGridViewItems.DataFilter = "QtyOnHand <> 0"
+            memoryCacheDrugs = Nothing
+            DataGridViewDrugs.MakeDataRetrieverCache(memoryCacheDrugs, "DrugList", "[Trade Name],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume,IdNo,GTin,[Package Size],[Package Type],[Public Price],[Dosage Form],[Generic Name],[RegistrationNo],[Route Of Administration]", "IGroupClinic")
+        End Sub
 
 #Region "Field Items"
 

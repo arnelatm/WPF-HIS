@@ -34,12 +34,13 @@
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.BnItems = New System.Windows.Forms.BindingNavigator(Me.components)
         Me.btnItemsBnAddNewItem = New System.Windows.Forms.ToolStripButton()
-        Me.tsItemsCount = New System.Windows.Forms.ToolStripLabel()
+        Me.tsDrugsCount = New System.Windows.Forms.ToolStripLabel()
         Me.btnItemsBnDeleteItem = New System.Windows.Forms.ToolStripButton()
         Me.btnFirstItem = New System.Windows.Forms.ToolStripButton()
         Me.btnPrevItem = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsItemsCurrentRecord = New System.Windows.Forms.ToolStripTextBox()
+        Me.tsItemsCount = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnNextItem = New System.Windows.Forms.ToolStripButton()
         Me.btnLastItem = New System.Windows.Forms.ToolStripButton()
@@ -80,7 +81,6 @@
         Me.cboRouteOfAdministration = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.BnDrugs = New System.Windows.Forms.BindingNavigator(Me.components)
-        Me.tsDrugsCount = New System.Windows.Forms.ToolStripLabel()
         Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton()
         Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton()
         Me.BindingNavigatorSeparator = New System.Windows.Forms.ToolStripSeparator()
@@ -290,12 +290,12 @@
         Me.btnItemsBnAddNewItem.Size = New System.Drawing.Size(23, 22)
         Me.btnItemsBnAddNewItem.Text = "Add new"
         '
-        'tsItemsCount
+        'tsDrugsCount
         '
-        Me.tsItemsCount.Name = "tsItemsCount"
-        Me.tsItemsCount.Size = New System.Drawing.Size(35, 22)
-        Me.tsItemsCount.Text = "of {0}"
-        Me.tsItemsCount.ToolTipText = "Total number of items"
+        Me.tsDrugsCount.Name = "tsDrugsCount"
+        Me.tsDrugsCount.Size = New System.Drawing.Size(35, 22)
+        Me.tsDrugsCount.Text = "of {0}"
+        Me.tsDrugsCount.ToolTipText = "Total number of items"
         '
         'btnItemsBnDeleteItem
         '
@@ -338,6 +338,13 @@
         Me.tsItemsCurrentRecord.Size = New System.Drawing.Size(50, 23)
         Me.tsItemsCurrentRecord.Text = "0"
         Me.tsItemsCurrentRecord.ToolTipText = "Current position"
+        '
+        'tsItemsCount
+        '
+        Me.tsItemsCount.Name = "tsItemsCount"
+        Me.tsItemsCount.Size = New System.Drawing.Size(35, 22)
+        Me.tsItemsCount.Text = "of {0}"
+        Me.tsItemsCount.ToolTipText = "Total number of items"
         '
         'ToolStripSeparator2
         '
@@ -764,7 +771,6 @@
         Me.txtRegistrationNo.FieldName = Nothing
         Me.txtRegistrationNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtRegistrationNo.FindEnabled = true
-        Me.CFlowLayout1.SetFlowBreak(Me.txtRegistrationNo, true)
         Me.txtRegistrationNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.txtRegistrationNo.ForeColor = System.Drawing.Color.Black
         Me.txtRegistrationNo.LinkedLabel = Nothing
@@ -775,19 +781,20 @@
         Me.txtRegistrationNo.Name = "txtRegistrationNo"
         Me.txtRegistrationNo.OldValue = ""
         Me.txtRegistrationNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtRegistrationNo.Size = New System.Drawing.Size(148, 21)
+        Me.txtRegistrationNo.Size = New System.Drawing.Size(102, 21)
         Me.txtRegistrationNo.TabIndex = 69
         Me.txtRegistrationNo.Translatable = false
         '
         'lblDosageForm
         '
+        Me.lblDosageForm.AutoSize = true
         Me.lblDosageForm.DisplayOnly = true
         Me.lblDosageForm.EditingMode = false
         Me.lblDosageForm.Font = New System.Drawing.Font("Arial Narrow", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblDosageForm.Location = New System.Drawing.Point(1, 176)
+        Me.lblDosageForm.Location = New System.Drawing.Point(210, 151)
         Me.lblDosageForm.Margin = New System.Windows.Forms.Padding(1)
         Me.lblDosageForm.Name = "lblDosageForm"
-        Me.lblDosageForm.Size = New System.Drawing.Size(103, 23)
+        Me.lblDosageForm.Size = New System.Drawing.Size(65, 16)
         Me.lblDosageForm.TabIndex = 60
         Me.lblDosageForm.Text = "Dosage Form"
         Me.lblDosageForm.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -817,7 +824,7 @@
         Me.cboDosageForm.IgnoreCase = false
         Me.cboDosageForm.IntegralHeight = false
         Me.cboDosageForm.LinkedLabel = Nothing
-        Me.cboDosageForm.Location = New System.Drawing.Point(106, 176)
+        Me.cboDosageForm.Location = New System.Drawing.Point(277, 151)
         Me.cboDosageForm.Margin = New System.Windows.Forms.Padding(1)
         Me.cboDosageForm.Name = "cboDosageForm"
         Me.cboDosageForm.OldValue = 0
@@ -827,7 +834,7 @@
         Me.cboDosageForm.PreviousSearchTerm = Nothing
         Me.cboDosageForm.PropertySelector = Nothing
         Me.cboDosageForm.ReadOnlyCombo = false
-        Me.cboDosageForm.Size = New System.Drawing.Size(362, 23)
+        Me.cboDosageForm.Size = New System.Drawing.Size(191, 23)
         Me.cboDosageForm.SuggestBoxHeight = 200
         Me.cboDosageForm.SuggestListOrderRule = Nothing
         Me.cboDosageForm.TabIndex = 65
@@ -843,7 +850,7 @@
         Me.CLabel1.DisplayOnly = true
         Me.CLabel1.EditingMode = false
         Me.CLabel1.Font = New System.Drawing.Font("Arial Narrow", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.CLabel1.Location = New System.Drawing.Point(1, 201)
+        Me.CLabel1.Location = New System.Drawing.Point(1, 176)
         Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel1.Name = "CLabel1"
         Me.CLabel1.Size = New System.Drawing.Size(103, 23)
@@ -869,7 +876,7 @@
         Me.txtStrengthValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.txtStrengthValue.ForeColor = System.Drawing.Color.Black
         Me.txtStrengthValue.LinkedLabel = Nothing
-        Me.txtStrengthValue.Location = New System.Drawing.Point(106, 201)
+        Me.txtStrengthValue.Location = New System.Drawing.Point(106, 176)
         Me.txtStrengthValue.Margin = New System.Windows.Forms.Padding(1)
         Me.txtStrengthValue.MaximumValue = Nothing
         Me.txtStrengthValue.MinimumValue = Nothing
@@ -885,7 +892,7 @@
         Me.lblUnitOfStrength.DisplayOnly = true
         Me.lblUnitOfStrength.EditingMode = false
         Me.lblUnitOfStrength.Font = New System.Drawing.Font("Arial Narrow", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblUnitOfStrength.Location = New System.Drawing.Point(256, 201)
+        Me.lblUnitOfStrength.Location = New System.Drawing.Point(256, 176)
         Me.lblUnitOfStrength.Margin = New System.Windows.Forms.Padding(1)
         Me.lblUnitOfStrength.Name = "lblUnitOfStrength"
         Me.lblUnitOfStrength.Size = New System.Drawing.Size(74, 23)
@@ -918,7 +925,7 @@
         Me.cboUnitOfStrength.IgnoreCase = false
         Me.cboUnitOfStrength.IntegralHeight = false
         Me.cboUnitOfStrength.LinkedLabel = Nothing
-        Me.cboUnitOfStrength.Location = New System.Drawing.Point(332, 201)
+        Me.cboUnitOfStrength.Location = New System.Drawing.Point(332, 176)
         Me.cboUnitOfStrength.Margin = New System.Windows.Forms.Padding(1)
         Me.cboUnitOfStrength.Name = "cboUnitOfStrength"
         Me.cboUnitOfStrength.OldValue = 0
@@ -944,7 +951,7 @@
         Me.lblVolume.DisplayOnly = true
         Me.lblVolume.EditingMode = false
         Me.lblVolume.Font = New System.Drawing.Font("Arial Narrow", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblVolume.Location = New System.Drawing.Point(1, 226)
+        Me.lblVolume.Location = New System.Drawing.Point(1, 201)
         Me.lblVolume.Margin = New System.Windows.Forms.Padding(1)
         Me.lblVolume.Name = "lblVolume"
         Me.lblVolume.Size = New System.Drawing.Size(103, 23)
@@ -970,7 +977,7 @@
         Me.txtVolume.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.txtVolume.ForeColor = System.Drawing.Color.Black
         Me.txtVolume.LinkedLabel = Nothing
-        Me.txtVolume.Location = New System.Drawing.Point(106, 226)
+        Me.txtVolume.Location = New System.Drawing.Point(106, 201)
         Me.txtVolume.Margin = New System.Windows.Forms.Padding(1)
         Me.txtVolume.MaximumValue = Nothing
         Me.txtVolume.MinimumValue = Nothing
@@ -987,7 +994,7 @@
         Me.lblUnitOfVolume.DisplayOnly = true
         Me.lblUnitOfVolume.EditingMode = false
         Me.lblUnitOfVolume.Font = New System.Drawing.Font("Arial Narrow", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblUnitOfVolume.Location = New System.Drawing.Point(227, 226)
+        Me.lblUnitOfVolume.Location = New System.Drawing.Point(227, 201)
         Me.lblUnitOfVolume.Margin = New System.Windows.Forms.Padding(1)
         Me.lblUnitOfVolume.Name = "lblUnitOfVolume"
         Me.lblUnitOfVolume.Size = New System.Drawing.Size(103, 23)
@@ -1020,7 +1027,7 @@
         Me.cboUnitOfVolume.IgnoreCase = false
         Me.cboUnitOfVolume.IntegralHeight = false
         Me.cboUnitOfVolume.LinkedLabel = Nothing
-        Me.cboUnitOfVolume.Location = New System.Drawing.Point(332, 226)
+        Me.cboUnitOfVolume.Location = New System.Drawing.Point(332, 201)
         Me.cboUnitOfVolume.Margin = New System.Windows.Forms.Padding(1)
         Me.cboUnitOfVolume.Name = "cboUnitOfVolume"
         Me.cboUnitOfVolume.OldValue = 0
@@ -1046,7 +1053,7 @@
         Me.lblPackageType.DisplayOnly = true
         Me.lblPackageType.EditingMode = false
         Me.lblPackageType.Font = New System.Drawing.Font("Arial Narrow", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblPackageType.Location = New System.Drawing.Point(1, 251)
+        Me.lblPackageType.Location = New System.Drawing.Point(1, 226)
         Me.lblPackageType.Margin = New System.Windows.Forms.Padding(1)
         Me.lblPackageType.Name = "lblPackageType"
         Me.lblPackageType.Size = New System.Drawing.Size(103, 23)
@@ -1078,7 +1085,7 @@
         Me.cboPackageType.IgnoreCase = false
         Me.cboPackageType.IntegralHeight = false
         Me.cboPackageType.LinkedLabel = Nothing
-        Me.cboPackageType.Location = New System.Drawing.Point(106, 251)
+        Me.cboPackageType.Location = New System.Drawing.Point(106, 226)
         Me.cboPackageType.Margin = New System.Windows.Forms.Padding(1)
         Me.cboPackageType.Name = "cboPackageType"
         Me.cboPackageType.OldValue = 0
@@ -1104,7 +1111,7 @@
         Me.cboPackageSize.DisplayOnly = true
         Me.cboPackageSize.EditingMode = false
         Me.cboPackageSize.Font = New System.Drawing.Font("Arial Narrow", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.cboPackageSize.Location = New System.Drawing.Point(256, 251)
+        Me.cboPackageSize.Location = New System.Drawing.Point(256, 226)
         Me.cboPackageSize.Margin = New System.Windows.Forms.Padding(1)
         Me.cboPackageSize.Name = "cboPackageSize"
         Me.cboPackageSize.Size = New System.Drawing.Size(74, 23)
@@ -1131,7 +1138,7 @@
         Me.txtPackageSize.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.txtPackageSize.ForeColor = System.Drawing.Color.Black
         Me.txtPackageSize.LinkedLabel = Nothing
-        Me.txtPackageSize.Location = New System.Drawing.Point(332, 251)
+        Me.txtPackageSize.Location = New System.Drawing.Point(332, 226)
         Me.txtPackageSize.Margin = New System.Windows.Forms.Padding(1)
         Me.txtPackageSize.MaximumValue = Nothing
         Me.txtPackageSize.MinimumValue = Nothing
@@ -1148,7 +1155,7 @@
         Me.CLabel3.DisplayOnly = true
         Me.CLabel3.EditingMode = false
         Me.CLabel3.Font = New System.Drawing.Font("Arial Narrow", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.CLabel3.Location = New System.Drawing.Point(1, 276)
+        Me.CLabel3.Location = New System.Drawing.Point(1, 251)
         Me.CLabel3.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel3.Name = "CLabel3"
         Me.CLabel3.Size = New System.Drawing.Size(103, 23)
@@ -1181,7 +1188,7 @@
         Me.cboRouteOfAdministration.IgnoreCase = false
         Me.cboRouteOfAdministration.IntegralHeight = false
         Me.cboRouteOfAdministration.LinkedLabel = Nothing
-        Me.cboRouteOfAdministration.Location = New System.Drawing.Point(106, 276)
+        Me.cboRouteOfAdministration.Location = New System.Drawing.Point(106, 251)
         Me.cboRouteOfAdministration.Margin = New System.Windows.Forms.Padding(1)
         Me.cboRouteOfAdministration.Name = "cboRouteOfAdministration"
         Me.cboRouteOfAdministration.OldValue = 0
@@ -1258,13 +1265,6 @@
         Me.BnDrugs.Size = New System.Drawing.Size(255, 25)
         Me.BnDrugs.TabIndex = 80
         Me.BnDrugs.Text = "BindingNavigator1"
-        '
-        'tsDrugsCount
-        '
-        Me.tsDrugsCount.Name = "tsDrugsCount"
-        Me.tsDrugsCount.Size = New System.Drawing.Size(35, 22)
-        Me.tsDrugsCount.Text = "of {0}"
-        Me.tsDrugsCount.ToolTipText = "Total number of items"
         '
         'BindingNavigatorMoveFirstItem
         '
@@ -1374,6 +1374,7 @@
         Me.txtDrugIdNo.FieldName = Nothing
         Me.txtDrugIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtDrugIdNo.FindEnabled = true
+        Me.CFlowLayout2.SetFlowBreak(Me.txtDrugIdNo, true)
         Me.txtDrugIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.txtDrugIdNo.ForeColor = System.Drawing.Color.Black
         Me.txtDrugIdNo.LinkedLabel = Nothing
@@ -1393,8 +1394,8 @@
         '
         Me.lblPublicPrice.DisplayOnly = true
         Me.lblPublicPrice.EditingMode = false
-        Me.lblPublicPrice.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblPublicPrice.Location = New System.Drawing.Point(255, 26)
+        Me.lblPublicPrice.Font = New System.Drawing.Font("Arial Narrow", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblPublicPrice.Location = New System.Drawing.Point(1, 51)
         Me.lblPublicPrice.Margin = New System.Windows.Forms.Padding(1)
         Me.lblPublicPrice.Name = "lblPublicPrice"
         Me.lblPublicPrice.Size = New System.Drawing.Size(102, 23)
@@ -1421,7 +1422,7 @@
         Me.txtDrugPublicPrice.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.txtDrugPublicPrice.ForeColor = System.Drawing.Color.Black
         Me.txtDrugPublicPrice.LinkedLabel = Nothing
-        Me.txtDrugPublicPrice.Location = New System.Drawing.Point(359, 26)
+        Me.txtDrugPublicPrice.Location = New System.Drawing.Point(105, 51)
         Me.txtDrugPublicPrice.Margin = New System.Windows.Forms.Padding(1)
         Me.txtDrugPublicPrice.MaximumValue = Nothing
         Me.txtDrugPublicPrice.MinimumValue = Nothing
@@ -1438,7 +1439,7 @@
         Me.CLabel5.DisplayOnly = true
         Me.CLabel5.EditingMode = false
         Me.CLabel5.Font = New System.Drawing.Font("Arial Narrow", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.CLabel5.Location = New System.Drawing.Point(1, 51)
+        Me.CLabel5.Location = New System.Drawing.Point(1, 76)
         Me.CLabel5.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel5.Name = "CLabel5"
         Me.CLabel5.Size = New System.Drawing.Size(102, 23)
@@ -1465,7 +1466,7 @@
         Me.txtDrugGTin.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.txtDrugGTin.ForeColor = System.Drawing.Color.Black
         Me.txtDrugGTin.LinkedLabel = Nothing
-        Me.txtDrugGTin.Location = New System.Drawing.Point(105, 51)
+        Me.txtDrugGTin.Location = New System.Drawing.Point(105, 76)
         Me.txtDrugGTin.Margin = New System.Windows.Forms.Padding(1)
         Me.txtDrugGTin.MaximumValue = Nothing
         Me.txtDrugGTin.MinimumValue = Nothing
@@ -1481,7 +1482,7 @@
         Me.CLabel7.DisplayOnly = true
         Me.CLabel7.EditingMode = false
         Me.CLabel7.Font = New System.Drawing.Font("Arial Narrow", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.CLabel7.Location = New System.Drawing.Point(1, 76)
+        Me.CLabel7.Location = New System.Drawing.Point(1, 101)
         Me.CLabel7.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel7.Name = "CLabel7"
         Me.CLabel7.Size = New System.Drawing.Size(102, 23)
@@ -1508,7 +1509,7 @@
         Me.txtDrugTradeName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.txtDrugTradeName.ForeColor = System.Drawing.Color.Black
         Me.txtDrugTradeName.LinkedLabel = Nothing
-        Me.txtDrugTradeName.Location = New System.Drawing.Point(105, 76)
+        Me.txtDrugTradeName.Location = New System.Drawing.Point(105, 101)
         Me.txtDrugTradeName.Margin = New System.Windows.Forms.Padding(1)
         Me.txtDrugTradeName.MaximumValue = Nothing
         Me.txtDrugTradeName.MinimumValue = Nothing
@@ -1524,7 +1525,7 @@
         Me.CLabel8.DisplayOnly = true
         Me.CLabel8.EditingMode = false
         Me.CLabel8.Font = New System.Drawing.Font("Arial Narrow", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.CLabel8.Location = New System.Drawing.Point(1, 101)
+        Me.CLabel8.Location = New System.Drawing.Point(1, 126)
         Me.CLabel8.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel8.Name = "CLabel8"
         Me.CLabel8.Size = New System.Drawing.Size(102, 23)
@@ -1551,7 +1552,7 @@
         Me.txtDrugGenericName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.txtDrugGenericName.ForeColor = System.Drawing.Color.Black
         Me.txtDrugGenericName.LinkedLabel = Nothing
-        Me.txtDrugGenericName.Location = New System.Drawing.Point(105, 101)
+        Me.txtDrugGenericName.Location = New System.Drawing.Point(105, 126)
         Me.txtDrugGenericName.Margin = New System.Windows.Forms.Padding(1)
         Me.txtDrugGenericName.MaximumValue = Nothing
         Me.txtDrugGenericName.MinimumValue = Nothing
@@ -1567,7 +1568,7 @@
         Me.CLabel10.DisplayOnly = true
         Me.CLabel10.EditingMode = false
         Me.CLabel10.Font = New System.Drawing.Font("Arial Narrow", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.CLabel10.Location = New System.Drawing.Point(1, 126)
+        Me.CLabel10.Location = New System.Drawing.Point(1, 151)
         Me.CLabel10.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel10.Name = "CLabel10"
         Me.CLabel10.Size = New System.Drawing.Size(102, 23)
@@ -1590,18 +1591,17 @@
         Me.txtDrugRegistrationNo.FieldName = Nothing
         Me.txtDrugRegistrationNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtDrugRegistrationNo.FindEnabled = true
-        Me.CFlowLayout2.SetFlowBreak(Me.txtDrugRegistrationNo, true)
         Me.txtDrugRegistrationNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.txtDrugRegistrationNo.ForeColor = System.Drawing.Color.Black
         Me.txtDrugRegistrationNo.LinkedLabel = Nothing
-        Me.txtDrugRegistrationNo.Location = New System.Drawing.Point(105, 126)
+        Me.txtDrugRegistrationNo.Location = New System.Drawing.Point(105, 151)
         Me.txtDrugRegistrationNo.Margin = New System.Windows.Forms.Padding(1)
         Me.txtDrugRegistrationNo.MaximumValue = Nothing
         Me.txtDrugRegistrationNo.MinimumValue = Nothing
         Me.txtDrugRegistrationNo.Name = "txtDrugRegistrationNo"
         Me.txtDrugRegistrationNo.OldValue = ""
         Me.txtDrugRegistrationNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtDrugRegistrationNo.Size = New System.Drawing.Size(148, 21)
+        Me.txtDrugRegistrationNo.Size = New System.Drawing.Size(101, 21)
         Me.txtDrugRegistrationNo.TabIndex = 69
         Me.txtDrugRegistrationNo.Translatable = false
         '
@@ -1610,10 +1610,10 @@
         Me.CLabel11.DisplayOnly = true
         Me.CLabel11.EditingMode = false
         Me.CLabel11.Font = New System.Drawing.Font("Arial Narrow", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.CLabel11.Location = New System.Drawing.Point(1, 151)
+        Me.CLabel11.Location = New System.Drawing.Point(208, 151)
         Me.CLabel11.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel11.Name = "CLabel11"
-        Me.CLabel11.Size = New System.Drawing.Size(102, 23)
+        Me.CLabel11.Size = New System.Drawing.Size(85, 23)
         Me.CLabel11.TabIndex = 60
         Me.CLabel11.Text = "Dosage Form"
         Me.CLabel11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1637,14 +1637,14 @@
         Me.txtDrugDosageForm.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.txtDrugDosageForm.ForeColor = System.Drawing.Color.Black
         Me.txtDrugDosageForm.LinkedLabel = Nothing
-        Me.txtDrugDosageForm.Location = New System.Drawing.Point(105, 151)
+        Me.txtDrugDosageForm.Location = New System.Drawing.Point(295, 151)
         Me.txtDrugDosageForm.Margin = New System.Windows.Forms.Padding(1)
         Me.txtDrugDosageForm.MaximumValue = Nothing
         Me.txtDrugDosageForm.MinimumValue = Nothing
         Me.txtDrugDosageForm.Name = "txtDrugDosageForm"
         Me.txtDrugDosageForm.OldValue = "0"
         Me.txtDrugDosageForm.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtDrugDosageForm.Size = New System.Drawing.Size(368, 21)
+        Me.txtDrugDosageForm.Size = New System.Drawing.Size(178, 21)
         Me.txtDrugDosageForm.TabIndex = 65
         Me.txtDrugDosageForm.Translatable = false
         '

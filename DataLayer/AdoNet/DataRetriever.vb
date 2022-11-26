@@ -5,22 +5,24 @@ Namespace AdoNet
     Public Class DataRetriever
         Implements IDataPageRetriever
 
-        Private _tableName As String
-        Private _command As SqlCommand
-        Private _columnList As String
+        Private ReadOnly _tableName As String
+        Private ReadOnly _command As SqlCommand
+        Private ReadOnly _columnList As String
         Private ReadOnly _db
+        Private ReadOnly _dataFilter As String
 
         Public Sub New()
 
         End Sub
 
-        Public Sub New(tableName As String, Optional pColumnList As String = Nothing, Optional connectionName As String = Nothing)
+        Public Sub New(tableName As String, Optional pColumnList As String = Nothing, Optional connectionName As String = Nothing, Optional dataFilter As String = Nothing)
             _db = New Db(connectionName)
             Dim connection As New SqlConnection(_db.GetConnectionString())
             connection.Open()
             _command = connection.CreateCommand()
             Me._tableName = tableName
             _columnList = pColumnList
+            _dataFilter = dataFilter
         End Sub
 
         Private rowCountValue As Integer = -1
@@ -50,7 +52,7 @@ Namespace AdoNet
 
                 ' Retrieve the column information from the database.
                 ' "Primary_Key,Item_Code,GTin,ItemNameEnglish,Price_Cash,Pack1,Pack2,Pack3"
-                _command.CommandText = "SELECT " & _columnList & " FROM " & _tableName
+                _command.CommandText = "SELECT " & _columnList & " FROM " & _tableName & IIf(_dataFilter Is Nothing, "", " where " & _dataFilter)
                 Dim adapter As New SqlDataAdapter()
                 adapter.SelectCommand = _command
                 Dim table As New DataTable()
