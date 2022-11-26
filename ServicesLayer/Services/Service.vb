@@ -593,8 +593,12 @@ Namespace Services
             Return DataDao.GetRecordFieldWithKeyG(Of TR, TS)(searchValue, tableName, searchFieldName, returnFieldName)
         End Function
 
-        Public Function GetRecordPosition(tableName As String, idNo As Int32) As Integer Implements IService.GetRecordPosition
-            Return DataDao.GetRecordPosition(tableName, idNo)
+        Public Function GetRecordPosition(tableName As String, idNo As Int32, Optional IdFieldName As String = Nothing) As Integer Implements IService.GetRecordPosition
+            Return DataDao.GetRecordPosition(tableName, idNo, IdFieldName)
+        End Function
+
+        Public Function GetRecordPositionByKey(Of T)(keyValue As T, tableName As String, sortKey As String, Optional IdFieldName As String = Nothing) As Integer Implements IService.GetRecordPositionByKey
+            Return DataDao.GetRecordPositionByKey(Of T)(keyValue, tableName, sortKey, IdFieldName)
         End Function
 
         Public Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal Optional fields As String() = Nothing, Optional filterKey As String = Nothing) As Object Implements IService.GetRecords

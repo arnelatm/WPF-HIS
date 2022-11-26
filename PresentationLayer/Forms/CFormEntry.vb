@@ -48,7 +48,7 @@ Public Class CFormEntry
         ' This call is required by the designer.
         InitializeComponent()
         DoubleBuffered = True
-
+        _inputTurnedOn = False
         ' Add any initialization after the InitializeComponent() call.
     End Sub
 
@@ -109,9 +109,11 @@ Public Class CFormEntry
     'End Property
 
     Public Overridable Sub UpdateViewDisplay(editMode As Boolean, addMode As Boolean, recordPositionNumber As Integer, targetIdNo As Integer, recordCount As Integer)
-        tsbCurrentRecord.Text = recordPositionNumber
-        tsbTotalRecords.Text = recordCount
-        UpdateNavigationButtonDisplay(editMode, addMode, recordPositionNumber, recordCount)
+        If Not HideNavigatorButtons Then
+            tsbCurrentRecord.Text = recordPositionNumber
+            tsbTotalRecords.Text = recordCount
+            UpdateNavigationButtonDisplay(editMode, addMode, recordPositionNumber, recordCount)
+        End If
         If addMode Or editMode Then
             TurnOnInputs()
         Else
@@ -178,13 +180,21 @@ Public Class CFormEntry
         lblFormDescription.TextAlign = ContentAlignment.MiddleCenter
     End Sub
 
+    Private _inputTurnedOn As Boolean = False
+
     Public Overridable Sub TurnOffInputs()
-        Inputs(False)
+        If _inputTurnedOn Then
+            Inputs(False)
+            _inputTurnedOn = False
+        End If
         'RaiseEvent InputsTurnedOff()
     End Sub
 
     Public Overridable Sub TurnOnInputs()
-        Inputs(True)
+        If Not _inputTurnedOn Then
+            Inputs(True)
+            _inputTurnedOn = True
+        End If
         'RaiseEvent InputsTurnedOn()
         'If FirstControl IsNot Nothing Then
         '    FirstControl.Focus()

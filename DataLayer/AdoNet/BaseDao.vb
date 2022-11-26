@@ -725,11 +725,18 @@ Namespace AdoNet
             Return retVal
         End Function
 
-        Public Function GetRecordPosition(tableName As String, idNo As Int32) As Integer _
-            Implements IBaseDao.GetRecordPosition
+        Public Function GetRecordPosition(tableName As String, idNo As Int32, Optional IdFieldName As String = Nothing) As Integer Implements IBaseDao.GetRecordPosition
+            Dim fieldName As String = IIf(IdFieldName Is Nothing, "IdNo", idFieldName)
             Dim sql As String =
                     " Select Count(*) FROM [" & tableName & "] " &
-                    " Where " & GetPrimaryFieldName() & " < " & idNo
+                    " Where " & fieldName & " < " & idNo 
+            Return GetDb().Scalar(sql)
+        End Function
+
+
+        Public Function GetRecordPositionByKey(Of T)(keyValue As T, tableName As String, sortKey As String, keyFieldName As String) As Integer Implements IBaseDao.GetRecordPositionByKey
+            'Dim sql As String = "Select count(*) from [" & tableName & "] where [" & sortKey & "] < (select [" & sortKey & "] from [" & tableName & "] where [" & keyFieldName & "] = " & keyValue.ToString() & ")"
+            Dim sql As String =  "SELECT RowNr FROM ( SELECT  ROW_NUMBER() OVER (ORDER BY [" & sortKey & "]) AS RowNr, " & keyFieldName & " FROM [" & tableName & "]) sub WHERE sub." & keyFieldName & " = " & keyValue.ToString() 
             Return GetDb().Scalar(sql)
         End Function
 

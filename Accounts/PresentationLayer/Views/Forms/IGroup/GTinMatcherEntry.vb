@@ -50,6 +50,7 @@ Namespace PresentationLayer.Views.Forms
             Else
                 _nfi.NumberGroupSeparator = numberGroupSeparator
             End If
+            HideNavigatorButtons = True
         End Sub
 
         Private Sub InitializeDataGridView()
@@ -99,7 +100,7 @@ Namespace PresentationLayer.Views.Forms
         '    dgv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells)
         'End Sub
 
-        Private Sub BtnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
+        Private Sub BtnFilter_Click(sender As Object, e As EventArgs) 
             DataGridViewItems.DataFilter = "QtyOnHand <> 0"
             memoryCacheDrugs = Nothing
             DataGridViewDrugs.MakeDataRetrieverCache(memoryCacheDrugs, "DrugList", "[Trade Name],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume,IdNo,GTin,[Package Size],[Package Type],[Public Price],[Dosage Form],[Generic Name],[RegistrationNo],[Route Of Administration]", "IGroupClinic")
@@ -267,7 +268,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Volume As Double? Implements IItemDetailsView.Volume
             Get
-                Return txtVolume.GetValue(Volume)
+                Return txtVolume.GetValue(Of Double?)
             End Get
             Set
                 txtVolume.SetValue(Value)
@@ -285,7 +286,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PackageSize As Double? Implements IItemDetailsView.PackageSize
             Get
-                Return txtPackageSize.GetValue(PackageSize)
+                Return txtPackageSize.GetValue(Of Double?)
             End Get
             Set
                 txtPackageSize.SetValue(Value)
@@ -303,17 +304,22 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub SelectRecordOnDrugGrid(gTinValue As String)
             If gTinValue IsNot DBNull.Value OrElse gTinValue IsNot Nothing OrElse gTinValue = "" Then
-                DataGridViewDrugs.SearchGrid(gTinValue, "GTin")
+                Dim rowPos As Int32
+                RaiseEvent GTinValueChanged(DataGridViewDrugs, gTinValue)
+                'DataGridViewDrugs.CurrentCell = DataGridViewDrugs(0, rowPos)
             End If
         End Sub
 
-        Private Sub SelectRecordOnItemGrid(idNo As Int32?)
-            If Not _startedByItemGrid Then
-                If Not (idNo Is Nothing OrElse idNo = 0) Then
-                    DataGridViewItems.SearchGrid(idNo, "Primary_Key")
-                End If
-            End If
-        End Sub
+        'Private Sub SelectRecordOnItemGrid(idNo As Int32?)
+        '    If Not _startedByItemGrid Then
+        '        If Not (idNo Is Nothing OrElse idNo = 0) Then
+        '            DataGridViewItems.SearchGrid(idNo, "Primary_Key")
+        '            If GTin IsNot Nothing OrElse GTin <> "" Then
+        '                DataGridViewItems.SearchGrid(GTin, "GTin")
+        '            End If
+        '        End If
+        '    End If
+        'End Sub
 
         Public Property PrescriptionDrug As Boolean Implements IItemDetailsView.PrescriptionDrug
 
@@ -583,6 +589,9 @@ Namespace PresentationLayer.Views.Forms
                 dgvIdNo = curRow.Cells("Primary_Key").Value
                 _startedByItemGrid = True
                 RaiseEvent UpdateItemDisplay(dgvIdNo)
+                If  GTin IsNot Nothing AndAlso GTin <> "" Then
+                    SelectRecordOnDrugGrid(GTin)
+                End If
                 _startedByItemGrid = False
             End If
         End Sub
@@ -594,49 +603,39 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Protected Overridable Sub OnAfterRecordChanged() Handles Me.AfterUpdateView
-            SelectRecordOnItemGrid(IdNo)
-        End Sub
+        'Protected Overridable Sub OnAfterRecordChanged() Handles Me.AfterUpdateView
+        '    SelectRecordOnItemGrid(IdNo)
+        'End Sub
 
-        Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs)
-            MoveToRow(DataGridViewDrugs, -1)
-        End Sub
+        'Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs)
+        '    MoveToRow(DataGridViewDrugs, -1)
+        'End Sub
 
-        Private Sub CButton3_ClickButtonArea(sender As Object, e As MouseEventArgs)
-            MoveToRow(DataGridViewDrugs, +1)
-        End Sub
+        'Private Sub CButton3_ClickButtonArea(sender As Object, e As MouseEventArgs)
+        '    MoveToRow(DataGridViewDrugs, +1)
+        'End Sub
 
-        Private Sub CButton2_ClickButtonArea(sender As Object, e As MouseEventArgs)
-            DataGridViewDrugs.CurrentCell = DataGridViewDrugs(0, DataGridViewDrugs.RowCount() - 1)
-        End Sub
+        'Private Sub CButton2_ClickButtonArea(sender As Object, e As MouseEventArgs)
+        '    DataGridViewDrugs.CurrentCell = DataGridViewDrugs(0, DataGridViewDrugs.RowCount() - 1)
+        'End Sub
 
-        Private Sub CButton4_ClickButtonArea(sender As Object, e As MouseEventArgs)
-            DataGridViewDrugs.CurrentCell = DataGridViewDrugs(0, 0)
-        End Sub
+        'Private Sub CButton4_ClickButtonArea(sender As Object, e As MouseEventArgs)
+        '    DataGridViewDrugs.CurrentCell = DataGridViewDrugs(0, 0)
+        'End Sub
 
         Private Sub MoveToRow(dataGridView As CDataGridView, rowCount As Integer)
             Dim nRow As Integer = dataGridView.CurrentRow.Index
             With dataGridView
                 Dim col = .CurrentCell.ColumnIndex
                 Dim row = .CurrentCell.RowIndex
-                Dim nRows = .Rows.Count 
-                Dim nCol = .Columns.Count 
+                Dim nRows = .Rows.Count
+                Dim nCol = .Columns.Count
                 Dim nextRow = row + rowCount
-                If (nCol = col And nRows = row) Then
-                    .CurrentCell = dataGridView(0, 0)
-                ElseIf (nRows = row) Then
-                    .CurrentCell = dataGridView(col + 1, 0)
-                Else
-                    If nextRow > .RowCount() Then
-                        .CurrentCell = dataGridView(col, .RowCount() - 1)
-                    ElseIf nextRow < 0 Then
-                        .CurrentCell = dataGridView(col, 0)
-                    Else
-                        .CurrentCell = dataGridView(col, nextRow)
-                    End If
+                If nextRow+1 <= .RowCount() AndAlso nextRow > 0 Then
+                    .CurrentCell = dataGridView(col, nextRow)
+                    BnRefresh(dataGridView)
                 End If
             End With
-            BnRefresh(dataGridView)
         End Sub
 
         Private Sub BindingNavigatorMoveFirstItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorMoveFirstItem.Click
