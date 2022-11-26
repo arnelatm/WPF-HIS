@@ -72,8 +72,8 @@ Namespace PresentationLayer.Views.Forms
             ' Create a DataRetriever and use it to create a Cache object
             ' and to initialize the DataGridView columns and rows.
 
-            CreateVirtualData(DataGridViewItems, memoryCacheItems, "ItemDetailsQty_View", "ItemNameEnglish,Primary_Key,Item_Code,GTin,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand", "IGroupClinic")
-            CreateVirtualData(DataGridViewDrugs, memoryCacheDrugs, "DrugList", "[Trade Name],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume,IdNo,GTin,[Package Size],[Package Type],[Public Price],[Dosage Form],[Generic Name],[RegistrationNo],[Route Of Administration]", "IGroupClinic")
+            DataGridViewItems.MakeDataRetrieverCache(memoryCacheItems, "ItemDetailsQty_View", "ItemNameEnglish,Primary_Key,Item_Code,GTin,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand", "IGroupClinic")
+            DataGridViewDrugs.MakeDataRetrieverCache(memoryCacheDrugs, "DrugList", "[Trade Name],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume,IdNo,GTin,[Package Size],[Package Type],[Public Price],[Dosage Form],[Generic Name],[RegistrationNo],[Route Of Administration]", "IGroupClinic")
             BnItems.Refresh()
         End Sub
 
@@ -85,15 +85,15 @@ Namespace PresentationLayer.Views.Forms
             e.Value = memoryCacheDrugs.RetrieveElement(e.RowIndex, e.ColumnIndex)
         End Sub
 
-        Private Sub CreateVirtualData(ByRef dgv As CDataGridView, ByRef memoryCache As Cache, table As String, columnList As String, connectionName As String)
-            Dim retriever As New DataRetriever(table, columnList, connectionName)
-            For Each column As DataColumn In retriever.Columns
-                dgv.Columns.Add(column.ColumnName, column.ColumnName)
-            Next
-            memoryCache = New Cache(retriever, 16)
-            dgv.RowCount = retriever.RowCount
-            dgv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells)
-        End Sub
+        'Private Sub CreateVirtualData(ByRef dgv As CDataGridView, ByRef memoryCache As Cache, table As String, columnList As String, connectionName As String)
+        '    Dim retriever As New DataRetriever(table, columnList, connectionName)
+        '    For Each column As DataColumn In retriever.Columns
+        '        dgv.Columns.Add(column.ColumnName, column.ColumnName)
+        '    Next
+        '    memoryCache = New Cache(retriever, 16)
+        '    dgv.RowCount = retriever.RowCount
+        '    dgv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells)
+        'End Sub
 
 #Region "Field Items"
 
