@@ -619,8 +619,8 @@ Namespace PresentationLayer.Views.Forms
             With dataGridView
                 Dim col = .CurrentCell.ColumnIndex
                 Dim row = .CurrentCell.RowIndex
-                Dim nRows = .Rows.Count - 1
-                Dim nCol = .Columns.Count - 1
+                Dim nRows = .Rows.Count 
+                Dim nCol = .Columns.Count 
                 Dim nextRow = row + rowCount
                 If (nCol = col And nRows = row) Then
                     .CurrentCell = dataGridView(0, 0)
