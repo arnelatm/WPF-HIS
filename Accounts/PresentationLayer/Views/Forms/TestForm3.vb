@@ -43,7 +43,7 @@ Public Class TestForm3
         ' Create a DataRetriever and use it to create a Cache object
         ' and to initialize the DataGridView columns and rows.
         Try
-            Dim retriever As New DataRetriever(table, "Primary_Key,Item_Code,GTin,ItemNameEnglish,Price_Cash,Pack1,Pack2,Pack3", "IGroupClinic")
+            Dim retriever As New Libraries.CBaseControlsLibrary.DataRetriever(table, "Primary_Key,Item_Code,GTin,ItemNameEnglish,Price_Cash,Pack1,Pack2,Pack3", "IGroupClinic")
             memoryCache = New Cache(retriever, 16)
             For Each column As DataColumn In retriever.Columns
                 dataGridView1.Columns.Add(
