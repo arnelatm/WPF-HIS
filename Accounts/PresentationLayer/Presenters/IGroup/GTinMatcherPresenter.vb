@@ -35,9 +35,13 @@ Namespace PresentationLayer.Presenters
                 ClearDrugDisplay()
                 ClearItemDrugDisplay()
             Else
-                Dim drugIdNo As Integer = GetDrugIdNo(gTinValue)
+                Dim drugIdNo As Integer = GetDrugIdNo(View.GTIN)
                 Dim drug As Object = MakeDrug(drugIdNo)
-                DisplayDrug(drug)
+                If drug IsNot Nothing Then
+                    DisplayDrug(drug)
+                    Dim drugPosId As Integer = Service.GetRecordPositionByKey(Of Integer)(drug.IdNo, "DrugList", "Trade Name", "IdNo") + 1
+                    sender.CurrentCell = sender(0, drugPosId)
+                End If
             End If
         End Sub
 
@@ -162,13 +166,13 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Sub OnAfterSaveItemDetails() Handles Me.AfterSave
-            If Service.RecordCount("StockPositionCurrent", "Item_Code", View.ItemDetailsCode, "BranchId = '02'") = 0 Then
-                Service.InsertRecord("StockPositionCurrent", {"BranchID", "Item_Code", "Batch", "Expiry", "WarehouseID", "PCSQty", "CashPrice", "CreditPrice", "CostPrice", "PurchaseNo", "TmpStock"},
-                                                        {"String", "String", "String", "DateTime", "String", "Decimal", "Decimal", "Decimal", "Decimal", "Decimal", "Decimal"},
-                                                        {"01", View.ItemDetailsCode, "000", Now(), "01", 0, 0, 0, 0, 0, 0})
-            End If
-        End Sub
+        'Public Sub OnAfterSaveItemDetails() Handles Me.AfterSave
+        '    If Service.RecordCount("StockPositionCurrent", "Item_Code", View.ItemDetailsCode, "BranchId = '02'") = 0 Then
+        '        Service.InsertRecord("StockPositionCurrent", {"BranchID", "Item_Code", "Batch", "Expiry", "WarehouseID", "PCSQty", "CashPrice", "CreditPrice", "CostPrice", "PurchaseNo", "TmpStock"},
+        '                                                {"String", "String", "String", "DateTime", "String", "Decimal", "Decimal", "Decimal", "Decimal", "Decimal", "Decimal"},
+        '                                                {"01", View.ItemDetailsCode, "000", Now(), "01", 0, 0, 0, 0, 0, 0})
+        '    End If
+        'End Sub
 
         Public Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
             If View.GTIN IsNot Nothing Or View.GTIN <> "" Then

@@ -257,11 +257,19 @@ Public Class CTextBox
         End If
     End Sub
 
-    Public Function GetValue(value As Object) As Object
+    Public Function GetValue(Of T) As Object
         If Text Is Nothing Then
             Return Nothing
         End If
-        Select Case value.GetType()
+            Dim objType As Type = GetType(T)
+            Dim objUnderlyingTYpe As Type = Nullable.GetUnderlyingType(objType)
+            'If objUnderlyingTYpe IsNot Nothing Then
+                
+            'Else
+                
+            'End If
+
+        Select Case objUnderlyingTYpe
             Case GetType(String)
                 Return Text
             Case GetType(Short), GetType(Short?) 'Int16

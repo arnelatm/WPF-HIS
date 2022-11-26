@@ -1978,6 +1978,7 @@
         Me.DataGridViewItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridViewItems.BegFindValue = Nothing
         Me.DataGridViewItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridViewItems.DataFilter = Nothing
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
@@ -1987,7 +1988,7 @@
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DataGridViewItems.DefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridViewItems.DgvFooter = Nothing
-        Me.DataGridViewItems.DisplayOnly = false
+        Me.DataGridViewItems.DisplayOnly = true
         Me.DataGridViewItems.Ea = Nothing
         Me.DataGridViewItems.EditingMode = false
         Me.DataGridViewItems.EndFindValue = Nothing
@@ -2019,6 +2020,7 @@
         Me.DataGridViewDrugs.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridViewDrugs.BegFindValue = Nothing
         Me.DataGridViewDrugs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridViewDrugs.DataFilter = Nothing
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
@@ -2028,7 +2030,7 @@
         DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DataGridViewDrugs.DefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridViewDrugs.DgvFooter = Nothing
-        Me.DataGridViewDrugs.DisplayOnly = false
+        Me.DataGridViewDrugs.DisplayOnly = true
         Me.DataGridViewDrugs.Ea = Nothing
         Me.DataGridViewDrugs.EditingMode = false
         Me.DataGridViewDrugs.EndFindValue = Nothing
