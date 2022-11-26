@@ -26,7 +26,7 @@ Public Class TestForm3
         With Me
             .AutoSize = True
             .Controls.Add(Me.dataGridView1)
-            .Text = "DataGridView virtual-mode just-in-time demo"
+            .Text = $"DataGridView virtual-mode just-in-time demo"
         End With
 
         ' Complete the initialization of the DataGridView.
@@ -43,7 +43,7 @@ Public Class TestForm3
         ' Create a DataRetriever and use it to create a Cache object
         ' and to initialize the DataGridView columns and rows.
         Try
-            Dim retriever As New Libraries.CBaseControlsLibrary.DataRetriever(table, "Primary_Key,Item_Code,GTin,ItemNameEnglish,Price_Cash,Pack1,Pack2,Pack3", "IGroupClinic")
+            Dim retriever As New DataRetriever(table, "Primary_Key,Item_Code,GTin,ItemNameEnglish,Price_Cash,Pack1,Pack2,Pack3", "IGroupClinic")
             memoryCache = New Cache(retriever, 16)
             For Each column As DataColumn In retriever.Columns
                 dataGridView1.Columns.Add(
@@ -51,8 +51,7 @@ Public Class TestForm3
             Next
             Me.dataGridView1.RowCount = retriever.RowCount
         Catch ex As SqlException
-            MessageBox.Show("Connection could not be established. " &
-                "Verify that the connection string is valid.")
+            MessageBox.Show($"Connection could not be established. Verify that the connection string is valid.")
             Application.Exit()
         End Try
 
