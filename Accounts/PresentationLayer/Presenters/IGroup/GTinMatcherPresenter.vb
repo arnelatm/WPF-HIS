@@ -39,7 +39,7 @@ Namespace PresentationLayer.Presenters
                 Dim drug As Object = MakeDrug(drugIdNo)
                 If drug IsNot Nothing Then
                     DisplayDrug(drug)
-                    Dim drugPosId As Integer = Service.GetRecordPositionByKey(Of Integer)(drug.IdNo, "DrugList", "Trade Name", "IdNo") + 1
+                    Dim drugPosId As Integer = Service.GetRecordPositionByKey(Of Integer)(drug.IdNo, "DrugList", "Trade Name", "IdNo") - 1
                     sender.CurrentCell = sender(0, drugPosId)
                 End If
             End If

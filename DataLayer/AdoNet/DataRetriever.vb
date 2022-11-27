@@ -10,12 +10,14 @@ Namespace AdoNet
         Private ReadOnly _columnList As String
         Private ReadOnly _db
         Private ReadOnly _dataFilter As String
+        Private ReadOnly _columnsToSortBy As String()
+        Private _sortkey As String
 
         Public Sub New()
 
         End Sub
 
-        Public Sub New(tableName As String, Optional pColumnList As String = Nothing, Optional connectionName As String = Nothing, Optional dataFilter As String = Nothing)
+        Public Sub New(tableName As String, Optional pColumnList As String = Nothing, Optional connectionName As String = Nothing, Optional dataFilter As String = Nothing, Optional columnToSortBy As String = Nothing)
             _db = New Db(connectionName)
             Dim connection As New SqlConnection(_db.GetConnectionString())
             connection.Open()
@@ -23,6 +25,8 @@ Namespace AdoNet
             Me._tableName = tableName
             _columnList = pColumnList
             _dataFilter = dataFilter
+            _columnsToSortBy = columnToSortBy.Split(",")
+            _sortkey = columnToSortBy
         End Sub
 
         Private rowCountValue As Integer = -1
@@ -96,7 +100,6 @@ Namespace AdoNet
         End Property
 
         ' Declare variables to be reused by the SupplyPageOfData method.
-        Private columnToSortBy As String
 
         Private adapter As New SqlDataAdapter()
 
@@ -104,9 +107,12 @@ Namespace AdoNet
 
             ' Store the name of the ID column. This column must contain unique
             ' values so the SQL below will work properly.
-            If columnToSortBy Is Nothing Then
-                columnToSortBy = Me.Columns(0).ColumnName
-            End If
+            Dim sortFields As String = ""
+            For Each item In _columnsToSortBy
+                sortFields = sortFields & "[" & item & "]+"
+            Next
+            sortFields = Left(sortFields, Len(sortFields) - 1)
+            '_columnToSortBy = Me.Columns(0).ColumnName
 
             'If Not Me.Columns(columnToSortBy).Unique Then
             '    Throw New InvalidOperationException(String.Format(
@@ -115,15 +121,14 @@ Namespace AdoNet
 
             ' Retrieve the specified number of rows from the database, starting
             ' with the row specified by the lowerPageBoundary parameter.
-            _command.CommandText =
-                "Select Top " & rowsPerPage & " " &
-                CommaSeparatedListOfColumnNames & " From " & _tableName &
-                " WHERE [" & columnToSortBy & "] NOT IN (SELECT TOP " &
-                lowerPageBoundary & " [" & columnToSortBy & "] From " &
-                _tableName & " Order By [" & columnToSortBy &
-                "]) Order By [" & columnToSortBy & "]"
-            adapter.SelectCommand = _command
+            _command.CommandText = "Select Top " & rowsPerPage & " " &
+                                   CommaSeparatedListOfColumnNames & " From " & _tableName &
+                                   " WHERE " & _sortkey & " NOT IN (SELECT TOP " &
+                                   lowerPageBoundary & " " & _sortkey & " From [" &
+                                   _tableName & "] Order by " & _sortkey &
+                                   ") Order By " & _sortkey
 
+            adapter.SelectCommand = _command
             Dim table As New DataTable()
             table.Locale = System.Globalization.CultureInfo.InvariantCulture
             adapter.Fill(table)

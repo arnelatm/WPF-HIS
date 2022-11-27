@@ -39,7 +39,7 @@ Public Class CDataGridView
     End Sub
 
     Public Property DataFilter As String = Nothing
-        
+
     Public Event ChangesMade As EventHandler
 
     Public Event DeletingRow(ByVal cancel As Boolean)
@@ -1012,8 +1012,8 @@ Public Class CDataGridView
         Return retValue
     End Function
 
-    Public Sub MakeDataRetrieverCache(ByRef memoryCache As Cache, table As String, columnList As String, connectionName As String)
-        Dim retriever As New DataRetriever(table, columnList, connectionName, DataFilter)
+    Public Sub MakeDataRetrieverCache(ByRef memoryCache As Cache, table As String, columnList As String, connectionName As String, Optional sortKey As String = Nothing)
+        Dim retriever As New DataRetriever(table, columnList, connectionName, DataFilter, sortKey)
         For Each column As DataColumn In retriever.Columns
             Columns.Add(column.ColumnName, column.ColumnName)
         Next

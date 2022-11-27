@@ -78,8 +78,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub MakeDataGridViews()
-            DataGridViewItems.MakeDataRetrieverCache(memoryCacheItems, "ItemDetailsQty_View", "ItemNameEnglish,Primary_Key,Item_Code,GTin,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand", "IGroupClinic")
-            DataGridViewDrugs.MakeDataRetrieverCache(memoryCacheDrugs, "DrugList", "[Trade Name],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume,IdNo,GTin,[Package Size],[Package Type],[Public Price],[Dosage Form],[Generic Name],[RegistrationNo],[Route Of Administration]", "IGroupClinic")
+            DataGridViewItems.MakeDataRetrieverCache(memoryCacheItems, "ItemDetailsQty_View", "ItemNameEnglish,Primary_Key,Item_Code,GTin,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand", "IGroupClinic", "ItemNameEnglish")
+            DataGridViewDrugs.MakeDataRetrieverCache(memoryCacheDrugs, "DrugList", "[Trade Name],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume,IdNo,GTin,[Package Size],[Package Type],[Public Price],[Dosage Form],[Generic Name],[RegistrationNo],[Route Of Administration]", "IGroupClinic", "[Trade Name]")
         End Sub
 
         Private Sub dataGridViewItems_CellValueNeeded(ByVal sender As Object, ByVal e As DataGridViewCellValueEventArgs) Handles DataGridViewItems.CellValueNeeded
@@ -100,7 +100,7 @@ Namespace PresentationLayer.Views.Forms
         '    dgv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells)
         'End Sub
 
-        Private Sub BtnFilter_Click(sender As Object, e As EventArgs) 
+        Private Sub BtnFilter_Click(sender As Object, e As EventArgs)
             DataGridViewItems.DataFilter = "QtyOnHand <> 0"
             memoryCacheDrugs = Nothing
             DataGridViewDrugs.MakeDataRetrieverCache(memoryCacheDrugs, "DrugList", "[Trade Name],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume,IdNo,GTin,[Package Size],[Package Type],[Public Price],[Dosage Form],[Generic Name],[RegistrationNo],[Route Of Administration]", "IGroupClinic")
@@ -304,7 +304,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub SelectRecordOnDrugGrid(gTinValue As String)
             If gTinValue IsNot DBNull.Value OrElse gTinValue IsNot Nothing OrElse gTinValue = "" Then
-                Dim rowPos As Int32
+                'Dim rowPos As Int32
                 RaiseEvent GTinValueChanged(DataGridViewDrugs, gTinValue)
                 'DataGridViewDrugs.CurrentCell = DataGridViewDrugs(0, rowPos)
             End If
@@ -589,7 +589,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvIdNo = curRow.Cells("Primary_Key").Value
                 _startedByItemGrid = True
                 RaiseEvent UpdateItemDisplay(dgvIdNo)
-                If  GTin IsNot Nothing AndAlso GTin <> "" Then
+                If GTin IsNot Nothing AndAlso GTin <> "" Then
                     SelectRecordOnDrugGrid(GTin)
                 End If
                 _startedByItemGrid = False
@@ -631,7 +631,7 @@ Namespace PresentationLayer.Views.Forms
                 Dim nRows = .Rows.Count
                 Dim nCol = .Columns.Count
                 Dim nextRow = row + rowCount
-                If nextRow+1 <= .RowCount() AndAlso nextRow > 0 Then
+                If nextRow + 1 <= .RowCount() AndAlso nextRow > 0 Then
                     .CurrentCell = dataGridView(col, nextRow)
                     BnRefresh(dataGridView)
                 End If
