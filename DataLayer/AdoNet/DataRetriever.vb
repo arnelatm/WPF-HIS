@@ -10,7 +10,6 @@ Namespace AdoNet
         Private ReadOnly _columnList As String
         Private ReadOnly _db
         Private ReadOnly _dataFilter As String
-        Private ReadOnly _columnsToSortBy As String()
         Private _sortkey As String
 
         Public Sub New()
@@ -25,7 +24,6 @@ Namespace AdoNet
             Me._tableName = tableName
             _columnList = pColumnList
             _dataFilter = dataFilter
-            _columnsToSortBy = columnToSortBy.Split(",")
             _sortkey = columnToSortBy
         End Sub
 
@@ -107,12 +105,16 @@ Namespace AdoNet
 
             ' Store the name of the ID column. This column must contain unique
             ' values so the SQL below will work properly.
-            Dim sortFields As String = ""
-            For Each item In _columnsToSortBy
-                sortFields = sortFields & "[" & item & "]+"
-            Next
-            sortFields = Left(sortFields, Len(sortFields) - 1)
+            'Dim sortFields As String = ""
+            'For Each item In _columnsToSortBy
+            '    sortFields = sortFields & "[" & item & "]+"
+            'Next
+            'sortFields = Left(sortFields, Len(sortFields) - 1)
             '_columnToSortBy = Me.Columns(0).ColumnName
+
+            If _sortkey Is Nothing Then
+                _sortkey = "[" + Columns(0).ToString() + "]"
+            End If
 
             'If Not Me.Columns(columnToSortBy).Unique Then
             '    Throw New InvalidOperationException(String.Format(

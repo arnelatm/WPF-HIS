@@ -70,14 +70,15 @@ Namespace PresentationLayer.Presenters
             CreateDataSource("DrugRouteOfAdministration_View", "RouteOfAdministration", {"RouteOfAdministration"}, "RouteOfAdministration")
         End Sub
 
-        Public Overrides Sub GoFilter()
-            If DataFilter Is Nothing Or DataFilter = "" Then
-                DataFilter = "QtyOnHand <> 0"
-            Else
-                DataFilter = ""
-            End If
-            GoFirstRecord()
-        End Sub
+        'Public Overrides Sub GoFilter()
+        '    If View.DataFilter Is Nothing Or View.DataFilter = "" Then
+        '        View.DataFilter = "QtyOnHand <> 0"
+        '    Else
+        '        View.DataFilter = ""
+        '    End If
+        '    DataFilter = View.DataFilter
+        '    GoFirstRecord()
+        'End Sub
 
         'Private Sub OnGTinMatcherValueChanged(sender As DataGridView, gTin As String)
         '    If gTin IsNot Nothing Or gTin <> "" Then

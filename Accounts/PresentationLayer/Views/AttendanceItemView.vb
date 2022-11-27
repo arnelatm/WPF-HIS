@@ -71,6 +71,7 @@ Namespace PresentationLayer.Views
         Public Property PayrollIdNo As Int16 Implements IAttendanceItemView.PayrollIdNo
         Public Property Sequence As Int16 Implements IAttendanceItemView.Sequence
         Public Property Selected As Boolean Implements IAttendanceItemView.Selected
+        Public Property DataFilter As String Implements IView.DataFilter
 
     End Class
 

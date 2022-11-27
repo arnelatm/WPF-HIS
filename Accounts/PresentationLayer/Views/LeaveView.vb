@@ -121,13 +121,8 @@ Namespace PresentationLayer.Views
         End Property
 
         Public Property LeaveCycle As String Implements ILeaveView.LeaveCycle
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As String)
-                Throw New NotImplementedException()
-            End Set
-        End Property
+
+        Public Property DataFilter As String Implements IView.DataFilter
 
     End Class
 

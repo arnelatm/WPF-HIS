@@ -18,6 +18,7 @@ Namespace PresentationLayer.Views
         Public Property NoMaxLimit As Boolean Implements IEmployeeLeaveCreditView.NoMaxLimit
         Public Property PaidPercent As Decimal Implements IEmployeeLeaveCreditView.PaidPercent
         Public Property Sequence As Int16 Implements IEmployeeLeaveCreditView.Sequence
+        Public Property DataFilter As String Implements IView.DataFilter
 
     End Class
 

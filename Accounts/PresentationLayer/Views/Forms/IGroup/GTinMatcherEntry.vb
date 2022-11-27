@@ -4,6 +4,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Forms
 
@@ -17,9 +18,9 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event FinderValueChanged(itemIdNo As Int16) Implements IItemDetailsView.FinderValueChanged
 
-        Public Event GetDrugDataTable(ByRef drugListDataTable As DataTable) Implements IGTinMatcherView.GetDrugDataTable
+        'Public Event GetDrugDataTable(ByRef drugListDataTable As DataTable) Implements IGTinMatcherView.GetDrugDataTable
 
-        Public Event GetItemDataTable(ByRef drugListDataTable As DataTable) Implements IGTinMatcherView.GetItemDataTable
+        'Public Event GetItemDataTable(ByRef drugListDataTable As DataTable) Implements IGTinMatcherView.GetItemDataTable
 
         Public Event UpdateDrugDisplay(gTinIdNo As Int32) Implements IGTinMatcherView.UpdateDrugDisplay
 
@@ -78,8 +79,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub MakeDataGridViews()
-            DataGridViewItems.MakeDataRetrieverCache(memoryCacheItems, "ItemDetailsQty_View", "ItemNameEnglish,Primary_Key,Item_Code,GTin,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand", "IGroupClinic", "ItemNameEnglish")
-            DataGridViewDrugs.MakeDataRetrieverCache(memoryCacheDrugs, "DrugList", "[Trade Name],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume,IdNo,GTin,[Package Size],[Package Type],[Public Price],[Dosage Form],[Generic Name],[RegistrationNo],[Route Of Administration]", "IGroupClinic", "[Trade Name]")
+            DataGridViewItems.MakeDataRetrieverCache(memoryCacheItems, "ItemDetailsQty_View", "ItemNameEnglish,Primary_Key,Item_Code,GTin,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand", "IGroupClinic")
+            DataGridViewDrugs.MakeDataRetrieverCache(memoryCacheDrugs, "DrugList", "[Trade Name],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume,IdNo,GTin,[Package Size],[Package Type],[Public Price],[Dosage Form],[Generic Name],[RegistrationNo],[Route Of Administration]", "IGroupClinic")
         End Sub
 
         Private Sub dataGridViewItems_CellValueNeeded(ByVal sender As Object, ByVal e As DataGridViewCellValueEventArgs) Handles DataGridViewItems.CellValueNeeded
@@ -100,11 +101,16 @@ Namespace PresentationLayer.Views.Forms
         '    dgv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells)
         'End Sub
 
-        Private Sub BtnFilter_Click(sender As Object, e As EventArgs)
-            DataGridViewItems.DataFilter = "QtyOnHand <> 0"
-            memoryCacheDrugs = Nothing
-            DataGridViewDrugs.MakeDataRetrieverCache(memoryCacheDrugs, "DrugList", "[Trade Name],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume,IdNo,GTin,[Package Size],[Package Type],[Public Price],[Dosage Form],[Generic Name],[RegistrationNo],[Route Of Administration]", "IGroupClinic")
-        End Sub
+        'Private Sub BtnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
+
+        '    InitializeDataGridView()
+        '    Refresh()
+
+        '    'DataGridViewItems.DataFilter = DataFilter
+        '    'memoryCacheItems = Nothing
+        '    'DataGridViewItems.MakeDataRetrieverCache(memoryCacheItems, "ItemDetailsQty_View", "ItemNameEnglish,Primary_Key,Item_Code,GTin,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand", "IGroupClinic")
+        '    'DataGridViewItems.Refresh()
+        'End Sub
 
 #Region "Field Items"
 
