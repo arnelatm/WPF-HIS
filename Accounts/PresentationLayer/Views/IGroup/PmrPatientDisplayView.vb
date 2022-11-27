@@ -16,6 +16,7 @@ Namespace PresentationLayer.Views.Interfaces
         Public Property LastConsDate As String Implements IPmrPatientDisplayView.LastConsDate
         Public Property InvTime As Date Implements IPmrPatientDisplayView.InvTime
         Public Property Errors As List(Of String) Implements IView.Errors
+        Public Property DataFilter As String Implements IView.DataFilter
 
     End Class
 
