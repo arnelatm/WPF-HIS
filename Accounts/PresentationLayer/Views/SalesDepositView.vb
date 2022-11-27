@@ -117,6 +117,8 @@ Namespace PresentationLayer.Views
         '    Return Math.Round(pBankCharge * _vatRate, 2)
         'End Function
 
+        Public Property DataFilter As String Implements IView.DataFilter
+
     End Class
 
 End Namespace

@@ -20,6 +20,7 @@ Namespace PresentationLayer.Views
         Public Property Sequence As Int16 Implements IDjOiItemView.Sequence
         Public Property TransactionDate As Date? Implements IDjOiItemView.TransactionDate
         Public Property Errors As List(Of String) Implements IView.Errors
+        Public Property DataFilter As String Implements IView.DataFilter
 
     End Class
 

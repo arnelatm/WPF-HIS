@@ -18,6 +18,7 @@ Namespace PresentationLayer.Views
         Public Property Rate As Decimal Implements IEmployeePayElementView.Rate
         Public Property Unit As String Implements IEmployeePayElementView.Unit
         Public Property Errors As List(Of String) Implements IView.Errors
+        Public Property DataFilter As String Implements IView.DataFilter
 
     End Class
 

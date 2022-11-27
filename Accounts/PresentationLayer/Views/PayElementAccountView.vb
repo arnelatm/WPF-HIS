@@ -14,6 +14,7 @@ Namespace PresentationLayer.Views
         Public Property PayGroupIdNo As Int16 Implements IPayElementAccountView.PayGroupIdNo
         Public Property PayGroupName As String Implements IPayElementAccountView.PayGroupName
         Public Property Sequence As Int16 Implements IPayElementAccountView.Sequence
+        Public Property DataFilter As String Implements IView.DataFilter
 
     End Class
 

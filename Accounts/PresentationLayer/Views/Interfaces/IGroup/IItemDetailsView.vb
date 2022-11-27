@@ -5,10 +5,10 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface IItemDetailsView
         Inherits IView
 
-
-
         Event FinderValueChanged(itemIdNo As Int16)
+
         Event GTinValueChanged(sender As DataGridView, gTinValue As String)
+
         Property BranchID As String
         Property DosageForm As String
         Property GenericName As String

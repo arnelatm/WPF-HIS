@@ -24,13 +24,14 @@ Namespace PresentationLayer.Views
         Public Property LeaveName As String Implements IEmployeeLeaveApprovalItemView.LeaveName
         Public Property LeaveNameAra As String Implements IEmployeeLeaveApprovalItemView.LeaveNameAra
         Public Property LeaveReason As String Implements IEmployeeLeaveApprovalItemView.LeaveReason
-        Public Property LeaveStatus As String Implements IEmployeeLeaveApprovalItemView.LeaveStatus       
+        Public Property LeaveStatus As String Implements IEmployeeLeaveApprovalItemView.LeaveStatus
         Public Property StartDate As Date Implements IEmployeeLeaveApprovalItemView.StartDate
         Public Property Status As String Implements IEmployeeLeaveApprovalItemView.Status
         Public Property SupervisorIdNo As Integer Implements IEmployeeLeaveApprovalItemView.SupervisorIdNo
         Public Property Approve As Boolean Implements IEmployeeLeaveApprovalItemView.Approve
         Public Property Disapprove As Boolean Implements IEmployeeLeaveApprovalItemView.Disapprove
         Public Property Errors As List(Of String) Implements IView.Errors
+        Public Property DataFilter As String Implements IView.DataFilter
     End Class
 
 End Namespace
