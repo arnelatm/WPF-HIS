@@ -11,6 +11,7 @@ Namespace PresentationLayer.Views
 
         'Public Property Ea As EventAggregator
         Public Property Amount As Decimal Implements IPcClosingJournalView.Amount
+
         Public Property CdJournalIdNo As Int32 Implements IPcClosingJournalView.CdJournalIdNo
         Public Property Errors As List(Of String) Implements IView.Errors
         Public Property IdNo As Integer Implements IPcClosingJournalView.IdNo
@@ -22,6 +23,7 @@ Namespace PresentationLayer.Views
         Public Property PcClosed As Boolean Implements IPcClosingJournalView.PcClosed
         Public Property ReferenceNo As String Implements IPcClosingJournalView.ReferenceNo
         Public Property TransactionDate As Date? Implements IPcClosingJournalView.TransactionDate
+        Public Property DataFilter As String Implements IView.DataFilter
     End Class
 
 End Namespace

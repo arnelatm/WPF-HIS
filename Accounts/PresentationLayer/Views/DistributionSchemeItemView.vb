@@ -19,6 +19,7 @@ Namespace PresentationLayer.Views
         Public Property Percentage As Decimal Implements IDistributionSchemeItemView.Percentage
 
         Public Property Errors As List(Of String) Implements IView.Errors
+        Public Property DataFilter As String Implements IView.DataFilter
 
     End Class
 

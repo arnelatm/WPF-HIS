@@ -12,7 +12,6 @@ Namespace PresentationLayer.Views
         Public Property Credit As Decimal Implements IAccountReconciliationItemView.Credit
         Public Property Debit As Decimal Implements IAccountReconciliationItemView.Debit
         Public Property DocumentNumber As String Implements IAccountReconciliationItemView.DocumentNumber
-        Public Property Errors As List(Of String) Implements IView.Errors
         Public Property IdNo As Integer Implements IAccountReconciliationItemView.IdNo
         Public Property JournalCode As String Implements IAccountReconciliationItemView.JournalCode
         Public Property JournalIdNo As Integer Implements IAccountReconciliationItemView.JournalIdNo
@@ -22,6 +21,8 @@ Namespace PresentationLayer.Views
         Public Property ReferenceNo As String Implements IAccountReconciliationItemView.ReferenceNo
         Public Property Sequence As Int32 Implements IAccountReconciliationItemView.Sequence
         Public Property TransactionDate As Date? Implements IAccountReconciliationItemView.TransactionDate
+        Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Errors As List(Of String) Implements IView.Errors
 
     End Class
 

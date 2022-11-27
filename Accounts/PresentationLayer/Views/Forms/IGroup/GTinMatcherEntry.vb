@@ -4,6 +4,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Forms
 
@@ -17,9 +18,9 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event FinderValueChanged(itemIdNo As Int16) Implements IItemDetailsView.FinderValueChanged
 
-        Public Event GetDrugDataTable(ByRef drugListDataTable As DataTable) Implements IGTinMatcherView.GetDrugDataTable
+        'Public Event GetDrugDataTable(ByRef drugListDataTable As DataTable) Implements IGTinMatcherView.GetDrugDataTable
 
-        Public Event GetItemDataTable(ByRef drugListDataTable As DataTable) Implements IGTinMatcherView.GetItemDataTable
+        'Public Event GetItemDataTable(ByRef drugListDataTable As DataTable) Implements IGTinMatcherView.GetItemDataTable
 
         Public Event UpdateDrugDisplay(gTinIdNo As Int32) Implements IGTinMatcherView.UpdateDrugDisplay
 
@@ -100,11 +101,16 @@ Namespace PresentationLayer.Views.Forms
         '    dgv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells)
         'End Sub
 
-        Private Sub BtnFilter_Click(sender As Object, e As EventArgs) 
-            DataGridViewItems.DataFilter = "QtyOnHand <> 0"
-            memoryCacheDrugs = Nothing
-            DataGridViewDrugs.MakeDataRetrieverCache(memoryCacheDrugs, "DrugList", "[Trade Name],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume,IdNo,GTin,[Package Size],[Package Type],[Public Price],[Dosage Form],[Generic Name],[RegistrationNo],[Route Of Administration]", "IGroupClinic")
-        End Sub
+        'Private Sub BtnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
+
+        '    InitializeDataGridView()
+        '    Refresh()
+
+        '    'DataGridViewItems.DataFilter = DataFilter
+        '    'memoryCacheItems = Nothing
+        '    'DataGridViewItems.MakeDataRetrieverCache(memoryCacheItems, "ItemDetailsQty_View", "ItemNameEnglish,Primary_Key,Item_Code,GTin,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand", "IGroupClinic")
+        '    'DataGridViewItems.Refresh()
+        'End Sub
 
 #Region "Field Items"
 
@@ -304,7 +310,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub SelectRecordOnDrugGrid(gTinValue As String)
             If gTinValue IsNot DBNull.Value OrElse gTinValue IsNot Nothing OrElse gTinValue = "" Then
-                Dim rowPos As Int32
+                'Dim rowPos As Int32
                 RaiseEvent GTinValueChanged(DataGridViewDrugs, gTinValue)
                 'DataGridViewDrugs.CurrentCell = DataGridViewDrugs(0, rowPos)
             End If
@@ -589,7 +595,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvIdNo = curRow.Cells("Primary_Key").Value
                 _startedByItemGrid = True
                 RaiseEvent UpdateItemDisplay(dgvIdNo)
-                If  GTin IsNot Nothing AndAlso GTin <> "" Then
+                If GTin IsNot Nothing AndAlso GTin <> "" Then
                     SelectRecordOnDrugGrid(GTin)
                 End If
                 _startedByItemGrid = False
@@ -631,7 +637,7 @@ Namespace PresentationLayer.Views.Forms
                 Dim nRows = .Rows.Count
                 Dim nCol = .Columns.Count
                 Dim nextRow = row + rowCount
-                If nextRow+1 <= .RowCount() AndAlso nextRow > 0 Then
+                If nextRow + 1 <= .RowCount() AndAlso nextRow > 0 Then
                     .CurrentCell = dataGridView(col, nextRow)
                     BnRefresh(dataGridView)
                 End If

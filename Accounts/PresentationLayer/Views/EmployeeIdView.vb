@@ -19,6 +19,7 @@ Namespace PresentationLayer.Views
 
         Public Property Picture As Image Implements IEmployeeIdView.Picture
         Public Property Print As Boolean Implements IEmployeeIdView.Print
+        Public Property DataFilter As String Implements IView.DataFilter
 
     End Class
 

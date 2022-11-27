@@ -17,6 +17,7 @@ Namespace PresentationLayer.Views
         Public Property OvertimeSpecial As Decimal Implements IOtWorkHourView.OvertimeSpecial
         Public Property PayrollIdNo As Int16 Implements IOtWorkHourView.PayrollIdNo
         Public Property Sequence As Int16 Implements IOtWorkHourView.Sequence
+        Public Property DataFilter As String Implements IView.DataFilter
 
     End Class
 
