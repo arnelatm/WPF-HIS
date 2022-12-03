@@ -14,6 +14,7 @@ Namespace DataLayer.AdoNet
         Private _db As New Db("IGROUPCLINIC")
 
         Private FieldList As String = "BranchID," &
+                                      "Created_By_Branch," &
                                       "DosageForm," &
                                       "GenericName," &
                                       "GTin," &
@@ -92,8 +93,8 @@ Namespace DataLayer.AdoNet
 
         Public Function AddRecord(ByRef ItemDetails As ItemDetails) As Integer Implements IDao(Of ItemDetails).AddRecord
             Dim sql As String = " INSERT INTO [ItemDetails] " &
-                    " (BranchID,GTin,Item_Code,ItemGroup,ItemNameEnglish,Pack1,Pack2,Pack3)" &
-                    " VALUES (@BranchID,@GTIN,@ItemDetailsCode,@ItemGroup,@ItemDetailsName,@Pack1,@Pack2,@Pack3)"
+                    " (BranchID,Created_By_Branch,GTin,Item_Code,ItemGroup,ItemNameEnglish,Pack1,Pack2,Pack3)" &
+                    " VALUES (@BranchID,@Created_By_Branch,@GTIN,@ItemDetailsCode,@ItemGroup,@ItemDetailsName,@Pack1,@Pack2,@Pack3)"
             Dim retval As Integer
             retval = _db.Insert(sql, Take(ItemDetails))
             'If retval > 0 Then
@@ -113,6 +114,7 @@ Namespace DataLayer.AdoNet
                             Function(reader) _
             New ItemDetails() With {
             .BranchID = Extensions.AsString(reader("BranchID")),
+            .Created_By_Branch = Extensions.AsString(reader("Created_By_Branch")),
             .DosageForm = Extensions.AsString(reader("DosageForm")),
             .GenericName = Extensions.AsString(reader("GenericName")),
             .GTin = Extensions.AsString(reader("GTIN")),
@@ -138,6 +140,7 @@ Namespace DataLayer.AdoNet
         Private Function Take(ItemDetails As ItemDetails) As Object()
             Return New Object() {
                             "BranchID", ItemDetails.BranchID,
+                            "Created_By_Branch", ItemDetails.Created_By_Branch,
                             "GTin", ItemDetails.GTin,
                             "ItemDetailsCode", ItemDetails.ItemDetailsCode,
                             "ItemGroup", ItemDetails.ItemGroup,

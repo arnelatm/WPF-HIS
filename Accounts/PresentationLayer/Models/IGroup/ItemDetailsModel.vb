@@ -8,6 +8,7 @@
         'Implements IModelNew
 
         Public Property BranchID As String
+        Public Property Created_By_Branch As String
         Public Property DosageForm As String
         Public Property GenericName As String
         Public Property GTin As String

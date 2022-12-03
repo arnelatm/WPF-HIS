@@ -10,6 +10,7 @@ Namespace PresentationLayer.Views.Interfaces
         Event GTinValueChanged(sender As DataGridView, gTinValue As String)
 
         Property BranchID As String
+        Property Created_By_Branch As String
         Property DosageForm As String
         Property GenericName As String
         Property GTIN As String
