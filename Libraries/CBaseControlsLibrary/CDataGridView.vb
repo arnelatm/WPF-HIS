@@ -21,6 +21,7 @@ Public Class CDataGridView
     Private _firstVisibleColumn As Integer = -1
     Private _insertColumnAdded As Boolean = False
     Private _lastEditableColumn As Integer = -1
+    Private  _memoryCache As Cache
     Private ReadOnly _origEditMode As DataGridViewEditMode
 
     Public Sub New()
@@ -37,6 +38,8 @@ Public Class CDataGridView
         _origEditMode = EditMode
 
     End Sub
+
+    Public Property Cached As Boolean = False
 
     Public Property DataFilter As String = Nothing
 
@@ -1012,14 +1015,20 @@ Public Class CDataGridView
         Return retValue
     End Function
 
-    Public Sub MakeDataRetrieverCache(ByRef memoryCache As Cache, table As String, columnList As String, connectionName As String, Optional sortKey As String = Nothing)
+    Public Sub MakeDataRetrieverCache(table As String, columnList As String, connectionName As String, Optional sortKey As String = Nothing)
         Dim retriever As New DataRetriever(table, columnList, connectionName, DataFilter, sortKey)
         For Each column As DataColumn In retriever.Columns
             Columns.Add(column.ColumnName, column.ColumnName)
         Next
-        memoryCache = New Cache(retriever, 16)
+        _memoryCache = New Cache(retriever, 16)
         RowCount = retriever.RowCount
         AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells)
+    End Sub
+
+    Private Sub dataGridView_CellValueNeeded(ByVal sender As Object, ByVal e As DataGridViewCellValueEventArgs) Handles MyBase.CellValueNeeded
+        If Cached Then
+            e.Value = _memoryCache.RetrieveElement(e.RowIndex, e.ColumnIndex)
+        End If
     End Sub
 
 End Class

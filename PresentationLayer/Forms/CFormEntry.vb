@@ -39,6 +39,8 @@ Public Class CFormEntry
 
     Public Event AfterUpdateView()
 
+    Public Event AfterSave()
+
     Public Event InputsTurnedOn()
 
     Public Event InputsTurnedOff()
@@ -423,6 +425,8 @@ Public Class CFormEntry
         If Ea IsNot Nothing Then
             Ea.PublishEvent(saveData)
         End If
+        RaiseEvent AfterSave()
+
         If saveData.ValidData Then
             If QuitOnSave Then
                 Close()

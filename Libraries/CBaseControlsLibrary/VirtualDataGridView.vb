@@ -68,7 +68,7 @@ Public Class Cache
             Try
                 element = cachePages(0).table.Rows(rowIndex Mod RowsPerPage).Item(columnIndex).ToString()
             Catch ex As Exception
-                Return False
+                Return True
             End Try
             Return True
         ElseIf IsRowCachedInPage(1, rowIndex) Then
@@ -76,7 +76,7 @@ Public Class Cache
                 element = cachePages(1).table.Rows(rowIndex Mod RowsPerPage).Item(columnIndex).ToString()
                 Return True
             Catch ex As Exception
-                Return False
+                Return True
             End Try
         End If
 

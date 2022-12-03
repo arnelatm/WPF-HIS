@@ -13,8 +13,8 @@ Namespace PresentationLayer.Views.Forms
 
         Private _nfi As NumberFormatInfo
         Private _drugList As Object
-        Private memoryCacheItems As Cache
-        Private memoryCacheDrugs As Cache
+        'Private memoryCacheItems As Cache
+        'Private memoryCacheDrugs As Cache
 
         Public Event FinderValueChanged(itemIdNo As Int16) Implements IItemDetailsView.FinderValueChanged
 
@@ -79,17 +79,21 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub MakeDataGridViews()
-            DataGridViewItems.MakeDataRetrieverCache(memoryCacheItems, "ItemDetailsQty_View", "ItemNameEnglish,Primary_Key,Item_Code,GTin,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand", "IGroupClinic")
-            DataGridViewDrugs.MakeDataRetrieverCache(memoryCacheDrugs, "DrugList", "[Trade Name],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume,IdNo,GTin,[Package Size],[Package Type],[Public Price],[Dosage Form],[Generic Name],[RegistrationNo],[Route Of Administration]", "IGroupClinic")
+            'memoryCacheDrugs = Nothing
+            'memoryCacheItems = Nothing
+            'DataGridViewItems.MakeDataRetrieverCache(memoryCacheItems, "ItemDetailsQty_View", "ItemNameEnglish,Primary_Key,Item_Code,GTin,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand", "IGroupClinic")
+            'DataGridViewDrugs.MakeDataRetrieverCache(memoryCacheDrugs, "DrugList", "[Trade Name],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume,IdNo,GTin,[Package Size],[Package Type],[Public Price],[Dosage Form],[Generic Name],[RegistrationNo],[Route Of Administration]", "IGroupClinic")
+            DataGridViewItems.MakeDataRetrieverCache("ItemDetailsQty_View", "ItemNameEnglish,Primary_Key,Item_Code,GTin,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand", "IGroupClinic")
+            DataGridViewDrugs.MakeDataRetrieverCache("DrugList", "[Trade Name],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume,IdNo,GTin,[Package Size],[Package Type],[Public Price],[Dosage Form],[Generic Name],[RegistrationNo],[Route Of Administration]", "IGroupClinic")
         End Sub
 
-        Private Sub dataGridViewItems_CellValueNeeded(ByVal sender As Object, ByVal e As DataGridViewCellValueEventArgs) Handles DataGridViewItems.CellValueNeeded
-            e.Value = memoryCacheItems.RetrieveElement(e.RowIndex, e.ColumnIndex)
-        End Sub
+        'Private Sub dataGridViewItems_CellValueNeeded(ByVal sender As Object, ByVal e As DataGridViewCellValueEventArgs) Handles DataGridViewItems.CellValueNeeded
+        '    e.Value = memoryCacheItems.RetrieveElement(e.RowIndex, e.ColumnIndex)
+        'End Sub
 
-        Private Sub dataGridViewDrugs_CellValueNeeded(ByVal sender As Object, ByVal e As DataGridViewCellValueEventArgs) Handles DataGridViewDrugs.CellValueNeeded
-            e.Value = memoryCacheDrugs.RetrieveElement(e.RowIndex, e.ColumnIndex)
-        End Sub
+        'Private Sub dataGridViewDrugs_CellValueNeeded(ByVal sender As Object, ByVal e As DataGridViewCellValueEventArgs) Handles DataGridViewDrugs.CellValueNeeded
+        '    e.Value = memoryCacheDrugs.RetrieveElement(e.RowIndex, e.ColumnIndex)
+        'End Sub
 
         'Private Sub CreateVirtualData(ByRef dgv As CDataGridView, ByRef memoryCache As Cache, table As String, columnList As String, connectionName As String)
         '    Dim retriever As New DataRetriever(table, columnList, connectionName)
@@ -477,31 +481,30 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Price_Cash As Decimal? Implements IItemDetailsView.Price_Cash
             Get
-                If txtDrugPackageSize.Text Is Nothing Then
-                    Return 0
-                Else
-                    Return txtPrice_Cash.Text
-                End If
+                Return txtPrice_Cash.GetValue(Of Decimal?)
             End Get
             Set
-                txtPrice_Cash.Text = IIf(Value Is Nothing, "", Value)
+                txtPrice_Cash.SetValue(Value)
             End Set
         End Property
 
         Private Property QtyOnHand As Decimal? Implements IItemDetailsView.QtyOnHand
             Get
-                If txtQtyOnHand.Text Is Nothing Then
-                    Return Nothing
-                Else
-                    Return ToDecimalNumber(txtQtyOnHand.Text, _nfi)
-                End If
+                Return txtQtyOnHand.GetValue(Of Decimal?)
             End Get
             Set
-                If Value Is Nothing Then
-                    txtQtyOnHand.Text = Nothing
-                Else
-                    txtQtyOnHand.Text = NoDbNull(Value)
-                End If
+                txtQtyOnHand.SetValue(Value)
+            End Set
+        End Property
+
+        Private _created_By_Branch As String
+
+        Public Property Created_By_Branch As String Implements IItemDetailsView.Created_By_Branch
+            Get
+                Return "01"
+            End Get
+            Set(value As String)
+                _created_By_Branch = value
             End Set
         End Property
 
@@ -561,6 +564,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub GTinMatcher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            DataGridViewDrugs.Cached = True
+            DataGridViewItems.Cached = True
             InitializeDataGridView()
             btnDrugBnDeleteItem.Visible = False
             btnDrugBnAddNewItem.Visible = False
@@ -607,6 +612,14 @@ Namespace PresentationLayer.Views.Forms
                 RaiseEvent MatchGTinRequested(DrugGTin, IdNo)
                 RaiseEvent UpdateItemDisplay(IdNo)
             End If
+        End Sub
+
+        Private Sub AfterSave_Handler() Handles MyBase.AfterSave
+            'DataGridViewDrugs.Rows.Clear()
+            'DataGridViewItems.Rows.Clear()
+            MakeDataGridViews()
+            tsItemsCount.Text = DataGridViewItems.RowCount
+            tsDrugsCount.Text = DataGridViewDrugs.RowCount
         End Sub
 
         'Protected Overridable Sub OnAfterRecordChanged() Handles Me.AfterUpdateView
