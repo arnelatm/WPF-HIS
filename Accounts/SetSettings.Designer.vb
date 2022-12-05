@@ -22,7 +22,7 @@ Partial Class SetSettings
         Me.components = New System.ComponentModel.Container()
         Me.PropertyGrid = New System.Windows.Forms.PropertyGrid()
         Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.SuspendLayout()
+        Me.SuspendLayout
         '
         'PropertyGrid
         '
@@ -33,8 +33,7 @@ Partial Class SetSettings
         '
         'CButton1
         '
-        Me.CButton1.DesignerSelected = True
-        Me.CButton1.DisplayOnly = True
+        Me.CButton1.DesignerSelected = true
         Me.CButton1.ImageIndex = 0
         Me.CButton1.Location = New System.Drawing.Point(376, 413)
         Me.CButton1.Name = "CButton1"
@@ -46,14 +45,14 @@ Partial Class SetSettings
         '
         'SetSettings
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Controls.Add(Me.CButton1)
         Me.Controls.Add(Me.PropertyGrid)
         Me.Name = "SetSettings"
-        Me.ResumeLayout(False)
+        Me.ResumeLayout(false)
 
-    End Sub
+End Sub
 
     Friend WithEvents PropertyGrid As PropertyGrid
     Friend WithEvents CButton1 As Libraries.CBaseControlsLibrary.CButton
