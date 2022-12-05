@@ -442,6 +442,7 @@
         Me.txtPrice_Cash.ComputedValue = false
         Me.txtPrice_Cash.CustomFormat = Nothing
         Me.txtPrice_Cash.DataBoundControl = true
+        Me.txtPrice_Cash.DisplayOnly = true
         Me.txtPrice_Cash.EditingMode = true
         Me.txtPrice_Cash.EndFindValue = Nothing
         Me.txtPrice_Cash.FieldDescription = Nothing
@@ -458,6 +459,7 @@
         Me.txtPrice_Cash.MinimumValue = Nothing
         Me.txtPrice_Cash.Name = "txtPrice_Cash"
         Me.txtPrice_Cash.OldValue = Nothing
+        Me.txtPrice_Cash.ReadOnly = true
         Me.txtPrice_Cash.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtPrice_Cash.Size = New System.Drawing.Size(100, 21)
         Me.txtPrice_Cash.TabIndex = 78
@@ -1428,6 +1430,7 @@
         Me.txtDrugPublicPrice.MinimumValue = Nothing
         Me.txtDrugPublicPrice.Name = "txtDrugPublicPrice"
         Me.txtDrugPublicPrice.OldValue = Nothing
+        Me.txtDrugPublicPrice.ReadOnly = true
         Me.txtDrugPublicPrice.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtDrugPublicPrice.Size = New System.Drawing.Size(100, 21)
         Me.txtDrugPublicPrice.TabIndex = 73
@@ -1472,6 +1475,7 @@
         Me.txtDrugGTin.MinimumValue = Nothing
         Me.txtDrugGTin.Name = "txtDrugGTin"
         Me.txtDrugGTin.OldValue = ""
+        Me.txtDrugGTin.ReadOnly = true
         Me.txtDrugGTin.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtDrugGTin.Size = New System.Drawing.Size(148, 21)
         Me.txtDrugGTin.TabIndex = 37
@@ -1515,6 +1519,7 @@
         Me.txtDrugTradeName.MinimumValue = Nothing
         Me.txtDrugTradeName.Name = "txtDrugTradeName"
         Me.txtDrugTradeName.OldValue = Nothing
+        Me.txtDrugTradeName.ReadOnly = true
         Me.txtDrugTradeName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtDrugTradeName.Size = New System.Drawing.Size(368, 21)
         Me.txtDrugTradeName.TabIndex = 40
@@ -1558,6 +1563,7 @@
         Me.txtDrugGenericName.MinimumValue = Nothing
         Me.txtDrugGenericName.Name = "txtDrugGenericName"
         Me.txtDrugGenericName.OldValue = "0"
+        Me.txtDrugGenericName.ReadOnly = true
         Me.txtDrugGenericName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtDrugGenericName.Size = New System.Drawing.Size(368, 21)
         Me.txtDrugGenericName.TabIndex = 53
@@ -1600,6 +1606,7 @@
         Me.txtDrugRegistrationNo.MinimumValue = Nothing
         Me.txtDrugRegistrationNo.Name = "txtDrugRegistrationNo"
         Me.txtDrugRegistrationNo.OldValue = ""
+        Me.txtDrugRegistrationNo.ReadOnly = true
         Me.txtDrugRegistrationNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtDrugRegistrationNo.Size = New System.Drawing.Size(101, 21)
         Me.txtDrugRegistrationNo.TabIndex = 69
@@ -1643,6 +1650,7 @@
         Me.txtDrugDosageForm.MinimumValue = Nothing
         Me.txtDrugDosageForm.Name = "txtDrugDosageForm"
         Me.txtDrugDosageForm.OldValue = "0"
+        Me.txtDrugDosageForm.ReadOnly = true
         Me.txtDrugDosageForm.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtDrugDosageForm.Size = New System.Drawing.Size(178, 21)
         Me.txtDrugDosageForm.TabIndex = 65
@@ -1685,6 +1693,7 @@
         Me.txtDrugStrengthValue.MinimumValue = Nothing
         Me.txtDrugStrengthValue.Name = "txtDrugStrengthValue"
         Me.txtDrugStrengthValue.OldValue = Nothing
+        Me.txtDrugStrengthValue.ReadOnly = true
         Me.txtDrugStrengthValue.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtDrugStrengthValue.Size = New System.Drawing.Size(148, 21)
         Me.txtDrugStrengthValue.TabIndex = 71
@@ -1728,6 +1737,7 @@
         Me.txtDrugUnitOfStrength.MinimumValue = Nothing
         Me.txtDrugUnitOfStrength.Name = "txtDrugUnitOfStrength"
         Me.txtDrugUnitOfStrength.OldValue = "0"
+        Me.txtDrugUnitOfStrength.ReadOnly = true
         Me.txtDrugUnitOfStrength.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtDrugUnitOfStrength.Size = New System.Drawing.Size(138, 21)
         Me.txtDrugUnitOfStrength.TabIndex = 70
@@ -1770,6 +1780,7 @@
         Me.txtDrugVolume.MinimumValue = Nothing
         Me.txtDrugVolume.Name = "txtDrugVolume"
         Me.txtDrugVolume.OldValue = Nothing
+        Me.txtDrugVolume.ReadOnly = true
         Me.txtDrugVolume.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtDrugVolume.Size = New System.Drawing.Size(118, 21)
         Me.txtDrugVolume.TabIndex = 64
@@ -1814,6 +1825,7 @@
         Me.txtDrugUnitOfVolume.MinimumValue = Nothing
         Me.txtDrugUnitOfVolume.Name = "txtDrugUnitOfVolume"
         Me.txtDrugUnitOfVolume.OldValue = "0"
+        Me.txtDrugUnitOfVolume.ReadOnly = true
         Me.txtDrugUnitOfVolume.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtDrugUnitOfVolume.Size = New System.Drawing.Size(168, 21)
         Me.txtDrugUnitOfVolume.TabIndex = 68
@@ -1856,6 +1868,7 @@
         Me.txtDrugPackageType.MinimumValue = Nothing
         Me.txtDrugPackageType.Name = "txtDrugPackageType"
         Me.txtDrugPackageType.OldValue = "0"
+        Me.txtDrugPackageType.ReadOnly = true
         Me.txtDrugPackageType.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtDrugPackageType.Size = New System.Drawing.Size(118, 21)
         Me.txtDrugPackageType.TabIndex = 66
@@ -1899,6 +1912,7 @@
         Me.txtDrugPackageSize.MinimumValue = Nothing
         Me.txtDrugPackageSize.Name = "txtDrugPackageSize"
         Me.txtDrugPackageSize.OldValue = Nothing
+        Me.txtDrugPackageSize.ReadOnly = true
         Me.txtDrugPackageSize.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtDrugPackageSize.Size = New System.Drawing.Size(168, 21)
         Me.txtDrugPackageSize.TabIndex = 67
@@ -1942,6 +1956,7 @@
         Me.txtDrugRouteOfAdministration.MinimumValue = Nothing
         Me.txtDrugRouteOfAdministration.Name = "txtDrugRouteOfAdministration"
         Me.txtDrugRouteOfAdministration.OldValue = ""
+        Me.txtDrugRouteOfAdministration.ReadOnly = true
         Me.txtDrugRouteOfAdministration.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtDrugRouteOfAdministration.Size = New System.Drawing.Size(368, 21)
         Me.txtDrugRouteOfAdministration.TabIndex = 43
@@ -1977,6 +1992,7 @@
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
         Me.DataGridViewItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridViewItems.BegFindValue = Nothing
+        Me.DataGridViewItems.Cached = false
         Me.DataGridViewItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewItems.DataFilter = Nothing
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -2019,6 +2035,7 @@
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.FloralWhite
         Me.DataGridViewDrugs.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridViewDrugs.BegFindValue = Nothing
+        Me.DataGridViewDrugs.Cached = false
         Me.DataGridViewDrugs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewDrugs.DataFilter = Nothing
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft

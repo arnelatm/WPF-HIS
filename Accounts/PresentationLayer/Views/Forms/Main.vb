@@ -1110,6 +1110,9 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of GTinMatcherEntry, GTinMatcherPresenter(Of GTinMatcherModel))()
         End Sub
 
+        Private Sub IqamaCBCResultToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemIqamaCBCResult.Click
+            RunForm(Of IqamaCbcReport)()
+        End Sub
     End Class
 
 End Namespace

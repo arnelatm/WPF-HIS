@@ -15,10 +15,10 @@ Namespace PresentationLayer.Views.Forms
         Implements ILab_InvoiceGroupView
 
         Private _nfi As NumberFormatInfo
-
+        Private _labResultDirectory As String
         Private Event RetrieveLabResultRequested() Implements ILab_InvoiceGroupView.RetrieveLabResultRequested
-
         Private Event SaveResultRequested() Implements ILab_InvoiceGroupView.SaveResultRequested
+
 
         Public Sub New()
 

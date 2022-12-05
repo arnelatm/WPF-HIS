@@ -86,9 +86,13 @@ Namespace PresentationLayer.Presenters
 
         Private Function RetrieveCbcMachineResults()
             Dim retVal As Boolean = False
-            Dim filePath As String = "\\laboratory5\drivec\NihonKohden"
+            
             Dim sFiles As String()
             Dim pattern As String = "*_" + View.InvoiceNoF + ".csv"
+            Dim mySettings = AppSettings.Load()
+            Dim filePath As String = IIf(mySettings.LaboratoryResultDirectory Is Nothing Or mySettings.LaboratoryResultDirectory="","c:\LabResults",mySettings.LaboratoryResultDirectory)
+            mySettings = Nothing
+
             View.InvoiceNo = Val(StripNonNumbers(View.InvoiceNoF))
             sFiles = Directory.GetFileSystemEntries(filePath, pattern)
             If sFiles.Length > 0 Then
@@ -526,9 +530,9 @@ Namespace PresentationLayer.Presenters
                     nAge = View.Age
                 Case "M"
                     nAge = View.Age / 12
-                Case = "W"
-                    nAge = View.Age / 365.25
                 Case = "D"
+                    nAge = View.Age / 365.25
+                Case = "W"
                     nAge = View.Age * 7 / 365.25
                 Case Else
                     nAge = 12
