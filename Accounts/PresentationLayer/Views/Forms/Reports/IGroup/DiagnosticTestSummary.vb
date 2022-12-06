@@ -39,6 +39,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                     parameter.Add({"BeginningDate", cBegDate})
                     parameter.Add({"EndingDate", cEndDate})
                     parameter.Add({"ReportNumber", selection.ToString()})
+                    parameter.Add({"ReportTitle", cboReportSelector.SelectedItem})
                     Dim cForm As New ReportFormIGroup($"Diagnostic Test Summary.Rpt", FormCulture, parameter)
                     cForm.Show()
                 End If
