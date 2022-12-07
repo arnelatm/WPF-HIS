@@ -25,21 +25,28 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateDataSource("Department", "ParentIdNo")
+            'CreateDataSource("Department", "ParentIdNo")
+            'CreateDataSource("RevCostCenter", "RevCostCenterIdNo")
+            ', GetControlName("RevCostCenterIdNo")
+            Try
+                Dim Task1, Task2
+                Task1 = Task(Of List(Of Lookup.LookupData)).Factory.StartNew(Function() Method1("Department"))
+                Task2 = Task(Of List(Of Lookup.LookupData)).Factory.StartNew(Function() Method1("RevCostCenter"))
+                'Task.WaitAll(Task1,Task2)
 
-
-            'Dim Task1, Task2 As Task
-            'Task1 = Task.Factory.StartNew(Sub() Method1("Department", GetControlName("ParentIdNo")))
-            ''Task1 = Task.Factory.StartNew(Sub() CreateDataSource("Department", "ParentIdNo"))
-            'Task2 = Task.Factory.StartNew(Sub() Method1("RevCostCenter", GetControlName("RevCostCenterIdNo")))          
-            'Task.WaitAll(Task1,Task2)
+                Invoker.SetPropertyR(GetControlName("ParentIdNo"), "DataSource", Task1.Result)
+                Invoker.SetPropertyR(GetControlName("RevCostCenterIdNo"), "DataSource", Task2.Result)
+            Catch ex As Exception
+                MessageBox.Show(ex.Message)
+            End Try
 
         End Sub
 
-        Private Shared Sub Method1(ByVal Param1 As String, ByRef control As Control)
+        Private Shared Function Method1(ByVal Param1 As String)
             Dim cd As New DataCreator()
-            cd.CreateData(Param1, control)
-        End Sub
+            Dim data As List(Of Lookup.LookupData) = cd.CreateData(Param1)
+            Return data
+        End Function
 
         Public Function GetAccountNameOfChild(idNoToSearch As Integer) As String
             Return Service.GetRecordFieldWithKey(idNoToSearch, "Department", "ParentIdNo", "DepartmentName")
@@ -52,16 +59,16 @@ Namespace PresentationLayer.Presenters
         '    Dim data As List(Of Lookup.LookupData)
         'End Sub
 
-        Public Sub CreateData(dataTableName As String, ByRef control As Control)
+        Public Function CreateData(dataTableName As String) As List(Of Lookup.LookupData)
             Dim lookupObj
             Dim data As List(Of Lookup.LookupData)
             Dim sv = New CommonService("Department")
-            lookupObj = SetLookupObject(dataTableName, control)
+            lookupObj = SetLookupObject(dataTableName)
             data = sv.GetLookup(lookupObj)
-            Invoker.SetPropertyR(control, "DataSource", {data})
-        End Sub
+            Return data
+        End Function
 
-        Public Function SetLookupObject(dataTableName As String, ByRef control As Control, Optional dataFields As String() = Nothing, Optional sortKey As String = Nothing, Optional filter As String = Nothing) As Lookup
+        Public Function SetLookupObject(dataTableName As String, Optional dataFields As String() = Nothing, Optional sortKey As String = Nothing, Optional filter As String = Nothing) As Lookup
             Dim lookupObj As New Lookup(dataTableName)
             If dataFields IsNot Nothing Then
                 lookupObj.FieldsToShow = dataFields

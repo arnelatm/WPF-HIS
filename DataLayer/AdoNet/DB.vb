@@ -98,6 +98,7 @@ Namespace AdoNet
                                     Next
                                 End While
                             End Using
+                            connection.Close()
                         End Using
                     Catch ex As Exception
                         '_waitForm.Close()
