@@ -98,7 +98,7 @@ Namespace PresentationLayer.Views.Forms
                 Return TxtItemDetailsCode.GetValue(Of String)
             End Get
             Set
-                TxtItemDetailsCode.SetValue(value)
+                TxtItemDetailsCode.SetValue(Value)
             End Set
         End Property
 
@@ -107,7 +107,7 @@ Namespace PresentationLayer.Views.Forms
                 Return TxtItemDetailsName.Text
             End Get
             Set
-                TxtItemDetailsName.SetValue(value)
+                TxtItemDetailsName.SetValue(Value)
             End Set
         End Property
 
@@ -127,7 +127,7 @@ Namespace PresentationLayer.Views.Forms
                 Return txtGenericName.Text
             End Get
             Set
-                txtGenericName.SetValue(value)
+                txtGenericName.SetValue(Value)
             End Set
         End Property
 
@@ -180,7 +180,7 @@ Namespace PresentationLayer.Views.Forms
                 Return txtRegistrationNo.Text
             End Get
             Set
-                txtRegistrationNo.SetValue(value)
+                txtRegistrationNo.SetValue(Value)
             End Set
         End Property
 
@@ -275,10 +275,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DrugIdNo As Int32 Implements IGTinMatcherView.DrugIdNo
             Get
-               Return txtDrugIdNo.GetValue(Of Int32)                
+                Return txtDrugIdNo.GetValue(Of Int32)
             End Get
             Set
-                txtDrugIdNo.SetValue(value)
+                txtDrugIdNo.SetValue(Value)
             End Set
         End Property
 
@@ -296,7 +296,7 @@ Namespace PresentationLayer.Views.Forms
                 Return txtDrugGenericName.GetValue(Of Int32)
             End Get
             Set
-                txtDrugGenericName.SetValue(value)
+                txtDrugGenericName.SetValue(Value)
             End Set
         End Property
 
@@ -305,7 +305,7 @@ Namespace PresentationLayer.Views.Forms
                 Return txtDrugRegistrationNo.GetValue(Of Int32)
             End Get
             Set
-                txtDrugRegistrationNo.SetValue(value)
+                txtDrugRegistrationNo.SetValue(Value)
             End Set
         End Property
 
@@ -356,7 +356,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DrugVolume As Double? Implements IGTinMatcherView.DrugVolume
             Get
-                txtDrugVolume.GetValue(Of Int32)
+                txtDrugVolume.GetValue(Of Int32)()
             End Get
             Set
                 txtDrugVolume.SetValue(Value)
@@ -374,10 +374,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DrugPackageSize As Double? Implements IGTinMatcherView.DrugPackageSize
             Get
-                txtDrugPackageSize.GetValue(Of Double?)
+                txtDrugPackageSize.GetValue(Of Double?)()
             End Get
             Set
-                txtDrugPackageSize.SetValue(value)
+                txtDrugPackageSize.SetValue(Value)
             End Set
         End Property
 
@@ -395,7 +395,7 @@ Namespace PresentationLayer.Views.Forms
                 Return txtDrugPublicPrice.GetValue(Of Int32)
             End Get
             Set
-                txtDrugPublicPrice.SetValue(value)
+                txtDrugPublicPrice.SetValue(Value)
             End Set
         End Property
 
@@ -508,6 +508,7 @@ Namespace PresentationLayer.Views.Forms
             If curRow IsNot Nothing Then
                 dgvIdNo = curRow.Cells("IdNo").Value
                 RaiseEvent UpdateDrugDisplay(dgvIdNo)
+                tsDrugsCurrentRecord.Text = curRow.Index() + 1
             End If
         End Sub
 
@@ -524,6 +525,7 @@ Namespace PresentationLayer.Views.Forms
                     SelectRecordOnDrugGrid(GTin)
                 End If
                 _startedByItemGrid = False
+                tsItemsCurrentRecord.Text = curRow.Index() + 1
             End If
         End Sub
 
@@ -535,9 +537,15 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub AfterSave_Handler() Handles MyBase.AfterSave
-            MakeDataGridViews()
-            tsItemsCount.Text = DataGridViewItems.RowCount
-            tsDrugsCount.Text = DataGridViewDrugs.RowCount
+            Dim curRow = DataGridViewItems.CurrentRow()
+            If curRow IsNot Nothing Then
+                Dim dgvIdNo As Int32 = DataGridViewItems.CurrentRow.Cells("Primary_Key").Value
+                MakeDataGridViews()
+                Dim currentRow = DataGridViewItems.CurrentRow.Index()
+                MoveToRow(DataGridViewItems, currentRow)
+                tsItemsCount.Text = DataGridViewItems.RowCount
+                tsDrugsCount.Text = DataGridViewDrugs.RowCount
+            End If
         End Sub
 
         Private Sub MoveToRow(dataGridView As CDataGridView, rowCount As Integer)

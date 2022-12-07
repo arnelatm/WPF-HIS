@@ -2,7 +2,7 @@
 
 Namespace PresentationLayer.Views.Forms.Reports
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-    Partial Class IqamaCbcReport
+    Partial Class IqamaCbcReport2
         Inherits AATM.PresentationLayer.Forms.BFMain
 
         'Form overrides dispose to clean up the component list.
@@ -25,7 +25,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.components = New System.ComponentModel.Container()
         Me.lblBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.txtSampleNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.txtInvoiceNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -52,7 +52,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.lblBeginningDate.Name = "lblBeginningDate"
         Me.lblBeginningDate.Size = New System.Drawing.Size(133, 25)
         Me.lblBeginningDate.TabIndex = 20
-        Me.lblBeginningDate.Text = "Sample Number"
+        Me.lblBeginningDate.Text = "Invoice No."
         Me.lblBeginningDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.lblBeginningDate.Translatable = true
         '
@@ -60,40 +60,40 @@ Namespace PresentationLayer.Views.Forms.Reports
         '
         Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
         Me.CFlowLayout1.Controls.Add(Me.lblBeginningDate)
-        Me.CFlowLayout1.Controls.Add(Me.txtSampleNo)
+        Me.CFlowLayout1.Controls.Add(Me.txtInvoiceNumber)
         Me.CFlowLayout1.Location = New System.Drawing.Point(12, 37)
         Me.CFlowLayout1.Name = "CFlowLayout1"
         Me.CFlowLayout1.Padding = New System.Windows.Forms.Padding(10)
         Me.CFlowLayout1.Size = New System.Drawing.Size(318, 50)
         Me.CFlowLayout1.TabIndex = 26
         '
-        'txtSampleNo
+        'txtInvoiceNumber
         '
-        Me.txtSampleNo.BackColor = System.Drawing.Color.White
-        Me.txtSampleNo.BegFindValue = Nothing
-        Me.txtSampleNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtSampleNo.ComputedValue = false
-        Me.txtSampleNo.CustomFormat = Nothing
-        Me.txtSampleNo.DataBoundControl = true
-        Me.txtSampleNo.EditingMode = true
-        Me.txtSampleNo.EndFindValue = Nothing
-        Me.txtSampleNo.FieldDescription = Nothing
-        Me.txtSampleNo.FieldName = Nothing
-        Me.txtSampleNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtSampleNo.FindEnabled = false
-        Me.txtSampleNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtSampleNo.ForeColor = System.Drawing.Color.Black
-        Me.txtSampleNo.LinkedLabel = Nothing
-        Me.txtSampleNo.Location = New System.Drawing.Point(146, 11)
-        Me.txtSampleNo.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtSampleNo.MaximumValue = Nothing
-        Me.txtSampleNo.MinimumValue = Nothing
-        Me.txtSampleNo.Name = "txtSampleNo"
-        Me.txtSampleNo.OldValue = Nothing
-        Me.txtSampleNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtSampleNo.Size = New System.Drawing.Size(156, 23)
-        Me.txtSampleNo.TabIndex = 25
-        Me.txtSampleNo.Translatable = false
+        Me.txtInvoiceNumber.BackColor = System.Drawing.Color.White
+        Me.txtInvoiceNumber.BegFindValue = Nothing
+        Me.txtInvoiceNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtInvoiceNumber.ComputedValue = false
+        Me.txtInvoiceNumber.CustomFormat = Nothing
+        Me.txtInvoiceNumber.DataBoundControl = true
+        Me.txtInvoiceNumber.EditingMode = true
+        Me.txtInvoiceNumber.EndFindValue = Nothing
+        Me.txtInvoiceNumber.FieldDescription = Nothing
+        Me.txtInvoiceNumber.FieldName = Nothing
+        Me.txtInvoiceNumber.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtInvoiceNumber.FindEnabled = false
+        Me.txtInvoiceNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.txtInvoiceNumber.ForeColor = System.Drawing.Color.Black
+        Me.txtInvoiceNumber.LinkedLabel = Nothing
+        Me.txtInvoiceNumber.Location = New System.Drawing.Point(146, 11)
+        Me.txtInvoiceNumber.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtInvoiceNumber.MaximumValue = Nothing
+        Me.txtInvoiceNumber.MinimumValue = Nothing
+        Me.txtInvoiceNumber.Name = "txtInvoiceNumber"
+        Me.txtInvoiceNumber.OldValue = Nothing
+        Me.txtInvoiceNumber.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.txtInvoiceNumber.Size = New System.Drawing.Size(156, 23)
+        Me.txtInvoiceNumber.TabIndex = 25
+        Me.txtInvoiceNumber.Translatable = false
         '
         'CLabel2
         '
@@ -149,7 +149,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.btnCancel.TabIndex = 28
         Me.btnCancel.Text = "Cancel"
         '
-        'IqamaCbcReport
+        'IqamaCbcReport2
         '
         Me.ClientSize = New System.Drawing.Size(332, 128)
         Me.Controls.Add(Me.CLabel2)
@@ -157,7 +157,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.Controls.Add(Me.btnOk)
         Me.Controls.Add(Me.CFlowLayout1)
         Me.Controls.Add(Me.CLabel1)
-        Me.Name = "IqamaCbcReport"
+        Me.Name = "IqamaCbcReport2"
         Me.Text = "Iqama CBC Result Printing"
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.CFlowLayout1.ResumeLayout(false)
@@ -171,6 +171,6 @@ End Sub
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
-        Friend WithEvents txtSampleNo As CTextBox
+        Friend WithEvents txtInvoiceNumber As CTextBox
     End Class
 End NameSpace

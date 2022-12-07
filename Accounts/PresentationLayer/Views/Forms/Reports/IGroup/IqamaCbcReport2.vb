@@ -4,13 +4,12 @@ Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms.Reports
 
-    Public Class IqamaCbcReport
+    Public Class IqamaCbcReport2
 
         Public Property MainTableName As String
         Protected SortOrderKey As String
-        Private _mode As String
 
-        Public Sub New(mode As String)
+        Public Sub New()
 
             ' This call is required by the designer.
             InitializeComponent()
@@ -20,29 +19,24 @@ Namespace PresentationLayer.Views.Forms.Reports
             MainTableName = "CBCResults"
             SortOrderKey = "IdNo"
             Presenter = New ReportPresenter(Me)
-            txtSampleNo.Text = ""
-            _mode = mode
+            Dim currentDate = Now()
+            ' returns previous month last day
+            Dim endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, currentDate.Month, 0)
+            txtInvoiceNumber.Text = ""
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
             Dim parameters As New ArrayList
-            Dim reportName As String
             parameters.Add({"ReportTitle", "Complete Blood Count"})
-            If _mode = "SampleNo" Then
-                parameters.Add({"SampleNo", txtSampleNo.GetValue(Of Int32)})
-                reportName = "CBCReportDyMindBySampleNo.Rpt"
-            Else
-                parameters.Add({"InvoiceNo", txtSampleNo.GetValue(Of Int32)})
-                reportName = "CBCReportDyMindByInvoiceNo.Rpt"
-            End If
-            Dim cForm As New ReportFormIGroup(reportName, FormCulture, parameters)
+            parameters.Add({"InvoiceNumber", txtInvoiceNumber.GetValue(Of Int32)})
+            Dim cForm As New ReportFormIGroup("CBCReportDyMindByInvoiceNo.Rpt", FormCulture, parameters)
             cForm.Show()            
         End Sub
 
         Private Sub CButton2_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
             Close()
         End Sub
-
+        
     End Class
 
 End Namespace
