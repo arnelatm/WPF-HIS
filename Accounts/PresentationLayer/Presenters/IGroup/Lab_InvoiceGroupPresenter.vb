@@ -90,7 +90,7 @@ Namespace PresentationLayer.Presenters
             Dim sFiles As String()
             Dim pattern As String = "*_" + View.InvoiceNoF + ".csv"
             Dim mySettings = AppSettings.Load()
-            Dim filePath As String = IIf(mySettings.LaboratoryResultDirectory Is Nothing Or mySettings.LaboratoryResultDirectory="","c:\LabResults",mySettings.LaboratoryResultDirectory)
+            Dim filePath As String = IIf(mySettings.LaboratoryResultDirectory Is Nothing Or mySettings.LaboratoryResultDirectory="","\\laboratory5\drivec\NihonKohden",mySettings.LaboratoryResultDirectory)
             mySettings = Nothing
 
             View.InvoiceNo = Val(StripNonNumbers(View.InvoiceNoF))
