@@ -25,18 +25,15 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            Dim Task1, Task2 As Task
-            Task1 = Task.Factory.StartNew(Sub() Method1("Department", GetControlName("ParentIdNo")))
-            Task2 = Task.Factory.StartNew(Sub() Method1("RevCostCenter", GetControlName("RevCostCenterIdNo")))
-            'Dim control As Control = GetControlName("ParentIdNo")
-            'Call New Thread(Sub() Method1("Department", GetControlName("ParentIdNo"))).Start()
+            CreateDataSource("Department", "ParentIdNo")
 
-            Task.WaitAll(Task1, Task2)
 
-            'Call New Thread(Sub() Method1("RevCostCenter", GetControlName("RevCostCenterIdNo"))).Start()
-            'CreateDataSource("Department", "ParentIdNo")
-            'CreateDataSource("RevCostCenter", "RevCostCenterIdNo")
-            Dim control As Control = GetControlName("ParentIdNo")
+            'Dim Task1, Task2 As Task
+            'Task1 = Task.Factory.StartNew(Sub() Method1("Department", GetControlName("ParentIdNo")))
+            ''Task1 = Task.Factory.StartNew(Sub() CreateDataSource("Department", "ParentIdNo"))
+            'Task2 = Task.Factory.StartNew(Sub() Method1("RevCostCenter", GetControlName("RevCostCenterIdNo")))          
+            'Task.WaitAll(Task1,Task2)
+
         End Sub
 
         Private Shared Sub Method1(ByVal Param1 As String, ByRef control As Control)

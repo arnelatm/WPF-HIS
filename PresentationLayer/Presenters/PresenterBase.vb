@@ -1974,6 +1974,14 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Dim lookupObj
         lookupObj = SetLookupObject(dataTableName, control, dataFields, sortKey, filter)
         data = GetLookup(lookupObj)
+        'Invoker.SetProperty(control, "DataSource", {data})
+
+        Dim Task1 ', Task2 As Task
+        Task1 = Task.Factory.StartNew(Sub() GetLookup(lookupObj))
+            ''Task1 = Task.Factory.StartNew(Sub() CreateDataSource("Department", "ParentIdNo"))
+            'Task2 = Task.Factory.StartNew(Sub() Method1("RevCostCenter", GetControlName("RevCostCenterIdNo")))          
+        Task.WaitAll(Task1) ' ,Task2)
+
         Invoker.SetProperty(control, "DataSource", {data})
     End Sub
 
