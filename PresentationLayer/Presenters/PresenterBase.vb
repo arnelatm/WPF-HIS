@@ -546,7 +546,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return Service.GetLookup(lookupObj)
     End Function
 
-
     Public Function GetOriginalModel() As TM
         Return OriginalModel
     End Function
@@ -1886,7 +1885,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End If
     End Sub
 
-
     Public Function UserHasAccess(securityKey As String, Optional inform As Boolean = False) As Boolean
         Dim hasAccess As Boolean
         If UserIsASuperAdministrator() Then
@@ -2089,6 +2087,10 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End If
         Invoker.SetProperty(View, targetProperty, {data})
     End Sub
+
+    Public Function GetService()
+        Return Service
+    End Function
 
 End Class
 

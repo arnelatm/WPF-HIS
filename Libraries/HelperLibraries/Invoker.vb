@@ -1,4 +1,5 @@
 ﻿Imports System.Reflection
+Imports System.Windows.Forms
 
 Public NotInheritable Class Invoker
 
@@ -45,9 +46,19 @@ Public NotInheritable Class Invoker
         End Try
     End Function
 
+    Public Shared Function SetPropertyR(ByRef cControl As Control, ByVal sName As String, ByVal ParamArray yArguments() As Object) As Object
+        ' ReSharper disable once VBPossibleMistakenCallToGetType.2
+        Try
+            Return cControl.GetType().InvokeMember(sName, SetPublicNonPublicPropertyFieldFlags, Nothing, cControl, yArguments)
+        Catch ex As Exception
+            Debugger.Break()
+            Return Nothing
+        End Try
+    End Function
+
     'Public Shared Function SetPublicPropertyOnly(ByVal oObject As Object, ByVal sName As String, ByVal ParamArray yArguments() As Object) As Object
     '    ' ReSharper disable once VBPossibleMistakenCallToGetType.2
-    '    dim retValue As Object 
+    '    dim retValue As Object
     '    Try
     '        'retValue = oObject.GetType().InvokeMember(sName, GetPublicPropertyFlags, Nothing, oObject, yArguments, Nothing , Nothing, Nothing)
     '        'retValue = oObject.GetType().InvokeMember(sName, GetPublicPropertyFlags, Nothing, oObject, yArguments)
@@ -65,9 +76,9 @@ Public NotInheritable Class Invoker
             Return oObject.GetType().InvokeMember(sName, SetPublicFieldFlags, Nothing, oObject, yArguments)
         Catch ex As Exception
             Debugger.Break()
-            Return nothing
+            Return Nothing
         End Try
-        Return nothing
+        Return Nothing
 
     End Function
 
