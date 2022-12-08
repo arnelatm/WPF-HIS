@@ -128,15 +128,18 @@ Namespace PresentationLayer.Presenters
             CreateEnumDataSource(Of PayrollPaymentMethodSelection)("PaymentMethod")
             CreateEnumDataSource(Of SponsorTypeSelection)("SponsorType")
             CreateEnumDataSource(Of BloodTypeSelection)("BloodType")
-            CreateDataSource("Bank", "BankIdNo")
-            CreateDataSource("Country", "CountryCode")
-            CreateDataSource("Department", "DepartmentIdNo")
-            CreateDataSource("Designation", "DesignationIdNo")
-            CreateDataSource("Country", "NationalityCode")
-            CreateDataSource("Religion", "ReligionIdNo")
-            CreateDataSource("PayCycle", "PayCycleIdNo")
-            CreateDataSource("PayGroup", "PayGroupIdNo")
-            CreateDataSource("Employee", "SupervisorIdNo", "Supervisor=1")
+            CreateDataSourceThread({{"Bank", "BankIdNo"},
+                                    {"Country", "CountryCode"},
+                                    {"Department", "DepartmentIdNo"},
+                                    {"Designation", "DesignationIdNo"},
+                                    {"Country", "NationalityCode"},
+                                    {"Religion", "ReligionIdNo"},
+                                    {"PayCycle", "PayCycleIdNo"},
+                                    {"PayGroup", "PayGroupIdNo"}
+                                    })
+                                    '{"Employee", "SupervisorIdNo"} ', "Supervisor=1"}
+                                    
+
             CreateListDataSource("List", "Title", "NameTitle")
             CreateEnumData(Of PayRateUnitSelection)(View.Unit)
             CreateLookupData("PhoneType", "PhoneTypes")
