@@ -32,7 +32,7 @@ Namespace PresentationLayer.Presenters
                 Dim Task1, Task2
                 Task1 = Task(Of List(Of Lookup.LookupData)).Factory.StartNew(Function() Method1("Department"))
                 Task2 = Task(Of List(Of Lookup.LookupData)).Factory.StartNew(Function() Method1("RevCostCenter"))
-                'Task.WaitAll(Task1,Task2)
+                'Task.WaitAll(Task1) ', Task2)
 
                 Invoker.SetPropertyR(GetControlName("ParentIdNo"), "DataSource", Task1.Result)
                 Invoker.SetPropertyR(GetControlName("RevCostCenterIdNo"), "DataSource", Task2.Result)
@@ -45,6 +45,7 @@ Namespace PresentationLayer.Presenters
         Private Shared Function Method1(ByVal Param1 As String)
             Dim cd As New DataCreator()
             Dim data As List(Of Lookup.LookupData) = cd.CreateData(Param1)
+            cd = Nothing
             Return data
         End Function
 
