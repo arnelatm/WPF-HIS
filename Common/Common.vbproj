@@ -61,6 +61,18 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="Telerik.WinControls, Version=2020.1.218.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2020.1.218.40\Telerik.WinControls.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.WinControls.UI, Version=2020.1.218.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2020.1.218.40\Telerik.WinControls.UI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TelerikCommon, Version=2020.1.218.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWF\2020.1.218.40\TelerikCommon.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -76,6 +88,10 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLayer\BaseBO.Designer.vb">
+      <DependentUpon>BaseBO.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessLayer\BaseBO.vb" />
     <Compile Include="BusinessLayer\Branch.vb" />
     <Compile Include="BusinessLayer\Printer.vb" />
     <Compile Include="BusinessLayer\PrintJob.vb" />
@@ -277,6 +293,9 @@
     <Compile Include="ServiceLayer\CommonService.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="BusinessLayer\BaseBO.resx">
+      <DependentUpon>BaseBO.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>

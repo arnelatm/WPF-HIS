@@ -30,10 +30,8 @@ Namespace PresentationLayer.Presenters
             ', GetControlName("RevCostCenterIdNo")
             Try
                 Dim Task1, Task2
-                Task1 = Task(Of List(Of Lookup.LookupData)).Factory.StartNew(Function() Method1("Department"))
-                Task2 = Task(Of List(Of Lookup.LookupData)).Factory.StartNew(Function() Method1("RevCostCenter"))
-                'Task.WaitAll(Task1) ', Task2)
-
+                Task1 = Task(Of List(Of Lookup.LookupData)).Factory.StartNew(Function() LookupDataCreator("Department"))
+                Task2 = Task(Of List(Of Lookup.LookupData)).Factory.StartNew(Function() LookupDataCreator("RevCostCenter"))
                 Invoker.SetPropertyR(GetControlName("ParentIdNo"), "DataSource", Task1.Result)
                 Invoker.SetPropertyR(GetControlName("RevCostCenterIdNo"), "DataSource", Task2.Result)
             Catch ex As Exception
@@ -42,9 +40,9 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
-        Private Shared Function Method1(ByVal Param1 As String)
+        Private Shared Function LookupDataCreator(ByVal tableName As String)
             Dim cd As New DataCreator()
-            Dim data As List(Of Lookup.LookupData) = cd.CreateData(Param1)
+            Dim data As List(Of Lookup.LookupData) = cd.CreateData(tableName)
             cd = Nothing
             Return data
         End Function
@@ -63,7 +61,7 @@ Namespace PresentationLayer.Presenters
         Public Function CreateData(dataTableName As String) As List(Of Lookup.LookupData)
             Dim lookupObj
             Dim data As List(Of Lookup.LookupData)
-            Dim sv = New CommonService("Department")
+            Dim sv = New CommonService()
             lookupObj = SetLookupObject(dataTableName)
             data = sv.GetLookup(lookupObj)
             Return data
