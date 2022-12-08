@@ -25,19 +25,21 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            'CreateDataSource("Department", "ParentIdNo")
-            'CreateDataSource("RevCostCenter", "RevCostCenterIdNo")
-            ', GetControlName("RevCostCenterIdNo")
-            Try
-                Dim Task1, Task2
-                Task1 = Task(Of List(Of Lookup.LookupData)).Factory.StartNew(Function() LookupDataCreator("Department"))
-                Task2 = Task(Of List(Of Lookup.LookupData)).Factory.StartNew(Function() LookupDataCreator("RevCostCenter"))
-                Invoker.SetPropertyR(GetControlName("ParentIdNo"), "DataSource", Task1.Result)
-                Invoker.SetPropertyR(GetControlName("RevCostCenterIdNo"), "DataSource", Task2.Result)
-            Catch ex As Exception
-                MessageBox.Show(ex.Message)
-            End Try
+            CreateDataSourceThread({{"Department", "ParentIdNo"}, {"RevCostCenter", "RevCostCenterIdNo"}})
+        End Sub
 
+        Private Sub CreateDataSourceThread(dataSourceNames As Array)
+            Dim tasks As New List(Of Object)
+            Dim itemCount As Int32 = dataSourceNames.Length
+            For i = 0 To UBound(dataSourceNames, 1)
+                dim tableName as String = dataSourceNames(i,0)
+                dim fieldName as String = dataSourceNames(i,1)
+                Dim sTask = {Task(Of List(Of Lookup.LookupData)).Factory.StartNew(Function() LookupDataCreator(tableName)), fieldName }
+                tasks.Add(sTask)                
+            Next
+            For Each taskItem In tasks
+                Invoker.SetPropertyR(GetControlName(taskItem(1)), "DataSource", taskItem(0).Result)
+            Next
         End Sub
 
         Private Shared Function LookupDataCreator(ByVal tableName As String)
