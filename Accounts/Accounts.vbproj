@@ -217,6 +217,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLayer\BaseBO.vb" />
     <Compile Include="BusinessLayer\AccountReconciliation.vb" />
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
