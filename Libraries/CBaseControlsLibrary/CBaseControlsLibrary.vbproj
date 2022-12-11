@@ -98,6 +98,9 @@
     </Compile>
     <Compile Include="BlendItemsConverter.vb" />
     <Compile Include="BlendTypeEditor.vb" />
+    <Compile Include="CtComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CdComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
