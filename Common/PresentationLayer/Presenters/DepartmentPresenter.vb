@@ -25,7 +25,9 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateDataSourceThread({{"Department", "ParentIdNo"}, {"RevCostCenter", "RevCostCenterIdNo"}})
+            CreateDataSourceThread({{"Department"   , "ParentIdNo"       , "IdNo,DepartmentName,DepartmentCode"      },
+                                    {"RevCostCenter", "RevCostCenterIdNo", "IdNo,RevCostCenterName,RevCostCenterCode"}
+                                   })
         End Sub
 
         Public Function GetAccountNameOfChild(idNoToSearch As Integer) As String

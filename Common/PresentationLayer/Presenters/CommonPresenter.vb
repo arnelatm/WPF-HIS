@@ -39,20 +39,29 @@ Namespace PresentationLayer.Presenters
         Protected Sub CreateDataSourceThread(dataSourceNames As Array)
             Dim tasks As New List(Of Object)
             Dim itemCount As Int32 = dataSourceNames.Length
+            Dim filter As String
+            Const LookupTableName As Short = 0
+            Const ControlFieldName As Short = 1
+            Const LookupFieldNames As Short = 2
+            Const LookupFilter As Short = 3
             For i = 0 To UBound(dataSourceNames, 1)
-                Dim tableName As String = dataSourceNames(i, 0)
-                Dim fieldName As String = dataSourceNames(i, 1)
-                Dim sTask = {Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(tableName)), fieldName}
+                Dim tableName As String = dataSourceNames(i, LookupTableName)
+                Dim fieldName As String = dataSourceNames(i, ControlFieldName)
+                Dim luFields As String = dataSourceNames(i, LookupFieldNames)
+                If UBound(dataSourceNames, 1) > 3 Then
+                    filter = dataSourceNames(i, LookupFilter)
+                End If
+                Dim sTask = {Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(tableName, luFields, Filter)), fieldName}
                 tasks.Add(sTask)
             Next
             For Each taskItem In tasks
-                Invoker.SetPropertyR(GetControlName2(taskItem(1)), "DataSource", taskItem(0).Result)                
+                Invoker.SetPropertyR(GetFieldControlName(taskItem(1)), "DataSource", taskItem(0).Result)
             Next
         End Sub
 
-        Private Shared Function LookupDataTableCreator(ByVal tableName As String) As DataTable
+        Private Shared Function LookupDataTableCreator(ByVal tableName As String, Optional luFields As String = Nothing, Optional luFilter As String = Nothing) As DataTable
             Dim cd As New DataCreator()
-            Dim data As DataTable = cd.CreateDataTable(tableName)
+            Dim data As DataTable = cd.CreateDataTable(tableName, luFields, luFilter)
             cd = Nothing
             Return data
         End Function
@@ -68,18 +77,33 @@ Namespace PresentationLayer.Presenters
 
     Public Class DataCreator
 
-        Public Function CreateDataTable(tableName As String) As DataTable
-            Dim sv = New CommonService()
-            Dim fieldNames = {"IdNo",tableName + "Name", tableName + "Code"}
-            Return sv.GetDtRecords(tableName,tableName + "Name",  fieldNames)
+        Private Shared ReadOnly _sv = New CommonService()
+
+        Public Function CreateDataTable(tableName As String, Optional fieldNames As String = Nothing, Optional sortKey As String = Nothing, Optional luFilter As String = Nothing) As DataTable
+            Dim luFields As String()
+            If fieldNames Is Nothing Then
+                fieldNames = "IdNo" + "," + tableName + "Name" + "," + tableName + "Code"
+                If sortKey Is Nothing Then
+                    sortKey = tableName + "Name"
+                End If
+            Else
+                luFields = fieldNames.Split(",")
+                If luFields.Count() = 1 Then
+                    sortKey = luFields(0)
+                Else
+                    If sortKey Is Nothing Then
+                        sortKey = luFields(1)
+                    End If
+                End If
+            End If
+            Return _sv.GetDtRecords(tableName, sortKey, fieldNames, luFilter)
         End Function
 
         Public Function CreateData(dataTableName As String) As List(Of Lookup.LookupData)
             Dim lookupObj
             Dim data As List(Of Lookup.LookupData)
-            Dim sv = New CommonService()
             lookupObj = SetLookupObject(dataTableName)
-            data = sv.GetLookup(lookupObj)
+            data = _sv.GetLookup(lookupObj)
             Return data
         End Function
 

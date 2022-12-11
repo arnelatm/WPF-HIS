@@ -95,7 +95,7 @@ Public Interface IBaseDao
 
     Function GetRecords(tableName As String, sortKey As String, Optional fieldNames As String() = Nothing, Optional filterKey As String = Nothing) As Object
 
-    Function GetRecordsDataTable(tableName As String, sortKey As String, Optional fieldNames() As String = Nothing, Optional filterKey As String = Nothing) As Object
+    'Function GetRecordsDataTable(tableName As String, sortKey As String, Optional fieldNames() As String = Nothing, Optional filterKey As String = Nothing) As Object
 
     Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer
 
@@ -116,5 +116,5 @@ Public Interface IBaseDao
     Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) As Integer
 
     Function UpdateRecordWithKey(Of T1, T2)(tableName As String, keyFieldName As String, keyFieldValue As T1, fieldToReplace As String, replaceValue As T2) As Integer
-    Function GetDtRecords(tableName As String, sortKey As String, Optional fieldNames() As String = Nothing, Optional filterKey As String = Nothing) As DataTable
+    Function GetDtRecords(tableName As String, sortKey As String, fieldNames As String, Optional filterKey As String = Nothing) As DataTable
 End Interface

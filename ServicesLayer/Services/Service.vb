@@ -217,38 +217,38 @@ Namespace Services
             Return GetLookup(lookupObj)
         End Function
 
-        Public Function GetLookupDataTable(lookupObj As LookupTable, Optional hierarchical As Boolean = False) As DataTable
-            If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
-                Dim nameFieldArabic = lookupObj.NameField + "Ara"
-                If FieldExistInTable(lookupObj.TableName, nameFieldArabic) Then
-                    If lookupObj.SortKey = lookupObj.NameField Then
-                        lookupObj.SortKey = nameFieldArabic
-                        Dim i As Integer = 0
-                        For Each field In lookupObj.FieldsToShow
-                            If field = lookupObj.NameField Then
-                                lookupObj.FieldsToShow(i) = nameFieldArabic
-                            End If
-                            i = i + 1
-                        Next
-                        lookupObj.NameField = nameFieldArabic
-                    End If
-                End If
-            End If
-            If Not hierarchical Then
-                Dim data = GetRecordsDataTable(lookupObj.TableName, lookupObj.SortKey, lookupObj.FieldsToShow, lookupObj.FilterKey)
-                'Dim lookupSetting = GlobalVariables.LookupSetting()
-                'If lookupSetting = "NameAndCode" Then
-                '    Return ProcessLookupTableByNameCode(data, lookupObj.FieldsToShow.Count())
-                'ElseIf lookupSetting = "CodeAndName" Then
-                '    Return ProcessLookupTableByCodeName(data, lookupObj.FieldsToShow.Count())
-                'ElseIf lookupSetting = "Name" Then
-                '    Return ProcessLookupTableByName(data, lookupObj.FieldsToShow.Count())
-                'Else
-                '    Return ProcessLookupTableByNameCode(data, lookupObj.FieldsToShow.Count())
-                'End If
-                Return data
-            End If
-        End Function
+        'Public Function GetLookupDataTable(lookupObj As LookupTable, Optional hierarchical As Boolean = False) As DataTable
+        '    If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+        '        Dim nameFieldArabic = lookupObj.NameField + "Ara"
+        '        If FieldExistInTable(lookupObj.TableName, nameFieldArabic) Then
+        '            If lookupObj.SortKey = lookupObj.NameField Then
+        '                lookupObj.SortKey = nameFieldArabic
+        '                Dim i As Integer = 0
+        '                For Each field In lookupObj.FieldsToShow
+        '                    If field = lookupObj.NameField Then
+        '                        lookupObj.FieldsToShow(i) = nameFieldArabic
+        '                    End If
+        '                    i = i + 1
+        '                Next
+        '                lookupObj.NameField = nameFieldArabic
+        '            End If
+        '        End If
+        '    End If
+        '    If Not hierarchical Then
+        '        Dim data = GetRecordsDataTable(lookupObj.TableName, lookupObj.SortKey, lookupObj.FieldsToShow, lookupObj.FilterKey)
+        '        'Dim lookupSetting = GlobalVariables.LookupSetting()
+        '        'If lookupSetting = "NameAndCode" Then
+        '        '    Return ProcessLookupTableByNameCode(data, lookupObj.FieldsToShow.Count())
+        '        'ElseIf lookupSetting = "CodeAndName" Then
+        '        '    Return ProcessLookupTableByCodeName(data, lookupObj.FieldsToShow.Count())
+        '        'ElseIf lookupSetting = "Name" Then
+        '        '    Return ProcessLookupTableByName(data, lookupObj.FieldsToShow.Count())
+        '        'Else
+        '        '    Return ProcessLookupTableByNameCode(data, lookupObj.FieldsToShow.Count())
+        '        'End If
+        '        Return data
+        '    End If
+        'End Function
 
 
         'Public Function GetDefaultFieldValues(ByVal systemViewName As String) Implements IService.GetDefaultFieldValues
@@ -643,7 +643,7 @@ Namespace Services
             Return DataDao.GetRecords(tableName, sortKey, fields, filterKey)
         End Function
 
-        Public Function GetDtRecords(ByVal tableName As String, ByVal sortKey As String, ByVal Optional fields As String() = Nothing, Optional filterKey As String = Nothing) As Object Implements IService.GetDtRecords
+        Public Function GetDtRecords(ByVal tableName As String, ByVal sortKey As String, ByVal Optional fields As String = Nothing, Optional filterKey As String = Nothing) As Object Implements IService.GetDtRecords
             Return DataDao.GetDtRecords(tableName, sortKey, fields, filterKey)
         End Function
 
@@ -835,9 +835,9 @@ Namespace Services
             Return BaseDao.GetNextSeries(seriesName)
         End Function
 
-        Public Function GetRecordsDataTable(tableName As String, sortKey As String, Optional fields() As String = Nothing, Optional filterKey As String = Nothing) As DataTable Implements IService.GetRecordsDataTable
-            Return BaseDao.GetRecordsDataTable(tableName, sortKey, fields, filterKey)
-        End Function
+        'Public Function GetRecordsDataTable(tableName As String, sortKey As String, Optional fields() As String = Nothing, Optional filterKey As String = Nothing) As DataTable Implements IService.GetRecordsDataTable
+        '    Return BaseDao.GetRecordsDataTable(tableName, sortKey, fields, filterKey)
+        'End Function
 
         Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList Implements IService.GetUserSecurity
             Return BaseDao.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
