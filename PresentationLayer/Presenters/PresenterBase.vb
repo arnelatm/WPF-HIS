@@ -1973,7 +1973,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return control
     End Function
 
-    Protected Function GetControlName2(ByVal fieldName As String) As ComboBox
+    Protected Function GetFieldControlName(ByVal fieldName As String) As ComboBox
         Dim control As Control = Nothing
         If Not MainFieldsDictionary.TryGetValue(fieldName, control) Then
             Debugger.Break()

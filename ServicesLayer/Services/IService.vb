@@ -6,67 +6,6 @@ Imports AATM.Libraries.AatmInterfaces
 Namespace Services
 
     Public Interface IService
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         Function AddRecord(ByRef model As Object) As Integer
         Function AddSecurityObject(securityObjectName As SecurityObject) As Integer
         Function CheckIfUnique(textValue As String, tableName As String, fieldName As String, targetIdNo As Int32) As Boolean
@@ -112,7 +51,7 @@ Namespace Services
         Function GetRecordPosition(tableName As String, idNo As Int32, Optional IdFieldName As String = Nothing) As Integer
         Function GetRecordPositionByKey(Of T)(keyValue As T, tableName As String, sortKey As String, Optional KeyFieldName As String = Nothing) As Integer
         Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal Optional fields As String() = Nothing, Optional filterKey As String = Nothing) As Object
-        Function GetRecordsDataTable(tableName As String, sortKey As String, Optional fields() As String = Nothing, Optional filterKey As String = Nothing) As DataTable
+        'Function GetRecordsDataTable(tableName As String, sortKey As String, Optional fields() As String = Nothing, Optional filterKey As String = Nothing) As DataTable
         Function GetRecordsWithGroupIdNo(Of TM)(ByVal idNo, Optional ByRef sortKey = Nothing) As List(Of TM)
         Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer
         Function GetSpRecords(spName As String, fields As String, sortKey As String, filter As String) As Object
@@ -129,7 +68,7 @@ Namespace Services
         Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, ByRef value As T) As Integer
         Function UpdateTable(ByRef data As DataTable, groupIdNo As Integer) As Integer
         Function UpdateTvp(dtTable As DataTable) As Integer
-        Function GetDtRecords(tableName As String, sortKey As String, Optional fields() As String = Nothing, Optional filterKey As String = Nothing) As Object
+        Function GetDtRecords(tableName As String, sortKey As String, Optional fields As String = Nothing, Optional filterKey As String = Nothing) As Object
     End Interface
 
 End Namespace

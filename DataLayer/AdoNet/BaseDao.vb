@@ -773,53 +773,39 @@ Namespace AdoNet
             Return GetDb().SqlRead(sql)
         End Function
 
-        Public Function GetDtRecords(tableName As String, sortKey As String, Optional fieldNames As String() = Nothing, Optional filterKey As String = Nothing) As DataTable Implements IBaseDao.GetDtRecords
-            Dim fields As String
-            If fieldNames Is Nothing Then
-                fields = "*"
-            Else
-                fields = String.Join(",", fieldNames)
-            End If
+        Public Function GetDtRecords(tableName As String, sortKey As String, fieldNames As String, Optional filterKey As String = Nothing) As DataTable Implements IBaseDao.GetDtRecords
             Dim sql As String
             If filterKey Is Nothing Or filterKey = "" Then
-                If sortKey Is Nothing Or sortKey = "" Then
-                    sql = " SELECT " & fields & " from [" & tableName & "]"
-                Else
-                    sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey
-                End If
+                sql = " SELECT " & fieldNames & " from [" & tableName & "] order by " & sortKey
             Else
-                If sortKey Is Nothing Or sortKey = "" Then
-                    sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey
-                Else
-                    sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey & " order by " & sortKey
-                End If
+                sql = " SELECT " & fieldNames & " from [" & tableName & "] where " & filterKey & " order by " & sortKey
             End If
             Return GetDb().SqlReadDataTable(sql)
         End Function
 
-        Public Function GetRecordsDataTable(tableName As String, sortKey As String, Optional fieldNames As String() = Nothing, Optional filterKey As String = Nothing) As Object Implements IBaseDao.GetRecordsDataTable
-            Dim fields As String
-            If fieldNames Is Nothing Then
-                fields = "*"
-            Else
-                fields = String.Join(",", fieldNames)
-            End If
-            Dim sql As String
-            If filterKey Is Nothing Or filterKey = "" Then
-                If sortKey Is Nothing Or sortKey = "" Then
-                    sql = " SELECT " & fields & " from [" & tableName & "]"
-                Else
-                    sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey
-                End If
-            Else
-                If sortKey Is Nothing Or sortKey = "" Then
-                    sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey
-                Else
-                    sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey & " order by " & sortKey
-                End If
-            End If
-            Return CreateDataTable(sql)
-        End Function
+        'Public Function GetRecordsDataTable(tableName As String, sortKey As String, Optional fieldNames As String() = Nothing, Optional filterKey As String = Nothing) As Object Implements IBaseDao.GetRecordsDataTable
+        '    'Dim fields As String
+        '    'If fieldNames Is Nothing Then
+        '    '    fields = "*"
+        '    'Else
+        '    '    fields = String.Join(",", fieldNames)
+        '    'End If
+        '    Dim sql As String
+        '    If filterKey Is Nothing Or filterKey = "" Then
+        '        If sortKey Is Nothing Or sortKey = "" Then
+        '            sql = " SELECT " & fields & " from [" & tableName & "]"
+        '        Else
+        '            sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey
+        '        End If
+        '    Else
+        '        If sortKey Is Nothing Or sortKey = "" Then
+        '            sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey
+        '        Else
+        '            sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey & " order by " & sortKey
+        '        End If
+        '    End If
+        '    Return CreateDataTable(sql)
+        'End Function
 
         'Public Function GetRecordsByField(tableName As String, sortKey As String, fieldNames As String(), Optional filter As String = Nothing) As Object Implements IBaseDao.GetRecordsByField
         '    Dim fields = String.Join(",", fieldNames)
