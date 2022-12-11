@@ -670,6 +670,10 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End Try
     End Function
 
+    Public Function GetDtRecords(ByVal pTableName As String, ByVal sortOrder As String, ByVal fieldNames As String(), Optional filter As String = Nothing)
+        Return Service.GetDtRecords(pTableName, sortOrder, fieldNames, filter)
+    End Function
+
     Public Function GetRecords(ByVal pTableName As String, ByVal sortOrder As String, ByVal fieldNames As String(), Optional filter As String = Nothing)
         Return Service.GetRecords(pTableName, sortOrder, fieldNames, filter)
     End Function
@@ -1969,6 +1973,16 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return control
     End Function
 
+    Protected Function GetControlName2(ByVal fieldName As String) As ComboBox
+        Dim control As Control = Nothing
+        If Not MainFieldsDictionary.TryGetValue(fieldName, control) Then
+            Debugger.Break()
+            System.Windows.Forms.MessageBox.Show($"Field '" & fieldName & $"' is not present in the MainFieldsDictionary.")
+        End If
+        Return control
+    End Function
+
+
     Protected Sub SetDataSource(dataTableName As String, control As Control, Optional dataFields As String() = Nothing, Optional sortKey As String = Nothing, Optional filter As String = Nothing)
         Dim data As List(Of Lookup.LookupData)
         Dim lookupObj
@@ -1978,8 +1992,8 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
         Dim Task1 ', Task2 As Task
         Task1 = Task.Factory.StartNew(Sub() GetLookup(lookupObj))
-            ''Task1 = Task.Factory.StartNew(Sub() CreateDataSource("Department", "ParentIdNo"))
-            'Task2 = Task.Factory.StartNew(Sub() Method1("RevCostCenter", GetControlName("RevCostCenterIdNo")))          
+        ''Task1 = Task.Factory.StartNew(Sub() CreateDataSource("Department", "ParentIdNo"))
+        'Task2 = Task.Factory.StartNew(Sub() Method1("RevCostCenter", GetControlName("RevCostCenterIdNo")))          
         Task.WaitAll(Task1) ' ,Task2)
 
         Invoker.SetProperty(control, "DataSource", {data})

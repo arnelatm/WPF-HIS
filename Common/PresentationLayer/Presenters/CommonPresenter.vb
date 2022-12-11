@@ -23,7 +23,6 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(itemView As IView)
             MyBase.New(itemView)
-
         End Sub
 
         'Protected Sub New()
@@ -43,13 +42,20 @@ Namespace PresentationLayer.Presenters
             For i = 0 To UBound(dataSourceNames, 1)
                 Dim tableName As String = dataSourceNames(i, 0)
                 Dim fieldName As String = dataSourceNames(i, 1)
-                Dim sTask = {Task(Of List(Of Lookup.LookupData)).Factory.StartNew(Function() LookupDataCreator(tableName)), fieldName}
+                Dim sTask = {Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(tableName)), fieldName}
                 tasks.Add(sTask)
             Next
             For Each taskItem In tasks
-                Invoker.SetPropertyR(GetControlName(taskItem(1)), "DataSource", taskItem(0).Result)
+                Invoker.SetPropertyR(GetControlName2(taskItem(1)), "DataSource", taskItem(0).Result)                
             Next
         End Sub
+
+        Private Shared Function LookupDataTableCreator(ByVal tableName As String) As DataTable
+            Dim cd As New DataCreator()
+            Dim data As DataTable = cd.CreateDataTable(tableName)
+            cd = Nothing
+            Return data
+        End Function
 
         Private Shared Function LookupDataCreator(ByVal tableName As String)
             Dim cd As New DataCreator()
@@ -61,6 +67,12 @@ Namespace PresentationLayer.Presenters
     End Class
 
     Public Class DataCreator
+
+        Public Function CreateDataTable(tableName As String) As DataTable
+            Dim sv = New CommonService()
+            Dim fieldNames = {"IdNo",tableName + "Name", tableName + "Code"}
+            Return sv.GetDtRecords(tableName,tableName + "Name",  fieldNames)
+        End Function
 
         Public Function CreateData(dataTableName As String) As List(Of Lookup.LookupData)
             Dim lookupObj

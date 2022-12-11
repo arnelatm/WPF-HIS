@@ -129,7 +129,7 @@ Namespace Services
         Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, ByRef value As T) As Integer
         Function UpdateTable(ByRef data As DataTable, groupIdNo As Integer) As Integer
         Function UpdateTvp(dtTable As DataTable) As Integer
-
+        Function GetDtRecords(tableName As String, sortKey As String, Optional fields() As String = Nothing, Optional filterKey As String = Nothing) As Object
     End Interface
 
 End Namespace
