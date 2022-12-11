@@ -260,21 +260,36 @@ Namespace DataLayer.AdoNet
         Private Function ProcessLookupByCodeName(data As Object, fieldCount As UInt16) As List(Of Lookup.LookupData)
             Dim tlData As New List(Of Lookup.LookupData)
             If fieldCount = 3 Then
-                For i = 1 To Int(data.Count / 3)
-                    Dim tData As New Lookup.LookupData With {.IdNo = data(i * 3 - 3),
-                            .Name = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1)) & " | " & data(i * 3 - 2),
-                            .Code = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1))
-                            }
+                For each item In data 
+                    Dim tData As New Lookup.LookupData With {.IdNo = item(0), 
+                                                             .Name = item(1),
+                                                             .Code = item(2)}
                     tlData.Add(tData)
                 Next
             Else
-                For i = 1 To Int(data.Count / 2)
-                    Dim tData As New Lookup.LookupData With {.IdNo = data(i * 2 - 2),
-                            .Name = If(IsDBNull(data(i * 2 - 1)), "", data(i * 2 - 1)) & " | " & data(i * 2 - 2)
-                            }
+                For each item In data 
+                    Dim tData As New Lookup.LookupData With {.IdNo = data(0),
+                                                             .Name = data(1)}
                     tlData.Add(tData)
                 Next
             End If
+
+            'If fieldCount = 3 Then
+            '    For i = 1 To Int(data.Count / 3)
+            '        Dim tData As New Lookup.LookupData With {.IdNo = data(i * 3 - 3),
+            '                .Name = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1)) & " | " & data(i * 3 - 2),
+            '                .Code = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1))
+            '                }
+            '        tlData.Add(tData)
+            '    Next
+            'Else
+            '    For i = 1 To Int(data.Count / 2)
+            '        Dim tData As New Lookup.LookupData With {.IdNo = data(i * 2 - 2),
+            '                .Name = If(IsDBNull(data(i * 2 - 1)), "", data(i * 2 - 1)) & " | " & data(i * 2 - 2)
+            '                }
+            '        tlData.Add(tData)
+            '    Next
+            'End If
             Return tlData
         End Function
 

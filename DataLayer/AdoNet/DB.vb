@@ -125,6 +125,45 @@ Namespace AdoNet
             Return arrayResult
         End Function
 
+        Public Function SqlReadDataTable(sql As String, ParamArray ByVal params() As Object)
+            Dim dataTable As New DataTable
+            Dim tryAgain As Boolean
+            '_waitForm.Show()
+            Using connection = CreateConnection()
+                '_waitForm.Show()
+                Do While True
+                    Try
+                        tryAgain = False
+                        Using command = CreateCommand(sql, connection, params)
+                            Dim adapter As New SqlDataAdapter(command)
+                            adapter.Fill(dataTable)
+                            connection.Close()
+                        End Using
+                    Catch ex As Exception
+                        '_waitForm.Close()
+                        Select Case TryToCatchError(ex)
+                            Case DialogResult.Cancel
+                                'Exit Do
+                            Case DialogResult.Retry
+                                ' do nothing
+                                tryAgain = True
+                                '_waitForm.Show()
+                            Case Else
+                                MessageBox.Show(ex.Message)
+                                Throw
+                        End Select
+                    Finally
+                        '_waitForm.Close()
+                    End Try
+                    If Not tryAgain Then
+                        Exit Do
+                    End If
+                Loop
+            End Using
+            '_waitForm.Close()
+            Return dataTable
+        End Function
+
         Public Function SqlReadSecurity(sql As String, ParamArray ByVal params() As Object)
             Dim arrayResult As New ArrayList
             Dim tryAgain As Boolean
@@ -1337,7 +1376,7 @@ Namespace AdoNet
                     command.Connection = connection
                     command.Transaction = transaction
                     retValue = 0
-                    For Each item as DaoCommand In commandsWithParameters
+                    For Each item As DaoCommand In commandsWithParameters
                         command.Parameters.Clear()
                         command.CommandText = item.CommandText
                         If item.Parameters IsNot Nothing AndAlso item.Parameters.Length() > 0 Then
@@ -1346,7 +1385,7 @@ Namespace AdoNet
                         retValue += command.ExecuteNonQuery()
                     Next
                     ' Attempt to commit the transaction.
-                    transaction.Commit()                    
+                    transaction.Commit()
                 Catch ex As Exception
                     MessageBox.Show("Commit Exception Type: " & ex.GetType().ToString())
                     MessageBox.Show("  Message: {0}", ex.Message)
