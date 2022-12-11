@@ -7,7 +7,7 @@ Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.BaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 
-Public Class CaComboBox
+Public Class CtComboBox
     Inherits BCombobox
     Implements IEntryControl, ILinkedLabel, IFindableControl
 
@@ -97,26 +97,12 @@ Public Class CaComboBox
             If value Then
                 If DisplayOnly Then
                     ReadOnlyCombo = True
-                    'ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                    'BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                    'MaxDropDownItems = 1
-                    'DropDownStyle = ComboBoxStyle.Simple
-                    'DropDownHeight = 1
                 Else
                     ReadOnlyCombo = False
-                    'ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                    'BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                    'MaxDropDownItems = _defaultMaxDropDownItems
-                    'IntegralHeight = True
                     DropDownStyle = ComboBoxStyle.DropDown
-                    'DropDownHeight = _defaultDropDownHeight
                 End If
             Else
                 ReadOnlyCombo = True
-                'ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                'BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                'DropDownStyle = ComboBoxStyle.Simple
-                'DropDownHeight = 1
             End If
         End Set
     End Property
@@ -138,11 +124,6 @@ Public Class CaComboBox
     <Description("Set to True to make this control visible only when in editing or adding mode")>
     <Browsable(True)>
     Public Property HideWhenNotEditingOrAdding As Boolean = False
-
-    '<Category("Custom Properties")>
-    '<Description("Select the label to which this control is linked.")>
-    '<Browsable(True)>
-    'Public Property LinkedLabel As Label Implements IEntryControl.LinkedLabel
 
     Public Property OldValue As Integer
 
@@ -176,8 +157,6 @@ Public Class CaComboBox
             Return _readOnlyCombo
         End Get
         Set
-            ' If the value isn't changing, then do nothing
-            'If Value = _readOnlyCombo Then Exit Property
             _readOnlyCombo = Value
             If Value Then
                 DropDownStyle = ComboBoxStyle.Simple
@@ -252,22 +231,6 @@ Public Class CaComboBox
     <Browsable(True)>
     Public Property ValueIsNumeric As Boolean
 
-    '<Category("Custom Properties")>
-    '<DefaultValue(False)>
-    '<Description("Set to True to specify that this control value will not be shown.")>
-    '<Browsable(True)>
-    'Public Property Viewable As Boolean
-    '    Get
-    '        Return _viewable
-    '    End Get
-    '    Set
-    '        _viewable = Value
-    '        If Not Value Then
-    '            Width = 0
-    '        End If
-    '    End Set
-    'End Property
-
     Public Shared Property WmPaint1 As Integer = &HF
 
     <Bindable(True)>
@@ -285,7 +248,6 @@ Public Class CaComboBox
                 SendKeys.Send("{TAB}")
                 e.Handled = True
                 e.SuppressKeyPress = True
-                'SendKeys.SendWait("{TAB}")
             Else
                 e.Handled = False
             End If
@@ -311,7 +273,6 @@ Public Class CaComboBox
 #Region "Event Handlers"
 
     Private _previousIndex As Integer
-    'Private _findDataType As IFindableControl.DataTypeEnum
 
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
         If Hidden Then
@@ -435,16 +396,9 @@ Public Class CaComboBox
         _suggestBindingList.ResetBindings()
         Dim showForm As Boolean
         showForm = _suggestBindingList.Any()
-        'SuggestListForm.Visible = showForm
         If showForm Then
             SetListBoxFormLocation(SuggestListForm)
             SuggestListForm.Visible = True
-            'Me.SendToBack()
-            'SuggestListForm.BringToFront()
-            'Me.Focus()
-        Else
-            'SuggestListForm.Hide()
-            'Me.SetVisibleCore(True)
         End If
         If _suggestBindingList.Count = 0 And LimitToList Then
             Beep()
@@ -472,8 +426,7 @@ Public Class CaComboBox
     End Sub
 
     Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged
-        PropertySelectorCompiled = Function(collection) collection.Cast(Of Lookup.LookupData)().[Select](Function(p) p.Name)
-        'PropertySelectorCompiled = Function(collection) PropertySelectorCompiled = Function(collection) collection.Cast(Of Lookup.LookupData)().[Select](Function(p) p.Name)
+        PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(1).ToString())
     End Sub
 
     Private Shadows Sub OnParentChanged(ByVal sender As Object, ByVal e As EventArgs)
@@ -511,53 +464,53 @@ Public Class CaComboBox
 
     End Sub
 
-    Public Function GetValue()
-        If SelectedItem IsNot Nothing Then
-            If ValueMember.ToLower() = "idno" Then
-                Return CType(SelectedItem, Lookup.LookupData).IdNo
-            ElseIf ValueMember.ToLower() = "name" Then
-                Return CType(SelectedItem, Lookup.LookupData).Name
-            ElseIf ValueMember.ToLower() = "code" Then
-                Return CType(SelectedItem, Lookup.LookupData).Code
-            ElseIf ValueMember.ToLower() = "index" Then
-                Return CType(SelectedItem, Lookup.LookupData).Index
-            Else
-                Return Text
-            End If
-        Else
-            Return Nothing
-        End If
-    End Function
+    'Public Function GetValue()
+    '    If SelectedItem IsNot Nothing Then
+    '        If ValueMember.ToLower() = "idno" Then
+    '            Return CType(SelectedItem, Lookup.LookupData).IdNo
+    '        ElseIf ValueMember.ToLower() = "name" Then
+    '            Return CType(SelectedItem, Lookup.LookupData).Name
+    '        ElseIf ValueMember.ToLower() = "code" Then
+    '            Return CType(SelectedItem, Lookup.LookupData).Code
+    '        ElseIf ValueMember.ToLower() = "index" Then
+    '            Return CType(SelectedItem, Lookup.LookupData).Index
+    '        Else
+    '            Return Text
+    '        End If
+    '    Else
+    '        Return Nothing
+    '    End If
+    'End Function
 
-    Public Function GetNullableValue(Of T)()
-        Dim x = GetValue()
-        If x Is Nothing Then
-            Return Nothing
-        Else
-            Return CType(x, T)
-        End If
-    End Function
+    'Public Function GetNullableValue(Of T)()
+    '    Dim x = GetValue()
+    '    If x Is Nothing Then
+    '        Return Nothing
+    '    Else
+    '        Return CType(x, T)
+    '    End If
+    'End Function
 
-    Public Sub SetValue(ByRef value)
-        If value Is DBNull.Value OrElse value Is Nothing Then
-            Text = Nothing
-        Else
-            If ValueMember.ToLower() = "idno" Then
-                If IsNumeric(value) Then
-                    IdNoSearch(value)
-                Else
-                    SelectedIndex = -1
-                End If
-            ElseIf ValueMember.ToLower() = "code" Then
-                CodeSearch(value)
-            Else
-                NameSearch(value)
-                'SelectedValue = value
-                'Text = value
-                'SelectedText = value
-            End If
-        End If
-    End Sub
+    'Public Sub SetValue(ByRef value)
+    '    If value Is DBNull.Value OrElse value Is Nothing Then
+    '        Text = Nothing
+    '    Else
+    '        If ValueMember.ToLower() = "idno" Then
+    '            If IsNumeric(value) Then
+    '                IdNoSearch(value)
+    '            Else
+    '                SelectedIndex = -1
+    '            End If
+    '        ElseIf ValueMember.ToLower() = "code" Then
+    '            CodeSearch(value)
+    '        Else
+    '            NameSearch(value)
+    '            'SelectedValue = value
+    '            'Text = value
+    '            'SelectedText = value
+    '        End If
+    '    End If
+    'End Sub
 
     Public Property DataValue
 

@@ -403,31 +403,31 @@ Namespace Services
                 '    tlData.Add(tData)
                 'Next
             ElseIf fieldCount = 3 Then
-                For Each item In data
-                    Dim tData As New Lookup.LookupData With {.IdNo = item(0),
-                                                             .Name = If(IsDBNull(item(1)), "", item(1)) & If(IsDBNull(item(2)), "", item(2)),
-                                                             .Code = If(IsDBNull(item(2)), "", item(2))}
-                    tlData.Add(tData)
-                Next
-                'For i = 1 To Int(data.Count / 3)
-                '    Dim tData As New Lookup.LookupData With {.IdNo = data(i * 3 - 3),
-                '        .Name = data(i * 3 - 2) & " | " & If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1)),
-                '        .Code = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1))
-                '        }
+                'For Each item In data
+                '    Dim tData As New Lookup.LookupData With {.IdNo = item(0),
+                '                                             .Name = If(IsDBNull(item(1)), "", item(1)) & If(IsDBNull(item(2)), "", item(2)),
+                '                                             .Code = If(IsDBNull(item(2)), "", item(2))}
                 '    tlData.Add(tData)
                 'Next
+                For i = 1 To Int(data.Count / 3)
+                    Dim tData As New Lookup.LookupData With {.IdNo = data(i * 3 - 3),
+                        .Name = data(i * 3 - 2) & " | " & If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1)),
+                        .Code = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1))
+                        }
+                    tlData.Add(tData)
+                Next
             ElseIf fieldCount = 2 Then
-                For Each item In data
-                    Dim tData As New Lookup.LookupData With {.IdNo = item(0),
-                                                             .Name = item(1) & " | " & item(0)}
-                    tlData.Add(tData)
-                Next
-                'For i = 1 To Int(data.Count / 2)
-                '    Dim tData As New Lookup.LookupData With {.IdNo = data(i * 2 - 2),
-                '            .Name = data(i * 2 - 1) & " | " & data(i * 2 - 2)
-                '            }
+                'For Each item In data
+                '    Dim tData As New Lookup.LookupData With {.IdNo = item(0),
+                '                                             .Name = item(1) & " | " & item(0)}
                 '    tlData.Add(tData)
                 'Next
+                For i = 1 To Int(data.Count / 2)
+                    Dim tData As New Lookup.LookupData With {.IdNo = data(i * 2 - 2),
+                            .Name = data(i * 2 - 1) & " | " & data(i * 2 - 2)
+                            }
+                    tlData.Add(tData)
+                Next
             Else
                 For Each item In data
                     Dim tData As New Lookup.LookupData With {.Name = If(IsDBNull(item(0)), "", item(0))}
