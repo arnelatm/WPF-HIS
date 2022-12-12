@@ -157,7 +157,7 @@
         Me.lblPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
         Me.lblBankAccountNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtBankAccountNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblOpeningBalance = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -3881,7 +3881,7 @@ End Sub
         Friend WithEvents lblPaymentMethod As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents cboPaymentMethod As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents lblBankIdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cacBankIdNo As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents cacBankIdNo As Libraries.CBaseControlsLibrary.CtComboBox
         Friend WithEvents lblBankAccountNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtBankAccountNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblOpeningBalance As Libraries.CBaseControlsLibrary.CLabel

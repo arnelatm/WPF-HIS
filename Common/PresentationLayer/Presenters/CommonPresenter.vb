@@ -39,7 +39,6 @@ Namespace PresentationLayer.Presenters
         Protected Sub CreateDataSourceThread(dataSourceNames As Array)
             Dim tasks As New List(Of Object)
             Dim itemCount As Int32 = dataSourceNames.Length
-            Dim filter As String
             Const LookupTableName As Short = 0
             Const ControlFieldName As Short = 1
             Const LookupFieldNames As Short = 2
@@ -47,8 +46,12 @@ Namespace PresentationLayer.Presenters
             For i = 0 To UBound(dataSourceNames, 1)
                 Dim tableName As String = dataSourceNames(i, LookupTableName)
                 Dim fieldName As String = dataSourceNames(i, ControlFieldName)
-                Dim luFields As String = dataSourceNames(i, LookupFieldNames)
-                If UBound(dataSourceNames, 1) > 3 Then
+                Dim filter As String = nothing
+                Dim luFields As String = nothing
+                If UBound(dataSourceNames, 2) > 1 Then
+                    luFields = dataSourceNames(i, LookupFieldNames)
+                End If
+                If UBound(dataSourceNames, 2) > 2 Then
                     filter = dataSourceNames(i, LookupFilter)
                 End If
                 Dim sTask = {Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(tableName, luFields, Filter)), fieldName}
