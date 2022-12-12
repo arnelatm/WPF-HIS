@@ -464,11 +464,13 @@ Public Class CtComboBox
 
     End Sub
 
-    Public Function GetValue()
+    Public Function GetValue(Of T) as T
         If SelectedIndex = -1 Then
             Return Nothing
         Else
-            Return SelectedValue
+            Dim x as T
+            x = CType(SelectedValue, T)
+            Return x
             'If ValueMember.ToLower() = "idno" Then
             '    Return CType(SelectedItem, Lookup.LookupData).IdNo
             'ElseIf ValueMember.ToLower() = "name" Then

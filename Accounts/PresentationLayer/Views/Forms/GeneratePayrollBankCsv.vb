@@ -27,7 +27,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayCycleIdNo As Int16 Implements IPayrollView.PayCycleIdNo
+        Public Property PayCycleIdNo As Byte Implements IPayrollView.PayCycleIdNo
             Get
                 Return cboPayCycleIdNo.GetValue()
             End Get

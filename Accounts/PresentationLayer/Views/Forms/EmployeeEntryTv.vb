@@ -53,25 +53,25 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Balance As Decimal Implements IEmployeeView.Balance
             Get
-                Return NumParser(Of Decimal)(txtBalance.Text)
+                Return txtBalance.GetValue(Of Decimal)
             End Get
             Set
-                txtBalance.Text = Value
+                txtBalance.SetValue(Value)
             End Set
         End Property
 
         Public Property BankAccountNo As String Implements IEmployeeView.BankAccountNo
             Get
-                Return txtBankAccountNo.Text
+                Return txtBankAccountNo.GetValue(Of String)
             End Get
             Set
-                txtBankAccountNo.Text = Value
+                txtBankAccountNo.SetValue(Value)
             End Set
         End Property
 
         Public Property BankIdNo As Int16? Implements IEmployeeView.BankIdNo
             Get
-               Return cacBankIdNo.GetValue()                
+               Return cacBankIdNo.GetValue(Of Int16?)                
             End Get
             Set
                 cacBankIdNo.SetValue(Value)
@@ -98,7 +98,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property CountryCode As String Implements IEmployeeView.CountryCode
             Get
-                Return cacCountryCode.GetValue()
+                Return cacCountryCode.GetValue(Of String)
             End Get
             Set
                 cacCountryCode.SetValue(Value)
@@ -107,7 +107,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DepartmentIdNo As Int16? Implements IEmployeeView.DepartmentIdNo
             Get
-                Return cacDepartmentIdNo.GetNullableValue(Of Int16)
+                Return cacDepartmentIdNo.GetValue(Of Int16?)
             End Get
             Set
                 cacDepartmentIdNo.SetValue(Value)
@@ -116,7 +116,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DesignationIdNo As Int16? Implements IEmployeeView.DesignationIdNo
             Get
-                Return cacDesignationIdNo.GetNullableValue(Of Int16)
+                Return cacDesignationIdNo.GetValue(Of Int16?)
             End Get
             Set
                 cacDesignationIdNo.SetValue(Value)
@@ -125,37 +125,37 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property District As String Implements IEmployeeView.District
             Get
-                Return txtDistrict.Text
+                Return txtDistrict.GetValue(Of String)
             End Get
             Set
-                txtDistrict.Text = Value
+                txtDistrict.SetValue(Value)
             End Set
         End Property
 
         Public Property DutyHours As Decimal Implements IEmployeeView.DutyHours
             Get
-                Return NumParser(Of Decimal)(txtDutyHours.Text)
+                Return txtDutyHours.GetValue(Of Decimal)
             End Get
             Set
-                txtDutyHours.Text = FormatDecimalNumber(Value)
+                txtDutyHours.SetValue(Value)
             End Set
         End Property
 
         Public Property Email As String Implements IEmployeeView.Email
             Get
-                Return txtEmail.Text
+                Return txtEmail.GetValue(Of String)
             End Get
             Set
-                txtEmail.Text = Value
+                txtEmail.SetValue(Value)
             End Set
         End Property
 
         Public Property EmployeeCode As String Implements IEmployeeView.EmployeeCode
             Get
-                Return txtEmployeeCode.Text
+                Return txtEmployeeCode.GetValue(Of String)
             End Get
             Set
-                txtEmployeeCode.Text = Value
+                txtEmployeeCode.SetValue(Value)
             End Set
         End Property
 
@@ -212,19 +212,19 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property EmployeeName As String Implements IEmployeeView.EmployeeName
             Get
-                Return txtEmployeeName.Text
+                Return txtEmployeeName.GetValue(Of String)
             End Get
             Set
-                txtEmployeeName.Text = Value
+                txtEmployeeName.SetValue(Value)
             End Set
         End Property
 
         Public Property EmployeeNameAra As String Implements IEmployeeView.EmployeeNameAra
             Get
-                Return txtEmployeeNameAra.Text
+                Return txtEmployeeNameAra.GetValue(Of String)
             End Get
             Set
-                txtEmployeeNameAra.Text = Value
+                txtEmployeeNameAra.SetValue(Value)
             End Set
         End Property
 
@@ -252,23 +252,19 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Iban As String Implements IEmployeeView.Iban
             Get
-                Return txtIban.Text
+                Return txtIban.GetValue(Of String)
             End Get
             Set
-                txtIban.Text = Value
+                txtIban.SetValue(Value)
             End Set
         End Property
 
         Public Property IdNo As Int32 Implements IEmployeeView.IdNo
             Get
-                If TxtIdNo.Text <> "" Then
-                    Return Convert.ToInt16(TxtIdNo.Text)
-                Else
-                    Return 0
-                End If
+                return TxtIdNo.GetValue(Of Int32)
             End Get
             Set
-                TxtIdNo.Text = Convert.ToString(Value)
+                TxtIdNo.SetValue(Value)
             End Set
         End Property
 
@@ -283,16 +279,16 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property NationalIdNo As String Implements IEmployeeView.NationalIdNo
             Get
-                Return txtNationalIdNo.Text
+                Return txtNationalIdNo.GetValue(Of String)
             End Get
             Set
-                txtNationalIdNo.Text = Value
+                txtNationalIdNo.SetValue(Value)
             End Set
         End Property
 
         Public Property NationalityCode As String Implements IEmployeeView.NationalityCode
             Get
-                Return cacNationalityCode.GetValue()
+                Return cacNationalityCode.GetValue(Of String)
             End Get
             Set
                 cacNationalityCode.SetValue(Value)
@@ -301,25 +297,25 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Notes As String Implements IEmployeeView.Notes
             Get
-                Return txtNotes.Text
+                Return txtNotes.GetValue(Of String)
             End Get
             Set
-                txtNotes.Text = Value
+                txtNotes.SetValue(Value)
             End Set
         End Property
 
         Public Property OpeningBalance As Decimal Implements IEmployeeView.OpeningBalance
             Get
-                Return NumParser(Of Decimal)(txtOpeningBalance.Text)
+                Return txtOpeningBalance.GetValue(Of Decimal)
             End Get
             Set
-                txtOpeningBalance.Text = FormatDecimalNumber(Value)
+                txtOpeningBalance.SetValue(Value)
             End Set
         End Property
 
-        Public Property PayCycleIdNo As Int16? Implements IEmployeeView.PayCycleIdNo
+        Public Property PayCycleIdNo As Byte? Implements IEmployeeView.PayCycleIdNo
             Get
-                Return cboPayCycleidNo.GetNullableValue(Of Int16)
+                Return cboPayCycleidNo.GetValue(Of Byte?)
             End Get
             Set
                 cboPayCycleidNo.SetValue(Value)
@@ -329,7 +325,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PayGroupIdNo As Int16? Implements IEmployeeView.PayGroupIdNo
             Get
-                Return cboPayGroupIdNo.GetNullableValue(Of Int16)
+                Return cboPayGroupIdNo.GetValue(Of Int16?)
             End Get
             Set
                 cboPayGroupIdNo.SetValue(Value)
@@ -347,7 +343,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PoBox As String Implements IEmployeeView.PoBox
             Get
-                Return txtPoBox.Text
+                Return txtPoBox.GetValue(Of String)
             End Get
             Set
                 txtPoBox.Text = Value
@@ -356,7 +352,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property ProvinceState As String Implements IEmployeeView.ProvinceState
             Get
-                Return txtProvinceState.Text
+                Return txtProvinceState.GetValue(Of String)
             End Get
             Set
                 txtProvinceState.Text = Value
@@ -374,7 +370,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property ReligionIdNo As Int16? Implements IEmployeeView.ReligionIdNo
             Get
-                Return cacReligionIdNo.GetNullableValue(Of Int16)
+                Return cacReligionIdNo.GetValue(Of Int16?)
             End Get
             Set
                 cacReligionIdNo.SetValue(Value)
@@ -383,10 +379,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Street As String Implements IEmployeeView.Street
             Get
-                Return txtStreet.Text
+                Return txtStreet.GetValue(Of String)
             End Get
             Set
-                txtStreet.Text = Value
+                txtStreet.SetValue(Value)
             End Set
         End Property
 
@@ -401,7 +397,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property SupervisorIdNo As Int32 Implements IEmployeeView.SupervisorIdNo
             Get
-                Return cboSupervisorIdNo.GetNullableValue(Of Int32)
+                Return cboSupervisorIdNo.GetValue(of Int32)
             End Get
             Set
                 cboSupervisorIdNo.SetValue(Value)
@@ -410,7 +406,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Title As String Implements IEmployeeView.Title
             Get
-                Return cboTitle.GetNullableValue(Of String)
+                Return cboTitle.GetValue()
             End Get
             Set
                 cboTitle.SetValue(Value)
@@ -419,19 +415,19 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property TownCity As String Implements IEmployeeView.TownCity
             Get
-                Return txtTownCity.Text
+                Return txtTownCity.GetValue(Of String)
             End Get
             Set
-                txtTownCity.Text = Value
+                txtTownCity.SetValue(Value)
             End Set
         End Property
 
         Public Property ZipCode As String Implements IEmployeeView.ZipCode
             Get
-                Return txtZipCode.Text
+                Return txtZipCode.GetValue(Of String)
             End Get
             Set
-                txtZipCode.Text = Value
+                txtZipCode.SetValue(Value)
             End Set
         End Property
 
@@ -477,10 +473,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property ActualDutyHours As Decimal Implements IEmployeeView.ActualDutyHours
             Get
-                Return NumParser(Of Decimal)(txtActualDutyHours.Text)
+                Return txtActualDutyHours.GetValue(Of Decimal)
             End Get
             Set
-                txtActualDutyHours.Text = FormatDecimalNumber(Value)
+                txtActualDutyHours.SetValue(Value)
             End Set
         End Property
 

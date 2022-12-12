@@ -19,7 +19,7 @@ Namespace BusinessLayer
 
         Public Property EndDate As Date
         Public Property IdNo As Int16
-        Public Property PayCycleIdNo As Int16
+        Public Property PayCycleIdNo As Byte
         Public Property PayrollCode As String
         Public Property PayrollName As String
         Public Property PayrollNameAra As String

@@ -154,7 +154,7 @@ Namespace DataLayer.AdoNet
             .NationalityCode = Extensions.AsString(reader("NationalityCode")),
             .Notes = Extensions.AsString(reader("Notes")),
             .OpeningBalance = Extensions.AsDecimal(reader("OpeningBalance")),
-            .PayCycleIdNo = Extensions.AsNullable(Of Int16?)(reader("PayCycleIdNo")),
+            .PayCycleIdNo = Extensions.AsNullable(Of Byte?)(reader("PayCycleIdNo")),
             .PayGroupIdNo = Extensions.AsNullable(Of Int16?)(reader("PayGroupIdNo")),
             .PaymentMethod = Extensions.AsChar(reader("PaymentMethod")),
             .Phone1 = Extensions.AsString(reader("Phone1")),
