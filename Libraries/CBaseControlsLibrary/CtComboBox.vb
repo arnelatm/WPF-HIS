@@ -464,23 +464,24 @@ Public Class CtComboBox
 
     End Sub
 
-    'Public Function GetValue()
-    '    If SelectedItem IsNot Nothing Then
-    '        If ValueMember.ToLower() = "idno" Then
-    '            Return CType(SelectedItem, Lookup.LookupData).IdNo
-    '        ElseIf ValueMember.ToLower() = "name" Then
-    '            Return CType(SelectedItem, Lookup.LookupData).Name
-    '        ElseIf ValueMember.ToLower() = "code" Then
-    '            Return CType(SelectedItem, Lookup.LookupData).Code
-    '        ElseIf ValueMember.ToLower() = "index" Then
-    '            Return CType(SelectedItem, Lookup.LookupData).Index
-    '        Else
-    '            Return Text
-    '        End If
-    '    Else
-    '        Return Nothing
-    '    End If
-    'End Function
+    Public Function GetValue()
+        If SelectedIndex = -1 Then
+            Return Nothing
+        Else
+            Return SelectedValue
+            'If ValueMember.ToLower() = "idno" Then
+            '    Return CType(SelectedItem, Lookup.LookupData).IdNo
+            'ElseIf ValueMember.ToLower() = "name" Then
+            '    Return CType(SelectedItem, Lookup.LookupData).Name
+            'ElseIf ValueMember.ToLower() = "code" Then
+            '    Return CType(SelectedItem, Lookup.LookupData).Code
+            'ElseIf ValueMember.ToLower() = "index" Then
+            '    Return CType(SelectedItem, Lookup.LookupData).Index
+            'Else
+            '    Return Text
+            'End If            
+        End If
+    End Function
 
     'Public Function GetNullableValue(Of T)()
     '    Dim x = GetValue()
@@ -491,26 +492,13 @@ Public Class CtComboBox
     '    End If
     'End Function
 
-    'Public Sub SetValue(ByRef value)
-    '    If value Is DBNull.Value OrElse value Is Nothing Then
-    '        Text = Nothing
-    '    Else
-    '        If ValueMember.ToLower() = "idno" Then
-    '            If IsNumeric(value) Then
-    '                IdNoSearch(value)
-    '            Else
-    '                SelectedIndex = -1
-    '            End If
-    '        ElseIf ValueMember.ToLower() = "code" Then
-    '            CodeSearch(value)
-    '        Else
-    '            NameSearch(value)
-    '            'SelectedValue = value
-    '            'Text = value
-    '            'SelectedText = value
-    '        End If
-    '    End If
-    'End Sub
+    Public Sub SetValue(value)
+        If value Is DBNull.Value OrElse value Is Nothing Then
+            SelectedIndex = -1
+        Else
+            SelectedValue = value
+        End If
+    End Sub
 
     Public Property DataValue
 
@@ -518,13 +506,15 @@ Public Class CtComboBox
         Dim returnValue As Int32
         Dim found As Boolean = False
         Dim i = 0
-        If DataSource IsNot Nothing Then
+        Dim dr As DataRow
+        dr = DataSource.Select("IdNo='" & value & "'")
+        If dr IsNot Nothing Then
             For Each item In DataSource
                 If item.IdNo = value Then
                     'SelectedIndex = i
                     'Dim lReadOnlyCombo As Boolean = Visible
                     If Visible Then
-                        SelectedItem = DataSource(i)
+                        SelectedItem = dr.Item("IdNo")
                     Else
                         SelectedItem = DataSource(i)
                     End If

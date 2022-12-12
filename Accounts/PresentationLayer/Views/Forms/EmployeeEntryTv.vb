@@ -71,11 +71,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property BankIdNo As Int16? Implements IEmployeeView.BankIdNo
             Get
-                If Visible Then
-                    Return cacBankIdNo.GetNullableValue(Of Int16)
-                Else
-                    Return cacBankIdNo.DataValue
-                End If
+               Return cacBankIdNo.GetValue()                
             End Get
             Set
                 cacBankIdNo.SetValue(Value)

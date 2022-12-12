@@ -19,82 +19,73 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property IdNo As Int16 Implements IDepartmentView.IdNo
             Get
-                Return NumParser(Of Int16)(TxtIdNo.Text)
+                Return txtIdNo.GetValue(Of Int16) 
             End Get
             Set
-                TxtIdNo.Text = Convert.ToString(Value)
+                TxtIdNo.SetValue(Value)
             End Set
         End Property
 
         Public Property ParentIdNo As Int16? Implements IDepartmentView.ParentIdNo
             Get
-                If cacParentIdNo.SelectedValue Is Nothing Then
-                    Return Nothing
-                Else
-                    Return cacParentIdNo.SelectedValue
-                End If
+                Return cacParentIdNo.GetValue()
             End Get
             Set
-                If Value Is Nothing Then
-                    cacParentIdNo.SelectedIndex = -1
-                Else
-                    cacParentIdNo.SelectedValue = Value
-                End If
-
+                cacParentIdNo.SetValue(Value)
             End Set
         End Property
 
         Public Property DepartmentCode As String Implements IDepartmentView.DepartmentCode
             Get
-                Return txtDepartmentCode.Text
+                Return txtDepartmentCode.GetValue(Of String)
             End Get
             Set
-                txtDepartmentCode.Text = Value
+                txtDepartmentCode.SetValue(Value)
             End Set
         End Property
 
         Public Property DepartmentName As String Implements IDepartmentView.DepartmentName
             Get
-                Return txtDepartmentName.Text
+                Return txtDepartmentName.GetValue(Of String)
             End Get
             Set
-                txtDepartmentName.Text = Value
+                txtDepartmentName.SetValue(Value)
             End Set
         End Property
 
         Public Property DepartmentNameAra As String Implements IDepartmentView.DepartmentNameAra
             Get
-                Return txtDepartmentNameAra.Text
+                Return txtDepartmentNameAra.GetValue(Of String)
             End Get
             Set
-                txtDepartmentNameAra.Text = Value
+                txtDepartmentNameAra.SetValue(Value)
             End Set
         End Property
 
         Public Property RevCostCenterIdNo As Int16 Implements IDepartmentView.RevCostCenterIdNo
             Get
-                Return cacRevCostCenterIdNo.SelectedValue
+                Return cacRevCostCenterIdNo.GetValue()
             End Get
             Set
-                cacRevCostCenterIdNo.SelectedValue = Value
+                cacRevCostCenterIdNo.SetValue(value)
             End Set
         End Property
 
         Public Property Notes As String Implements IDepartmentView.Notes
             Get
-                Return txtNotes.Text
+                Return txtNotes.GetValue(Of String)
             End Get
             Set
-                txtNotes.Text = Value
+                txtNotes.SetValue(Value)
             End Set
         End Property
 
         Public Property SortKey As String Implements IDepartmentView.SortKey
             Get
-                Return txtSortKey.Text
+                Return txtSortKey.GetValue(Of String)
             End Get
             Set
-                txtSortKey.Text = Value
+                txtSortKey.SetValue(Value)
             End Set
         End Property
 
