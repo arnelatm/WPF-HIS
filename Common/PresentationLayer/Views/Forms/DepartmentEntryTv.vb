@@ -28,7 +28,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property ParentIdNo As Int16? Implements IDepartmentView.ParentIdNo
             Get
-                Return cacParentIdNo.GetValue()
+                Return cacParentIdNo.GetValue(Of Int16?)
             End Get
             Set
                 cacParentIdNo.SetValue(Value)
@@ -64,7 +64,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property RevCostCenterIdNo As Int16 Implements IDepartmentView.RevCostCenterIdNo
             Get
-                Return cacRevCostCenterIdNo.GetValue()
+                Return cacRevCostCenterIdNo.GetValue(Of Int16)
             End Get
             Set
                 cacRevCostCenterIdNo.SetValue(value)

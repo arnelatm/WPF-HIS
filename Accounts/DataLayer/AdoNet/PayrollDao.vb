@@ -71,7 +71,7 @@ Namespace DataLayer.AdoNet
             New Payroll() With {
             .EndDate = Extensions.AsDate(reader("EndDate")),
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
-            .PayCycleIdNo = Extensions.AsInt(Of Int16)(reader("PayCycleIdNo")),
+            .PayCycleIdNo = Extensions.AsInt(Of Byte)(reader("PayCycleIdNo")),
             .PayFrequency = Extensions.AsChar(reader("PayFrequency")),
             .PayrollCode = Extensions.AsString(reader("PayrollCode")),
             .PayrollName = Extensions.AsString(reader("PayrollName")),

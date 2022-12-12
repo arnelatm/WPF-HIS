@@ -176,6 +176,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Problems And Solutions", "Problems And Solutions", "{981A0171-5E5E-461E-A09A-DE12F781F288}"
 	ProjectSection(SolutionItems) = preProject
 		code 0x0000011b - printng error.txt = code 0x0000011b - printng error.txt
+		Error correction for DTC error.pdf = Error correction for DTC error.pdf
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IGroup", "IGroup", "{B5D54750-F102-47FF-BDF7-A67CB2A5A22D}"

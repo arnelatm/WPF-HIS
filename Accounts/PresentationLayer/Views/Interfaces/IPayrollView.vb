@@ -6,7 +6,7 @@ Namespace PresentationLayer.Views.Interfaces
         Inherits IView
         Property EndDate As Date?
         Property IdNo As Int16
-        Property PayCycleIdNo As Int16
+        Property PayCycleIdNo As Byte
         Property PayrollCode As String
         Property PayrollName As String
         Property PayrollNameAra As String

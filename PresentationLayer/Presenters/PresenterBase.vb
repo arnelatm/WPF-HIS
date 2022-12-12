@@ -670,8 +670,8 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End Try
     End Function
 
-    Public Function GetDtRecords(ByVal pTableName As String, ByVal sortOrder As String, ByVal fieldNames As String(), Optional filter As String = Nothing)
-        Return Service.GetDtRecords(pTableName, sortOrder, fieldNames, filter)
+    Public Function GetDtRecords(ByVal pTableName As String, ByVal fieldNames As String(), Optional filter As String = Nothing, Optional sortKey As String = Nothing)
+        Return Service.GetDtRecords(pTableName, fieldNames, filter, sortKey)
     End Function
 
     Public Function GetRecords(ByVal pTableName As String, ByVal sortOrder As String, ByVal fieldNames As String(), Optional filter As String = Nothing)
@@ -1973,8 +1973,8 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return control
     End Function
 
-    Protected Function GetFieldControlName(ByVal fieldName As String) As ComboBox
-        Dim control As Control = Nothing
+    Protected Function GetFieldControlName(ByVal fieldName As String) As CtComboBox
+        Dim control As CtComboBox = Nothing
         If Not MainFieldsDictionary.TryGetValue(fieldName, control) Then
             Debugger.Break()
             System.Windows.Forms.MessageBox.Show($"Field '" & fieldName & $"' is not present in the MainFieldsDictionary.")

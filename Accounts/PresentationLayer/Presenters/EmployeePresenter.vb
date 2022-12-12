@@ -128,17 +128,15 @@ Namespace PresentationLayer.Presenters
             CreateEnumDataSource(Of PayrollPaymentMethodSelection)("PaymentMethod")
             CreateEnumDataSource(Of SponsorTypeSelection)("SponsorType")
             CreateEnumDataSource(Of BloodTypeSelection)("BloodType")
-            CreateDataSourceThread({{"Bank", "BankIdNo"},
-                                    {"Country", "CountryCode"},
-                                    {"Department", "DepartmentIdNo"},
-                                    {"Designation", "DesignationIdNo"},
-                                    {"Country", "NationalityCode"},
-                                    {"Religion", "ReligionIdNo"},
-                                    {"PayCycle", "PayCycleIdNo"},
-                                    {"PayGroup", "PayGroupIdNo"}
-                                    })
-                                    '{"Employee", "SupervisorIdNo"} ', "Supervisor=1"}
-                                    
+            CreateDataSourceThread({{"Bank", "BankIdNo", Nothing, Nothing},
+                                    {"Country", "CountryCode", Nothing, Nothing},
+                                    {"Department", "DepartmentIdNo", Nothing, Nothing},
+                                    {"Designation", "DesignationIdNo", Nothing, Nothing},
+                                    {"Country", "NationalityCode", "CountryCode, CountryName", Nothing},
+                                    {"Religion", "ReligionIdNo", Nothing, Nothing},
+                                    {"PayCycle", "PayCycleIdNo", Nothing, Nothing},
+                                    {"PayGroup", "PayGroupIdNo", Nothing, Nothing},
+                                    {"Employee", "SupervisorIdNo", Nothing, "Supervisor=1"}})
 
             CreateListDataSource("List", "Title", "NameTitle")
             CreateEnumData(Of PayRateUnitSelection)(View.Unit)
@@ -591,11 +589,11 @@ End Namespace
 
 Public Class PayCycleIdNoChanged
 
-    Public Sub New(ByVal payCycleIdNo As Int16?)
+    Public Sub New(ByVal payCycleIdNo As Byte?)
         Me.PayCycleIdNo = payCycleIdNo
     End Sub
 
-    Public Property PayCycleIdNo As Int16?
+    Public Property PayCycleIdNo As Byte?
 
 End Class
 

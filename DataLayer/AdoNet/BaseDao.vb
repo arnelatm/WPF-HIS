@@ -773,12 +773,20 @@ Namespace AdoNet
             Return GetDb().SqlRead(sql)
         End Function
 
-        Public Function GetDtRecords(tableName As String, sortKey As String, fieldNames As String, Optional filterKey As String = Nothing) As DataTable Implements IBaseDao.GetDtRecords
+        Public Function GetDtRecords(tableName As String, fieldNames As String, filterKey As String, sortKey As String) As DataTable Implements IBaseDao.GetDtRecords
             Dim sql As String
             If filterKey Is Nothing Or filterKey = "" Then
-                sql = " SELECT " & fieldNames & " from [" & tableName & "] order by " & sortKey
+                If sortKey Is Nothing Or sortKey = "" Then
+                    sql = " SELECT " & fieldNames & " from [" & tableName & "]"
+                Else
+                    sql = " SELECT " & fieldNames & " from [" & tableName & "] order by " & sortKey
+                End If
             Else
-                sql = " SELECT " & fieldNames & " from [" & tableName & "] where " & filterKey & " order by " & sortKey
+                If sortKey Is Nothing Or sortKey = "" Then
+                    sql = " SELECT " & fieldNames & " from [" & tableName & "] where " & filterKey 
+                Else
+                    sql = " SELECT " & fieldNames & " from [" & tableName & "] where " & filterKey & " order by " & sortKey
+                End If
             End If
             Return GetDb().SqlReadDataTable(sql)
         End Function
