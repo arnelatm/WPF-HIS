@@ -1979,6 +1979,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             Debugger.Break()
             System.Windows.Forms.MessageBox.Show($"Field '" & fieldName & $"' is not present in the MainFieldsDictionary.")
         End If
+        control.SaveFieldName()
         Return control
     End Function
 

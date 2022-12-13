@@ -45,6 +45,8 @@ Public Class CtComboBox
 
     Public Property DefaultValue As Object
 
+    Private Property _displayField As String
+
     Public Shared Property Delete As String = "Delete Selected Text"
     Public ComboBoxValueChanged As Boolean = False
     Private _lastValue As Object = Nothing
@@ -940,6 +942,10 @@ Public Class CtComboBox
             description = LinkedLabel.Text
         End If
         Return description
+    End Function
+
+    Public Function SaveFieldName()
+        _displayField = DisplayMember
     End Function
 
     'Public Function binarySearch(value)

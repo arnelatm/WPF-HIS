@@ -644,14 +644,6 @@ Namespace Services
         End Function
 
         Public Function GetDtRecords(ByVal tableName As String, ByVal Optional fields As String = Nothing, Optional filterKey As String = Nothing, Optional ByVal sortKey As String = Nothing) As Object Implements IService.GetDtRecords
-            If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
-                Dim nameField = sortKey
-                Dim nameFieldArabic = sortKey + "Ara"
-                If FieldExistInTable(tableName, nameFieldArabic) Then
-                    fields = Replace(fields,nameField,nameFieldArabic)
-                    sortKey = nameFieldArabic
-                End If
-            End If
             Return DataDao.GetDtRecords(tableName, fields, filterKey, sortKey)
         End Function
 
