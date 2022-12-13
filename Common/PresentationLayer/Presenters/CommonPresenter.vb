@@ -40,6 +40,19 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Sub CreateDataSourceThread(dataSourceNames As Array)
+            Dim tasks As List(Of Object) = GetTasks(dataSourceNames)
+            Dim i As Integer = 0
+            For Each taskItem In tasks
+                Dim dControl As CtComboBox = taskItem(1)
+                Dim vMember As String = TaskItem(2)
+                Dim dMember As String = taskItem(3)
+                Invoker.SetPropertyR(dControl, "DataSource", taskItem(0).Result)
+                dControl.Valuemember = vMember
+                dControl.DisplayMember = dMember
+            Next
+        End Sub
+
+        Private Function GetTasks(ByRef dataSourceNames As Array) As List(Of Object)
             Dim tasks As New List(Of Object)
             Dim itemCount As Int32 = dataSourceNames.Length
             Const LookupTableName As Int32 = 0
@@ -98,18 +111,11 @@ Namespace PresentationLayer.Presenters
                 Dim vMember As String = luFields.Split(",")(0).Trim()
                 Dim dMember As String = sortKey.Trim()
                 Dim sTask = {Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(tableName, luFields, filter, sortKey)), control, vMember, dMember}
-
                 tasks.Add(sTask)
             Next
-            For Each taskItem In tasks
-                Dim dControl As CtComboBox = taskItem(1)
-                Dim vMember As String = TaskItem(2)
-                Dim dMember As String = taskItem(3)
-                Invoker.SetPropertyR(dControl, "DataSource", taskItem(0).Result)
-                dControl.Valuemember = vMember
-                dControl.DisplayMember = dMember
-            Next
-        End Sub
+
+            Return tasks
+        End Function
 
         Private Shared Function LookupDataTableCreator(ByVal tableName As String, luFields As String, luFilter As String, sortKey As String) As DataTable
             Dim cd As New DataCreator()
