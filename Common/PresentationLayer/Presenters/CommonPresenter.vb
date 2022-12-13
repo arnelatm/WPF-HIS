@@ -20,19 +20,9 @@ Namespace PresentationLayer.Presenters
             MyBase.New()
         End Sub
 
-        'Shared Sub New()
-        '    DefaultFieldValueService = New Service("DefaultFieldValue")
-        'End Sub
-
         Public Sub New(itemView As IView)
             MyBase.New(itemView)
         End Sub
-
-        'Protected Sub New()
-        '    MyBase.New()
-        'End Sub
-
-        'Public Shared Property ModelDefaultFieldValue As IModelDefaultFieldValue
 
         Public Overrides Sub GoAddRecord()
             MyBase.GoAddRecord()
@@ -58,46 +48,31 @@ Namespace PresentationLayer.Presenters
             Const LookupFilter As Int32 = 3
             Const LookupSortKey As Int32 = 4
             Dim lookups As New List(Of DataLookup)
-            For i = 0 To UBound(dataSourceNames,1)
+            For i = 0 To UBound(dataSourceNames, 1)
                 Dim dtl As New DataLookup
-                dtl.TableName = datasourceNames(i, LookupTableName)
-                dtl.PropertyName = datasourceNames(i, PropertyFieldName)
-                If UBound(datasourceNames,2) > 1 Then
-                    dtl.LuFields = datasourceNames(i, LookupFieldNames)
+                dtl.TableName = dataSourceNames(i, LookupTableName)
+                dtl.PropertyName = dataSourceNames(i, PropertyFieldName)
+                If UBound(dataSourceNames, 2) > 1 Then
+                    dtl.LuFields = dataSourceNames(i, LookupFieldNames)
                 End If
-                If UBound(datasourceNames,2) > 2 Then
-                    dtl.Filter = datasourceNames(i, LookupFilter)
+                If UBound(dataSourceNames, 2) > 2 Then
+                    dtl.Filter = dataSourceNames(i, LookupFilter)
                 End If
-                If UBound(datasourceNames,2) > 3 Then
-                    dtl.SortKey = datasourceNames(i, LookupSortKey)
+                If UBound(dataSourceNames, 2) > 3 Then
+                    dtl.SortKey = dataSourceNames(i, LookupSortKey)
                 End If
                 ComposeLookupProperties(dtl)
-                dtl.LookupTask = Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(dtl))
+                dtl.LookUpTask = Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(dtl))
                 lookups.Add(dtl)
             Next
             Return lookups
         End Function
 
-        'Private Function CreateLuTasks(ByRef dataSourceNames As Array) As List(Of Task)
-        '    Dim luTasks As New List(Of Task)
-        '    Dim itemCount As Int32 = dataSourceNames.Length
-        '    Dim control As CtComboBox
-        '    Dim luFields As String = ""
-        '    Dim filter As String = ""
-        '    Dim sortKey As String = ""
-        '    For i = 0 To UBound(dataSourceNames, 1)
-        '        ComposeLookupProperties(dataSourceNames(i), TableName, luFields, filter, sortKey)
-        '        Dim sTask = {Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(TableName, luFields, filter, sortKey)), control, vMember, dMember}
-        '        luTasks.Add(sTask)
-        '    Next
-        '    Return luTasks
-        'End Function
-
         Private Shared Sub ComposeLookupProperties(dtl As DataLookup)
             If dtl.LuFields Is Nothing Then
                 dtl.SortKey = dtl.TableName + "Name"
                 dtl.NameField = dtl.TableName + "Name"
-                dtl.DisplayMember = dtl.NameField 
+                dtl.DisplayMember = dtl.NameField
                 dtl.ValueMember = "IdNo"
                 dtl.LuFields = dtl.NameField + ", IdNo, " + dtl.TableName + "Code"
             Else
@@ -134,11 +109,11 @@ Namespace PresentationLayer.Presenters
                 Dim nameFieldArabic As String = Dtl.NameField + "Ara"
                 Dim svc As New CommonService
                 If svc.FieldExistInTable(Dtl.TableName, nameFieldArabic) Then
-                    Dtl.NameField = nameFieldArabic
-                    Dtl.DisplayMember = nameFieldArabic
                     If Dtl.SortKey = Dtl.NameField Then
                         Dtl.SortKey = nameFieldArabic
                     End If
+                    Dtl.NameField = nameFieldArabic
+                    Dtl.DisplayMember = nameFieldArabic
                 End If
             End If
         End Sub
