@@ -1446,7 +1446,7 @@
         Me.cacCountryCode.ValueIsMandatory = false
         Me.cacCountryCode.ValueIsNullable = false
         Me.cacCountryCode.ValueIsNumeric = false
-        Me.cacCountryCode.ValueMember = "Code"
+        Me.cacCountryCode.ValueMember = "CountryCode"
         '
         'lblCountryCode
         '

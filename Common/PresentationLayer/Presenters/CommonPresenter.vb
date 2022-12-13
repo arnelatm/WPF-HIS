@@ -1,8 +1,11 @@
 ﻿' Category business object
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
+Imports System.Globalization
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries
+Imports AATM.Libraries.CBaseControlsLibrary
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
 Imports AATM.ServicesLayer.Services
@@ -44,6 +47,7 @@ Namespace PresentationLayer.Presenters
             Const LookupFieldNames As Int32 = 2
             Const LookupFilter As Int32 = 3
             Const LookupSortKey As Int32 = 4
+            Dim control As CtComboBox
             For i = 0 To UBound(dataSourceNames, 1)
                 Dim tableName As String = dataSourceNames(i, LookupTableName)
                 Dim fieldName As String = dataSourceNames(i, ControlFieldName)
@@ -59,15 +63,55 @@ Namespace PresentationLayer.Presenters
                 If UBound(dataSourceNames, 2) > 3 Then
                     sortKey = dataSourceNames(i, LookupSortKey)
                 End If
-                Dim sTask = {Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(tableName, luFields, filter, sortKey)), fieldName}
+                If luFields Is Nothing Then
+                    luFields = "IdNo" + "," + tableName + "Name" + "," + tableName + "Code"
+                    sortKey = tableName + "Name"
+                Else
+                    Dim fieldNames = luFields.Split(",")
+                    If fieldNames.Count() = 1 Then
+                        sortKey = fieldNames(0)
+                    Else
+                        If sortKey Is Nothing Then
+                            sortKey = fieldNames(1)
+                        End If
+                    End If
+                End If
+                If GlobalFunctions.IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+                    Dim nameField As String = sortKey
+                    Dim nameFieldArabic As String = sortKey + "Ara"
+                    Dim newFields As String = ""
+                    Dim svc As New CommonService
+                    If svc.FieldExistInTable(tableName, nameFieldArabic) Then
+                        Dim fieldNames = luFields.Split(",")
+                        For Each item In fieldNames
+                            If String.Compare(item, nameField, StringComparison.OrdinalIgnoreCase) = 0 Then
+                                newFields += nameFieldArabic + ","
+                            Else
+                                newFields += item + ","
+                            End If
+                        Next
+                        luFields = Left(newFields, Len(newFields) - 1)
+                        sortKey = nameFieldArabic
+                    End If
+                End If
+                control = GetFieldControlName(fieldName)
+                Dim vMember As String = luFields.Split(",")(0).Trim()
+                Dim dMember As String = sortKey.Trim()
+                Dim sTask = {Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(tableName, luFields, filter, sortKey)), control, vMember, dMember}
+
                 tasks.Add(sTask)
             Next
             For Each taskItem In tasks
-                Invoker.SetPropertyR(GetFieldControlName(taskItem(1)), "DataSource", taskItem(0).Result)
+                Dim dControl As CtComboBox = taskItem(1)
+                Dim vMember As String = TaskItem(2)
+                Dim dMember As String = taskItem(3)
+                Invoker.SetPropertyR(dControl, "DataSource", taskItem(0).Result)
+                dControl.Valuemember = vMember
+                dControl.DisplayMember = dMember
             Next
         End Sub
 
-        Private Shared Function LookupDataTableCreator(ByVal tableName As String, Optional luFields As String = Nothing, Optional luFilter As String = Nothing, Optional sortKey As String = Nothing) As DataTable
+        Private Shared Function LookupDataTableCreator(ByVal tableName As String, luFields As String, luFilter As String, sortKey As String) As DataTable
             Dim cd As New DataCreator()
             Dim data As DataTable = cd.CreateDataTable(tableName, luFields, luFilter, sortKey)
             cd = Nothing
@@ -87,21 +131,21 @@ Namespace PresentationLayer.Presenters
 
         Private Shared ReadOnly _sv = New CommonService()
 
-        Public Function CreateDataTable(tableName As String, Optional fieldNames As String = Nothing, Optional luFilter As String = Nothing, Optional sortKey As String = Nothing) As DataTable
-            Dim luFields As String()
-            If fieldNames Is Nothing Then
-                fieldNames = "IdNo" + "," + tableName + "Name" + "," + tableName + "Code"
-                sortKey = tableName + "Name"
-            Else
-                luFields = fieldNames.Split(",")
-                If luFields.Count() = 1 Then
-                    sortKey = luFields(0)
-                Else
-                    If sortKey Is Nothing Then
-                        sortKey = luFields(1)                        
-                    End If
-                End If
-            End If
+        Public Function CreateDataTable(tableName As String, fieldNames As String, luFilter As String, sortKey As String) As DataTable
+            'Dim luFields As String()
+            'If fieldNames Is Nothing Then
+            '    fieldNames = "IdNo" + "," + tableName + "Name" + "," + tableName + "Code"
+            '    sortKey = tableName + "Name"
+            'Else
+            '    luFields = fieldNames.Split(",")
+            '    If luFields.Count() = 1 Then
+            '        sortKey = luFields(0)
+            '    Else
+            '        If sortKey Is Nothing Then
+            '            sortKey = luFields(1)
+            '        End If
+            '    End If
+            'End If
             Return _sv.GetDtRecords(tableName, fieldNames, luFilter, sortKey)
         End Function
 
