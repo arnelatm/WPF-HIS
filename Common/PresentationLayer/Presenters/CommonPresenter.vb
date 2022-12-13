@@ -39,87 +39,113 @@ Namespace PresentationLayer.Presenters
             MakeDefaultValues()
         End Sub
 
-        Protected Sub CreateDataSourceThread(dataSourceNames As Array)
-            Dim tasks As List(Of Object) = GetTasks(dataSourceNames)
-            Dim i As Integer = 0
-            For Each taskItem In tasks
-                Dim dControl As CtComboBox = taskItem(1)
-                Dim vMember As String = TaskItem(2)
-                Dim dMember As String = taskItem(3)
-                Invoker.SetPropertyR(dControl, "DataSource", taskItem(0).Result)
-                dControl.Valuemember = vMember
-                dControl.DisplayMember = dMember
+        Protected Sub CreateDataSourceThread(dataSourceNames As Object)
+            Dim luItems As List(Of DataLookup)
+            luItems = CreateDataLookups(dataSourceNames)
+            For Each luItem As DataLookup In luItems
+                luItem.PropertyControl = GetFieldControlName(luItem.PropertyName)
+                luItem.Data = luItem.LookUpTask.Result
+                Invoker.SetPropertyR(luItem.PropertyControl, "DataSource", luItem.Data)
+                Invoker.SetPropertyR(luItem.PropertyControl, "DisplayMember", luItem.DisplayMember)
+                Invoker.SetPropertyR(luItem.PropertyControl, "ValueMember", luItem.ValueMember)
             Next
         End Sub
 
-        Private Function GetTasks(ByRef dataSourceNames As Array) As List(Of Object)
-            Dim tasks As New List(Of Object)
-            Dim itemCount As Int32 = dataSourceNames.Length
+        Private Shared Function CreateDataLookups(dataSourceNames As Object) As List(Of DataLookup)
             Const LookupTableName As Int32 = 0
-            Const ControlFieldName As Int32 = 1
+            Const PropertyFieldName As Int32 = 1
             Const LookupFieldNames As Int32 = 2
             Const LookupFilter As Int32 = 3
             Const LookupSortKey As Int32 = 4
-            Dim control As CtComboBox
-            For i = 0 To UBound(dataSourceNames, 1)
-                Dim tableName As String = dataSourceNames(i, LookupTableName)
-                Dim fieldName As String = dataSourceNames(i, ControlFieldName)
-                Dim luFields As String = Nothing
-                Dim filter As String = Nothing
-                Dim sortKey As String = Nothing
-                If UBound(dataSourceNames, 2) > 1 Then
-                    luFields = dataSourceNames(i, LookupFieldNames)
+            Dim lookups As New List(Of DataLookup)
+            For i = 0 To UBound(dataSourceNames,1)
+                Dim dtl As New DataLookup
+                dtl.TableName = datasourceNames(i, LookupTableName)
+                dtl.PropertyName = datasourceNames(i, PropertyFieldName)
+                If UBound(datasourceNames,2) > 1 Then
+                    dtl.LuFields = datasourceNames(i, LookupFieldNames)
                 End If
-                If UBound(dataSourceNames, 2) > 2 Then
-                    filter = dataSourceNames(i, LookupFilter)
+                If UBound(datasourceNames,2) > 2 Then
+                    dtl.Filter = datasourceNames(i, LookupFilter)
                 End If
-                If UBound(dataSourceNames, 2) > 3 Then
-                    sortKey = dataSourceNames(i, LookupSortKey)
+                If UBound(datasourceNames,2) > 3 Then
+                    dtl.SortKey = datasourceNames(i, LookupSortKey)
                 End If
-                If luFields Is Nothing Then
-                    luFields = "IdNo" + "," + tableName + "Name" + "," + tableName + "Code"
-                    sortKey = tableName + "Name"
-                Else
-                    Dim fieldNames = luFields.Split(",")
-                    If fieldNames.Count() = 1 Then
-                        sortKey = fieldNames(0)
-                    Else
-                        If sortKey Is Nothing Then
-                            sortKey = fieldNames(1)
-                        End If
-                    End If
-                End If
-                If GlobalFunctions.IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
-                    Dim nameField As String = sortKey
-                    Dim nameFieldArabic As String = sortKey + "Ara"
-                    Dim newFields As String = ""
-                    Dim svc As New CommonService
-                    If svc.FieldExistInTable(tableName, nameFieldArabic) Then
-                        Dim fieldNames = luFields.Split(",")
-                        For Each item In fieldNames
-                            If String.Compare(item, nameField, StringComparison.OrdinalIgnoreCase) = 0 Then
-                                newFields += nameFieldArabic + ","
-                            Else
-                                newFields += item + ","
-                            End If
-                        Next
-                        luFields = Left(newFields, Len(newFields) - 1)
-                        sortKey = nameFieldArabic
-                    End If
-                End If
-                control = GetFieldControlName(fieldName)
-                Dim vMember As String = luFields.Split(",")(0).Trim()
-                Dim dMember As String = sortKey.Trim()
-                Dim sTask = {Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(tableName, luFields, filter, sortKey)), control, vMember, dMember}
-                tasks.Add(sTask)
+                ComposeLookupProperties(dtl)
+                dtl.LookupTask = Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(dtl))
+                lookups.Add(dtl)
             Next
-
-            Return tasks
+            Return lookups
         End Function
 
-        Private Shared Function LookupDataTableCreator(ByVal tableName As String, luFields As String, luFilter As String, sortKey As String) As DataTable
+        'Private Function CreateLuTasks(ByRef dataSourceNames As Array) As List(Of Task)
+        '    Dim luTasks As New List(Of Task)
+        '    Dim itemCount As Int32 = dataSourceNames.Length
+        '    Dim control As CtComboBox
+        '    Dim luFields As String = ""
+        '    Dim filter As String = ""
+        '    Dim sortKey As String = ""
+        '    For i = 0 To UBound(dataSourceNames, 1)
+        '        ComposeLookupProperties(dataSourceNames(i), TableName, luFields, filter, sortKey)
+        '        Dim sTask = {Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(TableName, luFields, filter, sortKey)), control, vMember, dMember}
+        '        luTasks.Add(sTask)
+        '    Next
+        '    Return luTasks
+        'End Function
+
+        Private Shared Sub ComposeLookupProperties(dtl As DataLookup)
+            If dtl.LuFields Is Nothing Then
+                dtl.SortKey = dtl.TableName + "Name"
+                dtl.NameField = dtl.TableName + "Name"
+                dtl.DisplayMember = dtl.NameField 
+                dtl.ValueMember = "IdNo"
+                dtl.LuFields = dtl.NameField + ", IdNo, " + dtl.TableName + "Code"
+            Else
+                Dim fieldNames = dtl.LuFields.Split(",")
+                If fieldNames.Count() = 1 Then
+                    dtl.SortKey = fieldNames(0)
+                    dtl.NameField = fieldNames(0)
+                    dtl.ValueMember = fieldNames(0)
+                    dtl.DisplayMember = fieldNames(0)
+                ElseIf fieldNames.Count() = 2 Then
+                    dtl.NameField = fieldNames(0)
+                    dtl.DisplayMember = fieldNames(0)
+                    dtl.ValueMember = fieldNames(1)
+                    If dtl.SortKey Is Nothing Then
+                        dtl.SortKey = fieldNames(0)
+                    End If
+                ElseIf fieldNames.Count() = 3 Then
+                    dtl.NameField = fieldNames(0)
+                    dtl.DisplayMember = fieldNames(0) + "|" + fieldNames(2)
+                    dtl.ValueMember = fieldNames(1)
+                    If dtl.SortKey Is Nothing Then
+                        dtl.SortKey = fieldNames(0)
+                    End If
+                Else
+                    MessageBox.Show("Too much parameters passed!")
+                    Debugger.Break()
+                End If
+            End If
+            TranslateFields(dtl)
+        End Sub
+
+        Private Shared Sub TranslateFields(ByRef Dtl As DataLookup)
+            If GlobalFunctions.IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+                Dim nameFieldArabic As String = Dtl.NameField + "Ara"
+                Dim svc As New CommonService
+                If svc.FieldExistInTable(Dtl.TableName, nameFieldArabic) Then
+                    Dtl.NameField = nameFieldArabic
+                    Dtl.DisplayMember = nameFieldArabic
+                    If Dtl.SortKey = Dtl.NameField Then
+                        Dtl.SortKey = nameFieldArabic
+                    End If
+                End If
+            End If
+        End Sub
+
+        Private Shared Function LookupDataTableCreator(dtl As DataLookup) As DataTable
             Dim cd As New DataCreator()
-            Dim data As DataTable = cd.CreateDataTable(tableName, luFields, luFilter, sortKey)
+            Dim data As DataTable = cd.CreateDataTable(dtl)
             cd = Nothing
             Return data
         End Function
@@ -131,28 +157,31 @@ Namespace PresentationLayer.Presenters
             Return data
         End Function
 
+
+
+    End Class
+
+    Public Class DataLookup
+        Public Property TableName As String
+        Public Property PropertyName As String
+        Public Property PropertyControl As CtComboBox
+        Public Property LuFields As String
+        Public Property SortKey As String
+        Public Property Filter As String
+        Public Property ValueMember As String
+        Public Property DisplayMember As String
+        Public Property Data As DataTable
+        Public Property NameField As String
+        Public Property ExtraField As String
+        Public Property LookUpTask As Task(Of DataTable)
     End Class
 
     Public Class DataCreator
 
         Private Shared ReadOnly _sv = New CommonService()
 
-        Public Function CreateDataTable(tableName As String, fieldNames As String, luFilter As String, sortKey As String) As DataTable
-            'Dim luFields As String()
-            'If fieldNames Is Nothing Then
-            '    fieldNames = "IdNo" + "," + tableName + "Name" + "," + tableName + "Code"
-            '    sortKey = tableName + "Name"
-            'Else
-            '    luFields = fieldNames.Split(",")
-            '    If luFields.Count() = 1 Then
-            '        sortKey = luFields(0)
-            '    Else
-            '        If sortKey Is Nothing Then
-            '            sortKey = luFields(1)
-            '        End If
-            '    End If
-            'End If
-            Return _sv.GetDtRecords(tableName, fieldNames, luFilter, sortKey)
+        Public Function CreateDataTable(dtl As DataLookup) As DataTable
+            Return _sv.GetDtRecords(dtl.TableName, dtl.LuFields, dtl.Filter, dtl.SortKey)
         End Function
 
         Public Function CreateData(dataTableName As String) As List(Of Lookup.LookupData)
@@ -178,4 +207,5 @@ Namespace PresentationLayer.Presenters
         End Function
 
     End Class
+
 End Namespace

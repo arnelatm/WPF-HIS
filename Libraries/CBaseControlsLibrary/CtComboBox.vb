@@ -428,7 +428,7 @@ Public Class CtComboBox
     End Sub
 
     Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged
-        PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(1).ToString())
+        PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(0).ToString())
     End Sub
 
     Private Shadows Sub OnParentChanged(ByVal sender As Object, ByVal e As EventArgs)
@@ -944,9 +944,9 @@ Public Class CtComboBox
         Return description
     End Function
 
-    Public Function SaveFieldName()
-        _displayField = DisplayMember
-    End Function
+    'Public Function SaveFieldName()
+    '    _displayField = DisplayMember
+    'End Function
 
     'Public Function binarySearch(value)
     '    Dim index As Int32
