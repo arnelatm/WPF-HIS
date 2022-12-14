@@ -36,7 +36,7 @@ Namespace PresentationLayer.Presenters
                 luItem.PropertyControl = GetFieldControlName(luItem.PropertyName)
                 luItem.Data = luItem.LookUpTask.Result
                 Invoker.SetPropertyR(luItem.PropertyControl, "DataSource", luItem.Data)
-                Invoker.SetPropertyR(luItem.PropertyControl, "DisplayMember", luItem.DisplayMember)
+                Invoker.SetPropertyR(luItem.PropertyControl, "DisplayMember", luItem.Data.Columns(0).ColumnName)
                 Invoker.SetPropertyR(luItem.PropertyControl, "ValueMember", luItem.ValueMember)
             Next
         End Sub
@@ -69,54 +69,63 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Shared Sub ComposeLookupProperties(dtl As DataLookup)
+            Dim RightToLeftFormat = GlobalFunctions.IsRightToLeft(CultureInfo.CurrentCulture.ToString())
+            dtl.NameFieldOrig = dtl.TableName + "Name"
             If dtl.LuFields Is Nothing Then
-                dtl.SortKey = dtl.TableName + "Name"
-                dtl.NameField = dtl.TableName + "Name"
-                dtl.DisplayMember = dtl.NameField
+                dtl.NameField = TranslateNameField(dtl.TableName, dtl.NameFieldOrig)
+                dtl.NameDisplayValue = dtl.NameField + "+'-'+" + dtl.TableName + "Code"
                 dtl.ValueMember = "IdNo"
-                dtl.LuFields = dtl.NameField + ", IdNo, " + dtl.TableName + "Code"
+                dtl.LuFields = dtl.NameDisplayValue + " COLLATE SQL_Latin1_General_CP1_CI_AS, IdNo"
+                dtl.SortKey = dtl.NameField
             Else
                 Dim fieldNames = dtl.LuFields.Split(",")
                 If fieldNames.Count() = 1 Then
-                    dtl.SortKey = fieldNames(0)
-                    dtl.NameField = fieldNames(0)
-                    dtl.ValueMember = fieldNames(0)
-                    dtl.DisplayMember = fieldNames(0)
+                    dtl.NameField = TranslateNameField(dtl.TableName, dtl.NameFieldOrig)
+                    dtl.NameDisplayValue = dtl.NameField
+                    dtl.ValueMember = fieldNames(0).Trim()
+                    dtl.LuFields = dtl.NameDisplayValue + " COLLATE SQL_Latin1_General_CP1_CI_AS"
+                    dtl.SortKey = dtl.NameField
                 ElseIf fieldNames.Count() = 2 Then
-                    dtl.NameField = fieldNames(0)
-                    dtl.DisplayMember = fieldNames(0)
-                    dtl.ValueMember = fieldNames(1)
-                    If dtl.SortKey Is Nothing Then
-                        dtl.SortKey = fieldNames(0)
-                    End If
+                    dtl.NameField = TranslateNameField(dtl.TableName, dtl.NameFieldOrig)
+                    dtl.NameDisplayValue = dtl.NameField + "+'-'+" + fieldNames(1) + " COLLATE SQL_Latin1_General_CP1_CI_AS"
+                    dtl.ValueMember = fieldNames(1).Trim()
+                    dtl.LuFields = dtl.NameDisplayValue + "," + fieldNames(1)
+                    dtl.SortKey = dtl.NameField
                 ElseIf fieldNames.Count() = 3 Then
-                    dtl.NameField = fieldNames(0)
-                    dtl.DisplayMember = fieldNames(0) + "|" + fieldNames(2)
-                    dtl.ValueMember = fieldNames(1)
-                    If dtl.SortKey Is Nothing Then
-                        dtl.SortKey = fieldNames(0)
-                    End If
+                    dtl.NameField = fieldNames(0).Trim()
+                    dtl.NameDisplayValue = TranslateNameField(dtl.TableName, dtl.NameField) + "+'-'+" + fieldNames(2) + " COLLATE SQL_Latin1_General_CP1_CI_AS"
+                    dtl.LuFields = dtl.NameDisplayValue + "," + fieldNames(1)
+                    dtl.ValueMember = fieldNames(1).Trim()
+                    dtl.SortKey = dtl.NameField
                 Else
                     MessageBox.Show("Too much parameters passed!")
                     Debugger.Break()
                 End If
             End If
-            TranslateFields(dtl)
+            'TranslateFields(dtl)
         End Sub
 
-        Private Shared Sub TranslateFields(ByRef Dtl As DataLookup)
+        Private Shared Function TranslateNameField(tableName As String, fieldName As String) As String
+            Dim retValue As String = fieldName
             If GlobalFunctions.IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
-                Dim nameFieldArabic As String = Dtl.NameField + "Ara"
+                Dim nameFieldArabic As String = fieldName + "Ara"
                 Dim svc As New CommonService
-                If svc.FieldExistInTable(Dtl.TableName, nameFieldArabic) Then
-                    If Dtl.SortKey = Dtl.NameField Then
-                        Dtl.SortKey = nameFieldArabic
-                    End If
-                    Dtl.NameField = nameFieldArabic
-                    Dtl.DisplayMember = nameFieldArabic
+                If svc.FieldExistInTable(tableName, nameFieldArabic) Then
+                    retValue = fieldName + "Ara"
+                    'If Dtl.SortKey = Dtl.NameField Then
+                    '    Dtl.SortKey = nameFieldArabic
+                    'End If
+                    'Dtl.NameFieldToUse = nameFieldArabic
+                    'Dtl.DisplayMember = nameFieldArabic
+                    'dim luFields = dtl.LuFields.Split(",")
+                    'if luFields(0) = Dtl.NameField
+                    '    luFields(0) = nameFieldArabic
+                    '    dtl.LuFields = nameFieldArabic + if(luFields.Length > 1, "," + luFields(1), "") + if(luFields.Length > 2, "," + luFields(2), "")
+                    'End If
                 End If
             End If
-        End Sub
+            Return retValue
+        End Function
 
         Private Shared Function LookupDataTableCreator(dtl As DataLookup) As DataTable
             Dim cd As New DataCreator()
@@ -132,8 +141,6 @@ Namespace PresentationLayer.Presenters
             Return data
         End Function
 
-
-
     End Class
 
     Public Class DataLookup
@@ -147,8 +154,10 @@ Namespace PresentationLayer.Presenters
         Public Property DisplayMember As String
         Public Property Data As DataTable
         Public Property NameField As String
-        Public Property ExtraField As String
+        Public Property NameFieldOrig As String
+        Public Property NameDisplayValue As String
         Public Property LookUpTask As Task(Of DataTable)
+        Public Property NameFieldToUse As String
     End Class
 
     Public Class DataCreator
