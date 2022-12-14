@@ -112,16 +112,6 @@ Namespace PresentationLayer.Presenters
                 Dim svc As New CommonService
                 If svc.FieldExistInTable(tableName, nameFieldArabic) Then
                     retValue = fieldName + "Ara"
-                    'If Dtl.SortKey = Dtl.NameField Then
-                    '    Dtl.SortKey = nameFieldArabic
-                    'End If
-                    'Dtl.NameFieldToUse = nameFieldArabic
-                    'Dtl.DisplayMember = nameFieldArabic
-                    'dim luFields = dtl.LuFields.Split(",")
-                    'if luFields(0) = Dtl.NameField
-                    '    luFields(0) = nameFieldArabic
-                    '    dtl.LuFields = nameFieldArabic + if(luFields.Length > 1, "," + luFields(1), "") + if(luFields.Length > 2, "," + luFields(2), "")
-                    'End If
                 End If
             End If
             Return retValue
