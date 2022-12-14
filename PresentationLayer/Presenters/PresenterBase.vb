@@ -379,14 +379,11 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         compareLogic.Config.CompareChildren = True
         compareLogic.Config.MembersToIgnore.Add("DateCreated")
         compareLogic.Config.MembersToIgnore.Add("Errors")
-        'CallByName(View, "IgnoreTextBoxNumParserMessage", CallType.Set, True)
         Dim result As ComparisonResult = compareLogic.Compare(OriginalModel, View)
         If Not result.AreEqual Then
             CompareDifferences = result.DifferencesString
-            'Messaging.Show(result.DifferencesString, "Differences")
             retVal = True
         End If
-        'CallByName(View, "IgnoreTextBoxNumParserMessage", CallType.Set, False)
         Return retVal
     End Function
 
@@ -396,14 +393,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End If
         Return False
     End Function
-
-    'Public Function CountRecordWithKey(searchValue As String, searchFieldName As String) As Integer
-    '    Try
-    '        Return Service.CountRecordWithKey(searchValue, TableName, searchFieldName)
-    '    Catch ex As Exception
-    '        Return Nothing
-    '    End Try
-    'End Function
 
     Public Sub CreateDataTable(ByRef dataTable As DataTable, rowColumns As Object)
         For i = 0 To rowColumns.GetLength(0) - 1
@@ -1979,7 +1968,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             Debugger.Break()
             System.Windows.Forms.MessageBox.Show($"Field '" & propertyName & $"' is not present in the MainFieldsDictionary.")
         End If
-        'control.SaveFieldName()
         Return control
     End Function
 
@@ -1989,14 +1977,11 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Dim lookupObj
         lookupObj = SetLookupObject(dataTableName, control, dataFields, sortKey, filter)
         data = GetLookup(lookupObj)
-        'Invoker.SetProperty(control, "DataSource", {data})
-
-        Dim Task1 ', Task2 As Task
+        Dim Task1 
         Task1 = Task.Factory.StartNew(Sub() GetLookup(lookupObj))
         ''Task1 = Task.Factory.StartNew(Sub() CreateDataSource("Department", "ParentIdNo"))
         'Task2 = Task.Factory.StartNew(Sub() Method1("RevCostCenter", GetControlName("RevCostCenterIdNo")))          
         Task.WaitAll(Task1) ' ,Task2)
-
         Invoker.SetProperty(control, "DataSource", {data})
     End Sub
 
@@ -2063,10 +2048,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return dataList
     End Function
 
-    'Protected Sub GetLookupData(tableName As String, targetProperty As String, Optional filter As String = Nothing) 'As List(Of Lookup.LookupData)
-    '    SetLookupData(tableName, Me, targetProperty, filter))
-    'End Sub
-
     Protected Overloads Sub CreateLookupData(sourceTableName As String, targetProperty As String)
         Dim data As List(Of Lookup.LookupData)
         data = GetLookup(sourceTableName)
@@ -2096,10 +2077,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         data = GetLookup(sourceTableName, fields, sortKey, filter)
         Invoker.SetProperty(View, targetProperty, {data})
     End Sub
-
-    'Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String, sortField As String, fields As String(), Optional filter As String = Nothing)
-    '    Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, sortField, fields, filter))
-    'End Sub
 
     Protected Sub SetLookupData(ByVal sourceTableName As String, ByVal targetProperty As String, Optional ByVal sortKey As String = Nothing, ByVal Optional fields As String() = Nothing, Optional ByVal filter As String = Nothing)
         Dim data As List(Of Lookup.LookupData)

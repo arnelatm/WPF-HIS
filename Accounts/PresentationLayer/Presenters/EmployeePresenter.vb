@@ -132,7 +132,7 @@ Namespace PresentationLayer.Presenters
                                     {"Country", "CountryCode", Nothing, Nothing},
                                     {"Department", "DepartmentIdNo", Nothing, Nothing},
                                     {"Designation", "DesignationIdNo", Nothing, Nothing},
-                                    {"Country", "NationalityCode", "CountryCode, CountryName", Nothing},
+                                    {"Country", "NationalityCode", "CountryName,CountryCode", Nothing},
                                     {"Religion", "ReligionIdNo", Nothing, Nothing},
                                     {"PayCycle", "PayCycleIdNo", Nothing, Nothing},
                                     {"PayGroup", "PayGroupIdNo", Nothing, Nothing},
