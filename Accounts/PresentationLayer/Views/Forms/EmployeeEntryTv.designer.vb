@@ -177,7 +177,7 @@
         Me.tbpEarnings = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
         Me.DataGridViewEarnings = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.dgvSequenceEarning = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+        Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvDtComboBoxColumn()
         Me.dgvEarningRate = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
         Me.dgvEarningUnit = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         Me.dgvEarningAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
@@ -186,7 +186,7 @@
         Me.tbpDeductions = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
         Me.DataGridViewDeductions = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.dgvSequenceDeduction = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvDeductionIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+        Me.dgvDeductionIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvDtComboBoxColumn()
         Me.dgvDeductionRate = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
         Me.dgvDeductionUnit = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         Me.dgvDeductionAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
@@ -195,7 +195,7 @@
         Me.tbpPhones = New AATM.Libraries.CBaseControlsLibrary.CTabPage()
         Me.DataGridViewPhones = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvPhoneTypeIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+        Me.dgvPhoneTypeIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvDtComboBoxColumn()
         Me.dgvCountryTelIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
         Me.dgvAreaCode = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.PhoneNumber = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -207,7 +207,7 @@
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.DataGridViewLeaveCredits = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.dgvSequenceLeaveCredits = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.dgvLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+        Me.dgvLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvDtComboBoxColumn()
         Me.dgvLeaveAllowed = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
         Me.dgvPaidPercent = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
         Me.dgvCumulative = New System.Windows.Forms.DataGridViewCheckBoxColumn()
@@ -221,7 +221,7 @@
         Me.tbpDocuments = New System.Windows.Forms.TabPage()
         Me.DataGridViewDocuments = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.dgvSequenceDocument = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvDocumentIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+        Me.dgvDocumentIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvDtComboBoxColumn()
         Me.dgvNumber = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvIssueDate = New AATM.Libraries.CBaseControlsLibrary.CDgvDtpColumn()
         Me.dgvExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CDgvDtpColumn()
@@ -3917,7 +3917,7 @@ End Sub
         Friend WithEvents txtDutyHours As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents DataGridViewEarnings As Libraries.CBaseControlsLibrary.CDataGridView
         Friend WithEvents dgvSequenceEarning As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvEarningIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
+        Friend WithEvents dgvEarningIdNo As Libraries.CBaseControlsLibrary.CDgvDtComboBoxColumn
         Friend WithEvents dgvEarningRate As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
         Friend WithEvents dgvEarningUnit As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvEarningAmount As Libraries.CBaseControlsLibrary.CdgvMoneyColumn
@@ -3925,7 +3925,7 @@ End Sub
         Friend WithEvents IdNoDataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewDeductions As Libraries.CBaseControlsLibrary.CDataGridView
         Friend WithEvents dgvSequenceDeduction As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvDeductionIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
+        Friend WithEvents dgvDeductionIdNo As Libraries.CBaseControlsLibrary.CDgvDtComboBoxColumn
         Friend WithEvents dgvDeductionRate As Libraries.CBaseControlsLibrary.CdgvMoneyColumn
         Friend WithEvents dgvDeductionUnit As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvDeductionAmount As Libraries.CBaseControlsLibrary.CdgvMoneyColumn
@@ -3933,7 +3933,7 @@ End Sub
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewPhones As Libraries.CBaseControlsLibrary.CDataGridView
         Friend WithEvents dgvSequence As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvPhoneTypeIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
+        Friend WithEvents dgvPhoneTypeIdNo As Libraries.CBaseControlsLibrary.CDgvDtComboBoxColumn
         Friend WithEvents dgvCountryTelIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
         Friend WithEvents dgvAreaCode As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents PhoneNumber As Libraries.CBaseControlsLibrary.CDgvTextColumn
@@ -3961,7 +3961,7 @@ End Sub
         Friend WithEvents CLabel5 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents chkSupervisor As Libraries.CBaseControlsLibrary.CCheckBox
         Friend WithEvents dgvSequenceLeaveCredits As DataGridViewTextBoxColumn
-        Friend WithEvents dgvLeaveIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
+        Friend WithEvents dgvLeaveIdNo As Libraries.CBaseControlsLibrary.CDgvDtComboBoxColumn
         Friend WithEvents dgvLeaveAllowed As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
         Friend WithEvents dgvPaidPercent As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
         Friend WithEvents dgvCumulative As DataGridViewCheckBoxColumn
@@ -3980,7 +3980,7 @@ End Sub
         Friend WithEvents dgvEmployeeDocumentIdNo As DataGridViewTextBoxColumn
         Friend WithEvents dgvDocumentNote As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvSequenceDocument As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvDocumentIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
+        Friend WithEvents dgvDocumentIdNo As Libraries.CBaseControlsLibrary.CDgvDtComboBoxColumn
         Friend WithEvents dgvNumber As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvIssueDate As Libraries.CBaseControlsLibrary.CDgvDtpColumn
         Friend WithEvents dgvExpiryDate As Libraries.CBaseControlsLibrary.CDgvDtpColumn

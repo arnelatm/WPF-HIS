@@ -35,11 +35,14 @@ Namespace PresentationLayer.Views.Forms
 
 #Region "Fields"
 
-        Public Property Documents As List(Of Lookup.LookupData) Implements IEmployeeView.Documents
-        Public Property PhoneTypes As List(Of Lookup.LookupData) Implements IEmployeeView.PhoneTypes
-        Public Property Leaves As List(Of Lookup.LookupData) Implements IEmployeeView.Leaves
-        Public Property DeductionsByName As List(Of Lookup.LookupData) Implements IEmployeeView.DeductionsByName
-        Public Property EarningsByName As List(Of Lookup.LookupData) Implements IEmployeeView.EarningsByName
+        'Public Property Documents As List(Of Lookup.LookupData) Implements IEmployeeView.Documents
+        'Public Property PhoneTypes As List(Of Lookup.LookupData) Implements IEmployeeView.PhoneTypes
+        'Public Property Leaves As List(Of Lookup.LookupData) Implements IEmployeeView.Leaves
+        Public Property Documents As DataTable Implements IEmployeeView.Documents
+        Public Property PhoneTypes As DataTable Implements IEmployeeView.PhoneTypes
+        Public Property Leaves As DataTable Implements IEmployeeView.Leaves
+        Public Property DeductionsByName As DataTable Implements IEmployeeView.DeductionsByName
+        Public Property EarningsByName As DataTable Implements IEmployeeView.EarningsByName
         Public Property Unit As List(Of Lookup.LookupData) Implements IEmployeeView.Unit
 
         Public Property Active As Boolean Implements IEmployeeView.Active

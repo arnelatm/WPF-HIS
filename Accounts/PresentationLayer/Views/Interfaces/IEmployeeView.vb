@@ -51,11 +51,11 @@ Namespace PresentationLayer.Views.Interfaces
         Property EmployeePhones As List(Of EmployeePhoneView)
         Property EmployeeLeaveCredits As List(Of EmployeeLeaveCreditView)
         Property Picture As Image
-        Property PhoneTypes As List(Of Lookup.LookupData)
-        Property Documents As List(Of Lookup.LookupData)
-        Property Leaves As List(Of Lookup.LookupData)
-        Property DeductionsByName As List(Of Lookup.LookupData)
-        Property EarningsByName As List(Of Lookup.LookupData)
+        Property PhoneTypes As DataTable
+        Property Documents As DataTable
+        Property Leaves As DataTable
+        Property DeductionsByName As DataTable
+        Property EarningsByName As DataTable
         Property Unit As List(Of Lookup.LookupData)
     End Interface
 

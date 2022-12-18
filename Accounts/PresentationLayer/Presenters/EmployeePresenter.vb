@@ -128,8 +128,10 @@ Namespace PresentationLayer.Presenters
             CreateEnumDataSource(Of PayrollPaymentMethodSelection)("PaymentMethod")
             CreateEnumDataSource(Of SponsorTypeSelection)("SponsorType")
             CreateEnumDataSource(Of BloodTypeSelection)("BloodType")
+            CreateListDataSource("List", "Title", "NameTitle")
+            CreateEnumData(Of PayRateUnitSelection)(View.Unit)
             CreateDataSourceThread({{"Bank", "BankIdNo", Nothing, Nothing},
-                                    {"Country", "CountryCode", Nothing, Nothing},
+                                    {"Country", "CountryCode", "CountryName,CountryCode", Nothing},
                                     {"Department", "DepartmentIdNo", Nothing, Nothing},
                                     {"Designation", "DesignationIdNo", Nothing, Nothing},
                                     {"Country", "NationalityCode", "CountryName,CountryCode", Nothing},
@@ -138,13 +140,18 @@ Namespace PresentationLayer.Presenters
                                     {"PayGroup", "PayGroupIdNo", Nothing, Nothing},
                                     {"Employee", "SupervisorIdNo", Nothing, "Supervisor=1"}})
 
-            CreateListDataSource("List", "Title", "NameTitle")
-            CreateEnumData(Of PayRateUnitSelection)(View.Unit)
-            CreateLookupData("PhoneType", "PhoneTypes")
-            CreateLookupData("Document", "Documents", "DocumentType = '" + EnumToCode(DocumentTypeSelection.Employee) + "'")
-            CreateLookupData("Leave", "Leaves")
-            CreateLookupData("PayElement", "DeductionsByName", "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
-            CreateLookupData("PayElement", "EarningsByName", "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
+            CreateLookupDataThread({{"PayElement", "DeductionsByName", Nothing,"PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"},
+                                    {"PayElement", "EarningsByName", Nothing,"PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"},
+                                    {"PhoneType", "PhoneTypes", Nothing, Nothing},
+                                    {"Document", "Documents", Nothing, "DocumentType = '" + EnumToCode(DocumentTypeSelection.Employee) + "'"},
+                                    {"Leave", "Leaves", Nothing, Nothing}
+                                    })
+
+            'CreateLookupData("PhoneType", "PhoneTypes")
+            'CreateLookupData("Document", "Documents", "DocumentType = '" + EnumToCode(DocumentTypeSelection.Employee) + "'")
+            'CreateLookupData("Leave", "Leaves")
+            'CreateLookupData("PayElement", "DeductionsByName", "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
+            'CreateLookupData("PayElement", "EarningsByName", "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'")
         End Sub
 
         Public Function GetEmployeeBalance(idNo As Integer)

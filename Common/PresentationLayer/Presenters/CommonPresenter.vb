@@ -41,7 +41,20 @@ Namespace PresentationLayer.Presenters
             Next
         End Sub
 
-        Private Shared Function CreateDataLookups(dataSourceNames As Object) As List(Of DataLookup)
+        Protected Sub CreateLookupDataThread(dataSourceNames As Object)
+            Dim luItems As List(Of DataLookup)
+            luItems = CreateDataLookups(dataSourceNames)
+            For Each luItem As DataLookup In luItems
+                'luItem.PropertyControl = GetFieldControlName(luItem.PropertyName)
+                luItem.Data = luItem.LookUpTask.Result
+                'CallByName(View,luItem.PropertyName.ToString(),CallType.Set, luItem.Data)
+                Invoker.SetProperty(Me.View, luItem.PropertyName, luItem.Data)
+                'Invoker.SetPropertyR(luItem.PropertyControl, "DisplayMember", luItem.Data.Columns(0).ColumnName)
+                'Invoker.SetPropertyR(luItem.PropertyControl, "ValueMember", luItem.ValueMember)
+            Next
+        End Sub
+
+        Private Function CreateDataLookups(dataSourceNames As Object) As List(Of DataLookup)
             Const LookupTableName As Int32 = 0
             Const PropertyFieldName As Int32 = 1
             Const LookupFieldNames As Int32 = 2
@@ -68,7 +81,7 @@ Namespace PresentationLayer.Presenters
             Return lookups
         End Function
 
-        Private Shared Sub ComposeLookupProperties(dtl As DataLookup)
+        Private Sub ComposeLookupProperties(dtl As DataLookup)
             Dim RightToLeftFormat = GlobalFunctions.IsRightToLeft(CultureInfo.CurrentCulture.ToString())
             dtl.NameFieldOrig = dtl.TableName + "Name"
             If dtl.LuFields Is Nothing Then
@@ -105,7 +118,7 @@ Namespace PresentationLayer.Presenters
             'TranslateFields(dtl)
         End Sub
 
-        Private Shared Function TranslateNameField(tableName As String, fieldName As String) As String
+        Private Function TranslateNameField(tableName As String, fieldName As String) As String
             Dim retValue As String = fieldName
             If GlobalFunctions.IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
                 Dim nameFieldArabic As String = fieldName + "Ara"
@@ -117,14 +130,15 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
-        Private Shared Function LookupDataTableCreator(dtl As DataLookup) As DataTable
+        Private Function LookupDataTableCreator(dtl As DataLookup) As DataTable
             Dim cd As New DataCreator()
             Dim data As DataTable = cd.CreateDataTable(dtl)
+            data.Columns(0).ColumnName = "Name"
             cd = Nothing
             Return data
         End Function
 
-        Private Shared Function LookupDataCreator(ByVal tableName As String)
+        Private Function LookupDataCreator(ByVal tableName As String)
             Dim cd As New DataCreator()
             Dim data As List(Of Lookup.LookupData) = cd.CreateData(tableName)
             cd = Nothing
