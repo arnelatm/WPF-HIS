@@ -185,7 +185,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function GenerateCode(idNo As Integer) As String Implements IDaoAutoCode.GenerateCode
-            Return UpdateCode(Db, "Customer", "CustomerCode", "IdNo", idNo)
+            Return UpdateCode("Customer", "CustomerCode", "IdNo", idNo)
         End Function
 
     End Class

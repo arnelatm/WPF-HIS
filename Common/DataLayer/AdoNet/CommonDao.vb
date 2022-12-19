@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
         Public Sub New()
         End Sub
 
-        Protected Function UpdateCode(db As Db, tableName As String, codeFieldName As String, idFieldName As String, idNo As Integer) Implements ICommonDao.UpdateCode
+        Protected Function UpdateCode(tableName As String, codeFieldName As String, idFieldName As String, idNo As Integer) Implements ICommonDao.UpdateCode
             Dim sql1 As String
             Dim sql2 As String
             Dim retVal As Integer

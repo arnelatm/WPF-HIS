@@ -6,8 +6,7 @@ Namespace DataLayer
     Public Interface ICommonDao
         Inherits IBaseDao
 
-        Function UpdateCode(db As Db, tableName As String, codeFieldName As String, idFieldName As String, idNo As Integer) As Object
-        'Function UpdateCode(db As Db, tableName As String, idFieldName As String, idNo As Integer)
+        Function UpdateCode(tableName As String, codeFieldName As String, idFieldName As String, idNo As Integer) As Object
         Function GetNextCode(tableName As String, idNo As Integer) As String
         
 

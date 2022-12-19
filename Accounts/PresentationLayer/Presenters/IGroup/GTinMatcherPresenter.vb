@@ -63,19 +63,21 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Protected Overrides Sub CreateDataSources()
-            CreateDataSource("DrugDosageForm_View", "DosageForm", {"DosageForm"}, "DosageForm")
-            CreateDataSource("DrugUnitOfVolume_View", "UnitOfVolume", {"UnitOfVolume"}, "UnitOfVolume")
-            CreateDataSource("DrugUnitOfStrength_View", "UnitOfStrength", {"UnitOfStrength"}, "UnitOfStrength")
-            CreateDataSource("DrugPackageType_View", "PackageType", {"PackageType"}, "PackageType")
-            CreateDataSource("DrugRouteOfAdministration_View", "RouteOfAdministration", {"RouteOfAdministration"}, "RouteOfAdministration")
+            CreateDataSourceThread({{"DrugDosageForm_View", "DosageForm", "DosageForm"},
+                                    {"DrugUnitOfVolume_View", "UnitOfVolume", "UnitOfVolume"},
+                                    {"DrugUnitOfStrength_View", "UnitOfStrength", "UnitOfStrength"},
+                                    {"DrugPackageType_View", "PackageType", "PackageType"},
+                                    {"DrugRouteOfAdministration_View", "RouteOfAdministration", "RouteOfAdministration"}
+                                    })
         End Sub
 
         Public Overrides Sub GoFilter()
             If DataFilter Is Nothing Or DataFilter = "" Then
-                DataFilter = "QtyOnHand <> 0"
+                DataFilter = "QtyOnHand <> 0 and isnull(GTin,'')=''"
             Else
                 DataFilter = ""
             End If
+            View.DataFilter = DataFilter
             GoFirstRecord()
         End Sub
 
@@ -165,14 +167,6 @@ Namespace PresentationLayer.Presenters
                 View.ItemDetailsCode = Service.GenerateCode(View.IdNo)
             End If
         End Sub
-
-        'Public Sub OnAfterSaveItemDetails() Handles Me.AfterSave
-        '    If Service.RecordCount("StockPositionCurrent", "Item_Code", View.ItemDetailsCode, "BranchId = '02'") = 0 Then
-        '        Service.InsertRecord("StockPositionCurrent", {"BranchID", "Item_Code", "Batch", "Expiry", "WarehouseID", "PCSQty", "CashPrice", "CreditPrice", "CostPrice", "PurchaseNo", "TmpStock"},
-        '                                                {"String", "String", "String", "DateTime", "String", "Decimal", "Decimal", "Decimal", "Decimal", "Decimal", "Decimal"},
-        '                                                {"01", View.ItemDetailsCode, "000", Now(), "01", 0, 0, 0, 0, 0, 0})
-        '    End If
-        'End Sub
 
         Public Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
             If View.GTIN IsNot Nothing Or View.GTIN <> "" Then

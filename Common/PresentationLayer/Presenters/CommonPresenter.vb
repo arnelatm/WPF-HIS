@@ -83,8 +83,8 @@ Namespace PresentationLayer.Presenters
 
         Private Sub ComposeLookupProperties(dtl As DataLookup)
             Dim RightToLeftFormat = GlobalFunctions.IsRightToLeft(CultureInfo.CurrentCulture.ToString())
-            dtl.NameFieldOrig = dtl.TableName + "Name"
             If dtl.LuFields Is Nothing Then
+                dtl.NameFieldOrig = dtl.TableName + "Name"
                 dtl.NameField = TranslateNameField(dtl.TableName, dtl.NameFieldOrig)
                 dtl.NameDisplayValue = dtl.NameField + "+'-'+" + dtl.TableName + "Code"
                 dtl.ValueMember = "IdNo"
@@ -92,6 +92,7 @@ Namespace PresentationLayer.Presenters
                 dtl.SortKey = dtl.NameField
             Else
                 Dim fieldNames = dtl.LuFields.Split(",")
+                dtl.NameFieldOrig = fieldNames(0)
                 If fieldNames.Count() = 1 Then
                     dtl.NameField = TranslateNameField(dtl.TableName, dtl.NameFieldOrig)
                     dtl.NameDisplayValue = dtl.NameField
@@ -130,20 +131,20 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
-        Private Function LookupDataTableCreator(dtl As DataLookup) As DataTable
-            Dim cd As New DataCreator()
+        Private Function LookupDataTableCreator(dtl As DataLookup, Optional dataBase As String = Nothing) As DataTable
+            Dim cd As New DataCreator(Service)
             Dim data As DataTable = cd.CreateDataTable(dtl)
             data.Columns(0).ColumnName = "Name"
             cd = Nothing
             Return data
         End Function
 
-        Private Function LookupDataCreator(ByVal tableName As String)
-            Dim cd As New DataCreator()
-            Dim data As List(Of Lookup.LookupData) = cd.CreateData(tableName)
-            cd = Nothing
-            Return data
-        End Function
+        'Private Function LookupDataCreator(ByVal tableName As String)
+        '    Dim cd As New DataCreator(Service)
+        '    Dim data As List(Of Lookup.LookupData) = cd.CreateData(tableName)
+        '    cd = Nothing
+        '    Return data
+        'End Function
 
     End Class
 
@@ -166,7 +167,11 @@ Namespace PresentationLayer.Presenters
 
     Public Class DataCreator
 
-        Private Shared ReadOnly _sv = New CommonService()
+        Private Shared _sv As Service
+        
+        Public Sub New(svc As Service) 
+            _sv = svc            
+        End Sub
 
         Public Function CreateDataTable(dtl As DataLookup) As DataTable
             Return _sv.GetDtRecords(dtl.TableName, dtl.LuFields, dtl.Filter, dtl.SortKey)

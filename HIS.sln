@@ -145,6 +145,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQuer
 		Find all object references for a specific object.sql = Find all object references for a specific object.sql
 		Find All Tables without Primary KEy.sql = Find All Tables without Primary KEy.sql
 		Find duplicate fields in a table.sql = Find duplicate fields in a table.sql
+		FindStringInAllTablesInAllColumns.sql = FindStringInAllTablesInAllColumns.sql
 		Look for tables containing field name.sql = Look for tables containing field name.sql
 		Query changed tables in a database.sql = Query changed tables in a database.sql
 		Query Sql Database for a certain name.sql = Query Sql Database for a certain name.sql
