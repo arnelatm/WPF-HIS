@@ -52,8 +52,7 @@ Public Class Cache
     Private cachePages As DataPage()
     Private dataSupply As IDataPageRetriever
 
-    Public Sub New(ByVal dataSupplier As IDataPageRetriever,
-        ByVal rowsPerPage As Integer)
+    Public Sub New(ByVal dataSupplier As IDataPageRetriever, ByVal rowsPerPage As Integer)
 
         dataSupply = dataSupplier
         Cache.RowsPerPage = rowsPerPage

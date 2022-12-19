@@ -1020,7 +1020,7 @@ Public Class CDataGridView
         For Each column As DataColumn In retriever.Columns
             Columns.Add(column.ColumnName, column.ColumnName)
         Next
-        _memoryCache = New Cache(retriever, 16)
+        _memoryCache = New Cache(retriever, 500)
         RowCount = retriever.RowCount
         AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells)
     End Sub

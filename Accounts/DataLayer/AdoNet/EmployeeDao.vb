@@ -228,7 +228,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function GenerateCode(idNo As Integer) As String Implements IDaoAutoCode.GenerateCode
-            Return UpdateCode(_db, "Employee", "EmployeeCode", "IdNo", idNo)
+            Return UpdateCode("Employee", "EmployeeCode", "IdNo", idNo)
         End Function
 
         Public Function ToSqlImage(ByVal imageIn As System.Drawing.Image) As Byte()

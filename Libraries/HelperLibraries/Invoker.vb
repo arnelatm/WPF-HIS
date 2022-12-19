@@ -49,7 +49,7 @@ Public NotInheritable Class Invoker
     Public Shared Function SetPropertyR(ByRef cControl As Control, ByVal sName As String, ByVal ParamArray yArguments() As Object) As Object
         ' ReSharper disable once VBPossibleMistakenCallToGetType.2
         Try
-            Return cControl.GetType().InvokeMember(sName, SetPublicNonPublicPropertyFieldFlags, Nothing, cControl, yArguments)
+            'Return cControl.GetType().InvokeMember(sName, SetPublicNonPublicPropertyFieldFlags, Nothing, cControl, yArguments)
         Catch ex As Exception
             Debugger.Break()
             Return Nothing

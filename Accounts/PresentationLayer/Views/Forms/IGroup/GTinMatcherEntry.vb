@@ -4,6 +4,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Forms
@@ -69,6 +70,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub MakeDataGridViews()
+            DataGridViewItems.DataFilter = DataFilter
             DataGridViewItems.MakeDataRetrieverCache("ItemDetailsQty_View", "ItemNameEnglish,Primary_Key,Item_Code,GTin,Price_Cash,Pack1,Pack2,Pack3,QtyOnHand", "IGroupClinic")
             DataGridViewDrugs.MakeDataRetrieverCache("DrugList", "[Trade Name],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume,IdNo,GTin,[Package Size],[Package Type],[Public Price],[Dosage Form],[Generic Name],[RegistrationNo],[Route Of Administration]", "IGroupClinic")
         End Sub
@@ -186,7 +188,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property UnitOfStrength As String Implements IItemDetailsView.UnitOfStrength
             Get
-                Return cboUnitOfStrength.GetNullableValue(Of String)
+                Return cboUnitOfStrength.GetValue(Of String)
             End Get
             Set(value As String)
                 cboUnitOfStrength.SetValue(value)
@@ -195,7 +197,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property UnitOfVolume As String Implements IItemDetailsView.UnitOfVolume
             Get
-                Return cboUnitOfVolume.GetNullableValue(Of String)
+                Return cboUnitOfVolume.GetValue(Of String)
             End Get
             Set(value As String)
                 cboUnitOfVolume.SetValue(value)
@@ -204,7 +206,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PackageType As String Implements IItemDetailsView.PackageType
             Get
-                Return cboPackageType.GetNullableValue(Of String)
+                Return cboPackageType.GetValue(Of String)
             End Get
             Set(value As String)
                 cboPackageType.SetValue(value)
@@ -213,7 +215,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DosageForm As String Implements IItemDetailsView.DosageForm
             Get
-                Return cboDosageForm.GetNullableValue(Of String)
+                Return cboDosageForm.GetValue(Of String)
             End Get
             Set(value As String)
                 cboDosageForm.SetValue(value)
@@ -222,7 +224,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property RouteOfAdministration As String Implements IItemDetailsView.RouteOfAdministration
             Get
-                Return cboRouteOfAdministration.GetNullableValue(Of String)
+                Return cboRouteOfAdministration.GetValue(Of String)
             End Get
             Set(value As String)
                 cboRouteOfAdministration.SetValue(value)
@@ -608,6 +610,14 @@ Namespace PresentationLayer.Views.Forms
                     tsDrugsCount.Text = "of " + (dataGridView.RowCount()).ToString()
                     tsDrugsCurrentRecord.Text = (dataGridView.CurrentRow.Index + 1).ToString()
                 End If
+            End If
+        End Sub
+
+        Protected Overrides Sub PublishClickedButton(buttonClicked As ButtonClicked)
+            MyBase.PublishClickedButton(buttonClicked)
+            If buttonClicked = ButtonClicked.Filter Or buttonClicked = ButtonClicked.Save Then
+                MakeDataGridViews()                
+                tsItemsCount.Text = DataGridViewItems.RowCount                
             End If
         End Sub
 

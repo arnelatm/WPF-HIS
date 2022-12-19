@@ -32,12 +32,12 @@ Namespace AdoNet
         Public ReadOnly Property RowCount() As Integer
             Get
                 ' Return the existing value if it has already been determined.
-                If Not rowCountValue = -1 Then
-                    Return rowCountValue
-                End If
+                'If Not rowCountValue = -1 Then
+                '    Return rowCountValue
+                'End If
 
                 ' Retrieve the row count from the database.
-                _command.CommandText = "SELECT COUNT(*) FROM " & _tableName
+                _command.CommandText = "SELECT COUNT(*) FROM " & _tableName & IIf(_dataFilter Is Nothing, "", " WHERE " & _dataFilter)
                 rowCountValue = CInt(_command.ExecuteScalar())
                 Return rowCountValue
             End Get
@@ -54,7 +54,7 @@ Namespace AdoNet
 
                 ' Retrieve the column information from the database.
                 ' "Primary_Key,Item_Code,GTin,ItemNameEnglish,Price_Cash,Pack1,Pack2,Pack3"
-                _command.CommandText = "SELECT " & _columnList & " FROM " & _tableName & IIf(_dataFilter Is Nothing, "", " where " & _dataFilter)
+                _command.CommandText = "SELECT " & _columnList & " FROM " & _tableName & IIf(_dataFilter Is Nothing OrElse _dataFilter = "", "", " where " & _dataFilter)
                 Dim adapter As New SqlDataAdapter()
                 adapter.SelectCommand = _command
                 Dim table As New DataTable()
@@ -125,7 +125,8 @@ Namespace AdoNet
             ' with the row specified by the lowerPageBoundary parameter.
             _command.CommandText = "Select Top " & rowsPerPage & " " &
                                    CommaSeparatedListOfColumnNames & " From " & _tableName &
-                                   " WHERE " & _sortkey & " NOT IN (SELECT TOP " &
+                                   " WHERE " & IIf(_dataFilter Is Nothing,"",_dataFilter + " and ") &
+                                   _sortkey & " NOT IN (SELECT TOP " &
                                    lowerPageBoundary & " " & _sortkey & " From [" &
                                    _tableName & "] Order by " & _sortkey &
                                    ") Order By " & _sortkey
