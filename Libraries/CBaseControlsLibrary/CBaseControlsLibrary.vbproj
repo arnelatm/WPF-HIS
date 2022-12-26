@@ -103,6 +103,12 @@
     <Compile Include="CDgvDtComboBoxEditingControl.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CDataGridFindForm.designer.vb">
+      <DependentUpon>CDataGridFindForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CDataGridFindForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CtComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -488,6 +494,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BFGregorianCalendar.resx">
       <DependentUpon>BFGregorianCalendar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CDataGridFindForm.resx">
+      <DependentUpon>CDataGridFindForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CListSelector.resx">
       <DependentUpon>CListSelector.vb</DependentUpon>

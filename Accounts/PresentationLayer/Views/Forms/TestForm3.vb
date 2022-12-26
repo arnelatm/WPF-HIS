@@ -44,7 +44,7 @@ Public Class TestForm3
         ' and to initialize the DataGridView columns and rows.
         Try
             Dim retriever As New DataRetriever(table, "Primary_Key,Item_Code,GTin,ItemNameEnglish,Price_Cash,Pack1,Pack2,Pack3", "IGroupClinic")
-            memoryCache = New Cache(retriever, 16)
+            memoryCache = New Cache(retriever, 100)
             For Each column As DataColumn In retriever.Columns
                 dataGridView1.Columns.Add(
                     column.ColumnName, column.ColumnName)

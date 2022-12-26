@@ -21,7 +21,7 @@ Public Class CDataGridView
     Private _firstVisibleColumn As Integer = -1
     Private _insertColumnAdded As Boolean = False
     Private _lastEditableColumn As Integer = -1
-    Private  _memoryCache As Cache
+    Private _memoryCache As Cache
     Private ReadOnly _origEditMode As DataGridViewEditMode
 
     Public Sub New()
@@ -66,6 +66,15 @@ Public Class CDataGridView
     Public Property DisplayOnly As Boolean
 
     Public Property Ea As EventAggregator
+    'Public Property FindDataType As DataTypeEnum
+    'Public Property FindEnabled As Boolean
+    'Public Property BegFindValue As Object
+    'Public Property EndFindValue As Object
+    'Public Property SearchPlace As SearchPlaceEnum
+    'Public Property FieldName As String
+    'Public Property FieldDescription As String
+    'Public Property IgnoreCase As Boolean
+
 
     Private Sub DataGridView_DataSourceChanged(sender As Object, e As EventArgs) Handles Me.DataSourceChanged
         If Columns(SequenceColumn) IsNot Nothing Then
@@ -212,8 +221,6 @@ Public Class CDataGridView
     Public ReadOnly Property FindDataSource As Object Implements IFindableControl.FindDataSource
 
     Public ReadOnly Property FindDisplayMember As String Implements IFindableControl.FindDisplayMember
-
-    Public ReadOnly Property SearchMode As IFindableControl.SearchModeEnum Implements IFindableControl.SearchMode
 
     Public ReadOnly Property FindValueMember As String Implements IFindableControl.FindValueMember
 
@@ -979,6 +986,22 @@ Public Class CDataGridView
 
     Public Property IsDirty As Boolean = False
 
+    Public ReadOnly Property SearchMode As IFindableControl.SearchModeEnum Implements IFindableControl.SearchMode
+        Get
+            Throw New NotImplementedException()
+        End Get
+    End Property
+
+    Private _previousColumnSearch As Short
+    Private _previousSelectedRow As Integer
+    Private _previousTextSearch As String
+    Private _previousSearchPlace As IFindableControl.SearchPlaceEnum
+    Private _previousBegDateSearch As Date
+    Private _previousEndDateSearch As Date
+    Private _previousBegValueSearch As Decimal?
+    Private _previousEndValueSearch As Decimal?
+    Private _existingFind As Boolean
+
     'Executes when Cell Value on a DataGridView changes
     Private Sub DataGridCellValueChanged(sender As DataGridView, e As DataGridViewCellEventArgs) Handles MyBase.CellValueChanged
         'check that row isn't -1, i.e. creating datagrid header
@@ -1020,9 +1043,14 @@ Public Class CDataGridView
         For Each column As DataColumn In retriever.Columns
             Columns.Add(column.ColumnName, column.ColumnName)
         Next
-        _memoryCache = New Cache(retriever, 500)
+        _memoryCache = New Cache(retriever, 100)
         RowCount = retriever.RowCount
         AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells)
+        Dim i As Integer = 0
+        For Each item As DataColumn In retriever.Columns
+            Me.Columns(i).ValueType = item.DataType
+            i += 1
+        Next
     End Sub
 
     Private Sub dataGridView_CellValueNeeded(ByVal sender As Object, ByVal e As DataGridViewCellValueEventArgs) Handles MyBase.CellValueNeeded
@@ -1030,6 +1058,485 @@ Public Class CDataGridView
             e.Value = _memoryCache.RetrieveElement(e.RowIndex, e.ColumnIndex)
         End If
     End Sub
+
+    Private Sub DataGridViewReconciliationItems_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
+        Dim hitTestInfo As DataGridView.HitTestInfo
+        Dim continueSearch As Boolean = False
+        Dim matchFound As Integer = -1
+        If e.Button = MouseButtons.Right Then
+            hitTestInfo = Me.HitTest(e.X, e.Y)
+            If _existingFind Then
+                If Messaging.Show(True, "AskContinueWithPreviousSearch",
+                                  MessageBoxButtons.YesNo,
+                                  MessageBoxIcon.Warning,
+                                  MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
+                    matchFound = ContinuePreviousSearch()
+                    If matchFound >= 0 Then
+                        continueSearch = True
+                    Else
+                        continueSearch = False
+                    End If
+                Else
+                    continueSearch = False
+                End If
+            End If
+            If Not continueSearch Then
+                _existingFind = False
+                FindValue(hitTestInfo.ColumnIndex)
+            End If
+        End If
+    End Sub
+
+    'Private Property BegFindValue As Object
+    'Private Property SearchPlace As String
+    'Private Property IgnoreCase As Boolean
+
+    Private Sub FindValue(ByRef columnNo As Int16)
+        Dim myForm = FindForm()
+        Dim sw As Integer = 0
+        Dim pnt As Point
+        Dim dataTypeEnum As IFindableControl.DataTypeEnum
+        'If TypeOf Columns(columnNo) Is IFindableControl Then
+        ' Dim columnData As IFindableControl = Columns(columnNo)
+        'columnData = Columns(columnNo)
+        Dim columnDataType = Columns(columnNo).ValueType
+        _previousColumnSearch = columnNo
+        dataTypeEnum = GetObjectDataType(columnDataType)
+        'columnData.FindDataType = dataTypeEnum
+        Dim searchForm As CDataGridFindForm
+        searchForm = New CDataGridFindForm(Me, columnNo)
+        Dim screenRectangle As Rectangle
+        Dim formLocation As Point
+        searchForm.SetFieldDescription(Columns(columnNo).HeaderText)
+        screenRectangle = Screen.PrimaryScreen.WorkingArea
+        searchForm.StartPosition = FormStartPosition.Manual
+        pnt = myForm.PointToScreen(Location)
+        If formLocation.Y + searchForm.Height > screenRectangle.Height Then
+            formLocation.Y = pnt.Y - searchForm.Height + Height
+        End If
+        searchForm.Location = formLocation
+        If searchForm.ShowDialog() = DialogResult.OK Then
+            Dim textToSearch As String
+            Dim searchPlace As IFindableControl.SearchPlaceEnum
+            Dim ignoreCase As Boolean
+            If Not _existingFind Then
+                _existingFind = True
+            End If
+            If dataTypeEnum = IFindableControl.SearchModeEnum.TextBox Then
+                textToSearch = searchForm.TxtTextToSearch.Text
+                searchPlace = searchForm.SearchLocation
+                ignoreCase = searchForm.chkIgnoreCase.Checked
+                If textToSearch <> "" Then
+                    SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                    Try
+                        ClearSelection()
+                        For Each row As DataGridViewRow In Rows
+                            If searchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField Then
+                                ' search anywhere
+                                If ignoreCase Then
+                                    If row.Cells(columnNo).Value IsNot Nothing AndAlso row.Cells(columnNo).Value.ToString().ToLower().Contains(textToSearch.ToLower()) Then
+                                        row.Selected = True
+                                        If sw = 0 Then
+                                            'scroll and move to the first matching record
+                                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+                                            sw = 1
+                                            _previousSelectedRow = row.Index()
+                                        End If
+                                    End If
+                                Else
+                                    If row.Cells(columnNo).Value IsNot Nothing AndAlso row.Cells(columnNo).Value.ToString().Contains(textToSearch) Then
+                                        row.Selected = True
+                                        If sw = 0 Then
+                                            'scroll and move to the first matching record
+                                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+                                            sw = 1
+                                            _previousSelectedRow = row.Index()
+                                        End If
+                                    End If
+                                End If
+                            ElseIf searchPlace = IFindableControl.SearchPlaceEnum.ExactValue Then
+                                ' exact match
+                                If row.Cells(columnNo).Value.ToString().Equals(textToSearch) Then
+                                    row.Selected = True
+                                    If sw = 0 Then
+                                        'scroll and move to the first matching record
+                                        FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+                                        sw = 1
+                                        _previousSelectedRow = row.Index()
+                                    End If
+                                End If
+                            Else
+                                ' start of text
+                                If ignoreCase Then
+                                    If row.Cells(columnNo).Value.ToString().ToLower().StartsWith(textToSearch.ToLower()) Then
+                                        row.Selected = True
+                                        If sw = 0 Then
+                                            'scroll and move to the first matching record
+                                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+                                            sw = 1
+                                            _previousSelectedRow = row.Index()
+                                        End If
+                                    End If
+                                Else
+                                    If row.Cells(columnNo).Value.ToString().StartsWith(textToSearch) Then
+                                        row.Selected = True
+                                        If sw = 0 Then
+                                            'scroll and move to the first matching record
+                                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+                                            sw = 1
+                                            _previousSelectedRow = row.Index()
+                                        End If
+                                    End If
+                                End If
+                            End If
+                        Next
+                        _previousTextSearch = textToSearch
+                        _previousSearchPlace = searchPlace
+                    Catch exc As Exception
+                        MessageBox.Show(exc.Message)
+                    End Try
+                End If
+            End If
+        End If
+        '    ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.Date Then
+        '        Dim dBegDate As Date? = CallByName(columnData, "BegFindValue", CallType.Get)
+        '        Dim dEndDate As Date? = CallByName(columnData, "EndFindValue", CallType.Get)
+        '        Dim dBDate As Date
+        '        Dim dEDate As Date
+
+        '        If dBegDate Is Nothing Then
+        '        Else
+        '            If dEndDate Is Nothing Then
+        '                dBDate = Convert.ToDateTime(dBegDate)
+        '                dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, dBDate)
+        '                'searchString = fieldName & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & fieldName & " < '" & dEDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
+        '            Else
+        '                dBDate = Convert.ToDateTime(dBegDate)
+        '                dEDate = Convert.ToDateTime(dEndDate)
+        '                'dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, dEDate)
+        '                'searchString = fieldName & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & fieldName & " < '" & dEDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
+        '            End If
+        '        End If
+        '        SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        '        Try
+        '            ClearSelection()
+        '            For Each row As DataGridViewRow In Rows
+        '                Dim colDate As Date = row.Cells(columnNo).Value
+        '                If DateIsBetween(colDate, dBDate, dEDate) Then
+        '                    'If DateIsBetween(colDate, dBegDate, dEndDate) Then
+        '                    row.Selected = True
+        '                    If sw = 0 Then
+        '                        'scroll and move to the first matching record
+        '                        FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+        '                        _previousSelectedRow = SelectedRows(0).Index
+        '                        sw = 1
+        '                    End If
+        '                    'If colDate.ToString("yyyyMMdd") >= dBDate.ToString("yyyyMMdd") And colDate.ToString("yyyMMdd") < dEDate.ToString("yyyyMMdd") Then
+        '                    'row.Selected = True
+        '                    'If sw = 0 Then
+        '                    '    'scroll and move to the first matching record
+        '                    '    FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+        '                    '    _previousSelectedRow = SelectedRows(0).Index
+        '                    '    sw = 1
+        '                    'End If
+        '                    'End If
+        '                End If
+        '            Next
+        '            _previousBegDateSearch = dBDate
+        '            _previousEndDateSearch = dEDate
+        '        Catch exc As Exception
+        '            MessageBox.Show(exc.Message)
+        '        End Try
+        '    ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.Decimal Then
+        '        Dim begValue = CallByName(columnData, "BegFindValue", CallType.Get)
+        '        Dim endValue = CallByName(columnData, "EndFindValue", CallType.Get)
+        '        Dim dBegValue As Decimal?
+        '        Dim dEndValue As Decimal?
+        '        If begValue Is Nothing Then
+        '            dBegValue = Nothing
+        '        Else
+        '            dBegValue = Convert.ToDecimal(begValue)
+        '        End If
+        '        If endValue Is Nothing Then
+        '            dEndValue = Nothing
+        '        Else
+        '            dEndValue = Convert.ToDecimal(endValue)
+        '        End If
+        '        SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        '        Try
+        '            ClearSelection()
+        '            For Each row As DataGridViewRow In Rows
+        '                Dim colValue As Decimal? = row.Cells(columnNo).Value
+        '                If dBegValue Is Nothing AndAlso dEndValue Is Nothing Then
+        '                    If colValue Is Nothing Then
+        '                        row.Selected = True
+        '                        If sw = 0 Then
+        '                            'scroll and move to the first matching record
+        '                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+        '                            sw = 1
+        '                            _previousSelectedRow = row.Index()
+        '                        End If
+        '                    End If
+        '                ElseIf dEndValue Is Nothing Then
+        '                    If colValue >= dBegValue Then
+        '                        row.Selected = True
+        '                        If sw = 0 Then
+        '                            'scroll and move to the first matching record
+        '                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+        '                            _previousSelectedRow = row.Index()
+        '                            sw = 1
+        '                        End If
+        '                    End If
+        '                ElseIf dBegValue Is Nothing Then
+        '                    If colValue <= dEndValue Then
+        '                        row.Selected = True
+        '                        If sw = 0 Then
+        '                            'scroll and move to the first matching record
+        '                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+        '                            _previousSelectedRow = row.Index()
+        '                            sw = 1
+        '                        End If
+        '                    End If
+        '                Else
+        '                    If colValue >= dBegValue And colValue <= dEndValue Then
+        '                        'If DateIsBetween(colDate, dBegValue, dEndValue) Then
+        '                        row.Selected = True
+        '                        If sw = 0 Then
+        '                            'scroll and move to the first matching record
+        '                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+        '                            _previousSelectedRow = row.Index()
+        '                            sw = 1
+        '                        End If
+        '                    End If
+        '                End If
+        '            Next
+        '            _previousBegValueSearch = dBegValue
+        '            _previousEndValueSearch = dEndValue
+        '        Catch exc As Exception
+        '            MessageBox.Show(exc.Message)
+        '        End Try
+        '    ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.Integer Then
+        '        Dim begValue = CallByName(columnData, "BegFindValue", CallType.Get)
+        '        Dim endValue = CallByName(columnData, "EndFindValue", CallType.Get)
+        '        Dim dBegValue As Integer?
+        '        Dim dEndValue As Integer?
+        '        If begValue Is Nothing Then
+        '            dBegValue = Nothing
+        '        Else
+        '            dBegValue = Convert.ToInt32(begValue)
+        '        End If
+        '        If endValue Is Nothing Then
+        '            dEndValue = Nothing
+        '        Else
+        '            dEndValue = Convert.ToInt32(endValue)
+        '        End If
+        '        SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        '        Try
+        '            ClearSelection()
+        '            For Each row As DataGridViewRow In Rows
+        '                Dim colValue As Integer? = row.Cells(columnNo).Value
+        '                If dBegValue Is Nothing AndAlso dEndValue Is Nothing Then
+        '                    If colValue Is Nothing Then
+        '                        row.Selected = True
+        '                        If sw = 0 Then
+        '                            'scroll and move to the first matching record
+        '                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+        '                            sw = 1
+        '                            _previousSelectedRow = row.Index()
+        '                        End If
+        '                    End If
+        '                ElseIf dEndValue Is Nothing Then
+        '                    If colValue >= dBegValue Then
+        '                        row.Selected = True
+        '                        If sw = 0 Then
+        '                            'scroll and move to the first matching record
+        '                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+        '                            _previousSelectedRow = row.Index()
+        '                            sw = 1
+        '                        End If
+        '                    End If
+        '                ElseIf dBegValue Is Nothing Then
+        '                    If colValue <= dEndValue Then
+        '                        row.Selected = True
+        '                        If sw = 0 Then
+        '                            'scroll and move to the first matching record
+        '                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+        '                            _previousSelectedRow = row.Index()
+        '                            sw = 1
+        '                        End If
+        '                    End If
+        '                Else
+        '                    If colValue >= dBegValue And colValue <= dEndValue Then
+        '                        'If DateIsBetween(colDate, dBegValue, dEndValue) Then
+        '                        row.Selected = True
+        '                        If sw = 0 Then
+        '                            'scroll and move to the first matching record
+        '                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+        '                            _previousSelectedRow = row.Index()
+        '                            sw = 1
+        '                        End If
+        '                    End If
+        '                End If
+        '            Next
+        '            _previousBegValueSearch = dBegValue
+        '            _previousEndValueSearch = dEndValue
+        '        Catch exc As Exception
+        '            MessageBox.Show(exc.Message)
+        '        End Try
+        '    ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.Boolean Then
+        '        Dim valueToSearch As Boolean = CallByName(columnData, "BegFindValue", CallType.Get)
+        '        SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        '        ClearSelection()
+        '        For Each row As DataGridViewRow In Rows
+        '            If row.Cells(columnNo).Value = valueToSearch Then
+        '                row.Selected = True
+        '                If sw = 0 Then
+        '                    'scroll and move to the first matching record
+        '                    FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+        '                    sw = 1
+        '                    _previousSelectedRow = row.Index()
+        '                End If
+        '            End If
+        '        Next
+        '        _previousBegValueSearch = valueToSearch
+        '    End If
+        'End If
+        If sw = 0 Then
+            Messaging.Show(True, "MsgNoMatchingRecordFound")
+            _existingFind = False
+        End If
+        searchForm.Dispose()
+        'End If
+    End Sub
+
+    Private Function ContinuePreviousSearch() As Integer
+        Dim matchSw As Integer = 0
+        Dim myForm = FindForm()
+        Dim columnNo = _previousColumnSearch
+        Dim nMode As Int16
+        Dim columnDataType = Columns(columnNo).ValueType
+        If columnDataType = GetType(Date?) Or columnDataType = GetType(Date) Or columnDataType = GetType(DateTime) Then
+            nMode = 2
+        ElseIf columnDataType = GetType(String) Or columnDataType = GetType(Char) Then
+            nMode = 0
+        ElseIf columnDataType = GetType(Int16) Or columnDataType = GetType(Int32) Or columnDataType = GetType(Int64) Then
+            nMode = 3
+        ElseIf columnDataType = GetType(Decimal) Then
+            nMode = 3
+        ElseIf columnDataType = GetType(Boolean) Then
+            nMode = 4
+        End If
+        If nMode = IFindableControl.SearchModeEnum.TextBox Then
+            SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            Try
+                'ClearSelection()
+                For Each row As DataGridViewRow In Rows
+                    If _previousSearchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField Then
+                        If row.Cells(columnNo).Value IsNot Nothing AndAlso row.Cells(columnNo).Value.ToString().Contains(_previousTextSearch) Then
+                            row.Selected = True
+                            If row.Index > _previousSelectedRow AndAlso Not Rows(row.Index).Displayed Then
+                                FirstDisplayedScrollingRowIndex = row.Index
+                                _previousSelectedRow = row.Index
+                                matchSw = 1
+                                Exit For
+                            End If
+                        End If
+                    Else
+                        If row.Cells(columnNo).Value IsNot Nothing AndAlso row.Cells(columnNo).Value.ToString().Equals(_previousTextSearch) Then
+                            row.Selected = True
+                            If Not Rows(row.Index).Displayed Then
+                                FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+                                _previousSelectedRow = row.Index
+                                matchSw = 1
+                                Exit For
+                            End If
+                        End If
+                    End If
+                Next
+            Catch exc As Exception
+                MessageBox.Show(exc.Message)
+            End Try
+        ElseIf nMode = 2 Then
+            Dim dBegDate As Date? = _previousBegDateSearch
+            Dim dEndDate As Date? = _previousEndDateSearch
+            SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            Try
+                ClearSelection()
+                Dim firstRowMatchSw As Int16 = 0
+
+                For Each row As DataGridViewRow In Rows
+                    Dim colDate As Date = row.Cells(columnNo).Value
+                    If DateIsBetween(colDate, dBegDate, dEndDate) Then
+                        row.Selected = True
+                        If firstRowMatchSw = 0 Then
+                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+                            firstRowMatchSw = 1
+                            _previousSelectedRow = row.Index
+                        ElseIf row.Index > _previousSelectedRow And Not Rows(row.Index).Displayed Then
+                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+                            _previousSelectedRow = row.Index
+                        End If
+                    End If
+                Next
+            Catch exc As Exception
+                MessageBox.Show(exc.Message)
+            End Try
+        ElseIf nMode = 3 Then
+            Dim dBegValue As Decimal? = _previousBegValueSearch
+            Dim dEndValue As Decimal? = _previousEndValueSearch
+            SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            Try
+                For Each row As DataGridViewRow In Rows
+                    Dim colValue As Decimal = row.Cells(columnNo).Value
+                    If colValue >= dBegValue AndAlso colValue <= dEndValue Then
+                        row.Selected = True
+                        If row.Index > _previousSelectedRow AndAlso Not Rows(row.Index).Displayed Then
+                            FirstDisplayedScrollingRowIndex = row.Index
+                            _previousSelectedRow = row.Index
+                            matchSw = 1
+                            Exit For
+                        End If
+                    End If
+                Next
+            Catch exc As Exception
+                MessageBox.Show(exc.Message)
+            End Try
+        ElseIf nMode = 4 Then
+            Dim dBegValue As Boolean = _previousBegValueSearch
+            SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            Try
+                For Each row As DataGridViewRow In Rows
+                    Dim colValue As Boolean = row.Cells(columnNo).Value
+                    If colValue = dBegValue Then
+                        row.Selected = True
+                        If row.Index > _previousSelectedRow AndAlso Not Rows(row.Index).Displayed Then
+                            FirstDisplayedScrollingRowIndex = row.Index
+                            _previousSelectedRow = row.Index
+                            matchSw = 1
+                            Exit For
+                        End If
+                    End If
+                Next
+            Catch exc As Exception
+                MessageBox.Show(exc.Message)
+            End Try
+        End If
+        If matchSw = 0 Then
+            If Messaging.Show(True, "AskLastRecordReachStartBeg",
+                              MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
+                _previousSelectedRow = -1
+                ContinuePreviousSearch()
+            Else
+                '' stay on the current record
+            End If
+        End If
+        Return matchSw
+    End Function
+
+    Private Class Search
+
+
+    End Class
 
 End Class
 

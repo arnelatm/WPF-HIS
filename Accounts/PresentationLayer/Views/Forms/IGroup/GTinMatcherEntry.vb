@@ -86,6 +86,16 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public WriteOnly Property currentIndex As Integer Implements IGTinMatcherView.CurrentIndex
+            Set(value As Integer)
+                If not _startedByItemGrid Then
+                    If DataGridViewItems.Rows.Count > value And value > 0 Then
+                        DataGridViewItems.CurrentCell = DataGridViewItems(0, value)
+                    End If
+                End If
+            End Set
+        End Property
+
         Public Property IdNo As Int32 Implements IItemDetailsView.IdNo
             Get
                 Return TxtIdNo.GetValue(Of Int32)
@@ -616,8 +626,8 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub PublishClickedButton(buttonClicked As ButtonClicked)
             MyBase.PublishClickedButton(buttonClicked)
             If buttonClicked = ButtonClicked.Filter Or buttonClicked = ButtonClicked.Save Then
-                MakeDataGridViews()                
-                tsItemsCount.Text = DataGridViewItems.RowCount                
+                MakeDataGridViews()
+                tsItemsCount.Text = DataGridViewItems.RowCount
             End If
         End Sub
 

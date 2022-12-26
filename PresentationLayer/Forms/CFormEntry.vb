@@ -662,6 +662,14 @@ Public Class CFormEntry
         'ResumeLayout()
     End Sub
 
+    'Private Sub btnEdit_EnabledChanged(sender As Object, e As EventArgs) Handles btnEdit.EnabledChanged
+    '    Debugger.Break()
+    'End Sub
+
+    'Private Sub btnSave_EnabledChanged(sender As Object, e As EventArgs) Handles btnSave.EnabledChanged
+    '    Debugger.Break()
+    'End Sub
+
     'Protected Overridable Function DataIsValid() As Boolean
     '    Debugger.Break()
     '    Return False

@@ -39,8 +39,9 @@ Namespace PresentationLayer.Presenters
                 Dim drug As Object = MakeDrug(drugIdNo)
                 If drug IsNot Nothing Then
                     DisplayDrug(drug)
-                    Dim drugPosId As Integer = Service.GetRecordPositionByKey(Of Integer)(drug.IdNo, "DrugList", "Trade Name", "IdNo") - 1
-                    sender.CurrentCell = sender(0, drugPosId)
+                    Dim drugPosId As Integer = Service.GetRecordPositionByKey(Of Integer)(drug.IdNo, "DrugList", "Trade Name", "IdNo") 
+                    sender.FirstDisplayedScrollingRowIndex = drugPosId - 1
+                    sender.CurrentCell = sender.Rows(drugPosId-1).Cells(0)
                 End If
             End If
         End Sub
@@ -55,7 +56,12 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnUpdateItemDisplay(idNo As Integer)
-            RecordPositionNumber = GetSortedRecordPosition(idNo)
+            RecordPositionNumber = GetSortedRecordPosition(idNo)            
+        End Sub
+
+        Public Overrides Sub UpdateViewData(idNo As Int32)
+            MyBase.UpdateViewData(idNo)
+            View.CurrentIndex = RecordPositionNumber
         End Sub
 
         Private Function MakeDrug(drugIdNo As Integer) As Object

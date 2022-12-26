@@ -262,8 +262,18 @@ Public Class CTextBox
             Return Nothing
         End If
         Dim objType As Type = GetType(T)
-        Dim objUnderlyingTYpe As Type = Nullable.GetUnderlyingType(objType)
-        Select Case objUnderlyingTYpe
+        Return CalculateValue(objType)
+        'Dim objUnderlyingType As Type = Nullable.GetUnderlyingType(objType)
+        'If objUnderlyingType <> Nothing Then
+        '    Return CalculateValue(objUnderlyingType)
+        'Else
+        '    Return CalculateValue(objType)
+        'End If
+        'Return Text
+    End Function
+
+    Public Function CalculateValue(objDataType)
+        Select Case objDataType
             Case GetType(String)
                 Return Text
             Case GetType(Short), GetType(Short?) 'Int16
@@ -293,11 +303,10 @@ Public Class CTextBox
             Case GetType(ULong), GetType(ULong)
                 Return NumParser(Of ULong)(Text)
             Case GetType(UShort), GetType(UShort)
-                Return NumParser(Of UShort)(Text)
+                Return NumParser(Of UShort)(Text)            
         End Select
         Return Text
     End Function
-
 
 #Region "FindableControl"
 

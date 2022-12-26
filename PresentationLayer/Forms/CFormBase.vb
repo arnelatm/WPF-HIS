@@ -73,7 +73,6 @@ Public Class CFormBase
             TurnOnInputs()
             btnSave.Visible = False
             btnEdit.Visible = False
-            btnUndo.Visible = False
             btnFilter.Visible = False
             btnOpen.Visible = False
             btnNew.Visible = False
@@ -82,7 +81,9 @@ Public Class CFormBase
     End Sub
 
     Public Overridable Sub UpdateViewDisplay(editMode As Boolean, addMode As Boolean, recordPositionNumber As Integer, targetIdNo As Integer, recordCount As Integer)
-        If Not (QueryOnly Or SingleData) Then
+        If (QueryOnly Or SingleData) Then
+            TurnOnInputs()
+        Else
             'TurnOnInputs()
             'btnSave.Visible = False
             'btnEdit.Visible = False
