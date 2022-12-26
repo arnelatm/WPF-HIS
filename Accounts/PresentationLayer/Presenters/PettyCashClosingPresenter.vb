@@ -42,9 +42,7 @@ Namespace PresentationLayer.Presenters
                                             {"PcClosed", GetType(Boolean)}
                                             })
             AskBeforeSave = True
-
             AddHandler view.PcJournalCheckedEvent, AddressOf OnPcJournalCheckedEvent
-
         End Sub
 
         Protected Overrides Sub CreateDataSources()

@@ -366,7 +366,6 @@ Partial Class CFormEntry
         Me.Controls.Add(Me.FormToolStrip)
         Me.Name = "CFormEntry"
         Me.Text = "CFormEntry"
-        Me.ViewDisplayName = ""
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.FormToolStrip.ResumeLayout(false)
         Me.FormToolStrip.PerformLayout

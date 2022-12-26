@@ -1462,4 +1462,47 @@ Public Module GlobalFunctions
         Return argObj
     End Function
 
+    Public Function DateIsBetween(dateToCheck As Object, begDate As Object, endDate As Object)
+        If Not (TypeOf dateToCheck Is Date Or TypeOf dateToCheck Is Date?) And (TypeOf begDate Is Date Or TypeOf begDate Is Date?) And (TypeOf endDate Is Date Or TypeOf endDate Is Date?) Then
+            MessageBox.Show("One of the passed date is not a valid date type.")
+            Debugger.Break()
+            Return False
+        End If
+        If TypeOf dateToCheck Is Date And TypeOf begDate Is Date And TypeOf endDate Is Date Then
+            Dim dC As Date = dateToCheck
+            Dim dB As Date = begDate
+            Dim dE As Date = endDate
+            If dC.ToString("yyyyMMdd") >= dB.ToString("yyyyMMdd") And dC.ToString("yyyyMMdd") <= dE.ToString("yyyyMMdd") Then
+                Return True
+            Else
+                Return False
+            End If
+        ElseIf TypeOf dateToCheck Is Date? And TypeOf begDate Is Date? And TypeOf endDate Is Date? Then
+            If dateToCheck Is Nothing And begDate Is Nothing And endDate Is Nothing Then
+                Return True
+            End If
+            If dateToCheck Is Nothing Then
+                If begDate IsNot Nothing And endDate IsNot Nothing Then
+                    Return False
+                Else
+                    Return True
+                End If
+            Else
+                If begDate Is Nothing Or endDate Is Nothing Then
+                    Return True
+                Else
+                    Dim dDateToCheck As Date = dateToCheck
+                    Dim dEndDate As Date = endDate
+                    Dim dBegDate As Date = begDate
+                    If dDateToCheck.ToString("yyyyMMdd") >= dBegDate.ToString("yyyyMMdd") And dDateToCheck.ToString("yyyyMMdd") <= dEndDate.ToString("yyyyMMdd") Then
+                        Return True
+                    Else
+                        Return False
+                    End If
+                End If
+            End If
+        End If
+        Return False
+    End Function
+
 End Module

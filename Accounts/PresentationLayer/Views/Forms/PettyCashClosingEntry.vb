@@ -26,8 +26,8 @@ Namespace PresentationLayer.Views.Forms
             Me.Text = Messaging.TranslateCaption("Petty Cash Closing Journal")
             _nfi.NumberDecimalDigits = 2
             FirstControl = dtpTransactionDate
-            SingleData = True
             QuitOnSave = True
+            HideNavigatorButtons = True
         End Sub
 
 #Region "Field Items"
@@ -52,10 +52,9 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Applied As Decimal Implements IPettyCashClosingView.Applied
             Get
-                Return txtAmount.Text
+                Return txtAmount.GetValue(Of Decimal)
             End Get
             Set(value As Decimal)
-
             End Set
         End Property
 
@@ -271,13 +270,11 @@ Namespace PresentationLayer.Views.Forms
             _pcFooter.ColumnToSum("dgvAmount") = True
             _pcFooter.SetText("DgvPayeeName", "Totals ->")
 
-            btnEdit.Visible = False
             btnFilter.Visible = False
             btnDelete.Visible = False
             btnNew.Visible = False
-            btnOpen.Visible = False
-            TurnOnInputs()
-
+            btnOpen.Visible = False       
+            btnEdit.Visible = False
         End Sub
 
         Private Sub btnSelectAll_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnSelectAll.ClickButtonArea
@@ -289,7 +286,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PettyCashClosingEntry_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-            Presenter.GoAddRecord()
+            btnAdd.PerformClick()
             Presenter.GetOpenPettyCash()
             cboAccountIdNo.SelectedValue = -1
             txtAmount.Text = 0
