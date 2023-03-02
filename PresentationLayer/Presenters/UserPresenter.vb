@@ -29,8 +29,10 @@ Public Class UserPresenter(Of TM As New)
     End Sub
 
     Private Sub OnBeforeSave() Handles MyBase.BeforeSave
-        If View.Password <> OriginalModel.Password Then
-            View.Password = _serviceLogin.EncryptPassword(View.IdNo, View.Password)
+        If Not CancelSave Then
+            If View.Password <> OriginalModel.Password Then
+                View.Password = _serviceLogin.EncryptPassword(View.IdNo, View.Password)
+            End If
         End If
     End Sub
 

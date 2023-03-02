@@ -23,6 +23,7 @@ Public Class CDataGridView
     Private _lastEditableColumn As Integer = -1
     Private _memoryCache As Cache
     Private ReadOnly _origEditMode As DataGridViewEditMode
+    Private _columnNo As Integer
 
     Public Sub New()
         MyBase.New()
@@ -221,6 +222,8 @@ Public Class CDataGridView
     Public ReadOnly Property FindDataSource As Object Implements IFindableControl.FindDataSource
 
     Public ReadOnly Property FindDisplayMember As String Implements IFindableControl.FindDisplayMember
+
+    Public ReadOnly Property SearchMode As IFindableControl.SearchModeEnum Implements IFindableControl.SearchMode
 
     Public ReadOnly Property FindValueMember As String Implements IFindableControl.FindValueMember
 
@@ -985,13 +988,6 @@ Public Class CDataGridView
     End Sub
 
     Public Property IsDirty As Boolean = False
-
-    Public ReadOnly Property SearchMode As IFindableControl.SearchModeEnum Implements IFindableControl.SearchMode
-        Get
-            Throw New NotImplementedException()
-        End Get
-    End Property
-
     Private _previousColumnSearch As Short
     Private _previousSelectedRow As Integer
     Private _previousTextSearch As String
@@ -1046,9 +1042,14 @@ Public Class CDataGridView
         _memoryCache = New Cache(retriever, 100)
         RowCount = retriever.RowCount
         AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells)
+        If DgSearch IsNot Nothing Then
+            DgSearch.Clear()
+        End If
         Dim i As Integer = 0
         For Each item As DataColumn In retriever.Columns
             Me.Columns(i).ValueType = item.DataType
+            Dim searchItem As New DataGridSearch(Me, i)
+            DgSearch.Add(searchItem)
             i += 1
         Next
     End Sub
@@ -1065,6 +1066,7 @@ Public Class CDataGridView
         Dim matchFound As Integer = -1
         If e.Button = MouseButtons.Right Then
             hitTestInfo = Me.HitTest(e.X, e.Y)
+
             If _existingFind Then
                 If Messaging.Show(True, "AskContinueWithPreviousSearch",
                                   MessageBoxButtons.YesNo,
@@ -1082,7 +1084,8 @@ Public Class CDataGridView
             End If
             If Not continueSearch Then
                 _existingFind = False
-                FindValue(hitTestInfo.ColumnIndex)
+                _columnNo = hitTestInfo.ColumnIndex
+                FindValue()
             End If
         End If
     End Sub
@@ -1091,7 +1094,7 @@ Public Class CDataGridView
     'Private Property SearchPlace As String
     'Private Property IgnoreCase As Boolean
 
-    Private Sub FindValue(ByRef columnNo As Int16)
+    Private Sub FindValue()
         Dim myForm = FindForm()
         Dim sw As Integer = 0
         Dim pnt As Point
@@ -1099,15 +1102,18 @@ Public Class CDataGridView
         'If TypeOf Columns(columnNo) Is IFindableControl Then
         ' Dim columnData As IFindableControl = Columns(columnNo)
         'columnData = Columns(columnNo)
-        Dim columnDataType = Columns(columnNo).ValueType
-        _previousColumnSearch = columnNo
+        Dim columnDataType = Columns(_columnNo).ValueType
+        _previousColumnSearch = _columnNo
         dataTypeEnum = GetObjectDataType(columnDataType)
         'columnData.FindDataType = dataTypeEnum
         Dim searchForm As CDataGridFindForm
-        searchForm = New CDataGridFindForm(Me, columnNo)
+        'DgSearch(_columnNo).SearchMode = GetColumnSearchModeType(Columns(_columnNo))
+
+
+        searchForm = New CDataGridFindForm(Me, _columnNo)
         Dim screenRectangle As Rectangle
         Dim formLocation As Point
-        searchForm.SetFieldDescription(Columns(columnNo).HeaderText)
+        searchForm.SetFieldDescription(Columns(_columnNo).HeaderText)
         screenRectangle = Screen.PrimaryScreen.WorkingArea
         searchForm.StartPosition = FormStartPosition.Manual
         pnt = myForm.PointToScreen(Location)
@@ -1116,25 +1122,24 @@ Public Class CDataGridView
         End If
         searchForm.Location = formLocation
         If searchForm.ShowDialog() = DialogResult.OK Then
-            Dim textToSearch As String
-            Dim searchPlace As IFindableControl.SearchPlaceEnum
-            Dim ignoreCase As Boolean
+            'Dim searchPlace As IFindableControl.SearchPlaceEnum
+            'Dim ignoreCase As Boolean
             If Not _existingFind Then
                 _existingFind = True
             End If
             If dataTypeEnum = IFindableControl.SearchModeEnum.TextBox Then
-                textToSearch = searchForm.TxtTextToSearch.Text
-                searchPlace = searchForm.SearchLocation
-                ignoreCase = searchForm.chkIgnoreCase.Checked
-                If textToSearch <> "" Then
+                DgSearch(_columnNo).BegFindValue = searchForm.txtBegValue.Text
+                'searchPlace = searchForm.SearchLocation
+                'ignoreCase = searchForm.chkIgnoreCase.Checked
+                If DgSearch(_columnNo).TextToSearch <> "" Then
                     SelectionMode = DataGridViewSelectionMode.FullRowSelect
                     Try
                         ClearSelection()
                         For Each row As DataGridViewRow In Rows
-                            If searchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField Then
+                            If SearchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField Then
                                 ' search anywhere
-                                If ignoreCase Then
-                                    If row.Cells(columnNo).Value IsNot Nothing AndAlso row.Cells(columnNo).Value.ToString().ToLower().Contains(textToSearch.ToLower()) Then
+                                If IgnoreCase Then
+                                    If row.Cells(_columnNo).Value IsNot Nothing AndAlso row.Cells(_columnNo).Value.ToString().ToLower().Contains(DgSearch(_columnNo).TextToSearch.ToLower()) Then
                                         row.Selected = True
                                         If sw = 0 Then
                                             'scroll and move to the first matching record
@@ -1144,7 +1149,7 @@ Public Class CDataGridView
                                         End If
                                     End If
                                 Else
-                                    If row.Cells(columnNo).Value IsNot Nothing AndAlso row.Cells(columnNo).Value.ToString().Contains(textToSearch) Then
+                                    If row.Cells(_columnNo).Value IsNot Nothing AndAlso row.Cells(_columnNo).Value.ToString().Contains(DgSearch(_columnNo).TextToSearch) Then
                                         row.Selected = True
                                         If sw = 0 Then
                                             'scroll and move to the first matching record
@@ -1154,9 +1159,9 @@ Public Class CDataGridView
                                         End If
                                     End If
                                 End If
-                            ElseIf searchPlace = IFindableControl.SearchPlaceEnum.ExactValue Then
+                            ElseIf SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue Then
                                 ' exact match
-                                If row.Cells(columnNo).Value.ToString().Equals(textToSearch) Then
+                                If row.Cells(_columnNo).Value.ToString().Equals(DgSearch(_columnNo).TextToSearch) Then
                                     row.Selected = True
                                     If sw = 0 Then
                                         'scroll and move to the first matching record
@@ -1167,8 +1172,8 @@ Public Class CDataGridView
                                 End If
                             Else
                                 ' start of text
-                                If ignoreCase Then
-                                    If row.Cells(columnNo).Value.ToString().ToLower().StartsWith(textToSearch.ToLower()) Then
+                                If IgnoreCase Then
+                                    If row.Cells(_columnNo).Value.ToString().ToLower().StartsWith(DgSearch(_columnNo).TextToSearch.ToLower()) Then
                                         row.Selected = True
                                         If sw = 0 Then
                                             'scroll and move to the first matching record
@@ -1178,7 +1183,7 @@ Public Class CDataGridView
                                         End If
                                     End If
                                 Else
-                                    If row.Cells(columnNo).Value.ToString().StartsWith(textToSearch) Then
+                                    If row.Cells(_columnNo).Value.ToString().StartsWith(DgSearch(_columnNo).TextToSearch) Then
                                         row.Selected = True
                                         If sw = 0 Then
                                             'scroll and move to the first matching record
@@ -1190,8 +1195,8 @@ Public Class CDataGridView
                                 End If
                             End If
                         Next
-                        _previousTextSearch = textToSearch
-                        _previousSearchPlace = searchPlace
+                        _previousTextSearch = DgSearch(_columnNo).TextToSearch
+                        _previousSearchPlace = SearchPlace
                     Catch exc As Exception
                         MessageBox.Show(exc.Message)
                     End Try
@@ -1533,12 +1538,44 @@ Public Class CDataGridView
         Return matchSw
     End Function
 
-    Private Class Search
+    Public Property DgSearch As New List(Of DataGridSearch)
 
+
+
+    Public Class DataGridSearch
+        Implements IFindableControl
+
+        Public Sub New(dataGridView As CDataGridView, colNo As Integer)
+            If TypeOf dataGridView.Columns(colNo).CellTemplate Is DataGridViewTextBoxCell Then
+                SearchMode = IFindableControl.SearchModeEnum.TextBox
+                'FindDataSource 
+            ElseIf TypeOf dataGridView.Columns(colNo).CellTemplate Is DataGridViewComboBoxCell Then
+                SearchMode = IFindableControl.SearchModeEnum.ComboBox
+            ElseIf TypeOf dataGridView.Columns(colNo).CellTemplate Is DataGridViewCheckBoxCell Then
+                SearchMode = IFindableControl.SearchModeEnum.CheckBox
+            Else
+                SearchMode = IFindableControl.SearchModeEnum.Date
+            End If
+
+        End Sub
+
+        Public Property FindDataType As IFindableControl.DataTypeEnum Implements IFindableControl.FindDataType
+        Public Property FindEnabled As Boolean Implements IFindableControl.FindEnabled
+        Public Property FieldName As String Implements IFindableControl.FieldName
+        Public Property FieldDescription As String Implements IFindableControl.FieldDescription
+        Public ReadOnly Property FindDataSource As Object Implements IFindableControl.FindDataSource
+        Public ReadOnly Property FindDisplayMember As String Implements IFindableControl.FindDisplayMember
+        Public ReadOnly Property SearchMode As IFindableControl.SearchModeEnum Implements IFindableControl.SearchMode
+        Public ReadOnly Property FindValueMember As String Implements IFindableControl.FindValueMember
+        Public Property BegFindValue As Object Implements IFindableControl.BegFindValue
+        Public Property EndFindValue As Object Implements IFindableControl.EndFindValue
+        Public Property SearchPlace As IFindableControl.SearchPlaceEnum Implements IFindableControl.SearchPlace
+        Public Property IgnoreCase As Boolean Implements IFindableControl.IgnoreCase
+        Public Property TextToSearch As String
 
     End Class
-
 End Class
+
 
 'Public Class DataRetriever
 '    Implements IDataPageRetriever

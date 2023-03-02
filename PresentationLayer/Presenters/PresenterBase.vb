@@ -659,6 +659,10 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End Try
     End Function
 
+    Public Function GetFieldOnMaxField(searchFieldName As String, tableName As String, returnFieldName As String, Optional filter As String = Nothing) As Object
+        Return Service.GetFieldOnMaxField(searchFieldName, tableName, returnFieldName, filter)
+    End Function
+
     Public Function GetDtRecords(ByVal pTableName As String, ByVal fieldNames As String(), Optional filter As String = Nothing, Optional sortKey As String = Nothing)
         Return Service.GetDtRecords(pTableName, fieldNames, filter, sortKey)
     End Function
@@ -863,34 +867,40 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     '    Return False
     'End Function
 
-    Public Overridable Function Save(ByRef viewControl As Control)
+    Public Overridable Function Save(ByRef viewControl As Control) As Boolean
+        CancelSave = False
         RaiseEvent BeforeSave()
-        Dim record As New TM
-        GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
-        Dim retVal As Integer = InitiateSave()
-        If retVal < 0 Then
-            Messaging.Show(True, "MsgSaveRecordFailed", "Something went wrong during saving, saving record failed", "Saving Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Else
-            RaiseEvent AfterSave()
-        End If
-        If retVal < 0 Then
-        Else
-            If PromptOnSavedRecord Then
-                Messaging.Show(True, "MsgRecordSuccessfullySaved")
+        Dim retVal As Integer = 0
+        If Not CancelSave Then
+            Dim record As New TM
+            GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
+            retVal = InitiateSave()
+            If retVal < 0 Then
+                Messaging.Show(True, "MsgSaveRecordFailed", "Something went wrong during saving, saving record failed", "Saving Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Else
-                Messaging.MessageTimeOutNowait("Record Saved", "Record Saved", 1)
+                RaiseEvent AfterSave()
             End If
-            If AddMode Then
-                RecordPositionNumber = GetSortedRecordPosition(retVal)
+            If retVal < 0 Then
             Else
-                RecordPositionNumber = GetSortedRecordPosition(TargetIdNo)
+                If PromptOnSavedRecord Then
+                    Messaging.Show(True, "MsgRecordSuccessfullySaved")
+                Else
+                    Messaging.MessageTimeOutNowait("Record Saved", "Record Saved", 1)
+                End If
+                If AddMode Then
+                    RecordPositionNumber = GetSortedRecordPosition(retVal)
+                Else
+                    RecordPositionNumber = GetSortedRecordPosition(TargetIdNo)
+                End If
+                AddMode = False
+                EditMode = False
+                UpdateViewData(TargetIdNo)
+                ClearAllErrorMessages()
             End If
-            AddMode = False
-            EditMode = False
-            UpdateViewData(TargetIdNo)
-            ClearAllErrorMessages()
+        Else
+            retVal = -1
         End If
-        Return retVal
+        Return retVal >= 0
     End Function
 
     Public Function SaveOrAbandonChanges() As DialogResult
@@ -1333,8 +1343,11 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             GoUndoChanges()
         Else
             If validated Then
-                Save(eventType.ViewControl)
-                eventType.ValidData = True
+                If Save(eventType.ViewControl) Then
+                    eventType.ValidData = True
+                Else
+                    eventType.ValidData = False
+                End If
             Else
                 Beep()
                 Messaging.MessageKey = "ValidationErrors"
@@ -1977,7 +1990,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Dim lookupObj
         lookupObj = SetLookupObject(dataTableName, control, dataFields, sortKey, filter)
         data = GetLookup(lookupObj)
-        Dim Task1 
+        Dim Task1
         Task1 = Task.Factory.StartNew(Sub() GetLookup(lookupObj))
         ''Task1 = Task.Factory.StartNew(Sub() CreateDataSource("Department", "ParentIdNo"))
         'Task2 = Task.Factory.StartNew(Sub() Method1("RevCostCenter", GetControlName("RevCostCenterIdNo")))          

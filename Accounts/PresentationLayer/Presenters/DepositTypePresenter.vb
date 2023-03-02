@@ -27,10 +27,12 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If Not View.WithBankCharges Then
-                View.Rate = 0
-                View.BankChargesAccountIdNo = Nothing
-                View.BankChargesVatAccountIdNo = Nothing
+            If Not CancelSave Then
+                If Not View.WithBankCharges Then
+                    View.Rate = 0
+                    View.BankChargesAccountIdNo = Nothing
+                    View.BankChargesVatAccountIdNo = Nothing
+                End If
             End If
         End Sub
 

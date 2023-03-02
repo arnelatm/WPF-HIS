@@ -18,6 +18,7 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("AccountIdNo"))
                 AddRule(New ValidateRequired("EmployeeIdNo"))
                 AddRule(New ValidateCompare("TotalDebits", "TotalCredits", ValidationOperator.Equal, ValidationDataType.Decimal))
+                AddRule(New ValidateRequired("TransactionType"))
             End If
         End Sub
 

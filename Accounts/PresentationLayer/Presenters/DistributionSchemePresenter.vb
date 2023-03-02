@@ -38,31 +38,33 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If DtInsertTable IsNot Nothing Then
-                DtInsertTable.Clear()
-            End If
-            If DtUpdateTable IsNot Nothing Then
-                DtUpdateTable.Clear()
-            End If
-            Dim nRowCount = 1
-            For Each ji In View.DistributionSchemeItems
-                Dim workRow As DataRow
-                If ji.IdNo <= 0 Then
-                    workRow = DtInsertTable.NewRow()
-                Else
-                    workRow = DtUpdateTable.NewRow()
-                    workRow("IdNo") = ji.IdNo
+            If Not CancelSave Then
+                If DtInsertTable IsNot Nothing Then
+                    DtInsertTable.Clear()
                 End If
-                workRow("DistributionSchemeIdNo") = View.IdNo
-                workRow("Sequence") = nRowCount
-                workRow("Percentage") = ji.Percentage
-                If ji.IdNo <= 0 Then
-                    DtInsertTable.Rows.Add(workRow)
-                Else
-                    DtUpdateTable.Rows.Add(workRow)
+                If DtUpdateTable IsNot Nothing Then
+                    DtUpdateTable.Clear()
                 End If
-                nRowCount += 1
-            Next
+                Dim nRowCount = 1
+                For Each ji In View.DistributionSchemeItems
+                    Dim workRow As DataRow
+                    If ji.IdNo <= 0 Then
+                        workRow = DtInsertTable.NewRow()
+                    Else
+                        workRow = DtUpdateTable.NewRow()
+                        workRow("IdNo") = ji.IdNo
+                    End If
+                    workRow("DistributionSchemeIdNo") = View.IdNo
+                    workRow("Sequence") = nRowCount
+                    workRow("Percentage") = ji.Percentage
+                    If ji.IdNo <= 0 Then
+                        DtInsertTable.Rows.Add(workRow)
+                    Else
+                        DtUpdateTable.Rows.Add(workRow)
+                    End If
+                    nRowCount += 1
+                Next
+            End If
         End Sub
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully

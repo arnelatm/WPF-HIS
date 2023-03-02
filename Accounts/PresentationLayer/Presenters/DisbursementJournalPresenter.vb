@@ -185,15 +185,16 @@ Namespace PresentationLayer.Presenters
                     ViewToDataTables(View.DjOiItems, DtOiInsertTable, DtOiUpdateTable, AddressOf DjOiFillData, AddressOf DjOiItemFilter)
                     'View.TotalCredits = View.TotalDebits
                 End If
+
+                For Each item In View.JournalItems
+                    If item.Equals(DBNull.Value) Then
+                        item.Notes = ""
+                    End If
+                    If item.Notes Is Nothing Then
+                        item.Notes = ""
+                    End If
+                Next
             End If
-            For Each item In View.JournalItems
-                If item.Equals(DBNull.Value) Then
-                    item.Notes = ""
-                End If
-                If item.Notes Is Nothing Then
-                    item.Notes = ""
-                End If
-            Next
         End Sub
 
         'Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
@@ -1089,6 +1090,9 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Overrides Function IsOkToEditRecord() As Boolean
+            If Not MyBase.IsOkToEditRecord() Then
+                Return False
+            End If
             Dim result As Boolean = True
             Dim type As Type = View.GetType
             Dim cPcClosed = CallByName(View, "PcClosed", CallType.Get)
@@ -1126,7 +1130,7 @@ Namespace PresentationLayer.Presenters
                     End If
                 End If
                 If retVal Then
-                    If ReconciledEntriesExist(View.JournalItems, "CD") Then
+                    If ReconciledEntriesExist(View.JournalItems, JournalCode) Then
                         retVal = False
                     End If
                 End If

@@ -12,7 +12,7 @@ Public Class CDataGridFindForm
     Private _formPosition As Point
     Private _controlHeight As Int16
     Private _controlWidth As Int16
-    Private _findableGrid As CDataGridView
+    Private _dgView As CDataGridView
     Private _columnNumber As Integer
 
 
@@ -25,8 +25,9 @@ Public Class CDataGridFindForm
 
         ' This call is required by the designer.
         InitializeComponent()
+        _columnNumber = columnNumber
         Dim formPoint As Point
-        _findableGrid = findableGrid
+        _dgView = findableGrid
         'Dim ctrlPoint As Point
         'ctrlPoint = New Point(ctrl.Location.X + ctrl.Width, ctrl.Location.Y)
         'formPoint = ctrl.PointToScreen(ctrlPoint)
@@ -34,12 +35,12 @@ Public Class CDataGridFindForm
         _formPosition.Y = formPoint.Y
         _controlHeight = findableGrid.Height
         _controlWidth = findableGrid.Width
-        _findableGrid = findableGrid
+        '_dgView = findableGrid
 
-        Dim pnt As Point = findableGrid.PointToScreen(New Point(0 + _findableGrid.Width, 0))
+        Dim pnt As Point = findableGrid.PointToScreen(New Point(0 + _dgView.Width, 0))
         _formPosition.X = pnt.X
         _formPosition.Y = pnt.Y
-        'pnt = Me.PointToClient(pnt)
+       'pnt = Me.PointToClient(pnt)
 
         'If findableControl.SearchMode = "String" Then
         '    _searchMode = SearchModeEnum.TextBox
@@ -68,86 +69,97 @@ Public Class CDataGridFindForm
 
     Private Sub BtnFind_Click(sender As Object, e As EventArgs) Handles BtnFind.Click
         DialogResult = DialogResult.OK
-        Dim dataType = _findableGrid.Columns(_columnNumber)
-        If _findableGrid.FindDataType = IFindableControl.DataTypeEnum.String Then
-            _findableGrid.BegFindValue = TxtTextToSearch.Text
+        Dim dataType As IFindableControl.DataTypeEnum = GetObjectDataType(_dgView.Columns(_columnNumber).ValueType)
+        If dataType = IFindableControl.DataTypeEnum.String Then
+            _dgView.DgSearch(_columnNumber).TextToSearch = TxtTextToSearch.Text
             If SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
-                _findableGrid.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
-                _findableGrid.BegFindValue = cboTextToSearch.SelectedValue
+                _dgView.DgSearch(_columnNumber).SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
+                _dgView.DgSearch(_columnNumber).BegFindValue = cboTextToSearch.SelectedValue
             ElseIf RBtnStart.Checked Then
-                _findableGrid.SearchPlace = IFindableControl.SearchPlaceEnum.StartOfField
+                _dgView.DgSearch(_columnNumber).SearchPlace = IFindableControl.SearchPlaceEnum.StartOfField
             ElseIf RBtnExactMatch.Checked Then
-                _findableGrid.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
+                _dgView.DgSearch(_columnNumber).SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
             Else
-                _findableGrid.SearchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField
+                _dgView.DgSearch(_columnNumber).SearchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField
             End If
             If chkIgnoreCase.Checked Then
-                _findableGrid.IgnoreCase = True
+                _dgView.IgnoreCase = True
             Else
-                _findableGrid.IgnoreCase = False
+                _dgView.IgnoreCase = False
             End If
-        ElseIf _findableGrid.FindDataType = IFindableControl.DataTypeEnum.Date Then
+        ElseIf dataType = IFindableControl.DataTypeEnum.Date Then
             If SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
-                _findableGrid.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
-                _findableGrid.BegFindValue = cboTextToSearch.SelectedValue
+                _dgView.DgSearch(_columnNumber).SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
+                _dgView.DgSearch(_columnNumber).BegFindValue = cboTextToSearch.SelectedValue
             Else
-                _findableGrid.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
-                _findableGrid.BegFindValue = dtpBegDate.Value
-                _findableGrid.EndFindValue = dtpEndDate.Value
+                _dgView.DgSearch(_columnNumber).SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
+                _dgView.DgSearch(_columnNumber).BegFindValue = dtpBegDate.Value
+                _dgView.DgSearch(_columnNumber).EndFindValue = dtpEndDate.Value
             End If
-        ElseIf _findableGrid.FindDataType = IFindableControl.DataTypeEnum.Decimal Or _findableGrid.FindDataType = IFindableControl.DataTypeEnum.Integer Then
+        ElseIf dataType = IFindableControl.DataTypeEnum.Decimal Or dataType = IFindableControl.DataTypeEnum.Integer Then
             If SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
-                _findableGrid.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
-                _findableGrid.BegFindValue = cboTextToSearch.SelectedValue
+                _dgView.DgSearch(_columnNumber).SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
+                _dgView.DgSearch(_columnNumber).BegFindValue = cboTextToSearch.SelectedValue
             Else
-                _findableGrid.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
+                _dgView.DgSearch(_columnNumber).SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
                 If txtBegValue.Text Is Nothing OrElse txtBegValue.Text = "" Then
-                    _findableGrid.BegFindValue = Nothing
+                    _dgView.DgSearch(_columnNumber).BegFindValue = Nothing
                 Else
-                    If _findableGrid.FindDataType = IFindableControl.DataTypeEnum.Decimal Then
+                    If dataType = IFindableControl.DataTypeEnum.Decimal Then
                         Dim value As Decimal
                         If Not Decimal.TryParse(txtBegValue.Text, value) Then
                             MessagingLibrary.Messaging.Show(True, "MsgInvalidDecimalValue")
                             DialogResult = DialogResult.Cancel
                         Else
-                            _findableGrid.BegFindValue = txtBegValue.Text
+                            _dgView.DgSearch(_columnNumber).BegFindValue = txtBegValue.Text
                         End If
                     Else
                         Dim value As Integer
                         If Not Integer.TryParse(txtBegValue.Text, value) Then
                             MessagingLibrary.Messaging.Show(True, "MsgInvalidIntegerValue")
                         Else
-                            _findableGrid.BegFindValue = txtBegValue.Text
+                            _dgView.DgSearch(_columnNumber).BegFindValue = txtBegValue.Text
                         End If
                     End If
                 End If
                 If txtEndValue.Text Is Nothing OrElse txtEndValue.Text = "" Then
-                    _findableGrid.EndFindValue = Nothing
+                    _dgView.DgSearch(_columnNumber).EndFindValue = Nothing
                 Else
-                    If _findableGrid.FindDataType = IFindableControl.DataTypeEnum.Decimal Then
+                    If dataType = IFindableControl.DataTypeEnum.Decimal Then
                         Dim value As Decimal
                         If Not Decimal.TryParse(txtEndValue.Text, value) Then
                             DialogResult = DialogResult.Cancel
                             MessagingLibrary.Messaging.Show(True, "MsgInvalidDecimalValue")
                         Else
-                            _findableGrid.EndFindValue = txtEndValue.Text
+                            _dgView.DgSearch(_columnNumber).BegFindValue = txtEndValue.Text
                         End If
                     Else
                         Dim value As Integer
                         If Not Integer.TryParse(txtEndValue.Text, value) Then
                             MessagingLibrary.Messaging.Show(True, "MsgInvalidIntegerValue")
                         Else
-                            _findableGrid.EndFindValue = txtEndValue.Text
+                            _dgView.DgSearch(_columnNumber).BegFindValue = txtEndValue.Text
                         End If
                     End If
                 End If
             End If
-        ElseIf _findableGrid.FindDataType = IFindableControl.DataTypeEnum.Boolean Then
-            _findableGrid.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
-            _findableGrid.BegFindValue = chkChecked.Checked
+        ElseIf dataType = IFindableControl.DataTypeEnum.Boolean Then
+            _dgView.DgSearch(_columnNumber).SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
+            _dgView.DgSearch(_columnNumber).BegFindValue = chkChecked.Checked
         End If
         Close()
     End Sub
+
+    'Private Function GetColumnSearchModeType(dataGridViewColumn As DataGridViewColumn) As Object
+    '    If TypeOf dataGridViewColumn.CellTemplate Is DataGridViewTextBoxCell Then
+    '        Return IFindableControl.SearchModeEnum.TextBox
+    '    ElseIf TypeOf dataGridViewColumn.CellTemplate Is DataGridViewComboBoxCell Then
+    '        Return IFindableControl.SearchModeEnum.ComboBox
+    '    ElseIf TypeOf dataGridViewColumn.CellTemplate Is DataGridViewComboBoxCell Then
+    '        Return IFindableControl.SearchModeEnum.ComboBox
+    '    End If
+    '    Return IFindableControl.SearchModeEnum.TextBox
+    'End Function
 
     Private Sub SetFormLocation()
         Dim pnt As Point
@@ -189,6 +201,7 @@ Public Class CDataGridFindForm
 
     Private Sub CFindForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetFormLocation()
+        'Dim searchModeType = GetColumnSearchModeType(_dgView.Columns(_columnNumber))
         If SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
             'lblLookFor1.Visible = False
             'lblLookFor2.Visible = True
@@ -215,20 +228,20 @@ Public Class CDataGridFindForm
     End Sub
 
     Private Sub SetFormSize()
-        If _findableGrid.FindDataType = IFindableControl.DataTypeEnum.String Then
+        If _dgView.FindDataType = IFindableControl.DataTypeEnum.String Then
             Height = 270
-        ElseIf _findableGrid.FindDataType = IFindableControl.DataTypeEnum.Date Then
+        ElseIf _dgView.FindDataType = IFindableControl.DataTypeEnum.Date Then
             Height = 160
-        ElseIf _findableGrid.FindDataType = IFindableControl.DataTypeEnum.Decimal Or _findableGrid.FindDataType = IFindableControl.DataTypeEnum.Integer Then
+        ElseIf _dgView.FindDataType = IFindableControl.DataTypeEnum.Decimal Or _dgView.FindDataType = IFindableControl.DataTypeEnum.Integer Then
             Height = 160
-        ElseIf _findableGrid.FindDataType = IFindableControl.DataTypeEnum.Boolean Then
+        ElseIf _dgView.FindDataType = IFindableControl.DataTypeEnum.Boolean Then
             Height = 175
             Width = 200
         End If
     End Sub
 
     Private Sub SetupDisplay()
-        If _findableGrid.FindDataType = IFindableControl.DataTypeEnum.String Then
+        If _dgView.FindDataType = IFindableControl.DataTypeEnum.String Then
             'lblLookFor1.Visible = True
             'lblLookFor2.Visible = False
             'lblLookFor3.Visible = False
@@ -248,7 +261,7 @@ Public Class CDataGridFindForm
             lblIgnoreCase.Visible = True
             chkIgnoreCase.Visible = True
             TxtTextToSearch.Focus()
-        ElseIf _findableGrid.FindDataType = IFindableControl.DataTypeEnum.Date Then
+        ElseIf _dgView.FindDataType = IFindableControl.DataTypeEnum.Date Then
             dtpBegDate.Visible = True
             dtpEndDate.Visible = True
             dtpBegDate.Focus()
@@ -266,8 +279,8 @@ Public Class CDataGridFindForm
             chkChecked.Visible = False
             txtBegValue.Visible = False
             txtEndValue.Visible = False
-        ElseIf _findableGrid.FindDataType = IFindableControl.DataTypeEnum.Decimal Or
-                   _findableGrid.FindDataType = IFindableControl.DataTypeEnum.Integer Then
+        ElseIf _dgView.FindDataType = IFindableControl.DataTypeEnum.Decimal Or
+                   _dgView.FindDataType = IFindableControl.DataTypeEnum.Integer Then
             dtpBegDate.Visible = False
             dtpEndDate.Visible = False
             TxtTextToSearch.Visible = False
@@ -281,7 +294,7 @@ Public Class CDataGridFindForm
             txtEndValue.Visible = True
             txtBegValue.Focus()
             txtBegValue.Select()
-        ElseIf _findableGrid.FindDataType = IFindableControl.DataTypeEnum.Boolean Then
+        ElseIf _dgView.FindDataType = IFindableControl.DataTypeEnum.Boolean Then
             'lblLookFor4.Visible = True
             chkChecked.Visible = True
             dtpBegDate.Visible = False
