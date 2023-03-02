@@ -25,6 +25,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim endDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, currentDate.Month, 0)
             dtpEndingDate.Value = endDate
             dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(endDate.Year, endDate.Month, 1)
+            chkIncludeZeroBalances.Checked = True
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea

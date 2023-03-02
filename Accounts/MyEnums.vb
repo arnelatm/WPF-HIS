@@ -404,3 +404,25 @@ Public Enum RecurTypeSelection
 
 End Enum
 
+Public Enum SearchModeEnum
+    [TextBox]
+    [Date]
+    [ComboBox]
+    [CheckBox]
+End Enum
+
+Public Enum SearchPlaceEnum
+    [StartOfField]
+    [AnywhereOnField]
+    [ExactValue]
+End Enum
+
+Public Enum DataTypeEnum
+    [String]
+    [Date]
+    [DateTime]
+    [Integer]
+    [Decimal]
+    [Boolean]
+End Enum
+

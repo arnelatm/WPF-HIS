@@ -138,15 +138,15 @@ Namespace PresentationLayer.Presenters
                     ViewToDataTables(View.CsrOiItems, DtOiInsertTable, DtOiUpdateTable, AddressOf CsrOiFillData,
                                      AddressOf CsrOiItemFilter)
                 End If
+                For Each item In View.JournalItems
+                    If item.Equals(DBNull.Value) Then
+                        item.Notes = ""
+                    End If
+                    If item.Notes Is Nothing Then
+                        item.Notes = ""
+                    End If
+                Next
             End If
-            For Each item In View.JournalItems
-                If item.Equals(DBNull.Value) Then
-                    item.Notes = ""
-                End If
-                If item.Notes Is Nothing Then
-                    item.Notes = ""
-                End If
-            Next
         End Sub
 
         Public Sub OnBeforeValidate() Handles MyBase.BeforeValidate
@@ -953,6 +953,9 @@ Namespace PresentationLayer.Presenters
         'End Function
 
         Public Overrides Function IsOkToEditRecord() As Boolean
+            If Not MyBase.IsOkToEditRecord() Then
+                Return False
+            End If
             Dim result As Boolean = True
             If ReconciledEntriesExist(View.JournalItems, "CR") Then
                 result = False

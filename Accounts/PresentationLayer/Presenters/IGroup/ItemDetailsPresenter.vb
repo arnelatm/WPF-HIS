@@ -69,8 +69,10 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnBeforeSave() Handles MyBase.BeforeSave
-            If View.ItemDetailsCode Is Nothing Or View.ItemDetailsCode = "" Then
-                View.ItemDetailsCode = Service.GenerateCode(View.IdNo)
+            If Not CancelSave Then
+                If View.ItemDetailsCode Is Nothing Or View.ItemDetailsCode = "" Then
+                    View.ItemDetailsCode = Service.GenerateCode(View.IdNo)
+                End If
             End If
         End Sub
 

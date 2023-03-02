@@ -221,6 +221,13 @@ Namespace PresentationLayer.Presenters
             cForm.Show()
         End Sub
 
+        Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
+            ' ReSharper disable once VBUseMethodAny.1
+            If View.JournalItems IsNot Nothing And View.JournalItems.Count() > 0 Then
+                DtUpdateTable.Clear()
+                _erJournalItemService.DelUpdateTvp(DtUpdateTable, idNo)
+            End If
+        End Sub
         Public Sub OnApJournalDataChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
             With eventType.BindingSource
                 If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then

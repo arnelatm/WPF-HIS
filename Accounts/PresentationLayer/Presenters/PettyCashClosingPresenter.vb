@@ -99,38 +99,40 @@ Namespace PresentationLayer.Presenters
         'End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            AddMode = True
-            If DtInsertTable IsNot Nothing Then
-                DtInsertTable.Clear()
-            End If
-            Dim nRowCount As Int16 = 1
-            CreateJournalItems()
-            Dim workRow As DataRow
-            For Each dataView In View.JournalItems
-                Dim idNo As Integer = dataView.IdNo
-                workRow = DtInsertTable.NewRow()
-                workRow("Sequence") = nRowCount
-                workRow("AccountIdNo") = dataView.AccountIdNo
-                workRow("Credit") = dataView.Credit
-                workRow("Debit") = dataView.Debit
-                workRow("JournalIdNo") = View.IdNo
-                workRow("Notes") = dataView.Notes
-                workRow("RevCostCenteridNo") = dataView.RevCostCenterIdNo
-                DtInsertTable.Rows.Add(workRow)
-                nRowCount += 1
-            Next
-            workRow = Nothing
-            For Each dataView In View.PcClosingJournals
-                If dataView.PcClosed Then
-                    Dim idNo As Integer = dataView.IdNo
-                    workRow = DtUpdateTable.NewRow()
-                    workRow("CdJournalIdNo") = View.IdNo
-                    workRow("IdNo") = dataView.IdNo
-                    workRow("PcClosed") = True
-                    DtUpdateTable.Rows.Add(workRow)
+            If Not CancelSave Then
+                AddMode = True
+                If DtInsertTable IsNot Nothing Then
+                    DtInsertTable.Clear()
                 End If
-            Next
-            View.PcClosed = True
+                Dim nRowCount As Int16 = 1
+                CreateJournalItems()
+                Dim workRow As DataRow
+                For Each dataView In View.JournalItems
+                    Dim idNo As Integer = dataView.IdNo
+                    workRow = DtInsertTable.NewRow()
+                    workRow("Sequence") = nRowCount
+                    workRow("AccountIdNo") = dataView.AccountIdNo
+                    workRow("Credit") = dataView.Credit
+                    workRow("Debit") = dataView.Debit
+                    workRow("JournalIdNo") = View.IdNo
+                    workRow("Notes") = dataView.Notes
+                    workRow("RevCostCenteridNo") = dataView.RevCostCenterIdNo
+                    DtInsertTable.Rows.Add(workRow)
+                    nRowCount += 1
+                Next
+                workRow = Nothing
+                For Each dataView In View.PcClosingJournals
+                    If dataView.PcClosed Then
+                        Dim idNo As Integer = dataView.IdNo
+                        workRow = DtUpdateTable.NewRow()
+                        workRow("CdJournalIdNo") = View.IdNo
+                        workRow("IdNo") = dataView.IdNo
+                        workRow("PcClosed") = True
+                        DtUpdateTable.Rows.Add(workRow)
+                    End If
+                Next
+                View.PcClosed = True
+            End If
         End Sub
 
         Public Sub CreateJournalItems()

@@ -117,7 +117,7 @@ Namespace PresentationLayer.Presenters
 
         'End Sub
 
-        Public Overrides Function Save(ByRef viewControl As Control)
+        Public Overrides Function Save(ByRef viewControl As Control) As Boolean
             'RaiseEvent BeforeSave()
             'Dim record As New TM
             'GlobalVariables.Mapper.Map(Of IView, TM)(View, record)
@@ -167,7 +167,7 @@ Namespace PresentationLayer.Presenters
                 UpdateViewData(TargetIdNo)
                 ClearAllErrorMessages()
             End If
-            Return retVal
+            Return retVal < 0
         End Function
 
         Public Overrides Function ChangesMade() As Boolean

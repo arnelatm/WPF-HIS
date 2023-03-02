@@ -168,6 +168,9 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Overrides Function IsOkToEditRecord() As Boolean
+            If Not MyBase.IsOkToEditRecord() Then
+                Return False
+            End If
             Dim result As Boolean = True
             Dim reconciledDao = New ReconciledDao
             For Each item In View.JournalItems

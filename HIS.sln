@@ -148,6 +148,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQuer
 		FindStringInAllTablesInAllColumns.sql = FindStringInAllTablesInAllColumns.sql
 		Look for tables containing field name.sql = Look for tables containing field name.sql
 		Query changed tables in a database.sql = Query changed tables in a database.sql
+		Query compare total from one table to total from a sub table.sql = Query compare total from one table to total from a sub table.sql
 		Query Sql Database for a certain name.sql = Query Sql Database for a certain name.sql
 		Query tables for Creation Date.sql = Query tables for Creation Date.sql
 		QueryAvailableIdentityFieldSpace.sql = QueryAvailableIdentityFieldSpace.sql

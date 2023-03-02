@@ -362,6 +362,9 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Overrides Function IsOkToEditRecord() As Boolean
+            If Not MyBase.IsOkToEditRecord() Then
+                Return False
+            End If
             Dim result As Boolean = True
             If ReconciledEntriesExist(View.JournalItems, "AR") Then
                 result = False

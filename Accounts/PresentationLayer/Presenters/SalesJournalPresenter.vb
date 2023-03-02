@@ -112,35 +112,37 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
-            MakeJournalItems()
-            SetAsideJournalItems()
-            Dim nRowCount As Integer
-            nRowCount = 1
-            For Each sc In View.SalesDeposits
-                If sc.SaleAmount <> 0 Or sc.DepositAmount <> 0 Then
-                    Dim workRow As DataRow
-                    If sc.IdNo <= 0 Then
-                        workRow = DtSalesDepositInsertTable.NewRow()
-                    Else
-                        workRow = DtSalesDepositUpdateTable.NewRow()
-                        workRow("IdNo") = sc.IdNo
+            If Not CancelSave Then
+                MakeJournalItems()
+                SetAsideJournalItems()
+                Dim nRowCount As Integer
+                nRowCount = 1
+                For Each sc In View.SalesDeposits
+                    If sc.SaleAmount <> 0 Or sc.DepositAmount <> 0 Then
+                        Dim workRow As DataRow
+                        If sc.IdNo <= 0 Then
+                            workRow = DtSalesDepositInsertTable.NewRow()
+                        Else
+                            workRow = DtSalesDepositUpdateTable.NewRow()
+                            workRow("IdNo") = sc.IdNo
+                        End If
+                        workRow("DepositTypeIdNo") = sc.DepositTypeIdNo
+                        workRow("SalesJournalIdNo") = View.IdNo
+                        workRow("Sequence") = nRowCount
+                        workRow("SaleAmount") = sc.SaleAmount
+                        workRow("DepositAmount") = sc.DepositAmount
+                        workRow("VatAmount") = sc.VatAmount
+                        If sc.IdNo <= 0 Then
+                            DtSalesDepositInsertTable.Rows.Add(workRow)
+                        Else
+                            DtSalesDepositUpdateTable.Rows.Add(workRow)
+                        End If
+                        nRowCount += 1
+                        'View.TotalDebits += sc.SaleAmount
                     End If
-                    workRow("DepositTypeIdNo") = sc.DepositTypeIdNo
-                    workRow("SalesJournalIdNo") = View.IdNo
-                    workRow("Sequence") = nRowCount
-                    workRow("SaleAmount") = sc.SaleAmount
-                    workRow("DepositAmount") = sc.DepositAmount
-                    workRow("VatAmount") = sc.VatAmount
-                    If sc.IdNo <= 0 Then
-                        DtSalesDepositInsertTable.Rows.Add(workRow)
-                    Else
-                        DtSalesDepositUpdateTable.Rows.Add(workRow)
-                    End If
-                    nRowCount += 1
-                    'View.TotalDebits += sc.SaleAmount
-                End If
-            Next
-            'View.TotalCredits = View.TotalDebits
+                Next
+                'View.TotalCredits = View.TotalDebits
+            End If
         End Sub
 
         Public Sub OnBeforeValidate() Handles MyBase.BeforeValidate
@@ -332,6 +334,9 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Overrides Function IsOkToEditRecord() As Boolean
+            If Not MyBase.IsOkToEditRecord() Then
+                Return False
+            End If
             Dim result As Boolean = True
             Dim reconciledDao = New ReconciledDao
             For Each item In View.JournalItems

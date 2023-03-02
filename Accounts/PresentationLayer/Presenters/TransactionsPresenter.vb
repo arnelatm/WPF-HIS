@@ -16,7 +16,7 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Function IsOkToDeleteRecord() As Boolean
             Dim retVal As Boolean = True
-            If MyBase.IsOkToDeleteRecord() Then
+            If MyBase.IsOkToDeleteRecord() And IsOkToChangeRecord() Then
                 Dim type As Type = View.GetType
                 If type.GetProperty("Posted") IsNot Nothing Then
                     Dim cPosted = CallByName(View, "Posted", CallType.Get)
@@ -33,7 +33,7 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Public Overrides Function IsOkToEditRecord() As Boolean
+        Private Function IsOkToChangeRecord() As Boolean
             Dim retVal As Boolean = True
             If MyBase.IsOkToEditRecord() Then
                 Dim type As Type = View.GetType
@@ -41,14 +41,14 @@ Namespace PresentationLayer.Presenters
                 If type.GetProperty("Posted") IsNot Nothing Then
                     Dim cPosted = CallByName(View, "Posted", CallType.Get)
                     If cPosted Then
-                        Messaging.Show(True, "MsgEditingOfPostedRecordNotAllowed")
+                        Messaging.Show(True, "MsgChangePostedRecordNotAllowed")
                         retVal = False
                     End If
                 End If
                 If retVal AndAlso type.GetProperty("TransactionDate") IsNot Nothing Then
                     Dim cTransactionDate = CallByName(View, "TransactionDate", CallType.Get)
                     If cTransactionDate <= closedTransactionDate Then
-                        Messaging.Show(True, "MsgEditingClosedTransaction")
+                        Messaging.Show(True, "MsgChangeClosedTransaction")
                         retVal = False
                     End If
                 End If
@@ -68,13 +68,62 @@ Namespace PresentationLayer.Presenters
                         If isEditable Then
                             ' user has editing options for approved transactions
                         Else
-                            Messaging.Show(True, "MsgEditingApprovedTransaction")
+                            Messaging.Show(True, "MsgChangeApprovedTransaction")
                             retVal = False
                         End If
                     End If
                 End If
             End If
             Return retVal
+        End Function
+
+        Public Overrides Function IsOkToEditRecord() As Boolean
+            If IsOkToChangeRecord() Then
+                Return True
+            End If
+            Return False
+
+            'Dim retVal As Boolean = True
+            'If MyBase.IsOkToEditRecord() Then
+            '    Dim type As Type = View.GetType
+            '    Static closedTransactionDate As Date = GetRecordFieldWithKeyG(Of Date)("Closed Period", "LastPosting", "TransactionName", "LastPostingDate")
+            '    If type.GetProperty("Posted") IsNot Nothing Then
+            '        Dim cPosted = CallByName(View, "Posted", CallType.Get)
+            '        If cPosted Then
+            '            Messaging.Show(True, "MsgChangePostedRecordNotAllowed")
+            '            retVal = False
+            '        End If
+            '    End If
+            '    If retVal AndAlso type.GetProperty("TransactionDate") IsNot Nothing Then
+            '        Dim cTransactionDate = CallByName(View, "TransactionDate", CallType.Get)
+            '        If cTransactionDate <= closedTransactionDate Then
+            '            Messaging.Show(True, "MsgChangeClosedTransaction")
+            '            retVal = False
+            '        End If
+            '    End If
+            '    If retVal AndAlso type.GetProperty("Approved") IsNot Nothing Then
+            '        Dim approved = CallByName(View, "Approved", CallType.Get)
+            '        If retVal AndAlso approved Then
+            '            Dim controlSecurityValues As ArrayList
+            '            Dim isEditable As Boolean
+            '            Dim controlSecurityObjectIdNo As Int32
+            '            controlSecurityObjectIdNo = GetControlSecurityIdNo("ApproveTransactions")
+            '            controlSecurityValues = GetUserSecurity(controlSecurityObjectIdNo, GlobalVariables.SecurityGroupIdNo)
+            '            If controlSecurityValues.Count > 0 Then
+            '                isEditable = controlSecurityValues(1)
+            '            Else
+            '                isEditable = False
+            '            End If
+            '            If isEditable Then
+            '                ' user has editing options for approved transactions
+            '            Else
+            '                Messaging.Show(True, "MsgChangeApprovedTransaction")
+            '                retVal = False
+            '            End If
+            '        End If
+            '    End If
+            'End If
+            'Return retVal
         End Function
 
         Public Sub OnValidatingDataTransactionEvent(ByRef eventType As ValidatingData) Implements ISubscriber(Of ValidatingData).OnEventHandler
@@ -93,6 +142,20 @@ Namespace PresentationLayer.Presenters
         Public Function GetLocalizedPrefix(journalCode As String)
             Return Service.GetField(journalCode, "JournalPrefix", "JournalCode", "JournalCodeAra")
         End Function
+
+        Public Sub OnTransactionBeforeSave() Handles MyBase.BeforeSave
+            If Not CancelSave Then
+                Dim type As Type = View.GetType
+                Static closedTransactionDate As Date = GetRecordFieldWithKeyG(Of Date)("Closed Period", "LastPosting", "TransactionName", "LastPostingDate")
+                If type.GetProperty("TransactionDate") IsNot Nothing Then
+                    Dim cTransactionDate = CallByName(View, "TransactionDate", CallType.Get)
+                    If cTransactionDate <= closedTransactionDate Then
+                        Messaging.Show(True, "MsgChangeClosedTransaction")
+                        CancelSave = True
+                    End If
+                End If
+            End If
+        End Sub
 
     End Class
 

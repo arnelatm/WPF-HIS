@@ -57,17 +57,19 @@ Public Class SecurityGroupPresenter(Of TM As New)
     End Sub
 
     Private Sub OnBeforeSave() Handles MyBase.BeforeSave
-        DtInsertTable.Clear()
-        DtUpdateTable.Clear()
-        For Each groupAccess In View.GroupAccesses
-            If groupAccess.IdNo <= 0 Then
-                If groupAccess.Visible OrElse groupAccess.Editable Then
-                    DtInsertTable.Rows.Add(groupAccess.Editable, View.IdNo, groupAccess.SecurityObjectIdNo, groupAccess.Visible)
+        If Not CancelSave Then
+            DtInsertTable.Clear()
+            DtUpdateTable.Clear()
+            For Each groupAccess In View.GroupAccesses
+                If groupAccess.IdNo <= 0 Then
+                    If groupAccess.Visible OrElse groupAccess.Editable Then
+                        DtInsertTable.Rows.Add(groupAccess.Editable, View.IdNo, groupAccess.SecurityObjectIdNo, groupAccess.Visible)
+                    End If
+                Else
+                    DtUpdateTable.Rows.Add(groupAccess.Editable, groupAccess.IdNo, View.IdNo, groupAccess.SecurityObjectIdNo, groupAccess.Visible)
                 End If
-            Else
-                DtUpdateTable.Rows.Add(groupAccess.Editable, groupAccess.IdNo, View.IdNo, groupAccess.SecurityObjectIdNo, groupAccess.Visible)
-            End If
-        Next
+            Next
+        End If
     End Sub
 
     Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully

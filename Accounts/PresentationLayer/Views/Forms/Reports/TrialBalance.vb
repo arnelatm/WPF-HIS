@@ -32,7 +32,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim endingDate As Date?
             Dim lastFiscalYearDate As Date
             Dim AccountBalanceYear As Integer
-            Dim begDataDate As Date
             Dim language As String
             language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
             lastFiscalYearDate = Presenter.GetRecordFieldWithKeyG(Of Date)("LastFiscalYearEnd", "LastPosting", "TransactionName", "lastPostingDate")
@@ -43,10 +42,8 @@ Namespace PresentationLayer.Views.Forms.Reports
             dtpBeginningDate.Value = beginningDate
             If beginningDate < lastFiscalYearDate Then
                 AccountBalanceYear = Year(beginningDate)
-                begDataDate = beginningDate
             Else
-                AccountBalanceYear = Year(lastFiscalYearDate)
-                begDataDate = lastFiscalYearDate
+                AccountBalanceYear = Presenter.GetFieldOnMaxField("Year", "AccountBalance", "Year")
             End If
             Dim reportName = Messaging.TranslateCaption("Trial Balance")
             Dim reportTitle As String
