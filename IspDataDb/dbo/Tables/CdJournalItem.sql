@@ -9,9 +9,12 @@
     [PayIdNo]           INT            NULL,
     [Notes]             NVARCHAR (300) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [Posted]            BIT            CONSTRAINT [DF_CashDisbursementJournalItem_Posted] DEFAULT ((0)) NOT NULL,
+    [OldAccountIdNo]    SMALLINT       NULL,
     [DateTimeStamp]     ROWVERSION     NOT NULL,
     CONSTRAINT [PK_CashDisbursementJournalItemsIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

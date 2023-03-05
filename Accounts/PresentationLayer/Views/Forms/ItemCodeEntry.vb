@@ -6,11 +6,15 @@ Namespace PresentationLayer.Views.Forms
     Public Class ItemCodeEntryTv
         Implements IItemCodeView
 
+        Private _lockGroup As Boolean = False
+
         Public Sub New()
             'MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             FirstControl = txtItemCodeName
+            LockGroup = False
+            btnLockGroup.Enabled = False
         End Sub
 
 #Region "Fields"
@@ -57,6 +61,13 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 cboCodeGroupIdNo.SetValue(Value)
+                If Value <> 0 Then
+                    btnLockGroup.Enabled = True
+                    'LockGroup = True
+                Else
+                    btnLockGroup.Enabled = False
+                    'LockGroup = False
+                End If
             End Set
         End Property
 
@@ -68,6 +79,22 @@ Namespace PresentationLayer.Views.Forms
                 txtNote.Text = Value
             End Set
         End Property
+
+        Public Property LockGroup As Boolean Implements IItemCodeView.LockGroup
+            Get
+                Return _lockGroup
+            End Get
+            Set(value As Boolean)
+                _lockGroup = value
+                If value Then
+                    btnLockGroup.BackgroundImage = My.Resources.Resources.Lock
+                Else
+                    btnLockGroup.BackgroundImage = My.Resources.Resources.Unlock
+                End If
+            End Set
+        End Property
+
+        Public Event LockGroupClicked() Implements IItemCodeView.LockGroupClicked
 
 #End Region
 
@@ -81,6 +108,21 @@ Namespace PresentationLayer.Views.Forms
                 {"CodeGroupIdNo", cboCodeGroupIdNo},
                 {"Note", txtNote}
                 }
+        End Sub
+
+        Private Sub BtnLockGroup_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnLockGroup.ClickButtonArea
+            If CodeGroupIdNo <> 0 Then
+                If Not LockGroup Then
+                    LockGroup = True
+                    RaiseEvent LockGroupClicked()
+                Else
+                    LockGroup = False
+                    RaiseEvent LockGroupClicked()
+                End If
+            Else
+                LockGroup = False
+            End If
+            RaiseEvent LockGroupClicked()
         End Sub
 
     End Class

@@ -8,10 +8,13 @@
     [RevCostCenterIdNo] SMALLINT       CONSTRAINT [DF_PcJournalItem_ProfitCenterIdNo] DEFAULT ((0)) NULL,
     [PayIdNo]           INT            NULL,
     [Notes]             NVARCHAR (300) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [OldAccountIdNo]    SMALLINT       NULL,
     [Posted]            BIT            CONSTRAINT [DF_PcJournalItem_Posted] DEFAULT ((0)) NOT NULL,
     [DateTimeStamp]     ROWVERSION     NOT NULL,
     CONSTRAINT [PK_PcJournalItemsIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

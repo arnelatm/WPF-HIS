@@ -7,12 +7,15 @@ Namespace PresentationLayer.Presenters
     Public Class ItemCodePresenter(Of TM As New)
         Inherits CommonPresenter(Of IItemCodeView, TM)
 
+
+
         Public Sub New(itemView As IItemCodeView)
             MyBase.New(itemView)
             Service = New AccountsService("ItemCode")
             TableName = "ItemCode"
             TreeViewMainField = "ItemCodeName"
             SortOrderKey = "ItemCodeName"
+            AddHandler View.LockGroupClicked, AddressOf LockGroupClicked
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -34,6 +37,16 @@ Namespace PresentationLayer.Presenters
             'End If
             Return False
         End Function
+
+        Public Sub LockGroupClicked()
+            If View.LockGroup Then
+                View.LockGroup = False
+                DataFilter = ""
+            Else
+                View.LockGroup = True
+                DataFilter = "CodeGroupIdNo = " & View.CodeGroupIdNo.ToString()
+            End If
+        End Sub
 
     End Class
 

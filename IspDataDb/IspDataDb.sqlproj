@@ -345,7 +345,6 @@
     <Build Include="dbo\Tables\Category.sql" />
     <Build Include="dbo\Stored Procedures\UpdateCkJournalItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertCkJournalItemTVP.sql" />
-    <Build Include="dbo\Tables\ChartBalance.sql" />
     <Build Include="dbo\Views\SalesJournalTransaction_View.sql" />
     <Build Include="dbo\Views\PcJournalTransaction_View.sql" />
     <Build Include="dbo\Functions\FuncErStatement.sql" />
@@ -532,6 +531,11 @@
     <Build Include="dbo\Tables\Computer.sql" />
     <Build Include="dbo\Tables\ReportFile.sql" />
     <Build Include="dbo\Tables\Report.sql" />
+    <Build Include="dbo\Views\IncomeStatementLayoutCT_View.sql" />
+    <Build Include="dbo\Views\GLDeptBalanceSheet_View.sql" />
+    <Build Include="dbo\Views\GeneralLedgerDept_View.sql" />
+    <Build Include="dbo\Functions\fnGetAcctActivityMovement.sql" />
+    <Build Include="dbo\Functions\FuncDeptGlIncomeStatement.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
