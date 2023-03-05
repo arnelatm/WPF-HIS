@@ -244,7 +244,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboCodeGroupIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>460, 24</value>
+    <value>428, 24</value>
   </data>
   <data name="cboCodeGroupIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -261,11 +261,52 @@
   <data name="&gt;&gt;cboCodeGroupIdNo.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="btnLockGroup.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAACxMAAAsTAQCanBgAAAHXSURBVGhD7ZddSsUwEIWLgg+KbkAf1fUoooK6IcVliCDi
+        AsQt+O7/DhT8A/VJz4EbCEObSZppWrUffHApd+Yk16SD1cgfYwZuw2N4Dd8n8jOfbUF+Z5BswAf4rXgP
+        1+FgmIaHsG6xIQ/gFOydpsV/wivI4/M1eSbdh73CYyMXdQd34Cx08PMu5PGR31+DvcDLKM/8OZyHTSzA
+        C+jXcMO9XGy+beRCQot3cBPyL7EJi8PXor8IHptY9qBfewSLcwPdAj6gf+Y15iAvuavnRS/OG8xZwC10
+        9exVHBdOL/kgEdb4PYrjh48b4IPS+OGD38ASPIWv0A/tQmacwRVoAhf/BOvCupSZizAb/vJ1ASU8gdmU
+        ODZNPsNsZNOuMc8zb6hgnmfeUME8z7yhgnmeeUMF8zzzhgrmeW0a+pM7dbK2yQuS2rBpcsdOVlmXTWrD
+        0OSOmayyJpvUhqHJHTNZZU02qQ1foKxx/ooN8MLKGiePl4asySa14Sp8hLKOl3gZasi6bNo05NuGF5bH
+        ifKXj1k8aZMXxLyhgnmeeUMF8zzzhgrmeeYNFczzzBsqmOeZN1QwzwtN1q41+ac+NFm7NmZyqzRN1q6N
+        ndxR+JO1LszS1Mk9MvKPqaofoLA/vDe2hFIAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnLockGroup.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="btnLockGroup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>593, 38</value>
+  </data>
+  <data name="btnLockGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 21</value>
+  </data>
+  <data name="btnLockGroup.TabIndex" type="System.Int32, mscorlib">
+    <value>163</value>
+  </data>
+  <data name="btnLockGroup.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;btnLockGroup.Name" xml:space="preserve">
+    <value>btnLockGroup</value>
+  </data>
+  <data name="&gt;&gt;btnLockGroup.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CButton, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;btnLockGroup.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;btnLockGroup.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="lblItemCodeCode.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblItemCodeCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 62</value>
+    <value>11, 63</value>
   </data>
   <data name="lblItemCodeCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -292,13 +333,13 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblItemCodeCode.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="txtItemCodeCode.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtItemCodeCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>161, 62</value>
+    <value>161, 63</value>
   </data>
   <data name="txtItemCodeCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -319,13 +360,13 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtItemCodeCode.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="lblItemCodeName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblItemCodeName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 87</value>
+    <value>11, 88</value>
   </data>
   <data name="lblItemCodeName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -352,13 +393,13 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblItemCodeName.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="txtItemCodeName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtItemCodeName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>161, 87</value>
+    <value>161, 88</value>
   </data>
   <data name="txtItemCodeName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -379,13 +420,13 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtItemCodeName.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="lblItemCodeNameAra.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblItemCodeNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 112</value>
+    <value>11, 113</value>
   </data>
   <data name="lblItemCodeNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -412,13 +453,13 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblItemCodeNameAra.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="txtItemCodeNameAra.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtItemCodeNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>161, 112</value>
+    <value>161, 113</value>
   </data>
   <data name="txtItemCodeNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -442,7 +483,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtItemCodeNameAra.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="LblNote.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -451,7 +492,7 @@
     <value>NoControl</value>
   </data>
   <data name="LblNote.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 137</value>
+    <value>11, 138</value>
   </data>
   <data name="LblNote.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -478,13 +519,13 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;LblNote.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="txtNote.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNote.Location" type="System.Drawing.Point, System.Drawing">
-    <value>161, 137</value>
+    <value>161, 138</value>
   </data>
   <data name="txtNote.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -505,7 +546,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtNote.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="floDataDisplay.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
@@ -617,7 +658,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACa
-        CQAAAk1TRnQBSQFMAgEBAgEAAagBAAHgAQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAAagBAAHoAQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA

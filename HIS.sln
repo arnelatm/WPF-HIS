@@ -143,6 +143,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQuer
 		EditingSqlQuery.sql = EditingSqlQuery.sql
 		Extract Varchar Fields to Images.sql = Extract Varchar Fields to Images.sql
 		Find all object references for a specific object.sql = Find all object references for a specific object.sql
+		Find all objects with a specific name.sql = Find all objects with a specific name.sql
 		Find All Tables without Primary KEy.sql = Find All Tables without Primary KEy.sql
 		Find duplicate fields in a table.sql = Find duplicate fields in a table.sql
 		FindStringInAllTablesInAllColumns.sql = FindStringInAllTablesInAllColumns.sql

@@ -10,6 +10,9 @@ Namespace PresentationLayer.Views.Interfaces
         Property ItemCodeNameAra As String
         Property CodeGroupIdNo As Int16
         Property Note As String
+        Property LockGroup As Boolean
+        Event LockGroupClicked() 
+
     End Interface
 
 End Namespace
