@@ -28,6 +28,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ItemCodeEntryTv))
+        Dim CBlendItems1 As AATM.Libraries.CBaseControlsLibrary.cBlendItems = New AATM.Libraries.CBaseControlsLibrary.cBlendItems()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtItemCodeCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -39,10 +40,10 @@ Namespace PresentationLayer.Views.Forms
         Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboCodeGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.btnLockGroup = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.LblNote = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtNote = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.btnLockGroup = New AATM.Libraries.CBaseControlsLibrary.CButton()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -70,6 +71,14 @@ Namespace PresentationLayer.Views.Forms
         Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"),System.Windows.Forms.ImageListStreamer)
         Me.ImageListTreeView.Images.SetKeyName(0, "TreeNode.ico")
         Me.ImageListTreeView.Images.SetKeyName(1, "openbriefcase.png")
+        '
+        'TranslatorDAC
+        '
+        Me.TranslatorDAC.Cs = ""
+        '
+        'AppDataDAC
+        '
+        Me.AppDataDAC.Cs = ""
         '
         'TxtIdNo
         '
@@ -169,7 +178,6 @@ Namespace PresentationLayer.Views.Forms
         Me.txtItemCodeName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtItemCodeName.Translatable = false
         Me.txtItemCodeName.ValueIsMandatory = true
-        Me.txtItemCodeName.ValueIsUnique = true
         '
         'lblItemCodeName
         '
@@ -205,7 +213,6 @@ Namespace PresentationLayer.Views.Forms
         Me.txtItemCodeNameAra.ReadOnly = true
         Me.txtItemCodeNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.txtItemCodeNameAra.Translatable = false
-        Me.txtItemCodeNameAra.ValueIsUnique = true
         '
         'lblItemCodeNameAra
         '
@@ -221,11 +228,11 @@ Namespace PresentationLayer.Views.Forms
         Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
         Me.floDataDisplay.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
         Me.floDataDisplay.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.floDataDisplay.Controls.Add(Me.lblIdNo)
-        Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
         Me.floDataDisplay.Controls.Add(Me.CLabel1)
         Me.floDataDisplay.Controls.Add(Me.cboCodeGroupIdNo)
         Me.floDataDisplay.Controls.Add(Me.btnLockGroup)
+        Me.floDataDisplay.Controls.Add(Me.lblIdNo)
+        Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
         Me.floDataDisplay.Controls.Add(Me.lblItemCodeCode)
         Me.floDataDisplay.Controls.Add(Me.txtItemCodeCode)
         Me.floDataDisplay.Controls.Add(Me.lblItemCodeName)
@@ -283,6 +290,20 @@ Namespace PresentationLayer.Views.Forms
         Me.cboCodeGroupIdNo.ValueIsNumeric = false
         Me.cboCodeGroupIdNo.ValueMember = "IdNo"
         '
+        'btnLockGroup
+        '
+        Me.btnLockGroup.BackColor = System.Drawing.Color.GreenYellow
+        resources.ApplyResources(Me.btnLockGroup, "btnLockGroup")
+        CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.White, System.Drawing.Color.White}
+        CBlendItems1.iPoint = New Single() {0!, 1!}
+        Me.btnLockGroup.ColorFillBlend = CBlendItems1
+        Me.btnLockGroup.DesignerSelected = false
+        Me.btnLockGroup.FillType = AATM.Libraries.CBaseControlsLibrary.CButton.eFillType.Solid
+        Me.btnLockGroup.ImageIndex = 0
+        Me.btnLockGroup.Name = "btnLockGroup"
+        Me.btnLockGroup.OriginalImageName = Nothing
+        Me.btnLockGroup.SecurityKey = ""
+        '
         'LblNote
         '
         Me.LblNote.DisplayOnly = true
@@ -325,16 +346,6 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout1.Controls.Add(Me.floDataDisplay)
         resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
         Me.CFlowLayout1.Name = "CFlowLayout1"
-        '
-        'btnLockGroup
-        '
-        Me.btnLockGroup.BackColor = System.Drawing.Color.GreenYellow
-        resources.ApplyResources(Me.btnLockGroup, "btnLockGroup")
-        Me.btnLockGroup.DesignerSelected = true
-        Me.btnLockGroup.ImageIndex = 0
-        Me.btnLockGroup.Name = "btnLockGroup"
-        Me.btnLockGroup.OriginalImageName = Nothing
-        Me.btnLockGroup.SecurityKey = ""
         '
         'ItemCodeEntryTv
         '

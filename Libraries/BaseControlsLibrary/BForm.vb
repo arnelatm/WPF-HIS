@@ -13,6 +13,7 @@ Public Class BForm
         ' Add any initialization after the InitializeComponent() call.
         BackColor = SystemColors.Desktop
         BackgroundImage = Images.GreenGradientBackgroundLarge
+        'BackgroundImage = Images.Unlock
         BackgroundImageLayout = ImageLayout.Stretch
         Application.EnableVisualStyles()
 

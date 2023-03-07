@@ -273,12 +273,13 @@ Public Class CFormEntry
                 btnAdd.Enabled = True
                 btnDelete.Enabled = False
                 btnFind.Enabled = False
-                btnPrint.Enabled = False
-                btnUndo.Enabled = False
+                btnPrint.Enabled = False                
                 If adding Or editing Then
                     btnSave.Enabled = True
+                    btnUndo.Enabled = True
                 Else
                     btnSave.Enabled = False
+                    btnUndo.Enabled = False
                 End If
             ElseIf recordPositionNumber = 1 Then
                 btnFirst.Enabled = False
@@ -308,9 +309,10 @@ Public Class CFormEntry
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
-        'AddMode = True
+        BeforeAdd()
         PublishClickedButton(ButtonClicked.Add)
         Inputs(True)
+        AfterAdd()
         'UpdateNavigationButtonDisplay(False, True)
     End Sub
 
@@ -342,7 +344,15 @@ Public Class CFormEntry
     End Sub
 
     Protected Overridable Sub BeforeEdit()
+    End Sub
 
+    Protected Overridable Sub AfterEdit()
+    End Sub
+
+    Protected Overridable Sub BeforeAdd()
+    End Sub
+
+    Protected Overridable Sub AfterAdd()
     End Sub
 
     Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click

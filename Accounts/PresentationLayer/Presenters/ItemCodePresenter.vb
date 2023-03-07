@@ -7,8 +7,6 @@ Namespace PresentationLayer.Presenters
     Public Class ItemCodePresenter(Of TM As New)
         Inherits CommonPresenter(Of IItemCodeView, TM)
 
-
-
         Public Sub New(itemView As IItemCodeView)
             MyBase.New(itemView)
             Service = New AccountsService("ItemCode")
@@ -16,6 +14,7 @@ Namespace PresentationLayer.Presenters
             TreeViewMainField = "ItemCodeName"
             SortOrderKey = "ItemCodeName"
             AddHandler View.LockGroupClicked, AddressOf LockGroupClicked
+            AddHandler View.FilterRecords, AddressOf FilterRecords
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -40,11 +39,35 @@ Namespace PresentationLayer.Presenters
 
         Public Sub LockGroupClicked()
             If View.LockGroup Then
-                View.LockGroup = False
-                DataFilter = ""
-            Else
-                View.LockGroup = True
                 DataFilter = "CodeGroupIdNo = " & View.CodeGroupIdNo.ToString()
+            Else
+                DataFilter = ""
+            End If
+            DisplayTree()
+        End Sub
+
+
+        Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
+            'If View.LockGroup Then
+            View.CodeGroupIdNo = View.SavedGroupIdNo
+            'End If
+        End Sub
+
+        Public Overrides Sub GoFilter()
+            'If DataFilter Is Nothing Or DataFilter = "" Then
+            '    DataFilter = "Active = 1"
+            'Else
+            '    DataFilter = ""
+            'End If
+            DisplayTree()
+            GoFirstRecord()
+        End Sub
+
+        Public Sub FilterRecords()
+            DataFilter = View.DataFilter
+            DisplayTree()
+            If Not AddMode Then
+                GoLastRecord()
             End If
         End Sub
 

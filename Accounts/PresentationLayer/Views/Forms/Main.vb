@@ -1117,6 +1117,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemIqamaCBCResultBySampleNo_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemIqamaCBCResultBySampleNo.Click
             RunForm(Of IqamaCbcReport, String)("SampleNo")
         End Sub
+
+        Private Sub DosagePrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DosagePrintingToolStripMenuItem.Click
+            RunForm(Of DosagePrinting, DosagePrintingPresenter(Of DosagePrintingModel))()
+        End Sub
     End Class
 
 End Namespace

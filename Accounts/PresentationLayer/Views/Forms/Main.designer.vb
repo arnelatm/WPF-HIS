@@ -172,6 +172,7 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemShiftDailySummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemAccountingReports = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemLaboratoryReports = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemIqamaCBCResultBySampleNo = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemIqamaCBCResultByInvoiceNo = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemDiagnosticTestSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemSalesReports = New System.Windows.Forms.ToolStripMenuItem()
@@ -212,7 +213,7 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemIqamaCBCResultBySampleNo = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DosagePrintingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.AccountsMenu.SuspendLayout
@@ -727,7 +728,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemPharmacy
         '
-        Me.ToolStripMenuItemPharmacy.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemDrugSale, Me.ToolStripMenuItemDrugAcceptance, Me.ToolStripMenuItemItemMatcher})
+        Me.ToolStripMenuItemPharmacy.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemDrugSale, Me.ToolStripMenuItemDrugAcceptance, Me.ToolStripMenuItemItemMatcher, Me.DosagePrintingToolStripMenuItem})
         Me.ToolStripMenuItemPharmacy.Name = "ToolStripMenuItemPharmacy"
         resources.ApplyResources(Me.ToolStripMenuItemPharmacy, "ToolStripMenuItemPharmacy")
         '
@@ -970,6 +971,11 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemLaboratoryReports.Name = "ToolStripMenuItemLaboratoryReports"
         resources.ApplyResources(Me.ToolStripMenuItemLaboratoryReports, "ToolStripMenuItemLaboratoryReports")
         '
+        'ToolStripMenuItemIqamaCBCResultBySampleNo
+        '
+        Me.ToolStripMenuItemIqamaCBCResultBySampleNo.Name = "ToolStripMenuItemIqamaCBCResultBySampleNo"
+        resources.ApplyResources(Me.ToolStripMenuItemIqamaCBCResultBySampleNo, "ToolStripMenuItemIqamaCBCResultBySampleNo")
+        '
         'ToolStripMenuItemIqamaCBCResultByInvoiceNo
         '
         Me.ToolStripMenuItemIqamaCBCResultByInvoiceNo.Name = "ToolStripMenuItemIqamaCBCResultByInvoiceNo"
@@ -1179,10 +1185,10 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
-        'ToolStripMenuItemIqamaCBCResultBySampleNo
+        'DosagePrintingToolStripMenuItem
         '
-        Me.ToolStripMenuItemIqamaCBCResultBySampleNo.Name = "ToolStripMenuItemIqamaCBCResultBySampleNo"
-        resources.ApplyResources(Me.ToolStripMenuItemIqamaCBCResultBySampleNo, "ToolStripMenuItemIqamaCBCResultBySampleNo")
+        Me.DosagePrintingToolStripMenuItem.Name = "DosagePrintingToolStripMenuItem"
+        resources.ApplyResources(Me.DosagePrintingToolStripMenuItem, "DosagePrintingToolStripMenuItem")
         '
         'Main
         '
@@ -1394,5 +1400,6 @@ End Sub
         Friend WithEvents ToolStripMenuItemIqamaCBCResultByInvoiceNo As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDiagnosticTestSummary As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemIqamaCBCResultBySampleNo As ToolStripMenuItem
+        Friend WithEvents DosagePrintingToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace

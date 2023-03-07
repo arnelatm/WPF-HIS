@@ -224,10 +224,8 @@
   <ItemGroup>
     <Content Include="Resources\Image1.png" />
     <Content Include="Resources\btnPrint.png" />
+    <None Include="Resources\Lock.png" />
     <None Include="Resources\Unlock.png" />
-    <None Include="Resources\Lock.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
