@@ -196,6 +196,9 @@ Public Class CFormBase
                 btnPrint.Enabled = False
                 btnUndo.Enabled = False
                 If adding Or editing Then
+                    If adding Then
+                        btnUndo.Enabled = True
+                    End If
                     btnSave.Enabled = True
                 Else
                     btnSave.Enabled = False

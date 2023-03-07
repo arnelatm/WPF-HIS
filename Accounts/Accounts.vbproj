@@ -223,6 +223,7 @@
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
     <Compile Include="BusinessLayer\IGroup\DrugAccept.vb" />
+    <Compile Include="BusinessLayer\IGroup\DosagePrinting.vb" />
     <Compile Include="BusinessLayer\IGroup\DrugSale.vb" />
     <Compile Include="BusinessLayer\IGroup\GTinMatcher.vb" />
     <Compile Include="BusinessLayer\IGroup\StockInventory.vb" />
@@ -307,6 +308,7 @@
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\DoctorDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\DrugAcceptDao.vb" />
+    <Compile Include="DataLayer\AdoNet\IGroup\DosagePrintingDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\DrugTransactionDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\DrugSaleDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\StockInventoryDao.vb" />
@@ -418,6 +420,7 @@
     </Compile>
     <Compile Include="OneTimeRun.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\DrugAcceptModel.vb" />
+    <Compile Include="PresentationLayer\Models\IGroup\DosagePrintingModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\DrugSaleModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\GTinMatcherModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\StockInventoryModel.vb" />
@@ -479,6 +482,7 @@
     <Compile Include="PresentationLayer\Presenters\IGroup\DrugAcceptPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\DrugSalePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\GTinMatcherPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\IGroup\DosagePrintingPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\StockInventoryPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ItemCodePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CodeGroupPresenter.vb" />
@@ -530,6 +534,12 @@
       <DependentUpon>ArJournalEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\ArJournalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\DosagePrinting.Designer.vb">
+      <DependentUpon>DosagePrinting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\DosagePrinting.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DoctorEntry.Designer.vb">
@@ -860,6 +870,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IDrugAcceptView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IDrugSaleView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IGTinMatcherView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IDosagePrintView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IStockInventoryView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IItemCode.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ICodeGroup.vb" />
@@ -1819,6 +1830,10 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ArJournalEntry.resx">
       <DependentUpon>ArJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\DosagePrinting.resx">
+      <DependentUpon>DosagePrinting.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\DoctorEntry.resx">
       <DependentUpon>DoctorEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -2718,6 +2733,11 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\Lock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Unlock.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

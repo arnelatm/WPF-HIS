@@ -302,158 +302,158 @@ Namespace PresentationLayer.Views.Forms
         Me.LblDefaultPaperSource.TabIndex = 159
         Me.LblDefaultPaperSource.Text = "Paper Source"
         Me.LblDefaultPaperSource.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.LblDefaultPaperSource.Translatable = True
-            '
-            'cboDefaultPaperSource
-            '
-            Me.cboDefaultPaperSource.BackColor = System.Drawing.Color.White
-            Me.cboDefaultPaperSource.BegFindValue = Nothing
-            Me.cboDefaultPaperSource.ChangingSearchValueOnly = False
-            Me.cboDefaultPaperSource.CurrentSearchTerm = ""
-            Me.cboDefaultPaperSource.DataValue = Nothing
-            Me.cboDefaultPaperSource.DefaultValue = Nothing
-            Me.cboDefaultPaperSource.DisplayMember = "Name"
-            Me.cboDefaultPaperSource.EditingMode = True
-            Me.cboDefaultPaperSource.EndFindValue = Nothing
-            Me.cboDefaultPaperSource.FieldDescription = Nothing
-            Me.cboDefaultPaperSource.FieldName = Nothing
-            Me.cboDefaultPaperSource.FilterRule = Nothing
-            Me.cboDefaultPaperSource.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboDefaultPaperSource.FindEnabled = False
-            Me.floDataDisplay.SetFlowBreak(Me.cboDefaultPaperSource, True)
-            Me.cboDefaultPaperSource.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cboDefaultPaperSource.ForeColor = System.Drawing.Color.Black
-            Me.cboDefaultPaperSource.FormattingEnabled = True
-            Me.cboDefaultPaperSource.HideWhenNotEditingOrAdding = False
-            Me.cboDefaultPaperSource.IgnoreCase = False
-            Me.cboDefaultPaperSource.IntegralHeight = False
-            Me.cboDefaultPaperSource.LinkedLabel = Me.LblDefaultPaperSource
-            Me.cboDefaultPaperSource.Location = New System.Drawing.Point(157, 117)
-            Me.cboDefaultPaperSource.Margin = New System.Windows.Forms.Padding(1)
-            Me.cboDefaultPaperSource.Name = "cboDefaultPaperSource"
-            Me.cboDefaultPaperSource.OldValue = 0
-            Me.cboDefaultPaperSource.OriginalDataSource = Nothing
-            Me.cboDefaultPaperSource.OriginalList = Nothing
-            Me.cboDefaultPaperSource.OverrideDropDownStyleList = False
-            Me.cboDefaultPaperSource.PreviousSearchTerm = Nothing
-            Me.cboDefaultPaperSource.PropertySelector = Nothing
-            Me.cboDefaultPaperSource.ReadOnlyCombo = False
-            Me.cboDefaultPaperSource.Size = New System.Drawing.Size(221, 24)
-            Me.cboDefaultPaperSource.SuggestBoxHeight = 200
-            Me.cboDefaultPaperSource.SuggestListOrderRule = Nothing
-            Me.cboDefaultPaperSource.TabIndex = 4
-            Me.cboDefaultPaperSource.TextToSearch = Nothing
-            Me.cboDefaultPaperSource.Translatable = False
-            Me.cboDefaultPaperSource.ValueIsMandatory = False
-            Me.cboDefaultPaperSource.ValueIsNullable = False
-            Me.cboDefaultPaperSource.ValueIsNumeric = False
-            Me.cboDefaultPaperSource.ValueMember = "IdNo"
-            '
-            'LblDefaultPaperSize
-            '
-            Me.LblDefaultPaperSize.DisplayOnly = True
-            Me.LblDefaultPaperSize.EditingMode = False
-            Me.LblDefaultPaperSize.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.MyErrorProvider.SetIconAlignment(Me.LblDefaultPaperSize, System.Windows.Forms.ErrorIconAlignment.TopLeft)
-            Me.LblDefaultPaperSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.LblDefaultPaperSize.Location = New System.Drawing.Point(11, 143)
-            Me.LblDefaultPaperSize.Margin = New System.Windows.Forms.Padding(1)
-            Me.LblDefaultPaperSize.Name = "LblDefaultPaperSize"
-            Me.LblDefaultPaperSize.Size = New System.Drawing.Size(144, 23)
-            Me.LblDefaultPaperSize.TabIndex = 161
-            Me.LblDefaultPaperSize.Text = "Paper Size"
-            Me.LblDefaultPaperSize.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.LblDefaultPaperSize.Translatable = True
-            '
-            'cboDefaultPaperSize
-            '
-            Me.cboDefaultPaperSize.BackColor = System.Drawing.Color.White
-            Me.cboDefaultPaperSize.BegFindValue = Nothing
-            Me.cboDefaultPaperSize.ChangingSearchValueOnly = False
-            Me.cboDefaultPaperSize.CurrentSearchTerm = ""
-            Me.cboDefaultPaperSize.DataValue = Nothing
-            Me.cboDefaultPaperSize.DefaultValue = Nothing
-            Me.cboDefaultPaperSize.DisplayMember = "Name"
-            Me.cboDefaultPaperSize.EditingMode = True
-            Me.cboDefaultPaperSize.EndFindValue = Nothing
-            Me.cboDefaultPaperSize.FieldDescription = Nothing
-            Me.cboDefaultPaperSize.FieldName = Nothing
-            Me.cboDefaultPaperSize.FilterRule = Nothing
-            Me.cboDefaultPaperSize.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboDefaultPaperSize.FindEnabled = False
-            Me.floDataDisplay.SetFlowBreak(Me.cboDefaultPaperSize, True)
-            Me.cboDefaultPaperSize.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cboDefaultPaperSize.ForeColor = System.Drawing.Color.Black
-            Me.cboDefaultPaperSize.FormattingEnabled = True
-            Me.cboDefaultPaperSize.HideWhenNotEditingOrAdding = False
-            Me.cboDefaultPaperSize.IgnoreCase = False
-            Me.cboDefaultPaperSize.IntegralHeight = False
-            Me.cboDefaultPaperSize.LinkedLabel = Me.LblDefaultPaperSize
-            Me.cboDefaultPaperSize.Location = New System.Drawing.Point(157, 143)
-            Me.cboDefaultPaperSize.Margin = New System.Windows.Forms.Padding(1)
-            Me.cboDefaultPaperSize.Name = "cboDefaultPaperSize"
-            Me.cboDefaultPaperSize.OldValue = 0
-            Me.cboDefaultPaperSize.OriginalDataSource = Nothing
-            Me.cboDefaultPaperSize.OriginalList = Nothing
-            Me.cboDefaultPaperSize.OverrideDropDownStyleList = False
-            Me.cboDefaultPaperSize.PreviousSearchTerm = Nothing
-            Me.cboDefaultPaperSize.PropertySelector = Nothing
-            Me.cboDefaultPaperSize.ReadOnlyCombo = False
-            Me.cboDefaultPaperSize.Size = New System.Drawing.Size(221, 24)
-            Me.cboDefaultPaperSize.SuggestBoxHeight = 200
-            Me.cboDefaultPaperSize.SuggestListOrderRule = Nothing
-            Me.cboDefaultPaperSize.TabIndex = 5
-            Me.cboDefaultPaperSize.TextToSearch = Nothing
-            Me.cboDefaultPaperSize.Translatable = False
-            Me.cboDefaultPaperSize.ValueIsMandatory = False
-            Me.cboDefaultPaperSize.ValueIsNullable = False
-            Me.cboDefaultPaperSize.ValueIsNumeric = False
-            Me.cboDefaultPaperSize.ValueMember = "Name"
-            '
-            'LblDefaultPaperOrientation
-            '
-            Me.LblDefaultPaperOrientation.DisplayOnly = True
-            Me.LblDefaultPaperOrientation.EditingMode = False
-            Me.LblDefaultPaperOrientation.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.MyErrorProvider.SetIconAlignment(Me.LblDefaultPaperOrientation, System.Windows.Forms.ErrorIconAlignment.TopLeft)
-            Me.LblDefaultPaperOrientation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.LblDefaultPaperOrientation.Location = New System.Drawing.Point(11, 169)
-            Me.LblDefaultPaperOrientation.Margin = New System.Windows.Forms.Padding(1)
-            Me.LblDefaultPaperOrientation.Name = "LblDefaultPaperOrientation"
-            Me.LblDefaultPaperOrientation.Size = New System.Drawing.Size(144, 23)
-            Me.LblDefaultPaperOrientation.TabIndex = 163
-            Me.LblDefaultPaperOrientation.Text = "Paper Orientation"
-            Me.LblDefaultPaperOrientation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.LblDefaultPaperOrientation.Translatable = True
-            '
-            'cboDefaultPaperOrientation
-            '
-            Me.cboDefaultPaperOrientation.BackColor = System.Drawing.Color.White
-            Me.cboDefaultPaperOrientation.BegFindValue = Nothing
-            Me.cboDefaultPaperOrientation.ChangingSearchValueOnly = False
-            Me.cboDefaultPaperOrientation.CurrentSearchTerm = ""
-            Me.cboDefaultPaperOrientation.DataValue = Nothing
-            Me.cboDefaultPaperOrientation.DefaultValue = Nothing
-            Me.cboDefaultPaperOrientation.DisplayMember = "Name"
-            Me.cboDefaultPaperOrientation.EditingMode = True
-            Me.cboDefaultPaperOrientation.EndFindValue = Nothing
-            Me.cboDefaultPaperOrientation.FieldDescription = Nothing
-            Me.cboDefaultPaperOrientation.FieldName = Nothing
-            Me.cboDefaultPaperOrientation.FilterRule = Nothing
-            Me.cboDefaultPaperOrientation.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboDefaultPaperOrientation.FindEnabled = False
-            Me.cboDefaultPaperOrientation.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cboDefaultPaperOrientation.ForeColor = System.Drawing.Color.Black
-            Me.cboDefaultPaperOrientation.FormattingEnabled = True
-            Me.cboDefaultPaperOrientation.HideWhenNotEditingOrAdding = False
-            Me.cboDefaultPaperOrientation.IgnoreCase = False
-            Me.cboDefaultPaperOrientation.IntegralHeight = False
-            Me.cboDefaultPaperOrientation.LinkedLabel = Me.LblDefaultPaperOrientation
-            Me.cboDefaultPaperOrientation.Location = New System.Drawing.Point(157, 169)
-            Me.cboDefaultPaperOrientation.Margin = New System.Windows.Forms.Padding(1)
-            Me.cboDefaultPaperOrientation.Name = "cboDefaultPaperOrientation"
-            Me.cboDefaultPaperOrientation.OldValue = 0
-            Me.cboDefaultPaperOrientation.OriginalDataSource = Nothing
+        Me.LblDefaultPaperSource.Translatable = true
+        '
+        'cboDefaultPaperSource
+        '
+        Me.cboDefaultPaperSource.BackColor = System.Drawing.Color.White
+        Me.cboDefaultPaperSource.BegFindValue = Nothing
+        Me.cboDefaultPaperSource.ChangingSearchValueOnly = false
+        Me.cboDefaultPaperSource.CurrentSearchTerm = ""
+        Me.cboDefaultPaperSource.DataValue = Nothing
+        Me.cboDefaultPaperSource.DefaultValue = Nothing
+        Me.cboDefaultPaperSource.DisplayMember = "Name"
+        Me.cboDefaultPaperSource.EditingMode = true
+        Me.cboDefaultPaperSource.EndFindValue = Nothing
+        Me.cboDefaultPaperSource.FieldDescription = Nothing
+        Me.cboDefaultPaperSource.FieldName = Nothing
+        Me.cboDefaultPaperSource.FilterRule = Nothing
+        Me.cboDefaultPaperSource.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboDefaultPaperSource.FindEnabled = false
+        Me.floDataDisplay.SetFlowBreak(Me.cboDefaultPaperSource, true)
+        Me.cboDefaultPaperSource.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.cboDefaultPaperSource.ForeColor = System.Drawing.Color.Black
+        Me.cboDefaultPaperSource.FormattingEnabled = true
+        Me.cboDefaultPaperSource.HideWhenNotEditingOrAdding = false
+        Me.cboDefaultPaperSource.IgnoreCase = false
+        Me.cboDefaultPaperSource.IntegralHeight = false
+        Me.cboDefaultPaperSource.LinkedLabel = Me.LblDefaultPaperSource
+        Me.cboDefaultPaperSource.Location = New System.Drawing.Point(157, 117)
+        Me.cboDefaultPaperSource.Margin = New System.Windows.Forms.Padding(1)
+        Me.cboDefaultPaperSource.Name = "cboDefaultPaperSource"
+        Me.cboDefaultPaperSource.OldValue = 0
+        Me.cboDefaultPaperSource.OriginalDataSource = Nothing
+        Me.cboDefaultPaperSource.OriginalList = Nothing
+        Me.cboDefaultPaperSource.OverrideDropDownStyleList = false
+        Me.cboDefaultPaperSource.PreviousSearchTerm = Nothing
+        Me.cboDefaultPaperSource.PropertySelector = Nothing
+        Me.cboDefaultPaperSource.ReadOnlyCombo = false
+        Me.cboDefaultPaperSource.Size = New System.Drawing.Size(221, 24)
+        Me.cboDefaultPaperSource.SuggestBoxHeight = 200
+        Me.cboDefaultPaperSource.SuggestListOrderRule = Nothing
+        Me.cboDefaultPaperSource.TabIndex = 4
+        Me.cboDefaultPaperSource.TextToSearch = Nothing
+        Me.cboDefaultPaperSource.Translatable = false
+        Me.cboDefaultPaperSource.ValueIsMandatory = false
+        Me.cboDefaultPaperSource.ValueIsNullable = false
+        Me.cboDefaultPaperSource.ValueIsNumeric = false
+        Me.cboDefaultPaperSource.ValueMember = "IdNo"
+        '
+        'LblDefaultPaperSize
+        '
+        Me.LblDefaultPaperSize.DisplayOnly = true
+        Me.LblDefaultPaperSize.EditingMode = false
+        Me.LblDefaultPaperSize.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.MyErrorProvider.SetIconAlignment(Me.LblDefaultPaperSize, System.Windows.Forms.ErrorIconAlignment.TopLeft)
+        Me.LblDefaultPaperSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.LblDefaultPaperSize.Location = New System.Drawing.Point(11, 143)
+        Me.LblDefaultPaperSize.Margin = New System.Windows.Forms.Padding(1)
+        Me.LblDefaultPaperSize.Name = "LblDefaultPaperSize"
+        Me.LblDefaultPaperSize.Size = New System.Drawing.Size(144, 23)
+        Me.LblDefaultPaperSize.TabIndex = 161
+        Me.LblDefaultPaperSize.Text = "Paper Size"
+        Me.LblDefaultPaperSize.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LblDefaultPaperSize.Translatable = true
+        '
+        'cboDefaultPaperSize
+        '
+        Me.cboDefaultPaperSize.BackColor = System.Drawing.Color.White
+        Me.cboDefaultPaperSize.BegFindValue = Nothing
+        Me.cboDefaultPaperSize.ChangingSearchValueOnly = false
+        Me.cboDefaultPaperSize.CurrentSearchTerm = ""
+        Me.cboDefaultPaperSize.DataValue = Nothing
+        Me.cboDefaultPaperSize.DefaultValue = Nothing
+        Me.cboDefaultPaperSize.DisplayMember = "Name"
+        Me.cboDefaultPaperSize.EditingMode = true
+        Me.cboDefaultPaperSize.EndFindValue = Nothing
+        Me.cboDefaultPaperSize.FieldDescription = Nothing
+        Me.cboDefaultPaperSize.FieldName = Nothing
+        Me.cboDefaultPaperSize.FilterRule = Nothing
+        Me.cboDefaultPaperSize.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboDefaultPaperSize.FindEnabled = false
+        Me.floDataDisplay.SetFlowBreak(Me.cboDefaultPaperSize, true)
+        Me.cboDefaultPaperSize.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.cboDefaultPaperSize.ForeColor = System.Drawing.Color.Black
+        Me.cboDefaultPaperSize.FormattingEnabled = true
+        Me.cboDefaultPaperSize.HideWhenNotEditingOrAdding = false
+        Me.cboDefaultPaperSize.IgnoreCase = false
+        Me.cboDefaultPaperSize.IntegralHeight = false
+        Me.cboDefaultPaperSize.LinkedLabel = Me.LblDefaultPaperSize
+        Me.cboDefaultPaperSize.Location = New System.Drawing.Point(157, 143)
+        Me.cboDefaultPaperSize.Margin = New System.Windows.Forms.Padding(1)
+        Me.cboDefaultPaperSize.Name = "cboDefaultPaperSize"
+        Me.cboDefaultPaperSize.OldValue = 0
+        Me.cboDefaultPaperSize.OriginalDataSource = Nothing
+        Me.cboDefaultPaperSize.OriginalList = Nothing
+        Me.cboDefaultPaperSize.OverrideDropDownStyleList = false
+        Me.cboDefaultPaperSize.PreviousSearchTerm = Nothing
+        Me.cboDefaultPaperSize.PropertySelector = Nothing
+        Me.cboDefaultPaperSize.ReadOnlyCombo = false
+        Me.cboDefaultPaperSize.Size = New System.Drawing.Size(221, 24)
+        Me.cboDefaultPaperSize.SuggestBoxHeight = 200
+        Me.cboDefaultPaperSize.SuggestListOrderRule = Nothing
+        Me.cboDefaultPaperSize.TabIndex = 5
+        Me.cboDefaultPaperSize.TextToSearch = Nothing
+        Me.cboDefaultPaperSize.Translatable = false
+        Me.cboDefaultPaperSize.ValueIsMandatory = false
+        Me.cboDefaultPaperSize.ValueIsNullable = false
+        Me.cboDefaultPaperSize.ValueIsNumeric = false
+        Me.cboDefaultPaperSize.ValueMember = "Name"
+        '
+        'LblDefaultPaperOrientation
+        '
+        Me.LblDefaultPaperOrientation.DisplayOnly = true
+        Me.LblDefaultPaperOrientation.EditingMode = false
+        Me.LblDefaultPaperOrientation.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.MyErrorProvider.SetIconAlignment(Me.LblDefaultPaperOrientation, System.Windows.Forms.ErrorIconAlignment.TopLeft)
+        Me.LblDefaultPaperOrientation.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.LblDefaultPaperOrientation.Location = New System.Drawing.Point(11, 169)
+        Me.LblDefaultPaperOrientation.Margin = New System.Windows.Forms.Padding(1)
+        Me.LblDefaultPaperOrientation.Name = "LblDefaultPaperOrientation"
+        Me.LblDefaultPaperOrientation.Size = New System.Drawing.Size(144, 23)
+        Me.LblDefaultPaperOrientation.TabIndex = 163
+        Me.LblDefaultPaperOrientation.Text = "Paper Orientation"
+        Me.LblDefaultPaperOrientation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.LblDefaultPaperOrientation.Translatable = true
+        '
+        'cboDefaultPaperOrientation
+        '
+        Me.cboDefaultPaperOrientation.BackColor = System.Drawing.Color.White
+        Me.cboDefaultPaperOrientation.BegFindValue = Nothing
+        Me.cboDefaultPaperOrientation.ChangingSearchValueOnly = false
+        Me.cboDefaultPaperOrientation.CurrentSearchTerm = ""
+        Me.cboDefaultPaperOrientation.DataValue = Nothing
+        Me.cboDefaultPaperOrientation.DefaultValue = Nothing
+        Me.cboDefaultPaperOrientation.DisplayMember = "Name"
+        Me.cboDefaultPaperOrientation.EditingMode = true
+        Me.cboDefaultPaperOrientation.EndFindValue = Nothing
+        Me.cboDefaultPaperOrientation.FieldDescription = Nothing
+        Me.cboDefaultPaperOrientation.FieldName = Nothing
+        Me.cboDefaultPaperOrientation.FilterRule = Nothing
+        Me.cboDefaultPaperOrientation.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboDefaultPaperOrientation.FindEnabled = false
+        Me.cboDefaultPaperOrientation.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.cboDefaultPaperOrientation.ForeColor = System.Drawing.Color.Black
+        Me.cboDefaultPaperOrientation.FormattingEnabled = true
+        Me.cboDefaultPaperOrientation.HideWhenNotEditingOrAdding = false
+        Me.cboDefaultPaperOrientation.IgnoreCase = false
+        Me.cboDefaultPaperOrientation.IntegralHeight = false
+        Me.cboDefaultPaperOrientation.LinkedLabel = Me.LblDefaultPaperOrientation
+        Me.cboDefaultPaperOrientation.Location = New System.Drawing.Point(157, 169)
+        Me.cboDefaultPaperOrientation.Margin = New System.Windows.Forms.Padding(1)
+        Me.cboDefaultPaperOrientation.Name = "cboDefaultPaperOrientation"
+        Me.cboDefaultPaperOrientation.OldValue = 0
+        Me.cboDefaultPaperOrientation.OriginalDataSource = Nothing
         Me.cboDefaultPaperOrientation.OriginalList = Nothing
         Me.cboDefaultPaperOrientation.OverrideDropDownStyleList = false
         Me.cboDefaultPaperOrientation.PreviousSearchTerm = Nothing

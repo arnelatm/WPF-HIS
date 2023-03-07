@@ -7,6 +7,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IItemCodeView
 
         Private _lockGroup As Boolean = False
+        Private _groupIdNo As Int16
 
         Public Sub New()
             'MyBase.New()
@@ -14,7 +15,17 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             FirstControl = txtItemCodeName
             LockGroup = False
-            btnLockGroup.Enabled = False
+            btnLockGroup.Enabled = True
+        End Sub
+
+        Public Sub New(codeGroupIdNo As Int16)
+            'MyBase.New()
+            ' This call is required by the designer.
+            InitializeComponent()
+            FirstControl = txtItemCodeName
+            LockGroup = False
+            btnLockGroup.Enabled = True
+            DataFilter = "CodeGroupIdNo = " + codeGroupIdNo.ToString()
         End Sub
 
 #Region "Fields"
@@ -61,12 +72,12 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 cboCodeGroupIdNo.SetValue(Value)
-                If Value <> 0 Then
-                    btnLockGroup.Enabled = True
-                    'LockGroup = True
-                Else
-                    btnLockGroup.Enabled = False
-                    'LockGroup = False
+                If Not btnEdit.Enabled Then
+                    If Value <> 0 Then
+                        btnLockGroup.Enabled = True
+                    Else
+                        btnLockGroup.Enabled = True
+                    End If
                 End If
             End Set
         End Property
@@ -87,14 +98,17 @@ Namespace PresentationLayer.Views.Forms
             Set(value As Boolean)
                 _lockGroup = value
                 If value Then
-                    btnLockGroup.BackgroundImage = My.Resources.Resources.Lock
+                    btnLockGroup.BackgroundImage = My.Resources.Lock
                 Else
-                    btnLockGroup.BackgroundImage = My.Resources.Resources.Unlock
+                    btnLockGroup.BackgroundImage = My.Resources.Unlock
                 End If
             End Set
         End Property
 
+        Public Property SavedGroupIdNo As Short Implements IItemCodeView.SavedGroupIdNo
+
         Public Event LockGroupClicked() Implements IItemCodeView.LockGroupClicked
+        Public Event FilterRecords() Implements IItemCodeView.FilterRecords
 
 #End Region
 
@@ -110,20 +124,70 @@ Namespace PresentationLayer.Views.Forms
                 }
         End Sub
 
-        Private Sub BtnLockGroup_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnLockGroup.ClickButtonArea
-            If CodeGroupIdNo <> 0 Then
-                If Not LockGroup Then
-                    LockGroup = True
-                    RaiseEvent LockGroupClicked()
-                Else
-                    LockGroup = False
-                    RaiseEvent LockGroupClicked()
-                End If
-            Else
-                LockGroup = False
-            End If
-            RaiseEvent LockGroupClicked()
+        'Private Sub BtnLockGroup_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnLockGroup.ClickButtonArea
+        '    If CodeGroupIdNo <> 0 Then
+        '        If Not LockGroup Then
+        '            LockGroup = True
+        '            SavedGroupIdNo = CodeGroupIdNo
+        '            cboCodeGroupIdNo.Enabled = False
+        '            RaiseEvent LockGroupClicked()
+        '        Else
+        '            cboCodeGroupIdNo.Enabled = True
+        '            LockGroup = False
+        '            RaiseEvent LockGroupClicked()
+        '        End If
+        '    Else
+        '        LockGroup = False
+        '        cboCodeGroupIdNo.Enabled = True
+        '    End If
+        '    RaiseEvent LockGroupClicked()
+        'End Sub
+
+        Private Sub OnFormLoad() Handles MyBase.Load
+            DataFilter = "CodeGroupIdNo = 0"
+            RaiseEvent FilterRecords()
+            cboCodeGroupIdNo.Enabled = True
+            cboCodeGroupIdNo.DisplayOnly = False
         End Sub
+
+        Private Sub cboCodeGroupIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboCodeGroupIdNo.SelectedIndexChanged
+            DataFilter = "CodeGroupIdNo = " & CodeGroupIdNo.ToString()
+            SavedGroupIdNo = CodeGroupIdNo
+            RaiseEvent FilterRecords()
+        End Sub
+
+        Protected Overrides Sub BeforeEdit()
+            cboCodeGroupIdNo.Enabled = False
+        End Sub
+
+        Protected Overrides Sub AfterEdit()
+            EnableCodeGroupIdNoSelection()
+        End Sub
+
+        Protected Sub ItemCodeAfterUpdateView() Handles MyBase.AfterUpdateView
+            EnableCodeGroupIdNoSelection()
+        End Sub
+
+        Private Sub EnableCodeGroupIdNoSelection()
+            cboCodeGroupIdNo.Enabled = True
+            cboCodeGroupIdNo.DisplayOnly = False
+        End Sub
+
+        Protected Overrides Sub BeforeAdd()
+            _groupIdNo = CodeGroupIdNo
+            MyBase.BeforeAdd()
+            'CodeGroupIdNo = _groupIdNo
+        End Sub
+
+        Protected Overrides Sub AfterAdd()
+            MyBase.AfterAdd()
+            CodeGroupIdNo = _groupIdNo
+            If CodeGroupIdNo <> 0 Then
+                cboCodeGroupIdNo.Enabled = False
+                cboCodeGroupIdNo.DisplayOnly = True
+            End If
+        End Sub
+
 
     End Class
 

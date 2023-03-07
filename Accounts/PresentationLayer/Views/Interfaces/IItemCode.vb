@@ -11,8 +11,9 @@ Namespace PresentationLayer.Views.Interfaces
         Property CodeGroupIdNo As Int16
         Property Note As String
         Property LockGroup As Boolean
-        Event LockGroupClicked() 
-
+        Property SavedGroupIdNo As Int16
+        Event LockGroupClicked()
+        Event FilterRecords()
     End Interface
 
 End Namespace
