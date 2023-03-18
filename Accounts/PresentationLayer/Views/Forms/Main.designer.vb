@@ -213,7 +213,7 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DosagePrintingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DosageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.AccountsMenu.SuspendLayout
@@ -728,7 +728,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemPharmacy
         '
-        Me.ToolStripMenuItemPharmacy.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemDrugSale, Me.ToolStripMenuItemDrugAcceptance, Me.ToolStripMenuItemItemMatcher, Me.DosagePrintingToolStripMenuItem})
+        Me.ToolStripMenuItemPharmacy.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemDrugSale, Me.ToolStripMenuItemDrugAcceptance, Me.ToolStripMenuItemItemMatcher, Me.DosageToolStripMenuItem})
         Me.ToolStripMenuItemPharmacy.Name = "ToolStripMenuItemPharmacy"
         resources.ApplyResources(Me.ToolStripMenuItemPharmacy, "ToolStripMenuItemPharmacy")
         '
@@ -1185,10 +1185,10 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
-        'DosagePrintingToolStripMenuItem
+        'DosageToolStripMenuItem
         '
-        Me.DosagePrintingToolStripMenuItem.Name = "DosagePrintingToolStripMenuItem"
-        resources.ApplyResources(Me.DosagePrintingToolStripMenuItem, "DosagePrintingToolStripMenuItem")
+        Me.DosageToolStripMenuItem.Name = "DosageToolStripMenuItem"
+        resources.ApplyResources(Me.DosageToolStripMenuItem, "DosageToolStripMenuItem")
         '
         'Main
         '
@@ -1400,6 +1400,6 @@ End Sub
         Friend WithEvents ToolStripMenuItemIqamaCBCResultByInvoiceNo As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDiagnosticTestSummary As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemIqamaCBCResultBySampleNo As ToolStripMenuItem
-        Friend WithEvents DosagePrintingToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents DosageToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace

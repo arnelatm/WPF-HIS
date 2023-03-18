@@ -69,12 +69,13 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Protected Overrides Sub CreateDataSources()
-            CreateDataSourceThread({{"DrugDosageForm_View", "DosageForm", "DosageForm"},
-                                    {"DrugUnitOfVolume_View", "UnitOfVolume", "UnitOfVolume"},
-                                    {"DrugUnitOfStrength_View", "UnitOfStrength", "UnitOfStrength"},
-                                    {"DrugPackageType_View", "PackageType", "PackageType"},
-                                    {"DrugRouteOfAdministration_View", "RouteOfAdministration", "RouteOfAdministration"}
-                                    })
+            Dim data As New ArrayList
+            data.Add({"DrugDosageForm_View", "DosageForm", "DosageForm"})
+            data.Add({"DrugUnitOfVolume_View", "UnitOfVolume", "UnitOfVolume"})
+            data.Add({"DrugUnitOfStrength_View", "UnitOfStrength", "UnitOfStrength"})
+            data.Add({"DrugPackageType_View", "PackageType", "PackageType"})
+            data.Add({"DrugRouteOfAdministration_View", "RouteOfAdministration", "RouteOfAdministration"})
+            CreateDataSourceThread(data)
         End Sub
 
         Public Overrides Sub GoFilter()

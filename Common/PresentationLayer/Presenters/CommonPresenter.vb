@@ -29,7 +29,20 @@ Namespace PresentationLayer.Presenters
             MakeDefaultValues()
         End Sub
 
-        Protected Sub CreateDataSourceThread(dataSourceNames As Object)
+        'Protected Sub CreateDataSourceThread(dataSourceNames As Object)
+        '    Dim luItems As List(Of DataLookup)
+        '    luItems = CreateDataLookups(dataSourceNames)
+        '    For Each luItem As DataLookup In luItems
+        '        luItem.PropertyControl = GetFieldControlName(luItem.PropertyName)
+        '        luItem.Data = luItem.LookUpTask.Result
+        '        Invoker.SetPropertyR(luItem.PropertyControl, "DataSource", luItem.Data)
+        '        Invoker.SetPropertyR(luItem.PropertyControl, "DisplayMember", luItem.Data.Columns(0).ColumnName)
+        '        Invoker.SetPropertyR(luItem.PropertyControl, "ValueMember", luItem.ValueMember)
+        '    Next
+        'End Sub
+
+        
+        Protected Sub CreateDataSourceThread(dataSourceNames As ArrayList)
             Dim luItems As List(Of DataLookup)
             luItems = CreateDataLookups(dataSourceNames)
             For Each luItem As DataLookup In luItems
@@ -41,38 +54,59 @@ Namespace PresentationLayer.Presenters
             Next
         End Sub
 
-        Protected Sub CreateLookupDataThread(dataSourceNames As Object)
+        'Protected Sub CreateLookupDataThread(dataSourceNames As Object)
+        '    Dim luItems As List(Of DataLookup)
+        '    luItems = CreateDataLookups(dataSourceNames)
+        '    For Each luItem As DataLookup In luItems
+        '        'luItem.PropertyControl = GetFieldControlName(luItem.PropertyName)
+        '        luItem.Data = luItem.LookUpTask.Result
+        '        'CallByName(View,luItem.PropertyName.ToString(),CallType.Set, luItem.Data)
+        '        Invoker.SetProperty(Me.View, luItem.PropertyName, luItem.Data)
+        '        'Invoker.SetPropertyR(luItem.PropertyControl, "DisplayMember", luItem.Data.Columns(0).ColumnName)
+        '        'Invoker.SetPropertyR(luItem.PropertyControl, "ValueMember", luItem.ValueMember)
+        '    Next
+        'End Sub
+
+        
+        Protected Sub CreateLookupDataThread(dataSourceNames As ArrayList)
             Dim luItems As List(Of DataLookup)
             luItems = CreateDataLookups(dataSourceNames)
             For Each luItem As DataLookup In luItems
-                'luItem.PropertyControl = GetFieldControlName(luItem.PropertyName)
                 luItem.Data = luItem.LookUpTask.Result
-                'CallByName(View,luItem.PropertyName.ToString(),CallType.Set, luItem.Data)
                 Invoker.SetProperty(Me.View, luItem.PropertyName, luItem.Data)
-                'Invoker.SetPropertyR(luItem.PropertyControl, "DisplayMember", luItem.Data.Columns(0).ColumnName)
-                'Invoker.SetPropertyR(luItem.PropertyControl, "ValueMember", luItem.ValueMember)
             Next
         End Sub
 
-        Private Function CreateDataLookups(dataSourceNames As Object) As List(Of DataLookup)
+        Protected Sub CreateDataSourceGroupCodeThread(GroupCodeCodes As Object)
+            Dim nCount = GroupCodeCodes.Length()
+            Dim dataSourceNames as New ArrayList
+            For i = 0 To nCount / 2 - 1
+                Dim idNo As Int16
+                idNo = Service.GetRecordFieldWithKeyG(Of Int16, String)(GroupCodeCodes(i, 1), "CodeGroup", "CodeGroupCode", "IdNo")
+                dataSourceNames.Add({"ItemCode", GroupCodeCodes(i, 0), "ItemCodeCode,ItemCodeName", "CodeGroupIdNo = " & idNo.ToString()})
+            Next
+            CreateDataSourceThread(dataSourceNames)
+        End Sub
+
+        Private Function CreateDataLookups(dataSourceNames As ArrayList) As List(Of DataLookup)
             Const LookupTableName As Int32 = 0
             Const PropertyFieldName As Int32 = 1
             Const LookupFieldNames As Int32 = 2
             Const LookupFilter As Int32 = 3
             Const LookupSortKey As Int32 = 4
             Dim lookups As New List(Of DataLookup)
-            For i = 0 To UBound(dataSourceNames, 1)
+            For each item In dataSourceNames
                 Dim dtl As New DataLookup
-                dtl.TableName = dataSourceNames(i, LookupTableName)
-                dtl.PropertyName = dataSourceNames(i, PropertyFieldName)
-                If UBound(dataSourceNames, 2) > 1 Then
-                    dtl.LuFields = dataSourceNames(i, LookupFieldNames)
+                dtl.TableName = item(LookupTableName)
+                dtl.PropertyName = item(PropertyFieldName)
+                If item.Length-1 > 1 Then
+                    dtl.LuFields = item(LookupFieldNames)
                 End If
-                If UBound(dataSourceNames, 2) > 2 Then
-                    dtl.Filter = dataSourceNames(i, LookupFilter)
+                If item.Length-1 > 2 Then
+                    dtl.Filter = item(LookupFilter)
                 End If
-                If UBound(dataSourceNames, 2) > 3 Then
-                    dtl.SortKey = dataSourceNames(i, LookupSortKey)
+                If item.Length-1  > 3 Then
+                    dtl.SortKey = item(LookupSortKey)
                 End If
                 ComposeLookupProperties(dtl)
                 dtl.LookUpTask = Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(dtl))
@@ -80,6 +114,71 @@ Namespace PresentationLayer.Presenters
             Next
             Return lookups
         End Function
+
+        'Private Function CreateDataLookupsGroupCode(GroupCodeCodes As Object) As List(Of DataLookup)  
+        '    Dim dataSourceNames As Object = Nothing
+        '    For each item In GroupCodeCodes
+        '        Dim idNo As Int16
+        '        idNo = Service.GetRecordFieldWithKeyG(Of Int16, String)(item(2), "CodeGroup", "CodeGroupCode", "IdNo")
+        '        dataSourceNames.Add("ItemCode",GroupCodeCodes(1),"ItemCodeCode,ItemCodeName","CodeGroupIdNo = " & idNo.ToString())
+        '    Next
+        '    Return CreateDataLookups(dataSourceNames)
+        'End Function
+
+
+        'Private Function CreateDataLookups(dataSourceNames As Object) As List(Of DataLookup)
+        '    Const LookupTableName As Int32 = 0
+        '    Const PropertyFieldName As Int32 = 1
+        '    Const LookupFieldNames As Int32 = 2
+        '    Const LookupFilter As Int32 = 3
+        '    Const LookupSortKey As Int32 = 4
+        '    Dim lookups As New List(Of DataLookup)
+        '    For i = 0 To dataSourceNames.Length()-1
+        '        Dim dtl As New DataLookup
+        '        dtl.TableName = datasourcenames(i)(LookupTableName)
+        '        dtl.PropertyName = dataSourceNames(i)(PropertyFieldName)
+        '        If dataSourceNames(i).Length() > 2 Then
+        '            dtl.LuFields = dataSourceNames(i)(LookupFieldNames)
+        '        End If
+        '        If dataSourceNames(i).Length() > 3 Then
+        '            dtl.Filter = dataSourceNames(i)(LookupFilter)
+        '        End If
+        '        If dataSourceNames(i).Length() > 4 Then
+        '            dtl.SortKey = dataSourceNames(i)(LookupSortKey)
+        '        End If
+        '        ComposeLookupProperties(dtl)
+        '        dtl.LookUpTask = Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(dtl))
+        '        lookups.Add(dtl)
+        '    Next
+        '    Return lookups
+        'End Function
+
+        'Private Function CreateDataLookups(dataSourceNames As Object) As List(Of DataLookup)
+        '    Const LookupTableName As Int32 = 0
+        '    Const PropertyFieldName As Int32 = 1
+        '    Const LookupFieldNames As Int32 = 2
+        '    Const LookupFilter As Int32 = 3
+        '    Const LookupSortKey As Int32 = 4
+        '    Dim lookups As New List(Of DataLookup)
+        '    For i = 0 To UBound(dataSourceNames, 1)
+        '        Dim dtl As New DataLookup
+        '        dtl.TableName = dataSourceNames(i, LookupTableName)
+        '        dtl.PropertyName = dataSourceNames(i, PropertyFieldName)
+        '        If UBound(dataSourceNames, 2) > 1 Then
+        '            dtl.LuFields = dataSourceNames(i, LookupFieldNames)
+        '        End If
+        '        If UBound(dataSourceNames, 2) > 2 Then
+        '            dtl.Filter = dataSourceNames(i, LookupFilter)
+        '        End If
+        '        If UBound(dataSourceNames, 2) > 3 Then
+        '            dtl.SortKey = dataSourceNames(i, LookupSortKey)
+        '        End If
+        '        ComposeLookupProperties(dtl)
+        '        dtl.LookUpTask = Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(dtl))
+        '        lookups.Add(dtl)
+        '    Next
+        '    Return lookups
+        'End Function
 
         Private Sub ComposeLookupProperties(dtl As DataLookup)
             Dim RightToLeftFormat = GlobalFunctions.IsRightToLeft(CultureInfo.CurrentCulture.ToString())
@@ -168,9 +267,9 @@ Namespace PresentationLayer.Presenters
     Public Class DataCreator
 
         Private Shared _sv As Service
-        
-        Public Sub New(svc As Service) 
-            _sv = svc            
+
+        Public Sub New(svc As Service)
+            _sv = svc
         End Sub
 
         Public Function CreateDataTable(dtl As DataLookup) As DataTable

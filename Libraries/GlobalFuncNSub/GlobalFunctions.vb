@@ -1505,4 +1505,376 @@ Public Module GlobalFunctions
         Return False
     End Function
 
+    Public Function DecimalToFraction(ByVal decimalNumber As Double, Optional den As Integer = 32) As String
+
+        Dim fracString As String
+
+        Dim dp As Decimal = decimalNumber Mod 1 'determine decimal portion
+
+        Dim wn As Integer = CInt(Fix(decimalNumber)) 'determine whole number portion
+
+        Dim num As Integer = CInt(Math.Floor(dp * den + 0.5)) 'determine numerator
+
+        If num = 0 Then 'decimal rounds down to next whole number
+
+            fracString = wn.ToString
+
+        ElseIf num = den Then 'decimal rounds up to next whole number
+
+            fracString = (wn + 1).ToString
+
+        Else 'somewhere between
+
+            Do Until num Mod 2 = 1
+
+                num = CInt(num / 2)
+
+                den = CInt(den / 2)
+
+            Loop
+
+            If wn > 0 Then
+
+                fracString = wn.ToString & " " & num.ToString & "/" & den.ToString
+
+            Else
+
+                fracString = num.ToString & "/" & den.ToString
+
+            End If
+
+        End If
+
+        Return fracString 'return string
+
+    End Function
+
+    Function Num2Fraction(dblSource As Decimal) As Fraction
+        Dim lp As Long
+        Dim strNumber As String
+        Dim strDecimals As String
+        Dim lngN As Double
+        Dim lngD As Double
+
+        ' Slight rework of JohnYingling's example to get
+        ' numerator and denominator as numerics rather than
+        ' string
+        strNumber = CStr(dblSource)
+        strDecimals = Right(strNumber, Len(strNumber) - InStr(strNumber, "."))
+        If Len(strDecimals) > 0 Then
+            lngN = CLng(strDecimals)
+            lngD = 10 ^ (Len(strDecimals))
+        End If
+
+        ' Given a numerator and denominator, reduce to
+        ' lowest terms by checking for common factors, stating with the highest
+        For lp = lngN To 2 Step -1 ' No need to check 1
+            If lngN Mod lp = 0 Then
+                If lngD Mod lp = 0 Then
+                    lngN = lngN / lp
+                    lngD = lngD / lp
+                    lp = lngN ' reduce search space
+                End If
+            End If
+        Next
+        Return New Fraction(lngN,lngD)
+    End Function
+
+
+    ''' <summary>
+    ''' Return a fraction string from a double.
+    ''' </summary>
+    ''' <param name="d">The double to convert.</param>
+    ''' <returns>The converted string.</returns>
+    ''' <remarks>Code written by Troy Lundin on May 3, 2007</remarks>
+    Function GetFraction(ByVal d As Double) As String
+        ' Get the initial denominator: 1 * (10 ^ decimal portion length)
+        Dim tb1 = d.ToString()
+        Dim Denom As Int32 = CInt(1 * (10 ^ tb1.Split("."c)(1).Length))
+
+        ' Get the initial numerator: integer portion of the number
+        Dim Numer As Int32 = CInt(tb1.Split("."c)(1))
+
+        ' Use the Euclidean algorithm to find the gcd
+        Dim a As Int32 = Numer
+        Dim b As Int32 = Denom
+        Dim t As Int32 = 0 ' t is a value holder
+
+        ' Euclidean algorithm
+        While b <> 0
+            t = b
+            b = a Mod b
+            a = t
+        End While
+
+        ' Return our answer
+        Return CInt(d) & " " & (Numer / a) & "/" & (Denom / a)
+    End Function
+
+    Public Function GetDecimalToFraction(ByVal dNumber As Double, ByVal iDenominator As Integer, sMethod As String) As String
+        Dim dRes As Double
+        Dim dPrec As Double
+        Dim iIn As Long, iParts As Integer
+        dPrec = 1 / iDenominator        'decimal precision
+        dRes = 0 : iIn = 0 : iParts = 0
+        dRes = Round(dNumber, dPrec, sMethod)
+        iIn = Int(dRes)
+        iParts = CInt((dRes - iIn) * iDenominator)
+        If iParts = iDenominator Then
+            GetDecimalToFraction = CStr(iIn + 1)
+        ElseIf iParts > 0 Then
+            Do While (iParts Mod 2) = 0 And (iDenominator Mod 2) = 0
+                iParts = iParts / 2
+                iDenominator = iDenominator / 2
+            Loop
+            If iIn > 0 Then
+                GetDecimalToFraction = CStr(iIn) & " " & CStr(iParts) & "/" & CStr(iDenominator)
+            Else
+                GetDecimalToFraction = CStr(iParts) & "/" & CStr(iDenominator)
+            End If
+        Else    'parts=0
+            GetDecimalToFraction = CStr(iIn)
+        End If
+    End Function
+
+    Public Function Round(dNumber As Double, dIncrement As Double, sMethod As String) As Double
+        If sMethod Like "U" Then
+            Round = CLng((dNumber + dIncrement / 2) / dIncrement) * dIncrement
+        ElseIf sMethod Like "D" Then
+            Round = CLng((dNumber - dIncrement / 2) / dIncrement) * dIncrement
+        Else    'assume nearest
+            Round = CLng(dNumber / dIncrement) * dIncrement
+        End If
+    End Function
+
+    Public Function RealToFraction(ByVal value As Double, Optional ByVal accuracy As Double = 0.01) As String
+        If accuracy <= 0.0 OrElse accuracy >= 1.0 Then
+            Throw New ArgumentOutOfRangeException("accuracy", "Must be > 0 and < 1.")
+        End If
+
+        Dim sign As Integer = Math.Sign(value)
+
+        If sign = -1 Then
+            value = Math.Abs(value)
+        End If
+        Dim fraction As Fraction
+        Dim maxError As Double = If(sign = 0, accuracy, value * accuracy)
+        Dim n As Integer = CInt(Math.Floor(value))
+        value -= n
+
+        If value < maxError Then
+            fraction = New Fraction(sign * n, 1)
+            Return FractionToString(fraction)
+        End If
+
+        If 1 - maxError < value Then
+            fraction = New Fraction(sign * (n + 1), 1)
+            Return FractionToString(fraction)
+        End If
+
+        Dim lower_n As Integer = 0
+        Dim lower_d As Integer = 1
+        Dim upper_n As Integer = 1
+        Dim upper_d As Integer = 1
+
+        While True
+            Dim middle_n As Integer = lower_n + upper_n
+            Dim middle_d As Integer = lower_d + upper_d
+
+            If middle_d * (value + maxError) < middle_n Then
+                upper_n = middle_n
+                upper_d = middle_d
+            ElseIf middle_n < (value - maxError) * middle_d Then
+                lower_n = middle_n
+                lower_d = middle_d
+            Else
+                fraction = New Fraction((n * middle_d + middle_n) * sign, middle_d)
+                Return FractionToString(fraction)
+            End If
+        End While
+    End Function
+
+    Public Structure Fraction
+        Public Sub New(ByVal nP As Integer, ByVal dP As Integer)
+            N = nP
+            D = dP
+        End Sub
+
+        Public Property N As Integer
+        Public Property D As Integer
+    End Structure
+
+    Public Function FractionToString(fraction As Fraction) As String
+        Dim fractionString As String = ""
+        If fraction.N = 0 Then
+            Return ""
+        Else
+
+        End If
+        Return fraction.N.ToString() + "/" + fraction.D.ToString()
+    End Function
+
+    Public Function NumberToWord(number As Decimal) As String
+        Return ConvertToEnglish(number)
+    End Function
+
+
+#Region "English Number To Word"
+
+#Region "Variables"
+
+    Private _englishOnes As String() = New String() {"Zero", "One", "Two", "Three", "Four", "Five",
+     "Six", "Seven", "Eight", "Nine", "Ten", "Eleven",
+     "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen",
+     "Eighteen", "Nineteen"}
+
+
+    Private _englishFractionOnes As String() = New String() {"", "", "half", "third", "fourth", "fifth",
+     "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh",
+     "twelfth", "thirteenth", "Fourteenth", "Fifteenth", "Sixteenth", "Seventeenth",
+     "eighteenth", "nineteenth"}
+
+    Private _englishTens As String() = New String() {"Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy",
+     "Eighty", "Ninety"}
+
+
+    Private _englishFractionTens As String() = New String() {"twentieth", "thirtieth", "Fortieth", "Fiftieth", "Sixtieth", "Seventieth",
+     "Eightieth", "Ninetieth"}
+
+    Private _englishGroup As String() = New String() {"Hundred", "Thousand", "Million", "Billion", "Trillion", "Quadrillion",
+     "Quintillion", "Sextillian", "Septillion", "Octillion", "Nonillion", "Decillion",
+     "Undecillion", "Duodecillion", "Tredecillion", "Quattuordecillion", "Quindecillion", "Sexdecillion",
+     "Septendecillion", "Octodecillion", "Novemdecillion", "Vigintillion", "Unvigintillion", "Duovigintillion",
+     "10^72", "10^75", "10^78", "10^81", "10^84", "10^87",
+     "Vigintinonillion", "10^93", "10^96", "Duotrigintillion", "Trestrigintillion"}
+
+    Private _englishFractionGroup As String() = New String() {"Hundredth", "Thousandth", "Millionth", "Billionth", "Trillionth", "Quadrillionth",
+     "Quintillionth", "Sextillianth", "Septillionth", "Octillionth", "Nonillionth", "Decillionth",
+     "Undecillionth", "Duodecillionth", "Tredecillionth", "Quattuordecillionth", "Quindecillionth", "Sexdecillionth",
+     "Septendecillionth", "Octodecillionth", "Novemdecillionth", "Vigintillionth", "Unvigintillionth", "Duovigintillionth",
+     "10^72", "10^75th", "10^78th", "10^81th", "10^84th", "10^87th",
+     "Vigintinonillionth", "10^93th", "10^96th", "Duotrigintillionth", "Trestrigintillionth"}
+
+#End Region
+
+    ''' <summary>
+    ''' Process a group of 3 digits
+    ''' </summary>
+    ''' <param name="groupNumber">The group number to process</param>
+    ''' <returns></returns>
+    Private Function ProcessGroup(ByVal groupNumber As Integer, Optional ByVal fractonalPart As Boolean = False) As String
+        Dim tens As Integer = groupNumber Mod 100
+
+        Dim hundreds As Integer = groupNumber \ 100
+
+        Dim retVal As String = [String].Empty
+
+        If hundreds > 0 Then
+            retVal = [String].Format("{0} {1}", Iif(fractonalPart,_englishOnes(hundreds),_englishFractionOnes), IIf(fractonalPart,_englishGroup(0),_englishFractionGroup(0)))
+        End If
+        If tens > 0 Then
+            If tens < 20 Then
+                retVal += (If((retVal <> [String].Empty), " ", [String].Empty)) & IIf(fractonalPart,_englishOnes(tens),_englishFractionOnes(tens))
+            Else
+                Dim ones As Integer = tens Mod 10
+
+                tens = (tens \ 10) - 2
+                ' 20's offset
+                retVal += (If((retVal <> [String].Empty), " ", [String].Empty)) & IIf(fractonalPart,_englishTens(tens),_englishFractionTens(tens))
+
+                If ones > 0 Then
+                    retVal += (If((retVal <> [String].Empty), " ", [String].Empty)) & IIf(fractonalPart,_englishOnes(ones),_englishFractionOnes(ones))
+                End If
+            End If
+        End If
+
+        Return retVal
+    End Function
+
+    ''' <summary>
+    ''' Convert stored number to words using selected currency
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function ConvertToEnglish(number As Decimal, Optional money As Boolean = True) As String
+        Dim tempNumber As [Decimal] = number
+        Dim retVal As String = ""
+        If tempNumber = 0 Then
+            Return "Zero"
+        End If
+        Dim _decimalValue As Int64
+        Dim _integerValue As Int64
+        Dim splits As [String]() = number.ToString().Split("."c)
+        _integerValue = Convert.ToInt64(splits(0))
+        If splits.Length > 1 Then
+            _decimalValue = Convert.ToInt64(splits(1))
+        End If
+        retVal = ConvertWholeNumberToWord(_integerValue)
+        If _decimalValue > 0 Then
+            Dim fraction As Fraction = Num2Fraction(_decimalValue)
+            retVal = retVal + " and " + ConvertWholeNumberToWord(fraction.N) + ConvertWholeNumberToWord(fraction.D,False)
+        End If
+        Return retVal
+    End Function
+
+    Private Function ConvertWholeNumberToWord(ByRef wholeNumber As Int64, Optional fractionalPart As Boolean = False) As String
+        Dim retVal As String = [String].Empty
+        Dim group As Integer = 0
+        Dim tempNumber As Int64 = wholeNumber
+        If wholeNumber < 1 Then
+            retVal = iif(fractionalPart,_englishOnes(0),_englishFractionOnes(0))
+        Else
+            While wholeNumber >= 1
+                Dim numberToProcess As Integer = CInt(Math.Truncate(tempNumber Mod 1000))
+
+                tempNumber = tempNumber / 1000
+
+                Dim groupDescription As String = ProcessGroup(numberToProcess, fractionalPart)
+
+                If groupDescription <> [String].Empty Then
+                    If group > 0 Then
+                        retVal = [String].Format("{0} {1}", iif(fractionalPart,_englishGroup(group),_englishFractionGroup), retVal)
+                    End If
+
+                    retVal = [String].Format("{0} {1}", groupDescription, retVal)
+                End If
+
+                group += 1
+            End While
+        End If
+        Return retVal
+    End Function
+
+    Private _arabicOnes As String() = New String() {[String].Empty, "واحد", "اثنان", "ثلاثة", "أربعة", "خمسة",
+     "ستة", "سبعة", "ثمانية", "تسعة", "عشرة", "أحد عشر",
+     "اثنا عشر", "ثلاثة عشر", "أربعة عشر", "خمسة عشر", "ستة عشر", "سبعة عشر",
+     "ثمانية عشر", "تسعة عشر"}
+
+    Private _arabicFeminineOnes As String() = New String() {[String].Empty, "إحدى", "اثنتان", "ثلاث", "أربع", "خمس",
+     "ست", "سبع", "ثمان", "تسع", "عشر", "إحدى عشرة",
+     "اثنتا عشرة", "ثلاث عشرة", "أربع عشرة", "خمس عشرة", "ست عشرة", "سبع عشرة",
+     "ثماني عشرة", "تسع عشرة"}
+
+    Private _arabicTens As String() = New String() {"عشرون", "ثلاثون", "أربعون", "خمسون", "ستون", "سبعون",
+     "ثمانون", "تسعون"}
+
+    Private _arabicHundreds As String() = New String() {"", "مائة", "مئتان", "ثلاثمائة", "أربعمائة", "خمسمائة",
+     "ستمائة", "سبعمائة", "ثمانمائة", "تسعمائة"}
+
+    Private _arabicAppendedTwos As String() = New String() {"مئتا", "ألفا", "مليونا", "مليارا", "تريليونا", "كوادريليونا",
+     "كوينتليونا", "سكستيليونا"}
+
+    Private _arabicTwos As String() = New String() {"مئتان", "ألفان", "مليونان", "ملياران", "تريليونان", "كوادريليونان",
+     "كوينتليونان", "سكستيليونان"}
+
+    Private _arabicGroup As String() = New String() {"مائة", "ألف", "مليون", "مليار", "تريليون", "كوادريليون",
+     "كوينتليون", "سكستيليون"}
+
+    Private _arabicAppendedGroup As String() = New String() {"", "ألفاً", "مليوناً", "ملياراً", "تريليوناً", "كوادريليوناً",
+     "كوينتليوناً", "سكستيليوناً"}
+
+    Private _arabicPluralGroups As String() = New String() {"", "آلاف", "ملايين", "مليارات", "تريليونات", "كوادريليونات",
+     "كوينتليونات", "سكستيليونات"}
+
+#End Region
+
 End Module

@@ -224,6 +224,7 @@
   <ItemGroup>
     <Content Include="Resources\Image1.png" />
     <Content Include="Resources\btnPrint.png" />
+    <Content Include="Resources\Logo.jpg" />
     <None Include="Resources\Lock.png" />
     <None Include="Resources\Unlock.png" />
   </ItemGroup>

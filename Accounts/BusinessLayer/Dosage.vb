@@ -4,7 +4,7 @@ Imports AATM.BusinessLayer.BusinessRules
 
 Namespace BusinessLayer
 
-    Public Class DosagePrinting
+    Public Class Dosage
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
@@ -19,14 +19,18 @@ Namespace BusinessLayer
 
         End Sub
 
-        Public Property Dosage As String
-        Public Property DosageUnit As String
-        Public Property Route As String
-        Public Property Direction As String
-        Public Property Frequency As String
-        Public Property FrequencyTiming As String
+        Public Property IdNo As Int32
+        Public Property DosageCode As String
+        Public Property DosageName As String
+        Public Property DosageNameAra As String
+        Public Property Dose As String
+        Public Property DosageUnit As Int32
+        Public Property Route As Int32
+        Public Property Direction As Int32
+        Public Property Frequency As Int32
+        Public Property FrequencyTiming As Int32
         Public Property Duration As String
-        Public Property DurationUnit As String
+        Public Property DurationTiming As Int32
 
     End Class
 

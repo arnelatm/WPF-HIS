@@ -105,6 +105,10 @@
         InitializeClass(number, currency, [String].Empty, "only.", "فقط", $"لا غير")
     End Sub
 
+    Public Sub New(number As [Decimal])
+        InitializeClass(number)
+    End Sub
+
     ''' <summary>
     ''' Constructor: Full Version
     ''' </summary>
@@ -135,6 +139,15 @@
         ArabicPrefixText = arabicPrefixText5
         ArabicSuffixText = arabicSuffixText6
 
+        ExtractIntegerAndDecimalParts()
+    End Sub
+
+    ''' <summary>
+    ''' Initialize Class Variables
+    ''' </summary>
+    ''' <param name="number1">Number to be converted</param>
+    Private Sub InitializeClass(ByVal number1 As [Decimal])
+        Number = number1
         ExtractIntegerAndDecimalParts()
     End Sub
 
@@ -192,8 +205,18 @@
      "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen",
      "Eighteen", "Nineteen"}
 
+    
+    Private Shared _englishFractionOnes As String() = New String() {"", "", "half", "third", "fourth", "fifth",
+     "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh",
+     "twelfth", "thirteenth", "Fourteenth", "Fifteenth", "Sixteenth", "Seventeenth",
+     "eighteenth", "nineteenth"}
+
     Private Shared _englishTens As String() = New String() {"Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy",
      "Eighty", "Ninety"}
+
+    
+    Private Shared _englishFractionTens As String() = New String() {"twentieth", "thirtieth", "Fortieth", "Fiftieth", "Sixtieth", "Seventieth",
+     "Eightieth", "Ninetieth"}
 
     Private Shared _englishGroup As String() = New String() {"Hundred", "Thousand", "Million", "Billion", "Trillion", "Quadrillion",
      "Quintillion", "Sextillian", "Septillion", "Octillion", "Nonillion", "Decillion",
@@ -201,6 +224,13 @@
      "Septendecillion", "Octodecillion", "Novemdecillion", "Vigintillion", "Unvigintillion", "Duovigintillion",
      "10^72", "10^75", "10^78", "10^81", "10^84", "10^87",
      "Vigintinonillion", "10^93", "10^96", "Duotrigintillion", "Trestrigintillion"}
+
+    Private Shared _englishFractionGroup As String() = New String() {"Hundredth", "Thousandth", "Millionth", "Billionth", "Trillionth", "Quadrillionth",
+     "Quintillionth", "Sextillianth", "Septillionth", "Octillionth", "Nonillionth", "Decillionth",
+     "Undecillionth", "Duodecillionth", "Tredecillionth", "Quattuordecillionth", "Quindecillionth", "Sexdecillionth",
+     "Septendecillionth", "Octodecillionth", "Novemdecillionth", "Vigintillionth", "Unvigintillionth", "Duovigintillionth",
+     "10^72", "10^75th", "10^78th", "10^81th", "10^84th", "10^87th",
+     "Vigintinonillionth", "10^93th", "10^96th", "Duotrigintillionth", "Trestrigintillionth"}
 
 #End Region
 
@@ -242,7 +272,7 @@
     ''' Convert stored number to words using selected currency
     ''' </summary>
     ''' <returns></returns>
-    Public Function ConvertToEnglish() As String
+    Public Function ConvertToEnglish(Optional money As Boolean = True) As String
         Dim tempNumber As [Decimal] = Number
 
         If tempNumber = 0 Then
@@ -276,16 +306,22 @@
                 group += 1
             End While
         End If
-
         Dim formattedNumber As [String] = [String].Empty
-        formattedNumber += If((EnglishPrefixText <> [String].Empty), [String].Format("{0} ", EnglishPrefixText), [String].Empty)
-        formattedNumber += If((retVal <> [String].Empty), retVal, [String].Empty)
-        formattedNumber += If((retVal <> [String].Empty), (If(_intergerValue = 1, Currency.EnglishCurrencyName, Currency.EnglishPluralCurrencyName)), [String].Empty)
-        formattedNumber += If((decimalString <> [String].Empty), " and ", [String].Empty)
-        formattedNumber += If((decimalString <> [String].Empty), decimalString, [String].Empty)
-        formattedNumber += If((decimalString <> [String].Empty), " " & Convert.ToString((If(_decimalValue = 1, Currency.EnglishCurrencyPartName, Currency.EnglishPluralCurrencyPartName))), [String].Empty)
-        formattedNumber += If((EnglishSuffixText <> [String].Empty), [String].Format(" {0}", EnglishSuffixText), [String].Empty)
-
+        If money Then
+            formattedNumber += If((EnglishPrefixText <> [String].Empty), [String].Format("{0} ", EnglishPrefixText), [String].Empty)
+            formattedNumber += If((retVal <> [String].Empty), retVal, [String].Empty)
+            formattedNumber += If((retVal <> [String].Empty), (If(_intergerValue = 1, Currency.EnglishCurrencyName, Currency.EnglishPluralCurrencyName)), [String].Empty)
+            formattedNumber += If((decimalString <> [String].Empty), " and ", [String].Empty)
+            formattedNumber += If((decimalString <> [String].Empty), decimalString, [String].Empty)
+            formattedNumber += If((decimalString <> [String].Empty), " " & Convert.ToString((If(_decimalValue = 1, Currency.EnglishCurrencyPartName, Currency.EnglishPluralCurrencyPartName))), [String].Empty)
+            formattedNumber += If((EnglishSuffixText <> [String].Empty), [String].Format(" {0}", EnglishSuffixText), [String].Empty)
+        Else
+            formattedNumber += If((retVal <> [String].Empty), retVal, [String].Empty)
+            formattedNumber += If((decimalString <> [String].Empty), " and ", [String].Empty)
+            formattedNumber += If((decimalString <> [String].Empty), decimalString, [String].Empty)
+            formattedNumber += If((decimalString <> [String].Empty), " " & Convert.ToString((If(_decimalValue = 1, Currency.EnglishCurrencyPartName, Currency.EnglishPluralCurrencyPartName))), [String].Empty)
+            formattedNumber += If((EnglishSuffixText <> [String].Empty), [String].Format(" {0}", EnglishSuffixText), [String].Empty)
+        End If
         Return formattedNumber
     End Function
 

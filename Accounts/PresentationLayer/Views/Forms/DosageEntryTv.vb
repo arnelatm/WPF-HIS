@@ -1,16 +1,14 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
-Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class DosagePrinting
-        Implements IDosagePrintView
+    Public Class DosageEntryTv
+        Implements IDosageView
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
@@ -18,8 +16,7 @@ Namespace PresentationLayer.Views.Forms
 
             ' This call is required by the designer.
             InitializeComponent()
-            Presenter = New ReportPresenter(Me)
-            ' Add any initialization after the InitializeComponent() call.
+               ' Add any initialization after the InitializeComponent() call.
 
         End Sub
 
@@ -28,23 +25,32 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
-            HideNavigatorButtons = True
             Text = Messaging.TranslateCaption("Check Disbursement Journal")
             btnPrintCheck.Visible = True
             _nfi.NumberDecimalDigits = 2
 
         End Sub
 
-        Public Property Dosage As String Implements IDosagePrintView.Dosage
+
+        Public Property IdNo As Int32 Implements IDosageView.IdNo
             Get
-                Return txtDosage.Text
+                Return GlobalFunctions.NumParser(Of Int32)(TxtIdNo.Text)
             End Get
-            Set(value As String)
-                txtDosage.Text = value
+            Set
+                TxtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
-        Public Property DosageUnit As String Implements IDosagePrintView.DosageUnit
+        Public Property Dose As Decimal Implements IDosageView.Dose
+            Get
+                Return NumParser(Of Decimal)(txtDose.Text)
+            End Get
+            Set
+                txtDose.Text = FormatDecimalNumber(Value)
+            End Set
+        End Property
+
+        Public Property DosageUnit As Int32 Implements IDosageView.DosageUnit
             Get
                 Return cboDosageUnit.GetValue()
             End Get
@@ -53,7 +59,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Route As String Implements IDosagePrintView.Route
+        Public Property Route As Int32 Implements IDosageView.Route
             Get
                 Return cboRoute.GetValue()
             End Get
@@ -62,7 +68,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Direction As String Implements IDosagePrintView.Direction
+        Public Property Direction As Int32 Implements IDosageView.Direction
             Get
                 Return cboDirection.GetValue()
             End Get
@@ -71,7 +77,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Frequency As String Implements IDosagePrintView.Frequency
+        Public Property Frequency As Int32 Implements IDosageView.Frequency
             Get
                 Return cboFrequency.GetValue()
             End Get
@@ -80,7 +86,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property FrequencyTiming As String Implements IDosagePrintView.FrequencyTiming
+        Public Property FrequencyTiming As Int32 Implements IDosageView.FrequencyTiming
             Get
                 Return cboFrequencyTiming.GetValue()
             End Get
@@ -89,7 +95,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Duration As String Implements IDosagePrintView.Duration
+        Public Property Duration As Int32 Implements IDosageView.Duration
             Get
                 Return txtDuration.Text
             End Get
@@ -98,12 +104,41 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DurationUnit As String Implements IDosagePrintView.DurationUnit
+        Public Property DurationTiming As Int32 Implements IDosageView.DurationTiming
             Get
-                Return cboDurationUnit.GetValue()
+                Return cboDurationTiming.GetValue()
             End Get
             Set
-                cboDurationUnit.SetValue(Value)
+                cboDurationTiming.SetValue(Value)
+            End Set
+        End Property
+
+        Public Shadows Property DataFilter As String Implements IView.DataFilter
+
+        Public Property DosageCode As String Implements IDosageView.DosageCode
+            Get
+                Return txtDosageCode.Text
+            End Get
+            Set(value As String)
+                txtDosageCode.Text = value
+            End Set
+        End Property
+
+        Public Property DosageName As String Implements IDosageView.DosageName
+            Get
+                Return txtDosageName.Text
+            End Get
+            Set(value As String)
+                txtDosageName.Text = value
+            End Set
+        End Property
+
+        Public Property DosageNameAra As String Implements IDosageView.DosageNameAra
+            Get
+                Return txtDosageNameAra.Text
+            End Get
+            Set(value As String)
+                txtDosageNameAra.Text = value
             End Set
         End Property
 
@@ -132,16 +167,17 @@ Namespace PresentationLayer.Views.Forms
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
                 {"Direction", cboDirection},
+                {"Dose", txtDose},
                 {"DosageUnit", cboDosageUnit},
-                {"DurationUnit", cboDurationUnit},
+                {"Duration", txtDuration},
+                {"DurationTiming", cboDurationTiming},
                 {"Frequency", cboFrequency},
                 {"FrequencyTiming", cboFrequencyTiming},
-                {"Route", cboRoute},
-                {"Dosage", txtDosage},
-                {"Duration", txtDuration},
-                {"DurationTiming", cboDurationUnit}
+                {"IdNo", txtIdNo},
+                {"Route", cboRoute}
                 }
         End Sub
+
 
     End Class
 

@@ -200,6 +200,9 @@ Public Class MappingProfileAccounts
         CreateMap(Of GTinMatcher, GTinMatcherModel)().ReverseMap()
         CreateMap(Of GTinMatcherModel, IGTinMatcherView)().ReverseMap()
 
+        CreateMap(Of Dosage, DosageModel)().ReverseMap()
+        CreateMap(Of DosageModel, IDosageView)().ReverseMap()
+
         'CreateMap(Of PmrPatientDisplayModel, PmrPatientDisplayView)()
 
     End Sub
