@@ -25,12 +25,10 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateDataSourceThread({{"Department", "ParentIdNo"},
-                                    {"RevCostCenter", "RevCostCenterIdNo"}
-                                   })
-            'CreateDataSourceThread({{"Department", "ParentIdNo", "IdNo,DepartmentName,DepartmentCode"},
-            '                        {"RevCostCenter", "RevCostCenterIdNo", "IdNo,RevCostCenterName,RevCostCenterCode"}
-            '                       })
+            Dim data As New ArrayList
+            data.Add({"Department", "ParentIdNo"})
+            data.Add({"RevCostCenter", "RevCostCenterIdNo"})
+            CreateDataSourceThread(data)
         End Sub
 
         Public Function GetAccountNameOfChild(idNoToSearch As Integer) As String

@@ -212,6 +212,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayeeIdNo.ChangingSearchValueOnly = false
         Me.tlpDisbursement.SetColumnSpan(Me.cboPayeeIdNo, 5)
         Me.cboPayeeIdNo.CurrentSearchTerm = ""
+        Me.cboPayeeIdNo.DataValue = Nothing
         Me.cboPayeeIdNo.DefaultValue = Nothing
         Me.cboPayeeIdNo.DisplayMember = "Name"
         Me.cboPayeeIdNo.Dock = System.Windows.Forms.DockStyle.Fill
@@ -289,6 +290,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPaymentType.ChangingSearchValueOnly = false
         Me.tlpDisbursement.SetColumnSpan(Me.cboPaymentType, 3)
         Me.cboPaymentType.CurrentSearchTerm = ""
+        Me.cboPaymentType.DataValue = Nothing
         Me.cboPaymentType.DefaultValue = "0"
         Me.cboPaymentType.DisplayMember = "Name"
         Me.cboPaymentType.EditingMode = false
@@ -404,6 +406,9 @@ Namespace PresentationLayer.Views.Forms
         '
         'dtpCheckDate
         '
+        Me.dtpCheckDate.AutoSize = true
+        Me.dtpCheckDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.dtpCheckDate.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
         Me.dtpCheckDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
         Me.dtpCheckDate.DefaultValue = Nothing
         Me.dtpCheckDate.DisplayOnly = false
@@ -419,7 +424,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dtpCheckDate.SecurityKey = Nothing
         Me.dtpCheckDate.ShowLongDate = false
         Me.dtpCheckDate.ShowTime = false
-        Me.dtpCheckDate.Size = New System.Drawing.Size(112, 25)
+        Me.dtpCheckDate.Size = New System.Drawing.Size(118, 23)
         Me.dtpCheckDate.TabIndex = 13
         Me.dtpCheckDate.TargetCalendar = Nothing
         Me.dtpCheckDate.Translatable = false

@@ -1032,7 +1032,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub TestFormToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTestForm.Click
-            Dim form As New TestForm3
+            Dim form As New Form4
             form.Show()
             'Dim formToRun = Activator.CreateInstance(GetType(TestForm))
             'formToRun.Presenter = New DepartmentPresenter(Of DepartmentModel)(formToRun)
@@ -1118,8 +1118,8 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of IqamaCbcReport, String)("SampleNo")
         End Sub
 
-        Private Sub DosagePrintingToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DosagePrintingToolStripMenuItem.Click
-            RunForm(Of DosagePrinting, DosagePrintingPresenter(Of DosagePrintingModel))()
+        Private Sub DosageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DosageToolStripMenuItem.Click
+            RunForm(Of DosageEntryTv, DosagePresenter(Of DosageModel))()
         End Sub
     End Class
 
