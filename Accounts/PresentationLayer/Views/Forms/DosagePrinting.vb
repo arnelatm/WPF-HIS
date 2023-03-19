@@ -6,7 +6,7 @@ Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class DosageEntryTv
+    Public Class DosagePrinting
         Implements IDosageView
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
@@ -16,7 +16,7 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
                ' Add any initialization after the InitializeComponent() call.
-
+            
         End Sub
 
         Public Sub New(ByVal tableName As String)
@@ -25,6 +25,7 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
             Text = Messaging.TranslateCaption("Check Disbursement Journal")
+            btnPrintCheck.Visible = True
             _nfi.NumberDecimalDigits = 2
 
         End Sub
@@ -39,39 +40,47 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Route As Int32 Implements IDosageView.Route
+        Public Property Dose As Decimal 
             Get
-                Return cboRoute.GetValue(Of Int32)
+                Return NumParser(Of Decimal)(txtDose.Text)
             End Get
             Set
-                cboRoute.SetValue(Value)
+                txtDose.Text = FormatDecimalNumber(Value)
             End Set
         End Property
+
+        Public Property DosageUnit As Int32 
+            Get
+                Return cboDosageUnit.GetValue(Of Int32)
+            End Get
+            Set
+                cboDosageUnit.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property Route As Int32 Implements IDosageView.Route
 
         Public Property Direction As Int32 Implements IDosageView.Direction
-            Get
-                Return cboDirection.GetValue(Of Int32)
-            End Get
-            Set
-                cboDirection.SetValue(Value)
-            End Set
-        End Property
 
         Public Property Frequency As Int32 Implements IDosageView.Frequency
+
+        Public Property FrequencyTiming As Int32 Implements IDosageView.FrequencyTiming
+
+        Public Property Duration As Int32 
             Get
-                Return cboFrequency.GetValue(Of Int32)
+                Return txtDuration.Text
             End Get
             Set
-                cboFrequency.SetValue(Value)
+                txtDuration.Text = Value
             End Set
         End Property
 
-        Public Property FrequencyTiming As Int32 Implements IDosageView.FrequencyTiming
+        Public Property DurationTiming As Int32
             Get
-                Return cboFrequencyTiming.GetValue(Of Int32)
+                Return cboDurationTiming.GetValue(Of Int32)
             End Get
             Set
-                cboFrequencyTiming.SetValue(Value)
+                cboDurationTiming.SetValue(Value)
             End Set
         End Property
 
@@ -86,21 +95,21 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property DosageName As String Implements IDosageView.DosageName
+            Get
+                Return txtDosageCode.Text 
+            End Get
+            Set(value As String)
+                txtDosageName.Text = value
+            End Set
+        End Property
+
         Public Property DosageNameAra As String Implements IDosageView.DosageNameAra
             Get
                 Return txtDosageNameAra.Text
             End Get
             Set(value As String)
                 txtDosageNameAra.Text = value
-            End Set
-        End Property
-
-        Public Property DosageName As String Implements IDosageView.DosageName
-            Get
-                Return txtDosageName.Text
-            End Get
-            Set(value As String)
-                txtDosageName.Text = value
             End Set
         End Property
 
@@ -112,7 +121,7 @@ Namespace PresentationLayer.Views.Forms
             Close()
         End Sub
 
-        Private Sub btnPrintCheck_ClickButtonArea(sender As Object, e As MouseEventArgs) 
+        Private Sub btnPrintCheck_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnPrintCheck.ClickButtonArea
             Dim currencies As New List(Of CurrencyInfo)()
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
@@ -128,18 +137,24 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
-                {"Direction", cboDirection},
-                {"DosageCode", txtDosageCode},
+                {"Dose", txtDose},
                 {"DosageName", txtDosageName},
                 {"DosageNameAra", txtDosageNameAra},
-                {"Frequency", cboFrequency},
-                {"FrequencyTiming", cboFrequencyTiming},
-                {"IdNo", txtIdNo},
-                {"Route", cboRoute}
+                {"DosageUnit", cboDosageUnit},
+                {"Duration", txtDuration},
+                {"DurationTiming", cboDurationTiming},
+                {"IdNo", txtIdNo}
                 }
         End Sub
 
-
+        Private Sub DosagePrinting_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            btnAdd.Visible = False
+            btnDelete.Visible = False
+            btnFilter.Visible = False
+            btnSave.Visible = False
+            btnUndo.Visible = False
+            btnEdit.Visible = False
+        End Sub
     End Class
 
 End Namespace

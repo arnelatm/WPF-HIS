@@ -273,7 +273,7 @@ Public Class CFormEntry
                 btnAdd.Enabled = True
                 btnDelete.Enabled = False
                 btnFind.Enabled = False
-                btnPrint.Enabled = False                
+                btnPrint.Enabled = False
                 If adding Or editing Then
                     btnSave.Enabled = True
                     btnUndo.Enabled = True
@@ -475,6 +475,9 @@ Public Class CFormEntry
     End Sub
 
     Private Sub BtnUndo_Click(sender As Object, e As EventArgs) Handles btnUndo.Click
+        If _debugSwitch Then
+            Debugger.Break()
+        End If
         PublishClickedButton(ButtonClicked.Undo)
     End Sub
 
