@@ -30,4 +30,12 @@ Namespace BusinessLayer
 
     End Class
 
+    Public Class DosagePrinting
+        Inherits AATM.BusinessLayer.BusinessObject
+
+        Public Property IdNo As Int32
+        Public Property DosageName As String
+        Public Property DosageNameAra As String
+
+    End Class
 End Namespace

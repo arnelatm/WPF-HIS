@@ -90,9 +90,9 @@ Namespace DataLayer.AdoNet
                             }
         End Function
 
-        Private Function MakeDosage(number As Decimal) As String
-            Return NumberToWord(number)
-        End Function
+        'Private Function MakeDosage(number As Decimal) As String
+        '    Return NumberToWord(number)
+        'End Function
 
         'Public Overrides Function GetActualFieldName(fieldName As String)
         '    Dim actualFieldName As String

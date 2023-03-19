@@ -15,4 +15,10 @@
         Public Property FrequencyTiming As Int32
     End Class
 
+    Public Class DosagePrintingModel
+        Public Property IdNo As Int32
+        Public Property DosageName As String
+        Public Property DosageNameAra As String
+    End Class
+
 End Namespace

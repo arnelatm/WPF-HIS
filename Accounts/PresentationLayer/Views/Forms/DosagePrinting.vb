@@ -7,7 +7,7 @@ Imports AATM.PresentationLayer.Views
 Namespace PresentationLayer.Views.Forms
 
     Public Class DosagePrinting
-        Implements IDosageView
+        Implements IDosagePrintingView
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
@@ -15,8 +15,8 @@ Namespace PresentationLayer.Views.Forms
 
             ' This call is required by the designer.
             InitializeComponent()
-               ' Add any initialization after the InitializeComponent() call.
-            
+            ' Add any initialization after the InitializeComponent() call.
+
         End Sub
 
         Public Sub New(ByVal tableName As String)
@@ -25,31 +25,30 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
             Text = Messaging.TranslateCaption("Check Disbursement Journal")
-            btnPrintCheck.Visible = True
             _nfi.NumberDecimalDigits = 2
 
         End Sub
 
 
-        Public Property IdNo As Int32 Implements IDosageView.IdNo
+        Public Property IdNo As Int32 Implements IDosagePrintingView.IdNo
             Get
-                Return GlobalFunctions.NumParser(Of Int32)(TxtIdNo.Text)
+                Return GlobalFunctions.NumParser(Of Int32)(txtIdNo.Text)
             End Get
             Set
-                TxtIdNo.Text = Convert.ToString(Value)
+                txtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
-        Public Property Dose As Decimal 
+        Public Property Dose As Decimal Implements IDosagePrintingView.Dose
             Get
-                Return NumParser(Of Decimal)(txtDose.Text)
+                Return txtDose.GetValue(Of Decimal)
             End Get
             Set
                 txtDose.Text = FormatDecimalNumber(Value)
             End Set
         End Property
 
-        Public Property DosageUnit As Int32 
+        Public Property DosageUnit As Int32 Implements IDosagePrintingView.DosageUnit
             Get
                 Return cboDosageUnit.GetValue(Of Int32)
             End Get
@@ -58,24 +57,16 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Route As Int32 Implements IDosageView.Route
-
-        Public Property Direction As Int32 Implements IDosageView.Direction
-
-        Public Property Frequency As Int32 Implements IDosageView.Frequency
-
-        Public Property FrequencyTiming As Int32 Implements IDosageView.FrequencyTiming
-
-        Public Property Duration As Int32 
+        Public Property Duration As Decimal Implements IDosagePrintingView.Duration
             Get
-                Return txtDuration.Text
+                Return txtDuration.GetValue(Of Decimal)
             End Get
             Set
-                txtDuration.Text = Value
+                txtDuration.Text = FormatDecimalNumber(Value)
             End Set
         End Property
 
-        Public Property DurationTiming As Int32
+        Public Property DurationTiming As Decimal Implements IDosagePrintingView.DurationTiming
             Get
                 Return cboDurationTiming.GetValue(Of Int32)
             End Get
@@ -86,7 +77,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Shadows Property DataFilter As String Implements IView.DataFilter
 
-        Public Property DosageCode As String Implements IDosageView.DosageCode
+        Public Property DosageCode As String Implements IDosagePrintingView.DosageCode
             Get
                 Return txtDosageCode.Text
             End Get
@@ -95,16 +86,16 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DosageName As String Implements IDosageView.DosageName
+        Public Property DosageName As String Implements IDosagePrintingView.DosageName
             Get
-                Return txtDosageCode.Text 
+                Return txtDosageCode.Text
             End Get
             Set(value As String)
                 txtDosageName.Text = value
             End Set
         End Property
 
-        Public Property DosageNameAra As String Implements IDosageView.DosageNameAra
+        Public Property DosageNameAra As String Implements IDosagePrintingView.DosageNameAra
             Get
                 Return txtDosageNameAra.Text
             End Get
@@ -121,18 +112,7 @@ Namespace PresentationLayer.Views.Forms
             Close()
         End Sub
 
-        Private Sub btnPrintCheck_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnPrintCheck.ClickButtonArea
-            Dim currencies As New List(Of CurrencyInfo)()
-            Dim curCulture = CultureInfo.CurrentCulture
-            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-            Dim language As String
-            Dim reportName As String
-            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-            reportName = "Check Printing.Rpt"
-            'Dim cForm As New ReportForm(reportName, checkAmountInWords, "CheckAmountInWords", payee, "PayeeName", dtpCheckDate.Value, "CheckDate", Convert.ToDecimal(txtAmount.Text), "CheckAmount", txtNotes.Text, "Notes", language, "Language")
-            'cForm.Show()
-        End Sub
+
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
@@ -154,6 +134,8 @@ Namespace PresentationLayer.Views.Forms
             btnSave.Visible = False
             btnUndo.Visible = False
             btnEdit.Visible = False
+            txtDose.Text = 1
+            txtDuration.Text = 1
         End Sub
     End Class
 

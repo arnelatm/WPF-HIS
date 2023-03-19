@@ -203,6 +203,9 @@ Public Class MappingProfileAccounts
         CreateMap(Of Dosage, DosageModel)().ReverseMap()
         CreateMap(Of DosageModel, IDosageView)().ReverseMap()
 
+        CreateMap(Of DosagePrinting, DosageModel)().ReverseMap()
+        CreateMap(Of DosageModel, IDosagePrintingView)().ReverseMap()
+
         'CreateMap(Of PmrPatientDisplayModel, PmrPatientDisplayView)()
 
     End Sub

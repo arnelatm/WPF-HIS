@@ -1694,6 +1694,53 @@ Public Module GlobalFunctions
         End While
     End Function
 
+        Public Function Real2Fraction(ByVal value As Double, Optional ByVal accuracy As Double = 0.01) As Fraction
+        If accuracy <= 0.0 OrElse accuracy >= 1.0 Then
+            Throw New ArgumentOutOfRangeException("accuracy", "Must be > 0 and < 1.")
+        End If
+
+        Dim sign As Integer = Math.Sign(value)
+
+        If sign = -1 Then
+            value = Math.Abs(value)
+        End If
+        Dim fraction As Fraction
+        Dim maxError As Double = If(sign = 0, accuracy, value * accuracy)
+        Dim n As Integer = CInt(Math.Floor(value))
+        value -= n
+
+        If value < maxError Then
+            fraction = New Fraction(sign * n, 1)
+            Return fraction
+        End If
+
+        If 1 - maxError < value Then
+            fraction = New Fraction(sign * (n + 1), 1)
+            Return fraction
+        End If
+
+        Dim lower_n As Integer = 0
+        Dim lower_d As Integer = 1
+        Dim upper_n As Integer = 1
+        Dim upper_d As Integer = 1
+
+        While True
+            Dim middle_n As Integer = lower_n + upper_n
+            Dim middle_d As Integer = lower_d + upper_d
+
+            If middle_d * (value + maxError) < middle_n Then
+                upper_n = middle_n
+                upper_d = middle_d
+            ElseIf middle_n < (value - maxError) * middle_d Then
+                lower_n = middle_n
+                lower_d = middle_d
+            Else
+                fraction = New Fraction((n * middle_d + middle_n) * sign, middle_d)
+                Return fraction
+            End If
+        End While
+    End Function
+
     Public Structure Fraction
         Public Sub New(ByVal nP As Integer, ByVal dP As Integer)
             N = nP
@@ -1714,8 +1761,30 @@ Public Module GlobalFunctions
         Return fraction.N.ToString() + "/" + fraction.D.ToString()
     End Function
 
-    Public Function NumberToWord(number As Decimal) As String
-        Return ConvertToEnglish(number)
+
+    ''' <summary>
+    ''' Convert stored number to words using selected currency
+    ''' </summary>
+    ''' <returns></returns>
+    Public Function NumberToWordEnglish(number As Decimal, Optional money As Boolean = True) As String
+        Dim tempNumber As [Decimal] = number
+        Dim retVal As String = ""
+        If tempNumber = 0 Then
+            Return "Zero"
+        End If
+        Dim _decimalValue As Int64
+        Dim _integerValue As Int64
+        Dim splits As [String]() = number.ToString().Split("."c)
+        _integerValue = Convert.ToInt64(splits(0))
+        If splits.Length > 1 Then
+            _decimalValue = Convert.ToInt64(splits(1))
+        End If
+        retVal = ConvertWholeNumberToWord(_integerValue)
+        If _decimalValue > 0 Then
+            Dim fraction As Fraction = Real2Fraction(number - _integerValue)
+            retVal = IIf(retVal="","",retVal + " and ") + ConvertWholeNumberToWord(fraction.N) + "- " + ConvertWholeNumberToWord(fraction.D,True)
+        End If
+        Return retVal
     End Function
 
 
@@ -1729,7 +1798,7 @@ Public Module GlobalFunctions
      "Eighteen", "Nineteen"}
 
 
-    Private _englishFractionOnes As String() = New String() {"", "", "half", "third", "fourth", "fifth",
+    Private _englishFractionOnes As String() = New String() {"", "one", "half", "third", "fourth", "fifth",
      "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh",
      "twelfth", "thirteenth", "Fourteenth", "Fifteenth", "Sixteenth", "Seventeenth",
      "eighteenth", "nineteenth"}
@@ -1770,20 +1839,20 @@ Public Module GlobalFunctions
         Dim retVal As String = [String].Empty
 
         If hundreds > 0 Then
-            retVal = [String].Format("{0} {1}", Iif(fractonalPart,_englishOnes(hundreds),_englishFractionOnes), IIf(fractonalPart,_englishGroup(0),_englishFractionGroup(0)))
+            retVal = [String].Format("{0} {1}", Iif(fractonalPart,_englishFractionOnes(hundreds),_englishOnes(hundreds)), IIf(fractonalPart,_englishFractionGroup(0),_englishGroup(0)))
         End If
         If tens > 0 Then
             If tens < 20 Then
-                retVal += (If((retVal <> [String].Empty), " ", [String].Empty)) & IIf(fractonalPart,_englishOnes(tens),_englishFractionOnes(tens))
+                retVal += (If((retVal <> [String].Empty), " ", [String].Empty)) & IIf(fractonalPart,_englishFractionOnes(tens),_englishOnes(tens))
             Else
                 Dim ones As Integer = tens Mod 10
 
                 tens = (tens \ 10) - 2
                 ' 20's offset
-                retVal += (If((retVal <> [String].Empty), " ", [String].Empty)) & IIf(fractonalPart,_englishTens(tens),_englishFractionTens(tens))
+                retVal += (If((retVal <> [String].Empty), " ", [String].Empty)) & IIf(fractonalPart,_englishFractionTens(tens),_englishTens(tens))
 
                 If ones > 0 Then
-                    retVal += (If((retVal <> [String].Empty), " ", [String].Empty)) & IIf(fractonalPart,_englishOnes(ones),_englishFractionOnes(ones))
+                    retVal += (If((retVal <> [String].Empty), " ", [String].Empty)) & IIf(fractonalPart,_englishFractionOnes(ones),_englishOnes(ones))
                 End If
             End If
         End If
@@ -1791,30 +1860,6 @@ Public Module GlobalFunctions
         Return retVal
     End Function
 
-    ''' <summary>
-    ''' Convert stored number to words using selected currency
-    ''' </summary>
-    ''' <returns></returns>
-    Public Function ConvertToEnglish(number As Decimal, Optional money As Boolean = True) As String
-        Dim tempNumber As [Decimal] = number
-        Dim retVal As String = ""
-        If tempNumber = 0 Then
-            Return "Zero"
-        End If
-        Dim _decimalValue As Int64
-        Dim _integerValue As Int64
-        Dim splits As [String]() = number.ToString().Split("."c)
-        _integerValue = Convert.ToInt64(splits(0))
-        If splits.Length > 1 Then
-            _decimalValue = Convert.ToInt64(splits(1))
-        End If
-        retVal = ConvertWholeNumberToWord(_integerValue)
-        If _decimalValue > 0 Then
-            Dim fraction As Fraction = Num2Fraction(_decimalValue)
-            retVal = retVal + " and " + ConvertWholeNumberToWord(fraction.N) + ConvertWholeNumberToWord(fraction.D,False)
-        End If
-        Return retVal
-    End Function
 
     Private Function ConvertWholeNumberToWord(ByRef wholeNumber As Int64, Optional fractionalPart As Boolean = False) As String
         Dim retVal As String = [String].Empty
@@ -1823,7 +1868,7 @@ Public Module GlobalFunctions
         If wholeNumber < 1 Then
             retVal = iif(fractionalPart,_englishOnes(0),_englishFractionOnes(0))
         Else
-            While wholeNumber >= 1
+            While tempNumber >= 1
                 Dim numberToProcess As Integer = CInt(Math.Truncate(tempNumber Mod 1000))
 
                 tempNumber = tempNumber / 1000
