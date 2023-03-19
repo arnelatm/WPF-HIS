@@ -42,21 +42,23 @@ Public Class CTextBox
             Return _editingMode
         End Get
         Set(value As Boolean)
-            _editingMode = value
-            If value Then
-                If DisplayOnly Then
+            If Not AlwaysEditable Then
+                _editingMode = value
+                If value Then
+                    If DisplayOnly Then
+                        [ReadOnly] = True
+                        ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                        BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                    Else
+                        [ReadOnly] = False
+                        ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                        BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                    End If
+                Else
                     [ReadOnly] = True
                     ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                     BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                Else
-                    [ReadOnly] = False
-                    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
                 End If
-            Else
-                [ReadOnly] = True
-                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             End If
         End Set
     End Property
@@ -108,6 +110,12 @@ Public Class CTextBox
     '        Refresh()
     '    End Set
     'End Property
+
+
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to True to specify that this control can be edited.")>
+    Public Property AlwaysEditable As Boolean = False
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
@@ -183,16 +191,18 @@ Public Class CTextBox
             Return _displayOnly
         End Get
         Set(value As Boolean)
-            If _displayOnly = value Then Exit Property
-            _displayOnly = value
-            If value Then
-                [ReadOnly] = True
-                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            Else
-                [ReadOnly] = False
-                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            If Not AlwaysEditable Then
+                If _displayOnly = value Then Exit Property
+                _displayOnly = value
+                If value Then
+                    [ReadOnly] = True
+                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                Else
+                    [ReadOnly] = False
+                    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                End If
             End If
         End Set
     End Property
@@ -303,7 +313,7 @@ Public Class CTextBox
             Case GetType(ULong), GetType(ULong)
                 Return NumParser(Of ULong)(Text)
             Case GetType(UShort), GetType(UShort)
-                Return NumParser(Of UShort)(Text)            
+                Return NumParser(Of UShort)(Text)
         End Select
         Return Text
     End Function
@@ -380,8 +390,10 @@ Public Class CTextBox
             ForeColor = GlobalVariables.DefaultFormControlForegroundColor
             BackColor = GlobalVariables.DefaultFormControlBackgroundColor
         Else
-            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            If Not AlwaysEditable Then
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            End If
         End If
     End Sub
 

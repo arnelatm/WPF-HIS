@@ -129,6 +129,7 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemDrugSale = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemDrugAcceptance = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemItemMatcher = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemDosagePrinting = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemReports = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemStatementOfAccountsPayable = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemStatementOfAccountsReceivable = New System.Windows.Forms.ToolStripMenuItem()
@@ -213,7 +214,8 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DosageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemPMR = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemDosage = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.AccountsMenu.SuspendLayout
@@ -347,7 +349,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemMasters
         '
-        Me.ToolStripMenuItemMasters.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemGeneral, Me.ToolStripMenuItemSecurity, Me.ToolStripMenuItemEmployee, Me.ToolStripMenuItemTranslations, Me.ToolStripMenuItemPayroll, Me.ToolStripMenuItemDoctor, Me.ToolStripMenuItemSupplierVendors, Me.ToolStripMenuItemCustomerClients, Me.ToolStripMenuItemItemCode, Me.ToolStripMenuItemCodeGroup, Me.ToolStripMenuItemIGroup})
+        Me.ToolStripMenuItemMasters.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemGeneral, Me.ToolStripMenuItemSecurity, Me.ToolStripMenuItemEmployee, Me.ToolStripMenuItemTranslations, Me.ToolStripMenuItemPayroll, Me.ToolStripMenuItemDoctor, Me.ToolStripMenuItemSupplierVendors, Me.ToolStripMenuItemCustomerClients, Me.ToolStripMenuItemItemCode, Me.ToolStripMenuItemCodeGroup, Me.ToolStripMenuItemIGroup, Me.ToolStripMenuItemPMR})
         Me.ToolStripMenuItemMasters.Name = "ToolStripMenuItemMasters"
         resources.ApplyResources(Me.ToolStripMenuItemMasters, "ToolStripMenuItemMasters")
         '
@@ -728,7 +730,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemPharmacy
         '
-        Me.ToolStripMenuItemPharmacy.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemDrugSale, Me.ToolStripMenuItemDrugAcceptance, Me.ToolStripMenuItemItemMatcher, Me.DosageToolStripMenuItem})
+        Me.ToolStripMenuItemPharmacy.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemDrugSale, Me.ToolStripMenuItemDrugAcceptance, Me.ToolStripMenuItemItemMatcher, Me.ToolStripMenuItemDosagePrinting})
         Me.ToolStripMenuItemPharmacy.Name = "ToolStripMenuItemPharmacy"
         resources.ApplyResources(Me.ToolStripMenuItemPharmacy, "ToolStripMenuItemPharmacy")
         '
@@ -746,6 +748,11 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.ToolStripMenuItemItemMatcher.Name = "ToolStripMenuItemItemMatcher"
         resources.ApplyResources(Me.ToolStripMenuItemItemMatcher, "ToolStripMenuItemItemMatcher")
+        '
+        'ToolStripMenuItemDosagePrinting
+        '
+        Me.ToolStripMenuItemDosagePrinting.Name = "ToolStripMenuItemDosagePrinting"
+        resources.ApplyResources(Me.ToolStripMenuItemDosagePrinting, "ToolStripMenuItemDosagePrinting")
         '
         'ToolStripMenuItemReports
         '
@@ -1185,10 +1192,16 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
-        'DosageToolStripMenuItem
+        'ToolStripMenuItemPMR
         '
-        Me.DosageToolStripMenuItem.Name = "DosageToolStripMenuItem"
-        resources.ApplyResources(Me.DosageToolStripMenuItem, "DosageToolStripMenuItem")
+        Me.ToolStripMenuItemPMR.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemDosage})
+        Me.ToolStripMenuItemPMR.Name = "ToolStripMenuItemPMR"
+        resources.ApplyResources(Me.ToolStripMenuItemPMR, "ToolStripMenuItemPMR")
+        '
+        'ToolStripMenuItemDosage
+        '
+        Me.ToolStripMenuItemDosage.Name = "ToolStripMenuItemDosage"
+        resources.ApplyResources(Me.ToolStripMenuItemDosage, "ToolStripMenuItemDosage")
         '
         'Main
         '
@@ -1400,6 +1413,8 @@ End Sub
         Friend WithEvents ToolStripMenuItemIqamaCBCResultByInvoiceNo As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDiagnosticTestSummary As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemIqamaCBCResultBySampleNo As ToolStripMenuItem
-        Friend WithEvents DosageToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemDosagePrinting As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemPMR As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemDosage As ToolStripMenuItem
     End Class
 End NameSpace
