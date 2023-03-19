@@ -25,7 +25,6 @@ Namespace PresentationLayer.Views.Forms
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DosagePrinting))
-        Me.btnPrintCheck = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDose = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -58,7 +57,6 @@ Namespace PresentationLayer.Views.Forms
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.TableLayoutPanel1)
-        Me.SplitContainer1.Panel2.Controls.Add(Me.btnPrintCheck)
         Me.SplitContainer1.Size = New System.Drawing.Size(934, 480)
         Me.SplitContainer1.SplitterDistance = 355
         '
@@ -80,19 +78,6 @@ Namespace PresentationLayer.Views.Forms
         'AppDataDAC
         '
         Me.AppDataDAC.Cs = ""
-        '
-        'btnPrintCheck
-        '
-        Me.btnPrintCheck.DesignerSelected = false
-        Me.btnPrintCheck.ImageIndex = 0
-        Me.btnPrintCheck.Location = New System.Drawing.Point(211, 321)
-        Me.btnPrintCheck.Name = "btnPrintCheck"
-        Me.btnPrintCheck.OriginalImageName = Nothing
-        Me.btnPrintCheck.SecurityKey = ""
-        Me.btnPrintCheck.Size = New System.Drawing.Size(116, 31)
-        Me.btnPrintCheck.TabIndex = 291
-        Me.btnPrintCheck.TabStop = false
-        Me.btnPrintCheck.Text = "Print Dosage"
         '
         'CLabel1
         '
@@ -611,7 +596,6 @@ End Sub
         Friend WithEvents DataGridViewTextBoxColumn5 As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewCheckBoxColumn1 As Windows.Forms.DataGridViewCheckBoxColumn
         Friend WithEvents PcsIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents btnPrintCheck As CButton
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents txtDose As CTextBox
         Friend WithEvents CLabel2 As CLabel
