@@ -43,6 +43,8 @@ Public Class CComboBox
 
     End Sub
 
+    Public Property AlwaysEditable As Boolean = False
+
     <Bindable(True)>
     <Category("Properties")>
     <DefaultValue(GetType(Boolean))>
@@ -168,22 +170,26 @@ Public Class CComboBox
     Public Property LinkedLabel As CLabel Implements ILinkedLabel.LinkedLabel
 
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
-        If EditingMode Then
-            ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
-        Else
-            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+        If Not AlwaysEditable Then
+            If EditingMode Then
+                ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            End If
         End If
     End Sub
 
     Public Sub LeaveHandler(sender As Object, e As EventArgs) Handles MyBase.Leave
-        If EditingMode Then
-            ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-        Else
-            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+        If Not AlwaysEditable Then
+            If EditingMode Then
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            End If
         End If
     End Sub
 
@@ -298,9 +304,11 @@ Public Class CComboBox
             Return _readOnlyCombo
         End Get
         Set
-            ' If the value isn't changing, then do nothing
-            If Value = _readOnlyCombo Then Exit Property
-            _readOnlyCombo = Value
+            If Not AlwaysEditable Then
+                ' If the value isn't changing, then do nothing
+                If Value = _readOnlyCombo Then Exit Property
+                _readOnlyCombo = Value
+            End If
         End Set
     End Property
 
@@ -326,13 +334,15 @@ Public Class CComboBox
             Return _editingMode
         End Get
         Set(value As Boolean)
-            _editingMode = value
-            If value Then
-                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            Else
-                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            If Not AlwaysEditable Then
+                _editingMode = value
+                If value Then
+                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                Else
+                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                End If
             End If
         End Set
     End Property

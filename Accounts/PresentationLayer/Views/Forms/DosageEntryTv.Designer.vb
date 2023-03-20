@@ -38,10 +38,10 @@ Namespace PresentationLayer.Views.Forms
         Me.cboDirection = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
         Me.CLabel6 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboFrequency = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-        Me.CLabel9 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboFrequencyTiming = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
         Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel10 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.CLabel9 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CTextBox1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
@@ -89,6 +89,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'cboRoute
         '
+        Me.cboRoute.AlwaysEditable = false
         Me.cboRoute.BackColor = System.Drawing.Color.White
         Me.cboRoute.BegFindValue = Nothing
         Me.cboRoute.ChangingSearchValueOnly = false
@@ -351,6 +352,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'cboDirection
         '
+        Me.cboDirection.AlwaysEditable = false
         Me.cboDirection.BackColor = System.Drawing.Color.White
         Me.cboDirection.BegFindValue = Nothing
         Me.cboDirection.ChangingSearchValueOnly = false
@@ -413,6 +415,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'cboFrequency
         '
+        Me.cboFrequency.AlwaysEditable = false
         Me.cboFrequency.BackColor = System.Drawing.Color.White
         Me.cboFrequency.BegFindValue = Nothing
         Me.cboFrequency.ChangingSearchValueOnly = false
@@ -456,23 +459,9 @@ Namespace PresentationLayer.Views.Forms
         Me.cboFrequency.ValueIsNumeric = false
         Me.cboFrequency.ValueMember = "IdNo"
         '
-        'CLabel9
-        '
-        Me.CLabel9.AutoSize = true
-        Me.CLabel9.DisplayOnly = true
-        Me.CLabel9.EditingMode = false
-        Me.CLabel9.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.CLabel9.Location = New System.Drawing.Point(155, 172)
-        Me.CLabel9.Margin = New System.Windows.Forms.Padding(1)
-        Me.CLabel9.Name = "CLabel9"
-        Me.CLabel9.Size = New System.Drawing.Size(121, 17)
-        Me.CLabel9.TabIndex = 296
-        Me.CLabel9.Text = "Frequency Timing"
-        Me.CLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.CLabel9.Translatable = true
-        '
         'cboFrequencyTiming
         '
+        Me.cboFrequencyTiming.AlwaysEditable = false
         Me.cboFrequencyTiming.BackColor = System.Drawing.Color.White
         Me.cboFrequencyTiming.BegFindValue = Nothing
         Me.cboFrequencyTiming.ChangingSearchValueOnly = false
@@ -547,6 +536,21 @@ Namespace PresentationLayer.Views.Forms
         Me.CLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.CLabel10.Translatable = true
         '
+        'CLabel9
+        '
+        Me.CLabel9.AutoSize = true
+        Me.CLabel9.DisplayOnly = true
+        Me.CLabel9.EditingMode = false
+        Me.CLabel9.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.CLabel9.Location = New System.Drawing.Point(155, 172)
+        Me.CLabel9.Margin = New System.Windows.Forms.Padding(1)
+        Me.CLabel9.Name = "CLabel9"
+        Me.CLabel9.Size = New System.Drawing.Size(121, 17)
+        Me.CLabel9.TabIndex = 296
+        Me.CLabel9.Text = "Frequency Timing"
+        Me.CLabel9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.CLabel9.Translatable = true
+        '
         'CTextBox1
         '
         Me.CTextBox1.BackColor = System.Drawing.Color.White
@@ -586,7 +590,7 @@ Namespace PresentationLayer.Views.Forms
         Me.ClientSize = New System.Drawing.Size(1274, 533)
         Me.MinimumSize = New System.Drawing.Size(16, 100)
         Me.Name = "DosageEntryTv"
-        Me.Text = "Dosage Printing"
+        Me.Text = "Dosage Maintenance"
         Me.SplitContainer1.Panel1.ResumeLayout(false)
         Me.SplitContainer1.Panel2.ResumeLayout(false)
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).EndInit

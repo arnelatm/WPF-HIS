@@ -142,7 +142,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
     Protected WithEvents FormTreeView As TreeView
     Protected NodeToDelete As TreeNode
 
-    Protected Sub DisplayTree()
+    Public Sub DisplayTree(optional IdNo As Int64 = 0)
         Dim root As TreeNode = FormTreeView.Nodes(0)
         root.Nodes.Clear()
         Dim treeViewData As Object = GetTreeViewData()
@@ -157,6 +157,9 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
             Next
         End If
         FormTreeView.ExpandAll()
+        If IdNo <> 0 Then
+            TargetIdNo = IdNo
+        End If
         GotoRecordInTreeView()
     End Sub
 

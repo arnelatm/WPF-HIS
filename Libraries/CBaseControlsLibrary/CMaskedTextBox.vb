@@ -36,6 +36,8 @@ Public Class CMaskedTextBox
     <Browsable(True)>
     Public Property MaximumValue As Decimal? = Nothing
 
+    Public Property AlwaysEditable As Boolean = False
+
     Public Property DateTimePickerParent As Control = Nothing
 
     Public Sub New()
@@ -56,21 +58,23 @@ Public Class CMaskedTextBox
             Return _editingMode
         End Get
         Set(value As Boolean)
-            _editingMode = value
-            If value Then
-                If DisplayOnly Then
-                    [ReadOnly] = True
+            If Not AlwaysEditable Then
+                _editingMode = value
+                If value Then
+                    If DisplayOnly Then
+                        [ReadOnly] = True
+                        ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                        BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                    Else
+                        [ReadOnly] = False
+                        ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                        BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                    End If
+                Else
                     ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                     BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                Else
-                    [ReadOnly] = False
-                    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                    [ReadOnly] = True
                 End If
-            Else
-                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                [ReadOnly] = True
             End If
         End Set
     End Property
@@ -85,16 +89,18 @@ Public Class CMaskedTextBox
             Return _displayOnly
         End Get
         Set(value As Boolean)
-            If _displayOnly = value Then Exit Property
-            _displayOnly = value
-            If value Then
-                [ReadOnly] = True
-                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            Else
-                [ReadOnly] = False
-                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            If Not AlwaysEditable Then
+                If _displayOnly = value Then Exit Property
+                _displayOnly = value
+                If value Then
+                    [ReadOnly] = True
+                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                Else
+                    [ReadOnly] = False
+                    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                End If
             End If
         End Set
     End Property
@@ -144,25 +150,29 @@ Public Class CMaskedTextBox
     Public Property SearchField As String
 
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
-        If EditingMode And Not DisplayOnly Then
-            ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
-        Else
-            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+        If Not AlwaysEditable Then
+            If EditingMode And Not DisplayOnly Then
+                ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            End If
+            _oldText = Text
+            SetPosition()
+            SendKeys.Send("{Home}")
         End If
-        _oldText = Text
-        SetPosition()
-        SendKeys.Send("{Home}")
     End Sub
 
     Public Sub LeaveHandler(sender As Object, e As EventArgs) Handles MyBase.Leave
-        If EditingMode And Not DisplayOnly Then
-            ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-        Else
-            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+        If Not AlwaysEditable Then
+            If EditingMode And Not DisplayOnly Then
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            End If
         End If
     End Sub
 

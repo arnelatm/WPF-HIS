@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[CBCResults] (
+    [IdNo]        INT             IDENTITY (1, 1) NOT NULL,
+    [PatientName] VARCHAR (50)    NULL,
+    [InvoiceNo]   NUMERIC (10)    NULL,
+    [SampleId]    NUMERIC (10)    NULL,
+    [MRN]         VARCHAR (10)    NULL,
+    [Gender]      VARCHAR (6)     NULL,
+    [Age]         NUMERIC (6)     NULL,
+    [AgeYMD]      VARCHAR (6)     NULL,
+    [WBC]         DECIMAL (10, 2) NULL,
+    [Neutrophils] DECIMAL (10, 2) NULL,
+    [Lymphocytes] DECIMAL (10, 2) NULL,
+    [Monocytes]   DECIMAL (10, 2) NULL,
+    [RBC]         DECIMAL (10, 2) NULL,
+    [Hemoglobin]  DECIMAL (10, 2) NULL,
+    [Hematocrit]  DECIMAL (10, 2) NULL,
+    [MCV]         DECIMAL (10, 2) NULL,
+    [MCH]         DECIMAL (10, 2) NULL,
+    [RDWCV]       DECIMAL (10, 2) NULL,
+    [RDWSD]       DECIMAL (10, 2) NULL,
+    [Platelets]   DECIMAL (10, 2) NULL,
+    [PCT]         DECIMAL (10, 2) NULL,
+    [MPV]         DECIMAL (10, 2) NULL,
+    [PDW]         DECIMAL (10, 2) NULL,
+    CONSTRAINT [PK_CBCResults] PRIMARY KEY CLUSTERED ([IdNo] ASC)
+);
+

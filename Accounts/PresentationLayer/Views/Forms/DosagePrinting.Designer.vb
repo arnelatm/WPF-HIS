@@ -43,6 +43,7 @@ Namespace PresentationLayer.Views.Forms
         Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel10 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CTextBox1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -56,6 +57,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'SplitContainer1.Panel2
         '
+        Me.SplitContainer1.Panel2.Controls.Add(Me.CButton1)
         Me.SplitContainer1.Panel2.Controls.Add(Me.TableLayoutPanel1)
         Me.SplitContainer1.Size = New System.Drawing.Size(934, 480)
         Me.SplitContainer1.SplitterDistance = 355
@@ -564,6 +566,18 @@ Namespace PresentationLayer.Views.Forms
         Me.CTextBox1.TabIndex = 305
         Me.CTextBox1.Translatable = false
         '
+        'CButton1
+        '
+        Me.CButton1.DesignerSelected = true
+        Me.CButton1.ImageIndex = 0
+        Me.CButton1.Location = New System.Drawing.Point(11, 322)
+        Me.CButton1.Name = "CButton1"
+        Me.CButton1.OriginalImageName = Nothing
+        Me.CButton1.SecurityKey = ""
+        Me.CButton1.Size = New System.Drawing.Size(130, 25)
+        Me.CButton1.TabIndex = 295
+        Me.CButton1.Text = "Add New Dosage"
+        '
         'DosagePrinting
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
@@ -614,5 +628,6 @@ End Sub
         Friend WithEvents CLabel8 As CLabel
         Friend WithEvents txtDuration As CTextBox
         Friend WithEvents cboDosageUnit As CtComboBox
+        Friend WithEvents CButton1 As CButton
     End Class
 End Namespace

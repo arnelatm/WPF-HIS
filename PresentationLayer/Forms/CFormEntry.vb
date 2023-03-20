@@ -38,6 +38,7 @@ Public Class CFormEntry
     Private _firstLoadSwitch As UInt16 = 0
 
     Public Event AfterUpdateView()
+    Public Property AddOnOpen As Boolean = False
 
     Public Event AfterSave()
 
@@ -563,6 +564,9 @@ Public Class CFormEntry
             End If
             If Not UserIsASuperAdministrator() Then
                 HideButton(btnDebug)
+            End If
+            If AddOnOpen Then
+                btnAdd.PerformClick()
             End If
             'CenterForm(Me)
             'UpdateNavigationButtonDisplay(False, False)

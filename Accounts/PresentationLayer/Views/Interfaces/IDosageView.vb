@@ -27,7 +27,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property DosageUnit As Int32
         Property Duration As Decimal
         Property DurationTiming As Decimal
-        
+        Event AddNewDosage()
+        Event UpdateTree()
     End Interface
 
 End Namespace

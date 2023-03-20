@@ -45,8 +45,6 @@ Public Class CtComboBox
 
     Public Property DefaultValue As Object
 
-    Private Property _displayField As String
-
     Public Shared Property Delete As String = "Delete Selected Text"
     Public ComboBoxValueChanged As Boolean = False
     Public Property AlwaysEditable As Boolean = False
