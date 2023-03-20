@@ -9,13 +9,14 @@ Namespace PresentationLayer.Views.Forms
     Public Class DosageEntryTv
         Implements IDosageView
 
+        Public Property AddMode As Boolean = False
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
         Public Sub New()
 
             ' This call is required by the designer.
             InitializeComponent()
-               ' Add any initialization after the InitializeComponent() call.
+            ' Add any initialization after the InitializeComponent() call.
 
         End Sub
 
@@ -32,10 +33,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property IdNo As Int32 Implements IDosageView.IdNo
             Get
-                Return GlobalFunctions.NumParser(Of Int32)(TxtIdNo.Text)
+                Return GlobalFunctions.NumParser(Of Int32)(txtIdNo.Text)
             End Get
             Set
-                TxtIdNo.Text = Convert.ToString(Value)
+                txtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
@@ -112,18 +113,6 @@ Namespace PresentationLayer.Views.Forms
             Close()
         End Sub
 
-        Private Sub btnPrintCheck_ClickButtonArea(sender As Object, e As MouseEventArgs) 
-            Dim currencies As New List(Of CurrencyInfo)()
-            Dim curCulture = CultureInfo.CurrentCulture
-            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-            Dim language As String
-            Dim reportName As String
-            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-            reportName = "Check Printing.Rpt"
-            'Dim cForm As New ReportForm(reportName, checkAmountInWords, "CheckAmountInWords", payee, "PayeeName", dtpCheckDate.Value, "CheckDate", Convert.ToDecimal(txtAmount.Text), "CheckAmount", txtNotes.Text, "Notes", language, "Language")
-            'cForm.Show()
-        End Sub
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From

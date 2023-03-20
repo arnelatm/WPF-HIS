@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[HRSettings] (
+    [BranchID]                    VARCHAR (15)   NOT NULL,
+    [DataBaseServerType]          INT            NULL,
+    [DataBaseServerVersion]       INT            NULL,
+    [DataBaseName]                VARCHAR (50)   NULL,
+    [DataBaseUserName]            VARCHAR (30)   NULL,
+    [DataBaseUserPassword]        VARCHAR (30)   NULL,
+    [PunchExceptionShiftStarting] INT            NULL,
+    [PunchExceptionShiftEnding]   INT            NULL,
+    [PunchExceptionRestStarting]  INT            NULL,
+    [PunchExceptionRestEnding]    INT            NULL,
+    [BankName]                    VARCHAR (50)   NULL,
+    [ProcessedIndex]              NUMERIC (10)   NULL,
+    [DefaultMonth]                VARCHAR (30)   NULL,
+    [DefaultYear]                 VARCHAR (10)   NULL,
+    [SalaryDays30]                INT            NULL,
+    [ServiceBenefitsAllowed]      INT            NULL,
+    [TimeCoverInMinutes]          INT            NULL,
+    [AutoProcessing]              INT            NULL,
+    [timecoverinminute]           INT            NULL,
+    [InOutPressing]               INT            NULL,
+    [MAXOTHrs]                    INT            NULL,
+    [latehrsdeduct]               INT            NULL,
+    [ProcessedCheckTime]          DATETIME       NULL,
+    [OTCalculation]               INT            NULL,
+    [OTPercent]                   NUMERIC (5, 2) NULL
+);
+

@@ -907,6 +907,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ToDos", "ToDos", "{E4F0E91F
 		Sample Data.txt = Sample Data.txt
 	EndProjectSection
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "IGroupClinicDb", "IGroupClinicDb\IGroupClinicDb.sqlproj", "{0105059D-8256-4280-8F09-B7010070AE2E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1011,6 +1013,12 @@ Global
 		{8F2BB05A-C065-4E1B-9B1A-D4F600C0DB62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F2BB05A-C065-4E1B-9B1A-D4F600C0DB62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F2BB05A-C065-4E1B-9B1A-D4F600C0DB62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0105059D-8256-4280-8F09-B7010070AE2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0105059D-8256-4280-8F09-B7010070AE2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0105059D-8256-4280-8F09-B7010070AE2E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{0105059D-8256-4280-8F09-B7010070AE2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0105059D-8256-4280-8F09-B7010070AE2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0105059D-8256-4280-8F09-B7010070AE2E}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

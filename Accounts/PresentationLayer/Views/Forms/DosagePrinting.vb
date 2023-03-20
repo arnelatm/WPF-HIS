@@ -1,5 +1,8 @@
 ﻿Imports System.Globalization
+Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Views
@@ -10,6 +13,9 @@ Namespace PresentationLayer.Views.Forms
         Implements IDosagePrintingView
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
+        
+        Public Event AddNewDosage() Implements IDosagePrintingView.AddNewDosage
+        Public Event UpdateTree() Implements IDosagePrintingView.UpdateTree
 
         Public Sub New()
 
@@ -136,6 +142,11 @@ Namespace PresentationLayer.Views.Forms
             btnEdit.Visible = False
             txtDose.Text = 1
             txtDuration.Text = 1
+        End Sub
+
+        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
+            RaiseEvent AddNewDosage()
+            RaiseEvent UpdateTree()
         End Sub
     End Class
 

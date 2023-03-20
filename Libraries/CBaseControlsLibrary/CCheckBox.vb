@@ -24,6 +24,7 @@ Public Class CCheckBox
 
     Private _state As CheckBoxState = CheckBoxState.UncheckedNormal
 
+
     Public Sub New()
         MyBase.New()
         Font = SystemFonts.IconTitleFont
@@ -42,6 +43,8 @@ Public Class CCheckBox
         NoLabel = True
         Text = ""
     End Sub
+
+    Public Property AlwaysEditable As Boolean = False
 
     <Category("Custom Properties")>
     <DefaultValue(CType(Nothing, String))>
@@ -223,15 +226,17 @@ Public Class CCheckBox
         End Get
         Set(value As Boolean)
             'If _displayOnly = value Then Exit Property
-            _displayOnly = value
-            If value Then
-                Enabled = False
-                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            Else
-                Enabled = True
-                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            If Not AlwaysEditable Then
+                _displayOnly = value
+                If value Then
+                    Enabled = False
+                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                Else
+                    Enabled = True
+                    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                End If
             End If
         End Set
     End Property
@@ -258,23 +263,25 @@ Public Class CCheckBox
             Return _editingMode
         End Get
         Set(value As Boolean)
-            _editingMode = value
-            If value Then
-                If DisplayOnly Then
+            If Not AlwaysEditable Then
+                _editingMode = value
+                If value Then
+                    If DisplayOnly Then
+                        AutoCheck = False
+                        ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                        BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                    Else
+                        AutoCheck = True
+                        ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                        BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                    End If
+                    '_state = VisualStyles.CheckBoxState.CheckedDisabled
+                Else
                     AutoCheck = False
                     ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                     BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                Else
-                    AutoCheck = True
-                    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                    '_state = VisualStyles.CheckBoxState.CheckedNormal
                 End If
-                '_state = VisualStyles.CheckBoxState.CheckedDisabled
-            Else
-                AutoCheck = False
-                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                '_state = VisualStyles.CheckBoxState.CheckedNormal
             End If
         End Set
     End Property
@@ -310,12 +317,14 @@ Public Class CCheckBox
     '    MyBase.OnPaint(e)
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
         _oldValue = Text
-        If EditingMode And Not DisplayOnly Then
-            ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
-        Else
-            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+        If Not AlwaysEditable Then
+            If EditingMode And Not DisplayOnly Then
+                ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            End If
         End If
     End Sub
 
@@ -348,12 +357,14 @@ Public Class CCheckBox
     'Protected Overrides Sub OnPaint(ByVal e As System.Windows.Forms.PaintEventArgs)
     '    Dim checkRegion As New Rectangle(2, 3, 9, 9)
     Public Sub LeaveHandler(sender As Object, e As EventArgs) Handles MyBase.Leave
-        If EditingMode And Not DisplayOnly Then
-            ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-        Else
-            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+        If Not AlwaysEditable Then
+            If EditingMode And Not DisplayOnly Then
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            End If
         End If
     End Sub
 
