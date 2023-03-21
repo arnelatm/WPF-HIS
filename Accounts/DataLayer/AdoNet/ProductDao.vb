@@ -15,7 +15,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordByIdNo(idNo) As Product Implements iDao(Of Product).GetRecordByIdNo
             Dim sql As String =
-                    " SELECT IdNo, ProductCode, ProductName, ProductNameAra, ProductCategoryIdNo, GlAccountIdNo, VatAccountIdNo," &
+                    " SELECT IdNo, ProductCode, ProductName, ProductNameAra, CategoryIdNo, GlAccountIdNo, VatAccountIdNo," &
                     "   Unit1, Unit2, Unit3, Unit1Ara, Unit2Ara, Unit3Ara, StdPrice1, StdPrice2, StdPrice3, Active" &
                     "   FROM [Product]" &
                     " WHERE IdNo = @IdNo"
@@ -29,7 +29,7 @@ Namespace DataLayer.AdoNet
                     "    SET ProductCode = @ProductCode," &
                     "        ProductName = @ProductName," &
                     "        ProductNameAra = @ProductNameAra," &
-                    "        ProductCategoryIdNo = @ProductCategoryIdNo," &
+                    "        CategoryIdNo = @CategoryIdNo," &
                     "        GlAccountIdNo = @GlAccountIdNo," &
                     "        VatAccountIdNo = @VatAccountIdNo," &
                     "        Unit1 = @Unit1," &
@@ -50,9 +50,9 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef Product As Product) As Integer Implements iDao(Of Product).AddRecord
             Dim sql As String =
                     " INSERT INTO [Product] " &
-                    " (ProductCode,ProductName,ProductNameAra,ProductCategoryIdNo, GlAccountIdNo, VatAccountIdNo," &
+                    " (ProductCode,ProductName,ProductNameAra,CategoryIdNo, GlAccountIdNo, VatAccountIdNo," &
                     "   Unit1, Unit2, Unit3, Unit1Ara, Unit2Ara, Unit3Ara, StdPrice1, StdPrice2, StdPrice3, Active) " &
-                    " VALUES (@ProductCode,@ProductName,@ProductNameAra,@ProductCategoryIdNo, @GlAccountIdNo, @VatAccountIdNo," &
+                    " VALUES (@ProductCode,@ProductName,@ProductNameAra,@CategoryIdNo, @GlAccountIdNo, @VatAccountIdNo," &
                     "   @Unit1, @Unit2, @Unit3, @Unit1Ara, @Unit2Ara, @Unit3Ara, @StdPrice1, @StdPrice2, @StdPrice3, @Active) "
             Return Db.Insert(sql, Take(Product))
         End Function
@@ -64,7 +64,7 @@ Namespace DataLayer.AdoNet
             .ProductCode = Extensions.AsString(reader("ProductCode")),
             .ProductName = Extensions.AsString(reader("ProductName")),
             .ProductNameAra = Extensions.AsString(reader("ProductNameAra")),
-            .ProductCategoryIdNo = Extensions.AsInt(Of Int16)(reader("ProductCategoryIdNo")),
+            .CategoryIdNo = Extensions.AsInt(Of Int16)(reader("CategoryIdNo")),
             .GlAccountIdNo = Extensions.AsInt(Of Int16)(reader("GlAccountIdNo")),
             .VatAccountIdNo = Extensions.AsInt(Of Int16)(reader("VatAccountIdNo")),
             .Unit1 = Extensions.AsString(reader("Unit1")),
@@ -85,7 +85,7 @@ Namespace DataLayer.AdoNet
                                     "@ProductCode", Product.ProductCode,
                                     "@ProductName", Product.ProductName,
                                     "@ProductNameAra", Product.ProductNameAra,
-                                    "@ProductCategoryIdNo", Product.ProductCategoryIdNo,
+                                    "@CategoryIdNo", Product.CategoryIdNo,
                                     "@GlAccountIdNo", Product.GlAccountIdNo,
                                     "@VatAccountIdNo", Product.VatAccountIdNo,
                                     "@Unit1", Product.Unit1,

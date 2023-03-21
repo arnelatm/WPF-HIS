@@ -144,7 +144,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 23</value>
+    <value>58, 23</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblIdNo.TabIndex" type="System.Int32, mscorlib">
@@ -172,7 +172,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="TxtIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 4</value>
+    <value>64, 4</value>
   </data>
   <data name="TxtIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -199,13 +199,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 29</value>
+    <value>128, 4</value>
   </data>
   <data name="lblCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblCode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 23</value>
+    <value>333, 23</value>
   </data>
   <data name="lblCode.TabIndex" type="System.Int32, mscorlib">
     <value>156</value>
@@ -214,7 +214,7 @@
     <value>Code</value>
   </data>
   <data name="lblCode.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>MiddleRight</value>
   </data>
   <data name="&gt;&gt;lblCode.Name" xml:space="preserve">
     <value>lblCode</value>
@@ -228,44 +228,44 @@
   <data name="&gt;&gt;lblCode.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="txtProductCategoryCode.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txtCategoryCode.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="txtProductCategoryCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 29</value>
+  <data name="txtCategoryCode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>463, 4</value>
   </data>
-  <data name="txtProductCategoryCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="txtCategoryCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtProductCategoryCode.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="txtCategoryCode.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 23</value>
   </data>
-  <data name="txtProductCategoryCode.TabIndex" type="System.Int32, mscorlib">
+  <data name="txtCategoryCode.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;txtProductCategoryCode.Name" xml:space="preserve">
-    <value>txtProductCategoryCode</value>
+  <data name="&gt;&gt;txtCategoryCode.Name" xml:space="preserve">
+    <value>txtCategoryCode</value>
   </data>
-  <data name="&gt;&gt;txtProductCategoryCode.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtCategoryCode.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtProductCategoryCode.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtCategoryCode.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;txtProductCategoryCode.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtCategoryCode.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="lblName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 54</value>
+    <value>4, 29</value>
   </data>
   <data name="lblName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 23</value>
+    <value>185, 23</value>
   </data>
   <data name="lblName.TabIndex" type="System.Int32, mscorlib">
     <value>157</value>
@@ -288,31 +288,31 @@
   <data name="&gt;&gt;lblName.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="txtProductCategoryName.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txtCategoryName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="txtProductCategoryName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 54</value>
+  <data name="txtCategoryName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 54</value>
   </data>
-  <data name="txtProductCategoryName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="txtCategoryName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtProductCategoryName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 23</value>
+  <data name="txtCategoryName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>520, 23</value>
   </data>
-  <data name="txtProductCategoryName.TabIndex" type="System.Int32, mscorlib">
+  <data name="txtCategoryName.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;txtProductCategoryName.Name" xml:space="preserve">
-    <value>txtProductCategoryName</value>
+  <data name="&gt;&gt;txtCategoryName.Name" xml:space="preserve">
+    <value>txtCategoryName</value>
   </data>
-  <data name="&gt;&gt;txtProductCategoryName.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtCategoryName.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtProductCategoryName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtCategoryName.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;txtProductCategoryName.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtCategoryName.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="lblNameAra.Font" type="System.Drawing.Font, System.Drawing">
@@ -325,7 +325,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblNameAra.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 23</value>
+    <value>185, 23</value>
   </data>
   <data name="lblNameAra.TabIndex" type="System.Int32, mscorlib">
     <value>158</value>
@@ -348,47 +348,410 @@
   <data name="&gt;&gt;lblNameAra.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="txtProductCategoryNameAra.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txtCategoryNameAra.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="txtProductCategoryNameAra.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 79</value>
+  <data name="txtCategoryNameAra.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 104</value>
   </data>
-  <data name="txtProductCategoryNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="txtCategoryNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtProductCategoryNameAra.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+  <data name="txtCategoryNameAra.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
-  <data name="txtProductCategoryNameAra.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 23</value>
+  <data name="txtCategoryNameAra.Size" type="System.Drawing.Size, System.Drawing">
+    <value>520, 23</value>
   </data>
-  <data name="txtProductCategoryNameAra.TabIndex" type="System.Int32, mscorlib">
+  <data name="txtCategoryNameAra.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;txtProductCategoryNameAra.Name" xml:space="preserve">
-    <value>txtProductCategoryNameAra</value>
+  <data name="&gt;&gt;txtCategoryNameAra.Name" xml:space="preserve">
+    <value>txtCategoryNameAra</value>
   </data>
-  <data name="&gt;&gt;txtProductCategoryNameAra.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtCategoryNameAra.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtProductCategoryNameAra.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtCategoryNameAra.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;txtProductCategoryNameAra.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtCategoryNameAra.ZOrder" xml:space="preserve">
     <value>7</value>
+  </data>
+  <data name="lblPurchaseAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblPurchaseAccountIdNo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblPurchaseAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 129</value>
+  </data>
+  <data name="lblPurchaseAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblPurchaseAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 23</value>
+  </data>
+  <data name="lblPurchaseAccountIdNo.TabIndex" type="System.Int32, mscorlib">
+    <value>160</value>
+  </data>
+  <data name="lblPurchaseAccountIdNo.Text" xml:space="preserve">
+    <value>Purchase Account</value>
+  </data>
+  <data name="lblPurchaseAccountIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblPurchaseAccountIdNo.Name" xml:space="preserve">
+    <value>lblPurchaseAccountIdNo</value>
+  </data>
+  <data name="&gt;&gt;lblPurchaseAccountIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblPurchaseAccountIdNo.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblPurchaseAccountIdNo.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="cboPurchaseAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="cboPurchaseAccountIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="cboPurchaseAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 154</value>
+  </data>
+  <data name="cboPurchaseAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="cboPurchaseAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>520, 24</value>
+  </data>
+  <data name="cboPurchaseAccountIdNo.TabIndex" type="System.Int32, mscorlib">
+    <value>161</value>
+  </data>
+  <data name="&gt;&gt;cboPurchaseAccountIdNo.Name" xml:space="preserve">
+    <value>cboPurchaseAccountIdNo</value>
+  </data>
+  <data name="&gt;&gt;cboPurchaseAccountIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cboPurchaseAccountIdNo.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;cboPurchaseAccountIdNo.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="lblSaleAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblSaleAccountIdNo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSaleAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 180</value>
+  </data>
+  <data name="lblSaleAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblSaleAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 23</value>
+  </data>
+  <data name="lblSaleAccountIdNo.TabIndex" type="System.Int32, mscorlib">
+    <value>162</value>
+  </data>
+  <data name="lblSaleAccountIdNo.Text" xml:space="preserve">
+    <value>Sale Account</value>
+  </data>
+  <data name="lblSaleAccountIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblSaleAccountIdNo.Name" xml:space="preserve">
+    <value>lblSaleAccountIdNo</value>
+  </data>
+  <data name="&gt;&gt;lblSaleAccountIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblSaleAccountIdNo.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblSaleAccountIdNo.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="cboSaleAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="cboSaleAccountIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="cboSaleAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 205</value>
+  </data>
+  <data name="cboSaleAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="cboSaleAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>520, 24</value>
+  </data>
+  <data name="cboSaleAccountIdNo.TabIndex" type="System.Int32, mscorlib">
+    <value>163</value>
+  </data>
+  <data name="&gt;&gt;cboSaleAccountIdNo.Name" xml:space="preserve">
+    <value>cboSaleAccountIdNo</value>
+  </data>
+  <data name="&gt;&gt;cboSaleAccountIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cboSaleAccountIdNo.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;cboSaleAccountIdNo.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="lblVatPurchaseAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblVatPurchaseAccountIdNo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblVatPurchaseAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 231</value>
+  </data>
+  <data name="lblVatPurchaseAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblVatPurchaseAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 23</value>
+  </data>
+  <data name="lblVatPurchaseAccountIdNo.TabIndex" type="System.Int32, mscorlib">
+    <value>164</value>
+  </data>
+  <data name="lblVatPurchaseAccountIdNo.Text" xml:space="preserve">
+    <value>VAT Purchase Account</value>
+  </data>
+  <data name="lblVatPurchaseAccountIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblVatPurchaseAccountIdNo.Name" xml:space="preserve">
+    <value>lblVatPurchaseAccountIdNo</value>
+  </data>
+  <data name="&gt;&gt;lblVatPurchaseAccountIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblVatPurchaseAccountIdNo.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblVatPurchaseAccountIdNo.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="cboVatPurchaseAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="cboVatPurchaseAccountIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="cboVatPurchaseAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 256</value>
+  </data>
+  <data name="cboVatPurchaseAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="cboVatPurchaseAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>520, 24</value>
+  </data>
+  <data name="cboVatPurchaseAccountIdNo.TabIndex" type="System.Int32, mscorlib">
+    <value>165</value>
+  </data>
+  <data name="&gt;&gt;cboVatPurchaseAccountIdNo.Name" xml:space="preserve">
+    <value>cboVatPurchaseAccountIdNo</value>
+  </data>
+  <data name="&gt;&gt;cboVatPurchaseAccountIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cboVatPurchaseAccountIdNo.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;cboVatPurchaseAccountIdNo.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="lblVatSaleAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblVatSaleAccountIdNo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblVatSaleAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 282</value>
+  </data>
+  <data name="lblVatSaleAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblVatSaleAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 23</value>
+  </data>
+  <data name="lblVatSaleAccountIdNo.TabIndex" type="System.Int32, mscorlib">
+    <value>169</value>
+  </data>
+  <data name="lblVatSaleAccountIdNo.Text" xml:space="preserve">
+    <value>VAT Sale Account </value>
+  </data>
+  <data name="lblVatSaleAccountIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblVatSaleAccountIdNo.Name" xml:space="preserve">
+    <value>lblVatSaleAccountIdNo</value>
+  </data>
+  <data name="&gt;&gt;lblVatSaleAccountIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblVatSaleAccountIdNo.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblVatSaleAccountIdNo.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="cboVatSaleAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="cboVatSaleAccountIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="cboVatSaleAccountIdNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 307</value>
+  </data>
+  <data name="cboVatSaleAccountIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="cboVatSaleAccountIdNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>520, 24</value>
+  </data>
+  <data name="cboVatSaleAccountIdNo.TabIndex" type="System.Int32, mscorlib">
+    <value>170</value>
+  </data>
+  <data name="&gt;&gt;cboVatSaleAccountIdNo.Name" xml:space="preserve">
+    <value>cboVatSaleAccountIdNo</value>
+  </data>
+  <data name="&gt;&gt;cboVatSaleAccountIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cboVatSaleAccountIdNo.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;cboVatSaleAccountIdNo.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="lblVatPercentage.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblVatPercentage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblVatPercentage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 333</value>
+  </data>
+  <data name="lblVatPercentage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblVatPercentage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 23</value>
+  </data>
+  <data name="lblVatPercentage.TabIndex" type="System.Int32, mscorlib">
+    <value>166</value>
+  </data>
+  <data name="lblVatPercentage.Text" xml:space="preserve">
+    <value>VAT Percentage</value>
+  </data>
+  <data name="lblVatPercentage.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblVatPercentage.Name" xml:space="preserve">
+    <value>lblVatPercentage</value>
+  </data>
+  <data name="&gt;&gt;lblVatPercentage.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblVatPercentage.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblVatPercentage.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="txtVatPercentage.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="txtVatPercentage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 358</value>
+  </data>
+  <data name="txtVatPercentage.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtVatPercentage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 23</value>
+  </data>
+  <data name="txtVatPercentage.TabIndex" type="System.Int32, mscorlib">
+    <value>167</value>
+  </data>
+  <data name="&gt;&gt;txtVatPercentage.Name" xml:space="preserve">
+    <value>txtVatPercentage</value>
+  </data>
+  <data name="&gt;&gt;txtVatPercentage.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtVatPercentage.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;txtVatPercentage.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="lblPercentMark.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblPercentMark.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblPercentMark.Location" type="System.Drawing.Point, System.Drawing">
+    <value>68, 358</value>
+  </data>
+  <data name="lblPercentMark.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblPercentMark.Size" type="System.Drawing.Size, System.Drawing">
+    <value>20, 17</value>
+  </data>
+  <data name="lblPercentMark.TabIndex" type="System.Int32, mscorlib">
+    <value>168</value>
+  </data>
+  <data name="lblPercentMark.Text" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="lblPercentMark.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblPercentMark.Name" xml:space="preserve">
+    <value>lblPercentMark</value>
+  </data>
+  <data name="&gt;&gt;lblPercentMark.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblPercentMark.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblPercentMark.ZOrder" xml:space="preserve">
+    <value>18</value>
   </data>
   <data name="lblNotes.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 104</value>
+    <value>4, 383</value>
   </data>
   <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 23</value>
+    <value>185, 23</value>
   </data>
   <data name="lblNotes.TabIndex" type="System.Int32, mscorlib">
     <value>159</value>
@@ -409,13 +772,13 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblNotes.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>19</value>
   </data>
   <data name="txtNotes.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 104</value>
+    <value>4, 408</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -424,7 +787,7 @@
     <value>True</value>
   </data>
   <data name="txtNotes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 60</value>
+    <value>520, 60</value>
   </data>
   <data name="txtNotes.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -439,7 +802,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtNotes.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>20</value>
   </data>
   <data name="floDataDisplay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -454,7 +817,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="floDataDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>580, 304</value>
+    <value>534, 529</value>
   </data>
   <data name="floDataDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>147</value>
@@ -484,10 +847,10 @@
     <value>1</value>
   </data>
   <data name="SplitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>954, 304</value>
+    <value>879, 529</value>
   </data>
   <data name="SplitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>364</value>
+    <value>335</value>
   </data>
   <data name="&gt;&gt;SplitContainer1.Name" xml:space="preserve">
     <value>SplitContainer1</value>
@@ -502,7 +865,7 @@
     <value>0</value>
   </data>
   <data name="FormTreeView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>364, 304</value>
+    <value>335, 529</value>
   </data>
   <data name="&gt;&gt;FormTreeView.Name" xml:space="preserve">
     <value>FormTreeView</value>
@@ -524,7 +887,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACG
-        CQAAAk1TRnQBSQFMAgEBAgEAATgBAAFQAQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAATgBAAFwAQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -586,10 +949,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>954, 357</value>
-  </data>
-  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>900, 267</value>
+    <value>879, 582</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Product Categories Maintenance Form</value>
@@ -625,7 +985,7 @@
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>ProductCategoryEntryTv</value>
+    <value>CategoryEntryTv</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>AATM.PresentationLayer.Forms.CFormEntryTv, Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
