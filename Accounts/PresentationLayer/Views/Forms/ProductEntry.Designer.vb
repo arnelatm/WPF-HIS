@@ -38,7 +38,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboProductCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblGlAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboGlAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblVatAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -216,7 +216,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout4.Controls.Add(Me.lblIdNo)
             Me.CFlowLayout4.Controls.Add(Me.TxtIdNo)
             Me.CFlowLayout4.Controls.Add(Me.lblCategoryIdNo)
-            Me.CFlowLayout4.Controls.Add(Me.cboProductCategoryIdNo)
+            Me.CFlowLayout4.Controls.Add(Me.cboCategoryIdNo)
             Me.CFlowLayout4.Controls.Add(Me.lblProductCode)
             Me.CFlowLayout4.Controls.Add(Me.txtProductCode)
             Me.CFlowLayout4.Controls.Add(Me.lblProductName)
@@ -295,42 +295,42 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCategoryIdNo.Name = "lblCategoryIdNo"
             Me.lblCategoryIdNo.Translatable = True
             '
-            'cboProductCategoryIdNo
+            'cboCategoryIdNo
             '
-            Me.cboProductCategoryIdNo.BackColor = System.Drawing.Color.White
-            Me.cboProductCategoryIdNo.BegFindValue = Nothing
-            Me.cboProductCategoryIdNo.ChangingSearchValueOnly = False
-            Me.cboProductCategoryIdNo.CurrentSearchTerm = ""
-            Me.cboProductCategoryIdNo.DefaultValue = ""
-            Me.cboProductCategoryIdNo.DisplayMember = "Name"
-            Me.cboProductCategoryIdNo.EditingMode = False
-            Me.cboProductCategoryIdNo.EndFindValue = Nothing
-            Me.cboProductCategoryIdNo.FieldDescription = Nothing
-            Me.cboProductCategoryIdNo.FieldName = Nothing
-            Me.cboProductCategoryIdNo.FilterRule = Nothing
-            Me.cboProductCategoryIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboProductCategoryIdNo.FindEnabled = False
-            resources.ApplyResources(Me.cboProductCategoryIdNo, "cboProductCategoryIdNo")
-            Me.cboProductCategoryIdNo.ForeColor = System.Drawing.Color.Black
-            Me.cboProductCategoryIdNo.HideWhenNotEditingOrAdding = False
-            Me.cboProductCategoryIdNo.IgnoreCase = False
-            Me.cboProductCategoryIdNo.LinkedLabel = Me.lblCategoryIdNo
-            Me.cboProductCategoryIdNo.Name = "cboProductCategoryIdNo"
-            Me.cboProductCategoryIdNo.OldValue = 0
-            Me.cboProductCategoryIdNo.OriginalDataSource = Nothing
-            Me.cboProductCategoryIdNo.OriginalList = Nothing
-            Me.cboProductCategoryIdNo.OverrideDropDownStyleList = False
-            Me.cboProductCategoryIdNo.PreviousSearchTerm = Nothing
-            Me.cboProductCategoryIdNo.PropertySelector = Nothing
-            Me.cboProductCategoryIdNo.ReadOnlyCombo = False
-            Me.cboProductCategoryIdNo.SuggestBoxHeight = 200
-            Me.cboProductCategoryIdNo.SuggestListOrderRule = Nothing
-            Me.cboProductCategoryIdNo.TextToSearch = Nothing
-            Me.cboProductCategoryIdNo.Translatable = False
-            Me.cboProductCategoryIdNo.ValueIsMandatory = False
-            Me.cboProductCategoryIdNo.ValueIsNullable = False
-            Me.cboProductCategoryIdNo.ValueIsNumeric = False
-            Me.cboProductCategoryIdNo.ValueMember = "IdNo"
+            Me.cboCategoryIdNo.BackColor = System.Drawing.Color.White
+            Me.cboCategoryIdNo.BegFindValue = Nothing
+            Me.cboCategoryIdNo.ChangingSearchValueOnly = False
+            Me.cboCategoryIdNo.CurrentSearchTerm = ""
+            Me.cboCategoryIdNo.DefaultValue = ""
+            Me.cboCategoryIdNo.DisplayMember = "Name"
+            Me.cboCategoryIdNo.EditingMode = False
+            Me.cboCategoryIdNo.EndFindValue = Nothing
+            Me.cboCategoryIdNo.FieldDescription = Nothing
+            Me.cboCategoryIdNo.FieldName = Nothing
+            Me.cboCategoryIdNo.FilterRule = Nothing
+            Me.cboCategoryIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboCategoryIdNo.FindEnabled = False
+            resources.ApplyResources(Me.cboCategoryIdNo, "cboCategoryIdNo")
+            Me.cboCategoryIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboCategoryIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboCategoryIdNo.IgnoreCase = False
+            Me.cboCategoryIdNo.LinkedLabel = Me.lblCategoryIdNo
+            Me.cboCategoryIdNo.Name = "cboCategoryIdNo"
+            Me.cboCategoryIdNo.OldValue = 0
+            Me.cboCategoryIdNo.OriginalDataSource = Nothing
+            Me.cboCategoryIdNo.OriginalList = Nothing
+            Me.cboCategoryIdNo.OverrideDropDownStyleList = False
+            Me.cboCategoryIdNo.PreviousSearchTerm = Nothing
+            Me.cboCategoryIdNo.PropertySelector = Nothing
+            Me.cboCategoryIdNo.ReadOnlyCombo = False
+            Me.cboCategoryIdNo.SuggestBoxHeight = 200
+            Me.cboCategoryIdNo.SuggestListOrderRule = Nothing
+            Me.cboCategoryIdNo.TextToSearch = Nothing
+            Me.cboCategoryIdNo.Translatable = False
+            Me.cboCategoryIdNo.ValueIsMandatory = False
+            Me.cboCategoryIdNo.ValueIsNullable = False
+            Me.cboCategoryIdNo.ValueIsNumeric = False
+            Me.cboCategoryIdNo.ValueMember = "IdNo"
             '
             'lblGlAccountIdNo
             '
@@ -798,7 +798,7 @@ End Sub
         Friend WithEvents lblCancelled As CLabel
         Friend WithEvents lblUnit1 As CLabel
         Friend WithEvents txtUnit1 As CTextBox
-        Friend WithEvents cboProductCategoryIdNo As CaComboBox
+        Friend WithEvents cboCategoryIdNo As CaComboBox
         Friend WithEvents chkActive As CCheckBox
     End Class
 End NameSpace

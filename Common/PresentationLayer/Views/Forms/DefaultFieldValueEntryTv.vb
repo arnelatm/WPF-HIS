@@ -194,7 +194,7 @@ End Namespace
 'PayGroup
 'Payroll
 'PcJournal
-'ProductCategory
+'Category
 'SalesJournal
 'SecurityGroup
 'Supplier

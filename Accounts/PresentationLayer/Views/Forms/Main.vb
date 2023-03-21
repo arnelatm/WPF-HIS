@@ -234,10 +234,6 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of CashReceiptJournalEntry, CashReceiptJournalPresenter(Of CashReceiptJournalModel))()
         End Sub
 
-        Private Sub CategoriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCategories.Click
-            RunBasicForm("Category", "Categories Maintenance Form")
-        End Sub
-
         Private Sub ChartOfAccountsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemChartOfAccounts.Click
             RunForm(Of AccountEntryTv, AccountPresenter(Of AccountModel))()
         End Sub
@@ -316,10 +312,6 @@ Namespace PresentationLayer.Views.Forms
         ''' <param name="e"></param>
         Private Sub IndexToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemIndex.Click
             MessageBox.Show("Help Is Not implemented... ", "Help")
-        End Sub
-
-        Private Sub ItemsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemItems.Click
-            RunForm(Of ProductEntry, ProductPresenter(Of ProductModel))()
         End Sub
 
         Private Sub LeavesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLeaves.Click
@@ -1124,6 +1116,14 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ToolStripMenuItemDosage_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDosage.Click
             RunForm(Of DosageEntryTv, DosagePresenter(Of DosageModel))()
+        End Sub
+
+        Private Sub ToolStripMenuItemProduct_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemProduct.Click
+
+        End Sub
+
+        Private Sub ToolStripMenuItemCategory_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCategory.Click
+            RunForm(Of CategoryEntryTv, CategoryPresenter(Of CategoryModel))()
         End Sub
     End Class
 

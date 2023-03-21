@@ -15,7 +15,7 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
-            FirstControl = cboProductCategoryIdNo
+            FirstControl = cboCategoryIdNo
         End Sub
 
         Public Property DateCreated As DateTime? Implements IProductView.DateCreated
@@ -71,96 +71,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Unit1 As String Implements IProductView.Unit1
+        Public Property BaseUnit As Short Implements IProductView.BaseUnit
             Get
-                Return txtUnit1.Text
+                Return cboBaseUnitIdNo.GetNullableValue(Of Int16)
             End Get
             Set
-                txtUnit1.Text = Value
-            End Set
-        End Property
-
-        Public Property Unit2 As String Implements IProductView.Unit2
-            Get
-                Return txtUnit2.Text
-            End Get
-            Set
-                txtUnit2.Text = Value
-            End Set
-        End Property
-
-        Public Property Unit3 As String Implements IProductView.Unit3
-            Get
-                Return txtUnit3.Text
-            End Get
-            Set
-                txtUnit3.Text = Value
-            End Set
-        End Property
-
-        Public Property Unit1Ara As String Implements IProductView.Unit1Ara
-            Get
-                Return txtUnit1Ara.Text
-            End Get
-            Set
-                txtUnit1Ara.Text = Value
-            End Set
-        End Property
-
-        Public Property Unit2Ara As String Implements IProductView.Unit2Ara
-            Get
-                Return txtUnit2Ara.Text
-            End Get
-            Set
-                txtUnit2Ara.Text = Value
-            End Set
-        End Property
-
-        Public Property Unit3Ara As String Implements IProductView.Unit3Ara
-            Get
-                Return txtUnit3Ara.Text
-            End Get
-            Set
-                txtUnit3Ara.Text = Value
-            End Set
-        End Property
-
-        Public Property StdPrice1 As Decimal Implements IProductView.StdPrice1
-            Get
-                If txtStdPrice1.Text <> "" Then
-                    Return Convert.ToSingle(txtStdPrice1.Text)
-                Else
-                    Return 0
-                End If
-            End Get
-            Set
-                txtStdPrice1.Text = Value
-            End Set
-        End Property
-
-        Public Property StdPrice2 As Decimal Implements IProductView.StdPrice2
-            Get
-                If txtStdPrice2.Text <> "" Then
-                    Return Convert.ToSingle(txtStdPrice2.Text)
-                Else
-                    Return 0
-                End If
-            End Get
-            Set
-                txtStdPrice2.Text = Value
-            End Set
-        End Property
-
-        Public Property StdPrice3 As Decimal Implements IProductView.StdPrice3
-            Get
-                If txtStdPrice3.Text <> "" Then
-                    Return Convert.ToSingle(txtStdPrice3.Text)
-                Else
-                    Return 0
-                End If
-            End Get
-            Set
-                txtStdPrice3.Text = Value
+                cboBaseUnitIdNo.SetValue(Value)
             End Set
         End Property
 
@@ -191,12 +107,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property ProductCategoryIdNo As Int16 Implements IProductView.ProductCategoryIdNo
+        Public Property CategoryIdNo As Int16 Implements IProductView.CategoryIdNo
             Get
-                Return cboProductCategoryIdNo.GetValue()
+                Return cboCategoryIdNo.GetValue()
             End Get
             Set(value As Int16)
-                cboProductCategoryIdNo.SetValue(value)
+                cboCategoryIdNo.SetValue(value)
             End Set
         End Property
 
@@ -207,7 +123,7 @@ Namespace PresentationLayer.Views.Forms
          {"ProductCode", txtProductCode},
          {"ProductName", txtProductName},
          {"ProductNameAra", txtProductNameAra},
-         {"ProductCategoryIdNo", cboProductCategoryIdNo},
+         {"CategoryIdNo", cboCategoryIdNo},
          {"GlAccountIdNo", cboGlAccountIdNo},
          {"VatAccountIdNo", cboVatAccountIdNo},
          {"Unit1", txtUnit1},

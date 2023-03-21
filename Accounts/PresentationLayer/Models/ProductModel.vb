@@ -11,9 +11,10 @@
         Public Property ProductCode As String
         Public Property ProductName As String
         Public Property ProductNameAra As String
-        Public Property ProductCategoryIdNo As Int16
+        Public Property CategoryIdNo As Int16
         Public Property GlAccountIdNo As Int16?
-        Public Property VatAccountIdNo As Int16?
+        Public Property VatPurchaseAccountIdNo As Int16?
+        Public Property VatSaleAccountIdNo As Int16?
         Public Property Unit1 As String
         Public Property Unit2 As String
         Public Property Unit3 As String

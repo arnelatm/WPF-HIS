@@ -18,9 +18,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateDataSource("ProductCategory", "ProductCategoryIdNo")
-            CreateDataSource("Account", "GlAccountIdNo", "DetailAccount=1")
-            CreateDataSource("Account", "VatAccountIdNo", "SpecialAccount=" & GlobalFunctions.EnumToCode(SpecialAccountSelection.VatInput))
+            CreateDataSource("Category", "CategoryIdNo")
         End Sub
 
     End Class

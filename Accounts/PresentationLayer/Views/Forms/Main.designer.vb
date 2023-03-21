@@ -65,7 +65,6 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemPhoneTypes = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemReligions = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemBanks = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemCategories = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemItems = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemDefaultFieldValues = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemSalesDepositTypes = New System.Windows.Forms.ToolStripMenuItem()
@@ -98,6 +97,8 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemIGroup = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemPharmacyItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemStockInventory = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemPMR = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemDosage = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemTransactions = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemPettyCash = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemCashDisbursementEntry = New System.Windows.Forms.ToolStripMenuItem()
@@ -214,8 +215,9 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemPMR = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemDosage = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemInventory = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemProduct = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemCategory = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.AccountsMenu.SuspendLayout
@@ -349,13 +351,13 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemMasters
         '
-        Me.ToolStripMenuItemMasters.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemGeneral, Me.ToolStripMenuItemSecurity, Me.ToolStripMenuItemEmployee, Me.ToolStripMenuItemTranslations, Me.ToolStripMenuItemPayroll, Me.ToolStripMenuItemDoctor, Me.ToolStripMenuItemSupplierVendors, Me.ToolStripMenuItemCustomerClients, Me.ToolStripMenuItemItemCode, Me.ToolStripMenuItemCodeGroup, Me.ToolStripMenuItemIGroup, Me.ToolStripMenuItemPMR})
+        Me.ToolStripMenuItemMasters.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemGeneral, Me.ToolStripMenuItemSecurity, Me.ToolStripMenuItemEmployee, Me.ToolStripMenuItemTranslations, Me.ToolStripMenuItemPayroll, Me.ToolStripMenuItemDoctor, Me.ToolStripMenuItemSupplierVendors, Me.ToolStripMenuItemCustomerClients, Me.ToolStripMenuItemItemCode, Me.ToolStripMenuItemCodeGroup, Me.ToolStripMenuItemIGroup, Me.ToolStripMenuItemPMR, Me.ToolStripMenuItemInventory})
         Me.ToolStripMenuItemMasters.Name = "ToolStripMenuItemMasters"
         resources.ApplyResources(Me.ToolStripMenuItemMasters, "ToolStripMenuItemMasters")
         '
         'ToolStripMenuItemGeneral
         '
-        Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemDocuments, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemCategories, Me.ToolStripMenuItemItems, Me.ToolStripMenuItemDefaultFieldValues, Me.ToolStripMenuItemSalesDepositTypes, Me.ToolStripMenuItemPrinters})
+        Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemDocuments, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemItems, Me.ToolStripMenuItemDefaultFieldValues, Me.ToolStripMenuItemSalesDepositTypes, Me.ToolStripMenuItemPrinters})
         Me.ToolStripMenuItemGeneral.Name = "ToolStripMenuItemGeneral"
         resources.ApplyResources(Me.ToolStripMenuItemGeneral, "ToolStripMenuItemGeneral")
         '
@@ -418,11 +420,6 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.ToolStripMenuItemBanks.Name = "ToolStripMenuItemBanks"
         resources.ApplyResources(Me.ToolStripMenuItemBanks, "ToolStripMenuItemBanks")
-        '
-        'ToolStripMenuItemCategories
-        '
-        Me.ToolStripMenuItemCategories.Name = "ToolStripMenuItemCategories"
-        resources.ApplyResources(Me.ToolStripMenuItemCategories, "ToolStripMenuItemCategories")
         '
         'ToolStripMenuItemItems
         '
@@ -588,6 +585,17 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.ToolStripMenuItemStockInventory.Name = "ToolStripMenuItemStockInventory"
         resources.ApplyResources(Me.ToolStripMenuItemStockInventory, "ToolStripMenuItemStockInventory")
+        '
+        'ToolStripMenuItemPMR
+        '
+        Me.ToolStripMenuItemPMR.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemDosage})
+        Me.ToolStripMenuItemPMR.Name = "ToolStripMenuItemPMR"
+        resources.ApplyResources(Me.ToolStripMenuItemPMR, "ToolStripMenuItemPMR")
+        '
+        'ToolStripMenuItemDosage
+        '
+        Me.ToolStripMenuItemDosage.Name = "ToolStripMenuItemDosage"
+        resources.ApplyResources(Me.ToolStripMenuItemDosage, "ToolStripMenuItemDosage")
         '
         'ToolStripMenuItemTransactions
         '
@@ -1192,16 +1200,21 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
-        'ToolStripMenuItemPMR
+        'ToolStripMenuItemInventory
         '
-        Me.ToolStripMenuItemPMR.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemDosage})
-        Me.ToolStripMenuItemPMR.Name = "ToolStripMenuItemPMR"
-        resources.ApplyResources(Me.ToolStripMenuItemPMR, "ToolStripMenuItemPMR")
+        Me.ToolStripMenuItemInventory.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemProduct, Me.ToolStripMenuItemCategory})
+        Me.ToolStripMenuItemInventory.Name = "ToolStripMenuItemInventory"
+        resources.ApplyResources(Me.ToolStripMenuItemInventory, "ToolStripMenuItemInventory")
         '
-        'ToolStripMenuItemDosage
+        'ToolStripMenuItemProduct
         '
-        Me.ToolStripMenuItemDosage.Name = "ToolStripMenuItemDosage"
-        resources.ApplyResources(Me.ToolStripMenuItemDosage, "ToolStripMenuItemDosage")
+        Me.ToolStripMenuItemProduct.Name = "ToolStripMenuItemProduct"
+        resources.ApplyResources(Me.ToolStripMenuItemProduct, "ToolStripMenuItemProduct")
+        '
+        'ToolStripMenuItemCategory
+        '
+        Me.ToolStripMenuItemCategory.Name = "ToolStripMenuItemCategory"
+        resources.ApplyResources(Me.ToolStripMenuItemCategory, "ToolStripMenuItemCategory")
         '
         'Main
         '
@@ -1315,7 +1328,6 @@ End Sub
         Friend WithEvents ToolStripMenuItemAccountsPayableEntry As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemAccountsReceivableEntry As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemItems As ToolStripMenuItem
-        Friend WithEvents ToolStripMenuItemCategories As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemCaptionsBatchEdit As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemSalesJournalEntry As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemAccountReconciliation As ToolStripMenuItem
@@ -1416,5 +1428,8 @@ End Sub
         Friend WithEvents ToolStripMenuItemDosagePrinting As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemPMR As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDosage As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemInventory As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemProduct As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemCategory As ToolStripMenuItem
     End Class
 End NameSpace
