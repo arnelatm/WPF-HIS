@@ -319,7 +319,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ItemsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemItems.Click
-            RunForm(Of PurchaseItemEntry, PurchaseItemPresenter(Of PurchaseItemModel))()
+            RunForm(Of ProductEntry, ProductPresenter(Of ProductModel))()
         End Sub
 
         Private Sub LeavesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemLeaves.Click

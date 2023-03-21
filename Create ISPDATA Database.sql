@@ -6815,17 +6815,17 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[PurchaseItem]    Script Date: 02/12/2020 15:42:52 ******/
+/****** Object:  Table [dbo].[Product]    Script Date: 02/12/2020 15:42:52 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[PurchaseItem](
+CREATE TABLE [dbo].[Product](
 	[IdNo] [int] IDENTITY(1,1) NOT NULL,
 	[CategoryIdNo] [smallint] NULL,
-	[PurchaseitemCode] [varchar](10) NOT NULL,
-	[PurchaseitemName] [varchar](50) NOT NULL,
-	[PurchaseitemNameAra] [nvarchar](100) NULL,
+	[ProductCode] [varchar](10) NOT NULL,
+	[ProductName] [varchar](50) NOT NULL,
+	[ProductNameAra] [nvarchar](100) NULL,
 	[Unit1] [nvarchar](20) NOT NULL,
 	[Unit2] [nvarchar](20) NULL,
 	[Unit3] [nvarchar](20) NULL,
@@ -6841,7 +6841,7 @@ CREATE TABLE [dbo].[PurchaseItem](
 	[DateCreated] [date] NULL,
 	[DateTimeStamp] [timestamp] NULL,
 	[CreatedByIdNo] [smallint] NULL,
- CONSTRAINT [PK_PurchaseItem] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED 
 (
 	[IdNo] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -7235,7 +7235,7 @@ ALTER TABLE [dbo].[PcJournalItem] ADD  CONSTRAINT [DF_PcJournalItem_ProfitCenter
 GO
 ALTER TABLE [dbo].[PcJournalItem] ADD  CONSTRAINT [DF_PcJournalItem_Posted]  DEFAULT ((0)) FOR [Posted]
 GO
-ALTER TABLE [dbo].[PurchaseItem] ADD  CONSTRAINT [DF_Purchaseitem_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
+ALTER TABLE [dbo].[Product] ADD  CONSTRAINT [DF_Product_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
 GO
 ALTER TABLE [dbo].[PurchaseJournal] ADD  CONSTRAINT [DF_PurchaseJournal_DateCreated]  DEFAULT (getdate()) FOR [DateCreated]
 GO

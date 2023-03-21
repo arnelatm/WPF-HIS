@@ -264,139 +264,139 @@
   <data name="&gt;&gt;cboProductCategoryIdNo.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="lblPurchaseItemCode.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblProductCode.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="lblPurchaseItemCode.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblProductCode.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblPurchaseItemCode.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblProductCode.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 62</value>
   </data>
-  <data name="lblPurchaseItemCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblProductCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="lblPurchaseItemCode.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblProductCode.Size" type="System.Drawing.Size, System.Drawing">
     <value>210, 23</value>
   </data>
-  <data name="lblPurchaseItemCode.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblProductCode.TabIndex" type="System.Int32, mscorlib">
     <value>254</value>
   </data>
-  <data name="lblPurchaseItemCode.Text" xml:space="preserve">
+  <data name="lblProductCode.Text" xml:space="preserve">
     <value>Purchase Item Code</value>
   </data>
-  <data name="lblPurchaseItemCode.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblProductCode.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;lblPurchaseItemCode.Name" xml:space="preserve">
-    <value>lblPurchaseItemCode</value>
+  <data name="&gt;&gt;lblProductCode.Name" xml:space="preserve">
+    <value>lblProductCode</value>
   </data>
-  <data name="&gt;&gt;lblPurchaseItemCode.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblProductCode.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lblPurchaseItemCode.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblProductCode.Parent" xml:space="preserve">
     <value>CFlowLayout4</value>
   </data>
-  <data name="&gt;&gt;lblPurchaseItemCode.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblProductCode.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="txtPurchaseItemCode.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txtProductCode.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="txtPurchaseItemCode.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="txtProductCode.Location" type="System.Drawing.Point, System.Drawing">
     <value>223, 62</value>
   </data>
-  <data name="txtPurchaseItemCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="txtProductCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtPurchaseItemCode.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="txtProductCode.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 23</value>
   </data>
-  <data name="txtPurchaseItemCode.TabIndex" type="System.Int32, mscorlib">
+  <data name="txtProductCode.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;txtPurchaseItemCode.Name" xml:space="preserve">
-    <value>txtPurchaseItemCode</value>
+  <data name="&gt;&gt;txtProductCode.Name" xml:space="preserve">
+    <value>txtProductCode</value>
   </data>
-  <data name="&gt;&gt;txtPurchaseItemCode.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtProductCode.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtPurchaseItemCode.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtProductCode.Parent" xml:space="preserve">
     <value>CFlowLayout4</value>
   </data>
-  <data name="&gt;&gt;txtPurchaseItemCode.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtProductCode.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="lblPurchaseItemName.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblProductName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="lblPurchaseItemName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblProductName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblPurchaseItemName.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblProductName.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 87</value>
   </data>
-  <data name="lblPurchaseItemName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblProductName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="lblPurchaseItemName.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblProductName.Size" type="System.Drawing.Size, System.Drawing">
     <value>210, 23</value>
   </data>
-  <data name="lblPurchaseItemName.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblProductName.TabIndex" type="System.Int32, mscorlib">
     <value>255</value>
   </data>
-  <data name="lblPurchaseItemName.Text" xml:space="preserve">
+  <data name="lblProductName.Text" xml:space="preserve">
     <value>Purchase Item Name</value>
   </data>
-  <data name="lblPurchaseItemName.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblProductName.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;lblPurchaseItemName.Name" xml:space="preserve">
-    <value>lblPurchaseItemName</value>
+  <data name="&gt;&gt;lblProductName.Name" xml:space="preserve">
+    <value>lblProductName</value>
   </data>
-  <data name="&gt;&gt;lblPurchaseItemName.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblProductName.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lblPurchaseItemName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblProductName.Parent" xml:space="preserve">
     <value>CFlowLayout4</value>
   </data>
-  <data name="&gt;&gt;lblPurchaseItemName.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblProductName.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="lblPurchaseItemNameAra.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblProductNameAra.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="lblPurchaseItemNameAra.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblProductNameAra.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblPurchaseItemNameAra.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblProductNameAra.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 112</value>
   </data>
-  <data name="lblPurchaseItemNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblProductNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="lblPurchaseItemNameAra.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblProductNameAra.Size" type="System.Drawing.Size, System.Drawing">
     <value>210, 23</value>
   </data>
-  <data name="lblPurchaseItemNameAra.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblProductNameAra.TabIndex" type="System.Int32, mscorlib">
     <value>256</value>
   </data>
-  <data name="lblPurchaseItemNameAra.Text" xml:space="preserve">
+  <data name="lblProductNameAra.Text" xml:space="preserve">
     <value>Purchase Item Name (Arabic)</value>
   </data>
-  <data name="lblPurchaseItemNameAra.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblProductNameAra.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;lblPurchaseItemNameAra.Name" xml:space="preserve">
-    <value>lblPurchaseItemNameAra</value>
+  <data name="&gt;&gt;lblProductNameAra.Name" xml:space="preserve">
+    <value>lblProductNameAra</value>
   </data>
-  <data name="&gt;&gt;lblPurchaseItemNameAra.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblProductNameAra.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lblPurchaseItemNameAra.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblProductNameAra.Parent" xml:space="preserve">
     <value>CFlowLayout4</value>
   </data>
-  <data name="&gt;&gt;lblPurchaseItemNameAra.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblProductNameAra.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="lblGlAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
@@ -1191,61 +1191,61 @@
   <data name="&gt;&gt;CFlowLayout4.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="txtPurchaseItemName.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txtProductName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="txtPurchaseItemName.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="txtProductName.Location" type="System.Drawing.Point, System.Drawing">
     <value>223, 87</value>
   </data>
-  <data name="txtPurchaseItemName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="txtProductName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtPurchaseItemName.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="txtProductName.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 23</value>
   </data>
-  <data name="txtPurchaseItemName.TabIndex" type="System.Int32, mscorlib">
+  <data name="txtProductName.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;txtPurchaseItemName.Name" xml:space="preserve">
-    <value>txtPurchaseItemName</value>
+  <data name="&gt;&gt;txtProductName.Name" xml:space="preserve">
+    <value>txtProductName</value>
   </data>
-  <data name="&gt;&gt;txtPurchaseItemName.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtProductName.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtPurchaseItemName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtProductName.Parent" xml:space="preserve">
     <value>CFlowLayout4</value>
   </data>
-  <data name="&gt;&gt;txtPurchaseItemName.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtProductName.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="txtPurchaseItemNameAra.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txtProductNameAra.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="txtPurchaseItemNameAra.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="txtProductNameAra.Location" type="System.Drawing.Point, System.Drawing">
     <value>223, 112</value>
   </data>
-  <data name="txtPurchaseItemNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="txtProductNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtPurchaseItemNameAra.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+  <data name="txtProductNameAra.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
   </data>
-  <data name="txtPurchaseItemNameAra.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="txtProductNameAra.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 23</value>
   </data>
-  <data name="txtPurchaseItemNameAra.TabIndex" type="System.Int32, mscorlib">
+  <data name="txtProductNameAra.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;txtPurchaseItemNameAra.Name" xml:space="preserve">
-    <value>txtPurchaseItemNameAra</value>
+  <data name="&gt;&gt;txtProductNameAra.Name" xml:space="preserve">
+    <value>txtProductNameAra</value>
   </data>
-  <data name="&gt;&gt;txtPurchaseItemNameAra.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtProductNameAra.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtPurchaseItemNameAra.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtProductNameAra.Parent" xml:space="preserve">
     <value>CFlowLayout4</value>
   </data>
-  <data name="&gt;&gt;txtPurchaseItemNameAra.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtProductNameAra.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -2448,7 +2448,7 @@
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>PurchaseItemEntry</value>
+    <value>ProductEntry</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>AATM.PresentationLayer.Forms.CFormEntry, Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>

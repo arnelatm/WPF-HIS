@@ -3,7 +3,7 @@ Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-    Partial Class PurchaseItemEntry
+    Partial Class ProductEntry
         Inherits CFormEntry
 
         'Form overrides dispose to clean up the component list.
@@ -24,14 +24,14 @@ Namespace PresentationLayer.Views.Forms
         <System.Diagnostics.DebuggerStepThrough()> _
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PurchaseItemEntry))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ProductEntry))
         Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
-        Me.txtPurchaseItemNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-        Me.txtPurchaseItemName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblPurchaseItemName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblPurchaseItemNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtPurchaseItemCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblPurchaseItemCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtProductNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+        Me.txtProductName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.lblProductName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.lblProductNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtProductCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.lblProductCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -66,113 +66,113 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout4.SuspendLayout()
             Me.SuspendLayout()
             '
-            'txtPurchaseItemNameAra
+            'txtProductNameAra
             '
-            Me.txtPurchaseItemNameAra.BackColor = System.Drawing.Color.White
-            Me.txtPurchaseItemNameAra.BegFindValue = Nothing
-            Me.txtPurchaseItemNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtPurchaseItemNameAra.ComputedValue = False
-            Me.txtPurchaseItemNameAra.CustomFormat = Nothing
-            Me.txtPurchaseItemNameAra.DataBoundControl = True
-            Me.txtPurchaseItemNameAra.EditingMode = False
-            Me.txtPurchaseItemNameAra.EndFindValue = Nothing
-            Me.txtPurchaseItemNameAra.EnglishControl = Me.txtPurchaseItemName
-            Me.txtPurchaseItemNameAra.FieldDescription = Nothing
-            Me.txtPurchaseItemNameAra.FieldName = Nothing
-            Me.txtPurchaseItemNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtPurchaseItemNameAra.FindEnabled = True
-            Me.CFlowLayout4.SetFlowBreak(Me.txtPurchaseItemNameAra, True)
-            resources.ApplyResources(Me.txtPurchaseItemNameAra, "txtPurchaseItemNameAra")
-            Me.txtPurchaseItemNameAra.ForeColor = System.Drawing.Color.Black
-            Me.txtPurchaseItemNameAra.LinkedLabel = Me.lblPurchaseItemNameAra
-            Me.txtPurchaseItemNameAra.MaximumValue = Nothing
-            Me.txtPurchaseItemNameAra.MinimumValue = Nothing
-            Me.txtPurchaseItemNameAra.Name = "txtPurchaseItemNameAra"
-            Me.txtPurchaseItemNameAra.OldValue = Nothing
-            Me.txtPurchaseItemNameAra.ReadOnly = True
-            Me.txtPurchaseItemNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPurchaseItemNameAra.Translatable = False
-            Me.txtPurchaseItemNameAra.ValueIsUnique = True
+            Me.txtProductNameAra.BackColor = System.Drawing.Color.White
+            Me.txtProductNameAra.BegFindValue = Nothing
+            Me.txtProductNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtProductNameAra.ComputedValue = False
+            Me.txtProductNameAra.CustomFormat = Nothing
+            Me.txtProductNameAra.DataBoundControl = True
+            Me.txtProductNameAra.EditingMode = False
+            Me.txtProductNameAra.EndFindValue = Nothing
+            Me.txtProductNameAra.EnglishControl = Me.txtProductName
+            Me.txtProductNameAra.FieldDescription = Nothing
+            Me.txtProductNameAra.FieldName = Nothing
+            Me.txtProductNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtProductNameAra.FindEnabled = True
+            Me.CFlowLayout4.SetFlowBreak(Me.txtProductNameAra, True)
+            resources.ApplyResources(Me.txtProductNameAra, "txtProductNameAra")
+            Me.txtProductNameAra.ForeColor = System.Drawing.Color.Black
+            Me.txtProductNameAra.LinkedLabel = Me.lblProductNameAra
+            Me.txtProductNameAra.MaximumValue = Nothing
+            Me.txtProductNameAra.MinimumValue = Nothing
+            Me.txtProductNameAra.Name = "txtProductNameAra"
+            Me.txtProductNameAra.OldValue = Nothing
+            Me.txtProductNameAra.ReadOnly = True
+            Me.txtProductNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtProductNameAra.Translatable = False
+            Me.txtProductNameAra.ValueIsUnique = True
             '
-            'txtPurchaseItemName
+            'txtProductName
             '
-            Me.txtPurchaseItemName.BackColor = System.Drawing.Color.White
-            Me.txtPurchaseItemName.BegFindValue = Nothing
-            Me.txtPurchaseItemName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtPurchaseItemName.ComputedValue = False
-            Me.txtPurchaseItemName.CustomFormat = Nothing
-            Me.txtPurchaseItemName.DataBoundControl = True
-            Me.txtPurchaseItemName.EditingMode = False
-            Me.txtPurchaseItemName.EndFindValue = Nothing
-            Me.txtPurchaseItemName.FieldDescription = Nothing
-            Me.txtPurchaseItemName.FieldName = Nothing
-            Me.txtPurchaseItemName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtPurchaseItemName.FindEnabled = True
-            Me.CFlowLayout4.SetFlowBreak(Me.txtPurchaseItemName, True)
-            resources.ApplyResources(Me.txtPurchaseItemName, "txtPurchaseItemName")
-            Me.txtPurchaseItemName.ForeColor = System.Drawing.Color.Black
-            Me.txtPurchaseItemName.LinkedLabel = Me.lblPurchaseItemName
-            Me.txtPurchaseItemName.MaximumValue = Nothing
-            Me.txtPurchaseItemName.MinimumValue = Nothing
-            Me.txtPurchaseItemName.Name = "txtPurchaseItemName"
-            Me.txtPurchaseItemName.OldValue = Nothing
-            Me.txtPurchaseItemName.ReadOnly = True
-            Me.txtPurchaseItemName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPurchaseItemName.Translatable = False
-            Me.txtPurchaseItemName.ValueIsMandatory = True
-            Me.txtPurchaseItemName.ValueIsUnique = True
+            Me.txtProductName.BackColor = System.Drawing.Color.White
+            Me.txtProductName.BegFindValue = Nothing
+            Me.txtProductName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtProductName.ComputedValue = False
+            Me.txtProductName.CustomFormat = Nothing
+            Me.txtProductName.DataBoundControl = True
+            Me.txtProductName.EditingMode = False
+            Me.txtProductName.EndFindValue = Nothing
+            Me.txtProductName.FieldDescription = Nothing
+            Me.txtProductName.FieldName = Nothing
+            Me.txtProductName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtProductName.FindEnabled = True
+            Me.CFlowLayout4.SetFlowBreak(Me.txtProductName, True)
+            resources.ApplyResources(Me.txtProductName, "txtProductName")
+            Me.txtProductName.ForeColor = System.Drawing.Color.Black
+            Me.txtProductName.LinkedLabel = Me.lblProductName
+            Me.txtProductName.MaximumValue = Nothing
+            Me.txtProductName.MinimumValue = Nothing
+            Me.txtProductName.Name = "txtProductName"
+            Me.txtProductName.OldValue = Nothing
+            Me.txtProductName.ReadOnly = True
+            Me.txtProductName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtProductName.Translatable = False
+            Me.txtProductName.ValueIsMandatory = True
+            Me.txtProductName.ValueIsUnique = True
             '
-            'lblPurchaseItemName
+            'lblProductName
             '
-            Me.lblPurchaseItemName.DisplayOnly = True
-            Me.lblPurchaseItemName.EditingMode = False
-            resources.ApplyResources(Me.lblPurchaseItemName, "lblPurchaseItemName")
-            Me.lblPurchaseItemName.Name = "lblPurchaseItemName"
-            Me.lblPurchaseItemName.Translatable = True
+            Me.lblProductName.DisplayOnly = True
+            Me.lblProductName.EditingMode = False
+            resources.ApplyResources(Me.lblProductName, "lblProductName")
+            Me.lblProductName.Name = "lblProductName"
+            Me.lblProductName.Translatable = True
             '
-            'lblPurchaseItemNameAra
+            'lblProductNameAra
             '
-            Me.lblPurchaseItemNameAra.DisplayOnly = True
-            Me.lblPurchaseItemNameAra.EditingMode = False
-            resources.ApplyResources(Me.lblPurchaseItemNameAra, "lblPurchaseItemNameAra")
-            Me.lblPurchaseItemNameAra.Name = "lblPurchaseItemNameAra"
-            Me.lblPurchaseItemNameAra.Translatable = True
+            Me.lblProductNameAra.DisplayOnly = True
+            Me.lblProductNameAra.EditingMode = False
+            resources.ApplyResources(Me.lblProductNameAra, "lblProductNameAra")
+            Me.lblProductNameAra.Name = "lblProductNameAra"
+            Me.lblProductNameAra.Translatable = True
             '
-            'txtPurchaseItemCode
+            'txtProductCode
             '
-            Me.txtPurchaseItemCode.BackColor = System.Drawing.Color.White
-            Me.txtPurchaseItemCode.BegFindValue = Nothing
-            Me.txtPurchaseItemCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtPurchaseItemCode.ComputedValue = False
-            Me.txtPurchaseItemCode.CustomFormat = Nothing
-            Me.txtPurchaseItemCode.DataBoundControl = True
-            Me.txtPurchaseItemCode.EditingMode = True
-            Me.txtPurchaseItemCode.EndFindValue = Nothing
-            Me.txtPurchaseItemCode.FieldDescription = Nothing
-            Me.txtPurchaseItemCode.FieldName = Nothing
-            Me.txtPurchaseItemCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtPurchaseItemCode.FindEnabled = True
-            Me.CFlowLayout4.SetFlowBreak(Me.txtPurchaseItemCode, True)
-            resources.ApplyResources(Me.txtPurchaseItemCode, "txtPurchaseItemCode")
-            Me.txtPurchaseItemCode.ForeColor = System.Drawing.Color.Black
-            Me.txtPurchaseItemCode.LinkedLabel = Me.lblPurchaseItemCode
-            Me.txtPurchaseItemCode.MaximumValue = Nothing
-            Me.txtPurchaseItemCode.MinimumValue = Nothing
-            Me.txtPurchaseItemCode.Name = "txtPurchaseItemCode"
-            Me.txtPurchaseItemCode.OldValue = Nothing
-            Me.txtPurchaseItemCode.ReadOnly = True
-            Me.txtPurchaseItemCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPurchaseItemCode.Translatable = False
-            Me.txtPurchaseItemCode.ValueIsMandatory = True
-            Me.txtPurchaseItemCode.ValueIsUnique = True
+            Me.txtProductCode.BackColor = System.Drawing.Color.White
+            Me.txtProductCode.BegFindValue = Nothing
+            Me.txtProductCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtProductCode.ComputedValue = False
+            Me.txtProductCode.CustomFormat = Nothing
+            Me.txtProductCode.DataBoundControl = True
+            Me.txtProductCode.EditingMode = True
+            Me.txtProductCode.EndFindValue = Nothing
+            Me.txtProductCode.FieldDescription = Nothing
+            Me.txtProductCode.FieldName = Nothing
+            Me.txtProductCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtProductCode.FindEnabled = True
+            Me.CFlowLayout4.SetFlowBreak(Me.txtProductCode, True)
+            resources.ApplyResources(Me.txtProductCode, "txtProductCode")
+            Me.txtProductCode.ForeColor = System.Drawing.Color.Black
+            Me.txtProductCode.LinkedLabel = Me.lblProductCode
+            Me.txtProductCode.MaximumValue = Nothing
+            Me.txtProductCode.MinimumValue = Nothing
+            Me.txtProductCode.Name = "txtProductCode"
+            Me.txtProductCode.OldValue = Nothing
+            Me.txtProductCode.ReadOnly = True
+            Me.txtProductCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtProductCode.Translatable = False
+            Me.txtProductCode.ValueIsMandatory = True
+            Me.txtProductCode.ValueIsUnique = True
             '
-            'lblPurchaseItemCode
+            'lblProductCode
             '
-            Me.lblPurchaseItemCode.DisplayOnly = True
-            Me.lblPurchaseItemCode.EditingMode = False
-            resources.ApplyResources(Me.lblPurchaseItemCode, "lblPurchaseItemCode")
-            Me.lblPurchaseItemCode.Name = "lblPurchaseItemCode"
-            Me.lblPurchaseItemCode.Translatable = True
+            Me.lblProductCode.DisplayOnly = True
+            Me.lblProductCode.EditingMode = False
+            resources.ApplyResources(Me.lblProductCode, "lblProductCode")
+            Me.lblProductCode.Name = "lblProductCode"
+            Me.lblProductCode.Translatable = True
             '
             'txtDateCreated
             '
@@ -217,12 +217,12 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout4.Controls.Add(Me.TxtIdNo)
             Me.CFlowLayout4.Controls.Add(Me.lblCategoryIdNo)
             Me.CFlowLayout4.Controls.Add(Me.cboProductCategoryIdNo)
-            Me.CFlowLayout4.Controls.Add(Me.lblPurchaseItemCode)
-            Me.CFlowLayout4.Controls.Add(Me.txtPurchaseItemCode)
-            Me.CFlowLayout4.Controls.Add(Me.lblPurchaseItemName)
-            Me.CFlowLayout4.Controls.Add(Me.txtPurchaseItemName)
-            Me.CFlowLayout4.Controls.Add(Me.lblPurchaseItemNameAra)
-            Me.CFlowLayout4.Controls.Add(Me.txtPurchaseItemNameAra)
+            Me.CFlowLayout4.Controls.Add(Me.lblProductCode)
+            Me.CFlowLayout4.Controls.Add(Me.txtProductCode)
+            Me.CFlowLayout4.Controls.Add(Me.lblProductName)
+            Me.CFlowLayout4.Controls.Add(Me.txtProductName)
+            Me.CFlowLayout4.Controls.Add(Me.lblProductNameAra)
+            Me.CFlowLayout4.Controls.Add(Me.txtProductNameAra)
             Me.CFlowLayout4.Controls.Add(Me.lblGlAccountIdNo)
             Me.CFlowLayout4.Controls.Add(Me.cboGlAccountIdNo)
             Me.CFlowLayout4.Controls.Add(Me.lblVatAccountIdNo)
@@ -506,7 +506,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtUnit1Ara.FindEnabled = True
             resources.ApplyResources(Me.txtUnit1Ara, "txtUnit1Ara")
             Me.txtUnit1Ara.ForeColor = System.Drawing.Color.Black
-            Me.txtUnit1Ara.LinkedLabel = Me.lblPurchaseItemNameAra
+            Me.txtUnit1Ara.LinkedLabel = Me.lblProductNameAra
             Me.txtUnit1Ara.MaximumValue = Nothing
             Me.txtUnit1Ara.MinimumValue = Nothing
             Me.txtUnit1Ara.Name = "txtUnit1Ara"
@@ -594,7 +594,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtUnit2Ara.FindEnabled = True
             resources.ApplyResources(Me.txtUnit2Ara, "txtUnit2Ara")
             Me.txtUnit2Ara.ForeColor = System.Drawing.Color.Black
-            Me.txtUnit2Ara.LinkedLabel = Me.lblPurchaseItemNameAra
+            Me.txtUnit2Ara.LinkedLabel = Me.lblProductNameAra
             Me.txtUnit2Ara.MaximumValue = Nothing
             Me.txtUnit2Ara.MinimumValue = Nothing
             Me.txtUnit2Ara.Name = "txtUnit2Ara"
@@ -682,7 +682,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtUnit3Ara.FindEnabled = True
             resources.ApplyResources(Me.txtUnit3Ara, "txtUnit3Ara")
             Me.txtUnit3Ara.ForeColor = System.Drawing.Color.Black
-            Me.txtUnit3Ara.LinkedLabel = Me.lblPurchaseItemNameAra
+            Me.txtUnit3Ara.LinkedLabel = Me.lblProductNameAra
             Me.txtUnit3Ara.MaximumValue = Nothing
             Me.txtUnit3Ara.MinimumValue = Nothing
             Me.txtUnit3Ara.Name = "txtUnit3Ara"
@@ -750,11 +750,11 @@ Namespace PresentationLayer.Views.Forms
             Me.chkActive.Translatable = False
             Me.chkActive.UseVisualStyleBackColor = False
             '
-            'PurchaseItemEntry
+            'ProductEntry
             '
             resources.ApplyResources(Me, "$this")
             Me.Controls.Add(Me.CFlowLayout4)
-            Me.Name = "PurchaseItemEntry"
+            Me.Name = "ProductEntry"
             Me.Controls.SetChildIndex(Me.CFlowLayout4, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).EndInit
@@ -765,15 +765,15 @@ Namespace PresentationLayer.Views.Forms
 
 End Sub
         Friend WithEvents bsJournalItems As Windows.Forms.BindingSource
-        Friend WithEvents txtPurchaseItemNameAra As CTextBoxArabic
-        Friend WithEvents txtPurchaseItemName As CTextBox
+        Friend WithEvents txtProductNameAra As CTextBoxArabic
+        Friend WithEvents txtProductName As CTextBox
         Friend WithEvents CFlowLayout4 As CFlowLayout
         Friend WithEvents lblIdNo As CLabel
         Friend WithEvents TxtIdNo As CTextBox
-        Friend WithEvents lblPurchaseItemCode As CLabel
-        Friend WithEvents txtPurchaseItemCode As CTextBox
-        Friend WithEvents lblPurchaseItemName As CLabel
-        Friend WithEvents lblPurchaseItemNameAra As CLabel
+        Friend WithEvents lblProductCode As CLabel
+        Friend WithEvents txtProductCode As CTextBox
+        Friend WithEvents lblProductName As CLabel
+        Friend WithEvents lblProductNameAra As CLabel
         Friend WithEvents lblDateCreated As CLabel
         Friend WithEvents txtDateCreated As CTextBox
         Friend WithEvents CLabel4 As CLabel
