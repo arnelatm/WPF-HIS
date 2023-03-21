@@ -5,16 +5,16 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
-    Public Class PurchaseItemPresenter(Of TM As New)
-        Inherits CommonPresenter(Of IPurchaseItemView, TM)
+    Public Class ProductPresenter(Of TM As New)
+        Inherits CommonPresenter(Of IProductView, TM)
 
-        Public Sub New(view As IPurchaseItemView)
+        Public Sub New(view As IProductView)
             MyBase.New(view)
-            Service = New AccountsService("PurchaseItem")
-            TableName = "PurchaseItem"
-            TreeViewMainField = "PurchaseItemName"
-            'TreeViewSecondaryField = "PurchaseItemCode"
-            SortOrderKey = "PurchaseItemName"
+            Service = New AccountsService("Product")
+            TableName = "Product"
+            TreeViewMainField = "ProductName"
+            'TreeViewSecondaryField = "ProductCode"
+            SortOrderKey = "ProductName"
         End Sub
 
         Protected Overrides Sub CreateDataSources()

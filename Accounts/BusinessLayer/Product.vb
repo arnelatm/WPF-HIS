@@ -1,18 +1,18 @@
-﻿' Purchaseitem business object
+﻿' Product business object
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
 Imports AATM.BusinessLayer.BusinessRules
 
 Namespace BusinessLayer
 
-    Public Class PurchaseItem
+    Public Class Product
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
         Public Sub New()
             If GetRules().Count() = 0 Then
                 ' establish business rules
-                AddRule(New ValidateRequired("PurchaseItemName"))
-                AddRule(New ValidateRequired("PurchaseItemCode"))
+                AddRule(New ValidateRequired("ProductName"))
+                AddRule(New ValidateRequired("ProductCode"))
                 AddRule(New ValidateRequired("GlAccountIdNo"))
             End If
         End Sub
@@ -22,9 +22,9 @@ Namespace BusinessLayer
         Public Property DateCreated As DateTime?
         Public Property GlAccountIdNo As Int16?
         Public Property IdNo As Int32
-        Public Property PurchaseItemCode As String
-        Public Property PurchaseItemName As String
-        Public Property PurchaseItemNameAra As String
+        Public Property ProductCode As String
+        Public Property ProductName As String
+        Public Property ProductNameAra As String
         Public Property StdPrice1 As Decimal
         Public Property StdPrice2 As Decimal
         Public Property StdPrice3 As Decimal

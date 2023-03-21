@@ -2634,7 +2634,7 @@ INSERT [dbo].[DefaultFieldValue] ([IdNo], [TableName], [FieldName], [DataType], 
 GO
 INSERT [dbo].[DefaultFieldValue] ([IdNo], [TableName], [FieldName], [DataType], [Length], [DecimalPart], [LinkedTable], [LinkedFieldValue], [LinkedFieldName], [DefaultValue]) VALUES (54, N'SalesJournal', N'TransactionDate', 3, 0, NULL, NULL, NULL, NULL, N'yesterday')
 GO
-INSERT [dbo].[DefaultFieldValue] ([IdNo], [TableName], [FieldName], [DataType], [Length], [DecimalPart], [LinkedTable], [LinkedFieldValue], [LinkedFieldName], [DefaultValue]) VALUES (55, N'PurchaseItem', N'Unit1', 12, 10, NULL, NULL, NULL, NULL, N'pc.')
+INSERT [dbo].[DefaultFieldValue] ([IdNo], [TableName], [FieldName], [DataType], [Length], [DecimalPart], [LinkedTable], [LinkedFieldValue], [LinkedFieldName], [DefaultValue]) VALUES (55, N'Product', N'Unit1', 12, 10, NULL, NULL, NULL, NULL, N'pc.')
 GO
 INSERT [dbo].[DefaultFieldValue] ([IdNo], [TableName], [FieldName], [DataType], [Length], [DecimalPart], [LinkedTable], [LinkedFieldValue], [LinkedFieldName], [DefaultValue]) VALUES (56, N'PcJournal', N'AccountIdNo', 6, 3, NULL, NULL, NULL, NULL, N'104')
 GO
@@ -24118,13 +24118,13 @@ INSERT [dbo].[RevCostCenterOld] ([IdNo], [RevCostCenterCode], [RevCostCenterName
 GO
 SET IDENTITY_INSERT [dbo].[RevCostCenterOld] OFF
 GO
-SET IDENTITY_INSERT [dbo].[PurchaseItem] ON 
+SET IDENTITY_INSERT [dbo].[Product] ON 
 GO
-INSERT [dbo].[PurchaseItem] ([IdNo], [CategoryIdNo], [PurchaseitemCode], [PurchaseitemName], [PurchaseitemNameAra], [Unit1], [Unit2], [Unit3], [Unit1Ara], [Unit2Ara], [Unit3Ara], [StdPrice1], [StdPrice2], [StdPrice3], [GlAccountIdNo], [VatAccountIdNo], [Active], [DateCreated], [CreatedByIdNo]) VALUES (2, 1, N'0056', N'Samixon', N'Samixon', N'pc', NULL, NULL, N'pc', NULL, NULL, 1.0000, 0.0000, 0.0000, 119, 229, 0, CAST(N'2020-03-17' AS Date), NULL)
+INSERT [dbo].[Product] ([IdNo], [CategoryIdNo], [ProductCode], [ProductName], [ProductNameAra], [Unit1], [Unit2], [Unit3], [Unit1Ara], [Unit2Ara], [Unit3Ara], [StdPrice1], [StdPrice2], [StdPrice3], [GlAccountIdNo], [VatAccountIdNo], [Active], [DateCreated], [CreatedByIdNo]) VALUES (2, 1, N'0056', N'Samixon', N'Samixon', N'pc', NULL, NULL, N'pc', NULL, NULL, 1.0000, 0.0000, 0.0000, 119, 229, 0, CAST(N'2020-03-17' AS Date), NULL)
 GO
-INSERT [dbo].[PurchaseItem] ([IdNo], [CategoryIdNo], [PurchaseitemCode], [PurchaseitemName], [PurchaseitemNameAra], [Unit1], [Unit2], [Unit3], [Unit1Ara], [Unit2Ara], [Unit3Ara], [StdPrice1], [StdPrice2], [StdPrice3], [GlAccountIdNo], [VatAccountIdNo], [Active], [DateCreated], [CreatedByIdNo]) VALUES (3, 1, N'0005', N'Olfen Amp', N'Olfen Amp', N'pc.', NULL, NULL, N'pc.', NULL, NULL, 0.0000, 0.0000, 0.0000, 119, 229, 0, CAST(N'2020-03-17' AS Date), NULL)
+INSERT [dbo].[Product] ([IdNo], [CategoryIdNo], [ProductCode], [ProductName], [ProductNameAra], [Unit1], [Unit2], [Unit3], [Unit1Ara], [Unit2Ara], [Unit3Ara], [StdPrice1], [StdPrice2], [StdPrice3], [GlAccountIdNo], [VatAccountIdNo], [Active], [DateCreated], [CreatedByIdNo]) VALUES (3, 1, N'0005', N'Olfen Amp', N'Olfen Amp', N'pc.', NULL, NULL, N'pc.', NULL, NULL, 0.0000, 0.0000, 0.0000, 119, 229, 0, CAST(N'2020-03-17' AS Date), NULL)
 GO
-SET IDENTITY_INSERT [dbo].[PurchaseItem] OFF
+SET IDENTITY_INSERT [dbo].[Product] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Religion] ON 
 GO
@@ -25416,7 +25416,7 @@ INSERT [dbo].[SystemForms] ([IdNo], [FormName]) VALUES (4009, N'ChequeDisburseme
 GO
 INSERT [dbo].[SystemForms] ([IdNo], [FormName]) VALUES (4010, N'CategoryEntryTv')
 GO
-INSERT [dbo].[SystemForms] ([IdNo], [FormName]) VALUES (4011, N'PurchaseItemEntry')
+INSERT [dbo].[SystemForms] ([IdNo], [FormName]) VALUES (4011, N'ProductEntry')
 GO
 INSERT [dbo].[SystemForms] ([IdNo], [FormName]) VALUES (5007, N'CheckDisbursementJournalEntry')
 GO

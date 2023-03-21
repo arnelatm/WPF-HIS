@@ -2,13 +2,13 @@
 
 Namespace PresentationLayer.Views.Interfaces
 
-    Public Interface IPurchaseItemView
+    Public Interface IProductView
         Inherits IView
         Property IdNo As Int32
         Property ProductCategoryIdNo As Int16
-        Property PurchaseItemCode As String
-        Property PurchaseItemName As String
-        Property PurchaseItemNameAra As String
+        Property ProductCode As String
+        Property ProductName As String
+        Property ProductNameAra As String
         Property GlAccountIdNo As Int16?
         Property VatAccountIdNo As Int16?
         Property Unit1 As String

@@ -4,8 +4,8 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class PurchaseItemEntry
-        Implements IPurchaseItemView
+    Public Class ProductEntry
+        Implements IProductView
 
         'Private _glAccounts
         'Private _inputVatAccounts
@@ -18,7 +18,7 @@ Namespace PresentationLayer.Views.Forms
             FirstControl = cboProductCategoryIdNo
         End Sub
 
-        Public Property DateCreated As DateTime? Implements IPurchaseItemView.DateCreated
+        Public Property DateCreated As DateTime? Implements IProductView.DateCreated
             Get
                 If String.IsNullOrEmpty(txtDateCreated.Text) Then
                     Return Now()
@@ -35,7 +35,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property IdNo As Int32 Implements IPurchaseItemView.IdNo
+        Public Property IdNo As Int32 Implements IProductView.IdNo
             Get
                 Return NumParser(Of Int32)(TxtIdNo.Text)
             End Get
@@ -44,34 +44,34 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PurchaseItemCode As String Implements IPurchaseItemView.PurchaseItemCode
+        Public Property ProductCode As String Implements IProductView.ProductCode
             Get
-                Return txtPurchaseItemCode.Text
+                Return txtProductCode.Text
             End Get
             Set
-                txtPurchaseItemCode.Text = Value
+                txtProductCode.Text = Value
             End Set
         End Property
 
-        Public Property PurchaseItemName As String Implements IPurchaseItemView.PurchaseItemName
+        Public Property ProductName As String Implements IProductView.ProductName
             Get
-                Return txtPurchaseItemName.Text
+                Return txtProductName.Text
             End Get
             Set
-                txtPurchaseItemName.Text = Value
+                txtProductName.Text = Value
             End Set
         End Property
 
-        Public Property PurchaseItemNameAra As String Implements IPurchaseItemView.PurchaseItemNameAra
+        Public Property ProductNameAra As String Implements IProductView.ProductNameAra
             Get
-                Return txtPurchaseItemNameAra.Text
+                Return txtProductNameAra.Text
             End Get
             Set
-                txtPurchaseItemNameAra.Text = Value
+                txtProductNameAra.Text = Value
             End Set
         End Property
 
-        Public Property Unit1 As String Implements IPurchaseItemView.Unit1
+        Public Property Unit1 As String Implements IProductView.Unit1
             Get
                 Return txtUnit1.Text
             End Get
@@ -80,7 +80,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Unit2 As String Implements IPurchaseItemView.Unit2
+        Public Property Unit2 As String Implements IProductView.Unit2
             Get
                 Return txtUnit2.Text
             End Get
@@ -89,7 +89,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Unit3 As String Implements IPurchaseItemView.Unit3
+        Public Property Unit3 As String Implements IProductView.Unit3
             Get
                 Return txtUnit3.Text
             End Get
@@ -98,7 +98,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Unit1Ara As String Implements IPurchaseItemView.Unit1Ara
+        Public Property Unit1Ara As String Implements IProductView.Unit1Ara
             Get
                 Return txtUnit1Ara.Text
             End Get
@@ -107,7 +107,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Unit2Ara As String Implements IPurchaseItemView.Unit2Ara
+        Public Property Unit2Ara As String Implements IProductView.Unit2Ara
             Get
                 Return txtUnit2Ara.Text
             End Get
@@ -116,7 +116,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Unit3Ara As String Implements IPurchaseItemView.Unit3Ara
+        Public Property Unit3Ara As String Implements IProductView.Unit3Ara
             Get
                 Return txtUnit3Ara.Text
             End Get
@@ -125,7 +125,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property StdPrice1 As Decimal Implements IPurchaseItemView.StdPrice1
+        Public Property StdPrice1 As Decimal Implements IProductView.StdPrice1
             Get
                 If txtStdPrice1.Text <> "" Then
                     Return Convert.ToSingle(txtStdPrice1.Text)
@@ -138,7 +138,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property StdPrice2 As Decimal Implements IPurchaseItemView.StdPrice2
+        Public Property StdPrice2 As Decimal Implements IProductView.StdPrice2
             Get
                 If txtStdPrice2.Text <> "" Then
                     Return Convert.ToSingle(txtStdPrice2.Text)
@@ -151,7 +151,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property StdPrice3 As Decimal Implements IPurchaseItemView.StdPrice3
+        Public Property StdPrice3 As Decimal Implements IProductView.StdPrice3
             Get
                 If txtStdPrice3.Text <> "" Then
                     Return Convert.ToSingle(txtStdPrice3.Text)
@@ -164,7 +164,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Active As Boolean Implements IPurchaseItemView.Active
+        Public Property Active As Boolean Implements IProductView.Active
             Get
                 Return chkActive.Checked
             End Get
@@ -173,7 +173,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property GlAccountIdNo As Int16? Implements IPurchaseItemView.GlAccountIdNo
+        Public Property GlAccountIdNo As Int16? Implements IProductView.GlAccountIdNo
             Get
                 Return cboGlAccountIdNo.GetNullableValue(Of Int16)
             End Get
@@ -182,7 +182,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property VatAccountIdNo As Int16? Implements IPurchaseItemView.VatAccountIdNo
+        Public Property VatAccountIdNo As Int16? Implements IProductView.VatAccountIdNo
             Get
                 Return cboVatAccountIdNo.GetNullableValue(Of Int16)
             End Get
@@ -191,7 +191,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property ProductCategoryIdNo As Int16 Implements IPurchaseItemView.ProductCategoryIdNo
+        Public Property ProductCategoryIdNo As Int16 Implements IProductView.ProductCategoryIdNo
             Get
                 Return cboProductCategoryIdNo.GetValue()
             End Get
@@ -204,9 +204,9 @@ Namespace PresentationLayer.Views.Forms
             MainFieldsDictionary = New Dictionary(Of String, Object) From
         {
          {"IdNo", TxtIdNo},
-         {"PurchaseItemCode", txtPurchaseItemCode},
-         {"PurchaseItemName", txtPurchaseItemName},
-         {"PurchaseItemNameAra", txtPurchaseItemNameAra},
+         {"ProductCode", txtProductCode},
+         {"ProductName", txtProductName},
+         {"ProductNameAra", txtProductNameAra},
          {"ProductCategoryIdNo", cboProductCategoryIdNo},
          {"GlAccountIdNo", cboGlAccountIdNo},
          {"VatAccountIdNo", cboVatAccountIdNo},
