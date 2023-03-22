@@ -99,6 +99,9 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemStockInventory = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemPMR = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemDosage = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemInventory = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemProduct = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemCategory = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemTransactions = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemPettyCash = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemCashDisbursementEntry = New System.Windows.Forms.ToolStripMenuItem()
@@ -215,9 +218,7 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemInventory = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemProduct = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemCategory = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemPurchaseEntry = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.AccountsMenu.SuspendLayout
@@ -597,6 +598,22 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemDosage.Name = "ToolStripMenuItemDosage"
         resources.ApplyResources(Me.ToolStripMenuItemDosage, "ToolStripMenuItemDosage")
         '
+        'ToolStripMenuItemInventory
+        '
+        Me.ToolStripMenuItemInventory.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemProduct, Me.ToolStripMenuItemCategory})
+        Me.ToolStripMenuItemInventory.Name = "ToolStripMenuItemInventory"
+        resources.ApplyResources(Me.ToolStripMenuItemInventory, "ToolStripMenuItemInventory")
+        '
+        'ToolStripMenuItemProduct
+        '
+        Me.ToolStripMenuItemProduct.Name = "ToolStripMenuItemProduct"
+        resources.ApplyResources(Me.ToolStripMenuItemProduct, "ToolStripMenuItemProduct")
+        '
+        'ToolStripMenuItemCategory
+        '
+        Me.ToolStripMenuItemCategory.Name = "ToolStripMenuItemCategory"
+        resources.ApplyResources(Me.ToolStripMenuItemCategory, "ToolStripMenuItemCategory")
+        '
         'ToolStripMenuItemTransactions
         '
         Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPettyCash, Me.ToolStripMenuItemCashDisbursementEntry, Me.ToolStripMenuItemAccountsPayableEntry, Me.ToolStripMenuItemAccountsReceivableEntry, Me.ToolStripMenuItemCashReceiptEntry, Me.ToolStripMenuItemEmployeeReceivable, Me.ToolStripMenuItemGeneralJournalEntry, Me.ToolStripMenuItemSalesJournalEntry, Me.ToolStripMenuItemAccountReconciliation, Me.ToolStripMenuItemPostPettyCashAccount, Me.ToolStripMenuItemClosing, Me.ToolStripMenuItemHR, Me.ToolStripMenuItemPayrollTransaction, Me.ToolStripMenuItemShiftSummaryEntry, Me.ToolStripSeparator2, Me.ToolStripMenuItemClosePettyCashFund, Me.ToolStripMenuItemLaboratory, Me.ToolStripMenuItemPharmacy})
@@ -738,7 +755,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemPharmacy
         '
-        Me.ToolStripMenuItemPharmacy.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemDrugSale, Me.ToolStripMenuItemDrugAcceptance, Me.ToolStripMenuItemItemMatcher, Me.ToolStripMenuItemDosagePrinting})
+        Me.ToolStripMenuItemPharmacy.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemDrugSale, Me.ToolStripMenuItemDrugAcceptance, Me.ToolStripMenuItemPurchaseEntry, Me.ToolStripMenuItemItemMatcher, Me.ToolStripMenuItemDosagePrinting})
         Me.ToolStripMenuItemPharmacy.Name = "ToolStripMenuItemPharmacy"
         resources.ApplyResources(Me.ToolStripMenuItemPharmacy, "ToolStripMenuItemPharmacy")
         '
@@ -1200,21 +1217,10 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
-        'ToolStripMenuItemInventory
+        'ToolStripMenuItemPurchaseEntry
         '
-        Me.ToolStripMenuItemInventory.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemProduct, Me.ToolStripMenuItemCategory})
-        Me.ToolStripMenuItemInventory.Name = "ToolStripMenuItemInventory"
-        resources.ApplyResources(Me.ToolStripMenuItemInventory, "ToolStripMenuItemInventory")
-        '
-        'ToolStripMenuItemProduct
-        '
-        Me.ToolStripMenuItemProduct.Name = "ToolStripMenuItemProduct"
-        resources.ApplyResources(Me.ToolStripMenuItemProduct, "ToolStripMenuItemProduct")
-        '
-        'ToolStripMenuItemCategory
-        '
-        Me.ToolStripMenuItemCategory.Name = "ToolStripMenuItemCategory"
-        resources.ApplyResources(Me.ToolStripMenuItemCategory, "ToolStripMenuItemCategory")
+        Me.ToolStripMenuItemPurchaseEntry.Name = "ToolStripMenuItemPurchaseEntry"
+        resources.ApplyResources(Me.ToolStripMenuItemPurchaseEntry, "ToolStripMenuItemPurchaseEntry")
         '
         'Main
         '
@@ -1431,5 +1437,6 @@ End Sub
         Friend WithEvents ToolStripMenuItemInventory As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemProduct As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemCategory As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemPurchaseEntry As ToolStripMenuItem
     End Class
 End NameSpace

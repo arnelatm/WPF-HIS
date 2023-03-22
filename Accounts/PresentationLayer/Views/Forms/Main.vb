@@ -1125,6 +1125,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemCategory_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCategory.Click
             RunForm(Of CategoryEntryTv, CategoryPresenter(Of CategoryModel))()
         End Sub
+
+        Private Sub ToolStripMenuItemPurchaseEntry_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPurchaseEntry.Click
+            RunForm(Of PurchaseEntry, PurchasePresenter(Of PurchaseModel))()
+        End Sub
     End Class
 
 End Namespace
