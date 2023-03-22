@@ -5,6 +5,7 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface ICategoryView
         Inherits IView
         Property IdNo As Int16
+        Property BranchIdNo As Int16
         Property CategoryCode As String
         Property CategoryName As String
         Property CategoryNameAra As String

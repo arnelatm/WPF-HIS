@@ -17,6 +17,7 @@ Namespace BusinessLayer
         End Sub
 
         Public Property IdNo As Int16
+        Public Property BranchIdNo As Int16
         Public Property CategoryCode As String
         Public Property CategoryName As String
         Public Property CategoryNameAra As String

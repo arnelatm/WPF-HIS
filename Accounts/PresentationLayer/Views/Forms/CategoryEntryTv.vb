@@ -90,10 +90,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property VatPercentage As Decimal Implements ICategoryView.VatPercentage
             Get
-                Return GlobalFunctions.NumParser(Of Decimal)(TxtVatPercentage.Text)
+                Return GlobalFunctions.NumParser(Of Decimal)(txtVatPercentage.Text)
             End Get
             Set
-                TxtVatPercentage.Text = Convert.ToString(Value)
+                txtVatPercentage.Text = Convert.ToString(Value)
             End Set
         End Property
 
@@ -103,6 +103,15 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 cboVatSaleAccountIdNo.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property BranchIdNo As Short Implements ICategoryView.BranchIdNo
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Short)
+                Throw New NotImplementedException()
             End Set
         End Property
 
