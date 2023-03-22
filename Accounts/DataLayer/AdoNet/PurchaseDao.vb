@@ -7,7 +7,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class PurchaseDao
-        Implements IDao(Of Purchase), IDaoJournals(Of Purchase)
+        Implements IDao(Of Purchase)
 
 
         
@@ -18,7 +18,6 @@ Namespace DataLayer.AdoNet
                                   "IdNo," &
                                   "InvoiceDate," &
                                   "InvoiceNo," &
-                                  "Notes," &
                                   "Posted," &
                                   "SupplierIdNo," &
                                   "TransactionDate," &
@@ -31,7 +30,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordByIdNo(idNo) As Purchase _
         Implements IDao(Of Purchase).GetRecordByIdNo
-            Dim sql As String = " SELECT Amount,Cancelled,DateCreated,DueDate,IdNo,InvoiceDate,InvoiceNo,Notes,Posted,SupplierIdNo,TransactionDate,VatAmount,VatNumber" &
+            Dim sql As String = " SELECT Amount,Cancelled,DateCreated,DueDate,IdNo,InvoiceDate,InvoiceNo,Posted,SupplierIdNo,TransactionDate,VatAmount,VatNumber" &
                     " FROM [Purchase]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -48,7 +47,6 @@ Namespace DataLayer.AdoNet
                     "IdNo = @IdNo," &
                     "InvoiceDate = @InvoiceDate," &
                     "InvoiceNo = @InvoiceNo," &
-                    "Notes = @Notes," &
                     "Posted = @Posted," &
                     "SupplierIdNo = @SupplierIdNo," &
                     "TransactionDate = @TransactionDate," &
@@ -62,8 +60,8 @@ Namespace DataLayer.AdoNet
             Implements IDao(Of Purchase).AddRecord
             Dim sql As String =
                     " INSERT INTO [Purchase] " &
-                    " (Amount,Cancelled,DueDate,IdNo,InvoiceDate,InvoiceNo,Notes,Posted,SupplierIdNo,TransactionDate,VatAmount,VatNumber)" &
-                    " VALUES (@Amount,@Cancelled,@DueDate,@IdNo,@InvoiceDate,@InvoiceNo,@Notes,@Posted,@SupplierIdNo,@TransactionDate,@VatAmount,@VatNumber)"
+                    " (Amount,Cancelled,DueDate,IdNo,InvoiceDate,InvoiceNo,Posted,SupplierIdNo,TransactionDate,VatAmount,VatNumber)" &
+                    " VALUES (@Amount,@Cancelled,@DueDate,@IdNo,@InvoiceDate,@InvoiceNo,@Posted,@SupplierIdNo,@TransactionDate,@VatAmount,@VatNumber)"
             Return Db.Insert(sql, Take(Purchase))
         End Function
 
@@ -89,7 +87,6 @@ Namespace DataLayer.AdoNet
                                     "DueDate", Purchase.DueDate,
                                     "InvoiceDate", Purchase.InvoiceDate,
                                     "InvoiceNo", Purchase.InvoiceNo,
-                                    "Notes", Purchase.Notes,
                                     "Posted", Purchase.Posted,
                                     "SupplierIdNo", Purchase.SupplierIdNo,
                                     "TransactionDate", Purchase.TransactionDate,

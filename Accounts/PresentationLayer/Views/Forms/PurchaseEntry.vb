@@ -12,7 +12,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _footer As DgvFooter
-        Private _journalItems As List(Of JournalItemView)
+        Private _purchaseDetails As List(Of PurchaseDetailView)
 
         Public Sub New()
             MyBase.New()
@@ -23,30 +23,21 @@ Namespace PresentationLayer.Views.Forms
             _nfi.NumberDecimalDigits = 2
         End Sub
 
-        Private Sub JiBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
-            e.NewObject = New JournalItemView
+        Private Sub JiBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsPurchaseDetails.AddingNew
+            e.NewObject = New PurchaseDetailView
             ' work around for error on datagrid entry on lastrow please do not remove.
             ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
             ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
             ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again
-            If DataGridViewJournalItems.Rows.Count = bsJournalItems.Count Then
-                bsJournalItems.RemoveAt(bsJournalItems.Count - 1)
+            If DataGridViewPurchaseDetails.Rows.Count = bsPurchaseDetails.Count Then
+                bsPurchaseDetails.RemoveAt(bsPurchaseDetails.Count - 1)
             End If
         End Sub
 
 #Region "Fields"
 
-        Public Property AccountsByCode Implements IPurchaseView.AccountsByCode
-        Private Property RevCostCentersByCode Implements IPurchaseView.RevCostCentersByCode
-
-        Public Property AccountIdNo As Int16? Implements IPurchaseView.AccountIdNo
-            Get
-                Return cboAccountIdNo.GetNullableValue(Of Int16)
-            End Get
-            Set
-                cboAccountIdNo.SetValue(Value)
-            End Set
-        End Property
+        Public Property ProductsByCode Implements IPurchaseView.ProductsByCode
+        Public Property UnitsByCode Implements IPurchaseView.UnitsByCode
 
         Public Property Amount As Decimal Implements IPurchaseView.Amount
             Get
@@ -54,15 +45,6 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 txtAmount.Text = FormatMoney(Value)
-            End Set
-        End Property
-
-        Public Property Approved As Boolean Implements IPurchaseView.Approved
-            Get
-                Return chkApproved.Checked
-            End Get
-            Set
-                chkApproved.Checked = Value
             End Set
         End Property
 
@@ -132,22 +114,13 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property JournalItems As List(Of JournalItemView) Implements IPurchaseView.JournalItems
+        Public Property PurchaseDetails As List(Of PurchaseDetailView) Implements IPurchaseView.PurchaseDetails
             Get
-                Return _journalItems
+                Return _purchaseDetails
             End Get
             Set
-                _journalItems = Value
-                BindJournalItem()
-            End Set
-        End Property
-
-        Public Property Notes As String Implements IPurchaseView.Notes
-            Get
-                Return txtNotes.Text
-            End Get
-            Set
-                txtNotes.Text = If(Value, "")
+                _purchaseDetails = Value
+                BindPurchaseDetail()
             End Set
         End Property
 
@@ -160,37 +133,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property ReferenceNo As String Implements IPurchaseView.ReferenceNo
-            Get
-                Return txtReferenceNo.Text
-            End Get
-            Set
-                txtReferenceNo.Text = Value
-            End Set
-        End Property
-
-        Public Property SettlementDiscount As Decimal Implements IPurchaseView.SettlementDiscount
-            Get
-                If txtSettlementDiscount.Text <> "" Then
-                    Return Convert.ToDecimal(txtSettlementDiscount.Text)
-                Else
-                    Return 0D
-                End If
-            End Get
-            Set
-                txtSettlementDiscount.Text = Value
-            End Set
-        End Property
-
-        Public Property SettlementDueDate As Date? Implements IPurchaseView.SettlementDueDate
-            Get
-                Return dtpSettlementDueDate.Value
-            End Get
-            Set
-                dtpSettlementDueDate.Value = Value
-            End Set
-        End Property
-
         Public Property SupplierIdNo As Int32? Implements IPurchaseView.SupplierIdNo
             Get
                 Return cboSupplierIdNo.GetNullableValue(Of Int32)
@@ -198,18 +140,6 @@ Namespace PresentationLayer.Views.Forms
             Set
                 cboSupplierIdNo.SetValue(Value)
             End Set
-        End Property
-
-        Public ReadOnly Property TotalCredits As Decimal Implements IPurchaseView.TotalCredits
-            Get
-                Return NumParser(Of Decimal)(txtTotalCredits.Text)
-            End Get
-        End Property
-
-        Public ReadOnly Property TotalDebits As Decimal Implements IPurchaseView.TotalDebits
-            Get
-                Return NumParser(Of Decimal)(txtTotalDebits.Text)
-            End Get
         End Property
 
         Public Property TransactionDate As Date? Implements IPurchaseView.TransactionDate
@@ -222,15 +152,6 @@ Namespace PresentationLayer.Views.Forms
                 Else
                     dtpTransactionDate.Value = Value
                 End If
-            End Set
-        End Property
-
-        Public Property TransactionType As String Implements IPurchaseView.TransactionType
-            Get
-                Return cboTransactionType.GetValue()
-            End Get
-            Set
-                cboTransactionType.SetValue(Value)
             End Set
         End Property
 
@@ -252,21 +173,19 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
         {
-         {"AccountIdNo", cboAccountIdNo},
          {"Amount", txtAmount},
          {"Cancelled", chkCancelled},
          {"DateCreated", txtDateCreated},
          {"DueDate", dtpDueDate},
          {"IdNo", TxtIdNo},
          {"InvoiceNo", txtInvoiceNo},
-         {"Notes", txtNotes},
          {"Posted", chkPosted},
-         {"ReferenceNo", txtReferenceNo},
          {"SettlementDiscount", txtSettlementDiscount},
          {"SettlementDueDate", dtpSettlementDueDate},
          {"SupplierIdNo", cboSupplierIdNo},
@@ -284,12 +203,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PurchaseEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            If GlobalVariables.RightToLeftLayout Then
-                txtJournalCode.Text = Presenter.GetLocalizedPrefix("AP")
-            Else
-                txtJournalCode.Text = "AP"
-            End If
-            _footer = New DgvFooter(DataGridViewJournalItems) With {
+            _footer = New DgvFooter(DataGridViewPurchaseDetails) With {
                 .AutoCalc = True
             }
             _footer.ColumnToSum("dgvDebit") = True
@@ -300,37 +214,30 @@ Namespace PresentationLayer.Views.Forms
             UpdateTotals()
         End Sub
 
-        Private Sub BindJournalItem()
+        Private Sub BindPurchaseDetail()
             SuspendLayout()
-            bsJournalItems.DataSource = Nothing
-            DataGridViewJournalItems.Refresh()
-            bsJournalItems.DataSource = JournalItems
-            bsJournalItems.AllowNew = True
-            With DataGridViewJournalItems
+            bsPurchaseDetails.DataSource = Nothing
+            DataGridViewPurchaseDetails.Refresh()
+            bsPurchaseDetails.DataSource = PurchaseDetails
+            bsPurchaseDetails.AllowNew = True
+            With DataGridViewPurchaseDetails
                 '.Refresh()
                 .AutoGenerateColumns = False
-                .DataSource = bsJournalItems
+                .DataSource = bsPurchaseDetails
                 '.Refresh()
             End With
-            With DataGridViewJournalItems.Columns
+            With DataGridViewPurchaseDetails.Columns
                 dgvSequence.DisplayOnly = True
-                dgvAccountIdNo.DataSource = AccountsByCode
+                dgvAccountIdNo.DataSource = ProductsByCode
                 dgvAccountIdNo.DisplayMember = "Name"
                 dgvAccountIdNo.ValueMember = "IdNo"
                 dgvAccountIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvRevCostCenterIdNo.DataSource = RevCostCentersByCode
-                dgvRevCostCenterIdNo.DisplayMember = "Name"
-                dgvRevCostCenterIdNo.ValueMember = "idNo"
-                dgvRevCostCenterIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvUnitsIdNo.DataSource = UnitsByCode
+                dgvUnitsIdNo.DisplayMember = "Name"
+                dgvUnitsIdNo.ValueMember = "idNo"
+                dgvUnitsIdNo.DisplayStyleForCurrentCellOnly = True
             End With
             ResumeLayout()
-        End Sub
-
-        Private Sub CboAccountIdNo_Validating(sender As Object, e As CancelEventArgs) Handles cboAccountIdNo.Validating
-            If PaymentOrDiscountMade() Then
-                ' revert to previous value
-                cboAccountIdNo.RevertValue()
-            End If
         End Sub
 
         Private Sub CboSupplierIdNo_Changed(sender As Object, e As EventArgs) Handles cboSupplierIdNo.Validated, cboSupplierIdNo.SelectionChangeCommitted
@@ -348,13 +255,13 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub DataGridViewJournalItems_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewJournalItems.UserDeletedRow
+        Private Sub DataGridViewPurchaseDetails_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewPurchaseDetails.UserDeletedRow
             UpdateTotals()
             UpdateInputVatAmount()
         End Sub
 
         Private Sub UpdateInputVatAmount()
-            VatAmount = Presenter.UpdateInputVatAmount(JournalItems)
+            VatAmount = Presenter.UpdateInputVatAmount(PurchaseDetails)
         End Sub
 
         Private Overloads Sub Dispose()
@@ -362,35 +269,35 @@ Namespace PresentationLayer.Views.Forms
             '_footer.Dispose()
         End Sub
 
-        Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboTransactionType.Validated, txtAmount.Validated, cboTransactionType.SelectionChangeCommitted, cboAccountIdNo.SelectionChangeCommitted
+        Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles  cboTransactionType.Validated, txtAmount.Validated, cboTransactionType.SelectionChangeCommitted
             Presenter.UpdateFirstLine()
             UpdateTotals()
-            DataGridViewJournalItems.Refresh()
+            DataGridViewPurchaseDetails.Refresh()
         End Sub
 
         Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) _
-            Handles DataGridViewJournalItems.CellBeginEdit
-            If DataGridViewJournalItems.CurrentCell.RowIndex() = 0 Then
-                With DataGridViewJournalItems.CurrentCell
+            Handles DataGridViewPurchaseDetails.CellBeginEdit
+            If DataGridViewPurchaseDetails.CurrentCell.RowIndex() = 0 Then
+                With DataGridViewPurchaseDetails.CurrentCell
                     Dim cColumnName = .OwningColumn.Name.ToLower()
                     ' don't allow edits for first line entries account id no and amounts if only single AP
                     If cColumnName = $"dgvaccountidno" Or ((cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit") AndAlso Presenter.CountApItems() <= 1) Then
                         Beep()
                         e.Cancel = True
-                        DataGridViewJournalItems.EndEdit()
+                        DataGridViewPurchaseDetails.EndEdit()
                     End If
                 End With
-            ElseIf (DataGridViewJournalItems.CurrentRow.Cells("dgvPaidAmount").Value <> 0 Or DataGridViewJournalItems.CurrentRow.Cells("dgvDiscountTaken").Value <> 0) _
-                   And DataGridViewJournalItems.CurrentCell.OwningColumn.Name.ToLower() = $"dgvaccountidno" Then
+            ElseIf (DataGridViewPurchaseDetails.CurrentRow.Cells("dgvPaidAmount").Value <> 0 Or DataGridViewPurchaseDetails.CurrentRow.Cells("dgvDiscountTaken").Value <> 0) _
+                   And DataGridViewPurchaseDetails.CurrentCell.OwningColumn.Name.ToLower() = $"dgvaccountidno" Then
                 Beep()
                 e.Cancel = True
-                DataGridViewJournalItems.EndEdit()
+                DataGridViewPurchaseDetails.EndEdit()
                 Messaging.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
             End If
         End Sub
 
-        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellEndEdit
-            ProcessCellEndEdit(DataGridViewJournalItems, bsJournalItems)
+        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchaseDetails.CellEndEdit
+            ProcessCellEndEdit(DataGridViewPurchaseDetails, bsPurchaseDetails)
             UpdateTotals()
         End Sub
 
@@ -402,36 +309,36 @@ Namespace PresentationLayer.Views.Forms
 
         Private Function PaymentOrDiscountMade()
             Dim retVal As Boolean = False
-            If (DataGridViewJournalItems.Rows(0).Cells("dgvPaidAmount").Value <> 0 Or DataGridViewJournalItems.Rows(0).Cells("dgvDiscountTaken").Value <> 0) Then
+            If (DataGridViewPurchaseDetails.Rows(0).Cells("dgvPaidAmount").Value <> 0 Or DataGridViewPurchaseDetails.Rows(0).Cells("dgvDiscountTaken").Value <> 0) Then
                 Messaging.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
                 retVal = True
             End If
             Return retVal
         End Function
 
-        Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
-            MoveToGridView(DataGridViewJournalItems, "dgvRevCostCenterIdNo")
+        Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) 
+            MoveToGridView(DataGridViewPurchaseDetails, "dgvUnitsIdNo")
         End Sub
 
         Private Sub UpdateTotals()
             If _footer IsNot Nothing Then
                 _footer.CalculateTotals()
-                txtTotalDebits.Text = _footer.Value("dgvDebit")
-                txtTotalCredits.Text = _footer.Value("dgvCredit")
+                'txtTotalDebits.Text = _footer.Value("dgvDebit")
+                'txtTotalCredits.Text = _footer.Value("dgvCredit")
             End If
         End Sub
 
         Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) _
-                Handles DataGridViewJournalItems.UserDeletingRow
-            Dim PurchaseRow As DataGridViewRow = DataGridViewJournalItems.Rows(0)
-            If DataGridViewJournalItems.SelectedRows.Contains(PurchaseRow) Then
+                Handles DataGridViewPurchaseDetails.UserDeletingRow
+            Dim PurchaseRow As DataGridViewRow = DataGridViewPurchaseDetails.Rows(0)
+            If DataGridViewPurchaseDetails.SelectedRows.Contains(PurchaseRow) Then
                 ' Do not allow the user to delete the first row.
                 Messaging.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
                 ' Cancel the deletion
                 e.Cancel = True
             ElseIf Presenter.EditMode Then
                 Dim jiIdNo As Integer
-                jiIdNo = DataGridViewJournalItems.CurrentRow.Cells("dgvIdNo").Value
+                jiIdNo = DataGridViewPurchaseDetails.CurrentRow.Cells("dgvIdNo").Value
                 If Presenter.ApPaymentExists("AP", jiIdNo) Then
                     'ElseIf
                     ' Do not allow the user to delete items with existing payments/discounts (prevent orphaned records)

@@ -22,7 +22,6 @@ Namespace BusinessLayer
             End If
         End Sub
 
-        Public Property AccountIdNo As Int16?
         Public Property Amount As Decimal
         Public Property Cancelled As Boolean
         Public Property DateCreated As DateTime?
@@ -30,16 +29,15 @@ Namespace BusinessLayer
         Public Property IdNo As Int32
         Public Property InvoiceNo As String
         Public Property InvoiceDate As Date?
-        Public Property Notes As String
         Public Property Posted As Boolean
         Public Property ReferenceNo As String
-        Public Property SupplierIdNo As Int32
-        Public Property SettlementDiscount As Decimal
-        Public Property SettlementDueDate As Date?
+        Public Property SupplierIdNo As Int32?
         Public Property InvoiceAmount As Decimal
         Public Property TransactionDate As Date?
         Public Property VatAmount As Decimal
         Public Property VatNumber As String
+        Public Property PurchaseDetails As List(Of PurchaseDetail)
+
     End Class
 
 End Namespace

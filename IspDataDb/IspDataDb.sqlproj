@@ -145,7 +145,7 @@
     <Build Include="dbo\Views\ApJournalItem_View.sql" />
     <Build Include="dbo\Views\ArJournalItem_View.sql" />
     <Build Include="dbo\Views\SecurityObject_View.sql" />
-    <Build Include="dbo\Views\PurchaseJournalItem_View.sql" />
+    <Build Include="dbo\Views\PurchaseDetail_View.sql" />
     <Build Include="dbo\Views\GeneralJournalItem_View.sql" />
     <Build Include="dbo\Views\ArOpenInvoice_View.sql" />
     <Build Include="dbo\Views\TranslatedCaption_View.sql" />

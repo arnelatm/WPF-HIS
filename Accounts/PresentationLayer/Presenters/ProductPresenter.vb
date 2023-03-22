@@ -18,8 +18,8 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Sub CreateDataSources()
             Dim data As New ArrayList
-            data.Add({"Category", "CategoryIdNo", Nothing, Nothing})
-            data.Add({"Unit", "BaseUnitIdNo", Nothing, Nothing})
+            data.Add({"Product", "ProductIdNo", Nothing, Nothing})
+            data.Add({"Unit", "UnitIdNo", Nothing, Nothing})
             CreateDataSourceThread(data)
         End Sub
 

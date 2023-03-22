@@ -6,7 +6,6 @@
     ''' </summary>
     Public Class PurchaseModel
 
-        Public Property AccountIdNo As Int16?
         Public Property Amount As Decimal
         Public Property Cancelled As Boolean
         Public Property DateCreated As DateTime?
@@ -17,10 +16,7 @@
         Public Property InvoiceNo As String
         Public Property Notes As String
         Public Property Posted As Boolean
-        Public Property ReferenceNo As String
-        Public Property SettlementDiscount As Decimal
-        Public Property SettlementDueDate As Date?
-        Public Property SupplierIdNo As Int32
+        Public Property SupplierIdNo As Int32?
         Public Property TransactionDate As Date?
         Public Property VatAmount As Decimal
         Public Property VatNumber As String

@@ -1,7 +1,7 @@
 ﻿' ** Enterprise Design Pattern: Domain Model, Identity Field
 Namespace BusinessLayer
 
-    Public Class PurchaseItem
+    Public Class PurchaseDetail
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
