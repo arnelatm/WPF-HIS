@@ -3,7 +3,7 @@
     [ItemCodeCode]    NVARCHAR (5)   NOT NULL,
     [ItemCodeName]    NVARCHAR (50)  NOT NULL,
     [ItemCodeNameAra] NVARCHAR (50)  NULL,
-    [CodeGroupIdNo]   SMALLINT       NOT NULL,
+    [CodeGroupIdNo]   TINYINT       NOT NULL,
     [Note]            NVARCHAR (100) NULL,
     [DateTimeStamp]   ROWVERSION     NULL,
     CONSTRAINT [PK_ItemCode] PRIMARY KEY CLUSTERED ([IdNo] ASC)
