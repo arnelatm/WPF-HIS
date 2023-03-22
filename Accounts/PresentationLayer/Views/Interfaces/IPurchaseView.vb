@@ -2,7 +2,7 @@
 
 Namespace PresentationLayer.Views.Interfaces
 
-    Public Interface IPurchaseJournalView
+    Public Interface IPurchaseView
         Inherits IView
 
         Property AccountIdNo As Int16?

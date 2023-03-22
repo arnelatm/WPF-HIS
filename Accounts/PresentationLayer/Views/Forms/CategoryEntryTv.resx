@@ -241,7 +241,7 @@
     <value>62, 23</value>
   </data>
   <data name="txtCategoryCode.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;txtCategoryCode.Name" xml:space="preserve">
     <value>txtCategoryCode</value>
@@ -301,7 +301,7 @@
     <value>520, 23</value>
   </data>
   <data name="txtCategoryName.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;txtCategoryName.Name" xml:space="preserve">
     <value>txtCategoryName</value>
@@ -364,7 +364,7 @@
     <value>520, 23</value>
   </data>
   <data name="txtCategoryNameAra.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;txtCategoryNameAra.Name" xml:space="preserve">
     <value>txtCategoryNameAra</value>
@@ -430,7 +430,7 @@
     <value>520, 24</value>
   </data>
   <data name="cboPurchaseAccountIdNo.TabIndex" type="System.Int32, mscorlib">
-    <value>161</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;cboPurchaseAccountIdNo.Name" xml:space="preserve">
     <value>cboPurchaseAccountIdNo</value>
@@ -496,7 +496,7 @@
     <value>520, 24</value>
   </data>
   <data name="cboSaleAccountIdNo.TabIndex" type="System.Int32, mscorlib">
-    <value>163</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;cboSaleAccountIdNo.Name" xml:space="preserve">
     <value>cboSaleAccountIdNo</value>
@@ -562,7 +562,7 @@
     <value>520, 24</value>
   </data>
   <data name="cboVatPurchaseAccountIdNo.TabIndex" type="System.Int32, mscorlib">
-    <value>165</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;cboVatPurchaseAccountIdNo.Name" xml:space="preserve">
     <value>cboVatPurchaseAccountIdNo</value>
@@ -628,7 +628,7 @@
     <value>520, 24</value>
   </data>
   <data name="cboVatSaleAccountIdNo.TabIndex" type="System.Int32, mscorlib">
-    <value>170</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;cboVatSaleAccountIdNo.Name" xml:space="preserve">
     <value>cboVatSaleAccountIdNo</value>
@@ -691,7 +691,7 @@
     <value>62, 23</value>
   </data>
   <data name="txtVatPercentage.TabIndex" type="System.Int32, mscorlib">
-    <value>167</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;txtVatPercentage.Name" xml:space="preserve">
     <value>txtVatPercentage</value>
@@ -790,7 +790,7 @@
     <value>520, 60</value>
   </data>
   <data name="txtNotes.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;txtNotes.Name" xml:space="preserve">
     <value>txtNotes</value>
@@ -887,7 +887,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACG
-        CQAAAk1TRnQBSQFMAgEBAgEAATgBAAF4AQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAATgBAAGAAQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA

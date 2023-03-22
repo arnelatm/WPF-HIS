@@ -3,14 +3,13 @@
 Namespace PresentationLayer.Views.Interfaces
 
     Public Interface IProductView
-        Inherits IView
+		Inherits IView
 
         Property Active As Boolean
-        Property BarCode As String
-        Property BaseUnit As Int16
+        Property Barcode As String
+        Property BaseUnitIdNo As Int16
         Property CategoryIdNo As Int16
         Property DateCreated As DateTime?
-        Property GlAccountIdNo As Int16?
         Property GTIN As String
         Property IdNo As Int32
         Property ProductCode As String

@@ -16,16 +16,17 @@ Namespace BusinessLayer
             End If
         End Sub
 
+
         Public Property Active As Boolean
-        Public Property BaseUnit As Int16
+        Public Property BarCode As String
+        Public Property BaseUnitIdNo As Int16
         Public Property CategoryIdNo As Int16
         Public Property DateCreated As DateTime?
+        Public Property GTIN As String
         Public Property IdNo As Int32
         Public Property ProductCode As String
         Public Property ProductName As String
         Public Property ProductNameAra As String
-        Public Property GTIN As String
-        Public Property BarCode As String
 
     End Class
 

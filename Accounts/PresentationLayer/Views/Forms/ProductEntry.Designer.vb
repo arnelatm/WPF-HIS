@@ -34,19 +34,21 @@ Namespace PresentationLayer.Views.Forms
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblCancelled = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-        Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.CTextBox1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.CTextBox2 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.cboCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+        Me.lblProductName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtProductName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.lblProductNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtProductNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+        Me.lblBaseUnit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboBaseUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
         Me.lblBarcode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtBarcode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblGTIN = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtGTIN = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblInventory = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkInventory = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+        Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.bsJournalItems,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout4.SuspendLayout
@@ -133,17 +135,19 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout4.Controls.Add(Me.cboCategoryIdNo)
         Me.CFlowLayout4.Controls.Add(Me.lblProductCode)
         Me.CFlowLayout4.Controls.Add(Me.txtProductCode)
-        Me.CFlowLayout4.Controls.Add(Me.CLabel1)
-        Me.CFlowLayout4.Controls.Add(Me.CTextBox1)
-        Me.CFlowLayout4.Controls.Add(Me.CLabel2)
-        Me.CFlowLayout4.Controls.Add(Me.CTextBox2)
+        Me.CFlowLayout4.Controls.Add(Me.lblProductName)
+        Me.CFlowLayout4.Controls.Add(Me.txtProductName)
+        Me.CFlowLayout4.Controls.Add(Me.lblProductNameAra)
+        Me.CFlowLayout4.Controls.Add(Me.txtProductNameAra)
+        Me.CFlowLayout4.Controls.Add(Me.lblBaseUnit)
+        Me.CFlowLayout4.Controls.Add(Me.cboBaseUnitIdNo)
         Me.CFlowLayout4.Controls.Add(Me.lblBarcode)
         Me.CFlowLayout4.Controls.Add(Me.txtBarcode)
         Me.CFlowLayout4.Controls.Add(Me.lblGTIN)
         Me.CFlowLayout4.Controls.Add(Me.txtGTIN)
         Me.CFlowLayout4.Controls.Add(Me.lblInventory)
         Me.CFlowLayout4.Controls.Add(Me.chkInventory)
-        Me.CFlowLayout4.Controls.Add(Me.lblCancelled)
+        Me.CFlowLayout4.Controls.Add(Me.lblActive)
         Me.CFlowLayout4.Controls.Add(Me.chkActive)
         Me.CFlowLayout4.Controls.Add(Me.lblDateCreated)
         Me.CFlowLayout4.Controls.Add(Me.txtDateCreated)
@@ -234,110 +238,126 @@ Namespace PresentationLayer.Views.Forms
         Me.cboCategoryIdNo.ValueIsNumeric = false
         Me.cboCategoryIdNo.ValueMember = "IdNo"
         '
-        'lblCancelled
+        'lblProductName
         '
-        Me.lblCancelled.DisplayOnly = true
-        Me.lblCancelled.EditingMode = false
-        resources.ApplyResources(Me.lblCancelled, "lblCancelled")
-        Me.lblCancelled.Name = "lblCancelled"
-        Me.lblCancelled.Translatable = true
+        Me.lblProductName.DisplayOnly = true
+        Me.lblProductName.EditingMode = false
+        resources.ApplyResources(Me.lblProductName, "lblProductName")
+        Me.lblProductName.Name = "lblProductName"
+        Me.lblProductName.Translatable = true
         '
-        'chkActive
+        'txtProductName
         '
-        Me.chkActive.AlwaysEditable = false
-        Me.chkActive.BackColor = System.Drawing.Color.White
-        Me.chkActive.BegFindValue = Nothing
-        Me.chkActive.DisplayOnly = false
-        Me.chkActive.EditingMode = true
-        Me.chkActive.EndFindValue = Nothing
-        Me.chkActive.FieldDescription = Nothing
-        Me.chkActive.FieldName = Nothing
-        Me.chkActive.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.chkActive.FindEnabled = false
-        resources.ApplyResources(Me.chkActive, "chkActive")
-        Me.CFlowLayout4.SetFlowBreak(Me.chkActive, true)
-        Me.chkActive.ForeColor = System.Drawing.Color.Black
-        Me.chkActive.IFindableControl_FindEnabled = false
-        Me.chkActive.IgnoreCase = false
-        Me.chkActive.LinkedLabel = Nothing
-        Me.chkActive.Name = "chkActive"
-        Me.chkActive.NoLabel = true
-        Me.chkActive.OldValue = Nothing
-        Me.chkActive.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.chkActive.Translatable = false
-        Me.chkActive.UseVisualStyleBackColor = false
+        Me.txtProductName.BackColor = System.Drawing.Color.White
+        Me.txtProductName.BegFindValue = Nothing
+        Me.txtProductName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtProductName.ComputedValue = false
+        Me.txtProductName.CustomFormat = Nothing
+        Me.txtProductName.DataBoundControl = true
+        Me.txtProductName.EditingMode = true
+        Me.txtProductName.EndFindValue = Nothing
+        Me.txtProductName.FieldDescription = Nothing
+        Me.txtProductName.FieldName = Nothing
+        Me.txtProductName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtProductName.FindEnabled = true
+        Me.CFlowLayout4.SetFlowBreak(Me.txtProductName, true)
+        resources.ApplyResources(Me.txtProductName, "txtProductName")
+        Me.txtProductName.ForeColor = System.Drawing.Color.Black
+        Me.txtProductName.LinkedLabel = Me.lblProductName
+        Me.txtProductName.MaximumValue = Nothing
+        Me.txtProductName.MinimumValue = Nothing
+        Me.txtProductName.Name = "txtProductName"
+        Me.txtProductName.OldValue = Nothing
+        Me.txtProductName.ReadOnly = true
+        Me.txtProductName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.txtProductName.Translatable = false
+        Me.txtProductName.ValueIsMandatory = true
+        Me.txtProductName.ValueIsUnique = true
         '
-        'CLabel1
+        'lblProductNameAra
         '
-        Me.CLabel1.DisplayOnly = true
-        Me.CLabel1.EditingMode = false
-        resources.ApplyResources(Me.CLabel1, "CLabel1")
-        Me.CLabel1.Name = "CLabel1"
-        Me.CLabel1.Translatable = true
+        Me.lblProductNameAra.DisplayOnly = true
+        Me.lblProductNameAra.EditingMode = false
+        resources.ApplyResources(Me.lblProductNameAra, "lblProductNameAra")
+        Me.lblProductNameAra.Name = "lblProductNameAra"
+        Me.lblProductNameAra.Translatable = true
         '
-        'CTextBox1
+        'txtProductNameAra
         '
-        Me.CTextBox1.BackColor = System.Drawing.Color.White
-        Me.CTextBox1.BegFindValue = Nothing
-        Me.CTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.CTextBox1.ComputedValue = false
-        Me.CTextBox1.CustomFormat = Nothing
-        Me.CTextBox1.DataBoundControl = true
-        Me.CTextBox1.EditingMode = true
-        Me.CTextBox1.EndFindValue = Nothing
-        Me.CTextBox1.FieldDescription = Nothing
-        Me.CTextBox1.FieldName = Nothing
-        Me.CTextBox1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.CTextBox1.FindEnabled = true
-        Me.CFlowLayout4.SetFlowBreak(Me.CTextBox1, true)
-        resources.ApplyResources(Me.CTextBox1, "CTextBox1")
-        Me.CTextBox1.ForeColor = System.Drawing.Color.Black
-        Me.CTextBox1.LinkedLabel = Me.CLabel1
-        Me.CTextBox1.MaximumValue = Nothing
-        Me.CTextBox1.MinimumValue = Nothing
-        Me.CTextBox1.Name = "CTextBox1"
-        Me.CTextBox1.OldValue = Nothing
-        Me.CTextBox1.ReadOnly = true
-        Me.CTextBox1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.CTextBox1.Translatable = false
-        Me.CTextBox1.ValueIsMandatory = true
-        Me.CTextBox1.ValueIsUnique = true
+        Me.txtProductNameAra.BackColor = System.Drawing.Color.White
+        Me.txtProductNameAra.BegFindValue = Nothing
+        Me.txtProductNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtProductNameAra.ComputedValue = false
+        Me.txtProductNameAra.CustomFormat = Nothing
+        Me.txtProductNameAra.DataBoundControl = true
+        Me.txtProductNameAra.EditingMode = true
+        Me.txtProductNameAra.EndFindValue = Nothing
+        Me.txtProductNameAra.EnglishControl = Me.txtProductName
+        Me.txtProductNameAra.FieldDescription = Nothing
+        Me.txtProductNameAra.FieldName = Nothing
+        Me.txtProductNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtProductNameAra.FindEnabled = true
+        Me.CFlowLayout4.SetFlowBreak(Me.txtProductNameAra, true)
+        resources.ApplyResources(Me.txtProductNameAra, "txtProductNameAra")
+        Me.txtProductNameAra.ForeColor = System.Drawing.Color.Black
+        Me.txtProductNameAra.LinkedLabel = Me.lblProductNameAra
+        Me.txtProductNameAra.MaximumValue = Nothing
+        Me.txtProductNameAra.MinimumValue = Nothing
+        Me.txtProductNameAra.Name = "txtProductNameAra"
+        Me.txtProductNameAra.OldValue = Nothing
+        Me.txtProductNameAra.ReadOnly = true
+        Me.txtProductNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.txtProductNameAra.Translatable = false
+        Me.txtProductNameAra.ValueIsMandatory = true
+        Me.txtProductNameAra.ValueIsUnique = true
         '
-        'CLabel2
+        'lblBaseUnit
         '
-        Me.CLabel2.DisplayOnly = true
-        Me.CLabel2.EditingMode = false
-        resources.ApplyResources(Me.CLabel2, "CLabel2")
-        Me.CLabel2.Name = "CLabel2"
-        Me.CLabel2.Translatable = true
+        Me.lblBaseUnit.DisplayOnly = true
+        Me.lblBaseUnit.EditingMode = false
+        resources.ApplyResources(Me.lblBaseUnit, "lblBaseUnit")
+        Me.lblBaseUnit.Name = "lblBaseUnit"
+        Me.lblBaseUnit.Translatable = true
         '
-        'CTextBox2
+        'cboBaseUnitIdNo
         '
-        Me.CTextBox2.BackColor = System.Drawing.Color.White
-        Me.CTextBox2.BegFindValue = Nothing
-        Me.CTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.CTextBox2.ComputedValue = false
-        Me.CTextBox2.CustomFormat = Nothing
-        Me.CTextBox2.DataBoundControl = true
-        Me.CTextBox2.EditingMode = true
-        Me.CTextBox2.EndFindValue = Nothing
-        Me.CTextBox2.FieldDescription = Nothing
-        Me.CTextBox2.FieldName = Nothing
-        Me.CTextBox2.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.CTextBox2.FindEnabled = true
-        Me.CFlowLayout4.SetFlowBreak(Me.CTextBox2, true)
-        resources.ApplyResources(Me.CTextBox2, "CTextBox2")
-        Me.CTextBox2.ForeColor = System.Drawing.Color.Black
-        Me.CTextBox2.LinkedLabel = Me.CLabel2
-        Me.CTextBox2.MaximumValue = Nothing
-        Me.CTextBox2.MinimumValue = Nothing
-        Me.CTextBox2.Name = "CTextBox2"
-        Me.CTextBox2.OldValue = Nothing
-        Me.CTextBox2.ReadOnly = true
-        Me.CTextBox2.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.CTextBox2.Translatable = false
-        Me.CTextBox2.ValueIsMandatory = true
-        Me.CTextBox2.ValueIsUnique = true
+        Me.cboBaseUnitIdNo.AlwaysEditable = false
+        Me.cboBaseUnitIdNo.BackColor = System.Drawing.Color.White
+        Me.cboBaseUnitIdNo.BegFindValue = Nothing
+        Me.cboBaseUnitIdNo.ChangingSearchValueOnly = false
+        Me.cboBaseUnitIdNo.CurrentSearchTerm = ""
+        Me.cboBaseUnitIdNo.DataValue = Nothing
+        Me.cboBaseUnitIdNo.DefaultValue = ""
+        Me.cboBaseUnitIdNo.DisplayMember = "Name"
+        Me.cboBaseUnitIdNo.EditingMode = false
+        Me.cboBaseUnitIdNo.EndFindValue = Nothing
+        Me.cboBaseUnitIdNo.FieldDescription = Nothing
+        Me.cboBaseUnitIdNo.FieldName = Nothing
+        Me.cboBaseUnitIdNo.FilterRule = Nothing
+        Me.cboBaseUnitIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboBaseUnitIdNo.FindEnabled = false
+        Me.CFlowLayout4.SetFlowBreak(Me.cboBaseUnitIdNo, true)
+        resources.ApplyResources(Me.cboBaseUnitIdNo, "cboBaseUnitIdNo")
+        Me.cboBaseUnitIdNo.ForeColor = System.Drawing.Color.Black
+        Me.cboBaseUnitIdNo.HideWhenNotEditingOrAdding = false
+        Me.cboBaseUnitIdNo.IgnoreCase = false
+        Me.cboBaseUnitIdNo.LinkedLabel = Me.lblCategoryIdNo
+        Me.cboBaseUnitIdNo.Name = "cboBaseUnitIdNo"
+        Me.cboBaseUnitIdNo.OldValue = 0
+        Me.cboBaseUnitIdNo.OriginalDataSource = Nothing
+        Me.cboBaseUnitIdNo.OriginalList = Nothing
+        Me.cboBaseUnitIdNo.OverrideDropDownStyleList = false
+        Me.cboBaseUnitIdNo.PreviousSearchTerm = Nothing
+        Me.cboBaseUnitIdNo.PropertySelector = Nothing
+        Me.cboBaseUnitIdNo.ReadOnlyCombo = false
+        Me.cboBaseUnitIdNo.SuggestBoxHeight = 200
+        Me.cboBaseUnitIdNo.SuggestListOrderRule = Nothing
+        Me.cboBaseUnitIdNo.TextToSearch = Nothing
+        Me.cboBaseUnitIdNo.Translatable = false
+        Me.cboBaseUnitIdNo.ValueIsMandatory = false
+        Me.cboBaseUnitIdNo.ValueIsNullable = false
+        Me.cboBaseUnitIdNo.ValueIsNumeric = false
+        Me.cboBaseUnitIdNo.ValueMember = "IdNo"
         '
         'lblBarcode
         '
@@ -436,13 +456,46 @@ Namespace PresentationLayer.Views.Forms
         Me.chkInventory.ForeColor = System.Drawing.Color.Black
         Me.chkInventory.IFindableControl_FindEnabled = false
         Me.chkInventory.IgnoreCase = false
-        Me.chkInventory.LinkedLabel = Nothing
+        Me.chkInventory.LinkedLabel = Me.lblInventory
         Me.chkInventory.Name = "chkInventory"
         Me.chkInventory.NoLabel = true
         Me.chkInventory.OldValue = Nothing
         Me.chkInventory.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.chkInventory.Translatable = false
         Me.chkInventory.UseVisualStyleBackColor = false
+        '
+        'lblActive
+        '
+        Me.lblActive.DisplayOnly = true
+        Me.lblActive.EditingMode = false
+        resources.ApplyResources(Me.lblActive, "lblActive")
+        Me.lblActive.Name = "lblActive"
+        Me.lblActive.Translatable = true
+        '
+        'chkActive
+        '
+        Me.chkActive.AlwaysEditable = false
+        Me.chkActive.BackColor = System.Drawing.Color.White
+        Me.chkActive.BegFindValue = Nothing
+        Me.chkActive.DisplayOnly = false
+        Me.chkActive.EditingMode = true
+        Me.chkActive.EndFindValue = Nothing
+        Me.chkActive.FieldDescription = Nothing
+        Me.chkActive.FieldName = Nothing
+        Me.chkActive.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.chkActive.FindEnabled = false
+        resources.ApplyResources(Me.chkActive, "chkActive")
+        Me.CFlowLayout4.SetFlowBreak(Me.chkActive, true)
+        Me.chkActive.ForeColor = System.Drawing.Color.Black
+        Me.chkActive.IFindableControl_FindEnabled = false
+        Me.chkActive.IgnoreCase = false
+        Me.chkActive.LinkedLabel = Me.lblActive
+        Me.chkActive.Name = "chkActive"
+        Me.chkActive.NoLabel = true
+        Me.chkActive.OldValue = Nothing
+        Me.chkActive.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.chkActive.Translatable = false
+        Me.chkActive.UseVisualStyleBackColor = false
         '
         'ProductEntry
         '
@@ -467,18 +520,20 @@ End Sub
         Friend WithEvents lblDateCreated As CLabel
         Friend WithEvents txtDateCreated As CTextBox
         Friend WithEvents lblCategoryIdNo As CLabel
-        Friend WithEvents lblCancelled As CLabel
-        Friend WithEvents cboCategoryIdNo As CaComboBox
+        Friend WithEvents lblActive As CLabel
+        Friend WithEvents cboCategoryIdNo As CtComboBox
         Friend WithEvents chkActive As CCheckBox
-        Friend WithEvents CLabel1 As CLabel
-        Friend WithEvents CTextBox1 As CTextBox
-        Friend WithEvents CLabel2 As CLabel
-        Friend WithEvents CTextBox2 As CTextBox
+        Friend WithEvents lblProductName As CLabel
+        Friend WithEvents txtProductName As CTextBox
+        Friend WithEvents lblProductNameAra As CLabel
+        Friend WithEvents txtProductNameAra As CTextBoxArabic
         Friend WithEvents lblBarcode As CLabel
         Friend WithEvents txtBarcode As CTextBox
         Friend WithEvents lblGTIN As CLabel
         Friend WithEvents txtGTIN As CTextBox
         Friend WithEvents lblInventory As CLabel
         Friend WithEvents chkInventory As CCheckBox
+        Friend WithEvents lblBaseUnit As CLabel
+        Friend WithEvents cboBaseUnitIdNo As CtComboBox
     End Class
 End NameSpace
