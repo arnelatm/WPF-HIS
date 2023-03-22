@@ -15,6 +15,9 @@
         Public Property ProductCode As String
         Public Property ProductName As String
         Public Property ProductNameAra As String
+        Public Property GTIN As String
+        Public Property BarCode As String
+
     End Class
 
 End Namespace
