@@ -245,6 +245,7 @@
     <Compile Include="BusinessLayer\IGroup\Patient.vb" />
     <Compile Include="BusinessLayer\IGroup\Lab_InvoiceGroup.vb" />
     <Compile Include="BusinessLayer\IGroup\ItemDetails.vb" />
+    <Compile Include="BusinessLayer\PurchaseDetail.vb" />
     <Compile Include="BusinessLayer\JournalPrefix.vb" />
     <Compile Include="BusinessLayer\EmployeeLeave.vb" />
     <Compile Include="BusinessLayer\EmployeeAbsence.vb" />
@@ -295,7 +296,7 @@
     <Compile Include="BusinessLayer\GlLedgerItem.vb" />
     <Compile Include="BusinessLayer\JournalItem.vb" />
     <Compile Include="BusinessLayer\Product.vb" />
-    <Compile Include="BusinessLayer\PurchaseJournal.vb" />
+    <Compile Include="BusinessLayer\Purchase.vb" />
     <Compile Include="BusinessLayer\Reconciled.vb" />
     <Compile Include="BusinessLayer\ReportSelector.vb" />
     <Compile Include="BusinessLayer\Report.vb" />
@@ -326,6 +327,7 @@
     <Compile Include="DataLayer\AdoNet\IGroup\PmrInvestigationDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\Lab_InvoiceGroupDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\ItemDetailsDao.vb" />
+    <Compile Include="DataLayer\AdoNet\ProductDao.vb" />
     <Compile Include="DataLayer\AdoNet\ReportDao.vb" />
     <Compile Include="DataLayer\AdoNet\ShiftSummaryDao.vb" />
     <Compile Include="DataLayer\AdoNet\HolidayDao.vb" />
@@ -368,7 +370,7 @@
     <Compile Include="DataLayer\AdoNet\DistributionSchemeDao.vb" />
     <Compile Include="DataLayer\AdoNet\DistributionSchemeItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\GlLedgeritemDao.vb" />
-    <Compile Include="DataLayer\AdoNet\PurchaseJournalDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PurchaseDao.vb" />
     <Compile Include="DataLayer\AdoNet\ReconciledDao.vb" />
     <Compile Include="DataLayer\AdoNet\SalesDepositDao.vb" />
     <Compile Include="DataLayer\AdoNet\SalesJournalDao.vb" />
@@ -444,6 +446,7 @@
     <Compile Include="PresentationLayer\Models\IGroup\PMRPatientDisplayModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\Lab_InvoiceGroupModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\ItemDetailsModel.vb" />
+    <Compile Include="PresentationLayer\Models\PurchaseDetailModel.vb" />
     <Compile Include="PresentationLayer\Models\ReportSelectorModel.vb" />
     <Compile Include="PresentationLayer\Models\ReportModel.vb" />
     <Compile Include="PresentationLayer\Models\ShiftSummaryModel.vb" />
@@ -525,6 +528,12 @@
     <Compile Include="PresentationLayer\Views\EmployeeLeaveCreditView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeePayElementView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeDocumentView.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\PurchaseEntry.designer.vb">
+      <DependentUpon>PurchaseEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\PurchaseEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\ApJournalEntry.designer.vb">
       <DependentUpon>ApJournalEntry.vb</DependentUpon>
     </Compile>
@@ -918,6 +927,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IHolidayTransferView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IHolidayAvailmentView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeLeaveApprovalItemView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IPurchaseDetailView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IReportSelectorView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IReportView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IShiftSummaryView.vb" />
@@ -935,6 +945,7 @@
     <Compile Include="PresentationLayer\Views\HolidayTransferItemView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeLeaveApprovalHistoryView.vb" />
     <Compile Include="PresentationLayer\Views\Lab_InvoiceDetailsView.vb" />
+    <Compile Include="PresentationLayer\Views\PurchaseDetailView.vb" />
     <Compile Include="PresentationLayer\Views\PcJournalView.vb" />
     <Compile Include="PresentationLayer\Views\PayElementItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPayElementItemView.vb" />
@@ -1189,7 +1200,7 @@
     <Compile Include="PresentationLayer\Models\JournalItemModel.vb" />
     <Compile Include="PresentationLayer\Models\MainModel.vb" />
     <Compile Include="PresentationLayer\Models\ProductModel.vb" />
-    <Compile Include="PresentationLayer\Models\PurchaseJournalModel.vb" />
+    <Compile Include="PresentationLayer\Models\PurchaseModel.vb" />
     <Compile Include="PresentationLayer\Models\ReconciledModel.vb" />
     <Compile Include="PresentationLayer\Models\SalesDepositModel.vb" />
     <Compile Include="PresentationLayer\Models\SalesJournalModel.vb" />
@@ -1255,7 +1266,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IDistributionSchemeItemsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IJournalItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IProductView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\IPurchaseJournalView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IPurchaseView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISalesDepositsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISalesDepositView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISalesJournalView.vb" />
@@ -1842,6 +1853,9 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\AccountReconciliationEntry.resx">
       <DependentUpon>AccountReconciliationEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\PurchaseEntry.resx">
+      <DependentUpon>PurchaseEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ApJournalEntry.resx">
       <DependentUpon>ApJournalEntry.vb</DependentUpon>

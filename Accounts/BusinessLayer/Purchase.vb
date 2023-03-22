@@ -4,7 +4,7 @@ Imports AATM.BusinessLayer.BusinessRules
 
 Namespace BusinessLayer
 
-    Public Class PurchaseJournal
+    Public Class Purchase
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
@@ -15,10 +15,8 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("TransactionDate"))
                 AddRule(New ValidateRange("TransactionDate", Date.MinValue, Date.Today, ValidationDataType.Date))
                 AddRule(New ValidateRequired("Notes"))
-                AddRule(New ValidateRequired("AccountIdNo"))
                 AddRule(New ValidateRequired("SupplierIdNo"))
                 AddRule(New ValidateRequired("InvoiceNo"))
-                AddRule(New ValidateCompare("TotalDebits", "TotalCredits", ValidationOperator.Equal, ValidationDataType.Decimal))
                 AddRule(New ValidateVatNumber("VatNumber"))
                 AddRule(New ValidateIfRequired("VatNumber", "VatAmount", ValidationDataType.Decimal, ValidationOperator.NotEqual, 0))
             End If
@@ -30,11 +28,7 @@ Namespace BusinessLayer
         Public Property DateCreated As DateTime?
         Public Property DueDate As Date?
         Public Property IdNo As Int32
-
-        'Public Property SettlementDueDate As Date?
-        'Public Property SettlementDiscount As Decimal
         Public Property InvoiceNo As String
-
         Public Property InvoiceDate As Date?
         Public Property Notes As String
         Public Property Posted As Boolean
@@ -42,8 +36,7 @@ Namespace BusinessLayer
         Public Property SupplierIdNo As Int32
         Public Property SettlementDiscount As Decimal
         Public Property SettlementDueDate As Date?
-        Public Property TotalCredits As Decimal
-        Public Property TotalDebits As Decimal
+        Public Property InvoiceAmount As Decimal
         Public Property TransactionDate As Date?
         Public Property VatAmount As Decimal
         Public Property VatNumber As String

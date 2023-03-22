@@ -250,13 +250,13 @@
     <value>418, 24</value>
   </data>
   <data name="cboCategoryIdNo.TabIndex" type="System.Int32, mscorlib">
-    <value>283</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;cboCategoryIdNo.Name" xml:space="preserve">
     <value>cboCategoryIdNo</value>
   </data>
   <data name="&gt;&gt;cboCategoryIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboCategoryIdNo.Parent" xml:space="preserve">
     <value>CFlowLayout4</value>
@@ -300,131 +300,200 @@
   <data name="&gt;&gt;lblProductCode.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="CLabel1.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblProductName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="CLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblProductName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="CLabel1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblProductName.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 87</value>
   </data>
-  <data name="CLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblProductName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="CLabel1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblProductName.Size" type="System.Drawing.Size, System.Drawing">
     <value>210, 23</value>
   </data>
-  <data name="CLabel1.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblProductName.TabIndex" type="System.Int32, mscorlib">
     <value>285</value>
   </data>
-  <data name="CLabel1.Text" xml:space="preserve">
+  <data name="lblProductName.Text" xml:space="preserve">
     <value>Product Name</value>
   </data>
-  <data name="CLabel1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblProductName.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;CLabel1.Name" xml:space="preserve">
-    <value>CLabel1</value>
+  <data name="&gt;&gt;lblProductName.Name" xml:space="preserve">
+    <value>lblProductName</value>
   </data>
-  <data name="&gt;&gt;CLabel1.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblProductName.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;CLabel1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblProductName.Parent" xml:space="preserve">
     <value>CFlowLayout4</value>
   </data>
-  <data name="&gt;&gt;CLabel1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblProductName.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="CTextBox1.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txtProductName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="CTextBox1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="txtProductName.Location" type="System.Drawing.Point, System.Drawing">
     <value>223, 87</value>
   </data>
-  <data name="CTextBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="txtProductName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="CTextBox1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="txtProductName.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 23</value>
   </data>
-  <data name="CTextBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>284</value>
+  <data name="txtProductName.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
-  <data name="&gt;&gt;CTextBox1.Name" xml:space="preserve">
-    <value>CTextBox1</value>
+  <data name="&gt;&gt;txtProductName.Name" xml:space="preserve">
+    <value>txtProductName</value>
   </data>
-  <data name="&gt;&gt;CTextBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtProductName.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;CTextBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtProductName.Parent" xml:space="preserve">
     <value>CFlowLayout4</value>
   </data>
-  <data name="&gt;&gt;CTextBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtProductName.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="CLabel2.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblProductNameAra.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="CLabel2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblProductNameAra.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="CLabel2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblProductNameAra.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 112</value>
   </data>
-  <data name="CLabel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblProductNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="CLabel2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblProductNameAra.Size" type="System.Drawing.Size, System.Drawing">
     <value>210, 23</value>
   </data>
-  <data name="CLabel2.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblProductNameAra.TabIndex" type="System.Int32, mscorlib">
     <value>287</value>
   </data>
-  <data name="CLabel2.Text" xml:space="preserve">
+  <data name="lblProductNameAra.Text" xml:space="preserve">
     <value>Product Name Arabic</value>
   </data>
-  <data name="CLabel2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblProductNameAra.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;CLabel2.Name" xml:space="preserve">
-    <value>CLabel2</value>
+  <data name="&gt;&gt;lblProductNameAra.Name" xml:space="preserve">
+    <value>lblProductNameAra</value>
   </data>
-  <data name="&gt;&gt;CLabel2.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblProductNameAra.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;CLabel2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblProductNameAra.Parent" xml:space="preserve">
     <value>CFlowLayout4</value>
   </data>
-  <data name="&gt;&gt;CLabel2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblProductNameAra.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="CTextBox2.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txtProductNameAra.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="CTextBox2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="txtProductNameAra.Location" type="System.Drawing.Point, System.Drawing">
     <value>223, 112</value>
   </data>
-  <data name="CTextBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="txtProductNameAra.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="CTextBox2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="txtProductNameAra.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="txtProductNameAra.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 23</value>
   </data>
-  <data name="CTextBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>286</value>
+  <data name="txtProductNameAra.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
-  <data name="&gt;&gt;CTextBox2.Name" xml:space="preserve">
-    <value>CTextBox2</value>
+  <data name="&gt;&gt;txtProductNameAra.Name" xml:space="preserve">
+    <value>txtProductNameAra</value>
   </data>
-  <data name="&gt;&gt;CTextBox2.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;txtProductNameAra.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;CTextBox2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtProductNameAra.Parent" xml:space="preserve">
     <value>CFlowLayout4</value>
   </data>
-  <data name="&gt;&gt;CTextBox2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtProductNameAra.ZOrder" xml:space="preserve">
     <value>9</value>
+  </data>
+  <data name="lblBaseUnit.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblBaseUnit.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblBaseUnit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 137</value>
+  </data>
+  <data name="lblBaseUnit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblBaseUnit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 23</value>
+  </data>
+  <data name="lblBaseUnit.TabIndex" type="System.Int32, mscorlib">
+    <value>295</value>
+  </data>
+  <data name="lblBaseUnit.Text" xml:space="preserve">
+    <value>Base  Unit</value>
+  </data>
+  <data name="lblBaseUnit.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblBaseUnit.Name" xml:space="preserve">
+    <value>lblBaseUnit</value>
+  </data>
+  <data name="&gt;&gt;lblBaseUnit.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblBaseUnit.Parent" xml:space="preserve">
+    <value>CFlowLayout4</value>
+  </data>
+  <data name="&gt;&gt;lblBaseUnit.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="cboBaseUnitIdNo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="cboBaseUnitIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="cboBaseUnitIdNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>223, 137</value>
+  </data>
+  <data name="cboBaseUnitIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="cboBaseUnitIdNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 24</value>
+  </data>
+  <data name="cboBaseUnitIdNo.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;cboBaseUnitIdNo.Name" xml:space="preserve">
+    <value>cboBaseUnitIdNo</value>
+  </data>
+  <data name="&gt;&gt;cboBaseUnitIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;cboBaseUnitIdNo.Parent" xml:space="preserve">
+    <value>CFlowLayout4</value>
+  </data>
+  <data name="&gt;&gt;cboBaseUnitIdNo.ZOrder" xml:space="preserve">
+    <value>11</value>
   </data>
   <data name="lblBarcode.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -433,7 +502,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblBarcode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 137</value>
+    <value>11, 163</value>
   </data>
   <data name="lblBarcode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -460,22 +529,22 @@
     <value>CFlowLayout4</value>
   </data>
   <data name="&gt;&gt;lblBarcode.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="txtBarcode.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtBarcode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>223, 137</value>
+    <value>223, 163</value>
   </data>
   <data name="txtBarcode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtBarcode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>151, 23</value>
+    <value>175, 23</value>
   </data>
   <data name="txtBarcode.TabIndex" type="System.Int32, mscorlib">
-    <value>288</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;txtBarcode.Name" xml:space="preserve">
     <value>txtBarcode</value>
@@ -487,7 +556,7 @@
     <value>CFlowLayout4</value>
   </data>
   <data name="&gt;&gt;txtBarcode.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="lblGTIN.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -496,7 +565,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblGTIN.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 162</value>
+    <value>11, 188</value>
   </data>
   <data name="lblGTIN.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -523,22 +592,22 @@
     <value>CFlowLayout4</value>
   </data>
   <data name="&gt;&gt;lblGTIN.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="txtGTIN.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtGTIN.Location" type="System.Drawing.Point, System.Drawing">
-    <value>223, 162</value>
+    <value>223, 188</value>
   </data>
   <data name="txtGTIN.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtGTIN.Size" type="System.Drawing.Size, System.Drawing">
-    <value>151, 23</value>
+    <value>175, 23</value>
   </data>
   <data name="txtGTIN.TabIndex" type="System.Int32, mscorlib">
-    <value>290</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;txtGTIN.Name" xml:space="preserve">
     <value>txtGTIN</value>
@@ -550,7 +619,7 @@
     <value>CFlowLayout4</value>
   </data>
   <data name="&gt;&gt;txtGTIN.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>15</value>
   </data>
   <data name="lblInventory.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -559,7 +628,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblInventory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 187</value>
+    <value>11, 213</value>
   </data>
   <data name="lblInventory.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -586,7 +655,7 @@
     <value>CFlowLayout4</value>
   </data>
   <data name="&gt;&gt;lblInventory.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>16</value>
   </data>
   <data name="chkInventory.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -598,13 +667,13 @@
     <value>NoControl</value>
   </data>
   <data name="chkInventory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>225, 189</value>
+    <value>225, 215</value>
   </data>
   <data name="chkInventory.Size" type="System.Drawing.Size, System.Drawing">
     <value>13, 13</value>
   </data>
   <data name="chkInventory.TabIndex" type="System.Int32, mscorlib">
-    <value>292</value>
+    <value>8</value>
   </data>
   <data name="chkInventory.Text" xml:space="preserve">
     <value> </value>
@@ -619,43 +688,43 @@
     <value>CFlowLayout4</value>
   </data>
   <data name="&gt;&gt;chkInventory.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>17</value>
   </data>
-  <data name="lblCancelled.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblActive.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="lblCancelled.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblActive.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblCancelled.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 212</value>
+  <data name="lblActive.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 238</value>
   </data>
-  <data name="lblCancelled.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblActive.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="lblCancelled.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblActive.Size" type="System.Drawing.Size, System.Drawing">
     <value>210, 23</value>
   </data>
-  <data name="lblCancelled.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblActive.TabIndex" type="System.Int32, mscorlib">
     <value>281</value>
   </data>
-  <data name="lblCancelled.Text" xml:space="preserve">
+  <data name="lblActive.Text" xml:space="preserve">
     <value>Active?</value>
   </data>
-  <data name="lblCancelled.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblActive.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;lblCancelled.Name" xml:space="preserve">
-    <value>lblCancelled</value>
+  <data name="&gt;&gt;lblActive.Name" xml:space="preserve">
+    <value>lblActive</value>
   </data>
-  <data name="&gt;&gt;lblCancelled.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblActive.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lblCancelled.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblActive.Parent" xml:space="preserve">
     <value>CFlowLayout4</value>
   </data>
-  <data name="&gt;&gt;lblCancelled.ZOrder" xml:space="preserve">
-    <value>16</value>
+  <data name="&gt;&gt;lblActive.ZOrder" xml:space="preserve">
+    <value>18</value>
   </data>
   <data name="chkActive.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -664,13 +733,13 @@
     <value>Segoe UI, 9pt</value>
   </data>
   <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>225, 214</value>
+    <value>225, 240</value>
   </data>
   <data name="chkActive.Size" type="System.Drawing.Size, System.Drawing">
     <value>13, 13</value>
   </data>
   <data name="chkActive.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>9</value>
   </data>
   <data name="chkActive.Text" xml:space="preserve">
     <value> </value>
@@ -685,7 +754,7 @@
     <value>CFlowLayout4</value>
   </data>
   <data name="&gt;&gt;chkActive.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>19</value>
   </data>
   <data name="lblDateCreated.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -694,7 +763,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 237</value>
+    <value>11, 263</value>
   </data>
   <data name="lblDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -721,22 +790,22 @@
     <value>CFlowLayout4</value>
   </data>
   <data name="&gt;&gt;lblDateCreated.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>20</value>
   </data>
   <data name="txtDateCreated.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>223, 237</value>
+    <value>223, 263</value>
   </data>
   <data name="txtDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtDateCreated.Size" type="System.Drawing.Size, System.Drawing">
-    <value>151, 23</value>
+    <value>175, 23</value>
   </data>
   <data name="txtDateCreated.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;txtDateCreated.Name" xml:space="preserve">
     <value>txtDateCreated</value>
@@ -748,7 +817,7 @@
     <value>CFlowLayout4</value>
   </data>
   <data name="&gt;&gt;txtDateCreated.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>21</value>
   </data>
   <data name="CFlowLayout4.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>

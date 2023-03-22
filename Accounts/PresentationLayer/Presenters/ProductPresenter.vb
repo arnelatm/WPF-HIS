@@ -12,14 +12,24 @@ Namespace PresentationLayer.Presenters
             MyBase.New(view)
             Service = New AccountsService("Product")
             TableName = "Product"
-            TreeViewMainField = "ProductName"
-            'TreeViewSecondaryField = "ProductCode"
+            WithTreeView = False
             SortOrderKey = "ProductName"
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateDataSource("Category", "CategoryIdNo")
+            Dim data As New ArrayList
+            data.Add({"Category", "CategoryIdNo", Nothing, Nothing})
+            data.Add({"Unit", "BaseUnitIdNo", Nothing, Nothing})
+            CreateDataSourceThread(data)
         End Sub
+
+        Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
+            Dim returnValue As Boolean = False
+            'If CheckDependentRecords(Of Int32)(View.IdNo, "Product", "CategoryIdNo") Then
+            '    Return True
+            'End If
+            Return False
+        End Function
 
     End Class
 
