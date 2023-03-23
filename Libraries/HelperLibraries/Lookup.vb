@@ -24,7 +24,7 @@ Public Class Lookup
     End Class
 
     Public Class LookupData
-        Public Property IdNo
+        Public Property IdNo 
         Public Property Name As String
         Public Property Code As String
         Public Property Index

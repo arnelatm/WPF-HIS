@@ -1370,7 +1370,7 @@ Public Module GlobalFunctions
     Public Function GetPrinterPageInfo(ByVal printerName As String) As PageSettings
         Dim settings As PrinterSettings
 
-        If String.IsNullOrEmpty(printerName) Then
+        If Not String.IsNullOrEmpty(printerName) Then
 
             For Each printer In PrinterSettings.InstalledPrinters
                 settings = New PrinterSettings()

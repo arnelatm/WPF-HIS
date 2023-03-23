@@ -306,6 +306,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'cboDefaultPaperSource
         '
+        Me.cboDefaultPaperSource.AlwaysEditable = false
         Me.cboDefaultPaperSource.BackColor = System.Drawing.Color.White
         Me.cboDefaultPaperSource.BegFindValue = Nothing
         Me.cboDefaultPaperSource.ChangingSearchValueOnly = false
@@ -367,6 +368,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'cboDefaultPaperSize
         '
+        Me.cboDefaultPaperSize.AlwaysEditable = false
         Me.cboDefaultPaperSize.BackColor = System.Drawing.Color.White
         Me.cboDefaultPaperSize.BegFindValue = Nothing
         Me.cboDefaultPaperSize.ChangingSearchValueOnly = false
@@ -408,7 +410,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboDefaultPaperSize.ValueIsMandatory = false
         Me.cboDefaultPaperSize.ValueIsNullable = false
         Me.cboDefaultPaperSize.ValueIsNumeric = false
-        Me.cboDefaultPaperSize.ValueMember = "Name"
+        Me.cboDefaultPaperSize.ValueMember = "IdNo"
         '
         'LblDefaultPaperOrientation
         '
@@ -428,6 +430,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'cboDefaultPaperOrientation
         '
+        Me.cboDefaultPaperOrientation.AlwaysEditable = false
         Me.cboDefaultPaperOrientation.BackColor = System.Drawing.Color.White
         Me.cboDefaultPaperOrientation.BegFindValue = Nothing
         Me.cboDefaultPaperOrientation.ChangingSearchValueOnly = false

@@ -1060,7 +1060,7 @@ Public Class CDataGridView
         End If
     End Sub
 
-    Private Sub DataGridViewReconciliationItems_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
+    Private Sub DataGridView_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
         Dim hitTestInfo As DataGridView.HitTestInfo
         Dim continueSearch As Boolean = False
         Dim matchFound As Integer = -1

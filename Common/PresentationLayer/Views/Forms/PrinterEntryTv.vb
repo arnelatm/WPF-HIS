@@ -56,7 +56,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 cboDefaultPaperSize.SetValue(Value)
-                cboDefaultPaperSize.Refresh()
+                'cboDefaultPaperSize.Refresh()
             End Set
         End Property
 
