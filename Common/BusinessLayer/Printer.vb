@@ -17,7 +17,7 @@ Namespace BusinessLayer
         End Sub
 
         Public Property DefaultPaperOrientation As Int32?
-        Public Property DefaultPaperSize As String
+        Public Property DefaultPaperSize As Int32?
         Public Property DefaultPaperSource As Int32?
         Public Property HostOrIpName As String
         Public Property IdNo As Int16

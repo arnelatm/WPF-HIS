@@ -57,7 +57,7 @@ Namespace DataLayer.AdoNet
             New Printer() With {
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .DefaultPaperOrientation = Extensions.AsNullable(Of Int32?)(reader("DefaultPaperOrientation")),
-            .DefaultPaperSize = Extensions.AsString(reader("DefaultPaperSize")),
+            .DefaultPaperSize = Extensions.AsInt(Of Int32)(reader("DefaultPaperSize")),
             .DefaultPaperSource = Extensions.AsNullable(Of Int32?)(reader("DefaultPaperSource")),
             .HostOrIpName = Extensions.AsString(reader("HostOrIpName")),
             .PrinterCode = Extensions.AsString(reader("PrinterCode")),

@@ -18,7 +18,7 @@ Namespace PresentationLayer.Presenters
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Private ReadOnly _PurchaseItemService As New AccountsService("PurchaseDetail", Nothing, {"PurchaseItem_View", "UpdatePurchaseItemTVP", "InsertPurchaseItemTVP"})
+        'Private ReadOnly _PurchaseItemService As New AccountsService("PurchaseDetail", Nothing, {"PurchaseItem_View", "UpdatePurchaseItemTVP", "InsertPurchaseItemTVP"})
 
         Public Sub New(view As IPurchaseView)
             MyBase.New(view)
@@ -53,11 +53,10 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateLookupData("Product", "ProductByCode", "BranchId='02'")
+            CreateLookupData("Product_View", "ProductsByCode", "BranchIdNo=1")
             CreateLookupData("Unit", "UnitsByCode")
             CreateDataSource("Supplier", "SupplierIdNo")
-            CreateEnumDataSource(Of TransactionTypeSelection)("TransactionType")
-            CreateSpecialAccountDataSource("ProductIdNo", {EnumToCode(SpecialAccountSelection.AccountsPayable)})
+            CreateEnumDataSource(Of TransactionTypeSelection)("TransactionType")            
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
@@ -88,32 +87,32 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
-            Dim passedValue As Integer = retVal
-            retVal = UpdateChildData(_PurchaseItemService, DtUpdateTable, DtInsertTable, passedValue, "PurchaseIdNo")
-            If retVal >= 0 Then
-                Dim newPurchaseDetail As List(Of PurchaseDetailModel)
-                newPurchaseDetail = _PurchaseItemService.GetRecordsWithGroupIdNo(Of PurchaseDetailModel)(View.IdNo, "Sequence")
-                If AddMode Then
-                    For Each item In newPurchaseDetail
-                        If IsAccountsPayableAccount(item.ProductIdNo) Then
-                            retVal = AddApOpenInvoice(item, "AP")
-                            If retVal < 0 Then
-                                Exit For
-                            End If
-                        End If
-                    Next
-                Else
-                    retVal = RemoveDeletedApOpenInvoices(retVal, newPurchaseDetail)
-                    If retVal >= 0 Then
-                        retVal = AddNewApOpenInvoices(retVal, newPurchaseDetail)
-                    End If
-                End If
-            End If
-            If retVal >= 0 Then
-                If IsEmpty(View.ReferenceNo) Then
-                    retVal = UpdateGlReferenceNumber()
-                End If
-            End If
+            'Dim passedValue As Integer = retVal
+            'retVal = UpdateChildData(_PurchaseItemService, DtUpdateTable, DtInsertTable, passedValue, "PurchaseIdNo")
+            'If retVal >= 0 Then
+            '    Dim newPurchaseDetail As List(Of PurchaseDetailModel)
+            '    newPurchaseDetail = _PurchaseItemService.GetRecordsWithGroupIdNo(Of PurchaseDetailModel)(View.IdNo, "Sequence")
+            '    'If AddMode Then
+            '    '    For Each item In newPurchaseDetail
+            '    '        If IsAccountsPayableAccount(item.ProductIdNo) Then
+            '    '            retVal = AddApOpenInvoice(item, "AP")
+            '    '            If retVal < 0 Then
+            '    '                Exit For
+            '    '            End If
+            '    '        End If
+            '    '    Next
+            '    'Else
+            '    '    'retVal = RemoveDeletedApOpenInvoices(retVal, newPurchaseDetail)
+            '    '    'If retVal >= 0 Then
+            '    '    '    retVal = AddNewApOpenInvoices(retVal, newPurchaseDetail)
+            '    '    'End If
+            '    'End If
+            'End If
+            'If retVal >= 0 Then
+            '    If IsEmpty(View.ReferenceNo) Then
+            '        retVal = UpdateGlReferenceNumber()
+            '    End If
+            'End If
             If retVal >= 0 AndAlso Not IsEmpty(View.VatNumber) Then
                 Service.UpdateVatNumber(View.VatNumber, View.SupplierIdNo)
             End If
@@ -190,14 +189,14 @@ Namespace PresentationLayer.Presenters
             ' ReSharper disable once VBUseMethodAny.1
             If View.PurchaseDetails IsNot Nothing And View.PurchaseDetails.Count() > 0 Then
                 DtUpdateTable.Clear()
-                _PurchaseItemService.DelUpdateTvp(DtUpdateTable, idNo)
+                '_PurchaseItemService.DelUpdateTvp(DtUpdateTable, idNo)
             End If
         End Sub
 
         Public Sub UpdateDueDate()
             If View.SupplierIdNo IsNot Nothing Then
-                Dim supplierPaymentDueDays = GetSupplierPaymentDueDays(View.SupplierIdNo)
-                View.DueDate = DateAdd("d", supplierPaymentDueDays, View.TransactionDate)
+                'Dim supplierPaymentDueDays = GetSupplierPaymentDueDays(View.SupplierIdNo)
+                'View.DueDate = DateAdd("d", supplierPaymentDueDays, View.TransactionDate)
             Else
                 View.DueDate = Nothing
             End If

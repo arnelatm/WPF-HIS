@@ -7,6 +7,7 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class PurchaseDao
+        Inherits AccountsDao
         Implements IDao(Of Purchase)
 
 

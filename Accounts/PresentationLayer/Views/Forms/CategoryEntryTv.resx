@@ -195,17 +195,80 @@
   <data name="&gt;&gt;TxtIdNo.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="lblBranchIdNo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblBranchIdNo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblBranchIdNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>128, 4</value>
+  </data>
+  <data name="lblBranchIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblBranchIdNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 23</value>
+  </data>
+  <data name="lblBranchIdNo.TabIndex" type="System.Int32, mscorlib">
+    <value>171</value>
+  </data>
+  <data name="lblBranchIdNo.Text" xml:space="preserve">
+    <value>Branch ID No.</value>
+  </data>
+  <data name="lblBranchIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;lblBranchIdNo.Name" xml:space="preserve">
+    <value>lblBranchIdNo</value>
+  </data>
+  <data name="&gt;&gt;lblBranchIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblBranchIdNo.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblBranchIdNo.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="txtBranchIdNo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="txtBranchIdNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>272, 4</value>
+  </data>
+  <data name="txtBranchIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtBranchIdNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 23</value>
+  </data>
+  <data name="txtBranchIdNo.TabIndex" type="System.Int32, mscorlib">
+    <value>170</value>
+  </data>
+  <data name="&gt;&gt;txtBranchIdNo.Name" xml:space="preserve">
+    <value>txtBranchIdNo</value>
+  </data>
+  <data name="&gt;&gt;txtBranchIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtBranchIdNo.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;txtBranchIdNo.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="lblCode.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="lblCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>128, 4</value>
+    <value>336, 4</value>
   </data>
   <data name="lblCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblCode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>333, 23</value>
+    <value>50, 23</value>
   </data>
   <data name="lblCode.TabIndex" type="System.Int32, mscorlib">
     <value>156</value>
@@ -226,19 +289,19 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblCode.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="txtCategoryCode.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtCategoryCode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>463, 4</value>
+    <value>388, 4</value>
   </data>
   <data name="txtCategoryCode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtCategoryCode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 23</value>
+    <value>136, 23</value>
   </data>
   <data name="txtCategoryCode.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -253,7 +316,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtCategoryCode.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="lblName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -286,7 +349,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblName.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="txtCategoryName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -313,7 +376,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtCategoryName.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="lblNameAra.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -346,7 +409,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblNameAra.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="txtCategoryNameAra.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -376,7 +439,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtCategoryNameAra.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="lblPurchaseAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -412,7 +475,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblPurchaseAccountIdNo.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="cboPurchaseAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -442,7 +505,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;cboPurchaseAccountIdNo.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="lblSaleAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -478,7 +541,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblSaleAccountIdNo.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="cboSaleAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -508,7 +571,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;cboSaleAccountIdNo.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="lblVatPurchaseAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -544,7 +607,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblVatPurchaseAccountIdNo.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="cboVatPurchaseAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -574,7 +637,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;cboVatPurchaseAccountIdNo.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>15</value>
   </data>
   <data name="lblVatSaleAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -610,7 +673,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblVatSaleAccountIdNo.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>16</value>
   </data>
   <data name="cboVatSaleAccountIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -640,7 +703,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;cboVatSaleAccountIdNo.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>17</value>
   </data>
   <data name="lblVatPercentage.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -676,7 +739,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblVatPercentage.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>18</value>
   </data>
   <data name="txtVatPercentage.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -703,7 +766,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtVatPercentage.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>19</value>
   </data>
   <data name="lblPercentMark.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -739,7 +802,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblPercentMark.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>20</value>
   </data>
   <data name="lblNotes.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -772,7 +835,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblNotes.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>21</value>
   </data>
   <data name="txtNotes.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -802,7 +865,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtNotes.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>22</value>
   </data>
   <data name="floDataDisplay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -887,7 +950,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACG
-        CQAAAk1TRnQBSQFMAgEBAgEAATgBAAGAAQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAATgBAAGIAQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA

@@ -34,8 +34,16 @@ Namespace PresentationLayer.Presenters
         Public Overrides Sub GoPrintRecord()
             Dim qtyDescription As String = IIf(View.Dose <> 0, GlobalFunctions.NumberToWordEnglish(View.Dose, False).ToLower() + Trim(GetRecordFieldWithKeyG(Of String)(View.DosageUnit, "ItemCode", "IdNo", "ItemCodeName")) + IIf(View.Dose > 1, "s", ""), "")
             Dim duration As String = IIf(View.Duration <> 0, " for " + GlobalFunctions.NumberToWordEnglish(View.Duration).ToLower() + " " + Trim(GetRecordFieldWithKeyG(Of String)(View.DurationTiming, "ItemCode", "IdNo", "ItemCodeName")) + IIf(View.Dose > 1, "s", ""), "")
-            Dim cForm As New ReportForm("DosageLabel.Rpt", View.IdNo, "IdNo", qtyDescription, "QtyDescription", duration, "Duration")
-            cForm.Show()
+
+            Dim prPresenter As New PrintReportPresenter()
+            Dim args As Array =  { View.IdNo, "IdNo", qtyDescription, "QtyDescription", duration, "Duration" }
+            prPresenter.PrintReport("DosageLabel.Rpt", Nothing , args)
+
+
+
+
+            'Dim cForm As New ReportForm("DosageLabel.Rpt", View.IdNo, "IdNo", qtyDescription, "QtyDescription", duration, "Duration")
+            'cForm.Show()
         End Sub
 
 

@@ -206,11 +206,11 @@ Namespace PresentationLayer.Views.Forms
             _footer = New DgvFooter(DataGridViewPurchaseDetails) With {
                 .AutoCalc = True
             }
-            _footer.ColumnToSum("dgvDebit") = True
-            _footer.ColumnToSum("dgvCredit") = True
-            _footer.SetAlignment("dgvDebit", ContentAlignment.MiddleRight)
-            _footer.SetAlignment("dgvCredit", ContentAlignment.MiddleRight)
-            _footer.SetText("DgvAccountIdNo", "Totals ->")
+            _footer.ColumnToSum("dgvNetAmount") = True
+            _footer.ColumnToSum("dgvVatAmount") = True
+            _footer.SetAlignment("dgvNetAmount", ContentAlignment.MiddleRight)
+            _footer.SetAlignment("dgvVatAmount", ContentAlignment.MiddleRight)
+            _footer.SetText("DgvProductIdNo", "Totals ->")
             UpdateTotals()
         End Sub
 
@@ -242,7 +242,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CboSupplierIdNo_Changed(sender As Object, e As EventArgs) Handles cboSupplierIdNo.Validated, cboSupplierIdNo.SelectionChangeCommitted
             Presenter.UpdateDueDate()
-            Presenter.UpdateEarlySettlementValues()
+            'Presenter.UpdateEarlySettlementValues()
             If SupplierIdNo IsNot Nothing Then
                 Presenter.SetSupplierVatNumber(VatNumber, SupplierIdNo, True)
             End If
@@ -270,7 +270,6 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles  cboTransactionType.Validated, txtAmount.Validated, cboTransactionType.SelectionChangeCommitted
-            Presenter.UpdateFirstLine()
             UpdateTotals()
             DataGridViewPurchaseDetails.Refresh()
         End Sub
@@ -303,7 +302,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub OnTransactionDateValidated(sender As Object, e As EventArgs) Handles dtpTransactionDate.Validated
             Presenter.UpdateDueDate()
-            Presenter.UpdateEarlySettlementValues()
+            'Presenter.UpdateEarlySettlementValues()
             Presenter.UpdateSupplierDate()
         End Sub
 
