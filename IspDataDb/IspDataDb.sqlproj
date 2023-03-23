@@ -186,7 +186,7 @@
     <Build Include="dbo\Stored Procedures\InsertCsrOiItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertDistributionSchemeItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertGeneralJournalItemTVP.sql" />
-    <Build Include="dbo\Stored Procedures\InsertPurchaseJournalItemTVP.sql" />
+    <Build Include="dbo\Stored Procedures\InsertPurchaseDetailTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertSalesJournalItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\UpdateApJournalItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\UpdateArJournalItemTVP.sql" />
@@ -196,7 +196,7 @@
     <Build Include="dbo\Stored Procedures\InsertGroupAccessTVP.sql" />
     <Build Include="dbo\Stored Procedures\UpdateGroupAccessTVP.sql" />
     <Build Include="dbo\Stored Procedures\UpdateGeneralJournalItemTVP.sql" />
-    <Build Include="dbo\Stored Procedures\UpdatePurchaseJournalItemTVP.sql" />
+    <Build Include="dbo\Stored Procedures\UpdatePurchaseDetailTVP.sql" />
     <Build Include="dbo\Stored Procedures\UpdateSalesJournalItemTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertSalesDepositTVP.sql" />
     <Build Include="dbo\Stored Procedures\UpdateSalesDepositTVP.sql" />
@@ -546,7 +546,6 @@
     <Build Include="dbo\Tables\Product.sql" />
     <Build Include="dbo\Tables\PurchaseDetail.sql" />
     <Build Include="dbo\Tables\Purchase.sql" />
-    <Build Include="dbo\Views\PurchaseJournalItem_View.sql" />
     <Build Include="dbo\Views\PurchaseDetail_View_1.sql" />
     <Build Include="dbo\Views\Product_View.sql" />
   </ItemGroup>
