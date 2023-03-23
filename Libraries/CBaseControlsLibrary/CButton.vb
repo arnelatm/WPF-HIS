@@ -55,7 +55,6 @@ Imports System.Windows.Forms
 ''' Custom Button Control with Gradient Colors and Extra Image (VB.NET)
 ''' </summary>
 ''' <remarks>v3.5</remarks>
-'''<System.Diagnostics.DebuggerStepThrough()>
 <ToolboxItem(True), ToolboxBitmap(GetType(CButton), "CButton.bmp")>
 <DefaultEvent("ClickButtonArea")>
 <Designer(GetType(CButtonDesigner))>

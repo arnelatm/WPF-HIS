@@ -50,7 +50,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DefaultPaperSize As String Implements IPrinterView.DefaultPaperSize
+        Public Property DefaultPaperSize As Int32? Implements IPrinterView.DefaultPaperSize
             Get
                 Return cboDefaultPaperSize.GetValue()
             End Get

@@ -47,6 +47,8 @@ Namespace PresentationLayer.Views.Forms
         Me.lblVatPercentage = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtVatPercentage = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblPercentMark = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.lblBranchIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.txtBranchIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -255,6 +257,8 @@ Namespace PresentationLayer.Views.Forms
         Me.floDataDisplay.BackColor = System.Drawing.Color.Transparent
         Me.floDataDisplay.Controls.Add(Me.lblIdNo)
         Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
+        Me.floDataDisplay.Controls.Add(Me.lblBranchIdNo)
+        Me.floDataDisplay.Controls.Add(Me.txtBranchIdNo)
         Me.floDataDisplay.Controls.Add(Me.lblCode)
         Me.floDataDisplay.Controls.Add(Me.txtCategoryCode)
         Me.floDataDisplay.Controls.Add(Me.lblName)
@@ -516,6 +520,42 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPercentMark.Name = "lblPercentMark"
         Me.lblPercentMark.Translatable = true
         '
+        'lblBranchIdNo
+        '
+        Me.lblBranchIdNo.DisplayOnly = true
+        Me.lblBranchIdNo.EditingMode = false
+        resources.ApplyResources(Me.lblBranchIdNo, "lblBranchIdNo")
+        Me.lblBranchIdNo.Name = "lblBranchIdNo"
+        Me.lblBranchIdNo.Translatable = true
+        '
+        'txtBranchIdNo
+        '
+        Me.txtBranchIdNo.BackColor = System.Drawing.Color.White
+        Me.txtBranchIdNo.BegFindValue = Nothing
+        Me.txtBranchIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtBranchIdNo.ComputedValue = false
+        Me.txtBranchIdNo.CustomFormat = Nothing
+        Me.txtBranchIdNo.DataBoundControl = true
+        Me.txtBranchIdNo.DisplayOnly = true
+        Me.txtBranchIdNo.EditingMode = true
+        Me.txtBranchIdNo.EndFindValue = Nothing
+        Me.txtBranchIdNo.FieldDescription = Nothing
+        Me.txtBranchIdNo.FieldName = Nothing
+        Me.txtBranchIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtBranchIdNo.FindEnabled = true
+        resources.ApplyResources(Me.txtBranchIdNo, "txtBranchIdNo")
+        Me.txtBranchIdNo.ForeColor = System.Drawing.Color.Black
+        Me.txtBranchIdNo.LinkedLabel = Me.lblBranchIdNo
+        Me.txtBranchIdNo.MaximumValue = Nothing
+        Me.txtBranchIdNo.MinimumValue = Nothing
+        Me.txtBranchIdNo.Name = "txtBranchIdNo"
+        Me.txtBranchIdNo.OldValue = Nothing
+        Me.txtBranchIdNo.ReadOnly = true
+        Me.txtBranchIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.txtBranchIdNo.TabStop = false
+        Me.txtBranchIdNo.Translatable = false
+        Me.txtBranchIdNo.ValueIsNumeric = true
+        '
         'CategoryEntryTv
         '
         resources.ApplyResources(Me, "$this")
@@ -553,5 +593,7 @@ End Sub
         Friend WithEvents lblPercentMark As CLabel
         Friend WithEvents lblVatSaleAccountIdNo As CLabel
         Friend WithEvents cboVatSaleAccountIdNo As CtComboBox
+        Friend WithEvents lblBranchIdNo As CLabel
+        Friend WithEvents txtBranchIdNo As CTextBox
     End Class
 End Namespace

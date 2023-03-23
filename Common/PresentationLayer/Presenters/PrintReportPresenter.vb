@@ -39,6 +39,8 @@ Namespace PresentationLayer.Presenters
                 If print Then
                     report.PrintReport(copies, collate, startPage, endPage)
                 End If
+            Else
+                report.PrintReport(copies, collate, startPage, endPage)
             End If
         End Sub
 

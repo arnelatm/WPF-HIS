@@ -6,7 +6,7 @@ Namespace PresentationLayer.Views.Interface
         Inherits IView
 
         Property DefaultPaperOrientation As Int32?
-        Property DefaultPaperSize As String
+        Property DefaultPaperSize As Int32?
         Property DefaultPaperSource As Int32?
         Property HostOrIpName As String
         Property IdNo As Int16

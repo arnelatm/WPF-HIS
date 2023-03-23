@@ -108,10 +108,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property BranchIdNo As Short Implements ICategoryView.BranchIdNo
             Get
-                Throw New NotImplementedException()
+                Return txtBranchIdNo.Text
             End Get
-            Set(value As Short)
-                Throw New NotImplementedException()
+            Set
+                txtBranchIdNo.Text = value
             End Set
         End Property
 
@@ -120,6 +120,7 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                     {
+                    {"BranchIdNo", txtBranchIdNo},
                     {"CategoryCode", txtCategoryCode},
                     {"CategoryName", txtCategoryName},
                     {"CategoryNameAra", txtCategoryNameAra},
