@@ -37,7 +37,6 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 txtPrinterName.Text = Value
-                RaiseEvent PrinterChanged(Me)
             End Set
         End Property
 
@@ -56,7 +55,6 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 cboDefaultPaperSize.SetValue(Value)
-                'cboDefaultPaperSize.Refresh()
             End Set
         End Property
 
@@ -139,6 +137,16 @@ Namespace PresentationLayer.Views.Forms
         '    cboPaperSource.DataSource = paperSourceLookup
 
         'End Sub
+
+        'Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
+        '    Dim nDefaultPaperSize As Int32? = DefaultPaperSize
+        '    Dim nDefaultPaperSource As Int32? = DefaultPaperSource
+        '    RaiseEvent PrinterChanged(Me)
+        '    cboDefaultPaperOrientation.Refresh()
+        '    DefaultPaperSize = nDefaultPaperSize
+        '    DefaultPaperSource = nDefaultPaperSource
+        'End Sub
+
 
     End Class
 

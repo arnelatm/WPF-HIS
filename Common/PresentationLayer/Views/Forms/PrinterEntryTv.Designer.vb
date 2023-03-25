@@ -69,6 +69,14 @@ Namespace PresentationLayer.Views.Forms
         Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
         Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
         '
+        'TranslatorDAC
+        '
+        Me.TranslatorDAC.Cs = ""
+        '
+        'AppDataDAC
+        '
+        Me.AppDataDAC.Cs = ""
+        '
         'floDataDisplay
         '
         Me.floDataDisplay.AutoSize = true
@@ -409,7 +417,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboDefaultPaperSize.Translatable = false
         Me.cboDefaultPaperSize.ValueIsMandatory = false
         Me.cboDefaultPaperSize.ValueIsNullable = false
-        Me.cboDefaultPaperSize.ValueIsNumeric = false
+        Me.cboDefaultPaperSize.ValueIsNumeric = true
         Me.cboDefaultPaperSize.ValueMember = "IdNo"
         '
         'LblDefaultPaperOrientation

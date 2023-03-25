@@ -20,19 +20,15 @@ Namespace PresentationLayer.Presenters
             TreeViewMainField = "PrinterName"
             TreeViewSecondaryField = "PrinterCode"
             AddHandler view.CheckPrinterClicked, AddressOf OnCheckPrinterClicked
-            AddHandler view.PrinterChanged, AddressOf OnPrinterChanged
+            AddHandler view.PrinterChanged, AddressOf UpdatePrinterDataSource
 
         End Sub
 
         Protected Overrides Sub CreateDataSources()
             CreateDataSourceGroupCode("DefaultPaperOrientation", "PPOR")
-            'CreateDataSourceGroupCode("DefaultPaperSize", "PPSZ")
-            'CreateDataSourceGroupCode("DefaultPaperSource", "PPSR")
         End Sub
 
         Private Sub OnCheckPrinterClicked(sender As Object)
-            'Dim prPresenter As New PrintReportPresenter()
-            'prPresenter.PrintReport(reportFileName, jobName, databaseConnectionName)
             If String.IsNullOrEmpty(View.PrinterName) Then
                 Throw New ArgumentNullException("printerName")
             End If
@@ -47,11 +43,15 @@ Namespace PresentationLayer.Presenters
                     MessageBox.Show("Printer OK")
                     Dim data = GetPrinterPageInfo(printer)
                     Debugger.Break()
-                    Dim supportedPaperSize As String = ""
+                    Dim printOut As String = ""
                     For Each item As PaperSize In data.PrinterSettings.PaperSizes
-                        supportedPaperSize += item.PaperName + item.PaperName + vbCrLf
+                        printOut += item.PaperName + vbCrLf
                     Next
-                    MessageBox.Show(supportedPaperSize)
+                    printOut += " Paper Sources " + vbCrLf
+                    For Each item As PaperSource In data.PrinterSettings.PaperSources
+                        printOut += item.SourceName + vbCrLf
+                    Next
+                    MessageBox.Show(printOut)
                 Else
                     MessageBox.Show("Printer doesn't exist")
                 End If
@@ -61,7 +61,15 @@ Namespace PresentationLayer.Presenters
             'View.PayFrequency = Service.GetField(Of String, Int16)(View.PayCycleIdNo, "PayCycle", "IdNo", "PayFrequency")
         End Sub
 
-        Private Sub OnPrinterChanged(sender As Object)
+
+        Private Sub OnBeforeMappingData(ByVal dataModel As Object) Handles MyBase.BeforeMappingData
+            View.PrinterName = dataModel.PrinterName
+            View.DefaultPaperSize = dataModel.DefaultPaperSize
+            View.DefaultPaperSource = dataModel.DefaultPaperSource
+            UpdatePrinterDataSource()
+        End Sub
+
+        Private Sub UpdatePrinterDataSource()
             SetPrinterSupportedPaper(View.PrinterName)
             SetPrinterSupportedSources(View.PrinterName)
         End Sub
@@ -79,7 +87,9 @@ Namespace PresentationLayer.Presenters
                 paperSizeLookup.Add(dbLookup)
                 index += 1
             Next
+            Dim savedDefaultPaperSize As Int32? = View.DefaultPaperSize
             GetControlName("DefaultPaperSize").DataSource = paperSizeLookup
+            View.DefaultPaperSize = savedDefaultPaperSize
         End Sub
 
         Private Sub SetPrinterSupportedSources(pPrinterName As String)
@@ -95,8 +105,15 @@ Namespace PresentationLayer.Presenters
                 paperSourceLookup.Add(dbLookup)
                 index += 1
             Next
+            Dim savedDefaultPaperSource As Int32? = View.DefaultPaperSource
             GetControlName("DefaultPaperSource").DataSource = paperSourceLookup
+            View.DefaultPaperSource = savedDefaultPaperSource
         End Sub
+
+        Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
+            View.HostOrIpName = Environment.MachineName
+        End Sub
+
 
         'Public Shared Function GetPrinterPageInfo(ByVal printerName As String) As PageSettings
         '    Dim settings As PrinterSettings
