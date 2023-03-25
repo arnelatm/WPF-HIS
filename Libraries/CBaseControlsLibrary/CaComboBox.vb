@@ -243,9 +243,9 @@ Public Class CaComboBox
     <Bindable(True)>
     <Category("Properties")>
     <DefaultValue(GetType(Boolean))>
-    <Description("Set to True to specify that this control will only accept numeric values.")>
+    <Description("Set to True to specify that this control will only accept values on list.")>
     <Browsable(True)>
-    Private Property LimitToList As Boolean = False
+    Public Property LimitToList As Boolean = False
 
     Public Sub OnKeyDownPressed(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If DisplayOnly Then
@@ -600,10 +600,14 @@ Public Class CaComboBox
                 i += 1
             Next
             If Not found Then
-                If value IsNot Nothing Then
+                If LimitToList Then
+                    If value IsNot Nothing Then
+                        Text = value
+                    End If
+                    SelectedIndex = -1
+                Else
                     Text = value
                 End If
-                SelectedIndex = -1
             End If
         Else
             SelectedIndex = -1
@@ -766,7 +770,9 @@ Public Class CaComboBox
                     Text = SuggestListForm.SuggestListBox.Items(0)
                 Else
                     ' invalid selection or text set to empty string
-                    Text = Nothing
+                    If LimitToList Then
+                        Text = Nothing
+                    End If
                 End If
             End If
         End If
