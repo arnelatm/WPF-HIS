@@ -13,7 +13,6 @@ Namespace PresentationLayer.Views.Interface
         Property IdNo As Int16
         Property PrinterCode As String
         Property PrinterName As String
-        Property InstalledPrinter As String
         Event CheckPrinterClicked(sender As Object)
 
         Event PrinterChanged(sender As Object)

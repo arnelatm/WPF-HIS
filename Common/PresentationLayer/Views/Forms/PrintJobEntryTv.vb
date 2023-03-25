@@ -93,7 +93,7 @@ Namespace PresentationLayer.Views.Forms
                 {"PaperSize", cboPaperSize},
                 {"PaperSource", cboPaperSource},
                 {"PrinterIdNo", cboPrinterIdNo},
-                {"PrintJobName", cboPrintSetupIdNo}
+                {"PrintSetupIdNo", cboPrintSetupIdNo}
                 }
         End Sub
 

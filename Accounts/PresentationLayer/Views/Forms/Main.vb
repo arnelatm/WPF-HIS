@@ -1065,7 +1065,7 @@ Namespace PresentationLayer.Views.Forms
             prPresenter.PrintReport(reportFileName, databaseConnectionName, args)
         End Sub
 
-        Private Sub ToolStripMenuItemPrintJobs_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPrinters.Click
+        Private Sub PrinterEntryTv_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPrinters.Click
             RunForm(Of PrinterEntryTv, PrinterPresenter(Of PrinterModel))()
         End Sub
 
@@ -1128,6 +1128,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ToolStripMenuItemPurchaseEntry_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPurchaseEntry.Click
             RunForm(Of PurchaseEntry, PurchasePresenter(Of PurchaseModel))()
+        End Sub
+
+        Private Sub ToolStripMenuItemPrintJobs_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPrintJobs.Click
+            RunForm(Of PrintJobEntryTv, PrintJobPresenter(Of PrintJobModel))()
         End Sub
     End Class
 

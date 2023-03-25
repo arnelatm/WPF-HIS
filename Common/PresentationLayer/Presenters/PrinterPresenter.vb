@@ -91,6 +91,9 @@ Namespace PresentationLayer.Presenters
             Dim savedDefaultPaperSize As Int32? = View.DefaultPaperSize
             GetControlName("DefaultPaperSize").DataSource = paperSizeLookup
             View.DefaultPaperSize = savedDefaultPaperSize
+            If savedDefaultPaperSize is Nothing or savedDefaultPaperSize = 0 then
+                View.DefaultPaperSize = data.PrinterSettings.DefaultPageSettings.PaperSize.RawKind
+            End If
         End Sub
 
         Private Sub SetPrinterSupportedSources(pPrinterName As String)
@@ -109,6 +112,9 @@ Namespace PresentationLayer.Presenters
             Dim savedDefaultPaperSource As Int32? = View.DefaultPaperSource
             GetControlName("DefaultPaperSource").DataSource = paperSourceLookup
             View.DefaultPaperSource = savedDefaultPaperSource
+            If savedDefaultPaperSource Is Nothing or savedDefaultPaperSource = 0 then
+                View.DefaultPaperSource = data.PrinterSettings.DefaultPageSettings.PaperSource.RawKind
+            End If
         End Sub
        
         Private Sub SetInstalledPrinter()
@@ -128,7 +134,7 @@ Namespace PresentationLayer.Presenters
                 data.Add(dbLookup)
                 index += 1
             Next
-            GetControlName("InstalledPrinter").DataSource = data
+            GetControlName("PrinterName").DataSource = data
         End Sub
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized

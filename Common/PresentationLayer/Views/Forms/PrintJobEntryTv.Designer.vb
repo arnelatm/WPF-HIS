@@ -157,6 +157,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'cboPrintSetupIdNo
         '
+        Me.cboPrintSetupIdNo.AlwaysEditable = false
         Me.cboPrintSetupIdNo.BackColor = System.Drawing.Color.White
         Me.cboPrintSetupIdNo.BegFindValue = Nothing
         Me.cboPrintSetupIdNo.ChangingSearchValueOnly = false
@@ -178,6 +179,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPrintSetupIdNo.HideWhenNotEditingOrAdding = false
         Me.cboPrintSetupIdNo.IgnoreCase = false
         Me.cboPrintSetupIdNo.IntegralHeight = false
+        Me.cboPrintSetupIdNo.LimitToList = false
         Me.cboPrintSetupIdNo.LinkedLabel = Me.lblPrintSetupIdNo
         Me.cboPrintSetupIdNo.Location = New System.Drawing.Point(157, 36)
         Me.cboPrintSetupIdNo.Margin = New System.Windows.Forms.Padding(1)
@@ -189,7 +191,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPrintSetupIdNo.PreviousSearchTerm = Nothing
         Me.cboPrintSetupIdNo.PropertySelector = Nothing
         Me.cboPrintSetupIdNo.ReadOnlyCombo = false
-        Me.cboPrintSetupIdNo.Size = New System.Drawing.Size(221, 24)
+        Me.cboPrintSetupIdNo.Size = New System.Drawing.Size(307, 24)
         Me.cboPrintSetupIdNo.SuggestBoxHeight = 200
         Me.cboPrintSetupIdNo.SuggestListOrderRule = Nothing
         Me.cboPrintSetupIdNo.TabIndex = 1
@@ -218,6 +220,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'cboComputerIdNo
         '
+        Me.cboComputerIdNo.AlwaysEditable = false
         Me.cboComputerIdNo.BackColor = System.Drawing.Color.White
         Me.cboComputerIdNo.BegFindValue = Nothing
         Me.cboComputerIdNo.ChangingSearchValueOnly = false
@@ -239,6 +242,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboComputerIdNo.HideWhenNotEditingOrAdding = false
         Me.cboComputerIdNo.IgnoreCase = false
         Me.cboComputerIdNo.IntegralHeight = false
+        Me.cboComputerIdNo.LimitToList = false
         Me.cboComputerIdNo.LinkedLabel = Me.LblComputerIdNo
         Me.cboComputerIdNo.Location = New System.Drawing.Point(157, 62)
         Me.cboComputerIdNo.Margin = New System.Windows.Forms.Padding(1)
@@ -250,7 +254,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboComputerIdNo.PreviousSearchTerm = Nothing
         Me.cboComputerIdNo.PropertySelector = Nothing
         Me.cboComputerIdNo.ReadOnlyCombo = false
-        Me.cboComputerIdNo.Size = New System.Drawing.Size(221, 24)
+        Me.cboComputerIdNo.Size = New System.Drawing.Size(307, 24)
         Me.cboComputerIdNo.SuggestBoxHeight = 200
         Me.cboComputerIdNo.SuggestListOrderRule = Nothing
         Me.cboComputerIdNo.TabIndex = 2
@@ -279,6 +283,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'cboPrinterIdNo
         '
+        Me.cboPrinterIdNo.AlwaysEditable = false
         Me.cboPrinterIdNo.BackColor = System.Drawing.Color.White
         Me.cboPrinterIdNo.BegFindValue = Nothing
         Me.cboPrinterIdNo.ChangingSearchValueOnly = false
@@ -300,6 +305,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPrinterIdNo.HideWhenNotEditingOrAdding = false
         Me.cboPrinterIdNo.IgnoreCase = false
         Me.cboPrinterIdNo.IntegralHeight = false
+        Me.cboPrinterIdNo.LimitToList = false
         Me.cboPrinterIdNo.LinkedLabel = Me.lblPrintSetupIdNo
         Me.cboPrinterIdNo.Location = New System.Drawing.Point(157, 88)
         Me.cboPrinterIdNo.Margin = New System.Windows.Forms.Padding(1)
@@ -311,7 +317,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPrinterIdNo.PreviousSearchTerm = Nothing
         Me.cboPrinterIdNo.PropertySelector = Nothing
         Me.cboPrinterIdNo.ReadOnlyCombo = false
-        Me.cboPrinterIdNo.Size = New System.Drawing.Size(221, 24)
+        Me.cboPrinterIdNo.Size = New System.Drawing.Size(307, 24)
         Me.cboPrinterIdNo.SuggestBoxHeight = 200
         Me.cboPrinterIdNo.SuggestListOrderRule = Nothing
         Me.cboPrinterIdNo.TabIndex = 175
@@ -340,6 +346,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'cboPaperSource
         '
+        Me.cboPaperSource.AlwaysEditable = false
         Me.cboPaperSource.BackColor = System.Drawing.Color.White
         Me.cboPaperSource.BegFindValue = Nothing
         Me.cboPaperSource.ChangingSearchValueOnly = false
@@ -361,6 +368,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPaperSource.HideWhenNotEditingOrAdding = false
         Me.cboPaperSource.IgnoreCase = false
         Me.cboPaperSource.IntegralHeight = false
+        Me.cboPaperSource.LimitToList = false
         Me.cboPaperSource.LinkedLabel = Me.LblPaperSource
         Me.cboPaperSource.Location = New System.Drawing.Point(157, 114)
         Me.cboPaperSource.Margin = New System.Windows.Forms.Padding(1)
@@ -372,7 +380,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPaperSource.PreviousSearchTerm = Nothing
         Me.cboPaperSource.PropertySelector = Nothing
         Me.cboPaperSource.ReadOnlyCombo = false
-        Me.cboPaperSource.Size = New System.Drawing.Size(221, 24)
+        Me.cboPaperSource.Size = New System.Drawing.Size(307, 24)
         Me.cboPaperSource.SuggestBoxHeight = 200
         Me.cboPaperSource.SuggestListOrderRule = Nothing
         Me.cboPaperSource.TabIndex = 5
@@ -401,6 +409,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'cboPaperSize
         '
+        Me.cboPaperSize.AlwaysEditable = false
         Me.cboPaperSize.BackColor = System.Drawing.Color.White
         Me.cboPaperSize.BegFindValue = Nothing
         Me.cboPaperSize.ChangingSearchValueOnly = false
@@ -422,6 +431,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPaperSize.HideWhenNotEditingOrAdding = false
         Me.cboPaperSize.IgnoreCase = false
         Me.cboPaperSize.IntegralHeight = false
+        Me.cboPaperSize.LimitToList = false
         Me.cboPaperSize.LinkedLabel = Me.LblPaperSource
         Me.cboPaperSize.Location = New System.Drawing.Point(157, 140)
         Me.cboPaperSize.Margin = New System.Windows.Forms.Padding(1)
@@ -433,7 +443,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPaperSize.PreviousSearchTerm = Nothing
         Me.cboPaperSize.PropertySelector = Nothing
         Me.cboPaperSize.ReadOnlyCombo = false
-        Me.cboPaperSize.Size = New System.Drawing.Size(221, 24)
+        Me.cboPaperSize.Size = New System.Drawing.Size(307, 24)
         Me.cboPaperSize.SuggestBoxHeight = 200
         Me.cboPaperSize.SuggestListOrderRule = Nothing
         Me.cboPaperSize.TabIndex = 6
@@ -462,6 +472,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'cboPaperOrientation
         '
+        Me.cboPaperOrientation.AlwaysEditable = false
         Me.cboPaperOrientation.BackColor = System.Drawing.Color.White
         Me.cboPaperOrientation.BegFindValue = Nothing
         Me.cboPaperOrientation.ChangingSearchValueOnly = false
@@ -482,6 +493,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPaperOrientation.HideWhenNotEditingOrAdding = false
         Me.cboPaperOrientation.IgnoreCase = false
         Me.cboPaperOrientation.IntegralHeight = false
+        Me.cboPaperOrientation.LimitToList = false
         Me.cboPaperOrientation.LinkedLabel = Me.LblPaperOrientation
         Me.cboPaperOrientation.Location = New System.Drawing.Point(157, 166)
         Me.cboPaperOrientation.Margin = New System.Windows.Forms.Padding(1)
@@ -493,7 +505,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPaperOrientation.PreviousSearchTerm = Nothing
         Me.cboPaperOrientation.PropertySelector = Nothing
         Me.cboPaperOrientation.ReadOnlyCombo = false
-        Me.cboPaperOrientation.Size = New System.Drawing.Size(221, 24)
+        Me.cboPaperOrientation.Size = New System.Drawing.Size(307, 24)
         Me.cboPaperOrientation.SuggestBoxHeight = 200
         Me.cboPaperOrientation.SuggestListOrderRule = Nothing
         Me.cboPaperOrientation.TabIndex = 7

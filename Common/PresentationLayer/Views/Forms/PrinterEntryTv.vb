@@ -16,7 +16,7 @@ Namespace PresentationLayer.Views.Forms
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
-            FirstControl = txtPrinterName
+            FirstControl = cboPrinterName
             ' Add any initialization after the InitializeComponent() call.
         End Sub
 
@@ -33,10 +33,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PrinterName As String Implements IPrinterView.PrinterName
             Get
-                Return txtPrinterName.Text
+                Return cboPrinterName.Text
             End Get
             Set
-                txtPrinterName.Text = Value
+                cboPrinterName.Text = Value
             End Set
         End Property
 
@@ -85,15 +85,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property InstalledPrinter As String Implements IPrinterView.InstalledPrinter
-            Get
-                Return cboInstalledPrinter.GetValue()
-            End Get
-            Set(value As String)
-                txtPrinterName.SetValue(value)
-            End Set
-        End Property
-
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -105,8 +96,7 @@ Namespace PresentationLayer.Views.Forms
                 {"DefaultPaperSize", cboDefaultPaperSize},
                 {"DefaultPaperSource", cboDefaultPaperSource},
                 {"PrinterCode", txtPrinterCode},
-                {"PrinterName", txtPrinterName},
-                {"InstalledPrinter", cboInstalledPrinter}
+                {"PrinterName", cboPrinterName}
                 }
         End Sub
 
@@ -114,9 +104,9 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent CheckPrinterClicked(Me)
         End Sub
 
-        Private Sub txtPrinterName_Validated(sender As Object, e As EventArgs) Handles txtPrinterName.Validated
-            RaiseEvent PrinterChanged(Me)
-        End Sub
+        'Private Sub cboPrinterName_TextChanged(sender As Object, e As EventArgs) Handles cboPrinterName.TextChanged
+        '    'RaiseEvent PrinterChanged(Me)
+        'End Sub
 
         'Private Sub PrinterEntryTv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         '    Dim pkInstalledPrinters As String

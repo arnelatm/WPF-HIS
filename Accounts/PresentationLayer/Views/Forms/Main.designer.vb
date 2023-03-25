@@ -132,6 +132,7 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemPharmacy = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemDrugSale = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemDrugAcceptance = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemPurchaseEntry = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemItemMatcher = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemDosagePrinting = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemReports = New System.Windows.Forms.ToolStripMenuItem()
@@ -218,7 +219,7 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemPurchaseEntry = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemPrintJobs = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.AccountsMenu.SuspendLayout
@@ -358,7 +359,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'ToolStripMenuItemGeneral
         '
-        Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemDocuments, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemItems, Me.ToolStripMenuItemDefaultFieldValues, Me.ToolStripMenuItemSalesDepositTypes, Me.ToolStripMenuItemPrinters})
+        Me.ToolStripMenuItemGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBranches, Me.ToolStripMenuItemChartOfAccounts, Me.ToolStripMenuItemDepartments, Me.ToolStripMenuItemRevCostCenters, Me.ToolStripMenuItemRevenueGroups, Me.ToolStripMenuItemDistributionSchemes, Me.ToolStripSeparator4, Me.ToolStripMenuItemCountries, Me.ToolStripMenuItemDocuments, Me.ToolStripMenuItemPhoneTypes, Me.ToolStripMenuItemReligions, Me.ToolStripMenuItemBanks, Me.ToolStripMenuItemItems, Me.ToolStripMenuItemDefaultFieldValues, Me.ToolStripMenuItemSalesDepositTypes, Me.ToolStripMenuItemPrinters, Me.ToolStripMenuItemPrintJobs})
         Me.ToolStripMenuItemGeneral.Name = "ToolStripMenuItemGeneral"
         resources.ApplyResources(Me.ToolStripMenuItemGeneral, "ToolStripMenuItemGeneral")
         '
@@ -768,6 +769,11 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.ToolStripMenuItemDrugAcceptance.Name = "ToolStripMenuItemDrugAcceptance"
         resources.ApplyResources(Me.ToolStripMenuItemDrugAcceptance, "ToolStripMenuItemDrugAcceptance")
+        '
+        'ToolStripMenuItemPurchaseEntry
+        '
+        Me.ToolStripMenuItemPurchaseEntry.Name = "ToolStripMenuItemPurchaseEntry"
+        resources.ApplyResources(Me.ToolStripMenuItemPurchaseEntry, "ToolStripMenuItemPurchaseEntry")
         '
         'ToolStripMenuItemItemMatcher
         '
@@ -1217,10 +1223,10 @@ Namespace PresentationLayer.Views.Forms
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
         '
-        'ToolStripMenuItemPurchaseEntry
+        'ToolStripMenuItemPrintJobs
         '
-        Me.ToolStripMenuItemPurchaseEntry.Name = "ToolStripMenuItemPurchaseEntry"
-        resources.ApplyResources(Me.ToolStripMenuItemPurchaseEntry, "ToolStripMenuItemPurchaseEntry")
+        Me.ToolStripMenuItemPrintJobs.Name = "ToolStripMenuItemPrintJobs"
+        resources.ApplyResources(Me.ToolStripMenuItemPrintJobs, "ToolStripMenuItemPrintJobs")
         '
         'Main
         '
@@ -1438,5 +1444,6 @@ End Sub
         Friend WithEvents ToolStripMenuItemProduct As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemCategory As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemPurchaseEntry As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemPrintJobs As ToolStripMenuItem
     End Class
 End NameSpace

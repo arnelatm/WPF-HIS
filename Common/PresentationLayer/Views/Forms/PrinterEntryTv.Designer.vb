@@ -32,8 +32,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPrinterCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtPrinterCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblPrinterName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboInstalledPrinter = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.txtPrinterName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.cboPrinterName = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblHostName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtHostOrIpName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.LblDefaultPaperSource = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -88,9 +87,8 @@ Namespace PresentationLayer.Views.Forms
         Me.floDataDisplay.Controls.Add(Me.btnCheckPrinter)
         Me.floDataDisplay.Controls.Add(Me.lblPrinterCode)
         Me.floDataDisplay.Controls.Add(Me.txtPrinterCode)
-        Me.floDataDisplay.Controls.Add(Me.cboInstalledPrinter)
         Me.floDataDisplay.Controls.Add(Me.lblPrinterName)
-        Me.floDataDisplay.Controls.Add(Me.txtPrinterName)
+        Me.floDataDisplay.Controls.Add(Me.cboPrinterName)
         Me.floDataDisplay.Controls.Add(Me.lblHostName)
         Me.floDataDisplay.Controls.Add(Me.txtHostOrIpName)
         Me.floDataDisplay.Controls.Add(Me.LblDefaultPaperSource)
@@ -193,6 +191,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtPrinterCode.FieldName = Nothing
         Me.txtPrinterCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtPrinterCode.FindEnabled = false
+        Me.floDataDisplay.SetFlowBreak(Me.txtPrinterCode, true)
         Me.txtPrinterCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtPrinterCode.ForeColor = System.Drawing.Color.Black
         Me.txtPrinterCode.LinkedLabel = Me.lblPrinterName
@@ -214,7 +213,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPrinterName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.MyErrorProvider.SetIconAlignment(Me.lblPrinterName, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.lblPrinterName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPrinterName.Location = New System.Drawing.Point(11, 68)
+        Me.lblPrinterName.Location = New System.Drawing.Point(11, 67)
         Me.lblPrinterName.Margin = New System.Windows.Forms.Padding(1)
         Me.lblPrinterName.Name = "lblPrinterName"
         Me.lblPrinterName.Size = New System.Drawing.Size(144, 23)
@@ -223,80 +222,51 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPrinterName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.lblPrinterName.Translatable = true
         '
-        'cboInstalledPrinter
+        'cboPrinterName
         '
-        Me.cboInstalledPrinter.AlwaysEditable = false
-        Me.cboInstalledPrinter.BackColor = System.Drawing.Color.White
-        Me.cboInstalledPrinter.BegFindValue = Nothing
-        Me.cboInstalledPrinter.ChangingSearchValueOnly = false
-        Me.cboInstalledPrinter.CurrentSearchTerm = ""
-        Me.cboInstalledPrinter.DataValue = Nothing
-        Me.cboInstalledPrinter.DefaultValue = Nothing
-        Me.cboInstalledPrinter.DisplayMember = "Name"
-        Me.cboInstalledPrinter.EditingMode = true
-        Me.cboInstalledPrinter.EndFindValue = Nothing
-        Me.cboInstalledPrinter.FieldDescription = Nothing
-        Me.cboInstalledPrinter.FieldName = Nothing
-        Me.cboInstalledPrinter.FilterRule = Nothing
-        Me.cboInstalledPrinter.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboInstalledPrinter.FindEnabled = false
-        Me.cboInstalledPrinter.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.cboInstalledPrinter.ForeColor = System.Drawing.Color.Black
-        Me.cboInstalledPrinter.FormattingEnabled = true
-        Me.cboInstalledPrinter.HideWhenNotEditingOrAdding = false
-        Me.cboInstalledPrinter.IgnoreCase = false
-        Me.cboInstalledPrinter.IntegralHeight = false
-        Me.cboInstalledPrinter.LimitToList = false
-        Me.cboInstalledPrinter.LinkedLabel = Nothing
-        Me.cboInstalledPrinter.Location = New System.Drawing.Point(267, 42)
-        Me.cboInstalledPrinter.Margin = New System.Windows.Forms.Padding(1)
-        Me.cboInstalledPrinter.Name = "cboInstalledPrinter"
-        Me.cboInstalledPrinter.OldValue = 0
-        Me.cboInstalledPrinter.OriginalDataSource = Nothing
-        Me.cboInstalledPrinter.OriginalList = Nothing
-        Me.cboInstalledPrinter.OverrideDropDownStyleList = false
-        Me.cboInstalledPrinter.PreviousSearchTerm = Nothing
-        Me.cboInstalledPrinter.PropertySelector = Nothing
-        Me.cboInstalledPrinter.ReadOnlyCombo = false
-        Me.cboInstalledPrinter.Size = New System.Drawing.Size(311, 24)
-        Me.cboInstalledPrinter.SuggestBoxHeight = 200
-        Me.cboInstalledPrinter.SuggestListOrderRule = Nothing
-        Me.cboInstalledPrinter.TabIndex = 179
-        Me.cboInstalledPrinter.TextToSearch = Nothing
-        Me.cboInstalledPrinter.Translatable = false
-        Me.cboInstalledPrinter.ValueIsMandatory = false
-        Me.cboInstalledPrinter.ValueIsNullable = false
-        Me.cboInstalledPrinter.ValueIsNumeric = false
-        Me.cboInstalledPrinter.ValueMember = "IdNo"
-        '
-        'txtPrinterName
-        '
-        Me.txtPrinterName.BackColor = System.Drawing.Color.White
-        Me.txtPrinterName.BegFindValue = Nothing
-        Me.txtPrinterName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtPrinterName.ComputedValue = false
-        Me.txtPrinterName.CustomFormat = Nothing
-        Me.txtPrinterName.DataBoundControl = true
-        Me.txtPrinterName.EditingMode = true
-        Me.txtPrinterName.EndFindValue = Nothing
-        Me.txtPrinterName.FieldDescription = Nothing
-        Me.txtPrinterName.FieldName = Nothing
-        Me.txtPrinterName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtPrinterName.FindEnabled = false
-        Me.floDataDisplay.SetFlowBreak(Me.txtPrinterName, true)
-        Me.txtPrinterName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtPrinterName.ForeColor = System.Drawing.Color.Black
-        Me.txtPrinterName.LinkedLabel = Me.lblPrinterName
-        Me.txtPrinterName.Location = New System.Drawing.Point(157, 68)
-        Me.txtPrinterName.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtPrinterName.MaximumValue = Nothing
-        Me.txtPrinterName.MinimumValue = Nothing
-        Me.txtPrinterName.Name = "txtPrinterName"
-        Me.txtPrinterName.OldValue = "0"
-        Me.txtPrinterName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtPrinterName.Size = New System.Drawing.Size(423, 23)
-        Me.txtPrinterName.TabIndex = 2
-        Me.txtPrinterName.Translatable = false
+        Me.cboPrinterName.AlwaysEditable = false
+        Me.cboPrinterName.BackColor = System.Drawing.Color.White
+        Me.cboPrinterName.BegFindValue = Nothing
+        Me.cboPrinterName.ChangingSearchValueOnly = false
+        Me.cboPrinterName.CurrentSearchTerm = ""
+        Me.cboPrinterName.DataValue = Nothing
+        Me.cboPrinterName.DefaultValue = Nothing
+        Me.cboPrinterName.DisplayMember = "Name"
+        Me.cboPrinterName.EditingMode = true
+        Me.cboPrinterName.EndFindValue = Nothing
+        Me.cboPrinterName.FieldDescription = Nothing
+        Me.cboPrinterName.FieldName = Nothing
+        Me.cboPrinterName.FilterRule = Nothing
+        Me.cboPrinterName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboPrinterName.FindEnabled = false
+        Me.cboPrinterName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.cboPrinterName.ForeColor = System.Drawing.Color.Black
+        Me.cboPrinterName.FormattingEnabled = true
+        Me.cboPrinterName.HideWhenNotEditingOrAdding = false
+        Me.cboPrinterName.IgnoreCase = false
+        Me.cboPrinterName.IntegralHeight = false
+        Me.cboPrinterName.LimitToList = false
+        Me.cboPrinterName.LinkedLabel = Nothing
+        Me.cboPrinterName.Location = New System.Drawing.Point(157, 67)
+        Me.cboPrinterName.Margin = New System.Windows.Forms.Padding(1)
+        Me.cboPrinterName.Name = "cboPrinterName"
+        Me.cboPrinterName.OldValue = 0
+        Me.cboPrinterName.OriginalDataSource = Nothing
+        Me.cboPrinterName.OriginalList = Nothing
+        Me.cboPrinterName.OverrideDropDownStyleList = false
+        Me.cboPrinterName.PreviousSearchTerm = Nothing
+        Me.cboPrinterName.PropertySelector = Nothing
+        Me.cboPrinterName.ReadOnlyCombo = false
+        Me.cboPrinterName.Size = New System.Drawing.Size(423, 24)
+        Me.cboPrinterName.SuggestBoxHeight = 200
+        Me.cboPrinterName.SuggestListOrderRule = Nothing
+        Me.cboPrinterName.TabIndex = 179
+        Me.cboPrinterName.TextToSearch = Nothing
+        Me.cboPrinterName.Translatable = false
+        Me.cboPrinterName.ValueIsMandatory = false
+        Me.cboPrinterName.ValueIsNullable = false
+        Me.cboPrinterName.ValueIsNumeric = false
+        Me.cboPrinterName.ValueMember = "IdNo"
         '
         'lblHostName
         '
@@ -559,7 +529,6 @@ End Sub
         Friend WithEvents LblDefaultPaperSize As CLabel
         Friend WithEvents LblDefaultPaperOrientation As CLabel
         Friend WithEvents lblPrinterName As CLabel
-        Friend WithEvents txtPrinterName As CTextBox
         Friend WithEvents cboDefaultPaperSource As CaComboBox
         Friend WithEvents cboDefaultPaperSize As CaComboBox
         Friend WithEvents cboDefaultPaperOrientation As CaComboBox
@@ -567,6 +536,6 @@ End Sub
         Friend WithEvents lblHostName As CLabel
         Friend WithEvents txtHostOrIpName As CTextBox
         Friend WithEvents btnCheckPrinter As CButton
-        Friend WithEvents cboInstalledPrinter As CaComboBox
+        Friend WithEvents cboPrinterName As CaComboBox
     End Class
 End Namespace
