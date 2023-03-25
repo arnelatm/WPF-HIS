@@ -72,6 +72,7 @@ Namespace PresentationLayer.Presenters
         Private Sub UpdatePrinterDataSource()
             SetPrinterSupportedPaper(View.PrinterName)
             SetPrinterSupportedSources(View.PrinterName)
+            SetInstalledPrinter()
         End Sub
 
         Private Sub SetPrinterSupportedPaper(pPrinterName As String)
@@ -108,6 +109,26 @@ Namespace PresentationLayer.Presenters
             Dim savedDefaultPaperSource As Int32? = View.DefaultPaperSource
             GetControlName("DefaultPaperSource").DataSource = paperSourceLookup
             View.DefaultPaperSource = savedDefaultPaperSource
+        End Sub
+       
+        Private Sub SetInstalledPrinter()
+            Dim data As New List(Of Lookup.LookupData)
+            ' Find all printers installed
+            Dim index As Int16 = 0
+            For Each item In PrinterSettings.InstalledPrinters
+
+            '    cboThisPrinter.Items.Add(pkInstalledPrinters)
+            'Next pkInstalledPrinters
+            'For Each item As PaperSize In data.PrinterSettings.PaperSizes
+                Dim dbLookup = New Lookup.LookupData
+                dbLookup.IdNo = index
+                dbLookup.Name = item
+                dbLookup.Code = item
+                dbLookup.Index = index
+                data.Add(dbLookup)
+                index += 1
+            Next
+            GetControlName("InstalledPrinter").DataSource = data
         End Sub
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized

@@ -32,6 +32,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPrinterCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtPrinterCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblPrinterName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboInstalledPrinter = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.txtPrinterName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblHostName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtHostOrIpName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -87,6 +88,7 @@ Namespace PresentationLayer.Views.Forms
         Me.floDataDisplay.Controls.Add(Me.btnCheckPrinter)
         Me.floDataDisplay.Controls.Add(Me.lblPrinterCode)
         Me.floDataDisplay.Controls.Add(Me.txtPrinterCode)
+        Me.floDataDisplay.Controls.Add(Me.cboInstalledPrinter)
         Me.floDataDisplay.Controls.Add(Me.lblPrinterName)
         Me.floDataDisplay.Controls.Add(Me.txtPrinterName)
         Me.floDataDisplay.Controls.Add(Me.lblHostName)
@@ -191,7 +193,6 @@ Namespace PresentationLayer.Views.Forms
         Me.txtPrinterCode.FieldName = Nothing
         Me.txtPrinterCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.txtPrinterCode.FindEnabled = false
-        Me.floDataDisplay.SetFlowBreak(Me.txtPrinterCode, true)
         Me.txtPrinterCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtPrinterCode.ForeColor = System.Drawing.Color.Black
         Me.txtPrinterCode.LinkedLabel = Me.lblPrinterName
@@ -213,7 +214,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPrinterName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.MyErrorProvider.SetIconAlignment(Me.lblPrinterName, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.lblPrinterName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPrinterName.Location = New System.Drawing.Point(11, 67)
+        Me.lblPrinterName.Location = New System.Drawing.Point(11, 68)
         Me.lblPrinterName.Margin = New System.Windows.Forms.Padding(1)
         Me.lblPrinterName.Name = "lblPrinterName"
         Me.lblPrinterName.Size = New System.Drawing.Size(144, 23)
@@ -221,6 +222,52 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPrinterName.Text = "Printer Name"
         Me.lblPrinterName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.lblPrinterName.Translatable = true
+        '
+        'cboInstalledPrinter
+        '
+        Me.cboInstalledPrinter.AlwaysEditable = false
+        Me.cboInstalledPrinter.BackColor = System.Drawing.Color.White
+        Me.cboInstalledPrinter.BegFindValue = Nothing
+        Me.cboInstalledPrinter.ChangingSearchValueOnly = false
+        Me.cboInstalledPrinter.CurrentSearchTerm = ""
+        Me.cboInstalledPrinter.DataValue = Nothing
+        Me.cboInstalledPrinter.DefaultValue = Nothing
+        Me.cboInstalledPrinter.DisplayMember = "Name"
+        Me.cboInstalledPrinter.EditingMode = true
+        Me.cboInstalledPrinter.EndFindValue = Nothing
+        Me.cboInstalledPrinter.FieldDescription = Nothing
+        Me.cboInstalledPrinter.FieldName = Nothing
+        Me.cboInstalledPrinter.FilterRule = Nothing
+        Me.cboInstalledPrinter.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboInstalledPrinter.FindEnabled = false
+        Me.cboInstalledPrinter.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.cboInstalledPrinter.ForeColor = System.Drawing.Color.Black
+        Me.cboInstalledPrinter.FormattingEnabled = true
+        Me.cboInstalledPrinter.HideWhenNotEditingOrAdding = false
+        Me.cboInstalledPrinter.IgnoreCase = false
+        Me.cboInstalledPrinter.IntegralHeight = false
+        Me.cboInstalledPrinter.LimitToList = false
+        Me.cboInstalledPrinter.LinkedLabel = Nothing
+        Me.cboInstalledPrinter.Location = New System.Drawing.Point(267, 42)
+        Me.cboInstalledPrinter.Margin = New System.Windows.Forms.Padding(1)
+        Me.cboInstalledPrinter.Name = "cboInstalledPrinter"
+        Me.cboInstalledPrinter.OldValue = 0
+        Me.cboInstalledPrinter.OriginalDataSource = Nothing
+        Me.cboInstalledPrinter.OriginalList = Nothing
+        Me.cboInstalledPrinter.OverrideDropDownStyleList = false
+        Me.cboInstalledPrinter.PreviousSearchTerm = Nothing
+        Me.cboInstalledPrinter.PropertySelector = Nothing
+        Me.cboInstalledPrinter.ReadOnlyCombo = false
+        Me.cboInstalledPrinter.Size = New System.Drawing.Size(311, 24)
+        Me.cboInstalledPrinter.SuggestBoxHeight = 200
+        Me.cboInstalledPrinter.SuggestListOrderRule = Nothing
+        Me.cboInstalledPrinter.TabIndex = 179
+        Me.cboInstalledPrinter.TextToSearch = Nothing
+        Me.cboInstalledPrinter.Translatable = false
+        Me.cboInstalledPrinter.ValueIsMandatory = false
+        Me.cboInstalledPrinter.ValueIsNullable = false
+        Me.cboInstalledPrinter.ValueIsNumeric = false
+        Me.cboInstalledPrinter.ValueMember = "IdNo"
         '
         'txtPrinterName
         '
@@ -240,7 +287,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtPrinterName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtPrinterName.ForeColor = System.Drawing.Color.Black
         Me.txtPrinterName.LinkedLabel = Me.lblPrinterName
-        Me.txtPrinterName.Location = New System.Drawing.Point(157, 67)
+        Me.txtPrinterName.Location = New System.Drawing.Point(157, 68)
         Me.txtPrinterName.Margin = New System.Windows.Forms.Padding(1)
         Me.txtPrinterName.MaximumValue = Nothing
         Me.txtPrinterName.MinimumValue = Nothing
@@ -258,7 +305,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblHostName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.MyErrorProvider.SetIconAlignment(Me.lblHostName, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.lblHostName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblHostName.Location = New System.Drawing.Point(11, 92)
+        Me.lblHostName.Location = New System.Drawing.Point(11, 93)
         Me.lblHostName.Margin = New System.Windows.Forms.Padding(1)
         Me.lblHostName.Name = "lblHostName"
         Me.lblHostName.Size = New System.Drawing.Size(144, 23)
@@ -285,7 +332,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtHostOrIpName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtHostOrIpName.ForeColor = System.Drawing.Color.Black
         Me.txtHostOrIpName.LinkedLabel = Me.lblHostName
-        Me.txtHostOrIpName.Location = New System.Drawing.Point(157, 92)
+        Me.txtHostOrIpName.Location = New System.Drawing.Point(157, 93)
         Me.txtHostOrIpName.Margin = New System.Windows.Forms.Padding(1)
         Me.txtHostOrIpName.MaximumValue = Nothing
         Me.txtHostOrIpName.MinimumValue = Nothing
@@ -303,7 +350,7 @@ Namespace PresentationLayer.Views.Forms
         Me.LblDefaultPaperSource.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.MyErrorProvider.SetIconAlignment(Me.LblDefaultPaperSource, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.LblDefaultPaperSource.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.LblDefaultPaperSource.Location = New System.Drawing.Point(11, 117)
+        Me.LblDefaultPaperSource.Location = New System.Drawing.Point(11, 118)
         Me.LblDefaultPaperSource.Margin = New System.Windows.Forms.Padding(1)
         Me.LblDefaultPaperSource.Name = "LblDefaultPaperSource"
         Me.LblDefaultPaperSource.Size = New System.Drawing.Size(144, 23)
@@ -336,8 +383,9 @@ Namespace PresentationLayer.Views.Forms
         Me.cboDefaultPaperSource.HideWhenNotEditingOrAdding = false
         Me.cboDefaultPaperSource.IgnoreCase = false
         Me.cboDefaultPaperSource.IntegralHeight = false
+        Me.cboDefaultPaperSource.LimitToList = false
         Me.cboDefaultPaperSource.LinkedLabel = Me.LblDefaultPaperSource
-        Me.cboDefaultPaperSource.Location = New System.Drawing.Point(157, 117)
+        Me.cboDefaultPaperSource.Location = New System.Drawing.Point(157, 118)
         Me.cboDefaultPaperSource.Margin = New System.Windows.Forms.Padding(1)
         Me.cboDefaultPaperSource.Name = "cboDefaultPaperSource"
         Me.cboDefaultPaperSource.OldValue = 0
@@ -365,7 +413,7 @@ Namespace PresentationLayer.Views.Forms
         Me.LblDefaultPaperSize.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.MyErrorProvider.SetIconAlignment(Me.LblDefaultPaperSize, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.LblDefaultPaperSize.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.LblDefaultPaperSize.Location = New System.Drawing.Point(11, 143)
+        Me.LblDefaultPaperSize.Location = New System.Drawing.Point(11, 144)
         Me.LblDefaultPaperSize.Margin = New System.Windows.Forms.Padding(1)
         Me.LblDefaultPaperSize.Name = "LblDefaultPaperSize"
         Me.LblDefaultPaperSize.Size = New System.Drawing.Size(144, 23)
@@ -398,8 +446,9 @@ Namespace PresentationLayer.Views.Forms
         Me.cboDefaultPaperSize.HideWhenNotEditingOrAdding = false
         Me.cboDefaultPaperSize.IgnoreCase = false
         Me.cboDefaultPaperSize.IntegralHeight = false
+        Me.cboDefaultPaperSize.LimitToList = false
         Me.cboDefaultPaperSize.LinkedLabel = Me.LblDefaultPaperSize
-        Me.cboDefaultPaperSize.Location = New System.Drawing.Point(157, 143)
+        Me.cboDefaultPaperSize.Location = New System.Drawing.Point(157, 144)
         Me.cboDefaultPaperSize.Margin = New System.Windows.Forms.Padding(1)
         Me.cboDefaultPaperSize.Name = "cboDefaultPaperSize"
         Me.cboDefaultPaperSize.OldValue = 0
@@ -427,7 +476,7 @@ Namespace PresentationLayer.Views.Forms
         Me.LblDefaultPaperOrientation.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.MyErrorProvider.SetIconAlignment(Me.LblDefaultPaperOrientation, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.LblDefaultPaperOrientation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.LblDefaultPaperOrientation.Location = New System.Drawing.Point(11, 169)
+        Me.LblDefaultPaperOrientation.Location = New System.Drawing.Point(11, 170)
         Me.LblDefaultPaperOrientation.Margin = New System.Windows.Forms.Padding(1)
         Me.LblDefaultPaperOrientation.Name = "LblDefaultPaperOrientation"
         Me.LblDefaultPaperOrientation.Size = New System.Drawing.Size(144, 23)
@@ -459,8 +508,9 @@ Namespace PresentationLayer.Views.Forms
         Me.cboDefaultPaperOrientation.HideWhenNotEditingOrAdding = false
         Me.cboDefaultPaperOrientation.IgnoreCase = false
         Me.cboDefaultPaperOrientation.IntegralHeight = false
+        Me.cboDefaultPaperOrientation.LimitToList = false
         Me.cboDefaultPaperOrientation.LinkedLabel = Me.LblDefaultPaperOrientation
-        Me.cboDefaultPaperOrientation.Location = New System.Drawing.Point(157, 169)
+        Me.cboDefaultPaperOrientation.Location = New System.Drawing.Point(157, 170)
         Me.cboDefaultPaperOrientation.Margin = New System.Windows.Forms.Padding(1)
         Me.cboDefaultPaperOrientation.Name = "cboDefaultPaperOrientation"
         Me.cboDefaultPaperOrientation.OldValue = 0
@@ -517,5 +567,6 @@ End Sub
         Friend WithEvents lblHostName As CLabel
         Friend WithEvents txtHostOrIpName As CTextBox
         Friend WithEvents btnCheckPrinter As CButton
+        Friend WithEvents cboInstalledPrinter As CaComboBox
     End Class
 End Namespace

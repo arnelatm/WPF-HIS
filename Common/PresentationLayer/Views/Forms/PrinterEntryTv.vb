@@ -85,6 +85,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property InstalledPrinter As String Implements IPrinterView.InstalledPrinter
+            Get
+                Return cboInstalledPrinter.GetValue()
+            End Get
+            Set(value As String)
+                txtPrinterName.SetValue(value)
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -96,7 +105,8 @@ Namespace PresentationLayer.Views.Forms
                 {"DefaultPaperSize", cboDefaultPaperSize},
                 {"DefaultPaperSource", cboDefaultPaperSource},
                 {"PrinterCode", txtPrinterCode},
-                {"PrinterName", txtPrinterName}
+                {"PrinterName", txtPrinterName},
+                {"InstalledPrinter", cboInstalledPrinter}
                 }
         End Sub
 
@@ -107,6 +117,17 @@ Namespace PresentationLayer.Views.Forms
         Private Sub txtPrinterName_Validated(sender As Object, e As EventArgs) Handles txtPrinterName.Validated
             RaiseEvent PrinterChanged(Me)
         End Sub
+
+        'Private Sub PrinterEntryTv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        '    Dim pkInstalledPrinters As String
+        '    ' Find all printers installed
+        '    For Each pkInstalledPrinters In PrinterSettings.InstalledPrinters
+        '        cboInstalledPrinter.Items.Add(pkInstalledPrinters)
+        '    Next pkInstalledPrinters
+        '    ' Set the combo to the first printer in the list
+        '    cboInstalledPrinter.SelectedIndex = 0
+        'End Sub
+
 
         'Private Sub SetPrinterPropertiesLookup(pPrinterName As String)
         '    Dim data = GetPrinterPageInfo(pPrinterName)
