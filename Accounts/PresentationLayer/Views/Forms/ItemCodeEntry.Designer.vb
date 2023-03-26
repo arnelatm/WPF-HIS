@@ -253,6 +253,7 @@ Namespace PresentationLayer.Views.Forms
         '
         'cboCodeGroupIdNo
         '
+        Me.cboCodeGroupIdNo.AlwaysEditable = false
         Me.cboCodeGroupIdNo.BackColor = System.Drawing.Color.White
         Me.cboCodeGroupIdNo.BegFindValue = Nothing
         Me.cboCodeGroupIdNo.ChangingSearchValueOnly = false
@@ -272,6 +273,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboCodeGroupIdNo.FormattingEnabled = true
         Me.cboCodeGroupIdNo.HideWhenNotEditingOrAdding = false
         Me.cboCodeGroupIdNo.IgnoreCase = false
+        Me.cboCodeGroupIdNo.LimitToList = false
         Me.cboCodeGroupIdNo.LinkedLabel = Nothing
         Me.cboCodeGroupIdNo.Name = "cboCodeGroupIdNo"
         Me.cboCodeGroupIdNo.OldValue = 0
