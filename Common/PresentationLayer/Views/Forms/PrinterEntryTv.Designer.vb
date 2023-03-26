@@ -55,13 +55,13 @@ Namespace PresentationLayer.Views.Forms
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.floDataDisplay)
-        Me.SplitContainer1.Size = New System.Drawing.Size(896, 329)
-        Me.SplitContainer1.SplitterDistance = 296
+        Me.SplitContainer1.Size = New System.Drawing.Size(955, 329)
+        Me.SplitContainer1.SplitterDistance = 315
         '
         'FormTreeView
         '
         Me.FormTreeView.LineColor = System.Drawing.Color.Black
-        Me.FormTreeView.Size = New System.Drawing.Size(296, 329)
+        Me.FormTreeView.Size = New System.Drawing.Size(315, 329)
         '
         'ImageListTreeView
         '
@@ -102,7 +102,7 @@ Namespace PresentationLayer.Views.Forms
         Me.floDataDisplay.MinimumSize = New System.Drawing.Size(440, 300)
         Me.floDataDisplay.Name = "floDataDisplay"
         Me.floDataDisplay.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
-        Me.floDataDisplay.Size = New System.Drawing.Size(590, 329)
+        Me.floDataDisplay.Size = New System.Drawing.Size(630, 329)
         Me.floDataDisplay.TabIndex = 148
         '
         'lblIdNo
@@ -114,9 +114,9 @@ Namespace PresentationLayer.Views.Forms
         Me.lblIdNo.Location = New System.Drawing.Point(11, 11)
         Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblIdNo.Name = "lblIdNo"
-        Me.lblIdNo.Size = New System.Drawing.Size(144, 23)
+        Me.lblIdNo.Size = New System.Drawing.Size(183, 23)
         Me.lblIdNo.TabIndex = 150
-        Me.lblIdNo.Text = "Print Job ID No."
+        Me.lblIdNo.Text = "Printer ID No."
         Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.lblIdNo.Translatable = true
         '
@@ -137,7 +137,7 @@ Namespace PresentationLayer.Views.Forms
         Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
         Me.TxtIdNo.LinkedLabel = Me.lblIdNo
-        Me.TxtIdNo.Location = New System.Drawing.Point(157, 11)
+        Me.TxtIdNo.Location = New System.Drawing.Point(196, 11)
         Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.TxtIdNo.MaximumValue = Nothing
         Me.TxtIdNo.MinimumValue = Nothing
@@ -153,7 +153,7 @@ Namespace PresentationLayer.Views.Forms
         Me.btnCheckPrinter.DesignerSelected = false
         Me.floDataDisplay.SetFlowBreak(Me.btnCheckPrinter, true)
         Me.btnCheckPrinter.ImageIndex = 0
-        Me.btnCheckPrinter.Location = New System.Drawing.Point(223, 13)
+        Me.btnCheckPrinter.Location = New System.Drawing.Point(262, 13)
         Me.btnCheckPrinter.Name = "btnCheckPrinter"
         Me.btnCheckPrinter.OriginalImageName = Nothing
         Me.btnCheckPrinter.SecurityKey = ""
@@ -171,7 +171,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPrinterCode.Location = New System.Drawing.Point(11, 42)
         Me.lblPrinterCode.Margin = New System.Windows.Forms.Padding(1)
         Me.lblPrinterCode.Name = "lblPrinterCode"
-        Me.lblPrinterCode.Size = New System.Drawing.Size(144, 23)
+        Me.lblPrinterCode.Size = New System.Drawing.Size(183, 23)
         Me.lblPrinterCode.TabIndex = 157
         Me.lblPrinterCode.Text = "Printer Code"
         Me.lblPrinterCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -195,7 +195,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtPrinterCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtPrinterCode.ForeColor = System.Drawing.Color.Black
         Me.txtPrinterCode.LinkedLabel = Me.lblPrinterName
-        Me.txtPrinterCode.Location = New System.Drawing.Point(157, 42)
+        Me.txtPrinterCode.Location = New System.Drawing.Point(196, 42)
         Me.txtPrinterCode.Margin = New System.Windows.Forms.Padding(1)
         Me.txtPrinterCode.MaximumValue = Nothing
         Me.txtPrinterCode.MinimumValue = Nothing
@@ -216,7 +216,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPrinterName.Location = New System.Drawing.Point(11, 67)
         Me.lblPrinterName.Margin = New System.Windows.Forms.Padding(1)
         Me.lblPrinterName.Name = "lblPrinterName"
-        Me.lblPrinterName.Size = New System.Drawing.Size(144, 23)
+        Me.lblPrinterName.Size = New System.Drawing.Size(183, 23)
         Me.lblPrinterName.TabIndex = 165
         Me.lblPrinterName.Text = "Printer Name"
         Me.lblPrinterName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -247,7 +247,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPrinterName.IntegralHeight = false
         Me.cboPrinterName.LimitToList = false
         Me.cboPrinterName.LinkedLabel = Nothing
-        Me.cboPrinterName.Location = New System.Drawing.Point(157, 67)
+        Me.cboPrinterName.Location = New System.Drawing.Point(196, 67)
         Me.cboPrinterName.Margin = New System.Windows.Forms.Padding(1)
         Me.cboPrinterName.Name = "cboPrinterName"
         Me.cboPrinterName.OldValue = 0
@@ -278,7 +278,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblHostName.Location = New System.Drawing.Point(11, 93)
         Me.lblHostName.Margin = New System.Windows.Forms.Padding(1)
         Me.lblHostName.Name = "lblHostName"
-        Me.lblHostName.Size = New System.Drawing.Size(144, 23)
+        Me.lblHostName.Size = New System.Drawing.Size(183, 23)
         Me.lblHostName.TabIndex = 176
         Me.lblHostName.Text = "Host or IP Name"
         Me.lblHostName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -302,7 +302,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtHostOrIpName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtHostOrIpName.ForeColor = System.Drawing.Color.Black
         Me.txtHostOrIpName.LinkedLabel = Me.lblHostName
-        Me.txtHostOrIpName.Location = New System.Drawing.Point(157, 93)
+        Me.txtHostOrIpName.Location = New System.Drawing.Point(196, 93)
         Me.txtHostOrIpName.Margin = New System.Windows.Forms.Padding(1)
         Me.txtHostOrIpName.MaximumValue = Nothing
         Me.txtHostOrIpName.MinimumValue = Nothing
@@ -323,9 +323,9 @@ Namespace PresentationLayer.Views.Forms
         Me.LblDefaultPaperSource.Location = New System.Drawing.Point(11, 118)
         Me.LblDefaultPaperSource.Margin = New System.Windows.Forms.Padding(1)
         Me.LblDefaultPaperSource.Name = "LblDefaultPaperSource"
-        Me.LblDefaultPaperSource.Size = New System.Drawing.Size(144, 23)
+        Me.LblDefaultPaperSource.Size = New System.Drawing.Size(183, 23)
         Me.LblDefaultPaperSource.TabIndex = 159
-        Me.LblDefaultPaperSource.Text = "Paper Source"
+        Me.LblDefaultPaperSource.Text = "Default Paper Source"
         Me.LblDefaultPaperSource.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.LblDefaultPaperSource.Translatable = true
         '
@@ -355,7 +355,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboDefaultPaperSource.IntegralHeight = false
         Me.cboDefaultPaperSource.LimitToList = false
         Me.cboDefaultPaperSource.LinkedLabel = Me.LblDefaultPaperSource
-        Me.cboDefaultPaperSource.Location = New System.Drawing.Point(157, 118)
+        Me.cboDefaultPaperSource.Location = New System.Drawing.Point(196, 118)
         Me.cboDefaultPaperSource.Margin = New System.Windows.Forms.Padding(1)
         Me.cboDefaultPaperSource.Name = "cboDefaultPaperSource"
         Me.cboDefaultPaperSource.OldValue = 0
@@ -386,9 +386,9 @@ Namespace PresentationLayer.Views.Forms
         Me.LblDefaultPaperSize.Location = New System.Drawing.Point(11, 144)
         Me.LblDefaultPaperSize.Margin = New System.Windows.Forms.Padding(1)
         Me.LblDefaultPaperSize.Name = "LblDefaultPaperSize"
-        Me.LblDefaultPaperSize.Size = New System.Drawing.Size(144, 23)
+        Me.LblDefaultPaperSize.Size = New System.Drawing.Size(183, 23)
         Me.LblDefaultPaperSize.TabIndex = 161
-        Me.LblDefaultPaperSize.Text = "Paper Size"
+        Me.LblDefaultPaperSize.Text = "Default Paper Size"
         Me.LblDefaultPaperSize.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.LblDefaultPaperSize.Translatable = true
         '
@@ -418,7 +418,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboDefaultPaperSize.IntegralHeight = false
         Me.cboDefaultPaperSize.LimitToList = false
         Me.cboDefaultPaperSize.LinkedLabel = Me.LblDefaultPaperSize
-        Me.cboDefaultPaperSize.Location = New System.Drawing.Point(157, 144)
+        Me.cboDefaultPaperSize.Location = New System.Drawing.Point(196, 144)
         Me.cboDefaultPaperSize.Margin = New System.Windows.Forms.Padding(1)
         Me.cboDefaultPaperSize.Name = "cboDefaultPaperSize"
         Me.cboDefaultPaperSize.OldValue = 0
@@ -449,9 +449,9 @@ Namespace PresentationLayer.Views.Forms
         Me.LblDefaultPaperOrientation.Location = New System.Drawing.Point(11, 170)
         Me.LblDefaultPaperOrientation.Margin = New System.Windows.Forms.Padding(1)
         Me.LblDefaultPaperOrientation.Name = "LblDefaultPaperOrientation"
-        Me.LblDefaultPaperOrientation.Size = New System.Drawing.Size(144, 23)
+        Me.LblDefaultPaperOrientation.Size = New System.Drawing.Size(183, 23)
         Me.LblDefaultPaperOrientation.TabIndex = 163
-        Me.LblDefaultPaperOrientation.Text = "Paper Orientation"
+        Me.LblDefaultPaperOrientation.Text = "Default Paper Orientation"
         Me.LblDefaultPaperOrientation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.LblDefaultPaperOrientation.Translatable = true
         '
@@ -480,7 +480,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboDefaultPaperOrientation.IntegralHeight = false
         Me.cboDefaultPaperOrientation.LimitToList = false
         Me.cboDefaultPaperOrientation.LinkedLabel = Me.LblDefaultPaperOrientation
-        Me.cboDefaultPaperOrientation.Location = New System.Drawing.Point(157, 170)
+        Me.cboDefaultPaperOrientation.Location = New System.Drawing.Point(196, 170)
         Me.cboDefaultPaperOrientation.Margin = New System.Windows.Forms.Padding(1)
         Me.cboDefaultPaperOrientation.Name = "cboDefaultPaperOrientation"
         Me.cboDefaultPaperOrientation.OldValue = 0
@@ -504,7 +504,7 @@ Namespace PresentationLayer.Views.Forms
         'PrinterEntryTv
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
-        Me.ClientSize = New System.Drawing.Size(896, 382)
+        Me.ClientSize = New System.Drawing.Size(955, 382)
         Me.MinimumSize = New System.Drawing.Size(703, 404)
         Me.Name = "PrinterEntryTv"
         Me.Text = "Printer Maintenance Form"

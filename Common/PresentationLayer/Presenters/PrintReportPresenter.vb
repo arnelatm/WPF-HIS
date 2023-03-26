@@ -21,7 +21,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub ProcessReport(reportFileName As String, databaseConnectionName As String, print As Boolean, Optional args() As Object = Nothing, Optional copies As Int16 = 1, Optional collate As Boolean = False, Optional startPage As Int16 = 0, Optional endPage As Int16 = 0)
             Dim report As New ReportPrinter(reportFileName, databaseConnectionName, args)
-            Dim pjModel As New PrintJobModel
+            Dim pjModel As New PrintSetupModel
             Dim printer As PrinterModel = Nothing
             Dim computerName As String = Environment.MachineName
             Dim printSetupIdNo As Int32 = _service.GetPrintSetupIdNo(reportFileName)
@@ -29,7 +29,7 @@ Namespace PresentationLayer.Presenters
                 Dim computerIdNo As Int16 = _service.GetIdNoWithName(Of Int16)("Computer", computerName)
                 Dim printJobIdNo As Int32 = GetPrintJobIdNo(computerIdNo, printSetupIdNo)
                 If Not (computerIdNo = 0 Or printJobIdNo = 0) Then
-                    pjModel = _service.GetRecordByIdNo(Of PrintJobModel)(printJobIdNo)
+                    pjModel = _service.GetRecordByIdNo(Of PrintSetupModel)(printJobIdNo)
                     Dim printerName As String = _service.GetFieldWithIdNo(pjModel.PrinterIdNo, "Printer", "PrinterName").ToString()  ' force null value to empty string
                     Dim hostOrIpName As String = _service.GetFieldWithIdNo(pjModel.IdNo, "Printer", "HostOrIpName").ToString()
                     Dim printerSharedName As String = IIf(GlobalFunctions.IsEmpty(hostOrIpName), printerName, "\\" & hostOrIpName & "\" & printerName)
