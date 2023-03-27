@@ -12,6 +12,8 @@ Namespace PresentationLayer.Views.Interface
         Property PaperSource As Int16
         Property PrinterIdNo As Int16
         Property PrintJobIdNo As Int16
+        Property PrintSetupCode As String
+        Property PrintSetupName As String
         Event PrinterChanged(sender As Object)
     End Interface
 

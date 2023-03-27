@@ -18,14 +18,16 @@ Namespace DataLayer.AdoNet
                                   "PaperSize," &
                                   "PaperSource," &
                                   "PrinterIdNo," &
-                                  "PrintJobIdNo"
+                                  "PrintJobIdNo," &
+                                  "PrintSetupCode," &
+                                  "PrintSetupName"
 
         'Public Function GetPrintSetupByName(PrintJobIdNo As String) As PrintSetup Implements iDao(Of PrintSetup).GetPrintSetupByName
         '    Throw New NotImplementedException
         'End Function
 
         Public Function GetRecordByIdNo(idNo) As PrintSetup Implements IDao(Of PrintSetup).GetRecordByIdNo
-            Dim sql As String = "Select " & FieldList & " FROM [PrintSetup] " &
+            Dim sql As String = "Select " & FieldList & " FROM [PrintSetup_View] " &
                     "WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Return _db.Read(sql, Make, params).FirstOrDefault()
@@ -61,7 +63,9 @@ Namespace DataLayer.AdoNet
             .PaperSize = Extensions.AsNullable(Of Int16)(reader("PaperSize")),
             .PaperSource = Extensions.AsNullable(Of Int16)(reader("PaperSource")),
             .PrinterIdNo = Extensions.AsNullable(Of Int16)(reader("PrinterIdNo")),
-            .PrintJobIdNo = Extensions.AsNullable(Of Int16)(reader("PrintJobIdNo"))
+            .PrintJobIdNo = Extensions.AsNullable(Of Int16)(reader("PrintJobIdNo")),
+            .PrintSetupCode = Extensions.AsString(reader("PrintSetupCode")),
+            .PrintSetupName = Extensions.AsString(reader("PrintSetupName"))
             }
 
         Private Function Take(PrintSetup As PrintSetup) As Object()
