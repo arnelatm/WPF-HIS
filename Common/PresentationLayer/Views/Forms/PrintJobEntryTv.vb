@@ -13,9 +13,11 @@ Namespace PresentationLayer.Views.Forms
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
-            FirstControl = cboPrintSetupIdNo
+            FirstControl = txtPrintJobName
             ' Add any initialization after the InitializeComponent() call.
         End Sub
+
+        Public Event PrinterChanged(sender As Object) Implements IPrintJobView.PrinterChanged
 
 #Region "Fields"
 
@@ -28,25 +30,16 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PrintJobName As Int32? Implements IPrintJobView.PrintJobName
+        Public Property PrintJobName As String Implements IPrintJobView.PrintJobName
             Get
-                Return cboPrintSetupIdNo.GetValue()
+                Return txtPrintJobName.Text
             End Get
             Set
-                cboPrintSetupIdNo.SetValue(Value)
+                txtPrintJobName.SetValue(Value)
             End Set
         End Property
 
-        Public Property ComputerIdNo As Int16 Implements IPrintJobView.ComputerIdNo
-            Get
-                Return cboComputerIdNo.GetValue()
-            End Get
-            Set
-                cboComputerIdNo.SetValue(Value)
-            End Set
-        End Property
-
-        Public Property PaperSize As Int32? Implements IPrintJobView.PaperSize
+        Public Property PaperSize As Int16 Implements IPrintJobView.PaperSize
             Get
                 Return cboPaperSize.GetValue()
             End Get
@@ -55,7 +48,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PaperSource As Int32? Implements IPrintJobView.PaperSource
+        Public Property PaperSource As Int16 Implements IPrintJobView.PaperSource
             Get
                 Return cboPaperSource.GetValue()
             End Get
@@ -64,7 +57,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PrinterIdNo As Int16? Implements IPrintJobView.PrinterIdNo
+        Public Property PrinterIdNo As Int16 Implements IPrintJobView.PrinterIdNo
             Get
                 Return cboPrinterIdNo.GetValue()
             End Get
@@ -73,7 +66,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PaperOrientation As Int32? Implements IPrintJobView.PaperOrientation
+        Public Property PaperOrientation As Int16 Implements IPrintJobView.PaperOrientation
             Get
                 Return cboPaperOrientation.GetValue()
             End Get
@@ -82,82 +75,47 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property PrintJobNameAra As String Implements IPrintJobView.PrintJobNameAra
+            Get
+                Return txtPrintJobNameAra.Text
+            End Get
+            Set(value As String)
+                txtPrintJobNameAra.SetValue(value)
+            End Set
+        End Property
+
+        Public Property PrintJobCode As String Implements IPrintJobView.PrintJobCode
+            Get
+                Return txtPrintJobCode.Text
+            End Get
+            Set(value As String)
+                txtPrintJobCode.SetValue(value)
+            End Set
+        End Property
+
+
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
-                {"ComputerIdNo", cboComputerIdNo},
                 {"IdNo", TxtIdNo},
                 {"PaperOrientation", cboPaperOrientation},
                 {"PaperSize", cboPaperSize},
                 {"PaperSource", cboPaperSource},
                 {"PrinterIdNo", cboPrinterIdNo},
-                {"PrintSetupIdNo", cboPrintSetupIdNo}
+                {"PrintJobName", txtPrintJobName},
+                {"PrintJobNameAra", txtPrintJobNameAra}
                 }
         End Sub
 
-        'Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrinters.ClickButtonArea
-        '    'Dim myForm = New CListSelector(btnPrinters, GetInstalledPrinters())
-        '    Dim printersQueue As PrintQueueCollection = GlobalFunctions.GetNetworkPrinters()
-        '    Dim printers As New ArrayList
-        '    Dim ComputerIdNo As String = Environment.MachineName
-        '    For Each item As PrintQueue In printersQueue
-        '        'if item.sharename is nothing orelse (item.sharename = "") then
-        '        '    printers.add(item.name)
-        '        'else
-        '        '    if item.hostingprintserver.name <> "\\" + ComputerIdNo then
-        '        '        printers.add(item.hostingprintserver.name + "\" + item.sharename)
-        '        'else
-        '        printers.Add(item.Name + " | " + item.QueuePort.Name)
-        '        'end if
-        '        'end if
-        '    Next
-        '    Dim myForm = New CListSelector(btnPrinters, printers)
-        '    myForm.Show()
-        'End Sub
 
-        'Private Function GetNetPrinters() As ArrayList
-        '    ' Use the ObjectQuery to get the list of configured printers
-        '    Dim printers As New ArrayList
-        '    Dim oQuery As System.Management.ObjectQuery = New System.Management.ObjectQuery("SELECT * FROM Win32_Printer")
-
-        '    Dim moSearcher As System.Management.ManagementObjectSearcher = New System.Management.ManagementObjectSearcher(oQuery)
-
-        '    Dim moc As System.Management.ManagementObjectCollection = moSearcher.Get()
-
-        '    For Each mo As ManagementObject In moc
-        '        Dim pdc As System.Management.PropertyDataCollection = mo.Properties
-        '        For Each pd As System.Management.PropertyData In pdc
-        '            If CBool(mo("Network")) Then
-        '                printers.Add(mo(pd.Name))
-        '            End If
-        '        Next pd
-        '    Next mo
-        '    Return printers
-        'End Function
-
-        'Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrinters.ClickButtonArea
-        '    'Dim myForm = New CListSelector(btnPrinters, GetInstalledPrinters())
-        '    Dim queue As PrintQueueCollection = GlobalFunctions.GetNetworkPrinters()
-        '    Dim printers As New ArrayList
-        '    Dim ComputerIdNo As String = Environment.MachineName
-        '    For Each item In queue
-        '        printers.Add(item.Name + ":" + item.QueuePort.Name)
-        '        'If item.ShareName Is Nothing OrElse (item.ShareName = "") Then
-        '        '    printers.Add(item.Name)
-        '        'Else
-        '        '    If item.HostingPrintServer.Name <> "\\" + ComputerIdNo Then
-        '        '        printers.Add(item.HostingPrintServer.Name + "\" + item.ShareName)
-        '        '    Else
-        '        '        printers.Add(item.Name)
-        '        '    End If
-        '        'End If
-        '    Next
-        '    Dim myForm = New CListSelector(btnPrinters, printers)
-        '    myForm.Show()
-        'End Sub
+        Private Sub cboPrinterName_TextChanged(sender As Object, e As EventArgs) Handles cboPrinterIdNo.TextChanged
+            RaiseEvent PrinterChanged(Me)
+        End Sub
 
     End Class
+
 
 End Namespace
