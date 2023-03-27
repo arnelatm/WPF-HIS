@@ -1,5 +1,6 @@
 ﻿Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.Common.ServiceLayer
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
@@ -13,20 +14,24 @@ Namespace PresentationLayer.Presenters
             TableName = "PrintSetup"
             TreeViewMainField = "PrintSetupName"
             SortOrderKey = "PrintSetupName"
+            AddHandler view.PrinterChanged, AddressOf UpdatePrinterDataSource
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            Dim control = GetControlName("PrinterIdNo")
-            AAtm.Libraries.Invoker.SetProperty(control, "DataSource", GetInstalledPrinters)
+            CreateDataSource("Printer", "PrinterIdNo")
+            CreateDataSource("PrintJob", "PrintJobIdNo")
+            CreateDataSourceGroupCode("PaperOrientation", "PPOR")
+            CreateDataSource("Computer", "ComputerIdNo")
         End Sub
 
-        Private Function GetInstalledPrinters()
-            Dim sPrinters As New ArrayList
-            For Each printer In System.Drawing.Printing.PrinterSettings.InstalledPrinters
-                sPrinters.Add(printer)
-            Next
-            Return sPrinters
-        End Function
+
+        Private Sub UpdatePrinterDataSource()
+            Dim printerName As String = GetFieldWithIdNo(View.PrinterIdNo, "Printer", "PrinterName")
+            If GlobalFunctions.IsPrinterValid(printerName) Then
+                SetPrinterSupportedPaper(printerName, View.PaperSize)
+                SetPrinterSupportedSources(printerName, View.PaperSource)
+            End If
+        End Sub
 
     End Class
 

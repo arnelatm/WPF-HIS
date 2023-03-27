@@ -1387,7 +1387,6 @@ Public Module GlobalFunctions
 
     End Function
 
-
     Public Function IsPrinterValid(pPrinterName As String) As Boolean
         Dim data = GetPrinterPageInfo(pPrinterName)
         If data.PrinterSettings.IsValid() Then

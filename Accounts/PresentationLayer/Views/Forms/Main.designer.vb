@@ -68,6 +68,10 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemItems = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemDefaultFieldValues = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemSalesDepositTypes = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemPrinting = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemPrinters = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemPrintJobs = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemPrintSetups = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemSecurity = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemSecurityGroups = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemSecurityObjects = New System.Windows.Forms.ToolStripMenuItem()
@@ -218,10 +222,6 @@ Namespace PresentationLayer.Views.Forms
         Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemPrinting = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemPrinters = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemPrintJobs = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemPrintSetups = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.ToolStrip.SuspendLayout
         Me.AccountsMenu.SuspendLayout
@@ -439,6 +439,27 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.ToolStripMenuItemSalesDepositTypes.Name = "ToolStripMenuItemSalesDepositTypes"
         resources.ApplyResources(Me.ToolStripMenuItemSalesDepositTypes, "ToolStripMenuItemSalesDepositTypes")
+        '
+        'ToolStripMenuItemPrinting
+        '
+        Me.ToolStripMenuItemPrinting.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPrinters, Me.ToolStripMenuItemPrintJobs, Me.ToolStripMenuItemPrintSetups})
+        Me.ToolStripMenuItemPrinting.Name = "ToolStripMenuItemPrinting"
+        resources.ApplyResources(Me.ToolStripMenuItemPrinting, "ToolStripMenuItemPrinting")
+        '
+        'ToolStripMenuItemPrinters
+        '
+        Me.ToolStripMenuItemPrinters.Name = "ToolStripMenuItemPrinters"
+        resources.ApplyResources(Me.ToolStripMenuItemPrinters, "ToolStripMenuItemPrinters")
+        '
+        'ToolStripMenuItemPrintJobs
+        '
+        Me.ToolStripMenuItemPrintJobs.Name = "ToolStripMenuItemPrintJobs"
+        resources.ApplyResources(Me.ToolStripMenuItemPrintJobs, "ToolStripMenuItemPrintJobs")
+        '
+        'ToolStripMenuItemPrintSetups
+        '
+        Me.ToolStripMenuItemPrintSetups.Name = "ToolStripMenuItemPrintSetups"
+        resources.ApplyResources(Me.ToolStripMenuItemPrintSetups, "ToolStripMenuItemPrintSetups")
         '
         'ToolStripMenuItemSecurity
         '
@@ -1219,27 +1240,6 @@ Namespace PresentationLayer.Views.Forms
         '
         resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
         Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
-        '
-        'ToolStripMenuItemPrinting
-        '
-        Me.ToolStripMenuItemPrinting.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPrinters, Me.ToolStripMenuItemPrintJobs, Me.ToolStripMenuItemPrintSetups})
-        Me.ToolStripMenuItemPrinting.Name = "ToolStripMenuItemPrinting"
-        resources.ApplyResources(Me.ToolStripMenuItemPrinting, "ToolStripMenuItemPrinting")
-        '
-        'ToolStripMenuItemPrinters
-        '
-        Me.ToolStripMenuItemPrinters.Name = "ToolStripMenuItemPrinters"
-        resources.ApplyResources(Me.ToolStripMenuItemPrinters, "ToolStripMenuItemPrinters")
-        '
-        'ToolStripMenuItemPrintJobs
-        '
-        Me.ToolStripMenuItemPrintJobs.Name = "ToolStripMenuItemPrintJobs"
-        resources.ApplyResources(Me.ToolStripMenuItemPrintJobs, "ToolStripMenuItemPrintJobs")
-        '
-        'ToolStripMenuItemPrintSetups
-        '
-        Me.ToolStripMenuItemPrintSetups.Name = "ToolStripMenuItemPrintSetups"
-        resources.ApplyResources(Me.ToolStripMenuItemPrintSetups, "ToolStripMenuItemPrintSetups")
         '
         'Main
         '

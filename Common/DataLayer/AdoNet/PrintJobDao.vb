@@ -70,6 +70,7 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(printJob As PrintJob) As Object()
             Return New Object() {
+                                    "@IdNo", printJob.IdNo,
                                     "@PaperOrientation", printJob.PaperOrientation,
                                     "@PaperSize", printJob.PaperSize,
                                     "@PaperSource", printJob.PaperSource,

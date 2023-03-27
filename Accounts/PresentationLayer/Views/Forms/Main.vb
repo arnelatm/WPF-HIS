@@ -1135,6 +1135,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemPrintJob_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPrintJobs.Click
             RunForm(Of PrintJobEntryTv, PrintJobPresenter(Of PrintJobModel))()
         End Sub
+
+        Private Sub ToolStripMenuItemPrintSetups_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPrintSetups.Click
+            RunForm(Of PrintSetupEntryTv, PrintSetupPresenter(Of PrintSetupModel))()
+        End Sub
     End Class
 
 End Namespace

@@ -18,9 +18,9 @@ Namespace DataLayer.AdoNet
                                   "PaperSize," &
                                   "PaperSource," &
                                   "PrinterIdNo," &
-                                  "PrintSetupIdNo"
+                                  "PrintJobIdNo"
 
-        'Public Function GetPrintSetupByName(PrintSetupIdNo As String) As PrintSetup Implements iDao(Of PrintSetup).GetPrintSetupByName
+        'Public Function GetPrintSetupByName(PrintJobIdNo As String) As PrintSetup Implements iDao(Of PrintSetup).GetPrintSetupByName
         '    Throw New NotImplementedException
         'End Function
 
@@ -39,7 +39,7 @@ Namespace DataLayer.AdoNet
                     "PaperSize = @PaperSize, " &
                     "PaperSource = @PaperSource, " &
                     "PrinterIdNo = @PrinterIdNo, " &
-                    "PrintSetupIdNo = @PrintSetupIdNo " &
+                    "PrintJobIdNo = @PrintJobIdNo " &
                     "WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(PrintSetup))
         End Function
@@ -47,31 +47,32 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef PrintSetup As PrintSetup) As Integer Implements IDao(Of PrintSetup).AddRecord
             Dim sql As String =
                     " INSERT INTO [PrintSetup] " &
-                    " (ComputerIdNo,PaperOrientation,PaperSize,PaperSource,PrinterIdNo,PrintSetupIdNo) " &
-                    " VALUES (@ComputerIdNo,@PaperOrientation,@PaperSize,@PaperSource,@PrinterIdNo,@PrintSetupIdNo)"
+                    " (ComputerIdNo,PaperOrientation,PaperSize,PaperSource,PrinterIdNo,PrintJobIdNo) " &
+                    " VALUES (@ComputerIdNo,@PaperOrientation,@PaperSize,@PaperSource,@PrinterIdNo,@PrintJobIdNo)"
             Return _db.Insert(sql, Take(PrintSetup))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, PrintSetup) =
                                     Function(reader) _
             New PrintSetup() With {
-            .ComputerIdNo = Extensions.AsInt(Of Int16?)(reader("ComputerIdNo")),
+            .ComputerIdNo = Extensions.AsInt(Of Int16)(reader("ComputerIdNo")),
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
-            .PaperOrientation = Extensions.AsNullable(Of Int32?)(reader("PaperOrientation")),
-            .PaperSize = Extensions.AsNullable(Of Int32?)(reader("PaperSize")),
-            .PaperSource = Extensions.AsNullable(Of Int32?)(reader("PaperSource")),
-            .PrinterIdNo = Extensions.AsNullable(Of Int16?)(reader("PrinterIdNo")),
-            .PrintSetupIdNo = Extensions.AsNullable(Of Int32?)(reader("PrintSetupIdNo"))
+            .PaperOrientation = Extensions.AsNullable(Of Int16)(reader("PaperOrientation")),
+            .PaperSize = Extensions.AsNullable(Of Int16)(reader("PaperSize")),
+            .PaperSource = Extensions.AsNullable(Of Int16)(reader("PaperSource")),
+            .PrinterIdNo = Extensions.AsNullable(Of Int16)(reader("PrinterIdNo")),
+            .PrintJobIdNo = Extensions.AsNullable(Of Int16)(reader("PrintJobIdNo"))
             }
 
         Private Function Take(PrintSetup As PrintSetup) As Object()
             Return New Object() {
                                     "@ComputerIdNo", PrintSetup.ComputerIdNo,
+                                    "@IdNo", PrintSetup.IdNo,
                                     "@PaperOrientation", PrintSetup.PaperOrientation,
                                     "@PaperSize", PrintSetup.PaperSize,
                                     "@PaperSource", PrintSetup.PaperSource,
                                     "@PrinterIdNo", PrintSetup.PrinterIdNo,
-                                    "@PrintSetupIdNo", PrintSetup.PrintSetupIdNo
+                                    "@PrintJobIdNo", PrintSetup.PrintJobIdNo
                                 }
         End Function
 

@@ -6,12 +6,11 @@
 
         Public Property ComputerIdNo As Int16
         Public Property IdNo As Int16
-        Public Property NetworkName As String
-        Public Property PaperOrientation As Int32?
-        Public Property PaperSize As Int32?
-        Public Property PaperSource As Int32?
-        Public Property PrinterIdNo As Int16?
-        Public Property PrintSetupIdNo As Int32?
+        Public Property PaperOrientation As Int16
+        Public Property PaperSize As Int16
+        Public Property PaperSource As Int16
+        Public Property PrinterIdNo As Int16
+        Public Property PrintJobIdNo As Int16
 
     End Class
 
