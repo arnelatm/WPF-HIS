@@ -26,7 +26,7 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Sub CreateDataSources()
             CreateDataSourceGroupCode("DefaultPaperOrientation", "PPOR")
-            SetInstalledPrinter()
+            SetDataSourceInstalledPrinter("PrinterName")
         End Sub
 
         Private Sub OnCheckPrinterClicked(sender As Object)
@@ -54,7 +54,6 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-
         Private Sub OnBeforeMappingData(ByVal dataModel As Object) Handles MyBase.BeforeMappingData
             View.PrinterName = dataModel.PrinterName
             View.DefaultPaperSize = dataModel.DefaultPaperSize
@@ -64,140 +63,14 @@ Namespace PresentationLayer.Presenters
 
         Private Sub UpdatePrinterDataSource()
             If IsPrinterValid(View.PrinterName) Then
-                SetPrinterSupportedPaper(View.PrinterName)
-                SetPrinterSupportedSources(View.PrinterName)
+                SetPrinterSupportedPaper(View.PrinterName, View.DefaultPaperSize)
+                SetPrinterSupportedSources(View.PrinterName, View.DefaultPaperSource)
             End If
-        End Sub
-
-        Private Sub SetPrinterSupportedPaper(pPrinterName As String)
-            Dim data = GetPrinterPageInfo(pPrinterName)
-            Dim paperSizeLookup As New List(Of Lookup.LookupData)
-            Dim index As Int16 = 0
-            If data.PrinterSettings.IsValid() Then
-                For Each item As PaperSize In data.PrinterSettings.PaperSizes
-                    Dim dbLookup = New Lookup.LookupData
-                    dbLookup.IdNo = item.RawKind
-                    dbLookup.Name = item.PaperName
-                    dbLookup.Code = item.Kind
-                    dbLookup.Index = index
-                    paperSizeLookup.Add(dbLookup)
-                    index += 1
-                Next
-                Dim savedDefaultPaperSize As Int32? = View.DefaultPaperSize
-                GetControlName("DefaultPaperSize").DataSource = paperSizeLookup
-                View.DefaultPaperSize = savedDefaultPaperSize
-                If savedDefaultPaperSize Is Nothing Or savedDefaultPaperSize = 0 Then
-                    View.DefaultPaperSize = data.PrinterSettings.DefaultPageSettings.PaperSize.RawKind
-                End If
-            End If
-        End Sub
-
-        Private Sub SetPrinterSupportedSources(pPrinterName As String)
-            Dim data = GetPrinterPageInfo(pPrinterName)
-            Dim paperSourceLookup As New List(Of Lookup.LookupData)
-            Dim index As Int16 = 0
-            For Each item As PaperSource In data.PrinterSettings.PaperSources
-                Dim dbLookup = New Lookup.LookupData
-                dbLookup.IdNo = item.RawKind
-                dbLookup.Name = item.SourceName
-                dbLookup.Code = item.Kind
-                dbLookup.Index = index
-                paperSourceLookup.Add(dbLookup)
-                index += 1
-            Next
-            Dim savedDefaultPaperSource As Int32? = View.DefaultPaperSource
-            GetControlName("DefaultPaperSource").DataSource = paperSourceLookup
-            View.DefaultPaperSource = savedDefaultPaperSource
-            If savedDefaultPaperSource Is Nothing Or savedDefaultPaperSource = 0 Then
-                View.DefaultPaperSource = data.PrinterSettings.DefaultPageSettings.PaperSource.RawKind
-            End If
-        End Sub
-
-        Private Sub SetInstalledPrinter()
-            Dim data As New List(Of Lookup.LookupData)
-            ' Find all printers installed
-            Dim index As Int16 = 0
-            For Each item In PrinterSettings.InstalledPrinters
-                Dim dbLookup = New Lookup.LookupData
-                dbLookup.IdNo = index
-                dbLookup.Name = item
-                dbLookup.Code = item
-                dbLookup.Index = index
-                data.Add(dbLookup)
-                index += 1
-            Next
-            Dim oldData = GetControlName("PrinterName").DataSource
-            GetControlName("PrinterName").DataSource = data
         End Sub
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             View.HostOrIpName = Environment.MachineName
         End Sub
-
-
-        'Public Shared Function GetPrinterPageInfo(ByVal printerName As String) As PageSettings
-        '    Dim settings As PrinterSettings
-
-        '    If String.IsNullOrEmpty(printerName) Then
-
-        '        For Each printer In PrinterSettings.InstalledPrinters
-        '            settings = New PrinterSettings()
-        '            settings.PrinterName = printer.ToString()
-        '            If settings.IsDefaultPrinter Then Return settings.DefaultPageSettings
-        '        Next
-
-        '        Return Nothing
-        '    End If
-
-        '    settings = New PrinterSettings()
-        '    settings.PrinterName = printerName
-        '    Return settings.DefaultPageSettings
-        'End Function
-
-        'Public Shared Function GetPrinterPageInfo(printer As String) As PageSettings
-        '    Return GetPrinterPageInfo(printer)
-        'End Function
-
-        'Public Overloads Sub SetPrintOption(printerName As String, paperSize As Int16?, paperOrientation As Int16?, paperSource As Int16?)
-        '    If printerName IsNot Nothing Then
-        '        Dim dPrinterName As String = _report.PrintOptions.PrinterName
-        '        Dim noPrinter As Boolean = _report.PrintOptions.NoPrinter
-        '        Try
-        '            _report.PrintOptions.NoPrinter = False
-        '            _report.PrintOptions.PrinterName = printerName
-        '        Catch ex As Exception
-        '            MessageTimeOut("The Printer <" & printerName & "> doesn't exist on this system, using Default Printer.", "Invalid Printer Setup", 5)
-        '            _report.PrintOptions.NoPrinter = noPrinter
-        '            _report.PrintOptions.PrinterName = dPrinterName
-        '        End Try
-        '    End If
-        '    If paperSize IsNot Nothing Then
-        '        Dim dPaperSize As Int32
-        '        paperSize = _report.PrintOptions.PaperSize
-        '        Try
-        '            _report.PrintOptions.PaperSize = paperSize
-        '        Catch ex As Exception
-        '            _report.PrintOptions.PaperSize = dPaperSize
-        '        End Try
-        '    End If
-        '    If paperOrientation IsNot Nothing Then
-        '        Dim dPaperOrientation As Int16 = _report.PrintOptions.PaperOrientation
-        '        Try
-        '            _report.PrintOptions.PaperOrientation = paperOrientation
-        '        Catch ex As Exception
-        '            _report.PrintOptions.PaperOrientation = dPaperOrientation
-        '        End Try
-        '    End If
-        '    If paperSource IsNot Nothing Then
-        '        Dim dPaperSource As Int16
-        '        dPaperSource = _report.PrintOptions.PaperSource
-        '        Try
-        '            _report.PrintOptions.PaperSource = paperSource
-        '        Catch ex As Exception
-        '            _report.PrintOptions.PaperSource = dPaperSource
-        '        End Try
-        '    End If
-        'End Sub
 
     End Class
 

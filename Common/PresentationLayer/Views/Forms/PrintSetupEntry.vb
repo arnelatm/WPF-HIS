@@ -13,9 +13,11 @@ Namespace PresentationLayer.Views.Forms
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
-            FirstControl = cboPrintJonIdNo
+            FirstControl = cboPrintJobIdNo
             ' Add any initialization after the InitializeComponent() call.
         End Sub
+
+        Public Event PrinterChanged(sender As Object) Implements IPrintSetupView.PrinterChanged
 
 #Region "Fields"
 
@@ -28,12 +30,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PrintJobIdNo As Int32 Implements IPrintSetupView.PrintJobIdNo
+        Public Property PrintJobIdNo As Int16 Implements IPrintSetupView.PrintJobIdNo
             Get
-                Return cboPrintJonIdNo.GetValue()
+                Return cboPrintJobIdNo.GetValue()
             End Get
             Set
-                cboPrintJonIdNo.SetValue(Value)
+                cboPrintJobIdNo.SetValue(Value)
             End Set
         End Property
 
@@ -46,7 +48,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PaperSize As Int32? Implements IPrintSetupView.PaperSize
+        Public Property PaperSize As Int16 Implements IPrintSetupView.PaperSize
             Get
                 Return cboPaperSize.GetValue()
             End Get
@@ -55,7 +57,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PaperSource As Int32? Implements IPrintSetupView.PaperSource
+        Public Property PaperSource As Int16 Implements IPrintSetupView.PaperSource
             Get
                 Return cboPaperSource.GetValue()
             End Get
@@ -73,7 +75,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PaperOrientation As Int32? Implements IPrintSetupView.PaperOrientation
+        Public Property PaperOrientation As Int16 Implements IPrintSetupView.PaperOrientation
             Get
                 Return cboPaperOrientation.GetValue()
             End Get
@@ -93,9 +95,14 @@ Namespace PresentationLayer.Views.Forms
                 {"PaperSize", cboPaperSize},
                 {"PaperSource", cboPaperSource},
                 {"PrinterIdNo", cboPrinterIdNo},
-                {"PrintSetupIdNo", cboPrintJonIdNo}
+                {"PrintJobIdNo", cboPrintJobIdNo}
                 }
         End Sub
+
+        Private Sub cboPrinterName_TextChanged(sender As Object, e As EventArgs) Handles cboPrinterIdNo.TextChanged
+            RaiseEvent PrinterChanged(Me)
+        End Sub
+
 
         'Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrinters.ClickButtonArea
         '    'Dim myForm = New CListSelector(btnPrinters, GetInstalledPrinters())

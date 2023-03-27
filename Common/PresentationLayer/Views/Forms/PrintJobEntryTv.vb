@@ -1,9 +1,5 @@
-﻿Imports System.Printing
-Imports AATM.Common.PresentationLayer.Presenters
-Imports AATM.Common.PresentationLayer.Views.Interface
-Imports AATM.Libraries.CBaseControlsLibrary
+﻿Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.Libraries.GlobalFuncNSub
-Imports System.Management
 
 Namespace PresentationLayer.Views.Forms
 

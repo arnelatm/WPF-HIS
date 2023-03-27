@@ -1,5 +1,6 @@
 ﻿' Category business object
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
+Imports System.Drawing.Printing
 Imports System.Globalization
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.ServiceLayer
@@ -29,6 +30,7 @@ Namespace PresentationLayer.Presenters
             MakeDefaultValues()
         End Sub
 
+
         'Protected Sub CreateDataSourceThread(dataSourceNames As Object)
         '    Dim luItems As List(Of DataLookup)
         '    luItems = CreateDataLookups(dataSourceNames)
@@ -41,7 +43,7 @@ Namespace PresentationLayer.Presenters
         '    Next
         'End Sub
 
-        
+
         Protected Sub CreateDataSourceThread(dataSourceNames As ArrayList)
             Dim luItems As List(Of DataLookup)
             luItems = CreateDataLookups(dataSourceNames)
@@ -67,7 +69,7 @@ Namespace PresentationLayer.Presenters
         '    Next
         'End Sub
 
-        
+
         Protected Sub CreateLookupDataThread(dataSourceNames As ArrayList)
             Dim luItems As List(Of DataLookup)
             luItems = CreateDataLookups(dataSourceNames)
@@ -79,7 +81,7 @@ Namespace PresentationLayer.Presenters
 
         Protected Sub CreateDataSourceGroupCodeThread(GroupCodeCodes As Object)
             Dim nCount = GroupCodeCodes.Length()
-            Dim dataSourceNames as New ArrayList
+            Dim dataSourceNames As New ArrayList
             For i = 0 To nCount / 2 - 1
                 Dim idNo As Int16
                 idNo = Service.GetRecordFieldWithKeyG(Of Int16, String)(GroupCodeCodes(i, 1), "CodeGroup", "CodeGroupCode", "IdNo")
@@ -95,17 +97,17 @@ Namespace PresentationLayer.Presenters
             Const LookupFilter As Int32 = 3
             Const LookupSortKey As Int32 = 4
             Dim lookups As New List(Of DataLookup)
-            For each item In dataSourceNames
+            For Each item In dataSourceNames
                 Dim dtl As New DataLookup
                 dtl.TableName = item(LookupTableName)
                 dtl.PropertyName = item(PropertyFieldName)
-                If item.Length-1 > 1 Then
+                If item.Length - 1 > 1 Then
                     dtl.LuFields = item(LookupFieldNames)
                 End If
-                If item.Length-1 > 2 Then
+                If item.Length - 1 > 2 Then
                     dtl.Filter = item(LookupFilter)
                 End If
-                If item.Length-1  > 3 Then
+                If item.Length - 1 > 3 Then
                     dtl.SortKey = item(LookupSortKey)
                 End If
                 ComposeLookupProperties(dtl)
@@ -237,6 +239,66 @@ Namespace PresentationLayer.Presenters
             cd = Nothing
             Return data
         End Function
+
+        Protected Sub SetDataSourceInstalledPrinter(controlName As String)
+            Dim data As New List(Of Lookup.LookupData)
+            ' Find all printers installed
+            Dim index As Int16 = 0
+            For Each item In PrinterSettings.InstalledPrinters
+                Dim dbLookup = New Lookup.LookupData
+                dbLookup.IdNo = index
+                dbLookup.Name = item
+                dbLookup.Code = item
+                dbLookup.Index = index
+                data.Add(dbLookup)
+                index += 1
+            Next
+            GetControlName(controlName).DataSource = data
+        End Sub
+
+        Protected Sub SetPrinterSupportedSources(pPrinterName As String, ByRef paperSource As Int16)
+            Dim data = GlobalFunctions.GetPrinterPageInfo(pPrinterName)
+            Dim paperSourceLookup As New List(Of Lookup.LookupData)
+            Dim index As Int16 = 0
+            For Each item As PaperSource In data.PrinterSettings.PaperSources
+                Dim dbLookup = New Lookup.LookupData
+                dbLookup.IdNo = item.RawKind
+                dbLookup.Name = item.SourceName
+                dbLookup.Code = item.Kind
+                dbLookup.Index = index
+                paperSourceLookup.Add(dbLookup)
+                index += 1
+            Next
+            Dim savedPaperSource As Int32? = paperSource
+            GetControlName("PaperSource").DataSource = paperSourceLookup
+            paperSource = savedPaperSource
+            If savedPaperSource Is Nothing Or savedPaperSource = 0 Then
+                paperSource = data.PrinterSettings.DefaultPageSettings.PaperSource.RawKind
+            End If
+        End Sub
+
+        Protected Sub SetPrinterSupportedPaper(pPrinterName As String, ByRef paperSize As Int16)
+            Dim data = GetPrinterPageInfo(pPrinterName)
+            Dim paperSizeLookup As New List(Of Lookup.LookupData)
+            Dim index As Int16 = 0
+            If data.PrinterSettings.IsValid() Then
+                For Each item As PaperSize In data.PrinterSettings.PaperSizes
+                    Dim dbLookup = New Lookup.LookupData
+                    dbLookup.IdNo = item.RawKind
+                    dbLookup.Name = item.PaperName
+                    dbLookup.Code = item.Kind
+                    dbLookup.Index = index
+                    paperSizeLookup.Add(dbLookup)
+                    index += 1
+                Next
+                Dim savedDefaultPaperSize As Int32? = paperSize
+                GetControlName("PaperSize").DataSource = paperSizeLookup
+                paperSize = savedDefaultPaperSize
+                If savedDefaultPaperSize Is Nothing Or savedDefaultPaperSize = 0 Then
+                    paperSize = data.PrinterSettings.DefaultPageSettings.PaperSize.RawKind
+                End If
+            End If
+        End Sub
 
         'Private Function LookupDataCreator(ByVal tableName As String)
         '    Dim cd As New DataCreator(Service)

@@ -29,7 +29,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblPrintSetupIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPrintJonIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboPrintJobIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.LblComputerIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboComputerIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.lblPrinterIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -76,7 +76,7 @@ Namespace PresentationLayer.Views.Forms
         Me.floDataDisplay.Controls.Add(Me.lblIdNo)
         Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
         Me.floDataDisplay.Controls.Add(Me.lblPrintSetupIdNo)
-        Me.floDataDisplay.Controls.Add(Me.cboPrintJonIdNo)
+        Me.floDataDisplay.Controls.Add(Me.cboPrintJobIdNo)
         Me.floDataDisplay.Controls.Add(Me.LblComputerIdNo)
         Me.floDataDisplay.Controls.Add(Me.cboComputerIdNo)
         Me.floDataDisplay.Controls.Add(Me.lblPrinterIdNo)
@@ -155,52 +155,52 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPrintSetupIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.lblPrintSetupIdNo.Translatable = true
         '
-        'cboPrintJonIdNo
+        'cboPrintJobIdNo
         '
-        Me.cboPrintJonIdNo.AlwaysEditable = false
-        Me.cboPrintJonIdNo.BackColor = System.Drawing.Color.White
-        Me.cboPrintJonIdNo.BegFindValue = Nothing
-        Me.cboPrintJonIdNo.ChangingSearchValueOnly = false
-        Me.cboPrintJonIdNo.CurrentSearchTerm = ""
-        Me.cboPrintJonIdNo.DataValue = Nothing
-        Me.cboPrintJonIdNo.DefaultValue = Nothing
-        Me.cboPrintJonIdNo.DisplayMember = "Name"
-        Me.cboPrintJonIdNo.EditingMode = true
-        Me.cboPrintJonIdNo.EndFindValue = Nothing
-        Me.cboPrintJonIdNo.FieldDescription = Nothing
-        Me.cboPrintJonIdNo.FieldName = Nothing
-        Me.cboPrintJonIdNo.FilterRule = Nothing
-        Me.cboPrintJonIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboPrintJonIdNo.FindEnabled = false
-        Me.floDataDisplay.SetFlowBreak(Me.cboPrintJonIdNo, true)
-        Me.cboPrintJonIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.cboPrintJonIdNo.ForeColor = System.Drawing.Color.Black
-        Me.cboPrintJonIdNo.FormattingEnabled = true
-        Me.cboPrintJonIdNo.HideWhenNotEditingOrAdding = false
-        Me.cboPrintJonIdNo.IgnoreCase = false
-        Me.cboPrintJonIdNo.IntegralHeight = false
-        Me.cboPrintJonIdNo.LimitToList = false
-        Me.cboPrintJonIdNo.LinkedLabel = Me.lblPrintSetupIdNo
-        Me.cboPrintJonIdNo.Location = New System.Drawing.Point(157, 36)
-        Me.cboPrintJonIdNo.Margin = New System.Windows.Forms.Padding(1)
-        Me.cboPrintJonIdNo.Name = "cboPrintJonIdNo"
-        Me.cboPrintJonIdNo.OldValue = 0
-        Me.cboPrintJonIdNo.OriginalDataSource = Nothing
-        Me.cboPrintJonIdNo.OriginalList = Nothing
-        Me.cboPrintJonIdNo.OverrideDropDownStyleList = false
-        Me.cboPrintJonIdNo.PreviousSearchTerm = Nothing
-        Me.cboPrintJonIdNo.PropertySelector = Nothing
-        Me.cboPrintJonIdNo.ReadOnlyCombo = false
-        Me.cboPrintJonIdNo.Size = New System.Drawing.Size(307, 24)
-        Me.cboPrintJonIdNo.SuggestBoxHeight = 200
-        Me.cboPrintJonIdNo.SuggestListOrderRule = Nothing
-        Me.cboPrintJonIdNo.TabIndex = 1
-        Me.cboPrintJonIdNo.TextToSearch = Nothing
-        Me.cboPrintJonIdNo.Translatable = false
-        Me.cboPrintJonIdNo.ValueIsMandatory = false
-        Me.cboPrintJonIdNo.ValueIsNullable = false
-        Me.cboPrintJonIdNo.ValueIsNumeric = false
-        Me.cboPrintJonIdNo.ValueMember = "IdNo"
+        Me.cboPrintJobIdNo.AlwaysEditable = false
+        Me.cboPrintJobIdNo.BackColor = System.Drawing.Color.White
+        Me.cboPrintJobIdNo.BegFindValue = Nothing
+        Me.cboPrintJobIdNo.ChangingSearchValueOnly = false
+        Me.cboPrintJobIdNo.CurrentSearchTerm = ""
+        Me.cboPrintJobIdNo.DataValue = Nothing
+        Me.cboPrintJobIdNo.DefaultValue = Nothing
+        Me.cboPrintJobIdNo.DisplayMember = "Name"
+        Me.cboPrintJobIdNo.EditingMode = true
+        Me.cboPrintJobIdNo.EndFindValue = Nothing
+        Me.cboPrintJobIdNo.FieldDescription = Nothing
+        Me.cboPrintJobIdNo.FieldName = Nothing
+        Me.cboPrintJobIdNo.FilterRule = Nothing
+        Me.cboPrintJobIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboPrintJobIdNo.FindEnabled = false
+        Me.floDataDisplay.SetFlowBreak(Me.cboPrintJobIdNo, true)
+        Me.cboPrintJobIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
+        Me.cboPrintJobIdNo.ForeColor = System.Drawing.Color.Black
+        Me.cboPrintJobIdNo.FormattingEnabled = true
+        Me.cboPrintJobIdNo.HideWhenNotEditingOrAdding = false
+        Me.cboPrintJobIdNo.IgnoreCase = false
+        Me.cboPrintJobIdNo.IntegralHeight = false
+        Me.cboPrintJobIdNo.LimitToList = false
+        Me.cboPrintJobIdNo.LinkedLabel = Me.lblPrintSetupIdNo
+        Me.cboPrintJobIdNo.Location = New System.Drawing.Point(157, 36)
+        Me.cboPrintJobIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.cboPrintJobIdNo.Name = "cboPrintJobIdNo"
+        Me.cboPrintJobIdNo.OldValue = 0
+        Me.cboPrintJobIdNo.OriginalDataSource = Nothing
+        Me.cboPrintJobIdNo.OriginalList = Nothing
+        Me.cboPrintJobIdNo.OverrideDropDownStyleList = false
+        Me.cboPrintJobIdNo.PreviousSearchTerm = Nothing
+        Me.cboPrintJobIdNo.PropertySelector = Nothing
+        Me.cboPrintJobIdNo.ReadOnlyCombo = false
+        Me.cboPrintJobIdNo.Size = New System.Drawing.Size(307, 24)
+        Me.cboPrintJobIdNo.SuggestBoxHeight = 200
+        Me.cboPrintJobIdNo.SuggestListOrderRule = Nothing
+        Me.cboPrintJobIdNo.TabIndex = 1
+        Me.cboPrintJobIdNo.TextToSearch = Nothing
+        Me.cboPrintJobIdNo.Translatable = false
+        Me.cboPrintJobIdNo.ValueIsMandatory = false
+        Me.cboPrintJobIdNo.ValueIsNullable = false
+        Me.cboPrintJobIdNo.ValueIsNumeric = false
+        Me.cboPrintJobIdNo.ValueMember = "IdNo"
         '
         'LblComputerIdNo
         '
@@ -461,7 +461,7 @@ Namespace PresentationLayer.Views.Forms
         Me.LblPaperOrientation.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.MyErrorProvider.SetIconAlignment(Me.LblPaperOrientation, System.Windows.Forms.ErrorIconAlignment.TopLeft)
         Me.LblPaperOrientation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.LblPaperOrientation.Location = New System.Drawing.Point(11, 166)
+        Me.LblPaperOrientation.Location = New System.Drawing.Point(11, 167)
         Me.LblPaperOrientation.Margin = New System.Windows.Forms.Padding(1)
         Me.LblPaperOrientation.Name = "LblPaperOrientation"
         Me.LblPaperOrientation.Size = New System.Drawing.Size(144, 23)
@@ -495,7 +495,7 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPaperOrientation.IntegralHeight = false
         Me.cboPaperOrientation.LimitToList = false
         Me.cboPaperOrientation.LinkedLabel = Me.LblPaperOrientation
-        Me.cboPaperOrientation.Location = New System.Drawing.Point(157, 166)
+        Me.cboPaperOrientation.Location = New System.Drawing.Point(157, 167)
         Me.cboPaperOrientation.Margin = New System.Windows.Forms.Padding(1)
         Me.cboPaperOrientation.Name = "cboPaperOrientation"
         Me.cboPaperOrientation.OldValue = 0
@@ -545,7 +545,7 @@ End Sub
         Friend WithEvents LblPaperOrientation As CLabel
         Friend WithEvents lblPrinterIdNo As CLabel
         Friend WithEvents lblPrintSetupIdNo As CLabel
-        Friend WithEvents cboPrintJonIdNo As CaComboBox
+        Friend WithEvents cboPrintJobIdNo As CaComboBox
         Friend WithEvents cboPaperSource As CaComboBox
         Friend WithEvents cboPaperSize As CaComboBox
         Friend WithEvents cboPaperOrientation As CaComboBox
