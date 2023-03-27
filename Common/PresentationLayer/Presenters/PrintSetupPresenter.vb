@@ -11,8 +11,9 @@ Namespace PresentationLayer.Presenters
             MyBase.New(view)
 
             Service = New CommonService("PrintSetup")
-            TableName = "PrintSetup"
+            TableName = "PrintSetup_View"
             TreeViewMainField = "PrintSetupName"
+            TreeViewSecondaryField = ""
             SortOrderKey = "PrintSetupName"
             AddHandler view.PrinterChanged, AddressOf UpdatePrinterDataSource
         End Sub

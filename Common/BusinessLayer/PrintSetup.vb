@@ -27,6 +27,8 @@ Namespace BusinessLayer
         Public Property PaperSource As Int32
         Public Property PrinterIdNo As Int16
         Public Property PrintJobIdNo As Int16
+        Public Property PrintSetupCode As String
+        Public Property PrintSetupName As String
 
     End Class
 
