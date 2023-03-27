@@ -1370,22 +1370,51 @@ Public Module GlobalFunctions
     Public Function GetPrinterPageInfo(ByVal printerName As String) As PageSettings
         Dim settings As PrinterSettings
 
-        If Not String.IsNullOrEmpty(printerName) Then
+        'If Not String.IsNullOrEmpty(printerName) Then
 
-            For Each printer In PrinterSettings.InstalledPrinters
-                settings = New PrinterSettings()
-                settings.PrinterName = printer.ToString()
-                If settings.IsDefaultPrinter Then Return settings.DefaultPageSettings
-            Next
+        '    For Each printer In PrinterSettings.InstalledPrinters
+        '        settings = New PrinterSettings()
+        '        settings.PrinterName = printer.ToString()
+        '        If settings.IsDefaultPrinter Then Return settings.DefaultPageSettings
+        '    Next
 
-            Return Nothing
-        End If
+        '    Return Nothing
+        'End If
 
         settings = New PrinterSettings()
         settings.PrinterName = printerName
         Return settings.DefaultPageSettings
 
     End Function
+
+
+    Public Function IsPrinterValid(pPrinterName As String) As Boolean
+        Dim data = GetPrinterPageInfo(pPrinterName)
+        If data.PrinterSettings.IsValid() Then
+            Return True
+        End If
+        Return False
+    End Function
+
+    'Public Function GetPrinterPageInfo(ByVal printerName As String) As PageSettings
+    '    Dim settings As PrinterSettings
+
+    '    If Not String.IsNullOrEmpty(printerName) Then
+
+    '        For Each printer In PrinterSettings.InstalledPrinters
+    '            settings = New PrinterSettings()
+    '            settings.PrinterName = printer.ToString()
+    '            If settings.IsDefaultPrinter Then Return settings.DefaultPageSettings
+    '        Next
+
+    '        Return Nothing
+    '    End If
+
+    '    settings = New PrinterSettings()
+    '    settings.PrinterName = printerName
+    '    Return settings.DefaultPageSettings
+
+    'End Function
 
     Public Sub ProcessQrCode(cQrCodeText As String, ByRef gTin As String, ByRef batchNo As String, ByRef expiry As String, ByRef serializationNo As String, ByRef manufacture As String)
         Dim dataLength = Len(cQrCodeText)
@@ -1577,7 +1606,7 @@ Public Module GlobalFunctions
                 End If
             End If
         Next
-        Return New Fraction(lngN,lngD)
+        Return New Fraction(lngN, lngD)
     End Function
 
 
@@ -1694,7 +1723,7 @@ Public Module GlobalFunctions
         End While
     End Function
 
-        Public Function Real2Fraction(ByVal value As Double, Optional ByVal accuracy As Double = 0.01) As Fraction
+    Public Function Real2Fraction(ByVal value As Double, Optional ByVal accuracy As Double = 0.01) As Fraction
         If accuracy <= 0.0 OrElse accuracy >= 1.0 Then
             Throw New ArgumentOutOfRangeException("accuracy", "Must be > 0 and < 1.")
         End If
@@ -1782,7 +1811,7 @@ Public Module GlobalFunctions
         retVal = ConvertWholeNumberToWord(_integerValue)
         If _decimalValue > 0 Then
             Dim fraction As Fraction = Real2Fraction(number - _integerValue)
-            retVal = IIf(retVal="","",retVal + " and ") + ConvertWholeNumberToWord(fraction.N) + "- " + ConvertWholeNumberToWord(fraction.D,True)
+            retVal = IIf(retVal = "", "", retVal + " and ") + ConvertWholeNumberToWord(fraction.N) + "- " + ConvertWholeNumberToWord(fraction.D, True)
         End If
         Return retVal
     End Function
@@ -1839,20 +1868,20 @@ Public Module GlobalFunctions
         Dim retVal As String = [String].Empty
 
         If hundreds > 0 Then
-            retVal = [String].Format("{0} {1}", Iif(fractonalPart,_englishFractionOnes(hundreds),_englishOnes(hundreds)), IIf(fractonalPart,_englishFractionGroup(0),_englishGroup(0)))
+            retVal = [String].Format("{0} {1}", IIf(fractonalPart, _englishFractionOnes(hundreds), _englishOnes(hundreds)), IIf(fractonalPart, _englishFractionGroup(0), _englishGroup(0)))
         End If
         If tens > 0 Then
             If tens < 20 Then
-                retVal += (If((retVal <> [String].Empty), " ", [String].Empty)) & IIf(fractonalPart,_englishFractionOnes(tens),_englishOnes(tens))
+                retVal += (If((retVal <> [String].Empty), " ", [String].Empty)) & IIf(fractonalPart, _englishFractionOnes(tens), _englishOnes(tens))
             Else
                 Dim ones As Integer = tens Mod 10
 
                 tens = (tens \ 10) - 2
                 ' 20's offset
-                retVal += (If((retVal <> [String].Empty), " ", [String].Empty)) & IIf(fractonalPart,_englishFractionTens(tens),_englishTens(tens))
+                retVal += (If((retVal <> [String].Empty), " ", [String].Empty)) & IIf(fractonalPart, _englishFractionTens(tens), _englishTens(tens))
 
                 If ones > 0 Then
-                    retVal += (If((retVal <> [String].Empty), " ", [String].Empty)) & IIf(fractonalPart,_englishFractionOnes(ones),_englishOnes(ones))
+                    retVal += (If((retVal <> [String].Empty), " ", [String].Empty)) & IIf(fractonalPart, _englishFractionOnes(ones), _englishOnes(ones))
                 End If
             End If
         End If
@@ -1866,7 +1895,7 @@ Public Module GlobalFunctions
         Dim group As Integer = 0
         Dim tempNumber As Int64 = wholeNumber
         If wholeNumber < 1 Then
-            retVal = iif(fractionalPart,_englishOnes(0),_englishFractionOnes(0))
+            retVal = IIf(fractionalPart, _englishOnes(0), _englishFractionOnes(0))
         Else
             While tempNumber >= 1
                 Dim numberToProcess As Integer = CInt(Math.Truncate(tempNumber Mod 1000))
@@ -1877,7 +1906,7 @@ Public Module GlobalFunctions
 
                 If groupDescription <> [String].Empty Then
                     If group > 0 Then
-                        retVal = [String].Format("{0} {1}", iif(fractionalPart,_englishGroup(group),_englishFractionGroup), retVal)
+                        retVal = [String].Format("{0} {1}", IIf(fractionalPart, _englishGroup(group), _englishFractionGroup), retVal)
                     End If
 
                     retVal = [String].Format("{0} {1}", groupDescription, retVal)

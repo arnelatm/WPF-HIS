@@ -26,39 +26,32 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Sub CreateDataSources()
             CreateDataSourceGroupCode("DefaultPaperOrientation", "PPOR")
+            SetInstalledPrinter()
         End Sub
 
         Private Sub OnCheckPrinterClicked(sender As Object)
             If String.IsNullOrEmpty(View.PrinterName) Then
-                Throw New ArgumentNullException("printerName")
-            End If
-            If View.PrinterName IsNot Nothing Then
-                Dim printer As String
-                If GlobalFunctions.IsEmpty(View.HostOrIpName) Or View.HostOrIpName = Environment.MachineName Then
+                MessageBox.Show("Invalid Printer for this workstation.")
+            Else
+                If View.PrinterName IsNot Nothing Then
+                    Dim printer As String
                     printer = View.PrinterName
-                Else
-                    printer = "\\" + View.HostOrIpName + "\" + View.PrinterName
+                    If PrinterSettings.InstalledPrinters.Cast(Of String)().Any(Function(name) printer.ToUpper().Trim() = name.ToUpper().Trim()) Then
+                        Dim data = GetPrinterPageInfo(printer)
+                        Dim printOut As String = ""
+                        For Each item As PaperSize In data.PrinterSettings.PaperSizes
+                            printOut += item.PaperName + vbCrLf
+                        Next
+                        printOut += " Paper Sources " + vbCrLf
+                        For Each item As PaperSource In data.PrinterSettings.PaperSources
+                            printOut += item.SourceName + vbCrLf
+                        Next
+                        MessageBox.Show(printOut)
+                    Else
+                        MessageBox.Show("Printer doesn't exist or is not Installed")
+                    End If
                 End If
-                If PrinterSettings.InstalledPrinters.Cast(Of String)().Any(Function(name) printer.ToUpper().Trim() = name.ToUpper().Trim()) Then
-                    MessageBox.Show("Printer OK")
-                    Dim data = GetPrinterPageInfo(printer)
-                    Debugger.Break()
-                    Dim printOut As String = ""
-                    For Each item As PaperSize In data.PrinterSettings.PaperSizes
-                        printOut += item.PaperName + vbCrLf
-                    Next
-                    printOut += " Paper Sources " + vbCrLf
-                    For Each item As PaperSource In data.PrinterSettings.PaperSources
-                        printOut += item.SourceName + vbCrLf
-                    Next
-                    MessageBox.Show(printOut)
-                Else
-                    MessageBox.Show("Printer doesn't exist")
-                End If
-                'Debugger.Break()
             End If
-
-            'View.PayFrequency = Service.GetField(Of String, Int16)(View.PayCycleIdNo, "PayCycle", "IdNo", "PayFrequency")
         End Sub
 
 
@@ -70,29 +63,32 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub UpdatePrinterDataSource()
-            SetPrinterSupportedPaper(View.PrinterName)
-            SetPrinterSupportedSources(View.PrinterName)
-            SetInstalledPrinter()
+            If IsPrinterValid(View.PrinterName) Then
+                SetPrinterSupportedPaper(View.PrinterName)
+                SetPrinterSupportedSources(View.PrinterName)
+            End If
         End Sub
 
         Private Sub SetPrinterSupportedPaper(pPrinterName As String)
             Dim data = GetPrinterPageInfo(pPrinterName)
             Dim paperSizeLookup As New List(Of Lookup.LookupData)
             Dim index As Int16 = 0
-            For Each item As PaperSize In data.PrinterSettings.PaperSizes
-                Dim dbLookup = New Lookup.LookupData
-                dbLookup.IdNo = item.RawKind
-                dbLookup.Name = item.PaperName
-                dbLookup.Code = item.Kind
-                dbLookup.Index = index
-                paperSizeLookup.Add(dbLookup)
-                index += 1
-            Next
-            Dim savedDefaultPaperSize As Int32? = View.DefaultPaperSize
-            GetControlName("DefaultPaperSize").DataSource = paperSizeLookup
-            View.DefaultPaperSize = savedDefaultPaperSize
-            If savedDefaultPaperSize is Nothing or savedDefaultPaperSize = 0 then
-                View.DefaultPaperSize = data.PrinterSettings.DefaultPageSettings.PaperSize.RawKind
+            If data.PrinterSettings.IsValid() Then
+                For Each item As PaperSize In data.PrinterSettings.PaperSizes
+                    Dim dbLookup = New Lookup.LookupData
+                    dbLookup.IdNo = item.RawKind
+                    dbLookup.Name = item.PaperName
+                    dbLookup.Code = item.Kind
+                    dbLookup.Index = index
+                    paperSizeLookup.Add(dbLookup)
+                    index += 1
+                Next
+                Dim savedDefaultPaperSize As Int32? = View.DefaultPaperSize
+                GetControlName("DefaultPaperSize").DataSource = paperSizeLookup
+                View.DefaultPaperSize = savedDefaultPaperSize
+                If savedDefaultPaperSize Is Nothing Or savedDefaultPaperSize = 0 Then
+                    View.DefaultPaperSize = data.PrinterSettings.DefaultPageSettings.PaperSize.RawKind
+                End If
             End If
         End Sub
 
@@ -112,20 +108,16 @@ Namespace PresentationLayer.Presenters
             Dim savedDefaultPaperSource As Int32? = View.DefaultPaperSource
             GetControlName("DefaultPaperSource").DataSource = paperSourceLookup
             View.DefaultPaperSource = savedDefaultPaperSource
-            If savedDefaultPaperSource Is Nothing or savedDefaultPaperSource = 0 then
+            If savedDefaultPaperSource Is Nothing Or savedDefaultPaperSource = 0 Then
                 View.DefaultPaperSource = data.PrinterSettings.DefaultPageSettings.PaperSource.RawKind
             End If
         End Sub
-       
+
         Private Sub SetInstalledPrinter()
             Dim data As New List(Of Lookup.LookupData)
             ' Find all printers installed
             Dim index As Int16 = 0
             For Each item In PrinterSettings.InstalledPrinters
-
-            '    cboThisPrinter.Items.Add(pkInstalledPrinters)
-            'Next pkInstalledPrinters
-            'For Each item As PaperSize In data.PrinterSettings.PaperSizes
                 Dim dbLookup = New Lookup.LookupData
                 dbLookup.IdNo = index
                 dbLookup.Name = item
@@ -134,6 +126,7 @@ Namespace PresentationLayer.Presenters
                 data.Add(dbLookup)
                 index += 1
             Next
+            Dim oldData = GetControlName("PrinterName").DataSource
             GetControlName("PrinterName").DataSource = data
         End Sub
 

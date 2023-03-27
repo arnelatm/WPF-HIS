@@ -13,12 +13,15 @@ Namespace BusinessLayer
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("PrinterName"))
                 AddRule(New ValidateRequired("PrinterCode"))
+                AddRule(New ValidateRequired("DefaultPaperOrientation"))
+                AddRule(New ValidateRequired("DefaultPaperSize"))
+                AddRule(New ValidateRequired("HostOrIpName"))
             End If
         End Sub
 
-        Public Property DefaultPaperOrientation As Int32?
-        Public Property DefaultPaperSize As Int32?
-        Public Property DefaultPaperSource As Int32?
+        Public Property DefaultPaperOrientation As Int16
+        Public Property DefaultPaperSize As Int16
+        Public Property DefaultPaperSource As Int16
         Public Property HostOrIpName As String
         Public Property IdNo As Int16
         Public Property PrinterCode As String

@@ -5,13 +5,15 @@ Namespace PresentationLayer.Views.Interface
     Public Interface IPrintJobView
         Inherits IView
 
-        Property ComputerIdNo As Int16
         Property IdNo As Int16
-        Property PaperOrientation As Int32?
-        Property PaperSize As Int32?
-        Property PaperSource As Int32?
-        Property PrinterIdNo As Int16?
-        Property PrintJobName As Int32?
+        Property PaperOrientation As Int16
+        Property PaperSize As Int16
+        Property PaperSource As Int16
+        Property PrinterIdNo As Int16
+        Property PrintJobCode As String
+        Property PrintJobName As String
+        Property PrintJobNameAra As String
+        Event PrinterChanged(sender As Object)
 
     End Interface
 

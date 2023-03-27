@@ -49,7 +49,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DefaultPaperSize As Int32? Implements IPrinterView.DefaultPaperSize
+        Public Property DefaultPaperSize As Int16 Implements IPrinterView.DefaultPaperSize
             Get
                 Return cboDefaultPaperSize.GetValue()
             End Get
@@ -58,7 +58,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DefaultPaperSource As Int32? Implements IPrinterView.DefaultPaperSource
+        Public Property DefaultPaperSource As Int16 Implements IPrinterView.DefaultPaperSource
             Get
                 Return cboDefaultPaperSource.GetValue()
             End Get
@@ -67,7 +67,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DefaultPaperOrientation As Int32? Implements IPrinterView.DefaultPaperOrientation
+        Public Property DefaultPaperOrientation As Int16 Implements IPrinterView.DefaultPaperOrientation
             Get
                 Return cboDefaultPaperOrientation.GetValue()
             End Get
@@ -104,8 +104,12 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent CheckPrinterClicked(Me)
         End Sub
 
+        Private Sub cboPrinterName_TextChanged(sender As Object, e As EventArgs) Handles cboPrinterName.TextChanged
+            RaiseEvent PrinterChanged(Me)
+        End Sub
+
         'Private Sub cboPrinterName_TextChanged(sender As Object, e As EventArgs) Handles cboPrinterName.TextChanged
-        '    'RaiseEvent PrinterChanged(Me)
+        '    RaiseEvent PrinterChanged(Me)
         'End Sub
 
         'Private Sub PrinterEntryTv_Load(sender As Object, e As EventArgs) Handles MyBase.Load

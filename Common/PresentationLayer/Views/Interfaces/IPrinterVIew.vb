@@ -6,9 +6,9 @@ Namespace PresentationLayer.Views.Interface
     Public Interface IPrinterView
         Inherits IView
 
-        Property DefaultPaperOrientation As Int32?
-        Property DefaultPaperSize As Int32?
-        Property DefaultPaperSource As Int32?
+        Property DefaultPaperOrientation As Int16
+        Property DefaultPaperSize As Int16
+        Property DefaultPaperSource As Int16
         Property HostOrIpName As String
         Property IdNo As Int16
         Property PrinterCode As String

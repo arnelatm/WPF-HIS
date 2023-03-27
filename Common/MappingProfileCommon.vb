@@ -56,6 +56,8 @@ Public Class MappingProfileCommon
         CreateMap(Of PrinterModel, IPrinterView).ReverseMap()
         CreateMap(Of PrintSetup, PrintSetupModel).ReverseMap()
         CreateMap(Of PrintSetupModel, IPrintSetupView).ReverseMap()
+        CreateMap(Of PrintJob, PrintJobModel).ReverseMap()
+        CreateMap(Of PrintJobModel, IPrintJobView).ReverseMap()
 
         'destination >= destination.Value, opt >= opt.NullSubstitute("Other Value")));;
 
