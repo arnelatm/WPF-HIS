@@ -25,7 +25,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateDataSourceGroupCode("DefaultPaperOrientation", "PPOR")
+            CreateDataSourceGroupCode("PaperOrientation", "PPOR")
             SetDataSourceInstalledPrinter("PrinterName")
         End Sub
 
@@ -56,15 +56,15 @@ Namespace PresentationLayer.Presenters
 
         Private Sub OnBeforeMappingData(ByVal dataModel As Object) Handles MyBase.BeforeMappingData
             View.PrinterName = dataModel.PrinterName
-            View.DefaultPaperSize = dataModel.DefaultPaperSize
-            View.DefaultPaperSource = dataModel.DefaultPaperSource
+            View.PaperSize = dataModel.PaperSize
+            View.PaperSource = dataModel.PaperSource
             UpdatePrinterDataSource()
         End Sub
 
         Private Sub UpdatePrinterDataSource()
             If IsPrinterValid(View.PrinterName) Then
-                SetPrinterSupportedPaper(View.PrinterName, View.DefaultPaperSize)
-                SetPrinterSupportedSources(View.PrinterName, View.DefaultPaperSource)
+                SetPrinterSupportedPaper(View.PrinterName, View.PaperSize)
+                SetPrinterSupportedSources(View.PrinterName, View.PaperSource)
             End If
         End Sub
 

@@ -19,7 +19,6 @@ Namespace DataLayer.AdoNet
                                   "PaperSource," &
                                   "PrinterIdNo," &
                                   "PrintJobIdNo," &
-                                  "PrintSetupCode," &
                                   "PrintSetupName"
 
         'Public Function GetPrintSetupByName(PrintJobIdNo As String) As PrintSetup Implements iDao(Of PrintSetup).GetPrintSetupByName
@@ -64,7 +63,6 @@ Namespace DataLayer.AdoNet
             .PaperSource = Extensions.AsNullable(Of Int16)(reader("PaperSource")),
             .PrinterIdNo = Extensions.AsNullable(Of Int16)(reader("PrinterIdNo")),
             .PrintJobIdNo = Extensions.AsNullable(Of Int16)(reader("PrintJobIdNo")),
-            .PrintSetupCode = Extensions.AsString(reader("PrintSetupCode")),
             .PrintSetupName = Extensions.AsString(reader("PrintSetupName"))
             }
 

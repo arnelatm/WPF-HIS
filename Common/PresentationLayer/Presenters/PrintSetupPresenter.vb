@@ -12,6 +12,7 @@ Namespace PresentationLayer.Presenters
 
             Service = New CommonService("PrintSetup")
             TableName = "PrintSetup_View"
+            TableBaseName = "PrintSetup"
             TreeViewMainField = "PrintSetupName"
             TreeViewSecondaryField = ""
             SortOrderKey = "PrintSetupName"

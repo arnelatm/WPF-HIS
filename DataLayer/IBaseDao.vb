@@ -66,7 +66,7 @@ Public Interface IBaseDao
 
     Function GetNextSeries(ByVal seriesName As String) As Integer
 
-    Function GetPrintSetupIdNo(reportFileName As String) As Integer
+    Function GetPrintJobIdNo(reportFileName As String) As Integer
 
     Function GetRecordCount(tableName As String, Optional Filter As String = Nothing) As Integer
 

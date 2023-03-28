@@ -93,15 +93,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PrintSetupCode As String Implements IPrintSetupView.PrintSetupCode
-            Get
-                Return txtPrintSetupCode.Text
-            End Get
-            Set
-                txtPrintSetupCode.Text = Value
-            End Set
-        End Property
-
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()

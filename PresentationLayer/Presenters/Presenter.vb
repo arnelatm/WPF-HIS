@@ -142,7 +142,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
     Protected WithEvents FormTreeView As TreeView
     Protected NodeToDelete As TreeNode
 
-    Public Sub DisplayTree(optional IdNo As Int64 = 0)
+    Public Sub DisplayTree(Optional IdNo As Int64 = 0)
         Dim root As TreeNode = FormTreeView.Nodes(0)
         root.Nodes.Clear()
         Dim treeViewData As Object = GetTreeViewData()
@@ -167,9 +167,8 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
         Dim cModel As New TM
         Dim lookupObj As New Lookup(TableName, DataFilter)
         lookupObj.NameField = TreeViewMainField
-        If TreeViewSecondaryField Is Nothing Then
-            lookupObj = ChangeTvSecondaryFieldIfView(lookupObj)
-        End If
+
+        ComposeSecondaryField()
         If SortOrderKey IsNot Nothing Then
             lookupObj.SortKey = SortOrderKey
         End If
@@ -191,12 +190,28 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
         End If
     End Function
 
-    Private Function ChangeTvSecondaryFieldIfView(lookupObj As Lookup) As Lookup
+    Private Sub ComposeSecondaryField()
         If Right(TableName, 5) = "_View" Then
-            TreeViewSecondaryField = Left(TableName, TableName.Length - 5) + "Code"
+            If TreeViewSecondaryField Is Nothing Then
+                If TableBaseName Is Nothing Then
+                    TreeViewSecondaryField = TableName + "Code"
+                Else
+                    TreeViewSecondaryField = Left(TableName, TableName.Length - 5) + "Code"
+                End If
+            End If
+        Else
+            If TreeViewSecondaryField Is Nothing Then
+                If TableBaseName Is Nothing Then
+                    TreeViewSecondaryField = TableName + "Code"
+                Else
+                    TreeViewSecondaryField = TableBaseName + "Code"
+                End If
+            End If
         End If
-        Return lookupObj
-    End Function
+        If String.IsNullOrEmpty(TreeViewSecondaryField) then
+           TreeViewSecondaryField = ""
+        End If
+    End Sub
 
     Protected Overloads Sub AddRecordToTreeHierarchical(dataNode As Object, parentChanged As Boolean, treeViewTableName As TreeView)
         Dim parentIdValue As Integer? = GetPropertyValue(dataNode, ParentFieldName)
@@ -235,7 +250,11 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
     Protected Function MakeTreeNode(mainFieldValue As String, secondaryFieldValue As String, idNo As Int32) _
         As TreeNode
         Dim treeTextDisplay As String
-        treeTextDisplay = TreeNodeTextDisplay(mainFieldValue, secondaryFieldValue)
+        If TreeViewSecondaryField Is Nothing OrElse TreeViewSecondaryField <> "" Then
+            treeTextDisplay = TreeNodeTextDisplay(mainFieldValue, secondaryFieldValue)
+        Else
+            treeTextDisplay = TreeNodeTextDisplay(mainFieldValue)
+        End If
         Return New TreeNode With {
             .Text = treeTextDisplay,
             .Tag = idNo,

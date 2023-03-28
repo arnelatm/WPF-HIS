@@ -36,7 +36,7 @@ Namespace Services
         Function GetLastSortKey(ByVal searchValue As String, ByVal tableName As String) As String
         Function GetMainTableColumnProperties(tableName As String) As List(Of TblColProp)
         Function GetNextSeries(seriesName As String) As Integer
-        Function GetPrintSetupIdNo(reportName As String) As Integer
+        Function GetPrintJobIdNo(reportName As String) As Integer
         Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM
         Function GetRecordCount(tableName As String, Optional filter As String = Nothing) As Integer
         Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, Optional ByVal dateTimeStampField As String = "DateTimeStamp") As Object

@@ -15,6 +15,7 @@ Namespace PresentationLayer.Presenters
             MyBase.New(itemView)
             Service = New AccountsService("DosagePrinting")
             TableName = "Dosage_View"
+            TableBaseName = "Dosage"
             TreeViewMainField = "DosageName"
             SortOrderKey = "DosageName"
             WithTreeView = True
