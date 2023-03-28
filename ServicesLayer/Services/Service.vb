@@ -577,8 +577,8 @@ Namespace Services
         '    Dim idNo As T = DataDao.GetIdNoWithName(Of T)(tableName, itemName)
         '    Return idNo
         'End Function
-        Public Function GetPrintSetupIdNo(reportName As String) As Integer Implements IService.GetPrintSetupIdNo
-            Return DataDao.GetPrintSetupIdNo(reportName)
+        Public Function GetPrintJobIdNo(reportName As String) As Integer Implements IService.GetPrintJobIdNo
+            Return DataDao.GetPrintJobIdNo(reportName)
         End Function
 
         Public Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM Implements IService.GetRecordByIdNo

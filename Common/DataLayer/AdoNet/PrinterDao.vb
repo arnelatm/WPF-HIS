@@ -12,9 +12,9 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Private Const FieldList = "DefaultPaperOrientation," &
-                                  "DefaultPaperSize," &
-                                  "DefaultPaperSource," &
+        Private Const FieldList = "PaperOrientation," &
+                                  "PaperSize," &
+                                  "PaperSource," &
                                   "HostOrIpName," &
                                   "IdNo," &
                                   "PrinterCode," &
@@ -34,9 +34,9 @@ Namespace DataLayer.AdoNet
         Public Function UpdateRecord(ByRef Printer As Printer) As Integer Implements IDao(Of Printer).UpdateRecord
             Dim sql As String =
                     "UPDATE [Printer] SET " &
-                    "DefaultPaperOrientation = @DefaultPaperOrientation, " &
-                    "DefaultPaperSize = @DefaultPaperSize, " &
-                    "DefaultPaperSource = @DefaultPaperSource, " &
+                    "PaperOrientation = @PaperOrientation, " &
+                    "PaperSize = @PaperSize, " &
+                    "PaperSource = @PaperSource, " &
                     "HostOrIpName = @HostOrIpName, " &
                     "PrinterCode = @PrinterCode, " &
                     "PrinterName = @PrinterName " &
@@ -47,8 +47,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef Printer As Printer) As Integer Implements IDao(Of Printer).AddRecord
             Dim sql As String =
                     " INSERT INTO [Printer] " &
-                    " (DefaultPaperOrientation,DefaultPaperSize,DefaultPaperSource,HostOrIpName,PrinterCode,PrinterName) " &
-                    " VALUES (@DefaultPaperOrientation,@DefaultPaperSize,@DefaultPaperSource,@HostOrIpName,@PrinterCode,@PrinterName)"
+                    " (PaperOrientation,PaperSize,PaperSource,HostOrIpName,PrinterCode,PrinterName) " &
+                    " VALUES (@PaperOrientation,@PaperSize,@PaperSource,@HostOrIpName,@PrinterCode,@PrinterName)"
             Return _db.Insert(sql, Take(Printer))
         End Function
 
@@ -56,9 +56,9 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New Printer() With {
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
-            .DefaultPaperOrientation = Extensions.AsNullable(Of Int16)(reader("DefaultPaperOrientation")),
-            .DefaultPaperSize = Extensions.AsNullable(Of Int16)(reader("DefaultPaperSize")),
-            .DefaultPaperSource = Extensions.AsNullable(Of Int16)(reader("DefaultPaperSource")),
+            .PaperOrientation = Extensions.AsNullable(Of Int16)(reader("PaperOrientation")),
+            .PaperSize = Extensions.AsNullable(Of Int16)(reader("PaperSize")),
+            .PaperSource = Extensions.AsNullable(Of Int16)(reader("PaperSource")),
             .HostOrIpName = Extensions.AsString(reader("HostOrIpName")),
             .PrinterCode = Extensions.AsString(reader("PrinterCode")),
             .PrinterName = Extensions.AsString(reader("PrinterName"))
@@ -66,9 +66,9 @@ Namespace DataLayer.AdoNet
 
         Private Function Take(Printer As Printer) As Object()
             Return New Object() {
-                                    "@DefaultPaperOrientation", Printer.DefaultPaperOrientation,
-                                    "@DefaultPaperSize", Printer.DefaultPaperSize,
-                                    "@DefaultPaperSource", Printer.DefaultPaperSource,
+                                    "@PaperOrientation", Printer.PaperOrientation,
+                                    "@PaperSize", Printer.PaperSize,
+                                    "@PaperSource", Printer.PaperSource,
                                     "@HostOrIpName", Printer.HostOrIpName,
                                     "@IdNo", Printer.IdNo,
                                     "@PrinterCode", Printer.PrinterCode,

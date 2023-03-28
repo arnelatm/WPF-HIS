@@ -24,7 +24,7 @@ Public Class Lookup
     End Class
 
     Public Class LookupData
-        Public Property IdNo 
+        Public Property IdNo
         Public Property Name As String
         Public Property Code As String
         Public Property Index
@@ -38,16 +38,24 @@ Public Class Lookup
     Private Sub ComposeDefaultLookupValues(Optional filter As String = Nothing)
         If Right(TableName, 5) = "_View" Then
             NameField = Left(TableName, TableName.Length - 5) + "Name"
-            CodeField = Left(TableName, TableName.Length - 5) + "Code"
+            If CodeField Is Nothing Then
+                CodeField = Left(TableName, TableName.Length - 5) + "Code"
+            End If
         Else
             NameField = TableName + "Name"
-            CodeField = TableName + "Code"
+            If CodeField Is Nothing Then
+                CodeField = TableName + "Code"
+            End If
         End If
         SortKey = NameField
         If TableName = "List" Then
             FieldsToShow = {"IdNo", NameField}
         Else
-            FieldsToShow = {"IdNo", NameField, CodeField}
+            If CodeField = "" Then
+                FieldsToShow = {"IdNo", NameField}
+            Else
+                FieldsToShow = {"IdNo", NameField, CodeField}
+            End If
         End If
         FilterKey = filter
     End Sub

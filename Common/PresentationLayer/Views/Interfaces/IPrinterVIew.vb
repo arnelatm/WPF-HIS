@@ -6,15 +6,14 @@ Namespace PresentationLayer.Views.Interface
     Public Interface IPrinterView
         Inherits IView
 
-        Property DefaultPaperOrientation As Int16
-        Property DefaultPaperSize As Int16
-        Property DefaultPaperSource As Int16
         Property HostOrIpName As String
         Property IdNo As Int16
+        Property PaperOrientation As Int16
+        Property PaperSize As Int16
+        Property PaperSource As Int16
         Property PrinterCode As String
         Property PrinterName As String
         Event CheckPrinterClicked(sender As Object)
-
         Event PrinterChanged(sender As Object)
 
     End Interface

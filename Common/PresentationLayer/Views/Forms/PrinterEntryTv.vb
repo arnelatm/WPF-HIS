@@ -49,30 +49,30 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DefaultPaperSize As Int16 Implements IPrinterView.DefaultPaperSize
+        Public Property PaperSize As Int16 Implements IPrinterView.PaperSize
             Get
-                Return cboDefaultPaperSize.GetValue()
+                Return cboPaperSize.GetValue()
             End Get
             Set
-                cboDefaultPaperSize.SetValue(Value)
+                cboPaperSize.SetValue(Value)
             End Set
         End Property
 
-        Public Property DefaultPaperSource As Int16 Implements IPrinterView.DefaultPaperSource
+        Public Property PaperSource As Int16 Implements IPrinterView.PaperSource
             Get
-                Return cboDefaultPaperSource.GetValue()
+                Return cboPaperSource.GetValue()
             End Get
             Set
-                cboDefaultPaperSource.SetValue(Value)
+                cboPaperSource.SetValue(Value)
             End Set
         End Property
 
-        Public Property DefaultPaperOrientation As Int16 Implements IPrinterView.DefaultPaperOrientation
+        Public Property PaperOrientation As Int16 Implements IPrinterView.PaperOrientation
             Get
-                Return cboDefaultPaperOrientation.GetValue()
+                Return cboPaperOrientation.GetValue()
             End Get
             Set
-                cboDefaultPaperOrientation.SetValue(Value)
+                cboPaperOrientation.SetValue(Value)
             End Set
         End Property
 
@@ -92,9 +92,9 @@ Namespace PresentationLayer.Views.Forms
                 {
                 {"HostOrIpName", txtHostOrIpName},
                 {"IdNo", TxtIdNo},
-                {"DefaultPaperOrientation", cboDefaultPaperOrientation},
-                {"DefaultPaperSize", cboDefaultPaperSize},
-                {"DefaultPaperSource", cboDefaultPaperSource},
+                {"PaperOrientation", cboPaperOrientation},
+                {"PaperSize", cboPaperSize},
+                {"PaperSource", cboPaperSource},
                 {"PrinterCode", txtPrinterCode},
                 {"PrinterName", cboPrinterName}
                 }
@@ -154,12 +154,12 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
         'Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
-        '    Dim nDefaultPaperSize As Int32? = DefaultPaperSize
-        '    Dim nDefaultPaperSource As Int32? = DefaultPaperSource
+        '    Dim nPaperSize As Int32? = PaperSize
+        '    Dim nPaperSource As Int32? = PaperSource
         '    RaiseEvent PrinterChanged(Me)
-        '    cboDefaultPaperOrientation.Refresh()
-        '    DefaultPaperSize = nDefaultPaperSize
-        '    DefaultPaperSource = nDefaultPaperSource
+        '    cboPaperOrientation.Refresh()
+        '    PaperSize = nPaperSize
+        '    PaperSource = nPaperSource
         'End Sub
 
 

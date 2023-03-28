@@ -2,6 +2,9 @@
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Common.BusinessLayer
+Imports AATM.Common.Models
+Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AutoMapper
 
 Public Class MappingProfileAccounts
@@ -205,6 +208,9 @@ Public Class MappingProfileAccounts
 
         CreateMap(Of DosagePrinting, DosageModel)().ReverseMap()
         CreateMap(Of DosageModel, IDosagePrintingView)().ReverseMap()
+
+        CreateMap(Of PrintSetup, PrintSetupModel)().ReverseMap()
+        CreateMap(Of PrintSetupModel, IPrintSetupView)().ReverseMap()
 
         'CreateMap(Of PmrPatientDisplayModel, PmrPatientDisplayView)()
 

@@ -4,11 +4,11 @@
 
         ' ** Enterprise Design Pattern: Identity field pattern
 
-        Public Property DefaultPaperOrientation As Int16
-        Public Property DefaultPaperSize As Int16
-        Public Property DefaultPaperSource As Int16
         Public Property HostOrIpName As String
         Public Property IdNo As Int16
+        Public Property PaperOrientation As Int16
+        Public Property PaperSize As Int16
+        Public Property PaperSource As Int16
         Public Property PrinterCode As String
         Public Property PrinterName As String
 
