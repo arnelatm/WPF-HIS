@@ -102,39 +102,57 @@ Public Class ReportPrinter
         End If
     End Sub
 
-    Public Overloads Sub SetPrintOption(printerName As String, paperSizeName As String, paperOrientation As Int16?, paperSource As Int16?)
-        If printerName IsNot Nothing Then
-            Dim dPrinterName As String = _report.PrintOptions.PrinterName
-            Dim noPrinter As Boolean = _report.PrintOptions.NoPrinter
-            Try
+    Public Overloads Sub SetPrintOption(printerName As String, paperSize As Int16, paperOrientation As Int16?, paperSource As Int16?)
+        Dim dPrinterName As String = _report.PrintOptions.PrinterName
+        Dim dPaperOrientation As Int16 = _report.PrintOptions.PaperOrientation
+        Dim dPaperSource As Int16 = _report.PrintOptions.PaperSource
+        Dim dPaperSize As Int16 = _report.PrintOptions.PaperSize
+        Dim noPrinter As Boolean = _report.PrintOptions.NoPrinter
+        Try
+            If printerName IsNot Nothing Then
                 _report.PrintOptions.NoPrinter = False
                 _report.PrintOptions.PrinterName = printerName
-            Catch ex As Exception
-                MessageTimeOut("The Printer <" & printerName & "> doesn't exist on this system, using Default Printer.", "Invalid Printer Setup", 5)
-                _report.PrintOptions.NoPrinter = noPrinter
-                _report.PrintOptions.PrinterName = dPrinterName
-            End Try
-        End If
-        If paperSizeName IsNot Nothing Then
-            SetPaperSize(paperSizeName)
-        End If
-        If paperOrientation IsNot Nothing Then
-            Dim dPaperOrientation As Int16 = _report.PrintOptions.PaperOrientation
-            Try
-                _report.PrintOptions.PaperOrientation = paperOrientation
-            Catch ex As Exception
-                _report.PrintOptions.PaperOrientation = dPaperOrientation
-            End Try
-        End If
-        If paperSource IsNot Nothing Then
-            Dim dPaperSource As Int16
-            dPaperSource = _report.PrintOptions.PaperSource
-            Try
-                _report.PrintOptions.PaperSource = paperSource
-            Catch ex As Exception
-                _report.PrintOptions.PaperSource = dPaperSource
-            End Try
-        End If
+                If paperSize <> 0 Then
+                    Try
+                        _report.PrintOptions.PaperSize = paperSize
+                    Catch ex As Exception
+                        _report.PrintOptions.PaperSize = dPaperOrientation
+                    End Try
+                Else
+                    _report.PrintOptions.PaperSize = dPaperSize
+                End If
+                If paperOrientation IsNot Nothing Then
+                    Try
+                        _report.PrintOptions.PaperOrientation = paperOrientation
+                    Catch ex As Exception
+                        _report.PrintOptions.PaperOrientation = dPaperOrientation
+                    End Try
+                Else
+                    _report.PrintOptions.PaperOrientation = dPaperOrientation
+                End If
+                If paperSource IsNot Nothing Then
+                    Try
+                        Try
+                            _report.PrintOptions.PaperSource = paperSource
+                        Catch ex As Exception
+                            _report.PrintOptions.PaperSource = dPaperSource
+                        End Try
+                    Catch ex As Exception
+                        _report.PrintOptions.PaperSource = dPaperSource
+                    End Try
+                Else
+                    _report.PrintOptions.PaperSource = dPaperSource
+                End If
+            Else
+
+            End If
+        Catch
+            MessageTimeOut("The Printer <" & printerName & "> doesn't exist on this system, using Default Printer.", "Invalid Printer Setup", 5)
+            _report.PrintOptions.NoPrinter = noPrinter
+            _report.PrintOptions.PrinterName = dPrinterName
+            _report.PrintOptions.PaperOrientation = dPaperOrientation
+            _report.PrintOptions.PaperSource = dPaperSource
+        End Try
     End Sub
 
     Private Sub SetPaperSize(paperName As String)
