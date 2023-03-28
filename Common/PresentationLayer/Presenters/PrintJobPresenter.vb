@@ -20,14 +20,14 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Sub CreateDataSources()
             CreateDataSource("Printer", "PrinterIdNo")
-            CreateDataSourceGroupCode("PaperOrientation", "PPOR")
         End Sub
 
         Private Sub UpdatePrinterDataSource()
             Dim printerName As String = GetFieldWithIdNo(View.printerIdNo,"Printer","PrinterName")
             If IsPrinterValid(printerName) Then               
-                SetPrinterSupportedPaper(printerName, View.PaperSize)
+                SetPrinterSupportedPaperSize(printerName, View.PaperSize)
                 SetPrinterSupportedSources(printerName, View.PaperSource)
+                SetPrinterSupportedPaperOrientation(printerName, View.PaperOrientation)
             End If
         End Sub
 
