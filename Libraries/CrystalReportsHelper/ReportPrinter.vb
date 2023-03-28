@@ -123,9 +123,17 @@ Public Class ReportPrinter
                 End If
                 If paperOrientation IsNot Nothing Then
                     Try
-                        _report.PrintOptions.PaperOrientation = paperOrientation
+                        Dim po As CrystalDecisions.Shared.PaperOrientation
+                        If paperOrientation = 1 Then
+                            po = CrystalDecisions.Shared.PaperOrientation.Portrait
+                        ElseIf paperOrientation = 2 Then
+                            po = CrystalDecisions.Shared.PaperOrientation.Landscape
+                        Else
+                            po = CrystalDecisions.Shared.PaperOrientation.DefaultPaperOrientation
+                        End If
+                        _report.PrintOptions.PaperOrientation = po
                     Catch ex As Exception
-                        _report.PrintOptions.PaperOrientation = dPaperOrientation
+                        _report.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.DefaultPaperOrientation
                     End Try
                 Else
                     _report.PrintOptions.PaperOrientation = dPaperOrientation
@@ -188,4 +196,16 @@ Public Class ReportPrinter
         Return _report
     End Function
 
+    Public Function SetPaperOrientation(paperOrientation As Int16) As CrystalDecisions.Shared.PaperOrientation
+        Dim po As CrystalDecisions.Shared.PaperOrientation
+        If paperOrientation = 1 Then
+            po = CrystalDecisions.Shared.PaperOrientation.Portrait
+        ElseIf paperOrientation = 2 Then
+            po = CrystalDecisions.Shared.PaperOrientation.Landscape
+        Else
+            po = CrystalDecisions.Shared.PaperOrientation.DefaultPaperOrientation
+        End If
+        _report.PrintOptions.PaperOrientation = po
+        Return po
+    End Function
 End Class

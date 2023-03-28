@@ -6,11 +6,13 @@ Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
+Imports AATM.Libraries.CrystalReportsHelper
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
 Imports AATM.ServicesLayer.Services
 Imports AutoMapper
+Imports CrystalDecisions.Shared
 
 Namespace PresentationLayer.Presenters
 
@@ -260,7 +262,7 @@ Namespace PresentationLayer.Presenters
             Dim data = GlobalFunctions.GetPrinterPageInfo(pPrinterName)
             Dim paperSourceLookup As New List(Of Lookup.LookupData)
             Dim index As Int16 = 0
-            For Each item As PaperSource In data.PrinterSettings.PaperSources
+            For Each item As Drawing.Printing.PaperSource In data.PrinterSettings.PaperSources
                 Dim dbLookup = New Lookup.LookupData
                 dbLookup.IdNo = item.RawKind
                 dbLookup.Name = item.SourceName
@@ -269,43 +271,64 @@ Namespace PresentationLayer.Presenters
                 paperSourceLookup.Add(dbLookup)
                 index += 1
             Next
-            Dim savedPaperSource As Int32? = paperSource
+            Dim savedPaperSource As Int16? = paperSource
             GetControlName("PaperSource").DataSource = paperSourceLookup
             paperSource = savedPaperSource
-            If savedPaperSource Is Nothing Or savedPaperSource = 0 Then
+            If savedPaperSource Is Nothing OrElse savedPaperSource = 0 Then
                 paperSource = data.PrinterSettings.DefaultPageSettings.PaperSource.RawKind
             End If
         End Sub
 
-        Protected Sub SetPrinterSupportedPaper(pPrinterName As String, ByRef paperSize As Int16)
+        Protected Sub SetPrinterSupportedPaperSize(pPrinterName As String, ByRef paperSize As Int16)
             Dim data = GetPrinterPageInfo(pPrinterName)
             Dim paperSizeLookup As New List(Of Lookup.LookupData)
             Dim index As Int16 = 0
-            If data.PrinterSettings.IsValid() Then
-                For Each item As PaperSize In data.PrinterSettings.PaperSizes
-                    Dim dbLookup = New Lookup.LookupData
-                    dbLookup.IdNo = item.RawKind
-                    dbLookup.Name = item.PaperName
-                    dbLookup.Code = item.Kind
-                    dbLookup.Index = index
-                    paperSizeLookup.Add(dbLookup)
-                    index += 1
-                Next
-                Dim savedDefaultPaperSize As Int32? = paperSize
-                GetControlName("PaperSize").DataSource = paperSizeLookup
-                paperSize = savedDefaultPaperSize
-                If savedDefaultPaperSize Is Nothing Or savedDefaultPaperSize = 0 Then
-                    paperSize = data.PrinterSettings.DefaultPageSettings.PaperSize.RawKind
-                End If
+            For Each item As Drawing.Printing.PaperSize In data.PrinterSettings.PaperSizes
+                Dim dbLookup = New Lookup.LookupData
+                dbLookup.IdNo = item.RawKind
+                dbLookup.Name = item.PaperName
+                dbLookup.Code = item.Kind
+                dbLookup.Index = index
+                paperSizeLookup.Add(dbLookup)
+                index += 1
+            Next
+            Dim savedDefaultPaperSize As Int16? = paperSize
+            GetControlName("PaperSize").DataSource = paperSizeLookup
+            paperSize = savedDefaultPaperSize
+            If savedDefaultPaperSize Is Nothing OrElse savedDefaultPaperSize = 0 Then
+                paperSize = data.PrinterSettings.DefaultPageSettings.PaperSize.RawKind
             End If
         End Sub
 
-        'Private Function LookupDataCreator(ByVal tableName As String)
-        '    Dim cd As New DataCreator(Service)
-        '    Dim data As List(Of Lookup.LookupData) = cd.CreateData(tableName)
-        '    cd = Nothing
-        '    Return data
-        'End Function
+        Protected Sub SetPrinterSupportedPaperOrientation(pPrinterName As String, ByRef paperOrientation As Int16)
+            Dim data = GetPrinterPageInfo(pPrinterName)
+            Dim paperOrientationLookup As New List(Of Lookup.LookupData)
+            Dim index As Int16 = 0
+            Dim dbLookup = New Lookup.LookupData
+            dbLookup.IdNo = CrystalDecisions.Shared.PaperOrientation.DefaultPaperOrientation
+            dbLookup.Name = "DefaultPaperOrientation"
+            dbLookup.Code = "DefaultPaperOrientation"
+            dbLookup.Index = CrystalDecisions.Shared.PaperOrientation.DefaultPaperOrientation
+            paperOrientationLookup.Add(dbLookup)
+            dbLookup = New Lookup.LookupData
+            dbLookup.IdNo = CrystalDecisions.Shared.PaperOrientation.Landscape
+            dbLookup.Name = "Landscape"
+            dbLookup.Code = "Landscape"
+            dbLookup.Index = CrystalDecisions.Shared.PaperOrientation.Landscape
+            paperOrientationLookup.Add(dbLookup)
+            dbLookup = New Lookup.LookupData
+            dbLookup.IdNo = CrystalDecisions.Shared.PaperOrientation.Portrait
+            dbLookup.Name = "Portrait"
+            dbLookup.Code = "Portrait"
+            dbLookup.Index = CrystalDecisions.Shared.PaperOrientation.Portrait
+            paperOrientationLookup.Add(dbLookup)
+            Dim savedDefaultPaperOrientation As Int16? = paperOrientation
+            GetControlName("PaperOrientation").DataSource = paperOrientationLookup
+            paperOrientation = savedDefaultPaperOrientation
+            If savedDefaultPaperOrientation Is Nothing OrElse savedDefaultPaperOrientation = 0 Then
+                paperOrientation = CrystalDecisions.Shared.PaperOrientation.DefaultPaperOrientation
+            End If
+        End Sub
 
     End Class
 

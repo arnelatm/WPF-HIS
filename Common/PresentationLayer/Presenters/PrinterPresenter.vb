@@ -25,7 +25,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateDataSourceGroupCode("PaperOrientation", "PPOR")
+            'CreateDataSourceGroupCode("PaperOrientation", "PPOR")
             SetDataSourceInstalledPrinter("PrinterName")
         End Sub
 
@@ -63,8 +63,9 @@ Namespace PresentationLayer.Presenters
 
         Private Sub UpdatePrinterDataSource()
             If IsPrinterValid(View.PrinterName) Then
-                SetPrinterSupportedPaper(View.PrinterName, View.PaperSize)
+                SetPrinterSupportedPaperSize(View.PrinterName, View.PaperSize)
                 SetPrinterSupportedSources(View.PrinterName, View.PaperSource)
+                SetPrinterSupportedPaperOrientation(View.PrinterName, View.PaperOrientation)
             End If
         End Sub
 
