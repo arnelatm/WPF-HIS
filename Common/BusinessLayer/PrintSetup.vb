@@ -15,7 +15,6 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("PrinterIdNo"))
                 AddRule(New ValidateRequired("PaperOrientation"))
                 AddRule(New ValidateRequired("PaperSize"))
-                AddRule(New ValidateRequired("PaperSource"))
                 AddRule(New ValidateRequired("PrintJobIdNo"))
             End If
         End Sub

@@ -39,10 +39,9 @@ Namespace DataLayer.AdoNet
                     "PaperSize = @PaperSize, " &
                     "PaperSource = @PaperSource, " &
                     "PrinterIdNo = @PrinterIdNo, " &
-                    "PrintSetupIdNo = @PrintSetupIdNo, " &
-                    "PrintJobCode = @PrintJobCVode, " &
+                    "PrintJobCode = @PrintJobCode, " &
                     "PrintJobName = @PrintJobName, " &
-                    "PrintJobNameAra = @PrintJobNameAra" &
+                    "PrintJobNameAra = @PrintJobNameAra " &
                     "WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(printJob))
         End Function

@@ -27,7 +27,7 @@ Namespace PresentationLayer.Presenters
             Dim report As New ReportPrinter(reportFileName, databaseConnectionName, args)
             If print Then
                 Dim psModel As New PrintSetupModel
-                Dim printer As PrinterModel = Nothing
+                Dim printer As New PrinterModel 
                 Dim computerName As String = Environment.MachineName
                 Dim printJobIdNo As Int16 = _pjService.GetPrintJobIdNo(reportFileName)
                 Dim printerFound As Boolean = False
@@ -50,15 +50,20 @@ Namespace PresentationLayer.Presenters
                                 printer.PaperOrientation = IIf(pjModel.PaperOrientation <> 0, pjModel.PaperOrientation, printer.PaperOrientation)
                                 printer.PaperSource = IIf(pjModel.PaperSource <> 0, pjModel.PaperSource, printer.PaperSource)
                             Else
-
+                                printer.PrinterName = Nothing
                             End If
                         End If
+                    Else
+                        Dim pjModel As New PrintJobModel
+                        pjModel = _pjService.GetRecordByIdNo(Of PrintJobModel)(printJobIdNo)
+                        If pjModel.IdNo <> 0 then
+                            printer = _prService.GetRecordByIdNo(Of PrinterModel)(pjModel.PrinterIdNo)
+                            printer.PaperSize = IIf(pjModel.PaperSize <> 0, pjModel.PaperSize, printer.PaperSize)
+                            printer.PaperOrientation = IIf(pjModel.PaperOrientation <> 0, pjModel.PaperOrientation, printer.PaperOrientation)
+                            printer.PaperSource = IIf(pjModel.PaperSource <> 0, pjModel.PaperSource, printer.PaperSource)
+                        End If
                     End If
-                    'Dim printerName As String = _service.GetFieldWithIdNo(pjModel.PrinterIdNo, "Printer", "PrinterName").ToString()  ' force null value to empty string
-                    'Dim hostOrIpName As String = _service.GetFieldWithIdNo(pjModel.IdNo, "Printer", "HostOrIpName").ToString()
-                    'Dim printerSharedName As String = IIf(GlobalFunctions.IsEmpty(hostOrIpName), printerName, "\\" & hostOrIpName & "\" & printerName)
-                    'Dim paperSizeName As String = _service.GetIcNameWithIdNo(CodeGroupSelection.PaperSize, pjModel.PaperSize)
-                End If
+                 End If
                 report.SetPrintOption(printer.PrinterName, printer.PaperSize, printer.PaperOrientation, printer.PaperSource)
             End If
             report.PrintReport(copies, collate, startPage, endPage)
