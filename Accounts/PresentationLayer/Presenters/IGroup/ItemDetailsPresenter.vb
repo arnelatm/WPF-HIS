@@ -15,7 +15,8 @@ Namespace PresentationLayer.Presenters
             Service = New AccountsService("ItemDetails") ', Nothing ,Nothing, "IGROUPCLINIC")
             'Service.SaveConnectionString()
             'Service.SetConnectionString("IGROUPCLINIC")
-            TableName = "ItemDetails"
+            TableName = "ItemDetailsQty_View"
+            TableBaseName = "ItemDetails"
             SortOrderKey = "ItemNameEnglish"
             'Service.RestoreConnectionString()
             WithTreeView = False
@@ -35,7 +36,7 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Sub GoFilter()
             If DataFilter Is Nothing Or DataFilter = "" Then
-                DataFilter = "BranchId = '01' And IsNull(GTIN,'') = '' "
+                DataFilter = "BranchId = '01' And IsNull(GTIN,'')='' and QtyOnHand <> 0 and ItemGroup = 'MD' "
             Else
                 DataFilter = ""
             End If
