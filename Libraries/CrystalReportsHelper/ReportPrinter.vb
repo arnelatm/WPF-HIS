@@ -152,14 +152,30 @@ Public Class ReportPrinter
                     _report.PrintOptions.PaperSource = dPaperSource
                 End If
             Else
-
+                ' use currently selected printer and settings
+                If PrinterExists(dPrinterName) Then
+                    _report.PrintOptions.NoPrinter = noPrinter
+                    _report.PrintOptions.PrinterName = dPrinterName
+                    _report.PrintOptions.PaperSize = dPaperSize
+                    _report.PrintOptions.PaperOrientation = dPaperOrientation
+                    _report.PrintOptions.PaperSource = dPaperSource
+                Else
+                    Dim defaultPrinterName As PrinterSettings = New PrinterSettings()
+                    Dim defaultPrinter As String = defaultPrinterName.PrinterName
+                    _report.PrintOptions.PrinterName = defaultPrinterName.PrinterName
+                    _report.PrintOptions.PaperSize = defaultPrinterName.DefaultPageSettings.PaperSize.RawKind
+                    _report.PrintOptions.PaperSource = defaultPrinterName.DefaultPageSettings.PaperSource.RawKind
+                    _report.PrintOptions.PaperOrientation = IIf(defaultPrinterName.DefaultPageSettings.Landscape, CrystalDecisions.Shared.PaperOrientation.Portrait, CrystalDecisions.Shared.PaperOrientation.Landscape)
+                End If
             End If
         Catch
-            MessageTimeOut("The Printer <" & printerName & "> doesn't exist on this system, using Default Printer.", "Invalid Printer Setup", 5)
-            _report.PrintOptions.NoPrinter = noPrinter
-            _report.PrintOptions.PrinterName = dPrinterName
-            _report.PrintOptions.PaperOrientation = dPaperOrientation
-            _report.PrintOptions.PaperSource = dPaperSource
+            MessageTimeOut("The specified printer does not exist or the report's printer setting is invalid, using Default Printer.", "Invalid Printer Setup", 5)
+            Dim defaultPrinterName As PrinterSettings = New PrinterSettings()
+            Dim defaultPrinter As String = defaultPrinterName.PrinterName
+            _report.PrintOptions.PrinterName = defaultPrinterName.PrinterName
+            _report.PrintOptions.PaperSize = defaultPrinterName.DefaultPageSettings.PaperSize.RawKind
+            _report.PrintOptions.PaperSource = defaultPrinterName.DefaultPageSettings.PaperSource.RawKind
+            _report.PrintOptions.PaperOrientation = IIf(defaultPrinterName.DefaultPageSettings.Landscape, CrystalDecisions.Shared.PaperOrientation.Portrait, CrystalDecisions.Shared.PaperOrientation.Landscape)
         End Try
     End Sub
 
@@ -208,4 +224,12 @@ Public Class ReportPrinter
         _report.PrintOptions.PaperOrientation = po
         Return po
     End Function
+
+    Public Shared Function PrinterExists(printerName As String) As Boolean
+        If String.IsNullOrEmpty(printerName) Then
+            Throw New ArgumentNullException("printerName")
+        End If
+        Return PrinterSettings.InstalledPrinters.Cast(Of String)().Any(Function(name) printerName.ToUpper().Trim() = name.ToUpper().Trim())
+    End Function
+
 End Class
