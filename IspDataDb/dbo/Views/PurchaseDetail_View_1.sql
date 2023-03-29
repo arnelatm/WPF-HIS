@@ -1,25 +1,24 @@
 ﻿CREATE VIEW dbo.PurchaseDetail_View
 AS
-SELECT        dbo.PurchaseDetail.*, dbo.PurchaseDetail.IdNo AS Expr1, dbo.PurchaseDetail.Sequence AS Expr2, dbo.PurchaseDetail.PurchaseIdNo AS Expr3, dbo.PurchaseDetail.ProductIdNo AS Expr4, dbo.PurchaseDetail.Quantity AS Expr5, 
-                         dbo.PurchaseDetail.BonusQuantity AS Expr6, dbo.PurchaseDetail.UnitIdNo AS Expr7, dbo.PurchaseDetail.Price AS Expr8, dbo.PurchaseDetail.DiscountAmount AS Expr9, dbo.PurchaseDetail.VatPercent AS Expr10, 
-                         dbo.PurchaseDetail.VatAmount AS Expr11, dbo.PurchaseDetail.NetAmount AS Expr12, dbo.Product.ProductCode, dbo.Product.ProductName, dbo.Product.ProductNameAra, dbo.Product.Barcode, dbo.Product.GTIN, 
-                         dbo.ProductUnit.UnitIdNo AS Expr13, dbo.ProductUnit.Multiplier, dbo.ProductUnit.ToUnitIdNo, dbo.Product.BaseUnitIdNo, dbo.Unit.UnitCode, dbo.Unit.UnitName, dbo.Unit.UnitNameAra, dbo.Category.VatSaleAccountIdNo, 
-                         dbo.Category.VatPurchaseAccountIdNo, dbo.Category.VatPercentage, dbo.Category.SaleAccountIdNo, dbo.Category.PurchaseAccountIdNo
-FROM            dbo.PurchaseDetail INNER JOIN
-                         dbo.Product ON dbo.PurchaseDetail.ProductIdNo = dbo.Product.IdNo INNER JOIN
-                         dbo.Unit ON dbo.PurchaseDetail.UnitIdNo = dbo.Unit.IdNo INNER JOIN
-                         dbo.Category ON dbo.Product.CategoryIdNo = dbo.Category.IdNo INNER JOIN
-                         dbo.ProductUnit ON dbo.PurchaseDetail.ProductIdNo = dbo.ProductUnit.ProductIdNo
+SELECT        dbo.PurchaseDetail.IdNo, dbo.PurchaseDetail.Sequence, dbo.PurchaseDetail.PurchaseIdNo, dbo.PurchaseDetail.ProductIdNo, dbo.PurchaseDetail.Quantity, dbo.PurchaseDetail.BonusQuantity, dbo.PurchaseDetail.UnitIdNo, 
+                         dbo.PurchaseDetail.Price, dbo.PurchaseDetail.DiscountAmount, dbo.PurchaseDetail.VatPercent, dbo.PurchaseDetail.VatAmount, dbo.PurchaseDetail.NetAmount, dbo.PurchaseDetail.IdNo AS Expr1, 
+                         dbo.PurchaseDetail.Sequence AS Expr2, dbo.PurchaseDetail.PurchaseIdNo AS Expr3, dbo.PurchaseDetail.ProductIdNo AS Expr4, dbo.PurchaseDetail.Quantity AS Expr5, dbo.PurchaseDetail.BonusQuantity AS Expr6, 
+                         dbo.PurchaseDetail.UnitIdNo AS Expr7, dbo.PurchaseDetail.Price AS Expr8, dbo.PurchaseDetail.DiscountAmount AS Expr9, dbo.PurchaseDetail.VatPercent AS Expr10, dbo.PurchaseDetail.VatAmount AS Expr11, 
+                         dbo.PurchaseDetail.NetAmount AS Expr12, dbo.Product.ProductCode, dbo.Product.ProductName, dbo.Product.ProductNameAra, dbo.Product.Barcode, dbo.Product.GTIN, dbo.Product.BaseUnitIdNo, dbo.Unit.UnitCode, 
+                         dbo.Unit.UnitName, dbo.Unit.UnitNameAra, dbo.Category.VatSaleAccountIdNo, dbo.Category.VatPurchaseAccountIdNo, dbo.Category.VatPercentage, dbo.Category.SaleAccountIdNo, dbo.Category.PurchaseAccountIdNo, 
+                         dbo.Product.CategoryIdNo
+FROM            dbo.PurchaseDetail LEFT OUTER JOIN
+                         dbo.Unit ON dbo.PurchaseDetail.UnitIdNo = dbo.Unit.IdNo LEFT OUTER JOIN
+                         dbo.Product ON dbo.PurchaseDetail.ProductIdNo = dbo.Product.IdNo LEFT OUTER JOIN
+                         dbo.Category ON dbo.Product.CategoryIdNo = dbo.Category.IdNo
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PurchaseDetail_View';
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PurchaseDetail_View';
+
+
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'   Or = 1350
-      End
-   End
-End
-', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PurchaseDetail_View';
+
 
 
 GO
@@ -28,7 +27,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+         Configuration = "(H (1[65] 4[3] 2[14] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -104,42 +103,32 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "Product"
-            Begin Extent = 
-               Top = 3
-               Left = 286
-               Bottom = 299
-               Right = 467
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "ProductUnit"
-            Begin Extent = 
-               Top = 158
-               Left = 521
-               Bottom = 400
-               Right = 691
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
          Begin Table = "Unit"
             Begin Extent = 
-               Top = 2
-               Left = 1084
-               Bottom = 132
-               Right = 1254
+               Top = 9
+               Left = 834
+               Bottom = 139
+               Right = 1004
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "Product"
+            Begin Extent = 
+               Top = 19
+               Left = 287
+               Bottom = 315
+               Right = 468
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "Category"
             Begin Extent = 
-               Top = 114
-               Left = 838
-               Bottom = 335
-               Right = 1063
+               Top = 148
+               Left = 553
+               Bottom = 466
+               Right = 778
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -166,5 +155,11 @@ Begin DesignProperties =
          Filter = 1350
          Or = 1350
          Or = 1350
-      ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PurchaseDetail_View';
+         Or = 1350
+      End
+   End
+End
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PurchaseDetail_View';
+
+
 
