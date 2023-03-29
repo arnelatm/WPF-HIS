@@ -199,7 +199,7 @@ Namespace PresentationLayer.Presenters
                 If fieldNames.Count() = 1 Then
                     dtl.NameField = TranslateNameField(dtl.TableName, dtl.NameFieldOrig)
                     dtl.NameDisplayValue = dtl.NameField
-                    dtl.ValueMember = fieldNames(0).Trim()
+                    dtl.ValueMember = "Name"
                     dtl.LuFields = dtl.NameDisplayValue + " COLLATE SQL_Latin1_General_CP1_CI_AS"
                     dtl.SortKey = dtl.NameField
                 ElseIf fieldNames.Count() = 2 Then

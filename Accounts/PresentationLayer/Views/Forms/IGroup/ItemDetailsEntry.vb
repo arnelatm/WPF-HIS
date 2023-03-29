@@ -99,21 +99,19 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Pack1 As Short Implements IItemDetailsView.Pack1
             Get
-                Return 1
+                Return txtPack1.Text
             End Get
             Set(value As Short)
-                _pack1 = value
+                txtPack1.Text = value.ToString()
             End Set
         End Property
 
-        Private _pack2 As Short
-
         Public Property Pack2 As Short Implements IItemDetailsView.Pack2
             Get
-                Return 1
+                Return txtpack2.Text
             End Get
             Set(value As Short)
-                _pack2 = value
+                txtpack2.Text = value.ToString()
             End Set
         End Property
 
@@ -121,10 +119,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Pack3 As Short Implements IItemDetailsView.Pack3
             Get
-                Return 1
+                Return txtpack3.Text
             End Get
             Set(value As Short)
-                _pack3 = value
+                txtpack3.Text = value.ToString()
             End Set
         End Property
 
@@ -256,31 +254,32 @@ Namespace PresentationLayer.Views.Forms
                 RaiseEvent GTinValueChanged(Nothing, value)
             End Set
         End Property
-
         Public Property Price_Cash As Decimal? Implements IItemDetailsView.Price_Cash
             Get
-                Throw New NotImplementedException()
+                Return txtPrice_Cash.GetValue(Of Decimal?)
             End Get
-            Set(value As Decimal?)
-                Throw New NotImplementedException()
+            Set
+                txtPrice_Cash.SetValue(Value)
             End Set
         End Property
 
-        Public Property QtyOnHand As Decimal? Implements IItemDetailsView.QtyOnHand
+        Private Property QtyOnHand As Decimal? Implements IItemDetailsView.QtyOnHand
             Get
-                Throw New NotImplementedException()
+                Return txtQtyOnHand.GetValue(Of Decimal?)
             End Get
-            Set(value As Decimal?)
-                Throw New NotImplementedException()
+            Set
+                txtQtyOnHand.SetValue(Value)
             End Set
         End Property
+
+        Private _created_By_Branch As String
 
         Public Property Created_By_Branch As String Implements IItemDetailsView.Created_By_Branch
             Get
-                Throw New NotImplementedException()
+                Return "01"
             End Get
             Set(value As String)
-                Throw New NotImplementedException()
+                _created_By_Branch = value
             End Set
         End Property
 
@@ -328,10 +327,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub chkPrescriptionDrug_CheckedChanged(sender As Object, e As EventArgs) Handles chkPrescriptionDrug.CheckedChanged
-            If chkPrescriptionDrug.Checked Then
-                SetDisplayOnly(False)
-            Else
-                SetDisplayOnly(True)
+            If Not btnEdit.Enabled Then
+                If chkPrescriptionDrug.Checked Then
+                    SetDisplayOnly(False)
+                Else
+                    SetDisplayOnly(True)
+                End If
             End If
         End Sub
 

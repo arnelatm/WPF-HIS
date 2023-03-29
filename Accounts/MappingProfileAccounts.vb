@@ -212,6 +212,9 @@ Public Class MappingProfileAccounts
         CreateMap(Of PrintSetup, PrintSetupModel)().ReverseMap()
         CreateMap(Of PrintSetupModel, IPrintSetupView)().ReverseMap()
 
+        CreateMap(Of ItemDetails, ItemDetailsModel)().ReverseMap()
+        CreateMap(Of ItemDetailsModel, IItemDetailsView)().ReverseMap()
+
         'CreateMap(Of PmrPatientDisplayModel, PmrPatientDisplayView)()
 
     End Sub

@@ -143,24 +143,26 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
     Protected NodeToDelete As TreeNode
 
     Public Sub DisplayTree(Optional IdNo As Int64 = 0)
-        Dim root As TreeNode = FormTreeView.Nodes(0)
-        root.Nodes.Clear()
-        Dim treeViewData As Object = GetTreeViewData()
-        root.Text = Messaging.TranslateCaption(TableName)
-        If ParentFieldName Is Nothing OrElse ParentFieldName = "" Then
-            For Each dataNode In treeViewData
-                AddRecordToTree(dataNode)
-            Next
-        Else
-            For Each dataNode In treeViewData
-                AddRecordToTreeHierarchical(dataNode, True, FormTreeView)
-            Next
+        If WithTreeView Then
+            Dim root As TreeNode = FormTreeView.Nodes(0)
+            root.Nodes.Clear()
+            Dim treeViewData As Object = GetTreeViewData()
+            root.Text = Messaging.TranslateCaption(TableName)
+            If ParentFieldName Is Nothing OrElse ParentFieldName = "" Then
+                For Each dataNode In treeViewData
+                    AddRecordToTree(dataNode)
+                Next
+            Else
+                For Each dataNode In treeViewData
+                    AddRecordToTreeHierarchical(dataNode, True, FormTreeView)
+                Next
+            End If
+            FormTreeView.ExpandAll()
+            If IdNo <> 0 Then
+                TargetIdNo = IdNo
+            End If
+            GotoRecordInTreeView()
         End If
-        FormTreeView.ExpandAll()
-        If IdNo <> 0 Then
-            TargetIdNo = IdNo
-        End If
-        GotoRecordInTreeView()
     End Sub
 
     Public Function GetTreeViewData()
@@ -208,8 +210,8 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
                 End If
             End If
         End If
-        If String.IsNullOrEmpty(TreeViewSecondaryField) then
-           TreeViewSecondaryField = ""
+        If String.IsNullOrEmpty(TreeViewSecondaryField) Then
+            TreeViewSecondaryField = ""
         End If
     End Sub
 

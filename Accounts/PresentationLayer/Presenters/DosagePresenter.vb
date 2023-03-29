@@ -12,6 +12,7 @@ Namespace PresentationLayer.Presenters
             Service = New AccountsService("Dosage")
             TableName = "Dosage_View"
             TreeViewMainField = "DosageName"
+            TableBaseName = "Dosage"
             SortOrderKey = "DosageName"
             WithTreeView = True
         End Sub
