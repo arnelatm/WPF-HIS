@@ -30,7 +30,7 @@
     [BankIdNo]            INT             NULL,
     [BankAccountNo]       VARCHAR (15)    COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [IBAN]                VARCHAR (24)    COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-    [Notes]               VARCHAR (300)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [Notes]               NVARCHAR (300)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [OpeningBalance]      MONEY           NULL,
     [Balance]             MONEY           NULL,
     [PaymentMethod]       CHAR (1)        NULL,
@@ -54,6 +54,8 @@
     [DateTimeStamp]       ROWVERSION      NULL,
     CONSTRAINT [PK_EmployeeIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
