@@ -35,7 +35,8 @@ Namespace DataLayer.AdoNet
                                       "UnitOfStrength," &
                                       "UnitOfVolume," &
                                       "Volume"
-
+                                      
+                                      
         'Public Sub New(ParamArray arguments As Object())
         '    Db.SetConnectionString("IGROUPCLINIC")
         'End Sub
@@ -52,7 +53,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     "SELECT " & FieldList &
                     " FROM ItemDetailsQty_View" &
-                    " WHERE Primary_Key = @IdNo"
+                    " WHERE " & GetPrimaryFieldName() & " = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim value As ItemDetails = _db.Read(sql, Make, params).FirstOrDefault()
             If value Is Nothing Then
@@ -67,7 +68,7 @@ Namespace DataLayer.AdoNet
                     " UPDATE [ItemDetails] SET " &
                     " GTin = @GTin," &
                     " ItemNameEnglish = @ItemDetailsName" &
-                    " WHERE Primary_Key = @IdNo"
+                    " WHERE " & GetPrimaryFieldName() & " = @IdNo"
             Dim retval As Integer
             retval = _db.Update(sql, Take(ItemDetails))
             'If retval > 0 And Strings.Left(ItemDetails.RegistrationNo, 1) = "X" Then
@@ -114,7 +115,6 @@ Namespace DataLayer.AdoNet
                             Function(reader) _
             New ItemDetails() With {
             .BranchID = Extensions.AsString(reader("BranchID")),
-            .Created_By_Branch = Extensions.AsString(reader("Created_By_Branch")),
             .DosageForm = Extensions.AsString(reader("DosageForm")),
             .GenericName = Extensions.AsString(reader("GenericName")),
             .GTin = Extensions.AsString(reader("GTIN")),
@@ -127,20 +127,20 @@ Namespace DataLayer.AdoNet
             .Pack3 = Extensions.AsInt(Of Int16)(reader("Pack3")),
             .PackageSize = Extensions.AsNullable(Of Decimal?)(reader("PackageSize")),
             .PackageType = Extensions.AsString(reader("PackageType")),
-            .Price_Cash = Extensions.AsNullable(Of Decimal?)(reader("Price_Cash")),
-            .QtyOnHand = Extensions.AsNullable(Of Decimal?)(reader("QtyOnHand")),
             .RegistrationNo = Extensions.AsString(reader("RegistrationNo")),
             .RouteOfAdministration = Extensions.AsString(reader("RouteOfAdministration")),
             .StrengthValue = Extensions.AsString(reader("StrengthValue")),
             .UnitOfStrength = Extensions.AsString(reader("UnitOfStrength")),
             .UnitOfVolume = Extensions.AsString(reader("UnitOfVolume")),
-            .Volume = Extensions.AsNullable(Of Decimal?)(reader("Volume"))
+            .Created_By_Branch = Extensions.AsString(reader("Created_By_Branch")),
+            .QtyOnHand = Extensions.AsNullable(Of Decimal?)(reader("QtyOnHand")),
+            .Price_Cash = Extensions.AsNullable(Of Decimal?)(reader("Price_Cash")),
+            .Volume = Extensions.AsNullable(Of Decimal?)(reader("Volume"))          
             }
-
+            
         Private Function Take(ItemDetails As ItemDetails) As Object()
             Return New Object() {
                             "BranchID", ItemDetails.BranchID,
-                            "Created_By_Branch", ItemDetails.Created_By_Branch,
                             "GTin", ItemDetails.GTin,
                             "ItemDetailsCode", ItemDetails.ItemDetailsCode,
                             "ItemGroup", ItemDetails.ItemGroup,
@@ -148,9 +148,10 @@ Namespace DataLayer.AdoNet
                             "IdNo", ItemDetails.IdNo,
                             "Pack1", ItemDetails.Pack1,
                             "Pack2", ItemDetails.Pack2,
-                            "Pack3", ItemDetails.Pack3,
-                            "Price_Cash", ItemDetails.Price_Cash
+                            "Pack3", ItemDetails.Pack3
                             }
+                            '"Created_By_Branch", ItemDetails.Created_By_Branch,
+                            '"Price_Cash", ItemDetails.Price_Cash
         End Function
 
         'Private Function TakeDrug(ItemDetails As ItemDetails) As Object()

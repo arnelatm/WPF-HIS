@@ -35,7 +35,7 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Sub GoFilter()
             If DataFilter Is Nothing Or DataFilter = "" Then
-                DataFilter = "Active = 1"
+                DataFilter = "BranchId = '01' And IsNull(GTIN,'') = '' "
             Else
                 DataFilter = ""
             End If
@@ -50,9 +50,9 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Sub OnGTinValueChanged(sender As Object, gTinValue As String)
-            If gTinValue IsNot Nothing Or gTinValue <> "" Then
-                Dim gTinIdNo As Integer = Service.GetField("GTin", "DrugList")
-                Dim obj As Object = Service.GetFieldsWithIdNo(gTinIdNo, "DrugList", "[Dosage Form],[Generic Name],[Package Size],[Package Type],[RegistrationNo],[Route Of Administration],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume")
+            If gTinValue IsNot Nothing AndAlso gTinValue <> "" Then
+                Dim gTinIdNo As Int32 = Service.GetField(Of String,String)(gTinValue,"DrugList","GTin", "IdNo")
+                Dim obj As Object = Service.GetFieldsWithIdNo(gTinIdNo, "DrugList", "[Dosage Form],[Generic Name],[Package Size],[Package Type],[RegistrationNo],[Route Of Administration],[Strength Value],[Unit Of Strength],[Unit Of Volume],Volume","IdNo")
                 View.DosageForm = obj.DosageForm
                 View.GenericName = obj.GenericName
                 View.PackageSize = obj.PackageSize

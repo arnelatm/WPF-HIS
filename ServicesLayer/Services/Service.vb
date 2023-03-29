@@ -429,9 +429,13 @@ Namespace Services
                     tlData.Add(tData)
                 Next
             Else
-                For Each item In data
-                    Dim tData As New Lookup.LookupData With {.Name = If(IsDBNull(item(0)), "", item(0))}
-                    tlData.Add(tData)
+                For i As Integer = 0 To data.Count - 1
+                    Dim dbLookup = New Lookup.LookupData
+                    dbLookup.IdNo = i
+                    dbLookup.Name = data(i)
+                    dbLookup.Code = ""
+                    dbLookup.Index = i
+                    tlData.Add(dbLookup)
                 Next
                 'For i = 0 To Int(data.Count) - 1
                 '    Dim tData As New Lookup.LookupData With {.Name = If(IsDBNull(data(i)), "", data(i))}
