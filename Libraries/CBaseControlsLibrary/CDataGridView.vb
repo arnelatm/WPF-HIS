@@ -1541,7 +1541,7 @@ Public Class CDataGridView
     Public Property DgSearch As New List(Of DataGridSearch)
 
 
-
+    <[Serializable]>
     Public Class DataGridSearch
         Implements IFindableControl
 
