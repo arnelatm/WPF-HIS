@@ -27,6 +27,8 @@ Namespace PresentationLayer.Views.Forms
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PurchaseEntry))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -54,10 +56,12 @@ Namespace PresentationLayer.Views.Forms
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CDataGridView1 = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.CDataGridView2 = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout3.SuspendLayout
         Me.CFlowLayout1.SuspendLayout
         CType(Me.CDataGridView1,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.CDataGridView2,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'CFlowLayout3
@@ -690,6 +694,7 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
         Me.CFlowLayout1.Controls.Add(Me.CDataGridView1)
+        Me.CFlowLayout1.Controls.Add(Me.CDataGridView2)
         Me.CFlowLayout1.Location = New System.Drawing.Point(12, 276)
         Me.CFlowLayout1.Name = "CFlowLayout1"
         Me.CFlowLayout1.Size = New System.Drawing.Size(859, 345)
@@ -711,6 +716,7 @@ Namespace PresentationLayer.Views.Forms
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.CDataGridView1.DefaultCellStyle = DataGridViewCellStyle2
+        Me.CDataGridView1.DgSearch = CType(resources.GetObject("CDataGridView1.DgSearch"),System.Collections.Generic.List(Of AATM.Libraries.CBaseControlsLibrary.CDataGridView.DataGridSearch))
         Me.CDataGridView1.DgvFooter = Nothing
         Me.CDataGridView1.DisplayOnly = false
         Me.CDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
@@ -735,9 +741,52 @@ Namespace PresentationLayer.Views.Forms
         Me.CDataGridView1.SequenceFieldName = "Sequence"
         Me.CDataGridView1.ShowFooter = false
         Me.CDataGridView1.ShowInsertColumnWhenEditing = true
-        Me.CDataGridView1.Size = New System.Drawing.Size(594, 0)
+        Me.CDataGridView1.Size = New System.Drawing.Size(594, 150)
         Me.CDataGridView1.TabIndex = 6
         Me.CDataGridView1.Translatable = true
+        '
+        'CDataGridView2
+        '
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FloralWhite
+        Me.CDataGridView2.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
+        Me.CDataGridView2.BegFindValue = Nothing
+        Me.CDataGridView2.Cached = false
+        Me.CDataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.CDataGridView2.DataFilter = Nothing
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.CDataGridView2.DefaultCellStyle = DataGridViewCellStyle4
+        Me.CDataGridView2.DgSearch = CType(resources.GetObject("CDataGridView2.DgSearch"),System.Collections.Generic.List(Of AATM.Libraries.CBaseControlsLibrary.CDataGridView.DataGridSearch))
+        Me.CDataGridView2.DgvFooter = Nothing
+        Me.CDataGridView2.DisplayOnly = false
+        Me.CDataGridView2.Ea = Nothing
+        Me.CDataGridView2.EditingMode = false
+        Me.CDataGridView2.EndFindValue = Nothing
+        Me.CDataGridView2.FieldDescription = Nothing
+        Me.CDataGridView2.FieldName = Nothing
+        Me.CDataGridView2.FieldsDictionary = Nothing
+        Me.CDataGridView2.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.CDataGridView2.FindEnabled = false
+        Me.CDataGridView2.FirstRowDeletionEnabled = true
+        Me.CDataGridView2.FirstRowInsertionEnabled = true
+        Me.CDataGridView2.IgnoreCase = false
+        Me.CDataGridView2.IsDirty = false
+        Me.CDataGridView2.Location = New System.Drawing.Point(603, 3)
+        Me.CDataGridView2.Name = "CDataGridView2"
+        Me.CDataGridView2.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.CDataGridView2.SecurityKey = ""
+        Me.CDataGridView2.SequenceColumn = "dgvSequence"
+        Me.CDataGridView2.SequenceFieldName = "Sequence"
+        Me.CDataGridView2.ShowFooter = false
+        Me.CDataGridView2.ShowInsertColumnWhenEditing = true
+        Me.CDataGridView2.Size = New System.Drawing.Size(240, 150)
+        Me.CDataGridView2.TabIndex = 7
+        Me.CDataGridView2.Translatable = true
         '
         'PurchaseEntry
         '
@@ -753,6 +802,7 @@ Namespace PresentationLayer.Views.Forms
         Me.CFlowLayout3.PerformLayout
         Me.CFlowLayout1.ResumeLayout(false)
         CType(Me.CDataGridView1,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.CDataGridView2,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -785,5 +835,6 @@ End Sub
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents CDataGridView1 As CDataGridView
+        Friend WithEvents CDataGridView2 As CDataGridView
     End Class
 End NameSpace
