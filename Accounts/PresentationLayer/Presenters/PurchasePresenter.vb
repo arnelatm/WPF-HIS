@@ -1,9 +1,4 @@
-﻿Imports System.Globalization
-Imports AATM.Accounts.DataLayer.AdoNet
-Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
@@ -56,7 +51,7 @@ Namespace PresentationLayer.Presenters
             CreateLookupData("Product_View", "ProductsByCode", "BranchIdNo=1")
             CreateLookupData("Unit", "UnitsByCode")
             CreateDataSource("Supplier", "SupplierIdNo")
-            CreateEnumDataSource(Of TransactionTypeSelection)("TransactionType")            
+            CreateEnumDataSource(Of TransactionTypeSelection)("TransactionType")
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave

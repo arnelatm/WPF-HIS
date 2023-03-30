@@ -549,7 +549,6 @@
     <Build Include="dbo\Views\PurchaseDetail_View_1.sql" />
     <Build Include="dbo\Views\Product_View.sql" />
     <Build Include="dbo\Tables\PrintSetup.sql" />
-    <Build Include="dbo\Views\PurchaseJournalItem_View.sql" />
     <Build Include="dbo\Views\PrintSetup_View.sql" />
   </ItemGroup>
   <ItemGroup>
