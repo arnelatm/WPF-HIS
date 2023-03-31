@@ -45,13 +45,20 @@ Namespace PresentationLayer.Views.Forms.Reports
                 Else
                     fileName = "Statement of Accounts Payable.Rpt"
                 End If
-                Dim args As Object() = {dtpBeginningDate.Value, "BeginningDate",
+
+                Dim cForm
+                cForm = New ReportFormNew(fileName, reportTitle, CultureInfo.CurrentCulture, 
+                                      dtpBeginningDate.Value, "BeginningDate",
                                       dtpEndingDate.Value, "EndingDate",
                                       cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo",
-                                      cboSupplierIdNo.Text, "DisplayName"}
+                                      cboSupplierIdNo.Text, "DisplayName" )
+                cForm.Show()
 
-                Ea.PublishEvent(New ShowReportRequested(fileName, reportTitle, FormCulture, $"ISPDATA", args))
-                'Presenter.ShowReport(fileName, reportTitle, FormCulture, "A4", $"ISPDATA", args)
+                'prPresenter.PrintReport(fileName, Nothing , args)
+
+                'Ea.PublishEvent(New ShowReportRequested(fileName, reportTitle, FormCulture, $"ISPDATA", args))
+
+                'prPresenter.ShowReport(fileName, reportTitle, FormCulture, "A4", $"ISPDATA", args)
             Else
                 Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
             End If

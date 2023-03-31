@@ -248,7 +248,6 @@
         Me.TxtIdNo.DataBoundControl = true
         Me.TxtIdNo.DisplayOnly = true
         Me.TxtIdNo.EditingMode = true
-        Me.TxtIdNo.Enabled = false
         Me.TxtIdNo.EndFindValue = Nothing
         Me.TxtIdNo.FieldDescription = Nothing
         Me.TxtIdNo.FieldName = Nothing
@@ -830,6 +829,7 @@
         '
         'cacCountryCode
         '
+        Me.cacCountryCode.AlwaysEditable = false
         Me.cacCountryCode.BackColor = System.Drawing.Color.White
         Me.cacCountryCode.BegFindValue = Nothing
         Me.cacCountryCode.ChangingSearchValueOnly = false
@@ -851,6 +851,7 @@
         Me.cacCountryCode.HideWhenNotEditingOrAdding = false
         Me.cacCountryCode.IgnoreCase = false
         Me.cacCountryCode.IntegralHeight = false
+        Me.cacCountryCode.LimitToList = false
         Me.cacCountryCode.LinkedLabel = Nothing
         Me.cacCountryCode.Location = New System.Drawing.Point(513, 161)
         Me.cacCountryCode.Margin = New System.Windows.Forms.Padding(1)
@@ -1201,6 +1202,7 @@
         '
         'cacBankIdNo
         '
+        Me.cacBankIdNo.AlwaysEditable = false
         Me.cacBankIdNo.BackColor = System.Drawing.Color.White
         Me.cacBankIdNo.BegFindValue = Nothing
         Me.cacBankIdNo.ChangingSearchValueOnly = false
@@ -1222,6 +1224,7 @@
         Me.cacBankIdNo.HideWhenNotEditingOrAdding = false
         Me.cacBankIdNo.IgnoreCase = false
         Me.cacBankIdNo.IntegralHeight = false
+        Me.cacBankIdNo.LimitToList = false
         Me.cacBankIdNo.LinkedLabel = Nothing
         Me.cacBankIdNo.Location = New System.Drawing.Point(512, 262)
         Me.cacBankIdNo.Margin = New System.Windows.Forms.Padding(1)
@@ -1350,6 +1353,7 @@
         '
         'cacExpAccountIdNo
         '
+        Me.cacExpAccountIdNo.AlwaysEditable = false
         Me.cacExpAccountIdNo.BackColor = System.Drawing.Color.White
         Me.cacExpAccountIdNo.BegFindValue = Nothing
         Me.cacExpAccountIdNo.ChangingSearchValueOnly = false
@@ -1370,6 +1374,7 @@
         Me.cacExpAccountIdNo.HideWhenNotEditingOrAdding = false
         Me.cacExpAccountIdNo.IgnoreCase = false
         Me.cacExpAccountIdNo.IntegralHeight = false
+        Me.cacExpAccountIdNo.LimitToList = false
         Me.cacExpAccountIdNo.LinkedLabel = Nothing
         Me.cacExpAccountIdNo.Location = New System.Drawing.Point(166, 313)
         Me.cacExpAccountIdNo.Margin = New System.Windows.Forms.Padding(1)
@@ -1410,6 +1415,7 @@
         '
         'cacApAccountIdNo
         '
+        Me.cacApAccountIdNo.AlwaysEditable = false
         Me.cacApAccountIdNo.BackColor = System.Drawing.Color.White
         Me.cacApAccountIdNo.BegFindValue = Nothing
         Me.cacApAccountIdNo.ChangingSearchValueOnly = false
@@ -1431,6 +1437,7 @@
         Me.cacApAccountIdNo.HideWhenNotEditingOrAdding = false
         Me.cacApAccountIdNo.IgnoreCase = false
         Me.cacApAccountIdNo.IntegralHeight = false
+        Me.cacApAccountIdNo.LimitToList = false
         Me.cacApAccountIdNo.LinkedLabel = Nothing
         Me.cacApAccountIdNo.Location = New System.Drawing.Point(512, 313)
         Me.cacApAccountIdNo.Margin = New System.Windows.Forms.Padding(1)
@@ -1516,6 +1523,7 @@
         '
         'cacPaymentMethod
         '
+        Me.cacPaymentMethod.AlwaysEditable = false
         Me.cacPaymentMethod.BackColor = System.Drawing.Color.White
         Me.cacPaymentMethod.BegFindValue = Nothing
         Me.cacPaymentMethod.ChangingSearchValueOnly = false
@@ -1537,6 +1545,7 @@
         Me.cacPaymentMethod.HideWhenNotEditingOrAdding = false
         Me.cacPaymentMethod.IgnoreCase = false
         Me.cacPaymentMethod.IntegralHeight = false
+        Me.cacPaymentMethod.LimitToList = false
         Me.cacPaymentMethod.LinkedLabel = Nothing
         Me.cacPaymentMethod.Location = New System.Drawing.Point(512, 339)
         Me.cacPaymentMethod.Margin = New System.Windows.Forms.Padding(1)
@@ -1777,6 +1786,7 @@
         '
         'chkActive
         '
+        Me.chkActive.AlwaysEditable = false
         Me.chkActive.Appearance = System.Windows.Forms.Appearance.Button
         Me.chkActive.AutoCheck = false
         Me.chkActive.BackColor = System.Drawing.Color.White
@@ -1871,6 +1881,7 @@
         '
         'cacAccountStatus
         '
+        Me.cacAccountStatus.AlwaysEditable = false
         Me.cacAccountStatus.BackColor = System.Drawing.Color.White
         Me.cacAccountStatus.BegFindValue = Nothing
         Me.cacAccountStatus.ChangingSearchValueOnly = false
@@ -1892,6 +1903,7 @@
         Me.cacAccountStatus.HideWhenNotEditingOrAdding = false
         Me.cacAccountStatus.IgnoreCase = false
         Me.cacAccountStatus.IntegralHeight = false
+        Me.cacAccountStatus.LimitToList = false
         Me.cacAccountStatus.LinkedLabel = Nothing
         Me.cacAccountStatus.Location = New System.Drawing.Point(509, 415)
         Me.cacAccountStatus.Margin = New System.Windows.Forms.Padding(1)
@@ -1920,7 +1932,7 @@
         Me.lblNotes.EditingMode = false
         Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.lblNotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNotes.Location = New System.Drawing.Point(11, 442)
+        Me.lblNotes.Location = New System.Drawing.Point(11, 441)
         Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.lblNotes.Name = "lblNotes"
         Me.lblNotes.Size = New System.Drawing.Size(153, 23)
@@ -1948,7 +1960,7 @@
         Me.txtBalance.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtBalance.ForeColor = System.Drawing.Color.Black
         Me.txtBalance.LinkedLabel = Me.lblOpeningBalance
-        Me.txtBalance.Location = New System.Drawing.Point(166, 442)
+        Me.txtBalance.Location = New System.Drawing.Point(166, 441)
         Me.txtBalance.Margin = New System.Windows.Forms.Padding(1)
         Me.txtBalance.MaximumValue = Nothing
         Me.txtBalance.MinimumValue = Nothing
@@ -1968,7 +1980,7 @@
         Me.CLabel1.EditingMode = false
         Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.CLabel1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.CLabel1.Location = New System.Drawing.Point(11, 467)
+        Me.CLabel1.Location = New System.Drawing.Point(11, 466)
         Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel1.Name = "CLabel1"
         Me.CLabel1.Size = New System.Drawing.Size(153, 23)
@@ -1995,7 +2007,7 @@
         Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
         Me.txtNotes.ForeColor = System.Drawing.Color.Black
         Me.txtNotes.LinkedLabel = Nothing
-        Me.txtNotes.Location = New System.Drawing.Point(166, 467)
+        Me.txtNotes.Location = New System.Drawing.Point(166, 466)
         Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
         Me.txtNotes.MaximumValue = Nothing
         Me.txtNotes.MinimumValue = Nothing

@@ -20,13 +20,14 @@ Public Class ReportPrinter
     Public Sub New()
     End Sub
 
-    Public Sub New(pReportFileName As String, Optional pDataBaseConnectionName As String = DefaultConnection, Optional args() As Object = Nothing)
+    Public Sub New(pReportFileName As String, Optional pDataBaseConnectionName As String = DefaultConnection, Optional pArgs() As Object = Nothing)
         ReportFileName = pReportFileName
         DataBaseConnectionName = pDataBaseConnectionName
         SetReportProperties(pReportFileName)
-        If args IsNot Nothing Then
-            SetParameterValue(args)
-        End If
+        'If pArgs IsNot Nothing Then
+        '    SetParameterValue(pArgs)
+        'End If
+        args = pArgs
     End Sub
 
     Public Sub SetReportProperties(pReportFileName As String)
