@@ -20,6 +20,7 @@
         Public Property TransactionDate As Date?
         Public Property VatAmount As Decimal
         Public Property VatNumber As String
+        Public Property PurchaseDetails As List(Of PurchaseDetailModel)
     End Class
 
 End Namespace

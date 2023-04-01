@@ -10,7 +10,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property IdNo As Int32
         Property NetAmount As Decimal
         Property Price As Decimal
-        Property ProductIdNo As Int16?
+        Property ProductIdNo As Int32
         Property ProductName As String
         Property PurchaseIdNo As Int32
         Property Quantity As Int32

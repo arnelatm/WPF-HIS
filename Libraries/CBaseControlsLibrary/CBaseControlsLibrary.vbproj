@@ -98,6 +98,21 @@
     </Compile>
     <Compile Include="BlendItemsConverter.vb" />
     <Compile Include="BlendTypeEditor.vb" />
+    <Compile Include="CtDgvComboBoxColumn.vb" />
+    <Compile Include="CtDataGridFindForm.designer.vb">
+      <DependentUpon>CtDataGridFindForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CtDataGridFindForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CtDgvDtpColumn.vb" />
+    <Compile Include="CtDataGridView.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CtDgvComboBoxCell.vb" />
+    <Compile Include="CtDgvComboBoxEditingControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CDgvDtComboBoxColumn.vb" />
     <Compile Include="CDgvDtComboBoxCell.vb" />
     <Compile Include="CDgvDtComboBoxEditingControl.vb">
@@ -494,6 +509,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BFGregorianCalendar.resx">
       <DependentUpon>BFGregorianCalendar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CtDataGridFindForm.resx">
+      <DependentUpon>CtDataGridFindForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CDataGridFindForm.resx">
       <DependentUpon>CDataGridFindForm.vb</DependentUpon>
