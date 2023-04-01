@@ -125,6 +125,13 @@ Public Class CtComboBox
     End Property
 
     <Bindable(True)>
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to True to specify that this will only suggestappend when more than this specified number of characters is typed in.")>
+    <Browsable(True)>
+    Public Property SuggestCharCount As Integer = 1
+
+    <Bindable(True)>
     <Category("Properties")>
     <DefaultValue(GetType(Boolean))>
     <Description("Set to True to make this control visible only when in editing or adding mode")>
@@ -330,49 +337,55 @@ Public Class CtComboBox
     End Sub
 
     Protected Overloads Overrides Sub OnLostFocus(e As EventArgs)
+        BeginUpdate()
         If Not SuggestListForm.SuggestListBox.Focused Then
             HideSuggestionBox()
         End If
+        EndUpdate()
     End Sub
 
     Protected Overrides Sub OnGotFocus(e As EventArgs)
+        BeginUpdate()
         MyBase.OnGotFocus(e)
         _lastValue = SelectedValue
+        EndUpdate()
     End Sub
 
     Protected Overloads Overrides Sub OnPreviewKeyDown(e As PreviewKeyDownEventArgs)
+        Dim sw As Int16 = 0
+        BeginUpdate()
         If Not SuggestListForm.Visible Then
             MyBase.OnPreviewKeyDown(e)
-            Return
+            sw = 1
         End If
-        Select Case e.KeyCode
-            Case Keys.Down
-                If SuggestListForm.SuggestListBox.SelectedIndex < _suggestBindingList.Count - 1 Then
-                    ' ReSharper disable once ReturnValueOfPureMethodIsNotUsed
-                    Math.Max(Interlocked.Increment(SuggestListForm.SuggestListBox.SelectedIndex), SuggestListForm.SuggestListBox.SelectedIndex - 1)
-                End If
-                Return
-            Case Keys.Up
-                If SuggestListForm.SuggestListBox.SelectedIndex > 0 Then
+        If sw = 0 Then
+            Select Case e.KeyCode
+                Case Keys.Down
+                    If SuggestListForm.SuggestListBox.SelectedIndex < _suggestBindingList.Count - 1 Then
+                        ' ReSharper disable once ReturnValueOfPureMethodIsNotUsed
+                        Math.Max(Interlocked.Increment(SuggestListForm.SuggestListBox.SelectedIndex), SuggestListForm.SuggestListBox.SelectedIndex - 1)
+                    End If
+                Case Keys.Up
+                    If SuggestListForm.SuggestListBox.SelectedIndex > 0 Then
 #Disable Warning ReturnValueOfPureMethodIsNotUsed
-                    Math.Max(Interlocked.Decrement(SuggestListForm.SuggestListBox.SelectedIndex), SuggestListForm.SuggestListBox.SelectedIndex + 1)
+                        Math.Max(Interlocked.Decrement(SuggestListForm.SuggestListBox.SelectedIndex), SuggestListForm.SuggestListBox.SelectedIndex + 1)
 #Enable Warning ReturnValueOfPureMethodIsNotUsed
-                End If
-                Return
-            Case Keys.Enter
-                Text = SuggestListForm.SuggestListBox.Text
-                [Select](0, Text.Length)
-                SuggestListForm.Hide()
-                SuggestListForm.Visible = False
-                Return
-            Case Keys.Escape
-                HideSuggestionBox()
-                Return
-        End Select
-        MyBase.OnPreviewKeyDown(e)
+                    End If
+                Case Keys.Enter
+                    Text = SuggestListForm.SuggestListBox.Text
+                    [Select](0, Text.Length)
+                    SuggestListForm.Hide()
+                    SuggestListForm.Visible = False
+                Case Keys.Escape
+                    HideSuggestionBox()
+            End Select
+            MyBase.OnPreviewKeyDown(e)
+        End If
+        EndUpdate()
     End Sub
 
     Private Sub HideDropDown(hide As Boolean)
+        BeginUpdate()
         If Not AlwaysEditable Then
             If hide Then
                 DropDownStyle = ComboBoxStyle.Simple
@@ -398,30 +411,35 @@ Public Class CtComboBox
                 DropDownHeight = _defaultDropDownHeight
             End If
         End If
+        EndUpdate()
     End Sub
 
     Protected Overrides Sub OnTextChanged(ByVal e As EventArgs)
+        BeginUpdate()
         MyBase.OnTextChanged(e)
         If Not Focused Then Return
-        _suggestBindingList.Clear()
-        _suggestBindingList.RaiseListChangedEvents = False
-        PropertySelectorCompiled(Items).Where(_filterRuleCompiled).OrderBy(_suggestListOrderRuleCompiled).ToList().ForEach(AddressOf _suggestBindingList.Add)
-        _suggestBindingList.RaiseListChangedEvents = True
-        _suggestBindingList.ResetBindings()
-        Dim showForm As Boolean
-        showForm = _suggestBindingList.Any()
-        If showForm Then
-            SetListBoxFormLocation(SuggestListForm)
-            SuggestListForm.Visible = True
+        If Text.Length >= SuggestCharCount Then
+            _suggestBindingList.Clear()
+            _suggestBindingList.RaiseListChangedEvents = False
+            PropertySelectorCompiled(Items).Where(_filterRuleCompiled).OrderBy(_suggestListOrderRuleCompiled).ToList().ForEach(AddressOf _suggestBindingList.Add)
+            _suggestBindingList.RaiseListChangedEvents = True
+            _suggestBindingList.ResetBindings()
+            Dim showForm As Boolean
+            showForm = _suggestBindingList.Any()
+            If showForm Then
+                SetListBoxFormLocation(SuggestListForm)
+                SuggestListForm.Visible = True
+            End If
+            If _suggestBindingList.Count = 0 And LimitToList Then
+                Beep()
+                SendKeys.SendWait("{BACKSPACE}")
+            ElseIf _suggestBindingList.Count = 1 AndAlso _suggestBindingList.Single().Length = Text.Trim().Length Then
+                Text = _suggestBindingList.Single()
+                [Select](0, Text.Length)
+                HideSuggestionBox()
+            End If
         End If
-        If _suggestBindingList.Count = 0 And LimitToList Then
-            Beep()
-            SendKeys.SendWait("{BACKSPACE}")
-        ElseIf _suggestBindingList.Count = 1 AndAlso _suggestBindingList.Single().Length = Text.Trim().Length Then
-            Text = _suggestBindingList.Single()
-            [Select](0, Text.Length)
-            HideSuggestionBox()
-        End If
+        EndUpdate()
     End Sub
 
     Private Sub caComboBox_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
@@ -495,7 +513,7 @@ Public Class CtComboBox
             '    Return CType(SelectedItem, Lookup.LookupData).Index
             'Else
             '    Return Text
-            'End If            
+            'End If
         End If
     End Function
 

@@ -48,10 +48,16 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateLookupData("Product_View", "ProductsByCode", "BranchIdNo=1")
-            CreateLookupData("Unit", "UnitsByCode")
-            CreateDataSource("Supplier", "SupplierIdNo")
-            CreateEnumDataSource(Of TransactionTypeSelection)("TransactionType")
+            Dim data As New ArrayList
+            data.Add({"Supplier", "SupplierIdNo", Nothing, Nothing})
+            CreateDataSourceThread(data)
+
+            data.Clear()
+            data.Add({"Unit", "UnitsByCode", Nothing, Nothing})
+            data.Add({"Product", "ProductsByCode", Nothing, Nothing})
+            CreateLookupDataThread(data)
+            data.Clear()
+
         End Sub
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
@@ -75,7 +81,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function PurchaseDetailFilter(ByVal obj As Object) As Boolean
-            If (obj.ProductIdNo Is Nothing Or obj.ProductIdNo = 0) AndAlso obj.Debit = 0 AndAlso obj.Credit = 0 Then
+            If (obj.ProductIdNo Is Nothing Or obj.ProductIdNo = 0) Then
                 Return False
             End If
             Return True
@@ -114,47 +120,8 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Function IsBizDataValid() As Boolean
-            Dim retValue = False
-            If MyBase.IsBizDataValid() Then
-                Dim dateToday As DateTime = Now()
-                retValue = True
-                Dim lastPostingDate As DateTime? = Service.GetRecordFieldWithKeyG(Of DateTime?)("Purchase", "LastPosting", "TransactionName", "LastPostingDate")
-                If IsDateRangeValid("Accounts Payable", View.TransactionDate, lastPostingDate, dateToday) = DialogResult.No Then
-                    retValue = False
-                Else
-                    Dim nTotalAmount As Decimal = 0
-                    For Each item In View.PurchaseDetails
-                        nTotalAmount = nTotalAmount + item.NetAmount
-                        'If item.SpecialAccount = EnumToCode(SpecialAccountSelection.AccountsPayable) Then
-                        '    If View.TransactionType = "I" Or View.TransactionType = "C" Then
-                        '        nTotalAp = nTotalAp + item.Credit - item.Debit
-                        '    Else
-                        '        nTotalAp = nTotalAp + item.Debit - item.Credit
-                        '    End If
-                        'End If
-                        'If item.ProductIdNo Is Nothing Or item.ProductIdNo = 0 AndAlso (item.Debit <> 0 Or item.Credit <> 0) Then
-                        '    Dim lineNumber As String = item.Sequence.ToString()
-                        '    Messaging.ShowPmMessage(True, "MsgBlankProductIdNotAllowed", {"lineNumber", lineNumber})
-                        '    retValue = False
-                        '    Exit For
-                        'ElseIf item.SpecialAccount IsNot Nothing AndAlso cashAccounts.Contains(item.SpecialAccount) Then
-                        '    Dim lineNumber As String = item.Sequence.ToString()
-                        '    Messaging.ShowPmMessage(True, "MsgCashAccountsNotAllowed", {"lineNumber", lineNumber})
-                        '    retValue = False
-                        'ElseIf item.SpecialAccount IsNot Nothing AndAlso invalidAccounts.Contains(item.SpecialAccount) Then
-                        '    Dim lineNumber = Format(item.Sequence, "0")
-                        '    Dim entryNames = Messaging.TranslateCaption("Accounts Receivables/Employee Loans")
-                        '    Messaging.ShowPmMessage(True, "MsgAccountsNotAllowed", {"lineNumber", lineNumber, "entryNames", entryNames})
-                        '    retValue = False
-                        'End If
-                    Next
-                    If nTotalAmount <> View.Amount Then
-                        Messaging.Show(True, "MsgTotalApMismatch")
-                        retValue = False
-                    End If
-                End If
-            End If
-            Return retValue
+
+            Return True
         End Function
 
         Public Overrides Sub GoPrintRecord()

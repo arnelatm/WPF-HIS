@@ -11,7 +11,7 @@ Namespace PresentationLayer.Views
         Public Property IdNo As Int32 Implements IPurchaseDetailView.IdNo
         Public Property NetAmount As Decimal Implements IPurchaseDetailView.NetAmount
         Public Property Price As Decimal Implements IPurchaseDetailView.Price
-        Public Property ProductIdNo As Int16? Implements IPurchaseDetailView.ProductIdNo
+        Public Property ProductIdNo As Int32 Implements IPurchaseDetailView.ProductIdNo
         Public Property ProductName As String Implements IPurchaseDetailView.ProductName
         Public Property PurchaseIdNo As Int32 Implements IPurchaseDetailView.PurchaseIdNo
         Public Property Quantity As Int32 Implements IPurchaseDetailView.Quantity

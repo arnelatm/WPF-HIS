@@ -1,0 +1,45 @@
+﻿' This is the class that represents your cell which can use your ComboBox class
+Imports System.ComponentModel
+Imports System.Windows.Forms
+
+Public Class CtDgvComboBoxCell
+    Inherits DataGridViewComboBoxCell
+
+    Public Sub New()
+        MyBase.New()
+        AutoComplete = False
+    End Sub
+
+    ' You must override the EditType property to return the cell's
+    ' editing control type, which is your custom ComboBox class...
+    Public Overrides ReadOnly Property EditType() As Type
+        Get
+            Return GetType(CtDgvComboBoxEditingControl)
+        End Get
+    End Property
+
+    ' You must also override this method to initialize the ComboBox instance...
+    ' This method will be called each time a cell in the column enters edit-mode,
+    ' so you can fill the ComboBox instance based on the value of the edited cell
+    Public Overrides Sub InitializeEditingControl(ByVal pRowIndex As Integer, ByVal pFormattedValue As Object, ByVal cellStyle As DataGridViewCellStyle)
+
+        ' Call base...
+        MyBase.InitializeEditingControl(pRowIndex, pFormattedValue, cellStyle)
+
+        CellEditingControl = CType(DataGridView.EditingControl, CtDgvComboBoxEditingControl)
+        CellEditingControl.SuggestCharCount = SuggestCharCount
+        CellEditingControl.DropDownStyle = ComboBoxStyle.DropDown
+        CellEditingControl.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+
+    End Sub
+
+    <Bindable(True)>
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to an integer to specify the this will only suggestappend when more than this specified number of characters is typed in.")>
+    <Browsable(True)>
+    Public Property SuggestCharCount As Integer = 1
+
+    Public Property CellEditingControl As CtDgvComboBoxEditingControl
+
+End Class

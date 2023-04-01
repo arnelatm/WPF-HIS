@@ -10,7 +10,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.GlobalResources
 Imports AATM.Libraries.MessagingLibrary
 
-Public Class CDataGridView
+Public Class CtDataGridView
     Inherits DataGridView
     Implements IEntryControl, IFindableControl
 
@@ -129,7 +129,7 @@ Public Class CDataGridView
     End Property
 
     Private Sub DataGridView_CellEnter(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles Me.CellEnter
-        If CurrentCell IsNot Nothing AndAlso TypeOf (CurrentCell) Is CDgvDtpCell Then
+        If CurrentCell IsNot Nothing AndAlso TypeOf (CurrentCell) Is CtDgvDtpCell Then
             EditMode = DataGridViewEditMode.EditOnEnter
         End If
     End Sub
@@ -403,7 +403,7 @@ Public Class CDataGridView
     '    End If
     'End Function
 
-    Private Sub cDataGridView_DefaultValuesNeeded(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowEventArgs) Handles Me.DefaultValuesNeeded
+    Private Sub ctDataGridView_DefaultValuesNeeded(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowEventArgs) Handles Me.DefaultValuesNeeded
         If (SequenceColumn IsNot Nothing AndAlso SequenceColumn <> "") Then
             If Columns(SequenceColumn) IsNot Nothing Then
                 Dim nRowColumn = Columns(SequenceColumn).Index()
@@ -414,7 +414,7 @@ Public Class CDataGridView
         End If
     End Sub
 
-    Private Sub CDataGridView_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles MyBase.UserDeletedRow
+    Private Sub CtDataGridView_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles MyBase.UserDeletedRow
         ReSequenceDgvAfterDelete()
         RaiseEvent ChangesMade(Me, EventArgs.Empty)
     End Sub
@@ -423,7 +423,7 @@ Public Class CDataGridView
     '    Dim x = 1
     'End Sub
 
-    Private Sub CDataGridView_UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles Me.UserDeletingRow
+    Private Sub CtDataGridView_UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles Me.UserDeletingRow
         If Not EditingMode Then
             Messaging.Show(True, "MsgRowDelNotAllowedInViewMode")
             e.Cancel = True
@@ -509,8 +509,8 @@ Public Class CDataGridView
                 'Forms.MessageBox.Show("Error happened " & e.Context.ToString())
 
                 Dim editControl As Object = Me.EditingControl
-                If TypeOf (editControl) Is CDgvDtpEditingControl Then
-                    Dim x As CDgvDtpEditingControl = DirectCast(editControl, CDgvDtpEditingControl)
+                If TypeOf (editControl) Is CtDgvDtpEditingControl Then
+                    Dim x As CtDgvDtpEditingControl = DirectCast(editControl, CtDgvDtpEditingControl)
                     x.InformUserOfInvalidDate()
                 End If
             End If
@@ -635,17 +635,17 @@ Public Class CDataGridView
 
     Public Function GetEditingValue(Optional field As String = "")
         If CurrentCell IsNot Nothing Then
-            Dim dgvControl As Libraries.CBaseControlsLibrary.CDgvComboBoxCell
-            dgvControl = TryCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell)
+            Dim dgvControl As Libraries.CBaseControlsLibrary.CtDgvComboBoxCell
+            dgvControl = TryCast(CurrentCell, Libraries.CBaseControlsLibrary.CtDgvComboBoxCell)
             If dgvControl IsNot Nothing Then
                 If dgvControl.CellEditingControl.SelectedItem IsNot Nothing Then
                     Select Case field.ToLower()
                         Case $"code"
-                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).Code
+                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CtDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).Code
                         Case $"name"
-                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).Name
+                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CtDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).Name
                         Case $"idno"
-                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).IdNo
+                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CtDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).IdNo
                         Case Else
                             Return CurrentCell.Value
                     End Select
@@ -839,22 +839,9 @@ Public Class CDataGridView
     'End Event
 
     Private Sub DataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles Me.EditingControlShowing
-        '    'declare variable(cb) as a combobox
-        '    Dim cb As CaComboBox
-        '    'e represent the editing control in the datagridview
-        '    'the condition is, if the type of e is combobox then set your code for autocomplete
-        '    If TypeOf e.Control Is CaComboBox Then
-        '        cb = e.Control
-        '        'set the dropdown style of a combobox
-        '        cb.DropDownStyle = ComboBoxStyle.DropDown
-        '        'set the property of a combobox to autocomplete mode.
-        '        cb.AutoCompleteMode = AutoCompleteMode.Suggest
-        '        cb.AutoCompleteSource = AutoCompleteSource.ListItems
-        '    End If
-        'End Sub
-        If TypeOf e.Control Is CaComboBox Then
+        If TypeOf e.Control Is CtDgvComboBoxEditingControl Then
             'declare variable(cb) as a caCombobox
-            Dim cb As CaComboBox
+            Dim cb As CtDgvComboBoxEditingControl
             cb = e.Control
             'set the dropdown style of a combobox
             cb.DropDownStyle = ComboBoxStyle.DropDown
@@ -866,9 +853,12 @@ Public Class CDataGridView
             'cb.AutoSize = False
             'cb.DropDownStyle = ComboBoxStyle.Simple
             'cb.MaxDropDownItems = 1
+            If CurrentCell IsNot Nothing Then
+                cb.SuggestCharCount = DirectCast(CurrentCell.OwningColumn, AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn).SuggestCharCount
+            End If
             ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            'cb.DropDownHeight = Height
+
         ElseIf TypeOf e.Control Is CCustomDateTimePicker Then
             Dim cDtp As CCustomDateTimePicker
             cDtp = e.Control
@@ -878,7 +868,7 @@ Public Class CDataGridView
     End Sub
 
     ' sample cellvalidating event handler
-    'Private Sub CDataGridView_CellValidating(ByVal sender As Object, ByVal e As DataGridViewCellValidatingEventArgs) Handles Me.CellValidating
+    'Private Sub CtDataGridView_CellValidating(ByVal sender As Object, ByVal e As DataGridViewCellValidatingEventArgs) Handles Me.CellValidating
     '    If e.FormattedValue = "error" Then
     '        Me.Rows(e.RowIndex).Cells(e.ColumnIndex).ErrorText = "Negative Values not allowed"
     '        e.Cancel = False
@@ -910,7 +900,7 @@ Public Class CDataGridView
     '    Return True
     'End Function
 
-    Private Sub CDataGridView_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles Me.CellEndEdit
+    Private Sub CtDataGridView_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles Me.CellEndEdit
         Dim nIndex = CurrentRow.Index
         If DataSource IsNot Nothing Then
             If DataSource.[GetType]() Is GetType(BindingSource) Then
@@ -932,8 +922,6 @@ Public Class CDataGridView
     End Sub
 
     Private Sub On_CellPainting(ByVal sender As Object, ByVal e As DataGridViewCellPaintingEventArgs) Handles Me.CellPainting
-        SuspendLayout()
-
         If (e.ColumnIndex >= 0 AndAlso e.RowIndex >= 0) Then
             If TypeOf Me.Columns(e.ColumnIndex) Is CDgvCheckBoxColumn Then
                 Dim value = DirectCast(e.FormattedValue, Nullable(Of Boolean))
@@ -948,7 +936,6 @@ Public Class CDataGridView
                 End If
             End If
         End If
-        ResumeLayout()
     End Sub
 
     <Bindable(True)>
@@ -1108,10 +1095,10 @@ Public Class CDataGridView
         _previousColumnSearch = _columnNo
         dataTypeEnum = GetObjectDataType(columnDataType)
         'columnData.FindDataType = dataTypeEnum
-        Dim searchForm As CDataGridFindForm
+        Dim searchForm As CtDataGridFindForm
         'DgSearch(_columnNo).SearchMode = GetColumnSearchModeType(Columns(_columnNo))
 
-        searchForm = New CDataGridFindForm(Me, _columnNo)
+        searchForm = New CtDataGridFindForm(Me, _columnNo)
         Dim screenRectangle As Rectangle
         Dim formLocation As Point
         searchForm.SetFieldDescription(Columns(_columnNo).HeaderText)
@@ -1545,7 +1532,7 @@ Public Class CDataGridView
     Public Class DataGridSearch
         Implements IFindableControl
 
-        Public Sub New(dataGridView As CDataGridView, colNo As Integer)
+        Public Sub New(dataGridView As CtDataGridView, colNo As Integer)
             If TypeOf dataGridView.Columns(colNo).CellTemplate Is DataGridViewTextBoxCell Then
                 SearchMode = IFindableControl.SearchModeEnum.TextBox
                 'FindDataSource
