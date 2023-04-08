@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
 
     Public Class ProductDao
         Inherits CommonDao
-        Implements iDao(Of Product)
+        Implements IDao(Of Product)
 
         Private Const FieldList = "Active," &
                           "Barcode," &
@@ -19,11 +19,11 @@ Namespace DataLayer.AdoNet
                           "IdNo," &
                           "ProductCode," &
                           "ProductName," &
-                          "ProductNameAra"                         
+                          "ProductNameAra"
 
         Private ReadOnly Db As New Db()
 
-        Public Function GetRecordByIdNo(idNo) As Product Implements iDao(Of Product).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As Product Implements IDao(Of Product).GetRecordByIdNo
             Dim sql As String = " SELECT " & FieldList &
                     " FROM Product" &
                     " WHERE IdNo = @IdNo"
@@ -31,7 +31,7 @@ Namespace DataLayer.AdoNet
             Return Db.Read(sql, Make, params).FirstOrDefault()
         End Function
 
-        Public Function UpdateRecord(ByRef Product As Product) As Integer Implements iDao(Of Product).UpdateRecord
+        Public Function UpdateRecord(ByRef Product As Product) As Integer Implements IDao(Of Product).UpdateRecord
             Dim sql As String = " UPDATE [Product] Set" &
                     " Active = @Active," &
                     " Barcode = @Barcode," &
@@ -45,7 +45,7 @@ Namespace DataLayer.AdoNet
             Return Db.Update(sql, Take(Product))
         End Function
 
-        Public Function AddRecord(ByRef Product As Product) As Integer Implements iDao(Of Product).AddRecord
+        Public Function AddRecord(ByRef Product As Product) As Integer Implements IDao(Of Product).AddRecord
             Dim sql As String =
                     " INSERT INTO [Product] " &
                     " (Active,Barcode,BaseUnitIdNo,CategoryIdNo,GTIN,ProductCode,ProductName,ProductNameAra) " &
@@ -57,7 +57,7 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New Product() With {
             .Active = Extensions.AsBool(reader("Active")),
-            .Barcode = Extensions.AsString(reader("Barcode")),
+            .BarCode = Extensions.AsString(reader("Barcode")),
             .BaseUnitIdNo = Extensions.AsInt(Of Int16)(reader("BaseUnitIdNo")),
             .CategoryIdNo = Extensions.AsInt(Of Int16)(reader("CategoryIdNo")),
             .GTIN = Extensions.AsString(reader("GTIN")),
@@ -70,7 +70,7 @@ Namespace DataLayer.AdoNet
         Private Function Take(Product As Product) As Object()
             Return New Object() {
                                     "@Active", Product.Active,
-                                    "@Barcode", Product.Barcode,
+                                    "@Barcode", Product.BarCode,
                                     "@BaseUnitIdNo", Product.BaseUnitIdNo,
                                     "@CategoryIdNo", Product.CategoryIdNo,
                                     "@GTIN", Product.GTIN,
@@ -81,6 +81,25 @@ Namespace DataLayer.AdoNet
                                 }
         End Function
 
+        Public Function GetProductsBySearchString(searchString As String)
+            Dim sql As String
+
+            sql = "SELECT ProductCode,ProductName,BarCode,GTIN from Product where ProductName like '%" + searchString + "%' Or " + 
+                  "ProductCode = @searchString or GTIN = @searchString or BarCode = @searchString order by ProductName"
+            Dim params As String() = {"@SearchString", searchString}
+            Return Db.ExecuteReader(sql, params)
+        End Function
+
+
+        Private Shared ReadOnly MakeProduct As Func(Of IDataReader, Product) =
+                                    Function(reader) _
+            New Product() With {
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .ProductName = Extensions.AsString(reader("ProductName")),
+            .ProductCode = Extensions.AsString(reader("ProductCode")),
+            .BarCode = Extensions.AsString(reader("Barcode")),
+            .GTIN = Extensions.AsString(reader("GTIN"))            
+            }
     End Class
 
 End Namespace

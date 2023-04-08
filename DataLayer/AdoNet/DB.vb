@@ -352,6 +352,20 @@ Namespace AdoNet
             End Try
         End Function
 
+
+        Public Function ExecuteReader(ByVal sql As String, ParamArray ByVal params() As Object) As DataTable
+            Dim table As New DataTable
+            Using connection = CreateConnection()
+                Using command = CreateCommand(sql, connection, params)
+                    Using reader = command.ExecuteReader()
+                        table.Load(reader)                        
+                    End Using
+                End Using
+            End Using
+            Return table
+        End Function
+
+
         'Public Iterator Function Readx(Of T)(ByVal sql As String, ByVal make As Func(Of IDataReader, T), ParamArray ByVal params() As Object) As IEnumerable(Of T)
         '    Using connection = CreateConnection()
         '        Using command = CreateCommand(sql, connection, params)

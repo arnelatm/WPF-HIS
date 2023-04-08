@@ -151,6 +151,9 @@
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="MyGridComboBoxLibrary">
+      <HintPath>..\Libraries\GridComboBoxLibrary\obj\Debug\MyGridComboBoxLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="ShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <HintPath>..\packages\CrystalReports.ShockwaveFlashObjects.13.0.4000\lib\net40\ShockwaveFlashObjects.dll</HintPath>
@@ -163,6 +166,7 @@
     </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Design" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -398,6 +402,14 @@
     <Compile Include="Form2.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ISPDATADataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ISPDATADataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ISPDATADataSet.vb">
+      <DependentUpon>ISPDATADataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
@@ -541,6 +553,18 @@
     <Compile Include="PresentationLayer\Views\Forms\ArJournalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\CGridBoxForm.Designer.vb">
+      <DependentUpon>CGridBoxForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\CGridBoxForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\DataGridViewBoxForm.Designer.vb">
+      <DependentUpon>DataGridViewBoxForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\DataGridViewBoxForm.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DosagePrinting.Designer.vb">
       <DependentUpon>DosagePrinting.vb</DependentUpon>
     </Compile>
@@ -563,6 +587,12 @@
       <DependentUpon>Form3.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Form3.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\ProductFinder.Designer.vb">
+      <DependentUpon>ProductFinder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\ProductFinder.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Form4.Designer.vb">
@@ -1861,6 +1891,12 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ArJournalEntry.resx">
       <DependentUpon>ArJournalEntry.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\CGridBoxForm.resx">
+      <DependentUpon>CGridBoxForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\DataGridViewBoxForm.resx">
+      <DependentUpon>DataGridViewBoxForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\DosagePrinting.resx">
       <DependentUpon>DosagePrinting.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -1873,8 +1909,13 @@
       <DependentUpon>DoctorEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\ProductFinder.resx">
+      <DependentUpon>ProductFinder.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Form4.resx">
       <DependentUpon>Form4.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ProductEntry.resx">
       <DependentUpon>ProductEntry.vb</DependentUpon>
@@ -2578,6 +2619,17 @@
     <None Include="appx.config" />
     <None Include="app-Ibn-Server.config" />
     <None Include="appOrig.config" />
+    <None Include="ISPDATADataSet.xsc">
+      <DependentUpon>ISPDATADataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ISPDATADataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ISPDATADataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ISPDATADataSet.xss">
+      <DependentUpon>ISPDATADataSet.xsd</DependentUpon>
+    </None>
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -2621,6 +2673,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PcsOiItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PensionRateModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PettyCashJournalModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.ProductModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PurchaseDetailModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PurchaseModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.ReportModel.datasource" />

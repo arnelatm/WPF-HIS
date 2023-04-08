@@ -1,18 +1,22 @@
 ﻿Imports AATM.Accounts.DataLayer.AdoNet
 
-Public Class Form4
+Public Class ProductFinder
 
+    Public Sub New(textToFind As String)
 
-    Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
-        Dim number As Double
-        number = CTextBox1.Text
-        CLabel1.Text = AATM.Libraries.GlobalFuncNSub.DecimalToFraction(number, 32)
-        CLabel2.Text = AATM.Libraries.GlobalFuncNSub.RealToFraction(number, 0.0001)
-        CLabel3.Text = AATM.Libraries.GlobalFuncNSub.GetDecimalToFraction(number, 32, "U")
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        txtFinder.Text = textToFind
+        ' Add any initialization after the InitializeComponent() call.
+
+    End Sub
+
+    Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs)
         _findText = ""
     End Sub
 
-    Private Sub Form4_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub ProductFinder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'TODO: This line of code loads data into the 'ISPDATADataSet.Product' table. You can move, or remove it, as needed.
         Me.ProductTableAdapter.Fill(Me.ISPDATADataSet.Product)
         'TODO: This line of code loads data into the 'ISPDATADataSet.PurchaseDetail' table. You can move, or remove it, as needed.
@@ -121,20 +125,20 @@ Public Class Form4
     'End Sub
 
 
-    Private Sub Dgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchase.CellEndEdit
-        If DataGridViewPurchase.CurrentCell.OwningColumn.Name = "ProductName" Then
-            With DataGridViewPurchase.CurrentCell
-                Dim cColumnName = .OwningColumn.Name.ToLower()
-                Dim dao As New ProductDao
-                _findText = DataGridViewPurchase.CurrentCell.EditedFormattedValue
-                If _findText = "" Then
-                    DataGridViewProducts.DataSource = Nothing
-                Else
-                    DataGridViewProducts.DataSource = dao.GetProductsBySearchString(_findText)
-                End If
-            End With
-        End If
-    End Sub
+    'Private Sub Dgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs)
+    '    If DataGridViewPurchase.CurrentCell.OwningColumn.Name = "ProductName" Then
+    '        With DataGridViewPurchase.CurrentCell
+    '            Dim cColumnName = .OwningColumn.Name.ToLower()
+    '            Dim dao As New ProductDao
+    '            _findText = DataGridViewPurchase.CurrentCell.EditedFormattedValue
+    '            If _findText = "" Then
+    '                DataGridViewProducts.DataSource = Nothing
+    '            Else
+    '                DataGridViewProducts.DataSource = dao.GetProductsBySearchString(_findText)
+    '            End If
+    '        End With
+    '    End If
+    'End Sub
 
     Private _findText As String = ""
 
@@ -146,22 +150,22 @@ Public Class Form4
 
     End Sub
 
-    Private Sub DataGridViewPurchase_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchase.CellValueChanged
-        If e.RowIndex >= 0 Then
-            Dim newDate As DateTime
+    'Private Sub DataGridViewPurchase_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs)
+    '    If e.RowIndex >= 0 Then
+    '        Dim newDate As DateTime
 
-            Select Case Me.DataGridViewPurchase.Columns(e.ColumnIndex).Name
-                Case "ProductName"
-                    Dim newText As String = Me.DataGridViewPurchase.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString()
-                Case "ColumnCombo"
-                    Dim newPriority As String = Me.DataGridViewPurchase.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString()
-                Case "ColumnDate"
-                    DateTime.TryParse(Me.DataGridViewPurchase.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString(), newDate)
-            End Select
-        End If
-    End Sub
+    '        Select Case Me.DataGridViewPurchase.Columns(e.ColumnIndex).Name
+    '            Case "ProductName"
+    '                Dim newText As String = Me.DataGridViewPurchase.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString()
+    '            Case "ColumnCombo"
+    '                Dim newPriority As String = Me.DataGridViewPurchase.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString()
+    '            Case "ColumnDate"
+    '                DateTime.TryParse(Me.DataGridViewPurchase.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString(), newDate)
+    '        End Select
+    '    End If
+    'End Sub
 
-    Private Sub dataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles DataGridViewPurchase.EditingControlShowing
+    Private Sub dataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs)
 
         e.CellStyle.BackColor = Color.Aquamarine
 
