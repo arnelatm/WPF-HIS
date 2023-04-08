@@ -269,17 +269,19 @@ Namespace PresentationLayer.Views.Forms
             bsPurchaseDetails.AllowNew = True
             With DataGridViewPurchaseDetails
                 '.Refresh()
-                .AutoGenerateColumns = False
-                .DataSource = bsPurchaseDetails
+                'dgvProductIdNo.DataSource = ProductsByCode
+                'dgvProductIdNo.DataSource = ProductsByCode
+                'dgvProductIdNo.DataSource = ProductsByCode
+                'dgvProductIdNo.DisplayMember = "Name"
+                'dgvProductIdNo.ValueMember = "IdNO"
+                'dgvProductIdNo.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox
+                'dgvProductIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
+                '.DataSource = bsPurchaseDetails
+
                 '.Refresh()
             End With
             With DataGridViewPurchaseDetails.Columns
                 dgvSequence.DisplayOnly = True
-                dgvProductIdNo.DataSource = ProductsByCode
-                dgvProductIdNo.DisplayMember = "Name"
-                dgvProductIdNo.ValueMember = "IdNo"
-                dgvProductIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvProductIdNo.SuggestCharCount = 3
                 dgvUnitIdNo.DataSource = UnitsByCode
                 dgvUnitIdNo.DisplayMember = "Name"
                 dgvUnitIdNo.ValueMember = "idNo"
@@ -290,7 +292,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CboSupplierIdNo_Changed(sender As Object, e As EventArgs) Handles cboSupplierIdNo.Validated, cboSupplierIdNo.SelectionChangeCommitted
             Presenter.UpdateDueDate()
-            Presenter.UpdateEarlySettlementValues()
+            'Presenter.UpdateEarlySettlementValues()
             If SupplierIdNo IsNot Nothing Then
                 Presenter.SetSupplierVatNumber(VatNumber, SupplierIdNo, True)
             End If
@@ -323,31 +325,50 @@ Namespace PresentationLayer.Views.Forms
         '    DataGridViewPurchaseDetails.Refresh()
         'End Sub
 
-        'Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) _
-        '    Handles DataGridViewPurchaseDetails.CellBeginEdit
-        '    If DataGridViewPurchaseDetails.CurrentCell.RowIndex() = 0 Then
-        '        With DataGridViewPurchaseDetails.CurrentCell
-        '            Dim cColumnName = .OwningColumn.Name.ToLower()
-        '            ' don't allow edits for first line entries account id no and amounts if only single AP
-        '            'If cColumnName = $"dgvProductIdNo" Or ((cColumnName = $"dgvNetAmount" Or cColumnName = $"dgvVatAmount") AndAlso Presenter.CountApItems() <= 1) Then
-        '            '    Beep()
-        '            '    e.Cancel = True
-        '            '    DataGridViewPurchaseDetails.EndEdit()
-        '            'End If
-        '        End With
-        '        'ElseIf (DataGridViewPurchaseDetails.CurrentRow.Cells("dgvPaidAmount").Value <> 0 Or DataGridViewPurchaseDetails.CurrentRow.Cells("dgvDiscountTaken").Value <> 0) _
-        '        '       And DataGridViewPurchaseDetails.CurrentCell.OwningColumn.Name.ToLower() = $"dgvProductIdNo" Then
-        '        '    Beep()
-        '        '    e.Cancel = True
-        '        '    DataGridViewPurchaseDetails.EndEdit()
-        '        '    Messaging.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
-        '    End If
-        'End Sub
+        Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) _
+            Handles DataGridViewPurchaseDetails.CellBeginEdit
+            If DataGridViewPurchaseDetails.CurrentCell.RowIndex() = 0 Then
+                With DataGridViewPurchaseDetails.CurrentCell
+                    Dim cColumnName = .OwningColumn.Name.ToLower()
+                    If cColumnName = $"dgvProductIdNo" Then
 
-        'Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchaseDetails.CellEndEdit
-        '    ProcessCellEndEdit(DataGridViewPurchaseDetails, bsPurchaseDetails)
-        '    'UpdateTotals()
-        'End Sub
+                    End If
+                    '    Beep()
+                    '    e.Cancel = True
+                    '    DataGridViewPurchaseDetails.EndEdit()
+                    'End If
+                End With
+                'ElseIf (DataGridViewPurchaseDetails.CurrentRow.Cells("dgvPaidAmount").Value <> 0 Or DataGridViewPurchaseDetails.CurrentRow.Cells("dgvDiscountTaken").Value <> 0) _
+                '       And DataGridViewPurchaseDetails.CurrentCell.OwningColumn.Name.ToLower() = $"dgvProductIdNo" Then
+                '    Beep()
+                '    e.Cancel = True
+                '    DataGridViewPurchaseDetails.EndEdit()
+                '    Messaging.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
+            End If
+        End Sub
+
+        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchaseDetails.CellEndEdit
+            If DataGridViewPurchaseDetails.CurrentCell.RowIndex = 0 Then
+                With DataGridViewPurchaseDetails.CurrentCell
+                    Dim cColumnName = .OwningColumn.Name
+                    If cColumnName = $"dgvProductName" Then 'Or cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit" Then
+                        With bsPurchaseDetails
+                            Dim findText = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductName
+                            Dim form As New ProductFinder(findText)
+                            form.Show()
+                            'If DataGridViewPurchaseDetails.CurrentCell.RowIndex >= 0 And DataGridViewPurchaseDetails.CurrentCell.RowIndex < .Count() Then
+                            '    Dim findText As String
+                            '    'Dim amount As Decimal
+                            '    'Dim employeePayElement As EmployeePayElementView = eventType.BindingSource.Current
+                            '    'Dim earnIdNo = eventType.BindingSource.Current.PayElementIdNo
+                            '    'Dim calcType = GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
+                            '    'earnIdNo = eventType.EnteredValue
+                            'End If
+                        End With
+                    End If
+                End With
+            End If
+        End Sub
 
         Private Sub OnTransactionDateValidated(sender As Object, e As EventArgs) Handles dtpTransactionDate.Validated
             Presenter.UpdateDueDate()
@@ -396,6 +417,87 @@ Namespace PresentationLayer.Views.Forms
                 End If
             End If
         End Sub
+
+        Private Sub PurchaseEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            'TODO: This line of code loads data into the 'ISPDATADataSet.Product' table. You can move, or remove it, as needed.
+            Me.ProductTableAdapter.Fill(Me.ISPDATADataSet.Product)
+
+        End Sub
+
+
+        Private Sub grid_EditingControlShowing(ByVal s As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles DataGridViewPurchaseDetails.EditingControlShowing
+            Dim comboBox = TryCast(e.Control, DataGridViewComboBoxEditingControl)
+            If comboBox IsNot Nothing Then
+                comboBox.DropDownStyle = ComboBoxStyle.DropDown
+                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+            End If
+        End Sub
+
+
+        'Private Sub DataGridViewPurchase_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchaseDetails.CellValueChanged
+        '    If e.RowIndex >= 0 Then
+        '        Dim newDate As DateTime
+
+        '        Select Case DataGridViewPurchaseDetails.Columns(e.ColumnIndex).Name
+        '            Case "ProductName"
+        '                Dim newText As String = Me.DataGridViewPurchaseDetails.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString()
+        '                'Case "ColumnCombo"
+        '                '    Dim newPriority As String = Me.DataGridViewPurchase.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString()
+        '                'Case "ColumnDate"
+        '                '    DateTime.TryParse(Me.DataGridViewPurchase.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString(), newDate)
+        '        End Select
+        '    End If
+        'End Sub
+
+
+        Private Sub DataGridViewPurchase_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchaseDetails.CellValueChanged
+            If e.RowIndex >= 0 Then
+                Select Case DataGridViewPurchaseDetails.Columns(e.ColumnIndex).Name
+                    Case "ProductName"
+                        Dim newText As String = Me.DataGridViewPurchaseDetails.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString()
+
+                        'dgvProductIdNo.DataSource = ProductsByCode
+                        'dgvProductIdNo.DisplayMember = "Name"
+                        'dgvProductIdNo.ValueMember = "IdNO"
+
+
+
+                        'Case "ColumnCombo"
+                        '    Dim newPriority As String = Me.DataGridViewPurchase.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString()
+                        'Case "ColumnDate"
+                        '    DateTime.TryParse(Me.DataGridViewPurchase.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString(), newDate)
+                End Select
+            End If
+        End Sub
+
+
+        <System.Security.Permissions.UIPermission(System.Security.Permissions.SecurityAction.LinkDemand, Window:=System.Security.Permissions.UIPermissionWindow.AllWindows)>
+        Protected Overrides Function ProcessDialogKey(ByVal keyData As Keys) As Boolean
+
+            ' Extract the key code from the key value. 
+            Dim key As Keys = keyData And Keys.KeyCode
+
+            ' Handle the ENTER key as if it were a RIGHT ARROW key. 
+            'If key = Keys.Enter Then
+            '    Return Me.ProcessRightKey(keyData)
+            'End If
+
+
+            Return MyBase.ProcessDialogKey(keyData)
+
+        End Function
+
+        '<System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.LinkDemand, Flags:=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)>
+        'Protected Overrides Function ProcessDataGridViewKey(ByVal e As System.Windows.Forms.KeyEventArgs) As Boolean
+
+        '    ' Handle the ENTER key as if it were a RIGHT ARROW key. 
+        '    If e.KeyCode = Keys.Enter Then
+        '        Return Me.ProcessRightKey(e.KeyData)
+        '    End If
+
+        '    Return MyBase.ProcessDataGridViewKey(e)
+
+        'End Function
 
     End Class
 
