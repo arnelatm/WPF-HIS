@@ -348,32 +348,28 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchaseDetails.CellEndEdit
-            If DataGridViewPurchaseDetails.CurrentCell.RowIndex = 0 Then
-                With DataGridViewPurchaseDetails.CurrentCell
-                    Dim cColumnName = .OwningColumn.Name
-                    If cColumnName = $"dgvProductName" Then 'Or cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit" Then
-                        With bsPurchaseDetails
-                            Dim findText = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductName
-                            Dim form As New ProductFinder(findText, DataGridViewPurchaseDetails)
-                            If form.ShowDialog() = Windows.Forms.DialogResult.OK Then
-                                Dim sIdNo As Int32 = form.SelectedId
-                                Dim sName As String = form.SelectedName
-                                ' Yes, so grab the values you want from the dialog here
-                                '. = form.SelectedId
-                            End If
+            'If DataGridViewPurchaseDetails.CurrentCell.RowIndex = 0 Then
+            With DataGridViewPurchaseDetails.CurrentCell
+                Dim cColumnName = .OwningColumn.Name
+                If cColumnName = $"dgvProductName" Then 'Or cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit" Then
+                    With bsPurchaseDetails
+                        Dim findText = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductName
+                        Dim form As New ProductFinder(findText, DataGridViewPurchaseDetails)
+                        If form.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                            Dim sIdNo As Int32 = form.SelectedId
+                            Dim sName As String = form.SelectedName
+                            DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductIdNo = sIdNo
+                            DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductName = sName
+                            ' Yes, so grab the values you want from the dialog here
+                            '. = form.SelectedId
+                        Else
 
-                            'If DataGridViewPurchaseDetails.CurrentCell.RowIndex >= 0 And DataGridViewPurchaseDetails.CurrentCell.RowIndex < .Count() Then
-                            '    Dim findText As String
-                            '    'Dim amount As Decimal
-                            '    'Dim employeePayElement As EmployeePayElementView = eventType.BindingSource.Current
-                            '    'Dim earnIdNo = eventType.BindingSource.Current.PayElementIdNo
-                            '    'Dim calcType = GetFieldWithIdNo(earnIdNo, "PayElement", "CalculationType")
-                            '    'earnIdNo = eventType.EnteredValue
-                            'End If
-                        End With
-                    End If
-                End With
-            End If
+                        End If
+
+                    End With
+                End If
+            End With
+            'End If
         End Sub
 
         Private Sub OnTransactionDateValidated(sender As Object, e As EventArgs) Handles dtpTransactionDate.Validated
