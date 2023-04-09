@@ -44,6 +44,8 @@ Partial Class ProductFinder
         Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PurchaseDetailTableAdapter = New AATM.Accounts.ISPDATADataSetTableAdapters.PurchaseDetailTableAdapter()
         Me.ProductTableAdapter = New AATM.Accounts.ISPDATADataSetTableAdapters.ProductTableAdapter()
+        Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
         CType(Me.DataGridViewProducts, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ProductBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ISPDATADataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -60,7 +62,7 @@ Partial Class ProductFinder
         Me.DataGridViewProducts.DataSource = Me.ProductBindingSource
         Me.DataGridViewProducts.Location = New System.Drawing.Point(10, 37)
         Me.DataGridViewProducts.Name = "DataGridViewProducts"
-        Me.DataGridViewProducts.Size = New System.Drawing.Size(962, 444)
+        Me.DataGridViewProducts.Size = New System.Drawing.Size(962, 278)
         Me.DataGridViewProducts.TabIndex = 7
         '
         'DataGridViewTextBoxColumn2
@@ -193,11 +195,37 @@ Partial Class ProductFinder
         '
         Me.ProductTableAdapter.ClearBeforeFill = True
         '
+        'btnOk
+        '
+        Me.btnOk.DesignerSelected = False
+        Me.btnOk.ImageIndex = 0
+        Me.btnOk.Location = New System.Drawing.Point(401, 321)
+        Me.btnOk.Name = "btnOk"
+        Me.btnOk.OriginalImageName = Nothing
+        Me.btnOk.SecurityKey = ""
+        Me.btnOk.Size = New System.Drawing.Size(90, 25)
+        Me.btnOk.TabIndex = 9
+        Me.btnOk.Text = "CButton1"
+        '
+        'btnCancel
+        '
+        Me.btnCancel.DesignerSelected = False
+        Me.btnCancel.ImageIndex = 0
+        Me.btnCancel.Location = New System.Drawing.Point(513, 321)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.OriginalImageName = Nothing
+        Me.btnCancel.SecurityKey = ""
+        Me.btnCancel.Size = New System.Drawing.Size(90, 25)
+        Me.btnCancel.TabIndex = 10
+        Me.btnCancel.Text = "CButton2"
+        '
         'ProductFinder
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(984, 484)
+        Me.ClientSize = New System.Drawing.Size(984, 358)
+        Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.btnOk)
         Me.Controls.Add(Me.txtFinder)
         Me.Controls.Add(Me.DataGridViewProducts)
         Me.Name = "ProductFinder"
@@ -239,4 +267,6 @@ End Sub
     Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn8 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn9 As DataGridViewTextBoxColumn
+    Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
+    Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
 End Class

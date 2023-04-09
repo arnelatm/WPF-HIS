@@ -2,14 +2,31 @@
 
 Public Class ProductFinder
 
-    Public Sub New(textToFind As String)
+    Private _dgv As DataGridView
+
+    Public Sub New(textToFind As String, dgvObj As DataGridView)
 
         ' This call is required by the designer.
         InitializeComponent()
-
+        Me.ShowIcon = False
+        Me.ControlBox = True
+        Me.MinimizeBox = False
+        Me.MaximizeBox = False
+        Me.Text = ""
+        Me.TopMost = True
+        _dgv = dgvObj
         txtFinder.Text = textToFind
-        ' Add any initialization after the InitializeComponent() call.
-
+        Dim pnt As Point
+        Dim dgvLocation As Point
+        Dim screenRectangle As Rectangle
+        screenRectangle = Screen.PrimaryScreen.WorkingArea
+        StartPosition = FormStartPosition.Manual
+        pnt = _dgv.PointToScreen(Location)
+        Location = New Point(pnt.X, pnt.Y)
+        If dgvLocation.Y + Height > screenRectangle.Height Then
+            dgvLocation.Y = pnt.Y - Height
+        End If
+        DataGridViewProducts.MultiSelect = False
     End Sub
 
     Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs)
@@ -37,31 +54,6 @@ Public Class ProductFinder
     End Sub
 
     Private SearchString As String = ""
-
-    'Public Function HighlightText(ByVal InputTxt As String) As String
-    '    Dim Search_Str As String = txtSearch.Text
-    '    ' Setup the regular expression and add the Or operator.
-    '    Dim RegExp As Regex = New Regex(Search_Str.Replace(" ", "|").Trim, RegexOptions.IgnoreCase)
-    '    ' Highlight keywords by calling the
-    '    'delegate each time a keyword is found.
-    '    Return RegExp.Replace(InputTxt, New MatchEvaluator(AddressOf ReplaceKeyWords))
-    'End Function
-
-    'Public Function ReplaceKeyWords(ByVal m As Match) As String
-    '    Return ("<span class=highlight>" + m.Value + "</span>")
-    'End Function
-
-    'Protected Sub btnSearch_Click(ByVal sender As Object, ByVal e As ImageClickEventArgs)
-    '    '  Set the value of the SearchString so it gets
-    '    SearchString = txtSearch.Text
-    'End Sub
-
-    'Protected Sub btnClear_Click(ByVal sender As Object, ByVal e As ImageClickEventArgs)
-    '    '  Simple clean up text to return the Gridview to it's default state
-    '    txtSearch.Text = ""
-    '    SearchString = ""
-    '    gvDetails.DataBind()
-    'End Sub
 
     Private Sub txtFinder_TextChanged(sender As Object, e As EventArgs) Handles txtFinder.TextChanged
         Dim dao As New ProductDao
@@ -110,60 +102,9 @@ Public Class ProductFinder
         End If
     End Sub
 
-    'Private Sub Dgv_OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewPurchase.CellBeginEdit
-    '    If DataGridViewPurchase.CurrentCell.OwningColumn.Name = "ProductName" Then
-    '        With DataGridViewPurchase.CurrentCell
-    '            Dim cColumnName = .OwningColumn.Name.ToLower()
-    '            Dim dao As New ProductDao
-    '            If txtFinder.Text.Length() < 3 Then
-    '                DataGridViewProducts.DataSource = Nothing
-    '            Else
-    '                DataGridViewProducts.DataSource = dao.GetProductsBySearchString(txtFinder.Text)
-    '            End If
-    '        End With
-    '    End If
-    'End Sub
-
-
-    'Private Sub Dgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs)
-    '    If DataGridViewPurchase.CurrentCell.OwningColumn.Name = "ProductName" Then
-    '        With DataGridViewPurchase.CurrentCell
-    '            Dim cColumnName = .OwningColumn.Name.ToLower()
-    '            Dim dao As New ProductDao
-    '            _findText = DataGridViewPurchase.CurrentCell.EditedFormattedValue
-    '            If _findText = "" Then
-    '                DataGridViewProducts.DataSource = Nothing
-    '            Else
-    '                DataGridViewProducts.DataSource = dao.GetProductsBySearchString(_findText)
-    '            End If
-    '        End With
-    '    End If
-    'End Sub
 
     Private _findText As String = ""
 
-    Private Sub Dgv_OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs)
-
-    End Sub
-
-    Private Sub Dgv_OnCellBeginEdit(sender As Object, e As DataGridViewCellEventArgs)
-
-    End Sub
-
-    'Private Sub DataGridViewPurchase_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs)
-    '    If e.RowIndex >= 0 Then
-    '        Dim newDate As DateTime
-
-    '        Select Case Me.DataGridViewPurchase.Columns(e.ColumnIndex).Name
-    '            Case "ProductName"
-    '                Dim newText As String = Me.DataGridViewPurchase.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString()
-    '            Case "ColumnCombo"
-    '                Dim newPriority As String = Me.DataGridViewPurchase.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString()
-    '            Case "ColumnDate"
-    '                DateTime.TryParse(Me.DataGridViewPurchase.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString(), newDate)
-    '        End Select
-    '    End If
-    'End Sub
 
     Private Sub dataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs)
 
@@ -171,58 +112,22 @@ Public Class ProductFinder
 
     End Sub
 
-    Public Function CreateDataGridViewForPersonInfo(ByVal TargetForm As Form, ByVal ListBindingSource As BindingSource) As DataGridView
 
-        ' create the resulting grid and it's columns
-        Dim result As New DataGridView
-        Dim DataGridViewTextBoxColumn1 As New System.Windows.Forms.DataGridViewTextBoxColumn
-        Dim DataGridViewTextBoxColumn2 As New System.Windows.Forms.DataGridViewTextBoxColumn
+    Public Property SelectedId As Int32
+    Public Property SelectedName As String
+    Private Sub btnOk_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
+        SelectedId = DataGridViewProducts.CurrentRow.Cells(1).Value
+        SelectedName = DataGridViewProducts.CurrentRow.Cells(0).Value
+        Close()
+    End Sub
 
-        ' begin initialization (to minimize events)
-        CType(result, System.ComponentModel.ISupportInitialize).BeginInit()
+    Private Sub btnCancel_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
+        Close()
+    End Sub
 
-        ' setup grid properties as you need
-        result.AllowUserToAddRows = False
-        result.AllowUserToDeleteRows = False
-        result.AutoGenerateColumns = False
-        result.AllowUserToResizeRows = False
-        result.ColumnHeadersVisible = False
-        result.RowHeadersVisible = False
-        result.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
-        result.ReadOnly = True
-        result.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        result.Size = New System.Drawing.Size(300, 220)
-        result.AutoSize = False
+    Private Sub txtFinder_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles txtFinder.PreviewKeyDown
 
-        ' add datasource
-        result.DataSource = ListBindingSource
-
-        ' add columns
-        result.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() _
-            {DataGridViewTextBoxColumn1, DataGridViewTextBoxColumn2})
-
-        ' setup columns as you need
-        DataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        DataGridViewTextBoxColumn1.DataPropertyName = "Name"
-        DataGridViewTextBoxColumn1.HeaderText = "Name"
-        DataGridViewTextBoxColumn1.Name = ""
-        DataGridViewTextBoxColumn1.ReadOnly = True
-
-        DataGridViewTextBoxColumn2.DataPropertyName = "Code"
-        DataGridViewTextBoxColumn2.HeaderText = "Code"
-        DataGridViewTextBoxColumn2.Name = ""
-        DataGridViewTextBoxColumn2.ReadOnly = True
-        DataGridViewTextBoxColumn2.AutoSizeMode = DataGridViewAutoSizeColumnMode.NotSet
-
-        ' assign binding context of the form that hosts
-        ' the control in order to enable databinding
-        result.BindingContext = TargetForm.BindingContext
-
-        ' end initialization
-        CType(result, System.ComponentModel.ISupportInitialize).EndInit()
-
-        Return result
-    End Function
+    End Sub
 
 
 End Class

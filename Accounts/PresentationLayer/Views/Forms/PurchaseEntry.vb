@@ -354,8 +354,14 @@ Namespace PresentationLayer.Views.Forms
                     If cColumnName = $"dgvProductName" Then 'Or cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit" Then
                         With bsPurchaseDetails
                             Dim findText = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductName
-                            Dim form As New ProductFinder(findText)
-                            form.Show()
+                            Dim form As New ProductFinder(findText, DataGridViewPurchaseDetails)
+                            If form.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                                Dim sIdNo As Int32 = form.SelectedId
+                                Dim sName As String = form.SelectedName
+                                ' Yes, so grab the values you want from the dialog here
+                                '. = form.SelectedId
+                            End If
+
                             'If DataGridViewPurchaseDetails.CurrentCell.RowIndex >= 0 And DataGridViewPurchaseDetails.CurrentCell.RowIndex < .Count() Then
                             '    Dim findText As String
                             '    'Dim amount As Decimal
