@@ -84,7 +84,7 @@ Namespace DataLayer.AdoNet
         Public Function GetProductsBySearchString(searchString As String)
             Dim sql As String
 
-            sql = "SELECT ProductCode,ProductName,BarCode,GTIN from Product where ProductName like '%" + searchString + "%' Or " + 
+            sql = "SELECT IdNo,ProductCode,ProductName,BarCode,GTIN from Product where ProductName like '%" + searchString + "%' Or " +
                   "ProductCode = @searchString or GTIN = @searchString or BarCode = @searchString order by ProductName"
             Dim params As String() = {"@SearchString", searchString}
             Return Db.ExecuteReader(sql, params)
