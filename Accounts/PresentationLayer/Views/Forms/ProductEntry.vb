@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.GlobalFuncNSub
 
@@ -98,7 +99,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property BarCode As String Implements IProductView.BarCode
+        Public Property BarCode As String Implements IProductView.Barcode
             Get
                 Return txtBarcode.Text
             End Get
@@ -116,19 +117,38 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property Drug As Boolean Implements IProductView.Drug
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Boolean)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+
+        Private Property IProductView_ProductUnits As List(Of ProductUnit) Implements IProductView.ProductUnits
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As List(Of ProductUnit))
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
             {
-		     {"Active", chkActive},
-		     {"Barcode", txtBarcode},
-		     {"BaseUnitIdNo", cboBaseUnitIdNo},
-		     {"CategoryIdNo", cboCategoryIdNo},
-		     {"DateCreated", txtDateCreated},
-		     {"GTIN", txtGTIN},
-		     {"IdNo", TxtIdNo},
-		     {"ProductCode", txtProductCode},
-		     {"ProductName", txtProductName},
-		     {"ProductNameAra", txtProductNameAra}
+             {"Active", chkActive},
+             {"Barcode", txtBarcode},
+             {"BaseUnitIdNo", cboBaseUnitIdNo},
+             {"CategoryIdNo", cboCategoryIdNo},
+             {"DateCreated", txtDateCreated},
+             {"GTIN", txtGTIN},
+             {"IdNo", TxtIdNo},
+             {"ProductCode", txtProductCode},
+             {"ProductName", txtProductName},
+             {"ProductNameAra", txtProductNameAra}
             }
         End Sub
 

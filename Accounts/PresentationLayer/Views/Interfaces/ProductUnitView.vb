@@ -1,6 +1,4 @@
-﻿Imports AATM.Accounts.BusinessLayer
-
-Namespace PresentationLayer.Models
+﻿Namespace PresentationLayer.Models
 
     ''' <summary>
     '''     The Model in MVP design pattern.
@@ -20,7 +18,6 @@ Namespace PresentationLayer.Models
         Public Property ProductCode As String
         Public Property ProductName As String
         Public Property ProductNameAra As String
-        Public Property ProductUnits As List(Of ProductUnit)
 
     End Class
 

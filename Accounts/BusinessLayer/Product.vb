@@ -22,6 +22,7 @@ Namespace BusinessLayer
         Public Property BaseUnitIdNo As Int16
         Public Property CategoryIdNo As Int16
         Public Property DateCreated As DateTime?
+        Public Property Drug As Boolean
         Public Property GTIN As String
         Public Property IdNo As Int32
         Public Property ProductCode As String
