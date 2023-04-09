@@ -205,11 +205,12 @@ Partial Class ProductFinder
         Me.btnOk.SecurityKey = ""
         Me.btnOk.Size = New System.Drawing.Size(90, 25)
         Me.btnOk.TabIndex = 9
-        Me.btnOk.Text = "CButton1"
+        Me.btnOk.Text = "Ok"
         '
         'btnCancel
         '
         Me.btnCancel.DesignerSelected = False
+        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnCancel.ImageIndex = 0
         Me.btnCancel.Location = New System.Drawing.Point(513, 321)
         Me.btnCancel.Name = "btnCancel"
@@ -217,12 +218,14 @@ Partial Class ProductFinder
         Me.btnCancel.SecurityKey = ""
         Me.btnCancel.Size = New System.Drawing.Size(90, 25)
         Me.btnCancel.TabIndex = 10
-        Me.btnCancel.Text = "CButton2"
+        Me.btnCancel.Text = "Cancel"
         '
         'ProductFinder
         '
+        Me.AcceptButton = Me.btnOk
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(984, 358)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnOk)

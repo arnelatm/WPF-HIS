@@ -118,10 +118,12 @@ Public Class ProductFinder
     Private Sub btnOk_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
         SelectedId = DataGridViewProducts.CurrentRow.Cells(1).Value
         SelectedName = DataGridViewProducts.CurrentRow.Cells(0).Value
+        DialogResult = DialogResult.OK
         Close()
     End Sub
 
     Private Sub btnCancel_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
+        DialogResult = DialogResult.Cancel
         Close()
     End Sub
 
