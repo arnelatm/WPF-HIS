@@ -143,7 +143,14 @@ Namespace AdoNet
                     If Not (filter Is Nothing OrElse filter = "") Then
                         sql &= "(" & filter.Trim() & ")" & " and " & GetActualFieldName(findableControl.FieldName).Trim() & " "
                     Else
-                        sql &= GetActualFieldName(findableControl.FieldName).Trim()
+                        Dim fName As String = findableControl.FieldName
+                        If fName = "Name" Or fName = "Code" Then
+                            fName = Trim(tableName) + fName
+                            sql &= fName
+                        Else
+                            sql &= GetActualFieldName(findableControl.FieldName).Trim()
+                        End If
+                        'sql &= GetActualFieldName(findableControl.FieldName).Trim()
                     End If
                     If findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField Then
                         searchString = "%" & RTrim(findableControl.BegFindValue) + "%"
@@ -783,7 +790,7 @@ Namespace AdoNet
                 End If
             Else
                 If sortKey Is Nothing Or sortKey = "" Then
-                    sql = " SELECT " & fieldNames & " from [" & tableName & "] where " & filterKey 
+                    sql = " SELECT " & fieldNames & " from [" & tableName & "] where " & filterKey
                 Else
                     sql = " SELECT " & fieldNames & " from [" & tableName & "] where " & filterKey & " order by " & sortKey
                 End If

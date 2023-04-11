@@ -145,7 +145,7 @@ Namespace PresentationLayer.Views.Forms
             With DataGridViewProductUnits
                 dgvUnitIdNo.DataSource = UnitsByCode
                 dgvUnitIdNo.DisplayMember = "Name"
-                dgvUnitIdNo.ValueMember = "idNo"
+                dgvUnitIdNo.ValueMember = "IdNo"
                 dgvUnitIdNo.DisplayStyleForCurrentCellOnly = True
             End With
         End Sub

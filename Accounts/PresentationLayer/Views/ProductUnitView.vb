@@ -8,8 +8,8 @@ Namespace PresentationLayer.Views
 
         Public Property IdNo As Int32 Implements IProductUnitView.IdNo
         Public Property DataFilter As String Implements IView.DataFilter
-        Public Property UnitIdNo As Short Implements IProductUnitView.UnitIdNo
-        Public Property ProductUnitIdNo As Integer Implements IProductUnitView.ProductUnitIdNo
+        Public Property UnitIdNo As Int16 Implements IProductUnitView.UnitIdNo
+        Public Property ProductIdNo As Int32 Implements IProductUnitView.ProductIdNo
 
 
         Private _multiplier As Int16 = 0

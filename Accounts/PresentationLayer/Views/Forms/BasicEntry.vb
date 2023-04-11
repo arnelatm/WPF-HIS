@@ -7,13 +7,20 @@ Namespace PresentationLayer.Views.Forms
     Public Class BasicEntry
         Implements IBasicView
 
-        Public Sub New(ByVal tableOrViewName As String, ByVal formCaption As String)
+        Public Sub New(ByVal tableOrViewName As String, ByVal formCaption As String, ByVal withNotes As Boolean)
             MyBase.New()
 
             ' This call is required by the designer.
             InitializeComponent()
             FirstControl = TxtCode
             Me.Text = Messaging.TranslateCaption(formCaption)
+            If withNotes Then
+                TxtNote.Visible = True
+                lblNote.Visible = True
+            Else
+                TxtNote.Visible = False
+                lblNote.Visible = False
+            End If
 
         End Sub
 
@@ -69,6 +76,17 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
 #End Region
+
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
+            {
+             {"IdNo", TxtIdNo},
+             {"Code", TxtCode},
+             {"Name", TxtName},
+             {"NameAra", txtNameAra},
+             {"Note", TxtNote}
+            }
+        End Sub
 
     End Class
 

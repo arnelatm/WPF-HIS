@@ -267,19 +267,6 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewPurchaseDetails.Refresh()
             bsPurchaseDetails.DataSource = PurchaseDetails
             bsPurchaseDetails.AllowNew = True
-            With DataGridViewPurchaseDetails
-                '.Refresh()
-                'dgvProductIdNo.DataSource = ProductsByCode
-                'dgvProductIdNo.DataSource = ProductsByCode
-                'dgvProductIdNo.DataSource = ProductsByCode
-                'dgvProductIdNo.DisplayMember = "Name"
-                'dgvProductIdNo.ValueMember = "IdNO"
-                'dgvProductIdNo.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox
-                'dgvProductIdNo.AutoComplete = AutoCompleteMode.SuggestAppend
-                '.DataSource = bsPurchaseDetails
-
-                '.Refresh()
-            End With
             With DataGridViewPurchaseDetails.Columns
                 dgvSequence.DisplayOnly = True
                 dgvUnitIdNo.DataSource = UnitsByCode
