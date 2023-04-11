@@ -79,7 +79,7 @@
             Me.TxtIdNo.FieldDescription = Nothing
             Me.TxtIdNo.FieldName = Nothing
             Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.TxtIdNo.FindEnabled = False
+            Me.TxtIdNo.FindEnabled = True
             Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
             Me.TxtIdNo.LinkedLabel = Nothing
@@ -168,7 +168,7 @@
             Me.TxtCode.FieldDescription = Nothing
             Me.TxtCode.FieldName = Nothing
             Me.TxtCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.TxtCode.FindEnabled = False
+            Me.TxtCode.FindEnabled = True
             Me.TxtCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtCode.ForeColor = System.Drawing.Color.Black
             Me.TxtCode.LinkedLabel = Nothing
@@ -198,7 +198,7 @@
             Me.TxtName.FieldDescription = Nothing
             Me.TxtName.FieldName = Nothing
             Me.TxtName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.TxtName.FindEnabled = False
+            Me.TxtName.FindEnabled = True
             Me.TxtName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtName.ForeColor = System.Drawing.Color.Black
             Me.TxtName.LinkedLabel = Nothing
@@ -243,7 +243,7 @@
             Me.TxtNote.FieldDescription = Nothing
             Me.TxtNote.FieldName = Nothing
             Me.TxtNote.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.TxtNote.FindEnabled = False
+            Me.TxtNote.FindEnabled = True
             Me.TxtNote.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtNote.ForeColor = System.Drawing.Color.Black
             Me.TxtNote.LinkedLabel = Nothing
@@ -275,7 +275,7 @@
             Me.txtNameAra.FieldDescription = Nothing
             Me.txtNameAra.FieldName = Nothing
             Me.txtNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtNameAra.FindEnabled = False
+            Me.txtNameAra.FindEnabled = True
             Me.txtNameAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtNameAra.ForeColor = System.Drawing.Color.Black
             Me.txtNameAra.LinkedLabel = Nothing
@@ -298,7 +298,7 @@
             Me.ClientSize = New System.Drawing.Size(601, 214)
             Me.Controls.Add(Me.TableLayoutPanel1)
             Me.Name = "BasicEntry"
-        Me.Controls.SetChildIndex(Me.TableLayoutPanel1, 0)
+            Me.Controls.SetChildIndex(Me.TableLayoutPanel1, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.TableLayoutPanel1.ResumeLayout(false)
         Me.TableLayoutPanel1.PerformLayout

@@ -249,7 +249,6 @@
     <Compile Include="BusinessLayer\IGroup\Patient.vb" />
     <Compile Include="BusinessLayer\IGroup\Lab_InvoiceGroup.vb" />
     <Compile Include="BusinessLayer\IGroup\ItemDetails.vb" />
-    <Compile Include="BusinessLayer\Unit.vb" />
     <Compile Include="BusinessLayer\ProductUnit.vb" />
     <Compile Include="BusinessLayer\PurchaseDetail.vb" />
     <Compile Include="BusinessLayer\JournalPrefix.vb" />
@@ -937,7 +936,6 @@
     </Compile>
     <Compile Include="PresentationLayer\Views\IGroup\PmrPatientDisplayView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IProductUnitView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\IUnit.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IDrugAcceptView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IDrugSaleView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IGTinMatcherView.vb" />
