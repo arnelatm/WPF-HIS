@@ -14,7 +14,6 @@ Namespace PresentationLayer.Presenters
             MyBase.New(view)
             'Dim presenterModelName = $"AATM.Accounts.PresentationLayer.Models.ModelAccounts"
             TableName = tableOrViewName
-            SortOrderKey = "Name"
             WithTreeView = False
             Service = New AccountsService("Basic", , tableOrViewName)
 
