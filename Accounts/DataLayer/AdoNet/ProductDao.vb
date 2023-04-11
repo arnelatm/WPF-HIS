@@ -28,7 +28,13 @@ Namespace DataLayer.AdoNet
                     " FROM Product" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
-            Return Db.Read(sql, Make, params).FirstOrDefault()
+            Dim data = Db.Read(sql, Make, params).FirstOrDefault()
+            If data IsNot Nothing Then
+                Dim productUnitDao = New ProductUnitDao
+                Dim pu As List(Of ProductUnit) = productUnitDao.GetRecordsWithGroupIdNo(data.IdNo)
+                data.ProductUnits = pu
+            End If
+            Return data
         End Function
 
         Public Function UpdateRecord(ByRef Product As Product) As Integer Implements IDao(Of Product).UpdateRecord
@@ -98,8 +104,49 @@ Namespace DataLayer.AdoNet
             .ProductName = Extensions.AsString(reader("ProductName")),
             .ProductCode = Extensions.AsString(reader("ProductCode")),
             .BarCode = Extensions.AsString(reader("Barcode")),
-            .GTIN = Extensions.AsString(reader("GTIN"))            
+            .GTIN = Extensions.AsString(reader("GTIN"))
             }
+    End Class
+
+    Public Class ProductUnitDao
+        Inherits AccountsDao
+        Implements IDaoChild(Of ProductUnit)
+
+        Private ReadOnly Db As New Db()
+
+        Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of ProductUnit) Implements IDaoChild(Of ProductUnit).GetRecordsWithGroupIdNo
+            If sortExpression Is Nothing Then
+                sortExpression = "Sequence"
+            End If
+            Dim sql As String =
+                    "SELECT " &
+                    "BaseQty," &
+                    "IdNo," &
+                    "Multiplier," &
+                    "UnitIdNo " &
+                    "FROM ProductUnit " &
+                    "WHERE ProductIdNo = @IdNo "
+            Dim params() As Object = {"@IdNo", idNo}
+            Return Db.Read(sql, Make, params).ToList()
+        End Function
+
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of ProductUnit).DelUpdateTvp
+            Return Db.DelUpdateTvp("UpdateProductUnitTVP", tvpTable, "@MParam", groupIdNo)
+        End Function
+
+        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of ProductUnit).InsertTvp
+            Return Db.InsertTvp("InsertProductUnitTVP", tvpTable)
+        End Function
+
+        Private Shared ReadOnly Make As Func(Of IDataReader, ProductUnit) =
+                                    Function(reader) _
+            New ProductUnit() With {
+            .BaseQty = Extensions.AsInt(Of Int16)(reader("BaseQty")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .Multiplier = Extensions.AsInt(Of Int16)(reader("Multiplier")),
+            .UnitIdNo = Extensions.AsInt(Of Int16)(reader("UnitIdNo"))
+           }
+
     End Class
 
 End Namespace

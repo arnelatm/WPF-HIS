@@ -26,8 +26,8 @@ Namespace PresentationLayer.Views.Forms
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ProductEntry))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
             Me.txtProductCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblProductCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -43,26 +43,32 @@ Namespace PresentationLayer.Views.Forms
             Me.txtProductNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.lblBaseUnit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboBaseUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.btnUnits = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblBarcode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtBarcode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblGTIN = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtGTIN = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblDrug = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblInventory = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkInventory = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-            Me.lblDrug = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkDrug = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-            Me.btnUnits = New AATM.Libraries.CBaseControlsLibrary.CButton()
-            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.CDataGridView1 = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewProductUnits = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
+            Me.bsProductUnits = New System.Windows.Forms.BindingSource(Me.components)
+            Me.dgvUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
+            Me.MultiplierDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.BaseQtyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.ProductIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.bsJournalItems, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout4.SuspendLayout()
             Me.CFlowLayout1.SuspendLayout()
             Me.CFlowLayout2.SuspendLayout()
-            CType(Me.CDataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.DataGridViewProductUnits, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsProductUnits, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             '
             'txtProductCode
@@ -220,6 +226,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboCategoryIdNo.FilterRule = Nothing
             Me.cboCategoryIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboCategoryIdNo.FindEnabled = False
+            Me.CFlowLayout4.SetFlowBreak(Me.cboCategoryIdNo, True)
             resources.ApplyResources(Me.cboCategoryIdNo, "cboCategoryIdNo")
             Me.cboCategoryIdNo.ForeColor = System.Drawing.Color.Black
             Me.cboCategoryIdNo.HideWhenNotEditingOrAdding = False
@@ -364,6 +371,34 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBaseUnitIdNo.ValueIsNumeric = False
             Me.cboBaseUnitIdNo.ValueMember = "IdNo"
             '
+            'btnUnits
+            '
+            Me.btnUnits.DesignerSelected = False
+            Me.CFlowLayout4.SetFlowBreak(Me.btnUnits, True)
+            resources.ApplyResources(Me.btnUnits, "btnUnits")
+            Me.btnUnits.ImageIndex = 0
+            Me.btnUnits.Name = "btnUnits"
+            Me.btnUnits.OriginalImageName = Nothing
+            Me.btnUnits.SecurityKey = ""
+            '
+            'CFlowLayout1
+            '
+            Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
+            Me.CFlowLayout1.Controls.Add(Me.lblBarcode)
+            Me.CFlowLayout1.Controls.Add(Me.txtBarcode)
+            Me.CFlowLayout1.Controls.Add(Me.lblGTIN)
+            Me.CFlowLayout1.Controls.Add(Me.txtGTIN)
+            Me.CFlowLayout1.Controls.Add(Me.lblDrug)
+            Me.CFlowLayout1.Controls.Add(Me.txtDateCreated)
+            Me.CFlowLayout1.Controls.Add(Me.lblInventory)
+            Me.CFlowLayout1.Controls.Add(Me.chkInventory)
+            Me.CFlowLayout1.Controls.Add(Me.lblActive)
+            Me.CFlowLayout1.Controls.Add(Me.chkDrug)
+            Me.CFlowLayout1.Controls.Add(Me.lblDateCreated)
+            Me.CFlowLayout1.Controls.Add(Me.chkActive)
+            resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
+            Me.CFlowLayout1.Name = "CFlowLayout1"
+            '
             'lblBarcode
             '
             Me.lblBarcode.DisplayOnly = True
@@ -436,6 +471,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtGTIN.ValueIsMandatory = True
             Me.txtGTIN.ValueIsUnique = True
             '
+            'lblDrug
+            '
+            Me.lblDrug.DisplayOnly = True
+            Me.lblDrug.EditingMode = False
+            resources.ApplyResources(Me.lblDrug, "lblDrug")
+            Me.lblDrug.Name = "lblDrug"
+            Me.lblDrug.Translatable = True
+            '
             'lblInventory
             '
             Me.lblInventory.DisplayOnly = True
@@ -477,39 +520,6 @@ Namespace PresentationLayer.Views.Forms
             Me.lblActive.Name = "lblActive"
             Me.lblActive.Translatable = True
             '
-            'chkActive
-            '
-            Me.chkActive.AlwaysEditable = False
-            Me.chkActive.BackColor = System.Drawing.Color.White
-            Me.chkActive.BegFindValue = Nothing
-            Me.chkActive.DisplayOnly = False
-            Me.chkActive.EditingMode = True
-            Me.chkActive.EndFindValue = Nothing
-            Me.chkActive.FieldDescription = Nothing
-            Me.chkActive.FieldName = Nothing
-            Me.chkActive.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkActive.FindEnabled = False
-            resources.ApplyResources(Me.chkActive, "chkActive")
-            Me.CFlowLayout1.SetFlowBreak(Me.chkActive, True)
-            Me.chkActive.ForeColor = System.Drawing.Color.Black
-            Me.chkActive.IFindableControl_FindEnabled = False
-            Me.chkActive.IgnoreCase = False
-            Me.chkActive.LinkedLabel = Me.lblActive
-            Me.chkActive.Name = "chkActive"
-            Me.chkActive.NoLabel = True
-            Me.chkActive.OldValue = Nothing
-            Me.chkActive.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkActive.Translatable = False
-            Me.chkActive.UseVisualStyleBackColor = False
-            '
-            'lblDrug
-            '
-            Me.lblDrug.DisplayOnly = True
-            Me.lblDrug.EditingMode = False
-            resources.ApplyResources(Me.lblDrug, "lblDrug")
-            Me.lblDrug.Name = "lblDrug"
-            Me.lblDrug.Translatable = True
-            '
             'chkDrug
             '
             Me.chkDrug.AlwaysEditable = False
@@ -535,81 +545,130 @@ Namespace PresentationLayer.Views.Forms
             Me.chkDrug.Translatable = False
             Me.chkDrug.UseVisualStyleBackColor = False
             '
-            'btnUnits
+            'chkActive
             '
-            Me.btnUnits.DesignerSelected = False
-            Me.CFlowLayout4.SetFlowBreak(Me.btnUnits, True)
-            Me.btnUnits.ImageIndex = 0
-            resources.ApplyResources(Me.btnUnits, "btnUnits")
-            Me.btnUnits.Name = "btnUnits"
-            Me.btnUnits.OriginalImageName = Nothing
-            Me.btnUnits.SecurityKey = ""
-            '
-            'CFlowLayout1
-            '
-            Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
-            Me.CFlowLayout1.Controls.Add(Me.lblBarcode)
-            Me.CFlowLayout1.Controls.Add(Me.txtBarcode)
-            Me.CFlowLayout1.Controls.Add(Me.lblGTIN)
-            Me.CFlowLayout1.Controls.Add(Me.txtGTIN)
-            Me.CFlowLayout1.Controls.Add(Me.lblDrug)
-            Me.CFlowLayout1.Controls.Add(Me.txtDateCreated)
-            Me.CFlowLayout1.Controls.Add(Me.lblInventory)
-            Me.CFlowLayout1.Controls.Add(Me.chkInventory)
-            Me.CFlowLayout1.Controls.Add(Me.lblActive)
-            Me.CFlowLayout1.Controls.Add(Me.chkDrug)
-            Me.CFlowLayout1.Controls.Add(Me.lblDateCreated)
-            Me.CFlowLayout1.Controls.Add(Me.chkActive)
-            resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
-            Me.CFlowLayout1.Name = "CFlowLayout1"
+            Me.chkActive.AlwaysEditable = False
+            Me.chkActive.BackColor = System.Drawing.Color.White
+            Me.chkActive.BegFindValue = Nothing
+            Me.chkActive.DisplayOnly = False
+            Me.chkActive.EditingMode = True
+            Me.chkActive.EndFindValue = Nothing
+            Me.chkActive.FieldDescription = Nothing
+            Me.chkActive.FieldName = Nothing
+            Me.chkActive.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkActive.FindEnabled = False
+            resources.ApplyResources(Me.chkActive, "chkActive")
+            Me.CFlowLayout1.SetFlowBreak(Me.chkActive, True)
+            Me.chkActive.ForeColor = System.Drawing.Color.Black
+            Me.chkActive.IFindableControl_FindEnabled = False
+            Me.chkActive.IgnoreCase = False
+            Me.chkActive.LinkedLabel = Me.lblActive
+            Me.chkActive.Name = "chkActive"
+            Me.chkActive.NoLabel = True
+            Me.chkActive.OldValue = Nothing
+            Me.chkActive.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkActive.Translatable = False
+            Me.chkActive.UseVisualStyleBackColor = False
             '
             'CFlowLayout2
             '
             Me.CFlowLayout2.BackColor = System.Drawing.Color.Transparent
-            Me.CFlowLayout2.Controls.Add(Me.CDataGridView1)
+            Me.CFlowLayout2.Controls.Add(Me.DataGridViewProductUnits)
             resources.ApplyResources(Me.CFlowLayout2, "CFlowLayout2")
             Me.CFlowLayout2.Name = "CFlowLayout2"
             '
-            'CDataGridView1
+            'DataGridViewProductUnits
             '
             DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-            Me.CDataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-            Me.CDataGridView1.BegFindValue = Nothing
-            Me.CDataGridView1.Cached = False
-            Me.CDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.CDataGridView1.DataFilter = Nothing
-            DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            Me.DataGridViewProductUnits.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            Me.DataGridViewProductUnits.AutoGenerateColumns = False
+            Me.DataGridViewProductUnits.BegFindValue = Nothing
+            Me.DataGridViewProductUnits.Cached = False
+            Me.DataGridViewProductUnits.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            Me.DataGridViewProductUnits.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvUnitIdNo, Me.MultiplierDataGridViewTextBoxColumn, Me.BaseQtyDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn, Me.ProductIdNoDataGridViewTextBoxColumn})
+            Me.DataGridViewProductUnits.DataFilter = Nothing
+            Me.DataGridViewProductUnits.DataSource = Me.bsProductUnits
+            DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewProductUnits.DefaultCellStyle = DataGridViewCellStyle3
+            Me.DataGridViewProductUnits.DgvFooter = Nothing
+            Me.DataGridViewProductUnits.DisplayOnly = False
+            Me.DataGridViewProductUnits.Ea = Nothing
+            Me.DataGridViewProductUnits.EditingMode = False
+            Me.DataGridViewProductUnits.EndFindValue = Nothing
+            Me.DataGridViewProductUnits.FieldDescription = Nothing
+            Me.DataGridViewProductUnits.FieldName = Nothing
+            Me.DataGridViewProductUnits.FieldsDictionary = Nothing
+            Me.DataGridViewProductUnits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.DataGridViewProductUnits.FindEnabled = False
+            Me.DataGridViewProductUnits.FirstRowDeletionEnabled = True
+            Me.DataGridViewProductUnits.FirstRowInsertionEnabled = True
+            Me.DataGridViewProductUnits.IgnoreCase = False
+            Me.DataGridViewProductUnits.IsDirty = False
+            resources.ApplyResources(Me.DataGridViewProductUnits, "DataGridViewProductUnits")
+            Me.DataGridViewProductUnits.Name = "DataGridViewProductUnits"
+            Me.DataGridViewProductUnits.ReadOnly = True
+            Me.DataGridViewProductUnits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.DataGridViewProductUnits.SecurityKey = ""
+            Me.DataGridViewProductUnits.SequenceColumn = "dgvSequence"
+            Me.DataGridViewProductUnits.SequenceFieldName = "Sequence"
+            Me.DataGridViewProductUnits.ShowFooter = False
+            Me.DataGridViewProductUnits.ShowInsertColumnWhenEditing = True
+            Me.DataGridViewProductUnits.Translatable = True
+            '
+            'bsProductUnits
+            '
+            Me.bsProductUnits.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.ProductUnitModel)
+            '
+            'dgvUnitIdNo
+            '
+            Me.dgvUnitIdNo.AutoComplete = False
+            Me.dgvUnitIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+            Me.dgvUnitIdNo.DataPropertyName = "UnitIdNo"
             DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.CDataGridView1.DefaultCellStyle = DataGridViewCellStyle2
-            Me.CDataGridView1.DgSearch = CType(resources.GetObject("CDataGridView1.DgSearch"), System.Collections.Generic.List(Of AATM.Libraries.CBaseControlsLibrary.CDataGridView.DataGridSearch))
-            Me.CDataGridView1.DgvFooter = Nothing
-            Me.CDataGridView1.DisplayOnly = False
-            Me.CDataGridView1.Ea = Nothing
-            Me.CDataGridView1.EditingMode = False
-            Me.CDataGridView1.EndFindValue = Nothing
-            Me.CDataGridView1.FieldDescription = Nothing
-            Me.CDataGridView1.FieldName = Nothing
-            Me.CDataGridView1.FieldsDictionary = Nothing
-            Me.CDataGridView1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.CDataGridView1.FindEnabled = False
-            Me.CDataGridView1.FirstRowDeletionEnabled = True
-            Me.CDataGridView1.FirstRowInsertionEnabled = True
-            Me.CDataGridView1.IgnoreCase = False
-            Me.CDataGridView1.IsDirty = False
-            resources.ApplyResources(Me.CDataGridView1, "CDataGridView1")
-            Me.CDataGridView1.Name = "CDataGridView1"
-            Me.CDataGridView1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.CDataGridView1.SecurityKey = ""
-            Me.CDataGridView1.SequenceColumn = "dgvSequence"
-            Me.CDataGridView1.SequenceFieldName = "Sequence"
-            Me.CDataGridView1.ShowFooter = False
-            Me.CDataGridView1.ShowInsertColumnWhenEditing = True
-            Me.CDataGridView1.Translatable = True
+            Me.dgvUnitIdNo.DefaultCellStyle = DataGridViewCellStyle2
+            Me.dgvUnitIdNo.EditingMode = False
+            resources.ApplyResources(Me.dgvUnitIdNo, "dgvUnitIdNo")
+            Me.dgvUnitIdNo.Name = "dgvUnitIdNo"
+            Me.dgvUnitIdNo.ReadOnly = True
+            Me.dgvUnitIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvUnitIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvUnitIdNo.SuggestCharCount = 1
+            Me.dgvUnitIdNo.Translatable = False
+            '
+            'MultiplierDataGridViewTextBoxColumn
+            '
+            Me.MultiplierDataGridViewTextBoxColumn.DataPropertyName = "Multiplier"
+            resources.ApplyResources(Me.MultiplierDataGridViewTextBoxColumn, "MultiplierDataGridViewTextBoxColumn")
+            Me.MultiplierDataGridViewTextBoxColumn.Name = "MultiplierDataGridViewTextBoxColumn"
+            Me.MultiplierDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'BaseQtyDataGridViewTextBoxColumn
+            '
+            Me.BaseQtyDataGridViewTextBoxColumn.DataPropertyName = "BaseQty"
+            resources.ApplyResources(Me.BaseQtyDataGridViewTextBoxColumn, "BaseQtyDataGridViewTextBoxColumn")
+            Me.BaseQtyDataGridViewTextBoxColumn.Name = "BaseQtyDataGridViewTextBoxColumn"
+            Me.BaseQtyDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'IdNoDataGridViewTextBoxColumn
+            '
+            Me.IdNoDataGridViewTextBoxColumn.DataPropertyName = "IdNo"
+            resources.ApplyResources(Me.IdNoDataGridViewTextBoxColumn, "IdNoDataGridViewTextBoxColumn")
+            Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
+            Me.IdNoDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'ProductIdNoDataGridViewTextBoxColumn
+            '
+            Me.ProductIdNoDataGridViewTextBoxColumn.DataPropertyName = "ProductIdNo"
+            resources.ApplyResources(Me.ProductIdNoDataGridViewTextBoxColumn, "ProductIdNoDataGridViewTextBoxColumn")
+            Me.ProductIdNoDataGridViewTextBoxColumn.Name = "ProductIdNoDataGridViewTextBoxColumn"
+            Me.ProductIdNoDataGridViewTextBoxColumn.ReadOnly = True
             '
             'ProductEntry
             '
@@ -618,18 +677,18 @@ Namespace PresentationLayer.Views.Forms
             Me.Name = "ProductEntry"
             Me.Controls.SetChildIndex(Me.CFlowLayout4, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.bsJournalItems, System.ComponentModel.ISupportInitialize).EndInit()
             Me.CFlowLayout4.ResumeLayout(False)
             Me.CFlowLayout4.PerformLayout()
             Me.CFlowLayout1.ResumeLayout(False)
             Me.CFlowLayout1.PerformLayout()
             Me.CFlowLayout2.ResumeLayout(False)
-            CType(Me.CDataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.DataGridViewProductUnits, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsProductUnits, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
-            Me.PerformLayout
+            Me.PerformLayout()
 
-End Sub
-        Friend WithEvents bsJournalItems As Windows.Forms.BindingSource
+        End Sub
+        Friend WithEvents bsProductUnits As Windows.Forms.BindingSource
         Friend WithEvents CFlowLayout4 As CFlowLayout
         Friend WithEvents lblIdNo As CLabel
         Friend WithEvents TxtIdNo As CTextBox
@@ -658,6 +717,11 @@ End Sub
         Friend WithEvents btnUnits As CButton
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents CFlowLayout2 As CFlowLayout
-        Friend WithEvents CDataGridView1 As CDataGridView
+        Friend WithEvents DataGridViewProductUnits As CtDataGridView
+        Friend WithEvents dgvUnitIdNo As CtDgvComboBoxColumn
+        Friend WithEvents MultiplierDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents BaseQtyDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents ProductIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     End Class
 End NameSpace

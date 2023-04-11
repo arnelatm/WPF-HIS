@@ -391,7 +391,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub RunBasicForm(ByVal tableOrViewName As String, ByVal formCaption As String)
-            RunForm(Of BasicEntry, BasicPresenter(Of BasicModel))()
+            RunBaseForm(Of BasicEntry, BasicPresenter(Of BasicModel))(tableOrViewName, formCaption)
         End Sub
 
         Private Sub SalesDepositTypesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSalesDepositTypes.Click
@@ -893,6 +893,13 @@ Namespace PresentationLayer.Views.Forms
             Dim formToRun = Activator.CreateInstance(GetType(TV), param)
             Dim pType As Type = GetType(TP)
             formToRun.Presenter = Activator.CreateInstance(pType, {formToRun, param})
+            ShowEntryForm(formToRun)
+        End Sub
+
+        Private Overloads Sub RunBaseForm(Of TV, TP)(tableName As String, formName As String)
+            Dim formToRun = Activator.CreateInstance(GetType(TV), tableName, formName)
+            Dim pType As Type = GetType(TP)
+            formToRun.Presenter = Activator.CreateInstance(pType, {formToRun, tableName})
             ShowEntryForm(formToRun)
         End Sub
 

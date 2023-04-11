@@ -1,4 +1,5 @@
-﻿Imports AATM.PresentationLayer.Views
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Interfaces
 
@@ -16,8 +17,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property ProductCode As String
         Property ProductName As String
         Property ProductNameAra As String
-        Property ProductUnits As List(Of ProductUnit)
-
+        Property ProductUnits As List(Of ProductUnitView)
+        Property UnitsByCode As Object
     End Interface
 
 End Namespace
