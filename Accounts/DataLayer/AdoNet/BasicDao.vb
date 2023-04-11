@@ -20,7 +20,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordByIdNo(idNo) As Basic Implements iDao(Of Basic).GetRecordByIdNo
             Dim sql As String =
-                    " SELECT IdNo, Code, Name, NameAra" &
+                    " SELECT IdNo, " + _tableOrViewName + "Code ," + _tableOrViewName + "Name, " + _tableOrViewName + "NameAra" &
                     "   FROM " & _tableOrViewName &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -30,9 +30,9 @@ Namespace DataLayer.AdoNet
         Public Function UpdateRecord(ByRef Basic As Basic) As Integer Implements iDao(Of Basic).UpdateRecord
             Dim sql As String =
                     " UPDATE " & _tableOrViewName &
-                    "    SET Code = @Code," &
-                    "        Name = @Name," &
-                    "        NameAra = @NameAra" &
+                    "    SET " + _tableOrViewName + "Code = @Code," &
+                    _tableOrViewName + "Name = @Name," &
+                    _tableOrViewName + "NameAra = @NameAra" &
                     "  WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(Basic))
         End Function
@@ -40,18 +40,18 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef Basic As Basic) As Integer Implements iDao(Of Basic).AddRecord
             Dim sql As String =
                     " INSERT INTO " & _tableOrViewName &
-                    " (Code,Name,NameAra) " &
+                    " (" + _tableOrViewName + "Code," + _tableOrViewName + "Name," + _tableOrViewName + "NameAra) " &
                     " VALUES (@Code,@Name,@NameAra) "
             Return Db.Insert(sql, Take(Basic))
         End Function
 
-        Private Shared ReadOnly Make As Func(Of IDataReader, Basic) =
+        Private ReadOnly Make As Func(Of IDataReader, Basic) =
                                     Function(reader) _
             New Basic() With {
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
-            .Code = Extensions.AsString(reader("Code")),
-            .Name = Extensions.AsString(reader("Name")),
-            .NameAra = Extensions.AsString(reader("NameAra"))
+            .Code = Extensions.AsString(reader(_tableOrViewName + "Code")),
+            .Name = Extensions.AsString(reader(_tableOrViewName + "Name")),
+            .NameAra = Extensions.AsString(reader(_tableOrViewName + "NameAra"))
             }
 
         Private Function Take(Basic As Basic) As Object()
