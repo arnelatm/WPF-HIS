@@ -8,8 +8,7 @@ Namespace PresentationLayer.Views.Forms
     Public Class ProductEntry
         Implements IProductView
 
-        'Private _glAccounts
-        'Private _inputVatAccounts
+        Private _productUnits As List(Of ProductUnitView)
 
         Public Sub New()
             'MyBase.New()
@@ -119,22 +118,38 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Drug As Boolean Implements IProductView.Drug
             Get
-                Throw New NotImplementedException()
+                Return chkDrug.Checked
             End Get
-            Set(value As Boolean)
-                Throw New NotImplementedException()
+            Set
+                chkDrug.Checked = Value
             End Set
         End Property
 
-
-        Private Property IProductView_ProductUnits As List(Of ProductUnit) Implements IProductView.ProductUnits
+        Public Property ProductUnits As List(Of ProductUnitView) Implements IProductView.ProductUnits
             Get
-                Throw New NotImplementedException()
+                Return _productUnits
             End Get
-            Set(value As List(Of ProductUnit))
-                Throw New NotImplementedException()
+            Set
+                _productUnits = Value
+                BindProductUnits()
             End Set
         End Property
+
+        Private Property UnitsByCode Implements IProductView.UnitsByCode
+
+        Private Sub BindProductUnits()
+            bsProductUnits.DataSource = Nothing
+            DataGridViewProductUnits.Refresh()
+            bsProductUnits.DataSource = ProductUnits
+            bsProductUnits.AllowNew = True
+            With DataGridViewProductUnits
+                dgvUnitIdNo.DataSource = UnitsByCode
+                dgvUnitIdNo.DisplayMember = "Name"
+                dgvUnitIdNo.ValueMember = "idNo"
+                dgvUnitIdNo.DisplayStyleForCurrentCellOnly = True
+            End With
+        End Sub
+
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From

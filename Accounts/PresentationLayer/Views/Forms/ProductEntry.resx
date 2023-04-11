@@ -129,9 +129,6 @@
   <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>535, 17</value>
   </metadata>
-  <metadata name="bsJournalItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>675, 17</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -247,7 +244,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboCategoryIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 24</value>
+    <value>558, 24</value>
   </data>
   <data name="cboCategoryIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -346,7 +343,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtProductName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 23</value>
+    <value>558, 23</value>
   </data>
   <data name="txtProductName.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -412,7 +409,7 @@
     <value>Yes</value>
   </data>
   <data name="txtProductNameAra.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 23</value>
+    <value>558, 23</value>
   </data>
   <data name="txtProductNameAra.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -495,6 +492,9 @@
   <data name="&gt;&gt;cboBaseUnitIdNo.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="btnUnits.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
   <data name="btnUnits.Location" type="System.Drawing.Point, System.Drawing">
     <value>402, 139</value>
   </data>
@@ -526,7 +526,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblBarcode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 1</value>
+    <value>1, 6</value>
   </data>
   <data name="lblBarcode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -559,7 +559,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtBarcode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 1</value>
+    <value>213, 6</value>
   </data>
   <data name="txtBarcode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -589,7 +589,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblGTIN.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 26</value>
+    <value>1, 31</value>
   </data>
   <data name="lblGTIN.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -622,7 +622,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtGTIN.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 26</value>
+    <value>213, 31</value>
   </data>
   <data name="txtGTIN.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -652,7 +652,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDrug.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 51</value>
+    <value>1, 56</value>
   </data>
   <data name="lblDrug.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -691,7 +691,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 126</value>
+    <value>1, 131</value>
   </data>
   <data name="lblDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -721,7 +721,7 @@
     <value>10</value>
   </data>
   <data name="txtDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>213, 51</value>
+    <value>213, 56</value>
   </data>
   <data name="txtDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -751,7 +751,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblInventory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 76</value>
+    <value>1, 81</value>
   </data>
   <data name="lblInventory.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -790,7 +790,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkInventory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 78</value>
+    <value>215, 83</value>
   </data>
   <data name="chkInventory.Size" type="System.Drawing.Size, System.Drawing">
     <value>13, 13</value>
@@ -820,7 +820,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 101</value>
+    <value>1, 106</value>
   </data>
   <data name="lblActive.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -859,7 +859,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkDrug.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 103</value>
+    <value>215, 108</value>
   </data>
   <data name="chkDrug.Size" type="System.Drawing.Size, System.Drawing">
     <value>13, 13</value>
@@ -888,8 +888,11 @@
   <data name="chkActive.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9pt</value>
   </data>
+  <data name="chkActive.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="chkActive.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 128</value>
+    <value>215, 133</value>
   </data>
   <data name="chkActive.Size" type="System.Drawing.Size, System.Drawing">
     <value>13, 13</value>
@@ -915,6 +918,9 @@
   <data name="CFlowLayout1.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 170</value>
   </data>
+  <data name="CFlowLayout1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 5, 0, 0</value>
+  </data>
   <data name="CFlowLayout1.Size" type="System.Drawing.Size, System.Drawing">
     <value>393, 164</value>
   </data>
@@ -933,7 +939,31 @@
   <data name="&gt;&gt;CFlowLayout1.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="CDataGridView1.DgSearch" mimetype="application/x-microsoft.net.object.binary.base64">
+  <data name="dgvUnitIdNo.HeaderText" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+  <data name="MultiplierDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>Multiplier</value>
+  </data>
+  <data name="BaseQtyDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>Base Quantity</value>
+  </data>
+  <data name="IdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>IdNo</value>
+  </data>
+  <data name="IdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="ProductIdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>ProductIdNo</value>
+  </data>
+  <data name="ProductIdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <metadata name="bsProductUnits.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>675, 17</value>
+  </metadata>
+  <data name="DataGridViewProductUnits.DgSearch" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAJoBQ0Jhc2VDb250cm9sc0xpYnJhcnksIFZlcnNpb249MS4wLjAu
         MCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxsXV0sIG1zY29ybGliLCBWZXJzaW9u
@@ -947,32 +977,32 @@
         R3JpZFZpZXcrRGF0YUdyaWRTZWFyY2gDAAAACw==
 </value>
   </data>
-  <data name="CDataGridView1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="DataGridViewProductUnits.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="CDataGridView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 150</value>
+  <data name="DataGridViewProductUnits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>357, 150</value>
   </data>
-  <data name="CDataGridView1.TabIndex" type="System.Int32, mscorlib">
+  <data name="DataGridViewProductUnits.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;CDataGridView1.Name" xml:space="preserve">
-    <value>CDataGridView1</value>
+  <data name="&gt;&gt;DataGridViewProductUnits.Name" xml:space="preserve">
+    <value>DataGridViewProductUnits</value>
   </data>
-  <data name="&gt;&gt;CDataGridView1.Type" xml:space="preserve">
+  <data name="&gt;&gt;DataGridViewProductUnits.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CDataGridView, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;CDataGridView1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;DataGridViewProductUnits.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
-  <data name="&gt;&gt;CDataGridView1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;DataGridViewProductUnits.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="CFlowLayout2.Location" type="System.Drawing.Point, System.Drawing">
     <value>412, 170</value>
   </data>
   <data name="CFlowLayout2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 164</value>
+    <value>369, 164</value>
   </data>
   <data name="CFlowLayout2.TabIndex" type="System.Int32, mscorlib">
     <value>300</value>
@@ -999,7 +1029,7 @@
     <value>10, 10, 10, 10</value>
   </data>
   <data name="CFlowLayout4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>662, 516</value>
+    <value>796, 352</value>
   </data>
   <data name="CFlowLayout4.TabIndex" type="System.Int32, mscorlib">
     <value>246</value>
@@ -2204,7 +2234,7 @@
     <value>Tile</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>662, 569</value>
+    <value>796, 405</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>669, 444</value>
@@ -2236,11 +2266,41 @@
   <data name="&gt;&gt;MyErrorProvider.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;bsJournalItems.Name" xml:space="preserve">
-    <value>bsJournalItems</value>
+  <data name="&gt;&gt;bsProductUnits.Name" xml:space="preserve">
+    <value>bsProductUnits</value>
   </data>
-  <data name="&gt;&gt;bsJournalItems.Type" xml:space="preserve">
+  <data name="&gt;&gt;bsProductUnits.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgvUnitIdNo.Name" xml:space="preserve">
+    <value>dgvUnitIdNo</value>
+  </data>
+  <data name="&gt;&gt;dgvUnitIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;MultiplierDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>MultiplierDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;MultiplierDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;BaseQtyDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>BaseQtyDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;BaseQtyDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>IdNoDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ProductIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>ProductIdNoDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;ProductIdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ProductEntry</value>

@@ -551,7 +551,6 @@
     <Build Include="dbo\Tables\PrintSetup.sql" />
     <Build Include="dbo\Views\PrintSetup_View.sql" />
     <Build Include="dbo\Tables\ProductOld.sql" />
-    <Build Include="dbo\Views\PurchaseJournalItem_View.sql" />
     <Build Include="dbo\Stored Procedures\spGetProductBySearchString.sql" />
   </ItemGroup>
   <ItemGroup>

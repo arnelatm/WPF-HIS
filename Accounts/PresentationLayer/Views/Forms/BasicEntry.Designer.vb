@@ -73,6 +73,7 @@
             Me.TxtIdNo.ComputedValue = False
             Me.TxtIdNo.CustomFormat = Nothing
             Me.TxtIdNo.DataBoundControl = True
+            Me.TxtIdNo.DisplayOnly = True
             Me.TxtIdNo.EditingMode = True
             Me.TxtIdNo.EndFindValue = Nothing
             Me.TxtIdNo.FieldDescription = Nothing
@@ -88,6 +89,7 @@
             Me.TxtIdNo.MinimumValue = Nothing
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.ReadOnly = True
             Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtIdNo.Size = New System.Drawing.Size(88, 23)
             Me.TxtIdNo.TabIndex = 0
@@ -293,10 +295,9 @@
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
-            Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
             Me.ClientSize = New System.Drawing.Size(601, 214)
             Me.Controls.Add(Me.TableLayoutPanel1)
-        Me.Name = "BasicEntry"
+            Me.Name = "BasicEntry"
         Me.Controls.SetChildIndex(Me.TableLayoutPanel1, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.TableLayoutPanel1.ResumeLayout(false)
