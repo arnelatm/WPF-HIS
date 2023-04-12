@@ -71,9 +71,9 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property BaseUnitIdNo As Short Implements IProductView.BaseUnitIdNo
+        Public Property BaseUnitIdNo As Int32 Implements IProductView.BaseUnitIdNo
             Get
-                Return cboBaseUnitIdNo.GetValue(Of Int16)
+                Return cboBaseUnitIdNo.GetValue(Of Int32)
             End Get
             Set
                 cboBaseUnitIdNo.SetValue(Value)
@@ -146,7 +146,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvUnitIdNo.DataSource = UnitsByCode
                 dgvUnitIdNo.DisplayMember = "Name"
                 dgvUnitIdNo.ValueMember = "IdNo"
-                dgvUnitIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvUnitIdNo.DisplayStyleForCurrentCellOnly = False
             End With
         End Sub
 

@@ -8,7 +8,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property IdNo As Int32
         Property Multiplier As Int16
         Property ProductIdNo As Int32
-        Property UnitIdNo As Int16
+        Property UnitIdNo As Int32
     End Interface
 
 End Namespace

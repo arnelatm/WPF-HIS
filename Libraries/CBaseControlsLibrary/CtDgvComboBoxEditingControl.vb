@@ -67,13 +67,14 @@ Public Class CtDgvComboBoxEditingControl
         SuggestListForm.SuggestListBox.DataSource = _suggestBindingList
         AddHandler SuggestListForm.SuggestListBox.Click, AddressOf SuggestListBoxOnClick
         AddHandler ParentChanged, AddressOf OnParentChanged
+        DisplayMember = "Name"
+        ValueMember = "IdNo"
 
     End Sub
 
     Public Property SuggestCharCount As Integer = 1
 
     Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged
-        DisplayMember = "Name"
         PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(0).ToString())
     End Sub
 

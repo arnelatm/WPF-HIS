@@ -16,7 +16,7 @@
     <ModelCollation>1025,CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <TargetLanguage>CS</TargetLanguage>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <SqlServerVerification>False</SqlServerVerification>
@@ -25,6 +25,7 @@
     <DefaultCollation>Arabic_CI_AS</DefaultCollation>
     <DefaultFilegroup>PRIMARY</DefaultFilegroup>
     <ValidateCasingOnIdentifiers>False</ValidateCasingOnIdentifiers>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -552,6 +553,12 @@
     <Build Include="dbo\Views\PrintSetup_View.sql" />
     <Build Include="dbo\Tables\ProductOld.sql" />
     <Build Include="dbo\Stored Procedures\spGetProductBySearchString.sql" />
+    <Build Include="dbo\Tables\Unitxx.sql" />
+    <Build Include="dbo\Views\PurchaseJournalItem_View.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateProductUnitTVP.sql" />
+    <Build Include="dbo\Stored Procedures\InsertProductUnitTVP.sql" />
+    <Build Include="dbo\User Defined Types\ProductUnitUpdate.sql" />
+    <Build Include="dbo\User Defined Types\ProductUnitInsert.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
