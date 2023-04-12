@@ -15,7 +15,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property PurchaseIdNo As Int32
         Property Quantity As Int32
         Property Sequence As Int16
-        Property UnitIdNo As Int16
+        Property UnitIdNo As Int32
         Property VatAmount As Decimal
         Property VatPercent As Decimal
 
