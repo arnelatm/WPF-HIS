@@ -1,11 +1,13 @@
 ﻿CREATE TABLE [dbo].[Unit] (
-    [IdNo]          TINYINT       IDENTITY (1, 1) NOT NULL,
+    [IdNo]          SMALLINT      IDENTITY (1, 1) NOT NULL,
     [UnitCode]      NVARCHAR (10) NOT NULL,
     [UnitName]      VARCHAR (20)  NOT NULL,
     [UnitNameAra]   NVARCHAR (20) NOT NULL,
     [DateTimeStamp] ROWVERSION    NULL,
     CONSTRAINT [PK_Unit] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

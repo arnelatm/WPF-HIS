@@ -39,7 +39,7 @@ Namespace PresentationLayer.Presenters
             CreateDataTable(DtProductUnitInsertTable, {{"BaseQty", GetType(Int16)},
                                  {"Multiplier", GetType(Int16)},
                                  {"ProductIdNo", GetType(Int32)},
-                                 {"UnitIdNo", GetType(Int32)}
+                                 {"UnitIdNo", GetType(Int16)}
                                  })
 
 
@@ -47,7 +47,7 @@ Namespace PresentationLayer.Presenters
                                              {"IdNo", GetType(Int32)},
                                              {"Multiplier", GetType(Int16)},
                                              {"ProductIdNo", GetType(Int32)},
-                                             {"UnitIdNo", GetType(Int32)}
+                                             {"UnitIdNo", GetType(Int16)}
                                             })
 
         End Sub

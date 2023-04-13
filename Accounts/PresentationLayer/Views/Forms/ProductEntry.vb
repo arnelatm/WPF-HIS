@@ -71,9 +71,9 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property BaseUnitIdNo As Int32 Implements IProductView.BaseUnitIdNo
+        Public Property BaseUnitIdNo As Int16 Implements IProductView.BaseUnitIdNo
             Get
-                Return cboBaseUnitIdNo.GetValue(Of Int32)
+                Return cboBaseUnitIdNo.GetValue(Of Int16)
             End Get
             Set
                 cboBaseUnitIdNo.SetValue(Value)

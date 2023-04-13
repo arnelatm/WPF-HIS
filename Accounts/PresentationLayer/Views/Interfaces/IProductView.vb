@@ -8,7 +8,7 @@ Namespace PresentationLayer.Views.Interfaces
 
         Property Active As Boolean
         Property Barcode As String
-        Property BaseUnitIdNo As Int32
+        Property BaseUnitIdNo As Int16
         Property CategoryIdNo As Int16
         Property DateCreated As DateTime?
         Property Drug As Boolean
