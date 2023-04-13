@@ -1,0 +1,2 @@
+Making a TinyInt as IDNO for combobox datasource causes the displayMember to not display value
+Solution: do not use TINYINT as DataType for IDNO
