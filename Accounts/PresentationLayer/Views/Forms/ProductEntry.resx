@@ -940,24 +940,27 @@
     <value>13</value>
   </data>
   <data name="dgvUnitIdNo.HeaderText" xml:space="preserve">
-    <value>Unit</value>
+    <value>UnitIdNo</value>
+  </data>
+  <data name="BaseQtyDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>BaseQty</value>
+  </data>
+  <data name="BaseQtyDataGridViewTextBoxColumn.Width" type="System.Int32, mscorlib">
+    <value>40</value>
   </data>
   <data name="MultiplierDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>Multiplier</value>
   </data>
-  <data name="BaseQtyDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>Base Quantity</value>
+  <data name="MultiplierDataGridViewTextBoxColumn.Width" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
+  <data name="dgvProductIdNo.HeaderText" xml:space="preserve">
+    <value>ProductIdNo</value>
   </data>
   <data name="IdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
     <value>IdNo</value>
   </data>
   <data name="IdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="ProductIdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>ProductIdNo</value>
-  </data>
-  <data name="ProductIdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <metadata name="bsProductUnits.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -981,7 +984,7 @@
     <value>3, 3</value>
   </data>
   <data name="DataGridViewProductUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>357, 150</value>
+    <value>366, 161</value>
   </data>
   <data name="DataGridViewProductUnits.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1075,6 +1078,9 @@
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>25</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -2276,13 +2282,7 @@
     <value>dgvUnitIdNo</value>
   </data>
   <data name="&gt;&gt;dgvUnitIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;MultiplierDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>MultiplierDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;MultiplierDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;BaseQtyDataGridViewTextBoxColumn.Name" xml:space="preserve">
     <value>BaseQtyDataGridViewTextBoxColumn</value>
@@ -2290,16 +2290,22 @@
   <data name="&gt;&gt;BaseQtyDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;MultiplierDataGridViewTextBoxColumn.Name" xml:space="preserve">
+    <value>MultiplierDataGridViewTextBoxColumn</value>
+  </data>
+  <data name="&gt;&gt;MultiplierDataGridViewTextBoxColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dgvProductIdNo.Name" xml:space="preserve">
+    <value>dgvProductIdNo</value>
+  </data>
+  <data name="&gt;&gt;dgvProductIdNo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
     <value>IdNoDataGridViewTextBoxColumn</value>
   </data>
   <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ProductIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
-    <value>ProductIdNoDataGridViewTextBoxColumn</value>
-  </data>
-  <data name="&gt;&gt;ProductIdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

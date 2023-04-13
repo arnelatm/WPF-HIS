@@ -31,7 +31,7 @@ Namespace DataLayer.AdoNet
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
             If data IsNot Nothing Then
                 Dim productUnitDao = New ProductUnitDao
-                Dim pu As List(Of ProductUnit) = productUnitDao.GetRecordsWithGroupIdNo(data.IdNo)
+                Dim pu As List(Of ProductUnit) = productUnitDao.GetRecordsWithGroupIdNo(data.IdNo, "")
                 data.ProductUnits = pu
             End If
             Return data
@@ -123,6 +123,7 @@ Namespace DataLayer.AdoNet
                     "BaseQty," &
                     "IdNo," &
                     "Multiplier," &
+                    "ProductIdNo," &
                     "UnitIdNo " &
                     "FROM ProductUnit " &
                     "WHERE ProductIdNo = @IdNo "
@@ -144,6 +145,7 @@ Namespace DataLayer.AdoNet
             .BaseQty = Extensions.AsInt(Of Int16)(reader("BaseQty")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Multiplier = Extensions.AsInt(Of Int16)(reader("Multiplier")),
+            .ProductIdNo = Extensions.AsInt(Of Int32)(reader("ProductIdNo")),
             .UnitIdNo = Extensions.AsInt(Of Int32)(reader("UnitIdNo"))
            }
 

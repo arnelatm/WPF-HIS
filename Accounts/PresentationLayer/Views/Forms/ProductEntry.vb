@@ -135,7 +135,8 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Private Property UnitsByCode Implements IProductView.UnitsByCode
+        Public Property UnitsByCode As Object Implements IProductView.UnitsByCode
+        Public Property ProductsByCode As Object Implements IProductView.ProductsByCode
 
         Private Sub BindProductUnits()
             bsProductUnits.DataSource = Nothing
@@ -143,10 +144,20 @@ Namespace PresentationLayer.Views.Forms
             bsProductUnits.DataSource = ProductUnits
             bsProductUnits.AllowNew = True
             With DataGridViewProductUnits
-                dgvUnitIdNo.DataSource = UnitsByCode
+                .AutoGenerateColumns = False
+                .DataSource = bsProductUnits
+            End With
+            With DataGridViewProductUnits.Columns
+                dgvUnitIdNo.DataSource = Nothing
                 dgvUnitIdNo.DisplayMember = "Name"
                 dgvUnitIdNo.ValueMember = "IdNo"
+                dgvUnitIdNo.DataSource = UnitsByCode
                 dgvUnitIdNo.DisplayStyleForCurrentCellOnly = False
+                dgvProductIdNo.DataSource = Nothing
+                dgvProductIdNo.DisplayMember = "Name"
+                dgvProductIdNo.ValueMember = "IdNo"
+                dgvProductIdNo.DataSource = ProductsByCode
+                dgvProductIdNo.DisplayStyleForCurrentCellOnly = False
             End With
         End Sub
 
@@ -165,6 +176,11 @@ Namespace PresentationLayer.Views.Forms
              {"ProductName", txtProductName},
              {"ProductNameAra", txtProductNameAra}
             }
+        End Sub
+
+        Private Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
+            bsProductUnits.ResetBindings(False)
+            'UpdateDisplay()
         End Sub
 
     End Class

@@ -19,6 +19,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property ProductNameAra As String
         Property ProductUnits As List(Of ProductUnitView)
         Property UnitsByCode As Object
+        Property ProductsByCode As Object
     End Interface
 
 End Namespace
