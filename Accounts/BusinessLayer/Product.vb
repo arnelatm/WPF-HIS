@@ -19,7 +19,7 @@ Namespace BusinessLayer
 
         Public Property Active As Boolean
         Public Property BarCode As String
-        Public Property BaseUnitIdNo As Int32
+        Public Property BaseUnitIdNo As Int16
         Public Property CategoryIdNo As Int16
         Public Property DateCreated As DateTime?
         Public Property Drug As Boolean

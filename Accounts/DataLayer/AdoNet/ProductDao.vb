@@ -64,7 +64,7 @@ Namespace DataLayer.AdoNet
             New Product() With {
             .Active = Extensions.AsBool(reader("Active")),
             .BarCode = Extensions.AsString(reader("Barcode")),
-            .BaseUnitIdNo = Extensions.AsInt(Of Int32)(reader("BaseUnitIdNo")),
+            .BaseUnitIdNo = Extensions.AsInt(Of Int16)(reader("BaseUnitIdNo")),
             .CategoryIdNo = Extensions.AsInt(Of Int16)(reader("CategoryIdNo")),
             .GTIN = Extensions.AsString(reader("GTIN")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
@@ -146,7 +146,7 @@ Namespace DataLayer.AdoNet
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .Multiplier = Extensions.AsInt(Of Int16)(reader("Multiplier")),
             .ProductIdNo = Extensions.AsInt(Of Int32)(reader("ProductIdNo")),
-            .UnitIdNo = Extensions.AsInt(Of Int32)(reader("UnitIdNo"))
+            .UnitIdNo = Extensions.AsInt(Of Int16)(reader("UnitIdNo"))
            }
 
     End Class

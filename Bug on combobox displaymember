@@ -1,2 +1,3 @@
 Making a TinyInt as IDNO for combobox datasource causes the displayMember to not display value
 Solution: do not use TINYINT as DataType for IDNO
+Also - Tried to make the SQL DataType to SmallInt while the VB.Net dataType is Int32 also display the same bug (DisplayMember doesn't display the value)

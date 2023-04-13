@@ -16,7 +16,7 @@ Namespace PresentationLayer.Views
         Public Property PurchaseIdNo As Int32 Implements IPurchaseDetailView.PurchaseIdNo
         Public Property Quantity As Int32 Implements IPurchaseDetailView.Quantity
         Public Property Sequence As Int16 Implements IPurchaseDetailView.Sequence
-        Public Property UnitIdNo As Int32 Implements IPurchaseDetailView.UnitIdNo
+        Public Property UnitIdNo As Int16 Implements IPurchaseDetailView.UnitIdNo
         Public Property VatAmount As Decimal Implements IPurchaseDetailView.VatAmount
         Public Property VatPercent As Decimal Implements IPurchaseDetailView.VatPercent
         Public Property Errors As List(Of String) Implements IView.Errors
