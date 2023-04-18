@@ -29,6 +29,7 @@ Public Class CtDataGridView
         MyBase.New()
         DoubleBuffered = True
         Enabled = True
+        EditMode = DataGridViewEditMode.EditOnEnter
         BackColor = Drawing.SystemColors.ControlLight
         DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
         DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
@@ -119,17 +120,19 @@ Public Class CtDataGridView
         End Set
     End Property
 
-    Private Sub DataGridView_CellEnter(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles Me.CellEnter
-        If CurrentCell IsNot Nothing AndAlso TypeOf (CurrentCell) Is CtDgvDtpCell Then
-            EditMode = DataGridViewEditMode.EditOnEnter
-        End If
-    End Sub
+    'Private Sub DataGridView_CellEnter(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles Me.CellEnter
+    '    SuspendDrawing()
+    '    If CurrentCell IsNot Nothing Then  'AndAlso TypeOf (CurrentCell) Is CtDgvDtpCell Then
+    '        EditMode = DataGridViewEditMode.EditOnEnter
+    '    End If
+    '    ResumeDrawing()
+    'End Sub
 
-    Private Sub dataGridView1_CellLeave(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles Me.CellLeave
-        If CurrentCell IsNot Nothing AndAlso TypeOf CurrentCell Is CtDgvDtpCell Then
-            EditMode = _origEditMode
-        End If
-    End Sub
+    'Private Sub dataGridView1_CellLeave(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles Me.CellLeave
+    '    If CurrentCell IsNot Nothing Then 'AndAlso TypeOf CurrentCell Is CtDgvDtpCell Then
+    '        EditMode = _origEditMode
+    '    End If
+    'End Sub
 
     Public ReadOnly Property FirstEditableColumn As Integer
         Get
@@ -472,7 +475,7 @@ Public Class CtDataGridView
         Return Nothing
     End Function
 
-    Private Sub DataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles Me.EditingControlShowing
+    Private Sub DataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles MyBase.EditingControlShowing
         If TypeOf e.Control Is CtDgvComboBoxEditingControl Then
             'declare variable(cb) as a caCombobox
             Dim cb As CtDgvComboBoxEditingControl
@@ -481,11 +484,12 @@ Public Class CtDataGridView
             cb.DropDownStyle = ComboBoxStyle.DropDown
             'set the property of a combobox to autocomplete mode.
             cb.AutoCompleteMode = AutoCompleteMode.Suggest
+            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             If CurrentCell IsNot Nothing Then
                 cb.SuggestCharCount = DirectCast(CurrentCell.OwningColumn, AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn).SuggestCharCount
             End If
-            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+
 
         ElseIf TypeOf e.Control Is CCustomDateTimePicker Then
             Dim cDtp As CCustomDateTimePicker
@@ -892,6 +896,29 @@ Public Class CtDataGridView
         End If
         Return matchSw
     End Function
+
+    Private Sub WireEditingControlEvents()
+        'AddHandler EditingPanel.Click, EditingControls_Click
+        'EditingPanel.DoubleClick += EditingControls_DoubleClick
+        'EditingPanel.MouseClick += EditingControls_MouseClick
+        'EditingPanel.MouseDoubleClick += EditingControls_MouseDoubleClick
+        'EditingPanel.MouseDown += EditingControls_MouseDown
+        'EditingPanel.MouseEnter += EditingControls_MouseEnter
+        'EditingPanel.MouseLeave += EditingControls_MouseLeave
+        'EditingPanel.MouseMove += EditingControls_MouseMove
+        'EditingPanel.MouseUp += EditingControls_MouseUp
+        'EditingControl.Click += EditingControls_Click
+        'EditingControl.DoubleClick += EditingControls_DoubleClick
+        'EditingControl.MouseClick += EditingControls_MouseClick
+        'EditingControl.MouseDoubleClick += EditingControls_MouseDoubleClick
+        'EditingControl.MouseDown += EditingControls_MouseDown
+        'EditingControl.MouseEnter += EditingControls_MouseEnter
+        'EditingControl.MouseLeave += EditingControls_MouseLeave
+        'EditingControl.MouseMove += EditingControls_MouseMove
+        'EditingControl.MouseUp += EditingControls_MouseUp
+    End Sub
+
+
 
     Public Property DgSearch As New List(Of DataGridSearch)
 

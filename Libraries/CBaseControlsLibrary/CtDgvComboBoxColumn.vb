@@ -84,6 +84,6 @@ Public Class CtDgvComboBoxColumn
         End Set
     End Property
 
-    Public Property SuggestCharCount As Integer = 1
+    Public Property SuggestCharCount As Integer
 
 End Class

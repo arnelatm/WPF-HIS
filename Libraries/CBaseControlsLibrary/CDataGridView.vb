@@ -128,17 +128,17 @@ Public Class CDataGridView
         End Set
     End Property
 
-    Private Sub DataGridView_CellEnter(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles Me.CellEnter
-        If CurrentCell IsNot Nothing AndAlso TypeOf (CurrentCell) Is CDgvDtpCell Then
-            EditMode = DataGridViewEditMode.EditOnEnter
-        End If
-    End Sub
+    'Private Sub DataGridView_CellEnter(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles Me.CellEnter
+    '    If CurrentCell IsNot Nothing Then 'AndAlso TypeOf (CurrentCell) Is CDgvDtpCell Then
+    '        EditMode = DataGridViewEditMode.EditOnEnter
+    '    End If
+    'End Sub
 
-    Private Sub dataGridView1_CellLeave(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles Me.CellLeave
-        If CurrentCell IsNot Nothing AndAlso TypeOf CurrentCell Is CtDgvDtpCell Then
-            EditMode = _origEditMode
-        End If
-    End Sub
+    'Private Sub dataGridView1_CellLeave(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles Me.CellLeave
+    '    If CurrentCell IsNot Nothing AndAlso TypeOf CurrentCell Is CtDgvDtpCell Then
+    '        EditMode = _origEditMode
+    '    End If
+    'End Sub
 
     Public ReadOnly Property FirstEditableColumn As Integer
         Get
