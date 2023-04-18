@@ -149,6 +149,7 @@ Namespace PresentationLayer.Views.Forms
             End With
             With DataGridViewProductUnits.Columns
                 dgvUnitIdNo.DataSource = Nothing
+                dgvUnitIdNo.DataSource = UnitsByCode
                 dgvUnitIdNo.DisplayMember = "Name"
                 dgvUnitIdNo.ValueMember = "IdNo"
                 dgvUnitIdNo.DataSource = UnitsByCode
