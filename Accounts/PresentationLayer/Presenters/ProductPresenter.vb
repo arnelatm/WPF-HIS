@@ -26,15 +26,16 @@ Namespace PresentationLayer.Presenters
             'data.Add({"Product", "IdNo", Nothing, Nothing})
             data1.Add({"Unit", "BaseUnitIdNo", Nothing, Nothing})
 
-            CreateDataSourceThread(data1)
-            CreateDataSourceThread(data1)
-            'Dim data2 As New ArrayList
-            'data2.Clear()
-            'data2.Add({"Unit", "UnitsByCode", Nothing, Nothing})
-            'CreateLookupDataThread(data2)
+            'CreateDataSourceThread(data1)
+            'CreateDataSourceThread(data1)
+            Dim data2 As New ArrayList
+            data2.Clear()
+            data2.Add({"Unit", "UnitsByCode", Nothing, Nothing})
+            data2.Add({"Product", "ProductsByCode", Nothing, Nothing})
+            CreateLookupDataThread(data2)
 
-            CreateLookupData("Unit", "UnitsByCode")
-            CreateLookupData("Product", "ProductsByCode")
+            'CreateLookupData("Unit", "UnitsByCode")
+            'CreateLookupData("Product", "ProductsByCode")
 
             CreateDataTable(DtProductUnitInsertTable, {{"BaseQty", GetType(Int16)},
                                  {"Multiplier", GetType(Int16)},

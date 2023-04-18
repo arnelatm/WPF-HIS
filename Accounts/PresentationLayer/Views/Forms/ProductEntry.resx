@@ -993,7 +993,7 @@
     <value>DataGridViewProductUnits</value>
   </data>
   <data name="&gt;&gt;DataGridViewProductUnits.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDataGridView, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtDataGridView, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;DataGridViewProductUnits.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
@@ -2282,7 +2282,7 @@
     <value>dgvUnitIdNo</value>
   </data>
   <data name="&gt;&gt;dgvUnitIdNo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;BaseQtyDataGridViewTextBoxColumn.Name" xml:space="preserve">
     <value>BaseQtyDataGridViewTextBoxColumn</value>
@@ -2300,7 +2300,7 @@
     <value>dgvProductIdNo</value>
   </data>
   <data name="&gt;&gt;dgvProductIdNo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">
     <value>IdNoDataGridViewTextBoxColumn</value>

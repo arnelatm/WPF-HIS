@@ -17,6 +17,20 @@ Public Class CtDgvComboBoxEditingControl
     Private _suggestListOrderRule As Expression(Of Func(Of String, String))
     Private _suggestListOrderRuleCompiled As Func(Of String, String)
 
+    Public Sub New()
+        _filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
+        _suggestListOrderRuleCompiled = Function(s) s
+        PropertySelectorCompiled = Function(collection) collection.Cast(Of String)()
+        SuggestListForm.SuggestListBox.DataSource = _suggestBindingList
+        AutoCompleteMode = AutoCompleteMode.SuggestAppend
+        DropDownStyle = ComboBoxStyle.DropDown
+        DisplayMember = "Name"
+        ValueMember = "IdNo"
+        DataSource = _suggestBindingList
+        AddHandler SuggestListForm.SuggestListBox.Click, AddressOf SuggestListBoxOnClick
+        AddHandler ParentChanged, AddressOf OnParentChanged
+    End Sub
+
     Public Property SuggestBoxHeight As Integer
         Get
             Return SuggestListForm.Height
@@ -59,27 +73,15 @@ Public Class CtDgvComboBoxEditingControl
         End Set
     End Property
 
-    Public Sub New()
-        _filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
-        _suggestListOrderRuleCompiled = Function(s) s
-        PropertySelectorCompiled = Function(collection) collection.Cast(Of String)()
 
-        SuggestListForm.SuggestListBox.DataSource = _suggestBindingList
-        AddHandler SuggestListForm.SuggestListBox.Click, AddressOf SuggestListBoxOnClick
-        AddHandler ParentChanged, AddressOf OnParentChanged
-        DisplayMember = "Name"
-        ValueMember = "IdNo"
 
-    End Sub
-
-    Public Property SuggestCharCount As Integer = 1
+    Public Property SuggestCharCount As Integer
 
     Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged
         PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(0).ToString())
     End Sub
 
     Protected Overrides Sub OnTextChanged(ByVal e As EventArgs)
-        'BeginUpdate()
         If Text.Length < SuggestCharCount Then
             _suggestBindingList.Clear()
             _suggestBindingList.RaiseListChangedEvents = True
@@ -249,9 +251,9 @@ Public Class CtDgvComboBoxEditingControl
                     Return dataGridViewWantsInputKey
                 End If
 
-            'Case Keys.Left, Keys.Right, Keys.Home, Keys.End
-            '    '    Keys.Home, Keys.End, Keys.PageDown, Keys.PageUp
-            '    Return True
+            Case Keys.Left, Keys.Right, Keys.Home, Keys.End
+                '    Keys.Home, Keys.End, Keys.PageDown, Keys.PageUp
+                Return True
 
             Case Keys.PageDown, Keys.PageUp, Keys.Up, Keys.Down
                 If DroppedDown Then
@@ -265,5 +267,14 @@ Public Class CtDgvComboBoxEditingControl
         End Select
 
     End Function
+
+
+    'Protected Overrides Sub OnDataSourceChanged(e As EventArgs)
+    '    'Visible = False
+    '    MyBase.OnDataSourceChanged(e)
+
+    '    Dim x = 1
+
+    'End Sub
 
 End Class

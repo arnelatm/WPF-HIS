@@ -56,12 +56,12 @@ Namespace PresentationLayer.Views.Forms
             Me.chkDrug = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.DataGridViewProductUnits = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewProductUnits = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.bsProductUnits = New System.Windows.Forms.BindingSource(Me.components)
-            Me.dgvUnitIdNo = New System.Windows.Forms.DataGridViewComboBoxColumn()
+            Me.dgvUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
             Me.BaseQtyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.MultiplierDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.dgvProductIdNo = New System.Windows.Forms.DataGridViewComboBoxColumn()
+            Me.dgvProductIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout4.SuspendLayout()
@@ -596,7 +596,6 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.DataGridViewProductUnits.DefaultCellStyle = DataGridViewCellStyle3
-            Me.DataGridViewProductUnits.DgSearch = CType(resources.GetObject("DataGridViewProductUnits.DgSearch"), System.Collections.Generic.List(Of AATM.Libraries.CBaseControlsLibrary.CDataGridView.DataGridSearch))
             Me.DataGridViewProductUnits.DgvFooter = Nothing
             Me.DataGridViewProductUnits.DisplayOnly = False
             Me.DataGridViewProductUnits.Ea = Nothing
@@ -628,15 +627,19 @@ Namespace PresentationLayer.Views.Forms
             '
             'dgvUnitIdNo
             '
+            Me.dgvUnitIdNo.AutoComplete = False
             Me.dgvUnitIdNo.DataPropertyName = "UnitIdNo"
             DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
             Me.dgvUnitIdNo.DefaultCellStyle = DataGridViewCellStyle2
+            Me.dgvUnitIdNo.EditingMode = False
             resources.ApplyResources(Me.dgvUnitIdNo, "dgvUnitIdNo")
             Me.dgvUnitIdNo.Name = "dgvUnitIdNo"
             Me.dgvUnitIdNo.ReadOnly = True
             Me.dgvUnitIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvUnitIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvUnitIdNo.SuggestCharCount = 1
+            Me.dgvUnitIdNo.Translatable = False
             '
             'BaseQtyDataGridViewTextBoxColumn
             '
@@ -654,13 +657,17 @@ Namespace PresentationLayer.Views.Forms
             '
             'dgvProductIdNo
             '
+            Me.dgvProductIdNo.AutoComplete = False
             Me.dgvProductIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvProductIdNo.DataPropertyName = "ProductIdNo"
+            Me.dgvProductIdNo.EditingMode = False
             resources.ApplyResources(Me.dgvProductIdNo, "dgvProductIdNo")
             Me.dgvProductIdNo.Name = "dgvProductIdNo"
             Me.dgvProductIdNo.ReadOnly = True
             Me.dgvProductIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvProductIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvProductIdNo.SuggestCharCount = 3
+            Me.dgvProductIdNo.Translatable = False
             '
             'IdNoDataGridViewTextBoxColumn
             '
@@ -716,11 +723,11 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents btnUnits As CButton
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents CFlowLayout2 As CFlowLayout
-        Friend WithEvents DataGridViewProductUnits As CDataGridView
-        Friend WithEvents dgvUnitIdNo As DataGridViewComboBoxColumn
+        Friend WithEvents DataGridViewProductUnits As CtDataGridView
+        Friend WithEvents dgvUnitIdNo As CtDgvComboBoxColumn
         Friend WithEvents BaseQtyDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents MultiplierDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents dgvProductIdNo As DataGridViewComboBoxColumn
+        Friend WithEvents dgvProductIdNo As CtDgvComboBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     End Class
 End NameSpace

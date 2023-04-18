@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form4
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Form4
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -55,7 +55,6 @@ Partial Class Form4
         Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PurchaseDetailTableAdapter = New AATM.Accounts.ISPDATADataSetTableAdapters.PurchaseDetailTableAdapter()
         Me.ProductTableAdapter = New AATM.Accounts.ISPDATADataSetTableAdapters.ProductTableAdapter()
-        Me.CTextBox1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -296,34 +295,6 @@ Partial Class Form4
         '
         Me.ProductTableAdapter.ClearBeforeFill = True
         '
-        'CTextBox1
-        '
-        Me.CTextBox1.BackColor = System.Drawing.Color.White
-        Me.CTextBox1.BegFindValue = Nothing
-        Me.CTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.CTextBox1.ComputedValue = False
-        Me.CTextBox1.CustomFormat = Nothing
-        Me.CTextBox1.DataBoundControl = True
-        Me.CTextBox1.EditingMode = True
-        Me.CTextBox1.EndFindValue = Nothing
-        Me.CTextBox1.FieldDescription = Nothing
-        Me.CTextBox1.FieldName = Nothing
-        Me.CTextBox1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.CTextBox1.FindEnabled = False
-        Me.CTextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.CTextBox1.ForeColor = System.Drawing.Color.Black
-        Me.CTextBox1.LinkedLabel = Nothing
-        Me.CTextBox1.Location = New System.Drawing.Point(72, 43)
-        Me.CTextBox1.Margin = New System.Windows.Forms.Padding(1)
-        Me.CTextBox1.MaximumValue = Nothing
-        Me.CTextBox1.MinimumValue = Nothing
-        Me.CTextBox1.Name = "CTextBox1"
-        Me.CTextBox1.OldValue = Nothing
-        Me.CTextBox1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.CTextBox1.Size = New System.Drawing.Size(100, 23)
-        Me.CTextBox1.TabIndex = 0
-        Me.CTextBox1.Translatable = False
-        '
         'CButton1
         '
         Me.CButton1.DesignerSelected = False
@@ -404,7 +375,6 @@ Partial Class Form4
         Me.Controls.Add(Me.CLabel2)
         Me.Controls.Add(Me.CLabel1)
         Me.Controls.Add(Me.CButton1)
-        Me.Controls.Add(Me.CTextBox1)
         Me.Name = "Form4"
         Me.Text = "Form4"
         CType(Me.DataGridViewProducts, System.ComponentModel.ISupportInitialize).EndInit()
@@ -418,7 +388,7 @@ Partial Class Form4
         Me.ResumeLayout(False)
         Me.PerformLayout
 
-End Sub
+    End Sub
     Friend WithEvents txtSearch As ComboBox
     Friend WithEvents DataGridViewProducts As DataGridView
     Friend WithEvents txtFinder As Libraries.CBaseControlsLibrary.CTextBox
@@ -454,7 +424,6 @@ End Sub
     Friend WithEvents PurchaseIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents ProductIdNoDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
     Friend WithEvents QuantityDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents CTextBox1 As Libraries.CBaseControlsLibrary.CTextBox
     Friend WithEvents CButton1 As Libraries.CBaseControlsLibrary.CButton
     Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
     Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel

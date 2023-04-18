@@ -129,7 +129,7 @@ Public Class CtComboBox
     <DefaultValue(False)>
     <Description("Set to True to specify that this will only suggestappend when more than this specified number of characters is typed in.")>
     <Browsable(True)>
-    Public Property SuggestCharCount As Integer = 1
+    Public Property SuggestCharCount As Integer
 
     <Bindable(True)>
     <Category("Properties")>
