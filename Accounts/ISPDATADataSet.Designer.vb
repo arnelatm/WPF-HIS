@@ -889,23 +889,23 @@ Partial Public Class ISPDATADataSet
         Private columnProductIdNo As Global.System.Data.DataColumn
         
         Private columnUnitIdNo As Global.System.Data.DataColumn
-        
-        Private columnMultiplier As Global.System.Data.DataColumn
-        
+
+        Private columnUnitQty As Global.System.Data.DataColumn
+
         Private columnToUnitIdNo As Global.System.Data.DataColumn
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
         Public Sub New()
             MyBase.New
             Me.TableName = "ProductUnit"
-            Me.BeginInit
-            Me.InitClass
-            Me.EndInit
+            Me.BeginInit()
+            Me.InitClass()
+            Me.EndInit()
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
         Friend Sub New(ByVal table As Global.System.Data.DataTable)
             MyBase.New
             Me.TableName = table.TableName
@@ -921,131 +921,131 @@ Partial Public Class ISPDATADataSet
             Me.Prefix = table.Prefix
             Me.MinimumCapacity = table.MinimumCapacity
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
         Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
             MyBase.New(info, context)
-            Me.InitVars
+            Me.InitVars()
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
         Public ReadOnly Property IdNoColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnIdNo
             End Get
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
         Public ReadOnly Property ProductIdNoColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnProductIdNo
             End Get
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
         Public ReadOnly Property UnitIdNoColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnUnitIdNo
             End Get
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
         Public ReadOnly Property MultiplierColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columnMultiplier
+                Return Me.columnUnitQty
             End Get
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
         Public ReadOnly Property ToUnitIdNoColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnToUnitIdNo
             End Get
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),  _
-         Global.System.ComponentModel.Browsable(false)>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0"),
+         Global.System.ComponentModel.Browsable(False)>
         Public ReadOnly Property Count() As Integer
             Get
                 Return Me.Rows.Count
             End Get
         End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Default ReadOnly Property Item(ByVal index As Integer) As ProductUnitRow
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
+        Default Public ReadOnly Property Item(ByVal index As Integer) As ProductUnitRow
             Get
-                Return CType(Me.Rows(index),ProductUnitRow)
+                Return CType(Me.Rows(index), ProductUnitRow)
             End Get
         End Property
-        
-        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
         Public Event ProductUnitRowChanging As ProductUnitRowChangeEventHandler
-        
-        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
         Public Event ProductUnitRowChanged As ProductUnitRowChangeEventHandler
-        
-        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
         Public Event ProductUnitRowDeleting As ProductUnitRowChangeEventHandler
-        
-        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
         Public Event ProductUnitRowDeleted As ProductUnitRowChangeEventHandler
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
         Public Overloads Sub AddProductUnitRow(ByVal row As ProductUnitRow)
             Me.Rows.Add(row)
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Overloads Function AddProductUnitRow(ByVal ProductIdNo As Integer, ByVal UnitIdNo As Short, ByVal Multiplier As Short, ByVal ToUnitIdNo As Short) As ProductUnitRow
-            Dim rowProductUnitRow As ProductUnitRow = CType(Me.NewRow,ProductUnitRow)
-            Dim columnValuesArray() As Object = New Object() {Nothing, ProductIdNo, UnitIdNo, Multiplier, ToUnitIdNo}
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
+        Public Overloads Function AddProductUnitRow(ByVal ProductIdNo As Integer, ByVal UnitIdNo As Short, ByVal UnitQty As Short, ByVal ToUnitIdNo As Short) As ProductUnitRow
+            Dim rowProductUnitRow As ProductUnitRow = CType(Me.NewRow, ProductUnitRow)
+            Dim columnValuesArray() As Object = New Object() {Nothing, ProductIdNo, UnitIdNo, UnitQty, ToUnitIdNo}
             rowProductUnitRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowProductUnitRow)
             Return rowProductUnitRow
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
         Public Function FindByIdNo(ByVal IdNo As Integer) As ProductUnitRow
-            Return CType(Me.Rows.Find(New Object() {IdNo}),ProductUnitRow)
+            Return CType(Me.Rows.Find(New Object() {IdNo}), ProductUnitRow)
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
         Public Overrides Function Clone() As Global.System.Data.DataTable
-            Dim cln As ProductUnitDataTable = CType(MyBase.Clone,ProductUnitDataTable)
-            cln.InitVars
+            Dim cln As ProductUnitDataTable = CType(MyBase.Clone, ProductUnitDataTable)
+            cln.InitVars()
             Return cln
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
         Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
             Return New ProductUnitDataTable()
         End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
         Friend Sub InitVars()
             Me.columnIdNo = MyBase.Columns("IdNo")
             Me.columnProductIdNo = MyBase.Columns("ProductIdNo")
             Me.columnUnitIdNo = MyBase.Columns("UnitIdNo")
-            Me.columnMultiplier = MyBase.Columns("Multiplier")
+            Me.columnUnitQty = MyBase.Columns("UnitQty")
             Me.columnToUnitIdNo = MyBase.Columns("ToUnitIdNo")
         End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
         Private Sub InitClass()
             Me.columnIdNo = New Global.System.Data.DataColumn("IdNo", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnIdNo)
@@ -1053,8 +1053,8 @@ Partial Public Class ISPDATADataSet
             MyBase.Columns.Add(Me.columnProductIdNo)
             Me.columnUnitIdNo = New Global.System.Data.DataColumn("UnitIdNo", GetType(Short), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnUnitIdNo)
-            Me.columnMultiplier = New Global.System.Data.DataColumn("Multiplier", GetType(Short), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnMultiplier)
+            Me.columnUnitQty = New Global.System.Data.DataColumn("UnitQty", GetType(Short), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnUnitQty)
             Me.columnToUnitIdNo = New Global.System.Data.DataColumn("ToUnitIdNo", GetType(Short), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnToUnitIdNo)
             Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnIdNo}, true))
@@ -2121,21 +2121,21 @@ Partial Public Class ISPDATADataSet
             End Set
         End Property
         
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property Multiplier() As Short
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
+        Public Property UnitQty() As Short
             Get
-                Try 
-                    Return CType(Me(Me.tableProductUnit.MultiplierColumn),Short)
+                Try
+                    Return CType(Me(Me.tableProductUnit.MultiplierColumn), Short)
                 Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Multiplier' in table 'ProductUnit' is DBNull.", e)
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'UnitQty' in table 'ProductUnit' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tableProductUnit.MultiplierColumn) = value
+                Me(Me.tableProductUnit.MultiplierColumn) = Value
             End Set
         End Property
-        
+
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Property ToUnitIdNo() As Short
@@ -3359,16 +3359,16 @@ Namespace ISPDATADataSetTableAdapters
             tableMapping.ColumnMappings.Add("IdNo", "IdNo")
             tableMapping.ColumnMappings.Add("ProductIdNo", "ProductIdNo")
             tableMapping.ColumnMappings.Add("UnitIdNo", "UnitIdNo")
-            tableMapping.ColumnMappings.Add("Multiplier", "Multiplier")
+            tableMapping.ColumnMappings.Add("UnitQty", "UnitQty")
             tableMapping.ColumnMappings.Add("ToUnitIdNo", "ToUnitIdNo")
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
-            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[ProductUnit] WHERE (([IdNo] = @Original_IdNo) AND ((@IsNull_Pr"& _ 
-                "oductIdNo = 1 AND [ProductIdNo] IS NULL) OR ([ProductIdNo] = @Original_ProductId"& _ 
-                "No)) AND ((@IsNull_UnitIdNo = 1 AND [UnitIdNo] IS NULL) OR ([UnitIdNo] = @Origin"& _ 
-                "al_UnitIdNo)) AND ((@IsNull_Multiplier = 1 AND [Multiplier] IS NULL) OR ([Multip"& _ 
-                "lier] = @Original_Multiplier)) AND ((@IsNull_ToUnitIdNo = 1 AND [ToUnitIdNo] IS "& _ 
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[ProductUnit] WHERE (([IdNo] = @Original_IdNo) AND ((@IsNull_Pr" &
+                "oductIdNo = 1 AND [ProductIdNo] IS NULL) OR ([ProductIdNo] = @Original_ProductId" &
+                "No)) AND ((@IsNull_UnitIdNo = 1 AND [UnitIdNo] IS NULL) OR ([UnitIdNo] = @Origin" &
+                "al_UnitIdNo)) AND ((@IsNull_Multiplier = 1 AND [UnitQty] IS NULL) OR ([Multip" &
+                "lier] = @Original_Multiplier)) AND ((@IsNull_ToUnitIdNo = 1 AND [ToUnitIdNo] IS " &
                 "NULL) OR ([ToUnitIdNo] = @Original_ToUnitIdNo)))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_IdNo", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IdNo", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))

@@ -26,8 +26,9 @@ Namespace PresentationLayer.Views.Forms
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ProductEntry))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.txtProductCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblProductCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -60,8 +61,8 @@ Namespace PresentationLayer.Views.Forms
             Me.bsProductUnits = New System.Windows.Forms.BindingSource(Me.components)
             Me.dgvUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
             Me.BaseQtyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.MultiplierDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.dgvProductIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
+            Me.dgvUnitQty = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.dgvProductIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout4.SuspendLayout()
@@ -585,21 +586,23 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewProductUnits.BegFindValue = Nothing
             Me.DataGridViewProductUnits.Cached = False
             Me.DataGridViewProductUnits.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewProductUnits.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvUnitIdNo, Me.BaseQtyDataGridViewTextBoxColumn, Me.MultiplierDataGridViewTextBoxColumn, Me.dgvProductIdNo, Me.IdNoDataGridViewTextBoxColumn})
+            Me.DataGridViewProductUnits.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvUnitIdNo, Me.BaseQtyDataGridViewTextBoxColumn, Me.dgvUnitQty, Me.dgvProductIdNo, Me.IdNoDataGridViewTextBoxColumn})
             Me.DataGridViewProductUnits.DataFilter = Nothing
             Me.DataGridViewProductUnits.DataSource = Me.bsProductUnits
-            DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewProductUnits.DefaultCellStyle = DataGridViewCellStyle3
+            DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewProductUnits.DefaultCellStyle = DataGridViewCellStyle4
+            Me.DataGridViewProductUnits.DgSearch = CType(resources.GetObject("DataGridViewProductUnits.DgSearch"), System.Collections.Generic.List(Of AATM.Libraries.CBaseControlsLibrary.CtDataGridView.DataGridSearch))
             Me.DataGridViewProductUnits.DgvFooter = Nothing
             Me.DataGridViewProductUnits.DisplayOnly = False
             Me.DataGridViewProductUnits.Ea = Nothing
             Me.DataGridViewProductUnits.EditingMode = False
+            Me.DataGridViewProductUnits.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
             Me.DataGridViewProductUnits.EndFindValue = Nothing
             Me.DataGridViewProductUnits.FieldDescription = Nothing
             Me.DataGridViewProductUnits.FieldName = Nothing
@@ -628,6 +631,7 @@ Namespace PresentationLayer.Views.Forms
             'dgvUnitIdNo
             '
             Me.dgvUnitIdNo.AutoComplete = False
+            Me.dgvUnitIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvUnitIdNo.DataPropertyName = "UnitIdNo"
             DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
@@ -638,7 +642,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvUnitIdNo.ReadOnly = True
             Me.dgvUnitIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvUnitIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            Me.dgvUnitIdNo.SuggestCharCount = 1
+            Me.dgvUnitIdNo.SuggestCharCount = 0
             Me.dgvUnitIdNo.Translatable = False
             '
             'BaseQtyDataGridViewTextBoxColumn
@@ -648,26 +652,24 @@ Namespace PresentationLayer.Views.Forms
             Me.BaseQtyDataGridViewTextBoxColumn.Name = "BaseQtyDataGridViewTextBoxColumn"
             Me.BaseQtyDataGridViewTextBoxColumn.ReadOnly = True
             '
-            'MultiplierDataGridViewTextBoxColumn
+            'dgvUnitQty
             '
-            Me.MultiplierDataGridViewTextBoxColumn.DataPropertyName = "Multiplier"
-            resources.ApplyResources(Me.MultiplierDataGridViewTextBoxColumn, "MultiplierDataGridViewTextBoxColumn")
-            Me.MultiplierDataGridViewTextBoxColumn.Name = "MultiplierDataGridViewTextBoxColumn"
-            Me.MultiplierDataGridViewTextBoxColumn.ReadOnly = True
+            Me.dgvUnitQty.DataPropertyName = "UnitQty"
+            resources.ApplyResources(Me.dgvUnitQty, "dgvUnitQty")
+            Me.dgvUnitQty.Name = "dgvUnitQty"
+            Me.dgvUnitQty.ReadOnly = True
             '
             'dgvProductIdNo
             '
-            Me.dgvProductIdNo.AutoComplete = False
             Me.dgvProductIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvProductIdNo.DataPropertyName = "ProductIdNo"
-            Me.dgvProductIdNo.EditingMode = False
+            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+            Me.dgvProductIdNo.DefaultCellStyle = DataGridViewCellStyle3
             resources.ApplyResources(Me.dgvProductIdNo, "dgvProductIdNo")
             Me.dgvProductIdNo.Name = "dgvProductIdNo"
             Me.dgvProductIdNo.ReadOnly = True
             Me.dgvProductIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvProductIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            Me.dgvProductIdNo.SuggestCharCount = 3
-            Me.dgvProductIdNo.Translatable = False
             '
             'IdNoDataGridViewTextBoxColumn
             '
@@ -726,8 +728,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents DataGridViewProductUnits As CtDataGridView
         Friend WithEvents dgvUnitIdNo As CtDgvComboBoxColumn
         Friend WithEvents BaseQtyDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents MultiplierDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents dgvProductIdNo As CtDgvComboBoxColumn
+        Friend WithEvents dgvUnitQty As DataGridViewTextBoxColumn
+        Friend WithEvents dgvProductIdNo As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     End Class
 End NameSpace

@@ -122,9 +122,9 @@ Namespace DataLayer.AdoNet
                     "SELECT " &
                     "BaseQty," &
                     "IdNo," &
-                    "Multiplier," &
                     "ProductIdNo," &
-                    "UnitIdNo " &
+                    "UnitIdNo," &
+                    "UnitQty " &
                     "FROM ProductUnit " &
                     "WHERE ProductIdNo = @IdNo "
             Dim params() As Object = {"@IdNo", idNo}
@@ -144,9 +144,9 @@ Namespace DataLayer.AdoNet
             New ProductUnit() With {
             .BaseQty = Extensions.AsInt(Of Int16)(reader("BaseQty")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
-            .Multiplier = Extensions.AsInt(Of Int16)(reader("Multiplier")),
             .ProductIdNo = Extensions.AsInt(Of Int32)(reader("ProductIdNo")),
-            .UnitIdNo = Extensions.AsInt(Of Int16)(reader("UnitIdNo"))
+            .UnitIdNo = Extensions.AsInt(Of Int16)(reader("UnitIdNo")),
+        .UnitQty = Extensions.AsInt(Of Int16)(reader("UnitQty"))
            }
 
     End Class

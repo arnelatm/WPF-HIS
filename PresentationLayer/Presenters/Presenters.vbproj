@@ -131,7 +131,7 @@
       <Name>BaseControlsLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\CBaseControlsLibrary\CBaseControlsLibrary.vbproj">
-      <Project>{f991561a-78f8-487c-a873-e6436b41d801}</Project>
+      <Project>{F991561A-78F8-487C-A873-E6436B41D801}</Project>
       <Name>CBaseControlsLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Libraries\GlobalFuncNSub\GlobalFuncNSub.vbproj">

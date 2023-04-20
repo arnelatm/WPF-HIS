@@ -19,7 +19,7 @@ Namespace PresentationLayer.Presenters
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Private _progressDisplayForm As CBaseControlsLibrary.DisplayProgressForm
+        Private _progressDisplayForm As DisplayProgressForm
 
         Public Sub New(view As IAccountReconciliationView)
             MyBase.New(view)
