@@ -6,7 +6,7 @@ Namespace PresentationLayer.Views.Interfaces
         Inherits IView
         Property BaseQty As Int16
         Property IdNo As Int32
-        Property Multiplier As Int16
+        Property UnitQty As Int16
         Property ProductIdNo As Int32
         Property UnitIdNo As Int16
     End Interface

@@ -81,9 +81,7 @@
     <Compile Include="BackgroundWorkerForm.Designer.vb">
       <DependentUpon>BackgroundWorkerForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="BackgroundWorkerForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="BackgroundWorkerForm.vb" />
     <Compile Include="BFCalendarUmAlQura.Designer.vb">
       <DependentUpon>BFCalendarUmAlQura.vb</DependentUpon>
     </Compile>
@@ -98,6 +96,7 @@
     </Compile>
     <Compile Include="BlendItemsConverter.vb" />
     <Compile Include="BlendTypeEditor.vb" />
+    <Compile Include="CtDgvComboboxCell1.vb" />
     <Compile Include="CtDgvComboBoxColumn.vb" />
     <Compile Include="CtDataGridFindForm.designer.vb">
       <DependentUpon>CtDataGridFindForm.vb</DependentUpon>
@@ -150,15 +149,11 @@
     <Compile Include="CPictureBox.Designer.vb">
       <DependentUpon>CPictureBox.vb</DependentUpon>
     </Compile>
-    <Compile Include="CPictureBox.vb">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="CPictureBox.vb" />
     <Compile Include="CButton.Designer.vb">
       <DependentUpon>CButton.vb</DependentUpon>
     </Compile>
-    <Compile Include="CButton.vb">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="CButton.vb" />
     <Compile Include="CButtonActionList.vb" />
     <Compile Include="CButtonDesigner.vb" />
     <Compile Include="CCalendar.Designer.vb">
@@ -179,9 +174,7 @@
     <Compile Include="CCustomDateTimePicker.Designer.vb">
       <DependentUpon>CCustomDateTimePicker.vb</DependentUpon>
     </Compile>
-    <Compile Include="CCustomDateTimePicker.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="CCustomDateTimePicker.vb" />
     <Compile Include="cDataGridViewWithFooter.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -224,15 +217,11 @@
     <Compile Include="CDtpGregorianDate.Designer.vb">
       <DependentUpon>CDtpGregorianDate.vb</DependentUpon>
     </Compile>
-    <Compile Include="CDtpGregorianDate.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="CDtpGregorianDate.vb" />
     <Compile Include="CDTPHijriDate.Designer.vb">
       <DependentUpon>CDTPHijriDate.vb</DependentUpon>
     </Compile>
-    <Compile Include="CDTPHijriDate.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="CDTPHijriDate.vb" />
     <Compile Include="CFindForm.designer.vb">
       <DependentUpon>CFindForm.vb</DependentUpon>
     </Compile>
@@ -263,18 +252,14 @@
     <Compile Include="CGDateTimePicker.Designer.vb">
       <DependentUpon>CGDateTimePicker.vb</DependentUpon>
     </Compile>
-    <Compile Include="CGDateTimePicker.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="CGDateTimePicker.vb" />
     <Compile Include="CGroupBox.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CHijriCalendar.Designer.vb">
       <DependentUpon>CHijriCalendar.vb</DependentUpon>
     </Compile>
-    <Compile Include="CHijriCalendar.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="CHijriCalendar.vb" />
     <Compile Include="ChooseGlyph.vb" />
     <Compile Include="CLabel.vb">
       <SubType>Component</SubType>
@@ -306,9 +291,7 @@
     <Compile Include="CMonthPicker.Designer.vb">
       <DependentUpon>CMonthPicker.vb</DependentUpon>
     </Compile>
-    <Compile Include="CMonthPicker.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="CMonthPicker.vb" />
     <Compile Include="CMyCombobox.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -318,9 +301,7 @@
     <Compile Include="ColorComboBox.designer.vb">
       <DependentUpon>ColorComboBox.vb</DependentUpon>
     </Compile>
-    <Compile Include="ColorComboBox.vb">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="ColorComboBox.vb" />
     <Compile Include="ComboIcon.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -368,9 +349,7 @@
     <Compile Include="dlgTimeColors.designer.vb">
       <DependentUpon>dlgTimeColors.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgTimeColors.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="dlgTimeColors.vb" />
     <Compile Include="DropdownColorBlender.designer.vb">
       <DependentUpon>DropdownColorBlender.vb</DependentUpon>
     </Compile>
@@ -392,15 +371,11 @@
     <Compile Include="DisplayProgressForm.Designer.vb">
       <DependentUpon>DisplayProgressForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="DisplayProgressForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="DisplayProgressForm.vb" />
     <Compile Include="gDateTimePicker.designer.vb">
       <DependentUpon>gDateTimePicker.vb</DependentUpon>
     </Compile>
-    <Compile Include="gDateTimePicker.vb">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="gDateTimePicker.vb" />
     <Compile Include="GregorianDates.vb" />
     <Compile Include="gTimeBox.designer.vb">
       <DependentUpon>gTimeBox.vb</DependentUpon>
@@ -411,15 +386,11 @@
     <Compile Include="gTimePicker.designer.vb">
       <DependentUpon>gTimePicker.vb</DependentUpon>
     </Compile>
-    <Compile Include="gTimePicker.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="gTimePicker.vb" />
     <Compile Include="gTimePickerCntrl.designer.vb">
       <DependentUpon>gTimePickerCntrl.vb</DependentUpon>
     </Compile>
-    <Compile Include="gTimePickerCntrl.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="gTimePickerCntrl.vb" />
     <Compile Include="HatchStyleEditor.vb" />
     <Compile Include="HatchStyleListBox.vb">
       <SubType>Component</SubType>
@@ -446,17 +417,14 @@
     <Compile Include="NullableDateTimeDropDown.designer.vb">
       <DependentUpon>NullableDateTimeDropDown.vb</DependentUpon>
     </Compile>
-    <Compile Include="NullableDateTimeDropDown.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="NullableDateTimeDropDown.vb" />
     <Compile Include="NullableDateTimeTypeEditor.vb" />
     <Compile Include="PadGlyph.vb" />
     <Compile Include="SplashScreen1.Designer.vb">
       <DependentUpon>SplashScreen1.vb</DependentUpon>
     </Compile>
-    <Compile Include="SplashScreen1.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="SplashScreen1.vb" />
+    <Compile Include="SR.vb" />
     <Compile Include="Strings.Designer.vb">
       <DependentUpon>Strings.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -465,24 +433,18 @@
     <Compile Include="tdpGregorian.Designer.vb">
       <DependentUpon>tdpGregorian.vb</DependentUpon>
     </Compile>
-    <Compile Include="tdpGregorian.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="tdpGregorian.vb" />
     <Compile Include="TimeColors.vb" />
     <Compile Include="TimeColorsUIEditor.vb" />
     <Compile Include="TimeUIEditor.vb" />
     <Compile Include="TxtComboBox.Designer.vb">
       <DependentUpon>TxtComboBox.vb</DependentUpon>
     </Compile>
-    <Compile Include="TxtComboBox.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="TxtComboBox.vb" />
     <Compile Include="UcCheckBox.Designer.vb">
       <DependentUpon>UcCheckBox.vb</DependentUpon>
     </Compile>
-    <Compile Include="UcCheckBox.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="UcCheckBox.vb" />
     <Compile Include="ValidationControl.vb" />
     <Compile Include="ValidationControlCollection.vb" />
     <Compile Include="VirtualDataGridView.vb" />

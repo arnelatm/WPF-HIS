@@ -12,14 +12,14 @@ Namespace BusinessLayer
             ' establish business rules
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("ProductIdNo"))
-                AddRule(New ValidateRange("Multiplier", 1, 32768, ValidationDataType.Integer))
+                AddRule(New ValidateRange("UnitQty", 1, 32768, ValidationDataType.Integer))
                 AddRule(New ValidateRange("BaseQty", 1, 32768, ValidationDataType.Integer))
             End If
         End Sub
 
         Public Property BaseQty As Int16
         Public Property IdNo As Int32
-        Public Property Multiplier As Int16
+        Public Property UnitQty As Int16
         Public Property ProductIdNo As Int16
         Public Property UnitIdNo As Int16
 

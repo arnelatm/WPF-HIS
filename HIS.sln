@@ -10,11 +10,6 @@ EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BaseControlsLibrary", "Libraries\BaseControlsLibrary\BaseControlsLibrary.vbproj", "{58F5EC33-2974-4823-AB62-1D4E5B3EF152}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CBaseControlsLibrary", "Libraries\CBaseControlsLibrary\CBaseControlsLibrary.vbproj", "{F991561A-78F8-487C-A873-E6436B41D801}"
-	ProjectSection(ProjectDependencies) = postProject
-		{63AACD2C-A92E-4CF4-8F4D-49C774E2B1C6} = {63AACD2C-A92E-4CF4-8F4D-49C774E2B1C6}
-		{0E9D874E-5354-465E-9EC3-F7A35C268A8A} = {0E9D874E-5354-465E-9EC3-F7A35C268A8A}
-		{ABBF2275-7DFF-4724-98F9-71A2FD10B471} = {ABBF2275-7DFF-4724-98F9-71A2FD10B471}
-	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ErrorsAndEvents", "Libraries\ErrorsAndEvents\ErrorsAndEvents.vbproj", "{ABBF2275-7DFF-4724-98F9-71A2FD10B471}"
 EndProject
@@ -911,8 +906,6 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "IGroupClinicDb", "IGroupCli
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "PMR", "PMR\PMR.vbproj", "{5FC553F1-5E77-4F35-B61A-5FC98A5D0E82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropDownControls", "Libraries\DropDown\DropDownControls.csproj", "{1A0EB623-3EDD-4BA6-80EE-0FA61A708542}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug (.NET 3.5)|Any CPU = Debug (.NET 3.5)|Any CPU
@@ -1125,14 +1118,6 @@ Global
 		{5FC553F1-5E77-4F35-B61A-5FC98A5D0E82}.Release (.NET 3.5)|Any CPU.Build.0 = Release|Any CPU
 		{5FC553F1-5E77-4F35-B61A-5FC98A5D0E82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FC553F1-5E77-4F35-B61A-5FC98A5D0E82}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1A0EB623-3EDD-4BA6-80EE-0FA61A708542}.Debug (.NET 3.5)|Any CPU.ActiveCfg = Debug (.NET 3.5)|Any CPU
-		{1A0EB623-3EDD-4BA6-80EE-0FA61A708542}.Debug (.NET 3.5)|Any CPU.Build.0 = Debug (.NET 3.5)|Any CPU
-		{1A0EB623-3EDD-4BA6-80EE-0FA61A708542}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A0EB623-3EDD-4BA6-80EE-0FA61A708542}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A0EB623-3EDD-4BA6-80EE-0FA61A708542}.Release (.NET 3.5)|Any CPU.ActiveCfg = Release (.NET 3.5)|Any CPU
-		{1A0EB623-3EDD-4BA6-80EE-0FA61A708542}.Release (.NET 3.5)|Any CPU.Build.0 = Release (.NET 3.5)|Any CPU
-		{1A0EB623-3EDD-4BA6-80EE-0FA61A708542}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A0EB623-3EDD-4BA6-80EE-0FA61A708542}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1173,7 +1158,6 @@ Global
 		{2CC5D6D4-CEA0-4991-8859-559BDF3FC1C4} = {C90D3B3E-01F4-401D-8649-0563028668C7}
 		{B721D695-0745-49EA-9FED-FF713FBE7792} = {549000D0-E128-4B80-AEDA-C6AF4FCC2989}
 		{E4F0E91F-DE65-4117-B6A5-99AFD8AF8DC3} = {0598D101-4147-476C-98FF-8C78D96B971E}
-		{1A0EB623-3EDD-4BA6-80EE-0FA61A708542} = {A6C79BF6-2C34-4AEA-9845-360F48976962}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {433E9001-0D97-4552-9BF4-6FED04B194AE}

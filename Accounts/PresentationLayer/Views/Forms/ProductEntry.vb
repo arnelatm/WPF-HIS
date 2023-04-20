@@ -137,9 +137,12 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property UnitsByCode As Object Implements IProductView.UnitsByCode
-        Public Property ProductsByCode As Object Implements IProductView.ProductsByCode
 
         Private Sub BindProductUnits()
+
+
+
+            bsProductUnits.SuspendBinding()
             bsProductUnits.DataSource = Nothing
             DataGridViewProductUnits.Refresh()
             bsProductUnits.DataSource = ProductUnits
@@ -147,20 +150,16 @@ Namespace PresentationLayer.Views.Forms
             With DataGridViewProductUnits
                 .AutoGenerateColumns = False
                 .DataSource = bsProductUnits
+                .DefaultCellStyle.SelectionBackColor = Color.Red
+                .DefaultCellStyle.SelectionForeColor = Color.White
             End With
             With DataGridViewProductUnits.Columns
-                dgvUnitIdNo.DataSource = Nothing
                 dgvUnitIdNo.DisplayMember = "Name"
                 dgvUnitIdNo.ValueMember = "IdNo"
                 dgvUnitIdNo.DataSource = UnitsByCode
-                dgvUnitIdNo.DisplayStyleForCurrentCellOnly = False
-                dgvProductIdNo.DataSource = Nothing
-                dgvProductIdNo.DisplayMember = "Name"
-                dgvProductIdNo.ValueMember = "IdNo"
-                dgvProductIdNo.DataSource = ProductsByCode
-                dgvProductIdNo.DisplayStyleForCurrentCellOnly = False
-                dgvProductIdNo.SuggestCharCount = 3
+                dgvUnitIdNo.DisplayStyleForCurrentCellOnly = True
             End With
+            bsProductUnits.ResumeBinding()
         End Sub
 
 
@@ -187,44 +186,43 @@ Namespace PresentationLayer.Views.Forms
 
 
 
-        'Temporary Controls to represent the Editing Cells  
-        Private cboCase As DataGridViewComboBoxEditingControl = Nothing
-        Private cboUnit As CtDgvComboBoxCell = Nothing
-        Private colUnit = New CtDgvComboBoxColumn
+        ''Temporary Controls to represent the Editing Cells  
+        'Private cboCase As DataGridViewComboBoxEditingControl = Nothing
+        'Private cboUnit As CtDgvComboBoxCell = Nothing
+        'Private colUnit = New CtDgvComboBoxColumn
 
 
-        Private Sub DataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewEditingControlShowingEventArgs) Handles DataGridViewProductUnits.EditingControlShowing
-            'If the current cell is of the type "ComboBox"  
-            If TypeOf (e.Control) Is DataGridViewComboBoxEditingControl Then
-                'Cast the current cell to the temporary control  
-                cboCase = DirectCast(e.Control, CtDgvComboBoxEditingControl)
-                'Cast the other cell to the other temporary control  
-                cboUnit = DirectCast(DataGridViewProductUnits.CurrentRow.Cells("dgvUnitIdNo"), CtDgvComboBoxCell)
+        'Private Sub DataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewEditingControlShowingEventArgs) Handles DataGridViewProductUnits.EditingControlShowing
+        '    'If the current cell is of the type "ComboBox"  
+        '    If TypeOf (e.Control) Is DataGridViewComboBoxEditingControl Then
+        '        'Cast the current cell to the temporary control  
+        '        cboCase = DirectCast(e.Control, CtDgvComboBoxEditingControl)
+        '        'Cast the other cell to the other temporary control  
+        '        cboUnit = DirectCast(DataGridViewProductUnits.CurrentRow.Cells("dgvUnitIdNo"), CtDgvComboBoxCell)
 
-                If cboCase IsNot Nothing Then
-                    'Add an EventHandler to the first temporary control  
-                    AddHandler cboCase.SelectedIndexChanged, AddressOf cboCase_SelectedIndexChanged
-                End If
-            End If
-        End Sub
+        '        If cboCase IsNot Nothing Then
+        '            'Add an EventHandler to the first temporary control  
+        '            AddHandler cboCase.SelectedIndexChanged, AddressOf cboCase_SelectedIndexChanged
+        '        End If
+        '    End If
+        'End Sub
 
-        'Do your thing in the EventHandler  
-        Private Sub cboCase_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs)
-            'cboUnit.Value = "box"
-            'txtReportTime.Value = Now.TimeOfDay
-            If cboCase.Text = "System.Data.DataRowView" Then
-                cboCase.SelectedIndex = -1
-            End If
-        End Sub
+        ''Do your thing in the EventHandler  
+        'Private Sub cboCase_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs)
+        '    'cboUnit.Value = "box"
+        '    'txtReportTime.Value = Now.TimeOfDay
+        '    If cboCase.Text = "System.Data.DataRowView" Then
+        '        cboCase.SelectedIndex = -1
+        '    End If
+        'End Sub
 
-        'After editing, remove the eventHandler  
-        Private Sub DataGridView1_CellEndEdit(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridViewProductUnits.CellEndEdit
-            If cboCase IsNot Nothing Then
-                RemoveHandler cboCase.SelectedIndexChanged, AddressOf cboCase_SelectedIndexChanged
-                cboCase = Nothing
-            End If
-            cboUnit.Value = "box"
-        End Sub
+        ''After editing, remove the eventHandler  
+        'Private Sub DataGridView1_CellEndEdit(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridViewProductUnits.CellEndEdit
+        '    If cboCase IsNot Nothing Then
+        '        RemoveHandler cboCase.SelectedIndexChanged, AddressOf cboCase_SelectedIndexChanged
+        '        cboCase = Nothing
+        '    End If
+        'End Sub
 
     End Class
 

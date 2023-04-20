@@ -23,32 +23,22 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Sub CreateDataSources()
             Dim data1 As New ArrayList
-            'data.Add({"Product", "IdNo", Nothing, Nothing})
             data1.Add({"Unit", "BaseUnitIdNo", Nothing, Nothing})
-
-            'CreateDataSourceThread(data1)
-            'CreateDataSourceThread(data1)
             Dim data2 As New ArrayList
             data2.Clear()
             data2.Add({"Unit", "UnitsByCode", Nothing, Nothing})
-            data2.Add({"Product", "ProductsByCode", Nothing, Nothing})
             CreateLookupDataThread(data2)
-
-            'CreateLookupData("Unit", "UnitsByCode")
-            'CreateLookupData("Product", "ProductsByCode")
-
             CreateDataTable(DtProductUnitInsertTable, {{"BaseQty", GetType(Int16)},
-                                 {"Multiplier", GetType(Int16)},
                                  {"ProductIdNo", GetType(Int32)},
-                                 {"UnitIdNo", GetType(Int16)}
+                                 {"UnitIdNo", GetType(Int16)},
+                                 {"UnitQty", GetType(Int16)}
                                  })
-
 
             CreateDataTable(DtProductUnitUpdateTable, {{"BaseQty", GetType(Int16)},
                                              {"IdNo", GetType(Int32)},
-                                             {"Multiplier", GetType(Int16)},
                                              {"ProductIdNo", GetType(Int32)},
-                                             {"UnitIdNo", GetType(Int16)}
+                                             {"UnitIdNo", GetType(Int16)},
+                                             {"UnitQty", GetType(Int16)}
                                             })
 
         End Sub
@@ -74,7 +64,7 @@ Namespace PresentationLayer.Presenters
 
 
         Public Function ProductUnitFilter(ByVal obj As ProductUnitView) As Boolean
-            If obj.UnitIdNo <> 0 And obj.BaseQty > 0 And obj.Multiplier > 0 Then
+            If obj.UnitIdNo <> 0 And obj.BaseQty > 0 And obj.UnitQty > 0 Then
                 Return True
             End If
             Return False
@@ -82,9 +72,9 @@ Namespace PresentationLayer.Presenters
 
         Private Sub ProductUnitFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("BaseQty") = itemDataView.BaseQty
-            workRow("Multiplier") = itemDataView.Multiplier
             workRow("ProductIdNo") = View.IdNo
             workRow("UnitIdNo") = itemDataView.UnitIdNo
+            workRow("UnitQty") = itemDataView.UnitQty
         End Sub
 
     End Class

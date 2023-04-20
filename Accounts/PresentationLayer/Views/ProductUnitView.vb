@@ -12,13 +12,17 @@ Namespace PresentationLayer.Views
         Public Property ProductIdNo As Int32 Implements IProductUnitView.ProductIdNo
 
 
-        Private _multiplier As Int16 = 0
-        Public Property Multiplier As Short Implements IProductUnitView.Multiplier
+        Private _unitQty As Int16 = 0
+        Public Property UnitQty As Short Implements IProductUnitView.UnitQty
             Get
-                Return _multiplier
+                Return _unitQty
             End Get
             Set(value As Short)
-                _multiplier = value
+                If value = 0 Then
+                    _unitQty = 1
+                Else
+                    _unitQty = value
+                End If
             End Set
         End Property
 
@@ -29,8 +33,10 @@ Namespace PresentationLayer.Views
                 Return _baseQty
             End Get
             Set(value As Short)
-                If _baseQty = 0 Then
+                If value = 0 Then
                     _baseQty = 1
+                Else
+                    _baseQty = value
                 End If
             End Set
         End Property
