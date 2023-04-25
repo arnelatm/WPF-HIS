@@ -1,5 +1,8 @@
-﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+﻿Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.DataLayer
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
@@ -9,7 +12,7 @@ Namespace PresentationLayer.Presenters
 
     Public Class PurchasePresenter(Of TM As New)
         Inherits TransactionsPresenter(Of IPurchaseView, TM)
-        'Implements ISubscriber(Of DataChanged)
+        Implements ISubscriber(Of DataChanged)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
@@ -214,27 +217,31 @@ Namespace PresentationLayer.Presenters
         '    Return False
         'End Function
 
-        'Public Sub OnPurchaseDataChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
-        '    With eventType.BindingSource
-        '        If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
-        '            Dim accountId = eventType.BindingSource.Current.ProductIdNo
-        '            Select Case eventType.PropertyName
-        '                Case $"ProductIdNo"
-        '                    MakePayTypeAndSpecialAccount(eventType.BindingSource.Current, accountId)
-        '                    View.VatAmount = UpdateInputVatAmount(View.PurchaseDetails)
-        '                    eventType.BindingSource.ResetItem(eventType.Row)
-        '                Case $"Debit"
-        '                    MakeDebitAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Debit)
-        '                    eventType.BindingSource.ResetItem(eventType.Row)
-        '                    View.VatAmount = UpdateInputVatAmount(View.PurchaseDetails)
-        '                Case $"Credit"
-        '                    MakeCreditAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Credit)
-        '                    eventType.BindingSource.ResetItem(eventType.Row)
-        '                    View.VatAmount = UpdateInputVatAmount(View.PurchaseDetails)
-        '            End Select
-        '        End If
-        '    End With
-        'End Sub
+        Public Sub OnPurchaseDataChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
+            With eventType.BindingSource
+                If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
+                    Dim productCode = eventType.BindingSource.Current.ProductCode
+                    Select Case eventType.PropertyName
+                        Case $"ProductIdNo"
+                            UpdateProductItem(eventType.BindingSource.Current, productCode)
+                            eventType.BindingSource.ResetItem(eventType.Row)
+                        Case $"Debit"
+                            MakeDebitAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Debit)
+                            eventType.BindingSource.ResetItem(eventType.Row)
+                        Case $"Credit"
+                            MakeCreditAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Credit)
+                            eventType.BindingSource.ResetItem(eventType.Row)
+                    End Select
+                End If
+            End With
+        End Sub
+
+        Public Sub UpdateProductItem(current As PurchaseDetailModel, productCode As String)
+            Dim idNo As Int32 = GetRecordFieldWithKeyG(Of Int32)(productCode, "Product", "ProductCode", "IdNo")
+            Dim item As ProductModel = Service.GetRecordByIdNo(Of ProductModel)(idNo)
+            If item IsNot Nothing Then
+            End If
+        End Sub
 
         Public Overrides Function IsOkToEditRecord() As Boolean
             If Not MyBase.IsOkToEditRecord() Then

@@ -119,10 +119,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Drug As Boolean Implements IProductView.Drug
             Get
-                Return chkDrug.Checked
+                Return chkActive.Checked
             End Get
             Set
-                chkDrug.Checked = Value
+                chkActive.Checked = Value
             End Set
         End Property
 
@@ -150,8 +150,6 @@ Namespace PresentationLayer.Views.Forms
             With DataGridViewProductUnits
                 .AutoGenerateColumns = False
                 .DataSource = bsProductUnits
-                .DefaultCellStyle.SelectionBackColor = Color.Red
-                .DefaultCellStyle.SelectionForeColor = Color.White
             End With
             With DataGridViewProductUnits.Columns
                 dgvUnitIdNo.DisplayMember = "Name"

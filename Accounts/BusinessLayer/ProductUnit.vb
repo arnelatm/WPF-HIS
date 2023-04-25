@@ -21,6 +21,7 @@ Namespace BusinessLayer
         Public Property IdNo As Int32
         Public Property UnitQty As Int16
         Public Property ProductIdNo As Int16
+        Public Property Sequence As Int16
         Public Property UnitIdNo As Int16
 
     End Class

@@ -132,6 +132,10 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgErroneousDate", "You entry <{enteredDate}> is not a valid date for the <{calendarName}>! Press Ctrl-Z to revert to previous value.", "Error")
         Messaging.AddMessage("MsgErroneousTime", "The time you entered is not a valid time! Press Ctrl-Z to revert to previous value.", "Error")
         Messaging.AddMessage("MsgNonDoctorUser", "Sorry, you are not a doctor. Only doctors have access to this module.", "Error")
+        Messaging.AddMessage("MsgDuplicateLine", "Sorry, duplicate values found. See line <{lineNumber}>.", "Error")
+        Messaging.AddMessage("MsgUnitEqualToBaseUnit", "Sorry, unit can't be the same as the base unit.", "Error")
+        Messaging.AddMessage("MsgUnitQtyEqualToBUQty", "Sorry, unit quantity can't be the same as the base unit quantity.", "Error")
+
     End Sub
 
     'Public Shared Sub CreateEnums()
