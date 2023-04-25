@@ -26,12 +26,12 @@ Namespace PresentationLayer.Views.Forms
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ProductEntry))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.txtProductCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblProductCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -44,24 +44,21 @@ Namespace PresentationLayer.Views.Forms
             Me.txtProductNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.lblBaseUnit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboBaseUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-            Me.btnUnits = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblBarcode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtBarcode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblGTIN = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtGTIN = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblDrug = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblInventory = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.chkInventory = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.chkDrug = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.DataGridViewProductUnits = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.bsProductUnits = New System.Windows.Forms.BindingSource(Me.components)
+            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
-            Me.BaseQtyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvUnitQty = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.BaseQtyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvProductIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -108,33 +105,6 @@ Namespace PresentationLayer.Views.Forms
             Me.lblProductCode.Name = "lblProductCode"
             Me.lblProductCode.Translatable = True
             '
-            'txtDateCreated
-            '
-            Me.txtDateCreated.BackColor = System.Drawing.Color.White
-            Me.txtDateCreated.BegFindValue = Nothing
-            Me.txtDateCreated.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtDateCreated.ComputedValue = False
-            Me.txtDateCreated.CustomFormat = Nothing
-            Me.txtDateCreated.DataBoundControl = True
-            Me.txtDateCreated.EditingMode = False
-            Me.txtDateCreated.EndFindValue = Nothing
-            Me.txtDateCreated.FieldDescription = Nothing
-            Me.txtDateCreated.FieldName = Nothing
-            Me.txtDateCreated.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtDateCreated.FindEnabled = True
-            Me.CFlowLayout1.SetFlowBreak(Me.txtDateCreated, True)
-            resources.ApplyResources(Me.txtDateCreated, "txtDateCreated")
-            Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
-            Me.txtDateCreated.LinkedLabel = Me.lblDateCreated
-            Me.txtDateCreated.MaximumValue = Nothing
-            Me.txtDateCreated.MinimumValue = Nothing
-            Me.txtDateCreated.Name = "txtDateCreated"
-            Me.txtDateCreated.OldValue = Nothing
-            Me.txtDateCreated.ReadOnly = True
-            Me.txtDateCreated.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtDateCreated.Translatable = False
-            Me.txtDateCreated.ValueIsMandatory = True
-            '
             'lblDateCreated
             '
             Me.lblDateCreated.BackColor = System.Drawing.Color.Transparent
@@ -159,7 +129,6 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout4.Controls.Add(Me.txtProductNameAra)
             Me.CFlowLayout4.Controls.Add(Me.lblBaseUnit)
             Me.CFlowLayout4.Controls.Add(Me.cboBaseUnitIdNo)
-            Me.CFlowLayout4.Controls.Add(Me.btnUnits)
             Me.CFlowLayout4.Controls.Add(Me.CFlowLayout1)
             Me.CFlowLayout4.Controls.Add(Me.CFlowLayout2)
             resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
@@ -372,16 +341,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBaseUnitIdNo.ValueIsNumeric = False
             Me.cboBaseUnitIdNo.ValueMember = "IdNo"
             '
-            'btnUnits
-            '
-            Me.btnUnits.DesignerSelected = False
-            Me.CFlowLayout4.SetFlowBreak(Me.btnUnits, True)
-            resources.ApplyResources(Me.btnUnits, "btnUnits")
-            Me.btnUnits.ImageIndex = 0
-            Me.btnUnits.Name = "btnUnits"
-            Me.btnUnits.OriginalImageName = Nothing
-            Me.btnUnits.SecurityKey = ""
-            '
             'CFlowLayout1
             '
             Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
@@ -389,14 +348,10 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1.Controls.Add(Me.txtBarcode)
             Me.CFlowLayout1.Controls.Add(Me.lblGTIN)
             Me.CFlowLayout1.Controls.Add(Me.txtGTIN)
-            Me.CFlowLayout1.Controls.Add(Me.lblDrug)
-            Me.CFlowLayout1.Controls.Add(Me.txtDateCreated)
-            Me.CFlowLayout1.Controls.Add(Me.lblInventory)
-            Me.CFlowLayout1.Controls.Add(Me.chkInventory)
             Me.CFlowLayout1.Controls.Add(Me.lblActive)
-            Me.CFlowLayout1.Controls.Add(Me.chkDrug)
-            Me.CFlowLayout1.Controls.Add(Me.lblDateCreated)
             Me.CFlowLayout1.Controls.Add(Me.chkActive)
+            Me.CFlowLayout1.Controls.Add(Me.lblDateCreated)
+            Me.CFlowLayout1.Controls.Add(Me.txtDateCreated)
             resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
             Me.CFlowLayout1.Name = "CFlowLayout1"
             '
@@ -472,47 +427,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtGTIN.ValueIsMandatory = True
             Me.txtGTIN.ValueIsUnique = True
             '
-            'lblDrug
-            '
-            Me.lblDrug.DisplayOnly = True
-            Me.lblDrug.EditingMode = False
-            resources.ApplyResources(Me.lblDrug, "lblDrug")
-            Me.lblDrug.Name = "lblDrug"
-            Me.lblDrug.Translatable = True
-            '
-            'lblInventory
-            '
-            Me.lblInventory.DisplayOnly = True
-            Me.lblInventory.EditingMode = False
-            resources.ApplyResources(Me.lblInventory, "lblInventory")
-            Me.lblInventory.Name = "lblInventory"
-            Me.lblInventory.Translatable = True
-            '
-            'chkInventory
-            '
-            Me.chkInventory.AlwaysEditable = False
-            Me.chkInventory.BackColor = System.Drawing.Color.White
-            Me.chkInventory.BegFindValue = Nothing
-            Me.chkInventory.DisplayOnly = False
-            Me.chkInventory.EditingMode = True
-            Me.chkInventory.EndFindValue = Nothing
-            Me.chkInventory.FieldDescription = Nothing
-            Me.chkInventory.FieldName = Nothing
-            Me.chkInventory.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkInventory.FindEnabled = False
-            resources.ApplyResources(Me.chkInventory, "chkInventory")
-            Me.CFlowLayout1.SetFlowBreak(Me.chkInventory, True)
-            Me.chkInventory.ForeColor = System.Drawing.Color.Black
-            Me.chkInventory.IFindableControl_FindEnabled = False
-            Me.chkInventory.IgnoreCase = False
-            Me.chkInventory.LinkedLabel = Me.lblInventory
-            Me.chkInventory.Name = "chkInventory"
-            Me.chkInventory.NoLabel = True
-            Me.chkInventory.OldValue = Nothing
-            Me.chkInventory.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkInventory.Translatable = False
-            Me.chkInventory.UseVisualStyleBackColor = False
-            '
             'lblActive
             '
             Me.lblActive.DisplayOnly = True
@@ -520,31 +434,6 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.lblActive, "lblActive")
             Me.lblActive.Name = "lblActive"
             Me.lblActive.Translatable = True
-            '
-            'chkDrug
-            '
-            Me.chkDrug.AlwaysEditable = False
-            Me.chkDrug.BackColor = System.Drawing.Color.White
-            Me.chkDrug.BegFindValue = Nothing
-            Me.chkDrug.DisplayOnly = False
-            Me.chkDrug.EditingMode = True
-            Me.chkDrug.EndFindValue = Nothing
-            Me.chkDrug.FieldDescription = Nothing
-            Me.chkDrug.FieldName = Nothing
-            Me.chkDrug.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkDrug.FindEnabled = False
-            resources.ApplyResources(Me.chkDrug, "chkDrug")
-            Me.CFlowLayout1.SetFlowBreak(Me.chkDrug, True)
-            Me.chkDrug.ForeColor = System.Drawing.Color.Black
-            Me.chkDrug.IFindableControl_FindEnabled = False
-            Me.chkDrug.IgnoreCase = False
-            Me.chkDrug.LinkedLabel = Me.lblDrug
-            Me.chkDrug.Name = "chkDrug"
-            Me.chkDrug.NoLabel = True
-            Me.chkDrug.OldValue = Nothing
-            Me.chkDrug.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkDrug.Translatable = False
-            Me.chkDrug.UseVisualStyleBackColor = False
             '
             'chkActive
             '
@@ -563,13 +452,40 @@ Namespace PresentationLayer.Views.Forms
             Me.chkActive.ForeColor = System.Drawing.Color.Black
             Me.chkActive.IFindableControl_FindEnabled = False
             Me.chkActive.IgnoreCase = False
-            Me.chkActive.LinkedLabel = Me.lblActive
+            Me.chkActive.LinkedLabel = Nothing
             Me.chkActive.Name = "chkActive"
             Me.chkActive.NoLabel = True
             Me.chkActive.OldValue = Nothing
             Me.chkActive.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.chkActive.Translatable = False
             Me.chkActive.UseVisualStyleBackColor = False
+            '
+            'txtDateCreated
+            '
+            Me.txtDateCreated.BackColor = System.Drawing.Color.White
+            Me.txtDateCreated.BegFindValue = Nothing
+            Me.txtDateCreated.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDateCreated.ComputedValue = False
+            Me.txtDateCreated.CustomFormat = Nothing
+            Me.txtDateCreated.DataBoundControl = True
+            Me.txtDateCreated.EditingMode = False
+            Me.txtDateCreated.EndFindValue = Nothing
+            Me.txtDateCreated.FieldDescription = Nothing
+            Me.txtDateCreated.FieldName = Nothing
+            Me.txtDateCreated.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtDateCreated.FindEnabled = True
+            Me.CFlowLayout1.SetFlowBreak(Me.txtDateCreated, True)
+            resources.ApplyResources(Me.txtDateCreated, "txtDateCreated")
+            Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
+            Me.txtDateCreated.LinkedLabel = Me.lblDateCreated
+            Me.txtDateCreated.MaximumValue = Nothing
+            Me.txtDateCreated.MinimumValue = Nothing
+            Me.txtDateCreated.Name = "txtDateCreated"
+            Me.txtDateCreated.OldValue = Nothing
+            Me.txtDateCreated.ReadOnly = True
+            Me.txtDateCreated.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtDateCreated.Translatable = False
+            Me.txtDateCreated.ValueIsMandatory = True
             '
             'CFlowLayout2
             '
@@ -586,23 +502,23 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewProductUnits.BegFindValue = Nothing
             Me.DataGridViewProductUnits.Cached = False
             Me.DataGridViewProductUnits.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewProductUnits.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvUnitIdNo, Me.BaseQtyDataGridViewTextBoxColumn, Me.dgvUnitQty, Me.dgvProductIdNo, Me.IdNoDataGridViewTextBoxColumn})
+            Me.DataGridViewProductUnits.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvUnitIdNo, Me.dgvUnitQty, Me.BaseQtyDataGridViewTextBoxColumn, Me.dgvProductIdNo, Me.IdNoDataGridViewTextBoxColumn})
             Me.DataGridViewProductUnits.DataFilter = Nothing
             Me.DataGridViewProductUnits.DataSource = Me.bsProductUnits
-            DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewProductUnits.DefaultCellStyle = DataGridViewCellStyle4
+            DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewProductUnits.DefaultCellStyle = DataGridViewCellStyle5
             Me.DataGridViewProductUnits.DgSearch = CType(resources.GetObject("DataGridViewProductUnits.DgSearch"), System.Collections.Generic.List(Of AATM.Libraries.CBaseControlsLibrary.CtDataGridView.DataGridSearch))
             Me.DataGridViewProductUnits.DgvFooter = Nothing
             Me.DataGridViewProductUnits.DisplayOnly = False
             Me.DataGridViewProductUnits.Ea = Nothing
             Me.DataGridViewProductUnits.EditingMode = False
-            Me.DataGridViewProductUnits.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
+            Me.DataGridViewProductUnits.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             Me.DataGridViewProductUnits.EndFindValue = Nothing
             Me.DataGridViewProductUnits.FieldDescription = Nothing
             Me.DataGridViewProductUnits.FieldName = Nothing
@@ -628,14 +544,36 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.bsProductUnits.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.ProductUnitModel)
             '
+            'dgvSequence
+            '
+            Me.dgvSequence.BegFindValue = Nothing
+            Me.dgvSequence.DataPropertyName = "Sequence"
+            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
+            Me.dgvSequence.DisplayOnly = True
+            Me.dgvSequence.EditingMode = True
+            Me.dgvSequence.EndFindValue = Nothing
+            Me.dgvSequence.FieldDescription = Nothing
+            Me.dgvSequence.FieldName = Nothing
+            Me.dgvSequence.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvSequence.FindEnabled = False
+            resources.ApplyResources(Me.dgvSequence, "dgvSequence")
+            Me.dgvSequence.IgnoreCase = False
+            Me.dgvSequence.Name = "dgvSequence"
+            Me.dgvSequence.ReadOnly = True
+            Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvSequence.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvSequence.Translatable = False
+            '
             'dgvUnitIdNo
             '
             Me.dgvUnitIdNo.AutoComplete = False
             Me.dgvUnitIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvUnitIdNo.DataPropertyName = "UnitIdNo"
-            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            Me.dgvUnitIdNo.DefaultCellStyle = DataGridViewCellStyle2
+            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+            Me.dgvUnitIdNo.DefaultCellStyle = DataGridViewCellStyle3
             Me.dgvUnitIdNo.EditingMode = False
             resources.ApplyResources(Me.dgvUnitIdNo, "dgvUnitIdNo")
             Me.dgvUnitIdNo.Name = "dgvUnitIdNo"
@@ -645,13 +583,6 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvUnitIdNo.SuggestCharCount = 0
             Me.dgvUnitIdNo.Translatable = False
             '
-            'BaseQtyDataGridViewTextBoxColumn
-            '
-            Me.BaseQtyDataGridViewTextBoxColumn.DataPropertyName = "BaseQty"
-            resources.ApplyResources(Me.BaseQtyDataGridViewTextBoxColumn, "BaseQtyDataGridViewTextBoxColumn")
-            Me.BaseQtyDataGridViewTextBoxColumn.Name = "BaseQtyDataGridViewTextBoxColumn"
-            Me.BaseQtyDataGridViewTextBoxColumn.ReadOnly = True
-            '
             'dgvUnitQty
             '
             Me.dgvUnitQty.DataPropertyName = "UnitQty"
@@ -659,13 +590,20 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvUnitQty.Name = "dgvUnitQty"
             Me.dgvUnitQty.ReadOnly = True
             '
+            'BaseQtyDataGridViewTextBoxColumn
+            '
+            Me.BaseQtyDataGridViewTextBoxColumn.DataPropertyName = "BaseQty"
+            resources.ApplyResources(Me.BaseQtyDataGridViewTextBoxColumn, "BaseQtyDataGridViewTextBoxColumn")
+            Me.BaseQtyDataGridViewTextBoxColumn.Name = "BaseQtyDataGridViewTextBoxColumn"
+            Me.BaseQtyDataGridViewTextBoxColumn.ReadOnly = True
+            '
             'dgvProductIdNo
             '
             Me.dgvProductIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvProductIdNo.DataPropertyName = "ProductIdNo"
-            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-            Me.dgvProductIdNo.DefaultCellStyle = DataGridViewCellStyle3
+            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+            Me.dgvProductIdNo.DefaultCellStyle = DataGridViewCellStyle4
             resources.ApplyResources(Me.dgvProductIdNo, "dgvProductIdNo")
             Me.dgvProductIdNo.Name = "dgvProductIdNo"
             Me.dgvProductIdNo.ReadOnly = True
@@ -703,11 +641,9 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblProductCode As CLabel
         Friend WithEvents txtProductCode As CTextBox
         Friend WithEvents lblDateCreated As CLabel
-        Friend WithEvents txtDateCreated As CTextBox
         Friend WithEvents lblCategoryIdNo As CLabel
         Friend WithEvents lblActive As CLabel
         Friend WithEvents cboCategoryIdNo As CtComboBox
-        Friend WithEvents chkActive As CCheckBox
         Friend WithEvents lblProductName As CLabel
         Friend WithEvents txtProductName As CTextBox
         Friend WithEvents lblProductNameAra As CLabel
@@ -716,19 +652,17 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtBarcode As CTextBox
         Friend WithEvents lblGTIN As CLabel
         Friend WithEvents txtGTIN As CTextBox
-        Friend WithEvents lblInventory As CLabel
-        Friend WithEvents chkInventory As CCheckBox
         Friend WithEvents lblBaseUnit As CLabel
         Friend WithEvents cboBaseUnitIdNo As CtComboBox
-        Friend WithEvents lblDrug As CLabel
-        Friend WithEvents chkDrug As CCheckBox
-        Friend WithEvents btnUnits As CButton
+        Friend WithEvents chkActive As CCheckBox
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents CFlowLayout2 As CFlowLayout
         Friend WithEvents DataGridViewProductUnits As CtDataGridView
+        Friend WithEvents txtDateCreated As CTextBox
+        Friend WithEvents dgvSequence As CDgvTextColumn
         Friend WithEvents dgvUnitIdNo As CtDgvComboBoxColumn
-        Friend WithEvents BaseQtyDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents dgvUnitQty As DataGridViewTextBoxColumn
+        Friend WithEvents BaseQtyDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents dgvProductIdNo As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     End Class

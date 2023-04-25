@@ -406,20 +406,20 @@ Namespace PresentationLayer.Presenters
             Return Nothing
         End Function
 
-        Public Shared Function FirstFieldDuplicate(Of T1, T2)(ByRef items As List(Of T1), ByVal fieldName As String) As Integer?
-            Dim [set] As HashSet(Of T2) = New HashSet(Of T2)()
-            Dim i As Integer = 0
-            Dim x As T2
-            For Each item As T1 In items
-                x = Invoker.GetProperty(item, fieldName)
-                If [set].Contains(x) Then
-                    Return i
-                End If
-                [set].Add(x)
-                i += 1
-            Next
-            Return Nothing
-        End Function
+        'Public Shared Function FirstFieldDuplicate(Of T1, T2)(ByRef items As List(Of T1), ByVal fieldName As String) As Integer?
+        '    Dim [set] As HashSet(Of T2) = New HashSet(Of T2)()
+        '    Dim i As Integer = 0
+        '    Dim x As T2
+        '    For Each item As T1 In items
+        '        x = Invoker.GetProperty(item, fieldName)
+        '        If [set].Contains(x) Then
+        '            Return i
+        '        End If
+        '        [set].Add(x)
+        '        i += 1
+        '    Next
+        '    Return Nothing
+        'End Function
 
         Public Sub RecordAddedUpdated(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             'Dim passedValue As Integer = retVal

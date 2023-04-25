@@ -29,7 +29,7 @@ Public Class CtDataGridView
         MyBase.New()
         DoubleBuffered = True
         Enabled = True
-        EditMode = DataGridViewEditMode.EditOnEnter
+        EditMode = DataGridViewEditMode.EditOnKeystroke
         BackColor = Drawing.SystemColors.ControlLight
         DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
         DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
@@ -500,21 +500,23 @@ Public Class CtDataGridView
     End Sub
 
     Private Sub CtDataGridView_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles Me.CellEndEdit
-        Dim nIndex = CurrentRow.Index
-        If DataSource IsNot Nothing Then
-            If DataSource.[GetType]() Is GetType(BindingSource) Then
-                'AssignEvent()
-                Dim myBindingSource = CType(DataSource, BindingSource)
-                Dim nDataCount = DataSource().Count()
-                If CurrentRow.Index = NewRowIndex Then
-                    Try
-                        myBindingSource.AddNew()
-                        ' adding a new row to the bindingsource adds a new empty row at the end with null values
-                        ' therefore there is a need to remove that row because it causes errors when moving to that empty row
-                        myBindingSource.RemoveAt(myBindingSource.Count - 1)
-                    Catch
+        If CurrentRow IsNot Nothing Then
+            Dim nIndex = CurrentRow.Index
+            If DataSource IsNot Nothing Then
+                If DataSource.[GetType]() Is GetType(BindingSource) Then
+                    'AssignEvent()
+                    Dim myBindingSource = CType(DataSource, BindingSource)
+                    Dim nDataCount = DataSource().Count()
+                    If CurrentRow.Index = NewRowIndex Then
+                        Try
+                            myBindingSource.AddNew()
+                            ' adding a new row to the bindingsource adds a new empty row at the end with null values
+                            ' therefore there is a need to remove that row because it causes errors when moving to that empty row
+                            myBindingSource.RemoveAt(myBindingSource.Count - 1)
+                        Catch
 
-                    End Try
+                        End Try
+                    End If
                 End If
             End If
         End If
@@ -652,7 +654,9 @@ Public Class CtDataGridView
             If Not continueSearch Then
                 _existingFind = False
                 _columnNo = hitTestInfo.ColumnIndex
-                FindValue()
+                If _columnNo > 0 Then
+                    FindValue()
+                End If
             End If
         End If
     End Sub

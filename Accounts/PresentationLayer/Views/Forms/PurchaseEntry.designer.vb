@@ -74,8 +74,8 @@ Namespace PresentationLayer.Views.Forms
             Me.ProductBindingSource = New System.Windows.Forms.BindingSource(Me.components)
             Me.ISPDATADataSet = New AATM.Accounts.ISPDATADataSet()
             Me.ProductTableAdapter = New AATM.Accounts.ISPDATADataSetTableAdapters.ProductTableAdapter()
-            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
-            Me.ProductCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvProductCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvProductName = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
             Me.dgvQuantity = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
@@ -377,7 +377,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpTransactionDate.SecurityKey = Nothing
             Me.dtpTransactionDate.ShowLongDate = False
             Me.dtpTransactionDate.ShowTime = False
-            Me.dtpTransactionDate.Size = New System.Drawing.Size(123, 23)
+            Me.dtpTransactionDate.Size = New System.Drawing.Size(124, 23)
             Me.dtpTransactionDate.TabIndex = 2
             Me.dtpTransactionDate.TargetCalendar = CType(resources.GetObject("dtpTransactionDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpTransactionDate.Translatable = False
@@ -590,7 +590,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpInvoiceDate.SecurityKey = Nothing
             Me.dtpInvoiceDate.ShowLongDate = False
             Me.dtpInvoiceDate.ShowTime = False
-            Me.dtpInvoiceDate.Size = New System.Drawing.Size(123, 23)
+            Me.dtpInvoiceDate.Size = New System.Drawing.Size(124, 23)
             Me.dtpInvoiceDate.TabIndex = 6
             Me.dtpInvoiceDate.TargetCalendar = CType(resources.GetObject("dtpInvoiceDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpInvoiceDate.Translatable = False
@@ -634,7 +634,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpDueDate.SecurityKey = Nothing
             Me.dtpDueDate.ShowLongDate = False
             Me.dtpDueDate.ShowTime = False
-            Me.dtpDueDate.Size = New System.Drawing.Size(123, 23)
+            Me.dtpDueDate.Size = New System.Drawing.Size(124, 23)
             Me.dtpDueDate.TabIndex = 7
             Me.dtpDueDate.TargetCalendar = CType(resources.GetObject("dtpDueDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpDueDate.Translatable = False
@@ -648,7 +648,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblInvoiceNo.EditingMode = False
             Me.lblInvoiceNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblInvoiceNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblInvoiceNo.Location = New System.Drawing.Point(286, 93)
+            Me.lblInvoiceNo.Location = New System.Drawing.Point(287, 93)
             Me.lblInvoiceNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblInvoiceNo.Name = "lblInvoiceNo"
             Me.lblInvoiceNo.Size = New System.Drawing.Size(325, 23)
@@ -675,7 +675,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtInvoiceNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtInvoiceNo.ForeColor = System.Drawing.Color.Black
             Me.txtInvoiceNo.LinkedLabel = Me.lblInvoiceNo
-            Me.txtInvoiceNo.Location = New System.Drawing.Point(613, 93)
+            Me.txtInvoiceNo.Location = New System.Drawing.Point(614, 93)
             Me.txtInvoiceNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtInvoiceNo.MaximumValue = Nothing
             Me.txtInvoiceNo.MinimumValue = Nothing
@@ -790,7 +790,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPurchaseDetails.BegFindValue = Nothing
             Me.DataGridViewPurchaseDetails.Cached = False
             Me.DataGridViewPurchaseDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewPurchaseDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.ProductCode, Me.dgvProductName, Me.dgvUnitIdNo, Me.dgvQuantity, Me.dgvBonusQuantity, Me.dgvDiscountAmount, Me.dgvNetAmount, Me.dgvPrice, Me.dgvVatPercent, Me.dgvVatAmount, Me.PurchaseIdNoDataGridViewTextBoxColumn, Me.dgvProductIdNo, Me.IdNoDataGridViewTextBoxColumn})
+            Me.DataGridViewPurchaseDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvProductCode, Me.dgvProductName, Me.dgvUnitIdNo, Me.dgvQuantity, Me.dgvBonusQuantity, Me.dgvDiscountAmount, Me.dgvNetAmount, Me.dgvPrice, Me.dgvVatPercent, Me.dgvVatAmount, Me.PurchaseIdNoDataGridViewTextBoxColumn, Me.dgvProductIdNo, Me.IdNoDataGridViewTextBoxColumn})
             Me.DataGridViewPurchaseDetails.DataFilter = Nothing
             Me.DataGridViewPurchaseDetails.DataSource = Me.bsPurchaseDetails
             DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -807,6 +807,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPurchaseDetails.Dock = System.Windows.Forms.DockStyle.Fill
             Me.DataGridViewPurchaseDetails.Ea = Nothing
             Me.DataGridViewPurchaseDetails.EditingMode = False
+            Me.DataGridViewPurchaseDetails.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             Me.DataGridViewPurchaseDetails.EndFindValue = Nothing
             Me.DataGridViewPurchaseDetails.FieldDescription = Nothing
             Me.DataGridViewPurchaseDetails.FieldName = Nothing
@@ -855,6 +856,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CtDataGridView2.DisplayOnly = False
             Me.CtDataGridView2.Ea = Nothing
             Me.CtDataGridView2.EditingMode = False
+            Me.CtDataGridView2.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             Me.CtDataGridView2.EndFindValue = Nothing
             Me.CtDataGridView2.FieldDescription = Nothing
             Me.CtDataGridView2.FieldName = Nothing
@@ -894,28 +896,34 @@ Namespace PresentationLayer.Views.Forms
             '
             'dgvSequence
             '
-            Me.dgvSequence.AutoComplete = False
+            Me.dgvSequence.BegFindValue = Nothing
             Me.dgvSequence.DataPropertyName = "Sequence"
             DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
             Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
+            Me.dgvSequence.DisplayOnly = True
             Me.dgvSequence.EditingMode = False
+            Me.dgvSequence.EndFindValue = Nothing
+            Me.dgvSequence.FieldDescription = Nothing
+            Me.dgvSequence.FieldName = Nothing
             Me.dgvSequence.FillWeight = 1.0!
+            Me.dgvSequence.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvSequence.FindEnabled = False
             Me.dgvSequence.HeaderText = "Seq"
+            Me.dgvSequence.IgnoreCase = False
             Me.dgvSequence.Name = "dgvSequence"
             Me.dgvSequence.ReadOnly = True
             Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvSequence.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            Me.dgvSequence.SuggestCharCount = 1
+            Me.dgvSequence.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvSequence.Translatable = False
             Me.dgvSequence.Width = 40
             '
-            'ProductCode
+            'dgvProductCode
             '
-            Me.ProductCode.HeaderText = "Product Code"
-            Me.ProductCode.Name = "ProductCode"
-            Me.ProductCode.ReadOnly = True
-            Me.ProductCode.Width = 60
+            Me.dgvProductCode.HeaderText = "Product Code"
+            Me.dgvProductCode.Name = "dgvProductCode"
+            Me.dgvProductCode.ReadOnly = True
+            Me.dgvProductCode.Width = 60
             '
             'dgvProductName
             '
@@ -939,7 +947,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvUnitIdNo.ReadOnly = True
             Me.dgvUnitIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvUnitIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            Me.dgvUnitIdNo.SuggestCharCount = 1
+            Me.dgvUnitIdNo.SuggestCharCount = 0
             Me.dgvUnitIdNo.Translatable = False
             Me.dgvUnitIdNo.Width = 80
             '
@@ -1174,8 +1182,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ISPDATADataSet As ISPDATADataSet
         Friend WithEvents ProductBindingSource As BindingSource
         Friend WithEvents ProductTableAdapter As ISPDATADataSetTableAdapters.ProductTableAdapter
-        Friend WithEvents dgvSequence As CtDgvComboBoxColumn
-        Friend WithEvents ProductCode As DataGridViewTextBoxColumn
+        Friend WithEvents dgvSequence As CDgvTextColumn
+        Friend WithEvents dgvProductCode As DataGridViewTextBoxColumn
         Friend WithEvents dgvProductName As DataGridViewTextBoxColumn
         Friend WithEvents dgvUnitIdNo As CtDgvComboBoxColumn
         Friend WithEvents dgvQuantity As CDgvDecimalColumn

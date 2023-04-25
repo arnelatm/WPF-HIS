@@ -42,7 +42,7 @@ Namespace PresentationLayer.Views
         End Property
 
         Public Property Errors As List(Of String) Implements IView.Errors
-
+        Public Property Sequence As Int16 Implements IProductUnitView.Sequence
 
     End Class
 

@@ -13,6 +13,7 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _footer As DgvFooter
         Private _PurchaseDetails As List(Of PurchaseDetailView)
+        Public Event ProductCodeChanged() Implements IPurchaseView.ProductCodeChanged
 
         Public Sub New()
             MyBase.New()
@@ -354,6 +355,8 @@ Namespace PresentationLayer.Views.Forms
                         End If
 
                     End With
+                ElseIf cColumnName = $"dgvProductCode" Then
+                    RaiseEvent ProductCodeChanged()
                 End If
             End With
             'End If

@@ -13,6 +13,7 @@ Namespace BusinessLayer
                 ' establish business rules
                 AddRule(New ValidateRequired("ProductName"))
                 AddRule(New ValidateRequired("ProductCode"))
+                AddRule(New ValidateRequired("CategoryIdNo"))
             End If
         End Sub
 

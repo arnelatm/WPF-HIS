@@ -2,6 +2,7 @@
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.Libraries.MessagingLibrary.Messaging
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
@@ -24,12 +25,16 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Sub CreateDataSources()
             Dim data1 As New ArrayList
             data1.Add({"Unit", "BaseUnitIdNo", Nothing, Nothing})
+            data1.Add({"Category", "CategoryIdNo", Nothing, Nothing})
             Dim data2 As New ArrayList
+            CreateDataSourceThread(data1)
+
             data2.Clear()
             data2.Add({"Unit", "UnitsByCode", Nothing, Nothing})
             CreateLookupDataThread(data2)
             CreateDataTable(DtProductUnitInsertTable, {{"BaseQty", GetType(Int16)},
                                  {"ProductIdNo", GetType(Int32)},
+                                 {"Sequence", GetType(Int16)},
                                  {"UnitIdNo", GetType(Int16)},
                                  {"UnitQty", GetType(Int16)}
                                  })
@@ -37,6 +42,7 @@ Namespace PresentationLayer.Presenters
             CreateDataTable(DtProductUnitUpdateTable, {{"BaseQty", GetType(Int16)},
                                              {"IdNo", GetType(Int32)},
                                              {"ProductIdNo", GetType(Int32)},
+                                             {"Sequence", GetType(Int16)},
                                              {"UnitIdNo", GetType(Int16)},
                                              {"UnitQty", GetType(Int16)}
                                             })
@@ -73,9 +79,36 @@ Namespace PresentationLayer.Presenters
         Private Sub ProductUnitFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("BaseQty") = itemDataView.BaseQty
             workRow("ProductIdNo") = View.IdNo
+            workRow("Sequence") = itemDataView.Sequence
             workRow("UnitIdNo") = itemDataView.UnitIdNo
             workRow("UnitQty") = itemDataView.UnitQty
         End Sub
+
+        Protected Overrides Function IsBizDataValid() As Boolean
+            Dim retValue = False
+            Dim textDescription = TranslateCaption("Product Units")
+            If MyBase.IsBizDataValid() Then
+                ' look for duplicate PayElementIdNo in bsEarning
+                Dim duplicate = FirstFieldDuplicate(Of ProductUnitView, Int16)(View.ProductUnits, "UnitIdNo")
+                If duplicate IsNot Nothing Then
+                    ShowPmMessage(True, "MsgDuplicateLine", {"lineNumber", (duplicate + 1).ToString()})
+                Else
+                    retValue = True
+                    For Each item As ProductUnitView In View.ProductUnits
+                        If item.UnitIdNo = View.BaseUnitIdNo Then
+                            Show(True, "MsgUnitEqualToBaseUnit")
+                            retValue = False
+                            Exit For
+                        ElseIf item.BaseQty = item.UnitQty Then
+                            Show(True, "MsgUnitQtyEqualToBUQty")
+                            retValue = False
+                            Exit For
+                        End If
+                    Next
+                End If
+            End If
+            Return retValue
+        End Function
 
     End Class
 

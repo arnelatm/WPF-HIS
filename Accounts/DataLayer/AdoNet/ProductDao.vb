@@ -123,6 +123,7 @@ Namespace DataLayer.AdoNet
                     "BaseQty," &
                     "IdNo," &
                     "ProductIdNo," &
+                    "Sequence," &
                     "UnitIdNo," &
                     "UnitQty " &
                     "FROM ProductUnit " &
@@ -145,8 +146,9 @@ Namespace DataLayer.AdoNet
             .BaseQty = Extensions.AsInt(Of Int16)(reader("BaseQty")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .ProductIdNo = Extensions.AsInt(Of Int32)(reader("ProductIdNo")),
+            .Sequence = Extensions.AsInt(Of Int16)(reader("Sequence")),
             .UnitIdNo = Extensions.AsInt(Of Int16)(reader("UnitIdNo")),
-        .UnitQty = Extensions.AsInt(Of Int16)(reader("UnitQty"))
+            .UnitQty = Extensions.AsInt(Of Int16)(reader("UnitQty"))
            }
 
     End Class

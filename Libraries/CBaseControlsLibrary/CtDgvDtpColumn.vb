@@ -412,7 +412,7 @@ Public Class CtDgvDtpEditingControl
     Public Sub PrepareEditingControlForEdit(ByVal selectAll As Boolean) _
         Implements IDataGridViewEditingControl.PrepareEditingControlForEdit
         Dim lEditMode As DataGridViewEditMode = EditingControlDataGridView.EditMode
-        EditingControlDataGridView.EditMode = DataGridViewEditMode.EditOnEnter
+        EditingControlDataGridView.EditMode = DataGridViewEditMode.EditOnKeystroke
         Focus()
         If selectAll Then
             If ShowLongDate Then
