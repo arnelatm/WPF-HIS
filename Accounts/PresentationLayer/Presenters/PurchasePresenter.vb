@@ -1,5 +1,8 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports System.Globalization
+Imports AATM.Accounts.DataLayer.AdoNet
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.DataLayer
@@ -16,7 +19,7 @@ Namespace PresentationLayer.Presenters
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        'Private ReadOnly _PurchaseItemService As New AccountsService("PurchaseDetail", Nothing, {"PurchaseItem_View", "UpdatePurchaseItemTVP", "InsertPurchaseItemTVP"})
+        Private ReadOnly _productService As New AccountsService("Product")
 
         Public Sub New(view As IPurchaseView)
             MyBase.New(view)
@@ -47,6 +50,7 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("UnitIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("VatAmount", GetType(Decimal))
             DtUpdateTable.Columns.Add("VatPercent", GetType(Decimal))
+            AddHandler view.ProductCodeChanged, AddressOf OnProductCodeChanged
 
         End Sub
 
@@ -220,26 +224,32 @@ Namespace PresentationLayer.Presenters
         Public Sub OnPurchaseDataChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
             With eventType.BindingSource
                 If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
-                    Dim productCode = eventType.BindingSource.Current.ProductCode
+                    'Dim productCode = eventType.BindingSource.Current.ProductCode
                     Select Case eventType.PropertyName
-                        Case $"ProductIdNo"
-                            UpdateProductItem(eventType.BindingSource.Current, productCode)
+                        Case $"ProductCode"
+                            UpdateProductItem(eventType.BindingSource.Current, eventType.EnteredValue)
                             eventType.BindingSource.ResetItem(eventType.Row)
-                        Case $"Debit"
-                            MakeDebitAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Debit)
-                            eventType.BindingSource.ResetItem(eventType.Row)
-                        Case $"Credit"
-                            MakeCreditAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Credit)
-                            eventType.BindingSource.ResetItem(eventType.Row)
+                            'Case $"Debit"
+                            '    MakeDebitAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Debit)
+                            '    eventType.BindingSource.ResetItem(eventType.Row)
+                            'Case $"Credit"
+                            '    MakeCreditAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Credit)
+                            '    eventType.BindingSource.ResetItem(eventType.Row)
                     End Select
                 End If
             End With
         End Sub
 
-        Public Sub UpdateProductItem(current As PurchaseDetailModel, productCode As String)
+        Public Sub UpdateProductItem(ByRef current As PurchaseDetailView, productCode As String)
             Dim idNo As Int32 = GetRecordFieldWithKeyG(Of Int32)(productCode, "Product", "ProductCode", "IdNo")
-            Dim item As ProductModel = Service.GetRecordByIdNo(Of ProductModel)(idNo)
+            Dim item As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(idNo)
             If item IsNot Nothing Then
+                current.ProductIdNo = item.IdNo
+                current.ProductName = item.ProductName
+            Else
+                current.ProductIdNo = ""
+                current.ProductName = ""
+                Messaging.Show(True, "Invalid Product Code!")
             End If
         End Sub
 
@@ -281,7 +291,34 @@ Namespace PresentationLayer.Presenters
             Return False
         End Function
 
+        Private Sub OnProductCodeChanged(productCode As String, bs As BindingSource)
+            Dim idNo As Int32 = GetRecordFieldWithKeyG(Of Int32)(productCode, "Product", "ProductCode", "IdNo")
+            Dim item As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(idNo)
+            If item IsNot Nothing Then
+                bs.Current.ProductIdNo = item.IdNo
+                bs.Current.ProductName = item.ProductName
+            Else
+                bs.Current.ProductIdNo = ""
+                bs.Current.ProductName = ""
+                Messaging.Show(True, "Invalid Product Code!")
+            End If
 
+            'Dim checkAmountInWords As String
+            'Dim currencies As New List(Of CurrencyInfo)()
+            'Dim curCulture = CultureInfo.CurrentCulture
+            'Dim language As String
+            'language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+            'currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
+            'If language = "ar" Then
+            '    checkAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
+            'Else
+            '    checkAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
+            'End If
+            'Dim reportFileName As String
+            'reportFileName = "Check Printing" & View.AccountIdNo.ToString() & ".Rpt"
+            'Dim cForm As New ReportForm(reportFileName, checkAmountInWords, "CheckAmountInWords", GetPayeeName(View.PayeeIdNo), "PayeeName", View.CheckDate, "CheckDate", Convert.ToDecimal(View.Amount), "CheckAmount", language, "Language", View.Notes, "Notes")
+            'cForm.Show()
+        End Sub
 
     End Class
 

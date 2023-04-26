@@ -135,7 +135,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgDuplicateLine", "Sorry, duplicate values found. See line <{lineNumber}>.", "Error")
         Messaging.AddMessage("MsgUnitEqualToBaseUnit", "Sorry, unit can't be the same as the base unit.", "Error")
         Messaging.AddMessage("MsgUnitQtyEqualToBUQty", "Sorry, unit quantity can't be the same as the base unit quantity.", "Error")
-
+        Messaging.AddMessage("MsgInvalidCode", "Sorry, no such {fieldName} on file.", "Error")
     End Sub
 
     'Public Shared Sub CreateEnums()

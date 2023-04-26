@@ -920,6 +920,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'dgvProductCode
             '
+            Me.dgvProductCode.DataPropertyName = "ProductCode"
             Me.dgvProductCode.HeaderText = "Product Code"
             Me.dgvProductCode.Name = "dgvProductCode"
             Me.dgvProductCode.ReadOnly = True

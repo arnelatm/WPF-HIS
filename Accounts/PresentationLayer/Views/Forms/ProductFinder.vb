@@ -27,6 +27,11 @@ Public Class ProductFinder
             dgvLocation.Y = pnt.Y - Height
         End If
         DataGridViewProducts.MultiSelect = False
+
+        DataGridViewProducts.DefaultCellStyle.SelectionBackColor = Color.LightBlue
+        DataGridViewProducts.DefaultCellStyle.SelectionForeColor = Color.Black
+
+
     End Sub
 
     Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs)
@@ -126,11 +131,12 @@ Public Class ProductFinder
         DialogResult = DialogResult.Cancel
         Close()
     End Sub
-
-    Private Sub txtFinder_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles txtFinder.PreviewKeyDown
-
+    Private Sub dgv_CellEnter(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DataGridViewProducts.CellEnter
+        If Me.DataGridViewProducts.CurrentCell IsNot Nothing Then
+            Me.DataGridViewProducts.CurrentCell.Style.BackColor = Color.White
+            Me.DataGridViewProducts.CurrentCell.Style.ForeColor = Color.Black
+        End If
     End Sub
-
 
 End Class
 

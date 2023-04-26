@@ -13,7 +13,7 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _footer As DgvFooter
         Private _PurchaseDetails As List(Of PurchaseDetailView)
-        Public Event ProductCodeChanged() Implements IPurchaseView.ProductCodeChanged
+        Public Event ProductCodeChanged(productCode As String, bs As BindingSource) Implements IPurchaseView.ProductCodeChanged
 
         Public Sub New()
             MyBase.New()
@@ -336,10 +336,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchaseDetails.CellEndEdit
-            'If DataGridViewPurchaseDetails.CurrentCell.RowIndex = 0 Then
-            With DataGridViewPurchaseDetails.CurrentCell
-                Dim cColumnName = .OwningColumn.Name
-                If cColumnName = $"dgvProductName" Then 'Or cColumnName = $"dgvdebit" Or cColumnName = $"dgvcredit" Then
+            With DataGridViewPurchaseDetails
+                Dim cColumnName = .CurrentCell.OwningColumn.Name
+                If cColumnName = $"dgvProductName" Then
                     With bsPurchaseDetails
                         Dim findText = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductName
                         Dim form As New ProductFinder(findText, DataGridViewPurchaseDetails)
@@ -350,17 +349,99 @@ Namespace PresentationLayer.Views.Forms
                             DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductName = sName
                             ' Yes, so grab the values you want from the dialog here
                             '. = form.SelectedId
-                        Else
-
                         End If
-
                     End With
-                ElseIf cColumnName = $"dgvProductCode" Then
-                    RaiseEvent ProductCodeChanged()
                 End If
             End With
+        End Sub
+
+        Private Sub dataGridView1_CellValidating(ByVal sender As Object, ByVal e As DataGridViewCellValidatingEventArgs) Handles DataGridViewPurchaseDetails.CellValidating
+
+            Me.DataGridViewPurchaseDetails.Rows(e.RowIndex).ErrorText = ""
+
+            ' Don't try to validate the 'new row' until finished 
+            ' editing since there
+            ' is not any point in validating its initial value.
+            If DataGridViewPurchaseDetails.Rows(e.RowIndex).IsNewRow Then Return
+            With DataGridViewPurchaseDetails
+                Dim cColumnName = .CurrentCell.OwningColumn.Name
+                If cColumnName = "dgvProductCode" Then
+                    If e.FormattedValue <> "" Then
+                        RaiseEvent ProductCodeChanged(e.FormattedValue, bsPurchaseDetails)
+                        If DataGridViewPurchaseDetails.CurrentRow().Cells("dgvProductName").Value = "" Then
+                            Messaging.ShowPmMessage(True, "MsgInvalidCode", {"fieldName", Messaging.TranslateCaption("Product Code")})
+                            e.Cancel = True
+                        Else
+                            'DataGridViewPurchaseDetails.CurrentCell = DataGridViewPurchaseDetails(3, DataGridViewPurchaseDetails.CurrentCell.RowIndex())
+                        End If
+                    End If
+                ElseIf cColumnName = "dgvProductName" Then
+
+                    'With bsPurchaseDetails
+                    '    Dim findText = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductName
+                    '    Dim form As New ProductFinder(findText, DataGridViewPurchaseDetails)
+                    '    If form.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                    '        Dim sIdNo As Int32 = form.SelectedId
+                    '        Dim sName As String = form.SelectedName
+                    '        DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductIdNo = sIdNo
+                    '        DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductName = sName
+                    '        ' Yes, so grab the values you want from the dialog here
+                    '        '. = form.SelectedId
+                    '    Else
+
+                    '    End If
+
+                    'End With
+
+                End If
+            End With
+
+            'If Not Integer.TryParse(e.FormattedValue.ToString(), newInteger) OrElse newInteger < 0 Then
+
+            '    e.Cancel = True
+            '    Me.DataGridViewPurchaseDetails.Rows(e.RowIndex).ErrorText = "the value must be a non-negative integer"
+
             'End If
         End Sub
+
+        'Private Sub ValidateByCell(ByVal sender As Object, ByVal data As DataGridViewCellCancelEventArgs) Handles DataGridViewPurchaseDetails.CellValidating
+
+        '    Dim row As DataGridViewRow = DataGridViewPurchaseDetails.Rows(data.RowIndex)
+        '    Dim productCodeCell As DataGridViewCell = row.Cells(DataGridViewPurchaseDetails.Columns("dgvProductCode").Index)
+        '    Dim productNameCell As DataGridViewCell = row.Cells(DataGridViewPurchaseDetails.Columns("dgvProductName").Index)
+        '    data.Cancel = Not (IsProductCodeGood(productCodeCell) AndAlso IsProductNameGood(productNameCell))
+        'End Sub
+
+        'Private Function IsProductCodeGood(ByRef cell As DataGridViewCell) As Boolean
+        '    If cell.Value IsNot Nothing Then
+        '        If cell.Value.ToString().Length = 0 Then
+        '            cell.ErrorText = "Please enter a product code"
+        '            DataGridViewPurchaseDetails.Rows(cell.RowIndex).ErrorText = "Please enter a product code"
+        '            Return False
+        '        ElseIf cell.Value.ToString().Equals("0") Then
+        '            cell.ErrorText = "Zero is not a valid product code"
+        '            DataGridViewPurchaseDetails.Rows(cell.RowIndex).ErrorText = "Zero is not a valid product code"
+        '            Return False
+        '            'ElseIf Not Integer.TryParse(cell.Value.ToString(), New Integer()) Then
+        '            '    cell.ErrorText = "A Track must be a number"
+        '            '    DataGridViewPurchaseDetails.Rows(cell.RowIndex).ErrorText =
+        '            '"A Track must be a number"
+        '            '    Return False
+        '        End If
+        '    End If
+        '    Return True
+        'End Function
+
+        'Private Function IsProductNameGood(ByRef cell As DataGridViewCell) As Boolean
+        '    If cell.Value IsNot Nothing Then
+        '        If cell.Value.ToString().Length = 0 Or cell.Value.ToString().Equals("") Then
+        '            cell.ErrorText = "Please enter a product name"
+        '            DataGridViewPurchaseDetails.Rows(cell.RowIndex).ErrorText = "Please enter a product name"
+        '            Return False
+        '        End If
+        '    End If
+        '    Return True
+        'End Function
 
         Private Sub OnTransactionDateValidated(sender As Object, e As EventArgs) Handles dtpTransactionDate.Validated
             Presenter.UpdateDueDate()
@@ -389,8 +470,8 @@ Namespace PresentationLayer.Views.Forms
         '    End If
         'End Sub
 
-        Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) _
-                Handles DataGridViewPurchaseDetails.UserDeletingRow
+
+        Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewPurchaseDetails.UserDeletingRow
             Dim PurchaseDetailRow As DataGridViewRow = DataGridViewPurchaseDetails.Rows(0)
             If DataGridViewPurchaseDetails.SelectedRows.Contains(PurchaseDetailRow) Then
                 ' Do not allow the user to delete the first row.
@@ -442,25 +523,27 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
 
-        Private Sub DataGridViewPurchase_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchaseDetails.CellValueChanged
-            If e.RowIndex >= 0 Then
-                Select Case DataGridViewPurchaseDetails.Columns(e.ColumnIndex).Name
-                    Case "ProductName"
-                        Dim newText As String = Me.DataGridViewPurchaseDetails.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString()
-
-                        'dgvProductIdNo.DataSource = ProductsByCode
-                        'dgvProductIdNo.DisplayMember = "Name"
-                        'dgvProductIdNo.ValueMember = "IdNO"
-
-
-
-                        'Case "ColumnCombo"
-                        '    Dim newPriority As String = Me.DataGridViewPurchase.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString()
-                        'Case "ColumnDate"
-                        '    DateTime.TryParse(Me.DataGridViewPurchase.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString(), newDate)
-                End Select
-            End If
-        End Sub
+        'Private Sub DataGridViewPurchase_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchaseDetails.CellValueChanged
+        '    With eventType.BindingSource
+        '        If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
+        '            Dim accountId = eventType.BindingSource.Current.AccountIdNo
+        '            Select Case eventType.PropertyName
+        '                Case $"AccountIdNo"
+        '                    MakePayTypeAndSpecialAccount(eventType.BindingSource.Current, accountId)
+        '                    View.VatAmount = UpdateInputVatAmount(View.JournalItems)
+        '                    eventType.BindingSource.ResetItem(eventType.Row)
+        '                Case $"Debit"
+        '                    MakeDebitAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Debit)
+        '                    eventType.BindingSource.ResetItem(eventType.Row)
+        '                    View.VatAmount = UpdateInputVatAmount(View.JournalItems)
+        '                Case $"Credit"
+        '                    MakeCreditAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Credit)
+        '                    eventType.BindingSource.ResetItem(eventType.Row)
+        '                    View.VatAmount = UpdateInputVatAmount(View.JournalItems)
+        '            End Select
+        '        End If
+        '    End With
+        'End Sub
 
 
         <System.Security.Permissions.UIPermission(System.Security.Permissions.SecurityAction.LinkDemand, Window:=System.Security.Permissions.UIPermissionWindow.AllWindows)>
