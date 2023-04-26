@@ -18,6 +18,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property UnitIdNo As Int16
         Property VatAmount As Decimal
         Property VatPercent As Decimal
+        Property ProductCode As String
 
     End Interface
 

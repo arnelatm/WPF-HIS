@@ -20,6 +20,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property PurchaseDetails As List(Of PurchaseDetailView)
         Property ProductsByCode As Object
         Property UnitsByCode As Object
+        Event ProductCodeChanged(productCode As String, bs As BindingSource)
+
     End Interface
 
 End Namespace

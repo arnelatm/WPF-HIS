@@ -21,6 +21,7 @@ Namespace PresentationLayer.Views
         Public Property VatPercent As Decimal Implements IPurchaseDetailView.VatPercent
         Public Property Errors As List(Of String) Implements IView.Errors
         Public Property DataFilter As String Implements IView.DataFilter
+        Public Property ProductCode As String Implements IPurchaseDetailView.ProductCode
 
     End Class
 
