@@ -1,4 +1,5 @@
 ﻿Imports AATM.Accounts.DataLayer.AdoNet
+Imports AATM.Libraries.CBaseControlsLibrary
 
 Public Class ProductFinder
 
@@ -120,9 +121,12 @@ Public Class ProductFinder
 
     Public Property SelectedId As Int32
     Public Property SelectedName As String
+    Public Property SelectedCode As String
+
     Private Sub btnOk_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
         SelectedId = DataGridViewProducts.CurrentRow.Cells(1).Value
         SelectedName = DataGridViewProducts.CurrentRow.Cells(0).Value
+        SelectedCode = DataGridViewProducts.CurrentRow.Cells(2).Value
         DialogResult = DialogResult.OK
         Close()
     End Sub
@@ -138,5 +142,10 @@ Public Class ProductFinder
         End If
     End Sub
 
+    Private Sub DataGridViewProducts_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles DataGridViewProducts.PreviewKeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnOk.PerformClick()
+        End If
+    End Sub
 End Class
 
