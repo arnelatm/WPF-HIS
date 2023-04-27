@@ -313,8 +313,7 @@ Namespace PresentationLayer.Views.Forms
         '    DataGridViewPurchaseDetails.Refresh()
         'End Sub
 
-        Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) _
-            Handles DataGridViewPurchaseDetails.CellBeginEdit
+        Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewPurchaseDetails.CellBeginEdit
             If DataGridViewPurchaseDetails.CurrentCell.RowIndex() = 0 Then
                 With DataGridViewPurchaseDetails.CurrentCell
                     Dim cColumnName = .OwningColumn.Name.ToLower()
@@ -343,10 +342,9 @@ Namespace PresentationLayer.Views.Forms
                         Dim findText = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductName
                         Dim form As New ProductFinder(findText, DataGridViewPurchaseDetails)
                         If form.ShowDialog() = Windows.Forms.DialogResult.OK Then
-                            Dim sIdNo As Int32 = form.SelectedId
-                            Dim sName As String = form.SelectedName
-                            DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductIdNo = sIdNo
-                            DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductName = sName
+                            DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductIdNo = form.SelectedId
+                            DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductName = form.SelectedName
+                            DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductCode = form.SelectedCode
                             ' Yes, so grab the values you want from the dialog here
                             '. = form.SelectedId
                         End If
@@ -372,6 +370,7 @@ Namespace PresentationLayer.Views.Forms
                             Messaging.ShowPmMessage(True, "MsgInvalidCode", {"fieldName", Messaging.TranslateCaption("Product Code")})
                             e.Cancel = True
                         Else
+                            'MoveToGridView(DataGridViewPurchaseDetails, "dgvUnitIdNo")
                             'DataGridViewPurchaseDetails.CurrentCell = DataGridViewPurchaseDetails(3, DataGridViewPurchaseDetails.CurrentCell.RowIndex())
                         End If
                     End If
@@ -402,6 +401,21 @@ Namespace PresentationLayer.Views.Forms
             '    Me.DataGridViewPurchaseDetails.Rows(e.RowIndex).ErrorText = "the value must be a non-negative integer"
 
             'End If
+        End Sub
+
+
+        Private Sub CellValidated(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DataGridViewPurchaseDetails.CellValidated
+
+            ' Clear any error messages that may have been set in cell validation.
+            DataGridViewPurchaseDetails.Rows(e.RowIndex).ErrorText = Nothing
+            With DataGridViewPurchaseDetails
+                Dim cColumnName = .CurrentCell.OwningColumn.Name
+                If cColumnName = "dgvProductCode" And DataGridViewPurchaseDetails.CurrentRow().Cells("dgvProductName").Value <> "" Then
+                    'MoveToGridView(DataGridViewPurchaseDetails, "dgvUnitIdNo")
+                    'ataGridViewPurchaseDetails.CurrentCell = DataGridViewPurchaseDetails(3, DataGridViewPurchaseDetails.CurrentCell.RowIndex())
+                    SendKeys.Send("{Tab}")
+                End If
+            End With
         End Sub
 
         'Private Sub ValidateByCell(ByVal sender As Object, ByVal data As DataGridViewCellCancelEventArgs) Handles DataGridViewPurchaseDetails.CellValidating
