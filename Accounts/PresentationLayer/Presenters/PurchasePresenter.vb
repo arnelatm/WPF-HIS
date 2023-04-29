@@ -50,7 +50,9 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("UnitIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("VatAmount", GetType(Decimal))
             DtUpdateTable.Columns.Add("VatPercent", GetType(Decimal))
+            AddHandler view.ProductUnitEditing, AddressOf OnProductUnitEditing
             AddHandler view.ProductCodeChanged, AddressOf OnProductCodeChanged
+            AddHandler view.ProductUnitSelection, AddressOf OnProductUnitSelection
 
         End Sub
 
@@ -246,12 +248,14 @@ Namespace PresentationLayer.Presenters
             If item IsNot Nothing Then
                 current.ProductIdNo = item.IdNo
                 current.ProductName = item.ProductName
+                'SetProductUnits(item.IdNo)
             Else
                 current.ProductIdNo = ""
                 current.ProductName = ""
                 Messaging.Show(True, "Invalid Product Code!")
             End If
         End Sub
+
 
         Public Overrides Function IsOkToEditRecord() As Boolean
             If Not MyBase.IsOkToEditRecord() Then
@@ -297,6 +301,8 @@ Namespace PresentationLayer.Presenters
             If item IsNot Nothing Then
                 bs.Current.ProductIdNo = item.IdNo
                 bs.Current.ProductName = item.ProductName
+                'SetProductUnits(item.IdNo)
+                'bs.ResetBindings(False)
             Else
                 bs.Current.ProductIdNo = ""
                 bs.Current.ProductName = ""
@@ -318,6 +324,21 @@ Namespace PresentationLayer.Presenters
             'reportFileName = "Check Printing" & View.AccountIdNo.ToString() & ".Rpt"
             'Dim cForm As New ReportForm(reportFileName, checkAmountInWords, "CheckAmountInWords", GetPayeeName(View.PayeeIdNo), "PayeeName", View.CheckDate, "CheckDate", Convert.ToDecimal(View.Amount), "CheckAmount", language, "Language", View.Notes, "Notes")
             'cForm.Show()
+        End Sub
+
+
+        Private Sub OnProductUnitSelection(productIdNo As Int32, bs As BindingSource)
+            SetProductUnits(productIdNo)
+        End Sub
+
+        Private Sub OnProductUnitEditing(productIdNo As Int32, bs As BindingSource)
+            SetProductUnits(productIdNo)
+        End Sub
+
+        Private Sub SetProductUnits(productIdNo As Int16)
+            Dim data As New ArrayList
+            data.Add({"ProductUnit_View", "UnitsByProduct", "UnitName,IdNo,UnitCode", "ProductIdNo = " + productIdNo.ToString()})
+            CreateLookupDataThread(data)
         End Sub
 
     End Class

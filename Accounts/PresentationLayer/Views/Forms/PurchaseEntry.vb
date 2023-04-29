@@ -14,7 +14,8 @@ Namespace PresentationLayer.Views.Forms
         Private _footer As DgvFooter
         Private _PurchaseDetails As List(Of PurchaseDetailView)
         Public Event ProductCodeChanged(productCode As String, bs As BindingSource) Implements IPurchaseView.ProductCodeChanged
-
+        Public Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource) Implements IPurchaseView.ProductUnitSelection
+        Public Event ProductUnitEditing(productIdNo As Int32, bs As BindingSource) Implements IPurchaseView.ProductUnitEditing
         Public Sub New()
             MyBase.New()
             ' This call is required by the designer.
@@ -36,8 +37,31 @@ Namespace PresentationLayer.Views.Forms
 
 #Region "Fields"
 
+
         Private Property ProductsByCode Implements IPurchaseView.ProductsByCode
         Private Property UnitsByCode Implements IPurchaseView.UnitsByCode
+
+        Private _unitsByProduct As Object
+
+        Private Property UnitsByProduct Implements IPurchaseView.UnitsByProduct
+            Get
+                Return _unitsByProduct
+            End Get
+            Set
+                _unitsByProduct = Value
+                'dgvUnitIdNo.DataSource = Value
+            End Set
+        End Property
+
+        'Private Property UnitsByCode Implements IPurchaseView.UnitsByCode
+        '    Get
+        '        Return _unitsByCode
+        '    End Get
+        '    Set
+        '        _unitsByCode = Value
+        '        dgvUnitIdNo.DataSource = Value
+        '    End Set
+        'End Property
 
         Public Property Amount As Decimal Implements IPurchaseView.Amount
             Get
@@ -313,26 +337,26 @@ Namespace PresentationLayer.Views.Forms
         '    DataGridViewPurchaseDetails.Refresh()
         'End Sub
 
-        Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewPurchaseDetails.CellBeginEdit
-            If DataGridViewPurchaseDetails.CurrentCell.RowIndex() = 0 Then
-                With DataGridViewPurchaseDetails.CurrentCell
-                    Dim cColumnName = .OwningColumn.Name.ToLower()
-                    If cColumnName = $"dgvProductIdNo" Then
-
-                    End If
-                    '    Beep()
-                    '    e.Cancel = True
-                    '    DataGridViewPurchaseDetails.EndEdit()
-                    'End If
-                End With
-                'ElseIf (DataGridViewPurchaseDetails.CurrentRow.Cells("dgvPaidAmount").Value <> 0 Or DataGridViewPurchaseDetails.CurrentRow.Cells("dgvDiscountTaken").Value <> 0) _
-                '       And DataGridViewPurchaseDetails.CurrentCell.OwningColumn.Name.ToLower() = $"dgvProductIdNo" Then
-                '    Beep()
-                '    e.Cancel = True
-                '    DataGridViewPurchaseDetails.EndEdit()
-                '    Messaging.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
-            End If
-        End Sub
+        'Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewPurchaseDetails.CellBeginEdit
+        '    'If DataGridViewPurchaseDetails.CurrentCell.RowIndex() = 0 Then
+        '    With DataGridViewPurchaseDetails.CurrentCell
+        '        Dim cColumnName = .OwningColumn.Name()
+        '        If cColumnName = $"dgvUnitIdNo" Then
+        '            RaiseEvent ProductUnitSelection(DataGridViewPurchaseDetails.CurrentRow.Cells("dgvProductIdNo").Value, bsPurchaseDetails)
+        '        End If
+        '        '    Beep()
+        '        '    e.Cancel = True
+        '        '    DataGridViewPurchaseDetails.EndEdit()
+        '        'End If
+        '    End With
+        '    'ElseIf (DataGridViewPurchaseDetails.CurrentRow.Cells("dgvPaidAmount").Value <> 0 Or DataGridViewPurchaseDetails.CurrentRow.Cells("dgvDiscountTaken").Value <> 0) _
+        '    '       And DataGridViewPurchaseDetails.CurrentCell.OwningColumn.Name.ToLower() = $"dgvProductIdNo" Then
+        '    '    Beep()
+        '    '    e.Cancel = True
+        '    '    DataGridViewPurchaseDetails.EndEdit()
+        '    '    Messaging.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
+        '    ' End If
+        'End Sub
 
         Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchaseDetails.CellEndEdit
             With DataGridViewPurchaseDetails
@@ -345,10 +369,14 @@ Namespace PresentationLayer.Views.Forms
                             DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductIdNo = form.SelectedId
                             DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductName = form.SelectedName
                             DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductCode = form.SelectedCode
+                            bsPurchaseDetails.ResetBindings(False)
                             ' Yes, so grab the values you want from the dialog here
                             '. = form.SelectedId
                         End If
                     End With
+                ElseIf cColumnName = $"dgvUnitIdNo" Then
+                    dgvUnitIdNo.DataSource = UnitsByCode
+                    DataGridViewPurchaseDetails.Refresh()
                 End If
             End With
         End Sub
@@ -513,11 +541,39 @@ Namespace PresentationLayer.Views.Forms
 
 
         Private Sub grid_EditingControlShowing(ByVal s As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles DataGridViewPurchaseDetails.EditingControlShowing
-            Dim comboBox = TryCast(e.Control, DataGridViewComboBoxEditingControl)
-            If comboBox IsNot Nothing Then
-                comboBox.DropDownStyle = ComboBoxStyle.DropDown
-                comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend
-            End If
+            With DataGridViewPurchaseDetails
+                Dim cColumnName = .CurrentCell.OwningColumn.Name
+                If cColumnName = "dgvUnitIdNo" Then
+                    Dim comboBox = TryCast(e.Control, DataGridViewComboBoxEditingControl)
+                    If comboBox IsNot Nothing Then
+                        RaiseEvent ProductUnitEditing(DataGridViewPurchaseDetails.CurrentRow.Cells("dgvProductIdNo").Value, bsPurchaseDetails)
+                        comboBox.DropDownStyle = ComboBoxStyle.DropDown
+                        comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+                        comboBox.DataSource = UnitsByProduct
+                    End If
+                End If
+            End With
+        End Sub
+
+        Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewPurchaseDetails.CellBeginEdit
+            'If DataGridViewPurchaseDetails.CurrentCell.RowIndex() = 0 Then
+            With DataGridViewPurchaseDetails.CurrentCell
+                Dim cColumnName = .OwningColumn.Name()
+                If cColumnName = $"dgvUnitIdNo" Then
+                    RaiseEvent ProductUnitSelection(DataGridViewPurchaseDetails.CurrentRow.Cells("dgvProductIdNo").Value, bsPurchaseDetails)
+                End If
+                '    Beep()
+                '    e.Cancel = True
+                '    DataGridViewPurchaseDetails.EndEdit()
+                'End If
+            End With
+            'ElseIf (DataGridViewPurchaseDetails.CurrentRow.Cells("dgvPaidAmount").Value <> 0 Or DataGridViewPurchaseDetails.CurrentRow.Cells("dgvDiscountTaken").Value <> 0) _
+            '       And DataGridViewPurchaseDetails.CurrentCell.OwningColumn.Name.ToLower() = $"dgvProductIdNo" Then
+            '    Beep()
+            '    e.Cancel = True
+            '    DataGridViewPurchaseDetails.EndEdit()
+            '    Messaging.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
+            ' End If
         End Sub
 
 
