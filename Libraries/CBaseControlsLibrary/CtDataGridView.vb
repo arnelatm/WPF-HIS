@@ -128,11 +128,6 @@ Public Class CtDataGridView
     '    ResumeDrawing()
     'End Sub
 
-    'Private Sub dataGridView1_CellLeave(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles Me.CellLeave
-    '    If CurrentCell IsNot Nothing Then 'AndAlso TypeOf CurrentCell Is CtDgvDtpCell Then
-    '        EditMode = _origEditMode
-    '    End If
-    'End Sub
 
     Public ReadOnly Property FirstEditableColumn As Integer
         Get
@@ -901,26 +896,26 @@ Public Class CtDataGridView
         Return matchSw
     End Function
 
-    Private Sub WireEditingControlEvents()
-        'AddHandler EditingPanel.Click, EditingControls_Click
-        'EditingPanel.DoubleClick += EditingControls_DoubleClick
-        'EditingPanel.MouseClick += EditingControls_MouseClick
-        'EditingPanel.MouseDoubleClick += EditingControls_MouseDoubleClick
-        'EditingPanel.MouseDown += EditingControls_MouseDown
-        'EditingPanel.MouseEnter += EditingControls_MouseEnter
-        'EditingPanel.MouseLeave += EditingControls_MouseLeave
-        'EditingPanel.MouseMove += EditingControls_MouseMove
-        'EditingPanel.MouseUp += EditingControls_MouseUp
-        'EditingControl.Click += EditingControls_Click
-        'EditingControl.DoubleClick += EditingControls_DoubleClick
-        'EditingControl.MouseClick += EditingControls_MouseClick
-        'EditingControl.MouseDoubleClick += EditingControls_MouseDoubleClick
-        'EditingControl.MouseDown += EditingControls_MouseDown
-        'EditingControl.MouseEnter += EditingControls_MouseEnter
-        'EditingControl.MouseLeave += EditingControls_MouseLeave
-        'EditingControl.MouseMove += EditingControls_MouseMove
-        'EditingControl.MouseUp += EditingControls_MouseUp
-    End Sub
+    'Private Sub WireEditingControlEvents()
+    '    'AddHandler EditingPanel.Click, EditingControls_Click
+    '    'EditingPanel.DoubleClick += EditingControls_DoubleClick
+    '    'EditingPanel.MouseClick += EditingControls_MouseClick
+    '    'EditingPanel.MouseDoubleClick += EditingControls_MouseDoubleClick
+    '    'EditingPanel.MouseDown += EditingControls_MouseDown
+    '    'EditingPanel.MouseEnter += EditingControls_MouseEnter
+    '    'EditingPanel.MouseLeave += EditingControls_MouseLeave
+    '    'EditingPanel.MouseMove += EditingControls_MouseMove
+    '    'EditingPanel.MouseUp += EditingControls_MouseUp
+    '    'EditingControl.Click += EditingControls_Click
+    '    'EditingControl.DoubleClick += EditingControls_DoubleClick
+    '    'EditingControl.MouseClick += EditingControls_MouseClick
+    '    'EditingControl.MouseDoubleClick += EditingControls_MouseDoubleClick
+    '    'EditingControl.MouseDown += EditingControls_MouseDown
+    '    'EditingControl.MouseEnter += EditingControls_MouseEnter
+    '    'EditingControl.MouseLeave += EditingControls_MouseLeave
+    '    'EditingControl.MouseMove += EditingControls_MouseMove
+    '    'EditingControl.MouseUp += EditingControls_MouseUp
+    'End Sub
 
 
 
