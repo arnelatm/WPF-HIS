@@ -11,6 +11,7 @@
         Public Property IdNo As Int32
         Public Property NetAmount As Decimal
         Public Property Price As Decimal
+        Public Property ProductCode As String
         Public Property ProductIdNo As Int32
         Public Property ProductName As String
         Public Property PurchaseIdNo As Int32

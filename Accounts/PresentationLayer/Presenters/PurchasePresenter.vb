@@ -41,6 +41,7 @@ Namespace PresentationLayer.Presenters
 
             DtUpdateTable.Columns.Add("BonusQuantity", GetType(Int16))
             DtUpdateTable.Columns.Add("DiscountAmount", GetType(Decimal))
+            DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("NetAmount", GetType(Decimal))
             DtUpdateTable.Columns.Add("Price", GetType(Decimal))
             DtUpdateTable.Columns.Add("ProductIdNo", GetType(Int16))
@@ -85,7 +86,7 @@ Namespace PresentationLayer.Presenters
             workRow("PurchaseIdNo") = View.IdNo
             workRow("Quantity") = itemDataView.Quantity
             workRow("UnitIdNo") = itemDataView.UnitIdNo
-            workRow("VatAmount") = If(itemDataView.Amount, "")
+            workRow("VatAmount") = itemDataView.VatAmount
             workRow("VatPercent") = itemDataView.VatPercent
         End Sub
 
