@@ -1,6 +1,7 @@
 ﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace DataLayer.AdoNet
     ' Data access object for Purchase
@@ -11,7 +12,7 @@ Namespace DataLayer.AdoNet
         Implements IDao(Of Purchase)
 
 
-        
+
         Private Const FieldList = "Amount," &
                                   "Cancelled," &
                                   "DateCreated," &
@@ -23,7 +24,7 @@ Namespace DataLayer.AdoNet
                                   "SupplierIdNo," &
                                   "TransactionDate," &
                                   "VatAmount," &
-                                  "VatNumber"                   
+                                  "VatNumber"
 
 
         ' ReSharper disable once InconsistentNaming
@@ -35,7 +36,12 @@ Namespace DataLayer.AdoNet
                     " FROM [Purchase]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
-            Return Db.Read(sql, Make, params).FirstOrDefault()
+            Dim data = Db.Read(sql, Make, params).FirstOrDefault()
+            If data IsNot Nothing Then
+                Dim purchaseDetailDao = New PurchaseDetailDao
+                data.PurchaseDetails = purchaseDetailDao.GetRecordsWithGroupIdNo(idNo, "sequence")
+            End If
+            Return data
         End Function
 
         Public Function UpdateRecord(ByRef Purchase As Purchase) As Integer _
@@ -61,24 +67,24 @@ Namespace DataLayer.AdoNet
             Implements IDao(Of Purchase).AddRecord
             Dim sql As String =
                     " INSERT INTO [Purchase] " &
-                    " (Amount,Cancelled,DueDate,IdNo,InvoiceDate,InvoiceNo,Posted,SupplierIdNo,TransactionDate,VatAmount,VatNumber)" &
-                    " VALUES (@Amount,@Cancelled,@DueDate,@IdNo,@InvoiceDate,@InvoiceNo,@Posted,@SupplierIdNo,@TransactionDate,@VatAmount,@VatNumber)"
+                    " (Amount,Cancelled,DueDate,InvoiceDate,InvoiceNo,Posted,SupplierIdNo,TransactionDate,VatAmount,VatNumber)" &
+                    " VALUES (@Amount,@Cancelled,@DueDate,@InvoiceDate,@InvoiceNo,@Posted,@SupplierIdNo,@TransactionDate,@VatAmount,@VatNumber)"
             Return Db.Insert(sql, Take(Purchase))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, Purchase) =
                                     Function(reader) _
-            New Purchase() With { .Amount = Extensions.AsDecimal(reader("Amount")),
-                                  .Cancelled = Extensions.AsBool(reader("Cancelled")),
-                                  .DueDate = Extensions.AsDate(reader("DueDate")),
-                                  .IdNo = Extensions.AsInt(of Int32)(reader("IdNo")),
-                                  .InvoiceDate = Extensions.AsDate(reader("InvoiceDate")),
-                                  .InvoiceNo = Extensions.AsInt(of Int32)(reader("InvoiceNo")),
-                                  .Posted = Extensions.AsBool(reader("Posted")),
-                                  .SupplierIdNo = Extensions.AsInt(of Int32)(reader("SupplierIdNo")),
-                                  .TransactionDate = Extensions.AsDate(reader("TransactionDate")),
-                                  .VatAmount = Extensions.AsDecimal(reader("VatAmount")),
-                                  .VatNumber = Extensions.AsString(reader("VatNumber"))
+            New Purchase() With {.Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
+                                  .Cancelled = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cancelled")),
+                                  .DueDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("DueDate")),
+                                  .IdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("IdNo")),
+                                  .InvoiceDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("InvoiceDate")),
+                                  .InvoiceNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("InvoiceNo")),
+                                  .Posted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Posted")),
+                                  .SupplierIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("SupplierIdNo")),
+                                  .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),
+                                  .VatAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("VatAmount")),
+                                  .VatNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("VatNumber"))
                                 }
 
         Private Function Take(Purchase As Purchase) As Object()

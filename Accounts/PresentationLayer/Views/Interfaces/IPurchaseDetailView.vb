@@ -10,6 +10,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property IdNo As Int32
         Property NetAmount As Decimal
         Property Price As Decimal
+        Property ProductCode As String
         Property ProductIdNo As Int32
         Property ProductName As String
         Property PurchaseIdNo As Int32
@@ -18,7 +19,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property UnitIdNo As Int16
         Property VatAmount As Decimal
         Property VatPercent As Decimal
-        Property ProductCode As String
+
 
     End Interface
 

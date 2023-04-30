@@ -7,10 +7,13 @@ Namespace PresentationLayer.Views
         Implements IPurchaseDetailView
 
         Public Property BonusQuantity As Int32 Implements IPurchaseDetailView.BonusQuantity
+        Public Property DataFilter As String Implements IView.DataFilter
         Public Property DiscountAmount As Decimal Implements IPurchaseDetailView.DiscountAmount
+        Public Property Errors As List(Of String) Implements IView.Errors
         Public Property IdNo As Int32 Implements IPurchaseDetailView.IdNo
         Public Property NetAmount As Decimal Implements IPurchaseDetailView.NetAmount
         Public Property Price As Decimal Implements IPurchaseDetailView.Price
+        Public Property ProductCode As String Implements IPurchaseDetailView.ProductCode
         Public Property ProductIdNo As Int32 Implements IPurchaseDetailView.ProductIdNo
         Public Property ProductName As String Implements IPurchaseDetailView.ProductName
         Public Property PurchaseIdNo As Int32 Implements IPurchaseDetailView.PurchaseIdNo
@@ -19,9 +22,6 @@ Namespace PresentationLayer.Views
         Public Property UnitIdNo As Int16 Implements IPurchaseDetailView.UnitIdNo
         Public Property VatAmount As Decimal Implements IPurchaseDetailView.VatAmount
         Public Property VatPercent As Decimal Implements IPurchaseDetailView.VatPercent
-        Public Property Errors As List(Of String) Implements IView.Errors
-        Public Property DataFilter As String Implements IView.DataFilter
-        Public Property ProductCode As String Implements IPurchaseDetailView.ProductCode
 
     End Class
 

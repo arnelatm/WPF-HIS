@@ -9,13 +9,17 @@ Namespace BusinessLayer
             ' establish business rules
         End Sub
 
+        Public Property BaseUnitIdNo As Int32
         Public Property BonusQuantity As Int32
+        Public Property CategoryIdNo As Int32
         Public Property DiscountAmount As Decimal
         Public Property IdNo As Int32
         Public Property NetAmount As Decimal
         Public Property Price As Decimal
+        Public Property ProductCode As Int32
         Public Property ProductIdNo As Int32
         Public Property ProductName As String
+        Public Property ProductNameAra As String
         Public Property PurchaseIdNo As Int32
         Public Property Quantity As Int32
         Public Property Sequence As Int16

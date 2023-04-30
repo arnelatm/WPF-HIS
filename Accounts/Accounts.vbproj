@@ -314,6 +314,7 @@
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\DoctorDao.vb" />
     <Compile Include="DataLayer\AdoNet\DosagePrintingDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PurchaseDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\DrugAcceptDao.vb" />
     <Compile Include="DataLayer\AdoNet\DosageDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\DrugTransactionDao.vb" />

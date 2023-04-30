@@ -219,6 +219,12 @@ Public Class MappingProfileAccounts
         CreateMap(Of ProductUnitModel, ProductUnitView)().ReverseMap()
         CreateMap(Of IProductUnitView, ProductUnitModel)().ReverseMap()
 
+        CreateMap(Of Purchase, PurchaseModel)().ReverseMap()
+        CreateMap(Of PurchaseModel, IPurchaseView)().ReverseMap()
+
+        CreateMap(Of PurchaseDetail, PurchaseDetailModel)().ReverseMap()
+        CreateMap(Of PurchaseDetailModel, PurchaseDetailView)().ReverseMap()
+
         'CreateMap(Of PmrPatientDisplayModel, PmrPatientDisplayView)()
 
     End Sub

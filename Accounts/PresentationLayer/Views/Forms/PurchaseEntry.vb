@@ -40,28 +40,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Property ProductsByCode Implements IPurchaseView.ProductsByCode
         Private Property UnitsByCode Implements IPurchaseView.UnitsByCode
-
-        Private _unitsByProduct As Object
-
         Private Property UnitsByProduct Implements IPurchaseView.UnitsByProduct
-            Get
-                Return _unitsByProduct
-            End Get
-            Set
-                _unitsByProduct = Value
-                'dgvUnitIdNo.DataSource = Value
-            End Set
-        End Property
-
-        'Private Property UnitsByCode Implements IPurchaseView.UnitsByCode
-        '    Get
-        '        Return _unitsByCode
-        '    End Get
-        '    Set
-        '        _unitsByCode = Value
-        '        dgvUnitIdNo.DataSource = Value
-        '    End Set
-        'End Property
 
         Public Property Amount As Decimal Implements IPurchaseView.Amount
             Get
