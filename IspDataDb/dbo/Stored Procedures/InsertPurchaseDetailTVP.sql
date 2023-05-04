@@ -1,13 +1,10 @@
 ﻿
 
 
-
-
-CREATE PROC [dbo].[InsertPurchaseJournalItemTVP]
-  @MParam JournalItemInsert READONLY
+CREATE PROC [dbo].[InsertPurchaseDetailTVP]
+  @MParam PurchaseDetailInsert READONLY
 AS 
-INSERT  INTO PurchaseJournalItem (AccountIdNo, Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence)
-        SELECT  AccountIdNo, Credit, Debit, JournalIdNo, Notes, RevCostCenterIdNo, Sequence
+INSERT  INTO PurchaseDetail ( BonusQuantity, DiscountAmount, NetAmount, Price, ProductIdNo, PurchaseIdNo, Quantity, [Sequence], UnitIdNo, VatAmount, VatPercent)
+        SELECT  BonusQuantity, DiscountAmount, NetAmount, Price, ProductIdNo, PurchaseIdNo, Quantity, [Sequence], UnitIdNo, VatAmount, VatPercent
         FROM    @MParam
-SET IDENTITY_INSERT DBO.PurchaseJournalItem ON;
-
+SET IDENTITY_INSERT DBO.PurchaseDetail ON;

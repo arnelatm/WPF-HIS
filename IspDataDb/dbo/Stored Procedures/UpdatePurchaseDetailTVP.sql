@@ -4,27 +4,38 @@
 
 
 
-CREATE PROCEDURE  [dbo].[UpdatePurchaseJournalItemTVP]
-  @MParam JournalItemUpdate READONLY, @GroupIdNo as INT
+
+
+
+
+
+
+
+CREATE PROCEDURE  [dbo].[UpdatePurchaseDetailTVP]
+  @MParam PurchaseDetailUpdate READONLY, @GroupIdNo as INT
 AS 
 
 BEGIN
 
 -- Delete non existent records
 DELETE A
-FROM [DBO].PurchaseJournalItem A WHERE A.JOURNALIDNO = @GroupIdNo and NOT EXISTS (SELECT * FROM @MParam where IdNo = A.IdNo )
+FROM [DBO].PurchaseDetail A 
+WHERE  (PurchaseIdNo = @GroupIdNo and NOT EXISTS (SELECT * FROM @MParam where IdNo = A.IdNo ) )
 
--- Update existing PurchaseJournalItems
+-- Update existing Details
 UPDATE a 
-SET a.AccountIdNo = B.AccountIdNo,
-	a.Credit = B.Credit,
-	a.Debit = B.Debit,
-	a.JournalIdNo = @GroupIdNo,
-	a.Notes = B.Notes,
-	a.RevCostCenterIdNo = B.RevCostCenterIdNo,
-	a.[Sequence] = B.[Sequence]
-from PurchaseJournalItem a INNER JOIN @MParam As b
-on a.IDNo = b.IDNo
+SET a.BonusQuantity = b.BonusQuantity,
+	a.DiscountAmount = b.DiscountAmount,
+	a.NetAmount = b.NetAmount,
+	a.Price = b.Price,
+	a.ProductIdNo = b.ProductIdNo ,
+	a.PurchaseIdNo = b.PurchaseIdNo,
+	a.Quantity = b.Quantity,
+	a.[Sequence] = b.[Sequence],
+	a.UnitIdNo = b.UnitIdNo,
+	a.VatAmount = b.VatAmount,
+	a.VatPercent = b.VatPercent
+from PurchaseDetail a INNER JOIN @MParam As b
+on a.IdNo = b.IdNo
 
 END
-

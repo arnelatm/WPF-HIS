@@ -35,7 +35,7 @@ Namespace PresentationLayer.Presenters
             DtInsertTable.Columns.Add("PurchaseIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("Quantity", GetType(Int16))
             DtInsertTable.Columns.Add("Sequence", GetType(Int16))
-            DtInsertTable.Columns.Add("UnitIdNo", GetType(Int32))
+            DtInsertTable.Columns.Add("UnitIdNo", GetType(Int16))
             DtInsertTable.Columns.Add("VatAmount", GetType(Decimal))
             DtInsertTable.Columns.Add("VatPercent", GetType(Decimal))
 
@@ -48,7 +48,7 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("PurchaseIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("Quantity", GetType(Int16))
             DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
-            DtUpdateTable.Columns.Add("UnitIdNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("UnitIdNo", GetType(Int16))
             DtUpdateTable.Columns.Add("VatAmount", GetType(Decimal))
             DtUpdateTable.Columns.Add("VatPercent", GetType(Decimal))
             AddHandler view.ProductUnitEditing, AddressOf OnProductUnitEditing
@@ -97,33 +97,11 @@ Namespace PresentationLayer.Presenters
             Return True
         End Function
 
+        Private ReadOnly _purchaseItemService As New AccountsService("PurchaseDetail")
+
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
-            'Dim passedValue As Integer = retVal
-            'retVal = UpdateChildData(_PurchaseItemService, DtUpdateTable, DtInsertTable, passedValue, "PurchaseIdNo")
-            'If retVal >= 0 Then
-            '    Dim newPurchaseDetail As List(Of PurchaseDetailModel)
-            '    newPurchaseDetail = _PurchaseItemService.GetRecordsWithGroupIdNo(Of PurchaseDetailModel)(View.IdNo, "Sequence")
-            '    'If AddMode Then
-            '    '    For Each item In newPurchaseDetail
-            '    '        If IsAccountsPayableAccount(item.ProductIdNo) Then
-            '    '            retVal = AddApOpenInvoice(item, "AP")
-            '    '            If retVal < 0 Then
-            '    '                Exit For
-            '    '            End If
-            '    '        End If
-            '    '    Next
-            '    'Else
-            '    '    'retVal = RemoveDeletedApOpenInvoices(retVal, newPurchaseDetail)
-            '    '    'If retVal >= 0 Then
-            '    '    '    retVal = AddNewApOpenInvoices(retVal, newPurchaseDetail)
-            '    '    'End If
-            '    'End If
-            'End If
-            'If retVal >= 0 Then
-            '    If IsEmpty(View.ReferenceNo) Then
-            '        retVal = UpdateGlReferenceNumber()
-            '    End If
-            'End If
+            Dim passedValue As Integer = retVal
+            retVal = UpdateChildData(_purchaseItemService, DtUpdateTable, DtInsertTable, passedValue, "PurchaseIdNo")
             If retVal >= 0 AndAlso Not IsEmpty(View.VatNumber) Then
                 Service.UpdateVatNumber(View.VatNumber, View.SupplierIdNo)
             End If

@@ -5,7 +5,7 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface IPurchaseDetailView
         Inherits IView
 
-        Property BonusQuantity As Int32
+        Property BonusQuantity As Int16
         Property DiscountAmount As Decimal
         Property IdNo As Int32
         Property NetAmount As Decimal
@@ -14,7 +14,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property ProductIdNo As Int32
         Property ProductName As String
         Property PurchaseIdNo As Int32
-        Property Quantity As Int32
+        Property Quantity As Int16
         Property Sequence As Int16
         Property UnitIdNo As Int16
         Property VatAmount As Decimal

@@ -51,14 +51,13 @@ Namespace DataLayer.AdoNet
                     "Amount = @Amount," &
                     "Cancelled = @Cancelled," &
                     "DueDate = @DueDate," &
-                    "IdNo = @IdNo," &
                     "InvoiceDate = @InvoiceDate," &
                     "InvoiceNo = @InvoiceNo," &
                     "Posted = @Posted," &
                     "SupplierIdNo = @SupplierIdNo," &
                     "TransactionDate = @TransactionDate," &
                     "VatAmount = @VatAmount," &
-                    "VatNumber = @VatNumber" &
+                    "VatNumber = @VatNumber " &
                     "WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(Purchase))
         End Function
@@ -92,6 +91,7 @@ Namespace DataLayer.AdoNet
                                     "Amount", Purchase.Amount,
                                     "Cancelled", Purchase.Cancelled,
                                     "DueDate", Purchase.DueDate,
+                                    "IdNo", Purchase.IdNo,
                                     "InvoiceDate", Purchase.InvoiceDate,
                                     "InvoiceNo", Purchase.InvoiceNo,
                                     "Posted", Purchase.Posted,
