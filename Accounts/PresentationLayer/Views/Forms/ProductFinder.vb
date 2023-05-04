@@ -1,11 +1,17 @@
 ﻿Imports AATM.Accounts.DataLayer.AdoNet
+Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries.CBaseControlsLibrary
+Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class ProductFinder
 
     Private _dgv As DataGridView
+    Private _service As Object
 
     Public Sub New(textToFind As String, dgvObj As DataGridView)
+
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -28,6 +34,7 @@ Public Class ProductFinder
             dgvLocation.Y = pnt.Y - Height
         End If
         DataGridViewProducts.MultiSelect = False
+        _service = New AccountsService("Product")
 
         DataGridViewProducts.DefaultCellStyle.SelectionBackColor = Color.LightBlue
         DataGridViewProducts.DefaultCellStyle.SelectionForeColor = Color.Black
@@ -122,11 +129,15 @@ Public Class ProductFinder
     Public Property SelectedId As Int32
     Public Property SelectedName As String
     Public Property SelectedCode As String
+    Public Property NoOfUnits As Int16
+    Public Property Product As IProductView
+
 
     Private Sub btnOk_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
         SelectedId = DataGridViewProducts.CurrentRow.Cells(1).Value
-        SelectedName = DataGridViewProducts.CurrentRow.Cells(0).Value
-        SelectedCode = DataGridViewProducts.CurrentRow.Cells(2).Value
+        Dim productModel = _service.GetRecordByIdNo(Of ProductModel)(SelectedId)
+        Product = GlobalVariables.Mapper.Map(productModel, Product)
+        NoOfUnits = _service.CountRecordWithKey(Of Int32)("ProductUnit", "ProductIdNo", SelectedId)
         DialogResult = DialogResult.OK
         Close()
     End Sub

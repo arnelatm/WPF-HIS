@@ -13,6 +13,7 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _footer As DgvFooter
         Private _PurchaseDetails As List(Of PurchaseDetailView)
+        Private _noOfUnits As Int16
         Public Event ProductCodeChanged(productCode As String, bs As BindingSource) Implements IPurchaseView.ProductCodeChanged
         Public Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource) Implements IPurchaseView.ProductUnitSelection
         Public Event ProductUnitEditing(productIdNo As Int32, bs As BindingSource) Implements IPurchaseView.ProductUnitEditing
@@ -345,9 +346,15 @@ Namespace PresentationLayer.Views.Forms
                         Dim findText = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductName
                         Dim form As New ProductFinder(findText, DataGridViewPurchaseDetails)
                         If form.ShowDialog() = Windows.Forms.DialogResult.OK Then
-                            DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductIdNo = form.SelectedId
-                            DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductName = form.SelectedName
-                            DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductCode = form.SelectedCode
+                            Dim product As IProductView = form.Product
+                            _noOfUnits = form.NoOfUnits
+                            DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductIdNo = product.IdNo
+                            DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductName = product.ProductName
+                            DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductCode = product.ProductCode
+                            Dim unitIdNo As Int16 = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).UnitIdNo
+                            If unitIdNo <= 0 Or _noOfUnits = 0 Then
+                                DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).UnitIdNo = product.BaseUnitIdNo
+                            End If
                             bsPurchaseDetails.ResetBindings(False)
                             ' Yes, so grab the values you want from the dialog here
                             '. = form.SelectedId
@@ -421,6 +428,9 @@ Namespace PresentationLayer.Views.Forms
                     'MoveToGridView(DataGridViewPurchaseDetails, "dgvUnitIdNo")
                     'ataGridViewPurchaseDetails.CurrentCell = DataGridViewPurchaseDetails(3, DataGridViewPurchaseDetails.CurrentCell.RowIndex())
                     SendKeys.Send("{Tab}")
+                    If _noOfUnits = 0 Then
+                        SendKeys.Send("{Tab}")
+                    End If
                 End If
             End With
         End Sub
