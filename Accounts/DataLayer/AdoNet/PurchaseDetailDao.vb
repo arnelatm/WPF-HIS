@@ -28,8 +28,8 @@ Namespace DataLayer.AdoNet
                                     "Quantity," &
                                     "Sequence," &
                                     "UnitIdNo," &
-                                    "VatPercent," &
-                                    "VatAmount"
+                                    "VatAmount," &
+                                    "VatPercent"
 
         Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of PurchaseDetail) Implements IDaoChild(Of PurchaseDetail).GetRecordsWithGroupIdNo
             If sortExpression Is Nothing Then
@@ -64,9 +64,10 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, PurchaseDetail) =
                                     Function(reader) _
             New PurchaseDetail() With {
-            .BaseUnitIdNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("BaseUnitIdNo")),
-            .BonusQuantity = AATM.DataLayer.AdoNet.Extensions.AsString(reader("BonusQuantity")),
-            .CategoryIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("CategoryIdNo")),
+            .BaseUnitIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("BaseUnitIdNo")),
+            .BonusQuantity = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("BonusQuantity")),
+            .CategoryIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("CategoryIdNo")),
+            .DiscountAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DiscountAmount")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .NetAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("NetAmount")),
             .Price = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Price")),
@@ -75,7 +76,7 @@ Namespace DataLayer.AdoNet
             .ProductName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ProductName")),
             .ProductNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ProductNameAra")),
             .PurchaseIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("PurchaseIdNo")),
-            .Quantity = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Quantity")),
+            .Quantity = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("Quantity")),
             .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("Sequence")),
             .UnitIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("UnitIdNo")),
             .VatAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("VatAmount")),
