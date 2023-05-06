@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
@@ -53,6 +54,7 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("VatPercent", GetType(Decimal))
             AddHandler view.ProductUnitEditing, AddressOf OnProductUnitEditing
             AddHandler view.ProductCodeChanged, AddressOf OnProductCodeChanged
+            AddHandler view.ProductNameChanged, AddressOf OnProductNameChanged
             AddHandler view.ProductUnitSelection, AddressOf OnProductUnitSelection
 
         End Sub
@@ -280,31 +282,56 @@ Namespace PresentationLayer.Presenters
             If item IsNot Nothing Then
                 bs.Current.ProductIdNo = item.IdNo
                 bs.Current.ProductName = item.ProductName
+                Dim noOfUnits = Service.CountRecordWithKey(Of Int32)("ProductUnit", "ProductIdNo", item.IdNo)
+                bs.Current.UnitCount = noOfUnits
+                If noOfUnits = 0 Or (bs.Current.UnitIdNo Is Nothing Or bs.Current.UnitIdNo = 0) Then
+                    bs.Current.UnitIdNo = item.BaseUnitIdNo
+                Else
+                    Dim nCount As Int16 = Service.CountRecordWith2Key(Of Int32, Int16)("ProductUnit", "ProductIdNo", "UnitIdNo", item.IdNo, bs.Current.UnitIdNo)
+                    If nCount = 0 Then
+                        bs.Current.UnitIdNo = item.BaseUnitIdNo
+                    Else
+                        ' no change, retain current value
+                    End If
+                End If
                 'SetProductUnits(item.IdNo)
                 'bs.ResetBindings(False)
             Else
-                bs.Current.ProductIdNo = ""
-                bs.Current.ProductName = ""
+                bs.Current.ProductIdNo = Nothing
+                bs.Current.ProductName = Nothing
+                bs.Current.UnitIdNo = Nothing
                 Messaging.Show(True, "Invalid Product Code!")
             End If
-
-            'Dim checkAmountInWords As String
-            'Dim currencies As New List(Of CurrencyInfo)()
-            'Dim curCulture = CultureInfo.CurrentCulture
-            'Dim language As String
-            'language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            'currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-            'If language = "ar" Then
-            '    checkAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
-            'Else
-            '    checkAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
-            'End If
-            'Dim reportFileName As String
-            'reportFileName = "Check Printing" & View.AccountIdNo.ToString() & ".Rpt"
-            'Dim cForm As New ReportForm(reportFileName, checkAmountInWords, "CheckAmountInWords", GetPayeeName(View.PayeeIdNo), "PayeeName", View.CheckDate, "CheckDate", Convert.ToDecimal(View.Amount), "CheckAmount", language, "Language", View.Notes, "Notes")
-            'cForm.Show()
         End Sub
 
+        Private Sub OnProductNameChanged(productCode As String, bs As BindingSource)
+            Dim idNo As Int32 = GetRecordFieldWithKeyG(Of Int32)(productCode, "Product", "ProductCode", "IdNo")
+            Dim item As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(idNo)
+            If item IsNot Nothing Then
+                bs.Current.ProductIdNo = item.IdNo
+                bs.Current.ProductName = item.ProductName
+                bs.Current.ProductCode = item.ProductCode
+                Dim noOfUnits = Service.CountRecordWithKey(Of Int32)("ProductUnit", "ProductIdNo", item.IdNo)
+                bs.Current.UnitCount = noOfUnits
+                If noOfUnits = 0 Or (bs.Current.UnitIdNo Is Nothing Or bs.Current.UnitIdNo = 0) Then
+                    bs.Current.UnitIdNo = item.BaseUnitIdNo
+                Else
+                    Dim nCount As Int16 = Service.CountRecordWith2Key(Of Int32, Int16)("ProductUnit", "ProductIdNo", "UnitIdNo", item.IdNo, bs.Current.UnitIdNo)
+                    If nCount = 0 Then
+                        bs.Current.UnitIdNo = item.BaseUnitIdNo
+                    Else
+                        ' no change, retain current value
+                    End If
+                End If
+                'SetProductUnits(item.IdNo)
+                'bs.ResetBindings(False)
+            Else
+                bs.Current.ProductIdNo = Nothing
+                bs.Current.ProductName = Nothing
+                bs.Current.UnitIdNo = Nothing
+                Messaging.Show(True, "Invalid Product Code!")
+            End If
+        End Sub
 
         Private Sub OnProductUnitSelection(productIdNo As Int32, bs As BindingSource)
             SetProductUnits(productIdNo)

@@ -62,8 +62,8 @@ Namespace AdoNet
             Dim searchVal2 As String = ConvertToString(Of TS2)(searchValue2)
 
             Dim sql As String = " Select COUNT(*) FROM [" & tableName & "] " &
-                                " Where " & searchFieldName1 & " = @SearchVal1 and " & searchFieldName2 & " = @SearchVal2 and "
-            Dim params() As Object = {"@SearchVal1", searchVal1, "@SearchVal2", searchVal2, "@SearchVal3"}
+                                " Where " & searchFieldName1 & " = @SearchVal1 and " & searchFieldName2 & " = @SearchVal2 "
+            Dim params() As Object = {"@SearchVal1", searchVal1, "@SearchVal2", searchVal2}
             Return GetDb().Scalar(sql, params)
         End Function
 
