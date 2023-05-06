@@ -17,6 +17,7 @@
         Public Property PurchaseIdNo As Int32
         Public Property Quantity As Int16
         Public Property Sequence As Int16
+        Public Property UnitCount As Int16
         Public Property UnitIdNo As Int16
         Public Property VatAmount As Decimal
         Public Property VatPercent As Decimal
