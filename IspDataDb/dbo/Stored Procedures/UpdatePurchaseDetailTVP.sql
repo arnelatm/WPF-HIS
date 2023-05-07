@@ -33,6 +33,7 @@ SET a.BonusQuantity = b.BonusQuantity,
 	a.Quantity = b.Quantity,
 	a.[Sequence] = b.[Sequence],
 	a.UnitIdNo = b.UnitIdNo,
+	a.UnitSalesPrice = b.UnitSalesPrice,
 	a.VatAmount = b.VatAmount,
 	a.VatPercent = b.VatPercent
 from PurchaseDetail a INNER JOIN @MParam As b

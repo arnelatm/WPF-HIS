@@ -9,6 +9,7 @@
     [Quantity]       SMALLINT        NOT NULL,
     [Sequence]       SMALLINT        NOT NULL,
     [UnitIdNo]       TINYINT         NOT NULL,
+    [UnitSalesPrice] DECIMAL (9, 2)  NOT NULL,
     [VatAmount]      DECIMAL (8, 2)  NULL,
     [VatPercent]     DECIMAL (5, 2)  NULL,
     PRIMARY KEY CLUSTERED ([IdNo] ASC));

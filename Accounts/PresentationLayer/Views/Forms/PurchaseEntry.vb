@@ -350,14 +350,9 @@ Namespace PresentationLayer.Views.Forms
                         If form.ShowDialog() = Windows.Forms.DialogResult.OK Then
                             Dim product As IProductView = form.Product
                             _noOfUnits = form.NoOfUnits
-                            'DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductIdNo = product.IdNo
-                            'DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductName = product.ProductName
-                            'DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductCode = product.ProductCode
-                            'DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).UnitCount = _noOfUnits
                             RaiseEvent ProductNameChanged(product.ProductCode, bsPurchaseDetails)
                             Dim unitIdNo As Int16 = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).UnitIdNo
                             If unitIdNo <= 0 Or _noOfUnits = 0 Then
-                                'DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).UnitIdNo = product.BaseUnitIdNo
                                 SendKeys.Send("{Tab}")
                             End If
                             bsPurchaseDetails.ResetBindings(False)
