@@ -134,10 +134,12 @@ Public Class ProductFinder
 
 
     Private Sub btnOk_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
-        SelectedId = DataGridViewProducts.CurrentRow.Cells(1).Value
-        Dim productModel = _service.GetRecordByIdNo(Of ProductModel)(SelectedId)
-        Product = GlobalVariables.Mapper.Map(productModel, Product)
-        NoOfUnits = _service.CountRecordWithKey(Of Int32)("ProductUnit", "ProductIdNo", SelectedId)
+        If DataGridViewProducts.CurrentRow IsNot Nothing Then
+            SelectedId = DataGridViewProducts.CurrentRow.Cells(1).Value
+            Dim productModel = _service.GetRecordByIdNo(Of ProductModel)(SelectedId)
+            Product = GlobalVariables.Mapper.Map(productModel, Product)
+            NoOfUnits = _service.CountRecordWithKey(Of Int32)("ProductUnit", "ProductIdNo", SelectedId)
+        End If
         DialogResult = DialogResult.OK
         Close()
     End Sub
