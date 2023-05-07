@@ -37,6 +37,7 @@ Namespace PresentationLayer.Presenters
             DtInsertTable.Columns.Add("Quantity", GetType(Int16))
             DtInsertTable.Columns.Add("Sequence", GetType(Int16))
             DtInsertTable.Columns.Add("UnitIdNo", GetType(Int16))
+            DtInsertTable.Columns.Add("UnitSalesPrice", GetType(Decimal))
             DtInsertTable.Columns.Add("VatAmount", GetType(Decimal))
             DtInsertTable.Columns.Add("VatPercent", GetType(Decimal))
 
@@ -50,6 +51,7 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("Quantity", GetType(Int16))
             DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
             DtUpdateTable.Columns.Add("UnitIdNo", GetType(Int16))
+            DtUpdateTable.Columns.Add("UnitSalesPrice", GetType(Decimal))
             DtUpdateTable.Columns.Add("VatAmount", GetType(Decimal))
             DtUpdateTable.Columns.Add("VatPercent", GetType(Decimal))
             AddHandler view.ProductUnitEditing, AddressOf OnProductUnitEditing
@@ -88,6 +90,7 @@ Namespace PresentationLayer.Presenters
             workRow("PurchaseIdNo") = View.IdNo
             workRow("Quantity") = itemDataView.Quantity
             workRow("UnitIdNo") = itemDataView.UnitIdNo
+            workRow("UnitSalesPrice") = itemDataView.UnitSalesPrice
             workRow("VatAmount") = itemDataView.VatAmount
             workRow("VatPercent") = itemDataView.VatPercent
         End Sub

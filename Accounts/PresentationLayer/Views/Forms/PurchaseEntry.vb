@@ -301,12 +301,12 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub DataGridViewPurchaseDetails_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewPurchaseDetails.UserDeletedRow
             'UpdateTotals()
-            UpdateInputVatAmount()
+            'UpdateInputVatAmount()
         End Sub
 
-        Private Sub UpdateInputVatAmount()
-            VatAmount = Presenter.UpdateInputVatAmount(PurchaseDetails)
-        End Sub
+        'Private Sub UpdateInputVatAmount()
+        '    VatAmount = Presenter.UpdateInputVatAmount(PurchaseDetails)
+        'End Sub
 
         Private Overloads Sub Dispose()
             Close()
@@ -549,23 +549,23 @@ Namespace PresentationLayer.Views.Forms
 
 
         Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewPurchaseDetails.UserDeletingRow
-            Dim PurchaseDetailRow As DataGridViewRow = DataGridViewPurchaseDetails.Rows(0)
-            If DataGridViewPurchaseDetails.SelectedRows.Contains(PurchaseDetailRow) Then
-                ' Do not allow the user to delete the first row.
-                Messaging.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
-                ' Cancel the deletion
-                e.Cancel = True
-            ElseIf Presenter.EditMode Then
-                Dim jiIdNo As Integer
-                jiIdNo = DataGridViewPurchaseDetails.CurrentRow.Cells("dgvIdNo").Value
-                If Presenter.ApPaymentExists("AP", jiIdNo) Then
-                    'ElseIf
-                    ' Do not allow the user to delete items with existing payments/discounts (prevent orphaned records)
-                    Messaging.Show(True, "MsgDeletePaidEntryNotAllowed")
-                    ' Cancel the deletion
-                    e.Cancel = True
-                End If
-            End If
+            'Dim PurchaseDetailRow As DataGridViewRow = DataGridViewPurchaseDetails.Rows(0)
+            'If DataGridViewPurchaseDetails.SelectedRows.Contains(PurchaseDetailRow) Then
+            '    ' Do not allow the user to delete the first row.
+            '    Messaging.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
+            '    ' Cancel the deletion
+            '    e.Cancel = True
+            'ElseIf Presenter.EditMode Then
+            '    Dim jiIdNo As Integer
+            '    jiIdNo = DataGridViewPurchaseDetails.CurrentRow.Cells("dgvIdNo").Value
+            '    If Presenter.ApPaymentExists("AP", jiIdNo) Then
+            '        'ElseIf
+            '        ' Do not allow the user to delete items with existing payments/discounts (prevent orphaned records)
+            '        Messaging.Show(True, "MsgDeletePaidEntryNotAllowed")
+            '        ' Cancel the deletion
+            '        e.Cancel = True
+            '    End If
+            'End If
         End Sub
 
         Private Sub PurchaseEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
