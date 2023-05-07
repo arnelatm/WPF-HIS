@@ -279,12 +279,12 @@ Namespace PresentationLayer.Presenters
         Private Sub OnProductCodeChanged(productCode As String, bs As BindingSource)
             Dim idNo As Int32 = GetRecordFieldWithKeyG(Of Int32)(productCode, "Product", "ProductCode", "IdNo")
             Dim item As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(idNo)
-            If item IsNot Nothing Then
+            If item.IdNo > 0 Then
                 bs.Current.ProductIdNo = item.IdNo
                 bs.Current.ProductName = item.ProductName
-                Dim noOfUnits = Service.CountRecordWithKey(Of Int32)("ProductUnit", "ProductIdNo", item.IdNo)
+                Dim noOfUnits = Service.CountRecordWithKey(Of Int32)("ProductUnit", "ProductIdNo", item.IdNo) + 1
                 bs.Current.UnitCount = noOfUnits
-                If noOfUnits = 0 Or (bs.Current.UnitIdNo Is Nothing Or bs.Current.UnitIdNo = 0) Then
+                If noOfUnits = 1 Or (bs.Current.UnitIdNo Is Nothing Or bs.Current.UnitIdNo = 0) Then
                     bs.Current.UnitIdNo = item.BaseUnitIdNo
                 Else
                     Dim nCount As Int16 = Service.CountRecordWith2Key(Of Int32, Int16)("ProductUnit", "ProductIdNo", "UnitIdNo", item.IdNo, bs.Current.UnitIdNo)
