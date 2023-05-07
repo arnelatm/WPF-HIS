@@ -8,6 +8,7 @@
     [UnitIdNo]       TINYINT        NULL,
     [Price]          DECIMAL (9, 2)  NULL,
     [DiscountAmount] DECIMAL (12, 2) NULL,
+    [UnitSalesPrice] DECIMAL (9, 2)  NULL,
     [VatAmount]      DECIMAL (12, 2) NULL,
     [VatPercent]     DECIMAL (5, 2)  NULL,
     [NetAmount]      DECIMAL (12, 2) NULL,

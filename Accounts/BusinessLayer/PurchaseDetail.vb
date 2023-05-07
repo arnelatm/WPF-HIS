@@ -25,6 +25,7 @@ Namespace BusinessLayer
         Public Property Sequence As Int16
         Public Property UnitCount As Int16
         Public Property UnitIdNo As Int16
+        Public Property UnitSalesPrice As Decimal
         Public Property VatAmount As Decimal
         Public Property VatPercent As Decimal
 
