@@ -1,5 +1,5 @@
 ﻿CREATE TYPE [dbo].[PurchaseDetailInsert] AS TABLE (
-    [BonusQuantity]  TINYINT         NOT NULL,
+    [BonusQuantity]  SMALLINT         NOT NULL,
     [DiscountAmount] DECIMAL (8, 2)  NOT NULL,
     [NetAmount]      DECIMAL (10, 2) NOT NULL,
     [Price]          DECIMAL (8, 2)  NOT NULL,
