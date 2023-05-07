@@ -16,7 +16,7 @@ Namespace PresentationLayer.Views.Forms
         Private _PurchaseDetails As List(Of PurchaseDetailView)
         Private _noOfUnits As Int16
         Public Event ProductCodeChanged(productCode As String, bs As BindingSource) Implements IPurchaseView.ProductCodeChanged
-        Public Event ProductNameChanged(productName As String, bs As BindingSource) Implements IPurchaseView.ProductNameChanged
+        'Public Event ProductNameChanged(productName As String, bs As BindingSource) Implements IPurchaseView.ProductNameChanged
         Public Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource) Implements IPurchaseView.ProductUnitSelection
         Public Event ProductUnitEditing(productIdNo As Int32, bs As BindingSource) Implements IPurchaseView.ProductUnitEditing
         Public Sub New()
@@ -342,48 +342,48 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchaseDetails.CellEndEdit
             With DataGridViewPurchaseDetails
-                Dim cColumnName = .CurrentCell.OwningColumn.Name
-                If cColumnName = $"dgvProductName" Then
-                    'With bsPurchaseDetails
-                    '    Dim findText = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductName
-                    '    Dim form As New ProductFinder(findText, DataGridViewPurchaseDetails)
-                    '    If form.ShowDialog() = Windows.Forms.DialogResult.OK Then
-                    '        Dim product As IProductView = form.Product
-                    '        _noOfUnits = form.NoOfUnits
-                    '        If product Is Nothing Then
-                    '            Dim description As String = Messaging.TranslateCaption("Product Name")
-                    '            Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", findText, "fieldDescription", description})
-                    '        Else
-                    '            RaiseEvent ProductNameChanged(product.ProductCode, bsPurchaseDetails)
-                    '            Dim unitIdNo As Int16 = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).UnitIdNo
-                    '            If unitIdNo <= 0 Or _noOfUnits <= 1 Then
-                    '                SendKeys.Send("{Tab}")
-                    '            End If
-                    '            bsPurchaseDetails.ResetBindings(False)
-                    '            ' Yes, so grab the values you want from the dialog here
-                    '            '. = form.SelectedId
-                    '        End If
-                    '    End If
-                    'End With
-                ElseIf cColumnName = $"dgvProductCode" Then
-                    RaiseEvent ProductCodeChanged(DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductCode, bsPurchaseDetails)
-                    Dim cProductName = DataGridViewPurchaseDetails.CurrentRow().Cells("dgvProductName").Value
-                    If Not String.IsNullOrEmpty(cProductName) Then
-                        SendKeys.Send("{Tab}")
-                        If DataGridViewPurchaseDetails.CurrentRow.Cells("dgvUnitCount").Value = 1 Then
-                            SendKeys.Send("{Tab}")
-                        End If
-                    End If
-                End If
+                'Dim cColumnName = .CurrentCell.OwningColumn.Name
+                'If cColumnName = $"dgvProductName" Then
+                '    'With bsPurchaseDetails
+                '    '    Dim findText = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductName
+                '    '    Dim form As New ProductFinder(findText, DataGridViewPurchaseDetails)
+                '    '    If form.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                '    '        Dim product As IProductView = form.Product
+                '    '        _noOfUnits = form.NoOfUnits
+                '    '        If product Is Nothing Then
+                '    '            Dim description As String = Messaging.TranslateCaption("Product Name")
+                '    '            Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", findText, "fieldDescription", description})
+                '    '        Else
+                '    '            RaiseEvent ProductNameChanged(product.ProductCode, bsPurchaseDetails)
+                '    '            Dim unitIdNo As Int16 = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).UnitIdNo
+                '    '            If unitIdNo <= 0 Or _noOfUnits <= 1 Then
+                '    '                SendKeys.Send("{Tab}")
+                '    '            End If
+                '    '            bsPurchaseDetails.ResetBindings(False)
+                '    '            ' Yes, so grab the values you want from the dialog here
+                '    '            '. = form.SelectedId
+                '    '        End If
+                '    '    End If
+                '    'End With
+                'ElseIf cColumnName = $"dgvProductCode" Then
+                '    RaiseEvent ProductCodeChanged(DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductCode, bsPurchaseDetails)
+                '    Dim cProductName = DataGridViewPurchaseDetails.CurrentRow().Cells("dgvProductName").Value
+                '    If Not String.IsNullOrEmpty(cProductName) Then
+                '        SendKeys.Send("{Tab}")
+                '        If DataGridViewPurchaseDetails.CurrentRow.Cells("dgvUnitCount").Value = 1 Then
+                '            SendKeys.Send("{Tab}")
+                '        End If
+                '    End If
+                'End If
             End With
         End Sub
 
         Private Sub dataGridView1_CellValidating(ByVal sender As Object, ByVal e As DataGridViewCellValidatingEventArgs) Handles DataGridViewPurchaseDetails.CellValidating
-            With DataGridViewPurchaseDetails
-                Dim cColumnName = .CurrentCell.OwningColumn.Name
-                If cColumnName = $"dgvProductName" AndAlso DataGridViewPurchaseDetails.IsCurrentCellDirty() Then
-                    With bsPurchaseDetails
-                        Dim findText = DataGridViewPurchaseDetails.CurrentRow.Cells("dgvProductName").EditedFormattedValue
+            If DataGridViewPurchaseDetails.IsCurrentCellDirty() Then
+                With DataGridViewPurchaseDetails
+                    Dim cColumnName = .CurrentCell.OwningColumn.Name
+                    If cColumnName = $"dgvProductName" Then
+                        Dim findText = .CurrentRow.Cells("dgvProductName").EditedFormattedValue
                         Dim form As New ProductFinder(findText, DataGridViewPurchaseDetails)
                         If form.ShowDialog() = Windows.Forms.DialogResult.OK Then
                             Dim product As IProductView = form.Product
@@ -392,9 +392,10 @@ Namespace PresentationLayer.Views.Forms
                                 Dim msg = Messaging.GetParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", findText, "fieldDescription", "Product Name"})
                                 Messaging.Show(msg)
                                 e.Cancel = True
-                                DataGridViewPurchaseDetails.Rows(e.RowIndex).ErrorText = msg
+                                .Rows(e.RowIndex).ErrorText = msg
                             Else
-                                RaiseEvent ProductNameChanged(product.ProductCode, bsPurchaseDetails)
+                                DataGridViewPurchaseDetails.CurrentRow.Cells("dgvProductCode").Value = product.ProductCode
+                                RaiseEvent ProductCodeChanged(product.ProductCode, bsPurchaseDetails)
                                 Dim unitIdNo As Int16 = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).UnitIdNo
                                 If unitIdNo <= 0 Or _noOfUnits <= 1 Then
                                     SendKeys.Send("{Tab}")
@@ -406,9 +407,18 @@ Namespace PresentationLayer.Views.Forms
                         Else
                             e.Cancel = True
                         End If
-                    End With
-                End If
-            End With
+                    ElseIf cColumnName = $"dgvProductCode" Then
+                        RaiseEvent ProductCodeChanged(.CurrentRow.Cells("dgvProductCode").EditedFormattedValue, bsPurchaseDetails)
+                        Dim cProductName = .CurrentRow().Cells("dgvProductName").Value
+                        If Not String.IsNullOrEmpty(cProductName) Then
+                            SendKeys.Send("{Tab}")
+                            If .CurrentRow.Cells("dgvUnitCount").Value = 1 Then
+                                SendKeys.Send("{Tab}")
+                            End If
+                        End If
+                    End If
+                End With
+            End If
         End Sub
 
 
