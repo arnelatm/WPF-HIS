@@ -56,7 +56,7 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("VatPercent", GetType(Decimal))
             AddHandler view.ProductUnitEditing, AddressOf OnProductUnitEditing
             AddHandler view.ProductCodeChanged, AddressOf OnProductCodeChanged
-            AddHandler view.ProductNameChanged, AddressOf OnProductNameChanged
+            'AddHandler view.ProductNameChanged, AddressOf OnProductNameChanged
             AddHandler view.ProductUnitSelection, AddressOf OnProductUnitSelection
 
         End Sub
@@ -273,7 +273,7 @@ Namespace PresentationLayer.Presenters
             '        Dim apOpenInvoiceNumber As Int32 = GetApOpenInvoiceNumber(item.IdNo)
             '        If CheckDependentRecords(Of Int32)(apOpenInvoiceNumber, "CdOiItem", "ApOpenInvoiceIdNo") Then
             '            Return True
-            '        End If
+            '        End IfOnProductNameChanged
             '    End If
             'Next
             Return False
@@ -282,9 +282,33 @@ Namespace PresentationLayer.Presenters
         Private Sub OnProductCodeChanged(productCode As String, bs As BindingSource)
             Dim idNo As Int32 = GetRecordFieldWithKeyG(Of Int32)(productCode, "Product", "ProductCode", "IdNo")
             Dim item As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(idNo)
+            UpdatePurchaseItem(item, bs)
+        End Sub
+
+        Private Sub OnProductUnitSelection(productIdNo As Int32, bs As BindingSource)
+            SetProductUnits(productIdNo)
+        End Sub
+
+        Private Sub OnProductUnitEditing(productIdNo As Int32, bs As BindingSource)
+            SetProductUnits(productIdNo)
+        End Sub
+
+        Private Sub SetProductUnits(productIdNo As Int16)
+            Dim data As New ArrayList
+            data.Add({"ProductUnit_View", "UnitsByProduct", "UnitName,IdNo,UnitCode", "ProductIdNo = " + productIdNo.ToString()})
+            CreateLookupDataThread(data)
+        End Sub
+
+        Private Sub UpdatePurchaseItem(item As ProductModel, bs As BindingSource)
             If item.IdNo > 0 Then
                 bs.Current.ProductIdNo = item.IdNo
                 bs.Current.ProductName = item.ProductName
+                If bs.Current.Quantity = 0 Then
+                    bs.Current.Quantity = 1
+                End If
+                If bs.Current.Price = 0 Then
+                    bs.Current.Price = Service.GetField(Of Decimal, Int32)(item.IdNo, "Product", "IdNo", "Price_Cash")
+                End If
                 Dim noOfUnits = Service.CountRecordWithKey(Of Int32)("ProductUnit", "ProductIdNo", item.IdNo) + 1
                 bs.Current.UnitCount = noOfUnits
                 If noOfUnits = 1 Or (bs.Current.UnitIdNo Is Nothing Or bs.Current.UnitIdNo = 0) Then
@@ -303,51 +327,10 @@ Namespace PresentationLayer.Presenters
                 bs.Current.ProductIdNo = Nothing
                 bs.Current.ProductName = Nothing
                 bs.Current.UnitIdNo = Nothing
+                bs.Current.Price = Nothing
+                bs.Current.ProductCode = Nothing
                 Messaging.Show(True, "Invalid Product Code!")
             End If
-        End Sub
-
-        Private Sub OnProductNameChanged(productCode As String, bs As BindingSource)
-            Dim idNo As Int32 = GetRecordFieldWithKeyG(Of Int32)(productCode, "Product", "ProductCode", "IdNo")
-            Dim item As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(idNo)
-            If item IsNot Nothing Then
-                bs.Current.ProductIdNo = item.IdNo
-                bs.Current.ProductName = item.ProductName
-                bs.Current.ProductCode = item.ProductCode
-                Dim noOfUnits = Service.CountRecordWithKey(Of Int32)("ProductUnit", "ProductIdNo", item.IdNo)
-                bs.Current.UnitCount = noOfUnits
-                If noOfUnits = 0 Or (bs.Current.UnitIdNo Is Nothing Or bs.Current.UnitIdNo = 0) Then
-                    bs.Current.UnitIdNo = item.BaseUnitIdNo
-                Else
-                    Dim nCount As Int16 = Service.CountRecordWith2Key(Of Int32, Int16)("ProductUnit", "ProductIdNo", "UnitIdNo", item.IdNo, bs.Current.UnitIdNo)
-                    If nCount = 0 Then
-                        bs.Current.UnitIdNo = item.BaseUnitIdNo
-                    Else
-                        ' no change, retain current value
-                    End If
-                End If
-                'SetProductUnits(item.IdNo)
-                'bs.ResetBindings(False)
-            Else
-                bs.Current.ProductIdNo = Nothing
-                bs.Current.ProductName = Nothing
-                bs.Current.UnitIdNo = Nothing
-                Messaging.Show(True, "Invalid Product Code!")
-            End If
-        End Sub
-
-        Private Sub OnProductUnitSelection(productIdNo As Int32, bs As BindingSource)
-            SetProductUnits(productIdNo)
-        End Sub
-
-        Private Sub OnProductUnitEditing(productIdNo As Int32, bs As BindingSource)
-            SetProductUnits(productIdNo)
-        End Sub
-
-        Private Sub SetProductUnits(productIdNo As Int16)
-            Dim data As New ArrayList
-            data.Add({"ProductUnit_View", "UnitsByProduct", "UnitName,IdNo,UnitCode", "ProductIdNo = " + productIdNo.ToString()})
-            CreateLookupDataThread(data)
         End Sub
 
     End Class
