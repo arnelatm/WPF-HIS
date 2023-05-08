@@ -397,7 +397,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub OnRowsAdded(ByVal sender As Object, ByVal e As DataGridViewRowsAddedEventArgs) Handles DataGridViewPurchaseDetails.RowsAdded
             If DataGridViewPurchaseDetails.CurrentRow IsNot Nothing Then
-                For i As Integer = 0 To e.RowCount
+                For i As Integer = e.RowIndex - 1 To e.RowCount
                     Dim row As DataGridViewRow = DataGridViewPurchaseDetails.Rows(i)
                     row.Cells("dgvGrossAmount").Value = row.Cells("dgvQuantity").Value * row.Cells("dgvPrice").Value
                     If row.Cells("dgvGrossAmount").Value Is Nothing OrElse row.Cells("dgvGrossAmount").Value = 0 Then
@@ -405,7 +405,20 @@ Namespace PresentationLayer.Views.Forms
                     Else
                         row.Cells("dgvDiscountPercent").Value = String.Format("{0,6:N2}", row.Cells("dgvDiscountAmount").Value / row.Cells("dgvGrossAmount").Value * 100)
                     End If
-                Next
+                    row.Cells("dgvAmtBefVat").Value = row.Cells("dgvGrossAmount").Value - row.Cells("dgvDiscountAmount").Value
+                    row.Cells("dgvAmtBefVat").Value = row.Cells("dgvGrossAmount").Value - row.Cells("dgvDiscountAmount").Value
+                Next i
+                'For i As Integer = 0 To e.RowCount
+                '    Dim row As DataGridViewRow = DataGridViewPurchaseDetails.Rows(i)
+                '    row.Cells("dgvGrossAmount").Value = row.Cells("dgvQuantity").Value * row.Cells("dgvPrice").Value
+                '    If row.Cells("dgvGrossAmount").Value Is Nothing OrElse row.Cells("dgvGrossAmount").Value = 0 Then
+                '        row.Cells("dgvDiscountPercent").Value = String.Format("{0,6:N2}", 0)
+                '    Else
+                '        row.Cells("dgvDiscountPercent").Value = String.Format("{0,6:N2}", row.Cells("dgvDiscountAmount").Value / row.Cells("dgvGrossAmount").Value * 100)
+                '    End If
+                '    row.Cells("dgvAmtBefVat").Value = row.Cells("dgvGrossAmount").Value - row.Cells("dgvDiscountAmount").Value
+                '    row.Cells("dgvAmtBefVat").Value = row.Cells("dgvGrossAmount").Value - row.Cells("dgvDiscountAmount").Value
+                'Next
             End If
         End Sub
 
