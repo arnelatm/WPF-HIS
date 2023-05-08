@@ -6,10 +6,20 @@ Namespace PresentationLayer.Views
     Public Class PurchaseDetailView
         Implements IPurchaseDetailView
 
+        Private _grossAmount As Decimal
+
         Public Property BonusQuantity As Int16 Implements IPurchaseDetailView.BonusQuantity
         Public Property DataFilter As String Implements IView.DataFilter
         Public Property DiscountAmount As Decimal Implements IPurchaseDetailView.DiscountAmount
         Public Property Errors As List(Of String) Implements IView.Errors
+        Public Property GrossAmount As Decimal Implements IPurchaseDetailView.GrossAmount
+            Get
+                Return Price * Quantity
+            End Get
+            Set(value As Decimal)
+                _grossAmount = value
+            End Set
+        End Property
         Public Property IdNo As Int32 Implements IPurchaseDetailView.IdNo
         Public Property NetAmount As Decimal Implements IPurchaseDetailView.NetAmount
         Public Property Price As Decimal Implements IPurchaseDetailView.Price
