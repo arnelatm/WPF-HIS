@@ -21,8 +21,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property UnitSalesPrice As Decimal
         Property VatAmount As Decimal
         Property VatPercent As Decimal
-
-
+        Property GrossAmount As Decimal
     End Interface
 
 End Namespace

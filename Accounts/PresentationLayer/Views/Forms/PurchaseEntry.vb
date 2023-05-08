@@ -397,8 +397,8 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub OnRowsAdded(ByVal sender As Object, ByVal e As DataGridViewRowsAddedEventArgs) Handles DataGridViewPurchaseDetails.RowsAdded
             If DataGridViewPurchaseDetails.CurrentRow IsNot Nothing Then
-                For i As Integer = 0 To e.RowCount - 1
-                    Dim row As DataGridViewRow = DataGridViewPurchaseDetails.Rows(e.RowIndex)
+                For i As Integer = 0 To e.RowCount
+                    Dim row As DataGridViewRow = DataGridViewPurchaseDetails.Rows(i)
                     row.Cells("dgvGrossAmount").Value = row.Cells("dgvQuantity").Value * row.Cells("dgvPrice").Value
                     If row.Cells("dgvGrossAmount").Value Is Nothing OrElse row.Cells("dgvGrossAmount").Value = 0 Then
                         row.Cells("dgvDiscountPercent").Value = String.Format("{0,6:N2}", 0)
