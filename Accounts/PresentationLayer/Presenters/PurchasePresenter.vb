@@ -321,6 +321,7 @@ Namespace PresentationLayer.Presenters
                         ' no change, retain current value
                     End If
                 End If
+                'bs.Current.GrossAmount = bs.Current.Price * bs.Current.Quantity
                 'SetProductUnits(item.IdNo)
                 'bs.ResetBindings(False)
             Else
