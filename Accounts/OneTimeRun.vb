@@ -136,6 +136,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgUnitEqualToBaseUnit", "Sorry, unit can't be the same as the base unit.", "Error")
         Messaging.AddMessage("MsgUnitQtyEqualToBUQty", "Sorry, unit quantity can't be the same as the base unit quantity.", "Error")
         Messaging.AddMessage("MsgInvalidCode", "Sorry, no such {fieldName} on file.", "Error")
+        Messaging.AddMessage("MsgText2Short", "Search text too short, must be at least 3 characters.", "warning")
     End Sub
 
     'Public Shared Sub CreateEnums()
