@@ -20,7 +20,7 @@ Public Class ProductFinder
         Me.MinimizeBox = False
         Me.MaximizeBox = False
         Me.Text = ""
-        Me.TopMost = True
+        Me.TopMost = False
         _dgv = dgvObj
         txtFinder.Text = textToFind
         Dim pnt As Point
@@ -51,6 +51,7 @@ Public Class ProductFinder
         Me.ProductTableAdapter.Fill(Me.ISPDATADataSet.Product)
         'TODO: This line of code loads data into the 'ISPDATADataSet.PurchaseDetail' table. You can move, or remove it, as needed.
         Me.PurchaseDetailTableAdapter.Fill(Me.ISPDATADataSet.PurchaseDetail)
+        txtFinder.Select()
 
         '' for columns    
         'DataGridViewAccGridComboBoxColumn1.ComboDataGridView = ProgramaticalyCreatedDataGridView
@@ -72,10 +73,11 @@ Public Class ProductFinder
         Dim dao As New ProductDao
         If txtFinder.Text.Length() < 3 Then
             DataGridViewProducts.DataSource = Nothing
+            AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgText2Short")
         Else
             DataGridViewProducts.DataSource = dao.GetProductsBySearchString(txtFinder.Text)
+            _findText = txtFinder.Text
         End If
-        _findText = txtFinder.Text
     End Sub
 
     Private Sub SubDataGridViewProducts_CellPainting(ByVal sender As Object, ByVal e As DataGridViewCellPaintingEventArgs) Handles DataGridViewProducts.CellPainting
