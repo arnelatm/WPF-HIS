@@ -9,10 +9,13 @@ Namespace BusinessLayer
             ' establish business rules
         End Sub
 
+        Public Property AmtBefVat As Decimal
         Public Property BaseUnitIdNo As Int16
         Public Property BonusQuantity As Int16
         Public Property CategoryIdNo As Int16
         Public Property DiscountAmount As Decimal
+        Public Property DiscountPercent As Decimal
+        Public Property GrossAmount As Decimal
         Public Property IdNo As Int32
         Public Property NetAmount As Decimal
         Public Property Price As Decimal
