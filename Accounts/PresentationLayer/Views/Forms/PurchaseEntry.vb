@@ -342,15 +342,32 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
         Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchaseDetails.CellEndEdit
-            With DataGridViewPurchaseDetails.CurrentRow
-                .Cells("dgvGrossAmount").Value = .Cells("dgvQuantity").Value * .Cells("dgvPrice").Value
-                Dim gAmt = .Cells("dgvGrossAmount").Value
-                Dim dAmt = .Cells("dgvGrossAmount").Value * .Cells("dgvDiscountPercent").Value / 100
-                .Cells("dgvDiscountAmount").Value = dAmt '.Cells("dgvGrossAmount").Value * .Cells("dgvDiscountPercent").Value / 100
-                .Cells("dgvAmtBefVat").Value = .Cells("dgvGrossAmount").Value - .Cells("dgvDiscountAmount").Value
-                .Cells("dgvVatAmount").Value = .Cells("dgvAmtBefVat").Value * .Cells("dgvVatPercent").Value / 100
-                .Cells("dgvNetAmount").Value = .Cells("dgvAmtBefVat").Value + .Cells("dgvVatAmount").Value
+            With bsPurchaseDetails.Current
+                bsPurchaseDetails.Current.GrossAmount = bsPurchaseDetails.Current.Quantity * bsPurchaseDetails.Current.Price
+                Dim gAmt = bsPurchaseDetails.Current.GrossAmount
+                Dim dAmt = bsPurchaseDetails.Current.GrossAmount * bsPurchaseDetails.Current.DiscountPercent / 100
+                Dim vAmt = (gAmt - dAmt) * bsPurchaseDetails.Current.VatPercent / 100
+                bsPurchaseDetails.Current.DiscountAmount = dAmt
+                bsPurchaseDetails.Current.VatAmount = vAmt
+                bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
+                'bsPurchaseDetails.ResetBindings(False)
+                'DataGridViewPurchaseDetails.Refresh()
+                '.Cells("dgvAmtBefVat").Value = .Cells("dgvGrossAmount").Value - .Cells("dgvDiscountAmount").Value
+                '.Cells("dgvVatAmount").Value = .Cells("dgvAmtBefVat").Value * .Cells("dgvVatPercent").Value / 100
+                '.Cells("dgvNetAmount").Value = gAmt - dAmt + .Cells("dgvVatAmt").Value '+ .Cells("dgvVatAmount").Value
             End With
+            'With DataGridViewPurchaseDetails.CurrentRow
+            '    .Cells("dgvGrossAmount").Value = .Cells("dgvQuantity").Value * .Cells("dgvPrice").Value
+            '    Dim gAmt = .Cells("dgvGrossAmount").Value
+            '    Dim dAmt = .Cells("dgvGrossAmount").Value * .Cells("dgvDiscountPercent").Value / 100
+            '    Dim vAmt = (gAmt - dAmt) * .Cells("dgvVatPercent").Value / 100
+            '    .Cells("dgvDiscountAmount").Value = dAmt '.Cells("dgvGrossAmount").Value * .Cells("dgvDiscountPercent").Value / 100
+            '    .Cells("dgvVatAmount").Value = vAmt '.Cells("dgvGrossAmount").Value * .Cells("dgvDiscountPercent").Value / 100
+            '    .Cells("dgvNetAmount").Value = gAmt - dAmt + vAmt '.Cells("dgvGrossAmount").Value * .Cells("dgvDiscountPercent").Value / 100
+            '    '.Cells("dgvAmtBefVat").Value = .Cells("dgvGrossAmount").Value - .Cells("dgvDiscountAmount").Value
+            '    '.Cells("dgvVatAmount").Value = .Cells("dgvAmtBefVat").Value * .Cells("dgvVatPercent").Value / 100
+            '    '.Cells("dgvNetAmount").Value = gAmt - dAmt + .Cells("dgvVatAmt").Value '+ .Cells("dgvVatAmount").Value
+            'End With
             'Dim cColumnName = .CurrentCell.OwningColumn.Name
             'If cColumnName = $"dgvProductName" Then
             '    'With bsPurchaseDetails
@@ -387,40 +404,40 @@ Namespace PresentationLayer.Views.Forms
             'End With
         End Sub
 
-        Private Sub OnCellFormatting(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs) Handles DataGridViewPurchaseDetails.CellFormatting
-            'If e.ColumnIndex = DataGridViewPurchaseDetails.Columns("dgvDiscountAmount").Index Then
-            '    e.FormattingApplied = True
-            '    Dim row As DataGridViewRow = DataGridViewPurchaseDetails.Rows(e.RowIndex)
-            '    e.Value = String.Format("{0,12:N2}", row.Cells("dgvGrossAmount").Value * row.Cells("dgvDiscountPercent").Value / 100)
-            'End If
-        End Sub
+        'Private Sub OnCellFormatting(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs) Handles DataGridViewPurchaseDetails.CellFormatting
+        '    'If e.ColumnIndex = DataGridViewPurchaseDetails.Columns("dgvDiscountAmount").Index Then
+        '    '    e.FormattingApplied = True
+        '    '    Dim row As DataGridViewRow = DataGridViewPurchaseDetails.Rows(e.RowIndex)
+        '    '    e.Value = String.Format("{0,12:N2}", row.Cells("dgvGrossAmount").Value * row.Cells("dgvDiscountPercent").Value / 100)
+        '    'End If
+        'End Sub
 
-        Private Sub OnRowsAdded(ByVal sender As Object, ByVal e As DataGridViewRowsAddedEventArgs) Handles DataGridViewPurchaseDetails.RowsAdded
-            If DataGridViewPurchaseDetails.CurrentRow IsNot Nothing Then
-                For i As Integer = e.RowIndex - 1 To e.RowCount
-                    Dim row As DataGridViewRow = DataGridViewPurchaseDetails.Rows(i)
-                    row.Cells("dgvGrossAmount").Value = row.Cells("dgvQuantity").Value * row.Cells("dgvPrice").Value
-                    If row.Cells("dgvGrossAmount").Value Is Nothing OrElse row.Cells("dgvGrossAmount").Value = 0 Then
-                        row.Cells("dgvDiscountPercent").Value = String.Format("{0,6:N2}", 0)
-                    Else
-                        row.Cells("dgvDiscountPercent").Value = String.Format("{0,6:N2}", row.Cells("dgvDiscountAmount").Value / row.Cells("dgvGrossAmount").Value * 100)
-                    End If
-                    row.Cells("dgvAmtBefVat").Value = row.Cells("dgvGrossAmount").Value - row.Cells("dgvDiscountAmount").Value
-                    row.Cells("dgvAmtBefVat").Value = row.Cells("dgvGrossAmount").Value - row.Cells("dgvDiscountAmount").Value
-                Next i
-                'For i As Integer = 0 To e.RowCount
-                '    Dim row As DataGridViewRow = DataGridViewPurchaseDetails.Rows(i)
-                '    row.Cells("dgvGrossAmount").Value = row.Cells("dgvQuantity").Value * row.Cells("dgvPrice").Value
-                '    If row.Cells("dgvGrossAmount").Value Is Nothing OrElse row.Cells("dgvGrossAmount").Value = 0 Then
-                '        row.Cells("dgvDiscountPercent").Value = String.Format("{0,6:N2}", 0)
-                '    Else
-                '        row.Cells("dgvDiscountPercent").Value = String.Format("{0,6:N2}", row.Cells("dgvDiscountAmount").Value / row.Cells("dgvGrossAmount").Value * 100)
-                '    End If
-                '    row.Cells("dgvAmtBefVat").Value = row.Cells("dgvGrossAmount").Value - row.Cells("dgvDiscountAmount").Value
-                '    row.Cells("dgvAmtBefVat").Value = row.Cells("dgvGrossAmount").Value - row.Cells("dgvDiscountAmount").Value
-                'Next
-            End If
-        End Sub
+        'Private Sub OnRowsAdded(ByVal sender As Object, ByVal e As DataGridViewRowsAddedEventArgs) Handles DataGridViewPurchaseDetails.RowsAdded
+        '    If DataGridViewPurchaseDetails.CurrentRow IsNot Nothing Then
+        '        For i As Integer = e.RowIndex - 1 To e.RowCount
+        '            Dim row As DataGridViewRow = DataGridViewPurchaseDetails.Rows(i)
+        '            row.Cells("dgvGrossAmount").Value = row.Cells("dgvQuantity").Value * row.Cells("dgvPrice").Value
+        '            If row.Cells("dgvGrossAmount").Value Is Nothing OrElse row.Cells("dgvGrossAmount").Value = 0 Then
+        '                row.Cells("dgvDiscountPercent").Value = String.Format("{0,6:N2}", 0)
+        '            Else
+        '                row.Cells("dgvDiscountPercent").Value = String.Format("{0,6:N2}", row.Cells("dgvDiscountAmount").Value / row.Cells("dgvGrossAmount").Value * 100)
+        '            End If
+        '            row.Cells("dgvAmtBefVat").Value = row.Cells("dgvGrossAmount").Value - row.Cells("dgvDiscountAmount").Value
+        '            row.Cells("dgvAmtBefVat").Value = row.Cells("dgvGrossAmount").Value - row.Cells("dgvDiscountAmount").Value
+        '        Next i
+        '        'For i As Integer = 0 To e.RowCount
+        '        '    Dim row As DataGridViewRow = DataGridViewPurchaseDetails.Rows(i)
+        '        '    row.Cells("dgvGrossAmount").Value = row.Cells("dgvQuantity").Value * row.Cells("dgvPrice").Value
+        '        '    If row.Cells("dgvGrossAmount").Value Is Nothing OrElse row.Cells("dgvGrossAmount").Value = 0 Then
+        '        '        row.Cells("dgvDiscountPercent").Value = String.Format("{0,6:N2}", 0)
+        '        '    Else
+        '        '        row.Cells("dgvDiscountPercent").Value = String.Format("{0,6:N2}", row.Cells("dgvDiscountAmount").Value / row.Cells("dgvGrossAmount").Value * 100)
+        '        '    End If
+        '        '    row.Cells("dgvAmtBefVat").Value = row.Cells("dgvGrossAmount").Value - row.Cells("dgvDiscountAmount").Value
+        '        '    row.Cells("dgvAmtBefVat").Value = row.Cells("dgvGrossAmount").Value - row.Cells("dgvDiscountAmount").Value
+        '        'Next
+        '    End If
+        'End Sub
 
 
         Private Sub dataGridView1_CellValidating(ByVal sender As Object, ByVal e As DataGridViewCellValidatingEventArgs) Handles DataGridViewPurchaseDetails.CellValidating

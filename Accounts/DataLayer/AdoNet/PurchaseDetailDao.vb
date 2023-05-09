@@ -13,10 +13,13 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Const FieldList As String = "BaseUnitIdNo," &
+        Const FieldList As String = "AmtBefVat," &
+                                    "BaseUnitIdNo," &
                                     "BonusQuantity," &
                                     "CategoryIdNo," &
                                     "DiscountAmount," &
+                                    "DiscountPercent," &
+                                    "GrossAmount," &
                                     "IdNo," &
                                     "NetAmount," &
                                     "Price," &
@@ -66,10 +69,13 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, PurchaseDetail) =
                                     Function(reader) _
             New PurchaseDetail() With {
+            .AmtBefVat = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("AmtBefVat")),
             .BaseUnitIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("BaseUnitIdNo")),
             .BonusQuantity = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("BonusQuantity")),
             .CategoryIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("CategoryIdNo")),
             .DiscountAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DiscountAmount")),
+            .DiscountPercent = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DiscountPercent")),
+            .GrossAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("GrossAmount")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .NetAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("NetAmount")),
             .Price = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Price")),
