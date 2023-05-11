@@ -12,7 +12,8 @@ Namespace DataLayer.AdoNet
         Inherits CommonDao
         Implements IDao(Of DrugAccept)
 
-        Private ReadOnly _db As New Db("IGROUPCLINIC")
+        'Private ReadOnly _db As New Db("IGROUPCLINIC")
+        Private ReadOnly _db As New Db()
 
         Private ReadOnly _fieldList As String = "BatchNo," &
                                       "Expiry," &

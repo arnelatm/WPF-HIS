@@ -150,16 +150,16 @@ Namespace PresentationLayer.Presenters
 
         Public Sub UpdateDueDate()
             If View.SupplierIdNo IsNot Nothing Then
-                'Dim supplierPaymentDueDays = GetSupplierPaymentDueDays(View.SupplierIdNo)
-                'View.DueDate = DateAdd("d", supplierPaymentDueDays, View.TransactionDate)
+                Dim supplierPaymentDueDays = GetSupplierPaymentDueDays(View.SupplierIdNo)
+                View.DueDate = DateAdd("d", supplierPaymentDueDays, View.TransactionDate)
             Else
                 View.DueDate = Nothing
             End If
         End Sub
 
-        'Public Function GetSupplierPaymentDueDays(idNo As String)
-        '    Return GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "PaymentDueDays")
-        'End Function
+        Private Function GetSupplierPaymentDueDays(idNo As String)
+            Return GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "PaymentDueDays")
+        End Function
 
         'Public Sub UpdateEarlySettlementValues()
         '    If View.SupplierIdNo IsNot Nothing Then
