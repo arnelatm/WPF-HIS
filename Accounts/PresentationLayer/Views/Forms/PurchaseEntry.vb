@@ -99,7 +99,11 @@ Namespace PresentationLayer.Views.Forms
                 Return dtpInvoiceDate.Value
             End Get
             Set
-                dtpInvoiceDate.Value = Value
+                If Value IsNot Nothing Then
+                    dtpInvoiceDate.Value = Value
+                Else
+                    dtpInvoiceDate.Value = Today()
+                End If
             End Set
         End Property
 
@@ -257,17 +261,21 @@ Namespace PresentationLayer.Views.Forms
         '    'UpdateTotals()
         'End Sub
 
-        'Private Sub PurchaseEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        '    _footer = New DgvFooter(DataGridViewPurchaseDetails) With {
-        '        .AutoCalc = True
-        '    }
-        '    _footer.ColumnToSum("dgvNetAmount") = True
-        '    _footer.ColumnToSum("dgvVatAmount") = True
-        '    _footer.SetAlignment("dgvNetAmount", ContentAlignment.MiddleRight)
-        '    _footer.SetAlignment("dgvVatAmount", ContentAlignment.MiddleRight)
-        '    '_footer.SetText("dgvProductIdNo", "Totals ->")
-        '    'UpdateTotals()
-        'End Sub
+        Private Sub PurchaseEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            _footer = New DgvFooter(DataGridViewPurchaseDetails) With {
+                .AutoCalc = True
+            }
+            _footer.ColumnToSum("dgvGrossAmount") = True
+            _footer.ColumnToSum("dgvDiscountAmount") = True
+            _footer.ColumnToSum("dgvAmtBefVat") = True
+            _footer.ColumnToSum("dgvVatAmount") = True
+            _footer.ColumnToSum("dgvNetAmount") = True
+            _footer.SetAlignment("dgvGrossAmount", ContentAlignment.MiddleRight)
+            _footer.SetAlignment("dgvVatAmount", ContentAlignment.MiddleRight)
+            _footer.SetAlignment("dgvVatAmount", ContentAlignment.MiddleRight)
+            _footer.SetText("dgvProductName", "Totals ->")
+            'UpdateTotals()
+        End Sub
 
         Private Sub BindPurchaseDetail()
             SuspendLayout()
@@ -305,20 +313,11 @@ Namespace PresentationLayer.Views.Forms
             'UpdateInputVatAmount()
         End Sub
 
-        'Private Sub UpdateInputVatAmount()
-        '    VatAmount = Presenter.UpdateInputVatAmount(PurchaseDetails)
-        'End Sub
 
         Private Overloads Sub Dispose()
             Close()
             '_footer.Dispose()
         End Sub
-
-        'Private Sub NeedUpdateFirstLine(sender As Object, e As EventArgs) Handles cboTransactionType.Validated, txtAmount.Validated, cboTransactionType.SelectionChangeCommitted
-        '    Presenter.UpdateFirstLine()
-        '    UpdateTotals()
-        '    DataGridViewPurchaseDetails.Refresh()
-        'End Sub
 
         'Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewPurchaseDetails.CellBeginEdit
         '    'If DataGridViewPurchaseDetails.CurrentCell.RowIndex() = 0 Then
@@ -359,7 +358,6 @@ Namespace PresentationLayer.Views.Forms
                     dAmt = bsPurchaseDetails.Current.DiscountAmount
                     vAmt = bsPurchaseDetails.Current.VatAmount
                     Dim vPerc = IIf(gAmt - dAmt = 0, 0, vAmt / (gAmt - dAmt) * 100)
-                    'bsPurchaseDetails.Current.DiscountAmount = dAmt
                     bsPurchaseDetails.Current.VatPercent = vPerc
                 ElseIf DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvDiscountAmount" Then
                     gAmt = bsPurchaseDetails.Current.GrossAmount
@@ -377,58 +375,7 @@ Namespace PresentationLayer.Views.Forms
                 End If
                 bsPurchaseDetails.Current.AmtBefVat = gAmt - dAmt
                 bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
-                'bsPurchaseDetails.ResetBindings(False)
-                'DataGridViewPurchaseDetails.Refresh()
-                '.Cells("dgvAmtBefVat").Value = .Cells("dgvGrossAmount").Value - .Cells("dgvDiscountAmount").Value
-                '.Cells("dgvVatAmount").Value = .Cells("dgvAmtBefVat").Value * .Cells("dgvVatPercent").Value / 100
-                '.Cells("dgvNetAmount").Value = gAmt - dAmt + .Cells("dgvVatAmt").Value '+ .Cells("dgvVatAmount").Value
             End With
-            'With DataGridViewPurchaseDetails.CurrentRow
-            '    .Cells("dgvGrossAmount").Value = .Cells("dgvQuantity").Value * .Cells("dgvPrice").Value
-            '    Dim gAmt = .Cells("dgvGrossAmount").Value
-            '    Dim dAmt = .Cells("dgvGrossAmount").Value * .Cells("dgvDiscountPercent").Value / 100
-            '    Dim vAmt = (gAmt - dAmt) * .Cells("dgvVatPercent").Value / 100
-            '    .Cells("dgvDiscountAmount").Value = dAmt '.Cells("dgvGrossAmount").Value * .Cells("dgvDiscountPercent").Value / 100
-            '    .Cells("dgvVatAmount").Value = vAmt '.Cells("dgvGrossAmount").Value * .Cells("dgvDiscountPercent").Value / 100
-            '    .Cells("dgvNetAmount").Value = gAmt - dAmt + vAmt '.Cells("dgvGrossAmount").Value * .Cells("dgvDiscountPercent").Value / 100
-            '    '.Cells("dgvAmtBefVat").Value = .Cells("dgvGrossAmount").Value - .Cells("dgvDiscountAmount").Value
-            '    '.Cells("dgvVatAmount").Value = .Cells("dgvAmtBefVat").Value * .Cells("dgvVatPercent").Value / 100
-            '    '.Cells("dgvNetAmount").Value = gAmt - dAmt + .Cells("dgvVatAmt").Value '+ .Cells("dgvVatAmount").Value
-            'End With
-            'Dim cColumnName = .CurrentCell.OwningColumn.Name
-            'If cColumnName = $"dgvProductName" Then
-            '    'With bsPurchaseDetails
-            '    '    Dim findText = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductName
-            '    '    Dim form As New ProductFinder(findText, DataGridViewPurchaseDetails)
-            '    '    If form.ShowDialog() = Windows.Forms.DialogResult.OK Then
-            '    '        Dim product As IProductView = form.Product
-            '    '        _noOfUnits = form.NoOfUnits
-            '    '        If product Is Nothing Then
-            '    '            Dim description As String = Messaging.TranslateCaption("Product Name")
-            '    '            Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", findText, "fieldDescription", description})
-            '    '        Else
-            '    '            RaiseEvent ProductNameChanged(product.ProductCode, bsPurchaseDetails)
-            '    '            Dim unitIdNo As Int16 = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).UnitIdNo
-            '    '            If unitIdNo <= 0 Or _noOfUnits <= 1 Then
-            '    '                SendKeys.Send("{Tab}")
-            '    '            End If
-            '    '            bsPurchaseDetails.ResetBindings(False)
-            '    '            ' Yes, so grab the values you want from the dialog here
-            '    '            '. = form.SelectedId
-            '    '        End If
-            '    '    End If
-            '    'End With
-            'ElseIf cColumnName = $"dgvProductCode" Then
-            '    RaiseEvent ProductCodeChanged(DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductCode, bsPurchaseDetails)
-            '    Dim cProductName = DataGridViewPurchaseDetails.CurrentRow().Cells("dgvProductName").Value
-            '    If Not String.IsNullOrEmpty(cProductName) Then
-            '        SendKeys.Send("{Tab}")
-            '        If DataGridViewPurchaseDetails.CurrentRow.Cells("dgvUnitCount").Value = 1 Then
-            '            SendKeys.Send("{Tab}")
-            '        End If
-            '    End If
-            'End If
-            'End With
         End Sub
 
         'Private Sub OnCellFormatting(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs) Handles DataGridViewPurchaseDetails.CellFormatting
@@ -647,13 +594,13 @@ Namespace PresentationLayer.Views.Forms
         '    MoveToGridView(DataGridViewPurchaseDetails, "dgvUnitIdNo")
         'End Sub
 
-        'Private Sub UpdateTotals()
-        '    If _footer IsNot Nothing Then
-        '        _footer.CalculateTotals()
-        '        'txtTotalDebits.Text = _footer.Value("dgvNetAmount")
-        '        'txtTotalCredits.Text = _footer.Value("dgvVatAmount")
-        '    End If
-        'End Sub
+        Private Sub UpdateTotals()
+            If _footer IsNot Nothing Then
+                _footer.CalculateTotals()
+                'txtTotalDebits.Text = _footer.Value("dgvNetAmount")
+                'txtTotalCredits.Text = _footer.Value("dgvVatAmount")
+            End If
+        End Sub
 
 
         Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewPurchaseDetails.UserDeletingRow
@@ -676,11 +623,11 @@ Namespace PresentationLayer.Views.Forms
             'End If
         End Sub
 
-        Private Sub PurchaseEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            'TODO: This line of code loads data into the 'ISPDATADataSet.Product' table. You can move, or remove it, as needed.
-            Me.ProductTableAdapter.Fill(Me.ISPDATADataSet.Product)
+        'Private Sub PurchaseEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        '    'TODO: This line of code loads data into the 'ISPDATADataSet.Product' table. You can move, or remove it, as needed.
+        '    Me.ProductTableAdapter.Fill(Me.ISPDATADataSet.Product)
 
-        End Sub
+        'End Sub
 
 
         Private Sub grid_EditingControlShowing(ByVal s As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles DataGridViewPurchaseDetails.EditingControlShowing

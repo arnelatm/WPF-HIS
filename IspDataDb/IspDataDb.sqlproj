@@ -561,6 +561,11 @@
     <Build Include="dbo\Stored Procedures\InsertPurchaseDetailTVP.sql" />
     <Build Include="dbo\User Defined Types\PurchaseDetailUpdate.sql" />
     <Build Include="dbo\User Defined Types\PurchaseDetailInsert.sql" />
+    <Build Include="dbo\Tables\Inventory.sql" />
+    <Build Include="dbo\Tables\Expiry.sql" />
+    <Build Include="dbo\Tables\DrugSale.sql" />
+    <Build Include="dbo\Tables\DrugList.sql" />
+    <Build Include="dbo\Tables\DrugAccept.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
