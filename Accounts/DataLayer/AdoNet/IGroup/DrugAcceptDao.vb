@@ -71,8 +71,8 @@ Namespace DataLayer.AdoNet
             .Expiry = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date)(reader("Expiry")),
             .GTin = AATM.DataLayer.AdoNet.Extensions.AsString(reader("GTin")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
-            .Item_Code = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Item_Code")),
-            .ItemNameEnglish = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ItemNameEnglish")),
+            .ProductCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Item_Code")),
+            .ProductName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ItemNameEnglish")),
             .AcceptDate = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date)(reader("AcceptDate")),
             .SerializationNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("SerializationNo"))
             }

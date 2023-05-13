@@ -722,6 +722,7 @@ Namespace PresentationLayer.Views.Forms
 
         End Function
 
+
         '<System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.LinkDemand, Flags:=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)>
         'Protected Overrides Function ProcessDataGridViewKey(ByVal e As System.Windows.Forms.KeyEventArgs) As Boolean
 
@@ -733,6 +734,108 @@ Namespace PresentationLayer.Views.Forms
         '    Return MyBase.ProcessDataGridViewKey(e)
 
         'End Function
+
+
+        Private WithEvents txtQrText As New DataGridViewTextBoxEditingControl
+
+        Private Sub DataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewEditingControlShowingEventArgs) Handles DataGridViewPurchaseDetails.EditingControlShowing
+            If DataGridViewPurchaseDetails.CurrentCell.OwningColumn.Name = "dgvProductName" Then
+                txtQrText = CType(DataGridViewPurchaseDetails.EditingControl, DataGridViewTextBoxEditingControl)
+            End If
+        End Sub
+
+        Private Sub txtNumeric_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtQrText.KeyPress
+            Dim i As Integer = txtQrText.SelectionStart 'save for later use
+
+            Select Case Asc(e.KeyChar)
+
+                'Case 4 'EOT
+
+                '    Me.txtQrCode.Text = Me.txtQrCode.Text.Insert(Me.txtQrCode.SelectionStart, "<EOT>")
+
+                '    Me.txtQrCode.SelectionStart = i + 5
+
+                '    e.Handled = True
+
+                Case 29 'GS
+
+                    txtQrText.Text = txtQrText.Text.Insert(txtQrText.SelectionStart, "<GS>")
+                    txtQrText.SelectionStart = i + 5
+                    e.Handled = True
+
+                    'Case 30 'RS
+
+                    '    Me.txtQrCode.Text = Me.txtQrCode.Text.Insert(Me.txtQrCode.SelectionStart, "<RS>")
+
+                    '    Me.txtQrCode.SelectionStart = i + 5
+
+                    '    e.Handled = True
+
+            End Select
+        End Sub
+
+
+        Private Function ExtractGTin(cText As String) As String
+            Dim dataLength = Len(cText)
+            Dim i As Int16 = 0
+            Dim ai As String = Mid(cText, 1, 2)
+            Dim lastPosition As Int16 = 2
+            Dim _cGTin As String = Nothing
+            Dim _cSerializationNo As String = Nothing
+            Dim _cBatchNo As String = Nothing
+            Dim _cExpiry As String = Nothing
+            Dim _cManufacture As String = Nothing
+            While lastPosition < dataLength
+                Select Case ai
+                    Case "01" 'GTIN
+                        _cGTin = Mid(cText, lastPosition + 1, 14)
+                        lastPosition += 14
+                    Case "17" 'Expiry Date
+                        _cExpiry = Mid(cText, lastPosition + 1, 6)
+                        If _cExpiry.Right(2) = "00" Then
+                            _cExpiry = Mid(_cExpiry, 1, 4) + "01"
+                        End If
+                        lastPosition += 6
+                    Case "11" 'manufacture date
+                        _cManufacture = Mid(cText, lastPosition + 1, 6)
+                        lastPosition += 6
+                    Case "10" ' Batch Number
+                        For i = lastPosition + 1 To dataLength
+                            If Mid(cText, i, 4) = "<GS>" Or Mid(cText, i, 1) = ChrW(13) Or i >= dataLength Then ' separator
+                                If i >= dataLength Then
+                                    _cBatchNo = Mid(cText, lastPosition + 1)
+                                Else
+                                    _cBatchNo = Mid(cText, lastPosition + 1, i - lastPosition - 1)
+                                End If
+                                lastPosition = i + 3
+                                Exit For
+                            End If
+                        Next
+                    Case "21" ' Serialization No.
+                        For i = lastPosition + 1 To dataLength
+                            If Mid(cText, i, 4) = "<GS>" Or Mid(cText, i, 1) = ChrW(13) Or i >= dataLength Then
+                                If i >= dataLength Then
+                                    _cSerializationNo = Mid(cText, lastPosition + 1)
+                                Else
+                                    _cSerializationNo = Mid(cText, lastPosition + 1, i - lastPosition - 1)
+                                End If
+                                lastPosition = i + 3
+                                Exit For
+                            End If
+                        Next
+                End Select
+                If lastPosition >= dataLength Then
+                    Exit While
+                Else
+                    ai = Mid(cText, lastPosition + 1, 2)
+                    If ai = vbLf Or ai = vbCrLf Or ai = vbLf & vbCr Then
+                        Exit While
+                    End If
+                    lastPosition += 2
+                End If
+            End While
+            Return _cGTin
+        End Function
 
     End Class
 
