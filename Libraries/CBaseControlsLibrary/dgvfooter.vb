@@ -424,7 +424,7 @@ Public Class DgvFooter
     ''' </summary>
     ''' <param name="columnName">Name of column in parent which to try and sum all cell values of.</param>
     ''' <remarks>If a cell value cannot be parsed to double, no error will be thrown. That cell will be skipped.</remarks>
-    Public Sub SumColumn(ByVal columnName As String)
+    Public Sub SumColumn(ByVal columnName As String, Optional noOfDecimalDisplay As Integer = -1)
         If Not String.IsNullOrEmpty(columnName) Then
             Dim tally As Double = 0.00D
             Dim nfi As NumberFormatInfo = New CultureInfo("en-US", False).NumberFormat
@@ -439,8 +439,13 @@ Public Class DgvFooter
 
             nfi.NumberDecimalDigits = _decimalPlaces
             tally = If(_roundSum, Math.Round(tally, _decimalPlaces, If(_bankersRounding, MidpointRounding.ToEven, MidpointRounding.AwayFromZero)), TruncateToDecimalPlace(tally, _decimalPlaces))
-
-            Rows(0).Cells(columnName & "_footer").Value = tally.ToString("N", nfi) & " " & _valueSuffix
+            If noOfDecimalDisplay = -1 Then
+                Rows(0).Cells(columnName & "_footer").Value = tally.ToString("N", nfi) & " " & _valueSuffix
+            Else
+                Dim nfiw As NumberFormatInfo = CType(nfi.Clone(), NumberFormatInfo)
+                nfiw.NumberDecimalDigits = noOfDecimalDisplay
+                Rows(0).Cells(columnName & "_footer").Value = tally.ToString("N", nfiw) & " " & _valueSuffix
+            End If
         End If
     End Sub
 
@@ -469,6 +474,10 @@ Public Class DgvFooter
 
     Public Sub SetAlignment(columnName As String, colAlignment As ContentAlignment)
         Columns(columnName & "_footer").DefaultCellStyle.Alignment = colAlignment
+    End Sub
+
+    Public Sub SetDecimalDisplay(columnName As String, noOfDecimalPlaces As Integer)
+        Columns(columnName & "_footer").DefaultCellStyle.Format = "N" + noOfDecimalPlaces.ToString()
     End Sub
 
     ''' <summary>
@@ -731,7 +740,7 @@ Public Class DgvFooter
     ''' <value>Boolean indicating whether column will be totalled.</value>
     ''' <returns>Boolean indicating whether column will be totalled.</returns>
     ''' <remarks></remarks>
-    Public Property ColumnToSum(ByVal columnName As String) As Boolean
+    Public Property ColumnToSum(ByVal columnName As String, Optional pDecimalPlaces As Integer = -1) As Boolean
         Get
             'If the _columnsToSum contains the name of column, then that column will be totaled.
             Return _columnsToSum.Contains(columnName)
@@ -748,7 +757,7 @@ Public Class DgvFooter
                     'Insert the column we are setting to be totaled.
                     _columnsToSum.Add(columnName)
 
-                    SumColumn(columnName)
+                    SumColumn(columnName, pDecimalPlaces)
                 End If
             Else
                 'If we are setting a column to not be totaled, and it is in _columnsToSum lsit, we must remove it - so it can not be totaled.
@@ -766,14 +775,14 @@ Public Class DgvFooter
     ''' <value>Boolean indicating whether column will be totalled.</value>
     ''' <returns>Boolean indicating whether column will be totalled.</returns>
     ''' <remarks></remarks>
-    Public Property ColumnToSum(ByVal columnIndex As Integer) As Boolean
+    Public Property ColumnToSum(ByVal columnIndex As Integer, Optional pDecimalPlaces As Integer = -1) As Boolean
         'Lets be a little lazy/smart and just call this property using the na
         'We could just perform needed actions using the index, but im sure we are getting a displayindex number, and not the actual index.
         'So to be safe, we will get the name from the index passed and call the property using columnName instead.
         'Besides this avoids recoding the same exact thing more than once, just to use index rather than columnNa
         Get
             Dim columnName As String = _parentDgv.Columns(columnIndex).Name
-            Return ColumnToSum(columnName)
+            Return ColumnToSum(columnName, pDecimalPlaces)
         End Get
         Set
             Dim columnName As String = _parentDgv.Columns(columnIndex).Name

@@ -115,4 +115,11 @@ Public Class CDgvDecimalColumn
         End Set
     End Property
 
+    <Bindable(True)>
+    <Category("Properties")>
+    <DefaultValue(GetType(Boolean))>
+    <Description("Set to the number of decimal places to display value")>
+    <Browsable(True)>
+    Public Property DecimalPlaces As Integer = -1
+
 End Class

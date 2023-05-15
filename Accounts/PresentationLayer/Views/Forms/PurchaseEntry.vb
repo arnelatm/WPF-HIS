@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
@@ -17,7 +18,7 @@ Namespace PresentationLayer.Views.Forms
         Private _PurchaseDetails As List(Of PurchaseDetailView)
         Private _noOfUnits As Int16
         Public Event ProductCodeChanged(productCode As String, bs As BindingSource) Implements IPurchaseView.ProductCodeChanged
-        'Public Event ProductNameChanged(productName As String, bs As BindingSource) Implements IPurchaseView.ProductNameChanged
+        Public Event GTinScanned(GTin As String, bs As BindingSource, ByRef productCode As String) Implements IPurchaseView.GTinScanned
         Public Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource) Implements IPurchaseView.ProductUnitSelection
         Public Event ProductUnitEditing(productIdNo As Int32, bs As BindingSource) Implements IPurchaseView.ProductUnitEditing
         Public Sub New()
@@ -265,14 +266,22 @@ Namespace PresentationLayer.Views.Forms
             _footer = New DgvFooter(DataGridViewPurchaseDetails) With {
                 .AutoCalc = True
             }
+            _footer.ColumnToSum("dgvQuantity", 0) = True
+            _footer.ColumnToSum("dgvBonusQuantity", 0) = True
             _footer.ColumnToSum("dgvGrossAmount") = True
             _footer.ColumnToSum("dgvDiscountAmount") = True
             _footer.ColumnToSum("dgvAmtBefVat") = True
             _footer.ColumnToSum("dgvVatAmount") = True
             _footer.ColumnToSum("dgvNetAmount") = True
+            _footer.SetAlignment("dgvQuantity", ContentAlignment.MiddleRight)
+            _footer.SetDecimalDisplay("dgvQuantity", 0)
+            _footer.SetAlignment("dgvBonusQuantity", ContentAlignment.MiddleRight)
+            _footer.SetDecimalDisplay("dgvBonusQuantity", 0)
             _footer.SetAlignment("dgvGrossAmount", ContentAlignment.MiddleRight)
+            _footer.SetAlignment("dgvDiscountAmount", ContentAlignment.MiddleRight)
+            _footer.SetAlignment("dgvAmtBefVat", ContentAlignment.MiddleRight)
             _footer.SetAlignment("dgvVatAmount", ContentAlignment.MiddleRight)
-            _footer.SetAlignment("dgvVatAmount", ContentAlignment.MiddleRight)
+            _footer.SetAlignment("dgvNetAmount", ContentAlignment.MiddleRight)
             _footer.SetText("dgvProductName", "Totals ->")
             'UpdateTotals()
         End Sub
@@ -289,6 +298,8 @@ Namespace PresentationLayer.Views.Forms
                 dgvUnitIdNo.DisplayMember = "Name"
                 dgvUnitIdNo.ValueMember = "idNo"
                 dgvUnitIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvQuantity.DecimalPlaces = 0
+                dgvBonusQuantity.DecimalPlaces = 0
             End With
             ResumeLayout()
         End Sub
@@ -375,6 +386,7 @@ Namespace PresentationLayer.Views.Forms
                 End If
                 bsPurchaseDetails.Current.AmtBefVat = gAmt - dAmt
                 bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
+                UpdateTotals()
             End With
         End Sub
 
@@ -429,28 +441,44 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ValidateProductName(ByRef dgv As CtDataGridView, ByRef e As DataGridViewCellValidatingEventArgs)
             Dim findText = dgv.CurrentRow.Cells("dgvProductName").EditedFormattedValue
-            Dim form As New ProductFinder(findText, dgv)
-            If form.ShowDialog() = Windows.Forms.DialogResult.OK Then
-                Dim product As IProductView = form.Product
-                _noOfUnits = form.NoOfUnits
-                If product Is Nothing Then
-                    Dim msg = Messaging.GetParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", findText, "fieldDescription", "Product Name"})
-                    Messaging.Show(msg)
-                    e.Cancel = True
-                    dgv.Rows(e.RowIndex).ErrorText = msg
-                Else
-                    dgv.CurrentRow.Cells("dgvProductCode").Value = product.ProductCode
-                    RaiseEvent ProductCodeChanged(product.ProductCode, bsPurchaseDetails)
+            If findText.Contains("<GS>") Then
+                Dim GTin As String = ExtractGTin(findText)
+                Dim productCode As String = ""
+                RaiseEvent GTinScanned(GTin, bsPurchaseDetails, productCode)
+                If productCode IsNot Nothing Then
+                    'Dim item As IProductView = DirectCast(product, IProductView)
+                    dgv.CurrentRow.Cells("dgvProductCode").Value = productCode
+                    RaiseEvent ProductCodeChanged(productCode, bsPurchaseDetails)
                     Dim unitIdNo As Int16 = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).UnitIdNo
                     If unitIdNo <= 0 Or _noOfUnits <= 1 Then
                         SendKeys.Send("{Tab}")
                     End If
                     bsPurchaseDetails.ResetBindings(False)
-                    ' Yes, so grab the values you want from the dialog here
-                    '. = form.SelectedId
                 End If
             Else
-                e.Cancel = True
+                Dim form As New ProductFinder(findText, dgv)
+                If form.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                    Dim product As IProductView = form.Product
+                    _noOfUnits = form.NoOfUnits
+                    If product Is Nothing Then
+                        Dim msg = Messaging.GetParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", findText, "fieldDescription", "Product Name"})
+                        Messaging.Show(msg)
+                        e.Cancel = True
+                        dgv.Rows(e.RowIndex).ErrorText = msg
+                    Else
+                        dgv.CurrentRow.Cells("dgvProductCode").Value = product.ProductCode
+                        RaiseEvent ProductCodeChanged(product.ProductCode, bsPurchaseDetails)
+                        Dim unitIdNo As Int16 = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).UnitIdNo
+                        If unitIdNo <= 0 Or _noOfUnits <= 1 Then
+                            SendKeys.Send("{Tab}")
+                        End If
+                        bsPurchaseDetails.ResetBindings(False)
+                        ' Yes, so grab the values you want from the dialog here
+                        '. = form.SelectedId
+                    End If
+                Else
+                    e.Cancel = True
+                End If
             End If
         End Sub
 
@@ -744,7 +772,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub txtNumeric_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtQrText.KeyPress
+        Private Sub txtQrText_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles txtQrText.KeyPress
             Dim i As Integer = txtQrText.SelectionStart 'save for later use
 
             Select Case Asc(e.KeyChar)
@@ -770,72 +798,11 @@ Namespace PresentationLayer.Views.Forms
                     '    Me.txtQrCode.SelectionStart = i + 5
 
                     '    e.Handled = True
+                    Dim x = 1
+                    x = 1
 
             End Select
         End Sub
-
-
-        Private Function ExtractGTin(cText As String) As String
-            Dim dataLength = Len(cText)
-            Dim i As Int16 = 0
-            Dim ai As String = Mid(cText, 1, 2)
-            Dim lastPosition As Int16 = 2
-            Dim _cGTin As String = Nothing
-            Dim _cSerializationNo As String = Nothing
-            Dim _cBatchNo As String = Nothing
-            Dim _cExpiry As String = Nothing
-            Dim _cManufacture As String = Nothing
-            While lastPosition < dataLength
-                Select Case ai
-                    Case "01" 'GTIN
-                        _cGTin = Mid(cText, lastPosition + 1, 14)
-                        lastPosition += 14
-                    Case "17" 'Expiry Date
-                        _cExpiry = Mid(cText, lastPosition + 1, 6)
-                        If _cExpiry.Right(2) = "00" Then
-                            _cExpiry = Mid(_cExpiry, 1, 4) + "01"
-                        End If
-                        lastPosition += 6
-                    Case "11" 'manufacture date
-                        _cManufacture = Mid(cText, lastPosition + 1, 6)
-                        lastPosition += 6
-                    Case "10" ' Batch Number
-                        For i = lastPosition + 1 To dataLength
-                            If Mid(cText, i, 4) = "<GS>" Or Mid(cText, i, 1) = ChrW(13) Or i >= dataLength Then ' separator
-                                If i >= dataLength Then
-                                    _cBatchNo = Mid(cText, lastPosition + 1)
-                                Else
-                                    _cBatchNo = Mid(cText, lastPosition + 1, i - lastPosition - 1)
-                                End If
-                                lastPosition = i + 3
-                                Exit For
-                            End If
-                        Next
-                    Case "21" ' Serialization No.
-                        For i = lastPosition + 1 To dataLength
-                            If Mid(cText, i, 4) = "<GS>" Or Mid(cText, i, 1) = ChrW(13) Or i >= dataLength Then
-                                If i >= dataLength Then
-                                    _cSerializationNo = Mid(cText, lastPosition + 1)
-                                Else
-                                    _cSerializationNo = Mid(cText, lastPosition + 1, i - lastPosition - 1)
-                                End If
-                                lastPosition = i + 3
-                                Exit For
-                            End If
-                        Next
-                End Select
-                If lastPosition >= dataLength Then
-                    Exit While
-                Else
-                    ai = Mid(cText, lastPosition + 1, 2)
-                    If ai = vbLf Or ai = vbCrLf Or ai = vbLf & vbCr Then
-                        Exit While
-                    End If
-                    lastPosition += 2
-                End If
-            End While
-            Return _cGTin
-        End Function
 
     End Class
 

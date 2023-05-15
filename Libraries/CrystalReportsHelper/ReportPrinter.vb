@@ -96,7 +96,7 @@ Public Class ReportPrinter
                 Case "A5L"
                     _report.PrintOptions.PaperSize = PaperSize.PaperA5
                     _report.PrintOptions.PaperOrientation = PaperOrientation.Landscape
-                Case "PhItemBarCode"
+                Case "PhItemBarcode"
                     _report.PrintOptions.PaperSize = 257
                     _report.PrintOptions.PaperOrientation = PaperOrientation.DefaultPaperOrientation
             End Select

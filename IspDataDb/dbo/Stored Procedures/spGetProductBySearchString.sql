@@ -14,5 +14,5 @@ BEGIN
 	Declare @queryString as VarChar(50)
     -- Insert statements for procedure here
 	Set @queryString = Concat('%',@findString,'%')
-	SELECT ProductCode,ProductName,BarCode,GTIN from Product where ProductName like @queryString or ProductCode like @queryString or GTIN = @queryString or BarCode = @queryString
+	SELECT ProductCode,ProductName,Barcode,GTIN from Product where ProductName like @queryString or ProductCode like @queryString or GTIN = @queryString or Barcode = @queryString
 END

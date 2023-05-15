@@ -146,6 +146,12 @@ Public Class CTextBox
     <Browsable(True)>
     Public Property MaximumValue As Decimal? = Nothing
 
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Specify here the temporary 'maxlength' value for data entry (useful to override default 'MaxLength' property).")>
+    <Browsable(True)>
+    Public Property OverrideMaxLength As Integer = 0
+
     'Public Sub MakeEditable(editableControl As Boolean) Implements IEntryControl.MakeEditable
     '    Me.ReadOnly = Not editableControl
     'End Sub
