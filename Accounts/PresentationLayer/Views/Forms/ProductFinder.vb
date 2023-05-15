@@ -51,7 +51,7 @@ Public Class ProductFinder
         Me.ProductTableAdapter.Fill(Me.ISPDATADataSet.Product)
         'TODO: This line of code loads data into the 'ISPDATADataSet.PurchaseDetail' table. You can move, or remove it, as needed.
         Me.PurchaseDetailTableAdapter.Fill(Me.ISPDATADataSet.PurchaseDetail)
-        txtFinder.Select()
+        'txtFinder.Select()
 
         '' for columns    
         'DataGridViewAccGridComboBoxColumn1.ComboDataGridView = ProgramaticalyCreatedDataGridView

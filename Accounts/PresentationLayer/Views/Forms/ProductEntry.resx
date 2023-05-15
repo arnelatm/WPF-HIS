@@ -927,7 +927,7 @@
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>25</value>
+    <value>122</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -2119,12 +2119,6 @@
   <data name="&gt;&gt;MyErrorProvider.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;bsProductUnits.Name" xml:space="preserve">
-    <value>bsProductUnits</value>
-  </data>
-  <data name="&gt;&gt;bsProductUnits.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;dgvSequence.Name" xml:space="preserve">
     <value>dgvSequence</value>
   </data>
@@ -2160,6 +2154,12 @@
   </data>
   <data name="&gt;&gt;IdNoDataGridViewTextBoxColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bsProductUnits.Name" xml:space="preserve">
+    <value>bsProductUnits</value>
+  </data>
+  <data name="&gt;&gt;bsProductUnits.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ProductEntry</value>

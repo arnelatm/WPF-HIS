@@ -63,7 +63,7 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New Product() With {
             .Active = Extensions.AsBool(reader("Active")),
-            .BarCode = Extensions.AsString(reader("Barcode")),
+            .Barcode = Extensions.AsString(reader("Barcode")),
             .BaseUnitIdNo = Extensions.AsInt(Of Int16)(reader("BaseUnitIdNo")),
             .CategoryIdNo = Extensions.AsInt(Of Int16)(reader("CategoryIdNo")),
             .GTIN = Extensions.AsString(reader("GTIN")),
@@ -76,7 +76,7 @@ Namespace DataLayer.AdoNet
         Private Function Take(Product As Product) As Object()
             Return New Object() {
                                     "@Active", Product.Active,
-                                    "@Barcode", Product.BarCode,
+                                    "@Barcode", Product.Barcode,
                                     "@BaseUnitIdNo", Product.BaseUnitIdNo,
                                     "@CategoryIdNo", Product.CategoryIdNo,
                                     "@GTIN", Product.GTIN,
@@ -90,8 +90,8 @@ Namespace DataLayer.AdoNet
         Public Function GetProductsBySearchString(searchString As String)
             Dim sql As String
 
-            sql = "SELECT IdNo,ProductCode,ProductName,BarCode,GTIN from Product where ProductName like '%" + searchString + "%' Or " +
-                  "ProductCode = @searchString or GTIN = @searchString or BarCode = @searchString order by ProductName"
+            sql = "SELECT IdNo,ProductCode,ProductName,Barcode,GTIN from Product where ProductName like '%" + searchString + "%' Or " +
+                  "ProductCode = @searchString or GTIN = @searchString or Barcode = @searchString order by ProductName"
             Dim params As String() = {"@SearchString", searchString}
             Return Db.ExecuteReader(sql, params)
         End Function
@@ -103,7 +103,7 @@ Namespace DataLayer.AdoNet
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .ProductName = Extensions.AsString(reader("ProductName")),
             .ProductCode = Extensions.AsString(reader("ProductCode")),
-            .BarCode = Extensions.AsString(reader("Barcode")),
+            .Barcode = Extensions.AsString(reader("Barcode")),
             .GTIN = Extensions.AsString(reader("GTIN"))
             }
     End Class

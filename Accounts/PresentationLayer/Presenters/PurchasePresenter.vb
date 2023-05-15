@@ -56,7 +56,7 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("VatPercent", GetType(Decimal))
             AddHandler view.ProductUnitEditing, AddressOf OnProductUnitEditing
             AddHandler view.ProductCodeChanged, AddressOf OnProductCodeChanged
-            'AddHandler view.ProductNameChanged, AddressOf OnProductNameChanged
+            AddHandler view.GTinScanned, AddressOf OnGTinScanned
             AddHandler view.ProductUnitSelection, AddressOf OnProductUnitSelection
 
         End Sub
@@ -283,6 +283,13 @@ Namespace PresentationLayer.Presenters
             Dim idNo As Int32 = GetRecordFieldWithKeyG(Of Int32)(productCode, "Product", "ProductCode", "IdNo")
             Dim item As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(idNo)
             UpdatePurchaseItem(item, bs)
+        End Sub
+
+        Private Sub OnGTinScanned(gTin As String, bs As BindingSource, ByRef productCode As String)
+            Dim idNo As Int32 = GetRecordFieldWithKeyG(Of Int32)(gTin, "Product", "GTin", "IdNo")
+            Dim productModel As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(idNo)
+            productCode = productModel.ProductCode
+            UpdatePurchaseItem(productModel, bs)
         End Sub
 
         Private Sub OnProductUnitSelection(productIdNo As Int32, bs As BindingSource)

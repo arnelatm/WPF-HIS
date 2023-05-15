@@ -11,7 +11,6 @@ Namespace PresentationLayer.Views.Interfaces
         Property BaseUnitIdNo As Int16
         Property CategoryIdNo As Int16
         Property DateCreated As DateTime?
-        Property Drug As Boolean
         Property GTIN As String
         Property IdNo As Int32
         Property ProductCode As String

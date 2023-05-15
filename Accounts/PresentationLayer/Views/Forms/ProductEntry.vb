@@ -99,7 +99,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property BarCode As String Implements IProductView.Barcode
+        Public Property Barcode As String Implements IProductView.Barcode
             Get
                 Return txtBarcode.Text
             End Get
@@ -114,17 +114,27 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 txtGTIN.Text = Value
+                txtGTIN.Text = Value
             End Set
         End Property
 
-        Public Property Drug As Boolean Implements IProductView.Drug
+        Public Property GTINQrCode As String
             Get
-                Return chkActive.Checked
+                Return txtGTIN.Text
             End Get
             Set
-                chkActive.Checked = Value
+                txtGTIN.Text = Value
             End Set
         End Property
+
+        'Public Property Drug As Boolean Implements IProductView.Drug
+        '    Get
+        '        Return chkDrugActive.Checked
+        '    End Get
+        '    Set
+        '        chkActive.Checked = Value
+        '    End Set
+        'End Property
 
         Public Property ProductUnits As List(Of ProductUnitView) Implements IProductView.ProductUnits
             Get
@@ -181,6 +191,30 @@ Namespace PresentationLayer.Views.Forms
             bsProductUnits.ResetBindings(False)
             'UpdateDisplay()
         End Sub
+
+        Private Sub Gtin_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtGTIN.KeyPress
+            Dim i As Integer = txtGTIN.SelectionStart 'save for later use
+            Select Case Asc(e.KeyChar)
+                Case 29 'GS
+                    txtGTIN.Text = txtGTIN.Text.Insert(txtGTIN.SelectionStart, "<GS>")
+                    txtGTIN.SelectionStart = i + 5
+                    e.Handled = True
+            End Select
+        End Sub
+
+        Private Sub txtGTIN_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles txtGTIN.Validating
+            If txtGTIN.Text.Contains("<GS>") Then
+                txtGTIN.Text = ExtractGTin(txtGTIN.Text)
+            End If
+        End Sub
+
+
+        'Private Sub txtGTin_Validated(sender As Object, e As EventArgs) Handles txtGTIN.Validated
+        '    txtGTIN.Text = txtGTIN.Text
+        '    chkActive.Select()
+        'End Sub
+
+
 
 
 

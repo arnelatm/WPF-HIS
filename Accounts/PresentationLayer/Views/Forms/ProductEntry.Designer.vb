@@ -54,13 +54,13 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.DataGridViewProductUnits = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
-            Me.bsProductUnits = New System.Windows.Forms.BindingSource(Me.components)
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
             Me.dgvUnitQty = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.BaseQtyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvProductIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.bsProductUnits = New System.Windows.Forms.BindingSource(Me.components)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout4.SuspendLayout()
             Me.CFlowLayout1.SuspendLayout()
@@ -91,6 +91,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtProductCode.MinimumValue = Nothing
             Me.txtProductCode.Name = "txtProductCode"
             Me.txtProductCode.OldValue = Nothing
+            Me.txtProductCode.OverrideMaxLength = 0
             Me.txtProductCode.ReadOnly = True
             Me.txtProductCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtProductCode.Translatable = False
@@ -166,6 +167,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.MinimumValue = Nothing
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.OverrideMaxLength = 0
             Me.TxtIdNo.ReadOnly = True
             Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtIdNo.Translatable = False
@@ -250,6 +252,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtProductName.MinimumValue = Nothing
             Me.txtProductName.Name = "txtProductName"
             Me.txtProductName.OldValue = Nothing
+            Me.txtProductName.OverrideMaxLength = 0
             Me.txtProductName.ReadOnly = True
             Me.txtProductName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtProductName.Translatable = False
@@ -287,6 +290,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtProductNameAra.MinimumValue = Nothing
             Me.txtProductNameAra.Name = "txtProductNameAra"
             Me.txtProductNameAra.OldValue = Nothing
+            Me.txtProductNameAra.OverrideMaxLength = 0
             Me.txtProductNameAra.ReadOnly = True
             Me.txtProductNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtProductNameAra.Translatable = False
@@ -385,6 +389,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBarcode.MinimumValue = Nothing
             Me.txtBarcode.Name = "txtBarcode"
             Me.txtBarcode.OldValue = Nothing
+            Me.txtBarcode.OverrideMaxLength = 0
             Me.txtBarcode.ReadOnly = True
             Me.txtBarcode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtBarcode.Translatable = False
@@ -421,6 +426,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtGTIN.MinimumValue = Nothing
             Me.txtGTIN.Name = "txtGTIN"
             Me.txtGTIN.OldValue = Nothing
+            Me.txtGTIN.OverrideMaxLength = 100
             Me.txtGTIN.ReadOnly = True
             Me.txtGTIN.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtGTIN.Translatable = False
@@ -482,6 +488,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDateCreated.MinimumValue = Nothing
             Me.txtDateCreated.Name = "txtDateCreated"
             Me.txtDateCreated.OldValue = Nothing
+            Me.txtDateCreated.OverrideMaxLength = 0
             Me.txtDateCreated.ReadOnly = True
             Me.txtDateCreated.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtDateCreated.Translatable = False
@@ -540,10 +547,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewProductUnits.ShowInsertColumnWhenEditing = True
             Me.DataGridViewProductUnits.Translatable = True
             '
-            'bsProductUnits
-            '
-            Me.bsProductUnits.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.ProductUnitModel)
-            '
             'dgvSequence
             '
             Me.dgvSequence.BegFindValue = Nothing
@@ -552,7 +555,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
             Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
             Me.dgvSequence.DisplayOnly = True
-            Me.dgvSequence.EditingMode = True
+            Me.dgvSequence.EditingMode = False
             Me.dgvSequence.EndFindValue = Nothing
             Me.dgvSequence.FieldDescription = Nothing
             Me.dgvSequence.FieldName = Nothing
@@ -615,6 +618,10 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.IdNoDataGridViewTextBoxColumn, "IdNoDataGridViewTextBoxColumn")
             Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
             Me.IdNoDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'bsProductUnits
+            '
+            Me.bsProductUnits.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.ProductUnitModel)
             '
             'ProductEntry
             '

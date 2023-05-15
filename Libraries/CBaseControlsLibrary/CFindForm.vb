@@ -335,4 +335,65 @@ Public Class CFindForm
         txtFieldToSearch.Text = fieldDescription
     End Sub
 
+    Private Sub Gtin_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TxtTextToSearch.KeyPress
+        If _findableControl.FieldName = "GTIN" Then
+            Dim i As Integer = TxtTextToSearch.SelectionStart 'save for later use
+            Select Case Asc(e.KeyChar)
+                Case 29 'GS
+                    TxtTextToSearch.Text = TxtTextToSearch.Text.Insert(TxtTextToSearch.SelectionStart, "<GS>")
+                    TxtTextToSearch.SelectionStart = i + 5
+                    e.Handled = True
+            End Select
+        End If
+    End Sub
+
+    Private Sub txtGTIN_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles TxtTextToSearch.Validating
+        If TxtTextToSearch.Text.Contains("<GS>") Then
+            TxtTextToSearch.Text = ExtractGTin(TxtTextToSearch.Text)
+        End If
+    End Sub
+
+    Private Function ExtractGTin(cText As String) As String
+        Dim dataLength = Len(cText)
+        Dim i As Int16 = 0
+        Dim ai As String = Mid(cText, 1, 2)
+        Dim lastPosition As Int16 = 2
+        Dim GTin As String = Nothing
+        While lastPosition < dataLength
+            Select Case ai
+                Case "01" 'GTIN
+                    GTin = Mid(cText, lastPosition + 1, 14)
+                    lastPosition += 14
+                Case "17" 'Expiry Date
+                    lastPosition += 6
+                Case "11" 'manufacture date
+                    lastPosition += 6
+                Case "10" ' Batch Number
+                    For i = lastPosition + 1 To dataLength
+                        If Mid(cText, i, 4) = "<GS>" Or Mid(cText, i, 1) = ChrW(13) Or i >= dataLength Then ' separator
+                            lastPosition = i + 3
+                            Exit For
+                        End If
+                    Next
+                Case "21" ' Serialization No.
+                    For i = lastPosition + 1 To dataLength
+                        If Mid(cText, i, 4) = "<GS>" Or Mid(cText, i, 1) = ChrW(13) Or i >= dataLength Then
+                            lastPosition = i + 3
+                            Exit For
+                        End If
+                    Next
+            End Select
+            If GTin IsNot Nothing OrElse lastPosition >= dataLength Then
+                Exit While
+            Else
+                ai = Mid(cText, lastPosition + 1, 2)
+                If ai = vbLf Or ai = vbCrLf Or ai = vbLf & vbCr Then
+                    Exit While
+                End If
+                lastPosition += 2
+            End If
+        End While
+        Return GTin
+
+    End Function
 End Class

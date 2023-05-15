@@ -469,7 +469,7 @@
     <value>10</value>
   </data>
   <data name="txtBarcode.Font" type="System.Drawing.Font, System.Drawing">
-    <value>BarCode, 8.249999pt</value>
+    <value>Barcode, 8.249999pt</value>
   </data>
   <data name="txtBarcode.Location" type="System.Drawing.Point, System.Drawing">
     <value>109, 175</value>
