@@ -271,10 +271,17 @@ Public Class DgvFooter
         If Not _autoCalc Then Exit Sub
         Dim curColumnName As String = _parentDgv.Columns(e.ColumnIndex).Name
         Dim columnAddable As Boolean = _columnsToSum.Contains(curColumnName)
-
+        Dim decLength As Integer = -1
+        If TypeOf (sender) Is CtDataGridView Then
+            Dim dgv As CtDataGridView = sender
+            If TypeOf (dgv.Columns(e.ColumnIndex)) Is CDgvDecimalColumn Then
+                Dim col As CDgvDecimalColumn = dgv.Columns(e.ColumnIndex)
+                decLength = col.DecimalPlaces
+            End If
+        End If
         'If _parentDGV.Rows(e.RowIndex).Cells(e.ColumnIndex).GetType.Name = "DataGridViewTextBoxCell" And columnAddable Then
         If columnAddable Then
-            SumColumn(curColumnName)
+            SumColumn(curColumnName, decLength)
         End If
     End Sub
 
@@ -289,8 +296,13 @@ Public Class DgvFooter
         For Each c As DataGridViewColumn In CType(sender, DataGridView).Columns.OfType(Of DataGridViewTextBoxColumn)()
             Dim columnAddable As Boolean = _columnsToSum.Contains(c.Name)
             If Not columnAddable Then Continue For
-
-            SumColumn(c.Name)
+            Dim dgv As CtDataGridView = sender
+            If TypeOf (dgv.Columns(c.Name)) Is CDgvDecimalColumn Then
+                Dim col As CDgvDecimalColumn = dgv.Columns(c.Name)
+                SumColumn(c.Name, col.DecimalPlaces)
+            Else
+                SumColumn(c.Name)
+            End If
         Next
         CheckParentVScrollBar()
     End Sub
@@ -450,7 +462,13 @@ Public Class DgvFooter
     End Sub
 
     Public Function GetColumnTotal(ByVal ColumnName As String)
-        SumColumn(ColumnName)
+        If TypeOf _parentDgv.Columns(ColumnName) Is CDgvDecimalColumn Then
+            Dim dgv As CDgvDecimalColumn = _parentDgv.Columns(ColumnName)
+            Dim nDecPlaces As Integer = dgv.DecimalPlaces
+            SumColumn(ColumnName, nDecPlaces)
+        Else
+            SumColumn(ColumnName)
+        End If
         Return Rows(0).Cells(ColumnName & "_footer").Value
     End Function
 
@@ -459,8 +477,15 @@ Public Class DgvFooter
     ''' </summary>
     ''' <remarks>If a cell value cannot be parsed to double, no error will be thrown. That cell will be skipped.</remarks>
     Public Sub CalculateTotals()
+        Dim i As Integer = 0
         For Each c As String In _columnsToSum
-            SumColumn(c)
+            If TypeOf _parentDgv.Columns(c) Is CDgvDecimalColumn Then
+                Dim dgv As CDgvDecimalColumn = _parentDgv.Columns(c)
+                Dim nDecPlaces As Integer = dgv.DecimalPlaces
+                SumColumn(c, nDecPlaces)
+            Else
+                SumColumn(c)
+            End If
         Next
     End Sub
 
@@ -474,10 +499,6 @@ Public Class DgvFooter
 
     Public Sub SetAlignment(columnName As String, colAlignment As ContentAlignment)
         Columns(columnName & "_footer").DefaultCellStyle.Alignment = colAlignment
-    End Sub
-
-    Public Sub SetDecimalDisplay(columnName As String, noOfDecimalPlaces As Integer)
-        Columns(columnName & "_footer").DefaultCellStyle.Format = "N" + noOfDecimalPlaces.ToString()
     End Sub
 
     ''' <summary>
