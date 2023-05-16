@@ -274,9 +274,7 @@ Namespace PresentationLayer.Views.Forms
             _footer.ColumnToSum("dgvVatAmount") = True
             _footer.ColumnToSum("dgvNetAmount") = True
             _footer.SetAlignment("dgvQuantity", ContentAlignment.MiddleRight)
-            _footer.SetDecimalDisplay("dgvQuantity", 0)
             _footer.SetAlignment("dgvBonusQuantity", ContentAlignment.MiddleRight)
-            _footer.SetDecimalDisplay("dgvBonusQuantity", 0)
             _footer.SetAlignment("dgvGrossAmount", ContentAlignment.MiddleRight)
             _footer.SetAlignment("dgvDiscountAmount", ContentAlignment.MiddleRight)
             _footer.SetAlignment("dgvAmtBefVat", ContentAlignment.MiddleRight)
@@ -292,16 +290,18 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewPurchaseDetails.Refresh()
             bsPurchaseDetails.DataSource = PurchaseDetails
             bsPurchaseDetails.AllowNew = True
-            With DataGridViewPurchaseDetails.Columns
-                dgvSequence.DisplayOnly = True
-                dgvUnitIdNo.DataSource = UnitsByCode
-                dgvUnitIdNo.DisplayMember = "Name"
-                dgvUnitIdNo.ValueMember = "idNo"
-                dgvUnitIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvQuantity.DecimalPlaces = 0
-                dgvBonusQuantity.DecimalPlaces = 0
-            End With
+            SetupDgvColumns()
             ResumeLayout()
+        End Sub
+
+        Private Sub SetupDgvColumns()
+            dgvSequence.DisplayOnly = True
+            dgvUnitIdNo.DataSource = UnitsByCode
+            dgvUnitIdNo.DisplayMember = "Name"
+            dgvUnitIdNo.ValueMember = "idNo"
+            dgvUnitIdNo.DisplayStyleForCurrentCellOnly = True
+            dgvQuantity.DecimalPlaces = 0
+            dgvBonusQuantity.DecimalPlaces = 0
         End Sub
 
         Private Sub CboSupplierIdNo_Changed(sender As Object, e As EventArgs) Handles cboSupplierIdNo.Validated, cboSupplierIdNo.SelectionChangeCommitted
@@ -357,26 +357,93 @@ Namespace PresentationLayer.Views.Forms
                 Dim dAmt As Decimal = 0
                 Dim price As Decimal = 0
                 Dim vAmt As Decimal = 0
-                If DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvGrossAmount" Then
-                    gAmt = bsPurchaseDetails.Current.GrossAmount
+                Dim amtBefVat As Decimal = 0
+                Dim dPerc As Decimal = 0
+                Dim vPerc As Decimal = 0
+                If DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvQuantity" Then
+                    gAmt = bsPurchaseDetails.Current.Price * bsPurchaseDetails.Current.Quantity
+                    bsPurchaseDetails.Current.GrossAmount = gAmt
                     dAmt = gAmt * bsPurchaseDetails.Current.DiscountPercent / 100
+                    bsPurchaseDetails.Current.DiscountAmount = dAmt
+                    bsPurchaseDetails.Current.AmtBefVat = gAmt - dAmt
                     vAmt = (gAmt - dAmt) * bsPurchaseDetails.Current.VatPercent / 100
+                    bsPurchaseDetails.Current.VatAmount = vAmt
+                    bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
+                ElseIf DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvPrice" Then
+                    gAmt = bsPurchaseDetails.Current.Price * bsPurchaseDetails.Current.Quantity
+                    bsPurchaseDetails.Current.GrossAmount = gAmt
+                    dAmt = gAmt * bsPurchaseDetails.Current.DiscountPercent / 100
+                    bsPurchaseDetails.Current.DiscountAmount = dAmt
+                    bsPurchaseDetails.Current.AmtBefVat = gAmt - dAmt
+                    vAmt = (gAmt - dAmt) * bsPurchaseDetails.Current.VatPercent / 100
+                    bsPurchaseDetails.Current.VatAmount = vAmt
+                    bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
+                ElseIf DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvGrossAmount" Then
+                    gAmt = bsPurchaseDetails.Current.GrossAmount
                     price = IIf(bsPurchaseDetails.Current.Quantity = 0, 0, gAmt / bsPurchaseDetails.Current.Quantity)
                     bsPurchaseDetails.Current.Price = price
+                    dAmt = gAmt * bsPurchaseDetails.Current.DiscountPercent / 100
+                    bsPurchaseDetails.Current.DiscountAmount = dAmt
+                    bsPurchaseDetails.Current.DiscountPercent = dAmt / gAmt * 100
+                    vAmt = (gAmt - dAmt) * bsPurchaseDetails.Current.VatPercent / 100
                     bsPurchaseDetails.Current.VatAmount = vAmt
+                    bsPurchaseDetails.Current.AmtBefVat = gAmt - dAmt
+                    bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
                 ElseIf DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvVatAmount" Then
                     gAmt = bsPurchaseDetails.Current.GrossAmount
                     dAmt = bsPurchaseDetails.Current.DiscountAmount
                     vAmt = bsPurchaseDetails.Current.VatAmount
-                    Dim vPerc = IIf(gAmt - dAmt = 0, 0, vAmt / (gAmt - dAmt) * 100)
+                    vPerc = IIf(gAmt - dAmt = 0, 0, vAmt / (gAmt - dAmt) * 100)
                     bsPurchaseDetails.Current.VatPercent = vPerc
+                    bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
+                ElseIf DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvVatPercent" Then
+                    vPerc = bsPurchaseDetails.Current.VatPercent
+                    gAmt = bsPurchaseDetails.Current.GrossAmount
+                    dAmt = bsPurchaseDetails.Current.DiscountAmount
+                    vAmt = (gAmt - dAmt) * vPerc / 100
+                    bsPurchaseDetails.Current.VatAmount = vAmt
+                    bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
+                ElseIf DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvDiscountPercent" Then
+                    gAmt = bsPurchaseDetails.Current.GrossAmount
+                    dAmt = gAmt * bsPurchaseDetails.Current.DiscountPercent / 100
+                    bsPurchaseDetails.Current.DiscountAmount = dAmt
+                    bsPurchaseDetails.Current.AmtBefVat = gAmt - dAmt
+                    vAmt = (gAmt - dAmt) * bsPurchaseDetails.Current.VatPercent / 100
+                    bsPurchaseDetails.Current.VatAmount = vAmt
+                    bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
                 ElseIf DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvDiscountAmount" Then
                     gAmt = bsPurchaseDetails.Current.GrossAmount
                     dAmt = bsPurchaseDetails.Current.DiscountAmount
-                    vAmt = (gAmt - dAmt) * bsPurchaseDetails.Current.VatPercent / 100
-                    Dim dPerc = IIf(gAmt = 0, 0, dAmt / gAmt * 100)
+                    dPerc = IIf(gAmt = 0, 0, dAmt / gAmt * 100)
                     bsPurchaseDetails.Current.DiscountPercent = dPerc
-                Else 'If DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvNetAmount" Then
+                    bsPurchaseDetails.Current.AmtBefVat = gAmt - dAmt
+                    vAmt = (gAmt - dAmt) * bsPurchaseDetails.Current.VatPercent / 100
+                    bsPurchaseDetails.Current.VatAmount = vAmt
+                    bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
+                ElseIf DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvAmtBefVat" Then
+                    amtBefVat = bsPurchaseDetails.Current.AmtBefVat
+                    gAmt = bsPurchaseDetails.Current.GrossAmount
+                    If amtBefVat <= gAmt Then
+                        dAmt = gAmt - amtBefVat
+                        bsPurchaseDetails.Current.DiscountAmount = dAmt
+                        dPerc = IIf(gAmt = 0, 0, dAmt / gAmt * 100)
+                        bsPurchaseDetails.Current.DiscountPercent = dPerc
+                        vAmt = amtBefVat * bsPurchaseDetails.Current.VatPercent / 100
+                        bsPurchaseDetails.Current.VatAmount = vAmt
+                        bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
+                    Else
+                        dAmt = bsPurchaseDetails.Current.DiscountAmount
+                        gAmt = amtBefVat - dAmt
+                        bsPurchaseDetails.Current.GrossAmount = gAmt
+                        price = IIf(bsPurchaseDetails.Current.Quantity = 0, 0, gAmt / bsPurchaseDetails.Current.Quantity)
+                        bsPurchaseDetails.Current.Price = price
+                        dPerc = IIf(gAmt = 0, 0, dAmt / gAmt * 100)
+                        bsPurchaseDetails.Current.DiscountPercent = dPerc
+                        vAmt = amtBefVat * bsPurchaseDetails.Current.VatPercent / 100
+                        bsPurchaseDetails.Current.VatAmount = vAmt
+                        bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
+                    End If
+                ElseIf DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvNetAmount" Then
                     bsPurchaseDetails.Current.GrossAmount = bsPurchaseDetails.Current.Quantity * bsPurchaseDetails.Current.Price
                     gAmt = bsPurchaseDetails.Current.GrossAmount
                     dAmt = bsPurchaseDetails.Current.GrossAmount * bsPurchaseDetails.Current.DiscountPercent / 100
@@ -384,8 +451,7 @@ Namespace PresentationLayer.Views.Forms
                     bsPurchaseDetails.Current.DiscountAmount = dAmt
                     bsPurchaseDetails.Current.VatAmount = vAmt
                 End If
-                bsPurchaseDetails.Current.AmtBefVat = gAmt - dAmt
-                bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
+
                 UpdateTotals()
             End With
         End Sub

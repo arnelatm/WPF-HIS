@@ -15,8 +15,8 @@ Public Class CDgvDecimalColumn
         DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
     End Sub
 
-    Public Sub SetFormat(ByVal length As UInt16, ByVal decimalPlaces As UInt16)
-        DefaultCellStyle.Format = StrDup(length - decimalPlaces - 2, "#") + "0." + StrDup(decimalPlaces, "0")
+    Public Sub SetFormat(ByVal length As UInt16, ByVal nDecimalPlaces As UInt16)
+        DefaultCellStyle.Format = StrDup(length - nDecimalPlaces - 2, "#") + "0." + StrDup(nDecimalPlaces, "0")
     End Sub
 
     <Category("Custom Properties")>
