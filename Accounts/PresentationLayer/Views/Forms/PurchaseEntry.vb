@@ -360,6 +360,7 @@ Namespace PresentationLayer.Views.Forms
                 Dim amtBefVat As Decimal = 0
                 Dim dPerc As Decimal = 0
                 Dim vPerc As Decimal = 0
+                Dim nAmt As Decimal = 0
                 If DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvQuantity" Then
                     gAmt = bsPurchaseDetails.Current.Price * bsPurchaseDetails.Current.Quantity
                     bsPurchaseDetails.Current.GrossAmount = gAmt
@@ -444,12 +445,16 @@ Namespace PresentationLayer.Views.Forms
                         bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
                     End If
                 ElseIf DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvNetAmount" Then
-                    bsPurchaseDetails.Current.GrossAmount = bsPurchaseDetails.Current.Quantity * bsPurchaseDetails.Current.Price
-                    gAmt = bsPurchaseDetails.Current.GrossAmount
-                    dAmt = bsPurchaseDetails.Current.GrossAmount * bsPurchaseDetails.Current.DiscountPercent / 100
-                    vAmt = (gAmt - dAmt) * bsPurchaseDetails.Current.VatPercent / 100
-                    bsPurchaseDetails.Current.DiscountAmount = dAmt
-                    bsPurchaseDetails.Current.VatAmount = vAmt
+                    nAmt = bsPurchaseDetails.Current.NetAmount
+                    vPerc = bsPurchaseDetails.Current.VatPercent
+                    dPerc = bsPurchaseDetails.Current.DiscountPercent
+                    amtBefVat = nAmt / (1 + vPerc / 100)
+                    bsPurchaseDetails.Current.AmtBefVat = amtBefVat
+                    bsPurchaseDetails.Current.VatAmount = nAmt - amtBefVat
+                    gAmt = amtBefVat / (1 - dPerc / 100)
+                    bsPurchaseDetails.Current.GrossAmount = gAmt
+                    bsPurchaseDetails.Current.DiscountAmount = gAmt - amtBefVat
+                    bsPurchaseDetails.Current.Price = IIf(bsPurchaseDetails.Current.Quantity = 0, 0, gAmt / bsPurchaseDetails.Current.Quantity)
                 End If
 
                 UpdateTotals()
