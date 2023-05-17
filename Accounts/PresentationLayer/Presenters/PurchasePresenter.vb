@@ -314,23 +314,10 @@ Namespace PresentationLayer.Presenters
                     bs.Current.Quantity = 1
                 End If
                 If bs.Current.Price = 0 Then
-                    bs.Current.Price = Service.GetField(Of Decimal, Int32)(item.IdNo, "Product", "IdNo", "Price_Cash")
+                    bs.Current.Price = GetLastPrice(item.IdNo)
                 End If
-                Dim noOfUnits = Service.CountRecordWithKey(Of Int32)("ProductUnit", "ProductIdNo", item.IdNo) + 1
-                bs.Current.UnitCount = noOfUnits
-                If noOfUnits = 1 Or (bs.Current.UnitIdNo Is Nothing Or bs.Current.UnitIdNo = 0) Then
-                    bs.Current.UnitIdNo = item.BaseUnitIdNo
-                Else
-                    Dim nCount As Int16 = Service.CountRecordWith2Key(Of Int32, Int16)("ProductUnit", "ProductIdNo", "UnitIdNo", item.IdNo, bs.Current.UnitIdNo)
-                    If nCount = 0 Then
-                        bs.Current.UnitIdNo = item.BaseUnitIdNo
-                    Else
-                        ' no change, retain current value
-                    End If
-                End If
-                'bs.Current.GrossAmount = bs.Current.Price * bs.Current.Quantity
-                'SetProductUnits(item.IdNo)
-                'bs.ResetBindings(False)
+                SetDefaultUnit(item, bs)
+                bs.Current.VatPercentage = GetVatPercentage(item.CategoryIdNo)
             Else
                 bs.Current.ProductIdNo = Nothing
                 bs.Current.ProductName = Nothing
@@ -340,6 +327,29 @@ Namespace PresentationLayer.Presenters
                 Messaging.Show(True, "Invalid Product Code!")
             End If
         End Sub
+
+        Private Function GetLastPrice(idNo As Int32) As Decimal
+            Return Service.GetField(Of Decimal, Int32)(idNo, "Product", "IdNo", "Price_Cash")
+        End Function
+
+        Private Sub SetDefaultUnit(item As ProductModel, bs As BindingSource)
+            Dim noOfUnits = Service.CountRecordWithKey(Of Int32)("ProductUnit", "ProductIdNo", item.IdNo) + 1
+            bs.Current.UnitCount = noOfUnits
+            If noOfUnits = 1 Or (bs.Current.UnitIdNo Is Nothing Or bs.Current.UnitIdNo = 0) Then
+                bs.Current.UnitIdNo = item.BaseUnitIdNo
+            Else
+                Dim nCount As Int16 = Service.CountRecordWith2Key(Of Int32, Int16)("ProductUnit", "ProductIdNo", "UnitIdNo", item.IdNo, bs.Current.UnitIdNo)
+                If nCount = 0 Then
+                    bs.Current.UnitIdNo = item.BaseUnitIdNo
+                Else
+                    ' no change, retain current value
+                End If
+            End If
+        End Sub
+
+        Private Function GetVatPercentage(categoryIdNo As Int16) As Decimal
+            Return Service.GetField(Of Int32, Int16)(categoryIdNo, "Category", "IdNo", "VatPercentage")
+        End Function
 
     End Class
 
