@@ -1,4 +1,5 @@
-﻿Imports System.Globalization
+﻿Imports System.Dynamic
+Imports System.Globalization
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
@@ -308,28 +309,46 @@ Namespace PresentationLayer.Presenters
 
         Private Sub UpdatePurchaseItem(item As ProductModel, bs As BindingSource)
             If item.IdNo > 0 Then
-                bs.Current.ProductIdNo = item.IdNo
-                bs.Current.ProductName = item.ProductName
-                If bs.Current.Quantity = 0 Then
-                    bs.Current.Quantity = 1
+                If bs.Current.ProductIdNo <> item.IdNo Then
+                    bs.Current.ProductName = item.ProductName
+                    If bs.Current.Quantity = 0 Then
+                        bs.Current.Quantity = 1
+                    End If
+                    SetPurchaseValues(item, bs)
+                    bs.Current.VatPercent = GetVatPercentage(item.CategoryIdNo)
+                    bs.Current.GrossAmount = bs.Current.Price * bs.Current.Quantity
+                    bs.Current.DiscountAmount = bs.Current.GrossAmount * bs.Current.DiscountPercent / 100
+                    bs.Current.AmtBefVat = bs.Current.GrossAmount - bs.Current.DiscountAmount
+                    bs.Current.VatAmount = (bs.Current.GrossAmount - bs.Current.DiscountAmount) * bs.Current.VatPercent / 100
+                    bs.Current.NetAmount = bs.Current.GrossAmount - bs.Current.DiscountAmount + bs.Current.VatAmount
+                    bs.Current.ProductIdNo = item.IdNo
                 End If
-                If bs.Current.Price = 0 Then
-                    bs.Current.Price = GetLastPrice(item.IdNo)
-                End If
-                SetDefaultUnit(item, bs)
-                bs.Current.VatPercentage = GetVatPercentage(item.CategoryIdNo)
             Else
                 bs.Current.ProductIdNo = Nothing
                 bs.Current.ProductName = Nothing
                 bs.Current.UnitIdNo = Nothing
                 bs.Current.Price = Nothing
-                bs.Current.ProductCode = Nothing
-                Messaging.Show(True, "Invalid Product Code!")
             End If
         End Sub
 
-        Private Function GetLastPrice(idNo As Int32) As Decimal
-            Return Service.GetField(Of Decimal, Int32)(idNo, "Product", "IdNo", "Price_Cash")
+        Private Sub SetPurchaseValues(item As ProductModel, bs As BindingSource)
+            Dim purchaseItem As Object = New ExpandoObject
+            purchaseItem = Service.GetTopOneFields("PurchaseDetail", "Price,UnitSalesPrice,UnitIdNo", "ProductIdNo = " & item.IdNo.ToString(), "IdNo", False)
+            If purchaseItem Is Nothing Then
+                SetDefaultUnit(item, bs)
+            Else
+                bs.Current.Price = purchaseItem.Price
+                bs.Current.UnitSalesPrice = purchaseItem.UnitSalesPrice
+                bs.Current.UnitIdNo = purchaseItem.UnitIdNo
+            End If
+            'SetDefaultUnit(item, bs)
+        End Sub
+
+        Private Function GetSalesPrice(item As ProductModel) As Decimal
+            Dim price As Decimal
+
+            price = Service.GetField(Of Decimal, Int32)(item.IdNo, "Product", "IdNo", "Price_Cash")
+            Return price
         End Function
 
         Private Sub SetDefaultUnit(item As ProductModel, bs As BindingSource)
