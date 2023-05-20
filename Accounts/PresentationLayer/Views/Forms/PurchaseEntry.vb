@@ -281,6 +281,7 @@ Namespace PresentationLayer.Views.Forms
             _footer.SetAlignment("dgvVatAmount", ContentAlignment.MiddleRight)
             _footer.SetAlignment("dgvNetAmount", ContentAlignment.MiddleRight)
             _footer.SetText("dgvProductName", "Totals ->")
+            txtReferenceNo.DisplayOnly = True
             'UpdateTotals()
         End Sub
 
@@ -318,12 +319,6 @@ Namespace PresentationLayer.Views.Forms
             '    cboSupplierIdNo.RevertValue()
             'End If
         End Sub
-
-        Private Sub DataGridViewPurchaseDetails_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewPurchaseDetails.UserDeletedRow
-            'UpdateTotals()
-            'UpdateInputVatAmount()
-        End Sub
-
 
         Private Overloads Sub Dispose()
             Close()
@@ -563,7 +558,10 @@ Namespace PresentationLayer.Views.Forms
                     SendKeys.Send("{Tab}")
                 End If
             Else
-                e.Cancel = True
+                If Not String.IsNullOrEmpty(code) Then
+                    Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", code, "fieldDescription", "Product Code"})
+                    e.Cancel = True
+                End If
             End If
         End Sub
 
@@ -696,31 +694,23 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateTotals()
             If _footer IsNot Nothing Then
                 _footer.CalculateTotals()
-                'txtTotalDebits.Text = _footer.Value("dgvNetAmount")
-                'txtTotalCredits.Text = _footer.Value("dgvVatAmount")
+                txtAmount.Text = _footer.Value("dgvNetAmount")
+                txtVatAmount.Text = _footer.Value("dgvVatAmount")
             End If
         End Sub
 
 
+
         Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewPurchaseDetails.UserDeletingRow
-            'Dim PurchaseDetailRow As DataGridViewRow = DataGridViewPurchaseDetails.Rows(0)
-            'If DataGridViewPurchaseDetails.SelectedRows.Contains(PurchaseDetailRow) Then
-            '    ' Do not allow the user to delete the first row.
-            '    Messaging.Show(True, "MsgFirstRowDeletionNotAllowed", "Deletion of the first row Is Not allowed!", "Delete Error")
-            '    ' Cancel the deletion
-            '    e.Cancel = True
-            'ElseIf Presenter.EditMode Then
-            '    Dim jiIdNo As Integer
-            '    jiIdNo = DataGridViewPurchaseDetails.CurrentRow.Cells("dgvIdNo").Value
-            '    If Presenter.ApPaymentExists("AP", jiIdNo) Then
-            '        'ElseIf
-            '        ' Do not allow the user to delete items with existing payments/discounts (prevent orphaned records)
-            '        Messaging.Show(True, "MsgDeletePaidEntryNotAllowed")
-            '        ' Cancel the deletion
-            '        e.Cancel = True
-            '    End If
-            'End If
+            'RaiseEvent UserDeletedRow()
+            'UpdateTotals()
         End Sub
+
+        Private Sub OnUserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewPurchaseDetails.UserDeletedRow
+            UpdateTotals()
+            'UpdateInputVatAmount()
+        End Sub
+
 
         'Private Sub PurchaseEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         '    'TODO: This line of code loads data into the 'ISPDATADataSet.Product' table. You can move, or remove it, as needed.

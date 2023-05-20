@@ -427,6 +427,26 @@ Namespace AdoNet
             Return obj
         End Function
 
+        Public Function GetTopOneFields(tableName As String, fieldList As String, filter As String, order As String, orderAscending As Boolean) As ExpandoObject Implements IBaseDao.GetTopOneFields
+            Dim sql As String =
+                    " Select Top 1 " & fieldList & " FROM [" & tableName & "] " + IIf(filter Is Nothing, "", " Where " & filter) +
+                    IIf(order Is Nothing, "", " order by " & order) + IIf(orderAscending, "", " DESC")
+            Dim values As Object
+            values = GetDb().SqlRead(sql)
+            Dim obj As Object = New ExpandoObject
+            If values.Count() <> 0 Then
+                Dim fields = fieldList.Split(",")
+                Dim i As Int16 = 0
+                For Each item In fields
+                    CreateDynamicObject(obj, item, values(i))
+                    i = i + 1
+                Next
+            Else
+                obj = Nothing
+            End If
+            Return obj
+        End Function
+
         Public Function GetIdNoWithName(Of T)(tableName As String, fieldValue As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As T Implements IBaseDao.GetIdNoWithName
             If idFieldName Is Nothing Then
                 idFieldName = "IdNo"

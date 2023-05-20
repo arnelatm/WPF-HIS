@@ -60,7 +60,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub DisplayPayrollDetails(ByRef startDate As Date?, ByRef endDate As Date?, ByRef payDescription As String)
             Dim payroll As Object = New ExpandoObject
-            payroll = Service.GetFieldsWithIdNo(View.PayrollIdNo, "Payroll", "StartDate,EndDate,PayrollName")
+            payroll = Service.GetFieldsWithIdNo(View.PayrollIdNo, "Payroll", "StartDate,EndDate,PayrollName,PayrollNameAra")
             startDate = CType(payroll.StartDate, Date)
             endDate = CType(payroll.EndDate, Date)
             If GlobalVariables.RightToLeftLayout Then

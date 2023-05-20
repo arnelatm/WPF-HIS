@@ -611,6 +611,10 @@ Namespace Services
             Return DataDao.GetRecordFieldsFiltered(tableName, fieldList, filter)
         End Function
 
+        Public Function GetTopOneFields(tableName As String, fieldList As String, filter As String, order As String, orderAscending As Boolean) As ExpandoObject Implements IService.GetTopOneFields
+            Return DataDao.GetTopOneFields(tableName, fieldList, filter, order, orderAscending)
+        End Function
+
         Public Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As String Implements IService.GetRecordFieldWith2Key
             Return DataDao.GetRecordFieldWith2Key(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2, returnFieldName)
         End Function

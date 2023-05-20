@@ -75,6 +75,7 @@ Public Interface IBaseDao
     Function GetRecordField(tableName As String, returnFieldName As String) As Object
 
     Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String) As ExpandoObject
+    Function GetTopOneFields(tableName As String, fieldList As String, filter As String, order As String, orderAscending As Boolean) As ExpandoObject
 
     Function GetRecordFieldWith2Key(searchValue1 As String, searchValue2 As String, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String) As String
 
@@ -117,4 +118,5 @@ Public Interface IBaseDao
 
     Function UpdateRecordWithKey(Of T1, T2)(tableName As String, keyFieldName As String, keyFieldValue As T1, fieldToReplace As String, replaceValue As T2) As Integer
     Function GetDtRecords(tableName As String, fieldNames As String, filterKey As String, sortKey As String) As DataTable
+
 End Interface
