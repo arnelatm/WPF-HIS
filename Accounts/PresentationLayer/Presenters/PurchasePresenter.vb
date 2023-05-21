@@ -59,6 +59,7 @@ Namespace PresentationLayer.Presenters
             AddHandler view.ProductCodeChanged, AddressOf OnProductCodeChanged
             AddHandler view.GTinScanned, AddressOf OnGTinScanned
             AddHandler view.ProductUnitSelection, AddressOf OnProductUnitSelection
+            AddHandler view.UnitChanged, AddressOf OnUnitChanged
 
         End Sub
 
@@ -295,6 +296,10 @@ Namespace PresentationLayer.Presenters
 
         Private Sub OnProductUnitSelection(productIdNo As Int32, bs As BindingSource)
             SetProductUnits(productIdNo)
+        End Sub
+
+        Private Sub OnUnitChanged(oldUnit As Int16, newUnit As Int16)
+            'RecomputePrice(productIdNo)
         End Sub
 
         Private Sub OnProductUnitEditing(productIdNo As Int32, bs As BindingSource)
