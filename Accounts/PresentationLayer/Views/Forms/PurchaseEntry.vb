@@ -439,6 +439,17 @@ Namespace PresentationLayer.Views.Forms
                         bsPurchaseDetails.Current.VatAmount = vAmt
                         bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
                     End If
+                ElseIf DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvUnitIdNo" Then
+                    Dim unit As String = sender.CurrentRow.Cells("dgvUnitIdNo").EditedFormattedValue
+
+                    gAmt = bsPurchaseDetails.Current.GrossAmount
+                    dAmt = bsPurchaseDetails.Current.DiscountAmount
+                    dPerc = IIf(gAmt = 0, 0, dAmt / gAmt * 100)
+                    'bsPurchaseDetails.Current.DiscountPercent = dPerc
+                    'bsPurchaseDetails.Current.AmtBefVat = gAmt - dAmt
+                    'vAmt = (gAmt - dAmt) * bsPurchaseDetails.Current.VatPercent / 100
+                    'bsPurchaseDetails.Current.VatAmount = vAmt
+                    'bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
                 ElseIf DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvNetAmount" Then
                     nAmt = bsPurchaseDetails.Current.NetAmount
                     vPerc = bsPurchaseDetails.Current.VatPercent
