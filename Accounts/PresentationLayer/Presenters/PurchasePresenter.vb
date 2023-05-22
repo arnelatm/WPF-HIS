@@ -12,6 +12,7 @@ Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
+Imports Telerik.Licensing
 
 Namespace PresentationLayer.Presenters
 
@@ -298,8 +299,42 @@ Namespace PresentationLayer.Presenters
             SetProductUnits(productIdNo)
         End Sub
 
-        Private Sub OnUnitChanged(oldUnit As Int16, newUnit As Int16)
-            'RecomputePrice(productIdNo)
+        Private Sub OnUnitChanged(oldUnit As Int16, newUnit As Int16, bs As BindingSource)
+            RecomputePrice(oldUnit, newUnit, bs)
+        End Sub
+
+        Private Sub RecomputePrice(oldUnit As Int16, newUnit As Int16, bs As BindingSource)
+            Dim newPrice As Decimal
+            Dim productIdNo As Int32 = bs.Current.ProductIdNo
+            Dim productModel As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(productIdNo)
+            If oldUnit <> newUnit Then
+                Dim unitQty, baseQty As Int16
+                Dim basePrice As Decimal
+                If productModel.BaseUnitIdNo = oldUnit Then
+                    basePrice = bs.Current.Price
+                Else
+                    unitQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, oldUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "UnitQty")
+                    baseQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, oldUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "BaseQty")
+                    basePrice = IIf(baseQty = 0, 0, unitQty / baseQty) * bs.Current.Price
+                End If
+                If newUnit = productModel.BaseUnitIdNo Then
+                    newPrice = basePrice
+                Else
+                    unitQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, newUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "UnitQty")
+                    baseQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, newUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "BaseQty")
+                    newPrice = IIf(baseQty = 0, 0, basePrice * baseQty / unitQty)
+                End If
+                Dim gAmt As Decimal = 0
+                gAmt = newPrice * bs.Current.Quantity
+                bs.Current.Price = newPrice
+                bs.Current.GrossAmount = gAmt
+                Dim dAmt As Decimal = gAmt * bs.Current.DiscountPercent / 100
+                bs.Current.DiscountAmount = dAmt
+                bs.Current.AmtBefVat = gAmt - dAmt
+                Dim vAmt As Decimal = (gAmt - dAmt) * bs.Current.VatPercent / 100
+                bs.Current.VatAmount = vAmt
+                bs.Current.NetAmount = gAmt - dAmt + vAmt
+            End If
         End Sub
 
         Private Sub OnProductUnitEditing(productIdNo As Int32, bs As BindingSource)

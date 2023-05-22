@@ -21,6 +21,7 @@ Namespace PresentationLayer.Views.Forms
         Public Event GTinScanned(GTin As String, bs As BindingSource, ByRef productCode As String) Implements IPurchaseView.GTinScanned
         Public Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource) Implements IPurchaseView.ProductUnitSelection
         Public Event ProductUnitEditing(productIdNo As Int32, bs As BindingSource) Implements IPurchaseView.ProductUnitEditing
+        Public Event UnitChanged(oldUnit As Int16, newUnit As Int16, bs As BindingSource) Implements IPurchaseView.UnitChanged
         Public Sub New()
             MyBase.New()
             ' This call is required by the designer.
@@ -439,17 +440,6 @@ Namespace PresentationLayer.Views.Forms
                         bsPurchaseDetails.Current.VatAmount = vAmt
                         bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
                     End If
-                ElseIf DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvUnitIdNo" Then
-                    Dim unit As String = sender.CurrentRow.Cells("dgvUnitIdNo").EditedFormattedValue
-
-                    gAmt = bsPurchaseDetails.Current.GrossAmount
-                    dAmt = bsPurchaseDetails.Current.DiscountAmount
-                    dPerc = IIf(gAmt = 0, 0, dAmt / gAmt * 100)
-                    'bsPurchaseDetails.Current.DiscountPercent = dPerc
-                    'bsPurchaseDetails.Current.AmtBefVat = gAmt - dAmt
-                    'vAmt = (gAmt - dAmt) * bsPurchaseDetails.Current.VatPercent / 100
-                    'bsPurchaseDetails.Current.VatAmount = vAmt
-                    'bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
                 ElseIf DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvNetAmount" Then
                     nAmt = bsPurchaseDetails.Current.NetAmount
                     vPerc = bsPurchaseDetails.Current.VatPercent
@@ -462,7 +452,6 @@ Namespace PresentationLayer.Views.Forms
                     bsPurchaseDetails.Current.DiscountAmount = gAmt - amtBefVat
                     bsPurchaseDetails.Current.Price = IIf(bsPurchaseDetails.Current.Quantity = 0, 0, gAmt / bsPurchaseDetails.Current.Quantity)
                 End If
-
                 UpdateTotals()
             End With
         End Sub
@@ -511,6 +500,8 @@ Namespace PresentationLayer.Views.Forms
                         ValidateProductName(DataGridViewPurchaseDetails, e)
                     ElseIf cColumnName = $"dgvProductCode" Then
                         ValidateProductCode(DataGridViewPurchaseDetails, e)
+                    ElseIf cColumnName = $"dgvUnitIdNo" Then
+                        ValidateUnit(DataGridViewPurchaseDetails, e)
                     End If
                 End With
             End If
@@ -574,6 +565,27 @@ Namespace PresentationLayer.Views.Forms
                     e.Cancel = True
                 End If
             End If
+        End Sub
+
+        Private Sub ValidateUnit(ByRef dgv As CtDataGridView, ByRef e As DataGridViewCellValidatingEventArgs)
+            Dim oldUnitIdNo As Int16 = dgv.CurrentRow.Cells("dgvUnitIdNo").Value
+            Dim newUnitIdNo = DirectCast(dgv.CurrentCell, AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxCell).CellEditingControl.SelectedValue
+            If oldUnitIdNo <> newUnitIdNo Then
+                RaiseEvent UnitChanged(oldUnitIdNo, newUnitIdNo, bsPurchaseDetails)
+            End If
+            'RaiseEvent ProductCodeChanged(code, bsPurchaseDetails)
+            'Dim cProductName = dgv.CurrentRow().Cells("dgvProductName").Value
+            'If Not String.IsNullOrEmpty(cProductName) Then
+            '    SendKeys.Send("{Tab}")
+            '    If dgv.CurrentRow.Cells("dgvUnitCount").Value = 1 Then
+            '        SendKeys.Send("{Tab}")
+            '    End If
+            'Else
+            '    If Not String.IsNullOrEmpty(code) Then
+            '        Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", code, "fieldDescription", "Product Code"})
+            '        e.Cancel = True
+            '    End If
+            'End If
         End Sub
 
         'Private Sub dataGridView1_CellValidating(ByVal sender As Object, ByVal e As DataGridViewCellValidatingEventArgs) Handles DataGridViewPurchaseDetails.CellValidating
