@@ -120,8 +120,6 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
             Me.CFlowLayout4.Controls.Add(Me.lblIdNo)
             Me.CFlowLayout4.Controls.Add(Me.TxtIdNo)
-            Me.CFlowLayout4.Controls.Add(Me.lblCategoryIdNo)
-            Me.CFlowLayout4.Controls.Add(Me.cboCategoryIdNo)
             Me.CFlowLayout4.Controls.Add(Me.lblProductCode)
             Me.CFlowLayout4.Controls.Add(Me.txtProductCode)
             Me.CFlowLayout4.Controls.Add(Me.lblProductName)
@@ -130,6 +128,8 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout4.Controls.Add(Me.txtProductNameAra)
             Me.CFlowLayout4.Controls.Add(Me.lblBaseUnit)
             Me.CFlowLayout4.Controls.Add(Me.cboBaseUnitIdNo)
+            Me.CFlowLayout4.Controls.Add(Me.lblCategoryIdNo)
+            Me.CFlowLayout4.Controls.Add(Me.cboCategoryIdNo)
             Me.CFlowLayout4.Controls.Add(Me.CFlowLayout1)
             Me.CFlowLayout4.Controls.Add(Me.CFlowLayout2)
             resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")
@@ -322,6 +322,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBaseUnitIdNo.FilterRule = Nothing
             Me.cboBaseUnitIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboBaseUnitIdNo.FindEnabled = False
+            Me.CFlowLayout4.SetFlowBreak(Me.cboBaseUnitIdNo, True)
             resources.ApplyResources(Me.cboBaseUnitIdNo, "cboBaseUnitIdNo")
             Me.cboBaseUnitIdNo.ForeColor = System.Drawing.Color.Black
             Me.cboBaseUnitIdNo.HideWhenNotEditingOrAdding = False
