@@ -30,22 +30,9 @@ Public Class CDgvDecimalColumn
             Return _displayOnly
         End Get
         Set(value As Boolean)
-            _editingMode = value
+            _displayOnly = value
             If value Then
-                If DisplayOnly Then
-                    [ReadOnly] = True
-                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                Else
-                    [ReadOnly] = False
-                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                    [ReadOnly] = False
-                End If
-            Else
-                [ReadOnly] = True
-                DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                _editingMode = True
             End If
         End Set
     End Property
