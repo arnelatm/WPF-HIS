@@ -32,6 +32,7 @@ Namespace PresentationLayer.Views
         Public Property UnitSalesPrice As Decimal Implements IPurchaseDetailView.UnitSalesPrice
         Public Property VatAmount As Decimal Implements IPurchaseDetailView.VatAmount
         Public Property VatPercent As Decimal Implements IPurchaseDetailView.VatPercent
+        Public Property WarehouseIdNo As Int16 Implements IPurchaseDetailView.WarehouseIdNo
 
     End Class
 

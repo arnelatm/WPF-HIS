@@ -177,6 +177,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property WarehouseIdNo As Int16 Implements IPurchaseView.WarehouseIdNo
+            Get
+                Return cboWarehouseIdNo.GetValue(Of Int16)
+            End Get
+            Set
+                cboWarehouseIdNo.SetValue(Value)
+            End Set
+        End Property
+
         'Public ReadOnly Property TotalCredits As Decimal Implements IPurchaseView.TotalCredits
         '    Get
         '        Return NumParser(Of Decimal)(txtTotalCredits.Text)
@@ -250,17 +259,18 @@ Namespace PresentationLayer.Views.Forms
          {"IdNo", TxtIdNo},
          {"InvoiceNo", txtInvoiceNo},
          {"Posted", chkPosted},
-         {"ReferenceNo", txtReferenceNo},
+         {"ReferenceNo", cboWarehouseIdNo},
          {"SupplierIdNo", cboSupplierIdNo},
          {"TransactionDate", dtpTransactionDate},
          {"VatAmount", txtVatAmount},
-         {"VatNumber", txtVatNumber}
+         {"VatNumber", txtVatNumber},
+         {"WarehouseIdNo", cboWarehouseIdNo}
         }
         End Sub
 
-        'Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
-        '    'UpdateTotals()
-        'End Sub
+        Protected Sub PurchaseUpdateView() Handles MyBase.AfterUpdateView
+            UpdateTotals()
+        End Sub
 
         Private Sub PurchaseEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             _footer = New DgvFooter(DataGridViewPurchaseDetails) With {
@@ -281,8 +291,7 @@ Namespace PresentationLayer.Views.Forms
             _footer.SetAlignment("dgvVatAmount", ContentAlignment.MiddleRight)
             _footer.SetAlignment("dgvNetAmount", ContentAlignment.MiddleRight)
             _footer.SetText("dgvProductName", "Totals ->")
-            txtReferenceNo.DisplayOnly = True
-            'UpdateTotals()
+            UpdateTotals()
         End Sub
 
         Private Sub BindPurchaseDetail()
@@ -718,11 +727,12 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateTotals()
             If _footer IsNot Nothing Then
                 _footer.CalculateTotals()
-                txtAmount.Text = _footer.Value("dgvNetAmount")
-                txtVatAmount.Text = _footer.Value("dgvVatAmount")
+                txtAmount.Text = _footer.Value("dgvNetAmount").ToString("n2")
+                txtVatAmount.Text = _footer.Value("dgvVatAmount").ToString("n2")
+                txtGrossAmount.Text = _footer.Value("dgvGrossAmount").ToString("n2")
+                txtDiscountAmount.Text = _footer.Value("dgvDiscountAmount").ToString("n2")
             End If
         End Sub
-
 
 
         Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewPurchaseDetails.UserDeletingRow
