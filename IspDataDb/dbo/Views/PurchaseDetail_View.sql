@@ -4,7 +4,7 @@
 
 CREATE VIEW [dbo].[PurchaseDetail_View]
 AS
-SELECT        dbo.PurchaseDetail.IdNo, dbo.PurchaseDetail.Sequence, dbo.PurchaseDetail.PurchaseIdNo, dbo.PurchaseDetail.ProductIdNo, dbo.PurchaseDetail.Quantity, dbo.PurchaseDetail.BonusQuantity, dbo.PurchaseDetail.UnitIdNo, 
+SELECT        dbo.PurchaseDetail.IdNo, dbo.PurchaseDetail.Sequence, dbo.PurchaseDetail.PurchaseIdNo, dbo.PurchaseDetail.ProductIdNo, dbo.PurchaseDetail.Quantity, dbo.PurchaseDetail.BonusQuantity, dbo.PurchaseDetail.UnitIdNo, dbo.PurchaseDetail.ExpiryDate, 
                          dbo.PurchaseDetail.Price, dbo.PurchaseDetail.DiscountAmount, dbo.PurchaseDetail.UnitSalesPrice, dbo.PurchaseDetail.VatPercent, dbo.PurchaseDetail.VatAmount, dbo.PurchaseDetail.NetAmount, dbo.Product.ProductCode, dbo.Product.ProductName, 
                          dbo.Product.ProductNameAra, dbo.Product.Barcode, dbo.Product.GTIN, dbo.Product.BaseUnitIdNo, dbo.Unit.UnitCode, dbo.Unit.UnitName, dbo.Unit.UnitNameAra, dbo.Category.VatSaleAccountIdNo, 
                          dbo.Category.VatPurchaseAccountIdNo, dbo.Category.VatPercentage, dbo.Category.SaleAccountIdNo, dbo.Category.PurchaseAccountIdNo, dbo.Product.CategoryIdNo, (select count(dbo.ProductUnit.ProductIdNo) from dbo.ProductUnit where dbo.ProductUnit.ProductIdNo = dbo.PurchaseDetail.ProductIdNo) as UnitCount,

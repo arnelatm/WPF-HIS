@@ -15,6 +15,7 @@ Namespace PresentationLayer.Views
         Public Property DiscountAmount As Decimal Implements IPurchaseDetailView.DiscountAmount
         Public Property DiscountPercent As Decimal Implements IPurchaseDetailView.DiscountPercent
         Public Property Errors As List(Of String) Implements IView.Errors
+        Public Property ExpiryDate As Date? Implements IPurchaseDetailView.ExpiryDate
         Public Property GrossAmount As Decimal Implements IPurchaseDetailView.GrossAmount
         Public Property IdNo As Int32 Implements IPurchaseDetailView.IdNo
         Public Property NetAmount As Decimal Implements IPurchaseDetailView.NetAmount
@@ -33,6 +34,7 @@ Namespace PresentationLayer.Views
         Public Property VatAmount As Decimal Implements IPurchaseDetailView.VatAmount
         Public Property VatPercent As Decimal Implements IPurchaseDetailView.VatPercent
         Public Property WarehouseIdNo As Int16 Implements IPurchaseDetailView.WarehouseIdNo
+
 
     End Class
 

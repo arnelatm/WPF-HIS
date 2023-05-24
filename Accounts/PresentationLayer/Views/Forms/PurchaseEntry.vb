@@ -291,6 +291,7 @@ Namespace PresentationLayer.Views.Forms
             _footer.SetAlignment("dgvVatAmount", ContentAlignment.MiddleRight)
             _footer.SetAlignment("dgvNetAmount", ContentAlignment.MiddleRight)
             _footer.SetText("dgvProductName", "Totals ->")
+            DataGridViewPurchaseDetails.Columns("dgvExpiryDate").DefaultCellStyle.Format = "yyyy/MM"
             UpdateTotals()
         End Sub
 
@@ -512,6 +513,18 @@ Namespace PresentationLayer.Views.Forms
                         ValidateProductCode(DataGridViewPurchaseDetails, e)
                     ElseIf cColumnName = $"dgvUnitIdNo" Then
                         ValidateUnit(DataGridViewPurchaseDetails, e)
+                    ElseIf cColumnName = $"dgvExpiryDate" Then
+                        Dim value As Date
+                        'Validate the input using the editing format and the display format.
+                        e.Cancel = Not Date.TryParseExact(CStr(e.FormattedValue),
+                                                          {"yyyyMM", "yyyy/MM", "yyMM"},
+                                                          Nothing,
+                                                          DateTimeStyles.None,
+                                                          value)
+                        If Not e.Cancel Then
+                            'Ensure data is displayed using the display format.
+                            DataGridViewPurchaseDetails.EditingControl.Text = value.ToString("yyyy/MM")
+                        End If
                     End If
                 End With
             End If
@@ -764,6 +777,11 @@ Namespace PresentationLayer.Views.Forms
                         comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend
                         comboBox.DataSource = UnitsByProduct
                     End If
+                ElseIf cColumnName = "dgvExpiryDate" Then
+                    'Display the date in the editing format.
+                    Dim cellValue = DataGridViewPurchaseDetails.CurrentCell.Value
+                    Dim text = If(cellValue Is DBNull.Value, String.Empty, CDate(cellValue).ToString("yyyy/MM"))
+                    e.Control.Text = text
                 End If
             End With
         End Sub

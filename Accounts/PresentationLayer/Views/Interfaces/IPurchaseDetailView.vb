@@ -11,6 +11,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property CategoryIdNo As Int16
         Property DiscountAmount As Decimal
         Property DiscountPercent As Decimal
+        Property ExpiryDate As Date?
         Property GrossAmount As Decimal
         Property IdNo As Int32
         Property NetAmount As Decimal

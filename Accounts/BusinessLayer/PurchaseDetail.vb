@@ -15,6 +15,7 @@ Namespace BusinessLayer
         Public Property CategoryIdNo As Int16
         Public Property DiscountAmount As Decimal
         Public Property DiscountPercent As Decimal
+        Public Property ExpiryDate As Date?
         Public Property GrossAmount As Decimal
         Public Property IdNo As Int32
         Public Property NetAmount As Decimal
