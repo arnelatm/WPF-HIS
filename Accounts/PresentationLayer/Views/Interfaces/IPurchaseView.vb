@@ -17,10 +17,12 @@ Namespace PresentationLayer.Views.Interfaces
         Property VatAmount As Decimal
         Property VatNumber As String
         Property Posted As Boolean
+        Property WarehouseIdNo As Int16
         Property PurchaseDetails As List(Of PurchaseDetailView)
         Property ProductsByCode As Object
         Property UnitsByCode As Object
         Property UnitsByProduct As Object
+
         Event ProductUnitEditing(productIdNo As Int32, bs As BindingSource)
         Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource)
         Event ProductCodeChanged(productCode As String, bs As BindingSource)

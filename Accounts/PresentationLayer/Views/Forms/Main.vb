@@ -1150,6 +1150,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemUnit_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUnit.Click
             RunBasicForm("Unit", "Product Units Entry")
         End Sub
+
+        Private Sub ToolStripMenuItemWarehouse_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemWarehouse.Click
+            RunBasicForm("Warehouse", "Warehouse Entry")
+        End Sub
     End Class
 
 End Namespace
