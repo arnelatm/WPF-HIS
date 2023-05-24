@@ -33,6 +33,7 @@ Namespace DataLayer.AdoNet
                                     "UnitCount," &
                                     "UnitIdNo," &
                                     "UnitSalesPrice," &
+                                    "UnitCost," &
                                     "VatAmount," &
                                     "VatPercent"
 
@@ -88,6 +89,7 @@ Namespace DataLayer.AdoNet
             .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("Sequence")),
             .UnitCount = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("UnitIdNo")),
             .UnitIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("UnitIdNo")),
+            .UnitCost = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("UnitCost")),
             .UnitSalesPrice = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("UnitSalesPrice")),
             .VatAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("VatAmount")),
             .VatPercent = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("VatPercent"))

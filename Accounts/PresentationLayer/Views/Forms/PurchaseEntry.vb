@@ -253,7 +253,6 @@ Namespace PresentationLayer.Views.Forms
          {"ReferenceNo", txtReferenceNo},
          {"SupplierIdNo", cboSupplierIdNo},
          {"TransactionDate", dtpTransactionDate},
-         {"TransactionType", cboTransactionType},
          {"VatAmount", txtVatAmount},
          {"VatNumber", txtVatNumber}
         }
@@ -304,6 +303,8 @@ Namespace PresentationLayer.Views.Forms
             dgvUnitIdNo.DisplayStyleForCurrentCellOnly = True
             dgvQuantity.DecimalPlaces = 0
             dgvBonusQuantity.DecimalPlaces = 0
+            dgvUnitCost.DisplayOnly = True
+            dgvUnitCost.SetFormat(7, 2)
         End Sub
 
         Private Sub CboSupplierIdNo_Changed(sender As Object, e As EventArgs) Handles cboSupplierIdNo.Validated, cboSupplierIdNo.SelectionChangeCommitted
