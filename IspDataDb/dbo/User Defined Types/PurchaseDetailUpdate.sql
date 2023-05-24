@@ -1,6 +1,7 @@
 ﻿CREATE TYPE [dbo].[PurchaseDetailUpdate] AS TABLE (
     [BonusQuantity]  SMALLINT        NOT NULL,
     [DiscountAmount] DECIMAL (8, 2)  NOT NULL,
+    [ExpiryDate]     DATE            NULL,
     [IdNo]           INT             NOT NULL,
     [NetAmount]      DECIMAL (10, 2) NOT NULL,
     [Price]          DECIMAL (8, 2)  NOT NULL,

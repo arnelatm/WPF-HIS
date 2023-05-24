@@ -26,6 +26,7 @@ Namespace BusinessLayer
         Public Property Cancelled As Boolean
         Public Property DateCreated As DateTime?
         Public Property DueDate As Date?
+        Public Property ExpiryDate As Date?
         Public Property IdNo As Int32
         Public Property InvoiceNo As String
         Public Property InvoiceDate As Date?

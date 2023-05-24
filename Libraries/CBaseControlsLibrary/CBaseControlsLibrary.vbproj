@@ -131,6 +131,8 @@
     </Compile>
     <Compile Include="BlendItemsConverter.vb" />
     <Compile Include="BlendTypeEditor.vb" />
+    <Compile Include="CDgvExpiryColumn.vb" />
+    <Compile Include="CDgvExpiryCell.vb" />
     <Compile Include="CtDgvComboboxCell1.vb" />
     <Compile Include="CtDgvComboBoxColumn.vb" />
     <Compile Include="CtDataGridFindForm.designer.vb">
