@@ -517,7 +517,7 @@ Namespace PresentationLayer.Views.Forms
                         Dim value As Date
                         'Validate the input using the editing format and the display format.
                         e.Cancel = Not Date.TryParseExact(CStr(e.FormattedValue),
-                                                          {"yyyyMM", "yyyy/MM", "yyMM"},
+                                                          {"yyyyMM", "yyyy/MM", "yyyy-MM"},
                                                           Nothing,
                                                           DateTimeStyles.None,
                                                           value)
