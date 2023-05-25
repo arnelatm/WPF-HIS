@@ -1,4 +1,5 @@
 ﻿CREATE TYPE [dbo].[PurchaseDetailUpdate] AS TABLE (
+    [BatchNo]        VARCHAR(10)     NULL,
     [BonusQuantity]  SMALLINT        NOT NULL,
     [DiscountAmount] DECIMAL (8, 2)  NOT NULL,
     [ExpiryDate]     DATE            NULL,
@@ -14,6 +15,4 @@
     [VatAmount]      DECIMAL (8, 2)  NULL,
     [VatPercent]     DECIMAL (5, 2)  NULL,
     PRIMARY KEY CLUSTERED ([IdNo] ASC));
-
-
 

@@ -15,6 +15,7 @@ Namespace DataLayer.AdoNet
 
         Const FieldList As String = "AmtBefVat," &
                                     "BaseUnitIdNo," &
+                                    "BatchNo," &
                                     "BonusQuantity," &
                                     "CategoryIdNo," &
                                     "DiscountAmount," &
@@ -73,6 +74,7 @@ Namespace DataLayer.AdoNet
             New PurchaseDetail() With {
             .AmtBefVat = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("AmtBefVat")),
             .BaseUnitIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("BaseUnitIdNo")),
+            .BatchNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("BatchNo")),
             .BonusQuantity = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("BonusQuantity")),
             .CategoryIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("CategoryIdNo")),
             .DiscountAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DiscountAmount")),

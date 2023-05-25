@@ -7,6 +7,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("AskContinueWithPreviousSearch", "Continue with previous search (Yes) or create a new search (No)?", "Information")
         Messaging.AddMessage("AskIfContinueAction", "Are you sure you want to {action} this {itemName} entry?", "Please confirm!")
         Messaging.AddMessage("AskIfDeleteRecord", "Are you sure you want to delete this record?", "Please Confirm Delete!")
+        Messaging.AddMessage("AskIfUseExpiredDate", "Are you sure you want to use this expired date?", "Please Confirm!")
         Messaging.AddMessage("AskIfRegeneratePayroll", "Payroll has already been generated. Are you sure you want to re-generate and update previous payroll?", "Please Confirm!")
         Messaging.AddMessage("AskIfSaveEmptyJournal", "Journal Entry is Empty, do you still want to save this entry?", "Empty Journal")
         Messaging.AddMessage("AskIfUserWantsToSaveOrContinueEdits", "Changes have been made to this record.  Press [Yes] to save changes, [No] to Abandon changes, or press [Cancel] to continue editing record? Save Changes?", "Please Confirm.")
@@ -137,6 +138,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgUnitQtyEqualToBUQty", "Sorry, unit quantity can't be the same as the base unit quantity.", "Error")
         Messaging.AddMessage("MsgInvalidCode", "Sorry, no such {fieldName} on file.", "Error")
         Messaging.AddMessage("MsgText2Short", "Search text too short, must be at least 3 characters.", "warning")
+        Messaging.AddMessage("MsgInvalidDate", "You entry <{enteredDate}> is not a valid date. Must be in one of the following format ['yyyy/MM' 'yyyyMM', 'yyyy-MM']. Press Ctrl-Z to revert to previous value.", "Error")
     End Sub
 
     'Public Shared Sub CreateEnums()

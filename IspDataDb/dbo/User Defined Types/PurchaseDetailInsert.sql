@@ -1,5 +1,6 @@
 ﻿CREATE TYPE [dbo].[PurchaseDetailInsert] AS TABLE (
-    [BonusQuantity]  SMALLINT         NOT NULL,
+    [BatchNo]        VARCHAR(10)     NULL,
+    [BonusQuantity]  SMALLINT        NOT NULL,
     [DiscountAmount] DECIMAL (8, 2)  NOT NULL,
     [ExpiryDate]     DATE            NULL,
     [NetAmount]      DECIMAL (10, 2) NOT NULL,
@@ -12,6 +13,4 @@
     [UnitSalesPrice] DECIMAL (9, 2)  NOT NULL,
     [VatAmount]      DECIMAL (8, 2)  NULL,
     [VatPercent]     DECIMAL (5, 2)  NULL);
-
-
 

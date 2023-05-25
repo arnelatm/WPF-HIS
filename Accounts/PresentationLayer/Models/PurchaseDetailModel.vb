@@ -8,6 +8,7 @@
 
         Public Property AmtBefVat As Decimal
         Public Property BaseUnitIdNo As Int16
+        Public Property BatchNo As String
         Public Property BonusQuantity As Int16
         Public Property CategoryIdNo As Int16
         Public Property DiscountAmount As Decimal

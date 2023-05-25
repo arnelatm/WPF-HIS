@@ -9,6 +9,7 @@ Namespace PresentationLayer.Views
 
         Public Property AmtBefVat As Decimal Implements IPurchaseDetailView.AmtBefVat
         Public Property BaseUnitIdNo As Int16 Implements IPurchaseDetailView.BaseUnitIdNo
+        Public Property BatchNo As String Implements IPurchaseDetailView.BatchNo
         Public Property BonusQuantity As Int16 Implements IPurchaseDetailView.BonusQuantity
         Public Property CategoryIdNo As Short Implements IPurchaseDetailView.CategoryIdNo
         Public Property DataFilter As String Implements IView.DataFilter
