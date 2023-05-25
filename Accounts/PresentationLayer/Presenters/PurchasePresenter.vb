@@ -30,8 +30,10 @@ Namespace PresentationLayer.Presenters
             WithTreeView = False
             Service = New AccountsService("Purchase")
             SortOrderKey = "IdNo"
+            DtInsertTable.Columns.Add("BatchNo", GetType(String))
             DtInsertTable.Columns.Add("BonusQuantity", GetType(Int16))
             DtInsertTable.Columns.Add("DiscountAmount", GetType(Decimal))
+            DtInsertTable.Columns.Add("ExpiryDate", GetType(Date))
             DtInsertTable.Columns.Add("NetAmount", GetType(Decimal))
             DtInsertTable.Columns.Add("Price", GetType(Decimal))
             DtInsertTable.Columns.Add("ProductIdNo", GetType(Int16))
@@ -43,8 +45,10 @@ Namespace PresentationLayer.Presenters
             DtInsertTable.Columns.Add("VatAmount", GetType(Decimal))
             DtInsertTable.Columns.Add("VatPercent", GetType(Decimal))
 
+            DtUpdateTable.Columns.Add("BatchNo", GetType(String))
             DtUpdateTable.Columns.Add("BonusQuantity", GetType(Int16))
             DtUpdateTable.Columns.Add("DiscountAmount", GetType(Decimal))
+            DtUpdateTable.Columns.Add("ExpiryDate", GetType(Date))
             DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("NetAmount", GetType(Decimal))
             DtUpdateTable.Columns.Add("Price", GetType(Decimal))
@@ -86,8 +90,10 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub FillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
+            workRow("BatchNo") = itemDataView.BatchNo
             workRow("BonusQuantity") = itemDataView.BonusQuantity
             workRow("DiscountAmount") = itemDataView.DiscountAmount
+            workRow("ExpiryDate") = itemDataView.ExpiryDate
             workRow("NetAmount") = itemDataView.NetAmount
             workRow("Price") = itemDataView.Price
             workRow("ProductIdNo") = itemDataView.ProductIdNo

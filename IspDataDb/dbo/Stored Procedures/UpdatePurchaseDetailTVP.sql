@@ -24,8 +24,10 @@ WHERE  (PurchaseIdNo = @GroupIdNo and NOT EXISTS (SELECT * FROM @MParam where Id
 
 -- Update existing Details
 UPDATE a 
-SET a.BonusQuantity = b.BonusQuantity,
+SET a.BatchNo = b.BatchNo,
+	a.BonusQuantity = b.BonusQuantity,
 	a.DiscountAmount = b.DiscountAmount,
+	a.ExpiryDate = b.ExpiryDate,
 	a.NetAmount = b.NetAmount,
 	a.Price = b.Price,
 	a.ProductIdNo = b.ProductIdNo ,

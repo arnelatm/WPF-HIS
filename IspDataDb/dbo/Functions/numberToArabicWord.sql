@@ -60,7 +60,7 @@ BEGIN
 		END
 	ELSE 
 		BEGIN
-			Set @fractionText = dbo.udfConvertDecimalPartToFraction(@inputNumber)
+			Set @fractionText = dbo.udf_ConvertDecimalPartToFraction(@inputNumber)
 		END	
 	
 	

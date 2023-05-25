@@ -2,6 +2,7 @@
 
 'Imports System.Data.SqlClient
 Imports System.Drawing
+Imports System.Globalization
 Imports System.Windows.Forms
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
@@ -1089,6 +1090,23 @@ Public Class CDataGridView
                 _columnNo = hitTestInfo.ColumnIndex
                 FindValue()
             End If
+        End If
+    End Sub
+
+
+    Public Sub ValidateExpiryDate(ByRef e As DataGridViewCellValidatingEventArgs)
+        Dim value As Date
+        'Validate the input using the editing format and the display format.
+        e.Cancel = Not Date.TryParseExact(CStr(e.FormattedValue),
+                                                      {"yyyyMM", "yyyy/MM", "yyyy-MM"},
+                                                      Nothing,
+                                                      DateTimeStyles.None,
+                                                      value)
+        If Not e.Cancel Then
+            'Ensure data is displayed using the display format.
+            EditingControl.Text = value.ToString("yyyy/MM")
+        Else
+            Messaging.ShowPmMessage(True, "MsgInvalidDate", {"enteredDate", e.FormattedValue})
         End If
     End Sub
 

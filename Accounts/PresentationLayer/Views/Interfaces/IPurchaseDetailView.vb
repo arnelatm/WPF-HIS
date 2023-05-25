@@ -7,6 +7,7 @@ Namespace PresentationLayer.Views.Interfaces
 
         Property AmtBefVat As Decimal
         Property BaseUnitIdNo As Int16
+        Property BatchNo As String
         Property BonusQuantity As Int16
         Property CategoryIdNo As Int16
         Property DiscountAmount As Decimal

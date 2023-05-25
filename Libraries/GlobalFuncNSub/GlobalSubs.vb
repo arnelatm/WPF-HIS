@@ -1,4 +1,6 @@
-﻿Imports System.Reflection
+﻿Imports System.Globalization
+Imports System.Reflection
+Imports System.Runtime.Remoting
 Imports System.Windows.Forms
 
 Public Module GlobalSubs
@@ -198,5 +200,6 @@ Public Module GlobalSubs
     Public Sub Gobble(dummy As Object)
         ' dummy sub to instantiate an object without assigning to a variable
     End Sub
+
 
 End Module

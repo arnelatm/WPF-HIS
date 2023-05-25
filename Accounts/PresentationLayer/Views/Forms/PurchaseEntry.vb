@@ -514,17 +514,7 @@ Namespace PresentationLayer.Views.Forms
                     ElseIf cColumnName = $"dgvUnitIdNo" Then
                         ValidateUnit(DataGridViewPurchaseDetails, e)
                     ElseIf cColumnName = $"dgvExpiryDate" Then
-                        Dim value As Date
-                        'Validate the input using the editing format and the display format.
-                        e.Cancel = Not Date.TryParseExact(CStr(e.FormattedValue),
-                                                          {"yyyyMM", "yyyy/MM", "yyyy-MM"},
-                                                          Nothing,
-                                                          DateTimeStyles.None,
-                                                          value)
-                        If Not e.Cancel Then
-                            'Ensure data is displayed using the display format.
-                            DataGridViewPurchaseDetails.EditingControl.Text = value.ToString("yyyy/MM")
-                        End If
+                        DataGridViewPurchaseDetails.ValidateExpiryDate(e)
                     End If
                 End With
             End If
@@ -610,6 +600,7 @@ Namespace PresentationLayer.Views.Forms
             '    End If
             'End If
         End Sub
+
 
         'Private Sub dataGridView1_CellValidating(ByVal sender As Object, ByVal e As DataGridViewCellValidatingEventArgs) Handles DataGridViewPurchaseDetails.CellValidating
 
