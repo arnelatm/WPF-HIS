@@ -2,6 +2,7 @@
 Imports CrystalDecisions.ReportAppServer.DataDefModel
 Imports Microsoft.Office.Interop.Excel
 Imports System.Dynamic
+Imports System.Globalization
 Imports System.Runtime.InteropServices.ComTypes
 
 Namespace PresentationLayer
@@ -74,19 +75,17 @@ Namespace PresentationLayer
         Public Function GetScannedData(cText As String) As ExpandoObject
             Dim product As Object
             product = New ExpandoObject
-
             Dim dataLength = Len(cText)
             Dim i As Int16 = 0
             Dim ai As String = Mid(cText, 1, 2)
             Dim lastPosition As Int16 = 2
-            Dim gTin As String = Nothing
             Dim expiryDate As Date = Nothing
             Dim batchNo As String = Nothing
             Dim serializationNo As String = Nothing
             While lastPosition < dataLength
                 Select Case ai
                     Case "01" 'GTIN
-                        gTin = Mid(cText, lastPosition + 1, 14)
+                        CType(product, IDictionary(Of String, Object))("GTin") = Mid(cText, lastPosition + 1, 14)
                         lastPosition += 14
                     Case "17" 'Expiry Date
                         Dim cExpDate As String = ""
@@ -94,7 +93,9 @@ Namespace PresentationLayer
                         If Right(cExpDate, 2) = "00" Then
                             cExpDate = Mid(cExpDate, 1, 4) + "01"
                         End If
-                        CType(product, IDictionary(Of String, Object))("ExpiryDate") = CType(cExpDate, Date?)
+                        Dim dExpDate As Date
+                        Date.TryParseExact(CStr(cExpDate), {"yyyyMM", "yyyy/MM", "yyyy-MM", "yyMMdd"}, Nothing, DateTimeStyles.None, dExpDate)
+                        CType(product, IDictionary(Of String, Object))("ExpiryDate") = dExpDate
                         lastPosition += 6
                     Case "11" 'manufacture date
                         CType(product, IDictionary(Of String, Object))("ManufactureDate") = Mid(cText, lastPosition + 1, 6)
@@ -118,7 +119,7 @@ Namespace PresentationLayer
                         '        Exit For
                         '    End If
                         'Next
-                        CType(product, IDictionary(Of String, Object))("BatchNo") = CType(batchNo, Date?)
+                        CType(product, IDictionary(Of String, Object))("BatchNo") = CType(batchNo, String)
                     Case "21" ' Serialization No.
                         Dim serialNo As String = Nothing
                         For i = lastPosition + 1 To dataLength
@@ -140,7 +141,7 @@ Namespace PresentationLayer
                         '    End If
                         'Next
                 End Select
-                If gTin IsNot Nothing OrElse lastPosition >= dataLength Then
+                If lastPosition >= dataLength Then
                     Exit While
                 Else
                     ai = Mid(cText, lastPosition + 1, 2)

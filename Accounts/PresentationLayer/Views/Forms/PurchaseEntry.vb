@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Dynamic
 Imports System.Globalization
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
@@ -523,16 +524,25 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ValidateProductName(ByRef dgv As CtDataGridView, ByRef e As DataGridViewCellValidatingEventArgs)
             Dim findText = dgv.CurrentRow.Cells("dgvProductName").EditedFormattedValue
             If findText.Contains("<GS>") Then
-                Dim GTin As String = ExtractGTin(findText)
+                Dim scannedProduct As Object = New ExpandoObject
+                scannedProduct = GetScannedData(findText)
                 Dim productCode As String = ""
-                RaiseEvent GTinScanned(GTin, bsPurchaseDetails, productCode)
+                RaiseEvent GTinScanned(scannedProduct.GTin, bsPurchaseDetails, productCode)
                 If productCode IsNot Nothing Then
                     'Dim item As IProductView = DirectCast(product, IProductView)
                     dgv.CurrentRow.Cells("dgvProductCode").Value = productCode
                     RaiseEvent ProductCodeChanged(productCode, bsPurchaseDetails)
+                    If scannedProduct.ExpiryDate IsNot Nothing Then
+                        bsPurchaseDetails.Current.ExpiryDate = scannedProduct.ExpiryDate
+                    End If
+                    If scannedProduct.BatchNo IsNot Nothing Then
+                        bsPurchaseDetails.Current.BatchNo = scannedProduct.BatchNo
+                    End If
                     Dim unitIdNo As Int16 = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).UnitIdNo
                     If unitIdNo <= 0 Or _noOfUnits <= 1 Then
-                        SendKeys.Send("{Tab}")
+                        SendKeys.Send("{Tab}{Tab}{Tab}")
+                    Else
+                        SendKeys.Send("{Tab}{Tab}")
                     End If
                     bsPurchaseDetails.ResetBindings(False)
                 End If
@@ -568,8 +578,9 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent ProductCodeChanged(code, bsPurchaseDetails)
             Dim cProductName = dgv.CurrentRow().Cells("dgvProductName").Value
             If Not String.IsNullOrEmpty(cProductName) Then
-                SendKeys.Send("{Tab}")
-                If dgv.CurrentRow.Cells("dgvUnitCount").Value = 1 Then
+                If dgv.CurrentRow.Cells("dgvUnitCount").Value = 0 Then
+                    SendKeys.Send("{Tab}{Tab}")
+                Else
                     SendKeys.Send("{Tab}")
                 End If
             Else
