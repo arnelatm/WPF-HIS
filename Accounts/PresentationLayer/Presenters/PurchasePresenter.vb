@@ -93,7 +93,7 @@ Namespace PresentationLayer.Presenters
             workRow("BatchNo") = itemDataView.BatchNo
             workRow("BonusQuantity") = itemDataView.BonusQuantity
             workRow("DiscountAmount") = itemDataView.DiscountAmount
-            workRow("ExpiryDate") = itemDataView.ExpiryDate
+            workRow("ExpiryDate") = IIf(itemDataView.ExpiryDate Is Nothing, DBNull.Value, itemDataView.ExpiryDate)
             workRow("NetAmount") = itemDataView.NetAmount
             workRow("Price") = itemDataView.Price
             workRow("ProductIdNo") = itemDataView.ProductIdNo
