@@ -19,6 +19,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Posted As Boolean
         Property WarehouseIdNo As Int16
         Property PurchaseDetails As List(Of PurchaseDetailView)
+        Property PurchaseHistory As List(Of PurchaseHistoryView)
         Property ProductsByCode As Object
         Property UnitsByCode As Object
         Property UnitsByProduct As Object
@@ -28,6 +29,7 @@ Namespace PresentationLayer.Views.Interfaces
         Event ProductCodeChanged(productCode As String, bs As BindingSource)
         Event GTinScanned(GTin As String, bs As BindingSource, ByRef productCode As String)
         Event UnitChanged(oldUnit As Short, newUnit As Short, bs As BindingSource)
+        Event RowChanged(productIdNo As Integer)
         'Event ProductNameChanged(productName As String, bs As BindingSource)
     End Interface
 

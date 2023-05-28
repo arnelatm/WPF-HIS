@@ -34,4 +34,27 @@ Namespace PresentationLayer.Views.Interfaces
 
     End Interface
 
+
+    Public Interface IPurchaseHistoryView
+        Inherits IView
+
+
+        Property BatchNo As String
+        Property BonusQuantity As Int16
+        Property ExpiryDate As Date?
+        Property GrossAmount As Decimal
+        Property IdNo As Int32
+        Property Price As Decimal
+        Property PurchaseIdNo As Int32
+        Property Quantity As Int16
+        Property SupplierCode As String
+        Property SupplierName As String
+        Property SupplierNameAra As String
+        Property TransactionDate As Date
+        Property UnitCost As Decimal
+        Property UnitName As String
+        Property UnitSalesPrice As Decimal
+
+    End Interface
+
 End Namespace

@@ -38,4 +38,30 @@ Namespace BusinessLayer
 
     End Class
 
+    Public Class PurchaseHistory
+        Inherits AATM.BusinessLayer.BusinessObject
+
+        ' ** Enterprise Design Pattern: Identity field pattern
+        Public Sub New()
+            ' establish business rules
+        End Sub
+
+        Public Property BatchNo As String
+        Public Property BonusQuantity As Int16
+        Public Property ExpiryDate As Date?
+        Public Property GrossAmount As Decimal
+        Public Property IdNo As Int32
+        Public Property PurchaseIdNo As Int32
+        Public Property Quantity As Int16
+        Public Property SupplierCode As String
+        Public Property SupplierName As String
+        Public Property SupplierNameAra As String
+        Public Property TransactionDate As Date
+        Public Property UnitCost As Decimal
+        Public Property UnitName As String
+        Public Property UnitSalesPrice As Decimal
+
+
+    End Class
+
 End Namespace

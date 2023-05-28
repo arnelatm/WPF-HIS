@@ -567,6 +567,7 @@
     <Build Include="dbo\Stored Procedures\InsertPurchaseDetailTVP.sql" />
     <Build Include="dbo\User Defined Types\PurchaseDetailUpdate.sql" />
     <Build Include="dbo\User Defined Types\PurchaseDetailInsert.sql" />
+    <Build Include="dbo\Views\PurchaseHistory_View.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

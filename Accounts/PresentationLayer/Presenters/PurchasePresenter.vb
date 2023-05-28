@@ -23,6 +23,7 @@ Namespace PresentationLayer.Presenters
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
         Private ReadOnly _productService As New AccountsService("Product")
+        Private ReadOnly _purchaseHistoryService As New AccountsService("PurchaseHistory")
 
         Public Sub New(view As IPurchaseView)
             MyBase.New(view)
@@ -65,6 +66,7 @@ Namespace PresentationLayer.Presenters
             AddHandler view.GTinScanned, AddressOf OnGTinScanned
             AddHandler view.ProductUnitSelection, AddressOf OnProductUnitSelection
             AddHandler view.UnitChanged, AddressOf OnUnitChanged
+            AddHandler view.RowChanged, AddressOf OnRowChanged
 
         End Sub
 
@@ -77,6 +79,7 @@ Namespace PresentationLayer.Presenters
             data.Clear()
             data.Add({"Unit", "UnitsByCode", Nothing, Nothing})
             data.Add({"Product", "ProductsByCode", Nothing, Nothing})
+            'data.Add({"PurchaseDetail", "PurchaseHistory", Nothing, Nothing})
             CreateLookupDataThread(data)
             data.Clear()
 
@@ -293,6 +296,8 @@ Namespace PresentationLayer.Presenters
             Dim idNo As Int32 = GetRecordFieldWithKeyG(Of Int32)(productCode, "Product", "ProductCode", "IdNo")
             Dim item As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(idNo)
             UpdatePurchaseItem(item, bs)
+            UpdatePurchaseHistory(idNo)
+            bs.ResetBindings(False)
         End Sub
 
         Private Sub OnGTinScanned(gTin As String, bs As BindingSource, ByRef productCode As String)
@@ -308,6 +313,16 @@ Namespace PresentationLayer.Presenters
 
         Private Sub OnUnitChanged(oldUnit As Int16, newUnit As Int16, bs As BindingSource)
             RecomputePrice(oldUnit, newUnit, bs)
+        End Sub
+
+        Private Sub OnRowChanged(productIdNo As Int32)
+            UpdatePurchaseHistory(productIdNo)
+        End Sub
+
+        Private Sub UpdatePurchaseHistory(productIdNo As Int32)
+            Dim purHistory As List(Of PurchaseHistoryModel)
+            purHistory = _purchaseHistoryService.GetRecordsWithGroupIdNo(Of PurchaseHistoryModel)(productIdNo)
+            GlobalVariables.Mapper.Map(purHistory, View.PurchaseHistory)
         End Sub
 
         Private Sub RecomputePrice(oldUnit As Int16, newUnit As Int16, bs As BindingSource)
@@ -341,6 +356,7 @@ Namespace PresentationLayer.Presenters
                 Dim vAmt As Decimal = (gAmt - dAmt) * bs.Current.VatPercent / 100
                 bs.Current.VatAmount = vAmt
                 bs.Current.NetAmount = gAmt - dAmt + vAmt
+                bs.Current.UnitCost = IIf(bs.Current.Quantity + bs.Current.BonusQuantity = 0, 0, bs.Current.NetAmount / (bs.Current.Quantity + bs.Current.BonusQuantity))
             End If
         End Sub
 
@@ -357,6 +373,7 @@ Namespace PresentationLayer.Presenters
         Private Sub UpdatePurchaseItem(item As ProductModel, bs As BindingSource)
             If item.IdNo > 0 Then
                 If bs.Current.ProductIdNo <> item.IdNo Then
+                    bs.Current.ProductCode = item.ProductCode
                     bs.Current.ProductName = item.ProductName
                     If bs.Current.Quantity = 0 Then
                         bs.Current.Quantity = 1
@@ -369,6 +386,7 @@ Namespace PresentationLayer.Presenters
                     bs.Current.VatAmount = (bs.Current.GrossAmount - bs.Current.DiscountAmount) * bs.Current.VatPercent / 100
                     bs.Current.NetAmount = bs.Current.GrossAmount - bs.Current.DiscountAmount + bs.Current.VatAmount
                     bs.Current.ProductIdNo = item.IdNo
+                    bs.Current.UnitCost = IIf(bs.Current.Quantity + bs.Current.BonusQuantity = 0, 0, bs.Current.NetAmount / (bs.Current.Quantity + bs.Current.BonusQuantity))
                 End If
             Else
                 bs.Current.ProductIdNo = Nothing
