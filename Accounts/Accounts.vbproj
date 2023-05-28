@@ -331,6 +331,7 @@
     <Compile Include="DataLayer\AdoNet\IGroup\Lab_InvoiceGroupDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\ItemDetailsDao.vb" />
     <Compile Include="DataLayer\AdoNet\ProductDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PurchaseHistoryDao.vb" />
     <Compile Include="DataLayer\AdoNet\ReportDao.vb" />
     <Compile Include="DataLayer\AdoNet\ShiftSummaryDao.vb" />
     <Compile Include="DataLayer\AdoNet\HolidayDao.vb" />
@@ -2680,6 +2681,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.ProductModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.ProductUnitModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PurchaseDetailModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PurchaseHistoryModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PurchaseModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.ReportModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.TransactionNotesModel.datasource" />

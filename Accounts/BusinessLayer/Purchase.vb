@@ -39,6 +39,7 @@ Namespace BusinessLayer
         Public Property VatNumber As String
         Public Property WarehouseIdNo As Int16
         Public Property PurchaseDetails As List(Of PurchaseDetail)
+        Public Property PurchaseHistory As List(Of PurchaseHistory)
 
     End Class
 

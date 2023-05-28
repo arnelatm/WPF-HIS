@@ -9,9 +9,7 @@ Namespace DataLayer.AdoNet
 
     Public Class PurchaseDao
         Inherits AccountsDao
-        Implements IDao(Of Purchase)
-
-
+        Implements IDao(Of Purchase), IPurchaseDao
 
         Private Const FieldList = "Amount," &
                                   "Cancelled," &
@@ -41,8 +39,15 @@ Namespace DataLayer.AdoNet
             If data IsNot Nothing Then
                 Dim purchaseDetailDao = New PurchaseDetailDao
                 data.PurchaseDetails = purchaseDetailDao.GetRecordsWithGroupIdNo(idNo, "sequence")
+                Dim productIdNo As Int32 = data.PurchaseDetails(0).ProductIdNo
+                data.PurchaseHistory = GetPurchaseHistory(productIdNo)
             End If
             Return data
+        End Function
+
+        Public Function GetPurchaseHistory(productIdNo As Int32) As List(Of PurchaseHistory) Implements IPurchaseDao.GetPurchaseHistory
+            Dim purchaseHistoryDao = New PurchaseHistoryDao
+            Return purchaseHistoryDao.GetRecordsWithGroupIdNo(productIdNo)
         End Function
 
         Public Function UpdateRecord(ByRef Purchase As Purchase) As Integer _
@@ -107,5 +112,10 @@ Namespace DataLayer.AdoNet
         End Function
 
     End Class
+
+    Public Interface IPurchaseDao
+        Function GetPurchaseHistory(productIdNo As Integer) As List(Of PurchaseHistory)
+
+    End Interface
 
 End Namespace

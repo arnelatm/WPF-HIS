@@ -22,6 +22,7 @@
         Public Property VatNumber As String
         Public Property WarehouseIdNo As Int16
         Public Property PurchaseDetails As List(Of PurchaseDetailModel)
+        Public Property PurchaseHistory As List(Of PurchaseHistoryModel)
     End Class
 
 End Namespace

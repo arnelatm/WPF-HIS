@@ -17,12 +17,14 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _footer As DgvFooter
         Private _PurchaseDetails As List(Of PurchaseDetailView)
+        Private _purchaseHistory As List(Of PurchaseHistoryView)
         Private _noOfUnits As Int16
         Public Event ProductCodeChanged(productCode As String, bs As BindingSource) Implements IPurchaseView.ProductCodeChanged
         Public Event GTinScanned(GTin As String, bs As BindingSource, ByRef productCode As String) Implements IPurchaseView.GTinScanned
         Public Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource) Implements IPurchaseView.ProductUnitSelection
         Public Event ProductUnitEditing(productIdNo As Int32, bs As BindingSource) Implements IPurchaseView.ProductUnitEditing
         Public Event UnitChanged(oldUnit As Int16, newUnit As Int16, bs As BindingSource) Implements IPurchaseView.UnitChanged
+        Public Event RowChanged(productIdNo As Int32) Implements IPurchaseView.RowChanged
         Public Sub New()
             MyBase.New()
             ' This call is required by the designer.
@@ -126,6 +128,16 @@ Namespace PresentationLayer.Views.Forms
             Set
                 _PurchaseDetails = Value
                 BindPurchaseDetail()
+            End Set
+        End Property
+
+        Public Property PurchaseHistory As List(Of PurchaseHistoryView) Implements IPurchaseView.PurchaseHistory
+            Get
+                Return _purchaseHistory
+            End Get
+            Set
+                _purchaseHistory = Value
+                BindPurchaseHistory()
             End Set
         End Property
 
@@ -306,6 +318,17 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
+
+        Private Sub BindPurchaseHistory()
+            SuspendLayout()
+            bsPurchaseHistory.DataSource = Nothing
+            DataGridViewPurchaseHistory.Refresh()
+            bsPurchaseHistory.DataSource = PurchaseHistory
+            bsPurchaseHistory.AllowNew = False
+            'SetupDgvColumns()
+            ResumeLayout()
+        End Sub
+
         Private Sub SetupDgvColumns()
             dgvSequence.DisplayOnly = True
             dgvUnitIdNo.DataSource = UnitsByCode
@@ -464,6 +487,8 @@ Namespace PresentationLayer.Views.Forms
                     bsPurchaseDetails.Current.DiscountAmount = gAmt - amtBefVat
                     bsPurchaseDetails.Current.Price = IIf(bsPurchaseDetails.Current.Quantity = 0, 0, gAmt / bsPurchaseDetails.Current.Quantity)
                 End If
+                Dim totQty As Int32 = bsPurchaseDetails.Current.Quantity + bsPurchaseDetails.Current.BonusQuantity
+                bsPurchaseDetails.Current.UnitCost = IIf(totQty = 0, 0, bsPurchaseDetails.Current.NetAmount / totQty)
                 UpdateTotals()
             End With
         End Sub
@@ -917,6 +942,14 @@ Namespace PresentationLayer.Views.Forms
                     x = 1
 
             End Select
+        End Sub
+
+
+        Private Sub DataGridViewPurchaseDetails_RowEnter(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchaseDetails.RowEnter
+            Dim newRow As DataGridViewRow = DataGridViewPurchaseDetails.Rows(e.RowIndex)
+            Dim prIdNo As Int32 = newRow.Cells("dgvProductIdNo").Value
+            RaiseEvent RowChanged(prIdNo)
+            bsPurchaseHistory.ResetBindings(False)
         End Sub
 
     End Class
