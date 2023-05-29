@@ -62,9 +62,18 @@ Public Class CDgvTextColumn
                     If [ReadOnly] Then
                         [ReadOnly] = False
                     End If
-                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                    [ReadOnly] = False
+                    If DataGridView.ReadOnly Then
+                        DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                        DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                        If Not [ReadOnly] Then
+                            ' need to do this because of error when setting sequence column ReadOnly property
+                            [ReadOnly] = True
+                        End If
+                    Else
+                        DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                        DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                        [ReadOnly] = False
+                    End If
                 End If
             Else
                 [ReadOnly] = True

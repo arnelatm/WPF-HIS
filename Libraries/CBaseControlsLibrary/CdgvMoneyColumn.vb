@@ -47,10 +47,15 @@ Public Class CdgvMoneyColumn
                     DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                     DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 Else
-                    [ReadOnly] = False
-                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                    [ReadOnly] = False
+                    If DataGridView.ReadOnly Then
+                        DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                        DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                        [ReadOnly] = True
+                    Else
+                        DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                        DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                        [ReadOnly] = False
+                    End If
                 End If
             Else
                 [ReadOnly] = True
