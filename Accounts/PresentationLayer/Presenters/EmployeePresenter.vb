@@ -16,7 +16,7 @@ Namespace PresentationLayer.Presenters
     Public Class EmployeePresenter(Of TM As New)
         Inherits CommonPresenter(Of IEmployeeView, TM)
         Implements ISubscriber(Of PayCycleIdNoChanged),
-                   ISubscriber(Of DataChanged)
+                   ISubscriber(Of DgvItemsChanged)
 
         Protected DtEmpPayElementInsertTable As New DataTable
         Protected DtEmpPayElementUpdateTable As New DataTable
@@ -449,7 +449,7 @@ Namespace PresentationLayer.Presenters
             View.PayFrequency = CodeToEnum(Of PayFrequencySelection)(GetFieldWithIdNo(eventType.PayCycleIdNo, "PayCycle", "PayFrequency"))
         End Sub
 
-        Public Sub OnPayElementDataChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
+        Public Sub OnPayElementdgvItemsChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler
             With eventType.BindingSource
                 If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
                     Select Case eventType.PropertyName

@@ -10,7 +10,7 @@ Namespace PresentationLayer.Presenters
 
     Public Class LeavePresenter(Of TM As New)
         Inherits CommonPresenter(Of ILeaveView, LeaveModel)
-        Implements ISubscriber(Of AATM.PresentationLayer.Events.DataChanged)
+        Implements ISubscriber(Of AATM.PresentationLayer.Events.DgvItemsChanged)
 
         Public Sub New(view As ILeaveView)
             MyBase.New(view)
@@ -38,7 +38,7 @@ Namespace PresentationLayer.Presenters
             CreateEnumDataSource(Of LeaveCycleSelection)("LeaveCycle")
         End Sub
 
-        Public Sub OnLeaveDataChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
+        Public Sub OnLeavedgvItemsChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler
             With eventType.BindingSource
                 If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
                     'Select Case eventType.PropertyName

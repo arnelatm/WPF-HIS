@@ -14,7 +14,7 @@ Namespace PresentationLayer.Presenters
 
     Public Class SalesJournalPresenter(Of TM As New)
         Inherits TransactionsPresenter(Of ISalesJournalView, TM)
-        Implements ISubscriber(Of DataChanged)
+        Implements ISubscriber(Of DgvItemsChanged)
 
         Protected DtInsertTable As New DataTable
         Protected DtSalesDepositInsertTable As New DataTable
@@ -319,7 +319,7 @@ Namespace PresentationLayer.Presenters
             Return depositType
         End Function
 
-        Public Sub OnPayElementDataChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
+        Public Sub OnPayElementdgvItemsChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler
             With eventType.BindingSource
                 If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
                     Select Case eventType.PropertyName

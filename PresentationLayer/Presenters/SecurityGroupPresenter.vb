@@ -10,7 +10,7 @@ Imports AATM.ServicesLayer.Services
 
 Public Class SecurityGroupPresenter(Of TM As New)
     Inherits Presenter(Of ISecurityGroupView, TM)
-    Implements ISubscriber(Of DataChanged)
+    Implements ISubscriber(Of DgvItemsChanged)
 
     Protected DtInsertTable As New DataTable
     Protected DtUpdateTable As New DataTable
@@ -143,7 +143,7 @@ Public Class SecurityGroupPresenter(Of TM As New)
         ProcessRows(propertyName, False)
     End Sub
 
-    Public Sub OnDataChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
+    Public Sub OndgvItemsChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler
         If eventType.PropertyName = "Visible" Then
             ProcessChildren(eventType.Row, True)
         Else

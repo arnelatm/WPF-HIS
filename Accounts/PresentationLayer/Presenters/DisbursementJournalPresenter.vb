@@ -15,7 +15,7 @@ Namespace PresentationLayer.Presenters
 
     Public Class DisbursementJournalPresenter(Of TM As New)
         Inherits TransactionsPresenter(Of IDisbursementJournalView, TM)
-        Implements ISubscriber(Of DataChanged)
+        Implements ISubscriber(Of DgvItemsChanged)
 
         Private ReadOnly _advancesToSupplierAccountIdNo As Int16
         Protected DtInsertTable As New DataTable
@@ -1047,7 +1047,7 @@ Namespace PresentationLayer.Presenters
             CallByName(View, "setPayeeDataSource", CallType.Method, View.PaymentType)
         End Sub
 
-        Private Sub OnDisbursementJournalChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
+        Private Sub OnDisbursementJournalChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler
             With eventType.BindingSource
                 If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
                     'Dim nIndex = eventType.BindingSource.Current.Index

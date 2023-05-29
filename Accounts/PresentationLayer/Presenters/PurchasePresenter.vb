@@ -18,7 +18,7 @@ Namespace PresentationLayer.Presenters
 
     Public Class PurchasePresenter(Of TM As New)
         Inherits TransactionsPresenter(Of IPurchaseView, TM)
-        Implements ISubscriber(Of DataChanged)
+        Implements ISubscriber(Of DgvItemsChanged)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
@@ -220,28 +220,135 @@ Namespace PresentationLayer.Presenters
         '    Return False
         'End Function
 
-        Public Sub OnPurchaseDataChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
-            With eventType.BindingSource
+        Public Sub OnPurchasedgvItemsChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler
+            With eventType.BindingSource.Current
                 If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
                     'Dim productCode = eventType.BindingSource.Current.ProductCode
+                    Dim gAmt As Decimal = 0
+                    Dim dAmt As Decimal = 0
+                    Dim price As Decimal = 0
+                    Dim vAmt As Decimal = 0
+                    Dim amtBefVat As Decimal = 0
+                    Dim dPerc As Decimal = 0
+                    Dim vPerc As Decimal = 0
+                    Dim nAmt As Decimal = 0
                     Select Case eventType.PropertyName
                         Case $"ProductCode"
-                            UpdateProductItem(eventType.BindingSource.Current, eventType.EnteredValue)
-                            eventType.BindingSource.ResetItem(eventType.Row)
-                            'Case $"Debit"
-                            '    MakeDebitAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Debit)
-                            '    eventType.BindingSource.ResetItem(eventType.Row)
-                            'Case $"Credit"
-                            '    MakeCreditAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Credit)
-                            '    eventType.BindingSource.ResetItem(eventType.Row)
+                            UpdatePurchaseItem(eventType.BindingSource.Current, eventType.EnteredValue)
+                            OnProductCodeChanged(.ProductCode, eventType.BindingSource)
+                            gAmt = .Price * .Quantity
+                            .GrossAmount = gAmt
+                            dAmt = gAmt * .DiscountPercent / 100
+                            .DiscountAmount = dAmt
+                            .AmtBefVat = gAmt - dAmt
+                            vAmt = (gAmt - dAmt) * .VatPercent / 100
+                            .VatAmount = vAmt
+                            .NetAmount = gAmt - dAmt + vAmt
+                        Case $"Quantity"
+                            gAmt = .Price * .Quantity
+                            .GrossAmount = gAmt
+                            dAmt = gAmt * .DiscountPercent / 100
+                            .DiscountAmount = dAmt
+                            .AmtBefVat = gAmt - dAmt
+                            vAmt = (gAmt - dAmt) * .VatPercent / 100
+                            .VatAmount = vAmt
+                            .NetAmount = gAmt - dAmt + vAmt
+                        Case "Price"
+                            gAmt = .Price * .Quantity
+                            .GrossAmount = gAmt
+                            dAmt = gAmt * .DiscountPercent / 100
+                            .DiscountAmount = dAmt
+                            .AmtBefVat = gAmt - dAmt
+                            vAmt = (gAmt - dAmt) * .VatPercent / 100
+                            .VatAmount = vAmt
+                            .NetAmount = gAmt - dAmt + vAmt
+                        Case "GrossAmount"
+                            gAmt = .GrossAmount
+                            price = IIf(.Quantity = 0, 0, gAmt / .Quantity)
+                            .Price = price
+                            dAmt = gAmt * .DiscountPercent / 100
+                            .DiscountAmount = dAmt
+                            .DiscountPercent = dAmt / gAmt * 100
+                            vAmt = (gAmt - dAmt) * .VatPercent / 100
+                            .VatAmount = vAmt
+                            .AmtBefVat = gAmt - dAmt
+                            .NetAmount = gAmt - dAmt + vAmt
+                        Case "VatAmount"
+                            gAmt = .GrossAmount
+                            dAmt = .DiscountAmount
+                            vAmt = .VatAmount
+                            vPerc = IIf(gAmt - dAmt = 0, 0, vAmt / (gAmt - dAmt) * 100)
+                            .VatPercent = vPerc
+                            .NetAmount = gAmt - dAmt + vAmt
+                        Case "VatPercent"
+                            vPerc = .VatPercent
+                            gAmt = .GrossAmount
+                            dAmt = .DiscountAmount
+                            vAmt = (gAmt - dAmt) * vPerc / 100
+                            .VatAmount = vAmt
+                            .NetAmount = gAmt - dAmt + vAmt
+                        Case "DiscountPercent"
+                            gAmt = .GrossAmount
+                            dAmt = gAmt * .DiscountPercent / 100
+                            .DiscountAmount = dAmt
+                            .AmtBefVat = gAmt - dAmt
+                            vAmt = (gAmt - dAmt) * .VatPercent / 100
+                            .VatAmount = vAmt
+                            .NetAmount = gAmt - dAmt + vAmt
+                        Case "DiscountAmount"
+                            gAmt = .GrossAmount
+                            dAmt = .DiscountAmount
+                            dPerc = IIf(gAmt = 0, 0, dAmt / gAmt * 100)
+                            .DiscountPercent = dPerc
+                            .AmtBefVat = gAmt - dAmt
+                            vAmt = (gAmt - dAmt) * .VatPercent / 100
+                            .VatAmount = vAmt
+                            .NetAmount = gAmt - dAmt + vAmt
+                        Case "AmtBefVat"
+                            amtBefVat = .AmtBefVat
+                            gAmt = .GrossAmount
+                            If amtBefVat <= gAmt Then
+                                dAmt = gAmt - amtBefVat
+                                .DiscountAmount = dAmt
+                                dPerc = IIf(gAmt = 0, 0, dAmt / gAmt * 100)
+                                .DiscountPercent = dPerc
+                                vAmt = amtBefVat * .VatPercent / 100
+                                .VatAmount = vAmt
+                                .NetAmount = gAmt - dAmt + vAmt
+                            Else
+                                dAmt = .DiscountAmount
+                                gAmt = amtBefVat - dAmt
+                                .GrossAmount = gAmt
+                                price = IIf(.Quantity = 0, 0, gAmt / .Quantity)
+                                .Price = price
+                                dPerc = IIf(gAmt = 0, 0, dAmt / gAmt * 100)
+                                .DiscountPercent = dPerc
+                                vAmt = amtBefVat * .VatPercent / 100
+                                .VatAmount = vAmt
+                                .NetAmount = gAmt - dAmt + vAmt
+                            End If
+                        Case "NetAmount"
+                            nAmt = .NetAmount
+                            vPerc = .VatPercent
+                            dPerc = .DiscountPercent
+                            amtBefVat = nAmt / (1 + vPerc / 100)
+                            .AmtBefVat = amtBefVat
+                            .VatAmount = nAmt - amtBefVat
+                            gAmt = amtBefVat / (1 - dPerc / 100)
+                            .GrossAmount = gAmt
+                            .DiscountAmount = gAmt - amtBefVat
+                            .Price = IIf(.Quantity = 0, 0, gAmt / .Quantity)
                     End Select
+                    Dim totQty As Int32 = .Quantity + .BonusQuantity
+                    .UnitCost = IIf(totQty = 0, 0, .NetAmount / totQty)
+                    eventType.BindingSource.ResetItem(eventType.Row)
                 End If
             End With
         End Sub
 
-        Public Sub UpdateProductItem(ByRef current As PurchaseDetailView, productCode As String)
-            Dim idNo As Int32 = GetRecordFieldWithKeyG(Of Int32)(productCode, "Product", "ProductCode", "IdNo")
-            Dim item As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(idNo)
+        Private Sub UpdatePurchaseItem(ByRef current As PurchaseDetailView, productCode As String)
+            Dim productIdNo As Int32 = GetProductIdNo(productCode)
+            Dim item As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(productIdNo)
             If item IsNot Nothing Then
                 current.ProductIdNo = item.IdNo
                 current.ProductName = item.ProductName
@@ -253,6 +360,9 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+        Private Function GetProductIdNo(productCode As String) As Int32
+            Return GetRecordFieldWithKeyG(Of Int32)(productCode, "Product", "ProductCode", "IdNo")
+        End Function
 
         Public Overrides Function IsOkToEditRecord() As Boolean
             If Not MyBase.IsOkToEditRecord() Then
@@ -293,12 +403,17 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Sub OnProductCodeChanged(productCode As String, bs As BindingSource)
-            Dim idNo As Int32 = GetRecordFieldWithKeyG(Of Int32)(productCode, "Product", "ProductCode", "IdNo")
-            Dim item As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(idNo)
-            UpdatePurchaseItem(item, bs)
-            UpdatePurchaseHistory(idNo)
-            bs.ResetBindings(False)
+            Dim pModel As ProductModel = GetProductModel(productCode)
+            UpdatePurchaseItem(pModel, bs)
+            If pModel.IdNo > 0 Then
+                UpdatePurchaseHistory(pModel.IdNo)
+            End If
         End Sub
+
+        Private Function GetProductModel(productCode As Int32) As ProductModel
+            Dim productIdNo As Int32 = GetProductIdNo(productCode)
+            Return _productService.GetRecordByIdNo(Of ProductModel)(productIdNo)
+        End Function
 
         Private Sub OnGTinScanned(gTin As String, bs As BindingSource, ByRef productCode As String)
             Dim idNo As Int32 = GetRecordFieldWithKeyG(Of Int32)(gTin, "Product", "GTin", "IdNo")
@@ -370,44 +485,51 @@ Namespace PresentationLayer.Presenters
             CreateLookupDataThread(data)
         End Sub
 
-        Private Sub UpdatePurchaseItem(item As ProductModel, bs As BindingSource)
-            If item.IdNo > 0 Then
-                If bs.Current.ProductIdNo <> item.IdNo Then
-                    bs.Current.ProductCode = item.ProductCode
-                    bs.Current.ProductName = item.ProductName
-                    If bs.Current.Quantity = 0 Then
-                        bs.Current.Quantity = 1
+        Private Sub UpdatePurchaseItem(pModel As ProductModel, bs As BindingSource)
+            With bs.Current
+                If pModel.IdNo > 0 Then
+                    If .ProductIdNo <> pModel.IdNo Then
+                        .ProductCode = pModel.ProductCode
+                        .ProductName = pModel.ProductName
+                        If .Quantity = 0 Then
+                            .Quantity = 1
+                        End If
+                        SetPurchaseValues(pModel, bs)
                     End If
-                    SetPurchaseValues(item, bs)
-                    bs.Current.VatPercent = GetVatPercentage(item.CategoryIdNo)
-                    bs.Current.GrossAmount = bs.Current.Price * bs.Current.Quantity
-                    bs.Current.DiscountAmount = bs.Current.GrossAmount * bs.Current.DiscountPercent / 100
-                    bs.Current.AmtBefVat = bs.Current.GrossAmount - bs.Current.DiscountAmount
-                    bs.Current.VatAmount = (bs.Current.GrossAmount - bs.Current.DiscountAmount) * bs.Current.VatPercent / 100
-                    bs.Current.NetAmount = bs.Current.GrossAmount - bs.Current.DiscountAmount + bs.Current.VatAmount
-                    bs.Current.ProductIdNo = item.IdNo
-                    bs.Current.UnitCost = IIf(bs.Current.Quantity + bs.Current.BonusQuantity = 0, 0, bs.Current.NetAmount / (bs.Current.Quantity + bs.Current.BonusQuantity))
+                Else
+                    bs.Current.ProductIdNo = Nothing
+                    bs.Current.ProductName = Nothing
+                    bs.Current.UnitIdNo = Nothing
+                    bs.Current.Price = Nothing
                 End If
-            Else
-                bs.Current.ProductIdNo = Nothing
-                bs.Current.ProductName = Nothing
-                bs.Current.UnitIdNo = Nothing
-                bs.Current.Price = Nothing
-            End If
+            End With
         End Sub
 
-        Private Sub SetPurchaseValues(item As ProductModel, bs As BindingSource)
-            Dim purchaseItem As Object = New ExpandoObject
-            purchaseItem = Service.GetTopOneFields("PurchaseDetail", "Price,UnitSalesPrice,UnitIdNo", "ProductIdNo = " & item.IdNo.ToString(), "IdNo", False)
-            If purchaseItem Is Nothing Then
-                SetDefaultUnit(item, bs)
-            Else
-                bs.Current.Price = purchaseItem.Price
-                bs.Current.UnitSalesPrice = purchaseItem.UnitSalesPrice
-                bs.Current.UnitIdNo = purchaseItem.UnitIdNo
-            End If
-            'SetDefaultUnit(item, bs)
+        Private Sub SetPurchaseValues(pModel As ProductModel, bs As BindingSource)
+            Dim lastPurchaseInfo As Object = New ExpandoObject
+            lastPurchaseInfo = GetLastPurchaseInfo(pModel)
+            With bs.Current
+                If lastPurchaseInfo Is Nothing Then
+                    SetDefaultUnit(pModel, bs)
+                Else
+                    .Price = lastPurchaseInfo.Price
+                    .UnitSalesPrice = lastPurchaseInfo.UnitSalesPrice
+                    .UnitIdNo = lastPurchaseInfo.UnitIdNo
+                End If
+                .VatPercent = GetVatPercentage(pModel.CategoryIdNo)
+                .GrossAmount = .Price * .Quantity
+                .DiscountAmount = .GrossAmount * .DiscountPercent / 100
+                .AmtBefVat = .GrossAmount - .DiscountAmount
+                .VatAmount = (.GrossAmount - .DiscountAmount) * .VatPercent / 100
+                .NetAmount = .GrossAmount - .DiscountAmount + .VatAmount
+                .ProductIdNo = pModel.IdNo
+                .UnitCost = IIf(.Quantity + .BonusQuantity = 0, 0, .NetAmount / (.Quantity + .BonusQuantity))
+            End With
         End Sub
+
+        Private Function GetLastPurchaseInfo(pModel As ProductModel) As ExpandoObject
+            Return Service.GetTopOneFields("PurchaseDetail", "Price,UnitSalesPrice,UnitIdNo", "ProductIdNo = " & pModel.IdNo.ToString(), "IdNo", False)
+        End Function
 
         Private Function GetSalesPrice(item As ProductModel) As Decimal
             Dim price As Decimal
