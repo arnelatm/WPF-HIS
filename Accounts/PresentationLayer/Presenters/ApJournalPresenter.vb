@@ -14,7 +14,7 @@ Namespace PresentationLayer.Presenters
 
     Public Class ApJournalPresenter(Of TM As New)
         Inherits TransactionsPresenter(Of IApJournalView, TM)
-        Implements ISubscriber(Of DataChanged)
+        Implements ISubscriber(Of DgvItemsChanged)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
@@ -362,7 +362,7 @@ Namespace PresentationLayer.Presenters
             Return False
         End Function
 
-        Public Sub OnApJournalDataChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
+        Public Sub OnApJournaldgvItemsChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler
             With eventType.BindingSource
                 If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
                     Dim accountId = eventType.BindingSource.Current.AccountIdNo

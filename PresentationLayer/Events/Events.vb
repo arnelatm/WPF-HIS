@@ -435,7 +435,7 @@ Public Class LanguageChanged
 
 End Class
 
-Public Class DataChanged
+Public Class DgvItemsChanged
 
     Public Sub New(bindingSource As BindingSource, row As Int32, propertyName As String, elementName As String, enteredValue As Object)
         Me.BindingSource = bindingSource

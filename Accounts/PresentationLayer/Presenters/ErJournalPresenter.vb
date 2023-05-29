@@ -13,7 +13,7 @@ Namespace PresentationLayer.Presenters
 
     Public Class ErJournalPresenter(Of TM As New)
         Inherits TransactionsPresenter(Of IErJournalView, TM)
-        Implements ISubscriber(Of DataChanged)
+        Implements ISubscriber(Of DgvItemsChanged)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
@@ -228,7 +228,7 @@ Namespace PresentationLayer.Presenters
                 _erJournalItemService.DelUpdateTvp(DtUpdateTable, idNo)
             End If
         End Sub
-        Public Sub OnApJournalDataChangedEventHandler(ByRef eventType As DataChanged) Implements ISubscriber(Of DataChanged).OnEventHandler
+        Public Sub OnApJournaldgvItemsChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler
             With eventType.BindingSource
                 If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
                     Dim accountId = eventType.BindingSource.Current.AccountIdNo
