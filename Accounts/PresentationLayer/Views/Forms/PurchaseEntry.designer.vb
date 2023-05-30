@@ -99,7 +99,8 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvUnitCost = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
             Me.dgvUnitCount = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
             Me.CtDataGridView2 = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
-            Me.DataGridViewPurchaseHistory = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
+            Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.CGroupBox1 = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblGrossAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtGrossAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -109,6 +110,12 @@ Namespace PresentationLayer.Views.Forms
             Me.txtVatAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.DataGridViewPurchaseHistory = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
+            Me.dgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.PurchaseIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.UnitName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.SupplierCode = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.SupplierName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.ProductBindingSource = New System.Windows.Forms.BindingSource(Me.components)
             Me.ISPDATADataSet = New AATM.Accounts.ISPDATADataSet()
             Me.ProductTableAdapter = New AATM.Accounts.ISPDATADataSetTableAdapters.ProductTableAdapter()
@@ -118,13 +125,6 @@ Namespace PresentationLayer.Views.Forms
             Me.NetAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.VatAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.VatPercentDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.dgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.PurchaseIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.UnitName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.SupplierCode = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.SupplierName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.CGroupBox1 = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvProductName = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
@@ -152,12 +152,12 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout3.SuspendLayout()
             CType(Me.DataGridViewPurchaseDetails, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.CtDataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.DataGridViewPurchaseHistory, System.ComponentModel.ISupportInitialize).BeginInit()
-            Me.CFlowLayout1.SuspendLayout()
-            CType(Me.ProductBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.ISPDATADataSet, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout4.SuspendLayout()
             Me.CGroupBox1.SuspendLayout()
+            Me.CFlowLayout1.SuspendLayout()
+            CType(Me.DataGridViewPurchaseHistory, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.ProductBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.ISPDATADataSet, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsPurchaseDetails, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsPurchaseHistory, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
@@ -1012,69 +1012,28 @@ Namespace PresentationLayer.Views.Forms
             Me.CtDataGridView2.TabIndex = 9
             Me.CtDataGridView2.Translatable = True
             '
-            'DataGridViewPurchaseHistory
+            'CFlowLayout4
             '
-            DataGridViewCellStyle26.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewPurchaseHistory.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle26
-            Me.DataGridViewPurchaseHistory.AutoGenerateColumns = False
-            Me.DataGridViewPurchaseHistory.BegFindValue = Nothing
-            Me.DataGridViewPurchaseHistory.Cached = False
-            DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle27.BackColor = System.Drawing.SystemColors.Control
-            DataGridViewCellStyle27.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle27.ForeColor = System.Drawing.SystemColors.WindowText
-            DataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.DataGridViewPurchaseHistory.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle27
-            Me.DataGridViewPurchaseHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewPurchaseHistory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvTransactionDate, Me.PurchaseIdNo, Me.QuantityDataGridViewTextBoxColumn, Me.BonusQuantityDataGridViewTextBoxColumn, Me.UnitName, Me.BatchNoDataGridViewTextBoxColumn, Me.ExpiryDateDataGridViewTextBoxColumn, Me.UnitCostDataGridViewTextBoxColumn1, Me.UnitSalesPriceDataGridViewTextBoxColumn1, Me.SupplierCode, Me.SupplierName, Me.IdNoDataGridViewTextBoxColumn})
-            Me.DataGridViewPurchaseHistory.DataFilter = Nothing
-            Me.DataGridViewPurchaseHistory.DataSource = Me.bsPurchaseHistory
-            DataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle38.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle38.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle38.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle38.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle38.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle38.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewPurchaseHistory.DefaultCellStyle = DataGridViewCellStyle38
-            Me.DataGridViewPurchaseHistory.DgSearch = Nothing
-            Me.DataGridViewPurchaseHistory.DgvFooter = Nothing
-            Me.DataGridViewPurchaseHistory.DisplayOnly = True
-            Me.DataGridViewPurchaseHistory.Ea = Nothing
-            Me.DataGridViewPurchaseHistory.EditingMode = False
-            Me.DataGridViewPurchaseHistory.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-            Me.DataGridViewPurchaseHistory.EndFindValue = Nothing
-            Me.DataGridViewPurchaseHistory.FieldDescription = Nothing
-            Me.DataGridViewPurchaseHistory.FieldName = Nothing
-            Me.DataGridViewPurchaseHistory.FieldsDictionary = Nothing
-            Me.DataGridViewPurchaseHistory.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.DataGridViewPurchaseHistory.FindEnabled = False
-            Me.DataGridViewPurchaseHistory.FirstRowDeletionEnabled = True
-            Me.DataGridViewPurchaseHistory.FirstRowInsertionEnabled = True
-            Me.DataGridViewPurchaseHistory.IgnoreCase = False
-            Me.DataGridViewPurchaseHistory.IsDirty = False
-            Me.DataGridViewPurchaseHistory.Location = New System.Drawing.Point(6, 19)
-            Me.DataGridViewPurchaseHistory.Name = "DataGridViewPurchaseHistory"
-            Me.DataGridViewPurchaseHistory.ReadOnly = True
-            DataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle39.BackColor = System.Drawing.SystemColors.Control
-            DataGridViewCellStyle39.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle39.ForeColor = System.Drawing.SystemColors.WindowText
-            DataGridViewCellStyle39.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle39.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle39.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.DataGridViewPurchaseHistory.RowHeadersDefaultCellStyle = DataGridViewCellStyle39
-            Me.DataGridViewPurchaseHistory.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.DataGridViewPurchaseHistory.SecurityKey = ""
-            Me.DataGridViewPurchaseHistory.SequenceColumn = "dgvSequence"
-            Me.DataGridViewPurchaseHistory.SequenceFieldName = "Sequence"
-            Me.DataGridViewPurchaseHistory.ShowFooter = False
-            Me.DataGridViewPurchaseHistory.ShowInsertColumnWhenEditing = True
-            Me.DataGridViewPurchaseHistory.Size = New System.Drawing.Size(881, 180)
-            Me.DataGridViewPurchaseHistory.TabIndex = 11
-            Me.DataGridViewPurchaseHistory.Translatable = True
+            Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
+            Me.CFlowLayout4.Controls.Add(Me.CGroupBox1)
+            Me.CFlowLayout4.Location = New System.Drawing.Point(3, 446)
+            Me.CFlowLayout4.Name = "CFlowLayout4"
+            Me.CFlowLayout4.Size = New System.Drawing.Size(1166, 208)
+            Me.CFlowLayout4.TabIndex = 12
+            '
+            'CGroupBox1
+            '
+            Me.CGroupBox1.AutoSize = True
+            Me.CGroupBox1.BackColor = System.Drawing.Color.Transparent
+            Me.CGroupBox1.Controls.Add(Me.CFlowLayout1)
+            Me.CGroupBox1.Controls.Add(Me.DataGridViewPurchaseHistory)
+            Me.CGroupBox1.DisplayOnly = True
+            Me.CGroupBox1.Location = New System.Drawing.Point(3, 3)
+            Me.CGroupBox1.Name = "CGroupBox1"
+            Me.CGroupBox1.Size = New System.Drawing.Size(1170, 218)
+            Me.CGroupBox1.TabIndex = 12
+            Me.CGroupBox1.TabStop = False
+            Me.CGroupBox1.Text = "Item Purchase History"
             '
             'CFlowLayout1
             '
@@ -1285,67 +1244,69 @@ Namespace PresentationLayer.Views.Forms
             Me.txtAmount.ValueIsMandatory = True
             Me.txtAmount.ValueIsNumeric = True
             '
-            'ProductBindingSource
+            'DataGridViewPurchaseHistory
             '
-            Me.ProductBindingSource.DataMember = "Product"
-            Me.ProductBindingSource.DataSource = Me.ISPDATADataSet
-            '
-            'ISPDATADataSet
-            '
-            Me.ISPDATADataSet.DataSetName = "ISPDATADataSet"
-            Me.ISPDATADataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-            '
-            'ProductTableAdapter
-            '
-            Me.ProductTableAdapter.ClearBeforeFill = True
-            '
-            'ProductIdNoDataGridViewTextBoxColumn
-            '
-            Me.ProductIdNoDataGridViewTextBoxColumn.DataPropertyName = "ProductIdNo"
-            Me.ProductIdNoDataGridViewTextBoxColumn.HeaderText = "ProductIdNo"
-            Me.ProductIdNoDataGridViewTextBoxColumn.Name = "ProductIdNoDataGridViewTextBoxColumn"
-            Me.ProductIdNoDataGridViewTextBoxColumn.ReadOnly = True
-            Me.ProductIdNoDataGridViewTextBoxColumn.Visible = False
-            '
-            'UnitSalesPriceDataGridViewTextBoxColumn
-            '
-            Me.UnitSalesPriceDataGridViewTextBoxColumn.DataPropertyName = "UnitSalesPrice"
-            Me.UnitSalesPriceDataGridViewTextBoxColumn.HeaderText = "Unit Sales Price"
-            Me.UnitSalesPriceDataGridViewTextBoxColumn.Name = "UnitSalesPriceDataGridViewTextBoxColumn"
-            Me.UnitSalesPriceDataGridViewTextBoxColumn.ReadOnly = True
-            Me.UnitSalesPriceDataGridViewTextBoxColumn.Width = 60
-            '
-            'UnitCostDataGridViewTextBoxColumn
-            '
-            Me.UnitCostDataGridViewTextBoxColumn.DataPropertyName = "UnitCost"
-            Me.UnitCostDataGridViewTextBoxColumn.HeaderText = "Unit Cost"
-            Me.UnitCostDataGridViewTextBoxColumn.Name = "UnitCostDataGridViewTextBoxColumn"
-            Me.UnitCostDataGridViewTextBoxColumn.ReadOnly = True
-            Me.UnitCostDataGridViewTextBoxColumn.Width = 60
-            '
-            'NetAmountDataGridViewTextBoxColumn
-            '
-            Me.NetAmountDataGridViewTextBoxColumn.DataPropertyName = "NetAmount"
-            Me.NetAmountDataGridViewTextBoxColumn.HeaderText = "Net Amount"
-            Me.NetAmountDataGridViewTextBoxColumn.Name = "NetAmountDataGridViewTextBoxColumn"
-            Me.NetAmountDataGridViewTextBoxColumn.ReadOnly = True
-            Me.NetAmountDataGridViewTextBoxColumn.Width = 80
-            '
-            'VatAmountDataGridViewTextBoxColumn
-            '
-            Me.VatAmountDataGridViewTextBoxColumn.DataPropertyName = "VatAmount"
-            Me.VatAmountDataGridViewTextBoxColumn.HeaderText = "Vat Amt."
-            Me.VatAmountDataGridViewTextBoxColumn.Name = "VatAmountDataGridViewTextBoxColumn"
-            Me.VatAmountDataGridViewTextBoxColumn.ReadOnly = True
-            Me.VatAmountDataGridViewTextBoxColumn.Width = 60
-            '
-            'VatPercentDataGridViewTextBoxColumn
-            '
-            Me.VatPercentDataGridViewTextBoxColumn.DataPropertyName = "VatPercent"
-            Me.VatPercentDataGridViewTextBoxColumn.HeaderText = "Vat %"
-            Me.VatPercentDataGridViewTextBoxColumn.Name = "VatPercentDataGridViewTextBoxColumn"
-            Me.VatPercentDataGridViewTextBoxColumn.ReadOnly = True
-            Me.VatPercentDataGridViewTextBoxColumn.Width = 40
+            DataGridViewCellStyle26.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewPurchaseHistory.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle26
+            Me.DataGridViewPurchaseHistory.AutoGenerateColumns = False
+            Me.DataGridViewPurchaseHistory.BegFindValue = Nothing
+            Me.DataGridViewPurchaseHistory.Cached = False
+            DataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle27.BackColor = System.Drawing.SystemColors.Control
+            DataGridViewCellStyle27.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle27.ForeColor = System.Drawing.SystemColors.WindowText
+            DataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.DataGridViewPurchaseHistory.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle27
+            Me.DataGridViewPurchaseHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            Me.DataGridViewPurchaseHistory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvTransactionDate, Me.PurchaseIdNo, Me.QuantityDataGridViewTextBoxColumn, Me.BonusQuantityDataGridViewTextBoxColumn, Me.UnitName, Me.BatchNoDataGridViewTextBoxColumn, Me.ExpiryDateDataGridViewTextBoxColumn, Me.UnitCostDataGridViewTextBoxColumn1, Me.UnitSalesPriceDataGridViewTextBoxColumn1, Me.SupplierCode, Me.SupplierName, Me.IdNoDataGridViewTextBoxColumn})
+            Me.DataGridViewPurchaseHistory.DataFilter = Nothing
+            Me.DataGridViewPurchaseHistory.DataSource = Me.bsPurchaseHistory
+            DataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle38.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle38.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle38.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle38.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle38.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle38.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewPurchaseHistory.DefaultCellStyle = DataGridViewCellStyle38
+            Me.DataGridViewPurchaseHistory.DgSearch = Nothing
+            Me.DataGridViewPurchaseHistory.DgvFooter = Nothing
+            Me.DataGridViewPurchaseHistory.DisplayOnly = True
+            Me.DataGridViewPurchaseHistory.Ea = Nothing
+            Me.DataGridViewPurchaseHistory.EditingMode = False
+            Me.DataGridViewPurchaseHistory.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewPurchaseHistory.EndFindValue = Nothing
+            Me.DataGridViewPurchaseHistory.FieldDescription = Nothing
+            Me.DataGridViewPurchaseHistory.FieldName = Nothing
+            Me.DataGridViewPurchaseHistory.FieldsDictionary = Nothing
+            Me.DataGridViewPurchaseHistory.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.DataGridViewPurchaseHistory.FindEnabled = False
+            Me.DataGridViewPurchaseHistory.FirstRowDeletionEnabled = True
+            Me.DataGridViewPurchaseHistory.FirstRowInsertionEnabled = True
+            Me.DataGridViewPurchaseHistory.IgnoreCase = False
+            Me.DataGridViewPurchaseHistory.IsDirty = False
+            Me.DataGridViewPurchaseHistory.Location = New System.Drawing.Point(6, 19)
+            Me.DataGridViewPurchaseHistory.Name = "DataGridViewPurchaseHistory"
+            Me.DataGridViewPurchaseHistory.ReadOnly = True
+            DataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle39.BackColor = System.Drawing.SystemColors.Control
+            DataGridViewCellStyle39.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle39.ForeColor = System.Drawing.SystemColors.WindowText
+            DataGridViewCellStyle39.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle39.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle39.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.DataGridViewPurchaseHistory.RowHeadersDefaultCellStyle = DataGridViewCellStyle39
+            Me.DataGridViewPurchaseHistory.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.DataGridViewPurchaseHistory.SecurityKey = ""
+            Me.DataGridViewPurchaseHistory.SequenceColumn = "dgvSequence"
+            Me.DataGridViewPurchaseHistory.SequenceFieldName = "Sequence"
+            Me.DataGridViewPurchaseHistory.ShowFooter = False
+            Me.DataGridViewPurchaseHistory.ShowInsertColumnWhenEditing = True
+            Me.DataGridViewPurchaseHistory.Size = New System.Drawing.Size(881, 180)
+            Me.DataGridViewPurchaseHistory.TabIndex = 11
+            Me.DataGridViewPurchaseHistory.Translatable = True
             '
             'dgvTransactionDate
             '
@@ -1456,27 +1417,67 @@ Namespace PresentationLayer.Views.Forms
             Me.SupplierName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.SupplierName.Translatable = False
             '
-            'CFlowLayout4
+            'ProductBindingSource
             '
-            Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
-            Me.CFlowLayout4.Controls.Add(Me.CGroupBox1)
-            Me.CFlowLayout4.Location = New System.Drawing.Point(3, 446)
-            Me.CFlowLayout4.Name = "CFlowLayout4"
-            Me.CFlowLayout4.Size = New System.Drawing.Size(1166, 208)
-            Me.CFlowLayout4.TabIndex = 12
+            Me.ProductBindingSource.DataMember = "Product"
+            Me.ProductBindingSource.DataSource = Me.ISPDATADataSet
             '
-            'CGroupBox1
+            'ISPDATADataSet
             '
-            Me.CGroupBox1.BackColor = System.Drawing.Color.Transparent
-            Me.CGroupBox1.Controls.Add(Me.CFlowLayout1)
-            Me.CGroupBox1.Controls.Add(Me.DataGridViewPurchaseHistory)
-            Me.CGroupBox1.DisplayOnly = True
-            Me.CGroupBox1.Location = New System.Drawing.Point(3, 3)
-            Me.CGroupBox1.Name = "CGroupBox1"
-            Me.CGroupBox1.Size = New System.Drawing.Size(1164, 205)
-            Me.CGroupBox1.TabIndex = 12
-            Me.CGroupBox1.TabStop = False
-            Me.CGroupBox1.Text = "Item Purchase History"
+            Me.ISPDATADataSet.DataSetName = "ISPDATADataSet"
+            Me.ISPDATADataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+            '
+            'ProductTableAdapter
+            '
+            Me.ProductTableAdapter.ClearBeforeFill = True
+            '
+            'ProductIdNoDataGridViewTextBoxColumn
+            '
+            Me.ProductIdNoDataGridViewTextBoxColumn.DataPropertyName = "ProductIdNo"
+            Me.ProductIdNoDataGridViewTextBoxColumn.HeaderText = "ProductIdNo"
+            Me.ProductIdNoDataGridViewTextBoxColumn.Name = "ProductIdNoDataGridViewTextBoxColumn"
+            Me.ProductIdNoDataGridViewTextBoxColumn.ReadOnly = True
+            Me.ProductIdNoDataGridViewTextBoxColumn.Visible = False
+            '
+            'UnitSalesPriceDataGridViewTextBoxColumn
+            '
+            Me.UnitSalesPriceDataGridViewTextBoxColumn.DataPropertyName = "UnitSalesPrice"
+            Me.UnitSalesPriceDataGridViewTextBoxColumn.HeaderText = "Unit Sales Price"
+            Me.UnitSalesPriceDataGridViewTextBoxColumn.Name = "UnitSalesPriceDataGridViewTextBoxColumn"
+            Me.UnitSalesPriceDataGridViewTextBoxColumn.ReadOnly = True
+            Me.UnitSalesPriceDataGridViewTextBoxColumn.Width = 60
+            '
+            'UnitCostDataGridViewTextBoxColumn
+            '
+            Me.UnitCostDataGridViewTextBoxColumn.DataPropertyName = "UnitCost"
+            Me.UnitCostDataGridViewTextBoxColumn.HeaderText = "Unit Cost"
+            Me.UnitCostDataGridViewTextBoxColumn.Name = "UnitCostDataGridViewTextBoxColumn"
+            Me.UnitCostDataGridViewTextBoxColumn.ReadOnly = True
+            Me.UnitCostDataGridViewTextBoxColumn.Width = 60
+            '
+            'NetAmountDataGridViewTextBoxColumn
+            '
+            Me.NetAmountDataGridViewTextBoxColumn.DataPropertyName = "NetAmount"
+            Me.NetAmountDataGridViewTextBoxColumn.HeaderText = "Net Amount"
+            Me.NetAmountDataGridViewTextBoxColumn.Name = "NetAmountDataGridViewTextBoxColumn"
+            Me.NetAmountDataGridViewTextBoxColumn.ReadOnly = True
+            Me.NetAmountDataGridViewTextBoxColumn.Width = 80
+            '
+            'VatAmountDataGridViewTextBoxColumn
+            '
+            Me.VatAmountDataGridViewTextBoxColumn.DataPropertyName = "VatAmount"
+            Me.VatAmountDataGridViewTextBoxColumn.HeaderText = "Vat Amt."
+            Me.VatAmountDataGridViewTextBoxColumn.Name = "VatAmountDataGridViewTextBoxColumn"
+            Me.VatAmountDataGridViewTextBoxColumn.ReadOnly = True
+            Me.VatAmountDataGridViewTextBoxColumn.Width = 60
+            '
+            'VatPercentDataGridViewTextBoxColumn
+            '
+            Me.VatPercentDataGridViewTextBoxColumn.DataPropertyName = "VatPercent"
+            Me.VatPercentDataGridViewTextBoxColumn.HeaderText = "Vat %"
+            Me.VatPercentDataGridViewTextBoxColumn.Name = "VatPercentDataGridViewTextBoxColumn"
+            Me.VatPercentDataGridViewTextBoxColumn.ReadOnly = True
+            Me.VatPercentDataGridViewTextBoxColumn.Width = 40
             '
             'dgvSequence
             '
@@ -1849,13 +1850,14 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout3.PerformLayout()
             CType(Me.DataGridViewPurchaseDetails, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.CtDataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.DataGridViewPurchaseHistory, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.CFlowLayout4.ResumeLayout(False)
+            Me.CFlowLayout4.PerformLayout()
+            Me.CGroupBox1.ResumeLayout(False)
             Me.CFlowLayout1.ResumeLayout(False)
             Me.CFlowLayout1.PerformLayout()
+            CType(Me.DataGridViewPurchaseHistory, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.ProductBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.ISPDATADataSet, System.ComponentModel.ISupportInitialize).EndInit()
-            Me.CFlowLayout4.ResumeLayout(False)
-            Me.CGroupBox1.ResumeLayout(False)
             CType(Me.bsPurchaseDetails, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.bsPurchaseHistory, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
