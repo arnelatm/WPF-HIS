@@ -383,6 +383,11 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
         Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchaseDetails.CellEndEdit
+            Select Case DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name
+                Case <> "dgvQuantity"
+                    ProcessCellEndEdit(DataGridViewPurchaseDetails, bsPurchaseDetails)
+            End Select
+
             'With bsPurchaseDetails.Current
             '    Dim gAmt As Decimal = 0
             '    Dim dAmt As Decimal = 0
@@ -555,7 +560,7 @@ Namespace PresentationLayer.Views.Forms
                 RaiseEvent GTinScanned(scannedProduct.GTin, bsPurchaseDetails, productCode)
                 If productCode IsNot Nothing Then
                     'Dim item As IProductView = DirectCast(product, IProductView)
-                    dgv.CurrentRow.Cells("dgvProductCode").Value = productCode
+                    'dgv.CurrentRow.Cells("dgvProductCode").Value = productCode
                     RaiseEvent ProductCodeChanged(productCode, bsPurchaseDetails)
                     If scannedProduct.ExpiryDate IsNot Nothing Then
                         bsPurchaseDetails.Current.ExpiryDate = scannedProduct.ExpiryDate
@@ -582,15 +587,12 @@ Namespace PresentationLayer.Views.Forms
                         e.Cancel = True
                         dgv.Rows(e.RowIndex).ErrorText = msg
                     Else
-                        dgv.CurrentRow.Cells("dgvProductCode").Value = product.ProductCode
                         RaiseEvent ProductCodeChanged(product.ProductCode, bsPurchaseDetails)
                         Dim unitIdNo As Int16 = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).UnitIdNo
                         If unitIdNo <= 0 Or _noOfUnits <= 1 Then
                             SendKeys.Send("{Tab}")
                         End If
                         bsPurchaseDetails.ResetBindings(False)
-                        ' Yes, so grab the values you want from the dialog here
-                        '. = form.SelectedId
                     End If
                 Else
                     e.Cancel = True
@@ -603,7 +605,7 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent ProductCodeChanged(code, bsPurchaseDetails)
             Dim cProductName = dgv.CurrentRow().Cells("dgvProductName").Value
             If Not String.IsNullOrEmpty(cProductName) Then
-                If dgv.CurrentRow.Cells("dgvUnitCount").Value = 0 Then
+                If dgv.CurrentRow.Cells("dgvUnitCount").Value < 2 Then
                     SendKeys.Send("{Tab}{Tab}")
                 Else
                     SendKeys.Send("{Tab}")
@@ -946,10 +948,11 @@ Namespace PresentationLayer.Views.Forms
 
 
         Private Sub DataGridViewPurchaseDetails_RowEnter(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchaseDetails.RowEnter
-            Dim newRow As DataGridViewRow = DataGridViewPurchaseDetails.Rows(e.RowIndex)
-            Dim prIdNo As Int32 = newRow.Cells("dgvProductIdNo").Value
+            Dim dgvRow As DataGridViewRow = DataGridViewPurchaseDetails.Rows(e.RowIndex)
+            Dim prIdNo As Int32 = dgvRow.Cells("dgvProductIdNo").Value
             RaiseEvent RowChanged(prIdNo)
             bsPurchaseHistory.ResetBindings(False)
+            CGroupBox1.Text = Messaging.TranslateCaption("Purchase History for ") + dgvRow.Cells("dgvProductCode").Value + "-" + dgvRow.Cells("dgvProductName").Value
         End Sub
 
     End Class

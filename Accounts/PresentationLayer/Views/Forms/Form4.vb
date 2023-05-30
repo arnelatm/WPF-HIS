@@ -3,11 +3,8 @@
 Public Class Form4
 
 
-    Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
+    Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs)
         Dim number As Double
-        CLabel1.Text = AATM.Libraries.GlobalFuncNSub.DecimalToFraction(number, 32)
-        CLabel2.Text = AATM.Libraries.GlobalFuncNSub.RealToFraction(number, 0.0001)
-        CLabel3.Text = AATM.Libraries.GlobalFuncNSub.GetDecimalToFraction(number, 32, "U")
         _findText = ""
     End Sub
 
@@ -58,51 +55,7 @@ Public Class Form4
     '    gvDetails.DataBind()
     'End Sub
 
-    Private Sub txtFinder_TextChanged(sender As Object, e As EventArgs) Handles txtFinder.TextChanged
-        Dim dao As New ProductDao
-        If txtFinder.Text.Length() < 3 Then
-            DataGridViewProducts.DataSource = Nothing
-        Else
-            DataGridViewProducts.DataSource = dao.GetProductsBySearchString(txtFinder.Text)
-        End If
-        _findText = txtFinder.Text
-    End Sub
-
-    Private Sub SubDataGridViewProducts_CellPainting(ByVal sender As Object, ByVal e As DataGridViewCellPaintingEventArgs) Handles DataGridViewProducts.CellPainting
-        If e.RowIndex > -1 AndAlso e.ColumnIndex > -1 AndAlso DataGridViewProducts.Columns(e.ColumnIndex).Name <> "Id" Then
-
-            If Not String.IsNullOrWhiteSpace(_findText.Trim()) Then
-                Dim gridCellValue As String = e.FormattedValue.ToString()
-                Dim startIndexInCellValue As Integer = gridCellValue.ToLower().IndexOf(_findText.Trim().ToLower())
-
-                If startIndexInCellValue >= 0 Then
-                    e.Handled = True
-                    e.PaintBackground(e.CellBounds, True)
-                    Dim hl_rect As Rectangle = New Rectangle With {
-                        .Y = e.CellBounds.Y + 2,
-                        .Height = e.CellBounds.Height - 5
-                    }
-                    Dim sBeforeSearchword As String = gridCellValue.Substring(0, startIndexInCellValue)
-                    Dim sSearchWord As String = gridCellValue.Substring(startIndexInCellValue, _findText.Trim().Length)
-                    Dim s1 As Size = TextRenderer.MeasureText(e.Graphics, sBeforeSearchword, e.CellStyle.Font, e.CellBounds.Size)
-                    Dim s2 As Size = TextRenderer.MeasureText(e.Graphics, sSearchWord, e.CellStyle.Font, e.CellBounds.Size)
-
-                    If s1.Width > 5 Then
-                        hl_rect.X = e.CellBounds.X + s1.Width - 5
-                        hl_rect.Width = s2.Width - 6
-                    Else
-                        hl_rect.X = e.CellBounds.X + 2
-                        hl_rect.Width = s2.Width - 6
-                    End If
-
-                    Dim hl_brush As SolidBrush
-                    hl_brush = New SolidBrush(Color.Yellow)
-                    e.Graphics.FillRectangle(hl_brush, hl_rect)
-                    hl_brush.Dispose()
-                    e.PaintContent(e.CellBounds)
-                End If
-            End If
-        End If
+    Private Sub txtFinder_TextChanged(sender As Object, e As EventArgs)
     End Sub
 
     'Private Sub Dgv_OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewPurchase.CellBeginEdit
@@ -120,21 +73,6 @@ Public Class Form4
     'End Sub
 
 
-    Private Sub Dgv_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchase.CellEndEdit
-        If DataGridViewPurchase.CurrentCell.OwningColumn.Name = "ProductName" Then
-            With DataGridViewPurchase.CurrentCell
-                Dim cColumnName = .OwningColumn.Name.ToLower()
-                Dim dao As New ProductDao
-                _findText = DataGridViewPurchase.CurrentCell.EditedFormattedValue
-                If _findText = "" Then
-                    DataGridViewProducts.DataSource = Nothing
-                Else
-                    DataGridViewProducts.DataSource = dao.GetProductsBySearchString(_findText)
-                End If
-            End With
-        End If
-    End Sub
-
     Private _findText As String = ""
 
     Private Sub Dgv_OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs)
@@ -145,22 +83,7 @@ Public Class Form4
 
     End Sub
 
-    Private Sub DataGridViewPurchase_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchase.CellValueChanged
-        If e.RowIndex >= 0 Then
-            Dim newDate As DateTime
-
-            Select Case Me.DataGridViewPurchase.Columns(e.ColumnIndex).Name
-                Case "ProductName"
-                    Dim newText As String = Me.DataGridViewPurchase.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString()
-                Case "ColumnCombo"
-                    Dim newPriority As String = Me.DataGridViewPurchase.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString()
-                Case "ColumnDate"
-                    DateTime.TryParse(Me.DataGridViewPurchase.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString(), newDate)
-            End Select
-        End If
-    End Sub
-
-    Private Sub dataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles DataGridViewPurchase.EditingControlShowing
+    Private Sub dataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs)
 
         e.CellStyle.BackColor = Color.Aquamarine
 
@@ -219,6 +142,12 @@ Public Class Form4
         Return result
     End Function
 
-
+    Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton2.ClickButtonArea
+        txtResult1.Text = Math.Round(Val(txtValue.Text), 2, MidpointRounding.AwayFromZero)
+        txtResult2.Text = Math.Round(Val(txtValue.Text), 2, MidpointRounding.ToEven)
+        txtResult3.Text = Math.Ceiling(Val(txtValue.Text) * 100D) / 100D
+        txtResult4.Text = Math.Floor(Val(txtValue.Text) * 100D) / 100D
+        txtResult5.Text = Math.Floor(Val(txtValue.Text) * 100D) / 100D
+    End Sub
 End Class
 
