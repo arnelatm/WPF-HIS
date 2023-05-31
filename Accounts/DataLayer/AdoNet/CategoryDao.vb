@@ -16,6 +16,7 @@ Namespace DataLayer.AdoNet
                                   "CategoryCode," &
                                   "CategoryName," &
                                   "CategoryNameAra," &
+                                  "NeedsExpiryDate," &
                                   "PurchaseAccountIdNo," &
                                   "SaleAccountIdNo," &
                                   "VatPurchaseAccountIdNo," &
@@ -44,6 +45,7 @@ Namespace DataLayer.AdoNet
                     " CategoryCode = @CategoryCode," &
                     " CategoryName = @CategoryName," &
                     " CategoryNameAra = @CategoryNameAra," &
+                    " NeedsExpiryDate = @NeedsExpiryDate," &
                     " Notes = @Notes," &
                     " PurchaseAccountIdNo = @PurchaseAccountIdNo," &
                     " SaleAccountIdNo = @SaleAccountIdNo," &
@@ -58,8 +60,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef Category As Category) As Integer Implements IDao(Of Category).AddRecord
             Dim sql As String =
                     " INSERT INTO [Category] " &
-                    " (BranchIdNo,CategoryCode,CategoryName,CategoryNameAra,PurchaseAccountIdNo,SaleAccountIdNo,VatPurchaseAccountIdNo,VatSaleAccountIdNo,VatPercentage,Notes) " &
-                    " VALUES (@BranchIdNo,@CategoryCode,@CategoryName,@CategoryNameAra,@PurchaseAccountIdNo,@SaleAccountIdNo,@VatPurchaseAccountIdNo,@VatSaleAccountIdNo,@VatPercentage,@Notes) "
+                    " (BranchIdNo,CategoryCode,CategoryName,CategoryNameAra,NeedsExpiryDate,PurchaseAccountIdNo,SaleAccountIdNo,VatPurchaseAccountIdNo,VatSaleAccountIdNo,VatPercentage,Notes) " &
+                    " VALUES (@BranchIdNo,@CategoryCode,@CategoryName,@CategoryNameAra,@NeedsExpiryDate,@PurchaseAccountIdNo,@SaleAccountIdNo,@VatPurchaseAccountIdNo,@VatSaleAccountIdNo,@VatPercentage,@Notes) "
             Return Db.Insert(sql, Take(Category))
         End Function
 
@@ -71,6 +73,7 @@ Namespace DataLayer.AdoNet
             .CategoryCode = Extensions.AsString(reader("CategoryCode")),
             .CategoryName = Extensions.AsString(reader("CategoryName")),
             .CategoryNameAra = Extensions.AsString(reader("CategoryNameAra")),
+            .NeedsExpiryDate = Extensions.AsBool(reader("NeedsExpiryDate")),
             .PurchaseAccountIdNo = Extensions.AsInt(Of Int16)(reader("PurchaseAccountIdNo")),
             .SaleAccountIdNo = Extensions.AsInt(Of Int16)(reader("SaleAccountIdNo")),
             .VatPurchaseAccountIdNo = Extensions.AsInt(Of Int16)(reader("VatPurchaseAccountIdNo")),
@@ -86,6 +89,7 @@ Namespace DataLayer.AdoNet
                                     "@CategoryCode", Category.CategoryCode,
                                     "@CategoryName", Category.CategoryName,
                                     "@CategoryNameAra", Category.CategoryNameAra,
+                                    "@NeedsExpiryDate", Category.NeedsExpiryDate,
                                     "@PurchaseAccountIdNo", Category.PurchaseAccountIdNo,
                                     "@SaleAccountIdNo", Category.SaleAccountIdNo,
                                     "@VatPurchaseAccountIdNo", Category.VatPurchaseAccountIdNo,

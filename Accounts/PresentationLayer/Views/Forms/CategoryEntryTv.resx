@@ -244,7 +244,7 @@
     <value>62, 23</value>
   </data>
   <data name="txtBranchIdNo.TabIndex" type="System.Int32, mscorlib">
-    <value>170</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;txtBranchIdNo.Name" xml:space="preserve">
     <value>txtBranchIdNo</value>
@@ -304,7 +304,7 @@
     <value>136, 23</value>
   </data>
   <data name="txtCategoryCode.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;txtCategoryCode.Name" xml:space="preserve">
     <value>txtCategoryCode</value>
@@ -364,7 +364,7 @@
     <value>520, 23</value>
   </data>
   <data name="txtCategoryName.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;txtCategoryName.Name" xml:space="preserve">
     <value>txtCategoryName</value>
@@ -427,7 +427,7 @@
     <value>520, 23</value>
   </data>
   <data name="txtCategoryNameAra.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;txtCategoryNameAra.Name" xml:space="preserve">
     <value>txtCategoryNameAra</value>
@@ -493,7 +493,7 @@
     <value>520, 24</value>
   </data>
   <data name="cboPurchaseAccountIdNo.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;cboPurchaseAccountIdNo.Name" xml:space="preserve">
     <value>cboPurchaseAccountIdNo</value>
@@ -559,7 +559,7 @@
     <value>520, 24</value>
   </data>
   <data name="cboSaleAccountIdNo.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;cboSaleAccountIdNo.Name" xml:space="preserve">
     <value>cboSaleAccountIdNo</value>
@@ -625,7 +625,7 @@
     <value>520, 24</value>
   </data>
   <data name="cboVatPurchaseAccountIdNo.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;cboVatPurchaseAccountIdNo.Name" xml:space="preserve">
     <value>cboVatPurchaseAccountIdNo</value>
@@ -691,7 +691,7 @@
     <value>520, 24</value>
   </data>
   <data name="cboVatSaleAccountIdNo.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;cboVatSaleAccountIdNo.Name" xml:space="preserve">
     <value>cboVatSaleAccountIdNo</value>
@@ -718,7 +718,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblVatPercentage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 23</value>
+    <value>274, 23</value>
   </data>
   <data name="lblVatPercentage.TabIndex" type="System.Int32, mscorlib">
     <value>166</value>
@@ -741,6 +741,72 @@
   <data name="&gt;&gt;lblVatPercentage.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
+  <data name="CLabel1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="CLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="CLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>280, 333</value>
+  </data>
+  <data name="CLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="CLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>185, 23</value>
+  </data>
+  <data name="CLabel1.TabIndex" type="System.Int32, mscorlib">
+    <value>173</value>
+  </data>
+  <data name="CLabel1.Text" xml:space="preserve">
+    <value>Needs Expiry Date?</value>
+  </data>
+  <data name="CLabel1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.Name" xml:space="preserve">
+    <value>CLabel1</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="chkNeedsExpiryDate.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="chkNeedsExpiryDate.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="chkNeedsExpiryDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>469, 335</value>
+  </data>
+  <data name="chkNeedsExpiryDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>19, 19</value>
+  </data>
+  <data name="chkNeedsExpiryDate.TabIndex" type="System.Int32, mscorlib">
+    <value>174</value>
+  </data>
+  <data name="chkNeedsExpiryDate.Text" xml:space="preserve">
+    <value>chkNeedsExpiryDate</value>
+  </data>
+  <data name="&gt;&gt;chkNeedsExpiryDate.Name" xml:space="preserve">
+    <value>chkNeedsExpiryDate</value>
+  </data>
+  <data name="&gt;&gt;chkNeedsExpiryDate.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CCheckBoxNew, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;chkNeedsExpiryDate.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;chkNeedsExpiryDate.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
   <data name="txtVatPercentage.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -754,7 +820,7 @@
     <value>62, 23</value>
   </data>
   <data name="txtVatPercentage.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;txtVatPercentage.Name" xml:space="preserve">
     <value>txtVatPercentage</value>
@@ -766,7 +832,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtVatPercentage.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>21</value>
   </data>
   <data name="lblPercentMark.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -802,7 +868,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblPercentMark.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>22</value>
   </data>
   <data name="lblNotes.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -835,7 +901,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;lblNotes.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>23</value>
   </data>
   <data name="txtNotes.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -853,7 +919,7 @@
     <value>520, 60</value>
   </data>
   <data name="txtNotes.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;txtNotes.Name" xml:space="preserve">
     <value>txtNotes</value>
@@ -865,7 +931,7 @@
     <value>floDataDisplay</value>
   </data>
   <data name="&gt;&gt;txtNotes.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>24</value>
   </data>
   <data name="floDataDisplay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -950,7 +1016,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACG
-        CQAAAk1TRnQBSQFMAgEBAgEAATgBAAGQAQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAATgBAAGYAQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA

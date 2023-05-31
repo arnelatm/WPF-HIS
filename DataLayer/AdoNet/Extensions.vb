@@ -191,6 +191,18 @@ Namespace AdoNet
             End If
         End Function
 
+        ' transform object into DateTime data type.
+        <Extension>
+        Public Function AsNullableDate(ByVal obj As DateTime?, Optional ByVal defaultDateTime As Date? = Nothing) As Date?
+            If obj.HasValue Then
+                Dim result As DateTime
+                Date.TryParse(obj.ToString(), result)
+                Return result
+            Else
+                Return Nothing
+            End If
+        End Function
+
         ' transform object into String in date format "yyyy/mm/dd"
         Public Function AsShortDateString(item As Object, Optional ByVal defaultDateTime As Date = Nothing) As String
             Dim result As String

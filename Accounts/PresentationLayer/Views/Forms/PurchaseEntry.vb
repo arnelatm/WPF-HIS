@@ -305,6 +305,7 @@ Namespace PresentationLayer.Views.Forms
             _footer.SetAlignment("dgvNetAmount", ContentAlignment.MiddleRight)
             _footer.SetText("dgvProductName", "Totals ->")
             DataGridViewPurchaseDetails.Columns("dgvExpiryDate").DefaultCellStyle.Format = "yyyy/MM"
+            DataGridViewPurchaseHistory.Columns("dgvExpiryDateH").DefaultCellStyle.Format = "yyyy/MM"
             UpdateTotals()
         End Sub
 
@@ -384,7 +385,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchaseDetails.CellEndEdit
             Select Case DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name
-                Case <> "dgvQuantity"
+                Case $"dgvQuantity", $"dgvPrice", $"dgvDiscountPercent", $"dgvVatPercent", $"dgvBonusQuantity"
                     ProcessCellEndEdit(DataGridViewPurchaseDetails, bsPurchaseDetails)
             End Select
 
@@ -545,7 +546,7 @@ Namespace PresentationLayer.Views.Forms
                     ElseIf cColumnName = $"dgvUnitIdNo" Then
                         ValidateUnit(DataGridViewPurchaseDetails, e)
                     ElseIf cColumnName = $"dgvExpiryDate" Then
-                        DataGridViewPurchaseDetails.ValidateExpiryDate(e)
+                        DataGridViewPurchaseDetails.ValidateExpiryDate(e, True)
                     End If
                 End With
             End If
@@ -809,7 +810,7 @@ Namespace PresentationLayer.Views.Forms
                 ElseIf cColumnName = "dgvExpiryDate" Then
                     'Display the date in the editing format.
                     Dim cellValue = DataGridViewPurchaseDetails.CurrentCell.Value
-                    Dim text = If(cellValue Is DBNull.Value, String.Empty, CDate(cellValue).ToString("yyyy/MM"))
+                    Dim text = If(cellValue Is DBNull.Value, "", CDate(cellValue).ToString("yyyy/MM"))
                     e.Control.Text = text
                 End If
             End With
@@ -953,6 +954,31 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent RowChanged(prIdNo)
             bsPurchaseHistory.ResetBindings(False)
             CGroupBox1.Text = Messaging.TranslateCaption("Purchase History for ") + dgvRow.Cells("dgvProductCode").Value + "-" + dgvRow.Cells("dgvProductName").Value
+        End Sub
+
+        ' Changes how cells are displayed depending on their columns and values.
+        Private Sub dgvPurDetailsFormatting(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellFormattingEventArgs) Handles DataGridViewPurchaseDetails.CellFormatting
+            If sender.Columns(e.ColumnIndex).Name.Equals("dgvExpiryDate") Then
+                If e.Value = Date.MinValue Then
+                    e.Value = String.Empty
+                    e.FormattingApplied = True
+                ElseIf e.Value < DateAdd(DateInterval.Day, Today().Day * -1, Today) Then
+                    e.CellStyle.BackColor = Color.Red
+                End If
+            End If
+
+        End Sub
+
+        ' Changes how cells are displayed depending on their columns and values.
+        Private Sub dgvPurHistoryFormatting(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellFormattingEventArgs) Handles DataGridViewPurchaseHistory.CellFormatting
+            If sender.Columns(e.ColumnIndex).Name.Equals("dgvExpiryDateH") Then
+                If e.Value = Date.MinValue Then
+                    e.Value = String.Empty
+                    e.FormattingApplied = True
+                ElseIf e.Value < DateAdd(DateInterval.Day, Today().Day * -1, Today) Then
+                    e.CellStyle.BackColor = Color.Red
+                End If
+            End If
         End Sub
 
     End Class

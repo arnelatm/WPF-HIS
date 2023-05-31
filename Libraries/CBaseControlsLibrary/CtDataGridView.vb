@@ -657,24 +657,29 @@ Public Class CtDataGridView
         End If
     End Sub
 
-    Public Sub ValidateExpiryDate(ByRef e As DataGridViewCellValidatingEventArgs)
-        Dim value As Date
+    Public Sub ValidateExpiryDate(ByRef e As DataGridViewCellValidatingEventArgs, Optional AllowBlanks As Boolean = False)
         'Validate the input using the editing format and the display format.
-        e.Cancel = Not Date.TryParseExact(CStr(e.FormattedValue),
+        If AllowBlanks AndAlso (e.FormattedValue.Trim() = "" OrElse e.FormattedValue = "    /  " OrElse e.FormattedValue Is Nothing) Then
+            Me.CurrentCell.Value = Nothing
+            e.Cancel = False
+        Else
+            Dim value As Date
+            e.Cancel = Not Date.TryParseExact(CStr(e.FormattedValue),
                                                       {"yyyyMM", "yyyy/MM", "yyyy-MM"},
                                                       Nothing,
                                                       DateTimeStyles.None,
                                                       value)
-        If Not e.Cancel Then
-            'Ensure data is displayed using the display format.
-            EditingControl.Text = value.ToString("yyyy/MM")
-            If value < Today() Then
-                If Messaging.Show(True, "AskIfUseExpiredDate", "Are you sure you want to use this expired date?", "Please Confirm!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then
-                    e.Cancel = True
+            If Not e.Cancel Then
+                'Ensure data is displayed using the display format.
+                EditingControl.Text = value.ToString("yyyy/MM")
+                If value < Today() Then
+                    If Messaging.Show(True, "AskIfUseExpiredDate", "Are you sure you want to use this expired date?", "Please Confirm!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then
+                        e.Cancel = True
+                    End If
                 End If
+            Else
+                Messaging.ShowPmMessage(True, "MsgInvalidDate", {"enteredDate", e.FormattedValue})
             End If
-        Else
-            Messaging.ShowPmMessage(True, "MsgInvalidDate", {"enteredDate", e.FormattedValue})
         End If
     End Sub
 

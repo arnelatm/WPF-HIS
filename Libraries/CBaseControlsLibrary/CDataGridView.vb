@@ -1095,7 +1095,7 @@ Public Class CDataGridView
 
 
     Public Sub ValidateExpiryDate(ByRef e As DataGridViewCellValidatingEventArgs)
-        Dim value As Date
+        Dim value As Date?
         'Validate the input using the editing format and the display format.
         e.Cancel = Not Date.TryParseExact(CStr(e.FormattedValue),
                                                       {"yyyyMM", "yyyy/MM", "yyyy-MM"},
@@ -1104,7 +1104,7 @@ Public Class CDataGridView
                                                       value)
         If Not e.Cancel Then
             'Ensure data is displayed using the display format.
-            EditingControl.Text = value.ToString("yyyy/MM")
+            EditingControl.Text = IIf(value Is Nothing, "", value.ToString("yyyy/MM"))
         Else
             Messaging.ShowPmMessage(True, "MsgInvalidDate", {"enteredDate", e.FormattedValue})
         End If

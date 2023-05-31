@@ -115,6 +115,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property NeedsExpiryDate As Boolean Implements ICategoryView.NeedsExpiryDate
+            Get
+                Return chkNeedsExpiryDate.Checked
+            End Get
+            Set
+                chkNeedsExpiryDate.Checked = Value
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -124,6 +133,7 @@ Namespace PresentationLayer.Views.Forms
                     {"CategoryCode", txtCategoryCode},
                     {"CategoryName", txtCategoryName},
                     {"CategoryNameAra", txtCategoryNameAra},
+                    {"NeedsExpiryDate", chkNeedsExpiryDate},
                     {"IdNo", TxtIdNo},
                     {"Notes", txtNotes},
                     {"PurchaseAccountIdNo", cboPurchaseAccountIdNo},
