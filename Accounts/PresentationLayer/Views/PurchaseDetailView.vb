@@ -19,6 +19,7 @@ Namespace PresentationLayer.Views
         Public Property ExpiryDate As Date? Implements IPurchaseDetailView.ExpiryDate
         Public Property GrossAmount As Decimal Implements IPurchaseDetailView.GrossAmount
         Public Property IdNo As Int32 Implements IPurchaseDetailView.IdNo
+        Public Property NeedsExpiryDate As Boolean Implements IPurchaseDetailView.NeedsExpiryDate
         Public Property NetAmount As Decimal Implements IPurchaseDetailView.NetAmount
         Public Property Price As Decimal Implements IPurchaseDetailView.Price
         Public Property ProductCode As String Implements IPurchaseDetailView.ProductCode

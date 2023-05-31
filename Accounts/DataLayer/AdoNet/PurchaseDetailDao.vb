@@ -23,6 +23,7 @@ Namespace DataLayer.AdoNet
                                     "ExpiryDate," &
                                     "GrossAmount," &
                                     "IdNo," &
+                                    "NeedsExpiryDate," &
                                     "NetAmount," &
                                     "Price," &
                                     "ProductCode," &
@@ -82,6 +83,7 @@ Namespace DataLayer.AdoNet
             .ExpiryDate = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date)(reader("ExpiryDate")),
             .GrossAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("GrossAmount")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
+            .NeedsExpiryDate = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("NetAmount")),
             .NetAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("NetAmount")),
             .Price = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Price")),
             .ProductCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ProductCode")),

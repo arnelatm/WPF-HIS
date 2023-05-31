@@ -385,7 +385,9 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchaseDetails.CellEndEdit
             Select Case DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name
-                Case $"dgvQuantity", $"dgvPrice", $"dgvDiscountPercent", $"dgvVatPercent", $"dgvBonusQuantity"
+                Case $"dgvProductCode", $"dgvProductName"
+                    ' nothing to do already processed
+                Case Else
                     ProcessCellEndEdit(DataGridViewPurchaseDetails, bsPurchaseDetails)
             End Select
 
@@ -546,10 +548,16 @@ Namespace PresentationLayer.Views.Forms
                     ElseIf cColumnName = $"dgvUnitIdNo" Then
                         ValidateUnit(DataGridViewPurchaseDetails, e)
                     ElseIf cColumnName = $"dgvExpiryDate" Then
-                        DataGridViewPurchaseDetails.ValidateExpiryDate(e, True)
+                        ValidateExpiryDate(DataGridViewPurchaseDetails, e)
                     End If
                 End With
             End If
+        End Sub
+
+        Private Sub ValidateExpiryDate(ByRef dgv As CtDataGridView, ByRef e As DataGridViewCellValidatingEventArgs)
+            Dim needsExpiryDate As Boolean = dgv.CurrentRow.Cells("dgvNeedsExpiryDate").Value
+            Dim allowBlankDate As Boolean = Not needsExpiryDate
+            DataGridViewPurchaseDetails.ValidateExpiryDate(e, allowBlankDate)
         End Sub
 
         Private Sub ValidateProductName(ByRef dgv As CtDataGridView, ByRef e As DataGridViewCellValidatingEventArgs)
