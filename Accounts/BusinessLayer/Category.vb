@@ -21,6 +21,7 @@ Namespace BusinessLayer
         Public Property CategoryCode As String
         Public Property CategoryName As String
         Public Property CategoryNameAra As String
+        Public Property NeedsExpiryDate As Boolean
         Public Property PurchaseAccountIdNo As Int16
         Public Property SaleAccountIdNo As Int16
         Public Property VatPurchaseAccountIdNo As Int16

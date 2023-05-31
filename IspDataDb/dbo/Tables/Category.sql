@@ -4,6 +4,7 @@
     [CategoryCode]           VARCHAR (5)    NULL,
     [CategoryName]           VARCHAR (50)   NULL,
     [CategoryNameAra]        NVARCHAR (50)  NULL,
+    [NeedsExpiryDate]        BIT            NULL,
     [PurchaseAccountIdNo]    SMALLINT       NULL,
     [SaleAccountIdNo]        SMALLINT       NULL,
     [VatSaleAccountIdNo]     SMALLINT       NULL,

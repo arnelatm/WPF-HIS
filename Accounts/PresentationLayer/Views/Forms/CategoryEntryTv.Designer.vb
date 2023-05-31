@@ -49,6 +49,8 @@ Namespace PresentationLayer.Views.Forms
             Me.lblVatPercentage = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtVatPercentage = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblPercentMark = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkNeedsExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CCheckBoxNew()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -76,6 +78,14 @@ Namespace PresentationLayer.Views.Forms
             Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
             Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
             '
+            'TranslatorDAC
+            '
+            Me.TranslatorDAC.Cs = ""
+            '
+            'AppDataDAC
+            '
+            Me.AppDataDAC.Cs = ""
+            '
             'TxtIdNo
             '
             Me.TxtIdNo.BackColor = System.Drawing.Color.White
@@ -98,6 +108,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.MinimumValue = Nothing
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.OverrideMaxLength = 0
             Me.TxtIdNo.ReadOnly = True
             Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtIdNo.TabStop = False
@@ -134,6 +145,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCategoryCode.MinimumValue = Nothing
             Me.txtCategoryCode.Name = "txtCategoryCode"
             Me.txtCategoryCode.OldValue = Nothing
+            Me.txtCategoryCode.OverrideMaxLength = 0
             Me.txtCategoryCode.ReadOnly = True
             Me.txtCategoryCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtCategoryCode.Translatable = False
@@ -169,6 +181,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCategoryName.MinimumValue = Nothing
             Me.txtCategoryName.Name = "txtCategoryName"
             Me.txtCategoryName.OldValue = Nothing
+            Me.txtCategoryName.OverrideMaxLength = 0
             Me.txtCategoryName.ReadOnly = True
             Me.txtCategoryName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtCategoryName.Translatable = False
@@ -205,6 +218,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCategoryNameAra.MinimumValue = Nothing
             Me.txtCategoryNameAra.Name = "txtCategoryNameAra"
             Me.txtCategoryNameAra.OldValue = Nothing
+            Me.txtCategoryNameAra.OverrideMaxLength = 0
             Me.txtCategoryNameAra.ReadOnly = True
             Me.txtCategoryNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtCategoryNameAra.Translatable = False
@@ -238,6 +252,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.MinimumValue = Nothing
             Me.txtNotes.Name = "txtNotes"
             Me.txtNotes.OldValue = Nothing
+            Me.txtNotes.OverrideMaxLength = 0
             Me.txtNotes.ReadOnly = True
             Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtNotes.Translatable = False
@@ -274,6 +289,8 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.Controls.Add(Me.lblVatSaleAccountIdNo)
             Me.floDataDisplay.Controls.Add(Me.cboVatSaleAccountIdNo)
             Me.floDataDisplay.Controls.Add(Me.lblVatPercentage)
+            Me.floDataDisplay.Controls.Add(Me.CLabel1)
+            Me.floDataDisplay.Controls.Add(Me.chkNeedsExpiryDate)
             Me.floDataDisplay.Controls.Add(Me.txtVatPercentage)
             Me.floDataDisplay.Controls.Add(Me.lblPercentMark)
             Me.floDataDisplay.Controls.Add(Me.lblNotes)
@@ -310,6 +327,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBranchIdNo.MinimumValue = Nothing
             Me.txtBranchIdNo.Name = "txtBranchIdNo"
             Me.txtBranchIdNo.OldValue = Nothing
+            Me.txtBranchIdNo.OverrideMaxLength = 0
             Me.txtBranchIdNo.ReadOnly = True
             Me.txtBranchIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtBranchIdNo.TabStop = False
@@ -520,7 +538,6 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.lblVatPercentage.DisplayOnly = True
             Me.lblVatPercentage.EditingMode = False
-            Me.floDataDisplay.SetFlowBreak(Me.lblVatPercentage, True)
             resources.ApplyResources(Me.lblVatPercentage, "lblVatPercentage")
             Me.lblVatPercentage.Name = "lblVatPercentage"
             Me.lblVatPercentage.Translatable = True
@@ -546,6 +563,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtVatPercentage.MinimumValue = Nothing
             Me.txtVatPercentage.Name = "txtVatPercentage"
             Me.txtVatPercentage.OldValue = Nothing
+            Me.txtVatPercentage.OverrideMaxLength = 0
             Me.txtVatPercentage.ReadOnly = True
             Me.txtVatPercentage.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtVatPercentage.Translatable = False
@@ -560,15 +578,44 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPercentMark.Name = "lblPercentMark"
             Me.lblPercentMark.Translatable = True
             '
+            'CLabel1
+            '
+            Me.CLabel1.DisplayOnly = True
+            Me.CLabel1.EditingMode = False
+            resources.ApplyResources(Me.CLabel1, "CLabel1")
+            Me.CLabel1.Name = "CLabel1"
+            Me.CLabel1.Translatable = True
+            '
+            'chkNeedsExpiryDate
+            '
+            Me.chkNeedsExpiryDate.BegFindValue = Nothing
+            Me.chkNeedsExpiryDate.BoxSize = New System.Drawing.Size(14, 14)
+            Me.chkNeedsExpiryDate.DisplayOnly = False
+            Me.chkNeedsExpiryDate.EditingMode = True
+            Me.chkNeedsExpiryDate.EndFindValue = Nothing
+            Me.chkNeedsExpiryDate.FieldDescription = Nothing
+            Me.chkNeedsExpiryDate.FieldName = Nothing
+            Me.chkNeedsExpiryDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkNeedsExpiryDate.FindEnabled = False
+            resources.ApplyResources(Me.chkNeedsExpiryDate, "chkNeedsExpiryDate")
+            Me.chkNeedsExpiryDate.IFindableControl_FindEnabled = False
+            Me.chkNeedsExpiryDate.IgnoreCase = False
+            Me.chkNeedsExpiryDate.LinkedLabel = Nothing
+            Me.chkNeedsExpiryDate.Name = "chkNeedsExpiryDate"
+            Me.chkNeedsExpiryDate.OldValue = Nothing
+            Me.chkNeedsExpiryDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.ExactValue
+            Me.chkNeedsExpiryDate.Translatable = True
+            Me.chkNeedsExpiryDate.UseVisualStyleBackColor = True
+            '
             'CategoryEntryTv
             '
             resources.ApplyResources(Me, "$this")
-        Me.Name = "CategoryEntryTv"
-        Me.SplitContainer1.Panel1.ResumeLayout(false)
-        Me.SplitContainer1.Panel2.ResumeLayout(false)
-        CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).EndInit
-        Me.SplitContainer1.ResumeLayout(false)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
+            Me.Name = "CategoryEntryTv"
+            Me.SplitContainer1.Panel1.ResumeLayout(False)
+            Me.SplitContainer1.Panel2.ResumeLayout(False)
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.SplitContainer1.ResumeLayout(False)
+            CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floDataDisplay.ResumeLayout(false)
         Me.floDataDisplay.PerformLayout
         Me.ResumeLayout(false)
@@ -599,5 +646,7 @@ End Sub
         Friend WithEvents cboVatSaleAccountIdNo As CtComboBox
         Friend WithEvents lblBranchIdNo As CLabel
         Friend WithEvents txtBranchIdNo As CTextBox
+        Friend WithEvents CLabel1 As CLabel
+        Friend WithEvents chkNeedsExpiryDate As CCheckBoxNew
     End Class
 End Namespace
