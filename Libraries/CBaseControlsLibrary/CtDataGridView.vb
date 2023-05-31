@@ -661,7 +661,6 @@ Public Class CtDataGridView
         'Validate the input using the editing format and the display format.
         If AllowBlanks AndAlso (e.FormattedValue.Trim() = "" OrElse e.FormattedValue = "    /  " OrElse e.FormattedValue Is Nothing) Then
             Me.CurrentCell.Value = Nothing
-            e.Cancel = False
         Else
             Dim value As Date
             e.Cancel = Not Date.TryParseExact(CStr(e.FormattedValue),
@@ -678,7 +677,12 @@ Public Class CtDataGridView
                     End If
                 End If
             Else
-                Messaging.ShowPmMessage(True, "MsgInvalidDate", {"enteredDate", e.FormattedValue})
+                If Me.CurrentCell.Value Is Nothing Or CurrentCell.Value = Date.MinValue Then
+                    Messaging.Show(True, "MsgBlankExpNotAllowed")
+                Else
+                    Messaging.ShowPmMessage(True, "MsgInvalidDate", {"enteredDate", e.FormattedValue})
+                End If
+                'e.Cancel = True
             End If
         End If
     End Sub

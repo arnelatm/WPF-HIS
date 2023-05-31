@@ -16,6 +16,7 @@
         Public Property ExpiryDate As Date?
         Public Property GrossAmount As Decimal
         Public Property IdNo As Int32
+        Public Property NeedsExpiryDate As Boolean
         Public Property NetAmount As Decimal
         Public Property Price As Decimal
         Public Property ProductCode As String

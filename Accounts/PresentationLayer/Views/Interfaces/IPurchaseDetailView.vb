@@ -15,6 +15,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property ExpiryDate As Date?
         Property GrossAmount As Decimal
         Property IdNo As Int32
+        Property NeedsExpiryDate As Boolean
         Property NetAmount As Decimal
         Property Price As Decimal
         Property ProductCode As String

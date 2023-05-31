@@ -139,6 +139,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgInvalidCode", "Sorry, no such {fieldName} on file.", "Error")
         Messaging.AddMessage("MsgText2Short", "Search text too short, must be at least 3 characters.", "warning")
         Messaging.AddMessage("MsgInvalidDate", "You entry <{enteredDate}> is not a valid date. Must be in one of the following format ['yyyy/MM' 'yyyyMM', 'yyyy-MM']. Press Ctrl-Z to revert to previous value.", "Error")
+        Messaging.AddMessage("MsgBlankExpNotAllowed", "Sorry, expiry date is a needed for this item.", "Error")
     End Sub
 
     'Public Shared Sub CreateEnums()

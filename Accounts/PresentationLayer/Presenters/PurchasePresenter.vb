@@ -239,65 +239,48 @@ Namespace PresentationLayer.Presenters
                         Case "GrossAmount"
                             gAmt = .GrossAmount
                             With purchaseDetail
-                                .Price = Math.Round(IIf(.Quantity = 0, 0, .GrossAmount / .Quantity), 2)
+                                .Price = RecomputePrice(purchaseDetail)
                                 .DiscountAmount = GetDiscountAmount(purchaseDetail)
                                 .AmtBefVat = GetAmountBeforeVat(purchaseDetail)
                                 .VatAmount = GetVatAmount(purchaseDetail)
                                 .NetAmount = GetNetAmount(purchaseDetail)
-                                .UnitCost = GetUnitCost(purchaseDetail)
                             End With
                         Case "DiscountAmount"
-                            dPerc = Math.Round(IIf(.GrossAmount = 0, 0, .DiscountAmount / .GrossAmount * 100), 2)
+                            dPerc = RecomputeDiscountPercentage(purchaseDetail)
                             With purchaseDetail
                                 .DiscountPercent = dPerc
                                 .AmtBefVat = GetAmountBeforeVat(purchaseDetail)
                                 .VatAmount = GetVatAmount(purchaseDetail)
                                 .NetAmount = GetNetAmount(purchaseDetail)
-                                .UnitCost = GetUnitCost(purchaseDetail)
                             End With
                         Case "VatAmount"
-                            vPerc = IIf(.GrossAmount - .DiscountAmount = 0, 0, .VatAmount / (.GrossAmount - .DiscountAmount) * 100)
+                            vPerc = RecomputeVatPercentage(purchaseDetail)
                             With purchaseDetail
                                 .VatPercent = vPerc
                                 .NetAmount = GetNetAmount(purchaseDetail)
-                                .UnitCost = GetUnitCost(purchaseDetail)
                             End With
                         Case "AmtBefVat"
                             gAmt = .GrossAmount
-                            If .AmtBefVat <= gAmt Then
-                                dAmt = gAmt - amtBefVat
-                                .DiscountAmount = dAmt
-                                dPerc = IIf(gAmt = 0, 0, dAmt / gAmt * 100)
-                                .DiscountPercent = dPerc
-                                vAmt = amtBefVat * .VatPercent / 100
-                                .VatAmount = vAmt
-                                .NetAmount = gAmt - dAmt + vAmt
+                            If .AmtBefVat <= .GrossAmount Then
+                                .DiscountAmount = .GrossAmount - .AmtBefVat
+                                .DiscountPercent = IIf(.GrossAmount = 0, 0, .DiscountAmount / .GrossAmount * 100)
+                                .VatAmount = .AmtBefVat * .VatPercent / 100
+                                .NetAmount = GetNetAmount(purchaseDetail)
                             Else
-                                dAmt = .DiscountAmount
-                                gAmt = amtBefVat - dAmt
-                                .GrossAmount = gAmt
-                                price = IIf(.Quantity = 0, 0, gAmt / .Quantity)
-                                .Price = price
-                                dPerc = IIf(gAmt = 0, 0, dAmt / gAmt * 100)
-                                .DiscountPercent = dPerc
-                                vAmt = amtBefVat * .VatPercent / 100
-                                .VatAmount = vAmt
-                                .NetAmount = gAmt - dAmt + vAmt
+                                .GrossAmount = .AmtBefVat - .DiscountAmount
+                                .Price = IIf(.Quantity = 0, 0, .GrossAmount / .Quantity)
+                                .DiscountPercent = IIf(.GrossAmount = 0, 0, .DiscountAmount / .GrossAmount * 100)
+                                .VatAmount = GetVatAmount(purchaseDetail)
+                                .NetAmount = GetNetAmount(purchaseDetail)
                             End If
                         Case "NetAmount"
-                            nAmt = .NetAmount
-                            vPerc = .VatPercent
-                            dPerc = .DiscountPercent
-                            amtBefVat = nAmt / (1 + vPerc / 100)
-                            .AmtBefVat = amtBefVat
-                            .VatAmount = nAmt - amtBefVat
-                            gAmt = amtBefVat / (1 - dPerc / 100)
-                            .GrossAmount = gAmt
-                            .DiscountAmount = gAmt - amtBefVat
-                            .Price = IIf(.Quantity = 0, 0, gAmt / .Quantity)
+                            .AmtBefVat = .NetAmount / (1 + .VatPercent / 100)
+                            .VatAmount = .NetAmount - .AmtBefVat
+                            .GrossAmount = .AmtBefVat / (1 - .DiscountPercent / 100)
+                            .DiscountAmount = .GrossAmount - .AmtBefVat
+                            .Price = IIf(.Quantity = 0, 0, .GrossAmount / .Quantity)
                     End Select
-                    Dim totQty As Int32 = .Quantity + .BonusQuantity
-                    .UnitCost = IIf(totQty = 0, 0, .NetAmount / totQty)
+                    .UnitCost = GetUnitCost(purchaseDetail)
                     eventType.BindingSource.ResetItem(eventType.Row)
                 End If
             End With
@@ -339,6 +322,7 @@ Namespace PresentationLayer.Presenters
                 .VatPercent = GetVatPercentage(pModel.CategoryIdNo)
                 SetAmounts(purchaseDetail)
                 .ProductIdNo = pModel.IdNo
+                .NeedsExpiryDate = GetNeedsExpiryDate(pModel.CategoryIdNo)
             End With
         End Sub
 
@@ -376,9 +360,17 @@ Namespace PresentationLayer.Presenters
             Return IIf(purchaseDetail.Quantity + purchaseDetail.BonusQuantity = 0, 0, purchaseDetail.NetAmount / (purchaseDetail.Quantity + purchaseDetail.BonusQuantity))
         End Function
 
+        Private Function RecomputeDiscountPercentage(purchaseDetail As PurchaseDetailView) As Decimal
+            Return Math.Round(IIf(purchaseDetail.GrossAmount = 0, 0, purchaseDetail.DiscountAmount / purchaseDetail.GrossAmount * 100), 2)
+        End Function
 
+        Private Function RecomputePrice(purchaseDetail As PurchaseDetailView) As Decimal
+            Return Math.Round(IIf(purchaseDetail.Quantity = 0, 0, purchaseDetail.GrossAmount / purchaseDetail.Quantity), 2)
+        End Function
 
-
+        Private Function RecomputeVatPercentage(purchaseDetail As PurchaseDetailView) As Decimal
+            Return IIf(purchaseDetail.GrossAmount - purchaseDetail.DiscountAmount = 0, 0, purchaseDetail.VatAmount / (purchaseDetail.GrossAmount - purchaseDetail.DiscountAmount) * 100)
+        End Function
 
         'Private Sub SetPurchaseValues(pModel As ProductModel, bs As BindingSource)
         '    Dim lastPurchaseInfo As Object = New ExpandoObject
@@ -556,8 +548,6 @@ Namespace PresentationLayer.Presenters
             CreateLookupDataThread(data)
         End Sub
 
-
-
         Private Sub SetPurchaseValues(pModel As ProductModel, purchaseDetail As PurchaseDetailView)
             Dim lastPurchaseInfo As Object = New ExpandoObject
             lastPurchaseInfo = GetLastPurchaseInfo(pModel)
@@ -611,8 +601,13 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Function GetVatPercentage(categoryIdNo As Int16) As Decimal
-            Return Service.GetField(Of Int32, Int16)(categoryIdNo, "Category", "IdNo", "VatPercentage")
+            Return Service.GetField(Of Decimal, Int16)(categoryIdNo, "Category", "IdNo", "VatPercentage")
         End Function
+
+        Private Function GetNeedsExpiryDate(categoryIdNo As Int16) As Decimal
+            Return Service.GetField(Of Boolean, Int16)(categoryIdNo, "Category", "IdNo", "NeedsExpiryDate")
+        End Function
+
 
     End Class
 
