@@ -6,6 +6,9 @@
     [PaperSource]      SMALLINT      NULL,
     [PaperOrientation] SMALLINT      NULL,
     [PaperSize]        SMALLINT      NULL,
+    [DefaultPaperSource] TINYINT NULL, 
+    [DefaultPaperOrientation] TINYINT NULL, 
+    [DefaultPaperSize] TINYINT NULL, 
     [DateTimeStamp]    ROWVERSION    NULL,
     CONSTRAINT [PK_PrinterAssignment] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );

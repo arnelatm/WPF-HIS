@@ -126,8 +126,16 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Function IsBizDataValid() As Boolean
-
-            Return True
+            Dim retValue As Boolean = True
+            For Each item In View.PurchaseDetails
+                If item.NeedsExpiryDate AndAlso (item.ExpiryDate.Value = Nothing OrElse item.ExpiryDate.Value = Date.MinValue) Then
+                    Dim lineNumber = Format(item.Sequence, "0")
+                    Messaging.ShowPmMessage(True, "MsgExpDateNeeded", {"lineNumber", lineNumber})
+                    retValue = False
+                    Exit For
+                End If
+            Next
+            Return retValue
         End Function
 
         Public Overrides Sub GoPrintRecord()
@@ -372,49 +380,6 @@ Namespace PresentationLayer.Presenters
             Return IIf(purchaseDetail.GrossAmount - purchaseDetail.DiscountAmount = 0, 0, purchaseDetail.VatAmount / (purchaseDetail.GrossAmount - purchaseDetail.DiscountAmount) * 100)
         End Function
 
-        'Private Sub SetPurchaseValues(pModel As ProductModel, bs As BindingSource)
-        '    Dim lastPurchaseInfo As Object = New ExpandoObject
-        '    lastPurchaseInfo = GetLastPurchaseInfo(pModel)
-        '    With bs.Current
-        '        If lastPurchaseInfo Is Nothing Then
-        '            SetDefaultUnit(pModel, bs)
-        '        Else
-        '            .Price = lastPurchaseInfo.Price
-        '            .UnitSalesPrice = lastPurchaseInfo.UnitSalesPrice
-        '            .UnitIdNo = lastPurchaseInfo.UnitIdNo
-        '        End If
-        '        .VatPercent = GetVatPercentage(pModel.CategoryIdNo)
-        '        .GrossAmount = .Price * .Quantity
-        '        .DiscountAmount = .GrossAmount * .DiscountPercent / 100
-        '        .AmtBefVat = .GrossAmount - .DiscountAmount
-        '        .VatAmount = (.GrossAmount - .DiscountAmount) * .VatPercent / 100
-        '        .NetAmount = .GrossAmount - .DiscountAmount + .VatAmount
-        '        .ProductIdNo = pModel.IdNo
-        '        .UnitCost = IIf(.Quantity + .BonusQuantity = 0, 0, .NetAmount / (.Quantity + .BonusQuantity))
-        '    End With
-        'End Sub
-
-        Private Sub UpdatePurchaseItem(pModel As ProductModel, purchaseDetail As PurchaseDetailView)
-
-            With purchaseDetail
-                If pModel.IdNo > 0 Then
-                    If .ProductIdNo <> pModel.IdNo Then
-                        .ProductCode = pModel.ProductCode
-                        .ProductName = pModel.ProductName
-                        If .Quantity = 0 Then
-                            .Quantity = 1
-                        End If
-                        SetPurchaseValues(pModel, purchaseDetail)
-                    End If
-                Else
-                    purchaseDetail.ProductIdNo = Nothing
-                    purchaseDetail.ProductName = Nothing
-                    purchaseDetail.UnitIdNo = Nothing
-                    purchaseDetail.Price = Nothing
-                End If
-            End With
-        End Sub
-
         Private Function GetProductModel(productCode As String) As ProductModel
             Dim productIdNo As Int32 = GetProductIdNo(productCode)
             Dim product As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(productIdNo)
@@ -482,7 +447,7 @@ Namespace PresentationLayer.Presenters
             Dim purchaseDetail As PurchaseDetailView = bs.Current
             Dim productModel As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(idNo)
             productCode = productModel.ProductCode
-            UpdatePurchaseItem(productModel, purchaseDetail)
+            OnProductCodeChanged(productCode, bs)
         End Sub
 
         Private Sub OnProductUnitSelection(productIdNo As Int32, bs As BindingSource)
@@ -504,6 +469,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub RecomputePrice(oldUnit As Int16, newUnit As Int16, bs As BindingSource)
+            Dim purchaseDetail As PurchaseDetailView = bs.Current
             Dim newPrice As Decimal
             Dim productIdNo As Int32 = bs.Current.ProductIdNo
             Dim productModel As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(productIdNo)
@@ -511,11 +477,11 @@ Namespace PresentationLayer.Presenters
                 Dim unitQty, baseQty As Int16
                 Dim basePrice As Decimal
                 If productModel.BaseUnitIdNo = oldUnit Then
-                    basePrice = bs.Current.Price
+                    basePrice = purchaseDetail.Price
                 Else
                     unitQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, oldUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "UnitQty")
                     baseQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, oldUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "BaseQty")
-                    basePrice = Math.Ceiling(IIf(baseQty = 0, 0, unitQty / baseQty) * bs.Current.Price * 100D) / 100D
+                    basePrice = Math.Ceiling(IIf(baseQty = 0, 0, unitQty / baseQty) * purchaseDetail.Price * 100D) / 100D
                 End If
                 If newUnit = productModel.BaseUnitIdNo Then
                     newPrice = basePrice
@@ -524,17 +490,8 @@ Namespace PresentationLayer.Presenters
                     baseQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, newUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "BaseQty")
                     newPrice = Math.Ceiling(IIf(baseQty = 0, 0, basePrice * baseQty / unitQty) * 100D) / 100D
                 End If
-                Dim gAmt As Decimal = 0
-                gAmt = newPrice * bs.Current.Quantity
-                bs.Current.Price = newPrice
-                bs.Current.GrossAmount = gAmt
-                Dim dAmt As Decimal = gAmt * bs.Current.DiscountPercent / 100D
-                bs.Current.DiscountAmount = dAmt
-                bs.Current.AmtBefVat = gAmt - dAmt
-                Dim vAmt As Decimal = (gAmt - dAmt) * bs.Current.VatPercent / 100D
-                bs.Current.VatAmount = vAmt
-                bs.Current.NetAmount = gAmt - dAmt + vAmt
-                bs.Current.UnitCost = IIf(bs.Current.Quantity + bs.Current.BonusQuantity = 0, 0, bs.Current.NetAmount / (bs.Current.Quantity + bs.Current.BonusQuantity))
+                purchaseDetail.Price = newPrice
+                SetAmounts(purchaseDetail)
             End If
         End Sub
 
@@ -546,28 +503,6 @@ Namespace PresentationLayer.Presenters
             Dim data As New ArrayList
             data.Add({"ProductUnit_View", "UnitsByProduct", "UnitName,IdNo,UnitCode", "ProductIdNo = " + productIdNo.ToString()})
             CreateLookupDataThread(data)
-        End Sub
-
-        Private Sub SetPurchaseValues(pModel As ProductModel, purchaseDetail As PurchaseDetailView)
-            Dim lastPurchaseInfo As Object = New ExpandoObject
-            lastPurchaseInfo = GetLastPurchaseInfo(pModel)
-            With purchaseDetail
-                If lastPurchaseInfo Is Nothing Then
-                    SetDefaultUnit(pModel, purchaseDetail)
-                Else
-                    .Price = lastPurchaseInfo.Price
-                    .UnitSalesPrice = lastPurchaseInfo.UnitSalesPrice
-                    .UnitIdNo = lastPurchaseInfo.UnitIdNo
-                End If
-                .VatPercent = GetVatPercentage(pModel.CategoryIdNo)
-                .GrossAmount = .Price * .Quantity
-                .DiscountAmount = .GrossAmount * .DiscountPercent / 100
-                .AmtBefVat = .GrossAmount - .DiscountAmount
-                .VatAmount = (.GrossAmount - .DiscountAmount) * .VatPercent / 100
-                .NetAmount = .GrossAmount - .DiscountAmount + .VatAmount
-                .ProductIdNo = pModel.IdNo
-                .UnitCost = IIf(.Quantity + .BonusQuantity = 0, 0, .NetAmount / (.Quantity + .BonusQuantity))
-            End With
         End Sub
 
         Private Function GetLastPurchaseInfo(pModel As ProductModel) As ExpandoObject
