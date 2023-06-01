@@ -7,6 +7,8 @@
     [PaperSource]      SMALLINT      NULL,
     [PaperOrientation] SMALLINT      NULL,
     [PaperSize]        SMALLINT      NULL,
+    [ComputerIdNo]     SMALLINT      NULL,
+    [PrintSetupIdNo]   SMALLINT      NULL,
     [DateTimeStamp]    ROWVERSION    NULL,
     CONSTRAINT [PK_PrintJob] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );

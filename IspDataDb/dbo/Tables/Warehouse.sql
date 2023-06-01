@@ -1,9 +1,9 @@
 ﻿CREATE TABLE [dbo].[Warehouse] (
     [IdNo]             SMALLINT      IDENTITY (1, 1) NOT NULL,
-    [WarehouseCode]    NVARCHAR (10) NOT NULL,
+    [WarehouseCode]    VARCHAR(10) NOT NULL,
     [WarehouseName]    VARCHAR (20)  NOT NULL,
-    [WarehouseNameAra] NVARCHAR (20) NOT NULL,
-    [DateTimeStamp]    ROWVERSION    NULL,
+    [WarehouseNameAra] NVARCHAR (20) NULL,
+    [DateTimeStamp]    TIMESTAMP    NULL,
     CONSTRAINT [PK_Warehouse] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
 

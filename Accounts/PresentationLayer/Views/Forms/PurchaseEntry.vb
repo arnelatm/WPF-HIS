@@ -986,6 +986,10 @@ Namespace PresentationLayer.Views.Forms
                 ElseIf e.Value < DateAdd(DateInterval.Day, Today().Day * -1, Today) Then
                     e.CellStyle.BackColor = Color.Red
                 End If
+            ElseIf sender.Columns(e.ColumnIndex).Name.Equals("dgvUnitSalesPrice") Then
+                If e.Value < sender.Columns("dgvUnitCost").Value Then
+                    e.CellStyle.BackColor = Color.Red
+                End If
             End If
         End Sub
 
