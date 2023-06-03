@@ -14,7 +14,9 @@ Namespace DataLayer.AdoNet
         Private Const FieldList = "Active," &
                           "Barcode," &
                           "BaseUnitIdNo," &
+                          "BranchIdNo," &
                           "CategoryIdNo," &
+                          "DateCreated," &
                           "GTIN," &
                           "IdNo," &
                           "ProductCode," &
@@ -42,7 +44,9 @@ Namespace DataLayer.AdoNet
                     " Active = @Active," &
                     " Barcode = @Barcode," &
                     " BaseUnitIdNo = @BaseUnitIdNo," &
+                    " BranchIdNo = @BranchIdNo," &
                     " CategoryIdNo = @CategoryIdNo," &
+                    " DateCreated = @DateCreated," &
                     " GTIN = @GTIN," &
                     " ProductCode = @ProductCode," &
                     " ProductName = @ProductName," &
@@ -54,8 +58,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef Product As Product) As Integer Implements IDao(Of Product).AddRecord
             Dim sql As String =
                     " INSERT INTO [Product] " &
-                    " (Active,Barcode,BaseUnitIdNo,CategoryIdNo,GTIN,ProductCode,ProductName,ProductNameAra) " &
-                    " VALUES (@Active,@Barcode,@BaseUnitIdNo,@CategoryIdNo,@GTIN,@ProductCode,@ProductName,@ProductNameAra) "
+                    " (Active,Barcode,BaseUnitIdNo,BranchIdNo,CategoryIdNo,DateCreated,GTIN,ProductCode,ProductName,ProductNameAra) " &
+                    " VALUES (@Active,@Barcode,@BaseUnitIdNo,@BranchIdNo,@CategoryIdNo,@DateCreated,@GTIN,@ProductCode,@ProductName,@ProductNameAra) "
             Return Db.Insert(sql, Take(Product))
         End Function
 
@@ -65,7 +69,9 @@ Namespace DataLayer.AdoNet
             .Active = Extensions.AsBool(reader("Active")),
             .Barcode = Extensions.AsString(reader("Barcode")),
             .BaseUnitIdNo = Extensions.AsInt(Of Int16)(reader("BaseUnitIdNo")),
+            .BranchIdNo = Extensions.AsInt(Of Int16)(reader("BranchIdNo")),
             .CategoryIdNo = Extensions.AsInt(Of Int16)(reader("CategoryIdNo")),
+            .DateCreated = Extensions.AsNullable(Of DateTime)(reader("DateCreated")),
             .GTIN = Extensions.AsString(reader("GTIN")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .ProductCode = Extensions.AsString(reader("ProductCode")),
@@ -78,7 +84,9 @@ Namespace DataLayer.AdoNet
                                     "@Active", Product.Active,
                                     "@Barcode", Product.Barcode,
                                     "@BaseUnitIdNo", Product.BaseUnitIdNo,
+                                    "@BranchIdNo", Product.BranchIdNo,
                                     "@CategoryIdNo", Product.CategoryIdNo,
+                                    "@DateCreated", Product.DateCreated,
                                     "@GTIN", Product.GTIN,
                                     "@IdNo", Product.IdNo,
                                     "@ProductCode", Product.ProductCode,

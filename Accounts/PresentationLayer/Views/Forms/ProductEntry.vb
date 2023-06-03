@@ -1,5 +1,6 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
@@ -9,6 +10,8 @@ Namespace PresentationLayer.Views.Forms
     Public Class ProductEntry
         Implements IProductView
 
+        Private _lockBranch As Boolean = False
+        Private _branchIdNo As Int16
         Private _productUnits As List(Of ProductUnitView)
 
         Public Sub New()
@@ -17,6 +20,7 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
             FirstControl = cboCategoryIdNo
+            DataFilter = "BranchIdNo = " + BranchIdNo.ToString()
         End Sub
 
         Public Property DateCreated As DateTime? Implements IProductView.DateCreated
@@ -146,12 +150,33 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property LockBranch As Boolean Implements IProductView.LockBranch
+            Get
+                Return _lockBranch
+            End Get
+            Set(value As Boolean)
+                _lockBranch = value
+                If value Then
+                    btnLockBranch.BackgroundImage = My.Resources.Lock
+                Else
+                    btnLockBranch.BackgroundImage = My.Resources.Unlock
+                End If
+            End Set
+        End Property
+
+
         Public Property UnitsByCode As Object Implements IProductView.UnitsByCode
 
+        Public Property BranchIdNo As Short Implements IProductView.BranchIdNo
+            Get
+                Return cboBranchIdNo.GetValue(Of Int16)
+            End Get
+            Set(value As Int16)
+                cboBranchIdNo.SetValue(value)
+            End Set
+        End Property
+
         Private Sub BindProductUnits()
-
-
-
             bsProductUnits.SuspendBinding()
             bsProductUnits.DataSource = Nothing
             DataGridViewProductUnits.Refresh()
@@ -170,6 +195,9 @@ Namespace PresentationLayer.Views.Forms
             bsProductUnits.ResumeBinding()
         End Sub
 
+        Public Event LockBranchClicked() Implements IProductView.LockBranchClicked
+        Public Event FilterRecords() Implements IProductView.FilterRecords
+
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
@@ -177,6 +205,7 @@ Namespace PresentationLayer.Views.Forms
              {"Active", chkActive},
              {"Barcode", txtBarcode},
              {"BaseUnitIdNo", cboBaseUnitIdNo},
+             {"BranchIdNo", cboBranchIdNo},
              {"CategoryIdNo", cboCategoryIdNo},
              {"DateCreated", txtDateCreated},
              {"GTIN", txtGTIN},

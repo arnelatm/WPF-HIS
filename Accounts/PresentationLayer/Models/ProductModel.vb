@@ -10,6 +10,7 @@ Namespace PresentationLayer.Models
         Public Property Active As Boolean
         Public Property Barcode As String
         Public Property BaseUnitIdNo As Int16
+        Public Property BranchIdNo As Int16
         Public Property CategoryIdNo As Int16
         Public Property DateCreated As DateTime?
         Public Property Drug As Boolean
