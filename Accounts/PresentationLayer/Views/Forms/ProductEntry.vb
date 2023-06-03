@@ -176,6 +176,11 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property BranchCount As Integer Implements IProductView.BranchCount
+
+        Public Property SavedBranch As Integer Implements IProductView.SavedBranch
+
+
         Private Sub BindProductUnits()
             bsProductUnits.SuspendBinding()
             bsProductUnits.DataSource = Nothing
@@ -193,6 +198,19 @@ Namespace PresentationLayer.Views.Forms
                 dgvUnitIdNo.DisplayStyleForCurrentCellOnly = True
             End With
             bsProductUnits.ResumeBinding()
+        End Sub
+
+        Private Sub OnFormLoad() Handles MyBase.Load
+            If BranchCount > 1 Then
+                cboBranchIdNo.Enabled = True
+                LockBranch = False
+                btnLockBranch.Enabled = True
+            Else
+                btnLockBranch.Enabled = False
+                cboBranchIdNo.Enabled = False
+                LockBranch = True
+            End If
+            RaiseEvent FilterRecords()
         End Sub
 
         Public Event LockBranchClicked() Implements IProductView.LockBranchClicked
@@ -235,6 +253,28 @@ Namespace PresentationLayer.Views.Forms
             If txtGTIN.Text.Contains("<GS>") Then
                 txtGTIN.Text = ExtractGTin(txtGTIN.Text)
             End If
+        End Sub
+
+        Private Sub btnLockBranch_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnLockBranch.ClickButtonArea
+            If BranchCount > 1 Then
+                If Not LockBranch Then
+                    LockBranch = True
+                    SavedBranch = BranchIdNo
+                    cboBranchIdNo.Enabled = False
+                Else
+                    cboBranchIdNo.Enabled = True
+                    LockBranch = False
+                End If
+            Else
+                LockBranch = True
+                cboBranchIdNo.Enabled = False
+            End If
+            RaiseEvent LockBranchClicked()
+        End Sub
+
+        Protected Overrides Sub AfterAdd()
+            MyBase.AfterAdd()
+            BranchIdNo = SavedBranch
         End Sub
 
 
