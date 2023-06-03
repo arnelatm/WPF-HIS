@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
 
     Public Class ProductDao
         Inherits CommonDao
-        Implements IDao(Of Product)
+        Implements IDao(Of Product), IDaoAutoCode
 
         Private Const FieldList = "Active," &
                           "Barcode," &
@@ -104,7 +104,6 @@ Namespace DataLayer.AdoNet
             Return Db.ExecuteReader(sql, params)
         End Function
 
-
         Private Shared ReadOnly MakeProduct As Func(Of IDataReader, Product) =
                                     Function(reader) _
             New Product() With {
@@ -114,6 +113,11 @@ Namespace DataLayer.AdoNet
             .Barcode = Extensions.AsString(reader("Barcode")),
             .GTIN = Extensions.AsString(reader("GTIN"))
             }
+
+        Public Function GenerateCode(idNo As Integer) As String Implements IDaoAutoCode.GenerateCode
+            Return UpdateCode("Product", "ProductCode", "IdNo", idNo)
+        End Function
+
     End Class
 
     Public Class ProductUnitDao
@@ -158,6 +162,7 @@ Namespace DataLayer.AdoNet
             .UnitIdNo = Extensions.AsInt(Of Int16)(reader("UnitIdNo")),
             .UnitQty = Extensions.AsInt(Of Int16)(reader("UnitQty"))
            }
+
 
     End Class
 

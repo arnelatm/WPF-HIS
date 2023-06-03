@@ -4,6 +4,8 @@ Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.MessagingLibrary.Messaging
 Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.DataLayer
+Imports AATM.Accounts.DataLayer.AdoNet
 
 Namespace PresentationLayer.Presenters
 
@@ -20,9 +22,18 @@ Namespace PresentationLayer.Presenters
             TableName = "Product"
             WithTreeView = False
             SortOrderKey = "ProductName"
+            view.BranchCount = GetBranchCount()
             AddHandler view.LockBranchClicked, AddressOf LockBranchClicked
             AddHandler view.FilterRecords, AddressOf FilterRecords
         End Sub
+
+        Private Function GetBranchCount()
+            Return Service.CountRecordWithKey(Of Integer)("SecurityBranch", "SecurityGroupIdNo", GlobalVariables.SecurityGroupIdNo)
+        End Function
+
+        Private Function GetBranch()
+            Return Service.GetTopOneFields("SecurityBranch", "BranchIdNo", "SecurityGroupIdNo = " & GlobalVariables.SecurityGroupIdNo.ToString(), "BranchIdNo", False)
+        End Function
 
         Protected Overrides Sub CreateDataSources()
             Dim data1 As New ArrayList
@@ -114,10 +125,13 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Sub FilterRecords()
-            DataFilter = View.DataFilter
-            If Not AddMode Then
-                GoLastRecord()
+            If View.BranchCount < 2 Then
+                View.SavedBranch = GetBranch()
+                DataFilter = "BranchIdNo = " & View.SavedBranch.ToString()
+            Else
+                DataFilter = Nothing
             End If
+            GoLastRecord()
         End Sub
 
         Public Sub LockBranchClicked()
@@ -125,6 +139,14 @@ Namespace PresentationLayer.Presenters
                 DataFilter = "BranchIdNo = " & View.BranchIdNo.ToString()
             Else
                 DataFilter = ""
+            End If
+        End Sub
+
+        Public Sub RecordAddedUpdated(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
+            'Dim passedValue As Integer = retVal
+            If retVal >= 0 And IsEmpty(View.ProductCode) Then
+                retVal = Service.GenerateCode(View.IdNo)
+                View.ProductCode = Service.GetFieldWithIdNo(View.IdNo, "Product", "ProductCode")
             End If
         End Sub
 

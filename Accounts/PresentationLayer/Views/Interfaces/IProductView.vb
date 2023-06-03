@@ -20,6 +20,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property ProductUnits As List(Of ProductUnitView)
         Property UnitsByCode As Object
         Property LockBranch As Boolean
+        Property BranchCount As Int32
+        Property SavedBranch As Int32
         Event LockBranchClicked()
         Event FilterRecords()
 

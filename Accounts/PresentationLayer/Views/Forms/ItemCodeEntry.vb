@@ -188,7 +188,9 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private Sub btnLockGroup_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnLockGroup.ClickButtonArea
 
+        End Sub
     End Class
 
 End Namespace

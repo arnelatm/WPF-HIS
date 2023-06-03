@@ -12,8 +12,8 @@ Namespace BusinessLayer
             If GetRules().Count() = 0 Then
                 ' establish business rules
                 AddRule(New ValidateRequired("ProductName"))
-                AddRule(New ValidateRequired("ProductCode"))
                 AddRule(New ValidateRequired("CategoryIdNo"))
+                AddRule(New ValidateRequired("BranchIdNo"))
             End If
         End Sub
 
