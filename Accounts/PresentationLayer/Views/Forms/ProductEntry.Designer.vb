@@ -30,20 +30,23 @@ Namespace PresentationLayer.Views.Forms
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim CBlendItems1 As AATM.Libraries.CBaseControlsLibrary.cBlendItems = New AATM.Libraries.CBaseControlsLibrary.cBlendItems()
             Me.txtProductCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblProductCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboBranchIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.lblCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.lblProductName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtProductName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblProductNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtProductNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.lblBaseUnit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboBaseUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblBarcode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtBarcode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -61,6 +64,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvProductIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsProductUnits = New System.Windows.Forms.BindingSource(Me.components)
+            Me.btnLockBranch = New AATM.Libraries.CBaseControlsLibrary.CButton()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout4.SuspendLayout()
             Me.CFlowLayout1.SuspendLayout()
@@ -120,6 +124,9 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
             Me.CFlowLayout4.Controls.Add(Me.lblIdNo)
             Me.CFlowLayout4.Controls.Add(Me.TxtIdNo)
+            Me.CFlowLayout4.Controls.Add(Me.CLabel1)
+            Me.CFlowLayout4.Controls.Add(Me.cboBranchIdNo)
+            Me.CFlowLayout4.Controls.Add(Me.btnLockBranch)
             Me.CFlowLayout4.Controls.Add(Me.lblProductCode)
             Me.CFlowLayout4.Controls.Add(Me.txtProductCode)
             Me.CFlowLayout4.Controls.Add(Me.lblProductName)
@@ -159,7 +166,6 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.FieldName = Nothing
             Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.TxtIdNo.FindEnabled = True
-            Me.CFlowLayout4.SetFlowBreak(Me.TxtIdNo, True)
             resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
             Me.TxtIdNo.LinkedLabel = Me.lblIdNo
@@ -173,6 +179,55 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.Translatable = False
             Me.TxtIdNo.ValueIsNumeric = True
             '
+            'CLabel1
+            '
+            Me.CLabel1.BackColor = System.Drawing.Color.Transparent
+            Me.CLabel1.DisplayOnly = True
+            Me.CLabel1.EditingMode = False
+            resources.ApplyResources(Me.CLabel1, "CLabel1")
+            Me.CLabel1.Name = "CLabel1"
+            Me.CLabel1.Translatable = True
+            '
+            'cboBranchIdNo
+            '
+            Me.cboBranchIdNo.AlwaysEditable = False
+            Me.cboBranchIdNo.BackColor = System.Drawing.Color.White
+            Me.cboBranchIdNo.BegFindValue = Nothing
+            Me.cboBranchIdNo.ChangingSearchValueOnly = False
+            Me.cboBranchIdNo.CurrentSearchTerm = ""
+            Me.cboBranchIdNo.DataValue = Nothing
+            Me.cboBranchIdNo.DefaultValue = ""
+            Me.cboBranchIdNo.DisplayMember = "Name"
+            Me.cboBranchIdNo.EditingMode = False
+            Me.cboBranchIdNo.EndFindValue = Nothing
+            Me.cboBranchIdNo.FieldDescription = Nothing
+            Me.cboBranchIdNo.FieldName = Nothing
+            Me.cboBranchIdNo.FilterRule = Nothing
+            Me.cboBranchIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboBranchIdNo.FindEnabled = False
+            resources.ApplyResources(Me.cboBranchIdNo, "cboBranchIdNo")
+            Me.cboBranchIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboBranchIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboBranchIdNo.IgnoreCase = False
+            Me.cboBranchIdNo.LinkedLabel = Me.lblCategoryIdNo
+            Me.cboBranchIdNo.Name = "cboBranchIdNo"
+            Me.cboBranchIdNo.OldValue = 0
+            Me.cboBranchIdNo.OriginalDataSource = Nothing
+            Me.cboBranchIdNo.OriginalList = Nothing
+            Me.cboBranchIdNo.OverrideDropDownStyleList = False
+            Me.cboBranchIdNo.PreviousSearchTerm = Nothing
+            Me.cboBranchIdNo.PropertySelector = Nothing
+            Me.cboBranchIdNo.ReadOnlyCombo = False
+            Me.cboBranchIdNo.SuggestBoxHeight = 200
+            Me.cboBranchIdNo.SuggestCharCount = 1
+            Me.cboBranchIdNo.SuggestListOrderRule = Nothing
+            Me.cboBranchIdNo.TextToSearch = Nothing
+            Me.cboBranchIdNo.Translatable = False
+            Me.cboBranchIdNo.ValueIsMandatory = False
+            Me.cboBranchIdNo.ValueIsNullable = False
+            Me.cboBranchIdNo.ValueIsNumeric = False
+            Me.cboBranchIdNo.ValueMember = "IdNo"
+            '
             'lblCategoryIdNo
             '
             Me.lblCategoryIdNo.DisplayOnly = True
@@ -180,47 +235,6 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.lblCategoryIdNo, "lblCategoryIdNo")
             Me.lblCategoryIdNo.Name = "lblCategoryIdNo"
             Me.lblCategoryIdNo.Translatable = True
-            '
-            'cboCategoryIdNo
-            '
-            Me.cboCategoryIdNo.AlwaysEditable = False
-            Me.cboCategoryIdNo.BackColor = System.Drawing.Color.White
-            Me.cboCategoryIdNo.BegFindValue = Nothing
-            Me.cboCategoryIdNo.ChangingSearchValueOnly = False
-            Me.cboCategoryIdNo.CurrentSearchTerm = ""
-            Me.cboCategoryIdNo.DataValue = Nothing
-            Me.cboCategoryIdNo.DefaultValue = ""
-            Me.cboCategoryIdNo.DisplayMember = "Name"
-            Me.cboCategoryIdNo.EditingMode = False
-            Me.cboCategoryIdNo.EndFindValue = Nothing
-            Me.cboCategoryIdNo.FieldDescription = Nothing
-            Me.cboCategoryIdNo.FieldName = Nothing
-            Me.cboCategoryIdNo.FilterRule = Nothing
-            Me.cboCategoryIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboCategoryIdNo.FindEnabled = False
-            Me.CFlowLayout4.SetFlowBreak(Me.cboCategoryIdNo, True)
-            resources.ApplyResources(Me.cboCategoryIdNo, "cboCategoryIdNo")
-            Me.cboCategoryIdNo.ForeColor = System.Drawing.Color.Black
-            Me.cboCategoryIdNo.HideWhenNotEditingOrAdding = False
-            Me.cboCategoryIdNo.IgnoreCase = False
-            Me.cboCategoryIdNo.LinkedLabel = Me.lblCategoryIdNo
-            Me.cboCategoryIdNo.Name = "cboCategoryIdNo"
-            Me.cboCategoryIdNo.OldValue = 0
-            Me.cboCategoryIdNo.OriginalDataSource = Nothing
-            Me.cboCategoryIdNo.OriginalList = Nothing
-            Me.cboCategoryIdNo.OverrideDropDownStyleList = False
-            Me.cboCategoryIdNo.PreviousSearchTerm = Nothing
-            Me.cboCategoryIdNo.PropertySelector = Nothing
-            Me.cboCategoryIdNo.ReadOnlyCombo = False
-            Me.cboCategoryIdNo.SuggestBoxHeight = 200
-            Me.cboCategoryIdNo.SuggestCharCount = 1
-            Me.cboCategoryIdNo.SuggestListOrderRule = Nothing
-            Me.cboCategoryIdNo.TextToSearch = Nothing
-            Me.cboCategoryIdNo.Translatable = False
-            Me.cboCategoryIdNo.ValueIsMandatory = False
-            Me.cboCategoryIdNo.ValueIsNullable = False
-            Me.cboCategoryIdNo.ValueIsNumeric = False
-            Me.cboCategoryIdNo.ValueMember = "IdNo"
             '
             'lblProductName
             '
@@ -345,6 +359,47 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBaseUnitIdNo.ValueIsNullable = False
             Me.cboBaseUnitIdNo.ValueIsNumeric = False
             Me.cboBaseUnitIdNo.ValueMember = "IdNo"
+            '
+            'cboCategoryIdNo
+            '
+            Me.cboCategoryIdNo.AlwaysEditable = False
+            Me.cboCategoryIdNo.BackColor = System.Drawing.Color.White
+            Me.cboCategoryIdNo.BegFindValue = Nothing
+            Me.cboCategoryIdNo.ChangingSearchValueOnly = False
+            Me.cboCategoryIdNo.CurrentSearchTerm = ""
+            Me.cboCategoryIdNo.DataValue = Nothing
+            Me.cboCategoryIdNo.DefaultValue = ""
+            Me.cboCategoryIdNo.DisplayMember = "Name"
+            Me.cboCategoryIdNo.EditingMode = False
+            Me.cboCategoryIdNo.EndFindValue = Nothing
+            Me.cboCategoryIdNo.FieldDescription = Nothing
+            Me.cboCategoryIdNo.FieldName = Nothing
+            Me.cboCategoryIdNo.FilterRule = Nothing
+            Me.cboCategoryIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboCategoryIdNo.FindEnabled = False
+            Me.CFlowLayout4.SetFlowBreak(Me.cboCategoryIdNo, True)
+            resources.ApplyResources(Me.cboCategoryIdNo, "cboCategoryIdNo")
+            Me.cboCategoryIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboCategoryIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboCategoryIdNo.IgnoreCase = False
+            Me.cboCategoryIdNo.LinkedLabel = Me.lblCategoryIdNo
+            Me.cboCategoryIdNo.Name = "cboCategoryIdNo"
+            Me.cboCategoryIdNo.OldValue = 0
+            Me.cboCategoryIdNo.OriginalDataSource = Nothing
+            Me.cboCategoryIdNo.OriginalList = Nothing
+            Me.cboCategoryIdNo.OverrideDropDownStyleList = False
+            Me.cboCategoryIdNo.PreviousSearchTerm = Nothing
+            Me.cboCategoryIdNo.PropertySelector = Nothing
+            Me.cboCategoryIdNo.ReadOnlyCombo = False
+            Me.cboCategoryIdNo.SuggestBoxHeight = 200
+            Me.cboCategoryIdNo.SuggestCharCount = 1
+            Me.cboCategoryIdNo.SuggestListOrderRule = Nothing
+            Me.cboCategoryIdNo.TextToSearch = Nothing
+            Me.cboCategoryIdNo.Translatable = False
+            Me.cboCategoryIdNo.ValueIsMandatory = False
+            Me.cboCategoryIdNo.ValueIsNullable = False
+            Me.cboCategoryIdNo.ValueIsNumeric = False
+            Me.cboCategoryIdNo.ValueMember = "IdNo"
             '
             'CFlowLayout1
             '
@@ -475,6 +530,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDateCreated.ComputedValue = False
             Me.txtDateCreated.CustomFormat = Nothing
             Me.txtDateCreated.DataBoundControl = True
+            Me.txtDateCreated.DisplayOnly = True
             Me.txtDateCreated.EditingMode = False
             Me.txtDateCreated.EndFindValue = Nothing
             Me.txtDateCreated.FieldDescription = Nothing
@@ -624,6 +680,20 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.bsProductUnits.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.ProductUnitModel)
             '
+            'btnLockBranch
+            '
+            Me.btnLockBranch.BackColor = System.Drawing.Color.GreenYellow
+            resources.ApplyResources(Me.btnLockBranch, "btnLockBranch")
+            CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.White, System.Drawing.Color.White}
+            CBlendItems1.iPoint = New Single() {0!, 1.0!}
+            Me.btnLockBranch.ColorFillBlend = CBlendItems1
+            Me.btnLockBranch.DesignerSelected = True
+            Me.btnLockBranch.FillType = AATM.Libraries.CBaseControlsLibrary.CButton.eFillType.Solid
+            Me.btnLockBranch.ImageIndex = 0
+            Me.btnLockBranch.Name = "btnLockBranch"
+            Me.btnLockBranch.OriginalImageName = Nothing
+            Me.btnLockBranch.SecurityKey = ""
+            '
             'ProductEntry
             '
             resources.ApplyResources(Me, "$this")
@@ -673,5 +743,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents BaseQtyDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents dgvProductIdNo As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents CLabel1 As CLabel
+        Friend WithEvents cboBranchIdNo As CtComboBox
+        Friend WithEvents btnLockBranch As CButton
     End Class
 End NameSpace

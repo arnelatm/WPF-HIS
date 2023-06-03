@@ -20,12 +20,15 @@ Namespace PresentationLayer.Presenters
             TableName = "Product"
             WithTreeView = False
             SortOrderKey = "ProductName"
+            AddHandler view.LockBranchClicked, AddressOf LockBranchClicked
+            AddHandler view.FilterRecords, AddressOf FilterRecords
         End Sub
 
         Protected Overrides Sub CreateDataSources()
             Dim data1 As New ArrayList
             data1.Add({"Unit", "BaseUnitIdNo", Nothing, Nothing})
             data1.Add({"Category", "CategoryIdNo", Nothing, Nothing})
+            data1.Add({"Branch", "BranchIdNo", Nothing, Nothing})
             Dim data2 As New ArrayList
             CreateDataSourceThread(data1)
 
@@ -109,6 +112,21 @@ Namespace PresentationLayer.Presenters
             End If
             Return retValue
         End Function
+
+        Public Sub FilterRecords()
+            DataFilter = View.DataFilter
+            If Not AddMode Then
+                GoLastRecord()
+            End If
+        End Sub
+
+        Public Sub LockBranchClicked()
+            If View.LockBranch Then
+                DataFilter = "BranchIdNo = " & View.BranchIdNo.ToString()
+            Else
+                DataFilter = ""
+            End If
+        End Sub
 
     End Class
 

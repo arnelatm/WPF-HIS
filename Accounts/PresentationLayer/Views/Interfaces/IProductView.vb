@@ -9,6 +9,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Active As Boolean
         Property Barcode As String
         Property BaseUnitIdNo As Int16
+        Property BranchIdNo As Int16
         Property CategoryIdNo As Int16
         Property DateCreated As DateTime?
         Property GTIN As String
@@ -18,6 +19,9 @@ Namespace PresentationLayer.Views.Interfaces
         Property ProductNameAra As String
         Property ProductUnits As List(Of ProductUnitView)
         Property UnitsByCode As Object
+        Property LockBranch As Boolean
+        Event LockBranchClicked()
+        Event FilterRecords()
 
     End Interface
 
