@@ -14,7 +14,6 @@ Namespace BusinessLayer
             If GetRules().Count() = 0 Then
                 AddRule(New ValidateRequired("TransactionDate"))
                 AddRule(New ValidateRange("TransactionDate", Date.MinValue, Date.Today, ValidationDataType.Date))
-                AddRule(New ValidateRequired("Notes"))
                 AddRule(New ValidateRequired("SupplierIdNo"))
                 AddRule(New ValidateRequired("InvoiceNo"))
                 AddRule(New ValidateVatNumber("VatNumber"))

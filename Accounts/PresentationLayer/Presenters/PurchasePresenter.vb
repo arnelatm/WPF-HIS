@@ -127,14 +127,18 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Function IsBizDataValid() As Boolean
             Dim retValue As Boolean = True
-            For Each item In View.PurchaseDetails
-                If item.NeedsExpiryDate AndAlso (item.ExpiryDate.Value = Nothing OrElse item.ExpiryDate.Value = Date.MinValue) Then
-                    Dim lineNumber = Format(item.Sequence, "0")
-                    Messaging.ShowPmMessage(True, "MsgExpDateNeeded", {"lineNumber", lineNumber})
-                    retValue = False
-                    Exit For
-                End If
-            Next
+            If MyBase.IsBizDataValid Then
+                For Each item In View.PurchaseDetails
+                    If item.NeedsExpiryDate AndAlso (item.ExpiryDate Is Nothing OrElse item.ExpiryDate.Value = Date.MinValue) Then
+                        Dim lineNumber = Format(item.Sequence, "0")
+                        Messaging.ShowPmMessage(True, "MsgExpDateNeeded", {"lineNumber", lineNumber})
+                        retValue = False
+                        Exit For
+                    End If
+                Next
+            Else
+                retValue = False
+            End If
             Return retValue
         End Function
 

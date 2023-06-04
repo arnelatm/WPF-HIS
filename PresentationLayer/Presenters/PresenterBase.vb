@@ -450,6 +450,11 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return retValue
     End Function
 
+
+    Public Function GetRecordCount(tableName As String, Optional dataFilter As String = Nothing)
+        Return Service.GetRecordCount(tableName, dataFilter)
+    End Function
+
     Public Function GetBizObjectErrors() As List(Of String)
         Return Service.GetBizObjectErrors()
     End Function

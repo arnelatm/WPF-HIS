@@ -25,10 +25,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ProductEntry))
+            Dim CBlendItems1 As AATM.Libraries.CBaseControlsLibrary.cBlendItems = New AATM.Libraries.CBaseControlsLibrary.cBlendItems()
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim CBlendItems1 As AATM.Libraries.CBaseControlsLibrary.cBlendItems = New AATM.Libraries.CBaseControlsLibrary.cBlendItems()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.txtProductCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -40,6 +40,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboBranchIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.lblCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.btnLockBranch = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.lblProductName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtProductName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblProductNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -58,7 +59,6 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.DataGridViewProductUnits = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.btnLockBranch = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.dgvUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
             Me.dgvUnitQty = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.BaseQtyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -100,7 +100,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtProductCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtProductCode.Translatable = False
             Me.txtProductCode.ValueIsMandatory = True
-            Me.txtProductCode.ValueIsUnique = True
             '
             'lblProductCode
             '
@@ -235,6 +234,21 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.lblCategoryIdNo, "lblCategoryIdNo")
             Me.lblCategoryIdNo.Name = "lblCategoryIdNo"
             Me.lblCategoryIdNo.Translatable = True
+            '
+            'btnLockBranch
+            '
+            Me.btnLockBranch.BackColor = System.Drawing.Color.GreenYellow
+            Me.btnLockBranch.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.Lock
+            resources.ApplyResources(Me.btnLockBranch, "btnLockBranch")
+            CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.White, System.Drawing.Color.White}
+            CBlendItems1.iPoint = New Single() {0!, 1.0!}
+            Me.btnLockBranch.ColorFillBlend = CBlendItems1
+            Me.btnLockBranch.DesignerSelected = False
+            Me.btnLockBranch.FillType = AATM.Libraries.CBaseControlsLibrary.CButton.eFillType.Solid
+            Me.btnLockBranch.ImageIndex = 0
+            Me.btnLockBranch.Name = "btnLockBranch"
+            Me.btnLockBranch.OriginalImageName = Nothing
+            Me.btnLockBranch.SecurityKey = ""
             '
             'lblProductName
             '
@@ -450,7 +464,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBarcode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtBarcode.Translatable = False
             Me.txtBarcode.ValueIsMandatory = True
-            Me.txtBarcode.ValueIsUnique = True
             '
             'lblGTIN
             '
@@ -487,7 +500,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtGTIN.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtGTIN.Translatable = False
             Me.txtGTIN.ValueIsMandatory = True
-            Me.txtGTIN.ValueIsUnique = True
             '
             'lblActive
             '
@@ -625,21 +637,6 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvSequence.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvSequence.Translatable = False
-            '
-            'btnLockBranch
-            '
-            Me.btnLockBranch.BackColor = System.Drawing.Color.GreenYellow
-            Me.btnLockBranch.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.Lock
-            resources.ApplyResources(Me.btnLockBranch, "btnLockBranch")
-            CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.White, System.Drawing.Color.White}
-            CBlendItems1.iPoint = New Single() {0!, 1.0!}
-            Me.btnLockBranch.ColorFillBlend = CBlendItems1
-            Me.btnLockBranch.DesignerSelected = True
-            Me.btnLockBranch.FillType = AATM.Libraries.CBaseControlsLibrary.CButton.eFillType.Solid
-            Me.btnLockBranch.ImageIndex = 0
-            Me.btnLockBranch.Name = "btnLockBranch"
-            Me.btnLockBranch.OriginalImageName = Nothing
-            Me.btnLockBranch.SecurityKey = ""
             '
             'dgvUnitIdNo
             '

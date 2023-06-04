@@ -15,8 +15,7 @@
 
         Public Overrides Function Validate(businessObject As BusinessObject) As Boolean
             Try
-                Dim propValue As String =
-                        businessObject.GetType().GetProperty([Property]).GetValue(businessObject, Nothing).ToString()
+                Dim propValue As String = businessObject.GetType().GetProperty([Property]).GetValue(businessObject, Nothing).ToString()
                 Dim dataType = businessObject.GetType().GetProperty([Property])
                 Select Case dataType.PropertyType.Name
                     Case "String"
