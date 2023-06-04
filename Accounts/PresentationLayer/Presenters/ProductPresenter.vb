@@ -120,13 +120,42 @@ Namespace PresentationLayer.Presenters
                         End If
                     Next
                 End If
+                If Not CodeAndBranchUnique() Then
+                    Dim errorMessage = Libraries.MessagingLibrary.Messaging.GetParametrizedMessage(True, "MsgDuplicateValuesNotAllowed", {"fieldValue", View.BranchIdNo.ToString() + "-" + View.ProductCode, "fieldDescription", "BranchIdNo - Product Code"})
+                    Libraries.MessagingLibrary.Messaging.Show(errorMessage)
+                    retValue = False
+                End If
             End If
             Return retValue
         End Function
 
+        Private Function CodeAndBranchUnique() As Boolean
+            Dim idNo As Int32 = Service.GetRecordFieldWith2KeyG(Of String, Int16, Int32)(View.ProductCode, View.BranchIdNo, "Product", "ProductCode", "BranchIdNo", "IdNo")
+            If idNo <> 0 AndAlso idNo <> View.IdNo Then
+                Return False
+            End If
+            Return True
+        End Function
+
+        Private Function BarCodeAndBranchUnique() As Boolean
+            Dim idNo As Int32 = Service.GetRecordFieldWith2KeyG(Of String, Int16, Int32)(View.Barcode, View.BranchIdNo, "Product", "BarCode", "BranchIdNo", "IdNo")
+            If idNo <> 0 AndAlso idNo <> View.IdNo Then
+                Return False
+            End If
+            Return True
+        End Function
+
+        Private Function GTinAndBranchUnique() As Boolean
+            Dim idNo As Int32 = Service.GetRecordFieldWith2KeyG(Of String, Int16, Int32)(View.GTIN, View.BranchIdNo, "Product", "GTIN", "BranchIdNo", "IdNo")
+            If idNo <> 0 AndAlso idNo <> View.IdNo Then
+                Return False
+            End If
+            Return True
+        End Function
+
         Public Sub FilterRecords()
             If View.BranchCount < 2 Then
-                View.SavedBranch = GetBranch()
+                View.SavedBranch = GetBranch().BranchIdNo
                 DataFilter = "BranchIdNo = " & View.SavedBranch.ToString()
             Else
                 DataFilter = Nothing

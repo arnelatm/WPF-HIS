@@ -46,26 +46,26 @@ Public Class ProductFinder
         _findText = ""
     End Sub
 
-    Private Sub ProductFinder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'TODO: This line of code loads data into the 'ISPDATADataSet.Product' table. You can move, or remove it, as needed.
-        Me.ProductTableAdapter.Fill(Me.ISPDATADataSet.Product)
-        'TODO: This line of code loads data into the 'ISPDATADataSet.PurchaseDetail' table. You can move, or remove it, as needed.
-        Me.PurchaseDetailTableAdapter.Fill(Me.ISPDATADataSet.PurchaseDetail)
-        'txtFinder.Select()
+    'Private Sub ProductFinder_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    '    'TODO: This line of code loads data into the 'ISPDATADataSet.Product' table. You can move, or remove it, as needed.
+    '    Me.ProductTableAdapter.Fill(Me.ISPDATADataSet.Product)
+    '    'TODO: This line of code loads data into the 'ISPDATADataSet.PurchaseDetail' table. You can move, or remove it, as needed.
+    '    Me.PurchaseDetailTableAdapter.Fill(Me.ISPDATADataSet.PurchaseDetail)
+    '    'txtFinder.Select()
 
-        '' for columns    
-        'DataGridViewAccGridComboBoxColumn1.ComboDataGridView = ProgramaticalyCreatedDataGridView
-        '' selection is done by single click, i.e. not double click
-        'DataGridViewAccGridComboBoxColumn1.CloseOnSingleClick = True
-        '' binding is trigered on value change, i.e. not on validating
-        'DataGridViewAccGridComboBoxColumn1.InstantBinding = True
+    '    '' for columns    
+    '    'DataGridViewAccGridComboBoxColumn1.ComboDataGridView = ProgramaticalyCreatedDataGridView
+    '    '' selection is done by single click, i.e. not double click
+    '    'DataGridViewAccGridComboBoxColumn1.CloseOnSingleClick = True
+    '    '' binding is trigered on value change, i.e. not on validating
+    '    'DataGridViewAccGridComboBoxColumn1.InstantBinding = True
 
-        '' for comboboxes (second param is CloseOnSingleClick property setter)
-        'Dim ProgramaticalyCreatedDataGridView As DataGridView = CreateDataGridViewForPersonInfo()
-        'AccGridComboBox1.AddDataGridView(ProgramaticalyCreatedDataGridView, True)
-        'AccGridComboBox1.InstantBinding = True
+    '    '' for comboboxes (second param is CloseOnSingleClick property setter)
+    '    'Dim ProgramaticalyCreatedDataGridView As DataGridView = CreateDataGridViewForPersonInfo()
+    '    'AccGridComboBox1.AddDataGridView(ProgramaticalyCreatedDataGridView, True)
+    '    'AccGridComboBox1.InstantBinding = True
 
-    End Sub
+    'End Sub
 
     Private SearchString As String = ""
 
@@ -132,14 +132,15 @@ Public Class ProductFinder
     Public Property SelectedName As String
     Public Property SelectedCode As String
     Public Property NoOfUnits As Int16
-    Public Property Product As IProductView
-
+    Public Property Product As ProductModel
 
     Private Sub btnOk_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
         If DataGridViewProducts.CurrentRow IsNot Nothing Then
             SelectedId = DataGridViewProducts.CurrentRow.Cells(1).Value
-            Dim productModel = _service.GetRecordByIdNo(Of ProductModel)(SelectedId)
-            Product = GlobalVariables.Mapper.Map(productModel, Product)
+            Product = _service.GetRecordByIdNo(Of ProductModel)(SelectedId)
+            'Dim productModel = _service.GetRecordByIdNo(Of ProductModel)(SelectedId)
+            'Product = GlobalVariables.Mapper.Map(productModel, Product)
+            'Product = productModel
             NoOfUnits = _service.CountRecordWithKey(Of Int32)("ProductUnit", "ProductIdNo", SelectedId) + 1
         End If
         DialogResult = DialogResult.OK

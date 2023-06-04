@@ -203,9 +203,11 @@ Namespace PresentationLayer.Views.Forms
         Private Sub OnFormLoad() Handles MyBase.Load
             If BranchCount > 1 Then
                 cboBranchIdNo.Enabled = True
+                btnLockBranch.Visible = True
                 LockBranch = False
                 btnLockBranch.Enabled = True
             Else
+                btnLockBranch.Visible = False
                 btnLockBranch.Enabled = False
                 cboBranchIdNo.Enabled = False
                 LockBranch = True

@@ -193,7 +193,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
     End Function
 
     Private Sub ComposeSecondaryField()
-        If Right(TableName, 5) = "_View" Then
+        If Len(TableName) >= 5 AndAlso Right(TableName, 5) = "_View" Then
             If TreeViewSecondaryField Is Nothing Then
                 If TableBaseName Is Nothing Then
                     TreeViewSecondaryField = TableName + "Code"

@@ -588,7 +588,7 @@ Namespace PresentationLayer.Views.Forms
             Else
                 Dim form As New ProductFinder(findText, dgv)
                 If form.ShowDialog() = Windows.Forms.DialogResult.OK Then
-                    Dim product As IProductView = form.Product
+                    Dim product As ProductModel = form.Product
                     _noOfUnits = form.NoOfUnits
                     If product Is Nothing Then
                         Dim msg = Messaging.GetParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", findText, "fieldDescription", "Product Name"})
@@ -973,8 +973,14 @@ Namespace PresentationLayer.Views.Forms
                 ElseIf e.Value < DateAdd(DateInterval.Day, Today().Day * -1, Today) Then
                     e.CellStyle.BackColor = Color.Red
                 End If
+            ElseIf sender.Columns(e.ColumnIndex).Name.Equals("dgvUnitSalesPrice") Then
+                Dim x = DirectCast(sender, DataGridView).CurrentRow()
+                If x IsNot Nothing Then
+                    If e.Value < x.Cells("dgvUnitCost").Value Then
+                        e.CellStyle.BackColor = Color.Red
+                    End If
+                End If
             End If
-
         End Sub
 
         ' Changes how cells are displayed depending on their columns and values.
@@ -984,10 +990,6 @@ Namespace PresentationLayer.Views.Forms
                     e.Value = String.Empty
                     e.FormattingApplied = True
                 ElseIf e.Value < DateAdd(DateInterval.Day, Today().Day * -1, Today) Then
-                    e.CellStyle.BackColor = Color.Red
-                End If
-            ElseIf sender.Columns(e.ColumnIndex).Name.Equals("dgvUnitSalesPrice") Then
-                If e.Value < sender.Columns("dgvUnitCost").Value Then
                     e.CellStyle.BackColor = Color.Red
                 End If
             End If
