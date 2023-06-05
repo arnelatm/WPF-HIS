@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Windows.Forms
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Models
@@ -46,7 +47,7 @@ Public Class LoginEntry
             If Password IsNot Nothing Then
                 textBoxPassword.Text = Password
             End If
-            textBoxUserName.Text = UserName
+            txtUserName.Text = UserName
         End If
         chkSaveUserNameAndPassword.Checked = _rememberPassword
         Presenter = New UserPresenter(Of UserModel)(Me)
@@ -63,15 +64,15 @@ Public Class LoginEntry
             textBoxPassword.Text = "" 'Space(20)
             textNewPassword.Editable = True
             textConfirmation.Editable = True
-            textBoxUserName.DisplayOnly = True
+            txtUserName.DisplayOnly = True
             Refresh()
             ' Presenter.EnableEdit()
-            Height = 388
-            floPasswordEntry.Height = 134
+            Height = 448
+            floPasswordEntry.Height = 413
         Else
-            textBoxUserName.DisplayOnly = False
-            Height = 342
-            floPasswordEntry.Height = 134 - 46
+            txtUserName.DisplayOnly = False
+            Height = 402
+            floPasswordEntry.Height = 413 - 46
         End If
 
     End Sub
@@ -94,10 +95,10 @@ Public Class LoginEntry
 
     Public Property UserName As String Implements IUserView.UserName
         Get
-            Return textBoxUserName.Text.Trim()
+            Return txtUserName.Text.Trim()
         End Get
         Set(value As String)
-            textBoxUserName.Text = value
+            txtUserName.Text = value
         End Set
     End Property
 
@@ -142,14 +143,11 @@ Public Class LoginEntry
 
     Private Sub AfterSuccessfulLogin()
         SaveUserPasswordSetting()
-        'GlobalVariables.UserName = UserName
-        'GlobalVariables.UserIdNo = IdNo
-        'GlobalVariables.SecurityGroupIdNo = SecurityGroupIdNo
     End Sub
 
     Private Sub SaveUserPasswordSetting()
         If chkSaveUserNameAndPassword.Checked Then
-            My.Settings.UserName = textBoxUserName.Text.Trim()
+            My.Settings.UserName = txtUserName.Text.Trim()
             My.Settings.Oterkis = _oterkis
             My.Settings.RememberPassword = True
             My.Settings.Save()
@@ -159,6 +157,8 @@ Public Class LoginEntry
             My.Settings.RememberPassword = False
             My.Settings.Save()
         End If
+        GlobalVariables.BranchIdNo = cboBranchIdNo.SelectedValue
+
     End Sub
 
     ''' <summary>
@@ -185,11 +185,11 @@ Public Class LoginEntry
 
     Private Sub FormLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If _changingPassword Then
-            _textBoxUserName.ReadOnly = True
-            _textBoxUserName.DisplayOnly = True
+            _txtUserName.ReadOnly = True
+            _txtUserName.DisplayOnly = True
         Else
-            _textBoxUserName.ReadOnly = False
-            _textBoxUserName.DisplayOnly = False
+            _txtUserName.ReadOnly = False
+            _txtUserName.DisplayOnly = False
         End If
         _textBoxPassword.ReadOnly = False
         _textConfirmation.ReadOnly = False
@@ -197,15 +197,23 @@ Public Class LoginEntry
         _textBoxPassword.DisplayOnly = False
         _textNewPassword.DisplayOnly = False
         _textConfirmation.DisplayOnly = False
-        'Me.Show()
-        'MyPresenter.Display()
+        MainFieldsDictionary = New Dictionary(Of String, Object) From
+            {
+             {"BranchIdNo", cboBranchIdNo},
+             {"UserName", txtUserName}
+            }
+        Presenter.CreateBranchSource()
     End Sub
+
+
+    Public MainFieldsDictionary As New Dictionary(Of String, Object)
 
     Private Sub FormLogin_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         If _cancelLogin Then
             Close()
         End If
     End Sub
+
 
     'Private Sub Button1_Click(sender As Object, e As EventArgs)
     '    If txtConfirmation.Visible Then

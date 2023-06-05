@@ -974,10 +974,12 @@ Namespace PresentationLayer.Views.Forms
                     e.CellStyle.BackColor = Color.Red
                 End If
             ElseIf sender.Columns(e.ColumnIndex).Name.Equals("dgvUnitSalesPrice") Then
-                Dim x = DirectCast(sender, DataGridView).CurrentRow()
+                Dim x = DirectCast(sender, DataGridView).Rows(e.RowIndex)
                 If x IsNot Nothing Then
-                    If e.Value < x.Cells("dgvUnitCost").Value Then
-                        e.CellStyle.BackColor = Color.Red
+                    If x.Cells("dgvProductIdNo").Value <> 0 Then
+                        If e.Value Is Nothing Or e.Value <= x.Cells("dgvUnitCost").Value Then
+                            e.CellStyle.BackColor = Color.Red
+                        End If
                     End If
                 End If
             End If
