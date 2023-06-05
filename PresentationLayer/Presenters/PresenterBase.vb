@@ -189,12 +189,21 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End Get
     End Property
 
-    Protected ReadOnly Property MainFieldsDictionary As Dictionary(Of String, Object)
+    Dim _mainFieldsDictionary As Dictionary(Of String, Object)
+
+    Protected Property MainFieldsDictionary As Dictionary(Of String, Object)
         Get
             'Return CallByName(View, "MainFieldsDictionary", CallType.Get)
             Return Invoker.GetField(View, "MainFieldsDictionary")
         End Get
+        Set(value As Dictionary(Of String, Object))
+            _mainFieldsDictionary = value
+        End Set
     End Property
+
+    Public Sub CreateMainFieldsDictionary(fieldsDictionary As Dictionary(Of String, Object))
+        MainFieldsDictionary = fieldsDictionary
+    End Sub
 
     Public Property AddMode As Boolean
         Get

@@ -46,7 +46,6 @@ Namespace DataLayer.AdoNet
                     " BaseUnitIdNo = @BaseUnitIdNo," &
                     " BranchIdNo = @BranchIdNo," &
                     " CategoryIdNo = @CategoryIdNo," &
-                    " DateCreated = @DateCreated," &
                     " GTIN = @GTIN," &
                     " ProductCode = @ProductCode," &
                     " ProductName = @ProductName," &
@@ -58,8 +57,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef Product As Product) As Integer Implements IDao(Of Product).AddRecord
             Dim sql As String =
                     " INSERT INTO [Product] " &
-                    " (Active,Barcode,BaseUnitIdNo,BranchIdNo,CategoryIdNo,DateCreated,GTIN,ProductCode,ProductName,ProductNameAra) " &
-                    " VALUES (@Active,@Barcode,@BaseUnitIdNo,@BranchIdNo,@CategoryIdNo,@DateCreated,@GTIN,@ProductCode,@ProductName,@ProductNameAra) "
+                    " (Active,Barcode,BaseUnitIdNo,BranchIdNo,CategoryIdNo,GTIN,ProductCode,ProductName,ProductNameAra) " &
+                    " VALUES (@Active,@Barcode,@BaseUnitIdNo,@BranchIdNo,@CategoryIdNo,@GTIN,@ProductCode,@ProductName,@ProductNameAra) "
             Return Db.Insert(sql, Take(Product))
         End Function
 

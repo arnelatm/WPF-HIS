@@ -28,6 +28,10 @@ Public Class UserPresenter(Of TM As New)
         CreateEnumDataSource(Of SecurityLevelSelection)("SecurityLevel")
     End Sub
 
+    Public Sub CreateBranchSource()
+        CreateDataSource("Branch", "BranchIdNo")
+    End Sub
+
     Private Sub OnBeforeSave() Handles MyBase.BeforeSave
         If Not CancelSave Then
             If View.Password <> OriginalModel.Password Then

@@ -1,5 +1,6 @@
 ﻿CREATE TABLE [dbo].[SecurityGroup] (
     [IdNo]                 SMALLINT      IDENTITY (1, 1) NOT NULL,
+    [BranchIdNo]           TINYINT       NULL,
     [SecurityGroupName]    VARCHAR (50)  NULL,
     [ParentIdNo]           SMALLINT      NULL,
     [Notes]                VARCHAR (100) NULL,
@@ -9,6 +10,8 @@
     CONSTRAINT [PK_IDNo] PRIMARY KEY CLUSTERED ([IdNo] ASC),
     CONSTRAINT [IX_SecurityGroupName] UNIQUE NONCLUSTERED ([SecurityGroupName] ASC)
 );
+
+
 
 
 

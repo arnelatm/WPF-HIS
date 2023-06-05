@@ -4,7 +4,7 @@
     [Primary_Key]    INT            NULL,
     [Barcode]        VARCHAR (15)   NULL,
     [BaseUnitIdNo]   TINYINT        NULL,
-    [ProductCode]    VARCHAR (13)   NOT NULL,
+    [ProductCode]    VARCHAR (13)   NULL,
     [ProductName]    VARCHAR (50)   NOT NULL,
     [ProductNameAra] VARCHAR (50)   NULL,
     [ItemGroup]      VARCHAR (5)    NULL,
@@ -16,11 +16,13 @@
     [GTIN]           VARCHAR (14)   NULL,
     [Active]         BIT            NULL,
     [CreatedByIdNo]  INT            NULL,
-    [DateCreated]    DATE           NULL,
+    [DateCreated]    AS             (getdate()),
     [DateTimeStamp]  ROWVERSION     NOT NULL,
     CONSTRAINT [PK_ItemDetails] PRIMARY KEY CLUSTERED ([IdNo] ASC),
     CONSTRAINT [IX_Product] UNIQUE NONCLUSTERED ([BranchIdNo] ASC, [ProductCode] ASC)
 );
+
+
 
 
 
