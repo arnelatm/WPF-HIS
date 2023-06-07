@@ -342,6 +342,9 @@ Public Class CDataGridView
             '    End If
             'End If
             'Return Me.ProcessTabKey(e.KeyData)
+        ElseIf e.KeyCode = Keys.Insert Then
+            Dim x As Int16 = CurrentRow.Index
+            InsertRow(x)
         End If
 
         Return MyBase.ProcessDataGridViewKey(e)
@@ -462,6 +465,23 @@ Public Class CDataGridView
         Catch ex As Exception
             Windows.MessageBox.Show("error")
         End Try
+    End Sub
+
+    Private Sub InsertRow(rowIndex As Int16)
+        If rowIndex = NewRowIndex() Then
+            Beep()
+        ElseIf rowIndex > 0 Or (rowIndex = 0 And FirstRowInsertionEnabled) Then
+            Dim myBindingSource = CType(DataSource, BindingSource)
+            Dim dataList = myBindingSource.AddNew()
+            myBindingSource.RemoveAt(myBindingSource.Count() - 1)
+            myBindingSource.Position = rowIndex
+            myBindingSource.Insert(rowIndex, dataList)
+            ReSequenceDgvAfterInsert()
+            CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, CurrentRow.Index() - 1, 0))
+        Else
+            Messaging.Show(True, "MsgFirstRowInsertionNotAllowed")
+        End If
+        'End If
     End Sub
 
     'Private Sub DataGridView_CellEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles Me.CellEnter
@@ -1225,6 +1245,10 @@ Public Class CDataGridView
                 End If
             End If
             searchForm.Dispose()
+            If sw = 0 Then
+                Messaging.Show(True, "MsgNoMatchingRecordFound")
+                _existingFind = False
+            End If
         End If
         '    ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.Date Then
         '        Dim dBegDate As Date? = CallByName(columnData, "BegFindValue", CallType.Get)
@@ -1429,10 +1453,6 @@ Public Class CDataGridView
         '        _previousBegValueSearch = valueToSearch
         '    End If
         'End If
-        If sw = 0 Then
-            Messaging.Show(True, "MsgNoMatchingRecordFound")
-            _existingFind = False
-        End If
         'End If
     End Sub
 
