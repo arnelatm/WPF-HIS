@@ -621,13 +621,12 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewApprovalHistory.SecurityKey = ""
         Me.DataGridViewApprovalHistory.SequenceColumn = "dgvSequence"
         Me.DataGridViewApprovalHistory.SequenceFieldName = "Sequence"
-        Me.DataGridViewApprovalHistory.ShowFooter = false
-        Me.DataGridViewApprovalHistory.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewApprovalHistory.Translatable = true
-        '
-        'dgvApprovalIdNo
-        '
-        Me.dgvApprovalIdNo.BegFindValue = Nothing
+        Me.DataGridViewApprovalHistory.ShowFooter = False
+            Me.DataGridViewApprovalHistory.Translatable = True
+            '
+            'dgvApprovalIdNo
+            '
+            Me.dgvApprovalIdNo.BegFindValue = Nothing
         Me.dgvApprovalIdNo.DataPropertyName = "ApprovalIdNo"
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black

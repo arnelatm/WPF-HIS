@@ -286,10 +286,9 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewEarnings.SecurityKey = ""
         Me.DataGridViewEarnings.SequenceColumn = "dgvSequence"
         Me.DataGridViewEarnings.SequenceFieldName = "Sequence"
-        Me.DataGridViewEarnings.ShowFooter = false
-        Me.DataGridViewEarnings.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewEarnings.Size = New System.Drawing.Size(633, 316)
-        Me.DataGridViewEarnings.TabIndex = 0
+        Me.DataGridViewEarnings.ShowFooter = False
+            Me.DataGridViewEarnings.Size = New System.Drawing.Size(633, 316)
+            Me.DataGridViewEarnings.TabIndex = 0
         Me.DataGridViewEarnings.Translatable = true
         '
         'bsEarnings
@@ -347,10 +346,9 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewDeductions.SecurityKey = ""
         Me.DataGridViewDeductions.SequenceColumn = "dgvSequence"
         Me.DataGridViewDeductions.SequenceFieldName = "Sequence"
-        Me.DataGridViewDeductions.ShowFooter = false
-        Me.DataGridViewDeductions.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewDeductions.Size = New System.Drawing.Size(633, 316)
-        Me.DataGridViewDeductions.TabIndex = 0
+        Me.DataGridViewDeductions.ShowFooter = False
+            Me.DataGridViewDeductions.Size = New System.Drawing.Size(633, 316)
+            Me.DataGridViewDeductions.TabIndex = 0
         Me.DataGridViewDeductions.Translatable = true
         '
         'bsDeductions

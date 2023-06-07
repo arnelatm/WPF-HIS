@@ -2021,10 +2021,9 @@
         Me.DataGridViewItems.SecurityKey = ""
         Me.DataGridViewItems.SequenceColumn = "dgvSequence"
         Me.DataGridViewItems.SequenceFieldName = "Sequence"
-        Me.DataGridViewItems.ShowFooter = false
-        Me.DataGridViewItems.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewItems.Size = New System.Drawing.Size(1259, 159)
-        Me.DataGridViewItems.TabIndex = 39
+        Me.DataGridViewItems.ShowFooter = False
+            Me.DataGridViewItems.Size = New System.Drawing.Size(1259, 159)
+            Me.DataGridViewItems.TabIndex = 39
         Me.DataGridViewItems.Translatable = true
         '
         'DataGridViewDrugs
@@ -2064,10 +2063,9 @@
         Me.DataGridViewDrugs.SecurityKey = ""
         Me.DataGridViewDrugs.SequenceColumn = "dgvSequence"
         Me.DataGridViewDrugs.SequenceFieldName = "Sequence"
-        Me.DataGridViewDrugs.ShowFooter = false
-        Me.DataGridViewDrugs.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewDrugs.Size = New System.Drawing.Size(1259, 159)
-        Me.DataGridViewDrugs.TabIndex = 40
+        Me.DataGridViewDrugs.ShowFooter = False
+            Me.DataGridViewDrugs.Size = New System.Drawing.Size(1259, 159)
+            Me.DataGridViewDrugs.TabIndex = 40
         Me.DataGridViewDrugs.Translatable = true
         '
         'GTinMatcherEntry

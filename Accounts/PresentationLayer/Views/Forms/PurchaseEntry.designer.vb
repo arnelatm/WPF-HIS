@@ -767,7 +767,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPurchaseDetails.SequenceColumn = "dgvSequence"
             Me.DataGridViewPurchaseDetails.SequenceFieldName = "Sequence"
             Me.DataGridViewPurchaseDetails.ShowFooter = False
-            Me.DataGridViewPurchaseDetails.ShowInsertColumnWhenEditing = True
             Me.DataGridViewPurchaseDetails.Size = New System.Drawing.Size(1155, 312)
             Me.DataGridViewPurchaseDetails.TabIndex = 0
             Me.DataGridViewPurchaseDetails.Translatable = True
@@ -833,7 +832,6 @@ Namespace PresentationLayer.Views.Forms
             Me.CtDataGridView2.SequenceColumn = "dgvSequence"
             Me.CtDataGridView2.SequenceFieldName = "Sequence"
             Me.CtDataGridView2.ShowFooter = False
-            Me.CtDataGridView2.ShowInsertColumnWhenEditing = True
             Me.CtDataGridView2.Size = New System.Drawing.Size(1, 312)
             Me.CtDataGridView2.TabIndex = 9
             Me.CtDataGridView2.Translatable = True
@@ -1129,7 +1127,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPurchaseHistory.SequenceColumn = "dgvSequence"
             Me.DataGridViewPurchaseHistory.SequenceFieldName = "Sequence"
             Me.DataGridViewPurchaseHistory.ShowFooter = False
-            Me.DataGridViewPurchaseHistory.ShowInsertColumnWhenEditing = True
             Me.DataGridViewPurchaseHistory.Size = New System.Drawing.Size(881, 137)
             Me.DataGridViewPurchaseHistory.TabIndex = 11
             Me.DataGridViewPurchaseHistory.Translatable = True

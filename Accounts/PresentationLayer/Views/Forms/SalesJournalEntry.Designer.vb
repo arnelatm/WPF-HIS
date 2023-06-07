@@ -556,13 +556,12 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewJournalItems.SecurityKey = ""
         Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
         Me.DataGridViewJournalItems.SequenceFieldName = "Sequence"
-        Me.DataGridViewJournalItems.ShowFooter = false
-        Me.DataGridViewJournalItems.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewJournalItems.Translatable = true
-        '
-        'dgvSequence
-        '
-        Me.dgvSequence.BegFindValue = Nothing
+        Me.DataGridViewJournalItems.ShowFooter = False
+            Me.DataGridViewJournalItems.Translatable = True
+            '
+            'dgvSequence
+            '
+            Me.dgvSequence.BegFindValue = Nothing
         Me.dgvSequence.DataPropertyName = "Sequence"
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
@@ -757,13 +756,12 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewSalesDeposits.SecurityKey = ""
         Me.DataGridViewSalesDeposits.SequenceColumn = "dgvSequenceSc"
         Me.DataGridViewSalesDeposits.SequenceFieldName = "Sequence"
-        Me.DataGridViewSalesDeposits.ShowFooter = false
-        Me.DataGridViewSalesDeposits.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewSalesDeposits.Translatable = true
-        '
-        'dgvSequenceSc
-        '
-        Me.dgvSequenceSc.BegFindValue = Nothing
+        Me.DataGridViewSalesDeposits.ShowFooter = False
+            Me.DataGridViewSalesDeposits.Translatable = True
+            '
+            'dgvSequenceSc
+            '
+            Me.dgvSequenceSc.BegFindValue = Nothing
         Me.dgvSequenceSc.DataPropertyName = "Sequence"
         DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black

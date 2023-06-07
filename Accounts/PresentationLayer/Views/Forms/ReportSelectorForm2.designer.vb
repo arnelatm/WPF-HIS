@@ -116,10 +116,9 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewReportList.SecurityKey = ""
         Me.DataGridViewReportList.SequenceColumn = "dgvSequence"
         Me.DataGridViewReportList.SequenceFieldName = "Sequence"
-        Me.DataGridViewReportList.ShowFooter = false
-        Me.DataGridViewReportList.ShowInsertColumnWhenEditing = false
-        Me.DataGridViewReportList.Size = New System.Drawing.Size(362, 475)
-        Me.DataGridViewReportList.TabIndex = 11
+        Me.DataGridViewReportList.ShowFooter = False
+            Me.DataGridViewReportList.Size = New System.Drawing.Size(362, 475)
+            Me.DataGridViewReportList.TabIndex = 11
         Me.DataGridViewReportList.Translatable = true
         '
         'ReportName

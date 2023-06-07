@@ -4,7 +4,7 @@ Public Class Form4
 
 
     Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs)
-        Dim number As Double
+        'Dim number As Double
         _findText = ""
     End Sub
 

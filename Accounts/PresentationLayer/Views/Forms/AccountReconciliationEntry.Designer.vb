@@ -1014,13 +1014,12 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewReconciliationItems.SecurityKey = ""
         Me.DataGridViewReconciliationItems.SequenceColumn = "dgvSequence"
         Me.DataGridViewReconciliationItems.SequenceFieldName = "Sequence"
-        Me.DataGridViewReconciliationItems.ShowFooter = false
-        Me.DataGridViewReconciliationItems.ShowInsertColumnWhenEditing = false
-        Me.DataGridViewReconciliationItems.Translatable = true
-        '
-        'bsAccountReconciliationItems
-        '
-        Me.bsAccountReconciliationItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.AccountReconciliationItemModel)
+        Me.DataGridViewReconciliationItems.ShowFooter = False
+            Me.DataGridViewReconciliationItems.Translatable = True
+            '
+            'bsAccountReconciliationItems
+            '
+            Me.bsAccountReconciliationItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.AccountReconciliationItemModel)
         '
         'dgvSequence
         '

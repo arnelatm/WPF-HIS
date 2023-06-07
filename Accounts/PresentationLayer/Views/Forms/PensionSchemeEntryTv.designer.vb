@@ -354,7 +354,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPensionRates.SequenceColumn = "dgvSequence"
             Me.DataGridViewPensionRates.SequenceFieldName = "Sequence"
             Me.DataGridViewPensionRates.ShowFooter = False
-            Me.DataGridViewPensionRates.ShowInsertColumnWhenEditing = True
             Me.DataGridViewPensionRates.Translatable = True
             '
             'dgvSequence

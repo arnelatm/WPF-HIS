@@ -267,8 +267,7 @@ Partial Class EmployeeLeaveApprovalEntry
         Me.DataGridViewEmployeeLeave.SecurityKey = ""
         Me.DataGridViewEmployeeLeave.SequenceColumn = "dgvSequence"
         Me.DataGridViewEmployeeLeave.SequenceFieldName = "Sequence"
-        Me.DataGridViewEmployeeLeave.ShowFooter = false
-        Me.DataGridViewEmployeeLeave.ShowInsertColumnWhenEditing = true
+        Me.DataGridViewEmployeeLeave.ShowFooter = False
         Me.DataGridViewEmployeeLeave.Size = New System.Drawing.Size(1055, 482)
         Me.DataGridViewEmployeeLeave.TabIndex = 3
         Me.DataGridViewEmployeeLeave.Translatable = true

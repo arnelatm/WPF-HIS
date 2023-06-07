@@ -569,10 +569,9 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewPayrollAttendance.SecurityKey = ""
         Me.DataGridViewPayrollAttendance.SequenceColumn = "dgvSequence"
         Me.DataGridViewPayrollAttendance.SequenceFieldName = "Sequence"
-        Me.DataGridViewPayrollAttendance.ShowFooter = false
-        Me.DataGridViewPayrollAttendance.ShowInsertColumnWhenEditing = false
-        Me.DataGridViewPayrollAttendance.Size = New System.Drawing.Size(745, 346)
-        Me.DataGridViewPayrollAttendance.TabIndex = 171
+        Me.DataGridViewPayrollAttendance.ShowFooter = False
+            Me.DataGridViewPayrollAttendance.Size = New System.Drawing.Size(745, 346)
+            Me.DataGridViewPayrollAttendance.TabIndex = 171
         Me.DataGridViewPayrollAttendance.Translatable = true
         '
         'dgvSequence
@@ -794,10 +793,9 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewPayrollOvertime.SecurityKey = ""
         Me.DataGridViewPayrollOvertime.SequenceColumn = "dgvSequence"
         Me.DataGridViewPayrollOvertime.SequenceFieldName = "Sequence"
-        Me.DataGridViewPayrollOvertime.ShowFooter = false
-        Me.DataGridViewPayrollOvertime.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewPayrollOvertime.Size = New System.Drawing.Size(754, 358)
-        Me.DataGridViewPayrollOvertime.TabIndex = 0
+        Me.DataGridViewPayrollOvertime.ShowFooter = False
+            Me.DataGridViewPayrollOvertime.Size = New System.Drawing.Size(754, 358)
+            Me.DataGridViewPayrollOvertime.TabIndex = 0
         Me.DataGridViewPayrollOvertime.Translatable = true
         '
         'dgvSequenceOvertime

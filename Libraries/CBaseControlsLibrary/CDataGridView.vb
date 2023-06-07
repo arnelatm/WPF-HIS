@@ -15,7 +15,7 @@ Public Class CDataGridView
     Inherits DataGridView
     Implements IEntryControl, IFindableControl
 
-    Private _dgvInsertColumnIndex As Integer = -1
+    'Private _dgvInsertColumnIndex As Integer = -1
     Private _editingMode As Boolean
     Private _translatable As Boolean = True
     Private _firstEditableColumn As Integer = -1
@@ -109,15 +109,6 @@ Public Class CDataGridView
                     col.EditingMode = value
                 End If
             Next
-            'If value Then
-            '    If ShowInsertColumnWhenEditing Then
-            '        If Not DisplayOnly Then
-            '            AddInsertColumn()
-            '        End If
-            '    End If
-            'Else
-            '    RemoveInsertColumn()
-            'End If
             If ShowFooter Then
                 If DgvFooter Is Nothing Then
                     DgvFooter = New DgvFooter(Me) With {
@@ -191,13 +182,6 @@ Public Class CDataGridView
     <Browsable(True)>
     Public Property SequenceFieldName As String = "Sequence"
 
-    <Bindable(True)>
-    <Category("Custom")>
-    <DefaultValue(GetType(Boolean))>
-    <Description("Set to True to specify that insert column is visible when editing.")>
-    <Browsable(True)>
-    Public Property ShowInsertColumnWhenEditing As Boolean = True
-
     Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
             Return True
@@ -231,29 +215,29 @@ Public Class CDataGridView
 
     Public Property FieldDescription As String Implements IFindableControl.FieldDescription
 
-    Public Sub AddInsertColumn()
-        If Not DisplayOnly AndAlso Not Columns.Contains("dgvInsertColumn") Then
-            With Columns
-                Dim dgvInsColumn As New DataGridViewImageColumn
-                .Insert(.Count, dgvInsColumn)
-                dgvInsColumn.Image = Images.InsertRowImage
-                dgvInsColumn.Width = 30
-                dgvInsColumn.Name = "dgvInsertColumn"
-                dgvInsColumn.HeaderText = Messaging.TranslateCaption("Ins.")
-                _insertColumnAdded = True
-                _dgvInsertColumnIndex = dgvInsColumn.Index
-            End With
-        End If
-    End Sub
+    'Public Sub AddInsertColumn()
+    '    If Not DisplayOnly AndAlso Not Columns.Contains("dgvInsertColumn") Then
+    '        With Columns
+    '            Dim dgvInsColumn As New DataGridViewImageColumn
+    '            .Insert(.Count, dgvInsColumn)
+    '            dgvInsColumn.Image = Images.InsertRowImage
+    '            dgvInsColumn.Width = 30
+    '            dgvInsColumn.Name = "dgvInsertColumn"
+    '            dgvInsColumn.HeaderText = Messaging.TranslateCaption("Ins.")
+    '            _insertColumnAdded = True
+    '            _dgvInsertColumnIndex = dgvInsColumn.Index
+    '        End With
+    '    End If
+    'End Sub
 
-    Public Sub RemoveInsertColumn()
-        With Columns
-            If _insertColumnAdded Then
-                .Remove("dgvInsertColumn")
-                _insertColumnAdded = False
-            End If
-        End With
-    End Sub
+    'Public Sub RemoveInsertColumn()
+    '    With Columns
+    '        If _insertColumnAdded Then
+    '            .Remove("dgvInsertColumn")
+    '            _insertColumnAdded = False
+    '        End If
+    '    End With
+    'End Sub
 
     Public Sub ReSequenceDgvAfterDelete()
         If CurrentCell IsNot Nothing Then
@@ -333,20 +317,11 @@ Public Class CDataGridView
         ' Handle the ENTER key as if it were a RIGHT ARROW key.
         If e.KeyCode = Keys.Enter Then
             Return MoveToNextCell(e.KeyData)
-            'Dim currentColumnIndex As Int16
-            'currentColumnIndex = CurrentCell.ColumnIndex()
-            'If currentColumnIndex = LastEditableColumn And currentColumnIndex < ColumnCount() Then
-            '    If CurrentCell.RowIndex() + 1 < RowCount() Then
-            '        CurrentCell = Me(FirstEditableColumn, CurrentCellAddress.Y + 1)
-            '        Return True
-            '    End If
-            'End If
-            'Return Me.ProcessTabKey(e.KeyData)
         ElseIf e.KeyCode = Keys.Insert Then
-            Dim x As Int16 = CurrentRow.Index
-            InsertRow(x)
+            If Me.CurrentRow.Selected Then
+                InsertRow(CurrentRow.Index)
+            End If
         End If
-
         Return MyBase.ProcessDataGridViewKey(e)
     End Function
 
@@ -434,38 +409,38 @@ Public Class CDataGridView
         End If
     End Sub
 
-    Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles MyBase.CellClick
-        Try
-            If EditingMode And CurrentCell IsNot Nothing Then
-                With CurrentCell
-                    Select Case .OwningColumn.Name.ToLower()
-                        Case $"dgvinsertcolumn"
-                            'If (CurrentRow.Index() <> NewRowIndex()) Then
-                            'If Ea IsNot Nothing Then
-                            '    Ea.PublishEvent(New InsertDgvLine(CurrentRow.Index(), Name))
-                            'End If
-                            If .RowIndex() = NewRowIndex() Then
-                                Beep()
-                            ElseIf .RowIndex() > 0 Or (.RowIndex() = 0 And FirstRowInsertionEnabled) Then
-                                Dim myBindingSource = CType(DataSource, BindingSource)
-                                Dim dataList = myBindingSource.AddNew()
-                                myBindingSource.RemoveAt(myBindingSource.Count() - 1)
-                                myBindingSource.Position = .RowIndex
-                                myBindingSource.Insert(.RowIndex(), dataList)
-                                ReSequenceDgvAfterInsert()
-                                CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, CurrentRow.Index() - 1, 0))
-                            Else
-                                Messaging.Show(True, "MsgFirstRowInsertionNotAllowed")
-                            End If
-                            'End If
+    'Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles MyBase.CellClick
+    '    'Try
+    '    '    If EditingMode And CurrentCell IsNot Nothing Then
+    '    '        With CurrentCell
+    '    '            Select Case .OwningColumn.Name.ToLower()
+    '    '                Case $"dgvinsertcolumn"
+    '    '                    'If (CurrentRow.Index() <> NewRowIndex()) Then
+    '    '                    'If Ea IsNot Nothing Then
+    '    '                    '    Ea.PublishEvent(New InsertDgvLine(CurrentRow.Index(), Name))
+    '    '                    'End If
+    '    '                    If .RowIndex() = NewRowIndex() Then
+    '    '                        Beep()
+    '    '                    ElseIf .RowIndex() > 0 Or (.RowIndex() = 0 And FirstRowInsertionEnabled) Then
+    '    '                        Dim myBindingSource = CType(DataSource, BindingSource)
+    '    '                        Dim dataList = myBindingSource.AddNew()
+    '    '                        myBindingSource.RemoveAt(myBindingSource.Count() - 1)
+    '    '                        myBindingSource.Position = .RowIndex
+    '    '                        myBindingSource.Insert(.RowIndex(), dataList)
+    '    '                        ReSequenceDgvAfterInsert()
+    '    '                        CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, CurrentRow.Index() - 1, 0))
+    '    '                    Else
+    '    '                        Messaging.Show(True, "MsgFirstRowInsertionNotAllowed")
+    '    '                    End If
+    '    '                    'End If
 
-                    End Select
-                End With
-            End If
-        Catch ex As Exception
-            Windows.MessageBox.Show("error")
-        End Try
-    End Sub
+    '    '            End Select
+    '    '        End With
+    '    '    End If
+    '    'Catch ex As Exception
+    '    '    Windows.MessageBox.Show("error")
+    '    'End Try
+    'End Sub
 
     Private Sub InsertRow(rowIndex As Int16)
         If rowIndex = NewRowIndex() Then
@@ -584,9 +559,7 @@ Public Class CDataGridView
         If _firstEditableColumn < 0 Then
             Dim nColumnCount As Integer = ColumnCount()
             For i = 0 To nColumnCount - 1
-                If Columns(i).Name = "dgvInsertColumn" Then
-                    'nLastEditableColumn = nLastEditableColumn - 1
-                ElseIf Columns(i).Name = SequenceColumn Then
+                If Columns(i).Name = SequenceColumn Then
                     'ignore
                 ElseIf (Not Columns(i).Visible) Or Columns(i).ReadOnly Then
                     ' ignore
@@ -615,15 +588,11 @@ Public Class CDataGridView
         If _lastEditableColumn < 0 Then
             Dim nColumnCount As Integer = ColumnCount()
             For i = nColumnCount - 1 To 0 Step -1
-                If Columns(i).Name = "dgvInsertColumn" Then
-                    'nLastEditableColumn = nLastEditableColumn - 1
+                If (Not Columns(i).Visible) Or Columns(i).ReadOnly Then
+                    ' ignore
                 Else
-                    If (Not Columns(i).Visible) Or Columns(i).ReadOnly Then
-                        ' ignore
-                    Else
-                        _lastEditableColumn = i
-                        Exit For
-                    End If
+                    _lastEditableColumn = i
+                    Exit For
                 End If
             Next
         End If

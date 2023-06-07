@@ -161,10 +161,9 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewTransactionNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
         Me.DataGridViewTransactionNotes.SequenceColumn = "dgvSequence"
         Me.DataGridViewTransactionNotes.SequenceFieldName = "Sequence"
-        Me.DataGridViewTransactionNotes.ShowFooter = false
-        Me.DataGridViewTransactionNotes.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewTransactionNotes.Size = New System.Drawing.Size(551, 366)
-        Me.DataGridViewTransactionNotes.TabIndex = 32
+        Me.DataGridViewTransactionNotes.ShowFooter = False
+            Me.DataGridViewTransactionNotes.Size = New System.Drawing.Size(551, 366)
+            Me.DataGridViewTransactionNotes.TabIndex = 32
         '
         'dgvNotes
         '

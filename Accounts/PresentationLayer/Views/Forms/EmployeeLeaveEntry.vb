@@ -225,14 +225,12 @@ Namespace PresentationLayer.Views.Forms
         Private Sub BindApprovalLeaveHistory()
             SuspendLayout()
             bsEmployeeLeaveApprovalHistory.DataSource = Nothing
-            DataGridViewApprovalHistory.ShowInsertColumnWhenEditing = False
             DataGridViewApprovalHistory.Refresh()
             bsEmployeeLeaveApprovalHistory.DataSource = ApprovalHistory
             bsEmployeeLeaveApprovalHistory.AllowNew = True
             With DataGridViewApprovalHistory
                 .AutoGenerateColumns = False
                 .DataSource = bsEmployeeLeaveApprovalHistory
-                .RemoveInsertColumn()
             End With
             With DataGridViewApprovalHistory.Columns
                 dgvApprovedBy.DataSource = Users
