@@ -22,24 +22,22 @@ Namespace PresentationLayer.Presenters
             TableName = "Product"
             WithTreeView = False
             SortOrderKey = "ProductName"
-            view.BranchCount = GetBranchCount()
-            AddHandler view.LockBranchClicked, AddressOf LockBranchClicked
             AddHandler view.FilterRecords, AddressOf FilterRecords
         End Sub
 
-        Private Function GetBranchCount()
-            Return Service.CountRecordWithKey(Of Integer)("SecurityBranch", "SecurityGroupIdNo", GlobalVariables.SecurityGroupIdNo)
-        End Function
+        'Private Function GetBranchCount()
+        '    Return Service.CountRecordWithKey(Of Integer)("SecurityBranch", "SecurityGroupIdNo", GlobalVariables.SecurityGroupIdNo)
+        'End Function
 
-        Private Function GetBranch()
-            Return Service.GetTopOneFields("SecurityBranch", "BranchIdNo", "SecurityGroupIdNo = " & GlobalVariables.SecurityGroupIdNo.ToString(), "BranchIdNo", False)
-        End Function
+        'Private Function GetBranch()
+        '    Return Service.GetTopOneFields("SecurityBranch", "BranchIdNo", "SecurityGroupIdNo = " & GlobalVariables.SecurityGroupIdNo.ToString(), "BranchIdNo", False)
+        'End Function
 
         Protected Overrides Sub CreateDataSources()
             Dim data1 As New ArrayList
             data1.Add({"Unit", "BaseUnitIdNo", Nothing, Nothing})
             data1.Add({"Category", "CategoryIdNo", Nothing, Nothing})
-            data1.Add({"Branch", "BranchIdNo", Nothing, Nothing})
+            'data1.Add({"Branch", "BranchIdNo", Nothing, Nothing})
             Dim data2 As New ArrayList
             CreateDataSourceThread(data1)
 
@@ -154,21 +152,8 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Sub FilterRecords()
-            If View.BranchCount < 2 Then
-                View.SavedBranch = GetBranch().BranchIdNo
-                DataFilter = "BranchIdNo = " & View.SavedBranch.ToString()
-            Else
-                DataFilter = Nothing
-            End If
+            DataFilter = "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString()
             GoLastRecord()
-        End Sub
-
-        Public Sub LockBranchClicked()
-            If View.LockBranch Then
-                DataFilter = "BranchIdNo = " & View.BranchIdNo.ToString()
-            Else
-                DataFilter = ""
-            End If
         End Sub
 
         Public Sub RecordAddedUpdated(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully

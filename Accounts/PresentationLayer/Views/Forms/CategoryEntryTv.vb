@@ -12,6 +12,7 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             FirstControl = txtCategoryCode
             ' Add any initialization after the InitializeComponent() call.
+            DataFilter = "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString()
         End Sub
 
 #Region "Fields"
@@ -106,13 +107,10 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property BranchIdNo As Short Implements ICategoryView.BranchIdNo
+        Public ReadOnly Property BranchIdNo As Short Implements ICategoryView.BranchIdNo
             Get
-                Return txtBranchIdNo.Text
+                Return GlobalVariables.BranchIdNo
             End Get
-            Set
-                txtBranchIdNo.Text = value
-            End Set
         End Property
 
         Public Property NeedsExpiryDate As Boolean Implements ICategoryView.NeedsExpiryDate
@@ -126,10 +124,17 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
+
+        Private Sub OnFormLoad() Handles MyBase.Load
+            RaiseEvent FilterRecords()
+        End Sub
+
+        Public Event FilterRecords() Implements ICategoryView.FilterRecords
+
+
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                     {
-                    {"BranchIdNo", txtBranchIdNo},
                     {"CategoryCode", txtCategoryCode},
                     {"CategoryName", txtCategoryName},
                     {"CategoryNameAra", txtCategoryNameAra},
@@ -142,6 +147,8 @@ Namespace PresentationLayer.Views.Forms
                     {"VatSaleAccountIdNo", cboVatSaleAccountIdNo}
                     }
         End Sub
+
+
 
     End Class
 

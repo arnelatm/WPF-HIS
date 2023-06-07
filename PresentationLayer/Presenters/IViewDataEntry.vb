@@ -4,6 +4,6 @@
     'Property RecordPositionNumber As Integer
     Property QuitOnSave As Boolean
 
-    Property DataFilter As String
+    'Property DataFilter As String
 
 End Interface
