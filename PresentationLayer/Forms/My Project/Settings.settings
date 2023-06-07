@@ -11,5 +11,8 @@
     <Setting Name="UserName" Type="System.String" Scope="User">
       <Value Profile="(Default)">Arnel</Value>
     </Setting>
+    <Setting Name="BranchIdNo" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -34,12 +34,23 @@ Public Class LoginEntry
         _cancelLogin = False
         AddHandler FormClosing, AddressOf FormLogin_Closing
         'textBoxUserName.Text = Environment.UserName
+
+        Presenter = New UserPresenter(Of UserModel)(Me)
+
+        MainFieldsDictionary = New Dictionary(Of String, Object) From
+            {
+             {"BranchIdNo", cboBranchIdNo},
+             {"UserName", txtUserName}
+            }
+        Presenter.CreateBranchSource()
+
         If changePassword Then
             UserName = GlobalVariables.UserName
             Password = ""
         Else
             UserName = My.Settings.UserName
             Password = My.Settings.Oterkis
+            BranchIdNo = My.Settings.BranchIdNo
         End If
 
         _rememberPassword = My.Settings.RememberPassword
@@ -50,7 +61,7 @@ Public Class LoginEntry
             txtUserName.Text = UserName
         End If
         chkSaveUserNameAndPassword.Checked = _rememberPassword
-        Presenter = New UserPresenter(Of UserModel)(Me)
+
         If _changingPassword Then
             textNewPassword.Visible = True
             textConfirmation.Visible = True
@@ -102,6 +113,15 @@ Public Class LoginEntry
         End Set
     End Property
 
+    Public Property BranchIdNo As Int16
+        Get
+            Return cboBranchIdNo.GetNullableValue(Of Int16)
+        End Get
+        Set
+            cboBranchIdNo.SetValue(Value)
+        End Set
+    End Property
+
     Public Property IdNo As Int32 Implements IUserView.IdNo
 
     Public Property SecurityLevel As Short Implements IUserView.SecurityLevel
@@ -150,10 +170,12 @@ Public Class LoginEntry
             My.Settings.UserName = txtUserName.Text.Trim()
             My.Settings.Oterkis = _oterkis
             My.Settings.RememberPassword = True
+            My.Settings.BranchIdNo = cboBranchIdNo.SelectedValue
             My.Settings.Save()
         Else
             My.Settings.UserName = ""
             My.Settings.Oterkis = ""
+            My.Settings.BranchIdNo = 1
             My.Settings.RememberPassword = False
             My.Settings.Save()
         End If
@@ -197,12 +219,6 @@ Public Class LoginEntry
         _textBoxPassword.DisplayOnly = False
         _textNewPassword.DisplayOnly = False
         _textConfirmation.DisplayOnly = False
-        MainFieldsDictionary = New Dictionary(Of String, Object) From
-            {
-             {"BranchIdNo", cboBranchIdNo},
-             {"UserName", txtUserName}
-            }
-        Presenter.CreateBranchSource()
     End Sub
 
 

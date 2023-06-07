@@ -260,6 +260,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public ReadOnly Property BranchIdNo As Short Implements IPurchaseView.BranchIdNo
+            Get
+                Return GlobalVariables.BranchIdNo
+            End Get
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -966,19 +972,21 @@ Namespace PresentationLayer.Views.Forms
 
         ' Changes how cells are displayed depending on their columns and values.
         Private Sub dgvPurDetailsFormatting(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellFormattingEventArgs) Handles DataGridViewPurchaseDetails.CellFormatting
-            If sender.Columns(e.ColumnIndex).Name.Equals("dgvExpiryDate") Then
-                If e.Value = Date.MinValue Then
-                    e.Value = String.Empty
-                    e.FormattingApplied = True
-                ElseIf e.Value < DateAdd(DateInterval.Day, Today().Day * -1, Today) Then
-                    e.CellStyle.BackColor = Color.Red
-                End If
-            ElseIf sender.Columns(e.ColumnIndex).Name.Equals("dgvUnitSalesPrice") Then
-                Dim x = DirectCast(sender, DataGridView).Rows(e.RowIndex)
-                If x IsNot Nothing Then
-                    If x.Cells("dgvProductIdNo").Value <> 0 Then
-                        If e.Value Is Nothing Or e.Value <= x.Cells("dgvUnitCost").Value Then
-                            e.CellStyle.BackColor = Color.Red
+            If e.ColumnIndex > 0 Then
+                If sender.Columns(e.ColumnIndex).Name.Equals("dgvExpiryDate") Then
+                    If e.Value = Date.MinValue Then
+                        e.Value = String.Empty
+                        e.FormattingApplied = True
+                    ElseIf e.Value < DateAdd(DateInterval.Day, Today().Day * -1, Today) Then
+                        e.CellStyle.BackColor = Color.Red
+                    End If
+                ElseIf sender.Columns(e.ColumnIndex).Name.Equals("dgvUnitSalesPrice") Then
+                    Dim x = DirectCast(sender, DataGridView).Rows(e.RowIndex)
+                    If x IsNot Nothing Then
+                        If x.Cells("dgvProductIdNo").Value <> 0 Then
+                            If e.Value Is Nothing Or e.Value <= x.Cells("dgvUnitCost").Value Then
+                                e.CellStyle.BackColor = Color.Red
+                            End If
                         End If
                     End If
                 End If

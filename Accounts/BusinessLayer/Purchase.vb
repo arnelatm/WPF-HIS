@@ -22,6 +22,7 @@ Namespace BusinessLayer
         End Sub
 
         Public Property Amount As Decimal
+        Public Property BranchIdNo As Int16
         Public Property Cancelled As Boolean
         Public Property DateCreated As DateTime?
         Public Property DueDate As Date?

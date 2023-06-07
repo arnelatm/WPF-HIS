@@ -18,6 +18,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IProductView)
             MyBase.New(view)
+            DataFilter = "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString()
             Service = New AccountsService("Product")
             TableName = "Product"
             WithTreeView = False
@@ -152,7 +153,6 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Sub FilterRecords()
-            DataFilter = "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString()
             GoLastRecord()
         End Sub
 

@@ -2,6 +2,8 @@
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.GlobalFuncNSub
+Imports Extensions = AATM.DataLayer.AdoNet.Extensions
 
 Namespace DataLayer.AdoNet
     ' Data access object for Product
@@ -97,8 +99,8 @@ Namespace DataLayer.AdoNet
         Public Function GetProductsBySearchString(searchString As String)
             Dim sql As String
 
-            sql = "SELECT IdNo,ProductCode,ProductName,Barcode,GTIN from Product where ProductName like '%" + searchString + "%' Or " +
-                  "ProductCode = @searchString or GTIN = @searchString or Barcode = @searchString order by ProductName"
+            sql = "SELECT IdNo,ProductCode,ProductName,Barcode,GTIN from Product where BranchIdNo = " + GlobalVariables.BranchIdNo.ToString() + " AND (ProductName like '%" + searchString + "%' Or " +
+                  "ProductCode = @searchString or GTIN = @searchString or Barcode = @searchString ) order by ProductName"
             Dim params As String() = {"@SearchString", searchString}
             Return Db.ExecuteReader(sql, params)
         End Function

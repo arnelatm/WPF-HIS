@@ -6,6 +6,7 @@ Namespace PresentationLayer.Views.Interfaces
         Inherits IView
 
         Property Amount As Decimal
+        ReadOnly Property BranchIdNo As Int16
         Property Cancelled As Boolean
         Property DateCreated As DateTime?
         Property DueDate As Date?

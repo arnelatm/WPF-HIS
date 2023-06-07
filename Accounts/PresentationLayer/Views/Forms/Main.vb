@@ -379,7 +379,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ReligionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemReligions.Click
-            RunForm(Of ReligionEntryTv, ReligionPresenter(Of ReligionModel))()
+            RunBasicForm("Religion", "Religion Entry")
+            'RunForm(Of ReligionEntryTv, ReligionPresenter(Of ReligionModel))()
         End Sub
 
         Private Sub RevCostCentersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemRevCostCenters.Click
@@ -1127,15 +1128,11 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of CategoryEntryTv, CategoryPresenter(Of CategoryModel))()
         End Sub
 
-        Private Sub ToolStripMenuItemPurchaseEntry_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPurchaseEntry.Click
-            RunForm(Of PurchaseEntry, PurchasePresenter(Of PurchaseModel))()
-        End Sub
-
-        Private Sub ToolStripMenuItemPrintJobs_Click(sender As Object, e As EventArgs) 
+        Private Sub ToolStripMenuItemPrintJobs_Click(sender As Object, e As EventArgs)
             RunForm(Of PrintSetupEntryTv, PrintSetupPresenter(Of PrintSetupModel))()
         End Sub
 
-        Private Sub ToolStripMenuItemPrinters_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPrinters.Click           
+        Private Sub ToolStripMenuItemPrinters_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPrinters.Click
             RunForm(Of PrinterEntryTv, PrinterPresenter(Of PrinterModel))()
         End Sub
 
@@ -1153,6 +1150,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ToolStripMenuItemWarehouse_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemWarehouse.Click
             RunBasicForm("Warehouse", "Warehouse Entry")
+        End Sub
+
+        Private Sub ToolStripMenuItemPurchase_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPurchase.Click
+            RunForm(Of PurchaseEntry, PurchasePresenter(Of PurchaseModel))()
         End Sub
     End Class
 
