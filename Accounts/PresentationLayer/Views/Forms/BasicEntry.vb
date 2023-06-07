@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms
@@ -73,6 +74,12 @@ Namespace PresentationLayer.Views.Forms
             Set
                 txtNameAra.Text = Value
             End Set
+        End Property
+
+        Public ReadOnly Property BranchIdNo As Short Implements IBasicView.BranchIdNo
+            Get
+                Return GlobalVariables.BranchIdNo
+            End Get
         End Property
 
 #End Region

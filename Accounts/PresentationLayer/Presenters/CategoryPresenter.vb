@@ -16,7 +16,7 @@ Namespace PresentationLayer.Presenters
         
         Public Sub New(view As ICategoryView)
             MyBase.New(view)
-            'DataFilter = "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString()
+            DataFilter = "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString()
             If view IsNot Nothing Then
                 Service = New AccountsService("Category")
                 TableName = "Category"
@@ -44,7 +44,6 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Sub FilterRecords()
-            DataFilter = "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString()
             GoLastRecord()
         End Sub
 

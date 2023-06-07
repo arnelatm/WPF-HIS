@@ -27,6 +27,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IPurchaseView)
             MyBase.New(view)
+            DataFilter = "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString()
             TableName = "Purchase"
             WithTreeView = False
             Service = New AccountsService("Purchase")
@@ -73,12 +74,12 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Sub CreateDataSources()
             Dim data As New ArrayList
             data.Add({"Supplier", "SupplierIdNo", Nothing, Nothing})
-            data.Add({"Warehouse", "WarehouseIdNo", Nothing, Nothing})
+            data.Add({"Warehouse", "WarehouseIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"})
             CreateDataSourceThread(data)
 
             data.Clear()
             data.Add({"Unit", "UnitsByCode", Nothing, Nothing})
-            data.Add({"Product", "ProductsByCode", Nothing, Nothing})
+            data.Add({"Product", "ProductsByCode", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "ProductName"})
             'data.Add({"PurchaseDetail", "PurchaseHistory", Nothing, Nothing})
             CreateLookupDataThread(data)
             data.Clear()

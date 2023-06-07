@@ -12,7 +12,6 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             FirstControl = txtCategoryCode
             ' Add any initialization after the InitializeComponent() call.
-            DataFilter = "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString()
         End Sub
 
 #Region "Fields"

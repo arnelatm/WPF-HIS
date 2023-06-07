@@ -1,5 +1,6 @@
 ﻿CREATE TABLE [dbo].[Purchase] (
     [IdNo]            INT          IDENTITY (1, 1) NOT NULL,
+    [BranchIdNo]      TINYINT      NULL,
     [SupplierIdNo]    INT          NOT NULL,
     [TransactionDate] DATE         NULL,
     [Amount]          MONEY        NOT NULL,

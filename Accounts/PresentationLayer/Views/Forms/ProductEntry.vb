@@ -19,7 +19,6 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
             FirstControl = cboCategoryIdNo
-            DataFilter = "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString()
         End Sub
 
         Public Property DateCreated As DateTime? Implements IProductView.DateCreated

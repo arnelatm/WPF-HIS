@@ -155,8 +155,5 @@ Namespace PresentationLayer
 
         End Function
 
-
-
-
     End Module
 End Namespace
