@@ -11,7 +11,6 @@ Namespace PresentationLayer.Views.Forms
         Implements IProductView
 
         Private _lockBranch As Boolean = False
-        Private _branchIdNo As Int16
         Private _productUnits As List(Of ProductUnitView)
 
         Public Sub New()
@@ -20,7 +19,7 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
             FirstControl = cboCategoryIdNo
-            DataFilter = "BranchIdNo = " + BranchIdNo.ToString()
+            DataFilter = "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString()
         End Sub
 
         Public Property DateCreated As DateTime? Implements IProductView.DateCreated
@@ -150,36 +149,28 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property LockBranch As Boolean Implements IProductView.LockBranch
-            Get
-                Return _lockBranch
-            End Get
-            Set(value As Boolean)
-                _lockBranch = value
-                If value Then
-                    btnLockBranch.BackgroundImage = My.Resources.Lock
-                Else
-                    btnLockBranch.BackgroundImage = My.Resources.Unlock
-                End If
-            End Set
-        End Property
+        'Public Property LockBranch As Boolean Implements IProductView.LockBranch
+        '    Get
+        '        Return _lockBranch
+        '    End Get
+        '    Set(value As Boolean)
+        '        _lockBranch = value
+        '        If value Then
+        '            btnLockBranch.BackgroundImage = My.Resources.Lock
+        '        Else
+        '            btnLockBranch.BackgroundImage = My.Resources.Unlock
+        '        End If
+        '    End Set
+        'End Property
 
 
         Public Property UnitsByCode As Object Implements IProductView.UnitsByCode
 
-        Public Property BranchIdNo As Short Implements IProductView.BranchIdNo
+        Public ReadOnly Property BranchIdNo As Short Implements IProductView.BranchIdNo
             Get
-                Return cboBranchIdNo.GetValue(Of Int16)
+                Return GlobalVariables.BranchIdNo
             End Get
-            Set(value As Int16)
-                cboBranchIdNo.SetValue(value)
-            End Set
         End Property
-
-        Public Property BranchCount As Integer Implements IProductView.BranchCount
-
-        Public Property SavedBranch As Integer Implements IProductView.SavedBranch
-
 
         Private Sub BindProductUnits()
             bsProductUnits.SuspendBinding()
@@ -201,21 +192,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub OnFormLoad() Handles MyBase.Load
-            If BranchCount > 1 Then
-                cboBranchIdNo.Enabled = True
-                btnLockBranch.Visible = True
-                LockBranch = False
-                btnLockBranch.Enabled = True
-            Else
-                btnLockBranch.Visible = False
-                btnLockBranch.Enabled = False
-                cboBranchIdNo.Enabled = False
-                LockBranch = True
-            End If
             RaiseEvent FilterRecords()
         End Sub
 
-        Public Event LockBranchClicked() Implements IProductView.LockBranchClicked
         Public Event FilterRecords() Implements IProductView.FilterRecords
 
 
@@ -225,7 +204,6 @@ Namespace PresentationLayer.Views.Forms
              {"Active", chkActive},
              {"Barcode", txtBarcode},
              {"BaseUnitIdNo", cboBaseUnitIdNo},
-             {"BranchIdNo", cboBranchIdNo},
              {"CategoryIdNo", cboCategoryIdNo},
              {"DateCreated", txtDateCreated},
              {"GTIN", txtGTIN},
@@ -257,26 +235,26 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub btnLockBranch_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnLockBranch.ClickButtonArea
-            If BranchCount > 1 Then
-                If Not LockBranch Then
-                    LockBranch = True
-                    SavedBranch = BranchIdNo
-                    cboBranchIdNo.Enabled = False
-                Else
-                    cboBranchIdNo.Enabled = True
-                    LockBranch = False
-                End If
-            Else
-                LockBranch = True
-                cboBranchIdNo.Enabled = False
-            End If
-            RaiseEvent LockBranchClicked()
-        End Sub
+        'Private Sub btnLockBranch_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnLockBranch.ClickButtonArea
+        '    If BranchCount > 1 Then
+        '        If Not LockBranch Then
+        '            LockBranch = True
+        '            SavedBranch = BranchIdNo
+        '            cboBranchIdNo.Enabled = False
+        '        Else
+        '            cboBranchIdNo.Enabled = True
+        '            LockBranch = False
+        '        End If
+        '    Else
+        '        LockBranch = True
+        '        cboBranchIdNo.Enabled = False
+        '    End If
+        '    RaiseEvent LockBranchClicked()
+        'End Sub
 
         Protected Overrides Sub AfterAdd()
             MyBase.AfterAdd()
-            BranchIdNo = SavedBranch
+            'cboBranchIdNo.SelectedValue = GlobalVariables.BranchIdNo
         End Sub
 
 

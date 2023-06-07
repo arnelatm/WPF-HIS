@@ -104,6 +104,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Public Sub New(itemView As IView)
         If itemView IsNot Nothing Then
             Me.View = itemView
+            Me.DataFilter = View.DataFilter
             'Me.Model = New TM
             MyErrorProvider = GetErrorProvider()
             If Ea IsNot Nothing Then

@@ -130,7 +130,7 @@ Public Class CFormEntry
 
     Public Property QuitOnSave As Boolean Implements IViewDataEntry.QuitOnSave
 
-    Private Property IViewDataEntry_DataFilter As String Implements IViewDataEntry.DataFilter
+    'Public Property DataFilter As String Implements IViewDataEntry.DataFilter
 
     Public Sub CheckDataChanges()
     End Sub
