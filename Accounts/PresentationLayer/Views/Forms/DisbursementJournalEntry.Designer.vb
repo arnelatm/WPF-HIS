@@ -397,7 +397,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
             Me.DataGridViewJournalItems.SequenceFieldName = "Sequence"
             Me.DataGridViewJournalItems.ShowFooter = False
-            Me.DataGridViewJournalItems.ShowInsertColumnWhenEditing = True
             Me.DataGridViewJournalItems.Size = New System.Drawing.Size(996, 340)
             Me.DataGridViewJournalItems.TabIndex = 15
             Me.DataGridViewJournalItems.Translatable = True
@@ -1223,7 +1222,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewDjOiItems.SequenceColumn = "dgvSequencePcsOi"
             Me.DataGridViewDjOiItems.SequenceFieldName = "Sequence"
             Me.DataGridViewDjOiItems.ShowFooter = False
-            Me.DataGridViewDjOiItems.ShowInsertColumnWhenEditing = False
             Me.DataGridViewDjOiItems.Size = New System.Drawing.Size(996, 340)
             Me.DataGridViewDjOiItems.TabIndex = 16
             Me.DataGridViewDjOiItems.Translatable = True

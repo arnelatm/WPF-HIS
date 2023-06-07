@@ -140,10 +140,9 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewEmployeeIdList.SecurityKey = ""
         Me.DataGridViewEmployeeIdList.SequenceColumn = "dgvSequence"
         Me.DataGridViewEmployeeIdList.SequenceFieldName = "Sequence"
-        Me.DataGridViewEmployeeIdList.ShowFooter = false
-        Me.DataGridViewEmployeeIdList.ShowInsertColumnWhenEditing = false
-        Me.DataGridViewEmployeeIdList.Size = New System.Drawing.Size(978, 450)
-        Me.DataGridViewEmployeeIdList.TabIndex = 10
+        Me.DataGridViewEmployeeIdList.ShowFooter = False
+            Me.DataGridViewEmployeeIdList.Size = New System.Drawing.Size(978, 450)
+            Me.DataGridViewEmployeeIdList.TabIndex = 10
         Me.DataGridViewEmployeeIdList.Translatable = true
         '
         'PrintThis

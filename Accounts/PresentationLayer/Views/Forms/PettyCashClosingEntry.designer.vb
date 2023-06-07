@@ -125,10 +125,9 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewPcJournals.SecurityKey = "ClosePettyCash"
         Me.DataGridViewPcJournals.SequenceColumn = "dgvSequence"
         Me.DataGridViewPcJournals.SequenceFieldName = "Sequence"
-        Me.DataGridViewPcJournals.ShowFooter = false
-        Me.DataGridViewPcJournals.ShowInsertColumnWhenEditing = false
-        Me.DataGridViewPcJournals.Size = New System.Drawing.Size(977, 450)
-        Me.DataGridViewPcJournals.TabIndex = 10
+        Me.DataGridViewPcJournals.ShowFooter = False
+            Me.DataGridViewPcJournals.Size = New System.Drawing.Size(977, 450)
+            Me.DataGridViewPcJournals.TabIndex = 10
         Me.DataGridViewPcJournals.Translatable = true
         '
         'dgvPcClosed

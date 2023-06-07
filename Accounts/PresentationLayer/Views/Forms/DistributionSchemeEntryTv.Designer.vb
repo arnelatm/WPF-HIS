@@ -345,7 +345,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewDistributionSchemeItems.SequenceColumn = "dgvSequence"
             Me.DataGridViewDistributionSchemeItems.SequenceFieldName = "Sequence"
             Me.DataGridViewDistributionSchemeItems.ShowFooter = False
-            Me.DataGridViewDistributionSchemeItems.ShowInsertColumnWhenEditing = True
             '
             'bsDistributionSchemeItems
             '

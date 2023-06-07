@@ -73,14 +73,12 @@ Public Class EmployeeLeaveApprovalEntry
     Public Sub BindEmployeeLeaveList()
         SuspendLayout()
         bsEmployeeLeave.DataSource = Nothing
-        DataGridViewEmployeeLeave.ShowInsertColumnWhenEditing = False
         DataGridViewEmployeeLeave.Refresh()
         bsEmployeeLeave.DataSource = EmployeeLeaveApprovalItems
         bsEmployeeLeave.AllowNew = True
         With DataGridViewEmployeeLeave
             .AutoGenerateColumns = False
             .DataSource = bsEmployeeLeave
-            .RemoveInsertColumn()
         End With
         With DataGridViewEmployeeLeave.Columns
             dgvEmployeeIdNo.DisplayOnly = True

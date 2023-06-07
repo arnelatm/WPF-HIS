@@ -104,14 +104,12 @@ Namespace PresentationLayer.Views.Forms
         Private Sub BindHolidayTransferItems()
             SuspendLayout()
             bsHolidayTransferItems.DataSource = Nothing
-            DataGridViewHolidayTransferitems.ShowInsertColumnWhenEditing = False
             DataGridViewHolidayTransferitems.Refresh()
             bsHolidayTransferItems.DataSource = HolidayTransferItems
             bsHolidayTransferItems.AllowNew = True
             With DataGridViewHolidayTransferitems
                 .AutoGenerateColumns = False
                 .DataSource = bsHolidayTransferItems
-                .RemoveInsertColumn()
             End With
             With DataGridViewHolidayTransferitems.Columns
                 dgvEmployeeIdNo.DisplayOnly = True

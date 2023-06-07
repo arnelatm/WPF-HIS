@@ -395,10 +395,9 @@
         Me.DataGridViewHolidayTransferitems.SecurityKey = ""
         Me.DataGridViewHolidayTransferitems.SequenceColumn = ""
         Me.DataGridViewHolidayTransferitems.SequenceFieldName = ""
-        Me.DataGridViewHolidayTransferitems.ShowFooter = false
-        Me.DataGridViewHolidayTransferitems.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewHolidayTransferitems.Size = New System.Drawing.Size(562, 452)
-        Me.DataGridViewHolidayTransferitems.TabIndex = 5
+        Me.DataGridViewHolidayTransferitems.ShowFooter = False
+            Me.DataGridViewHolidayTransferitems.Size = New System.Drawing.Size(562, 452)
+            Me.DataGridViewHolidayTransferitems.TabIndex = 5
         Me.DataGridViewHolidayTransferitems.Translatable = true
         '
         'dgvEmployeeIdNo

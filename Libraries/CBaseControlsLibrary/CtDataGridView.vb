@@ -15,7 +15,6 @@ Public Class CtDataGridView
     Inherits DataGridView
     Implements IEntryControl, IFindableControl
 
-    Private _dgvInsertColumnIndex As Integer = -1
     Private _editingMode As Boolean
     Private _translatable As Boolean = True
     Private _firstEditableColumn As Integer = -1
@@ -101,15 +100,6 @@ Public Class CtDataGridView
                     col.EditingMode = value
                 End If
             Next
-            If value Then
-                If ShowInsertColumnWhenEditing Then
-                    If Not DisplayOnly Then
-                        AddInsertColumn()
-                    End If
-                End If
-            Else
-                RemoveInsertColumn()
-            End If
             If ShowFooter Then
                 If DgvFooter Is Nothing Then
                     DgvFooter = New DgvFooter(Me) With {
@@ -180,13 +170,6 @@ Public Class CtDataGridView
     <Browsable(True)>
     Public Property SequenceFieldName As String = "Sequence"
 
-    <Bindable(True)>
-    <Category("Custom")>
-    <DefaultValue(GetType(Boolean))>
-    <Description("Set to True to specify that insert column is visible when editing.")>
-    <Browsable(True)>
-    Public Property ShowInsertColumnWhenEditing As Boolean = True
-
     Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
             Return True
@@ -219,30 +202,6 @@ Public Class CtDataGridView
     Public Property IgnoreCase As Boolean Implements IFindableControl.IgnoreCase
 
     Public Property FieldDescription As String Implements IFindableControl.FieldDescription
-
-    Public Sub AddInsertColumn()
-        If Not DisplayOnly AndAlso Not Columns.Contains("dgvInsertColumn") Then
-            With Columns
-                Dim dgvInsColumn As New DataGridViewImageColumn
-                .Insert(.Count, dgvInsColumn)
-                dgvInsColumn.Image = Images.InsertRowImage
-                dgvInsColumn.Width = 30
-                dgvInsColumn.Name = "dgvInsertColumn"
-                dgvInsColumn.HeaderText = Messaging.TranslateCaption("Ins.")
-                _insertColumnAdded = True
-                _dgvInsertColumnIndex = dgvInsColumn.Index
-            End With
-        End If
-    End Sub
-
-    Public Sub RemoveInsertColumn()
-        With Columns
-            If _insertColumnAdded Then
-                .Remove("dgvInsertColumn")
-                _insertColumnAdded = False
-            End If
-        End With
-    End Sub
 
     Public Sub ReSequenceDgvAfterDelete()
         If CurrentCell IsNot Nothing Then
@@ -304,8 +263,11 @@ Public Class CtDataGridView
         ' Handle the ENTER key as if it were a RIGHT ARROW key.
         If e.KeyCode = Keys.Enter Then
             Return MoveToNextCell(e.KeyData)
+        ElseIf e.KeyCode = Keys.Insert Then
+            If Me.CurrentRow.Selected Then
+                InsertRow(CurrentRow.Index)
+            End If
         End If
-
         Return MyBase.ProcessDataGridViewKey(e)
     End Function
 
@@ -347,32 +309,81 @@ Public Class CtDataGridView
         End If
     End Sub
 
-    Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles MyBase.CellClick
-        Try
-            If EditingMode And CurrentCell IsNot Nothing Then
-                With CurrentCell
-                    Select Case .OwningColumn.Name.ToLower()
-                        Case $"dgvinsertcolumn"
-                            If .RowIndex() = NewRowIndex() Then
-                                Beep()
-                            ElseIf .RowIndex() > 0 Or (.RowIndex() = 0 And FirstRowInsertionEnabled) Then
-                                Dim myBindingSource = CType(DataSource, BindingSource)
-                                Dim dataList = myBindingSource.AddNew()
-                                myBindingSource.RemoveAt(myBindingSource.Count() - 1)
-                                myBindingSource.Position = .RowIndex
-                                myBindingSource.Insert(.RowIndex(), dataList)
-                                ReSequenceDgvAfterInsert()
-                                CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, CurrentRow.Index() - 1, 0))
-                            Else
-                                Messaging.Show(True, "MsgFirstRowInsertionNotAllowed")
-                            End If
-                    End Select
-                End With
-            End If
-        Catch ex As Exception
-            Windows.MessageBox.Show("error")
-        End Try
+    'Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles MyBase.CellClick
+    '    Try
+    '        If EditingMode And CurrentCell IsNot Nothing Then
+    '            With CurrentCell
+    '                Select Case .OwningColumn.Name.ToLower()
+    '                    Case $"dgvinsertcolumn"
+    '                        If .RowIndex() = NewRowIndex() Then
+    '                            Beep()
+    '                        ElseIf .RowIndex() > 0 Or (.RowIndex() = 0 And FirstRowInsertionEnabled) Then
+    '                            Dim myBindingSource = CType(DataSource, BindingSource)
+    '                            Dim dataList = myBindingSource.AddNew()
+    '                            myBindingSource.RemoveAt(myBindingSource.Count() - 1)
+    '                            myBindingSource.Position = .RowIndex
+    '                            myBindingSource.Insert(.RowIndex(), dataList)
+    '                            ReSequenceDgvAfterInsert()
+    '                            CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, CurrentRow.Index() - 1, 0))
+    '                        Else
+    '                            Messaging.Show(True, "MsgFirstRowInsertionNotAllowed")
+    '                        End If
+    '                End Select
+    '            End With
+    '        End If
+    '    Catch ex As Exception
+    '        Windows.MessageBox.Show("error")
+    '    End Try
+    'End Sub
+
+    Private Sub InsertRow(rowIndex As Int16)
+        If rowIndex = NewRowIndex() Then
+            Beep()
+        ElseIf rowIndex > 0 Or (rowIndex = 0 And FirstRowInsertionEnabled) Then
+            Dim myBindingSource = CType(DataSource, BindingSource)
+            Dim dataList = myBindingSource.AddNew()
+            myBindingSource.RemoveAt(myBindingSource.Count() - 1)
+            myBindingSource.Position = rowIndex
+            myBindingSource.Insert(rowIndex, dataList)
+            ReSequenceDgvAfterInsert()
+            CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, CurrentRow.Index() - 1, 0))
+        Else
+            Messaging.Show(True, "MsgFirstRowInsertionNotAllowed")
+        End If
+        'End If
     End Sub
+
+    'Private Sub DataGridView_CellEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles Me.CellEnter
+    '    Dim dgc As DataGridViewCell = Me.Item(e.ColumnIndex, e.RowIndex)
+    '    If dgc IsNot Nothing AndAlso dgc.ReadOnly Then
+    '        SendKeys.Send("{Tab}")
+    '    End If
+    'End Sub
+    'Private Sub AddNewRow()
+    '    Dim myBindingSource = CType(DataSource, BindingSource)
+    '    If myBindingSource IsNot Nothing Then
+    '        Dim row = CurrentRow.Index() + 1
+    '        Try
+    '            myBindingSource.AddNew()
+    '        Catch ex As Exception
+
+    '        End Try
+    '        'myBindingSource.MoveLast()
+    '        If CurrentRow IsNot Nothing AndAlso CurrentRow.DataBoundItem IsNot Nothing Then
+    '            CallByName(CurrentRow.DataBoundItem, "Sequence", CallType.Set, row + 1)
+    '            CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, row - 1, 0))
+    '        End If
+    '        'If CurrentRow IsNot Nothing AndAlso CurrentRow.DataBoundItem IsNot Nothing Then
+    '        '    CallByName(CurrentRow.DataBoundItem, "Sequence", CallType.Set, row + 1)
+    '        '    CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, row - 1, 0))
+    '        'End If
+    '    End If
+    'End Sub
+
+    'Private Sub DataGridView_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles Me.CellValueChanged
+    '    RaiseEvent ChangesMade(Me, EventArgs.Empty)
+    '    CallByName(CurrentRow.Cells("dgvInsColumn"), "Image", CallType.Set, Images.InsertRowImage)
+    'End Sub
 
     Private Sub DataGridView_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles Me.DataError
 
@@ -401,9 +412,7 @@ Public Class CtDataGridView
         If _firstEditableColumn < 0 Then
             Dim nColumnCount As Integer = ColumnCount()
             For i = 0 To nColumnCount - 1
-                If Columns(i).Name = "dgvInsertColumn" Then
-                    'nLastEditableColumn = nLastEditableColumn - 1
-                ElseIf Columns(i).Name = SequenceColumn Then
+                If Columns(i).Name = SequenceColumn Then
                     'ignore
                 ElseIf (Not Columns(i).Visible) Or Columns(i).ReadOnly Then
                     ' ignore
@@ -432,15 +441,11 @@ Public Class CtDataGridView
         If _lastEditableColumn < 0 Then
             Dim nColumnCount As Integer = ColumnCount()
             For i = nColumnCount - 1 To 0 Step -1
-                If Columns(i).Name = "dgvInsertColumn" Then
-                    'nLastEditableColumn = nLastEditableColumn - 1
+                If (Not Columns(i).Visible) Or Columns(i).ReadOnly Then
+                    ' ignore
                 Else
-                    If (Not Columns(i).Visible) Or Columns(i).ReadOnly Then
-                        ' ignore
-                    Else
-                        _lastEditableColumn = i
-                        Exit For
-                    End If
+                    _lastEditableColumn = i
+                    Exit For
                 End If
             Next
         End If
@@ -695,43 +700,66 @@ Public Class CtDataGridView
         'If TypeOf Columns(columnNo) Is IFindableControl Then
         ' Dim columnData As IFindableControl = Columns(columnNo)
         'columnData = Columns(columnNo)
-        Dim columnDataType = Columns(_columnNo).ValueType
-        _previousColumnSearch = _columnNo
-        dataTypeEnum = GetObjectDataType(columnDataType)
-        'columnData.FindDataType = dataTypeEnum
-        Dim searchForm As CtDataGridFindForm
-        'DgSearch(_columnNo).SearchMode = GetColumnSearchModeType(Columns(_columnNo))
+        If _columnNo > 0 Then
+            Dim columnDataType = Columns(_columnNo).ValueType
+            _previousColumnSearch = _columnNo
+            dataTypeEnum = GetObjectDataType(columnDataType)
+            'columnData.FindDataType = dataTypeEnum
+            Dim searchForm As CtDataGridFindForm
+            'DgSearch(_columnNo).SearchMode = GetColumnSearchModeType(Columns(_columnNo))
 
-        searchForm = New CtDataGridFindForm(Me, _columnNo)
-        Dim screenRectangle As Rectangle
-        Dim formLocation As Point
-        searchForm.SetFieldDescription(Columns(_columnNo).HeaderText)
-        screenRectangle = Screen.PrimaryScreen.WorkingArea
-        searchForm.StartPosition = FormStartPosition.Manual
-        pnt = myForm.PointToScreen(Location)
-        If formLocation.Y + searchForm.Height > screenRectangle.Height Then
-            formLocation.Y = pnt.Y - searchForm.Height + Height
-        End If
-        searchForm.Location = formLocation
-        If searchForm.ShowDialog() = DialogResult.OK Then
-            'Dim searchPlace As IFindableControl.SearchPlaceEnum
-            'Dim ignoreCase As Boolean
-            If Not _existingFind Then
-                _existingFind = True
+            searchForm = New CtDataGridFindForm(Me, _columnNo)
+            Dim screenRectangle As Rectangle
+            Dim formLocation As Point
+            searchForm.SetFieldDescription(Columns(_columnNo).HeaderText)
+            screenRectangle = Screen.PrimaryScreen.WorkingArea
+            searchForm.StartPosition = FormStartPosition.Manual
+            pnt = myForm.PointToScreen(Location)
+            If formLocation.Y + searchForm.Height > screenRectangle.Height Then
+                formLocation.Y = pnt.Y - searchForm.Height + Height
             End If
-            If dataTypeEnum = IFindableControl.SearchModeEnum.TextBox Then
-                DgSearch(_columnNo).BegFindValue = searchForm.txtBegValue.Text
-                'searchPlace = searchForm.SearchLocation
-                'ignoreCase = searchForm.chkIgnoreCase.Checked
-                If DgSearch(_columnNo).TextToSearch <> "" Then
-                    SelectionMode = DataGridViewSelectionMode.FullRowSelect
-                    Try
-                        ClearSelection()
-                        For Each row As DataGridViewRow In Rows
-                            If SearchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField Then
-                                ' search anywhere
-                                If IgnoreCase Then
-                                    If row.Cells(_columnNo).Value IsNot Nothing AndAlso row.Cells(_columnNo).Value.ToString().ToLower().Contains(DgSearch(_columnNo).TextToSearch.ToLower()) Then
+            searchForm.Location = formLocation
+            If searchForm.ShowDialog() = DialogResult.OK Then
+                'Dim searchPlace As IFindableControl.SearchPlaceEnum
+                'Dim ignoreCase As Boolean
+                If Not _existingFind Then
+                    _existingFind = True
+                End If
+                If dataTypeEnum = IFindableControl.SearchModeEnum.TextBox Then
+                    DgSearch(_columnNo).BegFindValue = searchForm.txtBegValue.Text
+                    'searchPlace = searchForm.SearchLocation
+                    'ignoreCase = searchForm.chkIgnoreCase.Checked
+                    If DgSearch(_columnNo).TextToSearch <> "" Then
+                        SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                        Try
+                            ClearSelection()
+                            For Each row As DataGridViewRow In Rows
+                                If SearchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField Then
+                                    ' search anywhere
+                                    If IgnoreCase Then
+                                        If row.Cells(_columnNo).Value IsNot Nothing AndAlso row.Cells(_columnNo).Value.ToString().ToLower().Contains(DgSearch(_columnNo).TextToSearch.ToLower()) Then
+                                            row.Selected = True
+                                            If sw = 0 Then
+                                                'scroll and move to the first matching record
+                                                FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+                                                sw = 1
+                                                _previousSelectedRow = row.Index()
+                                            End If
+                                        End If
+                                    Else
+                                        If row.Cells(_columnNo).Value IsNot Nothing AndAlso row.Cells(_columnNo).Value.ToString().Contains(DgSearch(_columnNo).TextToSearch) Then
+                                            row.Selected = True
+                                            If sw = 0 Then
+                                                'scroll and move to the first matching record
+                                                FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+                                                sw = 1
+                                                _previousSelectedRow = row.Index()
+                                            End If
+                                        End If
+                                    End If
+                                ElseIf SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue Then
+                                    ' exact match
+                                    If row.Cells(_columnNo).Value.ToString().Equals(DgSearch(_columnNo).TextToSearch) Then
                                         row.Selected = True
                                         If sw = 0 Then
                                             'scroll and move to the first matching record
@@ -741,66 +769,44 @@ Public Class CtDataGridView
                                         End If
                                     End If
                                 Else
-                                    If row.Cells(_columnNo).Value IsNot Nothing AndAlso row.Cells(_columnNo).Value.ToString().Contains(DgSearch(_columnNo).TextToSearch) Then
-                                        row.Selected = True
-                                        If sw = 0 Then
-                                            'scroll and move to the first matching record
-                                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
-                                            sw = 1
-                                            _previousSelectedRow = row.Index()
+                                    ' start of text
+                                    If IgnoreCase Then
+                                        If row.Cells(_columnNo).Value.ToString().ToLower().StartsWith(DgSearch(_columnNo).TextToSearch.ToLower()) Then
+                                            row.Selected = True
+                                            If sw = 0 Then
+                                                'scroll and move to the first matching record
+                                                FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+                                                sw = 1
+                                                _previousSelectedRow = row.Index()
+                                            End If
+                                        End If
+                                    Else
+                                        If row.Cells(_columnNo).Value.ToString().StartsWith(DgSearch(_columnNo).TextToSearch) Then
+                                            row.Selected = True
+                                            If sw = 0 Then
+                                                'scroll and move to the first matching record
+                                                FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+                                                sw = 1
+                                                _previousSelectedRow = row.Index()
+                                            End If
                                         End If
                                     End If
                                 End If
-                            ElseIf SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue Then
-                                ' exact match
-                                If row.Cells(_columnNo).Value.ToString().Equals(DgSearch(_columnNo).TextToSearch) Then
-                                    row.Selected = True
-                                    If sw = 0 Then
-                                        'scroll and move to the first matching record
-                                        FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
-                                        sw = 1
-                                        _previousSelectedRow = row.Index()
-                                    End If
-                                End If
-                            Else
-                                ' start of text
-                                If IgnoreCase Then
-                                    If row.Cells(_columnNo).Value.ToString().ToLower().StartsWith(DgSearch(_columnNo).TextToSearch.ToLower()) Then
-                                        row.Selected = True
-                                        If sw = 0 Then
-                                            'scroll and move to the first matching record
-                                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
-                                            sw = 1
-                                            _previousSelectedRow = row.Index()
-                                        End If
-                                    End If
-                                Else
-                                    If row.Cells(_columnNo).Value.ToString().StartsWith(DgSearch(_columnNo).TextToSearch) Then
-                                        row.Selected = True
-                                        If sw = 0 Then
-                                            'scroll and move to the first matching record
-                                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
-                                            sw = 1
-                                            _previousSelectedRow = row.Index()
-                                        End If
-                                    End If
-                                End If
-                            End If
-                        Next
-                        _previousTextSearch = DgSearch(_columnNo).TextToSearch
-                        _previousSearchPlace = SearchPlace
-                    Catch exc As Exception
-                        MessageBox.Show(exc.Message)
-                    End Try
+                            Next
+                            _previousTextSearch = DgSearch(_columnNo).TextToSearch
+                            _previousSearchPlace = SearchPlace
+                        Catch exc As Exception
+                            MessageBox.Show(exc.Message)
+                        End Try
+                    End If
                 End If
             End If
+            If sw = 0 Then
+                Messaging.Show(True, "MsgNoMatchingRecordFound")
+                _existingFind = False
+            End If
+            searchForm.Dispose()
         End If
-        If sw = 0 Then
-            Messaging.Show(True, "MsgNoMatchingRecordFound")
-            _existingFind = False
-        End If
-        searchForm.Dispose()
-        'End If
     End Sub
 
     Private Function ContinuePreviousSearch() As Integer

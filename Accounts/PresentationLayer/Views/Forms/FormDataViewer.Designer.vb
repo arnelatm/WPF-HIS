@@ -88,10 +88,9 @@ Namespace PresentationLayer.Views.Forms
         Me.CDataGridView1.SecurityKey = ""
         Me.CDataGridView1.SequenceColumn = "dgvSequence"
         Me.CDataGridView1.SequenceFieldName = "Sequence"
-        Me.CDataGridView1.ShowFooter = false
-        Me.CDataGridView1.ShowInsertColumnWhenEditing = true
-        Me.CDataGridView1.Size = New System.Drawing.Size(841, 375)
-        Me.CDataGridView1.TabIndex = 4
+        Me.CDataGridView1.ShowFooter = False
+            Me.CDataGridView1.Size = New System.Drawing.Size(841, 375)
+            Me.CDataGridView1.TabIndex = 4
         Me.CDataGridView1.Translatable = true
         '
         'lblIdNo

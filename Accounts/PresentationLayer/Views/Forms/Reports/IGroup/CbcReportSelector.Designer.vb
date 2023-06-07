@@ -72,8 +72,7 @@ Partial Class CbcReportSelector
         Me.DataGridViewReportFiles.SecurityKey = ""
         Me.DataGridViewReportFiles.SequenceColumn = "dgvSequence"
         Me.DataGridViewReportFiles.SequenceFieldName = "Sequence"
-        Me.DataGridViewReportFiles.ShowFooter = false
-        Me.DataGridViewReportFiles.ShowInsertColumnWhenEditing = true
+        Me.DataGridViewReportFiles.ShowFooter = False
         Me.DataGridViewReportFiles.Size = New System.Drawing.Size(444, 332)
         Me.DataGridViewReportFiles.TabIndex = 0
         Me.DataGridViewReportFiles.Translatable = true

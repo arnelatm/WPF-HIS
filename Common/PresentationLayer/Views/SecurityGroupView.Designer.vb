@@ -384,7 +384,6 @@ Namespace PresentationLayer.Views
             Me.DataGridViewGroupAccesses.SequenceColumn = "dgvSequence"
             Me.DataGridViewGroupAccesses.SequenceFieldName = "Sequence"
             Me.DataGridViewGroupAccesses.ShowFooter = False
-            Me.DataGridViewGroupAccesses.ShowInsertColumnWhenEditing = False
             Me.DataGridViewGroupAccesses.Size = New System.Drawing.Size(655, 368)
             Me.DataGridViewGroupAccesses.TabIndex = 178
             Me.DataGridViewGroupAccesses.Translatable = True

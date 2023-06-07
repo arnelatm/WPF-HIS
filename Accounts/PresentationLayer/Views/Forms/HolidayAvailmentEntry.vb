@@ -137,14 +137,12 @@ Namespace PresentationLayer.Views.Forms
         Private Sub BindApprovalLeaveHistory()
             SuspendLayout()
             bsHolidayAvailmentApprovalHistory.DataSource = Nothing
-            DataGridViewApprovalHistory.ShowInsertColumnWhenEditing = False
             DataGridViewApprovalHistory.Refresh()
             bsHolidayAvailmentApprovalHistory.DataSource = ApprovalHistory
             bsHolidayAvailmentApprovalHistory.AllowNew = True
             With DataGridViewApprovalHistory
                 .AutoGenerateColumns = False
                 .DataSource = bsHolidayAvailmentApprovalHistory
-                .RemoveInsertColumn()
             End With
             With DataGridViewApprovalHistory.Columns
                 dgvEnteredBy.DataSource = Users

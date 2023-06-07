@@ -1196,10 +1196,9 @@
         Me.DataGridViewPhoneDisplay.SecurityKey = ""
         Me.DataGridViewPhoneDisplay.SequenceColumn = "dgvSequencePhoneDisplay"
         Me.DataGridViewPhoneDisplay.SequenceFieldName = "Sequence"
-        Me.DataGridViewPhoneDisplay.ShowFooter = false
-        Me.DataGridViewPhoneDisplay.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewPhoneDisplay.Size = New System.Drawing.Size(363, 140)
-        Me.DataGridViewPhoneDisplay.TabIndex = 291
+        Me.DataGridViewPhoneDisplay.ShowFooter = False
+            Me.DataGridViewPhoneDisplay.Size = New System.Drawing.Size(363, 140)
+            Me.DataGridViewPhoneDisplay.TabIndex = 291
         Me.DataGridViewPhoneDisplay.Translatable = true
         '
         'dgvSequencePhoneDisplay
@@ -2826,10 +2825,9 @@
         Me.DataGridViewEarnings.SecurityKey = ""
         Me.DataGridViewEarnings.SequenceColumn = "dgvSequenceEarning"
         Me.DataGridViewEarnings.SequenceFieldName = "Sequence"
-        Me.DataGridViewEarnings.ShowFooter = true
-        Me.DataGridViewEarnings.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewEarnings.Size = New System.Drawing.Size(669, 361)
-        Me.DataGridViewEarnings.TabIndex = 5
+        Me.DataGridViewEarnings.ShowFooter = True
+            Me.DataGridViewEarnings.Size = New System.Drawing.Size(669, 361)
+            Me.DataGridViewEarnings.TabIndex = 5
         Me.DataGridViewEarnings.Translatable = true
         '
         'dgvSequenceEarning
@@ -2998,10 +2996,9 @@
         Me.DataGridViewDeductions.SecurityKey = ""
         Me.DataGridViewDeductions.SequenceColumn = "dgvSequenceDeduction"
         Me.DataGridViewDeductions.SequenceFieldName = "Sequence"
-        Me.DataGridViewDeductions.ShowFooter = false
-        Me.DataGridViewDeductions.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewDeductions.Size = New System.Drawing.Size(663, 355)
-        Me.DataGridViewDeductions.TabIndex = 2
+        Me.DataGridViewDeductions.ShowFooter = False
+            Me.DataGridViewDeductions.Size = New System.Drawing.Size(663, 355)
+            Me.DataGridViewDeductions.TabIndex = 2
         Me.DataGridViewDeductions.Translatable = true
         '
         'dgvSequenceDeduction
@@ -3175,10 +3172,9 @@
         Me.DataGridViewPhones.SecurityKey = ""
         Me.DataGridViewPhones.SequenceColumn = "dgvSequence"
         Me.DataGridViewPhones.SequenceFieldName = "Sequence"
-        Me.DataGridViewPhones.ShowFooter = false
-        Me.DataGridViewPhones.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewPhones.Size = New System.Drawing.Size(663, 355)
-        Me.DataGridViewPhones.TabIndex = 273
+        Me.DataGridViewPhones.ShowFooter = False
+            Me.DataGridViewPhones.Size = New System.Drawing.Size(663, 355)
+            Me.DataGridViewPhones.TabIndex = 273
         Me.DataGridViewPhones.Translatable = true
         '
         'dgvSequence
@@ -3371,10 +3367,9 @@
         Me.DataGridViewLeaveCredits.SequenceColumn = "dgvSequenceLeaveCredits"
         Me.DataGridViewLeaveCredits.SequenceFieldName = "Sequence"
         Me.DataGridViewLeaveCredits.ShowCellErrors = false
-        Me.DataGridViewLeaveCredits.ShowFooter = false
-        Me.DataGridViewLeaveCredits.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewLeaveCredits.Size = New System.Drawing.Size(663, 355)
-        Me.DataGridViewLeaveCredits.TabIndex = 0
+        Me.DataGridViewLeaveCredits.ShowFooter = False
+            Me.DataGridViewLeaveCredits.Size = New System.Drawing.Size(663, 355)
+            Me.DataGridViewLeaveCredits.TabIndex = 0
         Me.DataGridViewLeaveCredits.Translatable = true
         '
         'dgvSequenceLeaveCredits
@@ -3591,10 +3586,9 @@
         Me.DataGridViewDocuments.SequenceColumn = "dgvSequenceDocument"
         Me.DataGridViewDocuments.SequenceFieldName = "Sequence"
         Me.DataGridViewDocuments.ShowCellErrors = false
-        Me.DataGridViewDocuments.ShowFooter = false
-        Me.DataGridViewDocuments.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewDocuments.Size = New System.Drawing.Size(663, 355)
-        Me.DataGridViewDocuments.TabIndex = 1
+        Me.DataGridViewDocuments.ShowFooter = False
+            Me.DataGridViewDocuments.Size = New System.Drawing.Size(663, 355)
+            Me.DataGridViewDocuments.TabIndex = 1
         Me.DataGridViewDocuments.Translatable = true
         '
         'dgvSequenceDocument

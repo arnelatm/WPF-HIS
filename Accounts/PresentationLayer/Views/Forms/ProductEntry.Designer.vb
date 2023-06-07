@@ -542,7 +542,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewProductUnits.SequenceColumn = "dgvSequence"
             Me.DataGridViewProductUnits.SequenceFieldName = "Sequence"
             Me.DataGridViewProductUnits.ShowFooter = False
-            Me.DataGridViewProductUnits.ShowInsertColumnWhenEditing = True
             Me.DataGridViewProductUnits.Translatable = True
             '
             'dgvSequence

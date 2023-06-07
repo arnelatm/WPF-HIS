@@ -492,13 +492,12 @@ Namespace PresentationLayer.Views.Forms
         Me.DataGridViewJournalItems.SecurityKey = ""
         Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
         Me.DataGridViewJournalItems.SequenceFieldName = "Sequence"
-        Me.DataGridViewJournalItems.ShowFooter = false
-        Me.DataGridViewJournalItems.ShowInsertColumnWhenEditing = true
-        Me.DataGridViewJournalItems.Translatable = true
-        '
-        'CFlowLayout4
-        '
-        Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
+        Me.DataGridViewJournalItems.ShowFooter = False
+            Me.DataGridViewJournalItems.Translatable = True
+            '
+            'CFlowLayout4
+            '
+            Me.CFlowLayout4.BackColor = System.Drawing.Color.Transparent
         Me.CFlowLayout4.Controls.Add(Me.floJournalHeader)
         Me.CFlowLayout4.Controls.Add(Me.DataGridViewJournalItems)
         resources.ApplyResources(Me.CFlowLayout4, "CFlowLayout4")

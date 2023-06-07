@@ -151,7 +151,6 @@
             Me.DataGridViewPmrPatientDisplay.SequenceColumn = "dgvSequence"
             Me.DataGridViewPmrPatientDisplay.SequenceFieldName = "Sequence"
             Me.DataGridViewPmrPatientDisplay.ShowFooter = False
-            Me.DataGridViewPmrPatientDisplay.ShowInsertColumnWhenEditing = True
             Me.DataGridViewPmrPatientDisplay.Size = New System.Drawing.Size(777, 431)
             Me.DataGridViewPmrPatientDisplay.TabIndex = 11
             Me.DataGridViewPmrPatientDisplay.Translatable = True
