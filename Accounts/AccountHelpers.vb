@@ -159,6 +159,8 @@ Namespace Accounts
             Select Case tableName
                 Case "PhoneType"
                     Return True
+                Case "Bank"
+                    Return True
                 Case Else
                     Return False
             End Select

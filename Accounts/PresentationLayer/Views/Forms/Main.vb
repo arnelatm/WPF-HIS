@@ -205,10 +205,6 @@ Namespace PresentationLayer.Views.Forms
             cForm.Show()
         End Sub
 
-        Private Sub BanksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBanks.Click
-            RunForm(Of BankEntryTv, BankPresenter(Of BankModel))()
-        End Sub
-
         Private Sub BankTransferToolStripMenuItem_Click(sender As Object, e As EventArgs)
             Dim formToRun = New DisbursementJournalEntry("CdJournal")
             formToRun.Presenter = New DisbursementJournalPresenter(Of DisbursementJournalModel)(formToRun, "CdJournal")
@@ -388,7 +384,7 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of RevenueGroupEntryTv, RevenueGroupPresenter(Of RevenueGroupModel))()
         End Sub
 
-        Private Sub RunBasicForm(ByVal tableOrViewName As String, ByVal formCaption As String, Optional ByVal withNotes As Boolean = False)
+        Private Sub RunBasicForm(ByVal tableOrViewName As String, ByVal formCaption As String)
             RunBaseForm(Of BasicEntry, BasicPresenter(Of BasicModel))(tableOrViewName, formCaption)
         End Sub
 
@@ -1149,8 +1145,12 @@ Namespace PresentationLayer.Views.Forms
             RunBasicForm("Warehouse", "Warehouse Entry")
         End Sub
 
+        Private Sub BanksToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBanks.Click
+            RunBasicForm("Bank", "Bank Entry")
+        End Sub
+
         Private Sub PhoneTypesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPhoneTypes.Click
-            RunBasicForm("PhoneType", "Phone Type Entry", True)
+            RunBasicForm("PhoneType", "Phone Type Entry")
         End Sub
 
         Private Sub ToolStripMenuItemPurchase_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPurchase.Click

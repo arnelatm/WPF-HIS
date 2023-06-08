@@ -27,8 +27,6 @@ Public Class MappingProfileAccounts
         CreateMap(Of ArOpenInvoice, ArOpenInvoiceModel)().ReverseMap()
         CreateMap(Of AttendanceItem, AttendanceItemModel)().ReverseMap()
         CreateMap(Of AttendanceItemModel, AttendanceItemView)().ReverseMap()
-        CreateMap(Of Bank, BankModel)().ReverseMap()
-        CreateMap(Of BankModel, IBankView)().ReverseMap()
         CreateMap(Of Basic, BasicModel)().ReverseMap()
         CreateMap(Of BasicModel, IBasicView)().ReverseMap()
         CreateMap(Of CashReceiptJournal, CashReceiptJournalModel)().ReverseMap()
