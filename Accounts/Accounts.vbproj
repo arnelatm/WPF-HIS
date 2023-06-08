@@ -245,6 +245,8 @@
     <Compile Include="BusinessLayer\IGroup\Lab_InvoiceGroup.vb" />
     <Compile Include="BusinessLayer\IGroup\ItemDetails.vb" />
     <Compile Include="BusinessLayer\ProductUnit.vb" />
+    <Compile Include="BusinessLayer\Sale.vb" />
+    <Compile Include="BusinessLayer\SaleDetail.vb" />
     <Compile Include="BusinessLayer\PurchaseDetail.vb" />
     <Compile Include="BusinessLayer\JournalPrefix.vb" />
     <Compile Include="BusinessLayer\EmployeeLeave.vb" />
@@ -308,6 +310,8 @@
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\DoctorDao.vb" />
     <Compile Include="DataLayer\AdoNet\DosagePrintingDao.vb" />
+    <Compile Include="DataLayer\AdoNet\SaleDetailDao.vb" />
+    <Compile Include="DataLayer\AdoNet\SaleDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\DrugAcceptDao.vb" />
     <Compile Include="DataLayer\AdoNet\DosageDao.vb" />
@@ -455,7 +459,9 @@
     <Compile Include="PresentationLayer\Models\IGroup\Lab_InvoiceGroupModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\ItemDetailsModel.vb" />
     <Compile Include="PresentationLayer\Models\ProductUnitModel.vb" />
+    <Compile Include="PresentationLayer\Models\SaleDetailModel.vb" />
     <Compile Include="PresentationLayer\Models\PurchaseDetailModel.vb" />
+    <Compile Include="PresentationLayer\Models\SaleModel.vb" />
     <Compile Include="PresentationLayer\Models\ReportSelectorModel.vb" />
     <Compile Include="PresentationLayer\Models\ReportModel.vb" />
     <Compile Include="PresentationLayer\Models\ShiftSummaryModel.vb" />
@@ -537,6 +543,14 @@
     <Compile Include="PresentationLayer\Views\EmployeeLeaveCreditView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeePayElementView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeDocumentView.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\SaleEntry.Designer.vb">
+      <DependentUpon>SaleEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\SaleEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Interfaces\ISaleDetailView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\ISaleView.vb" />
     <Compile Include="PresentationLayer\Views\ProductUnitView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\ApJournalEntry.designer.vb">
       <DependentUpon>ApJournalEntry.vb</DependentUpon>
@@ -974,6 +988,7 @@
     <Compile Include="PresentationLayer\Views\HolidayTransferItemView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeLeaveApprovalHistoryView.vb" />
     <Compile Include="PresentationLayer\Views\Lab_InvoiceDetailsView.vb" />
+    <Compile Include="PresentationLayer\Views\SaleDetailView.vb" />
     <Compile Include="PresentationLayer\Views\PurchaseDetailView.vb" />
     <Compile Include="PresentationLayer\Views\PcJournalView.vb" />
     <Compile Include="PresentationLayer\Views\PayElementItemView.vb" />
@@ -1908,6 +1923,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ProductEntry.resx">
       <DependentUpon>ProductEntry.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\SaleEntry.resx">
+      <DependentUpon>SaleEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PurchaseEntry.resx">

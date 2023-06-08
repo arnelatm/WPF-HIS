@@ -143,6 +143,8 @@ Public Class MappingProfileAccounts
         CreateMap(Of PurchaseModel, IPurchaseView)().ReverseMap()
         CreateMap(Of RecurringPayElement, RecurringPayElementModel)().ReverseMap()
         CreateMap(Of RecurringPayElementModel, IRecurringPayElementView)().ReverseMap()
+        CreateMap(Of Sale, SaleModel)().ReverseMap()
+        CreateMap(Of SaleModel, ISaleView)().ReverseMap()
         CreateMap(Of SalesDeposit, SalesDepositModel)().ReverseMap()
         CreateMap(Of SalesDepositModel, SalesDepositView)(MemberList.Source).ReverseMap()
         CreateMap(Of SalesJournal, SalesJournalModel)().ReverseMap()
