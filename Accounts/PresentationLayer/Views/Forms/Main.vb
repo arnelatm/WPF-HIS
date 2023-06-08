@@ -362,9 +362,6 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of DisbursementJournalEntry, DisbursementJournalPresenter(Of DisbursementJournalModel), String)("PcJournal")
         End Sub
 
-        Private Sub PhoneTypesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPhoneTypes.Click
-            RunForm(Of PhoneTypeEntryTv, PhoneTypePresenter(Of PhoneTypeModel))()
-        End Sub
 
         Private Sub QuarterlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTBQuarterly.Click
             RunForm(Of TrialBalance, String)("Q")
@@ -391,8 +388,8 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of RevenueGroupEntryTv, RevenueGroupPresenter(Of RevenueGroupModel))()
         End Sub
 
-        Private Sub RunBasicForm(ByVal tableOrViewName As String, ByVal formCaption As String)
-            RunBaseForm(Of BasicEntry, BasicPresenter(Of BasicModel))(tableOrViewName, formCaption, False)
+        Private Sub RunBasicForm(ByVal tableOrViewName As String, ByVal formCaption As String, Optional ByVal withNotes As Boolean = False)
+            RunBaseForm(Of BasicEntry, BasicPresenter(Of BasicModel))(tableOrViewName, formCaption)
         End Sub
 
         Private Sub SalesDepositTypesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSalesDepositTypes.Click
@@ -897,8 +894,8 @@ Namespace PresentationLayer.Views.Forms
             ShowEntryForm(formToRun)
         End Sub
 
-        Private Overloads Sub RunBaseForm(Of TV, TP)(tableName As String, formName As String, withNotes As Boolean)
-            Dim formToRun = Activator.CreateInstance(GetType(TV), tableName, formName, withNotes)
+        Private Overloads Sub RunBaseForm(Of TV, TP)(tableName As String, formName As String)
+            Dim formToRun = Activator.CreateInstance(GetType(TV), tableName, formName)
             Dim pType As Type = GetType(TP)
             formToRun.Presenter = Activator.CreateInstance(pType, {formToRun, tableName})
             ShowEntryForm(formToRun)
@@ -1150,6 +1147,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ToolStripMenuItemWarehouse_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemWarehouse.Click
             RunBasicForm("Warehouse", "Warehouse Entry")
+        End Sub
+
+        Private Sub PhoneTypesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPhoneTypes.Click
+            RunBasicForm("PhoneType", "Phone Type Entry", True)
         End Sub
 
         Private Sub ToolStripMenuItemPurchase_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPurchase.Click

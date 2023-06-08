@@ -570,7 +570,7 @@ Namespace PresentationLayer.Views.Forms
             Dim findText = dgv.CurrentRow.Cells("dgvProductName").EditedFormattedValue
             If findText.Contains("<GS>") Then
                 Dim scannedProduct As Object = New ExpandoObject
-                scannedProduct = GetScannedData(findText)
+                scannedProduct = Accounts.AccountHelpers.GetScannedData(findText)
                 Dim productCode As String = ""
                 RaiseEvent GTinScanned(scannedProduct.GTin, bsPurchaseDetails, productCode)
                 If productCode IsNot Nothing Then

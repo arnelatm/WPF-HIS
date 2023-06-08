@@ -15,34 +15,51 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
         Private ReadOnly _tableOrViewName As String
+        Private Property WithNotes As Boolean
+        Private Property LimitToBranch As Boolean
 
         Public Sub New(ByVal tableName As Object)
             _tableOrViewName = tableName.ToString()
+            WithNotes = IIf(Accounts.AccountHelpers.BasicWithNotes(tableName), True, False)
+            LimitToBranch = IIf(Accounts.AccountHelpers.LimitToBranch(tableName), True, False)
         End Sub
 
         Public Function GetRecordByIdNo(idNo) As Basic Implements IDao(Of Basic).GetRecordByIdNo
             Dim fields As String = "IdNo," + _tableOrViewName + "Code," + _tableOrViewName + "Name," + _tableOrViewName + "NameAra"
-            If GlobalFunctions.LimitToBranch(_tableOrViewName) Then
+            If WithNotes Then
+                fields += ",Notes"
+            End If
+            If LimitToBranch Then
                 fields += ",BranchIdNo"
             End If
             Dim sql As String = "SELECT " & fields &
                     " FROM " & _tableOrViewName &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
-            If GlobalFunctions.LimitToBranch(_tableOrViewName) Then
-                Return Db.Read(sql, MakeBranch, params).FirstOrDefault()
+            If LimitToBranch Then
+                If WithNotes Then
+                    Return Db.Read(sql, MakeBranchNotes, params).FirstOrDefault()
+                Else
+                    Return Db.Read(sql, MakeBranch, params).FirstOrDefault()
+                End If
             Else
-                Return Db.Read(sql, Make, params).FirstOrDefault()
+                If WithNotes Then
+                    Return Db.Read(sql, MakeNotes, params).FirstOrDefault()
+                Else
+                    Return Db.Read(sql, Make, params).FirstOrDefault()
+                End If
             End If
         End Function
 
         Public Function UpdateRecord(ByRef Basic As Basic) As Integer Implements IDao(Of Basic).UpdateRecord
+            Dim withNotes As Boolean = IIf(Accounts.AccountHelpers.BasicWithNotes(_tableOrViewName), True, False)
             Dim fields As String = _tableOrViewName + "Code = @Code," &
                                    _tableOrViewName + "Name = @Name," &
                                    _tableOrViewName + "NameAra = @NameAra" &
-                                   IIf(GlobalFunctions.LimitToBranch(_tableOrViewName), ",BranchIdNo = @BranchIdNo", "")
+                                   IIf(withNotes, ",Notes = @Notes", "") &
+                                   IIf(LimitToBranch, ",BranchIdNo = @BranchIdNo", "")
             Dim sql As String = " UPDATE " & _tableOrViewName & " SET " + fields + "  WHERE IdNo = @IdNo"
-            If GlobalFunctions.LimitToBranch(_tableOrViewName) Then
+            If LimitToBranch Then
                 Return Db.Update(sql, TakeBranch(Basic))
             Else
                 Return Db.Update(sql, Take(Basic))
@@ -51,15 +68,20 @@ Namespace DataLayer.AdoNet
 
         Public Function AddRecord(ByRef Basic As Basic) As Integer Implements IDao(Of Basic).AddRecord
             Dim fields As String = _tableOrViewName + "Code," + _tableOrViewName + "Name," + _tableOrViewName + "NameAra"
-            Dim values As String = "@Code,@Name,@NameAra" + IIf(LimitToBranch(_tableOrViewName), ",@BranchIdNo", "")
-            If GlobalFunctions.LimitToBranch(_tableOrViewName) Then
+            Dim values As String = "@Code,@Name,@NameAra"
+            If WithNotes Then
+                fields += ",Notes"
+                values += ",@BranchIdNo"
+            End If
+            If LimitToBranch Then
                 fields += ",BranchIdNo"
+                values += ",@BranchIdNo"
             End If
             Dim sql As String =
                     " INSERT INTO " & _tableOrViewName &
                     " (" & fields & ")" &
                     " VALUES (" & values & ")"
-            If GlobalFunctions.LimitToBranch(_tableOrViewName) Then
+            If LimitToBranch Then
                 Return Db.Insert(sql, TakeBranch(Basic))
             Else
                 Return Db.Insert(sql, Take(Basic))
@@ -75,6 +97,16 @@ Namespace DataLayer.AdoNet
             .NameAra = Extensions.AsString(reader(_tableOrViewName + "NameAra"))
             }
 
+        Private ReadOnly MakeNotes As Func(Of IDataReader, Basic) =
+                                    Function(reader) _
+            New Basic() With {
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .Code = Extensions.AsString(reader(_tableOrViewName + "Code")),
+            .Name = Extensions.AsString(reader(_tableOrViewName + "Name")),
+            .NameAra = Extensions.AsString(reader(_tableOrViewName + "NameAra")),
+            .Notes = Extensions.AsString(reader("Notes"))
+            }
+
         Private ReadOnly MakeBranch As Func(Of IDataReader, Basic) =
                                     Function(reader) _
             New Basic() With {
@@ -85,24 +117,58 @@ Namespace DataLayer.AdoNet
             .NameAra = Extensions.AsString(reader(_tableOrViewName + "NameAra"))
             }
 
+        Private ReadOnly MakeBranchNotes As Func(Of IDataReader, Basic) =
+                                    Function(reader) _
+            New Basic() With {
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .BranchIdNo = Extensions.AsInt(Of Int16)(reader("BranchIdNo")),
+            .Code = Extensions.AsString(reader(_tableOrViewName + "Code")),
+            .Name = Extensions.AsString(reader(_tableOrViewName + "Name")),
+            .NameAra = Extensions.AsString(reader(_tableOrViewName + "NameAra")),
+            .Notes = Extensions.AsString(reader("Notes"))
+            }
+
         Private Function Take(Basic As Basic) As Object()
-            Return New Object() {
+            If WithNotes Then
+                Return New Object() {
+                                    "@IdNo", Basic.IdNo,
+                                    "@Code", Basic.Code,
+                                    "@Name", Basic.Name,
+                                    "@NameAra", Basic.NameAra,
+                                    "@Notes", Basic.Notes
+                                }
+            Else
+                Return New Object() {
                                     "@IdNo", Basic.IdNo,
                                     "@Code", Basic.Code,
                                     "@Name", Basic.Name,
                                     "@NameAra", Basic.NameAra
                                 }
+            End If
         End Function
 
         Private Function TakeBranch(Basic As Basic) As Object()
-            Return New Object() {
+            If WithNotes Then
+                Return New Object() {
+                                    "@BranchIdNo", Basic.BranchIdNo,
+                                    "@IdNo", Basic.IdNo,
+                                    "@Code", Basic.Code,
+                                    "@Name", Basic.Name,
+                                    "@NameAra", Basic.NameAra,
+                                    "@Notes", Basic.Notes
+                                }
+            Else
+                Return New Object() {
                                     "@BranchIdNo", Basic.BranchIdNo,
                                     "@IdNo", Basic.IdNo,
                                     "@Code", Basic.Code,
                                     "@Name", Basic.Name,
                                     "@NameAra", Basic.NameAra
                                 }
+
+            End If
         End Function
+
 
     End Class
 

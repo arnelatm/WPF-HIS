@@ -1951,14 +1951,4 @@ Public Module GlobalFunctions
 #End Region
 
 
-    Public Function LimitToBranch(tableName As String) As Boolean
-        Select Case tableName
-            Case "Warehouse"
-                Return True
-            Case Else
-                Return False
-        End Select
-    End Function
-
-
 End Module

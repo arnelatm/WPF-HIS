@@ -8,14 +8,14 @@ Namespace PresentationLayer.Views.Forms
     Public Class BasicEntry
         Implements IBasicView
 
-        Public Sub New(ByVal tableOrViewName As String, ByVal formCaption As String, ByVal withNotes As Boolean)
+        Public Sub New(ByVal tableOrViewName As String, ByVal formCaption As String)
             MyBase.New()
 
             ' This call is required by the designer.
             InitializeComponent()
             FirstControl = TxtCode
             Me.Text = Messaging.TranslateCaption(formCaption)
-            If withNotes Then
+            If Accounts.AccountHelpers.BasicWithNotes(tableOrViewName) Then
                 TxtNote.Visible = True
                 lblNote.Visible = True
             Else

@@ -170,9 +170,6 @@
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.7.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
-    </Reference>
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
@@ -218,6 +215,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountHelpers.vb" />
     <Compile Include="BusinessLayer\BaseBO.vb" />
     <Compile Include="BusinessLayer\AccountReconciliation.vb" />
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
@@ -537,7 +535,6 @@
     <Compile Include="PresentationLayer\Presenters\PensionSchemePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PensionProviderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DisbursementJournalPresenter.vb" />
-    <Compile Include="PresentationLayer\AccountHelpers.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeLeaveApprovalItemView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeLeaveCreditView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeePayElementView.vb" />

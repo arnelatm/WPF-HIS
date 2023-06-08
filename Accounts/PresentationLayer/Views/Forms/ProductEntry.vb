@@ -230,7 +230,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub txtGTIN_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles txtGTIN.Validating
             If txtGTIN.Text.Contains("<GS>") Then
-                txtGTIN.Text = ExtractGTin(txtGTIN.Text)
+                txtGTIN.Text = Accounts.AccountHelpers.ExtractGTin(txtGTIN.Text)
             End If
         End Sub
 
