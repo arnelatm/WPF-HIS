@@ -277,7 +277,6 @@
     <Compile Include="BusinessLayer\ErJournal.vb" />
     <Compile Include="BusinessLayer\ArJournal.vb" />
     <Compile Include="BusinessLayer\ArOpenInvoice.vb" />
-    <Compile Include="BusinessLayer\Bank.vb" />
     <Compile Include="BusinessLayer\BusinessRules\ValidateAccounts.vb" />
     <Compile Include="BusinessLayer\BusinessRules\ValidateParentId.vb" />
     <Compile Include="BusinessLayer\DepositType.vb" />
@@ -358,7 +357,6 @@
     <Compile Include="DataLayer\AdoNet\PayGroupDao.vb" />
     <Compile Include="DataLayer\AdoNet\LeaveDao.vb" />
     <Compile Include="DataLayer\AdoNet\ErJournalDao.vb" />
-    <Compile Include="DataLayer\AdoNet\BankDao.vb" />
     <Compile Include="DataLayer\AdoNet\DepositTypeDao.vb" />
     <Compile Include="DataLayer\AdoNet\CashReceiptJournalDao.vb" />
     <Compile Include="DataLayer\AdoNet\AccountDao.vb" />
@@ -1052,12 +1050,6 @@
     <Compile Include="PresentationLayer\Views\Forms\ArJournalReport.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\BankEntryTv.Designer.vb">
-      <DependentUpon>BankEntryTv.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\BankEntryTv.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\CashReceiptJournalEntry.Designer.vb">
       <DependentUpon>CashReceiptJournalEntry.vb</DependentUpon>
     </Compile>
@@ -1215,7 +1207,6 @@
     <Compile Include="PresentationLayer\Models\ERJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\ARJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\ArOpenInvoiceModel.vb" />
-    <Compile Include="PresentationLayer\Models\BankModel.vb" />
     <Compile Include="PresentationLayer\Models\DepositTypeModel.vb" />
     <Compile Include="PresentationLayer\Models\CashReceiptJournalModel.vb" />
     <Compile Include="PresentationLayer\Models\CategoryModel.vb" />
@@ -1241,7 +1232,6 @@
     <Compile Include="PresentationLayer\Presenters\ApJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ErJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ArJournalPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\BankPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CashReceiptJournalItemsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CashReceiptJournalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CategoryPresenter.vb" />
@@ -1277,7 +1267,6 @@
     <Compile Include="PresentationLayer\Views\Interfaces\ILeaveView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IErJournalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IArJournalView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\IBankView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IBranchView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDepositTypeView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ICashReceiptJournalView.vb" />
@@ -1956,10 +1945,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\CodeGroupEntryTv.resx">
       <DependentUpon>CodeGroupEntryTv.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\BankEntryTv.resx">
-      <DependentUpon>BankEntryTv.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\BasicEntry.resx">
