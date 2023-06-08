@@ -28,6 +28,7 @@ Namespace BusinessLayer
         Public Property Name As String
         Public Property NameAra As String
         Public Property Code As String
+        Public Property Notes As String
         Public Property BranchIdNo As Int16
         'Public Property Notes As String
 

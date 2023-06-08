@@ -86,10 +86,16 @@ Public Class CtDataGridView
         End Get
         Set(value As Boolean)
             _editingMode = value
-            If DisplayOnly OrElse Not value Then
-                DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                [ReadOnly] = True
+            If value Then
+                If DisplayOnly Then
+                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                    [ReadOnly] = True
+                Else
+                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                    [ReadOnly] = False
+                End If
             Else
                 DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                 DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor

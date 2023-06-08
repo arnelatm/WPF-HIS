@@ -23,7 +23,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub CreateSpecialAccountDataSource(fieldName As String, specialAccountArray As String())
             Dim filter As String
-            filter = CreateSpecialAccountFilterKey(specialAccountArray)
+            filter = Accounts.AccountHelpers.CreateSpecialAccountFilterKey(specialAccountArray)
             CreateDataSource("Account", fieldName, filter)
         End Sub
 

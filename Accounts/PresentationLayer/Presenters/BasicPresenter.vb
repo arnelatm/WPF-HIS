@@ -14,7 +14,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IBasicView, tableOrViewName As String)
             MyBase.New(view)
-            If LimitToBranch(tableOrViewName) Then
+            If Accounts.AccountHelpers.LimitToBranch(tableOrViewName) Then
                 DataFilter = "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString()
             Else
                 DataFilter = ""
