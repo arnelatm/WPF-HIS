@@ -29,7 +29,6 @@ Namespace PresentationLayer.Views.Interfaces
         Property UnitCost As Decimal
         Property VatAmount As Decimal
         Property VatPercent As Decimal
-        Property WarehouseIdNo As Int16
 
     End Interface
 

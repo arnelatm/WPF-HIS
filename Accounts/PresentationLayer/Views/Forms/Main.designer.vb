@@ -226,6 +226,9 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemSales = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemSalesEntry = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemSalesReturn = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -649,7 +652,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemTransactions
             '
-            Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPettyCash, Me.ToolStripMenuItemCashDisbursementEntry, Me.ToolStripMenuItemAccountsPayableEntry, Me.ToolStripMenuItemAccountsReceivableEntry, Me.ToolStripMenuItemCashReceiptEntry, Me.ToolStripMenuItemEmployeeReceivable, Me.ToolStripMenuItemGeneralJournalEntry, Me.ToolStripMenuItemPurchases, Me.ToolStripMenuItemSalesJournalEntry, Me.ToolStripMenuItemAccountReconciliation, Me.ToolStripMenuItemPostPettyCashAccount, Me.ToolStripMenuItemClosing, Me.ToolStripMenuItemHR, Me.ToolStripMenuItemPayrollTransaction, Me.ToolStripMenuItemShiftSummaryEntry, Me.ToolStripSeparator2, Me.ToolStripMenuItemClosePettyCashFund, Me.ToolStripMenuItemLaboratory, Me.ToolStripMenuItemPharmacy})
+            Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPettyCash, Me.ToolStripMenuItemCashDisbursementEntry, Me.ToolStripMenuItemAccountsPayableEntry, Me.ToolStripMenuItemAccountsReceivableEntry, Me.ToolStripMenuItemCashReceiptEntry, Me.ToolStripMenuItemEmployeeReceivable, Me.ToolStripMenuItemGeneralJournalEntry, Me.ToolStripMenuItemSales, Me.ToolStripMenuItemPurchases, Me.ToolStripMenuItemSalesJournalEntry, Me.ToolStripMenuItemAccountReconciliation, Me.ToolStripMenuItemPostPettyCashAccount, Me.ToolStripMenuItemClosing, Me.ToolStripMenuItemHR, Me.ToolStripMenuItemPayrollTransaction, Me.ToolStripMenuItemShiftSummaryEntry, Me.ToolStripSeparator2, Me.ToolStripMenuItemClosePettyCashFund, Me.ToolStripMenuItemLaboratory, Me.ToolStripMenuItemPharmacy})
             Me.ToolStripMenuItemTransactions.Name = "ToolStripMenuItemTransactions"
             resources.ApplyResources(Me.ToolStripMenuItemTransactions, "ToolStripMenuItemTransactions")
             '
@@ -1266,6 +1269,22 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
+            'ToolStripMenuItemSales
+            '
+            Me.ToolStripMenuItemSales.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemSalesEntry, Me.ToolStripMenuItemSalesReturn})
+            Me.ToolStripMenuItemSales.Name = "ToolStripMenuItemSales"
+            resources.ApplyResources(Me.ToolStripMenuItemSales, "ToolStripMenuItemSales")
+            '
+            'ToolStripMenuItemSalesEntry
+            '
+            Me.ToolStripMenuItemSalesEntry.Name = "ToolStripMenuItemSalesEntry"
+            resources.ApplyResources(Me.ToolStripMenuItemSalesEntry, "ToolStripMenuItemSalesEntry")
+            '
+            'ToolStripMenuItemSalesReturn
+            '
+            Me.ToolStripMenuItemSalesReturn.Name = "ToolStripMenuItemSalesReturn"
+            resources.ApplyResources(Me.ToolStripMenuItemSalesReturn, "ToolStripMenuItemSalesReturn")
+            '
             'Main
             '
             Me.AllowDrop = True
@@ -1274,8 +1293,8 @@ Namespace PresentationLayer.Views.Forms
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
             Me.Controls.Add(Me.ToolStrip)
             Me.Controls.Add(Me.AccountsMenu)
-            Me.IsMdiContainer = true
-        Me.MenuFormName = "Menu"
+            Me.IsMdiContainer = True
+            Me.MenuFormName = "Menu"
         Me.Name = "Main"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
@@ -1489,5 +1508,8 @@ End Sub
         Friend WithEvents ToolStripMenuItemPurchases As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemPurchase As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemPurchaseReturn As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemSales As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemSalesEntry As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemSalesReturn As ToolStripMenuItem
     End Class
 End NameSpace
