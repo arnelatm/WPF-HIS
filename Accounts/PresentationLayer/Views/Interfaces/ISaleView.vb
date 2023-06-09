@@ -12,7 +12,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property DateCreated As DateTime?
         Property DueDate As Date?
         Property IdNo As Int32
-        Property InvoiceNo As Int32
+        Property InvoiceNo As String
         Property PatientIdNo As Int32?
         Property PatientName As String
         Property Posted As Boolean
@@ -21,7 +21,6 @@ Namespace PresentationLayer.Views.Interfaces
         Property UnitsByCode As Object
         Property UnitsByProduct As Object
         Property VatAmount As Decimal
-        Property VatNumber As String
         Property WarehouseIdNo As Int16
         ReadOnly Property BranchIdNo As Int16
         Property SaleDetails As List(Of SaleDetailView)

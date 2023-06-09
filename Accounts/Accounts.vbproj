@@ -496,6 +496,7 @@
     <Compile Include="PresentationLayer\Models\PensionSchemeModel.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\SalePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchasePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DoctorPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DosagePrintingPresenter.vb" />

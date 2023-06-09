@@ -15,9 +15,6 @@ Namespace BusinessLayer
                 AddRule(New ValidateRequired("TransactionDate"))
                 AddRule(New ValidateRange("TransactionDate", Date.MinValue, Date.Today, ValidationDataType.Date))
                 AddRule(New ValidateRequired("CustomerIdNo"))
-                AddRule(New ValidateRequired("InvoiceNo"))
-                AddRule(New ValidateVatNumber("VatNumber"))
-                AddRule(New ValidateIfRequired("VatNumber", "VatAmount", ValidationDataType.Decimal, ValidationOperator.NotEqual, 0))
             End If
         End Sub
 
@@ -30,16 +27,14 @@ Namespace BusinessLayer
         Public Property DueDate As Date?
         Public Property IdNo As Int32
         Public Property InvoiceAmount As Decimal
-        Public Property InvoiceNo As Int32
+        Public Property InvoiceNo As String
         Public Property PatientIdNo As Int32?
         Public Property PatientName As String
         Public Property Posted As Boolean
         Public Property ReferenceNo As String
         Public Property SaleDetails As List(Of SaleDetail)
-        Public Property SaleHistory As List(Of SaleHistory)
         Public Property TransactionDate As Date?
         Public Property VatAmount As Decimal
-        Public Property VatNumber As String
         Public Property WarehouseIdNo As Int16
 
     End Class

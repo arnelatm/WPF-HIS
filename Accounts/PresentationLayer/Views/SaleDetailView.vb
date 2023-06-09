@@ -33,8 +33,6 @@ Namespace PresentationLayer.Views
         Public Property UnitCost As Decimal Implements ISaleDetailView.UnitCost
         Public Property VatAmount As Decimal Implements ISaleDetailView.VatAmount
         Public Property VatPercent As Decimal Implements ISaleDetailView.VatPercent
-        Public Property WarehouseIdNo As Int16 Implements ISaleDetailView.WarehouseIdNo
-
 
     End Class
 

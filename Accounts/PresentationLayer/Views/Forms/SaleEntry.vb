@@ -210,15 +210,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property VatNumber As String Implements ISaleView.VatNumber
-            Get
-                Return txtVatNumber.Text
-            End Get
-            Set
-                txtVatNumber.Text = Value
-            End Set
-        End Property
-
         Public Property Cancelled As Boolean Implements ISaleView.Cancelled
             Get
                 Return chkCancelled.Checked
@@ -234,12 +225,34 @@ Namespace PresentationLayer.Views.Forms
             End Get
         End Property
 
-        Public Property PatientIdNo As Integer? Implements ISaleView.PatientIdNo
+        Public Property PatientIdNo As Int32? Implements ISaleView.PatientIdNo
             Get
-                Throw New NotImplementedException()
+                If txtPatientIdNo.Text <> "" Then
+                    Return Convert.ToInt32(txtPatientIdNo.Text)
+                Else
+                    Return 0
+                End If
             End Get
-            Set(value As Integer?)
-                Throw New NotImplementedException()
+            Set
+                txtPatientIdNo.Text = Convert.ToString(Value)
+            End Set
+        End Property
+
+        Public Property InvoiceNo As String Implements ISaleView.InvoiceNo
+            Get
+                Return txtInvoiceNo.Text
+            End Get
+            Set
+                txtInvoiceNo.Text = Value
+            End Set
+        End Property
+
+        Public Property PatientName As String Implements ISaleView.PatientName
+            Get
+                Return txtPatientName.Text
+            End Get
+            Set
+                txtPatientName.Text = Value
             End Set
         End Property
 
@@ -250,16 +263,16 @@ Namespace PresentationLayer.Views.Forms
         {
          {"Amount", txtAmount},
          {"Cancelled", chkCancelled},
+         {"CustomerIdNo", cboCustomerIdNo},
          {"DateCreated", txtDateCreated},
          {"DueDate", dtpDueDate},
          {"IdNo", TxtIdNo},
          {"InvoiceNo", txtInvoiceNo},
+         {"PatientIdNo", txtPatientIdNo},
          {"Posted", chkPosted},
          {"ReferenceNo", cboWarehouseIdNo},
-         {"CustomerIdNo", cboCustomerIdNo},
          {"TransactionDate", dtpTransactionDate},
          {"VatAmount", txtVatAmount},
-         {"VatNumber", txtVatNumber},
          {"WarehouseIdNo", cboWarehouseIdNo}
         }
         End Sub
@@ -273,14 +286,12 @@ Namespace PresentationLayer.Views.Forms
                 .AutoCalc = True
             }
             _footer.ColumnToSum("dgvQuantity", 0) = True
-            _footer.ColumnToSum("dgvBonusQuantity", 0) = True
             _footer.ColumnToSum("dgvGrossAmount") = True
             _footer.ColumnToSum("dgvDiscountAmount") = True
             _footer.ColumnToSum("dgvAmtBefVat") = True
             _footer.ColumnToSum("dgvVatAmount") = True
             _footer.ColumnToSum("dgvNetAmount") = True
             _footer.SetAlignment("dgvQuantity", ContentAlignment.MiddleRight)
-            _footer.SetAlignment("dgvBonusQuantity", ContentAlignment.MiddleRight)
             _footer.SetAlignment("dgvGrossAmount", ContentAlignment.MiddleRight)
             _footer.SetAlignment("dgvDiscountAmount", ContentAlignment.MiddleRight)
             _footer.SetAlignment("dgvAmtBefVat", ContentAlignment.MiddleRight)
@@ -309,7 +320,6 @@ Namespace PresentationLayer.Views.Forms
             dgvUnitIdNo.ValueMember = "idNo"
             dgvUnitIdNo.DisplayStyleForCurrentCellOnly = True
             dgvQuantity.DecimalPlaces = 0
-            dgvBonusQuantity.DecimalPlaces = 0
             dgvUnitCost.DisplayOnly = True
             dgvUnitCost.SetFormat(7, 2)
         End Sub
@@ -317,9 +327,6 @@ Namespace PresentationLayer.Views.Forms
         Private Sub CboCustomerIdNo_Changed(sender As Object, e As EventArgs) Handles cboCustomerIdNo.Validated, cboCustomerIdNo.SelectionChangeCommitted
             Presenter.UpdateDueDate()
             'Presenter.UpdateEarlySettlementValues()
-            If CustomerIdNo IsNot Nothing Then
-                Presenter.SetCustomerVatNumber(VatNumber, CustomerIdNo, True)
-            End If
         End Sub
 
         Private Sub CboCustomerIdNo_Validating(sender As Object, e As CancelEventArgs)
@@ -944,15 +951,15 @@ Namespace PresentationLayer.Views.Forms
                     ElseIf e.Value < DateAdd(DateInterval.Day, Today().Day * -1, Today) Then
                         e.CellStyle.BackColor = Color.Red
                     End If
-                ElseIf sender.Columns(e.ColumnIndex).Name.Equals("dgvUnitSalesPrice") Then
-                    Dim x = DirectCast(sender, DataGridView).Rows(e.RowIndex)
-                    If x IsNot Nothing Then
-                        If x.Cells("dgvProductIdNo").Value <> 0 Then
-                            If e.Value Is Nothing Or e.Value <= x.Cells("dgvUnitCost").Value Then
-                                e.CellStyle.BackColor = Color.Red
-                            End If
-                        End If
-                    End If
+                    'ElseIf sender.Columns(e.ColumnIndex).Name.Equals("dgvUnitSalesPrice") Then
+                    '    Dim x = DirectCast(sender, DataGridView).Rows(e.RowIndex)
+                    '    If x IsNot Nothing Then
+                    '        If x.Cells("dgvProductIdNo").Value <> 0 Then
+                    '            If e.Value Is Nothing Or e.Value <= x.Cells("dgvUnitCost").Value Then
+                    '                e.CellStyle.BackColor = Color.Red
+                    '            End If
+                    '        End If
+                    '    End If
                 End If
             End If
         End Sub

@@ -14,14 +14,13 @@
         Public Property DueDate As Date?
         Public Property Errors As List(Of String)
         Public Property IdNo As Int32
-        Public Property InvoiceNo As Int32
+        Public Property InvoiceNo As String
         Public Property Notes As String
         Public Property PatientIdNo As Int32?
         Public Property PatientName As String
         Public Property Posted As Boolean
         Public Property TransactionDate As Date?
         Public Property VatAmount As Decimal
-        Public Property VatNumber As String
         Public Property WarehouseIdNo As Int16
         Public Property SaleDetails As List(Of SaleDetailModel)
 

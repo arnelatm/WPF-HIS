@@ -12,18 +12,17 @@ Namespace DataLayer.AdoNet
         Implements IDao(Of Sale)
 
         Private Const FieldList = "Amount," &
+                                  "BranchIdNo," &
                                   "Cancelled," &
                                   "CustomerIdNo," &
                                   "DateCreated," &
                                   "DueDate," &
                                   "IdNo," &
-                                  "InvoiceDate," &
                                   "InvoiceNo," &
                                   "Posted," &
                                   "PatientIdNo," &
                                   "TransactionDate," &
                                   "VatAmount," &
-                                  "VatNumber," &
                                   "WarehouseIdNo"
 
 
@@ -32,7 +31,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordByIdNo(idNo) As Sale _
         Implements IDao(Of Sale).GetRecordByIdNo
-            Dim sql As String = " SELECT Amount,Cancelled,DateCreated,DueDate,IdNo,InvoiceDate,InvoiceNo,Posted,CustomerIdNo,TransactionDate,VatAmount,VatNumber,WarehouseIdNo" &
+            Dim sql As String = " SELECT Amount,BranchIdNo,Cancelled,CustomerIdNo,DateCreated,DueDate,IdNo,InvoiceNo,PatientIdNo,Posted,TransactionDate,VatAmount,WarehouseIdNo" &
                     " FROM [Sale]" &
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
@@ -49,15 +48,15 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     "UPDATE [Sale] Set " &
                     "Amount = @Amount," &
+                    "BranchIdNo = @BranchIdNo," &
                     "Cancelled = @Cancelled," &
                     "DueDate = @DueDate," &
-                    "InvoiceDate = @InvoiceDate," &
                     "InvoiceNo = @InvoiceNo," &
+                    "PatientIdNo = @PatientIdNo," &
                     "Posted = @Posted," &
                     "CustomerIdNo = @CustomerIdNo," &
                     "TransactionDate = @TransactionDate," &
                     "VatAmount = @VatAmount," &
-                    "VatNumber = @VatNumber, " &
                     "WarehouseIdNo = @WarehouseIdNo " &
                     "WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(Sale))
@@ -67,38 +66,40 @@ Namespace DataLayer.AdoNet
             Implements IDao(Of Sale).AddRecord
             Dim sql As String =
                     " INSERT INTO [Sale] " &
-                    " (Amount,Cancelled,DueDate,InvoiceDate,InvoiceNo,Posted,CustomerIdNo,TransactionDate,VatAmount,VatNumber,WarehouseIdNo)" &
-                    " VALUES (@Amount,@Cancelled,@DueDate,@InvoiceDate,@InvoiceNo,@Posted,@CustomerIdNo,@TransactionDate,@VatAmount,@VatNumber,@WarehouseIdNo)"
+                    " (Amount,BranchIdNo,Cancelled,CustomerIdNo,DueDate,InvoiceNo,PatientIdNo,Posted,TransactionDate,VatAmount,WarehouseIdNo)" &
+                    " VALUES (@Amount,@BranchIdNo,@Cancelled,@CustomerIdNo,@DueDate,@InvoiceNo,@PatientIdNo,@Posted,@TransactionDate,@VatAmount,@WarehouseIdNo)"
             Return Db.Insert(sql, Take(Sale))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, Sale) =
                                     Function(reader) _
             New Sale() With {.Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
+                                  .BranchIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("BranchIdNo,")),
                                   .Cancelled = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cancelled")),
-                                  .CustomerIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("CustomerIdNo")),
+                                  .CustomerIdNo = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Int32)(reader("CustomerIdNo")),
                                   .DueDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("DueDate")),
                                   .IdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("IdNo")),
-                                  .PatientIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("PatientIdNo")),
+                                  .InvoiceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("InvoiceNo")),
+                                  .PatientIdNo = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Int32)(reader("PatientIdNo")),
                                   .Posted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Posted")),
                                   .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),
                                   .VatAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("VatAmount")),
-                                  .VatNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("VatNumber")),
                                   .WarehouseIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("WarehouseIdNo"))
                                 }
 
         Private Function Take(Sale As Sale) As Object()
             Return New Object() {
                                     "Amount", Sale.Amount,
+                                    "BranchIdNo", Sale.BranchIdNo,
                                     "Cancelled", Sale.Cancelled,
                                     "CustomerIdNo", Sale.CustomerIdNo,
                                     "DueDate", Sale.DueDate,
                                     "IdNo", Sale.IdNo,
+                                    "InvoiceNo", Sale.InvoiceNo,
                                     "PatientIdNo", Sale.PatientIdNo,
                                     "Posted", Sale.Posted,
                                     "TransactionDate", Sale.TransactionDate,
                                     "VatAmount", Sale.VatAmount,
-                                    "VatNumber", Sale.VatNumber,
                                     "WarehouseIdNo", Sale.WarehouseIdNo
                                  }
         End Function
