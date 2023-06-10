@@ -74,7 +74,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, Sale) =
                                     Function(reader) _
             New Sale() With {.Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
-                                  .BranchIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("BranchIdNo,")),
+                                  .BranchIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("BranchIdNo")),
                                   .Cancelled = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cancelled")),
                                   .CustomerIdNo = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Int32)(reader("CustomerIdNo")),
                                   .DueDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("DueDate")),
