@@ -18,6 +18,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgAlreadyPosted", "Sorry this record has already been posted!", "Disallowed operation")
         Messaging.AddMessage("MsgAppliedAmtExceedsBalance", "Error in line {lineNumber}. Applied amount and discount exceeds balance.", "Invalid Payment")
         Messaging.AddMessage("MsgBegDateMustBeLessThanEndDate", "Beginning date must be less than ending date.", "Invalid Entry")
+        Messaging.AddMessage("MsgObj1MustBeLessThanObj2", "{name1} must be less than {name2}.", "Invalid Entry")
         Messaging.AddMessage("MsgBlankAccountIDNotAllowed", "Error in line <{lineNumber}>. Cannot save entries with debit/credit amounts when account ID is blank.", "Invalid Entry")
         Messaging.AddMessage("MsgCannotEditReadOnly", "Sorry either this item Is read only Or you don't have the proper security credentials to change this value. Reverting to original value.", "Error")
         Messaging.AddMessage("MsgCannotPostUnreconciledEntry", "Sorry you can't post an un-reconciled entry!", "Disallowed operation")

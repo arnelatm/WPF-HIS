@@ -137,7 +137,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACg
-        CQAAAk1TRnQBSQFMAgEBAgEAAYABCwGAAQsBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAAYgBCwGIAQsBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -3979,13 +3979,13 @@
     <value>General Journal Entry</value>
   </data>
   <data name="ToolStripMenuItemSalesEntry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>138, 22</value>
   </data>
   <data name="ToolStripMenuItemSalesEntry.Text" xml:space="preserve">
     <value>Sales Entry</value>
   </data>
   <data name="ToolStripMenuItemSalesReturn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>138, 22</value>
   </data>
   <data name="ToolStripMenuItemSalesReturn.Text" xml:space="preserve">
     <value>Sales Return</value>
@@ -3997,13 +3997,13 @@
     <value>Sales</value>
   </data>
   <data name="ToolStripMenuItemPurchase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>160, 22</value>
   </data>
   <data name="ToolStripMenuItemPurchase.Text" xml:space="preserve">
     <value>Purchase </value>
   </data>
   <data name="ToolStripMenuItemPurchaseReturn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>160, 22</value>
   </data>
   <data name="ToolStripMenuItemPurchaseReturn.Text" xml:space="preserve">
     <value>Purchase Return</value>
@@ -4467,6 +4467,18 @@
   <data name="ToolStripMenuItemPharmacyReports.Text" xml:space="preserve">
     <value>Pharmacy Reports</value>
   </data>
+  <data name="ToolStripMenuItemSterilizationLabels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="ToolStripMenuItemSterilizationLabels.Text" xml:space="preserve">
+    <value>Sterilization Labels</value>
+  </data>
+  <data name="ToolStripMenuItemClinicReports.Size" type="System.Drawing.Size, System.Drawing">
+    <value>254, 22</value>
+  </data>
+  <data name="ToolStripMenuItemClinicReports.Text" xml:space="preserve">
+    <value>Clinic Reports</value>
+  </data>
   <data name="ToolStripMenuItemReports.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 20</value>
   </data>
@@ -4647,7 +4659,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACg
-        CQAAAk1TRnQBSQFMAgEBAgEAAYABCwGAAQsBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAAYgBCwGIAQsBEAEAARABAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -5536,6 +5548,24 @@
   <data name="&gt;&gt;ToolStripMenuItemGeneralJournalEntry.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;ToolStripMenuItemSales.Name" xml:space="preserve">
+    <value>ToolStripMenuItemSales</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItemSales.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItemSalesEntry.Name" xml:space="preserve">
+    <value>ToolStripMenuItemSalesEntry</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItemSalesEntry.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItemSalesReturn.Name" xml:space="preserve">
+    <value>ToolStripMenuItemSalesReturn</value>
+  </data>
+  <data name="&gt;&gt;ToolStripMenuItemSalesReturn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;ToolStripMenuItemPurchases.Name" xml:space="preserve">
     <value>ToolStripMenuItemPurchases</value>
   </data>
@@ -6190,22 +6220,16 @@
   <data name="&gt;&gt;toolStripMenuItem19.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItemSales.Name" xml:space="preserve">
-    <value>ToolStripMenuItemSales</value>
+  <data name="&gt;&gt;ToolStripMenuItemClinicReports.Name" xml:space="preserve">
+    <value>ToolStripMenuItemClinicReports</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItemSales.Type" xml:space="preserve">
+  <data name="&gt;&gt;ToolStripMenuItemClinicReports.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItemSalesEntry.Name" xml:space="preserve">
-    <value>ToolStripMenuItemSalesEntry</value>
+  <data name="&gt;&gt;ToolStripMenuItemSterilizationLabels.Name" xml:space="preserve">
+    <value>ToolStripMenuItemSterilizationLabels</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItemSalesEntry.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItemSalesReturn.Name" xml:space="preserve">
-    <value>ToolStripMenuItemSalesReturn</value>
-  </data>
-  <data name="&gt;&gt;ToolStripMenuItemSalesReturn.Type" xml:space="preserve">
+  <data name="&gt;&gt;ToolStripMenuItemSterilizationLabels.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
