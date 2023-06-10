@@ -33,8 +33,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
-            Me.lblCopies = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtCopies = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout1.SuspendLayout()
             Me.SuspendLayout()
@@ -132,12 +130,10 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.CFlowLayout1.Controls.Add(Me.dtpProductionDate)
             Me.CFlowLayout1.Controls.Add(Me.lblExpiryDate)
             Me.CFlowLayout1.Controls.Add(Me.dtpExpiryDate)
-            Me.CFlowLayout1.Controls.Add(Me.lblCopies)
-            Me.CFlowLayout1.Controls.Add(Me.txtCopies)
             Me.CFlowLayout1.Location = New System.Drawing.Point(12, 37)
             Me.CFlowLayout1.Name = "CFlowLayout1"
             Me.CFlowLayout1.Padding = New System.Windows.Forms.Padding(10)
-            Me.CFlowLayout1.Size = New System.Drawing.Size(318, 101)
+            Me.CFlowLayout1.Size = New System.Drawing.Size(318, 71)
             Me.CFlowLayout1.TabIndex = 26
             '
             'CLabel2
@@ -172,9 +168,9 @@ Namespace PresentationLayer.Views.Forms.Reports
             '
             'btnOk
             '
-            Me.btnOk.DesignerSelected = True
+            Me.btnOk.DesignerSelected = False
             Me.btnOk.ImageIndex = 0
-            Me.btnOk.Location = New System.Drawing.Point(67, 144)
+            Me.btnOk.Location = New System.Drawing.Point(67, 135)
             Me.btnOk.Name = "btnOk"
             Me.btnOk.OriginalImageName = Nothing
             Me.btnOk.SecurityKey = ""
@@ -186,55 +182,13 @@ Namespace PresentationLayer.Views.Forms.Reports
             '
             Me.btnCancel.DesignerSelected = False
             Me.btnCancel.ImageIndex = 0
-            Me.btnCancel.Location = New System.Drawing.Point(173, 144)
+            Me.btnCancel.Location = New System.Drawing.Point(173, 135)
             Me.btnCancel.Name = "btnCancel"
             Me.btnCancel.OriginalImageName = Nothing
             Me.btnCancel.SecurityKey = ""
             Me.btnCancel.Size = New System.Drawing.Size(90, 25)
             Me.btnCancel.TabIndex = 28
             Me.btnCancel.Text = "Cancel"
-            '
-            'lblCopies
-            '
-            Me.lblCopies.DisplayOnly = True
-            Me.lblCopies.EditingMode = False
-            Me.lblCopies.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblCopies.Location = New System.Drawing.Point(11, 65)
-            Me.lblCopies.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblCopies.Name = "lblCopies"
-            Me.lblCopies.Size = New System.Drawing.Size(171, 25)
-            Me.lblCopies.TabIndex = 25
-            Me.lblCopies.Text = "No. of Copies:"
-            Me.lblCopies.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.lblCopies.Translatable = True
-            '
-            'txtCopies
-            '
-            Me.txtCopies.BackColor = System.Drawing.SystemColors.ControlLight
-            Me.txtCopies.BegFindValue = Nothing
-            Me.txtCopies.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtCopies.ComputedValue = False
-            Me.txtCopies.CustomFormat = Nothing
-            Me.txtCopies.DataBoundControl = True
-            Me.txtCopies.EditingMode = True
-            Me.txtCopies.EndFindValue = Nothing
-            Me.txtCopies.FieldDescription = Nothing
-            Me.txtCopies.FieldName = Nothing
-            Me.txtCopies.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtCopies.FindEnabled = False
-            Me.txtCopies.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtCopies.LinkedLabel = Nothing
-            Me.txtCopies.Location = New System.Drawing.Point(184, 65)
-            Me.txtCopies.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtCopies.MaximumValue = Nothing
-            Me.txtCopies.MinimumValue = Nothing
-            Me.txtCopies.Name = "txtCopies"
-            Me.txtCopies.OldValue = Nothing
-            Me.txtCopies.OverrideMaxLength = 0
-            Me.txtCopies.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtCopies.Size = New System.Drawing.Size(79, 23)
-            Me.txtCopies.TabIndex = 26
-            Me.txtCopies.Translatable = False
             '
             'SterilizationLabelPrinter
             '
@@ -261,7 +215,5 @@ Namespace PresentationLayer.Views.Forms.Reports
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
-        Friend WithEvents lblCopies As CLabel
-        Friend WithEvents txtCopies As CTextBox
     End Class
 End NameSpace

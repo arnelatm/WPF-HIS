@@ -23,14 +23,15 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim currentDate = Now()
             currentDate = GlobalFunctions.GregorianDateSerial(currentDate.Year, currentDate.Month, currentDate.Day)
             ' returns previous month last day
-            dtpExpiryDate.Value = currentDate.AddDays(-1)
-            dtpProductionDate.Value = dtpExpiryDate.Value
+            dtpProductionDate.Value = currentDate
+            dtpExpiryDate.Value = currentDate.AddMonths(1)
+
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
             If dtpProductionDate.Value <= dtpExpiryDate.Value Then
-                Dim productionDate As Date?
-                Dim expiryDate As Date?
+                Dim productionDate As Date
+                Dim expiryDate As Date
                 productionDate = dtpProductionDate.Value
                 expiryDate = dtpExpiryDate.Value
                 Dim parameter As New ArrayList

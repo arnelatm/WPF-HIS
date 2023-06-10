@@ -7,7 +7,7 @@
     <ProjectGuid>{826EE6DC-954A-4C18-9108-EBD592FCB1E8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>AATM.Accounts</RootNamespace>
-    <AssemblyName>Pharmacy</AssemblyName>
+    <AssemblyName>Accounts</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsFormsWithCustomSubMain</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -36,7 +36,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>Pharmacy.xml</DocumentationFile>
+    <DocumentationFile>Accounts.xml</DocumentationFile>
     <DefineConstants>_MYFORMS=True</DefineConstants>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
@@ -46,7 +46,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>Pharmacy.xml</DocumentationFile>
+    <DocumentationFile>Accounts.xml</DocumentationFile>
     <DefineConstants>_MYFORMS=True</DefineConstants>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
