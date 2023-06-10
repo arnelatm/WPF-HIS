@@ -32,7 +32,6 @@ Namespace PresentationLayer.Presenters
             Service = New AccountsService("Sale")
             SortOrderKey = "IdNo"
             DtInsertTable.Columns.Add("BatchNo", GetType(String))
-            DtInsertTable.Columns.Add("BonusQuantity", GetType(Int16))
             DtInsertTable.Columns.Add("DiscountAmount", GetType(Decimal))
             DtInsertTable.Columns.Add("ExpiryDate", GetType(Date))
             DtInsertTable.Columns.Add("NetAmount", GetType(Decimal))
@@ -46,7 +45,6 @@ Namespace PresentationLayer.Presenters
             DtInsertTable.Columns.Add("VatPercent", GetType(Decimal))
 
             DtUpdateTable.Columns.Add("BatchNo", GetType(String))
-            DtUpdateTable.Columns.Add("BonusQuantity", GetType(Int16))
             DtUpdateTable.Columns.Add("DiscountAmount", GetType(Decimal))
             DtUpdateTable.Columns.Add("ExpiryDate", GetType(Date))
             DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
@@ -89,7 +87,6 @@ Namespace PresentationLayer.Presenters
 
         Private Sub FillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("BatchNo") = itemDataView.BatchNo
-            workRow("BonusQuantity") = itemDataView.BonusQuantity
             workRow("DiscountAmount") = itemDataView.DiscountAmount
             workRow("ExpiryDate") = IIf(itemDataView.ExpiryDate Is Nothing, DBNull.Value, itemDataView.ExpiryDate)
             workRow("NetAmount") = itemDataView.NetAmount
@@ -225,7 +222,7 @@ Namespace PresentationLayer.Presenters
                     Dim vPerc As Decimal = 0
                     Dim nAmt As Decimal = 0
                     Select Case eventType.PropertyName
-                        Case $"Quantity", $"Price", $"BonusQuantity", $"VatPercent", $"DiscountPercent"
+                        Case $"Quantity", $"Price", $"VatPercent", $"DiscountPercent"
                             SetAmounts(SaleDetail)
                             eventType.BindingSource.ResetCurrentItem()
                         Case "GrossAmount"
