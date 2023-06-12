@@ -12,12 +12,12 @@
             ReportFileName = fileName
             MainTableName = "Account"
             GetReportProperties()
-            Report.DataSourceConnections.Clear()
+            ReportDocument.DataSourceConnections.Clear()
             WindowState = FormWindowState.Maximized
             With CrystalReportViewer1
                 .Visible = True
                 .BringToFront()
-                .ReportSource = Report
+                .ReportSource = ReportDocument
                 .Refresh()
             End With
             btnQuit.Visible = True

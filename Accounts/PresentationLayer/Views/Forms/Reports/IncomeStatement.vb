@@ -20,7 +20,6 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             MainTableName = "Account"
             SortOrderKey = "IdNo"
-            Presenter = New ReportPresenter(Me)
             _period = period
 
         End Sub

@@ -36,7 +36,6 @@ Namespace PresentationLayer.Views.Forms
 
             ' This call is required by the designer.
             InitializeComponent()
-            Presenter = New ReportPresenter(Me)
             ' Add any initialization after the InitializeComponent() call.
 
         End Sub

@@ -20,17 +20,16 @@ Namespace PresentationLayer.Views.Forms.Reports
             GetIgroupReportProperties()
             Dim language As String
             language = Strings.Left(formCulture.Name, formCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            Presenter = New ReportPresenter(Me)
             If args IsNot Nothing AndAlso args.Count > 0 Then
                 For i = 0 To args.Count() - 1
                     Dim parameterName As String = args(i)(0)
                     Dim parameterValue = args(i)(1)
-                    Report.SetParameterValue(parameterName, parameterValue)
+                    ReportDocument.SetParameterValue(parameterName, parameterValue)
                 Next
             End If
-            Report.SetParameterValue("Language", language)
-            Report.SetParameterValue("EstablishmentName", Presenter.GetRecordField("Establishment", "EstablishmentName"))
-            Report.DataSourceConnections.Clear()
+            ReportDocument.SetParameterValue("Language", language)
+            ReportDocument.SetParameterValue("EstablishmentName", Presenter.GetRecordField("Establishment", "EstablishmentName"))
+            ReportDocument.DataSourceConnections.Clear()
             SetPrintOption(printJobName)
             ProcessReport()
 
@@ -45,11 +44,11 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim server As String = ConfigurationManager.AppSettings.Get("ServerTranslator")
             Dim database As String = ConfigurationManager.AppSettings.Get("DATABASEIGroup")
 
-            Report.Load(reportPaths & ReportFileName)
+            ReportDocument.Load(reportPaths & ReportFileName)
 
-            If Report.DataSourceConnections.Count > 0 Then
+            If ReportDocument.DataSourceConnections.Count > 0 Then
 
-                Report.DataSourceConnections(0).SetConnection(server, database, uid, pwd)
+                ReportDocument.DataSourceConnections(0).SetConnection(server, database, uid, pwd)
 
             End If
 
@@ -58,10 +57,10 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Public Sub SetPrintOption(printJobName As String)
             If printJobName IsNot Nothing Then
-                Report.PrintOptions.PrinterName = "Ad"
+                ReportDocument.PrintOptions.PrinterName = "Ad"
                 'Report.PrintOptions.PaperSize = 257
-                Report.PrintOptions.PaperOrientation = PaperOrientation.DefaultPaperOrientation
-                Report.PrintOptions.PaperSource = PaperSource.Auto
+                ReportDocument.PrintOptions.PaperOrientation = PaperOrientation.DefaultPaperOrientation
+                ReportDocument.PrintOptions.PaperSource = PaperSource.Auto
             End If
         End Sub
 

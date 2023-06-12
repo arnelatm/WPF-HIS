@@ -54,7 +54,7 @@ Public Interface IBaseDao
 
     Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer
 
-    Function GetIdNoWithName(Of T)(tableName As String, fieldValue As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As T
+    Function GetIdNoWithKey(Of T)(tableName As String, fieldValue As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As T
 
     Function GetLastSeriesNumber(ByVal seriesName As String) As Integer
 

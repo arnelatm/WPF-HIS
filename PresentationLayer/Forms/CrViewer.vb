@@ -6,7 +6,7 @@ Imports CrystalDecisions.ReportAppServer.DataDefModel
 
 Public Class CrViewer
 
-    Public Report As New ReportPrinter
+    Public ReportPrinter As New CrystalReportPrinter
 
     Public Event OkButtonClicked()
 
@@ -27,10 +27,10 @@ Public Class CrViewer
 
         ' Add any initialization after the InitializeComponent() call.
         Text = reportTitle
-        Report.SetReportProperties(reportFileName)
-        Report.ReportFileName = reportFileName
+        ReportPrinter.SetReportProperties(reportFileName)
+        ReportPrinter.ReportFileName = reportFileName
         SetParameters(reportTitle, formCulture, args)
-        Report.ClearDataSourceConnections()
+        ReportPrinter.ClearDataSourceConnections()
         SetupCrViewer()
 
     End Sub
@@ -39,10 +39,10 @@ Public Class CrViewer
         Dim language As String
         language = Microsoft.VisualBasic.Strings.Left(formCulture.Name, formCulture.Name.IndexOf("-", StringComparison.Ordinal))
         Dim establishmentName As String = GetEstablishmentName(formCulture, language)
-        Report.SetParameterValue(args)
-        Report.SetParameterValue({reportTitle, "ReportTitle"})
-        Report.SetParameterValue({establishmentName, "EstablishmentName"})
-        Report.SetParameterValue({language, "Language"})
+        ReportPrinter.SetParameterValue(args)
+        ReportPrinter.SetParameterValue({reportTitle, "ReportTitle"})
+        ReportPrinter.SetParameterValue({establishmentName, "EstablishmentName"})
+        ReportPrinter.SetParameterValue({language, "Language"})
     End Sub
 
     Private Function GetEstablishmentName(cFormCulture As CultureInfo, language As String) As String
@@ -74,7 +74,7 @@ Public Class CrViewer
         With CrystalReportViewer1
             .Visible = True
             .BringToFront()
-            .ReportSource = Report.GetReportSource()
+            .ReportSource = ReportPrinter.GetReportSource()
             .SetProductLocale(CInt(ceCulture))
             .Refresh()
         End With
@@ -82,11 +82,11 @@ Public Class CrViewer
     End Sub
 
     Public Sub SetDb(Optional dbCName As String = Nothing)
-        Report.DataBaseConnectionName = IIf(dbCName Is Nothing, $"ISPDATA", dbCName)
+        ReportPrinter.DataBaseConnectionName = IIf(dbCName Is Nothing, $"ISPDATA", dbCName)
     End Sub
 
     Public Sub SetPrintJob(Optional printJobName As String = "Default")
-        Report.PrintJobName = printJobName
+        ReportPrinter.PrintJobName = printJobName
     End Sub
 
     Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click

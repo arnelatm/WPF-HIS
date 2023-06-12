@@ -497,7 +497,6 @@
     <Build Include="dbo\User Defined Types\EmployeeLeaveApprovalItemUpdate.sql" />
     <Build Include="dbo\Views\LatestApproval_View.sql" />
     <Build Include="dbo\Views\EmployeeInfo_View.sql" />
-    <Build Include="dbo\Tables\ReportMaster.sql" />
     <Build Include="dbo\Tables\ListGroup_1.sql" />
     <Build Include="dbo\Tables\ListCoded_1.sql" />
     <Build Include="dbo\Tables\List_1.sql" />

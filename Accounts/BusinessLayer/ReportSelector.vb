@@ -5,9 +5,9 @@ Imports AATM.BusinessLayer.BusinessRules
 Namespace BusinessLayer
 
     Public Class ReportSelector
-        Inherits Report
+        Inherits CrReport
 
-        Public Property ReportList As List(Of Report)
+        Public Property ReportList As List(Of CrReport)
 
     End Class
 

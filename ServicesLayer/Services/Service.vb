@@ -559,8 +559,8 @@ Namespace Services
             Return DataDao.GetIdNoOfSortedPositionNumber(recordNo, tableName, sortOrder, filter)
         End Function
 
-        Public Function GetIdNoWithName(Of T)(tableName As String, fieldValue As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As T Implements IService.GetIdNoWithName
-            Dim idNo As T = DataDao.GetIdNoWithName(Of T)(tableName, fieldValue, fieldName, idFieldName)
+        Public Function GetIdNoWithKey(Of T)(tableName As String, fieldValue As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As T Implements IService.GetIdNoWithKey
+            Dim idNo As T = DataDao.GetIdNoWithKey(Of T)(tableName, fieldValue, fieldName, idFieldName)
             Return idNo
         End Function
 
@@ -577,8 +577,8 @@ Namespace Services
             Return modelOfPresenter
         End Function
 
-        'Public Function GetIdNoWithName(Of T)(tableName As String, itemName As String) As T Implements IService.GetIdNoWithName
-        '    Dim idNo As T = DataDao.GetIdNoWithName(Of T)(tableName, itemName)
+        'Public Function GetIdNoWithKey(Of T)(tableName As String, itemName As String) As T Implements IService.GetIdNoWithKey
+        '    Dim idNo As T = DataDao.GetIdNoWithKey(Of T)(tableName, itemName)
         '    Return idNo
         'End Function
         Public Function GetPrintJobIdNo(reportName As String) As Integer Implements IService.GetPrintJobIdNo

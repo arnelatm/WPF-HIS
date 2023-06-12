@@ -11,10 +11,10 @@
 
             ReportFileName = "Accounts Receivable Journal.rpt"
             GetReportProperties()
-            Report.SetParameterValue("ArJournalIdNo", idNo)
-            Report.SetParameterValue("ArAmountInWords", amount)
-            Report.SetParameterValue("TotalLineAmountInWords", lineTotal)
-            Report.DataSourceConnections.Clear()
+            ReportDocument.SetParameterValue("ArJournalIdNo", idNo)
+            ReportDocument.SetParameterValue("ArAmountInWords", amount)
+            ReportDocument.SetParameterValue("TotalLineAmountInWords", lineTotal)
+            ReportDocument.DataSourceConnections.Clear()
             ProcessReport()
 
         End Sub

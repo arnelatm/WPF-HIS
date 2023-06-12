@@ -1,6 +1,8 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
+Imports AATM.Common.PresentationLayer.Models
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
@@ -60,14 +62,14 @@ Namespace PresentationLayer.Views.Forms.Reports
                     endValue = GregorianDateSerial(Year(dEnd), 12, 31)
                 Case "Q"
                     Dim monthNumber As Int16 = Month(dEnd)
-                    Dim quarter = IIf(monthNumber < 4,1,IIf(monthNumber < 7,2,IIf(monthNumber < 10,3,4)))
-                    begValue = GregorianDateSerial(Year(dStart), quarter*3-2, 1)
-                    endValue = AsMonthEndDate(GregorianDateSerial(Year(dEnd), quarter*3, 1))
+                    Dim quarter = IIf(monthNumber < 4, 1, IIf(monthNumber < 7, 2, IIf(monthNumber < 10, 3, 4)))
+                    begValue = GregorianDateSerial(Year(dStart), quarter * 3 - 2, 1)
+                    endValue = AsMonthEndDate(GregorianDateSerial(Year(dEnd), quarter * 3, 1))
                 Case "S"
                     Dim monthNumber As Int16 = Month(dEnd)
-                    Dim semester = IIf(monthNumber < 7,1,2)
-                    begValue = GregorianDateSerial(Year(dStart), semester*6-5, 1)
-                    endValue = AsMonthEndDate(GregorianDateSerial(Year(dEnd), semester*6, 1))
+                    Dim semester = IIf(monthNumber < 7, 1, 2)
+                    begValue = GregorianDateSerial(Year(dStart), semester * 6 - 5, 1)
+                    endValue = AsMonthEndDate(GregorianDateSerial(Year(dEnd), semester * 6, 1))
             End Select
             dtpBeginningDate.Value = begValue
             dtpEndingDate.Value = endValue

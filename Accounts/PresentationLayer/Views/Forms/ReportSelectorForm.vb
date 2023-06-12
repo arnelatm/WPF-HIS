@@ -1,4 +1,5 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Common.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 
@@ -45,6 +46,15 @@ Namespace PresentationLayer.Views.Forms
         Public Property ReportTitleAra As String Implements IReportSelectorView.ReportTitleAra
         Public Property QueryFormParameters As String Implements IReportView.QueryFormParameters
         Public Property QueryParameters As String Implements IReportView.QueryParameters
+
+        Public Property PrintJobIdNo As Short Implements IReportView.PrintJobIdNo
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Short)
+                Throw New NotImplementedException()
+            End Set
+        End Property
 
 #End Region
 

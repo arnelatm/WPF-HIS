@@ -4,7 +4,9 @@ Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Common.BusinessLayer
 Imports AATM.Common.Models
+Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views.Interface
+Imports AATM.Common.PresentationLayer.Views.Interfaces
 Imports AutoMapper
 
 Public Class MappingProfileAccounts
@@ -155,8 +157,6 @@ Public Class MappingProfileAccounts
         CreateMap(Of SupplierModel, ISupplierView)().ReverseMap()
         CreateMap(Of ShiftSummary, ShiftSummaryModel)().ReverseMap()
         CreateMap(Of ShiftSummaryModel, IShiftSummaryView)().ReverseMap()
-        CreateMap(Of Report, ReportModel)().ReverseMap()
-        CreateMap(Of ReportModel, IReportView)().ReverseMap()
         CreateMap(Of ItemDetails, ItemDetailsModel)().ReverseMap()
         CreateMap(Of ItemDetailsModel, IItemDetailsView)().ReverseMap()
         CreateMap(Of Lab_InvoiceGroup, Lab_InvoiceGroupModel)().ReverseMap()
@@ -210,9 +210,6 @@ Public Class MappingProfileAccounts
 
         CreateMap(Of DosagePrinting, DosageModel)().ReverseMap()
         CreateMap(Of DosageModel, IDosagePrintingView)().ReverseMap()
-
-        CreateMap(Of PrintSetup, PrintSetupModel)().ReverseMap()
-        CreateMap(Of PrintSetupModel, IPrintSetupView)().ReverseMap()
 
         CreateMap(Of ItemDetails, ItemDetailsModel)().ReverseMap()
         CreateMap(Of ItemDetailsModel, IItemDetailsView)().ReverseMap()

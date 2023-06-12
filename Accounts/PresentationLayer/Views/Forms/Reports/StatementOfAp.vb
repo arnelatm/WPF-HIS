@@ -13,6 +13,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Public Property MainTableName As String
         Protected SortOrderKey As String
+        Public Event PrintReport(reportFileName As String)
 
         Public Sub New()
 
@@ -23,7 +24,6 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             MainTableName = "ApJournal"
             SortOrderKey = "IdNo"
-            Presenter = New ReportPresenter(Me)
             Presenter.CreateDataSource("Supplier", cboSupplierIdNo)
             Dim today = Now()
             dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, 1, 1)

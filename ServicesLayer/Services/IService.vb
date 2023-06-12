@@ -32,7 +32,7 @@ Namespace Services
         Function GetIcIdNoWithName(groupCode As CodeGroupSelection, itemName As String) As Integer
         Function GetIcNameWithIdNo(groupCode As CodeGroupSelection, idNo As Int32) As String
         Function GetIdNoOfSortedPositionNumber(recordNo As Integer, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer
-        Function GetIdNoWithName(Of T)(tableName As String, itemName As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As T
+        Function GetIdNoWithKey(Of T)(tableName As String, itemName As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As T
         Function GetLastSortKey(ByVal searchValue As String, ByVal tableName As String) As String
         Function GetMainTableColumnProperties(tableName As String) As List(Of TblColProp)
         Function GetNextSeries(seriesName As String) As Integer

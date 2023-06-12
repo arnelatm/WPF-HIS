@@ -59,7 +59,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Private _undoMode As Boolean = False
     Private _ea As EventAggregator
     Private _dataErrors As String = ""
-    Protected Service As Object
+    Public Service As Object
 
     Public Event AfterDelete(retVal As Integer)
 

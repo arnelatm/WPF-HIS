@@ -20,7 +20,6 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             MainTableName = "ApJournal"
             SortOrderKey = "IdNo"
-            Presenter = New ReportPresenter(Me)
             Dim today = Now()
             dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
             dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
