@@ -197,6 +197,8 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemPharmacyBarcodePrinting = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemGenerateDailyDrugTransferFile = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemGenerateDrugAcceptanceFile = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemClinicReports = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemSterilizationLabels = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemUtilities = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemUpdateMenuSecurityObjects = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemRecreateSecurityObjectMenu = New System.Windows.Forms.ToolStripMenuItem()
@@ -229,8 +231,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemClinicReports = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemSterilizationLabels = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemReportMaster = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -364,7 +365,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemMasters
             '
-            Me.ToolStripMenuItemMasters.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemGeneral, Me.ToolStripMenuItemSecurity, Me.ToolStripMenuItemEmployee, Me.ToolStripMenuItemTranslations, Me.ToolStripMenuItemPayroll, Me.ToolStripMenuItemDoctor, Me.ToolStripMenuItemSupplierVendors, Me.ToolStripMenuItemCustomerClients, Me.ToolStripMenuItemItemCode, Me.ToolStripMenuItemCodeGroup, Me.ToolStripMenuItemIGroup, Me.ToolStripMenuItemPMR, Me.ToolStripMenuItemInventory})
+            Me.ToolStripMenuItemMasters.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemGeneral, Me.ToolStripMenuItemSecurity, Me.ToolStripMenuItemEmployee, Me.ToolStripMenuItemTranslations, Me.ToolStripMenuItemPayroll, Me.ToolStripMenuItemDoctor, Me.ToolStripMenuItemSupplierVendors, Me.ToolStripMenuItemCustomerClients, Me.ToolStripMenuItemItemCode, Me.ToolStripMenuItemCodeGroup, Me.ToolStripMenuItemIGroup, Me.ToolStripMenuItemPMR, Me.ToolStripMenuItemInventory, Me.ToolStripMenuItemReportMaster})
             Me.ToolStripMenuItemMasters.Name = "ToolStripMenuItemMasters"
             resources.ApplyResources(Me.ToolStripMenuItemMasters, "ToolStripMenuItemMasters")
             '
@@ -1119,6 +1120,17 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemGenerateDrugAcceptanceFile.Name = "ToolStripMenuItemGenerateDrugAcceptanceFile"
             resources.ApplyResources(Me.ToolStripMenuItemGenerateDrugAcceptanceFile, "ToolStripMenuItemGenerateDrugAcceptanceFile")
             '
+            'ToolStripMenuItemClinicReports
+            '
+            Me.ToolStripMenuItemClinicReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemSterilizationLabels})
+            Me.ToolStripMenuItemClinicReports.Name = "ToolStripMenuItemClinicReports"
+            resources.ApplyResources(Me.ToolStripMenuItemClinicReports, "ToolStripMenuItemClinicReports")
+            '
+            'ToolStripMenuItemSterilizationLabels
+            '
+            Me.ToolStripMenuItemSterilizationLabels.Name = "ToolStripMenuItemSterilizationLabels"
+            resources.ApplyResources(Me.ToolStripMenuItemSterilizationLabels, "ToolStripMenuItemSterilizationLabels")
+            '
             'ToolStripMenuItemUtilities
             '
             Me.ToolStripMenuItemUtilities.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemUpdateMenuSecurityObjects, Me.ToolStripMenuItemRecreateSecurityObjectMenu, Me.ToolStripMenuItemTransactionNotesTranslator, Me.ToolStripMenuItemSimplePasswordGenerator, Me.ToolStripMenuItemTestForm})
@@ -1287,16 +1299,10 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'ToolStripMenuItemClinicReports
+            'ToolStripMenuItemReportMaster
             '
-            Me.ToolStripMenuItemClinicReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemSterilizationLabels})
-            Me.ToolStripMenuItemClinicReports.Name = "ToolStripMenuItemClinicReports"
-            resources.ApplyResources(Me.ToolStripMenuItemClinicReports, "ToolStripMenuItemClinicReports")
-            '
-            'ToolStripMenuItemSterilizationLabels
-            '
-            Me.ToolStripMenuItemSterilizationLabels.Name = "ToolStripMenuItemSterilizationLabels"
-            resources.ApplyResources(Me.ToolStripMenuItemSterilizationLabels, "ToolStripMenuItemSterilizationLabels")
+            Me.ToolStripMenuItemReportMaster.Name = "ToolStripMenuItemReportMaster"
+            resources.ApplyResources(Me.ToolStripMenuItemReportMaster, "ToolStripMenuItemReportMaster")
             '
             'Main
             '
@@ -1309,7 +1315,7 @@ Namespace PresentationLayer.Views.Forms
             Me.IsMdiContainer = True
             Me.MenuFormName = "Menu"
             Me.Name = "Main"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+            Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.ToolStrip.ResumeLayout(false)
         Me.ToolStrip.PerformLayout
@@ -1526,5 +1532,6 @@ End Sub
         Friend WithEvents ToolStripMenuItemSalesReturn As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemClinicReports As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemSterilizationLabels As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemReportMaster As ToolStripMenuItem
     End Class
 End NameSpace

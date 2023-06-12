@@ -19,8 +19,6 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             MainTableName = "EmployeeInfo_View"
             SortOrderKey = "IdNo"
-            Presenter = New ReportPresenter(Me)
-
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea

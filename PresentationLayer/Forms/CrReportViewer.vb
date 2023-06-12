@@ -5,7 +5,7 @@ Imports CrystalDecisions.ReportAppServer.DataDefModel
 
 Public Class CrReportViewer
 
-    Public Report As New ReportDocument
+    Public ReportDocument As New ReportDocument
 
     Public Event OkButtonClicked()
 
@@ -42,11 +42,11 @@ Public Class CrReportViewer
             End If
         End If
         'MessageBox.Show(reportPaths & ReportFileName)
-        Report.Load(reportPaths & ReportFileName)
+        ReportDocument.Load(reportPaths & ReportFileName)
 
-        If Report.DataSourceConnections.Count > 0 Then
+        If ReportDocument.DataSourceConnections.Count > 0 Then
 
-            Report.DataSourceConnections(0).SetConnection(server, database, uid, pwd)
+            ReportDocument.DataSourceConnections(0).SetConnection(server, database, uid, pwd)
 
         End If
 
@@ -64,7 +64,7 @@ Public Class CrReportViewer
         With CrystalReportViewer1
             .Visible = True
             .BringToFront()
-            .ReportSource = Report
+            .ReportSource = ReportDocument
             .SetProductLocale(CInt(ceCulture))
             .Refresh()
         End With

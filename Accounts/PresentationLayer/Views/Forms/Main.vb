@@ -263,9 +263,12 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CustomToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTBCustom.Click
-            Dim formToRun As TrialBalance
-            formToRun = New TrialBalance("C")
-            formToRun.Show()
+
+            RunForm(Of TrialBalance, ReportPresenter(Of ReportModel))()
+
+            'Dim formToRun As TrialBalance
+            'formToRun = New TrialBalance("C")
+            'formToRun.Show()
         End Sub
 
         Private Sub DefaultFieldValuesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDefaultFieldValues.Click
@@ -897,6 +900,13 @@ Namespace PresentationLayer.Views.Forms
             ShowEntryForm(formToRun)
         End Sub
 
+        Private Overloads Sub RunReport(Of TV, TP)()
+            Dim formToRun = Activator.CreateInstance(GetType(TV))
+            Dim pType As Type = GetType(TP)
+            formToRun.Presenter = Activator.CreateInstance(pType)
+            Invoker.InvokeFunction(formToRun, "Show")
+        End Sub
+
         Private Sub UpdateMenuSecurityObjectsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUpdateMenuSecurityObjects.Click
             Dim allControls As New List(Of Control)
             If UserIsASuperAdministrator() Then
@@ -1121,10 +1131,6 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of CategoryEntryTv, CategoryPresenter(Of CategoryModel))()
         End Sub
 
-        Private Sub ToolStripMenuItemPrintJobs_Click(sender As Object, e As EventArgs)
-            RunForm(Of PrintSetupEntryTv, PrintSetupPresenter(Of PrintSetupModel))()
-        End Sub
-
         Private Sub ToolStripMenuItemPrinters_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPrinters.Click
             RunForm(Of PrinterEntryTv, PrinterPresenter(Of PrinterModel))()
         End Sub
@@ -1134,7 +1140,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemPrintSetups_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPrintSetups.Click
-            RunForm(Of PrintSetupEntryTv, PrintSetupPresenter(Of PrintSetupModel))()
+            RunForm(Of PrintSetupEntry, PrintSetupPresenter(Of PrintSetupModel))()
         End Sub
 
         Private Sub ToolStripMenuItemUnit_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUnit.Click
@@ -1162,7 +1168,11 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemSterilizationLabels_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSterilizationLabels.Click
-            RunForm(Of SterilizationLabelPrinter)()
+            RunReport(Of SterilizationLabelPrinter, PrintReportPresenter)()
+        End Sub
+
+        Private Sub ToolStripMenuItemReportMaster_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemReportMaster.Click
+            RunForm(Of ReportEntry, ReportPresenter(Of ReportModel))()
         End Sub
     End Class
 

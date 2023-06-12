@@ -16,9 +16,9 @@ Namespace PresentationLayer.Views.Forms.Reports
             GetReportProperties()
             For i = 0 To args.Length - 1 Step 2
                 Dim value = args(i)
-                Report.SetParameterValue(args(i + 1).ToString(), ConvertObjectToType(value))
+                ReportDocument.SetParameterValue(args(i + 1).ToString(), ConvertObjectToType(value))
             Next
-            Report.DataSourceConnections.Clear()
+            ReportDocument.DataSourceConnections.Clear()
             ProcessReport()
 
         End Sub

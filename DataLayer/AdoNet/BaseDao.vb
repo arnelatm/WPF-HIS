@@ -447,15 +447,15 @@ Namespace AdoNet
             Return obj
         End Function
 
-        Public Function GetIdNoWithName(Of T)(tableName As String, fieldValue As String, Optional fieldName As String = Nothing, Optional idFieldName As String = Nothing) As T Implements IBaseDao.GetIdNoWithName
+        Public Function GetIdNoWithKey(Of T)(tableName As String, KeyValue As String, Optional keyFieldName As String = Nothing, Optional idFieldName As String = Nothing) As T Implements IBaseDao.GetIdNoWithKey
             If idFieldName Is Nothing Then
                 idFieldName = "IdNo"
             End If
-            If fieldName Is Nothing Then
-                fieldName = tableName + "Name"
+            If keyFieldName Is Nothing Then
+                keyFieldName = tableName + "Name"
             End If
-            Dim sql As String = "Select Top 1 " & idFieldName & " FROM " & tableName & " where " & fieldName & " =  @FieldValue"
-            Dim params() As Object = {"@FieldValue", fieldValue}
+            Dim sql As String = "Select Top 1 " & idFieldName & " FROM " & tableName & " where " & keyFieldName & " =  @FieldValue"
+            Dim params() As Object = {"@FieldValue", KeyValue}
             Return GetDb().Scalar(sql, params)
         End Function
 
@@ -474,7 +474,7 @@ Namespace AdoNet
         End Function
 
         Public Function GetPrintJobIdNo(reportFileName As String) As Int32 Implements IBaseDao.GetPrintJobIdNo
-            Dim sql As String = "Select Top 1 PrintJobIdNo from ReportFile where ReportFileName = @reportFileName"
+            Dim sql As String = "Select Top 1 PrintJobIdNo from Report where ReportFileName = @reportFileName"
             Dim params() As Object = {"@ReportFileName", reportFileName}
             Return GetDb().Scalar(sql, params)
         End Function

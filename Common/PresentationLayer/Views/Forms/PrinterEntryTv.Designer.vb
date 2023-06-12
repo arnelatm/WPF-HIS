@@ -143,173 +143,176 @@ Namespace PresentationLayer.Views.Forms
         Me.TxtIdNo.MinimumValue = Nothing
         Me.TxtIdNo.Name = "TxtIdNo"
         Me.TxtIdNo.OldValue = Nothing
-        Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.TxtIdNo.Size = New System.Drawing.Size(62, 23)
-        Me.TxtIdNo.TabIndex = 0
-        Me.TxtIdNo.Translatable = false
-        '
-        'btnCheckPrinter
-        '
-        Me.btnCheckPrinter.DesignerSelected = false
-        Me.floDataDisplay.SetFlowBreak(Me.btnCheckPrinter, true)
-        Me.btnCheckPrinter.ImageIndex = 0
-        Me.btnCheckPrinter.Location = New System.Drawing.Point(262, 13)
-        Me.btnCheckPrinter.Name = "btnCheckPrinter"
-        Me.btnCheckPrinter.OriginalImageName = Nothing
-        Me.btnCheckPrinter.SecurityKey = ""
-        Me.btnCheckPrinter.Size = New System.Drawing.Size(128, 25)
-        Me.btnCheckPrinter.TabIndex = 178
-        Me.btnCheckPrinter.Text = "Check Printer"
-        '
-        'lblPrinterCode
-        '
-        Me.lblPrinterCode.DisplayOnly = true
-        Me.lblPrinterCode.EditingMode = false
-        Me.lblPrinterCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.MyErrorProvider.SetIconAlignment(Me.lblPrinterCode, System.Windows.Forms.ErrorIconAlignment.TopLeft)
-        Me.lblPrinterCode.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPrinterCode.Location = New System.Drawing.Point(11, 42)
-        Me.lblPrinterCode.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblPrinterCode.Name = "lblPrinterCode"
-        Me.lblPrinterCode.Size = New System.Drawing.Size(183, 23)
-        Me.lblPrinterCode.TabIndex = 157
-        Me.lblPrinterCode.Text = "Printer Code"
-        Me.lblPrinterCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblPrinterCode.Translatable = true
-        '
-        'txtPrinterCode
-        '
-        Me.txtPrinterCode.BackColor = System.Drawing.Color.White
-        Me.txtPrinterCode.BegFindValue = Nothing
-        Me.txtPrinterCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtPrinterCode.ComputedValue = false
-        Me.txtPrinterCode.CustomFormat = Nothing
-        Me.txtPrinterCode.DataBoundControl = true
-        Me.txtPrinterCode.EditingMode = true
-        Me.txtPrinterCode.EndFindValue = Nothing
-        Me.txtPrinterCode.FieldDescription = Nothing
-        Me.txtPrinterCode.FieldName = Nothing
-        Me.txtPrinterCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtPrinterCode.FindEnabled = false
-        Me.floDataDisplay.SetFlowBreak(Me.txtPrinterCode, true)
-        Me.txtPrinterCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtPrinterCode.ForeColor = System.Drawing.Color.Black
-        Me.txtPrinterCode.LinkedLabel = Me.lblPrinterName
-        Me.txtPrinterCode.Location = New System.Drawing.Point(196, 42)
-        Me.txtPrinterCode.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtPrinterCode.MaximumValue = Nothing
-        Me.txtPrinterCode.MinimumValue = Nothing
-        Me.txtPrinterCode.Name = "txtPrinterCode"
-        Me.txtPrinterCode.OldValue = "0"
-        Me.txtPrinterCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtPrinterCode.Size = New System.Drawing.Size(108, 23)
-        Me.txtPrinterCode.TabIndex = 1
-        Me.txtPrinterCode.Translatable = false
-        '
-        'lblPrinterName
-        '
-        Me.lblPrinterName.DisplayOnly = true
-        Me.lblPrinterName.EditingMode = false
-        Me.lblPrinterName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.MyErrorProvider.SetIconAlignment(Me.lblPrinterName, System.Windows.Forms.ErrorIconAlignment.TopLeft)
-        Me.lblPrinterName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPrinterName.Location = New System.Drawing.Point(11, 67)
-        Me.lblPrinterName.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblPrinterName.Name = "lblPrinterName"
-        Me.lblPrinterName.Size = New System.Drawing.Size(183, 23)
-        Me.lblPrinterName.TabIndex = 165
-        Me.lblPrinterName.Text = "Printer Name"
-        Me.lblPrinterName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblPrinterName.Translatable = true
-        '
-        'cboPrinterName
-        '
-        Me.cboPrinterName.AlwaysEditable = false
-        Me.cboPrinterName.BackColor = System.Drawing.Color.White
-        Me.cboPrinterName.BegFindValue = Nothing
-        Me.cboPrinterName.ChangingSearchValueOnly = false
-        Me.cboPrinterName.CurrentSearchTerm = ""
-        Me.cboPrinterName.DataValue = Nothing
-        Me.cboPrinterName.DefaultValue = Nothing
-        Me.cboPrinterName.DisplayMember = "Name"
-        Me.cboPrinterName.EditingMode = true
-        Me.cboPrinterName.EndFindValue = Nothing
-        Me.cboPrinterName.FieldDescription = Nothing
-        Me.cboPrinterName.FieldName = Nothing
-        Me.cboPrinterName.FilterRule = Nothing
-        Me.cboPrinterName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboPrinterName.FindEnabled = false
-        Me.cboPrinterName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.cboPrinterName.ForeColor = System.Drawing.Color.Black
-        Me.cboPrinterName.FormattingEnabled = true
-        Me.cboPrinterName.HideWhenNotEditingOrAdding = false
-        Me.cboPrinterName.IgnoreCase = false
-        Me.cboPrinterName.IntegralHeight = false
-        Me.cboPrinterName.LimitToList = false
-        Me.cboPrinterName.LinkedLabel = Nothing
-        Me.cboPrinterName.Location = New System.Drawing.Point(196, 67)
-        Me.cboPrinterName.Margin = New System.Windows.Forms.Padding(1)
-        Me.cboPrinterName.Name = "cboPrinterName"
-        Me.cboPrinterName.OldValue = 0
-        Me.cboPrinterName.OriginalDataSource = Nothing
-        Me.cboPrinterName.OriginalList = Nothing
-        Me.cboPrinterName.OverrideDropDownStyleList = false
-        Me.cboPrinterName.PreviousSearchTerm = Nothing
-        Me.cboPrinterName.PropertySelector = Nothing
-        Me.cboPrinterName.ReadOnlyCombo = false
-        Me.cboPrinterName.Size = New System.Drawing.Size(423, 24)
-        Me.cboPrinterName.SuggestBoxHeight = 200
-        Me.cboPrinterName.SuggestListOrderRule = Nothing
-        Me.cboPrinterName.TabIndex = 179
-        Me.cboPrinterName.TextToSearch = Nothing
-        Me.cboPrinterName.Translatable = false
-        Me.cboPrinterName.ValueIsMandatory = false
-        Me.cboPrinterName.ValueIsNullable = false
-        Me.cboPrinterName.ValueIsNumeric = false
-        Me.cboPrinterName.ValueMember = "IdNo"
-        '
-        'lblHostName
-        '
-        Me.lblHostName.DisplayOnly = true
-        Me.lblHostName.EditingMode = false
-        Me.lblHostName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.MyErrorProvider.SetIconAlignment(Me.lblHostName, System.Windows.Forms.ErrorIconAlignment.TopLeft)
-        Me.lblHostName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblHostName.Location = New System.Drawing.Point(11, 93)
-        Me.lblHostName.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblHostName.Name = "lblHostName"
-        Me.lblHostName.Size = New System.Drawing.Size(183, 23)
-        Me.lblHostName.TabIndex = 176
-        Me.lblHostName.Text = "Host or IP Name"
-        Me.lblHostName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblHostName.Translatable = true
-        '
-        'txtHostOrIpName
-        '
-        Me.txtHostOrIpName.BackColor = System.Drawing.Color.White
-        Me.txtHostOrIpName.BegFindValue = Nothing
-        Me.txtHostOrIpName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtHostOrIpName.ComputedValue = false
-        Me.txtHostOrIpName.CustomFormat = Nothing
-        Me.txtHostOrIpName.DataBoundControl = true
-        Me.txtHostOrIpName.EditingMode = true
-        Me.txtHostOrIpName.EndFindValue = Nothing
-        Me.txtHostOrIpName.FieldDescription = Nothing
-        Me.txtHostOrIpName.FieldName = Nothing
-        Me.txtHostOrIpName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtHostOrIpName.FindEnabled = false
-        Me.floDataDisplay.SetFlowBreak(Me.txtHostOrIpName, true)
-        Me.txtHostOrIpName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtHostOrIpName.ForeColor = System.Drawing.Color.Black
-        Me.txtHostOrIpName.LinkedLabel = Me.lblHostName
-        Me.txtHostOrIpName.Location = New System.Drawing.Point(196, 93)
-        Me.txtHostOrIpName.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtHostOrIpName.MaximumValue = Nothing
-        Me.txtHostOrIpName.MinimumValue = Nothing
-        Me.txtHostOrIpName.Name = "txtHostOrIpName"
-        Me.txtHostOrIpName.OldValue = "0"
-        Me.txtHostOrIpName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtHostOrIpName.Size = New System.Drawing.Size(423, 23)
+            Me.TxtIdNo.OverrideMaxLength = 0
+            Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.TxtIdNo.Size = New System.Drawing.Size(62, 23)
+            Me.TxtIdNo.TabIndex = 0
+            Me.TxtIdNo.Translatable = False
+            '
+            'btnCheckPrinter
+            '
+            Me.btnCheckPrinter.DesignerSelected = False
+            Me.floDataDisplay.SetFlowBreak(Me.btnCheckPrinter, True)
+            Me.btnCheckPrinter.ImageIndex = 0
+            Me.btnCheckPrinter.Location = New System.Drawing.Point(262, 13)
+            Me.btnCheckPrinter.Name = "btnCheckPrinter"
+            Me.btnCheckPrinter.OriginalImageName = Nothing
+            Me.btnCheckPrinter.SecurityKey = ""
+            Me.btnCheckPrinter.Size = New System.Drawing.Size(128, 25)
+            Me.btnCheckPrinter.TabIndex = 178
+            Me.btnCheckPrinter.Text = "Check Printer"
+            '
+            'lblPrinterCode
+            '
+            Me.lblPrinterCode.DisplayOnly = True
+            Me.lblPrinterCode.EditingMode = False
+            Me.lblPrinterCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.MyErrorProvider.SetIconAlignment(Me.lblPrinterCode, System.Windows.Forms.ErrorIconAlignment.TopLeft)
+            Me.lblPrinterCode.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblPrinterCode.Location = New System.Drawing.Point(11, 42)
+            Me.lblPrinterCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPrinterCode.Name = "lblPrinterCode"
+            Me.lblPrinterCode.Size = New System.Drawing.Size(183, 23)
+            Me.lblPrinterCode.TabIndex = 157
+            Me.lblPrinterCode.Text = "Printer Code"
+            Me.lblPrinterCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPrinterCode.Translatable = True
+            '
+            'txtPrinterCode
+            '
+            Me.txtPrinterCode.BackColor = System.Drawing.Color.White
+            Me.txtPrinterCode.BegFindValue = Nothing
+            Me.txtPrinterCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtPrinterCode.ComputedValue = False
+            Me.txtPrinterCode.CustomFormat = Nothing
+            Me.txtPrinterCode.DataBoundControl = True
+            Me.txtPrinterCode.EditingMode = True
+            Me.txtPrinterCode.EndFindValue = Nothing
+            Me.txtPrinterCode.FieldDescription = Nothing
+            Me.txtPrinterCode.FieldName = Nothing
+            Me.txtPrinterCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtPrinterCode.FindEnabled = False
+            Me.floDataDisplay.SetFlowBreak(Me.txtPrinterCode, True)
+            Me.txtPrinterCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtPrinterCode.ForeColor = System.Drawing.Color.Black
+            Me.txtPrinterCode.LinkedLabel = Me.lblPrinterName
+            Me.txtPrinterCode.Location = New System.Drawing.Point(196, 42)
+            Me.txtPrinterCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtPrinterCode.MaximumValue = Nothing
+            Me.txtPrinterCode.MinimumValue = Nothing
+            Me.txtPrinterCode.Name = "txtPrinterCode"
+            Me.txtPrinterCode.OldValue = "0"
+            Me.txtPrinterCode.OverrideMaxLength = 0
+            Me.txtPrinterCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtPrinterCode.Size = New System.Drawing.Size(108, 23)
+            Me.txtPrinterCode.TabIndex = 1
+            Me.txtPrinterCode.Translatable = False
+            '
+            'lblPrinterName
+            '
+            Me.lblPrinterName.DisplayOnly = True
+            Me.lblPrinterName.EditingMode = False
+            Me.lblPrinterName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.MyErrorProvider.SetIconAlignment(Me.lblPrinterName, System.Windows.Forms.ErrorIconAlignment.TopLeft)
+            Me.lblPrinterName.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblPrinterName.Location = New System.Drawing.Point(11, 67)
+            Me.lblPrinterName.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPrinterName.Name = "lblPrinterName"
+            Me.lblPrinterName.Size = New System.Drawing.Size(183, 23)
+            Me.lblPrinterName.TabIndex = 165
+            Me.lblPrinterName.Text = "Printer Name"
+            Me.lblPrinterName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPrinterName.Translatable = True
+            '
+            'cboPrinterName
+            '
+            Me.cboPrinterName.AlwaysEditable = False
+            Me.cboPrinterName.BackColor = System.Drawing.Color.White
+            Me.cboPrinterName.BegFindValue = Nothing
+            Me.cboPrinterName.ChangingSearchValueOnly = False
+            Me.cboPrinterName.CurrentSearchTerm = ""
+            Me.cboPrinterName.DataValue = Nothing
+            Me.cboPrinterName.DefaultValue = Nothing
+            Me.cboPrinterName.DisplayMember = "Name"
+            Me.cboPrinterName.EditingMode = True
+            Me.cboPrinterName.EndFindValue = Nothing
+            Me.cboPrinterName.FieldDescription = Nothing
+            Me.cboPrinterName.FieldName = Nothing
+            Me.cboPrinterName.FilterRule = Nothing
+            Me.cboPrinterName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboPrinterName.FindEnabled = False
+            Me.cboPrinterName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboPrinterName.ForeColor = System.Drawing.Color.Black
+            Me.cboPrinterName.FormattingEnabled = True
+            Me.cboPrinterName.HideWhenNotEditingOrAdding = False
+            Me.cboPrinterName.IgnoreCase = False
+            Me.cboPrinterName.IntegralHeight = False
+            Me.cboPrinterName.LimitToList = False
+            Me.cboPrinterName.LinkedLabel = Nothing
+            Me.cboPrinterName.Location = New System.Drawing.Point(196, 67)
+            Me.cboPrinterName.Margin = New System.Windows.Forms.Padding(1)
+            Me.cboPrinterName.Name = "cboPrinterName"
+            Me.cboPrinterName.OldValue = 0
+            Me.cboPrinterName.OriginalDataSource = Nothing
+            Me.cboPrinterName.OriginalList = Nothing
+            Me.cboPrinterName.OverrideDropDownStyleList = False
+            Me.cboPrinterName.PreviousSearchTerm = Nothing
+            Me.cboPrinterName.PropertySelector = Nothing
+            Me.cboPrinterName.ReadOnlyCombo = False
+            Me.cboPrinterName.Size = New System.Drawing.Size(423, 24)
+            Me.cboPrinterName.SuggestBoxHeight = 200
+            Me.cboPrinterName.SuggestListOrderRule = Nothing
+            Me.cboPrinterName.TabIndex = 179
+            Me.cboPrinterName.TextToSearch = Nothing
+            Me.cboPrinterName.Translatable = False
+            Me.cboPrinterName.ValueIsMandatory = False
+            Me.cboPrinterName.ValueIsNullable = False
+            Me.cboPrinterName.ValueIsNumeric = False
+            Me.cboPrinterName.ValueMember = "IdNo"
+            '
+            'lblHostName
+            '
+            Me.lblHostName.DisplayOnly = True
+            Me.lblHostName.EditingMode = False
+            Me.lblHostName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.MyErrorProvider.SetIconAlignment(Me.lblHostName, System.Windows.Forms.ErrorIconAlignment.TopLeft)
+            Me.lblHostName.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblHostName.Location = New System.Drawing.Point(11, 93)
+            Me.lblHostName.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblHostName.Name = "lblHostName"
+            Me.lblHostName.Size = New System.Drawing.Size(183, 23)
+            Me.lblHostName.TabIndex = 176
+            Me.lblHostName.Text = "Host or IP Name"
+            Me.lblHostName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblHostName.Translatable = True
+            '
+            'txtHostOrIpName
+            '
+            Me.txtHostOrIpName.BackColor = System.Drawing.Color.White
+            Me.txtHostOrIpName.BegFindValue = Nothing
+            Me.txtHostOrIpName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtHostOrIpName.ComputedValue = False
+            Me.txtHostOrIpName.CustomFormat = Nothing
+            Me.txtHostOrIpName.DataBoundControl = True
+            Me.txtHostOrIpName.EditingMode = True
+            Me.txtHostOrIpName.EndFindValue = Nothing
+            Me.txtHostOrIpName.FieldDescription = Nothing
+            Me.txtHostOrIpName.FieldName = Nothing
+            Me.txtHostOrIpName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtHostOrIpName.FindEnabled = False
+            Me.floDataDisplay.SetFlowBreak(Me.txtHostOrIpName, True)
+            Me.txtHostOrIpName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtHostOrIpName.ForeColor = System.Drawing.Color.Black
+            Me.txtHostOrIpName.LinkedLabel = Me.lblHostName
+            Me.txtHostOrIpName.Location = New System.Drawing.Point(196, 93)
+            Me.txtHostOrIpName.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtHostOrIpName.MaximumValue = Nothing
+            Me.txtHostOrIpName.MinimumValue = Nothing
+            Me.txtHostOrIpName.Name = "txtHostOrIpName"
+            Me.txtHostOrIpName.OldValue = "0"
+            Me.txtHostOrIpName.OverrideMaxLength = 0
+            Me.txtHostOrIpName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtHostOrIpName.Size = New System.Drawing.Size(423, 23)
         Me.txtHostOrIpName.TabIndex = 3
         Me.txtHostOrIpName.Translatable = false
         '

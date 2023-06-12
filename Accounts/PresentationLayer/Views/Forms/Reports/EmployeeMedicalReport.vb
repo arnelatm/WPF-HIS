@@ -19,7 +19,6 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             MainTableName = "Employee"
             SortOrderKey = "IdNo"
-            Presenter = New ReportPresenter(Me)
             dtpMedicalReportDate.Value = Today()
         End Sub
 

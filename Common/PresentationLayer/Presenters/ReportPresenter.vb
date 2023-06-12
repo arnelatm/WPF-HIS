@@ -1,25 +1,28 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.Common.BusinessLayer
-Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.Common.PresentationLayer.Models
+Imports AATM.Common.PresentationLayer.Views.Interfaces
+Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries
 Imports AATM.PresentationLayer.Forms
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
-    Public Class ReportPresenter
-        Inherits AccountsPresenter(Of IView, AccountModel)
+    Public Class ReportPresenter(Of TM As New)
+        Inherits CommonPresenter(Of IReportView, TM)
         Implements ISubscriber(Of ShowReportRequested)
 
         Public Sub New(view As IView)
             MyBase.New(view)
             TableName = "Account"
-            Service = New AccountsService("Account")
+            Service = New CommonService("Report")
             TableName = "Account"
             SortOrderKey = "IdNo"
             WithTreeView = False
+        End Sub
+
+        Public Sub OnShowReportRequested(ByRef eventType As ShowReportRequested) Implements ISubscriber(Of ShowReportRequested).OnEventHandler
+            ShowReport(eventType.reportFileName, eventType.reportTitle, eventType.FormCulture, eventType.DbConnName, eventType.Args)
         End Sub
 
         Public Sub ShowReport(reportFileName As String, reportTitle As String, cFormCulture As CultureInfo, dbConnectionName As String, args As Object)
@@ -29,10 +32,6 @@ Namespace PresentationLayer.Presenters
             crViewerForm.Show()
         End Sub
 
-        Public Sub OnShowReportRequested(ByRef eventType As ShowReportRequested) Implements ISubscriber(Of ShowReportRequested).OnEventHandler
-            ShowReport(eventType.reportFileName, eventType.reportTitle, eventType.FormCulture, eventType.DbConnName, eventType.Args)
-        End Sub
-
         Protected Overrides Sub Finalize()
             MyBase.Finalize()
         End Sub
@@ -40,19 +39,15 @@ Namespace PresentationLayer.Presenters
     End Class
 
     Public Class DateRangeCompanyPresenter
-        Inherits AccountsPresenter(Of IView, AccountModel)
+        Inherits CommonPresenter(Of IView, ReportModel)
 
         Public Sub New(view As IView)
             MyBase.New(view)
             TableName = "Account"
-            Service = New AccountsService("Account")
+            Service = New CommonService("Report")
             TableName = "Account"
             SortOrderKey = "IdNo"
             WithTreeView = False
-            Service.SaveConnectionString()
-            Service.SetConnectionString("IGROUPCLINIC")
-            CreateLookupData("InsuranceDetails", "InsuranceList", {"InsuranceId", "NameEnglish"}, "NameEnglish", Nothing)
-            Service.RestoreConnectionString()
         End Sub
 
     End Class

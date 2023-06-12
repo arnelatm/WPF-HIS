@@ -4,11 +4,12 @@ Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports System.Management
+Imports AATM.Common.PresentationLayer.Views.Interfaces
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class PrintSetupEntry
-        Implements IPrintSetupView
+    Public Class ReportEntry
+        Implements IReportView
 
         Public Sub New()
             ' This call is required by the designer.
@@ -17,20 +18,18 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
         End Sub
 
-        Public Event PrinterChanged(sender As Object) Implements IPrintSetupView.PrinterChanged
-
 #Region "Fields"
 
-        Public Property IdNo As Int16 Implements IPrintSetupView.IdNo
+        Public Property IdNo As Int16 Implements IReportView.IdNo
             Get
-                Return GlobalFunctions.NumParser(Of Int32)(TxtIdNo.Text)
+                Return GlobalFunctions.NumParser(Of Int32)(txtIdNo.Text)
             End Get
             Set
-                TxtIdNo.Text = Convert.ToString(Value)
+                txtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
-        Public Property PrintJobIdNo As Int16 Implements IPrintSetupView.PrintJobIdNo
+        Public Property PrintJobIdNo As Int16 Implements IReportView.PrintJobIdNo
             Get
                 Return cboPrintJobIdNo.GetValue()
             End Get
@@ -39,57 +38,93 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property ComputerIdNo As Int16 Implements IPrintSetupView.ComputerIdNo
+        Public Property ReportName As String Implements IReportView.ReportName
             Get
-                Return cboComputerIdNo.GetValue()
+                Return txtReportName.Text
             End Get
             Set
-                cboComputerIdNo.SetValue(Value)
+                txtReportName.Text = Value
             End Set
         End Property
 
-        Public Property PaperSize As Int16 Implements IPrintSetupView.PaperSize
+        Public Property ReportCode As String Implements IReportView.ReportCode
             Get
-                Return cboPaperSize.GetValue()
+                Return txtReportCode.Text
             End Get
             Set
-                cboPaperSize.SetValue(Value)
+                txtReportCode.Text = Value
             End Set
         End Property
 
-        Public Property PaperSource As Int16 Implements IPrintSetupView.PaperSource
+        Public Property QueryForm As String Implements IReportView.QueryForm
             Get
-                Return cboPaperSource.GetValue()
+                Return txtQueryForm.Text
             End Get
             Set
-                cboPaperSource.SetValue(Value)
+                txtQueryForm.Text = Value
             End Set
         End Property
 
-        Public Property PrinterIdNo As Int16 Implements IPrintSetupView.PrinterIdNo
+        Public Property QueryFormParameters As String Implements IReportView.QueryFormParameters
             Get
-                Return cboPrinterIdNo.GetValue()
+                Return txtQueryFormParameters.Text
             End Get
             Set
-                cboPrinterIdNo.SetValue(Value)
+                txtQueryFormParameters.Text = Value
             End Set
         End Property
 
-        Public Property PaperOrientation As Int16 Implements IPrintSetupView.PaperOrientation
+        Public Property QueryParameters As String Implements IReportView.QueryParameters
             Get
-                Return cboPaperOrientation.GetValue()
+                Return txtQueryParameters.Text
             End Get
             Set
-                cboPaperOrientation.SetValue(Value)
+                txtQueryParameters.Text = Value
             End Set
         End Property
 
-        Public Property PrintSetupName As String Implements IPrintSetupView.PrintSetupName
+        Public Property ReportFileName As String Implements IReportView.ReportFileName
             Get
-                Return txtPrintSetupName.Text
+                Return txtReportFileName.Text
             End Get
             Set
-                txtPrintSetupName.Text = Value
+                txtReportFileName.Text = Value
+            End Set
+        End Property
+
+        Public Property ReportGroup As String Implements IReportView.ReportGroup
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As String)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property ReportNameAra As String Implements IReportView.ReportNameAra
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As String)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property ReportTitle As String Implements IReportView.ReportTitle
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As String)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property ReportTitleAra As String Implements IReportView.ReportTitleAra
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As String)
+                Throw New NotImplementedException()
             End Set
         End Property
 
@@ -98,20 +133,14 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
-                {"ComputerIdNo", cboComputerIdNo},
-                {"IdNo", TxtIdNo},
-                {"PaperOrientation", cboPaperOrientation},
-                {"PaperSize", cboPaperSize},
-                {"PaperSource", cboPaperSource},
-                {"PrinterIdNo", cboPrinterIdNo},
-                {"PrintJobIdNo", cboPrintJobIdNo}
+                {"ReportName", txtReportName},
+                {"ReportCode", txtReportCode},
+                {"QueryForm", txtQueryForm},
+                {"QueryFormParameters", txtQueryFormParameters},
+                {"ReportTitle", txtReportTitle},
+                {"IdNo", txtIdNo}
                 }
         End Sub
-
-        Private Sub cboPrinterName_TextChanged(sender As Object, e As EventArgs) Handles cboPrinterIdNo.TextChanged
-            RaiseEvent PrinterChanged(Me)
-        End Sub
-
 
         'Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrinters.ClickButtonArea
         '    'Dim myForm = New CListSelector(btnPrinters, GetInstalledPrinters())

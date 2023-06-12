@@ -7,7 +7,7 @@ Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 Imports PaperSize = CrystalDecisions.Shared.PaperSize
 
-Public Class ReportPrinter
+Public Class CrystalReportPrinter
     Private Const DefaultConnection As String = "ISPDATA"
     Private ReadOnly _report As New ReportDocument
 
@@ -24,10 +24,15 @@ Public Class ReportPrinter
         ReportFileName = pReportFileName
         DataBaseConnectionName = pDataBaseConnectionName
         SetReportProperties(pReportFileName)
+        Args = pArgs
+        For i = 0 To Args.Length - 1 Step 2
+            Dim value As Object = Args(i)
+            _report.SetParameterValue(Args(i + 1).ToString(), ConvertObjectToType(value))
+        Next
         'If pArgs IsNot Nothing Then
         '    SetParameterValue(pArgs)
         'End If
-        args = pArgs
+
     End Sub
 
     Public Sub SetReportProperties(pReportFileName As String)

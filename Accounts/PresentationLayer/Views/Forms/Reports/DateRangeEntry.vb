@@ -1,9 +1,8 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
+Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms.Reports
 
@@ -23,8 +22,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = "ApJournal"
             SortOrderKey = "IdNo"
-            Presenter = New ReportPresenter(Me)
-
             Dim today = Now()
             dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
             dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
@@ -46,7 +43,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             _reportModel = reportModel
             MainTableName = "ApJournal"
             SortOrderKey = "IdNo"
-            Presenter = New ReportPresenter(Me)
             Dim qParameters As String = _reportModel.QueryFormParameters
             Dim lParameters As String() = qParameters.Split(","c)
             _period = lParameters(0)

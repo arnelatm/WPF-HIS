@@ -19,7 +19,6 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             MainTableName = "CBCResults"
             SortOrderKey = "IdNo"
-            Presenter = New ReportPresenter(Me)
             txtSampleNo.Text = ""
             _mode = mode
         End Sub

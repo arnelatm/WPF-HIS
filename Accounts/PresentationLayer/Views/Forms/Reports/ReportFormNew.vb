@@ -19,22 +19,21 @@ Namespace PresentationLayer.Views.Forms.Reports
             GetReportProperties()
             Dim language As String
             Dim establishmentName As String
-            Presenter = New ReportPresenter(Me)
             language = Strings.Left(formCulture.Name, formCulture.Name.IndexOf("-", StringComparison.Ordinal))
             If language <> "ar" Then
-                establishmentName = Presenter.GetRecordField("Establishment", "EstablishmentName")
+                establishmentName = Presenter.Service.GetRecordField("Establishment", "EstablishmentName")
             Else
-                establishmentName = Presenter.GetRecordField("Establishment", "EstablishmentNameAra")
+                establishmentName = Presenter.Service.GetRecordField("Establishment", "EstablishmentNameAra")
             End If
 
             For i = 0 To args.Length - 1 Step 2
                 Dim value As Object = args(i)
-                Report.SetParameterValue(args(i + 1).ToString(), ConvertObjectToType(value))
+                ReportDocument.SetParameterValue(args(i + 1).ToString(), ConvertObjectToType(value))
             Next
-            Report.SetParameterValue("ReportTitle", reportTitle)
-            Report.SetParameterValue("EstablishmentName", establishmentName)
-            Report.SetParameterValue("Language", language)
-            Report.DataSourceConnections.Clear()
+            ReportDocument.SetParameterValue("ReportTitle", reportTitle)
+            ReportDocument.SetParameterValue("EstablishmentName", establishmentName)
+            ReportDocument.SetParameterValue("Language", language)
+            ReportDocument.DataSourceConnections.Clear()
             SetPrintOption(fileName)
             ProcessReport()
 
@@ -47,10 +46,10 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim printJobIdNo As Int16 = GetPrintJobIdNo(reportFileName)
             Dim printSetup As Object = GetPrintSetupObject(computerIdNo, printJobIdNo)
 
-            Report.PrintOptions.PrinterName = GetPrinterName(printSetup.PrinterIdNo)
-            Report.PrintOptions.PaperSize = GetPaperSize(printSetup.PaperSizeIdNo)
-            Report.PrintOptions.PaperOrientation = GetPaperOrientation(printSetup.PaperOrientation)
-            Report.PrintOptions.PaperSource = GetPaperSource(printSetup.PaperOrientation)
+            'Report.PrintOptions.PrinterName = GetPrinterName(printSetup.PrinterIdNo)
+            'Report.PrintOptions.PaperSize = GetPaperSize(printSetup.PaperSizeIdNo)
+            'Report.PrintOptions.PaperOrientation = GetPaperOrientation(printSetup.PaperOrientation)
+            'Report.PrintOptions.PaperSource = GetPaperSource(printSetup.PaperOrientation)
 
         End Sub
 
@@ -59,7 +58,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim tableName As String = "ReportFile"
             Dim searchFieldName As String = "ReportFileName"
             Dim returnFieldName As String = "PrintJobIdNo"
-            Return Presenter.GetField(reportFileName, tableName, searchFieldName, returnFieldName)
+            Return Presenter.Service.GetField(reportFileName, tableName, searchFieldName, returnFieldName)
         End Function
 
         Public Function GetPrintSetupIdNo(computerIdNo As Int16, printJobIdNo As Int32) As Int32
@@ -67,7 +66,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim tableName As String = "ReportFile"
             Dim searchFieldName As String = "ReportFileName"
             Dim returnFieldName As String = "PrintJobIdNo"
-            Return Presenter.GetField(ReportFileName, tableName, searchFieldName, returnFieldName)
+            Return Presenter.Service.GetField(ReportFileName, tableName, searchFieldName, returnFieldName)
         End Function
 
 
@@ -76,7 +75,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim tableName As String = "Computer"
             Dim searchFieldName As String = "ComputerName"
             Dim returnFieldName As String = "IdNo"
-            Return Presenter.GetField(searchValue, "Computer", searchFieldName, returnFieldName)
+            Return Presenter.Service.GetField(searchValue, "Computer", searchFieldName, returnFieldName)
         End Function
 
         Public Function GetPrintSetupIdNo(computerIdNo As Int16, printJobIdNo As Int16) As Int16
@@ -86,13 +85,12 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim searchFieldName1 As String = "ComputerIdNo"
             Dim searchFieldName2 As String = "PrintJobIdNo"
             Dim returnFieldName As String = "IdNo"
-            Dim printSetupIdNo As Int32 = Presenter.GetRecordFieldWith2KeyG(Of Int16, Int16, Int16)(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2, returnFieldName)
-            Return Presenter.GetPrintSetupObject(printSetupIdNo, tableName, "PrinterIdNo,PaperSource,PaperOrientation,PaperSize")
+            Return Presenter.Service.GetRecordFieldWith2KeyG(Of Int16, Int16, Int16)(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2, returnFieldName)
         End Function
 
         Public Function GetPrintSetupObject(computerIdNo As Int16, printJobIdNo As Int16) As Object
             Dim printSetupIdNo As Int16 = GetPrintSetupIdNo(computerIdNo, printJobIdNo)
-            Return Presenter.GetFieldsWithIdNo(printSetupIdNo, "PrintSetup", "PrinterIdNo,PaperSource,PaperOrientation,PaperSize", "IdNo")
+            Return Presenter.Service.GetFieldsWithIdNo(printSetupIdNo, "PrintSetup", "PrinterIdNo,PaperSource,PaperOrientation,PaperSize", "IdNo")
         End Function
 
 
