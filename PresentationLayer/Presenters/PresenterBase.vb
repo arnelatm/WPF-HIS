@@ -2011,15 +2011,13 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Function
 
 
-    Protected Sub SetDataSource(dataTableName As String, control As Control, Optional dataFields As String() = Nothing, Optional sortKey As String = Nothing, Optional filter As String = Nothing)
+    Public Sub SetDataSource(dataTableName As String, control As Control, Optional dataFields As String() = Nothing, Optional sortKey As String = Nothing, Optional filter As String = Nothing)
         Dim data As List(Of Lookup.LookupData)
         Dim lookupObj
         lookupObj = SetLookupObject(dataTableName, control, dataFields, sortKey, filter)
         data = GetLookup(lookupObj)
         Dim Task1
         Task1 = Task.Factory.StartNew(Sub() GetLookup(lookupObj))
-        ''Task1 = Task.Factory.StartNew(Sub() CreateDataSource("Department", "ParentIdNo"))
-        'Task2 = Task.Factory.StartNew(Sub() Method1("RevCostCenter", GetControlName("RevCostCenterIdNo")))          
         Task.WaitAll(Task1) ' ,Task2)
         Invoker.SetProperty(control, "DataSource", {data})
     End Sub
