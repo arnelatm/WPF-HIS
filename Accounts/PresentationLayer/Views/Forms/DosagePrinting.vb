@@ -1,8 +1,5 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Models
-Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Views
@@ -13,9 +10,11 @@ Namespace PresentationLayer.Views.Forms
         Implements IDosagePrintingView
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
-        
+
         Public Event AddNewDosage() Implements IDosagePrintingView.AddNewDosage
         Public Event UpdateTree() Implements IDosagePrintingView.UpdateTree
+        Public Event PrintReport(reportFileName As String, pDatabaseConnectionName As String, args As Object, copies As Integer) Implements IDosagePrintingView.PrintReport
+        'Public Event OnPrintReport As IPrintReportView.OnPrintReportEventHandler Implements IDosagePrintingView.PrintReport
 
         Public Sub New()
 

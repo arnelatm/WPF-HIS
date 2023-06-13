@@ -903,7 +903,8 @@ Namespace PresentationLayer.Views.Forms
 
         Private Overloads Sub RunReport(Of TV)()
             Dim formToRun = Activator.CreateInstance(GetType(TV))
-            formToRun.Presenter = New PrintReportPresenter
+            Dim pType As Type = GetType(PrintReportPresenter(Of ReportModel))
+            formToRun.Presenter = Activator.CreateInstance(pType, {formToRun})
             Invoker.InvokeFunction(formToRun, "Show")
         End Sub
 
@@ -1069,10 +1070,11 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of DoctorEntryTv, DoctorPresenter(Of DoctorModel))()
         End Sub
 
-        Private Sub PrintReport(reportFileName As String, databaseConnectionName As String, Optional args() As Object = Nothing)
-            Dim prPresenter As New PrintReportPresenter()
-            prPresenter.PrintReport(reportFileName, databaseConnectionName, args)
-        End Sub
+        'Private Sub PrintReport(reportFileName As String, databaseConnectionName As String, Optional args() As Object = Nothing)
+        '    'Dim prPresenter As New PrintReportPresenter()
+        '    'prPresenter.PrintReport(reportFileName, databaseConnectionName, args)
+        '    RunReport(Of SterilizationLabelPrinter)()
+        'End Sub
 
         Private Sub ToolStripMenuItemStockInventory_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStockInventory.Click
             RunForm(Of StockInventoryEntry, StockInventoryPresenter(Of StockInventoryModel))()
@@ -1088,7 +1090,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ToolStripMenuItemPharmacyBarcodePrinting_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPharmacyBarcodePrinting.Click
             Dim args As Object() = {Environment.MachineName, "Workstation"}
-            PrintReport("BarcodePharmacy.Rpt", $"IGROUP", args)
+            'PrintReport("BarcodePharmacy.Rpt", $"IGROUP", args)
         End Sub
 
         Private Sub ToolStripMenuItemGenerateDailyDrugTransferFile_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemGenerateDailyDrugTransferFile.Click
