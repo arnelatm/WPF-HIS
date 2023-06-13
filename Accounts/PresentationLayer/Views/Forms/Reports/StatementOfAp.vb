@@ -1,6 +1,7 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
@@ -24,7 +25,6 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             MainTableName = "ApJournal"
             SortOrderKey = "IdNo"
-            Presenter.CreateDataSource("Supplier", cboSupplierIdNo)
             Dim today = Now()
             dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, 1, 1)
             dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day)
@@ -47,11 +47,11 @@ Namespace PresentationLayer.Views.Forms.Reports
                 End If
 
                 Dim cForm
-                cForm = New ReportFormNew(fileName, reportTitle, CultureInfo.CurrentCulture, 
+                cForm = New ReportFormNew(fileName, reportTitle, CultureInfo.CurrentCulture,
                                       dtpBeginningDate.Value, "BeginningDate",
                                       dtpEndingDate.Value, "EndingDate",
                                       cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo",
-                                      cboSupplierIdNo.Text, "DisplayName" )
+                                      cboSupplierIdNo.Text, "DisplayName")
                 cForm.Show()
 
                 'prPresenter.PrintReport(fileName, Nothing , args)
@@ -66,6 +66,13 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
             Close()
+        End Sub
+
+
+        Private Sub StatementOfAp_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            If Ea IsNot Nothing Then
+                Ea.PublishEvent(New GetControlDataSource("Supplier", cboSupplierIdNo))
+            End If
         End Sub
 
     End Class

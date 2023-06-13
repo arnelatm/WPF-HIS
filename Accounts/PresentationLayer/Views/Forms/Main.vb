@@ -7,6 +7,7 @@ Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Common
+Imports AATM.Common.BusinessLayer
 Imports AATM.Common.Models
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
@@ -458,7 +459,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemStatementOfAccountsPayable_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStatementOfAccountsPayable.Click
-            RunForm(Of StatementOfAp)()
+            RunReport(Of StatementOfAp)()
         End Sub
 
         Private Sub ToolStripMenuItemStatementOfAccountsReceivable_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStatementOfAccountsReceivable.Click
@@ -900,10 +901,9 @@ Namespace PresentationLayer.Views.Forms
             ShowEntryForm(formToRun)
         End Sub
 
-        Private Overloads Sub RunReport(Of TV, TP)()
+        Private Overloads Sub RunReport(Of TV)()
             Dim formToRun = Activator.CreateInstance(GetType(TV))
-            Dim pType As Type = GetType(TP)
-            formToRun.Presenter = Activator.CreateInstance(pType)
+            formToRun.Presenter = New PrintReportPresenter
             Invoker.InvokeFunction(formToRun, "Show")
         End Sub
 
@@ -1168,7 +1168,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemSterilizationLabels_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSterilizationLabels.Click
-            RunReport(Of SterilizationLabelPrinter, PrintReportPresenter)()
+            RunReport(Of SterilizationLabelPrinter)()
         End Sub
 
         Private Sub ToolStripMenuItemReportMaster_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemReportMaster.Click

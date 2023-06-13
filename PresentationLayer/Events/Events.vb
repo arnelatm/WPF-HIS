@@ -452,3 +452,15 @@ Public Class DgvItemsChanged
     Public Property EnteredValue As Object
 
 End Class
+
+Public Class GetControlDataSource
+
+    Public Sub New(tableName As String, control As Control)
+        Me.TableName = tableName
+        Me.Control = control
+    End Sub
+
+    Public Property TableName As String
+    Public Property Control As Control
+
+End Class

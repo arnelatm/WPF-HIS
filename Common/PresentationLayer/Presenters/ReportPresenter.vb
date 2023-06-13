@@ -19,6 +19,8 @@ Namespace PresentationLayer.Presenters
             TableName = "Account"
             SortOrderKey = "IdNo"
             WithTreeView = False
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
         End Sub
 
         Public Sub OnShowReportRequested(ByRef eventType As ShowReportRequested) Implements ISubscriber(Of ShowReportRequested).OnEventHandler
