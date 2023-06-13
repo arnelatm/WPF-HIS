@@ -1,9 +1,11 @@
-﻿Imports AATM.Libraries.CBaseControlsLibrary
+﻿Imports AATM.Common.PresentationLayer.Views.Forms.Reports
+Imports AATM.Libraries.CBaseControlsLibrary
+Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms.Reports
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
     Partial Class SterilizationLabelPrinter
-        Inherits AATM.PresentationLayer.Forms.BfMain
+        Inherits BfMain
 
         'Form overrides dispose to clean up the component list.
         <System.Diagnostics.DebuggerNonUserCode()>
@@ -265,4 +267,4 @@ Namespace PresentationLayer.Views.Forms.Reports
         Friend WithEvents CLabel3 As CLabel
         Friend WithEvents txtCopies As CTextBox
     End Class
-End NameSpace
+End Namespace

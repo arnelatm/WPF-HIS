@@ -14,7 +14,6 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Public Property MainTableName As String
         Protected SortOrderKey As String
-        Public Event PrintReport(reportFileName As String)
 
         Public Sub New()
 
@@ -54,11 +53,6 @@ Namespace PresentationLayer.Views.Forms.Reports
                                       cboSupplierIdNo.Text, "DisplayName")
                 cForm.Show()
 
-                'prPresenter.PrintReport(fileName, Nothing , args)
-
-                'Ea.PublishEvent(New ShowReportRequested(fileName, reportTitle, FormCulture, $"ISPDATA", args))
-
-                'prPresenter.ShowReport(fileName, reportTitle, FormCulture, "A4", $"ISPDATA", args)
             Else
                 Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
             End If

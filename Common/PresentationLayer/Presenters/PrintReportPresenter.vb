@@ -13,7 +13,8 @@ Imports AATM.ServicesLayer.Services
 
 Namespace PresentationLayer.Presenters
 
-    Public Class PrintReportPresenter
+    Public Class PrintReportPresenter(Of TM As New)
+        Inherits CommonPresenter(Of IPrintReportView, TM)
         Implements ISubscriber(Of GetControlDataSource)
 
         Private ReadOnly _psService As Object
@@ -22,17 +23,22 @@ Namespace PresentationLayer.Presenters
         Private _presenter As CommonPresenter(Of IView, ReportModel)
 
         Public Sub New()
+
+        End Sub
+
+        Public Sub New(view As IPrintReportView)
             _pjService = New CommonService("PrintJob")
             _psService = New CommonService("PrintSetup")
             _prService = New CommonService("Printer")
+            AddHandler view.OnPrintReport, AddressOf OnPrintReport
         End Sub
 
-        Protected Sub CreateDataSources(tableName As String, control As Control)
-            _presenter.CreateDataSource(tableName, control)
-        End Sub
+        'Protected Sub CreateDataSources(tableName As String, control As Control)
+        '    _presenter.CreateDataSource(tableName, control)
+        'End Sub
 
 
-        Public Sub PrintReport(reportFileName As String, databaseConnectionName As String, Optional args() As Object = Nothing, Optional copies As Int16 = 1, Optional collate As Boolean = False, Optional startPage As Int16 = 0, Optional endPage As Int16 = 0)
+        Private Sub OnPrintReport(reportFileName As String, databaseConnectionName As String, Optional args() As Object = Nothing, Optional copies As Int16 = 1, Optional collate As Boolean = False, Optional startPage As Int16 = 0, Optional endPage As Int16 = 0)
             ProcessReport(reportFileName, databaseConnectionName, True, args, copies, collate, startPage, endPage)
         End Sub
 
@@ -90,11 +96,11 @@ Namespace PresentationLayer.Presenters
             ProcessReport(viewer.ReportPrinter.ReportFileName, databaseConnectionName, False)
         End Sub
 
-        Public Function GetService()
+        Public Function GetService1()
             Return _pjService
         End Function
 
-        Public Sub OnEventHandler(ByRef eventType As GetControlDataSource) Implements ISubscriber(Of GetControlDataSource).OnEventHandler
+        Public Sub OnEventHandler2(ByRef eventType As GetControlDataSource) Implements ISubscriber(Of GetControlDataSource).OnEventHandler
             _presenter.SetDataSource(eventType.TableName, eventType.Control)
         End Sub
     End Class
