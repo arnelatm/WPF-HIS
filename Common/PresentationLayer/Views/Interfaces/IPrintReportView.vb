@@ -1,8 +1,14 @@
 ﻿Imports AATM.PresentationLayer.Views
 
 Public Interface IPrintReportView
-    Inherits IView
+    Inherits AATM.PresentationLayer.Views.IView
 
-    Event OnPrintReport(reportFileName As String, pDatabaseConnectionName As String, args As Object, copies As Integer)
+    Event PrintReport(reportFileName As String, pDatabaseConnectionName As String, args As Object, copies As Integer)
+
+End Interface
+
+Public Interface IPrintReport
+
+    Event PrintReport(reportFileName As String, pDatabaseConnectionName As String, args As Object, copies As Integer)
 
 End Interface

@@ -10,7 +10,7 @@ Namespace PresentationLayer.Views.Forms.Reports
     Public Class ReportPrinting
         Implements IPrintReportView
 
-        Public Event OnPrintReport(reportFileName As String, pDatabaseConnectionName As String, args As Object, copies As Integer) Implements IPrintReportView.OnPrintReport
+        Public Event OnPrintReport(reportFileName As String, pDatabaseConnectionName As String, args As Object, copies As Integer) Implements IPrintReportView.PrintReport
 
         Public Sub New()
 

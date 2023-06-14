@@ -8,7 +8,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Public Property MainTableName As String
         Protected SortOrderKey As String
-        Public Event OnPrintReport As IPrintReportView.OnPrintReportEventHandler Implements IPrintReportView.OnPrintReport
+        Public Event PrintReport As IPrintReportView.PrintReportEventHandler Implements IPrintReportView.PrintReport
 
         Public Sub New()
 
@@ -32,7 +32,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             productionDate = dtpProductionDate.Value
             expiryDate = dtpExpiryDate.Value
             Dim args As Object() = {productionDate, "ProductionDate", expiryDate, "ExpiryDate"}
-            RaiseEvent OnPrintReport("Expiry Label.Rpt", "ISPDATA", args, CInt(txtCopies.Text))
+            RaiseEvent PrintReport("Expiry Label.Rpt", "ISPDATA", args, CInt(txtCopies.Text))
         End Sub
 
         Private Sub CButton2_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
