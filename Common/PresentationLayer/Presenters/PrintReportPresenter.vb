@@ -1,15 +1,11 @@
 ﻿Imports AATM.Common.Models
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.ServiceLayer
-Imports AATM.DataLayer
 Imports AATM.Libraries
 Imports AATM.Libraries.CrystalReportsHelper
-Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Forms
-Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
-Imports AATM.ServicesLayer.Services
 
 Namespace PresentationLayer.Presenters
 
@@ -30,7 +26,7 @@ Namespace PresentationLayer.Presenters
             _pjService = New CommonService("PrintJob")
             _psService = New CommonService("PrintSetup")
             _prService = New CommonService("Printer")
-            AddHandler view.OnPrintReport, AddressOf OnPrintReport
+            AddHandler view.PrintReport, AddressOf OnPrintReport
         End Sub
 
         'Protected Sub CreateDataSources(tableName As String, control As Control)

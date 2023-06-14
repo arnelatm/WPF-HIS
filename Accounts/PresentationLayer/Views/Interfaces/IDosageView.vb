@@ -29,7 +29,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property DurationTiming As Decimal
         Event AddNewDosage()
         Event UpdateTree()
-        Event PrintReport(reportFileName As String, pDatabaseConnectionName As String, args As Object, copies As Integer)
+
     End Interface
 
 End Namespace
