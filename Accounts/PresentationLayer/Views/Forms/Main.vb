@@ -1176,6 +1176,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemReportMaster_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemReportMaster.Click
             RunForm(Of ReportEntry, ReportPresenter(Of ReportModel))()
         End Sub
+
+        Private Sub ToolStripMenuItemDosageLabelPrinting_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDosageLabelPrinting.Click
+            RunForm(Of DoctorsPatientViewer, PmrInvestigationPresenter(Of PmrInvestigationModel))()
+        End Sub
     End Class
 
 End Namespace

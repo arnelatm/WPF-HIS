@@ -13,28 +13,31 @@ Namespace PresentationLayer.Presenters
         Inherits CommonPresenter(Of IPrintReportView, TM)
         Implements ISubscriber(Of GetControlDataSource)
 
-        Private ReadOnly _psService As Object
-        Private ReadOnly _pjService As Object
-        Private ReadOnly _prService As Object
+        Private _psService As Object
+        Private _pjService As Object
+        Private _prService As Object
         Private _presenter As CommonPresenter(Of IView, ReportModel)
 
         Public Sub New()
-
+            MakeServices()
         End Sub
 
         Public Sub New(view As IPrintReportView)
+            MakeServices()
+            AddHandler view.PrintReport, AddressOf OnPrintReport
+        End Sub
+
+        Private Sub MakeServices()
             _pjService = New CommonService("PrintJob")
             _psService = New CommonService("PrintSetup")
             _prService = New CommonService("Printer")
-            AddHandler view.PrintReport, AddressOf OnPrintReport
         End Sub
 
         'Protected Sub CreateDataSources(tableName As String, control As Control)
         '    _presenter.CreateDataSource(tableName, control)
         'End Sub
 
-
-        Private Sub OnPrintReport(reportFileName As String, databaseConnectionName As String, Optional args() As Object = Nothing, Optional copies As Int16 = 1, Optional collate As Boolean = False, Optional startPage As Int16 = 0, Optional endPage As Int16 = 0)
+        Public Sub OnPrintReport(reportFileName As String, databaseConnectionName As String, Optional args() As Object = Nothing, Optional copies As Int16 = 1, Optional collate As Boolean = False, Optional startPage As Int16 = 0, Optional endPage As Int16 = 0)
             ProcessReport(reportFileName, databaseConnectionName, True, args, copies, collate, startPage, endPage)
         End Sub
 
@@ -99,6 +102,7 @@ Namespace PresentationLayer.Presenters
         Public Sub OnEventHandler2(ByRef eventType As GetControlDataSource) Implements ISubscriber(Of GetControlDataSource).OnEventHandler
             _presenter.SetDataSource(eventType.TableName, eventType.Control)
         End Sub
+
     End Class
 
 End Namespace

@@ -1,6 +1,7 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Common
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Views
@@ -9,12 +10,12 @@ Namespace PresentationLayer.Views.Forms
 
     Public Class DosagePrinting
         Implements IDosagePrintingView
-        Implements IPrintReport
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Public Event AddNewDosage() Implements IDosagePrintingView.AddNewDosage
         Public Event UpdateTree() Implements IDosagePrintingView.UpdateTree
-        Public Event PrintReport As IPrintReport.PrintReportEventHandler Implements IPrintReport.PrintReport
+        Public Event UpdatePatient() Implements IDosagePrintingView.UpdatePatient
+        'Public Event PrintReport As IPrintReport.PrintReportEventHandler Implements IPrintReport.PrintReport
 
         'Public Event OnPrintReport As IPrintReportView.OnPrintReportEventHandler Implements IDosagePrintingView.PrintReport
 
@@ -108,6 +109,51 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As String)
                 txtDosageNameAra.Text = value
+            End Set
+        End Property
+
+        Public Property FileNo As Integer Implements IDosagePrintingView.FileNo
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Integer)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property PatientName As String Implements IDosagePrintingView.PatientName
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As String)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property Age As Short Implements IDosagePrintingView.Age
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Short)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property AgeDMY As String Implements IDosagePrintingView.AgeDMY
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As String)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property Gender As String Implements IDosagePrintingView.Gender
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As String)
+                Throw New NotImplementedException()
             End Set
         End Property
 

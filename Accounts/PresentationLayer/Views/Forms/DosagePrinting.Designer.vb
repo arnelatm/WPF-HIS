@@ -29,102 +29,111 @@ Namespace PresentationLayer.Views.Forms
         Me.txtDose = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.cboDosageUnit = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-        Me.txtDosageNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel12 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.CLabel11 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDosageCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtDosageName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.cboDurationTiming = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-        Me.CLabel7 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.CLabel8 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDuration = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.CLabel10 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.CTextBox1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.SplitContainer1.Panel1.SuspendLayout
-        Me.SplitContainer1.Panel2.SuspendLayout
-        Me.SplitContainer1.SuspendLayout
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.TableLayoutPanel1.SuspendLayout
-        Me.SuspendLayout
-        '
-        'SplitContainer1
-        '
-        '
-        'SplitContainer1.Panel2
-        '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.CButton1)
-        Me.SplitContainer1.Panel2.Controls.Add(Me.TableLayoutPanel1)
-        Me.SplitContainer1.Size = New System.Drawing.Size(934, 480)
-        Me.SplitContainer1.SplitterDistance = 355
-        '
-        'FormTreeView
-        '
-        Me.FormTreeView.LineColor = System.Drawing.Color.Black
-        Me.FormTreeView.Size = New System.Drawing.Size(355, 480)
-        '
-        'ImageListTreeView
-        '
-        Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"),System.Windows.Forms.ImageListStreamer)
-        Me.ImageListTreeView.Images.SetKeyName(0, "TreeNode.ico")
-        Me.ImageListTreeView.Images.SetKeyName(1, "openbriefcase.png")
-        '
-        'TranslatorDAC
-        '
-        Me.TranslatorDAC.Cs = ""
-        '
-        'AppDataDAC
-        '
-        Me.AppDataDAC.Cs = ""
-        '
-        'CLabel1
-        '
-        Me.CLabel1.AutoSize = true
-        Me.CLabel1.DisplayOnly = true
-        Me.CLabel1.EditingMode = false
-        Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.CLabel1.Location = New System.Drawing.Point(11, 36)
-        Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
-        Me.CLabel1.Name = "CLabel1"
-        Me.CLabel1.Size = New System.Drawing.Size(67, 17)
-        Me.CLabel1.TabIndex = 0
-        Me.CLabel1.Text = "Dose Qty"
-        Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.CLabel1.Translatable = true
-        '
-        'txtDose
-        '
-        Me.txtDose.AlwaysEditable = true
-        Me.txtDose.BackColor = System.Drawing.Color.White
-        Me.txtDose.BegFindValue = Nothing
-        Me.txtDose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtDose.ComputedValue = false
-        Me.txtDose.CustomFormat = Nothing
-        Me.txtDose.DataBoundControl = true
-        Me.txtDose.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtDose.EditingMode = true
-        Me.txtDose.EndFindValue = Nothing
-        Me.txtDose.FieldDescription = Nothing
-        Me.txtDose.FieldName = Nothing
-        Me.txtDose.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtDose.FindEnabled = false
-        Me.txtDose.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.txtDose.ForeColor = System.Drawing.Color.Black
-        Me.txtDose.LinkedLabel = Nothing
-        Me.txtDose.Location = New System.Drawing.Point(11, 55)
-        Me.txtDose.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtDose.MaximumValue = Nothing
-        Me.txtDose.MinimumSize = New System.Drawing.Size(80, 2)
-        Me.txtDose.MinimumValue = Nothing
-        Me.txtDose.Name = "txtDose"
-        Me.txtDose.OldValue = Nothing
+            Me.CTextBox2 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtFileNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblPatientName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboGender = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.txtAgeDMY = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblAge = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPatientName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblFileNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboDosageUnit = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.txtDosageNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel12 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.CLabel11 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDosageCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtDosageName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.cboDurationTiming = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.CLabel7 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.CLabel8 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDuration = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.CLabel10 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblGender = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.CTextBox1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.SplitContainer1.Panel1.SuspendLayout()
+            Me.SplitContainer1.Panel2.SuspendLayout()
+            Me.SplitContainer1.SuspendLayout()
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.TableLayoutPanel1.SuspendLayout()
+            Me.SuspendLayout()
+            '
+            'SplitContainer1
+            '
+            '
+            'SplitContainer1.Panel2
+            '
+            Me.SplitContainer1.Panel2.Controls.Add(Me.CButton1)
+            Me.SplitContainer1.Panel2.Controls.Add(Me.TableLayoutPanel1)
+            Me.SplitContainer1.Size = New System.Drawing.Size(975, 480)
+            Me.SplitContainer1.SplitterDistance = 370
+            '
+            'FormTreeView
+            '
+            Me.FormTreeView.LineColor = System.Drawing.Color.Black
+            Me.FormTreeView.Size = New System.Drawing.Size(370, 480)
+            '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "TreeNode.ico")
+            Me.ImageListTreeView.Images.SetKeyName(1, "openbriefcase.png")
+            '
+            'TranslatorDAC
+            '
+            Me.TranslatorDAC.Cs = ""
+            '
+            'AppDataDAC
+            '
+            Me.AppDataDAC.Cs = ""
+            '
+            'CLabel1
+            '
+            Me.CLabel1.AutoSize = True
+            Me.CLabel1.DisplayOnly = True
+            Me.CLabel1.EditingMode = False
+            Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel1.Location = New System.Drawing.Point(11, 36)
+            Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel1.Name = "CLabel1"
+            Me.CLabel1.Size = New System.Drawing.Size(67, 17)
+            Me.CLabel1.TabIndex = 0
+            Me.CLabel1.Text = "Dose Qty"
+            Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel1.Translatable = True
+            '
+            'txtDose
+            '
+            Me.txtDose.AlwaysEditable = True
+            Me.txtDose.BackColor = System.Drawing.Color.White
+            Me.txtDose.BegFindValue = Nothing
+            Me.txtDose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDose.ComputedValue = False
+            Me.txtDose.CustomFormat = Nothing
+            Me.txtDose.DataBoundControl = True
+            Me.txtDose.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtDose.EditingMode = True
+            Me.txtDose.EndFindValue = Nothing
+            Me.txtDose.FieldDescription = Nothing
+            Me.txtDose.FieldName = Nothing
+            Me.txtDose.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtDose.FindEnabled = False
+            Me.txtDose.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtDose.ForeColor = System.Drawing.Color.Black
+            Me.txtDose.LinkedLabel = Nothing
+            Me.txtDose.Location = New System.Drawing.Point(11, 55)
+            Me.txtDose.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtDose.MaximumValue = Nothing
+            Me.txtDose.MinimumSize = New System.Drawing.Size(80, 2)
+            Me.txtDose.MinimumValue = Nothing
+            Me.txtDose.Name = "txtDose"
+            Me.txtDose.OldValue = Nothing
             Me.txtDose.OverrideMaxLength = 0
             Me.txtDose.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtDose.Size = New System.Drawing.Size(80, 23)
+            Me.txtDose.Size = New System.Drawing.Size(91, 23)
             Me.txtDose.TabIndex = 1
             Me.txtDose.Translatable = False
             '
@@ -134,7 +143,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel2.DisplayOnly = True
             Me.CLabel2.EditingMode = False
             Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel2.Location = New System.Drawing.Point(93, 36)
+            Me.CLabel2.Location = New System.Drawing.Point(104, 36)
             Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel2.Name = "CLabel2"
             Me.CLabel2.Size = New System.Drawing.Size(86, 17)
@@ -151,6 +160,14 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+            Me.TableLayoutPanel1.Controls.Add(Me.CTextBox2, 0, 12)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtFileNo, 0, 10)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblPatientName, 1, 9)
+            Me.TableLayoutPanel1.Controls.Add(Me.cboGender, 2, 12)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtAgeDMY, 0, 12)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblAge, 0, 11)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtPatientName, 1, 10)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblFileNo, 0, 9)
             Me.TableLayoutPanel1.Controls.Add(Me.cboDosageUnit, 1, 2)
             Me.TableLayoutPanel1.Controls.Add(Me.txtDosageNameAra, 0, 6)
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel12, 0, 3)
@@ -167,12 +184,13 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel10, 2, 0)
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel1, 0, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel2, 1, 1)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblGender, 2, 11)
             Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top
             Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
             Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(10)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             Me.TableLayoutPanel1.Padding = New System.Windows.Forms.Padding(10)
-            Me.TableLayoutPanel1.RowCount = 10
+            Me.TableLayoutPanel1.RowCount = 13
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -183,8 +201,234 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-            Me.TableLayoutPanel1.Size = New System.Drawing.Size(569, 308)
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+            Me.TableLayoutPanel1.Size = New System.Drawing.Size(595, 349)
             Me.TableLayoutPanel1.TabIndex = 294
+            '
+            'CTextBox2
+            '
+            Me.CTextBox2.AlwaysEditable = True
+            Me.CTextBox2.BackColor = System.Drawing.Color.White
+            Me.CTextBox2.BegFindValue = Nothing
+            Me.CTextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.CTextBox2.ComputedValue = False
+            Me.CTextBox2.CustomFormat = Nothing
+            Me.CTextBox2.DataBoundControl = True
+            Me.CTextBox2.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.CTextBox2.EditingMode = True
+            Me.CTextBox2.EndFindValue = Nothing
+            Me.CTextBox2.FieldDescription = Nothing
+            Me.CTextBox2.FieldName = Nothing
+            Me.CTextBox2.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.CTextBox2.FindEnabled = False
+            Me.CTextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CTextBox2.ForeColor = System.Drawing.Color.Black
+            Me.CTextBox2.LinkedLabel = Nothing
+            Me.CTextBox2.Location = New System.Drawing.Point(11, 322)
+            Me.CTextBox2.Margin = New System.Windows.Forms.Padding(1)
+            Me.CTextBox2.MaximumValue = Nothing
+            Me.CTextBox2.MinimumSize = New System.Drawing.Size(80, 2)
+            Me.CTextBox2.MinimumValue = Nothing
+            Me.CTextBox2.Name = "CTextBox2"
+            Me.CTextBox2.OldValue = Nothing
+            Me.CTextBox2.OverrideMaxLength = 0
+            Me.CTextBox2.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.CTextBox2.Size = New System.Drawing.Size(91, 23)
+            Me.CTextBox2.TabIndex = 316
+            Me.CTextBox2.Translatable = False
+            '
+            'txtFileNo
+            '
+            Me.txtFileNo.AlwaysEditable = True
+            Me.txtFileNo.BackColor = System.Drawing.Color.White
+            Me.txtFileNo.BegFindValue = Nothing
+            Me.txtFileNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtFileNo.ComputedValue = False
+            Me.txtFileNo.CustomFormat = Nothing
+            Me.txtFileNo.DataBoundControl = True
+            Me.txtFileNo.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtFileNo.EditingMode = True
+            Me.txtFileNo.EndFindValue = Nothing
+            Me.txtFileNo.FieldDescription = Nothing
+            Me.txtFileNo.FieldName = Nothing
+            Me.txtFileNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtFileNo.FindEnabled = False
+            Me.txtFileNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtFileNo.ForeColor = System.Drawing.Color.Black
+            Me.txtFileNo.LinkedLabel = Nothing
+            Me.txtFileNo.Location = New System.Drawing.Point(11, 282)
+            Me.txtFileNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtFileNo.MaximumValue = Nothing
+            Me.txtFileNo.MinimumSize = New System.Drawing.Size(80, 2)
+            Me.txtFileNo.MinimumValue = Nothing
+            Me.txtFileNo.Name = "txtFileNo"
+            Me.txtFileNo.OldValue = Nothing
+            Me.txtFileNo.OverrideMaxLength = 0
+            Me.txtFileNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtFileNo.Size = New System.Drawing.Size(91, 23)
+            Me.txtFileNo.TabIndex = 315
+            Me.txtFileNo.Translatable = False
+            '
+            'lblPatientName
+            '
+            Me.lblPatientName.AutoSize = True
+            Me.lblPatientName.DisplayOnly = True
+            Me.lblPatientName.EditingMode = False
+            Me.lblPatientName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblPatientName.Location = New System.Drawing.Point(104, 262)
+            Me.lblPatientName.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPatientName.Name = "lblPatientName"
+            Me.lblPatientName.Size = New System.Drawing.Size(93, 17)
+            Me.lblPatientName.TabIndex = 314
+            Me.lblPatientName.Text = "Patient Name"
+            Me.lblPatientName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPatientName.Translatable = True
+            '
+            'cboGender
+            '
+            Me.cboGender.AlwaysEditable = True
+            Me.cboGender.BackColor = System.Drawing.Color.White
+            Me.cboGender.BegFindValue = Nothing
+            Me.cboGender.ChangingSearchValueOnly = False
+            Me.TableLayoutPanel1.SetColumnSpan(Me.cboGender, 2)
+            Me.cboGender.CurrentSearchTerm = ""
+            Me.cboGender.DataValue = Nothing
+            Me.cboGender.DefaultValue = Nothing
+            Me.cboGender.DisplayMember = "Name"
+            Me.cboGender.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.cboGender.Editable = True
+            Me.cboGender.EditingMode = True
+            Me.cboGender.EndFindValue = Nothing
+            Me.cboGender.FieldDescription = Nothing
+            Me.cboGender.FieldName = Nothing
+            Me.cboGender.FilterRule = Nothing
+            Me.cboGender.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboGender.FindEnabled = False
+            Me.cboGender.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboGender.ForeColor = System.Drawing.Color.Black
+            Me.cboGender.FormattingEnabled = True
+            Me.cboGender.HideWhenNotEditingOrAdding = False
+            Me.cboGender.IgnoreCase = False
+            Me.cboGender.IntegralHeight = False
+            Me.cboGender.LinkedLabel = Nothing
+            Me.cboGender.Location = New System.Drawing.Point(199, 322)
+            Me.cboGender.Margin = New System.Windows.Forms.Padding(1)
+            Me.cboGender.Name = "cboGender"
+            Me.cboGender.OldValue = 0
+            Me.cboGender.OriginalDataSource = Nothing
+            Me.cboGender.OriginalList = Nothing
+            Me.cboGender.OverrideDropDownStyleList = False
+            Me.cboGender.PreviousSearchTerm = Nothing
+            Me.cboGender.PropertySelector = Nothing
+            Me.cboGender.ReadOnlyCombo = False
+            Me.cboGender.Size = New System.Drawing.Size(385, 24)
+            Me.cboGender.SuggestBoxHeight = 200
+            Me.cboGender.SuggestCharCount = 0
+            Me.cboGender.SuggestListOrderRule = Nothing
+            Me.cboGender.TabIndex = 313
+            Me.cboGender.TextToSearch = Nothing
+            Me.cboGender.Translatable = False
+            Me.cboGender.ValueIsMandatory = False
+            Me.cboGender.ValueIsNullable = False
+            Me.cboGender.ValueIsNumeric = True
+            Me.cboGender.ValueMember = "IdNo"
+            '
+            'txtAgeDMY
+            '
+            Me.txtAgeDMY.AlwaysEditable = True
+            Me.txtAgeDMY.BackColor = System.Drawing.Color.White
+            Me.txtAgeDMY.BegFindValue = Nothing
+            Me.txtAgeDMY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtAgeDMY.ComputedValue = False
+            Me.txtAgeDMY.CustomFormat = Nothing
+            Me.txtAgeDMY.DataBoundControl = True
+            Me.txtAgeDMY.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtAgeDMY.EditingMode = True
+            Me.txtAgeDMY.EndFindValue = Nothing
+            Me.txtAgeDMY.FieldDescription = Nothing
+            Me.txtAgeDMY.FieldName = Nothing
+            Me.txtAgeDMY.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtAgeDMY.FindEnabled = False
+            Me.txtAgeDMY.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtAgeDMY.ForeColor = System.Drawing.Color.Black
+            Me.txtAgeDMY.LinkedLabel = Nothing
+            Me.txtAgeDMY.Location = New System.Drawing.Point(104, 322)
+            Me.txtAgeDMY.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtAgeDMY.MaximumValue = Nothing
+            Me.txtAgeDMY.MinimumSize = New System.Drawing.Size(80, 2)
+            Me.txtAgeDMY.MinimumValue = Nothing
+            Me.txtAgeDMY.Name = "txtAgeDMY"
+            Me.txtAgeDMY.OldValue = Nothing
+            Me.txtAgeDMY.OverrideMaxLength = 0
+            Me.txtAgeDMY.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtAgeDMY.Size = New System.Drawing.Size(93, 23)
+            Me.txtAgeDMY.TabIndex = 312
+            Me.txtAgeDMY.Translatable = False
+            '
+            'lblAge
+            '
+            Me.lblAge.AutoSize = True
+            Me.lblAge.DisplayOnly = True
+            Me.lblAge.EditingMode = False
+            Me.lblAge.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblAge.Location = New System.Drawing.Point(11, 302)
+            Me.lblAge.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblAge.Name = "lblAge"
+            Me.lblAge.Size = New System.Drawing.Size(33, 17)
+            Me.lblAge.TabIndex = 311
+            Me.lblAge.Text = "Age"
+            Me.lblAge.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblAge.Translatable = True
+            '
+            'txtPatientName
+            '
+            Me.txtPatientName.AlwaysEditable = True
+            Me.txtPatientName.BackColor = System.Drawing.Color.White
+            Me.txtPatientName.BegFindValue = Nothing
+            Me.txtPatientName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TableLayoutPanel1.SetColumnSpan(Me.txtPatientName, 3)
+            Me.txtPatientName.ComputedValue = False
+            Me.txtPatientName.CustomFormat = Nothing
+            Me.txtPatientName.DataBoundControl = True
+            Me.txtPatientName.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtPatientName.Editable = True
+            Me.txtPatientName.EditingMode = True
+            Me.txtPatientName.EndFindValue = Nothing
+            Me.txtPatientName.FieldDescription = Nothing
+            Me.txtPatientName.FieldName = Nothing
+            Me.txtPatientName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtPatientName.FindEnabled = False
+            Me.txtPatientName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtPatientName.ForeColor = System.Drawing.Color.Black
+            Me.txtPatientName.LinkedLabel = Nothing
+            Me.txtPatientName.Location = New System.Drawing.Point(104, 282)
+            Me.txtPatientName.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtPatientName.MaximumValue = Nothing
+            Me.txtPatientName.MinimumValue = Nothing
+            Me.txtPatientName.Name = "txtPatientName"
+            Me.txtPatientName.OldValue = Nothing
+            Me.txtPatientName.OverrideMaxLength = 0
+            Me.txtPatientName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtPatientName.Size = New System.Drawing.Size(480, 23)
+            Me.txtPatientName.TabIndex = 309
+            Me.txtPatientName.Translatable = False
+            '
+            'lblFileNo
+            '
+            Me.lblFileNo.AutoSize = True
+            Me.lblFileNo.DisplayOnly = True
+            Me.lblFileNo.EditingMode = False
+            Me.lblFileNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblFileNo.Location = New System.Drawing.Point(11, 262)
+            Me.lblFileNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblFileNo.Name = "lblFileNo"
+            Me.lblFileNo.Size = New System.Drawing.Size(56, 17)
+            Me.lblFileNo.TabIndex = 307
+            Me.lblFileNo.Text = "File No."
+            Me.lblFileNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblFileNo.Translatable = True
             '
             'cboDosageUnit
             '
@@ -213,7 +457,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDosageUnit.IgnoreCase = False
             Me.cboDosageUnit.IntegralHeight = False
             Me.cboDosageUnit.LinkedLabel = Nothing
-            Me.cboDosageUnit.Location = New System.Drawing.Point(93, 55)
+            Me.cboDosageUnit.Location = New System.Drawing.Point(104, 55)
             Me.cboDosageUnit.Margin = New System.Windows.Forms.Padding(1)
             Me.cboDosageUnit.Name = "cboDosageUnit"
             Me.cboDosageUnit.OldValue = 0
@@ -223,7 +467,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDosageUnit.PreviousSearchTerm = Nothing
             Me.cboDosageUnit.PropertySelector = Nothing
             Me.cboDosageUnit.ReadOnlyCombo = False
-            Me.cboDosageUnit.Size = New System.Drawing.Size(465, 24)
+            Me.cboDosageUnit.Size = New System.Drawing.Size(480, 24)
             Me.cboDosageUnit.SuggestBoxHeight = 200
             Me.cboDosageUnit.SuggestCharCount = 0
             Me.cboDosageUnit.SuggestListOrderRule = Nothing
@@ -265,7 +509,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDosageNameAra.OverrideMaxLength = 0
             Me.txtDosageNameAra.ReadOnly = True
             Me.txtDosageNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtDosageNameAra.Size = New System.Drawing.Size(547, 47)
+            Me.txtDosageNameAra.Size = New System.Drawing.Size(573, 47)
             Me.txtDosageNameAra.TabIndex = 305
             Me.txtDosageNameAra.Translatable = False
             '
@@ -320,7 +564,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDosageCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDosageCode.ForeColor = System.Drawing.Color.Black
             Me.txtDosageCode.LinkedLabel = Nothing
-            Me.txtDosageCode.Location = New System.Drawing.Point(274, 11)
+            Me.txtDosageCode.Location = New System.Drawing.Point(292, 11)
             Me.txtDosageCode.Margin = New System.Windows.Forms.Padding(1)
             Me.txtDosageCode.MaximumValue = Nothing
             Me.txtDosageCode.MinimumValue = Nothing
@@ -363,7 +607,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDosageName.OverrideMaxLength = 0
             Me.txtDosageName.ReadOnly = True
             Me.txtDosageName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtDosageName.Size = New System.Drawing.Size(547, 47)
+            Me.txtDosageName.Size = New System.Drawing.Size(573, 47)
             Me.txtDosageName.TabIndex = 302
             Me.txtDosageName.Translatable = False
             '
@@ -387,7 +631,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtIdNo.ForeColor = System.Drawing.Color.Black
             Me.txtIdNo.LinkedLabel = Nothing
-            Me.txtIdNo.Location = New System.Drawing.Point(93, 11)
+            Me.txtIdNo.Location = New System.Drawing.Point(104, 11)
             Me.txtIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtIdNo.MaximumValue = Nothing
             Me.txtIdNo.MinimumValue = Nothing
@@ -396,7 +640,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtIdNo.OverrideMaxLength = 0
             Me.txtIdNo.ReadOnly = True
             Me.txtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtIdNo.Size = New System.Drawing.Size(86, 23)
+            Me.txtIdNo.Size = New System.Drawing.Size(93, 23)
             Me.txtIdNo.TabIndex = 300
             Me.txtIdNo.Translatable = False
             '
@@ -427,7 +671,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDurationTiming.IgnoreCase = False
             Me.cboDurationTiming.IntegralHeight = False
             Me.cboDurationTiming.LinkedLabel = Nothing
-            Me.cboDurationTiming.Location = New System.Drawing.Point(181, 236)
+            Me.cboDurationTiming.Location = New System.Drawing.Point(199, 236)
             Me.cboDurationTiming.Margin = New System.Windows.Forms.Padding(1)
             Me.cboDurationTiming.Name = "cboDurationTiming"
             Me.cboDurationTiming.OldValue = 0
@@ -437,7 +681,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDurationTiming.PreviousSearchTerm = Nothing
             Me.cboDurationTiming.PropertySelector = Nothing
             Me.cboDurationTiming.ReadOnlyCombo = False
-            Me.cboDurationTiming.Size = New System.Drawing.Size(377, 24)
+            Me.cboDurationTiming.Size = New System.Drawing.Size(385, 24)
             Me.cboDurationTiming.SuggestBoxHeight = 200
             Me.cboDurationTiming.SuggestCharCount = 0
             Me.cboDurationTiming.SuggestListOrderRule = Nothing
@@ -455,7 +699,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel7.DisplayOnly = True
             Me.CLabel7.EditingMode = False
             Me.CLabel7.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel7.Location = New System.Drawing.Point(181, 217)
+            Me.CLabel7.Location = New System.Drawing.Point(199, 217)
             Me.CLabel7.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel7.Name = "CLabel7"
             Me.CLabel7.Size = New System.Drawing.Size(91, 17)
@@ -509,7 +753,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDuration.OldValue = Nothing
             Me.txtDuration.OverrideMaxLength = 0
             Me.txtDuration.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtDuration.Size = New System.Drawing.Size(168, 23)
+            Me.txtDuration.Size = New System.Drawing.Size(186, 23)
             Me.txtDuration.TabIndex = 293
             Me.txtDuration.Translatable = False
             '
@@ -535,7 +779,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel10.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CLabel10.EditingMode = False
             Me.CLabel10.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel10.Location = New System.Drawing.Point(181, 11)
+            Me.CLabel10.Location = New System.Drawing.Point(199, 11)
             Me.CLabel10.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel10.Name = "CLabel10"
             Me.CLabel10.Size = New System.Drawing.Size(91, 23)
@@ -543,6 +787,21 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel10.Text = "Code "
             Me.CLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
             Me.CLabel10.Translatable = True
+            '
+            'lblGender
+            '
+            Me.lblGender.AutoSize = True
+            Me.lblGender.DisplayOnly = True
+            Me.lblGender.EditingMode = False
+            Me.lblGender.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblGender.Location = New System.Drawing.Point(199, 302)
+            Me.lblGender.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblGender.Name = "lblGender"
+            Me.lblGender.Size = New System.Drawing.Size(56, 17)
+            Me.lblGender.TabIndex = 310
+            Me.lblGender.Text = "Gender"
+            Me.lblGender.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblGender.Translatable = True
             '
             'CTextBox1
             '
@@ -579,30 +838,30 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.CButton1.DesignerSelected = False
             Me.CButton1.ImageIndex = 0
-        Me.CButton1.Location = New System.Drawing.Point(11, 322)
-        Me.CButton1.Name = "CButton1"
-        Me.CButton1.OriginalImageName = Nothing
-        Me.CButton1.SecurityKey = ""
-        Me.CButton1.Size = New System.Drawing.Size(130, 25)
-        Me.CButton1.TabIndex = 295
-        Me.CButton1.Text = "Add New Dosage"
-        '
-        'DosagePrinting
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
-        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"),System.Drawing.Image)
-        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile
-        Me.ClientSize = New System.Drawing.Size(934, 533)
-        Me.MinimumSize = New System.Drawing.Size(16, 100)
-        Me.Name = "DosagePrinting"
-        Me.Text = "Dosage Printing"
-        Me.SplitContainer1.Panel1.ResumeLayout(false)
-        Me.SplitContainer1.Panel2.ResumeLayout(false)
-        CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).EndInit
-        Me.SplitContainer1.ResumeLayout(false)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TableLayoutPanel1.ResumeLayout(false)
+            Me.CButton1.Location = New System.Drawing.Point(11, 362)
+            Me.CButton1.Name = "CButton1"
+            Me.CButton1.OriginalImageName = Nothing
+            Me.CButton1.SecurityKey = ""
+            Me.CButton1.Size = New System.Drawing.Size(130, 25)
+            Me.CButton1.TabIndex = 295
+            Me.CButton1.Text = "Add New Dosage"
+            '
+            'DosagePrinting
+            '
+            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+            Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
+            Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile
+            Me.ClientSize = New System.Drawing.Size(975, 533)
+            Me.MinimumSize = New System.Drawing.Size(16, 100)
+            Me.Name = "DosagePrinting"
+            Me.Text = "Dosage Printing"
+            Me.SplitContainer1.Panel1.ResumeLayout(False)
+            Me.SplitContainer1.Panel2.ResumeLayout(False)
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.SplitContainer1.ResumeLayout(False)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.TableLayoutPanel1.ResumeLayout(false)
         Me.TableLayoutPanel1.PerformLayout
         Me.ResumeLayout(false)
         Me.PerformLayout
@@ -638,5 +897,14 @@ End Sub
         Friend WithEvents txtDuration As CTextBox
         Friend WithEvents cboDosageUnit As CtComboBox
         Friend WithEvents CButton1 As CButton
+        Friend WithEvents cboGender As CtComboBox
+        Friend WithEvents txtAgeDMY As CTextBox
+        Friend WithEvents lblAge As CLabel
+        Friend WithEvents txtPatientName As CTextBox
+        Friend WithEvents lblFileNo As CLabel
+        Friend WithEvents lblGender As CLabel
+        Friend WithEvents txtFileNo As CTextBox
+        Friend WithEvents lblPatientName As CLabel
+        Friend WithEvents CTextBox2 As CTextBox
     End Class
 End Namespace

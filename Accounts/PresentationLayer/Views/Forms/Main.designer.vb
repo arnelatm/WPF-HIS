@@ -107,6 +107,7 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemCategory = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemUnit = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemWarehouse = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemReportMaster = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemTransactions = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPettyCash = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemCashDisbursementEntry = New System.Windows.Forms.ToolStripMenuItem()
@@ -231,7 +232,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemReportMaster = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDosageLabelPrinting = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -652,6 +653,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemWarehouse.Name = "ToolStripMenuItemWarehouse"
             resources.ApplyResources(Me.ToolStripMenuItemWarehouse, "ToolStripMenuItemWarehouse")
+            '
+            'ToolStripMenuItemReportMaster
+            '
+            Me.ToolStripMenuItemReportMaster.Name = "ToolStripMenuItemReportMaster"
+            resources.ApplyResources(Me.ToolStripMenuItemReportMaster, "ToolStripMenuItemReportMaster")
             '
             'ToolStripMenuItemTransactions
             '
@@ -1101,7 +1107,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemPharmacyReports
             '
-            Me.ToolStripMenuItemPharmacyReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPharmacyBarcodePrinting, Me.ToolStripMenuItemGenerateDailyDrugTransferFile, Me.ToolStripMenuItemGenerateDrugAcceptanceFile})
+            Me.ToolStripMenuItemPharmacyReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPharmacyBarcodePrinting, Me.ToolStripMenuItemGenerateDailyDrugTransferFile, Me.ToolStripMenuItemGenerateDrugAcceptanceFile, Me.ToolStripMenuItemDosageLabelPrinting})
             Me.ToolStripMenuItemPharmacyReports.Name = "ToolStripMenuItemPharmacyReports"
             resources.ApplyResources(Me.ToolStripMenuItemPharmacyReports, "ToolStripMenuItemPharmacyReports")
             '
@@ -1299,10 +1305,10 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'ToolStripMenuItemReportMaster
+            'ToolStripMenuItemDosageLabelPrinting
             '
-            Me.ToolStripMenuItemReportMaster.Name = "ToolStripMenuItemReportMaster"
-            resources.ApplyResources(Me.ToolStripMenuItemReportMaster, "ToolStripMenuItemReportMaster")
+            Me.ToolStripMenuItemDosageLabelPrinting.Name = "ToolStripMenuItemDosageLabelPrinting"
+            resources.ApplyResources(Me.ToolStripMenuItemDosageLabelPrinting, "ToolStripMenuItemDosageLabelPrinting")
             '
             'Main
             '
@@ -1316,7 +1322,7 @@ Namespace PresentationLayer.Views.Forms
             Me.MenuFormName = "Menu"
             Me.Name = "Main"
             Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
+            CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.ToolStrip.ResumeLayout(false)
         Me.ToolStrip.PerformLayout
         Me.AccountsMenu.ResumeLayout(false)
@@ -1533,5 +1539,6 @@ End Sub
         Friend WithEvents ToolStripMenuItemClinicReports As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemSterilizationLabels As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemReportMaster As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemDosageLabelPrinting As ToolStripMenuItem
     End Class
 End NameSpace
