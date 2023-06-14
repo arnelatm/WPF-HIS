@@ -1,0 +1,182 @@
+﻿Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
+Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Libraries.MessagingLibrary
+
+Namespace PresentationLayer.Views.Forms
+
+    Public Class DoctorsPatientViewer
+        Implements IPmrInvestigationView
+
+        Public Event GetDoctorPatientsRequested() Implements IPmrInvestigationView.GetDoctorPatientsRequested
+
+        Public Event DoctorCodeRequested(ByRef drId As String) Implements IPmrInvestigationView.DoctorCodeRequested
+
+        Public Event GetPmrDataAccessRequested(ByRef dataAccessCode As String) Implements IPmrInvestigationView.GetPmrDataAccessRequested
+
+        Private _pmrPatientsDisplay As New List(Of PmrPatientDisplayView)
+        Private _doctorId As String
+        Private _dataAccessLevel As String = ""
+
+        Public Sub New()
+            'MyBase.New()
+            ' This call is required by the designer.
+            InitializeComponent()
+            SingleData = True
+            QueryOnly = True
+            DisplaySetup()
+        End Sub
+
+        Private Sub DisplaySetup()
+            dtpTransactionDate.Value = Today()
+        End Sub
+
+        Private Sub AddDgColumn(dgvColumnName As DataGridViewImageColumn, dgvName As String, caption As String)
+            With DataGridViewPmrPatientDisplay
+                .Columns.Insert(.Columns.Count, dgvColumnName)
+                dgvColumnName.Image = imgList.Images(0)
+                dgvColumnName.Width = 35
+                dgvColumnName.Name = dgvName
+                dgvColumnName.HeaderText = Messaging.TranslateCaption(caption)
+            End With
+        End Sub
+
+        Private _doctorCode As String
+
+        Public Property DoctorCode As String Implements IPmrInvestigationView.DoctorCode
+            Get
+                Return cboDoctorName.GetValue()
+            End Get
+            Set(value As String)
+                cboDoctorName.SetValue(value)
+            End Set
+        End Property
+
+        Public Property DoctorName As String Implements IPmrInvestigationView.DoctorName
+            Get
+                Return cboDoctorName.GetValue()
+            End Get
+            Set(value As String)
+                cboDoctorName.SetValue(value)
+            End Set
+        End Property
+
+        Public ReadOnly Property SeriesDataGridViewTextBoxColumnProperty As DataGridViewTextBoxColumn
+            Get
+                Return SeriesDataGridViewTextBoxColumn
+            End Get
+        End Property
+
+        'Public Property DoctorName As String Implements IPmrInvestigationView.DoctorName
+        '    Get
+        '        Return cboDoctorName.Text
+        '    End Get
+        '    Set(value As String)
+        '        txtDoctorName.Text = value
+        '    End Set
+        'End Property
+
+        Public Property TransactionDate As Date? Implements IPmrInvestigationView.TransactionDate
+            Get
+                Return dtpTransactionDate.Value
+            End Get
+            Set(value As Date?)
+                dtpTransactionDate.Value = value
+            End Set
+        End Property
+
+        Public Property PmrPatientsDisplay As List(Of PmrPatientDisplayView) Implements IPmrInvestigationView.PmrPatientsDisplay
+            Get
+                Return _pmrPatientsDisplay
+            End Get
+            Set
+                _pmrPatientsDisplay = Value
+                BindPmrPatientDisplay()
+            End Set
+        End Property
+
+        Private Sub BindPmrPatientDisplay()
+            SuspendLayout()
+            bsPmrPatientDisplay.DataSource = Nothing
+            DataGridViewPmrPatientDisplay.Refresh()
+            bsPmrPatientDisplay.DataSource = PmrPatientsDisplay
+            bsPmrPatientDisplay.AllowNew = True
+            With DataGridViewPmrPatientDisplay
+                .AutoGenerateColumns = False
+                .DataSource = bsPmrPatientDisplay
+            End With
+
+            ResumeLayout()
+        End Sub
+
+        Private Sub btnRefresh_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnRefresh.ClickButtonArea
+            If DoctorCode IsNot Nothing Then
+                RaiseEvent GetDoctorPatientsRequested()
+            Else
+                PmrPatientsDisplay.Clear()
+                DataGridViewPmrPatientDisplay.Refresh()
+            End If
+        End Sub
+
+        Private Sub PrescriptionDosage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            RaiseEvent GetPmrDataAccessRequested(_dataAccessLevel)
+            With DataGridViewPmrPatientDisplay
+                .DefaultCellStyle.ForeColor = Color.Black
+                .BackColor = Color.White
+                .AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke
+            End With
+            Dim drCode As String = ""
+            RaiseEvent DoctorCodeRequested(drCode)
+            If drCode IsNot Nothing Then
+                DoctorCode = drCode
+                RaiseEvent GetDoctorPatientsRequested()
+                cboDoctorName.DisplayOnly = True
+                'dtpTransactionDate.EditingMode = True
+            Else
+                'btnEdit.PerformClick()
+                cboDoctorName.DisplayOnly = False
+                dtpTransactionDate.DisplayOnly = False
+            End If
+        End Sub
+
+        Private Sub dataGridView1_CellFormatting(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs) Handles DataGridViewPmrPatientDisplay.CellFormatting
+            For Each myRow As DataGridViewRow In DataGridViewPmrPatientDisplay.Rows
+                If myRow.Cells("dgvFileType").Value = "Old" Then
+                    myRow.DefaultCellStyle.ForeColor = Color.Coral
+                Else
+                    myRow.DefaultCellStyle.ForeColor = Color.DarkGreen
+                End If
+                myRow.DefaultCellStyle.BackColor = Color.White
+            Next
+        End Sub
+
+        Private Sub dtpTransactionDate_Validated(sender As Object, e As EventArgs) Handles dtpTransactionDate.Validated
+            RaiseEvent GetDoctorPatientsRequested()
+        End Sub
+
+        Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPmrPatientDisplay.CellClick
+            With DataGridViewPmrPatientDisplay
+                'Dim cForm As New ReportFormIGroup($"PMR Doctors Form.Rpt", FormCulture)
+            End With
+        End Sub
+
+        Protected Overrides Sub CreateMainFieldsDictionary()
+            MainFieldsDictionary = New Dictionary(Of String, Object) From
+                {
+                {"DoctorCode", txtDoctorCode},
+                {"DoctorName", cboDoctorName}
+                }
+        End Sub
+
+        Private Sub cboDoctorName_Validated(sender As Object, e As EventArgs) Handles cboDoctorName.SelectionChangeCommitted, cboDoctorName.Leave
+            If String.IsNullOrEmpty(cboDoctorName.SelectedValue) Then
+                PmrPatientsDisplay = Nothing
+                txtDoctorCode.Text = ""
+            Else
+                txtDoctorCode.Text = cboDoctorName.SelectedValue
+                RaiseEvent GetDoctorPatientsRequested()
+            End If
+        End Sub
+
+    End Class
+
+End Namespace

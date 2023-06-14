@@ -12,6 +12,17 @@ Namespace DataLayer.AdoNet
         Inherits DosageDao
 
 
+        'Public Function GetPatientDetails(idNo) As IgPatient
+        '    Dim sql As String =
+        '            "SELECT " & _fieldList &
+        '            " FROM Dosage_View" &
+        '            " WHERE IdNo = @IdNo"
+
+        '    Dim params() As Object = {"@IdNo", idNo}
+        '    Dim value As Dosage = _db.Read(sql, Make, params).FirstOrDefault()
+        '    Return value
+        'End Function
+
     End Class
 
 End Namespace

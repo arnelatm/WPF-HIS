@@ -19,6 +19,12 @@
         Public Property IdNo As Int32
         Public Property DosageName As String
         Public Property DosageNameAra As String
+        Public Property FileNo As Int32
+        Public Property PatientName As String
+        Public Property Age As Int16
+        Public Property AgeDMY As String
+        Public Property Gender As String
+
     End Class
 
 End Namespace

@@ -1,11 +1,11 @@
-﻿' Category business object
-' ** Enterprise Design Pattern: Domain Model, Identity Field
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.PresentationLayer.Views
 
-Imports System.Web.Services
+Namespace PresentationLayer.Views.Interfaces
 
-Namespace BusinessLayer
+    Public Interface IPatientView
+        Inherits IView
 
-    Public Class Patient
         Property RegistrationNo As Int32
         Property Series As String
         Property PatientNameEnglish As String
@@ -13,20 +13,20 @@ Namespace BusinessLayer
         Property Age As String
         Property AgeYMD As String
 
-    End Class
+    End Interface
 
-    Public Class PatientPrescription
-        Inherits Patient
+    Public Interface IPatientPrescriptionView
+        Inherits IPatientView
         Property PrescriptionDetail As List(Of Prescription)
 
-    End Class
+    End Interface
 
-    Public Class Prescription
+    Public Interface Prescription
 
         Property ItemNameEnglish As String
         Property DosageEnglish As String
         Property Duration As String
 
-    End Class
+    End Interface
 
 End Namespace

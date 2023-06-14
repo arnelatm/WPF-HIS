@@ -464,3 +464,19 @@ Public Class GetControlDataSource
     Public Property Control As Control
 
 End Class
+
+Public Class PrintCrEventArgs
+
+    Public Sub New(ByVal fileName As String, ByVal dataBaseConnection As String, ByVal Args As Object, ByVal Copies As Integer)
+        Me.FileName = fileName
+        Me.DataBaseConnectionName = dataBaseConnection
+        Me.Copies = Copies
+        Me.Args = Args
+    End Sub
+
+    Public Property FileName As String
+    Public Property DataBaseConnectionName As String
+    Public Property Copies As Integer
+    Public Property Args As Object
+
+End Class

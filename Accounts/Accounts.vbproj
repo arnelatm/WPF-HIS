@@ -542,6 +542,18 @@
     <Compile Include="PresentationLayer\Views\EmployeeLeaveCreditView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeePayElementView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeDocumentView.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\PatientPrescription.Designer.vb">
+      <DependentUpon>PatientPrescription.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\PatientPrescription.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\DoctorsPatient.Designer.vb">
+      <DependentUpon>DoctorsPatient.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\DoctorsPatient.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\SterilizationLabelPrinting.designer.vb">
       <DependentUpon>SterilizationLabelPrinting.vb</DependentUpon>
     </Compile>
@@ -962,7 +974,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeDocumentView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IPmrInvestigationView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IPmrPatientDisplayView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IPmrPatientView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IPatientView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\ILab_InvoiceGroupView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IItemDetailsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IHolidayAvailmentApprovalHistoryView.vb" />
@@ -1900,6 +1912,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\CGridBoxForm.resx">
       <DependentUpon>CGridBoxForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\PatientPrescription.resx">
+      <DependentUpon>PatientPrescription.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\DoctorsPatient.resx">
+      <DependentUpon>DoctorsPatient.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\SterilizationLabelPrinting.resx">
       <DependentUpon>SterilizationLabelPrinting.vb</DependentUpon>

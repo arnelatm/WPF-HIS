@@ -27,8 +27,14 @@ Namespace PresentationLayer.Views.Interfaces
         Property DosageUnit As Int32
         Property Duration As Decimal
         Property DurationTiming As Decimal
+        Property FileNo As Int32
+        Property PatientName As String
+        Property Age As Int16
+        Property AgeDMY As String
+        Property Gender As String
         Event AddNewDosage()
         Event UpdateTree()
+        Event UpdatePatient()
 
     End Interface
 
