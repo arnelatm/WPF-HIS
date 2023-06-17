@@ -198,6 +198,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemPharmacyBarcodePrinting = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemGenerateDailyDrugTransferFile = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemGenerateDrugAcceptanceFile = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDosageLabelPrinting = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemClinicReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemSterilizationLabels = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemUtilities = New System.Windows.Forms.ToolStripMenuItem()
@@ -232,7 +233,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemDosageLabelPrinting = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDoctorsPrescriptions = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -1107,7 +1108,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemPharmacyReports
             '
-            Me.ToolStripMenuItemPharmacyReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPharmacyBarcodePrinting, Me.ToolStripMenuItemGenerateDailyDrugTransferFile, Me.ToolStripMenuItemGenerateDrugAcceptanceFile, Me.ToolStripMenuItemDosageLabelPrinting})
+            Me.ToolStripMenuItemPharmacyReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPharmacyBarcodePrinting, Me.ToolStripMenuItemGenerateDailyDrugTransferFile, Me.ToolStripMenuItemGenerateDrugAcceptanceFile, Me.ToolStripMenuItemDosageLabelPrinting, Me.ToolStripMenuItemDoctorsPrescriptions})
             Me.ToolStripMenuItemPharmacyReports.Name = "ToolStripMenuItemPharmacyReports"
             resources.ApplyResources(Me.ToolStripMenuItemPharmacyReports, "ToolStripMenuItemPharmacyReports")
             '
@@ -1125,6 +1126,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemGenerateDrugAcceptanceFile.Name = "ToolStripMenuItemGenerateDrugAcceptanceFile"
             resources.ApplyResources(Me.ToolStripMenuItemGenerateDrugAcceptanceFile, "ToolStripMenuItemGenerateDrugAcceptanceFile")
+            '
+            'ToolStripMenuItemDosageLabelPrinting
+            '
+            Me.ToolStripMenuItemDosageLabelPrinting.Name = "ToolStripMenuItemDosageLabelPrinting"
+            resources.ApplyResources(Me.ToolStripMenuItemDosageLabelPrinting, "ToolStripMenuItemDosageLabelPrinting")
             '
             'ToolStripMenuItemClinicReports
             '
@@ -1305,10 +1311,10 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'ToolStripMenuItemDosageLabelPrinting
+            'ToolStripMenuItemDoctorsPrescriptions
             '
-            Me.ToolStripMenuItemDosageLabelPrinting.Name = "ToolStripMenuItemDosageLabelPrinting"
-            resources.ApplyResources(Me.ToolStripMenuItemDosageLabelPrinting, "ToolStripMenuItemDosageLabelPrinting")
+            Me.ToolStripMenuItemDoctorsPrescriptions.Name = "ToolStripMenuItemDoctorsPrescriptions"
+            resources.ApplyResources(Me.ToolStripMenuItemDoctorsPrescriptions, "ToolStripMenuItemDoctorsPrescriptions")
             '
             'Main
             '
@@ -1322,8 +1328,8 @@ Namespace PresentationLayer.Views.Forms
             Me.MenuFormName = "Menu"
             Me.Name = "Main"
             Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-            CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.ToolStrip.ResumeLayout(false)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.ToolStrip.ResumeLayout(false)
         Me.ToolStrip.PerformLayout
         Me.AccountsMenu.ResumeLayout(false)
         Me.AccountsMenu.PerformLayout
@@ -1540,5 +1546,6 @@ End Sub
         Friend WithEvents ToolStripMenuItemSterilizationLabels As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemReportMaster As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDosageLabelPrinting As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemDoctorsPrescriptions As ToolStripMenuItem
     End Class
 End NameSpace

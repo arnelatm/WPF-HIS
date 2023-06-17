@@ -1044,7 +1044,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemPMRReports_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPMRReports.Click
-            RunForm(Of PmrInvestigationRequestForm, PmrInvestigationPresenter(Of PmrInvestigationModel))()
+            RunForm(Of PmrInvestigationForm, PMRInvestigationPresenter(Of PmrInvestigationModel))()
         End Sub
 
         Private Sub ToolStripMenuItemVATReport_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemVATReport.Click
@@ -1178,7 +1178,11 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemDosageLabelPrinting_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDosageLabelPrinting.Click
-            RunForm(Of DoctorsPatientViewer, PmrInvestigationPresenter(Of PmrInvestigationModel))()
+            RunForm(Of DoctorsPrescriptionForm, PMRInvestigationPresenter(Of PmrInvestigationModel))()
+        End Sub
+
+        Private Sub ToolStripMenuItemDoctorsPrescriptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDoctorsPrescriptions.Click
+            RunForm(Of DoctorsPrescriptionForm, DoctorsPrescriptionPresenter(Of DoctorsPrescriptionModel))()
         End Sub
     End Class
 

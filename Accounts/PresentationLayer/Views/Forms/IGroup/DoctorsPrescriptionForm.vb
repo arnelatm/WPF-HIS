@@ -1,21 +1,24 @@
-﻿Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class DoctorsPatientViewer
-        Implements IPmrInvestigationView
+    Public Class DoctorsPrescriptionForm
+        Implements IDoctorsPrescriptionView
 
-        Public Event GetDoctorPatientsRequested() Implements IPmrInvestigationView.GetDoctorPatientsRequested
+        Public Event GetDoctorPatientsRequested() Implements IDoctorsPrescriptionView.GetDoctorPatientsRequested
 
-        Public Event DoctorCodeRequested(ByRef drId As String) Implements IPmrInvestigationView.DoctorCodeRequested
+        Public Event DoctorCodeRequested(ByRef drId As String) Implements IDoctorsPrescriptionView.DoctorCodeRequested
 
-        Public Event GetPmrDataAccessRequested(ByRef dataAccessCode As String) Implements IPmrInvestigationView.GetPmrDataAccessRequested
+        Public Event GetPmrDataAccessRequested(ByRef dataAccessCode As String) Implements IDoctorsPrescriptionView.GetPmrDataAccessRequested
 
-        Private _pmrPatientsDisplay As New List(Of PmrPatientDisplayView)
+        Private _pmrDoctorsPatients As New List(Of DoctorsPatientView)
         Private _doctorId As String
         Private _dataAccessLevel As String = ""
+        Private _prescriptionDetails As New List(Of PrescriptionDetailView)
+        Public Event RowChanged(patientIdNo As Int32) Implements IDoctorsPrescriptionView.RowChanged
 
         Public Sub New()
             'MyBase.New()
@@ -30,19 +33,9 @@ Namespace PresentationLayer.Views.Forms
             dtpTransactionDate.Value = Today()
         End Sub
 
-        Private Sub AddDgColumn(dgvColumnName As DataGridViewImageColumn, dgvName As String, caption As String)
-            With DataGridViewPmrPatientDisplay
-                .Columns.Insert(.Columns.Count, dgvColumnName)
-                dgvColumnName.Image = imgList.Images(0)
-                dgvColumnName.Width = 35
-                dgvColumnName.Name = dgvName
-                dgvColumnName.HeaderText = Messaging.TranslateCaption(caption)
-            End With
-        End Sub
-
         Private _doctorCode As String
 
-        Public Property DoctorCode As String Implements IPmrInvestigationView.DoctorCode
+        Public Property DoctorCode As String Implements IDoctorsPrescriptionView.DoctorCode
             Get
                 Return cboDoctorName.GetValue()
             End Get
@@ -51,7 +44,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DoctorName As String Implements IPmrInvestigationView.DoctorName
+        Public Property DoctorName As String Implements IDoctorsPrescriptionView.DoctorName
             Get
                 Return cboDoctorName.GetValue()
             End Get
@@ -75,7 +68,7 @@ Namespace PresentationLayer.Views.Forms
         '    End Set
         'End Property
 
-        Public Property TransactionDate As Date? Implements IPmrInvestigationView.TransactionDate
+        Public Property TransactionDate As Date? Implements IDoctorsPrescriptionView.TransactionDate
             Get
                 Return dtpTransactionDate.Value
             End Get
@@ -84,42 +77,62 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PmrPatientsDisplay As List(Of PmrPatientDisplayView) Implements IPmrInvestigationView.PmrPatientsDisplay
+        Public Property DoctorsPatients As List(Of DoctorsPatientView) Implements IDoctorsPrescriptionView.DoctorsPatients
             Get
-                Return _pmrPatientsDisplay
+                Return _pmrDoctorsPatients
             End Get
             Set
-                _pmrPatientsDisplay = Value
-                BindPmrPatientDisplay()
+                _pmrDoctorsPatients = Value
+                BindDoctorsPatient()
             End Set
         End Property
 
-        Private Sub BindPmrPatientDisplay()
+        Public Property PrescriptionDetails As List(Of PrescriptionDetailView) Implements IDoctorsPrescriptionView.PrescriptionDetails
+            Get
+                Return _prescriptionDetails
+            End Get
+            Set
+                _prescriptionDetails = Value
+                BindPrescriptionDetails()
+            End Set
+        End Property
+
+        Private Sub BindDoctorsPatient()
             SuspendLayout()
-            bsPmrPatientDisplay.DataSource = Nothing
-            DataGridViewPmrPatientDisplay.Refresh()
-            bsPmrPatientDisplay.DataSource = PmrPatientsDisplay
-            bsPmrPatientDisplay.AllowNew = True
-            With DataGridViewPmrPatientDisplay
+            bsDoctorsPatient.DataSource = Nothing
+            DataGridViewDoctorsPatient.Refresh()
+            bsDoctorsPatient.DataSource = DoctorsPatients
+            bsDoctorsPatient.AllowNew = True
+            With DataGridViewDoctorsPatient
                 .AutoGenerateColumns = False
-                .DataSource = bsPmrPatientDisplay
+                .DataSource = bsDoctorsPatient
             End With
 
             ResumeLayout()
         End Sub
 
+        Private Sub BindPrescriptionDetails()
+            SuspendLayout()
+            bsPrescriptionDetails.DataSource = Nothing
+            DataGridViewPrescriptionDetails.Refresh()
+            bsPrescriptionDetails.DataSource = PrescriptionDetails
+            bsPrescriptionDetails.AllowNew = False
+            ResumeLayout()
+        End Sub
+
+
         Private Sub btnRefresh_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnRefresh.ClickButtonArea
             If DoctorCode IsNot Nothing Then
                 RaiseEvent GetDoctorPatientsRequested()
             Else
-                PmrPatientsDisplay.Clear()
-                DataGridViewPmrPatientDisplay.Refresh()
+                DoctorsPatients.Clear()
+                DataGridViewDoctorsPatient.Refresh()
             End If
         End Sub
 
         Private Sub PrescriptionDosage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             RaiseEvent GetPmrDataAccessRequested(_dataAccessLevel)
-            With DataGridViewPmrPatientDisplay
+            With DataGridViewDoctorsPatient
                 .DefaultCellStyle.ForeColor = Color.Black
                 .BackColor = Color.White
                 .AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke
@@ -138,8 +151,8 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub dataGridView1_CellFormatting(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs) Handles DataGridViewPmrPatientDisplay.CellFormatting
-            For Each myRow As DataGridViewRow In DataGridViewPmrPatientDisplay.Rows
+        Private Sub dataGridView1_CellFormatting(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs) Handles DataGridViewDoctorsPatient.CellFormatting
+            For Each myRow As DataGridViewRow In DataGridViewDoctorsPatient.Rows
                 If myRow.Cells("dgvFileType").Value = "Old" Then
                     myRow.DefaultCellStyle.ForeColor = Color.Coral
                 Else
@@ -153,8 +166,8 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent GetDoctorPatientsRequested()
         End Sub
 
-        Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPmrPatientDisplay.CellClick
-            With DataGridViewPmrPatientDisplay
+        Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDoctorsPatient.CellClick
+            With DataGridViewDoctorsPatient
                 'Dim cForm As New ReportFormIGroup($"PMR Doctors Form.Rpt", FormCulture)
             End With
         End Sub
@@ -169,7 +182,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub cboDoctorName_Validated(sender As Object, e As EventArgs) Handles cboDoctorName.SelectionChangeCommitted, cboDoctorName.Leave
             If String.IsNullOrEmpty(cboDoctorName.SelectedValue) Then
-                PmrPatientsDisplay = Nothing
+                DoctorsPatients = Nothing
                 txtDoctorCode.Text = ""
             Else
                 txtDoctorCode.Text = cboDoctorName.SelectedValue
@@ -177,6 +190,13 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private Sub DataGridViewPrescriptionDetails_RowEnter(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDoctorsPatient.RowEnter
+            Dim dgvRow As DataGridViewRow = DataGridViewDoctorsPatient.Rows(e.RowIndex)
+            Dim ptIdNo As Int32 = dgvRow.Cells("dgvPatientIdNo").Value
+            RaiseEvent RowChanged(ptIdNo)
+            bsPrescriptionDetails.ResetBindings(False)
+            CGroupBox1.Text = Messaging.TranslateCaption("Prescription for ") + dgvRow.Cells("dgvFileNo").Value + "-" + dgvRow.Cells("dgvPatientName").Value
+        End Sub
     End Class
 
 End Namespace

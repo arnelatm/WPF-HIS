@@ -6,7 +6,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
-    Public Class PmrInvestigationPresenter(Of TM As New)
+    Public Class PMRInvestigationPresenter(Of TM As New)
         Inherits CommonPresenter(Of IPmrInvestigationView, TM)
 
         Public Sub New(itemView As IPmrInvestigationView)
@@ -84,4 +84,95 @@ Namespace PresentationLayer.Presenters
         End Function
     End Class
 
+    Public Class DoctorsPrescriptionPresenter(Of TM As New)
+        Inherits CommonPresenter(Of IDoctorsPrescriptionView, TM)
+
+        Private ReadOnly _prescriptionDetailsService As New AccountsService("PrescriptionDetail")
+        'Private ReadOnly _doctorsPatientService As New AccountsService("DoctorsPatient")
+
+        Public Sub New(itemView As IDoctorsPrescriptionView)
+            MyBase.New(itemView)
+            Service = New AccountsService("DoctorsPrescription")
+            Service.SaveConnectionString()
+            Service.SetConnectionString($"IGROUPCLINIC")
+            TableName = "PmrPatientDisplay_View"
+            SortOrderKey = "Trans_Key"
+            Service.RestoreConnectionString()
+            WithTreeView = False
+            AddHandler View.DoctorCodeRequested, AddressOf GetDoctorCode
+            AddHandler View.GetDoctorPatientsRequested, AddressOf GetDoctorsPatients
+
+        End Sub
+
+        Protected Overrides Sub CreateDataSources()
+            Service.SaveConnectionString()
+            Service.SetConnectionString($"ISPDATA")
+            CreateDataSource("Doctor_View", "DoctorName")
+            Service.RestoreConnectionString()
+        End Sub
+
+        Private Sub GetDoctorsPatients()
+            Dim pmrPatients As New DoctorsPatientModel
+            Dim transactionDateString As String = View.TransactionDate
+            If String.IsNullOrEmpty(View.DoctorCode) Then
+                pmrPatients = Nothing
+            Else
+                'pmrPatients = _doctorsPatientService.GetParametrized(Of DoctorsPatientModel)({View.DoctorCode, View.TransactionDate})
+                pmrPatients = Service.GetParametrized(Of DoctorsPatientModel)({View.DoctorCode, View.TransactionDate})
+            End If
+            GlobalVariables.Mapper.Map(pmrPatients, View.DoctorsPatients)
+        End Sub
+
+        Private Sub GetDoctorCode(ByRef drId As String)
+            Dim employeeIdNo As Int32
+            employeeIdNo = Service.GetUserEmployeeIdNo()
+            Service.SaveConnectionString()
+            Service.SetConnectionString($"ISPDATA")
+            drId = Service.GetField(Of String, Int32)(employeeIdNo, "Doctor", "EmployeeIdNo", "DoctorCode")
+            Service.RestoreConnectionString()
+        End Sub
+
+        Private Sub PrintReport()
+            Dim pmrPatients As New DoctorsPrescriptionModel
+            pmrPatients = Service.GetParametrized(Of DoctorsPrescriptionModel)({View.DoctorCode, View.TransactionDate})
+            GlobalVariables.Mapper.Map(pmrPatients, View)
+        End Sub
+
+        Private Sub OnRowChanged(patientIdNo As Int32)
+            UpdatePrescriptionDetail(patientIdNo)
+        End Sub
+
+
+        Private Sub UpdatePrescriptionDetail(patientIdNo As Int32)
+            Dim prescriptionDetails As List(Of PrescriptionDetailModel)
+            prescriptionDetails = _prescriptionDetailsService.GetRecordsWithGroupIdNo(Of PrescriptionDetailModel)(patientIdNo)
+            GlobalVariables.Mapper.Map(prescriptionDetails, View.PrescriptionDetails)
+        End Sub
+
+    End Class
+
+    'Public Class DoctorsPrescriptionPresenter(Of TM As New)
+    '    Inherits PMRInvestigationPresenter(Of DoctorsPrescriptionModel)
+
+    '    Private ReadOnly _prescriptionDetailsService As New AccountsService("PrescriptionDetail")
+
+    '    Public Sub New(itemView As IDoctorsPrescriptionView)
+    '        MyBase.New(itemView)
+
+    '        AddHandler View.RowChanged, AddressOf OnRowChanged
+
+    '    End Sub
+
+    '    Private Sub OnRowChanged(patientIdNo As Int32)
+    '        UpdatePrescriptionDetail(patientIdNo)
+    '    End Sub
+
+
+    '    Private Sub UpdatePrescriptionDetail(patientIdNo As Int32)
+    '        Dim prescriptionDetails As List(Of PrescriptionDetailModel)
+    '        prescriptionDetails = _prescriptionDetailsService.GetRecordsWithGroupIdNo(Of PrescriptionDetailModel)(patientIdNo)
+    '        GlobalVariables.Mapper.Map(prescriptionDetails, View.PrescriptionDetails)
+    '    End Sub
+
+    'End Class
 End Namespace

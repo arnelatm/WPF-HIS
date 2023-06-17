@@ -4,7 +4,7 @@ Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class PmrInvestigationRequestForm
+    Public Class PmrInvestigationForm
         Implements IPmrInvestigationView
 
         Public Event GetDoctorPatientsRequested() Implements IPmrInvestigationView.GetDoctorPatientsRequested
@@ -13,7 +13,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event GetPmrDataAccessRequested(ByRef dataAccessCode As String) Implements IPmrInvestigationView.GetPmrDataAccessRequested
 
-        Private _pmrPatientsDisplay As New List(Of PmrPatientDisplayView)
+        Private _doctorsPatients As New List(Of DoctorsPatientView)
         Private _doctorId As String
         Private _dataAccessLevel As String = ""
 
@@ -84,25 +84,25 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PmrPatientsDisplay As List(Of PmrPatientDisplayView) Implements IPmrInvestigationView.PmrPatientsDisplay
+        Public Property DoctorsPatients As List(Of DoctorsPatientView) Implements IPmrInvestigationView.DoctorsPatients
             Get
-                Return _pmrPatientsDisplay
+                Return _doctorsPatients
             End Get
             Set
-                _pmrPatientsDisplay = Value
-                BindPmrPatientDisplay()
+                _doctorsPatients = Value
+                BindDoctorsPatient()
             End Set
         End Property
 
-        Private Sub BindPmrPatientDisplay()
+        Private Sub BindDoctorsPatient()
             SuspendLayout()
-            bsPmrPatientDisplay.DataSource = Nothing
+            bsDoctorsPatient.DataSource = Nothing
             DataGridViewPmrPatientDisplay.Refresh()
-            bsPmrPatientDisplay.DataSource = PmrPatientsDisplay
-            bsPmrPatientDisplay.AllowNew = True
+            bsDoctorsPatient.DataSource = DoctorsPatients
+            bsDoctorsPatient.AllowNew = True
             With DataGridViewPmrPatientDisplay
                 .AutoGenerateColumns = False
-                .DataSource = bsPmrPatientDisplay
+                .DataSource = bsDoctorsPatient
             End With
 
             ResumeLayout()
@@ -112,7 +112,7 @@ Namespace PresentationLayer.Views.Forms
             If DoctorCode IsNot Nothing Then
                 RaiseEvent GetDoctorPatientsRequested()
             Else
-                PmrPatientsDisplay.Clear()
+                DoctorsPatients.Clear()
                 DataGridViewPmrPatientDisplay.Refresh()
             End If
         End Sub
@@ -210,7 +210,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub cboDoctorName_Validated(sender As Object, e As EventArgs) Handles cboDoctorName.SelectionChangeCommitted, cboDoctorName.Leave
             If String.IsNullOrEmpty(cboDoctorName.SelectedValue) Then
-                PmrPatientsDisplay = Nothing
+                DoctorsPatients = Nothing
                 txtDoctorCode.Text = ""
             Else
                 txtDoctorCode.Text = cboDoctorName.SelectedValue

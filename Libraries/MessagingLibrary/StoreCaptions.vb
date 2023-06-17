@@ -362,15 +362,19 @@ Public Class StoreCaptions
         Return Captions
     End Function
 
-    Friend Sub InsertWord(ByVal t As String)
+    Friend Sub InsertWord(ByVal word As String)
+        'If word.Contains("'") Then
+        '    Debugger.Break()
+        'End If
         Dim cmd As String
-        If Not (String.IsNullOrEmpty(t) OrElse t = "  /  /") Then
-            cmd = "SELECT COUNT(*) From OriginalCaptions where Caption = '" + t + "'"
-            Dim howMany As Int32 = _dAc1.ExecScalar(Of Int32)(cmd)
+        If Not (String.IsNullOrEmpty(word) OrElse word = "  /  /") Then
+            Dim params() As Object = {"@word", word}
+            cmd = "SELECT COUNT(*) From OriginalCaptions where Caption = @word"
+            Dim howMany As Int32 = _dAc1.ExecScalar(Of Int32)(cmd, params)
             If howMany = 0 Then
-                cmd = "INSERT INTO OriginalCaptions (caption) values ( '" + t + "')"
-                'cmd = "INSERT INTO OriginalCaptions (caption) values ( @t )"
-                _dAc1.ExecCmd(cmd)
+                'cmd = "INSERT INTO OriginalCaptions (caption) values ( '" + word + "')"
+                cmd = "INSERT INTO OriginalCaptions (caption) values ( @word )"
+                _dAc1.ExecCmd(cmd, params)
             End If
         End If
     End Sub
@@ -382,11 +386,12 @@ Public Class StoreCaptions
 
     Public Sub InsertMessage(ByVal key As String, ByVal message As String)
         Dim cmd As String
-        cmd = "SELECT COUNT(*) FROM OriginalMessage where Key = '" + key + "'"
-        Dim howMany As Int32 = _dAc1.ExecScalar(Of Int32)(cmd)
+        Dim params() As Object = {"@key", key, "@message", message}
+        cmd = "SELECT COUNT(*) FROM OriginalMessage where Key = @message"
+        Dim howMany As Int32 = _dAc1.ExecScalar(Of Int32)(cmd, params)
         If howMany = 0 Then
-            cmd = "INSERT INTO OriginalMessage (key, message) values ( '" + key + "','" + message + "')"
-            _dAc1.ExecCmd(cmd)
+            cmd = "INSERT INTO OriginalMessage (key, message) values (@key, @message)"
+            _dAc1.ExecCmd(cmd, params)
         End If
     End Sub
 
@@ -397,11 +402,12 @@ Public Class StoreCaptions
         End If
     End Sub
 
-    Friend Sub InsertFormItem(ByVal systemViewIdNo As Int16, ByVal item As String)
+    Friend Sub InsertFormItem(ByVal systemViewIdNo As Int16, ByVal itemName As String)
         Dim cmd As String
         Dim captionIdNo As Int32
-        cmd = "Select IdNo From OriginalCaptions where Caption = '" + item.ToString().TrimEnd() + "'"
-        captionIdNo = _dAc1.ExecScalar(Of Int32)(cmd)
+        cmd = "Select IdNo From OriginalCaptions where Caption = @itemName"
+        Dim params() As Object = {"@ItemName", itemName}
+        captionIdNo = _dAc1.ExecScalar(Of Int32)(cmd, params)
         'if item.ToString().TrimEnd() = "Gender" then
         '    debugger.Break()
         'End If
@@ -415,18 +421,20 @@ Public Class StoreCaptions
 
     Friend Sub InsertForm(ByVal formName As String)
         Dim cmd As String
-        cmd = "SELECT COUNT(*) FROM SystemView where SystemViewName ='" + formName + "'"
-        Dim howMany As Int16 = _dAc1.ExecScalar(Of Int16)(cmd)
+        Dim params() As Object = {"@FormName", formName}
+        cmd = "SELECT COUNT(*) FROM SystemView where SystemViewName = @formName "
+        Dim howMany As Int16 = _dAc1.ExecScalar(Of Int16)(cmd, params)
         If howMany = 0 Then
-            cmd = "INSERT INTO SystemView (SystemViewName) values ( '" + formName + "')"
-            _dAc1.ExecCmd(cmd)
+            cmd = "INSERT INTO SystemView (SystemViewName) values (@formName)"
+            _dAc1.ExecCmd(cmd, params)
         End If
     End Sub
 
     Friend Function GetSystemViewIdNo(ByVal formName As String) As Int16
         Dim cmd As String
-        cmd = "SELECT IdNo FROM SystemView where SystemViewName ='" + formName + "'"
-        Return _dAc1.ExecScalar(Of Int16)(cmd)
+        Dim params() As Object = {"@FormName", formName}
+        cmd = "SELECT IdNo FROM SystemView where SystemViewName = @formName "
+        Return _dAc1.ExecScalar(Of Int16)(cmd, params)
     End Function
 
     'Friend Function IsTranslatable(ByVal ctrl As Control)

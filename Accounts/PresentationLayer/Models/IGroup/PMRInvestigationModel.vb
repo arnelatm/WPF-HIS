@@ -11,7 +11,13 @@ Namespace PresentationLayer.Models
         Public Property DoctorCode As String
         Public Property DoctorName As String
         Public Property TransactionDate As Date?
-        Public Property PmrPatientsDisplay As List(Of PmrPatientDisplayModel)
+        Public Property DoctorsPatients As List(Of DoctorsPatientModel)
+
+    End Class
+
+    Public Class DoctorsPrescriptionModel
+
+        Public Property PrescriptionDetails As List(Of PrescriptionDetail)
 
     End Class
 

@@ -1,0 +1,24 @@
+﻿Imports AATM.PresentationLayer.Views
+
+Namespace PresentationLayer.Views.Interfaces
+
+    Public Class DoctorsPatientView
+        Implements IDoctorsPatientView
+
+        Public Property Token As String Implements IDoctorsPatientView.Token
+        Public Property Status As Boolean Implements IDoctorsPatientView.Status
+        Public Property FileNo As String Implements IDoctorsPatientView.FileNo
+        Public Property Name As String Implements IDoctorsPatientView.Name
+        Public Property PType As String Implements IDoctorsPatientView.PType
+        Public Property InvType As String Implements IDoctorsPatientView.InvType
+        Public Property InvoiceDate As String Implements IDoctorsPatientView.InvoiceDate
+        Public Property TransKey As Int32 Implements IDoctorsPatientView.TransKey
+        Public Property LastConsDate As String Implements IDoctorsPatientView.LastConsDate
+        Public Property InvTime As Date Implements IDoctorsPatientView.InvTime
+        Public Property Errors As List(Of String) Implements IView.Errors
+        Public Property DataFilter As String Implements IView.DataFilter
+        Public Property PatientIdNo As Int32 Implements IDoctorsPatientView.PatientIdNo
+
+    End Class
+
+End Namespace

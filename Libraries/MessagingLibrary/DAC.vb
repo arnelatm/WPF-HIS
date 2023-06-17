@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Data.Common
 Imports System.Data.OleDb
 Imports System.Data.SqlClient
 Imports AATM.Libraries.GlobalFuncNSub
@@ -144,7 +145,7 @@ Public Class Dac
         End If
     End Function
 
-    Public Function ExecCmd(ByVal cmd As String) As String
+    Public Function ExecCmd(ByVal cmd As String, Optional params() As Object = Nothing) As String
         Dim status As String = "Ok"
         Cs = BuildConnString()
         Select Case DacAccessType
@@ -156,6 +157,9 @@ Public Class Dac
                     ErrorMessage(ex, SqlError)
                 End Try
                 Dim dc1 As New SqlCommand(cmd, cn1)
+                If params IsNot Nothing Then
+                    AddParameters(dc1, params)
+                End If
                 Dc = dc1
                 Cn = cn1
             Case "MDB"
@@ -269,7 +273,7 @@ Public Class Dac
 
     End Function
 
-    Public Function ExecScalar(Of T)(ByVal cmd As String) As T
+    Public Function ExecScalar(Of T)(ByVal cmd As String, Optional params As Object = Nothing) As T
         Dim retVal As T
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             Cs = BuildConnString()
@@ -283,6 +287,9 @@ Public Class Dac
                     End Try
                     Dim dc1 As New SqlCommand(cmd, cn1)
                     dc1.CommandType = CommandType.Text
+                    If params IsNot Nothing Then
+                        AddParameters(dc1, params)
+                    End If
                     Dc = dc1
                     Cn = cn1
                 Case "MDB"
@@ -643,6 +650,46 @@ Public Class Dac
         End Try
         Return retVal
     End Function
+
+    Public Sub AddParameters(command As DbCommand, parms() As Object)
+        Try
+            If parms IsNot Nothing AndAlso parms.Length > 0 Then
+
+                ' ** Iterator pattern
+
+                ' NOTE: processes a name/value pair at each iteration
+
+                For i = 0 To parms.Length - 1 Step 2
+                    Dim name As String = parms(i).ToString()
+
+                    ' no empty strings to the database
+
+                    If TypeOf parms(i + 1) Is String AndAlso CStr(parms(i + 1)) = "" Then
+                        parms(i + 1) = Nothing
+                    End If
+
+                    ' if null, set to DbNull
+
+                    If TypeOf parms(i + 1) Is Image Then
+                        Dim imageParameter As SqlParameter = New SqlParameter("@Image", SqlDbType.Image)
+                        imageParameter.Value = DBNull.Value
+                        command.Parameters.Add(imageParameter)
+                    Else
+                        Dim value As Object = If(parms(i + 1), DBNull.Value)
+                        ' ** Factory pattern
+                        Dim dbParameter = command.CreateParameter()
+                        dbParameter.ParameterName = name
+                        dbParameter.Value = value
+                        command.Parameters.Add(dbParameter)
+                    End If
+
+                Next i
+            End If
+        Catch ex As Exception
+            Debugger.Break()
+        End Try
+
+    End Sub
 
 #End Region
 
