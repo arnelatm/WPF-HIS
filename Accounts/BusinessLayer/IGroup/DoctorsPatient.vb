@@ -3,7 +3,7 @@
 
 Namespace BusinessLayer
 
-    Public Class PmrPatientDisplay
+    Public Class DoctorsPatient
         Inherits AATM.BusinessLayer.BusinessObject
 
         Public Property InvoiceDate As String
@@ -16,6 +16,7 @@ Namespace BusinessLayer
         Public Property TransKey As Integer
         Public Property LastConsDate As String
         Public Property InvTime As Date
+        Public Property PatientIdNo As Int32
 
     End Class
 

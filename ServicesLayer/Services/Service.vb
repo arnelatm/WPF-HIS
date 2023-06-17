@@ -577,6 +577,16 @@ Namespace Services
             Return modelOfPresenter
         End Function
 
+        'Public Function GetParametrized(Of TM As New, TD As New)(parameter As Object, Optional sortOrder As String = "")
+        '    Dim modelOfPresenter As New TM
+        '    Dim dao As New TD
+        '    Dim record = dao.GetParametrized(parameter, sortOrder)
+        '    If record IsNot Nothing Then
+        '        GlobalVariables.Mapper.Map(record, modelOfPresenter)
+        '    End If
+        '    Return modelOfPresenter
+        'End Function
+
         'Public Function GetIdNoWithKey(Of T)(tableName As String, itemName As String) As T Implements IService.GetIdNoWithKey
         '    Dim idNo As T = DataDao.GetIdNoWithKey(Of T)(tableName, itemName)
         '    Return idNo

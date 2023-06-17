@@ -4,7 +4,7 @@
     '''     The Model in MVP design pattern.
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
-    Public Class PmrPatientDisplayModel
+    Public Class DoctorsPatientModel
 
         Public Property InvoiceDate As String
         Public Property [Name] As String
@@ -16,6 +16,7 @@
         Public Property TransKey As Integer
         Public Property LastConsDate As String
         Public Property InvTime As Date
+        Public Property PatientIdNo As Int32
 
     End Class
 

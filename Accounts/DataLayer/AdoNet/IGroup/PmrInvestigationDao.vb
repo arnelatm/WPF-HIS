@@ -33,7 +33,8 @@ Namespace DataLayer.AdoNet
             data.TransactionDate = transactionDate
             Dim params() As Object = {"@DoctorId", doctorCode, "@TransactionDate", dateString}
             sql = $"SELECT Distinct [PmrDate], [FileNo], [FileType], [PatientName], [Status], [TokenNo], [PType], [LastConsDate], [Trans_Key], [InvTime] from PmrDoctorsGenForm_View where doctorid = @DoctorId and PmrDate = @TransactionDate and not (trans_key is Null and tokenno = 0) order by tokenno desc"
-            data.PmrPatientsDisplay = _db.Read(sql, MakePmrPatientDetails, params).ToList()
+            'sql = $"SELECT Distinct [PmrDate], [FileNo], [FileType], [PatientName], [Status], [TokenNo], [PType], [LastConsDate], [Trans_Key], [InvTime], [PatientIdNo] from PmrDoctorsGenForm_View where doctorid = @DoctorId and PmrDate = @TransactionDate and not (trans_key is Null and tokenno = 0) order by tokenno desc"
+            data.DoctorsPatients = _db.Read(sql, MakeDoctorsPatient, params).ToList()
             Return data
         End Function
 
@@ -42,7 +43,7 @@ Namespace DataLayer.AdoNet
             .DoctorName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmpNameEnglish"))
             }
 
-        Private Shared ReadOnly MakePmrPatientDetails As Func(Of IDataReader, PmrPatientDisplay) = Function(reader) New PmrPatientDisplay() With
+        Private Shared ReadOnly MakeDoctorsPatient As Func(Of IDataReader, DoctorsPatient) = Function(reader) New DoctorsPatient() With
             {
             .InvoiceDate = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PmrDate")),
             .FileNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("FileNo")),

@@ -2,7 +2,7 @@
 
 Namespace PresentationLayer.Views.Interfaces
 
-    Public Interface IPmrPatientDisplayView
+    Public Interface IDoctorsPatientView
         Inherits IView
 
         Property InvoiceDate As String
@@ -15,6 +15,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property LastConsDate As String
         Property TransKey As Integer
         Property InvTime As Date
+        Property PatientIdNo As Int32
 
     End Interface
 

@@ -225,6 +225,7 @@
     <Compile Include="BusinessLayer\Dosage.vb" />
     <Compile Include="BusinessLayer\IGroup\DrugSale.vb" />
     <Compile Include="BusinessLayer\IGroup\GTinMatcher.vb" />
+    <Compile Include="BusinessLayer\IGroup\PrescriptionDetail.vb" />
     <Compile Include="BusinessLayer\IGroup\StockInventory.vb" />
     <Compile Include="BusinessLayer\ItemCode.vb" />
     <Compile Include="BusinessLayer\CodeGroup.vb" />
@@ -240,7 +241,7 @@
     <Compile Include="BusinessLayer\EmployeeLeaveApprovalItem.vb" />
     <Compile Include="BusinessLayer\EmployeePayElement.vb" />
     <Compile Include="BusinessLayer\IGroup\PmrInvestigation.vb" />
-    <Compile Include="BusinessLayer\IGroup\PmrPatientDisplay.vb" />
+    <Compile Include="BusinessLayer\IGroup\DoctorsPatient.vb" />
     <Compile Include="BusinessLayer\IGroup\Patient.vb" />
     <Compile Include="BusinessLayer\IGroup\Lab_InvoiceGroup.vb" />
     <Compile Include="BusinessLayer\IGroup\ItemDetails.vb" />
@@ -310,6 +311,8 @@
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\DoctorDao.vb" />
     <Compile Include="DataLayer\AdoNet\DosagePrintingDao.vb" />
+    <Compile Include="DataLayer\AdoNet\IGroup\DoctorsPrescriptionDao.vb" />
+    <Compile Include="DataLayer\AdoNet\IGroup\PrescriptionDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\SaleDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\SaleDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseDetailDao.vb" />
@@ -436,6 +439,8 @@
     <Compile Include="PresentationLayer\Models\DosageModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\DrugSaleModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\GTinMatcherModel.vb" />
+    <Compile Include="PresentationLayer\Models\IGroup\PrescriptionDetailModel.vb" />
+    <Compile Include="PresentationLayer\Models\IGroup\PrescriptionModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\StockInventoryModel.vb" />
     <Compile Include="PresentationLayer\Models\ItemCodeModel.vb" />
     <Compile Include="PresentationLayer\Models\CodeGroupModel.vb" />
@@ -454,7 +459,7 @@
     <Compile Include="PresentationLayer\Models\HolidayTransferAvailmentModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\PatientModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\PMRInvestigationModel.vb" />
-    <Compile Include="PresentationLayer\Models\IGroup\PMRPatientDisplayModel.vb" />
+    <Compile Include="PresentationLayer\Models\IGroup\DoctorsPatientModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\Lab_InvoiceGroupModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\ItemDetailsModel.vb" />
     <Compile Include="PresentationLayer\Models\ProductUnitModel.vb" />
@@ -507,7 +512,7 @@
     <Compile Include="PresentationLayer\Presenters\CodeGroupPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\CustomerPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DocumentPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\IGroup\PmrInvestigationPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\IGroup\PMRInvestigationPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\Lab_InvoiceGroupPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\ItemDetailsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ReportSelectorPresenter.vb" />
@@ -542,16 +547,16 @@
     <Compile Include="PresentationLayer\Views\EmployeeLeaveCreditView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeePayElementView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeDocumentView.vb" />
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\PatientPrescription.Designer.vb">
-      <DependentUpon>PatientPrescription.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\PatientPrescriptionForm.Designer.vb">
+      <DependentUpon>PatientPrescriptionForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\PatientPrescription.vb">
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\PatientPrescriptionForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\DoctorsPatient.Designer.vb">
-      <DependentUpon>DoctorsPatient.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\DoctorsPrescriptionForm.Designer.vb">
+      <DependentUpon>DoctorsPrescriptionForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\DoctorsPatient.vb">
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\DoctorsPrescriptionForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\SterilizationLabelPrinting.designer.vb">
@@ -566,6 +571,8 @@
     <Compile Include="PresentationLayer\Views\Forms\SaleEntry.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IPrescriptionDetailView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IPrescriptionView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISaleDetailView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISaleView.vb" />
     <Compile Include="PresentationLayer\Views\ProductUnitView.vb" />
@@ -767,10 +774,10 @@
     <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrReportSelector.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationRequestForm.Designer.vb">
-      <DependentUpon>PmrInvestigationRequestForm.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationForm.Designer.vb">
+      <DependentUpon>PmrInvestigationForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationRequestForm.vb">
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsEntry.Designer.vb">
@@ -959,7 +966,7 @@
     <Compile Include="PresentationLayer\Views\Forms\SupplierEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\IGroup\PmrPatientDisplayView.vb" />
+    <Compile Include="PresentationLayer\Views\IGroup\DoctorsPatientView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IProductUnitView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IDrugAcceptView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IDrugSaleView.vb" />
@@ -973,7 +980,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IDocumentView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeDocumentView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IPmrInvestigationView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IPmrPatientDisplayView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IDoctorsPatientView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IPatientView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\ILab_InvoiceGroupView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IItemDetailsView.vb" />
@@ -1004,6 +1011,7 @@
     <Compile Include="PresentationLayer\Views\HolidayTransferItemView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeLeaveApprovalHistoryView.vb" />
     <Compile Include="PresentationLayer\Views\Lab_InvoiceDetailsView.vb" />
+    <Compile Include="PresentationLayer\Views\PrescriptionDetailView.vb" />
     <Compile Include="PresentationLayer\Views\SaleDetailView.vb" />
     <Compile Include="PresentationLayer\Views\PurchaseDetailView.vb" />
     <Compile Include="PresentationLayer\Views\PcJournalView.vb" />
@@ -1913,11 +1921,11 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\CGridBoxForm.resx">
       <DependentUpon>CGridBoxForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\PatientPrescription.resx">
-      <DependentUpon>PatientPrescription.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\PatientPrescriptionForm.resx">
+      <DependentUpon>PatientPrescriptionForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\DoctorsPatient.resx">
-      <DependentUpon>DoctorsPatient.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\DoctorsPrescriptionForm.resx">
+      <DependentUpon>DoctorsPrescriptionForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\SterilizationLabelPrinting.resx">
       <DependentUpon>SterilizationLabelPrinting.vb</DependentUpon>
@@ -2047,8 +2055,8 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\PmrReportSelector.resx">
       <DependentUpon>PmrReportSelector.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationRequestForm.resx">
-      <DependentUpon>PmrInvestigationRequestForm.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationForm.resx">
+      <DependentUpon>PmrInvestigationForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsEntry.resx">
       <DependentUpon>ItemDetailsEntry.vb</DependentUpon>
@@ -2703,6 +2711,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PcsOiItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PensionRateModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PettyCashJournalModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PrescriptionDetailModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.ProductModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.ProductUnitModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PurchaseDetailModel.datasource" />

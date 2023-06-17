@@ -195,9 +195,9 @@ Public Class MappingProfileAccounts
         CreateMap(Of Doctor, DoctorModel)().ReverseMap()
         CreateMap(Of DoctorModel, IDoctorView)().ReverseMap()
 
-        CreateMap(Of PmrPatientDisplay, PmrPatientDisplayModel)().ReverseMap()
-        CreateMap(Of PmrPatientDisplayModel, IPmrPatientDisplayView)().ReverseMap()
-        CreateMap(Of PmrPatientDisplayModel, PmrPatientDisplayView)().ReverseMap()
+        CreateMap(Of DoctorsPatient, DoctorsPatientModel)().ReverseMap()
+        CreateMap(Of DoctorsPatientModel, IDoctorsPatientView)().ReverseMap()
+        CreateMap(Of DoctorsPatientModel, DoctorsPatientView)().ReverseMap()
 
         CreateMap(Of StockInventory, StockInventoryModel)().ReverseMap()
         CreateMap(Of StockInventoryModel, IStockInventoryView)().ReverseMap()
@@ -227,6 +227,9 @@ Public Class MappingProfileAccounts
 
         CreateMap(Of PurchaseHistory, PurchaseHistoryModel)().ReverseMap()
         CreateMap(Of PurchaseHistoryModel, PurchaseHistoryView)().ReverseMap()
+
+        CreateMap(Of DoctorsPrescription, DoctorsPrescriptionModel)().ReverseMap()
+        CreateMap(Of DoctorsPrescriptionModel, IDoctorsPrescriptionView)().ReverseMap()
 
         'CreateMap(Of PmrPatientDisplayModel, PmrPatientDisplayView)()
 
