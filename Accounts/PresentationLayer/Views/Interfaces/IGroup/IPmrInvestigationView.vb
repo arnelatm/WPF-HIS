@@ -10,7 +10,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property TransactionDate As Date?
         Property DoctorsPatients As List(Of DoctorsPatientView)
 
-        Event GetDoctorPatientsRequested()
+        Event DataChanged()
 
         Event DoctorCodeRequested(ByRef drId As String)
         Event GetPmrDataAccessRequested(ByRef drId As String)

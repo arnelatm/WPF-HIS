@@ -570,7 +570,7 @@ Namespace Services
 
         Public Function GetParametrized(Of TM As New)(parameter As Object, Optional sortOrder As String = "")
             Dim modelOfPresenter As New TM
-            Dim record = DataDao.GetParametrized(parameter, sortOrder)
+            Dim record = DataDao.GetParametrized(Of TM)(parameter, sortOrder)
             If record IsNot Nothing Then
                 GlobalVariables.Mapper.Map(record, modelOfPresenter)
             End If
