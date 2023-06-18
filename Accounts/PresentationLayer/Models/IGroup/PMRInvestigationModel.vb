@@ -16,11 +16,8 @@ Namespace PresentationLayer.Models
     End Class
 
     Public Class DoctorsPrescriptionModel
+        Inherits PmrInvestigationModel
 
-        Public Property DoctorCode As String
-        Public Property DoctorName As String
-        Public Property TransactionDate As Date?
-        Public Property DoctorsPatients As List(Of DoctorsPatientModel)
         Public Property PrescriptionDetails As List(Of PrescriptionDetail)
 
     End Class
