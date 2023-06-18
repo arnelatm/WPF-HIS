@@ -26,8 +26,6 @@ Namespace Services
         'Protected Shared ReadOnly DefaultFieldValueDao As IDefaultFieldValueDao = Factory.DefaultFieldValueDao
         Protected Shared ReadOnly TblColPropDao As ITblColPropDao = Factory.TblColPropDao
 
-        'Protected Shared ReadOnly DaoFactory As IDaoFactory = DaoFactories.GetFactory(Provider)
-
         Public Sub New(objectName As String, Optional bizParam As Object = Nothing, Optional daoParam As Object = Nothing)
             CreateBusinessObject(objectName, bizParam)
             CreateDao(objectName, daoParam)
@@ -217,43 +215,6 @@ Namespace Services
             Return GetLookup(lookupObj)
         End Function
 
-        'Public Function GetLookupDataTable(lookupObj As LookupTable, Optional hierarchical As Boolean = False) As DataTable
-        '    If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
-        '        Dim nameFieldArabic = lookupObj.NameField + "Ara"
-        '        If FieldExistInTable(lookupObj.TableName, nameFieldArabic) Then
-        '            If lookupObj.SortKey = lookupObj.NameField Then
-        '                lookupObj.SortKey = nameFieldArabic
-        '                Dim i As Integer = 0
-        '                For Each field In lookupObj.FieldsToShow
-        '                    If field = lookupObj.NameField Then
-        '                        lookupObj.FieldsToShow(i) = nameFieldArabic
-        '                    End If
-        '                    i = i + 1
-        '                Next
-        '                lookupObj.NameField = nameFieldArabic
-        '            End If
-        '        End If
-        '    End If
-        '    If Not hierarchical Then
-        '        Dim data = GetRecordsDataTable(lookupObj.TableName, lookupObj.SortKey, lookupObj.FieldsToShow, lookupObj.FilterKey)
-        '        'Dim lookupSetting = GlobalVariables.LookupSetting()
-        '        'If lookupSetting = "NameAndCode" Then
-        '        '    Return ProcessLookupTableByNameCode(data, lookupObj.FieldsToShow.Count())
-        '        'ElseIf lookupSetting = "CodeAndName" Then
-        '        '    Return ProcessLookupTableByCodeName(data, lookupObj.FieldsToShow.Count())
-        '        'ElseIf lookupSetting = "Name" Then
-        '        '    Return ProcessLookupTableByName(data, lookupObj.FieldsToShow.Count())
-        '        'Else
-        '        '    Return ProcessLookupTableByNameCode(data, lookupObj.FieldsToShow.Count())
-        '        'End If
-        '        Return data
-        '    End If
-        'End Function
-
-
-        'Public Function GetDefaultFieldValues(ByVal systemViewName As String) Implements IService.GetDefaultFieldValues
-        '    Return DefaultFieldValueDao.GetTableDefaultValues(systemViewName)
-        'End Function
         Public Function GetMainTableColumnProperties(tableName As String) As List(Of TblColProp) Implements IService.GetMainTableColumnProperties
             Return TblColPropDao.GetMainTableColumnProperties(tableName)
         End Function
@@ -263,27 +224,6 @@ Namespace Services
         End Function
 
         Protected Overridable Sub CreateBusinessObject(objectName As String, Optional bizParam As Object = Nothing)
-            'Dim bizObjectName As String
-            'bizObjectName = $"AATM.BusinessLayer.BusinessObjects." + objectName
-            'If bizParam Is Nothing OrElse bizParam.Length = 0 Then
-            '    DataBo = Activator.CreateInstance(Type.GetType(bizObjectName))
-            'Else
-            '    DataBo = Activator.CreateInstance(Type.GetType(bizObjectName), bizParam)
-            'End If
-            'If DataBo Is Nothing Then
-            '    MessageBox.Show("Missing Business Object " + objectName)
-            'End If
-            'Dim bizObject = $"AATM.BusinessLayer.BusinessObjects." + objectName
-            'Dim tType = Type.GetType(bizObject)
-            'If bizParam IsNot Nothing AndAlso bizParam.Length > 0 Then
-            '    DataBo = CreateInstance(bizObject)
-            'Else
-            '    DataBo = CreateInstance(bizObject, bizParam)
-            '    'DataBo = Activator.CreateInstance(tType)
-            'End If
-            'If DataBo Is Nothing Then
-            '    MessageBox.Show("Missing Business Object " + bizObject)
-            'End If
             Dim bizObject = $"AATM.BusinessLayer.BusinessObjects." + objectName
             Dim tType = Type.GetType(bizObject)
             If bizParam IsNot Nothing AndAlso bizParam.Length > 0 Then
@@ -332,26 +272,12 @@ Namespace Services
                                                              .Code = If(IsDBNull(item(2)), "", item(2))}
                     tlData.Add(tData)
                 Next
-
-                'For i = 1 To Int(data.Count / 3)
-                '    Dim tData As New Lookup.LookupData With {.IdNo = data(i * 3 - 3),
-                '            .Name = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1)) & " | " & data(i * 3 - 2),
-                '            .Code = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1))
-                '            }
-                '    tlData.Add(tData)
-                'Next
             Else
                 For Each item In data
                     Dim tData As New Lookup.LookupData With {.IdNo = item(0),
                                                              .Name = If(IsDBNull(item(1)), "", item(1)) & " | " & item(0)}
                     tlData.Add(tData)
                 Next
-                'For i = 1 To Int(data.Count / 2)
-                '    Dim tData As New Lookup.LookupData With {.IdNo = data(i * 2 - 2),
-                '            .Name = If(IsDBNull(data(i * 2 - 1)), "", data(i * 2 - 1)) & " | " & data(i * 2 - 2)
-                '            }
-                '    tlData.Add(tData)
-                'Next
             End If
             Return tlData
         End Function
@@ -365,25 +291,12 @@ Namespace Services
                                                              .Code = If(IsDBNull(item(2)), "", item(2))}
                     tlData.Add(tData)
                 Next
-                'For i = 1 To Int(data.Count / 3)
-                '    Dim tData As New Lookup.LookupData With {.IdNo = data(i * 3 - 3),
-                '            .Name = data(i * 3 - 2),
-                '            .Code = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1))
-                '            }
-                '    tlData.Add(tData)
-                'Next
             Else
                 For Each item In data
                     Dim tData As New Lookup.LookupData With {.IdNo = item(0),
                                                              .Name = If(IsDBNull(item(1)), "", item(1))}
                     tlData.Add(tData)
                 Next
-                'For i = 1 To Int(data.Count / 2)
-                '    Dim tData As New Lookup.LookupData With {.IdNo = data(i * 2 - 2),
-                '            .Name = data(i * 2 - 1)
-                '            }
-                '    tlData.Add(tData)
-                'Next
             End If
             Return tlData
         End Function
@@ -403,12 +316,6 @@ Namespace Services
                 '    tlData.Add(tData)
                 'Next
             ElseIf fieldCount = 3 Then
-                'For Each item In data
-                '    Dim tData As New Lookup.LookupData With {.IdNo = item(0),
-                '                                             .Name = If(IsDBNull(item(1)), "", item(1)) & If(IsDBNull(item(2)), "", item(2)),
-                '                                             .Code = If(IsDBNull(item(2)), "", item(2))}
-                '    tlData.Add(tData)
-                'Next
                 For i = 1 To Int(data.Count / 3)
                     Dim tData As New Lookup.LookupData With {.IdNo = data(i * 3 - 3),
                         .Name = data(i * 3 - 2) & " | " & If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1)),
@@ -417,11 +324,6 @@ Namespace Services
                     tlData.Add(tData)
                 Next
             ElseIf fieldCount = 2 Then
-                'For Each item In data
-                '    Dim tData As New Lookup.LookupData With {.IdNo = item(0),
-                '                                             .Name = item(1) & " | " & item(0)}
-                '    tlData.Add(tData)
-                'Next
                 For i = 1 To Int(data.Count / 2)
                     Dim tData As New Lookup.LookupData With {.IdNo = data(i * 2 - 2),
                             .Name = data(i * 2 - 1) & " | " & data(i * 2 - 2)
@@ -437,10 +339,6 @@ Namespace Services
                     dbLookup.Index = i
                     tlData.Add(dbLookup)
                 Next
-                'For i = 0 To Int(data.Count) - 1
-                '    Dim tData As New Lookup.LookupData With {.Name = If(IsDBNull(data(i)), "", data(i))}
-                '    tlData.Add(tData)
-                'Next
             End If
             Return tlData
         End Function
@@ -577,26 +475,11 @@ Namespace Services
             Return modelOfPresenter
         End Function
 
-        'Public Function GetParametrized(Of TM As New, TD As New)(parameter As Object, Optional sortOrder As String = "")
-        '    Dim modelOfPresenter As New TM
-        '    Dim dao As New TD
-        '    Dim record = dao.GetParametrized(parameter, sortOrder)
-        '    If record IsNot Nothing Then
-        '        GlobalVariables.Mapper.Map(record, modelOfPresenter)
-        '    End If
-        '    Return modelOfPresenter
-        'End Function
-
-        'Public Function GetIdNoWithKey(Of T)(tableName As String, itemName As String) As T Implements IService.GetIdNoWithKey
-        '    Dim idNo As T = DataDao.GetIdNoWithKey(Of T)(tableName, itemName)
-        '    Return idNo
-        'End Function
         Public Function GetPrintJobIdNo(reportName As String) As Integer Implements IService.GetPrintJobIdNo
             Return DataDao.GetPrintJobIdNo(reportName)
         End Function
 
         Public Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM Implements IService.GetRecordByIdNo
-            'return DataDao.GetRecordByIdNo(Convert.ToInt32(idNo))
             Dim modelOfPresenter As New TM
             Dim record = DataDao.GetRecordByIdNo(Convert.ToInt32(idNo))
             If record IsNot Nothing Then
@@ -665,9 +548,6 @@ Namespace Services
             Return DataDao.GetDtRecords(tableName, fields, filterKey, sortKey)
         End Function
 
-        'Public Overloads Function GetAll(Optional ByRef sortKey As String = Nothing) Implements IService.GetAll
-        '    Return DataDao.GetAll(sortKey)
-        'End Function
         Public Function GetRecordsWithGroupIdNo(Of TM)(idNo, Optional ByRef sortKey = Nothing) As List(Of TM) Implements IService.GetRecordsWithGroupIdNo
             Dim bizData = DataDao.GetRecordsWithGroupIdNo(idNo, sortKey)
             Dim dataModel As New List(Of TM)
@@ -738,90 +618,6 @@ Namespace Services
             Return DataDao.UpdateTvp(dtTable)
         End Function
 
-        'Private ReadOnly _hasher As New SHA1CryptoServiceProvider()
-
-        'Public Function HashEncryptString(s As String) As String
-        '    Dim clearBytes As Byte() = Encoding.UTF8.GetBytes(s)
-        '    Dim hashedBytes As Byte() = _hasher.ComputeHash(clearBytes)
-        '    Return Convert.ToBase64String(hashedBytes)
-        'End Function
-
-        '' ReSharper disable once UnusedMember.Global
-        'Public Function EncryptPassword(userLoginIdNo As Integer, password As String) As String
-        '    Dim salt As Salt
-        '    Dim ePassword As String = Nothing
-        '    Dim saltString As String
-        '    Dim saltDao = New SaltDao()
-        '    Try
-
-        '        If userLoginIdNo = 0 Then
-        '            ePassword = password
-        '            'saltString = GetSalt(28)
-        '            'ePassword = HashEncryptStringWithSalt(password, saltString)
-        '            ' new user no Salt record yet
-        '        Else
-        '            salt = saltDao.GetSaltByLoginIdNo(userLoginIdNo)
-        '            If salt Is Nothing Then
-        '                saltString = HashEncryptString(password)
-        '                Dim newSalt As New Salt
-        '                newSalt.Salt = saltString.PadLeft(25)
-        '                newSalt.LoginIdNo = userLoginIdNo
-        '                If saltDao.InsertSalt(newSalt) > 0 Then
-        '                    ePassword = HashEncryptStringWithSalt(password, newSalt.Salt)
-        '                Else
-        '                    MessageBox.Show("Password was not encrypted!")
-        '                End If
-        '            Else
-        '                'Hash the user entered password with the salt value stored in the Salt table
-        '                ePassword = HashEncryptStringWithSalt(password, salt.Salt)
-        '            End If
-        '        End If
-        '    Catch ex As Exception
-        '        MsgBox(ex.ToString)
-        '        Return False
-        '    End Try
-
-        '    Return ePassword
-        'End Function
-
-        'Public Function DecryptPassword(userName As String, password As String) As String
-        '    Dim ePassword As String = ""
-        '    Dim saltDao As New SaltDao()
-        '    If String.IsNullOrWhiteSpace(userName) Then
-        '        Return ""
-        '    End If
-        '    If String.IsNullOrWhiteSpace(password) Then
-        '        Return ""
-        '    End If
-        '    Dim nLoginIdNo As Int32
-        '    nLoginIdNo = DataDao.GetLoginByUserName(userName).IdNo
-
-        '    If nLoginIdNo <> 0 Then
-        '        'Get the salt value for this username
-        '        Dim salt As String
-
-        '        Try
-        '            salt = saltDao.GetSaltByLoginIdNo(nLoginIdNo).Salt
-        '            'Dim SaltValue As String
-        '            'SaltValue = HashEncryptString(nLoginIdNo.ToString())
-        '            If Not IsDBNull(salt) Then
-        '                'Hash the user entered password with the salt value stored in the Salt table
-        '                ePassword = HashEncryptStringWithSalt(password, salt.ToString)
-        '            End If
-        '        Catch ex As Exception
-        '            MsgBox(ex.ToString)
-        '            Return False
-        '        End Try
-
-        '    End If
-
-        '    Return ePassword
-        'End Function
-
-        'Public Function HashEncryptStringWithSalt(s As String, salt As String) As String
-        '    Return HashEncryptString(salt + s)
-        'End Function
-
         Public Function UsePayGroups()
             Dim retValue = GetRecordFieldWithKey("PYGP", "Setting", "SettingCode", "Value")
             If retValue Is Nothing Then
@@ -852,10 +648,6 @@ Namespace Services
         Public Function GetNextSeries(seriesName As String) As Integer Implements IService.GetNextSeries
             Return BaseDao.GetNextSeries(seriesName)
         End Function
-
-        'Public Function GetRecordsDataTable(tableName As String, sortKey As String, Optional fields() As String = Nothing, Optional filterKey As String = Nothing) As DataTable Implements IService.GetRecordsDataTable
-        '    Return BaseDao.GetRecordsDataTable(tableName, sortKey, fields, filterKey)
-        'End Function
 
         Public Function GetUserSecurity(securityObjectIdNo As Int32, securityGroupIdNo As Int16) As ArrayList Implements IService.GetUserSecurity
             Return BaseDao.GetUserSecurity(securityObjectIdNo, securityGroupIdNo)
