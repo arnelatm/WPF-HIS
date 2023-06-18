@@ -311,7 +311,6 @@
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\DoctorDao.vb" />
     <Compile Include="DataLayer\AdoNet\DosagePrintingDao.vb" />
-    <Compile Include="DataLayer\AdoNet\IGroup\DoctorsPrescriptionDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\PrescriptionDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\SaleDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\SaleDao.vb" />

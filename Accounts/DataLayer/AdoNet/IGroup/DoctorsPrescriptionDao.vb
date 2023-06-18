@@ -8,11 +8,11 @@ Namespace DataLayer.AdoNet
     ' ** DAO Pattern
 
     Public Class DoctorsPrescriptionDao
-        Inherits PmrInvestigationDao
+        'Inherits PmrInvestigationDao
         Implements IDoctorsPrescriptionDao
         'Implements IDaoParametrized(Of DoctorsPrescription), IDoctorsPrescriptionDao
 
-        'Private ReadOnly _db As New Db("IGROUPCLINIC")
+        Private ReadOnly _db As New Db("IGROUPCLINIC")
 
         'Public Overrides Function GetDB()
         '    Return _db
@@ -22,24 +22,24 @@ Namespace DataLayer.AdoNet
         '    Return "Trans_Key"
         'End Function
 
-        'Public Overloads Function GetParametrized(parameter As Object, Optional sortExpression As String = Nothing) As DoctorsPrescription Implements IDaoParametrized(Of DoctorsPrescription).GetParametrized
-        '    Dim doctorCode As String = parameter(0).ToString()
-        '    Dim transactionDate As Date? = parameter(1)
-        '    Dim dateString As String = CDate(transactionDate).ToString("yyyy/MM/dd", System.Globalization.CultureInfo.InvariantCulture)
-        '    Dim sql As String = "SELECT EmpNameEnglish from EmployeeDetails where EmpId = '" + doctorCode.ToString() + "'"
-        '    Dim data As New DoctorsPrescription
-        '    data = _db.Read(sql, Make).FirstOrDefault()
-        '    data.DoctorCode = doctorCode
-        '    data.DoctorName = doctorCode
-        '    data.TransactionDate = transactionDate
-        '    Dim params() As Object = {"@DoctorId", doctorCode, "@TransactionDate", dateString}
-        '    sql = $"SELECT Distinct [PmrDate], [FileNo], [FileType], [PatientName], [Status], [TokenNo], [PType], [LastConsDate], [Trans_Key], [InvTime] from PmrDoctorsGenForm_View where doctorid = @DoctorId and PmrDate = @TransactionDate and not (trans_key is Null and tokenno = 0) order by tokenno desc"
-        '    data.DoctorsPatients = _db.Read(sql, MakeDoctorsPatient, params).ToList()
-        '    'params = {"@Trans_Key", data.DoctorsPatients(0).TransKey}
-        '    'sql = $"SELECT RowNbr, ItemNameEnglish, DosageEnglish, Duration from PmrMedicineDetails_View where Trans_Key = @Trans_Key order by rowNbr"
-        '    'data.PrescriptionDetails = _db.Read(sql, MakePrescriptionDetail, params).ToList()
-        '    Return data
-        'End Function
+        Public Overloads Function GetParametrized(parameter As Object, Optional sortExpression As String = Nothing) As DoctorsPrescription Implements IDaoParametrized(Of DoctorsPrescription).GetParametrized
+            Dim doctorCode As String = parameter(0).ToString()
+            Dim transactionDate As Date? = parameter(1)
+            Dim dateString As String = CDate(transactionDate).ToString("yyyy/MM/dd", System.Globalization.CultureInfo.InvariantCulture)
+            Dim sql As String = "SELECT EmpNameEnglish from EmployeeDetails where EmpId = '" + doctorCode.ToString() + "'"
+            Dim data As New DoctorsPrescription
+            data = _db.Read(sql, Make).FirstOrDefault()
+            data.DoctorCode = doctorCode
+            data.DoctorName = doctorCode
+            data.TransactionDate = transactionDate
+            Dim params() As Object = {"@DoctorId", doctorCode, "@TransactionDate", dateString}
+            sql = $"SELECT Distinct [PmrDate], [FileNo], [FileType], [PatientName], [Status], [TokenNo], [PType], [LastConsDate], [Trans_Key], [InvTime] from PmrDoctorsGenForm_View where doctorid = @DoctorId and PmrDate = @TransactionDate and not (trans_key is Null and tokenno = 0) order by tokenno desc"
+            data.DoctorsPatients = _db.Read(sql, MakeDoctorsPatient, params).ToList()
+            'params = {"@Trans_Key", data.DoctorsPatients(0).TransKey}
+            'sql = $"SELECT RowNbr, ItemNameEnglish, DosageEnglish, Duration from PmrMedicineDetails_View where Trans_Key = @Trans_Key order by rowNbr"
+            'data.PrescriptionDetails = _db.Read(sql, MakePrescriptionDetail, params).ToList()
+            Return data
+        End Function
 
         'Private Shared ReadOnly Make As Func(Of IDataReader, DoctorsPrescription) = Function(reader) New DoctorsPrescription() With
         '    {

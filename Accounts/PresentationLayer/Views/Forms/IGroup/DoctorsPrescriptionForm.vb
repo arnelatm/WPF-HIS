@@ -8,7 +8,7 @@ Namespace PresentationLayer.Views.Forms
     Public Class DoctorsPrescriptionForm
         Implements IDoctorsPrescriptionView
 
-        Public Event GetDoctorPatientsRequested() Implements IDoctorsPrescriptionView.GetDoctorPatientsRequested
+        Public Event GetDoctorPatientsRequested() Implements IDoctorsPrescriptionView.DataChanged
 
         Public Event DoctorCodeRequested(ByRef drId As String) Implements IDoctorsPrescriptionView.DoctorCodeRequested
 

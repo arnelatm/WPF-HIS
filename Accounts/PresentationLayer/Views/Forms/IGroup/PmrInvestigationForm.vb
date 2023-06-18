@@ -7,7 +7,7 @@ Namespace PresentationLayer.Views.Forms
     Public Class PmrInvestigationForm
         Implements IPmrInvestigationView
 
-        Public Event GetDoctorPatientsRequested() Implements IPmrInvestigationView.GetDoctorPatientsRequested
+        Public Event DataChanged() Implements IPmrInvestigationView.DataChanged
 
         Public Event DoctorCodeRequested(ByRef drId As String) Implements IPmrInvestigationView.DoctorCodeRequested
 
@@ -110,7 +110,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub btnRefresh_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnRefresh.ClickButtonArea
             If DoctorCode IsNot Nothing Then
-                RaiseEvent GetDoctorPatientsRequested()
+                RaiseEvent DataChanged()
             Else
                 DoctorsPatients.Clear()
                 DataGridViewPmrPatientDisplay.Refresh()
@@ -149,7 +149,7 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent DoctorCodeRequested(drCode)
             If drCode IsNot Nothing Then
                 DoctorCode = drCode
-                RaiseEvent GetDoctorPatientsRequested()
+                RaiseEvent DataChanged()
                 cboDoctorName.DisplayOnly = True
                 'dtpTransactionDate.EditingMode = True
             Else
@@ -171,7 +171,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub dtpTransactionDate_Validated(sender As Object, e As EventArgs) Handles dtpTransactionDate.Validated
-            RaiseEvent GetDoctorPatientsRequested()
+            RaiseEvent DataChanged()
         End Sub
 
         Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPmrPatientDisplay.CellClick
@@ -214,7 +214,7 @@ Namespace PresentationLayer.Views.Forms
                 txtDoctorCode.Text = ""
             Else
                 txtDoctorCode.Text = cboDoctorName.SelectedValue
-                RaiseEvent GetDoctorPatientsRequested()
+                RaiseEvent DataChanged()
             End If
         End Sub
 
