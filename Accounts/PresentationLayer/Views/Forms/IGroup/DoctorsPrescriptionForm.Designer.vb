@@ -25,18 +25,25 @@
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DoctorsPrescriptionForm))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.btnRefresh = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.imgList = New System.Windows.Forms.ImageList(Me.components)
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.DataGridViewDoctorsPatient = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.dgvFileNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvPatientName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvFileType = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.InvTypeDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvTime = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.dgvPatientIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.dgvTransKey = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsDoctorsPatient = New System.Windows.Forms.BindingSource(Me.components)
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -47,15 +54,12 @@
             Me.ItemNameEnglishDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.DosageEnglishDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.DurationDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.chkPrint = New System.Windows.Forms.DataGridViewCheckBoxColumn()
             Me.bsPrescriptionDetails = New System.Windows.Forms.BindingSource(Me.components)
+            Me.btnSelectAll = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.btnPrintLabels = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.dgvFileNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvPatientName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvFileType = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.InvTypeDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvTime = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.dgvPatientIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.dgvTransKey = New System.Windows.Forms.DataGridViewTextBoxColumn()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
@@ -89,6 +93,9 @@
             Me.CFlowLayout2.BackColor = System.Drawing.Color.Transparent
             Me.CFlowLayout2.Controls.Add(Me.TableLayoutPanel1)
             Me.CFlowLayout2.Controls.Add(Me.CGroupBox1)
+            Me.CFlowLayout2.Controls.Add(Me.btnSelectAll)
+            Me.CFlowLayout2.Controls.Add(Me.CButton1)
+            Me.CFlowLayout2.Controls.Add(Me.btnPrintLabels)
             Me.CFlowLayout2.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CFlowLayout2.Location = New System.Drawing.Point(0, 53)
             Me.CFlowLayout2.Name = "CFlowLayout2"
@@ -116,7 +123,7 @@
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.Size = New System.Drawing.Size(783, 462)
+            Me.TableLayoutPanel1.Size = New System.Drawing.Size(783, 412)
             Me.TableLayoutPanel1.TabIndex = 17
             '
             'DataGridViewDoctorsPatient
@@ -163,9 +170,123 @@
             Me.DataGridViewDoctorsPatient.SequenceColumn = "dgvSequence"
             Me.DataGridViewDoctorsPatient.SequenceFieldName = "Sequence"
             Me.DataGridViewDoctorsPatient.ShowFooter = False
-            Me.DataGridViewDoctorsPatient.Size = New System.Drawing.Size(777, 400)
+            Me.DataGridViewDoctorsPatient.Size = New System.Drawing.Size(777, 350)
             Me.DataGridViewDoctorsPatient.TabIndex = 11
             Me.DataGridViewDoctorsPatient.Translatable = True
+            '
+            'dgvFileNo
+            '
+            Me.dgvFileNo.BegFindValue = Nothing
+            Me.dgvFileNo.DataPropertyName = "FileNo"
+            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+            Me.dgvFileNo.DefaultCellStyle = DataGridViewCellStyle2
+            Me.dgvFileNo.EditingMode = False
+            Me.dgvFileNo.EndFindValue = Nothing
+            Me.dgvFileNo.FieldDescription = Nothing
+            Me.dgvFileNo.FieldName = Nothing
+            Me.dgvFileNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvFileNo.FindEnabled = False
+            Me.dgvFileNo.HeaderText = "FileNo"
+            Me.dgvFileNo.IgnoreCase = False
+            Me.dgvFileNo.Name = "dgvFileNo"
+            Me.dgvFileNo.ReadOnly = True
+            Me.dgvFileNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvFileNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvFileNo.Translatable = False
+            Me.dgvFileNo.Width = 80
+            '
+            'dgvPatientName
+            '
+            Me.dgvPatientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+            Me.dgvPatientName.BegFindValue = Nothing
+            Me.dgvPatientName.DataPropertyName = "Name"
+            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+            Me.dgvPatientName.DefaultCellStyle = DataGridViewCellStyle3
+            Me.dgvPatientName.EditingMode = False
+            Me.dgvPatientName.EndFindValue = Nothing
+            Me.dgvPatientName.FieldDescription = Nothing
+            Me.dgvPatientName.FieldName = Nothing
+            Me.dgvPatientName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvPatientName.FindEnabled = False
+            Me.dgvPatientName.HeaderText = "Name"
+            Me.dgvPatientName.IgnoreCase = False
+            Me.dgvPatientName.Name = "dgvPatientName"
+            Me.dgvPatientName.ReadOnly = True
+            Me.dgvPatientName.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvPatientName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvPatientName.Translatable = False
+            '
+            'dgvFileType
+            '
+            Me.dgvFileType.BegFindValue = Nothing
+            Me.dgvFileType.DataPropertyName = "InvType"
+            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+            Me.dgvFileType.DefaultCellStyle = DataGridViewCellStyle4
+            Me.dgvFileType.EditingMode = False
+            Me.dgvFileType.EndFindValue = Nothing
+            Me.dgvFileType.FieldDescription = Nothing
+            Me.dgvFileType.FieldName = Nothing
+            Me.dgvFileType.FillWeight = 60.0!
+            Me.dgvFileType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvFileType.FindEnabled = False
+            Me.dgvFileType.HeaderText = "Patient Type"
+            Me.dgvFileType.IgnoreCase = False
+            Me.dgvFileType.Name = "dgvFileType"
+            Me.dgvFileType.ReadOnly = True
+            Me.dgvFileType.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvFileType.Translatable = False
+            Me.dgvFileType.Width = 60
+            '
+            'InvTypeDataGridViewTextBoxColumn
+            '
+            Me.InvTypeDataGridViewTextBoxColumn.BegFindValue = Nothing
+            Me.InvTypeDataGridViewTextBoxColumn.DataPropertyName = "InvType"
+            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+            Me.InvTypeDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle5
+            Me.InvTypeDataGridViewTextBoxColumn.EditingMode = False
+            Me.InvTypeDataGridViewTextBoxColumn.EndFindValue = Nothing
+            Me.InvTypeDataGridViewTextBoxColumn.FieldDescription = Nothing
+            Me.InvTypeDataGridViewTextBoxColumn.FieldName = Nothing
+            Me.InvTypeDataGridViewTextBoxColumn.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.InvTypeDataGridViewTextBoxColumn.FindEnabled = False
+            Me.InvTypeDataGridViewTextBoxColumn.HeaderText = "Invoice Type"
+            Me.InvTypeDataGridViewTextBoxColumn.IgnoreCase = False
+            Me.InvTypeDataGridViewTextBoxColumn.Name = "InvTypeDataGridViewTextBoxColumn"
+            Me.InvTypeDataGridViewTextBoxColumn.ReadOnly = True
+            Me.InvTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.InvTypeDataGridViewTextBoxColumn.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.InvTypeDataGridViewTextBoxColumn.Translatable = False
+            Me.InvTypeDataGridViewTextBoxColumn.Width = 70
+            '
+            'dgvTime
+            '
+            Me.dgvTime.DataPropertyName = "InvTime"
+            DataGridViewCellStyle6.Format = "hh:mm tt"
+            DataGridViewCellStyle6.NullValue = Nothing
+            Me.dgvTime.DefaultCellStyle = DataGridViewCellStyle6
+            Me.dgvTime.HeaderText = "Time"
+            Me.dgvTime.Name = "dgvTime"
+            Me.dgvTime.ReadOnly = True
+            '
+            'dgvPatientIdNo
+            '
+            Me.dgvPatientIdNo.DataPropertyName = "PatientIdNo"
+            Me.dgvPatientIdNo.HeaderText = "PatientIdNo"
+            Me.dgvPatientIdNo.Name = "dgvPatientIdNo"
+            Me.dgvPatientIdNo.ReadOnly = True
+            Me.dgvPatientIdNo.Visible = False
+            '
+            'dgvTransKey
+            '
+            Me.dgvTransKey.DataPropertyName = "TransKey"
+            Me.dgvTransKey.HeaderText = "TransKey"
+            Me.dgvTransKey.Name = "dgvTransKey"
+            Me.dgvTransKey.ReadOnly = True
+            Me.dgvTransKey.Visible = False
             '
             'bsDoctorsPatient
             '
@@ -282,9 +403,9 @@
             Me.CGroupBox1.Controls.Add(Me.DataGridViewPrescriptionDetails)
             Me.CGroupBox1.DisplayOnly = True
             Me.CGroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.CGroupBox1.Location = New System.Drawing.Point(3, 471)
+            Me.CGroupBox1.Location = New System.Drawing.Point(3, 421)
             Me.CGroupBox1.Name = "CGroupBox1"
-            Me.CGroupBox1.Size = New System.Drawing.Size(783, 220)
+            Me.CGroupBox1.Size = New System.Drawing.Size(783, 208)
             Me.CGroupBox1.TabIndex = 19
             Me.CGroupBox1.TabStop = False
             Me.CGroupBox1.Text = "Prescription for :"
@@ -297,7 +418,7 @@
             Me.DataGridViewPrescriptionDetails.BegFindValue = Nothing
             Me.DataGridViewPrescriptionDetails.Cached = False
             Me.DataGridViewPrescriptionDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewPrescriptionDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ItemNameEnglishDataGridViewTextBoxColumn, Me.DosageEnglishDataGridViewTextBoxColumn, Me.DurationDataGridViewTextBoxColumn})
+            Me.DataGridViewPrescriptionDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ItemNameEnglishDataGridViewTextBoxColumn, Me.DosageEnglishDataGridViewTextBoxColumn, Me.DurationDataGridViewTextBoxColumn, Me.chkPrint})
             Me.DataGridViewPrescriptionDetails.DataFilter = Nothing
             Me.DataGridViewPrescriptionDetails.DataSource = Me.bsPrescriptionDetails
             DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -330,7 +451,7 @@
             Me.DataGridViewPrescriptionDetails.SequenceColumn = "dgvSequence"
             Me.DataGridViewPrescriptionDetails.SequenceFieldName = "Sequence"
             Me.DataGridViewPrescriptionDetails.ShowFooter = False
-            Me.DataGridViewPrescriptionDetails.Size = New System.Drawing.Size(768, 182)
+            Me.DataGridViewPrescriptionDetails.Size = New System.Drawing.Size(768, 170)
             Me.DataGridViewPrescriptionDetails.TabIndex = 18
             Me.DataGridViewPrescriptionDetails.Translatable = True
             '
@@ -354,9 +475,52 @@
             Me.DurationDataGridViewTextBoxColumn.HeaderText = "Duration"
             Me.DurationDataGridViewTextBoxColumn.Name = "DurationDataGridViewTextBoxColumn"
             '
+            'chkPrint
+            '
+            Me.chkPrint.DataPropertyName = "Print"
+            Me.chkPrint.HeaderText = "Print"
+            Me.chkPrint.Name = "chkPrint"
+            Me.chkPrint.Width = 60
+            '
             'bsPrescriptionDetails
             '
             Me.bsPrescriptionDetails.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PrescriptionDetailModel)
+            '
+            'btnSelectAll
+            '
+            Me.btnSelectAll.DesignerSelected = False
+            Me.btnSelectAll.ImageIndex = 0
+            Me.btnSelectAll.Location = New System.Drawing.Point(3, 635)
+            Me.btnSelectAll.Name = "btnSelectAll"
+            Me.btnSelectAll.OriginalImageName = Nothing
+            Me.btnSelectAll.SecurityKey = ""
+            Me.btnSelectAll.Size = New System.Drawing.Size(90, 25)
+            Me.btnSelectAll.TabIndex = 20
+            Me.btnSelectAll.Text = "Select All"
+            '
+            'CButton1
+            '
+            Me.CButton1.DesignerSelected = False
+            Me.CButton1.ImageIndex = 0
+            Me.CButton1.Location = New System.Drawing.Point(99, 635)
+            Me.CButton1.Name = "CButton1"
+            Me.CButton1.OriginalImageName = Nothing
+            Me.CButton1.SecurityKey = ""
+            Me.CButton1.Size = New System.Drawing.Size(106, 25)
+            Me.CButton1.TabIndex = 22
+            Me.CButton1.Text = "Unselect All"
+            '
+            'btnPrintLabels
+            '
+            Me.btnPrintLabels.DesignerSelected = True
+            Me.btnPrintLabels.ImageIndex = 0
+            Me.btnPrintLabels.Location = New System.Drawing.Point(211, 635)
+            Me.btnPrintLabels.Name = "btnPrintLabels"
+            Me.btnPrintLabels.OriginalImageName = Nothing
+            Me.btnPrintLabels.SecurityKey = ""
+            Me.btnPrintLabels.Size = New System.Drawing.Size(318, 25)
+            Me.btnPrintLabels.TabIndex = 21
+            Me.btnPrintLabels.Text = "Print Dosage Labels for Selected Medicines"
             '
             'txtDoctorCode
             '
@@ -388,121 +552,7 @@
             Me.txtDoctorCode.Translatable = False
             Me.txtDoctorCode.Visible = False
             '
-            'dgvFileNo
-            '
-            Me.dgvFileNo.BegFindValue = Nothing
-            Me.dgvFileNo.DataPropertyName = "FileNo"
-            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            Me.dgvFileNo.DefaultCellStyle = DataGridViewCellStyle2
-            Me.dgvFileNo.EditingMode = False
-            Me.dgvFileNo.EndFindValue = Nothing
-            Me.dgvFileNo.FieldDescription = Nothing
-            Me.dgvFileNo.FieldName = Nothing
-            Me.dgvFileNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvFileNo.FindEnabled = False
-            Me.dgvFileNo.HeaderText = "FileNo"
-            Me.dgvFileNo.IgnoreCase = False
-            Me.dgvFileNo.Name = "dgvFileNo"
-            Me.dgvFileNo.ReadOnly = True
-            Me.dgvFileNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvFileNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvFileNo.Translatable = False
-            Me.dgvFileNo.Width = 80
-            '
-            'dgvPatientName
-            '
-            Me.dgvPatientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-            Me.dgvPatientName.BegFindValue = Nothing
-            Me.dgvPatientName.DataPropertyName = "Name"
-            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-            Me.dgvPatientName.DefaultCellStyle = DataGridViewCellStyle3
-            Me.dgvPatientName.EditingMode = False
-            Me.dgvPatientName.EndFindValue = Nothing
-            Me.dgvPatientName.FieldDescription = Nothing
-            Me.dgvPatientName.FieldName = Nothing
-            Me.dgvPatientName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvPatientName.FindEnabled = False
-            Me.dgvPatientName.HeaderText = "Name"
-            Me.dgvPatientName.IgnoreCase = False
-            Me.dgvPatientName.Name = "dgvPatientName"
-            Me.dgvPatientName.ReadOnly = True
-            Me.dgvPatientName.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvPatientName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvPatientName.Translatable = False
-            '
-            'dgvFileType
-            '
-            Me.dgvFileType.BegFindValue = Nothing
-            Me.dgvFileType.DataPropertyName = "InvType"
-            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-            Me.dgvFileType.DefaultCellStyle = DataGridViewCellStyle4
-            Me.dgvFileType.EditingMode = False
-            Me.dgvFileType.EndFindValue = Nothing
-            Me.dgvFileType.FieldDescription = Nothing
-            Me.dgvFileType.FieldName = Nothing
-            Me.dgvFileType.FillWeight = 60.0!
-            Me.dgvFileType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvFileType.FindEnabled = False
-            Me.dgvFileType.HeaderText = "Patient Type"
-            Me.dgvFileType.IgnoreCase = False
-            Me.dgvFileType.Name = "dgvFileType"
-            Me.dgvFileType.ReadOnly = True
-            Me.dgvFileType.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvFileType.Translatable = False
-            Me.dgvFileType.Width = 60
-            '
-            'InvTypeDataGridViewTextBoxColumn
-            '
-            Me.InvTypeDataGridViewTextBoxColumn.BegFindValue = Nothing
-            Me.InvTypeDataGridViewTextBoxColumn.DataPropertyName = "InvType"
-            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-            Me.InvTypeDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle5
-            Me.InvTypeDataGridViewTextBoxColumn.EditingMode = False
-            Me.InvTypeDataGridViewTextBoxColumn.EndFindValue = Nothing
-            Me.InvTypeDataGridViewTextBoxColumn.FieldDescription = Nothing
-            Me.InvTypeDataGridViewTextBoxColumn.FieldName = Nothing
-            Me.InvTypeDataGridViewTextBoxColumn.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.InvTypeDataGridViewTextBoxColumn.FindEnabled = False
-            Me.InvTypeDataGridViewTextBoxColumn.HeaderText = "Invoice Type"
-            Me.InvTypeDataGridViewTextBoxColumn.IgnoreCase = False
-            Me.InvTypeDataGridViewTextBoxColumn.Name = "InvTypeDataGridViewTextBoxColumn"
-            Me.InvTypeDataGridViewTextBoxColumn.ReadOnly = True
-            Me.InvTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.InvTypeDataGridViewTextBoxColumn.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.InvTypeDataGridViewTextBoxColumn.Translatable = False
-            Me.InvTypeDataGridViewTextBoxColumn.Width = 70
-            '
-            'dgvTime
-            '
-            Me.dgvTime.DataPropertyName = "InvTime"
-            DataGridViewCellStyle6.Format = "hh:mm tt"
-            DataGridViewCellStyle6.NullValue = Nothing
-            Me.dgvTime.DefaultCellStyle = DataGridViewCellStyle6
-            Me.dgvTime.HeaderText = "Time"
-            Me.dgvTime.Name = "dgvTime"
-            Me.dgvTime.ReadOnly = True
-            '
-            'dgvPatientIdNo
-            '
-            Me.dgvPatientIdNo.DataPropertyName = "PatientIdNo"
-            Me.dgvPatientIdNo.HeaderText = "PatientIdNo"
-            Me.dgvPatientIdNo.Name = "dgvPatientIdNo"
-            Me.dgvPatientIdNo.ReadOnly = True
-            Me.dgvPatientIdNo.Visible = False
-            '
-            'dgvTransKey
-            '
-            Me.dgvTransKey.DataPropertyName = "TransKey"
-            Me.dgvTransKey.HeaderText = "TransKey"
-            Me.dgvTransKey.Name = "dgvTransKey"
-            Me.dgvTransKey.ReadOnly = True
-            Me.dgvTransKey.Visible = False
-            '
-            'DoctorsPrescription
+            'DoctorsPrescriptionForm
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -510,7 +560,7 @@
             Me.ClientSize = New System.Drawing.Size(797, 769)
             Me.Controls.Add(Me.CFlowLayout2)
             Me.Controls.Add(Me.txtDoctorCode)
-            Me.Name = "DoctorsPrescription"
+            Me.Name = "DoctorsPrescriptionForm"
             Me.Text = "Doctor's Patients Viewer"
             Me.Controls.SetChildIndex(Me.txtDoctorCode, 0)
             Me.Controls.SetChildIndex(Me.CFlowLayout2, 0)
@@ -551,9 +601,6 @@
         Friend WithEvents DataGridViewPrescriptionDetails As Libraries.CBaseControlsLibrary.CDataGridView
         Friend WithEvents bsPrescriptionDetails As BindingSource
         Friend WithEvents CGroupBox1 As Libraries.CBaseControlsLibrary.CGroupBox
-        Friend WithEvents ItemNameEnglishDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents DosageEnglishDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents DurationDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents dgvFileNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvPatientName As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvFileType As Libraries.CBaseControlsLibrary.CDgvTextColumn
@@ -561,5 +608,12 @@
         Friend WithEvents dgvTime As DataGridViewTextBoxColumn
         Friend WithEvents dgvPatientIdNo As DataGridViewTextBoxColumn
         Friend WithEvents dgvTransKey As DataGridViewTextBoxColumn
+        Friend WithEvents btnSelectAll As Libraries.CBaseControlsLibrary.CButton
+        Friend WithEvents CButton1 As Libraries.CBaseControlsLibrary.CButton
+        Friend WithEvents btnPrintLabels As Libraries.CBaseControlsLibrary.CButton
+        Friend WithEvents ItemNameEnglishDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents DosageEnglishDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents DurationDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents chkPrint As DataGridViewCheckBoxColumn
     End Class
 End Namespace

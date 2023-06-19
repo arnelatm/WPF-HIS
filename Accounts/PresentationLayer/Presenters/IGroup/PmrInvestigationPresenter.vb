@@ -21,7 +21,6 @@ Namespace PresentationLayer.Presenters
             AddHandler View.DoctorCodeRequested, AddressOf GetDoctorCode
             AddHandler View.DataChanged, AddressOf UpdateData
             AddHandler View.GetPmrDataAccessRequested, AddressOf GetPMRDataAccess
-
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -87,7 +86,7 @@ Namespace PresentationLayer.Presenters
     Public Class DoctorsPrescriptionPresenter(Of TM As New)
         Inherits CommonPresenter(Of IDoctorsPrescriptionView, TM)
 
-        'Private _doctorsPatientService = New AccountsService("DoctorsPatient")
+        Private _prescriptionDetailsService = New AccountsService("PrescriptionDetail")
 
         Public Sub New(itemView As IDoctorsPrescriptionView)
             MyBase.New(itemView)
@@ -100,6 +99,17 @@ Namespace PresentationLayer.Presenters
             WithTreeView = False
             AddHandler View.DoctorCodeRequested, AddressOf GetDoctorCode
             AddHandler View.DataChanged, AddressOf UpdateData
+            AddHandler View.RowChanged, AddressOf OnRowChanged
+            AddHandler View.SaveDosage, AddressOf OnSaveDosage
+            AddHandler View.PrintDosageLabel, AddressOf OnPrintDosageLabel
+        End Sub
+
+        Private Sub OnPrintDosageLabel()
+            Throw New NotImplementedException()
+        End Sub
+
+        Private Sub OnSaveDosage()
+            Throw New NotImplementedException()
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -127,6 +137,16 @@ Namespace PresentationLayer.Presenters
             Service.SetConnectionString($"ISPDATA")
             drId = Service.GetField(Of String, Int32)(employeeIdNo, "Doctor", "EmployeeIdNo", "DoctorCode")
             Service.RestoreConnectionString()
+        End Sub
+
+        Private Sub OnRowChanged(transKey As Int32)
+            UpdatePrescriptionDetail(transKey)
+        End Sub
+
+        Private Sub UpdatePrescriptionDetail(transKey As Int32?)
+            Dim prescriptionDetails As New List(Of PrescriptionDetailModel)
+            prescriptionDetails = _prescriptionDetailsService.GetRecordsWithGroupIdNo(Of PrescriptionDetailModel)(transKey)
+            GlobalVariables.Mapper.Map(prescriptionDetails, View.PrescriptionDetails)
         End Sub
 
         'Private Sub PrintReport()

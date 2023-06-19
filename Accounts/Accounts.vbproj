@@ -225,6 +225,7 @@
     <Compile Include="BusinessLayer\Dosage.vb" />
     <Compile Include="BusinessLayer\IGroup\DrugSale.vb" />
     <Compile Include="BusinessLayer\IGroup\GTinMatcher.vb" />
+    <Compile Include="BusinessLayer\IGroup\PMRPrescription.vb" />
     <Compile Include="BusinessLayer\IGroup\PrescriptionDetail.vb" />
     <Compile Include="BusinessLayer\IGroup\StockInventory.vb" />
     <Compile Include="BusinessLayer\ItemCode.vb" />

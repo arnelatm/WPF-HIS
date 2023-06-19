@@ -21,7 +21,8 @@ Namespace PresentationLayer.Views.Interfaces
 
         Property PrescriptionDetails As List(Of PrescriptionDetailView)
         Event RowChanged(productIdNo As Integer)
-
+        Event PrintDosageLabel()
+        Event SaveDosage()
     End Interface
 
 End Namespace

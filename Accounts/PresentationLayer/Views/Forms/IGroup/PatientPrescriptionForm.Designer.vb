@@ -35,11 +35,7 @@
             Me.CTextBox2 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtAge = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.DataGridViewPrescriptionDetails = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.ItemNameEnglishDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DosageEnglishDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DurationDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvTransKey = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.bsPrescriptionDetails = New System.Windows.Forms.BindingSource(Me.components)
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblPatientName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
@@ -48,6 +44,10 @@
             Me.cboGender = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblSeries = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.ItemNameEnglishDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.DosageEnglishDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.DurationDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.bsPrescriptionDetails = New System.Windows.Forms.BindingSource(Me.components)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
@@ -319,32 +319,6 @@
             Me.DataGridViewPrescriptionDetails.TabIndex = 11
             Me.DataGridViewPrescriptionDetails.Translatable = True
             '
-            'ItemNameEnglishDataGridViewTextBoxColumn
-            '
-            Me.ItemNameEnglishDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-            Me.ItemNameEnglishDataGridViewTextBoxColumn.DataPropertyName = "ItemNameEnglish"
-            Me.ItemNameEnglishDataGridViewTextBoxColumn.HeaderText = "Medicine Name"
-            Me.ItemNameEnglishDataGridViewTextBoxColumn.Name = "ItemNameEnglishDataGridViewTextBoxColumn"
-            Me.ItemNameEnglishDataGridViewTextBoxColumn.ReadOnly = True
-            '
-            'DosageEnglishDataGridViewTextBoxColumn
-            '
-            Me.DosageEnglishDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.DosageEnglishDataGridViewTextBoxColumn.DataPropertyName = "DosageEnglish"
-            Me.DosageEnglishDataGridViewTextBoxColumn.HeaderText = "Dosage "
-            Me.DosageEnglishDataGridViewTextBoxColumn.Name = "DosageEnglishDataGridViewTextBoxColumn"
-            Me.DosageEnglishDataGridViewTextBoxColumn.ReadOnly = True
-            Me.DosageEnglishDataGridViewTextBoxColumn.Width = 72
-            '
-            'DurationDataGridViewTextBoxColumn
-            '
-            Me.DurationDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.DurationDataGridViewTextBoxColumn.DataPropertyName = "Duration"
-            Me.DurationDataGridViewTextBoxColumn.HeaderText = "Duration"
-            Me.DurationDataGridViewTextBoxColumn.Name = "DurationDataGridViewTextBoxColumn"
-            Me.DurationDataGridViewTextBoxColumn.ReadOnly = True
-            Me.DurationDataGridViewTextBoxColumn.Width = 72
-            '
             'dgvTransKey
             '
             Me.dgvTransKey.DataPropertyName = "TransKey"
@@ -352,10 +326,6 @@
             Me.dgvTransKey.Name = "dgvTransKey"
             Me.dgvTransKey.ReadOnly = True
             Me.dgvTransKey.Visible = False
-            '
-            'bsPrescriptionDetails
-            '
-            Me.bsPrescriptionDetails.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PrescriptionDetailModel)
             '
             'CLabel1
             '
@@ -567,7 +537,37 @@
             Me.txtDoctorCode.Translatable = False
             Me.txtDoctorCode.Visible = False
             '
-            'PatientPrescriptionViewer
+            'ItemNameEnglishDataGridViewTextBoxColumn
+            '
+            Me.ItemNameEnglishDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+            Me.ItemNameEnglishDataGridViewTextBoxColumn.DataPropertyName = "ItemNameEnglish"
+            Me.ItemNameEnglishDataGridViewTextBoxColumn.HeaderText = "Medicine Name"
+            Me.ItemNameEnglishDataGridViewTextBoxColumn.Name = "ItemNameEnglishDataGridViewTextBoxColumn"
+            Me.ItemNameEnglishDataGridViewTextBoxColumn.ReadOnly = True
+            '
+            'DosageEnglishDataGridViewTextBoxColumn
+            '
+            Me.DosageEnglishDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+            Me.DosageEnglishDataGridViewTextBoxColumn.DataPropertyName = "DosageEnglish"
+            Me.DosageEnglishDataGridViewTextBoxColumn.HeaderText = "Dosage "
+            Me.DosageEnglishDataGridViewTextBoxColumn.Name = "DosageEnglishDataGridViewTextBoxColumn"
+            Me.DosageEnglishDataGridViewTextBoxColumn.ReadOnly = True
+            Me.DosageEnglishDataGridViewTextBoxColumn.Width = 72
+            '
+            'DurationDataGridViewTextBoxColumn
+            '
+            Me.DurationDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+            Me.DurationDataGridViewTextBoxColumn.DataPropertyName = "Duration"
+            Me.DurationDataGridViewTextBoxColumn.HeaderText = "Duration"
+            Me.DurationDataGridViewTextBoxColumn.Name = "DurationDataGridViewTextBoxColumn"
+            Me.DurationDataGridViewTextBoxColumn.ReadOnly = True
+            Me.DurationDataGridViewTextBoxColumn.Width = 72
+            '
+            'bsPrescriptionDetails
+            '
+            Me.bsPrescriptionDetails.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PrescriptionDetailModel)
+            '
+            'PatientPrescriptionForm
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -575,7 +575,7 @@
             Me.ClientSize = New System.Drawing.Size(808, 553)
             Me.Controls.Add(Me.CFlowLayout2)
             Me.Controls.Add(Me.txtDoctorCode)
-            Me.Name = "PatientPrescriptionViewer"
+            Me.Name = "PatientPrescriptionForm"
             Me.Text = "Patient Prescription"
             Me.Controls.SetChildIndex(Me.txtDoctorCode, 0)
             Me.Controls.SetChildIndex(Me.CFlowLayout2, 0)

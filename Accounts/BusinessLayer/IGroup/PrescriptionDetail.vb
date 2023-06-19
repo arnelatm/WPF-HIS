@@ -10,7 +10,7 @@ Namespace BusinessLayer
         Public Sub New()
         End Sub
 
-        Property RowNbr As Int16
+        Property RowNbr As Int32
         Property ItemNameEnglish As String
         Property DosageEnglish As String
         Property Duration As String
