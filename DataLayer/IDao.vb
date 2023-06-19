@@ -61,7 +61,7 @@ End Interface
 
 Public Interface IDaoParametrized(Of TBiz)
 
-    Function GetParametrized(Of TM)(parameter As Object, Optional ByVal sortExpression As String = Nothing) As TBiz
+    Function GetParametrized(Of T)(parameter As Object, Optional ByVal sortExpression As String = Nothing) As TBiz
 
 End Interface
 

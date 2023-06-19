@@ -1,4 +1,6 @@
-﻿Imports AATM.Accounts.BusinessLayer
+﻿Imports System.IO
+Imports System.Runtime.Serialization.Formatters.Binary
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.MessagingLibrary
@@ -13,12 +15,14 @@ Namespace PresentationLayer.Views.Forms
         Public Event DoctorCodeRequested(ByRef drId As String) Implements IDoctorsPrescriptionView.DoctorCodeRequested
 
         Public Event GetPmrDataAccessRequested(ByRef dataAccessCode As String) Implements IDoctorsPrescriptionView.GetPmrDataAccessRequested
+        Public Event SaveDosage() Implements IDoctorsPrescriptionView.SaveDosage
 
         Private _pmrDoctorsPatients As New List(Of DoctorsPatientView)
         Private _doctorId As String
         Private _dataAccessLevel As String = ""
         Private _prescriptionDetails As New List(Of PrescriptionDetailView)
         Public Event RowChanged(patientIdNo As Int32) Implements IDoctorsPrescriptionView.RowChanged
+        Public Event PrintDosageLabel() Implements IDoctorsPrescriptionView.PrintDosageLabel
 
         Public Sub New()
             'MyBase.New()
@@ -58,15 +62,6 @@ Namespace PresentationLayer.Views.Forms
                 Return SeriesDataGridViewTextBoxColumn
             End Get
         End Property
-
-        'Public Property DoctorName As String Implements IPmrInvestigationView.DoctorName
-        '    Get
-        '        Return cboDoctorName.Text
-        '    End Get
-        '    Set(value As String)
-        '        txtDoctorName.Text = value
-        '    End Set
-        'End Property
 
         Public Property TransactionDate As Date? Implements IDoctorsPrescriptionView.TransactionDate
             Get
@@ -192,11 +187,79 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub DataGridViewPrescriptionDetails_RowEnter(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDoctorsPatient.RowEnter
             Dim dgvRow As DataGridViewRow = DataGridViewDoctorsPatient.Rows(e.RowIndex)
-            Dim ptIdNo As Int32 = dgvRow.Cells("dgvPatientIdNo").Value
-            RaiseEvent RowChanged(ptIdNo)
+            Dim transKey As Int32 = dgvRow.Cells("dgvTransKey").Value
+            RaiseEvent RowChanged(transKey)
             bsPrescriptionDetails.ResetBindings(False)
             CGroupBox1.Text = Messaging.TranslateCaption("Prescription for ") + dgvRow.Cells("dgvFileNo").Value + "-" + dgvRow.Cells("dgvPatientName").Value
+        End Sub
+
+        Private Sub btnSelectAll_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnSelectAll.ClickButtonArea
+            For Each item In PrescriptionDetails
+                item.Print = True
+            Next
+            bsPrescriptionDetails.ResetBindings(False)
+        End Sub
+
+        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
+            For Each item In PrescriptionDetails
+                item.Print = False
+            Next
+            bsPrescriptionDetails.ResetBindings(False)
+        End Sub
+
+        Private Sub btnPrintLabels_ClickButtonArea(Sender As Object, e As MouseEventArgs)
+            RaiseEvent SaveDosage()
+            'Dim mstrSaveFile As String = "MedicineLabels.txt"
+
+            'If My.Computer.FileSystem.FileExists(mstrSaveFile) = True Then
+            '    My.Computer.FileSystem.DeleteFile(mstrSaveFile)
+            'End If
+            'Dim fs As Stream = New FileStream(mstrSaveFile, FileMode.Create)
+            'Dim bf As BinaryFormatter = New BinaryFormatter()
+            'bf.Serialize(fs, PrescriptionDetails)
+            'fs.Close()
+
+            'If My.Computer.FileSystem.FileExists(mstrSaveFile) Then
+            '    Dim fs As Stream = New FileStream(mstrSaveFile, FileMode.Open)
+            '    Dim bf As BinaryFormatter = New BinaryFormatter()
+            '    mstrData = CType(bf.Deserialize(fs), CType(mstrData))
+            '    fs.Close()
+            'End If
+            'Return True
+        End Sub
+
+        Private Sub btnPrintLabels_ClickButtonArea_1(Sender As Object, e As MouseEventArgs) Handles btnPrintLabels.ClickButtonArea
+            RaiseEvent PrintDosageLabel()
         End Sub
     End Class
 
 End Namespace
+
+''Imports
+'Imports System.IO
+'Imports System.Text
+'Imports System.Collections
+'Imports System.Runtime.Serialization.Formatters.Binary
+'Imports System.Runtime.Serialization
+
+''Functions
+'Public Function Load()
+'    If My.Computer.FileSystem.FileExists(mstrSaveFile) Then
+'        Dim fs As Stream = New FileStream(mstrSaveFile, FileMode.Open)
+'        Dim bf As BinaryFormatter = New BinaryFormatter()
+'        mstrData = CType(bf.Deserialize(fs), CType(mstrData))
+'        fs.Close()
+'    End If
+'    Return True
+'End Function
+
+'Public Function Save()
+'    If My.Computer.FileSystem.FileExists(mstrSaveFile) = True Then
+'        My.Computer.FileSystem.DeleteFile(mstrSaveFile)
+'    End If
+'    Dim fs As Stream = New FileStream(mstrSaveFile, FileMode.Create)
+'    Dim bf As BinaryFormatter = New BinaryFormatter()
+'    bf.Serialize(fs, mstrData)
+'    fs.Close()
+'    Return True
+'End Function
