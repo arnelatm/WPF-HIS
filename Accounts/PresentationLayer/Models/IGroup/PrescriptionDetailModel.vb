@@ -6,11 +6,11 @@
     ''' </summary>
     Public Class PrescriptionDetailModel
 
-        Property ItemNameEnglish As String
-        Property DosageEnglish As String
+        Property ItemName As String
+        Property Dosage As String
         Property Duration As String
-        Property Item_Code As String
-        Property Trans_Key As Int32
+        Property ItemCode As String
+        Property TransKey As Int32
         Property RowNbr As Int32
         Property Print As Boolean
 

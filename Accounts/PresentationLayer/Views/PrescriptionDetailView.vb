@@ -7,13 +7,13 @@ Namespace PresentationLayer.Views
         Implements IPrescriptionDetailView
 
         Public Property DataFilter As String Implements IView.DataFilter
-        Public Property DosageEnglish As String Implements IPrescriptionDetailView.DosageEnglish
+        Public Property Dosage As String Implements IPrescriptionDetailView.Dosage
         Public Property Duration As String Implements IPrescriptionDetailView.Duration
         Public Property Errors As List(Of String) Implements IView.Errors
-        Public Property Item_Code As String Implements IPrescriptionDetailView.Item_Code
-        Public Property ItemNameEnglish As String Implements IPrescriptionDetailView.ItemNameEnglish
+        Public Property ItemCode As String Implements IPrescriptionDetailView.ItemCode
+        Public Property ItemName As String Implements IPrescriptionDetailView.ItemName
         Public Property RowNbr As Integer Implements IPrescriptionDetailView.RowNbr
-        Public Property Trans_Key As Integer Implements IPrescriptionDetailView.Trans_Key
+        Public Property TransKey As Integer Implements IPrescriptionDetailView.TransKey
         Public Property Print As Boolean Implements IPrescriptionDetailView.Print
 
     End Class

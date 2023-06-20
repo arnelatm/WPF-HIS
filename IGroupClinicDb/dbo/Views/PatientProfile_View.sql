@@ -1,5 +1,6 @@
 ﻿
 
+
 CREATE view [dbo].[PatientProfile_View] as 
 Select a.Branchid,
 a.Trans_key,
@@ -56,7 +57,9 @@ l.NameEnglish as activeInsName,
 h.UnderInsuranceID,
 m.NameENglish as co_ins_company,
 n.ServiceID as insServiceID,
-n.ServiceNameEnglish as InsServiceNameENglish
+n.ServiceNameEnglish as InsServiceNameENglish,
+b.VATAmt,
+a.VATExemption
 from ClinicInvoiceGroup a
 left outer join CLinicInvoiceDetails b on a.Trans_key = b.Group_key and a.BranchId = b.BranchID 
 left outer join PatientDetails c on a.RegistrationNo = c.RegistrationNo and upper(a.RegistrationType) = upper(c.PatientType) and a.BranchID = c.BranchID
