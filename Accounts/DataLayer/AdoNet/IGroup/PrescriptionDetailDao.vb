@@ -35,7 +35,7 @@ Namespace DataLayer.AdoNet
                 End If
                 Dim sql As String =
                         " SELECT " & FieldList &
-                        " FROM PrescriptionDetails_View" &
+                        " FROM PrescriptionDetail_View" &
                         " WHERE TransKey = @IdNo  " &
                         " ORDER BY " & sortExpression
                 Dim params() As Object = {"@IdNo", idNo}

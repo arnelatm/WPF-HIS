@@ -33,9 +33,24 @@ Namespace DataLayer.AdoNet
             Return _db
         End Function
 
-        'Public Overrides Function GetPrimaryFieldName()
-        '    Return "Trans_Key"
-        'End Function
+        Public Overrides Function GetPrimaryFieldName()
+            Return "TransKey"
+        End Function
+
+        Public Function GetRecordByIdNo(idNo As Object) As Prescription Implements IDao(Of Prescription).GetRecordByIdNo
+            Dim sql As String = "Select " & FieldList & " FROM Prescription_View " &
+                "Where TransKey = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
+            Dim data As New Prescription
+            data = _db.Read(sql, Make, params).FirstOrDefault()
+            sql = $"select  PrescriptionItems_View order by RowNbr where transKey = @IdNo"
+            Dim piDao As New PrescriptionDetailDao
+            data.PrescriptionDetails = piDao.GetRecordsWithGroupIdNo(data.TransKey, "RowNbr")
+            'params = {"@trans_key", data.doctorspatients(0).transkey}
+            'sql = $"select rownbr, itemnameenglish, dosageenglish, duration from pmrmedicinedetails_view where trans_key = @trans_key order by rownbr"
+            'data.prescriptiondetails = _db.read(sql, makeprescriptiondetail, params).tolist()
+            Return data
+        End Function
 
         'Public Overloads Function getparametrized(parameter As Object, Optional sortexpression As String = Nothing) As Prescription Implements IDaoParametrized(Of Prescription).GetParametrized
         '    Dim doctorcode As String = parameter(0).ToString()
@@ -57,7 +72,16 @@ Namespace DataLayer.AdoNet
 
         Private Shared ReadOnly Make As Func(Of IDataReader, Prescription) = Function(reader) New Prescription() With
             {
-            .DoctorName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmpNameEnglish"))
+            .Age = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Age")),
+            .AgeYmd = AATM.DataLayer.AdoNet.Extensions.AsString(reader("AgeYmd")),
+            .DoctorCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("DoctorCode")),
+            .DoctorName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("DoctorName")),
+            .FileNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("FileNo")),
+            .Gender = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Gender")),
+            .PatientName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PatientName")),
+            .Series = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Series")),
+            .TransDate = AATM.DataLayer.AdoNet.Extensions.AsString(reader("TransDate")),
+            .TransKey = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("TransKey"))
             }
 
         'Private Shared ReadOnly MakeDoctorsPatient As Func(Of IDataReader, DoctorsPatient) = Function(reader) New DoctorsPatient() With
@@ -88,20 +112,7 @@ Namespace DataLayer.AdoNet
         '    Return prescriptionDetailDao.GetRecordsWithGroupIdNo(productIdNo)
         'End Function
 
-        Public Function GetRecordByIdNo(idNo As Object) As Prescription Implements IDao(Of Prescription).GetRecordByIdNo
-            Dim sql As String = "Select " & FieldList & " FROM Prescription_View " &
-                "Where TransKey = @IdNo"
-            Dim params() As Object = {"@IdNo", idNo}
-            Dim data As New Prescription
-            data = _db.Read(sql, Make, params).FirstOrDefault()
-            sql = $"select  PrescriptionItems_View order by RowNbr where transKey = @TransKey"
-            Dim piDao As New PrescriptionDetailDao
-            data.PrescriptionDetails = piDao.GetRecordsWithGroupIdNo(data.TransKey, "RowNbr")
-            'params = {"@trans_key", data.doctorspatients(0).transkey}
-            'sql = $"select rownbr, itemnameenglish, dosageenglish, duration from pmrmedicinedetails_view where trans_key = @trans_key order by rownbr"
-            'data.prescriptiondetails = _db.read(sql, makeprescriptiondetail, params).tolist()
-            Return data
-        End Function
+
 
         Public Function AddRecord(ByRef recordData As Prescription) As Integer Implements IDao(Of Prescription).AddRecord
             Throw New NotImplementedException()

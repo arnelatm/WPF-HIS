@@ -600,11 +600,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Function
 
     Public Function GetRecordDateTimeStamp(idNo As Int32) As Object
-        Try
-            Return Service.GetRecordDateTimeStamp(idNo, TableName)
-        Catch ex As Exception
-            Return Nothing
-        End Try
+        Return Service.GetRecordDateTimeStamp(idNo, TableName)
     End Function
 
     Public Function GetRecordField(cTableName As String, returnFieldName As String) As Object
@@ -983,7 +979,11 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Public Overridable Sub UpdateViewData(idNo As Int32)
         'If idNo <> 0 Then
         Dim modelData As TM
-        RecordDateTimeStampValue = GetRecordDateTimeStamp(TargetIdNo)
+        Try
+            RecordDateTimeStampValue = GetRecordDateTimeStamp(TargetIdNo)
+        Catch ex As Exception
+            RecordDateTimeStampValue = Nothing
+        End Try
         modelData = Service.GetRecordByIdNo(Of TM)(idNo)
         RaiseEvent BeforeMappingData(modelData)
         GlobalVariables.Mapper.Map(Of TM, TV)(modelData, View)
