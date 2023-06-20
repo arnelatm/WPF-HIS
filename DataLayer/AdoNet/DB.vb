@@ -358,7 +358,7 @@ Namespace AdoNet
             Using connection = CreateConnection()
                 Using command = CreateCommand(sql, connection, params)
                     Using reader = command.ExecuteReader()
-                        table.Load(reader)                        
+                        table.Load(reader)
                     End Using
                 End Using
             End Using
@@ -1324,6 +1324,9 @@ Namespace AdoNet
                 Else
                     Return DialogResult.Retry
                 End If
+            ElseIf ex.Message.Equals("Invalid column name 'DateTimeStamp'.") Then
+                ' ignore this error for the meantime (records with no 'DateTimeStamp' field)
+                Return DialogResult.Cancel
             Else
                 'Debugger.Break()
                 MessageBox.Show(ex.Message)

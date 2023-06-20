@@ -1,6 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Dynamic
 Imports System.Globalization
+Imports System.Runtime.InteropServices.WindowsRuntime
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
@@ -644,12 +645,16 @@ Namespace AdoNet
         Public Function GetRecordDateTimeStamp(idNo As Int32, tableName As String, dateTimeStampField As String) _
             As Object _
             Implements IBaseDao.GetRecordDateTimeStamp
-            Dim sql As String =
+            Dim retValue As Object
+            Try
+                Dim sql As String =
                     " Select top 1 " & dateTimeStampField & " FROM [" & tableName & "] " &
                     " Where " & GetPrimaryFieldName() & " = @IdNo "
-            Dim params() As Object = {"@IdNo", idNo}
-            Dim retValue As Object
-            retValue = GetDb().Scalar(sql, params)
+                Dim params() As Object = {"@IdNo", idNo}
+                retValue = GetDb().Scalar(sql, params)
+            Catch ex As Exception
+                retValue = Nothing
+            End Try
             Return retValue
             'Return System.Text.Encoding.ASCII.GetString(retValue)
         End Function
