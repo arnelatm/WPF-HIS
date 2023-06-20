@@ -1,6 +1,7 @@
 ﻿
 
 
+
 CREATE VIEW [dbo].[AllInvoicesCCC_View]
   AS
 (SELECT 'Clinic'									  as 'InvSource'
@@ -25,7 +26,7 @@ CREATE VIEW [dbo].[AllInvoicesCCC_View]
 	  ,isnull(CIG.VATExemption,0)					  as 'InvVatExemption'
 	  ,CIG.BillAmt						              as 'InvBillAmt'
 	  ,cig.Reject                                     as 'Rejected'
-	  ,iif(MS.CostCentre='',ED.Costcentre,isNull(ms.CostCentre,ED.CostCentre)) as 'CostCenter'
+	  ,ED.Costcentre                                  as 'CostCenter'
 	  ,cig.InsuranceID								  as 'CompanyID'
 	  ,(SELECT Round(sum(qty*saleprice),2) 
 	    from [ClinicInvoiceDetails] as b
@@ -63,7 +64,7 @@ UNION
 	  ,isnull(ibg.VATExemption,0)
 	  ,ibg.NetAmt
 	  ,ibg.Rejected 
- 	  ,isNull(ms.CostCentre,'999') as 'CostCenter'
+ 	  ,'301'
 	  ,ibg.CompanyID								  as 'CompanyID'
 	  ,(SELECT Round(sum(qty*[Price]),2) 
 	    from [IBInvoiceDetails] as c

@@ -44,8 +44,11 @@
     [MachineID]           VARCHAR (20)    DEFAULT (host_name()) NULL,
     [PrintSDFACode]       INT             NULL,
     [ProviderCode]        VARCHAR (50)    NULL,
-    [DeductibleNotTaken]  INT             NULL
+    [DeductibleNotTaken]  INT             NULL,
+    [VatNumber]           VARCHAR (15)    NULL
 );
+
+
 
 
 GO

@@ -16,12 +16,13 @@
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <TargetLanguage>CS</TargetLanguage>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -888,5 +889,22 @@
     <Build Include="dbo\Stored Procedures\spFieldExistInTable.sql" />
     <Build Include="dbo\Stored Procedures\Date2Date_ItemMovement_Proc.sql" />
     <Build Include="dbo\Stored Procedures\Date2Date_ItemMovement_FromStockDate_Proc.sql" />
+    <Build Include="dbo\Views\ZWarehouse.sql" />
+    <Build Include="dbo\Views\ZTransferUnit.sql" />
+    <Build Include="dbo\Views\ZProductUnit.sql" />
+    <Build Include="dbo\Views\ZProduct.sql" />
+    <Build Include="dbo\Views\ZPhProductUnit.sql" />
+    <Build Include="dbo\Views\Z1TransferUnit_View.sql" />
+    <Build Include="dbo\Views\Z1PharmacyUnit_View.sql" />
+    <Build Include="dbo\Views\Z1ClinicUnit_View.sql" />
+    <Build Include="dbo\Views\ProductUnit_VIew.sql" />
+    <Build Include="dbo\Views\ProductPhPurchaseDetail_View.sql" />
+    <Build Include="dbo\Views\ProductPharmacyUnit_View.sql" />
+    <Build Include="dbo\Views\Product_View.sql" />
+    <Build Include="dbo\Views\PrescriptionItems_View.sql" />
+    <Build Include="dbo\Views\PrescriptionDetail_View.sql" />
+    <Build Include="dbo\Views\Prescription_View.sql" />
+    <Build Include="dbo\Views\PMRPrescriptions_View.sql" />
+    <Build Include="dbo\Views\PharmacyMedicines_View.sql" />
   </ItemGroup>
 </Project>

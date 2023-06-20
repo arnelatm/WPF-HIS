@@ -71,6 +71,9 @@
     [SplDay]             INT           NULL,
     [FridayDutyHrs]      INT           NULL,
     [primary_key]        INT           IDENTITY (1, 1) NOT NULL,
-    [LedgerID]           VARCHAR (15)  NULL
+    [LedgerID]           VARCHAR (15)  NULL,
+    [EmpCode]            VARCHAR (15)  NULL
 );
+
+
 

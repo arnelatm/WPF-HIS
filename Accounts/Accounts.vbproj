@@ -225,7 +225,7 @@
     <Compile Include="BusinessLayer\Dosage.vb" />
     <Compile Include="BusinessLayer\IGroup\DrugSale.vb" />
     <Compile Include="BusinessLayer\IGroup\GTinMatcher.vb" />
-    <Compile Include="BusinessLayer\IGroup\PMRPrescription.vb" />
+    <Compile Include="BusinessLayer\IGroup\Prescription.vb" />
     <Compile Include="BusinessLayer\IGroup\PrescriptionDetail.vb" />
     <Compile Include="BusinessLayer\IGroup\StockInventory.vb" />
     <Compile Include="BusinessLayer\ItemCode.vb" />
@@ -312,6 +312,7 @@
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\DoctorDao.vb" />
     <Compile Include="DataLayer\AdoNet\DosagePrintingDao.vb" />
+    <Compile Include="DataLayer\AdoNet\IGroup\PrescriptionDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\PrescriptionDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\SaleDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\SaleDao.vb" />
@@ -440,6 +441,7 @@
     <Compile Include="PresentationLayer\Models\IGroup\DrugSaleModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\GTinMatcherModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\PrescriptionDetailModel.vb" />
+    <Compile Include="PresentationLayer\Models\IGroup\PmrPrescriptionModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\PrescriptionModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\StockInventoryModel.vb" />
     <Compile Include="PresentationLayer\Models\ItemCodeModel.vb" />
@@ -499,6 +501,7 @@
     <Compile Include="PresentationLayer\Models\PensionSchemeModel.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\IGroup\PrescriptionPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SalePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchasePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DoctorPresenter.vb" />
@@ -547,16 +550,10 @@
     <Compile Include="PresentationLayer\Views\EmployeeLeaveCreditView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeePayElementView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeDocumentView.vb" />
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\PatientPrescriptionForm.Designer.vb">
-      <DependentUpon>PatientPrescriptionForm.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\PrescriptionForm.Designer.vb">
+      <DependentUpon>PrescriptionForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\PatientPrescriptionForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\DoctorsPrescriptionForm.Designer.vb">
-      <DependentUpon>DoctorsPrescriptionForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\DoctorsPrescriptionForm.vb">
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\PrescriptionForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\SterilizationLabelPrinting.designer.vb">
@@ -772,12 +769,6 @@
       <DependentUpon>PmrReportSelector.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrReportSelector.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationForm.Designer.vb">
-      <DependentUpon>PmrInvestigationForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsEntry.Designer.vb">
@@ -1921,11 +1912,8 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\CGridBoxForm.resx">
       <DependentUpon>CGridBoxForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\PatientPrescriptionForm.resx">
-      <DependentUpon>PatientPrescriptionForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\DoctorsPrescriptionForm.resx">
-      <DependentUpon>DoctorsPrescriptionForm.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\PrescriptionForm.resx">
+      <DependentUpon>PrescriptionForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\SterilizationLabelPrinting.resx">
       <DependentUpon>SterilizationLabelPrinting.vb</DependentUpon>
@@ -2054,9 +2042,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\PmrReportSelector.resx">
       <DependentUpon>PmrReportSelector.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationForm.resx">
-      <DependentUpon>PmrInvestigationForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsEntry.resx">
       <DependentUpon>ItemDetailsEntry.vb</DependentUpon>

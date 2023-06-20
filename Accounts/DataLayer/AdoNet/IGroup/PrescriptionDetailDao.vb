@@ -12,14 +12,19 @@ Namespace DataLayer.AdoNet
         Implements IDaoChildUpdateOnly(Of PrescriptionDetail)
         'Implements IDaoGetRecords(Of PrescriptionDetail), IDaoGetRecord(Of PrescriptionDetail)
 
-        Private ReadOnly Db As New Db("IGROUPCLINIC")
+        Private ReadOnly _db As New Db("IGROUPCLINIC")
 
-        Const FieldList As String = "DosageEnglish," &
+        Const FieldList As String = "Dosage," &
                                     "Duration," &
-                                    "Item_Code," &
-                                    "ItemNameEnglish," &
+                                    "ItemCode," &
+                                    "ItemName," &
                                     "RowNbr," &
-                                    "Trans_Key"
+                                    "TransKey"
+
+        Public Overrides Function GetDB()
+            Return _db
+        End Function
+
 
         Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of PrescriptionDetail) Implements IDaoChildUpdateOnly(Of PrescriptionDetail).GetRecordsWithGroupIdNo
             If idNo Is Nothing OrElse idNo.Equals(DBNull.Value) OrElse idNo = 0 Then
@@ -30,23 +35,23 @@ Namespace DataLayer.AdoNet
                 End If
                 Dim sql As String =
                         " SELECT " & FieldList &
-                        " FROM PMRMedicineDetails_View" &
-                        " WHERE Trans_key = @IdNo  " &
+                        " FROM PrescriptionDetails_View" &
+                        " WHERE TransKey = @IdNo  " &
                         " ORDER BY " & sortExpression
                 Dim params() As Object = {"@IdNo", idNo}
-                Return Db.Read(sql, Make, params).ToList()
+                Return _db.Read(sql, Make, params).ToList()
             End If
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, PrescriptionDetail) =
                                     Function(reader) _
             New PrescriptionDetail() With {
-            .DosageEnglish = AATM.DataLayer.AdoNet.Extensions.AsString(reader("DosageEnglish")),
+            .Dosage = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Dosage")),
             .Duration = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Duration")),
-            .Item_Code = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Item_Code")),
-            .ItemNameEnglish = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ItemNameEnglish")),
+            .ItemCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ItemCode")),
+            .ItemName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ItemName")),
             .RowNbr = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("RowNbr")),
-            .Trans_Key = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("Trans_key"))
+            .TransKey = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("Transkey"))
             }
 
         'Public Function GetDaoRecords(Optional filter As String = Nothing) As List(Of PrescriptionDetail) Implements IDaoGetRecords(Of PrescriptionDetail).GetDaoRecords

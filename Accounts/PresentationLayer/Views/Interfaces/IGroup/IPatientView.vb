@@ -21,12 +21,4 @@ Namespace PresentationLayer.Views.Interfaces
 
     End Interface
 
-    Public Interface Prescription
-
-        Property ItemNameEnglish As String
-        Property DosageEnglish As String
-        Property Duration As String
-
-    End Interface
-
 End Namespace

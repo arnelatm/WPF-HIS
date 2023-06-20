@@ -1,22 +1,19 @@
-﻿Namespace PresentationLayer.Models
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.PresentationLayer.Models
 
-    ''' <summary>
-    '''     The Model in MVP design pattern.
-    '''     Implements IModel and communicates with WCF Service.
-    ''' </summary>
-    Public Class PmrPrescriptionModel
+Public Class PrescriptionModel
+    Public Property Age As String
+    Public Property AgeYmd As String
+    Public Property Dob As String
+    Public Property DoctorCode As String
+    Public Property DoctorName As String
+    Public Property FileNo As Integer
+    Public Property Gender As String
+    Public Property PatientName As String
+    Public Property Series As String
+    Public Property TransDate As String
+    Public Property TransKey As Integer
+    Public Property PrescriptionDetails As List(Of PrescriptionDetailModel)
 
-        Public Property InvoiceDate As String
-        Public Property [Name] As String
-        Public Property [Status] As Boolean
-        Public Property [Token] As String
-        Public Property PType As String
-        Public Property FileNo As String
-        Public Property InvType As String
-        Public Property TransKey As Integer
-        Public Property LastConsDate As String
-        Public Property InvTime As Date
+End Class
 
-    End Class
-
-End Namespace

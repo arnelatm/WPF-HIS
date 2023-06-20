@@ -17,16 +17,16 @@ Namespace BusinessLayer
 
     Public Class PatientPrescription
         Inherits Patient
-        Property PrescriptionDetail As List(Of Prescription)
+        Property PrescriptionDetails As List(Of PrescriptionDetail)
 
     End Class
 
-    Public Class Prescription
+    'Public Class Prescription
 
-        Property ItemNameEnglish As String
-        Property DosageEnglish As String
-        Property Duration As String
+    '    Property ItemNameEnglish As String
+    '    Property DosageEnglish As String
+    '    Property Duration As String
 
-    End Class
+    'End Class
 
 End Namespace

@@ -135,7 +135,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PrescriptionDetail As List(Of Prescription) Implements IPatientPrescriptionView.PrescriptionDetail
+        Public Property PrescriptionDetail As List(Of Interfaces.Prescription) Implements IPatientPrescriptionView.PrescriptionDetail
 
         Public Property RegistrationNo As Integer Implements IPatientView.RegistrationNo
             Get
