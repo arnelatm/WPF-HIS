@@ -43,7 +43,7 @@ Namespace DataLayer.AdoNet
             Dim params() As Object = {"@IdNo", idNo}
             Dim data As New Prescription
             data = _db.Read(sql, Make, params).FirstOrDefault()
-            sql = $"select  PrescriptionItems_View order by RowNbr where transKey = @IdNo"
+            'sql = $"select * PrescriptionItem_View order by RowNbr where transKey = @IdNo"
             Dim piDao As New PrescriptionDetailDao
             data.PrescriptionDetails = piDao.GetRecordsWithGroupIdNo(data.TransKey, "RowNbr")
             'params = {"@trans_key", data.doctorspatients(0).transkey}

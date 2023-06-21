@@ -133,10 +133,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property AgeYMD As String Implements IPrescriptionView.AgeYmd
             Get
-                Return txtAge.Text
+                Return txtAgeYMD.Text
             End Get
             Set(value As String)
-                txtAge.Text = value
+                txtAgeYMD.Text = value
             End Set
         End Property
 
@@ -201,7 +201,7 @@ Namespace PresentationLayer.Views.Forms
             SuspendLayout()
             bsPrescriptionDetails.DataSource = Nothing
             DataGridViewPrescriptionDetails.Refresh()
-            bsPrescriptionDetails.DataSource =
+            bsPrescriptionDetails.DataSource = PrescriptionDetails
             bsPrescriptionDetails.AllowNew = True
             With DataGridViewPrescriptionDetails
                 .AutoGenerateColumns = False

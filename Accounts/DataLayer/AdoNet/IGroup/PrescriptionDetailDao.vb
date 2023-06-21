@@ -16,6 +16,7 @@ Namespace DataLayer.AdoNet
 
         Const FieldList As String = "Dosage," &
                                     "Duration," &
+                                    "GenericName," &
                                     "ItemCode," &
                                     "ItemName," &
                                     "RowNbr," &
@@ -35,7 +36,7 @@ Namespace DataLayer.AdoNet
                 End If
                 Dim sql As String =
                         " SELECT " & FieldList &
-                        " FROM PrescriptionDetail_View" &
+                        " FROM PrescriptionItem_View" &
                         " WHERE TransKey = @IdNo  " &
                         " ORDER BY " & sortExpression
                 Dim params() As Object = {"@IdNo", idNo}
@@ -48,6 +49,7 @@ Namespace DataLayer.AdoNet
             New PrescriptionDetail() With {
             .Dosage = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Dosage")),
             .Duration = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Duration")),
+            .GenericName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("GenericName")),
             .ItemCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ItemCode")),
             .ItemName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ItemName")),
             .RowNbr = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("RowNbr")),

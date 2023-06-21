@@ -9,6 +9,7 @@ Namespace PresentationLayer.Views
         Public Property DataFilter As String Implements IView.DataFilter
         Public Property Dosage As String Implements IPrescriptionDetailView.Dosage
         Public Property Duration As String Implements IPrescriptionDetailView.Duration
+        Public Property GenericName As String Implements IPrescriptionDetailView.GenericName
         Public Property Errors As List(Of String) Implements IView.Errors
         Public Property ItemCode As String Implements IPrescriptionDetailView.ItemCode
         Public Property ItemName As String Implements IPrescriptionDetailView.ItemName
