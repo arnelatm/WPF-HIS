@@ -22,6 +22,7 @@ Public Class CDataGridView
     Private _firstVisibleColumn As Integer = -1
     Private _insertColumnAdded As Boolean = False
     Private _lastEditableColumn As Integer = -1
+    Private _searchable As Boolean = True
     Private _memoryCache As Cache
     Private ReadOnly _origEditMode As DataGridViewEditMode
     Private _columnNo As Integer
@@ -38,7 +39,22 @@ Public Class CDataGridView
         ShowCellErrors = True
         ShowRowErrors = True
         _origEditMode = EditMode
+        'MakeGridSearchable()
+    End Sub
 
+    Public Sub MakeGridSearchable()
+        If Searchable Then
+            If DgSearch Is Nothing Then
+                DgSearch = New List(Of DataGridSearch)
+            End If
+            'DgSearch = New DgSearch
+            Dim i As Integer = 0
+            For Each col In Columns()
+                Dim searchItem As New DataGridSearch(Me, i)
+                DgSearch.Add(searchItem)
+                i += 1
+            Next
+        End If
     End Sub
 
     Public Property Cached As Boolean = False
@@ -143,6 +159,21 @@ Public Class CDataGridView
             Return GetFirstEditableColumn()
         End Get
     End Property
+
+    <Bindable(True)>
+    <Category("Custom")>
+    <DefaultValue(GetType(Boolean))>
+    <Description("Set to True to specify that this grid is searchable.")>
+    <Browsable(True)>
+    Public Property Searchable As Boolean
+        Get
+            Return _searchable
+        End Get
+        Set(value As Boolean)
+            _searchable = value
+        End Set
+    End Property
+
 
     Public Function GetColumnTotal(ByVal columnName As String)
         Return DgvFooter.GetColumnTotal(columnName)
@@ -1040,16 +1071,6 @@ Public Class CDataGridView
         _memoryCache = New Cache(retriever, 100)
         RowCount = retriever.RowCount
         AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells)
-        If DgSearch IsNot Nothing Then
-            DgSearch.Clear()
-        End If
-        Dim i As Integer = 0
-        For Each item As DataColumn In retriever.Columns
-            Me.Columns(i).ValueType = item.DataType
-            Dim searchItem As New DataGridSearch(Me, i)
-            DgSearch.Add(searchItem)
-            i += 1
-        Next
     End Sub
 
     Private Sub dataGridView_CellValueNeeded(ByVal sender As Object, ByVal e As DataGridViewCellValueEventArgs) Handles MyBase.CellValueNeeded
@@ -1122,8 +1143,8 @@ Public Class CDataGridView
             Dim columnDataType = Columns(_columnNo).ValueType
             _previousColumnSearch = _columnNo
             dataTypeEnum = GetObjectDataType(columnDataType)
+            DgSearch(_columnNo).FindDataType = dataTypeEnum
             'columnData.FindDataType = dataTypeEnum
-
             'DgSearch(_columnNo).SearchMode = GetColumnSearchModeType(Columns(_columnNo))
             Dim searchForm As CDataGridFindForm
             searchForm = New CDataGridFindForm(Me, _columnNo)
@@ -1143,80 +1164,108 @@ Public Class CDataGridView
                 If Not _existingFind Then
                     _existingFind = True
                 End If
-                If dataTypeEnum = IFindableControl.SearchModeEnum.TextBox Then
+                If dataTypeEnum = IFindableControl.DataTypeEnum.Decimal Or dataTypeEnum = IFindableControl.DataTypeEnum.Integer Then
                     DgSearch(_columnNo).BegFindValue = searchForm.txtBegValue.Text
-                    'searchPlace = searchForm.SearchLocation
+                    DgSearch(_columnNo).EndFindValue = searchForm.txtEndValue.Text
+                    DgSearch(_columnNo).TextToSearch = searchForm.TxtTextToSearch.Text
+                    DgSearch(_columnNo).SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
                     'ignoreCase = searchForm.chkIgnoreCase.Checked
-                    If DgSearch(_columnNo).TextToSearch <> "" Then
+                    If DgSearch(_columnNo).BegFindValue <> "" Then
                         SelectionMode = DataGridViewSelectionMode.FullRowSelect
-                        Try
-                            ClearSelection()
+                        ClearSelection()
+                        If DgSearch(_columnNo).EndFindValue = "" Then
+                            Dim begValue As Integer = DgSearch(_columnNo).BegFindValue
                             For Each row As DataGridViewRow In Rows
-                                If SearchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField Then
-                                    ' search anywhere
-                                    If IgnoreCase Then
-                                        If row.Cells(_columnNo).Value IsNot Nothing AndAlso row.Cells(_columnNo).Value.ToString().ToLower().Contains(DgSearch(_columnNo).TextToSearch.ToLower()) Then
-                                            row.Selected = True
-                                            If sw = 0 Then
-                                                'scroll and move to the first matching record
-                                                FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
-                                                sw = 1
-                                                _previousSelectedRow = row.Index()
-                                            End If
-                                        End If
-                                    Else
-                                        If row.Cells(_columnNo).Value IsNot Nothing AndAlso row.Cells(_columnNo).Value.ToString().Contains(DgSearch(_columnNo).TextToSearch) Then
-                                            row.Selected = True
-                                            If sw = 0 Then
-                                                'scroll and move to the first matching record
-                                                FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
-                                                sw = 1
-                                                _previousSelectedRow = row.Index()
-                                            End If
-                                        End If
-                                    End If
-                                ElseIf SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue Then
-                                    ' exact match
-                                    If row.Cells(_columnNo).Value.ToString().Equals(DgSearch(_columnNo).TextToSearch) Then
-                                        row.Selected = True
-                                        If sw = 0 Then
-                                            'scroll and move to the first matching record
-                                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
-                                            sw = 1
-                                            _previousSelectedRow = row.Index()
-                                        End If
-                                    End If
-                                Else
-                                    ' start of text
-                                    If IgnoreCase Then
-                                        If row.Cells(_columnNo).Value.ToString().ToLower().StartsWith(DgSearch(_columnNo).TextToSearch.ToLower()) Then
-                                            row.Selected = True
-                                            If sw = 0 Then
-                                                'scroll and move to the first matching record
-                                                FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
-                                                sw = 1
-                                                _previousSelectedRow = row.Index()
-                                            End If
-                                        End If
-                                    Else
-                                        If row.Cells(_columnNo).Value.ToString().StartsWith(DgSearch(_columnNo).TextToSearch) Then
-                                            row.Selected = True
-                                            If sw = 0 Then
-                                                'scroll and move to the first matching record
-                                                FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
-                                                sw = 1
-                                                _previousSelectedRow = row.Index()
-                                            End If
-                                        End If
+                                If row.Cells(_columnNo).Value = begValue Then
+                                    row.Selected = True
+                                    If sw = 0 Then
+                                        'scroll and move to the first matching record
+                                        FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+                                        sw = 1
+                                        _previousSelectedRow = row.Index()
                                     End If
                                 End If
                             Next
-                            _previousTextSearch = DgSearch(_columnNo).TextToSearch
-                            _previousSearchPlace = SearchPlace
-                        Catch exc As Exception
-                            MessageBox.Show(exc.Message)
-                        End Try
+                        Else
+                            Dim begValue As Decimal = DgSearch(_columnNo).BegFindValue
+                            Dim endValue As Integer = DgSearch(_columnNo).EndFindValue
+                            For Each row As DataGridViewRow In Rows
+                                If row.Cells(_columnNo).Value >= begValue And row.Cells(_columnNo).Value <= endValue Then
+                                    row.Selected = True
+                                    If sw = 0 Then
+                                        'scroll and move to the first matching record
+                                        FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+                                        sw = 1
+                                        _previousSelectedRow = row.Index()
+                                    End If
+                                End If
+                            Next
+                        End If
                     End If
+                ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.String Then
+                    Dim searchValue As String = DgSearch(_columnNo).BegFindValue
+                    For Each row As DataGridViewRow In Rows
+                        If DgSearch(_columnNo).SearchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField Then
+                            ' search anywhere
+                            If IgnoreCase Then
+                                If row.Cells(_columnNo).Value IsNot Nothing AndAlso row.Cells(_columnNo).Value.ToString().ToLower().Contains(DgSearch(_columnNo).TextToSearch.ToLower()) Then
+                                    row.Selected = True
+                                    If sw = 0 Then
+                                        'scroll and move to the first matching record
+                                        FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+                                        sw = 1
+                                        _previousSelectedRow = row.Index()
+                                    End If
+                                End If
+                            Else
+                                If row.Cells(_columnNo).Value IsNot Nothing AndAlso row.Cells(_columnNo).Value.ToString().Contains(DgSearch(_columnNo).TextToSearch) Then
+                                    row.Selected = True
+                                    If sw = 0 Then
+                                        'scroll and move to the first matching record
+                                        FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+                                        sw = 1
+                                        _previousSelectedRow = row.Index()
+                                    End If
+                                End If
+                            End If
+                        ElseIf DgSearch(_columnNo).SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue Then
+                            ' exact match
+                            If row.Cells(_columnNo).Value = Val(DgSearch(_columnNo).TextToSearch) Then
+                                row.Selected = True
+                                If sw = 0 Then
+                                    'scroll and move to the first matching record
+                                    FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+                                    sw = 1
+                                    _previousSelectedRow = row.Index()
+                                End If
+                            End If
+                        Else
+                            ' start of text
+                            If IgnoreCase Then
+                                If row.Cells(_columnNo).Value.ToString().ToLower().StartsWith(DgSearch(_columnNo).TextToSearch.ToLower()) Then
+                                    row.Selected = True
+                                    If sw = 0 Then
+                                        'scroll and move to the first matching record
+                                        FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+                                        sw = 1
+                                        _previousSelectedRow = row.Index()
+                                    End If
+                                End If
+                            Else
+                                If row.Cells(_columnNo).Value.ToString().StartsWith(DgSearch(_columnNo).TextToSearch) Then
+                                    row.Selected = True
+                                    If sw = 0 Then
+                                        'scroll and move to the first matching record
+                                        FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
+                                        sw = 1
+                                        _previousSelectedRow = row.Index()
+                                    End If
+                                End If
+                            End If
+                        End If
+                    Next
+                    _previousTextSearch = DgSearch(_columnNo).TextToSearch
+                    _previousSearchPlace = SearchPlace
                 End If
             End If
             searchForm.Dispose()

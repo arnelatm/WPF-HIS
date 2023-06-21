@@ -380,6 +380,10 @@ Public Class BfMain
                     End If
                 End If
             End If
+            If TypeOf cCtrl Is CDataGridView Or TypeOf cCtrl Is CtDataGridView Then
+                Dim cControl As CDataGridView = DirectCast(cCtrl, CDataGridView)
+                cControl.MakeGridSearchable()
+            End If
         Next
     End Sub
 

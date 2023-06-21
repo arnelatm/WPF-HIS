@@ -223,7 +223,7 @@ Public Class CFindForm
         ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Date Then
             Height = 160
         ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Decimal Or _findableControl.FindDataType = IFindableControl.DataTypeEnum.Integer Then
-            Height = 160
+            Height = 200 '160
         ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Boolean Then
             Height = 175
             Width = 200
