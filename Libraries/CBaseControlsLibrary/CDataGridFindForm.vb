@@ -1,6 +1,7 @@
 ﻿Imports System.Drawing
 Imports System.Windows.Forms
 Imports AATM.Libraries.AatmInterfaces
+Imports AATM.Libraries.CBaseControlsLibrary.CDataGridView
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CDataGridFindForm
@@ -40,7 +41,7 @@ Public Class CDataGridFindForm
         Dim pnt As Point = findableGrid.PointToScreen(New Point(0 + _dgView.Width, 0))
         _formPosition.X = pnt.X
         _formPosition.Y = pnt.Y
-       'pnt = Me.PointToClient(pnt)
+        'pnt = Me.PointToClient(pnt)
 
         'If findableControl.SearchMode = "String" Then
         '    _searchMode = SearchModeEnum.TextBox
@@ -87,6 +88,24 @@ Public Class CDataGridFindForm
             Else
                 _dgView.IgnoreCase = False
             End If
+        ElseIf dataType = IFindableControl.DataTypeEnum.Decimal Or dataType = IFindableControl.DataTypeEnum.Integer Then
+            If dataType = IFindableControl.DataTypeEnum.Decimal Then
+                Dim value As Decimal
+                If Not Decimal.TryParse(txtBegValue.Text, value) Then
+                    MessagingLibrary.Messaging.Show(True, "MsgInvalidDecimalValue")
+                    DialogResult = DialogResult.Cancel
+                Else
+                    _dgView.DgSearch(_columnNumber).BegFindValue = txtBegValue.Text
+                    _dgView.DgSearch(_columnNumber).EndFindValue = txtEndValue.Text
+                End If
+            Else
+                Dim value As Integer
+                If Not Integer.TryParse(txtBegValue.Text, value) Then
+                    MessagingLibrary.Messaging.Show(True, "MsgInvalidIntegerValue")
+                Else
+                    _dgView.DgSearch(_columnNumber).BegFindValue = txtBegValue.Text
+                End If
+            End If
         ElseIf dataType = IFindableControl.DataTypeEnum.Date Then
             If SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
                 _dgView.DgSearch(_columnNumber).SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
@@ -96,12 +115,12 @@ Public Class CDataGridFindForm
                 _dgView.DgSearch(_columnNumber).BegFindValue = dtpBegDate.Value
                 _dgView.DgSearch(_columnNumber).EndFindValue = dtpEndDate.Value
             End If
-        ElseIf dataType = IFindableControl.DataTypeEnum.Decimal Or dataType = IFindableControl.DataTypeEnum.Integer Then
+            _dgView.DgSearch(_columnNumber).SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
+            _dgView.DgSearch(_columnNumber).BegFindValue = cboTextToSearch.SelectedValue
             If SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
                 _dgView.DgSearch(_columnNumber).SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
                 _dgView.DgSearch(_columnNumber).BegFindValue = cboTextToSearch.SelectedValue
             Else
-                _dgView.DgSearch(_columnNumber).SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
                 If txtBegValue.Text Is Nothing OrElse txtBegValue.Text = "" Then
                     _dgView.DgSearch(_columnNumber).BegFindValue = Nothing
                 Else
@@ -228,20 +247,22 @@ Public Class CDataGridFindForm
     End Sub
 
     Private Sub SetFormSize()
-        If _dgView.FindDataType = IFindableControl.DataTypeEnum.String Then
+        Dim findDataTypeEnum As DataTypeEnum = _dgView.DgSearch(_columnNumber).FindDataType
+        If findDataTypeEnum = IFindableControl.DataTypeEnum.String Then
             Height = 270
-        ElseIf _dgView.FindDataType = IFindableControl.DataTypeEnum.Date Then
+        ElseIf findDataTypeEnum = IFindableControl.DataTypeEnum.Date Then
             Height = 160
-        ElseIf _dgView.FindDataType = IFindableControl.DataTypeEnum.Decimal Or _dgView.FindDataType = IFindableControl.DataTypeEnum.Integer Then
+        ElseIf findDataTypeEnum = IFindableControl.DataTypeEnum.Decimal Or findDataTypeEnum = IFindableControl.DataTypeEnum.Integer Then
             Height = 160
-        ElseIf _dgView.FindDataType = IFindableControl.DataTypeEnum.Boolean Then
+        ElseIf findDataTypeEnum = IFindableControl.DataTypeEnum.Boolean Then
             Height = 175
             Width = 200
         End If
     End Sub
 
     Private Sub SetupDisplay()
-        If _dgView.FindDataType = IFindableControl.DataTypeEnum.String Then
+        Dim findDataTypeEnum As DataTypeEnum = _dgView.DgSearch(_columnNumber).FindDataType
+        If findDataTypeEnum = IFindableControl.DataTypeEnum.String Then
             'lblLookFor1.Visible = True
             'lblLookFor2.Visible = False
             'lblLookFor3.Visible = False
@@ -261,7 +282,7 @@ Public Class CDataGridFindForm
             lblIgnoreCase.Visible = True
             chkIgnoreCase.Visible = True
             TxtTextToSearch.Focus()
-        ElseIf _dgView.FindDataType = IFindableControl.DataTypeEnum.Date Then
+        ElseIf findDataTypeEnum = IFindableControl.DataTypeEnum.Date Then
             dtpBegDate.Visible = True
             dtpEndDate.Visible = True
             dtpBegDate.Focus()
@@ -279,8 +300,8 @@ Public Class CDataGridFindForm
             chkChecked.Visible = False
             txtBegValue.Visible = False
             txtEndValue.Visible = False
-        ElseIf _dgView.FindDataType = IFindableControl.DataTypeEnum.Decimal Or
-                   _dgView.FindDataType = IFindableControl.DataTypeEnum.Integer Then
+        ElseIf findDataTypeEnum = IFindableControl.DataTypeEnum.Decimal Or
+                   findDataTypeEnum = IFindableControl.DataTypeEnum.Integer Then
             dtpBegDate.Visible = False
             dtpEndDate.Visible = False
             TxtTextToSearch.Visible = False
@@ -294,7 +315,7 @@ Public Class CDataGridFindForm
             txtEndValue.Visible = True
             txtBegValue.Focus()
             txtBegValue.Select()
-        ElseIf _dgView.FindDataType = IFindableControl.DataTypeEnum.Boolean Then
+        ElseIf findDataTypeEnum = IFindableControl.DataTypeEnum.Boolean Then
             'lblLookFor4.Visible = True
             chkChecked.Visible = True
             dtpBegDate.Visible = False
