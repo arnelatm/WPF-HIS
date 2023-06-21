@@ -35,8 +35,8 @@ Namespace DataLayer.AdoNet
                                       "UnitOfStrength," &
                                       "UnitOfVolume," &
                                       "Volume"
-                                      
-                                      
+
+
         'Public Sub New(ParamArray arguments As Object())
         '    Db.SetConnectionString("IGROUPCLINIC")
         'End Sub
@@ -135,9 +135,9 @@ Namespace DataLayer.AdoNet
             .Created_By_Branch = Extensions.AsString(reader("Created_By_Branch")),
             .QtyOnHand = Extensions.AsNullable(Of Decimal?)(reader("QtyOnHand")),
             .Price_Cash = Extensions.AsNullable(Of Decimal?)(reader("Price_Cash")),
-            .Volume = Extensions.AsNullable(Of Decimal?)(reader("Volume"))          
+            .Volume = Extensions.AsNullable(Of Decimal?)(reader("Volume"))
             }
-            
+
         Private Function Take(ItemDetails As ItemDetails) As Object()
             Return New Object() {
                             "BranchID", ItemDetails.BranchID,

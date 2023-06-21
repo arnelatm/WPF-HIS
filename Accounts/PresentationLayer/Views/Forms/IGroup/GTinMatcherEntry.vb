@@ -395,7 +395,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DrugGTin As String Implements IGTinMatcherView.DrugGTin
             Get
-                Return txtDrugGTin.GetValue(Of Int32)
+                Return txtDrugGTin.GetValue(Of String)
             End Get
             Set(value As String)
                 txtDrugGTin.SetValue(value)

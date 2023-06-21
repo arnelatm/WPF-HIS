@@ -8,6 +8,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property ItemName As String
         Property Dosage As String
         Property Duration As String
+        Property GenericName As String
         Property TransKey As Int32
         Property RowNbr As Int32
         Property ItemCode As String
