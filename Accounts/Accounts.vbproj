@@ -1914,6 +1914,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\PrescriptionForm.resx">
       <DependentUpon>PrescriptionForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\SterilizationLabelPrinting.resx">
       <DependentUpon>SterilizationLabelPrinting.vb</DependentUpon>
@@ -1975,6 +1976,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\GTinMatcherEntry.resx">
       <DependentUpon>GTinMatcherEntry.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\StockInventoryEntry.resx">
       <DependentUpon>StockInventoryEntry.vb</DependentUpon>

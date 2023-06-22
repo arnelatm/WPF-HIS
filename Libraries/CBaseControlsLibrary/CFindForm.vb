@@ -14,7 +14,6 @@ Public Class CFindForm
     Private _formPosition As Point
     Private _controlHeight As Int16
     Private _controlWidth As Int16
-    Private _dgSearch As DataGridSearch
     Private ReadOnly _findableControl As IFindableControl
     Private _dgFindColumnNo As Int16
 

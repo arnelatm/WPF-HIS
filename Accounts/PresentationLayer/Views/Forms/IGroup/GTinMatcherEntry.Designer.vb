@@ -2038,7 +2038,6 @@
             DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.DataGridViewItems.DefaultCellStyle = DataGridViewCellStyle2
-            Me.DataGridViewItems.DgSearch = CType(resources.GetObject("DataGridViewItems.DgSearch"), System.Collections.Generic.List(Of AATM.Libraries.CBaseControlsLibrary.CDataGridView.DataGridSearch))
             Me.DataGridViewItems.DgvFooter = Nothing
             Me.DataGridViewItems.DisplayOnly = True
             Me.DataGridViewItems.Ea = Nothing
@@ -2081,7 +2080,6 @@
             DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.DataGridViewDrugs.DefaultCellStyle = DataGridViewCellStyle4
-            Me.DataGridViewDrugs.DgSearch = CType(resources.GetObject("DataGridViewDrugs.DgSearch"), System.Collections.Generic.List(Of AATM.Libraries.CBaseControlsLibrary.CDataGridView.DataGridSearch))
             Me.DataGridViewDrugs.DgvFooter = Nothing
             Me.DataGridViewDrugs.DisplayOnly = True
             Me.DataGridViewDrugs.Ea = Nothing

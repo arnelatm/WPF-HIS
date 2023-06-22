@@ -373,7 +373,6 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.DataGridViewJournalItems.DefaultCellStyle = DataGridViewCellStyle31
-            Me.DataGridViewJournalItems.DgSearch = CType(resources.GetObject("DataGridViewJournalItems.DgSearch"), System.Collections.Generic.List(Of AATM.Libraries.CBaseControlsLibrary.CDataGridView.DataGridSearch))
             Me.DataGridViewJournalItems.DgvFooter = Nothing
             Me.DataGridViewJournalItems.DisplayOnly = False
             Me.DataGridViewJournalItems.Ea = EventAggregator3
@@ -1197,7 +1196,6 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle40.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle40.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.DataGridViewDjOiItems.DefaultCellStyle = DataGridViewCellStyle40
-            Me.DataGridViewDjOiItems.DgSearch = CType(resources.GetObject("DataGridViewDjOiItems.DgSearch"), System.Collections.Generic.List(Of AATM.Libraries.CBaseControlsLibrary.CDataGridView.DataGridSearch))
             Me.DataGridViewDjOiItems.DgvFooter = Nothing
             Me.DataGridViewDjOiItems.DisplayOnly = False
             Me.DataGridViewDjOiItems.Ea = EventAggregator1
