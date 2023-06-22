@@ -383,7 +383,6 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.DataGridViewPrescriptionDetails.DefaultCellStyle = DataGridViewCellStyle16
-            Me.DataGridViewPrescriptionDetails.DgSearch = CType(resources.GetObject("DataGridViewPrescriptionDetails.DgSearch"), System.Collections.Generic.List(Of AATM.Libraries.CBaseControlsLibrary.CDataGridView.DataGridSearch))
             Me.DataGridViewPrescriptionDetails.DgvFooter = Nothing
             Me.DataGridViewPrescriptionDetails.DisplayOnly = True
             Me.DataGridViewPrescriptionDetails.Dock = System.Windows.Forms.DockStyle.Fill

@@ -626,7 +626,6 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle43.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle43.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.DataGridViewSaleDetails.DefaultCellStyle = DataGridViewCellStyle43
-            Me.DataGridViewSaleDetails.DgSearch = Nothing
             Me.DataGridViewSaleDetails.DgvFooter = Nothing
             Me.DataGridViewSaleDetails.DisplayOnly = False
             Me.DataGridViewSaleDetails.Dock = System.Windows.Forms.DockStyle.Fill
@@ -1072,7 +1071,6 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.CtDataGridView2.DefaultCellStyle = DataGridViewCellStyle19
-            Me.CtDataGridView2.DgSearch = Nothing
             Me.CtDataGridView2.DgvFooter = Nothing
             Me.CtDataGridView2.DisplayOnly = False
             Me.CtDataGridView2.Ea = Nothing

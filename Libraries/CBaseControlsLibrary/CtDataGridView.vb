@@ -46,6 +46,15 @@ Public Class CtDataGridView
 
     Public Property DataFilter As String = Nothing
 
+    Public Property FindColumnNo As Int16
+        Get
+            Return _findColumnNo
+        End Get
+        Set(value As Int16)
+            _findColumnNo = value
+        End Set
+    End Property
+
     Public Event ChangesMade As EventHandler
 
     Public Event DeletingRow(ByVal cancel As Boolean)
@@ -117,15 +126,6 @@ Public Class CtDataGridView
             End If
         End Set
     End Property
-
-    'Private Sub DataGridView_CellEnter(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles Me.CellEnter
-    '    SuspendDrawing()
-    '    If CurrentCell IsNot Nothing Then  'AndAlso TypeOf (CurrentCell) Is CtDgvDtpCell Then
-    '        EditMode = DataGridViewEditMode.EditOnEnter
-    '    End If
-    '    ResumeDrawing()
-    'End Sub
-
 
     Public ReadOnly Property FirstEditableColumn As Integer
         Get
@@ -577,16 +577,6 @@ Public Class CtDataGridView
         _memoryCache = New Cache(retriever, 100)
         RowCount = retriever.RowCount
         AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells)
-        'If DgSearch IsNot Nothing Then
-        '    DgSearch.Clear()
-        'End If
-        'Dim i As Integer = 0
-        'For Each item As DataColumn In retriever.Columns
-        '    Me.Columns(i).ValueType = item.DataType
-        '    Dim searchItem As New DataGridSearch(Me, i)
-        '    DgSearch.Add(searchItem)
-        '    i += 1
-        'Next
     End Sub
 
     Private Sub dataGridView_CellValueNeeded(ByVal sender As Object, ByVal e As DataGridViewCellValueEventArgs) Handles MyBase.CellValueNeeded
@@ -620,7 +610,7 @@ Public Class CtDataGridView
             If Not continueSearch Then
                 _existingFind = False
                 _findColumnNo = hitTestInfo.ColumnIndex
-                If _findColumnNo > 0 Then
+                If _findColumnNo >= 0 Then
                     FindValue()
                 End If
             End If
@@ -662,11 +652,11 @@ Public Class CtDataGridView
         Dim sw As Integer = 0
         Dim pnt As Point
         Dim dataTypeEnum As IFindableControl.DataTypeEnum
-        If _findColumnNo > 0 Then
+        If _findColumnNo >= 0 Then
             Dim columnDataType = Columns(_findColumnNo).ValueType
             _previousColumnSearch = _findColumnNo
             dataTypeEnum = GetObjectDataType(columnDataType)
-            Dim searchForm As CFindForm 
+            Dim searchForm As CFindForm
             FindDataType = dataTypeEnum
             searchForm = New CFindForm(Me) ', _findColumnNo) 
             Dim screenRectangle As Rectangle
@@ -688,7 +678,7 @@ Public Class CtDataGridView
                 If dataTypeEnum = IFindableControl.DataTypeEnum.Decimal Or dataTypeEnum = IFindableControl.DataTypeEnum.Integer Then
                     SelectionMode = DataGridViewSelectionMode.FullRowSelect
                     ClearSelection()
-                    If BegFindValue = EndFindValue OrElse EndFindValue = "" Then 
+                    If BegFindValue = EndFindValue OrElse EndFindValue = "" Then
                         For Each row As DataGridViewRow In Rows
                             If row.Cells(_findColumnNo).Value = BegFindValue Then
                                 row.Selected = True
@@ -714,7 +704,7 @@ Public Class CtDataGridView
                         Next
                     End If
                 ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.String Then
-                    Dim searchValue As String = BegFindValue 
+                    Dim searchValue As String = BegFindValue
                     For Each row As DataGridViewRow In Rows
                         If SearchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField Then
                             ' search anywhere
@@ -775,7 +765,7 @@ Public Class CtDataGridView
                             End If
                         End If
                     Next
-                    _previousTextSearch = searchValue 
+                    _previousTextSearch = searchValue
                     _previousSearchPlace = SearchPlace
                 ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.Date Then
                     SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
@@ -941,41 +931,5 @@ Public Class CtDataGridView
         End If
         Return matchSw
     End Function
-
-    Public Property DgSearch As New List(Of DataGridSearch)
-
-    <[Serializable]>
-    Public Class DataGridSearch
-        Implements IFindableControl
-
-        Public Sub New(dataGridView As CtDataGridView, colNo As Integer)
-            If TypeOf dataGridView.Columns(colNo).CellTemplate Is DataGridViewTextBoxCell Then
-                SearchMode = IFindableControl.SearchModeEnum.TextBox
-                'FindDataSource
-            ElseIf TypeOf dataGridView.Columns(colNo).CellTemplate Is DataGridViewComboBoxCell Then
-                SearchMode = IFindableControl.SearchModeEnum.ComboBox
-            ElseIf TypeOf dataGridView.Columns(colNo).CellTemplate Is DataGridViewCheckBoxCell Then
-                SearchMode = IFindableControl.SearchModeEnum.CheckBox
-            Else
-                SearchMode = IFindableControl.SearchModeEnum.Date
-            End If
-
-        End Sub
-
-        Public Property FindDataType As IFindableControl.DataTypeEnum Implements IFindableControl.FindDataType
-        Public Property FindEnabled As Boolean Implements IFindableControl.FindEnabled
-        Public Property FieldName As String Implements IFindableControl.FieldName
-        Public Property FieldDescription As String Implements IFindableControl.FieldDescription
-        Public ReadOnly Property FindDataSource As Object Implements IFindableControl.FindDataSource
-        Public ReadOnly Property FindDisplayMember As String Implements IFindableControl.FindDisplayMember
-        Public ReadOnly Property SearchMode As IFindableControl.SearchModeEnum Implements IFindableControl.SearchMode
-        Public ReadOnly Property FindValueMember As String Implements IFindableControl.FindValueMember
-        Public Property BegFindValue As Object Implements IFindableControl.BegFindValue
-        Public Property EndFindValue As Object Implements IFindableControl.EndFindValue
-        Public Property SearchPlace As IFindableControl.SearchPlaceEnum Implements IFindableControl.SearchPlace
-        Public Property IgnoreCase As Boolean Implements IFindableControl.IgnoreCase
-        Public Property TextToSearch As String
-
-    End Class
 
 End Class

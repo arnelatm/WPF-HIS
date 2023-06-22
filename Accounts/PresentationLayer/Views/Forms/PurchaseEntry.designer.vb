@@ -734,7 +734,6 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.DataGridViewPurchaseDetails.DefaultCellStyle = DataGridViewCellStyle21
-            Me.DataGridViewPurchaseDetails.DgSearch = Nothing
             Me.DataGridViewPurchaseDetails.DgvFooter = Nothing
             Me.DataGridViewPurchaseDetails.DisplayOnly = False
             Me.DataGridViewPurchaseDetails.Dock = System.Windows.Forms.DockStyle.Fill
@@ -1212,7 +1211,6 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.CtDataGridView2.DefaultCellStyle = DataGridViewCellStyle25
-            Me.CtDataGridView2.DgSearch = Nothing
             Me.CtDataGridView2.DgvFooter = Nothing
             Me.CtDataGridView2.DisplayOnly = False
             Me.CtDataGridView2.Ea = Nothing
@@ -1508,7 +1506,6 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle39.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle39.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.DataGridViewPurchaseHistory.DefaultCellStyle = DataGridViewCellStyle39
-            Me.DataGridViewPurchaseHistory.DgSearch = Nothing
             Me.DataGridViewPurchaseHistory.DgvFooter = Nothing
             Me.DataGridViewPurchaseHistory.DisplayOnly = True
             Me.DataGridViewPurchaseHistory.Ea = Nothing

@@ -518,7 +518,6 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.DataGridViewProductUnits.DefaultCellStyle = DataGridViewCellStyle5
-            Me.DataGridViewProductUnits.DgSearch = CType(resources.GetObject("DataGridViewProductUnits.DgSearch"), System.Collections.Generic.List(Of AATM.Libraries.CBaseControlsLibrary.CtDataGridView.DataGridSearch))
             Me.DataGridViewProductUnits.DgvFooter = Nothing
             Me.DataGridViewProductUnits.DisplayOnly = False
             Me.DataGridViewProductUnits.Ea = Nothing
