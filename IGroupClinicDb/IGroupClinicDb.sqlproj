@@ -906,5 +906,6 @@
     <Build Include="dbo\Views\Prescription_View.sql" />
     <Build Include="dbo\Views\PMRPrescriptions_View.sql" />
     <Build Include="dbo\Views\PharmacyMedicines_View.sql" />
+    <Build Include="dbo\Views\HRAttendenceProcess_ViewOrig.sql" />
   </ItemGroup>
 </Project>
