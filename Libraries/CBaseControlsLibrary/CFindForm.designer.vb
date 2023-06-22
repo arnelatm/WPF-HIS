@@ -24,13 +24,12 @@ Partial Class CFindForm
     'Do not modify it using the code editor.
     <DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CFindForm))
         Me.TxtTextToSearch = New System.Windows.Forms.TextBox()
         Me.lblLookFor1 = New System.Windows.Forms.Label()
         Me.RBtnStart = New System.Windows.Forms.RadioButton()
         Me.RBtnAnywhere = New System.Windows.Forms.RadioButton()
-        Me.BtnFind = New System.Windows.Forms.Button()
-        Me.BtnCancel = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.txtEndValue = New System.Windows.Forms.TextBox()
         Me.txtBegValue = New System.Windows.Forms.TextBox()
@@ -38,15 +37,17 @@ Partial Class CFindForm
         Me.cboTextToSearch = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.dtpEndDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.dtpBegDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-        Me.CGroupBox1 = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
+        Me.cgbStringFindOption = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
         Me.RBtnExactMatch = New System.Windows.Forms.RadioButton()
         Me.chkChecked = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
+        Me.BtnCancel = New System.Windows.Forms.Button()
         Me.chkIgnoreCase = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
         Me.lblIgnoreCase = New System.Windows.Forms.Label()
+        Me.BtnFind = New System.Windows.Forms.Button()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtFieldToSearch = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TableLayoutPanel1.SuspendLayout()
-        Me.CGroupBox1.SuspendLayout()
+        Me.cgbStringFindOption.SuspendLayout()
         Me.SuspendLayout()
         '
         'TxtTextToSearch
@@ -93,31 +94,6 @@ Partial Class CFindForm
         Me.RBtnAnywhere.Text = "Anywhere on Field"
         Me.RBtnAnywhere.UseVisualStyleBackColor = False
         '
-        'BtnFind
-        '
-        Me.BtnFind.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.BtnFind.AutoSize = True
-        Me.TableLayoutPanel1.SetColumnSpan(Me.BtnFind, 2)
-        Me.BtnFind.Location = New System.Drawing.Point(69, 258)
-        Me.BtnFind.Name = "BtnFind"
-        Me.BtnFind.Size = New System.Drawing.Size(37, 23)
-        Me.BtnFind.TabIndex = 4
-        Me.BtnFind.Text = "Find"
-        Me.BtnFind.UseVisualStyleBackColor = True
-        '
-        'BtnCancel
-        '
-        Me.BtnCancel.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.BtnCancel.AutoSize = True
-        Me.TableLayoutPanel1.SetColumnSpan(Me.BtnCancel, 3)
-        Me.BtnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.BtnCancel.Location = New System.Drawing.Point(224, 258)
-        Me.BtnCancel.Name = "BtnCancel"
-        Me.BtnCancel.Size = New System.Drawing.Size(61, 23)
-        Me.BtnCancel.TabIndex = 5
-        Me.BtnCancel.Text = "Cancel"
-        Me.BtnCancel.UseVisualStyleBackColor = True
-        '
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.AutoSize = True
@@ -137,13 +113,13 @@ Partial Class CFindForm
         Me.TableLayoutPanel1.Controls.Add(Me.cboTextToSearch, 1, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.dtpEndDate, 4, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.dtpBegDate, 1, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.CGroupBox1, 0, 5)
+        Me.TableLayoutPanel1.Controls.Add(Me.cgbStringFindOption, 0, 5)
         Me.TableLayoutPanel1.Controls.Add(Me.chkChecked, 3, 4)
-        Me.TableLayoutPanel1.Controls.Add(Me.BtnCancel, 2, 8)
+        Me.TableLayoutPanel1.Controls.Add(Me.BtnCancel, 1, 8)
         Me.TableLayoutPanel1.Controls.Add(Me.chkIgnoreCase, 3, 6)
         Me.TableLayoutPanel1.Controls.Add(Me.lblIgnoreCase, 0, 6)
-        Me.TableLayoutPanel1.Controls.Add(Me.BtnFind, 0, 8)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(11, 29)
+        Me.TableLayoutPanel1.Controls.Add(Me.BtnFind, 3, 8)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(10, 45)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 9
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -153,18 +129,15 @@ Partial Class CFindForm
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(335, 284)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(335, 304)
         Me.TableLayoutPanel1.TabIndex = 6
         '
         'txtEndValue
         '
         Me.txtEndValue.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtEndValue.Location = New System.Drawing.Point(218, 81)
+        Me.txtEndValue.Location = New System.Drawing.Point(218, 80)
         Me.txtEndValue.Name = "txtEndValue"
         Me.txtEndValue.Size = New System.Drawing.Size(114, 20)
         Me.txtEndValue.TabIndex = 14
@@ -172,7 +145,7 @@ Partial Class CFindForm
         'txtBegValue
         '
         Me.txtBegValue.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtBegValue.Location = New System.Drawing.Point(58, 81)
+        Me.txtBegValue.Location = New System.Drawing.Point(58, 80)
         Me.txtBegValue.Name = "txtBegValue"
         Me.txtBegValue.Size = New System.Drawing.Size(114, 20)
         Me.txtBegValue.TabIndex = 13
@@ -182,7 +155,7 @@ Partial Class CFindForm
         Me.lblTo1.AutoSize = True
         Me.lblTo1.BackColor = System.Drawing.Color.Transparent
         Me.TableLayoutPanel1.SetColumnSpan(Me.lblTo1, 2)
-        Me.lblTo1.Location = New System.Drawing.Point(178, 53)
+        Me.lblTo1.Location = New System.Drawing.Point(178, 52)
         Me.lblTo1.Name = "lblTo1"
         Me.TableLayoutPanel1.SetRowSpan(Me.lblTo1, 2)
         Me.lblTo1.Size = New System.Drawing.Size(31, 13)
@@ -191,6 +164,7 @@ Partial Class CFindForm
         '
         'cboTextToSearch
         '
+        Me.cboTextToSearch.AlwaysEditable = False
         Me.cboTextToSearch.BackColor = System.Drawing.Color.White
         Me.cboTextToSearch.BegFindValue = Nothing
         Me.cboTextToSearch.ChangingSearchValueOnly = False
@@ -213,6 +187,7 @@ Partial Class CFindForm
         Me.cboTextToSearch.HideWhenNotEditingOrAdding = False
         Me.cboTextToSearch.IgnoreCase = False
         Me.cboTextToSearch.IntegralHeight = False
+        Me.cboTextToSearch.LimitToList = False
         Me.cboTextToSearch.LinkedLabel = Nothing
         Me.cboTextToSearch.Location = New System.Drawing.Point(56, 27)
         Me.cboTextToSearch.Margin = New System.Windows.Forms.Padding(1)
@@ -249,7 +224,7 @@ Partial Class CFindForm
         Me.dtpEndDate.EditsAllowed = False
         Me.dtpEndDate.ForeColor = System.Drawing.Color.Black
         Me.dtpEndDate.LinkedLabel = Nothing
-        Me.dtpEndDate.Location = New System.Drawing.Point(216, 54)
+        Me.dtpEndDate.Location = New System.Drawing.Point(216, 53)
         Me.dtpEndDate.Margin = New System.Windows.Forms.Padding(1)
         Me.dtpEndDate.Name = "dtpEndDate"
         Me.dtpEndDate.ReadOnlyDp = False
@@ -278,7 +253,7 @@ Partial Class CFindForm
         Me.dtpBegDate.EditsAllowed = False
         Me.dtpBegDate.ForeColor = System.Drawing.Color.Black
         Me.dtpBegDate.LinkedLabel = Nothing
-        Me.dtpBegDate.Location = New System.Drawing.Point(56, 54)
+        Me.dtpBegDate.Location = New System.Drawing.Point(56, 53)
         Me.dtpBegDate.Margin = New System.Windows.Forms.Padding(1)
         Me.dtpBegDate.Name = "dtpBegDate"
         Me.dtpBegDate.ReadOnlyDp = False
@@ -293,21 +268,21 @@ Partial Class CFindForm
         Me.dtpBegDate.ValueIsMandatory = False
         Me.dtpBegDate.ValueIsNullable = False
         '
-        'CGroupBox1
+        'cgbStringFindOption
         '
-        Me.CGroupBox1.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.CGroupBox1.AutoSize = True
-        Me.CGroupBox1.BackColor = System.Drawing.Color.Transparent
-        Me.TableLayoutPanel1.SetColumnSpan(Me.CGroupBox1, 5)
-        Me.CGroupBox1.Controls.Add(Me.RBtnStart)
-        Me.CGroupBox1.Controls.Add(Me.RBtnAnywhere)
-        Me.CGroupBox1.Controls.Add(Me.RBtnExactMatch)
-        Me.CGroupBox1.DisplayOnly = True
-        Me.CGroupBox1.Location = New System.Drawing.Point(105, 129)
-        Me.CGroupBox1.Name = "CGroupBox1"
-        Me.CGroupBox1.Size = New System.Drawing.Size(124, 101)
-        Me.CGroupBox1.TabIndex = 7
-        Me.CGroupBox1.TabStop = False
+        Me.cgbStringFindOption.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.cgbStringFindOption.AutoSize = True
+        Me.cgbStringFindOption.BackColor = System.Drawing.Color.Transparent
+        Me.TableLayoutPanel1.SetColumnSpan(Me.cgbStringFindOption, 5)
+        Me.cgbStringFindOption.Controls.Add(Me.RBtnStart)
+        Me.cgbStringFindOption.Controls.Add(Me.RBtnAnywhere)
+        Me.cgbStringFindOption.Controls.Add(Me.RBtnExactMatch)
+        Me.cgbStringFindOption.DisplayOnly = True
+        Me.cgbStringFindOption.Location = New System.Drawing.Point(105, 128)
+        Me.cgbStringFindOption.Name = "cgbStringFindOption"
+        Me.cgbStringFindOption.Size = New System.Drawing.Size(124, 101)
+        Me.cgbStringFindOption.TabIndex = 7
+        Me.cgbStringFindOption.TabStop = False
         '
         'RBtnExactMatch
         '
@@ -336,7 +311,7 @@ Partial Class CFindForm
         Me.chkChecked.ForeColor = System.Drawing.Color.Black
         Me.chkChecked.IgnoreCase = False
         Me.chkChecked.LinkedLabel = Nothing
-        Me.chkChecked.Location = New System.Drawing.Point(196, 105)
+        Me.chkChecked.Location = New System.Drawing.Point(196, 104)
         Me.chkChecked.Margin = New System.Windows.Forms.Padding(1)
         Me.chkChecked.Name = "chkChecked"
         Me.chkChecked.RightToLeft = System.Windows.Forms.RightToLeft.No
@@ -345,6 +320,17 @@ Partial Class CFindForm
         Me.chkChecked.TabIndex = 8
         Me.chkChecked.Text = "UcCheckBox1"
         Me.chkChecked.Translatable = True
+        '
+        'BtnCancel
+        '
+        Me.BtnCancel.AutoSize = True
+        Me.BtnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.BtnCancel.Location = New System.Drawing.Point(58, 267)
+        Me.BtnCancel.Name = "BtnCancel"
+        Me.BtnCancel.Size = New System.Drawing.Size(100, 30)
+        Me.BtnCancel.TabIndex = 5
+        Me.BtnCancel.Text = "Cancel"
+        Me.BtnCancel.UseVisualStyleBackColor = True
         '
         'chkIgnoreCase
         '
@@ -362,7 +348,7 @@ Partial Class CFindForm
         Me.chkIgnoreCase.ForeColor = System.Drawing.Color.Black
         Me.chkIgnoreCase.IgnoreCase = False
         Me.chkIgnoreCase.LinkedLabel = Nothing
-        Me.chkIgnoreCase.Location = New System.Drawing.Point(196, 234)
+        Me.chkIgnoreCase.Location = New System.Drawing.Point(196, 233)
         Me.chkIgnoreCase.Margin = New System.Windows.Forms.Padding(1)
         Me.chkIgnoreCase.Name = "chkIgnoreCase"
         Me.chkIgnoreCase.RightToLeft = System.Windows.Forms.RightToLeft.No
@@ -378,12 +364,23 @@ Partial Class CFindForm
         Me.lblIgnoreCase.AutoSize = True
         Me.lblIgnoreCase.BackColor = System.Drawing.Color.Transparent
         Me.TableLayoutPanel1.SetColumnSpan(Me.lblIgnoreCase, 2)
-        Me.lblIgnoreCase.Location = New System.Drawing.Point(3, 233)
+        Me.lblIgnoreCase.Location = New System.Drawing.Point(3, 232)
         Me.lblIgnoreCase.Name = "lblIgnoreCase"
         Me.lblIgnoreCase.Size = New System.Drawing.Size(70, 13)
         Me.lblIgnoreCase.TabIndex = 16
         Me.lblIgnoreCase.Text = "Ignore Case?"
         Me.lblIgnoreCase.Visible = False
+        '
+        'BtnFind
+        '
+        Me.BtnFind.AutoSize = True
+        Me.TableLayoutPanel1.SetColumnSpan(Me.BtnFind, 2)
+        Me.BtnFind.Location = New System.Drawing.Point(198, 267)
+        Me.BtnFind.Name = "BtnFind"
+        Me.BtnFind.Size = New System.Drawing.Size(110, 30)
+        Me.BtnFind.TabIndex = 4
+        Me.BtnFind.Text = "Find"
+        Me.BtnFind.UseVisualStyleBackColor = True
         '
         'CLabel1
         '
@@ -392,12 +389,12 @@ Partial Class CFindForm
         Me.CLabel1.DisplayOnly = True
         Me.CLabel1.EditingMode = False
         Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.CLabel1.Location = New System.Drawing.Point(10, 6)
+        Me.CLabel1.Location = New System.Drawing.Point(10, 10)
         Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
         Me.CLabel1.Name = "CLabel1"
-        Me.CLabel1.Size = New System.Drawing.Size(111, 17)
+        Me.CLabel1.Size = New System.Drawing.Size(115, 17)
         Me.CLabel1.TabIndex = 7
-        Me.CLabel1.Text = "Field to Search :"
+        Me.CLabel1.Text = "Field to Search  :"
         Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.CLabel1.Translatable = True
         '
@@ -409,7 +406,7 @@ Partial Class CFindForm
         Me.txtFieldToSearch.EditingMode = False
         Me.txtFieldToSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.txtFieldToSearch.ForeColor = System.Drawing.Color.Black
-        Me.txtFieldToSearch.Location = New System.Drawing.Point(124, 6)
+        Me.txtFieldToSearch.Location = New System.Drawing.Point(124, 10)
         Me.txtFieldToSearch.Margin = New System.Windows.Forms.Padding(1)
         Me.txtFieldToSearch.Name = "txtFieldToSearch"
         Me.txtFieldToSearch.Size = New System.Drawing.Size(103, 17)
@@ -422,16 +419,16 @@ Partial Class CFindForm
         '
         Me.AcceptButton = Me.BtnFind
         Me.CancelButton = Me.BtnCancel
-        Me.ClientSize = New System.Drawing.Size(354, 334)
+        Me.ClientSize = New System.Drawing.Size(357, 353)
         Me.Controls.Add(Me.txtFieldToSearch)
         Me.Controls.Add(Me.CLabel1)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Name = "CFindForm"
-        Me.Text = "Find Field Form"
+        Me.Text = "Search Record Form"
         Me.TableLayoutPanel1.ResumeLayout(false)
         Me.TableLayoutPanel1.PerformLayout
-        Me.CGroupBox1.ResumeLayout(false)
-        Me.CGroupBox1.PerformLayout
+        Me.cgbStringFindOption.ResumeLayout(false)
+        Me.cgbStringFindOption.PerformLayout
         Me.ResumeLayout(false)
         Me.PerformLayout
 
@@ -441,8 +438,6 @@ End Sub
     Friend WithEvents lblLookFor1 As Label
     Friend WithEvents RBtnStart As RadioButton
     Friend WithEvents RBtnAnywhere As RadioButton
-    Friend WithEvents BtnFind As Button
-    Friend WithEvents BtnCancel As Button
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Public WithEvents cboTextToSearch As CaComboBox
     Friend WithEvents lblTo1 As Label
@@ -450,11 +445,13 @@ End Sub
     Friend WithEvents dtpEndDate As CCustomDateTimePicker
     Friend WithEvents dtpBegDate As CCustomDateTimePicker
     Friend WithEvents RBtnExactMatch As RadioButton
-    Friend WithEvents CGroupBox1 As CGroupBox
+    Friend WithEvents cgbStringFindOption As CGroupBox
     Friend WithEvents txtEndValue As TextBox
     Friend WithEvents txtBegValue As TextBox
     Friend WithEvents CLabel1 As CLabel
     Friend WithEvents txtFieldToSearch As CLabel
     Friend WithEvents chkIgnoreCase As UcCheckBox
     Friend WithEvents lblIgnoreCase As Label
+    Friend WithEvents BtnCancel As Button
+    Friend WithEvents BtnFind As Button
 End Class

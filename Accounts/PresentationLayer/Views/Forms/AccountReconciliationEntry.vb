@@ -424,7 +424,7 @@ Namespace PresentationLayer.Views.Forms
                 dataTypeEnum = GetObjectDataType(columnDataType)
                 columnData.FindDataType = dataTypeEnum
                 Dim searchForm As CFindForm
-                searchForm = New CFindForm(DataGridViewReconciliationItems.Columns(columnNo))
+                searchForm = New CFindForm(DataGridViewReconciliationItems) '.Columns(columnNo))
                 Dim screenRectangle As Rectangle
                 Dim formLocation As Point
                 searchForm.SetFieldDescription(DataGridViewReconciliationItems.Columns(columnNo).HeaderText)
