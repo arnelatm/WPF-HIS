@@ -711,10 +711,10 @@ Public Class CtDataGridView
             _previousColumnSearch = _columnNo
             dataTypeEnum = GetObjectDataType(columnDataType)
             'columnData.FindDataType = dataTypeEnum
-            Dim searchForm As CtDataGridFindForm
+            Dim searchForm As CFindForm 'CtDataGridFindForm
             'DgSearch(_columnNo).SearchMode = GetColumnSearchModeType(Columns(_columnNo))
 
-            searchForm = New CtDataGridFindForm(Me, _columnNo)
+            searchForm = New CFindForm(Me) ', _columnNo) 'CtDataGridFindForm(Me, _columnNo)
             Dim screenRectangle As Rectangle
             Dim formLocation As Point
             searchForm.SetFieldDescription(Columns(_columnNo).HeaderText)

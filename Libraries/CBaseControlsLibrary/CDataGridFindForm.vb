@@ -115,50 +115,17 @@ Public Class CDataGridFindForm
                 _dgView.DgSearch(_columnNumber).BegFindValue = dtpBegDate.Value
                 _dgView.DgSearch(_columnNumber).EndFindValue = dtpEndDate.Value
             End If
-            _dgView.DgSearch(_columnNumber).SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
-            _dgView.DgSearch(_columnNumber).BegFindValue = cboTextToSearch.SelectedValue
             If SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
                 _dgView.DgSearch(_columnNumber).SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
                 _dgView.DgSearch(_columnNumber).BegFindValue = cboTextToSearch.SelectedValue
             Else
-                If txtBegValue.Text Is Nothing OrElse txtBegValue.Text = "" Then
-                    _dgView.DgSearch(_columnNumber).BegFindValue = Nothing
-                Else
-                    If dataType = IFindableControl.DataTypeEnum.Decimal Then
-                        Dim value As Decimal
-                        If Not Decimal.TryParse(txtBegValue.Text, value) Then
-                            MessagingLibrary.Messaging.Show(True, "MsgInvalidDecimalValue")
-                            DialogResult = DialogResult.Cancel
-                        Else
-                            _dgView.DgSearch(_columnNumber).BegFindValue = txtBegValue.Text
-                        End If
+                Dim dBegValue As Date? = CDate(_dgView.DgSearch(_columnNumber).BegFindValue)
+                Dim dEndValue As Date? = CDate(_dgView.DgSearch(_columnNumber).EndFindValue)
+                If dBegValue IsNot Nothing Then
+                    If dEndValue Is Nothing Then
+                        _dgView.DgSearch(_columnNumber).EndFindValue = Nothing
                     Else
-                        Dim value As Integer
-                        If Not Integer.TryParse(txtBegValue.Text, value) Then
-                            MessagingLibrary.Messaging.Show(True, "MsgInvalidIntegerValue")
-                        Else
-                            _dgView.DgSearch(_columnNumber).BegFindValue = txtBegValue.Text
-                        End If
-                    End If
-                End If
-                If txtEndValue.Text Is Nothing OrElse txtEndValue.Text = "" Then
-                    _dgView.DgSearch(_columnNumber).EndFindValue = Nothing
-                Else
-                    If dataType = IFindableControl.DataTypeEnum.Decimal Then
-                        Dim value As Decimal
-                        If Not Decimal.TryParse(txtEndValue.Text, value) Then
-                            DialogResult = DialogResult.Cancel
-                            MessagingLibrary.Messaging.Show(True, "MsgInvalidDecimalValue")
-                        Else
-                            _dgView.DgSearch(_columnNumber).BegFindValue = txtEndValue.Text
-                        End If
-                    Else
-                        Dim value As Integer
-                        If Not Integer.TryParse(txtEndValue.Text, value) Then
-                            MessagingLibrary.Messaging.Show(True, "MsgInvalidIntegerValue")
-                        Else
-                            _dgView.DgSearch(_columnNumber).BegFindValue = txtEndValue.Text
-                        End If
+                        _dgView.DgSearch(_columnNumber).EndFindValue = dBegValue
                     End If
                 End If
             End If
