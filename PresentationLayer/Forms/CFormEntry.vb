@@ -88,13 +88,13 @@ Public Class CFormEntry
         Me.Activate()
         Dim allCtrl As New List(Of Control)
         allCtrl = FindControlRecursive(allCtrl, Me)
-        For Each control In allCtrl
-            If TypeOf control Is CDataGridView Then
-                Dim dgv As CDataGridView
-                dgv = DirectCast(control, CDataGridView)
-                dgv.MakeGridSearchable()
-            End If
-        Next
+        'For Each control In allCtrl
+        '    If TypeOf control Is CDataGridView Then
+        '        Dim dgv As CDataGridView
+        '        dgv = DirectCast(control, CDataGridView)
+        '        dgv.MakeGridSearchable()
+        '    End If
+        'Next
         Parent.ResumeDrawing()
     End Sub
 

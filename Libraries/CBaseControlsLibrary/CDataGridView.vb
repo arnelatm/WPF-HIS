@@ -15,7 +15,6 @@ Public Class CDataGridView
     Inherits DataGridView
     Implements IEntryControl, IFindableControl
 
-    'Private _dgvInsertColumnIndex As Integer = -1
     Private _editingMode As Boolean
     Private _translatable As Boolean = True
     Private _firstEditableColumn As Integer = -1
@@ -39,23 +38,22 @@ Public Class CDataGridView
         ShowCellErrors = True
         ShowRowErrors = True
         _origEditMode = EditMode
-        'MakeGridSearchable()
     End Sub
 
-    Public Sub MakeGridSearchable()
-        If Searchable Then
-            If DgSearch Is Nothing Then
-                DgSearch = New List(Of DataGridSearch)
-            End If
-            'DgSearch = New DgSearch
-            Dim i As Integer = 0
-            For Each col In Columns()
-                Dim searchItem As New DataGridSearch(Me, i)
-                DgSearch.Add(searchItem)
-                i += 1
-            Next
-        End If
-    End Sub
+    'Public Sub MakeGridSearchable()
+    '   If Searchable Then
+    '        If DgSearch Is Nothing Then
+    '            DgSearch = New List(Of DataGridSearch)
+    '        End If
+    '        'DgSearch = New DgSearch
+    '        Dim i As Integer = 0
+    '        For Each col In Columns()
+    '            Dim searchItem As New DataGridSearch(Me, i)
+    '            DgSearch.Add(searchItem)
+    '            i += 1
+    '        Next
+    '    End If
+    'End Sub
 
     Public Property Cached As Boolean = False
 
@@ -157,11 +155,6 @@ Public Class CDataGridView
     '    End If
     'End Sub
 
-    'Private Sub dataGridView1_CellLeave(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles Me.CellLeave
-    '    If CurrentCell IsNot Nothing AndAlso TypeOf CurrentCell Is CtDgvDtpCell Then
-    '        EditMode = _origEditMode
-    '    End If
-    'End Sub
 
     Public ReadOnly Property FirstEditableColumn As Integer
         Get
@@ -290,22 +283,11 @@ Public Class CDataGridView
             Dim i = CurrentCell.RowIndex()
             Dim myBindingSource = CType(DataSource, BindingSource)
             Try
-                'If CallByName(myBindingSource.Current, SequenceFieldName, CallType.Get) IsNot Nothing Then
                 If Invoker.GetProperty(myBindingSource.Current, SequenceFieldName) IsNot Nothing Then
                     For Each record In myBindingSource
                         Dim sequence = CallByName(record, SequenceFieldName, CallType.Get)
-                        'Dim sequence = Invoker.GetProperty(record, SequenceFieldName)
                         If sequence > i + 1 Then
                             CallByName(record, SequenceFieldName, CallType.Set, sequence - 1)
-                            'Dim sq = sequence - 1
-                            'sequence = Invoker.GetProperty(record, SequenceFieldName)
-                            'Dim y = record.GetType().InvokeMember("Sequence", Reflection.BindingFlags.GetProperty, Nothing, record, Nothing)
-                            'Dim x = record.GetType().InvokeMember("Sequence", Reflection.BindingFlags.SetProperty, Nothing, record, Nothing)
-                            'record.GetType().InvokeMember("Sequence", Reflection.BindingFlags.SetProperty Or Reflection.BindingFlags.Public Or Reflection.BindingFlags.SetField Or Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.IgnoreCase or Reflection.BindingFlags.Instance Or Reflection.BindingFlags.SetField, Nothing, record, New Object() { 1 })
-                            'Dim x As New Form
-                            'x.GetType().InvokeMember("Text", Reflection.BindingFlags.SetProperty, Nothing, x, New Object() { "MyText" })
-                            ' (sName,  SetPublicNonPublicPropertyFieldFlags , Nothing, oObject, yArguments )
-                            ' Invoker.SetPublicPropertyOnly(record, SequenceFieldName, new Object() { 1 })
                         End If
                     Next
                 End If
@@ -321,18 +303,14 @@ Public Class CDataGridView
         Dim i = CurrentCell.RowIndex()
         Dim myBindingSource = CType(DataSource, BindingSource)
         Try
-            'If CallByName(myBindingSource.Current, SequenceFieldName, CallType.Get) IsNot Nothing Then
             If Invoker.GetProperty(myBindingSource.Current, SequenceFieldName) IsNot Nothing Then
                 For Each o In myBindingSource
                     If o IsNot Nothing Then
-                        'Dim sequence = CallByName(o, SequenceFieldName, CallType.Get)
                         Dim sequence = Invoker.GetProperty(o, SequenceFieldName)
                         If sequence = 0 Then
                             CallByName(o, SequenceFieldName, CallType.Set, i)
-                            'Invoker.SetProperty(o, SequenceFieldName, {i})
                         ElseIf sequence >= i Then
                             CallByName(o, SequenceFieldName, CallType.Set, sequence + 1)
-                            'Invoker.SetProperty(o, SequenceFieldName, {sequence + 1})
                         End If
                     End If
                 Next
@@ -341,9 +319,6 @@ Public Class CDataGridView
 
         End Try
     End Sub
-
-    'Public Property ErrorMessageKey As String = Nothing
-    'Public Property ErrorMessageParameters As Array = Nothing
 
     Protected Overrides Function ProcessDialogKey(ByVal keyData As Keys) As Boolean
         ' handles
@@ -386,48 +361,6 @@ Public Class CDataGridView
         Return Me.ProcessTabKey(keyData)
     End Function
 
-    'Protected Overrides Function ProcessDialogKey(ByVal keyData As Keys) As Boolean ' Extract the key code from the key value.
-    '    Dim key As Keys = keyData And Keys.KeyCode
-    '    If key = Keys.Enter And CurrentCell IsNot Nothing Then
-    '        Dim currentColumnIndex As Int16
-    '        currentColumnIndex = CurrentCell.ColumnIndex()
-    '        If currentColumnIndex = LastEditableColumn And currentColumnIndex < ColumnCount() Then
-    '            If CurrentCell.RowIndex() + 1 < RowCount() Then
-    '                CurrentCell = Me(FirstEditableColumn, CurrentCellAddress.Y + 1)
-    '                Return True
-    '            End If
-    '        End If
-    '        ProcessTabKey(keyData)
-    '        If ErrorMessageKey IsNot Nothing Then
-    '            If ErrorMessageParameters Is Nothing Then
-    '                Messaging.Show(True, ErrorMessageKey)
-    '            Else
-    '                Messaging.ShowPmMessage(True, ErrorMessageKey, ErrorMessageParameters)
-    '            End If
-    '        End If
-    '        ErrorMessageKey = Nothing
-    '        Return True
-    '        'Dim currentColumnIndex As Int16
-    '        'currentColumnIndex = CurrentCell.ColumnIndex()
-    '        'If currentColumnIndex < LastEditableColumn Then
-    '        '    ' Handle the ENTER key as if it were a tab ARROW key
-    '        '    Return ProcessTabKey(keyData)
-    '        'ElseIf currentColumnIndex = LastEditableColumn Then
-    '        '    ' go to next row on the first editable column
-    '        '    If CurrentCell.RowIndex() >= RowCount() Then
-    '        '        CurrentCell = Me(FirstEditableColumn, RowCount() - 1)
-    '        '    Else
-    '        '        Return ProcessTabKey(keyData)
-    '        '    End If
-    '        '    Return True
-    '        'Else
-    '        '    Return MyBase.ProcessDialogKey(keyData)
-    '        'End If
-    '    Else
-    '        Return MyBase.ProcessDialogKey(keyData)
-    '    End If
-    'End Function
-
     Private Sub cDataGridView_DefaultValuesNeeded(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewRowEventArgs) Handles Me.DefaultValuesNeeded
         If (SequenceColumn IsNot Nothing AndAlso SequenceColumn <> "") Then
             If Columns(SequenceColumn) IsNot Nothing Then
@@ -444,49 +377,13 @@ Public Class CDataGridView
         RaiseEvent ChangesMade(Me, EventArgs.Empty)
     End Sub
 
-    'Private Sub DataGridViewJournalItems_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles MyBase.RowsAdded
-    '    Dim x = 1
-    'End Sub
-
-    Private Sub CDataGridView_UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles Me.UserDeletingRow
+    Private Sub CtDataGridView_UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles Me.UserDeletingRow
         If Not EditingMode Then
             Messaging.Show(True, "MsgRowDelNotAllowedInViewMode")
             e.Cancel = True
         End If
     End Sub
 
-    'Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles MyBase.CellClick
-    '    'Try
-    '    '    If EditingMode And CurrentCell IsNot Nothing Then
-    '    '        With CurrentCell
-    '    '            Select Case .OwningColumn.Name.ToLower()
-    '    '                Case $"dgvinsertcolumn"
-    '    '                    'If (CurrentRow.Index() <> NewRowIndex()) Then
-    '    '                    'If Ea IsNot Nothing Then
-    '    '                    '    Ea.PublishEvent(New InsertDgvLine(CurrentRow.Index(), Name))
-    '    '                    'End If
-    '    '                    If .RowIndex() = NewRowIndex() Then
-    '    '                        Beep()
-    '    '                    ElseIf .RowIndex() > 0 Or (.RowIndex() = 0 And FirstRowInsertionEnabled) Then
-    '    '                        Dim myBindingSource = CType(DataSource, BindingSource)
-    '    '                        Dim dataList = myBindingSource.AddNew()
-    '    '                        myBindingSource.RemoveAt(myBindingSource.Count() - 1)
-    '    '                        myBindingSource.Position = .RowIndex
-    '    '                        myBindingSource.Insert(.RowIndex(), dataList)
-    '    '                        ReSequenceDgvAfterInsert()
-    '    '                        CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, CurrentRow.Index() - 1, 0))
-    '    '                    Else
-    '    '                        Messaging.Show(True, "MsgFirstRowInsertionNotAllowed")
-    '    '                    End If
-    '    '                    'End If
-
-    '    '            End Select
-    '    '        End With
-    '    '    End If
-    '    'Catch ex As Exception
-    '    '    Windows.MessageBox.Show("error")
-    '    'End Try
-    'End Sub
 
     Private Sub InsertRow(rowIndex As Int16)
         If rowIndex = NewRowIndex() Then
@@ -505,37 +402,6 @@ Public Class CDataGridView
         'End If
     End Sub
 
-    'Private Sub DataGridView_CellEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles Me.CellEnter
-    '    Dim dgc As DataGridViewCell = Me.Item(e.ColumnIndex, e.RowIndex)
-    '    If dgc IsNot Nothing AndAlso dgc.ReadOnly Then
-    '        SendKeys.Send("{Tab}")
-    '    End If
-    'End Sub
-    'Private Sub AddNewRow()
-    '    Dim myBindingSource = CType(DataSource, BindingSource)
-    '    If myBindingSource IsNot Nothing Then
-    '        Dim row = CurrentRow.Index() + 1
-    '        Try
-    '            myBindingSource.AddNew()
-    '        Catch ex As Exception
-
-    '        End Try
-    '        'myBindingSource.MoveLast()
-    '        If CurrentRow IsNot Nothing AndAlso CurrentRow.DataBoundItem IsNot Nothing Then
-    '            CallByName(CurrentRow.DataBoundItem, "Sequence", CallType.Set, row + 1)
-    '            CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, row - 1, 0))
-    '        End If
-    '        'If CurrentRow IsNot Nothing AndAlso CurrentRow.DataBoundItem IsNot Nothing Then
-    '        '    CallByName(CurrentRow.DataBoundItem, "Sequence", CallType.Set, row + 1)
-    '        '    CurrentCell = Me(FirstEditableColumn, If(CurrentRow.Index() > 0, row - 1, 0))
-    '        'End If
-    '    End If
-    'End Sub
-
-    'Private Sub DataGridView_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles Me.CellValueChanged
-    '    RaiseEvent ChangesMade(Me, EventArgs.Empty)
-    '    CallByName(CurrentRow.Cells("dgvInsColumn"), "Image", CallType.Set, Images.InsertRowImage)
-    'End Sub
 
     Private Sub DataGridView_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles Me.DataError
 
@@ -545,61 +411,20 @@ Public Class CDataGridView
             'Debugger.Break()
             ' ignore error
         Else
-            'Debugger.Break()
-            'Forms.MessageBox.Show("Error happened " & e.Context.ToString())
             If e.Context.HasFlag(DataGridViewDataErrorContexts.Parsing) Then
-                'Forms.MessageBox.Show("Error happened " & e.Context.ToString())
-
                 Dim editControl As Object = Me.EditingControl
                 If TypeOf (editControl) Is CDgvDtpEditingControl Then
                     Dim x As CDgvDtpEditingControl = DirectCast(editControl, CDgvDtpEditingControl)
                     x.InformUserOfInvalidDate()
                 End If
             End If
-            'If e.Context.HasFlag(DataGridViewDataErrorContexts.CurrentCellChange) Then
-            '    Forms.MessageBox.Show("Cell change")
-            'End If
-            'If e.Context.HasFlag(DataGridViewDataErrorContexts.Parsing) Then
-            '    Forms.MessageBox.Show("parsing error")
-            'End If
-            'If e.Context.HasFlag(DataGridViewDataErrorContexts.LeaveControl) Then
-            '    Debugger.Break()
-            '    Forms.MessageBox.Show("leave control error")
-            'End If
-
-            'If (TypeOf (e.Exception) Is ConstraintException) Then
-            '    Debugger.Break()
-            '    Dim view As DataGridView = CType(sender, DataGridView)
-            '    view.Rows(e.RowIndex).ErrorText = "an error"
-            '    view.Rows(e.RowIndex).Cells(e.ColumnIndex).ErrorText = "an error"
-            '    e.ThrowException = False
-            'End If
         End If
-        'End Try
     End Sub
 
     Private Sub DataGridView1_RowHeaderMouseClick(ByVal sender As Object, ByVal e As DataGridViewCellMouseEventArgs) Handles Me.RowHeaderMouseClick
         SelectionMode = DataGridViewSelectionMode.RowHeaderSelect
         Rows(e.RowIndex).Selected = True
     End Sub
-
-    '' Write the method to call the Event, and then use it as you want.
-    'Protected Sub OnParentofGridChanged(ByVal e As EventArgs)
-    '    Dim ParentofGridChangedHandler As EventHandler =
-    '    CType(Me.Events("ParentofGridChangedEvent"), EventHandler)
-    '    If (ParentofGridChangedHandler IsNot Nothing) Then
-    '        ParentofGridChangedHandler.Invoke(Me, e)
-    '    End If
-    'End Sub
-
-    'Private Sub DataGridViewGroupAccesses_CurrentCellChanged(sender As Object, e As EventArgs) Handles MyBase.CurrentCellChanged
-    '    If _dgvInsertColumnIndex <= 0 Then Exit Sub
-    '    If (CurrentRow IsNot Nothing) AndAlso EditingMode AndAlso (_dgvInsertColumnIndex >= 1) Then
-    '        If Images.InsertRowImage <> CurrentRow.Cells(_dgvInsertColumnIndex).Value Then
-    '            CurrentRow.Cells(_dgvInsertColumnIndex).Value = Images.InsertRowImage
-    '        End If
-    '    End If
-    'End Sub
 
     Private Function GetFirstEditableColumn() As Integer
         If _firstEditableColumn < 0 Then
@@ -645,30 +470,6 @@ Public Class CDataGridView
         Return _lastEditableColumn
     End Function
 
-    'Public Function GetEditingValue(cCurrentCell As Object, Optional field As String = "")
-    '    If cCurrentCell IsNot Nothing Then
-    '        Dim dgvControl As Libraries.CBaseControlsLibrary.CDgvComboboxCell
-    '        dgvControl = TryCast(cCurrentCell, Libraries.CBaseControlsLibrary.CDgvComboboxCell)
-    '        If dgvControl IsNot Nothing Then
-    '            If dgvControl.CellEditingControl.SelectedItem IsNot Nothing Then
-    '                Select Case field.ToLower()
-    '                    Case $"code"
-    '                        Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).Code
-    '                    Case $"name"
-    '                        Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).Name
-    '                    Case $"idno"
-    '                        Return DirectCast(DirectCast(cCurrentCell, Libraries.CBaseControlsLibrary.CDgvComboboxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).IdNo
-    '                    Case Else
-    '                        Return cCurrentCell.Value
-    '                End Select
-    '            Else
-    '                Return cCurrentCell.Value
-    '            End If
-    '        End If
-    '    End If
-    '    Return Nothing
-    'End Function
-
     Public Function GetEditingValue(Optional field As String = "")
         If CurrentCell IsNot Nothing Then
             Dim dgvControl As Libraries.CBaseControlsLibrary.CDgvComboBoxCell
@@ -693,202 +494,8 @@ Public Class CDataGridView
         Return Nothing
     End Function
 
-    'Public Sub AddDeleteColumn()
-    '    With Columns
-    '        Dim parentForm = FindForm()
-    '        If GetPropertyValue(parentForm, "Presenter.EditMode") Or GetPropertyValue(parentForm, "Presenter.AddMode") Then
-    '            Dim dgvDelColumn As New DataGridViewImageColumn
-    '            .Insert(.Count, dgvDelColumn)
-    '            dgvDelColumn.Name = "dgvDeleteColumn"
-    '            dgvDelColumn.Image = GlobalResources.SharedResources.Images.DeleteImage
-    '            dgvDelColumn.Width = 30
-    '            dgvDelColumn.HeaderText = "Del."
-    '            _deleteColumnAdded = True
-    '        Else
-    '            _deleteColumnAdded = False
-    '        End If
-    '    End With
-    'End Sub
-    'Public Sub RemoveDeleteColumn()
-    '    With Columns
-    '        If _deleteColumnAdded Then
-    '            .Remove("dgvDeleteColumn")
-    '            _deleteColumnAdded = False
-    '        End If
-    '    End With
-    'End Sub
-    'Private Overloads Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles Me.CellEndEdit
-
-    '    SendKeys.Send("{TAB}")
-    '    SendKeys.Send("{UP}")
-    'End Sub
-
-    'Private Overloads Sub OnKeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
-    '    Try
-    '        If CurrentCell IsNot Nothing Then
-    '            Dim iColumn As Integer = CurrentCell.ColumnIndex
-    '            Dim iRow As Integer = Math.Min(CurrentCell.RowIndex, RowCount() - 1)
-    '            Select Case e.KeyData
-    '                Case Keys.Enter
-    '                    SendKeys.Send("{TAB}")
-    '                    e.Handled = True
-    '                Case Keys.Tab
-    '                    If EditingMode Then
-    '                        If iColumn = Columns.Count() - 1 OrElse iColumn = LastEditableColumn() OrElse iColumn = Columns.IndexOf(Columns("dgvInsertColumn")) Then
-    '                            ' if on the last editable column, move to the first editable column on the next row
-    '                            Dim r = Math.Min(iRow + 1, RowCount() - 1)
-    '                            Dim vc = FirstVisibleColumn
-    '                            Dim ec = FirstEditableColumn
-    '                            Dim c = If(ec > 0, ec, vc)
-    '                            CurrentCell = Me(c, r)
-    '                            e.Handled = True
-    '                        End If
-    '                    End If
-
-    '                Case Else
-    '                    e.Handled = False
-    '            End Select
-    '        End If
-    '    Catch ex As Exception
-    '        Forms.MessageBox.Show(ex.Message)
-    '    End Try
-    '    'Return
-    'End Sub
-
-    'Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, keyData As System.Windows.Forms.Keys) As Boolean
-    '    If msg.WParam.ToInt32() = CInt(Keys.Enter) Then
-    '        SendKeys.Send("{Tab}")
-    '        Return True
-    '    End If
-    '    Return MyBase.ProcessCmdKey(msg, keyData)
-    'End Function
-
-    'Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
-    '    Dim icolumn As Integer = CurrentCell.ColumnIndex
-    '    Dim irow As Integer = CurrentCell.RowIndex
-    '    If keyData = Keys.Enter Then
-    '        If icolumn = Columns.Count - 1 Then
-    '            CurrentCell = Me(FirstVisibleColumn, Math.Min(irow, RowCount() - 1))
-    '        Else
-    '            Dim selected As Boolean = False
-    '            For i = icolumn + 1 To Columns.Count() - 1
-    '                If Me(i, irow).Visible AndAlso Not (Me(i, irow).OwningColumn.Name = "dgvInsertColumn") Then
-    '                    CurrentCell = Me(i, irow)
-    '                    selected = True
-    '                    Exit For
-    '                End If
-    '            Next
-    '            If Not selected Then
-    '                If irow + 1 <= Rows.Count - 1 Then
-    '                    For i = 0 To Columns.Count - 1
-    '                        If Me(i, irow + 1).Visible AndAlso Not (Me(i, irow + 1).OwningColumn.DataPropertyName.ToLower() = "sequence") Then
-    '                            CurrentCell = Me(i, irow + 1)
-    '                            Exit For
-    '                        End If
-    '                    Next
-    '                End If
-    '            End If
-    '        End If
-    '        Return True
-    '    Else
-    '        If keyData = Keys.Down And irow = RowCount() - 1 Then
-    '            Try
-    '                CurrentCell = Me(FirstVisibleColumn, Math.Min(irow, RowCount() - 1))
-    '                If CurrentCell.OwningColumn.DataPropertyName.ToLower() = "sequence" Then
-    '                    CurrentCell.Value = RowCount()
-    '                End If
-    '            Catch ex As Exception
-
-    '            End Try
-
-    '        Else
-    '            Return MyBase.ProcessCmdKey(msg, keyData)
-    '        End If
-    '    End If
-    '    Return Nothing
-    'End Function
-
-    'Protected Overrides Function ProcessDataGridViewKey(ByVal e As System.Windows.Forms.KeyEventArgs) As Boolean
-    '    ' Handle the ENTER key as if it were a tab key.
-    '    If e.KeyCode = Keys.Enter Then
-    '        'Try
-    '        Return Me.ProcessTabKey(e.KeyData)
-    ''        'Catch ex As Exception
-
-    ''        'End Try
-
-    ''    End If
-    ''    'Try
-    ''        Return MyBase.ProcessDataGridViewKey(e)
-    ''    'Catch ex As Exception
-
-    ''    'End Try
-
-    ''End Function
-    ''Private Sub DataGridView_CellEndEdit(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles Me.CellEndEdit
-
-    'Private Sub DataGridView_CellEndEdit(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles Me.CellEndEdit
-    '    If Me.CurrentCell.RowIndex = RowCount Then 'Or Me.CurrentCell.RowIndex = LastEditableColumn Then
-    '        Me.Rows.Add()
-    '    End If
-    'End Sub
-
-    'Private Sub DataGridView_BeginEdit(ByVal sender As Object, ByVal e As DataGridViewCellCancelEventArgs) Handles Me.CellBeginEdit
-    '    If Me.CurrentCell.RowIndex = RowCount() - 1 Then
-    '        If Me.AllowUserToAddRows Then
-    '            AddNewRow()
-    '        End If
-    '    End If
-    'End Sub
-
-    'Public Property GridParentChanged As Boolean
-    '    Set(value As Boolean)
-    '        _GridChangedParent = value
-    '        If value = True Then
-    '            RaiseEvent GridChangedParent()
-    '        End If
-    '    End Set
-    '    Get
-    '        Return _GridChangedParent
-    '    End Get
-    'End Property
-
-    '<Bindable(True)>
-    '<Category("Actions")>
-    '<Description("Clear the data on the Grid View")>
-    '<Browsable(True)>
-    'Public Custom Event ParentofGridChanged As EventHandler
-    '    AddHandler(ByVal value As EventHandler)
-    '        ' Add the delegate to the Component's EventHandlerList Collection
-    '        Me.Events.AddHandler("ParentofGridChangedEvent", value)
-    '    End AddHandler
-
-    '    RemoveHandler(ByVal value As EventHandler)
-    '        ' Remove the delegate from the Component's EventHandlerList Collection
-    '        Me.Events.RemoveHandler("ParentofGridChangedEvent", value)
-    '    End RemoveHandler
-
-    '    RaiseEvent(ByVal sender As Object, ByVal e As System.EventArgs)
-    '        ' Raise the event.
-    '        CType(Me.Events("ParentofGridChangedEvent"), EventHandler).Invoke(sender, e)
-    '    End RaiseEvent
-    'End Event
-
-    Private Sub DataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles Me.EditingControlShowing
-        '    'declare variable(cb) as a combobox
-        '    Dim cb As CaComboBox
-        '    'e represent the editing control in the datagridview
-        '    'the condition is, if the type of e is combobox then set your code for autocomplete
-        '    If TypeOf e.Control Is CaComboBox Then
-        '        cb = e.Control
-        '        'set the dropdown style of a combobox
-        '        cb.DropDownStyle = ComboBoxStyle.DropDown
-        '        'set the property of a combobox to autocomplete mode.
-        '        cb.AutoCompleteMode = AutoCompleteMode.Suggest
-        '        cb.AutoCompleteSource = AutoCompleteSource.ListItems
-        '    End If
-        'End Sub
-        If TypeOf e.Control Is CaComboBox Then
+    Private Sub DataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles MyBase.EditingControlShowing
+        If TypeOf e.Control Is CtDgvComboBoxEditingControl Then
             'declare variable(cb) as a caCombobox
             Dim cb As CaComboBox
             cb = e.Control
@@ -896,12 +503,6 @@ Public Class CDataGridView
             cb.DropDownStyle = ComboBoxStyle.DropDown
             'set the property of a combobox to autocomplete mode.
             cb.AutoCompleteMode = AutoCompleteMode.Suggest
-            'cb.AutoCompleteSource = AutoCompleteSource.ListItems
-            'cb.OverrideDropDownStyleList = False
-            'cb.IntegralHeight = True
-            'cb.AutoSize = False
-            'cb.DropDownStyle = ComboBoxStyle.Simple
-            'cb.MaxDropDownItems = 1
             ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             'cb.DropDownHeight = Height
@@ -920,31 +521,6 @@ Public Class CDataGridView
     '        e.Cancel = False
     '    End If
     'End Sub
-
-    'Public Sub MakeViewable(ViewableControl As Boolean) Implements IEntryControl.MakeViewable
-    '    ' not applicable
-    'End Sub
-
-    'Public Sub MakeSelectable(selectableControl As Boolean) Implements IEntryControl.MakeSelectable
-    '    Enabled = selectableControl
-    'End Sub
-    'Function Clone(Of T As ICloneable)(ByVal listToClone As IList(Of T)) As IList(Of T)
-    '    Return listToClone.[Select](Function(item) CType(item.Clone(), T)).ToList()
-    'End Function
-
-    'Private Function ParseDataSource() As Boolean
-    '    If DataSource Is Nothing Then
-    '        Return False
-    '    End If
-
-    '    If DataSource.[GetType]().Equals(GetType(BindingSource)) Then
-    '        'AssignEvent()
-    '        Dim myBindingSource = CType(DataSource, BindingSource)
-
-    '    End If
-
-    '    Return True
-    'End Function
 
     Private Sub CDataGridView_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles Me.CellEndEdit
         Dim nIndex = CurrentRow.Index
@@ -995,27 +571,6 @@ Public Class CDataGridView
     <Browsable(True)>
     Public Property SecurityKey As String = ""
 
-    'Private Sub Dgv_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles Me.CellFormatting
-    '    If e.Value IsNot Nothing AndAlso TypeOf Columns(e.ColumnIndex).CellTemplate Is DataGridViewCheckBoxCell Then
-    '        If Me(e.ColumnIndex, e.RowIndex).ReadOnly Then
-    '            Me(e.ColumnIndex, e.RowIndex).Style.BackColor = If(CType(e.Value, Boolean), Color.Yellow, Columns(e.ColumnIndex).DefaultCellStyle.BackColor)
-    '        Else
-    '            Me(e.ColumnIndex, e.RowIndex).Style.BackColor = If(CType(e.Value, Boolean), Color.White, Columns(e.ColumnIndex).DefaultCellStyle.BackColor)
-    '        End If
-    '    End If
-    'End Sub
-
-    'Public Function GetControlDescription(Optional defaultDescription As String = Nothing) Implements IEntryControl.GetControlDescription
-    '    Dim description As String
-    '    If LinkedLabel Is Nothing OrElse LinkedLabel.Text Is Nothing OrElse LinkedLabel.Text = "" Then
-    '        description = If(defaultDescription Is Nothing OrElse defaultDescription = "", Name, defaultDescription)
-    '    Else
-    '        description = LinkedLabel.Text
-    '    End If
-    '    Return description
-    'End Function
-
-    'Ends Edit Mode So CellValueChanged Event Can Fire
     Private Sub EndEditMode(sender As System.Object, e As EventArgs) Handles MyBase.CurrentCellDirtyStateChanged
         'if current cell of grid is dirty, commits edit
         If Me.IsCurrentCellDirty Then
@@ -1113,52 +668,55 @@ Public Class CDataGridView
             If Not continueSearch Then
                 _existingFind = False
                 _findColumnNo = hitTestInfo.ColumnIndex
-                FindValue()
+		If _findColumnNo > 0 then
+                   FindValue()
+		End If
             End If
         End If
     End Sub
 
-
-    Public Sub ValidateExpiryDate(ByRef e As DataGridViewCellValidatingEventArgs)
-        Dim value As Date?
+    Public Sub ValidateExpiryDate(ByRef e As DataGridViewCellValidatingEventArgs, Optional AllowBlanks As Boolean = False)
         'Validate the input using the editing format and the display format.
-        e.Cancel = Not Date.TryParseExact(CStr(e.FormattedValue),
+        If AllowBlanks AndAlso (e.FormattedValue.Trim() = "" OrElse e.FormattedValue = "    /  " OrElse e.FormattedValue Is Nothing) Then
+            Me.CurrentCell.Value = Nothing
+        Else
+            Dim value As Date
+            e.Cancel = Not Date.TryParseExact(CStr(e.FormattedValue),
                                                       {"yyyyMM", "yyyy/MM", "yyyy-MM"},
                                                       Nothing,
                                                       DateTimeStyles.None,
                                                       value)
-        If Not e.Cancel Then
-            'Ensure data is displayed using the display format.
-            EditingControl.Text = IIf(value Is Nothing, "", value.ToString("yyyy/MM"))
-        Else
-            Messaging.ShowPmMessage(True, "MsgInvalidDate", {"enteredDate", e.FormattedValue})
+            If Not e.Cancel Then
+                'Ensure data is displayed using the display format.
+                EditingControl.Text = value.ToString("yyyy/MM")
+                If value < Today() Then
+                    If Messaging.Show(True, "AskIfUseExpiredDate", "Are you sure you want to use this expired date?", "Please Confirm!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then
+                        e.Cancel = True
+                    End If
+                End If
+            Else
+                If Me.CurrentCell.Value Is Nothing Or CurrentCell.Value = Date.MinValue Then
+                    Messaging.Show(True, "MsgBlankExpNotAllowed")
+                Else
+                    Messaging.ShowPmMessage(True, "MsgInvalidDate", {"enteredDate", e.FormattedValue})
+                End If
+                'e.Cancel = True
+            End If
         End If
     End Sub
-
-    'Private Property BegFindValue As Object
-    'Private Property SearchPlace As String
-    'Private Property IgnoreCase As Boolean
 
     Private Sub FindValue()
         Dim myForm = FindForm()
         Dim sw As Integer = 0
         Dim pnt As Point
         Dim dataTypeEnum As IFindableControl.DataTypeEnum
-
-        'If TypeOf Columns(columnNo) Is IFindableControl Then
-        ' Dim columnData As IFindableControl = Columns(columnNo)
-        'columnData = Columns(columnNo)
         If _findColumnNo > 0 Then
             Dim columnDataType = Columns(_findColumnNo).ValueType
             _previousColumnSearch = _findColumnNo
             dataTypeEnum = GetObjectDataType(columnDataType)
-            'DgSearch(_findColumnNo).FindDataType = dataTypeEnum
-            'columnData.FindDataType = dataTypeEnum
-            'DgSearch(_findColumnNo).SearchMode = GetColumnSearchModeType(Columns(_findColumnNo))
-            'SearchMode = GetColumnSearchModeType(Columns(_findColumnNo))
-            Dim searchForm As CFindForm 'CDataGridFindForm
+            Dim searchForm As CFindForm 
             FindDataType = dataTypeEnum
-            searchForm = New CFindForm(Me) ', _findColumnNo) ' CDataGridFindForm(Me, _findColumnNo)
+            searchForm = New CFindForm(Me) ', _findColumnNo) 
             Dim screenRectangle As Rectangle
             Dim formLocation As Point
             searchForm.SetFieldDescription(Columns(_findColumnNo).HeaderText)
@@ -1176,16 +734,9 @@ Public Class CDataGridView
                     _existingFind = True
                 End If
                 If dataTypeEnum = IFindableControl.DataTypeEnum.Decimal Or dataTypeEnum = IFindableControl.DataTypeEnum.Integer Then
-                    'DgSearch(_findColumnNo).BegFindValue = searchForm.txtBegValue.Text
-                    'DgSearch(_findColumnNo).EndFindValue = searchForm.txtEndValue.Text
-                    'DgSearch(_findColumnNo).TextToSearch = searchForm.TxtTextToSearch.Text
-                    'DgSearch(_findColumnNo).SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
-                    'ignoreCase = searchForm.chkIgnoreCase.Checked
-                    'If DgSearch(_findColumnNo).BegFindValue <> "" Then
                     SelectionMode = DataGridViewSelectionMode.FullRowSelect
                     ClearSelection()
-                    If BegFindValue = EndFindValue OrElse EndFindValue = "" Then ' DgSearch(_findColumnNo).EndFindValue = "" Then
-                        'Dim begValue As Integer = DgSearch(_findColumnNo).BegFindValue
+                    If BegFindValue = EndFindValue OrElse EndFindValue = "" Then 
                         For Each row As DataGridViewRow In Rows
                             If row.Cells(_findColumnNo).Value = BegFindValue Then
                                 row.Selected = True
@@ -1198,8 +749,6 @@ Public Class CDataGridView
                             End If
                         Next
                     Else
-                        'Dim begValue As Decimal = DgSearch(_findColumnNo).BegFindValue
-                        'Dim endValue As Integer = DgSearch(_findColumnNo).EndFindValue
                         For Each row As DataGridViewRow In Rows
                             If row.Cells(_findColumnNo).Value >= BegFindValue And row.Cells(_findColumnNo).Value <= EndFindValue Then
                                 row.Selected = True
@@ -1213,9 +762,8 @@ Public Class CDataGridView
                         Next
                     End If
                 ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.String Then
-                    Dim searchValue As String = BegFindValue 'DgSearch(_findColumnNo).
+                    Dim searchValue As String = BegFindValue 
                     For Each row As DataGridViewRow In Rows
-                        'If DgSearch(_findColumnNo).SearchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField Then
                         If SearchPlace = IFindableControl.SearchPlaceEnum.AnywhereOnField Then
                             ' search anywhere
                             If IgnoreCase Then
@@ -1275,19 +823,14 @@ Public Class CDataGridView
                             End If
                         End If
                     Next
-                    _previousTextSearch = searchValue ' DgSearch(_findColumnNo).TextToSearch
+                    _previousTextSearch = searchValue 
                     _previousSearchPlace = SearchPlace
                 ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.Date Then
-                    'BegFindValue = searchForm.txtBegValue.Text
-                    'EndFindValue = searchForm.txtEndValue.Text
                     SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
-                    'ignoreCase = searchForm.chkIgnoreCase.Checked
                     If BegFindValue IsNot Nothing Then
                         SelectionMode = DataGridViewSelectionMode.FullRowSelect
                         ClearSelection()
-                        'If DgSearch(_findColumnNo).EndFindValue = "" Then
                         If EndFindValue Is Nothing Then
-                            'Dim begValue As Date = BegFindValue 'DgSearch(_findColumnNo).BegFindValue
                             For Each row As DataGridViewRow In Rows
                                 If row.Cells(_findColumnNo).Value = BegFindValue Then
                                     row.Selected = True
@@ -1300,8 +843,6 @@ Public Class CDataGridView
                                 End If
                             Next
                         Else
-                            'Dim begValue As Decimal = BegFindValue 'DgSearch(_findColumnNo).BegFindValue
-                            'Dim endValue As Integer = EndFindValue 'DgSearch(_findColumnNo).EndFindValue
                             For Each row As DataGridViewRow In Rows
                                 If row.Cells(_findColumnNo).Value >= BegFindValue And row.Cells(_findColumnNo).Value <= EndFindValue Then
                                     row.Selected = True
@@ -1323,210 +864,6 @@ Public Class CDataGridView
                 _existingFind = False
             End If
         End If
-        '    ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.Date Then
-        '        Dim dBegDate As Date? = CallByName(columnData, "BegFindValue", CallType.Get)
-        '        Dim dEndDate As Date? = CallByName(columnData, "EndFindValue", CallType.Get)
-        '        Dim dBDate As Date
-        '        Dim dEDate As Date
-
-        '        If dBegDate Is Nothing Then
-        '        Else
-        '            If dEndDate Is Nothing Then
-        '                dBDate = Convert.ToDateTime(dBegDate)
-        '                dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, dBDate)
-        '                'searchString = fieldName & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & fieldName & " < '" & dEDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
-        '            Else
-        '                dBDate = Convert.ToDateTime(dBegDate)
-        '                dEDate = Convert.ToDateTime(dEndDate)
-        '                'dEDate = DateAndTime.DateAdd(DateInterval.Day, 1, dEDate)
-        '                'searchString = fieldName & " >= '" & dBDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture) & "' and " & fieldName & " < '" & dEDate.ToString("yyyMMdd", CultureInfo.InvariantCulture) & "'"
-        '            End If
-        '        End If
-        '        SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        '        Try
-        '            ClearSelection()
-        '            For Each row As DataGridViewRow In Rows
-        '                Dim colDate As Date = row.Cells(columnNo).Value
-        '                If DateIsBetween(colDate, dBDate, dEDate) Then
-        '                    'If DateIsBetween(colDate, dBegDate, dEndDate) Then
-        '                    row.Selected = True
-        '                    If sw = 0 Then
-        '                        'scroll and move to the first matching record
-        '                        FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
-        '                        _previousSelectedRow = SelectedRows(0).Index
-        '                        sw = 1
-        '                    End If
-        '                    'If colDate.ToString("yyyyMMdd") >= dBDate.ToString("yyyyMMdd") And colDate.ToString("yyyMMdd") < dEDate.ToString("yyyyMMdd") Then
-        '                    'row.Selected = True
-        '                    'If sw = 0 Then
-        '                    '    'scroll and move to the first matching record
-        '                    '    FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
-        '                    '    _previousSelectedRow = SelectedRows(0).Index
-        '                    '    sw = 1
-        '                    'End If
-        '                    'End If
-        '                End If
-        '            Next
-        '            _previousBegDateSearch = dBDate
-        '            _previousEndDateSearch = dEDate
-        '        Catch exc As Exception
-        '            MessageBox.Show(exc.Message)
-        '        End Try
-        '    ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.Decimal Then
-        '        Dim begValue = CallByName(columnData, "BegFindValue", CallType.Get)
-        '        Dim endValue = CallByName(columnData, "EndFindValue", CallType.Get)
-        '        Dim dBegValue As Decimal?
-        '        Dim dEndValue As Decimal?
-        '        If begValue Is Nothing Then
-        '            dBegValue = Nothing
-        '        Else
-        '            dBegValue = Convert.ToDecimal(begValue)
-        '        End If
-        '        If endValue Is Nothing Then
-        '            dEndValue = Nothing
-        '        Else
-        '            dEndValue = Convert.ToDecimal(endValue)
-        '        End If
-        '        SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        '        Try
-        '            ClearSelection()
-        '            For Each row As DataGridViewRow In Rows
-        '                Dim colValue As Decimal? = row.Cells(columnNo).Value
-        '                If dBegValue Is Nothing AndAlso dEndValue Is Nothing Then
-        '                    If colValue Is Nothing Then
-        '                        row.Selected = True
-        '                        If sw = 0 Then
-        '                            'scroll and move to the first matching record
-        '                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
-        '                            sw = 1
-        '                            _previousSelectedRow = row.Index()
-        '                        End If
-        '                    End If
-        '                ElseIf dEndValue Is Nothing Then
-        '                    If colValue >= dBegValue Then
-        '                        row.Selected = True
-        '                        If sw = 0 Then
-        '                            'scroll and move to the first matching record
-        '                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
-        '                            _previousSelectedRow = row.Index()
-        '                            sw = 1
-        '                        End If
-        '                    End If
-        '                ElseIf dBegValue Is Nothing Then
-        '                    If colValue <= dEndValue Then
-        '                        row.Selected = True
-        '                        If sw = 0 Then
-        '                            'scroll and move to the first matching record
-        '                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
-        '                            _previousSelectedRow = row.Index()
-        '                            sw = 1
-        '                        End If
-        '                    End If
-        '                Else
-        '                    If colValue >= dBegValue And colValue <= dEndValue Then
-        '                        'If DateIsBetween(colDate, dBegValue, dEndValue) Then
-        '                        row.Selected = True
-        '                        If sw = 0 Then
-        '                            'scroll and move to the first matching record
-        '                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
-        '                            _previousSelectedRow = row.Index()
-        '                            sw = 1
-        '                        End If
-        '                    End If
-        '                End If
-        '            Next
-        '            _previousBegValueSearch = dBegValue
-        '            _previousEndValueSearch = dEndValue
-        '        Catch exc As Exception
-        '            MessageBox.Show(exc.Message)
-        '        End Try
-        '    ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.Integer Then
-        '        Dim begValue = CallByName(columnData, "BegFindValue", CallType.Get)
-        '        Dim endValue = CallByName(columnData, "EndFindValue", CallType.Get)
-        '        Dim dBegValue As Integer?
-        '        Dim dEndValue As Integer?
-        '        If begValue Is Nothing Then
-        '            dBegValue = Nothing
-        '        Else
-        '            dBegValue = Convert.ToInt32(begValue)
-        '        End If
-        '        If endValue Is Nothing Then
-        '            dEndValue = Nothing
-        '        Else
-        '            dEndValue = Convert.ToInt32(endValue)
-        '        End If
-        '        SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        '        Try
-        '            ClearSelection()
-        '            For Each row As DataGridViewRow In Rows
-        '                Dim colValue As Integer? = row.Cells(columnNo).Value
-        '                If dBegValue Is Nothing AndAlso dEndValue Is Nothing Then
-        '                    If colValue Is Nothing Then
-        '                        row.Selected = True
-        '                        If sw = 0 Then
-        '                            'scroll and move to the first matching record
-        '                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
-        '                            sw = 1
-        '                            _previousSelectedRow = row.Index()
-        '                        End If
-        '                    End If
-        '                ElseIf dEndValue Is Nothing Then
-        '                    If colValue >= dBegValue Then
-        '                        row.Selected = True
-        '                        If sw = 0 Then
-        '                            'scroll and move to the first matching record
-        '                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
-        '                            _previousSelectedRow = row.Index()
-        '                            sw = 1
-        '                        End If
-        '                    End If
-        '                ElseIf dBegValue Is Nothing Then
-        '                    If colValue <= dEndValue Then
-        '                        row.Selected = True
-        '                        If sw = 0 Then
-        '                            'scroll and move to the first matching record
-        '                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
-        '                            _previousSelectedRow = row.Index()
-        '                            sw = 1
-        '                        End If
-        '                    End If
-        '                Else
-        '                    If colValue >= dBegValue And colValue <= dEndValue Then
-        '                        'If DateIsBetween(colDate, dBegValue, dEndValue) Then
-        '                        row.Selected = True
-        '                        If sw = 0 Then
-        '                            'scroll and move to the first matching record
-        '                            FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
-        '                            _previousSelectedRow = row.Index()
-        '                            sw = 1
-        '                        End If
-        '                    End If
-        '                End If
-        '            Next
-        '            _previousBegValueSearch = dBegValue
-        '            _previousEndValueSearch = dEndValue
-        '        Catch exc As Exception
-        '            MessageBox.Show(exc.Message)
-        '        End Try
-        '    ElseIf dataTypeEnum = IFindableControl.DataTypeEnum.Boolean Then
-        '        Dim valueToSearch As Boolean = CallByName(columnData, "BegFindValue", CallType.Get)
-        '        SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        '        ClearSelection()
-        '        For Each row As DataGridViewRow In Rows
-        '            If row.Cells(columnNo).Value = valueToSearch Then
-        '                row.Selected = True
-        '                If sw = 0 Then
-        '                    'scroll and move to the first matching record
-        '                    FirstDisplayedScrollingRowIndex = SelectedRows(0).Index
-        '                    sw = 1
-        '                    _previousSelectedRow = row.Index()
-        '                End If
-        '            End If
-        '        Next
-        '        _previousBegValueSearch = valueToSearch
-        '    End If
-        'End If
-        'End If
     End Sub
 
     Private Function ContinuePreviousSearch() As Integer
@@ -1690,131 +1027,3 @@ Public Class CDataGridView
     End Class
 
 End Class
-
-'Public Class DataRetriever
-'    Implements IDataPageRetriever
-
-'    Private ReadOnly _tableName As String
-'    'Private ReadOnly _command As SqlCommand
-'    Private ReadOnly _columnList As String
-'    'Private ReadOnly _db
-
-'    Public Sub New(tableName As String)
-'        _tableName = tableName
-'    End Sub
-
-'    Public Sub New(tableName As String, Optional pColumnList As String = Nothing, Optional connectionName As String = Nothing)
-'        _db = New Db(connectionName)
-'        Dim connection As New SqlConnection(_db.GetConnectionString())
-'        connection.Open()
-'        _command = connection.CreateCommand()
-'        Me._tableName = tableName
-'        _columnList = pColumnList
-'    End Sub
-
-'    Private rowCountValue As Integer = -1
-
-'    Public ReadOnly Property RowCount() As Integer
-'        Get
-'            ' Return the existing value if it has already been determined.
-'            If Not rowCountValue = -1 Then
-'                Return rowCountValue
-'            End If
-
-'            ' Retrieve the row count from the database.
-'            _command.CommandText = "SELECT COUNT(*) FROM " & _tableName
-'            rowCountValue = CInt(_command.ExecuteScalar())
-'            Return rowCountValue
-'        End Get
-'    End Property
-
-'    Private columnsValue As DataColumnCollection
-
-'    Public ReadOnly Property Columns() As DataColumnCollection
-'        Get
-'            ' Return the existing value if it has already been determined.
-'            If columnsValue IsNot Nothing Then
-'                Return columnsValue
-'            End If
-
-'            ' Retrieve the column information from the database.
-'            ' "Primary_Key,Item_Code,GTin,ItemNameEnglish,Price_Cash,Pack1,Pack2,Pack3"
-'            _command.CommandText = "SELECT " & _columnList & " FROM " & _tableName
-'            Dim adapter As New SqlDataAdapter()
-'            adapter.SelectCommand = _command
-'            Dim table As New DataTable()
-'            table.Locale = System.Globalization.CultureInfo.InvariantCulture
-'            adapter.FillSchema(table, SchemaType.Source)
-'            columnsValue = table.Columns
-'            Return columnsValue
-'        End Get
-'    End Property
-
-'    Private commaSeparatedListOfColumnNamesValue As String = _columnList
-
-'    Private ReadOnly Property CommaSeparatedListOfColumnNames() As String
-'        Get
-'            ' Return the existing value if it has already been determined.
-'            If commaSeparatedListOfColumnNamesValue IsNot Nothing Then
-'                Return commaSeparatedListOfColumnNamesValue
-'            End If
-
-'            ' Store a list of column names for use in the
-'            ' SupplyPageOfData method.
-'            Dim commaSeparatedColumnNames As New System.Text.StringBuilder()
-'            Dim firstColumn As Boolean = True
-'            For Each column As DataColumn In Columns
-'                If Not firstColumn Then
-'                    commaSeparatedColumnNames.Append(", ")
-'                End If
-'                If column.ColumnName.Contains(" ") Then
-'                    commaSeparatedColumnNames.Append("[" & column.ColumnName & "]")
-'                Else
-'                    commaSeparatedColumnNames.Append(column.ColumnName)
-'                End If
-
-'                firstColumn = False
-'            Next
-
-'            commaSeparatedListOfColumnNamesValue =
-'                commaSeparatedColumnNames.ToString()
-'            Return commaSeparatedListOfColumnNamesValue
-'        End Get
-'    End Property
-
-'    ' Declare variables to be reused by the SupplyPageOfData method.
-'    Private columnToSortBy As String
-
-'    Private adapter As New SqlDataAdapter()
-
-'    Public Function SupplyPageOfData(ByVal lowerPageBoundary As Integer, ByVal rowsPerPage As Integer) As DataTable Implements IDataPageRetriever.SupplyPageOfData
-
-'        ' Store the name of the ID column. This column must contain unique
-'        ' values so the SQL below will work properly.
-'        If columnToSortBy Is Nothing Then
-'            columnToSortBy = Me.Columns(0).ColumnName
-'        End If
-
-'        'If Not Me.Columns(columnToSortBy).Unique Then
-'        '    Throw New InvalidOperationException(String.Format(
-'        '        "Column {0} must contain unique values.", columnToSortBy))
-'        'End If
-
-'        ' Retrieve the specified number of rows from the database, starting
-'        ' with the row specified by the lowerPageBoundary parameter.
-'        _command.CommandText = "Select Top " & rowsPerPage & " " &
-'            CommaSeparatedListOfColumnNames & " From " & _tableName &
-'            " WHERE [" & columnToSortBy & "] NOT IN (SELECT TOP " &
-'            lowerPageBoundary & " [" & columnToSortBy & "] From " &
-'            _tableName & " Order By [" & columnToSortBy &
-'            "]) Order By [" & columnToSortBy & "]"
-'        adapter.SelectCommand = _command
-
-'        Dim table As New DataTable()
-'        table.Locale = System.Globalization.CultureInfo.InvariantCulture
-'        adapter.Fill(table)
-'        Return table
-
-'    End Function
-
-'End Class

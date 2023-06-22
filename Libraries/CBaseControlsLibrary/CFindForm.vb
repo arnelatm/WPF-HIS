@@ -226,24 +226,18 @@ Public Class CFindForm
 
     Private Sub SetFormSize()
         If _findableControl.FindDataType = IFindableControl.DataTypeEnum.String Then
-            Height = 270
+            Height = 300
         ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Date Then
-            Height = 160
+            Height = 200
         ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Decimal Or _findableControl.FindDataType = IFindableControl.DataTypeEnum.Integer Then
-            Height = 200 '160
+            Height = 200
         ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Boolean Then
-            Height = 175
-            Width = 200
+            Height = 200
         End If
     End Sub
 
     Private Sub SetupDisplay()
         If _findableControl.FindDataType = IFindableControl.DataTypeEnum.String Then
-            'lblLookFor1.Visible = True
-            'lblLookFor2.Visible = False
-            'lblLookFor3.Visible = False
-            'lblLookFor4.Visible = False
-            'lblLookFor5.Visible = False
             TxtTextToSearch.Visible = True
             cboTextToSearch.Visible = False
             RBtnAnywhere.Visible = True
