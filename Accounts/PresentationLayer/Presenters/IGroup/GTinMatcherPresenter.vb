@@ -56,6 +56,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnUpdateItemDisplay(idNo As Integer)
+            CreateDataSources()
             RecordPositionNumber = GetSortedRecordPosition(idNo)
         End Sub
 
