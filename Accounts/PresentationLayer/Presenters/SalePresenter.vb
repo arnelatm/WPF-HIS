@@ -431,7 +431,7 @@ Namespace PresentationLayer.Presenters
             SetProductUnits(productIdNo)
         End Sub
 
-        Private Sub OnUnitChanged(oldUnit As Int16, newUnit As Int16, bs As BindingSource)
+        Private Sub OnUnitChanged(oldUnit As Int16, newUnit As Int16, bs As BindingSource, formattedValue As String)
             RecomputePrice(oldUnit, newUnit, bs)
         End Sub
 

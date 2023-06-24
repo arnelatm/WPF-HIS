@@ -43,6 +43,9 @@ Public Class CComboBox
 
     End Sub
 
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to True to specify that this control is always editable.")>
     Public Property AlwaysEditable As Boolean = False
 
     <Bindable(True)>

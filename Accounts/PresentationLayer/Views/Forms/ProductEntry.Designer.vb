@@ -53,7 +53,7 @@ Namespace PresentationLayer.Views.Forms
             Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.DataGridViewProductUnits = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
+            Me.DataGridViewProductUnits = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
             Me.dgvUnitQty = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -660,7 +660,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents chkActive As CCheckBox
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents CFlowLayout2 As CFlowLayout
-        Friend WithEvents DataGridViewProductUnits As CtDataGridView
+        Friend WithEvents DataGridViewProductUnits As CDataGridView
         Friend WithEvents txtDateCreated As CTextBox
         Friend WithEvents dgvSequence As CDgvTextColumn
         Friend WithEvents dgvUnitIdNo As CtDgvComboBoxColumn

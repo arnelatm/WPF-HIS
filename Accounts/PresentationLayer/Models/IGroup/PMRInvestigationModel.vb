@@ -18,7 +18,7 @@ Namespace PresentationLayer.Models
     Public Class DoctorsPrescriptionModel
         Inherits PmrInvestigationModel
 
-        Public Property PrescriptionDetails As List(Of PrescriptionDetail)
+        Public Property PrescriptionDetails As List(Of PrescriptionItem)
 
     End Class
 

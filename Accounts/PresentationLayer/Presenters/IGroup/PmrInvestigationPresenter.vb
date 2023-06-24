@@ -144,8 +144,8 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub UpdatePrescriptionDetail(transKey As Int32?)
-            Dim prescriptionDetails As New List(Of PrescriptionDetailModel)
-            prescriptionDetails = _prescriptionDetailsService.GetRecordsWithGroupIdNo(Of PrescriptionDetailModel)(transKey)
+            Dim prescriptionDetails As New List(Of PrescriptionItemModel)
+            prescriptionDetails = _prescriptionDetailsService.GetRecordsWithGroupIdNo(Of PrescriptionItemModel)(transKey)
             GlobalVariables.Mapper.Map(prescriptionDetails, View.PrescriptionDetails)
         End Sub
 

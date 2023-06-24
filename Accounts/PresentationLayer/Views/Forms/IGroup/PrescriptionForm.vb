@@ -1,5 +1,9 @@
 ﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Common.PresentationLayer.Models
+Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
@@ -8,88 +12,22 @@ Namespace PresentationLayer.Views.Forms
     Public Class PrescriptionForm
         Implements IPrescriptionView
 
-        'Public Event GetDoctorPatientsRequested() Implements IPrescriptionView.GetDoctorPatientsRequested
-
-        'Public Event FileNoRequested(ByRef drId As String) Implements IPrescriptionView.FileNoRequested
-
-        'Public Event GetPmrDataAccessRequested(ByRef dataAccessCode As String) Implements IPrescriptionView.GetPmrDataAccessRequested
-
-        Private _prescriptionDetails As New List(Of PrescriptionDetailView)
+        Public Event PrintLabels() Implements IPrescriptionView.PrintLabels
+        Private _prescriptionDetails As New List(Of PrescriptionItemView)
 
         Public Sub New()
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
-            'SingleData = True
-            'QueryOnly = True
-            'DisplaySetup()
+            dgvPrintLabel.AlwaysEditable = True
+            DisallowSaves = True
         End Sub
-
-        'Private Sub DisplaySetup()
-        '    dtpTransDate.Value = Today()
-        'End Sub
-
-        Private Sub AddDgColumn(dgvColumnName As DataGridViewImageColumn, dgvName As String, caption As String)
-            With DataGridViewPrescriptionDetails
-                .Columns.Insert(.Columns.Count, dgvColumnName)
-                dgvColumnName.Image = imgList.Images(0)
-                dgvColumnName.Width = 35
-                dgvColumnName.Name = dgvName
-                dgvColumnName.HeaderText = Messaging.TranslateCaption(caption)
-            End With
-        End Sub
-
-        'Public Property FileNo As Int32 Implements IPrescriptionView.FileNo
-        '    Get
-        '        Return txtFileNo.Text
-        '    End Get
-        '    Set(value As String)
-        '        txtFileNo.Text = value
-        '    End Set
-        'End Property
-
-        'Public Property DoctorName As String Implements IPrescriptionView.DoctorName
-        '    Get
-        '        Return cboDoctorName.GetValue()
-        '    End Get
-        '    Set(value As String)
-        '        cboDoctorName.SetValue(value)
-        '    End Set
-        'End Property
 
         Public ReadOnly Property SeriesDataGridViewTextBoxColumnProperty As DataGridViewTextBoxColumn
             Get
                 Return SeriesDataGridViewTextBoxColumn
             End Get
         End Property
-
-        'Public Property DoctorName As String Implements IPrescriptionVIew.DoctorName
-        '    Get
-        '        Return cboDoctorName.Text
-        '    End Get
-        '    Set(value As String)
-        '        txtDoctorName.Text = value
-        '    End Set
-        'End Property
-
-        'Public Property TransactionDate As Date? Implements IPrescriptionView.TransactionDate
-        '    Get
-        '        Return dtpTransactionDate.Value
-        '    End Get
-        '    Set(value As Date?)
-        '        dtpTransactionDate.Value = value
-        '    End Set
-        'End Property
-
-        'Public Property PmrPatientsDisplay As List(Of PmrPatientDisplayView) Implements IPrescriptionView.PmrPatientsDisplay
-        '    Get
-        '        Return _pmrPatientsDisplay
-        '    End Get
-        '    Set
-        '        _pmrPatientsDisplay = Value
-        '        BindPmrPatientDisplay()
-        '    End Set
-        'End Property
 
         Public Property Series As String Implements IPrescriptionView.Series
             Get
@@ -169,7 +107,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PrescriptionDetails As List(Of PrescriptionDetailView) Implements IPrescriptionView.PrescriptionDetails
+        Public Property PrescriptionDetails As List(Of PrescriptionItemView) Implements IPrescriptionView.PrescriptionDetails
             Get
                 Return _prescriptionDetails
             End Get
@@ -180,13 +118,6 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property DoctorCode As String Implements IPrescriptionView.DoctorCode
-        '    Get
-        '        Throw New NotImplementedException()
-        '    End Get
-        '    Set(value As String)
-        '        Throw New NotImplementedException()
-        '    End Set
-        'End Property
 
         Public Property TransDate As String Implements IPrescriptionView.TransDate
             Get
@@ -210,57 +141,6 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
-        'Private Sub btnRefresh_ClickButtonArea(Sender As Object, e As MouseEventArgs)
-        '    If FileNo IsNot Nothing Then
-        '        RaiseEvent GetDoctorPatientsRequested()
-        '    Else
-        '        PmrPatientsDisplay.Clear()
-        '        DataGridViewPmrPatientDisplay.Refresh()
-        '    End If
-        'End Sub
-
-        'Private Sub PrescriptionDosage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        '    RaiseEvent GetPmrDataAccessRequested(_dataAccessLevel)
-        '    With DataGridViewPmrPatientDisplay
-        '        .DefaultCellStyle.ForeColor = Color.Black
-        '        .BackColor = Color.White
-        '        .AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke
-        '    End With
-        '    Dim drCode As String = ""
-        '    RaiseEvent FileNoRequested(drCode)
-        '    If drCode IsNot Nothing Then
-        '        FileNo = drCode
-        '        RaiseEvent GetDoctorPatientsRequested()
-        '        cboDoctorName.DisplayOnly = True
-        '        'dtpTransactionDate.EditingMode = True
-        '    Else
-        '        'btnEdit.PerformClick()
-        '        cboDoctorName.DisplayOnly = False
-        '        dtpTransactionDate.DisplayOnly = False
-        '    End If
-        'End Sub
-
-        'Private Sub dataGridView1_CellFormatting(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs) Handles DataGridViewPrescriptionDetails.CellFormatting
-        '    For Each myRow As DataGridViewRow In DataGridViewPrescriptionDetails.Rows
-        '        If myRow.Cells("dgvFileType").Value = "Old" Then
-        '            myRow.DefaultCellStyle.ForeColor = Color.Coral
-        '        Else
-        '            myRow.DefaultCellStyle.ForeColor = Color.DarkGreen
-        '        End If
-        '        myRow.DefaultCellStyle.BackColor = Color.White
-        '    Next
-        'End Sub
-
-        'Private Sub dtpTransactionDate_Validated(sender As Object, e As EventArgs) Handles dtpTransactionDate.Validated
-        '    RaiseEvent GetDoctorPatientsRequested()
-        'End Sub
-
-        Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPrescriptionDetails.CellClick
-            With DataGridViewPrescriptionDetails
-                'Dim cForm As New ReportFormIGroup($"PMR Doctors Form.Rpt", FormCulture)
-            End With
-        End Sub
-
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
@@ -278,15 +158,9 @@ Namespace PresentationLayer.Views.Forms
                 }
         End Sub
 
-        'Private Sub cboDoctorName_Validated(sender As Object, e As EventArgs)
-        '    If String.IsNullOrEmpty(cboDoctorName.SelectedValue) Then
-        '        PmrPatientsDisplay = Nothing
-        '        txtFileNo.Text = ""
-        '    Else
-        '        txtFileNo.Text = cboDoctorName.SelectedValue
-        '        RaiseEvent GetDoctorPatientsRequested()
-        '    End If
-        'End Sub
+        Private Sub btnPrintDosageLabels_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrintDosageLabels.ClickButtonArea
+            RaiseEvent PrintLabels()
+        End Sub
 
     End Class
 

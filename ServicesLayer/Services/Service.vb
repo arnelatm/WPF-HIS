@@ -399,7 +399,7 @@ Namespace Services
             Implements IService.GenericUpdateRecordWithIdNo
             'Dim dDataDao = New BaseDao
             'Return dDataDao.GenericUpdateRecordWithIdNo(idNo, tableName, fieldName, value)
-            Return DataDao.GenericUpdateRecordWithIdNo(idNo, tableName, fieldName, value)
+            Return DataDao.GenericUpdateRecordWithIdNo(Of T)(idNo, tableName, fieldName, value)
         End Function
 
         Public Function GetDaoRecords(Optional filter As String = Nothing)

@@ -17,6 +17,13 @@ Public Class CDgvCheckboxCell
         Return copy
     End Function
 
+
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to True to specify that this control is always editable.")>
+    Public Property AlwaysEditable As Boolean = False
+
+
     ' ReSharper disable once LocalizableElement
     <DisplayName("DisplayOnly")>
     <Category("Custom Properties")>
@@ -30,15 +37,17 @@ Public Class CDgvCheckboxCell
             Return _displayOnly
         End Get
         Set
-            _displayOnly = Value
-            If Value Or DisplayOnly Then
-                Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                [ReadOnly] = True
-            Else
-                Style.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                Style.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                [ReadOnly] = False
+            If Not AlwaysEditable Then
+                _displayOnly = Value
+                If Value Or DisplayOnly Then
+                    Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                    Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    [ReadOnly] = True
+                Else
+                    Style.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                    Style.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                    [ReadOnly] = False
+                End If
             End If
         End Set
     End Property
@@ -48,15 +57,17 @@ Public Class CDgvCheckboxCell
             Return _editingMode
         End Get
         Set(val As Boolean)
-            _editingMode = val
-            If val Or DisplayOnly Then
-                Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                [ReadOnly] = True
-            Else
-                Style.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                Style.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                [ReadOnly] = False
+            If Not AlwaysEditable Then
+                _editingMode = val
+                If val Or DisplayOnly Then
+                    Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                    Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    [ReadOnly] = True
+                Else
+                    Style.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                    Style.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                    [ReadOnly] = False
+                End If
             End If
         End Set
     End Property

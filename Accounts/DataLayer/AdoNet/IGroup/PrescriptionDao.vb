@@ -44,7 +44,7 @@ Namespace DataLayer.AdoNet
             Dim data As New Prescription
             data = _db.Read(sql, Make, params).FirstOrDefault()
             'sql = $"select * PrescriptionItem_View order by RowNbr where transKey = @IdNo"
-            Dim piDao As New PrescriptionDetailDao
+            Dim piDao As New PrescriptionItemDao
             data.PrescriptionDetails = piDao.GetRecordsWithGroupIdNo(data.TransKey, "RowNbr")
             'params = {"@trans_key", data.doctorspatients(0).transkey}
             'sql = $"select rownbr, itemnameenglish, dosageenglish, duration from pmrmedicinedetails_view where trans_key = @trans_key order by rownbr"
@@ -98,7 +98,7 @@ Namespace DataLayer.AdoNet
         '    .TransKey = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("Trans_Key"))
         '    }
 
-        Private Shared ReadOnly MakePrescriptionDetail As Func(Of IDataReader, PrescriptionDetail) = Function(reader) New PrescriptionDetail() With
+        Private Shared ReadOnly MakePrescriptionDetail As Func(Of IDataReader, PrescriptionItem) = Function(reader) New PrescriptionItem() With
             {
             .ItemName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ItemName")),
             .Dosage = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Dosage")),
@@ -124,7 +124,7 @@ Namespace DataLayer.AdoNet
     End Class
 
     Public Interface IPrescriptionDao
-        Function GetPrescriptionDetail(productIdNo As Integer) As List(Of PrescriptionDetail)
+        Function GetPrescriptionDetail(productIdNo As Integer) As List(Of PrescriptionItem)
 
     End Interface
 

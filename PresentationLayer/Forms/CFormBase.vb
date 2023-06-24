@@ -13,6 +13,7 @@ Public Class CFormBase
     Public MainFieldsDictionary As New Dictionary(Of String, Object)
     Public GotoTargetRecordWorker As BackgroundWorker(Of String)
     Public ShowWaitForm As BackgroundWorker(Of String)
+    Public DisallowSaves As Boolean = False
     Protected Const TurnOff As Boolean = False
     Protected Shared _resetEvent As AutoResetEvent = New AutoResetEvent(False)
     Protected FirstControl As Control
@@ -166,7 +167,11 @@ Public Class CFormBase
             Else
                 If adding Or editing Then
                     btnQuit.Enabled = False
-                    btnSave.Enabled = True
+                    If DisallowSaves Then
+                        btnSave.Enabled = False
+                    Else
+                        btnSave.Enabled = True
+                    End If
                     btnUndo.Enabled = True
                 Else
                     btnEdit.Enabled = True
@@ -181,7 +186,9 @@ Public Class CFormBase
                 btnPrint.Enabled = False
                 btnQuit.Enabled = False
                 btnFilter.Enabled = False
-                btnSave.Enabled = True
+                If Not DisallowSaves Then
+                    btnSave.Enabled = True
+                End If
                 btnUndo.Enabled = True
             Else
                 btnEdit.Enabled = True
@@ -199,7 +206,9 @@ Public Class CFormBase
                     If adding Then
                         btnUndo.Enabled = True
                     End If
-                    btnSave.Enabled = True
+                    If Not DisallowSaves Then
+                        btnSave.Enabled = True
+                    End If
                 Else
                     btnSave.Enabled = False
                 End If

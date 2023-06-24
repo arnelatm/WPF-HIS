@@ -4,7 +4,7 @@ Imports AATM.Accounts.BusinessLayer
 
 Namespace BusinessLayer
 
-    Public Class PrescriptionDetail
+    Public Class PrescriptionItem
         Inherits AATM.BusinessLayer.BusinessObject
 
         Public Sub New()
@@ -16,6 +16,9 @@ Namespace BusinessLayer
         Property Duration As String
         Property GenericName As String
         Property ItemCode As String
+        Property LabelPrinted As Boolean
+        Property PrescriptionItemIdNo As Int32
+        Property PrintLabel As Boolean
         Property TransKey As Int32
 
         ',[Age]

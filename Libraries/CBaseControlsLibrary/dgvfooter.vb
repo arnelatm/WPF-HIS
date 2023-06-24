@@ -272,8 +272,8 @@ Public Class DgvFooter
         Dim curColumnName As String = _parentDgv.Columns(e.ColumnIndex).Name
         Dim columnAddable As Boolean = _columnsToSum.Contains(curColumnName)
         Dim decLength As Integer = -1
-        If TypeOf (sender) Is CtDataGridView Then
-            Dim dgv As CtDataGridView = sender
+        If TypeOf (sender) Is CDataGridView Then
+            Dim dgv As CDataGridView = sender
             If TypeOf (dgv.Columns(e.ColumnIndex)) Is CDgvDecimalColumn Then
                 Dim col As CDgvDecimalColumn = dgv.Columns(e.ColumnIndex)
                 decLength = col.DecimalPlaces
@@ -296,7 +296,7 @@ Public Class DgvFooter
         For Each c As DataGridViewColumn In CType(sender, DataGridView).Columns.OfType(Of DataGridViewTextBoxColumn)()
             Dim columnAddable As Boolean = _columnsToSum.Contains(c.Name)
             If Not columnAddable Then Continue For
-            Dim dgv As CtDataGridView = sender
+            Dim dgv As CDataGridView = sender
             If TypeOf (dgv.Columns(c.Name)) Is CDgvDecimalColumn Then
                 Dim col As CDgvDecimalColumn = dgv.Columns(c.Name)
                 SumColumn(c.Name, col.DecimalPlaces)

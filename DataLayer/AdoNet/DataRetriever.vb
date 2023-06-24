@@ -125,7 +125,7 @@ Namespace AdoNet
             ' with the row specified by the lowerPageBoundary parameter.
             _command.CommandText = "Select Top " & rowsPerPage & " " &
                                    CommaSeparatedListOfColumnNames & " From " & _tableName &
-                                   " WHERE " & IIf(_dataFilter Is Nothing,"",_dataFilter + " and ") &
+                                   " WHERE " & IIf(_dataFilter Is Nothing OrElse _dataFilter = "", "", _dataFilter + " and ") &
                                    _sortkey & " NOT IN (SELECT TOP " &
                                    lowerPageBoundary & " " & _sortkey & " From [" &
                                    _tableName & "] Order by " & _sortkey &
