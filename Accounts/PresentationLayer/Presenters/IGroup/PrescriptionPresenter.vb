@@ -30,11 +30,14 @@ Namespace PresentationLayer.Presenters
 
         Private Sub OnPrintLabels()
             UpdatePrintableLabels()
+
+            CreateLabels()
+
             Dim printModel As New ReportModel
             Dim reportPrinter As New PrintReportPresenter(Of ReportModel)
             reportPrinter.OnPrintReport("DosageLabel.Rpt", "IGROUPCLINIC", {View.TransKey, "IdNo"})
 
-            ' after printing marked the records as not printable 
+            ' after printing marked the records as not printable so as to avoid duplicate printing of labels
             For Each item As PrescriptionItemView In View.PrescriptionDetails
                 MarkLabelAsNotPrintable(item)
             Next
@@ -57,6 +60,22 @@ Namespace PresentationLayer.Presenters
 
         Private Sub MarkLabelAsNotPrintable(item As PrescriptionItemView)
             _prescriptionDetailsService.GenericUpdateRecordWithIdNo(Of Boolean)(item.PrescriptionItemIdNo, "PMRMedicineDetails", "LabelPrinted", True)
+        End Sub
+
+        Private Sub CreateLabels()
+            Dim labelIdNo As Int32 = Service.GetField(Environment.MachineName, "DosageLabel", "IdNo")
+            If labelIdNo > 0 Then
+                Service.DeleteChildren(labelIdNo, "DosageLabelDetail", "DosageLabelIdNo")
+            Else
+                For Each item As PrescriptionItemView In View.PrescriptionDetails
+                    Dim itemName As String = IIf(item.GenericName = "", item.ItemName, item.GenericName.Trim() + "(" + item.ItemName.Trim() + ")")
+                    Dim dosage As String = item.Dosage
+                    Dim dosageAra As String = dosage
+                    Service.InsertRecord("DosageLabelDetail", {"DosageLabelIdNo", "ItemName", "Dosage", "DosageAra"},
+                                                              {"Integer", "String", "String", "String"},
+                                                              {labelIdNo, itemName, dosage, dosageAra})
+                Next
+            End If
         End Sub
 
         Protected Overrides Sub CreateDataSources()

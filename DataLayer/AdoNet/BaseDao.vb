@@ -92,7 +92,13 @@ Namespace AdoNet
                     " Where " & GetPrimaryFieldName() & " = " & idNo
                 Return GetDb().Delete(sql)
             End If
+        End Function
 
+        Public Function DeleteChildren(parentIdNo As Int32, tableName As String, parentKeyIdName As String) As Int32 _
+            Implements IBaseDao.DeleteChildren
+            Dim sql As String = " Delete FROM [" & tableName & "] " &
+                " Where " & parentKeyIdName & " = " & parentKeyIdName
+            Return GetDb().Delete(sql)
         End Function
 
         'Private Shared Function GetPhysicalTableName(pTableName As String) As String

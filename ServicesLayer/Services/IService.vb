@@ -70,6 +70,7 @@ Namespace Services
         Function UpdateTable(ByRef data As DataTable, groupIdNo As Integer) As Integer
         Function UpdateTvp(dtTable As DataTable) As Integer
         Function GetDtRecords(tableName As String, Optional fields As String = Nothing, Optional filterKey As String = Nothing, Optional sortKey As String = Nothing) As Object
+        Function DeleteChildren(parentIdNo As Integer, tableName As String, parentIdFieldName As String) As Integer
     End Interface
 
 End Namespace

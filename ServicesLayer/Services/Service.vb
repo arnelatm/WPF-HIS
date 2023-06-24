@@ -371,6 +371,11 @@ Namespace Services
             Return DataDao.DeleteRecord(idNo, tableName)
         End Function
 
+        Public Function DeleteChildren(parentIdNo As Int32, tableName As String, parentIdFieldName As String) As Integer _
+            Implements IService.DeleteChildren
+            Return DataDao.DeleteRecord(parentIdNo, tableName, parentIdFieldName)
+        End Function
+
         Public Function DelUpdateTvp(dtTable As DataTable, ByVal groupKey As Integer) As Integer Implements IService.DelUpdateTvp
             Return DataDao.DelUpdateTvp(dtTable, groupKey)
         End Function
