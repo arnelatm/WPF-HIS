@@ -1090,7 +1090,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ToolStripMenuItemPharmacyBarcodePrinting_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPharmacyBarcodePrinting.Click
             Dim args As Object() = {Environment.MachineName, "Workstation"}
-            'PrintReport("BarcodePharmacy.Rpt", $"IGROUP", args)
+            'PrintReport("BarcodePharmacy.Rpt", $"IGROUPCLINIC", args)
         End Sub
 
         Private Sub ToolStripMenuItemGenerateDailyDrugTransferFile_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemGenerateDailyDrugTransferFile.Click
@@ -1187,6 +1187,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ToolStripMenuItemPrescription_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPrescription.Click
             RunForm(Of PrescriptionForm, PrescriptionPresenter(Of PrescriptionModel))()
+        End Sub
+
+        Private Sub ToolStripMenuItemPharmacyReports_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPharmacyReports.Click
+
         End Sub
     End Class
 

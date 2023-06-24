@@ -15,6 +15,12 @@ Public Class CDgvCheckBoxColumn
         CellTemplate = New CDgvCheckboxCell
     End Sub
 
+
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to True to specify that this control is always editable.")>
+    Public Property AlwaysEditable As Boolean = False
+
     <DisplayName("DisplayOnly")>
     <Category("Custom Properties")>
     <DefaultValue(False)>
@@ -27,17 +33,19 @@ Public Class CDgvCheckBoxColumn
             Return _displayOnly
         End Get
         Set(value As Boolean)
-            _editingMode = value
-            If value Then
-                [ReadOnly] = True
-                DefaultCellStyle.BackColor = System.Drawing.Color.Orange 'GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                _displayOnly = True
-            Else
-                [ReadOnly] = False
-                DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                _displayOnly = False
+            If Not AlwaysEditable Then
+                _editingMode = value
+                If value Then
+                    [ReadOnly] = True
+                    DefaultCellStyle.BackColor = System.Drawing.Color.Orange 'GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    _displayOnly = True
+                Else
+                    [ReadOnly] = False
+                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                    _displayOnly = False
+                End If
             End If
         End Set
     End Property
@@ -47,24 +55,25 @@ Public Class CDgvCheckBoxColumn
             Return _editingMode
         End Get
         Set(value As Boolean)
-            _editingMode = value
-            If value Then
-                If DisplayOnly Then
-                    [ReadOnly] = True
-                    DefaultCellStyle.BackColor = System.Drawing.Color.Orange 'GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            If Not AlwaysEditable Then
+                _editingMode = value
+                If value Then
+                    If DisplayOnly Then
+                        [ReadOnly] = True
+                        DefaultCellStyle.BackColor = System.Drawing.Color.Orange 'GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                        DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    Else
+                        [ReadOnly] = False
+                        DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                        DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                        [ReadOnly] = False
+                    End If
                 Else
-                    [ReadOnly] = False
-                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                    [ReadOnly] = False
+                    [ReadOnly] = True
+                    DefaultCellStyle.ForeColor = System.Drawing.Color.Orange 'GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                 End If
-            Else
-                [ReadOnly] = True
-                DefaultCellStyle.ForeColor = System.Drawing.Color.Orange 'GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             End If
-
         End Set
     End Property
 

@@ -17,8 +17,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property Series As String
         Property TransDate As String
         Property TransKey As Integer
-        Property PrescriptionDetails As List(Of PrescriptionDetailView)
-
+        Property PrescriptionDetails As List(Of PrescriptionItemView)
+        Event PrintLabels()
     End Interface
 
 End Namespace

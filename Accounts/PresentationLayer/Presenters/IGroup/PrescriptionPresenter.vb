@@ -1,7 +1,12 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.DataLayer.AdoNet
+Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.DataLayer
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
@@ -9,7 +14,7 @@ Namespace PresentationLayer.Presenters
     Public Class PrescriptionPresenter(Of TM As New)
         Inherits CommonPresenter(Of IPrescriptionView, TM)
 
-        Private _prescriptionDetailsService = New AccountsService("PrescriptionDetail")
+        Private _prescriptionDetailsService = New AccountsService("PrescriptionItem")
 
         Public Sub New(itemView As IPrescriptionView)
             MyBase.New(itemView)
@@ -20,23 +25,43 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "TransKey"
             Service.RestoreConnectionString()
             WithTreeView = False
-
-            'AddHandler View.SaveDosage, AddressOf OnSaveDosage
-            'AddHandler View.PrintDosageLabel, AddressOf OnPrintDosageLabel
+            AddHandler View.PrintLabels, AddressOf OnPrintLabels
         End Sub
 
-        Private Sub OnPrintDosageLabel()
-            Throw New NotImplementedException()
+        Private Sub OnPrintLabels()
+            UpdatePrintableLabels()
+            Dim printModel As New ReportModel
+            Dim reportPrinter As New PrintReportPresenter(Of ReportModel)
+            reportPrinter.OnPrintReport("DosageLabel.Rpt", "IGROUPCLINIC", {View.TransKey, "IdNo"})
+
+            ' after printing marked the records as not printable 
+            For Each item As PrescriptionItemView In View.PrescriptionDetails
+                MarkLabelAsNotPrintable(item)
+            Next
+
         End Sub
 
-        Private Sub OnSaveDosage()
-            Throw New NotImplementedException()
+        Private Sub UpdatePrintableLabels()
+            For Each item As PrescriptionItemView In View.PrescriptionDetails
+                If item.PrintLabel Then
+                    MarkLabelAsPrintable(item)
+                Else
+                    MarkLabelAsNotPrintable(item)
+                End If
+            Next
+        End Sub
+
+        Private Sub MarkLabelAsPrintable(item As PrescriptionItemView)
+            _prescriptionDetailsService.GenericUpdateRecordWithIdNo(Of Boolean)(item.PrescriptionItemIdNo, "PMRMedicineDetails", "LabelPrinted", False)
+        End Sub
+
+        Private Sub MarkLabelAsNotPrintable(item As PrescriptionItemView)
+            _prescriptionDetailsService.GenericUpdateRecordWithIdNo(Of Boolean)(item.PrescriptionItemIdNo, "PMRMedicineDetails", "LabelPrinted", True)
         End Sub
 
         Protected Overrides Sub CreateDataSources()
             Service.SaveConnectionString()
             Service.SetConnectionString($"ISPDATA")
-            'CreateDataSource("Doctor_View", "DoctorName")
             Service.RestoreConnectionString()
         End Sub
 
@@ -60,21 +85,11 @@ Namespace PresentationLayer.Presenters
             Service.RestoreConnectionString()
         End Sub
 
-        'Private Sub OnRowChanged(transKey As Int32)
-        '    UpdatePrescriptionDetail(transKey)
-        'End Sub
-
         Private Sub UpdatePrescriptionDetail(transKey As Int32?)
-            Dim prescriptionDetails As New List(Of PrescriptionDetailModel)
-            prescriptionDetails = _prescriptionDetailsService.GetRecordsWithGroupIdNo(Of PrescriptionDetailModel)(transKey)
+            Dim prescriptionDetails As New List(Of PrescriptionItemModel)
+            prescriptionDetails = _prescriptionDetailsService.GetRecordsWithGroupIdNo(Of PrescriptionItemModel)(transKey)
             GlobalVariables.Mapper.Map(prescriptionDetails, View.PrescriptionDetails)
         End Sub
-
-        'Private Sub PrintReport()
-        '    Dim pmrPatients As New DoctorsPrescriptionModel
-        '    pmrPatients = Service.GetParametrized(Of DoctorsPrescriptionModel)({View.DoctorCode, View.TransactionDate})
-        '    GlobalVariables.Mapper.Map(pmrPatients, View)
-        'End Sub
 
     End Class
 

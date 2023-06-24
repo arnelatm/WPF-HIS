@@ -22,7 +22,7 @@ Namespace PresentationLayer.Views.Forms
         Public Event GTinScanned(GTin As String, bs As BindingSource, ByRef productCode As String) Implements ISaleView.GTinScanned
         Public Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource) Implements ISaleView.ProductUnitSelection
         Public Event ProductUnitEditing(productIdNo As Int32, bs As BindingSource) Implements ISaleView.ProductUnitEditing
-        Public Event UnitChanged(oldUnit As Int16, newUnit As Int16, bs As BindingSource) Implements ISaleView.UnitChanged
+        Public Event UnitChanged(oldUnit As Int16, newUnit As Int16, bs As BindingSource, formattedValue As String) Implements ISaleView.UnitChanged
         Public Event RowChanged(productIdNo As Int32) Implements ISaleView.RowChanged
         Public Sub New()
             MyBase.New()
@@ -610,7 +610,7 @@ Namespace PresentationLayer.Views.Forms
             Dim oldUnitIdNo As Int16 = dgv.CurrentRow.Cells("dgvUnitIdNo").Value
             Dim newUnitIdNo = DirectCast(dgv.CurrentCell, AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxCell).CellEditingControl.SelectedValue
             If oldUnitIdNo <> newUnitIdNo Then
-                RaiseEvent UnitChanged(oldUnitIdNo, newUnitIdNo, bsSaleDetails)
+                RaiseEvent UnitChanged(oldUnitIdNo, newUnitIdNo, bsSaleDetails, e.FormattedValue)
             End If
             'RaiseEvent ProductCodeChanged(code, bsSaleDetails)
             'Dim cProductName = dgv.CurrentRow().Cells("dgvProductName").Value

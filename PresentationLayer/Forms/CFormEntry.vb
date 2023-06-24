@@ -16,6 +16,7 @@ Public Class CFormEntry
     Public MainFieldsDictionary As New Dictionary(Of String, Object)
     Public GotoTargetRecordWorker As BackgroundWorker(Of String)
     Public ShowWaitForm As BackgroundWorker(Of String)
+    Public DisallowSaves As Boolean = False
     Protected Const TurnOff As Boolean = False
     Protected Shared _resetEvent As AutoResetEvent = New AutoResetEvent(False)
     Public FirstControl As Control
@@ -236,7 +237,9 @@ Public Class CFormEntry
             HideNavigatorButtons = True
             If adding Or editing Then
                 btnQuit.Enabled = False
-                btnSave.Enabled = True
+                If Not DisallowSaves Then
+                    btnSave.Enabled = True
+                End If
                 btnUndo.Enabled = True
             Else
                 btnEdit.Enabled = True
@@ -257,7 +260,9 @@ Public Class CFormEntry
                 btnFind.Enabled = False
                 btnQuit.Enabled = False
                 btnFilter.Enabled = False
-                btnSave.Enabled = True
+                If Not DisallowSaves Then
+                    btnSave.Enabled = True
+                End If
                 btnUndo.Enabled = True
             Else
                 btnFirst.Enabled = True
@@ -285,7 +290,9 @@ Public Class CFormEntry
                 btnFind.Enabled = False
                 btnPrint.Enabled = False
                 If adding Or editing Then
-                    btnSave.Enabled = True
+                    If Not DisallowSaves Then
+                        btnSave.Enabled = True
+                    End If
                     btnUndo.Enabled = True
                 Else
                     btnSave.Enabled = False

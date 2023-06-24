@@ -4,16 +4,18 @@
     '''     The Model in MVP design pattern.
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
-    Public Class PrescriptionDetailModel
+    Public Class PrescriptionItemModel
 
-        Property ItemName As String
         Property Dosage As String
         Property Duration As String
         Property GenericName As String
         Property ItemCode As String
-        Property TransKey As Int32
+        Property ItemName As String
+        Property LabelPrinted As Boolean
+        Property PrescriptionItemIdNo As Int32
+        Property PrintLabel As Boolean
         Property RowNbr As Int32
-        Property Print As Boolean
+        Property TransKey As Int32
 
     End Class
 

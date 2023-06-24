@@ -47,6 +47,10 @@ Public Class CtComboBox
 
     Public Shared Property Delete As String = "Delete Selected Text"
     Public ComboBoxValueChanged As Boolean = False
+
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to True to specify that this control is always editable.")>
     Public Property AlwaysEditable As Boolean = False
 
     Private _lastValue As Object = Nothing

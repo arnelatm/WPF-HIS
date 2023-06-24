@@ -36,6 +36,9 @@ Public Class CMaskedTextBox
     <Browsable(True)>
     Public Property MaximumValue As Decimal? = Nothing
 
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to True to specify that this control is always editable.")>
     Public Property AlwaysEditable As Boolean = False
 
     Public Property DateTimePickerParent As Control = Nothing

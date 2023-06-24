@@ -21,8 +21,8 @@ Public Class CrReportViewer
 
     Public Property ReportFileName As String
 
-    Protected Sub GetReportProperties()
-        Dim reportPaths As String = ConfigurationManager.AppSettings.Get("ReportPaths")
+    Protected Sub GetReportProperties(Optional cReportPath As String = "ReportPaths")
+        Dim reportPaths As String = ConfigurationManager.AppSettings.Get(cReportPath)
         Dim uid As String = ConfigurationManager.AppSettings.Get("UID")
         Dim pwd As String = ConfigurationManager.AppSettings.Get("PWD")
         Dim server As String = ConfigurationManager.AppSettings.Get("ServerTranslator")

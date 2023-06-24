@@ -26,7 +26,7 @@ Namespace BusinessLayer
         Public Property Series As String
         Public Property TransDate As String
         Public Property TransKey As Integer
-        Public Property PrescriptionDetails As List(Of PrescriptionDetail)
+        Public Property PrescriptionDetails As List(Of PrescriptionItem)
 
     End Class
 

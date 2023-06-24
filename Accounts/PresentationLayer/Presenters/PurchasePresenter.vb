@@ -459,8 +459,12 @@ Namespace PresentationLayer.Presenters
             SetProductUnits(productIdNo)
         End Sub
 
-        Private Sub OnUnitChanged(oldUnit As Int16, newUnit As Int16, bs As BindingSource)
-            RecomputePrice(oldUnit, newUnit, bs)
+        Private Sub OnUnitChanged(oldUnit As Int16, newUnit As Int16, bs As BindingSource, formattedValue As String)
+            If newUnit = 0 Then
+                Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", formattedValue, "fieldDescription", "Unit"})
+            Else
+                RecomputePrice(oldUnit, newUnit, bs)
+            End If
         End Sub
 
         Private Sub OnRowChanged(productIdNo As Int32)

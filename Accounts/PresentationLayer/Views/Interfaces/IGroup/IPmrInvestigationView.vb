@@ -19,7 +19,7 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface IDoctorsPrescriptionView
         Inherits IPmrInvestigationView
 
-        Property PrescriptionDetails As List(Of PrescriptionDetailView)
+        Property PrescriptionDetails As List(Of PrescriptionItemView)
         Event RowChanged(productIdNo As Integer)
         Event PrintDosageLabel()
         Event SaveDosage()

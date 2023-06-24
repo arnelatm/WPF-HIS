@@ -7,18 +7,22 @@ Namespace DataLayer.AdoNet
     ' Data access object for CbcRetrieval
     ' ** DAO Pattern
 
-    Public Class PrescriptionDetailDao
+    Public Class PrescriptionItemDao
         Inherits AccountsDao
-        Implements IDaoChildUpdateOnly(Of PrescriptionDetail)
+        Implements IDaoChildUpdateOnly(Of PrescriptionItem)
         'Implements IDaoGetRecords(Of PrescriptionDetail), IDaoGetRecord(Of PrescriptionDetail)
 
         Private ReadOnly _db As New Db("IGROUPCLINIC")
+
 
         Const FieldList As String = "Dosage," &
                                     "Duration," &
                                     "GenericName," &
                                     "ItemCode," &
                                     "ItemName," &
+                                    "LabelPrinted," &
+                                    "PrescriptionItemIdNo," &
+                                    "PrintLabel," &
                                     "RowNbr," &
                                     "TransKey"
 
@@ -27,7 +31,7 @@ Namespace DataLayer.AdoNet
         End Function
 
 
-        Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of PrescriptionDetail) Implements IDaoChildUpdateOnly(Of PrescriptionDetail).GetRecordsWithGroupIdNo
+        Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of PrescriptionItem) Implements IDaoChildUpdateOnly(Of PrescriptionItem).GetRecordsWithGroupIdNo
             If idNo Is Nothing OrElse idNo.Equals(DBNull.Value) OrElse idNo = 0 Then
                 Return Nothing
             Else
@@ -44,16 +48,19 @@ Namespace DataLayer.AdoNet
             End If
         End Function
 
-        Private Shared ReadOnly Make As Func(Of IDataReader, PrescriptionDetail) =
+        Private Shared ReadOnly Make As Func(Of IDataReader, PrescriptionItem) =
                                     Function(reader) _
-            New PrescriptionDetail() With {
+            New PrescriptionItem() With {
             .Dosage = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Dosage")),
             .Duration = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Duration")),
             .GenericName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("GenericName")),
             .ItemCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ItemCode")),
             .ItemName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ItemName")),
+            .LabelPrinted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("LabelPrinted")),
+            .PrescriptionItemIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("PrescriptionItemIdNo")),
             .RowNbr = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("RowNbr")),
-            .TransKey = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("Transkey"))
+            .TransKey = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("Transkey")),
+            .PrintLabel = Not (AATM.DataLayer.AdoNet.Extensions.AsBool(reader("LabelPrinted")))
             }
 
         'Public Function GetDaoRecords(Optional filter As String = Nothing) As List(Of PrescriptionDetail) Implements IDaoGetRecords(Of PrescriptionDetail).GetDaoRecords

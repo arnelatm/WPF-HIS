@@ -54,7 +54,7 @@ Public Class CrystalReportPrinter
                 UseDefaultConnection()
             Case $"ISPDATA"
                 UseDefaultConnection()
-            Case $"IGROUP"
+            Case $"IGROUPCLINIC"
                 UseIGroupConnection()
             Case Else
                 MessageBox.Show($"No database connection specified or connection name not recognized.")

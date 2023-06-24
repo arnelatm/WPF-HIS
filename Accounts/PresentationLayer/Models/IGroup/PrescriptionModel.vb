@@ -13,7 +13,7 @@ Public Class PrescriptionModel
     Public Property Series As String
     Public Property TransDate As String
     Public Property TransKey As Integer
-    Public Property PrescriptionDetails As List(Of PrescriptionDetailModel)
+    Public Property PrescriptionDetails As List(Of PrescriptionItemModel)
 
 End Class
 

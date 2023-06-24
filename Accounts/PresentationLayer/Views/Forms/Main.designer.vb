@@ -1338,11 +1338,11 @@ Namespace PresentationLayer.Views.Forms
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ToolStrip.ResumeLayout(False)
             Me.ToolStrip.PerformLayout()
-            Me.AccountsMenu.ResumeLayout(false)
-        Me.AccountsMenu.PerformLayout
-        Me.contextMenuStripMember.ResumeLayout(false)
-        Me.contextMenuStrip1.ResumeLayout(false)
-        Me.ResumeLayout(false)
+            Me.AccountsMenu.ResumeLayout(False)
+            Me.AccountsMenu.PerformLayout()
+            Me.contextMenuStripMember.ResumeLayout(False)
+            Me.contextMenuStrip1.ResumeLayout(False)
+            Me.ResumeLayout(false)
         Me.PerformLayout
 
 End Sub

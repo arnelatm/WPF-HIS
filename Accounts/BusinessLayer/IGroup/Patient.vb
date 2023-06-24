@@ -17,7 +17,7 @@ Namespace BusinessLayer
 
     Public Class PatientPrescription
         Inherits Patient
-        Property PrescriptionDetails As List(Of PrescriptionDetail)
+        Property PrescriptionDetails As List(Of PrescriptionItem)
 
     End Class
 
