@@ -163,6 +163,7 @@ Public Class LoginEntry
 
     Private Sub AfterSuccessfulLogin()
         SaveUserPasswordSetting()
+        GlobalVariables.BranchIdNo = cboBranchIdNo.SelectedValue
     End Sub
 
     Private Sub SaveUserPasswordSetting()

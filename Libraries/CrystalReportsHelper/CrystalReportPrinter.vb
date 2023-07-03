@@ -211,7 +211,7 @@ Public Class CrystalReportPrinter
         Next
     End Sub
 
-    Public Sub PrintReport(Optional copies As Int16 = 1, Optional collate As Boolean = False, Optional startPage As Int16 = 0, Optional endPage As Int16 = 0)
+    Public Sub PrintReport(Optional copies As Integer = 1, Optional collate As Boolean = False, Optional startPage As Integer = 1, Optional endPage As Integer = 0)
         _report.PrintToPrinter(copies, collate, startPage, endPage)
     End Sub
 

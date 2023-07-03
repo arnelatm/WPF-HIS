@@ -907,5 +907,10 @@
     <Build Include="dbo\Views\PMRPrescriptions_View.sql" />
     <Build Include="dbo\Views\PharmacyMedicines_View.sql" />
     <Build Include="dbo\Views\HRAttendenceProcess_ViewOrig.sql" />
+    <Build Include="dbo\Tables\DosageLabelDetail.sql" />
+    <Build Include="dbo\Tables\DosageLabel.sql" />
+    <Build Include="dbo\Views\PrescriptionItem_View.sql" />
+    <Build Include="dbo\Views\PrescriptionDetails_View.sql" />
+    <Build Include="dbo\Tables\report.sql" />
   </ItemGroup>
 </Project>

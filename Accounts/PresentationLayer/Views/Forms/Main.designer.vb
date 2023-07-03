@@ -199,7 +199,6 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemPharmacyBarcodePrinting = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemGenerateDailyDrugTransferFile = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemGenerateDrugAcceptanceFile = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemDosageLabelPrinting = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDoctorsPrescriptions = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemClinicReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemSterilizationLabels = New System.Windows.Forms.ToolStripMenuItem()
@@ -1115,7 +1114,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemPharmacyReports
             '
-            Me.ToolStripMenuItemPharmacyReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPharmacyBarcodePrinting, Me.ToolStripMenuItemGenerateDailyDrugTransferFile, Me.ToolStripMenuItemGenerateDrugAcceptanceFile, Me.ToolStripMenuItemDosageLabelPrinting, Me.ToolStripMenuItemDoctorsPrescriptions})
+            Me.ToolStripMenuItemPharmacyReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPharmacyBarcodePrinting, Me.ToolStripMenuItemGenerateDailyDrugTransferFile, Me.ToolStripMenuItemGenerateDrugAcceptanceFile, Me.ToolStripMenuItemDoctorsPrescriptions})
             Me.ToolStripMenuItemPharmacyReports.Name = "ToolStripMenuItemPharmacyReports"
             resources.ApplyResources(Me.ToolStripMenuItemPharmacyReports, "ToolStripMenuItemPharmacyReports")
             '
@@ -1133,11 +1132,6 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemGenerateDrugAcceptanceFile.Name = "ToolStripMenuItemGenerateDrugAcceptanceFile"
             resources.ApplyResources(Me.ToolStripMenuItemGenerateDrugAcceptanceFile, "ToolStripMenuItemGenerateDrugAcceptanceFile")
-            '
-            'ToolStripMenuItemDosageLabelPrinting
-            '
-            Me.ToolStripMenuItemDosageLabelPrinting.Name = "ToolStripMenuItemDosageLabelPrinting"
-            resources.ApplyResources(Me.ToolStripMenuItemDosageLabelPrinting, "ToolStripMenuItemDosageLabelPrinting")
             '
             'ToolStripMenuItemDoctorsPrescriptions
             '
@@ -1342,10 +1336,10 @@ Namespace PresentationLayer.Views.Forms
             Me.AccountsMenu.PerformLayout()
             Me.contextMenuStripMember.ResumeLayout(False)
             Me.contextMenuStrip1.ResumeLayout(False)
-            Me.ResumeLayout(false)
-        Me.PerformLayout
+            Me.ResumeLayout(False)
+            Me.PerformLayout()
 
-End Sub
+        End Sub
 
 #End Region
 
@@ -1552,7 +1546,6 @@ End Sub
         Friend WithEvents ToolStripMenuItemClinicReports As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemSterilizationLabels As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemReportMaster As ToolStripMenuItem
-        Friend WithEvents ToolStripMenuItemDosageLabelPrinting As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDoctorsPrescriptions As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemPrescription As ToolStripMenuItem
     End Class

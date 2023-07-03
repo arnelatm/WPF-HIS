@@ -30,9 +30,9 @@ Namespace PresentationLayer.Views.Forms
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.imgList = New System.Windows.Forms.ImageList(Me.components)
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
@@ -51,9 +51,11 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvItemName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvGenericName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvDosage = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.DurationDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvTransKey = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvLabelPrinted = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
             Me.dgvPrintLabel = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
+            Me.bsPrescriptionDetails = New System.Windows.Forms.BindingSource(Me.components)
             Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblPatientName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpTransDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
@@ -63,8 +65,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDob = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.btnPrintDosageLabels = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.DurationDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.bsPrescriptionDetails = New System.Windows.Forms.BindingSource(Me.components)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
@@ -86,7 +86,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CFlowLayout2.Location = New System.Drawing.Point(0, 53)
             Me.CFlowLayout2.Name = "CFlowLayout2"
-            Me.CFlowLayout2.Size = New System.Drawing.Size(983, 577)
+            Me.CFlowLayout2.Size = New System.Drawing.Size(983, 499)
             Me.CFlowLayout2.TabIndex = 5
             '
             'TableLayoutPanel1
@@ -126,7 +126,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.Size = New System.Drawing.Size(970, 538)
+            Me.TableLayoutPanel1.Size = New System.Drawing.Size(970, 457)
             Me.TableLayoutPanel1.TabIndex = 17
             '
             'txtGender
@@ -412,7 +412,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPrescriptionDetails.SequenceColumn = "dgvSequence"
             Me.DataGridViewPrescriptionDetails.SequenceFieldName = "Sequence"
             Me.DataGridViewPrescriptionDetails.ShowFooter = False
-            Me.DataGridViewPrescriptionDetails.Size = New System.Drawing.Size(964, 431)
+            Me.DataGridViewPrescriptionDetails.Size = New System.Drawing.Size(964, 350)
             Me.DataGridViewPrescriptionDetails.TabIndex = 11
             Me.DataGridViewPrescriptionDetails.Translatable = True
             '
@@ -503,6 +503,29 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvDosage.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvDosage.Translatable = False
             '
+            'DurationDataGridViewTextBoxColumn
+            '
+            Me.DurationDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+            Me.DurationDataGridViewTextBoxColumn.BegFindValue = Nothing
+            Me.DurationDataGridViewTextBoxColumn.DataPropertyName = "Duration"
+            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+            Me.DurationDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle6
+            Me.DurationDataGridViewTextBoxColumn.EditingMode = False
+            Me.DurationDataGridViewTextBoxColumn.EndFindValue = Nothing
+            Me.DurationDataGridViewTextBoxColumn.FieldDescription = Nothing
+            Me.DurationDataGridViewTextBoxColumn.FieldName = Nothing
+            Me.DurationDataGridViewTextBoxColumn.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.DurationDataGridViewTextBoxColumn.FindEnabled = False
+            Me.DurationDataGridViewTextBoxColumn.HeaderText = "Duration"
+            Me.DurationDataGridViewTextBoxColumn.IgnoreCase = False
+            Me.DurationDataGridViewTextBoxColumn.Name = "DurationDataGridViewTextBoxColumn"
+            Me.DurationDataGridViewTextBoxColumn.ReadOnly = True
+            Me.DurationDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.DurationDataGridViewTextBoxColumn.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.DurationDataGridViewTextBoxColumn.Translatable = False
+            Me.DurationDataGridViewTextBoxColumn.Width = 72
+            '
             'dgvTransKey
             '
             Me.dgvTransKey.DataPropertyName = "TransKey"
@@ -558,6 +581,10 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvPrintLabel.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvPrintLabel.Translatable = False
             Me.dgvPrintLabel.Width = 40
+            '
+            'bsPrescriptionDetails
+            '
+            Me.bsPrescriptionDetails.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PrescriptionItemModel)
             '
             'lblTransactionDate
             '
@@ -726,7 +753,7 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.btnPrintDosageLabels.DesignerSelected = False
             Me.btnPrintDosageLabels.ImageIndex = 0
-            Me.btnPrintDosageLabels.Location = New System.Drawing.Point(3, 547)
+            Me.btnPrintDosageLabels.Location = New System.Drawing.Point(3, 466)
             Me.btnPrintDosageLabels.Name = "btnPrintDosageLabels"
             Me.btnPrintDosageLabels.OriginalImageName = Nothing
             Me.btnPrintDosageLabels.SecurityKey = ""
@@ -764,39 +791,12 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDoctorCode.Translatable = False
             Me.txtDoctorCode.Visible = False
             '
-            'DurationDataGridViewTextBoxColumn
-            '
-            Me.DurationDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.DurationDataGridViewTextBoxColumn.BegFindValue = Nothing
-            Me.DurationDataGridViewTextBoxColumn.DataPropertyName = "Duration"
-            DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
-            Me.DurationDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle6
-            Me.DurationDataGridViewTextBoxColumn.EditingMode = False
-            Me.DurationDataGridViewTextBoxColumn.EndFindValue = Nothing
-            Me.DurationDataGridViewTextBoxColumn.FieldDescription = Nothing
-            Me.DurationDataGridViewTextBoxColumn.FieldName = Nothing
-            Me.DurationDataGridViewTextBoxColumn.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.DurationDataGridViewTextBoxColumn.FindEnabled = False
-            Me.DurationDataGridViewTextBoxColumn.HeaderText = "Duration"
-            Me.DurationDataGridViewTextBoxColumn.IgnoreCase = False
-            Me.DurationDataGridViewTextBoxColumn.Name = "DurationDataGridViewTextBoxColumn"
-            Me.DurationDataGridViewTextBoxColumn.ReadOnly = True
-            Me.DurationDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.DurationDataGridViewTextBoxColumn.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.DurationDataGridViewTextBoxColumn.Translatable = False
-            Me.DurationDataGridViewTextBoxColumn.Width = 72
-            '
-            'bsPrescriptionDetails
-            '
-            Me.bsPrescriptionDetails.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PrescriptionItemModel)
-            '
             'PrescriptionForm
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
-            Me.ClientSize = New System.Drawing.Size(983, 630)
+            Me.ClientSize = New System.Drawing.Size(983, 552)
             Me.Controls.Add(Me.CFlowLayout2)
             Me.Controls.Add(Me.txtDoctorCode)
             Me.Name = "PrescriptionForm"

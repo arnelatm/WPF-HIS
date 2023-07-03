@@ -1,73 +1,72 @@
 ﻿
-
-
-CREATE view [dbo].[PatientProfile_View] as 
-Select a.Branchid,
-a.Trans_key,
-c.series,
-a.registrationtype,
-a.transtype,
-a.transnbr,
-a.billtype,
-a.registrationno,
-a.transdateenglish,
-a.transdatehijri,
-a.doctorid,
-a.insuranceid,
-a.insurancegroupid,
-a.insurancenameenglish,
-a.normaldiscountamt,
-a.previousBalanceAmt,
-a.deductibleamt,
-a.deductiblediscountamt,
-a.extradiscountpercent,
-a.extradiscountamt,
-a.roundoffamt,
-a.billamt,
+CREATE VIEW [dbo].[PatientProfile_View]
+AS
+SELECT a.BranchID,
+a.Trans_Key,
+c.Series,
+a.RegistrationType,
+a.TransType,
+a.TransNbr,
+a.BillType,
+a.RegistrationNo,
+a.TransDateEnglish,
+a.TransDateHijri,
+a.DoctorID,
+a.InsuranceID,
+a.InsuranceGroupID,
+a.InsuranceNameEnglish,
+a.NormalDiscountAmt,
+a.PreviousBalanceAmt,
+a.DeductibleAmt,
+a.DeductibleDiscountAmt,
+a.ExtraDiscountPercent,
+a.ExtraDiscountAmt,
+a.RoundOffAmt,
+a.BillAmt,
 a.remarks,
-c.inssoapno,
-c.inssoapcode,
-c.inscardno,
-a.userid,
-a.machineid,
-convert(datetime,a.create_date) as entry_date,
-b.rownbr,
-b.serviceid,
-b.qty,
-b.saleprice,
-b.costprice,
-b.discountper,
-b.discountamt,
-b.deductibleper,
-b.salestatus,
-b.costpriceperunit,
-d.departmentid,
-c.patientnameenglish,
+c.InsSoapNo,
+c.InsSoapCode,
+c.InsCardNo,
+a.UserID,
+a.MachineID,
+CONVERT(datetime, a.Create_Date) AS entry_date,
+b.RowNbr,
+b.ServiceID,
+b.Qty,
+b.SalePrice,
+b.CostPrice, 
+b.DiscountPer,
+b.DiscountAmt,
+b.DeductiblePer,
+b.SaleStatus,
+b.costPricePerUnit,
+d.DepartmentID,
+c.PatientNameEnglish,
 c.Age,
 c.AgeYMD,
 c.Sex,
 c.CountryIOTA,
 d.ServiceNameEnglish,
-e.EmpNameENglish,
-f.countryNameEng,
+e.EmpNameEnglish,
+f.CountryNameEng,
 c.IqamaNo,
-k.NameEnglish as groupName,
+k.NameEnglish AS groupName,
 h.GroupInsuranceID,
-l.NameEnglish as activeInsName,
+l.NameEnglish AS activeInsName,
 h.UnderInsuranceID,
-m.NameENglish as co_ins_company,
-n.ServiceID as insServiceID,
-n.ServiceNameEnglish as InsServiceNameENglish,
+m.NameEnglish AS co_ins_company,
+n.ServiceID AS insServiceID,
+n.ServiceNameEnglish AS InsServiceNameENglish,
 b.VATAmt,
 a.VATExemption
-from ClinicInvoiceGroup a
-left outer join CLinicInvoiceDetails b on a.Trans_key = b.Group_key and a.BranchId = b.BranchID 
-left outer join PatientDetails c on a.RegistrationNo = c.RegistrationNo and upper(a.RegistrationType) = upper(c.PatientType) and a.BranchID = c.BranchID
-left outer join MedicalServices d on b.ServiceID = d.ServiceID and a.BranchID = d.BranchID 
-left outer join EMployeeDetails e on a.DOctorID=e.EmpId 
-left outer join CountryMaster f on c.CountryIOTA=f.CountryIOTA
-left outer join INsuranceDetails h on a.InsuranceID=h.InsuranceID
-left outer join InsuranceDetails k on a.InsuranceGroupID=k.InsuranceID
-left outer join InsuranceDetails l on h.GroupInsuranceID=l.InsuranceID
-left outer join insuranceDetails m on h.UnderInsuranceID=m.InsuranceID
-left outer join InsuranceServicePRiceList n on b.ServiceID=n.ServiceID and n.InsuranceID = a.InsuranceGroupID
+FROM dbo.ClinicInvoiceGroup AS a
+LEFT OUTER JOIN dbo.ClinicInvoiceDetails AS b ON a.Trans_Key = b.Group_Key AND a.BranchID = b.BranchID
+LEFT OUTER JOIN dbo.PatientDetails AS c ON a.RegistrationNo = c.RegistrationNo AND UPPER(a.RegistrationType) = UPPER(c.PatientType) AND a.BranchID = c.BranchID
+LEFT OUTER JOIN dbo.MedicalServices AS d ON b.ServiceID = d.ServiceID AND a.BranchID = d.BranchID
+LEFT OUTER JOIN dbo.EmployeeDetails AS e ON a.DoctorID = e.EmpID
+LEFT OUTER JOIN dbo.CountryMaster AS f ON c.CountryIOTA = f.CountryIOTA
+LEFT OUTER JOIN dbo.InsuranceDetails AS h ON a.InsuranceID = h.InsuranceID
+LEFT OUTER JOIN dbo.InsuranceDetails AS k ON a.InsuranceGroupID = k.InsuranceID
+LEFT OUTER JOIN dbo.InsuranceDetails AS l ON h.GroupInsuranceID = l.InsuranceID
+LEFT OUTER JOIN dbo.InsuranceDetails AS m ON h.UnderInsuranceID = m.InsuranceID
+LEFT OUTER JOIN dbo.InsuranceServicePriceList AS n ON b.ServiceID = n.ServiceID AND n.InsuranceID = a.InsuranceGroupID

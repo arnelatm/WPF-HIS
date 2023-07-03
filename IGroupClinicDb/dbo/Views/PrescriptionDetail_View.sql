@@ -11,6 +11,9 @@
 
 
 
+
+
+
 CREATE view 	[dbo].[PrescriptionDetail_View] 
 as 
 select 	
@@ -28,7 +31,10 @@ select
 	c.PatientNameEnglish ,
 	c.Age,
 	Iif(c.Sex='M','Male',IIf(c.Sex='F','Female','Unspecified')) as 'Gender',
-	IIf(c.AgeYMD='Y','year(s)',iif(c.AgeYMD='M','month(s)',iif(c.AgeYMD='D','day(s)',''))) as 'AgeYMD'
+	IIf(c.AgeYMD='Y','year(s)',iif(c.AgeYMD='M','month(s)',iif(c.AgeYMD='D','day(s)',''))) as 'AgeYMD',
+	b.LabelPrinted,
+	IIf(b.LabelPrinted=0,0,1) as PrintLabel,
+	b.PrescriptionItemIdNo
 from 	PMRPatientGeneralInfo			A	
 left outer join PMRPrescription_View 	B on a.trans_key=b.Trans_key 
 left outer join PatientDetails 			C on a.registrationno =c.registrationno and a.series=c.series

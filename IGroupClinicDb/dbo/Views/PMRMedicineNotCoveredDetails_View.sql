@@ -1,8 +1,14 @@
 ﻿
-CREATE view 	PMRMedicineNotCoveredDetails_View --EMR_Patient_Medicine_Detail_View
+
+
+
+
+
+CREATE view 	[dbo].[PMRMedicineNotCoveredDetails_View] --EMR_Patient_Medicine_Detail_View
  
 as 
 select		a.*,
+		b.IdNo as PrescriptionItemIdNo,
 		b.RowNBR,
 		b.item_code,
 		b.qty,
@@ -23,7 +29,8 @@ select		a.*,
 		e.DescriptionEnglish as Duration,
 		'PHR' as DepartmentID,
 		g.PharmacyTransNBR,
-		g.Printed  
+		g.Printed,
+		IsNull(b.LabelPrinted,0) as LabelPrinted
 from		PMRMedicineNotCoveredGroup	A
 left outer join	PMRMedicineNotCoveredDetails 	B ON a.Trans_key =b.Group_key 
 left outer join	ItemDetails		C ON B.item_code=C.item_code 

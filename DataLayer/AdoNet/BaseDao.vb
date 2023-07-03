@@ -77,28 +77,26 @@ Namespace AdoNet
             Return GetDb().Scalar(sql, params)
         End Function
 
-        Public Function DeleteRecord(idNo As Int32, tableName As String) As Int32 _
-            Implements IBaseDao.DeleteRecord
+        Public Function DeleteRecord(Of T)(keyFieldValue As T, tableName As String, keyFieldName As String) As Integer Implements IBaseDao.DeleteRecord
+            Dim params() As Object = {"keyFieldValue", keyFieldValue, "keyFieldName", keyFieldName}
             'Dim cTableName = GetPhysicalTableName(tableName)
             If tableName.Right(5) = "_View" Then
                 Dim l As Int16 = Len(tableName)
-                Dim sql As String =
-                    " Delete FROM [" & Left(tableName, Len(tableName) - 5) & "] " &
-                    " Where " & GetPrimaryFieldName() & " = " & idNo
-                Return GetDb().Delete(sql)
+                Dim sql As String = "Delete FROM [" & Left(tableName, Len(tableName) - 5) & "] " & " Where @keyFieldName = @keyFieldName"
+                Return GetDb().scalar(sql, params)
             Else
-                Dim sql As String =
-                    " Delete FROM [" & tableName & "] " &
-                    " Where " & GetPrimaryFieldName() & " = " & idNo
-                Return GetDb().Delete(sql)
+                Dim sql As String = "Delete FROM [" & tableName & "] " & " Where @keyFieldName = @keyFieldName"
+                Return GetDb().Scalar(sql, params)
             End If
         End Function
 
-        Public Function DeleteChildren(parentIdNo As Int32, tableName As String, parentKeyIdName As String) As Int32 _
-            Implements IBaseDao.DeleteChildren
+        Public Function DeleteRecords(Of T)(keyFieldValue As T, tableName As String, keyFieldName As String) As Int32 _
+            Implements IBaseDao.DeleteRecords
             Dim sql As String = " Delete FROM [" & tableName & "] " &
-                " Where " & parentKeyIdName & " = " & parentKeyIdName
-            Return GetDb().Delete(sql)
+                " Where " & keyFieldName & " = @keyFieldValue"
+            Dim db = GetDb()
+            Dim params() As Object = {"@keyFieldValue", keyFieldValue}
+            Return GetDb().Scalar(sql, params)
         End Function
 
         'Private Shared Function GetPhysicalTableName(pTableName As String) As String
@@ -1303,8 +1301,11 @@ Namespace AdoNet
                     parameters.Add(DateTime.Parse(value))
                 ElseIf fieldTypes(i) = "Decimal" Then
                     parameters.Add(Decimal.Parse(value))
-                ElseIf fieldTypes(i) = "Integer" Then
+                ElseIf fieldTypes(i) = "Integer" OrElse fieldTypes(i) = "Int32" OrElse fieldTypes(i) = "Int16" Then
                     parameters.Add(Integer.Parse(value))
+                Else
+                    Messaging.Show("Invalid data Type <" & fieldTypes(i) & ">.")
+                    Debugger.Break()
                 End If
 
                 i = i + 1
@@ -1367,6 +1368,20 @@ Namespace AdoNet
 
         Public Function GetDataValue(sqlCommand As String) As Object
             Return GetDb().Scalar(sqlCommand)
+        End Function
+
+        Public Function DeleteRecord(idNo As Integer, tableName As String) As Integer Implements IBaseDao.DeleteRecord
+            Dim params() As Object = {"@IdNo", idNo}
+            Dim sql As String
+            'Dim cTableName = GetPhysicalTableName(tableName)
+            If tableName.Right(5) = "_View" Then
+                Dim l As Int16 = Len(tableName)
+                sql = "Delete From [" & Left(tableName, Len(tableName) - 5) & "] " & " Where IdNo = " & idNo
+                Return GetDb().scalar(sql, params)
+            Else
+                sql = "Delete From [" & tableName & "] " & " Where IdNo = @IdNo"
+            End If
+            Return GetDb().Scalar(Sql, params)
         End Function
 
     End Class

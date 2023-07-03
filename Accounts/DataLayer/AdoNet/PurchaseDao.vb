@@ -1,4 +1,5 @@
 ﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Common.BusinessLayer
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.GlobalFuncNSub
@@ -12,6 +13,7 @@ Namespace DataLayer.AdoNet
         Implements IDao(Of Purchase), IPurchaseDao
 
         Private Const FieldList = "Amount," &
+                                  "BranchIdNo," &
                                   "Cancelled," &
                                   "DateCreated," &
                                   "DueDate," &
@@ -31,9 +33,7 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordByIdNo(idNo) As Purchase _
         Implements IDao(Of Purchase).GetRecordByIdNo
-            Dim sql As String = " SELECT Amount,Cancelled,DateCreated,DueDate,IdNo,InvoiceDate,InvoiceNo,Posted,SupplierIdNo,TransactionDate,VatAmount,VatNumber,WarehouseIdNo" &
-                    " FROM [Purchase]" &
-                    " WHERE IdNo = @IdNo"
+            Dim sql As String = " SELECT " & FieldList & " FROM [Purchase]" & " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
             If data IsNot Nothing Then
@@ -55,6 +55,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     "UPDATE [Purchase] Set " &
                     "Amount = @Amount," &
+                    "BranchIdNo = @BranchIdNo," &
                     "Cancelled = @Cancelled," &
                     "DueDate = @DueDate," &
                     "InvoiceDate = @InvoiceDate," &
@@ -73,14 +74,15 @@ Namespace DataLayer.AdoNet
             Implements IDao(Of Purchase).AddRecord
             Dim sql As String =
                     " INSERT INTO [Purchase] " &
-                    " (Amount,Cancelled,DueDate,InvoiceDate,InvoiceNo,Posted,SupplierIdNo,TransactionDate,VatAmount,VatNumber,WarehouseIdNo)" &
-                    " VALUES (@Amount,@Cancelled,@DueDate,@InvoiceDate,@InvoiceNo,@Posted,@SupplierIdNo,@TransactionDate,@VatAmount,@VatNumber,@WarehouseIdNo)"
+                    " (Amount,BranchIdNo,Cancelled,DueDate,InvoiceDate,InvoiceNo,Posted,SupplierIdNo,TransactionDate,VatAmount,VatNumber,WarehouseIdNo)" &
+                    " VALUES (@Amount,@BranchIdNo,@Cancelled,@DueDate,@InvoiceDate,@InvoiceNo,@Posted,@SupplierIdNo,@TransactionDate,@VatAmount,@VatNumber,@WarehouseIdNo)"
             Return Db.Insert(sql, Take(Purchase))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, Purchase) =
                                     Function(reader) _
             New Purchase() With {.Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
+                                  .BranchIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("BranchIdNo")),
                                   .Cancelled = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cancelled")),
                                   .DueDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("DueDate")),
                                   .IdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("IdNo")),
@@ -97,6 +99,7 @@ Namespace DataLayer.AdoNet
         Private Function Take(Purchase As Purchase) As Object()
             Return New Object() {
                                     "Amount", Purchase.Amount,
+                                    "BranchIdNo", Purchase.BranchIdNo,
                                     "Cancelled", Purchase.Cancelled,
                                     "DueDate", Purchase.DueDate,
                                     "IdNo", Purchase.IdNo,

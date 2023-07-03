@@ -127,7 +127,6 @@ Partial Class LoginEntry
         '
         'chkSaveUserNameAndPassword
         '
-        Me.chkSaveUserNameAndPassword.AlwaysEditable = False
         Me.chkSaveUserNameAndPassword.BackColor = System.Drawing.Color.White
         Me.chkSaveUserNameAndPassword.BegFindValue = Nothing
         Me.chkSaveUserNameAndPassword.DisplayOnly = False
@@ -228,7 +227,6 @@ Partial Class LoginEntry
         '
         'cboBranchIdNo
         '
-        Me.cboBranchIdNo.AlwaysEditable = False
         Me.cboBranchIdNo.BackColor = System.Drawing.Color.White
         Me.cboBranchIdNo.BegFindValue = Nothing
         Me.cboBranchIdNo.ChangingSearchValueOnly = False

@@ -1,4 +1,6 @@
-﻿CREATE View PMRPrescription_View
+﻿
+
+CREATE View [dbo].[PMRPrescription_View]
  
 as
 SELECT * FROM PMRPharmacyMedicineNotCoveredPrint_View

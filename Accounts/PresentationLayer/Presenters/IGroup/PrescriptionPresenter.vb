@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.DataLayer.AdoNet
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
@@ -8,6 +9,7 @@ Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.DataLayer
 Imports AATM.Libraries.GlobalFuncNSub
+Imports Telerik.WinControls.UI
 
 Namespace PresentationLayer.Presenters
 
@@ -15,16 +17,16 @@ Namespace PresentationLayer.Presenters
         Inherits CommonPresenter(Of IPrescriptionView, TM)
 
         Private _prescriptionDetailsService = New AccountsService("PrescriptionItem")
+        Private _computerName As String
+        Private _labelIdNo As Int32
 
         Public Sub New(itemView As IPrescriptionView)
             MyBase.New(itemView)
             Service = New AccountsService("Prescription")
-            Service.SaveConnectionString()
-            Service.SetConnectionString($"IGROUPCLINIC")
             TableName = "Prescription_View"
             SortOrderKey = "TransKey"
-            Service.RestoreConnectionString()
             WithTreeView = False
+            _computerName = Environment.MachineName
             AddHandler View.PrintLabels, AddressOf OnPrintLabels
         End Sub
 
@@ -35,7 +37,7 @@ Namespace PresentationLayer.Presenters
 
             Dim printModel As New ReportModel
             Dim reportPrinter As New PrintReportPresenter(Of ReportModel)
-            reportPrinter.OnPrintReport("DosageLabel.Rpt", "IGROUPCLINIC", {View.TransKey, "IdNo"})
+            reportPrinter.OnPrintReport("DosageLabel.Rpt", "IGROUPCLINIC", {_labelIdNo, "LabelIdNo"})
 
             ' after printing marked the records as not printable so as to avoid duplicate printing of labels
             For Each item As PrescriptionItemView In View.PrescriptionDetails
@@ -63,26 +65,41 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub CreateLabels()
-            Dim labelIdNo As Int32 = Service.GetField(Environment.MachineName, "DosageLabel", "IdNo")
-            If labelIdNo > 0 Then
-                Service.DeleteChildren(labelIdNo, "DosageLabelDetail", "DosageLabelIdNo")
-            Else
-                For Each item As PrescriptionItemView In View.PrescriptionDetails
-                    Dim itemName As String = IIf(item.GenericName = "", item.ItemName, item.GenericName.Trim() + "(" + item.ItemName.Trim() + ")")
-                    Dim dosage As String = item.Dosage
+            _labelIdNo = Service.GetField(Of Int32, String)(_computerName, "DosageLabel", "ComputerName", "IdNo")
+            Dim retVal As Int32
+            If _labelIdNo > 0 Then
+                retVal = Service.DeleteRecords(Of Int32)(_labelIdNo, "DosageLabelDetail", "DosageLabelIdNo")
+                If retVal >= 0 Then
+                    retVal = Service.DeleteRecord(Of Int32)(_labelIdNo, "DosageLabel", "IdNo")
+                End If
+            End If
+
+            Service.InsertRecord("DosageLabel", {"ComputerName", "PrescriptionIdNo", "PatientName", "FileNo", "Age", "AgeYmd", "Gender", "DoctorName"},
+                                                {"String", "Integer", "String", "Integer", "Integer", "String", "String", "String"},
+                                                {_computerName, View.TransKey, View.PatientName, View.FileNo, Val(View.Age), View.AgeYmd, Left(View.Gender, 1), View.DoctorName})
+            _labelIdNo = Service.GetField(Of Int32, String)(_computerName, "DosageLabel", "ComputerName", "IdNo")
+            For Each item As PrescriptionItemView In View.PrescriptionDetails
+                If item.PrintLabel Then
+                    Dim itemName As String
+                    Dim dosage As String = item.Dosage.Trim() + IIf(item.Duration Is Nothing OrElse item.Duration = "", "", " for " & item.Duration)
                     Dim dosageAra As String = dosage
+                    If item.GenericName Is Nothing OrElse item.GenericName = "" Then
+                        itemName = item.ItemName
+                    Else
+                        itemName = item.GenericName.Trim() + " (" + item.ItemName.Trim() + ")"
+                    End If
                     Service.InsertRecord("DosageLabelDetail", {"DosageLabelIdNo", "ItemName", "Dosage", "DosageAra"},
                                                               {"Integer", "String", "String", "String"},
-                                                              {labelIdNo, itemName, dosage, dosageAra})
-                Next
-            End If
+                                                              {_labelIdNo, itemName, dosage, dosageAra})
+                End If
+            Next
         End Sub
 
-        Protected Overrides Sub CreateDataSources()
-            Service.SaveConnectionString()
-            Service.SetConnectionString($"ISPDATA")
-            Service.RestoreConnectionString()
-        End Sub
+        'Protected Overrides Sub CreateDataSources()
+        '    Service.SaveConnectionString()
+        '    Service.SetConnectionString($"ISPDATA")
+        '    Service.RestoreConnectionString()
+        'End Sub
 
         Private Sub UpdateData()
             Dim prescriptionModel As New PrescriptionModel

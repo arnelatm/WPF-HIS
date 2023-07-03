@@ -13,6 +13,8 @@ Namespace Services
         Function CountRecordWith3Key(Of TS1, TS2, TS3)(tableName As String, searchFieldName1 As String, searchFieldName2 As String, searchFieldName3 As String, searchValue1 As TS1, searchValue2 As TS2, searchValue3 As TS3) As Integer
         Function CountRecordWithKey(Of TS1)(tableName As String, searchFieldName As String, searchValue As TS1) As Integer
         Function DeleteRecord(idNo As Int32, tableName As String) As Integer
+        Function DeleteRecord(Of T)(keyFieldValue As T, tableName As String, keyFieldName As String) As Integer
+        Function DeleteRecords(Of T)(keyFieldValue As T, tableName As String, keyFieldName As String) As Integer
         Function DelUpdateTvp(dtTable As DataTable, groupKey As Integer) As Integer
         Function ExecuteTvpSp(ByRef userProcedureName As String, dtTable As DataTable) As Integer
         Function FieldExistInTable(ByVal tableName As String, ByVal fieldName As String) As Boolean
@@ -70,7 +72,7 @@ Namespace Services
         Function UpdateTable(ByRef data As DataTable, groupIdNo As Integer) As Integer
         Function UpdateTvp(dtTable As DataTable) As Integer
         Function GetDtRecords(tableName As String, Optional fields As String = Nothing, Optional filterKey As String = Nothing, Optional sortKey As String = Nothing) As Object
-        Function DeleteChildren(parentIdNo As Integer, tableName As String, parentIdFieldName As String) As Integer
+
     End Interface
 
 End Namespace

@@ -48,6 +48,33 @@ Namespace PresentationLayer.Views.Forms
         Public Property QueryParameters As String Implements IReportView.QueryParameters
         Public Property PrintJobIdNo As Short Implements IReportView.PrintJobIdNo
 
+        Public Property Active As Boolean Implements IReportView.Active
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Boolean)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property BranchIdNo As Short Implements IReportView.BranchIdNo
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Short)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property DateCreated As Date Implements IReportView.DateCreated
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Date)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
 
 #End Region
 

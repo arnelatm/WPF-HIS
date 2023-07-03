@@ -1,4 +1,5 @@
 ﻿CREATE TABLE [dbo].[PatientDetails] (
+    [IdNo]                INT             IDENTITY (1, 1) NOT NULL,
     [BranchID]            VARCHAR (15)    NOT NULL,
     [Series]              VARCHAR (2)     NOT NULL,
     [RegistrationNo]      NUMERIC (12)    NOT NULL,
@@ -51,6 +52,8 @@
     [Create_Date]         DATETIME        NULL,
     [MachineID]           VARCHAR (20)    NULL
 );
+
+
 
 
 GO

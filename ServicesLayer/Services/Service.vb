@@ -366,15 +366,18 @@ Namespace Services
             Return DataDao.CountRecordWithKey(Of TS1)(tableName, searchFieldName, searchValue)
         End Function
 
-        Public Function DeleteRecord(idNo As Int32, tableName As String) As Integer _
-            Implements IService.DeleteRecord
+        Public Function DeleteRecord(idNo As Int32, tableName As String) As Integer Implements IService.DeleteRecord
             Return DataDao.DeleteRecord(idNo, tableName)
         End Function
 
-        Public Function DeleteChildren(parentIdNo As Int32, tableName As String, parentIdFieldName As String) As Integer _
-            Implements IService.DeleteChildren
-            Return DataDao.DeleteRecord(parentIdNo, tableName, parentIdFieldName)
+        Public Function DeleteRecord(Of T)(keyFieldValue As T, tableName As String, keyFieldName As String) As Integer Implements IService.DeleteRecord
+            Return DataDao.DeleteRecord(Of T)(keyFieldValue, tableName, keyFieldName)
         End Function
+
+        Public Function DeleteRecords(Of T)(keyFieldValue As T, tableName As String, keyFieldName As String) As Integer Implements IService.DeleteRecords
+            Return DataDao.DeleteRecordS(Of T)(keyFieldValue, tableName, keyFieldName)
+        End Function
+
 
         Public Function DelUpdateTvp(dtTable As DataTable, ByVal groupKey As Integer) As Integer Implements IService.DelUpdateTvp
             Return DataDao.DelUpdateTvp(dtTable, groupKey)
