@@ -37,7 +37,7 @@ Namespace AdoNet
                 'End If
 
                 ' Retrieve the row count from the database.
-                _command.CommandText = "SELECT COUNT(*) FROM " & _tableName & IIf(_dataFilter Is Nothing, "", " WHERE " & _dataFilter)
+                _command.CommandText = "SELECT COUNT(*) FROM " & _tableName & IIf(_dataFilter Is Nothing OrElse _dataFilter = "", "", " WHERE " & _dataFilter)
                 rowCountValue = CInt(_command.ExecuteScalar())
                 Return rowCountValue
             End Get

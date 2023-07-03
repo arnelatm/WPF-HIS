@@ -237,6 +237,9 @@ Public Class MappingProfileAccounts
         CreateMap(Of Prescription, PrescriptionModel)().ReverseMap()
         CreateMap(Of PrescriptionModel, IPrescriptionView)().ReverseMap()
 
+        CreateMap(Of Report, ReportModel)().ReverseMap()
+        CreateMap(Of ReportModel, IReportView)().ReverseMap()
+
         'CreateMap(Of PmrPatientDisplayModel, PmrPatientDisplayView)()
 
     End Sub

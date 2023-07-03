@@ -34,18 +34,28 @@ Namespace PresentationLayer.Views.Forms
             Me.txtReportName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblReportNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReportNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
-            Me.cboPrintJobIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.lblPrintJobIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblQueryForm = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtQueryForm = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblQueryFormParameters = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtQueryFormParameters = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblReportTitle = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtReportTitle = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblQueryParameters = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtQueryParameters = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblReportTitle = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtReportTitle = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblReportFileName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReportFileName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblPrintJobIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPrintJobIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblReportGroup = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtReportGroup = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblReportTitleAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtReportTitleAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+            Me.lblBranchIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtBranchIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -60,13 +70,13 @@ Namespace PresentationLayer.Views.Forms
             'SplitContainer1.Panel2
             '
             Me.SplitContainer1.Panel2.Controls.Add(Me.floDataDisplay)
-            Me.SplitContainer1.Size = New System.Drawing.Size(1040, 312)
+            Me.SplitContainer1.Size = New System.Drawing.Size(1040, 499)
             Me.SplitContainer1.SplitterDistance = 434
             '
             'FormTreeView
             '
             Me.FormTreeView.LineColor = System.Drawing.Color.Black
-            Me.FormTreeView.Size = New System.Drawing.Size(434, 312)
+            Me.FormTreeView.Size = New System.Drawing.Size(434, 499)
             '
             'ImageListTreeView
             '
@@ -102,16 +112,26 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.Controls.Add(Me.txtQueryParameters)
             Me.floDataDisplay.Controls.Add(Me.lblReportTitle)
             Me.floDataDisplay.Controls.Add(Me.txtReportTitle)
+            Me.floDataDisplay.Controls.Add(Me.lblReportTitleAra)
+            Me.floDataDisplay.Controls.Add(Me.txtReportTitleAra)
             Me.floDataDisplay.Controls.Add(Me.lblReportFileName)
             Me.floDataDisplay.Controls.Add(Me.txtReportFileName)
             Me.floDataDisplay.Controls.Add(Me.lblPrintJobIdNo)
             Me.floDataDisplay.Controls.Add(Me.cboPrintJobIdNo)
+            Me.floDataDisplay.Controls.Add(Me.lblReportGroup)
+            Me.floDataDisplay.Controls.Add(Me.txtReportGroup)
+            Me.floDataDisplay.Controls.Add(Me.lblDateCreated)
+            Me.floDataDisplay.Controls.Add(Me.txtDateCreated)
+            Me.floDataDisplay.Controls.Add(Me.lblActive)
+            Me.floDataDisplay.Controls.Add(Me.chkActive)
+            Me.floDataDisplay.Controls.Add(Me.lblBranchIdNo)
+            Me.floDataDisplay.Controls.Add(Me.txtBranchIdNo)
             Me.floDataDisplay.Dock = System.Windows.Forms.DockStyle.Fill
             Me.floDataDisplay.Location = New System.Drawing.Point(0, 0)
             Me.floDataDisplay.MinimumSize = New System.Drawing.Size(440, 300)
             Me.floDataDisplay.Name = "floDataDisplay"
             Me.floDataDisplay.Padding = New System.Windows.Forms.Padding(10, 10, 0, 0)
-            Me.floDataDisplay.Size = New System.Drawing.Size(596, 312)
+            Me.floDataDisplay.Size = New System.Drawing.Size(596, 499)
             Me.floDataDisplay.TabIndex = 148
             '
             'lblIdNo
@@ -300,69 +320,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtReportNameAra.TabIndex = 3
             Me.txtReportNameAra.Translatable = False
             '
-            'cboPrintJobIdNo
-            '
-            Me.cboPrintJobIdNo.AlwaysEditable = False
-            Me.cboPrintJobIdNo.BackColor = System.Drawing.Color.White
-            Me.cboPrintJobIdNo.BegFindValue = Nothing
-            Me.cboPrintJobIdNo.ChangingSearchValueOnly = False
-            Me.cboPrintJobIdNo.CurrentSearchTerm = ""
-            Me.cboPrintJobIdNo.DataValue = Nothing
-            Me.cboPrintJobIdNo.DefaultValue = Nothing
-            Me.cboPrintJobIdNo.DisplayMember = "Name"
-            Me.cboPrintJobIdNo.EditingMode = True
-            Me.cboPrintJobIdNo.EndFindValue = Nothing
-            Me.cboPrintJobIdNo.FieldDescription = Nothing
-            Me.cboPrintJobIdNo.FieldName = Nothing
-            Me.cboPrintJobIdNo.FilterRule = Nothing
-            Me.cboPrintJobIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboPrintJobIdNo.FindEnabled = False
-            Me.floDataDisplay.SetFlowBreak(Me.cboPrintJobIdNo, True)
-            Me.cboPrintJobIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cboPrintJobIdNo.ForeColor = System.Drawing.Color.Black
-            Me.cboPrintJobIdNo.FormattingEnabled = True
-            Me.cboPrintJobIdNo.HideWhenNotEditingOrAdding = False
-            Me.cboPrintJobIdNo.IgnoreCase = False
-            Me.cboPrintJobIdNo.IntegralHeight = False
-            Me.cboPrintJobIdNo.LimitToList = False
-            Me.cboPrintJobIdNo.LinkedLabel = Me.lblPrintJobIdNo
-            Me.cboPrintJobIdNo.Location = New System.Drawing.Point(180, 236)
-            Me.cboPrintJobIdNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.cboPrintJobIdNo.Name = "cboPrintJobIdNo"
-            Me.cboPrintJobIdNo.OldValue = 0
-            Me.cboPrintJobIdNo.OriginalDataSource = Nothing
-            Me.cboPrintJobIdNo.OriginalList = Nothing
-            Me.cboPrintJobIdNo.OverrideDropDownStyleList = False
-            Me.cboPrintJobIdNo.PreviousSearchTerm = Nothing
-            Me.cboPrintJobIdNo.PropertySelector = Nothing
-            Me.cboPrintJobIdNo.ReadOnlyCombo = False
-            Me.cboPrintJobIdNo.Size = New System.Drawing.Size(403, 24)
-            Me.cboPrintJobIdNo.SuggestBoxHeight = 200
-            Me.cboPrintJobIdNo.SuggestListOrderRule = Nothing
-            Me.cboPrintJobIdNo.TabIndex = 8
-            Me.cboPrintJobIdNo.TextToSearch = Nothing
-            Me.cboPrintJobIdNo.Translatable = False
-            Me.cboPrintJobIdNo.ValueIsMandatory = False
-            Me.cboPrintJobIdNo.ValueIsNullable = False
-            Me.cboPrintJobIdNo.ValueIsNumeric = False
-            Me.cboPrintJobIdNo.ValueMember = "IdNo"
-            '
-            'lblPrintJobIdNo
-            '
-            Me.lblPrintJobIdNo.DisplayOnly = True
-            Me.lblPrintJobIdNo.EditingMode = False
-            Me.lblPrintJobIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.MyErrorProvider.SetIconAlignment(Me.lblPrintJobIdNo, System.Windows.Forms.ErrorIconAlignment.TopLeft)
-            Me.lblPrintJobIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPrintJobIdNo.Location = New System.Drawing.Point(11, 236)
-            Me.lblPrintJobIdNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblPrintJobIdNo.Name = "lblPrintJobIdNo"
-            Me.lblPrintJobIdNo.Size = New System.Drawing.Size(167, 23)
-            Me.lblPrintJobIdNo.TabIndex = 153
-            Me.lblPrintJobIdNo.Text = "Print Job Name"
-            Me.lblPrintJobIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.lblPrintJobIdNo.Translatable = True
-            '
             'lblQueryForm
             '
             Me.lblQueryForm.DisplayOnly = True
@@ -457,53 +414,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtQueryFormParameters.TabIndex = 5
             Me.txtQueryFormParameters.Translatable = False
             '
-            'lblReportTitle
-            '
-            Me.lblReportTitle.DisplayOnly = True
-            Me.lblReportTitle.EditingMode = False
-            Me.lblReportTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblReportTitle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblReportTitle.Location = New System.Drawing.Point(11, 186)
-            Me.lblReportTitle.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblReportTitle.Name = "lblReportTitle"
-            Me.lblReportTitle.Size = New System.Drawing.Size(167, 23)
-            Me.lblReportTitle.TabIndex = 187
-            Me.lblReportTitle.Text = "Report Title"
-            Me.lblReportTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.lblReportTitle.Translatable = True
-            '
-            'txtReportTitle
-            '
-            Me.txtReportTitle.BackColor = System.Drawing.Color.White
-            Me.txtReportTitle.BegFindValue = Nothing
-            Me.txtReportTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtReportTitle.ComputedValue = False
-            Me.txtReportTitle.CustomFormat = Nothing
-            Me.txtReportTitle.DataBoundControl = True
-            Me.txtReportTitle.DisplayOnly = True
-            Me.txtReportTitle.EditingMode = True
-            Me.txtReportTitle.EndFindValue = Nothing
-            Me.txtReportTitle.FieldDescription = Nothing
-            Me.txtReportTitle.FieldName = Nothing
-            Me.txtReportTitle.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtReportTitle.FindEnabled = True
-            Me.floDataDisplay.SetFlowBreak(Me.txtReportTitle, True)
-            Me.txtReportTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtReportTitle.ForeColor = System.Drawing.Color.Black
-            Me.txtReportTitle.LinkedLabel = Me.lblReportTitle
-            Me.txtReportTitle.Location = New System.Drawing.Point(180, 186)
-            Me.txtReportTitle.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtReportTitle.MaximumValue = Nothing
-            Me.txtReportTitle.MinimumValue = Nothing
-            Me.txtReportTitle.Name = "txtReportTitle"
-            Me.txtReportTitle.OldValue = Nothing
-            Me.txtReportTitle.OverrideMaxLength = 0
-            Me.txtReportTitle.ReadOnly = True
-            Me.txtReportTitle.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtReportTitle.Size = New System.Drawing.Size(403, 23)
-            Me.txtReportTitle.TabIndex = 7
-            Me.txtReportTitle.Translatable = False
-            '
             'lblQueryParameters
             '
             Me.lblQueryParameters.DisplayOnly = True
@@ -551,18 +461,65 @@ Namespace PresentationLayer.Views.Forms
             Me.txtQueryParameters.TabIndex = 6
             Me.txtQueryParameters.Translatable = False
             '
+            'lblReportTitle
+            '
+            Me.lblReportTitle.DisplayOnly = True
+            Me.lblReportTitle.EditingMode = False
+            Me.lblReportTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblReportTitle.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblReportTitle.Location = New System.Drawing.Point(11, 186)
+            Me.lblReportTitle.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblReportTitle.Name = "lblReportTitle"
+            Me.lblReportTitle.Size = New System.Drawing.Size(167, 23)
+            Me.lblReportTitle.TabIndex = 187
+            Me.lblReportTitle.Text = "Report Title"
+            Me.lblReportTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblReportTitle.Translatable = True
+            '
+            'txtReportTitle
+            '
+            Me.txtReportTitle.BackColor = System.Drawing.Color.White
+            Me.txtReportTitle.BegFindValue = Nothing
+            Me.txtReportTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtReportTitle.ComputedValue = False
+            Me.txtReportTitle.CustomFormat = Nothing
+            Me.txtReportTitle.DataBoundControl = True
+            Me.txtReportTitle.DisplayOnly = True
+            Me.txtReportTitle.EditingMode = True
+            Me.txtReportTitle.EndFindValue = Nothing
+            Me.txtReportTitle.FieldDescription = Nothing
+            Me.txtReportTitle.FieldName = Nothing
+            Me.txtReportTitle.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtReportTitle.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtReportTitle, True)
+            Me.txtReportTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtReportTitle.ForeColor = System.Drawing.Color.Black
+            Me.txtReportTitle.LinkedLabel = Me.lblReportTitle
+            Me.txtReportTitle.Location = New System.Drawing.Point(180, 186)
+            Me.txtReportTitle.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtReportTitle.MaximumValue = Nothing
+            Me.txtReportTitle.MinimumValue = Nothing
+            Me.txtReportTitle.Name = "txtReportTitle"
+            Me.txtReportTitle.OldValue = Nothing
+            Me.txtReportTitle.OverrideMaxLength = 0
+            Me.txtReportTitle.ReadOnly = True
+            Me.txtReportTitle.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtReportTitle.Size = New System.Drawing.Size(403, 23)
+            Me.txtReportTitle.TabIndex = 7
+            Me.txtReportTitle.Translatable = False
+            '
             'lblReportFileName
             '
             Me.lblReportFileName.DisplayOnly = True
             Me.lblReportFileName.EditingMode = False
             Me.lblReportFileName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblReportFileName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblReportFileName.Location = New System.Drawing.Point(11, 211)
+            Me.lblReportFileName.Location = New System.Drawing.Point(11, 236)
             Me.lblReportFileName.Margin = New System.Windows.Forms.Padding(1)
             Me.lblReportFileName.Name = "lblReportFileName"
             Me.lblReportFileName.Size = New System.Drawing.Size(167, 23)
             Me.lblReportFileName.TabIndex = 191
-            Me.lblReportFileName.Text = "Report Title"
+            Me.lblReportFileName.Text = "Report File Name"
             Me.lblReportFileName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblReportFileName.Translatable = True
             '
@@ -585,7 +542,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtReportFileName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtReportFileName.ForeColor = System.Drawing.Color.Black
             Me.txtReportFileName.LinkedLabel = Me.lblReportFileName
-            Me.txtReportFileName.Location = New System.Drawing.Point(180, 211)
+            Me.txtReportFileName.Location = New System.Drawing.Point(180, 236)
             Me.txtReportFileName.Margin = New System.Windows.Forms.Padding(1)
             Me.txtReportFileName.MaximumValue = Nothing
             Me.txtReportFileName.MinimumValue = Nothing
@@ -598,10 +555,312 @@ Namespace PresentationLayer.Views.Forms
             Me.txtReportFileName.TabIndex = 190
             Me.txtReportFileName.Translatable = False
             '
+            'lblPrintJobIdNo
+            '
+            Me.lblPrintJobIdNo.DisplayOnly = True
+            Me.lblPrintJobIdNo.EditingMode = False
+            Me.lblPrintJobIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.MyErrorProvider.SetIconAlignment(Me.lblPrintJobIdNo, System.Windows.Forms.ErrorIconAlignment.TopLeft)
+            Me.lblPrintJobIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblPrintJobIdNo.Location = New System.Drawing.Point(11, 261)
+            Me.lblPrintJobIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblPrintJobIdNo.Name = "lblPrintJobIdNo"
+            Me.lblPrintJobIdNo.Size = New System.Drawing.Size(167, 23)
+            Me.lblPrintJobIdNo.TabIndex = 153
+            Me.lblPrintJobIdNo.Text = "Print Job Name"
+            Me.lblPrintJobIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblPrintJobIdNo.Translatable = True
+            '
+            'cboPrintJobIdNo
+            '
+            Me.cboPrintJobIdNo.BackColor = System.Drawing.Color.White
+            Me.cboPrintJobIdNo.BegFindValue = Nothing
+            Me.cboPrintJobIdNo.ChangingSearchValueOnly = False
+            Me.cboPrintJobIdNo.CurrentSearchTerm = ""
+            Me.cboPrintJobIdNo.DataValue = Nothing
+            Me.cboPrintJobIdNo.DefaultValue = Nothing
+            Me.cboPrintJobIdNo.DisplayMember = "Name"
+            Me.cboPrintJobIdNo.EditingMode = True
+            Me.cboPrintJobIdNo.EndFindValue = Nothing
+            Me.cboPrintJobIdNo.FieldDescription = Nothing
+            Me.cboPrintJobIdNo.FieldName = Nothing
+            Me.cboPrintJobIdNo.FilterRule = Nothing
+            Me.cboPrintJobIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboPrintJobIdNo.FindEnabled = False
+            Me.floDataDisplay.SetFlowBreak(Me.cboPrintJobIdNo, True)
+            Me.cboPrintJobIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboPrintJobIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboPrintJobIdNo.FormattingEnabled = True
+            Me.cboPrintJobIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboPrintJobIdNo.IgnoreCase = False
+            Me.cboPrintJobIdNo.IntegralHeight = False
+            Me.cboPrintJobIdNo.LimitToList = False
+            Me.cboPrintJobIdNo.LinkedLabel = Me.lblPrintJobIdNo
+            Me.cboPrintJobIdNo.Location = New System.Drawing.Point(180, 261)
+            Me.cboPrintJobIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.cboPrintJobIdNo.Name = "cboPrintJobIdNo"
+            Me.cboPrintJobIdNo.OldValue = 0
+            Me.cboPrintJobIdNo.OriginalDataSource = Nothing
+            Me.cboPrintJobIdNo.OriginalList = Nothing
+            Me.cboPrintJobIdNo.OverrideDropDownStyleList = False
+            Me.cboPrintJobIdNo.PreviousSearchTerm = Nothing
+            Me.cboPrintJobIdNo.PropertySelector = Nothing
+            Me.cboPrintJobIdNo.ReadOnlyCombo = False
+            Me.cboPrintJobIdNo.Size = New System.Drawing.Size(403, 24)
+            Me.cboPrintJobIdNo.SuggestBoxHeight = 200
+            Me.cboPrintJobIdNo.SuggestListOrderRule = Nothing
+            Me.cboPrintJobIdNo.TabIndex = 8
+            Me.cboPrintJobIdNo.TextToSearch = Nothing
+            Me.cboPrintJobIdNo.Translatable = False
+            Me.cboPrintJobIdNo.ValueIsMandatory = False
+            Me.cboPrintJobIdNo.ValueIsNullable = False
+            Me.cboPrintJobIdNo.ValueIsNumeric = False
+            Me.cboPrintJobIdNo.ValueMember = "IdNo"
+            '
+            'lblReportGroup
+            '
+            Me.lblReportGroup.DisplayOnly = True
+            Me.lblReportGroup.EditingMode = False
+            Me.lblReportGroup.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblReportGroup.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblReportGroup.Location = New System.Drawing.Point(11, 287)
+            Me.lblReportGroup.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblReportGroup.Name = "lblReportGroup"
+            Me.lblReportGroup.Size = New System.Drawing.Size(167, 23)
+            Me.lblReportGroup.TabIndex = 193
+            Me.lblReportGroup.Text = "Report Code"
+            Me.lblReportGroup.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblReportGroup.Translatable = True
+            '
+            'txtReportGroup
+            '
+            Me.txtReportGroup.BackColor = System.Drawing.Color.White
+            Me.txtReportGroup.BegFindValue = Nothing
+            Me.txtReportGroup.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtReportGroup.ComputedValue = False
+            Me.txtReportGroup.CustomFormat = Nothing
+            Me.txtReportGroup.DataBoundControl = True
+            Me.txtReportGroup.DisplayOnly = True
+            Me.txtReportGroup.EditingMode = True
+            Me.txtReportGroup.EndFindValue = Nothing
+            Me.txtReportGroup.FieldDescription = Nothing
+            Me.txtReportGroup.FieldName = Nothing
+            Me.txtReportGroup.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtReportGroup.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtReportGroup, True)
+            Me.txtReportGroup.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtReportGroup.ForeColor = System.Drawing.Color.Black
+            Me.txtReportGroup.LinkedLabel = Me.lblReportGroup
+            Me.txtReportGroup.Location = New System.Drawing.Point(180, 287)
+            Me.txtReportGroup.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtReportGroup.MaximumValue = Nothing
+            Me.txtReportGroup.MinimumValue = Nothing
+            Me.txtReportGroup.Name = "txtReportGroup"
+            Me.txtReportGroup.OldValue = Nothing
+            Me.txtReportGroup.OverrideMaxLength = 0
+            Me.txtReportGroup.ReadOnly = True
+            Me.txtReportGroup.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtReportGroup.Size = New System.Drawing.Size(403, 23)
+            Me.txtReportGroup.TabIndex = 192
+            Me.txtReportGroup.Translatable = False
+            '
+            'lblReportTitleAra
+            '
+            Me.lblReportTitleAra.DisplayOnly = True
+            Me.lblReportTitleAra.EditingMode = False
+            Me.lblReportTitleAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblReportTitleAra.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblReportTitleAra.Location = New System.Drawing.Point(11, 211)
+            Me.lblReportTitleAra.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblReportTitleAra.Name = "lblReportTitleAra"
+            Me.lblReportTitleAra.Size = New System.Drawing.Size(167, 23)
+            Me.lblReportTitleAra.TabIndex = 195
+            Me.lblReportTitleAra.Text = "Report Title Arabic"
+            Me.lblReportTitleAra.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblReportTitleAra.Translatable = True
+            '
+            'txtReportTitleAra
+            '
+            Me.txtReportTitleAra.BackColor = System.Drawing.Color.White
+            Me.txtReportTitleAra.BegFindValue = Nothing
+            Me.txtReportTitleAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtReportTitleAra.ComputedValue = False
+            Me.txtReportTitleAra.CustomFormat = Nothing
+            Me.txtReportTitleAra.DataBoundControl = True
+            Me.txtReportTitleAra.EditingMode = True
+            Me.txtReportTitleAra.EndFindValue = Nothing
+            Me.txtReportTitleAra.EnglishControl = Nothing
+            Me.txtReportTitleAra.FieldDescription = Nothing
+            Me.txtReportTitleAra.FieldName = Nothing
+            Me.txtReportTitleAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtReportTitleAra.FindEnabled = False
+            Me.floDataDisplay.SetFlowBreak(Me.txtReportTitleAra, True)
+            Me.txtReportTitleAra.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtReportTitleAra.ForeColor = System.Drawing.Color.Black
+            Me.txtReportTitleAra.LinkedLabel = Nothing
+            Me.txtReportTitleAra.Location = New System.Drawing.Point(180, 211)
+            Me.txtReportTitleAra.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtReportTitleAra.MaximumValue = Nothing
+            Me.txtReportTitleAra.MinimumValue = Nothing
+            Me.txtReportTitleAra.Name = "txtReportTitleAra"
+            Me.txtReportTitleAra.OldValue = Nothing
+            Me.txtReportTitleAra.OverrideMaxLength = 0
+            Me.txtReportTitleAra.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+            Me.txtReportTitleAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtReportTitleAra.Size = New System.Drawing.Size(403, 23)
+            Me.txtReportTitleAra.TabIndex = 194
+            Me.txtReportTitleAra.Translatable = False
+            '
+            'lblBranchIdNo
+            '
+            Me.lblBranchIdNo.DisplayOnly = True
+            Me.lblBranchIdNo.EditingMode = False
+            Me.lblBranchIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.MyErrorProvider.SetIconAlignment(Me.lblBranchIdNo, System.Windows.Forms.ErrorIconAlignment.TopLeft)
+            Me.lblBranchIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblBranchIdNo.Location = New System.Drawing.Point(11, 363)
+            Me.lblBranchIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblBranchIdNo.Name = "lblBranchIdNo"
+            Me.lblBranchIdNo.Size = New System.Drawing.Size(167, 23)
+            Me.lblBranchIdNo.TabIndex = 197
+            Me.lblBranchIdNo.Text = "Branch Id No."
+            Me.lblBranchIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblBranchIdNo.Translatable = True
+            Me.lblBranchIdNo.Visible = False
+            '
+            'txtBranchIdNo
+            '
+            Me.txtBranchIdNo.BackColor = System.Drawing.Color.White
+            Me.txtBranchIdNo.BegFindValue = Nothing
+            Me.txtBranchIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtBranchIdNo.ComputedValue = False
+            Me.txtBranchIdNo.CustomFormat = Nothing
+            Me.txtBranchIdNo.DataBoundControl = True
+            Me.txtBranchIdNo.DisplayOnly = True
+            Me.txtBranchIdNo.EditingMode = True
+            Me.txtBranchIdNo.EndFindValue = Nothing
+            Me.txtBranchIdNo.FieldDescription = Nothing
+            Me.txtBranchIdNo.FieldName = Nothing
+            Me.txtBranchIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtBranchIdNo.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtBranchIdNo, True)
+            Me.txtBranchIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtBranchIdNo.ForeColor = System.Drawing.Color.Black
+            Me.txtBranchIdNo.LinkedLabel = Me.lblReportGroup
+            Me.txtBranchIdNo.Location = New System.Drawing.Point(180, 363)
+            Me.txtBranchIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtBranchIdNo.MaximumValue = Nothing
+            Me.txtBranchIdNo.MinimumValue = Nothing
+            Me.txtBranchIdNo.Name = "txtBranchIdNo"
+            Me.txtBranchIdNo.OldValue = Nothing
+            Me.txtBranchIdNo.OverrideMaxLength = 0
+            Me.txtBranchIdNo.ReadOnly = True
+            Me.txtBranchIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtBranchIdNo.Size = New System.Drawing.Size(403, 23)
+            Me.txtBranchIdNo.TabIndex = 198
+            Me.txtBranchIdNo.Translatable = False
+            Me.txtBranchIdNo.Visible = False
+            '
+            'lblDateCreated
+            '
+            Me.lblDateCreated.DisplayOnly = True
+            Me.lblDateCreated.EditingMode = False
+            Me.lblDateCreated.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblDateCreated.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblDateCreated.Location = New System.Drawing.Point(11, 312)
+            Me.lblDateCreated.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblDateCreated.Name = "lblDateCreated"
+            Me.lblDateCreated.Size = New System.Drawing.Size(167, 23)
+            Me.lblDateCreated.TabIndex = 200
+            Me.lblDateCreated.Text = "Date Created"
+            Me.lblDateCreated.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblDateCreated.Translatable = True
+            '
+            'txtDateCreated
+            '
+            Me.txtDateCreated.BackColor = System.Drawing.Color.White
+            Me.txtDateCreated.BegFindValue = Nothing
+            Me.txtDateCreated.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDateCreated.ComputedValue = False
+            Me.txtDateCreated.CustomFormat = Nothing
+            Me.txtDateCreated.DataBoundControl = True
+            Me.txtDateCreated.DisplayOnly = True
+            Me.txtDateCreated.EditingMode = True
+            Me.txtDateCreated.EndFindValue = Nothing
+            Me.txtDateCreated.FieldDescription = Nothing
+            Me.txtDateCreated.FieldName = Nothing
+            Me.txtDateCreated.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtDateCreated.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtDateCreated, True)
+            Me.txtDateCreated.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
+            Me.txtDateCreated.LinkedLabel = Me.lblDateCreated
+            Me.txtDateCreated.Location = New System.Drawing.Point(180, 312)
+            Me.txtDateCreated.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtDateCreated.MaximumValue = Nothing
+            Me.txtDateCreated.MinimumValue = Nothing
+            Me.txtDateCreated.Name = "txtDateCreated"
+            Me.txtDateCreated.OldValue = Nothing
+            Me.txtDateCreated.OverrideMaxLength = 0
+            Me.txtDateCreated.ReadOnly = True
+            Me.txtDateCreated.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtDateCreated.Size = New System.Drawing.Size(403, 23)
+            Me.txtDateCreated.TabIndex = 199
+            Me.txtDateCreated.Translatable = False
+            '
+            'lblActive
+            '
+            Me.lblActive.DisplayOnly = True
+            Me.lblActive.EditingMode = False
+            Me.lblActive.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblActive.Location = New System.Drawing.Point(11, 337)
+            Me.lblActive.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblActive.Name = "lblActive"
+            Me.lblActive.Size = New System.Drawing.Size(167, 24)
+            Me.lblActive.TabIndex = 279
+            Me.lblActive.Text = "Active?"
+            Me.lblActive.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblActive.Translatable = True
+            '
+            'chkActive
+            '
+            Me.chkActive.Appearance = System.Windows.Forms.Appearance.Button
+            Me.chkActive.AutoCheck = False
+            Me.chkActive.BackColor = System.Drawing.Color.White
+            Me.chkActive.BegFindValue = Nothing
+            Me.chkActive.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+            Me.chkActive.DisplayOnly = False
+            Me.chkActive.EditingMode = False
+            Me.chkActive.EndFindValue = Nothing
+            Me.chkActive.FieldDescription = Nothing
+            Me.chkActive.FieldName = Nothing
+            Me.chkActive.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkActive.FindEnabled = True
+            Me.chkActive.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+            Me.floDataDisplay.SetFlowBreak(Me.chkActive, True)
+            Me.chkActive.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+            Me.chkActive.ForeColor = System.Drawing.Color.Black
+            Me.chkActive.IFindableControl_FindEnabled = False
+            Me.chkActive.IgnoreCase = False
+            Me.chkActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.chkActive.LinkedLabel = Me.lblActive
+            Me.chkActive.Location = New System.Drawing.Point(180, 337)
+            Me.chkActive.Margin = New System.Windows.Forms.Padding(1)
+            Me.chkActive.Name = "chkActive"
+            Me.chkActive.NoLabel = False
+            Me.chkActive.OldValue = ""
+            Me.chkActive.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkActive.Size = New System.Drawing.Size(13, 13)
+            Me.chkActive.TabIndex = 278
+            Me.chkActive.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+            Me.chkActive.Translatable = False
+            Me.chkActive.UseVisualStyleBackColor = False
+            '
             'ReportEntry
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-            Me.ClientSize = New System.Drawing.Size(1040, 365)
+            Me.ClientSize = New System.Drawing.Size(1040, 552)
             Me.MinimumSize = New System.Drawing.Size(703, 404)
             Me.Name = "ReportEntry"
             Me.Text = "Report Maintenance Form"
@@ -638,5 +897,15 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtQueryParameters As CTextBox
         Friend WithEvents lblReportFileName As CLabel
         Friend WithEvents txtReportFileName As CTextBox
+        Friend WithEvents lblReportGroup As CLabel
+        Friend WithEvents txtReportGroup As CTextBox
+        Friend WithEvents lblReportTitleAra As CLabel
+        Friend WithEvents txtReportTitleAra As CTextBoxArabic
+        Friend WithEvents lblBranchIdNo As CLabel
+        Friend WithEvents txtBranchIdNo As CTextBox
+        Friend WithEvents lblDateCreated As CLabel
+        Friend WithEvents txtDateCreated As CTextBox
+        Friend WithEvents lblActive As CLabel
+        Friend WithEvents chkActive As CCheckBox
     End Class
 End Namespace

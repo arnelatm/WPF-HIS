@@ -94,37 +94,64 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property ReportGroup As String Implements IReportView.ReportGroup
             Get
-                Throw New NotImplementedException()
+                Return txtReportGroup.Text
             End Get
-            Set(value As String)
-                Throw New NotImplementedException()
+            Set
+                txtReportGroup.Text = Value
             End Set
         End Property
 
         Public Property ReportNameAra As String Implements IReportView.ReportNameAra
             Get
-                Throw New NotImplementedException()
+                Return txtReportNameAra.Text
             End Get
-            Set(value As String)
-                Throw New NotImplementedException()
+            Set
+                txtReportNameAra.Text = Value
             End Set
         End Property
 
         Public Property ReportTitle As String Implements IReportView.ReportTitle
             Get
-                Throw New NotImplementedException()
+                Return txtReportTitle.Text
             End Get
-            Set(value As String)
-                Throw New NotImplementedException()
+            Set
+                txtReportTitle.Text = Value
             End Set
         End Property
 
         Public Property ReportTitleAra As String Implements IReportView.ReportTitleAra
             Get
-                Throw New NotImplementedException()
+                Return txtReportTitleAra.Text
             End Get
-            Set(value As String)
-                Throw New NotImplementedException()
+            Set
+                txtReportTitleAra.Text = Value
+            End Set
+        End Property
+
+        Public Property Active As Boolean Implements IReportView.Active
+            Get
+                Return chkActive.Checked
+            End Get
+            Set
+                chkActive.Checked = Value
+            End Set
+        End Property
+
+        Public Property BranchIdNo As Short Implements IReportView.BranchIdNo
+            Get
+                Return txtBranchIdNo.Text
+            End Get
+            Set
+                txtBranchIdNo.Text = Value
+            End Set
+        End Property
+
+        Public Property DateCreated As Date Implements IReportView.DateCreated
+            Get
+                Return txtDateCreated.Text
+            End Get
+            Set
+                txtDateCreated.Text = Value
             End Set
         End Property
 
@@ -141,67 +168,6 @@ Namespace PresentationLayer.Views.Forms
                 {"IdNo", txtIdNo}
                 }
         End Sub
-
-        'Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrinters.ClickButtonArea
-        '    'Dim myForm = New CListSelector(btnPrinters, GetInstalledPrinters())
-        '    Dim printersQueue As PrintQueueCollection = GlobalFunctions.GetNetworkPrinters()
-        '    Dim printers As New ArrayList
-        '    Dim ComputerIdNo As String = Environment.MachineName
-        '    For Each item As PrintQueue In printersQueue
-        '        'if item.sharename is nothing orelse (item.sharename = "") then
-        '        '    printers.add(item.name)
-        '        'else
-        '        '    if item.hostingprintserver.name <> "\\" + ComputerIdNo then
-        '        '        printers.add(item.hostingprintserver.name + "\" + item.sharename)
-        '        'else
-        '        printers.Add(item.Name + " | " + item.QueuePort.Name)
-        '        'end if
-        '        'end if
-        '    Next
-        '    Dim myForm = New CListSelector(btnPrinters, printers)
-        '    myForm.Show()
-        'End Sub
-
-        'Private Function GetNetPrinters() As ArrayList
-        '    ' Use the ObjectQuery to get the list of configured printers
-        '    Dim printers As New ArrayList
-        '    Dim oQuery As System.Management.ObjectQuery = New System.Management.ObjectQuery("SELECT * FROM Win32_Printer")
-
-        '    Dim moSearcher As System.Management.ManagementObjectSearcher = New System.Management.ManagementObjectSearcher(oQuery)
-
-        '    Dim moc As System.Management.ManagementObjectCollection = moSearcher.Get()
-
-        '    For Each mo As ManagementObject In moc
-        '        Dim pdc As System.Management.PropertyDataCollection = mo.Properties
-        '        For Each pd As System.Management.PropertyData In pdc
-        '            If CBool(mo("Network")) Then
-        '                printers.Add(mo(pd.Name))
-        '            End If
-        '        Next pd
-        '    Next mo
-        '    Return printers
-        'End Function
-
-        'Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrinters.ClickButtonArea
-        '    'Dim myForm = New CListSelector(btnPrinters, GetInstalledPrinters())
-        '    Dim queue As PrintQueueCollection = GlobalFunctions.GetNetworkPrinters()
-        '    Dim printers As New ArrayList
-        '    Dim ComputerIdNo As String = Environment.MachineName
-        '    For Each item In queue
-        '        printers.Add(item.Name + ":" + item.QueuePort.Name)
-        '        'If item.ShareName Is Nothing OrElse (item.ShareName = "") Then
-        '        '    printers.Add(item.Name)
-        '        'Else
-        '        '    If item.HostingPrintServer.Name <> "\\" + ComputerIdNo Then
-        '        '        printers.Add(item.HostingPrintServer.Name + "\" + item.ShareName)
-        '        '    Else
-        '        '        printers.Add(item.Name)
-        '        '    End If
-        '        'End If
-        '    Next
-        '    Dim myForm = New CListSelector(btnPrinters, printers)
-        '    myForm.Show()
-        'End Sub
 
     End Class
 

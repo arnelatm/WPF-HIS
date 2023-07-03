@@ -17,9 +17,13 @@ Namespace PresentationLayer.Presenters
         Private _pjService As Object
         Private _prService As Object
         Private _presenter As CommonPresenter(Of IView, ReportModel)
+        Private _computerName As String
+        Private _computerIdNo As Int16
 
         Public Sub New()
             MakeServices()
+            _computerName = Environment.MachineName      ' "Pharmacy" '
+            _computerIdNo = _psService.GetRecordFieldWithKeyG(Of Int16)(_computerName, "Computer", "ComputerName", "IdNo")
         End Sub
 
         Public Sub New(view As IPrintReportView)
@@ -37,54 +41,59 @@ Namespace PresentationLayer.Presenters
         '    _presenter.CreateDataSource(tableName, control)
         'End Sub
 
-        Public Sub OnPrintReport(reportFileName As String, databaseConnectionName As String, Optional args() As Object = Nothing, Optional copies As Int16 = 1, Optional collate As Boolean = False, Optional startPage As Int16 = 0, Optional endPage As Int16 = 0)
+        Public Sub OnPrintReport(reportFileName As String, databaseConnectionName As String, Optional args() As Object = Nothing, Optional copies As Integer = 1, Optional collate As Boolean = False, Optional startPage As Integer = 1, Optional endPage As Integer = 100000)
             ProcessReport(reportFileName, databaseConnectionName, True, args, copies, collate, startPage, endPage)
         End Sub
 
-        Private Sub ProcessReport(reportFileName As String, databaseConnectionName As String, print As Boolean, Optional args() As Object = Nothing, Optional copies As Int16 = 1, Optional collate As Boolean = False, Optional startPage As Int16 = 0, Optional endPage As Int16 = 0)
-            Dim report As New CrystalReportPrinter(reportFileName, databaseConnectionName, args)
+
+
+        Private Function GetPrintSetupIdNo(reportFileName As String, printJobIdNo As Int16) As Int16
+            Return _psService.GetRecordFieldWith2KeyG(Of Int16, Int16, Int16)(printJobIdNo, _computerIdNo, "PrintSetup", "PrintJobIdNo", "ComputerIdNo", "IdNo")
+        End Function
+
+        Private Function GetPrintJobIdNo(reportFileName) As Int16
+            Return _psService.GetRecordFieldWithKeyG(Of Int16, String)(reportFileName, "Report", "ReportFileName", "PrintJobIdNo")
+        End Function
+
+        Private Sub ProcessReport(reportFileName As String, databaseConnectionName As String, print As Boolean, Optional args() As Object = Nothing, Optional copies As Integer = 1, Optional collate As Boolean = False, Optional startPage As Integer = 1, Optional endPage As Integer = 0)
             If print Then
-                Dim psModel As New PrintSetupModel
+                Dim printJobIdNo As Int16 = GetPrintJobIdNo(reportFileName)
+                Dim printSetupIdNo As Int16 = GetPrintSetupIdNo(reportFileName, printJobIdNo)
+                Dim crReport As New CrystalReportPrinter(reportFileName, databaseConnectionName, args)
                 Dim printer As New PrinterModel
-                Dim computerName As String = Environment.MachineName
-                Dim printJobIdNo As Int16 = _pjService.GetPrintJobIdNo(reportFileName)
-                Dim printerFound As Boolean = False
-                If printJobIdNo <> 0 Then
-                    Dim computerIdNo As Int16 = _pjService.GetIdNoWithKey(Of Int16)("Computer", computerName)
-                    Dim printSetupIdNo As Int16 = _pjService.GetRecordFieldWith2KeyG(Of Int16, Int16, Int16)(printJobIdNo, computerIdNo, "PrintSetup", "PrintJobIdNo", "ComputerIdNo", "IdNo")
-                    If printSetupIdNo <> 0 Then
-                        psModel = _psService.GetRecordByIdNo(Of PrintSetupModel)(printSetupIdNo)
-                        If psModel IsNot Nothing Then
-                            printer = _prService.GetRecordByIdNo(Of PrinterModel)(psModel.PrinterIdNo)
-                            printer.PaperSize = IIf(psModel.PaperSize <> 0, psModel.PaperSize, printer.PaperSize)
-                            printer.PaperOrientation = IIf(psModel.PaperOrientation <> 0, psModel.PaperOrientation, printer.PaperOrientation)
-                            printer.PaperSource = IIf(psModel.PaperSource <> 0, psModel.PaperSource, printer.PaperSource)
-                        Else
-                            Dim pjModel As New PrintJobModel
-                            pjModel = _pjService.GetRecordByIdNo(Of PrintJobModel)(printJobIdNo)
-                            If pjModel IsNot Nothing Then
-                                printer = _prService.GetRecordByIdNo(Of PrinterModel)(pjModel.PrinterIdNo)
-                                printer.PaperSize = IIf(pjModel.PaperSize <> 0, pjModel.PaperSize, printer.PaperSize)
-                                printer.PaperOrientation = IIf(pjModel.PaperOrientation <> 0, pjModel.PaperOrientation, printer.PaperOrientation)
-                                printer.PaperSource = IIf(pjModel.PaperSource <> 0, pjModel.PaperSource, printer.PaperSource)
-                            Else
-                                printer.PrinterName = Nothing
-                            End If
-                        End If
+                Dim psModel As New PrintSetupModel
+                If printSetupIdNo <> 0 Then
+                    psModel = _psService.GetRecordByIdNo(Of PrintSetupModel)(printSetupIdNo)
+                    If psModel IsNot Nothing Then
+                        printer = _prService.GetRecordByIdNo(Of PrinterModel)(psModel.PrinterIdNo)
+                        printer.PaperSize = IIf(psModel.PaperSize <> 0, psModel.PaperSize, printer.PaperSize)
+                        printer.PaperOrientation = IIf(psModel.PaperOrientation <> 0, psModel.PaperOrientation, printer.PaperOrientation)
+                        printer.PaperSource = IIf(psModel.PaperSource <> 0, psModel.PaperSource, printer.PaperSource)
                     Else
                         Dim pjModel As New PrintJobModel
                         pjModel = _pjService.GetRecordByIdNo(Of PrintJobModel)(printJobIdNo)
-                        If pjModel.IdNo <> 0 Then
+                        If pjModel IsNot Nothing Then
                             printer = _prService.GetRecordByIdNo(Of PrinterModel)(pjModel.PrinterIdNo)
                             printer.PaperSize = IIf(pjModel.PaperSize <> 0, pjModel.PaperSize, printer.PaperSize)
                             printer.PaperOrientation = IIf(pjModel.PaperOrientation <> 0, pjModel.PaperOrientation, printer.PaperOrientation)
                             printer.PaperSource = IIf(pjModel.PaperSource <> 0, pjModel.PaperSource, printer.PaperSource)
+                        Else
+                            printer.PrinterName = Nothing
                         End If
                     End If
+                Else
+                    Dim pjModel As New PrintJobModel
+                    pjModel = _pjService.GetRecordByIdNo(Of PrintJobModel)(printJobIdNo)
+                    If pjModel.IdNo <> 0 Then
+                        printer = _prService.GetRecordByIdNo(Of PrinterModel)(pjModel.PrinterIdNo)
+                        printer.PaperSize = IIf(pjModel.PaperSize <> 0, pjModel.PaperSize, printer.PaperSize)
+                        printer.PaperOrientation = IIf(pjModel.PaperOrientation <> 0, pjModel.PaperOrientation, printer.PaperOrientation)
+                        printer.PaperSource = IIf(pjModel.PaperSource <> 0, pjModel.PaperSource, printer.PaperSource)
+                    End If
                 End If
-                report.SetPrintOption(printer.PrinterName, printer.PaperSize, printer.PaperOrientation, printer.PaperSource)
+                crReport.SetPrintOption(printer.PrinterName, printer.PaperSize, printer.PaperOrientation, printer.PaperSource)
+                crReport.PrintReport(copies, collate, startPage, endPage)
             End If
-            report.PrintReport(copies, collate, startPage, endPage)
         End Sub
 
         Private Function GetPrintJobIdNo(computerIdNo As Int16, printSetupIdNo As Integer) As Short

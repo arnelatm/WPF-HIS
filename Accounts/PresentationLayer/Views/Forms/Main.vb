@@ -1192,6 +1192,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemPharmacyReports_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPharmacyReports.Click
 
         End Sub
+
+        Private Sub ToolStripMenuItemDoctorsPrescriptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDoctorsPrescriptions.Click
+            RunForm(Of PrescriptionForm, PrescriptionPresenter(Of PrescriptionModel))()
+        End Sub
     End Class
 
 End Namespace

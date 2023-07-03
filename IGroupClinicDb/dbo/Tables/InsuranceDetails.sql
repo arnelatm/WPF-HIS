@@ -51,6 +51,10 @@
 
 
 
+
+
+
+
 GO
 CREATE UNIQUE CLUSTERED INDEX [IDX_InsuranceDetails]
     ON [dbo].[InsuranceDetails]([BranchID] ASC, [InsuranceID] ASC);

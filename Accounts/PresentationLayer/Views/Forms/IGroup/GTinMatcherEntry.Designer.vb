@@ -812,7 +812,6 @@
             '
             'cboDosageForm
             '
-            Me.cboDosageForm.AlwaysEditable = False
             Me.cboDosageForm.BackColor = System.Drawing.Color.White
             Me.cboDosageForm.BegFindValue = Nothing
             Me.cboDosageForm.ChangingSearchValueOnly = False
@@ -916,7 +915,6 @@
             '
             'cboUnitOfStrength
             '
-            Me.cboUnitOfStrength.AlwaysEditable = False
             Me.cboUnitOfStrength.BackColor = System.Drawing.Color.White
             Me.cboUnitOfStrength.BegFindValue = Nothing
             Me.cboUnitOfStrength.ChangingSearchValueOnly = False
@@ -1021,7 +1019,6 @@
             '
             'cboUnitOfVolume
             '
-            Me.cboUnitOfVolume.AlwaysEditable = False
             Me.cboUnitOfVolume.BackColor = System.Drawing.Color.White
             Me.cboUnitOfVolume.BegFindValue = Nothing
             Me.cboUnitOfVolume.ChangingSearchValueOnly = False
@@ -1082,7 +1079,6 @@
             '
             'cboPackageType
             '
-            Me.cboPackageType.AlwaysEditable = False
             Me.cboPackageType.BackColor = System.Drawing.Color.White
             Me.cboPackageType.BegFindValue = Nothing
             Me.cboPackageType.ChangingSearchValueOnly = False
@@ -1187,7 +1183,6 @@
             '
             'cboRouteOfAdministration
             '
-            Me.cboRouteOfAdministration.AlwaysEditable = False
             Me.cboRouteOfAdministration.BackColor = System.Drawing.Color.White
             Me.cboRouteOfAdministration.BegFindValue = Nothing
             Me.cboRouteOfAdministration.ChangingSearchValueOnly = False
@@ -1279,7 +1274,7 @@
             Me.CFlowLayout2.SetFlowBreak(Me.BnDrugs, True)
             Me.BnDrugs.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.tsDrugsCurrentRecord, Me.tsDrugsCount, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.BindingNavigatorSeparator2, Me.btnDrugBnAddNewItem, Me.btnDrugBnDeleteItem})
             Me.BnDrugs.Location = New System.Drawing.Point(0, 0)
-            Me.BnDrugs.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
+            Me.BnDrugs.MoveFirstItem = Me.BindingNavigatorMoveNextItem
             Me.BnDrugs.MoveLastItem = Me.BindingNavigatorMoveLastItem
             Me.BnDrugs.MoveNextItem = Me.BindingNavigatorMoveNextItem
             Me.BnDrugs.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
@@ -2046,6 +2041,7 @@
             Me.DataGridViewItems.FieldDescription = Nothing
             Me.DataGridViewItems.FieldName = Nothing
             Me.DataGridViewItems.FieldsDictionary = Nothing
+            Me.DataGridViewItems.FindColumnNo = CType(0, Short)
             Me.DataGridViewItems.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.DataGridViewItems.FindEnabled = True
             Me.DataGridViewItems.FirstRowDeletionEnabled = True
@@ -2055,6 +2051,7 @@
             Me.DataGridViewItems.Location = New System.Drawing.Point(3, 292)
             Me.DataGridViewItems.Name = "DataGridViewItems"
             Me.DataGridViewItems.ReadOnly = True
+            Me.DataGridViewItems.Searchable = True
             Me.DataGridViewItems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewItems.SecurityKey = ""
             Me.DataGridViewItems.SequenceColumn = "dgvSequence"
@@ -2088,6 +2085,7 @@
             Me.DataGridViewDrugs.FieldDescription = Nothing
             Me.DataGridViewDrugs.FieldName = Nothing
             Me.DataGridViewDrugs.FieldsDictionary = Nothing
+            Me.DataGridViewDrugs.FindColumnNo = CType(0, Short)
             Me.DataGridViewDrugs.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.DataGridViewDrugs.FindEnabled = True
             Me.DataGridViewDrugs.FirstRowDeletionEnabled = True
@@ -2097,6 +2095,7 @@
             Me.DataGridViewDrugs.Location = New System.Drawing.Point(3, 457)
             Me.DataGridViewDrugs.Name = "DataGridViewDrugs"
             Me.DataGridViewDrugs.ReadOnly = True
+            Me.DataGridViewDrugs.Searchable = True
             Me.DataGridViewDrugs.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewDrugs.SecurityKey = ""
             Me.DataGridViewDrugs.SequenceColumn = "dgvSequence"
@@ -2104,11 +2103,11 @@
             Me.DataGridViewDrugs.ShowFooter = False
             Me.DataGridViewDrugs.Size = New System.Drawing.Size(1259, 159)
             Me.DataGridViewDrugs.TabIndex = 40
-            Me.DataGridViewDrugs.Translatable = true
-        '
-        'GTinMatcherEntry
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
+            Me.DataGridViewDrugs.Translatable = True
+            '
+            'GTinMatcherEntry
+            '
+            Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
         Me.ClientSize = New System.Drawing.Size(1284, 709)
         Me.Controls.Add(Me.CFlowLayout3)

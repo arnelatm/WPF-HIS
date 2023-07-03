@@ -14,22 +14,30 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly _db As New Db()
 
-        Private Const FieldList = "IdNo," &
-                                    "QueryForm," &
-                                    "QueryFormParameters," &
-                                    "QueryParameters," &
-                                    "ReportCode," &
-                                    "ReportFileName," &
-                                    "ReportName," &
-                                    "ReportNameAra," &
-                                    "ReportTitle," &
-                                    "ReportTitleAra"
+        Private Const FieldList = "Active," &
+                                  "BranchIdNo," &
+                                  "DateCreated," &
+                                  "IdNo," &
+                                  "PrintJobIdNo," &
+                                  "QueryForm," &
+                                  "QueryFormParameters," &
+                                  "QueryParameters," &
+                                  "ReportCode," &
+                                  "ReportFileName," &
+                                  "ReportName," &
+                                  "ReportNameAra," &
+                                  "ReportTitle," &
+                                  "ReportTitleAra"
 
 
         Private Shared ReadOnly Make As Func(Of IDataReader, Report) =
                                     Function(reader) _
             New Report() With {
+            .Active = Extensions.AsBool(reader("Active")),
+            .BranchIdNo = Extensions.AsInt(Of Int16)(reader("BranchIdNo")),
+            .DateCreated = Extensions.AsDateTime(reader("DateCreated")),
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
+            .PrintJobIdNo = Extensions.AsInt(Of Int16)(reader("PrintJobIdNo")),
             .QueryForm = Extensions.AsString(reader("QueryForm")),
             .QueryFormParameters = Extensions.AsString(reader("QueryFormParameters")),
             .QueryParameters = Extensions.AsString(reader("QueryParameters")),
@@ -42,16 +50,23 @@ Namespace DataLayer.AdoNet
             }
 
         Public Function AddRecord(ByRef report As Report) As Integer Implements IDao(Of Report).AddRecord
+            'Dim sql As String =
+            '        " INSERT INTO [PrintSetup] " &
+            '        " (QueryForm,QueryFormParameters,QueryParameters,ReportCode,ReportFileName,ReportName,ReportNameAra,ReportTitle,ReportTitleAra) " &
+            '        " VALUES (@QueryForm,@QueryFormParameters,@QueryParameters,@ReportCode,@ReportFileName,@ReportName,@ReportNameAra,@ReportTitle,@ReportTitleAra)"
             Dim sql As String =
                     " INSERT INTO [PrintSetup] " &
-                    " (QueryForm,QueryFormParameters,QueryParameters,ReportCode,ReportFileName,ReportName,ReportNameAra,ReportTitle,ReportTitleAra) " &
-                    " VALUES (@QueryForm,@QueryFormParameters,@QueryParameters,@ReportCode,@ReportFileName,@ReportName,@ReportNameAra,@ReportTitle,@ReportTitleAra)"
+                    " (Active,BranchIdNo,PrintJobIdNo,QueryForm,QueryFormParameters,QueryParameters,ReportCode,ReportFileName,ReportName,ReportNameAra,ReportTitle,ReportTitleAra) " &
+                    " VALUES (@Active,@BranchIdNo,@PrintJobIdNo,@QueryForm,@QueryFormParameters,@QueryParameters,@ReportCode,@ReportFileName,@ReportName,@ReportNameAra,@ReportTitle,@ReportTitleAra)"
             Return _db.Insert(sql, Take(report))
         End Function
 
         Private Function Take(report As Report) As Object()
             Return New Object() {
                                     "@IdNo", report.IdNo,
+                                    "Active", report.Active,
+                                    "BranchIdNo", report.BranchIdNo,
+                                    "PrintJobIdNo", report.PrintJobIdNo,
                                     "QueryForm", report.QueryForm,
                                     "QueryFormParameters", report.QueryFormParameters,
                                     "QueryParameters", report.QueryParameters,
@@ -67,6 +82,9 @@ Namespace DataLayer.AdoNet
         Public Function UpdateRecord(ByRef report As Report) As Integer Implements IDao(Of Report).UpdateRecord
             Dim sql As String =
                     "UPDATE [PrintSetup] SET " &
+                    "Active = @Active," &
+                    "BranchIdNo = @BranchIdNo," &
+                    "PrintJobIdNo = @PrintJobIdNo," &
                     "QueryForm = @QueryForm, " &
                     "QueryFormParameters = @QueryFormParameters, " &
                     "QueryParameters = @QueryParameters, " &
