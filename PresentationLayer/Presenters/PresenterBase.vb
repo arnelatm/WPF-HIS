@@ -1616,16 +1616,17 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                             SetPropertyValue(cCtrl, "ValueIsNumeric", True)
                         Else
                             Dim cTextBox As New CTextBox
+                            Dim nMaxLength As Int16 = IIf(row.MaxLength = -1, 32767, row.MaxLength)
                             cTextBox = DirectCast(cCtrl, CTextBox)
                             If cTextBox.OverrideMaxLength = 0 Then
                                 ' this command will limit the text length to the table field length so as not to have field length overflows.
                                 ' if you don't want to follow this just enter the override length in the 'OverrideMaxLength' property
-                                SetPropertyValue(cCtrl, "Maxlength", If(row.fldType.ToLower() = "nvarchar", Convert.ToInt16(row.MaxLength / 2), row.MaxLength))
+                                SetPropertyValue(cCtrl, "Maxlength", If(row.fldType.ToLower() = "nvarchar", Convert.ToInt16(nMaxLength / 2), nMaxLength))
                             Else
                                 ' if you entered an overrideMaxLength value other than 0 then use that value. (Useful for barcode or QRCode scanning to get the 
                                 ' full value of the barcode or qrcode and maybe process that data to just extract the value that you need. Say for Drug QRCodes
                                 ' need to get the full qrcode text and just extract the GTIN value and discard the rest of the text
-                                SetPropertyValue(cCtrl, "Maxlength", If(row.fldType.ToLower() = "nvarchar", Convert.ToInt16(row.MaxLength / 2), cTextBox.OverrideMaxLength))
+                                SetPropertyValue(cCtrl, "Maxlength", If(row.fldType.ToLower() = "nvarchar", Convert.ToInt16(nMaxLength / 2), cTextBox.OverrideMaxLength))
                             End If
                             SetPropertyValue(cCtrl, "ValueIsNullable", row.IsNullable)
                             If (Not row.IsIdentity) And (Not row.IsNullable) Then

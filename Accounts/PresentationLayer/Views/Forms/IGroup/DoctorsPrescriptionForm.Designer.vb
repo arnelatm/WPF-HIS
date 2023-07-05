@@ -146,7 +146,6 @@
             DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.DataGridViewDoctorsPatient.DefaultCellStyle = DataGridViewCellStyle7
-            Me.DataGridViewDoctorsPatient.DgSearch = CType(resources.GetObject("DataGridViewDoctorsPatient.DgSearch"), System.Collections.Generic.List(Of AATM.Libraries.CBaseControlsLibrary.CDataGridView.DataGridSearch))
             Me.DataGridViewDoctorsPatient.DgvFooter = Nothing
             Me.DataGridViewDoctorsPatient.DisplayOnly = True
             Me.DataGridViewDoctorsPatient.Dock = System.Windows.Forms.DockStyle.Fill
@@ -429,7 +428,6 @@
             DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
             DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
             Me.DataGridViewPrescriptionDetails.DefaultCellStyle = DataGridViewCellStyle9
-            Me.DataGridViewPrescriptionDetails.DgSearch = CType(resources.GetObject("DataGridViewPrescriptionDetails.DgSearch"), System.Collections.Generic.List(Of AATM.Libraries.CBaseControlsLibrary.CDataGridView.DataGridSearch))
             Me.DataGridViewPrescriptionDetails.DgvFooter = Nothing
             Me.DataGridViewPrescriptionDetails.DisplayOnly = False
             Me.DataGridViewPrescriptionDetails.Ea = Nothing
@@ -484,7 +482,7 @@
             '
             'bsPrescriptionDetails
             '
-            Me.bsPrescriptionDetails.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PrescriptionDetailModel)
+            Me.bsPrescriptionDetails.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PrescriptionItemModel)
             '
             'btnSelectAll
             '

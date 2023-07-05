@@ -81,7 +81,7 @@ Namespace DataLayer.AdoNet
 
         Public Function UpdateRecord(ByRef report As Report) As Integer Implements IDao(Of Report).UpdateRecord
             Dim sql As String =
-                    "UPDATE [PrintSetup] SET " &
+                    "UPDATE Report SET " &
                     "Active = @Active," &
                     "BranchIdNo = @BranchIdNo," &
                     "PrintJobIdNo = @PrintJobIdNo," &
@@ -90,10 +90,10 @@ Namespace DataLayer.AdoNet
                     "QueryParameters = @QueryParameters, " &
                     "ReportCode = @ReportCode, " &
                     "ReportFileName = @ReportFileName, " &
-                    "ReportName = report.ReportName, " &
-                    "ReportNameAra = report.ReportNameAra, " &
-                    "ReportTitle = report.ReportTitle, " &
-                    "ReportTitleAra = report.ReportTitleAra, " &
+                    "ReportName = @ReportName, " &
+                    "ReportNameAra = @ReportNameAra, " &
+                    "ReportTitle = @ReportTitle, " &
+                    "ReportTitleAra = @ReportTitleAra " &
                     "WHERE IdNo = @IdNo"
             Return _db.Update(sql, Take(report))
         End Function

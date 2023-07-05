@@ -17,13 +17,9 @@ Namespace PresentationLayer.Views.Interfaces
     End Interface
 
     Public Interface IDosagePrintingView
-        Inherits IView
+        Inherits IDosageView
 
-        Property IdNo As Int32
         Property Dose As Decimal
-        Property DosageCode As String
-        Property DosageName As String
-        Property DosageNameAra As String
         Property DosageUnit As Int32
         Property Duration As Decimal
         Property DurationTiming As Decimal

@@ -21,4 +21,22 @@ Namespace PresentationLayer.Views
 
     End Class
 
+    Public Class PrescriptionDetailView
+        Implements IPrescriptionDetailView
+
+        Public Property DataFilter As String Implements IView.DataFilter
+        Public Property Dosage As String Implements IPrescriptionDetailView.Dosage
+        Public Property Duration As String Implements IPrescriptionDetailView.Duration
+        Public Property GenericName As String Implements IPrescriptionDetailView.GenericName
+        Public Property Errors As List(Of String) Implements IView.Errors
+        Public Property ItemCode As String Implements IPrescriptionDetailView.ItemCode
+        Public Property ItemName As String Implements IPrescriptionDetailView.ItemName
+        Public Property LabelPrinted As Boolean Implements IPrescriptionDetailView.LabelPrinted
+        Public Property RowNbr As Integer Implements IPrescriptionDetailView.RowNbr
+        Public Property TransKey As Integer Implements IPrescriptionDetailView.TransKey
+        Public Property PrintLabel As Boolean Implements IPrescriptionDetailView.PrintLabel
+        Public Property PrescriptionItemIdNo As Integer Implements IPrescriptionDetailView.PrescriptionItemIdNo
+
+    End Class
+
 End Namespace

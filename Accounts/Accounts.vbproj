@@ -550,6 +550,18 @@
     <Compile Include="PresentationLayer\Views\EmployeeLeaveCreditView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeePayElementView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeDocumentView.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\DoctorsPrescriptionForm.Designer.vb">
+      <DependentUpon>DoctorsPrescriptionForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\DoctorsPrescriptionForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationRequestForm.Designer.vb">
+      <DependentUpon>PmrInvestigationRequestForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationRequestForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\PrescriptionForm.Designer.vb">
       <DependentUpon>PrescriptionForm.vb</DependentUpon>
     </Compile>
@@ -871,12 +883,6 @@
       <DependentUpon>DateRangeEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\DateRangeEntry.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\GenerateDrugSale.Designer.vb">
-      <DependentUpon>GenerateDrugSale.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\GenerateDrugSale.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\ReportFormIGroup.Designer.vb">
@@ -1912,6 +1918,13 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\CGridBoxForm.resx">
       <DependentUpon>CGridBoxForm.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\DoctorsPrescriptionForm.resx">
+      <DependentUpon>DoctorsPrescriptionForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationRequestForm.resx">
+      <DependentUpon>PmrInvestigationRequestForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\PrescriptionForm.resx">
       <DependentUpon>PrescriptionForm.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -2107,9 +2120,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\DateRangeEntry.resx">
       <DependentUpon>DateRangeEntry.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\GenerateDrugSale.resx">
-      <DependentUpon>GenerateDrugSale.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ReportFormIGroup.resx">
       <DependentUpon>ReportFormIGroup.vb</DependentUpon>
@@ -2718,6 +2728,7 @@
     </None>
     <None Include="packages.config" />
     <None Include="PresentationLayer\Views\app-Ibn-Server.config" />
+    <None Include="Reports\IGroup\DosageLabel.rpt" />
     <None Include="ServiceLayer\app-Ibn-Server.config" />
   </ItemGroup>
   <ItemGroup>

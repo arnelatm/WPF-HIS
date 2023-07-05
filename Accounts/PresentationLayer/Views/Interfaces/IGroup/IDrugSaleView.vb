@@ -9,8 +9,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property Expiry As Date?
         Property GTin As String
         Property IdNo As Int32
-        Property Item_Code As String
-        Property ItemNameEnglish As String
+        Property ProductCode As String
+        Property ProductName As String
         Property SaleDate As Date?
         Property SerializationNo As String
         Property QrCode As String

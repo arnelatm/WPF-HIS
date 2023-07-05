@@ -25,4 +25,18 @@ Namespace PresentationLayer.Views.Interfaces
         Event SaveDosage()
     End Interface
 
+    Public Interface IPmrInvestigationView2
+        Inherits IView
+
+        Property DoctorCode As String
+        Property DoctorName As String
+        Property TransactionDate As Date?
+        Property PmrPatientsDisplay As List(Of PmrPatientDisplayView)
+
+        Event GetDoctorPatientsRequested()
+
+        Event DoctorCodeRequested(ByRef drId As String)
+        Event GetPmrDataAccessRequested(ByRef drId As String)
+    End Interface
+
 End Namespace

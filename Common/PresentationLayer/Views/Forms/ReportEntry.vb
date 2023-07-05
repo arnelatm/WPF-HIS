@@ -14,7 +14,7 @@ Namespace PresentationLayer.Views.Forms
         Public Sub New()
             ' This call is required by the designer.
             InitializeComponent()
-            FirstControl = cboPrintJobIdNo
+
             ' Add any initialization after the InitializeComponent() call.
         End Sub
 
@@ -31,7 +31,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PrintJobIdNo As Int16 Implements IReportView.PrintJobIdNo
             Get
-                Return cboPrintJobIdNo.GetValue()
+                Return cboPrintJobIdNo.GetValue(Of Int16)()
             End Get
             Set
                 cboPrintJobIdNo.SetValue(Value)
@@ -160,12 +160,19 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
-                {"ReportName", txtReportName},
-                {"ReportCode", txtReportCode},
+                {"Active", chkActive},
+                {"BranchIdNo", txtBranchIdNo},
+                {"DateCreated", txtDateCreated},
+                {"IdNo", txtIdNo},
+                {"PrintJobIdNo", cboPrintJobIdNo},
                 {"QueryForm", txtQueryForm},
                 {"QueryFormParameters", txtQueryFormParameters},
+                {"ReportCode", txtReportCode},
+                {"ReportFileName", txtReportFileName},
+                {"ReportName", txtReportName},
+                {"ReportNameAra", txtReportNameAra},
                 {"ReportTitle", txtReportTitle},
-                {"IdNo", txtIdNo}
+                {"ReportTitleAra", txtReportTitleAra}
                 }
         End Sub
 

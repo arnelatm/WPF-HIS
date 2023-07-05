@@ -25,24 +25,24 @@
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.lblManufactureDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblItemNameEnglish = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtItemNameEnglish = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtProductName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtSerializationNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblSerialNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtBatchNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblBatch = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblItem_Code = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.TxtItem_Code = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.TxtProductCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblGTIN = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtGTIN = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblSaleDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.dtpSaleDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-            Me.lblExpiry = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtQrCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.dtpExpiry = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
+            Me.lblExpiry = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpManufacture = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
+            Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblSaleDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.dtpSaleDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.btnClearEntry = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.btnValidate = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.qrCodeErrorProvider = New System.Windows.Forms.ErrorProvider(Me.components)
@@ -61,11 +61,11 @@
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 318.0!))
             Me.TableLayoutPanel1.Controls.Add(Me.lblManufactureDate, 0, 8)
             Me.TableLayoutPanel1.Controls.Add(Me.lblItemNameEnglish, 0, 6)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtItemNameEnglish, 1, 6)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtProductName, 1, 6)
             Me.TableLayoutPanel1.Controls.Add(Me.txtSerializationNo, 1, 10)
             Me.TableLayoutPanel1.Controls.Add(Me.txtBatchNo, 1, 7)
             Me.TableLayoutPanel1.Controls.Add(Me.lblItem_Code, 0, 5)
-            Me.TableLayoutPanel1.Controls.Add(Me.TxtItem_Code, 1, 5)
+            Me.TableLayoutPanel1.Controls.Add(Me.TxtProductCode, 1, 5)
             Me.TableLayoutPanel1.Controls.Add(Me.lblSerialNo, 0, 10)
             Me.TableLayoutPanel1.Controls.Add(Me.lblBatch, 0, 7)
             Me.TableLayoutPanel1.Controls.Add(Me.lblGTIN, 0, 4)
@@ -128,35 +128,36 @@
             Me.lblItemNameEnglish.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblItemNameEnglish.Translatable = True
             '
-            'txtItemNameEnglish
+            'txtProductName
             '
-            Me.txtItemNameEnglish.BackColor = System.Drawing.Color.White
-            Me.txtItemNameEnglish.BegFindValue = Nothing
-            Me.txtItemNameEnglish.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TableLayoutPanel1.SetColumnSpan(Me.txtItemNameEnglish, 2)
-            Me.txtItemNameEnglish.ComputedValue = False
-            Me.txtItemNameEnglish.CustomFormat = Nothing
-            Me.txtItemNameEnglish.DataBoundControl = True
-            Me.txtItemNameEnglish.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.txtItemNameEnglish.EditingMode = True
-            Me.txtItemNameEnglish.EndFindValue = Nothing
-            Me.txtItemNameEnglish.FieldDescription = Nothing
-            Me.txtItemNameEnglish.FieldName = Nothing
-            Me.txtItemNameEnglish.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtItemNameEnglish.FindEnabled = True
-            Me.txtItemNameEnglish.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtItemNameEnglish.ForeColor = System.Drawing.Color.Black
-            Me.txtItemNameEnglish.LinkedLabel = Me.lblItemNameEnglish
-            Me.txtItemNameEnglish.Location = New System.Drawing.Point(174, 124)
-            Me.txtItemNameEnglish.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtItemNameEnglish.MaximumValue = Nothing
-            Me.txtItemNameEnglish.MinimumValue = Nothing
-            Me.txtItemNameEnglish.Name = "txtItemNameEnglish"
-            Me.txtItemNameEnglish.OldValue = Nothing
-            Me.txtItemNameEnglish.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtItemNameEnglish.Size = New System.Drawing.Size(466, 23)
-            Me.txtItemNameEnglish.TabIndex = 5
-            Me.txtItemNameEnglish.Translatable = False
+            Me.txtProductName.BackColor = System.Drawing.Color.White
+            Me.txtProductName.BegFindValue = Nothing
+            Me.txtProductName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TableLayoutPanel1.SetColumnSpan(Me.txtProductName, 2)
+            Me.txtProductName.ComputedValue = False
+            Me.txtProductName.CustomFormat = Nothing
+            Me.txtProductName.DataBoundControl = True
+            Me.txtProductName.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtProductName.EditingMode = True
+            Me.txtProductName.EndFindValue = Nothing
+            Me.txtProductName.FieldDescription = Nothing
+            Me.txtProductName.FieldName = Nothing
+            Me.txtProductName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtProductName.FindEnabled = True
+            Me.txtProductName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtProductName.ForeColor = System.Drawing.Color.Black
+            Me.txtProductName.LinkedLabel = Me.lblItemNameEnglish
+            Me.txtProductName.Location = New System.Drawing.Point(174, 124)
+            Me.txtProductName.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtProductName.MaximumValue = Nothing
+            Me.txtProductName.MinimumValue = Nothing
+            Me.txtProductName.Name = "txtProductName"
+            Me.txtProductName.OldValue = Nothing
+            Me.txtProductName.OverrideMaxLength = 0
+            Me.txtProductName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtProductName.Size = New System.Drawing.Size(466, 23)
+            Me.txtProductName.TabIndex = 5
+            Me.txtProductName.Translatable = False
             '
             'txtSerializationNo
             '
@@ -182,6 +183,7 @@
             Me.txtSerializationNo.MinimumValue = Nothing
             Me.txtSerializationNo.Name = "txtSerializationNo"
             Me.txtSerializationNo.OldValue = Nothing
+            Me.txtSerializationNo.OverrideMaxLength = 0
             Me.txtSerializationNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtSerializationNo.Size = New System.Drawing.Size(148, 23)
             Me.txtSerializationNo.TabIndex = 9
@@ -226,6 +228,7 @@
             Me.txtBatchNo.MinimumValue = Nothing
             Me.txtBatchNo.Name = "txtBatchNo"
             Me.txtBatchNo.OldValue = ""
+            Me.txtBatchNo.OverrideMaxLength = 0
             Me.txtBatchNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtBatchNo.Size = New System.Drawing.Size(148, 23)
             Me.txtBatchNo.TabIndex = 6
@@ -246,51 +249,6 @@
             Me.lblBatch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblBatch.Translatable = True
             '
-            'TxtIdNo
-            '
-            Me.TxtIdNo.BackColor = System.Drawing.Color.White
-            Me.TxtIdNo.BegFindValue = Nothing
-            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TxtIdNo.ComputedValue = False
-            Me.TxtIdNo.CustomFormat = Nothing
-            Me.TxtIdNo.DataBoundControl = True
-            Me.TxtIdNo.DisplayOnly = True
-            Me.TxtIdNo.EditingMode = True
-            Me.TxtIdNo.EndFindValue = Nothing
-            Me.TxtIdNo.FieldDescription = Nothing
-            Me.TxtIdNo.FieldName = Nothing
-            Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.TxtIdNo.FindEnabled = True
-            Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
-            Me.TxtIdNo.LinkedLabel = Me.lblIdNo
-            Me.TxtIdNo.Location = New System.Drawing.Point(174, 1)
-            Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.TxtIdNo.MaximumValue = Nothing
-            Me.TxtIdNo.MinimumValue = Nothing
-            Me.TxtIdNo.Name = "TxtIdNo"
-            Me.TxtIdNo.OldValue = ""
-            Me.TxtIdNo.ReadOnly = True
-            Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.TxtIdNo.Size = New System.Drawing.Size(148, 23)
-            Me.TxtIdNo.TabIndex = 0
-            Me.TxtIdNo.Translatable = False
-            '
-            'lblIdNo
-            '
-            Me.lblIdNo.AutoSize = True
-            Me.lblIdNo.DisplayOnly = True
-            Me.lblIdNo.EditingMode = False
-            Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblIdNo.Location = New System.Drawing.Point(1, 1)
-            Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblIdNo.Name = "lblIdNo"
-            Me.lblIdNo.Size = New System.Drawing.Size(83, 17)
-            Me.lblIdNo.TabIndex = 1
-            Me.lblIdNo.Text = "I.D. Number"
-            Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.lblIdNo.Translatable = True
-            '
             'lblItem_Code
             '
             Me.lblItem_Code.AutoSize = True
@@ -306,36 +264,37 @@
             Me.lblItem_Code.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblItem_Code.Translatable = True
             '
-            'TxtItem_Code
+            'TxtProductCode
             '
-            Me.TxtItem_Code.BackColor = System.Drawing.Color.White
-            Me.TxtItem_Code.BegFindValue = Nothing
-            Me.TxtItem_Code.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TxtItem_Code.ComputedValue = False
-            Me.TxtItem_Code.CustomFormat = Nothing
-            Me.TxtItem_Code.DataBoundControl = True
-            Me.TxtItem_Code.DisplayOnly = True
-            Me.TxtItem_Code.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.TxtItem_Code.EditingMode = True
-            Me.TxtItem_Code.EndFindValue = Nothing
-            Me.TxtItem_Code.FieldDescription = Nothing
-            Me.TxtItem_Code.FieldName = "Item_Code"
-            Me.TxtItem_Code.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.TxtItem_Code.FindEnabled = True
-            Me.TxtItem_Code.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.TxtItem_Code.ForeColor = System.Drawing.Color.Black
-            Me.TxtItem_Code.LinkedLabel = Me.lblItem_Code
-            Me.TxtItem_Code.Location = New System.Drawing.Point(174, 99)
-            Me.TxtItem_Code.Margin = New System.Windows.Forms.Padding(1)
-            Me.TxtItem_Code.MaximumValue = Nothing
-            Me.TxtItem_Code.MinimumValue = Nothing
-            Me.TxtItem_Code.Name = "TxtItem_Code"
-            Me.TxtItem_Code.OldValue = Nothing
-            Me.TxtItem_Code.ReadOnly = True
-            Me.TxtItem_Code.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.TxtItem_Code.Size = New System.Drawing.Size(148, 23)
-            Me.TxtItem_Code.TabIndex = 4
-            Me.TxtItem_Code.Translatable = False
+            Me.TxtProductCode.BackColor = System.Drawing.Color.White
+            Me.TxtProductCode.BegFindValue = Nothing
+            Me.TxtProductCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TxtProductCode.ComputedValue = False
+            Me.TxtProductCode.CustomFormat = Nothing
+            Me.TxtProductCode.DataBoundControl = True
+            Me.TxtProductCode.DisplayOnly = True
+            Me.TxtProductCode.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.TxtProductCode.EditingMode = True
+            Me.TxtProductCode.EndFindValue = Nothing
+            Me.TxtProductCode.FieldDescription = Nothing
+            Me.TxtProductCode.FieldName = "Item_Code"
+            Me.TxtProductCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.TxtProductCode.FindEnabled = True
+            Me.TxtProductCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.TxtProductCode.ForeColor = System.Drawing.Color.Black
+            Me.TxtProductCode.LinkedLabel = Me.lblItem_Code
+            Me.TxtProductCode.Location = New System.Drawing.Point(174, 99)
+            Me.TxtProductCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.TxtProductCode.MaximumValue = Nothing
+            Me.TxtProductCode.MinimumValue = Nothing
+            Me.TxtProductCode.Name = "TxtProductCode"
+            Me.TxtProductCode.OldValue = Nothing
+            Me.TxtProductCode.OverrideMaxLength = 0
+            Me.TxtProductCode.ReadOnly = True
+            Me.TxtProductCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.TxtProductCode.Size = New System.Drawing.Size(148, 23)
+            Me.TxtProductCode.TabIndex = 4
+            Me.TxtProductCode.Translatable = False
             '
             'lblGTIN
             '
@@ -376,10 +335,174 @@
             Me.txtGTIN.MinimumValue = Nothing
             Me.txtGTIN.Name = "txtGTIN"
             Me.txtGTIN.OldValue = ""
+            Me.txtGTIN.OverrideMaxLength = 0
             Me.txtGTIN.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtGTIN.Size = New System.Drawing.Size(148, 23)
             Me.txtGTIN.TabIndex = 3
             Me.txtGTIN.Translatable = False
+            '
+            'CLabel1
+            '
+            Me.CLabel1.AutoSize = True
+            Me.CLabel1.DisplayOnly = True
+            Me.CLabel1.EditingMode = False
+            Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel1.Location = New System.Drawing.Point(1, 49)
+            Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel1.Name = "CLabel1"
+            Me.CLabel1.Size = New System.Drawing.Size(97, 17)
+            Me.CLabel1.TabIndex = 49
+            Me.CLabel1.Text = "Scan Qr Code"
+            Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel1.Translatable = True
+            '
+            'txtQrCode
+            '
+            Me.txtQrCode.BackColor = System.Drawing.Color.White
+            Me.txtQrCode.BegFindValue = Nothing
+            Me.txtQrCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TableLayoutPanel1.SetColumnSpan(Me.txtQrCode, 2)
+            Me.txtQrCode.ComputedValue = False
+            Me.txtQrCode.CustomFormat = Nothing
+            Me.txtQrCode.DataBoundControl = True
+            Me.txtQrCode.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtQrCode.EditingMode = True
+            Me.txtQrCode.EndFindValue = Nothing
+            Me.txtQrCode.FieldDescription = Nothing
+            Me.txtQrCode.FieldName = Nothing
+            Me.txtQrCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtQrCode.FindEnabled = False
+            Me.txtQrCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtQrCode.ForeColor = System.Drawing.Color.Black
+            Me.txtQrCode.LinkedLabel = Nothing
+            Me.txtQrCode.Location = New System.Drawing.Point(174, 49)
+            Me.txtQrCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtQrCode.MaximumValue = Nothing
+            Me.txtQrCode.MinimumValue = Nothing
+            Me.txtQrCode.Name = "txtQrCode"
+            Me.txtQrCode.OldValue = Nothing
+            Me.txtQrCode.OverrideMaxLength = 0
+            Me.txtQrCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtQrCode.Size = New System.Drawing.Size(466, 23)
+            Me.txtQrCode.TabIndex = 1
+            Me.txtQrCode.Translatable = False
+            '
+            'dtpExpiry
+            '
+            Me.dtpExpiry.AutoSize = True
+            Me.dtpExpiry.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.dtpExpiry.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
+            Me.dtpExpiry.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpExpiry.DefaultValue = Nothing
+            Me.dtpExpiry.DisplayOnly = False
+            Me.dtpExpiry.DtpDefaultValue = Nothing
+            Me.dtpExpiry.EditingMode = True
+            Me.dtpExpiry.EditsAllowed = False
+            Me.dtpExpiry.ForeColor = System.Drawing.Color.Black
+            Me.dtpExpiry.LinkedLabel = Me.lblExpiry
+            Me.dtpExpiry.Location = New System.Drawing.Point(173, 196)
+            Me.dtpExpiry.Margin = New System.Windows.Forms.Padding(0)
+            Me.dtpExpiry.Name = "dtpExpiry"
+            Me.dtpExpiry.ReadOnlyDp = False
+            Me.dtpExpiry.SecurityKey = Nothing
+            Me.dtpExpiry.ShowLongDate = False
+            Me.dtpExpiry.ShowTime = False
+            Me.dtpExpiry.Size = New System.Drawing.Size(118, 23)
+            Me.dtpExpiry.TabIndex = 8
+            Me.dtpExpiry.TargetCalendar = CType(resources.GetObject("dtpExpiry.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpExpiry.Translatable = False
+            Me.dtpExpiry.Value = Nothing
+            Me.dtpExpiry.ValueIsMandatory = False
+            Me.dtpExpiry.ValueIsNullable = False
+            '
+            'lblExpiry
+            '
+            Me.lblExpiry.AutoSize = True
+            Me.lblExpiry.DisplayOnly = True
+            Me.lblExpiry.EditingMode = False
+            Me.lblExpiry.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblExpiry.Location = New System.Drawing.Point(1, 197)
+            Me.lblExpiry.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblExpiry.Name = "lblExpiry"
+            Me.lblExpiry.Size = New System.Drawing.Size(80, 17)
+            Me.lblExpiry.TabIndex = 11
+            Me.lblExpiry.Text = "Expiry Date"
+            Me.lblExpiry.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblExpiry.Translatable = True
+            '
+            'dtpManufacture
+            '
+            Me.dtpManufacture.AutoSize = True
+            Me.dtpManufacture.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.dtpManufacture.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
+            Me.dtpManufacture.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpManufacture.DefaultValue = Nothing
+            Me.dtpManufacture.DisplayOnly = False
+            Me.dtpManufacture.DtpDefaultValue = Nothing
+            Me.dtpManufacture.EditingMode = True
+            Me.dtpManufacture.EditsAllowed = False
+            Me.dtpManufacture.ForeColor = System.Drawing.Color.Black
+            Me.dtpManufacture.LinkedLabel = Me.lblManufactureDate
+            Me.dtpManufacture.Location = New System.Drawing.Point(173, 173)
+            Me.dtpManufacture.Margin = New System.Windows.Forms.Padding(0)
+            Me.dtpManufacture.Name = "dtpManufacture"
+            Me.dtpManufacture.ReadOnlyDp = False
+            Me.dtpManufacture.SecurityKey = Nothing
+            Me.dtpManufacture.ShowLongDate = False
+            Me.dtpManufacture.ShowTime = False
+            Me.dtpManufacture.Size = New System.Drawing.Size(118, 23)
+            Me.dtpManufacture.TabIndex = 7
+            Me.dtpManufacture.TargetCalendar = CType(resources.GetObject("dtpManufacture.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpManufacture.Translatable = False
+            Me.dtpManufacture.Value = Nothing
+            Me.dtpManufacture.ValueIsMandatory = False
+            Me.dtpManufacture.ValueIsNullable = False
+            '
+            'lblIdNo
+            '
+            Me.lblIdNo.AutoSize = True
+            Me.lblIdNo.DisplayOnly = True
+            Me.lblIdNo.EditingMode = False
+            Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblIdNo.Location = New System.Drawing.Point(1, 1)
+            Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblIdNo.Name = "lblIdNo"
+            Me.lblIdNo.Size = New System.Drawing.Size(83, 17)
+            Me.lblIdNo.TabIndex = 1
+            Me.lblIdNo.Text = "I.D. Number"
+            Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblIdNo.Translatable = True
+            '
+            'TxtIdNo
+            '
+            Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BegFindValue = Nothing
+            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TxtIdNo.ComputedValue = False
+            Me.TxtIdNo.CustomFormat = Nothing
+            Me.TxtIdNo.DataBoundControl = True
+            Me.TxtIdNo.DisplayOnly = True
+            Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.EndFindValue = Nothing
+            Me.TxtIdNo.FieldDescription = Nothing
+            Me.TxtIdNo.FieldName = Nothing
+            Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.TxtIdNo.FindEnabled = True
+            Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+            Me.TxtIdNo.LinkedLabel = Me.lblIdNo
+            Me.TxtIdNo.Location = New System.Drawing.Point(174, 1)
+            Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.TxtIdNo.MaximumValue = Nothing
+            Me.TxtIdNo.MinimumValue = Nothing
+            Me.TxtIdNo.Name = "TxtIdNo"
+            Me.TxtIdNo.OldValue = ""
+            Me.TxtIdNo.OverrideMaxLength = 0
+            Me.TxtIdNo.ReadOnly = True
+            Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.TxtIdNo.Size = New System.Drawing.Size(148, 23)
+            Me.TxtIdNo.TabIndex = 0
+            Me.TxtIdNo.Translatable = False
             '
             'lblSaleDate
             '
@@ -423,122 +546,6 @@
             Me.dtpSaleDate.Value = Nothing
             Me.dtpSaleDate.ValueIsMandatory = False
             Me.dtpSaleDate.ValueIsNullable = False
-            '
-            'lblExpiry
-            '
-            Me.lblExpiry.AutoSize = True
-            Me.lblExpiry.DisplayOnly = True
-            Me.lblExpiry.EditingMode = False
-            Me.lblExpiry.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblExpiry.Location = New System.Drawing.Point(1, 197)
-            Me.lblExpiry.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblExpiry.Name = "lblExpiry"
-            Me.lblExpiry.Size = New System.Drawing.Size(80, 17)
-            Me.lblExpiry.TabIndex = 11
-            Me.lblExpiry.Text = "Expiry Date"
-            Me.lblExpiry.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.lblExpiry.Translatable = True
-            '
-            'CLabel1
-            '
-            Me.CLabel1.AutoSize = True
-            Me.CLabel1.DisplayOnly = True
-            Me.CLabel1.EditingMode = False
-            Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel1.Location = New System.Drawing.Point(1, 49)
-            Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel1.Name = "CLabel1"
-            Me.CLabel1.Size = New System.Drawing.Size(97, 17)
-            Me.CLabel1.TabIndex = 49
-            Me.CLabel1.Text = "Scan Qr Code"
-            Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.CLabel1.Translatable = True
-            '
-            'txtQrCode
-            '
-            Me.txtQrCode.BackColor = System.Drawing.Color.White
-            Me.txtQrCode.BegFindValue = Nothing
-            Me.txtQrCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TableLayoutPanel1.SetColumnSpan(Me.txtQrCode, 2)
-            Me.txtQrCode.ComputedValue = False
-            Me.txtQrCode.CustomFormat = Nothing
-            Me.txtQrCode.DataBoundControl = True
-            Me.txtQrCode.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.txtQrCode.EditingMode = True
-            Me.txtQrCode.EndFindValue = Nothing
-            Me.txtQrCode.FieldDescription = Nothing
-            Me.txtQrCode.FieldName = Nothing
-            Me.txtQrCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtQrCode.FindEnabled = False
-            Me.txtQrCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtQrCode.ForeColor = System.Drawing.Color.Black
-            Me.txtQrCode.LinkedLabel = Nothing
-            Me.txtQrCode.Location = New System.Drawing.Point(174, 49)
-            Me.txtQrCode.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtQrCode.MaximumValue = Nothing
-            Me.txtQrCode.MinimumValue = Nothing
-            Me.txtQrCode.Name = "txtQrCode"
-            Me.txtQrCode.OldValue = Nothing
-            Me.txtQrCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtQrCode.Size = New System.Drawing.Size(466, 23)
-            Me.txtQrCode.TabIndex = 1
-            Me.txtQrCode.Translatable = False
-            '
-            'dtpExpiry
-            '
-            Me.dtpExpiry.AutoSize = True
-            Me.dtpExpiry.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-            Me.dtpExpiry.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
-            Me.dtpExpiry.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-            Me.dtpExpiry.DefaultValue = Nothing
-            Me.dtpExpiry.DisplayOnly = False
-            Me.dtpExpiry.DtpDefaultValue = Nothing
-            Me.dtpExpiry.EditingMode = True
-            Me.dtpExpiry.EditsAllowed = False
-            Me.dtpExpiry.ForeColor = System.Drawing.Color.Black
-            Me.dtpExpiry.LinkedLabel = Me.lblExpiry
-            Me.dtpExpiry.Location = New System.Drawing.Point(173, 196)
-            Me.dtpExpiry.Margin = New System.Windows.Forms.Padding(0)
-            Me.dtpExpiry.Name = "dtpExpiry"
-            Me.dtpExpiry.ReadOnlyDp = False
-            Me.dtpExpiry.SecurityKey = Nothing
-            Me.dtpExpiry.ShowLongDate = False
-            Me.dtpExpiry.ShowTime = False
-            Me.dtpExpiry.Size = New System.Drawing.Size(118, 23)
-            Me.dtpExpiry.TabIndex = 8
-            Me.dtpExpiry.TargetCalendar = CType(resources.GetObject("dtpExpiry.TargetCalendar"), System.Globalization.Calendar)
-            Me.dtpExpiry.Translatable = False
-            Me.dtpExpiry.Value = Nothing
-            Me.dtpExpiry.ValueIsMandatory = False
-            Me.dtpExpiry.ValueIsNullable = False
-            '
-            'dtpManufacture
-            '
-            Me.dtpManufacture.AutoSize = True
-            Me.dtpManufacture.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-            Me.dtpManufacture.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
-            Me.dtpManufacture.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-            Me.dtpManufacture.DefaultValue = Nothing
-            Me.dtpManufacture.DisplayOnly = False
-            Me.dtpManufacture.DtpDefaultValue = Nothing
-            Me.dtpManufacture.EditingMode = True
-            Me.dtpManufacture.EditsAllowed = False
-            Me.dtpManufacture.ForeColor = System.Drawing.Color.Black
-            Me.dtpManufacture.LinkedLabel = Me.lblManufactureDate
-            Me.dtpManufacture.Location = New System.Drawing.Point(173, 173)
-            Me.dtpManufacture.Margin = New System.Windows.Forms.Padding(0)
-            Me.dtpManufacture.Name = "dtpManufacture"
-            Me.dtpManufacture.ReadOnlyDp = False
-            Me.dtpManufacture.SecurityKey = Nothing
-            Me.dtpManufacture.ShowLongDate = False
-            Me.dtpManufacture.ShowTime = False
-            Me.dtpManufacture.Size = New System.Drawing.Size(118, 23)
-            Me.dtpManufacture.TabIndex = 7
-            Me.dtpManufacture.TargetCalendar = CType(resources.GetObject("dtpManufacture.TargetCalendar"), System.Globalization.Calendar)
-            Me.dtpManufacture.Translatable = False
-            Me.dtpManufacture.Value = Nothing
-            Me.dtpManufacture.ValueIsMandatory = False
-            Me.dtpManufacture.ValueIsNullable = False
             '
             'btnClearEntry
             '
@@ -595,14 +602,14 @@
         Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblItem_Code As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblBatch As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents TxtItem_Code As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents TxtProductCode As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtBatchNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblExpiry As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblSerialNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtGTIN As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblGTIN As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblItemNameEnglish As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtItemNameEnglish As Libraries.CBaseControlsLibrary.CTextBox
+        Friend WithEvents txtProductName As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtSerializationNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents dtpExpiry As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
         Friend WithEvents lblSaleDate As Libraries.CBaseControlsLibrary.CLabel
