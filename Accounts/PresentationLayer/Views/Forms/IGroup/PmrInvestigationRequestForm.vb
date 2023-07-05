@@ -4,16 +4,16 @@ Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class PmrInvestigationForm
-        Implements IPmrInvestigationView
+    Public Class PmrInvestigationRequestForm
+        Implements IPmrInvestigationView2
 
-        Public Event DataChanged() Implements IPmrInvestigationView.DataChanged
+        Public Event GetDoctorPatientsRequested() Implements IPmrInvestigationView2.GetDoctorPatientsRequested
 
-        Public Event DoctorCodeRequested(ByRef drId As String) Implements IPmrInvestigationView.DoctorCodeRequested
+        Public Event DoctorCodeRequested(ByRef drId As String) Implements IPmrInvestigationView2.DoctorCodeRequested
 
-        Public Event GetPmrDataAccessRequested(ByRef dataAccessCode As String) Implements IPmrInvestigationView.GetPmrDataAccessRequested
+        Public Event GetPmrDataAccessRequested(ByRef dataAccessCode As String) Implements IPmrInvestigationView2.GetPmrDataAccessRequested
 
-        Private _doctorsPatients As New List(Of DoctorsPatientView)
+        Private _pmrPatientsDisplay As New List(Of PmrPatientDisplayView)
         Private _doctorId As String
         Private _dataAccessLevel As String = ""
 
@@ -42,7 +42,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private _doctorCode As String
 
-        Public Property DoctorCode As String Implements IPmrInvestigationView.DoctorCode
+        Public Property DoctorCode As String Implements IPmrInvestigationView2.DoctorCode
             Get
                 Return cboDoctorName.GetValue()
             End Get
@@ -51,7 +51,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DoctorName As String Implements IPmrInvestigationView.DoctorName
+        Public Property DoctorName As String Implements IPmrInvestigationView2.DoctorName
             Get
                 Return cboDoctorName.GetValue()
             End Get
@@ -66,7 +66,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
         End Property
 
-        'Public Property DoctorName As String Implements IPmrInvestigationView.DoctorName
+        'Public Property DoctorName As String Implements IPmrInvestigationView2.DoctorName
         '    Get
         '        Return cboDoctorName.Text
         '    End Get
@@ -75,7 +75,7 @@ Namespace PresentationLayer.Views.Forms
         '    End Set
         'End Property
 
-        Public Property TransactionDate As Date? Implements IPmrInvestigationView.TransactionDate
+        Public Property TransactionDate As Date? Implements IPmrInvestigationView2.TransactionDate
             Get
                 Return dtpTransactionDate.Value
             End Get
@@ -84,25 +84,25 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DoctorsPatients As List(Of DoctorsPatientView) Implements IPmrInvestigationView.DoctorsPatients
+        Public Property PmrPatientsDisplay As List(Of PmrPatientDisplayView) Implements IPmrInvestigationView2.PmrPatientsDisplay
             Get
-                Return _doctorsPatients
+                Return _pmrPatientsDisplay
             End Get
             Set
-                _doctorsPatients = Value
-                BindDoctorsPatient()
+                _pmrPatientsDisplay = Value
+                BindPmrPatientDisplay()
             End Set
         End Property
 
-        Private Sub BindDoctorsPatient()
+        Private Sub BindPmrPatientDisplay()
             SuspendLayout()
-            bsDoctorsPatient.DataSource = Nothing
+            bsPmrPatientDisplay.DataSource = Nothing
             DataGridViewPmrPatientDisplay.Refresh()
-            bsDoctorsPatient.DataSource = DoctorsPatients
-            bsDoctorsPatient.AllowNew = True
+            bsPmrPatientDisplay.DataSource = PmrPatientsDisplay
+            bsPmrPatientDisplay.AllowNew = True
             With DataGridViewPmrPatientDisplay
                 .AutoGenerateColumns = False
-                .DataSource = bsDoctorsPatient
+                .DataSource = bsPmrPatientDisplay
             End With
 
             ResumeLayout()
@@ -110,9 +110,9 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub btnRefresh_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnRefresh.ClickButtonArea
             If DoctorCode IsNot Nothing Then
-                RaiseEvent DataChanged()
+                RaiseEvent GetDoctorPatientsRequested()
             Else
-                DoctorsPatients.Clear()
+                PmrPatientsDisplay.Clear()
                 DataGridViewPmrPatientDisplay.Refresh()
             End If
         End Sub
@@ -149,7 +149,7 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent DoctorCodeRequested(drCode)
             If drCode IsNot Nothing Then
                 DoctorCode = drCode
-                RaiseEvent DataChanged()
+                RaiseEvent GetDoctorPatientsRequested()
                 cboDoctorName.DisplayOnly = True
                 'dtpTransactionDate.EditingMode = True
             Else
@@ -171,7 +171,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub dtpTransactionDate_Validated(sender As Object, e As EventArgs) Handles dtpTransactionDate.Validated
-            RaiseEvent DataChanged()
+            RaiseEvent GetDoctorPatientsRequested()
         End Sub
 
         Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPmrPatientDisplay.CellClick
@@ -210,11 +210,11 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub cboDoctorName_Validated(sender As Object, e As EventArgs) Handles cboDoctorName.SelectionChangeCommitted, cboDoctorName.Leave
             If String.IsNullOrEmpty(cboDoctorName.SelectedValue) Then
-                DoctorsPatients = Nothing
+                PmrPatientsDisplay = Nothing
                 txtDoctorCode.Text = ""
             Else
                 txtDoctorCode.Text = cboDoctorName.SelectedValue
-                RaiseEvent DataChanged()
+                RaiseEvent GetDoctorPatientsRequested()
             End If
         End Sub
 

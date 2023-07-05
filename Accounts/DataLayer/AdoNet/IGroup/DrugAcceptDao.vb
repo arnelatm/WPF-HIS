@@ -12,15 +12,15 @@ Namespace DataLayer.AdoNet
         Inherits CommonDao
         Implements IDao(Of DrugAccept)
 
-        'Private ReadOnly _db As New Db("IGROUPCLINIC")
-        Private ReadOnly _db As New Db()
+        Private ReadOnly _db As New Db("IGROUPCLINIC")
+        'Private ReadOnly _db As New Db()
 
         Private ReadOnly _fieldList As String = "BatchNo," &
                                       "Expiry," &
                                       "GTin," &
                                       "IdNo," &
-                                      "Item_Code," &
-                                      "ItemNameEnglish," &
+                                      "ProductCode," &
+                                      "ProductName," &
                                       "AcceptDate," &
                                       "SerializationNo"
 
@@ -50,7 +50,7 @@ Namespace DataLayer.AdoNet
             'If retVal > 0 And Not GlobalFunctions.IsEmpty(DrugAccept.GTin) Then
             '    Dim sql1 As String = "UPDATE ItemDetails SET " &
             '        " GTin = @GTin" &
-            '        " WHERE Item_Code = @Item_Code and BranchId = @BranchId"
+            '        " WHERE ProductCode = @ProductCode and BranchId = @BranchId"
             '    _db.Update(sql1, Take(DrugAccept))
             'End If
             Return retVal
@@ -71,8 +71,8 @@ Namespace DataLayer.AdoNet
             .Expiry = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date)(reader("Expiry")),
             .GTin = AATM.DataLayer.AdoNet.Extensions.AsString(reader("GTin")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
-            .ProductCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Item_Code")),
-            .ProductName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ItemNameEnglish")),
+            .ProductCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ProductCode")),
+            .ProductName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ProductName")),
             .AcceptDate = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date)(reader("AcceptDate")),
             .SerializationNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("SerializationNo"))
             }
@@ -91,9 +91,9 @@ Namespace DataLayer.AdoNet
         'Public Overrides Function GetActualFieldName(fieldName As String)
         '    Dim actualFieldName As String
         '    If fieldName = "DrugAcceptCode" Then
-        '        actualFieldName = "Item_Code"
+        '        actualFieldName = "ProductCode"
         '    ElseIf fieldName = "DrugAcceptName" Then
-        '        actualFieldName = "ItemNameEnglish"
+        '        actualFieldName = "ProductName"
         '    Else
         '        actualFieldName = fieldName
         '    End If

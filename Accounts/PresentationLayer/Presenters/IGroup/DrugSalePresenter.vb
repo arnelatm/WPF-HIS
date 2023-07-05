@@ -50,7 +50,8 @@ Namespace PresentationLayer.Presenters
             View.SerializationNo = ""
             View.Expiry = Nothing
             View.Manufacture = Nothing
-            View.ItemNameEnglish = ""
+            View.ProductName = ""
+            View.ProductCode = ""
         End Sub
 
         Public Sub OnFinderValueChanged(idNo As Int16)
@@ -265,8 +266,8 @@ Namespace PresentationLayer.Presenters
             View.SerializationNo = _cSerializationNo
             View.Manufacture = MakeDate(_cManufacture)
             View.Expiry = MakeDate(_cExpiry)
-            View.ItemNameEnglish = GetDrugName()
-            View.Item_Code = GetDrugCode()
+            View.ProductName = GetDrugName()
+            View.ProductCode = GetDrugCode()
         End Sub
 
         Private Function MakeDate(stringDate As String) As Date

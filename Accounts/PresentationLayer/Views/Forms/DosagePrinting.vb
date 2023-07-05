@@ -123,10 +123,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PatientName As String Implements IDosagePrintingView.PatientName
             Get
-                Throw New NotImplementedException()
+                Return txtPatientName.Text
             End Get
             Set(value As String)
-                Throw New NotImplementedException()
+                txtPatientName.Text = value
             End Set
         End Property
 
@@ -153,6 +153,42 @@ Namespace PresentationLayer.Views.Forms
                 Throw New NotImplementedException()
             End Get
             Set(value As String)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property Route As Integer Implements IDosageView.Route
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Integer)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property Direction As Integer Implements IDosageView.Direction
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Integer)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property Frequency As Integer Implements IDosageView.Frequency
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Integer)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property FrequencyTiming As Integer Implements IDosageView.FrequencyTiming
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Integer)
                 Throw New NotImplementedException()
             End Set
         End Property
@@ -195,6 +231,8 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent AddNewDosage()
             RaiseEvent UpdateTree()
         End Sub
+
+
     End Class
 
 End Namespace

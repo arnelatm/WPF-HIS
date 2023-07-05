@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports AATM.Common.BusinessLayer
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views.Interfaces
 Imports AATM.Common.ServiceLayer
@@ -14,11 +15,10 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IView)
             MyBase.New(view)
-            TableName = "Account"
+            TableName = "Report"
             Service = New CommonService("Report")
-            TableName = "Account"
             TreeViewMainField = "ReportName"
-            SortOrderKey = "IdNo"
+            SortOrderKey = "ReportName"
             WithTreeView = True
             'Ea = New EventAggregator()
             'Ea.SubscribeEvent(Me)
@@ -37,6 +37,13 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Sub Finalize()
             MyBase.Finalize()
+        End Sub
+
+
+        Protected Overrides Sub CreateDataSources()
+            Dim data As New ArrayList
+            data.Add({"PrintJob", "PrintJobIdNo", Nothing, Nothing})
+            CreateDataSourceThread(data)
         End Sub
 
     End Class

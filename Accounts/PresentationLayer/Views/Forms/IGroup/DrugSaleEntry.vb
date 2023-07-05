@@ -88,21 +88,21 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Item_Code As String Implements IDrugSaleView.Item_Code
+        Public Property ProductCode As String Implements IDrugSaleView.ProductCode
             Get
-                Return TxtItem_Code.Text
+                Return TxtProductCode.Text
             End Get
             Set(value As String)
-                TxtItem_Code.Text = value
+                TxtProductCode.Text = value
             End Set
         End Property
 
-        Public Property ItemNameEnglish As String Implements IDrugSaleView.ItemNameEnglish
+        Public Property ProductName As String Implements IDrugSaleView.ProductName
             Get
-                Return txtItemNameEnglish.Text
+                Return txtProductName.Text
             End Get
             Set(value As String)
-                txtItemNameEnglish.Text = value
+                txtProductName.Text = value
             End Set
         End Property
 
@@ -143,8 +143,8 @@ Namespace PresentationLayer.Views.Forms
                 {"Expiry", dtpExpiry},
                 {"GTin", txtGTIN},
                 {"IdNo", TxtIdNo},
-                {"Item_Code", TxtItem_Code},
-                {"ItemNameEnglish", txtItemNameEnglish},
+                {"Item_Code", TxtProductCode},
+                {"ItemNameEnglish", txtProductName},
                 {"SaleDate", dtpSaleDate},
                 {"SerializationNo", txtSerializationNo}
                 }
@@ -156,8 +156,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub SetDisplayOnly(value As Boolean)
-            txtItemNameEnglish.DisplayOnly = value
-            TxtItem_Code.DisplayOnly = value
+            txtProductName.DisplayOnly = value
+            TxtProductCode.DisplayOnly = value
         End Sub
 
         Private Sub txtQrCode_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles txtQrCode.KeyPress

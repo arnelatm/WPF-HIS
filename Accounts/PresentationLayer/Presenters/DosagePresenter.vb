@@ -22,6 +22,7 @@ Namespace PresentationLayer.Presenters
             data.Add({"ItemCode", "Direction", Nothing, "CodeGroupIdNo=10"})
             data.Add({"ItemCode", "Frequency", Nothing, "CodeGroupIdNo=6"})
             data.Add({"ItemCode", "FrequencyTiming", Nothing, "CodeGroupIdNo=11"})
+            data.Add({"ItemCode", "Route", Nothing, "CodeGroupIdNo=9"})
             CreateDataSourceThread(data)
         End Sub
 

@@ -20,7 +20,7 @@ Namespace PresentationLayer.Views.Forms
         Private _pmrDoctorsPatients As New List(Of DoctorsPatientView)
         Private _doctorId As String
         Private _dataAccessLevel As String = ""
-        Private _prescriptionDetails As New List(Of PrescriptionDetailView)
+        Private _prescriptionDetails As New List(Of PrescriptionItemView)
         Public Event RowChanged(patientIdNo As Int32) Implements IDoctorsPrescriptionView.RowChanged
         Public Event PrintDosageLabel() Implements IDoctorsPrescriptionView.PrintDosageLabel
 
@@ -82,7 +82,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PrescriptionDetails As List(Of PrescriptionDetailView) Implements IDoctorsPrescriptionView.PrescriptionDetails
+        Public Property PrescriptionDetails As List(Of PrescriptionItemView) Implements IDoctorsPrescriptionView.PrescriptionDetails
             Get
                 Return _prescriptionDetails
             End Get
@@ -91,6 +91,7 @@ Namespace PresentationLayer.Views.Forms
                 BindPrescriptionDetails()
             End Set
         End Property
+
 
         Private Sub BindDoctorsPatient()
             SuspendLayout()
@@ -195,14 +196,14 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub btnSelectAll_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnSelectAll.ClickButtonArea
             For Each item In PrescriptionDetails
-                item.Print = True
+                'item.Print = True
             Next
             bsPrescriptionDetails.ResetBindings(False)
         End Sub
 
         Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
             For Each item In PrescriptionDetails
-                item.Print = False
+                'item.Print = False
             Next
             bsPrescriptionDetails.ResetBindings(False)
         End Sub
