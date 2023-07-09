@@ -97,7 +97,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property ProductName As String Implements IDrugSaleView.ProductName
+        Public Shadows Property ProductName As String Implements IDrugSaleView.ProductName
             Get
                 Return txtProductName.Text
             End Get

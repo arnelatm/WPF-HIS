@@ -7,7 +7,7 @@
     [Frequency]       NVARCHAR (20)   NULL,
     [FrequencyTiming] INT             NULL,
     [Duration]        DECIMAL (10, 2) NULL,
-    [DurationTiming]  INT             NULL,
+    [DurationUnit]  INT             NULL,
     [DateTimeStamp]   ROWVERSION      NULL,
     CONSTRAINT [PK_DosagePrinting] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );

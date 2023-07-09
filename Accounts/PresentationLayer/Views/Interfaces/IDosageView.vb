@@ -19,15 +19,15 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface IDosagePrintingView
         Inherits IDosageView
 
-        Property Dose As Decimal
-        Property DosageUnit As Int32
-        Property Duration As Decimal
-        Property DurationTiming As Decimal
-        Property FileNo As Int32
-        Property PatientName As String
         Property Age As Int16
         Property AgeDMY As String
+        Property Dose As Decimal
+        Property DoseUnit As Int32
+        Property Duration As Decimal
+        Property DurationUnit As Int16
+        Property FileNo As Int32
         Property Gender As String
+        Property PatientName As String
         Event AddNewDosage()
         Event UpdateTree()
         Event UpdatePatient()

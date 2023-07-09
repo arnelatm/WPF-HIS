@@ -8,7 +8,7 @@ Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class DosagePrinting
+    Public Class DosagePrintingForm
         Implements IDosagePrintingView
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
@@ -56,12 +56,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DosageUnit As Int32 Implements IDosagePrintingView.DosageUnit
+        Public Property DoseUnit As Int32 Implements IDosagePrintingView.DoseUnit
             Get
-                Return cboDosageUnit.GetValue(Of Int32)
+                Return cboDoseUnit.GetValue(Of Int32)
             End Get
             Set
-                cboDosageUnit.SetValue(Value)
+                cboDoseUnit.SetValue(Value)
             End Set
         End Property
 
@@ -74,12 +74,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DurationTiming As Decimal Implements IDosagePrintingView.DurationTiming
+        Public Property DurationUnit As Int16 Implements IDosagePrintingView.DurationUnit
             Get
-                Return cboDurationTiming.GetValue(Of Int32)
+                Return cboDurationUnit.GetValue(Of Int16)
             End Get
             Set
-                cboDurationTiming.SetValue(Value)
+                cboDurationUnit.SetValue(Value)
             End Set
         End Property
 
@@ -114,10 +114,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property FileNo As Integer Implements IDosagePrintingView.FileNo
             Get
-                Throw New NotImplementedException()
+                Return txtFileNo.Text
             End Get
-            Set(value As Integer)
-                Throw New NotImplementedException()
+            Set
+                txtFileNo.Text = Value
             End Set
         End Property
 
@@ -130,68 +130,40 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Age As Short Implements IDosagePrintingView.Age
+        Public Property Age As Int16 Implements IDosagePrintingView.Age
             Get
-                Throw New NotImplementedException()
+                Return txtAge.Text
             End Get
-            Set(value As Short)
-                Throw New NotImplementedException()
+            Set(value As Int16)
+                txtAge.Text = value
             End Set
         End Property
 
         Public Property AgeDMY As String Implements IDosagePrintingView.AgeDMY
             Get
-                Throw New NotImplementedException()
+                Return cboAgeDmy.GetValue(Of String)
             End Get
             Set(value As String)
-                Throw New NotImplementedException()
+                cboAgeDmy.SetValue(value)
             End Set
         End Property
 
         Public Property Gender As String Implements IDosagePrintingView.Gender
             Get
-                Throw New NotImplementedException()
+                Return cboGender.GetValue(Of String)
             End Get
-            Set(value As String)
-                Throw New NotImplementedException()
+            Set
+                cboGender.SetValue(Value)
             End Set
         End Property
 
-        Public Property Route As Integer Implements IDosageView.Route
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As Integer)
-                Throw New NotImplementedException()
-            End Set
-        End Property
+        Public Property Route As Int32 Implements IDosageView.Route
 
         Public Property Direction As Integer Implements IDosageView.Direction
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As Integer)
-                Throw New NotImplementedException()
-            End Set
-        End Property
 
         Public Property Frequency As Integer Implements IDosageView.Frequency
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As Integer)
-                Throw New NotImplementedException()
-            End Set
-        End Property
 
         Public Property FrequencyTiming As Integer Implements IDosageView.FrequencyTiming
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As Integer)
-                Throw New NotImplementedException()
-            End Set
-        End Property
 
 #Region "Field Items"
 
@@ -206,25 +178,31 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
-                {"Dose", txtDose},
+                {"Age", txtAge},
+                {"AgeDmy", cboAgeDmy},
+                {"DosageCode", txtDosageCode},
                 {"DosageName", txtDosageName},
                 {"DosageNameAra", txtDosageNameAra},
-                {"DosageUnit", cboDosageUnit},
+                {"Dose", txtDose},
+                {"DoseUnit", cboDoseUnit},
                 {"Duration", txtDuration},
-                {"DurationTiming", cboDurationTiming},
-                {"IdNo", txtIdNo}
+                {"DurationUnit", cboDurationUnit},
+                {"FileNo", txtFileNo},
+                {"Gender", cboGender},
+                {"IdNo", txtIdNo},
+                {"PatientName", txtPatientName}
                 }
         End Sub
 
         Private Sub DosagePrinting_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            btnAdd.Visible = False
-            btnDelete.Visible = False
-            btnFilter.Visible = False
-            btnSave.Visible = False
-            btnUndo.Visible = False
-            btnEdit.Visible = False
-            txtDose.Text = 1
-            txtDuration.Text = 1
+            'btnAdd.Visible = False
+            'btnDelete.Visible = False
+            'btnFilter.Visible = False
+            'btnSave.Visible = False
+            'btnUndo.Visible = False
+            'btnEdit.Visible = False
+            'txtDose.Text = 1
+            'txtDuration.Text = 1
         End Sub
 
         Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea

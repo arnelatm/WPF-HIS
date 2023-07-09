@@ -872,7 +872,6 @@ Namespace PresentationLayer.Views.Forms
 
         Private Overloads Sub RunForm(Of TV)()
             Dim formToRun = Activator.CreateInstance(GetType(TV))
-            ShowEntryForm(formToRun)
         End Sub
 
         Private Overloads Sub RunForm(Of TV, TX)(param As TX)
@@ -1118,7 +1117,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub DosageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDosagePrinting.Click
-            RunForm(Of DosagePrinting, DosagePrintingPresenter(Of DosageModel))()
+            RunForm(Of DosagePrintingForm, DosagePrintingPresenter(Of DosagePrintingModel))()
         End Sub
 
         Private Sub ToolStripMenuItemDosage_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDosage.Click

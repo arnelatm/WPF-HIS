@@ -74,6 +74,9 @@ Public Class CtComboBox
                 Else
                     ReadOnlyCombo = False
                 End If
+            Else
+                _displayOnly = False
+                ReadOnlyCombo = False
             End If
         End Set
     End Property
@@ -94,7 +97,7 @@ Public Class CtComboBox
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control value is hidden (used for secured controls)")>
-    Public Property Hidden As Boolean
+    Public Property Hidden As Boolean = False
 
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get
@@ -113,6 +116,9 @@ Public Class CtComboBox
                 Else
                     ReadOnlyCombo = True
                 End If
+            Else
+                _editingMode = True
+                ReadOnlyCombo = False
             End If
         End Set
     End Property
@@ -176,7 +182,7 @@ Public Class CtComboBox
         Set
             If Not AlwaysEditable Then
                 _readOnlyCombo = Value
-                If Value And Not AlwaysEditable Then
+                If Value Then
                     DropDownStyle = ComboBoxStyle.Simple
                     MaxDropDownItems = 1
                     If Hidden Then
@@ -199,6 +205,11 @@ Public Class CtComboBox
                     End If
                     DropDownHeight = _defaultDropDownHeight
                 End If
+            Else
+                _readOnlyCombo = False
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                DropDownHeight = _defaultDropDownHeight
             End If
         End Set
     End Property
@@ -307,6 +318,9 @@ Public Class CtComboBox
                     BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                 End If
             End If
+        Else
+            ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
         End If
     End Sub
 
@@ -324,6 +338,9 @@ Public Class CtComboBox
                     BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                 End If
             End If
+        Else
+            ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlBackgroundColor
         End If
     End Sub
 
@@ -414,6 +431,17 @@ Public Class CtComboBox
                 End If
                 DropDownHeight = _defaultDropDownHeight
             End If
+        Else
+            MaxDropDownItems = _defaultMaxDropDownItems
+            DropDownStyle = _defaultDropdownStyle
+            If Hidden Then
+                ForeColor = Color.Black
+                BackColor = Color.Black
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            End If
+            DropDownHeight = _defaultDropDownHeight
         End If
         EndUpdate()
     End Sub
