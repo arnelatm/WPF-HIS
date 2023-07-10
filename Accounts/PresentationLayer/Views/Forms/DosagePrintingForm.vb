@@ -208,9 +208,9 @@ Namespace PresentationLayer.Views.Forms
             cboDoseUnit.ReadOnlyCombo = False
             cboDoseUnit.EditingMode = True
             cboDoseUnit.MaxDropDownItems = 20
-            cboDoseUnit.DropDownStyle = ComboBoxStyle.DropDown
-            cboDoseUnit.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-            cboDoseUnit.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            'cboDoseUnit.DropDownStyle = ComboBoxStyle.DropDown
+            'cboDoseUnit.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            'cboDoseUnit.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
             cboDoseUnit.DropDownHeight = 150
             cboDurationUnit.Editable = True
             cboDurationUnit.ReadOnlyCombo = False
