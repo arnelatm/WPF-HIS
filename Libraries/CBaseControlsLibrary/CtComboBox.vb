@@ -98,7 +98,7 @@ Public Class CtComboBox
             If AlwaysEditable Then
                 DisplayOnly = False
             Else
-                DisplayOnly = Value
+                DisplayOnly = Not Value
             End If
         End Set
     End Property

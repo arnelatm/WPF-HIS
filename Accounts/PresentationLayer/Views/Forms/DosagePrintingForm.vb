@@ -195,17 +195,35 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub DosagePrinting_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            'btnAdd.Visible = False
-            'btnDelete.Visible = False
-            'btnFilter.Visible = False
-            'btnSave.Visible = False
-            'btnUndo.Visible = False
-            'btnEdit.Visible = False
-            'txtDose.Text = 1
-            'txtDuration.Text = 1
+            btnAdd.Visible = False
+            btnDelete.Visible = False
+            btnFilter.Visible = False
+            btnSave.Visible = False
+            btnUndo.Visible = False
+            btnEdit.Visible = False
+            txtDose.Text = 1
+            txtDuration.Text = 1
+            'cboDoseUnit.DisplayOnly = False
+            cboDoseUnit.Editable = True
+            cboDoseUnit.ReadOnlyCombo = False
+            cboDoseUnit.EditingMode = True
+            cboDoseUnit.MaxDropDownItems = 20
+            cboDoseUnit.DropDownStyle = ComboBoxStyle.DropDown
+            cboDoseUnit.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            cboDoseUnit.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            cboDoseUnit.DropDownHeight = 150
+            cboDurationUnit.Editable = True
+            cboDurationUnit.ReadOnlyCombo = False
         End Sub
 
         Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
+            'cboDoseUnit.DisplayOnly = False
+            cboDoseUnit.Editable = True
+            cboDoseUnit.EditingMode = True
+            cboDoseUnit.ReadOnlyCombo = False
+            cboDoseUnit.DropDownHeight = 150
+            cboDurationUnit.Editable = True
+            Debugger.Break()
             RaiseEvent AddNewDosage()
             RaiseEvent UpdateTree()
         End Sub
