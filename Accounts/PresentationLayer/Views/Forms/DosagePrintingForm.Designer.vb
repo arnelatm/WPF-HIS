@@ -48,8 +48,8 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPatientName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtFileNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-            Me.cboDurationUnit = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.cboDoseUnit = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboDurationUnit = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.cboAgeDmy = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.cboGender = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.txtDosageNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -139,7 +139,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblGender.DisplayOnly = True
             Me.lblGender.EditingMode = False
             Me.lblGender.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblGender.Location = New System.Drawing.Point(295, 300)
+            Me.lblGender.Location = New System.Drawing.Point(235, 300)
             Me.lblGender.Margin = New System.Windows.Forms.Padding(1)
             Me.lblGender.Name = "lblGender"
             Me.lblGender.Size = New System.Drawing.Size(56, 17)
@@ -185,10 +185,10 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel10.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CLabel10.EditingMode = False
             Me.CLabel10.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel10.Location = New System.Drawing.Point(295, 11)
+            Me.CLabel10.Location = New System.Drawing.Point(235, 11)
             Me.CLabel10.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel10.Name = "CLabel10"
-            Me.CLabel10.Size = New System.Drawing.Size(119, 23)
+            Me.CLabel10.Size = New System.Drawing.Size(179, 23)
             Me.CLabel10.TabIndex = 301
             Me.CLabel10.Text = "Code "
             Me.CLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -330,7 +330,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtIdNo.OverrideMaxLength = 0
             Me.txtIdNo.ReadOnly = True
             Me.txtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtIdNo.Size = New System.Drawing.Size(179, 23)
+            Me.txtIdNo.Size = New System.Drawing.Size(119, 23)
             Me.txtIdNo.TabIndex = 0
             Me.txtIdNo.Translatable = False
             '
@@ -579,8 +579,8 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-            Me.TableLayoutPanel1.Controls.Add(Me.cboDurationUnit, 1, 8)
             Me.TableLayoutPanel1.Controls.Add(Me.cboDoseUnit, 1, 2)
+            Me.TableLayoutPanel1.Controls.Add(Me.cboDurationUnit, 1, 8)
             Me.TableLayoutPanel1.Controls.Add(Me.cboAgeDmy, 1, 12)
             Me.TableLayoutPanel1.Controls.Add(Me.cboGender, 1, 12)
             Me.TableLayoutPanel1.Controls.Add(Me.txtFileNo, 0, 10)
@@ -625,6 +625,54 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Size = New System.Drawing.Size(526, 441)
             Me.TableLayoutPanel1.TabIndex = 0
             '
+            'cboDoseUnit
+            '
+            Me.cboDoseUnit.AlwaysEditable = True
+            Me.cboDoseUnit.BackColor = System.Drawing.Color.White
+            Me.cboDoseUnit.BegFindValue = Nothing
+            Me.cboDoseUnit.ChangingSearchValueOnly = False
+            Me.TableLayoutPanel1.SetColumnSpan(Me.cboDoseUnit, 2)
+            Me.cboDoseUnit.CurrentSearchTerm = ""
+            Me.cboDoseUnit.DataValue = Nothing
+            Me.cboDoseUnit.DefaultValue = Nothing
+            Me.cboDoseUnit.DisplayMember = "Name"
+            Me.cboDoseUnit.EditingMode = True
+            Me.cboDoseUnit.EndFindValue = Nothing
+            Me.cboDoseUnit.FieldDescription = Nothing
+            Me.cboDoseUnit.FieldName = Nothing
+            Me.cboDoseUnit.FilterRule = Nothing
+            Me.cboDoseUnit.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboDoseUnit.FindEnabled = False
+            Me.cboDoseUnit.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboDoseUnit.ForeColor = System.Drawing.Color.Black
+            Me.cboDoseUnit.FormattingEnabled = True
+            Me.cboDoseUnit.HideWhenNotEditingOrAdding = False
+            Me.cboDoseUnit.IgnoreCase = False
+            Me.cboDoseUnit.IntegralHeight = False
+            Me.cboDoseUnit.LimitToList = False
+            Me.cboDoseUnit.LinkedLabel = Nothing
+            Me.cboDoseUnit.Location = New System.Drawing.Point(114, 55)
+            Me.cboDoseUnit.Margin = New System.Windows.Forms.Padding(1)
+            Me.cboDoseUnit.Name = "cboDoseUnit"
+            Me.cboDoseUnit.OldValue = 0
+            Me.cboDoseUnit.OriginalDataSource = Nothing
+            Me.cboDoseUnit.OriginalList = Nothing
+            Me.cboDoseUnit.OverrideDropDownStyleList = False
+            Me.cboDoseUnit.PreviousSearchTerm = Nothing
+            Me.cboDoseUnit.PropertySelector = Nothing
+            Me.cboDoseUnit.ReadOnlyCombo = False
+            Me.cboDoseUnit.Size = New System.Drawing.Size(221, 24)
+            Me.cboDoseUnit.SuggestBoxHeight = 200
+            Me.cboDoseUnit.SuggestCharCount = 0
+            Me.cboDoseUnit.SuggestListOrderRule = Nothing
+            Me.cboDoseUnit.TabIndex = 315
+            Me.cboDoseUnit.TextToSearch = Nothing
+            Me.cboDoseUnit.Translatable = False
+            Me.cboDoseUnit.ValueIsMandatory = False
+            Me.cboDoseUnit.ValueIsNullable = False
+            Me.cboDoseUnit.ValueIsNumeric = True
+            Me.cboDoseUnit.ValueMember = "IdNo"
+            '
             'cboDurationUnit
             '
             Me.cboDurationUnit.AlwaysEditable = True
@@ -651,6 +699,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDurationUnit.HideWhenNotEditingOrAdding = False
             Me.cboDurationUnit.IgnoreCase = False
             Me.cboDurationUnit.IntegralHeight = False
+            Me.cboDurationUnit.LimitToList = False
             Me.cboDurationUnit.LinkedLabel = Nothing
             Me.cboDurationUnit.Location = New System.Drawing.Point(114, 230)
             Me.cboDurationUnit.Margin = New System.Windows.Forms.Padding(1)
@@ -673,49 +722,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDurationUnit.ValueIsNullable = False
             Me.cboDurationUnit.ValueIsNumeric = False
             Me.cboDurationUnit.ValueMember = "IdNo"
-            '
-            'cboDoseUnit
-            '
-            Me.cboDoseUnit.BackColor = System.Drawing.Color.White
-            Me.cboDoseUnit.BegFindValue = Nothing
-            Me.cboDoseUnit.ChangingSearchValueOnly = False
-            Me.TableLayoutPanel1.SetColumnSpan(Me.cboDoseUnit, 2)
-            Me.cboDoseUnit.CurrentSearchTerm = ""
-            Me.cboDoseUnit.DataValue = Nothing
-            Me.cboDoseUnit.DefaultValue = Nothing
-            Me.cboDoseUnit.DisplayMember = "Name"
-            Me.cboDoseUnit.EditingMode = True
-            Me.cboDoseUnit.EndFindValue = Nothing
-            Me.cboDoseUnit.FieldDescription = Nothing
-            Me.cboDoseUnit.FieldName = Nothing
-            Me.cboDoseUnit.FilterRule = Nothing
-            Me.cboDoseUnit.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboDoseUnit.FindEnabled = False
-            Me.cboDoseUnit.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cboDoseUnit.HideWhenNotEditingOrAdding = False
-            Me.cboDoseUnit.IgnoreCase = False
-            Me.cboDoseUnit.LinkedLabel = Me.lblDoseUnit
-            Me.cboDoseUnit.Location = New System.Drawing.Point(114, 55)
-            Me.cboDoseUnit.Margin = New System.Windows.Forms.Padding(1)
-            Me.cboDoseUnit.Name = "cboDoseUnit"
-            Me.cboDoseUnit.OldValue = 0
-            Me.cboDoseUnit.OriginalDataSource = Nothing
-            Me.cboDoseUnit.OriginalList = Nothing
-            Me.cboDoseUnit.OverrideDropDownStyleList = False
-            Me.cboDoseUnit.PreviousSearchTerm = Nothing
-            Me.cboDoseUnit.PropertySelector = Nothing
-            Me.cboDoseUnit.ReadOnlyCombo = False
-            Me.cboDoseUnit.Size = New System.Drawing.Size(300, 24)
-            Me.cboDoseUnit.SuggestBoxHeight = 200
-            Me.cboDoseUnit.SuggestCharCount = 0
-            Me.cboDoseUnit.SuggestListOrderRule = Nothing
-            Me.cboDoseUnit.TabIndex = 3
-            Me.cboDoseUnit.TextToSearch = Nothing
-            Me.cboDoseUnit.Translatable = False
-            Me.cboDoseUnit.ValueIsMandatory = False
-            Me.cboDoseUnit.ValueIsNullable = False
-            Me.cboDoseUnit.ValueIsNumeric = False
-            Me.cboDoseUnit.ValueMember = "IdNo"
             '
             'cboAgeDmy
             '
@@ -741,8 +747,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAgeDmy.HideWhenNotEditingOrAdding = False
             Me.cboAgeDmy.IgnoreCase = False
             Me.cboAgeDmy.IntegralHeight = False
+            Me.cboAgeDmy.LimitToList = False
             Me.cboAgeDmy.LinkedLabel = Nothing
-            Me.cboAgeDmy.Location = New System.Drawing.Point(295, 319)
+            Me.cboAgeDmy.Location = New System.Drawing.Point(114, 319)
             Me.cboAgeDmy.Margin = New System.Windows.Forms.Padding(1)
             Me.cboAgeDmy.Name = "cboAgeDmy"
             Me.cboAgeDmy.OldValue = 0
@@ -789,8 +796,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboGender.HideWhenNotEditingOrAdding = False
             Me.cboGender.IgnoreCase = False
             Me.cboGender.IntegralHeight = False
+            Me.cboGender.LimitToList = False
             Me.cboGender.LinkedLabel = Nothing
-            Me.cboGender.Location = New System.Drawing.Point(114, 319)
+            Me.cboGender.Location = New System.Drawing.Point(235, 319)
             Me.cboGender.Margin = New System.Windows.Forms.Padding(1)
             Me.cboGender.Name = "cboGender"
             Me.cboGender.OldValue = 0
@@ -902,8 +910,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblGender As CLabel
         Friend WithEvents cboGender As CtComboBox
         Friend WithEvents cboAgeDmy As CtComboBox
-        Friend WithEvents cboDoseUnit As CtComboBox
         Friend WithEvents txtDosageNameAra As CTextBox
         Friend WithEvents cboDurationUnit As CtComboBox
+        Friend WithEvents cboDoseUnit As CtComboBox
     End Class
 End Namespace

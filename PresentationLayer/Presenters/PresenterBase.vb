@@ -2065,6 +2065,17 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End If
     End Sub
 
+    Public Sub CreateEnumDataSourceT(Of TE)(ByVal fieldName As String)
+        Dim control As CtComboBox = Nothing
+        Dim x = MainFieldsDictionary
+        If MainFieldsDictionary.TryGetValue(fieldName, control) Then
+            control.DataSource = GetEnumData(Of TE)()
+        Else
+            Debugger.Break()
+            MessageBox.Show($"Field '" & fieldName & $"' is not valid!")
+        End If
+    End Sub
+
     Public Sub CreateEnumDataSource(Of TE)(ByRef comboControl As CaComboBox)
         comboControl.DataSource = GetEnumData(Of TE)()
     End Sub
