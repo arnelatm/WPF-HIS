@@ -39,6 +39,7 @@ Namespace PresentationLayer.Presenters
             data.Add({"ItemCode", "DurationUnit", Nothing, "CodeGroupIdNo=12"})
             data.Add({"ItemCode", "DoseUnit", Nothing, "CodeGroupIdNo=7"})
             CreateDataSourceThread(data)
+            CreateEnumDataSourceT(Of MaleFemaleSelection)("Gender")
             Dim viewIdNo As Int32 = GetRecordFieldWithKey("DosagePrinting", "SystemView", "SystemViewName", "IdNo")
             View.DoseUnit = GetRecordFieldWithKey(viewIdNo, "DefaultFieldValue", "SystemViewIdNo", "DefaultValue").ToInt32Number()
         End Sub

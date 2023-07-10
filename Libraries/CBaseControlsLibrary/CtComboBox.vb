@@ -62,6 +62,11 @@ Public Class CtComboBox
     <Browsable(True)>
     Public Property DisplayOnly As Boolean
         Get
+            If AlwaysEditable Then
+                _displayOnly = False
+            Else
+                Return _displayOnly
+            End If
             Return _displayOnly
         End Get
         Set(value As Boolean)
@@ -90,7 +95,11 @@ Public Class CtComboBox
         End Get
         Set
             _editable = Value
-            DisplayOnly = Value
+            If AlwaysEditable Then
+                DisplayOnly = False
+            Else
+                DisplayOnly = Value
+            End If
         End Set
     End Property
 
@@ -119,6 +128,7 @@ Public Class CtComboBox
             Else
                 _editingMode = True
                 ReadOnlyCombo = False
+                DropDownStyle = ComboBoxStyle.DropDown
             End If
         End Set
     End Property
@@ -207,8 +217,15 @@ Public Class CtComboBox
                 End If
             Else
                 _readOnlyCombo = False
-                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                MaxDropDownItems = _defaultMaxDropDownItems
+                DropDownStyle = _defaultDropdownStyle
+                If Hidden Then
+                    ForeColor = Color.Black
+                    BackColor = Color.Black
+                Else
+                    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+                End If
                 DropDownHeight = _defaultDropDownHeight
             End If
         End Set
@@ -266,9 +283,9 @@ Public Class CtComboBox
     <Bindable(True)>
     <Category("Properties")>
     <DefaultValue(GetType(Boolean))>
-    <Description("Set to True to specify that this control will only accept numeric values.")>
+    <Description("Set to True to specify that this control will only accept values on list.")>
     <Browsable(True)>
-    Private Property LimitToList As Boolean = False
+    Public Property LimitToList As Boolean = False
 
     Public Sub OnKeyDownPressed(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If DisplayOnly Then
@@ -407,30 +424,18 @@ Public Class CtComboBox
 
     Private Sub HideDropDown(hide As Boolean)
         BeginUpdate()
-        If Not AlwaysEditable Then
-            If hide Then
-                DropDownStyle = ComboBoxStyle.Simple
-                MaxDropDownItems = 1
-                If Hidden Then
-                    ForeColor = Color.Black
-                    BackColor = Color.Black
-                Else
-                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                End If
-                DropDownHeight = Height
+        'If Not AlwaysEditable Then
+        If hide Then
+            DropDownStyle = ComboBoxStyle.Simple
+            MaxDropDownItems = 1
+            If Hidden Then
+                ForeColor = Color.Black
+                BackColor = Color.Black
             Else
-                MaxDropDownItems = _defaultMaxDropDownItems
-                DropDownStyle = _defaultDropdownStyle
-                If Hidden Then
-                    ForeColor = Color.Black
-                    BackColor = Color.Black
-                Else
-                    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                End If
-                DropDownHeight = _defaultDropDownHeight
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             End If
+            DropDownHeight = Height
         Else
             MaxDropDownItems = _defaultMaxDropDownItems
             DropDownStyle = _defaultDropdownStyle
@@ -443,6 +448,18 @@ Public Class CtComboBox
             End If
             DropDownHeight = _defaultDropDownHeight
         End If
+        'Else
+        '    MaxDropDownItems = _defaultMaxDropDownItems
+        '    DropDownStyle = _defaultDropdownStyle
+        '    If Hidden Then
+        '        ForeColor = Color.Black
+        '        BackColor = Color.Black
+        '    Else
+        '        ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+        '        BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+        '    End If
+        '    DropDownHeight = _defaultDropDownHeight
+        'End If
         EndUpdate()
     End Sub
 
