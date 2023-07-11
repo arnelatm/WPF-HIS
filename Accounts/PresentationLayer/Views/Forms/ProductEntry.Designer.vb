@@ -36,13 +36,13 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblProductName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtProductName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblProductNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtProductNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.lblBaseUnit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboBaseUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.lblCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboCategoryIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblBarcode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -171,14 +171,6 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.Translatable = False
             Me.TxtIdNo.ValueIsNumeric = True
             '
-            'lblCategoryIdNo
-            '
-            Me.lblCategoryIdNo.DisplayOnly = True
-            Me.lblCategoryIdNo.EditingMode = False
-            resources.ApplyResources(Me.lblCategoryIdNo, "lblCategoryIdNo")
-            Me.lblCategoryIdNo.Name = "lblCategoryIdNo"
-            Me.lblCategoryIdNo.Translatable = True
-            '
             'lblProductName
             '
             Me.lblProductName.DisplayOnly = True
@@ -271,7 +263,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBaseUnitIdNo.DataValue = Nothing
             Me.cboBaseUnitIdNo.DefaultValue = ""
             Me.cboBaseUnitIdNo.DisplayMember = "Name"
-            Me.cboBaseUnitIdNo.EditingMode = False
+            Me.cboBaseUnitIdNo.Editable = True
+            Me.cboBaseUnitIdNo.EditingMode = True
             Me.cboBaseUnitIdNo.EndFindValue = Nothing
             Me.cboBaseUnitIdNo.FieldDescription = Nothing
             Me.cboBaseUnitIdNo.FieldName = Nothing
@@ -283,6 +276,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBaseUnitIdNo.ForeColor = System.Drawing.Color.Black
             Me.cboBaseUnitIdNo.HideWhenNotEditingOrAdding = False
             Me.cboBaseUnitIdNo.IgnoreCase = False
+            Me.cboBaseUnitIdNo.LimitToList = False
             Me.cboBaseUnitIdNo.LinkedLabel = Me.lblCategoryIdNo
             Me.cboBaseUnitIdNo.Name = "cboBaseUnitIdNo"
             Me.cboBaseUnitIdNo.OldValue = 0
@@ -301,6 +295,14 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBaseUnitIdNo.ValueIsNumeric = False
             Me.cboBaseUnitIdNo.ValueMember = "IdNo"
             '
+            'lblCategoryIdNo
+            '
+            Me.lblCategoryIdNo.DisplayOnly = True
+            Me.lblCategoryIdNo.EditingMode = False
+            resources.ApplyResources(Me.lblCategoryIdNo, "lblCategoryIdNo")
+            Me.lblCategoryIdNo.Name = "lblCategoryIdNo"
+            Me.lblCategoryIdNo.Translatable = True
+            '
             'cboCategoryIdNo
             '
             Me.cboCategoryIdNo.BackColor = System.Drawing.Color.White
@@ -310,7 +312,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboCategoryIdNo.DataValue = Nothing
             Me.cboCategoryIdNo.DefaultValue = ""
             Me.cboCategoryIdNo.DisplayMember = "Name"
-            Me.cboCategoryIdNo.EditingMode = False
+            Me.cboCategoryIdNo.Editable = True
+            Me.cboCategoryIdNo.EditingMode = True
             Me.cboCategoryIdNo.EndFindValue = Nothing
             Me.cboCategoryIdNo.FieldDescription = Nothing
             Me.cboCategoryIdNo.FieldName = Nothing
@@ -322,6 +325,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboCategoryIdNo.ForeColor = System.Drawing.Color.Black
             Me.cboCategoryIdNo.HideWhenNotEditingOrAdding = False
             Me.cboCategoryIdNo.IgnoreCase = False
+            Me.cboCategoryIdNo.LimitToList = False
             Me.cboCategoryIdNo.LinkedLabel = Me.lblCategoryIdNo
             Me.cboCategoryIdNo.Name = "cboCategoryIdNo"
             Me.cboCategoryIdNo.OldValue = 0
@@ -436,7 +440,6 @@ Namespace PresentationLayer.Views.Forms
             '
             'chkActive
             '
-            Me.chkActive.AlwaysEditable = False
             Me.chkActive.BackColor = System.Drawing.Color.White
             Me.chkActive.BegFindValue = Nothing
             Me.chkActive.DisplayOnly = False
@@ -523,6 +526,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewProductUnits.FieldDescription = Nothing
             Me.DataGridViewProductUnits.FieldName = Nothing
             Me.DataGridViewProductUnits.FieldsDictionary = Nothing
+            Me.DataGridViewProductUnits.FindColumnNo = CType(0, Short)
             Me.DataGridViewProductUnits.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.DataGridViewProductUnits.FindEnabled = False
             Me.DataGridViewProductUnits.FirstRowDeletionEnabled = True
@@ -532,6 +536,7 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.DataGridViewProductUnits, "DataGridViewProductUnits")
             Me.DataGridViewProductUnits.Name = "DataGridViewProductUnits"
             Me.DataGridViewProductUnits.ReadOnly = True
+            Me.DataGridViewProductUnits.Searchable = True
             Me.DataGridViewProductUnits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewProductUnits.SecurityKey = ""
             Me.DataGridViewProductUnits.SequenceColumn = "dgvSequence"

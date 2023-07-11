@@ -164,9 +164,9 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PayFrequency As PayFrequencySelection Implements IEmployeeView.PayFrequency
 
-        Public Property SponsorType As Char Implements IEmployeeView.SponsorType
+        Public Property SponsorType As String Implements IEmployeeView.SponsorType
             Get
-                Return cboSponsorType.GetValue()
+                Return cboSponsorType.GetValue(Of String)
             End Get
             Set
                 cboSponsorType.SetValue(Value)
@@ -335,7 +335,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PaymentMethod As Char Implements IEmployeeView.PaymentMethod
+        Public Property PaymentMethod As String Implements IEmployeeView.PaymentMethod
             Get
                 Return cboPaymentMethod.GetValue()
             End Get
