@@ -53,16 +53,16 @@ Namespace BusinessLayer
         Public Property OpeningBalance As Decimal
         Public Property PayCycleIdNo As Byte?
         Public Property PayGroupIdNo As Int16?
-        Public Property PaymentMethod As Char
+        Public Property PaymentMethod As String
         Public Property PayRateAmount As Decimal
-        Public Property PayRateType As Char
+        Public Property PayRateType As String
         Public Property Phone1 As String
         Public Property Phone2 As String
         Public Property PoBox As String
         Public Property ProvinceState As String
         Public Property ReleasedDate As Date?
         Public Property ReligionIdNo As Int16?
-        Public Property SponsorType As Char
+        Public Property SponsorType As String
         Public Property Street As String
         Public Property Supervisor As Boolean
         Public Property SupervisorIdNo As Int32

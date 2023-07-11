@@ -549,8 +549,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub PayElementEntryTv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            ImageListTreeView.Images.Add(Image.FromFile("Images\Deduction.png"))
-            ImageListTreeView.Images.Add(Image.FromFile("Images\Earning.png"))
+            ImageListTreeView.Images.Add(Image.FromFile("Resources\Deduction.png"))
+            ImageListTreeView.Images.Add(Image.FromFile("Resources\Earning.png"))
             FormTreeView.ImageList = ImageListTreeView
             UpdateReportGroup()
         End Sub

@@ -1922,10 +1922,8 @@
             Me.cacDepartmentIdNo.DataValue = Nothing
             Me.cacDepartmentIdNo.DefaultValue = Nothing
             Me.cacDepartmentIdNo.DisplayMember = "DepartmentName"
-            Me.cacDepartmentIdNo.DropDownHeight = 21
-            Me.cacDepartmentIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cacDepartmentIdNo.Editable = True
-            Me.cacDepartmentIdNo.EditingMode = False
+            Me.cacDepartmentIdNo.EditingMode = True
             Me.cacDepartmentIdNo.EndFindValue = Nothing
             Me.cacDepartmentIdNo.FieldDescription = Nothing
             Me.cacDepartmentIdNo.FieldName = Nothing
@@ -1943,7 +1941,6 @@
             Me.cacDepartmentIdNo.LinkedLabel = Me.lblDepartmentIdNo
             Me.cacDepartmentIdNo.Location = New System.Drawing.Point(179, 56)
             Me.cacDepartmentIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-            Me.cacDepartmentIdNo.MaxDropDownItems = 1
             Me.cacDepartmentIdNo.Name = "cacDepartmentIdNo"
             Me.cacDepartmentIdNo.OldValue = 0
             Me.cacDepartmentIdNo.OriginalDataSource = Nothing
@@ -1987,10 +1984,8 @@
             Me.cacDesignationIdNo.DataValue = Nothing
             Me.cacDesignationIdNo.DefaultValue = Nothing
             Me.cacDesignationIdNo.DisplayMember = "DesignationName"
-            Me.cacDesignationIdNo.DropDownHeight = 21
-            Me.cacDesignationIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cacDesignationIdNo.Editable = True
-            Me.cacDesignationIdNo.EditingMode = False
+            Me.cacDesignationIdNo.EditingMode = True
             Me.cacDesignationIdNo.EndFindValue = Nothing
             Me.cacDesignationIdNo.FieldDescription = Nothing
             Me.cacDesignationIdNo.FieldName = Nothing
@@ -2008,7 +2003,6 @@
             Me.cacDesignationIdNo.LinkedLabel = Nothing
             Me.cacDesignationIdNo.Location = New System.Drawing.Point(180, 82)
             Me.cacDesignationIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-            Me.cacDesignationIdNo.MaxDropDownItems = 1
             Me.cacDesignationIdNo.Name = "cacDesignationIdNo"
             Me.cacDesignationIdNo.OldValue = 0
             Me.cacDesignationIdNo.OriginalDataSource = Nothing
@@ -2053,16 +2047,14 @@
             Me.cboSponsorType.DataValue = Nothing
             Me.cboSponsorType.DefaultValue = Nothing
             Me.cboSponsorType.DisplayMember = "Name"
-            Me.cboSponsorType.DropDownHeight = 21
-            Me.cboSponsorType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboSponsorType.Editable = True
-            Me.cboSponsorType.EditingMode = False
+            Me.cboSponsorType.EditingMode = True
             Me.cboSponsorType.EndFindValue = Nothing
             Me.cboSponsorType.FieldDescription = Nothing
             Me.cboSponsorType.FieldName = Nothing
             Me.cboSponsorType.FilterRule = Nothing
             Me.cboSponsorType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboSponsorType.FindEnabled = False
+            Me.cboSponsorType.FindEnabled = True
             Me.floEmployment.SetFlowBreak(Me.cboSponsorType, True)
             Me.cboSponsorType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cboSponsorType.ForeColor = System.Drawing.Color.Black
@@ -2074,7 +2066,6 @@
             Me.cboSponsorType.LinkedLabel = Me.lblSponsorType
             Me.cboSponsorType.Location = New System.Drawing.Point(179, 108)
             Me.cboSponsorType.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-            Me.cboSponsorType.MaxDropDownItems = 1
             Me.cboSponsorType.Name = "cboSponsorType"
             Me.cboSponsorType.OldValue = 0
             Me.cboSponsorType.OriginalDataSource = Nothing
@@ -2083,15 +2074,14 @@
             Me.cboSponsorType.PreviousSearchTerm = Nothing
             Me.cboSponsorType.PropertySelector = Nothing
             Me.cboSponsorType.ReadOnlyCombo = False
-            Me.cboSponsorType.SecurityKey = "EPI"
-            Me.cboSponsorType.Size = New System.Drawing.Size(279, 24)
+            Me.cboSponsorType.Size = New System.Drawing.Size(278, 24)
             Me.cboSponsorType.SuggestBoxHeight = 200
             Me.cboSponsorType.SuggestListOrderRule = Nothing
             Me.cboSponsorType.TabIndex = 4
             Me.cboSponsorType.TextToSearch = Nothing
             Me.cboSponsorType.Translatable = False
             Me.cboSponsorType.ValueIsMandatory = False
-            Me.cboSponsorType.ValueIsNullable = True
+            Me.cboSponsorType.ValueIsNullable = False
             Me.cboSponsorType.ValueIsNumeric = False
             Me.cboSponsorType.ValueMember = "Code"
             '
@@ -2119,10 +2109,8 @@
             Me.cboSupervisorIdNo.DataValue = Nothing
             Me.cboSupervisorIdNo.DefaultValue = Nothing
             Me.cboSupervisorIdNo.DisplayMember = "EmployeeName"
-            Me.cboSupervisorIdNo.DropDownHeight = 21
-            Me.cboSupervisorIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboSupervisorIdNo.Editable = True
-            Me.cboSupervisorIdNo.EditingMode = False
+            Me.cboSupervisorIdNo.EditingMode = True
             Me.cboSupervisorIdNo.EndFindValue = Nothing
             Me.cboSupervisorIdNo.FieldDescription = Nothing
             Me.cboSupervisorIdNo.FieldName = Nothing
@@ -2140,7 +2128,6 @@
             Me.cboSupervisorIdNo.LinkedLabel = Nothing
             Me.cboSupervisorIdNo.Location = New System.Drawing.Point(180, 134)
             Me.cboSupervisorIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-            Me.cboSupervisorIdNo.MaxDropDownItems = 1
             Me.cboSupervisorIdNo.Name = "cboSupervisorIdNo"
             Me.cboSupervisorIdNo.OldValue = 0
             Me.cboSupervisorIdNo.OriginalDataSource = Nothing
@@ -2328,10 +2315,8 @@
             Me.cboPaymentMethod.DataValue = Nothing
             Me.cboPaymentMethod.DefaultValue = Nothing
             Me.cboPaymentMethod.DisplayMember = "Name"
-            Me.cboPaymentMethod.DropDownHeight = 21
-            Me.cboPaymentMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboPaymentMethod.Editable = True
-            Me.cboPaymentMethod.EditingMode = False
+            Me.cboPaymentMethod.EditingMode = True
             Me.cboPaymentMethod.EndFindValue = Nothing
             Me.cboPaymentMethod.FieldDescription = Nothing
             Me.cboPaymentMethod.FieldName = Nothing
@@ -2349,7 +2334,6 @@
             Me.cboPaymentMethod.LinkedLabel = Me.lblPaymentMethod
             Me.cboPaymentMethod.Location = New System.Drawing.Point(190, 4)
             Me.cboPaymentMethod.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-            Me.cboPaymentMethod.MaxDropDownItems = 1
             Me.cboPaymentMethod.Name = "cboPaymentMethod"
             Me.cboPaymentMethod.OldValue = 0
             Me.cboPaymentMethod.OriginalDataSource = Nothing
@@ -2395,10 +2379,8 @@
             Me.cacBankIdNo.DataValue = Nothing
             Me.cacBankIdNo.DefaultValue = Nothing
             Me.cacBankIdNo.DisplayMember = "BankName"
-            Me.cacBankIdNo.DropDownHeight = 21
-            Me.cacBankIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cacBankIdNo.Editable = True
-            Me.cacBankIdNo.EditingMode = False
+            Me.cacBankIdNo.EditingMode = True
             Me.cacBankIdNo.EndFindValue = Nothing
             Me.cacBankIdNo.FieldDescription = Nothing
             Me.cacBankIdNo.FieldName = Nothing
@@ -2416,7 +2398,6 @@
             Me.cacBankIdNo.LinkedLabel = Me.lblBankIdNo
             Me.cacBankIdNo.Location = New System.Drawing.Point(190, 30)
             Me.cacBankIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-            Me.cacBankIdNo.MaxDropDownItems = 1
             Me.cacBankIdNo.Name = "cacBankIdNo"
             Me.cacBankIdNo.OldValue = 0
             Me.cacBankIdNo.OriginalDataSource = Nothing
@@ -2658,10 +2639,8 @@
             Me.cboPayCycleidNo.DataValue = Nothing
             Me.cboPayCycleidNo.DefaultValue = Nothing
             Me.cboPayCycleidNo.DisplayMember = "PayCycleName"
-            Me.cboPayCycleidNo.DropDownHeight = 21
-            Me.cboPayCycleidNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboPayCycleidNo.Editable = True
-            Me.cboPayCycleidNo.EditingMode = False
+            Me.cboPayCycleidNo.EditingMode = True
             Me.cboPayCycleidNo.EndFindValue = Nothing
             Me.cboPayCycleidNo.FieldDescription = Nothing
             Me.cboPayCycleidNo.FieldName = Nothing
@@ -2679,7 +2658,6 @@
             Me.cboPayCycleidNo.LinkedLabel = Me.lblPayCycleIdNo
             Me.cboPayCycleidNo.Location = New System.Drawing.Point(190, 156)
             Me.cboPayCycleidNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-            Me.cboPayCycleidNo.MaxDropDownItems = 1
             Me.cboPayCycleidNo.Name = "cboPayCycleidNo"
             Me.cboPayCycleidNo.OldValue = 0
             Me.cboPayCycleidNo.OriginalDataSource = Nothing
@@ -2725,10 +2703,8 @@
             Me.cboPayGroupIdNo.DataValue = Nothing
             Me.cboPayGroupIdNo.DefaultValue = Nothing
             Me.cboPayGroupIdNo.DisplayMember = "PayGroupName"
-            Me.cboPayGroupIdNo.DropDownHeight = 21
-            Me.cboPayGroupIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboPayGroupIdNo.Editable = True
-            Me.cboPayGroupIdNo.EditingMode = False
+            Me.cboPayGroupIdNo.EditingMode = True
             Me.cboPayGroupIdNo.EndFindValue = Nothing
             Me.cboPayGroupIdNo.FieldDescription = Nothing
             Me.cboPayGroupIdNo.FieldName = Nothing
@@ -2746,7 +2722,6 @@
             Me.cboPayGroupIdNo.LinkedLabel = Me.lblPayGroupIdNo
             Me.cboPayGroupIdNo.Location = New System.Drawing.Point(190, 182)
             Me.cboPayGroupIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
-            Me.cboPayGroupIdNo.MaxDropDownItems = 1
             Me.cboPayGroupIdNo.Name = "cboPayGroupIdNo"
             Me.cboPayGroupIdNo.OldValue = 0
             Me.cboPayGroupIdNo.OriginalDataSource = Nothing
@@ -4054,7 +4029,6 @@
         Friend WithEvents tbpPhones As Libraries.CBaseControlsLibrary.CTabPage
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblSponsorType As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboSponsorType As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents TabPage1 As TabPage
         Friend WithEvents bsLeaveCredits As BindingSource
         Friend WithEvents DataGridViewLeaveCredits As Libraries.CBaseControlsLibrary.CDataGridView
@@ -4097,5 +4071,6 @@
         Friend WithEvents IdNoDataGridViewTextBoxColumn1 As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents CButton1 As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents cacNationalityCode As Libraries.CBaseControlsLibrary.CtComboBox
+        Friend WithEvents cboSponsorType As Libraries.CBaseControlsLibrary.CaComboBox
     End Class
 End NameSpace

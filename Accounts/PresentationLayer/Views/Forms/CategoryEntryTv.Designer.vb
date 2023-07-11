@@ -47,10 +47,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblVatSaleAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboVatSaleAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.lblVatPercentage = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtVatPercentage = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblPercentMark = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkNeedsExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CCheckBoxNew()
+            Me.txtVatPercentage = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblPercentMark = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -351,6 +351,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPurchaseAccountIdNo.DataValue = Nothing
             Me.cboPurchaseAccountIdNo.DefaultValue = Nothing
             Me.cboPurchaseAccountIdNo.DisplayMember = "Name"
+            Me.cboPurchaseAccountIdNo.Editable = True
             Me.cboPurchaseAccountIdNo.EditingMode = True
             Me.cboPurchaseAccountIdNo.EndFindValue = Nothing
             Me.cboPurchaseAccountIdNo.FieldDescription = Nothing
@@ -364,6 +365,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPurchaseAccountIdNo.FormattingEnabled = True
             Me.cboPurchaseAccountIdNo.HideWhenNotEditingOrAdding = False
             Me.cboPurchaseAccountIdNo.IgnoreCase = False
+            Me.cboPurchaseAccountIdNo.LimitToList = False
             Me.cboPurchaseAccountIdNo.LinkedLabel = Me.lblPurchaseAccountIdNo
             Me.cboPurchaseAccountIdNo.Name = "cboPurchaseAccountIdNo"
             Me.cboPurchaseAccountIdNo.OldValue = 0
@@ -399,6 +401,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSaleAccountIdNo.DataValue = Nothing
             Me.cboSaleAccountIdNo.DefaultValue = Nothing
             Me.cboSaleAccountIdNo.DisplayMember = "Name"
+            Me.cboSaleAccountIdNo.Editable = True
             Me.cboSaleAccountIdNo.EditingMode = True
             Me.cboSaleAccountIdNo.EndFindValue = Nothing
             Me.cboSaleAccountIdNo.FieldDescription = Nothing
@@ -412,6 +415,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSaleAccountIdNo.FormattingEnabled = True
             Me.cboSaleAccountIdNo.HideWhenNotEditingOrAdding = False
             Me.cboSaleAccountIdNo.IgnoreCase = False
+            Me.cboSaleAccountIdNo.LimitToList = False
             Me.cboSaleAccountIdNo.LinkedLabel = Nothing
             Me.cboSaleAccountIdNo.Name = "cboSaleAccountIdNo"
             Me.cboSaleAccountIdNo.OldValue = 0
@@ -447,6 +451,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboVatPurchaseAccountIdNo.DataValue = Nothing
             Me.cboVatPurchaseAccountIdNo.DefaultValue = Nothing
             Me.cboVatPurchaseAccountIdNo.DisplayMember = "Name"
+            Me.cboVatPurchaseAccountIdNo.Editable = True
             Me.cboVatPurchaseAccountIdNo.EditingMode = True
             Me.cboVatPurchaseAccountIdNo.EndFindValue = Nothing
             Me.cboVatPurchaseAccountIdNo.FieldDescription = Nothing
@@ -460,6 +465,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboVatPurchaseAccountIdNo.FormattingEnabled = True
             Me.cboVatPurchaseAccountIdNo.HideWhenNotEditingOrAdding = False
             Me.cboVatPurchaseAccountIdNo.IgnoreCase = False
+            Me.cboVatPurchaseAccountIdNo.LimitToList = False
             Me.cboVatPurchaseAccountIdNo.LinkedLabel = Me.lblVatPurchaseAccountIdNo
             Me.cboVatPurchaseAccountIdNo.Name = "cboVatPurchaseAccountIdNo"
             Me.cboVatPurchaseAccountIdNo.OldValue = 0
@@ -495,6 +501,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboVatSaleAccountIdNo.DataValue = Nothing
             Me.cboVatSaleAccountIdNo.DefaultValue = Nothing
             Me.cboVatSaleAccountIdNo.DisplayMember = "Name"
+            Me.cboVatSaleAccountIdNo.Editable = True
             Me.cboVatSaleAccountIdNo.EditingMode = True
             Me.cboVatSaleAccountIdNo.EndFindValue = Nothing
             Me.cboVatSaleAccountIdNo.FieldDescription = Nothing
@@ -508,6 +515,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboVatSaleAccountIdNo.FormattingEnabled = True
             Me.cboVatSaleAccountIdNo.HideWhenNotEditingOrAdding = False
             Me.cboVatSaleAccountIdNo.IgnoreCase = False
+            Me.cboVatSaleAccountIdNo.LimitToList = False
             Me.cboVatSaleAccountIdNo.LinkedLabel = Me.lblVatSaleAccountIdNo
             Me.cboVatSaleAccountIdNo.Name = "cboVatSaleAccountIdNo"
             Me.cboVatSaleAccountIdNo.OldValue = 0
@@ -533,6 +541,35 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.lblVatPercentage, "lblVatPercentage")
             Me.lblVatPercentage.Name = "lblVatPercentage"
             Me.lblVatPercentage.Translatable = True
+            '
+            'CLabel1
+            '
+            Me.CLabel1.DisplayOnly = True
+            Me.CLabel1.EditingMode = False
+            resources.ApplyResources(Me.CLabel1, "CLabel1")
+            Me.CLabel1.Name = "CLabel1"
+            Me.CLabel1.Translatable = True
+            '
+            'chkNeedsExpiryDate
+            '
+            Me.chkNeedsExpiryDate.BegFindValue = Nothing
+            Me.chkNeedsExpiryDate.BoxSize = New System.Drawing.Size(14, 14)
+            Me.chkNeedsExpiryDate.DisplayOnly = False
+            Me.chkNeedsExpiryDate.EditingMode = True
+            Me.chkNeedsExpiryDate.EndFindValue = Nothing
+            Me.chkNeedsExpiryDate.FieldDescription = Nothing
+            Me.chkNeedsExpiryDate.FieldName = Nothing
+            Me.chkNeedsExpiryDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkNeedsExpiryDate.FindEnabled = False
+            resources.ApplyResources(Me.chkNeedsExpiryDate, "chkNeedsExpiryDate")
+            Me.chkNeedsExpiryDate.IFindableControl_FindEnabled = False
+            Me.chkNeedsExpiryDate.IgnoreCase = False
+            Me.chkNeedsExpiryDate.LinkedLabel = Nothing
+            Me.chkNeedsExpiryDate.Name = "chkNeedsExpiryDate"
+            Me.chkNeedsExpiryDate.OldValue = Nothing
+            Me.chkNeedsExpiryDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.ExactValue
+            Me.chkNeedsExpiryDate.Translatable = True
+            Me.chkNeedsExpiryDate.UseVisualStyleBackColor = True
             '
             'txtVatPercentage
             '
@@ -570,35 +607,6 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPercentMark.Name = "lblPercentMark"
             Me.lblPercentMark.Translatable = True
             '
-            'CLabel1
-            '
-            Me.CLabel1.DisplayOnly = True
-            Me.CLabel1.EditingMode = False
-            resources.ApplyResources(Me.CLabel1, "CLabel1")
-            Me.CLabel1.Name = "CLabel1"
-            Me.CLabel1.Translatable = True
-            '
-            'chkNeedsExpiryDate
-            '
-            Me.chkNeedsExpiryDate.BegFindValue = Nothing
-            Me.chkNeedsExpiryDate.BoxSize = New System.Drawing.Size(14, 14)
-            Me.chkNeedsExpiryDate.DisplayOnly = False
-            Me.chkNeedsExpiryDate.EditingMode = True
-            Me.chkNeedsExpiryDate.EndFindValue = Nothing
-            Me.chkNeedsExpiryDate.FieldDescription = Nothing
-            Me.chkNeedsExpiryDate.FieldName = Nothing
-            Me.chkNeedsExpiryDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkNeedsExpiryDate.FindEnabled = False
-            resources.ApplyResources(Me.chkNeedsExpiryDate, "chkNeedsExpiryDate")
-            Me.chkNeedsExpiryDate.IFindableControl_FindEnabled = False
-            Me.chkNeedsExpiryDate.IgnoreCase = False
-            Me.chkNeedsExpiryDate.LinkedLabel = Nothing
-            Me.chkNeedsExpiryDate.Name = "chkNeedsExpiryDate"
-            Me.chkNeedsExpiryDate.OldValue = Nothing
-            Me.chkNeedsExpiryDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.ExactValue
-            Me.chkNeedsExpiryDate.Translatable = True
-            Me.chkNeedsExpiryDate.UseVisualStyleBackColor = True
-            '
             'CategoryEntryTv
             '
             resources.ApplyResources(Me, "$this")
@@ -607,8 +615,8 @@ Namespace PresentationLayer.Views.Forms
             Me.SplitContainer1.Panel2.ResumeLayout(False)
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
             Me.SplitContainer1.ResumeLayout(False)
-            CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.floDataDisplay.ResumeLayout(false)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.floDataDisplay.ResumeLayout(false)
         Me.floDataDisplay.PerformLayout
         Me.ResumeLayout(false)
         Me.PerformLayout

@@ -1,5 +1,6 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
+Imports AATM.Common
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
@@ -11,9 +12,11 @@ Imports AATM.ServicesLayer.Services
 Namespace PresentationLayer.Views.Forms.Reports
 
     Public Class StatementOfAp
+        Implements IPrintReportView
 
         Public Property MainTableName As String
         Protected SortOrderKey As String
+        Public Event PrintReport As IPrintReportView.PrintReportEventHandler Implements IPrintReportView.PrintReport
 
         Public Sub New()
 
@@ -27,6 +30,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim today = Now()
             dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, 1, 1)
             dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day)
+            Ea.PublishEvent(New GetControlDataSource("Supplier", cboSupplierIdNo))
 
         End Sub
 
@@ -64,10 +68,9 @@ Namespace PresentationLayer.Views.Forms.Reports
 
 
         Private Sub StatementOfAp_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            If Ea IsNot Nothing Then
-                Ea.PublishEvent(New GetControlDataSource("Supplier", cboSupplierIdNo))
-            End If
+            Ea.PublishEvent(New GetControlDataSource("Supplier", cboSupplierIdNo))
         End Sub
+
 
     End Class
 

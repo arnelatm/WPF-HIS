@@ -32,7 +32,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property OpeningBalance As Decimal
         Property PayCycleIdNo As Byte?
         Property PayGroupIdNo As Int16?
-        Property PaymentMethod As Char
+        Property PaymentMethod As String
         Property PoBox As String
         Property ProvinceState As String
         Property ReleasedDate As Date?
@@ -44,7 +44,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property TownCity As String
         Property ZipCode As String
         Property PayFrequency As PayFrequencySelection
-        Property SponsorType As Char
+        Property SponsorType As String
         Property RegularEmployeeDeductions As List(Of EmployeePayElementView)
         Property RegularEmployeeEarnings As List(Of EmployeePayElementView)
         Property EmployeeDocuments As List(Of EmployeeDocumentView)

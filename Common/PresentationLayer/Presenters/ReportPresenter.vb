@@ -9,7 +9,7 @@ Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
-    Public Class vb(Of TM As New)
+    Public Class ReportPresenter(Of TM As New)
         Inherits CommonPresenter(Of IReportView, TM)
         Implements ISubscriber(Of ShowReportRequested)
 
@@ -20,8 +20,8 @@ Namespace PresentationLayer.Presenters
             TreeViewMainField = "ReportName"
             SortOrderKey = "ReportName"
             WithTreeView = True
-            'Ea = New EventAggregator()
-            'Ea.SubscribeEvent(Me)
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
         End Sub
 
         Public Sub OnShowReportRequested(ByRef eventType As ShowReportRequested) Implements ISubscriber(Of ShowReportRequested).OnEventHandler
