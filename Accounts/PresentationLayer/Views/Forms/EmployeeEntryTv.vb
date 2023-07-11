@@ -74,7 +74,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property BankIdNo As Int16? Implements IEmployeeView.BankIdNo
             Get
-               Return cacBankIdNo.GetValue(Of Int16?)                
+                Return cacBankIdNo.GetValue(Of Int16?)
             End Get
             Set
                 cacBankIdNo.SetValue(Value)
@@ -264,7 +264,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property IdNo As Int32 Implements IEmployeeView.IdNo
             Get
-                return TxtIdNo.GetValue(Of Int32)
+                Return TxtIdNo.GetValue(Of Int32)
             End Get
             Set
                 TxtIdNo.SetValue(Value)
@@ -400,7 +400,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property SupervisorIdNo As Int32 Implements IEmployeeView.SupervisorIdNo
             Get
-                Return cboSupervisorIdNo.GetValue(of Int32)
+                Return cboSupervisorIdNo.GetValue(Of Int32)
             End Get
             Set
                 cboSupervisorIdNo.SetValue(Value)
@@ -812,6 +812,9 @@ Namespace PresentationLayer.Views.Forms
             ProcessCellEndEdit(DataGridViewLeaveCredits, bsLeaveCredits)
         End Sub
 
+        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
+            Debugger.Break()
+        End Sub
     End Class
 
 End Namespace

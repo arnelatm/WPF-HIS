@@ -369,9 +369,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayorType.OverrideDropDownStyleList = false
         Me.cboPayorType.PreviousSearchTerm = Nothing
         Me.cboPayorType.PropertySelector = Nothing
-        Me.cboPayorType.ReadOnlyCombo = false
-        Me.cboPayorType.SuggestBoxHeight = 200
-        Me.cboPayorType.SuggestListOrderRule = Nothing
+            Me.cboPayorType.SuggestBoxHeight = 200
+            Me.cboPayorType.SuggestListOrderRule = Nothing
         Me.cboPayorType.TextToSearch = Nothing
         Me.cboPayorType.Translatable = false
         Me.cboPayorType.ValueIsMandatory = false
@@ -416,9 +415,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPayorIdNo.OverrideDropDownStyleList = false
         Me.cboPayorIdNo.PreviousSearchTerm = Nothing
         Me.cboPayorIdNo.PropertySelector = Nothing
-        Me.cboPayorIdNo.ReadOnlyCombo = false
-        Me.cboPayorIdNo.SuggestBoxHeight = 200
-        Me.cboPayorIdNo.SuggestListOrderRule = Nothing
+            Me.cboPayorIdNo.SuggestBoxHeight = 200
+            Me.cboPayorIdNo.SuggestListOrderRule = Nothing
         Me.cboPayorIdNo.TextToSearch = Nothing
         Me.cboPayorIdNo.Translatable = false
         Me.cboPayorIdNo.ValueIsMandatory = false
@@ -496,9 +494,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAccountIdNo.OverrideDropDownStyleList = false
         Me.cboAccountIdNo.PreviousSearchTerm = Nothing
         Me.cboAccountIdNo.PropertySelector = Nothing
-        Me.cboAccountIdNo.ReadOnlyCombo = false
-        Me.cboAccountIdNo.SuggestBoxHeight = 200
-        Me.cboAccountIdNo.SuggestListOrderRule = Nothing
+            Me.cboAccountIdNo.SuggestBoxHeight = 200
+            Me.cboAccountIdNo.SuggestListOrderRule = Nothing
         Me.cboAccountIdNo.TextToSearch = Nothing
         Me.cboAccountIdNo.Translatable = false
         Me.cboAccountIdNo.ValueIsMandatory = false
@@ -570,9 +567,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboDiscountAccountIdNo.OverrideDropDownStyleList = false
         Me.cboDiscountAccountIdNo.PreviousSearchTerm = Nothing
         Me.cboDiscountAccountIdNo.PropertySelector = Nothing
-        Me.cboDiscountAccountIdNo.ReadOnlyCombo = false
-        Me.cboDiscountAccountIdNo.SuggestBoxHeight = 200
-        Me.cboDiscountAccountIdNo.SuggestListOrderRule = Nothing
+            Me.cboDiscountAccountIdNo.SuggestBoxHeight = 200
+            Me.cboDiscountAccountIdNo.SuggestListOrderRule = Nothing
         Me.cboDiscountAccountIdNo.TextToSearch = Nothing
         Me.cboDiscountAccountIdNo.Translatable = false
         Me.cboDiscountAccountIdNo.ValueIsMandatory = false

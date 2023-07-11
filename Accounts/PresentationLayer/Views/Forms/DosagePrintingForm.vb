@@ -2,6 +2,7 @@
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Common
 Imports AATM.Libraries
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Views
@@ -141,10 +142,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property AgeDMY As String Implements IDosagePrintingView.AgeDMY
             Get
-                Return cboAgeDmy.GetValue(Of String)
+                Return cboAgeYmd.GetValue()
             End Get
             Set(value As String)
-                cboAgeDmy.SetValue(value)
+                cboAgeYmd.SetValue(value)
             End Set
         End Property
 
@@ -165,6 +166,26 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property FrequencyTiming As Integer Implements IDosageView.FrequencyTiming
 
+        Public Property DefaultDoseUnit As Short Implements IDosagePrintingView.DefaultDoseUnit
+
+        Public Property DefaultDurationUnit As Short Implements IDosagePrintingView.DefaultDurationUnit
+
+        Public Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
+            SetAlwaysEditableFields()
+        End Sub
+
+        Private Sub SetAlwaysEditableFields()
+            txtDose.Text = 1
+            txtDuration.Text = 1
+            cboDoseUnit.EditingMode = True
+            cboGender.EditingMode = True
+            cboDurationUnit.EditingMode = True
+            cboAgeYmd.EditingMode = True
+            cboGender.EditingMode = True
+            cboDoseUnit.SetValue(DefaultDoseUnit)
+            cboDurationUnit.SetValue(DefaultDurationUnit)
+        End Sub
+
 #Region "Field Items"
 
 #End Region
@@ -179,7 +200,7 @@ Namespace PresentationLayer.Views.Forms
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
                 {"Age", txtAge},
-                {"AgeDmy", cboAgeDmy},
+                {"AgeYmd", cboAgeYmd},
                 {"DosageCode", txtDosageCode},
                 {"DosageName", txtDosageName},
                 {"DosageNameAra", txtDosageNameAra},
@@ -201,29 +222,10 @@ Namespace PresentationLayer.Views.Forms
             btnSave.Visible = False
             btnUndo.Visible = False
             btnEdit.Visible = False
-            txtDose.Text = 1
-            txtDuration.Text = 1
-            'cboDoseUnit.DisplayOnly = False
-            cboDoseUnit.Editable = True
-            cboDoseUnit.ReadOnlyCombo = False
-            cboDoseUnit.EditingMode = True
-            cboDoseUnit.MaxDropDownItems = 20
-            'cboDoseUnit.DropDownStyle = ComboBoxStyle.DropDown
-            'cboDoseUnit.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-            'cboDoseUnit.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-            cboDoseUnit.DropDownHeight = 150
-            cboDurationUnit.Editable = True
-            cboDurationUnit.ReadOnlyCombo = False
+            SetAlwaysEditableFields()
         End Sub
 
         Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
-            'cboDoseUnit.DisplayOnly = False
-            cboDoseUnit.Editable = True
-            cboDoseUnit.EditingMode = True
-            cboDoseUnit.ReadOnlyCombo = False
-            cboDoseUnit.DropDownHeight = 150
-            cboDurationUnit.Editable = True
-            Debugger.Break()
             RaiseEvent AddNewDosage()
             RaiseEvent UpdateTree()
         End Sub

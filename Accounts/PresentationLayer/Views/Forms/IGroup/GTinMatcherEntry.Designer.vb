@@ -843,7 +843,6 @@
             Me.cboDosageForm.OverrideDropDownStyleList = False
             Me.cboDosageForm.PreviousSearchTerm = Nothing
             Me.cboDosageForm.PropertySelector = Nothing
-            Me.cboDosageForm.ReadOnlyCombo = False
             Me.cboDosageForm.Size = New System.Drawing.Size(216, 23)
             Me.cboDosageForm.SuggestBoxHeight = 200
             Me.cboDosageForm.SuggestCharCount = 0
@@ -946,7 +945,6 @@
             Me.cboUnitOfStrength.OverrideDropDownStyleList = False
             Me.cboUnitOfStrength.PreviousSearchTerm = Nothing
             Me.cboUnitOfStrength.PropertySelector = Nothing
-            Me.cboUnitOfStrength.ReadOnlyCombo = False
             Me.cboUnitOfStrength.Size = New System.Drawing.Size(216, 23)
             Me.cboUnitOfStrength.SuggestBoxHeight = 200
             Me.cboUnitOfStrength.SuggestCharCount = 0
@@ -1050,7 +1048,6 @@
             Me.cboUnitOfVolume.OverrideDropDownStyleList = False
             Me.cboUnitOfVolume.PreviousSearchTerm = Nothing
             Me.cboUnitOfVolume.PropertySelector = Nothing
-            Me.cboUnitOfVolume.ReadOnlyCombo = False
             Me.cboUnitOfVolume.Size = New System.Drawing.Size(216, 23)
             Me.cboUnitOfVolume.SuggestBoxHeight = 200
             Me.cboUnitOfVolume.SuggestCharCount = 0
@@ -1109,7 +1106,6 @@
             Me.cboPackageType.OverrideDropDownStyleList = False
             Me.cboPackageType.PreviousSearchTerm = Nothing
             Me.cboPackageType.PropertySelector = Nothing
-            Me.cboPackageType.ReadOnlyCombo = False
             Me.cboPackageType.Size = New System.Drawing.Size(148, 23)
             Me.cboPackageType.SuggestBoxHeight = 200
             Me.cboPackageType.SuggestCharCount = 0
@@ -1214,7 +1210,6 @@
             Me.cboRouteOfAdministration.OverrideDropDownStyleList = False
             Me.cboRouteOfAdministration.PreviousSearchTerm = Nothing
             Me.cboRouteOfAdministration.PropertySelector = Nothing
-            Me.cboRouteOfAdministration.ReadOnlyCombo = False
             Me.cboRouteOfAdministration.Size = New System.Drawing.Size(497, 23)
             Me.cboRouteOfAdministration.SuggestBoxHeight = 200
             Me.cboRouteOfAdministration.SuggestCharCount = 0

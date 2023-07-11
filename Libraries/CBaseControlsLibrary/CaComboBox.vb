@@ -14,15 +14,12 @@ Public Class CaComboBox
 #Region "Custom Properties"
 
     'Private MyErrorProvider As New ErrorProviderExtended
-    Private _displayOnly As Boolean
-
-    Private _editable As Boolean
     Private _translatable As Boolean = False
     Private _editingMode As Boolean = True
     Private _filterRule As Expression(Of Func(Of String, String, Boolean))
     Private _filterRuleCompiled As Func(Of String, Boolean)
     Private _propertySelector As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String)))
-    Private _readOnlyCombo As Boolean
+    'Private _readOnlyCombo As Boolean
     Private _suggestListOrderRule As Expression(Of Func(Of String, String))
     Private _suggestListOrderRuleCompiled As Func(Of String, String)
     Private ReadOnly _defaultDropDownHeight As Int16
@@ -35,6 +32,7 @@ Public Class CaComboBox
     Public DataSourceProgrammaticChange As Boolean = False
     Protected SuggestListForm As CListBoxForm = New CListBoxForm
 
+    Private Property _editMode As Boolean
     Public Property ChangingSearchValueOnly As Boolean = False
 
     Public Shared Property Copy As String = "Copy Selected Text"
@@ -60,35 +58,13 @@ Public Class CaComboBox
     <Description("Set to True to specify that this control is for DisplayOnly.")>
     <Browsable(True)>
     Public Property DisplayOnly As Boolean
-        Get
-            Return _displayOnly
-        End Get
-        Set(value As Boolean)
-            If Not AlwaysEditable Then
-                If _displayOnly <> value Then
-                    _displayOnly = value
-                End If
-                If value Then
-                    ReadOnlyCombo = True
-                Else
-                    ReadOnlyCombo = False
-                End If
-            End If
-        End Set
-    End Property
+
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control can be edited.")>
-    Public Property Editable As Boolean
-        Get
-            Return _editable
-        End Get
-        Set
-            _editable = Value
-            DisplayOnly = Value
-        End Set
-    End Property
+    Public Property Editable As Boolean = True
+
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
@@ -100,18 +76,33 @@ Public Class CaComboBox
             Return _editingMode
         End Get
         Set(value As Boolean)
-            If Not AlwaysEditable Then
-                _editingMode = value
-                If value Then
-                    If DisplayOnly Then
-                        ReadOnlyCombo = True
+            _editingMode = value
+            If value Then
+                If Editable AndAlso Not DisplayOnly Then
+                    DropDownHeight = _defaultDropDownHeight
+                    DropDownStyle = _defaultDropdownStyle
+                    MaxDropDownItems = _defaultMaxDropDownItems
+                    If Hidden Then
+                        ForeColor = Color.Black
+                        BackColor = Color.Black
                     Else
-                        ReadOnlyCombo = False
-                        DropDownStyle = ComboBoxStyle.DropDown
+                        ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                        BackColor = GlobalVariables.DefaultFormControlBackgroundColor
                     End If
                 Else
-                    ReadOnlyCombo = True
+                    DropDownStyle = ComboBoxStyle.Simple
+                    DropDownHeight = Height
+                    MaxDropDownItems = 1
+                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                 End If
+            Else
+                DropDownStyle = ComboBoxStyle.Simple
+                DropDownHeight = Height
+                MaxDropDownItems = 1
+                IntegralHeight = True
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             End If
         End Set
     End Property
@@ -162,38 +153,6 @@ Public Class CaComboBox
     End Property
 
     Public Property ReadOnlyCombo As Boolean
-        Get
-            Return _readOnlyCombo
-        End Get
-        Set
-            If Not AlwaysEditable Then
-                _readOnlyCombo = Value
-                If Value And Not AlwaysEditable Then
-                    DropDownStyle = ComboBoxStyle.Simple
-                    MaxDropDownItems = 1
-                    If Hidden Then
-                        ForeColor = Color.Black
-                        BackColor = Color.Black
-                    Else
-                        ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                        BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                    End If
-                    DropDownHeight = Height
-                Else
-                    MaxDropDownItems = _defaultMaxDropDownItems
-                    DropDownStyle = _defaultDropdownStyle
-                    If Hidden Then
-                        ForeColor = Color.Black
-                        BackColor = Color.Black
-                    Else
-                        ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                        BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                    End If
-                    DropDownHeight = _defaultDropDownHeight
-                End If
-            End If
-        End Set
-    End Property
 
     Public Property SuggestBoxHeight As Integer
         Get
@@ -286,35 +245,31 @@ Public Class CaComboBox
     Private _previousIndex As Integer
 
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
-        If Not AlwaysEditable Then
-            If Hidden Then
-                ForeColor = Color.Black
-                BackColor = Color.Black
+        If Hidden Then
+            ForeColor = Color.Black
+            BackColor = Color.Black
+        Else
+            If EditingMode And Not DisplayOnly Then
+                ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
             Else
-                If EditingMode And Not DisplayOnly Then
-                    ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
-                Else
-                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                End If
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             End If
         End If
     End Sub
 
     Public Sub LeaveHandler(sender As Object, e As EventArgs) Handles MyBase.Leave
-        If Not AlwaysEditable Then
-            If Hidden Then
-                ForeColor = Color.Black
-                BackColor = Color.Black
+        If Hidden Then
+            ForeColor = Color.Black
+            BackColor = Color.Black
+        Else
+            If EditingMode And Not DisplayOnly Then
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
             Else
-                If EditingMode And Not DisplayOnly Then
-                    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                Else
-                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                End If
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             End If
         End If
     End Sub
@@ -344,10 +299,13 @@ Public Class CaComboBox
     End Sub
 
     Protected Overloads Overrides Sub OnPreviewKeyDown(e As PreviewKeyDownEventArgs)
+        Dim sw As Int16 = 0
+        BeginUpdate()
         If Not SuggestListForm.Visible Then
             MyBase.OnPreviewKeyDown(e)
-            Return
+            sw = 1
         End If
+        If sw = 0 Then
         Select Case e.KeyCode
             Case Keys.Down
                 If SuggestListForm.SuggestListBox.SelectedIndex < _suggestBindingList.Count - 1 Then
@@ -358,52 +316,52 @@ Public Class CaComboBox
             Case Keys.Up
                 If SuggestListForm.SuggestListBox.SelectedIndex > 0 Then
 #Disable Warning ReturnValueOfPureMethodIsNotUsed
-                    Math.Max(Interlocked.Decrement(SuggestListForm.SuggestListBox.SelectedIndex), SuggestListForm.SuggestListBox.SelectedIndex + 1)
+                        Math.Max(Interlocked.Decrement(SuggestListForm.SuggestListBox.SelectedIndex), SuggestListForm.SuggestListBox.SelectedIndex + 1)
 #Enable Warning ReturnValueOfPureMethodIsNotUsed
-                End If
-                Return
-            Case Keys.Enter
-                Text = SuggestListForm.SuggestListBox.Text
-                [Select](0, Text.Length)
-                SuggestListForm.Hide()
-                SuggestListForm.Visible = False
-                Return
-            Case Keys.Escape
-                HideSuggestionBox()
-                Return
-        End Select
-        MyBase.OnPreviewKeyDown(e)
+                    End If
+                Case Keys.Enter
+                    Text = SuggestListForm.SuggestListBox.Text
+                    [Select](0, Text.Length)
+                    SuggestListForm.Hide()
+                    SuggestListForm.Visible = False
+                Case Keys.Escape
+                    HideSuggestionBox()
+            End Select
+            MyBase.OnPreviewKeyDown(e)
+        End If
+        EndUpdate()
     End Sub
 
     Private Sub HideDropDown(hide As Boolean)
-        If Not AlwaysEditable Then
-            If hide Then
-                DropDownStyle = ComboBoxStyle.Simple
-                MaxDropDownItems = 1
-                If Hidden Then
-                    ForeColor = Color.Black
-                    BackColor = Color.Black
-                Else
-                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                End If
-                DropDownHeight = Height
+        BeginUpdate()
+        If hide Then
+            DropDownStyle = ComboBoxStyle.Simple
+            MaxDropDownItems = 1
+            If Hidden Then
+                ForeColor = Color.Black
+                BackColor = Color.Black
             Else
-                MaxDropDownItems = _defaultMaxDropDownItems
-                DropDownStyle = _defaultDropdownStyle
-                If Hidden Then
-                    ForeColor = Color.Black
-                    BackColor = Color.Black
-                Else
-                    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                End If
-                DropDownHeight = _defaultDropDownHeight
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             End If
+            DropDownHeight = Height
+        Else
+            MaxDropDownItems = _defaultMaxDropDownItems
+            DropDownStyle = _defaultDropdownStyle
+            If Hidden Then
+                ForeColor = Color.Black
+                BackColor = Color.Black
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            End If
+            DropDownHeight = _defaultDropDownHeight
         End If
+        EndUpdate()
     End Sub
 
     Protected Overrides Sub OnTextChanged(ByVal e As EventArgs)
+        BeginUpdate()
         MyBase.OnTextChanged(e)
         If Not Focused Then Return
         _suggestBindingList.Clear()
@@ -425,6 +383,7 @@ Public Class CaComboBox
             [Select](0, Text.Length)
             HideSuggestionBox()
         End If
+        EndUpdate()
     End Sub
 
     Private Sub caComboBox_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
@@ -464,7 +423,9 @@ Public Class CaComboBox
         FlatStyle = FlatStyle.Standard
         Font = myFont
         BorderColor = Color.DimGray
-        ValueMember = "IdNo"
+        If ValueMember Is Nothing OrElse ValueMember = "" Then
+            ValueMember = "IdNo"
+        End If
         DisplayMember = "Name"
         _defaultMaxDropDownItems = MaxDropDownItems
         _defaultDropdownStyle = DropDownStyle
@@ -481,6 +442,27 @@ Public Class CaComboBox
 
     End Sub
 
+    Public Function GetValue(Of T)() As T
+        If SelectedIndex = -1 Then
+            Return Nothing
+        Else
+            Dim x As T
+            x = CType(SelectedValue, T)
+            Return x
+            'If ValueMember.ToLower() = "idno" Then
+            '    Return CType(SelectedItem, Lookup.LookupData).IdNo
+            'ElseIf ValueMember.ToLower() = "name" Then
+            '    Return CType(SelectedItem, Lookup.LookupData).Name
+            'ElseIf ValueMember.ToLower() = "code" Then
+            '    Return CType(SelectedItem, Lookup.LookupData).Code
+            'ElseIf ValueMember.ToLower() = "index" Then
+            '    Return CType(SelectedItem, Lookup.LookupData).Index
+            'Else
+            '    Return Text
+            'End If
+        End If
+    End Function
+    
     Public Function GetValue()
         If SelectedItem IsNot Nothing Then
             If ValueMember.ToLower() = "idno" Then
@@ -508,26 +490,34 @@ Public Class CaComboBox
         End If
     End Function
 
-    Public Sub SetValue(ByRef value)
+    Public Sub SetValue(value)
         If value Is DBNull.Value OrElse value Is Nothing Then
-            Text = Nothing
+            SelectedIndex = -1
         Else
-            If ValueMember.ToLower() = "idno" Then
-                If IsNumeric(value) Then
-                    IdNoSearch(value)
-                Else
-                    SelectedIndex = -1
-                End If
-            ElseIf ValueMember.ToLower() = "code" Then
-                CodeSearch(value)
-            Else
-                NameSearch(value)
-                'SelectedValue = value
-                'Text = value
-                'SelectedText = value
-            End If
+            SelectedValue = value
         End If
     End Sub
+    
+    'Public Sub SetValue(ByRef value)
+    '    If value Is DBNull.Value OrElse value Is Nothing Then
+    '        Text = Nothing
+    '    Else
+    '        If ValueMember.ToLower() = "idno" Then
+    '            If IsNumeric(value) Then
+    '                IdNoSearch(value)
+    '            Else
+    '                SelectedIndex = -1
+    '            End If
+    '        ElseIf ValueMember.ToLower() = "code" Then
+    '            CodeSearch(value)
+    '        Else
+    '            NameSearch(value)
+    '            'SelectedValue = value
+    '            'Text = value
+    '            'SelectedText = value
+    '        End If
+    '    End If
+    'End Sub
 
     Public Property DataValue
 

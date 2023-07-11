@@ -121,7 +121,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboRoute.OverrideDropDownStyleList = False
             Me.cboRoute.PreviousSearchTerm = Nothing
             Me.cboRoute.PropertySelector = Nothing
-            Me.cboRoute.ReadOnlyCombo = False
             Me.cboRoute.Size = New System.Drawing.Size(758, 24)
             Me.cboRoute.SuggestBoxHeight = 200
             Me.cboRoute.SuggestCharCount = 0
@@ -388,7 +387,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDirection.OverrideDropDownStyleList = False
             Me.cboDirection.PreviousSearchTerm = Nothing
             Me.cboDirection.PropertySelector = Nothing
-            Me.cboDirection.ReadOnlyCombo = False
             Me.cboDirection.Size = New System.Drawing.Size(758, 24)
             Me.cboDirection.SuggestBoxHeight = 200
             Me.cboDirection.SuggestCharCount = 0
@@ -450,7 +448,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboFrequency.OverrideDropDownStyleList = False
             Me.cboFrequency.PreviousSearchTerm = Nothing
             Me.cboFrequency.PropertySelector = Nothing
-            Me.cboFrequency.ReadOnlyCombo = False
             Me.cboFrequency.Size = New System.Drawing.Size(142, 24)
             Me.cboFrequency.SuggestBoxHeight = 200
             Me.cboFrequency.SuggestCharCount = 0
@@ -497,7 +494,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboFrequencyTiming.OverrideDropDownStyleList = False
             Me.cboFrequencyTiming.PreviousSearchTerm = Nothing
             Me.cboFrequencyTiming.PropertySelector = Nothing
-            Me.cboFrequencyTiming.ReadOnlyCombo = False
             Me.cboFrequencyTiming.Size = New System.Drawing.Size(614, 24)
             Me.cboFrequencyTiming.SuggestBoxHeight = 200
             Me.cboFrequencyTiming.SuggestCharCount = 0

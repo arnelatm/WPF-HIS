@@ -273,9 +273,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cacParentIdNo.OverrideDropDownStyleList = false
         Me.cacParentIdNo.PreviousSearchTerm = Nothing
         Me.cacParentIdNo.PropertySelector = Nothing
-        Me.cacParentIdNo.ReadOnlyCombo = false
-        Me.cacParentIdNo.SuggestBoxHeight = 200
-        Me.cacParentIdNo.SuggestListOrderRule = Nothing
+            Me.cacParentIdNo.SuggestBoxHeight = 200
+            Me.cacParentIdNo.SuggestListOrderRule = Nothing
         Me.cacParentIdNo.TextToSearch = Nothing
         Me.cacParentIdNo.Translatable = false
         Me.cacParentIdNo.ValueIsMandatory = false
@@ -321,9 +320,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cacRevCostCenterIdNo.OverrideDropDownStyleList = false
         Me.cacRevCostCenterIdNo.PreviousSearchTerm = Nothing
         Me.cacRevCostCenterIdNo.PropertySelector = Nothing
-        Me.cacRevCostCenterIdNo.ReadOnlyCombo = false
-        Me.cacRevCostCenterIdNo.SuggestBoxHeight = 200
-        Me.cacRevCostCenterIdNo.SuggestListOrderRule = Nothing
+            Me.cacRevCostCenterIdNo.SuggestBoxHeight = 200
+            Me.cacRevCostCenterIdNo.SuggestListOrderRule = Nothing
         Me.cacRevCostCenterIdNo.TextToSearch = Nothing
         Me.cacRevCostCenterIdNo.Translatable = false
         Me.cacRevCostCenterIdNo.ValueIsMandatory = false

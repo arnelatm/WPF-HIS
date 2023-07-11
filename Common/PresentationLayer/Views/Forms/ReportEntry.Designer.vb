@@ -639,7 +639,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPrintJobIdNo.OverrideDropDownStyleList = False
             Me.cboPrintJobIdNo.PreviousSearchTerm = Nothing
             Me.cboPrintJobIdNo.PropertySelector = Nothing
-            Me.cboPrintJobIdNo.ReadOnlyCombo = False
             Me.cboPrintJobIdNo.Size = New System.Drawing.Size(403, 24)
             Me.cboPrintJobIdNo.SuggestBoxHeight = 200
             Me.cboPrintJobIdNo.SuggestCharCount = 0
