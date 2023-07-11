@@ -25,16 +25,16 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             ' Add any initialization after the InitializeComponent() call.
 
-            MainTableName = "ApJournal"
+            MainTableName = "Report"
             SortOrderKey = "IdNo"
             Dim today = Now()
             dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, 1, 1)
             dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day)
-            Ea.PublishEvent(New GetControlDataSource("Supplier", cboSupplierIdNo))
 
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
+            Debugger.Break()
             If dtpBeginningDate.Value <= dtpEndingDate.Value Then
                 Dim reportName As String
                 Dim reportTitle As String
@@ -69,6 +69,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Private Sub StatementOfAp_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             Ea.PublishEvent(New GetControlDataSource("Supplier", cboSupplierIdNo))
+            cboSupplierIdNo.EditingMode = True
         End Sub
 
 

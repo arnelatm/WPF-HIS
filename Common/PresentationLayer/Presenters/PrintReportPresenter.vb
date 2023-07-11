@@ -24,14 +24,20 @@ Namespace PresentationLayer.Presenters
             MakeServices()
             _computerName = Environment.MachineName      ' "Pharmacy" '
             _computerIdNo = _psService.GetRecordFieldWithKeyG(Of Int16)(_computerName, "Computer", "ComputerName", "IdNo")
+            'Ea = New EventAggregator()
+            'Ea.SubscribeEvent(Me)
         End Sub
 
         Public Sub New(view As IPrintReportView)
+            MyBase.New(view)
             MakeServices()
             AddHandler view.PrintReport, AddressOf OnPrintReport
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
         End Sub
 
         Private Sub MakeServices()
+            Service = New CommonService("Report")
             _pjService = New CommonService("PrintJob")
             _psService = New CommonService("PrintSetup")
             _prService = New CommonService("Printer")
@@ -44,8 +50,6 @@ Namespace PresentationLayer.Presenters
         Public Sub OnPrintReport(reportFileName As String, databaseConnectionName As String, Optional args() As Object = Nothing, Optional copies As Integer = 1, Optional collate As Boolean = False, Optional startPage As Integer = 1, Optional endPage As Integer = 100000)
             ProcessReport(reportFileName, databaseConnectionName, True, args, copies, collate, startPage, endPage)
         End Sub
-
-
 
         Private Function GetPrintSetupIdNo(reportFileName As String, printJobIdNo As Int16) As Int16
             Return _psService.GetRecordFieldWith2KeyG(Of Int16, Int16, Int16)(printJobIdNo, _computerIdNo, "PrintSetup", "PrintJobIdNo", "ComputerIdNo", "IdNo")
@@ -108,8 +112,8 @@ Namespace PresentationLayer.Presenters
             Return _pjService
         End Function
 
-        Public Sub OnEventHandler2(ByRef eventType As GetControlDataSource) Implements ISubscriber(Of GetControlDataSource).OnEventHandler
-            _presenter.SetDataSource(eventType.TableName, eventType.Control)
+        Public Sub OnGetControlDataSourceHandler(ByRef eventType As GetControlDataSource) Implements ISubscriber(Of GetControlDataSource).OnEventHandler
+            SetDataSource(eventType.TableName, eventType.Control)
         End Sub
 
     End Class
