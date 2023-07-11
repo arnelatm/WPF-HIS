@@ -449,7 +449,6 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboCustomerIdNo
             '
-            Me.cboCustomerIdNo.AlwaysEditable = False
             Me.cboCustomerIdNo.BackColor = System.Drawing.Color.White
             Me.cboCustomerIdNo.BegFindValue = Nothing
             Me.cboCustomerIdNo.ChangingSearchValueOnly = False
@@ -481,7 +480,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboCustomerIdNo.OverrideDropDownStyleList = False
             Me.cboCustomerIdNo.PreviousSearchTerm = Nothing
             Me.cboCustomerIdNo.PropertySelector = Nothing
-            Me.cboCustomerIdNo.ReadOnlyCombo = False
             Me.cboCustomerIdNo.Size = New System.Drawing.Size(430, 24)
             Me.cboCustomerIdNo.SuggestBoxHeight = 200
             Me.cboCustomerIdNo.SuggestCharCount = 1
@@ -511,7 +509,6 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboWarehouseIdNo
             '
-            Me.cboWarehouseIdNo.AlwaysEditable = False
             Me.cboWarehouseIdNo.BackColor = System.Drawing.Color.White
             Me.cboWarehouseIdNo.BegFindValue = Nothing
             Me.cboWarehouseIdNo.ChangingSearchValueOnly = False
@@ -542,7 +539,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboWarehouseIdNo.OverrideDropDownStyleList = False
             Me.cboWarehouseIdNo.PreviousSearchTerm = Nothing
             Me.cboWarehouseIdNo.PropertySelector = Nothing
-            Me.cboWarehouseIdNo.ReadOnlyCombo = False
             Me.cboWarehouseIdNo.Size = New System.Drawing.Size(234, 24)
             Me.cboWarehouseIdNo.SuggestBoxHeight = 200
             Me.cboWarehouseIdNo.SuggestCharCount = 1
@@ -1562,7 +1558,6 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboNationality
             '
-            Me.cboNationality.AlwaysEditable = False
             Me.cboNationality.BackColor = System.Drawing.Color.White
             Me.cboNationality.BegFindValue = Nothing
             Me.cboNationality.ChangingSearchValueOnly = False
@@ -1593,7 +1588,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboNationality.OverrideDropDownStyleList = False
             Me.cboNationality.PreviousSearchTerm = Nothing
             Me.cboNationality.PropertySelector = Nothing
-            Me.cboNationality.ReadOnlyCombo = False
             Me.cboNationality.Size = New System.Drawing.Size(234, 24)
             Me.cboNationality.SuggestBoxHeight = 200
             Me.cboNationality.SuggestCharCount = 1
@@ -1623,7 +1617,6 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboGender
             '
-            Me.cboGender.AlwaysEditable = False
             Me.cboGender.BackColor = System.Drawing.Color.White
             Me.cboGender.BegFindValue = Nothing
             Me.cboGender.ChangingSearchValueOnly = False
@@ -1654,7 +1647,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboGender.OverrideDropDownStyleList = False
             Me.cboGender.PreviousSearchTerm = Nothing
             Me.cboGender.PropertySelector = Nothing
-            Me.cboGender.ReadOnlyCombo = False
             Me.cboGender.Size = New System.Drawing.Size(122, 24)
             Me.cboGender.SuggestBoxHeight = 200
             Me.cboGender.SuggestCharCount = 1
@@ -1699,7 +1691,6 @@ Namespace PresentationLayer.Views.Forms
             '
             'CtComboBox1
             '
-            Me.CtComboBox1.AlwaysEditable = False
             Me.CtComboBox1.BackColor = System.Drawing.Color.White
             Me.CtComboBox1.BegFindValue = Nothing
             Me.CtComboBox1.ChangingSearchValueOnly = False
@@ -1730,7 +1721,6 @@ Namespace PresentationLayer.Views.Forms
             Me.CtComboBox1.OverrideDropDownStyleList = False
             Me.CtComboBox1.PreviousSearchTerm = Nothing
             Me.CtComboBox1.PropertySelector = Nothing
-            Me.CtComboBox1.ReadOnlyCombo = False
             Me.CtComboBox1.Size = New System.Drawing.Size(234, 24)
             Me.CtComboBox1.SuggestBoxHeight = 200
             Me.CtComboBox1.SuggestCharCount = 1

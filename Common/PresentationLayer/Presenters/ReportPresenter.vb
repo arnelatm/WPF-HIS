@@ -9,7 +9,7 @@ Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
-    Public Class ReportPresenter(Of TM As New)
+    Public Class vb(Of TM As New)
         Inherits CommonPresenter(Of IReportView, TM)
         Implements ISubscriber(Of ShowReportRequested)
 

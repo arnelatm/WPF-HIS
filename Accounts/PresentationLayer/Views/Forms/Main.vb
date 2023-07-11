@@ -265,7 +265,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CustomToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTBCustom.Click
 
-            RunForm(Of TrialBalance, ReportPresenter(Of ReportModel))()
+            RunForm(Of TrialBalance, PrintReportPresenter(Of ReportModel))()
 
             'Dim formToRun As TrialBalance
             'formToRun = New TrialBalance("C")
@@ -1173,7 +1173,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemReportMaster_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemReportMaster.Click
-            RunForm(Of ReportEntry, ReportPresenter(Of ReportModel))()
+            RunForm(Of ReportEntry, PrintReportPresenter(Of ReportModel))()
         End Sub
 
         'Private Sub ToolStripMenuItemDosageLabelPrinting_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDosageLabelPrinting.Click

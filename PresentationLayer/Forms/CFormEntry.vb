@@ -631,6 +631,7 @@ Public Class CFormEntry
                 'If ctrl.Name = "dtpDateStart" Then
                 '    Debugger.Break()
                 'End If
+
                 SetPropertyValue(ctrl, "EditingMode", onOff)
 
             End If

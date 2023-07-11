@@ -344,7 +344,6 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboPurchaseAccountIdNo
             '
-            Me.cboPurchaseAccountIdNo.AlwaysEditable = False
             Me.cboPurchaseAccountIdNo.BackColor = System.Drawing.Color.White
             Me.cboPurchaseAccountIdNo.BegFindValue = Nothing
             Me.cboPurchaseAccountIdNo.ChangingSearchValueOnly = False
@@ -373,7 +372,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPurchaseAccountIdNo.OverrideDropDownStyleList = False
             Me.cboPurchaseAccountIdNo.PreviousSearchTerm = Nothing
             Me.cboPurchaseAccountIdNo.PropertySelector = Nothing
-            Me.cboPurchaseAccountIdNo.ReadOnlyCombo = False
             Me.cboPurchaseAccountIdNo.SuggestBoxHeight = 200
             Me.cboPurchaseAccountIdNo.SuggestCharCount = 1
             Me.cboPurchaseAccountIdNo.SuggestListOrderRule = Nothing
@@ -394,7 +392,6 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboSaleAccountIdNo
             '
-            Me.cboSaleAccountIdNo.AlwaysEditable = False
             Me.cboSaleAccountIdNo.BackColor = System.Drawing.Color.White
             Me.cboSaleAccountIdNo.BegFindValue = Nothing
             Me.cboSaleAccountIdNo.ChangingSearchValueOnly = False
@@ -423,7 +420,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSaleAccountIdNo.OverrideDropDownStyleList = False
             Me.cboSaleAccountIdNo.PreviousSearchTerm = Nothing
             Me.cboSaleAccountIdNo.PropertySelector = Nothing
-            Me.cboSaleAccountIdNo.ReadOnlyCombo = False
             Me.cboSaleAccountIdNo.SuggestBoxHeight = 200
             Me.cboSaleAccountIdNo.SuggestCharCount = 1
             Me.cboSaleAccountIdNo.SuggestListOrderRule = Nothing
@@ -444,7 +440,6 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboVatPurchaseAccountIdNo
             '
-            Me.cboVatPurchaseAccountIdNo.AlwaysEditable = False
             Me.cboVatPurchaseAccountIdNo.BackColor = System.Drawing.Color.White
             Me.cboVatPurchaseAccountIdNo.BegFindValue = Nothing
             Me.cboVatPurchaseAccountIdNo.ChangingSearchValueOnly = False
@@ -473,7 +468,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboVatPurchaseAccountIdNo.OverrideDropDownStyleList = False
             Me.cboVatPurchaseAccountIdNo.PreviousSearchTerm = Nothing
             Me.cboVatPurchaseAccountIdNo.PropertySelector = Nothing
-            Me.cboVatPurchaseAccountIdNo.ReadOnlyCombo = False
             Me.cboVatPurchaseAccountIdNo.SuggestBoxHeight = 200
             Me.cboVatPurchaseAccountIdNo.SuggestCharCount = 1
             Me.cboVatPurchaseAccountIdNo.SuggestListOrderRule = Nothing
@@ -494,7 +488,6 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboVatSaleAccountIdNo
             '
-            Me.cboVatSaleAccountIdNo.AlwaysEditable = False
             Me.cboVatSaleAccountIdNo.BackColor = System.Drawing.Color.White
             Me.cboVatSaleAccountIdNo.BegFindValue = Nothing
             Me.cboVatSaleAccountIdNo.ChangingSearchValueOnly = False
@@ -523,7 +516,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboVatSaleAccountIdNo.OverrideDropDownStyleList = False
             Me.cboVatSaleAccountIdNo.PreviousSearchTerm = Nothing
             Me.cboVatSaleAccountIdNo.PropertySelector = Nothing
-            Me.cboVatSaleAccountIdNo.ReadOnlyCombo = False
             Me.cboVatSaleAccountIdNo.SuggestBoxHeight = 200
             Me.cboVatSaleAccountIdNo.SuggestCharCount = 1
             Me.cboVatSaleAccountIdNo.SuggestListOrderRule = Nothing

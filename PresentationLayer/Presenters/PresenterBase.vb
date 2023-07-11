@@ -2069,7 +2069,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Dim control As CtComboBox = Nothing
         Dim x = MainFieldsDictionary
         If MainFieldsDictionary.TryGetValue(fieldName, control) Then
-            control.DataSource = GetEnumData(Of TE)()
+            control.DataSource = GetEnumDataT(Of TE)()
         Else
             Debugger.Break()
             MessageBox.Show($"Field '" & fieldName & $"' is not valid!")
@@ -2085,6 +2085,19 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Sub
 
     Private Function GetEnumData(Of TE)()
+        Dim dataList As New List(Of Lookup.LookupData)
+        For Each c In [Enum].GetValues(GetType(TE))
+            Dim data As New Lookup.LookupData With {
+                    .IdNo = CInt(c),
+                    .Code = EnumToCode(c),
+                    .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
+                    }
+            dataList.Add(data)
+        Next
+        Return dataList
+    End Function
+
+    Private Function GetEnumDataT(Of TE)()
         Dim dataList As New List(Of Lookup.LookupData)
         For Each c In [Enum].GetValues(GetType(TE))
             Dim data As New Lookup.LookupData With {

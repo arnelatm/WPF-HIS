@@ -39,9 +39,11 @@ Namespace PresentationLayer.Presenters
             data.Add({"ItemCode", "DurationUnit", Nothing, "CodeGroupIdNo=12"})
             data.Add({"ItemCode", "DoseUnit", Nothing, "CodeGroupIdNo=7"})
             CreateDataSourceThread(data)
-            CreateEnumDataSourceT(Of MaleFemaleSelection)("Gender")
-            Dim viewIdNo As Int32 = GetRecordFieldWithKey("DosagePrinting", "SystemView", "SystemViewName", "IdNo")
-            View.DoseUnit = GetRecordFieldWithKey(viewIdNo, "DefaultFieldValue", "SystemViewIdNo", "DefaultValue").ToInt32Number()
+            CreateEnumDataSource(Of MaleFemaleSelection)("Gender")
+            CreateEnumDataSource(Of YearMonthDaySelection)("AgeYmd")
+            Dim viewIdNo As Int32 = GetRecordFieldWithKey("DosagePrintingForm", "SystemView", "SystemViewName", "IdNo")
+            View.DefaultDoseUnit = Service.GetRecordFieldWith2KeyG(Of Int16, String, Int16)(viewIdNo, "DoseUnit", "DefaultFieldValue", "SystemViewIdNo", "FieldName", "DefaultValue")
+            View.DefaultDurationUnit = Service.GetRecordFieldWith2KeyG(Of Int16, String, Int16)(viewIdNo, "DurationUnit", "DefaultFieldValue", "SystemViewIdNo", "FieldName", "DefaultValue")
         End Sub
 
         Public Overrides Sub GoPrintRecord()

@@ -264,7 +264,6 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboBaseUnitIdNo
             '
-            Me.cboBaseUnitIdNo.AlwaysEditable = False
             Me.cboBaseUnitIdNo.BackColor = System.Drawing.Color.White
             Me.cboBaseUnitIdNo.BegFindValue = Nothing
             Me.cboBaseUnitIdNo.ChangingSearchValueOnly = False
@@ -292,7 +291,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBaseUnitIdNo.OverrideDropDownStyleList = False
             Me.cboBaseUnitIdNo.PreviousSearchTerm = Nothing
             Me.cboBaseUnitIdNo.PropertySelector = Nothing
-            Me.cboBaseUnitIdNo.ReadOnlyCombo = False
             Me.cboBaseUnitIdNo.SuggestBoxHeight = 200
             Me.cboBaseUnitIdNo.SuggestCharCount = 1
             Me.cboBaseUnitIdNo.SuggestListOrderRule = Nothing
@@ -305,7 +303,6 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboCategoryIdNo
             '
-            Me.cboCategoryIdNo.AlwaysEditable = False
             Me.cboCategoryIdNo.BackColor = System.Drawing.Color.White
             Me.cboCategoryIdNo.BegFindValue = Nothing
             Me.cboCategoryIdNo.ChangingSearchValueOnly = False
@@ -333,7 +330,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboCategoryIdNo.OverrideDropDownStyleList = False
             Me.cboCategoryIdNo.PreviousSearchTerm = Nothing
             Me.cboCategoryIdNo.PropertySelector = Nothing
-            Me.cboCategoryIdNo.ReadOnlyCombo = False
             Me.cboCategoryIdNo.SuggestBoxHeight = 200
             Me.cboCategoryIdNo.SuggestCharCount = 1
             Me.cboCategoryIdNo.SuggestListOrderRule = Nothing

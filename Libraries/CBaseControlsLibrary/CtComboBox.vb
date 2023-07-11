@@ -14,15 +14,11 @@ Public Class CtComboBox
 #Region "Custom Properties"
 
     'Private MyErrorProvider As New ErrorProviderExtended
-    Private _displayOnly As Boolean
-
-    Private _editable As Boolean
     Private _translatable As Boolean = False
     Private _editingMode As Boolean = True
     Private _filterRule As Expression(Of Func(Of String, String, Boolean))
     Private _filterRuleCompiled As Func(Of String, Boolean)
     Private _propertySelector As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String)))
-    Private _readOnlyCombo As Boolean
     Private _suggestListOrderRule As Expression(Of Func(Of String, String))
     Private _suggestListOrderRuleCompiled As Func(Of String, String)
     Private ReadOnly _defaultDropDownHeight As Int16
@@ -35,6 +31,7 @@ Public Class CtComboBox
     Public DataSourceProgrammaticChange As Boolean = False
     Protected SuggestListForm As CListBoxForm = New CListBoxForm
 
+    Private Property _editMode As Boolean
     Public Property ChangingSearchValueOnly As Boolean = False
 
     Public Shared Property Copy As String = "Copy Selected Text"
@@ -48,11 +45,6 @@ Public Class CtComboBox
     Public Shared Property Delete As String = "Delete Selected Text"
     Public ComboBoxValueChanged As Boolean = False
 
-    <Category("Custom Properties")>
-    <DefaultValue(False)>
-    <Description("Set to True to specify that this control is always editable.")>
-    Public Property AlwaysEditable As Boolean = False
-
     Private _lastValue As Object = Nothing
 
     <Bindable(True)>
@@ -61,47 +53,13 @@ Public Class CtComboBox
     <Description("Set to True to specify that this control is for DisplayOnly.")>
     <Browsable(True)>
     Public Property DisplayOnly As Boolean
-        Get
-            If AlwaysEditable Then
-                _displayOnly = False
-            Else
-                Return _displayOnly
-            End If
-            Return _displayOnly
-        End Get
-        Set(value As Boolean)
-            If Not AlwaysEditable Then
-                If _displayOnly <> value Then
-                    _displayOnly = value
-                End If
-                If value Then
-                    ReadOnlyCombo = True
-                Else
-                    ReadOnlyCombo = False
-                End If
-            Else
-                _displayOnly = False
-                ReadOnlyCombo = False
-            End If
-        End Set
-    End Property
+
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control can be edited.")>
-    Public Property Editable As Boolean
-        Get
-            Return _editable
-        End Get
-        Set
-            _editable = Value
-            If AlwaysEditable Then
-                DisplayOnly = False
-            Else
-                DisplayOnly = Not Value
-            End If
-        End Set
-    End Property
+    Public Property Editable As Boolean = True
+
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
@@ -113,22 +71,32 @@ Public Class CtComboBox
             Return _editingMode
         End Get
         Set(value As Boolean)
-            If Not AlwaysEditable Then
-                _editingMode = value
-                If value Then
-                    If DisplayOnly Then
-                        ReadOnlyCombo = True
+            _editingMode = value
+            If value Then
+                If Editable AndAlso Not DisplayOnly Then
+                    DropDownHeight = _defaultDropDownHeight
+                    DropDownStyle = _defaultDropdownStyle
+                    MaxDropDownItems = _defaultMaxDropDownItems
+                    If Hidden Then
+                        ForeColor = Color.Black
+                        BackColor = Color.Black
                     Else
-                        ReadOnlyCombo = False
-                        DropDownStyle = ComboBoxStyle.DropDown
+                        ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                        BackColor = GlobalVariables.DefaultFormControlBackgroundColor
                     End If
                 Else
-                    ReadOnlyCombo = True
+                    DropDownStyle = ComboBoxStyle.Simple
+                    DropDownHeight = Height
+                    MaxDropDownItems = 1
+                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
                 End If
             Else
-                _editingMode = True
-                ReadOnlyCombo = False
-                DropDownStyle = ComboBoxStyle.DropDown
+                DropDownStyle = ComboBoxStyle.Simple
+                DropDownHeight = Height
+                MaxDropDownItems = 1
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             End If
         End Set
     End Property
@@ -182,52 +150,6 @@ Public Class CtComboBox
             If value Is Nothing Then Return
             _propertySelector = value
             PropertySelectorCompiled = value.Compile()
-        End Set
-    End Property
-
-    Public Property ReadOnlyCombo As Boolean
-        Get
-            Return _readOnlyCombo
-        End Get
-        Set
-            If Not AlwaysEditable Then
-                _readOnlyCombo = Value
-                If Value Then
-                    DropDownStyle = ComboBoxStyle.Simple
-                    MaxDropDownItems = 1
-                    If Hidden Then
-                        ForeColor = Color.Black
-                        BackColor = Color.Black
-                    Else
-                        ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                        BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                    End If
-                    DropDownHeight = Height
-                Else
-                    MaxDropDownItems = _defaultMaxDropDownItems
-                    DropDownStyle = _defaultDropdownStyle
-                    If Hidden Then
-                        ForeColor = Color.Black
-                        BackColor = Color.Black
-                    Else
-                        ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                        BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                    End If
-                    DropDownHeight = _defaultDropDownHeight
-                End If
-            Else
-                _readOnlyCombo = False
-                MaxDropDownItems = _defaultMaxDropDownItems
-                DropDownStyle = _defaultDropdownStyle
-                If Hidden Then
-                    ForeColor = Color.Black
-                    BackColor = Color.Black
-                Else
-                    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                End If
-                DropDownHeight = _defaultDropDownHeight
-            End If
         End Set
     End Property
 
@@ -322,42 +244,32 @@ Public Class CtComboBox
     Private _previousIndex As Integer
 
     Public Sub EnterHandler(sender As Object, e As EventArgs) Handles MyBase.Enter
-        If Not AlwaysEditable Then
-            If Hidden Then
-                ForeColor = Color.Black
-                BackColor = Color.Black
-            Else
-                If EditingMode And Not DisplayOnly Then
-                    ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
-                Else
-                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                End If
-            End If
+        If Hidden Then
+            ForeColor = Color.Black
+            BackColor = Color.Black
         Else
-            ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
+            If EditingMode And Not DisplayOnly Then
+                ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            End If
         End If
     End Sub
 
     Public Sub LeaveHandler(sender As Object, e As EventArgs) Handles MyBase.Leave
-        If Not AlwaysEditable Then
-            If Hidden Then
-                ForeColor = Color.Black
-                BackColor = Color.Black
-            Else
-                If EditingMode And Not DisplayOnly Then
-                    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                Else
-                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                End If
-            End If
+        If Hidden Then
+            ForeColor = Color.Black
+            BackColor = Color.Black
         Else
-            ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-            BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            If EditingMode And Not DisplayOnly Then
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            End If
         End If
     End Sub
 
@@ -424,7 +336,6 @@ Public Class CtComboBox
 
     Private Sub HideDropDown(hide As Boolean)
         BeginUpdate()
-        'If Not AlwaysEditable Then
         If hide Then
             DropDownStyle = ComboBoxStyle.Simple
             MaxDropDownItems = 1
@@ -448,18 +359,6 @@ Public Class CtComboBox
             End If
             DropDownHeight = _defaultDropDownHeight
         End If
-        'Else
-        '    MaxDropDownItems = _defaultMaxDropDownItems
-        '    DropDownStyle = _defaultDropdownStyle
-        '    If Hidden Then
-        '        ForeColor = Color.Black
-        '        BackColor = Color.Black
-        '    Else
-        '        ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-        '        BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-        '    End If
-        '    DropDownHeight = _defaultDropDownHeight
-        'End If
         EndUpdate()
     End Sub
 
@@ -594,19 +493,11 @@ Public Class CtComboBox
         If dr IsNot Nothing Then
             For Each item In DataSource
                 If item.IdNo = value Then
-                    'SelectedIndex = i
-                    'Dim lReadOnlyCombo As Boolean = Visible
                     If Visible Then
                         SelectedItem = dr.Item("IdNo")
                     Else
                         SelectedItem = DataSource(i)
                     End If
-                    '    Visible = True
-                    '    DisplayOnly = False
-                    '    ReadOnlyCombo = False
-                    '    SelectedItem = DataSource(i)
-                    '    Visible = False
-                    'End If
                     found = True
                     Exit For
                 End If
