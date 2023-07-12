@@ -39,12 +39,12 @@ End Interface
 
 'End Interface
 
-'Public Interface IDaoAll(Of TBiz)
+Public Interface IDaoGetAll(Of TBiz)
 
-'    ' gets a specific record data
-'    Function GetAll(Optional ByVal sortExpression As String = Nothing) As List(Of TBiz)
+    ' gets a specific record data
+    Function GetAll(Of TBiz)(Optional ByVal sortExpression As String = Nothing) As List(Of TBiz)
 
-'End Interface
+End Interface
 
 Public Interface IDaoList(Of TBiz)
 

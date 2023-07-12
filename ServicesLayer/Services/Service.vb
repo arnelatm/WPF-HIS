@@ -487,6 +487,16 @@ Namespace Services
             Return DataDao.GetPrintJobIdNo(reportName)
         End Function
 
+
+        Public Function GetAll(Of TM As New)(sortKey As String) As List(Of TM) Implements IService.GetAll
+            Dim modelOfPresenter As New List(Of TM)
+            Dim record = DataDao.GetAll(Of TM)(sortKey)
+            If record IsNot Nothing Then
+                GlobalVariables.Mapper.Map(record, modelOfPresenter)
+            End If
+            Return modelOfPresenter
+        End Function
+
         Public Function GetRecordByIdNo(Of TM As New)(idNo As Int32) As TM Implements IService.GetRecordByIdNo
             Dim modelOfPresenter As New TM
             Dim record = DataDao.GetRecordByIdNo(Convert.ToInt32(idNo))

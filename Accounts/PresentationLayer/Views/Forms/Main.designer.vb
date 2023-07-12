@@ -234,6 +234,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemOldDosageTranslation = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -620,7 +621,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemPMR
             '
-            Me.ToolStripMenuItemPMR.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemDosage})
+            Me.ToolStripMenuItemPMR.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemDosage, Me.ToolStripMenuItemOldDosageTranslation})
             Me.ToolStripMenuItemPMR.Name = "ToolStripMenuItemPMR"
             resources.ApplyResources(Me.ToolStripMenuItemPMR, "ToolStripMenuItemPMR")
             '
@@ -1317,6 +1318,11 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
+            'ToolStripMenuItemOldDosageTranslation
+            '
+            Me.ToolStripMenuItemOldDosageTranslation.Name = "ToolStripMenuItemOldDosageTranslation"
+            resources.ApplyResources(Me.ToolStripMenuItemOldDosageTranslation, "ToolStripMenuItemOldDosageTranslation")
+            '
             'Main
             '
             Me.AllowDrop = True
@@ -1548,5 +1554,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemReportMaster As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDoctorsPrescriptions As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemPrescription As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemOldDosageTranslation As ToolStripMenuItem
     End Class
 End NameSpace

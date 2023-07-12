@@ -227,6 +227,7 @@
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
     <Compile Include="BusinessLayer\IGroup\DrugAccept.vb" />
     <Compile Include="BusinessLayer\Dosage.vb" />
+    <Compile Include="BusinessLayer\IGroup\DosageMaster.vb" />
     <Compile Include="BusinessLayer\IGroup\DrugSale.vb" />
     <Compile Include="BusinessLayer\IGroup\GTinMatcher.vb" />
     <Compile Include="BusinessLayer\IGroup\Prescription.vb" />
@@ -316,6 +317,7 @@
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\DoctorDao.vb" />
     <Compile Include="DataLayer\AdoNet\DosagePrintingDao.vb" />
+    <Compile Include="DataLayer\AdoNet\IGroup\DosageMasterDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\PrescriptionDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\PrescriptionItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\SaleDetailDao.vb" />
@@ -442,6 +444,7 @@
     <Compile Include="OneTimeRun.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\DrugAcceptModel.vb" />
     <Compile Include="PresentationLayer\Models\DosageModel.vb" />
+    <Compile Include="PresentationLayer\Models\IGroup\DosageMasterModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\DrugSaleModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\GTinMatcherModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\PrescriptionItemModel.vb" />
@@ -505,6 +508,7 @@
     <Compile Include="PresentationLayer\Models\PensionSchemeModel.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\IGroup\DosageMasterPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\PrescriptionPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SalePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchasePresenter.vb" />
@@ -560,6 +564,18 @@
     <Compile Include="PresentationLayer\Views\Forms\IGroup\DoctorsPrescriptionForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\DosageEditing.Designer.vb">
+      <DependentUpon>DosageEditing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\DosageEditing.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\DosageTableManager.Designer.vb">
+      <DependentUpon>DosageTableManager.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\DosageTableManager.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationRequestForm.Designer.vb">
       <DependentUpon>PmrInvestigationRequestForm.vb</DependentUpon>
     </Compile>
@@ -584,6 +600,7 @@
     <Compile Include="PresentationLayer\Views\Forms\SaleEntry.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IDosageMasterView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IPrescriptionItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IPrescriptionView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISaleDetailView.vb" />
@@ -1926,6 +1943,9 @@
       <DependentUpon>DoctorsPrescriptionForm.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\DosageTableManager.resx">
+      <DependentUpon>DosageTableManager.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationRequestForm.resx">
       <DependentUpon>PmrInvestigationRequestForm.vb</DependentUpon>
     </EmbeddedResource>
@@ -2686,6 +2706,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.CsrOiItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.DeductionModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.DistributionSchemeItemModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.DosageMasterModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EarningModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EarningSummaryModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.EmployeeDeductionModel.datasource" />
