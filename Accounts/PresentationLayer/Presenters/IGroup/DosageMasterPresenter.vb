@@ -9,10 +9,10 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Presenters
 
-    Public Class DosageMasterPresenter(Of TM As New)
-        Inherits AccountsPresenter(Of IDosageMasterView, TM)
+    Public Class DosageMasterListPresenter(Of TM As New)
+        Inherits AccountsPresenter(Of IDosageMasterListView, TM)
 
-        Public Sub New(itemView As IDosageMasterView)
+        Public Sub New(itemView As IDosageMasterListView)
             MyBase.New(itemView)
             Service = New AccountsService("DosageMaster")
             TableName = "DosageMaster"
@@ -32,7 +32,7 @@ Namespace PresentationLayer.Presenters
 
 
         Public Sub OnLoadAll(sortKey As String)
-            Dim dmv As New List(Of IDosageMasterDetailView)
+            Dim dmv As New List(Of IDosageMasterView)
             Dim record = Service.GetAll(Of TM)(sortKey)
             If record IsNot Nothing Then
                 GlobalVariables.Mapper.Map(record, dmv)

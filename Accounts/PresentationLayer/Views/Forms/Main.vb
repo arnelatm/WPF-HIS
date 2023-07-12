@@ -1205,7 +1205,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemOldDosageTranslation_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemOldDosageTranslation.Click
-            RunForm(Of DosageTableManager, DosageMasterPresenter(Of DosageMasterModel))()
+            RunForm(Of DosageTableManager, DosageMasterListPresenter(Of DosageMasterModel))()
             'Dim frm As New DosageTableManager With {
             '    .SystemViewIdNoToTranslate = VSystemViewIdNo,
             '    .AppDataDAC = AppDataDAC,

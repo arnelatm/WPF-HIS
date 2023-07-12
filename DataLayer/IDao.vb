@@ -42,7 +42,7 @@ End Interface
 Public Interface IDaoGetAll(Of TBiz)
 
     ' gets a specific record data
-    Function GetAll(Of TBiz)(Optional ByVal sortExpression As String = Nothing) As List(Of TBiz)
+    Function GetAll(Of TM)(sortExpression As String) As List(Of TBiz)
 
 End Interface
 
