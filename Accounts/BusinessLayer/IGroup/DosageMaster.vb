@@ -12,27 +12,22 @@ Namespace BusinessLayer
             ' establish business rules
         End Sub
 
-        Public Property DosageMasterList As List(Of DosageMasterDetail)
+        Public Property DosageMasterCode As String
+        Public Property DosageMasterName As String
+        Public Property DosageMasterNameAra As String
+        Public Property IdNo As Int32
 
     End Class
 
-    Public Class DosageMasterDetail
+    Public Class DosageMasterList
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
         Public Sub New()
             ' establish business rules
-            If GetRules().Count() = 0 Then
-                AddRule(New ValidateRequired("DosageName"))
-                AddRule(New ValidateRequired("DosageNameAra"))
-            End If
-
         End Sub
 
-        Public Property DosageMasterCode As String
-        Public Property DosageMasterName As String
-        Public Property DosageMasterNameAra As String
-        Public Property IdNo As Int32
+        Public Property DosageMasterList As List(Of DosageMaster)
 
     End Class
 

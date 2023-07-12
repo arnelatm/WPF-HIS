@@ -27,8 +27,8 @@ Partial Class DosageTableManager
     <DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.DataGrid1 = New System.Windows.Forms.DataGridView()
-        Me.bsDosageMaster = New System.Windows.Forms.BindingSource(Me.components)
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.txtCaption = New System.Windows.Forms.TextBox()
         Me.txtTranslation = New System.Windows.Forms.TextBox()
         Me.cmdGridEdit = New System.Windows.Forms.Button()
@@ -37,33 +37,16 @@ Partial Class DosageTableManager
         Me.cmdDelete = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DosageMasterNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DosageMasterNameARaDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewDosageMaster = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.DosageMasterCodeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.bsDosageMaster = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DataGrid1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DataGridViewDosageMaster, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bsDosageMaster, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'DataGrid1
-        '
-        Me.DataGrid1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DataGrid1.AutoGenerateColumns = False
-        Me.DataGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGrid1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.DosageMasterNameDataGridViewTextBoxColumn, Me.DosageMasterNameARaDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn})
-        Me.DataGrid1.DataSource = Me.bsDosageMaster
-        Me.DataGrid1.Location = New System.Drawing.Point(90, 39)
-        Me.DataGrid1.MultiSelect = False
-        Me.DataGrid1.Name = "DataGrid1"
-        Me.DataGrid1.Size = New System.Drawing.Size(895, 358)
-        Me.DataGrid1.TabIndex = 9
-        '
-        'bsDosageMaster
-        '
-        Me.bsDosageMaster.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.DosageMasterModel)
         '
         'txtCaption
         '
@@ -146,40 +129,86 @@ Partial Class DosageTableManager
         Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.CLabel2.Translatable = True
         '
-        'Column1
+        'DataGridViewDosageMaster
         '
-        Me.Column1.DataPropertyName = "DosageMasterCode"
-        Me.Column1.HeaderText = "Dosage Code"
-        Me.Column1.Name = "Column1"
-        Me.Column1.Width = 50
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
+        Me.DataGridViewDosageMaster.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.DataGridViewDosageMaster.AutoGenerateColumns = False
+        Me.DataGridViewDosageMaster.BegFindValue = Nothing
+        Me.DataGridViewDosageMaster.Cached = False
+        Me.DataGridViewDosageMaster.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridViewDosageMaster.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DosageMasterCodeDataGridViewTextBoxColumn, Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3})
+        Me.DataGridViewDosageMaster.DataFilter = Nothing
+        Me.DataGridViewDosageMaster.DataSource = Me.bsDosageMaster
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewDosageMaster.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DataGridViewDosageMaster.DgvFooter = Nothing
+        Me.DataGridViewDosageMaster.DisplayOnly = False
+        Me.DataGridViewDosageMaster.Ea = Nothing
+        Me.DataGridViewDosageMaster.EditingMode = False
+        Me.DataGridViewDosageMaster.EndFindValue = Nothing
+        Me.DataGridViewDosageMaster.FieldDescription = Nothing
+        Me.DataGridViewDosageMaster.FieldName = Nothing
+        Me.DataGridViewDosageMaster.FieldsDictionary = Nothing
+        Me.DataGridViewDosageMaster.FindColumnNo = CType(0, Short)
+        Me.DataGridViewDosageMaster.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.DataGridViewDosageMaster.FindEnabled = False
+        Me.DataGridViewDosageMaster.FirstRowDeletionEnabled = True
+        Me.DataGridViewDosageMaster.FirstRowInsertionEnabled = True
+        Me.DataGridViewDosageMaster.IgnoreCase = False
+        Me.DataGridViewDosageMaster.IsDirty = False
+        Me.DataGridViewDosageMaster.Location = New System.Drawing.Point(0, 0)
+        Me.DataGridViewDosageMaster.Name = "DataGridViewDosageMaster"
+        Me.DataGridViewDosageMaster.Searchable = True
+        Me.DataGridViewDosageMaster.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.DataGridViewDosageMaster.SecurityKey = ""
+        Me.DataGridViewDosageMaster.SequenceColumn = "dgvSequence"
+        Me.DataGridViewDosageMaster.SequenceFieldName = "Sequence"
+        Me.DataGridViewDosageMaster.ShowFooter = False
+        Me.DataGridViewDosageMaster.Size = New System.Drawing.Size(911, 150)
+        Me.DataGridViewDosageMaster.TabIndex = 30
+        Me.DataGridViewDosageMaster.Translatable = True
         '
-        'DosageMasterNameDataGridViewTextBoxColumn
+        'DosageMasterCodeDataGridViewTextBoxColumn
         '
-        Me.DosageMasterNameDataGridViewTextBoxColumn.DataPropertyName = "DosageMasterName"
-        Me.DosageMasterNameDataGridViewTextBoxColumn.HeaderText = "Dosage Name"
-        Me.DosageMasterNameDataGridViewTextBoxColumn.Name = "DosageMasterNameDataGridViewTextBoxColumn"
-        Me.DosageMasterNameDataGridViewTextBoxColumn.Width = 362
+        Me.DosageMasterCodeDataGridViewTextBoxColumn.DataPropertyName = "DosageMasterCode"
+        Me.DosageMasterCodeDataGridViewTextBoxColumn.HeaderText = "DosageMasterCode"
+        Me.DosageMasterCodeDataGridViewTextBoxColumn.Name = "DosageMasterCodeDataGridViewTextBoxColumn"
         '
-        'DosageMasterNameARaDataGridViewTextBoxColumn
+        'DataGridViewTextBoxColumn1
         '
-        Me.DosageMasterNameARaDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DosageMasterNameARaDataGridViewTextBoxColumn.DataPropertyName = "DosageMasterNameARa"
-        Me.DosageMasterNameARaDataGridViewTextBoxColumn.HeaderText = "Dosage Arabic"
-        Me.DosageMasterNameARaDataGridViewTextBoxColumn.Name = "DosageMasterNameARaDataGridViewTextBoxColumn"
+        Me.DataGridViewTextBoxColumn1.DataPropertyName = "DosageMasterName"
+        Me.DataGridViewTextBoxColumn1.HeaderText = "DosageMasterName"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         '
-        'IdNoDataGridViewTextBoxColumn
+        'DataGridViewTextBoxColumn2
         '
-        Me.IdNoDataGridViewTextBoxColumn.DataPropertyName = "IdNo"
-        Me.IdNoDataGridViewTextBoxColumn.HeaderText = "IdNo"
-        Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
-        Me.IdNoDataGridViewTextBoxColumn.Visible = False
-        Me.IdNoDataGridViewTextBoxColumn.Width = 40
+        Me.DataGridViewTextBoxColumn2.DataPropertyName = "DosageMasterNameARa"
+        Me.DataGridViewTextBoxColumn2.HeaderText = "DosageMasterNameARa"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.DataPropertyName = "IdNo"
+        Me.DataGridViewTextBoxColumn3.HeaderText = "IdNo"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        '
+        'bsDosageMaster
+        '
+        Me.bsDosageMaster.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.DosageMasterModel)
         '
         'DosageTableManager
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(995, 461)
+        Me.Controls.Add(Me.DataGridViewDosageMaster)
         Me.Controls.Add(Me.cmdCancel)
         Me.Controls.Add(Me.cmdDelete)
         Me.Controls.Add(Me.cmdSave)
@@ -188,17 +217,15 @@ Partial Class DosageTableManager
         Me.Controls.Add(Me.CLabel2)
         Me.Controls.Add(Me.txtTranslation)
         Me.Controls.Add(Me.txtCaption)
-        Me.Controls.Add(Me.DataGrid1)
         Me.Name = "DosageTableManager"
         Me.Text = "Translation Table Manager"
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DataGrid1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DataGridViewDosageMaster, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.bsDosageMaster, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents DataGrid1 As DataGridView
     Friend WithEvents txtCaption As TextBox
     Friend WithEvents txtTranslation As TextBox
     Friend WithEvents cmdGridEdit As Button
@@ -208,9 +235,13 @@ Partial Class DosageTableManager
     Friend WithEvents cmdCancel As Button
     Friend WithEvents CLabel2 As CLabel
     Friend WithEvents ISPDATADataSet As ISPDATADataSet
-    Friend WithEvents bsDosageMaster As BindingSource
-    Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents DosageMasterNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents DosageMasterNameARaDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewDosageMaster As CDataGridView
+    Friend WithEvents bsDosageMaster As BindingSource
+    Friend WithEvents DosageMasterCodeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
 End Class

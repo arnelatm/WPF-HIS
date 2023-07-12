@@ -10,57 +10,53 @@ Namespace DataLayer.AdoNet
 
     Public Class DosageMasterDao
         Inherits CommonDao
-        Implements IDao(Of DosageMasterDetail), IDaoGetAll(Of DosageMasterDetail)
+        Implements IDao(Of DosageMaster), IDaoGetAll(Of DosageMaster)
 
         Private ReadOnly _db As New Db("IGROUPCLINIC")
 
-        Private ReadOnly _fieldList As String = "IdNo," &
+        Private ReadOnly _fieldList As String = "Primary_Key," &
                                                 "ItemId," &
                                                 "ItemNameArabic," &
                                                 "ItemNameEnglish"
-
         Public Overrides Function GetDB()
             Return _db
         End Function
 
 
-        Public Function GetAll(Of DosageMasterDetail)(Optional sortString As String = Nothing) As List(Of DosageMasterDetail) Implements IDaoGetAll(Of DosageMasterDetail).GetAll
-            Dim sql As String =
-                    "SELECT " & _fieldList &
-                    " FROM MedicineDosageMaster order by " & GetActualFieldName(sortString)
-            Dim value As List(Of DosageMasterDetail) = _db.Read(sql, Make).ToList()
-            Return value
+        Public Function GetAll(Of TM)(sortExpression As String) As List(Of DosageMaster) Implements IDaoGetAll(Of DosageMaster).GetAll
+            Dim sql As String = "SELECT " & _fieldList & " FROM MedicineDosageMaster order by " & GetActualFieldName(sortExpression)
+            Return _db.Read(sql, Make).ToList()
         End Function
 
 
-        Public Function GetRecordByIdNo(idNo) As DosageMasterDetail Implements IDao(Of DosageMasterDetail).GetRecordByIdNo
+        Public Function GetRecordByIdNo(idNo) As DosageMaster Implements IDao(Of DosageMaster).GetRecordByIdNo
             Dim sql As String =
                     "SELECT " & _fieldList &
-                    " FROM DosageMaster" &
-                    " WHERE IdNo = @IdNo"
+                    " FROM MedicineDosageMaster" &
+                    " WHERE " & GetPrimaryFieldName() & " = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
-            Dim value As DosageMasterDetail = _db.Read(sql, Make, params).FirstOrDefault()
+            Dim value As DosageMaster = _db.Read(sql, Make, params).FirstOrDefault()
             Return value
         End Function
 
-        Public Function UpdateRecord(ByRef dosageMasterDetail As DosageMasterDetail) As Integer Implements IDao(Of DosageMasterDetail).UpdateRecord
-            Dim sql As String = " UPDATE DosageMaster SET " &
-                    " ItemNameArabic = @DosageMasterNameAra where IdNo = @IdNo"
+        Public Function UpdateRecord(ByRef dosageMaster As DosageMaster) As Integer Implements IDao(Of DosageMaster).UpdateRecord
+            Dim sql As String = " UPDATE MedicineDosageMaster SET " &
+                    " ItemNameArabic = @DosageMasterNameAra where " & GetPrimaryFieldName() & " = @IdNo"
             Dim retVal As Integer
-            retVal = _db.Update(sql, Take(dosageMasterDetail))
+            retVal = _db.Update(sql, Take(dosageMaster))
             Return retVal
         End Function
 
-        Private Shared ReadOnly Make As Func(Of IDataReader, DosageMasterDetail) =
+        Private Shared ReadOnly Make As Func(Of IDataReader, DosageMaster) =
                             Function(reader) _
-            New DosageMasterDetail() With {
+            New DosageMaster With {
             .DosageMasterCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ItemId")),
             .DosageMasterName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ItemNameEnglish")),
             .DosageMasterNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ItemNameArabic")),
-            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo"))
+            .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("Primary_Key"))
             }
 
-        Private Function Take(DosageMaster As DosageMasterDetail) As Object()
+        Private Function Take(DosageMaster As DosageMaster) As Object()
             Return New Object() {
                             "ItemId", DosageMaster.DosageMasterNameAra,
                             "ItemNameEnglish", DosageMaster.DosageMasterName,
@@ -68,7 +64,7 @@ Namespace DataLayer.AdoNet
                             }
         End Function
 
-        Public Function AddRecord(ByRef recordData As DosageMasterDetail) As Integer Implements IDao(Of DosageMasterDetail).AddRecord
+        Public Function AddRecord(ByRef recordData As DosageMaster) As Integer Implements IDao(Of DosageMaster).AddRecord
             Throw New NotImplementedException()
         End Function
 
@@ -86,6 +82,40 @@ Namespace DataLayer.AdoNet
             Return actualFieldName
         End Function
 
+        Public Overrides Function GetPrimaryFieldName()
+            Return "Primary_Key"
+        End Function
+
     End Class
 
+    Public Class DosageMasterListDao
+        Inherits CommonDao
+        Implements IDaoGetAll(Of DosageMaster)
+
+        Private ReadOnly _db As New Db("IGROUPCLINIC")
+
+        Private ReadOnly _fieldList As String = "Primary_Key," &
+                                                "ItemId," &
+                                                "ItemNameArabic," &
+                                                "ItemNameEnglish"
+
+        Public Overrides Function GetDB()
+            Return _db
+        End Function
+
+        Public Function GetAll(Of TM)(sortExpression As String) As List(Of DosageMaster) Implements IDaoGetAll(Of DosageMaster).GetAll
+            Dim sql As String = "SELECT " & _fieldList & " FROM MedicineDosageMaster order by " & GetActualFieldName(sortExpression)
+            Return _db.Read(sql, Make).ToList()
+        End Function
+
+        Private Shared ReadOnly Make As Func(Of IDataReader, DosageMaster) =
+                    Function(reader) _
+                    New DosageMaster With {
+                    .DosageMasterCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ItemId")),
+                    .DosageMasterName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ItemNameEnglish")),
+                    .DosageMasterNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ItemNameArabic")),
+                    .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("Primary_Key"))
+                    }
+
+    End Class
 End Namespace
