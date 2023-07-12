@@ -7,7 +7,7 @@ Imports CrystalDecisions.CrystalReports.Engine
 Imports CrystalDecisions.Shared
 Imports PaperSize = CrystalDecisions.Shared.PaperSize
 
-Public Class CrystalReportPrinter
+Public Class CrystalReportsPrinter
     Private Const DefaultConnection As String = "ISPDATA"
     Private ReadOnly _report As New ReportDocument
 
@@ -215,15 +215,7 @@ Public Class CrystalReportPrinter
         _report.PrintToPrinter(copies, collate, startPage, endPage)
     End Sub
 
-    Public Sub SetParameterValue(args() As Object)
-        For i = 0 To args.Length - 1 Step 2
-            Dim value As Object = GlobalFunctions.ConvertObjectToType(args(i))
-            Dim name As String = args(i + 1).ToString()
-            _report.SetParameterValue(name, value)
-        Next
-    End Sub
-
-    Public Sub SetParameterValues(args() As Object)
+    Public Sub SetParameterValue(args As Object())
         For i = 0 To args.Length - 1 Step 2
             Dim value As Object = GlobalFunctions.ConvertObjectToType(args(i))
             Dim name As String = args(i + 1).ToString()

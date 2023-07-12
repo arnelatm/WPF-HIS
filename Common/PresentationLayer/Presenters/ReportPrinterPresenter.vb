@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports System.Web.UI.WebControls
 Imports AATM.Common.Models
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.ServiceLayer
@@ -12,8 +13,8 @@ Imports CrystalDecisions.ReportAppServer.ReportDefModel
 
 Namespace PresentationLayer.Presenters
 
-    Public Class PrintReportPresenter(Of TM As New)
-        Inherits CommonPresenter(Of IPrintReportView, TM)
+    Public Class ReportPrinterPresenter(Of TM As New)
+        Inherits CommonPresenter(Of IReportPrinterView, TM)
         Implements ISubscriber(Of GetControlDataSource)
 
         Private _psService As Object
@@ -27,15 +28,15 @@ Namespace PresentationLayer.Presenters
             MakeServices()
             _computerName = Environment.MachineName      ' "Pharmacy" '
             _computerIdNo = _psService.GetRecordFieldWithKeyG(Of Int16)(_computerName, "Computer", "ComputerName", "IdNo")
-            'Ea = New EventAggregator()
-            'Ea.SubscribeEvent(Me)
+            'AddHandler View.PrintReport, AddressOf OnPrintReport
+            Ea = New EventAggregator()
+            Ea.SubscribeEvent(Me)
         End Sub
 
-        Public Sub New(view As IPrintReportView)
+        Public Sub New(view As IReportPrinterView)
             MyBase.New(view)
             MakeServices()
             AddHandler view.PrintReport, AddressOf OnPrintReport
-            'AddHandler view.GetLanguageAndCo, AddressOf OnGetLanguageAndCo
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
         End Sub
@@ -51,8 +52,21 @@ Namespace PresentationLayer.Presenters
         '    _presenter.CreateDataSource(tableName, control)
         'End Sub
 
-        Public Sub OnPrintReport(reportFileName As String, databaseConnectionName As String, Optional args() As Object = Nothing, Optional copies As Integer = 1, Optional collate As Boolean = False, Optional startPage As Integer = 1, Optional endPage As Integer = 100000)
-            ProcessReport(reportFileName, databaseConnectionName, True, args, copies, collate, startPage, endPage)
+        Private Sub AddToArray(ByRef arr As Object(), newItem As Object, name As String)
+            Dim len = arr.Length
+            ReDim Preserve arr(len + 1)
+            arr(len) = newItem
+            arr(len + 1) = name
+        End Sub
+
+        Public Sub OnPrintReport(sender As IReportPrinterView) 'reportFileName As String, databaseConnectionName As String, Optional args() As Object = Nothing, Optional copies As Integer = 1, Optional collate As Boolean = False, Optional startPage As Integer = 1, Optional endPage As Integer = 100000)
+            Dim args As Object() = sender.Args
+            'AddToArray(args, sender.FileName, "FileName")
+            Dim establishmentName = Service.GetRecordField("Establishment", "EstablishmentName")
+            AddToArray(args, establishmentName, "EstablishmentName")
+            AddToArray(args, sender.FormCultureLanguage, "Language")
+            AddToArray(args, IIf(sender.ReportTitle Is Nothing, "", sender.ReportTitle), "ReportTitle")
+            ProcessReport(sender.FileName, sender.DataBaseConnectionName, True, args, sender.Copies)
         End Sub
 
         Private Function GetPrintSetupIdNo(reportFileName As String, printJobIdNo As Int16) As Int16
@@ -63,7 +77,7 @@ Namespace PresentationLayer.Presenters
             Return _psService.GetRecordFieldWithKeyG(Of Int16, String)(reportFileName, "Report", "ReportFileName", "PrintJobIdNo")
         End Function
 
-        Public Sub ProcessReport(reportFileName As String, databaseConnectionName As String, print As Boolean, Optional args() As Object = Nothing, Optional copies As Integer = 1, Optional collate As Boolean = False, Optional startPage As Integer = 1, Optional endPage As Integer = 0)
+        Public Sub ProcessReport(reportFileName As String, databaseConnectionName As String, print As Boolean, Optional args As Object() = Nothing, Optional copies As Integer = 1, Optional collate As Boolean = False, Optional startPage As Integer = 1, Optional endPage As Integer = 0)
             If print Then
                 Dim printJobIdNo As Int16 = GetPrintJobIdNo(reportFileName)
                 Dim printSetupIdNo As Int16 = GetPrintSetupIdNo(reportFileName, printJobIdNo)
@@ -121,15 +135,19 @@ Namespace PresentationLayer.Presenters
         End Sub
 
 
-        'Private Sub OnGetLanguageAndCo(ByVal sender As IReportPrinterView, ByVal formCulture As String, ByRef language As String, ByRef establishmentName As String, ByRef reportTitle As String)
-        '    language = Strings.Left(formCulture, formCulture.IndexOf("-", StringComparison.Ordinal))
-        '    If language <> "ar" Then
-        '        establishmentName = Service.GetRecordField("Establishment", "EstablishmentName")
-        '    Else
-        '        establishmentName = Service.GetRecordField("Establishment", "EstablishmentNameAra")
-        '    End If
-        '    'ProcessReport(sender.FileName, "", True, args)
-        'End Sub
+        Private Sub PrintReport(ByVal sender As IReportPrinterView)
+            Dim language = sender.FormCultureLanguage
+            Dim EstablishmentName As String
+            If language <> "ar" Then
+                EstablishmentName = Service.GetRecordField("Establishment", "EstablishmentName")
+            Else
+                EstablishmentName = Service.GetRecordField("Establishment", "EstablishmentNameAra")
+            End If
+            Dim reportTitle As String = sender.ReportTitle
+            Dim args As Array = sender.Args
+            'args
+            ProcessReport(sender.FileName, "", True, args)
+        End Sub
         'Private Sub MakeReport(ByVal fileName As String, ByVal reportTitle As String, formCulture As CultureInfo, ByVal ParamArray args() As Object)
         '    Dim language As String
         '    Dim establishmentName As String

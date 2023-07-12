@@ -9,6 +9,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Public Property MainTableName As String
         Protected SortOrderKey As String
         Public Event PrintReport As IPrintReportView.PrintReportEventHandler Implements IPrintReportView.PrintReport
+        'Public Event GetLanguageAndCo As IPrintReportView.GetLanguageAndCoEventHandler Implements IPrintReportView.GetLanguageAndCo
 
         Public Sub New()
 
