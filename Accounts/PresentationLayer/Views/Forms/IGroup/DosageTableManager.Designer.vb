@@ -38,11 +38,11 @@ Partial Class DosageTableManager
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.DataGridViewDosageMaster = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.DosageMasterCodeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsDosageMaster = New System.Windows.Forms.BindingSource(Me.components)
+        Me.dgvDosageCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dgvDosageName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dgvDosageNameArabic = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridViewDosageMaster, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bsDosageMaster, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -137,7 +137,7 @@ Partial Class DosageTableManager
         Me.DataGridViewDosageMaster.BegFindValue = Nothing
         Me.DataGridViewDosageMaster.Cached = False
         Me.DataGridViewDosageMaster.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewDosageMaster.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DosageMasterCodeDataGridViewTextBoxColumn, Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3})
+        Me.DataGridViewDosageMaster.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvDosageCode, Me.dgvDosageName, Me.dgvDosageNameArabic, Me.DataGridViewTextBoxColumn3})
         Me.DataGridViewDosageMaster.DataFilter = Nothing
         Me.DataGridViewDosageMaster.DataSource = Me.bsDosageMaster
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -163,7 +163,7 @@ Partial Class DosageTableManager
         Me.DataGridViewDosageMaster.FirstRowInsertionEnabled = True
         Me.DataGridViewDosageMaster.IgnoreCase = False
         Me.DataGridViewDosageMaster.IsDirty = False
-        Me.DataGridViewDosageMaster.Location = New System.Drawing.Point(0, 0)
+        Me.DataGridViewDosageMaster.Location = New System.Drawing.Point(90, 12)
         Me.DataGridViewDosageMaster.Name = "DataGridViewDosageMaster"
         Me.DataGridViewDosageMaster.Searchable = True
         Me.DataGridViewDosageMaster.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -171,37 +171,43 @@ Partial Class DosageTableManager
         Me.DataGridViewDosageMaster.SequenceColumn = "dgvSequence"
         Me.DataGridViewDosageMaster.SequenceFieldName = "Sequence"
         Me.DataGridViewDosageMaster.ShowFooter = False
-        Me.DataGridViewDosageMaster.Size = New System.Drawing.Size(911, 150)
+        Me.DataGridViewDosageMaster.Size = New System.Drawing.Size(895, 385)
         Me.DataGridViewDosageMaster.TabIndex = 30
         Me.DataGridViewDosageMaster.Translatable = True
         '
-        'DosageMasterCodeDataGridViewTextBoxColumn
+        'bsDosageMaster
         '
-        Me.DosageMasterCodeDataGridViewTextBoxColumn.DataPropertyName = "DosageMasterCode"
-        Me.DosageMasterCodeDataGridViewTextBoxColumn.HeaderText = "DosageMasterCode"
-        Me.DosageMasterCodeDataGridViewTextBoxColumn.Name = "DosageMasterCodeDataGridViewTextBoxColumn"
+        Me.bsDosageMaster.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.DosageMasterModel)
         '
-        'DataGridViewTextBoxColumn1
+        'dgvDosageCode
         '
-        Me.DataGridViewTextBoxColumn1.DataPropertyName = "DosageMasterName"
-        Me.DataGridViewTextBoxColumn1.HeaderText = "DosageMasterName"
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.dgvDosageCode.DataPropertyName = "DosageMasterCode"
+        Me.dgvDosageCode.HeaderText = "Dosage Code"
+        Me.dgvDosageCode.Name = "dgvDosageCode"
+        Me.dgvDosageCode.ReadOnly = True
+        Me.dgvDosageCode.Width = 45
         '
-        'DataGridViewTextBoxColumn2
+        'dgvDosageName
         '
-        Me.DataGridViewTextBoxColumn2.DataPropertyName = "DosageMasterNameARa"
-        Me.DataGridViewTextBoxColumn2.HeaderText = "DosageMasterNameARa"
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.dgvDosageName.DataPropertyName = "DosageMasterName"
+        Me.dgvDosageName.HeaderText = "Dosage Name"
+        Me.dgvDosageName.Name = "dgvDosageName"
+        Me.dgvDosageName.ReadOnly = True
+        Me.dgvDosageName.Width = 375
+        '
+        'dgvDosageNameArabic
+        '
+        Me.dgvDosageNameArabic.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.dgvDosageNameArabic.DataPropertyName = "DosageMasterNameARa"
+        Me.dgvDosageNameArabic.HeaderText = "Dosage Name Arabic"
+        Me.dgvDosageNameArabic.Name = "dgvDosageNameArabic"
         '
         'DataGridViewTextBoxColumn3
         '
         Me.DataGridViewTextBoxColumn3.DataPropertyName = "IdNo"
         Me.DataGridViewTextBoxColumn3.HeaderText = "IdNo"
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-        '
-        'bsDosageMaster
-        '
-        Me.bsDosageMaster.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.DosageMasterModel)
+        Me.DataGridViewTextBoxColumn3.Visible = False
         '
         'DosageTableManager
         '
@@ -240,8 +246,8 @@ Partial Class DosageTableManager
     Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewDosageMaster As CDataGridView
     Friend WithEvents bsDosageMaster As BindingSource
-    Friend WithEvents DosageMasterCodeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents dgvDosageCode As DataGridViewTextBoxColumn
+    Friend WithEvents dgvDosageName As DataGridViewTextBoxColumn
+    Friend WithEvents dgvDosageNameArabic As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
 End Class
