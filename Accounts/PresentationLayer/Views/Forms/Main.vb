@@ -203,6 +203,7 @@ Namespace PresentationLayer.Views.Forms
             Dim reportTitle = Messaging.TranslateCaption("Aging of Accounts Payable as of ")
             reportTitle = reportTitle + " " + GlobalFuncNSub.GregorianLongDate(Now(), CultureInfo.CurrentCulture)
             Dim cForm As New ReportFormNew("Aging of Accounts Payable.Rpt", reportTitle, CultureInfo.CurrentCulture)
+            cForm.Presenter = New PrintReportPresenter(Of ReportModel)
             cForm.Show()
         End Sub
 
@@ -459,7 +460,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemStatementOfAccountsPayable_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStatementOfAccountsPayable.Click
-            RunReport(Of StatementOfAp)()
+            RunReportNew(Of StatementOfAp)()
+            'RunReport(Of StatementOfAp)()
         End Sub
 
         Private Sub ToolStripMenuItemStatementOfAccountsReceivable_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStatementOfAccountsReceivable.Click
@@ -883,6 +885,12 @@ Namespace PresentationLayer.Views.Forms
             Dim formToRun = Activator.CreateInstance(GetType(TV))
             Dim pType As Type = GetType(TP)
             formToRun.Presenter = Activator.CreateInstance(pType, {formToRun})
+            Invoker.InvokeFunction(formToRun, "Show")
+        End Sub
+
+        Private Overloads Sub RunReportNew(Of TV)()
+            Dim formToRun = Activator.CreateInstance(GetType(TV))
+            formToRun.Presenter = New ReportPrinterPresenter(Of ReportModel)(formToRun)
             Invoker.InvokeFunction(formToRun, "Show")
         End Sub
 

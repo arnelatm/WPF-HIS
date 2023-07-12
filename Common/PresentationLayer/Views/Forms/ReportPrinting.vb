@@ -11,6 +11,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Implements IPrintReportView
 
         Public Event OnPrintReport(reportFileName As String, pDatabaseConnectionName As String, args As Object, copies As Integer) Implements IPrintReportView.PrintReport
+        'Private Event GetLanguageAndCo(sender As Object, ByRef language As String, ByRef establishmentName As String) Implements IPrintReportView.GetLanguageAndCo
 
         Public Sub New()
 

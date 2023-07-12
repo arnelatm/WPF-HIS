@@ -17,22 +17,23 @@ Namespace PresentationLayer.Views.Forms.Reports
             ReportFileName = fileName
             MainTableName = "Account"
             GetReportProperties()
-            Dim language As String
-            Dim establishmentName As String
-            language = Strings.Left(formCulture.Name, formCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            If language <> "ar" Then
-                establishmentName = Presenter.Service.GetRecordField("Establishment", "EstablishmentName")
-            Else
-                establishmentName = Presenter.Service.GetRecordField("Establishment", "EstablishmentNameAra")
-            End If
+            'Dim language As String
+            'language = Strings.Left(formCulture.Name, formCulture.Name.IndexOf("-", StringComparison.Ordinal))
+
+            'Dim establishmentName As String
+            'If language <> "ar" Then
+            '    establishmentName = Presenter.Service.GetRecordField("Establishment", "EstablishmentName")
+            'Else
+            '    establishmentName = Presenter.Service.GetRecordField("Establishment", "EstablishmentNameAra")
+            'End If
 
             For i = 0 To args.Length - 1 Step 2
                 Dim value As Object = args(i)
                 ReportDocument.SetParameterValue(args(i + 1).ToString(), ConvertObjectToType(value))
             Next
-            ReportDocument.SetParameterValue("ReportTitle", reportTitle)
-            ReportDocument.SetParameterValue("EstablishmentName", establishmentName)
-            ReportDocument.SetParameterValue("Language", language)
+            'ReportDocument.SetParameterValue("ReportTitle", reportTitle)
+            'ReportDocument.SetParameterValue("EstablishmentName", establishmentName)
+            'ReportDocument.SetParameterValue("Language", language)
             ReportDocument.DataSourceConnections.Clear()
             SetPrintOption(fileName)
             ProcessReport()
