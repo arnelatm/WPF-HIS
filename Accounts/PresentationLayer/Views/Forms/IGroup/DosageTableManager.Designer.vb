@@ -27,24 +27,24 @@ Partial Class DosageTableManager
     <DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.txtOriginal = New System.Windows.Forms.TextBox()
         Me.txtTranslation = New System.Windows.Forms.TextBox()
-        Me.cmdGridEdit = New System.Windows.Forms.Button()
-        Me.cmdEdit = New System.Windows.Forms.Button()
-        Me.cmdSave = New System.Windows.Forms.Button()
-        Me.cmdDelete = New System.Windows.Forms.Button()
-        Me.cmdCancel = New System.Windows.Forms.Button()
+        Me.btnGridEdit = New System.Windows.Forms.Button()
+        Me.btnEdit = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.DataGridViewDosageMaster = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.txtDosageCode = New System.Windows.Forms.TextBox()
-        Me.txtIdNo = New System.Windows.Forms.TextBox()
         Me.dgvDosageCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvDosageName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvDosageNameArabic = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsDosageMaster = New System.Windows.Forms.BindingSource(Me.components)
+        Me.txtDosageCode = New System.Windows.Forms.TextBox()
+        Me.txtIdNo = New System.Windows.Forms.TextBox()
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridViewDosageMaster, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bsDosageMaster, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -71,51 +71,51 @@ Partial Class DosageTableManager
         Me.txtTranslation.TabIndex = 11
         Me.txtTranslation.Text = "Arabic Translation"
         '
-        'cmdGridEdit
+        'btnGridEdit
         '
-        Me.cmdGridEdit.Location = New System.Drawing.Point(12, 208)
-        Me.cmdGridEdit.Name = "cmdGridEdit"
-        Me.cmdGridEdit.Size = New System.Drawing.Size(75, 64)
-        Me.cmdGridEdit.TabIndex = 25
-        Me.cmdGridEdit.Text = "Full Edit on Grid with Auto Save"
-        Me.cmdGridEdit.UseVisualStyleBackColor = True
+        Me.btnGridEdit.Location = New System.Drawing.Point(12, 208)
+        Me.btnGridEdit.Name = "btnGridEdit"
+        Me.btnGridEdit.Size = New System.Drawing.Size(75, 64)
+        Me.btnGridEdit.TabIndex = 25
+        Me.btnGridEdit.Text = "Full Edit on Grid with Auto Save"
+        Me.btnGridEdit.UseVisualStyleBackColor = True
         '
-        'cmdEdit
+        'btnEdit
         '
-        Me.cmdEdit.Location = New System.Drawing.Point(12, 277)
-        Me.cmdEdit.Name = "cmdEdit"
-        Me.cmdEdit.Size = New System.Drawing.Size(75, 37)
-        Me.cmdEdit.TabIndex = 26
-        Me.cmdEdit.Text = "&Edit a single cell"
-        Me.cmdEdit.UseVisualStyleBackColor = True
+        Me.btnEdit.Location = New System.Drawing.Point(12, 277)
+        Me.btnEdit.Name = "btnEdit"
+        Me.btnEdit.Size = New System.Drawing.Size(75, 37)
+        Me.btnEdit.TabIndex = 26
+        Me.btnEdit.Text = "&Edit a single cell"
+        Me.btnEdit.UseVisualStyleBackColor = True
         '
-        'cmdSave
+        'btnSave
         '
-        Me.cmdSave.Location = New System.Drawing.Point(12, 320)
-        Me.cmdSave.Name = "cmdSave"
-        Me.cmdSave.Size = New System.Drawing.Size(75, 23)
-        Me.cmdSave.TabIndex = 27
-        Me.cmdSave.Text = "Save"
-        Me.cmdSave.UseVisualStyleBackColor = True
+        Me.btnSave.Location = New System.Drawing.Point(12, 320)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnSave.TabIndex = 27
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
-        'cmdDelete
+        'btnDelete
         '
-        Me.cmdDelete.Enabled = False
-        Me.cmdDelete.Location = New System.Drawing.Point(12, 349)
-        Me.cmdDelete.Name = "cmdDelete"
-        Me.cmdDelete.Size = New System.Drawing.Size(75, 23)
-        Me.cmdDelete.TabIndex = 28
-        Me.cmdDelete.Text = "&Delete"
-        Me.cmdDelete.UseVisualStyleBackColor = True
+        Me.btnDelete.Enabled = False
+        Me.btnDelete.Location = New System.Drawing.Point(12, 349)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(75, 23)
+        Me.btnDelete.TabIndex = 28
+        Me.btnDelete.Text = "&Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
         '
-        'cmdCancel
+        'btnCancel
         '
-        Me.cmdCancel.Location = New System.Drawing.Point(12, 378)
-        Me.cmdCancel.Name = "cmdCancel"
-        Me.cmdCancel.Size = New System.Drawing.Size(75, 23)
-        Me.cmdCancel.TabIndex = 29
-        Me.cmdCancel.Text = "&Cancel"
-        Me.cmdCancel.UseVisualStyleBackColor = True
+        Me.btnCancel.Location = New System.Drawing.Point(12, 378)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnCancel.TabIndex = 29
+        Me.btnCancel.Text = "&Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
         '
         'CLabel2
         '
@@ -134,8 +134,8 @@ Partial Class DosageTableManager
         '
         'DataGridViewDosageMaster
         '
-        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-        Me.DataGridViewDosageMaster.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FloralWhite
+        Me.DataGridViewDosageMaster.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridViewDosageMaster.AutoGenerateColumns = False
         Me.DataGridViewDosageMaster.BegFindValue = Nothing
         Me.DataGridViewDosageMaster.Cached = False
@@ -143,14 +143,14 @@ Partial Class DosageTableManager
         Me.DataGridViewDosageMaster.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvDosageCode, Me.dgvDosageName, Me.dgvDosageNameArabic, Me.dgvIdNo})
         Me.DataGridViewDosageMaster.DataFilter = Nothing
         Me.DataGridViewDosageMaster.DataSource = Me.bsDosageMaster
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewDosageMaster.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewDosageMaster.DefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridViewDosageMaster.DgvFooter = Nothing
         Me.DataGridViewDosageMaster.DisplayOnly = False
         Me.DataGridViewDosageMaster.Ea = Nothing
@@ -177,26 +177,6 @@ Partial Class DosageTableManager
         Me.DataGridViewDosageMaster.Size = New System.Drawing.Size(895, 385)
         Me.DataGridViewDosageMaster.TabIndex = 30
         Me.DataGridViewDosageMaster.Translatable = True
-        '
-        'txtDosageCode
-        '
-        Me.txtDosageCode.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.txtDosageCode.Enabled = False
-        Me.txtDosageCode.Location = New System.Drawing.Point(133, 403)
-        Me.txtDosageCode.Multiline = True
-        Me.txtDosageCode.Name = "txtDosageCode"
-        Me.txtDosageCode.Size = New System.Drawing.Size(40, 52)
-        Me.txtDosageCode.TabIndex = 31
-        '
-        'txtIdNo
-        '
-        Me.txtIdNo.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.txtIdNo.Enabled = False
-        Me.txtIdNo.Location = New System.Drawing.Point(90, 403)
-        Me.txtIdNo.Multiline = True
-        Me.txtIdNo.Name = "txtIdNo"
-        Me.txtIdNo.Size = New System.Drawing.Size(38, 52)
-        Me.txtIdNo.TabIndex = 32
         '
         'dgvDosageCode
         '
@@ -234,6 +214,26 @@ Partial Class DosageTableManager
         '
         Me.bsDosageMaster.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.DosageMasterModel)
         '
+        'txtDosageCode
+        '
+        Me.txtDosageCode.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtDosageCode.Enabled = False
+        Me.txtDosageCode.Location = New System.Drawing.Point(133, 403)
+        Me.txtDosageCode.Multiline = True
+        Me.txtDosageCode.Name = "txtDosageCode"
+        Me.txtDosageCode.Size = New System.Drawing.Size(40, 52)
+        Me.txtDosageCode.TabIndex = 31
+        '
+        'txtIdNo
+        '
+        Me.txtIdNo.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtIdNo.Enabled = False
+        Me.txtIdNo.Location = New System.Drawing.Point(90, 403)
+        Me.txtIdNo.Multiline = True
+        Me.txtIdNo.Name = "txtIdNo"
+        Me.txtIdNo.Size = New System.Drawing.Size(38, 52)
+        Me.txtIdNo.TabIndex = 32
+        '
         'DosageTableManager
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -242,16 +242,16 @@ Partial Class DosageTableManager
         Me.Controls.Add(Me.txtIdNo)
         Me.Controls.Add(Me.txtDosageCode)
         Me.Controls.Add(Me.DataGridViewDosageMaster)
-        Me.Controls.Add(Me.cmdCancel)
-        Me.Controls.Add(Me.cmdDelete)
-        Me.Controls.Add(Me.cmdSave)
-        Me.Controls.Add(Me.cmdEdit)
-        Me.Controls.Add(Me.cmdGridEdit)
+        Me.Controls.Add(Me.btnCancel)
+        Me.Controls.Add(Me.btnDelete)
+        Me.Controls.Add(Me.btnSave)
+        Me.Controls.Add(Me.btnEdit)
+        Me.Controls.Add(Me.btnGridEdit)
         Me.Controls.Add(Me.CLabel2)
         Me.Controls.Add(Me.txtTranslation)
         Me.Controls.Add(Me.txtOriginal)
         Me.Name = "DosageTableManager"
-        Me.Text = "Translation Table Manager"
+        Me.Text = "Dosage Translation Manager"
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataGridViewDosageMaster, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.bsDosageMaster, System.ComponentModel.ISupportInitialize).EndInit()
@@ -261,11 +261,11 @@ Partial Class DosageTableManager
     End Sub
     Friend WithEvents txtOriginal As TextBox
     Friend WithEvents txtTranslation As TextBox
-    Friend WithEvents cmdGridEdit As Button
-    Friend WithEvents cmdEdit As Button
-    Friend WithEvents cmdSave As Button
-    Friend WithEvents cmdDelete As Button
-    Friend WithEvents cmdCancel As Button
+    Friend WithEvents btnGridEdit As Button
+    Friend WithEvents btnEdit As Button
+    Friend WithEvents btnSave As Button
+    Friend WithEvents btnDelete As Button
+    Friend WithEvents btnCancel As Button
     Friend WithEvents CLabel2 As CLabel
     Friend WithEvents ISPDATADataSet As ISPDATADataSet
     Friend WithEvents DosageMasterNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
