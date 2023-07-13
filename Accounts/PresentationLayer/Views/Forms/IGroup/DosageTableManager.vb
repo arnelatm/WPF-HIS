@@ -89,7 +89,7 @@ Public Class DosageTableManager
     End Sub
 
 
-    Private Sub cmdCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
+    Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
         AllowEditing(False)
     End Sub
 
@@ -98,7 +98,7 @@ Public Class DosageTableManager
         AllowEdits(AllowEdit)
     End Sub
 
-    Private Sub cmdEdit_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnEdit.Click
+    Private Sub btnEdit_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnEdit.Click
         With DataGridViewDosageMaster
             Dim nIndex = .CurrentRow.Index
             txtOriginal.Text = .Rows(nIndex).Cells(1).Value
@@ -109,7 +109,7 @@ Public Class DosageTableManager
         btnSave.Enabled = True
     End Sub
 
-    Private Sub cmdSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSave.Click
+    Private Sub btnSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSave.Click
         RaiseEvent SaveCurrent(CInt(DataGridViewDosageMaster.CurrentRow.Cells(3).Value), txtTranslation.Text)
         UpdateDisplay()
     End Sub
@@ -163,7 +163,7 @@ Public Class DosageTableManager
         End If
     End Sub
 
-    Private Sub cmdGridEdit_Click(sender As Object, e As EventArgs) Handles btnGridEdit.Click
+    Private Sub btnGridEdit_Click(sender As Object, e As EventArgs) Handles btnGridEdit.Click
         AllowEditing(True)
     End Sub
 
