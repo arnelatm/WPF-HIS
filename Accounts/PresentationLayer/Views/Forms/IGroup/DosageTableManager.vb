@@ -10,8 +10,6 @@ Public Class DosageTableManager
 
 #Region " Declarations and Property Procedures "
 
-    Const TurnOn As Boolean = True
-    Const TurnOff As Boolean = False
     Friend Row As Integer
     Friend Cmd As String
     Friend Msg As String
@@ -91,7 +89,7 @@ Public Class DosageTableManager
     End Sub
 
 
-    Private Sub cmdCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdCancel.Click
+    Private Sub cmdCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
         AllowEditing(False)
     End Sub
 
@@ -100,7 +98,7 @@ Public Class DosageTableManager
         AllowEdits(AllowEdit)
     End Sub
 
-    Private Sub cmdEdit_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdEdit.Click
+    Private Sub cmdEdit_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnEdit.Click
         With DataGridViewDosageMaster
             Dim nIndex = .CurrentRow.Index
             txtOriginal.Text = .Rows(nIndex).Cells(1).Value
@@ -108,10 +106,10 @@ Public Class DosageTableManager
         End With
         AllowEdits(True)
         txtTranslation.Focus()
-        cmdSave.Enabled = True
+        btnSave.Enabled = True
     End Sub
 
-    Private Sub cmdSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdSave.Click
+    Private Sub cmdSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSave.Click
         RaiseEvent SaveCurrent(CInt(DataGridViewDosageMaster.CurrentRow.Cells(3).Value), txtTranslation.Text)
         UpdateDisplay()
     End Sub
@@ -149,23 +147,23 @@ Public Class DosageTableManager
 
     Sub AllowEdits(allow As Boolean)
         If allow Then
-            cmdEdit.Enabled = False
-            cmdDelete.Enabled = False
-            cmdCancel.Enabled = True
-            cmdSave.Enabled = True
+            btnEdit.Enabled = False
+            btnDelete.Enabled = False
+            btnCancel.Enabled = True
+            btnSave.Enabled = True
             txtTranslation.Enabled = True
-            cmdGridEdit.Enabled = False
+            btnGridEdit.Enabled = False
         Else
-            cmdEdit.Enabled = True
-            cmdDelete.Enabled = False 'True
-            cmdCancel.Enabled = False
-            cmdSave.Enabled = False
+            btnEdit.Enabled = True
+            btnDelete.Enabled = False 'True
+            btnCancel.Enabled = False
+            btnSave.Enabled = False
             txtTranslation.Enabled = False
-            cmdGridEdit.Enabled = True
+            btnGridEdit.Enabled = True
         End If
     End Sub
 
-    Private Sub cmdGridEdit_Click(sender As Object, e As EventArgs) Handles cmdGridEdit.Click
+    Private Sub cmdGridEdit_Click(sender As Object, e As EventArgs) Handles btnGridEdit.Click
         AllowEditing(True)
     End Sub
 
