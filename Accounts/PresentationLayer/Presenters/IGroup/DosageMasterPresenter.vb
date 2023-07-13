@@ -22,7 +22,7 @@ Namespace PresentationLayer.Presenters
             'Dim detailDao = New DosageMasterDetailDao()
 
             AddHandler View.LoadAll, AddressOf OnLoadAll
-            'AddHandler View.ClearEntry, AddressOf OnClearEntry
+            AddHandler View.SaveCurrent, AddressOf OnSaveCurrent
             'AddHandler View.ValidateEntries, AddressOf OnValidateEntries
             'AddHandler View.ValidateQrCode, AddressOf OnValidateQrCode
             'AddHandler View.SaveDosageMaster, AddressOf OnSaveDosageMaster
@@ -38,6 +38,10 @@ Namespace PresentationLayer.Presenters
                 GlobalVariables.Mapper.Map(record, dmv)
                 View.DosageMasterList = dmv
             End If
+        End Sub
+
+        Public Sub OnSaveCurrent(idNo As Int32, translation As String)
+            Service.UpdateRecordWithIdNo(Of String)(idNo, "MedicineDosageMaster", "ItemNameArabic", translation)
         End Sub
 
         Private Sub OnAddDosageMaster()

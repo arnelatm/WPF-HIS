@@ -29,7 +29,7 @@ Partial Class DosageTableManager
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.txtCaption = New System.Windows.Forms.TextBox()
+        Me.txtOriginal = New System.Windows.Forms.TextBox()
         Me.txtTranslation = New System.Windows.Forms.TextBox()
         Me.cmdGridEdit = New System.Windows.Forms.Button()
         Me.cmdEdit = New System.Windows.Forms.Button()
@@ -38,40 +38,42 @@ Partial Class DosageTableManager
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.DataGridViewDosageMaster = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.bsDosageMaster = New System.Windows.Forms.BindingSource(Me.components)
+        Me.txtDosageCode = New System.Windows.Forms.TextBox()
+        Me.txtIdNo = New System.Windows.Forms.TextBox()
         Me.dgvDosageCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvDosageName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvDosageNameArabic = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.dgvIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.bsDosageMaster = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridViewDosageMaster, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.bsDosageMaster, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'txtCaption
+        'txtOriginal
         '
-        Me.txtCaption.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.txtCaption.Enabled = False
-        Me.txtCaption.Location = New System.Drawing.Point(90, 403)
-        Me.txtCaption.Multiline = True
-        Me.txtCaption.Name = "txtCaption"
-        Me.txtCaption.Size = New System.Drawing.Size(450, 52)
-        Me.txtCaption.TabIndex = 10
-        Me.txtCaption.Text = "Original Message"
+        Me.txtOriginal.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtOriginal.Enabled = False
+        Me.txtOriginal.Location = New System.Drawing.Point(176, 403)
+        Me.txtOriginal.Multiline = True
+        Me.txtOriginal.Name = "txtOriginal"
+        Me.txtOriginal.Size = New System.Drawing.Size(375, 52)
+        Me.txtOriginal.TabIndex = 10
+        Me.txtOriginal.Text = "Dose in English"
         '
         'txtTranslation
         '
         Me.txtTranslation.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtTranslation.Location = New System.Drawing.Point(546, 403)
+        Me.txtTranslation.Location = New System.Drawing.Point(557, 403)
         Me.txtTranslation.Multiline = True
         Me.txtTranslation.Name = "txtTranslation"
-        Me.txtTranslation.Size = New System.Drawing.Size(439, 52)
+        Me.txtTranslation.Size = New System.Drawing.Size(428, 52)
         Me.txtTranslation.TabIndex = 11
-        Me.txtTranslation.Text = "Translation"
+        Me.txtTranslation.Text = "Arabic Translation"
         '
         'cmdGridEdit
         '
-        Me.cmdGridEdit.Location = New System.Drawing.Point(9, 251)
+        Me.cmdGridEdit.Location = New System.Drawing.Point(12, 208)
         Me.cmdGridEdit.Name = "cmdGridEdit"
         Me.cmdGridEdit.Size = New System.Drawing.Size(75, 64)
         Me.cmdGridEdit.TabIndex = 25
@@ -80,7 +82,7 @@ Partial Class DosageTableManager
         '
         'cmdEdit
         '
-        Me.cmdEdit.Location = New System.Drawing.Point(9, 320)
+        Me.cmdEdit.Location = New System.Drawing.Point(12, 277)
         Me.cmdEdit.Name = "cmdEdit"
         Me.cmdEdit.Size = New System.Drawing.Size(75, 37)
         Me.cmdEdit.TabIndex = 26
@@ -89,7 +91,7 @@ Partial Class DosageTableManager
         '
         'cmdSave
         '
-        Me.cmdSave.Location = New System.Drawing.Point(9, 363)
+        Me.cmdSave.Location = New System.Drawing.Point(12, 320)
         Me.cmdSave.Name = "cmdSave"
         Me.cmdSave.Size = New System.Drawing.Size(75, 23)
         Me.cmdSave.TabIndex = 27
@@ -98,7 +100,8 @@ Partial Class DosageTableManager
         '
         'cmdDelete
         '
-        Me.cmdDelete.Location = New System.Drawing.Point(9, 392)
+        Me.cmdDelete.Enabled = False
+        Me.cmdDelete.Location = New System.Drawing.Point(12, 349)
         Me.cmdDelete.Name = "cmdDelete"
         Me.cmdDelete.Size = New System.Drawing.Size(75, 23)
         Me.cmdDelete.TabIndex = 28
@@ -107,7 +110,7 @@ Partial Class DosageTableManager
         '
         'cmdCancel
         '
-        Me.cmdCancel.Location = New System.Drawing.Point(9, 421)
+        Me.cmdCancel.Location = New System.Drawing.Point(12, 378)
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.Size = New System.Drawing.Size(75, 23)
         Me.cmdCancel.TabIndex = 29
@@ -137,7 +140,7 @@ Partial Class DosageTableManager
         Me.DataGridViewDosageMaster.BegFindValue = Nothing
         Me.DataGridViewDosageMaster.Cached = False
         Me.DataGridViewDosageMaster.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewDosageMaster.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvDosageCode, Me.dgvDosageName, Me.dgvDosageNameArabic, Me.DataGridViewTextBoxColumn3})
+        Me.DataGridViewDosageMaster.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvDosageCode, Me.dgvDosageName, Me.dgvDosageNameArabic, Me.dgvIdNo})
         Me.DataGridViewDosageMaster.DataFilter = Nothing
         Me.DataGridViewDosageMaster.DataSource = Me.bsDosageMaster
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -175,9 +178,25 @@ Partial Class DosageTableManager
         Me.DataGridViewDosageMaster.TabIndex = 30
         Me.DataGridViewDosageMaster.Translatable = True
         '
-        'bsDosageMaster
+        'txtDosageCode
         '
-        Me.bsDosageMaster.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.DosageMasterModel)
+        Me.txtDosageCode.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtDosageCode.Enabled = False
+        Me.txtDosageCode.Location = New System.Drawing.Point(133, 403)
+        Me.txtDosageCode.Multiline = True
+        Me.txtDosageCode.Name = "txtDosageCode"
+        Me.txtDosageCode.Size = New System.Drawing.Size(40, 52)
+        Me.txtDosageCode.TabIndex = 31
+        '
+        'txtIdNo
+        '
+        Me.txtIdNo.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtIdNo.Enabled = False
+        Me.txtIdNo.Location = New System.Drawing.Point(90, 403)
+        Me.txtIdNo.Multiline = True
+        Me.txtIdNo.Name = "txtIdNo"
+        Me.txtIdNo.Size = New System.Drawing.Size(38, 52)
+        Me.txtIdNo.TabIndex = 32
         '
         'dgvDosageCode
         '
@@ -201,19 +220,27 @@ Partial Class DosageTableManager
         Me.dgvDosageNameArabic.DataPropertyName = "DosageMasterNameARa"
         Me.dgvDosageNameArabic.HeaderText = "Dosage Name Arabic"
         Me.dgvDosageNameArabic.Name = "dgvDosageNameArabic"
+        Me.dgvDosageNameArabic.ReadOnly = True
         '
-        'DataGridViewTextBoxColumn3
+        'dgvIdNo
         '
-        Me.DataGridViewTextBoxColumn3.DataPropertyName = "IdNo"
-        Me.DataGridViewTextBoxColumn3.HeaderText = "IdNo"
-        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-        Me.DataGridViewTextBoxColumn3.Visible = False
+        Me.dgvIdNo.DataPropertyName = "IdNo"
+        Me.dgvIdNo.HeaderText = "IdNo"
+        Me.dgvIdNo.Name = "dgvIdNo"
+        Me.dgvIdNo.ReadOnly = True
+        Me.dgvIdNo.Visible = False
+        '
+        'bsDosageMaster
+        '
+        Me.bsDosageMaster.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.DosageMasterModel)
         '
         'DosageTableManager
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(995, 461)
+        Me.Controls.Add(Me.txtIdNo)
+        Me.Controls.Add(Me.txtDosageCode)
         Me.Controls.Add(Me.DataGridViewDosageMaster)
         Me.Controls.Add(Me.cmdCancel)
         Me.Controls.Add(Me.cmdDelete)
@@ -222,7 +249,7 @@ Partial Class DosageTableManager
         Me.Controls.Add(Me.cmdGridEdit)
         Me.Controls.Add(Me.CLabel2)
         Me.Controls.Add(Me.txtTranslation)
-        Me.Controls.Add(Me.txtCaption)
+        Me.Controls.Add(Me.txtOriginal)
         Me.Name = "DosageTableManager"
         Me.Text = "Translation Table Manager"
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
@@ -232,7 +259,7 @@ Partial Class DosageTableManager
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents txtCaption As TextBox
+    Friend WithEvents txtOriginal As TextBox
     Friend WithEvents txtTranslation As TextBox
     Friend WithEvents cmdGridEdit As Button
     Friend WithEvents cmdEdit As Button
@@ -246,8 +273,10 @@ Partial Class DosageTableManager
     Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewDosageMaster As CDataGridView
     Friend WithEvents bsDosageMaster As BindingSource
+    Friend WithEvents txtDosageCode As TextBox
+    Friend WithEvents txtIdNo As TextBox
     Friend WithEvents dgvDosageCode As DataGridViewTextBoxColumn
     Friend WithEvents dgvDosageName As DataGridViewTextBoxColumn
     Friend WithEvents dgvDosageNameArabic As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
+    Friend WithEvents dgvIdNo As DataGridViewTextBoxColumn
 End Class

@@ -18,6 +18,7 @@ Namespace PresentationLayer.Views.Interfaces
 
         Property DosageMasterList As List(Of IDosageMasterView)
         Event LoadAll(sortKey As String)
+        Event SaveCurrent(idNo As Int32, translation As String)
 
     End Interface
 
