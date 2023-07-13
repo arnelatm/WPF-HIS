@@ -33,13 +33,15 @@
     [OtherParameters]       VARCHAR (300)  NULL,
     [doc_type]              CHAR (1)       CONSTRAINT [DF__ReportCre__doc_t__2C938683] DEFAULT ('D') NULL,
     [UserID]                VARCHAR (15)   CONSTRAINT [DF__ReportCre__UserI__2D87AABC] DEFAULT ('Admin') NULL,
-    [Create_Date]           DATETIME       CONSTRAINT [DF__ReportCre__Creat__2E7BCEF5] DEFAULT (getdate()) NULL,
+    [DateCreated]           DATETIME       CONSTRAINT [DF__ReportCre__Creat__2E7BCEF5] DEFAULT (getdate()) NULL,
     [MachineID]             VARCHAR (20)   CONSTRAINT [DF__ReportCre__Machi__2F6FF32E] DEFAULT (host_name()) NULL,
     [QueryForm]             VARCHAR (50)   NULL,
     [QueryFormParameters]   VARCHAR (MAX)  NULL,
     [Active]                BIT            NULL,
     CONSTRAINT [PK_ReportCreator] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

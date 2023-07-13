@@ -102,9 +102,10 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripMenuItemStockInventory = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemPMR = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItemDosage = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemInventory = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemProduct = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemCategory = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemOldDosageTranslation = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemInventory = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemProduct = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemCategory = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemUnit = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemWarehouse = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemReportMaster = New System.Windows.Forms.ToolStripMenuItem()
@@ -234,7 +235,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemOldDosageTranslation = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDurationTranslation = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -621,7 +622,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemPMR
             '
-            Me.ToolStripMenuItemPMR.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemDosage, Me.ToolStripMenuItemOldDosageTranslation})
+            Me.ToolStripMenuItemPMR.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemDosage, Me.ToolStripMenuItemOldDosageTranslation, Me.ToolStripMenuItemDurationTranslation})
             Me.ToolStripMenuItemPMR.Name = "ToolStripMenuItemPMR"
             resources.ApplyResources(Me.ToolStripMenuItemPMR, "ToolStripMenuItemPMR")
             '
@@ -629,6 +630,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemDosage.Name = "ToolStripMenuItemDosage"
             resources.ApplyResources(Me.ToolStripMenuItemDosage, "ToolStripMenuItemDosage")
+            '
+            'ToolStripMenuItemOldDosageTranslation
+            '
+            Me.ToolStripMenuItemOldDosageTranslation.Name = "ToolStripMenuItemOldDosageTranslation"
+            resources.ApplyResources(Me.ToolStripMenuItemOldDosageTranslation, "ToolStripMenuItemOldDosageTranslation")
             '
             'ToolStripMenuItemInventory
             '
@@ -1318,10 +1324,10 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'ToolStripMenuItemOldDosageTranslation
+            'ToolStripMenuItemDurationTranslation
             '
-            Me.ToolStripMenuItemOldDosageTranslation.Name = "ToolStripMenuItemOldDosageTranslation"
-            resources.ApplyResources(Me.ToolStripMenuItemOldDosageTranslation, "ToolStripMenuItemOldDosageTranslation")
+            Me.ToolStripMenuItemDurationTranslation.Name = "ToolStripMenuItemDurationTranslation"
+            resources.ApplyResources(Me.ToolStripMenuItemDurationTranslation, "ToolStripMenuItemDurationTranslation")
             '
             'Main
             '
@@ -1555,5 +1561,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemDoctorsPrescriptions As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemPrescription As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemOldDosageTranslation As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemDurationTranslation As ToolStripMenuItem
     End Class
 End NameSpace

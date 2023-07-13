@@ -1213,6 +1213,10 @@ Namespace PresentationLayer.Views.Forms
             '    }
             'frm.Show()
         End Sub
+
+        Private Sub ToolStripMenuItemDurationTranslation_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDurationTranslation.Click
+            RunForm(Of DurationTableManager, DurationListPresenter(Of DurationModel))()
+        End Sub
     End Class
 
 End Namespace

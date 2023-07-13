@@ -20,6 +20,9 @@
 
 
 
+
+
+
 CREATE VIEW [dbo].[Dosage_View]
 AS
 SELECT a.IdNo, a.DosageCode, a.Direction, a.DosageUnit, a.Frequency, a.FrequencyTiming, a.Route,		
@@ -29,6 +32,15 @@ SELECT a.IdNo, a.DosageCode, a.Direction, a.DosageUnit, a.Frequency, a.Frequency
 		d.ItemCodeName AS RouteName, 
 		e.ItemCodeName AS FrequencyName, 
 		f.ItemCodeName AS FrequencyTimingName, 
+		'' as PatientName,
+		'' as AgeYmd,
+		0 as Age,
+		0.00 as Dose,
+		'' as Gender,
+		0 as DoseUnit,
+		0.00 as Duration,
+		0 as DurationUnit,
+		0 as FileNo,
 		a.DateTimeStamp
 FROM            dbo.Dosage AS a LEFT OUTER JOIN
                          dbo.ItemCode AS c ON a.Direction = c.IdNo AND c.CodeGroupIdNo = 10 LEFT OUTER JOIN
