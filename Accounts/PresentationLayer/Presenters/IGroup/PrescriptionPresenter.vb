@@ -81,16 +81,29 @@ Namespace PresentationLayer.Presenters
             For Each item As PrescriptionItemView In View.PrescriptionDetails
                 If item.PrintLabel Then
                     Dim itemName As String
-                    Dim dosage As String = item.Dosage.Trim() + IIf(item.Duration Is Nothing OrElse item.Duration = "", "", " for " & item.Duration)
-                    Dim dosageAra As String = dosage
+                    Dim duration As String = IIf(item.Duration Is Nothing OrElse item.Duration = "", "", " for " & item.Duration)
+                    Dim dosage As String = item.Dosage.Trim() + duration
+                    Dim durationArabic As String = ""
+                    Dim dosageAra As String
+                    If duration = "" Then
+                        durationArabic = ""
+                    Else
+                        durationArabic = " ل " + Service.GetField(Of String, String)(item.Duration, "PMRQtyDays", "DescriptionEnglish", "DescriptionArabic")
+                    End If
+                    Dim doseAra As String = Service.GetField(Of String, String)(item.Dosage, "MedicineDosageMaster", "ItemNameEnglish", "ItemNameArabic")
+                    If doseAra Is Nothing OrElse doseAra = "" Then
+                        dosageAra = item.Dosage.Trim() + " " + durationArabic
+                    Else
+                        dosageAra = doseAra + " " + durationArabic
+                    End If
                     If item.GenericName Is Nothing OrElse item.GenericName = "" Then
                         itemName = item.ItemName
                     Else
                         itemName = item.GenericName.Trim() + " (" + item.ItemName.Trim() + ")"
                     End If
                     Service.InsertRecord("DosageLabelDetail", {"DosageLabelIdNo", "ItemName", "Dosage", "DosageAra"},
-                                                              {"Integer", "String", "String", "String"},
-                                                              {_labelIdNo, itemName, dosage, dosageAra})
+                                                          {"Integer", "String", "String", "String"},
+                                                          {_labelIdNo, itemName, dosage, dosageAra})
                 End If
             Next
         End Sub
