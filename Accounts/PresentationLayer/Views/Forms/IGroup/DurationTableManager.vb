@@ -5,42 +5,39 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.GlobalFuncNSub
 
-Public Class DosageTableManager
-    Implements IDosageMasterListView
+Public Class DurationTableManager
+    Implements IDurationListView
 
 #Region " Declarations and Property Procedures "
 
-    Const TurnOn As Boolean = True
-    Const TurnOff As Boolean = False
     Friend Row As Integer
     Friend Cmd As String
     Friend Msg As String
     Friend Result As String
-    Friend TransTable As New DataTable
-    Private Event LoadAll(sortKey As String) Implements IDosageMasterListView.LoadAll
-    Private Event SaveCurrent(idNo As Int32, translation As String) Implements IDosageMasterListView.SaveCurrent
+    Private Event LoadAll(sortKey As String) Implements IDurationListView.LoadAll
+    Private Event SaveCurrent(idNo As Int32, translation As String) Implements IDurationListView.SaveCurrent
     Private MenuLevel As String = ""
-    Private _dosageMasterList As List(Of IDosageMasterView)
+    Private _durationMasterList As List(Of IDurationView)
     Private _originalAppTextLanguage As String
     Public Property SystemViewIdNoToTranslate As Int16
 
-    Public Property DosageMasterList As List(Of IDosageMasterView) Implements IDosageMasterListView.DosageMasterList
+    Public Property DurationList As List(Of IDurationView) Implements IDurationListView.DurationList
         Get
-            Return _dosageMasterList
+            Return _durationMasterList
         End Get
-        Set(value As List(Of IDosageMasterView))
-            _dosageMasterList = value
-            BindDosage()
+        Set(value As List(Of IDurationView))
+            _durationMasterList = value
+            BindDuration()
         End Set
     End Property
 
-    Public Property DosageMasterCode As String Implements IDosageMasterView.DosageMasterCode
+    Public Property DurationCode As String Implements IDurationView.DurationCode
 
-    Public Property DosageMasterName As String Implements IDosageMasterView.DosageMasterName
+    Public Property DurationName As String Implements IDurationView.DurationName
 
-    Public Property DosageMasterNameAra As String Implements IDosageMasterView.DosageMasterNameAra
+    Public Property DurationNameAra As String Implements IDurationView.DurationNameAra
 
-    Public Property IdNo As Integer Implements IDosageMasterView.IdNo
+    Public Property IdNo As Integer Implements IDurationView.IdNo
 
 
 #End Region
@@ -53,24 +50,22 @@ Public Class DosageTableManager
         InitializationMode = False
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             ' Add any initialization after the InitializeComponent() call.
-            TransTable.Columns.Add("Original")
-            TransTable.Columns.Add("Translated")
             _originalAppTextLanguage = GlobalVariables.OriginalAppTextLanguage
         End If
 
     End Sub
 
-    Private Sub BindDosage()
-        bsDosageMaster.DataSource = Nothing
-        bsDosageMaster.DataSource = DosageMasterList
-        bsDosageMaster.AllowNew = False
-        With DataGridViewDosageMaster
+    Private Sub BindDuration()
+        bsDuration.DataSource = Nothing
+        bsDuration.DataSource = DurationList
+        bsDuration.AllowNew = False
+        With DataGridViewDuration
             .Refresh()
             .AutoGenerateColumns = False
-            .DataSource = bsDosageMaster
+            .DataSource = bsDuration
             .Refresh()
         End With
-        With DataGridViewDosageMaster.Columns
+        With DataGridViewDuration.Columns
 
         End With
     End Sub
@@ -79,7 +74,7 @@ Public Class DosageTableManager
 #Region " Form Load event code "
 
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-        RaiseEvent LoadAll("DosageMasterName")
+        RaiseEvent LoadAll("DurationName")
     End Sub
 
 #End Region
@@ -94,42 +89,37 @@ Public Class DosageTableManager
     End Sub
 
 
-    Private Sub cmdCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdCancel.Click
+    Private Sub btnCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnCancel.Click
         AllowEditing(False)
     End Sub
 
     Private Sub AllowEditing(AllowEdit As Boolean)
-        DataGridViewDosageMaster.Columns(2).ReadOnly = Not AllowEdit
+        DataGridViewDuration.Columns(2).ReadOnly = Not AllowEdit
         AllowEdits(AllowEdit)
     End Sub
 
-    Private Sub cmdEdit_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdEdit.Click
-        With DataGridViewDosageMaster
+    Private Sub btnEdit_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnEdit.Click
+        With DataGridViewDuration
             Dim nIndex = .CurrentRow.Index
             txtOriginal.Text = .Rows(nIndex).Cells(1).Value
             txtTranslation.Text = .Rows(nIndex).Cells(2).Value
         End With
         AllowEdits(True)
-        'txtTranslation.Visible = True
-        'txtOriginal.Visible = True
         txtTranslation.Focus()
-        cmdSave.Enabled = True
+        btnSave.Enabled = True
     End Sub
 
-    Private Sub cmdSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdSave.Click
-        RaiseEvent SaveCurrent(CInt(DataGridViewDosageMaster.CurrentRow.Cells(3).Value), txtTranslation.Text)
+    Private Sub btnSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSave.Click
+        RaiseEvent SaveCurrent(CInt(DataGridViewDuration.CurrentRow.Cells(3).Value), txtTranslation.Text)
         UpdateDisplay()
     End Sub
 
     Private Sub UpdateDisplay()
-        'txtTranslation.Visible = False
-        'txtOriginal.Visible = False
-        With DataGridViewDosageMaster
+        With DataGridViewDuration
             .Rows(.CurrentRow.Index).Cells(2).Value = txtTranslation.Text
         End With
         AllowEdits(False)
-        'DataGridViewDosageMaster.Columns(2).ReadOnly = True
-        DataGridViewDosageMaster.Refresh()
+        DataGridViewDuration.Refresh()
     End Sub
 
     Private Sub SetFocusToRowWithText(ByVal textToFind As String, ByRef dataGrid As DataGridView)
@@ -144,7 +134,7 @@ Public Class DosageTableManager
         Next
     End Sub
 
-    Private Sub DataGridViewCellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDosageMaster.CellValueChanged
+    Private Sub DataGridViewCellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDuration.CellValueChanged
         If Not InitializationMode Then
             RaiseEvent SaveCurrent(sender.Rows(e.RowIndex).Cells(3).Value, sender.Rows(e.RowIndex).Cells(2).Value)
         End If
@@ -157,44 +147,35 @@ Public Class DosageTableManager
 
     Sub AllowEdits(allow As Boolean)
         If allow Then
-            cmdEdit.Enabled = False
-            cmdDelete.Enabled = False
-            cmdCancel.Enabled = True
-            cmdSave.Enabled = True
+            btnEdit.Enabled = False
+            btnDelete.Enabled = False
+            btnCancel.Enabled = True
+            btnSave.Enabled = True
             txtTranslation.Enabled = True
-            cmdGridEdit.Enabled = False
+            btnGridEdit.Enabled = False
         Else
-            cmdEdit.Enabled = True
-            cmdDelete.Enabled = False 'True
-            cmdCancel.Enabled = False
-            cmdSave.Enabled = False
+            btnEdit.Enabled = True
+            btnDelete.Enabled = False 'True
+            btnCancel.Enabled = False
+            btnSave.Enabled = False
             txtTranslation.Enabled = False
-            cmdGridEdit.Enabled = True
+            btnGridEdit.Enabled = True
         End If
     End Sub
 
-    Private Sub cmdGridEdit_Click(sender As Object, e As EventArgs) Handles cmdGridEdit.Click
+    Private Sub btnGridEdit_Click(sender As Object, e As EventArgs) Handles btnGridEdit.Click
         AllowEditing(True)
-        'cmdSave.Enabled = False
-        'cmdCancel.Enabled = True
-        'cmdEdit.Enabled = False
-        'cmdDelete.Enabled = False ' True
-        'DataGridViewDosageMaster.Columns(2).ReadOnly = False
     End Sub
 
-    Private Sub DataGrid1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDosageMaster.CellClick
-        With DataGridViewDosageMaster
+    Private Sub DataGrid1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDuration.CellClick
+        With DataGridViewDuration
             Dim nIndex = .CurrentRow.Index
-            txtDosageCode.Text = .Rows(nIndex).Cells(0).Value
+            txtDurationCode.Text = .Rows(nIndex).Cells(0).Value
             txtOriginal.Text = .Rows(nIndex).Cells(1).Value
             txtTranslation.Text = .Rows(nIndex).Cells(2).Value
             txtIdNo.Text = .Rows(nIndex).Cells(3).Value
         End With
     End Sub
-
-    'Private Sub txtTranslation_Leave(sender As Object, e As EventArgs) Handles txtTranslation.Leave
-    '    AllowEdits(False)
-    'End Sub
 
 #End Region
 
