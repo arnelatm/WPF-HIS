@@ -16,6 +16,7 @@ Public Class DosageTableManager
     Friend Cmd As String
     Friend Msg As String
     Friend Result As String
+    Friend TransTable As New DataTable
     Private Event LoadAll(sortKey As String) Implements IDosageMasterListView.LoadAll
     Private Event SaveCurrent(idNo As Int32, translation As String) Implements IDosageMasterListView.SaveCurrent
     Private MenuLevel As String = ""
@@ -52,6 +53,8 @@ Public Class DosageTableManager
         InitializationMode = False
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             ' Add any initialization after the InitializeComponent() call.
+            TransTable.Columns.Add("Original")
+            TransTable.Columns.Add("Translated")
             _originalAppTextLanguage = GlobalVariables.OriginalAppTextLanguage
         End If
 
@@ -107,6 +110,8 @@ Public Class DosageTableManager
             txtTranslation.Text = .Rows(nIndex).Cells(2).Value
         End With
         AllowEdits(True)
+        'txtTranslation.Visible = True
+        'txtOriginal.Visible = True
         txtTranslation.Focus()
         cmdSave.Enabled = True
     End Sub
@@ -117,10 +122,13 @@ Public Class DosageTableManager
     End Sub
 
     Private Sub UpdateDisplay()
+        'txtTranslation.Visible = False
+        'txtOriginal.Visible = False
         With DataGridViewDosageMaster
             .Rows(.CurrentRow.Index).Cells(2).Value = txtTranslation.Text
         End With
         AllowEdits(False)
+        'DataGridViewDosageMaster.Columns(2).ReadOnly = True
         DataGridViewDosageMaster.Refresh()
     End Sub
 
@@ -167,6 +175,11 @@ Public Class DosageTableManager
 
     Private Sub cmdGridEdit_Click(sender As Object, e As EventArgs) Handles cmdGridEdit.Click
         AllowEditing(True)
+        'cmdSave.Enabled = False
+        'cmdCancel.Enabled = True
+        'cmdEdit.Enabled = False
+        'cmdDelete.Enabled = False ' True
+        'DataGridViewDosageMaster.Columns(2).ReadOnly = False
     End Sub
 
     Private Sub DataGrid1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewDosageMaster.CellClick
@@ -178,6 +191,10 @@ Public Class DosageTableManager
             txtIdNo.Text = .Rows(nIndex).Cells(3).Value
         End With
     End Sub
+
+    'Private Sub txtTranslation_Leave(sender As Object, e As EventArgs) Handles txtTranslation.Leave
+    '    AllowEdits(False)
+    'End Sub
 
 #End Region
 
