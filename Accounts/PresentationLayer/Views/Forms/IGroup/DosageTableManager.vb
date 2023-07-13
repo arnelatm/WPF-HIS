@@ -52,7 +52,7 @@ Public Class DosageTableManager
             ' Add any initialization after the InitializeComponent() call.
             _originalAppTextLanguage = GlobalVariables.OriginalAppTextLanguage
         End If
-
+        AllowEditing(False)
     End Sub
 
     Private Sub BindDosage()

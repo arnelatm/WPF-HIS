@@ -548,7 +548,6 @@
     <Build Include="dbo\Views\PrintSetup_View.sql" />
     <Build Include="dbo\Tables\ProductOld.sql" />
     <Build Include="dbo\Stored Procedures\spGetProductBySearchString.sql" />
-    <Build Include="dbo\Tables\Unitxx.sql" />
     <Build Include="dbo\Stored Procedures\UpdateProductUnitTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertProductUnitTVP.sql" />
     <Build Include="dbo\User Defined Types\ProductUnitUpdate.sql" />
@@ -556,9 +555,7 @@
     <Build Include="dbo\Views\ProductUnit_View.sql" />
     <Build Include="dbo\Tables\Inventory.sql" />
     <Build Include="dbo\Tables\Expiry.sql" />
-    <Build Include="dbo\Tables\DrugSale.sql" />
     <Build Include="dbo\Tables\DrugList.sql" />
-    <Build Include="dbo\Tables\DrugAccept.sql" />
     <Build Include="dbo\Tables\Warehouse.sql" />
     <Build Include="dbo\Views\DrugSale_View.sql" />
     <Build Include="dbo\Functions\numberToArabicWord.sql" />
@@ -575,8 +572,7 @@
     <Build Include="dbo\Stored Procedures\InsertSaleDetailTVP.sql" />
     <Build Include="dbo\User Defined Types\SaleDetailInsert.sql" />
     <Build Include="dbo\User Defined Types\SaleDetailUpdate.sql" />
-    <Build Include="dbo\Tables\DosageLabel.sql" />
-    <Build Include="dbo\Tables\DosageDetail.sql" />
+    <Build Include="dbo\Functions\fnGetDrugSaleCsv.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
