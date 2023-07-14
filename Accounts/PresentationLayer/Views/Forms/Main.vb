@@ -1087,7 +1087,7 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of StockInventoryEntry, StockInventoryPresenter(Of StockInventoryModel))()
         End Sub
 
-        Private Sub ToolStripMenuItemDrugSale_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDrugSale.Click
+        Private Sub ToolStripMenuItemDrugSale_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDrugSale.Click, ToolStripButtonDrugSale.Click
             RunForm(Of DrugSaleEntry, DrugSalePresenter(Of DrugSaleModel))()
         End Sub
 
@@ -1200,7 +1200,7 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
-        Private Sub ToolStripMenuItemDoctorsPrescriptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDoctorsPrescriptions.Click
+        Private Sub ToolStripMenuItemDoctorsPrescriptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDoctorsPrescriptions.Click, ToolStripButtonDoseLabel.Click
             RunForm(Of PrescriptionForm, PrescriptionPresenter(Of PrescriptionModel))()
         End Sub
 
@@ -1217,6 +1217,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemDurationTranslation_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDurationTranslation.Click
             RunForm(Of DurationTableManager, DurationListPresenter(Of DurationModel))()
         End Sub
+
     End Class
 
 End Namespace
