@@ -39,70 +39,73 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripButtonEnglish = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButtonTranslate = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButtonDebug = New System.Windows.Forms.ToolStripButton()
-        Me.AccountsMenu = New System.Windows.Forms.MenuStrip()
-        Me.ToolStripMenuItemFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemLogin = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemLogout = New System.Windows.Forms.ToolStripMenuItem()
-        Me.toolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripMenuItemChangePassword = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemSettings = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemExit = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemEdit = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemCut = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemCopy = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemPaste = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemMasters = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemGeneral = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemBranches = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemChartOfAccounts = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemDepartments = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemRevCostCenters = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemRevenueGroups = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemDistributionSchemes = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripMenuItemCountries = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemDocuments = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemPhoneTypes = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemReligions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemBanks = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemItems = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemDefaultFieldValues = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemSalesDepositTypes = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemPrinting = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemPrinters = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemPrintJobs = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemPrintSetups = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemSecurity = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemSecurityGroups = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemSecurityObjects = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemUsers = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemEmployee = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemEmployees = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemDesignations = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemTranslations = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemMessages = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemCaptions = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemCaptionsBatchEdit = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemCreateAllMessages = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemTransactionJournalCodes = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemPayroll = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemPayElement = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemLeaves = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemPayGroups = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemPayCycles = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemPensionProviders = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemPensionSchemes = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemDoctor = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemSupplierVendors = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemCustomerClients = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemItemCode = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemCodeGroup = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemIGroup = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemPharmacyItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemStockInventory = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemPMR = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItemDosage = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripButtonDrugSale = New System.Windows.Forms.ToolStripButton()
+            Me.ToolStripButtonDoseLabel = New System.Windows.Forms.ToolStripButton()
+            Me.AccountsMenu = New System.Windows.Forms.MenuStrip()
+            Me.ToolStripMenuItemFile = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemLogin = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemLogout = New System.Windows.Forms.ToolStripMenuItem()
+            Me.toolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
+            Me.ToolStripMenuItemChangePassword = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemSettings = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemExit = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemEdit = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemCut = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemCopy = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemPaste = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemMasters = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemGeneral = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemBranches = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemChartOfAccounts = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDepartments = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemRevCostCenters = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemRevenueGroups = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDistributionSchemes = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+            Me.ToolStripMenuItemCountries = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDocuments = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemPhoneTypes = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemReligions = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemBanks = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemItems = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDefaultFieldValues = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemSalesDepositTypes = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemPrinting = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemPrinters = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemPrintJobs = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemPrintSetups = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemSecurity = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemSecurityGroups = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemSecurityObjects = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemUsers = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemEmployee = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemEmployees = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDesignations = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemTranslations = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemMessages = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemCaptions = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemCaptionsBatchEdit = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemCreateAllMessages = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemTransactionJournalCodes = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemPayroll = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemPayElement = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemLeaves = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemPayGroups = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemPayCycles = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemPensionProviders = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemPensionSchemes = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDoctor = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemSupplierVendors = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemCustomerClients = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemItemCode = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemCodeGroup = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemIGroup = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemPharmacyItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemStockInventory = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemPMR = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDosage = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemOldDosageTranslation = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDurationTranslation = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemInventory = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemProduct = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemCategory = New System.Windows.Forms.ToolStripMenuItem()
@@ -235,7 +238,6 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemDurationTranslation = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -254,7 +256,7 @@ Namespace PresentationLayer.Views.Forms
             '
             resources.ApplyResources(Me.ToolStrip, "ToolStrip")
             Me.ToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-            Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButtonLogin, Me.ToolStripButtonLogout, Me.ToolStripButtonExit, Me.toolStripSeparator1, Me.ToolStripButtonArabic, Me.ToolStripButtonEnglish, Me.ToolStripButtonTranslate, Me.ToolStripButtonDebug})
+            Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButtonLogin, Me.ToolStripButtonLogout, Me.ToolStripButtonExit, Me.toolStripSeparator1, Me.ToolStripButtonArabic, Me.ToolStripButtonEnglish, Me.ToolStripButtonTranslate, Me.ToolStripButtonDebug, Me.ToolStripButtonDrugSale, Me.ToolStripButtonDoseLabel})
             Me.ToolStrip.Name = "ToolStrip"
             '
             'ToolStripButtonLogin
@@ -302,6 +304,18 @@ Namespace PresentationLayer.Views.Forms
             '
             resources.ApplyResources(Me.ToolStripButtonDebug, "ToolStripButtonDebug")
             Me.ToolStripButtonDebug.Name = "ToolStripButtonDebug"
+            '
+            'ToolStripButtonDrugSale
+            '
+            resources.ApplyResources(Me.ToolStripButtonDrugSale, "ToolStripButtonDrugSale")
+            Me.ToolStripButtonDrugSale.Image = Global.AATM.Accounts.My.Resources.Resources.sfdasale
+            Me.ToolStripButtonDrugSale.Name = "ToolStripButtonDrugSale"
+            '
+            'ToolStripButtonDoseLabel
+            '
+            resources.ApplyResources(Me.ToolStripButtonDoseLabel, "ToolStripButtonDoseLabel")
+            Me.ToolStripButtonDoseLabel.Image = Global.AATM.Accounts.My.Resources.Resources.Dose
+            Me.ToolStripButtonDoseLabel.Name = "ToolStripButtonDoseLabel"
             '
             'AccountsMenu
             '
@@ -635,6 +649,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemOldDosageTranslation.Name = "ToolStripMenuItemOldDosageTranslation"
             resources.ApplyResources(Me.ToolStripMenuItemOldDosageTranslation, "ToolStripMenuItemOldDosageTranslation")
+            '
+            'ToolStripMenuItemDurationTranslation
+            '
+            Me.ToolStripMenuItemDurationTranslation.Name = "ToolStripMenuItemDurationTranslation"
+            resources.ApplyResources(Me.ToolStripMenuItemDurationTranslation, "ToolStripMenuItemDurationTranslation")
             '
             'ToolStripMenuItemInventory
             '
@@ -1324,11 +1343,6 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'ToolStripMenuItemDurationTranslation
-            '
-            Me.ToolStripMenuItemDurationTranslation.Name = "ToolStripMenuItemDurationTranslation"
-            resources.ApplyResources(Me.ToolStripMenuItemDurationTranslation, "ToolStripMenuItemDurationTranslation")
-            '
             'Main
             '
             Me.AllowDrop = True
@@ -1562,5 +1576,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemPrescription As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemOldDosageTranslation As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDurationTranslation As ToolStripMenuItem
+        Friend WithEvents ToolStripButtonDrugSale As ToolStripButton
+        Friend WithEvents ToolStripButtonDoseLabel As ToolStripButton
     End Class
 End NameSpace

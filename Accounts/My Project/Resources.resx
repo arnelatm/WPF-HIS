@@ -138,9 +138,6 @@
   <data name="SpecialAccountSelection_AccountsPayable" xml:space="preserve">
     <value>AccountsPayable</value>
   </data>
-  <data name="SpecialAccountSelection_AdvancesToSupplier" xml:space="preserve">
-    <value>AdvancesToSupplier</value>
-  </data>
   <data name="SpecialAccountSelection_CustomerAdvances" xml:space="preserve">
     <value>CustomerAdvances</value>
   </data>
@@ -156,11 +153,12 @@
   <data name="AccountGroupSelection_Revenue" xml:space="preserve">
     <value>Revenue</value>
   </data>
-  <data name="PaymentTypeSelection_CustomerRefund" xml:space="preserve">
-    <value>CustomerRefund</value>
-  </data>
   <data name="PaymentMethodSelection_BitCoin" xml:space="preserve">
     <value>BitCoin</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="GreenGradientBackgroundLarge" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GreenGradientBackgroundLarge.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PaymentMethodSelection_DebitCard" xml:space="preserve">
     <value>DebitCard</value>
@@ -168,8 +166,8 @@
   <data name="DocumentTypeSelection_Establishment" xml:space="preserve">
     <value>Establishment</value>
   </data>
-  <data name="ReceiptTypeSelection_AccountsReceivable" xml:space="preserve">
-    <value>AccountsReceivable</value>
+  <data name="DocumentTypeSelection_Client" xml:space="preserve">
+    <value>Client</value>
   </data>
   <data name="DebitCreditSelection_Credit" xml:space="preserve">
     <value>Credit</value>
@@ -180,10 +178,6 @@
   <data name="SpecialAccountSelection_AccountsReceivable" xml:space="preserve">
     <value>AccountsReceivable</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="YellowGradientBackgroundLarge2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\YellowGradientBackgroundLarge2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="RevCostCenterTypeSelection_Direct" xml:space="preserve">
     <value>Direct</value>
   </data>
@@ -193,8 +187,8 @@
   <data name="AccountGroupSelection_Asset" xml:space="preserve">
     <value>Asset</value>
   </data>
-  <data name="SecurityLevelSelection_Manager1" xml:space="preserve">
-    <value>Manager1</value>
+  <data name="DebitCreditSelection_Debit" xml:space="preserve">
+    <value>Debit</value>
   </data>
   <data name="PaymentMethodSelection_Check" xml:space="preserve">
     <value>Check</value>
@@ -205,6 +199,9 @@
   <data name="PaymentMethodSelection_BankTransfer" xml:space="preserve">
     <value>BankTransfer</value>
   </data>
+  <data name="PaymentMethodSelection_Others" xml:space="preserve">
+    <value>Others</value>
+  </data>
   <data name="SecurityLevelSelection_None" xml:space="preserve">
     <value>None</value>
   </data>
@@ -214,8 +211,8 @@
   <data name="SpecialAccountSelection_Cash" xml:space="preserve">
     <value>Cash</value>
   </data>
-  <data name="DocumentTypeSelection_Client" xml:space="preserve">
-    <value>Client</value>
+  <data name="PayeeTypeSelection_Supplier" xml:space="preserve">
+    <value>Supplier</value>
   </data>
   <data name="DocumentTypeSelection_Patient" xml:space="preserve">
     <value>Patient</value>
@@ -250,8 +247,14 @@
   <data name="SecurityLevelSelection_Administrator3" xml:space="preserve">
     <value>Administrator3</value>
   </data>
+  <data name="MaritalStatusSelection_None" xml:space="preserve">
+    <value>None</value>
+  </data>
   <data name="AccountStatusSelection_Prospect" xml:space="preserve">
     <value>Prospect</value>
+  </data>
+  <data name="DocumentTypeSelection_Employee" xml:space="preserve">
+    <value>Employee</value>
   </data>
   <data name="MaritalStatusSelection_Widowed" xml:space="preserve">
     <value>Widowed</value>
@@ -280,8 +283,8 @@
   <data name="SecurityLevelSelection_Manager2" xml:space="preserve">
     <value>Manager2</value>
   </data>
-  <data name="SpecialAccountSelection_CheckingAccount" xml:space="preserve">
-    <value>CheckingAccount</value>
+  <data name="Dose1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Dose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="DocumentTypeSelection_Supplier" xml:space="preserve">
     <value>Supplier</value>
@@ -292,14 +295,14 @@
   <data name="PaymentTypeSelection_AccountsPayable" xml:space="preserve">
     <value>AccountsPayable</value>
   </data>
-  <data name="SecurityLevelSelection_Administrator1" xml:space="preserve">
-    <value>Administrator1</value>
-  </data>
   <data name="MaleFemaleSelection_Female" xml:space="preserve">
     <value>Female</value>
   </data>
   <data name="AccountGroupSelection_Expense" xml:space="preserve">
     <value>Expenses</value>
+  </data>
+  <data name="ReceiptTypeSelection_AccountsReceivable" xml:space="preserve">
+    <value>AccountsReceivable</value>
   </data>
   <data name="TransactionTypeSelection_None" xml:space="preserve">
     <value>None</value>
@@ -310,8 +313,8 @@
   <data name="PayeeTypeSelection_None" xml:space="preserve">
     <value>None</value>
   </data>
-  <data name="SecurityLevelSelection_Guest" xml:space="preserve">
-    <value>Guest</value>
+  <data name="YellowGradientBackgroundLarge2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\YellowGradientBackgroundLarge2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PaymentTypeSelection_Others" xml:space="preserve">
     <value>Others</value>
@@ -319,26 +322,32 @@
   <data name="SecurityLevelSelection_User3" xml:space="preserve">
     <value>User3</value>
   </data>
+  <data name="SecurityLevelSelection_Guest" xml:space="preserve">
+    <value>Guest</value>
+  </data>
+  <data name="PaymentTypeSelection_CustomerRefund" xml:space="preserve">
+    <value>CustomerRefund</value>
+  </data>
   <data name="TransactionTypeSelection_Invoice" xml:space="preserve">
     <value>Invoice</value>
-  </data>
-  <data name="DocumentTypeSelection_Employee" xml:space="preserve">
-    <value>Employee</value>
-  </data>
-  <data name="PayeeTypeSelection_Supplier" xml:space="preserve">
-    <value>Supplier</value>
   </data>
   <data name="ImageTypeSelection_None" xml:space="preserve">
     <value>None</value>
   </data>
-  <data name="DebitCreditSelection_Debit" xml:space="preserve">
-    <value>Debit</value>
+  <data name="SpecialAccountSelection_AdvancesToSupplier" xml:space="preserve">
+    <value>AdvancesToSupplier</value>
   </data>
   <data name="SpecialAccountSelection_VatOutput" xml:space="preserve">
     <value>VatOutput</value>
   </data>
-  <data name="ReceiptTypeSelection_Others" xml:space="preserve">
-    <value>Others</value>
+  <data name="PaymentMethodSelection_CreditCard" xml:space="preserve">
+    <value>CreditCard</value>
+  </data>
+  <data name="AccountStatusSelection_OnHold" xml:space="preserve">
+    <value>OnHold</value>
+  </data>
+  <data name="Dose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Dose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SpecialAccountSelection_PettyCashAccount" xml:space="preserve">
     <value>PettyCashAccount</value>
@@ -352,11 +361,14 @@
   <data name="ImageTypeSelection_Jpg" xml:space="preserve">
     <value>Jpg</value>
   </data>
-  <data name="AccountGroupSelection_None" xml:space="preserve">
-    <value>None</value>
+  <data name="Unlock" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Unlock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ImageTypeSelection_Bmp" xml:space="preserve">
     <value>Bmp</value>
+  </data>
+  <data name="AccountGroupSelection_None" xml:space="preserve">
+    <value>None</value>
   </data>
   <data name="ReceiptTypeSelection_SupplierRefund" xml:space="preserve">
     <value>SupplierRefund</value>
@@ -379,11 +391,11 @@
   <data name="PayeeTypeSelection_Customer" xml:space="preserve">
     <value>Customer</value>
   </data>
-  <data name="PaymentMethodSelection_CreditCard" xml:space="preserve">
-    <value>CreditCard</value>
+  <data name="SpecialAccountSelection_CheckingAccount" xml:space="preserve">
+    <value>CheckingAccount</value>
   </data>
-  <data name="MaritalStatusSelection_None" xml:space="preserve">
-    <value>None</value>
+  <data name="SecurityLevelSelection_Manager1" xml:space="preserve">
+    <value>Manager1</value>
   </data>
   <data name="SecurityLevelSelection_Administrator2" xml:space="preserve">
     <value>Administrator2</value>
@@ -391,8 +403,8 @@
   <data name="MaritalStatusSelection_Single" xml:space="preserve">
     <value>Single</value>
   </data>
-  <data name="AccountStatusSelection_OnHold" xml:space="preserve">
-    <value>OnHold</value>
+  <data name="SecurityLevelSelection_Administrator1" xml:space="preserve">
+    <value>Administrator1</value>
   </data>
   <data name="SecurityLevelSelection_User2" xml:space="preserve">
     <value>User2</value>
@@ -415,7 +427,10 @@
   <data name="SecurityLevelSelection_Manager3" xml:space="preserve">
     <value>Manager3</value>
   </data>
-  <data name="PaymentMethodSelection_Others" xml:space="preserve">
+  <data name="Lock" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Lock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ReceiptTypeSelection_Others" xml:space="preserve">
     <value>Others</value>
   </data>
   <data name="PaymentTypeSelection_Supplier" xml:space="preserve">
@@ -430,13 +445,7 @@
   <data name="DocumentTypeSelection_None" xml:space="preserve">
     <value>None</value>
   </data>
-  <data name="GreenGradientBackgroundLarge" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\GreenGradientBackgroundLarge.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Lock" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Lock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Unlock" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Unlock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="sfdasale" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sfdasale.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
