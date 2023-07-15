@@ -18,7 +18,7 @@ Namespace PresentationLayer.Presenters
         End Sub
         
         Protected Overrides Sub CreateDataSources()
-            Dim data As New ArrayList 
+            Dim data As New ArrayList
             data.Add({"ItemCode", "Direction", Nothing, "CodeGroupIdNo=10"})
             data.Add({"ItemCode", "Frequency", Nothing, "CodeGroupIdNo=6"})
             data.Add({"ItemCode", "FrequencyTiming", Nothing, "CodeGroupIdNo=11"})

@@ -24,7 +24,6 @@ Public Class CFormEntry
     Protected RecordDateTimeStampValue As Object
     Protected SingleData As Boolean = False
     Protected AutoAddOnSave As Boolean = False
-
     Private _debugSwitch As Byte = 0
 
     'Private _addMode As Boolean = False
@@ -46,6 +45,8 @@ Public Class CFormEntry
     Public Event InputsTurnedOn()
 
     Public Event InputsTurnedOff()
+
+    Public Event NavButtonsClicked()
 
     Public Sub New()
         'MyBase.New()
@@ -328,7 +329,7 @@ Public Class CFormEntry
         End If
         BeforeAdd()
         PublishClickedButton(ButtonClicked.Add)
-        Inputs(True)
+
         AfterAdd()
         'UpdateNavigationButtonDisplay(False, True)
     End Sub
@@ -469,6 +470,7 @@ Public Class CFormEntry
         If Ea IsNot Nothing Then
             Ea.PublishEvent(New ViewButtonClicked(buttonClicked))
         End If
+        RaiseEvent NavButtonsClicked()
     End Sub
 
     Protected Overridable Sub GridValidator()

@@ -171,34 +171,34 @@
   <data name="&gt;&gt;CLabel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="cboCodeGroupIdNo.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="cboCodeGroupSelector.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="cboCodeGroupIdNo.IntegralHeight" type="System.Boolean, mscorlib">
+  <data name="cboCodeGroupSelector.IntegralHeight" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="cboCodeGroupIdNo.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cboCodeGroupSelector.Location" type="System.Drawing.Point, System.Drawing">
     <value>161, 11</value>
   </data>
-  <data name="cboCodeGroupIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="cboCodeGroupSelector.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="cboCodeGroupIdNo.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cboCodeGroupSelector.Size" type="System.Drawing.Size, System.Drawing">
     <value>428, 24</value>
   </data>
-  <data name="cboCodeGroupIdNo.TabIndex" type="System.Int32, mscorlib">
+  <data name="cboCodeGroupSelector.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;cboCodeGroupIdNo.Name" xml:space="preserve">
-    <value>cboCodeGroupIdNo</value>
+  <data name="&gt;&gt;cboCodeGroupSelector.Name" xml:space="preserve">
+    <value>cboCodeGroupSelector</value>
   </data>
-  <data name="&gt;&gt;cboCodeGroupIdNo.Type" xml:space="preserve">
+  <data name="&gt;&gt;cboCodeGroupSelector.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;cboCodeGroupIdNo.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cboCodeGroupSelector.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
   </data>
-  <data name="&gt;&gt;cboCodeGroupIdNo.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cboCodeGroupSelector.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="btnLockGroup.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
@@ -534,6 +534,36 @@
   <data name="&gt;&gt;txtNote.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
+  <data name="txtCodeGroupIdNo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="txtCodeGroupIdNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 163</value>
+  </data>
+  <data name="txtCodeGroupIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtCodeGroupIdNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 23</value>
+  </data>
+  <data name="txtCodeGroupIdNo.TabIndex" type="System.Int32, mscorlib">
+    <value>164</value>
+  </data>
+  <data name="txtCodeGroupIdNo.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;txtCodeGroupIdNo.Name" xml:space="preserve">
+    <value>txtCodeGroupIdNo</value>
+  </data>
+  <data name="&gt;&gt;txtCodeGroupIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtCodeGroupIdNo.Parent" xml:space="preserve">
+    <value>floDataDisplay</value>
+  </data>
+  <data name="&gt;&gt;txtCodeGroupIdNo.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
   <data name="floDataDisplay.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
   </data>
@@ -644,7 +674,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACa
-        CQAAAk1TRnQBSQFMAgEBAgEAAagBAAEoAQEBEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAAagBAAFAAQEBEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -698,7 +728,7 @@
     <value>564, 17</value>
   </metadata>
   <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 56</value>
+    <value>688, 17</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

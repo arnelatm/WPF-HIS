@@ -2,17 +2,13 @@
 ' ** Enterprise Design Pattern: Domain Model, Identity Field
 Imports System.Drawing.Printing
 Imports System.Globalization
-Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.Libraries.CrystalReportsHelper
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
 Imports AATM.ServicesLayer.Services
-Imports AutoMapper
-Imports CrystalDecisions.Shared
 
 Namespace PresentationLayer.Presenters
 

@@ -13,12 +13,16 @@ Namespace PresentationLayer.Presenters
             TableName = "ItemCode"
             TreeViewMainField = "ItemCodeName"
             SortOrderKey = "ItemCodeName"
-            AddHandler View.LockGroupClicked, AddressOf LockGroupClicked
+            'AddHandler View.LockGroupClicked, AddressOf LockGroupClicked
             AddHandler View.FilterRecords, AddressOf FilterRecords
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateDataSource("CodeGroup", "CodeGroupIdNo")
+            Dim data As New ArrayList
+            data.Add({"CodeGroup", "CodeGroupSelector", Nothing, Nothing})
+            CreateDataSourceThread(data)
+
+            'CreateDataSource("CodeGroup", "CodeGroupSelector")
         End Sub
 
         Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
@@ -37,14 +41,14 @@ Namespace PresentationLayer.Presenters
             Return False
         End Function
 
-        Public Sub LockGroupClicked()
-            If View.LockGroup Then
-                DataFilter = "CodeGroupIdNo = " & View.CodeGroupIdNo.ToString()
-            Else
-                DataFilter = ""
-            End If
-            DisplayTree()
-        End Sub
+        'Public Sub LockGroupClicked()
+        '    If View.LockGroup Then
+        '        DataFilter = "CodeGroupIdNo = " & View.CodeGroupIdNo.ToString()
+        '    Else
+        '        DataFilter = ""
+        '    End If
+        '    DisplayTree()
+        'End Sub
 
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
@@ -70,6 +74,8 @@ Namespace PresentationLayer.Presenters
                 GoLastRecord()
             End If
         End Sub
+
+
 
     End Class
 
