@@ -211,7 +211,7 @@ Namespace PresentationLayer.Views.Forms
         '    End If
         'End Sub
 
-        Private Sub OnNavButtonsClicked() Handles MyBase.NavButtonsClicked
+        Private Sub OnRecordChanged() Handles MyBase.RecordChanged
             If LockGroup Then
                 cboCodeGroupSelector.EditingMode = False
             Else
@@ -260,6 +260,10 @@ Namespace PresentationLayer.Views.Forms
             Else
                 cboCodeGroupSelector.EditingMode = True
             End If
+        End Sub
+
+        Private Sub FormTreeView_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles FormTreeView.AfterSelect
+            cboCodeGroupSelector.EditingMode = Not LockGroup
         End Sub
     End Class
 

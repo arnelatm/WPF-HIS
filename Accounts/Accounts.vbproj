@@ -2921,5 +2921,11 @@
   <ItemGroup>
     <None Include="Resources\sfdasale.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Prescription.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btnfind.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

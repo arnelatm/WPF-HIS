@@ -19,8 +19,8 @@ Namespace DataLayer.AdoNet
                                       "Expiry," &
                                       "GTin," &
                                       "IdNo," &
-                                      "ProductCode," &
-                                      "ProductName," &
+                                      "Item_Code," &
+                                      "ItemNameEnglish," &
                                       "SaleDate," &
                                       "SerializationNo"
 
@@ -71,8 +71,8 @@ Namespace DataLayer.AdoNet
             .Expiry = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date)(reader("Expiry")),
             .GTin = AATM.DataLayer.AdoNet.Extensions.AsString(reader("GTin")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
-            .ProductCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ProductCode")),
-            .ProductName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ProductName")),
+            .ProductCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Item_Code")),
+            .ProductName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ItemNameEnglish")),
             .SaleDate = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date)(reader("SaleDate")),
             .SerializationNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("SerializationNo"))
             }
@@ -88,17 +88,17 @@ Namespace DataLayer.AdoNet
                             }
         End Function
 
-        'Public Overrides Function GetActualFieldName(fieldName As String)
-        '    Dim actualFieldName As String
-        '    If fieldName = "DrugSaleCode" Then
-        '        actualFieldName = "ProductCode"
-        '    ElseIf fieldName = "DrugSaleName" Then
-        '        actualFieldName = "ProductName"
-        '    Else
-        '        actualFieldName = fieldName
-        '    End If
-        '    Return actualFieldName
-        'End Function
+        Public Overrides Function GetActualFieldName(fieldName As String)
+            Dim actualFieldName As String
+            If fieldName = "ProductCode" Then
+                actualFieldName = "Item_Code"
+            ElseIf fieldName = "ProductName" Then
+                actualFieldName = "ItemNameEnglsh"
+            Else
+                actualFieldName = fieldName
+            End If
+            Return actualFieldName
+        End Function
 
     End Class
 

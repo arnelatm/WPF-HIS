@@ -16,6 +16,7 @@ Namespace PresentationLayer.Views.Forms
         Public Event AddNewDosage() Implements IDosagePrintingView.AddNewDosage
         Public Event UpdateTree() Implements IDosagePrintingView.UpdateTree
         Public Event UpdatePatient() Implements IDosagePrintingView.UpdatePatient
+        Public Event FindPatient() Implements IDosagePrintingView.FindPatient
         'Public Event PrintReport As IPrintReport.PrintReportEventHandler Implements IPrintReport.PrintReport
 
         'Public Event OnPrintReport As IPrintReportView.OnPrintReportEventHandler Implements IDosagePrintingView.PrintReport
@@ -81,6 +82,15 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 cboDurationUnit.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property PatientType As Int32 Implements IDosagePrintingView.PatientType
+            Get
+                Return cboPatientType.GetValue(Of Int32)
+            End Get
+            Set
+                cboPatientType.SetValue(Value)
             End Set
         End Property
 
@@ -182,6 +192,7 @@ Namespace PresentationLayer.Views.Forms
             cboDurationUnit.EditingMode = True
             cboAgeYmd.EditingMode = True
             cboGender.EditingMode = True
+            cboPatientType.EditingMode = True
             cboDoseUnit.SetValue(DefaultDoseUnit)
             cboDurationUnit.SetValue(DefaultDurationUnit)
         End Sub
@@ -211,7 +222,8 @@ Namespace PresentationLayer.Views.Forms
                 {"FileNo", txtFileNo},
                 {"Gender", cboGender},
                 {"IdNo", txtIdNo},
-                {"PatientName", txtPatientName}
+                {"PatientName", txtPatientName},
+                {"PatientType", cboPatientType}
                 }
         End Sub
 
@@ -230,7 +242,9 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent UpdateTree()
         End Sub
 
-
+        Private Sub btnFindPatient_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnFindPatient.ClickButtonArea
+            RaiseEvent FindPatient()
+        End Sub
     End Class
 
 End Namespace

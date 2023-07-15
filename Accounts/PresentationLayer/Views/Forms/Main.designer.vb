@@ -40,6 +40,7 @@ Namespace PresentationLayer.Views.Forms
         Me.ToolStripButtonTranslate = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripButtonDebug = New System.Windows.Forms.ToolStripButton()
             Me.ToolStripButtonDrugSale = New System.Windows.Forms.ToolStripButton()
+            Me.ToolStripButtonPrescription = New System.Windows.Forms.ToolStripButton()
             Me.ToolStripButtonDoseLabel = New System.Windows.Forms.ToolStripButton()
             Me.AccountsMenu = New System.Windows.Forms.MenuStrip()
             Me.ToolStripMenuItemFile = New System.Windows.Forms.ToolStripMenuItem()
@@ -256,7 +257,7 @@ Namespace PresentationLayer.Views.Forms
             '
             resources.ApplyResources(Me.ToolStrip, "ToolStrip")
             Me.ToolStrip.ImageScalingSize = New System.Drawing.Size(24, 24)
-            Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButtonLogin, Me.ToolStripButtonLogout, Me.ToolStripButtonExit, Me.toolStripSeparator1, Me.ToolStripButtonArabic, Me.ToolStripButtonEnglish, Me.ToolStripButtonTranslate, Me.ToolStripButtonDebug, Me.ToolStripButtonDrugSale, Me.ToolStripButtonDoseLabel})
+            Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButtonLogin, Me.ToolStripButtonLogout, Me.ToolStripButtonExit, Me.toolStripSeparator1, Me.ToolStripButtonArabic, Me.ToolStripButtonEnglish, Me.ToolStripButtonTranslate, Me.ToolStripButtonDebug, Me.ToolStripButtonDrugSale, Me.ToolStripButtonPrescription, Me.ToolStripButtonDoseLabel})
             Me.ToolStrip.Name = "ToolStrip"
             '
             'ToolStripButtonLogin
@@ -308,13 +309,17 @@ Namespace PresentationLayer.Views.Forms
             'ToolStripButtonDrugSale
             '
             resources.ApplyResources(Me.ToolStripButtonDrugSale, "ToolStripButtonDrugSale")
-            Me.ToolStripButtonDrugSale.Image = Global.AATM.Accounts.My.Resources.Resources.sfdasale
             Me.ToolStripButtonDrugSale.Name = "ToolStripButtonDrugSale"
+            '
+            'ToolStripButtonPrescription
+            '
+            resources.ApplyResources(Me.ToolStripButtonPrescription, "ToolStripButtonPrescription")
+            Me.ToolStripButtonPrescription.Image = Global.AATM.Accounts.My.Resources.Resources.Prescription
+            Me.ToolStripButtonPrescription.Name = "ToolStripButtonPrescription"
             '
             'ToolStripButtonDoseLabel
             '
             resources.ApplyResources(Me.ToolStripButtonDoseLabel, "ToolStripButtonDoseLabel")
-            Me.ToolStripButtonDoseLabel.Image = Global.AATM.Accounts.My.Resources.Resources.Dose
             Me.ToolStripButtonDoseLabel.Name = "ToolStripButtonDoseLabel"
             '
             'AccountsMenu
@@ -1348,7 +1353,6 @@ Namespace PresentationLayer.Views.Forms
             Me.AllowDrop = True
             resources.ApplyResources(Me, "$this")
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-            Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
             Me.Controls.Add(Me.ToolStrip)
             Me.Controls.Add(Me.AccountsMenu)
             Me.IsMdiContainer = True
@@ -1578,5 +1582,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemDurationTranslation As ToolStripMenuItem
         Friend WithEvents ToolStripButtonDrugSale As ToolStripButton
         Friend WithEvents ToolStripButtonDoseLabel As ToolStripButton
+        Friend WithEvents ToolStripButtonPrescription As ToolStripButton
     End Class
 End NameSpace

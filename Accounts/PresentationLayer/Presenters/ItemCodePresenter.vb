@@ -12,6 +12,7 @@ Namespace PresentationLayer.Presenters
             Service = New AccountsService("ItemCode")
             TableName = "ItemCode"
             TreeViewMainField = "ItemCodeName"
+            TreeViewSecondaryField = "ItemCodeCode"
             SortOrderKey = "ItemCodeName"
             'AddHandler View.LockGroupClicked, AddressOf LockGroupClicked
             AddHandler View.FilterRecords, AddressOf FilterRecords

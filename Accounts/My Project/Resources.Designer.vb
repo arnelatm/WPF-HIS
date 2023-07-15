@@ -187,6 +187,16 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property btnfind() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("btnfind", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Credit.
         '''</summary>
         Friend ReadOnly Property DebitCreditSelection_Credit() As String
@@ -628,6 +638,16 @@ Namespace My.Resources
         Friend ReadOnly Property PaymentTypeSelection_Supplier() As String
             Get
                 Return ResourceManager.GetString("PaymentTypeSelection_Supplier", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized resource of type System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property Prescription() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("Prescription", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
         

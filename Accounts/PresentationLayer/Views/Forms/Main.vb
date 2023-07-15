@@ -1124,7 +1124,7 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of IqamaCbcReport, String)("SampleNo")
         End Sub
 
-        Private Sub DosageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDosagePrinting.Click
+        Private Sub DosageToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDosagePrinting.Click, ToolStripButtonDoseLabel.Click
             RunForm(Of DosagePrintingForm, DosagePrintingPresenter(Of DosagePrintingModel))()
         End Sub
 
@@ -1192,15 +1192,7 @@ Namespace PresentationLayer.Views.Forms
         '    RunForm(Of DoctorsPrescriptionForm, DoctorsPrescriptionPresenter(Of DoctorsPrescriptionModel))()
         'End Sub
 
-        Private Sub ToolStripMenuItemPrescription_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPrescription.Click
-            RunForm(Of PrescriptionForm, PrescriptionPresenter(Of PrescriptionModel))()
-        End Sub
-
-        Private Sub ToolStripMenuItemPharmacyReports_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPharmacyReports.Click
-
-        End Sub
-
-        Private Sub ToolStripMenuItemDoctorsPrescriptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDoctorsPrescriptions.Click, ToolStripButtonDoseLabel.Click
+        Private Sub ToolStripMenuItemPrescription_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPrescription.Click, ToolStripButtonPrescription.Click
             RunForm(Of PrescriptionForm, PrescriptionPresenter(Of PrescriptionModel))()
         End Sub
 

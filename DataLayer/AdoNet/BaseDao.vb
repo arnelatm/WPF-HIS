@@ -32,6 +32,10 @@ Namespace AdoNet
             Return _db
         End Function
 
+        Public Overridable Function GetDb(connectionString As String)
+            Return _db
+        End Function
+
         Public Overridable Function GetPrimaryFieldName()
             Return "IdNo"
         End Function
@@ -421,15 +425,19 @@ Namespace AdoNet
                     " Where " & filter
             Dim values As Object
             values = GetDb().SqlRead(sql)
-            Dim fields = fieldList.Split(",")
-            Dim obj As Object
-            obj = New ExpandoObject
-            Dim i As Int16 = 0
-            For Each item In fields
-                CreateDynamicObject(obj, item, values(i))
-                i = i + 1
-            Next
-            Return obj
+            If values.Count() > 0 Then
+                Dim fields = fieldList.Split(",")
+                Dim obj As Object
+                obj = New ExpandoObject
+                Dim i As Int16 = 0
+                For Each item In fields
+                    CreateDynamicObject(obj, item, values(i))
+                    i = i + 1
+                Next
+                Return obj
+            Else
+                Return Nothing
+            End If
         End Function
 
         Public Function GetTopOneFields(tableName As String, fieldList As String, filter As String, order As String, orderAscending As Boolean) As ExpandoObject Implements IBaseDao.GetTopOneFields
@@ -706,6 +714,7 @@ Namespace AdoNet
             Dim sql As String = " Select Top 1 " & returnFieldName & " FROM [" & tableName & "] " &
                     " Where " & searchFieldName1 & " = @SearchVal1 and " & searchFieldName2 & " = @SearchVal2 "
             Dim params() As Object = {"@SearchVal1", searchVal1, "@SearchVal2", searchVal2}
+
             Dim retVal = GetDb().Scalar(sql, params)
             If retVal Is Nothing Or IsDBNull(retVal) Then
                 Return Nothing
@@ -1381,7 +1390,7 @@ Namespace AdoNet
             Else
                 sql = "Delete From [" & tableName & "] " & " Where IdNo = @IdNo"
             End If
-            Return GetDb().Scalar(Sql, params)
+            Return GetDb().Scalar(sql, params)
         End Function
 
     End Class
