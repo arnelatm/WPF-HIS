@@ -93,7 +93,6 @@ Partial Class CFormEntryTv
         Me.Controls.Add(Me.SplitContainer1)
         Me.Name = "CFormEntryTv"
         Me.Text = "CFormEntryNewTv"
-        Me.ViewDisplayName = ""
         Me.Controls.SetChildIndex(Me.SplitContainer1, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.SplitContainer1.Panel1.ResumeLayout(false)

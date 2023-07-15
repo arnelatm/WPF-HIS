@@ -41,10 +41,10 @@ Namespace PresentationLayer.Views.Forms
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboCodeGroupSelector = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.btnLockGroup = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.LblNote = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtNote = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.LblNote = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtNote = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtCodeGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -289,6 +289,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboCodeGroupSelector.PreviousSearchTerm = Nothing
             Me.cboCodeGroupSelector.PropertySelector = Nothing
             Me.cboCodeGroupSelector.SuggestBoxHeight = 200
+            Me.cboCodeGroupSelector.SuggestCharCount = 0
             Me.cboCodeGroupSelector.SuggestListOrderRule = Nothing
             Me.cboCodeGroupSelector.TextToSearch = Nothing
             Me.cboCodeGroupSelector.Translatable = False
@@ -304,7 +305,7 @@ Namespace PresentationLayer.Views.Forms
             CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.White, System.Drawing.Color.White}
             CBlendItems1.iPoint = New Single() {0!, 1.0!}
             Me.btnLockGroup.ColorFillBlend = CBlendItems1
-            Me.btnLockGroup.DesignerSelected = True
+            Me.btnLockGroup.DesignerSelected = False
             Me.btnLockGroup.FillType = AATM.Libraries.CBaseControlsLibrary.CButton.eFillType.Solid
             Me.btnLockGroup.ImageIndex = 0
             Me.btnLockGroup.Name = "btnLockGroup"
@@ -348,13 +349,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNote.ValueIsMandatory = True
             Me.txtNote.ValueIsUnique = True
             '
-            'CFlowLayout1
-            '
-            Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
-            Me.CFlowLayout1.Controls.Add(Me.floDataDisplay)
-            resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
-            Me.CFlowLayout1.Name = "CFlowLayout1"
-            '
             'txtCodeGroupIdNo
             '
             Me.txtCodeGroupIdNo.BackColor = System.Drawing.Color.White
@@ -385,13 +379,20 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCodeGroupIdNo.Translatable = False
             Me.txtCodeGroupIdNo.ValueIsNumeric = True
             '
+            'CFlowLayout1
+            '
+            Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
+            Me.CFlowLayout1.Controls.Add(Me.floDataDisplay)
+            resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
+            Me.CFlowLayout1.Name = "CFlowLayout1"
+            '
             'ItemCodeEntryTv
             '
             resources.ApplyResources(Me, "$this")
             Me.Name = "ItemCodeEntryTv"
             Me.SplitContainer1.Panel1.ResumeLayout(False)
-            Me.SplitContainer1.Panel2.ResumeLayout(false)
-        CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).EndInit
+            Me.SplitContainer1.Panel2.ResumeLayout(False)
+            CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).EndInit
         Me.SplitContainer1.ResumeLayout(false)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.floDataDisplay.ResumeLayout(false)

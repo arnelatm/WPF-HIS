@@ -11,6 +11,10 @@
 
     Public Property TreeViewData As New Object
 
+    Private Sub FormTreeView_AfterSelect(sender As Object, e As Windows.Forms.TreeViewEventArgs) Handles FormTreeView.AfterSelect
+        RunRecordChanged()
+    End Sub
+
     'Private Sub BfTvEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
     '    'If GlobalVariables.RightToLeftLayout Then
     '    '    RightToLeft = RightToLeft.Yes

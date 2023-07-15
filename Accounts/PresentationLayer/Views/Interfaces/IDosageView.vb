@@ -28,12 +28,13 @@ Namespace PresentationLayer.Views.Interfaces
         Property FileNo As Int32
         Property Gender As String
         Property PatientName As String
+        Property PatientType As Int32
         Property DefaultDoseUnit As Int16
         Property DefaultDurationUnit As Int16
         Event AddNewDosage()
         Event UpdateTree()
         Event UpdatePatient()
-
+        Event FindPatient()
     End Interface
 
 End Namespace

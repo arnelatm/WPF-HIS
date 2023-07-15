@@ -1889,7 +1889,7 @@ Public Module GlobalFunctions
     End Function
 
 
-    Private Function ConvertWholeNumberToWord(ByRef wholeNumber As Int64, Optional fractionalPart As Boolean = False) As String
+    Public Function ConvertWholeNumberToWord(ByRef wholeNumber As Int64, Optional fractionalPart As Boolean = False) As String
         Dim retVal As String = [String].Empty
         Dim group As Integer = 0
         Dim tempNumber As Int64 = wholeNumber

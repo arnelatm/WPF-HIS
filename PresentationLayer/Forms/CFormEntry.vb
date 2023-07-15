@@ -46,7 +46,7 @@ Public Class CFormEntry
 
     Public Event InputsTurnedOff()
 
-    Public Event NavButtonsClicked()
+    Public Event RecordChanged()
 
     Public Sub New()
         'MyBase.New()
@@ -470,11 +470,15 @@ Public Class CFormEntry
         If Ea IsNot Nothing Then
             Ea.PublishEvent(New ViewButtonClicked(buttonClicked))
         End If
-        RaiseEvent NavButtonsClicked()
+        RaiseEvent RecordChanged()
     End Sub
 
     Protected Overridable Sub GridValidator()
         '
+    End Sub
+
+    Protected Sub RunRecordChanged()
+        RaiseEvent RecordChanged()
     End Sub
 
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
