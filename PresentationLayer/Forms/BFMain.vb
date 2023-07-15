@@ -32,6 +32,7 @@ Public Class BfMain
     Protected RtlCultureInfoStr = GlobalVariables.DefaultMirroredCultureInfoStr
     Protected DefaultMirroredLanguageIdNo As Int16
     Protected Shared ResetEvent As AutoResetEvent = New AutoResetEvent(False)
+    Protected FormShown As Boolean = False
     Public Dv As DataView
     Public MyErrorProvider As New ErrorProviderExtended
     Public Ea As EventAggregator

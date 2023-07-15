@@ -39,70 +39,71 @@ Namespace PresentationLayer.Views.Forms
         Me.lblItemCodeNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboCodeGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.btnLockGroup = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.cboCodeGroupSelector = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.btnLockGroup = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.LblNote = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtNote = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.SplitContainer1.Panel1.SuspendLayout
-        Me.SplitContainer1.Panel2.SuspendLayout
-        Me.SplitContainer1.SuspendLayout
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.floDataDisplay.SuspendLayout
-        Me.CFlowLayout1.SuspendLayout
-        Me.SuspendLayout
-        '
-        'SplitContainer1
-        '
-        '
-        'SplitContainer1.Panel2
-        '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.CFlowLayout1)
-        resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
-        '
-        'FormTreeView
-        '
-        Me.FormTreeView.LineColor = System.Drawing.Color.Black
-        resources.ApplyResources(Me.FormTreeView, "FormTreeView")
-        '
-        'ImageListTreeView
-        '
-        Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"),System.Windows.Forms.ImageListStreamer)
-        Me.ImageListTreeView.Images.SetKeyName(0, "TreeNode.ico")
-        Me.ImageListTreeView.Images.SetKeyName(1, "openbriefcase.png")
-        '
-        'TranslatorDAC
-        '
-        Me.TranslatorDAC.Cs = ""
-        '
-        'AppDataDAC
-        '
-        Me.AppDataDAC.Cs = ""
-        '
-        'TxtIdNo
-        '
-        Me.TxtIdNo.BackColor = System.Drawing.Color.White
-        Me.TxtIdNo.BegFindValue = Nothing
-        Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtIdNo.ComputedValue = false
-        Me.TxtIdNo.CustomFormat = Nothing
-        Me.TxtIdNo.DataBoundControl = true
-        Me.TxtIdNo.DisplayOnly = true
-        Me.TxtIdNo.EditingMode = true
-        Me.TxtIdNo.EndFindValue = Nothing
-        Me.TxtIdNo.FieldDescription = Nothing
-        Me.TxtIdNo.FieldName = Nothing
-        Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.TxtIdNo.FindEnabled = true
-        Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, true)
-        resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
-        Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
-        Me.TxtIdNo.LinkedLabel = Me.lblIdNo
-        Me.TxtIdNo.MaximumValue = Nothing
-        Me.TxtIdNo.MinimumValue = Nothing
-        Me.TxtIdNo.Name = "TxtIdNo"
-        Me.TxtIdNo.OldValue = Nothing
+            Me.txtCodeGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.SplitContainer1.Panel1.SuspendLayout()
+            Me.SplitContainer1.Panel2.SuspendLayout()
+            Me.SplitContainer1.SuspendLayout()
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.floDataDisplay.SuspendLayout()
+            Me.CFlowLayout1.SuspendLayout()
+            Me.SuspendLayout()
+            '
+            'SplitContainer1
+            '
+            '
+            'SplitContainer1.Panel2
+            '
+            Me.SplitContainer1.Panel2.Controls.Add(Me.CFlowLayout1)
+            resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
+            '
+            'FormTreeView
+            '
+            Me.FormTreeView.LineColor = System.Drawing.Color.Black
+            resources.ApplyResources(Me.FormTreeView, "FormTreeView")
+            '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "TreeNode.ico")
+            Me.ImageListTreeView.Images.SetKeyName(1, "openbriefcase.png")
+            '
+            'TranslatorDAC
+            '
+            Me.TranslatorDAC.Cs = ""
+            '
+            'AppDataDAC
+            '
+            Me.AppDataDAC.Cs = ""
+            '
+            'TxtIdNo
+            '
+            Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BegFindValue = Nothing
+            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TxtIdNo.ComputedValue = False
+            Me.TxtIdNo.CustomFormat = Nothing
+            Me.TxtIdNo.DataBoundControl = True
+            Me.TxtIdNo.DisplayOnly = True
+            Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.EndFindValue = Nothing
+            Me.TxtIdNo.FieldDescription = Nothing
+            Me.TxtIdNo.FieldName = Nothing
+            Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.TxtIdNo.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.TxtIdNo, True)
+            resources.ApplyResources(Me.TxtIdNo, "TxtIdNo")
+            Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+            Me.TxtIdNo.LinkedLabel = Me.lblIdNo
+            Me.TxtIdNo.MaximumValue = Nothing
+            Me.TxtIdNo.MinimumValue = Nothing
+            Me.TxtIdNo.Name = "TxtIdNo"
+            Me.TxtIdNo.OldValue = Nothing
             Me.TxtIdNo.OverrideMaxLength = 0
             Me.TxtIdNo.ReadOnly = True
             Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -233,7 +234,7 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
             Me.floDataDisplay.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
             Me.floDataDisplay.Controls.Add(Me.CLabel1)
-            Me.floDataDisplay.Controls.Add(Me.cboCodeGroupIdNo)
+            Me.floDataDisplay.Controls.Add(Me.cboCodeGroupSelector)
             Me.floDataDisplay.Controls.Add(Me.btnLockGroup)
             Me.floDataDisplay.Controls.Add(Me.lblIdNo)
             Me.floDataDisplay.Controls.Add(Me.TxtIdNo)
@@ -245,6 +246,7 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.Controls.Add(Me.txtItemCodeNameAra)
             Me.floDataDisplay.Controls.Add(Me.LblNote)
             Me.floDataDisplay.Controls.Add(Me.txtNote)
+            Me.floDataDisplay.Controls.Add(Me.txtCodeGroupIdNo)
             Me.floDataDisplay.Name = "floDataDisplay"
             '
             'CLabel1
@@ -255,46 +257,45 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel1.Name = "CLabel1"
             Me.CLabel1.Translatable = True
             '
-            'cboCodeGroupIdNo
+            'cboCodeGroupSelector
             '
-            Me.cboCodeGroupIdNo.AlwaysEditable = False
-            Me.cboCodeGroupIdNo.BackColor = System.Drawing.Color.White
-            Me.cboCodeGroupIdNo.BegFindValue = Nothing
-            Me.cboCodeGroupIdNo.ChangingSearchValueOnly = False
-            Me.cboCodeGroupIdNo.CurrentSearchTerm = ""
-            Me.cboCodeGroupIdNo.DataValue = Nothing
-            Me.cboCodeGroupIdNo.DefaultValue = Nothing
-            Me.cboCodeGroupIdNo.DisplayMember = "Name"
-            Me.cboCodeGroupIdNo.EditingMode = True
-            Me.cboCodeGroupIdNo.EndFindValue = Nothing
-            Me.cboCodeGroupIdNo.FieldDescription = Nothing
-            Me.cboCodeGroupIdNo.FieldName = Nothing
-            Me.cboCodeGroupIdNo.FilterRule = Nothing
-            Me.cboCodeGroupIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboCodeGroupIdNo.FindEnabled = False
-            resources.ApplyResources(Me.cboCodeGroupIdNo, "cboCodeGroupIdNo")
-            Me.cboCodeGroupIdNo.ForeColor = System.Drawing.Color.Black
-            Me.cboCodeGroupIdNo.FormattingEnabled = True
-            Me.cboCodeGroupIdNo.HideWhenNotEditingOrAdding = False
-            Me.cboCodeGroupIdNo.IgnoreCase = False
-            Me.cboCodeGroupIdNo.LimitToList = False
-            Me.cboCodeGroupIdNo.LinkedLabel = Nothing
-            Me.cboCodeGroupIdNo.Name = "cboCodeGroupIdNo"
-            Me.cboCodeGroupIdNo.OldValue = 0
-            Me.cboCodeGroupIdNo.OriginalDataSource = Nothing
-            Me.cboCodeGroupIdNo.OriginalList = Nothing
-            Me.cboCodeGroupIdNo.OverrideDropDownStyleList = False
-            Me.cboCodeGroupIdNo.PreviousSearchTerm = Nothing
-            Me.cboCodeGroupIdNo.PropertySelector = Nothing
-            Me.cboCodeGroupIdNo.ReadOnlyCombo = False
-            Me.cboCodeGroupIdNo.SuggestBoxHeight = 200
-            Me.cboCodeGroupIdNo.SuggestListOrderRule = Nothing
-            Me.cboCodeGroupIdNo.TextToSearch = Nothing
-            Me.cboCodeGroupIdNo.Translatable = False
-            Me.cboCodeGroupIdNo.ValueIsMandatory = False
-            Me.cboCodeGroupIdNo.ValueIsNullable = False
-            Me.cboCodeGroupIdNo.ValueIsNumeric = False
-            Me.cboCodeGroupIdNo.ValueMember = "IdNo"
+            Me.cboCodeGroupSelector.BackColor = System.Drawing.Color.White
+            Me.cboCodeGroupSelector.BegFindValue = Nothing
+            Me.cboCodeGroupSelector.ChangingSearchValueOnly = False
+            Me.cboCodeGroupSelector.CurrentSearchTerm = ""
+            Me.cboCodeGroupSelector.DataValue = Nothing
+            Me.cboCodeGroupSelector.DefaultValue = Nothing
+            Me.cboCodeGroupSelector.DisplayMember = "Name"
+            Me.cboCodeGroupSelector.Editable = True
+            Me.cboCodeGroupSelector.EditingMode = True
+            Me.cboCodeGroupSelector.EndFindValue = Nothing
+            Me.cboCodeGroupSelector.FieldDescription = Nothing
+            Me.cboCodeGroupSelector.FieldName = Nothing
+            Me.cboCodeGroupSelector.FilterRule = Nothing
+            Me.cboCodeGroupSelector.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboCodeGroupSelector.FindEnabled = False
+            resources.ApplyResources(Me.cboCodeGroupSelector, "cboCodeGroupSelector")
+            Me.cboCodeGroupSelector.ForeColor = System.Drawing.Color.Black
+            Me.cboCodeGroupSelector.FormattingEnabled = True
+            Me.cboCodeGroupSelector.HideWhenNotEditingOrAdding = False
+            Me.cboCodeGroupSelector.IgnoreCase = False
+            Me.cboCodeGroupSelector.LimitToList = False
+            Me.cboCodeGroupSelector.LinkedLabel = Nothing
+            Me.cboCodeGroupSelector.Name = "cboCodeGroupSelector"
+            Me.cboCodeGroupSelector.OldValue = 0
+            Me.cboCodeGroupSelector.OriginalDataSource = Nothing
+            Me.cboCodeGroupSelector.OriginalList = Nothing
+            Me.cboCodeGroupSelector.OverrideDropDownStyleList = False
+            Me.cboCodeGroupSelector.PreviousSearchTerm = Nothing
+            Me.cboCodeGroupSelector.PropertySelector = Nothing
+            Me.cboCodeGroupSelector.SuggestBoxHeight = 200
+            Me.cboCodeGroupSelector.SuggestListOrderRule = Nothing
+            Me.cboCodeGroupSelector.TextToSearch = Nothing
+            Me.cboCodeGroupSelector.Translatable = False
+            Me.cboCodeGroupSelector.ValueIsMandatory = False
+            Me.cboCodeGroupSelector.ValueIsNullable = False
+            Me.cboCodeGroupSelector.ValueIsNumeric = False
+            Me.cboCodeGroupSelector.ValueMember = "IdNo"
             '
             'btnLockGroup
             '
@@ -343,23 +344,53 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNote.OverrideMaxLength = 0
             Me.txtNote.ReadOnly = True
             Me.txtNote.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtNote.Translatable = false
-        Me.txtNote.ValueIsMandatory = true
-        Me.txtNote.ValueIsUnique = true
-        '
-        'CFlowLayout1
-        '
-        Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
-        Me.CFlowLayout1.Controls.Add(Me.floDataDisplay)
-        resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
-        Me.CFlowLayout1.Name = "CFlowLayout1"
-        '
-        'ItemCodeEntryTv
-        '
-        resources.ApplyResources(Me, "$this")
-        Me.Name = "ItemCodeEntryTv"
-        Me.SplitContainer1.Panel1.ResumeLayout(false)
-        Me.SplitContainer1.Panel2.ResumeLayout(false)
+            Me.txtNote.Translatable = False
+            Me.txtNote.ValueIsMandatory = True
+            Me.txtNote.ValueIsUnique = True
+            '
+            'CFlowLayout1
+            '
+            Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
+            Me.CFlowLayout1.Controls.Add(Me.floDataDisplay)
+            resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
+            Me.CFlowLayout1.Name = "CFlowLayout1"
+            '
+            'txtCodeGroupIdNo
+            '
+            Me.txtCodeGroupIdNo.BackColor = System.Drawing.Color.White
+            Me.txtCodeGroupIdNo.BegFindValue = Nothing
+            Me.txtCodeGroupIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtCodeGroupIdNo.ComputedValue = False
+            Me.txtCodeGroupIdNo.CustomFormat = Nothing
+            Me.txtCodeGroupIdNo.DataBoundControl = True
+            Me.txtCodeGroupIdNo.DisplayOnly = True
+            Me.txtCodeGroupIdNo.EditingMode = True
+            Me.txtCodeGroupIdNo.EndFindValue = Nothing
+            Me.txtCodeGroupIdNo.FieldDescription = Nothing
+            Me.txtCodeGroupIdNo.FieldName = Nothing
+            Me.txtCodeGroupIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtCodeGroupIdNo.FindEnabled = True
+            Me.floDataDisplay.SetFlowBreak(Me.txtCodeGroupIdNo, True)
+            resources.ApplyResources(Me.txtCodeGroupIdNo, "txtCodeGroupIdNo")
+            Me.txtCodeGroupIdNo.ForeColor = System.Drawing.Color.Black
+            Me.txtCodeGroupIdNo.LinkedLabel = Me.lblIdNo
+            Me.txtCodeGroupIdNo.MaximumValue = Nothing
+            Me.txtCodeGroupIdNo.MinimumValue = Nothing
+            Me.txtCodeGroupIdNo.Name = "txtCodeGroupIdNo"
+            Me.txtCodeGroupIdNo.OldValue = Nothing
+            Me.txtCodeGroupIdNo.OverrideMaxLength = 0
+            Me.txtCodeGroupIdNo.ReadOnly = True
+            Me.txtCodeGroupIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtCodeGroupIdNo.TabStop = False
+            Me.txtCodeGroupIdNo.Translatable = False
+            Me.txtCodeGroupIdNo.ValueIsNumeric = True
+            '
+            'ItemCodeEntryTv
+            '
+            resources.ApplyResources(Me, "$this")
+            Me.Name = "ItemCodeEntryTv"
+            Me.SplitContainer1.Panel1.ResumeLayout(False)
+            Me.SplitContainer1.Panel2.ResumeLayout(false)
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).EndInit
         Me.SplitContainer1.ResumeLayout(false)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
@@ -381,9 +412,10 @@ End Sub
         Friend WithEvents lblItemCodeNameAra As CLabel
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents CLabel1 As CLabel
-        Friend WithEvents cboCodeGroupIdNo As CaComboBox
+        Friend WithEvents cboCodeGroupSelector As CtComboBox
         Friend WithEvents LblNote As CLabel
         Friend WithEvents txtNote As CTextBox
         Friend WithEvents btnLockGroup As CButton
+        Friend WithEvents txtCodeGroupIdNo As CTextBox
     End Class
 End Namespace

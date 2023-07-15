@@ -586,39 +586,37 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
             Dim returnValue As Boolean = False
             If CheckDependentRecords(Of Int32)(View.IdNo, "User", "EmployeeIdNo") Then
-                Return True
+                returnValue = True
             ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "EmployeeLeave", "EmployeeIdNo") Then
-                Return True
+                returnValue = True
             ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "AttendanceItem", "EmployeeIdNo") Then
-                Return True
+                returnValue = True
             ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "AttendanceItem", "EmployeeIdNo") Then
-                Return True
+                returnValue = True
             ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "EmployeeAbsence", "EmployeeIdNo") Then
-                Return True
+                returnValue = True
             ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "EmployeeLeaveCredit", "EmployeeIdNo") Then
-                Return True
+                returnValue = True
             ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "EmployeePayElement", "EmployeeIdNo") Then
-                Return True
+                returnValue = True
             ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "EmployeePhone", "EmployeeIdNo") Then
-                Return True
-                'ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "ErDetails_View", "EmployeeIdNo") Then
-                '    Return True
+                returnValue = True
             ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "EmployeeDocument", "EmployeeIdNo") Then
-                Return True
+                returnValue = True
             ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "ErJournal", "EmployeeIdNo") Then
-                Return True
+                returnValue = True
             ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "HolidayTransferItem", "EmployeeIdNo") Then
-                Return True
+                returnValue = True
             ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "OtWorkHour", "EmployeeIdNo") Then
-                Return True
+                returnValue = True
             ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "HolidayTransferItem", "EmployeeIdNo") Then
-                Return True
+                returnValue = True
             ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "PayrollDetail", "EmployeeIdNo") Then
-                Return True
+                returnValue = True
             ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "RecurringPayElement", "EmployeeIdNo") Then
-                Return True
+                returnValue = True
             End If
-            Return False
+            Return returnValue
         End Function
 
     End Class
