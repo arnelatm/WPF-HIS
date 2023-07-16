@@ -49,6 +49,9 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPatientName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtFileNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+            Me.txtGTin = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtBarCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblBarCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblGtin = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtGenericName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.cboPatientType = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
@@ -62,9 +65,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtItemName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtItemCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblBarCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtBarCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtGTin = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -659,6 +659,89 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Size = New System.Drawing.Size(528, 482)
             Me.TableLayoutPanel1.TabIndex = 0
             '
+            'txtGTin
+            '
+            Me.txtGTin.AlwaysEditable = True
+            Me.txtGTin.BackColor = System.Drawing.Color.White
+            Me.txtGTin.BegFindValue = Nothing
+            Me.txtGTin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TableLayoutPanel1.SetColumnSpan(Me.txtGTin, 2)
+            Me.txtGTin.ComputedValue = False
+            Me.txtGTin.CustomFormat = Nothing
+            Me.txtGTin.DataBoundControl = True
+            Me.txtGTin.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtGTin.EditingMode = True
+            Me.txtGTin.EndFindValue = Nothing
+            Me.txtGTin.FieldDescription = Nothing
+            Me.txtGTin.FieldName = Nothing
+            Me.txtGTin.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtGTin.FindEnabled = False
+            Me.txtGTin.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtGTin.ForeColor = System.Drawing.Color.Black
+            Me.txtGTin.LinkedLabel = Nothing
+            Me.txtGTin.Location = New System.Drawing.Point(371, 36)
+            Me.txtGTin.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtGTin.MaximumValue = Nothing
+            Me.txtGTin.MinimumSize = New System.Drawing.Size(80, 2)
+            Me.txtGTin.MinimumValue = Nothing
+            Me.txtGTin.Name = "txtGTin"
+            Me.txtGTin.OldValue = Nothing
+            Me.txtGTin.OverrideMaxLength = 0
+            Me.txtGTin.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtGTin.Size = New System.Drawing.Size(146, 23)
+            Me.txtGTin.TabIndex = 325
+            Me.txtGTin.Translatable = False
+            '
+            'txtBarCode
+            '
+            Me.txtBarCode.AlwaysEditable = True
+            Me.txtBarCode.BackColor = System.Drawing.Color.White
+            Me.txtBarCode.BegFindValue = Nothing
+            Me.txtBarCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TableLayoutPanel1.SetColumnSpan(Me.txtBarCode, 2)
+            Me.txtBarCode.ComputedValue = False
+            Me.txtBarCode.CustomFormat = Nothing
+            Me.txtBarCode.DataBoundControl = True
+            Me.txtBarCode.DisplayOnly = True
+            Me.txtBarCode.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtBarCode.Editable = True
+            Me.txtBarCode.EditingMode = True
+            Me.txtBarCode.EndFindValue = Nothing
+            Me.txtBarCode.FieldDescription = Nothing
+            Me.txtBarCode.FieldName = Nothing
+            Me.txtBarCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtBarCode.FindEnabled = False
+            Me.txtBarCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtBarCode.ForeColor = System.Drawing.Color.Black
+            Me.txtBarCode.LinkedLabel = Nothing
+            Me.txtBarCode.Location = New System.Drawing.Point(371, 86)
+            Me.txtBarCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtBarCode.MaximumValue = Nothing
+            Me.txtBarCode.MinimumValue = Nothing
+            Me.txtBarCode.Name = "txtBarCode"
+            Me.txtBarCode.OldValue = Nothing
+            Me.txtBarCode.OverrideMaxLength = 0
+            Me.txtBarCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtBarCode.Size = New System.Drawing.Size(146, 23)
+            Me.txtBarCode.TabIndex = 324
+            Me.txtBarCode.Translatable = False
+            '
+            'lblBarCode
+            '
+            Me.lblBarCode.AutoSize = True
+            Me.lblBarCode.DisplayOnly = True
+            Me.lblBarCode.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.lblBarCode.EditingMode = False
+            Me.lblBarCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblBarCode.Location = New System.Drawing.Point(247, 86)
+            Me.lblBarCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblBarCode.Name = "lblBarCode"
+            Me.lblBarCode.Size = New System.Drawing.Size(122, 23)
+            Me.lblBarCode.TabIndex = 323
+            Me.lblBarCode.Text = "BarCode"
+            Me.lblBarCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+            Me.lblBarCode.Translatable = True
+            '
             'lblGtin
             '
             Me.lblGtin.AutoSize = True
@@ -677,6 +760,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'txtGenericName
             '
+            Me.txtGenericName.AlwaysEditable = True
             Me.txtGenericName.BackColor = System.Drawing.Color.White
             Me.txtGenericName.BegFindValue = Nothing
             Me.txtGenericName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -1017,6 +1101,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'txtItemName
             '
+            Me.txtItemName.AlwaysEditable = True
             Me.txtItemName.BackColor = System.Drawing.Color.White
             Me.txtItemName.BegFindValue = Nothing
             Me.txtItemName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -1043,7 +1128,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtItemName.Name = "txtItemName"
             Me.txtItemName.OldValue = Nothing
             Me.txtItemName.OverrideMaxLength = 0
-            Me.txtItemName.ReadOnly = True
             Me.txtItemName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtItemName.Size = New System.Drawing.Size(406, 23)
             Me.txtItemName.TabIndex = 319
@@ -1051,6 +1135,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'txtItemCode
             '
+            Me.txtItemCode.AlwaysEditable = True
             Me.txtItemCode.BackColor = System.Drawing.Color.White
             Me.txtItemCode.BegFindValue = Nothing
             Me.txtItemCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -1075,7 +1160,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtItemCode.Name = "txtItemCode"
             Me.txtItemCode.OldValue = Nothing
             Me.txtItemCode.OverrideMaxLength = 0
-            Me.txtItemCode.ReadOnly = True
             Me.txtItemCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtItemCode.Size = New System.Drawing.Size(98, 23)
             Me.txtItemCode.TabIndex = 318
@@ -1095,89 +1179,6 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel2.Text = "Generic"
             Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.CLabel2.Translatable = True
-            '
-            'lblBarCode
-            '
-            Me.lblBarCode.AutoSize = True
-            Me.lblBarCode.DisplayOnly = True
-            Me.lblBarCode.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.lblBarCode.EditingMode = False
-            Me.lblBarCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblBarCode.Location = New System.Drawing.Point(247, 86)
-            Me.lblBarCode.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblBarCode.Name = "lblBarCode"
-            Me.lblBarCode.Size = New System.Drawing.Size(122, 23)
-            Me.lblBarCode.TabIndex = 323
-            Me.lblBarCode.Text = "BarCode"
-            Me.lblBarCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-            Me.lblBarCode.Translatable = True
-            '
-            'txtBarCode
-            '
-            Me.txtBarCode.BackColor = System.Drawing.Color.White
-            Me.txtBarCode.BegFindValue = Nothing
-            Me.txtBarCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TableLayoutPanel1.SetColumnSpan(Me.txtBarCode, 2)
-            Me.txtBarCode.ComputedValue = False
-            Me.txtBarCode.CustomFormat = Nothing
-            Me.txtBarCode.DataBoundControl = True
-            Me.txtBarCode.DisplayOnly = True
-            Me.txtBarCode.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.txtBarCode.Editable = True
-            Me.txtBarCode.EditingMode = True
-            Me.txtBarCode.EndFindValue = Nothing
-            Me.txtBarCode.FieldDescription = Nothing
-            Me.txtBarCode.FieldName = Nothing
-            Me.txtBarCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtBarCode.FindEnabled = False
-            Me.txtBarCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtBarCode.ForeColor = System.Drawing.Color.Black
-            Me.txtBarCode.LinkedLabel = Nothing
-            Me.txtBarCode.Location = New System.Drawing.Point(371, 86)
-            Me.txtBarCode.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtBarCode.MaximumValue = Nothing
-            Me.txtBarCode.MinimumValue = Nothing
-            Me.txtBarCode.Name = "txtBarCode"
-            Me.txtBarCode.OldValue = Nothing
-            Me.txtBarCode.OverrideMaxLength = 0
-            Me.txtBarCode.ReadOnly = True
-            Me.txtBarCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtBarCode.Size = New System.Drawing.Size(146, 23)
-            Me.txtBarCode.TabIndex = 324
-            Me.txtBarCode.Translatable = False
-            '
-            'txtGTin
-            '
-            Me.txtGTin.AlwaysEditable = True
-            Me.txtGTin.BackColor = System.Drawing.Color.White
-            Me.txtGTin.BegFindValue = Nothing
-            Me.txtGTin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TableLayoutPanel1.SetColumnSpan(Me.txtGTin, 2)
-            Me.txtGTin.ComputedValue = False
-            Me.txtGTin.CustomFormat = Nothing
-            Me.txtGTin.DataBoundControl = True
-            Me.txtGTin.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.txtGTin.EditingMode = True
-            Me.txtGTin.EndFindValue = Nothing
-            Me.txtGTin.FieldDescription = Nothing
-            Me.txtGTin.FieldName = Nothing
-            Me.txtGTin.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtGTin.FindEnabled = False
-            Me.txtGTin.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtGTin.ForeColor = System.Drawing.Color.Black
-            Me.txtGTin.LinkedLabel = Nothing
-            Me.txtGTin.Location = New System.Drawing.Point(371, 36)
-            Me.txtGTin.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtGTin.MaximumValue = Nothing
-            Me.txtGTin.MinimumSize = New System.Drawing.Size(80, 2)
-            Me.txtGTin.MinimumValue = Nothing
-            Me.txtGTin.Name = "txtGTin"
-            Me.txtGTin.OldValue = Nothing
-            Me.txtGTin.OverrideMaxLength = 0
-            Me.txtGTin.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtGTin.Size = New System.Drawing.Size(146, 23)
-            Me.txtGTin.TabIndex = 325
-            Me.txtGTin.Translatable = False
             '
             'DosagePrintingForm
             '
