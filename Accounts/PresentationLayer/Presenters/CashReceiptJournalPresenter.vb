@@ -82,7 +82,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function GetCustomerAdvancesAccountIdNo()
-            Return GetRecordFieldWithKey("CA", "Account", "SpecialAccount", "IdNo")
+            Return GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.CustomerAdvances), "Account", "SpecialAccount", "IdNo")
         End Function
 
         Public Property JournalCode As String

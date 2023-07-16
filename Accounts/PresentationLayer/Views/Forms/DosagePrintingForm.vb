@@ -17,6 +17,8 @@ Namespace PresentationLayer.Views.Forms
         Public Event UpdateTree() Implements IDosagePrintingView.UpdateTree
         Public Event UpdatePatient() Implements IDosagePrintingView.UpdatePatient
         Public Event FindPatient() Implements IDosagePrintingView.FindPatient
+        Public Event ItemCodeChanged() Implements IDosagePrintingView.ItemCodeChanged
+        Public Event GTinChanged() Implements IDosagePrintingView.GTinChanged
         'Public Event PrintReport As IPrintReport.PrintReportEventHandler Implements IPrintReport.PrintReport
 
         'Public Event OnPrintReport As IPrintReportView.OnPrintReportEventHandler Implements IDosagePrintingView.PrintReport
@@ -180,6 +182,51 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DefaultDurationUnit As Short Implements IDosagePrintingView.DefaultDurationUnit
 
+        Public Property ItemCode As String Implements IDosagePrintingView.ItemCode
+            Get
+                Return txtItemCode.Text
+            End Get
+            Set
+                txtItemCode.Text = Value
+            End Set
+        End Property
+
+        Public Property ItemName As String Implements IDosagePrintingView.ItemName
+            Get
+                Return txtItemName.Text
+            End Get
+            Set
+                txtItemName.Text = Value
+            End Set
+        End Property
+
+        Public Property GTin As String Implements IDosagePrintingView.GTin
+            Get
+                Return txtGTIN.Text
+            End Get
+            Set
+                txtGTIN.Text = Value
+            End Set
+        End Property
+
+        Public Property GenericName As String Implements IDosagePrintingView.GenericName
+            Get
+                Return txtGenericName.Text
+            End Get
+            Set
+                txtGenericName.Text = Value
+            End Set
+        End Property
+
+        Public Property BarCode As String Implements IDosagePrintingView.BarCode
+            Get
+                Return txtBarCode.Text
+            End Get
+            Set
+                txtBarCode.Text = Value
+            End Set
+        End Property
+
         Public Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
             SetAlwaysEditableFields()
         End Sub
@@ -193,6 +240,10 @@ Namespace PresentationLayer.Views.Forms
             cboAgeYmd.EditingMode = True
             cboGender.EditingMode = True
             cboPatientType.EditingMode = True
+            txtItemCode.EditingMode = True
+            txtGenericName.EditingMode = True
+            txtBarCode.EditingMode = True
+            txtGTIN.EditingMode = True
             cboDoseUnit.SetValue(DefaultDoseUnit)
             cboDurationUnit.SetValue(DefaultDurationUnit)
         End Sub
@@ -212,6 +263,7 @@ Namespace PresentationLayer.Views.Forms
                 {
                 {"Age", txtAge},
                 {"AgeYmd", cboAgeYmd},
+                {"BarCode", txtBarCode},
                 {"DosageCode", txtDosageCode},
                 {"DosageName", txtDosageName},
                 {"DosageNameAra", txtDosageNameAra},
@@ -221,7 +273,11 @@ Namespace PresentationLayer.Views.Forms
                 {"DurationUnit", cboDurationUnit},
                 {"FileNo", txtFileNo},
                 {"Gender", cboGender},
+                {"GenericName", txtGenericName},
+                {"GTin", txtGTIN},
                 {"IdNo", txtIdNo},
+                {"ItemCode", txtItemCode},
+                {"ItemName", txtItemName},
                 {"PatientName", txtPatientName},
                 {"PatientType", cboPatientType}
                 }
@@ -244,6 +300,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub btnFindPatient_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnFindPatient.ClickButtonArea
             RaiseEvent FindPatient()
+        End Sub
+
+        Private Sub txtItemCode_TextChanged(sender As Object, e As EventArgs) Handles txtItemCode.LostFocus
+            RaiseEvent ItemCodeChanged()
         End Sub
     End Class
 

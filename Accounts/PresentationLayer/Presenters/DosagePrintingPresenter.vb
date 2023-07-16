@@ -41,11 +41,12 @@ Namespace PresentationLayer.Presenters
             AddHandler View.AddNewDosage, AddressOf OnAddNewDosage
             AddHandler View.UpdateTree, AddressOf OnUpdateTree
             AddHandler View.FindPatient, AddressOf OnFindPatient
+            AddHandler View.ItemCodeChanged, AddressOf OnItemCodeChanged
         End Sub
 
         Private Sub OnFindPatient()
-            Dim patientType As String = Service.GetRecordFieldWithKeyG(Of String, Int32)(View.PatientType, "ItemCode", "IdNo", "ItemCodeName")
-            Dim filter As String = "RegistrationNo = " + View.FileNo.ToString() + " and PatientType = '" & patientType & "'"
+            Dim patientType As String = Service.GetRecordFieldWithKeyG(Of String, String)(View.PatientType, "ItemDetails", "IdNo", "ItemNameEnglish")
+            Dim filter As String = "ItemCode = " + View.ItemCode.ToString().Trim() + " and BranchId = '01' "
             Dim patient As Object = New ExpandoObject
             patient = _drugSaleService.GetRecordFieldsFiltered("PatientDetails", "PatientNameEnglish,Age,AgeYMD,Sex", filter)
             If patient Is Nothing Then
@@ -55,6 +56,22 @@ Namespace PresentationLayer.Presenters
                 View.Age = patient.Age
                 View.AgeDMY = patient.AgeYmd
                 View.Gender = patient.Sex
+            End If
+        End Sub
+
+        Private Sub OnItemCodeChanged()
+            Dim filter As String = "ItemCode = " + View.ItemCode.Trim() + " and itemCode = '" & View.ItemCode & "'"
+            Dim medicine As Object = New ExpandoObject
+            medicine = _drugSaleService.GetRecordFieldsFiltered("Medicines_View", "ItemNameEnglish,GenericName,DosageForm", filter)
+            If medicine Is Nothing Then
+                AATM.Libraries.MessagingLibrary.Messaging.Show("No Such medicine with that item code on file.")
+            Else
+                View.ItemName = medicine.ItemNameEnglish
+                View.GenericName = medicine.GenericName
+                View.BarCode = medicine.BarCode
+                View.DoseUnit = medicine.DosageForm
+                View.AgeDMY = medicine.AgeYmd
+                View.Gender = medicine.Sex
             End If
         End Sub
 
@@ -155,7 +172,7 @@ Namespace PresentationLayer.Presenters
 
             Service.InsertRecord("DosageLabelDetail", {"DosageLabelIdNo", "ItemName", "Dosage", "DosageAra"},
                                                   {"Integer", "String", "String", "String"},
-                                                  {_labelIdNo, itemName, dosage, dosageAra})
+                                                  {_labelIdNo, itemName, dosage, dosageArabic})
 
 
         End Sub

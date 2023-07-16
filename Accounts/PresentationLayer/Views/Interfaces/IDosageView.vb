@@ -26,15 +26,22 @@ Namespace PresentationLayer.Views.Interfaces
         Property Duration As Decimal
         Property DurationUnit As Int16
         Property FileNo As Int32
+        Property ItemCode As String
+        Property ItemName As String
+        Property GTin As String
         Property Gender As String
         Property PatientName As String
         Property PatientType As Int32
         Property DefaultDoseUnit As Int16
         Property DefaultDurationUnit As Int16
+        Property GenericName As String
+        Property BarCode As String
         Event AddNewDosage()
         Event UpdateTree()
         Event UpdatePatient()
         Event FindPatient()
+        Event ItemCodeChanged()
+        Event GTinChanged()
     End Interface
 
 End Namespace
