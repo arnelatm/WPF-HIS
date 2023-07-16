@@ -243,7 +243,10 @@ Namespace PresentationLayer.Views.Forms
             txtItemCode.EditingMode = True
             txtGenericName.EditingMode = True
             txtBarCode.EditingMode = True
-            txtGTIN.EditingMode = True
+            txtGTin.EditingMode = True
+            txtBarCode.ReadOnly = False
+            txtItemName.ReadOnly = False
+            txtItemCode.ReadOnly = False
             cboDoseUnit.SetValue(DefaultDoseUnit)
             cboDurationUnit.SetValue(DefaultDurationUnit)
         End Sub
