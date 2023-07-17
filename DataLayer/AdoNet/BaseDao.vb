@@ -33,6 +33,7 @@ Namespace AdoNet
         End Function
 
         Public Overridable Function GetDb(connectionString As String)
+            SetConnectionString(connectionString)
             Return _db
         End Function
 

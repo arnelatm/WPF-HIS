@@ -41,6 +41,7 @@ Namespace PresentationLayer.Views.Interfaces
         Event UpdatePatient()
         Event FindPatient()
         Event ItemCodeChanged()
+        Event ItemNameChanged(idNo As Int32)
         Event GTinChanged()
     End Interface
 

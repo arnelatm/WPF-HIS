@@ -64,7 +64,9 @@ Namespace AdoNet
         End Function
 
         Public Sub SetConnectionString(connectionName As String)
-            _connectionString = ConfigurationManager.ConnectionStrings(connectionName).ConnectionString
+            If connectionName IsNot Nothing Then
+                _connectionString = ConfigurationManager.ConnectionStrings(connectionName).ConnectionString
+            End If
         End Sub
 
         'Public Sub SetSecurityConnectionString(connectionName As String)

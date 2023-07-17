@@ -1,2 +1,0 @@
-﻿Public Class CToolStripButton
-End Class
