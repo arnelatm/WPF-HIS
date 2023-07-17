@@ -702,7 +702,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBarCode.ComputedValue = False
             Me.txtBarCode.CustomFormat = Nothing
             Me.txtBarCode.DataBoundControl = True
-            Me.txtBarCode.DisplayOnly = True
             Me.txtBarCode.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtBarCode.Editable = True
             Me.txtBarCode.EditingMode = True
@@ -768,7 +767,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtGenericName.ComputedValue = False
             Me.txtGenericName.CustomFormat = Nothing
             Me.txtGenericName.DataBoundControl = True
-            Me.txtGenericName.DisplayOnly = True
             Me.txtGenericName.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtGenericName.Editable = True
             Me.txtGenericName.EditingMode = True
@@ -1109,7 +1107,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtItemName.ComputedValue = False
             Me.txtItemName.CustomFormat = Nothing
             Me.txtItemName.DataBoundControl = True
-            Me.txtItemName.DisplayOnly = True
             Me.txtItemName.Dock = System.Windows.Forms.DockStyle.Fill
             Me.txtItemName.Editable = True
             Me.txtItemName.EditingMode = True
@@ -1142,7 +1139,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtItemCode.ComputedValue = False
             Me.txtItemCode.CustomFormat = Nothing
             Me.txtItemCode.DataBoundControl = True
-            Me.txtItemCode.DisplayOnly = True
             Me.txtItemCode.Editable = True
             Me.txtItemCode.EditingMode = True
             Me.txtItemCode.EndFindValue = Nothing

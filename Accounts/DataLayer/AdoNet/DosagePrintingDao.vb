@@ -24,7 +24,9 @@ Namespace DataLayer.AdoNet
                                       "DosageNameAra," &
                                       "Duration," &
                                       "DurationUnit," &
+                                      "GenericName," &
                                       "IdNo," &
+                                      "ItemName," &
                                       "Frequency," &
                                       "FrequencyTiming," &
                                       "Route," &
