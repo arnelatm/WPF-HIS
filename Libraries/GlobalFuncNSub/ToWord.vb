@@ -205,7 +205,7 @@
      "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen",
      "Eighteen", "Nineteen"}
 
-    
+
     Private Shared _englishFractionOnes As String() = New String() {"", "", "half", "third", "fourth", "fifth",
      "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh",
      "twelfth", "thirteenth", "Fourteenth", "Fifteenth", "Sixteenth", "Seventeenth",
@@ -214,7 +214,7 @@
     Private Shared _englishTens As String() = New String() {"Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy",
      "Eighty", "Ninety"}
 
-    
+
     Private Shared _englishFractionTens As String() = New String() {"twentieth", "thirtieth", "Fortieth", "Fiftieth", "Sixtieth", "Seventieth",
      "Eightieth", "Ninetieth"}
 
@@ -371,24 +371,29 @@
     ''' <param name="groupLevel">Group Level</param>
     ''' <returns></returns>
     Private Function GetDigitFeminineStatus(ByVal digit As Integer, ByVal groupLevel As Integer) As String
-        If groupLevel = -1 Then
-            ' if it is in the decimal part
-            If Currency.IsCurrencyPartNameFeminine Then
-                Return _arabicFeminineOnes(digit)
-            Else
-                ' use feminine field
-                Return _arabicOnes(digit)
-            End If
-        ElseIf groupLevel = 0 Then
-            If Currency.IsCurrencyNameFeminine Then
-                Return _arabicFeminineOnes(digit)
-            Else
-                ' use feminine field
-                Return _arabicOnes(digit)
-            End If
-        Else
+        If Currency Is Nothing Then
             Return _arabicOnes(digit)
+        Else
+            If groupLevel = -1 Then
+                ' if it is in the decimal part
+                If Currency.IsCurrencyPartNameFeminine Then
+                    Return _arabicFeminineOnes(digit)
+                Else
+                    ' use feminine field
+                    Return _arabicOnes(digit)
+                End If
+            ElseIf groupLevel = 0 Then
+                If Currency.IsCurrencyNameFeminine Then
+                    Return _arabicFeminineOnes(digit)
+                Else
+                    ' use feminine field
+                    Return _arabicOnes(digit)
+                End If
+            Else
+                Return _arabicOnes(digit)
+            End If
         End If
+
     End Function
 
     ''' <summary>
@@ -470,7 +475,7 @@
     ''' Convert stored number to words using selected currency
     ''' </summary>
     ''' <returns></returns>
-    Public Function ConvertToArabic() As String
+    Public Function ConvertToArabic(Optional WithCurrency As Boolean = True) As String
         Dim tempNumber As [Decimal] = Number
 
         If tempNumber = 0 Then
@@ -528,49 +533,53 @@
         Dim formattedNumber As [String] = [String].Empty
         formattedNumber += If((ArabicPrefixText <> [String].Empty), [String].Format("{0} ", ArabicPrefixText), [String].Empty)
         formattedNumber += If((retVal <> [String].Empty), retVal, [String].Empty)
-        If _intergerValue <> 0 Then
-            ' here we add currency name depending on _intergerValue : 1 ,2 , 3--->10 , 11--->99
-            Dim remaining100 As Integer = CInt(_intergerValue Mod 100)
+        If WithCurrency And Currency IsNot Nothing Then
+            If _intergerValue <> 0 Then
+                ' here we add currency name depending on _intergerValue : 1 ,2 , 3--->10 , 11--->99
+                Dim remaining100 As Integer = CInt(_intergerValue Mod 100)
 
-            If remaining100 = 0 Then
-                formattedNumber += Currency.Arabic1CurrencyName
-            ElseIf remaining100 = 1 Then
-                formattedNumber += Currency.Arabic1CurrencyName
-            ElseIf remaining100 = 2 Then
-                If _intergerValue = 2 Then
-                    formattedNumber += Currency.Arabic2CurrencyName
-                Else
+                If remaining100 = 0 Then
                     formattedNumber += Currency.Arabic1CurrencyName
+                ElseIf remaining100 = 1 Then
+                    formattedNumber += Currency.Arabic1CurrencyName
+                ElseIf remaining100 = 2 Then
+                    If _intergerValue = 2 Then
+                        formattedNumber += Currency.Arabic2CurrencyName
+                    Else
+                        formattedNumber += Currency.Arabic1CurrencyName
+                    End If
+                ElseIf remaining100 >= 3 AndAlso remaining100 <= 10 Then
+                    formattedNumber += Currency.Arabic310CurrencyName
+                ElseIf remaining100 >= 11 AndAlso remaining100 <= 99 Then
+                    formattedNumber += Currency.Arabic1199CurrencyName
                 End If
-            ElseIf remaining100 >= 3 AndAlso remaining100 <= 10 Then
-                formattedNumber += Currency.Arabic310CurrencyName
-            ElseIf remaining100 >= 11 AndAlso remaining100 <= 99 Then
-                formattedNumber += Currency.Arabic1199CurrencyName
             End If
-        End If
-        formattedNumber += If((_decimalValue <> 0), " و ", [String].Empty)
-        formattedNumber += If((_decimalValue <> 0), decimalString, [String].Empty)
-        If _decimalValue <> 0 Then
-            ' here we add currency part name depending on _intergerValue : 1 ,2 , 3--->10 , 11--->99
-            formattedNumber += " "
+            formattedNumber += If((_decimalValue <> 0), " و ", [String].Empty)
+            formattedNumber += If((_decimalValue <> 0), decimalString, [String].Empty)
+            If _decimalValue <> 0 Then
+                ' here we add currency part name depending on _intergerValue : 1 ,2 , 3--->10 , 11--->99
+                formattedNumber += " "
 
-            Dim remaining100 As Integer = CInt(_decimalValue Mod 100)
+                Dim remaining100 As Integer = CInt(_decimalValue Mod 100)
 
-            If remaining100 = 0 Then
-                formattedNumber += Currency.Arabic1CurrencyPartName
-            ElseIf remaining100 = 1 Then
-                formattedNumber += Currency.Arabic1CurrencyPartName
-            ElseIf remaining100 = 2 Then
-                formattedNumber += Currency.Arabic2CurrencyPartName
-            ElseIf remaining100 >= 3 AndAlso remaining100 <= 10 Then
-                formattedNumber += Currency.Arabic310CurrencyPartName
-            ElseIf remaining100 >= 11 AndAlso remaining100 <= 99 Then
-                formattedNumber += Currency.Arabic1199CurrencyPartName
+                If remaining100 = 0 Then
+                    formattedNumber += Currency.Arabic1CurrencyPartName
+                ElseIf remaining100 = 1 Then
+                    formattedNumber += Currency.Arabic1CurrencyPartName
+                ElseIf remaining100 = 2 Then
+                    formattedNumber += Currency.Arabic2CurrencyPartName
+                ElseIf remaining100 >= 3 AndAlso remaining100 <= 10 Then
+                    formattedNumber += Currency.Arabic310CurrencyPartName
+                ElseIf remaining100 >= 11 AndAlso remaining100 <= 99 Then
+                    formattedNumber += Currency.Arabic1199CurrencyPartName
+                End If
             End If
+            retVal = formattedNumber
         End If
-        formattedNumber += If((ArabicSuffixText <> [String].Empty), [String].Format(" {0}", ArabicSuffixText), [String].Empty)
-
-        Return formattedNumber
+        If ArabicSuffixText IsNot Nothing Then
+            retVal += If((ArabicSuffixText <> [String].Empty), [String].Format(" {0}", ArabicSuffixText), [String].Empty)
+        End If
+        Return retVal
     End Function
 
 #End Region

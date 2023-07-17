@@ -33,6 +33,8 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
     Private _undoMode As Boolean = False
     Private _ea As EventAggregator
     Private _dataErrors As String = ""
+    Public Event BeforeChangeRecord()
+    Public Event AfterChangeRecord()
 
     'Public Shadows Event AfterDelete(retVal As Integer)
 
@@ -96,6 +98,8 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
     End Sub
 
     Public Overrides Sub ViewButtonClicked(ByRef eventType As ViewButtonClicked)
+        RaiseEvent BeforeChangeRecord()
+
         Select Case eventType.SelectedButton
             Case ButtonClicked.First
                 GoFirstRecord()
@@ -110,6 +114,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
             Case ButtonClicked.Delete
                 GoDeleteRecord()
         End Select
+        RaiseEvent AfterChangeRecord()
     End Sub
 
     Public Overrides Sub EntryFormLoaded()
@@ -302,6 +307,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
     End Sub
 
     Protected Sub BfTvEntry_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles FormTreeView.AfterSelect
+        RaiseEvent BeforeChangeRecord()
         Select Case e.Action
             Case TreeViewAction.ByKeyboard
                     'MessageBox.Show("You like the keyboard!")
@@ -327,6 +333,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
         If Not FormTreeView.SelectedNode.IsVisible Then
             FormTreeView.SelectedNode.EnsureVisible()
         End If
+        RaiseEvent AfterChangeRecord()
     End Sub
 
     Private Sub FormTreeViewBeforeSelect(ByVal sender As Object, ByVal e As TreeViewCancelEventArgs) Handles FormTreeView.BeforeSelect

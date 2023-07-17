@@ -211,7 +211,7 @@ Namespace PresentationLayer.Views.Forms
         '    End If
         'End Sub
 
-        Private Sub OnRecordChanged() Handles MyBase.RecordChanged
+        Private Sub OnAfterChangeRecord() Handles MyBase.AfterChangeRecord
             If LockGroup Then
                 cboCodeGroupSelector.EditingMode = False
             Else

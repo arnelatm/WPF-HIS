@@ -109,7 +109,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DosageName As String Implements IDosagePrintingView.DosageName
             Get
-                Return txtDosageCode.Text
+                Return txtDosageName.Text
             End Get
             Set(value As String)
                 txtDosageName.Text = value
@@ -127,10 +127,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property FileNo As Integer Implements IDosagePrintingView.FileNo
             Get
-                Return txtFileNo.Text
+                Return txtFileNo.GetValue(Of Integer)
             End Get
             Set
-                txtFileNo.Text = Value
+                txtFileNo.SetValue(Value)
             End Set
         End Property
 
@@ -145,10 +145,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Age As Int16 Implements IDosagePrintingView.Age
             Get
-                Return txtAge.Text
+                Return txtAge.GetValue(Of Int16)
             End Get
             Set(value As Int16)
-                txtAge.Text = value
+                txtAge.SetValue(value)
             End Set
         End Property
 
@@ -308,6 +308,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub txtItemCode_TextChanged(sender As Object, e As EventArgs) Handles txtItemCode.LostFocus
             RaiseEvent ItemCodeChanged()
         End Sub
+
     End Class
 
 End Namespace

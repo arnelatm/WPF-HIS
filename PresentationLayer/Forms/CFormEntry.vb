@@ -46,7 +46,8 @@ Public Class CFormEntry
 
     Public Event InputsTurnedOff()
 
-    Public Event RecordChanged()
+    Public Event AfterChangeRecord()
+    Public Event BeforeChangeRecord()
 
     Public Sub New()
         'MyBase.New()
@@ -467,18 +468,23 @@ Public Class CFormEntry
     End Sub
 
     Protected Overridable Sub PublishClickedButton(buttonClicked As ButtonClicked)
+        'RaiseEvent BeforeChangeRecord()
         If Ea IsNot Nothing Then
             Ea.PublishEvent(New ViewButtonClicked(buttonClicked))
         End If
-        RaiseEvent RecordChanged()
+        'RaiseEvent AfterChangeRecord()
     End Sub
 
     Protected Overridable Sub GridValidator()
         '
     End Sub
 
-    Protected Sub RunRecordChanged()
-        RaiseEvent RecordChanged()
+    Protected Sub RunAfterChangeRecord()
+        RaiseEvent AfterChangeRecord()
+    End Sub
+
+    Protected Sub RunBeforeChangeRecord()
+        RaiseEvent BeforeChangeRecord()
     End Sub
 
     Private Sub BtnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click

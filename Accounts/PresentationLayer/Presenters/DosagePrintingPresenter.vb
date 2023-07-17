@@ -1,4 +1,7 @@
 ﻿Imports System.Dynamic
+Imports AATM.Accounts.BusinessLayer
+Imports System.IO
+Imports System.Security.AccessControl
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
@@ -13,6 +16,9 @@ Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Views
+Imports System.Net.WebRequestMethods
+Imports System.Data.Entity.Design.PluralizationServices
+Imports System.Globalization
 
 Namespace PresentationLayer.Presenters
 
@@ -88,12 +94,26 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Sub GoPrintRecord()
 
-            Dim qtyDescription As String = IIf(View.Dose <> 0, GlobalFunctions.NumberToWordEnglish(View.Dose, False).ToLower() + Trim(GetRecordFieldWithKeyG(Of String)(View.DoseUnit, "ItemCode", "IdNo", "ItemCodeName")) + IIf(View.Dose > 1, "s", ""), "")
-            Dim duration As String = IIf(View.Duration <> 0, " for " + GlobalFunctions.NumberToWordEnglish(View.Duration).ToLower() + " " + Trim(GetRecordFieldWithKeyG(Of String)(View.DurationUnit, "ItemCode", "IdNo", "ItemCodeName")) + IIf(View.Dose > 1, "s", ""), "")
-            Dim args As Object = {View.IdNo, "IdNo", qtyDescription, "QtyDescription", duration, "Duration"}
-            Ea.PublishEvent(New PrintCrEventArgs("DosageLabel.Rpt", "ISPDATA", args, 1))
+            CreateLabels()
+
+            Dim printModel As New ReportModel
+            Dim reportPrinter As New PrintReportPresenter(Of ReportModel)
+            reportPrinter.OnPrintReport("DosageLabel.Rpt", "ISPDATA", {_labelIdNo, "LabelIdNo"})
+
+
+            'Dim qtyDescription As String = IIf(View.Dose <> 0, GlobalFunctions.NumberToWordEnglish(View.Dose, False).ToLower() + Trim(GetRecordFieldWithKeyG(Of String)(View.DoseUnit, "ItemCode", "IdNo", "ItemCodeName")) + IIf(View.Dose > 1, "s", ""), "")
+            'Dim duration As String = IIf(View.Duration <> 0, " for " + GlobalFunctions.NumberToWordEnglish(View.Duration).ToLower() + " " + Trim(GetRecordFieldWithKeyG(Of String)(View.DurationUnit, "ItemCode", "IdNo", "ItemCodeName")) + IIf(View.Dose > 1, "s", ""), "")
+            'Dim args As Object = {View.IdNo, "IdNo", qtyDescription, "QtyDescription", duration, "Duration"}
+            'Ea.PublishEvent(New PrintCrEventArgs("DosageLabel.Rpt", "ISPDATA", args, 1))
 
         End Sub
+
+        Public Sub OnEventHandler(ByRef eventType As PrintCrEventArgs) Implements ISubscriber(Of PrintCrEventArgs).OnEventHandler
+            Dim printModel As New ReportModel
+            Dim reportPrinter As New PrintReportPresenter(Of ReportModel)
+            reportPrinter.OnPrintReport("DosageLabel.Rpt", "IGROUPCLINIC", {_labelIdNo, "LabelIdNo"})
+        End Sub
+
 
 
         Private Sub OnAddNewDosage()
@@ -110,15 +130,15 @@ Namespace PresentationLayer.Presenters
             DisplayTree(nIdNo)
         End Sub
 
-        Public Sub OnPrintReportEventHandler(ByRef eventType As PrintCrEventArgs) Implements ISubscriber(Of PrintCrEventArgs).OnEventHandler
+        'Public Sub OnPrintReportEventHandler(ByRef eventType As PrintCrEventArgs) Implements ISubscriber(Of PrintCrEventArgs).OnEventHandler
 
-            CreateLabels()
+        '    CreateLabels()
 
-            'Dim printModel As New ReportModel
-            'Dim reportPrinter As New PrintReportPresenter(Of ReportModel)
-            'reportPrinter.OnPrintReport("DosageLabel.Rpt", "IGROUPCLINIC", {_labelIdNo, "LabelIdNo"})
+        '    'Dim printModel As New ReportModel
+        '    'Dim reportPrinter As New PrintReportPresenter(Of ReportModel)
+        '    'reportPrinter.OnPrintReport("DosageLabel.Rpt", "IGROUPCLINIC", {_labelIdNo, "LabelIdNo"})
 
-        End Sub
+        'End Sub
 
 
         Private Sub CreateLabels()
@@ -138,42 +158,136 @@ Namespace PresentationLayer.Presenters
 
             Dim dose As String
             Dim doseArabic As String
-            If View.Dose - CInt(View.Dose) > 0 Then
-                dose = View.Dose.ToString() + " " + View.DoseUnit
-                doseArabic = dose
-            Else
-                dose = GlobalFunctions.NumberToWordEnglish(CInt(View.Dose))
-                doseArabic = ConvertWholeNumberToWord(CInt(View.Dose)) + " " + View.DoseUnit
-            End If
-
+            Dim doseUnit As String
+            Dim doseUnitArabic As String
+            Dim durationUnit As String
+            Dim durationUnitArabic As String
             Dim duration As String
             Dim durationArabic As String
-            If View.Duration - CInt(View.Duration) > 0 Then
-                duration = " for " & View.Duration.ToString() + View.DurationUnit
-                durationArabic = " ل " + View.Duration.ToString() + View.DurationUnit
+
+            Dim ps As PluralizationService = PluralizationService.CreateService(CultureInfo.GetCultureInfo("en-us"))
+            ''check if the supplied word is plural
+            'Dim isPlural = ps.IsPlural("mangoes")
+            ''true
+            ''check if the supplied word is singular
+            'Dim isSingular = ps.IsSingular("mangoe")
+            ''true
+            ''change a singular word to plural
+            'Dim pluralWord = ps.Pluralize("boy")
+            ''result: boys
+
+            If View.Dose = 0 Then
+                dose = ""
+                doseArabic = ""
             Else
-                duration = " for " & GlobalFunctions.ConvertWholeNumberToWord(CInt(View.Duration)) + View.DurationUnit
-                durationArabic = " ل " + GlobalFunctions.NumberToWordEnglish(CInt(View.Duration)) + " " + View.DurationUnit
+                If View.Dose - CInt(View.Dose) > 0 Then
+                    dose = View.Dose.ToString() + " " + View.DoseUnit
+                    doseArabic = dose
+                Else
+                    dose = GlobalFunctions.NumberToWordEnglish(CInt(View.Dose))
+                    doseArabic = New ToWord(CInt(View.Dose)).ConvertToArabic()
+                End If
+            End If
+
+            If View.DoseUnit = 0 Then
+                doseUnit = ""
+                doseUnitArabic = ""
+            Else
+                doseUnit = Service.GetField(Of String, Int32)(View.DoseUnit, "ItemCode", "IdNo", "ItemCodeName")
+                If View.Dose > 1 Then
+                    doseUnit = ps.Pluralize(doseUnit)
+                End If
+                doseUnitArabic = Service.GetField(Of String, Int32)(View.DoseUnit, "ItemCode", "IdNo", "ItemCodeNameAra")
+            End If
+
+            If View.Duration = 0 Then
+                duration = ""
+                durationArabic = ""
+            Else
+                If View.Duration - CInt(View.Duration) > 0 Then
+                    duration = " for " & View.Duration.ToString() + View.DurationUnit
+                    durationArabic = " ل " + View.Duration.ToString() + View.DurationUnit
+                Else
+                    duration = " for " & GlobalFunctions.NumberToWordEnglish(CInt(View.Duration)).ToLower()
+                    durationArabic = New ToWord(CInt(View.Duration)).ConvertToArabic()
+                End If
+            End If
+
+            If View.DurationUnit = 0 Then
+                durationUnit = ""
+                durationUnitArabic = ""
+            Else
+                durationUnit = Service.GetField(Of String, Int32)(View.DurationUnit, "ItemCode", "IdNo", "ItemCodeName")
+                durationUnitArabic = Service.GetField(Of String, Int32)(View.DurationUnit, "ItemCode", "IdNo", "ItemCodeNameAra")
+                If View.Duration > 1 Then
+                    durationUnit = ps.Pluralize(durationUnit)
+                End If
             End If
 
             Dim dosage As String
             Dim dosageArabic As String
-            dosage = dose + " " + View.DosageName.Trim() + " " + duration
-            dosageArabic = doseArabic + View.DosageNameAra.Trim() + " " + durationArabic
+            dosage = IIf(dose.Trim() = "", "", dose.Trim() + "(" + View.Dose.ToString().Trim() + ")" + " ") + IIf(doseUnit.Trim() = "", "", doseUnit.Trim() + " ") + View.DosageName.Trim() + " " + IIf(duration.Trim() = "", "", duration.Trim() + "(" + View.Duration.ToString() + ")" + " ") + durationUnit.Trim()
+            dosageArabic = IIf(doseArabic.Trim() = "", "", doseArabic.Trim() + "(" + View.Dose.ToString().Trim() + ")" + " ") + IIf(doseUnitArabic.Trim() = "", "", doseUnitArabic.Trim() + " ") + View.DosageNameAra.Trim() + " " + IIf(durationArabic.Trim() = "", "", durationArabic.Trim() + "(" + View.Duration.ToString().Trim() + ")" + " ") + durationUnitArabic.Trim()
 
             Dim itemName As String = ""
-            'If View.item.GenericName Is Nothing OrElse item.GenericName = "" Then
-            '    itemName = item.ItemName
-            'Else
-            '    itemName = item.GenericName.Trim() + " (" + item.ItemName.Trim() + ")"
-            'End If
+            If View.GenericName Is Nothing OrElse View.GenericName = "" Then
+                itemName = View.ItemName
+            Else
+                itemName = View.GenericName.Trim() + " (" + View.ItemName.Trim() + ")"
+            End If
 
             Service.InsertRecord("DosageLabelDetail", {"DosageLabelIdNo", "ItemName", "Dosage", "DosageAra"},
                                                   {"Integer", "String", "String", "String"},
-                                                  {_labelIdNo, itemName, dosage, dosageArabic})
+                                                  {_labelIdNo, itemName, dosage.ToLower(), dosageArabic})
 
 
         End Sub
+
+
+        Private _savedDose As Decimal
+        Private _savedDuration As Decimal
+        Private _savedFileNo As String
+        Private _savedGenericName As String
+        Private _savedGTin As String
+        Private _savedItemCode As String
+        Private _savedItemName As String
+        Private _savedPatientName As String
+        Private _savedAge As Int16
+        Private _savedAgeDmy As String
+        Private _savedPatientType As Int16
+        Private _savedGender As String
+
+        Public Sub OnBeforeChangeRecord() Handles MyBase.BeforeChangeRecord
+            _savedDose = View.Dose
+            _savedDuration = View.Duration
+            _savedFileNo = View.FileNo
+            _savedGenericName = View.GenericName
+            _savedGTin = View.GTin
+            _savedItemCode = View.ItemCode
+            _savedItemName = View.ItemName
+            _savedPatientName = View.PatientName
+            _savedFileNo = View.FileNo
+            _savedAge = View.Age
+            _savedAgeDmy = View.AgeDMY
+            _savedPatientType = View.PatientType
+            _savedGender = View.Gender
+        End Sub
+        Public Sub OnAfterChangeRecord() Handles MyBase.AfterChangeRecord
+            View.Dose = _savedDose
+            View.Duration = _savedDuration
+            View.FileNo = _savedFileNo
+            View.GenericName = _savedGenericName
+            View.GTin = _savedGTin
+            View.ItemCode = _savedItemCode
+            View.ItemName = _savedItemName
+            View.PatientName = _savedPatientName
+            View.Age = _savedAge
+            View.AgeDMY = _savedAgeDmy
+            View.PatientType = _savedPatientType
+            View.Gender = _savedGender
+        End Sub
+
+
 
         'Public Sub OnEventHandler(ByRef eventType As PrintCrEventArgs) Implements ISubscriber(Of PrintCrEventArgs).OnEventHandler
         '    Throw New NotImplementedException()
