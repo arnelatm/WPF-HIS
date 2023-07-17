@@ -230,7 +230,7 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
-        Private Function LookupDataTableCreator(dtl As DataLookup, Optional dataBase As String = Nothing) As DataTable
+        Private Function LookupDataTableCreator(dtl As DataLookup) As DataTable
             Dim cd As New DataCreator(Service)
             Dim data As DataTable = cd.CreateDataTable(dtl)
             data.Columns(0).ColumnName = "Name"
@@ -353,7 +353,8 @@ Namespace PresentationLayer.Presenters
             _sv = svc
         End Sub
 
-        Public Function CreateDataTable(dtl As DataLookup) As DataTable
+        Public Function CreateDataTable(dtl As DataLookup, Optional connectionName As String = Nothing) As DataTable
+            _sv.SetConnectionString(connectionName)
             Return _sv.GetDtRecords(dtl.TableName, dtl.LuFields, dtl.Filter, dtl.SortKey)
         End Function
 

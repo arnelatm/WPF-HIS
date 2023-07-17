@@ -18,6 +18,7 @@ Namespace PresentationLayer.Views.Forms
         Public Event UpdatePatient() Implements IDosagePrintingView.UpdatePatient
         Public Event FindPatient() Implements IDosagePrintingView.FindPatient
         Public Event ItemCodeChanged() Implements IDosagePrintingView.ItemCodeChanged
+        Public Event ItemNameChanged(idNo As Int32) Implements IDosagePrintingView.ItemNameChanged
         Public Event GTinChanged() Implements IDosagePrintingView.GTinChanged
         'Public Event PrintReport As IPrintReport.PrintReportEventHandler Implements IPrintReport.PrintReport
 
@@ -193,10 +194,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property ItemName As String Implements IDosagePrintingView.ItemName
             Get
-                Return txtItemName.Text
+                Return cboItemName.GetValue(Of String)
             End Get
             Set
-                txtItemName.Text = Value
+                cboItemName.SetValue(Value)
             End Set
         End Property
 
@@ -244,9 +245,7 @@ Namespace PresentationLayer.Views.Forms
             txtGenericName.EditingMode = True
             txtBarCode.EditingMode = True
             txtGTin.EditingMode = True
-            txtBarCode.ReadOnly = False
-            txtItemName.ReadOnly = False
-            txtItemCode.ReadOnly = False
+            cboItemName.EditingMode = True
             cboDoseUnit.SetValue(DefaultDoseUnit)
             cboDurationUnit.SetValue(DefaultDurationUnit)
         End Sub
@@ -277,10 +276,10 @@ Namespace PresentationLayer.Views.Forms
                 {"FileNo", txtFileNo},
                 {"Gender", cboGender},
                 {"GenericName", txtGenericName},
-                {"GTin", txtGTIN},
+                {"GTin", txtGTin},
                 {"IdNo", txtIdNo},
                 {"ItemCode", txtItemCode},
-                {"ItemName", txtItemName},
+                {"ItemName", cboItemName},
                 {"PatientName", txtPatientName},
                 {"PatientType", cboPatientType}
                 }
@@ -309,6 +308,10 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent ItemCodeChanged()
         End Sub
 
+        Private Sub cboItemName_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboItemName.SelectionChangeCommitted
+            RaiseEvent ItemNameChanged(cboItemName.SelectedValue)
+            'txtItemCode.Text = cboItemName
+        End Sub
     End Class
 
 End Namespace

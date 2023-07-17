@@ -30,14 +30,14 @@ Namespace PresentationLayer.Presenters
 
 
         'Public Event PrintReport As IPrintReport.PrintReportEventHandler Implements IPrintReport.PrintReport
-        Private _drugSaleService As Object
+        Private _igService As Object
         Private _labelIdNo As Int32
         Private _computerName As String
 
         Public Sub New(itemView As IDosagePrintingView)
             MyBase.New(itemView)
             Service = New AccountsService("DosagePrinting")
-            _drugSaleService = New AccountsService("DrugSale")
+            _igService = New AccountsService("DrugSale")
             TableName = "Dosage_View"
             TableBaseName = "Dosage"
             TreeViewMainField = "DosageName"
@@ -48,13 +48,14 @@ Namespace PresentationLayer.Presenters
             AddHandler View.UpdateTree, AddressOf OnUpdateTree
             AddHandler View.FindPatient, AddressOf OnFindPatient
             AddHandler View.ItemCodeChanged, AddressOf OnItemCodeChanged
+            AddHandler View.ItemNameChanged, AddressOf OnItemNameChanged
         End Sub
 
         Private Sub OnFindPatient()
             Dim patientType As String = Service.GetRecordFieldWithKeyG(Of String, Int32)(View.PatientType, "ItemCode", "IdNo", "ItemCodeName")
             Dim filter As String = "RegistrationNo = " + View.FileNo.ToString() + " and PatientType = '" & patientType & "'"
             Dim patient As Object = New ExpandoObject
-            patient = _drugSaleService.GetRecordFieldsFiltered("PatientDetails", "PatientNameEnglish,Age,AgeYMD,Sex", filter)
+            patient = _igService.GetRecordFieldsFiltered("PatientDetails", "PatientNameEnglish,Age,AgeYMD,Sex", filter)
             If patient Is Nothing Then
                 AATM.Libraries.MessagingLibrary.Messaging.Show("No Such Patient with that File number and type found on file.")
             Else
@@ -68,14 +69,28 @@ Namespace PresentationLayer.Presenters
         Private Sub OnItemCodeChanged()
             Dim filter As String = "ItemCode = " + View.ItemCode.Trim() + " and itemCode = '" & View.ItemCode & "'"
             Dim medicine As Object = New ExpandoObject
-            medicine = _drugSaleService.GetRecordFieldsFiltered("Medicines_View", "ItemNameEnglish,GenericName,GTin,BarCode", filter)
+            medicine = _igService.GetRecordFieldsFiltered("Medicines_View", "ItemName,GenericName,GTin,BarCode", filter)
             If medicine Is Nothing Then
                 AATM.Libraries.MessagingLibrary.Messaging.Show("No Such medicine with that item code on file.")
             Else
-                View.ItemName = medicine.ItemNameEnglish
-                View.GenericName = medicine.GenericName
-                View.GTin = medicine.GTin
-                View.BarCode = medicine.BarCode
+                View.ItemName = IIf(IsDBNull(medicine.ItemName), "", medicine.ItemName)
+                View.GenericName = IIf(IsDBNull(medicine.GenericName), "", medicine.GenericName)
+                View.GTin = IIf(IsDBNull(medicine.GTin), "", medicine.GenericName)
+                View.BarCode = IIf(IsDBNull(medicine.BarCode), "", medicine.BarCode)
+            End If
+        End Sub
+
+        Private Sub OnItemNameChanged(idNo As Int32)
+            Dim filter As String = "IdNo = " + idNo.ToString()
+            Dim medicine As Object = New ExpandoObject
+            medicine = _igService.GetRecordFieldsFiltered("Medicines_View", "ItemCode,GenericName,GTin,BarCode", filter)
+            If medicine Is Nothing Then
+                AATM.Libraries.MessagingLibrary.Messaging.Show("No Such medicine with that item code on file.")
+            Else
+                View.ItemCode = IIf(IsDBNull(medicine.ItemCode), "", medicine.ItemCode)
+                View.GenericName = IIf(IsDBNull(medicine.GenericName), "", medicine.GenericName)
+                View.GTin = IIf(IsDBNull(medicine.GTin), "", medicine.GenericName)
+                View.BarCode = IIf(IsDBNull(medicine.BarCode), "", medicine.BarCode)
             End If
         End Sub
 
@@ -85,6 +100,12 @@ Namespace PresentationLayer.Presenters
             data.Add({"ItemCode", "DoseUnit", Nothing, "CodeGroupIdNo=7"})
             data.Add({"ItemCode", "PatientType", Nothing, "CodeGroupIdNo=15"})
             CreateDataSourceThread(data)
+            Dim data2 As New ArrayList
+            data2.Add({"Medicines_View", "ItemName", "ItemName,IdNo,ItemCode", Nothing, "ItemName"})
+            Service.SetConnectionString("IGroupClinic")
+            CreateDataSourceThread(data2)
+            'Restore connection String
+            Service.SetConnectionString("ISPDATA")
             CreateEnumDataSource(Of MaleFemaleSelection)("Gender")
             CreateEnumDataSource(Of YearMonthDaySelection)("AgeYmd")
             Dim viewIdNo As Int32 = GetRecordFieldWithKey("DosagePrintingForm", "SystemView", "SystemViewName", "IdNo")
