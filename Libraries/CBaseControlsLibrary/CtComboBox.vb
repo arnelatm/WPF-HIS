@@ -64,7 +64,7 @@ Public Class CtComboBox
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control value is hidden (used for secured controls)")>
-    Public Property Hidden As Boolean = False
+    Public Property Hidden As Boolean
 
     Public Property EditingMode As Boolean Implements IEntryControl.EditingMode
         Get
@@ -95,6 +95,7 @@ Public Class CtComboBox
                 DropDownStyle = ComboBoxStyle.Simple
                 DropDownHeight = Height
                 MaxDropDownItems = 1
+                IntegralHeight = True
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             End If
@@ -315,6 +316,7 @@ Public Class CtComboBox
                         ' ReSharper disable once ReturnValueOfPureMethodIsNotUsed
                         Math.Max(Interlocked.Increment(SuggestListForm.SuggestListBox.SelectedIndex), SuggestListForm.SuggestListBox.SelectedIndex - 1)
                     End If
+                    Return
                 Case Keys.Up
                     If SuggestListForm.SuggestListBox.SelectedIndex > 0 Then
 #Disable Warning ReturnValueOfPureMethodIsNotUsed
@@ -406,7 +408,15 @@ Public Class CtComboBox
     End Sub
 
     Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged
-        PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(0).ToString())
+        Dim nCol As Int32 = 0
+        If DataSource IsNot Nothing Then
+            If DataSource.Columns.Count() = 1 Then
+                nCol = 0
+            Else
+                nCol = 1
+            End If
+        End If
+        PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(1).ToString())
     End Sub
 
     Private Shadows Sub OnParentChanged(ByVal sender As Object, ByVal e As EventArgs)

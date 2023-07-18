@@ -2004,10 +2004,14 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Protected Function GetFieldControlName(ByVal propertyName As String) As CtComboBox
         Dim control As CtComboBox = Nothing
-        If Not MainFieldsDictionary.TryGetValue(propertyName, control) Then
+        Try
+            If Not MainFieldsDictionary.TryGetValue(propertyName, control) Then
+                Debugger.Break()
+                System.Windows.Forms.MessageBox.Show($"Field '" & propertyName & $"' is not present in the MainFieldsDictionary.")
+            End If
+        Catch ex As Exception
             Debugger.Break()
-            System.Windows.Forms.MessageBox.Show($"Field '" & propertyName & $"' is not present in the MainFieldsDictionary.")
-        End If
+        End Try
         Return control
     End Function
 

@@ -31,18 +31,20 @@ Namespace PresentationLayer.Views.Interfaces
         Property GTin As String
         Property Gender As String
         Property PatientName As String
-        Property PatientType As Int32
+        Property PatientType As Int16
         Property DefaultDoseUnit As Int16
         Property DefaultDurationUnit As Int16
         Property GenericName As String
         Property BarCode As String
+        Property ItemIdNo As Integer
         Event AddNewDosage()
         Event UpdateTree()
         Event UpdatePatient()
         Event FindPatient()
         Event ItemCodeChanged()
         Event ItemNameChanged(idNo As Int32)
-        Event GTinChanged()
+        Event GTinChanged(cGTin As String)
+        Event BarCodeChanged(cBarCode As String)
     End Interface
 
 End Namespace
