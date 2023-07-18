@@ -89,7 +89,7 @@ Namespace DataLayer.AdoNet
             .DosageName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("DosageName")),
             .DosageNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("DosageNameAra")),
             .Age = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("Age")),
-            .AgeDMY = AATM.DataLayer.AdoNet.Extensions.AsString("year(s)"),
+            .AgeDMY = AATM.DataLayer.AdoNet.Extensions.AsString("AgeYmd"),
             .FileNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("FileNo")),
             .PatientName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("PatientName")),
             .Dose = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Dose")),

@@ -19,7 +19,8 @@ Namespace PresentationLayer.Views.Forms
         Public Event FindPatient() Implements IDosagePrintingView.FindPatient
         Public Event ItemCodeChanged() Implements IDosagePrintingView.ItemCodeChanged
         Public Event ItemNameChanged(idNo As Int32) Implements IDosagePrintingView.ItemNameChanged
-        Public Event GTinChanged() Implements IDosagePrintingView.GTinChanged
+        Public Event GTinChanged(cGTin As String) Implements IDosagePrintingView.GTinChanged
+        Public Event BarCodeChanged(cBarCode As String) Implements IDosagePrintingView.BarCodeChanged
         'Public Event PrintReport As IPrintReport.PrintReportEventHandler Implements IPrintReport.PrintReport
 
         'Public Event OnPrintReport As IPrintReportView.OnPrintReportEventHandler Implements IDosagePrintingView.PrintReport
@@ -88,9 +89,9 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PatientType As Int32 Implements IDosagePrintingView.PatientType
+        Public Property PatientType As Int16 Implements IDosagePrintingView.PatientType
             Get
-                Return cboPatientType.GetValue(Of Int32)
+                Return cboPatientType.GetValue(Of Int16)
             End Get
             Set
                 cboPatientType.SetValue(Value)
@@ -194,19 +195,30 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property ItemName As String Implements IDosagePrintingView.ItemName
             Get
-                Return cboItemName.GetValue(Of String)
+                Return txtItemName.Text
             End Get
             Set
-                cboItemName.SetValue(Value)
+                txtItemName.Text = Value
+            End Set
+        End Property
+
+        Public Property ItemIdNo As Int32 Implements IDosagePrintingView.ItemIdNo
+            Get
+                Return Nothing ' cboItemIdNo.GetValue(Of Int32)
+            End Get
+            Set
+                cboItemIdNo.SetValue(Value)
+                txtItemName.Text = DirectCast(cboItemIdNo.DataSource.Rows(cboItemIdNo.SelectedIndex()), System.Data.DataRow).ItemArray(1)
+                txtItemName.Text = Value
             End Set
         End Property
 
         Public Property GTin As String Implements IDosagePrintingView.GTin
             Get
-                Return txtGTIN.Text
+                Return txtGTin.Text
             End Get
             Set
-                txtGTIN.Text = Value
+                txtGTin.Text = Value
             End Set
         End Property
 
@@ -245,7 +257,7 @@ Namespace PresentationLayer.Views.Forms
             txtGenericName.EditingMode = True
             txtBarCode.EditingMode = True
             txtGTin.EditingMode = True
-            cboItemName.EditingMode = True
+            cboItemIdNo.EditingMode = True
             cboDoseUnit.SetValue(DefaultDoseUnit)
             cboDurationUnit.SetValue(DefaultDurationUnit)
         End Sub
@@ -266,6 +278,7 @@ Namespace PresentationLayer.Views.Forms
                 {"Age", txtAge},
                 {"AgeYmd", cboAgeYmd},
                 {"BarCode", txtBarCode},
+                {"ItemIdNo", cboItemIdNo},
                 {"DosageCode", txtDosageCode},
                 {"DosageName", txtDosageName},
                 {"DosageNameAra", txtDosageNameAra},
@@ -279,10 +292,11 @@ Namespace PresentationLayer.Views.Forms
                 {"GTin", txtGTin},
                 {"IdNo", txtIdNo},
                 {"ItemCode", txtItemCode},
-                {"ItemName", cboItemName},
+                {"ItemName", txtItemName},
                 {"PatientName", txtPatientName},
                 {"PatientType", cboPatientType}
                 }
+
         End Sub
 
         Private Sub DosagePrinting_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -305,13 +319,44 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub txtItemCode_TextChanged(sender As Object, e As EventArgs) Handles txtItemCode.LostFocus
-            RaiseEvent ItemCodeChanged()
+            Dim cItemCode As String = sender.Text
+            If cItemCode IsNot Nothing AndAlso cItemCode <> "" Then
+                RaiseEvent ItemCodeChanged()
+            End If
         End Sub
 
-        Private Sub cboItemName_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboItemName.SelectionChangeCommitted
-            RaiseEvent ItemNameChanged(cboItemName.SelectedValue)
-            'txtItemCode.Text = cboItemName
+        Private Sub cboItemIdNo_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboItemIdNo.SelectionChangeCommitted
+            Dim selectedIdNo As Int32 = cboItemIdNo.SelectedValue
+            RaiseEvent ItemNameChanged(selectedIdNo)
+            'txtItemName.Text = DirectCast(cboItemIdNo.DataSource.Rows(cboItemIdNo.SelectedIndex()), System.Data.DataRow).ItemArray(1)
         End Sub
+
+        Private Sub txtBarCode_Leave(sender As Object, e As EventArgs) Handles txtBarCode.Leave
+            Dim cBarCode As String = sender.Text
+            If cBarCode IsNot Nothing AndAlso cBarCode <> "" Then
+                RaiseEvent BarCodeChanged(txtBarCode.Text)
+            End If
+        End Sub
+
+        Private Sub txtGTin_Leave(sender As Object, e As EventArgs) Handles txtGTin.Leave
+            ProcessGTinEntry()
+        End Sub
+
+        Private Sub btnScanQrCode_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnScanQrCode.ClickButtonArea
+            Dim gTinScanner As New GTinScanner
+            gTinScanner.ShowDialog()
+            txtGTin.Text = gTinScanner.GTin
+            gTinScanner.Close()
+            ProcessGTinEntry()
+        End Sub
+
+        Private Sub ProcessGTinEntry()
+            Dim cGTin As String = txtGTin.Text
+            If cGTin IsNot Nothing AndAlso cGTin <> "" Then
+                RaiseEvent GTinChanged(txtGTin.Text)
+            End If
+        End Sub
+
     End Class
 
 End Namespace

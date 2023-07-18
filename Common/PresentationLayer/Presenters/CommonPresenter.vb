@@ -49,8 +49,52 @@ Namespace PresentationLayer.Presenters
                 luItem.PropertyControl = GetFieldControlName(luItem.PropertyName)
                 luItem.Data = luItem.LookUpTask.Result
                 Invoker.SetPropertyR(luItem.PropertyControl, "DataSource", luItem.Data)
-                Invoker.SetPropertyR(luItem.PropertyControl, "DisplayMember", luItem.Data.Columns(0).ColumnName)
-                Invoker.SetPropertyR(luItem.PropertyControl, "ValueMember", luItem.ValueMember)
+                Dim displayColumnNo As Integer = 0
+                Dim valueColumnNo As Integer = 0
+                If luItem.DisplayMember = "Name" Then
+                    If luItem.Data.Columns.Count() = 1 Then
+                        displayColumnNo = 0
+                        valueColumnNo = 0
+                    Else
+                        displayColumnNo = 1
+                    End If
+                ElseIf luItem.DisplayMember = "Code" Then
+                    If luItem.Data.Columns.Count() = 1 Then
+                        displayColumnNo = 0
+                    ElseIf luItem.Data.Columns.Count() = 2 Then
+                        displayColumnNo = 1
+                    Else
+                        displayColumnNo = 2
+                    End If
+                Else
+                    If luItem.Data.Columns.Count() = 1 Then
+                        displayColumnNo = 0
+                    Else
+                        displayColumnNo = 1
+                    End If
+                End If
+                If luItem.ValueMember = "Name" Then
+                    If luItem.Data.Columns.Count() = 1 Then
+                        valueColumnNo = 0
+                    Else
+                        valueColumnNo = 1
+                    End If
+                ElseIf luItem.DisplayMember = "Code" Then
+                    If luItem.Data.Columns.Count() = 1 Then
+                        valueColumnNo = 0
+                    ElseIf luItem.Data.Columns.Count() = 2 Then
+                        valueColumnNo = 1
+                    Else
+                        valueColumnNo = 2
+                    End If
+                Else
+                    valueColumnNo = 0
+                End If
+
+                Invoker.SetPropertyR(luItem.PropertyControl, "DisplayMember", luItem.Data.Columns(displayColumnNo).ColumnName)
+                Invoker.SetPropertyR(luItem.PropertyControl, "ValueMember", luItem.Data.Columns(valueColumnNo).ColumnName)
+                'Invoker.SetPropertyR(luItem.PropertyControl, "DisplayMember", "Name") 'luItem.DisplayMember)
+                'Invoker.SetPropertyR(luItem.PropertyControl, "ValueMember", luItem.ValueMember)
             Next
         End Sub
 
@@ -94,6 +138,8 @@ Namespace PresentationLayer.Presenters
             Const LookupFieldNames As Int32 = 2
             Const LookupFilter As Int32 = 3
             Const LookupSortKey As Int32 = 4
+            Const ValueMember As Int32 = 5
+            Const DisplayMember As Int32 = 6
             Dim lookups As New List(Of DataLookup)
             For Each item In dataSourceNames
                 Dim dtl As New DataLookup
@@ -107,6 +153,12 @@ Namespace PresentationLayer.Presenters
                 End If
                 If item.Length - 1 > 3 Then
                     dtl.SortKey = item(LookupSortKey)
+                End If
+                If item.Length - 1 > 4 Then
+                    dtl.ValueMember = item(ValueMember)
+                End If
+                If item.Length - 1 > 5 Then
+                    dtl.DisplayMember = item(DisplayMember)
                 End If
                 ComposeLookupProperties(dtl)
                 dtl.LookUpTask = Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(dtl))
@@ -187,29 +239,48 @@ Namespace PresentationLayer.Presenters
                 dtl.NameField = TranslateNameField(dtl.TableName, dtl.NameFieldOrig)
                 dtl.NameDisplayValue = dtl.NameField + "+'-'+" + dtl.TableName + "Code"
                 dtl.ValueMember = "IdNo"
-                dtl.LuFields = dtl.NameDisplayValue + " COLLATE SQL_Latin1_General_CP1_CI_AS, IdNo"
+                dtl.LuFields = "IdNo, " + dtl.NameDisplayValue + " COLLATE SQL_Latin1_General_CP1_CI_AS As Name"
                 dtl.SortKey = dtl.NameField
+                dtl.DisplayMember = dtl.NameDisplayValue
             Else
                 Dim fieldNames = dtl.LuFields.Split(",")
-                dtl.NameFieldOrig = fieldNames(0)
                 If fieldNames.Count() = 1 Then
+                    dtl.NameFieldOrig = fieldNames(0)
                     dtl.NameField = TranslateNameField(dtl.TableName, dtl.NameFieldOrig)
                     dtl.NameDisplayValue = dtl.NameField
                     dtl.ValueMember = "Name"
-                    dtl.LuFields = dtl.NameDisplayValue + " COLLATE SQL_Latin1_General_CP1_CI_AS"
-                    dtl.SortKey = dtl.NameField
+                    dtl.DisplayMember = "Name"
+                    dtl.LuFields = dtl.NameField
+                    dtl.SortKey = fieldNames(0)
                 ElseIf fieldNames.Count() = 2 Then
+                    ' assumed the first field is the value member and the second field as the display Value
+                    dtl.NameFieldOrig = fieldNames(1)
                     dtl.NameField = TranslateNameField(dtl.TableName, dtl.NameFieldOrig)
                     dtl.NameDisplayValue = dtl.NameField + "+'-'+" + fieldNames(1) + " COLLATE SQL_Latin1_General_CP1_CI_AS"
-                    dtl.ValueMember = fieldNames(1).Trim()
-                    dtl.LuFields = dtl.NameDisplayValue + "," + fieldNames(1)
-                    dtl.SortKey = dtl.NameField
+                    If dtl.ValueMember Is Nothing Then
+                        dtl.ValueMember = fieldNames(0).Trim()
+                    End If
+                    If dtl.DisplayMember Is Nothing Then
+                        dtl.NameDisplayValue = dtl.NameField + "+'-'+" + fieldNames(1) + " COLLATE SQL_Latin1_General_CP1_CI_AS"
+                        dtl.DisplayMember = "IdNo"
+                    End If
+                    dtl.LuFields = fieldNames(0) + " as IdNo," + dtl.NameDisplayValue + " as Name"
+                    If dtl.SortKey Is Nothing Then
+                        dtl.SortKey = dtl.NameField
+                    End If
                 ElseIf fieldNames.Count() = 3 Then
-                    dtl.NameField = fieldNames(0).Trim()
+                    dtl.NameField = fieldNames(1).Trim()
                     dtl.NameDisplayValue = TranslateNameField(dtl.TableName, dtl.NameField) + "+'-'+" + fieldNames(2) + " COLLATE SQL_Latin1_General_CP1_CI_AS"
-                    dtl.LuFields = dtl.NameDisplayValue + "," + fieldNames(1)
-                    dtl.ValueMember = fieldNames(1).Trim()
-                    dtl.SortKey = dtl.NameField
+                    If dtl.ValueMember Is Nothing Then
+                        dtl.ValueMember = "IdNo"
+                    End If
+                    If dtl.DisplayMember Is Nothing Then
+                        dtl.DisplayMember = "Name"
+                    End If
+                    dtl.LuFields = fieldNames(0) + " As IdNo," + dtl.NameDisplayValue + " as Name," + fieldNames(2) + " as Code"
+                    If dtl.SortKey Is Nothing Then
+                        dtl.SortKey = dtl.NameField
+                    End If
                 Else
                     MessageBox.Show("Too much parameters passed!")
                     Debugger.Break()
@@ -233,7 +304,7 @@ Namespace PresentationLayer.Presenters
         Private Function LookupDataTableCreator(dtl As DataLookup) As DataTable
             Dim cd As New DataCreator(Service)
             Dim data As DataTable = cd.CreateDataTable(dtl)
-            data.Columns(0).ColumnName = "Name"
+            'data.Columns(0).ColumnName = "Name"
             cd = Nothing
             Return data
         End Function
@@ -325,7 +396,6 @@ Namespace PresentationLayer.Presenters
                 paperOrientation = CrystalDecisions.Shared.PaperOrientation.DefaultPaperOrientation
             End If
         End Sub
-
     End Class
 
     Public Class DataLookup
@@ -353,8 +423,7 @@ Namespace PresentationLayer.Presenters
             _sv = svc
         End Sub
 
-        Public Function CreateDataTable(dtl As DataLookup, Optional connectionName As String = Nothing) As DataTable
-            _sv.SetConnectionString(connectionName)
+        Public Function CreateDataTable(dtl As DataLookup) As DataTable
             Return _sv.GetDtRecords(dtl.TableName, dtl.LuFields, dtl.Filter, dtl.SortKey)
         End Function
 
