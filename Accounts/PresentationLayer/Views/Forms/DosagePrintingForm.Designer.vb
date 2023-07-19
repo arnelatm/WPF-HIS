@@ -49,6 +49,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPatientName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtFileNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+            Me.btnScanQrCode = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.cboItemIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.txtItemName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -67,7 +68,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboAgeYmd = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.cboGender = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.btnScanQrCode = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.btnClear = New AATM.Libraries.CBaseControlsLibrary.CButton()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -81,6 +82,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'SplitContainer1.Panel2
             '
+            Me.SplitContainer1.Panel2.Controls.Add(Me.btnClear)
             Me.SplitContainer1.Panel2.Controls.Add(Me.CButton1)
             Me.SplitContainer1.Panel2.Controls.Add(Me.TableLayoutPanel1)
             Me.SplitContainer1.Size = New System.Drawing.Size(870, 553)
@@ -154,7 +156,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblGender.DisplayOnly = True
             Me.lblGender.EditingMode = False
             Me.lblGender.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblGender.Location = New System.Drawing.Point(442, 357)
+            Me.lblGender.Location = New System.Drawing.Point(414, 357)
             Me.lblGender.Margin = New System.Windows.Forms.Padding(1)
             Me.lblGender.Name = "lblGender"
             Me.lblGender.Size = New System.Drawing.Size(56, 17)
@@ -204,7 +206,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel10.Location = New System.Drawing.Point(256, 11)
             Me.CLabel10.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel10.Name = "CLabel10"
-            Me.CLabel10.Size = New System.Drawing.Size(80, 23)
+            Me.CLabel10.Size = New System.Drawing.Size(74, 23)
             Me.CLabel10.TabIndex = 301
             Me.CLabel10.Text = "Code "
             Me.CLabel10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -404,7 +406,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDosageCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDosageCode.ForeColor = System.Drawing.Color.Black
             Me.txtDosageCode.LinkedLabel = Nothing
-            Me.txtDosageCode.Location = New System.Drawing.Point(338, 11)
+            Me.txtDosageCode.Location = New System.Drawing.Point(332, 11)
             Me.txtDosageCode.Margin = New System.Windows.Forms.Padding(1)
             Me.txtDosageCode.MaximumValue = Nothing
             Me.txtDosageCode.MinimumValue = Nothing
@@ -413,7 +415,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDosageCode.OverrideMaxLength = 0
             Me.txtDosageCode.ReadOnly = True
             Me.txtDosageCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtDosageCode.Size = New System.Drawing.Size(197, 23)
+            Me.txtDosageCode.Size = New System.Drawing.Size(194, 23)
             Me.txtDosageCode.TabIndex = 4
             Me.txtDosageCode.Translatable = False
             '
@@ -530,7 +532,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtAge.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtAge.ForeColor = System.Drawing.Color.Black
             Me.txtAge.LinkedLabel = Nothing
-            Me.txtAge.Location = New System.Drawing.Point(256, 376)
+            Me.txtAge.Location = New System.Drawing.Point(332, 376)
             Me.txtAge.Margin = New System.Windows.Forms.Padding(1)
             Me.txtAge.MaximumValue = Nothing
             Me.txtAge.MinimumSize = New System.Drawing.Size(80, 2)
@@ -633,11 +635,11 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel2, 0, 3)
             Me.TableLayoutPanel1.Controls.Add(Me.txtPatientName, 0, 16)
             Me.TableLayoutPanel1.Controls.Add(Me.lblAge, 3, 13)
-            Me.TableLayoutPanel1.Controls.Add(Me.txtAge, 3, 14)
             Me.TableLayoutPanel1.Controls.Add(Me.lblGender, 5, 13)
-            Me.TableLayoutPanel1.Controls.Add(Me.cboAgeYmd, 4, 14)
             Me.TableLayoutPanel1.Controls.Add(Me.lblPatientName, 0, 15)
             Me.TableLayoutPanel1.Controls.Add(Me.cboGender, 5, 14)
+            Me.TableLayoutPanel1.Controls.Add(Me.cboAgeYmd, 3, 14)
+            Me.TableLayoutPanel1.Controls.Add(Me.txtAge, 4, 14)
             Me.TableLayoutPanel1.Location = New System.Drawing.Point(8, 17)
             Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(0)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -664,6 +666,21 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
             Me.TableLayoutPanel1.Size = New System.Drawing.Size(540, 482)
             Me.TableLayoutPanel1.TabIndex = 0
+            '
+            'btnScanQrCode
+            '
+            Me.btnScanQrCode.DesignerSelected = False
+            Me.btnScanQrCode.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.btnScanQrCode.ImageIndex = 0
+            Me.btnScanQrCode.Location = New System.Drawing.Point(413, 35)
+            Me.btnScanQrCode.Margin = New System.Windows.Forms.Padding(0)
+            Me.btnScanQrCode.Name = "btnScanQrCode"
+            Me.btnScanQrCode.OriginalImageName = Nothing
+            Me.btnScanQrCode.SecurityKey = ""
+            Me.btnScanQrCode.Size = New System.Drawing.Size(90, 20)
+            Me.btnScanQrCode.TabIndex = 328
+            Me.btnScanQrCode.Text = "Scan Qr Code"
+            Me.btnScanQrCode.TextMargin = New System.Windows.Forms.Padding(0)
             '
             'cboItemIdNo
             '
@@ -752,7 +769,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel3.DisplayOnly = True
             Me.CLabel3.EditingMode = False
             Me.CLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel3.Location = New System.Drawing.Point(338, 357)
+            Me.CLabel3.Location = New System.Drawing.Point(332, 357)
             Me.CLabel3.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel3.Name = "CLabel3"
             Me.CLabel3.Size = New System.Drawing.Size(74, 17)
@@ -789,7 +806,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtGTin.OldValue = Nothing
             Me.txtGTin.OverrideMaxLength = 0
             Me.txtGTin.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtGTin.Size = New System.Drawing.Size(184, 23)
+            Me.txtGTin.Size = New System.Drawing.Size(156, 23)
             Me.txtGTin.TabIndex = 5
             Me.txtGTin.Translatable = False
             '
@@ -813,7 +830,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBarCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtBarCode.ForeColor = System.Drawing.Color.Black
             Me.txtBarCode.LinkedLabel = Nothing
-            Me.txtBarCode.Location = New System.Drawing.Point(338, 87)
+            Me.txtBarCode.Location = New System.Drawing.Point(332, 87)
             Me.txtBarCode.Margin = New System.Windows.Forms.Padding(1)
             Me.txtBarCode.MaximumValue = Nothing
             Me.txtBarCode.MinimumValue = Nothing
@@ -821,7 +838,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtBarCode.OldValue = Nothing
             Me.txtBarCode.OverrideMaxLength = 0
             Me.txtBarCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtBarCode.Size = New System.Drawing.Size(197, 23)
+            Me.txtBarCode.Size = New System.Drawing.Size(194, 23)
             Me.txtBarCode.TabIndex = 8
             Me.txtBarCode.Translatable = False
             '
@@ -835,7 +852,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblBarCode.Location = New System.Drawing.Point(256, 87)
             Me.lblBarCode.Margin = New System.Windows.Forms.Padding(1)
             Me.lblBarCode.Name = "lblBarCode"
-            Me.lblBarCode.Size = New System.Drawing.Size(80, 23)
+            Me.lblBarCode.Size = New System.Drawing.Size(74, 23)
             Me.lblBarCode.TabIndex = 323
             Me.lblBarCode.Text = "BarCode"
             Me.lblBarCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1169,7 +1186,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAgeYmd.IntegralHeight = False
             Me.cboAgeYmd.LimitToList = False
             Me.cboAgeYmd.LinkedLabel = Nothing
-            Me.cboAgeYmd.Location = New System.Drawing.Point(338, 376)
+            Me.cboAgeYmd.Location = New System.Drawing.Point(256, 376)
             Me.cboAgeYmd.Margin = New System.Windows.Forms.Padding(1)
             Me.cboAgeYmd.MaxDropDownItems = 1
             Me.cboAgeYmd.Name = "cboAgeYmd"
@@ -1218,7 +1235,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboGender.IntegralHeight = False
             Me.cboGender.LimitToList = False
             Me.cboGender.LinkedLabel = Me.lblGender
-            Me.cboGender.Location = New System.Drawing.Point(441, 376)
+            Me.cboGender.Location = New System.Drawing.Point(413, 376)
             Me.cboGender.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
             Me.cboGender.MaxDropDownItems = 1
             Me.cboGender.Name = "cboGender"
@@ -1229,7 +1246,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboGender.PreviousSearchTerm = Nothing
             Me.cboGender.PropertySelector = Nothing
             Me.cboGender.ReadOnlyCombo = False
-            Me.cboGender.Size = New System.Drawing.Size(132, 24)
+            Me.cboGender.Size = New System.Drawing.Size(113, 24)
             Me.cboGender.SuggestBoxHeight = 200
             Me.cboGender.SuggestListOrderRule = Nothing
             Me.cboGender.TabIndex = 20
@@ -1240,20 +1257,17 @@ Namespace PresentationLayer.Views.Forms
             Me.cboGender.ValueIsNumeric = False
             Me.cboGender.ValueMember = "Code"
             '
-            'btnScanQrCode
+            'btnClear
             '
-            Me.btnScanQrCode.DesignerSelected = True
-            Me.btnScanQrCode.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            Me.btnScanQrCode.ImageIndex = 0
-            Me.btnScanQrCode.Location = New System.Drawing.Point(441, 35)
-            Me.btnScanQrCode.Margin = New System.Windows.Forms.Padding(0)
-            Me.btnScanQrCode.Name = "btnScanQrCode"
-            Me.btnScanQrCode.OriginalImageName = Nothing
-            Me.btnScanQrCode.SecurityKey = ""
-            Me.btnScanQrCode.Size = New System.Drawing.Size(90, 20)
-            Me.btnScanQrCode.TabIndex = 328
-            Me.btnScanQrCode.Text = "Scan Qr Code"
-            Me.btnScanQrCode.TextMargin = New System.Windows.Forms.Padding(0)
+            Me.btnClear.DesignerSelected = True
+            Me.btnClear.ImageIndex = 0
+            Me.btnClear.Location = New System.Drawing.Point(418, 502)
+            Me.btnClear.Name = "btnClear"
+            Me.btnClear.OriginalImageName = Nothing
+            Me.btnClear.SecurityKey = ""
+            Me.btnClear.Size = New System.Drawing.Size(130, 25)
+            Me.btnClear.TabIndex = 296
+            Me.btnClear.Text = "Clear Values"
             '
             'DosagePrintingForm
             '
@@ -1330,5 +1344,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtItemName As CTextBox
         Friend WithEvents cboItemIdNo As CtComboBox
         Friend WithEvents btnScanQrCode As CButton
+        Friend WithEvents btnClear As CButton
     End Class
 End Namespace

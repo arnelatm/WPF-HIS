@@ -99,6 +99,7 @@ Public Class CFormEntry
         '    End If
         'Next
         Parent.ResumeDrawing()
+        FormShown = True
     End Sub
 
     'Public Property RecordCount As Integer Implements IViewDataEntry.RecordCount
