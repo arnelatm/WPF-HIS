@@ -214,11 +214,15 @@ Namespace PresentationLayer.Presenters
                 Dim dmy As String = CodeToEnum(Of YearMonthDaySelection)(View.AgeDMY)
                 'PluralizationService.Pluralize()
             End If
-
+            Dim ps As PluralizationService = PluralizationService.CreateService(CultureInfo.GetCultureInfo("en-us"))
+            Dim ageDmyDescript As String = GetDescription(CodeToEnum(Of YearMonthDaySelection)(View.AgeDMY), "year")
+            If View.Age > 1 Then
+                ageDmyDescript = ps.Pluralize(ageDmyDescript)
+            End If
 
             Service.InsertRecord("DosageLabel", {"ComputerName", "PrescriptionIdNo", "PatientName", "FileNo", "Age", "AgeYmd", "Gender", "DoctorName"},
                                                 {"String", "Integer", "String", "Integer", "Integer", "String", "String", "String"},
-                                                {_computerName, 0, View.PatientName, View.FileNo, Val(View.Age), View.AgeDMY, Left(View.Gender, 1), ""})
+                                                {_computerName, 0, View.PatientName, View.FileNo, Val(View.Age), ageDmyDescript, Left(View.Gender, 1), ""})
             _labelIdNo = Service.GetField(Of Int32, String)(_computerName, "DosageLabel", "ComputerName", "IdNo")
 
             Dim dose As String
@@ -230,7 +234,7 @@ Namespace PresentationLayer.Presenters
             Dim duration As String
             Dim durationArabic As String
 
-            Dim ps As PluralizationService = PluralizationService.CreateService(CultureInfo.GetCultureInfo("en-us"))
+
             ''check if the supplied word is plural
             'Dim isPlural = ps.IsPlural("mangoes")
             ''true

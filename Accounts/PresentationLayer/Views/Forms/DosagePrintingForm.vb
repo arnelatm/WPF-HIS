@@ -315,48 +315,79 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub btnFindPatient_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnFindPatient.ClickButtonArea
-            RaiseEvent FindPatient()
-        End Sub
-
-        Private Sub txtItemCode_TextChanged(sender As Object, e As EventArgs) Handles txtItemCode.LostFocus
-            Dim cItemCode As String = sender.Text
-            If cItemCode IsNot Nothing AndAlso cItemCode <> "" Then
-                RaiseEvent ItemCodeChanged()
+            If FormShown Then
+                RaiseEvent FindPatient()
             End If
         End Sub
 
-        Private Sub cboItemIdNo_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboItemIdNo.SelectionChangeCommitted
-            Dim selectedIdNo As Int32 = cboItemIdNo.SelectedValue
-            RaiseEvent ItemNameChanged(selectedIdNo)
+
+        Private Sub txtItemCode_TextChanged(sender As Object, e As EventArgs) Handles txtItemCode.LostFocus
+            If FormShown Then
+                Dim cItemCode As String = sender.Text
+                If cItemCode IsNot Nothing AndAlso cItemCode <> "" Then
+                    RaiseEvent ItemCodeChanged()
+                End If
+            End If
+        End Sub
+
+        Private Sub cboItemIdNo_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboItemIdNo.SelectedValueChanged, cboItemIdNo.Leave
+            If FormShown Then
+                Dim selectedIdNo As Int32 = cboItemIdNo.SelectedValue
+                If selectedIdNo <> 0 Then
+                    RaiseEvent ItemNameChanged(selectedIdNo)
+                End If
+            End If
             'txtItemName.Text = DirectCast(cboItemIdNo.DataSource.Rows(cboItemIdNo.SelectedIndex()), System.Data.DataRow).ItemArray(1)
         End Sub
 
         Private Sub txtBarCode_Leave(sender As Object, e As EventArgs) Handles txtBarCode.Leave
-            Dim cBarCode As String = sender.Text
-            If cBarCode IsNot Nothing AndAlso cBarCode <> "" Then
-                RaiseEvent BarCodeChanged(txtBarCode.Text)
+            If FormShown Then
+                Dim cBarCode As String = sender.Text
+                If cBarCode IsNot Nothing AndAlso cBarCode <> "" Then
+                    RaiseEvent BarCodeChanged(txtBarCode.Text)
+                End If
             End If
         End Sub
 
         Private Sub txtGTin_Leave(sender As Object, e As EventArgs) Handles txtGTin.Leave
-            ProcessGTinEntry()
-        End Sub
-
-        Private Sub btnScanQrCode_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnScanQrCode.ClickButtonArea
-            Dim gTinScanner As New GTinScanner
-            gTinScanner.ShowDialog()
-            txtGTin.Text = gTinScanner.GTin
-            gTinScanner.Close()
-            ProcessGTinEntry()
-        End Sub
-
-        Private Sub ProcessGTinEntry()
-            Dim cGTin As String = txtGTin.Text
-            If cGTin IsNot Nothing AndAlso cGTin <> "" Then
-                RaiseEvent GTinChanged(txtGTin.Text)
+            If FormShown Then
+                ProcessGTinEntry()
             End If
         End Sub
 
+        Private Sub btnScanQrCode_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnScanQrCode.ClickButtonArea
+            If FormShown Then
+                Dim gTinScanner As New GTinScanner
+                gTinScanner.ShowDialog()
+                txtGTin.Text = gTinScanner.GTin
+                gTinScanner.Close()
+                ProcessGTinEntry()
+            End If
+        End Sub
+
+        Private Sub ProcessGTinEntry()
+            If FormShown Then
+                Dim cGTin As String = txtGTin.Text
+                If cGTin IsNot Nothing AndAlso cGTin <> "" Then
+                    RaiseEvent GTinChanged(txtGTin.Text)
+                End If
+            End If
+        End Sub
+
+        Private Sub btnClear_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnClear.ClickButtonArea
+            txtGTin.Text = ""
+            txtFileNo.Text = ""
+            txtDose.Text = 1
+            txtDuration.Text = 1
+            txtBarCode.Text = ""
+            txtFileNo.Text = ""
+            txtItemCode.Text = ""
+            txtGenericName.Text = ""
+            cboItemIdNo.SelectedIndex = -1
+            cboGender.SelectedIndex = -1
+            cboAgeYmd.SelectedValue = EnumToCode(YearMonthDaySelection.Year)
+            'cboPatientType.SelectedValue = 
+        End Sub
     End Class
 
 End Namespace

@@ -50,6 +50,7 @@ Public Class BfMain
         If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
             TextDisplayLanguage = GlobalVariables.AppCurrentCultureInfo.Name
         End If
+        InitializationMode = False
         ' Add any initialization after the InitializeComponent() call.
     End Sub
 
