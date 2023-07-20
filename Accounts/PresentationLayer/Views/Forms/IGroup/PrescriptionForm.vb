@@ -4,6 +4,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
@@ -13,6 +14,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IPrescriptionView
 
         Public Event PrintLabels() Implements IPrescriptionView.PrintLabels
+        Public Event ItemCodeChanged(itemCode As String, bs As BindingSource) Implements IPrescriptionView.ItemCodeChanged
         Private _prescriptionDetails As New List(Of PrescriptionItemView)
 
         Public Sub New()
@@ -131,10 +133,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub BindPrescriptionDetails()
             SuspendLayout()
             bsPrescriptionDetails.DataSource = Nothing
-            DataGridViewPrescriptionDetails.Refresh()
+            DataGridViewPrescriptionItems.Refresh()
             bsPrescriptionDetails.DataSource = PrescriptionDetails
             bsPrescriptionDetails.AllowNew = True
-            With DataGridViewPrescriptionDetails
+            With DataGridViewPrescriptionItems
                 .AutoGenerateColumns = False
                 .DataSource = bsPrescriptionDetails
             End With
@@ -160,6 +162,37 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub btnPrintDosageLabels_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPrintDosageLabels.ClickButtonArea
             RaiseEvent PrintLabels()
+        End Sub
+
+        Private Sub dataGridView1_CellValidating(ByVal sender As Object, ByVal e As DataGridViewCellValidatingEventArgs) Handles DataGridViewPrescriptionItems.CellValidating
+            If DataGridViewPrescriptionItems.IsCurrentCellDirty() Then
+                With DataGridViewPrescriptionItems
+                    Dim cColumnName = .CurrentCell.OwningColumn.Name
+                    If cColumnName = $"dgvItemCode" Then
+                        'ValidateItemCode(DataGridViewPrescriptionItems, e)
+                    ElseIf cColumnName = $"dgvItemName" Then
+                        'ValidateItemName(DataGridViewPurchaseDetails, e
+                    End If
+                End With
+            End If
+        End Sub
+
+        Private Sub ValidateItemCode(ByRef dgv As CtDataGridView, ByRef e As DataGridViewCellValidatingEventArgs)
+            Dim code As String = dgv.CurrentRow.Cells("dgvItemCode").EditedFormattedValue
+            'RaiseEvent ItemCodeChanged(code, bsPurchaseDetails)
+            Dim cItemName = dgv.CurrentRow().Cells("dgvItemName").Value
+            If Not String.IsNullOrEmpty(cItemName) Then
+                If dgv.CurrentRow.Cells("dgvUnitCount").Value < 2 Then
+                    SendKeys.Send("{Tab}{Tab}")
+                Else
+                    SendKeys.Send("{Tab}")
+                End If
+            Else
+                If Not String.IsNullOrEmpty(code) Then
+                    e.Cancel = True
+                    Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", code, "fieldDescription", "Item Code"})
+                End If
+            End If
         End Sub
 
     End Class

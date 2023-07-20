@@ -9,6 +9,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Duration As String
         Property GenericName As String
         Property ItemCode As String
+        Property ItemIdNo As Integer
         Property ItemName As String
         Property LabelPrinted As Boolean
         Property PrescriptionItemIdNo As Int32
@@ -24,6 +25,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Dosage As String
         Property Duration As String
         Property GenericName As String
+        Property ItemIdNo As Int32
         Property ItemCode As String
         Property ItemName As String
         Property LabelPrinted As Boolean

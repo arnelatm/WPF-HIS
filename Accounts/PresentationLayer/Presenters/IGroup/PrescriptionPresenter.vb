@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.BusinessLayer
+﻿Imports System.Dynamic
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
@@ -9,6 +10,7 @@ Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.DataLayer
 Imports AATM.Libraries.GlobalFuncNSub
+Imports Telerik.Licensing
 Imports Telerik.WinControls.UI
 
 Namespace PresentationLayer.Presenters
@@ -16,9 +18,10 @@ Namespace PresentationLayer.Presenters
     Public Class PrescriptionPresenter(Of TM As New)
         Inherits CommonPresenter(Of IPrescriptionView, TM)
 
-        Private _prescriptionDetailsService = New AccountsService("PrescriptionItem")
+        Private _prescriptionItemService = New AccountsService("PrescriptionItem")
         Private _computerName As String
         Private _labelIdNo As Int32
+        Private ReadOnly _itemDetailsService As New AccountsService("ItemDetails")
 
         Public Sub New(itemView As IPrescriptionView)
             MyBase.New(itemView)
@@ -28,6 +31,13 @@ Namespace PresentationLayer.Presenters
             WithTreeView = False
             _computerName = Environment.MachineName
             AddHandler View.PrintLabels, AddressOf OnPrintLabels
+            AddHandler View.ItemCodeChanged, AddressOf OnItemCodeChanged
+        End Sub
+
+        Private Sub OnItemCodeChanged(itemCode As String, bs As BindingSource)
+            Dim prescriptionItem As PrescriptionItemView = bs.Current
+            InitializePrescriptionItemValues(prescriptionItem, itemCode)
+            bs.ResetCurrentItem()
         End Sub
 
         Private Sub OnPrintLabels()
@@ -46,6 +56,33 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
+        Private Sub InitializePrescriptionItemValues(ByRef prescriptionDetail As PrescriptionItemView, itemCode As String)
+            Dim itemDetail As ItemDetailsModel = GetItemDetailsCode(itemCode)
+            If itemDetail IsNot Nothing Then
+                If itemCode <> itemDetail.ItemDetailsCode Then
+                    With prescriptionDetail
+                        prescriptionDetail.ItemIdNo = itemDetail.IdNo
+                        prescriptionDetail.ItemName = itemDetail.ItemDetailsName
+                        itemDetail.ItemDetailsCode = itemDetail.ItemDetailsCode
+                    End With
+                End If
+            Else
+                prescriptionDetail.ItemIdNo = ""
+                prescriptionDetail.ItemName = ""
+                AATM.Libraries.MessagingLibrary.Messaging.Show(True, "Invalid ItemDetails Code!")
+            End If
+        End Sub
+
+        Private Function GetItemDetailsCode(itemCode As String) As ItemDetailsModel
+            Dim itemDetailsIdNo As Int32 = GetitemDetailsIdNo(itemCode)
+            Dim itemDetails As ItemDetailsModel = _itemDetailsService.GetRecordByIdNo(Of ItemDetailsModel)(itemDetailsIdNo)
+            Return itemDetails
+        End Function
+
+        Private Function GetitemDetailsIdNo(itemCode As String) As Int32
+            Return GetRecordFieldWithKeyG(Of Int32)(itemCode, "ItemDetails", "ItemCode", "IdNo")
+        End Function
+
         Private Sub UpdatePrintableLabels()
             For Each item As PrescriptionItemView In View.PrescriptionDetails
                 If item.PrintLabel Then
@@ -57,11 +94,11 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub MarkLabelAsPrintable(item As PrescriptionItemView)
-            _prescriptionDetailsService.GenericUpdateRecordWithIdNo(Of Boolean)(item.PrescriptionItemIdNo, "PMRMedicineDetails", "LabelPrinted", False)
+            _prescriptionItemService.GenericUpdateRecordWithIdNo(Of Boolean)(item.PrescriptionItemIdNo, "PMRMedicineDetails", "LabelPrinted", False)
         End Sub
 
         Private Sub MarkLabelAsNotPrintable(item As PrescriptionItemView)
-            _prescriptionDetailsService.GenericUpdateRecordWithIdNo(Of Boolean)(item.PrescriptionItemIdNo, "PMRMedicineDetails", "LabelPrinted", True)
+            _prescriptionItemService.GenericUpdateRecordWithIdNo(Of Boolean)(item.PrescriptionItemIdNo, "PMRMedicineDetails", "LabelPrinted", True)
         End Sub
 
         Private Sub CreateLabels()
@@ -136,7 +173,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub UpdatePrescriptionDetail(transKey As Int32?)
             Dim prescriptionDetails As New List(Of PrescriptionItemModel)
-            prescriptionDetails = _prescriptionDetailsService.GetRecordsWithGroupIdNo(Of PrescriptionItemModel)(transKey)
+            prescriptionDetails = _prescriptionItemService.GetRecordsWithGroupIdNo(Of PrescriptionItemModel)(transKey)
             GlobalVariables.Mapper.Map(prescriptionDetails, View.PrescriptionDetails)
         End Sub
 

@@ -36,7 +36,7 @@
             Me.imgList = New System.Windows.Forms.ImageList(Me.components)
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-            Me.DataGridViewDoctorsPatient = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewDoctorsPatient = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvFileNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvPatientName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvFileType = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -50,7 +50,7 @@
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.cboDoctorName = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.CGroupBox1 = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
-            Me.DataGridViewPrescriptionDetails = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewPrescriptionDetails = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.ItemNameEnglishDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.DosageEnglishDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.DurationDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -589,14 +589,14 @@
         Friend WithEvents imgList As ImageList
         Friend WithEvents CFlowLayout2 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-        Friend WithEvents DataGridViewDoctorsPatient As Libraries.CBaseControlsLibrary.CDataGridView
+        Friend WithEvents DataGridViewDoctorsPatient As Libraries.CBaseControlsLibrary.CtDataGridView
         Friend WithEvents CreateDateDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dtpTransactionDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
         Friend WithEvents cboDoctorName As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents txtDoctorCode As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents DataGridViewPrescriptionDetails As Libraries.CBaseControlsLibrary.CDataGridView
+        Friend WithEvents DataGridViewPrescriptionDetails As Libraries.CBaseControlsLibrary.CtDataGridView
         Friend WithEvents bsPrescriptionDetails As BindingSource
         Friend WithEvents CGroupBox1 As Libraries.CBaseControlsLibrary.CGroupBox
         Friend WithEvents dgvFileNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
