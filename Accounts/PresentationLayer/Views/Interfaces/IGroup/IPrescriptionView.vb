@@ -19,6 +19,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property TransKey As Integer
         Property PrescriptionDetails As List(Of PrescriptionItemView)
         Event PrintLabels()
+        Event ItemCodeChanged(itemCode As String, bs As BindingSource)
     End Interface
 
 End Namespace

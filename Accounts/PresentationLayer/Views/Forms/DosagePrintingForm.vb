@@ -386,6 +386,7 @@ Namespace PresentationLayer.Views.Forms
             cboItemIdNo.SelectedIndex = -1
             cboGender.SelectedIndex = -1
             cboAgeYmd.SelectedValue = EnumToCode(YearMonthDaySelection.Year)
+            txtPatientName.Text = ""
             'cboPatientType.SelectedValue = 
         End Sub
     End Class

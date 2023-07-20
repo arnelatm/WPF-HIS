@@ -11,6 +11,7 @@ Namespace BusinessLayer
         End Sub
 
         Property RowNbr As Int32
+        Property ItemIdNo As Int32
         Property ItemName As String
         Property Dosage As String
         Property Duration As String

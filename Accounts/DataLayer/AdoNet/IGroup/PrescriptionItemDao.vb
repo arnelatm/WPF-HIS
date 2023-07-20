@@ -20,6 +20,7 @@ Namespace DataLayer.AdoNet
                                     "GenericName," &
                                     "ItemCode," &
                                     "ItemName," &
+                                    "ItemIdNo," &
                                     "LabelPrinted," &
                                     "PrescriptionItemIdNo," &
                                     "PrintLabel," &
@@ -28,6 +29,10 @@ Namespace DataLayer.AdoNet
 
         Public Overrides Function GetDB()
             Return _db
+        End Function
+
+        Public Overrides Function GetPrimaryFieldName()
+            Return "ItemIdNo"
         End Function
 
 

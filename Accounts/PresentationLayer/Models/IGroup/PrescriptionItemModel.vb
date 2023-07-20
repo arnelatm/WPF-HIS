@@ -10,6 +10,7 @@
         Property Duration As String
         Property GenericName As String
         Property ItemCode As String
+        Property ItemIdNo As Int32
         Property ItemName As String
         Property LabelPrinted As Boolean
         Property PrescriptionItemIdNo As Int32
