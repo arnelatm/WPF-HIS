@@ -20,6 +20,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property PrescriptionDetails As List(Of PrescriptionItemView)
         Event PrintLabels()
         Event ItemCodeChanged(itemCode As String, bs As BindingSource)
+        Event GTinScanned(GTin As String, bs As BindingSource, ByRef productCode As String)
     End Interface
 
 End Namespace

@@ -32,6 +32,7 @@ Namespace PresentationLayer.Presenters
             _computerName = Environment.MachineName
             AddHandler View.PrintLabels, AddressOf OnPrintLabels
             AddHandler View.ItemCodeChanged, AddressOf OnItemCodeChanged
+            AddHandler View.GTinScanned, AddressOf OnGTinScanned
         End Sub
 
         Private Sub OnItemCodeChanged(itemCode As String, bs As BindingSource)
@@ -59,13 +60,12 @@ Namespace PresentationLayer.Presenters
         Private Sub InitializePrescriptionItemValues(ByRef prescriptionDetail As PrescriptionItemView, itemCode As String)
             Dim itemDetail As ItemDetailsModel = GetItemDetailsCode(itemCode)
             If itemDetail IsNot Nothing Then
-                If itemCode <> itemDetail.ItemDetailsCode Then
-                    With prescriptionDetail
-                        prescriptionDetail.ItemIdNo = itemDetail.IdNo
-                        prescriptionDetail.ItemName = itemDetail.ItemDetailsName
-                        itemDetail.ItemDetailsCode = itemDetail.ItemDetailsCode
-                    End With
-                End If
+                With prescriptionDetail
+                    prescriptionDetail.ItemIdNo = itemDetail.IdNo
+                    prescriptionDetail.ItemName = itemDetail.ItemDetailsName
+                    prescriptionDetail.ItemCode = itemDetail.ItemDetailsCode
+                    prescriptionDetail.GenericName = itemDetail.GenericName
+                End With
             Else
                 prescriptionDetail.ItemIdNo = ""
                 prescriptionDetail.ItemName = ""
@@ -80,7 +80,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Function GetitemDetailsIdNo(itemCode As String) As Int32
-            Return GetRecordFieldWithKeyG(Of Int32)(itemCode, "ItemDetails", "ItemCode", "IdNo")
+            Return GetRecordFieldWithKeyG(Of Int32)(itemCode, "ItemDetails", "Item_Code", "Primary_Key")
         End Function
 
         Private Sub UpdatePrintableLabels()
@@ -91,6 +91,14 @@ Namespace PresentationLayer.Presenters
                     MarkLabelAsNotPrintable(item)
                 End If
             Next
+        End Sub
+
+        Private Sub OnGTinScanned(gTin As String, bs As BindingSource, ByRef productCode As String)
+            Dim idNo As Int32 = GetRecordFieldWithKeyG(Of Int32)(gTin, "ItemDetails", "GTin", "Primary_Key")
+            Dim purchaseDetail As PurchaseDetailView = bs.Current
+            Dim itemDetailsModel As ItemDetailsModel = _prescriptionItemService.GetRecordByIdNo(Of ItemDetailsModel)(idNo)
+            productCode = itemDetailsModel.ItemDetailsCode
+            OnItemCodeChanged(productCode, bs)
         End Sub
 
         Private Sub MarkLabelAsPrintable(item As PrescriptionItemView)
@@ -119,7 +127,7 @@ Namespace PresentationLayer.Presenters
                 If item.PrintLabel Then
                     Dim itemName As String
                     Dim duration As String = IIf(item.Duration Is Nothing OrElse item.Duration = "", "", " for " & item.Duration)
-                    Dim dosage As String = item.Dosage.Trim() + duration
+                    Dim dosage As String = IIf(item.Dosage Is Nothing, "", item.Dosage.Trim()) + duration
                     Dim durationArabic As String = ""
                     Dim dosageAra As String
                     If duration = "" Then

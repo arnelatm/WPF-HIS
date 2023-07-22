@@ -1,9 +1,6 @@
-﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
+﻿Imports System.Dynamic
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Common.PresentationLayer.Models
-Imports AATM.Common.PresentationLayer.Presenters
-Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
@@ -15,6 +12,8 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event PrintLabels() Implements IPrescriptionView.PrintLabels
         Public Event ItemCodeChanged(itemCode As String, bs As BindingSource) Implements IPrescriptionView.ItemCodeChanged
+        Public Event GTinScanned(GTin As String, bs As BindingSource, ByRef productCode As String) Implements IPrescriptionView.GTinScanned
+
         Private _prescriptionDetails As New List(Of PrescriptionItemView)
 
         Public Sub New()
@@ -169,9 +168,9 @@ Namespace PresentationLayer.Views.Forms
                 With DataGridViewPrescriptionItems
                     Dim cColumnName = .CurrentCell.OwningColumn.Name
                     If cColumnName = $"dgvItemCode" Then
-                        'ValidateItemCode(DataGridViewPrescriptionItems, e)
+                        ValidateItemCode(DataGridViewPrescriptionItems, e)
                     ElseIf cColumnName = $"dgvItemName" Then
-                        'ValidateItemName(DataGridViewPurchaseDetails, e
+                        ValidateItemName(DataGridViewPrescriptionItems, e)
                     End If
                 End With
             End If
@@ -179,18 +178,41 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ValidateItemCode(ByRef dgv As CtDataGridView, ByRef e As DataGridViewCellValidatingEventArgs)
             Dim code As String = dgv.CurrentRow.Cells("dgvItemCode").EditedFormattedValue
-            'RaiseEvent ItemCodeChanged(code, bsPurchaseDetails)
+            RaiseEvent ItemCodeChanged(code, bsPrescriptionDetails)
             Dim cItemName = dgv.CurrentRow().Cells("dgvItemName").Value
             If Not String.IsNullOrEmpty(cItemName) Then
-                If dgv.CurrentRow.Cells("dgvUnitCount").Value < 2 Then
-                    SendKeys.Send("{Tab}{Tab}")
-                Else
-                    SendKeys.Send("{Tab}")
-                End If
+                SendKeys.Send("{Tab}")
             Else
                 If Not String.IsNullOrEmpty(code) Then
                     e.Cancel = True
                     Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", code, "fieldDescription", "Item Code"})
+                End If
+            End If
+        End Sub
+
+        Private Sub ValidateItemName(ByRef dgv As CtDataGridView, ByRef e As DataGridViewCellValidatingEventArgs)
+            Dim findText = dgv.CurrentRow.Cells("dgvItemName").EditedFormattedValue
+            If findText.Contains("<GS>") Then
+                Dim scannedProduct As Object = New ExpandoObject
+                scannedProduct = Accounts.AccountHelpers.GetScannedData(findText)
+                Dim productCode As String = ""
+                RaiseEvent GTinScanned(scannedProduct.GTin, bsPrescriptionDetails, productCode)
+                If productCode IsNot Nothing Then
+                    RaiseEvent ItemCodeChanged(productCode, bsPrescriptionDetails)
+                    bsPrescriptionDetails.ResetBindings(False)
+                End If
+            Else
+                Dim form As New ItemDetailsFinder(findText, dgv)
+                If form.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                    Dim item As ItemDetailsModel = form.ItemDetails
+                    If item Is Nothing Then
+                        Dim msg = Messaging.GetParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", findText, "fieldDescription", "Medicine Name"})
+                        Messaging.Show(msg)
+                        e.Cancel = True
+                        dgv.Rows(e.RowIndex).ErrorText = msg
+                    End If
+                Else
+                    e.Cancel = True
                 End If
             End If
         End Sub

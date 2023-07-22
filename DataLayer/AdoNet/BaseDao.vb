@@ -1040,12 +1040,13 @@ Namespace AdoNet
             Return GetDb().Update(sql, {"@Value", value})
         End Function
 
-        Public Function GenericUpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T) As Integer _
+        Public Function GenericUpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, value As T, Optional primaryKeyFieldName As String = "IdNo") As Integer _
             Implements IBaseDao.GenericUpdateRecordWithIdNo
+            Dim primaryKey = IIf(primaryKeyFieldName Is Nothing, GetPrimaryFieldName(), primaryKeyFieldName)
             Dim sql As String =
                     " Update [" & tableName & "] " &
                     " Set " & fieldName & " = @Value" &
-                    " where " & GetPrimaryFieldName() & " = " & idNo
+                    " where " & primaryKey & " = " & idNo
             Return GetDb().Update(sql, {"@Value", value})
         End Function
 
