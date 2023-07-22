@@ -2,6 +2,9 @@
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.GlobalFuncNSub
+Imports AATM.DataLayer.AdoNet.Extensions
+Imports Extensions = AATM.DataLayer.AdoNet.Extensions
 
 Namespace DataLayer.AdoNet
     ' Data access object for ItemDetails
@@ -149,9 +152,9 @@ Namespace DataLayer.AdoNet
                             "Pack1", ItemDetails.Pack1,
                             "Pack2", ItemDetails.Pack2,
                             "Pack3", ItemDetails.Pack3
-                            }
-                            '"Created_By_Branch", ItemDetails.Created_By_Branch,
-                            '"Price_Cash", ItemDetails.Price_Cash
+}
+            '"Created_By_Branch", ItemDetails.Created_By_Branch,
+            '"Price_Cash", ItemDetails.Price_Cash
         End Function
 
         'Private Function TakeDrug(ItemDetails As ItemDetails) As Object()
@@ -226,6 +229,16 @@ Namespace DataLayer.AdoNet
         '    End If
         '    Return qty
         'End Function
+
+
+        Public Function GetItemDetailBySearchString(searchString As String)
+            Dim sql As String
+
+            sql = "SELECT Primary_Key,Item_Code,ItemNameEnglish,Ean_Code,GTIN from ItemDetails where BranchId = " + IIf(GlobalVariables.BranchIdNo = 1, "02", "01") + " AND (ItemNameEnglish like '%" + searchString + "%' Or " +
+                  "Item_Code = @searchString or GTIN = @searchString or Ean_Code = @searchString ) order by ItemNameEnglish"
+            Dim params As String() = {"@SearchString", searchString}
+            Return _db.ExecuteReader(sql, params)
+        End Function
 
         Public Overrides Function GetActualFieldName(fieldName As String)
             Dim actualFieldName As String

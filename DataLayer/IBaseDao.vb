@@ -28,7 +28,7 @@ Public Interface IBaseDao
 
     Function FindFieldNew(tableName As String, findableControl As IFindableControl, sortOrderKey As String, Optional filter As String = Nothing) As Integer
 
-    Function GenericUpdateRecordWithIdNo(Of T)(idNo As Integer, tableName As String, fieldName As String, value As T) As Integer
+    Function GenericUpdateRecordWithIdNo(Of T)(idNo As Integer, tableName As String, fieldName As String, value As T, Optional primaryKey As String = "IdNo") As Integer
 
     Function GetControlSecurityIdNo(searchValue As String, Optional menu As Boolean = False) As String
 

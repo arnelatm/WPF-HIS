@@ -599,6 +599,12 @@
     <Compile Include="PresentationLayer\Views\Forms\IGroup\PrescriptionForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsFinder.Designer.vb">
+      <DependentUpon>ItemDetailsFinder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsFinder.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\SterilizationLabelPrinting.designer.vb">
       <DependentUpon>SterilizationLabelPrinting.vb</DependentUpon>
     </Compile>
@@ -1967,6 +1973,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\PrescriptionForm.resx">
       <DependentUpon>PrescriptionForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsFinder.resx">
+      <DependentUpon>ItemDetailsFinder.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\SterilizationLabelPrinting.resx">
