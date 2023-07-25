@@ -912,5 +912,14 @@
     <Build Include="dbo\Views\PrescriptionItem_View.sql" />
     <Build Include="dbo\Views\PrescriptionDetails_View.sql" />
     <Build Include="dbo\Tables\report.sql" />
+    <Build Include="dbo\Tables\LinkWarehouse.sql" />
+    <Build Include="dbo\Tables\LinkUser.sql" />
+    <Build Include="dbo\Tables\LinkSupplier.sql" />
+    <Build Include="dbo\Views\ZWarehouse_View.sql" />
+    <Build Include="dbo\Views\ZPurchaseDetail_View.sql" />
+    <Build Include="dbo\Views\ZPurchase_View.sql" />
+    <Build Include="dbo\Views\ZProduct_View.sql" />
+    <Build Include="dbo\Views\Medicines_View.sql" />
+    <Build Include="dbo\Views\ItemDetailsFinder_View.sql" />
   </ItemGroup>
 </Project>
