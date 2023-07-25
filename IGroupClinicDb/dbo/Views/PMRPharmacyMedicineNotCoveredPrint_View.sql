@@ -1,34 +1,27 @@
-﻿
-
-
-
-
-
-
-CREATE VIEW [dbo].[PMRPharmacyMedicineNotCoveredPrint_View]
+﻿CREATE VIEW dbo.PMRPharmacyMedicineNotCoveredPrint_View
 AS
 SELECT        A.Trans_Key, A.TransNBR, A.TransType, A.TransDateEnglish, A.PatientType, A.BillType, A.Series, A.RegistrationNo, A.TokenNo, A.InsuranceID, A.InsuranceGroupID, A.DoctorID, A.bp, A.Breathing, A.Height, A.Weight, 
                          A.Temprature, A.PulseRate, A.Respiratory, A.VisitNo, A.VisitType, A.DurationOfIllness, A.DurationYMD, A.AdmissionType, A.FixedAlergies, A.DrugAlergies, A.OtherAlergies, A.ChiefComplaint, A.NoteAlergies, A.SignificantSign, 
                          A.OtherCondition, A.Diagnosis, A.DX_Code1, A.DX_Code2, A.DX_Code3, A.DX_Code4, A.MedicationNote, A.IllnessType, A.Lmp, A.LmpDate, A.Cmf, A.CmfNote, A.Los, A.Eda, A.DoctorRemark, A.UserID, A.Create_Date, A.MachineID, 
-                         B.PrescriptionItemIdNo, B.RowNBR, B.item_code, B.qty, B.unit, B.saleprice, B.discountper, B.discountamt, B.BillAmt, B.ItemnameEnglish, B.itemnamearabic, B.dosageID, B.DosageEnglish, B.DosageArabic, B.Duration, C.PatientNameEnglish, C.Age, 
-                         C.Sex, C.AgeYMD, D.CountryNameEng, E.EmpNameEnglish, E.OPDNo, F.NameEnglish AS Company, g.PharmacyTransNBR, g.Printed, C.InsCardExpiry, k.RegistrationNo AS SFDACode, m.[Generic name] AS GenericName, 
-                         m.[Trade name] AS TradeName, m.[Strength value] AS StrengthValue, m.[Unit of strength] AS UnitOfStrength, m.[Dosage Form] AS DosageForm, m.Volume, m.[Unit of volume] AS UnitOfVolume, m.[Package type] AS PackageType, 
-                         m.[Package size] AS PackageSize, IsNull(B.LabelPrinted,0) as LabelPrinted
+                         B.PrescriptionItemIdNo, B.RowNBR, B.Item_Code, B.Qty, B.Unit, B.SalePrice, B.DiscountPer, B.DiscountAmt, B.BillAmt, B.ItemNameEnglish, B.ItemNameArabic, B.DosageID, B.DosageEnglish, B.DosageArabic, B.Duration, 
+                         C.PatientNameEnglish, C.Age, C.Sex, C.AgeYMD, D.CountryNameEng, E.EmpNameEnglish, E.OPDNo, F.NameEnglish AS Company, g.PharmacyTransNBR, g.Printed, C.InsCardExpiry, k.RegistrationNo AS SFDACode, 
+                         m.[Generic name] AS GenericName, m.[Trade name] AS TradeName, m.[Strength value] AS StrengthValue, m.[Unit of strength] AS UnitOfStrength, m.[Dosage Form] AS DosageForm, m.Volume, m.[Unit of volume] AS UnitOfVolume, 
+                         m.[Package type] AS PackageType, m.[Package size] AS PackageSize, ISNULL(B.LabelPrinted, 0) AS LabelPrinted, B.itemid
 FROM            dbo.PMRPatientGeneralInfo AS A LEFT OUTER JOIN
                          dbo.PMRMedicineNotCoveredDetails_View AS B ON A.Trans_Key = B.Trans_Key LEFT OUTER JOIN
                          dbo.PatientDetails AS C ON A.RegistrationNo = C.RegistrationNo AND A.Series = C.Series LEFT OUTER JOIN
                          dbo.CountryMaster AS D ON C.CountryIOTA = D.CountryIOTA LEFT OUTER JOIN
                          dbo.EmployeeDetails AS E ON A.DoctorID = E.EmpID LEFT OUTER JOIN
                          dbo.InsuranceDetails AS F ON A.InsuranceID = F.InsuranceID LEFT OUTER JOIN
-                         dbo.PMRPharmacyInvoiceGenerated AS g ON A.Trans_Key = g.PMRTrans_Key AND B.item_code = g.Item_Code LEFT OUTER JOIN
-                         dbo.ItemRegistration AS k ON B.item_code COLLATE database_DEFAULT = k.Item_Code COLLATE database_DEFAULT LEFT OUTER JOIN
+                         dbo.PMRPharmacyInvoiceGenerated AS g ON A.Trans_Key = g.PMRTrans_Key AND B.Item_Code = g.Item_Code LEFT OUTER JOIN
+                         dbo.ItemRegistration AS k ON B.Item_Code COLLATE database_DEFAULT = k.Item_Code COLLATE database_DEFAULT LEFT OUTER JOIN
                          dbo.DrugList AS m ON k.RegistrationNo COLLATE database_DEFAULT = m.RegistrationNo COLLATE database_DEFAULT
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PMRPharmacyMedicineNotCoveredPrint_View';
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'       Begin Table = "k"
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'        Begin Table = "k"
             Begin Extent = 
                Top = 138
                Left = 274
@@ -77,13 +70,15 @@ End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PMRPharmacyMedicineNotCoveredPrint_View';
 
 
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+         Configuration = "(H (1[41] 4[7] 2[34] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -145,7 +140,7 @@ Begin DesignProperties =
    End
    Begin DiagramPane = 
       Begin Origin = 
-         Top = 0
+         Top = -96
          Left = 0
       End
       Begin Tables = 
@@ -167,7 +162,7 @@ Begin DesignProperties =
                Right = 453
             End
             DisplayFlags = 280
-            TopColumn = 23
+            TopColumn = 26
          End
          Begin Table = "C"
             Begin Extent = 
@@ -219,5 +214,7 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
          End
-  ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PMRPharmacyMedicineNotCoveredPrint_View';
+ ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PMRPharmacyMedicineNotCoveredPrint_View';
+
+
 

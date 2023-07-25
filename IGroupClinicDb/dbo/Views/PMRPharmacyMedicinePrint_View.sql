@@ -1,15 +1,13 @@
-﻿
-
-CREATE VIEW [dbo].[PMRPharmacyMedicinePrint_View]
+﻿CREATE VIEW dbo.PMRPharmacyMedicinePrint_View
 AS
 SELECT        A.Trans_Key, A.TransNBR, A.TransType, A.TransDateEnglish, A.PatientType, A.BillType, A.Series, A.RegistrationNo, A.TokenNo, A.InsuranceID, A.InsuranceGroupID, A.DoctorID, A.bp, A.Breathing, A.Height, A.Weight, 
                          A.Temprature, A.PulseRate, A.Respiratory, A.VisitNo, A.VisitType, A.DurationOfIllness, A.DurationYMD, A.AdmissionType, A.FixedAlergies, A.DrugAlergies, A.OtherAlergies, A.ChiefComplaint, A.NoteAlergies, A.SignificantSign, 
                          A.OtherCondition, A.Diagnosis, A.DX_Code1, A.DX_Code2, A.DX_Code3, A.DX_Code4, A.MedicationNote, A.IllnessType, A.Lmp, A.LmpDate, A.Cmf, A.CmfNote, A.Los, A.Eda, A.DoctorRemark, A.UserID, A.Create_Date, A.MachineID, 
-                         B.PrescriptionItemIdNo, B.RowNBR, B.Item_Code, B.Qty, B.Unit, B.SalePrice, B.DiscountPer, B.DiscountAmt, B.BillAmt, B.ItemNameEnglish, B.ItemNameArabic, B.DosageID, B.DosageEnglish, B.DosageArabic, B.Duration, C.PatientNameEnglish, 
-                         C.Age, C.Sex, C.AgeYMD, D.CountryNameEng, E.EmpNameEnglish, E.OPDNo, F.NameEnglish AS Company, g.PharmacyTransNBR, g.Printed, C.InsCardExpiry, k.RegistrationNo AS SFDACode, ISNULL(m.[Generic name], 
-                         n.[Generic name]) AS GenericName, ISNULL(m.[Trade name], n.[Trade name]) AS TradeName, ISNULL(m.[Strength value], n.[Strength value]) AS StrengthValue, ISNULL(m.[Unit of strength], n.[Unit of strength]) AS UnitOfStrength, 
-                         ISNULL(m.[Dosage Form], n.[Dosage Form]) AS DosageForm, ISNULL(m.Volume, n.Volume) AS Volume, ISNULL(m.[Unit of volume], n.[Unit of volume]) AS UnitOfVolume, ISNULL(m.[Package type], n.[Package type]) 
-                         AS PackageType, ISNULL(m.[Package size], n.[Package size]) AS PackageSize, B.LabelPrinted
+                         B.PrescriptionItemIdNo, B.RowNBR, B.Item_Code, B.Qty, B.Unit, B.SalePrice, B.DiscountPer, B.DiscountAmt, B.BillAmt, B.ItemNameEnglish, B.ItemNameArabic, B.DosageID, B.DosageEnglish, B.DosageArabic, B.Duration, 
+                         C.PatientNameEnglish, C.Age, C.Sex, C.AgeYMD, D.CountryNameEng, E.EmpNameEnglish, E.OPDNo, F.NameEnglish AS Company, g.PharmacyTransNBR, g.Printed, C.InsCardExpiry, k.RegistrationNo AS SFDACode, 
+                         ISNULL(m.[Generic name], n.[Generic name]) AS GenericName, ISNULL(m.[Trade name], n.[Trade name]) AS TradeName, ISNULL(m.[Strength value], n.[Strength value]) AS StrengthValue, ISNULL(m.[Unit of strength], 
+                         n.[Unit of strength]) AS UnitOfStrength, ISNULL(m.[Dosage Form], n.[Dosage Form]) AS DosageForm, ISNULL(m.Volume, n.Volume) AS Volume, ISNULL(m.[Unit of volume], n.[Unit of volume]) AS UnitOfVolume, 
+                         ISNULL(m.[Package type], n.[Package type]) AS PackageType, ISNULL(m.[Package size], n.[Package size]) AS PackageSize, B.LabelPrinted, o.Primary_Key AS ItemIdNo
 FROM            dbo.PMRPatientGeneralInfo AS A INNER JOIN
                          dbo.PMRMedicineDetails_View AS B ON A.Trans_Key = B.Trans_Key LEFT OUTER JOIN
                          dbo.PatientDetails AS C ON A.RegistrationNo = C.RegistrationNo AND A.Series = C.Series LEFT OUTER JOIN
@@ -26,42 +24,43 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @leve
 
 
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'       Begin Table = "k"
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'End
+         Begin Table = "k"
             Begin Extent = 
-               Top = 138
-               Left = 274
-               Bottom = 268
-               Right = 444
+               Top = 39
+               Left = 1208
+               Bottom = 169
+               Right = 1378
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "o"
             Begin Extent = 
-               Top = 798
-               Left = 38
-               Bottom = 928
-               Right = 239
+               Top = 0
+               Left = 987
+               Bottom = 345
+               Right = 1188
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "m"
             Begin Extent = 
-               Top = 930
-               Left = 38
-               Bottom = 1060
-               Right = 259
+               Top = 343
+               Left = 1245
+               Bottom = 473
+               Right = 1466
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "n"
             Begin Extent = 
-               Top = 1062
-               Left = 38
-               Bottom = 1192
-               Right = 259
+               Top = 183
+               Left = 1214
+               Bottom = 313
+               Right = 1435
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -77,7 +76,7 @@ EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'       Beg
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
          Column = 1440
-         Alias = 900
+         Alias = 3225
          Table = 1170
          Output = 720
          Append = 1400
@@ -95,13 +94,15 @@ End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PMRPharmacyMedicinePrint_View';
 
 
+
+
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane1', @value = N'[0E232FF0-B466-11cf-A24F-00AA00A3EFFF, 1.00]
 Begin DesignProperties = 
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+         Configuration = "(H (1[31] 4[61] 2[3] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -169,73 +170,74 @@ Begin DesignProperties =
       Begin Tables = 
          Begin Table = "A"
             Begin Extent = 
-               Top = 6
-               Left = 38
-               Bottom = 136
-               Right = 222
+               Top = 12
+               Left = 276
+               Bottom = 753
+               Right = 460
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "B"
             Begin Extent = 
-               Top = 6
-               Left = 260
-               Bottom = 136
-               Right = 453
+               Top = 186
+               Left = 515
+               Bottom = 902
+               Right = 708
             End
             DisplayFlags = 280
             TopColumn = 32
          End
          Begin Table = "C"
             Begin Extent = 
-               Top = 138
-               Left = 38
-               Bottom = 268
-               Right = 236
+               Top = 25
+               Left = 715
+               Bottom = 229
+               Right = 913
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 19
          End
          Begin Table = "D"
             Begin Extent = 
-               Top = 270
-               Left = 38
-               Bottom = 400
-               Right = 236
+               Top = 588
+               Left = 1100
+               Bottom = 718
+               Right = 1298
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "E"
             Begin Extent = 
-               Top = 402
-               Left = 38
-               Bottom = 532
-               Right = 284
+               Top = 599
+               Left = 0
+               Bottom = 729
+               Right = 246
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "F"
             Begin Extent = 
-               Top = 534
-               Left = 38
-               Bottom = 664
-               Right = 247
+               Top = 352
+               Left = 0
+               Bottom = 544
+               Right = 209
             End
             DisplayFlags = 280
             TopColumn = 0
          End
          Begin Table = "g"
             Begin Extent = 
-               Top = 666
-               Left = 38
-               Bottom = 796
-               Right = 232
+               Top = 465
+               Left = 811
+               Bottom = 728
+               Right = 1005
             End
             DisplayFlags = 280
             TopColumn = 0
-         End
-  ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PMRPharmacyMedicinePrint_View';
+         ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'PMRPharmacyMedicinePrint_View';
+
+
 
