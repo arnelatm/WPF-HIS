@@ -21,9 +21,10 @@
 
 
 
+
 CREATE VIEW [dbo].[APDetails_View]	
   AS
-With FirstRecord(FirstRecordDate) as (Select LastPostingDate from LastPosting where TransactionName = 'First Record')
+With FirstRecord(FirstRecordDate) as (Select LastPostingDate from LastPosting where TransactionName = 'Oldest Record')
 (SELECT 'AP' AS 'JournalCode'
 	  ,ai.[IdNo]
       ,ai.[Sequence]

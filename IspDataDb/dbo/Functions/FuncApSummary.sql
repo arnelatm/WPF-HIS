@@ -26,7 +26,7 @@ RETURN
 			Sum(dbo.ApDetails_View.Credit-dbo.ApDetails_View.Debit) as 'Amount', 
 			dbo.ApDetails_View.TransactionType
 	 FROM   dbo.ApDetails_View INNER JOIN dbo.Account ON dbo.ApDetails_View.AccountIdNo = dbo.Account.IDNo
-	 WHERE  (dbo.Account.SpecialAccount = 'AP' or dbo.Account.SpecialAccount='PD') AND TRANSACTIONDATE>=@BeginningDate AND TRANSACTIONDATE<=@EndingDate
+	 WHERE  (dbo.Account.SpecialAccount = 'AP' or dbo.Account.SpecialAccount = 'AS'  OR dbo.Account.SpecialAccount='PD') AND TRANSACTIONDATE>=@BeginningDate AND TRANSACTIONDATE<=@EndingDate
 	 Group By dbo.ApDetails_View.SupplierIdNo,dbo.ApDetails_View.TransactionType 
 	)
 	Union

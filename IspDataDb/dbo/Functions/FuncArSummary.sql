@@ -22,7 +22,7 @@ RETURN
 			Sum(dbo.ArDetails_View.Debit-dbo.ArDetails_View.Credit) as 'Amount', 
 			dbo.ArDetails_View.TransactionType
 	 FROM   dbo.ArDetails_View INNER JOIN dbo.Account ON dbo.ArDetails_View.AccountIdNo = dbo.Account.IDNo
-	 WHERE  (dbo.Account.SpecialAccount = 'AR' or dbo.Account.SpecialAccount='SD') AND TRANSACTIONDATE>=@BeginningDate AND TRANSACTIONDATE<=@EndingDate
+	 WHERE  (dbo.Account.SpecialAccount = 'AR' or dbo.Account.SpecialAccount='CA' or dbo.Account.SpecialAccount='SD') AND TRANSACTIONDATE>=@BeginningDate AND TRANSACTIONDATE<=@EndingDate
 	 Group By dbo.ArDetails_View.CustomerIdNo,dbo.ARDetails_View.TransactionType 
 	)
 	Union

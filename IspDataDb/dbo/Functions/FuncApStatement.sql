@@ -22,7 +22,7 @@ RETURN
            dbo.ApDetails_View.SupplierIdNo, dbo.ApDetails_View.InvoiceNo, dbo.ApDetails_View.TransactionDate, dbo.ApDetails_View.ReferenceNo, 
            dbo.ApDetails_View.TransactionType, dbo.APDetails_View.MainNote
 	FROM   dbo.ApDetails_View INNER JOIN dbo.Account ON dbo.ApDetails_View.AccountIdNo = dbo.Account.IDNo
-	WHERE  (dbo.Account.SpecialAccount = 'AP' or dbo.Account.SpecialAccount='PD') and SUPPLIERIDNO=@SupplierIdNo AND TRANSACTIONDATE>=@BeginningDate AND TRANSACTIONDATE<=@EndingDate
+	WHERE  (dbo.Account.SpecialAccount = 'AP' or  dbo.Account.SpecialAccount = 'AS' OR dbo.Account.SpecialAccount='PD') and SUPPLIERIDNO=@SupplierIdNo AND TRANSACTIONDATE>=@BeginningDate AND TRANSACTIONDATE<=@EndingDate
 	Group By dbo.ApDetails_View.JournalCode, dbo.ApDetails_View.JournalIdNo,dbo.ApDetails_View.Notes, dbo.ApDetails_View.SupplierIdNo, dbo.ApDetails_View.InvoiceNo, dbo.ApDetails_View.TransactionDate, dbo.ApDetails_View.ReferenceNo, 
              dbo.ApDetails_View.TransactionType, dbo.APDetails_View.MainNote)
 	Union

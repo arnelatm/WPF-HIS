@@ -3,11 +3,12 @@
     [BranchIdNo]      TINYINT      NULL,
     [SupplierIdNo]    INT          NOT NULL,
     [TransactionDate] DATE         NULL,
+    [ReferenceNo]     VARCHAR (15) NULL,
     [Amount]          MONEY        NOT NULL,
     [DueDate]         DATE         NULL,
-    [InvoiceNo]       VARCHAR (15) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+    [InvoiceNo]       VARCHAR (20) NOT NULL,
     [InvoiceDate]     DATE         NULL,
-    [VatNumber]       VARCHAR (15) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [VatNumber]       VARCHAR (50) NULL,
     [VatAmount]       MONEY        NULL,
     [WarehouseIdNo]   SMALLINT     NULL,
     [Posted]          BIT          NULL,
@@ -25,12 +26,12 @@
 
 
 
-GO
-CREATE NONCLUSTERED INDEX [IX_PurchaseSupplierIdNo]
-    ON [dbo].[Purchase]([SupplierIdNo] ASC);
 
 
 GO
-CREATE NONCLUSTERED INDEX [IX_PurchaseInvoiceNo]
-    ON [dbo].[Purchase]([InvoiceNo] ASC);
+
+
+
+GO
+
 
