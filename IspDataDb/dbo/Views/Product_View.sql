@@ -1,10 +1,13 @@
-﻿CREATE VIEW dbo.Product_View
+﻿
+CREATE VIEW [dbo].[Product_View]
 AS
 SELECT        dbo.Product.IdNo, dbo.Product.CategoryIdNo, dbo.Product.ProductCode, dbo.Product.ProductName, dbo.Product.ProductNameAra, dbo.Product.Barcode, dbo.Product.GTIN, dbo.Product.BaseUnitIdNo, dbo.Product.Active, 
-                         dbo.Product.DateCreated, dbo.Product.DateTimeStamp, dbo.Product.CreatedByIdNo, dbo.Category.IdNo AS Expr1, dbo.Unit.UnitCode, dbo.Unit.UnitName, dbo.Unit.UnitNameAra, dbo.Category.BranchIdNo
-FROM            dbo.Product INNER JOIN
-                         dbo.Category ON dbo.Product.IdNo = dbo.Category.IdNo AND dbo.Product.CategoryIdNo = dbo.Category.IdNo INNER JOIN
-                         dbo.Unit ON dbo.Product.BaseUnitIdNo = dbo.Unit.IdNo
+                         dbo.Product.DateCreated, dbo.Product.DateTimeStamp, dbo.Product.UserIdNo, dbo.Category.CategoryName AS CategoryName, dbo.Unit.UnitCode, dbo.Unit.UnitName, dbo.Unit.UnitNameAra, dbo.Product.BranchIdNo AS BranchIdNo, 
+                         dbo.[User].UserName
+FROM            dbo.Product LEFT OUTER JOIN
+                         dbo.Category ON dbo.Product.BranchIdNo = dbo.Category.BranchIdNo AND dbo.Product.CategoryIdNo = dbo.Category.IdNo LEFT OUTER JOIN
+                         dbo.Unit ON dbo.Product.BaseUnitIdNo = dbo.Unit.IdNo LEFT OUTER JOIN
+                         dbo.[User] ON dbo.Product.UserIdNo = dbo.[User].IdNo
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'Product_View';
 
@@ -15,7 +18,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+         Configuration = "(H (1[83] 4[5] 2[5] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -89,14 +92,14 @@ Begin DesignProperties =
                Right = 219
             End
             DisplayFlags = 280
-            TopColumn = 0
+            TopColumn = 4
          End
          Begin Table = "Category"
             Begin Extent = 
-               Top = 6
-               Left = 257
-               Bottom = 335
-               Right = 482
+               Top = 144
+               Left = 298
+               Bottom = 473
+               Right = 523
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -107,6 +110,16 @@ Begin DesignProperties =
                Left = 542
                Bottom = 279
                Right = 712
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "User"
+            Begin Extent = 
+               Top = 6
+               Left = 257
+               Bottom = 136
+               Right = 448
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -138,4 +151,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'Product_View';
+
+
 

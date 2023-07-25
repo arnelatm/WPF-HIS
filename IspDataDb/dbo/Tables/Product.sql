@@ -15,12 +15,14 @@
     [Price_Cash]     NUMERIC (7, 2) NULL,
     [GTIN]           VARCHAR (14)   NULL,
     [Active]         BIT            NULL,
-    [CreatedByIdNo]  INT            NULL,
-    [DateCreated]    AS             (getdate()),
+    [UserIdNo]       SMALLINT       NULL,
+    [DateCreated]    DATETIME       NOT NULL,
     [DateTimeStamp]  ROWVERSION     NOT NULL,
     CONSTRAINT [PK_ItemDetails] PRIMARY KEY CLUSTERED ([IdNo] ASC),
     CONSTRAINT [IX_Product] UNIQUE NONCLUSTERED ([BranchIdNo] ASC, [ProductCode] ASC)
 );
+
+
 
 
 

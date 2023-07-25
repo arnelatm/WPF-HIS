@@ -7,10 +7,13 @@
     [FullName]          VARCHAR (50)  NULL,
     [FullNameAra]       NVARCHAR (50) NULL,
     [SecurityLevel]     TINYINT       NULL,
+    [Active]            BIT           NULL,
     [DateTimeStamp]     ROWVERSION    NULL,
     CONSTRAINT [PK_UserIDNo] PRIMARY KEY CLUSTERED ([IdNo] ASC),
     CONSTRAINT [FK_User_User] FOREIGN KEY ([IdNo]) REFERENCES [dbo].[User] ([IdNo])
 );
+
+
 
 
 

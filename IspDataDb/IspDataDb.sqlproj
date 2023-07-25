@@ -573,6 +573,12 @@
     <Build Include="dbo\User Defined Types\SaleDetailInsert.sql" />
     <Build Include="dbo\User Defined Types\SaleDetailUpdate.sql" />
     <Build Include="dbo\Functions\fnGetDrugSaleCsv.sql" />
+    <Build Include="dbo\Tables\SupplierLink.sql" />
+    <Build Include="dbo\Tables\DrugSale.sql" />
+    <Build Include="dbo\Tables\DrugAccept.sql" />
+    <Build Include="dbo\Tables\DosageLabelDetail.sql" />
+    <Build Include="dbo\Tables\DosageLabel.sql" />
+    <Build Include="dbo\Stored Procedures\spAccountReconciliationItems.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

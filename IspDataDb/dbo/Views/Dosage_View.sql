@@ -1,28 +1,4 @@
 ﻿
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 CREATE VIEW [dbo].[Dosage_View]
 AS
 SELECT a.IdNo, a.DosageCode, a.Direction, a.DosageUnit, a.Frequency, a.FrequencyTiming, a.Route,		
@@ -41,6 +17,8 @@ SELECT a.IdNo, a.DosageCode, a.Direction, a.DosageUnit, a.Frequency, a.Frequency
 		0.00 as Duration,
 		0 as DurationUnit,
 		0 as FileNo,
+		'' as GenericName,
+		'' as ItemName,
 		a.DateTimeStamp
 FROM            dbo.Dosage AS a LEFT OUTER JOIN
                          dbo.ItemCode AS c ON a.Direction = c.IdNo AND c.CodeGroupIdNo = 10 LEFT OUTER JOIN
