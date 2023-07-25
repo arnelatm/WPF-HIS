@@ -13,6 +13,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property IdNo As Int32
         Property InvoiceDate As Date?
         Property InvoiceNo As String
+        Property ReferenceNo As String
         Property SupplierIdNo As Int32?
         Property TransactionDate As Date?
         Property VatAmount As Decimal
@@ -21,11 +22,11 @@ Namespace PresentationLayer.Views.Interfaces
         Property WarehouseIdNo As Int16
         Property PurchaseDetails As List(Of PurchaseDetailView)
         Property PurchaseHistory As List(Of PurchaseHistoryView)
-        Property ProductsByCode As Object
-        Property UnitsByCode As Object
-        Property UnitsByProduct As Object
+        Property ProductsByCode As DataTable
+        Property UnitsByCode As DataTable
+        Property UnitsByProduct As DataTable
 
-        Event ProductUnitEditing(productIdNo As Int32, bs As BindingSource)
+        Event ProductUnitEditing(productIdNo As Int32) ', bs As BindingSource)
         Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource)
         Event ProductCodeChanged(productCode As String, bs As BindingSource)
         Event GTinScanned(GTin As String, bs As BindingSource, ByRef productCode As String)

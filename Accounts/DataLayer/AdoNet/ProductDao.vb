@@ -23,15 +23,16 @@ Namespace DataLayer.AdoNet
                           "IdNo," &
                           "ProductCode," &
                           "ProductName," &
-                          "ProductNameAra"
+                          "ProductNameAra," &
+                          "UserName"
 
         Private ReadOnly Db As New Db()
 
         Public Function GetRecordByIdNo(idNo) As Product Implements IDao(Of Product).GetRecordByIdNo
             Dim sql As String = " SELECT " & FieldList &
-                    " FROM Product" &
-                    " WHERE IdNo = @IdNo"
-            Dim params() As Object = {"@IdNo", idNo}
+                    " FROM Product_View" &
+                    " WHERE IdNo = @IdNo and BranchIdNo = @BranchIdNo"
+            Dim params() As Object = {"@IdNo", idNo, "@BranchIdNo", GlobalVariables.BranchIdNo}
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
             If data IsNot Nothing Then
                 Dim productUnitDao = New ProductUnitDao
@@ -59,8 +60,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef Product As Product) As Integer Implements IDao(Of Product).AddRecord
             Dim sql As String =
                     " INSERT INTO [Product] " &
-                    " (Active,Barcode,BaseUnitIdNo,BranchIdNo,CategoryIdNo,GTIN,ProductCode,ProductName,ProductNameAra) " &
-                    " VALUES (@Active,@Barcode,@BaseUnitIdNo,@BranchIdNo,@CategoryIdNo,@GTIN,@ProductCode,@ProductName,@ProductNameAra) "
+                    " (Active,Barcode,BaseUnitIdNo,BranchIdNo,CategoryIdNo,GTIN,ProductCode,ProductName,ProductNameAra,UserIdNo) " &
+                    " VALUES (@Active,@Barcode,@BaseUnitIdNo,@BranchIdNo,@CategoryIdNo,@GTIN,@ProductCode,@ProductName,@ProductNameAra,@UserIdNo) "
             Return Db.Insert(sql, Take(Product))
         End Function
 
@@ -92,7 +93,8 @@ Namespace DataLayer.AdoNet
                                     "@IdNo", Product.IdNo,
                                     "@ProductCode", Product.ProductCode,
                                     "@ProductName", Product.ProductName,
-                                    "@ProductNameAra", Product.ProductNameAra
+                                    "@ProductNameAra", Product.ProductNameAra,
+                                    "@UserIdNo", GlobalVariables.UserIdNo
                                 }
         End Function
 
@@ -102,7 +104,7 @@ Namespace DataLayer.AdoNet
             sql = "SELECT IdNo,ProductCode,ProductName,Barcode,GTIN from Product where BranchIdNo = " + GlobalVariables.BranchIdNo.ToString() + " AND (ProductName like '%" + searchString + "%' Or " +
                   "ProductCode = @searchString or GTIN = @searchString or Barcode = @searchString ) order by ProductName"
             Dim params As String() = {"@SearchString", searchString}
-            Return Db.ExecuteReader(sql, params)
+            Return Db.Read(sql, MakeProduct, params).ToList()
         End Function
 
         Private Shared ReadOnly MakeProduct As Func(Of IDataReader, Product) =

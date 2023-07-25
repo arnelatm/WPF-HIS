@@ -71,6 +71,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property Active As Boolean Implements IUserView.Active
+            Get
+                Return chkActive.Checked
+            End Get
+            Set
+                chkActive.Checked = Value
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -81,7 +90,8 @@ Namespace PresentationLayer.Views.Forms
                 {"UserName", TxtUserName},
                 {"Password", TxtPassword},
                 {"SecurityLevel", cacSecurityLevel},
-                {"SecurityGroupIdNo", cacSecurityGroupIdNo}
+                {"SecurityGroupIdNo", cacSecurityGroupIdNo},
+                {"Active", lblActive}
                 }
         End Sub
 

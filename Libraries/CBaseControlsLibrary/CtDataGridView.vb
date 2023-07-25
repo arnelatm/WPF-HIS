@@ -301,8 +301,10 @@ Public Class CtDataGridView
             If CurrentCell.RowIndex() + 1 < RowCount() Then
                 ' hack need next line because currentcell not changing properly dont know why.
                 'ProcessTabKey(keyData)
+                'Select the last row.
+                Rows(RowCount() - 1).Selected = True
                 CurrentCell = Me(FirstEditableColumn, CurrentCell.RowIndex() + 1)
-                Return (keyData)
+                'Return (keyData)
             End If
         End If
         Return Me.ProcessTabKey(keyData)

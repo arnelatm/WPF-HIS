@@ -750,6 +750,69 @@
   <data name="&gt;&gt;txtDateCreated.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="lblUserIdNo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="lblUserIdNo.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblUserIdNo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 106</value>
+  </data>
+  <data name="lblUserIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="lblUserIdNo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 23</value>
+  </data>
+  <data name="lblUserIdNo.TabIndex" type="System.Int32, mscorlib">
+    <value>293</value>
+  </data>
+  <data name="lblUserIdNo.Text" xml:space="preserve">
+    <value>Created By:</value>
+  </data>
+  <data name="lblUserIdNo.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblUserIdNo.Name" xml:space="preserve">
+    <value>lblUserIdNo</value>
+  </data>
+  <data name="&gt;&gt;lblUserIdNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblUserIdNo.Parent" xml:space="preserve">
+    <value>CFlowLayout1</value>
+  </data>
+  <data name="&gt;&gt;lblUserIdNo.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="txtUserName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="txtUserName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>213, 106</value>
+  </data>
+  <data name="txtUserName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtUserName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>175, 23</value>
+  </data>
+  <data name="txtUserName.TabIndex" type="System.Int32, mscorlib">
+    <value>292</value>
+  </data>
+  <data name="&gt;&gt;txtUserName.Name" xml:space="preserve">
+    <value>txtUserName</value>
+  </data>
+  <data name="&gt;&gt;txtUserName.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtUserName.Parent" xml:space="preserve">
+    <value>CFlowLayout1</value>
+  </data>
+  <data name="&gt;&gt;txtUserName.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
   <data name="CFlowLayout1.Location" type="System.Drawing.Point, System.Drawing">
     <value>13, 140</value>
   </data>
@@ -773,54 +836,6 @@
   </data>
   <data name="&gt;&gt;CFlowLayout1.ZOrder" xml:space="preserve">
     <value>12</value>
-  </data>
-  <metadata name="dgvSequence.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dgvSequence.HeaderText" xml:space="preserve">
-    <value>Seq</value>
-  </data>
-  <data name="dgvSequence.Width" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <data name="dgvUnitIdNo.HeaderText" xml:space="preserve">
-    <value>Unit Name - Id No</value>
-  </data>
-  <data name="dgvUnitQty.HeaderText" xml:space="preserve">
-    <value>Unit Quantity</value>
-  </data>
-  <data name="dgvUnitQty.Width" type="System.Int32, mscorlib">
-    <value>60</value>
-  </data>
-  <data name="BaseQtyDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>Base Quantity</value>
-  </data>
-  <data name="BaseQtyDataGridViewTextBoxColumn.Width" type="System.Int32, mscorlib">
-    <value>60</value>
-  </data>
-  <data name="dgvProductIdNo.HeaderText" xml:space="preserve">
-    <value>ProductIdNo</value>
-  </data>
-  <data name="dgvProductIdNo.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="IdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
-    <value>IdNo</value>
-  </data>
-  <data name="IdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <metadata name="bsProductUnits.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>675, 17</value>
-  </metadata>
-  <data name="DataGridViewProductUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="DataGridViewProductUnits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>366, 161</value>
-  </data>
-  <data name="DataGridViewProductUnits.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="&gt;&gt;DataGridViewProductUnits.Name" xml:space="preserve">
     <value>DataGridViewProductUnits</value>
@@ -908,6 +923,66 @@
   </data>
   <data name="&gt;&gt;txtProductCode.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <metadata name="dgvSequence.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dgvSequence.HeaderText" xml:space="preserve">
+    <value>Seq</value>
+  </data>
+  <data name="dgvSequence.Width" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="dgvUnitIdNo.HeaderText" xml:space="preserve">
+    <value>Unit Name - Id No</value>
+  </data>
+  <data name="dgvUnitQty.HeaderText" xml:space="preserve">
+    <value>Unit Quantity</value>
+  </data>
+  <data name="dgvUnitQty.Width" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
+  <data name="BaseQtyDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>Base Quantity</value>
+  </data>
+  <data name="BaseQtyDataGridViewTextBoxColumn.Width" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
+  <data name="dgvProductIdNo.HeaderText" xml:space="preserve">
+    <value>ProductIdNo</value>
+  </data>
+  <data name="dgvProductIdNo.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="IdNoDataGridViewTextBoxColumn.HeaderText" xml:space="preserve">
+    <value>IdNo</value>
+  </data>
+  <data name="IdNoDataGridViewTextBoxColumn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <metadata name="bsProductUnits.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>675, 17</value>
+  </metadata>
+  <data name="DataGridViewProductUnits.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="DataGridViewProductUnits.Size" type="System.Drawing.Size, System.Drawing">
+    <value>366, 161</value>
+  </data>
+  <data name="DataGridViewProductUnits.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewProductUnits.Name" xml:space="preserve">
+    <value>DataGridViewProductUnits</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewProductUnits.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CDataGridView, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewProductUnits.Parent" xml:space="preserve">
+    <value>CFlowLayout2</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewProductUnits.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

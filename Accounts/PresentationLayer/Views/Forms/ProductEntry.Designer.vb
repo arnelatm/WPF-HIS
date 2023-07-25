@@ -25,11 +25,11 @@ Namespace PresentationLayer.Views.Forms
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ProductEntry))
-            Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.txtProductCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblProductCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -55,6 +55,8 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.DataGridViewProductUnits = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.lblUserIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtUserName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.dgvUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
             Me.dgvUnitQty = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.BaseQtyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -355,6 +357,8 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1.Controls.Add(Me.chkActive)
             Me.CFlowLayout1.Controls.Add(Me.lblDateCreated)
             Me.CFlowLayout1.Controls.Add(Me.txtDateCreated)
+            Me.CFlowLayout1.Controls.Add(Me.lblUserIdNo)
+            Me.CFlowLayout1.Controls.Add(Me.txtUserName)
             resources.ApplyResources(Me.CFlowLayout1, "CFlowLayout1")
             Me.CFlowLayout1.Name = "CFlowLayout1"
             '
@@ -500,8 +504,8 @@ Namespace PresentationLayer.Views.Forms
             '
             'DataGridViewProductUnits
             '
-            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewProductUnits.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            DataGridViewCellStyle6.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewProductUnits.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle6
             Me.DataGridViewProductUnits.AutoGenerateColumns = False
             Me.DataGridViewProductUnits.BegFindValue = Nothing
             Me.DataGridViewProductUnits.Cached = False
@@ -509,14 +513,14 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewProductUnits.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvUnitIdNo, Me.dgvUnitQty, Me.BaseQtyDataGridViewTextBoxColumn, Me.dgvProductIdNo, Me.IdNoDataGridViewTextBoxColumn})
             Me.DataGridViewProductUnits.DataFilter = Nothing
             Me.DataGridViewProductUnits.DataSource = Me.bsProductUnits
-            DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewProductUnits.DefaultCellStyle = DataGridViewCellStyle5
+            DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewProductUnits.DefaultCellStyle = DataGridViewCellStyle10
             Me.DataGridViewProductUnits.DgvFooter = Nothing
             Me.DataGridViewProductUnits.DisplayOnly = False
             Me.DataGridViewProductUnits.Ea = Nothing
@@ -548,9 +552,9 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.dgvSequence.BegFindValue = Nothing
             Me.dgvSequence.DataPropertyName = "Sequence"
-            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle2
+            DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
+            Me.dgvSequence.DefaultCellStyle = DataGridViewCellStyle7
             Me.dgvSequence.DisplayOnly = True
             Me.dgvSequence.EditingMode = False
             Me.dgvSequence.EndFindValue = Nothing
@@ -566,14 +570,52 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvSequence.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvSequence.Translatable = False
             '
+            'lblUserIdNo
+            '
+            Me.lblUserIdNo.BackColor = System.Drawing.Color.Transparent
+            Me.lblUserIdNo.DisplayOnly = True
+            Me.lblUserIdNo.EditingMode = False
+            resources.ApplyResources(Me.lblUserIdNo, "lblUserIdNo")
+            Me.lblUserIdNo.Name = "lblUserIdNo"
+            Me.lblUserIdNo.Translatable = True
+            '
+            'txtUserName
+            '
+            Me.txtUserName.BackColor = System.Drawing.Color.White
+            Me.txtUserName.BegFindValue = Nothing
+            Me.txtUserName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtUserName.ComputedValue = False
+            Me.txtUserName.CustomFormat = Nothing
+            Me.txtUserName.DataBoundControl = True
+            Me.txtUserName.DisplayOnly = True
+            Me.txtUserName.EditingMode = False
+            Me.txtUserName.EndFindValue = Nothing
+            Me.txtUserName.FieldDescription = Nothing
+            Me.txtUserName.FieldName = Nothing
+            Me.txtUserName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtUserName.FindEnabled = True
+            Me.CFlowLayout1.SetFlowBreak(Me.txtUserName, True)
+            resources.ApplyResources(Me.txtUserName, "txtUserName")
+            Me.txtUserName.ForeColor = System.Drawing.Color.Black
+            Me.txtUserName.LinkedLabel = Me.lblUserIdNo
+            Me.txtUserName.MaximumValue = Nothing
+            Me.txtUserName.MinimumValue = Nothing
+            Me.txtUserName.Name = "txtUserName"
+            Me.txtUserName.OldValue = Nothing
+            Me.txtUserName.OverrideMaxLength = 0
+            Me.txtUserName.ReadOnly = True
+            Me.txtUserName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtUserName.Translatable = False
+            Me.txtUserName.ValueIsMandatory = True
+            '
             'dgvUnitIdNo
             '
             Me.dgvUnitIdNo.AutoComplete = False
             Me.dgvUnitIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvUnitIdNo.DataPropertyName = "UnitIdNo"
-            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-            Me.dgvUnitIdNo.DefaultCellStyle = DataGridViewCellStyle3
+            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
+            Me.dgvUnitIdNo.DefaultCellStyle = DataGridViewCellStyle8
             Me.dgvUnitIdNo.EditingMode = False
             resources.ApplyResources(Me.dgvUnitIdNo, "dgvUnitIdNo")
             Me.dgvUnitIdNo.Name = "dgvUnitIdNo"
@@ -601,9 +643,9 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.dgvProductIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.dgvProductIdNo.DataPropertyName = "ProductIdNo"
-            DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-            Me.dgvProductIdNo.DefaultCellStyle = DataGridViewCellStyle4
+            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
+            Me.dgvProductIdNo.DefaultCellStyle = DataGridViewCellStyle9
             resources.ApplyResources(Me.dgvProductIdNo, "dgvProductIdNo")
             Me.dgvProductIdNo.Name = "dgvProductIdNo"
             Me.dgvProductIdNo.ReadOnly = True
@@ -669,5 +711,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents BaseQtyDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents dgvProductIdNo As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents lblUserIdNo As CLabel
+        Friend WithEvents txtUserName As CTextBox
     End Class
 End NameSpace

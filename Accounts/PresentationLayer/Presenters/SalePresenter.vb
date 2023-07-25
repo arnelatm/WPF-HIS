@@ -468,7 +468,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub SetProductUnits(productIdNo As Int16)
             Dim data As New ArrayList
-            data.Add({"ProductUnit_View", "UnitsByProduct", "UnitName,IdNo,UnitCode", "ProductIdNo = " + productIdNo.ToString()})
+            data.Add({"ProductUnit_View", "UnitsByProduct", "IdNo,UnitName,UnitCode", "ProductIdNo = " + productIdNo.ToString()})
             CreateLookupDataThread(data)
         End Sub
 

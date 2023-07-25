@@ -1,0 +1,8 @@
+insert into ispdata.dbo.PurchaseDetail(PurchaseIdNo,[Sequence],ProductIdNo,Quantity,BonusQuantity,UnitIdNo,BatchNo,Price,DiscountAmount,UnitSalesPrice,
+			ExpiryDate,VatAmount,VATPercent,NetAmount)
+select PurchaseIdNo,[Sequence],ProductIdNo,Quantity,BonusQuantity,UnitIdNo,BatchNo,Price,DiscountAmount,UnitSalesPrice,ExpiryDate,VatAmount,VATPercent,NetAmount 
+			from iGroupClinic.dbo.ZPurchaseDetail_View
+
+then run this:
+
+update purchasedetail set netamount = Round(quantity*Price-Discountamount+VatAmount,2)

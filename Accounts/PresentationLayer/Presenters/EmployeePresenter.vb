@@ -141,10 +141,10 @@ Namespace PresentationLayer.Presenters
             '                     {"Employee", "SupervisorIdNo", Nothing, "Supervisor=1"}}
             Dim data As New ArrayList
             data.Add({"Bank", "BankIdNo", Nothing, Nothing})
-            data.Add({"Country", "CountryCode", "CountryName,CountryCode", Nothing})
+            data.Add({"Country", "CountryCode", "CountryCode,CountryName", Nothing})
             data.Add({"Department", "DepartmentIdNo", Nothing, Nothing})
             data.Add({"Designation", "DesignationIdNo", Nothing, Nothing})
-            data.Add({"Country", "NationalityCode", "CountryName,CountryCode", Nothing})
+            data.Add({"Country", "NationalityCode", "CountryCode,CountryName", Nothing})
             data.Add({"Religion", "ReligionIdNo", Nothing, Nothing})
             data.Add({"PayCycle", "PayCycleIdNo", Nothing, Nothing})
             data.Add({"PayGroup", "PayGroupIdNo", Nothing, Nothing})

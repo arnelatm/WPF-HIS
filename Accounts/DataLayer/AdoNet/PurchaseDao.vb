@@ -13,7 +13,6 @@ Namespace DataLayer.AdoNet
         Implements IDao(Of Purchase), IPurchaseDao
 
         Private Const FieldList = "Amount," &
-                                  "BranchIdNo," &
                                   "Cancelled," &
                                   "DateCreated," &
                                   "DueDate," &
@@ -21,6 +20,7 @@ Namespace DataLayer.AdoNet
                                   "InvoiceDate," &
                                   "InvoiceNo," &
                                   "Posted," &
+                                  "ReferenceNo," &
                                   "SupplierIdNo," &
                                   "TransactionDate," &
                                   "VatAmount," &
@@ -33,14 +33,16 @@ Namespace DataLayer.AdoNet
 
         Public Function GetRecordByIdNo(idNo) As Purchase _
         Implements IDao(Of Purchase).GetRecordByIdNo
-            Dim sql As String = " SELECT " & FieldList & " FROM [Purchase]" & " WHERE IdNo = @IdNo"
-            Dim params() As Object = {"@IdNo", idNo}
+            Dim sql As String = " SELECT " & FieldList & " FROM [Purchase]" & " WHERE IdNo = @IdNo and BranchIdNo = @BranchIdNo"
+            Dim params() As Object = {"@IdNo", idNo, "@BranchIdNo", GlobalVariables.BranchIdNo}
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
             If data IsNot Nothing Then
                 Dim purchaseDetailDao = New PurchaseDetailDao
                 data.PurchaseDetails = purchaseDetailDao.GetRecordsWithGroupIdNo(idNo, "sequence")
-                Dim productIdNo As Int32 = data.PurchaseDetails(0).ProductIdNo
-                data.PurchaseHistory = GetPurchaseHistory(productIdNo)
+                If data.PurchaseDetails.Count() > 0 Then
+                    Dim productIdNo As Int32 = data.PurchaseDetails(0).ProductIdNo
+                    data.PurchaseHistory = GetPurchaseHistory(productIdNo)
+                End If
             End If
             Return data
         End Function
@@ -61,6 +63,7 @@ Namespace DataLayer.AdoNet
                     "InvoiceDate = @InvoiceDate," &
                     "InvoiceNo = @InvoiceNo," &
                     "Posted = @Posted," &
+                    "ReferenceNo = @Reference," &
                     "SupplierIdNo = @SupplierIdNo," &
                     "TransactionDate = @TransactionDate," &
                     "VatAmount = @VatAmount," &
@@ -74,38 +77,39 @@ Namespace DataLayer.AdoNet
             Implements IDao(Of Purchase).AddRecord
             Dim sql As String =
                     " INSERT INTO [Purchase] " &
-                    " (Amount,BranchIdNo,Cancelled,DueDate,InvoiceDate,InvoiceNo,Posted,SupplierIdNo,TransactionDate,VatAmount,VatNumber,WarehouseIdNo)" &
-                    " VALUES (@Amount,@BranchIdNo,@Cancelled,@DueDate,@InvoiceDate,@InvoiceNo,@Posted,@SupplierIdNo,@TransactionDate,@VatAmount,@VatNumber,@WarehouseIdNo)"
+                    " (Amount,BranchIdNo,Cancelled,DueDate,InvoiceDate,InvoiceNo,Posted,ReferenceNo,SupplierIdNo,TransactionDate,VatAmount,VatNumber,WarehouseIdNo)" &
+                    " VALUES (@Amount,@BranchIdNo,@Cancelled,@DueDate,@InvoiceDate,@InvoiceNo,@Posted,@ReferenceNo,@SupplierIdNo,@TransactionDate,@VatAmount,@VatNumber,@WarehouseIdNo)"
             Return Db.Insert(sql, Take(Purchase))
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, Purchase) =
                                     Function(reader) _
             New Purchase() With {.Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
-                                  .BranchIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("BranchIdNo")),
                                   .Cancelled = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cancelled")),
                                   .DueDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("DueDate")),
                                   .IdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("IdNo")),
                                   .InvoiceDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("InvoiceDate")),
-                                  .InvoiceNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("InvoiceNo")),
+                                  .InvoiceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("InvoiceNo")),
                                   .Posted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Posted")),
+                                  .ReferenceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ReferenceNo")),
                                   .SupplierIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("SupplierIdNo")),
                                   .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),
                                   .VatAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("VatAmount")),
                                   .VatNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("VatNumber")),
-                                  .WarehouseIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("WarehouseIdNo"))
+                                  .WarehouseIdNo = GlobalVariables.BranchIdNo
                                 }
 
         Private Function Take(Purchase As Purchase) As Object()
             Return New Object() {
                                     "Amount", Purchase.Amount,
-                                    "BranchIdNo", Purchase.BranchIdNo,
+                                    "BranchIdNo", GlobalVariables.BranchIdNo,
                                     "Cancelled", Purchase.Cancelled,
                                     "DueDate", Purchase.DueDate,
                                     "IdNo", Purchase.IdNo,
                                     "InvoiceDate", Purchase.InvoiceDate,
                                     "InvoiceNo", Purchase.InvoiceNo,
                                     "Posted", Purchase.Posted,
+                                    "ReferenceNo", Purchase.ReferenceNo,
                                     "SupplierIdNo", Purchase.SupplierIdNo,
                                     "TransactionDate", Purchase.TransactionDate,
                                     "VatAmount", Purchase.VatAmount,

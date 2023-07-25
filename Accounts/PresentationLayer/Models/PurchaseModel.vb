@@ -17,6 +17,7 @@
         Public Property InvoiceNo As String
         Public Property Notes As String
         Public Property Posted As Boolean
+        Public Property ReferenceNo As String
         Public Property SupplierIdNo As Int32?
         Public Property TransactionDate As Date?
         Public Property VatAmount As Decimal

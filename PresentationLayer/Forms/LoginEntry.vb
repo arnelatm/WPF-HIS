@@ -128,6 +128,8 @@ Public Class LoginEntry
 
     Public Property SecurityGroupIdNo As Short Implements IUserView.SecurityGroupIdNo
 
+    Public Property Active As Boolean Implements IUserView.Active
+
     Public Function LoginOk()
         Return _loginOk
     End Function
