@@ -129,6 +129,8 @@ Namespace PresentationLayer.Views.Forms
         Public Property Password As String Implements IUserView.Password
         Public Property SecurityLevel As Short Implements IUserView.SecurityLevel
 
+        Public Property Active As Boolean Implements IUserView.Active
+
         Public Sub ResetMenuSecurity(ByRef cCtrl As Control)
             Static sw = 0
             Static mainParentIdNo As Int32

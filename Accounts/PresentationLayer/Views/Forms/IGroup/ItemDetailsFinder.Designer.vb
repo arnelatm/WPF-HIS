@@ -23,31 +23,32 @@ Partial Class ItemDetailsFinder
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DataGridViewItemDetails = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProductCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Barcode = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.GTIN = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProductBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.ItemDetailModelBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.ItemBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.bsItemDetails = New System.Windows.Forms.BindingSource(Me.components)
         Me.PurchaseDetailBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.txtFinder = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PurchaseDetailTableAdapter = New AATM.Accounts.ISPDATADataSetTableAdapters.PurchaseDetailTableAdapter()
         Me.ProductTableAdapter = New AATM.Accounts.ISPDATADataSetTableAdapters.ProductTableAdapter()
         Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
+        Me.txtFinder = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+        Me.ItemDetailsCode = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.ItemDetailsName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.GenericName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.GTin = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+        Me.IdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DataGridViewItemDetails, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ProductBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ItemDetailModelBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ItemBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.bsItemDetails, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PurchaseDetailBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -55,38 +56,16 @@ Partial Class ItemDetailsFinder
         '
         Me.DataGridViewItemDetails.AutoGenerateColumns = False
         Me.DataGridViewItemDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewItemDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn2, Me.ProductCode, Me.Barcode, Me.GTIN})
-        Me.DataGridViewItemDetails.DataSource = Me.ProductBindingSource
-        Me.DataGridViewItemDetails.Location = New System.Drawing.Point(10, 37)
+        Me.DataGridViewItemDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ItemDetailsCode, Me.ItemDetailsName, Me.GenericName, Me.GTin, Me.IdNo})
+        Me.DataGridViewItemDetails.DataSource = Me.bsItemDetails
+        Me.DataGridViewItemDetails.Location = New System.Drawing.Point(12, 37)
         Me.DataGridViewItemDetails.Name = "DataGridViewItemDetails"
-        Me.DataGridViewItemDetails.Size = New System.Drawing.Size(962, 278)
+        Me.DataGridViewItemDetails.Size = New System.Drawing.Size(970, 278)
         Me.DataGridViewItemDetails.TabIndex = 7
         '
-        'DataGridViewTextBoxColumn2
+        'bsItemDetails
         '
-        Me.DataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DataGridViewTextBoxColumn2.DataPropertyName = "ProductName"
-        Me.DataGridViewTextBoxColumn2.HeaderText = "ProductName"
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        Me.DataGridViewTextBoxColumn2.ReadOnly = True
-        '
-        'ProductCode
-        '
-        Me.ProductCode.DataPropertyName = "ProductCode"
-        Me.ProductCode.HeaderText = "ProductCode"
-        Me.ProductCode.Name = "ProductCode"
-        '
-        'Barcode
-        '
-        Me.Barcode.DataPropertyName = "Barcode"
-        Me.Barcode.HeaderText = "Barcode"
-        Me.Barcode.Name = "Barcode"
-        '
-        'GTIN
-        '
-        Me.GTIN.DataPropertyName = "GTIN"
-        Me.GTIN.HeaderText = "GTIN"
-        Me.GTIN.Name = "GTIN"
+        Me.bsItemDetails.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.ItemDetailsModel)
         '
         'DataGridViewTextBoxColumn1
         '
@@ -121,35 +100,6 @@ Partial Class ItemDetailsFinder
         Me.DataGridViewTextBoxColumn7.DataPropertyName = "PurchaseIdNo"
         Me.DataGridViewTextBoxColumn7.HeaderText = "PurchaseIdNo"
         Me.DataGridViewTextBoxColumn7.Name = "DataGridViewTextBoxColumn7"
-        '
-        'txtFinder
-        '
-        Me.txtFinder.BackColor = System.Drawing.Color.White
-        Me.txtFinder.BegFindValue = Nothing
-        Me.txtFinder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtFinder.ComputedValue = False
-        Me.txtFinder.CustomFormat = Nothing
-        Me.txtFinder.DataBoundControl = True
-        Me.txtFinder.EditingMode = True
-        Me.txtFinder.EndFindValue = Nothing
-        Me.txtFinder.FieldDescription = Nothing
-        Me.txtFinder.FieldName = Nothing
-        Me.txtFinder.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.txtFinder.FindEnabled = False
-        Me.txtFinder.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.txtFinder.ForeColor = System.Drawing.Color.Black
-        Me.txtFinder.LinkedLabel = Nothing
-        Me.txtFinder.Location = New System.Drawing.Point(10, 10)
-        Me.txtFinder.Margin = New System.Windows.Forms.Padding(1)
-        Me.txtFinder.MaximumValue = Nothing
-        Me.txtFinder.MinimumValue = Nothing
-        Me.txtFinder.Name = "txtFinder"
-        Me.txtFinder.OldValue = Nothing
-        Me.txtFinder.OverrideMaxLength = 0
-        Me.txtFinder.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtFinder.Size = New System.Drawing.Size(962, 23)
-        Me.txtFinder.TabIndex = 8
-        Me.txtFinder.Translatable = False
         '
         'DataGridViewTextBoxColumn8
         '
@@ -196,6 +146,129 @@ Partial Class ItemDetailsFinder
         Me.btnCancel.TabIndex = 10
         Me.btnCancel.Text = "Cancel"
         '
+        'txtFinder
+        '
+        Me.txtFinder.BackColor = System.Drawing.Color.White
+        Me.txtFinder.BegFindValue = Nothing
+        Me.txtFinder.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtFinder.ComputedValue = False
+        Me.txtFinder.CustomFormat = Nothing
+        Me.txtFinder.DataBoundControl = True
+        Me.txtFinder.EditingMode = True
+        Me.txtFinder.EndFindValue = Nothing
+        Me.txtFinder.FieldDescription = Nothing
+        Me.txtFinder.FieldName = Nothing
+        Me.txtFinder.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.txtFinder.FindEnabled = False
+        Me.txtFinder.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.txtFinder.ForeColor = System.Drawing.Color.Black
+        Me.txtFinder.LinkedLabel = Nothing
+        Me.txtFinder.Location = New System.Drawing.Point(12, 10)
+        Me.txtFinder.Margin = New System.Windows.Forms.Padding(1)
+        Me.txtFinder.MaximumValue = Nothing
+        Me.txtFinder.MinimumValue = Nothing
+        Me.txtFinder.Name = "txtFinder"
+        Me.txtFinder.OldValue = Nothing
+        Me.txtFinder.OverrideMaxLength = 0
+        Me.txtFinder.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.txtFinder.Size = New System.Drawing.Size(962, 23)
+        Me.txtFinder.TabIndex = 11
+        Me.txtFinder.Translatable = False
+        '
+        'ItemDetailsCode
+        '
+        Me.ItemDetailsCode.BegFindValue = Nothing
+        Me.ItemDetailsCode.DataPropertyName = "ItemDetailsCode"
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
+        Me.ItemDetailsCode.DefaultCellStyle = DataGridViewCellStyle1
+        Me.ItemDetailsCode.EditingMode = False
+        Me.ItemDetailsCode.EndFindValue = Nothing
+        Me.ItemDetailsCode.FieldDescription = Nothing
+        Me.ItemDetailsCode.FieldName = Nothing
+        Me.ItemDetailsCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.ItemDetailsCode.FindEnabled = False
+        Me.ItemDetailsCode.HeaderText = "Medicine Code"
+        Me.ItemDetailsCode.IgnoreCase = False
+        Me.ItemDetailsCode.Name = "ItemDetailsCode"
+        Me.ItemDetailsCode.ReadOnly = True
+        Me.ItemDetailsCode.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ItemDetailsCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.ItemDetailsCode.Translatable = False
+        '
+        'ItemDetailsName
+        '
+        Me.ItemDetailsName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.ItemDetailsName.BegFindValue = Nothing
+        Me.ItemDetailsName.DataPropertyName = "ItemDetailsName"
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+        Me.ItemDetailsName.DefaultCellStyle = DataGridViewCellStyle2
+        Me.ItemDetailsName.EditingMode = False
+        Me.ItemDetailsName.EndFindValue = Nothing
+        Me.ItemDetailsName.FieldDescription = Nothing
+        Me.ItemDetailsName.FieldName = Nothing
+        Me.ItemDetailsName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.ItemDetailsName.FindEnabled = False
+        Me.ItemDetailsName.HeaderText = "Medicine Name"
+        Me.ItemDetailsName.IgnoreCase = False
+        Me.ItemDetailsName.Name = "ItemDetailsName"
+        Me.ItemDetailsName.ReadOnly = True
+        Me.ItemDetailsName.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ItemDetailsName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.ItemDetailsName.Translatable = False
+        Me.ItemDetailsName.Width = 97
+        '
+        'GenericName
+        '
+        Me.GenericName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.GenericName.BegFindValue = Nothing
+        Me.GenericName.DataPropertyName = "GenericName"
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+        Me.GenericName.DefaultCellStyle = DataGridViewCellStyle3
+        Me.GenericName.EditingMode = False
+        Me.GenericName.EndFindValue = Nothing
+        Me.GenericName.FieldDescription = Nothing
+        Me.GenericName.FieldName = Nothing
+        Me.GenericName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.GenericName.FindEnabled = False
+        Me.GenericName.HeaderText = "Generic Name"
+        Me.GenericName.IgnoreCase = False
+        Me.GenericName.Name = "GenericName"
+        Me.GenericName.ReadOnly = True
+        Me.GenericName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.GenericName.Translatable = False
+        Me.GenericName.Width = 92
+        '
+        'GTin
+        '
+        Me.GTin.BegFindValue = Nothing
+        Me.GTin.DataPropertyName = "GTin"
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.White
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+        Me.GTin.DefaultCellStyle = DataGridViewCellStyle4
+        Me.GTin.EditingMode = False
+        Me.GTin.EndFindValue = Nothing
+        Me.GTin.FieldDescription = Nothing
+        Me.GTin.FieldName = Nothing
+        Me.GTin.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.GTin.FindEnabled = False
+        Me.GTin.HeaderText = "GTin"
+        Me.GTin.IgnoreCase = False
+        Me.GTin.Name = "GTin"
+        Me.GTin.ReadOnly = True
+        Me.GTin.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.GTin.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.GTin.Translatable = False
+        '
+        'IdNo
+        '
+        Me.IdNo.DataPropertyName = "IdNo"
+        Me.IdNo.HeaderText = "IdNo"
+        Me.IdNo.Name = "IdNo"
+        Me.IdNo.Visible = False
+        '
         'ItemDetailsFinder
         '
         Me.AcceptButton = Me.btnOk
@@ -203,38 +276,28 @@ Partial Class ItemDetailsFinder
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(984, 358)
+        Me.Controls.Add(Me.txtFinder)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnOk)
-        Me.Controls.Add(Me.txtFinder)
         Me.Controls.Add(Me.DataGridViewItemDetails)
         Me.Name = "ItemDetailsFinder"
         Me.Text = "ItemDetailsFinder"
         CType(Me.DataGridViewItemDetails, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ProductBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ItemDetailModelBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.ItemBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.bsItemDetails, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PurchaseDetailBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents DataGridViewItemDetails As DataGridView
-    Friend WithEvents txtFinder As Libraries.CBaseControlsLibrary.CTextBox
     Friend WithEvents ProductNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents ProductCodeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents BarcodeDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents ItemBindingSource As BindingSource
+    Friend WithEvents bsItemDetails As BindingSource
     Friend WithEvents DataGridViewProductName As DataGridViewTextBoxColumn
-    Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents ItemDetailModelBindingSource As BindingSource
     Friend WithEvents PurchaseDetailBindingSource As BindingSource
     Friend WithEvents PurchaseDetailTableAdapter As ISPDATADataSetTableAdapters.PurchaseDetailTableAdapter
-    Friend WithEvents ProductBindingSource As BindingSource
     Friend WithEvents ProductTableAdapter As ISPDATADataSetTableAdapters.ProductTableAdapter
-    Friend WithEvents ProductCode As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
-    Friend WithEvents Barcode As DataGridViewTextBoxColumn
-    Friend WithEvents GTIN As DataGridViewTextBoxColumn
     Friend WithEvents DgProductName As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
@@ -245,4 +308,10 @@ Partial Class ItemDetailsFinder
     Friend WithEvents DataGridViewTextBoxColumn9 As DataGridViewTextBoxColumn
     Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
     Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
+    Friend WithEvents txtFinder As Libraries.CBaseControlsLibrary.CTextBox
+    Friend WithEvents ItemDetailsCode As Libraries.CBaseControlsLibrary.CDgvTextColumn
+    Friend WithEvents ItemDetailsName As Libraries.CBaseControlsLibrary.CDgvTextColumn
+    Friend WithEvents GenericName As Libraries.CBaseControlsLibrary.CDgvTextColumn
+    Friend WithEvents GTin As Libraries.CBaseControlsLibrary.CDgvTextColumn
+    Friend WithEvents IdNo As DataGridViewTextBoxColumn
 End Class

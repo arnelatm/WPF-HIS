@@ -82,7 +82,7 @@ Namespace PresentationLayer.Presenters
             data.Add({"Product", "ProductsByCode", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "ProductName"})
             'data.Add({"PurchaseDetail", "PurchaseHistory", Nothing, Nothing})
             CreateLookupDataThread(data)
-            data.Clear()
+            'data.Clear()
 
         End Sub
 
@@ -504,13 +504,13 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Sub OnProductUnitEditing(productIdNo As Int32, bs As BindingSource)
+        Private Sub OnProductUnitEditing(productIdNo As Int32) ', bs As BindingSource)
             SetProductUnits(productIdNo)
         End Sub
 
         Private Sub SetProductUnits(productIdNo As Int16)
             Dim data As New ArrayList
-            data.Add({"ProductUnit_View", "UnitsByProduct", "UnitName,IdNo,UnitCode", "ProductIdNo = " + productIdNo.ToString()})
+            data.Add({"ProductUnit_View", "UnitsByProduct", "IdNo,UnitName,UnitCode", "ProductIdNo = " + productIdNo.ToString()})
             CreateLookupDataThread(data)
         End Sub
 

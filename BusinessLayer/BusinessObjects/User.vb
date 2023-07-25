@@ -16,6 +16,7 @@ Namespace BusinessObjects
             End If
         End Sub
 
+        Public Property Active As Boolean
         Public Property IdNo As Int32
         Public Property EmployeeIdNo As Int32?
         Public Property UserName As String

@@ -48,10 +48,10 @@ Namespace PresentationLayer.Views.Forms
             Me.txtAgeYMD = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtAge = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.DataGridViewPrescriptionItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewPrescriptionItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvRowNbr = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvItemCode = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvItemName = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvItemName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvGenericName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvDosage = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.DurationDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -68,15 +68,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDob = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.btnPrintDosageLabels = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.dgvRowNbr = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvItemCode = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvItemName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvGenericName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvDosage = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.DurationDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvTransKey = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.dgvLabelPrinted = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
-            Me.dgvPrintLabel = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
@@ -387,7 +378,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPrescriptionItems.BegFindValue = Nothing
             Me.DataGridViewPrescriptionItems.Cached = False
             Me.DataGridViewPrescriptionItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewPrescriptionItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvRowNbr, Me.dgvItemCode, Me.dgvItemName, Me.dgvItemIdNo, Me.dgvGenericName, Me.dgvDosage, Me.DurationDataGridViewTextBoxColumn, Me.dgvTransKey, Me.dgvLabelPrinted, Me.dgvPrintLabel})
+            Me.DataGridViewPrescriptionItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvRowNbr, Me.dgvItemCode, Me.dgvItemName, Me.dgvGenericName, Me.dgvDosage, Me.DurationDataGridViewTextBoxColumn, Me.dgvTransKey, Me.dgvLabelPrinted, Me.dgvPrintLabel})
             Me.TableLayoutPanel1.SetColumnSpan(Me.DataGridViewPrescriptionItems, 6)
             Me.DataGridViewPrescriptionItems.DataFilter = Nothing
             Me.DataGridViewPrescriptionItems.DataSource = Me.bsPrescriptionDetails

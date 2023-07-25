@@ -22,6 +22,7 @@ Namespace PresentationLayer.Models
         Public Property ProductName As String
         Public Property ProductNameAra As String
         Public Property ProductUnits As List(Of ProductUnitModel)
+        Public Property UserName As String
 
     End Class
 

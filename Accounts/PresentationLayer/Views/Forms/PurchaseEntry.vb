@@ -1,13 +1,11 @@
 ﻿Imports System.ComponentModel
 Imports System.Dynamic
 Imports System.Globalization
-Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports Telerik.WinControls.VirtualKeyboard
 
 Namespace PresentationLayer.Views.Forms
 
@@ -22,9 +20,14 @@ Namespace PresentationLayer.Views.Forms
         Public Event ProductCodeChanged(productCode As String, bs As BindingSource) Implements IPurchaseView.ProductCodeChanged
         Public Event GTinScanned(GTin As String, bs As BindingSource, ByRef productCode As String) Implements IPurchaseView.GTinScanned
         Public Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource) Implements IPurchaseView.ProductUnitSelection
-        Public Event ProductUnitEditing(productIdNo As Int32, bs As BindingSource) Implements IPurchaseView.ProductUnitEditing
+        Public Event ProductUnitEditing(productIdNo As Int32) Implements IPurchaseView.ProductUnitEditing
         Public Event UnitChanged(oldUnit As Int16, newUnit As Int16, bs As BindingSource, formattedValue As String) Implements IPurchaseView.UnitChanged
         Public Event RowChanged(productIdNo As Int32) Implements IPurchaseView.RowChanged
+
+        Public Property ProductsByCode As DataTable Implements IPurchaseView.ProductsByCode
+        Public Property UnitsByCode As DataTable Implements IPurchaseView.UnitsByCode
+        Public Property UnitsByProduct As DataTable Implements IPurchaseView.UnitsByProduct
+
         Public Sub New()
             MyBase.New()
             ' This call is required by the designer.
@@ -45,11 +48,6 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
 #Region "Fields"
-
-
-        Private Property ProductsByCode Implements IPurchaseView.ProductsByCode
-        Private Property UnitsByCode Implements IPurchaseView.UnitsByCode
-        Private Property UnitsByProduct Implements IPurchaseView.UnitsByProduct
 
         Public Property Amount As Decimal Implements IPurchaseView.Amount
             Get
@@ -266,6 +264,15 @@ Namespace PresentationLayer.Views.Forms
             End Get
         End Property
 
+        Public Property ReferenceNo As String Implements IPurchaseView.ReferenceNo
+            Get
+                Return txtReferenceNo.Text
+            End Get
+            Set
+                txtReferenceNo.Text = Value
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -278,7 +285,7 @@ Namespace PresentationLayer.Views.Forms
          {"IdNo", TxtIdNo},
          {"InvoiceNo", txtInvoiceNo},
          {"Posted", chkPosted},
-         {"ReferenceNo", cboWarehouseIdNo},
+         {"ReferenceNo", txtReferenceNo},
          {"SupplierIdNo", cboSupplierIdNo},
          {"TransactionDate", dtpTransactionDate},
          {"VatAmount", txtVatAmount},
@@ -337,15 +344,17 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub SetupDgvColumns()
-            dgvSequence.DisplayOnly = True
-            dgvUnitIdNo.DataSource = UnitsByCode
-            dgvUnitIdNo.DisplayMember = "Name"
-            dgvUnitIdNo.ValueMember = "idNo"
-            dgvUnitIdNo.DisplayStyleForCurrentCellOnly = True
-            dgvQuantity.DecimalPlaces = 0
-            dgvBonusQuantity.DecimalPlaces = 0
-            dgvUnitCost.DisplayOnly = True
-            dgvUnitCost.SetFormat(7, 2)
+            If FormShown Then
+                dgvSequence.DisplayOnly = True
+                dgvUnitIdNo.DataSource = UnitsByCode
+                dgvUnitIdNo.DisplayMember = "Name"
+                dgvUnitIdNo.ValueMember = "IdNo"
+                dgvUnitIdNo.DisplayStyleForCurrentCellOnly = True
+                dgvQuantity.DecimalPlaces = 0
+                dgvBonusQuantity.DecimalPlaces = 0
+                dgvUnitCost.DisplayOnly = True
+                dgvUnitCost.SetFormat(7, 2)
+            End If
         End Sub
 
         Private Sub CboSupplierIdNo_Changed(sender As Object, e As EventArgs) Handles cboSupplierIdNo.Validated, cboSupplierIdNo.SelectionChangeCommitted
@@ -552,7 +561,7 @@ Namespace PresentationLayer.Views.Forms
                     ElseIf cColumnName = $"dgvProductName" Then
                         ValidateProductName(DataGridViewPurchaseDetails, e)
                     ElseIf cColumnName = $"dgvUnitIdNo" Then
-                        ValidateUnit(DataGridViewPurchaseDetails, e)
+                        '(DataGridViewPurchaseDetails, e)
                     ElseIf cColumnName = $"dgvExpiryDate" Then
                         ValidateExpiryDate(DataGridViewPurchaseDetails, e)
                     End If
@@ -633,26 +642,26 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub ValidateUnit(ByRef dgv As CtDataGridView, ByRef e As DataGridViewCellValidatingEventArgs)
-            Dim oldUnitIdNo As Int16 = dgv.CurrentRow.Cells("dgvUnitIdNo").Value
-            Dim newUnitIdNo = DirectCast(dgv.CurrentCell, AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxCell).CellEditingControl.SelectedValue
-            If oldUnitIdNo <> newUnitIdNo Then
-                RaiseEvent UnitChanged(oldUnitIdNo, newUnitIdNo, bsPurchaseDetails, e.FormattedValue)
-            End If
-            'RaiseEvent ProductCodeChanged(code, bsPurchaseDetails)
-            'Dim cProductName = dgv.CurrentRow().Cells("dgvProductName").Value
-            'If Not String.IsNullOrEmpty(cProductName) Then
-            '    SendKeys.Send("{Tab}")
-            '    If dgv.CurrentRow.Cells("dgvUnitCount").Value = 1 Then
-            '        SendKeys.Send("{Tab}")
-            '    End If
-            'Else
-            '    If Not String.IsNullOrEmpty(code) Then
-            '        Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", code, "fieldDescription", "Product Code"})
-            '        e.Cancel = True
-            '    End If
-            'End If
-        End Sub
+        'Private Sub ValidateUnit(ByRef dgv As CtDataGridView, ByRef e As DataGridViewCellValidatingEventArgs)
+        '    Dim oldUnitIdNo As Int16 = dgv.CurrentRow.Cells("dgvUnitIdNo").EditedFormattedValue
+        '    Dim newUnitIdNo As Int16 = CInt(DirectCast(dgv.CurrentCell, AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxCell).CellEditingControl.EditingControlFormattedValue)
+        '    If oldUnitIdNo <> newUnitIdNo Then
+        '        RaiseEvent UnitChanged(oldUnitIdNo, newUnitIdNo, bsPurchaseDetails, e.FormattedValue)
+        '    End If
+        '    'RaiseEvent ProductCodeChanged(code, bsPurchaseDetails)
+        '    'Dim cProductName = dgv.CurrentRow().Cells("dgvProductName").Value
+        '    'If Not String.IsNullOrEmpty(cProductName) Then
+        '    '    SendKeys.Send("{Tab}")
+        '    '    If dgv.CurrentRow.Cells("dgvUnitCount").Value = 1 Then
+        '    '        SendKeys.Send("{Tab}")
+        '    '    End If
+        '    'Else
+        '    '    If Not String.IsNullOrEmpty(code) Then
+        '    '        Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", code, "fieldDescription", "Product Code"})
+        '    '        e.Cancel = True
+        '    '    End If
+        '    'End If
+        'End Sub
 
 
         'Private Sub dataGridView1_CellValidating(ByVal sender As Object, ByVal e As DataGridViewCellValidatingEventArgs) Handles DataGridViewPurchaseDetails.CellValidating
@@ -816,7 +825,7 @@ Namespace PresentationLayer.Views.Forms
                 If cColumnName = "dgvUnitIdNo" Then
                     Dim comboBox = TryCast(e.Control, DataGridViewComboBoxEditingControl)
                     If comboBox IsNot Nothing Then
-                        RaiseEvent ProductUnitEditing(DataGridViewPurchaseDetails.CurrentRow.Cells("dgvProductIdNo").Value, bsPurchaseDetails)
+                        RaiseEvent ProductUnitSelection(DataGridViewPurchaseDetails.CurrentRow.Cells("dgvUnitIdNo").Value, bsPurchaseDetails)
                         comboBox.DropDownStyle = ComboBoxStyle.DropDown
                         comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend
                         comboBox.DataSource = UnitsByProduct
@@ -835,7 +844,7 @@ Namespace PresentationLayer.Views.Forms
             With DataGridViewPurchaseDetails.CurrentCell
                 Dim cColumnName = .OwningColumn.Name()
                 If cColumnName = $"dgvUnitIdNo" Then
-                    RaiseEvent ProductUnitSelection(DataGridViewPurchaseDetails.CurrentRow.Cells("dgvProductIdNo").Value, bsPurchaseDetails)
+                    RaiseEvent ProductUnitEditing(DataGridViewPurchaseDetails.CurrentRow.Cells("dgvProductIdNo").Value)
                 End If
                 '    Beep()
                 '    e.Cancel = True
@@ -1005,6 +1014,9 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private Sub lblDueDate_Click(sender As Object, e As EventArgs) Handles lblDueDate.Click
+
+        End Sub
     End Class
 
 End Namespace

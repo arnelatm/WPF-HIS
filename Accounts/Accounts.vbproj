@@ -2750,6 +2750,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.HolidayTransferItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.HolidayTransferItemModel1.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.IGroup.PmrPatientDisplayModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.ItemDetailsModel2.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.JournalItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.OvertimeItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PayElementAccountModel.datasource" />

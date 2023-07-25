@@ -210,6 +210,12 @@ Namespace PresentationLayer.Views.Forms
                         Messaging.Show(msg)
                         e.Cancel = True
                         dgv.Rows(e.RowIndex).ErrorText = msg
+                    Else
+                        RaiseEvent ItemCodeChanged(item.ItemDetailsCode, bsPrescriptionDetails)
+                        bsPrescriptionDetails.ResetBindings(False)
+                        'bsPrescriptionDetails.Current.ItemDetailsCode = item.ItemDetailsCode
+                        'bsPrescriptionDetails.Current.ItemDetailsCode = item.ItemDetailsCode
+
                     End If
                 Else
                     e.Cancel = True

@@ -256,12 +256,12 @@ Namespace PresentationLayer.Presenters
                     ' assumed the first field is the value member and the second field as the display Value
                     dtl.NameFieldOrig = fieldNames(1)
                     dtl.NameField = TranslateNameField(dtl.TableName, dtl.NameFieldOrig)
-                    dtl.NameDisplayValue = dtl.NameField + "+'-'+" + fieldNames(1) + " COLLATE SQL_Latin1_General_CP1_CI_AS"
+                    dtl.NameDisplayValue = dtl.NameField + "+'-'+" + fieldNames(0) + " COLLATE SQL_Latin1_General_CP1_CI_AS"
                     If dtl.ValueMember Is Nothing Then
                         dtl.ValueMember = fieldNames(0).Trim()
                     End If
                     If dtl.DisplayMember Is Nothing Then
-                        dtl.NameDisplayValue = dtl.NameField + "+'-'+" + fieldNames(1) + " COLLATE SQL_Latin1_General_CP1_CI_AS"
+                        dtl.NameDisplayValue = dtl.NameField + "+'-'+" + fieldNames(0) + " COLLATE SQL_Latin1_General_CP1_CI_AS"
                         dtl.DisplayMember = "IdNo"
                     End If
                     dtl.LuFields = fieldNames(0) + " as IdNo," + dtl.NameDisplayValue + " as Name"

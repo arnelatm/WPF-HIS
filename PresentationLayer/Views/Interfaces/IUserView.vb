@@ -3,6 +3,8 @@
     Public Interface IUserView
         Inherits IView
 
+
+        Property Active As Boolean
         Property IdNo As Int32
         Property UserName As String
         Property EmployeeIdNo As Int32?

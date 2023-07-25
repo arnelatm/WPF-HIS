@@ -136,7 +136,7 @@ Public Class ItemDetailsFinder
 
     Private Sub btnOk_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
         If DataGridViewItemDetails.CurrentRow IsNot Nothing Then
-            SelectedId = DataGridViewItemDetails.CurrentRow.Cells(1).Value
+            SelectedId = DataGridViewItemDetails.CurrentRow.Cells("IdNo").Value
             ItemDetails = _service.GetRecordByIdNo(Of ItemDetailsModel)(SelectedId)
             'Dim ItemDetailsModel = _service.GetRecordByIdNo(Of ItemDetailsModel)(SelectedId)
             'ItemDetails = GlobalVariables.Mapper.Map(ItemDetailsModel, ItemDetails)
@@ -162,6 +162,10 @@ Public Class ItemDetailsFinder
         If e.KeyCode = Keys.Enter Then
             btnOk.PerformClick()
         End If
+    End Sub
+
+    Private Sub ItemBindingSource_CurrentChanged(sender As Object, e As EventArgs) Handles bsItemDetails.CurrentChanged
+
     End Sub
 End Class
 

@@ -73,7 +73,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, PurchaseDetail) =
                                     Function(reader) _
             New PurchaseDetail() With {
-            .AmtBefVat = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("AmtBefVat")),
+            .AmtBefVat = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Decimal)(reader("AmtBefVat")),
             .BaseUnitIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("BaseUnitIdNo")),
             .BatchNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("BatchNo")),
             .BonusQuantity = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("BonusQuantity")),

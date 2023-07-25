@@ -31,6 +31,7 @@ Namespace BusinessLayer
         Public Property ProductName As String
         Public Property ProductNameAra As String
         Public Property ProductUnits As List(Of ProductUnit)
+        Public Property UserName As String
     End Class
 
 End Namespace

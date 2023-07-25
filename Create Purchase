@@ -1,0 +1,5 @@
+SET IDENTITY_INSERT IspdATA.dbo.Purchase On
+insert into ispdata.dbo.Purchase(IdNo,BranchIdNo,SupplierIdNo,ReferenceNo,TransactionDate,WareHouseIdNo,Amount,DueDate,InvoiceNo,InvoiceDate,VatNumber,VatAmount,Posted,DateCreated,UserIdNo) 
+select IdNo,BranchIdNo,SupplierIdNo,ReferenceNo,TransactionDate,WareHouseIdNo,Amount,DueDate,InvoiceNo,InvoiceDate,VatNumber,VatAmount,Posted,DateCreated,UserIdNo
+from iGroupClinic.dbo.ZPurchase_View
+set IDENTITY_INSERT dbo.Purchase Off

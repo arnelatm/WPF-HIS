@@ -233,12 +233,24 @@ Namespace DataLayer.AdoNet
 
         Public Function GetItemDetailBySearchString(searchString As String)
             Dim sql As String
-
-            sql = "SELECT Primary_Key,Item_Code,ItemNameEnglish,Ean_Code,GTIN from ItemDetails where BranchId = " + IIf(GlobalVariables.BranchIdNo = 1, "02", "01") + " AND (ItemNameEnglish like '%" + searchString + "%' Or " +
-                  "Item_Code = @searchString or GTIN = @searchString or Ean_Code = @searchString ) order by ItemNameEnglish"
-            Dim params As String() = {"@SearchString", searchString}
-            Return _db.ExecuteReader(sql, params)
+            searchString = searchString.Trim()
+            Dim searchString2 As String = "%" + searchString.Trim() + "%"
+            sql = "SELECT IdNo,ItemDetailsCode, ItemDetailsName, GenericName, BarCode, GTIN from ItemDetailsFinder_View where (ItemDetailsName like @searchString2 Or " +
+                  "ItemDetailsCode = @searchString or GTIN = @searchString or BarCode = @searchString ) order by ItemDetailsName"
+            Dim params As String() = {"@SearchString", searchString, "@SearchString2", searchString2}
+            Return _db.Read(sql, MakeFinder, params).ToList()
+            'Return _db.ExecuteReader(sql, params)
         End Function
+
+        Private Shared ReadOnly MakeFinder As Func(Of IDataReader, ItemDetails) =
+                            Function(reader) _
+            New ItemDetails() With {
+            .GenericName = Extensions.AsString(reader("GenericName")),
+            .GTin = Extensions.AsString(reader("GTIN")),
+            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .ItemDetailsCode = Extensions.AsString(reader("ItemDetailsCode")),
+            .ItemDetailsName = Extensions.AsString(reader("ItemDetailsName"))
+            }
 
         Public Overrides Function GetActualFieldName(fieldName As String)
             Dim actualFieldName As String

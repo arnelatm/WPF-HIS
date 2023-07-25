@@ -171,6 +171,15 @@ Namespace PresentationLayer.Views.Forms
             End Get
         End Property
 
+        Public Property UserName As String Implements IProductView.UserName
+            Get
+                Return txtUserName.Text
+            End Get
+            Set
+                txtUserName.Text = Value
+            End Set
+        End Property
+
         Private Sub BindProductUnits()
             bsProductUnits.SuspendBinding()
             bsProductUnits.DataSource = Nothing

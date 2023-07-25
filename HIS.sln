@@ -133,6 +133,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQuer
 		Create Unique Index with null values.sql = Create Unique Index with null values.sql
 		CreateEditReset Sequence.sql = CreateEditReset Sequence.sql
 		Delete or restore Archirodon.sql = Delete or restore Archirodon.sql
+		DeleteDuplicateProblem.sql = DeleteDuplicateProblem.sql
 		DeleteDuplicates.sql = DeleteDuplicates.sql
 		EditingSqlQuery.sql = EditingSqlQuery.sql
 		Extract Varchar Fields to Images.sql = Extract Varchar Fields to Images.sql
@@ -152,6 +153,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQuer
 		ResetIdentityField.sql = ResetIdentityField.sql
 		Reverse bit values.sql = Reverse bit values.sql
 		SearchDatabaseForASpecificColumnName.sql = SearchDatabaseForASpecificColumnName.sql
+		Set sequential unique number to a field.sql = Set sequential unique number to a field.sql
 		SqlQuery_2.sql = SqlQuery_2.sql
 		TextFile1.txt = TextFile1.txt
 		Update Query with Join.sql = Update Query with Join.sql
@@ -163,6 +165,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateIspdata", "CreateIspd
 		Change all 599 accountcode to 99 id no in account table.sql = Change all 599 accountcode to 99 id no in account table.sql
 		Create Chart Balance.sql = Create Chart Balance.sql
 		Create ISPDATA Database.sql = Create ISPDATA Database.sql
+		Create Product from IGroupCLinic Data = Create Product from IGroupCLinic Data
+		Create Purchase = Create Purchase
+		Create PurchaseDetail = Create PurchaseDetail
 		Create Salt and user.sql = Create Salt and user.sql
 	EndProjectSection
 EndProject
