@@ -30,23 +30,23 @@ Namespace PresentationLayer.Views.Forms
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(InvTransTypeEntryTv))
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-            Me.lblInvTransTypeCycle = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboAddOrDeduct = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblAddOrDeduct = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtInvTransTypeNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
             Me.txtInvTransTypeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtInvTransTypeCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-            Me.lblAddOrDeduct = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboAddOrDeduct = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.txtInvTransTypeNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
+            Me.lblInvTransTypeCycle = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
+            Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -105,13 +105,54 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Controls.Add(Me.lblActive, 2, 11)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             '
-            'lblInvTransTypeCycle
+            'cboAddOrDeduct
             '
-            Me.lblInvTransTypeCycle.DisplayOnly = True
-            Me.lblInvTransTypeCycle.EditingMode = False
-            resources.ApplyResources(Me.lblInvTransTypeCycle, "lblInvTransTypeCycle")
-            Me.lblInvTransTypeCycle.Name = "lblInvTransTypeCycle"
-            Me.lblInvTransTypeCycle.Translatable = True
+            Me.cboAddOrDeduct.BackColor = System.Drawing.Color.White
+            Me.cboAddOrDeduct.BegFindValue = Nothing
+            Me.cboAddOrDeduct.ChangingSearchValueOnly = False
+            Me.cboAddOrDeduct.CurrentSearchTerm = ""
+            Me.cboAddOrDeduct.DataValue = Nothing
+            Me.cboAddOrDeduct.DefaultValue = Nothing
+            Me.cboAddOrDeduct.DisplayMember = "Name"
+            resources.ApplyResources(Me.cboAddOrDeduct, "cboAddOrDeduct")
+            Me.cboAddOrDeduct.Editable = True
+            Me.cboAddOrDeduct.EditingMode = True
+            Me.cboAddOrDeduct.EndFindValue = Nothing
+            Me.cboAddOrDeduct.FieldDescription = Nothing
+            Me.cboAddOrDeduct.FieldName = Nothing
+            Me.cboAddOrDeduct.FilterRule = Nothing
+            Me.cboAddOrDeduct.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboAddOrDeduct.FindEnabled = False
+            Me.cboAddOrDeduct.ForeColor = System.Drawing.Color.Black
+            Me.cboAddOrDeduct.FormattingEnabled = True
+            Me.cboAddOrDeduct.HideWhenNotEditingOrAdding = False
+            Me.cboAddOrDeduct.IgnoreCase = False
+            Me.cboAddOrDeduct.LimitToList = False
+            Me.cboAddOrDeduct.LinkedLabel = Me.lblAddOrDeduct
+            Me.cboAddOrDeduct.Name = "cboAddOrDeduct"
+            Me.cboAddOrDeduct.OldValue = 0
+            Me.cboAddOrDeduct.OriginalDataSource = Nothing
+            Me.cboAddOrDeduct.OriginalList = Nothing
+            Me.cboAddOrDeduct.OverrideDropDownStyleList = False
+            Me.cboAddOrDeduct.PreviousSearchTerm = Nothing
+            Me.cboAddOrDeduct.PropertySelector = Nothing
+            Me.cboAddOrDeduct.ReadOnlyCombo = False
+            Me.cboAddOrDeduct.SuggestBoxHeight = 200
+            Me.cboAddOrDeduct.SuggestListOrderRule = Nothing
+            Me.cboAddOrDeduct.TextToSearch = Nothing
+            Me.cboAddOrDeduct.Translatable = False
+            Me.cboAddOrDeduct.ValueIsMandatory = False
+            Me.cboAddOrDeduct.ValueIsNullable = False
+            Me.cboAddOrDeduct.ValueIsNumeric = False
+            Me.cboAddOrDeduct.ValueMember = "Code"
+            '
+            'lblAddOrDeduct
+            '
+            resources.ApplyResources(Me.lblAddOrDeduct, "lblAddOrDeduct")
+            Me.lblAddOrDeduct.DisplayOnly = True
+            Me.lblAddOrDeduct.EditingMode = False
+            Me.lblAddOrDeduct.Name = "lblAddOrDeduct"
+            Me.lblAddOrDeduct.Translatable = True
             '
             'lblNotes
             '
@@ -149,13 +190,33 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.Translatable = False
             Me.txtNotes.ValueIsMandatory = True
             '
-            'lblAccountIdNo
+            'txtInvTransTypeNameAra
             '
-            resources.ApplyResources(Me.lblAccountIdNo, "lblAccountIdNo")
-            Me.lblAccountIdNo.DisplayOnly = True
-            Me.lblAccountIdNo.EditingMode = False
-            Me.lblAccountIdNo.Name = "lblAccountIdNo"
-            Me.lblAccountIdNo.Translatable = True
+            Me.txtInvTransTypeNameAra.BackColor = System.Drawing.Color.White
+            Me.txtInvTransTypeNameAra.BegFindValue = Nothing
+            Me.txtInvTransTypeNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TableLayoutPanel1.SetColumnSpan(Me.txtInvTransTypeNameAra, 3)
+            Me.txtInvTransTypeNameAra.ComputedValue = False
+            Me.txtInvTransTypeNameAra.CustomFormat = Nothing
+            Me.txtInvTransTypeNameAra.DataBoundControl = True
+            resources.ApplyResources(Me.txtInvTransTypeNameAra, "txtInvTransTypeNameAra")
+            Me.txtInvTransTypeNameAra.EditingMode = False
+            Me.txtInvTransTypeNameAra.EndFindValue = Nothing
+            Me.txtInvTransTypeNameAra.EnglishControl = Me.txtInvTransTypeName
+            Me.txtInvTransTypeNameAra.FieldDescription = Nothing
+            Me.txtInvTransTypeNameAra.FieldName = Nothing
+            Me.txtInvTransTypeNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtInvTransTypeNameAra.FindEnabled = True
+            Me.txtInvTransTypeNameAra.ForeColor = System.Drawing.Color.Black
+            Me.txtInvTransTypeNameAra.LinkedLabel = Me.lblNameAra
+            Me.txtInvTransTypeNameAra.MaximumValue = Nothing
+            Me.txtInvTransTypeNameAra.MinimumValue = Nothing
+            Me.txtInvTransTypeNameAra.Name = "txtInvTransTypeNameAra"
+            Me.txtInvTransTypeNameAra.OldValue = Nothing
+            Me.txtInvTransTypeNameAra.OverrideMaxLength = 0
+            Me.txtInvTransTypeNameAra.ReadOnly = True
+            Me.txtInvTransTypeNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtInvTransTypeNameAra.Translatable = False
             '
             'txtInvTransTypeName
             '
@@ -185,15 +246,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtInvTransTypeName.Translatable = False
             Me.txtInvTransTypeName.ValueIsMandatory = True
             '
-            'lblNameAra
-            '
-            resources.ApplyResources(Me.lblNameAra, "lblNameAra")
-            Me.TableLayoutPanel1.SetColumnSpan(Me.lblNameAra, 2)
-            Me.lblNameAra.DisplayOnly = True
-            Me.lblNameAra.EditingMode = False
-            Me.lblNameAra.Name = "lblNameAra"
-            Me.lblNameAra.Translatable = True
-            '
             'lblName
             '
             resources.ApplyResources(Me.lblName, "lblName")
@@ -202,6 +254,15 @@ Namespace PresentationLayer.Views.Forms
             Me.lblName.EditingMode = False
             Me.lblName.Name = "lblName"
             Me.lblName.Translatable = True
+            '
+            'lblNameAra
+            '
+            resources.ApplyResources(Me.lblNameAra, "lblNameAra")
+            Me.TableLayoutPanel1.SetColumnSpan(Me.lblNameAra, 2)
+            Me.lblNameAra.DisplayOnly = True
+            Me.lblNameAra.EditingMode = False
+            Me.lblNameAra.Name = "lblNameAra"
+            Me.lblNameAra.Translatable = True
             '
             'txtInvTransTypeCode
             '
@@ -229,6 +290,14 @@ Namespace PresentationLayer.Views.Forms
             Me.txtInvTransTypeCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtInvTransTypeCode.Translatable = False
             Me.txtInvTransTypeCode.ValueIsMandatory = True
+            '
+            'lblCode
+            '
+            resources.ApplyResources(Me.lblCode, "lblCode")
+            Me.lblCode.DisplayOnly = True
+            Me.lblCode.EditingMode = False
+            Me.lblCode.Name = "lblCode"
+            Me.lblCode.Translatable = True
             '
             'TxtIdNo
             '
@@ -267,46 +336,6 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo.Name = "lblIdNo"
             Me.lblIdNo.Translatable = True
             '
-            'lblCode
-            '
-            resources.ApplyResources(Me.lblCode, "lblCode")
-            Me.lblCode.DisplayOnly = True
-            Me.lblCode.EditingMode = False
-            Me.lblCode.Name = "lblCode"
-            Me.lblCode.Translatable = True
-            '
-            'lblActive
-            '
-            resources.ApplyResources(Me.lblActive, "lblActive")
-            Me.lblActive.DisplayOnly = True
-            Me.lblActive.EditingMode = False
-            Me.lblActive.Name = "lblActive"
-            Me.lblActive.Translatable = True
-            '
-            'chkActive
-            '
-            resources.ApplyResources(Me.chkActive, "chkActive")
-            Me.chkActive.BackColor = System.Drawing.Color.White
-            Me.chkActive.BegFindValue = Nothing
-            Me.chkActive.DisplayOnly = False
-            Me.chkActive.EditingMode = True
-            Me.chkActive.EndFindValue = Nothing
-            Me.chkActive.FieldDescription = Nothing
-            Me.chkActive.FieldName = Nothing
-            Me.chkActive.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkActive.FindEnabled = False
-            Me.chkActive.FlatAppearance.BorderSize = 0
-            Me.chkActive.ForeColor = System.Drawing.Color.Black
-            Me.chkActive.IFindableControl_FindEnabled = False
-            Me.chkActive.IgnoreCase = False
-            Me.chkActive.LinkedLabel = Me.lblActive
-            Me.chkActive.Name = "chkActive"
-            Me.chkActive.NoLabel = True
-            Me.chkActive.OldValue = Nothing
-            Me.chkActive.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkActive.Translatable = False
-            Me.chkActive.UseVisualStyleBackColor = False
-            '
             'cboAccountIdNo
             '
             Me.cboAccountIdNo.BackColor = System.Drawing.Color.White
@@ -340,6 +369,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.PreviousSearchTerm = Nothing
             Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.SuggestBoxHeight = 200
+            Me.cboAccountIdNo.SuggestCharCount = 0
             Me.cboAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboAccountIdNo.TextToSearch = Nothing
             Me.cboAccountIdNo.Translatable = False
@@ -348,81 +378,53 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.ValueIsNumeric = False
             Me.cboAccountIdNo.ValueMember = "IdNo"
             '
-            'lblAddOrDeduct
+            'lblInvTransTypeCycle
             '
-            resources.ApplyResources(Me.lblAddOrDeduct, "lblAddOrDeduct")
-            Me.lblAddOrDeduct.DisplayOnly = True
-            Me.lblAddOrDeduct.EditingMode = False
-            Me.lblAddOrDeduct.Name = "lblAddOrDeduct"
-            Me.lblAddOrDeduct.Translatable = True
+            Me.lblInvTransTypeCycle.DisplayOnly = True
+            Me.lblInvTransTypeCycle.EditingMode = False
+            resources.ApplyResources(Me.lblInvTransTypeCycle, "lblInvTransTypeCycle")
+            Me.lblInvTransTypeCycle.Name = "lblInvTransTypeCycle"
+            Me.lblInvTransTypeCycle.Translatable = True
             '
-            'cboAddOrDeduct
+            'lblAccountIdNo
             '
-            Me.cboAddOrDeduct.BackColor = System.Drawing.Color.White
-            Me.cboAddOrDeduct.BegFindValue = Nothing
-            Me.cboAddOrDeduct.ChangingSearchValueOnly = False
-            Me.cboAddOrDeduct.CurrentSearchTerm = ""
-            Me.cboAddOrDeduct.DataValue = Nothing
-            Me.cboAddOrDeduct.DefaultValue = Nothing
-            Me.cboAddOrDeduct.DisplayMember = "Name"
-            resources.ApplyResources(Me.cboAddOrDeduct, "cboAddOrDeduct")
-            Me.cboAddOrDeduct.Editable = True
-            Me.cboAddOrDeduct.EditingMode = True
-            Me.cboAddOrDeduct.EndFindValue = Nothing
-            Me.cboAddOrDeduct.FieldDescription = Nothing
-            Me.cboAddOrDeduct.FieldName = Nothing
-            Me.cboAddOrDeduct.FilterRule = Nothing
-            Me.cboAddOrDeduct.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboAddOrDeduct.FindEnabled = False
-            Me.cboAddOrDeduct.ForeColor = System.Drawing.Color.Black
-            Me.cboAddOrDeduct.FormattingEnabled = True
-            Me.cboAddOrDeduct.HideWhenNotEditingOrAdding = False
-            Me.cboAddOrDeduct.IgnoreCase = False
-            Me.cboAddOrDeduct.LimitToList = False
-            Me.cboAddOrDeduct.LinkedLabel = Me.lblAddOrDeduct
-            Me.cboAddOrDeduct.Name = "cboAddOrDeduct"
-            Me.cboAddOrDeduct.OldValue = 0
-            Me.cboAddOrDeduct.OriginalDataSource = Nothing
-            Me.cboAddOrDeduct.OriginalList = Nothing
-            Me.cboAddOrDeduct.OverrideDropDownStyleList = False
-            Me.cboAddOrDeduct.PreviousSearchTerm = Nothing
-            Me.cboAddOrDeduct.PropertySelector = Nothing
-            Me.cboAddOrDeduct.SuggestBoxHeight = 200
-            Me.cboAddOrDeduct.SuggestListOrderRule = Nothing
-            Me.cboAddOrDeduct.TextToSearch = Nothing
-            Me.cboAddOrDeduct.Translatable = False
-            Me.cboAddOrDeduct.ValueIsMandatory = False
-            Me.cboAddOrDeduct.ValueIsNullable = False
-            Me.cboAddOrDeduct.ValueIsNumeric = False
-            Me.cboAddOrDeduct.ValueMember = "IdNo"
+            resources.ApplyResources(Me.lblAccountIdNo, "lblAccountIdNo")
+            Me.lblAccountIdNo.DisplayOnly = True
+            Me.lblAccountIdNo.EditingMode = False
+            Me.lblAccountIdNo.Name = "lblAccountIdNo"
+            Me.lblAccountIdNo.Translatable = True
             '
-            'txtInvTransTypeNameAra
+            'chkActive
             '
-            Me.txtInvTransTypeNameAra.BackColor = System.Drawing.Color.White
-            Me.txtInvTransTypeNameAra.BegFindValue = Nothing
-            Me.txtInvTransTypeNameAra.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.TableLayoutPanel1.SetColumnSpan(Me.txtInvTransTypeNameAra, 3)
-            Me.txtInvTransTypeNameAra.ComputedValue = False
-            Me.txtInvTransTypeNameAra.CustomFormat = Nothing
-            Me.txtInvTransTypeNameAra.DataBoundControl = True
-            resources.ApplyResources(Me.txtInvTransTypeNameAra, "txtInvTransTypeNameAra")
-            Me.txtInvTransTypeNameAra.EditingMode = False
-            Me.txtInvTransTypeNameAra.EndFindValue = Nothing
-            Me.txtInvTransTypeNameAra.EnglishControl = Me.txtInvTransTypeName
-            Me.txtInvTransTypeNameAra.FieldDescription = Nothing
-            Me.txtInvTransTypeNameAra.FieldName = Nothing
-            Me.txtInvTransTypeNameAra.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtInvTransTypeNameAra.FindEnabled = True
-            Me.txtInvTransTypeNameAra.ForeColor = System.Drawing.Color.Black
-            Me.txtInvTransTypeNameAra.LinkedLabel = Me.lblNameAra
-            Me.txtInvTransTypeNameAra.MaximumValue = Nothing
-            Me.txtInvTransTypeNameAra.MinimumValue = Nothing
-            Me.txtInvTransTypeNameAra.Name = "txtInvTransTypeNameAra"
-            Me.txtInvTransTypeNameAra.OldValue = Nothing
-            Me.txtInvTransTypeNameAra.OverrideMaxLength = 0
-            Me.txtInvTransTypeNameAra.ReadOnly = True
-            Me.txtInvTransTypeNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtInvTransTypeNameAra.Translatable = False
+            resources.ApplyResources(Me.chkActive, "chkActive")
+            Me.chkActive.BackColor = System.Drawing.Color.White
+            Me.chkActive.BegFindValue = Nothing
+            Me.chkActive.DisplayOnly = False
+            Me.chkActive.EditingMode = True
+            Me.chkActive.EndFindValue = Nothing
+            Me.chkActive.FieldDescription = Nothing
+            Me.chkActive.FieldName = Nothing
+            Me.chkActive.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkActive.FindEnabled = False
+            Me.chkActive.FlatAppearance.BorderSize = 0
+            Me.chkActive.ForeColor = System.Drawing.Color.Black
+            Me.chkActive.IFindableControl_FindEnabled = False
+            Me.chkActive.IgnoreCase = False
+            Me.chkActive.LinkedLabel = Me.lblActive
+            Me.chkActive.Name = "chkActive"
+            Me.chkActive.NoLabel = True
+            Me.chkActive.OldValue = Nothing
+            Me.chkActive.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkActive.Translatable = False
+            Me.chkActive.UseVisualStyleBackColor = False
+            '
+            'lblActive
+            '
+            resources.ApplyResources(Me.lblActive, "lblActive")
+            Me.lblActive.DisplayOnly = True
+            Me.lblActive.EditingMode = False
+            Me.lblActive.Name = "lblActive"
+            Me.lblActive.Translatable = True
             '
             'InvTransTypeEntryTv
             '

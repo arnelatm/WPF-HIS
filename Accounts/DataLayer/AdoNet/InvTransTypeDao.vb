@@ -60,7 +60,7 @@ Namespace DataLayer.AdoNet
             New InvTransType() With {
             .Active = Extensions.AsBool(reader("Active")),
             .AccountIdNo = Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
-            .AddOrDeduct = Extensions.AsInt(Of Int16)(reader("AddOrDeduct")),
+            .AddOrDeduct = Extensions.AsString(reader("AddOrDeduct")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .InvTransTypeCode = Extensions.AsString(reader("InvTransTypeCode")),
             .InvTransTypeName = Extensions.AsString(reader("InvTransTypeName")),
