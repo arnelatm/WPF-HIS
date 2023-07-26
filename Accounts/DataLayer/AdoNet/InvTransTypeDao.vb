@@ -2,6 +2,7 @@
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.GlobalFuncNSub
 Imports Extensions = AATM.DataLayer.AdoNet.Extensions
 
 Namespace DataLayer.AdoNet
@@ -27,8 +28,8 @@ Namespace DataLayer.AdoNet
         Public Function GetRecordByIdNo(idNo) As InvTransType Implements IDao(Of InvTransType).GetRecordByIdNo
             Dim sql As String = " SELECT " & FieldList &
                     " FROM InvTransType" &
-                    " WHERE IdNo = @IdNo"
-            Dim params() As Object = {"@IdNo", idNo}
+                    " WHERE IdNo = @IdNo and BranchIdNo = @BranchIdNo"
+            Dim params() As Object = {"@IdNo", idNo, "@BranchIdNo", GlobalVariables.BranchIdNo}
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
             Return data
         End Function
@@ -49,8 +50,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef InvTransType As InvTransType) As Integer Implements IDao(Of InvTransType).AddRecord
             Dim sql As String =
                     " INSERT INTO [InvTransType] " &
-                    " (Active,AccountIdNo,AddOrDeduct,InvTransTypeCode,InvTransTypeName,InvTransTypeNameAra,Notes) " &
-                    " VALUES (@Active,@AccountIdNo,@AddOrDeduct,@InvTransTypeCode,@InvTransTypeName,@InvTransTypeNameAra,@Notes) "
+                    " (Active,AccountIdNo,AddOrDeduct,BranchIdNo,InvTransTypeCode,InvTransTypeName,InvTransTypeNameAra,Notes) " &
+                    " VALUES (@Active,@AccountIdNo,@AddOrDeduct,@BranchIdNo,@InvTransTypeCode,@InvTransTypeName,@InvTransTypeNameAra,@Notes) "
             Return Db.Insert(sql, Take(InvTransType))
         End Function
 
@@ -72,6 +73,7 @@ Namespace DataLayer.AdoNet
                                     "@Active", InvTransType.Active,
                                     "@AccountIdNo", InvTransType.AccountIdNo,
                                     "@AddOrDeduct", InvTransType.AddOrDeduct,
+                                    "@BranchIdNo", GlobalVariables.BranchIdNo,
                                     "@IdNo", InvTransType.IdNo,
                                     "@InvTransTypeCode", InvTransType.InvTransTypeCode,
                                     "@InvTransTypeName", InvTransType.InvTransTypeName,

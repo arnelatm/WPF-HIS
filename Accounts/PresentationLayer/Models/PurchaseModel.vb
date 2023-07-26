@@ -17,14 +17,16 @@
         Public Property InvoiceNo As String
         Public Property Notes As String
         Public Property Posted As Boolean
+        Public Property PurchaseDetails As List(Of PurchaseDetailModel)
+        Public Property PurchaseHistory As List(Of PurchaseHistoryModel)
         Public Property ReferenceNo As String
         Public Property SupplierIdNo As Int32?
         Public Property TransactionDate As Date?
+        Public Property UserIdNo As Int16
         Public Property VatAmount As Decimal
         Public Property VatNumber As String
         Public Property WarehouseIdNo As Int16
-        Public Property PurchaseDetails As List(Of PurchaseDetailModel)
-        Public Property PurchaseHistory As List(Of PurchaseHistoryModel)
+
     End Class
 
 End Namespace

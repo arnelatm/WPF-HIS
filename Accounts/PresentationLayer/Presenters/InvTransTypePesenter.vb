@@ -16,6 +16,7 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "InvTransTypeName"
             WithTreeView = True
             Service = New AccountsService("InvTransType")
+            DataFilter = "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString() + " "
         End Sub
 
         Protected Overrides Sub CreateDataSources()

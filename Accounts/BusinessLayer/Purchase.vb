@@ -28,18 +28,19 @@ Namespace BusinessLayer
         Public Property DateCreated As DateTime?
         Public Property DueDate As Date?
         Public Property IdNo As Int32
-        Public Property InvoiceNo As String
+        Public Property InvoiceAmount As Decimal
         Public Property InvoiceDate As Date?
+        Public Property InvoiceNo As String
         Public Property Posted As Boolean
+        Public Property PurchaseDetails As List(Of PurchaseDetail)
+        Public Property PurchaseHistory As List(Of PurchaseHistory)
         Public Property ReferenceNo As String
         Public Property SupplierIdNo As Int32?
-        Public Property InvoiceAmount As Decimal
         Public Property TransactionDate As Date?
+        Public Property UserIdNo As Int16
         Public Property VatAmount As Decimal
         Public Property VatNumber As String
         Public Property WarehouseIdNo As Int16
-        Public Property PurchaseDetails As List(Of PurchaseDetail)
-        Public Property PurchaseHistory As List(Of PurchaseHistory)
 
     End Class
 

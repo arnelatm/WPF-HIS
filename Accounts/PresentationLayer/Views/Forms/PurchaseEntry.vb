@@ -258,18 +258,21 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public ReadOnly Property BranchIdNo As Short Implements IPurchaseView.BranchIdNo
-            Get
-                Return GlobalVariables.BranchIdNo
-            End Get
-        End Property
-
         Public Property ReferenceNo As String Implements IPurchaseView.ReferenceNo
             Get
                 Return txtReferenceNo.Text
             End Get
             Set
                 txtReferenceNo.Text = Value
+            End Set
+        End Property
+
+        Public Property UserIdNo As Int16 Implements IPurchaseView.UserIdNo
+            Get
+                Return cboUserIdNo.GetValue(Of Int16)()
+            End Get
+            Set(value As Short)
+                cboUserIdNo.SetValue(value)
             End Set
         End Property
 
@@ -288,6 +291,7 @@ Namespace PresentationLayer.Views.Forms
          {"ReferenceNo", txtReferenceNo},
          {"SupplierIdNo", cboSupplierIdNo},
          {"TransactionDate", dtpTransactionDate},
+         {"UserIdNo", cboUserIdNo},
          {"VatAmount", txtVatAmount},
          {"VatNumber", txtVatNumber},
          {"WarehouseIdNo", cboWarehouseIdNo}

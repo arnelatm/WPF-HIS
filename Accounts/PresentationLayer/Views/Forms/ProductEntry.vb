@@ -165,12 +165,6 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property UnitsByCode As Object Implements IProductView.UnitsByCode
 
-        Public ReadOnly Property BranchIdNo As Short Implements IProductView.BranchIdNo
-            Get
-                Return GlobalVariables.BranchIdNo
-            End Get
-        End Property
-
         Public Property UserName As String Implements IProductView.UserName
             Get
                 Return txtUserName.Text

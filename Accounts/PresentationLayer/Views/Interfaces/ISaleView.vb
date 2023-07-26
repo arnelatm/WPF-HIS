@@ -20,11 +20,11 @@ Namespace PresentationLayer.Views.Interfaces
         Property TransactionDate As Date?
         Property UnitsByCode As Object
         Property UnitsByProduct As Object
+        Property UserIdNo As Int16
         Property VatAmount As Decimal
         Property WarehouseIdNo As Int16
-        ReadOnly Property BranchIdNo As Int16
-        Property SaleDetails As List(Of SaleDetailView)
 
+        Property SaleDetails As List(Of SaleDetailView)
         Event ProductUnitEditing(productIdNo As Int32, bs As BindingSource)
         Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource)
         Event ProductCodeChanged(productCode As String, bs As BindingSource)

@@ -7,7 +7,6 @@
     Public Class SaleModel
 
         Public Property Amount As Decimal
-        Public Property BranchIdNo As Int16
         Public Property Cancelled As Boolean
         Public Property CustomerIdNo As Int32?
         Public Property DateCreated As DateTime?
@@ -19,10 +18,11 @@
         Public Property PatientIdNo As Int32?
         Public Property PatientName As String
         Public Property Posted As Boolean
+        Public Property SaleDetails As List(Of SaleDetailModel)
         Public Property TransactionDate As Date?
+        Public Property UserIdNo As Int16
         Public Property VatAmount As Decimal
         Public Property WarehouseIdNo As Int16
-        Public Property SaleDetails As List(Of SaleDetailModel)
 
     End Class
 
