@@ -96,7 +96,7 @@ Namespace DataLayer.AdoNet
                                   .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),
                                   .VatAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("VatAmount")),
                                   .VatNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("VatNumber")),
-                                  .WarehouseIdNo = GlobalVariables.BranchIdNo
+                                  .WarehouseIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("WarehouseIdNo"))
                                 }
 
         Private Function Take(Purchase As Purchase) As Object()
