@@ -22,14 +22,16 @@
         Public Property ProductIdNo As Int32
         Public Property ProductName As String
         Public Property ProductNameAra As String
-        Public Property SaleIdNo As Int32
         Public Property Quantity As Int16
+        Public Property SaleIdNo As Int32
         Public Property Sequence As Int16
+        Public Property UnitCost As Decimal
         Public Property UnitCount As Int16
         Public Property UnitIdNo As Int16
-        Public Property UnitCost As Decimal
+        Public Property UserIdNo As Int16
         Public Property VatAmount As Decimal
         Public Property VatPercent As Decimal
+        Public Property WarehouseIdNo As Int16
 
     End Class
 

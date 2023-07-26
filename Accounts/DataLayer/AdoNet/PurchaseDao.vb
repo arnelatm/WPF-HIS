@@ -23,6 +23,7 @@ Namespace DataLayer.AdoNet
                                   "ReferenceNo," &
                                   "SupplierIdNo," &
                                   "TransactionDate," &
+                                  "UserIdNo," &
                                   "VatAmount," &
                                   "VatNumber," &
                                   "WarehouseIdNo"
@@ -57,7 +58,6 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     "UPDATE [Purchase] Set " &
                     "Amount = @Amount," &
-                    "BranchIdNo = @BranchIdNo," &
                     "Cancelled = @Cancelled," &
                     "DueDate = @DueDate," &
                     "InvoiceDate = @InvoiceDate," &
@@ -66,6 +66,7 @@ Namespace DataLayer.AdoNet
                     "ReferenceNo = @Reference," &
                     "SupplierIdNo = @SupplierIdNo," &
                     "TransactionDate = @TransactionDate," &
+                    "UserIdNo = @UserIdNo," &
                     "VatAmount = @VatAmount," &
                     "VatNumber = @VatNumber, " &
                     "WarehouseIdNo = @WarehouseIdNo " &
@@ -77,8 +78,8 @@ Namespace DataLayer.AdoNet
             Implements IDao(Of Purchase).AddRecord
             Dim sql As String =
                     " INSERT INTO [Purchase] " &
-                    " (Amount,BranchIdNo,Cancelled,DueDate,InvoiceDate,InvoiceNo,Posted,ReferenceNo,SupplierIdNo,TransactionDate,VatAmount,VatNumber,WarehouseIdNo)" &
-                    " VALUES (@Amount,@BranchIdNo,@Cancelled,@DueDate,@InvoiceDate,@InvoiceNo,@Posted,@ReferenceNo,@SupplierIdNo,@TransactionDate,@VatAmount,@VatNumber,@WarehouseIdNo)"
+                    " (Amount,BranchIdNo,Cancelled,DueDate,InvoiceDate,InvoiceNo,Posted,ReferenceNo,SupplierIdNo,TransactionDate,UserIdNo,VatAmount,VatNumber,WarehouseIdNo)" &
+                    " VALUES (@Amount,@BranchIdNo,@Cancelled,@DueDate,@InvoiceDate,@InvoiceNo,@Posted,@ReferenceNo,@SupplierIdNo,@TransactionDate,@UseridNo,@VatAmount,@VatNumber,@WarehouseIdNo)"
             Return Db.Insert(sql, Take(Purchase))
         End Function
 
@@ -94,6 +95,7 @@ Namespace DataLayer.AdoNet
                                   .ReferenceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ReferenceNo")),
                                   .SupplierIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("SupplierIdNo")),
                                   .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),
+                                  .UserIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("UserIdNo")),
                                   .VatAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("VatAmount")),
                                   .VatNumber = AATM.DataLayer.AdoNet.Extensions.AsString(reader("VatNumber")),
                                   .WarehouseIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("WarehouseIdNo"))
@@ -112,6 +114,7 @@ Namespace DataLayer.AdoNet
                                     "ReferenceNo", Purchase.ReferenceNo,
                                     "SupplierIdNo", Purchase.SupplierIdNo,
                                     "TransactionDate", Purchase.TransactionDate,
+                                    "UserIdNo", Purchase.UserIdNo,
                                     "VatAmount", Purchase.VatAmount,
                                     "VatNumber", Purchase.VatNumber,
                                     "WarehouseIdNo", Purchase.WarehouseIdNo

@@ -219,12 +219,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public ReadOnly Property BranchIdNo As Short Implements ISaleView.BranchIdNo
-            Get
-                Return GlobalVariables.BranchIdNo
-            End Get
-        End Property
-
         Public Property PatientIdNo As Int32? Implements ISaleView.PatientIdNo
             Get
                 If txtPatientIdNo.Text <> "" Then
@@ -256,6 +250,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property UserIdNo As Short Implements ISaleView.UserIdNo
+            Get
+                Return cboUserIdNo.GetValue(Of Int16)
+            End Get
+            Set
+                cboUserIdNo.SetValue(Value)
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -272,6 +275,7 @@ Namespace PresentationLayer.Views.Forms
          {"Posted", chkPosted},
          {"ReferenceNo", cboWarehouseIdNo},
          {"TransactionDate", dtpTransactionDate},
+         {"UserIdNo", cboUserIdNo},
          {"VatAmount", txtVatAmount},
          {"WarehouseIdNo", cboWarehouseIdNo}
         }

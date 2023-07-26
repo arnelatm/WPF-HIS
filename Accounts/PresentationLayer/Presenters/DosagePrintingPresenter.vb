@@ -209,7 +209,6 @@ Namespace PresentationLayer.Presenters
                     retVal = Service.DeleteRecord(Of Int32)(_labelIdNo, "DosageLabel", "IdNo")
                 End If
             End If
-            Dim ageDMY As String
             If Val(View.Age) > 1 Then
                 Dim dmy As String = CodeToEnum(Of YearMonthDaySelection)(View.AgeDMY)
                 'PluralizationService.Pluralize()

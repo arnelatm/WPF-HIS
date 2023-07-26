@@ -120,7 +120,7 @@ Namespace PresentationLayer.Presenters
                     Next
                 End If
                 If Not CodeAndBranchUnique() Then
-                    Dim errorMessage = Libraries.MessagingLibrary.Messaging.GetParametrizedMessage(True, "MsgDuplicateValuesNotAllowed", {"fieldValue", View.BranchIdNo.ToString() + "-" + View.ProductCode, "fieldDescription", "BranchIdNo - Product Code"})
+                    Dim errorMessage = Libraries.MessagingLibrary.Messaging.GetParametrizedMessage(True, "MsgDuplicateValuesNotAllowed", {"fieldValue", GlobalVariables.BranchIdNo.ToString() + "-" + View.ProductCode, "fieldDescription", "BranchIdNo - Product Code"})
                     Libraries.MessagingLibrary.Messaging.Show(errorMessage)
                     retValue = False
                 End If
@@ -129,7 +129,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Function CodeAndBranchUnique() As Boolean
-            Dim idNo As Int32 = Service.GetRecordFieldWith2KeyG(Of String, Int16, Int32)(View.ProductCode, View.BranchIdNo, "Product", "ProductCode", "BranchIdNo", "IdNo")
+            Dim idNo As Int32 = Service.GetRecordFieldWith2KeyG(Of String, Int16, Int32)(View.ProductCode, GlobalVariables.BranchIdNo, "Product", "ProductCode", "BranchIdNo", "IdNo")
             If idNo <> 0 AndAlso idNo <> View.IdNo Then
                 Return False
             End If
@@ -137,7 +137,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Function BarCodeAndBranchUnique() As Boolean
-            Dim idNo As Int32 = Service.GetRecordFieldWith2KeyG(Of String, Int16, Int32)(View.Barcode, View.BranchIdNo, "Product", "BarCode", "BranchIdNo", "IdNo")
+            Dim idNo As Int32 = Service.GetRecordFieldWith2KeyG(Of String, Int16, Int32)(View.Barcode, GlobalVariables.BranchIdNo, "Product", "BarCode", "BranchIdNo", "IdNo")
             If idNo <> 0 AndAlso idNo <> View.IdNo Then
                 Return False
             End If
@@ -145,7 +145,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Function GTinAndBranchUnique() As Boolean
-            Dim idNo As Int32 = Service.GetRecordFieldWith2KeyG(Of String, Int16, Int32)(View.GTIN, View.BranchIdNo, "Product", "GTIN", "BranchIdNo", "IdNo")
+            Dim idNo As Int32 = Service.GetRecordFieldWith2KeyG(Of String, Int16, Int32)(View.GTIN, GlobalVariables.BranchIdNo, "Product", "GTIN", "BranchIdNo", "IdNo")
             If idNo <> 0 AndAlso idNo <> View.IdNo Then
                 Return False
             End If

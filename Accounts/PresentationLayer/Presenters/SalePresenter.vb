@@ -69,6 +69,7 @@ Namespace PresentationLayer.Presenters
             Dim data As New ArrayList
             data.Add({"Customer", "CustomerIdNo", Nothing, Nothing})
             data.Add({"Warehouse", "WarehouseIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"})
+            data.Add({"User", "UserIdNo", "IdNo,UserName", Nothing})
             CreateDataSourceThread(data)
 
             data.Clear()
@@ -509,6 +510,16 @@ Namespace PresentationLayer.Presenters
         Private Function GetNeedsExpiryDate(categoryIdNo As Int16) As Decimal
             Return Service.GetField(Of Boolean, Int16)(categoryIdNo, "Category", "IdNo", "NeedsExpiryDate")
         End Function
+
+        Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
+            View.TransactionDate = Date.Now()
+            If View.SaleDetails IsNot Nothing Then
+                View.SaleDetails.Clear()
+            Else
+                View.SaleDetails = New List(Of SaleDetailView)
+            End If
+            View.UserIdNo = GlobalVariables.UserIdNo
+        End Sub
 
 
     End Class

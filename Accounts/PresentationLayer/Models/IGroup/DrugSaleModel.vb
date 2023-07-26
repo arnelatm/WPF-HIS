@@ -13,6 +13,7 @@
         Public Property ProductName As String
         Public Property SaleDate As Date?
         Public Property SerializationNo As String
+        Public Property UserIdNo As Int16
     End Class
 
 End Namespace

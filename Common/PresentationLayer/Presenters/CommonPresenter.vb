@@ -256,12 +256,12 @@ Namespace PresentationLayer.Presenters
                     ' assumed the first field is the value member and the second field as the display Value
                     dtl.NameFieldOrig = fieldNames(1)
                     dtl.NameField = TranslateNameField(dtl.TableName, dtl.NameFieldOrig)
-                    dtl.NameDisplayValue = dtl.NameField + "+'-'+" + fieldNames(0) + " COLLATE SQL_Latin1_General_CP1_CI_AS"
+                    dtl.NameDisplayValue = "Concat(" + dtl.NameField + ",'-'," + fieldNames(0) + ") COLLATE SQL_Latin1_General_CP1_CI_AS"
                     If dtl.ValueMember Is Nothing Then
                         dtl.ValueMember = fieldNames(0).Trim()
                     End If
                     If dtl.DisplayMember Is Nothing Then
-                        dtl.NameDisplayValue = dtl.NameField + "+'-'+" + fieldNames(0) + " COLLATE SQL_Latin1_General_CP1_CI_AS"
+                        dtl.NameDisplayValue = "Concat(" + dtl.NameField + ",'-'," + fieldNames(0) + ") COLLATE SQL_Latin1_General_CP1_CI_AS"
                         dtl.DisplayMember = "IdNo"
                     End If
                     dtl.LuFields = fieldNames(0) + " as IdNo," + dtl.NameDisplayValue + " as Name"
@@ -270,14 +270,14 @@ Namespace PresentationLayer.Presenters
                     End If
                 ElseIf fieldNames.Count() = 3 Then
                     dtl.NameField = fieldNames(1).Trim()
-                    dtl.NameDisplayValue = TranslateNameField(dtl.TableName, dtl.NameField) + "+'-'+" + fieldNames(2) + " COLLATE SQL_Latin1_General_CP1_CI_AS"
+                    dtl.NameDisplayValue = "Concat(" + TranslateNameField(dtl.TableName, dtl.NameField) + ",'-'," + fieldNames(2) + ") COLLATE SQL_Latin1_General_CP1_CI_AS"
                     If dtl.ValueMember Is Nothing Then
                         dtl.ValueMember = "IdNo"
                     End If
                     If dtl.DisplayMember Is Nothing Then
                         dtl.DisplayMember = "Name"
                     End If
-                    dtl.LuFields = fieldNames(0) + " As IdNo," + dtl.NameDisplayValue + " as Name," + fieldNames(2) + " as Code"
+                    dtl.LuFields = fieldNames(0) + " As IdNo," + dtl.NameDisplayValue + " as Name," + fieldNames(2).ToString() + " as Code"
                     If dtl.SortKey Is Nothing Then
                         dtl.SortKey = dtl.NameField
                     End If

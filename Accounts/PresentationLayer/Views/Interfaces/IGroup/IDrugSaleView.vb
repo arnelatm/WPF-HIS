@@ -9,23 +9,22 @@ Namespace PresentationLayer.Views.Interfaces
         Property Expiry As Date?
         Property GTin As String
         Property IdNo As Int32
+        Property Manufacture As Date?
         Property ProductCode As String
         Property ProductName As String
+        Property QrCode As String
         Property SaleDate As Date?
         Property SerializationNo As String
-        Property QrCode As String
-        Property Manufacture As Date?
+
         Event FinderValueChanged(itemIdNo As Int16)
-
         Event GenerateCsvFile(salesDate As Date)
-
-        'Event GetDrugName()
         Event CheckDuplicateDrug(ByRef duplicate As Boolean)
         Event ClearEntry()
         Event ValidateEntries()
         Event ValidateQrCode(ByRef valid As Boolean)
         Event SaveDrugSale()
         Event AddDrugSale()
+
     End Interface
 
 End Namespace

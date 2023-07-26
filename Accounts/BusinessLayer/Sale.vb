@@ -20,7 +20,6 @@ Namespace BusinessLayer
 
 
         Public Property Amount As Decimal
-        Public Property BranchIdNo As Int16
         Public Property Cancelled As Boolean
         Public Property CustomerIdNo As Int32?
         Public Property DateCreated As DateTime?
@@ -34,7 +33,9 @@ Namespace BusinessLayer
         Public Property ReferenceNo As String
         Public Property SaleDetails As List(Of SaleDetail)
         Public Property TransactionDate As Date?
+        Public Property UserIdNo As Int16
         Public Property VatAmount As Decimal
+        Public Property VatPercent As Decimal
         Public Property WarehouseIdNo As Int16
 
     End Class

@@ -75,6 +75,7 @@ Namespace PresentationLayer.Presenters
             Dim data As New ArrayList
             data.Add({"Supplier", "SupplierIdNo", Nothing, Nothing})
             data.Add({"Warehouse", "WarehouseIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"})
+            data.Add({"User", "UserIdNo", "IdNo,UserName", Nothing})
             CreateDataSourceThread(data)
 
             data.Clear()
@@ -552,6 +553,10 @@ Namespace PresentationLayer.Presenters
             Return Service.GetField(Of Boolean, Int16)(categoryIdNo, "Category", "IdNo", "NeedsExpiryDate")
         End Function
 
+        Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
+            View.TransactionDate = Date.Now()
+            View.UserIdNo = GlobalVariables.UserIdNo
+        End Sub
 
     End Class
 
