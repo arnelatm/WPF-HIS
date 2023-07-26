@@ -77,6 +77,8 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblSupplierIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -92,7 +94,6 @@ Namespace PresentationLayer.Views.Forms
             Me.lblWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.DataGridViewPurchaseDetails = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvProductCode = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -153,7 +154,6 @@ Namespace PresentationLayer.Views.Forms
             Me.NetAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.VatAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.VatPercentDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.FlowLayoutPanel1.SuspendLayout()
@@ -366,6 +366,53 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.Translatable = False
             Me.TxtIdNo.ValueIsNumeric = True
             '
+            'CLabel2
+            '
+            Me.CLabel2.DisplayOnly = True
+            Me.CLabel2.EditingMode = False
+            Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel2.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.CLabel2.Location = New System.Drawing.Point(299, 16)
+            Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel2.Name = "CLabel2"
+            Me.CLabel2.Size = New System.Drawing.Size(291, 23)
+            Me.CLabel2.TabIndex = 261
+            Me.CLabel2.Text = "Reference No."
+            Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+            Me.CLabel2.Translatable = True
+            '
+            'txtReferenceNo
+            '
+            Me.txtReferenceNo.BackColor = System.Drawing.Color.White
+            Me.txtReferenceNo.BegFindValue = Nothing
+            Me.txtReferenceNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtReferenceNo.ComputedValue = True
+            Me.txtReferenceNo.CustomFormat = Nothing
+            Me.txtReferenceNo.DataBoundControl = True
+            Me.txtReferenceNo.DisplayOnly = True
+            Me.txtReferenceNo.EditingMode = True
+            Me.txtReferenceNo.EndFindValue = Nothing
+            Me.txtReferenceNo.FieldDescription = Nothing
+            Me.txtReferenceNo.FieldName = Nothing
+            Me.txtReferenceNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtReferenceNo.FindEnabled = True
+            Me.txtReferenceNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtReferenceNo.ForeColor = System.Drawing.Color.Black
+            Me.txtReferenceNo.LinkedLabel = Me.lblIdNo
+            Me.txtReferenceNo.Location = New System.Drawing.Point(592, 16)
+            Me.txtReferenceNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtReferenceNo.MaximumValue = Nothing
+            Me.txtReferenceNo.MinimumValue = Nothing
+            Me.txtReferenceNo.Name = "txtReferenceNo"
+            Me.txtReferenceNo.OldValue = Nothing
+            Me.txtReferenceNo.OverrideMaxLength = 0
+            Me.txtReferenceNo.ReadOnly = True
+            Me.txtReferenceNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtReferenceNo.Size = New System.Drawing.Size(133, 23)
+            Me.txtReferenceNo.TabIndex = 1
+            Me.txtReferenceNo.Translatable = False
+            Me.txtReferenceNo.ValueIsNumeric = True
+            '
             'lblTransactionDate
             '
             Me.lblTransactionDate.DisplayOnly = True
@@ -442,7 +489,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSupplierIdNo.FieldName = Nothing
             Me.cboSupplierIdNo.FilterRule = Nothing
             Me.cboSupplierIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboSupplierIdNo.FindEnabled = False
+            Me.cboSupplierIdNo.FindEnabled = True
             Me.cboSupplierIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cboSupplierIdNo.ForeColor = System.Drawing.Color.Black
             Me.cboSupplierIdNo.FormattingEnabled = True
@@ -685,14 +732,14 @@ Namespace PresentationLayer.Views.Forms
             Me.cboWarehouseIdNo.FieldName = Nothing
             Me.cboWarehouseIdNo.FilterRule = Nothing
             Me.cboWarehouseIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboWarehouseIdNo.FindEnabled = False
+            Me.cboWarehouseIdNo.FindEnabled = True
             Me.cboWarehouseIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cboWarehouseIdNo.ForeColor = System.Drawing.Color.Black
             Me.cboWarehouseIdNo.FormattingEnabled = True
             Me.cboWarehouseIdNo.HideWhenNotEditingOrAdding = False
             Me.cboWarehouseIdNo.IgnoreCase = False
             Me.cboWarehouseIdNo.IntegralHeight = False
-            Me.cboWarehouseIdNo.LimitToList = False
+            Me.cboWarehouseIdNo.LimitToList = True
             Me.cboWarehouseIdNo.LinkedLabel = Me.lblSupplierIdNo
             Me.cboWarehouseIdNo.Location = New System.Drawing.Point(174, 92)
             Me.cboWarehouseIdNo.Margin = New System.Windows.Forms.Padding(1)
@@ -729,38 +776,6 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel1.Text = "Journal Id No."
             Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
             Me.CLabel1.Translatable = True
-            '
-            'txtReferenceNo
-            '
-            Me.txtReferenceNo.BackColor = System.Drawing.Color.White
-            Me.txtReferenceNo.BegFindValue = Nothing
-            Me.txtReferenceNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtReferenceNo.ComputedValue = True
-            Me.txtReferenceNo.CustomFormat = Nothing
-            Me.txtReferenceNo.DataBoundControl = True
-            Me.txtReferenceNo.DisplayOnly = True
-            Me.txtReferenceNo.EditingMode = True
-            Me.txtReferenceNo.EndFindValue = Nothing
-            Me.txtReferenceNo.FieldDescription = Nothing
-            Me.txtReferenceNo.FieldName = Nothing
-            Me.txtReferenceNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtReferenceNo.FindEnabled = True
-            Me.txtReferenceNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtReferenceNo.ForeColor = System.Drawing.Color.Black
-            Me.txtReferenceNo.LinkedLabel = Me.lblIdNo
-            Me.txtReferenceNo.Location = New System.Drawing.Point(592, 16)
-            Me.txtReferenceNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtReferenceNo.MaximumValue = Nothing
-            Me.txtReferenceNo.MinimumValue = Nothing
-            Me.txtReferenceNo.Name = "txtReferenceNo"
-            Me.txtReferenceNo.OldValue = Nothing
-            Me.txtReferenceNo.OverrideMaxLength = 0
-            Me.txtReferenceNo.ReadOnly = True
-            Me.txtReferenceNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtReferenceNo.Size = New System.Drawing.Size(133, 23)
-            Me.txtReferenceNo.TabIndex = 1
-            Me.txtReferenceNo.Translatable = False
-            Me.txtReferenceNo.ValueIsNumeric = True
             '
             'DataGridViewPurchaseDetails
             '
@@ -1954,21 +1969,6 @@ Namespace PresentationLayer.Views.Forms
             Me.VatPercentDataGridViewTextBoxColumn.Name = "VatPercentDataGridViewTextBoxColumn"
             Me.VatPercentDataGridViewTextBoxColumn.ReadOnly = True
             Me.VatPercentDataGridViewTextBoxColumn.Width = 40
-            '
-            'CLabel2
-            '
-            Me.CLabel2.DisplayOnly = True
-            Me.CLabel2.EditingMode = False
-            Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.CLabel2.Location = New System.Drawing.Point(299, 16)
-            Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel2.Name = "CLabel2"
-            Me.CLabel2.Size = New System.Drawing.Size(291, 23)
-            Me.CLabel2.TabIndex = 261
-            Me.CLabel2.Text = "Reference No."
-            Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-            Me.CLabel2.Translatable = True
             '
             'PurchaseEntry
             '

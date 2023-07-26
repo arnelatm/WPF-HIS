@@ -1212,6 +1212,9 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of DurationTableManager, DurationListPresenter(Of DurationModel))()
         End Sub
 
+        Private Sub ToolStripMenuItemInventoryTransactionType_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemInventoryTransactionType.Click
+            RunForm(Of InvTransTypeEntryTv, InvTransTypePresenter(Of InvTransTypeModel))()
+        End Sub
     End Class
 
 End Namespace

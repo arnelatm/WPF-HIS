@@ -383,6 +383,11 @@ Public Enum SponsorTypeSelection
     <EnumCode("4")> Others
 End Enum
 
+Public Enum InventoryActionSelection
+    <EnumCode("")> NotSpecified
+    <EnumCode("1")> Add
+    <EnumCode("2")> Deduct
+End Enum
 Public Enum AbsenceTypeSelection
     <EnumCode("")> NotSpecified
     <EnumCode("1")> Absent
