@@ -632,6 +632,10 @@ Namespace Services
             Return DataDao.UpdateRecord(data, groupIdNo)
         End Function
 
+        Public Function PostData(idNo As Int32) As Boolean Implements IService.PostData
+            Return DataDao.PostData(idNo)
+        End Function
+
         Public Function UpdateTvp(dtTable As DataTable) As Integer Implements IService.UpdateTvp
             Return DataDao.UpdateTvp(dtTable)
         End Function

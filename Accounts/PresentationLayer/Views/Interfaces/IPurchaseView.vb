@@ -32,6 +32,7 @@ Namespace PresentationLayer.Views.Interfaces
         Event GTinScanned(GTin As String, bs As BindingSource, ByRef productCode As String)
         Event UnitChanged(oldUnit As Short, newUnit As Short, bs As BindingSource, formattedValue As String)
         Event RowChanged(productIdNo As Integer)
+        Event PostData(idNo As Int32)
         'Event ProductNameChanged(productName As String, bs As BindingSource)
     End Interface
 

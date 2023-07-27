@@ -76,6 +76,17 @@ Namespace DataLayer
 
     End Interface
 
+
+    Public Interface IPurchaseDao
+        Function GetPurchaseHistory(productIdNo As Integer) As List(Of PurchaseHistory)
+
+    End Interface
+
+    Public Interface IDaoPosting
+        Function PostData(idNo As Int32) As Boolean
+
+    End Interface
+
     'Public Interface IDaoAutoVatUpdate
 
     '    Function UpdateVatNumber(ByVal vatNumber As String, ByVal idNo As Integer) As Integer

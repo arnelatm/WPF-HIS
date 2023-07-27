@@ -10,7 +10,7 @@ Namespace DataLayer.AdoNet
 
     Public Class PurchaseDao
         Inherits AccountsDao
-        Implements IDao(Of Purchase), IPurchaseDao
+        Implements IDao(Of Purchase), IPurchaseDao, IDaoPosting
 
         Private Const FieldList = "Amount," &
                                   "Cancelled," &
@@ -121,11 +121,29 @@ Namespace DataLayer.AdoNet
                                  }
         End Function
 
+        Public Function PostData(idNo As Integer) As Boolean Implements IDaoPosting.PostData
+            'Dim sql As String =
+            '        "Insert into Inventory(PurchaseDetailIdNo,ProductIdNo,QtyOnHand) " &
+            '        "select IdNo,ProductIdNo,Quantity+BonusQuantity from PurchaseDetail " &
+            '        "where PurchaseIdNo = @IdNo"
+            'Dim params() As Object = {"@IdNo", idNo}
+            'Dim retVal = Db.Update(sql, params)
+            'If retVal Then
+            '    sql = "Update Purchase set Posted = 1 where IdNo = @IdNo"
+            '    retVal = Db.Update(sql, params)
+            'End If
+            Dim retVal As Boolean
+            Dim commands As New List(Of DaoCommand)
+            Dim command1,command2 As New DaoCommand
+            command1.Add("Insert into Inventory (PurchaseDetailIdNo,ProductIdNo,QtyOnHand) " &
+                        "select IdNo,ProductIdNo,Quantity+BonusQuantity from PurchaseDetail " &
+                        "where PurchaseIdNo = @IdNo", {"@IdNo", idNo})
+            commands.Add(command1)
+            command2.Add("Update Purchase set Posted = 1 where IdNo = @IdNo", {"@IdNo", idNo})
+            commands.Add(command2)
+            retVal = Db.ExecuteNonQueryCommands("PostPurchase", commands)
+            Return retVal
+        End Function
     End Class
-
-    Public Interface IPurchaseDao
-        Function GetPurchaseHistory(productIdNo As Integer) As List(Of PurchaseHistory)
-
-    End Interface
 
 End Namespace
