@@ -1,18 +1,14 @@
 ﻿Imports System.Dynamic
-Imports System.Globalization
-Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.DataLayer
+Imports AATM.Common
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
-Imports Telerik.Licensing
+Imports AATM.ServicesLayer.Services
 
 Namespace PresentationLayer.Presenters
 
@@ -22,6 +18,7 @@ Namespace PresentationLayer.Presenters
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
+        Private _igService As Object
         Private ReadOnly _productService As New AccountsService("Product")
 
         Public Sub New(view As ISaleView)
@@ -30,6 +27,7 @@ Namespace PresentationLayer.Presenters
             TableName = "Sale"
             WithTreeView = False
             Service = New AccountsService("Sale")
+            _igService = New AccountsService("DrugSale")
             SortOrderKey = "IdNo"
             DtInsertTable.Columns.Add("BatchNo", GetType(String))
             DtInsertTable.Columns.Add("DiscountAmount", GetType(Decimal))
@@ -70,12 +68,16 @@ Namespace PresentationLayer.Presenters
             data.Add({"Customer", "CustomerIdNo", Nothing, Nothing})
             data.Add({"Warehouse", "WarehouseIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"})
             data.Add({"User", "UserIdNo", "IdNo,UserName", Nothing})
+            data.Add({"Country", "NationalityCode", "IdNo,CountryName,CountryCode", Nothing})
             CreateDataSourceThread(data)
 
             data.Clear()
             data.Add({"Unit", "UnitsByCode", Nothing, Nothing})
             data.Add({"Product", "ProductsByCode", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "ProductName"})
             CreateLookupDataThread(data)
+            Service.SetConnectionString("ISPDATA")
+            CreateEnumDataSource(Of MaleFemaleSelection)("Gender")
+            CreateEnumDataSource(Of YearMonthDaySelection)("AgeYmd")
             data.Clear()
 
         End Sub
@@ -519,8 +521,24 @@ Namespace PresentationLayer.Presenters
                 View.SaleDetails = New List(Of SaleDetailView)
             End If
             View.UserIdNo = GlobalVariables.UserIdNo
+            Dim wareHouse = Service.GetTopOneFields("Warehouse", "IdNo", "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString(), "IdNo", True)
+            View.WarehouseIdNo = wareHouse.IdNo
         End Sub
 
+        Private Sub OnFindPatient()
+            Dim patientType As String = Service.GetRecordFieldWithKeyG(Of String, Int32)(View.PatientType, "ItemCode", "IdNo", "ItemCodeName")
+            Dim filter As String = "RegistrationNo = " + View.FileNo.ToString() + " and PatientType = '" & patientType & "'"
+            Dim patient As Object = New ExpandoObject
+            patient = _igService.GetRecordFieldsFiltered("PatientDetails", "PatientNameEnglish,Age,AgeYMD,Sex", filter)
+            If patient Is Nothing Then
+                AATM.Libraries.MessagingLibrary.Messaging.Show("No Such Patient with that File number and type found on file.")
+            Else
+                View.PatientName = patient.PatientNameEnglish
+                View.Age = patient.Age
+                View.AgeDmy = patient.AgeYmd
+                View.Gender = patient.Sex
+            End If
+        End Sub
 
     End Class
 

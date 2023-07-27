@@ -27,10 +27,10 @@ Namespace BusinessLayer
         Public Property IdNo As Int32
         Public Property InvoiceAmount As Decimal
         Public Property InvoiceNo As String
+        Public Property JournalIdNo As Int32
         Public Property PatientIdNo As Int32?
         Public Property PatientName As String
         Public Property Posted As Boolean
-        Public Property ReferenceNo As String
         Public Property SaleDetails As List(Of SaleDetail)
         Public Property TransactionDate As Date?
         Public Property UserIdNo As Int16

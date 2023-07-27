@@ -331,6 +331,11 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewPurchaseHistory.Columns("dgvExpiryDateH").DefaultCellStyle.Format = "yyyy/MM"
             SetupDgvColumns()
             UpdateTotals()
+            If DirectCast(cboWarehouseIdNo.DataSource, System.Data.DataTable).Rows.Count() < 2 Then
+                cboWarehouseIdNo.Enabled = False
+            Else
+                cboWarehouseIdNo.Enabled = True
+            End If
         End Sub
 
         Private Sub BindPurchaseDetail()
@@ -825,7 +830,6 @@ Namespace PresentationLayer.Views.Forms
         '    Me.ProductTableAdapter.Fill(Me.ISPDATADataSet.Product)
 
         'End Sub
-
 
         Private Sub grid_EditingControlShowing(ByVal s As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles DataGridViewPurchaseDetails.EditingControlShowing
             With DataGridViewPurchaseDetails

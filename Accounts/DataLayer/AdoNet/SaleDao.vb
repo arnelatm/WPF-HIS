@@ -18,8 +18,9 @@ Namespace DataLayer.AdoNet
                                   "DueDate," &
                                   "IdNo," &
                                   "InvoiceNo," &
-                                  "Posted," &
+                                  "JournalIdNo," &
                                   "PatientIdNo," &
+                                  "Posted," &
                                   "TransactionDate," &
                                   "UserIdNo," &
                                   "VatAmount," &
@@ -50,11 +51,12 @@ Namespace DataLayer.AdoNet
                     "Amount = @Amount," &
                     "BranchIdNo = @BranchIdNo," &
                     "Cancelled = @Cancelled," &
+                    "CustomerIdNo = @CustomerIdNo," &
                     "DueDate = @DueDate," &
                     "InvoiceNo = @InvoiceNo," &
+                    "JournalIdNo = @JournalIdNo," &
                     "PatientIdNo = @PatientIdNo," &
                     "Posted = @Posted," &
-                    "CustomerIdNo = @CustomerIdNo," &
                     "TransactionDate = @TransactionDate," &
                     "UserIdNo = @UserIdNo," &
                     "VatAmount = @VatAmount," &
@@ -67,8 +69,8 @@ Namespace DataLayer.AdoNet
             Implements IDao(Of Sale).AddRecord
             Dim sql As String =
                     " INSERT INTO [Sale] " &
-                    " (Amount,BranchIdNo,Cancelled,CustomerIdNo,DueDate,InvoiceNo,PatientIdNo,Posted,TransactionDate,UserIdNo,VatAmount,WarehouseIdNo)" &
-                    " VALUES (@Amount,@BranchIdNo,@Cancelled,@CustomerIdNo,@DueDate,@InvoiceNo,@PatientIdNo,@Posted,@TransactionDate,@UserIdNo,@VatAmount,@WarehouseIdNo)"
+                    " (Amount,BranchIdNo,Cancelled,CustomerIdNo,DueDate,InvoiceNo,JournalIdNo,PatientIdNo,Posted,TransactionDate,UserIdNo,VatAmount,WarehouseIdNo)" &
+                    " VALUES (@Amount,@BranchIdNo,@Cancelled,@CustomerIdNo,@DueDate,@InvoiceNo,@JournalIdNo,@PatientIdNo,@Posted,@TransactionDate,@UserIdNo,@VatAmount,@WarehouseIdNo)"
             Return Db.Insert(sql, Take(Sale))
         End Function
 
@@ -80,6 +82,7 @@ Namespace DataLayer.AdoNet
                                   .DueDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("DueDate")),
                                   .IdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("IdNo")),
                                   .InvoiceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("InvoiceNo")),
+                                  .JournalIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("JournalIdNo")),
                                   .PatientIdNo = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Int32)(reader("PatientIdNo")),
                                   .Posted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Posted")),
                                   .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),
@@ -97,6 +100,7 @@ Namespace DataLayer.AdoNet
                                     "DueDate", Sale.DueDate,
                                     "IdNo", Sale.IdNo,
                                     "InvoiceNo", Sale.InvoiceNo,
+                                    "JournalIdNo", Sale.JournalIdNo,
                                     "PatientIdNo", Sale.PatientIdNo,
                                     "Posted", Sale.Posted,
                                     "TransactionDate", Sale.TransactionDate,

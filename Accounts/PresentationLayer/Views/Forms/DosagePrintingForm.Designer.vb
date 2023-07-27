@@ -25,7 +25,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DosagePrintingForm))
-            Dim CBlendItems2 As AATM.Libraries.CBaseControlsLibrary.cBlendItems = New AATM.Libraries.CBaseControlsLibrary.cBlendItems()
+            Dim CBlendItems1 As AATM.Libraries.CBaseControlsLibrary.cBlendItems = New AATM.Libraries.CBaseControlsLibrary.cBlendItems()
             Me.CTextBox1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.lblGender = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -66,8 +66,8 @@ Namespace PresentationLayer.Views.Forms
             Me.lblItemName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtItemCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboAgeYmd = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.cboGender = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboAgeYmd = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.btnClear = New AATM.Libraries.CBaseControlsLibrary.CButton()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
@@ -1085,9 +1085,9 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.btnFindPatient.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
             Me.btnFindPatient.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-            CBlendItems2.iColor = New System.Drawing.Color() {System.Drawing.Color.White, System.Drawing.Color.White}
-            CBlendItems2.iPoint = New Single() {0!, 1.0!}
-            Me.btnFindPatient.ColorFillBlend = CBlendItems2
+            CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.White, System.Drawing.Color.White}
+            CBlendItems1.iPoint = New Single() {0!, 1.0!}
+            Me.btnFindPatient.ColorFillBlend = CBlendItems1
             Me.btnFindPatient.DesignerSelected = False
             Me.btnFindPatient.Image = Global.AATM.Accounts.My.Resources.Resources.btnfind
             Me.btnFindPatient.ImageIndex = 0
@@ -1161,53 +1161,6 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.CLabel2.Translatable = True
             '
-            'cboAgeYmd
-            '
-            Me.cboAgeYmd.BackColor = System.Drawing.Color.White
-            Me.cboAgeYmd.BegFindValue = Nothing
-            Me.cboAgeYmd.ChangingSearchValueOnly = False
-            Me.cboAgeYmd.CurrentSearchTerm = ""
-            Me.cboAgeYmd.DataValue = Nothing
-            Me.cboAgeYmd.DefaultValue = Nothing
-            Me.cboAgeYmd.DisplayMember = "Name"
-            Me.cboAgeYmd.Editable = True
-            Me.cboAgeYmd.EditingMode = True
-            Me.cboAgeYmd.EndFindValue = Nothing
-            Me.cboAgeYmd.FieldDescription = Nothing
-            Me.cboAgeYmd.FieldName = Nothing
-            Me.cboAgeYmd.FilterRule = Nothing
-            Me.cboAgeYmd.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboAgeYmd.FindEnabled = False
-            Me.cboAgeYmd.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cboAgeYmd.ForeColor = System.Drawing.Color.Black
-            Me.cboAgeYmd.FormattingEnabled = True
-            Me.cboAgeYmd.HideWhenNotEditingOrAdding = False
-            Me.cboAgeYmd.IgnoreCase = False
-            Me.cboAgeYmd.IntegralHeight = False
-            Me.cboAgeYmd.LimitToList = False
-            Me.cboAgeYmd.LinkedLabel = Nothing
-            Me.cboAgeYmd.Location = New System.Drawing.Point(256, 376)
-            Me.cboAgeYmd.Margin = New System.Windows.Forms.Padding(1)
-            Me.cboAgeYmd.MaxDropDownItems = 1
-            Me.cboAgeYmd.Name = "cboAgeYmd"
-            Me.cboAgeYmd.OldValue = 0
-            Me.cboAgeYmd.OriginalDataSource = Nothing
-            Me.cboAgeYmd.OriginalList = Nothing
-            Me.cboAgeYmd.OverrideDropDownStyleList = False
-            Me.cboAgeYmd.PreviousSearchTerm = Nothing
-            Me.cboAgeYmd.PropertySelector = Nothing
-            Me.cboAgeYmd.ReadOnlyCombo = True
-            Me.cboAgeYmd.Size = New System.Drawing.Size(74, 24)
-            Me.cboAgeYmd.SuggestBoxHeight = 200
-            Me.cboAgeYmd.SuggestListOrderRule = Nothing
-            Me.cboAgeYmd.TabIndex = 19
-            Me.cboAgeYmd.TextToSearch = Nothing
-            Me.cboAgeYmd.Translatable = False
-            Me.cboAgeYmd.ValueIsMandatory = False
-            Me.cboAgeYmd.ValueIsNullable = False
-            Me.cboAgeYmd.ValueIsNumeric = True
-            Me.cboAgeYmd.ValueMember = "Code"
-            '
             'cboGender
             '
             Me.cboGender.BackColor = System.Drawing.Color.White
@@ -1257,9 +1210,56 @@ Namespace PresentationLayer.Views.Forms
             Me.cboGender.ValueIsNumeric = False
             Me.cboGender.ValueMember = "Code"
             '
+            'cboAgeYmd
+            '
+            Me.cboAgeYmd.BackColor = System.Drawing.Color.White
+            Me.cboAgeYmd.BegFindValue = Nothing
+            Me.cboAgeYmd.ChangingSearchValueOnly = False
+            Me.cboAgeYmd.CurrentSearchTerm = ""
+            Me.cboAgeYmd.DataValue = Nothing
+            Me.cboAgeYmd.DefaultValue = Nothing
+            Me.cboAgeYmd.DisplayMember = "Name"
+            Me.cboAgeYmd.Editable = True
+            Me.cboAgeYmd.EditingMode = True
+            Me.cboAgeYmd.EndFindValue = Nothing
+            Me.cboAgeYmd.FieldDescription = Nothing
+            Me.cboAgeYmd.FieldName = Nothing
+            Me.cboAgeYmd.FilterRule = Nothing
+            Me.cboAgeYmd.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboAgeYmd.FindEnabled = False
+            Me.cboAgeYmd.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboAgeYmd.ForeColor = System.Drawing.Color.Black
+            Me.cboAgeYmd.FormattingEnabled = True
+            Me.cboAgeYmd.HideWhenNotEditingOrAdding = False
+            Me.cboAgeYmd.IgnoreCase = False
+            Me.cboAgeYmd.IntegralHeight = False
+            Me.cboAgeYmd.LimitToList = False
+            Me.cboAgeYmd.LinkedLabel = Nothing
+            Me.cboAgeYmd.Location = New System.Drawing.Point(256, 376)
+            Me.cboAgeYmd.Margin = New System.Windows.Forms.Padding(1)
+            Me.cboAgeYmd.MaxDropDownItems = 1
+            Me.cboAgeYmd.Name = "cboAgeYmd"
+            Me.cboAgeYmd.OldValue = 0
+            Me.cboAgeYmd.OriginalDataSource = Nothing
+            Me.cboAgeYmd.OriginalList = Nothing
+            Me.cboAgeYmd.OverrideDropDownStyleList = False
+            Me.cboAgeYmd.PreviousSearchTerm = Nothing
+            Me.cboAgeYmd.PropertySelector = Nothing
+            Me.cboAgeYmd.ReadOnlyCombo = True
+            Me.cboAgeYmd.Size = New System.Drawing.Size(74, 24)
+            Me.cboAgeYmd.SuggestBoxHeight = 200
+            Me.cboAgeYmd.SuggestListOrderRule = Nothing
+            Me.cboAgeYmd.TabIndex = 19
+            Me.cboAgeYmd.TextToSearch = Nothing
+            Me.cboAgeYmd.Translatable = False
+            Me.cboAgeYmd.ValueIsMandatory = False
+            Me.cboAgeYmd.ValueIsNullable = False
+            Me.cboAgeYmd.ValueIsNumeric = True
+            Me.cboAgeYmd.ValueMember = "Code"
+            '
             'btnClear
             '
-            Me.btnClear.DesignerSelected = True
+            Me.btnClear.DesignerSelected = False
             Me.btnClear.ImageIndex = 0
             Me.btnClear.Location = New System.Drawing.Point(418, 502)
             Me.btnClear.Name = "btnClear"
