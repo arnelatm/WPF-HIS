@@ -329,6 +329,7 @@ Namespace PresentationLayer.Views.Forms
             _footer.SetText("dgvProductName", "Totals ->")
             DataGridViewPurchaseDetails.Columns("dgvExpiryDate").DefaultCellStyle.Format = "yyyy/MM"
             DataGridViewPurchaseHistory.Columns("dgvExpiryDateH").DefaultCellStyle.Format = "yyyy/MM"
+            SetupDgvColumns()
             UpdateTotals()
         End Sub
 
@@ -338,7 +339,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewPurchaseDetails.Refresh()
             bsPurchaseDetails.DataSource = PurchaseDetails
             bsPurchaseDetails.AllowNew = True
-            SetupDgvColumns()
+            'SetupDgvColumns()
             ResumeLayout()
         End Sub
 
@@ -354,17 +355,14 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub SetupDgvColumns()
-            If FormShown Then
-                dgvSequence.DisplayOnly = True
-                dgvUnitIdNo.DataSource = UnitsByCode
-                dgvUnitIdNo.DisplayMember = "Name"
-                dgvUnitIdNo.ValueMember = "IdNo"
-                dgvUnitIdNo.DisplayStyleForCurrentCellOnly = True
-                dgvQuantity.DecimalPlaces = 0
-                dgvBonusQuantity.DecimalPlaces = 0
-                dgvUnitCost.DisplayOnly = True
-                dgvUnitCost.SetFormat(7, 2)
-            End If
+            dgvSequence.DisplayOnly = True
+            dgvUnitIdNo.ValueMember = "IdNo"
+            dgvUnitIdNo.DisplayMember = "Name"
+            dgvUnitIdNo.DataSource = UnitsByCode
+            dgvQuantity.DecimalPlaces = 0
+            dgvBonusQuantity.DecimalPlaces = 0
+            dgvUnitCost.DisplayOnly = True
+            dgvUnitCost.SetFormat(7, 2)
         End Sub
 
         Private Sub CboSupplierIdNo_Changed(sender As Object, e As EventArgs) Handles cboSupplierIdNo.Validated, cboSupplierIdNo.SelectionChangeCommitted
@@ -835,7 +833,7 @@ Namespace PresentationLayer.Views.Forms
                 If cColumnName = "dgvUnitIdNo" Then
                     Dim comboBox = TryCast(e.Control, DataGridViewComboBoxEditingControl)
                     If comboBox IsNot Nothing Then
-                        RaiseEvent ProductUnitSelection(DataGridViewPurchaseDetails.CurrentRow.Cells("dgvUnitIdNo").Value, bsPurchaseDetails)
+                        RaiseEvent ProductUnitSelection(DataGridViewPurchaseDetails.CurrentRow.Cells("dgvProductIdNo").Value, bsPurchaseDetails)
                         comboBox.DropDownStyle = ComboBoxStyle.DropDown
                         comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend
                         comboBox.DataSource = UnitsByProduct
@@ -1024,13 +1022,15 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub lblDueDate_Click(sender As Object, e As EventArgs) Handles lblDueDate.Click
-
-        End Sub
-
         Private Sub btnPost_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPost.ClickButtonArea
             If Not Posted Then
-                RaiseEvent PostData(IdNo)
+                Dim caption = Messaging.TranslateCaption("Please confirm.")
+                Dim action As String = Messaging.TranslateCaption("post")
+                Dim itemName As String = Messaging.TranslateCaption("purchase transaction")
+                Dim msg = Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
+                If Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                    RaiseEvent PostData(IdNo)
+                End If
             End If
         End Sub
     End Class
