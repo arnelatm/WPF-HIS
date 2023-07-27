@@ -5,16 +5,23 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface ISaleView
         Inherits IView
 
-
+        Property Age As Int16
+        Property AgeDmy As String
         Property Amount As Decimal
         Property Cancelled As Boolean
         Property CustomerIdNo As Int32?
         Property DateCreated As DateTime?
+        Property DoctorIdNo As Int16
         Property DueDate As Date?
+        Property FileNo As Int32?
+        Property Gender As String
         Property IdNo As Int32
         Property InvoiceNo As String
-        Property PatientIdNo As Int32?
+        Property JournalIdNo As Int32
+        Property NationalityCode As String
         Property PatientName As String
+        Property PatientType As String
+        Property PhoneNo As String
         Property Posted As Boolean
         Property ProductsByCode As Object
         Property TransactionDate As Date?

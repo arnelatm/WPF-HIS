@@ -1,13 +1,11 @@
 ﻿Imports System.ComponentModel
 Imports System.Dynamic
 Imports System.Globalization
-Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports Telerik.WinControls.VirtualKeyboard
 
 Namespace PresentationLayer.Views.Forms
 
@@ -219,16 +217,16 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PatientIdNo As Int32? Implements ISaleView.PatientIdNo
+        Public Property FileNo As Int32? Implements ISaleView.FileNo
             Get
-                If txtPatientIdNo.Text <> "" Then
-                    Return Convert.ToInt32(txtPatientIdNo.Text)
+                If txtFileNo.Text <> "" Then
+                    Return Convert.ToInt32(txtFileNo.Text)
                 Else
                     Return 0
                 End If
             End Get
             Set
-                txtPatientIdNo.Text = Convert.ToString(Value)
+                txtFileNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
@@ -259,26 +257,105 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property JournalIdNo As Integer Implements ISaleView.JournalIdNo
+            Get
+                Return txtJournalIdNo.Text
+            End Get
+            Set
+                txtJournalIdNo.Text = Value
+            End Set
+        End Property
+
+        Public Property NationalityCode As String Implements ISaleView.NationalityCode
+            Get
+                Return cboNationalityCode.GetValue(Of String)
+            End Get
+            Set(value As String)
+                cboNationalityCode.SetValue(value)
+            End Set
+        End Property
+
+        Public Property Gender As String Implements ISaleView.Gender
+            Get
+                Return cboGender.GetValue(Of String)
+            End Get
+            Set(value As String)
+                cboGender.SetValue(value)
+            End Set
+        End Property
+
+        Public Property Age As Short Implements ISaleView.Age
+            Get
+                Return txtAge.Text
+            End Get
+            Set
+                txtAge.Text = Value
+            End Set
+        End Property
+
+        Public Property AgeDmy As String Implements ISaleView.AgeDmy
+            Get
+                Return cboAgeYmd.GetValue(Of String)
+            End Get
+            Set
+                cboAgeYmd.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property PhoneNo As String Implements ISaleView.PhoneNo
+            Get
+                Return txtPhoneNo.Text
+            End Get
+            Set
+                txtPhoneNo.Text = Value
+            End Set
+        End Property
+
+        Public Property DoctorIdNo As Short Implements ISaleView.DoctorIdNo
+            Get
+                Return cboDoctorIdNo.GetValue(Of String)
+            End Get
+            Set
+                cboDoctorIdNo.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property PatientType As String Implements ISaleView.PatientType
+            Get
+                Return cboPatientType.GetValue(Of String)
+            End Get
+            Set
+                cboPatientType.SetValue(Value)
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
-        {
-         {"Amount", txtAmount},
-         {"Cancelled", chkCancelled},
-         {"CustomerIdNo", cboCustomerIdNo},
-         {"DateCreated", txtDateCreated},
-         {"DueDate", dtpDueDate},
-         {"IdNo", TxtIdNo},
-         {"InvoiceNo", txtInvoiceNo},
-         {"PatientIdNo", txtPatientIdNo},
-         {"Posted", chkPosted},
-         {"ReferenceNo", cboWarehouseIdNo},
-         {"TransactionDate", dtpTransactionDate},
-         {"UserIdNo", cboUserIdNo},
-         {"VatAmount", txtVatAmount},
-         {"WarehouseIdNo", cboWarehouseIdNo}
-        }
+            {
+             {"Age", txtAge},
+             {"AgeYmd", cboAgeYmd},
+             {"Amount", txtAmount},
+             {"Cancelled", chkCancelled},
+             {"CustomerIdNo", cboCustomerIdNo},
+             {"DateCreated", txtDateCreated},
+             {"DoctorIdNo", cboDoctorIdNo},
+             {"DueDate", dtpDueDate},
+             {"FileNo", txtFileNo},
+             {"Gender", cboGender},
+             {"IdNo", TxtIdNo},
+             {"InvoiceNo", txtInvoiceNo},
+             {"JournalIdNo", txtJournalIdNo},
+             {"NationalityCode", cboNationalityCode},
+             {"PatientIdNo", txtFileNo},
+             {"PatientType", cboPatientType},
+             {"Posted", chkPosted},
+             {"TransactionDate", dtpTransactionDate},
+             {"UserIdNo", cboUserIdNo},
+             {"VatAmount", txtVatAmount},
+             {"WarehouseIdNo", cboWarehouseIdNo}
+            }
         End Sub
 
         Protected Sub SaleUpdateView() Handles MyBase.AfterUpdateView

@@ -558,6 +558,8 @@ Namespace PresentationLayer.Presenters
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             View.TransactionDate = Date.Now()
             View.UserIdNo = GlobalVariables.UserIdNo
+            Dim wareHouse = Service.GetTopOneFields("Warehouse", "IdNo", "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString(), "IdNo", True)
+            View.WarehouseIdNo = wareHouse.IdNo
         End Sub
 
         Private Function OnPostData(idNo As Int32) As Boolean
@@ -567,6 +569,7 @@ Namespace PresentationLayer.Presenters
             End If
             Return retVal
         End Function
+
 
     End Class
 

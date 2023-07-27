@@ -14,6 +14,7 @@
         Public Property Errors As List(Of String)
         Public Property IdNo As Int32
         Public Property InvoiceNo As String
+        Public Property JournalIdNo As Int32
         Public Property Notes As String
         Public Property PatientIdNo As Int32?
         Public Property PatientName As String
