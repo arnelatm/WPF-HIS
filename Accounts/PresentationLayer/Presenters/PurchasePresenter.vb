@@ -68,8 +68,10 @@ Namespace PresentationLayer.Presenters
             AddHandler view.ProductUnitSelection, AddressOf OnProductUnitSelection
             AddHandler view.UnitChanged, AddressOf OnUnitChanged
             AddHandler view.RowChanged, AddressOf OnRowChanged
+            AddHandler view.PostData, AddressOf OnPostData
 
         End Sub
+
 
         Protected Overrides Sub CreateDataSources()
             Dim data As New ArrayList
@@ -557,6 +559,14 @@ Namespace PresentationLayer.Presenters
             View.TransactionDate = Date.Now()
             View.UserIdNo = GlobalVariables.UserIdNo
         End Sub
+
+        Private Function OnPostData(idNo As Int32) As Boolean
+            Dim retVal As Boolean = Service.PostData(idNo)
+            If retVal Then
+                View.Posted = True
+            End If
+            Return retVal
+        End Function
 
     End Class
 

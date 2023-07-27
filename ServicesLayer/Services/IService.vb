@@ -73,6 +73,8 @@ Namespace Services
         Function UpdateTvp(dtTable As DataTable) As Integer
         Function GetDtRecords(tableName As String, Optional fields As String = Nothing, Optional filterKey As String = Nothing, Optional sortKey As String = Nothing) As Object
         Function GetAll(Of TM As New)(sortKey As String) As List(Of TM)
+        Function PostData(IdNo As Int32) As Boolean
+
     End Interface
 
 End Namespace

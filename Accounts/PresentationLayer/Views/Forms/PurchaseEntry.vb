@@ -23,6 +23,7 @@ Namespace PresentationLayer.Views.Forms
         Public Event ProductUnitEditing(productIdNo As Int32) Implements IPurchaseView.ProductUnitEditing
         Public Event UnitChanged(oldUnit As Int16, newUnit As Int16, bs As BindingSource, formattedValue As String) Implements IPurchaseView.UnitChanged
         Public Event RowChanged(productIdNo As Int32) Implements IPurchaseView.RowChanged
+        Public Event PostData(idNo As Int32) Implements IPurchaseView.PostData
 
         Public Property ProductsByCode As DataTable Implements IPurchaseView.ProductsByCode
         Public Property UnitsByCode As DataTable Implements IPurchaseView.UnitsByCode
@@ -154,6 +155,11 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As Boolean)
                 chkPosted.Checked = value
+                If value Then
+                    btnPost.Enabled = False
+                Else
+                    btnPost.Enabled = True
+                End If
             End Set
         End Property
 
@@ -1020,6 +1026,12 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub lblDueDate_Click(sender As Object, e As EventArgs) Handles lblDueDate.Click
 
+        End Sub
+
+        Private Sub btnPost_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPost.ClickButtonArea
+            If Not Posted Then
+                RaiseEvent PostData(IdNo)
+            End If
         End Sub
     End Class
 
