@@ -166,6 +166,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateIspdata", "CreateIspd
 		Create Chart Balance.sql = Create Chart Balance.sql
 		Create ISPDATA Database.sql = Create ISPDATA Database.sql
 		Create Product from IGroupCLinic Data = Create Product from IGroupCLinic Data
+		Create ProductUnit = Create ProductUnit
 		Create Purchase = Create Purchase
 		Create PurchaseDetail = Create PurchaseDetail
 		Create Salt and user.sql = Create Salt and user.sql
