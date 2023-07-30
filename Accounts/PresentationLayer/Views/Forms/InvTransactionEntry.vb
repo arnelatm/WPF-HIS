@@ -257,19 +257,11 @@ Namespace PresentationLayer.Views.Forms
                 .AutoCalc = True
             }
             _footer.ColumnToSum("dgvQuantity", 0) = True
-            _footer.ColumnToSum("dgvBonusQuantity", 0) = True
             _footer.ColumnToSum("dgvGrossAmount") = True
             _footer.ColumnToSum("dgvDiscountAmount") = True
-            _footer.ColumnToSum("dgvAmtBefVat") = True
-            _footer.ColumnToSum("dgvVatAmount") = True
-            _footer.ColumnToSum("dgvNetAmount") = True
             _footer.SetAlignment("dgvQuantity", ContentAlignment.MiddleRight)
-            _footer.SetAlignment("dgvBonusQuantity", ContentAlignment.MiddleRight)
             _footer.SetAlignment("dgvGrossAmount", ContentAlignment.MiddleRight)
             _footer.SetAlignment("dgvDiscountAmount", ContentAlignment.MiddleRight)
-            _footer.SetAlignment("dgvAmtBefVat", ContentAlignment.MiddleRight)
-            _footer.SetAlignment("dgvVatAmount", ContentAlignment.MiddleRight)
-            _footer.SetAlignment("dgvNetAmount", ContentAlignment.MiddleRight)
             _footer.SetText("dgvProductName", "Totals ->")
             DataGridViewInvTransactionDetails.Columns("dgvExpiryDate").DefaultCellStyle.Format = "yyyy/MM"
             SetupDgvColumns()
@@ -297,8 +289,6 @@ Namespace PresentationLayer.Views.Forms
             dgvUnitIdNo.ValueMember = "IdNo"
             dgvUnitIdNo.DisplayMember = "Name"
             dgvUnitIdNo.DataSource = UnitsByCode
-            dgvQuantity.DecimalPlaces = 0
-            dgvBonusQuantity.DecimalPlaces = 0
             dgvUnitCost.DisplayOnly = True
             dgvUnitCost.SetFormat(7, 2)
         End Sub
