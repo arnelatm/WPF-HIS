@@ -15,7 +15,6 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _footer As DgvFooter
         Private _InvTransactionDetails As List(Of InvTransactionDetailView)
-        Private _InvTransactionHistory As List(Of InvTransactionHistoryView)
         Private _noOfUnits As Int16
         Public Event ProductCodeChanged(productCode As String, bs As BindingSource) Implements IInvTransactionView.ProductCodeChanged
         Public Event GTinScanned(GTin As String, bs As BindingSource, ByRef productCode As String) Implements IInvTransactionView.GTinScanned
@@ -59,7 +58,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DateCreated As DateTime? Implements IInvTransactionView.DateCreated
+        Public Property DateCreated As DateTime Implements IInvTransactionView.DateCreated
             Get
                 Try
                     Return Convert.ToDateTime(txtDateCreated.Text)
@@ -68,20 +67,7 @@ Namespace PresentationLayer.Views.Forms
                 End Try
             End Get
             Set
-                If Value.HasValue Then
-                    txtDateCreated.Text = Value
-                Else
-                    txtDateCreated.Text = Date.Now().ToString()
-                End If
-            End Set
-        End Property
-
-        Public Property DueDate As Date? Implements IInvTransactionView.DueDate
-            Get
-                Return dtpDueDate.Value
-            End Get
-            Set
-                dtpDueDate.Value = Value
+                txtDateCreated.Text = Value
             End Set
         End Property
 
@@ -98,27 +84,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property InvoiceDate As Date? Implements IInvTransactionView.InvoiceDate
-            Get
-                Return dtpInvoiceDate.Value
-            End Get
-            Set
-                If Value IsNot Nothing Then
-                    dtpInvoiceDate.Value = Value
-                Else
-                    dtpInvoiceDate.Value = Today()
-                End If
-            End Set
-        End Property
-
-        Public Property InvoiceNo As String Implements IInvTransactionView.InvoiceNo
-            Get
-                Return txtInvoiceNo.Text
-            End Get
-            Set
-                txtInvoiceNo.Text = Value
-            End Set
-        End Property
 
         Public Property InvTransactionDetails As List(Of InvTransactionDetailView) Implements IInvTransactionView.InvTransactionDetails
             Get
@@ -130,24 +95,14 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property InvTransactionHistory As List(Of InvTransactionHistoryView) Implements IInvTransactionView.InvTransactionHistory
+        Public Property Notes As String Implements IInvTransactionView.Notes
             Get
-                Return _InvTransactionHistory
+                Return txtNotes.Text
             End Get
             Set
-                _InvTransactionHistory = Value
-                BindInvTransactionHistory()
+                txtNotes.Text = If(Value, "")
             End Set
         End Property
-
-        'Public Property Notes As String Implements IInvTransactionView.Notes
-        '    Get
-        '        Return txtNotes.Text
-        '    End Get
-        '    Set
-        '        txtNotes.Text = If(Value, "")
-        '    End Set
-        'End Property
 
         Public Property Posted As Boolean Implements IInvTransactionView.Posted
             Get
@@ -184,15 +139,6 @@ Namespace PresentationLayer.Views.Forms
         '        dtpSettlementDueDate.Value = Value
         '    End Set
         'End Property
-
-        Public Property SupplierIdNo As Int32? Implements IInvTransactionView.SupplierIdNo
-            Get
-                Return cboSupplierIdNo.GetValue(Of Int32?)
-            End Get
-            Set
-                cboSupplierIdNo.SetValue(Value)
-            End Set
-        End Property
 
         Public Property WarehouseIdNo As Int16 Implements IInvTransactionView.WarehouseIdNo
             Get
@@ -237,24 +183,6 @@ Namespace PresentationLayer.Views.Forms
         '    End Set
         'End Property
 
-        Public Property VatAmount As Decimal Implements IInvTransactionView.VatAmount
-            Get
-                Return Convert.ToDecimal(NumParser(Of Decimal)(txtVatAmount.Text), _nfi)
-            End Get
-            Set
-                txtVatAmount.Text = FormatMoney(Value)
-            End Set
-        End Property
-
-        Public Property VatNumber As String Implements IInvTransactionView.VatNumber
-            Get
-                Return txtVatNumber.Text
-            End Get
-            Set
-                txtVatNumber.Text = Value
-            End Set
-        End Property
-
         Public Property Cancelled As Boolean Implements IInvTransactionView.Cancelled
             Get
                 Return chkCancelled.Checked
@@ -282,6 +210,24 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property InvTransTypeIdNo As Int16 Implements IInvTransactionView.InvTransTypeIdNo
+            Get
+                Return cboInvTransTypeIdNo.GetValue(Of Int16)
+            End Get
+            Set(value As Short)
+                cboInvTransTypeIdNo.SetValue(value)
+            End Set
+        End Property
+
+        Public Property WarehouseToIdNo As Int16? Implements IInvTransactionView.WarehouseToIdNo
+            Get
+                Return cboWarehouseToIdNo.GetValue(Of Int16)
+            End Get
+            Set(value As Int16?)
+                cboWarehouseToIdNo.SetValue(value)
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -290,17 +236,15 @@ Namespace PresentationLayer.Views.Forms
          {"Amount", txtAmount},
          {"Cancelled", chkCancelled},
          {"DateCreated", txtDateCreated},
-         {"DueDate", dtpDueDate},
          {"IdNo", TxtIdNo},
-         {"InvoiceNo", txtInvoiceNo},
+         {"InvTransTypeIdNo", cboInvTransTypeIdNo},
+         {"Notes", txtNotes},
          {"Posted", chkPosted},
          {"ReferenceNo", txtReferenceNo},
-         {"SupplierIdNo", cboSupplierIdNo},
          {"TransactionDate", dtpTransactionDate},
          {"UserIdNo", cboUserIdNo},
-         {"VatAmount", txtVatAmount},
-         {"VatNumber", txtVatNumber},
-         {"WarehouseIdNo", cboWarehouseIdNo}
+         {"WarehouseIdNo", cboWarehouseIdNo},
+         {"WarehouseToIdNo", cboWarehouseToIdNo}
         }
         End Sub
 
@@ -328,7 +272,6 @@ Namespace PresentationLayer.Views.Forms
             _footer.SetAlignment("dgvNetAmount", ContentAlignment.MiddleRight)
             _footer.SetText("dgvProductName", "Totals ->")
             DataGridViewInvTransactionDetails.Columns("dgvExpiryDate").DefaultCellStyle.Format = "yyyy/MM"
-            DataGridViewInvTransactionHistory.Columns("dgvExpiryDateH").DefaultCellStyle.Format = "yyyy/MM"
             SetupDgvColumns()
             UpdateTotals()
             If DirectCast(cboWarehouseIdNo.DataSource, System.Data.DataTable).Rows.Count() < 2 Then
@@ -349,16 +292,6 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
 
-        Private Sub BindInvTransactionHistory()
-            SuspendLayout()
-            bsInvTransactionHistory.DataSource = Nothing
-            DataGridViewInvTransactionHistory.Refresh()
-            bsInvTransactionHistory.DataSource = InvTransactionHistory
-            bsInvTransactionHistory.AllowNew = False
-            'SetupDgvColumns()
-            ResumeLayout()
-        End Sub
-
         Private Sub SetupDgvColumns()
             dgvSequence.DisplayOnly = True
             dgvUnitIdNo.ValueMember = "IdNo"
@@ -368,14 +301,6 @@ Namespace PresentationLayer.Views.Forms
             dgvBonusQuantity.DecimalPlaces = 0
             dgvUnitCost.DisplayOnly = True
             dgvUnitCost.SetFormat(7, 2)
-        End Sub
-
-        Private Sub CboSupplierIdNo_Changed(sender As Object, e As EventArgs) Handles cboSupplierIdNo.Validated, cboSupplierIdNo.SelectionChangeCommitted
-            Presenter.UpdateDueDate()
-            'Presenter.UpdateEarlySettlementValues()
-            If SupplierIdNo IsNot Nothing Then
-                Presenter.SetSupplierVatNumber(VatNumber, SupplierIdNo, True)
-            End If
         End Sub
 
         Private Sub CboSupplierIdNo_Validating(sender As Object, e As CancelEventArgs)
@@ -808,7 +733,6 @@ Namespace PresentationLayer.Views.Forms
                 _footer.CalculateTotals()
                 Dim netAmtBefVat As Decimal = _footer.Value("dgvNetAmount")
                 Dim vatAmount As Decimal = _footer.Value("dgvVatAmount")
-                txtVatAmount.Text = vatAmount.ToString("n2")
                 txtAmount.Text = (netAmtBefVat + vatAmount).ToString("n2")
                 txtGrossAmount.Text = _footer.Value("dgvGrossAmount").ToString("n2")
                 txtDiscountAmount.Text = _footer.Value("dgvDiscountAmount").ToString("n2")
@@ -989,7 +913,6 @@ Namespace PresentationLayer.Views.Forms
             Dim dgvRow As DataGridViewRow = DataGridViewInvTransactionDetails.Rows(e.RowIndex)
             Dim prIdNo As Int32 = dgvRow.Cells("dgvProductIdNo").Value
             RaiseEvent RowChanged(prIdNo)
-            bsInvTransactionHistory.ResetBindings(False)
             CGroupBox1.Text = Messaging.TranslateCaption("InvTransaction History for ") + dgvRow.Cells("dgvProductCode").Value + "-" + dgvRow.Cells("dgvProductName").Value
         End Sub
 
@@ -1017,7 +940,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         ' Changes how cells are displayed depending on their columns and values.
-        Private Sub dgvPurHistoryFormatting(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellFormattingEventArgs) Handles DataGridViewInvTransactionHistory.CellFormatting
+        Private Sub dgvPurHistoryFormatting(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellFormattingEventArgs)
             If sender.Columns(e.ColumnIndex).Name.Equals("dgvExpiryDateH") Then
                 If e.Value = Date.MinValue Then
                     e.Value = String.Empty

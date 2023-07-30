@@ -129,7 +129,7 @@ Namespace DataLayer.AdoNet
             command1.Add("Insert into Inventory (PurchaseDetailIdNo,ProductIdNo,QtyOnHand,WarehouseIdNo) " &
                          "Select Case a.IdNo,a.ProductIdNo,(a.Quantity+a.BonusQuantity) * c.BaseQty / c.UnitQty,b.WarehouseIdNo " &
                          "From PurchaseDetail a Left Join Purchase b On a.PurchaseIdNo = b.IdNo " &
-                         "Left Join ProductUnit_View c On a.ProductIdNo = c.ProductIdNo And a.UnitIdNo = c.UnitIdNo " &)
+                         "Left Join ProductUnit_View c On a.ProductIdNo = c.ProductIdNo And a.UnitIdNo = c.UnitIdNo " &
                          "where a.PurchaseIdNo = @IdNo", {"@IdNo", idNo})
             'command1.Add("Insert into Inventory (PurchaseDetailIdNo,ProductIdNo,QtyOnHand,WarehouseIdNo) " &
             '            "select a.IdNo,a.ProductIdNo,a.Quantity+a.BonusQuantity,b.WarehouseIdNo from PurchaseDetail a " &

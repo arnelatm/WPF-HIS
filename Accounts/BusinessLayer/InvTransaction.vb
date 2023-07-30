@@ -16,7 +16,6 @@ Namespace BusinessLayer
         End Sub
 
         Public Property Amount As Decimal
-        Public Property BranchIdNo As Int16
         Public Property Cancelled As Boolean
         Public Property DateCreated As Date
         Public Property IdNo As Int32
@@ -28,6 +27,7 @@ Namespace BusinessLayer
         Public Property UserIdNo As Int16
         Public Property WarehouseIdNo As Int16
         Public Property WarehouseToIdNo As Int16?
+        Public Property InvTransactionDetails As List(Of InvTransactionDetail)
 
     End Class
 

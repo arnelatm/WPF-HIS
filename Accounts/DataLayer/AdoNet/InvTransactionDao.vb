@@ -10,7 +10,7 @@ Namespace DataLayer.AdoNet
 
     Public Class InvTransactionDao
         Inherits AccountsDao
-        Implements IDao(Of InvTransaction), IInvTransactionDao, IDaoPosting
+        Implements IDao(Of InvTransaction), IDaoPosting
 
         Private Const FieldList = "Amount," &
                                   "Cancelled," &
@@ -33,10 +33,6 @@ Namespace DataLayer.AdoNet
             Dim sql As String = " Select " & FieldList & " from InvTransaction " & " where IdNo = @IdNo and BranchIdNo = @BranchIdNo"
             Dim params() As Object = {"@IdNo", idNo, "@BranchIdNo", GlobalVariables.BranchIdNo}
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
-            If data IsNot Nothing Then
-                Dim InvTransactionDetailDao = New InvTransactionDetailDao
-                data.InvTransactionDetails = InvTransactionDetailDao.GetRecordsWithGroupIdNo(idNo, "sequence")
-            End If
             Return data
         End Function
 

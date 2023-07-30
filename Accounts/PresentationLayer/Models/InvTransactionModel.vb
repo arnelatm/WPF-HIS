@@ -1,4 +1,5 @@
-﻿Imports AATM.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.PresentationLayer.Models
 
 Namespace PresentationLayer.Models
 
@@ -10,8 +11,7 @@ Namespace PresentationLayer.Models
 
 
         Public Property Amount As Decimal
-        Public Property BranchIdNo As Int16
-        Public Property Cancelled As Boolea
+        Public Property Cancelled As Boolean
         Public Property DateCreated As Date
         Public Property IdNo As Int16
         Public Property InvTransTypeIdNo As Int16
@@ -22,6 +22,7 @@ Namespace PresentationLayer.Models
         Public Property UserIdNo As Int16
         Public Property WarehouseIdNo As Int16
         Public Property WarehouseToIdNo As Int16?
+        Public Property InvTransactionDetails As List(Of InvTransactionDetailModel)
 
     End Class
 

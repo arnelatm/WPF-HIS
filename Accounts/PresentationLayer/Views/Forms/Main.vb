@@ -1215,6 +1215,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemInventoryTransactionType_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemInventoryTransactionType.Click
             RunForm(Of InvTransTypeEntryTv, InvTransTypePresenter(Of InvTransTypeModel))()
         End Sub
+
+        Private Sub InventoryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InventoryToolStripMenuItem.Click
+            RunForm(Of InvTransactionEntry, InvTransactionPresenter(Of InvTransactionModel))()
+        End Sub
     End Class
 
 End Namespace
