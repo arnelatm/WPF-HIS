@@ -256,6 +256,7 @@
     <Compile Include="BusinessLayer\IGroup\ItemDetails.vb" />
     <Compile Include="BusinessLayer\InvTransType.vb" />
     <Compile Include="BusinessLayer\ProductUnit.vb" />
+    <Compile Include="BusinessLayer\InvTransactionDetail.vb" />
     <Compile Include="BusinessLayer\Sale.vb" />
     <Compile Include="BusinessLayer\SaleDetail.vb" />
     <Compile Include="BusinessLayer\PurchaseDetail.vb" />
@@ -327,6 +328,7 @@
     <Compile Include="DataLayer\AdoNet\IGroup\PrescriptionItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\InvTransTypeDao.vb" />
     <Compile Include="DataLayer\AdoNet\InvTransactionDao.vb" />
+    <Compile Include="DataLayer\AdoNet\InvTransactionDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\SaleDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\SaleDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseDetailDao.vb" />
@@ -482,6 +484,7 @@
     <Compile Include="PresentationLayer\Models\IGroup\Lab_InvoiceGroupModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\ItemDetailsModel.vb" />
     <Compile Include="PresentationLayer\Models\ProductUnitModel.vb" />
+    <Compile Include="PresentationLayer\Models\InvTransactionDetailModel.vb" />
     <Compile Include="PresentationLayer\Models\SaleDetailModel.vb" />
     <Compile Include="PresentationLayer\Models\PurchaseDetailModel.vb" />
     <Compile Include="PresentationLayer\Models\SaleModel.vb" />
@@ -522,6 +525,7 @@
     <Compile Include="PresentationLayer\Presenters\IGroup\DurationPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\DosageMasterPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\PrescriptionPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\InvTransactionPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\SalePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchasePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DoctorPresenter.vb" />
@@ -642,6 +646,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IPrescriptionView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IInvTransactionView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IInvTransTypeView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IInvTransactionDetailView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISaleDetailView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISaleView.vb" />
     <Compile Include="PresentationLayer\Views\ProductUnitView.vb" />
@@ -1069,6 +1074,7 @@
     <Compile Include="PresentationLayer\Views\EmployeeLeaveApprovalHistoryView.vb" />
     <Compile Include="PresentationLayer\Views\Lab_InvoiceDetailsView.vb" />
     <Compile Include="PresentationLayer\Views\PrescriptionItemView.vb" />
+    <Compile Include="PresentationLayer\Views\InvTransactionDetailView.vb" />
     <Compile Include="PresentationLayer\Views\SaleDetailView.vb" />
     <Compile Include="PresentationLayer\Views\PurchaseDetailView.vb" />
     <Compile Include="PresentationLayer\Views\PcJournalView.vb" />

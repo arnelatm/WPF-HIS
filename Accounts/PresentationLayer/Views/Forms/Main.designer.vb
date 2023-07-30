@@ -112,6 +112,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemCategory = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemUnit = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemWarehouse = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemInventoryTransactionType = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemReportMaster = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemTransactions = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPettyCash = New System.Windows.Forms.ToolStripMenuItem()
@@ -239,7 +240,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemInventoryTransactionType = New System.Windows.Forms.ToolStripMenuItem()
+            Me.InventoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -687,6 +688,11 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemWarehouse.Name = "ToolStripMenuItemWarehouse"
             resources.ApplyResources(Me.ToolStripMenuItemWarehouse, "ToolStripMenuItemWarehouse")
             '
+            'ToolStripMenuItemInventoryTransactionType
+            '
+            Me.ToolStripMenuItemInventoryTransactionType.Name = "ToolStripMenuItemInventoryTransactionType"
+            resources.ApplyResources(Me.ToolStripMenuItemInventoryTransactionType, "ToolStripMenuItemInventoryTransactionType")
+            '
             'ToolStripMenuItemReportMaster
             '
             Me.ToolStripMenuItemReportMaster.Name = "ToolStripMenuItemReportMaster"
@@ -694,7 +700,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemTransactions
             '
-            Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPettyCash, Me.ToolStripMenuItemCashDisbursementEntry, Me.ToolStripMenuItemAccountsPayableEntry, Me.ToolStripMenuItemAccountsReceivableEntry, Me.ToolStripMenuItemCashReceiptEntry, Me.ToolStripMenuItemEmployeeReceivable, Me.ToolStripMenuItemGeneralJournalEntry, Me.ToolStripMenuItemSales, Me.ToolStripMenuItemPurchases, Me.ToolStripMenuItemSalesJournalEntry, Me.ToolStripMenuItemAccountReconciliation, Me.ToolStripMenuItemPostPettyCashAccount, Me.ToolStripMenuItemClosing, Me.ToolStripMenuItemHR, Me.ToolStripMenuItemPayrollTransaction, Me.ToolStripMenuItemShiftSummaryEntry, Me.ToolStripSeparator2, Me.ToolStripMenuItemClosePettyCashFund, Me.ToolStripMenuItemLaboratory, Me.ToolStripMenuItemPharmacy})
+            Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPettyCash, Me.ToolStripMenuItemCashDisbursementEntry, Me.ToolStripMenuItemAccountsPayableEntry, Me.ToolStripMenuItemAccountsReceivableEntry, Me.ToolStripMenuItemCashReceiptEntry, Me.ToolStripMenuItemEmployeeReceivable, Me.ToolStripMenuItemGeneralJournalEntry, Me.ToolStripMenuItemSales, Me.ToolStripMenuItemPurchases, Me.ToolStripMenuItemSalesJournalEntry, Me.InventoryToolStripMenuItem, Me.ToolStripMenuItemAccountReconciliation, Me.ToolStripMenuItemPostPettyCashAccount, Me.ToolStripMenuItemHR, Me.ToolStripMenuItemClosing, Me.ToolStripMenuItemPayrollTransaction, Me.ToolStripMenuItemShiftSummaryEntry, Me.ToolStripSeparator2, Me.ToolStripMenuItemClosePettyCashFund, Me.ToolStripMenuItemLaboratory, Me.ToolStripMenuItemPharmacy})
             Me.ToolStripMenuItemTransactions.Name = "ToolStripMenuItemTransactions"
             resources.ApplyResources(Me.ToolStripMenuItemTransactions, "ToolStripMenuItemTransactions")
             '
@@ -1349,10 +1355,10 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'ToolStripMenuItemInventoryTransactionType
+            'InventoryToolStripMenuItem
             '
-            Me.ToolStripMenuItemInventoryTransactionType.Name = "ToolStripMenuItemInventoryTransactionType"
-            resources.ApplyResources(Me.ToolStripMenuItemInventoryTransactionType, "ToolStripMenuItemInventoryTransactionType")
+            Me.InventoryToolStripMenuItem.Name = "InventoryToolStripMenuItem"
+            resources.ApplyResources(Me.InventoryToolStripMenuItem, "InventoryToolStripMenuItem")
             '
             'Main
             '
@@ -1590,5 +1596,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripButtonDoseLabel As ToolStripButton
         Friend WithEvents ToolStripButtonPrescription As ToolStripButton
         Friend WithEvents ToolStripMenuItemInventoryTransactionType As ToolStripMenuItem
+        Friend WithEvents InventoryToolStripMenuItem As ToolStripMenuItem
     End Class
 End NameSpace
