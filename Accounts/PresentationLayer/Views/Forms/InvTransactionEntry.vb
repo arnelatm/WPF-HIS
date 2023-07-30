@@ -9,25 +9,25 @@ Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms
 
-    Public Class PurchaseEntry
-        Implements IPurchaseView
+    Public Class InvTransactionEntry
+        Implements IInvTransactionView
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _footer As DgvFooter
-        Private _PurchaseDetails As List(Of PurchaseDetailView)
-        Private _purchaseHistory As List(Of PurchaseHistoryView)
+        Private _InvTransactionDetails As List(Of InvTransactionDetailView)
+        Private _InvTransactionHistory As List(Of InvTransactionHistoryView)
         Private _noOfUnits As Int16
-        Public Event ProductCodeChanged(productCode As String, bs As BindingSource) Implements IPurchaseView.ProductCodeChanged
-        Public Event GTinScanned(GTin As String, bs As BindingSource, ByRef productCode As String) Implements IPurchaseView.GTinScanned
-        Public Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource) Implements IPurchaseView.ProductUnitSelection
-        Public Event ProductUnitEditing(productIdNo As Int32) Implements IPurchaseView.ProductUnitEditing
-        Public Event UnitChanged(oldUnit As Int16, newUnit As Int16, bs As BindingSource, formattedValue As String) Implements IPurchaseView.UnitChanged
-        Public Event RowChanged(productIdNo As Int32) Implements IPurchaseView.RowChanged
-        Public Event PostData(idNo As Int32) Implements IPurchaseView.PostData
+        Public Event ProductCodeChanged(productCode As String, bs As BindingSource) Implements IInvTransactionView.ProductCodeChanged
+        Public Event GTinScanned(GTin As String, bs As BindingSource, ByRef productCode As String) Implements IInvTransactionView.GTinScanned
+        Public Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource) Implements IInvTransactionView.ProductUnitSelection
+        Public Event ProductUnitEditing(productIdNo As Int32) Implements IInvTransactionView.ProductUnitEditing
+        Public Event UnitChanged(oldUnit As Int16, newUnit As Int16, bs As BindingSource, formattedValue As String) Implements IInvTransactionView.UnitChanged
+        Public Event RowChanged(productIdNo As Int32) Implements IInvTransactionView.RowChanged
+        Public Event PostData(idNo As Int32) Implements IInvTransactionView.PostData
 
-        Public Property ProductsByCode As DataTable Implements IPurchaseView.ProductsByCode
-        Public Property UnitsByCode As DataTable Implements IPurchaseView.UnitsByCode
-        Public Property UnitsByProduct As DataTable Implements IPurchaseView.UnitsByProduct
+        Public Property ProductsByCode As DataTable Implements IInvTransactionView.ProductsByCode
+        Public Property UnitsByCode As DataTable Implements IInvTransactionView.UnitsByCode
+        Public Property UnitsByProduct As DataTable Implements IInvTransactionView.UnitsByProduct
 
         Public Sub New()
             MyBase.New()
@@ -37,20 +37,20 @@ Namespace PresentationLayer.Views.Forms
             _nfi.NumberDecimalDigits = 2
         End Sub
 
-        'Private Sub JiBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsPurchaseDetails.AddingNew
-        '    e.NewObject = New PurchaseDetailView
+        'Private Sub JiBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsInvTransactionDetails.AddingNew
+        '    e.NewObject = New InvTransactionDetailView
         '    ' work around for error on datagrid entry on lastrow please do not remove.
         '    ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
         '    ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
         '    ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again
-        '    If DataGridViewPurchaseDetails.Rows.Count = bsPurchaseDetails.Count Then
-        '        bsPurchaseDetails.RemoveAt(bsPurchaseDetails.Count - 1)
+        '    If DataGridViewInvTransactionDetails.Rows.Count = bsInvTransactionDetails.Count Then
+        '        bsInvTransactionDetails.RemoveAt(bsInvTransactionDetails.Count - 1)
         '    End If
         'End Sub
 
 #Region "Fields"
 
-        Public Property Amount As Decimal Implements IPurchaseView.Amount
+        Public Property Amount As Decimal Implements IInvTransactionView.Amount
             Get
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtAmount.Text), _nfi)
             End Get
@@ -59,7 +59,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DateCreated As DateTime? Implements IPurchaseView.DateCreated
+        Public Property DateCreated As DateTime? Implements IInvTransactionView.DateCreated
             Get
                 Try
                     Return Convert.ToDateTime(txtDateCreated.Text)
@@ -76,7 +76,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DueDate As Date? Implements IPurchaseView.DueDate
+        Public Property DueDate As Date? Implements IInvTransactionView.DueDate
             Get
                 Return dtpDueDate.Value
             End Get
@@ -85,7 +85,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property IdNo As Int32 Implements IPurchaseView.IdNo
+        Public Property IdNo As Int32 Implements IInvTransactionView.IdNo
             Get
                 If TxtIdNo.Text <> "" Then
                     Return Convert.ToInt16(TxtIdNo.Text)
@@ -98,7 +98,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property InvoiceDate As Date? Implements IPurchaseView.InvoiceDate
+        Public Property InvoiceDate As Date? Implements IInvTransactionView.InvoiceDate
             Get
                 Return dtpInvoiceDate.Value
             End Get
@@ -111,7 +111,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property InvoiceNo As String Implements IPurchaseView.InvoiceNo
+        Public Property InvoiceNo As String Implements IInvTransactionView.InvoiceNo
             Get
                 Return txtInvoiceNo.Text
             End Get
@@ -120,27 +120,27 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PurchaseDetails As List(Of PurchaseDetailView) Implements IPurchaseView.PurchaseDetails
+        Public Property InvTransactionDetails As List(Of InvTransactionDetailView) Implements IInvTransactionView.InvTransactionDetails
             Get
-                Return _PurchaseDetails
+                Return _InvTransactionDetails
             End Get
             Set
-                _PurchaseDetails = Value
-                BindPurchaseDetail()
+                _InvTransactionDetails = Value
+                BindInvTransactionDetail()
             End Set
         End Property
 
-        Public Property PurchaseHistory As List(Of PurchaseHistoryView) Implements IPurchaseView.PurchaseHistory
+        Public Property InvTransactionHistory As List(Of InvTransactionHistoryView) Implements IInvTransactionView.InvTransactionHistory
             Get
-                Return _purchaseHistory
+                Return _InvTransactionHistory
             End Get
             Set
-                _purchaseHistory = Value
-                BindPurchaseHistory()
+                _InvTransactionHistory = Value
+                BindInvTransactionHistory()
             End Set
         End Property
 
-        'Public Property Notes As String Implements IPurchaseView.Notes
+        'Public Property Notes As String Implements IInvTransactionView.Notes
         '    Get
         '        Return txtNotes.Text
         '    End Get
@@ -149,7 +149,7 @@ Namespace PresentationLayer.Views.Forms
         '    End Set
         'End Property
 
-        Public Property Posted As Boolean Implements IPurchaseView.Posted
+        Public Property Posted As Boolean Implements IInvTransactionView.Posted
             Get
                 Return chkPosted.Checked
             End Get
@@ -163,7 +163,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        'Public Property SettlementDiscount As Decimal Implements IPurchaseView.SettlementDiscount
+        'Public Property SettlementDiscount As Decimal Implements IInvTransactionView.SettlementDiscount
         '    Get
         '        If txtSettlementDiscount.Text <> "" Then
         '            Return Convert.ToDecimal(txtSettlementDiscount.Text)
@@ -176,7 +176,7 @@ Namespace PresentationLayer.Views.Forms
         '    End Set
         'End Property
 
-        'Public Property SettlementDueDate As Date? Implements IPurchaseView.SettlementDueDate
+        'Public Property SettlementDueDate As Date? Implements IInvTransactionView.SettlementDueDate
         '    Get
         '        Return dtpSettlementDueDate.Value
         '    End Get
@@ -185,7 +185,7 @@ Namespace PresentationLayer.Views.Forms
         '    End Set
         'End Property
 
-        Public Property SupplierIdNo As Int32? Implements IPurchaseView.SupplierIdNo
+        Public Property SupplierIdNo As Int32? Implements IInvTransactionView.SupplierIdNo
             Get
                 Return cboSupplierIdNo.GetValue(Of Int32?)
             End Get
@@ -194,7 +194,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property WarehouseIdNo As Int16 Implements IPurchaseView.WarehouseIdNo
+        Public Property WarehouseIdNo As Int16 Implements IInvTransactionView.WarehouseIdNo
             Get
                 Return cboWarehouseIdNo.GetValue(Of Int16)
             End Get
@@ -203,19 +203,19 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        'Public ReadOnly Property TotalCredits As Decimal Implements IPurchaseView.TotalCredits
+        'Public ReadOnly Property TotalCredits As Decimal Implements IInvTransactionView.TotalCredits
         '    Get
         '        Return NumParser(Of Decimal)(txtTotalCredits.Text)
         '    End Get
         'End Property
 
-        'Public ReadOnly Property TotalDebits As Decimal Implements IPurchaseView.TotalDebits
+        'Public ReadOnly Property TotalDebits As Decimal Implements IInvTransactionView.TotalDebits
         '    Get
         '        Return NumParser(Of Decimal)(txtTotalDebits.Text)
         '    End Get
         'End Property
 
-        Public Property TransactionDate As Date? Implements IPurchaseView.TransactionDate
+        Public Property TransactionDate As Date? Implements IInvTransactionView.TransactionDate
             Get
                 Return dtpTransactionDate.Value
             End Get
@@ -228,7 +228,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        'Public Property TransactionType As String Implements IPurchaseView.TransactionType
+        'Public Property TransactionType As String Implements IInvTransactionView.TransactionType
         '    Get
         '        Return cboTransactionType.GetValue()
         '    End Get
@@ -237,7 +237,7 @@ Namespace PresentationLayer.Views.Forms
         '    End Set
         'End Property
 
-        Public Property VatAmount As Decimal Implements IPurchaseView.VatAmount
+        Public Property VatAmount As Decimal Implements IInvTransactionView.VatAmount
             Get
                 Return Convert.ToDecimal(NumParser(Of Decimal)(txtVatAmount.Text), _nfi)
             End Get
@@ -246,7 +246,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property VatNumber As String Implements IPurchaseView.VatNumber
+        Public Property VatNumber As String Implements IInvTransactionView.VatNumber
             Get
                 Return txtVatNumber.Text
             End Get
@@ -255,7 +255,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Cancelled As Boolean Implements IPurchaseView.Cancelled
+        Public Property Cancelled As Boolean Implements IInvTransactionView.Cancelled
             Get
                 Return chkCancelled.Checked
             End Get
@@ -264,7 +264,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property ReferenceNo As String Implements IPurchaseView.ReferenceNo
+        Public Property ReferenceNo As String Implements IInvTransactionView.ReferenceNo
             Get
                 Return txtReferenceNo.Text
             End Get
@@ -273,7 +273,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property UserIdNo As Int16 Implements IPurchaseView.UserIdNo
+        Public Property UserIdNo As Int16 Implements IInvTransactionView.UserIdNo
             Get
                 Return cboUserIdNo.GetValue(Of Int16)()
             End Get
@@ -304,12 +304,12 @@ Namespace PresentationLayer.Views.Forms
         }
         End Sub
 
-        Protected Sub PurchaseUpdateView() Handles MyBase.AfterUpdateView
+        Protected Sub InvTransactionUpdateView() Handles MyBase.AfterUpdateView
             UpdateTotals()
         End Sub
 
-        Private Sub PurchaseEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            _footer = New DgvFooter(DataGridViewPurchaseDetails) With {
+        Private Sub InvTransactionEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            _footer = New DgvFooter(DataGridViewInvTransactionDetails) With {
                 .AutoCalc = True
             }
             _footer.ColumnToSum("dgvQuantity", 0) = True
@@ -327,8 +327,8 @@ Namespace PresentationLayer.Views.Forms
             _footer.SetAlignment("dgvVatAmount", ContentAlignment.MiddleRight)
             _footer.SetAlignment("dgvNetAmount", ContentAlignment.MiddleRight)
             _footer.SetText("dgvProductName", "Totals ->")
-            DataGridViewPurchaseDetails.Columns("dgvExpiryDate").DefaultCellStyle.Format = "yyyy/MM"
-            DataGridViewPurchaseHistory.Columns("dgvExpiryDateH").DefaultCellStyle.Format = "yyyy/MM"
+            DataGridViewInvTransactionDetails.Columns("dgvExpiryDate").DefaultCellStyle.Format = "yyyy/MM"
+            DataGridViewInvTransactionHistory.Columns("dgvExpiryDateH").DefaultCellStyle.Format = "yyyy/MM"
             SetupDgvColumns()
             UpdateTotals()
             If DirectCast(cboWarehouseIdNo.DataSource, System.Data.DataTable).Rows.Count() < 2 Then
@@ -338,23 +338,23 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub BindPurchaseDetail()
+        Private Sub BindInvTransactionDetail()
             SuspendLayout()
-            bsPurchaseDetails.DataSource = Nothing
-            DataGridViewPurchaseDetails.Refresh()
-            bsPurchaseDetails.DataSource = PurchaseDetails
-            bsPurchaseDetails.AllowNew = True
+            bsInvTransactionDetails.DataSource = Nothing
+            DataGridViewInvTransactionDetails.Refresh()
+            bsInvTransactionDetails.DataSource = InvTransactionDetails
+            bsInvTransactionDetails.AllowNew = True
             'SetupDgvColumns()
             ResumeLayout()
         End Sub
 
 
-        Private Sub BindPurchaseHistory()
+        Private Sub BindInvTransactionHistory()
             SuspendLayout()
-            bsPurchaseHistory.DataSource = Nothing
-            DataGridViewPurchaseHistory.Refresh()
-            bsPurchaseHistory.DataSource = PurchaseHistory
-            bsPurchaseHistory.AllowNew = False
+            bsInvTransactionHistory.DataSource = Nothing
+            DataGridViewInvTransactionHistory.Refresh()
+            bsInvTransactionHistory.DataSource = InvTransactionHistory
+            bsInvTransactionHistory.AllowNew = False
             'SetupDgvColumns()
             ResumeLayout()
         End Sub
@@ -390,36 +390,36 @@ Namespace PresentationLayer.Views.Forms
             '_footer.Dispose()
         End Sub
 
-        'Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewPurchaseDetails.CellBeginEdit
-        '    'If DataGridViewPurchaseDetails.CurrentCell.RowIndex() = 0 Then
-        '    With DataGridViewPurchaseDetails.CurrentCell
+        'Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewInvTransactionDetails.CellBeginEdit
+        '    'If DataGridViewInvTransactionDetails.CurrentCell.RowIndex() = 0 Then
+        '    With DataGridViewInvTransactionDetails.CurrentCell
         '        Dim cColumnName = .OwningColumn.Name()
         '        If cColumnName = $"dgvUnitIdNo" Then
-        '            RaiseEvent ProductUnitSelection(DataGridViewPurchaseDetails.CurrentRow.Cells("dgvProductIdNo").Value, bsPurchaseDetails)
+        '            RaiseEvent ProductUnitSelection(DataGridViewInvTransactionDetails.CurrentRow.Cells("dgvProductIdNo").Value, bsInvTransactionDetails)
         '        End If
         '        '    Beep()
         '        '    e.Cancel = True
-        '        '    DataGridViewPurchaseDetails.EndEdit()
+        '        '    DataGridViewInvTransactionDetails.EndEdit()
         '        'End If
         '    End With
-        '    'ElseIf (DataGridViewPurchaseDetails.CurrentRow.Cells("dgvPaidAmount").Value <> 0 Or DataGridViewPurchaseDetails.CurrentRow.Cells("dgvDiscountTaken").Value <> 0) _
-        '    '       And DataGridViewPurchaseDetails.CurrentCell.OwningColumn.Name.ToLower() = $"dgvProductIdNo" Then
+        '    'ElseIf (DataGridViewInvTransactionDetails.CurrentRow.Cells("dgvPaidAmount").Value <> 0 Or DataGridViewInvTransactionDetails.CurrentRow.Cells("dgvDiscountTaken").Value <> 0) _
+        '    '       And DataGridViewInvTransactionDetails.CurrentCell.OwningColumn.Name.ToLower() = $"dgvProductIdNo" Then
         '    '    Beep()
         '    '    e.Cancel = True
-        '    '    DataGridViewPurchaseDetails.EndEdit()
+        '    '    DataGridViewInvTransactionDetails.EndEdit()
         '    '    Messaging.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
         '    ' End If
         'End Sub
 
-        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchaseDetails.CellEndEdit
-            Select Case DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name
+        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewInvTransactionDetails.CellEndEdit
+            Select Case DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name
                 Case $"dgvProductCode", $"dgvProductName"
                     ' nothing to do already processed
                 Case Else
-                    ProcessCellEndEdit(DataGridViewPurchaseDetails, bsPurchaseDetails)
+                    ProcessCellEndEdit(DataGridViewInvTransactionDetails, bsInvTransactionDetails)
             End Select
 
-            'With bsPurchaseDetails.Current
+            'With bsInvTransactionDetails.Current
             '    Dim gAmt As Decimal = 0
             '    Dim dAmt As Decimal = 0
             '    Dim price As Decimal = 0
@@ -428,119 +428,119 @@ Namespace PresentationLayer.Views.Forms
             '    Dim dPerc As Decimal = 0
             '    Dim vPerc As Decimal = 0
             '    Dim nAmt As Decimal = 0
-            '    If DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvQuantity" Then
-            '        gAmt = bsPurchaseDetails.Current.Price * bsPurchaseDetails.Current.Quantity
-            '        bsPurchaseDetails.Current.GrossAmount = gAmt
-            '        dAmt = gAmt * bsPurchaseDetails.Current.DiscountPercent / 100
-            '        bsPurchaseDetails.Current.DiscountAmount = dAmt
-            '        bsPurchaseDetails.Current.AmtBefVat = gAmt - dAmt
-            '        vAmt = (gAmt - dAmt) * bsPurchaseDetails.Current.VatPercent / 100
-            '        bsPurchaseDetails.Current.VatAmount = vAmt
-            '        bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
-            '    ElseIf DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvPrice" Then
-            '        gAmt = bsPurchaseDetails.Current.Price * bsPurchaseDetails.Current.Quantity
-            '        bsPurchaseDetails.Current.GrossAmount = gAmt
-            '        dAmt = gAmt * bsPurchaseDetails.Current.DiscountPercent / 100
-            '        bsPurchaseDetails.Current.DiscountAmount = dAmt
-            '        bsPurchaseDetails.Current.AmtBefVat = gAmt - dAmt
-            '        vAmt = (gAmt - dAmt) * bsPurchaseDetails.Current.VatPercent / 100
-            '        bsPurchaseDetails.Current.VatAmount = vAmt
-            '        bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
-            '    ElseIf DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvGrossAmount" Then
-            '        gAmt = bsPurchaseDetails.Current.GrossAmount
-            '        price = IIf(bsPurchaseDetails.Current.Quantity = 0, 0, gAmt / bsPurchaseDetails.Current.Quantity)
-            '        bsPurchaseDetails.Current.Price = price
-            '        dAmt = gAmt * bsPurchaseDetails.Current.DiscountPercent / 100
-            '        bsPurchaseDetails.Current.DiscountAmount = dAmt
-            '        bsPurchaseDetails.Current.DiscountPercent = dAmt / gAmt * 100
-            '        vAmt = (gAmt - dAmt) * bsPurchaseDetails.Current.VatPercent / 100
-            '        bsPurchaseDetails.Current.VatAmount = vAmt
-            '        bsPurchaseDetails.Current.AmtBefVat = gAmt - dAmt
-            '        bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
-            '    ElseIf DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvVatAmount" Then
-            '        gAmt = bsPurchaseDetails.Current.GrossAmount
-            '        dAmt = bsPurchaseDetails.Current.DiscountAmount
-            '        vAmt = bsPurchaseDetails.Current.VatAmount
+            '    If DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvQuantity" Then
+            '        gAmt = bsInvTransactionDetails.Current.Price * bsInvTransactionDetails.Current.Quantity
+            '        bsInvTransactionDetails.Current.GrossAmount = gAmt
+            '        dAmt = gAmt * bsInvTransactionDetails.Current.DiscountPercent / 100
+            '        bsInvTransactionDetails.Current.DiscountAmount = dAmt
+            '        bsInvTransactionDetails.Current.AmtBefVat = gAmt - dAmt
+            '        vAmt = (gAmt - dAmt) * bsInvTransactionDetails.Current.VatPercent / 100
+            '        bsInvTransactionDetails.Current.VatAmount = vAmt
+            '        bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
+            '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvPrice" Then
+            '        gAmt = bsInvTransactionDetails.Current.Price * bsInvTransactionDetails.Current.Quantity
+            '        bsInvTransactionDetails.Current.GrossAmount = gAmt
+            '        dAmt = gAmt * bsInvTransactionDetails.Current.DiscountPercent / 100
+            '        bsInvTransactionDetails.Current.DiscountAmount = dAmt
+            '        bsInvTransactionDetails.Current.AmtBefVat = gAmt - dAmt
+            '        vAmt = (gAmt - dAmt) * bsInvTransactionDetails.Current.VatPercent / 100
+            '        bsInvTransactionDetails.Current.VatAmount = vAmt
+            '        bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
+            '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvGrossAmount" Then
+            '        gAmt = bsInvTransactionDetails.Current.GrossAmount
+            '        price = IIf(bsInvTransactionDetails.Current.Quantity = 0, 0, gAmt / bsInvTransactionDetails.Current.Quantity)
+            '        bsInvTransactionDetails.Current.Price = price
+            '        dAmt = gAmt * bsInvTransactionDetails.Current.DiscountPercent / 100
+            '        bsInvTransactionDetails.Current.DiscountAmount = dAmt
+            '        bsInvTransactionDetails.Current.DiscountPercent = dAmt / gAmt * 100
+            '        vAmt = (gAmt - dAmt) * bsInvTransactionDetails.Current.VatPercent / 100
+            '        bsInvTransactionDetails.Current.VatAmount = vAmt
+            '        bsInvTransactionDetails.Current.AmtBefVat = gAmt - dAmt
+            '        bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
+            '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvVatAmount" Then
+            '        gAmt = bsInvTransactionDetails.Current.GrossAmount
+            '        dAmt = bsInvTransactionDetails.Current.DiscountAmount
+            '        vAmt = bsInvTransactionDetails.Current.VatAmount
             '        vPerc = IIf(gAmt - dAmt = 0, 0, vAmt / (gAmt - dAmt) * 100)
-            '        bsPurchaseDetails.Current.VatPercent = vPerc
-            '        bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
-            '    ElseIf DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvVatPercent" Then
-            '        vPerc = bsPurchaseDetails.Current.VatPercent
-            '        gAmt = bsPurchaseDetails.Current.GrossAmount
-            '        dAmt = bsPurchaseDetails.Current.DiscountAmount
+            '        bsInvTransactionDetails.Current.VatPercent = vPerc
+            '        bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
+            '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvVatPercent" Then
+            '        vPerc = bsInvTransactionDetails.Current.VatPercent
+            '        gAmt = bsInvTransactionDetails.Current.GrossAmount
+            '        dAmt = bsInvTransactionDetails.Current.DiscountAmount
             '        vAmt = (gAmt - dAmt) * vPerc / 100
-            '        bsPurchaseDetails.Current.VatAmount = vAmt
-            '        bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
-            '    ElseIf DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvDiscountPercent" Then
-            '        gAmt = bsPurchaseDetails.Current.GrossAmount
-            '        dAmt = gAmt * bsPurchaseDetails.Current.DiscountPercent / 100
-            '        bsPurchaseDetails.Current.DiscountAmount = dAmt
-            '        bsPurchaseDetails.Current.AmtBefVat = gAmt - dAmt
-            '        vAmt = (gAmt - dAmt) * bsPurchaseDetails.Current.VatPercent / 100
-            '        bsPurchaseDetails.Current.VatAmount = vAmt
-            '        bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
-            '    ElseIf DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvDiscountAmount" Then
-            '        gAmt = bsPurchaseDetails.Current.GrossAmount
-            '        dAmt = bsPurchaseDetails.Current.DiscountAmount
+            '        bsInvTransactionDetails.Current.VatAmount = vAmt
+            '        bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
+            '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvDiscountPercent" Then
+            '        gAmt = bsInvTransactionDetails.Current.GrossAmount
+            '        dAmt = gAmt * bsInvTransactionDetails.Current.DiscountPercent / 100
+            '        bsInvTransactionDetails.Current.DiscountAmount = dAmt
+            '        bsInvTransactionDetails.Current.AmtBefVat = gAmt - dAmt
+            '        vAmt = (gAmt - dAmt) * bsInvTransactionDetails.Current.VatPercent / 100
+            '        bsInvTransactionDetails.Current.VatAmount = vAmt
+            '        bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
+            '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvDiscountAmount" Then
+            '        gAmt = bsInvTransactionDetails.Current.GrossAmount
+            '        dAmt = bsInvTransactionDetails.Current.DiscountAmount
             '        dPerc = IIf(gAmt = 0, 0, dAmt / gAmt * 100)
-            '        bsPurchaseDetails.Current.DiscountPercent = dPerc
-            '        bsPurchaseDetails.Current.AmtBefVat = gAmt - dAmt
-            '        vAmt = (gAmt - dAmt) * bsPurchaseDetails.Current.VatPercent / 100
-            '        bsPurchaseDetails.Current.VatAmount = vAmt
-            '        bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
-            '    ElseIf DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvAmtBefVat" Then
-            '        amtBefVat = bsPurchaseDetails.Current.AmtBefVat
-            '        gAmt = bsPurchaseDetails.Current.GrossAmount
+            '        bsInvTransactionDetails.Current.DiscountPercent = dPerc
+            '        bsInvTransactionDetails.Current.AmtBefVat = gAmt - dAmt
+            '        vAmt = (gAmt - dAmt) * bsInvTransactionDetails.Current.VatPercent / 100
+            '        bsInvTransactionDetails.Current.VatAmount = vAmt
+            '        bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
+            '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvAmtBefVat" Then
+            '        amtBefVat = bsInvTransactionDetails.Current.AmtBefVat
+            '        gAmt = bsInvTransactionDetails.Current.GrossAmount
             '        If amtBefVat <= gAmt Then
             '            dAmt = gAmt - amtBefVat
-            '            bsPurchaseDetails.Current.DiscountAmount = dAmt
+            '            bsInvTransactionDetails.Current.DiscountAmount = dAmt
             '            dPerc = IIf(gAmt = 0, 0, dAmt / gAmt * 100)
-            '            bsPurchaseDetails.Current.DiscountPercent = dPerc
-            '            vAmt = amtBefVat * bsPurchaseDetails.Current.VatPercent / 100
-            '            bsPurchaseDetails.Current.VatAmount = vAmt
-            '            bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
+            '            bsInvTransactionDetails.Current.DiscountPercent = dPerc
+            '            vAmt = amtBefVat * bsInvTransactionDetails.Current.VatPercent / 100
+            '            bsInvTransactionDetails.Current.VatAmount = vAmt
+            '            bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
             '        Else
-            '            dAmt = bsPurchaseDetails.Current.DiscountAmount
+            '            dAmt = bsInvTransactionDetails.Current.DiscountAmount
             '            gAmt = amtBefVat - dAmt
-            '            bsPurchaseDetails.Current.GrossAmount = gAmt
-            '            price = IIf(bsPurchaseDetails.Current.Quantity = 0, 0, gAmt / bsPurchaseDetails.Current.Quantity)
-            '            bsPurchaseDetails.Current.Price = price
+            '            bsInvTransactionDetails.Current.GrossAmount = gAmt
+            '            price = IIf(bsInvTransactionDetails.Current.Quantity = 0, 0, gAmt / bsInvTransactionDetails.Current.Quantity)
+            '            bsInvTransactionDetails.Current.Price = price
             '            dPerc = IIf(gAmt = 0, 0, dAmt / gAmt * 100)
-            '            bsPurchaseDetails.Current.DiscountPercent = dPerc
-            '            vAmt = amtBefVat * bsPurchaseDetails.Current.VatPercent / 100
-            '            bsPurchaseDetails.Current.VatAmount = vAmt
-            '            bsPurchaseDetails.Current.NetAmount = gAmt - dAmt + vAmt
+            '            bsInvTransactionDetails.Current.DiscountPercent = dPerc
+            '            vAmt = amtBefVat * bsInvTransactionDetails.Current.VatPercent / 100
+            '            bsInvTransactionDetails.Current.VatAmount = vAmt
+            '            bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
             '        End If
-            '    ElseIf DataGridViewPurchaseDetails.CurrentCell().OwningColumn.Name = "dgvNetAmount" Then
-            '        nAmt = bsPurchaseDetails.Current.NetAmount
-            '        vPerc = bsPurchaseDetails.Current.VatPercent
-            '        dPerc = bsPurchaseDetails.Current.DiscountPercent
+            '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvNetAmount" Then
+            '        nAmt = bsInvTransactionDetails.Current.NetAmount
+            '        vPerc = bsInvTransactionDetails.Current.VatPercent
+            '        dPerc = bsInvTransactionDetails.Current.DiscountPercent
             '        amtBefVat = nAmt / (1 + vPerc / 100)
-            '        bsPurchaseDetails.Current.AmtBefVat = amtBefVat
-            '        bsPurchaseDetails.Current.VatAmount = nAmt - amtBefVat
+            '        bsInvTransactionDetails.Current.AmtBefVat = amtBefVat
+            '        bsInvTransactionDetails.Current.VatAmount = nAmt - amtBefVat
             '        gAmt = amtBefVat / (1 - dPerc / 100)
-            '        bsPurchaseDetails.Current.GrossAmount = gAmt
-            '        bsPurchaseDetails.Current.DiscountAmount = gAmt - amtBefVat
-            '        bsPurchaseDetails.Current.Price = IIf(bsPurchaseDetails.Current.Quantity = 0, 0, gAmt / bsPurchaseDetails.Current.Quantity)
+            '        bsInvTransactionDetails.Current.GrossAmount = gAmt
+            '        bsInvTransactionDetails.Current.DiscountAmount = gAmt - amtBefVat
+            '        bsInvTransactionDetails.Current.Price = IIf(bsInvTransactionDetails.Current.Quantity = 0, 0, gAmt / bsInvTransactionDetails.Current.Quantity)
             '    End If
-            '    Dim totQty As Int32 = bsPurchaseDetails.Current.Quantity + bsPurchaseDetails.Current.BonusQuantity
-            '    bsPurchaseDetails.Current.UnitCost = IIf(totQty = 0, 0, bsPurchaseDetails.Current.NetAmount / totQty)
+            '    Dim totQty As Int32 = bsInvTransactionDetails.Current.Quantity + bsInvTransactionDetails.Current.BonusQuantity
+            '    bsInvTransactionDetails.Current.UnitCost = IIf(totQty = 0, 0, bsInvTransactionDetails.Current.NetAmount / totQty)
             UpdateTotals()
             'End With
         End Sub
 
-        'Private Sub OnCellFormatting(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs) Handles DataGridViewPurchaseDetails.CellFormatting
-        '    'If e.ColumnIndex = DataGridViewPurchaseDetails.Columns("dgvDiscountAmount").Index Then
+        'Private Sub OnCellFormatting(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs) Handles DataGridViewInvTransactionDetails.CellFormatting
+        '    'If e.ColumnIndex = DataGridViewInvTransactionDetails.Columns("dgvDiscountAmount").Index Then
         '    '    e.FormattingApplied = True
-        '    '    Dim row As DataGridViewRow = DataGridViewPurchaseDetails.Rows(e.RowIndex)
+        '    '    Dim row As DataGridViewRow = DataGridViewInvTransactionDetails.Rows(e.RowIndex)
         '    '    e.Value = String.Format("{0,12:N2}", row.Cells("dgvGrossAmount").Value * row.Cells("dgvDiscountPercent").Value / 100)
         '    'End If
         'End Sub
 
-        'Private Sub OnRowsAdded(ByVal sender As Object, ByVal e As DataGridViewRowsAddedEventArgs) Handles DataGridViewPurchaseDetails.RowsAdded
-        '    If DataGridViewPurchaseDetails.CurrentRow IsNot Nothing Then
+        'Private Sub OnRowsAdded(ByVal sender As Object, ByVal e As DataGridViewRowsAddedEventArgs) Handles DataGridViewInvTransactionDetails.RowsAdded
+        '    If DataGridViewInvTransactionDetails.CurrentRow IsNot Nothing Then
         '        For i As Integer = e.RowIndex - 1 To e.RowCount
-        '            Dim row As DataGridViewRow = DataGridViewPurchaseDetails.Rows(i)
+        '            Dim row As DataGridViewRow = DataGridViewInvTransactionDetails.Rows(i)
         '            row.Cells("dgvGrossAmount").Value = row.Cells("dgvQuantity").Value * row.Cells("dgvPrice").Value
         '            If row.Cells("dgvGrossAmount").Value Is Nothing OrElse row.Cells("dgvGrossAmount").Value = 0 Then
         '                row.Cells("dgvDiscountPercent").Value = String.Format("{0,6:N2}", 0)
@@ -551,7 +551,7 @@ Namespace PresentationLayer.Views.Forms
         '            row.Cells("dgvAmtBefVat").Value = row.Cells("dgvGrossAmount").Value - row.Cells("dgvDiscountAmount").Value
         '        Next i
         '        'For i As Integer = 0 To e.RowCount
-        '        '    Dim row As DataGridViewRow = DataGridViewPurchaseDetails.Rows(i)
+        '        '    Dim row As DataGridViewRow = DataGridViewInvTransactionDetails.Rows(i)
         '        '    row.Cells("dgvGrossAmount").Value = row.Cells("dgvQuantity").Value * row.Cells("dgvPrice").Value
         '        '    If row.Cells("dgvGrossAmount").Value Is Nothing OrElse row.Cells("dgvGrossAmount").Value = 0 Then
         '        '        row.Cells("dgvDiscountPercent").Value = String.Format("{0,6:N2}", 0)
@@ -565,18 +565,18 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
 
-        Private Sub dataGridView1_CellValidating(ByVal sender As Object, ByVal e As DataGridViewCellValidatingEventArgs) Handles DataGridViewPurchaseDetails.CellValidating
-            If DataGridViewPurchaseDetails.IsCurrentCellDirty() Then
-                With DataGridViewPurchaseDetails
+        Private Sub dataGridView1_CellValidating(ByVal sender As Object, ByVal e As DataGridViewCellValidatingEventArgs) Handles DataGridViewInvTransactionDetails.CellValidating
+            If DataGridViewInvTransactionDetails.IsCurrentCellDirty() Then
+                With DataGridViewInvTransactionDetails
                     Dim cColumnName = .CurrentCell.OwningColumn.Name
                     If cColumnName = $"dgvProductCode" Then
-                        ValidateProductCode(DataGridViewPurchaseDetails, e)
+                        ValidateProductCode(DataGridViewInvTransactionDetails, e)
                     ElseIf cColumnName = $"dgvProductName" Then
-                        ValidateProductName(DataGridViewPurchaseDetails, e)
+                        ValidateProductName(DataGridViewInvTransactionDetails, e)
                     ElseIf cColumnName = $"dgvUnitIdNo" Then
-                        '(DataGridViewPurchaseDetails, e)
+                        '(DataGridViewInvTransactionDetails, e)
                     ElseIf cColumnName = $"dgvExpiryDate" Then
-                        ValidateExpiryDate(DataGridViewPurchaseDetails, e)
+                        ValidateExpiryDate(DataGridViewInvTransactionDetails, e)
                     End If
                 End With
             End If
@@ -585,7 +585,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ValidateExpiryDate(ByRef dgv As CtDataGridView, ByRef e As DataGridViewCellValidatingEventArgs)
             Dim needsExpiryDate As Boolean = dgv.CurrentRow.Cells("dgvNeedsExpiryDate").Value
             Dim allowBlankDate As Boolean = Not needsExpiryDate
-            DataGridViewPurchaseDetails.ValidateExpiryDate(e, allowBlankDate)
+            DataGridViewInvTransactionDetails.ValidateExpiryDate(e, allowBlankDate)
         End Sub
 
         Private Sub ValidateProductName(ByRef dgv As CtDataGridView, ByRef e As DataGridViewCellValidatingEventArgs)
@@ -594,24 +594,24 @@ Namespace PresentationLayer.Views.Forms
                 Dim scannedProduct As Object = New ExpandoObject
                 scannedProduct = Accounts.AccountHelpers.GetScannedData(findText)
                 Dim productCode As String = ""
-                RaiseEvent GTinScanned(scannedProduct.GTin, bsPurchaseDetails, productCode)
+                RaiseEvent GTinScanned(scannedProduct.GTin, bsInvTransactionDetails, productCode)
                 If productCode IsNot Nothing Then
                     'Dim item As IProductView = DirectCast(product, IProductView)
                     'dgv.CurrentRow.Cells("dgvProductCode").Value = productCode
-                    RaiseEvent ProductCodeChanged(productCode, bsPurchaseDetails)
+                    RaiseEvent ProductCodeChanged(productCode, bsInvTransactionDetails)
                     If scannedProduct.ExpiryDate IsNot Nothing Then
-                        bsPurchaseDetails.Current.ExpiryDate = scannedProduct.ExpiryDate
+                        bsInvTransactionDetails.Current.ExpiryDate = scannedProduct.ExpiryDate
                     End If
                     If scannedProduct.BatchNo IsNot Nothing Then
-                        bsPurchaseDetails.Current.BatchNo = scannedProduct.BatchNo
+                        bsInvTransactionDetails.Current.BatchNo = scannedProduct.BatchNo
                     End If
-                    Dim unitIdNo As Int16 = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).UnitIdNo
+                    Dim unitIdNo As Int16 = DirectCast(bsInvTransactionDetails.Current, AATM.Accounts.PresentationLayer.Views.InvTransactionDetailView).UnitIdNo
                     If unitIdNo <= 0 Or _noOfUnits <= 1 Then
                         SendKeys.Send("{Tab}{Tab}{Tab}")
                     Else
                         SendKeys.Send("{Tab}{Tab}")
                     End If
-                    bsPurchaseDetails.ResetBindings(False)
+                    bsInvTransactionDetails.ResetBindings(False)
                 End If
             Else
                 Dim form As New ProductFinder(findText, dgv)
@@ -624,12 +624,12 @@ Namespace PresentationLayer.Views.Forms
                         e.Cancel = True
                         dgv.Rows(e.RowIndex).ErrorText = msg
                     Else
-                        RaiseEvent ProductCodeChanged(product.ProductCode, bsPurchaseDetails)
-                        Dim unitIdNo As Int16 = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).UnitIdNo
+                        RaiseEvent ProductCodeChanged(product.ProductCode, bsInvTransactionDetails)
+                        Dim unitIdNo As Int16 = DirectCast(bsInvTransactionDetails.Current, AATM.Accounts.PresentationLayer.Views.InvTransactionDetailView).UnitIdNo
                         If unitIdNo <= 0 Or _noOfUnits <= 1 Then
                             SendKeys.Send("{Tab}")
                         End If
-                        bsPurchaseDetails.ResetBindings(False)
+                        bsInvTransactionDetails.ResetBindings(False)
                     End If
                 Else
                     e.Cancel = True
@@ -639,7 +639,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ValidateProductCode(ByRef dgv As CtDataGridView, ByRef e As DataGridViewCellValidatingEventArgs)
             Dim code As String = dgv.CurrentRow.Cells("dgvProductCode").EditedFormattedValue
-            RaiseEvent ProductCodeChanged(code, bsPurchaseDetails)
+            RaiseEvent ProductCodeChanged(code, bsInvTransactionDetails)
             Dim cProductName = dgv.CurrentRow().Cells("dgvProductName").Value
             If Not String.IsNullOrEmpty(cProductName) Then
                 If dgv.CurrentRow.Cells("dgvUnitCount").Value < 2 Then
@@ -659,9 +659,9 @@ Namespace PresentationLayer.Views.Forms
         '    Dim oldUnitIdNo As Int16 = dgv.CurrentRow.Cells("dgvUnitIdNo").EditedFormattedValue
         '    Dim newUnitIdNo As Int16 = CInt(DirectCast(dgv.CurrentCell, AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxCell).CellEditingControl.EditingControlFormattedValue)
         '    If oldUnitIdNo <> newUnitIdNo Then
-        '        RaiseEvent UnitChanged(oldUnitIdNo, newUnitIdNo, bsPurchaseDetails, e.FormattedValue)
+        '        RaiseEvent UnitChanged(oldUnitIdNo, newUnitIdNo, bsInvTransactionDetails, e.FormattedValue)
         '    End If
-        '    'RaiseEvent ProductCodeChanged(code, bsPurchaseDetails)
+        '    'RaiseEvent ProductCodeChanged(code, bsInvTransactionDetails)
         '    'Dim cProductName = dgv.CurrentRow().Cells("dgvProductName").Value
         '    'If Not String.IsNullOrEmpty(cProductName) Then
         '    '    SendKeys.Send("{Tab}")
@@ -677,37 +677,37 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
 
-        'Private Sub dataGridView1_CellValidating(ByVal sender As Object, ByVal e As DataGridViewCellValidatingEventArgs) Handles DataGridViewPurchaseDetails.CellValidating
+        'Private Sub dataGridView1_CellValidating(ByVal sender As Object, ByVal e As DataGridViewCellValidatingEventArgs) Handles DataGridViewInvTransactionDetails.CellValidating
 
-        '    Me.DataGridViewPurchaseDetails.Rows(e.RowIndex).ErrorText = ""
+        '    Me.DataGridViewInvTransactionDetails.Rows(e.RowIndex).ErrorText = ""
 
         '    ' Don't try to validate the 'new row' until finished 
         '    ' editing since there
         '    ' is not any point in validating its initial value.
-        '    If DataGridViewPurchaseDetails.Rows(e.RowIndex).IsNewRow Then Return
-        '    With DataGridViewPurchaseDetails
+        '    If DataGridViewInvTransactionDetails.Rows(e.RowIndex).IsNewRow Then Return
+        '    With DataGridViewInvTransactionDetails
         '        Dim cColumnName = .CurrentCell.OwningColumn.Name
         '        If cColumnName = "dgvProductCode" Then
         '            If e.FormattedValue <> "" Then
-        '                RaiseEvent ProductCodeChanged(e.FormattedValue, bsPurchaseDetails)
-        '                If DataGridViewPurchaseDetails.CurrentRow().Cells("dgvProductName").Value = "" Then
+        '                RaiseEvent ProductCodeChanged(e.FormattedValue, bsInvTransactionDetails)
+        '                If DataGridViewInvTransactionDetails.CurrentRow().Cells("dgvProductName").Value = "" Then
         '                    Messaging.ShowPmMessage(True, "MsgInvalidCode", {"fieldName", Messaging.TranslateCaption("Product Code")})
         '                    e.Cancel = True
         '                Else
-        '                    'MoveToGridView(DataGridViewPurchaseDetails, "dgvUnitIdNo")
-        '                    'DataGridViewPurchaseDetails.CurrentCell = DataGridViewPurchaseDetails(3, DataGridViewPurchaseDetails.CurrentCell.RowIndex())
+        '                    'MoveToGridView(DataGridViewInvTransactionDetails, "dgvUnitIdNo")
+        '                    'DataGridViewInvTransactionDetails.CurrentCell = DataGridViewInvTransactionDetails(3, DataGridViewInvTransactionDetails.CurrentCell.RowIndex())
         '                End If
         '            End If
         '        ElseIf cColumnName = "dgvProductName" Then
 
-        '            'With bsPurchaseDetails
-        '            '    Dim findText = DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductName
-        '            '    Dim form As New ProductFinder(findText, DataGridViewPurchaseDetails)
+        '            'With bsInvTransactionDetails
+        '            '    Dim findText = DirectCast(bsInvTransactionDetails.Current, AATM.Accounts.PresentationLayer.Views.InvTransactionDetailView).ProductName
+        '            '    Dim form As New ProductFinder(findText, DataGridViewInvTransactionDetails)
         '            '    If form.ShowDialog() = Windows.Forms.DialogResult.OK Then
         '            '        Dim sIdNo As Int32 = form.SelectedId
         '            '        Dim sName As String = form.SelectedName
-        '            '        DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductIdNo = sIdNo
-        '            '        DirectCast(bsPurchaseDetails.Current, AATM.Accounts.PresentationLayer.Views.PurchaseDetailView).ProductName = sName
+        '            '        DirectCast(bsInvTransactionDetails.Current, AATM.Accounts.PresentationLayer.Views.InvTransactionDetailView).ProductIdNo = sIdNo
+        '            '        DirectCast(bsInvTransactionDetails.Current, AATM.Accounts.PresentationLayer.Views.InvTransactionDetailView).ProductName = sName
         '            '        ' Yes, so grab the values you want from the dialog here
         '            '        '. = form.SelectedId
         '            '    Else
@@ -722,21 +722,21 @@ Namespace PresentationLayer.Views.Forms
         '    'If Not Integer.TryParse(e.FormattedValue.ToString(), newInteger) OrElse newInteger < 0 Then
 
         '    '    e.Cancel = True
-        '    '    Me.DataGridViewPurchaseDetails.Rows(e.RowIndex).ErrorText = "the value must be a non-negative integer"
+        '    '    Me.DataGridViewInvTransactionDetails.Rows(e.RowIndex).ErrorText = "the value must be a non-negative integer"
 
         '    'End If
         'End Sub
 
 
-        Private Sub CellValidated(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DataGridViewPurchaseDetails.CellValidated
+        Private Sub CellValidated(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles DataGridViewInvTransactionDetails.CellValidated
             '' Clear any error messages that may have been set in cell validation.
-            'DataGridViewPurchaseDetails.Rows(e.RowIndex).ErrorText = Nothing
-            'With DataGridViewPurchaseDetails
+            'DataGridViewInvTransactionDetails.Rows(e.RowIndex).ErrorText = Nothing
+            'With DataGridViewInvTransactionDetails
             '    Dim cColumnName = .CurrentCell.OwningColumn.Name
-            '    Dim cProductName = DataGridViewPurchaseDetails.CurrentRow().Cells("dgvProductName").Value
+            '    Dim cProductName = DataGridViewInvTransactionDetails.CurrentRow().Cells("dgvProductName").Value
             '    If cColumnName = "dgvProductCode" And Not String.IsNullOrEmpty(cProductName) Then
-            '        'MoveToGridView(DataGridViewPurchaseDetails, "dgvUnitIdNo")
-            '        'ataGridViewPurchaseDetails.CurrentCell = DataGridViewPurchaseDetails(3, DataGridViewPurchaseDetails.CurrentCell.RowIndex())
+            '        'MoveToGridView(DataGridViewInvTransactionDetails, "dgvUnitIdNo")
+            '        'ataGridViewInvTransactionDetails.CurrentCell = DataGridViewInvTransactionDetails(3, DataGridViewInvTransactionDetails.CurrentCell.RowIndex())
             '        SendKeys.Send("{Tab}")
             '        If _noOfUnits = 0 Then
             '            SendKeys.Send("{Tab}")
@@ -745,11 +745,11 @@ Namespace PresentationLayer.Views.Forms
             'End With
         End Sub
 
-        'Private Sub ValidateByCell(ByVal sender As Object, ByVal data As DataGridViewCellCancelEventArgs) Handles DataGridViewPurchaseDetails.CellValidating
+        'Private Sub ValidateByCell(ByVal sender As Object, ByVal data As DataGridViewCellCancelEventArgs) Handles DataGridViewInvTransactionDetails.CellValidating
 
-        '    Dim row As DataGridViewRow = DataGridViewPurchaseDetails.Rows(data.RowIndex)
-        '    Dim productCodeCell As DataGridViewCell = row.Cells(DataGridViewPurchaseDetails.Columns("dgvProductCode").Index)
-        '    Dim productNameCell As DataGridViewCell = row.Cells(DataGridViewPurchaseDetails.Columns("dgvProductName").Index)
+        '    Dim row As DataGridViewRow = DataGridViewInvTransactionDetails.Rows(data.RowIndex)
+        '    Dim productCodeCell As DataGridViewCell = row.Cells(DataGridViewInvTransactionDetails.Columns("dgvProductCode").Index)
+        '    Dim productNameCell As DataGridViewCell = row.Cells(DataGridViewInvTransactionDetails.Columns("dgvProductName").Index)
         '    data.Cancel = Not (IsProductCodeGood(productCodeCell) AndAlso IsProductNameGood(productNameCell))
         'End Sub
 
@@ -757,15 +757,15 @@ Namespace PresentationLayer.Views.Forms
         '    If cell.Value IsNot Nothing Then
         '        If cell.Value.ToString().Length = 0 Then
         '            cell.ErrorText = "Please enter a product code"
-        '            DataGridViewPurchaseDetails.Rows(cell.RowIndex).ErrorText = "Please enter a product code"
+        '            DataGridViewInvTransactionDetails.Rows(cell.RowIndex).ErrorText = "Please enter a product code"
         '            Return False
         '        ElseIf cell.Value.ToString().Equals("0") Then
         '            cell.ErrorText = "Zero is not a valid product code"
-        '            DataGridViewPurchaseDetails.Rows(cell.RowIndex).ErrorText = "Zero is not a valid product code"
+        '            DataGridViewInvTransactionDetails.Rows(cell.RowIndex).ErrorText = "Zero is not a valid product code"
         '            Return False
         '            'ElseIf Not Integer.TryParse(cell.Value.ToString(), New Integer()) Then
         '            '    cell.ErrorText = "A Track must be a number"
-        '            '    DataGridViewPurchaseDetails.Rows(cell.RowIndex).ErrorText =
+        '            '    DataGridViewInvTransactionDetails.Rows(cell.RowIndex).ErrorText =
         '            '"A Track must be a number"
         '            '    Return False
         '        End If
@@ -777,7 +777,7 @@ Namespace PresentationLayer.Views.Forms
         '    If cell.Value IsNot Nothing Then
         '        If cell.Value.ToString().Length = 0 Or cell.Value.ToString().Equals("") Then
         '            cell.ErrorText = "Please enter a product name"
-        '            DataGridViewPurchaseDetails.Rows(cell.RowIndex).ErrorText = "Please enter a product name"
+        '            DataGridViewInvTransactionDetails.Rows(cell.RowIndex).ErrorText = "Please enter a product name"
         '            Return False
         '        End If
         '    End If
@@ -792,7 +792,7 @@ Namespace PresentationLayer.Views.Forms
 
         'Private Function PaymentOrDiscountMade()
         '    Dim retVal As Boolean = False
-        '    If (DataGridViewPurchaseDetails.Rows(0).Cells("dgvPaidAmount").Value <> 0 Or DataGridViewPurchaseDetails.Rows(0).Cells("dgvDiscountTaken").Value <> 0) Then
+        '    If (DataGridViewInvTransactionDetails.Rows(0).Cells("dgvPaidAmount").Value <> 0 Or DataGridViewInvTransactionDetails.Rows(0).Cells("dgvDiscountTaken").Value <> 0) Then
         '        Messaging.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
         '        retVal = True
         '    End If
@@ -800,7 +800,7 @@ Namespace PresentationLayer.Views.Forms
         'End Function
 
         'Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
-        '    MoveToGridView(DataGridViewPurchaseDetails, "dgvUnitIdNo")
+        '    MoveToGridView(DataGridViewInvTransactionDetails, "dgvUnitIdNo")
         'End Sub
 
         Private Sub UpdateTotals()
@@ -816,82 +816,82 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
 
-        Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewPurchaseDetails.UserDeletingRow
+        Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewInvTransactionDetails.UserDeletingRow
             'RaiseEvent UserDeletedRow()
             'UpdateTotals()
         End Sub
 
-        Private Sub OnUserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewPurchaseDetails.UserDeletedRow
+        Private Sub OnUserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewInvTransactionDetails.UserDeletedRow
             UpdateTotals()
             'UpdateInputVatAmount()
         End Sub
 
 
-        'Private Sub PurchaseEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Private Sub InvTransactionEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         '    'TODO: This line of code loads data into the 'ISPDATADataSet.Product' table. You can move, or remove it, as needed.
         '    Me.ProductTableAdapter.Fill(Me.ISPDATADataSet.Product)
 
         'End Sub
 
-        Private Sub grid_EditingControlShowing(ByVal s As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles DataGridViewPurchaseDetails.EditingControlShowing
-            With DataGridViewPurchaseDetails
+        Private Sub grid_EditingControlShowing(ByVal s As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles DataGridViewInvTransactionDetails.EditingControlShowing
+            With DataGridViewInvTransactionDetails
                 Dim cColumnName = .CurrentCell.OwningColumn.Name
                 If cColumnName = "dgvUnitIdNo" Then
                     Dim comboBox = TryCast(e.Control, DataGridViewComboBoxEditingControl)
                     If comboBox IsNot Nothing Then
-                        RaiseEvent ProductUnitSelection(DataGridViewPurchaseDetails.CurrentRow.Cells("dgvProductIdNo").Value, bsPurchaseDetails)
+                        RaiseEvent ProductUnitSelection(DataGridViewInvTransactionDetails.CurrentRow.Cells("dgvProductIdNo").Value, bsInvTransactionDetails)
                         comboBox.DropDownStyle = ComboBoxStyle.DropDown
                         comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend
                         comboBox.DataSource = UnitsByProduct
                     End If
                 ElseIf cColumnName = "dgvExpiryDate" Then
                     'Display the date in the editing format.
-                    Dim cellValue = DataGridViewPurchaseDetails.CurrentCell.Value
+                    Dim cellValue = DataGridViewInvTransactionDetails.CurrentCell.Value
                     Dim text = If(cellValue Is DBNull.Value, "", CDate(cellValue).ToString("yyyy/MM"))
                     e.Control.Text = text
                 End If
             End With
         End Sub
 
-        Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewPurchaseDetails.CellBeginEdit
-            'If DataGridViewPurchaseDetails.CurrentCell.RowIndex() = 0 Then
-            With DataGridViewPurchaseDetails.CurrentCell
+        Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewInvTransactionDetails.CellBeginEdit
+            'If DataGridViewInvTransactionDetails.CurrentCell.RowIndex() = 0 Then
+            With DataGridViewInvTransactionDetails.CurrentCell
                 Dim cColumnName = .OwningColumn.Name()
                 If cColumnName = $"dgvUnitIdNo" Then
-                    RaiseEvent ProductUnitEditing(DataGridViewPurchaseDetails.CurrentRow.Cells("dgvProductIdNo").Value)
+                    RaiseEvent ProductUnitEditing(DataGridViewInvTransactionDetails.CurrentRow.Cells("dgvProductIdNo").Value)
                 End If
                 '    Beep()
                 '    e.Cancel = True
-                '    DataGridViewPurchaseDetails.EndEdit()
+                '    DataGridViewInvTransactionDetails.EndEdit()
                 'End If
             End With
-            'ElseIf (DataGridViewPurchaseDetails.CurrentRow.Cells("dgvPaidAmount").Value <> 0 Or DataGridViewPurchaseDetails.CurrentRow.Cells("dgvDiscountTaken").Value <> 0) _
-            '       And DataGridViewPurchaseDetails.CurrentCell.OwningColumn.Name.ToLower() = $"dgvProductIdNo" Then
+            'ElseIf (DataGridViewInvTransactionDetails.CurrentRow.Cells("dgvPaidAmount").Value <> 0 Or DataGridViewInvTransactionDetails.CurrentRow.Cells("dgvDiscountTaken").Value <> 0) _
+            '       And DataGridViewInvTransactionDetails.CurrentCell.OwningColumn.Name.ToLower() = $"dgvProductIdNo" Then
             '    Beep()
             '    e.Cancel = True
-            '    DataGridViewPurchaseDetails.EndEdit()
+            '    DataGridViewInvTransactionDetails.EndEdit()
             '    Messaging.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
             ' End If
         End Sub
 
 
-        'Private Sub DataGridViewPurchase_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchaseDetails.CellValueChanged
+        'Private Sub DataGridViewInvTransaction_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewInvTransactionDetails.CellValueChanged
         '    If e.RowIndex >= 0 Then
         '        Dim newDate As DateTime
 
-        '        Select Case DataGridViewPurchaseDetails.Columns(e.ColumnIndex).Name
+        '        Select Case DataGridViewInvTransactionDetails.Columns(e.ColumnIndex).Name
         '            Case "ProductName"
-        '                Dim newText As String = Me.DataGridViewPurchaseDetails.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString()
+        '                Dim newText As String = Me.DataGridViewInvTransactionDetails.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString()
         '                'Case "ColumnCombo"
-        '                '    Dim newPriority As String = Me.DataGridViewPurchase.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString()
+        '                '    Dim newPriority As String = Me.DataGridViewInvTransaction.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString()
         '                'Case "ColumnDate"
-        '                '    DateTime.TryParse(Me.DataGridViewPurchase.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString(), newDate)
+        '                '    DateTime.TryParse(Me.DataGridViewInvTransaction.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString(), newDate)
         '        End Select
         '    End If
         'End Sub
 
 
-        'Private Sub DataGridViewPurchase_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchaseDetails.CellValueChanged
+        'Private Sub DataGridViewInvTransaction_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewInvTransactionDetails.CellValueChanged
         '    With eventType.BindingSource
         '        If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
         '            Dim accountId = eventType.BindingSource.Current.AccountIdNo
@@ -946,9 +946,9 @@ Namespace PresentationLayer.Views.Forms
 
         Private WithEvents txtQrText As New DataGridViewTextBoxEditingControl
 
-        Private Sub DataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewEditingControlShowingEventArgs) Handles DataGridViewPurchaseDetails.EditingControlShowing
-            If DataGridViewPurchaseDetails.CurrentCell.OwningColumn.Name = "dgvProductName" Then
-                txtQrText = CType(DataGridViewPurchaseDetails.EditingControl, DataGridViewTextBoxEditingControl)
+        Private Sub DataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewEditingControlShowingEventArgs) Handles DataGridViewInvTransactionDetails.EditingControlShowing
+            If DataGridViewInvTransactionDetails.CurrentCell.OwningColumn.Name = "dgvProductName" Then
+                txtQrText = CType(DataGridViewInvTransactionDetails.EditingControl, DataGridViewTextBoxEditingControl)
             End If
         End Sub
 
@@ -985,16 +985,16 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
 
-        Private Sub DataGridViewPurchaseDetails_RowEnter(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPurchaseDetails.RowEnter
-            Dim dgvRow As DataGridViewRow = DataGridViewPurchaseDetails.Rows(e.RowIndex)
+        Private Sub DataGridViewInvTransactionDetails_RowEnter(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewInvTransactionDetails.RowEnter
+            Dim dgvRow As DataGridViewRow = DataGridViewInvTransactionDetails.Rows(e.RowIndex)
             Dim prIdNo As Int32 = dgvRow.Cells("dgvProductIdNo").Value
             RaiseEvent RowChanged(prIdNo)
-            bsPurchaseHistory.ResetBindings(False)
-            CGroupBox1.Text = Messaging.TranslateCaption("Purchase History for ") + dgvRow.Cells("dgvProductCode").Value + "-" + dgvRow.Cells("dgvProductName").Value
+            bsInvTransactionHistory.ResetBindings(False)
+            CGroupBox1.Text = Messaging.TranslateCaption("InvTransaction History for ") + dgvRow.Cells("dgvProductCode").Value + "-" + dgvRow.Cells("dgvProductName").Value
         End Sub
 
         ' Changes how cells are displayed depending on their columns and values.
-        Private Sub dgvPurDetailsFormatting(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellFormattingEventArgs) Handles DataGridViewPurchaseDetails.CellFormatting
+        Private Sub dgvPurDetailsFormatting(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellFormattingEventArgs) Handles DataGridViewInvTransactionDetails.CellFormatting
             If e.ColumnIndex > 0 Then
                 If sender.Columns(e.ColumnIndex).Name.Equals("dgvExpiryDate") Then
                     If e.Value = Date.MinValue Then
@@ -1017,7 +1017,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         ' Changes how cells are displayed depending on their columns and values.
-        Private Sub dgvPurHistoryFormatting(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellFormattingEventArgs) Handles DataGridViewPurchaseHistory.CellFormatting
+        Private Sub dgvPurHistoryFormatting(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellFormattingEventArgs) Handles DataGridViewInvTransactionHistory.CellFormatting
             If sender.Columns(e.ColumnIndex).Name.Equals("dgvExpiryDateH") Then
                 If e.Value = Date.MinValue Then
                     e.Value = String.Empty
@@ -1032,7 +1032,7 @@ Namespace PresentationLayer.Views.Forms
             If Not Posted Then
                 Dim caption = Messaging.TranslateCaption("Please confirm.")
                 Dim action As String = Messaging.TranslateCaption("post")
-                Dim itemName As String = Messaging.TranslateCaption("purchase transaction")
+                Dim itemName As String = Messaging.TranslateCaption("InvTransaction transaction")
                 Dim msg = Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
                 If Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                     RaiseEvent PostData(IdNo)
