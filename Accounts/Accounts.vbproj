@@ -235,6 +235,7 @@
     <Compile Include="BusinessLayer\IGroup\Prescription.vb" />
     <Compile Include="BusinessLayer\IGroup\PrescriptionItem.vb" />
     <Compile Include="BusinessLayer\IGroup\StockInventory.vb" />
+    <Compile Include="BusinessLayer\InvTransaction.vb" />
     <Compile Include="BusinessLayer\ItemCode.vb" />
     <Compile Include="BusinessLayer\CodeGroup.vb" />
     <Compile Include="BusinessLayer\DataImage.vb" />
@@ -325,6 +326,7 @@
     <Compile Include="DataLayer\AdoNet\IGroup\PrescriptionDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\PrescriptionItemDao.vb" />
     <Compile Include="DataLayer\AdoNet\InvTransTypeDao.vb" />
+    <Compile Include="DataLayer\AdoNet\InvTransactionDao.vb" />
     <Compile Include="DataLayer\AdoNet\SaleDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\SaleDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseDetailDao.vb" />
@@ -457,6 +459,7 @@
     <Compile Include="PresentationLayer\Models\IGroup\PmrPrescriptionModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\PrescriptionModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\StockInventoryModel.vb" />
+    <Compile Include="PresentationLayer\Models\InvTransactionModel.vb" />
     <Compile Include="PresentationLayer\Models\InvTransTypeModel.vb" />
     <Compile Include="PresentationLayer\Models\ItemCodeModel.vb" />
     <Compile Include="PresentationLayer\Models\CodeGroupModel.vb" />
@@ -615,6 +618,12 @@
     <Compile Include="PresentationLayer\Views\Forms\InvTransTypeEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\InvTransactionEntry.Designer.vb">
+      <DependentUpon>InvTransactionEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\InvTransactionEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\SterilizationLabelPrinting.designer.vb">
       <DependentUpon>SterilizationLabelPrinting.vb</DependentUpon>
     </Compile>
@@ -631,6 +640,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IDosageMasterView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IPrescriptionItemView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IPrescriptionView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IInvTransactionView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IInvTransTypeView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISaleDetailView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISaleView.vb" />
@@ -1992,6 +2002,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\InvTransTypeEntryTv.resx">
       <DependentUpon>InvTransTypeEntryTv.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\InvTransactionEntry.resx">
+      <DependentUpon>InvTransactionEntry.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\SterilizationLabelPrinting.resx">
       <DependentUpon>SterilizationLabelPrinting.vb</DependentUpon>
