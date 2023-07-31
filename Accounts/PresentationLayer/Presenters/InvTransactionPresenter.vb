@@ -69,6 +69,7 @@ Namespace PresentationLayer.Presenters
             Dim data As New ArrayList
             data.Add({"Warehouse", "WarehouseIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"})
             data.Add({"Warehouse", "WarehouseToIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"})
+            data.Add({"InvTransType", "InvTransTypeIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "InvTransTypeCode"})
             data.Add({"User", "UserIdNo", "IdNo,UserName", Nothing})
             CreateDataSourceThread(data)
 
@@ -77,7 +78,7 @@ Namespace PresentationLayer.Presenters
             data.Add({"Product", "ProductsByCode", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "ProductName"})
             'data.Add({"InvTransactionDetail", "InvTransactionHistory", Nothing, Nothing})
             CreateLookupDataThread(data)
-            'data.Clear()
+            data.Clear()
 
         End Sub
 
@@ -218,52 +219,11 @@ Namespace PresentationLayer.Presenters
                     Dim vPerc As Decimal = 0
                     Dim nAmt As Decimal = 0
                     Select Case eventType.PropertyName
-                        Case $"Quantity", $"Price", $"BonusQuantity", $"VatPercent", $"DiscountPercent"
+                        Case $"Quantity"
                             SetAmounts(InvTransactionDetail)
                             eventType.BindingSource.ResetCurrentItem()
-                        Case "GrossAmount"
-                            gAmt = .GrossAmount
-                            With InvTransactionDetail
-                                .Price = RecomputePrice(InvTransactionDetail)
-                                .DiscountAmount = GetDiscountAmount(InvTransactionDetail)
-                                .AmtBefVat = GetAmountBeforeVat(InvTransactionDetail)
-                                .VatAmount = GetVatAmount(InvTransactionDetail)
-                                .NetAmount = GetNetAmount(InvTransactionDetail)
-                            End With
-                        Case "DiscountAmount"
-                            dPerc = RecomputeDiscountPercentage(InvTransactionDetail)
-                            With InvTransactionDetail
-                                .DiscountPercent = dPerc
-                                .AmtBefVat = GetAmountBeforeVat(InvTransactionDetail)
-                                .VatAmount = GetVatAmount(InvTransactionDetail)
-                                .NetAmount = GetNetAmount(InvTransactionDetail)
-                            End With
-                        Case "VatAmount"
-                            vPerc = RecomputeVatPercentage(InvTransactionDetail)
-                            With InvTransactionDetail
-                                .VatPercent = vPerc
-                                .NetAmount = GetNetAmount(InvTransactionDetail)
-                            End With
-                        Case "AmtBefVat"
-                            gAmt = .GrossAmount
-                            If .AmtBefVat <= .GrossAmount Then
-                                .DiscountAmount = .GrossAmount - .AmtBefVat
-                                .DiscountPercent = IIf(.GrossAmount = 0, 0, .DiscountAmount / .GrossAmount * 100)
-                                .VatAmount = .AmtBefVat * .VatPercent / 100
-                                .NetAmount = GetNetAmount(InvTransactionDetail)
-                            Else
-                                .GrossAmount = .AmtBefVat - .DiscountAmount
-                                .Price = IIf(.Quantity = 0, 0, .GrossAmount / .Quantity)
-                                .DiscountPercent = IIf(.GrossAmount = 0, 0, .DiscountAmount / .GrossAmount * 100)
-                                .VatAmount = GetVatAmount(InvTransactionDetail)
-                                .NetAmount = GetNetAmount(InvTransactionDetail)
-                            End If
                         Case "NetAmount"
-                            .AmtBefVat = .NetAmount / (1 + .VatPercent / 100)
-                            .VatAmount = .NetAmount - .AmtBefVat
-                            .GrossAmount = .AmtBefVat / (1 - .DiscountPercent / 100)
-                            .DiscountAmount = .GrossAmount - .AmtBefVat
-                            .Price = IIf(.Quantity = 0, 0, .GrossAmount / .Quantity)
+                            '.Price = IIf(.Quantity = 0, 0, .GrossAmount / .Quantity)
                     End Select
                     .UnitCost = GetUnitCost(InvTransactionDetail)
                     eventType.BindingSource.ResetItem(eventType.Row)
@@ -281,8 +241,9 @@ Namespace PresentationLayer.Presenters
                         If InvTransactionDetail.Quantity = 0 Then
                             InvTransactionDetail.Quantity = 1
                         End If
-                        SetInvTransactionDetailValues(product, InvTransactionDetail)
+                        'SetInvTransactionDetailValues(product, InvTransactionDetail)
                         InvTransactionDetail.ProductCode = product.ProductCode
+                        CheckStock(product)
                     End With
                 End If
             Else
@@ -292,6 +253,15 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+        Private Sub CheckStock(product As ProductModel)
+            CountInventory(product.IdNo)
+        End Sub
+
+        Private Function CountInventory(productIdNo As Int32)
+            Dim nCount As Int16 = 0
+            nCount = Service.GetRecord
+        End Function
+
         Private Sub SetInvTransactionDetailValues(pModel As ProductModel, InvTransactionDetail As InvTransactionDetailView)
             Dim lastInvTransactionInfo As Object = New ExpandoObject
             lastInvTransactionInfo = GetLastInvTransactionInfo(pModel)
@@ -299,12 +269,9 @@ Namespace PresentationLayer.Presenters
                 If lastInvTransactionInfo Is Nothing Then
                     SetDefaultUnit(pModel, InvTransactionDetail)
                 Else
-                    .Price = lastInvTransactionInfo.Price
-                    .UnitSalesPrice = lastInvTransactionInfo.UnitSalesPrice
                     .UnitIdNo = lastInvTransactionInfo.UnitIdNo
                     .UnitCount = GetUnitCount(pModel, InvTransactionDetail)
                 End If
-                .VatPercent = GetVatPercentage(pModel.CategoryIdNo)
                 SetAmounts(InvTransactionDetail)
                 .ProductIdNo = pModel.IdNo
                 .NeedsExpiryDate = GetNeedsExpiryDate(pModel.CategoryIdNo)
@@ -313,48 +280,24 @@ Namespace PresentationLayer.Presenters
 
         Private Sub SetAmounts(InvTransactionDetail As InvTransactionDetailView)
             With InvTransactionDetail
-                .GrossAmount = GetGrossAmount(InvTransactionDetail)
-                .DiscountAmount = GetDiscountAmount(InvTransactionDetail)
-                .AmtBefVat = GetAmountBeforeVat(InvTransactionDetail)
-                .VatAmount = GetVatAmount(InvTransactionDetail)
                 .NetAmount = GetNetAmount(InvTransactionDetail)
                 .UnitCost = GetUnitCost(InvTransactionDetail)
             End With
         End Sub
-        Private Function GetGrossAmount(InvTransactionDetail As InvTransactionDetailView) As Decimal
-            Return InvTransactionDetail.Price * InvTransactionDetail.Quantity
-        End Function
-
-        Private Function GetDiscountAmount(InvTransactionDetail As InvTransactionDetailView) As Decimal
-            Return InvTransactionDetail.GrossAmount * InvTransactionDetail.DiscountPercent / 100
-        End Function
-
-        Private Function GetAmountBeforeVat(InvTransactionDetail As InvTransactionDetailView) As Decimal
-            Return InvTransactionDetail.GrossAmount - InvTransactionDetail.DiscountAmount
-        End Function
-
-        Private Function GetVatAmount(InvTransactionDetail As InvTransactionDetailView) As Decimal
-            Return (InvTransactionDetail.GrossAmount - InvTransactionDetail.DiscountAmount) * InvTransactionDetail.VatPercent / 100
-        End Function
 
         Private Function GetNetAmount(InvTransactionDetail As InvTransactionDetailView) As Decimal
-            Return InvTransactionDetail.GrossAmount - InvTransactionDetail.DiscountAmount + InvTransactionDetail.VatAmount
+            'Return InvTransactionDetail.GrossAmount - InvTransactionDetail.DiscountAmount + InvTransactionDetail.VatAmount
+            Return 0
         End Function
 
         Private Function GetUnitCost(InvTransactionDetail As InvTransactionDetailView) As Decimal
-            Return IIf(InvTransactionDetail.Quantity + InvTransactionDetail.BonusQuantity = 0, 0, InvTransactionDetail.NetAmount / (InvTransactionDetail.Quantity + InvTransactionDetail.BonusQuantity))
-        End Function
-
-        Private Function RecomputeDiscountPercentage(InvTransactionDetail As InvTransactionDetailView) As Decimal
-            Return Math.Round(IIf(InvTransactionDetail.GrossAmount = 0, 0, InvTransactionDetail.DiscountAmount / InvTransactionDetail.GrossAmount * 100), 2)
+            'Return IIf(InvTransactionDetail.Quantity + InvTransactionDetail.BonusQuantity = 0, 0, InvTransactionDetail.NetAmount / (InvTransactionDetail.Quantity + InvTransactionDetail.BonusQuantity))
+            Return 0
         End Function
 
         Private Function RecomputePrice(InvTransactionDetail As InvTransactionDetailView) As Decimal
-            Return Math.Round(IIf(InvTransactionDetail.Quantity = 0, 0, InvTransactionDetail.GrossAmount / InvTransactionDetail.Quantity), 2)
-        End Function
-
-        Private Function RecomputeVatPercentage(InvTransactionDetail As InvTransactionDetailView) As Decimal
-            Return IIf(InvTransactionDetail.GrossAmount - InvTransactionDetail.DiscountAmount = 0, 0, InvTransactionDetail.VatAmount / (InvTransactionDetail.GrossAmount - InvTransactionDetail.DiscountAmount) * 100)
+            Return 0
+            'Return Math.Round(IIf(InvTransactionDetail.Quantity = 0, 0, InvTransactionDetail.GrossAmount / InvTransactionDetail.Quantity), 2)
         End Function
 
         Private Function GetProductModel(productCode As String) As ProductModel
@@ -445,11 +388,11 @@ Namespace PresentationLayer.Presenters
                 Dim unitQty, baseQty As Int16
                 Dim basePrice As Decimal
                 If productModel.BaseUnitIdNo = oldUnit Then
-                    basePrice = InvTransactionDetail.Price
+                    'basePrice = InvTransactionDetail.Price
                 Else
                     unitQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, oldUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "UnitQty")
                     baseQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, oldUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "BaseQty")
-                    basePrice = Math.Ceiling(IIf(baseQty = 0, 0, unitQty / baseQty) * InvTransactionDetail.Price * 100D) / 100D
+                    'basePrice = Math.Ceiling(IIf(baseQty = 0, 0, unitQty / baseQty) * InvTransactionDetail.Price * 100D) / 100D
                 End If
                 If newUnit = productModel.BaseUnitIdNo Then
                     newPrice = basePrice
@@ -458,7 +401,7 @@ Namespace PresentationLayer.Presenters
                     baseQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, newUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "BaseQty")
                     newPrice = Math.Ceiling(IIf(baseQty = 0, 0, basePrice * baseQty / unitQty) * 100D) / 100D
                 End If
-                InvTransactionDetail.Price = newPrice
+                'InvTransactionDetail.Price = newPrice
                 SetAmounts(InvTransactionDetail)
             End If
         End Sub
@@ -469,7 +412,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub SetProductUnits(productIdNo As Int16)
             Dim data As New ArrayList
-            data.Add({"ProductUnit_View", "UnitsByProduct", "IdNo,UnitName,UnitCode", "ProductIdNo = " + productIdNo.ToString()})
+            data.Add({"ProductUnit_View", "UnitsByProduct", "UnitIdNo,UnitName,UnitCode", "ProductIdNo = " + productIdNo.ToString()})
             CreateLookupDataThread(data)
         End Sub
 

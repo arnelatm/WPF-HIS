@@ -317,6 +317,7 @@
     <Compile Include="BusinessLayer\SalesJournal.vb" />
     <Compile Include="BusinessLayer\PensionProvider.vb" />
     <Compile Include="BusinessLayer\ShiftSummary.vb" />
+    <Compile Include="BusinessLayer\Inventory.vb" />
     <Compile Include="BusinessLayer\Supplier.vb" />
     <Compile Include="ContainerConfig.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
@@ -461,6 +462,7 @@
     <Compile Include="PresentationLayer\Models\IGroup\PmrPrescriptionModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\PrescriptionModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\StockInventoryModel.vb" />
+    <Compile Include="PresentationLayer\Models\InventoryModel.vb" />
     <Compile Include="PresentationLayer\Models\InvTransactionModel.vb" />
     <Compile Include="PresentationLayer\Models\InvTransTypeModel.vb" />
     <Compile Include="PresentationLayer\Models\ItemCodeModel.vb" />

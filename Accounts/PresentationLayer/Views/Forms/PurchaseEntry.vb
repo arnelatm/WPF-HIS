@@ -14,7 +14,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _footer As DgvFooter
-        Private _PurchaseDetails As List(Of PurchaseDetailView)
+        Private _purchaseDetails As List(Of PurchaseDetailView)
         Private _purchaseHistory As List(Of PurchaseHistoryView)
         Private _noOfUnits As Int16
         Public Event ProductCodeChanged(productCode As String, bs As BindingSource) Implements IPurchaseView.ProductCodeChanged
@@ -122,10 +122,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PurchaseDetails As List(Of PurchaseDetailView) Implements IPurchaseView.PurchaseDetails
             Get
-                Return _PurchaseDetails
+                Return _purchaseDetails
             End Get
             Set
-                _PurchaseDetails = Value
+                _purchaseDetails = Value
                 BindPurchaseDetail()
             End Set
         End Property

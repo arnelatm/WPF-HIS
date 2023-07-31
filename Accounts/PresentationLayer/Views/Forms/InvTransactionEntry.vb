@@ -14,7 +14,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _footer As DgvFooter
-        Private _InvTransactionDetails As List(Of InvTransactionDetailView)
+        Private _invTransactionDetails As List(Of InvTransactionDetailView)
         Private _noOfUnits As Int16
         Public Event ProductCodeChanged(productCode As String, bs As BindingSource) Implements IInvTransactionView.ProductCodeChanged
         Public Event GTinScanned(GTin As String, bs As BindingSource, ByRef productCode As String) Implements IInvTransactionView.GTinScanned
@@ -87,10 +87,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property InvTransactionDetails As List(Of InvTransactionDetailView) Implements IInvTransactionView.InvTransactionDetails
             Get
-                Return _InvTransactionDetails
+                Return _invTransactionDetails
             End Get
             Set
-                _InvTransactionDetails = Value
+                _invTransactionDetails = Value
                 BindInvTransactionDetail()
             End Set
         End Property
@@ -257,11 +257,9 @@ Namespace PresentationLayer.Views.Forms
                 .AutoCalc = True
             }
             _footer.ColumnToSum("dgvQuantity", 0) = True
-            _footer.ColumnToSum("dgvGrossAmount") = True
-            _footer.ColumnToSum("dgvDiscountAmount") = True
+            _footer.ColumnToSum("dgvNetAmount") = True
             _footer.SetAlignment("dgvQuantity", ContentAlignment.MiddleRight)
-            _footer.SetAlignment("dgvGrossAmount", ContentAlignment.MiddleRight)
-            _footer.SetAlignment("dgvDiscountAmount", ContentAlignment.MiddleRight)
+            _footer.SetAlignment("dgvNetAmount", ContentAlignment.MiddleRight)
             _footer.SetText("dgvProductName", "Totals ->")
             DataGridViewInvTransactionDetails.Columns("dgvExpiryDate").DefaultCellStyle.Format = "yyyy/MM"
             SetupDgvColumns()
@@ -557,6 +555,7 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent ProductCodeChanged(code, bsInvTransactionDetails)
             Dim cProductName = dgv.CurrentRow().Cells("dgvProductName").Value
             If Not String.IsNullOrEmpty(cProductName) Then
+                'RaiseEvent ProductCodeValidated()
                 If dgv.CurrentRow.Cells("dgvUnitCount").Value < 2 Then
                     SendKeys.Send("{Tab}{Tab}")
                 Else
@@ -721,11 +720,8 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateTotals()
             If _footer IsNot Nothing Then
                 _footer.CalculateTotals()
-                Dim netAmtBefVat As Decimal = _footer.Value("dgvNetAmount")
-                Dim vatAmount As Decimal = _footer.Value("dgvVatAmount")
-                txtAmount.Text = (netAmtBefVat + vatAmount).ToString("n2")
-                txtGrossAmount.Text = _footer.Value("dgvGrossAmount").ToString("n2")
-                txtDiscountAmount.Text = _footer.Value("dgvDiscountAmount").ToString("n2")
+                Dim netAmount As Decimal = _footer.Value("dgvNetAmount")
+                txtAmount.Text = netAmount.ToString("n2")
             End If
         End Sub
 
@@ -898,14 +894,6 @@ Namespace PresentationLayer.Views.Forms
             End Select
         End Sub
 
-
-        Private Sub DataGridViewInvTransactionDetails_RowEnter(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewInvTransactionDetails.RowEnter
-            Dim dgvRow As DataGridViewRow = DataGridViewInvTransactionDetails.Rows(e.RowIndex)
-            Dim prIdNo As Int32 = dgvRow.Cells("dgvProductIdNo").Value
-            RaiseEvent RowChanged(prIdNo)
-            CGroupBox1.Text = Messaging.TranslateCaption("InvTransaction History for ") + dgvRow.Cells("dgvProductCode").Value + "-" + dgvRow.Cells("dgvProductName").Value
-        End Sub
-
         ' Changes how cells are displayed depending on their columns and values.
         Private Sub dgvPurDetailsFormatting(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellFormattingEventArgs) Handles DataGridViewInvTransactionDetails.CellFormatting
             If e.ColumnIndex > 0 Then
@@ -941,7 +929,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub btnPost_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPost.ClickButtonArea
+        Private Sub btnPost_ClickButtonArea(Sender As Object, e As MouseEventArgs)
             If Not Posted Then
                 Dim caption = Messaging.TranslateCaption("Please confirm.")
                 Dim action As String = Messaging.TranslateCaption("post")
