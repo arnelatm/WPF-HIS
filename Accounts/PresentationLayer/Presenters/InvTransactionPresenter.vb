@@ -235,6 +235,8 @@ Namespace PresentationLayer.Presenters
             Dim product As ProductModel = GetProductModel(productCode)
             If product IsNot Nothing Then
                 If productCode <> InvTransactionDetail.ProductCode Then
+                    Dim inventory As New InventoryModel
+                    inventory = Service.GetRecordsWithGroupIdNo(Of InventoryModel)(product.IdNo, "ExpiryDate")
                     With InvTransactionDetail
                         InvTransactionDetail.ProductIdNo = product.IdNo
                         InvTransactionDetail.ProductName = product.ProductName
