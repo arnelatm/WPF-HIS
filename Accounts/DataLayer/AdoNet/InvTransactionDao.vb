@@ -10,7 +10,8 @@ Namespace DataLayer.AdoNet
 
     Public Class InvTransactionDao
         Inherits AccountsDao
-        Implements IDao(Of InvTransaction), IDaoPosting
+        Implements IDao(Of InvTransaction), IDaoPosting, IDaoChild(Of Inventory)
+
 
         Private Const FieldList = "Amount," &
                                   "Cancelled," &
@@ -107,6 +108,39 @@ Namespace DataLayer.AdoNet
             'commands.Add(command2)
             'retVal = Db.ExecuteNonQueryCommands("PostInvTransaction", commands)
             Return retVal
+        End Function
+
+        Public Function GetRecordsWithGroupIdNo(idNo As Object, Optional sortExpression As Object = Nothing) As List(Of Inventory) Implements IDaoChild(Of Inventory).GetRecordsWithGroupIdNo
+            If sortExpression Is Nothing Then
+                sortExpression = "IdNo"
+            End If
+            Dim sql As String =
+                    "select BatchNo, ExpiryDate, IdNo, ProductIdNo, PurchaseDetailIdNo, QtyOnHand, UnitCost, UnitSalesPrice from Inventory_View " &
+                    "where ProductIdNo = @IdNo and QtyOnHand <> 0 and BranchIdNo = @BranchIdNo Order By " + sortExpression
+            Dim params() As Object = {"@IdNo", idNo, "@BranchIdNo", GlobalVariables.BranchIdNo}
+            Return Db.Read(sql, MakeInventory, params).ToList()
+        End Function
+
+
+        Private Shared ReadOnly MakeInventory As Func(Of IDataReader, Inventory) =
+                                    Function(reader) _
+            New Inventory() With {.BatchNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("BatchNo")),
+                                  .ExpiryDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("ExpiryDate")),
+                                  .IdNo = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("IdNo")),
+                                  .ProductIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("ProductIdNo")),
+                                  .PurchaseDetailIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("PurchaseDetailIdNo")),
+                                  .QtyOnHand = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("QtyOnHand")),
+                                  .UnitCost = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("UnitCost")),
+                                  .UnitSalesPrice = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("UnitSalesPrice")
+                                 )
+                                }
+
+        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of Inventory).DelUpdateTvp
+            Throw New NotImplementedException()
+        End Function
+
+        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of Inventory).InsertTvp
+            Throw New NotImplementedException()
         End Function
 
 

@@ -256,6 +256,10 @@ Public Class MappingProfileAccounts
         CreateMap(Of InvTransactionDetail, InvTransactionDetailModel)().ReverseMap()
         CreateMap(Of InvTransactionDetailModel, IInvTransactionDetailView)().ReverseMap()
 
+
+        CreateMap(Of Inventory, InventoryModel)().ReverseMap()
+        'CreateMap(Of InvTransactionModel, IInvTransactionView)().ReverseMap()
+
     End Sub
 
     'CreateMap(Of List(Of JournalItem), List(Of JournalItemModel))().ReverseMap()
