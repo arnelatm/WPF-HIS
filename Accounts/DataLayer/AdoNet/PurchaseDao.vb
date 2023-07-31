@@ -126,11 +126,11 @@ Namespace DataLayer.AdoNet
             Dim retVal As Boolean
             Dim commands As New List(Of DaoCommand)
             Dim command1, command2 As New DaoCommand
-            command1.Add("Insert into Inventory (PurchaseDetailIdNo,ProductIdNo,QtyOnHand,WarehouseIdNo) " &
-                         "Select Case a.IdNo,a.ProductIdNo,(a.Quantity+a.BonusQuantity) * c.BaseQty / c.UnitQty,b.WarehouseIdNo " &
+            command1.Add("Insert into Inventory (BranchIdNo,PurchaseDetailIdNo,ProductIdNo,QtyOnHand,WarehouseIdNo) " &
+                         "Select @BranchIdNo,a.IdNo,a.ProductIdNo,(a.Quantity+a.BonusQuantity) * c.BaseQty / c.UnitQty,b.WarehouseIdNo " &
                          "From PurchaseDetail a Left Join Purchase b On a.PurchaseIdNo = b.IdNo " &
                          "Left Join ProductUnit_View c On a.ProductIdNo = c.ProductIdNo And a.UnitIdNo = c.UnitIdNo " &
-                         "where a.PurchaseIdNo = @IdNo", {"@IdNo", idNo})
+                         "where a.PurchaseIdNo = @IdNo", {"@IdNo", idNo, "@BranchIdNo", GlobalVariables.BranchIdNo})
             'command1.Add("Insert into Inventory (PurchaseDetailIdNo,ProductIdNo,QtyOnHand,WarehouseIdNo) " &
             '            "select a.IdNo,a.ProductIdNo,a.Quantity+a.BonusQuantity,b.WarehouseIdNo from PurchaseDetail a " &
             '            "left join Purchase b on a.PurchaseIdNo = b.IdNo " &

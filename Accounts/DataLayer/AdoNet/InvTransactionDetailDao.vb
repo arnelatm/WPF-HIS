@@ -13,19 +13,13 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly Db As New Db()
 
-        Const FieldList As String = "AmtBefVat," &
-                                    "BaseUnitIdNo," &
+        Const FieldList As String = "BaseUnitIdNo," &
                                     "BatchNo," &
-                                    "BonusQuantity," &
                                     "CategoryIdNo," &
-                                    "DiscountAmount," &
-                                    "DiscountPercent," &
                                     "ExpiryDate," &
-                                    "GrossAmount," &
                                     "IdNo," &
                                     "NeedsExpiryDate," &
                                     "NetAmount," &
-                                    "Price," &
                                     "ProductCode," &
                                     "ProductIdNo," &
                                     "ProductName," &
@@ -35,10 +29,7 @@ Namespace DataLayer.AdoNet
                                     "Sequence," &
                                     "UnitCount," &
                                     "UnitIdNo," &
-                                    "UnitSalesPrice," &
-                                    "UnitCost," &
-                                    "VatAmount," &
-                                    "VatPercent"
+                                    "UnitCost"
 
         Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of InvTransactionDetail) Implements IDaoChild(Of InvTransactionDetail).GetRecordsWithGroupIdNo
             If sortExpression Is Nothing Then
@@ -73,19 +64,13 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, InvTransactionDetail) =
                                     Function(reader) _
             New InvTransactionDetail() With {
-            .AmtBefVat = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Decimal)(reader("AmtBefVat")),
             .BaseUnitIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("BaseUnitIdNo")),
             .BatchNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("BatchNo")),
-            .BonusQuantity = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("BonusQuantity")),
             .CategoryIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("CategoryIdNo")),
-            .DiscountAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DiscountAmount")),
-            .DiscountPercent = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("DiscountPercent")),
             .ExpiryDate = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date)(reader("ExpiryDate")),
-            .GrossAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("GrossAmount")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .NeedsExpiryDate = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("NetAmount")),
             .NetAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("NetAmount")),
-            .Price = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Price")),
             .ProductCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ProductCode")),
             .ProductIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("ProductIdNo")),
             .ProductName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ProductName")),
@@ -95,11 +80,8 @@ Namespace DataLayer.AdoNet
             .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("Sequence")),
             .UnitCount = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("UnitIdNo")),
             .UnitIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("UnitIdNo")),
-            .UnitCost = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("UnitCost")),
-            .UnitSalesPrice = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("UnitSalesPrice")),
-            .VatAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("VatAmount")),
-            .VatPercent = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("VatPercent"))
-           }
+            .UnitCost = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("UnitCost"))
+        }
 
         Public Function GetDaoRecords(Optional filter As String = Nothing) As List(Of InvTransactionDetail) Implements IDaoGetRecords(Of InvTransactionDetail).GetDaoRecords
             Dim sql As String = "SELECT " &

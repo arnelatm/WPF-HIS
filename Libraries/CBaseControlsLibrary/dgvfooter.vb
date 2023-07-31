@@ -278,6 +278,12 @@ Public Class DgvFooter
                 Dim col As CDgvDecimalColumn = dgv.Columns(e.ColumnIndex)
                 decLength = col.DecimalPlaces
             End If
+        ElseIf TypeOf (sender) Is CtDataGridView Then
+            Dim dgv As CtDataGridView = sender
+            If TypeOf (dgv.Columns(e.ColumnIndex)) Is CDgvDecimalColumn Then
+                Dim col As CDgvDecimalColumn = dgv.Columns(e.ColumnIndex)
+                decLength = col.DecimalPlaces
+            End If
         End If
         'If _parentDGV.Rows(e.RowIndex).Cells(e.ColumnIndex).GetType.Name = "DataGridViewTextBoxCell" And columnAddable Then
         If columnAddable Then
@@ -296,12 +302,22 @@ Public Class DgvFooter
         For Each c As DataGridViewColumn In CType(sender, DataGridView).Columns.OfType(Of DataGridViewTextBoxColumn)()
             Dim columnAddable As Boolean = _columnsToSum.Contains(c.Name)
             If Not columnAddable Then Continue For
-            Dim dgv As CDataGridView = sender
-            If TypeOf (dgv.Columns(c.Name)) Is CDgvDecimalColumn Then
-                Dim col As CDgvDecimalColumn = dgv.Columns(c.Name)
-                SumColumn(c.Name, col.DecimalPlaces)
-            Else
-                SumColumn(c.Name)
+            If TypeOf sender Is CDataGridView Then
+                Dim dgv As CDataGridView = sender
+                If TypeOf (dgv.Columns(c.Name)) Is CDgvDecimalColumn Then
+                    Dim col As CDgvDecimalColumn = dgv.Columns(c.Name)
+                    SumColumn(c.Name, col.DecimalPlaces)
+                Else
+                    SumColumn(c.Name)
+                End If
+            ElseIf TypeOf sender Is CtDataGridView Then
+                Dim dgv As CtDataGridView = sender
+                If TypeOf (dgv.Columns(c.Name)) Is CDgvDecimalColumn Then
+                    Dim col As CDgvDecimalColumn = dgv.Columns(c.Name)
+                    SumColumn(c.Name, col.DecimalPlaces)
+                Else
+                    SumColumn(c.Name)
+                End If
             End If
         Next
         CheckParentVScrollBar()

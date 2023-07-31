@@ -108,6 +108,21 @@ Namespace DataLayer.AdoNet
             'retVal = Db.ExecuteNonQueryCommands("PostInvTransaction", commands)
             Return retVal
         End Function
+
+
+        'Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of Inventory) Implements IDaoChild(Of Inventory).GetRecordsWithGroupIdNo
+        '    If sortExpression Is Nothing Then
+        '        sortExpression = "IdNo"
+        '    End If
+        '    Dim sql As String =
+        '            "select GroupAccess.IdNo , GroupAccess.SecurityGroupIdNo ,  SecurityObject.IdNo as 'SecurityObjectIdNo' , SecurityObject.SecurityObjectName, GroupAccess.Visible, GroupAccess.Editable from SecurityObject  " &
+        '            "left join groupAccess " &
+        '            "on SecurityObject.IdNo = GroupAccess.SecurityObjectIdNo  and SecurityGroupIdNo = @SecurityGroupIdNo " &
+        '            "Order By " & sortExpression & " ASC "
+        '    Dim params() As Object = {"@SecurityGroupIdNo", idNo}
+        '    Return Nothing ' Db.Read(sql, Make, params).ToList()
+        'End Function
+
     End Class
 
 End Namespace
