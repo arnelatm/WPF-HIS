@@ -436,7 +436,7 @@ Namespace PresentationLayer.Presenters
             If purchaseDetail.ProductIdNo > 0 Then
                 UpdatePurchaseHistory(purchaseDetail.ProductIdNo)
             End If
-            bs.ResetCurrentItem()
+            bs.EndEdit()
         End Sub
 
         Private Function GetProductModel(productCode As Int32) As ProductModel

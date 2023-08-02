@@ -27,6 +27,7 @@ Namespace PresentationLayer.Views.Forms
         Public Property ProductsByCode As DataTable Implements IInvTransactionView.ProductsByCode
         Public Property UnitsByCode As DataTable Implements IInvTransactionView.UnitsByCode
         Public Property UnitsByProduct As DataTable Implements IInvTransactionView.UnitsByProduct
+        Public Property ProductInventory As List(Of InventoryModel) Implements IInvTransactionView.ProductInventory
 
         Public Sub New()
             MyBase.New()
@@ -550,16 +551,27 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub ValidateProductCode(ByRef dgv As CtDataGridView, ByRef e As DataGridViewCellValidatingEventArgs)
+        Private Function ValidateProductCode(ByRef dgv As CtDataGridView, ByRef e As DataGridViewCellValidatingEventArgs)
+            Dim valid As Boolean = False
             Dim code As String = dgv.CurrentRow.Cells("dgvProductCode").EditedFormattedValue
             RaiseEvent ProductCodeChanged(code, bsInvTransactionDetails)
             Dim cProductName = dgv.CurrentRow().Cells("dgvProductName").Value
             If Not String.IsNullOrEmpty(cProductName) Then
-                'RaiseEvent ProductCodeValidated()
-                If dgv.CurrentRow.Cells("dgvUnitCount").Value < 2 Then
-                    SendKeys.Send("{Tab}{Tab}")
-                Else
-                    SendKeys.Send("{Tab}")
+                If ProductInventory.Count() = 1 Then
+                    SendKeys.Send("{Tab}{Tab}{Tab}")
+                    valid = True
+                ElseIf ProductInventory.Count() > 1 Then
+                    Dim form As New InventorySelector(ProductInventory, DataGridViewInvTransactionDetails)
+                    If form.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                        Dim selectedInvIndex As Int32 = form.SelectedInvIndex
+                        With bsInvTransactionDetails.Current
+                            .BatchNo = ProductInventory(selectedInvIndex).BatchNo
+                            .Quantity = ProductInventory(selectedInvIndex).QtyOnHand
+                            .ExpiryDate = ProductInventory(selectedInvIndex).ExpiryDate
+                            '.PurchaseDetailIdNo = ProductInventory(selectedInvIndex).PurchaseDetailIdNo
+                        End With
+                    End If
+                    valid = True
                 End If
             Else
                 If Not String.IsNullOrEmpty(code) Then
@@ -567,7 +579,8 @@ Namespace PresentationLayer.Views.Forms
                     Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", code, "fieldDescription", "Product Code"})
                 End If
             End If
-        End Sub
+            Return valid
+        End Function
 
         'Private Sub ValidateUnit(ByRef dgv As CtDataGridView, ByRef e As DataGridViewCellValidatingEventArgs)
         '    Dim oldUnitIdNo As Int16 = dgv.CurrentRow.Cells("dgvUnitIdNo").EditedFormattedValue

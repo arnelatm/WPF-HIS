@@ -630,6 +630,12 @@
     <Compile Include="PresentationLayer\Views\Forms\InvTransactionEntry.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\InventorySelector.Designer.vb">
+      <DependentUpon>InventorySelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\InventorySelector.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\SterilizationLabelPrinting.designer.vb">
       <DependentUpon>SterilizationLabelPrinting.vb</DependentUpon>
     </Compile>
@@ -2015,6 +2021,10 @@
       <DependentUpon>InvTransactionEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\InventorySelector.resx">
+      <DependentUpon>InventorySelector.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\SterilizationLabelPrinting.resx">
       <DependentUpon>SterilizationLabelPrinting.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -2786,6 +2796,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.HolidayTransferItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.HolidayTransferItemModel1.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.IGroup.PmrPatientDisplayModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.InventoryModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.InvTransactionDetailModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.ItemDetailsModel2.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.JournalItemModel.datasource" />
