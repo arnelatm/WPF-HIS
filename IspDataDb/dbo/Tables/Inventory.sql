@@ -1,10 +1,16 @@
 ﻿CREATE TABLE [dbo].[Inventory] (
-    [IdNo]         INT            IDENTITY (1, 1) NOT NULL,
-    [ProductIdNo]  INT            NULL,
-    [Quantity]     DECIMAL (9, 3) NULL,
-    [TotalCost]    DECIMAL (9, 2) NULL,
-    [LastUnitCost] DECIMAL (9, 3) NULL,
-    CONSTRAINT [PK_Inventory] PRIMARY KEY CLUSTERED ([IdNo] ASC),
-    CONSTRAINT [IX_InventoryProductIdNo] UNIQUE NONCLUSTERED ([ProductIdNo] ASC)
+    [IdNo]            INT             IDENTITY (1, 1) NOT NULL,
+    [BranchIdNo]      TINYINT         NULL,
+    [ProductIdNo]     INT             NULL,
+    [TransactionIdNo] INT             NULL,
+    [QtyOnHand]       DECIMAL (12, 4) NULL,
+    [WarehouseIdNo]   SMALLINT        NULL,
+    [TransactionType] CHAR (1)        NULL,
+    [BatchNo]         VARCHAR (20)    NULL,
+    [ExpiryDate]      DATE            NULL,
+    [UnitCost]        DECIMAL (12, 4) NULL,
+    CONSTRAINT [PK_Inventory_1] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 

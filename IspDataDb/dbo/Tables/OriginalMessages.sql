@@ -10,3 +10,10 @@
 
 
 
+
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_OriginalMessagesMessageKey]
+    ON [dbo].[OriginalMessages]([MessageKey] ASC);
+
