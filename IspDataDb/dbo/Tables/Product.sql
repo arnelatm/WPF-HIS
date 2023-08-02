@@ -16,11 +16,13 @@
     [GTIN]           VARCHAR (14)   NULL,
     [Active]         BIT            NULL,
     [UserIdNo]       SMALLINT       NULL,
-    [DateCreated]    DATETIME       NOT NULL,
+    [DateCreated]    DATETIME       CONSTRAINT [DF_Product_DateCreated_1] DEFAULT (getdate()) NOT NULL,
     [DateTimeStamp]  ROWVERSION     NOT NULL,
     CONSTRAINT [PK_ItemDetails] PRIMARY KEY CLUSTERED ([IdNo] ASC),
-    CONSTRAINT [IX_Product] UNIQUE NONCLUSTERED ([BranchIdNo] ASC, [ProductCode] ASC)
+    CONSTRAINT [IX_ProductBranchIdNoName] UNIQUE NONCLUSTERED ([BranchIdNo] ASC, [ProductCode] ASC)
 );
+
+
 
 
 

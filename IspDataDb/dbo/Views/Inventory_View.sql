@@ -2,20 +2,17 @@
 
 
 
-
-
-CREATE VIEW [dbo].[ProductUnit_View]
+CREATE VIEW [dbo].[Inventory_View]
 AS
-(SELECT dbo.ProductUnit.UnitIdNo, dbo.Unit.UnitCode, dbo.Unit.UnitName, dbo.ProductUnit.ProductIdNo, dbo.ProductUnit.UnitQty, dbo.ProductUnit.BaseQty
- FROM   dbo.ProductUnit 
- Left outer JOIN dbo.Unit ON dbo.ProductUnit.UnitIdNo = dbo.Unit.IdNo
- Union 
- Select dbo.Product.BaseUnitIdNo, dbo.Unit.UnitCode, dbo.Unit.UnitName, dbo.Product.IdNo, 1, 1
- From dbo.Product
- Left outer Join dbo.Unit on dbo.Product.BaseUnitIdNo = dbo.Unit.IdNo
- )
+SELECT  a.IdNo, a.BranchIdNo, a.ProductIdNo, a.TransactionIdNo, a.QtyOnHand, c.BatchNo, c.ExpiryDate, c.UnitSalesPrice, 
+        b.ProductName,a.WarehouseIdNo,Round(IIf(c.Quantity+c.BonusQuantity = 0,0,c.NetAmount / (c.Quantity+c.BonusQuantity)),4) as UnitCost
+FROM    dbo.Inventory a 
+		INNER JOIN dbo.Product b
+		ON a.ProductIdNo = b.IdNo 
+		INNER JOIN dbo.PurchaseDetail c 
+		ON a.TransactionIdNo = c.IdNo
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ProductUnit_View';
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'Inventory_View';
 
 
 GO
@@ -24,7 +21,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+         Configuration = "(H (1[69] 4[5] 2[8] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -90,25 +87,35 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
-         Begin Table = "ProductUnit"
+         Begin Table = "Inventory"
             Begin Extent = 
                Top = 6
                Left = 38
-               Bottom = 184
-               Right = 208
+               Bottom = 136
+               Right = 231
             End
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "Unit"
+         Begin Table = "PurchaseDetail"
             Begin Extent = 
-               Top = 6
-               Left = 246
-               Bottom = 196
-               Right = 419
+               Top = 9
+               Left = 474
+               Bottom = 353
+               Right = 654
             End
             DisplayFlags = 280
             TopColumn = 0
+         End
+         Begin Table = "Product"
+            Begin Extent = 
+               Top = 216
+               Left = 76
+               Bottom = 346
+               Right = 257
+            End
+            DisplayFlags = 280
+            TopColumn = 5
          End
       End
    End
@@ -136,5 +143,5 @@ Begin DesignProperties =
       End
    End
 End
-', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'ProductUnit_View';
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'Inventory_View';
 
