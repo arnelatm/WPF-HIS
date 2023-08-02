@@ -231,26 +231,32 @@ Namespace PresentationLayer.Presenters
             End With
         End Sub
 
-        Private Sub InitializeInvTransactionDetailValues(ByRef InvTransactionDetail As InvTransactionDetailView, productCode As String)
+        Private Sub InitializeInvTransactionDetailValues(ByRef bs As BindingSource, productCode As String)
             Dim product As ProductModel = GetProductModel(productCode)
             If product IsNot Nothing Then
-                If productCode <> InvTransactionDetail.ProductCode Then
-                    Dim inventory As New InventoryModel
+                If productCode <> bs.Current.ProductCode Then
+                    Dim inventory As New List(Of InventoryModel)
                     inventory = Service.GetRecordsWithGroupIdNo(Of InventoryModel)(product.IdNo, "ExpiryDate")
-                    With InvTransactionDetail
-                        InvTransactionDetail.ProductIdNo = product.IdNo
-                        InvTransactionDetail.ProductName = product.ProductName
-                        If InvTransactionDetail.Quantity = 0 Then
-                            InvTransactionDetail.Quantity = 1
-                        End If
-                        'SetInvTransactionDetailValues(product, InvTransactionDetail)
-                        InvTransactionDetail.ProductCode = product.ProductCode
-                        CheckStock(product)
-                    End With
+                    bs.Current.ProductIdNo = product.IdNo
+                    bs.Current.ProductName = product.ProductName
+                    bs.Current.UnitIdNo = product.BaseUnitIdNo
+                    If inventory.Count() = 1 Then
+                        With bs.Current
+                            If .Quantity = 0 Then
+                                .Quantity = inventory(0).QtyOnHand
+                            End If
+                            .ProductCode = product.ProductCode
+                            .BatchNo = inventory(0).BatchNo
+                            .ExpiryDate = inventory(0).ExpiryDate
+                            .UnitCost = inventory(0).UnitCost
+                            .NetAmount = inventory(0).UnitCost * inventory(0).QtyOnHand
+                        End With
+                    End If
+                    View.ProductInventory = inventory
                 End If
             Else
-                InvTransactionDetail.ProductIdNo = ""
-                InvTransactionDetail.ProductName = ""
+                bs.Current.ProductIdNo = ""
+                bs.Current.ProductName = ""
                 Messaging.Show(True, "Invalid Product Code!")
             End If
         End Sub
@@ -351,9 +357,9 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Sub OnProductCodeChanged(productCode As String, bs As BindingSource)
-            Dim InvTransactionDetail As InvTransactionDetailView = bs.Current
-            InitializeInvTransactionDetailValues(InvTransactionDetail, productCode)
-            bs.ResetCurrentItem()
+            InitializeInvTransactionDetailValues(bs, productCode)
+            bs.EndEdit()
+            'bs.ResetCurrentItem()
         End Sub
 
         Private Function GetProductModel(productCode As Int32) As ProductModel

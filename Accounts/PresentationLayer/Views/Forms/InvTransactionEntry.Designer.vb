@@ -953,6 +953,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
             Me.dgvUnitIdNo.DefaultCellStyle = DataGridViewCellStyle9
+            Me.dgvUnitIdNo.DisplayStyleForCurrentCellOnly = True
             Me.dgvUnitIdNo.EditingMode = False
             Me.dgvUnitIdNo.HeaderText = "Unit"
             Me.dgvUnitIdNo.Name = "dgvUnitIdNo"
@@ -1415,6 +1416,11 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents cboUserIdNo As CtComboBox
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents CLabel5 As CLabel
+        Friend WithEvents UnitSalesPriceDataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+        Friend WithEvents PriceDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents CLabel4 As CLabel
+        Friend WithEvents txtAmount As CTextBox
+        Friend WithEvents btnPost As CButton
         Friend WithEvents dgvSequence As CDgvTextColumn
         Friend WithEvents dgvProductCode As CDgvTextColumn
         Friend WithEvents dgvProductName As CDgvTextColumn
@@ -1428,19 +1434,14 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents dgvDiscountPercent As CdgvMoneyColumn
         Friend WithEvents dgvDiscountAmount As CdgvMoneyColumn
         Friend WithEvents dgvUnitCount As CDgvDecimalColumn
-        Friend WithEvents UnitSalesPriceDataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
         Friend WithEvents dgvProductIdNo As CDgvDtComboBoxColumn
         Friend WithEvents dgvNeedsExpiryDate As DataGridViewCheckBoxColumn
         Friend WithEvents BaseUnitIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents CategoryIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
         Friend WithEvents NeedsExpiryDateDataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
-        Friend WithEvents PriceDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents ProductNameAraDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
         Friend WithEvents UnitCountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents CLabel4 As CLabel
-        Friend WithEvents txtAmount As CTextBox
-        Friend WithEvents btnPost As CButton
     End Class
 End NameSpace

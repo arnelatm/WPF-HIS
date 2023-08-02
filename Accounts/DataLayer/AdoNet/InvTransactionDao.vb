@@ -115,7 +115,7 @@ Namespace DataLayer.AdoNet
                 sortExpression = "IdNo"
             End If
             Dim sql As String =
-                    "select BatchNo, ExpiryDate, IdNo, ProductIdNo, PurchaseDetailIdNo, QtyOnHand, UnitCost, UnitSalesPrice from Inventory_View " &
+                    "select BatchNo, ExpiryDate, IdNo, ProductIdNo, TransactionIdNo, QtyOnHand, UnitCost from Inventory_View " &
                     "where ProductIdNo = @IdNo and QtyOnHand <> 0 and BranchIdNo = @BranchIdNo Order By " + sortExpression
             Dim params() As Object = {"@IdNo", idNo, "@BranchIdNo", GlobalVariables.BranchIdNo}
             Return Db.Read(sql, MakeInventory, params).ToList()
@@ -128,12 +128,10 @@ Namespace DataLayer.AdoNet
                                   .ExpiryDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("ExpiryDate")),
                                   .IdNo = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("IdNo")),
                                   .ProductIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("ProductIdNo")),
-                                  .PurchaseDetailIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("PurchaseDetailIdNo")),
+                                  .PurchaseDetailIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("TransactionIdNo")),
                                   .QtyOnHand = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("QtyOnHand")),
-                                  .UnitCost = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("UnitCost")),
-                                  .UnitSalesPrice = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("UnitSalesPrice")
-                                 )
-                                }
+                                  .UnitCost = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("UnitCost"))
+                                 }
 
         Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of Inventory).DelUpdateTvp
             Throw New NotImplementedException()

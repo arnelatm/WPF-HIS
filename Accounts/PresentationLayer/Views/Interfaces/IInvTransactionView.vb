@@ -1,4 +1,5 @@
-﻿Imports AATM.PresentationLayer.Views
+﻿Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Interfaces
 
@@ -22,6 +23,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property UnitsByCode As DataTable
         Property UnitsByProduct As DataTable
         Property ProductsByCode As DataTable
+        Property ProductInventory As List(Of InventoryModel)
         Event ProductUnitEditing(productIdNo As Int32) ', bs As BindingSource)
         Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource)
         Event ProductCodeChanged(productCode As String, bs As BindingSource)

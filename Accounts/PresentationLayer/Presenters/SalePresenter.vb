@@ -414,7 +414,7 @@ Namespace PresentationLayer.Presenters
         Private Sub OnProductCodeChanged(productCode As String, bs As BindingSource)
             Dim SaleDetail As SaleDetailView = bs.Current
             InitializeSaleDetailValues(SaleDetail, productCode)
-            bs.ResetCurrentItem()
+            bs.EndEdit()
         End Sub
 
         Private Function GetProductModel(productCode As Int32) As ProductModel

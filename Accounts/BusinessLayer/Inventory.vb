@@ -9,7 +9,6 @@ Namespace BusinessLayer
 
         ' ** Enterprise Design Pattern: Identity field pattern
 
-        Public Property Batch As String
         Public Property BatchNo As String
         Public Property ExpiryDate As Date
         Public Property IdNo As Int32
