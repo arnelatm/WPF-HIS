@@ -142,6 +142,8 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgInvalidDate", "You entry <{enteredDate}> is not a valid date. Must be in one of the following format ['yyyy/MM' 'yyyyMM', 'yyyy-MM']. Press Ctrl-Z to revert to previous value.", "Error")
         Messaging.AddMessage("MsgBlankExpNotAllowed", "Sorry, expiry date is a needed for this item.", "Error")
         Messaging.AddMessage("MsgExpDateNeeded", "Error on line {lineNumber}. Sorry expiry date needed for the said purchase item.", "Invalid Entry")
+        Messaging.AddMessage("MsgMustSelectFromList", "Sorry you must select a <{selectionName}> from the list. Blank Values not allowed.", "Error")
+        Messaging.AddMessage("MsgNoSuchInventory", "Sorry, no such item exist in the current inventory. You cannot deduct an inventory item which does not exist in the invetory!", "Error")
     End Sub
 
     'Public Shared Sub CreateEnums()

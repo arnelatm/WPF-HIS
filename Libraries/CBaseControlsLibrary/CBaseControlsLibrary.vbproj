@@ -248,7 +248,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CDgvMoneyCell.vb" />
-    <Compile Include="CDgvTextCell.vb" />
+    <Compile Include="CDgvTextBoxCell.vb" />
     <Compile Include="CdgvMoneyColumn.vb" />
     <Compile Include="CDgvTextColumn.vb" />
     <Compile Include="CDtpGregorianDate.Designer.vb">

@@ -2,7 +2,7 @@
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
-Public Class CDgvTextCell
+Public Class CDgvTextBoxCell
     Inherits DataGridViewTextBoxCell
     Implements IEntryControl
 
@@ -17,6 +17,7 @@ Public Class CDgvTextCell
     '    copy.EditingMode = EditingMode
     '    Return copy
     'End Function
+
 
     <Category("Custom Properties")>
     <DefaultValue(False)>

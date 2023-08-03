@@ -385,8 +385,8 @@ End Enum
 
 Public Enum InventoryActionSelection
     <EnumCode("")> NotSpecified
-    <EnumCode("1")> Add
-    <EnumCode("2")> Deduct
+    <EnumCode("A")> Add
+    <EnumCode("D")> Deduct
 End Enum
 Public Enum AbsenceTypeSelection
     <EnumCode("")> NotSpecified

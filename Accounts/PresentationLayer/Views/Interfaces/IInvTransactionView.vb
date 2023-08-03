@@ -24,6 +24,9 @@ Namespace PresentationLayer.Views.Interfaces
         Property UnitsByProduct As DataTable
         Property ProductsByCode As DataTable
         Property ProductInventory As List(Of InventoryModel)
+        Property AddOrDeduct As String
+        Property BsInvTransactionDetails As BindingSource
+
         Event ProductUnitEditing(productIdNo As Int32) ', bs As BindingSource)
         Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource)
         Event ProductCodeChanged(productCode As String, bs As BindingSource)
@@ -31,8 +34,7 @@ Namespace PresentationLayer.Views.Interfaces
         Event UnitChanged(oldUnit As Short, newUnit As Short, bs As BindingSource, formattedValue As String)
         Event RowChanged(productIdNo As Integer)
         Event PostData(idNo As Int32)
-
-
+        Event InvTransactionTypeChanged(invTransTypeIdNo As Int16)
     End Interface
 
 End Namespace

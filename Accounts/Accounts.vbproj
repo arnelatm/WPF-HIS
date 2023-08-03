@@ -523,7 +523,7 @@
     <Compile Include="PresentationLayer\Models\PensionSchemeModel.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\InvTransTypePesenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\InvTransTypePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\DurationPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\DosageMasterPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\PrescriptionPresenter.vb" />

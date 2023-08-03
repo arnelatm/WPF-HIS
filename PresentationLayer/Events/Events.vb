@@ -453,6 +453,24 @@ Public Class DgvItemsChanged
 
 End Class
 
+Public Class DgvItemsValidating
+
+    Public Sub New(bindingSource As BindingSource, row As Int32, propertyName As String, elementName As String, enteredValue As Object)
+        Me.BindingSource = bindingSource
+        Me.Row = row
+        Me.PropertyName = propertyName
+        Me.ElementName = elementName
+        Me.EnteredValue = enteredValue
+    End Sub
+
+    Public Property BindingSource As BindingSource
+    Public Property Row As Int32
+    Public Property PropertyName As String
+    Public Property ElementName As String
+    Public Property EnteredValue As Object
+
+End Class
+
 Public Class GetControlDataSource
 
     Public Sub New(tableName As String, control As Control)

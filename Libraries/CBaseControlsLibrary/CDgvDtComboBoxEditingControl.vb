@@ -3,7 +3,6 @@ Imports System.Drawing
 Imports System.Linq.Expressions
 Imports System.Threading
 Imports System.Windows.Forms
-Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CDgvDtComboBoxEditingControl
     Inherits DataGridViewComboBoxEditingControl
@@ -193,7 +192,7 @@ Public Class CDgvDtComboBoxEditingControl
         '        formLocation.X = pnt.X - suggestLbForm.Width
         '    End If
         'Else
-            formLocation = New Point(pnt.X, pnt.Y + Height)
+        formLocation = New Point(pnt.X, pnt.Y + Height)
         'End If
         suggestLbForm.Location = formLocation
     End Sub
