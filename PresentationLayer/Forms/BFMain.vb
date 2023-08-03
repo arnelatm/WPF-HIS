@@ -1240,6 +1240,16 @@ Public Class BfMain
         bindingSource.ResetBindings(False)
     End Sub
 
+    Protected Sub ProcessCellValidating(dataGridView As DataGridView, bindingSource As BindingSource)
+        Dim firstDisplayedRow = dataGridView.FirstDisplayedScrollingRowIndex
+        Ea.PublishEvent(New DgvItemsChanged(bindingSource,
+                                                dataGridView.CurrentRow.Index,
+                                                dataGridView.CurrentCell.OwningColumn.DataPropertyName,
+                                                dataGridView.CurrentCell.OwningColumn.Name,
+                                                dataGridView.CurrentCell.Value))
+        bindingSource.ResetBindings(False)
+    End Sub
+
     Public Sub RunSubForm(Of TF, TP)(data As Object, subFormParent As Form)
         Dim childForm = Activator.CreateInstance(GetType(TF), data)
         Activator.CreateInstance(GetType(TP), {childForm})

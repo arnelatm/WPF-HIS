@@ -7,12 +7,13 @@ Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
+Imports Telerik.Licensing
 
 Namespace PresentationLayer.Presenters
 
     Public Class InvTransactionPresenter(Of TM As New)
         Inherits TransactionsPresenter(Of IInvTransactionView, TM)
-        Implements ISubscriber(Of DgvItemsChanged)
+        Implements ISubscriber(Of DgvItemsChanged), ISubscriber(Of DgvItemsValidating)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
@@ -60,9 +61,11 @@ Namespace PresentationLayer.Presenters
             AddHandler view.GTinScanned, AddressOf OnGTinScanned
             AddHandler view.ProductUnitSelection, AddressOf OnProductUnitSelection
             AddHandler view.UnitChanged, AddressOf OnUnitChanged
+            AddHandler view.InvTransactionTypeChanged, AddressOf OnInvTransactionTypeChanged
             AddHandler view.PostData, AddressOf OnPostData
 
         End Sub
+
 
 
         Protected Overrides Sub CreateDataSources()
@@ -219,6 +222,8 @@ Namespace PresentationLayer.Presenters
                     Dim vPerc As Decimal = 0
                     Dim nAmt As Decimal = 0
                     Select Case eventType.PropertyName
+                        Case $"ProductCode"
+                            InitializeInvTransactionDetailValues(eventType.BindingSource, InvTransactionDetail.ProductCode)
                         Case $"Quantity"
                             SetAmounts(InvTransactionDetail)
                             eventType.BindingSource.ResetCurrentItem()
@@ -231,7 +236,8 @@ Namespace PresentationLayer.Presenters
             End With
         End Sub
 
-        Private Sub InitializeInvTransactionDetailValues(ByRef bs As BindingSource, productCode As String)
+        Private Function InitializeInvTransactionDetailValues(ByRef bs As BindingSource, productCode As String) As Boolean
+            Dim retVal As Boolean = False
             Dim product As ProductModel = GetProductModel(productCode)
             If product IsNot Nothing Then
                 If productCode <> bs.Current.ProductCode Then
@@ -251,15 +257,22 @@ Namespace PresentationLayer.Presenters
                             .UnitCost = inventory(0).UnitCost
                             .NetAmount = inventory(0).UnitCost * inventory(0).QtyOnHand
                         End With
+                        retVal = True
+                    Else
+                        If View.AddOrDeduct = EnumToCode(InventoryActionSelection.Deduct) Then
+                            Messaging.Show(True, "MsgNoSuchInventory", "Error")
+                        End If
+                        If View.InvTransTypeIdNo Then
+                        End If
+                        View.ProductInventory = inventory
                     End If
-                    View.ProductInventory = inventory
                 End If
             Else
                 bs.Current.ProductIdNo = ""
                 bs.Current.ProductName = ""
                 Messaging.Show(True, "Invalid Product Code!")
             End If
-        End Sub
+        End Function
 
         Private Sub CheckStock(product As ProductModel)
             CountInventory(product.IdNo)
@@ -308,7 +321,7 @@ Namespace PresentationLayer.Presenters
             'Return Math.Round(IIf(InvTransactionDetail.Quantity = 0, 0, InvTransactionDetail.GrossAmount / InvTransactionDetail.Quantity), 2)
         End Function
 
-        Private Function GetProductModel(productCode As String) As ProductModel
+        Public Function GetProductModel(productCode As String) As ProductModel
             Dim productIdNo As Int32 = GetProductIdNo(productCode)
             Dim product As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(productIdNo)
             Return product
@@ -357,9 +370,9 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Sub OnProductCodeChanged(productCode As String, bs As BindingSource)
-            InitializeInvTransactionDetailValues(bs, productCode)
-            bs.EndEdit()
-            'bs.ResetCurrentItem()
+            'InitializeInvTransactionDetailValues(bs, productCode)
+            'bs.EndEdit()
+            ''bs.ResetCurrentItem()
         End Sub
 
         Private Function GetProductModel(productCode As Int32) As ProductModel
@@ -469,6 +482,10 @@ Namespace PresentationLayer.Presenters
             View.WarehouseIdNo = wareHouse.IdNo
         End Sub
 
+        Private Sub OnInvTransactionTypeChanged(invTransType As Int16)
+            View.AddOrDeduct = Service.GetField(View.InvTransTypeIdNo, "InvTransType", "IdNo", "AddOrDeduct")
+        End Sub
+
         Private Function OnPostData(idNo As Int32) As Boolean
             Dim retVal As Boolean = Service.PostData(idNo)
             If retVal Then
@@ -477,7 +494,53 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-
+        Public Sub OnInvTransactionDgvItemsValidatingEventHandler(ByRef eventType As DgvItemsValidating) Implements ISubscriber(Of DgvItemsValidating).OnEventHandler
+            Dim InvTransactionDetail As InvTransactionDetailView = eventType.BindingSource.Current
+            Dim bs As BindingSource = eventType.BindingSource
+            With bs.Current
+                Select Case eventType.PropertyName
+                    Case $"ProductCode"
+                        Dim retVal As Boolean = False
+                        Dim productCode As String = eventType.EnteredValue
+                        Dim product As ProductModel = GetProductModel(eventType.EnteredValue)
+                        If product IsNot Nothing Then
+                            If productCode <> bs.Current.ProductCode Then
+                                Dim inventory As New List(Of InventoryModel)
+                                inventory = Service.GetRecordsWithGroupIdNo(Of InventoryModel)(product.IdNo, "ExpiryDate")
+                                bs.Current.ProductIdNo = product.IdNo
+                                bs.Current.ProductName = product.ProductName
+                                bs.Current.UnitIdNo = product.BaseUnitIdNo
+                                If inventory.Count() = 1 Then
+                                    With bs.Current
+                                        If .Quantity = 0 Then
+                                            .Quantity = inventory(0).QtyOnHand
+                                        End If
+                                        .ProductCode = product.ProductCode
+                                        .BatchNo = inventory(0).BatchNo
+                                        .ExpiryDate = inventory(0).ExpiryDate
+                                        .UnitCost = inventory(0).UnitCost
+                                        .NetAmount = inventory(0).UnitCost * inventory(0).QtyOnHand
+                                    End With
+                                    retVal = True
+                                Else
+                                    If View.AddOrDeduct = EnumToCode(InventoryActionSelection.Deduct) Then
+                                        Messaging.Show(True, "MsgNoSuchInventory", "Error")
+                                    End If
+                                    If View.InvTransTypeIdNo Then
+                                    End If
+                                    View.ProductInventory = inventory
+                                End If
+                            End If
+                        Else
+                            bs.Current.ProductIdNo = ""
+                            bs.Current.ProductName = ""
+                            Messaging.Show(True, "Invalid Product Code!")
+                        End If
+                    Case Else
+                        ' nothing to do
+                End Select
+            End With
+        End Sub
     End Class
 
 End Namespace

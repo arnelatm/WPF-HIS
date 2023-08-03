@@ -22,6 +22,7 @@ Namespace PresentationLayer.Views.Forms
         Public Event ProductUnitEditing(productIdNo As Int32) Implements IInvTransactionView.ProductUnitEditing
         Public Event UnitChanged(oldUnit As Int16, newUnit As Int16, bs As BindingSource, formattedValue As String) Implements IInvTransactionView.UnitChanged
         Public Event RowChanged(productIdNo As Int32) Implements IInvTransactionView.RowChanged
+        Public Event InvTransactionTypeChanged(invTransTypeIdNo As Int16) Implements IInvTransactionView.InvTransactionTypeChanged
         Public Event PostData(idNo As Int32) Implements IInvTransactionView.PostData
 
         Public Property ProductsByCode As DataTable Implements IInvTransactionView.ProductsByCode
@@ -33,6 +34,7 @@ Namespace PresentationLayer.Views.Forms
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
+            FirstControl = cboInvTransTypeIdNo
             ' Add any initialization after the InitializeComponent() call.
             _nfi.NumberDecimalDigits = 2
         End Sub
@@ -217,6 +219,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As Short)
                 cboInvTransTypeIdNo.SetValue(value)
+                RaiseEvent InvTransactionTypeChanged(value)
             End Set
         End Property
 
@@ -228,6 +231,9 @@ Namespace PresentationLayer.Views.Forms
                 cboWarehouseToIdNo.SetValue(value)
             End Set
         End Property
+
+        Public Property AddOrDeduct As String Implements IInvTransactionView.AddOrDeduct
+
 
 #End Region
 
@@ -325,123 +331,123 @@ Namespace PresentationLayer.Views.Forms
         '    ' End If
         'End Sub
 
-        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewInvTransactionDetails.CellEndEdit
-            Select Case DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name
-                Case $"dgvProductCode", $"dgvProductName"
-                    ' nothing to do already processed
-                Case Else
-                    ProcessCellEndEdit(DataGridViewInvTransactionDetails, bsInvTransactionDetails)
-            End Select
+        'Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewInvTransactionDetails.CellEndEdit
+        '    Select Case DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name
+        '        Case $"dgvProductCode", $"dgvProductName"
+        '            ' nothing to do already processed
+        '        Case Else
+        '            ProcessCellEndEdit(DataGridViewInvTransactionDetails, bsInvTransactionDetails)
+        '    End Select
 
-            'With bsInvTransactionDetails.Current
-            '    Dim gAmt As Decimal = 0
-            '    Dim dAmt As Decimal = 0
-            '    Dim price As Decimal = 0
-            '    Dim vAmt As Decimal = 0
-            '    Dim amtBefVat As Decimal = 0
-            '    Dim dPerc As Decimal = 0
-            '    Dim vPerc As Decimal = 0
-            '    Dim nAmt As Decimal = 0
-            '    If DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvQuantity" Then
-            '        gAmt = bsInvTransactionDetails.Current.Price * bsInvTransactionDetails.Current.Quantity
-            '        bsInvTransactionDetails.Current.GrossAmount = gAmt
-            '        dAmt = gAmt * bsInvTransactionDetails.Current.DiscountPercent / 100
-            '        bsInvTransactionDetails.Current.DiscountAmount = dAmt
-            '        bsInvTransactionDetails.Current.AmtBefVat = gAmt - dAmt
-            '        vAmt = (gAmt - dAmt) * bsInvTransactionDetails.Current.VatPercent / 100
-            '        bsInvTransactionDetails.Current.VatAmount = vAmt
-            '        bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
-            '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvPrice" Then
-            '        gAmt = bsInvTransactionDetails.Current.Price * bsInvTransactionDetails.Current.Quantity
-            '        bsInvTransactionDetails.Current.GrossAmount = gAmt
-            '        dAmt = gAmt * bsInvTransactionDetails.Current.DiscountPercent / 100
-            '        bsInvTransactionDetails.Current.DiscountAmount = dAmt
-            '        bsInvTransactionDetails.Current.AmtBefVat = gAmt - dAmt
-            '        vAmt = (gAmt - dAmt) * bsInvTransactionDetails.Current.VatPercent / 100
-            '        bsInvTransactionDetails.Current.VatAmount = vAmt
-            '        bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
-            '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvGrossAmount" Then
-            '        gAmt = bsInvTransactionDetails.Current.GrossAmount
-            '        price = IIf(bsInvTransactionDetails.Current.Quantity = 0, 0, gAmt / bsInvTransactionDetails.Current.Quantity)
-            '        bsInvTransactionDetails.Current.Price = price
-            '        dAmt = gAmt * bsInvTransactionDetails.Current.DiscountPercent / 100
-            '        bsInvTransactionDetails.Current.DiscountAmount = dAmt
-            '        bsInvTransactionDetails.Current.DiscountPercent = dAmt / gAmt * 100
-            '        vAmt = (gAmt - dAmt) * bsInvTransactionDetails.Current.VatPercent / 100
-            '        bsInvTransactionDetails.Current.VatAmount = vAmt
-            '        bsInvTransactionDetails.Current.AmtBefVat = gAmt - dAmt
-            '        bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
-            '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvVatAmount" Then
-            '        gAmt = bsInvTransactionDetails.Current.GrossAmount
-            '        dAmt = bsInvTransactionDetails.Current.DiscountAmount
-            '        vAmt = bsInvTransactionDetails.Current.VatAmount
-            '        vPerc = IIf(gAmt - dAmt = 0, 0, vAmt / (gAmt - dAmt) * 100)
-            '        bsInvTransactionDetails.Current.VatPercent = vPerc
-            '        bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
-            '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvVatPercent" Then
-            '        vPerc = bsInvTransactionDetails.Current.VatPercent
-            '        gAmt = bsInvTransactionDetails.Current.GrossAmount
-            '        dAmt = bsInvTransactionDetails.Current.DiscountAmount
-            '        vAmt = (gAmt - dAmt) * vPerc / 100
-            '        bsInvTransactionDetails.Current.VatAmount = vAmt
-            '        bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
-            '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvDiscountPercent" Then
-            '        gAmt = bsInvTransactionDetails.Current.GrossAmount
-            '        dAmt = gAmt * bsInvTransactionDetails.Current.DiscountPercent / 100
-            '        bsInvTransactionDetails.Current.DiscountAmount = dAmt
-            '        bsInvTransactionDetails.Current.AmtBefVat = gAmt - dAmt
-            '        vAmt = (gAmt - dAmt) * bsInvTransactionDetails.Current.VatPercent / 100
-            '        bsInvTransactionDetails.Current.VatAmount = vAmt
-            '        bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
-            '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvDiscountAmount" Then
-            '        gAmt = bsInvTransactionDetails.Current.GrossAmount
-            '        dAmt = bsInvTransactionDetails.Current.DiscountAmount
-            '        dPerc = IIf(gAmt = 0, 0, dAmt / gAmt * 100)
-            '        bsInvTransactionDetails.Current.DiscountPercent = dPerc
-            '        bsInvTransactionDetails.Current.AmtBefVat = gAmt - dAmt
-            '        vAmt = (gAmt - dAmt) * bsInvTransactionDetails.Current.VatPercent / 100
-            '        bsInvTransactionDetails.Current.VatAmount = vAmt
-            '        bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
-            '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvAmtBefVat" Then
-            '        amtBefVat = bsInvTransactionDetails.Current.AmtBefVat
-            '        gAmt = bsInvTransactionDetails.Current.GrossAmount
-            '        If amtBefVat <= gAmt Then
-            '            dAmt = gAmt - amtBefVat
-            '            bsInvTransactionDetails.Current.DiscountAmount = dAmt
-            '            dPerc = IIf(gAmt = 0, 0, dAmt / gAmt * 100)
-            '            bsInvTransactionDetails.Current.DiscountPercent = dPerc
-            '            vAmt = amtBefVat * bsInvTransactionDetails.Current.VatPercent / 100
-            '            bsInvTransactionDetails.Current.VatAmount = vAmt
-            '            bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
-            '        Else
-            '            dAmt = bsInvTransactionDetails.Current.DiscountAmount
-            '            gAmt = amtBefVat - dAmt
-            '            bsInvTransactionDetails.Current.GrossAmount = gAmt
-            '            price = IIf(bsInvTransactionDetails.Current.Quantity = 0, 0, gAmt / bsInvTransactionDetails.Current.Quantity)
-            '            bsInvTransactionDetails.Current.Price = price
-            '            dPerc = IIf(gAmt = 0, 0, dAmt / gAmt * 100)
-            '            bsInvTransactionDetails.Current.DiscountPercent = dPerc
-            '            vAmt = amtBefVat * bsInvTransactionDetails.Current.VatPercent / 100
-            '            bsInvTransactionDetails.Current.VatAmount = vAmt
-            '            bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
-            '        End If
-            '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvNetAmount" Then
-            '        nAmt = bsInvTransactionDetails.Current.NetAmount
-            '        vPerc = bsInvTransactionDetails.Current.VatPercent
-            '        dPerc = bsInvTransactionDetails.Current.DiscountPercent
-            '        amtBefVat = nAmt / (1 + vPerc / 100)
-            '        bsInvTransactionDetails.Current.AmtBefVat = amtBefVat
-            '        bsInvTransactionDetails.Current.VatAmount = nAmt - amtBefVat
-            '        gAmt = amtBefVat / (1 - dPerc / 100)
-            '        bsInvTransactionDetails.Current.GrossAmount = gAmt
-            '        bsInvTransactionDetails.Current.DiscountAmount = gAmt - amtBefVat
-            '        bsInvTransactionDetails.Current.Price = IIf(bsInvTransactionDetails.Current.Quantity = 0, 0, gAmt / bsInvTransactionDetails.Current.Quantity)
-            '    End If
-            '    Dim totQty As Int32 = bsInvTransactionDetails.Current.Quantity + bsInvTransactionDetails.Current.BonusQuantity
-            '    bsInvTransactionDetails.Current.UnitCost = IIf(totQty = 0, 0, bsInvTransactionDetails.Current.NetAmount / totQty)
-            UpdateTotals()
-            'End With
-        End Sub
+        '    'With bsInvTransactionDetails.Current
+        '    '    Dim gAmt As Decimal = 0
+        '    '    Dim dAmt As Decimal = 0
+        '    '    Dim price As Decimal = 0
+        '    '    Dim vAmt As Decimal = 0
+        '    '    Dim amtBefVat As Decimal = 0
+        '    '    Dim dPerc As Decimal = 0
+        '    '    Dim vPerc As Decimal = 0
+        '    '    Dim nAmt As Decimal = 0
+        '    '    If DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvQuantity" Then
+        '    '        gAmt = bsInvTransactionDetails.Current.Price * bsInvTransactionDetails.Current.Quantity
+        '    '        bsInvTransactionDetails.Current.GrossAmount = gAmt
+        '    '        dAmt = gAmt * bsInvTransactionDetails.Current.DiscountPercent / 100
+        '    '        bsInvTransactionDetails.Current.DiscountAmount = dAmt
+        '    '        bsInvTransactionDetails.Current.AmtBefVat = gAmt - dAmt
+        '    '        vAmt = (gAmt - dAmt) * bsInvTransactionDetails.Current.VatPercent / 100
+        '    '        bsInvTransactionDetails.Current.VatAmount = vAmt
+        '    '        bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
+        '    '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvPrice" Then
+        '    '        gAmt = bsInvTransactionDetails.Current.Price * bsInvTransactionDetails.Current.Quantity
+        '    '        bsInvTransactionDetails.Current.GrossAmount = gAmt
+        '    '        dAmt = gAmt * bsInvTransactionDetails.Current.DiscountPercent / 100
+        '    '        bsInvTransactionDetails.Current.DiscountAmount = dAmt
+        '    '        bsInvTransactionDetails.Current.AmtBefVat = gAmt - dAmt
+        '    '        vAmt = (gAmt - dAmt) * bsInvTransactionDetails.Current.VatPercent / 100
+        '    '        bsInvTransactionDetails.Current.VatAmount = vAmt
+        '    '        bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
+        '    '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvGrossAmount" Then
+        '    '        gAmt = bsInvTransactionDetails.Current.GrossAmount
+        '    '        price = IIf(bsInvTransactionDetails.Current.Quantity = 0, 0, gAmt / bsInvTransactionDetails.Current.Quantity)
+        '    '        bsInvTransactionDetails.Current.Price = price
+        '    '        dAmt = gAmt * bsInvTransactionDetails.Current.DiscountPercent / 100
+        '    '        bsInvTransactionDetails.Current.DiscountAmount = dAmt
+        '    '        bsInvTransactionDetails.Current.DiscountPercent = dAmt / gAmt * 100
+        '    '        vAmt = (gAmt - dAmt) * bsInvTransactionDetails.Current.VatPercent / 100
+        '    '        bsInvTransactionDetails.Current.VatAmount = vAmt
+        '    '        bsInvTransactionDetails.Current.AmtBefVat = gAmt - dAmt
+        '    '        bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
+        '    '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvVatAmount" Then
+        '    '        gAmt = bsInvTransactionDetails.Current.GrossAmount
+        '    '        dAmt = bsInvTransactionDetails.Current.DiscountAmount
+        '    '        vAmt = bsInvTransactionDetails.Current.VatAmount
+        '    '        vPerc = IIf(gAmt - dAmt = 0, 0, vAmt / (gAmt - dAmt) * 100)
+        '    '        bsInvTransactionDetails.Current.VatPercent = vPerc
+        '    '        bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
+        '    '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvVatPercent" Then
+        '    '        vPerc = bsInvTransactionDetails.Current.VatPercent
+        '    '        gAmt = bsInvTransactionDetails.Current.GrossAmount
+        '    '        dAmt = bsInvTransactionDetails.Current.DiscountAmount
+        '    '        vAmt = (gAmt - dAmt) * vPerc / 100
+        '    '        bsInvTransactionDetails.Current.VatAmount = vAmt
+        '    '        bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
+        '    '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvDiscountPercent" Then
+        '    '        gAmt = bsInvTransactionDetails.Current.GrossAmount
+        '    '        dAmt = gAmt * bsInvTransactionDetails.Current.DiscountPercent / 100
+        '    '        bsInvTransactionDetails.Current.DiscountAmount = dAmt
+        '    '        bsInvTransactionDetails.Current.AmtBefVat = gAmt - dAmt
+        '    '        vAmt = (gAmt - dAmt) * bsInvTransactionDetails.Current.VatPercent / 100
+        '    '        bsInvTransactionDetails.Current.VatAmount = vAmt
+        '    '        bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
+        '    '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvDiscountAmount" Then
+        '    '        gAmt = bsInvTransactionDetails.Current.GrossAmount
+        '    '        dAmt = bsInvTransactionDetails.Current.DiscountAmount
+        '    '        dPerc = IIf(gAmt = 0, 0, dAmt / gAmt * 100)
+        '    '        bsInvTransactionDetails.Current.DiscountPercent = dPerc
+        '    '        bsInvTransactionDetails.Current.AmtBefVat = gAmt - dAmt
+        '    '        vAmt = (gAmt - dAmt) * bsInvTransactionDetails.Current.VatPercent / 100
+        '    '        bsInvTransactionDetails.Current.VatAmount = vAmt
+        '    '        bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
+        '    '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvAmtBefVat" Then
+        '    '        amtBefVat = bsInvTransactionDetails.Current.AmtBefVat
+        '    '        gAmt = bsInvTransactionDetails.Current.GrossAmount
+        '    '        If amtBefVat <= gAmt Then
+        '    '            dAmt = gAmt - amtBefVat
+        '    '            bsInvTransactionDetails.Current.DiscountAmount = dAmt
+        '    '            dPerc = IIf(gAmt = 0, 0, dAmt / gAmt * 100)
+        '    '            bsInvTransactionDetails.Current.DiscountPercent = dPerc
+        '    '            vAmt = amtBefVat * bsInvTransactionDetails.Current.VatPercent / 100
+        '    '            bsInvTransactionDetails.Current.VatAmount = vAmt
+        '    '            bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
+        '    '        Else
+        '    '            dAmt = bsInvTransactionDetails.Current.DiscountAmount
+        '    '            gAmt = amtBefVat - dAmt
+        '    '            bsInvTransactionDetails.Current.GrossAmount = gAmt
+        '    '            price = IIf(bsInvTransactionDetails.Current.Quantity = 0, 0, gAmt / bsInvTransactionDetails.Current.Quantity)
+        '    '            bsInvTransactionDetails.Current.Price = price
+        '    '            dPerc = IIf(gAmt = 0, 0, dAmt / gAmt * 100)
+        '    '            bsInvTransactionDetails.Current.DiscountPercent = dPerc
+        '    '            vAmt = amtBefVat * bsInvTransactionDetails.Current.VatPercent / 100
+        '    '            bsInvTransactionDetails.Current.VatAmount = vAmt
+        '    '            bsInvTransactionDetails.Current.NetAmount = gAmt - dAmt + vAmt
+        '    '        End If
+        '    '    ElseIf DataGridViewInvTransactionDetails.CurrentCell().OwningColumn.Name = "dgvNetAmount" Then
+        '    '        nAmt = bsInvTransactionDetails.Current.NetAmount
+        '    '        vPerc = bsInvTransactionDetails.Current.VatPercent
+        '    '        dPerc = bsInvTransactionDetails.Current.DiscountPercent
+        '    '        amtBefVat = nAmt / (1 + vPerc / 100)
+        '    '        bsInvTransactionDetails.Current.AmtBefVat = amtBefVat
+        '    '        bsInvTransactionDetails.Current.VatAmount = nAmt - amtBefVat
+        '    '        gAmt = amtBefVat / (1 - dPerc / 100)
+        '    '        bsInvTransactionDetails.Current.GrossAmount = gAmt
+        '    '        bsInvTransactionDetails.Current.DiscountAmount = gAmt - amtBefVat
+        '    '        bsInvTransactionDetails.Current.Price = IIf(bsInvTransactionDetails.Current.Quantity = 0, 0, gAmt / bsInvTransactionDetails.Current.Quantity)
+        '    '    End If
+        '    '    Dim totQty As Int32 = bsInvTransactionDetails.Current.Quantity + bsInvTransactionDetails.Current.BonusQuantity
+        '    '    bsInvTransactionDetails.Current.UnitCost = IIf(totQty = 0, 0, bsInvTransactionDetails.Current.NetAmount / totQty)
+        '    UpdateTotals()
+        '    'End With
+        'End Sub
 
         'Private Sub OnCellFormatting(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs) Handles DataGridViewInvTransactionDetails.CellFormatting
         '    'If e.ColumnIndex = DataGridViewInvTransactionDetails.Columns("dgvDiscountAmount").Index Then
@@ -479,22 +485,22 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
 
-        Private Sub dataGridView1_CellValidating(ByVal sender As Object, ByVal e As DataGridViewCellValidatingEventArgs) Handles DataGridViewInvTransactionDetails.CellValidating
-            If DataGridViewInvTransactionDetails.IsCurrentCellDirty() Then
-                With DataGridViewInvTransactionDetails
-                    Dim cColumnName = .CurrentCell.OwningColumn.Name
-                    If cColumnName = $"dgvProductCode" Then
-                        ValidateProductCode(DataGridViewInvTransactionDetails, e)
-                    ElseIf cColumnName = $"dgvProductName" Then
-                        ValidateProductName(DataGridViewInvTransactionDetails, e)
-                    ElseIf cColumnName = $"dgvUnitIdNo" Then
-                        '(DataGridViewInvTransactionDetails, e)
-                    ElseIf cColumnName = $"dgvExpiryDate" Then
-                        ValidateExpiryDate(DataGridViewInvTransactionDetails, e)
-                    End If
-                End With
-            End If
-        End Sub
+        'Private Sub dataGridView1_CellValidating(ByVal sender As Object, ByVal e As DataGridViewCellValidatingEventArgs) Handles DataGridViewInvTransactionDetails.CellValidating
+        '    If DataGridViewInvTransactionDetails.IsCurrentCellDirty() Then
+        '        With DataGridViewInvTransactionDetails
+        '            Dim cColumnName = .CurrentCell.OwningColumn.Name
+        '            If cColumnName = $"dgvProductCode" Then
+        '                ValidateProductCode(DataGridViewInvTransactionDetails, e)
+        '            ElseIf cColumnName = $"dgvProductName" Then
+        '                ValidateProductName(DataGridViewInvTransactionDetails, e)
+        '            ElseIf cColumnName = $"dgvUnitIdNo" Then
+        '                '(DataGridViewInvTransactionDetails, e)
+        '            ElseIf cColumnName = $"dgvExpiryDate" Then
+        '                ValidateExpiryDate(DataGridViewInvTransactionDetails, e)
+        '            End If
+        '        End With
+        '    End If
+        'End Sub
 
         Private Sub ValidateExpiryDate(ByRef dgv As CtDataGridView, ByRef e As DataGridViewCellValidatingEventArgs)
             Dim needsExpiryDate As Boolean = dgv.CurrentRow.Cells("dgvNeedsExpiryDate").Value
@@ -551,6 +557,12 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewInvTransactionDetails.CellEndEdit
+            ProcessCellEndEdit(sender, bsInvTransactionDetails)
+            UpdateTotals()
+        End Sub
+
+
         Private Function ValidateProductCode(ByRef dgv As CtDataGridView, ByRef e As DataGridViewCellValidatingEventArgs)
             Dim valid As Boolean = False
             Dim code As String = dgv.CurrentRow.Cells("dgvProductCode").EditedFormattedValue
@@ -572,9 +584,12 @@ Namespace PresentationLayer.Views.Forms
                         End With
                     End If
                     valid = True
+                Else
+                    SendKeys.Send("{Tab}")
                 End If
             Else
                 If Not String.IsNullOrEmpty(code) Then
+
                     e.Cancel = True
                     Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", code, "fieldDescription", "Product Code"})
                 End If
@@ -953,6 +968,44 @@ Namespace PresentationLayer.Views.Forms
                 End If
             End If
         End Sub
+
+        Private Sub cboInvTransTypeIdNo_Validating(sender As Object, e As CancelEventArgs) Handles cboInvTransTypeIdNo.Validating
+            If cboInvTransTypeIdNo.SelectedValue Is Nothing Then
+                Messaging.ShowPmMessage(True, "MsgMustSelectFromList", {"selectionName", Messaging.TranslateCaption("Inventory Transaction Type")})
+                e.Cancel = True
+            End If
+        End Sub
+
+        Private Sub cboInvTransTypeIdNo_Validated(sender As Object, e As EventArgs) Handles cboInvTransTypeIdNo.Validated
+            RaiseEvent InvTransactionTypeChanged(sender.SelectedValue)
+        End Sub
+
+        Private Sub DataGridViewInvTransactionDetails_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles DataGridViewInvTransactionDetails.CellValidating
+            Select Case DataGridViewInvTransactionDetails.CurrentCell.OwningColumn.DataPropertyName
+                Case $"ProductCode"
+                    If ProductCodeIsValid() Then
+                        e.Cancel = False
+                    Else
+                        e.Cancel = True
+                    End If
+                Case Else
+                    ' nothing to do
+            End Select
+            ProcessCellValidating(sender, bsInvTransactionDetails)
+            UpdateTotals()
+        End Sub
+
+        Private Function ProductCodeIsValid() As Boolean
+            Dim retVal As Boolean = True
+            Dim productCode As String = DataGridViewInvTransactionDetails.CurrentCell.Value
+            If Presenter.IsProductCodeValid(productCode) Then
+                retVal = True
+            Else
+                retVal = False
+            End If
+            Return retVal
+        End Function
+
     End Class
 
 End Namespace

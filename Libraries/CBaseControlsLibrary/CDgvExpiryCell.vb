@@ -3,7 +3,7 @@ Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CDgvExpiryCell
-    Inherits CDgvTextCell
+    Inherits CDgvTextBoxCell
 
 
 End Class

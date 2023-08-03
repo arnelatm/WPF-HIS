@@ -13,7 +13,7 @@ Public Class CDgvTextColumn
     Private _translatable As Boolean = False
 
     Public Sub New()
-        CellTemplate = New CDgvTextCell
+        CellTemplate = New CDgvTextBoxCell
     End Sub
 
     Public Overrides Function Clone() As Object

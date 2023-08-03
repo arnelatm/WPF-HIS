@@ -417,23 +417,45 @@ Public Class CDataGridView
 
     Public Function GetEditingValue(Optional field As String = "")
         If CurrentCell IsNot Nothing Then
-            Dim dgvControl As Libraries.CBaseControlsLibrary.CDgvComboBoxCell
-            dgvControl = TryCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell)
-            If dgvControl IsNot Nothing Then
-                If dgvControl.CellEditingControl.SelectedItem IsNot Nothing Then
-                    Select Case field.ToLower()
-                        Case $"code"
-                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).Code
-                        Case $"name"
-                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).Name
-                        Case $"idno"
-                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).IdNo
-                        Case Else
-                            Return CurrentCell.Value
-                    End Select
-                Else
-                    Return CurrentCell.Value
+            If TypeOf CurrentCell Is CDgvComboBoxCell Then
+                Dim dgvControl As Libraries.CBaseControlsLibrary.CDgvComboBoxCell
+                dgvControl = CurrentCell
+                If dgvControl IsNot Nothing Then
+                    If dgvControl.CellEditingControl.SelectedItem IsNot Nothing Then
+                        Select Case field.ToLower()
+                            Case $"code"
+                                Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).Code
+                            Case $"name"
+                                Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).Name
+                            Case $"idno"
+                                Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).IdNo
+                            Case Else
+                                Return CurrentCell.Value
+                        End Select
+                    Else
+                        Return CurrentCell.Value
+                    End If
                 End If
+            ElseIf TypeOf CurrentCell Is CDgvTextBoxCell Then
+                Dim dgvControl As Libraries.CBaseControlsLibrary.CDgvTextBoxCell
+                dgvControl = CurrentCell
+                If dgvControl IsNot Nothing Then
+                    If dgvControl.CellEditingControl.SelectedItem IsNot Nothing Then
+                        Select Case field.ToLower()
+                            Case $"code"
+                                Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).Code
+                            Case $"name"
+                                Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).Name
+                            Case $"idno"
+                                Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).IdNo
+                            Case Else
+                                Return CurrentCell.Value
+                        End Select
+                    Else
+                        Return CurrentCell.Value
+                    End If
+                End If
+
             End If
         End If
         Return Nothing
