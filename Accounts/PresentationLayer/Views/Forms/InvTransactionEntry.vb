@@ -24,11 +24,13 @@ Namespace PresentationLayer.Views.Forms
         Public Event RowChanged(productIdNo As Int32) Implements IInvTransactionView.RowChanged
         Public Event InvTransactionTypeChanged(invTransTypeIdNo As Int16) Implements IInvTransactionView.InvTransactionTypeChanged
         Public Event PostData(idNo As Int32) Implements IInvTransactionView.PostData
+        Public Event ProductCodeValidating(productCode As String, pnt As Point) Implements IInvTransactionView.ProductCodeValidating
 
         Public Property ProductsByCode As DataTable Implements IInvTransactionView.ProductsByCode
         Public Property UnitsByCode As DataTable Implements IInvTransactionView.UnitsByCode
         Public Property UnitsByProduct As DataTable Implements IInvTransactionView.UnitsByProduct
         Public Property ProductInventory As List(Of InventoryModel) Implements IInvTransactionView.ProductInventory
+        Public Property ProductCodeIsValid As Boolean Implements IInvTransactionView.ProductCodeIsValid
 
         Public Sub New()
             MyBase.New()
@@ -234,6 +236,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property AddOrDeduct As String Implements IInvTransactionView.AddOrDeduct
 
+        Private Property InvTransactionDetailsBs As BindingSource Implements IInvTransactionView.InvTransactionDetailsBs
 
 #End Region
 
@@ -284,7 +287,7 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewInvTransactionDetails.Refresh()
             bsInvTransactionDetails.DataSource = InvTransactionDetails
             bsInvTransactionDetails.AllowNew = True
-            'SetupDgvColumns()
+            InvTransactionDetailsBs = bsInvTransactionDetails
             ResumeLayout()
         End Sub
 
@@ -294,8 +297,7 @@ Namespace PresentationLayer.Views.Forms
             dgvUnitIdNo.ValueMember = "IdNo"
             dgvUnitIdNo.DisplayMember = "Name"
             dgvUnitIdNo.DataSource = UnitsByCode
-            dgvUnitCost.DisplayOnly = True
-            dgvUnitCost.SetFormat(7, 2)
+            'dgvUnitCost.SetFormat(7, 2)
         End Sub
 
         Private Sub CboSupplierIdNo_Validating(sender As Object, e As CancelEventArgs)
@@ -485,22 +487,24 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
 
-        'Private Sub dataGridView1_CellValidating(ByVal sender As Object, ByVal e As DataGridViewCellValidatingEventArgs) Handles DataGridViewInvTransactionDetails.CellValidating
-        '    If DataGridViewInvTransactionDetails.IsCurrentCellDirty() Then
-        '        With DataGridViewInvTransactionDetails
-        '            Dim cColumnName = .CurrentCell.OwningColumn.Name
-        '            If cColumnName = $"dgvProductCode" Then
-        '                ValidateProductCode(DataGridViewInvTransactionDetails, e)
-        '            ElseIf cColumnName = $"dgvProductName" Then
-        '                ValidateProductName(DataGridViewInvTransactionDetails, e)
-        '            ElseIf cColumnName = $"dgvUnitIdNo" Then
-        '                '(DataGridViewInvTransactionDetails, e)
-        '            ElseIf cColumnName = $"dgvExpiryDate" Then
-        '                ValidateExpiryDate(DataGridViewInvTransactionDetails, e)
-        '            End If
-        '        End With
-        '    End If
-        'End Sub
+        Private Sub dataGridView1_CellValidating(ByVal sender As Object, ByVal e As DataGridViewCellValidatingEventArgs) Handles DataGridViewInvTransactionDetails.CellValidating
+            If DataGridViewInvTransactionDetails.IsCurrentCellDirty() Then
+                With DataGridViewInvTransactionDetails
+                    Dim cColumnName = .CurrentCell.OwningColumn.Name
+                    If cColumnName = $"dgvProductCode" Then
+                        If Not ValidateProductCode(DataGridViewInvTransactionDetails, e) Then
+                            e.Cancel = True
+                        End If
+                    ElseIf cColumnName = $"dgvProductName" Then
+                        ValidateProductName(DataGridViewInvTransactionDetails, e)
+                    ElseIf cColumnName = $"dgvUnitIdNo" Then
+                        '(DataGridViewInvTransactionDetails, e)
+                    ElseIf cColumnName = $"dgvExpiryDate" Then
+                        ValidateExpiryDate(DataGridViewInvTransactionDetails, e)
+                    End If
+                End With
+            End If
+        End Sub
 
         Private Sub ValidateExpiryDate(ByRef dgv As CtDataGridView, ByRef e As DataGridViewCellValidatingEventArgs)
             Dim needsExpiryDate As Boolean = dgv.CurrentRow.Cells("dgvNeedsExpiryDate").Value
@@ -566,32 +570,41 @@ Namespace PresentationLayer.Views.Forms
         Private Function ValidateProductCode(ByRef dgv As CtDataGridView, ByRef e As DataGridViewCellValidatingEventArgs)
             Dim valid As Boolean = False
             Dim code As String = dgv.CurrentRow.Cells("dgvProductCode").EditedFormattedValue
-            RaiseEvent ProductCodeChanged(code, bsInvTransactionDetails)
-            Dim cProductName = dgv.CurrentRow().Cells("dgvProductName").Value
-            If Not String.IsNullOrEmpty(cProductName) Then
-                If ProductInventory.Count() = 1 Then
-                    SendKeys.Send("{Tab}{Tab}{Tab}")
-                    valid = True
-                ElseIf ProductInventory.Count() > 1 Then
-                    Dim form As New InventorySelector(ProductInventory, DataGridViewInvTransactionDetails)
-                    If form.ShowDialog() = Windows.Forms.DialogResult.OK Then
-                        Dim selectedInvIndex As Int32 = form.SelectedInvIndex
-                        With bsInvTransactionDetails.Current
-                            .BatchNo = ProductInventory(selectedInvIndex).BatchNo
-                            .Quantity = ProductInventory(selectedInvIndex).QtyOnHand
-                            .ExpiryDate = ProductInventory(selectedInvIndex).ExpiryDate
-                            '.PurchaseDetailIdNo = ProductInventory(selectedInvIndex).PurchaseDetailIdNo
-                        End With
-                    End If
-                    valid = True
-                Else
-                    SendKeys.Send("{Tab}")
-                End If
+            RaiseEvent ProductCodeValidating(code, dgv.Location)
+            If Not ProductCodeIsValid Then
+                e.Cancel = True
+                Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", code, "fieldDescription", "Product Code"})
             Else
-                If Not String.IsNullOrEmpty(code) Then
-
-                    e.Cancel = True
-                    Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", code, "fieldDescription", "Product Code"})
+                'RaiseEvent ProductCodeChanged(code, bsInvTransactionDetails)
+                Dim cProductName = dgv.CurrentRow().Cells("dgvProductName").Value
+                If Not String.IsNullOrEmpty(cProductName) Then
+                    If ProductInventory.Count() = 1 Then
+                        SendKeys.Send("{Tab}{Tab}{Tab}")
+                        valid = True
+                    ElseIf ProductInventory.Count() > 1 Then
+                        Dim form As New InventorySelector(ProductInventory, DataGridViewInvTransactionDetails.Location)
+                        If form.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                            Dim selectedInvIndex As Int32 = form.SelectedInvIndex
+                            With bsInvTransactionDetails.Current
+                                .BatchNo = ProductInventory(selectedInvIndex).BatchNo
+                                .Quantity = ProductInventory(selectedInvIndex).QtyOnHand
+                                .ExpiryDate = ProductInventory(selectedInvIndex).ExpiryDate
+                                '.PurchaseDetailIdNo = ProductInventory(selectedInvIndex).PurchaseDetailIdNo
+                            End With
+                            valid = True
+                        Else
+                            valid = False
+                            e.Cancel = True
+                        End If
+                    Else
+                        SendKeys.Send("{Tab}")
+                        valid = True
+                    End If
+                Else
+                    If Not String.IsNullOrEmpty(code) Then
+                        e.Cancel = True
+                        Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", code, "fieldDescription", "Product Code"})
+                    End If
                 End If
             End If
             Return valid
@@ -980,31 +993,31 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent InvTransactionTypeChanged(sender.SelectedValue)
         End Sub
 
-        Private Sub DataGridViewInvTransactionDetails_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles DataGridViewInvTransactionDetails.CellValidating
-            Select Case DataGridViewInvTransactionDetails.CurrentCell.OwningColumn.DataPropertyName
-                Case $"ProductCode"
-                    If ProductCodeIsValid() Then
-                        e.Cancel = False
-                    Else
-                        e.Cancel = True
-                    End If
-                Case Else
-                    ' nothing to do
-            End Select
-            ProcessCellValidating(sender, bsInvTransactionDetails)
-            UpdateTotals()
-        End Sub
+        'Private Sub DataGridViewInvTransactionDetails_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles DataGridViewInvTransactionDetails.CellValidating
+        '    Select Case DataGridViewInvTransactionDetails.CurrentCell.OwningColumn.DataPropertyName
+        '        Case $"ProductCode"
+        '            If ProductCodeIsValid() Then
+        '                e.Cancel = False
+        '            Else
+        '                e.Cancel = True
+        '            End If
+        '        Case Else
+        '            ' nothing to do
+        '    End Select
+        '    ProcessCellValidating(sender, bsInvTransactionDetails)
+        '    UpdateTotals()
+        'End Sub
 
-        Private Function ProductCodeIsValid() As Boolean
-            Dim retVal As Boolean = True
-            Dim productCode As String = DataGridViewInvTransactionDetails.CurrentCell.Value
-            If Presenter.IsProductCodeValid(productCode) Then
-                retVal = True
-            Else
-                retVal = False
-            End If
-            Return retVal
-        End Function
+        'Private Function ProductCodeIsValid() As Boolean
+        '    Dim retVal As Boolean = True
+        '    Dim productCode As String = DataGridViewInvTransactionDetails.CurrentCell.Value
+        '    If Presenter.IsProductCodeValid(productCode) Then
+        '        retVal = True
+        '    Else
+        '        retVal = False
+        '    End If
+        '    Return retVal
+        'End Function
 
     End Class
 

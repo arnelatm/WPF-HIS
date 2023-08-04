@@ -27,8 +27,12 @@ Namespace PresentationLayer.Views.Forms
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(InvTransactionEntry))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -40,13 +44,6 @@ Namespace PresentationLayer.Views.Forms
             Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
@@ -73,28 +70,6 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboUserIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.DataGridViewInvTransactionDetails = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
-            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvProductCode = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvProductName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvBatchNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvQuantity = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvDtComboBoxColumn()
-            Me.dgvUnitCost = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
-            Me.dgvNetAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-            Me.dgvGrossAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-            Me.dgvDiscountPercent = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-            Me.dgvDiscountAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-            Me.dgvUnitCount = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
-            Me.dgvProductIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvDtComboBoxColumn()
-            Me.dgvNeedsExpiryDate = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-            Me.BaseUnitIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.CategoryIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.NeedsExpiryDateDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-            Me.ProductNameAraDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.UnitCountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsInvTransactionDetails = New System.Windows.Forms.BindingSource(Me.components)
             Me.DGVDummy = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.btnPost = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -108,6 +83,23 @@ Namespace PresentationLayer.Views.Forms
             Me.NetAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.VatAmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.VatPercentDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvProductCode = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvProductName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvBatchNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvQuantity = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvDtComboBoxColumn()
+            Me.dgvUnitCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.dgvNetAmount = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvUnitCount = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
+            Me.dgvProductIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvDtComboBoxColumn()
+            Me.dgvNeedsExpiryDate = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+            Me.BaseUnitIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.CategoryIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.ProductNameAraDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.FlowLayoutPanel1.SuspendLayout()
@@ -766,17 +758,17 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
             Me.DataGridViewInvTransactionDetails.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
             Me.DataGridViewInvTransactionDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewInvTransactionDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvProductCode, Me.dgvProductName, Me.dgvBatchNo, Me.dgvExpiryDate, Me.dgvQuantity, Me.dgvUnitIdNo, Me.dgvUnitCost, Me.dgvNetAmount, Me.dgvGrossAmount, Me.dgvDiscountPercent, Me.dgvDiscountAmount, Me.dgvUnitCount, Me.dgvProductIdNo, Me.dgvNeedsExpiryDate, Me.BaseUnitIdNoDataGridViewTextBoxColumn, Me.CategoryIdNoDataGridViewTextBoxColumn, Me.DataGridViewTextBoxColumn3, Me.NeedsExpiryDateDataGridViewCheckBoxColumn, Me.ProductNameAraDataGridViewTextBoxColumn, Me.DataGridViewTextBoxColumn4, Me.UnitCountDataGridViewTextBoxColumn})
+            Me.DataGridViewInvTransactionDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvProductCode, Me.dgvProductName, Me.dgvBatchNo, Me.dgvExpiryDate, Me.dgvQuantity, Me.dgvUnitIdNo, Me.dgvUnitCost, Me.dgvNetAmount, Me.dgvUnitCount, Me.dgvProductIdNo, Me.dgvNeedsExpiryDate, Me.BaseUnitIdNoDataGridViewTextBoxColumn, Me.CategoryIdNoDataGridViewTextBoxColumn, Me.DataGridViewTextBoxColumn3, Me.ProductNameAraDataGridViewTextBoxColumn, Me.DataGridViewTextBoxColumn4})
             Me.DataGridViewInvTransactionDetails.DataFilter = Nothing
             Me.DataGridViewInvTransactionDetails.DataSource = Me.bsInvTransactionDetails
-            DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle17.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewInvTransactionDetails.DefaultCellStyle = DataGridViewCellStyle17
+            DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewInvTransactionDetails.DefaultCellStyle = DataGridViewCellStyle14
             Me.DataGridViewInvTransactionDetails.DgvFooter = Nothing
             Me.DataGridViewInvTransactionDetails.DisplayOnly = False
             Me.DataGridViewInvTransactionDetails.Ea = Nothing
@@ -796,14 +788,14 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewInvTransactionDetails.Location = New System.Drawing.Point(3, 183)
             Me.DataGridViewInvTransactionDetails.Name = "DataGridViewInvTransactionDetails"
             Me.DataGridViewInvTransactionDetails.ReadOnly = True
-            DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control
-            DataGridViewCellStyle18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText
-            DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.DataGridViewInvTransactionDetails.RowHeadersDefaultCellStyle = DataGridViewCellStyle18
+            DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control
+            DataGridViewCellStyle15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText
+            DataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.DataGridViewInvTransactionDetails.RowHeadersDefaultCellStyle = DataGridViewCellStyle15
             Me.DataGridViewInvTransactionDetails.Searchable = True
             Me.DataGridViewInvTransactionDetails.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewInvTransactionDetails.SecurityKey = ""
@@ -813,6 +805,179 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewInvTransactionDetails.Size = New System.Drawing.Size(1074, 312)
             Me.DataGridViewInvTransactionDetails.TabIndex = 0
             Me.DataGridViewInvTransactionDetails.Translatable = True
+            '
+            'bsInvTransactionDetails
+            '
+            Me.bsInvTransactionDetails.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.InvTransactionDetailModel)
+            '
+            'DGVDummy
+            '
+            DataGridViewCellStyle16.BackColor = System.Drawing.Color.FloralWhite
+            Me.DGVDummy.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle16
+            Me.DGVDummy.BegFindValue = Nothing
+            Me.DGVDummy.Cached = False
+            DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control
+            DataGridViewCellStyle17.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText
+            DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.DGVDummy.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle17
+            Me.DGVDummy.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            Me.DGVDummy.DataFilter = Nothing
+            DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle18.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DGVDummy.DefaultCellStyle = DataGridViewCellStyle18
+            Me.DGVDummy.DgvFooter = Nothing
+            Me.DGVDummy.DisplayOnly = False
+            Me.DGVDummy.Ea = Nothing
+            Me.DGVDummy.EditingMode = False
+            Me.DGVDummy.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DGVDummy.EndFindValue = Nothing
+            Me.DGVDummy.FieldDescription = Nothing
+            Me.DGVDummy.FieldName = Nothing
+            Me.DGVDummy.FieldsDictionary = Nothing
+            Me.DGVDummy.FindColumnNo = CType(0, Short)
+            Me.DGVDummy.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.DGVDummy.FindEnabled = False
+            Me.DGVDummy.FirstRowDeletionEnabled = True
+            Me.DGVDummy.FirstRowInsertionEnabled = True
+            Me.FlowLayoutPanel1.SetFlowBreak(Me.DGVDummy, True)
+            Me.DGVDummy.IgnoreCase = False
+            Me.DGVDummy.IsDirty = False
+            Me.DGVDummy.Location = New System.Drawing.Point(1083, 183)
+            Me.DGVDummy.Name = "DGVDummy"
+            Me.DGVDummy.ReadOnly = True
+            DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control
+            DataGridViewCellStyle19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText
+            DataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.DGVDummy.RowHeadersDefaultCellStyle = DataGridViewCellStyle19
+            Me.DGVDummy.Searchable = True
+            Me.DGVDummy.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.DGVDummy.SecurityKey = ""
+            Me.DGVDummy.SequenceColumn = "dgvSequence"
+            Me.DGVDummy.SequenceFieldName = "Sequence"
+            Me.DGVDummy.ShowFooter = False
+            Me.DGVDummy.Size = New System.Drawing.Size(10, 312)
+            Me.DGVDummy.TabIndex = 9
+            Me.DGVDummy.Translatable = True
+            '
+            'btnPost
+            '
+            Me.btnPost.DesignerSelected = False
+            Me.btnPost.ImageIndex = 0
+            Me.btnPost.Location = New System.Drawing.Point(3, 501)
+            Me.btnPost.Name = "btnPost"
+            Me.btnPost.OriginalImageName = Nothing
+            Me.btnPost.SecurityKey = ""
+            Me.btnPost.Size = New System.Drawing.Size(229, 25)
+            Me.btnPost.TabIndex = 275
+            Me.btnPost.Text = "Post Inventory Transaction"
+            '
+            'CLabel4
+            '
+            Me.CLabel4.DisplayOnly = True
+            Me.CLabel4.EditingMode = False
+            Me.CLabel4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel4.Location = New System.Drawing.Point(236, 499)
+            Me.CLabel4.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel4.Name = "CLabel4"
+            Me.CLabel4.Size = New System.Drawing.Size(739, 23)
+            Me.CLabel4.TabIndex = 273
+            Me.CLabel4.Text = "Total"
+            Me.CLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+            Me.CLabel4.Translatable = True
+            '
+            'txtAmount
+            '
+            Me.txtAmount.BackColor = System.Drawing.Color.White
+            Me.txtAmount.BegFindValue = Nothing
+            Me.txtAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtAmount.ComputedValue = False
+            Me.txtAmount.CustomFormat = Nothing
+            Me.txtAmount.DataBoundControl = True
+            Me.txtAmount.EditingMode = True
+            Me.txtAmount.EndFindValue = Nothing
+            Me.txtAmount.FieldDescription = Nothing
+            Me.txtAmount.FieldName = Nothing
+            Me.txtAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtAmount.FindEnabled = False
+            Me.txtAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtAmount.ForeColor = System.Drawing.Color.Black
+            Me.txtAmount.LinkedLabel = Nothing
+            Me.txtAmount.Location = New System.Drawing.Point(977, 499)
+            Me.txtAmount.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtAmount.MaximumValue = Nothing
+            Me.txtAmount.MinimumValue = Nothing
+            Me.txtAmount.Name = "txtAmount"
+            Me.txtAmount.OldValue = Nothing
+            Me.txtAmount.OverrideMaxLength = 0
+            Me.txtAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtAmount.Size = New System.Drawing.Size(100, 23)
+            Me.txtAmount.TabIndex = 274
+            Me.txtAmount.Translatable = False
+            '
+            'ProductTableAdapter
+            '
+            Me.ProductTableAdapter.ClearBeforeFill = True
+            '
+            'ProductIdNoDataGridViewTextBoxColumn
+            '
+            Me.ProductIdNoDataGridViewTextBoxColumn.DataPropertyName = "ProductIdNo"
+            Me.ProductIdNoDataGridViewTextBoxColumn.HeaderText = "ProductIdNo"
+            Me.ProductIdNoDataGridViewTextBoxColumn.Name = "ProductIdNoDataGridViewTextBoxColumn"
+            Me.ProductIdNoDataGridViewTextBoxColumn.ReadOnly = True
+            Me.ProductIdNoDataGridViewTextBoxColumn.Visible = False
+            '
+            'UnitSalesPriceDataGridViewTextBoxColumn
+            '
+            Me.UnitSalesPriceDataGridViewTextBoxColumn.DataPropertyName = "UnitSalesPrice"
+            Me.UnitSalesPriceDataGridViewTextBoxColumn.HeaderText = "Unit Sales Price"
+            Me.UnitSalesPriceDataGridViewTextBoxColumn.Name = "UnitSalesPriceDataGridViewTextBoxColumn"
+            Me.UnitSalesPriceDataGridViewTextBoxColumn.ReadOnly = True
+            Me.UnitSalesPriceDataGridViewTextBoxColumn.Width = 60
+            '
+            'UnitCostDataGridViewTextBoxColumn
+            '
+            Me.UnitCostDataGridViewTextBoxColumn.DataPropertyName = "UnitCost"
+            Me.UnitCostDataGridViewTextBoxColumn.HeaderText = "Unit Cost"
+            Me.UnitCostDataGridViewTextBoxColumn.Name = "UnitCostDataGridViewTextBoxColumn"
+            Me.UnitCostDataGridViewTextBoxColumn.ReadOnly = True
+            Me.UnitCostDataGridViewTextBoxColumn.Width = 60
+            '
+            'NetAmountDataGridViewTextBoxColumn
+            '
+            Me.NetAmountDataGridViewTextBoxColumn.DataPropertyName = "NetAmount"
+            Me.NetAmountDataGridViewTextBoxColumn.HeaderText = "Net Amount"
+            Me.NetAmountDataGridViewTextBoxColumn.Name = "NetAmountDataGridViewTextBoxColumn"
+            Me.NetAmountDataGridViewTextBoxColumn.ReadOnly = True
+            Me.NetAmountDataGridViewTextBoxColumn.Width = 80
+            '
+            'VatAmountDataGridViewTextBoxColumn
+            '
+            Me.VatAmountDataGridViewTextBoxColumn.DataPropertyName = "VatAmount"
+            Me.VatAmountDataGridViewTextBoxColumn.HeaderText = "Vat Amt."
+            Me.VatAmountDataGridViewTextBoxColumn.Name = "VatAmountDataGridViewTextBoxColumn"
+            Me.VatAmountDataGridViewTextBoxColumn.ReadOnly = True
+            Me.VatAmountDataGridViewTextBoxColumn.Width = 60
+            '
+            'VatPercentDataGridViewTextBoxColumn
+            '
+            Me.VatPercentDataGridViewTextBoxColumn.DataPropertyName = "VatPercent"
+            Me.VatPercentDataGridViewTextBoxColumn.HeaderText = "Vat %"
+            Me.VatPercentDataGridViewTextBoxColumn.Name = "VatPercentDataGridViewTextBoxColumn"
+            Me.VatPercentDataGridViewTextBoxColumn.ReadOnly = True
+            Me.VatPercentDataGridViewTextBoxColumn.Width = 40
             '
             'dgvSequence
             '
@@ -965,28 +1130,21 @@ Namespace PresentationLayer.Views.Forms
             'dgvUnitCost
             '
             Me.dgvUnitCost.DataPropertyName = "UnitCost"
-            Me.dgvUnitCost.DecimalPlaces = -1
-            DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
             DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
             Me.dgvUnitCost.DefaultCellStyle = DataGridViewCellStyle10
-            Me.dgvUnitCost.EditingMode = False
-            Me.dgvUnitCost.HeaderText = "Unit Cost"
+            Me.dgvUnitCost.HeaderText = "UnitCost"
             Me.dgvUnitCost.Name = "dgvUnitCost"
             Me.dgvUnitCost.ReadOnly = True
             Me.dgvUnitCost.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvUnitCost.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            Me.dgvUnitCost.Translatable = False
-            Me.dgvUnitCost.Width = 60
+            Me.dgvUnitCost.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
             '
             'dgvNetAmount
             '
             Me.dgvNetAmount.BegFindValue = Nothing
             Me.dgvNetAmount.DataPropertyName = "NetAmount"
-            DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
             DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle11.Format = "###,##0.00"
             Me.dgvNetAmount.DefaultCellStyle = DataGridViewCellStyle11
             Me.dgvNetAmount.EditingMode = False
             Me.dgvNetAmount.EndFindValue = Nothing
@@ -995,94 +1153,21 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvNetAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.dgvNetAmount.FindEnabled = False
             Me.dgvNetAmount.HeaderText = "NetAmount"
+            Me.dgvNetAmount.IgnoreCase = False
             Me.dgvNetAmount.Name = "dgvNetAmount"
             Me.dgvNetAmount.ReadOnly = True
             Me.dgvNetAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvNetAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvNetAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
             Me.dgvNetAmount.Translatable = False
-            '
-            'dgvGrossAmount
-            '
-            Me.dgvGrossAmount.BegFindValue = Nothing
-            Me.dgvGrossAmount.DataPropertyName = "GrossAmount"
-            DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle12.Format = "###,##0.00"
-            Me.dgvGrossAmount.DefaultCellStyle = DataGridViewCellStyle12
-            Me.dgvGrossAmount.EditingMode = False
-            Me.dgvGrossAmount.EndFindValue = Nothing
-            Me.dgvGrossAmount.FieldDescription = Nothing
-            Me.dgvGrossAmount.FieldName = Nothing
-            Me.dgvGrossAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvGrossAmount.FindEnabled = False
-            Me.dgvGrossAmount.HeaderText = "Gross Amount"
-            Me.dgvGrossAmount.Name = "dgvGrossAmount"
-            Me.dgvGrossAmount.ReadOnly = True
-            Me.dgvGrossAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvGrossAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvGrossAmount.Translatable = False
-            Me.dgvGrossAmount.Visible = False
-            Me.dgvGrossAmount.Width = 70
-            '
-            'dgvDiscountPercent
-            '
-            Me.dgvDiscountPercent.BegFindValue = Nothing
-            Me.dgvDiscountPercent.DataPropertyName = "DiscountPercent"
-            DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle13.Format = "###,##0.00"
-            Me.dgvDiscountPercent.DefaultCellStyle = DataGridViewCellStyle13
-            Me.dgvDiscountPercent.EditingMode = False
-            Me.dgvDiscountPercent.EndFindValue = Nothing
-            Me.dgvDiscountPercent.FieldDescription = Nothing
-            Me.dgvDiscountPercent.FieldName = Nothing
-            Me.dgvDiscountPercent.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvDiscountPercent.FindEnabled = False
-            Me.dgvDiscountPercent.HeaderText = "% Disc."
-            Me.dgvDiscountPercent.Name = "dgvDiscountPercent"
-            Me.dgvDiscountPercent.ReadOnly = True
-            Me.dgvDiscountPercent.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvDiscountPercent.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvDiscountPercent.Translatable = False
-            Me.dgvDiscountPercent.Visible = False
-            Me.dgvDiscountPercent.Width = 40
-            '
-            'dgvDiscountAmount
-            '
-            Me.dgvDiscountAmount.BegFindValue = Nothing
-            Me.dgvDiscountAmount.DataPropertyName = "DiscountAmount"
-            DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle14.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle14.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle14.Format = "###,##0.00"
-            Me.dgvDiscountAmount.DefaultCellStyle = DataGridViewCellStyle14
-            Me.dgvDiscountAmount.EditingMode = False
-            Me.dgvDiscountAmount.EndFindValue = Nothing
-            Me.dgvDiscountAmount.FieldDescription = Nothing
-            Me.dgvDiscountAmount.FieldName = Nothing
-            Me.dgvDiscountAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvDiscountAmount.FindEnabled = False
-            Me.dgvDiscountAmount.HeaderText = "Disc. Amt."
-            Me.dgvDiscountAmount.Name = "dgvDiscountAmount"
-            Me.dgvDiscountAmount.ReadOnly = True
-            Me.dgvDiscountAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvDiscountAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvDiscountAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            Me.dgvDiscountAmount.Translatable = False
-            Me.dgvDiscountAmount.Visible = False
-            Me.dgvDiscountAmount.Width = 60
             '
             'dgvUnitCount
             '
             Me.dgvUnitCount.DataPropertyName = "UnitCount"
             Me.dgvUnitCount.DecimalPlaces = -1
-            DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle15.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle15.ForeColor = System.Drawing.Color.Black
-            Me.dgvUnitCount.DefaultCellStyle = DataGridViewCellStyle15
+            DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
+            Me.dgvUnitCount.DefaultCellStyle = DataGridViewCellStyle12
             Me.dgvUnitCount.EditingMode = False
             Me.dgvUnitCount.HeaderText = "UnitCount"
             Me.dgvUnitCount.Name = "dgvUnitCount"
@@ -1096,9 +1181,9 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.dgvProductIdNo.AutoComplete = False
             Me.dgvProductIdNo.DataPropertyName = "ProductIdNo"
-            DataGridViewCellStyle16.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black
-            Me.dgvProductIdNo.DefaultCellStyle = DataGridViewCellStyle16
+            DataGridViewCellStyle13.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
+            Me.dgvProductIdNo.DefaultCellStyle = DataGridViewCellStyle13
             Me.dgvProductIdNo.EditingMode = False
             Me.dgvProductIdNo.HeaderText = "ProductIdNo"
             Me.dgvProductIdNo.Name = "dgvProductIdNo"
@@ -1140,14 +1225,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewTextBoxColumn3.ReadOnly = True
             Me.DataGridViewTextBoxColumn3.Visible = False
             '
-            'NeedsExpiryDateDataGridViewCheckBoxColumn
-            '
-            Me.NeedsExpiryDateDataGridViewCheckBoxColumn.DataPropertyName = "NeedsExpiryDate"
-            Me.NeedsExpiryDateDataGridViewCheckBoxColumn.HeaderText = "NeedsExpiryDate"
-            Me.NeedsExpiryDateDataGridViewCheckBoxColumn.Name = "NeedsExpiryDateDataGridViewCheckBoxColumn"
-            Me.NeedsExpiryDateDataGridViewCheckBoxColumn.ReadOnly = True
-            Me.NeedsExpiryDateDataGridViewCheckBoxColumn.Visible = False
-            '
             'ProductNameAraDataGridViewTextBoxColumn
             '
             Me.ProductNameAraDataGridViewTextBoxColumn.DataPropertyName = "ProductNameAra"
@@ -1163,187 +1240,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
             Me.DataGridViewTextBoxColumn4.ReadOnly = True
             Me.DataGridViewTextBoxColumn4.Visible = False
-            '
-            'UnitCountDataGridViewTextBoxColumn
-            '
-            Me.UnitCountDataGridViewTextBoxColumn.DataPropertyName = "UnitCount"
-            Me.UnitCountDataGridViewTextBoxColumn.HeaderText = "UnitCount"
-            Me.UnitCountDataGridViewTextBoxColumn.Name = "UnitCountDataGridViewTextBoxColumn"
-            Me.UnitCountDataGridViewTextBoxColumn.ReadOnly = True
-            Me.UnitCountDataGridViewTextBoxColumn.Visible = False
-            '
-            'bsInvTransactionDetails
-            '
-            Me.bsInvTransactionDetails.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.InvTransactionDetailModel)
-            '
-            'DGVDummy
-            '
-            DataGridViewCellStyle19.BackColor = System.Drawing.Color.FloralWhite
-            Me.DGVDummy.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle19
-            Me.DGVDummy.BegFindValue = Nothing
-            Me.DGVDummy.Cached = False
-            DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control
-            DataGridViewCellStyle20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.WindowText
-            DataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.DGVDummy.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle20
-            Me.DGVDummy.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DGVDummy.DataFilter = Nothing
-            DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle21.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle21.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle21.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DGVDummy.DefaultCellStyle = DataGridViewCellStyle21
-            Me.DGVDummy.DgvFooter = Nothing
-            Me.DGVDummy.DisplayOnly = False
-            Me.DGVDummy.Ea = Nothing
-            Me.DGVDummy.EditingMode = False
-            Me.DGVDummy.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-            Me.DGVDummy.EndFindValue = Nothing
-            Me.DGVDummy.FieldDescription = Nothing
-            Me.DGVDummy.FieldName = Nothing
-            Me.DGVDummy.FieldsDictionary = Nothing
-            Me.DGVDummy.FindColumnNo = CType(0, Short)
-            Me.DGVDummy.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.DGVDummy.FindEnabled = False
-            Me.DGVDummy.FirstRowDeletionEnabled = True
-            Me.DGVDummy.FirstRowInsertionEnabled = True
-            Me.FlowLayoutPanel1.SetFlowBreak(Me.DGVDummy, True)
-            Me.DGVDummy.IgnoreCase = False
-            Me.DGVDummy.IsDirty = False
-            Me.DGVDummy.Location = New System.Drawing.Point(1083, 183)
-            Me.DGVDummy.Name = "DGVDummy"
-            Me.DGVDummy.ReadOnly = True
-            DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control
-            DataGridViewCellStyle22.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText
-            DataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.DGVDummy.RowHeadersDefaultCellStyle = DataGridViewCellStyle22
-            Me.DGVDummy.Searchable = True
-            Me.DGVDummy.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.DGVDummy.SecurityKey = ""
-            Me.DGVDummy.SequenceColumn = "dgvSequence"
-            Me.DGVDummy.SequenceFieldName = "Sequence"
-            Me.DGVDummy.ShowFooter = False
-            Me.DGVDummy.Size = New System.Drawing.Size(10, 312)
-            Me.DGVDummy.TabIndex = 9
-            Me.DGVDummy.Translatable = True
-            '
-            'btnPost
-            '
-            Me.btnPost.DesignerSelected = False
-            Me.btnPost.ImageIndex = 0
-            Me.btnPost.Location = New System.Drawing.Point(3, 501)
-            Me.btnPost.Name = "btnPost"
-            Me.btnPost.OriginalImageName = Nothing
-            Me.btnPost.SecurityKey = ""
-            Me.btnPost.Size = New System.Drawing.Size(229, 25)
-            Me.btnPost.TabIndex = 275
-            Me.btnPost.Text = "Post Inventory Transaction"
-            '
-            'CLabel4
-            '
-            Me.CLabel4.DisplayOnly = True
-            Me.CLabel4.EditingMode = False
-            Me.CLabel4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel4.Location = New System.Drawing.Point(236, 499)
-            Me.CLabel4.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel4.Name = "CLabel4"
-            Me.CLabel4.Size = New System.Drawing.Size(739, 23)
-            Me.CLabel4.TabIndex = 273
-            Me.CLabel4.Text = "Total"
-            Me.CLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-            Me.CLabel4.Translatable = True
-            '
-            'txtAmount
-            '
-            Me.txtAmount.BackColor = System.Drawing.Color.White
-            Me.txtAmount.BegFindValue = Nothing
-            Me.txtAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtAmount.ComputedValue = False
-            Me.txtAmount.CustomFormat = Nothing
-            Me.txtAmount.DataBoundControl = True
-            Me.txtAmount.EditingMode = True
-            Me.txtAmount.EndFindValue = Nothing
-            Me.txtAmount.FieldDescription = Nothing
-            Me.txtAmount.FieldName = Nothing
-            Me.txtAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtAmount.FindEnabled = False
-            Me.txtAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtAmount.ForeColor = System.Drawing.Color.Black
-            Me.txtAmount.LinkedLabel = Nothing
-            Me.txtAmount.Location = New System.Drawing.Point(977, 499)
-            Me.txtAmount.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtAmount.MaximumValue = Nothing
-            Me.txtAmount.MinimumValue = Nothing
-            Me.txtAmount.Name = "txtAmount"
-            Me.txtAmount.OldValue = Nothing
-            Me.txtAmount.OverrideMaxLength = 0
-            Me.txtAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtAmount.Size = New System.Drawing.Size(100, 23)
-            Me.txtAmount.TabIndex = 274
-            Me.txtAmount.Translatable = False
-            '
-            'ProductTableAdapter
-            '
-            Me.ProductTableAdapter.ClearBeforeFill = True
-            '
-            'ProductIdNoDataGridViewTextBoxColumn
-            '
-            Me.ProductIdNoDataGridViewTextBoxColumn.DataPropertyName = "ProductIdNo"
-            Me.ProductIdNoDataGridViewTextBoxColumn.HeaderText = "ProductIdNo"
-            Me.ProductIdNoDataGridViewTextBoxColumn.Name = "ProductIdNoDataGridViewTextBoxColumn"
-            Me.ProductIdNoDataGridViewTextBoxColumn.ReadOnly = True
-            Me.ProductIdNoDataGridViewTextBoxColumn.Visible = False
-            '
-            'UnitSalesPriceDataGridViewTextBoxColumn
-            '
-            Me.UnitSalesPriceDataGridViewTextBoxColumn.DataPropertyName = "UnitSalesPrice"
-            Me.UnitSalesPriceDataGridViewTextBoxColumn.HeaderText = "Unit Sales Price"
-            Me.UnitSalesPriceDataGridViewTextBoxColumn.Name = "UnitSalesPriceDataGridViewTextBoxColumn"
-            Me.UnitSalesPriceDataGridViewTextBoxColumn.ReadOnly = True
-            Me.UnitSalesPriceDataGridViewTextBoxColumn.Width = 60
-            '
-            'UnitCostDataGridViewTextBoxColumn
-            '
-            Me.UnitCostDataGridViewTextBoxColumn.DataPropertyName = "UnitCost"
-            Me.UnitCostDataGridViewTextBoxColumn.HeaderText = "Unit Cost"
-            Me.UnitCostDataGridViewTextBoxColumn.Name = "UnitCostDataGridViewTextBoxColumn"
-            Me.UnitCostDataGridViewTextBoxColumn.ReadOnly = True
-            Me.UnitCostDataGridViewTextBoxColumn.Width = 60
-            '
-            'NetAmountDataGridViewTextBoxColumn
-            '
-            Me.NetAmountDataGridViewTextBoxColumn.DataPropertyName = "NetAmount"
-            Me.NetAmountDataGridViewTextBoxColumn.HeaderText = "Net Amount"
-            Me.NetAmountDataGridViewTextBoxColumn.Name = "NetAmountDataGridViewTextBoxColumn"
-            Me.NetAmountDataGridViewTextBoxColumn.ReadOnly = True
-            Me.NetAmountDataGridViewTextBoxColumn.Width = 80
-            '
-            'VatAmountDataGridViewTextBoxColumn
-            '
-            Me.VatAmountDataGridViewTextBoxColumn.DataPropertyName = "VatAmount"
-            Me.VatAmountDataGridViewTextBoxColumn.HeaderText = "Vat Amt."
-            Me.VatAmountDataGridViewTextBoxColumn.Name = "VatAmountDataGridViewTextBoxColumn"
-            Me.VatAmountDataGridViewTextBoxColumn.ReadOnly = True
-            Me.VatAmountDataGridViewTextBoxColumn.Width = 60
-            '
-            'VatPercentDataGridViewTextBoxColumn
-            '
-            Me.VatPercentDataGridViewTextBoxColumn.DataPropertyName = "VatPercent"
-            Me.VatPercentDataGridViewTextBoxColumn.HeaderText = "Vat %"
-            Me.VatPercentDataGridViewTextBoxColumn.Name = "VatPercentDataGridViewTextBoxColumn"
-            Me.VatPercentDataGridViewTextBoxColumn.ReadOnly = True
-            Me.VatPercentDataGridViewTextBoxColumn.Width = 40
             '
             'InvTransactionEntry
             '
@@ -1428,20 +1324,15 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents dgvExpiryDate As CDgvTextColumn
         Friend WithEvents dgvQuantity As CDgvTextColumn
         Friend WithEvents dgvUnitIdNo As CDgvDtComboBoxColumn
-        Friend WithEvents dgvUnitCost As CDgvDecimalColumn
-        Friend WithEvents dgvNetAmount As CdgvMoneyColumn
-        Friend WithEvents dgvGrossAmount As CdgvMoneyColumn
-        Friend WithEvents dgvDiscountPercent As CdgvMoneyColumn
-        Friend WithEvents dgvDiscountAmount As CdgvMoneyColumn
+        Friend WithEvents dgvUnitCost As DataGridViewTextBoxColumn
+        Friend WithEvents dgvNetAmount As CDgvTextColumn
         Friend WithEvents dgvUnitCount As CDgvDecimalColumn
         Friend WithEvents dgvProductIdNo As CDgvDtComboBoxColumn
         Friend WithEvents dgvNeedsExpiryDate As DataGridViewCheckBoxColumn
         Friend WithEvents BaseUnitIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents CategoryIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
-        Friend WithEvents NeedsExpiryDateDataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
         Friend WithEvents ProductNameAraDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
-        Friend WithEvents UnitCountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     End Class
 End NameSpace
