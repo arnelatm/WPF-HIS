@@ -4,11 +4,11 @@ Imports AATM.Accounts.ServiceLayer.ActionService
 
 Public Class InventorySelector
 
-    Private _dgv As DataGridView
+    Private _control As Control
     Private _service As Object
     Public SelectedInvIndex As Int32
 
-    Public Sub New(productInventory As List(Of InventoryModel), dgvObj As DataGridView)
+    Public Sub New(productInventory As List(Of InventoryModel), pnt As Point)
         ' This call is required by the designer.
         InitializeComponent()
         Me.ShowIcon = False
@@ -17,20 +17,17 @@ Public Class InventorySelector
         Me.MaximizeBox = False
         Me.Text = ""
         Me.TopMost = False
-        _dgv = dgvObj
-        Dim pnt As Point
-        Dim dgvLocation As Point
         Dim screenRectangle As Rectangle
         screenRectangle = Screen.PrimaryScreen.WorkingArea
         StartPosition = FormStartPosition.Manual
-        pnt = _dgv.PointToScreen(Location)
+        pnt = _control.PointToScreen(Location)
         Location = New Point(pnt.X, pnt.Y)
-        If dgvLocation.Y + Height > screenRectangle.Height Then
-            dgvLocation.Y = pnt.Y - Height
+        If pnt.Y + Height > screenRectangle.Height Then
+            pnt.Y = pnt.Y - Height
         End If
         DataGridViewProducts.MultiSelect = False
         _service = New AccountsService("Product")
-        lblProductName.Text = dgvObj.CurrentRow.Cells("dgvProductName").Value
+        lblProductName.Text = bsInventory.Current.ProductName
         DataGridViewProducts.DefaultCellStyle.SelectionBackColor = Color.LightBlue
         DataGridViewProducts.DefaultCellStyle.SelectionForeColor = Color.Black
         DataGridViewProducts.DataSource = productInventory

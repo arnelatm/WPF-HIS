@@ -63,6 +63,7 @@ Namespace PresentationLayer.Presenters
             AddHandler view.UnitChanged, AddressOf OnUnitChanged
             AddHandler view.InvTransactionTypeChanged, AddressOf OnInvTransactionTypeChanged
             AddHandler view.PostData, AddressOf OnPostData
+            AddHandler view.ProductCodeValidating, AddressOf OnProductCodeValidating
 
         End Sub
 
@@ -236,7 +237,7 @@ Namespace PresentationLayer.Presenters
             End With
         End Sub
 
-        Private Function InitializeInvTransactionDetailValues(ByRef bs As BindingSource, productCode As String) As Boolean
+        Private Sub InitializeInvTransactionDetailValues(ByRef bs As BindingSource, productCode As String)
             Dim retVal As Boolean = False
             Dim product As ProductModel = GetProductModel(productCode)
             If product IsNot Nothing Then
@@ -272,7 +273,66 @@ Namespace PresentationLayer.Presenters
                 bs.Current.ProductName = ""
                 Messaging.Show(True, "Invalid Product Code!")
             End If
-        End Function
+        End Sub
+
+
+        Private Sub OnProductCodeValidating(productCode As String, pnt As Point)
+            Dim retVal As Boolean = False
+            Dim product As ProductModel = GetProductModel(productCode)
+            If product Is Nothing Then
+                View.ProductCodeIsValid = True
+                'allow null Product Code, since user can enter Product Name instead of Product Code.
+            Else
+                If productCode <> View.InvTransactionDetailsBs.Current.ProductCode Then
+                    Dim inventory As New List(Of InventoryModel)
+                    inventory = Service.GetRecordsWithGroupIdNo(Of InventoryModel)(product.IdNo, "ExpiryDate")
+                    View.InvTransactionDetailsBs.Current.ProductIdNo = product.IdNo
+                    View.InvTransactionDetailsBs.Current.ProductName = product.ProductName
+                    View.InvTransactionDetailsBs.Current.UnitIdNo = product.BaseUnitIdNo
+                    If inventory.Count() = 1 Then
+                        With View.InvTransactionDetailsBs.Current
+                            If .Quantity = 0 Then
+                                .Quantity = inventory(0).QtyOnHand
+                            End If
+                            .ProductCode = product.ProductCode
+                            .BatchNo = inventory(0).BatchNo
+                            .ExpiryDate = inventory(0).ExpiryDate
+                            .UnitCost = inventory(0).UnitCost
+                            .NetAmount = inventory(0).UnitCost * inventory(0).QtyOnHand
+                        End With
+                        View.ProductInventory = inventory
+                        View.ProductCodeIsValid = True
+                    ElseIf inventory.Count() > 1 Then
+                        Dim form As New InventorySelector(inventory, pnt)
+                        If form.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                            Dim selectedInvIndex As Int32 = form.SelectedInvIndex
+                            With View.InvTransactionDetailsBs.Current
+                                .BatchNo = .ProductInventory(selectedInvIndex).BatchNo
+                                .Quantity = .ProductInventory(selectedInvIndex).QtyOnHand
+                                .ExpiryDate = .ProductInventory(selectedInvIndex).ExpiryDate
+                                .UnitCost = .ProductInventory(selectedInvIndex).UnitCost
+                                .NetAmount = Math.Round(.UnitCost * .Quantity, 2)
+                            End With
+                            View.ProductCodeIsValid = True
+                        Else
+                            View.ProductCodeIsValid = False
+                        End If
+                    Else
+                        If View.AddOrDeduct = EnumToCode(InventoryActionSelection.Deduct) Then
+                            Messaging.Show(True, "MsgNoSuchInventory", "Error")
+                            View.ProductCodeIsValid = False
+                        Else
+                            View.ProductCodeIsValid = True
+                        End If
+                        View.ProductInventory = inventory
+                    End If
+                Else
+                    View.InvTransactionDetailsBs.Current.ProductIdNo = ""
+                    View.InvTransactionDetailsBs.Current.ProductName = ""
+                    Messaging.Show(True, "Invalid Product Code!")
+                End If
+            End If
+        End Sub
 
         Private Sub CheckStock(product As ProductModel)
             CountInventory(product.IdNo)
