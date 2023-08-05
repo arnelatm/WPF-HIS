@@ -20,7 +20,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateEnumDataSource(Of InventoryActionSelection)("AddOrDeduct")
+            CreateEnumDataSource(Of InventoryActionSelection)("InventoryAction")
             Dim data As New ArrayList
             data.Add({"Account", "AccountIdNo", Nothing, Nothing})
             CreateDataSourceThread(data)

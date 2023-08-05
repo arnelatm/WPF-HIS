@@ -7,7 +7,7 @@ Namespace PresentationLayer.Views.Interfaces
 
         Property AccountIdNo As Int16?
         Property Active As Boolean
-        Property AddOrDeduct As String
+        Property InventoryAction As String
         Property IdNo As Int16
         Property InvTransTypeCode As String
         Property InvTransTypeName As String

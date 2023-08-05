@@ -9,7 +9,7 @@ Namespace PresentationLayer.Models
     Public Class InvTransTypeModel
         Public Property AccountIdNo As Int16?
         Public Property Active As Boolean
-        Public Property AddOrDeduct As String
+        Public Property InventoryAction As String
         Public Property IdNo As Int16
         Public Property InvTransTypeCode As String
         Public Property InvTransTypeName As String

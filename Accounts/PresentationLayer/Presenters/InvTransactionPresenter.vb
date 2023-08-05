@@ -1,4 +1,5 @@
 ﻿Imports System.Dynamic
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
@@ -27,35 +28,25 @@ Namespace PresentationLayer.Presenters
             Service = New AccountsService("InvTransaction")
             SortOrderKey = "IdNo"
             DtInsertTable.Columns.Add("BatchNo", GetType(String))
-            DtInsertTable.Columns.Add("BonusQuantity", GetType(Int16))
-            DtInsertTable.Columns.Add("DiscountAmount", GetType(Decimal))
             DtInsertTable.Columns.Add("ExpiryDate", GetType(Date))
-            DtInsertTable.Columns.Add("NetAmount", GetType(Decimal))
-            DtInsertTable.Columns.Add("Price", GetType(Decimal))
-            DtInsertTable.Columns.Add("ProductIdNo", GetType(Int16))
             DtInsertTable.Columns.Add("InvTransactionIdNo", GetType(Int32))
+            DtInsertTable.Columns.Add("NetAmount", GetType(Decimal))
+            DtInsertTable.Columns.Add("ProductIdNo", GetType(Int16))
             DtInsertTable.Columns.Add("Quantity", GetType(Int16))
             DtInsertTable.Columns.Add("Sequence", GetType(Int16))
+            DtInsertTable.Columns.Add("UnitCost", GetType(Decimal))
             DtInsertTable.Columns.Add("UnitIdNo", GetType(Int16))
-            DtInsertTable.Columns.Add("UnitSalesPrice", GetType(Decimal))
-            DtInsertTable.Columns.Add("VatAmount", GetType(Decimal))
-            DtInsertTable.Columns.Add("VatPercent", GetType(Decimal))
 
             DtUpdateTable.Columns.Add("BatchNo", GetType(String))
-            DtUpdateTable.Columns.Add("BonusQuantity", GetType(Int16))
-            DtUpdateTable.Columns.Add("DiscountAmount", GetType(Decimal))
             DtUpdateTable.Columns.Add("ExpiryDate", GetType(Date))
             DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("NetAmount", GetType(Decimal))
-            DtUpdateTable.Columns.Add("Price", GetType(Decimal))
-            DtUpdateTable.Columns.Add("ProductIdNo", GetType(Int16))
             DtUpdateTable.Columns.Add("InvTransactionIdNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("NetAmount", GetType(Decimal))
+            DtUpdateTable.Columns.Add("ProductIdNo", GetType(Int16))
             DtUpdateTable.Columns.Add("Quantity", GetType(Int16))
             DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
+            DtUpdateTable.Columns.Add("UnitCost", GetType(Decimal))
             DtUpdateTable.Columns.Add("UnitIdNo", GetType(Int16))
-            DtUpdateTable.Columns.Add("UnitSalesPrice", GetType(Decimal))
-            DtUpdateTable.Columns.Add("VatAmount", GetType(Decimal))
-            DtUpdateTable.Columns.Add("VatPercent", GetType(Decimal))
             AddHandler view.ProductUnitEditing, AddressOf OnProductUnitEditing
             AddHandler view.ProductCodeChanged, AddressOf OnProductCodeChanged
             AddHandler view.GTinScanned, AddressOf OnGTinScanned
@@ -94,18 +85,13 @@ Namespace PresentationLayer.Presenters
 
         Private Sub FillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("BatchNo") = itemDataView.BatchNo
-            workRow("BonusQuantity") = itemDataView.BonusQuantity
-            workRow("DiscountAmount") = itemDataView.DiscountAmount
             workRow("ExpiryDate") = IIf(itemDataView.ExpiryDate Is Nothing, DBNull.Value, itemDataView.ExpiryDate)
-            workRow("NetAmount") = itemDataView.NetAmount
-            workRow("Price") = itemDataView.Price
-            workRow("ProductIdNo") = itemDataView.ProductIdNo
             workRow("InvTransactionIdNo") = View.IdNo
+            workRow("NetAmount") = itemDataView.NetAmount
+            workRow("ProductIdNo") = itemDataView.ProductIdNo
             workRow("Quantity") = itemDataView.Quantity
+            workRow("UnitCost") = itemDataView.UnitCost
             workRow("UnitIdNo") = itemDataView.UnitIdNo
-            workRow("UnitSalesPrice") = itemDataView.UnitSalesPrice
-            workRow("VatAmount") = itemDataView.VatAmount
-            workRow("VatPercent") = itemDataView.VatPercent
         End Sub
 
         Public Function InvTransactionDetailFilter(ByVal obj As Object) As Boolean
@@ -216,22 +202,17 @@ Namespace PresentationLayer.Presenters
                 If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
                     Dim gAmt As Decimal = 0
                     Dim dAmt As Decimal = 0
-                    Dim price As Decimal = 0
-                    Dim vAmt As Decimal = 0
-                    Dim amtBefVat As Decimal = 0
-                    Dim dPerc As Decimal = 0
-                    Dim vPerc As Decimal = 0
                     Dim nAmt As Decimal = 0
                     Select Case eventType.PropertyName
                         Case $"ProductCode"
                             InitializeInvTransactionDetailValues(eventType.BindingSource, InvTransactionDetail.ProductCode)
                         Case $"Quantity"
-                            SetAmounts(InvTransactionDetail)
+                            'SetAmounts(InvTransactionDetail)
                             eventType.BindingSource.ResetCurrentItem()
                         Case "NetAmount"
                             '.Price = IIf(.Quantity = 0, 0, .GrossAmount / .Quantity)
                     End Select
-                    .UnitCost = GetUnitCost(InvTransactionDetail)
+                    .NetAmount = GetNetAmount(InvTransactionDetail)
                     eventType.BindingSource.ResetItem(eventType.Row)
                 End If
             End With
@@ -260,7 +241,7 @@ Namespace PresentationLayer.Presenters
                         End With
                         retVal = True
                     Else
-                        If View.AddOrDeduct = EnumToCode(InventoryActionSelection.Deduct) Then
+                        If View.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Then
                             Messaging.Show(True, "MsgNoSuchInventory", "Error")
                         End If
                         If View.InvTransTypeIdNo Then
@@ -276,10 +257,11 @@ Namespace PresentationLayer.Presenters
         End Sub
 
 
-        Private Sub OnProductCodeValidating(productCode As String, pnt As Point)
+        Private Sub OnProductCodeValidating(productCode As String, control As Control)
             Dim retVal As Boolean = False
-            Dim product As ProductModel = GetProductModel(productCode)
-            If product Is Nothing Then
+            Dim product As New ProductModel
+            product = GetProductModel(productCode)
+            If product.ProductName Is Nothing Then
                 View.ProductCodeIsValid = True
                 'allow null Product Code, since user can enter Product Name instead of Product Code.
             Else
@@ -291,9 +273,7 @@ Namespace PresentationLayer.Presenters
                     View.InvTransactionDetailsBs.Current.UnitIdNo = product.BaseUnitIdNo
                     If inventory.Count() = 1 Then
                         With View.InvTransactionDetailsBs.Current
-                            If .Quantity = 0 Then
-                                .Quantity = inventory(0).QtyOnHand
-                            End If
+                            .Quantity = SetInitialQuantity(inventory(0))
                             .ProductCode = product.ProductCode
                             .BatchNo = inventory(0).BatchNo
                             .ExpiryDate = inventory(0).ExpiryDate
@@ -303,37 +283,51 @@ Namespace PresentationLayer.Presenters
                         View.ProductInventory = inventory
                         View.ProductCodeIsValid = True
                     ElseIf inventory.Count() > 1 Then
-                        Dim form As New InventorySelector(inventory, pnt)
+                        Dim form As New InventorySelector(inventory, control)
                         If form.ShowDialog() = Windows.Forms.DialogResult.OK Then
                             Dim selectedInvIndex As Int32 = form.SelectedInvIndex
                             With View.InvTransactionDetailsBs.Current
-                                .BatchNo = .ProductInventory(selectedInvIndex).BatchNo
-                                .Quantity = .ProductInventory(selectedInvIndex).QtyOnHand
-                                .ExpiryDate = .ProductInventory(selectedInvIndex).ExpiryDate
-                                .UnitCost = .ProductInventory(selectedInvIndex).UnitCost
+                                .BatchNo = inventory(selectedInvIndex).BatchNo
+                                .Quantity = SetInitialQuantity(inventory(0))
+                                .ExpiryDate = inventory(selectedInvIndex).ExpiryDate
+                                .UnitCost = inventory(selectedInvIndex).UnitCost
                                 .NetAmount = Math.Round(.UnitCost * .Quantity, 2)
                             End With
+                            View.ProductInventory = inventory
                             View.ProductCodeIsValid = True
                         Else
                             View.ProductCodeIsValid = False
                         End If
                     Else
-                        If View.AddOrDeduct = EnumToCode(InventoryActionSelection.Deduct) Then
+                        If View.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Then
                             Messaging.Show(True, "MsgNoSuchInventory", "Error")
                             View.ProductCodeIsValid = False
                         Else
                             View.ProductCodeIsValid = True
                         End If
                         View.ProductInventory = inventory
+                        View.ProductCodeIsValid = True
                     End If
                 Else
-                    View.InvTransactionDetailsBs.Current.ProductIdNo = ""
-                    View.InvTransactionDetailsBs.Current.ProductName = ""
+                    View.ProductCodeIsValid = False
                     Messaging.Show(True, "Invalid Product Code!")
                 End If
             End If
         End Sub
 
+        Private Function SetInitialQuantity(inventory As InventoryModel) As Int16
+            Dim qty As Int16
+            Dim InventoryAction As String
+            InventoryAction = Service.GetField(Of String, Int16)(View.InvTransTypeIdNo, "InvTransType", "IdNo", "InventoryAction")
+            If InventoryAction Is Nothing Then
+                qty = 0
+            ElseIf InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
+                qty = inventory.QtyOnHand
+            Else
+                qty = 1
+            End If
+            Return qty
+        End Function
         Private Sub CheckStock(product As ProductModel)
             CountInventory(product.IdNo)
         End Sub
@@ -362,23 +356,12 @@ Namespace PresentationLayer.Presenters
         Private Sub SetAmounts(InvTransactionDetail As InvTransactionDetailView)
             With InvTransactionDetail
                 .NetAmount = GetNetAmount(InvTransactionDetail)
-                .UnitCost = GetUnitCost(InvTransactionDetail)
+                '.UnitCost = GetUnitCost(InvTransactionDetail)
             End With
         End Sub
 
         Private Function GetNetAmount(InvTransactionDetail As InvTransactionDetailView) As Decimal
-            'Return InvTransactionDetail.GrossAmount - InvTransactionDetail.DiscountAmount + InvTransactionDetail.VatAmount
-            Return 0
-        End Function
-
-        Private Function GetUnitCost(InvTransactionDetail As InvTransactionDetailView) As Decimal
-            'Return IIf(InvTransactionDetail.Quantity + InvTransactionDetail.BonusQuantity = 0, 0, InvTransactionDetail.NetAmount / (InvTransactionDetail.Quantity + InvTransactionDetail.BonusQuantity))
-            Return 0
-        End Function
-
-        Private Function RecomputePrice(InvTransactionDetail As InvTransactionDetailView) As Decimal
-            Return 0
-            'Return Math.Round(IIf(InvTransactionDetail.Quantity = 0, 0, InvTransactionDetail.GrossAmount / InvTransactionDetail.Quantity), 2)
+            Return Math.Round(InvTransactionDetail.UnitCost * InvTransactionDetail.Quantity, 2)
         End Function
 
         Public Function GetProductModel(productCode As String) As ProductModel
@@ -543,7 +526,12 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnInvTransactionTypeChanged(invTransType As Int16)
-            View.AddOrDeduct = Service.GetField(View.InvTransTypeIdNo, "InvTransType", "IdNo", "AddOrDeduct")
+            View.InventoryAction = Service.GetField(View.InvTransTypeIdNo, "InvTransType", "IdNo", "InventoryAction")
+            If View.InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
+                View.WarehouseToIdNoEnabled = True
+            Else
+                View.WarehouseToIdNoEnabled = False
+            End If
         End Sub
 
         Private Function OnPostData(idNo As Int32) As Boolean
@@ -583,7 +571,7 @@ Namespace PresentationLayer.Presenters
                                     End With
                                     retVal = True
                                 Else
-                                    If View.AddOrDeduct = EnumToCode(InventoryActionSelection.Deduct) Then
+                                    If View.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Then
                                         Messaging.Show(True, "MsgNoSuchInventory", "Error")
                                     End If
                                     If View.InvTransTypeIdNo Then

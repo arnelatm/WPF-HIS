@@ -1,14 +1,17 @@
-﻿Imports AATM.Accounts.DataLayer.AdoNet
-Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class InventorySelector
 
     Private _control As Control
     Private _service As Object
+    Private _formPosition As Point
+    Private _controlHeight As Int16
+    Private _controlWidth As Int16
     Public SelectedInvIndex As Int32
 
-    Public Sub New(productInventory As List(Of InventoryModel), pnt As Point)
+    Public Sub New(productInventory As List(Of InventoryModel), ctrl As Control)
         ' This call is required by the designer.
         InitializeComponent()
         Me.ShowIcon = False
@@ -17,22 +20,69 @@ Public Class InventorySelector
         Me.MaximizeBox = False
         Me.Text = ""
         Me.TopMost = False
-        Dim screenRectangle As Rectangle
-        screenRectangle = Screen.PrimaryScreen.WorkingArea
-        StartPosition = FormStartPosition.Manual
-        pnt = _control.PointToScreen(Location)
-        Location = New Point(pnt.X, pnt.Y)
-        If pnt.Y + Height > screenRectangle.Height Then
-            pnt.Y = pnt.Y - Height
-        End If
+        Dim formPoint As Point
+        _control = ctrl
+        _formPosition.X = formPoint.X
+        _formPosition.Y = formPoint.Y
+        _controlHeight = ctrl.Height
+        _controlWidth = ctrl.Width
+
+        Dim pnt As Point = ctrl.PointToScreen(New Point(0 + ctrl.Width, 0))
+        _formPosition.X = pnt.X
+        _formPosition.Y = pnt.Y
+
         DataGridViewProducts.MultiSelect = False
         _service = New AccountsService("Product")
-        lblProductName.Text = bsInventory.Current.ProductName
+        Dim productIdNo As Int32 = productInventory(0).ProductIdNo
+        Dim productName As String = _service.GetField(Of String, Int32)(productIdNo, "Product", "IdNo", "ProductName")
+        lblProductName.Text = productName
         DataGridViewProducts.DefaultCellStyle.SelectionBackColor = Color.LightBlue
         DataGridViewProducts.DefaultCellStyle.SelectionForeColor = Color.Black
         DataGridViewProducts.DataSource = productInventory
 
     End Sub
+
+    Private Sub CFindForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        SetFormLocation()
+    End Sub
+
+    Private Sub SetFormLocation()
+        Dim pnt As Point
+        Dim formLocation As Point
+        Dim screenRectangle As Rectangle
+        screenRectangle = Screen.PrimaryScreen.WorkingArea
+        StartPosition = FormStartPosition.Manual
+        pnt = _formPosition
+        If GlobalVariables.RightToLeftLayout Then
+            formLocation = New Point(pnt.X - Width - _controlWidth, pnt.Y)
+        Else
+            formLocation = New Point(pnt.X, pnt.Y)
+        End If
+        Dim horizontalCoordinateOutsideScreen As Boolean = False
+        If formLocation.X < 0 Then
+            formLocation.X = 0
+            horizontalCoordinateOutsideScreen = True
+        End If
+
+        If formLocation.X + Width > screenRectangle.Width Then
+            formLocation.X = screenRectangle.Width - Width
+            horizontalCoordinateOutsideScreen = True
+            ' set to true if form will not fit on the right
+        End If
+        If formLocation.Y < 0 Then
+            formLocation.Y = 0
+        End If
+        If formLocation.Y + Height > screenRectangle.Height Then
+            formLocation.Y = formLocation.Y - Height
+        Else
+            If horizontalCoordinateOutsideScreen Then
+                ' move down so as not to cover the field to be searched
+                formLocation.Y = formLocation.Y + _controlHeight
+            End If
+        End If
+        Location = formLocation
+    End Sub
+
 
     Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs)
         _findText = ""

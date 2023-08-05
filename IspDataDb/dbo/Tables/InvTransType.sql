@@ -4,7 +4,7 @@
     [InvTransTypeCode]    VARCHAR (10)   NULL,
     [InvTransTypeName]    VARCHAR (50)   NULL,
     [InvTransTypeNameAra] NVARCHAR (50)  NULL,
-    [AddOrDeduct]         CHAR (1)       NULL,
+    [InventoryAction]         CHAR (1)       NULL,
     [AccountIdNo]         INT            NULL,
     [Active]              BIT            NULL,
     [Notes]               NVARCHAR (100) NULL,

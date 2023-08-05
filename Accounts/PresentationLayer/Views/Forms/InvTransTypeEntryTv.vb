@@ -79,12 +79,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property AddOrDeduct As String Implements IInvTransTypeView.AddOrDeduct
+        Public Property InventoryAction As String Implements IInvTransTypeView.InventoryAction
             Get
-                Return cboAddOrDeduct.GetValue()
+                Return cboInventoryAction.GetValue()
             End Get
             Set
-                cboAddOrDeduct.SetValue(Value)
+                cboInventoryAction.SetValue(Value)
             End Set
         End Property
 
@@ -95,7 +95,7 @@ Namespace PresentationLayer.Views.Forms
                 {
                 {"AccountIdNo", cboAccountIdNo},
                 {"Active", chkActive},
-                {"AddOrDeduct", cboAddOrDeduct},
+                {"InventoryAction", cboInventoryAction},
                 {"InvTransTypeCode", txtInvTransTypeCode},
                 {"InvTransTypeName", txtInvTransTypeName},
                 {"InvTransTypeNameAra", txtInvTransTypeNameAra},
