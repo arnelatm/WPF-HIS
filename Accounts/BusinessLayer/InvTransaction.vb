@@ -11,7 +11,10 @@ Namespace BusinessLayer
         Public Sub New()
             If GetRules().Count() = 0 Then
                 ' establish business rules
-                AddRule(New ValidateRequired("InvTransTypeName"))
+                AddRule(New ValidateRequired("InvTransTypeIdNo"))
+                AddRule(New ValidateRequired("WarehouseIdNo"))
+                AddRule(New ValidateRequired("TransactionDate"))
+                AddRule(New ValidateRequired("Notes"))
             End If
         End Sub
 
@@ -23,7 +26,7 @@ Namespace BusinessLayer
         Public Property Notes As String
         Public Property Posted As Boolean
         Public Property ReferenceNo As String
-        Public Property TransactionDate As Date
+        Public Property TransactionDate As Date?
         Public Property UserIdNo As Int16
         Public Property WarehouseIdNo As Int16
         Public Property WarehouseToIdNo As Int16?

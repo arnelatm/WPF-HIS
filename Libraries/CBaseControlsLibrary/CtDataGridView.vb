@@ -304,7 +304,7 @@ Public Class CtDataGridView
                 'Select the last row.
                 Rows(RowCount() - 1).Selected = True
                 CurrentCell = Me(FirstEditableColumn, CurrentCell.RowIndex() + 1)
-                'Return (keyData)
+                Return (keyData)
             End If
         End If
         Return Me.ProcessTabKey(keyData)

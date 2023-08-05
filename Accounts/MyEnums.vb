@@ -387,6 +387,7 @@ Public Enum InventoryActionSelection
     <EnumCode("")> NotSpecified
     <EnumCode("A")> Add
     <EnumCode("D")> Deduct
+    <EnumCode("T")> Transfer
 End Enum
 Public Enum AbsenceTypeSelection
     <EnumCode("")> NotSpecified
@@ -430,4 +431,5 @@ Public Enum DataTypeEnum
     [Decimal]
     [Boolean]
 End Enum
+
 

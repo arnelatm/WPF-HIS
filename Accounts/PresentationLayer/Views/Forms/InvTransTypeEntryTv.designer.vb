@@ -30,8 +30,8 @@ Namespace PresentationLayer.Views.Forms
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(InvTransTypeEntryTv))
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-            Me.cboAddOrDeduct = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.lblAddOrDeduct = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboInventoryAction = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.lblInventoryAction = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtInvTransTypeNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
@@ -86,8 +86,8 @@ Namespace PresentationLayer.Views.Forms
             'TableLayoutPanel1
             '
             resources.ApplyResources(Me.TableLayoutPanel1, "TableLayoutPanel1")
-            Me.TableLayoutPanel1.Controls.Add(Me.cboAddOrDeduct, 0, 12)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblAddOrDeduct, 0, 11)
+            Me.TableLayoutPanel1.Controls.Add(Me.cboInventoryAction, 0, 12)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblInventoryAction, 0, 11)
             Me.TableLayoutPanel1.Controls.Add(Me.lblNotes, 0, 13)
             Me.TableLayoutPanel1.Controls.Add(Me.txtNotes, 0, 14)
             Me.TableLayoutPanel1.Controls.Add(Me.txtInvTransTypeNameAra, 0, 7)
@@ -105,54 +105,54 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Controls.Add(Me.lblActive, 2, 11)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             '
-            'cboAddOrDeduct
+            'cboInventoryAction
             '
-            Me.cboAddOrDeduct.BackColor = System.Drawing.Color.White
-            Me.cboAddOrDeduct.BegFindValue = Nothing
-            Me.cboAddOrDeduct.ChangingSearchValueOnly = False
-            Me.cboAddOrDeduct.CurrentSearchTerm = ""
-            Me.cboAddOrDeduct.DataValue = Nothing
-            Me.cboAddOrDeduct.DefaultValue = Nothing
-            Me.cboAddOrDeduct.DisplayMember = "Name"
-            resources.ApplyResources(Me.cboAddOrDeduct, "cboAddOrDeduct")
-            Me.cboAddOrDeduct.Editable = True
-            Me.cboAddOrDeduct.EditingMode = True
-            Me.cboAddOrDeduct.EndFindValue = Nothing
-            Me.cboAddOrDeduct.FieldDescription = Nothing
-            Me.cboAddOrDeduct.FieldName = Nothing
-            Me.cboAddOrDeduct.FilterRule = Nothing
-            Me.cboAddOrDeduct.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboAddOrDeduct.FindEnabled = False
-            Me.cboAddOrDeduct.ForeColor = System.Drawing.Color.Black
-            Me.cboAddOrDeduct.FormattingEnabled = True
-            Me.cboAddOrDeduct.HideWhenNotEditingOrAdding = False
-            Me.cboAddOrDeduct.IgnoreCase = False
-            Me.cboAddOrDeduct.LimitToList = False
-            Me.cboAddOrDeduct.LinkedLabel = Me.lblAddOrDeduct
-            Me.cboAddOrDeduct.Name = "cboAddOrDeduct"
-            Me.cboAddOrDeduct.OldValue = 0
-            Me.cboAddOrDeduct.OriginalDataSource = Nothing
-            Me.cboAddOrDeduct.OriginalList = Nothing
-            Me.cboAddOrDeduct.OverrideDropDownStyleList = False
-            Me.cboAddOrDeduct.PreviousSearchTerm = Nothing
-            Me.cboAddOrDeduct.PropertySelector = Nothing
-            Me.cboAddOrDeduct.ReadOnlyCombo = False
-            Me.cboAddOrDeduct.SuggestBoxHeight = 200
-            Me.cboAddOrDeduct.SuggestListOrderRule = Nothing
-            Me.cboAddOrDeduct.TextToSearch = Nothing
-            Me.cboAddOrDeduct.Translatable = False
-            Me.cboAddOrDeduct.ValueIsMandatory = False
-            Me.cboAddOrDeduct.ValueIsNullable = False
-            Me.cboAddOrDeduct.ValueIsNumeric = False
-            Me.cboAddOrDeduct.ValueMember = "Code"
+            Me.cboInventoryAction.BackColor = System.Drawing.Color.White
+            Me.cboInventoryAction.BegFindValue = Nothing
+            Me.cboInventoryAction.ChangingSearchValueOnly = False
+            Me.cboInventoryAction.CurrentSearchTerm = ""
+            Me.cboInventoryAction.DataValue = Nothing
+            Me.cboInventoryAction.DefaultValue = Nothing
+            Me.cboInventoryAction.DisplayMember = "Name"
+            resources.ApplyResources(Me.cboInventoryAction, "cboInventoryAction")
+            Me.cboInventoryAction.Editable = True
+            Me.cboInventoryAction.EditingMode = True
+            Me.cboInventoryAction.EndFindValue = Nothing
+            Me.cboInventoryAction.FieldDescription = Nothing
+            Me.cboInventoryAction.FieldName = Nothing
+            Me.cboInventoryAction.FilterRule = Nothing
+            Me.cboInventoryAction.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboInventoryAction.FindEnabled = False
+            Me.cboInventoryAction.ForeColor = System.Drawing.Color.Black
+            Me.cboInventoryAction.FormattingEnabled = True
+            Me.cboInventoryAction.HideWhenNotEditingOrAdding = False
+            Me.cboInventoryAction.IgnoreCase = False
+            Me.cboInventoryAction.LimitToList = False
+            Me.cboInventoryAction.LinkedLabel = Me.lblInventoryAction
+            Me.cboInventoryAction.Name = "cboInventoryAction"
+            Me.cboInventoryAction.OldValue = 0
+            Me.cboInventoryAction.OriginalDataSource = Nothing
+            Me.cboInventoryAction.OriginalList = Nothing
+            Me.cboInventoryAction.OverrideDropDownStyleList = False
+            Me.cboInventoryAction.PreviousSearchTerm = Nothing
+            Me.cboInventoryAction.PropertySelector = Nothing
+            Me.cboInventoryAction.ReadOnlyCombo = False
+            Me.cboInventoryAction.SuggestBoxHeight = 200
+            Me.cboInventoryAction.SuggestListOrderRule = Nothing
+            Me.cboInventoryAction.TextToSearch = Nothing
+            Me.cboInventoryAction.Translatable = False
+            Me.cboInventoryAction.ValueIsMandatory = False
+            Me.cboInventoryAction.ValueIsNullable = False
+            Me.cboInventoryAction.ValueIsNumeric = False
+            Me.cboInventoryAction.ValueMember = "Code"
             '
-            'lblAddOrDeduct
+            'lblInventoryAction
             '
-            resources.ApplyResources(Me.lblAddOrDeduct, "lblAddOrDeduct")
-            Me.lblAddOrDeduct.DisplayOnly = True
-            Me.lblAddOrDeduct.EditingMode = False
-            Me.lblAddOrDeduct.Name = "lblAddOrDeduct"
-            Me.lblAddOrDeduct.Translatable = True
+            resources.ApplyResources(Me.lblInventoryAction, "lblInventoryAction")
+            Me.lblInventoryAction.DisplayOnly = True
+            Me.lblInventoryAction.EditingMode = False
+            Me.lblInventoryAction.Name = "lblInventoryAction"
+            Me.lblInventoryAction.Translatable = True
             '
             'lblNotes
             '
@@ -459,8 +459,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents chkActive As CCheckBox
         Friend WithEvents lblInvTransTypeCycle As CLabel
         Friend WithEvents cboAccountIdNo As CtComboBox
-        Friend WithEvents cboAddOrDeduct As CaComboBox
-        Friend WithEvents lblAddOrDeduct As CLabel
+        Friend WithEvents cboInventoryAction As CaComboBox
+        Friend WithEvents lblInventoryAction As CLabel
         Friend WithEvents txtInvTransTypeNameAra As CTextBoxArabic
     End Class
 End Namespace

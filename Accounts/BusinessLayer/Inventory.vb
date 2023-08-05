@@ -12,6 +12,7 @@ Namespace BusinessLayer
         Public Property BatchNo As String
         Public Property ExpiryDate As Date
         Public Property IdNo As Int32
+        Public Property NetAmount As Decimal
         Public Property ProductIdNo As Int32
         Public Property PurchaseDetailIdNo As Int32
         Public Property QtyOnHand As Decimal

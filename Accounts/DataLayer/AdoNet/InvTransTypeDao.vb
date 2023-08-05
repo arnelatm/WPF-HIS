@@ -16,7 +16,7 @@ Namespace DataLayer.AdoNet
         Private Const FieldList =
                           "Active," &
                           "AccountIdNo," &
-                          "AddOrDeduct," &
+                          "InventoryAction," &
                           "IdNo," &
                           "InvTransTypeCode," &
                           "InvTransTypeName," &
@@ -38,7 +38,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String = " UPDATE [InvTransType] Set" &
                     " Active = @Active," &
                     " AccountIdNo = @AccountIdNo," &
-                    " AddOrDeduct = @AddOrDeduct," &
+                    " InventoryAction = @InventoryAction," &
                     " InvTransTypeCode = @InvTransTypeCode," &
                     " InvTransTypeName = @InvTransTypeName," &
                     " InvTransTypeNameAra = @InvTransTypeNameAra," &
@@ -50,8 +50,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef InvTransType As InvTransType) As Integer Implements IDao(Of InvTransType).AddRecord
             Dim sql As String =
                     " INSERT INTO [InvTransType] " &
-                    " (Active,AccountIdNo,AddOrDeduct,BranchIdNo,InvTransTypeCode,InvTransTypeName,InvTransTypeNameAra,Notes) " &
-                    " VALUES (@Active,@AccountIdNo,@AddOrDeduct,@BranchIdNo,@InvTransTypeCode,@InvTransTypeName,@InvTransTypeNameAra,@Notes) "
+                    " (Active,AccountIdNo,InventoryAction,BranchIdNo,InvTransTypeCode,InvTransTypeName,InvTransTypeNameAra,Notes) " &
+                    " VALUES (@Active,@AccountIdNo,@InventoryAction,@BranchIdNo,@InvTransTypeCode,@InvTransTypeName,@InvTransTypeNameAra,@Notes) "
             Return Db.Insert(sql, Take(InvTransType))
         End Function
 
@@ -60,7 +60,7 @@ Namespace DataLayer.AdoNet
             New InvTransType() With {
             .Active = Extensions.AsBool(reader("Active")),
             .AccountIdNo = Extensions.AsInt(Of Int16)(reader("AccountIdNo")),
-            .AddOrDeduct = Extensions.AsString(reader("AddOrDeduct")),
+            .InventoryAction = Extensions.AsString(reader("InventoryAction")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
             .InvTransTypeCode = Extensions.AsString(reader("InvTransTypeCode")),
             .InvTransTypeName = Extensions.AsString(reader("InvTransTypeName")),
@@ -72,7 +72,7 @@ Namespace DataLayer.AdoNet
             Return New Object() {
                                     "@Active", InvTransType.Active,
                                     "@AccountIdNo", InvTransType.AccountIdNo,
-                                    "@AddOrDeduct", InvTransType.AddOrDeduct,
+                                    "@InventoryAction", InvTransType.InventoryAction,
                                     "@BranchIdNo", GlobalVariables.BranchIdNo,
                                     "@IdNo", InvTransType.IdNo,
                                     "@InvTransTypeCode", InvTransType.InvTransTypeCode,

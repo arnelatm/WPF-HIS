@@ -24,9 +24,11 @@ Namespace PresentationLayer.Views.Interfaces
         Property UnitsByProduct As DataTable
         Property ProductsByCode As DataTable
         Property ProductInventory As List(Of InventoryModel)
-        Property AddOrDeduct As String
+        Property InventoryAction As String
         Property InvTransactionDetailsBs As BindingSource
         Property ProductCodeIsValid As Boolean
+        WriteOnly Property WarehouseToIdNoEnabled As Boolean
+
         Event ProductUnitEditing(productIdNo As Int32) ', bs As BindingSource)
         Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource)
         Event ProductCodeChanged(productCode As String, bs As BindingSource)
@@ -35,7 +37,7 @@ Namespace PresentationLayer.Views.Interfaces
         Event RowChanged(productIdNo As Integer)
         Event PostData(idNo As Int32)
         Event InvTransactionTypeChanged(invTransTypeIdNo As Int16)
-        Event ProductCodeValidating(productCode As String, pnt As Point)
+        Event ProductCodeValidating(productCode As String, control As Control)
     End Interface
 
 End Namespace
