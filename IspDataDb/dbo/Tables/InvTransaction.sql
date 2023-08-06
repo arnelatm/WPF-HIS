@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[InvTransaction] (
     [IdNo]             INT            IDENTITY (1, 1) NOT NULL,
     [BranchIdNo]       TINYINT        NOT NULL,
-    [ReferenceNo]      INT            NULL,
+    [ReferenceNo]      VARCHAR (10)   NULL,
     [TransactionDate]  DATE           NULL,
     [InvTransTypeIdNo] TINYINT        NULL,
     [WarehouseIdNo]    SMALLINT       NOT NULL,
@@ -15,6 +15,8 @@
     [DateTimeStamp]    ROWVERSION     NULL,
     CONSTRAINT [PK_InvTransaction] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
