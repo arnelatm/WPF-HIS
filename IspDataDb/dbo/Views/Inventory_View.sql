@@ -2,10 +2,17 @@
 
 
 
+
+
+
+
+
+
+
 CREATE VIEW [dbo].[Inventory_View]
 AS
 SELECT  a.IdNo, a.BranchIdNo, a.ProductIdNo, a.TransactionIdNo, a.QtyOnHand, c.BatchNo, c.ExpiryDate, c.UnitSalesPrice, 
-        b.ProductName,a.WarehouseIdNo,Round(IIf(c.Quantity+c.BonusQuantity = 0,0,c.NetAmount / (c.Quantity+c.BonusQuantity)),4) as UnitCost
+        b.ProductCode, b.ProductName,a.TransactionType,a.WarehouseIdNo,IIf(a.QtyOnHand=0,0,a.TotalCost / a.QtyOnHand) as UnitCost, a.TotalCost 
 FROM    dbo.Inventory a 
 		INNER JOIN dbo.Product b
 		ON a.ProductIdNo = b.IdNo 

@@ -9,8 +9,12 @@
     [BatchNo]         VARCHAR (20)    NULL,
     [ExpiryDate]      DATE            NULL,
     [UnitCost]        DECIMAL (12, 4) NULL,
+    [TotalCost]       DECIMAL (9, 2)  NULL,
+    [UnitSalesPrice]  DECIMAL (9, 2)  NULL,
     CONSTRAINT [PK_Inventory_1] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
