@@ -2,15 +2,15 @@
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class ProductFinder
+    Implements IProductFinderView
 
-    Private _dgv As DataGridView
+    Private _control As Control
+
     Private _service As Object
 
-    Public Sub New(textToFind As String, dgvObj As DataGridView)
+    Public Sub New(textToFind As String, control As Control)
 
 
         ' This call is required by the designer.
@@ -21,17 +21,17 @@ Public Class ProductFinder
         Me.MaximizeBox = False
         Me.Text = ""
         Me.TopMost = False
-        _dgv = dgvObj
+        _control = control
         txtFinder.Text = textToFind
         Dim pnt As Point
-        Dim dgvLocation As Point
+        Dim controlLocation As Point
         Dim screenRectangle As Rectangle
         screenRectangle = Screen.PrimaryScreen.WorkingArea
         StartPosition = FormStartPosition.Manual
-        pnt = _dgv.PointToScreen(Location)
+        pnt = _control.PointToScreen(Location)
         Location = New Point(pnt.X, pnt.Y)
-        If dgvLocation.Y + Height > screenRectangle.Height Then
-            dgvLocation.Y = pnt.Y - Height
+        If controlLocation.Y + Height > screenRectangle.Height Then
+            controlLocation.Y = pnt.Y - Height
         End If
         DataGridViewProducts.MultiSelect = False
         _service = New AccountsService("Product")

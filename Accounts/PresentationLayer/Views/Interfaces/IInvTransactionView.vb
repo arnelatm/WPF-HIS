@@ -27,17 +27,19 @@ Namespace PresentationLayer.Views.Interfaces
         Property InventoryAction As String
         Property InvTransactionDetailsBs As BindingSource
         Property ProductCodeIsValid As Boolean
+        Property NumberOfUnits As Int16
         WriteOnly Property WarehouseToIdNoEnabled As Boolean
-
+        Property ProductNameIsValid As Boolean
         Event ProductUnitEditing(productIdNo As Int32) ', bs As BindingSource)
         Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource)
         Event ProductCodeChanged(productCode As String, bs As BindingSource)
         Event GTinScanned(GTin As String, bs As BindingSource, ByRef productCode As String)
-        Event UnitChanged(oldUnit As Short, newUnit As Short, bs As BindingSource, formattedValue As String)
+        'Event UnitChanged(oldUnit As Short, newUnit As Short, bs As BindingSource, formattedValue As String)
         Event RowChanged(productIdNo As Integer)
         Event PostData(idNo As Int32)
         Event InvTransactionTypeChanged(invTransTypeIdNo As Int16)
         Event ProductCodeValidating(productCode As String, control As Control)
+        Event ProductNameValidating(productName As String, control As Control)
     End Interface
 
 End Namespace

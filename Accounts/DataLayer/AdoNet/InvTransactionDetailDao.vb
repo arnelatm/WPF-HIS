@@ -18,6 +18,7 @@ Namespace DataLayer.AdoNet
                                     "CategoryIdNo," &
                                     "ExpiryDate," &
                                     "IdNo," &
+                                    "InventoryIdNo," &
                                     "NeedsExpiryDate," &
                                     "NetAmount," &
                                     "ProductCode," &
@@ -69,6 +70,7 @@ Namespace DataLayer.AdoNet
             .CategoryIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("CategoryIdNo")),
             .ExpiryDate = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date)(reader("ExpiryDate")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
+            .InventoryIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("InventoryIdNo")),
             .NeedsExpiryDate = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("NetAmount")),
             .NetAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("NetAmount")),
             .ProductCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ProductCode")),
