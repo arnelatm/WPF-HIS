@@ -9,6 +9,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property CategoryIdNo As Int16
         Property ExpiryDate As Date?
         Property IdNo As Int32
+        Property InventoryIdNo As Int32
         Property InvTransactionIdNo As Int32
         Property NeedsExpiryDate As Boolean
         Property NetAmount As Decimal
@@ -21,6 +22,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property UnitCost As Decimal
         Property UnitCount As Int16
         Property UnitIdNo As Int16
+        Property OriginalUnitIdNo As Int16
+        Property OriginalUnitCost As Decimal
 
     End Interface
 

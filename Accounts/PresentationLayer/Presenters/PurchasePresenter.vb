@@ -289,6 +289,11 @@ Namespace PresentationLayer.Presenters
                             .GrossAmount = .AmtBefVat / (1 - .DiscountPercent / 100)
                             .DiscountAmount = .GrossAmount - .AmtBefVat
                             .Price = IIf(.Quantity = 0, 0, .GrossAmount / .Quantity)
+                        Case "UnitIdNo"
+                            If .Price <> 0 Then
+                                .Price = RecomputeNewPrice(eventType.BindingSource.Current)
+                                SetAmounts(purchaseDetail)
+                            End If
                     End Select
                     .UnitCost = GetUnitCost(purchaseDetail)
                     eventType.BindingSource.ResetItem(eventType.Row)
@@ -324,10 +329,10 @@ Namespace PresentationLayer.Presenters
                 If lastPurchaseInfo Is Nothing Then
                     SetDefaultUnit(pModel, purchaseDetail)
                 Else
-                    .Price = lastPurchaseInfo.Price
-                    .UnitSalesPrice = lastPurchaseInfo.UnitSalesPrice
                     .UnitIdNo = lastPurchaseInfo.UnitIdNo
+                    .UnitSalesPrice = lastPurchaseInfo.UnitSalesPrice
                     .UnitCount = GetUnitCount(pModel, purchaseDetail)
+                    .Price = lastPurchaseInfo.Price
                 End If
                 .VatPercent = GetVatPercentage(pModel.CategoryIdNo)
                 SetAmounts(purchaseDetail)
@@ -376,6 +381,35 @@ Namespace PresentationLayer.Presenters
 
         Private Function RecomputePrice(purchaseDetail As PurchaseDetailView) As Decimal
             Return Math.Round(IIf(purchaseDetail.Quantity = 0, 0, purchaseDetail.GrossAmount / purchaseDetail.Quantity), 2)
+        End Function
+
+        Private Function RecomputeNewPrice(purchaseDetail As PurchaseDetailView) As Decimal
+            Dim newPrice As Decimal
+            Dim product As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(purchaseDetail.ProductIdNo)
+            Dim lastPurchaseInfo As Object = New ExpandoObject
+            lastPurchaseInfo = GetLastPurchaseInfo(product)
+            Dim baseUnitPrice As Decimal = ConvertToBaseUnitPrice(product, lastPurchaseInfo)
+            Dim productUnitIdNo = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(purchaseDetail.ProductIdNo, purchaseDetail.UnitIdNo, "ProductUnit", "ProductIdNo", "UnitIdNo", "IdNo")
+            Dim pUnitInfo As Object = New ExpandoObject
+            pUnitInfo = Service.GetFieldsWithIdNo(productUnitIdNo, "ProductUnit", "UnitQty,BaseQty")
+            If purchaseDetail.UnitIdNo = product.BaseUnitIdNo Then
+                newPrice = baseUnitPrice
+            Else
+                newPrice = IIf(pUnitInfo.UnitQty = 0, 0, baseUnitPrice * pUnitInfo.BaseQty / pUnitInfo.UnitQty)
+            End If
+            Return newPrice
+        End Function
+
+        Private Function ConvertToBaseUnitPrice(product As ProductModel, lastPurchaseInfo As Object)
+            Dim baseUnitPrice As Decimal
+            If lastPurchaseInfo.UnitIdNo = product.BaseUnitIdNo Then
+                baseUnitPrice = lastPurchaseInfo.Price
+            Else
+                Dim productUnitIdNo As Int32 = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(product.IdNo, lastPurchaseInfo.UnitIdNo, "ProductUnit", "ProductIdNo", "UnitIdNo", "IdNo")
+                Dim pUnitInfo = Service.GetFieldsWithIdNo(productUnitIdNo, "ProductUnit", "UnitQty,BaseQty")
+                baseUnitPrice = IIf(pUnitInfo.BaseQty = 0, 0, lastPurchaseInfo.Price * pUnitInfo.Unitqty / pUnitInfo.BaseQty)
+            End If
+            Return baseUnitPrice
         End Function
 
         Private Function RecomputeVatPercentage(purchaseDetail As PurchaseDetailView) As Decimal

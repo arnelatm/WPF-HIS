@@ -1,8 +1,11 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.DataLayer.AdoNet
+Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class InventorySelector
+    Implements IInventorySelectorView
 
     Private _control As Control
     Private _service As Object
@@ -11,7 +14,17 @@ Public Class InventorySelector
     Private _controlWidth As Int16
     Public SelectedInvIndex As Int32
 
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+
+    End Sub
+
     Public Sub New(productInventory As List(Of InventoryModel), ctrl As Control)
+        MyBase.New()
         ' This call is required by the designer.
         InitializeComponent()
         Me.ShowIcon = False
@@ -35,6 +48,7 @@ Public Class InventorySelector
         _service = New AccountsService("Product")
         Dim productIdNo As Int32 = productInventory(0).ProductIdNo
         Dim productName As String = _service.GetField(Of String, Int32)(productIdNo, "Product", "IdNo", "ProductName")
+        Dim baseUnitIdNo As String = _service.GetField(Of String, Int32)(productIdNo, "Product", "IdNo", "BaseUnitIdNo")
         lblProductName.Text = productName
         DataGridViewProducts.DefaultCellStyle.SelectionBackColor = Color.LightBlue
         DataGridViewProducts.DefaultCellStyle.SelectionForeColor = Color.Black
@@ -45,6 +59,7 @@ Public Class InventorySelector
     Private Sub CFindForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         SetFormLocation()
     End Sub
+
 
     Private Sub SetFormLocation()
         Dim pnt As Point
@@ -175,6 +190,15 @@ Public Class InventorySelector
     Public Property SelectedCode As String
     Public Property NoOfUnits As Int16
     Public Property Inventory As InventoryModel
+
+    Public Property SelectedInventory As IInventoryView Implements IInventorySelectorView.SelectedInventory
+        Get
+            Throw New NotImplementedException()
+        End Get
+        Set(value As IInventoryView)
+            Throw New NotImplementedException()
+        End Set
+    End Property
 
     Private Sub btnOk_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
         If DataGridViewProducts.CurrentRow IsNot Nothing Then

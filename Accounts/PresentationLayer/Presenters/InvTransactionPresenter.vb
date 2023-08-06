@@ -8,7 +8,6 @@ Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
-Imports Telerik.Licensing
 
 Namespace PresentationLayer.Presenters
 
@@ -18,6 +17,7 @@ Namespace PresentationLayer.Presenters
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
+        Private ReadOnly _inventoryService As New AccountsService("Inventory")
         Private ReadOnly _productService As New AccountsService("Product")
 
         Public Sub New(view As IInvTransactionView)
@@ -49,12 +49,13 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("UnitIdNo", GetType(Int16))
             AddHandler view.ProductUnitEditing, AddressOf OnProductUnitEditing
             AddHandler view.ProductCodeChanged, AddressOf OnProductCodeChanged
-            AddHandler view.GTinScanned, AddressOf OnGTinScanned
+            'AddHandler view.GTinScanned, AddressOf OnGTinScanned
             AddHandler view.ProductUnitSelection, AddressOf OnProductUnitSelection
-            AddHandler view.UnitChanged, AddressOf OnUnitChanged
+            'AddHandler view.UnitChanged, AddressOf OnUnitChanged
             AddHandler view.InvTransactionTypeChanged, AddressOf OnInvTransactionTypeChanged
             AddHandler view.PostData, AddressOf OnPostData
             AddHandler view.ProductCodeValidating, AddressOf OnProductCodeValidating
+            AddHandler view.ProductNameValidating, AddressOf OnProductNameValidating
 
         End Sub
 
@@ -160,42 +161,6 @@ Namespace PresentationLayer.Presenters
             Return GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "PaymentDueDays")
         End Function
 
-        'Public Sub UpdateEarlySettlementValues()
-        '    If View.SupplierIdNo IsNot Nothing Then
-        '        Dim supplierSettlementDueDays As Integer
-        '        Dim supplierSettlementDiscount As Decimal
-        '        supplierSettlementDueDays = GetSupplierSettlementDueDays(View.SupplierIdNo)
-        '        supplierSettlementDiscount = GetSupplierSettlementDiscount(View.SupplierIdNo)
-        '        View.SettlementDueDate = DateAdd("d", supplierSettlementDueDays, View.TransactionDate)
-        '        View.SettlementDiscount = supplierSettlementDiscount
-        '    Else
-        '        View.SettlementDueDate = Nothing
-        '        View.SettlementDiscount = 0
-        '    End If
-        'End Sub
-
-        'Public Function GetSupplierSettlementDueDays(idNo As String)
-        '    Return GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "SettlementDueDays")
-        'End Function
-
-        'Public Function GetSupplierSettlementDiscount(idNo As String)
-        '    Return GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "SettlementDiscount")
-        'End Function
-
-        'Public Function ApPaymentExists(ByVal journalCode As String, ByVal idNo As Integer) As Boolean
-        '    Dim apOpenInvoiceIdNo As Integer
-        '    apOpenInvoiceIdNo = Service.GetRecordFieldWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode",
-        '                                                       "InvTransactionDetailIdNo", "IdNo")
-        '    If Service.CountRecordWithKey(Of Integer)("CdOiItem", "ApOpenInvoiceIdNo", apOpenInvoiceIdNo) > 0 Then
-        '        Return True
-        '    ElseIf Service.CountRecordWithKey(Of Integer)("CkOiItem", "ApOpenInvoiceIdNo", apOpenInvoiceIdNo) > 0 Then
-        '        Return True
-        '    ElseIf Service.CountRecordWithKey(Of Integer)("PcOiItem", "ApOpenInvoiceIdNo", apOpenInvoiceIdNo) > 0 Then
-        '        Return True
-        '    End If
-        '    Return False
-        'End Function
-
         Public Sub OnInvTransactiondgvItemsChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler
             Dim InvTransactionDetail As InvTransactionDetailView = eventType.BindingSource.Current
             With eventType.BindingSource.Current
@@ -211,12 +176,72 @@ Namespace PresentationLayer.Presenters
                             eventType.BindingSource.ResetCurrentItem()
                         Case "NetAmount"
                             '.Price = IIf(.Quantity = 0, 0, .GrossAmount / .Quantity)
+                        Case "UnitIdNo"
+                            RecomputeNewCost(InvTransactionDetail)
                     End Select
                     .NetAmount = GetNetAmount(InvTransactionDetail)
                     eventType.BindingSource.ResetItem(eventType.Row)
                 End If
             End With
         End Sub
+
+
+        Private Sub RecomputeNewCost(invTransactionDetail As InvTransactionDetailView)
+            If invTransactionDetail.UnitCost <> 0 Then
+                Dim product As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(invTransactionDetail.ProductIdNo)
+                Dim inventory As InventoryModel
+                If invTransactionDetail.InventoryIdNo <> 0 Then
+                    inventory = _inventoryService.GetRecordByIdNo(Of InventoryModel)(invTransactionDetail.InventoryIdNo)
+                    Dim baseUnitCost As Decimal = IIf(inventory.QtyOnHand = 0, 0, inventory.TotalCost / inventory.QtyOnHand)
+                    If invTransactionDetail.UnitIdNo = product.BaseUnitIdNo Then
+                        invTransactionDetail.UnitCost = baseUnitCost
+                    Else
+                        Dim pUnitInfo As Object = New ExpandoObject
+                        Dim pUnitIdNo As Int32 = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(product.IdNo, invTransactionDetail.UnitIdNo, "ProductUnit", "ProductIdNo", "UnitIdNo", "IdNo")
+                        pUnitInfo = Service.GetFieldsWithIdNo(pUnitIdNo, "ProductUnit", "UnitQty,BaseQty")
+                        invTransactionDetail.UnitCost = IIf(pUnitInfo.UnitQty = 0, 0, baseUnitCost * pUnitInfo.BaseQty / pUnitInfo.UnitQty)
+                    End If
+                End If
+            End If
+        End Sub
+
+        'Private Sub RecomputePrice(oldUnit As Int16, newUnit As Int16, bs As BindingSource)
+        '    If oldUnit <> newUnit Then
+        '        Dim inventory As IInventoryView
+        '        Dim newPrice As Decimal
+        '        Dim productIdNo As Int32 = bs.Current.ProductIdNo
+        '        Dim productModel As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(productIdNo)
+        '        Dim baseUnitIdNo As Int16
+        '        inventory = _inventoryService.GetRecordByIdNo(Of InventoryModel)(bs.Current.InventoryIdNo)
+        '        Dim invUnitCost As Decimal
+        '        invUnitCost = inventory.UnitCost
+        '        baseUnitIdNo = productModel.BaseUnitIdNo
+        '        Dim inventoryIdNo As Int32 = bs.Current.InventoryIdNo
+        '        Dim unitQty, baseQty As Int16
+        '        Dim baseUnitCost As Decimal
+        '        If newUnit = baseUnitIdNo Then
+        '            baseUnitCost = inventory.UnitCost
+        '        Else
+        '            unitQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, newUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "UnitQty")
+        '            baseQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, newUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "BaseQty")
+        '            baseUnitCost = IIf(baseQty = 0, 0, unitQty / baseQty * inventory.UnitCost)
+        '        End If
+        '        bs.Current.UnitCost = newPrice
+        '        SetAmounts(bs.Current)
+        '    End If
+        'End Sub
+
+        Private Function ConvertToBaseUnitPrice(product As ProductModel, invTransactionDetail As InvTransactionDetailView)
+            Dim baseUnitPrice As Decimal
+            If invTransactionDetail.UnitIdNo = product.BaseUnitIdNo Then
+                baseUnitPrice = invTransactionDetail.UnitCost
+            Else
+                Dim productUnitIdNo As Int32 = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(product.IdNo, invTransactionDetail.UnitIdNo, "ProductUnit", "ProductIdNo", "UnitIdNo", "IdNo")
+                Dim pUnitInfo = Service.GetFieldsWithIdNo(productUnitIdNo, "ProductUnit", "UnitQty,BaseQty")
+                baseUnitPrice = IIf(pUnitInfo.BaseQty = 0, 0, invTransactionDetail.UnitCost * pUnitInfo.BaseQty / pUnitInfo.UnitQty)
+            End If
+            Return baseUnitPrice
+        End Function
 
         Private Sub InitializeInvTransactionDetailValues(ByRef bs As BindingSource, productCode As String)
             Dim retVal As Boolean = False
@@ -238,6 +263,7 @@ Namespace PresentationLayer.Presenters
                             .ExpiryDate = inventory(0).ExpiryDate
                             .UnitCost = inventory(0).UnitCost
                             .NetAmount = inventory(0).UnitCost * inventory(0).QtyOnHand
+                            .InventoryIdNo = inventory(0).IdNo
                         End With
                         retVal = True
                     Else
@@ -272,32 +298,10 @@ Namespace PresentationLayer.Presenters
                     View.InvTransactionDetailsBs.Current.ProductName = product.ProductName
                     View.InvTransactionDetailsBs.Current.UnitIdNo = product.BaseUnitIdNo
                     If inventory.Count() = 1 Then
-                        With View.InvTransactionDetailsBs.Current
-                            .Quantity = SetInitialQuantity(inventory(0))
-                            .ProductCode = product.ProductCode
-                            .BatchNo = inventory(0).BatchNo
-                            .ExpiryDate = inventory(0).ExpiryDate
-                            .UnitCost = inventory(0).UnitCost
-                            .NetAmount = inventory(0).UnitCost * inventory(0).QtyOnHand
-                        End With
-                        View.ProductInventory = inventory
-                        View.ProductCodeIsValid = True
+                        UpdateInvTransactionDetail(inventory, 0)
+                        'View.InvTransactionDetailsBs.Current.ProductCode = product.ProductCode
                     ElseIf inventory.Count() > 1 Then
-                        Dim form As New InventorySelector(inventory, control)
-                        If form.ShowDialog() = Windows.Forms.DialogResult.OK Then
-                            Dim selectedInvIndex As Int32 = form.SelectedInvIndex
-                            With View.InvTransactionDetailsBs.Current
-                                .BatchNo = inventory(selectedInvIndex).BatchNo
-                                .Quantity = SetInitialQuantity(inventory(0))
-                                .ExpiryDate = inventory(selectedInvIndex).ExpiryDate
-                                .UnitCost = inventory(selectedInvIndex).UnitCost
-                                .NetAmount = Math.Round(.UnitCost * .Quantity, 2)
-                            End With
-                            View.ProductInventory = inventory
-                            View.ProductCodeIsValid = True
-                        Else
-                            View.ProductCodeIsValid = False
-                        End If
+                        SelectInventory(inventory, control)
                     Else
                         If View.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Then
                             Messaging.Show(True, "MsgNoSuchInventory", "Error")
@@ -314,6 +318,78 @@ Namespace PresentationLayer.Presenters
                 End If
             End If
         End Sub
+
+        Private Sub OnProductNameValidating(textToSearch As String, control As Control)
+            If textToSearch.Contains("<GS>") Then
+                Dim qrCodeData As Object = New ExpandoObject
+                Dim qrCodeText As String = textToSearch
+                qrCodeData = Accounts.AccountHelpers.GetQrCodeInfo(textToSearch)
+                View.InvTransactionDetailsBs.Current.ProductCode = GetProductCodeFromGTin(qrCodeData.GTin)
+            Else
+                Dim formToRun As New ProductFinder(textToSearch, control)
+                formToRun.Presenter = New ProductFinderPresenter(Of ProductModel)(formToRun)
+                If formToRun.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                    Dim product As ProductModel = formToRun.Product
+                    View.InvTransactionDetailsBs.Current.ProductName = product.ProductName
+
+                    View.NumberOfUnits = formToRun.NoOfUnits
+                    If product Is Nothing Then
+                        View.ProductNameIsValid = False
+                    Else
+                        View.ProductNameIsValid = True
+                        View.InvTransactionDetailsBs.Current.ProductCode = product.ProductCode
+                        Dim inventory As New List(Of InventoryModel)
+                        inventory = Service.GetRecordsWithGroupIdNo(Of InventoryModel)(product.IdNo, "ExpiryDate")
+                        View.InvTransactionDetailsBs.Current.ProductIdNo = product.IdNo
+                        View.InvTransactionDetailsBs.Current.ProductName = product.ProductName
+                        View.InvTransactionDetailsBs.Current.UnitIdNo = product.BaseUnitIdNo
+                        If inventory.Count() = 1 Then
+                            UpdateInvTransactionDetail(inventory, 0)
+                        ElseIf inventory.Count() > 1 Then
+                            SelectInventory(inventory, control)
+                        Else
+                            If View.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Then
+                                Messaging.Show(True, "MsgNoSuchInventory", "Error")
+                                View.ProductCodeIsValid = False
+                            Else
+                                View.ProductCodeIsValid = True
+                            End If
+                            View.ProductInventory = inventory
+                            View.ProductCodeIsValid = True
+                        End If
+                        View.InvTransactionDetailsBs.ResetBindings(False)
+                    End If
+                Else
+                    View.ProductNameIsValid = False
+                End If
+            End If
+        End Sub
+
+        Private Sub UpdateInvTransactionDetail(inventory As List(Of InventoryModel), selectedIndex As Int16)
+            With View.InvTransactionDetailsBs.Current
+                .Quantity = SetInitialQuantity(inventory(selectedIndex))
+                .BatchNo = inventory(selectedIndex).BatchNo
+                .ExpiryDate = inventory(selectedIndex).ExpiryDate
+                .UnitCost = inventory(selectedIndex).UnitCost
+                .NetAmount = inventory(selectedIndex).UnitCost * inventory(selectedIndex).QtyOnHand
+                .OriginalUnitCost = inventory(selectedIndex).UnitCost
+                .InventoryIdNo = inventory(selectedIndex).IdNo
+            End With
+            View.ProductInventory = inventory
+            View.ProductCodeIsValid = True
+        End Sub
+
+        Private Sub SelectInventory(inventory As List(Of InventoryModel), control As Control)
+            Dim formToRun As New InventorySelector(inventory, control)
+            formToRun.Presenter = New InventorySelectorPresenter(Of InventoryModel)(formToRun)
+            If formToRun.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                Dim selectedInvIndex As Int32 = formToRun.SelectedInvIndex
+                UpdateInvTransactionDetail(inventory, selectedInvIndex)
+            Else
+                View.ProductCodeIsValid = False
+            End If
+        End Sub
+
 
         Private Function SetInitialQuantity(inventory As InventoryModel) As Int16
             Dim qty As Int16
@@ -423,52 +499,25 @@ Namespace PresentationLayer.Presenters
             Return _productService.GetRecordByIdNo(Of ProductModel)(productIdNo)
         End Function
 
-        Private Sub OnGTinScanned(gTin As String, bs As BindingSource, ByRef productCode As String)
+        Private Function GetProductCodeFromGTin(gTin As String) As String
+            Dim bs = View.InvTransactionDetailsBs
             Dim idNo As Int32 = GetRecordFieldWithKeyG(Of Int32)(gTin, "Product", "GTin", "IdNo")
             Dim InvTransactionDetail As InvTransactionDetailView = bs.Current
             Dim productModel As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(idNo)
-            productCode = productModel.ProductCode
-            OnProductCodeChanged(productCode, bs)
-        End Sub
+            Return productModel.ProductCode
+        End Function
 
         Private Sub OnProductUnitSelection(productIdNo As Int32, bs As BindingSource)
             SetProductUnits(productIdNo)
         End Sub
 
-        Private Sub OnUnitChanged(oldUnit As Int16, newUnit As Int16, bs As BindingSource, formattedValue As String)
-            If newUnit = 0 Then
-                Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", formattedValue, "fieldDescription", "Unit"})
-            Else
-                RecomputePrice(oldUnit, newUnit, bs)
-            End If
-        End Sub
-
-        Private Sub RecomputePrice(oldUnit As Int16, newUnit As Int16, bs As BindingSource)
-            Dim InvTransactionDetail As InvTransactionDetailView = bs.Current
-            Dim newPrice As Decimal
-            Dim productIdNo As Int32 = bs.Current.ProductIdNo
-            Dim productModel As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(productIdNo)
-            If oldUnit <> newUnit Then
-                Dim unitQty, baseQty As Int16
-                Dim basePrice As Decimal
-                If productModel.BaseUnitIdNo = oldUnit Then
-                    'basePrice = InvTransactionDetail.Price
-                Else
-                    unitQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, oldUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "UnitQty")
-                    baseQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, oldUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "BaseQty")
-                    'basePrice = Math.Ceiling(IIf(baseQty = 0, 0, unitQty / baseQty) * InvTransactionDetail.Price * 100D) / 100D
-                End If
-                If newUnit = productModel.BaseUnitIdNo Then
-                    newPrice = basePrice
-                Else
-                    unitQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, newUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "UnitQty")
-                    baseQty = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(productIdNo, newUnit, "ProductUnit", "ProductIdNo", "UnitIdNo", "BaseQty")
-                    newPrice = Math.Ceiling(IIf(baseQty = 0, 0, basePrice * baseQty / unitQty) * 100D) / 100D
-                End If
-                'InvTransactionDetail.Price = newPrice
-                SetAmounts(InvTransactionDetail)
-            End If
-        End Sub
+        'Private Sub OnUnitChanged(oldUnit As Int16, newUnit As Int16, bs As BindingSource, formattedValue As String)
+        '    If newUnit = 0 Then
+        '        Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", formattedValue, "fieldDescription", "Unit"})
+        '    Else
+        '        RecomputePrice(oldUnit, newUnit, bs)
+        '    End If
+        'End Sub
 
         Private Sub OnProductUnitEditing(productIdNo As Int32) ', bs As BindingSource)
             SetProductUnits(productIdNo)

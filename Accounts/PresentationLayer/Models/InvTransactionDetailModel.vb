@@ -11,6 +11,7 @@
         Public Property CategoryIdNo As Int16
         Public Property ExpiryDate As Date?
         Public Property IdNo As Int32
+        Public Property InventoryIdNo As Int32
         Public Property InvTransactionIdNo As Int32
         Public Property NeedsExpiryDate As Boolean
         Public Property NetAmount As Decimal

@@ -1,5 +1,4 @@
 ﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.Common.BusinessLayer
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.GlobalFuncNSub
@@ -119,7 +118,7 @@ Namespace DataLayer.AdoNet
             If sortExpression Is Nothing Then
                 sortExpression = "IdNo"
             End If
-            Dim sql As String = "select BatchNo, ExpiryDate, IdNo, TotalCost, ProductIdNo, TransactionIdNo, QtyOnHand, UnitCost from Inventory_View " &
+            Dim sql As String = "select BatchNo, ExpiryDate, IdNo, TotalCost, ProductIdNo, TransactionIdNo, QtyOnHand, UnitCost, UnitSalesPrice, WarehouseIdNo from Inventory_View " &
                     "where ProductIdNo = @IdNo and QtyOnHand <> 0 and BranchIdNo = @BranchIdNo Order By " + sortExpression
             Dim params() As Object = {"@IdNo", idNo, "@BranchIdNo", GlobalVariables.BranchIdNo}
             Return Db.Read(sql, MakeInventory, params).ToList()
@@ -128,14 +127,17 @@ Namespace DataLayer.AdoNet
 
         Private Shared ReadOnly MakeInventory As Func(Of IDataReader, Inventory) =
                                     Function(reader) _
-            New Inventory() With {.BatchNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("BatchNo")),
+            New Inventory() With {
+                                  .BatchNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("BatchNo")),
                                   .ExpiryDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("ExpiryDate")),
                                   .IdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("IdNo")),
-                                  .NetAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("TotalCost")),
                                   .ProductIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("ProductIdNo")),
-                                  .PurchaseDetailIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("TransactionIdNo")),
                                   .QtyOnHand = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("QtyOnHand")),
-                                  .UnitCost = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("UnitCost"))
+                                  .TotalCost = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("TotalCost")),
+                                  .TransactionIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("TransactionIdNo")),
+                                  .UnitCost = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("UnitCost")),
+                                  .UnitSalesPrice = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("UnitSalesPrice")),
+                                  .WarehouseIdNo = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("WarehouseIdNo"))
                                   }
 
         Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of Inventory).DelUpdateTvp
@@ -189,7 +191,6 @@ Namespace DataLayer.AdoNet
             retVal = Db.ExecuteSqlTransaction("UpdateInvReferenceNumber", sql1, sql2)
             Return retVal
         End Function
-
 
     End Class
 

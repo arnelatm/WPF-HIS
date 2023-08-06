@@ -321,6 +321,7 @@
     <Compile Include="BusinessLayer\Supplier.vb" />
     <Compile Include="ContainerConfig.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
+    <Compile Include="DataLayer\AdoNet\InventoryDao.vb" />
     <Compile Include="DataLayer\AdoNet\DoctorDao.vb" />
     <Compile Include="DataLayer\AdoNet\DosagePrintingDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\DurationDao.vb" />
@@ -523,6 +524,8 @@
     <Compile Include="PresentationLayer\Models\PensionSchemeModel.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\ProductFinderPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\InventorySelectorPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\InvTransTypePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\DurationPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\DosageMasterPresenter.vb" />
@@ -618,6 +621,9 @@
     <Compile Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsFinder.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Interfaces\IProductFinderView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IInventoryView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IInventorySelectorView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\InvTransTypeEntryTv.designer.vb">
       <DependentUpon>InvTransTypeEntryTv.vb</DependentUpon>
     </Compile>

@@ -72,12 +72,12 @@ Namespace Accounts
 
         End Function
 
-        Public Function GetScannedData(cText As String) As ExpandoObject
+        Public Function GetQrCodeInfo(qrCodeText As String) As ExpandoObject
             Dim product As Object
             product = New ExpandoObject
-            Dim dataLength = Len(cText)
+            Dim dataLength = Len(qrCodeText)
             Dim i As Int16 = 0
-            Dim ai As String = Mid(cText, 1, 2)
+            Dim ai As String = Mid(qrCodeText, 1, 2)
             Dim lastPosition As Int16 = 2
             Dim expiryDate As Date = Nothing
             Dim batchNo As String = Nothing
@@ -85,11 +85,11 @@ Namespace Accounts
             While lastPosition < dataLength
                 Select Case ai
                     Case "01" 'GTIN
-                        CType(product, IDictionary(Of String, Object))("GTin") = Mid(cText, lastPosition + 1, 14)
+                        CType(product, IDictionary(Of String, Object))("GTin") = Mid(qrCodeText, lastPosition + 1, 14)
                         lastPosition += 14
                     Case "17" 'Expiry Date
                         Dim cExpDate As String = ""
-                        cExpDate = Mid(cText, lastPosition + 1, 6)
+                        cExpDate = Mid(qrCodeText, lastPosition + 1, 6)
                         If Right(cExpDate, 2) = "00" Then
                             cExpDate = Mid(cExpDate, 1, 4) + "01"
                         End If
@@ -98,15 +98,15 @@ Namespace Accounts
                         CType(product, IDictionary(Of String, Object))("ExpiryDate") = dExpDate
                         lastPosition += 6
                     Case "11" 'manufacture date
-                        CType(product, IDictionary(Of String, Object))("ManufactureDate") = Mid(cText, lastPosition + 1, 6)
+                        CType(product, IDictionary(Of String, Object))("ManufactureDate") = Mid(qrCodeText, lastPosition + 1, 6)
                         lastPosition += 6
                     Case "10" ' Batch Number
                         For i = lastPosition + 1 To dataLength
-                            If Mid(cText, i, 4) = "<GS>" Or Mid(cText, i, 1) = ChrW(13) Or i >= dataLength Then ' separator
+                            If Mid(qrCodeText, i, 4) = "<GS>" Or Mid(qrCodeText, i, 1) = ChrW(13) Or i >= dataLength Then ' separator
                                 If i >= dataLength Then
-                                    batchNo = Mid(cText, lastPosition + 1)
+                                    batchNo = Mid(qrCodeText, lastPosition + 1)
                                 Else
-                                    batchNo = Mid(cText, lastPosition + 1, i - lastPosition - 1)
+                                    batchNo = Mid(qrCodeText, lastPosition + 1, i - lastPosition - 1)
                                 End If
                                 lastPosition = i + 3
                                 Exit For
@@ -123,11 +123,11 @@ Namespace Accounts
                     Case "21" ' Serialization No.
                         Dim serialNo As String = Nothing
                         For i = lastPosition + 1 To dataLength
-                            If Mid(cText, i, 4) = "<GS>" Or Mid(cText, i, 1) = ChrW(13) Or i >= dataLength Then
+                            If Mid(qrCodeText, i, 4) = "<GS>" Or Mid(qrCodeText, i, 1) = ChrW(13) Or i >= dataLength Then
                                 If i >= dataLength Then
-                                    serialNo = Mid(cText, lastPosition + 1)
+                                    serialNo = Mid(qrCodeText, lastPosition + 1)
                                 Else
-                                    serialNo = Mid(cText, lastPosition + 1, i - lastPosition - 1)
+                                    serialNo = Mid(qrCodeText, lastPosition + 1, i - lastPosition - 1)
                                 End If
                                 lastPosition = i + 3
                                 Exit For
@@ -144,7 +144,7 @@ Namespace Accounts
                 If lastPosition >= dataLength Then
                     Exit While
                 Else
-                    ai = Mid(cText, lastPosition + 1, 2)
+                    ai = Mid(qrCodeText, lastPosition + 1, 2)
                     If ai = vbLf Or ai = vbCrLf Or ai = vbLf & vbCr Then
                         Exit While
                     End If

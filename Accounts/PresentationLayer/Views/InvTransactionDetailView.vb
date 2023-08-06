@@ -14,6 +14,7 @@ Namespace PresentationLayer.Views
         Public Property Errors As List(Of String) Implements IView.Errors
         Public Property ExpiryDate As Date? Implements IInvTransactionDetailView.ExpiryDate
         Public Property IdNo As Int32 Implements IInvTransactionDetailView.IdNo
+        Public Property InventoryIdNo As Int32 Implements IInvTransactionDetailView.InventoryIdNo
         Public Property InvTransactionIdNo As Int32 Implements IInvTransactionDetailView.InvTransactionIdNo
         Public Property NeedsExpiryDate As Boolean Implements IInvTransactionDetailView.NeedsExpiryDate
         Public Property NetAmount As Decimal Implements IInvTransactionDetailView.NetAmount
@@ -26,7 +27,8 @@ Namespace PresentationLayer.Views
         Public Property UnitCost As Decimal Implements IInvTransactionDetailView.UnitCost
         Public Property UnitCount As Int16 Implements IInvTransactionDetailView.UnitCount
         Public Property UnitIdNo As Int16 Implements IInvTransactionDetailView.UnitIdNo
-
+        Public Property OriginalUnitIdNo As Short Implements IInvTransactionDetailView.OriginalUnitIdNo
+        Public Property OriginalUnitCost As Decimal Implements IInvTransactionDetailView.OriginalUnitCost
 
     End Class
 
