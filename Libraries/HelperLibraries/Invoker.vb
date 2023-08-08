@@ -4,7 +4,7 @@ Imports System.Windows.Forms
 Public NotInheritable Class Invoker
 
     Private Const InvokePublicMethodFlags As BindingFlags = BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.InvokeMethod
-    Private Const GetPublicPropertyFlags As BindingFlags = BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.GetProperty
+    Private Const GetPublicPropertyFlags As BindingFlags = BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.GetProperty Or BindingFlags.IgnoreCase
     Private Const GetPublicFieldFlags As BindingFlags = BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.GetField
     Private Const SetPublicPropertyFlags As BindingFlags = BindingFlags.Public Or BindingFlags.Instance Or BindingFlags.SetProperty
     Private Const SetPublicNonPublicPropertyFieldFlags As BindingFlags = BindingFlags.Public Or BindingFlags.NonPublic Or BindingFlags.Instance Or BindingFlags.SetProperty Or BindingFlags.SetField

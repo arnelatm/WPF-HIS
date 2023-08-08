@@ -13,7 +13,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Created_By_Branch As String
         Property DosageForm As String
         Property GenericName As String
-        Property GTIN As String
+        Property GTin As String
         Property IdNo As Int32
         Property ItemDetailsCode As String
         Property ItemDetailsName As String

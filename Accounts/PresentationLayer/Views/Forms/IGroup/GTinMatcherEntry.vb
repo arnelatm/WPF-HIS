@@ -1,5 +1,6 @@
 ﻿Imports System.Configuration
 Imports System.Globalization
+Imports System.Windows.Documents
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.CBaseControlsLibrary
@@ -87,7 +88,7 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public WriteOnly Property currentIndex As Integer Implements IGTinMatcherView.CurrentIndex
-            Set(value As Integer)
+Set(value As Integer)
                 If not _startedByItemGrid Then
                     If DataGridViewItems.Rows.Count > value And value > 0 Then
                         DataGridViewItems.CurrentCell = DataGridViewItems(0, value)
@@ -268,7 +269,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property GTin As String Implements IItemDetailsView.GTIN
+        Public Property GTin As String Implements IItemDetailsView.GTin
             Get
                 Return txtGTIN.Text
             End Get
@@ -296,7 +297,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DrugTradeName As String Implements IGTinMatcherView.DrugTradeName
             Get
-                Return txtDrugTradeName.GetValue(Of Int32)
+                Return txtDrugTradeName.GetValue(Of String)
             End Get
             Set(value As String)
                 txtDrugTradeName.SetValue(value)
@@ -305,7 +306,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Overloads Property DrugGenericName As String Implements IGTinMatcherView.DrugGenericName
             Get
-                Return txtDrugGenericName.GetValue(Of Int32)
+                Return txtDrugGenericName.GetValue(Of String)
             End Get
             Set
                 txtDrugGenericName.SetValue(Value)
@@ -314,7 +315,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DrugRegistrationNo As String Implements IGTinMatcherView.DrugRegistrationNo
             Get
-                Return txtDrugRegistrationNo.GetValue(Of Int32)
+                Return txtDrugRegistrationNo.GetValue(Of String)
             End Get
             Set
                 txtDrugRegistrationNo.SetValue(Value)
@@ -323,7 +324,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DrugUnitOfStrength As String Implements IGTinMatcherView.DrugUnitOfStrength
             Get
-                Return txtDrugUnitOfStrength.GetValue(Of Int32)
+                Return txtDrugUnitOfStrength.GetValue(Of String)
             End Get
             Set(value As String)
                 txtDrugUnitOfStrength.SetValue(value)
@@ -332,7 +333,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DrugUnitOfVolume As String Implements IGTinMatcherView.DrugUnitOfVolume
             Get
-                Return txtDrugUnitOfVolume.GetValue(Of Int32)
+                Return txtDrugUnitOfVolume.GetValue(Of String)
             End Get
             Set(value As String)
                 txtDrugUnitOfVolume.SetValue(value)
@@ -341,7 +342,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DrugPackageType As String Implements IGTinMatcherView.DrugPackageType
             Get
-                Return txtDrugPackageType.GetValue(Of Int32)
+                Return txtDrugPackageType.GetValue(Of String)
             End Get
             Set(value As String)
                 txtDrugPackageType.SetValue(value)
@@ -350,7 +351,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DrugDosageForm As String Implements IGTinMatcherView.DrugDosageForm
             Get
-                Return txtDrugDosageForm.GetValue(Of Int32)
+                Return txtDrugDosageForm.GetValue(Of String)
             End Get
             Set(value As String)
                 txtDrugDosageForm.SetValue(value)
@@ -359,7 +360,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DrugRouteOfAdministration As String Implements IGTinMatcherView.DrugRouteOfAdministration
             Get
-                Return txtDrugRouteOfAdministration.GetValue(Of Int32)
+                Return txtDrugRouteOfAdministration.GetValue(Of String)
             End Get
             Set(value As String)
                 txtDrugRouteOfAdministration.SetValue(value)
@@ -367,8 +368,8 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property DrugVolume As Double? Implements IGTinMatcherView.DrugVolume
-            Get
-                txtDrugVolume.GetValue(Of Int32)()
+Get
+                txtDrugVolume.GetValue(Of Double?)()
             End Get
             Set
                 txtDrugVolume.SetValue(Value)
@@ -404,7 +405,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DrugPublicPrice As Decimal Implements IGTinMatcherView.DrugPublicPrice
             Get
-                Return txtDrugPublicPrice.GetValue(Of Int32)
+                Return txtDrugPublicPrice.GetValue(Of Decimal)
             End Get
             Set
                 txtDrugPublicPrice.SetValue(Value)
@@ -446,6 +447,7 @@ Namespace PresentationLayer.Views.Forms
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {{"DosageForm", cboDosageForm},
                 {"GenericName", txtGenericName},
+                {"GTin", txtGTIN},
                 {"IdNo", TxtIdNo},
                 {"ItemDetailsCode", TxtItemDetailsCode},
                 {"ItemDetailsName", TxtItemDetailsName},

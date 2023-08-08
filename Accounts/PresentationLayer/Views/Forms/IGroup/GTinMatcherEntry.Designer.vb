@@ -22,144 +22,144 @@
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(GTinMatcherEntry))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblGTIN = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.btnScanQrCode = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.EventLog1 = New System.Diagnostics.EventLog()
-        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.BnItems = New System.Windows.Forms.BindingNavigator(Me.components)
-        Me.btnItemsBnAddNewItem = New System.Windows.Forms.ToolStripButton()
-        Me.tsDrugsCount = New System.Windows.Forms.ToolStripLabel()
-        Me.btnItemsBnDeleteItem = New System.Windows.Forms.ToolStripButton()
-        Me.btnFirstItem = New System.Windows.Forms.ToolStripButton()
-        Me.btnPrevItem = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.tsItemsCurrentRecord = New System.Windows.Forms.ToolStripTextBox()
-        Me.tsItemsCount = New System.Windows.Forms.ToolStripLabel()
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.btnNextItem = New System.Windows.Forms.ToolStripButton()
-        Me.btnLastItem = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
-        Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.TxtItemDetailsCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel6 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtQtyOnHand = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel9 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblPrice_Cash = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtPrice_Cash = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblPacking = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtPack1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtpack2 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtpack3 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.txtGTIN = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.TxtItemDetailsName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblGenericName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtGenericName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblRegistrationCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtRegistrationNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblDosageForm = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboDosageForm = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-        Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtStrengthValue = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblUnitOfStrength = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboUnitOfStrength = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-        Me.lblVolume = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtVolume = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblUnitOfVolume = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboUnitOfVolume = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-        Me.lblPackageType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPackageType = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-        Me.cboPackageSize = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtPackageSize = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboRouteOfAdministration = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-        Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.BnDrugs = New System.Windows.Forms.BindingNavigator(Me.components)
-        Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton()
-        Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton()
-        Me.BindingNavigatorSeparator = New System.Windows.Forms.ToolStripSeparator()
-        Me.tsDrugsCurrentRecord = New System.Windows.Forms.ToolStripTextBox()
-        Me.BindingNavigatorSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton()
-        Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton()
-        Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.btnDrugBnAddNewItem = New System.Windows.Forms.ToolStripButton()
-        Me.btnDrugBnDeleteItem = New System.Windows.Forms.ToolStripButton()
-        Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDrugIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.lblPublicPrice = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDrugPublicPrice = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDrugGTin = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel7 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDrugTradeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel8 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDrugGenericName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel10 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDrugRegistrationNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel11 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDrugDosageForm = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel12 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDrugStrengthValue = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel13 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDrugUnitOfStrength = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel14 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDrugVolume = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel15 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDrugUnitOfVolume = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel16 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDrugPackageType = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel17 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDrugPackageSize = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.CLabel18 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.txtDrugRouteOfAdministration = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.DataGridViewItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.DataGridViewDrugs = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.EventLog1,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.CFlowLayout1.SuspendLayout
-        CType(Me.BnItems,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.BnItems.SuspendLayout
-        Me.CFlowLayout2.SuspendLayout
-        CType(Me.BnDrugs,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.BnDrugs.SuspendLayout
-        Me.CFlowLayout3.SuspendLayout
-        CType(Me.DataGridViewItems,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.DataGridViewDrugs,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.SuspendLayout
-        '
-        'TxtIdNo
-        '
-        Me.TxtIdNo.BackColor = System.Drawing.Color.White
-        Me.TxtIdNo.BegFindValue = Nothing
-        Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TxtIdNo.ComputedValue = false
-        Me.TxtIdNo.CustomFormat = Nothing
-        Me.TxtIdNo.DataBoundControl = true
-        Me.TxtIdNo.DisplayOnly = true
-        Me.TxtIdNo.EditingMode = true
-        Me.TxtIdNo.EndFindValue = Nothing
-        Me.TxtIdNo.FieldDescription = Nothing
-        Me.TxtIdNo.FieldName = Nothing
-        Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.TxtIdNo.FindEnabled = true
-        Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
-        Me.TxtIdNo.LinkedLabel = Nothing
-        Me.TxtIdNo.Location = New System.Drawing.Point(106, 26)
-        Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
-        Me.TxtIdNo.MaximumValue = Nothing
-        Me.TxtIdNo.MinimumValue = Nothing
-        Me.TxtIdNo.Name = "TxtIdNo"
-        Me.TxtIdNo.OldValue = ""
+            Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblGTIN = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.btnScanQrCode = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.EventLog1 = New System.Diagnostics.EventLog()
+            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.BnItems = New System.Windows.Forms.BindingNavigator(Me.components)
+            Me.btnItemsBnAddNewItem = New System.Windows.Forms.ToolStripButton()
+            Me.tsDrugsCount = New System.Windows.Forms.ToolStripLabel()
+            Me.btnItemsBnDeleteItem = New System.Windows.Forms.ToolStripButton()
+            Me.btnFirstItem = New System.Windows.Forms.ToolStripButton()
+            Me.btnPrevItem = New System.Windows.Forms.ToolStripButton()
+            Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+            Me.tsItemsCurrentRecord = New System.Windows.Forms.ToolStripTextBox()
+            Me.tsItemsCount = New System.Windows.Forms.ToolStripLabel()
+            Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+            Me.btnNextItem = New System.Windows.Forms.ToolStripButton()
+            Me.btnLastItem = New System.Windows.Forms.ToolStripButton()
+            Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+            Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.TxtItemDetailsCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel6 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtQtyOnHand = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel9 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblPrice_Cash = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPrice_Cash = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblPacking = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPack1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtpack2 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtpack3 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.txtGTIN = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.TxtItemDetailsName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblGenericName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtGenericName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblRegistrationCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtRegistrationNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblDosageForm = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboDosageForm = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtStrengthValue = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblUnitOfStrength = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboUnitOfStrength = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.lblVolume = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtVolume = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblUnitOfVolume = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboUnitOfVolume = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.lblPackageType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboPackageType = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboPackageSize = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtPackageSize = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboRouteOfAdministration = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.BnDrugs = New System.Windows.Forms.BindingNavigator(Me.components)
+            Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton()
+            Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton()
+            Me.BindingNavigatorSeparator = New System.Windows.Forms.ToolStripSeparator()
+            Me.tsDrugsCurrentRecord = New System.Windows.Forms.ToolStripTextBox()
+            Me.BindingNavigatorSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+            Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton()
+            Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton()
+            Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+            Me.btnDrugBnAddNewItem = New System.Windows.Forms.ToolStripButton()
+            Me.btnDrugBnDeleteItem = New System.Windows.Forms.ToolStripButton()
+            Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDrugIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblPublicPrice = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDrugPublicPrice = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDrugGTin = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel7 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDrugTradeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel8 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDrugGenericName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel10 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDrugRegistrationNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel11 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDrugDosageForm = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel12 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDrugStrengthValue = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel13 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDrugUnitOfStrength = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel14 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDrugVolume = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel15 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDrugUnitOfVolume = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel16 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDrugPackageType = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel17 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDrugPackageSize = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.CLabel18 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtDrugRouteOfAdministration = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.DataGridViewItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewDrugs = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.CFlowLayout1.SuspendLayout()
+            CType(Me.BnItems, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.BnItems.SuspendLayout()
+            Me.CFlowLayout2.SuspendLayout()
+            CType(Me.BnDrugs, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.BnDrugs.SuspendLayout()
+            Me.CFlowLayout3.SuspendLayout()
+            CType(Me.DataGridViewItems, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.DataGridViewDrugs, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.SuspendLayout()
+            '
+            'TxtIdNo
+            '
+            Me.TxtIdNo.BackColor = System.Drawing.Color.White
+            Me.TxtIdNo.BegFindValue = Nothing
+            Me.TxtIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.TxtIdNo.ComputedValue = False
+            Me.TxtIdNo.CustomFormat = Nothing
+            Me.TxtIdNo.DataBoundControl = True
+            Me.TxtIdNo.DisplayOnly = True
+            Me.TxtIdNo.EditingMode = True
+            Me.TxtIdNo.EndFindValue = Nothing
+            Me.TxtIdNo.FieldDescription = Nothing
+            Me.TxtIdNo.FieldName = Nothing
+            Me.TxtIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.TxtIdNo.FindEnabled = True
+            Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
+            Me.TxtIdNo.LinkedLabel = Nothing
+            Me.TxtIdNo.Location = New System.Drawing.Point(106, 26)
+            Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.TxtIdNo.MaximumValue = Nothing
+            Me.TxtIdNo.MinimumValue = Nothing
+            Me.TxtIdNo.Name = "TxtIdNo"
+            Me.TxtIdNo.OldValue = ""
             Me.TxtIdNo.OverrideMaxLength = 0
             Me.TxtIdNo.ReadOnly = True
             Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -819,6 +819,7 @@
             Me.cboDosageForm.DataValue = Nothing
             Me.cboDosageForm.DefaultValue = Nothing
             Me.cboDosageForm.DisplayMember = "Name"
+            Me.cboDosageForm.Editable = True
             Me.cboDosageForm.EditingMode = True
             Me.cboDosageForm.EndFindValue = Nothing
             Me.cboDosageForm.FieldDescription = Nothing
@@ -833,6 +834,7 @@
             Me.cboDosageForm.HideWhenNotEditingOrAdding = False
             Me.cboDosageForm.IgnoreCase = False
             Me.cboDosageForm.IntegralHeight = False
+            Me.cboDosageForm.LimitToList = False
             Me.cboDosageForm.LinkedLabel = Nothing
             Me.cboDosageForm.Location = New System.Drawing.Point(387, 151)
             Me.cboDosageForm.Margin = New System.Windows.Forms.Padding(1)
@@ -921,6 +923,7 @@
             Me.cboUnitOfStrength.DataValue = Nothing
             Me.cboUnitOfStrength.DefaultValue = Nothing
             Me.cboUnitOfStrength.DisplayMember = "Name"
+            Me.cboUnitOfStrength.Editable = True
             Me.cboUnitOfStrength.EditingMode = True
             Me.cboUnitOfStrength.EndFindValue = Nothing
             Me.cboUnitOfStrength.FieldDescription = Nothing
@@ -935,6 +938,7 @@
             Me.cboUnitOfStrength.HideWhenNotEditingOrAdding = False
             Me.cboUnitOfStrength.IgnoreCase = False
             Me.cboUnitOfStrength.IntegralHeight = False
+            Me.cboUnitOfStrength.LimitToList = False
             Me.cboUnitOfStrength.LinkedLabel = Nothing
             Me.cboUnitOfStrength.Location = New System.Drawing.Point(387, 176)
             Me.cboUnitOfStrength.Margin = New System.Windows.Forms.Padding(1)
@@ -1024,6 +1028,7 @@
             Me.cboUnitOfVolume.DataValue = Nothing
             Me.cboUnitOfVolume.DefaultValue = Nothing
             Me.cboUnitOfVolume.DisplayMember = "Name"
+            Me.cboUnitOfVolume.Editable = True
             Me.cboUnitOfVolume.EditingMode = True
             Me.cboUnitOfVolume.EndFindValue = Nothing
             Me.cboUnitOfVolume.FieldDescription = Nothing
@@ -1038,6 +1043,7 @@
             Me.cboUnitOfVolume.HideWhenNotEditingOrAdding = False
             Me.cboUnitOfVolume.IgnoreCase = False
             Me.cboUnitOfVolume.IntegralHeight = False
+            Me.cboUnitOfVolume.LimitToList = False
             Me.cboUnitOfVolume.LinkedLabel = Nothing
             Me.cboUnitOfVolume.Location = New System.Drawing.Point(387, 201)
             Me.cboUnitOfVolume.Margin = New System.Windows.Forms.Padding(1)
@@ -1083,6 +1089,7 @@
             Me.cboPackageType.DataValue = Nothing
             Me.cboPackageType.DefaultValue = Nothing
             Me.cboPackageType.DisplayMember = "Name"
+            Me.cboPackageType.Editable = True
             Me.cboPackageType.EditingMode = True
             Me.cboPackageType.EndFindValue = Nothing
             Me.cboPackageType.FieldDescription = Nothing
@@ -1096,6 +1103,7 @@
             Me.cboPackageType.HideWhenNotEditingOrAdding = False
             Me.cboPackageType.IgnoreCase = False
             Me.cboPackageType.IntegralHeight = False
+            Me.cboPackageType.LimitToList = False
             Me.cboPackageType.LinkedLabel = Nothing
             Me.cboPackageType.Location = New System.Drawing.Point(106, 226)
             Me.cboPackageType.Margin = New System.Windows.Forms.Padding(1)
@@ -1186,6 +1194,7 @@
             Me.cboRouteOfAdministration.DataValue = Nothing
             Me.cboRouteOfAdministration.DefaultValue = Nothing
             Me.cboRouteOfAdministration.DisplayMember = "Name"
+            Me.cboRouteOfAdministration.Editable = True
             Me.cboRouteOfAdministration.EditingMode = True
             Me.cboRouteOfAdministration.EndFindValue = Nothing
             Me.cboRouteOfAdministration.FieldDescription = Nothing
@@ -1200,6 +1209,7 @@
             Me.cboRouteOfAdministration.HideWhenNotEditingOrAdding = False
             Me.cboRouteOfAdministration.IgnoreCase = False
             Me.cboRouteOfAdministration.IntegralHeight = False
+            Me.cboRouteOfAdministration.LimitToList = False
             Me.cboRouteOfAdministration.LinkedLabel = Nothing
             Me.cboRouteOfAdministration.Location = New System.Drawing.Point(106, 251)
             Me.cboRouteOfAdministration.Margin = New System.Windows.Forms.Padding(1)
@@ -2016,6 +2026,7 @@
             '
             DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
             Me.DataGridViewItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+            Me.DataGridViewItems.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
             Me.DataGridViewItems.BegFindValue = Nothing
             Me.DataGridViewItems.Cached = False
             Me.DataGridViewItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -2060,6 +2071,7 @@
             '
             DataGridViewCellStyle3.BackColor = System.Drawing.Color.FloralWhite
             Me.DataGridViewDrugs.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
+            Me.DataGridViewDrugs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader
             Me.DataGridViewDrugs.BegFindValue = Nothing
             Me.DataGridViewDrugs.Cached = False
             Me.DataGridViewDrugs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -2102,18 +2114,18 @@
             '
             'GTinMatcherEntry
             '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
-        Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
-        Me.ClientSize = New System.Drawing.Size(1284, 709)
-        Me.Controls.Add(Me.CFlowLayout3)
-        Me.Controls.Add(Me.btnOk)
-        Me.Name = "GTinMatcherEntry"
-        Me.Text = "Item Details Entry"
-        Me.Controls.SetChildIndex(Me.btnOk, 0)
-        Me.Controls.SetChildIndex(Me.CFlowLayout3, 0)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.EventLog1,System.ComponentModel.ISupportInitialize).EndInit
-        Me.CFlowLayout1.ResumeLayout(false)
+            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+            Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
+            Me.ClientSize = New System.Drawing.Size(1284, 709)
+            Me.Controls.Add(Me.CFlowLayout3)
+            Me.Controls.Add(Me.btnOk)
+            Me.Name = "GTinMatcherEntry"
+            Me.Text = "Item Details Entry"
+            Me.Controls.SetChildIndex(Me.btnOk, 0)
+            Me.Controls.SetChildIndex(Me.CFlowLayout3, 0)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.CFlowLayout1.ResumeLayout(false)
         Me.CFlowLayout1.PerformLayout
         CType(Me.BnItems,System.ComponentModel.ISupportInitialize).EndInit
         Me.BnItems.ResumeLayout(false)
