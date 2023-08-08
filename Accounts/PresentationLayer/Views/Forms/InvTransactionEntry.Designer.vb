@@ -1138,6 +1138,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtAmount.Size = New System.Drawing.Size(100, 23)
             Me.txtAmount.TabIndex = 274
+            Me.txtAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtAmount.Translatable = False
             '
             'ProductTableAdapter

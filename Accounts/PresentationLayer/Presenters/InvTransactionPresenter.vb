@@ -29,6 +29,7 @@ Namespace PresentationLayer.Presenters
             SortOrderKey = "IdNo"
             DtInsertTable.Columns.Add("BatchNo", GetType(String))
             DtInsertTable.Columns.Add("ExpiryDate", GetType(Date))
+            DtInsertTable.Columns.Add("InventoryIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("InvTransactionIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("NetAmount", GetType(Decimal))
             DtInsertTable.Columns.Add("ProductIdNo", GetType(Int16))
@@ -40,6 +41,7 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("BatchNo", GetType(String))
             DtUpdateTable.Columns.Add("ExpiryDate", GetType(Date))
             DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("InventoryIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("InvTransactionIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("NetAmount", GetType(Decimal))
             DtUpdateTable.Columns.Add("ProductIdNo", GetType(Int16))
@@ -87,6 +89,7 @@ Namespace PresentationLayer.Presenters
         Private Sub FillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("BatchNo") = itemDataView.BatchNo
             workRow("ExpiryDate") = IIf(itemDataView.ExpiryDate Is Nothing, DBNull.Value, itemDataView.ExpiryDate)
+            workRow("InventoryIdNo") = itemDataView.InventoryIdNo
             workRow("InvTransactionIdNo") = View.IdNo
             workRow("NetAmount") = itemDataView.NetAmount
             workRow("ProductIdNo") = itemDataView.ProductIdNo
@@ -120,6 +123,14 @@ Namespace PresentationLayer.Presenters
                         Exit For
                     End If
                 Next
+                If retValue Then
+                    If View.InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
+                        If View.WarehouseToIdNo Is Nothing OrElse View.WarehouseToIdNo = 0 Then
+                            retValue = False
+                            Messaging.Show(True, "MsgWareHouseToBlank")
+                        End If
+                    End If
+                End If
             Else
                 retValue = False
             End If
@@ -291,31 +302,34 @@ Namespace PresentationLayer.Presenters
                 View.ProductCodeIsValid = True
                 'allow null Product Code, since user can enter Product Name instead of Product Code.
             Else
-                If productCode <> View.InvTransactionDetailsBs.Current.ProductCode Then
-                    Dim inventory As New List(Of InventoryModel)
-                    inventory = Service.GetRecordsWithGroupIdNo(Of InventoryModel)(product.IdNo, "ExpiryDate")
-                    View.InvTransactionDetailsBs.Current.ProductIdNo = product.IdNo
-                    View.InvTransactionDetailsBs.Current.ProductName = product.ProductName
-                    View.InvTransactionDetailsBs.Current.UnitIdNo = product.BaseUnitIdNo
-                    If inventory.Count() = 1 Then
-                        UpdateInvTransactionDetail(inventory, 0)
-                        'View.InvTransactionDetailsBs.Current.ProductCode = product.ProductCode
-                    ElseIf inventory.Count() > 1 Then
-                        SelectInventory(inventory, control)
+                'If productCode <> View.InvTransactionDetailsBs.Current.ProductCode Then
+                ' always check even if the same code as before, stock values may have changed
+                ' since the last editing
+                Dim inventory As New List(Of InventoryModel)
+                inventory = Service.GetRecordsWithGroupIdNo(Of InventoryModel)(product.IdNo, "ExpiryDate")
+                View.InvTransactionDetailsBs.Current.ProductIdNo = product.IdNo
+                View.InvTransactionDetailsBs.Current.ProductName = product.ProductName
+                View.InvTransactionDetailsBs.Current.UnitIdNo = product.BaseUnitIdNo
+                If inventory.Count() = 1 Then
+                    UpdateInvTransactionDetail(inventory, 0)
+                    'View.InvTransactionDetailsBs.Current.ProductCode = product.ProductCode
+                ElseIf inventory.Count() > 1 Then
+                    SelectInventory(inventory, control)
+                Else
+                    If View.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Then
+                        Messaging.Show(True, "MsgNoSuchInventory", "Error")
+                        View.ProductCodeIsValid = False
                     Else
-                        If View.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Then
-                            Messaging.Show(True, "MsgNoSuchInventory", "Error")
-                            View.ProductCodeIsValid = False
-                        Else
-                            View.ProductCodeIsValid = True
-                        End If
-                        View.ProductInventory = inventory
                         View.ProductCodeIsValid = True
                     End If
-                Else
-                    View.ProductCodeIsValid = False
-                    Messaging.Show(True, "Invalid Product Code!")
+                    View.ProductInventory = inventory
+                    View.ProductCodeIsValid = True
                 End If
+                'Else
+                ' same no need to change
+                'View.ProductCodeIsValid = True
+                'Messaging.Show(True, "Invalid Product Code!")
+                'End If
             End If
         End Sub
 
@@ -370,10 +384,10 @@ Namespace PresentationLayer.Presenters
                 .Quantity = SetInitialQuantity(inventory(selectedIndex))
                 .BatchNo = inventory(selectedIndex).BatchNo
                 .ExpiryDate = inventory(selectedIndex).ExpiryDate
+                .InventoryIdNo = inventory(selectedIndex).IdNo
                 .UnitCost = inventory(selectedIndex).UnitCost
                 .NetAmount = inventory(selectedIndex).UnitCost * inventory(selectedIndex).QtyOnHand
                 .OriginalUnitCost = inventory(selectedIndex).UnitCost
-                .InventoryIdNo = inventory(selectedIndex).IdNo
             End With
             View.ProductInventory = inventory
             View.ProductCodeIsValid = True
@@ -615,6 +629,7 @@ Namespace PresentationLayer.Presenters
                                         .ProductCode = product.ProductCode
                                         .BatchNo = inventory(0).BatchNo
                                         .ExpiryDate = inventory(0).ExpiryDate
+                                        .InventoryIdNo = inventory(0).IdNo
                                         .UnitCost = inventory(0).UnitCost
                                         .NetAmount = inventory(0).UnitCost * inventory(0).QtyOnHand
                                     End With
@@ -638,6 +653,7 @@ Namespace PresentationLayer.Presenters
                 End Select
             End With
         End Sub
+
     End Class
 
 End Namespace

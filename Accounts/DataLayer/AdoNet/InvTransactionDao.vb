@@ -1,6 +1,11 @@
-﻿Imports AATM.Accounts.BusinessLayer
+﻿Imports System.Data.SqlClient
+Imports System.Web.UI.WebControls.Expressions
+Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.DataLayer.AdoNet.Db
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace DataLayer.AdoNet
@@ -100,27 +105,69 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function PostData(idNo As Integer) As Boolean Implements IDaoPosting.PostData
-
-            Dim retVal As Boolean
-            'Dim commands As New List(Of DaoCommand)
-            'Dim command1, command2 As New DaoCommand
-            'command1.Add("Select Case a.IdNo,a.ProductIdNo,(a.Quantity+a.BonusQuantity) * c.BaseQty / c.UnitQty,b.WarehouseIdNo " &
-            '             "From InvTransactionDetail a Left Join InvTransaction b On a.InvTransactionIdNo = b.IdNo " &
-            '             "Left Join ProductUnit_View c On a.ProductIdNo = c.ProductIdNo And a.UnitIdNo = c.UnitIdNo ", {"@IdNo", idNo})
-            'commands.Add(command1)
-            'command2.Add("Update InvTransaction set Posted = 1 where IdNo = @IdNo", {"@IdNo", idNo})
-            'commands.Add(command2)
-            'retVal = Db.ExecuteNonQueryCommands("PostInvTransaction", commands)
+            Dim retVal As Boolean = True
+            Dim commands As New List(Of DaoCommand)
+            Dim invTransDetails As List(Of InvTransactionDetail)
+            Dim itDao = New InvTransactionDetailDao
+            invTransDetails = itDao.GetRecordsWithGroupIdNo(idNo)
+            Dim InvTrans As InvTransaction = GetRecordByIdNo(idNo)
+            Dim InventoryAction As String
+            Dim warehouseToIdNo As Int16
+            Dim sqls As New List(Of String)
+            InventoryAction = GetField(Of String, Int16)(InvTrans.InvTransTypeIdNo, "InvTransType", "IdNo", "InventoryAction")
+            warehouseToIdNo = InvTrans.WarehouseToIdNo
+            If InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
+                Dim connection As New Db
+                Dim transactionObj As New TransactionObject()
+                transactionObj.CreateConnection("InvTransactionPosting", Db.GetConnectionString)
+                For Each item As InvTransactionDetail In invTransDetails
+                    Dim parameters As Object = {"@InvTransactionDetailIdNo", item.IdNo,
+                                                "@InventoryIdNo", item.InventoryIdNo,
+                                                "@InvTransactionIdNo", InvTrans.IdNo,
+                                                "@WarehouseIdNo", InvTrans.WarehouseToIdNo}
+                    retVal = Db.RunSqlStoredProcedure("PostInvTransactionDetail2", parameters)
+                    'Dim sql As String
+                    'sql = "Update Inventory set qtyonhand = qtyonhand - " &
+                    '      "(select IIf(c.UnitQTy = 0,0,(cast(a.Quantity as Decimal(12,2)) * c.BaseQty / c.UnitQty)) " &
+                    '      "From InvTransactionDetail a " &
+                    '      "Left Join InvTransaction b " &
+                    '      "On a.InvTransactionIdNo = b.IdNo " &
+                    '      "Left Join ProductUnit_View c " &
+                    '      "On a.ProductIdNo = c.ProductIdNo And a.UnitIdNo = c.UnitIdNo " &
+                    '      "where a.IdNo = @InvTransactionDetailIdNo) " &
+                    '      "where idNo = @InventoryIdNo "
+                    'transactionObj.Command.Parameters.Clear()
+                    'If Db.ExecuteSqlInTransaction(transactionObj, sql, {"@InvTransactionDetailIdNo", item.IdNo, "@InventoryIdNo", item.InventoryIdNo}) <> 0 Then
+                    '    retVal = False
+                    'End If
+                Next
+                Db.CloseTransaction(transactionObj)
+                'retVal = transactionObj.Success
+            End If
+            'retVal = Db.ExecuteMultiSqls("UpdateInventory", sqls)
             Return retVal
         End Function
 
-        Public Function GetRecordsWithGroupIdNo(idNo As Object, Optional sortExpression As Object = Nothing) As List(Of Inventory) Implements IDaoChild(Of Inventory).GetRecordsWithGroupIdNo
+        'Private Function ConvertToBaseUnitPrice(product As ProductModel, invTransactionDetail As InvTransactionDetailView)
+        '    Dim baseUnitPrice As Decimal
+        '    If invTransactionDetail.UnitIdNo = product.BaseUnitIdNo Then
+        '        baseUnitPrice = invTransactionDetail.UnitCost
+        '    Else
+        '        Dim productUnitIdNo As Int32 = GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(product.IdNo, invTransactionDetail.UnitIdNo, "ProductUnit", "ProductIdNo", "UnitIdNo", "IdNo")
+        '        Dim pUnitInfo = GetFieldsWithIdNo(productUnitIdNo, "ProductUnit", "UnitQty,BaseQty")
+        '        baseUnitPrice = IIf(pUnitInfo.BaseQty = 0, 0, invTransactionDetail.UnitCost * pUnitInfo.BaseQty / pUnitInfo.UnitQty)
+        '    End If
+        '    Return baseUnitPrice
+        'End Function
+
+
+        Public Function GetRecordsWithGroupIdNo(productIdNo As Object, Optional sortExpression As Object = Nothing) As List(Of Inventory) Implements IDaoChild(Of Inventory).GetRecordsWithGroupIdNo
             If sortExpression Is Nothing Then
                 sortExpression = "IdNo"
             End If
             Dim sql As String = "select BatchNo, ExpiryDate, IdNo, TotalCost, ProductIdNo, TransactionIdNo, QtyOnHand, UnitCost, UnitSalesPrice, WarehouseIdNo from Inventory_View " &
-                    "where ProductIdNo = @IdNo and QtyOnHand <> 0 and BranchIdNo = @BranchIdNo Order By " + sortExpression
-            Dim params() As Object = {"@IdNo", idNo, "@BranchIdNo", GlobalVariables.BranchIdNo}
+                    "where ProductIdNo = @ProductIdNo And QtyOnHand <> 0 And BranchIdNo = @BranchIdNo Order By " + sortExpression
+            Dim params() As Object = {"@ProductIdNo", productIdNo, "@BranchIdNo", GlobalVariables.BranchIdNo}
             Return Db.Read(sql, MakeInventory, params).ToList()
         End Function
 
