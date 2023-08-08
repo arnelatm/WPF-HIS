@@ -35,16 +35,35 @@ Namespace PresentationLayer.Presenters
                 ClearDrugDisplay()
                 ClearItemDrugDisplay()
             Else
-                Dim drugIdNo As Integer = GetDrugIdNo(View.GTIN)
+                Dim rowIndex As Integer = MatchingRowIndex(sender, "GTIN", gTinValue)
+                Dim drugIdNo As Integer = sender.Rows(rowIndex).Cells("IdNo").Value
                 Dim drug As Object = MakeDrug(drugIdNo)
                 If drug IsNot Nothing Then
                     DisplayDrug(drug)
-                    Dim drugPosId As Integer = Service.GetRecordPositionByKey(Of Integer)(drug.IdNo, "DrugList", "Trade Name", "IdNo")
-                    sender.FirstDisplayedScrollingRowIndex = drugPosId - 1
-                    sender.CurrentCell = sender.Rows(drugPosId - 1).Cells(0)
+                    sender.FirstDisplayedScrollingRowIndex = rowIndex
+                    sender.CurrentCell = sender.Rows(rowIndex).Cells(0)
                 End If
             End If
         End Sub
+
+        Public Shared Function MatchingRowIndex(ByVal dgv As DataGridView, ByVal columnName As String, ByVal searchValue As String) As Integer
+            Dim rowIndex As Integer = -1
+            Dim tempAllowUserToAddRows As Boolean = dgv.AllowUserToAddRows
+            dgv.AllowUserToAddRows = False
+
+            If dgv.Rows.Count > 0 AndAlso dgv.Columns.Count > 0 AndAlso dgv.Columns(columnName) IsNot Nothing Then
+                Dim row As DataGridViewRow = dgv.Rows.Cast(Of DataGridViewRow)().FirstOrDefault(Function(r) r.Cells(columnName).Value.ToString().Equals(searchValue))
+                rowIndex = row.Index
+            End If
+
+            dgv.AllowUserToAddRows = tempAllowUserToAddRows
+            Return rowIndex
+        End Function
+
+        'Private Sub UndeleteSectionInGrid(ByVal sectionLetter As String)
+        '    Dim sectionRowIndex As Integer = MatchingRowIndex(dgvSections, "SectionLetter", sectionLetter)
+        '    dgvSections.Rows(sectionRowIndex).Cells("DeleteSection").Value = False
+        'End Sub
 
         Private Function GetDrugIdNo(ByRef gTinValue As String) As Int32
             Return Service.GetField(Of Int32, String)(gTinValue, "DrugList", "GTin", "IdNo")
@@ -56,7 +75,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnUpdateItemDisplay(idNo As Integer)
-            CreateDataSources()
+            'CreateDataSources()
             RecordPositionNumber = GetSortedRecordPosition(idNo)
         End Sub
 
@@ -136,18 +155,18 @@ Namespace PresentationLayer.Presenters
                 ClearDrugDisplay()
             Else
                 View.DrugIdNo = NoDbNull(drug.IdNo)
-                View.DrugGTin = NoDbNull(drug.GTin)
-                View.DrugTradeName = NoDbNull(drug.TradeName)
-                View.DrugGenericName = NoDbNull(drug.GenericName)
-                View.DrugDosageForm = NoDbNull(drug.DosageForm)
-                View.DrugGenericName = NoDbNull(drug.GenericName)
-                View.DrugPackageSize = NoDbNull(drug.PackageSize)
-                View.DrugPackageType = NoDbNull(drug.PackageType)
-                View.DrugRegistrationNo = NoDbNull(drug.RegistrationNo)
-                View.DrugRouteOfAdministration = NoDbNull(drug.RouteOfAdministration)
-                View.DrugStrengthValue = NoDbNull(drug.StrengthValue)
-                View.DrugUnitOfStrength = NoDbNull(drug.UnitOfStrength)
-                View.DrugUnitOfVolume = NoDbNull(drug.UnitOfVolume)
+                View.DrugGTin = NoDbNull(drug.GTin).ToString()
+                View.DrugTradeName = NoDbNull(drug.TradeName).ToString()
+                View.DrugGenericName = NoDbNull(drug.GenericName).ToString()
+                View.DrugDosageForm = NoDbNull(drug.DosageForm).ToString()
+                View.DrugGenericName = NoDbNull(drug.GenericName).ToString()
+                View.DrugPackageSize = NoDbNull(drug.PackageSize).ToString()
+                View.DrugPackageType = NoDbNull(drug.PackageType).ToString()
+                View.DrugRegistrationNo = NoDbNull(drug.RegistrationNo).ToString()
+                View.DrugRouteOfAdministration = NoDbNull(drug.RouteOfAdministration).ToString()
+                View.DrugStrengthValue = NoDbNull(drug.StrengthValue).ToString()
+                View.DrugUnitOfStrength = NoDbNull(drug.UnitOfStrength).ToString()
+                View.DrugUnitOfVolume = NoDbNull(drug.UnitOfVolume).ToString()
                 View.DrugVolume = NoDbNull(drug.Volume)
                 View.DrugPublicPrice = NoDbNull(drug.PublicPrice)
             End If

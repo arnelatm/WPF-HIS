@@ -20,6 +20,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property DrugIdNo As Integer
         Property DrugList As Object
         Property DrugPublicPrice As Decimal
+        'Property DrugViewer As DataGridView
         WriteOnly Property CurrentIndex As Integer
         'Property QtyOnHand As Decimal?
         'Event GetDrugDataTable(ByRef drugListDataTable As DataTable)
@@ -30,6 +31,7 @@ Namespace PresentationLayer.Views.Interfaces
         Event UpdateItemDisplay(gTinIdNo As Integer)
 
         Event MatchGTinRequested(gTinNumber As String, itemDetailIdNo As Integer)
+
 
         'Event GTinMatcherValueChanged(sender As Object, gTinIdNo As Int32)
 
