@@ -125,7 +125,11 @@ Namespace DataLayer.AdoNet
                                                 "@InventoryIdNo", item.InventoryIdNo,
                                                 "@InvTransactionIdNo", InvTrans.IdNo,
                                                 "@WarehouseIdNo", InvTrans.WarehouseToIdNo}
-                    retVal = Db.RunSqlStoredProcedure("PostInvTransactionDetail2", parameters)
+                    Dim updatedCount As Int32 = Db.RunSqlStoredProcedure("PostInvTransactionDetail", parameters)
+                    If updatedCount < 0 Then
+                        retVal = False
+                        Exit For
+                    End If
                     'Dim sql As String
                     'sql = "Update Inventory set qtyonhand = qtyonhand - " &
                     '      "(select IIf(c.UnitQTy = 0,0,(cast(a.Quantity as Decimal(12,2)) * c.BaseQty / c.UnitQty)) " &
@@ -141,7 +145,14 @@ Namespace DataLayer.AdoNet
                     '    retVal = False
                     'End If
                 Next
-                Db.CloseTransaction(transactionObj)
+                If retVal Then
+                    Dim sql As String = "update invtransaction set posted = 1 where idno = @InvTranactionIdNo"
+                    Dim updatedCount = Db.ExecuteSqlInTransaction(transactionObj, sql, {"@InvTranactionIdNo", InvTrans.IdNo})
+                    If updatedCount < 0 Then
+                        retVal = False
+                    End If
+                End If
+                Db.CloseTransaction(transactionObj, retVal)
                 'retVal = transactionObj.Success
             End If
             'retVal = Db.ExecuteMultiSqls("UpdateInventory", sqls)
