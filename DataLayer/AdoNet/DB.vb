@@ -1472,6 +1472,103 @@ Namespace AdoNet
             Return retValue
         End Function
 
+        Public Function ExecuteMultiSqls(transactionName As String, sqls As List(Of String), Optional returnValue As Object = Nothing) As Integer
+            Dim retValue As Integer
+            retValue = 0
+            Using connection As New SqlConnection(_connectionString)
+                connection.Open()
+
+                Dim command As SqlCommand = connection.CreateCommand()
+                Dim transaction As SqlTransaction
+
+                ' Start a local transaction
+                transaction = connection.BeginTransaction(transactionName)
+
+                ' Must assign both transaction object and connection
+                ' to Command object for a pending local transaction.
+                command.Connection = connection
+                command.Transaction = transaction
+
+                Try
+
+                    For Each sqlText In sqls
+                        command.CommandText = sqlText
+                        command.ExecuteNonQuery()
+                    Next
+
+                    ' Attempt to commit the transaction.
+                    transaction.Commit()
+                Catch ex As Exception
+                    MessageBox.Show("Commit Exception Type: " & ex.GetType().ToString())
+                    MessageBox.Show("  Message: {0}", ex.Message)
+
+                    ' Attempt to roll back the transaction.
+                    Try
+                        transaction.Rollback()
+                    Catch ex2 As Exception
+                        ' This catch block will handle any errors that may have occurred
+                        ' on the server that would cause the rollback to fail, such as
+                        ' a closed connection.
+                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType())
+                        Console.WriteLine("  Message: {0}", ex2.Message)
+                    End Try
+                    retValue = -1
+                End Try
+            End Using
+            Return retValue
+        End Function
+
+        Public Function OpenTransaction(transactionName As String) As TransactionObject
+            Dim retValue As Integer
+            retValue = 0
+            Dim connection As New SqlConnection(_connectionString)
+            connection.Open()
+            Dim transaction As SqlTransaction
+            ' Start a local transaction
+            transaction = connection.BeginTransaction(transactionName)
+            Dim transactionObject As New TransactionObject
+            transactionObject.Connection = connection
+            transactionObject.TransactionName = transactionName
+            transactionObject.Transaction = transaction
+            Return transactionObject
+        End Function
+
+        Public Function ExecuteSqlInTransaction(transactionObject As TransactionObject, sql As String, ParamArray ByVal parms() As Object) As Integer
+            Dim retVal As Integer = 0
+            With transactionObject
+                Try
+                    If parms IsNot Nothing AndAlso parms.Count > 0 Then
+                        .Command.AddParameters(parms)
+                    End If
+                    .Command.CommandText = sql
+                    .Command.ExecuteNonQuery()
+                Catch ex As Exception
+                    MessageBox.Show("Commit Exception Type: " & ex.GetType().ToString())
+                    MessageBox.Show("  Message: {0}", ex.Message)
+
+                    ' Attempt to roll back the transaction.
+                    Try
+                        .Transaction.Rollback()
+                    Catch ex2 As Exception
+                        ' This catch block will handle any errors that may have occurred
+                        ' on the server that would cause the rollback to fail, such as
+                        ' a closed connection.
+                        Console.WriteLine("Rollback Exception Type: {0}", ex2.GetType())
+                        Console.WriteLine("  Message: {0}", ex2.Message)
+                    End Try
+                    retVal = -1
+                End Try
+            End With
+            Return retVal
+        End Function
+
+        Public Sub CloseTransaction(ByRef transactionObject As TransactionObject)
+            transactionObject.Transaction.Commit()
+            transactionObject.Transaction = Nothing
+            transactionObject.Command = Nothing
+            transactionObject = Nothing
+        End Sub
+
         Public Function FieldExistInTable(tableName As String, fieldName As String)
             Dim retValue As Boolean
             Dim tryAgain As Boolean
@@ -1530,6 +1627,97 @@ Namespace AdoNet
             Return retValue
         End Function
 
+        Public Function RunSqlStoredProcedure(storeProcedureName As String, ByVal parms() As Object)
+            Dim retValue As Int32
+            Dim tryAgain As Boolean
+            '_waitForm.Show()
+            Do While True
+                tryAgain = False
+                Try
+                    Using connection = CreateConnection()
+                        Using command As New SqlCommand(storeProcedureName)
+                            Try
+                                command.CommandType = CommandType.StoredProcedure
+                                command.Connection = connection
+                                If parms IsNot Nothing AndAlso parms.Count > 0 Then
+                                    command.AddParameters(parms)
+                                End If
+                                retValue = command.ExecuteScalar()
+
+                                'command.Connection = connection
+                                'command.Parameters.AddWithValue("TableName", tableName)
+                                'command.Parameters.AddWithValue("FieldName", fieldName)
+                                ''Create a SqlParameter object to hold the output parameter value
+                                'Dim retValParam As New SqlParameter("@retValue", SqlDbType.Int)
+                                ''IMPORTANT - must set Direction as ReturnValue
+                                'retValParam.Direction = ParameterDirection.ReturnValue
+                                ''Now you can grab the output parameter's value...
+                                ''Call the proc...
+                                'Dim y = command.ExecuteNonQuery()
+                                'Dim x = Convert.ToInt32(retValParam.Value)
+                                'Exit Do
+                            Catch ex As Exception
+                                retValue = -1
+                                MessageBox.Show(ex.Message)
+                                Throw
+                            End Try
+                        End Using
+                    End Using
+                Catch ex As Exception
+                    Select Case TryToCatchError(ex)
+                        Case DialogResult.Cancel
+                            retValue = -1
+                        Case DialogResult.Retry
+                            tryAgain = True
+                        Case Else
+                            MessageBox.Show(ex.Message)
+                            Throw
+                    End Select
+                Finally
+                    ' nothing
+                End Try
+                If Not tryAgain Then
+                    Exit Do
+                End If
+            Loop
+            Return retValue
+        End Function
+
+        Public Class TransactionObject
+            Public Sub New()
+            End Sub
+
+            Public Sub CreateConnection(transactionName As String, connectionString As String)
+                Me.Success = False
+                Me.TransactionName = transactionName
+                Me.Connection = New SqlConnection(connectionString)
+                Command = Me.Connection.CreateCommand()
+                Me.Connection.Open()
+                ' Start a local transaction
+                Dim Transaction As SqlTransaction = Me.Connection.BeginTransaction(transactionName)
+                Command.Connection = Me.Connection
+                Command.Transaction = Transaction
+                Me.Transaction = Transaction
+            End Sub
+
+            'Public Sub New(ByVal transactionName As String, ByVal connection As SqlConnection)
+            '    Me.Connection = connection
+            '    Me.TransactionName = transactionName
+            '    Command = Me.Connection.CreateCommand()
+            '    ' Start a local transaction
+            '    Transaction = Me.Connection.BeginTransaction(transactionName)
+            '    Command.Connection = Me.Connection
+            '    Command.Transaction = Transaction
+            'End Sub
+
+            Public Property Connection As SqlConnection
+            Public Property TransactionName As String
+            Public Property Transaction As SqlTransaction
+            Public Property Command As SqlCommand
+            Public Property Success As Boolean
+
+        End Class
+
     End Class
 
     'Public Class CommandsWithParameters
@@ -1537,6 +1725,7 @@ Namespace AdoNet
     '    Dim sqlParameters As SqlParameter = New SqlParameter("retValue", SqlDbType.Int)    
 
     'End Class
+
 
     Public Module DbExtensions
         ' adds parameters to a command object

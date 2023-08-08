@@ -16,6 +16,7 @@
 
 
 
+
 CREATE PROCEDURE  [dbo].[UpdateInvTransactionDetailTVP]
   @MParam InvTransactionDetailUpdate READONLY, @GroupIdNo as INT
 AS 
@@ -31,6 +32,7 @@ WHERE  (InvTransactionIdNo = @GroupIdNo and NOT EXISTS (SELECT * FROM @MParam wh
 UPDATE a 
 SET a.BatchNo = b.BatchNo,
 	a.ExpiryDate = b.ExpiryDate,
+	a.InventoryIdNo = b.InventoryIdNo,
 	a.InvTransactionIdNo = b.InvTransactionIdNo,
 	a.NetAmount = b.NetAmount,
 	a.ProductIdNo = b.ProductIdNo ,

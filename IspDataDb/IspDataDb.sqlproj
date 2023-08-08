@@ -590,6 +590,8 @@
     <Build Include="dbo\Stored Procedures\InsertInvTransactionDetailTVP.sql" />
     <Build Include="dbo\User Defined Types\InvTransactionDetailUpdate.sql" />
     <Build Include="dbo\User Defined Types\InvTransactionDetailInsert.sql" />
+    <Build Include="dbo\Views\ItemInventoryDetailsQty_View.sql" />
+    <Build Include="dbo\Stored Procedures\postInvTransactionDetail.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

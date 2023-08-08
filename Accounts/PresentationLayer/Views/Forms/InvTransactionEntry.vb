@@ -591,6 +591,15 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent InvTransactionTypeChanged(sender.SelectedValue)
         End Sub
 
+        Private Sub btnPost_ClickButtonArea_1(Sender As Object, e As MouseEventArgs) Handles btnPost.ClickButtonArea
+            Dim caption = Messaging.TranslateCaption("Please confirm.")
+            Dim action As String = Messaging.TranslateCaption("post")
+            Dim itemName As String = Messaging.TranslateCaption("inventory transaction")
+            Dim msg = Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
+            If Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                RaiseEvent PostData(IdNo)
+            End If
+        End Sub
     End Class
 
 End Namespace
