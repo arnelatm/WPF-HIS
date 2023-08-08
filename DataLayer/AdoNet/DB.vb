@@ -1562,8 +1562,12 @@ Namespace AdoNet
             Return retVal
         End Function
 
-        Public Sub CloseTransaction(ByRef transactionObject As TransactionObject)
-            transactionObject.Transaction.Commit()
+        Public Sub CloseTransaction(ByRef transactionObject As TransactionObject, ByVal success As Boolean)
+            If success Then
+                transactionObject.Transaction.Commit()
+            Else
+                transactionObject.Transaction.Rollback()
+            End If
             transactionObject.Transaction = Nothing
             transactionObject.Command = Nothing
             transactionObject = Nothing
@@ -1627,7 +1631,7 @@ Namespace AdoNet
             Return retValue
         End Function
 
-        Public Function RunSqlStoredProcedure(storeProcedureName As String, ByVal parms() As Object)
+        Public Function RunSqlStoredProcedure(storeProcedureName As String, ByVal parms() As Object) As Int32
             Dim retValue As Int32
             Dim tryAgain As Boolean
             '_waitForm.Show()
