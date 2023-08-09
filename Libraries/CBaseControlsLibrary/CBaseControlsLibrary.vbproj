@@ -467,6 +467,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="MyDgvComboboxCell.vb" />
     <Compile Include="NullableDateTimeDropDown.designer.vb">
       <DependentUpon>NullableDateTimeDropDown.vb</DependentUpon>
     </Compile>
