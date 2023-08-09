@@ -70,12 +70,10 @@ Namespace PresentationLayer.Presenters
             CreateDataSourceThread(data)
 
             data.Clear()
-            'data.Add({"Unit", "UnitsByCode", Nothing, Nothing})
+            data.Add({"Unit", "UnitsByCode", Nothing, Nothing})
             data.Add({"Product", "ProductsByCode", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "ProductName"})
             CreateLookupDataThread(data)
             data.Clear()
-
-            CreateLookupData("Unit", "UnitsByCode")
 
         End Sub
 
@@ -211,7 +209,12 @@ Namespace PresentationLayer.Presenters
                         Dim pUnitInfo As Object = New ExpandoObject
                         Dim pUnitIdNo As Int32 = Service.GetRecordFieldWith2KeyG(Of Int32, Int16, Int32)(product.IdNo, invTransactionDetail.UnitIdNo, "ProductUnit", "ProductIdNo", "UnitIdNo", "IdNo")
                         pUnitInfo = Service.GetFieldsWithIdNo(pUnitIdNo, "ProductUnit", "UnitQty,BaseQty")
-                        invTransactionDetail.UnitCost = IIf(pUnitInfo.UnitQty = 0, 0, baseUnitCost * pUnitInfo.BaseQty / pUnitInfo.UnitQty)
+                        If pUnitInfo Is Nothing Then
+                            invTransactionDetail.UnitCost = 0
+                        Else
+                            invTransactionDetail.UnitCost = IIf(pUnitInfo.UnitQty = 0, 0, baseUnitCost * pUnitInfo.BaseQty / pUnitInfo.UnitQty)
+                        End If
+
                     End If
                 End If
             End If
@@ -563,10 +566,9 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub SetProductUnits(productIdNo As Int16)
-            'Dim data As New ArrayList
-            'data.Add({"ProductUnit_View", "UnitsByProduct", "UnitIdNo,UnitName,UnitCode", "ProductIdNo = " + productIdNo.ToString()})
-            'CreateLookupDataThread(data)
-            CreateLookupData("ProductUnitV", "UnitsByProduct", "ProductIdNo = " + productIdNo.ToString())
+            Dim data As New ArrayList
+            data.Add({"ProductUnit_View", "UnitsByProduct", "UnitIdNo,UnitName,UnitCode", "ProductIdNo = " + productIdNo.ToString()})
+            CreateLookupDataThread(data)
         End Sub
 
         Private Function GetLastInvTransactionInfo(pModel As ProductModel) As ExpandoObject

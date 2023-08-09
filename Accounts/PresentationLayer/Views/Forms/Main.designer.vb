@@ -129,9 +129,9 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemPurchase = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPurchaseReturn = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemSalesJournalEntry = New System.Windows.Forms.ToolStripMenuItem()
+            Me.InventoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemAccountReconciliation = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPostPettyCashAccount = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemClosing = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemHR = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemEmployeeLeaveNonHoliday = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemEmployeeLeaveHoliday = New System.Windows.Forms.ToolStripMenuItem()
@@ -139,6 +139,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemHolidayEntry = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemEmployeeLeaveApproval = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemEmployeeHolidayTransfer = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemClosing = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPayrollTransaction = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPayrollEntry = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemRecurringPayrollEntry = New System.Windows.Forms.ToolStripMenuItem()
@@ -208,6 +209,9 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemDoctorsPrescriptions = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemClinicReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemSterilizationLabels = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemInventoryReports = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemInventoryReport = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemProductExpiryReport = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemUtilities = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemUpdateMenuSecurityObjects = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemRecreateSecurityObjectMenu = New System.Windows.Forms.ToolStripMenuItem()
@@ -240,7 +244,6 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.InventoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -776,6 +779,11 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemSalesJournalEntry.Name = "ToolStripMenuItemSalesJournalEntry"
             resources.ApplyResources(Me.ToolStripMenuItemSalesJournalEntry, "ToolStripMenuItemSalesJournalEntry")
             '
+            'InventoryToolStripMenuItem
+            '
+            Me.InventoryToolStripMenuItem.Name = "InventoryToolStripMenuItem"
+            resources.ApplyResources(Me.InventoryToolStripMenuItem, "InventoryToolStripMenuItem")
+            '
             'ToolStripMenuItemAccountReconciliation
             '
             Me.ToolStripMenuItemAccountReconciliation.Name = "ToolStripMenuItemAccountReconciliation"
@@ -785,11 +793,6 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemPostPettyCashAccount.Name = "ToolStripMenuItemPostPettyCashAccount"
             resources.ApplyResources(Me.ToolStripMenuItemPostPettyCashAccount, "ToolStripMenuItemPostPettyCashAccount")
-            '
-            'ToolStripMenuItemClosing
-            '
-            Me.ToolStripMenuItemClosing.Name = "ToolStripMenuItemClosing"
-            resources.ApplyResources(Me.ToolStripMenuItemClosing, "ToolStripMenuItemClosing")
             '
             'ToolStripMenuItemHR
             '
@@ -826,6 +829,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemEmployeeHolidayTransfer.Name = "ToolStripMenuItemEmployeeHolidayTransfer"
             resources.ApplyResources(Me.ToolStripMenuItemEmployeeHolidayTransfer, "ToolStripMenuItemEmployeeHolidayTransfer")
+            '
+            'ToolStripMenuItemClosing
+            '
+            Me.ToolStripMenuItemClosing.Name = "ToolStripMenuItemClosing"
+            resources.ApplyResources(Me.ToolStripMenuItemClosing, "ToolStripMenuItemClosing")
             '
             'ToolStripMenuItemPayrollTransaction
             '
@@ -897,7 +905,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemReports
             '
-            Me.ToolStripMenuItemReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemStatementOfAccountsPayable, Me.ToolStripMenuItemStatementOfAccountsReceivable, Me.ToolStripMenuItemStatementOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfAccountsPayable, Me.ToolStripMenuItemSummaryOfAccountsReceivable, Me.ToolStripMenuItemTrialBalance, Me.ToolStripMenuItemBalanceSheet, Me.ToolStripMenuItemIncomeStatement, Me.ToolStripMenuItemAccountingtLists, Me.ToolStripMenuItemARAging, Me.ToolStripMenuItemAPAging, Me.ToolStripMenuItemCheckPrinting, Me.ToolStripMenuItemVATReport, Me.ToolStripMenuItemPayrollReport, Me.ToolStripMenuItemHRReports, Me.ToolStripMenuItemReceptionReports, Me.ToolStripMenuItemAccountingReports, Me.ToolStripMenuItemLaboratoryReports, Me.ToolStripMenuItemSalesReports, Me.ToolStripMenuItemPMRReports, Me.ToolStripMenuItemPharmacyReports, Me.ToolStripMenuItemClinicReports})
+            Me.ToolStripMenuItemReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemStatementOfAccountsPayable, Me.ToolStripMenuItemStatementOfAccountsReceivable, Me.ToolStripMenuItemStatementOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfAccountsPayable, Me.ToolStripMenuItemSummaryOfAccountsReceivable, Me.ToolStripMenuItemTrialBalance, Me.ToolStripMenuItemBalanceSheet, Me.ToolStripMenuItemIncomeStatement, Me.ToolStripMenuItemAccountingtLists, Me.ToolStripMenuItemARAging, Me.ToolStripMenuItemAPAging, Me.ToolStripMenuItemCheckPrinting, Me.ToolStripMenuItemVATReport, Me.ToolStripMenuItemPayrollReport, Me.ToolStripMenuItemHRReports, Me.ToolStripMenuItemReceptionReports, Me.ToolStripMenuItemAccountingReports, Me.ToolStripMenuItemLaboratoryReports, Me.ToolStripMenuItemSalesReports, Me.ToolStripMenuItemPMRReports, Me.ToolStripMenuItemPharmacyReports, Me.ToolStripMenuItemClinicReports, Me.ToolStripMenuItemInventoryReports})
             Me.ToolStripMenuItemReports.Name = "ToolStripMenuItemReports"
             resources.ApplyResources(Me.ToolStripMenuItemReports, "ToolStripMenuItemReports")
             '
@@ -1187,6 +1195,22 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemSterilizationLabels.Name = "ToolStripMenuItemSterilizationLabels"
             resources.ApplyResources(Me.ToolStripMenuItemSterilizationLabels, "ToolStripMenuItemSterilizationLabels")
             '
+            'ToolStripMenuItemInventoryReports
+            '
+            Me.ToolStripMenuItemInventoryReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemInventoryReport, Me.ToolStripMenuItemProductExpiryReport})
+            Me.ToolStripMenuItemInventoryReports.Name = "ToolStripMenuItemInventoryReports"
+            resources.ApplyResources(Me.ToolStripMenuItemInventoryReports, "ToolStripMenuItemInventoryReports")
+            '
+            'ToolStripMenuItemInventoryReport
+            '
+            Me.ToolStripMenuItemInventoryReport.Name = "ToolStripMenuItemInventoryReport"
+            resources.ApplyResources(Me.ToolStripMenuItemInventoryReport, "ToolStripMenuItemInventoryReport")
+            '
+            'ToolStripMenuItemProductExpiryReport
+            '
+            Me.ToolStripMenuItemProductExpiryReport.Name = "ToolStripMenuItemProductExpiryReport"
+            resources.ApplyResources(Me.ToolStripMenuItemProductExpiryReport, "ToolStripMenuItemProductExpiryReport")
+            '
             'ToolStripMenuItemUtilities
             '
             Me.ToolStripMenuItemUtilities.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemUpdateMenuSecurityObjects, Me.ToolStripMenuItemRecreateSecurityObjectMenu, Me.ToolStripMenuItemTransactionNotesTranslator, Me.ToolStripMenuItemSimplePasswordGenerator, Me.ToolStripMenuItemTestForm})
@@ -1354,11 +1378,6 @@ Namespace PresentationLayer.Views.Forms
             '
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
-            '
-            'InventoryToolStripMenuItem
-            '
-            Me.InventoryToolStripMenuItem.Name = "InventoryToolStripMenuItem"
-            resources.ApplyResources(Me.InventoryToolStripMenuItem, "InventoryToolStripMenuItem")
             '
             'Main
             '
@@ -1597,5 +1616,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripButtonPrescription As ToolStripButton
         Friend WithEvents ToolStripMenuItemInventoryTransactionType As ToolStripMenuItem
         Friend WithEvents InventoryToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemInventoryReports As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemInventoryReport As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemProductExpiryReport As ToolStripMenuItem
     End Class
 End NameSpace
