@@ -79,6 +79,7 @@ Namespace PresentationLayer.Presenters
             data.Add({"Product", "ProductsByCode", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "ProductName"})
             'data.Add({"PurchaseDetail", "PurchaseHistory", Nothing, Nothing})
             CreateLookupDataThread(data)
+            'CreateLookupData("Unit", "UnitsByCode")
             'data.Clear()
 
         End Sub
@@ -372,7 +373,10 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Function GetUnitCost(purchaseDetail As PurchaseDetailView) As Decimal
-            Return IIf(purchaseDetail.Quantity + purchaseDetail.BonusQuantity = 0, 0, purchaseDetail.NetAmount / (purchaseDetail.Quantity + purchaseDetail.BonusQuantity))
+            If Math.Round(purchaseDetail.Quantity + purchaseDetail.BonusQuantity, 4) = 0 Then
+                Return 0
+            End If
+            Return Math.Round(purchaseDetail.NetAmount / (purchaseDetail.Quantity + purchaseDetail.BonusQuantity), 4)
         End Function
 
         Private Function RecomputeDiscountPercentage(purchaseDetail As PurchaseDetailView) As Decimal

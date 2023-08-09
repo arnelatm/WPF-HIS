@@ -1718,7 +1718,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'dgvUnitIdNo
             '
-            Me.dgvUnitIdNo.AutoComplete = False
+            Me.dgvUnitIdNo.AutoComplete = True
             Me.dgvUnitIdNo.DataPropertyName = "UnitIdNo"
             DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black

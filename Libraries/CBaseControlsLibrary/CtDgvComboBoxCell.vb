@@ -8,7 +8,7 @@ Public Class CtDgvComboBoxCell
 
     Public Sub New()
         MyBase.New()
-        'AutoComplete = False
+        AutoComplete = True
         'CellEditingControl.AutoCompleteMode = AutoCompleteMode.SuggestAppend
     End Sub
 

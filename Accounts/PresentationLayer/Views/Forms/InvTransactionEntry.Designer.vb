@@ -72,7 +72,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvBatchNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CDgvExpiryColumn()
             Me.dgvQuantity = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
+            Me.dgvUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvUnitCost = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
             Me.dgvNetAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.dgvCategoryIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -921,7 +921,6 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvUnitIdNo.ReadOnly = True
             Me.dgvUnitIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvUnitIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            Me.dgvUnitIdNo.SuggestCharCount = 0
             Me.dgvUnitIdNo.Translatable = False
             '
             'dgvUnitCost
@@ -1212,7 +1211,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents dgvBatchNo As CDgvTextColumn
         Friend WithEvents dgvExpiryDate As CDgvExpiryColumn
         Friend WithEvents dgvQuantity As CDgvTextColumn
-        Friend WithEvents dgvUnitIdNo As CtDgvComboBoxColumn
+        Friend WithEvents dgvUnitIdNo As CDgvComboBoxColumn
         Friend WithEvents dgvUnitCost As CDgvDecimalColumn
         Friend WithEvents dgvNetAmount As CdgvMoneyColumn
         Friend WithEvents dgvCategoryIdNo As DataGridViewTextBoxColumn

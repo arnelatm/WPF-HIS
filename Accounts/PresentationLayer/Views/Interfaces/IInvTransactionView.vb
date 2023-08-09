@@ -20,8 +20,10 @@ Namespace PresentationLayer.Views.Interfaces
         Property WarehouseIdNo As Int16
         Property WarehouseToIdNo As Int16?
 
-        Property UnitsByCode As DataTable
-        Property UnitsByProduct As DataTable
+        'Property UnitsByCode As DataTable
+        Property UnitsByCode As Object
+        'Property UnitsByProduct As DataTable
+        Property UnitsByProduct As Object
         Property ProductsByCode As DataTable
         Property ProductInventory As List(Of InventoryModel)
         Property InventoryAction As String

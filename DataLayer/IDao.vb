@@ -76,6 +76,16 @@ Public Interface IDaoChild(Of TBiz)
 
 End Interface
 
+Public Interface IDaoStoredProcedure
+
+    Function RunStoredProcedure(ByRef storedProcedureName As String, parameter As Object) As Object
+
+End Interface
+
+Public Interface IDaoGetRecordsWithParams(Of TBiz)
+    Function GetRecordsWithParams(parameters As Object, Optional ByVal sortExpression As String = Nothing) As List(Of TBiz)
+End Interface
+
 Public Interface IDaoChildUpdateOnly(Of TBiz)
     ' gets a specific record data
 

@@ -335,6 +335,10 @@ Namespace ServiceLayer.ActionService
             Return DataDao.GetLeaveCredit(employeeIdNo, leaveIdNo)
         End Function
 
+        Public Function GetLastPurchaseCost(ByVal productIdNo As Integer) Implements IServiceAccounts.GetLastPurchaseCost
+            Return DataDao.GetLastPurchaseCost(productIdNo)
+        End Function
+
         'Public Function GetCustomerOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)
         '    Return GetOpenInvoices(Of TM)(idNo)
         'End Function

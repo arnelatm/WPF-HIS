@@ -562,12 +562,26 @@ Namespace Services
             Return DataDao.GetRecords(tableName, sortKey, fields, filterKey)
         End Function
 
+        'Public Function GetRecords(Of TM)(ByVal parameters As Object, ByVal Optional sortKey As String = Nothing) As List(Of TM) Implements IService.GetRecords
+        '    Dim bizData = DataDao.GetRecordsWithGroupIdNo(parameters, sortKey)
+        '    Dim dataModel As New List(Of TM)
+        '    GlobalVariables.Mapper.Map(bizData, dataModel)
+        '    Return dataModel
+        'End Function
+
         Public Function GetDtRecords(ByVal tableName As String, ByVal Optional fields As String = Nothing, Optional filterKey As String = Nothing, Optional ByVal sortKey As String = Nothing) As Object Implements IService.GetDtRecords
             Return DataDao.GetDtRecords(tableName, fields, filterKey, sortKey)
         End Function
 
         Public Function GetRecordsWithGroupIdNo(Of TM)(idNo, Optional ByRef sortKey = Nothing) As List(Of TM) Implements IService.GetRecordsWithGroupIdNo
             Dim bizData = DataDao.GetRecordsWithGroupIdNo(idNo, sortKey)
+            Dim dataModel As New List(Of TM)
+            GlobalVariables.Mapper.Map(bizData, dataModel)
+            Return dataModel
+        End Function
+
+        Public Function GetRecordsWithParams(Of TM)(parameters As Object, Optional ByRef sortKey As String = Nothing) As List(Of TM) Implements IService.GetRecordsWithParams
+            Dim bizData = DataDao.GetRecordsWithParams(parameters, sortKey)
             Dim dataModel As New List(Of TM)
             GlobalVariables.Mapper.Map(bizData, dataModel)
             Return dataModel
@@ -655,6 +669,11 @@ Namespace Services
             End If
         End Function
 
+        Public Function RunStoredProcedure(storeProcedureName As String, parameters As Object) Implements IService.RunStoredProcedure
+            Return DataDao.RunStoredProcedure(storeProcedureName, parameters)
+        End Function
+
+
 #End Region
 
 #Region "BaseDao Functions"
@@ -682,6 +701,7 @@ Namespace Services
         Public Function InitializeSecurityObject() As Integer Implements IService.InitializeSecurityObject
             Return BaseDao.InitializeSecurityObject()
         End Function
+
 
 #End Region
 
