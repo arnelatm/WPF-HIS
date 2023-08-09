@@ -139,7 +139,6 @@
     <Compile Include="CFindGridForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CtDgvComboboxCell1.vb" />
     <Compile Include="CtDgvComboBoxColumn.vb" />
     <Compile Include="CtDgvDtpColumn.vb" />
     <Compile Include="CtDataGridView.vb">
@@ -147,11 +146,6 @@
     </Compile>
     <Compile Include="CtDgvComboBoxCell.vb" />
     <Compile Include="CtDgvComboBoxEditingControl.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="CDgvDtComboBoxColumn.vb" />
-    <Compile Include="CDgvDtComboBoxCell.vb" />
-    <Compile Include="CDgvDtComboBoxEditingControl.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CtComboBox.vb">

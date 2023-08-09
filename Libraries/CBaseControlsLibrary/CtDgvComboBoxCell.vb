@@ -27,7 +27,7 @@ Public Class CtDgvComboBoxCell
 
         MyBase.InitializeEditingControl(pRowIndex, pFormattedValue, cellStyle)
         CellEditingControl = CType(DataGridView.EditingControl, CtDgvComboBoxEditingControl)
-        CellEditingControl.Enabled = True
+        'CellEditingControl.Enabled = True
         CellEditingControl.DropDownStyle = ComboBoxStyle.DropDown
         CellEditingControl.AutoCompleteMode = AutoCompleteMode.SuggestAppend
 
@@ -41,30 +41,30 @@ Public Class CtDgvComboBoxCell
     'Public Property SuggestCharCount As Integer
 
 
-    Private _cellEditingControl As CtDgvComboBoxEditingControl
+    'Private _cellEditingControl As CtDgvComboBoxEditingControl
     Public Property CellEditingControl As CtDgvComboBoxEditingControl
-        Get
-            Return _cellEditingControl
-        End Get
-        Set(value As CtDgvComboBoxEditingControl)
-            _cellEditingControl = value
-        End Set
-    End Property
+    '    Get
+    '        Return _cellEditingControl
+    '    End Get
+    '    Set(value As CtDgvComboBoxEditingControl)
+    '        _cellEditingControl = value
+    '    End Set
+    'End Property
 
-    Protected Overrides Sub OnMouseClick(ByVal e As DataGridViewCellMouseEventArgs)
+    'Protected Overrides Sub OnMouseClick(ByVal e As DataGridViewCellMouseEventArgs)
 
-        MyBase.OnMouseClick(e)
+    '    MyBase.OnMouseClick(e)
 
-        If MyBase.DataGridView Is Nothing Then
-            Return
-        End If
+    '    If MyBase.DataGridView Is Nothing Then
+    '        Return
+    '    End If
 
-        Dim currentCellAddress As Point = MyBase.DataGridView.CurrentCellAddress
+    '    Dim currentCellAddress As Point = MyBase.DataGridView.CurrentCellAddress
 
-        If currentCellAddress.X = e.ColumnIndex AndAlso currentCellAddress.Y = e.RowIndex Then
+    '    If currentCellAddress.X = e.ColumnIndex AndAlso currentCellAddress.Y = e.RowIndex Then
 
 
-        End If
-    End Sub
+    '    End If
+    'End Sub
 
 End Class

@@ -138,7 +138,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvProductCode = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvProductName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
+            Me.dgvUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
             Me.dgvBatchNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvQuantity = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
@@ -1718,12 +1718,10 @@ Namespace PresentationLayer.Views.Forms
             '
             'dgvUnitIdNo
             '
-            Me.dgvUnitIdNo.AutoComplete = True
             Me.dgvUnitIdNo.DataPropertyName = "UnitIdNo"
             DataGridViewCellStyle6.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
             Me.dgvUnitIdNo.DefaultCellStyle = DataGridViewCellStyle6
-            Me.dgvUnitIdNo.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox
             Me.dgvUnitIdNo.DisplayStyleForCurrentCellOnly = True
             Me.dgvUnitIdNo.EditingMode = False
             Me.dgvUnitIdNo.FillWeight = 80.0!
@@ -1732,7 +1730,6 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvUnitIdNo.ReadOnly = True
             Me.dgvUnitIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvUnitIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            Me.dgvUnitIdNo.SuggestCharCount = 0
             Me.dgvUnitIdNo.Translatable = False
             Me.dgvUnitIdNo.Width = 60
             '
@@ -2191,7 +2188,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents dgvSequence As CDgvTextColumn
         Friend WithEvents dgvProductCode As CDgvTextColumn
         Friend WithEvents dgvProductName As CDgvTextColumn
-        Friend WithEvents dgvUnitIdNo As CtDgvComboBoxColumn
+        Friend WithEvents dgvUnitIdNo As CDgvComboBoxColumn
         Friend WithEvents dgvBatchNo As CDgvTextColumn
         Friend WithEvents dgvExpiryDate As CDgvTextColumn
         Friend WithEvents dgvQuantity As CDgvDecimalColumn
