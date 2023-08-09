@@ -1,5 +1,5 @@
 ﻿
-CREATE PROCEDURE [dbo].[postInvTransactionDetail] @InvTransactionDetailIdNo Int,@InventoryIdNo Int, @InvTransactionIdNo Int, @WarehouseIdNo Smallint
+CREATE PROCEDURE [dbo].[PostInvTransDetailTransfer] @InvTransactionDetailIdNo Int,@InventoryIdNo Int, @InvTransactionIdNo Int, @WarehouseIdNo Smallint
 AS
 Declare @Quantity as Decimal(12,4) = 0 
 SELECT @Quantity = (select IIf(c.UnitQTy = 0,0,(cast(a.Quantity as Decimal(12,4)) * c.BaseQty / c.UnitQty))

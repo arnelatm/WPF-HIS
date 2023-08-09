@@ -34,3 +34,10 @@
 
 
 
+
+
+
+GO
+CREATE UNIQUE NONCLUSTERED INDEX [IX_ProductName]
+    ON [dbo].[Product]([ProductName] ASC);
+
