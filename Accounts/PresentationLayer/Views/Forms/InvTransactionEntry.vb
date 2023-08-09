@@ -16,27 +16,26 @@ Namespace PresentationLayer.Views.Forms
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
         Private _footer As DgvFooter
         Private _invTransactionDetails As List(Of InvTransactionDetailView)
+
         Public Event ProductCodeChanged(productCode As String, bs As BindingSource) Implements IInvTransactionView.ProductCodeChanged
         Public Event GTinScanned(GTin As String, bs As BindingSource, ByRef productCode As String) Implements IInvTransactionView.GTinScanned
         Public Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource) Implements IInvTransactionView.ProductUnitSelection
         Public Event ProductUnitEditing(productIdNo As Int32) Implements IInvTransactionView.ProductUnitEditing
         Public Event RowChanged(productIdNo As Int32) Implements IInvTransactionView.RowChanged
-        Public Event InvTransactionTypeChanged(invTransTypeIdNo As Int16) Implements IInvTransactionView.InvTransactionTypeChanged
         Public Event PostData(idNo As Int32) Implements IInvTransactionView.PostData
         Public Event ProductCodeValidating(productCode As String, control As Control) Implements IInvTransactionView.ProductCodeValidating
         Public Event ProductNameValidating(productName As String, control As Control) Implements IInvTransactionView.ProductNameValidating
+        Public Event InvTransactionTypeChanged(invTransTypeIdNo As Int16) Implements IInvTransactionView.InvTransactionTypeChanged
 
+        Public Property NumberOfUnits As Int16 Implements IInvTransactionView.NumberOfUnits
+        Public Property ProductCodeIsValid As Boolean Implements IInvTransactionView.ProductCodeIsValid
+        Public Property ProductNameIsValid As Boolean Implements IInvTransactionView.ProductNameIsValid
         Public Property ProductsByCode As DataTable Implements IInvTransactionView.ProductsByCode
-        'Public Property UnitsByCode As DataTable Implements IInvTransactionView.UnitsByCode
         Public Property UnitsByCode As Object Implements IInvTransactionView.UnitsByCode
-        'Public Property UnitsByProduct As DataTable Implements IInvTransactionView.UnitsByProduct
         Public Property UnitsByProduct As Object Implements IInvTransactionView.UnitsByProduct
         Public Property ProductInventory As List(Of InventoryModel) Implements IInvTransactionView.ProductInventory
-        Public Property ProductCodeIsValid As Boolean Implements IInvTransactionView.ProductCodeIsValid
-        Public Property NumberOfUnits As Int16 Implements IInvTransactionView.NumberOfUnits
-        Public Property ProductNameIsValid As Boolean Implements IInvTransactionView.ProductNameIsValid
-
-
+        'Public Property UnitsByProduct As DataTable Implements IInvTransactionView.UnitsByProduct
+        'Public Property UnitsByCode As DataTable Implements IInvTransactionView.UnitsByCode
         Public Sub New()
             MyBase.New()
             ' This call is required by the designer.
@@ -45,17 +44,6 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
             _nfi.NumberDecimalDigits = 2
         End Sub
-
-        'Private Sub JiBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsInvTransactionDetails.AddingNew
-        '    e.NewObject = New InvTransactionDetailView
-        '    ' work around for error on datagrid entry on lastrow please do not remove.
-        '    ' The reason it works Is because On a DataGridView where AllowUserToAddRows Is True,
-        '    ' it adds an empty row at the end of its rows which if bound to a list creates a null element at the end of the list.
-        '    ' The code removes that element And then the AddNew in the BindingList will trigger the DataGridView to add it again
-        '    If DataGridViewInvTransactionDetails.Rows.Count = bsInvTransactionDetails.Count Then
-        '        bsInvTransactionDetails.RemoveAt(bsInvTransactionDetails.Count - 1)
-        '    End If
-        'End Sub
 
 #Region "Fields"
 
@@ -128,28 +116,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        'Public Property SettlementDiscount As Decimal Implements IInvTransactionView.SettlementDiscount
-        '    Get
-        '        If txtSettlementDiscount.Text <> "" Then
-        '            Return Convert.ToDecimal(txtSettlementDiscount.Text)
-        '        Else
-        '            Return 0D
-        '        End If
-        '    End Get
-        '    Set
-        '        txtSettlementDiscount.Text = Value
-        '    End Set
-        'End Property
-
-        'Public Property SettlementDueDate As Date? Implements IInvTransactionView.SettlementDueDate
-        '    Get
-        '        Return dtpSettlementDueDate.Value
-        '    End Get
-        '    Set
-        '        dtpSettlementDueDate.Value = Value
-        '    End Set
-        'End Property
-
         Public Property WarehouseIdNo As Int16 Implements IInvTransactionView.WarehouseIdNo
             Get
                 Return cboWarehouseIdNo.GetValue(Of Int16)
@@ -158,18 +124,6 @@ Namespace PresentationLayer.Views.Forms
                 cboWarehouseIdNo.SetValue(Value)
             End Set
         End Property
-
-        'Public ReadOnly Property TotalCredits As Decimal Implements IInvTransactionView.TotalCredits
-        '    Get
-        '        Return NumParser(Of Decimal)(txtTotalCredits.Text)
-        '    End Get
-        'End Property
-
-        'Public ReadOnly Property TotalDebits As Decimal Implements IInvTransactionView.TotalDebits
-        '    Get
-        '        Return NumParser(Of Decimal)(txtTotalDebits.Text)
-        '    End Get
-        'End Property
 
         Public Property TransactionDate As Date? Implements IInvTransactionView.TransactionDate
             Get
@@ -183,15 +137,6 @@ Namespace PresentationLayer.Views.Forms
                 End If
             End Set
         End Property
-
-        'Public Property TransactionType As String Implements IInvTransactionView.TransactionType
-        '    Get
-        '        Return cboTransactionType.GetValue()
-        '    End Get
-        '    Set
-        '        cboTransactionType.SetValue(Value)
-        '    End Set
-        'End Property
 
         Public Property Cancelled As Boolean Implements IInvTransactionView.Cancelled
             Get
@@ -315,13 +260,6 @@ Namespace PresentationLayer.Views.Forms
             dgvUnitCost.SetFormat(12, 4)
         End Sub
 
-        Private Sub CboSupplierIdNo_Validating(sender As Object, e As CancelEventArgs)
-            'If PaymentOrDiscountMade() Then
-            '    ' revert to previous value
-            '    cboSupplierIdNo.RevertValue()
-            'End If
-        End Sub
-
         Private Overloads Sub Dispose()
             Close()
             '_footer.Dispose()
@@ -420,25 +358,6 @@ Namespace PresentationLayer.Views.Forms
             End If
             Return valid
         End Function
-
-        'Private Sub OnTransactionDateValidated(sender As Object, e As EventArgs) Handles dtpTransactionDate.Validated
-        '    Presenter.UpdateDueDate()
-        '    Presenter.UpdateEarlySettlementValues()
-        '    Presenter.UpdateSupplierDate()
-        'End Sub
-
-        'Private Function PaymentOrDiscountMade()
-        '    Dim retVal As Boolean = False
-        '    If (DataGridViewInvTransactionDetails.Rows(0).Cells("dgvPaidAmount").Value <> 0 Or DataGridViewInvTransactionDetails.Rows(0).Cells("dgvDiscountTaken").Value <> 0) Then
-        '        Messaging.Show(True, "MsgPaymentDiscExistChangeNotAllowed")
-        '        retVal = True
-        '    End If
-        '    Return retVal
-        'End Function
-
-        'Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
-        '    MoveToGridView(DataGridViewInvTransactionDetails, "dgvUnitIdNo")
-        'End Sub
 
         Private Sub UpdateTotals()
             If _footer IsNot Nothing Then
@@ -539,8 +458,6 @@ Namespace PresentationLayer.Views.Forms
                     '    Me.txtQrCode.SelectionStart = i + 5
 
                     '    e.Handled = True
-                    Dim x = 1
-                    x = 1
 
             End Select
         End Sub
@@ -564,18 +481,6 @@ Namespace PresentationLayer.Views.Forms
                             End If
                         End If
                     End If
-                End If
-            End If
-        End Sub
-
-        ' Changes how cells are displayed depending on their columns and values.
-        Private Sub dgvPurHistoryFormatting(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellFormattingEventArgs)
-            If sender.Columns(e.ColumnIndex).Name.Equals("dgvExpiryDateH") Then
-                If e.Value = Date.MinValue Then
-                    e.Value = String.Empty
-                    e.FormattingApplied = True
-                ElseIf e.Value < DateAdd(DateInterval.Day, Today().Day * -1, Today) Then
-                    e.CellStyle.BackColor = Color.Red
                 End If
             End If
         End Sub

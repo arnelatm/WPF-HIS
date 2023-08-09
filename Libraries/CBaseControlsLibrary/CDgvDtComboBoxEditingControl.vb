@@ -15,6 +15,17 @@ Public Class CDgvDtComboBoxEditingControl
     Private _filterRuleCompiled As Func(Of String, Boolean)
     Private _suggestListOrderRule As Expression(Of Func(Of String, String))
     Private _suggestListOrderRuleCompiled As Func(Of String, String)
+    
+    Public Sub New()
+        _filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
+        _suggestListOrderRuleCompiled = Function(s) s
+        PropertySelectorCompiled = Function(collection) collection.Cast(Of String)()
+
+        SuggestListForm.SuggestListBox.DataSource = _suggestBindingList
+        AddHandler SuggestListForm.SuggestListBox.Click, AddressOf SuggestListBoxOnClick
+        AddHandler ParentChanged, AddressOf OnParentChanged
+
+    End Sub
 
     Public Property SuggestBoxHeight As Integer
         Get
@@ -58,44 +69,46 @@ Public Class CDgvDtComboBoxEditingControl
         End Set
     End Property
 
-    Public Sub New()
-        _filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
-        _suggestListOrderRuleCompiled = Function(s) s
-        PropertySelectorCompiled = Function(collection) collection.Cast(Of String)()
 
-        SuggestListForm.SuggestListBox.DataSource = _suggestBindingList
-        AddHandler SuggestListForm.SuggestListBox.Click, AddressOf SuggestListBoxOnClick
-        AddHandler ParentChanged, AddressOf OnParentChanged
 
-    End Sub
+    Public Property SuggestCharCount As Integer
 
     Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged
-	DisplayMember = "Name"
+        DisplayMember = "Name"
         PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(0).ToString())
     End Sub
 
     Protected Overrides Sub OnTextChanged(ByVal e As EventArgs)
-        MyBase.OnTextChanged(e)
-        If Not Focused Then Return
-        _suggestBindingList.Clear()
-        _suggestBindingList.RaiseListChangedEvents = False
-        PropertySelectorCompiled(Items).Where(_filterRuleCompiled).OrderBy(_suggestListOrderRuleCompiled).ToList().ForEach(AddressOf _suggestBindingList.Add)
-        _suggestBindingList.RaiseListChangedEvents = True
-        _suggestBindingList.ResetBindings()
-        Dim showForm As Boolean
-        showForm = _suggestBindingList.Any()
-        SuggestListForm.Visible = showForm
-        If showForm Then
-            SetListBoxFormLocation(SuggestListForm)
-            SuggestListForm.Visible = True
-        Else
+        If Text.Length < SuggestCharCount Then
+            _suggestBindingList.Clear()
+            _suggestBindingList.RaiseListChangedEvents = True
+            _suggestBindingList.ResetBindings()
             SuggestListForm.Hide()
-        End If
+        Else
+            BeginUpdate()
+            MyBase.OnTextChanged(e)
+            If Not Focused Then Return
+            _suggestBindingList.Clear()
+            _suggestBindingList.RaiseListChangedEvents = False
+            PropertySelectorCompiled(Items).Where(_filterRuleCompiled).OrderBy(_suggestListOrderRuleCompiled).ToList().ForEach(AddressOf _suggestBindingList.Add)
+            _suggestBindingList.RaiseListChangedEvents = True
+            _suggestBindingList.ResetBindings()
+            Dim showForm As Boolean
+            showForm = _suggestBindingList.Any()
+            SuggestListForm.Visible = showForm
+            If showForm Then
+                SetListBoxFormLocation(SuggestListForm)
+                SuggestListForm.Visible = True
+            Else
+                SuggestListForm.Hide()
+            End If
 
-        If _suggestBindingList.Count = 1 AndAlso _suggestBindingList.Single().Length = Text.Trim().Length Then
-            Text = _suggestBindingList.Single()
-            [Select](0, Text.Length)
-            HideSuggBox()
+            If _suggestBindingList.Count = 1 AndAlso _suggestBindingList.Single().Length = Text.Trim().Length Then
+                Text = _suggestBindingList.Single()
+                [Select](0, Text.Length)
+                HideSuggBox()
+            End If
+            EndUpdate()
         End If
     End Sub
 
@@ -236,9 +249,9 @@ Public Class CDgvDtComboBoxEditingControl
                     Return dataGridViewWantsInputKey
                 End If
 
-            'Case Keys.Left, Keys.Right, Keys.Home, Keys.End
-            '    '    Keys.Home, Keys.End, Keys.PageDown, Keys.PageUp
-            '    Return True
+            Case Keys.Left, Keys.Right, Keys.Home, Keys.End
+                '    Keys.Home, Keys.End, Keys.PageDown, Keys.PageUp
+                Return True
 
             Case Keys.PageDown, Keys.PageUp, Keys.Up, Keys.Down
                 If DroppedDown Then

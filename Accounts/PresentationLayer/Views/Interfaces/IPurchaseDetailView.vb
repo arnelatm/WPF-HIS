@@ -32,7 +32,6 @@ Namespace PresentationLayer.Views.Interfaces
         Property VatAmount As Decimal
         Property VatPercent As Decimal
         Property WarehouseIdNo As Int16
-
     End Interface
 
 

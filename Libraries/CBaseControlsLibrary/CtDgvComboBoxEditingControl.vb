@@ -22,11 +22,6 @@ Public Class CtDgvComboBoxEditingControl
         _suggestListOrderRuleCompiled = Function(s) s
         PropertySelectorCompiled = Function(collection) collection.Cast(Of String)()
         SuggestListForm.SuggestListBox.DataSource = _suggestBindingList
-        AutoCompleteMode = AutoCompleteMode.SuggestAppend
-        DropDownStyle = ComboBoxStyle.DropDown
-        DisplayMember = "Name"
-        ValueMember = "IdNo"
-        DataSource = _suggestBindingList
         AddHandler SuggestListForm.SuggestListBox.Click, AddressOf SuggestListBoxOnClick
         AddHandler ParentChanged, AddressOf OnParentChanged
     End Sub
@@ -78,6 +73,7 @@ Public Class CtDgvComboBoxEditingControl
     Public Property SuggestCharCount As Integer
 
     Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged
+        DisplayMember = "Name"
         PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(0).ToString())
     End Sub
 
@@ -267,40 +263,5 @@ Public Class CtDgvComboBoxEditingControl
         End Select
 
     End Function
-
-
-    'Dim DisabledList As New List(Of String)
-
-    ''Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-    ''    DisabledList.Add("Asia")
-    ''    DisabledList.Add("Europe")
-    ''End Sub
-
-    'Private Sub ComboBox1_DrawItem(ByVal sender As Object, ByVal e As DrawItemEventArgs) Handles ComboBox1.DrawItem
-    '    Dim ItemFont1 As New Font("Arial", 8, FontStyle.Regular)
-    '    Dim ItemFont2 As New Font("Arial", 12, FontStyle.Regular)
-    '    Dim CurrentItem As String = DirectCast(sender, ComboBox).Items(e.Index)
-
-    '    Using w As New SolidBrush(Color.White)
-    '        e.Graphics.FillRectangle(w, e.Bounds)
-    '    End Using
-
-    '    If DisabledList.Contains(CurrentItem) Then
-    '        Using b As New SolidBrush(Color.Gray)
-    '            e.Graphics.DrawString(CurrentItem, ItemFont2, b, e.Bounds.X, e.Bounds.Y)
-    '        End Using
-    '    Else
-    '        e.Graphics.DrawString(CurrentItem, ItemFont1, Brushes.Black, e.Bounds.X, e.Bounds.Y)
-    '    End If
-    'End Sub
-    ''this event below is to handle if the user select the disabled option then option 'below it is selected. This below code only handle for the disabled item at 'index 0. you can add other index too.
-    'Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
-    '    Dim comboBox As ComboBox = CType(sender, ComboBox)
-
-    '    Dim selectedIndex As Integer = comboBox.SelectedIndex
-    '    If selectedIndex = 0 Then
-    '        comboBox.SelectedIndex = selectedIndex + 1
-    '    End If
-    'End Sub
 
 End Class

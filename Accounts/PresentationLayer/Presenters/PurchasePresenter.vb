@@ -1,4 +1,5 @@
 ﻿Imports System.Dynamic
+Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
@@ -58,11 +59,12 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("VatPercent", GetType(Decimal))
             AddHandler view.ProductUnitEditing, AddressOf OnProductUnitEditing
             AddHandler view.ProductCodeChanged, AddressOf OnProductCodeChanged
-            AddHandler view.GTinScanned, AddressOf OnGTinScanned
             AddHandler view.ProductUnitSelection, AddressOf OnProductUnitSelection
-            AddHandler view.UnitChanged, AddressOf OnUnitChanged
-            AddHandler view.RowChanged, AddressOf OnRowChanged
+            AddHandler view.ProductCodeValidating, AddressOf OnProductCodeValidating
+            AddHandler view.ProductNameValidating, AddressOf OnProductNameValidating
             AddHandler view.PostData, AddressOf OnPostData
+            AddHandler view.RowChanged, AddressOf OnRowChanged
+
 
         End Sub
 
@@ -75,12 +77,12 @@ Namespace PresentationLayer.Presenters
             CreateDataSourceThread(data)
 
             data.Clear()
-            data.Add({"Unit", "UnitsByCode", Nothing, Nothing})
+            'data.Add({"Unit", "UnitsByCode", Nothing, Nothing})
             data.Add({"Product", "ProductsByCode", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "ProductName"})
-            'data.Add({"PurchaseDetail", "PurchaseHistory", Nothing, Nothing})
             CreateLookupDataThread(data)
-            'CreateLookupData("Unit", "UnitsByCode")
-            'data.Clear()
+            data.Clear()
+
+            CreateLookupData("Unit", "UnitsByCode")
 
         End Sub
 
@@ -172,65 +174,6 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Sub UpdateDueDate()
-            If View.SupplierIdNo IsNot Nothing Then
-                Dim supplierPaymentDueDays = GetSupplierPaymentDueDays(View.SupplierIdNo)
-                View.DueDate = DateAdd("d", supplierPaymentDueDays, View.TransactionDate)
-            Else
-                View.DueDate = Nothing
-            End If
-        End Sub
-
-        Private Function GetSupplierPaymentDueDays(idNo As String)
-            Return GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "PaymentDueDays")
-        End Function
-
-        'Public Sub UpdateEarlySettlementValues()
-        '    If View.SupplierIdNo IsNot Nothing Then
-        '        Dim supplierSettlementDueDays As Integer
-        '        Dim supplierSettlementDiscount As Decimal
-        '        supplierSettlementDueDays = GetSupplierSettlementDueDays(View.SupplierIdNo)
-        '        supplierSettlementDiscount = GetSupplierSettlementDiscount(View.SupplierIdNo)
-        '        View.SettlementDueDate = DateAdd("d", supplierSettlementDueDays, View.TransactionDate)
-        '        View.SettlementDiscount = supplierSettlementDiscount
-        '    Else
-        '        View.SettlementDueDate = Nothing
-        '        View.SettlementDiscount = 0
-        '    End If
-        'End Sub
-
-        'Public Function GetSupplierSettlementDueDays(idNo As String)
-        '    Return GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "SettlementDueDays")
-        'End Function
-
-        'Public Function GetSupplierSettlementDiscount(idNo As String)
-        '    Return GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "SettlementDiscount")
-        'End Function
-
-        Public Sub UpdateSupplierDate()
-            If View.TransactionDate IsNot Nothing Then
-                If View.InvoiceDate Is Nothing Then
-                    View.InvoiceDate = View.TransactionDate
-                End If
-            Else
-                View.InvoiceDate = Nothing
-            End If
-        End Sub
-
-        'Public Function ApPaymentExists(ByVal journalCode As String, ByVal idNo As Integer) As Boolean
-        '    Dim apOpenInvoiceIdNo As Integer
-        '    apOpenInvoiceIdNo = Service.GetRecordFieldWith2Key(journalCode, idNo, "ArOpenInvoice", "JournalCode",
-        '                                                       "PurchaseDetailIdNo", "IdNo")
-        '    If Service.CountRecordWithKey(Of Integer)("CdOiItem", "ApOpenInvoiceIdNo", apOpenInvoiceIdNo) > 0 Then
-        '        Return True
-        '    ElseIf Service.CountRecordWithKey(Of Integer)("CkOiItem", "ApOpenInvoiceIdNo", apOpenInvoiceIdNo) > 0 Then
-        '        Return True
-        '    ElseIf Service.CountRecordWithKey(Of Integer)("PcOiItem", "ApOpenInvoiceIdNo", apOpenInvoiceIdNo) > 0 Then
-        '        Return True
-        '    End If
-        '    Return False
-        'End Function
-
         Public Sub OnPurchasedgvItemsChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler
             Dim purchaseDetail As PurchaseDetailView = eventType.BindingSource.Current
             With eventType.BindingSource.Current
@@ -244,6 +187,9 @@ Namespace PresentationLayer.Presenters
                     Dim vPerc As Decimal = 0
                     Dim nAmt As Decimal = 0
                     Select Case eventType.PropertyName
+                        Case $"ProductCode"
+                            InitializePurchaseDetailValues(eventType.BindingSource, purchaseDetail.ProductCode)
+
                         Case $"Quantity", $"Price", $"BonusQuantity", $"VatPercent", $"DiscountPercent"
                             SetAmounts(purchaseDetail)
                             eventType.BindingSource.ResetCurrentItem()
@@ -302,26 +248,87 @@ Namespace PresentationLayer.Presenters
             End With
         End Sub
 
-        Private Sub InitializePurchaseDetailValues(ByRef purchaseDetail As PurchaseDetailView, productCode As String)
+        Private Sub InitializePurchaseDetailValues(ByRef bs As BindingSource, productCode As String)
             Dim product As ProductModel = GetProductModel(productCode)
             If product IsNot Nothing Then
-                If productCode <> purchaseDetail.ProductCode Then
-                    With purchaseDetail
-                        purchaseDetail.ProductIdNo = product.IdNo
-                        purchaseDetail.ProductName = product.ProductName
-                        If purchaseDetail.Quantity = 0 Then
-                            purchaseDetail.Quantity = 1
+                If productCode <> bs.Current.ProductCode Then
+                    With bs.Current
+                        .ProductIdNo = product.IdNo
+                        .ProductName = product.ProductName
+                        .UnitIdNo = product.BaseUnitIdNo
+                        If .Quantity = 0 Then
+                            .Quantity = 1
                         End If
-                        SetPurchaseDetailValues(product, purchaseDetail)
-                        purchaseDetail.ProductCode = product.ProductCode
+                        SetPurchaseDetailValues(product, bs.Current)
+                        .ProductCode = product.ProductCode
                     End With
                 End If
             Else
-                purchaseDetail.ProductIdNo = ""
-                purchaseDetail.ProductName = ""
+                bs.Current.ProductIdNo = ""
+                bs.Current.ProductName = ""
                 Messaging.Show(True, "Invalid Product Code!")
             End If
         End Sub
+
+
+        Private Sub OnProductCodeValidating(productCode As String, control As Control)
+            Dim product As New ProductModel
+            product = GetProductModel(productCode)
+            If product.ProductName Is Nothing Then
+                View.ProductCodeIsValid = False
+                'allow null Product Code, since user can enter Product Name instead of Product Code.
+            Else
+                View.ProductCodeIsValid = True
+                With View.PurchaseDetailsBs.Current
+                    .ProductIdNo = product.IdNo
+                    .ProductName = product.ProductName
+                    .UnitIdNo = product.BaseUnitIdNo
+                    .Quantity = 1
+                    .UnitCost = Service.GetLastPurchaseCost(product.IdNo)
+                    .NetAmount = .UnitCost * .Quantity
+                End With
+            End If
+        End Sub
+
+        Private Sub OnProductNameValidating(textToSearch As String, control As Control)
+            If textToSearch.Contains("<GS>") Then
+                Dim qrCodeData As Object = New ExpandoObject
+                Dim qrCodeText As String = textToSearch
+                qrCodeData = Accounts.AccountHelpers.GetQrCodeInfo(textToSearch)
+                View.PurchaseDetailsBs.Current.ProductCode = GetProductCodeFromGTin(qrCodeData.GTin)
+            Else
+                Dim formToRun As New ProductFinder(textToSearch, control)
+                formToRun.Presenter = New ProductFinderPresenter(Of ProductModel)(formToRun)
+                If formToRun.ShowDialog() = Windows.Forms.DialogResult.OK Then
+                    Dim product As ProductModel = formToRun.Product
+                    If product IsNot Nothing Then
+                        View.PurchaseDetailsBs.Current.ProductName = product.ProductName
+                        View.NumberOfUnits = formToRun.NoOfUnits
+                        If product Is Nothing Then
+                            View.ProductNameIsValid = False
+                        Else
+                            View.ProductNameIsValid = True
+                            View.PurchaseDetailsBs.Current.ProductCode = product.ProductCode
+                            With View.PurchaseDetailsBs.Current
+                                .ProductIdNo = product.IdNo
+                                .ProductName = product.ProductName
+                                .ProductCode = product.ProductCode
+                                .UnitIdNo = product.BaseUnitIdNo
+                                .Quantity = 1
+                                .UnitCost = Service.GetLastPurchaseCost(product.IdNo)
+                                .NetAmount = .UnitCost * .Quantity
+                            End With
+                            View.PurchaseDetailsBs.ResetBindings(False)
+                        End If
+                    Else
+                        View.ProductNameIsValid = False
+                    End If
+                Else
+                    View.ProductNameIsValid = False
+                End If
+            End If
+        End Sub
+
 
         Private Sub SetPurchaseDetailValues(pModel As ProductModel, purchaseDetail As PurchaseDetailView)
             Dim lastPurchaseInfo As Object = New ExpandoObject
@@ -420,6 +427,12 @@ Namespace PresentationLayer.Presenters
             Return IIf(purchaseDetail.GrossAmount - purchaseDetail.DiscountAmount = 0, 0, purchaseDetail.VatAmount / (purchaseDetail.GrossAmount - purchaseDetail.DiscountAmount) * 100)
         End Function
 
+        Private Function GetProductCodeFromGTin(gTin As String) As String
+            Dim idNo As Int32 = GetRecordFieldWithKeyG(Of Int32)(gTin, "Product", "GTin", "IdNo")
+            Dim productModel As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(idNo)
+            Return productModel.ProductCode
+        End Function
+
         Private Function GetProductModel(productCode As String) As ProductModel
             Dim productIdNo As Int32 = GetProductIdNo(productCode)
             Dim product As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(productIdNo)
@@ -434,15 +447,7 @@ Namespace PresentationLayer.Presenters
             If Not MyBase.IsOkToEditRecord() Then
                 Return False
             End If
-            Dim result As Boolean = True
-            'If ReconciledEntriesExist(View.PurchaseDetails, "AP") Then
-            '    result = False
-            'Else
-            '    If DependentRecordExist() Then
-            '        result = False
-            '    End If
-            'End If
-            Return result
+            Return True
         End Function
 
         Public Overrides Function IsOkToDeleteRecord() As Boolean
@@ -470,7 +475,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub OnProductCodeChanged(productCode As String, bs As BindingSource)
             Dim purchaseDetail As PurchaseDetailView = bs.Current
-            InitializePurchaseDetailValues(purchaseDetail, productCode)
+            InitializePurchaseDetailValues(bs.Current, productCode)
             If purchaseDetail.ProductIdNo > 0 Then
                 UpdatePurchaseHistory(purchaseDetail.ProductIdNo)
             End If
@@ -481,14 +486,6 @@ Namespace PresentationLayer.Presenters
             Dim productIdNo As Int32 = GetProductIdNo(productCode)
             Return _productService.GetRecordByIdNo(Of ProductModel)(productIdNo)
         End Function
-
-        Private Sub OnGTinScanned(gTin As String, bs As BindingSource, ByRef productCode As String)
-            Dim idNo As Int32 = GetRecordFieldWithKeyG(Of Int32)(gTin, "Product", "GTin", "IdNo")
-            Dim purchaseDetail As PurchaseDetailView = bs.Current
-            Dim productModel As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(idNo)
-            productCode = productModel.ProductCode
-            OnProductCodeChanged(productCode, bs)
-        End Sub
 
         Private Sub OnProductUnitSelection(productIdNo As Int32, bs As BindingSource)
             SetProductUnits(productIdNo)
@@ -544,9 +541,10 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub SetProductUnits(productIdNo As Int16)
-            Dim data As New ArrayList
-            data.Add({"ProductUnit_View", "UnitsByProduct", "UnitIdNo,UnitName,UnitCode", "ProductIdNo = " + productIdNo.ToString()})
-            CreateLookupDataThread(data)
+            'Dim data As New ArrayList
+            'data.Add({"ProductUnit_View", "UnitsByProduct", "UnitIdNo,UnitName,UnitCode", "ProductIdNo = " + productIdNo.ToString()})
+            'CreateLookupDataThread(data)
+            CreateLookupData("ProductUnitV", "UnitsByProduct", "ProductIdNo = " + productIdNo.ToString())
         End Sub
 
         Private Function GetLastPurchaseInfo(pModel As ProductModel) As ExpandoObject
@@ -602,6 +600,37 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
+
+        Public Sub UpdateDueDate()
+            If View.SupplierIdNo IsNot Nothing Then
+                Dim supplierPaymentDueDays = GetSupplierPaymentDueDays(View.SupplierIdNo)
+                View.DueDate = DateAdd("d", supplierPaymentDueDays, View.TransactionDate)
+            Else
+                View.DueDate = Nothing
+            End If
+        End Sub
+
+        Private Function GetSupplierPaymentDueDays(idNo As String)
+            Return GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "PaymentDueDays")
+        End Function
+
+        Public Sub UpdateSupplierDate()
+            If View.TransactionDate IsNot Nothing Then
+                If View.InvoiceDate Is Nothing Then
+                    View.InvoiceDate = View.TransactionDate
+                End If
+            Else
+                View.InvoiceDate = Nothing
+            End If
+        End Sub
+
+        'Private Sub OnGTinScanned(gTin As String, bs As BindingSource, ByRef productCode As String)
+        '    Dim idNo As Int32 = GetRecordFieldWithKeyG(Of Int32)(gTin, "Product", "GTin", "IdNo")
+        '    Dim purchaseDetail As PurchaseDetailView = bs.Current
+        '    Dim productModel As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(idNo)
+        '    productCode = productModel.ProductCode
+        '    OnProductCodeChanged(productCode, bs)
+        'End Sub
 
     End Class
 

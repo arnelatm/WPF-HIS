@@ -17,8 +17,8 @@ Namespace PresentationLayer.Presenters
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Private ReadOnly _inventoryService As New AccountsService("Inventory")
         Private ReadOnly _productService As New AccountsService("Product")
+        Private ReadOnly _inventoryService As New AccountsService("Inventory")
 
         Public Sub New(view As IInvTransactionView)
             MyBase.New(view)
@@ -51,9 +51,7 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("UnitIdNo", GetType(Int16))
             AddHandler view.ProductUnitEditing, AddressOf OnProductUnitEditing
             AddHandler view.ProductCodeChanged, AddressOf OnProductCodeChanged
-            'AddHandler view.GTinScanned, AddressOf OnGTinScanned
             AddHandler view.ProductUnitSelection, AddressOf OnProductUnitSelection
-            'AddHandler view.UnitChanged, AddressOf OnUnitChanged
             AddHandler view.InvTransactionTypeChanged, AddressOf OnInvTransactionTypeChanged
             AddHandler view.PostData, AddressOf OnPostData
             AddHandler view.ProductCodeValidating, AddressOf OnProductCodeValidating
@@ -74,7 +72,6 @@ Namespace PresentationLayer.Presenters
             data.Clear()
             'data.Add({"Unit", "UnitsByCode", Nothing, Nothing})
             data.Add({"Product", "ProductsByCode", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "ProductName"})
-            'data.Add({"InvTransactionDetail", "InvTransactionHistory", Nothing, Nothing})
             CreateLookupDataThread(data)
             data.Clear()
 
@@ -170,10 +167,6 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Function GetSupplierPaymentDueDays(idNo As String)
-            Return GetRecordFieldWithKey(idNo, "Supplier", "IdNo", "PaymentDueDays")
-        End Function
-
         Public Sub OnInvTransactiondgvItemsChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler
             Dim InvTransactionDetail As InvTransactionDetailView = eventType.BindingSource.Current
             With eventType.BindingSource.Current
@@ -263,17 +256,16 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Sub InitializeInvTransactionDetailValues(ByRef bs As BindingSource, productCode As String)
-            Dim retVal As Boolean = False
             Dim product As ProductModel = GetProductModel(productCode)
             If product IsNot Nothing Then
                 If productCode <> bs.Current.ProductCode Then
                     Dim inventory As New List(Of InventoryModel)
                     inventory = Service.GetRecordsWithGroupIdNo(Of InventoryModel)(product.IdNo, "ExpiryDate", "WarehouseIdNo = " & View.WarehouseToIdNo.ToString())
-                    bs.Current.ProductIdNo = product.IdNo
-                    bs.Current.ProductName = product.ProductName
-                    bs.Current.UnitIdNo = product.BaseUnitIdNo
-                    If inventory.Count() = 1 Then
-                        With bs.Current
+                    With bs.Current
+                        .ProductIdNo = product.IdNo
+                        .ProductName = product.ProductName
+                        .UnitIdNo = product.BaseUnitIdNo
+                        If inventory.Count() = 1 Then
                             If .Quantity = 0 Then
                                 .Quantity = inventory(0).QtyOnHand
                             End If
@@ -283,16 +275,15 @@ Namespace PresentationLayer.Presenters
                             .UnitCost = inventory(0).UnitCost
                             .NetAmount = inventory(0).UnitCost * inventory(0).QtyOnHand
                             .InventoryIdNo = inventory(0).IdNo
-                        End With
-                        retVal = True
-                    Else
-                        If View.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Then
-                            Messaging.Show(True, "MsgNoSuchInventory", "Error")
+                        Else
+                            If View.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Then
+                                Messaging.Show(True, "MsgNoSuchInventory", "Error")
+                            End If
+                            If View.InvTransTypeIdNo Then
+                            End If
+                            View.ProductInventory = inventory
                         End If
-                        If View.InvTransTypeIdNo Then
-                        End If
-                        View.ProductInventory = inventory
-                    End If
+                    End With
                 End If
             Else
                 bs.Current.ProductIdNo = ""
@@ -333,7 +324,6 @@ Namespace PresentationLayer.Presenters
                 View.InvTransactionDetailsBs.Current.UnitIdNo = product.BaseUnitIdNo
                 If inventory.Count() = 1 Then
                     UpdateInvTransactionDetail(inventory, 0)
-                    'View.InvTransactionDetailsBs.Current.ProductCode = product.ProductCode
                 ElseIf inventory.Count() > 1 Then
                     SelectInventory(inventory, control)
                 Else
@@ -346,11 +336,6 @@ Namespace PresentationLayer.Presenters
                     View.ProductInventory = inventory
                     View.ProductCodeIsValid = True
                 End If
-                'Else
-                ' same no need to change
-                'View.ProductCodeIsValid = True
-                'Messaging.Show(True, "Invalid Product Code!")
-                'End If
             End If
         End Sub
 
@@ -365,49 +350,53 @@ Namespace PresentationLayer.Presenters
                 formToRun.Presenter = New ProductFinderPresenter(Of ProductModel)(formToRun)
                 If formToRun.ShowDialog() = Windows.Forms.DialogResult.OK Then
                     Dim product As ProductModel = formToRun.Product
-                    View.InvTransactionDetailsBs.Current.ProductName = product.ProductName
-                    View.NumberOfUnits = formToRun.NoOfUnits
-                    If product Is Nothing Then
-                        View.ProductNameIsValid = False
-                    Else
-                        View.ProductNameIsValid = True
-                        View.InvTransactionDetailsBs.Current.ProductCode = product.ProductCode
-                        If View.InventoryAction = EnumToCode(InventoryActionSelection.PurchaseOrder) Then
-                            ' accept ProductName as is no need to check with inventory
-                            With View.InvTransactionDetailsBs.Current
-                                .ProductIdNo = product.IdNo
-                                .ProductName = product.ProductName
-                                .ProductCode = product.ProductCode
-                                .UnitIdNo = product.BaseUnitIdNo
-                                .Quantity = 1
-                                .UnitCost = Service.GetLastPurchaseCost(product.IdNo)
-                                .NetAmount = .UnitCost * .Quantity
-                            End With
-                            View.InvTransactionDetailsBs.ResetBindings(False)
+                    If product IsNot Nothing Then
+                        View.InvTransactionDetailsBs.Current.ProductName = product.ProductName
+                        View.NumberOfUnits = formToRun.NoOfUnits
+                        If product Is Nothing Then
+                            View.ProductNameIsValid = False
                         Else
-                            Dim inventory As New List(Of InventoryModel)
-                            Dim parameterObj As Object
-                            parameterObj = CreateDynamicObj("ProductIdNo,WarehouseIdNo", {product.IdNo, View.WarehouseIdNo})
-                            inventory = Service.GetRecordsWithParams(Of InventoryModel)(parameterObj, "ExpiryDate")
-                            View.InvTransactionDetailsBs.Current.ProductIdNo = product.IdNo
-                            View.InvTransactionDetailsBs.Current.ProductName = product.ProductName
-                            View.InvTransactionDetailsBs.Current.UnitIdNo = product.BaseUnitIdNo
-                            If inventory.Count() = 1 Then
-                                UpdateInvTransactionDetail(inventory, 0)
-                            ElseIf inventory.Count() > 1 Then
-                                SelectInventory(inventory, control)
+                            View.ProductNameIsValid = True
+                            View.InvTransactionDetailsBs.Current.ProductCode = product.ProductCode
+                            If View.InventoryAction = EnumToCode(InventoryActionSelection.PurchaseOrder) Then
+                                ' accept ProductName as is no need to check with inventory
+                                With View.InvTransactionDetailsBs.Current
+                                    .ProductIdNo = product.IdNo
+                                    .ProductName = product.ProductName
+                                    .ProductCode = product.ProductCode
+                                    .UnitIdNo = product.BaseUnitIdNo
+                                    .Quantity = 1
+                                    .UnitCost = Service.GetLastPurchaseCost(product.IdNo)
+                                    .NetAmount = .UnitCost * .Quantity
+                                End With
+                                View.InvTransactionDetailsBs.ResetBindings(False)
                             Else
-                                If View.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Then
-                                    Messaging.Show(True, "MsgNoSuchInventory", "Error")
-                                    View.ProductCodeIsValid = False
+                                Dim inventory As New List(Of InventoryModel)
+                                Dim parameterObj As Object
+                                parameterObj = CreateDynamicObj("ProductIdNo,WarehouseIdNo", {product.IdNo, View.WarehouseIdNo})
+                                inventory = Service.GetRecordsWithParams(Of InventoryModel)(parameterObj, "ExpiryDate")
+                                View.InvTransactionDetailsBs.Current.ProductIdNo = product.IdNo
+                                View.InvTransactionDetailsBs.Current.ProductName = product.ProductName
+                                View.InvTransactionDetailsBs.Current.UnitIdNo = product.BaseUnitIdNo
+                                If inventory.Count() = 1 Then
+                                    UpdateInvTransactionDetail(inventory, 0)
+                                ElseIf inventory.Count() > 1 Then
+                                    SelectInventory(inventory, control)
                                 Else
+                                    If View.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Then
+                                        Messaging.Show(True, "MsgNoSuchInventory", "Error")
+                                        View.ProductCodeIsValid = False
+                                    Else
+                                        View.ProductCodeIsValid = True
+                                    End If
+                                    View.ProductInventory = inventory
                                     View.ProductCodeIsValid = True
                                 End If
-                                View.ProductInventory = inventory
-                                View.ProductCodeIsValid = True
+                                View.InvTransactionDetailsBs.ResetBindings(False)
                             End If
-                            View.InvTransactionDetailsBs.ResetBindings(False)
                         End If
+                    Else
+                        View.ProductNameIsValid = False
                     End If
                 Else
                     View.ProductNameIsValid = False
@@ -430,20 +419,6 @@ Namespace PresentationLayer.Presenters
             View.ProductInventory = inventory
             View.ProductCodeIsValid = True
         End Sub
-
-        'Private Function GetlastPurchaseCost() As Decimal
-        '    Dim unitCost As Decimal = 0
-        '    Dim sql = "Select Case top 1 IIf(a.BonusQuantity+a.Quantity = 0, 0 ,a.NetAmount / (a.BonusQuantity + a.Quantity)) * IIf(a.UnitIdNo = c.BaseUnitIdNo,1, Iif(b.BaseQTy = 0, 0, b.UnitQty / b.BaseQty))" &
-        '              "From [ISPDATA].[dbo].[PurchaseDetail] a " &
-        '              "Left Join ProductUnit b On a.ProductIdNo = b.ProductIdNo And a.UnitIdNo = b.UnitIdNo " &
-        '              "Left Join Product c On a.ProductIdNo = c.IdNo " &
-        '              "where a.productidno = @ProductIdNo " &
-        '              "order by a.IdNo desc"
-
-        '    Return unitCost
-        'End Function
-
-
 
         Private Sub SelectInventory(inventory As List(Of InventoryModel), control As Control)
             Dim formToRun As New InventorySelector(inventory, control)
@@ -566,9 +541,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private Function GetProductCodeFromGTin(gTin As String) As String
-            Dim bs = View.InvTransactionDetailsBs
             Dim idNo As Int32 = GetRecordFieldWithKeyG(Of Int32)(gTin, "Product", "GTin", "IdNo")
-            Dim InvTransactionDetail As InvTransactionDetailView = bs.Current
             Dim productModel As ProductModel = _productService.GetRecordByIdNo(Of ProductModel)(idNo)
             Return productModel.ProductCode
         End Function

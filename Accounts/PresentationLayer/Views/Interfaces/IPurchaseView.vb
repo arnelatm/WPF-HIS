@@ -24,15 +24,21 @@ Namespace PresentationLayer.Views.Interfaces
         Property VatNumber As String
         Property WarehouseIdNo As Int16
 
-        Property UnitsByCode As DataTable
-        Property UnitsByProduct As DataTable
+        Property PurchaseDetailsBs As BindingSource
+        'Property UnitsByCode As DataTable
+        Property UnitsByCode As Object
+        'Property UnitsByProduct As DataTable
+        Property UnitsByProduct As Object
+        Property ProductCodeIsValid As Boolean
+        Property NumberOfUnits As Short
+        Property ProductNameIsValid As Boolean
         Event ProductUnitEditing(productIdNo As Int32) ', bs As BindingSource)
         Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource)
         Event ProductCodeChanged(productCode As String, bs As BindingSource)
-        Event GTinScanned(GTin As String, bs As BindingSource, ByRef productCode As String)
-        Event UnitChanged(oldUnit As Short, newUnit As Short, bs As BindingSource, formattedValue As String)
         Event RowChanged(productIdNo As Integer)
         Event PostData(idNo As Int32)
+        Event ProductCodeValidating(productCode As String, control As Control)
+        Event ProductNameValidating(productName As String, control As Control)
         'Event ProductNameChanged(productName As String, bs As BindingSource)
     End Interface
 

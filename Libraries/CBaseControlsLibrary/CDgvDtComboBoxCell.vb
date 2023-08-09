@@ -13,7 +13,7 @@ Public Class CDgvDtComboBoxCell
     ' editing control type, which is your custom ComboBox class...
     Public Overrides ReadOnly Property EditType() As Type
         Get
-            Return GetType(CDgvDtComboBoxEditingControl)
+            Return GetType(CtDgvComboBoxEditingControl)
         End Get
     End Property
 

@@ -16,6 +16,16 @@ Public Class CDgvComboBoxEditingControl
     Private _filterRuleCompiled As Func(Of String, Boolean)
     Private _suggestListOrderRule As Expression(Of Func(Of String, String))
     Private _suggestListOrderRuleCompiled As Func(Of String, String)
+    Public Sub New()
+        _filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
+        _suggestListOrderRuleCompiled = Function(s) s
+        PropertySelectorCompiled = Function(collection) collection.Cast(Of String)()
+
+        SuggestListForm.SuggestListBox.DataSource = _suggestBindingList
+        AddHandler SuggestListForm.SuggestListBox.Click, AddressOf SuggestListBoxOnClick
+        AddHandler ParentChanged, AddressOf OnParentChanged
+
+    End Sub
 
     Public Property SuggestBoxHeight As Integer
         Get
@@ -59,16 +69,6 @@ Public Class CDgvComboBoxEditingControl
         End Set
     End Property
 
-    Public Sub New()
-        _filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
-        _suggestListOrderRuleCompiled = Function(s) s
-        PropertySelectorCompiled = Function(collection) collection.Cast(Of String)()
-
-        SuggestListForm.SuggestListBox.DataSource = _suggestBindingList
-        AddHandler SuggestListForm.SuggestListBox.Click, AddressOf SuggestListBoxOnClick
-        AddHandler ParentChanged, AddressOf OnParentChanged
-
-    End Sub
 
     Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged
         DisplayMember = "Name"
