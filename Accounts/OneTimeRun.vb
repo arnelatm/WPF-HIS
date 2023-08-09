@@ -146,6 +146,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgNoSuchInventory", "Sorry, no such item exist in the current inventory. You cannot deduct an inventory item which does not exist in the invetory!", "Error")
         Messaging.AddMessage("MsgWareHouseToBlank", "Sorry, 'warehouse to transfer' cannot be empty for an inventory transfer!", "error")
         Messaging.AddMessage("MsgNonPostableEntry", "Sorry, this entry is a non-postable inventory transaction.", "error")
+        Messaging.AddMessage("MsgDateCannotBeBlank", "Sorry, empty date not allowed.", "error")
     End Sub
 
     'Public Shared Sub CreateEnums()

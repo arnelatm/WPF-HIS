@@ -120,7 +120,7 @@ Namespace DataLayer.AdoNet
             If InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
                 Dim connection As New Db
                 Dim transactionObj As New TransactionObject()
-                transactionObj.CreateConnection("InvTransPostingTransfer", Db.GetConnectionString)
+                transactionObj.CreateConnection("PostInvTransDetailTransfer", Db.GetConnectionString)
                 For Each item As InvTransactionDetail In invTransDetails
                     Dim parameters As Object = {"@InvTransactionDetailIdNo", item.IdNo,
                                                 "@InventoryIdNo", item.InventoryIdNo,
@@ -143,7 +143,30 @@ Namespace DataLayer.AdoNet
             ElseIf InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Then
                 Dim connection As New Db
                 Dim transactionObj As New TransactionObject()
-                transactionObj.CreateConnection("InvTransactionPosting", Db.GetConnectionString)
+                transactionObj.CreateConnection("PostInvTransDetailDeduct", Db.GetConnectionString)
+                For Each item As InvTransactionDetail In invTransDetails
+                    Dim parameters As Object = {"@InvTransactionDetailIdNo", item.IdNo,
+                                                "@InventoryIdNo", item.InventoryIdNo,
+                                                "@InvTransactionIdNo", InvTrans.IdNo,
+                                                "@WarehouseIdNo", InvTrans.WarehouseToIdNo}
+                    Dim updatedCount As Int32 = Db.RunSqlStoredProcedure("PostInvTransDetailDeduct", parameters)
+                    If updatedCount < 0 Then
+                        retVal = False
+                        Exit For
+                    End If
+                Next
+                If retVal Then
+                    Dim sql As String = "update invtransaction set posted = 1 where idno = @InvTranactionIdNo"
+                    Dim updatedCount = Db.ExecuteSqlInTransaction(transactionObj, sql, {"@InvTranactionIdNo", InvTrans.IdNo})
+                    If updatedCount < 0 Then
+                        retVal = False
+                    End If
+                End If
+                Db.CloseTransaction(transactionObj, retVal)
+            ElseIf InventoryAction = EnumToCode(InventoryActionSelection.Add) Then
+                Dim connection As New Db
+                Dim transactionObj As New TransactionObject()
+                transactionObj.CreateConnection("PostInvTransDetailAdd", Db.GetConnectionString)
                 For Each item As InvTransactionDetail In invTransDetails
                     Dim parameters As Object = {"@InvTransactionDetailIdNo", item.IdNo,
                                                 "@InventoryIdNo", item.InventoryIdNo,
