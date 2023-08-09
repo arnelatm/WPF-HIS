@@ -7,6 +7,7 @@ Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 Imports AATM.DataLayer.AdoNet.Db
 Imports AATM.Libraries.GlobalFuncNSub
+Imports Microsoft.Office.Interop.Excel
 
 Namespace DataLayer.AdoNet
     ' Data access object for InvTransaction
@@ -14,7 +15,7 @@ Namespace DataLayer.AdoNet
 
     Public Class InvTransactionDao
         Inherits AccountsDao
-        Implements IDao(Of InvTransaction), IDaoPosting, IDaoChild(Of Inventory), IDaoAutoReference(Of Inventory)
+        Implements IDao(Of InvTransaction), IDaoPosting, IGetLastPurchaseCost, IDaoChild(Of Inventory), IDaoAutoReference(Of Inventory), IDaoGetRecordsWithParams(Of Inventory)
 
 
         Private Const FieldList = "Amount," &
@@ -119,31 +120,17 @@ Namespace DataLayer.AdoNet
             If InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
                 Dim connection As New Db
                 Dim transactionObj As New TransactionObject()
-                transactionObj.CreateConnection("InvTransactionPosting", Db.GetConnectionString)
+                transactionObj.CreateConnection("InvTransPostingTransfer", Db.GetConnectionString)
                 For Each item As InvTransactionDetail In invTransDetails
                     Dim parameters As Object = {"@InvTransactionDetailIdNo", item.IdNo,
                                                 "@InventoryIdNo", item.InventoryIdNo,
                                                 "@InvTransactionIdNo", InvTrans.IdNo,
                                                 "@WarehouseIdNo", InvTrans.WarehouseToIdNo}
-                    Dim updatedCount As Int32 = Db.RunSqlStoredProcedure("PostInvTransactionDetail", parameters)
+                    Dim updatedCount As Int32 = Db.RunSqlStoredProcedure("PostInvTransDetailTransfer", parameters)
                     If updatedCount < 0 Then
                         retVal = False
                         Exit For
                     End If
-                    'Dim sql As String
-                    'sql = "Update Inventory set qtyonhand = qtyonhand - " &
-                    '      "(select IIf(c.UnitQTy = 0,0,(cast(a.Quantity as Decimal(12,2)) * c.BaseQty / c.UnitQty)) " &
-                    '      "From InvTransactionDetail a " &
-                    '      "Left Join InvTransaction b " &
-                    '      "On a.InvTransactionIdNo = b.IdNo " &
-                    '      "Left Join ProductUnit_View c " &
-                    '      "On a.ProductIdNo = c.ProductIdNo And a.UnitIdNo = c.UnitIdNo " &
-                    '      "where a.IdNo = @InvTransactionDetailIdNo) " &
-                    '      "where idNo = @InventoryIdNo "
-                    'transactionObj.Command.Parameters.Clear()
-                    'If Db.ExecuteSqlInTransaction(transactionObj, sql, {"@InvTransactionDetailIdNo", item.IdNo, "@InventoryIdNo", item.InventoryIdNo}) <> 0 Then
-                    '    retVal = False
-                    'End If
                 Next
                 If retVal Then
                     Dim sql As String = "update invtransaction set posted = 1 where idno = @InvTranactionIdNo"
@@ -153,7 +140,29 @@ Namespace DataLayer.AdoNet
                     End If
                 End If
                 Db.CloseTransaction(transactionObj, retVal)
-                'retVal = transactionObj.Success
+            ElseIf InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Then
+                Dim connection As New Db
+                Dim transactionObj As New TransactionObject()
+                transactionObj.CreateConnection("InvTransactionPosting", Db.GetConnectionString)
+                For Each item As InvTransactionDetail In invTransDetails
+                    Dim parameters As Object = {"@InvTransactionDetailIdNo", item.IdNo,
+                                                "@InventoryIdNo", item.InventoryIdNo,
+                                                "@InvTransactionIdNo", InvTrans.IdNo,
+                                                "@WarehouseIdNo", InvTrans.WarehouseToIdNo}
+                    Dim updatedCount As Int32 = Db.RunSqlStoredProcedure("PostInvTransDetailDeduct", parameters)
+                    If updatedCount < 0 Then
+                        retVal = False
+                        Exit For
+                    End If
+                Next
+                If retVal Then
+                    Dim sql As String = "update invtransaction set posted = 1 where idno = @InvTranactionIdNo"
+                    Dim updatedCount = Db.ExecuteSqlInTransaction(transactionObj, sql, {"@InvTranactionIdNo", InvTrans.IdNo})
+                    If updatedCount < 0 Then
+                        retVal = False
+                    End If
+                End If
+                Db.CloseTransaction(transactionObj, retVal)
             End If
             'retVal = Db.ExecuteMultiSqls("UpdateInventory", sqls)
             Return retVal
@@ -171,18 +180,6 @@ Namespace DataLayer.AdoNet
         '    Return baseUnitPrice
         'End Function
 
-
-        Public Function GetRecordsWithGroupIdNo(productIdNo As Object, Optional sortExpression As Object = Nothing) As List(Of Inventory) Implements IDaoChild(Of Inventory).GetRecordsWithGroupIdNo
-            If sortExpression Is Nothing Then
-                sortExpression = "IdNo"
-            End If
-            Dim sql As String = "select BatchNo, ExpiryDate, IdNo, TotalCost, ProductIdNo, TransactionIdNo, QtyOnHand, UnitCost, UnitSalesPrice, WarehouseIdNo from Inventory_View " &
-                    "where ProductIdNo = @ProductIdNo And QtyOnHand <> 0 And BranchIdNo = @BranchIdNo Order By " + sortExpression
-            Dim params() As Object = {"@ProductIdNo", productIdNo, "@BranchIdNo", GlobalVariables.BranchIdNo}
-            Return Db.Read(sql, MakeInventory, params).ToList()
-        End Function
-
-
         Private Shared ReadOnly MakeInventory As Func(Of IDataReader, Inventory) =
                                     Function(reader) _
             New Inventory() With {
@@ -198,14 +195,6 @@ Namespace DataLayer.AdoNet
                                   .WarehouseIdNo = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("WarehouseIdNo"))
                                   }
 
-        Public Function DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of Inventory).DelUpdateTvp
-            Throw New NotImplementedException()
-        End Function
-
-        Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of Inventory).InsertTvp
-            Throw New NotImplementedException()
-        End Function
-
 
         'Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of Inventory) Implements IDaoChild(Of Inventory).GetRecordsWithGroupIdNo
         '    If sortExpression Is Nothing Then
@@ -217,7 +206,7 @@ Namespace DataLayer.AdoNet
         '            "on SecurityObject.IdNo = GroupAccess.SecurityObjectIdNo  and SecurityGroupIdNo = @SecurityGroupIdNo " &
         '            "Order By " & sortExpression & " ASC "
         '    Dim params() As Object = {"@SecurityGroupIdNo", idNo}
-        '    Return Nothing ' Db.Read(sql, Make, params).ToList()
+        '    Return Db.Read(sql, Make, params).ToList()
         'End Function
 
         Public Function UpdateReferenceNumber(ByRef bizObj As Inventory) As Integer Implements IDaoAutoReference(Of Inventory).UpdateReferenceNumber
@@ -250,6 +239,40 @@ Namespace DataLayer.AdoNet
             Return retVal
         End Function
 
+        Public Function GetRecordsWithParams(parameters As Object, Optional sortExpression As String = Nothing) As List(Of Inventory) Implements IDaoGetRecordsWithParams(Of Inventory).GetRecordsWithParams
+            If sortExpression Is Nothing Then
+                sortExpression = "IdNo"
+            End If
+            Dim sql As String = "select BatchNo, ExpiryDate, IdNo, TotalCost, ProductIdNo, TransactionIdNo, QtyOnHand, UnitCost, UnitSalesPrice, WarehouseIdNo from Inventory_View " &
+                    "where ProductIdNo = @ProductIdNo And QtyOnHand <> 0 And BranchIdNo = @BranchIdNo and WarehouseIdNo = @WarehouseIdNo Order By " + sortExpression
+            Dim params() As Object = {"@ProductIdNo", parameters.ProductIdNo, "@WarehouseIdNo", parameters.WarehouseIdNo, "@BranchIdNo", GlobalVariables.BranchIdNo}
+            Return Db.Read(sql, MakeInventory, params).ToList()
+        End Function
+
+        Public Function GetRecordsWithGroupIdNo(idNo As Object, Optional sortExpression As Object = Nothing) As List(Of Inventory) Implements IDaoChild(Of Inventory).GetRecordsWithGroupIdNo
+            If sortExpression Is Nothing Then
+                sortExpression = "IdNo"
+            End If
+            Dim sql As String = "select BatchNo, ExpiryDate, IdNo, TotalCost, ProductIdNo, TransactionIdNo, QtyOnHand, UnitCost, UnitSalesPrice, WarehouseIdNo from Inventory_View " &
+                    "where ProductIdNo = @ProductIdNo And QtyOnHand <> 0 And BranchIdNo = @BranchIdNo and WarehouseIdNo = @WarehouseIdNo Order By " + sortExpression
+            Dim params() As Object = {"@ProductIdNo", idNo, "@BranchIdNo", GlobalVariables.BranchIdNo}
+            Return Db.Read(sql, MakeInventory, params).ToList()
+        End Function
+
+        Public Function DelUpdateTvp(ByRef tvpTable As Data.DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of Inventory).DelUpdateTvp
+            Throw New NotImplementedException()
+        End Function
+
+        Public Function InsertTvp(ByRef tvpTable As Data.DataTable) As Integer Implements IDaoChild(Of Inventory).InsertTvp
+            Throw New NotImplementedException()
+        End Function
+
+        Public Function GetLastPurchaseCost(productidNo As Int32) As Decimal Implements IGetLastPurchaseCost.GetLastPurchaseCost
+            Return Db.RunSqlStoredProcedure("spGetLastPurchaseCost", {"@ProductIdNo", productidNo})
+        End Function
+
     End Class
+
+
 
 End Namespace

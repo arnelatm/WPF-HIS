@@ -46,12 +46,12 @@ Namespace DataLayer.AdoNet
             .ExpiryDate = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date)(reader("ExpiryDate")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .TotalCost = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("TotalCost")),
-            .ProductIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("ProductIdNo")),
-            .QtyOnHand = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("QtyOnHand")),
+            .ProductIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("ProductIdNo")),
+            .QtyOnHand = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Decimal)(reader("QtyOnHand")),
             .TransactionIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("TransactionIdNo")),
             .UnitCost = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("UnitCost")),
             .UnitSalesPrice = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("UnitSalesPrice")),
-            .WarehouseIdNo = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("WarehouseIdNo"))
+            .WarehouseIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("WarehouseIdNo"))
            }
 
         Public Function AddRecord(ByRef recordData As Inventory) As Integer Implements IDao(Of Inventory).AddRecord

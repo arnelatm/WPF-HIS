@@ -88,6 +88,11 @@ Namespace DataLayer
 
     End Interface
 
+    Public Interface IGetLastPurchaseCost
+        Function GetLastPurchaseCost(productIdNo As Integer) As Decimal
+
+    End Interface
+
     Public Interface IDaoPosting
         Function PostData(idNo As Int32) As Boolean
 

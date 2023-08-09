@@ -388,6 +388,8 @@ Public Enum InventoryActionSelection
     <EnumCode("A")> Add
     <EnumCode("D")> Deduct
     <EnumCode("T")> Transfer
+    <EnumCode("P")> PurchaseOrder
+    <EnumCode("R")> Request
 End Enum
 Public Enum AbsenceTypeSelection
     <EnumCode("")> NotSpecified

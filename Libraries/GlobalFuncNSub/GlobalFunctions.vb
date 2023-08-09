@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.Drawing
 Imports System.Drawing.Printing
+Imports System.Dynamic
 Imports System.Globalization
 Imports System.IO
 Imports System.Linq.Expressions
@@ -1531,6 +1532,26 @@ Public Module GlobalFunctions
             End If
         End If
         Return False
+    End Function
+
+    Public Function CreateDynamicObj(fieldsList As String, values As Object)
+        Dim fields = fieldsList.Split(",")
+        Dim obj As New ExpandoObject
+        Dim i As Int16 = 0
+        For Each item In fields
+            CreateDynamicField(obj, item, values(i))
+            i = i + 1
+        Next
+        Return obj
+    End Function
+
+
+    Public Function CreateDynamicField(ByRef obj As ExpandoObject, ByVal propertyName As String, ByVal propertyValue As Object)
+        Dim name As String = propertyName.Replace(" ", "")
+        name = name.Replace("[", "")
+        name = name.Replace("]", "")
+        CType(obj, IDictionary(Of String, Object))(name) = propertyValue
+        Return obj
     End Function
 
     Public Function DecimalToFraction(ByVal decimalNumber As Double, Optional den As Integer = 32) As String

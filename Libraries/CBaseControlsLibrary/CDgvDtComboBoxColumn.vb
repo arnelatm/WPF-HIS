@@ -13,7 +13,7 @@ Public Class CDgvDtComboBoxColumn
     Public Sub New()
         '' Specify the column to use your custom cell class...
         CellTemplate = New CDgvDtComboBoxCell()
-        AutoComplete = False
+        AutoComplete = True
     End Sub
 
     Public Overrides Property CellTemplate() As DataGridViewCell
