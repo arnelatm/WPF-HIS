@@ -74,7 +74,7 @@ Public Class CtDgvComboBoxEditingControl
 
     Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged
         DisplayMember = "Name"
-        PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(0).ToString())
+        PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(1).ToString())
     End Sub
 
     Protected Overrides Sub OnTextChanged(ByVal e As EventArgs)
