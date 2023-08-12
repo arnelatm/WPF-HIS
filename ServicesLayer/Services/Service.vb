@@ -580,8 +580,8 @@ Namespace Services
             Return dataModel
         End Function
 
-        Public Function GetRecordsWithParams(Of TM)(parameters As Object, Optional ByRef sortKey As String = Nothing) As List(Of TM) Implements IService.GetRecordsWithParams
-            Dim bizData = DataDao.GetRecordsWithParams(parameters, sortKey)
+        Public Function GetRecordsWithParams(Of TM)(parameters As Object) As List(Of TM) Implements IService.GetRecordsWithParams
+            Dim bizData = DataDao.GetRecordsWithParams(parameters)
             Dim dataModel As New List(Of TM)
             GlobalVariables.Mapper.Map(bizData, dataModel)
             Return dataModel

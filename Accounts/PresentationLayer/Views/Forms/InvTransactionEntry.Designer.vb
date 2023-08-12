@@ -921,6 +921,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvUnitIdNo.ReadOnly = True
             Me.dgvUnitIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvUnitIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvUnitIdNo.SuggestCharCount = 0
             Me.dgvUnitIdNo.Translatable = False
             '
             'dgvUnitCost

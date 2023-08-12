@@ -143,7 +143,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgBlankExpNotAllowed", "Sorry, expiry date is a needed for this item.", "Error")
         Messaging.AddMessage("MsgExpDateNeeded", "Error on line {lineNumber}. Sorry expiry date needed for the said purchase item.", "Invalid Entry")
         Messaging.AddMessage("MsgMustSelectFromList", "Sorry you must select a <{selectionName}> from the list. Blank Values not allowed.", "Error")
-        Messaging.AddMessage("MsgNoSuchInventory", "Sorry, no such item exist in the current inventory. You cannot deduct an inventory item which does not exist in the invetory!", "Error")
+        Messaging.AddMessage("MsgNoSuchInventory", "Sorry, no such item exist in the current inventory. You cannot deduct an inventory item which does not exist in the inventory!", "Error")
         Messaging.AddMessage("MsgWareHouseToBlank", "Sorry, 'warehouse to transfer' cannot be empty for an inventory transfer!", "error")
         Messaging.AddMessage("MsgNonPostableEntry", "Sorry, this entry is a non-postable inventory transaction.", "error")
         Messaging.AddMessage("MsgDateCannotBeBlank", "Sorry, empty date not allowed.", "error")

@@ -33,7 +33,8 @@ Namespace PresentationLayer.Views.Forms
         Public Property ProductsByCode As DataTable Implements IInvTransactionView.ProductsByCode
         Public Property UnitsByCode As Object Implements IInvTransactionView.UnitsByCode
         Public Property UnitsByProduct As Object Implements IInvTransactionView.UnitsByProduct
-        Public Property ProductInventory As List(Of InventoryModel) Implements IInvTransactionView.ProductInventory
+        Public Property ProductInInventory As Boolean Implements IInvTransactionView.ProductInInventory
+
         'Public Property UnitsByProduct As DataTable Implements IInvTransactionView.UnitsByProduct
         'Public Property UnitsByCode As DataTable Implements IInvTransactionView.UnitsByCode
         Public Sub New()
@@ -295,27 +296,32 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Function ValidateProductName(ByRef dgv As CtDataGridView, ByRef e As DataGridViewCellValidatingEventArgs) As Boolean
-            Dim retVal As Boolean = False
+            Dim valid As Boolean = True
             Dim findText = dgv.CurrentRow.Cells("dgvProductName").EditedFormattedValue
-            RaiseEvent ProductNameValidating(findText, dgv)
+            RaiseEvent ProductNameValidating(findText, DataGridViewInvTransactionDetails.EditingControl)
             If ProductNameIsValid Then
-                retVal = True
-                If InventoryAction = EnumToCode(InventoryActionSelection.PurchaseOrder) Then
-                    'SendKeys.Send("{Tab}")
+                valid = True
+                If InventoryAction = EnumToCode(InventoryActionSelection.PurchaseOrder) Or
+                   InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
+                    'just go to the next field, in this case go to the quantity field
+                    'Purchase Order/Request Items are always valid no check needed
                 Else
-                    If dgv.CurrentRow.Cells("dgvUnitIdNo").Value <= 0 Or NumberOfUnits <= 1 Then
-                        SendKeys.Send("{Tab}{Tab}{Tab}")
+                    'Product must be in the inventory, so check for existence on inventory
+                    If ProductInInventory Then
+                        If dgv.CurrentRow.Cells("dgvUnitIdNo").Value <= 0 Or NumberOfUnits <= 1 Then
+                            SendKeys.Send("{Tab}{Tab}{Tab}")
+                        Else
+                            SendKeys.Send("{Tab}{Tab}")
+                        End If
                     Else
-                        SendKeys.Send("{Tab}{Tab}")
+                        'just move to the next field
                     End If
                 End If
             Else
-                Dim msg = Messaging.GetParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", findText, "fieldDescription", "Product Name"})
-                Messaging.Show(msg)
                 e.Cancel = True
-                dgv.Rows(e.RowIndex).ErrorText = msg
+                valid = False
             End If
-            Return retVal
+            Return valid
         End Function
 
         Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewInvTransactionDetails.CellEndEdit
@@ -325,36 +331,21 @@ Namespace PresentationLayer.Views.Forms
 
 
         Private Function ValidateProductCode(ByRef dgv As CtDataGridView, ByRef e As DataGridViewCellValidatingEventArgs)
-            Dim valid As Boolean = False
+            Dim valid As Boolean
             Dim code As String = dgv.CurrentRow.Cells("dgvProductCode").EditedFormattedValue
-            Dim pnt As New Point(dgv.Location)
-            Dim xpnt As Point = dgv.PointToClient(dgv.Location)
-            Dim startPoint = dgv.PointToScreen(dgv.Location)
-            If Not (code Is Nothing OrElse code = "") Then
-                RaiseEvent ProductCodeValidating(code, DataGridViewInvTransactionDetails.EditingControl)
-                If Not ProductCodeIsValid Then
-                    e.Cancel = True
-                    Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", code, "fieldDescription", "Product Code"})
+            RaiseEvent ProductCodeValidating(code, DataGridViewInvTransactionDetails.EditingControl)
+            If ProductCodeIsValid Then
+                If code Is Nothing Or code = "" Then
+                    ' go to next name entry
+                ElseIf ProductInInventory Then
+                    SendKeys.Send("{Tab}{Tab}{Tab}")
                 Else
-                    Dim cProductName = dgv.CurrentRow().Cells("dgvProductName").Value
-                    If Not String.IsNullOrEmpty(cProductName) Then
-                        If ProductInventory IsNot Nothing AndAlso ProductInventory.Count() >= 1 Then
-                            SendKeys.Send("{Tab}{Tab}{Tab}")
-                            valid = True
-                        Else
-                            SendKeys.Send("{Tab}")
-                            valid = True
-                        End If
-                    Else
-                        If Not String.IsNullOrEmpty(code) Then
-                            e.Cancel = True
-                            Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", code, "fieldDescription", "Product Code"})
-                        End If
-                    End If
+                    SendKeys.Send("{Tab}")
                 End If
-            Else
-                ' allow empty product code they can always enter by name.
                 valid = True
+            Else
+                valid = False
+                e.Cancel = True
             End If
             Return valid
         End Function
@@ -485,18 +476,6 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub btnPost_ClickButtonArea(Sender As Object, e As MouseEventArgs)
-            If Not Posted Then
-                Dim caption = Messaging.TranslateCaption("Please confirm.")
-                Dim action As String = Messaging.TranslateCaption("post")
-                Dim itemName As String = Messaging.TranslateCaption("InvTransaction transaction")
-                Dim msg = Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
-                If Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-                    RaiseEvent PostData(IdNo)
-                End If
-            End If
-        End Sub
-
         Private Sub cboInvTransTypeIdNo_Validating(sender As Object, e As CancelEventArgs) Handles cboInvTransTypeIdNo.Validating
             If cboInvTransTypeIdNo.SelectedValue Is Nothing Then
                 Messaging.ShowPmMessage(True, "MsgMustSelectFromList", {"selectionName", Messaging.TranslateCaption("Inventory Transaction Type")})
@@ -506,28 +485,47 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub cboInvTransTypeIdNo_Validated(sender As Object, e As EventArgs) Handles cboInvTransTypeIdNo.Validated
             RaiseEvent InvTransactionTypeChanged(sender.SelectedValue)
-            If InventoryAction = EnumToCode(InventoryActionSelection.PurchaseOrder) Then
-                dgvBatchNo.Visible = False
-                dgvExpiryDate.Visible = False
-            Else
-                dgvBatchNo.Visible = True
-                dgvExpiryDate.Visible = True
-            End If
+            UpdateDgvColumns()
         End Sub
 
-        Private Sub btnPost_ClickButtonArea_1(Sender As Object, e As MouseEventArgs) Handles btnPost.ClickButtonArea
+        Private Sub btnPost_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPost.ClickButtonArea
             If InventoryAction = EnumToCode(InventoryActionSelection.Add) Or
-               InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or
-               InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
+                    InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or
+                    InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
                 Dim caption = Messaging.TranslateCaption("Please confirm.")
                 Dim action As String = Messaging.TranslateCaption("post")
-                Dim itemName As String = Messaging.TranslateCaption("inventory transaction")
+                Dim itemName As String = Messaging.TranslateCaption("InvTransaction transaction")
                 Dim msg = Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
                 If Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
                     RaiseEvent PostData(IdNo)
                 End If
             Else
                 Messaging.Show(True, "MsgNonPostableEntry")
+            End If
+        End Sub
+
+
+
+        Private Sub cboInvTransTypeIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboInvTransTypeIdNo.SelectedIndexChanged
+            UpdateDgvColumns()
+        End Sub
+
+        Private Sub UpdateDgvColumns()
+            If InventoryAction = EnumToCode(InventoryActionSelection.PurchaseOrder) Then
+                dgvBatchNo.Visible = False
+                dgvExpiryDate.Visible = False
+                dgvBatchNo.DisplayOnly = False
+                dgvExpiryDate.DisplayOnly = False
+                dgvUnitCost.DisplayOnly = False
+                dgvNetAmount.DisplayOnly = False
+            ElseIf InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or
+                   InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
+                dgvBatchNo.Visible = True
+                dgvExpiryDate.Visible = True
+                dgvBatchNo.DisplayOnly = True
+                dgvExpiryDate.DisplayOnly = True
+                dgvUnitCost.DisplayOnly = True
+                dgvNetAmount.DisplayOnly = True
             End If
         End Sub
     End Class

@@ -15,7 +15,7 @@ Namespace DataLayer.AdoNet
 
     Public Class InvTransactionDao
         Inherits AccountsDao
-        Implements IDao(Of InvTransaction), IDaoPosting, IGetLastPurchaseCost, IDaoChild(Of Inventory), IDaoAutoReference(Of Inventory), IDaoGetRecordsWithParams(Of Inventory)
+        Implements IDao(Of InvTransaction), IDaoPosting, IDaoChild(Of Inventory), IDaoAutoReference(Of Inventory), IDaoGetRecordsWithParams(Of Inventory)
 
 
         Private Const FieldList = "Amount," &
@@ -262,13 +262,21 @@ Namespace DataLayer.AdoNet
             Return retVal
         End Function
 
-        Public Function GetRecordsWithParams(parameters As Object, Optional sortExpression As String = Nothing) As List(Of Inventory) Implements IDaoGetRecordsWithParams(Of Inventory).GetRecordsWithParams
-            If sortExpression Is Nothing Then
-                sortExpression = "IdNo"
+        Public Function GetRecordsWithParams(parameters As Object) As List(Of Inventory) Implements IDaoGetRecordsWithParams(Of Inventory).GetRecordsWithParams
+            Dim sortExpression As String = ""
+            Dim filter As String = ""
+            If parameters.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or
+               parameters.InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Or
+               parameters.InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
+                sortExpression = "ExpiryDate"
+                filter = "ProductIdNo = @ProductIdNo and QtyOnHand <> 0 and WarehouseIdNo = @WarehouseIdNo"
+            ElseIf parameters.InventoryAction = EnumToCode(InventoryActionSelection.Add) Then
+                sortExpression = "ExpiryDate Desc"
+                filter = "ProductIdNo = @ProductIdNo and WarehouseIdNo = @WarehouseIdNo and ExpiryDate > CAST( GETDATE() AS Date )"
             End If
             Dim sql As String = "select BatchNo, ExpiryDate, IdNo, TotalCost, ProductIdNo, TransactionIdNo, QtyOnHand, UnitCost, UnitSalesPrice, WarehouseIdNo from Inventory_View " &
-                    "where ProductIdNo = @ProductIdNo And QtyOnHand <> 0 And BranchIdNo = @BranchIdNo and WarehouseIdNo = @WarehouseIdNo Order By " + sortExpression
-            Dim params() As Object = {"@ProductIdNo", parameters.ProductIdNo, "@WarehouseIdNo", parameters.WarehouseIdNo, "@BranchIdNo", GlobalVariables.BranchIdNo}
+                    "where " & filter & " Order By " + sortExpression
+            Dim params() As Object = {"@ProductIdNo", parameters.ProductIdNo, "@WarehouseIdNo", parameters.WarehouseIdNo}
             Return Db.Read(sql, MakeInventory, params).ToList()
         End Function
 
@@ -290,9 +298,10 @@ Namespace DataLayer.AdoNet
             Throw New NotImplementedException()
         End Function
 
-        Public Function GetLastPurchaseCost(productidNo As Int32) As Decimal Implements IGetLastPurchaseCost.GetLastPurchaseCost
-            Return Db.RunSqlStoredProcedure("spGetLastPurchaseCost", {"@ProductIdNo", productidNo})
-        End Function
+        'Public Function GetLastPurchaseCost(productidNo As Int32) As Decimal Implements IGetLastPurchaseCost.GetLastPurchaseCost
+        '    Return Db.RunSqlStoredProcedure("spGetLastPurchaseCost", {"@ProductIdNo", productidNo})
+        'End Function
+
 
     End Class
 

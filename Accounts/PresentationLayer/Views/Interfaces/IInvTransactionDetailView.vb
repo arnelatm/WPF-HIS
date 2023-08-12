@@ -22,8 +22,6 @@ Namespace PresentationLayer.Views.Interfaces
         Property UnitCost As Decimal
         Property UnitCount As Int16
         Property UnitIdNo As Int16
-        Property OriginalUnitIdNo As Int16
-        Property OriginalUnitCost As Decimal
 
     End Interface
 

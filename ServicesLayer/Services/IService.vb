@@ -73,7 +73,7 @@ Namespace Services
         Function UpdateRecordWithIdNo(Of T)(idNo As Int32, tableName As String, fieldName As String, ByRef value As T) As Integer
         Function UpdateTable(ByRef data As DataTable, groupIdNo As Integer) As Integer
         Function UpdateTvp(dtTable As DataTable) As Integer
-        Function GetRecordsWithParams(Of TM)(parameters As Object, ByRef Optional sortKey As String = Nothing) As List(Of TM)
+        Function GetRecordsWithParams(Of TM)(parameters As Object) As List(Of TM)
         Function RunStoredProcedure(storeProcedureName As String, parameters As Object) As Object
     End Interface
 
