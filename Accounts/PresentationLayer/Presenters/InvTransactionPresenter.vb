@@ -353,7 +353,7 @@ Namespace PresentationLayer.Presenters
                         View.ProductInInventory = True
                     ElseIf inventory.Count() > 1 Then
                         If SelectInventory(inventory, control, product) Then
-                            'UpdateIdNameUnit(product)
+                            UpdateIdNameUnit(product)
                             'UpdInvTransDetailFromInventory(inventory, 0)
                             View.ProductInInventory = True
                             entryIsValid = True
@@ -364,9 +364,11 @@ Namespace PresentationLayer.Presenters
                     Else
                         If View.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or
                            View.InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
-                            Messaging.Show(True, "MsgNoSuchInventory", "Error")
+                            Dim errorText = Messaging.GetMessage(True, "MsgNoSuchInventory")
+                            View.ValidationErrorText = errorText
                             entryIsValid = False
                             itemCodeOkButNonInInventory = True
+                            Messaging.Show(errorText)
                         Else
                             UpdateIdNameUnit(product)
                             entryIsValid = True
@@ -376,7 +378,11 @@ Namespace PresentationLayer.Presenters
             End If
             If Not entryIsValid Then
                 If Not (selectionCancelled Or itemCodeOkButNonInInventory) Then
-                    Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", productCode, "fieldDescription", "Product Code"})
+                    Dim errorText = Messaging.GetParametrizedMessage(True, "MsgInvalidValue", {"fieldValue", productCode, "fieldDescription", "Product Code"})
+                    View.ValidationErrorText = errorText
+                    entryIsValid = False
+                    Messaging.Show(errorText)
+                    'Messaging.ShowPmMessage(True, "MsgInvalidValue", {"fieldValue", productCode, "fieldDescription", "Product Code"})
                 End If
             End If
             View.ProductCodeIsValid = entryIsValid
@@ -384,6 +390,13 @@ Namespace PresentationLayer.Presenters
 
         Private Sub UpdateIdNameUnit(product As ProductModel)
             View.InvTransactionDetailsBs.Current.ProductIdNo = product.IdNo
+            View.InvTransactionDetailsBs.Current.ProductName = product.ProductName
+            View.InvTransactionDetailsBs.Current.UnitIdNo = product.BaseUnitIdNo
+        End Sub
+
+        Private Sub UpdateCodeNameUnit(product As ProductModel)
+            View.InvTransactionDetailsBs.Current.ProductIdNo = product.IdNo
+            View.InvTransactionDetailsBs.Current.ProductCode = product.ProductCode
             View.InvTransactionDetailsBs.Current.ProductName = product.ProductName
             View.InvTransactionDetailsBs.Current.UnitIdNo = product.BaseUnitIdNo
         End Sub
@@ -418,11 +431,6 @@ Namespace PresentationLayer.Presenters
                         ' accept ProductName as is no need to check with inventory
                         product = SetProductInitialValues(product)
                     ElseIf ItemInInventory(control, product) Then
-                        ' accept selected product
-                        ' View.ProductInInventory = True  (default value is already true)
-                        View.InvTransactionDetailsBs.Current.ProductName = product.ProductName
-                        View.NumberOfUnits = formToRun.NoOfUnits
-                        View.InvTransactionDetailsBs.Current.ProductCode = product.ProductCode
                         View.ProductInInventory = True
                     Else
                         If View.InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
@@ -464,9 +472,11 @@ Namespace PresentationLayer.Presenters
             inventory = Service.GetRecordsWithParams(Of InventoryModel)(parameterObj)
             If inventory.Count() = 1 Then
                 UpdInvTransDetailFromInventory(inventory, 0)
+                UpdateCodeNameUnit(product)
                 View.ProductInInventory = True
             ElseIf inventory.Count() > 1 Then
                 If SelectInventory(inventory, control, product) Then
+                    UpdateCodeNameUnit(product)
                     View.ProductInInventory = True
                 Else
                     retVal = False
@@ -478,7 +488,7 @@ Namespace PresentationLayer.Presenters
                     retVal = False
                 Else
                     'UpdInvTransDetailFromInventory(inventory, 0)
-                    UpdateIdNameUnit(product)
+                    UpdateCodeNameUnit(product)
                     View.ProductInInventory = False
                     retVal = True
                 End If
@@ -508,7 +518,6 @@ Namespace PresentationLayer.Presenters
             formToRun.Presenter = New InventorySelectorPresenter(Of InventoryModel)(formToRun)
             If formToRun.ShowDialog() = Windows.Forms.DialogResult.OK Then
                 Dim selectedInvIndex As Int32 = formToRun.SelectedInvIndex
-                UpdateIdNameUnit(product)
                 UpdInvTransDetailFromInventory(inventory, selectedInvIndex)
                 retVal = True
             Else

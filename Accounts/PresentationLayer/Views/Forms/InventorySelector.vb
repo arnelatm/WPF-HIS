@@ -191,14 +191,14 @@ Public Class InventorySelector
     Public Property NoOfUnits As Int16
     Public Property Inventory As InventoryModel
 
-    Public Property SelectedInventory As IInventoryView Implements IInventorySelectorView.SelectedInventory
-        Get
-            Throw New NotImplementedException()
-        End Get
-        Set(value As IInventoryView)
-            Throw New NotImplementedException()
-        End Set
-    End Property
+    'Public Property SelectedInventory As IInventoryView Implements IInventorySelectorView.SelectedInventory
+    '    Get
+    '        Throw New NotImplementedException()
+    '    End Get
+    '    Set(value As IInventoryView)
+    '        Throw New NotImplementedException()
+    '    End Set
+    'End Property
 
     Private Sub btnOk_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
         If DataGridViewProducts.CurrentRow IsNot Nothing Then
