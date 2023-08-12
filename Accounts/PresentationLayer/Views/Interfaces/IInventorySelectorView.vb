@@ -4,7 +4,7 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface IInventorySelectorView
         Inherits IView
 
-        Property SelectedInventory As IInventoryView
+        'Property SelectedInventory As IInventoryView
 
     End Interface
 

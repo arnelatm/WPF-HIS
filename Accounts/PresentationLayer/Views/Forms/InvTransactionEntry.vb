@@ -34,6 +34,7 @@ Namespace PresentationLayer.Views.Forms
         Public Property UnitsByCode As Object Implements IInvTransactionView.UnitsByCode
         Public Property UnitsByProduct As Object Implements IInvTransactionView.UnitsByProduct
         Public Property ProductInInventory As Boolean Implements IInvTransactionView.ProductInInventory
+        Public Property ValidationErrorText As String Implements IInvTransactionView.ValidationErrorText
 
         'Public Property UnitsByProduct As DataTable Implements IInvTransactionView.UnitsByProduct
         'Public Property UnitsByCode As DataTable Implements IInvTransactionView.UnitsByCode
@@ -275,10 +276,20 @@ Namespace PresentationLayer.Views.Forms
                         Dim pnt = dgv.PointToScreen(dgv.Location)
                         If Not ValidateProductCode(DataGridViewInvTransactionDetails, e) Then
                             e.Cancel = True
+                            .Rows(e.RowIndex).ErrorText = ValidationErrorText
+                            'DataGridViewInvTransactionDetails(e.RowIndex, e.ColumnIndex).ErrorText = ValidationErrorText
+                        Else
+                            .Rows(e.RowIndex).ErrorText = String.Empty
                         End If
                     ElseIf cColumnName = $"dgvProductName" Then
                         If Not ValidateProductName(DataGridViewInvTransactionDetails, e) Then
                             e.Cancel = True
+                            ' Set error text to why the cell validating failed.
+                            .Rows(e.RowIndex).ErrorText = ValidationErrorText
+                            'DataGridViewInvTransactionDetails(e.RowIndex, e.ColumnIndex).ErrorText = ValidationErrorText
+                            '.EndEdit()
+                        Else
+                            .Rows(e.RowIndex).ErrorText = String.Empty
                         End If
                     ElseIf cColumnName = $"dgvUnitIdNo" Then
                         '(DataGridViewInvTransactionDetails, e)
@@ -309,9 +320,9 @@ Namespace PresentationLayer.Views.Forms
                     'Product must be in the inventory, so check for existence on inventory
                     If ProductInInventory Then
                         If dgv.CurrentRow.Cells("dgvUnitIdNo").Value <= 0 Or NumberOfUnits <= 1 Then
-                            SendKeys.Send("{Tab}{Tab}{Tab}")
-                        Else
                             SendKeys.Send("{Tab}{Tab}")
+                        Else
+                            SendKeys.Send("{Tab}")
                         End If
                     Else
                         'just move to the next field

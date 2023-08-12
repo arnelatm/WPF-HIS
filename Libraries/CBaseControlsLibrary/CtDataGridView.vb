@@ -281,30 +281,38 @@ Public Class CtDataGridView
     End Function
 
     Protected Overrides Function ProcessDataGridViewKey(ByVal e As System.Windows.Forms.KeyEventArgs) As Boolean
-
-        ' Handle the ENTER key as if it were a RIGHT ARROW key.
-        If e.KeyCode = Keys.Enter Then
-            Return MoveToNextCell(e.KeyData)
-        ElseIf e.KeyCode = Keys.Insert Then
-            If Me.CurrentRow.Selected Then
-                InsertRow(CurrentRow.Index)
+        If Not IsCurrentCellDirty Then
+            ' Handle the ENTER key as if it were a RIGHT ARROW key.
+            If e.KeyCode = Keys.Enter Then
+                Return MoveToNextCell(e.KeyData)
+            ElseIf e.KeyCode = Keys.Insert Then
+                If Me.CurrentRow.Selected Then
+                    InsertRow(CurrentRow.Index)
+                End If
             End If
         End If
         Return MyBase.ProcessDataGridViewKey(e)
     End Function
 
-    Private Function MoveToNextCell(keyData As Keys) As Boolean
+    Private Sub Me_CellValidated(ByVal sender As Object, ByVal e As DataGridViewCellEventArgs) Handles Me.CellValidated
+        ' Clear any error messages that may have been set in cell validation.
+        Me.Rows(e.RowIndex).ErrorText = Nothing
 
-        Dim currentColumnIndex As Int16
-        currentColumnIndex = CurrentCell.ColumnIndex()
-        If currentColumnIndex = LastEditableColumn And currentColumnIndex < ColumnCount() Then
-            If CurrentCell.RowIndex() + 1 < RowCount() Then
-                ' hack need next line because currentcell not changing properly dont know why.
-                'ProcessTabKey(keyData)
-                'Select the last row.
-                Rows(RowCount() - 1).Selected = True
-                CurrentCell = Me(FirstEditableColumn, CurrentCell.RowIndex() + 1)
-                Return (keyData)
+    End Sub
+
+    Private Function MoveToNextCell(keyData As Keys) As Boolean
+        If Not IsCurrentCellDirty() Then
+            Dim currentColumnIndex As Int16
+            currentColumnIndex = CurrentCell.ColumnIndex()
+            If currentColumnIndex = LastEditableColumn And currentColumnIndex < ColumnCount() Then
+                If CurrentCell.RowIndex() + 1 < RowCount() Then
+                    ' hack need next line because currentcell not changing properly dont know why.
+                    'ProcessTabKey(keyData)
+                    'Select the last row.
+                    Rows(RowCount() - 1).Selected = True
+                    CurrentCell = Me(FirstEditableColumn, CurrentCell.RowIndex() + 1)
+                    Return (keyData)
+                End If
             End If
         End If
         Return Me.ProcessTabKey(keyData)

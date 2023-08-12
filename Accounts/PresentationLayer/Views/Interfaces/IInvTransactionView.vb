@@ -32,6 +32,7 @@ Namespace PresentationLayer.Views.Interfaces
         WriteOnly Property WarehouseToIdNoEnabled As Boolean
         Property ProductNameIsValid As Boolean
         Property ProductInInventory As Boolean
+        Property ValidationErrorText As String
         Event ProductUnitEditing(productIdNo As Int32) ', bs As BindingSource)
         Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource)
         Event ProductCodeChanged(productCode As String, bs As BindingSource)
