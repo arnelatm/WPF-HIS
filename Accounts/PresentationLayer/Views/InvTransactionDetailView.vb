@@ -27,8 +27,6 @@ Namespace PresentationLayer.Views
         Public Property UnitCost As Decimal Implements IInvTransactionDetailView.UnitCost
         Public Property UnitCount As Int16 Implements IInvTransactionDetailView.UnitCount
         Public Property UnitIdNo As Int16 Implements IInvTransactionDetailView.UnitIdNo
-        Public Property OriginalUnitIdNo As Short Implements IInvTransactionDetailView.OriginalUnitIdNo
-        Public Property OriginalUnitCost As Decimal Implements IInvTransactionDetailView.OriginalUnitCost
 
     End Class
 

@@ -25,13 +25,13 @@ Namespace PresentationLayer.Views.Interfaces
         'Property UnitsByProduct As DataTable
         Property UnitsByProduct As Object
         Property ProductsByCode As DataTable
-        Property ProductInventory As List(Of InventoryModel)
         Property InventoryAction As String
         Property InvTransactionDetailsBs As BindingSource
         Property ProductCodeIsValid As Boolean
         Property NumberOfUnits As Int16
         WriteOnly Property WarehouseToIdNoEnabled As Boolean
         Property ProductNameIsValid As Boolean
+        Property ProductInInventory As Boolean
         Event ProductUnitEditing(productIdNo As Int32) ', bs As BindingSource)
         Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource)
         Event ProductCodeChanged(productCode As String, bs As BindingSource)

@@ -11,6 +11,21 @@
 
 End Interface
 
+Public Interface IDaoCRUD(Of TBiz)
+
+    ' gets a specific record data
+    Function GetRecordByIdNo(idNo) As TBiz
+
+    ' Add a recordData
+    Function AddRecord(ByRef recordData As TBiz) As Integer
+
+    ' updates a recordData
+    Function UpdateRecord(ByRef recordData As TBiz) As Integer
+
+    Function DeleteRecord(ByRef recordData As TBiz) As Integer
+
+End Interface
+
 Public Interface IDaoReadOnly(Of TBiz)
 
     ' gets a specific record data
@@ -82,8 +97,8 @@ Public Interface IDaoStoredProcedure
 
 End Interface
 
-Public Interface IDaoGetRecordsWithParams(Of TBiz)
-    Function GetRecordsWithParams(parameters As Object, Optional ByVal sortExpression As String = Nothing) As List(Of TBiz)
+Public Interface IDaoGetRecordsWithParams(Of TM)
+    Function GetRecordsWithParams(parameters As Object) As List(Of TM)
 End Interface
 
 Public Interface IDaoChildUpdateOnly(Of TBiz)
