@@ -167,12 +167,23 @@ Namespace DataLayer.AdoNet
                 Dim connection As New Db
                 Dim transactionObj As New TransactionObject()
                 transactionObj.CreateConnection("PostInvTransDetailAdd", Db.GetConnectionString)
+                Dim updatedCount As Int32
                 For Each item As InvTransactionDetail In invTransDetails
-                    Dim parameters As Object = {"@InvTransactionDetailIdNo", item.IdNo,
+                    Dim parameters As Object
+                    If item.InventoryIdNo = 0 Then
+                        parameters = {"@InvTransactionDetailIdNo", item.IdNo,
                                                 "@InventoryIdNo", item.InventoryIdNo,
                                                 "@InvTransactionIdNo", InvTrans.IdNo,
-                                                "@WarehouseIdNo", InvTrans.WarehouseToIdNo}
-                    Dim updatedCount As Int32 = Db.RunSqlStoredProcedure("PostInvTransDetailDeduct", parameters)
+                                                "@WarehouseIdNo", InvTrans.WarehouseIdNo,
+                                                "@BranchIdNo", GlobalVariables.BranchIdNo}
+                        updatedCount = Db.RunSqlStoredProcedure("PostInvTransDetailInsert", parameters)
+                    Else
+                        parameters = {"@InvTransactionDetailIdNo", item.IdNo,
+                                                    "@InventoryIdNo", item.InventoryIdNo,
+                                                    "@InvTransactionIdNo", InvTrans.IdNo,
+                                                    "@WarehouseIdNo", InvTrans.WarehouseIdNo}
+                        updatedCount = Db.RunSqlStoredProcedure("PostInvTransDetailAdd", parameters)
+                    End If
                     If updatedCount < 0 Then
                         retVal = False
                         Exit For
@@ -180,7 +191,7 @@ Namespace DataLayer.AdoNet
                 Next
                 If retVal Then
                     Dim sql As String = "update invtransaction set posted = 1 where idno = @InvTranactionIdNo"
-                    Dim updatedCount = Db.ExecuteSqlInTransaction(transactionObj, sql, {"@InvTranactionIdNo", InvTrans.IdNo})
+                    updatedCount = Db.ExecuteSqlInTransaction(transactionObj, sql, {"@InvTranactionIdNo", InvTrans.IdNo})
                     If updatedCount < 0 Then
                         retVal = False
                     End If
