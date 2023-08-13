@@ -362,6 +362,7 @@ Namespace PresentationLayer.Presenters
                             selectionCancelled = True
                         End If
                     Else
+                        View.ProductInInventory = False
                         If View.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or
                            View.InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
                             Dim errorText = Messaging.GetMessage(True, "MsgNoSuchInventory")
@@ -480,8 +481,10 @@ Namespace PresentationLayer.Presenters
                     View.ProductInInventory = True
                 Else
                     retVal = False
+                    View.ProductInInventory = False
                 End If
             Else
+                View.ProductInInventory = False
                 If View.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or
                    View.InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
                     Messaging.Show(True, "MsgNoSuchInventory", "Error")
@@ -489,11 +492,9 @@ Namespace PresentationLayer.Presenters
                 Else
                     'UpdInvTransDetailFromInventory(inventory, 0)
                     UpdateCodeNameUnit(product)
-                    View.ProductInInventory = False
                     retVal = True
                 End If
             End If
-            View.ProductInInventory = retVal
             View.InvTransactionDetailsBs.ResetBindings(False)
             Return retVal
         End Function

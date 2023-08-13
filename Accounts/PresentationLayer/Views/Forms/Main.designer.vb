@@ -129,7 +129,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemPurchase = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPurchaseReturn = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemSalesJournalEntry = New System.Windows.Forms.ToolStripMenuItem()
-            Me.InventoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemInventoryTransactions = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemAccountReconciliation = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPostPettyCashAccount = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemHR = New System.Windows.Forms.ToolStripMenuItem()
@@ -703,7 +703,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemTransactions
             '
-            Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPettyCash, Me.ToolStripMenuItemCashDisbursementEntry, Me.ToolStripMenuItemAccountsPayableEntry, Me.ToolStripMenuItemAccountsReceivableEntry, Me.ToolStripMenuItemCashReceiptEntry, Me.ToolStripMenuItemEmployeeReceivable, Me.ToolStripMenuItemGeneralJournalEntry, Me.ToolStripMenuItemSales, Me.ToolStripMenuItemPurchases, Me.ToolStripMenuItemSalesJournalEntry, Me.InventoryToolStripMenuItem, Me.ToolStripMenuItemAccountReconciliation, Me.ToolStripMenuItemPostPettyCashAccount, Me.ToolStripMenuItemHR, Me.ToolStripMenuItemClosing, Me.ToolStripMenuItemPayrollTransaction, Me.ToolStripMenuItemShiftSummaryEntry, Me.ToolStripSeparator2, Me.ToolStripMenuItemClosePettyCashFund, Me.ToolStripMenuItemLaboratory, Me.ToolStripMenuItemPharmacy})
+            Me.ToolStripMenuItemTransactions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPettyCash, Me.ToolStripMenuItemCashDisbursementEntry, Me.ToolStripMenuItemAccountsPayableEntry, Me.ToolStripMenuItemAccountsReceivableEntry, Me.ToolStripMenuItemCashReceiptEntry, Me.ToolStripMenuItemEmployeeReceivable, Me.ToolStripMenuItemGeneralJournalEntry, Me.ToolStripMenuItemSales, Me.ToolStripMenuItemPurchases, Me.ToolStripMenuItemSalesJournalEntry, Me.ToolStripMenuItemInventoryTransactions, Me.ToolStripMenuItemAccountReconciliation, Me.ToolStripMenuItemPostPettyCashAccount, Me.ToolStripMenuItemHR, Me.ToolStripMenuItemClosing, Me.ToolStripMenuItemPayrollTransaction, Me.ToolStripMenuItemShiftSummaryEntry, Me.ToolStripSeparator2, Me.ToolStripMenuItemClosePettyCashFund, Me.ToolStripMenuItemLaboratory, Me.ToolStripMenuItemPharmacy})
             Me.ToolStripMenuItemTransactions.Name = "ToolStripMenuItemTransactions"
             resources.ApplyResources(Me.ToolStripMenuItemTransactions, "ToolStripMenuItemTransactions")
             '
@@ -779,10 +779,10 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemSalesJournalEntry.Name = "ToolStripMenuItemSalesJournalEntry"
             resources.ApplyResources(Me.ToolStripMenuItemSalesJournalEntry, "ToolStripMenuItemSalesJournalEntry")
             '
-            'InventoryToolStripMenuItem
+            'ToolStripMenuItemInventoryTransactions
             '
-            Me.InventoryToolStripMenuItem.Name = "InventoryToolStripMenuItem"
-            resources.ApplyResources(Me.InventoryToolStripMenuItem, "InventoryToolStripMenuItem")
+            Me.ToolStripMenuItemInventoryTransactions.Name = "ToolStripMenuItemInventoryTransactions"
+            resources.ApplyResources(Me.ToolStripMenuItemInventoryTransactions, "ToolStripMenuItemInventoryTransactions")
             '
             'ToolStripMenuItemAccountReconciliation
             '
@@ -1615,7 +1615,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripButtonDoseLabel As ToolStripButton
         Friend WithEvents ToolStripButtonPrescription As ToolStripButton
         Friend WithEvents ToolStripMenuItemInventoryTransactionType As ToolStripMenuItem
-        Friend WithEvents InventoryToolStripMenuItem As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemInventoryTransactions As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemInventoryReports As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemInventoryReport As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemProductExpiryReport As ToolStripMenuItem

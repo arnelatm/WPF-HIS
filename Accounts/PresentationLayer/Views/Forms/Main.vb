@@ -1216,7 +1216,7 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of InvTransTypeEntryTv, InvTransTypePresenter(Of InvTransTypeModel))()
         End Sub
 
-        Private Sub InventoryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles InventoryToolStripMenuItem.Click
+        Private Sub InventoryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemInventoryTransactions.Click
             RunForm(Of InvTransactionEntry, InvTransactionPresenter(Of InvTransactionModel))()
         End Sub
 
@@ -1227,6 +1227,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemProductExpiryReport_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemProductExpiryReport.Click
             RunReportNew(Of ExpiryReportByWarehouse)()
         End Sub
+
     End Class
 
 End Namespace

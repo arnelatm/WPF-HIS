@@ -347,7 +347,7 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent ProductCodeValidating(code, DataGridViewInvTransactionDetails.EditingControl)
             If ProductCodeIsValid Then
                 If code Is Nothing Or code = "" Then
-                    ' go to next name entry
+                    ' go to next cell (which is the productname)
                 ElseIf ProductInInventory Then
                     SendKeys.Send("{Tab}{Tab}{Tab}")
                 Else
@@ -536,6 +536,13 @@ Namespace PresentationLayer.Views.Forms
                 dgvBatchNo.DisplayOnly = True
                 dgvExpiryDate.DisplayOnly = True
                 dgvUnitCost.DisplayOnly = True
+                dgvNetAmount.DisplayOnly = True
+            ElseIf InventoryAction = EnumToCode(InventoryActionSelection.Add) Then
+                dgvBatchNo.Visible = True
+                dgvExpiryDate.Visible = True
+                dgvBatchNo.DisplayOnly = False
+                dgvExpiryDate.DisplayOnly = False
+                dgvUnitCost.DisplayOnly = False
                 dgvNetAmount.DisplayOnly = True
             End If
         End Sub
