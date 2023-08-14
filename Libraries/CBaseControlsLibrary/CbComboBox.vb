@@ -94,32 +94,27 @@ Public Class CbComboBox
         End Get
         Set(value As Boolean)
             _editingMode = value
-            If value Then
-                If DisplayOnly Then
-                    ReadOnlyCombo = True
-                    'ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                    'BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                    'MaxDropDownItems = 1
-                    'DropDownStyle = ComboBoxStyle.Simple
-                    'DropDownHeight = 1
-                Else
-                    ReadOnlyCombo = False
-                    'ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                    'BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                    'MaxDropDownItems = _defaultMaxDropDownItems
-                    'IntegralHeight = True
-                    DropDownStyle = ComboBoxStyle.DropDown
-                    'DropDownHeight = _defaultDropDownHeight
-                End If
-            Else
-                ReadOnlyCombo = True
-                'ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                'BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                'DropDownStyle = ComboBoxStyle.Simple
-                'DropDownHeight = 1
-            End If
+            UpdateDisplayOnlyControl()
         End Set
     End Property
+
+    Public Sub UpdateDisplayOnlyControl()
+        If _editingMode And Not DisplayOnly Then
+            ReadOnlyCombo = False
+            ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            MaxDropDownItems = _defaultMaxDropDownItems
+            IntegralHeight = True
+            DropDownStyle = ComboBoxStyle.DropDown
+            'DropDownHeight = _defaultDropDownHeight
+        Else
+            ReadOnlyCombo = True
+            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            DropDownStyle = ComboBoxStyle.Simple
+            DropDownHeight = 1
+        End If
+    End Sub
 
     'Public Property FilterRule As Expression(Of Func(Of String, String, Boolean))
     '    Get

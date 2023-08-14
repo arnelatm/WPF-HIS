@@ -41,30 +41,22 @@ Public Class CdgvMoneyColumn
         End Get
         Set(value As Boolean)
             _editingMode = value
-            If value Then
-                If DisplayOnly Then
-                    [ReadOnly] = True
-                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                Else
-                    If DataGridView.ReadOnly Then
-                        DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                        DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                        [ReadOnly] = True
-                    Else
-                        DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                        DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                        [ReadOnly] = False
-                    End If
-                End If
-            Else
-                [ReadOnly] = True
-                DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            End If
-
+            UpdateDisplayOnlyControl()
         End Set
     End Property
+
+    Private Sub UpdateDisplayOnlyControl()
+        If _editingMode And Not DisplayOnly Then
+            DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            [ReadOnly] = False
+        Else
+            [ReadOnly] = False
+            DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            [ReadOnly] = True
+        End If
+    End Sub
 
     Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get

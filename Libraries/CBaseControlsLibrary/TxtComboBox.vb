@@ -329,34 +329,38 @@ Public Class TxtComboBox
         End Get
         Set(value As Boolean)
             _editingMode = value
-            cboComboBox.EditingMode = value
-            TxtTextBox.EditingMode = value
-            If value Or DisplayOnly Then
-                cboComboBox.DropDownStyle = ComboBoxStyle.Simple
-                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                txtReadOnly.Text = cboComboBox.Text
-                txtReadOnly.BringToFront()
-                txtReadOnly.TabStop = True
-                cboComboBox.Visible = False
-                cboComboBox.TabStop = False
-                TxtTextBox.TabStop = False
-            Else
-                cboComboBox.DropDownStyle = ComboBoxStyle.DropDown
-                cboComboBox.Visible = True
-                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                cboComboBox.SelectedText = Nothing
-                cboComboBox.Visible = True
-                txtReadOnly.SendToBack()
-                cboComboBox.Visible = True
-                cboComboBox.TabStop = True
-                cboComboBox.SelectionLength = 0
-                TxtTextBox.TabStop = False
-                txtReadOnly.TabStop = False
-            End If
+            UpdateDisplayOnlyControl()
         End Set
     End Property
+
+    Private Sub UpdateDisplayOnlyControl()
+        cboComboBox.EditingMode = _editingMode
+        TxtTextBox.EditingMode = _editingMode
+        If _editingMode And Not DisplayOnly Then
+            cboComboBox.DropDownStyle = ComboBoxStyle.DropDown
+            cboComboBox.Visible = True
+            ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            cboComboBox.SelectedText = Nothing
+            cboComboBox.Visible = True
+            txtReadOnly.SendToBack()
+            cboComboBox.Visible = True
+            cboComboBox.TabStop = True
+            cboComboBox.SelectionLength = 0
+            TxtTextBox.TabStop = False
+            txtReadOnly.TabStop = False
+        Else
+            cboComboBox.DropDownStyle = ComboBoxStyle.Simple
+            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            txtReadOnly.Text = cboComboBox.Text
+            txtReadOnly.BringToFront()
+            txtReadOnly.TabStop = True
+            cboComboBox.Visible = False
+            cboComboBox.TabStop = False
+            TxtTextBox.TabStop = False
+        End If
+    End Sub
 
     Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get

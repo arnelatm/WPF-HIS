@@ -1,12 +1,14 @@
 ﻿Imports System.ComponentModel
 Imports System.Dynamic
 Imports System.Globalization
+Imports System.Windows.Controls
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement.Window
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
@@ -23,10 +25,9 @@ Namespace PresentationLayer.Views.Forms
         Public Event ProductUnitEditing(productIdNo As Int32) Implements IInvTransactionView.ProductUnitEditing
         Public Event RowChanged(productIdNo As Int32) Implements IInvTransactionView.RowChanged
         Public Event PostData(idNo As Int32) Implements IInvTransactionView.PostData
-        Public Event ProductCodeValidating(productCode As String, control As Control) Implements IInvTransactionView.ProductCodeValidating
-        Public Event ProductNameValidating(productName As String, control As Control) Implements IInvTransactionView.ProductNameValidating
         Public Event InvTransactionTypeChanged(invTransTypeIdNo As Int16) Implements IInvTransactionView.InvTransactionTypeChanged
-
+        Private Event ProductCodeValidating(productCode As String, control As Windows.Forms.Control) Implements IInvTransactionView.ProductCodeValidating
+        Private Event ProductNameValidating(productName As String, control As Windows.Forms.Control) Implements IInvTransactionView.ProductNameValidating
         Public Property NumberOfUnits As Int16 Implements IInvTransactionView.NumberOfUnits
         Public Property ProductCodeIsValid As Boolean Implements IInvTransactionView.ProductCodeIsValid
         Public Property ProductNameIsValid As Boolean Implements IInvTransactionView.ProductNameIsValid
@@ -239,6 +240,8 @@ Namespace PresentationLayer.Views.Forms
             Else
                 cboWarehouseIdNo.Enabled = True
             End If
+            UpdateDgvColumns()
+            dgvNetAmount.DisplayOnly = True
         End Sub
 
         Private Sub BindInvTransactionDetail()
@@ -521,6 +524,8 @@ Namespace PresentationLayer.Views.Forms
             UpdateDgvColumns()
         End Sub
 
+
+
         Private Sub UpdateDgvColumns()
             If InventoryAction = EnumToCode(InventoryActionSelection.PurchaseOrder) Then
                 dgvBatchNo.Visible = False
@@ -528,23 +533,58 @@ Namespace PresentationLayer.Views.Forms
                 dgvBatchNo.DisplayOnly = False
                 dgvExpiryDate.DisplayOnly = False
                 dgvUnitCost.DisplayOnly = False
-                dgvNetAmount.DisplayOnly = False
             ElseIf InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or
-                   InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
+                InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
                 dgvBatchNo.Visible = True
                 dgvExpiryDate.Visible = True
                 dgvBatchNo.DisplayOnly = True
                 dgvExpiryDate.DisplayOnly = True
                 dgvUnitCost.DisplayOnly = True
-                dgvNetAmount.DisplayOnly = True
-            ElseIf InventoryAction = EnumToCode(InventoryActionSelection.Add) Then
+            ElseIf InventoryAction = EnumToCode(InventoryActionSelection.Add) Or
+                InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
                 dgvBatchNo.Visible = True
                 dgvExpiryDate.Visible = True
                 dgvBatchNo.DisplayOnly = False
                 dgvExpiryDate.DisplayOnly = False
                 dgvUnitCost.DisplayOnly = False
-                dgvNetAmount.DisplayOnly = True
             End If
+            dgvBatchNo.UpdateDisplayOnlyControl()
+            dgvExpiryDate.UpdateDisplayOnlyControl()
+            dgvUnitCost.UpdateDisplayOnlyControl()
+
+            'If DataGridViewInvTransactionDetails.EditingMode Then
+            '    If InventoryAction = EnumToCode(InventoryActionSelection.PurchaseOrder) Then
+            '        dgvBatchNo.ReadOnly = False
+            '        dgvExpiryDate.ReadOnly = False
+            '        dgvUnitCost.ReadOnly = False
+            '    ElseIf InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or
+            '           InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
+            '        dgvBatchNo.ReadOnly = True
+            '        dgvExpiryDate.ReadOnly = True
+            '        dgvUnitCost.ReadOnly = True
+            '    ElseIf InventoryAction = EnumToCode(InventoryActionSelection.Add) Or
+            '           InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
+            '        dgvBatchNo.ReadOnly = False
+            '        dgvExpiryDate.ReadOnly = False
+            '        dgvUnitCost.ReadOnly = False
+            '    End If
+            'Else
+            '    If InventoryAction = EnumToCode(InventoryActionSelection.PurchaseOrder) Then
+            '        dgvBatchNo.DisplayOnly = False
+            '        dgvExpiryDate.DisplayOnly = False
+            '        dgvUnitCost.DisplayOnly = False
+            '    ElseIf InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or
+            '           InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
+            '        dgvBatchNo.DisplayOnly = True
+            '        dgvExpiryDate.DisplayOnly = True
+            '        dgvUnitCost.DisplayOnly = True
+            '    ElseIf InventoryAction = EnumToCode(InventoryActionSelection.Add) Or
+            '           InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
+            '        dgvBatchNo.DisplayOnly = False
+            '        dgvExpiryDate.DisplayOnly = False
+            '        dgvUnitCost.DisplayOnly = False
+            '    End If
+            'End If
         End Sub
     End Class
 

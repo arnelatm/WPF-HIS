@@ -81,17 +81,17 @@ Public Class CCheckBoxNew
         End Get
         Set(value As Boolean)
             _editingMode = value
-            If value Then
-                If DisplayOnly Then
-                    AutoCheck = False
-                Else
-                    AutoCheck = True
-                End If
-            Else
-                AutoCheck = False
-            End If
+            UpdateDisplayOnlyControl()
         End Set
     End Property
+
+    Private Sub UpdateDisplayOnlyControl()
+        If _editingMode And Not DisplayOnly Then
+            AutoCheck = True
+        Else
+            AutoCheck = False
+        End If
+    End Sub
 
     'End Sub
     <Category("Custom Properties")>

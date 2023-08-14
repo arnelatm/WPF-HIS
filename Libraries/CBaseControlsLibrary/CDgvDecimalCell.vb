@@ -22,17 +22,22 @@ Public Class CDgvDecimalCell
         End Get
         Set
             _editingMode = Value
-            If Value Or DisplayOnly Then
-                Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                [ReadOnly] = True
-            Else
-                Style.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                Style.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                [ReadOnly] = False
-            End If
+            UpdateDisplayOnlyControl()
         End Set
     End Property
+
+    Public Sub UpdateDisplayOnlyControl()
+        If _editingMode And Not DisplayOnly Then
+            [ReadOnly] = False
+            Style.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            Style.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+        Else
+            [ReadOnly] = False
+            Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            [ReadOnly] = True
+        End If
+    End Sub
 
     Sub New()
         If GlobalVariables.RightToLeftLayout Then

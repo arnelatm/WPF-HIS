@@ -644,9 +644,10 @@ Public Class CFormEntry
                 'If ctrl.Name = "dtpDateStart" Then
                 '    Debugger.Break()
                 'End If
-
+                If TypeOf ctrl Is DataGridView Then
+                    DirectCast(ctrl, DataGridView).EndEdit()
+                End If
                 SetPropertyValue(ctrl, "EditingMode", onOff)
-
             End If
         Next
         If onOff Then

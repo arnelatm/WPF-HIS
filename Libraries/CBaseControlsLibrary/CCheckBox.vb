@@ -268,26 +268,24 @@ Public Class CCheckBox
         Set(value As Boolean)
             If Not AlwaysEditable Then
                 _editingMode = value
-                If value Then
-                    If DisplayOnly Then
-                        AutoCheck = False
-                        ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                        BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                    Else
-                        AutoCheck = True
-                        ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                        BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                    End If
-                    '_state = VisualStyles.CheckBoxState.CheckedDisabled
-                Else
-                    AutoCheck = False
-                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                    '_state = VisualStyles.CheckBoxState.CheckedNormal
-                End If
+                UpdateDisplayOnlyControl()
             End If
         End Set
     End Property
+
+    Public Sub UpdateDisplayOnlyControl()
+        If _editingMode And Not DisplayOnly Then
+            AutoCheck = True
+            ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            '_state = VisualStyles.CheckBoxState.CheckedDisabled
+        Else
+            AutoCheck = False
+            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            '_state = VisualStyles.CheckBoxState.CheckedNormal
+        End If
+    End Sub
 
     'End Sub
     <Category("Custom Properties")>

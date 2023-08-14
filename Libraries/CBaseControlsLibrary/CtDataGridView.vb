@@ -96,21 +96,7 @@ Public Class CtDataGridView
         End Get
         Set(value As Boolean)
             _editingMode = value
-            If value Then
-                If DisplayOnly Then
-                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                    [ReadOnly] = True
-                Else
-                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                    [ReadOnly] = False
-                End If
-            Else
-                DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                [ReadOnly] = False
-            End If
+            UpdateDisplayOnlyControl()
             For Each col In Columns
                 If TypeOf col Is IEntryControl Then
                     col.EditingMode = value
@@ -126,6 +112,18 @@ Public Class CtDataGridView
             End If
         End Set
     End Property
+
+    Public Sub UpdateDisplayOnlyControl()
+        If _editingMode And Not DisplayOnly Then
+            DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            [ReadOnly] = False
+        Else
+            DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            [ReadOnly] = True
+        End If
+    End Sub
 
     Public ReadOnly Property FirstEditableColumn As Integer
         Get
@@ -940,5 +938,27 @@ Public Class CtDataGridView
         End If
         Return matchSw
     End Function
+
+    'Public Sub ResetDisplayOnly(lDisplayOnly As Boolean, control As Control)
+    '    If control.GetType().GetProperty("DisplayOnly") IsNot Nothing Then
+    '        If _editingMode Then
+
+    '            If lDisplayOnly Then
+    '                DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+    '                DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+    '                [ReadOnly] = True
+    '            Else
+    '                DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+    '                DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+    '                [ReadOnly] = False
+    '            End If
+    '        Else
+    '            DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+    '            DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+    '            [ReadOnly] = True
+    '        End If
+    '    End If
+    'End Sub
+
 
 End Class
