@@ -11,8 +11,13 @@ Namespace PresentationLayer.Views.Interfaces
         Property LockGroup As Boolean
         Property SavedGroupIdNo As Int16
         Property AppSettingGroupSelector As Int16
+        Property Selector1Data As Object
+        Property Selector2Data As Object
+        WriteOnly Property Selector1Text As String
+        WriteOnly Property Selector2Text As String
         Event LockGroupClicked()
         Event FilterRecords()
+        Event AppSettingGroupValueChanged(sender As Object)
     End Interface
 
 End Namespace

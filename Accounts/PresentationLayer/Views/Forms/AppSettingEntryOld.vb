@@ -1,6 +1,5 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.PresentationLayer.Views
+Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
 
@@ -9,21 +8,6 @@ Namespace PresentationLayer.Views.Forms
 
         Private _lockGroup As Boolean = False
         Private _groupIdNo As Int16
-        Public Event AppSettingGroupValueChanged(sender As Object) Implements IAppSettingView.AppSettingGroupValueChanged
-        Public Property Selector1Data As Object Implements IAppSettingView.Selector1Data
-        Public Property Selector2Data As Object Implements IAppSettingView.Selector2Data
-
-        Public WriteOnly Property Selector1Text As String Implements IAppSettingView.Selector1Text
-            Set(value As String)
-                lblSelector1IdNo.Text = value
-            End Set
-        End Property
-
-        Public WriteOnly Property Selector2Text As String Implements IAppSettingView.Selector2Text
-            Set(value As String)
-                lblSelector2IdNo.Text = value
-            End Set
-        End Property
 
         Public Sub New()
             MyBase.New()
@@ -44,22 +28,34 @@ Namespace PresentationLayer.Views.Forms
             DataFilter = "AppSettingGroupIdNo = " + appSettingGroupIdNo.ToString()
         End Sub
 
-#Region "Field Items"
+#Region "Fields"
 
         Public Property IdNo As Int32 Implements IAppSettingView.IdNo
             Get
-                If TxtIdNo.Text <> "" Then
-                    Return Convert.ToInt32(TxtIdNo.Text)
-                Else
-                    Return 0
-                End If
+                Return NumParser(Of Int32)(TxtIdNo.Text)
             End Get
             Set
                 TxtIdNo.Text = Convert.ToString(Value)
             End Set
         End Property
 
-        Public Property Selector1IdNo As Integer Implements IAppSettingView.Selector1IdNo
+        Public Property AppSettingGroupSelector As Int16 Implements IAppSettingView.AppSettingGroupSelector
+            Get
+                Return cboAppSettingGroupSelector.GetValue(Of Int16)
+            End Get
+            Set
+                cboAppSettingGroupSelector.SetValue(Value)
+                'If Not btnEdit.Enabled Then
+                '    If Value <> 0 Then
+                '        btnLockGroup.Enabled = True
+                '    Else
+                '        btnLockGroup.Enabled = True
+                '    End If
+                'End If
+            End Set
+        End Property
+
+        Public Property Selector1IdNo1 As Int32 Implements IAppSettingView.Selector1IdNo
             Get
                 Return cboSelector1IdNo.GetValue(Of Int32)
             End Get
@@ -68,7 +64,8 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Selector2IdNo As Integer Implements IAppSettingView.Selector2IdNo
+
+        Public Property Selector1IdNo2 As Int32 Implements IAppSettingView.Selector2IdNo
             Get
                 Return cboSelector2IdNo.GetValue(Of Int32)
             End Get
@@ -76,6 +73,17 @@ Namespace PresentationLayer.Views.Forms
                 cboSelector2IdNo.SetValue(Value)
             End Set
         End Property
+
+        Public Property AppSettingGroupIdNo As Int16 Implements IAppSettingView.AppSettingGroupIdNo
+            Get
+                Return txtAppSettingGroupIdNo.GetValue(Of Int16)
+            End Get
+            Set
+                txtAppSettingGroupIdNo.SetValue(Value)
+            End Set
+        End Property
+
+
 
         Public Property LockGroup As Boolean Implements IAppSettingView.LockGroup
             Get
@@ -97,29 +105,6 @@ Namespace PresentationLayer.Views.Forms
         Public Event LockGroupClicked() Implements IAppSettingView.LockGroupClicked
         Public Event FilterRecords() Implements IAppSettingView.FilterRecords
 
-        Public Property AppSettingGroupSelector As Short Implements IAppSettingView.AppSettingGroupSelector
-            Get
-                Return cboAppSettingGroupSelector.GetValue(Of Int16)
-            End Get
-            Set
-                cboAppSettingGroupSelector.SetValue(Value)
-            End Set
-        End Property
-
-        Public Property Errors As List(Of String) Implements IView.Errors
-
-        Public Property DataFilter As String Implements IView.DataFilter
-
-        Public Property AppSettingGroupIdNo As Short Implements IAppSettingView.AppSettingGroupIdNo
-            Get
-                Return txtAppSettingGroupIdNo.Text
-            End Get
-            Set(value As Short)
-                txtAppSettingGroupIdNo.Text = value
-            End Set
-        End Property
-
-
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -134,26 +119,6 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
 
-        Private Sub btnLockGroup_Click(sender As Object, e As EventArgs) Handles btnLockGroup.Click
-            LockGroup = Not LockGroup
-            If cboAppSettingGroupSelector.SelectedValue <> 0 Then
-                If Not LockGroup Then
-                    'LockGroup = True
-
-                    'cboAppSettingCodeSelector.Enabled = False
-                    'RaiseEvent LockGroupClicked()
-                    cboAppSettingGroupSelector.EditingMode = True
-                Else
-                    'RaiseEvent LockGroupClicked()
-                    SavedGroupIdNo = AppSettingGroupIdNo
-                    cboAppSettingGroupSelector.EditingMode = False
-                End If
-            Else
-                cboAppSettingGroupSelector.EditingMode = True
-            End If
-            cboAppSettingGroupSelector.Refresh()
-            'RaiseEvent LockGroupClicked()
-        End Sub
 
         Private Sub OnFormLoad() Handles MyBase.Load
             DataFilter = "AppSettingGroupIdNo = 0"
@@ -161,7 +126,6 @@ Namespace PresentationLayer.Views.Forms
             cboAppSettingGroupSelector.SelectedValue = 0
             cboAppSettingGroupSelector.DisplayOnly = False
             cboAppSettingGroupSelector.EditingMode = True
-            RaiseEvent AppSettingGroupValueChanged(cboAppSettingGroupSelector)
         End Sub
 
         'Protected Overrides Sub BeforeEdit()
@@ -202,14 +166,70 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub cboSelector1_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboAppSettingGroupSelector.SelectionChangeCommitted
-            'If FormShown Then
-            RaiseEvent AppSettingGroupValueChanged(sender)
-            'DataFilter = "Selector1 = " & cboAppSettingGroupSelector.SelectedValue.ToString()
-            'AppSettingGroupIdNo = cboAppSettingGroupSelector.SelectedValue
-            'SavedGroupIdNo = AppSettingGroupIdNo
-            'RaiseEvent FilterRecords()
-            'End If
+            If FormShown Then
+                DataFilter = "Selector1 = " & cboAppSettingGroupSelector.SelectedValue.ToString()
+                AppSettingGroupIdNo = cboAppSettingGroupSelector.SelectedValue
+                SavedGroupIdNo = AppSettingGroupIdNo
+                RaiseEvent FilterRecords()
+            End If
         End Sub
+
+        'Private Sub AddNewRecord() Handles btnNew.Click
+        '    btnNew.PerformClick()
+        '    If LockGroup Then
+        '        cboAppSettingCodeSelector.EditingMode = False
+        '    Else
+        '        cboAppSettingCodeSelector.EditingMode = True
+        '    End If
+        'End Sub
+
+        'Private Sub EditRecord() Handles btnEdit.Click
+        '    btnEdit.PerformClick()
+        '    If LockGroup Then
+        '        cboAppSettingCodeSelector.EditingMode = False
+        '    Else
+        '        cboAppSettingCodeSelector.EditingMode = True
+        '    End If
+        'End Sub
+
+        Private Sub OnAfterChangeRecord() Handles MyBase.AfterChangeRecord
+            If LockGroup Then
+                cboAppSettingGroupSelector.EditingMode = False
+            Else
+                cboAppSettingGroupSelector.EditingMode = True
+            End If
+        End Sub
+
+
+        'Private Sub btnLockGroup_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnLockGroup.ClickButtonArea
+        '    If LockGroup Then
+        '        cboAppSettingCodeSelector.EditingMode = True
+        '    Else
+        '        cboAppSettingCodeSelector.EditingMode = False
+        '    End If
+        'End Sub
+
+        Private Sub btnLockGroup_Click(sender As Object, e As EventArgs) Handles btnLockGroup.Click
+            LockGroup = Not LockGroup
+            If cboAppSettingGroupSelector.SelectedValue <> 0 Then
+                If Not LockGroup Then
+                    'LockGroup = True
+
+                    'cboAppSettingCodeSelector.Enabled = False
+                    'RaiseEvent LockGroupClicked()
+                    cboAppSettingGroupSelector.EditingMode = True
+                Else
+                    'RaiseEvent LockGroupClicked()
+                    SavedGroupIdNo = AppSettingGroupIdNo
+                    cboAppSettingGroupSelector.EditingMode = False
+                End If
+            Else
+                cboAppSettingGroupSelector.EditingMode = True
+            End If
+            cboAppSettingGroupSelector.Refresh()
+            'RaiseEvent LockGroupClicked()
+        End Sub
+
 
         Public Overloads Sub Inputs(onOff As Boolean)
             ' need to override because default method is to set 'EditingMode' to desired value
@@ -223,14 +243,9 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub OnAfterChangeRecord() Handles MyBase.AfterChangeRecord
-            If LockGroup Then
-                cboAppSettingGroupSelector.EditingMode = False
-            Else
-                cboAppSettingGroupSelector.EditingMode = True
-            End If
-        End Sub
-
+        'Private Sub FormTreeView_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles FormTreeView.AfterSelect
+        '    cboAppSettingGroupSelector.EditingMode = Not LockGroup
+        'End Sub
     End Class
 
 End Namespace
