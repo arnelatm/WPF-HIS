@@ -9,15 +9,15 @@
 
 
 
+
+
 CREATE VIEW [dbo].[Inventory_View]
 AS
-SELECT  a.IdNo, a.BranchIdNo, a.ProductIdNo, a.TransactionIdNo, a.QtyOnHand, c.BatchNo, c.ExpiryDate, c.UnitSalesPrice, 
-        b.ProductCode, b.ProductName,a.TransactionType,a.WarehouseIdNo,IIf(a.QtyOnHand=0,0,a.TotalCost / a.QtyOnHand) as UnitCost, a.TotalCost 
+SELECT  a.IdNo, a.BranchIdNo, a.ProductIdNo, a.TransactionIdNo, a.QtyOnHand, a.BatchNo, a.ExpiryDate, a.UnitSalesPrice, 
+        b.ProductCode, b.ProductName,a.TransactionType,a.WarehouseIdNo,IIf(a.QtyOnHand=0,a.UnitCost,a.TotalCost / a.QtyOnHand) as UnitCost, a.TotalCost 
 FROM    dbo.Inventory a 
 		INNER JOIN dbo.Product b
-		ON a.ProductIdNo = b.IdNo 
-		INNER JOIN dbo.PurchaseDetail c 
-		ON a.TransactionIdNo = c.IdNo
+		ON a.ProductIdNo = b.IdNo
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'Inventory_View';
 
