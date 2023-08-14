@@ -27,7 +27,7 @@ Namespace DataLayer.AdoNet
                     " UPDATE [AppSetting]" &
                     "    SET AppSettingGroupIdNo = @AppSettingGroupIdNo," &
                     "        Selector1IdNo = @Selector1IdNo," &
-                    "        Selector2IdNo = @Selector2IdNo," &
+                    "        Selector2IdNo = @Selector2IdNo" &
                     "  WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(AppSetting))
         End Function

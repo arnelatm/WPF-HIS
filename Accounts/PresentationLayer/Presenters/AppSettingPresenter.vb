@@ -1,6 +1,7 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.Libraries.CBaseControlsLibrary
 
 Namespace PresentationLayer.Presenters
 
@@ -15,6 +16,26 @@ Namespace PresentationLayer.Presenters
             WithTreeView = False
             'AddHandler View.LockGroupClicked, AddressOf LockGroupClicked
             AddHandler View.FilterRecords, AddressOf FilterRecords
+            AddHandler View.AppSettingGroupValueChanged, AddressOf OnAppSettingGroupValueChanged
+        End Sub
+
+        Private Sub OnAppSettingGroupValueChanged(sender As Object)
+            Dim cb As CtComboBox = DirectCast(sender, CtComboBox)
+            Dim idNo As Int16 = cb.SelectedValue
+            View.DataFilter = "AppSettingGroupIdNo = " & idNo.ToString()
+            Dim appSettingGroup As Object
+            appSettingGroup = Service.GetFieldsWithIdNo(idNo, "AppSettingGroup", "IdNo,AppSettingCode,AppSettingGroupName,AppSettingGroupNameAra,SelectorTable1,SelectorTable2,SelectorText1,SelectorText2", "IdNo")
+            If appSettingGroup IsNot Nothing Then
+                View.AppSettingGroupIdNo = idNo
+                View.SavedGroupIdNo = idNo
+                View.Selector1Text = appSettingGroup.SelectorText1
+                View.Selector2Text = appSettingGroup.SelectorText2
+                Dim data As New ArrayList
+                data.Add({appSettingGroup.SelectorTable1, "Selector1IdNo", Nothing, Nothing})
+                data.Add({appSettingGroup.SelectorTable2, "Selector2IdNo", Nothing, Nothing})
+                CreateDataSourceThread(data)
+            End If
+            FilterRecords()
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -67,7 +88,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub FilterRecords()
             DataFilter = View.DataFilter
-            DisplayTree()
+            'DisplayTree()
             If Not AddMode Then
                 GoLastRecord()
             End If
