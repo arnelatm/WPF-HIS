@@ -1228,6 +1228,9 @@ Namespace PresentationLayer.Views.Forms
             RunReportNew(Of ExpiryReportByWarehouse)()
         End Sub
 
+        Private Sub ToolStripMenuItemApplicationSetting_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemApplicationSetting.Click
+            RunForm(Of AppSettingEntry, AppSettingPresenter(Of AppSettingModel))()
+        End Sub
     End Class
 
 End Namespace

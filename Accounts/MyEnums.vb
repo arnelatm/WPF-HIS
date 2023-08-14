@@ -44,27 +44,34 @@ End Enum
 'End Enum
 
 Public Enum DatabaseTableSelection
-    <EnumCode("BN")> Bank
-    <EnumCode("BR")> Branch
-    <EnumCode("PY")> PaymentType
-    <EnumCode("CH")> Account
-    <EnumCode("CT")> Country
-    <EnumCode("CU")> Customer
-    <EnumCode("DP")> Department
-    <EnumCode("DG")> Designation
-    <EnumCode("DS")> DistributionScheme
-    <EnumCode("DC")> Document
-    <EnumCode("EM")> Employee
-    <EnumCode("FB")> Earning
-    <EnumCode("PT")> Patient
-    <EnumCode("PH")> Phone
-    <EnumCode("PC")> ProductCategory
-    <EnumCode("RC")> RevCostCenter
-    <EnumCode("SG")> SecurityGroup
-    <EnumCode("SO")> SecurityObject
-    <EnumCode("SP")> Supplier
-    <EnumCode("US")> User
+    <EnumCode("ACC")> Account
+    <EnumCode("BNK")> Bank
+    <EnumCode("BRN")> Branch
+    <EnumCode("CNT")> Country
+    <EnumCode("CUS")> Customer
+    <EnumCode("DEP")> Department
+    <EnumCode("DIS")> DistributionScheme
+    <EnumCode("DOC")> Document
+    <EnumCode("DSG")> Designation
+    <EnumCode("EMP")> Employee
+    <EnumCode("ERN")> Earning
+    <EnumCode("PAT")> Patient
+    <EnumCode("PHN")> Phone
+    <EnumCode("PRC")> ProductCategory
+    <EnumCode("PYT")> PaymentType
+    <EnumCode("RVC")> RevCostCenter
+    <EnumCode("SCG")> SecurityGroup
+    <EnumCode("SCO")> SecurityObject
+    <EnumCode("SUP")> Supplier
+    <EnumCode("USR")> User
+    <EnumCode("WRH")> Warehouse
 End Enum
+
+Public Enum ApplicationSettingCodeSelection
+    <EnumCode("BWSL")> BranchWithSales
+    <EnumCode("USDW")> UserDefaultWarehouse
+End Enum
+
 
 Public Enum DebitCreditSelection
     <EnumCode("")> NotSpecified
