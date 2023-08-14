@@ -352,15 +352,19 @@ Public Class CMyComboBox
         End Get
         Set(value As Boolean)
             _editingMode = value
-            If value Then
-                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            Else
-                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-            End If
+            UpdateDisplayOnlyControl()
         End Set
     End Property
+
+    Public Sub UpdateDisplayOnlyControl()
+        If _editingMode AndAlso Not DisplayOnly Then
+            ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+        Else
+            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+        End If
+    End Sub
 
     Private _previousSearchTerm As String
     Private _originalList As Object() = Nothing

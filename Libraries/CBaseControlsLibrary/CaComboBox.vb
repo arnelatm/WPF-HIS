@@ -77,35 +77,31 @@ Public Class CaComboBox
         End Get
         Set(value As Boolean)
             _editingMode = value
-            If value Then
-                If Editable AndAlso Not DisplayOnly Then
-                    DropDownHeight = _defaultDropDownHeight
-                    DropDownStyle = _defaultDropdownStyle
-                    MaxDropDownItems = _defaultMaxDropDownItems
-                    If Hidden Then
-                        ForeColor = Color.Black
-                        BackColor = Color.Black
-                    Else
-                        ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                        BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                    End If
-                Else
-                    DropDownStyle = ComboBoxStyle.Simple
-                    DropDownHeight = Height
-                    MaxDropDownItems = 1
-                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                End If
-            Else
-                DropDownStyle = ComboBoxStyle.Simple
-                DropDownHeight = Height
-                MaxDropDownItems = 1
-                IntegralHeight = True
-                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            End If
+            UpdateDisplayOnlyControl()
         End Set
     End Property
+
+    Public Sub UpdateDisplayOnlyControl()
+        If _editingMode AndAlso Editable AndAlso Not DisplayOnly Then
+            DropDownHeight = _defaultDropDownHeight
+            DropDownStyle = _defaultDropdownStyle
+            MaxDropDownItems = _defaultMaxDropDownItems
+            If Hidden Then
+                ForeColor = Color.Black
+                BackColor = Color.Black
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            End If
+        Else
+            DropDownStyle = ComboBoxStyle.Simple
+            DropDownHeight = Height
+            MaxDropDownItems = 1
+            IntegralHeight = True
+            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+        End If
+    End Sub
 
     Public Property FilterRule As Expression(Of Func(Of String, String, Boolean))
         Get
@@ -306,15 +302,15 @@ Public Class CaComboBox
             sw = 1
         End If
         If sw = 0 Then
-        Select Case e.KeyCode
-            Case Keys.Down
-                If SuggestListForm.SuggestListBox.SelectedIndex < _suggestBindingList.Count - 1 Then
-                    ' ReSharper disable once ReturnValueOfPureMethodIsNotUsed
-                    Math.Max(Interlocked.Increment(SuggestListForm.SuggestListBox.SelectedIndex), SuggestListForm.SuggestListBox.SelectedIndex - 1)
-                End If
-                Return
-            Case Keys.Up
-                If SuggestListForm.SuggestListBox.SelectedIndex > 0 Then
+            Select Case e.KeyCode
+                Case Keys.Down
+                    If SuggestListForm.SuggestListBox.SelectedIndex < _suggestBindingList.Count - 1 Then
+                        ' ReSharper disable once ReturnValueOfPureMethodIsNotUsed
+                        Math.Max(Interlocked.Increment(SuggestListForm.SuggestListBox.SelectedIndex), SuggestListForm.SuggestListBox.SelectedIndex - 1)
+                    End If
+                    Return
+                Case Keys.Up
+                    If SuggestListForm.SuggestListBox.SelectedIndex > 0 Then
 #Disable Warning ReturnValueOfPureMethodIsNotUsed
                         Math.Max(Interlocked.Decrement(SuggestListForm.SuggestListBox.SelectedIndex), SuggestListForm.SuggestListBox.SelectedIndex + 1)
 #Enable Warning ReturnValueOfPureMethodIsNotUsed
@@ -462,7 +458,7 @@ Public Class CaComboBox
             'End If
         End If
     End Function
-    
+
     Public Function GetValue()
         If SelectedItem IsNot Nothing Then
             If ValueMember.ToLower() = "idno" Then
@@ -497,7 +493,7 @@ Public Class CaComboBox
             SelectedValue = value
         End If
     End Sub
-    
+
     'Public Sub SetValue(ByRef value)
     '    If value Is DBNull.Value OrElse value Is Nothing Then
     '        Text = Nothing

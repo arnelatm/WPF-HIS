@@ -22,17 +22,22 @@ Public Class CDgvMoneyCell
         End Get
         Set
             _editingMode = Value
-            If Value Or DisplayOnly Then
-                Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                [ReadOnly] = True
-            Else
-                Style.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                Style.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                [ReadOnly] = False
-            End If
+            UpdateDisplayOnlyControl()
         End Set
     End Property
+
+    Public Sub UpdateDisplayOnlyControl()
+        If Value And Not DisplayOnly Then
+            Style.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            Style.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            [ReadOnly] = False
+        Else
+            [ReadOnly] = False
+            Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            [ReadOnly] = True
+        End If
+    End Sub
 
     Sub New()
         If GlobalVariables.RightToLeftLayout Then

@@ -94,26 +94,7 @@ Public Class CDataGridView
         End Get
         Set(value As Boolean)
             _editingMode = value
-            If value Then
-                If DisplayOnly Then
-                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                    [ReadOnly] = True
-                Else
-                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                    [ReadOnly] = False
-                End If
-            Else
-                DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                [ReadOnly] = False
-            End If
-            For Each col In Columns
-                If TypeOf col Is IEntryControl Then
-                    col.EditingMode = value
-                End If
-            Next
+            UpdateDisplayOnlyControl()
             If ShowFooter Then
                 If DgvFooter Is Nothing Then
                     DgvFooter = New DgvFooter(Me) With {
@@ -122,8 +103,26 @@ Public Class CDataGridView
                 End If
                 DgvFooter.CalculateTotals()
             End If
+            For Each col In Columns
+                If TypeOf col Is IEntryControl Then
+                    col.EditingMode = value
+                End If
+            Next
         End Set
     End Property
+
+    Public Sub UpdateDisplayOnlyControl()
+        If _editingMode And Not DisplayOnly Then
+            DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            [ReadOnly] = False
+        Else
+            DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            [ReadOnly] = False
+        End If
+
+    End Sub
 
     Public ReadOnly Property FirstEditableColumn As Integer
         Get

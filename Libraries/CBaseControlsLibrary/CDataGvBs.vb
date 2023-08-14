@@ -48,15 +48,7 @@ Public Class CDataGvBs
         End Get
         Set(value As Boolean)
             _editingMode = value
-            If DisplayOnly OrElse Not value Then
-                DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                [ReadOnly] = True
-            Else
-                DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                [ReadOnly] = False
-            End If
+            UpdateDisplayOnlyControl()
             For Each col In Columns
                 If TypeOf col Is IEntryControl Then
                     col.EditingMode = value
@@ -64,6 +56,19 @@ Public Class CDataGvBs
             Next
         End Set
     End Property
+
+    Public Sub UpdateDisplayOnlyControl()
+        If _editingMode And Not DisplayOnly Then
+            DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            [ReadOnly] = False
+        Else
+            DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            [ReadOnly] = True
+        End If
+
+    End Sub
 
     Public ReadOnly Property FirstEditableColumn As Integer
         Get

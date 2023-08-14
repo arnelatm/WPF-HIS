@@ -63,24 +63,23 @@ Public Class CMaskedTextBox
         Set(value As Boolean)
             If Not AlwaysEditable Then
                 _editingMode = value
-                If value Then
-                    If DisplayOnly Then
-                        [ReadOnly] = True
-                        ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                        BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                    Else
-                        [ReadOnly] = False
-                        ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                        BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                    End If
-                Else
-                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                    [ReadOnly] = True
-                End If
+                UpdateDisplayOnlyControl()
             End If
         End Set
     End Property
+
+    Public Sub UpdateDisplayOnlyControl()
+        If _editingMode And Not DisplayOnly Then
+            ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            [ReadOnly] = False
+        Else
+            [ReadOnly] = False
+            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            [ReadOnly] = True
+        End If
+    End Sub
 
     <Bindable(True)>
     <Category("Properties")>

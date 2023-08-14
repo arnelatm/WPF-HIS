@@ -50,38 +50,52 @@ Public Class CDgvTextColumn
         End Get
         Set(value As Boolean)
             _editingMode = value
-            If value Then
-                If DisplayOnly Then
-                    If Not [ReadOnly] Then
-                        ' need to do this because of error when setting sequence column ReadOnly property
-                        [ReadOnly] = True
-                    End If
-                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                Else
-                    If [ReadOnly] Then
-                        [ReadOnly] = False
-                    End If
-                    If DataGridView.ReadOnly Then
-                        DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                        DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                        If Not [ReadOnly] Then
-                            ' need to do this because of error when setting sequence column ReadOnly property
-                            [ReadOnly] = True
-                        End If
-                    Else
-                        DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                        DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                        [ReadOnly] = False
-                    End If
-                End If
-            Else
-                [ReadOnly] = True
-                DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            End If
+            UpdateDisplayOnlyControl()
+            'If value Then
+            '    If DisplayOnly Then
+            '        If Not [ReadOnly] Then
+            '            ' need to do this because of error when setting sequence column ReadOnly property
+            '            [ReadOnly] = True
+            '        End If
+            '        DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            '        DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            '    Else
+            '        If [ReadOnly] Then
+            '            [ReadOnly] = False
+            '        End If
+            '        If DataGridView.ReadOnly Then
+            '            DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            '            DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            '            If Not [ReadOnly] Then
+            '                ' need to do this because of error when setting sequence column ReadOnly property
+            '                [ReadOnly] = True
+            '            End If
+            '        Else
+            '            DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            '            DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            '            [ReadOnly] = False
+            '        End If
+            '    End If
+            'Else
+            '    [ReadOnly] = True
+            '    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            '    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            'End If
         End Set
     End Property
+
+    Public Sub UpdateDisplayOnlyControl()
+        If _editingMode And Not DisplayOnly Then
+            DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            [ReadOnly] = False
+        Else
+            [ReadOnly] = False
+            DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            [ReadOnly] = True
+        End If
+    End Sub
 
     Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
@@ -90,7 +104,6 @@ Public Class CDgvTextColumn
         Set(value As Boolean)
             _translatable = value
         End Set
-
     End Property
 
     'Public Sub MakeEditable(editableControl As Boolean) Implements IEntryControl.MakeEditable

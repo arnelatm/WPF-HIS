@@ -326,23 +326,21 @@ Public Class CCustomDateTimePicker
             'txtTime.EditingMode = eValue
             txtDate.EditingMode = eValue
             txtLongDate.EditingMode = eValue
-            If eValue Then
-                If DisplayOnly Then
-                    ReadOnlyDp = True
-                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                Else
-                    ReadOnlyDp = False
-                    ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                End If
-            Else
-                ReadOnlyDp = True
-                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            End If
+            UpdateDisplayOnlyControl()
         End Set
     End Property
+
+    Public Sub UpdateDisplayOnlyControl()
+        If _editingMode And Not DisplayOnly Then
+            ReadOnlyDp = False
+            ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+        Else
+            ReadOnlyDp = True
+            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+        End If
+    End Sub
 
     Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get

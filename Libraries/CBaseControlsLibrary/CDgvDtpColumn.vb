@@ -67,24 +67,22 @@ Public Class CDgvDtpColumn
         End Get
         Set(value As Boolean)
             _editingMode = value
-            If value Then
-                If DisplayOnly Then
-                    [ReadOnly] = True
-                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                Else
-                    [ReadOnly] = False
-                    DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                    [ReadOnly] = False
-                End If
-            Else
-                [ReadOnly] = True
-                DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-            End If
+            UpdateDisplayOnlyControl()
         End Set
     End Property
+
+    Private Sub UpdateDisplayOnlyControl()
+        If _editingMode And Not DisplayOnly Then
+            [ReadOnly] = False
+            DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+        Else
+            [ReadOnly] = False
+            DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            [ReadOnly] = True
+        End If
+    End Sub
 
     Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
@@ -270,17 +268,22 @@ Public Class CDgvDtpCell
         End Get
         Set(eValue As Boolean)
             _editingMode = Value
-            If eValue Or DisplayOnly Then
-                Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                [ReadOnly] = True
-            Else
-                Style.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                Style.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                [ReadOnly] = False
-            End If
+            UpdateDisplayOnlyControl()
         End Set
     End Property
+
+    Private Sub UpdateDisplayOnlyControl()
+        If _editingMode And Not DisplayOnly Then
+            [ReadOnly] = False
+            Style.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            Style.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+        Else
+            [ReadOnly] = False
+            Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            [ReadOnly] = True
+        End If
+    End Sub
 
     Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get

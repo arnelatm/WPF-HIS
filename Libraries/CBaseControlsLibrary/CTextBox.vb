@@ -44,24 +44,23 @@ Public Class CTextBox
         Set(value As Boolean)
             If Not AlwaysEditable Then
                 _editingMode = value
-                If value Then
-                    If DisplayOnly Then
-                        [ReadOnly] = True
-                        ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                        BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                    Else
-                        [ReadOnly] = False
-                        ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                        BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                    End If
-                Else
-                    [ReadOnly] = True
-                    ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                    BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                End If
+                UpdateDisplayOnlyControl()
             End If
         End Set
     End Property
+
+    Public Sub UpdateDisplayOnlyControl()
+        If _editingMode And Not DisplayOnly Then
+            [ReadOnly] = False
+            ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+        Else
+            [ReadOnly] = False
+            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            [ReadOnly] = True
+        End If
+    End Sub
 
     Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get

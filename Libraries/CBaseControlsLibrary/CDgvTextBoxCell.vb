@@ -48,17 +48,22 @@ Public Class CDgvTextBoxCell
         End Get
         Set
             _editingMode = Value
-            If Value Or DisplayOnly Then
-                Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                [ReadOnly] = True
-            Else
-                Style.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                Style.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                [ReadOnly] = False
-            End If
+            UpdateDisplayOnlyControl()
         End Set
     End Property
+
+    Private Sub UpdateDisplayOnlyControl()
+        If _editingMode And Not DisplayOnly Then
+            Style.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            Style.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            [ReadOnly] = False
+        Else
+            [ReadOnly] = False
+            Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+            [ReadOnly] = True
+        End If
+    End Sub
 
     Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get

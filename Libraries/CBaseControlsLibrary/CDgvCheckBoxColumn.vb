@@ -57,25 +57,23 @@ Public Class CDgvCheckBoxColumn
         Set(value As Boolean)
             If Not AlwaysEditable Then
                 _editingMode = value
-                If value Then
-                    If DisplayOnly Then
-                        [ReadOnly] = True
-                        DefaultCellStyle.BackColor = System.Drawing.Color.Orange 'GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                        DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                    Else
-                        [ReadOnly] = False
-                        DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                        DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-                        [ReadOnly] = False
-                    End If
-                Else
-                    [ReadOnly] = True
-                    DefaultCellStyle.ForeColor = System.Drawing.Color.Orange 'GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                    DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-                End If
+                UpdateDisplayOnlyControl()
             End If
         End Set
     End Property
+
+    Public Sub UpdateDisplayOnlyControl()
+        If _editingMode And Not DisplayOnly Then
+            [ReadOnly] = False
+            DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+            DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+        Else
+            [ReadOnly] = False
+            DefaultCellStyle.ForeColor = System.Drawing.Color.Orange
+            DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            [ReadOnly] = True
+        End If
+    End Sub
 
     Public Property Translatable As Boolean Implements IEntryControl.Translatable
         Get
