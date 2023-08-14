@@ -364,6 +364,7 @@ Namespace PresentationLayer.Views.Forms
             Return valid
         End Function
 
+
         Private Sub UpdateTotals()
             If _footer IsNot Nothing Then
                 _footer.CalculateTotals()
