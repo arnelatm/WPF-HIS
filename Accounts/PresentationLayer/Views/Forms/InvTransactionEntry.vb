@@ -404,7 +404,10 @@ Namespace PresentationLayer.Views.Forms
             End With
         End Sub
 
+        Private _oldCellValue As Object
+
         Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewInvTransactionDetails.CellBeginEdit
+            _oldCellValue = DataGridViewInvTransactionDetails.CurrentCell.Value
             With DataGridViewInvTransactionDetails.CurrentCell
                 Dim cColumnName = .OwningColumn.Name()
                 If cColumnName = $"dgvUnitIdNo" Then
@@ -586,6 +589,10 @@ Namespace PresentationLayer.Views.Forms
             '        dgvUnitCost.DisplayOnly = False
             '    End If
             'End If
+        End Sub
+
+        Private Sub DataGridViewInvTransactionDetails_ChangesMade(sender As Object, e As EventArgs) Handles DataGridViewInvTransactionDetails.ChangesMade
+
         End Sub
     End Class
 
