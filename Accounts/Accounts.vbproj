@@ -226,6 +226,7 @@
     <Compile Include="BusinessLayer\AccountReconciliationItem.vb" />
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
+    <Compile Include="BusinessLayer\AppSetting.vb" />
     <Compile Include="BusinessLayer\IGroup\Duration.vb" />
     <Compile Include="BusinessLayer\IGroup\DrugAccept.vb" />
     <Compile Include="BusinessLayer\Dosage.vb" />
@@ -331,6 +332,7 @@
     <Compile Include="DataLayer\AdoNet\InvTransTypeDao.vb" />
     <Compile Include="DataLayer\AdoNet\InvTransactionDao.vb" />
     <Compile Include="DataLayer\AdoNet\InvTransactionDetailDao.vb" />
+    <Compile Include="DataLayer\AdoNet\AppSettingDao.vb" />
     <Compile Include="DataLayer\AdoNet\SaleDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\SaleDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseDetailDao.vb" />
@@ -453,6 +455,7 @@
       <DependentUpon>NewSettings.settings</DependentUpon>
     </Compile>
     <Compile Include="OneTimeRun.vb" />
+    <Compile Include="PresentationLayer\Models\AppSettingModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\DurationModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\DrugAcceptModel.vb" />
     <Compile Include="PresentationLayer\Models\DosageModel.vb" />
@@ -466,6 +469,7 @@
     <Compile Include="PresentationLayer\Models\InventoryModel.vb" />
     <Compile Include="PresentationLayer\Models\InvTransactionModel.vb" />
     <Compile Include="PresentationLayer\Models\InvTransTypeModel.vb" />
+    <Compile Include="PresentationLayer\Models\SettingModel.vb" />
     <Compile Include="PresentationLayer\Models\ItemCodeModel.vb" />
     <Compile Include="PresentationLayer\Models\CodeGroupModel.vb" />
     <Compile Include="PresentationLayer\Models\DoctorModel.vb" />
@@ -524,6 +528,7 @@
     <Compile Include="PresentationLayer\Models\PensionSchemeModel.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\AppSettingPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ProductFinderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\InventorySelectorPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\InvTransTypePresenter.vb" />
@@ -621,6 +626,12 @@
     <Compile Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsFinder.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\AppSettingEntry.Designer.vb">
+      <DependentUpon>AppSettingEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\AppSettingEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\ExpiryReportByWarehouse.Designer.vb">
       <DependentUpon>ExpiryReportByWarehouse.vb</DependentUpon>
     </Compile>
@@ -633,6 +644,7 @@
     <Compile Include="PresentationLayer\Views\Forms\Reports\InventoryReportByWarehouse.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Interfaces\IAppSettingView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IProductFinderView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IInventoryView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IInventorySelectorView.vb" />
@@ -2041,6 +2053,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\InventorySelector.resx">
       <DependentUpon>InventorySelector.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\AppSettingEntry.resx">
+      <DependentUpon>AppSettingEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ExpiryReportByWarehouse.resx">

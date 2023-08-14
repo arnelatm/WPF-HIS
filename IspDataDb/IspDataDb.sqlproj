@@ -585,7 +585,6 @@
     <Build Include="dbo\Views\Inventory_View.sql" />
     <Build Include="dbo\Tables\ReportMasterOld.sql" />
     <Build Include="dbo\Views\InvTransactionDetail_View.sql" />
-    <Build Include="dbo\Views\Dosage_ViewOld.sql" />
     <Build Include="dbo\Stored Procedures\UpdateInvTransactionDetailTVP.sql" />
     <Build Include="dbo\Stored Procedures\InsertInvTransactionDetailTVP.sql" />
     <Build Include="dbo\User Defined Types\InvTransactionDetailUpdate.sql" />

@@ -1,0 +1,80 @@
+﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Common.PresentationLayer.Presenters
+
+Namespace PresentationLayer.Presenters
+
+    Public Class AppSettingPresenter(Of TM As New)
+        Inherits CommonPresenter(Of IAppSettingView, TM)
+
+        Public Sub New(itemView As IAppSettingView)
+            MyBase.New(itemView)
+            Service = New AccountsService("AppSetting")
+            TableName = "AppSetting"
+            SortOrderKey = "AppSettingGroupIdNo"
+            WithTreeView = False
+            'AddHandler View.LockGroupClicked, AddressOf LockGroupClicked
+            AddHandler View.FilterRecords, AddressOf FilterRecords
+        End Sub
+
+        Protected Overrides Sub CreateDataSources()
+            Dim data As New ArrayList
+            data.Add({"AppSettingGroup", "AppSettingGroupSelector", "IdNo,AppSettingGroupName,AppSettingCode", Nothing})
+            CreateDataSourceThread(data)
+        End Sub
+
+        Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
+            Dim returnValue As Boolean = False
+            'If CheckDependentRecords(Of Int32)(View.IdNo, "AppSettingAccount", "AppSettingIdNo") Then
+            '    Return True
+            'ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "Supplier", "AppSettingIdNo") Then
+            '    Return True
+            'ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "Customer", "AppSettingIdNo") Then
+            '    Return True
+            'ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "Employee", "AppSettingIdNo") Then
+            '    Return True
+            'ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "PensionProvider", "AppSettingIdNo") Then
+            '    Return True
+            'End If
+            Return False
+        End Function
+
+        'Public Sub LockGroupClicked()
+        '    If View.LockGroup Then
+        '        DataFilter = "CodeGroupIdNo = " & View.CodeGroupIdNo.ToString()
+        '    Else
+        '        DataFilter = ""
+        '    End If
+        '    DisplayTree()
+        'End Sub
+
+
+        Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
+            'If View.LockGroup Then
+            View.AppSettingGroupIdNo = View.SavedGroupIdNo
+            'End If
+        End Sub
+
+        Public Overrides Sub GoFilter()
+            'If DataFilter Is Nothing Or DataFilter = "" Then
+            '    DataFilter = "Active = 1"
+            'Else
+            '    DataFilter = ""
+            'End If
+            DisplayTree()
+            GoFirstRecord()
+        End Sub
+
+        Public Sub FilterRecords()
+            DataFilter = View.DataFilter
+            DisplayTree()
+            If Not AddMode Then
+                GoLastRecord()
+            End If
+        End Sub
+
+
+
+    End Class
+
+End Namespace
