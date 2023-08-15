@@ -147,6 +147,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgWareHouseToBlank", "Sorry, 'warehouse to transfer' cannot be empty for an inventory transfer!", "error")
         Messaging.AddMessage("MsgNonPostableEntry", "Sorry, this entry is a non-postable inventory transaction.", "error")
         Messaging.AddMessage("MsgDateCannotBeBlank", "Sorry, empty date not allowed.", "error")
+        Messaging.AddMessage("MsgCannotEditInvItems", "Cannot Edit <{fieldName}>, for existing inventory items. Reverting to previous value.", "invalid entry")
     End Sub
 
     'Public Shared Sub CreateEnums()

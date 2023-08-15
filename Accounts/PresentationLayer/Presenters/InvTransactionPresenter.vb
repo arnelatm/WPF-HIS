@@ -302,8 +302,8 @@ Namespace PresentationLayer.Presenters
                             If View.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Then
                                 Messaging.Show(True, "MsgNoSuchInventory", "Error")
                             End If
-                            If View.InvTransTypeIdNo Then
-                            End If
+                            'If View.InvTransTypeIdNo Then
+                            'End If
                         End If
                     End With
                 End If
@@ -372,6 +372,7 @@ Namespace PresentationLayer.Presenters
                             Messaging.Show(errorText)
                         Else
                             UpdateIdNameUnit(product)
+                            View.InvTransactionDetailsBs.Current.InventoryIdNo = 0
                             entryIsValid = True
                         End If
                     End If
@@ -431,6 +432,7 @@ Namespace PresentationLayer.Presenters
                     If View.InventoryAction = EnumToCode(InventoryActionSelection.PurchaseOrder) Then
                         ' accept ProductName as is no need to check with inventory
                         product = SetProductInitialValues(product)
+                        View.InvTransactionDetailsBs.Current.InventoryIdNo = 0
                     ElseIf ItemInInventory(control, product) Then
                         View.ProductInInventory = True
                     Else
@@ -443,6 +445,7 @@ Namespace PresentationLayer.Presenters
                             View.ProductNameIsValid = False
                             retVal = False
                         End If
+                        View.InvTransactionDetailsBs.Current.InventoryIdNo = 0
                     End If
                 End If
             Else

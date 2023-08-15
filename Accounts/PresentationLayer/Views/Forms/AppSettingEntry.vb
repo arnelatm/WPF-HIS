@@ -204,6 +204,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub cboSelector1_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboAppSettingGroupSelector.SelectionChangeCommitted
             'If FormShown Then
             RaiseEvent AppSettingGroupValueChanged(sender)
+            Refresh()
             'DataFilter = "Selector1 = " & cboAppSettingGroupSelector.SelectedValue.ToString()
             'AppSettingGroupIdNo = cboAppSettingGroupSelector.SelectedValue
             'SavedGroupIdNo = AppSettingGroupIdNo

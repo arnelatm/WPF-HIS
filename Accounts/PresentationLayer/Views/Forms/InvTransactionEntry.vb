@@ -298,6 +298,23 @@ Namespace PresentationLayer.Views.Forms
                         '(DataGridViewInvTransactionDetails, e)
                     ElseIf cColumnName = $"dgvExpiryDate" Then
                         ValidateExpiryDate(DataGridViewInvTransactionDetails, e)
+                        If .CurrentRow.Cells("dgvInventoryIdNo").Value <> 0 Then
+                            Messaging.ShowPmMessage(True, "MsgCannotEditInvItems", {"fieldName", Messaging.TranslateCaption("expiry date")})
+                            e.Cancel = True
+                            .CurrentRow.Cells("dgvExpiryDate").Value = DataGridViewInvTransactionDetails.OldCellValue
+                        End If
+                    ElseIf cColumnName = $"dgvBatchNo" Then
+                        If .CurrentRow.Cells("dgvInventoryIdNo").Value <> 0 Then
+                            Messaging.ShowPmMessage(True, "MsgCannotEditInvItems", {"fieldName", Messaging.TranslateCaption("batch number")})
+                            e.Cancel = True
+                            .CurrentRow.Cells("dgvBatchNo").Value = DataGridViewInvTransactionDetails.OldCellValue
+                        End If
+                    ElseIf cColumnName = $"dgvUnitCost" Then
+                        If .CurrentRow.Cells("dgvInventoryIdNo").Value <> 0 Then
+                            Messaging.ShowPmMessage(True, "MsgCannotEditInvItems", {"fieldName", Messaging.TranslateCaption("unit cost")})
+                            e.Cancel = True
+                            .CurrentRow.Cells("dgvUnitCost").Value = DataGridViewInvTransactionDetails.OldCellValue
+                        End If
                     End If
                 End With
             End If
@@ -404,10 +421,10 @@ Namespace PresentationLayer.Views.Forms
             End With
         End Sub
 
-        Private _oldCellValue As Object
+        'Private _oldCellValue As Object
 
         Private Sub OnCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles DataGridViewInvTransactionDetails.CellBeginEdit
-            _oldCellValue = DataGridViewInvTransactionDetails.CurrentCell.Value
+            '_oldCellValue = DataGridViewInvTransactionDetails.CurrentCell.Value
             With DataGridViewInvTransactionDetails.CurrentCell
                 Dim cColumnName = .OwningColumn.Name()
                 If cColumnName = $"dgvUnitIdNo" Then

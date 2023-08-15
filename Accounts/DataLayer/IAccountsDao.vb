@@ -24,9 +24,9 @@ Namespace DataLayer
 
     End Interface
 
-    Public Interface IDaoAutoReference(Of TBiz)
+    Public Interface IDaoAutoReference(Of T)
 
-        Function UpdateReferenceNumber(ByRef bizObj As TBiz) As Integer
+        Function UpdateReferenceNumber(ByRef obj As T) As Integer
 
     End Interface
 
