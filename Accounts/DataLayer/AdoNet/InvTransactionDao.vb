@@ -15,7 +15,7 @@ Namespace DataLayer.AdoNet
 
     Public Class InvTransactionDao
         Inherits AccountsDao
-        Implements IDao(Of InvTransaction), IDaoPosting, IDaoChild(Of Inventory), IDaoAutoReference(Of Inventory), IDaoGetRecordsWithParams(Of Inventory)
+        Implements IDao(Of InvTransaction), IDaoPosting, IDaoChild(Of Inventory), IDaoAutoReference(Of Int32), IDaoGetRecordsWithParams(Of Inventory)
 
 
         Private Const FieldList = "Amount," &
@@ -66,11 +66,15 @@ Namespace DataLayer.AdoNet
 
         Public Function AddRecord(ByRef InvTransaction As InvTransaction) As Integer _
             Implements IDao(Of InvTransaction).AddRecord
+            Dim retVal As Int32 = 0
             Dim sql As String =
                     " INSERT INTO [InvTransaction] " &
                     " (Amount,BranchIdNo,Cancelled,InvTransTypeIdNo,Notes,Posted,ReferenceNo,TransactionDate,UserIdNo,WarehouseIdNo,WarehouseToIdNo)" &
                     " VALUES (@Amount,@BranchIdNo,@Cancelled,@InvTransTypeIdNo,@Notes,@Posted,@ReferenceNo,@TransactionDate,@UseridNo,@WarehouseIdNo,@WarehouseToIdNo)"
-            Return Db.Insert(sql, Take(InvTransaction))
+            retVal = Db.Insert(sql, Take(InvTransaction))
+            If retVal > 0 Then
+                UpdateReferenceNumber(retVal)
+            End If
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, InvTransaction) =
@@ -243,19 +247,20 @@ Namespace DataLayer.AdoNet
         '    Return Db.Read(sql, Make, params).ToList()
         'End Function
 
-        Public Function UpdateReferenceNumber(ByRef bizObj As Inventory) As Integer Implements IDaoAutoReference(Of Inventory).UpdateReferenceNumber
+        Public Function UpdateReferenceNumber(ByRef idNo As Int32) As Integer Implements IDaoAutoReference(Of Int32).UpdateReferenceNumber
             Dim retVal As Integer
             Dim sql1 As String
             Dim sql2 As String
             Dim series = "InventoryTransaction"
             Dim maxlength As Int16
             If Db.Scalar("Select Count(*) from Series where SeriesName = '" & series & "'") < 1 Then
+                maxlength = 6
                 Dim sql As String = "INSERT INTO [Series] " &
                     " (SeriesName,Value,MaxLength,Prefix,Description)" &
                     " VALUES (@SeriesName,@Value,@MaxLength,@Prefix,@Description)"
                 Dim params() As Object = {"@SeriesName", series,
                                           "@Value", 0,
-                                          "@MaxLength", 6,
+                                          "@MaxLength", maxlength,
                                           "@Prefix", "",
                                           "@Description", "Inventory Transaction Series"
                                          }
@@ -267,8 +272,7 @@ Namespace DataLayer.AdoNet
                 maxlength = Db.Scalar("Select MaxLength from Series where SeriesName = '" & series & "'")
             End If
             sql1 = "Update [Series] set Value = Value + 1 where SeriesName = '" & series & "'"
-            sql2 = "Update [InvTransaction] set ReferenceNo = Concat(RIGHT(Concat(Replicate('0'," & maxlength & "),(select value from series where seriesName = '" & series & "'))," & maxlength &
-                   ")) where IdNo = " & bizObj.IdNo
+            sql2 = "Update [InvTransaction] set ReferenceNo = RIGHT(Concat(Replicate('0'," & maxlength & "),(select value from series where seriesName = '" & series & "'))," & maxlength & ") where IdNo = " & idNo
             retVal = Db.ExecuteSqlTransaction("UpdateInvReferenceNumber", sql1, sql2)
             Return retVal
         End Function

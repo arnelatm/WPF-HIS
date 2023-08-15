@@ -939,6 +939,12 @@ Public Class CtDataGridView
         Return matchSw
     End Function
 
+    Public Property OldCellValue As Object
+
+    Private Sub MyCellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles MyBase.CellBeginEdit
+        OldCellValue = Me.CurrentCell.Value
+    End Sub
+
     'Public Sub ResetDisplayOnly(lDisplayOnly As Boolean, control As Control)
     '    If control.GetType().GetProperty("DisplayOnly") IsNot Nothing Then
     '        If _editingMode Then
