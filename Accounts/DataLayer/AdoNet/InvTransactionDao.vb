@@ -48,6 +48,7 @@ Namespace DataLayer.AdoNet
 
         Public Function UpdateRecord(ByRef InvTransaction As InvTransaction) As Integer _
             Implements IDao(Of InvTransaction).UpdateRecord
+            Dim retVal As Int32 = 0
             Dim sql As String =
                     "UPDATE [InvTransaction] Set " &
                     "Amount = @Amount," &
@@ -61,7 +62,11 @@ Namespace DataLayer.AdoNet
                     "WarehouseIdNo = @WarehouseIdNo, " &
                     "WarehouseToIdNo = @WarehouseToIdNo " &
                     "WHERE IdNo = @IdNo"
-            Return Db.Update(sql, Take(InvTransaction))
+            retVal = Db.Update(sql, Take(InvTransaction))
+            If retVal > 0 Then
+                UpdateReferenceNumber(InvTransaction.IdNo)
+            End If
+            Return retVal
         End Function
 
         Public Function AddRecord(ByRef InvTransaction As InvTransaction) As Integer _
@@ -75,6 +80,7 @@ Namespace DataLayer.AdoNet
             If retVal > 0 Then
                 UpdateReferenceNumber(retVal)
             End If
+            Return retVal
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, InvTransaction) =
