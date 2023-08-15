@@ -162,10 +162,14 @@ Namespace PresentationLayer.Presenters
             FileName = "Statement of Accounts Payable.Rpt"
             Args = {View.IdNo, "InvTransactionIdNo", "en", "Language", ReportTitle, "ReportTitle"}
             Copies = 1
+            PrintThisReport()
+
+        End Sub
+
+        Private Sub PrintThisReport()
             Dim printModel As New ReportModel
             Dim reportPrinter As New PrintReportPresenter(Of ReportModel)
             reportPrinter.OnPrintReport("Inventory Transaction.Rpt", "ISPDATA", Args)
-
         End Sub
 
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
