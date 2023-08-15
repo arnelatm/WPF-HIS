@@ -1,19 +1,26 @@
 ﻿Imports System.Dynamic
+Imports System.Globalization
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Common
+Imports AATM.Common.PresentationLayer.Models
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
+Imports AATM.PresentationLayer.Presenters
+Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Presenters
 
     Public Class InvTransactionPresenter(Of TM As New)
         Inherits TransactionsPresenter(Of IInvTransactionView, TM)
-        Implements ISubscriber(Of DgvItemsChanged) ', ISubscriber(Of DgvItemsValidating)
+        Implements ISubscriber(Of DgvItemsChanged), IReportPrinterView ', ISubscriber(Of DgvItemsValidating)
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
@@ -103,6 +110,16 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Private ReadOnly _InvTransactionItemService As New AccountsService("InvTransactionDetail")
+        Public Event PrintReport As IReportPrinterView.PrintReportEventHandler Implements IReportPrinterView.PrintReport
+
+        Public Property FileName As String Implements IReportPrinterView.FileName
+        Public Property ReportTitle As String Implements IReportPrinterView.ReportTitle
+        Public Property FormCultureLanguage As String Implements IReportPrinterView.FormCultureLanguage
+        Public Property Args As Object() Implements IReportPrinterView.Args
+        Public Property DataBaseConnectionName As String Implements IReportPrinterView.DataBaseConnectionName
+        Public Property Copies As Integer Implements IReportPrinterView.Copies
+        Public Property Errors As List(Of String) Implements IView.Errors
+        Private Property DataFilter As String Implements IView.DataFilter
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
@@ -139,26 +156,16 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Overrides Sub GoPrintRecord()
-            'Dim transactionAmount As String
-            'Dim totalApAmount As String
-            'Dim currencies As New List(Of CurrencyInfo)()
-            'Dim curCulture = CultureInfo.CurrentCulture
-            'CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-            'Dim language As String
-            'language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            'currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-            'If language = "ar" Then
-            '    transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
-            'Else
-            '    transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
-            'End If
-            'If language = "ar" Then
-            '    totalApAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
-            'Else
-            '    totalApAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
-            'End If
-            'Dim cForm As New ReportForm("Accounts Payable Journal.Rpt", View.IdNo, "InvTransactionIdNo", transactionAmount, "ApAmountInWords", totalApAmount, "TotalLineAmountInWords", language, "Language")
-            'cForm.Show()
+
+            ReportTitle = Messaging.TranslateCaption("Inventory Transaction")
+            FormCultureLanguage = CultureInfo.CurrentCulture.Name
+            FileName = "Statement of Accounts Payable.Rpt"
+            Args = {View.IdNo, "InvTransactionIdNo", "en", "Language", ReportTitle, "ReportTitle"}
+            Copies = 1
+            Dim printModel As New ReportModel
+            Dim reportPrinter As New PrintReportPresenter(Of ReportModel)
+            reportPrinter.OnPrintReport("Inventory Transaction.Rpt", "ISPDATA", Args)
+
         End Sub
 
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
