@@ -20,11 +20,10 @@ Public Interface IReportPrinterView
     Property Args As Object()
     Property DataBaseConnectionName As String
     Property Copies As Int32
-
+    Property Collate As Boolean
+    Property StartPage As Int32
+    Property EndPage As Int32
     Event PrintReport(ByVal sender As IReportPrinterView)
-    'Event PrintReport(ByVal sender As IPrintReportView)
-    'Event GetLanguageAndCo(ByRef language As String, ByRef establishmentName As String)
-    'Event GetStandardData()
 
 End Interface
 
