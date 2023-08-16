@@ -428,7 +428,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub StatementOfEmployeeLoansToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStatementOfEmployeeLoans.Click
-            RunForm(Of StatementOfEr)()
+            RunReportNew(Of StatementOfEr)()
         End Sub
 
         Private Sub SummaryOfAccountsPayableToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSummaryOfAccountsPayable.Click

@@ -233,6 +233,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPrinterName.DataValue = Nothing
             Me.cboPrinterName.DefaultValue = Nothing
             Me.cboPrinterName.DisplayMember = "Name"
+            Me.cboPrinterName.Editable = True
             Me.cboPrinterName.EditingMode = True
             Me.cboPrinterName.EndFindValue = Nothing
             Me.cboPrinterName.FieldDescription = Nothing
@@ -340,6 +341,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaperSource.DataValue = Nothing
             Me.cboPaperSource.DefaultValue = Nothing
             Me.cboPaperSource.DisplayMember = "Name"
+            Me.cboPaperSource.Editable = True
             Me.cboPaperSource.EditingMode = True
             Me.cboPaperSource.EndFindValue = Nothing
             Me.cboPaperSource.FieldDescription = Nothing
@@ -403,6 +405,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaperSize.DataValue = Nothing
             Me.cboPaperSize.DefaultValue = Nothing
             Me.cboPaperSize.DisplayMember = "Name"
+            Me.cboPaperSize.Editable = True
             Me.cboPaperSize.EditingMode = True
             Me.cboPaperSize.EndFindValue = Nothing
             Me.cboPaperSize.FieldDescription = Nothing
@@ -462,11 +465,12 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaperOrientation.BegFindValue = Nothing
             Me.cboPaperOrientation.ChangingSearchValueOnly = False
             Me.cboPaperOrientation.CurrentSearchTerm = ""
-        Me.cboPaperOrientation.DataValue = Nothing
-        Me.cboPaperOrientation.DefaultValue = Nothing
-        Me.cboPaperOrientation.DisplayMember = "Name"
-        Me.cboPaperOrientation.EditingMode = true
-        Me.cboPaperOrientation.EndFindValue = Nothing
+            Me.cboPaperOrientation.DataValue = Nothing
+            Me.cboPaperOrientation.DefaultValue = Nothing
+            Me.cboPaperOrientation.DisplayMember = "Name"
+            Me.cboPaperOrientation.Editable = True
+            Me.cboPaperOrientation.EditingMode = True
+            Me.cboPaperOrientation.EndFindValue = Nothing
         Me.cboPaperOrientation.FieldDescription = Nothing
         Me.cboPaperOrientation.FieldName = Nothing
         Me.cboPaperOrientation.FilterRule = Nothing

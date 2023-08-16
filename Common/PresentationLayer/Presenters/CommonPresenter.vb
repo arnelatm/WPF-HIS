@@ -411,7 +411,7 @@ Namespace PresentationLayer.Presenters
             GetControlName(controlName).DataSource = data
         End Sub
 
-        Protected Sub SetPrinterSupportedSources(pPrinterName As String, ByRef paperSource As Int16)
+        Protected Sub SetPrinterSupportedSources(pPrinterName As String, ByRef paperSource As Int16?)
             Dim data = GlobalFunctions.GetPrinterPageInfo(pPrinterName)
             Dim paperSourceLookup As New List(Of Lookup.LookupData)
             Dim index As Int16 = 0
@@ -432,7 +432,7 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Protected Sub SetPrinterSupportedPaperSize(pPrinterName As String, ByRef paperSize As Int16)
+        Protected Sub SetPrinterSupportedPaperSize(pPrinterName As String, ByRef paperSize As Int16?)
             Dim data = GetPrinterPageInfo(pPrinterName)
             Dim paperSizeLookup As New List(Of Lookup.LookupData)
             Dim index As Int16 = 0
@@ -453,33 +453,33 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Protected Sub SetPrinterSupportedPaperOrientation(pPrinterName As String, ByRef paperOrientation As Int16)
-            Dim data = GetPrinterPageInfo(pPrinterName)
+        Protected Sub SetPrinterSupportedPaperOrientation(pPrinterName As String, ByRef paperOrientation As Int16?)
+            'Dim data = GetPrinterPageInfo(pPrinterName)
             Dim paperOrientationLookup As New List(Of Lookup.LookupData)
             Dim index As Int16 = 0
             Dim dbLookup = New Lookup.LookupData
-            dbLookup.IdNo = CrystalDecisions.Shared.PaperOrientation.DefaultPaperOrientation
+            dbLookup.IdNo = 0 'CInt(CrystalDecisions.Shared.PaperOrientation.DefaultPaperOrientation)
             dbLookup.Name = "DefaultPaperOrientation"
             dbLookup.Code = "DefaultPaperOrientation"
-            dbLookup.Index = CrystalDecisions.Shared.PaperOrientation.DefaultPaperOrientation
+            dbLookup.Index = 0 'CInt(CrystalDecisions.Shared.PaperOrientation.DefaultPaperOrientation)
             paperOrientationLookup.Add(dbLookup)
             dbLookup = New Lookup.LookupData
-            dbLookup.IdNo = CrystalDecisions.Shared.PaperOrientation.Landscape
+            dbLookup.IdNo = 1 'CInt(CrystalDecisions.Shared.PaperOrientation.Landscape)
             dbLookup.Name = "Landscape"
             dbLookup.Code = "Landscape"
-            dbLookup.Index = CrystalDecisions.Shared.PaperOrientation.Landscape
+            dbLookup.Index = 1 'CInt(CrystalDecisions.Shared.PaperOrientation.Landscape)
             paperOrientationLookup.Add(dbLookup)
             dbLookup = New Lookup.LookupData
-            dbLookup.IdNo = CrystalDecisions.Shared.PaperOrientation.Portrait
+            dbLookup.IdNo = 2 ' CInt(CrystalDecisions.Shared.PaperOrientation.Portrait)
             dbLookup.Name = "Portrait"
             dbLookup.Code = "Portrait"
-            dbLookup.Index = CrystalDecisions.Shared.PaperOrientation.Portrait
+            dbLookup.Index = 2 'CInt(CrystalDecisions.Shared.PaperOrientation.Portrait)
             paperOrientationLookup.Add(dbLookup)
             Dim savedDefaultPaperOrientation As Int16? = paperOrientation
             GetControlName("PaperOrientation").DataSource = paperOrientationLookup
             paperOrientation = savedDefaultPaperOrientation
             If savedDefaultPaperOrientation Is Nothing OrElse savedDefaultPaperOrientation = 0 Then
-                paperOrientation = CrystalDecisions.Shared.PaperOrientation.DefaultPaperOrientation
+                paperOrientation = 0 'CrystalDecisions.Shared.PaperOrientation.DefaultPaperOrientation
             End If
         End Sub
     End Class

@@ -49,7 +49,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PaperSize As Int16 Implements IPrinterView.PaperSize
+        Public Property PaperSize As Int16? Implements IPrinterView.PaperSize
             Get
                 Return cboPaperSize.GetValue()
             End Get
@@ -58,7 +58,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PaperSource As Int16 Implements IPrinterView.PaperSource
+        Public Property PaperSource As Int16? Implements IPrinterView.PaperSource
             Get
                 Return cboPaperSource.GetValue()
             End Get
@@ -67,7 +67,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PaperOrientation As Int16 Implements IPrinterView.PaperOrientation
+        Public Property PaperOrientation As Int16? Implements IPrinterView.PaperOrientation
             Get
                 Return cboPaperOrientation.GetValue()
             End Get
