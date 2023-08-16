@@ -35,7 +35,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                 Dim reportName As String = Messaging.TranslateCaption("Statement of Accounts Payable")
                 Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpBeginningDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
                 Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpEndingDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
-                Dim formCultureLanguage = CultureInfo.CurrentCulture.Name
+                Dim formCultureLanguage As String = CultureInfo.CurrentCulture.Name
                 Dim reportFileName As String
                 If formCultureLanguage = "ar" Then
                     reportFileName = "Statement of Accounts Payable Arabic.Rpt"
