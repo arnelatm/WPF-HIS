@@ -27,59 +27,59 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.lblCustomerCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboCustomerIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.dtpEndingDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-        Me.dtpBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.CFlowLayout1.SuspendLayout
-        Me.SuspendLayout
-        '
-        'lblCustomerCode
-        '
-        Me.lblCustomerCode.DisplayOnly = true
-        Me.lblCustomerCode.EditingMode = false
-        Me.lblCustomerCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblCustomerCode.Location = New System.Drawing.Point(1, 82)
-        Me.lblCustomerCode.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblCustomerCode.Name = "lblCustomerCode"
-        Me.lblCustomerCode.Size = New System.Drawing.Size(150, 24)
-        Me.lblCustomerCode.TabIndex = 22
-        Me.lblCustomerCode.Text = "Customer Code:"
-        Me.lblCustomerCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblCustomerCode.Translatable = true
-        '
-        'CLabel3
-        '
-        Me.CLabel3.DisplayOnly = true
-        Me.CLabel3.EditingMode = false
-        Me.CLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.CLabel3.Location = New System.Drawing.Point(1, 55)
-        Me.CLabel3.Margin = New System.Windows.Forms.Padding(1)
-        Me.CLabel3.Name = "CLabel3"
-        Me.CLabel3.Size = New System.Drawing.Size(150, 25)
-        Me.CLabel3.TabIndex = 21
-        Me.CLabel3.Text = "Ending Date:"
-        Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.CLabel3.Translatable = true
-        '
-        'lblBeginningDate
-        '
-        Me.lblBeginningDate.DisplayOnly = true
-        Me.lblBeginningDate.EditingMode = false
-        Me.lblBeginningDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblBeginningDate.Location = New System.Drawing.Point(1, 28)
-        Me.lblBeginningDate.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblBeginningDate.Name = "lblBeginningDate"
-        Me.lblBeginningDate.Size = New System.Drawing.Size(150, 25)
-        Me.lblBeginningDate.TabIndex = 20
-        Me.lblBeginningDate.Text = "Beginning Date :"
-        Me.lblBeginningDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblBeginningDate.Translatable = True
+            Me.cboCustomerIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.dtpEndingDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
+            Me.dtpBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
+            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
+            Me.CFlowLayout1.SuspendLayout()
+            Me.SuspendLayout()
+            '
+            'lblCustomerCode
+            '
+            Me.lblCustomerCode.DisplayOnly = True
+            Me.lblCustomerCode.EditingMode = False
+            Me.lblCustomerCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblCustomerCode.Location = New System.Drawing.Point(1, 82)
+            Me.lblCustomerCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblCustomerCode.Name = "lblCustomerCode"
+            Me.lblCustomerCode.Size = New System.Drawing.Size(150, 24)
+            Me.lblCustomerCode.TabIndex = 22
+            Me.lblCustomerCode.Text = "Customer Code:"
+            Me.lblCustomerCode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblCustomerCode.Translatable = True
+            '
+            'CLabel3
+            '
+            Me.CLabel3.DisplayOnly = True
+            Me.CLabel3.EditingMode = False
+            Me.CLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel3.Location = New System.Drawing.Point(1, 55)
+            Me.CLabel3.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel3.Name = "CLabel3"
+            Me.CLabel3.Size = New System.Drawing.Size(150, 25)
+            Me.CLabel3.TabIndex = 21
+            Me.CLabel3.Text = "Ending Date:"
+            Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel3.Translatable = True
+            '
+            'lblBeginningDate
+            '
+            Me.lblBeginningDate.DisplayOnly = True
+            Me.lblBeginningDate.EditingMode = False
+            Me.lblBeginningDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblBeginningDate.Location = New System.Drawing.Point(1, 28)
+            Me.lblBeginningDate.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblBeginningDate.Name = "lblBeginningDate"
+            Me.lblBeginningDate.Size = New System.Drawing.Size(150, 25)
+            Me.lblBeginningDate.TabIndex = 20
+            Me.lblBeginningDate.Text = "Beginning Date :"
+            Me.lblBeginningDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblBeginningDate.Translatable = True
             '
             'cboCustomerIdNo
             '
@@ -92,7 +92,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboCustomerIdNo.DefaultValue = Nothing
             Me.cboCustomerIdNo.DisplayMember = "Name"
             Me.cboCustomerIdNo.Editable = True
-            Me.cboCustomerIdNo.EditingMode = True
+            Me.cboCustomerIdNo.EditingMode = False
             Me.cboCustomerIdNo.EndFindValue = Nothing
             Me.cboCustomerIdNo.FieldDescription = Nothing
             Me.cboCustomerIdNo.FieldName = Nothing

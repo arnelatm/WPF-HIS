@@ -466,9 +466,10 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemStatementOfAccountsReceivable_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStatementOfAccountsReceivable.Click
-            Dim formToRun = Activator.CreateInstance(GetType(StatementOfAr))
-            formToRun.Presenter = New ReportPrinterPresenter(Of ReportModel)(formToRun)
-            Invoker.InvokeFunction(formToRun, "Show")
+            RunReportNew(Of StatementOfAr)()
+            'Dim formToRun = Activator.CreateInstance(GetType(StatementOfAr))
+            'formToRun.Presenter = New ReportPrinterPresenter(Of ReportModel)(formToRun)
+            'Invoker.InvokeFunction(formToRun, "Show")
         End Sub
 
         Private Sub ToolStripMenuItemStateOfEmployeeLoans_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSummaryOfEmployeeLoans.Click
