@@ -162,14 +162,14 @@ Namespace PresentationLayer.Presenters
             FileName = "Statement of Accounts Payable.Rpt"
             Args = {View.IdNo, "InvTransactionIdNo", "en", "Language", ReportTitle, "ReportTitle"}
             Copies = 1
-            PrintThisReport()
+            PrintThisReport(FileName, "ISPDATA", Args)
 
         End Sub
 
-        Private Sub PrintThisReport()
+        Private Sub PrintThisReport(FileName As String, databaseConnectionName As String, args As Object)
             Dim printModel As New ReportModel
             Dim reportPrinter As New PrintReportPresenter(Of ReportModel)
-            reportPrinter.OnPrintReport("Inventory Transaction.Rpt", "ISPDATA", Args)
+            reportPrinter.OnPrintReport("Inventory Transaction.Rpt", "ISPDATA", args)
         End Sub
 
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
