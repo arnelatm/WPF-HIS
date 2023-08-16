@@ -1,4 +1,6 @@
-﻿Imports AATM.PresentationLayer.Views
+﻿Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
+Imports AATM.PresentationLayer.Views
 
 Public Interface IPrintReportView
     Inherits AATM.PresentationLayer.Views.IView
@@ -24,6 +26,13 @@ Public Interface IReportPrinterView
     Property StartPage As Int32
     Property EndPage As Int32
     Event PrintReport(ByVal sender As IReportPrinterView)
+
+End Interface
+
+Public Interface ICrPrintableReportView
+    Inherits AATM.PresentationLayer.Views.IView
+
+    Event PrintReport(reportFileName As String, reportArgs As CrPrintableArgs)
 
 End Interface
 

@@ -1,20 +1,19 @@
 ﻿Imports System.Globalization
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports AATM.Common.Models
 Imports AATM.Common.PresentationLayer.Models
+Imports AATM.Common.PresentationLayer.Views.[Interface]
 Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries
 Imports AATM.Libraries.CrystalReportsHelper
+Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Forms
-Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
-Imports CrystalDecisions.ReportAppServer.ReportDefModel
 
 Namespace PresentationLayer.Presenters
 
     Public Class PrintReportPresenter(Of TM As New)
-        Inherits CommonPresenter(Of IPrintReportView, TM)
+        Inherits CommonPresenter(Of ICrPrintableReportView, TM)
         Implements ISubscriber(Of GetControlDataSource)
 
         Private _psService As Object
@@ -28,14 +27,16 @@ Namespace PresentationLayer.Presenters
             MakeServices()
             _computerName = Environment.MachineName      ' "Pharmacy" '
             _computerIdNo = _psService.GetRecordFieldWithKeyG(Of Int16)(_computerName, "Computer", "ComputerName", "IdNo")
+            'AddHandler View.PrintReport, AddressOf OnPrintCrystalReport
             'Ea = New EventAggregator()
             'Ea.SubscribeEvent(Me)
         End Sub
 
-        Public Sub New(view As IPrintReportView)
+        Public Sub New(view As ICrPrintableReportView)
             MyBase.New(view)
             MakeServices()
-            AddHandler view.PrintReport, AddressOf OnPrintReport
+            'AddHandler view.PrintReport, AddressOf OnPrintReport
+            AddHandler view.PrintReport, AddressOf OnPrintCrystalReport
             'AddHandler view.GetLanguageAndCo, AddressOf OnGetLanguageAndCo
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
@@ -123,6 +124,23 @@ Namespace PresentationLayer.Presenters
             SetDataSource(eventType.TableName, eventType.Control)
         End Sub
 
+        Public Sub PrintReport(reportFileName As String, reportArgs As CrPrintableArgs)
+            ' leave startpage and endpage to 0 - to print all pages
+            Dim rp As CrPrintableArgs = reportArgs
+            ProcessReport(reportFileName, rp.DataBaseConnectionName, True, rp.ReportParameters, rp.Copies, rp.Collate, rp.StartPage, rp.EndPage)
+        End Sub
+
+
+        Public Sub OnPrintCrystalReport(reportFileName As String, reportArgs As CrPrintableArgs)
+            'Dim printModel As New ReportModel
+            'Dim reportPrinter As New PrintReportPresenter(Of ReportModel)
+            If reportFileName Is Nothing Or reportFileName = "" Then
+                Debugger.Break()
+                MessageBox.Show("Crystal Report Printing - Empty Filename Error")
+            End If
+            PrintReport(reportFileName, reportArgs)
+            'reportPrinter.PrintReport(reportFileName, reportArgs)
+        End Sub
 
         'Private Sub OnGetLanguageAndCo(ByVal sender As IReportPrinterView, ByVal formCulture As String, ByRef language As String, ByRef establishmentName As String, ByRef reportTitle As String)
         '    language = Strings.Left(formCulture, formCulture.IndexOf("-", StringComparison.Ordinal))
@@ -150,28 +168,23 @@ Namespace PresentationLayer.Presenters
 
     End Class
 
-    Public Class CrPrintReport
+    'Public Class CrPrintableReport(Of TM As New)
+    '    Inherits PrintReportPresenter(Of TM)
 
-        Public Property FileName As String
-        Public Property Title As String
-        Public Property FormCultureLanguage As String = CultureInfo.CurrentCulture.Name
-        Public Property Parameters As Object()
-        Public Property DataBaseConnectionName As String = "ISPDATA"
-        Public Property Copies As Integer = 1
-        Public Property Collate As Boolean = True
-        Public Property StartPage As Integer = 0
-        Public Property EndPage As Integer = 0
+    '    Public Sub New(View As ICrPrintableReportView)
+    '        AddHandler View.PrintReport, AddressOf OnPrintReport
+    '    End Sub
 
-        Public Sub PrintThisReport()
-            Dim printModel As New ReportModel
-            Dim reportPrinter As New PrintReportPresenter(Of ReportModel)
-            If FileName Is Nothing Or FileName = "" Then
-                Debugger.Break()
-                MessageBox.Show("Crystal Report Printing - Empty Filename Error")
-            End If
-            reportPrinter.OnPrintReport(FileName, DataBaseConnectionName, Parameters, Copies, Collate, StartPage, EndPage)
-        End Sub
+    '    Public Sub OnPrintReport(reportFileName As String, reportArgs As CrPrintableArgs)
+    '        Dim printModel As New ReportModel
+    '        Dim reportPrinter As New PrintReportPresenter(Of ReportModel)
+    '        If reportArgs.ReportFileName Is Nothing Or reportArgs.ReportFileName = "" Then
+    '            Debugger.Break()
+    '            MessageBox.Show("Crystal Report Printing - Empty Filename Error")
+    '        End If
+    '        reportPrinter.PrintReport(reportFileName, reportArgs)
+    '    End Sub
 
-    End Class
+    'End Class
 
 End Namespace

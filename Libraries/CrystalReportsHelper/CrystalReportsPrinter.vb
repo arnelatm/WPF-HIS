@@ -217,7 +217,7 @@ Public Class CrystalReportsPrinter
 
     Public Sub SetParameterValue(args As Object())
         For i = 0 To args.Length - 1 Step 2
-            Dim value As Object = GlobalFunctions.ConvertObjectToType(args(i))
+            Dim value = GlobalFunctions.ConvertObjectToType(args(i))
             Dim name As String = args(i + 1).ToString()
             _report.SetParameterValue(name, value)
         Next

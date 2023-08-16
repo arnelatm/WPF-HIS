@@ -463,15 +463,16 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ToolStripMenuItemStatementOfAccountsPayable_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStatementOfAccountsPayable.Click
             RunReportNew(Of StatementOfAp)()
-            'RunReport(Of StatementOfAp)()
         End Sub
 
         Private Sub ToolStripMenuItemStatementOfAccountsReceivable_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStatementOfAccountsReceivable.Click
-            RunForm(Of StatementOfAr)()
+            Dim formToRun = Activator.CreateInstance(GetType(StatementOfAr))
+            formToRun.Presenter = New ReportPrinterPresenter(Of ReportModel)(formToRun)
+            Invoker.InvokeFunction(formToRun, "Show")
         End Sub
 
         Private Sub ToolStripMenuItemStateOfEmployeeLoans_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSummaryOfEmployeeLoans.Click
-            RunForm(Of ErSummary)()
+            RunReportNew(Of ErSummary)()
         End Sub
 
         Private Sub ToolStripMenuItemSummaryOfAccountsReceivable_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSummaryOfAccountsReceivable.Click
@@ -892,7 +893,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Overloads Sub RunReportNew(Of TV)()
             Dim formToRun = Activator.CreateInstance(GetType(TV))
-            formToRun.Presenter = New ReportPrinterPresenter(Of ReportModel)(formToRun)
+            formToRun.Presenter = New PrintReportPresenter(Of ReportModel)(formToRun)
             Invoker.InvokeFunction(formToRun, "Show")
         End Sub
 

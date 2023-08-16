@@ -1,5 +1,7 @@
 ﻿Imports System.Globalization
 Imports AATM.Common
+Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
@@ -7,46 +9,12 @@ Imports AATM.PresentationLayer.Events
 Namespace PresentationLayer.Views.Forms.Reports
 
     Public Class ExpiryReportByWarehouse
-        Implements IReportPrinterView
+        Implements ICrPrintableReportView
+
 
         Public Property MainTableName As String
-
-        Public Property FileName As String Implements IReportPrinterView.FileName
-        Public Property ReportTitle As String Implements IReportPrinterView.ReportTitle
-        Public Property FormCultureLanguage As String Implements IReportPrinterView.FormCultureLanguage
-        Public Property Args As Object() Implements IReportPrinterView.Args
-        Public Property DataBaseConnectionName As String Implements IReportPrinterView.DataBaseConnectionName
-        Public Property Copies As Integer Implements IReportPrinterView.Copies
-
-        Public Property Collate As Boolean Implements IReportPrinterView.Collate
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As Boolean)
-                Throw New NotImplementedException()
-            End Set
-        End Property
-
-        Public Property StartPage As Integer Implements IReportPrinterView.StartPage
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As Integer)
-                Throw New NotImplementedException()
-            End Set
-        End Property
-
-        Public Property EndPage As Integer Implements IReportPrinterView.EndPage
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As Integer)
-                Throw New NotImplementedException()
-            End Set
-        End Property
-
         Protected SortOrderKey As String
-        Private Event PrintReport(ByVal sender As IReportPrinterView) Implements IReportPrinterView.PrintReport
+        Private Event PrintReport As ICrPrintableReportView.PrintReportEventHandler Implements ICrPrintableReportView.PrintReport
 
         Public Sub New()
 
@@ -60,20 +28,17 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         End Sub
 
-        Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
+        Private Sub btnOk_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
             If dtpExpiryDate.Value Is Nothing Then
                 Messaging.Show(True, "MsgDateCannotBeBlank")
             Else
-                Dim reportName As String
-                reportName = Messaging.TranslateCaption("Inventory Expiry Report By Warehouse")
-                ReportTitle = Messaging.TranslateCaption("Inventory Expiry Report By Warehouse")
-                FormCultureLanguage = FormCulture.Name
-                FileName = "Inventory Expiry Report By Warehouse.Rpt"
-                Args = {cboWarehouseIdNo.SelectedItem.IdNo, "WarehouseIdNo",
-                        chkAllWarehouses.Checked, "AllWarehouses",
-                        dtpExpiryDate.Value, "ExpiryDate"}
-                Copies = 1
-                RaiseEvent PrintReport(Me)
+                Dim reportArgs As New CrPrintableArgs
+                Dim reportParameters As New Object
+                reportArgs.ReportParameters = {cboWarehouseIdNo.SelectedItem.IdNo, "WarehouseIdNo",
+                                               chkAllWarehouses.Checked, "AllWarehouses",
+                                               dtpExpiryDate.Value, "ExpiryDate"}
+                Dim reportFileName As String = "Inventory Expiry Report By Warehouse.Rpt"
+                RaiseEvent PrintReport(reportFileName, reportArgs)
             End If
         End Sub
 

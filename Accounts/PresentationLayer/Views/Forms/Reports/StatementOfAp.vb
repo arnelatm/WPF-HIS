@@ -1,31 +1,18 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Presenters
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Common
-Imports AATM.Common.PresentationLayer.Presenters
-Imports AATM.Libraries
+Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
-Imports AATM.PresentationLayer.Forms
-Imports AATM.ServicesLayer.Services
 
 Namespace PresentationLayer.Views.Forms.Reports
 
     Public Class StatementOfAp
-        Implements IReportPrinterView
+        Implements ICrPrintableReportView
 
         Public Property MainTableName As String
-
-        Public Property FileName As String Implements IReportPrinterView.FileName
-        Public Property ReportTitle As String Implements IReportPrinterView.ReportTitle
-        Public Property FormCultureLanguage As String Implements IReportPrinterView.FormCultureLanguage
-        Public Property Args As Object() Implements IReportPrinterView.Args
-        Public Property DataBaseConnectionName As String Implements IReportPrinterView.DataBaseConnectionName
-        Public Property Copies As Integer Implements IReportPrinterView.Copies
-
+        Public Event PrintReport(reportFileName As String, reportArgs As CrPrintableArgs) Implements ICrPrintableReportView.PrintReport
         Protected SortOrderKey As String
-        Private Event PrintReport(ByVal sender As IReportPrinterView) Implements IReportPrinterView.PrintReport
 
         Public Sub New()
 
@@ -42,43 +29,56 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         End Sub
 
-        Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
+        Private Sub btnOkClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
             If dtpBeginningDate.Value <= dtpEndingDate.Value Then
-                Dim reportName As String
+
+                Dim reportName As String = Messaging.TranslateCaption("Statement of Accounts Payable")
                 Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpBeginningDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
                 Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpEndingDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
-                reportName = Messaging.TranslateCaption("Statement of Accounts Payable")
-                reportTitle = Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName, "beginningDate", bDate, "endingDate", eDate})
-                FormCultureLanguage = FormCulture.Name
-                If FormCultureLanguage = "ar" Then
-                    FileName = "Statement of Accounts Payable Arabic.Rpt"
+                Dim formCultureLanguage = CultureInfo.CurrentCulture.Name
+                Dim reportFileName As String
+                If formCultureLanguage = "ar" Then
+                    reportFileName = "Statement of Accounts Payable Arabic.Rpt"
                 Else
-                    FileName = "Statement of Accounts Payable.Rpt"
+                    reportFileName = "Statement of Accounts Payable.Rpt"
                 End If
-                Args = {dtpBeginningDate.Value, "BeginningDate",
-                             dtpEndingDate.Value, "EndingDate",
-                             cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo",
-                             cboSupplierIdNo.Text, "DisplayName"}
-
-                Copies = 1
-
-                RaiseEvent PrintReport(Me)
-
-                'language, "Language",
-                '             establishmentName, "EstablishmentName",
-                '             reportTitle, "ReportTitle"}
-                'Dim cForm
-
-                'Presenter.ProcessReport(FileName, "", True, args)
-
-                'cForm = New ReportFormNew(fileName, reportTitle, CultureInfo.CurrentCulture)
-
-                'cForm.Show()
-
+                Dim reportArgs As New CrPrintableArgs
+                Dim reportParameters As New Object
+                Dim reportTitle As String = Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName, "beginningDate", bDate, "endingDate", eDate})
+                reportArgs.ReportParameters = {dtpBeginningDate.Value, "BeginningDate",
+                         dtpEndingDate.Value, "EndingDate",
+                         cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo",
+                         cboSupplierIdNo.Text, "DisplayName",
+                         reportTitle, "ReportTitle",
+                         GlobalVariables.EstablishmentName, "EstablishmentName",
+                         formCultureLanguage, "Language"}
+                RaiseEvent PrintReport(reportFileName, reportArgs)
             Else
                 Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
             End If
         End Sub
+
+        'Private Sub PrintCrReport()
+        '    Dim reportName As String = Messaging.TranslateCaption("Statement of Accounts Payable")
+        '    Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpBeginningDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
+        '    Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpEndingDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
+        '    Dim FormCultureLanguage = FormCulture.Name
+        '    If FormCultureLanguage = "ar" Then
+        '        cr.FileName = "Statement of Accounts Payable Arabic.Rpt"
+        '    Else
+        '        cr.FileName = "Statement of Accounts Payable.Rpt"
+        '    End If
+        '    cr.FormCultureLanguage = FormCultureLanguage
+        '    cr.Title = Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName, "beginningDate", bDate, "endingDate", eDate})
+        '    cr.Parameters = {dtpBeginningDate.Value, "BeginningDate",
+        '                 dtpEndingDate.Value, "EndingDate",
+        '                 cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo",
+        '                 cboSupplierIdNo.Text, "DisplayName",
+        '                 cr.Title, "ReportTitle",
+        '                 GlobalVariables.EstablishmentName, "EstablishmentName",
+        '                 cr.FormCultureLanguage, "Language"}
+        '    cr.PrintThisReport()
+        'End Sub
 
         Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
             Close()
