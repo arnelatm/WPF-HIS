@@ -1,6 +1,5 @@
 ﻿Imports System.Globalization
 Imports AATM.Common
-Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
@@ -13,7 +12,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
 
         Public Property MainTableName As String
-        Private Event PrintReport As ICrPrintableReportView.PrintReportEventHandler Implements ICrPrintableReportView.PrintReport
+        Private Event PrintReport(reportFileName As String, reportArgs As CrPrintableArgs) Implements ICrPrintableReportView.PrintReport
         Protected SortOrderKey As String
 
         Public Sub New()
