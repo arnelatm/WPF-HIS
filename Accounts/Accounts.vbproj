@@ -645,12 +645,6 @@
     <Compile Include="PresentationLayer\Views\Forms\Reports\InventoryReportByWarehouse.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\StatementOfAr1.Designer.vb">
-      <DependentUpon>StatementOfAr1.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\StatementOfAr1.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IAppSettingView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IProductFinderView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IInventoryView.vb" />
@@ -2070,10 +2064,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\InventoryReportByWarehouse.resx">
       <DependentUpon>InventoryReportByWarehouse.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\StatementOfAr1.resx">
-      <DependentUpon>StatementOfAr1.vb</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\SterilizationLabelPrinting.resx">
       <DependentUpon>SterilizationLabelPrinting.vb</DependentUpon>

@@ -9,13 +9,13 @@ Public Class CDgvCheckboxCell
     Private _displayOnly As Boolean
     Private _editingMode As Boolean
 
-    Public Overrides Function Clone() As Object
-        Dim copy As CDgvCheckboxCell = TryCast(MyBase.Clone(), CDgvCheckboxCell)
-        copy.DisplayOnly = DisplayOnly
-        copy.EditingMode = EditingMode
-        copy.Translatable = Translatable
-        Return copy
-    End Function
+    'Public Overrides Function Clone() As Object
+    '    Dim copy As CDgvCheckboxCell = TryCast(MyBase.Clone(), CDgvCheckboxCell)
+    '    copy.DisplayOnly = DisplayOnly
+    '    copy.EditingMode = EditingMode
+    '    copy.Translatable = Translatable
+    '    Return copy
+    'End Function
 
 
     <Category("Custom Properties")>
