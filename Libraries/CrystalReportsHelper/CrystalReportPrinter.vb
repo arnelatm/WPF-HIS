@@ -1,5 +1,6 @@
 ﻿Imports System.Configuration
 Imports System.Drawing.Printing
+Imports System.Globalization
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary.Messaging
@@ -258,5 +259,19 @@ Public Class CrystalReportPrinter
         End If
         Return PrinterSettings.InstalledPrinters.Cast(Of String)().Any(Function(name) printerName.ToUpper().Trim() = name.ToUpper().Trim())
     End Function
+
+
+    Public Class CrPrintableArgs
+
+        Public Property ReportFileName As String
+        Public Property FormCultureLanguage As String = CultureInfo.CurrentCulture.Name
+        Public Property ReportParameters As Object()
+        Public Property DataBaseConnectionName As String = "ISPDATA"
+        Public Property Copies As Integer = 1
+        Public Property Collate As Boolean = True
+        Public Property StartPage As Integer = 0
+        Public Property EndPage As Integer = 0
+
+    End Class
 
 End Class

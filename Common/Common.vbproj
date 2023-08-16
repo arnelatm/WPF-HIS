@@ -303,6 +303,7 @@
     <Compile Include="PresentationLayer\Views\Forms\SecurityGroupEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Interfaces\IPrintableCrReportView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPrinterVIew.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPrintJobVIew.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPrintSetupView.vb" />

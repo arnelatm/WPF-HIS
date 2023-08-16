@@ -1,20 +1,16 @@
-﻿Imports System.Globalization
-Imports System.Web.UI.WebControls
-Imports AATM.Common.Models
+﻿Imports AATM.Common.Models
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries
 Imports AATM.Libraries.CrystalReportsHelper
 Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Forms
-Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views
-Imports CrystalDecisions.ReportAppServer.ReportDefModel
 
 Namespace PresentationLayer.Presenters
 
     Public Class ReportPrinterPresenter(Of TM As New)
-        Inherits CommonPresenter(Of IReportPrinterView, TM)
+        Inherits CommonPresenter(Of IView, TM)
         Implements ISubscriber(Of GetControlDataSource)
 
         Private _psService As Object
@@ -33,13 +29,23 @@ Namespace PresentationLayer.Presenters
             Ea.SubscribeEvent(Me)
         End Sub
 
-        Public Sub New(view As IReportPrinterView)
+        Public Sub New(view As IView)
             MyBase.New(view)
             MakeServices()
-            AddHandler view.PrintReport, AddressOf OnPrintReport
+            'AddHandler view.PrintReport, AddressOf OnPrintReport
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
         End Sub
+
+        'Public Sub New(view As IReportPrinterView)
+        '    MyBase.New(view)
+        '    MakeServices()
+        '    AddHandler view.PrintReport, AddressOf OnPrintReport
+        '    Ea = New EventAggregator()
+        '    Ea.SubscribeEvent(Me)
+        'End Sub
+
+
 
         Private Sub MakeServices()
             Service = New CommonService("Report")
@@ -145,23 +151,8 @@ Namespace PresentationLayer.Presenters
             End If
             Dim reportTitle As String = sender.ReportTitle
             Dim args As Array = sender.Args
-            'args
             ProcessReport(sender.FileName, "", True, args)
         End Sub
-        'Private Sub MakeReport(ByVal fileName As String, ByVal reportTitle As String, formCulture As CultureInfo, ByVal ParamArray args() As Object)
-        '    Dim language As String
-        '    Dim establishmentName As String
-        '    language = Strings.Left(formCulture.Name, formCulture.Name.IndexOf("-", StringComparison.Ordinal))
-        '    If language <> "ar" Then
-        '        establishmentName = Service.GetRecordField("Establishment", "EstablishmentName")
-        '    Else
-        '        establishmentName = Service.GetRecordField("Establishment", "EstablishmentNameAra")
-        '    End If
-
-        '    ReportDocument.SetParameterValue("ReportTitle", reportTitle)
-        '    ReportDocument.SetParameterValue("EstablishmentName", establishmentName)
-        '    ReportDocument.SetParameterValue("Language", language)
-        'End Sub
 
     End Class
 
