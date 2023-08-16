@@ -18,6 +18,33 @@ Namespace PresentationLayer.Views.Forms.Reports
         Public Property DataBaseConnectionName As String Implements IReportPrinterView.DataBaseConnectionName
         Public Property Copies As Integer Implements IReportPrinterView.Copies
 
+        Public Property Collate As Boolean Implements IReportPrinterView.Collate
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Boolean)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property StartPage As Integer Implements IReportPrinterView.StartPage
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Integer)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property EndPage As Integer Implements IReportPrinterView.EndPage
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Integer)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
         Protected SortOrderKey As String
         Private Event PrintReport(ByVal sender As IReportPrinterView) Implements IReportPrinterView.PrintReport
 

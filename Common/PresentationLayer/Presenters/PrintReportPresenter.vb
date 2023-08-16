@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports AATM.Common.Models
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.ServiceLayer
@@ -51,7 +52,8 @@ Namespace PresentationLayer.Presenters
         '    _presenter.CreateDataSource(tableName, control)
         'End Sub
 
-        Public Sub OnPrintReport(reportFileName As String, databaseConnectionName As String, Optional args() As Object = Nothing, Optional copies As Integer = 1, Optional collate As Boolean = False, Optional startPage As Integer = 1, Optional endPage As Integer = 100000)
+        Public Sub OnPrintReport(reportFileName As String, databaseConnectionName As String, Optional args() As Object = Nothing, Optional copies As Integer = 1, Optional collate As Boolean = False, Optional startPage As Integer = 0, Optional endPage As Integer = 0)
+            ' leave startpage and endpage to 0 - to print all pages
             ProcessReport(reportFileName, databaseConnectionName, True, args, copies, collate, startPage, endPage)
         End Sub
 
@@ -63,7 +65,8 @@ Namespace PresentationLayer.Presenters
             Return _psService.GetRecordFieldWithKeyG(Of Int16, String)(reportFileName, "Report", "ReportFileName", "PrintJobIdNo")
         End Function
 
-        Public Sub ProcessReport(reportFileName As String, databaseConnectionName As String, print As Boolean, Optional args() As Object = Nothing, Optional copies As Integer = 1, Optional collate As Boolean = False, Optional startPage As Integer = 1, Optional endPage As Integer = 0)
+        Public Sub ProcessReport(reportFileName As String, databaseConnectionName As String, print As Boolean, Optional args() As Object = Nothing, Optional copies As Integer = 1, Optional collate As Boolean = False, Optional startPage As Integer = 0, Optional endPage As Integer = 0)
+            ' leave startPage & endPage to 0 to print all pages
             If print Then
                 Dim printJobIdNo As Int16 = GetPrintJobIdNo(reportFileName)
                 Dim printSetupIdNo As Int16 = GetPrintSetupIdNo(reportFileName, printJobIdNo)
@@ -144,6 +147,30 @@ Namespace PresentationLayer.Presenters
         '    ReportDocument.SetParameterValue("EstablishmentName", establishmentName)
         '    ReportDocument.SetParameterValue("Language", language)
         'End Sub
+
+    End Class
+
+    Public Class CrPrintReport
+
+        Public Property FileName As String
+        Public Property Title As String
+        Public Property FormCultureLanguage As String = CultureInfo.CurrentCulture.Name
+        Public Property Parameters As Object()
+        Public Property DataBaseConnectionName As String = "ISPDATA"
+        Public Property Copies As Integer = 1
+        Public Property Collate As Boolean = True
+        Public Property StartPage As Integer = 0
+        Public Property EndPage As Integer = 0
+
+        Public Sub PrintThisReport()
+            Dim printModel As New ReportModel
+            Dim reportPrinter As New PrintReportPresenter(Of ReportModel)
+            If FileName Is Nothing Or FileName = "" Then
+                Debugger.Break()
+                MessageBox.Show("Crystal Report Printing - Empty Filename Error")
+            End If
+            reportPrinter.OnPrintReport(FileName, DataBaseConnectionName, Parameters, Copies, Collate, StartPage, EndPage)
+        End Sub
 
     End Class
 
