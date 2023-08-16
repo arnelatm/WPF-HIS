@@ -58,27 +58,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             End If
         End Sub
 
-        'Private Sub PrintCrReport()
-        '    Dim reportName As String = Messaging.TranslateCaption("Statement of Accounts Payable")
-        '    Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpBeginningDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
-        '    Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpEndingDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
-        '    Dim FormCultureLanguage = FormCulture.Name
-        '    If FormCultureLanguage = "ar" Then
-        '        cr.FileName = "Statement of Accounts Payable Arabic.Rpt"
-        '    Else
-        '        cr.FileName = "Statement of Accounts Payable.Rpt"
-        '    End If
-        '    cr.FormCultureLanguage = FormCultureLanguage
-        '    cr.Title = Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName, "beginningDate", bDate, "endingDate", eDate})
-        '    cr.Parameters = {dtpBeginningDate.Value, "BeginningDate",
-        '                 dtpEndingDate.Value, "EndingDate",
-        '                 cboSupplierIdNo.SelectedItem.IdNo, "SupplierIdNo",
-        '                 cboSupplierIdNo.Text, "DisplayName",
-        '                 cr.Title, "ReportTitle",
-        '                 GlobalVariables.EstablishmentName, "EstablishmentName",
-        '                 cr.FormCultureLanguage, "Language"}
-        '    cr.PrintThisReport()
-        'End Sub
 
         Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
             Close()

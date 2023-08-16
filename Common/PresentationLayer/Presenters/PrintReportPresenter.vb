@@ -27,17 +27,12 @@ Namespace PresentationLayer.Presenters
             MakeServices()
             _computerName = Environment.MachineName      ' "Pharmacy" '
             _computerIdNo = _psService.GetRecordFieldWithKeyG(Of Int16)(_computerName, "Computer", "ComputerName", "IdNo")
-            'AddHandler View.PrintReport, AddressOf OnPrintCrystalReport
-            'Ea = New EventAggregator()
-            'Ea.SubscribeEvent(Me)
         End Sub
 
         Public Sub New(view As ICrPrintableReportView)
             MyBase.New(view)
             MakeServices()
-            'AddHandler view.PrintReport, AddressOf OnPrintReport
             AddHandler view.PrintReport, AddressOf OnPrintCrystalReport
-            'AddHandler view.GetLanguageAndCo, AddressOf OnGetLanguageAndCo
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
         End Sub
@@ -48,10 +43,6 @@ Namespace PresentationLayer.Presenters
             _psService = New CommonService("PrintSetup")
             _prService = New CommonService("Printer")
         End Sub
-
-        'Protected Sub CreateDataSources(tableName As String, control As Control)
-        '    _presenter.CreateDataSource(tableName, control)
-        'End Sub
 
         Public Sub OnPrintReport(reportFileName As String, databaseConnectionName As String, Optional args() As Object = Nothing, Optional copies As Integer = 1, Optional collate As Boolean = False, Optional startPage As Integer = 0, Optional endPage As Integer = 0)
             ' leave startpage and endpage to 0 - to print all pages
@@ -132,59 +123,12 @@ Namespace PresentationLayer.Presenters
 
 
         Public Sub OnPrintCrystalReport(reportFileName As String, reportArgs As CrPrintableArgs)
-            'Dim printModel As New ReportModel
-            'Dim reportPrinter As New PrintReportPresenter(Of ReportModel)
             If reportFileName Is Nothing Or reportFileName = "" Then
                 Debugger.Break()
                 MessageBox.Show("Crystal Report Printing - Empty Filename Error")
             End If
             PrintReport(reportFileName, reportArgs)
-            'reportPrinter.PrintReport(reportFileName, reportArgs)
         End Sub
-
-        'Private Sub OnGetLanguageAndCo(ByVal sender As IReportPrinterView, ByVal formCulture As String, ByRef language As String, ByRef establishmentName As String, ByRef reportTitle As String)
-        '    language = Strings.Left(formCulture, formCulture.IndexOf("-", StringComparison.Ordinal))
-        '    If language <> "ar" Then
-        '        establishmentName = Service.GetRecordField("Establishment", "EstablishmentName")
-        '    Else
-        '        establishmentName = Service.GetRecordField("Establishment", "EstablishmentNameAra")
-        '    End If
-        '    'ProcessReport(sender.FileName, "", True, args)
-        'End Sub
-        'Private Sub MakeReport(ByVal fileName As String, ByVal reportTitle As String, formCulture As CultureInfo, ByVal ParamArray args() As Object)
-        '    Dim language As String
-        '    Dim establishmentName As String
-        '    language = Strings.Left(formCulture.Name, formCulture.Name.IndexOf("-", StringComparison.Ordinal))
-        '    If language <> "ar" Then
-        '        establishmentName = Service.GetRecordField("Establishment", "EstablishmentName")
-        '    Else
-        '        establishmentName = Service.GetRecordField("Establishment", "EstablishmentNameAra")
-        '    End If
-
-        '    ReportDocument.SetParameterValue("ReportTitle", reportTitle)
-        '    ReportDocument.SetParameterValue("EstablishmentName", establishmentName)
-        '    ReportDocument.SetParameterValue("Language", language)
-        'End Sub
-
     End Class
-
-    'Public Class CrPrintableReport(Of TM As New)
-    '    Inherits PrintReportPresenter(Of TM)
-
-    '    Public Sub New(View As ICrPrintableReportView)
-    '        AddHandler View.PrintReport, AddressOf OnPrintReport
-    '    End Sub
-
-    '    Public Sub OnPrintReport(reportFileName As String, reportArgs As CrPrintableArgs)
-    '        Dim printModel As New ReportModel
-    '        Dim reportPrinter As New PrintReportPresenter(Of ReportModel)
-    '        If reportArgs.ReportFileName Is Nothing Or reportArgs.ReportFileName = "" Then
-    '            Debugger.Break()
-    '            MessageBox.Show("Crystal Report Printing - Empty Filename Error")
-    '        End If
-    '        reportPrinter.PrintReport(reportFileName, reportArgs)
-    '    End Sub
-
-    'End Class
 
 End Namespace
