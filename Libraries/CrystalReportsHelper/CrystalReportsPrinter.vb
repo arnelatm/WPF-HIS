@@ -188,13 +188,13 @@ Public Class CrystalReportsPrinter
                 End If
             End If
         Catch
-            MessageTimeOut("The specified printer does not exist or the report's printer setting is invalid, using Default Printer.", "Invalid Printer Setup", 5)
+            'MessageTimeOut("The specified printer does not exist or the report's printer setting is invalid, using Default Printer.", "Invalid Printer Setup", 5)
             Dim defaultPrinterName As PrinterSettings = New PrinterSettings()
             Dim defaultPrinter As String = defaultPrinterName.PrinterName
             _report.PrintOptions.PrinterName = defaultPrinterName.PrinterName
             _report.PrintOptions.PaperSize = defaultPrinterName.DefaultPageSettings.PaperSize.RawKind
             _report.PrintOptions.PaperSource = defaultPrinterName.DefaultPageSettings.PaperSource.RawKind
-            _report.PrintOptions.PaperOrientation = IIf(defaultPrinterName.DefaultPageSettings.Landscape, CrystalDecisions.Shared.PaperOrientation.Portrait, CrystalDecisions.Shared.PaperOrientation.Landscape)
+            _report.PrintOptions.PaperOrientation = IIf(defaultPrinterName.DefaultPageSettings.Landscape, CrystalDecisions.Shared.PaperOrientation.Landscape, CrystalDecisions.Shared.PaperOrientation.Portrait)
         End Try
     End Sub
 

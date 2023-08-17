@@ -26,12 +26,13 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.lblSupplierCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboBranchIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.chkAllWarehouses = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
-            Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.chkAllWarehouses = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout1.SuspendLayout()
             Me.SuspendLayout()
@@ -54,13 +55,14 @@ Namespace PresentationLayer.Views.Forms.Reports
             '
             Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
             Me.CFlowLayout1.Controls.Add(Me.CLabel2)
-            Me.CFlowLayout1.Controls.Add(Me.CLabel3)
+            Me.CFlowLayout1.Controls.Add(Me.CLabel4)
+            Me.CFlowLayout1.Controls.Add(Me.cboBranchIdNo)
             Me.CFlowLayout1.Controls.Add(Me.lblSupplierCode)
             Me.CFlowLayout1.Controls.Add(Me.cboWarehouseIdNo)
             Me.CFlowLayout1.Controls.Add(Me.chkAllWarehouses)
             Me.CFlowLayout1.Location = New System.Drawing.Point(12, 12)
             Me.CFlowLayout1.Name = "CFlowLayout1"
-            Me.CFlowLayout1.Size = New System.Drawing.Size(696, 122)
+            Me.CFlowLayout1.Size = New System.Drawing.Size(693, 122)
             Me.CFlowLayout1.TabIndex = 26
             '
             'CLabel2
@@ -79,58 +81,68 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
             Me.CLabel2.Translatable = True
             '
-            'CLabel3
+            'CLabel4
             '
-            Me.CLabel3.DisplayOnly = True
-            Me.CLabel3.EditingMode = False
-            Me.CFlowLayout1.SetFlowBreak(Me.CLabel3, True)
-            Me.CLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel3.Location = New System.Drawing.Point(1, 28)
-            Me.CLabel3.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel3.Name = "CLabel3"
-            Me.CLabel3.Size = New System.Drawing.Size(60, 17)
-            Me.CLabel3.TabIndex = 28
-            Me.CLabel3.Text = " "
-            Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.CLabel3.Translatable = True
+            Me.CLabel4.DisplayOnly = True
+            Me.CLabel4.EditingMode = False
+            Me.CLabel4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel4.Location = New System.Drawing.Point(1, 28)
+            Me.CLabel4.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel4.Name = "CLabel4"
+            Me.CLabel4.Size = New System.Drawing.Size(150, 24)
+            Me.CLabel4.TabIndex = 32
+            Me.CLabel4.Text = "Branch Name"
+            Me.CLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel4.Translatable = True
             '
-            'CLabel1
+            'cboBranchIdNo
             '
-            Me.CLabel1.DisplayOnly = True
-            Me.CLabel1.EditingMode = False
-            Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel1.Location = New System.Drawing.Point(25, 37)
-            Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel1.Name = "CLabel1"
-            Me.CLabel1.Size = New System.Drawing.Size(150, 25)
-            Me.CLabel1.TabIndex = 26
-            Me.CLabel1.Text = "Beginning Date :"
-            Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.CLabel1.Translatable = True
-            '
-            'btnOk
-            '
-            Me.btnOk.DesignerSelected = False
-            Me.btnOk.ImageIndex = 0
-            Me.btnOk.Location = New System.Drawing.Point(238, 140)
-            Me.btnOk.Name = "btnOk"
-            Me.btnOk.OriginalImageName = Nothing
-            Me.btnOk.SecurityKey = ""
-            Me.btnOk.Size = New System.Drawing.Size(90, 25)
-            Me.btnOk.TabIndex = 27
-            Me.btnOk.Text = "Ok"
-            '
-            'btnCancel
-            '
-            Me.btnCancel.DesignerSelected = False
-            Me.btnCancel.ImageIndex = 0
-            Me.btnCancel.Location = New System.Drawing.Point(360, 140)
-            Me.btnCancel.Name = "btnCancel"
-            Me.btnCancel.OriginalImageName = Nothing
-            Me.btnCancel.SecurityKey = ""
-            Me.btnCancel.Size = New System.Drawing.Size(90, 25)
-            Me.btnCancel.TabIndex = 28
-            Me.btnCancel.Text = "Cancel"
+            Me.cboBranchIdNo.BackColor = System.Drawing.Color.White
+            Me.cboBranchIdNo.BegFindValue = Nothing
+            Me.cboBranchIdNo.ChangingSearchValueOnly = False
+            Me.cboBranchIdNo.CurrentSearchTerm = ""
+            Me.cboBranchIdNo.DataValue = Nothing
+            Me.cboBranchIdNo.DefaultValue = Nothing
+            Me.cboBranchIdNo.DisplayMember = "Name"
+            Me.cboBranchIdNo.DropDownHeight = 21
+            Me.cboBranchIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cboBranchIdNo.EditingMode = False
+            Me.cboBranchIdNo.EndFindValue = Nothing
+            Me.cboBranchIdNo.FieldDescription = Nothing
+            Me.cboBranchIdNo.FieldName = Nothing
+            Me.cboBranchIdNo.FilterRule = Nothing
+            Me.cboBranchIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboBranchIdNo.FindEnabled = False
+            Me.CFlowLayout1.SetFlowBreak(Me.cboBranchIdNo, True)
+            Me.cboBranchIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboBranchIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboBranchIdNo.FormattingEnabled = True
+            Me.cboBranchIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboBranchIdNo.IgnoreCase = False
+            Me.cboBranchIdNo.IntegralHeight = False
+            Me.cboBranchIdNo.LimitToList = False
+            Me.cboBranchIdNo.LinkedLabel = Nothing
+            Me.cboBranchIdNo.Location = New System.Drawing.Point(153, 28)
+            Me.cboBranchIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.cboBranchIdNo.MaxDropDownItems = 1
+            Me.cboBranchIdNo.Name = "cboBranchIdNo"
+            Me.cboBranchIdNo.OldValue = 0
+            Me.cboBranchIdNo.OriginalDataSource = Nothing
+            Me.cboBranchIdNo.OriginalList = Nothing
+            Me.cboBranchIdNo.OverrideDropDownStyleList = False
+            Me.cboBranchIdNo.PreviousSearchTerm = Nothing
+            Me.cboBranchIdNo.PropertySelector = Nothing
+            Me.cboBranchIdNo.ReadOnlyCombo = False
+            Me.cboBranchIdNo.Size = New System.Drawing.Size(530, 24)
+            Me.cboBranchIdNo.SuggestBoxHeight = 200
+            Me.cboBranchIdNo.SuggestListOrderRule = Nothing
+            Me.cboBranchIdNo.TabIndex = 33
+            Me.cboBranchIdNo.TextToSearch = Nothing
+            Me.cboBranchIdNo.Translatable = False
+            Me.cboBranchIdNo.ValueIsMandatory = False
+            Me.cboBranchIdNo.ValueIsNullable = False
+            Me.cboBranchIdNo.ValueIsNumeric = False
+            Me.cboBranchIdNo.ValueMember = "IdNo"
             '
             'cboWarehouseIdNo
             '
@@ -151,6 +163,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboWarehouseIdNo.FilterRule = Nothing
             Me.cboWarehouseIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboWarehouseIdNo.FindEnabled = False
+            Me.CFlowLayout1.SetFlowBreak(Me.cboWarehouseIdNo, True)
             Me.cboWarehouseIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cboWarehouseIdNo.ForeColor = System.Drawing.Color.Black
             Me.cboWarehouseIdNo.FormattingEnabled = True
@@ -204,9 +217,47 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.chkAllWarehouses.Text = "Print All Warehouses"
             Me.chkAllWarehouses.Translatable = True
             '
+            'CLabel1
+            '
+            Me.CLabel1.DisplayOnly = True
+            Me.CLabel1.EditingMode = False
+            Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel1.Location = New System.Drawing.Point(25, 37)
+            Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel1.Name = "CLabel1"
+            Me.CLabel1.Size = New System.Drawing.Size(150, 25)
+            Me.CLabel1.TabIndex = 26
+            Me.CLabel1.Text = "Beginning Date :"
+            Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel1.Translatable = True
+            '
+            'btnOk
+            '
+            Me.btnOk.DesignerSelected = False
+            Me.btnOk.ImageIndex = 0
+            Me.btnOk.Location = New System.Drawing.Point(238, 140)
+            Me.btnOk.Name = "btnOk"
+            Me.btnOk.OriginalImageName = Nothing
+            Me.btnOk.SecurityKey = ""
+            Me.btnOk.Size = New System.Drawing.Size(90, 25)
+            Me.btnOk.TabIndex = 27
+            Me.btnOk.Text = "Ok"
+            '
+            'btnCancel
+            '
+            Me.btnCancel.DesignerSelected = False
+            Me.btnCancel.ImageIndex = 0
+            Me.btnCancel.Location = New System.Drawing.Point(360, 140)
+            Me.btnCancel.Name = "btnCancel"
+            Me.btnCancel.OriginalImageName = Nothing
+            Me.btnCancel.SecurityKey = ""
+            Me.btnCancel.Size = New System.Drawing.Size(90, 25)
+            Me.btnCancel.TabIndex = 28
+            Me.btnCancel.Text = "Cancel"
+            '
             'InventoryReportByWarehouse
             '
-            Me.ClientSize = New System.Drawing.Size(722, 173)
+            Me.ClientSize = New System.Drawing.Size(716, 186)
             Me.Controls.Add(Me.btnCancel)
             Me.Controls.Add(Me.btnOk)
             Me.Controls.Add(Me.CFlowLayout1)
@@ -225,8 +276,9 @@ Namespace PresentationLayer.Views.Forms.Reports
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
-        Friend WithEvents CLabel3 As CLabel
         Friend WithEvents cboWarehouseIdNo As CaComboBox
         Friend WithEvents chkAllWarehouses As UcCheckBox
+        Friend WithEvents CLabel4 As CLabel
+        Friend WithEvents cboBranchIdNo As CaComboBox
     End Class
 End Namespace

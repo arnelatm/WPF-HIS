@@ -1,4 +1,5 @@
-﻿Imports System.Dynamic
+﻿
+Imports System.Dynamic
 Imports System.Globalization
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
@@ -166,10 +167,12 @@ Namespace PresentationLayer.Presenters
 
         Public Overrides Sub GoPrintRecord()
             Dim cr As New CrPrintableArgs
+            Dim pr As New PrintReportPresenter(Of InvTransactionModel)
             Dim title As String = Messaging.TranslateCaption("Inventory Transaction")
             cr.ReportFileName = "Inventory Transaction.Rpt"
+            cr.FormCultureLanguage = CultureInfo.CurrentCulture.Name
             cr.ReportParameters = {cr.FormCultureLanguage, "Language", title, "ReportTitle", View.IdNo, "InvTransactionIdNo"}
-            RaiseEvent PrintReport("Inventory Transaction.Rpt", cr)
+            pr.PrintReport(cr.ReportFileName, cr)
         End Sub
 
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
