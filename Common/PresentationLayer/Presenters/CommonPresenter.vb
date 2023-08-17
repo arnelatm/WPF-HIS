@@ -411,7 +411,7 @@ Namespace PresentationLayer.Presenters
             GetControlName(controlName).DataSource = data
         End Sub
 
-        Protected Sub SetPrinterSupportedSources(pPrinterName As String, ByRef paperSource As Int16?)
+        Protected Sub SetPrinterSupportedSources(pPrinterName As String, ByRef paperSource As Int16)
             Dim data = GlobalFunctions.GetPrinterPageInfo(pPrinterName)
             Dim paperSourceLookup As New List(Of Lookup.LookupData)
             Dim index As Int16 = 0
@@ -424,10 +424,10 @@ Namespace PresentationLayer.Presenters
                 paperSourceLookup.Add(dbLookup)
                 index += 1
             Next
-            Dim savedPaperSource As Int16? = paperSource
+            Dim savedPaperSource As Integer = paperSource
             GetControlName("PaperSource").DataSource = paperSourceLookup
             paperSource = savedPaperSource
-            If savedPaperSource Is Nothing OrElse savedPaperSource = 0 Then
+            If savedPaperSource = 0 Then
                 paperSource = data.PrinterSettings.DefaultPageSettings.PaperSource.RawKind
             End If
         End Sub

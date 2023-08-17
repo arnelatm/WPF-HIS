@@ -467,9 +467,6 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ToolStripMenuItemStatementOfAccountsReceivable_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemStatementOfAccountsReceivable.Click
             RunReportNew(Of StatementOfAr)()
-            'Dim formToRun = Activator.CreateInstance(GetType(StatementOfAr))
-            'formToRun.Presenter = New ReportPrinterPresenter(Of ReportModel)(formToRun)
-            'Invoker.InvokeFunction(formToRun, "Show")
         End Sub
 
         Private Sub ToolStripMenuItemStateOfEmployeeLoans_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSummaryOfEmployeeLoans.Click
@@ -1007,7 +1004,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ShiftDailySummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemShiftDailySummary.Click
-            RunForm(Of ShiftDailyReport)()
+            RunReportNew(Of ShiftDailyReport)()
+            'RunForm(Of ShiftDailyReport)()
         End Sub
 
         Private Sub ToolStripMenuItemEmployeeLeaveReport_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeLeaveReport.Click
@@ -1192,9 +1190,9 @@ Namespace PresentationLayer.Views.Forms
         '    RunForm(Of DoctorsPrescriptionForm, PMRInvestigationPresenter(Of PmrInvestigationModel))()
         'End Sub
 
-        'Private Sub ToolStripMenuItemDoctorsPrescriptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDoctorsPrescriptions.Click
-        '    RunForm(Of DoctorsPrescriptionForm, DoctorsPrescriptionPresenter(Of DoctorsPrescriptionModel))()
-        'End Sub
+        Private Sub ToolStripMenuItemDoctorsPrescriptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDoctorsPrescriptions.Click
+            RunForm(Of DoctorsPrescriptionForm, DoctorsPrescriptionPresenter(Of DoctorsPrescriptionModel))()
+        End Sub
 
         Private Sub ToolStripMenuItemPrescription_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPrescription.Click, ToolStripButtonPrescription.Click
             RunForm(Of PrescriptionForm, PrescriptionPresenter(Of PrescriptionModel))()
@@ -1233,6 +1231,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemApplicationSetting_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemApplicationSetting.Click
             RunForm(Of AppSettingEntry, AppSettingPresenter(Of AppSettingModel))()
         End Sub
+
     End Class
 
 End Namespace

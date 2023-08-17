@@ -8,7 +8,7 @@ Namespace PresentationLayer.Views.Interface
         Property IdNo As Int16
         Property PaperOrientation As Int16
         Property PaperSize As Int16
-        Property PaperSource As Int16
+        Property PaperSource As Integer
         Property PrinterIdNo As Int16
         Property PrintJobCode As String
         Property PrintJobName As String

@@ -62,7 +62,6 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 cboPayCycleIdNo.SetValue(Value)
-
             End Set
         End Property
 

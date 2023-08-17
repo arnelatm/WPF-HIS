@@ -1,5 +1,7 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
+Imports AATM.Common
+Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
@@ -7,8 +9,10 @@ Imports AATM.PresentationLayer.Events
 Namespace PresentationLayer.Views.Forms.Reports
 
     Public Class ShiftDailyReport
+        Implements ICrPrintableReportView
 
         Public Property MainTableName As String
+        Public Event PrintReport(reportFileName As String, reportArgs As CrPrintableArgs) Implements ICrPrintableReportView.PrintReport
         Protected SortOrderKey As String
 
         Public Sub New()
@@ -26,21 +30,44 @@ Namespace PresentationLayer.Views.Forms.Reports
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
-            Dim cForm
             If dtpBeginningDate.Value <= dtpEndingDate.Value Then
-                Dim reportName As String
-                Dim reportTitle As String
+
+                Dim reportName As String = Messaging.TranslateCaption("Shift Summary Daily Report")
                 Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpBeginningDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
                 Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpEndingDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
-                reportName = Messaging.TranslateCaption($"Shift Summary Report")
-                reportTitle = Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName, "beginningDate", bDate, "endingDate", eDate})
+                Dim formCultureLanguage As String = CultureInfo.CurrentCulture.Name
+                Dim reportFileName As String
                 Dim cFormCulture = FormCulture
+                Dim reportTitle As String
+                reportTitle = Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName, "beginningDate", bDate, "endingDate", eDate})
                 If Strings.Left(cFormCulture.Name, 2) = "ar" Then
-                    cForm = New ReportFormNew("Shift Summary Daily Report.Rpt", reportTitle, CultureInfo.CurrentCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate" )
+                    reportFileName = "Shift Summary Daily Report.Rpt"
                 Else
-                    cForm = New ReportFormNew("Shift Summary Daily Report.Rpt", reportTitle, CultureInfo.CurrentCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate" )
+                    reportFileName = "Shift Summary Daily Report.Rpt"
                 End If
-                cForm.Show()
+                Dim reportArgs As New CrPrintableArgs
+                Dim reportParameters As New Object
+                reportArgs.ReportParameters = {CultureInfo.CurrentCulture.Name, "Language",
+                                               GlobalVariables.EstablishmentName, "EstablishmentName",
+                                               reportTitle, "ReportTitle",
+                                               dtpBeginningDate.Value, "BeginningDate",
+                                               dtpEndingDate.Value, "EndingDate"
+                                               }
+                RaiseEvent PrintReport(reportFileName, reportArgs)
+
+                'Dim reportName As String
+                'Dim reportTitle As String
+                'Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpBeginningDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
+                'Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpEndingDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
+                'reportName = Messaging.TranslateCaption($"Shift Summary Report")
+                'reportTitle = Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName, "beginningDate", bDate, "endingDate", eDate})
+                'Dim cFormCulture = FormCulture
+                'If Strings.Left(cFormCulture.Name, 2) = "ar" Then
+                '    cForm = New ReportFormNew("Shift Summary Daily Report.Rpt", reportTitle, CultureInfo.CurrentCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate")
+                'Else
+                '    cForm = New ReportFormNew("Shift Summary Daily Report.Rpt", reportTitle, CultureInfo.CurrentCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate")
+                'End If
+                'cForm.Show()
             Else
                 Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
             End If

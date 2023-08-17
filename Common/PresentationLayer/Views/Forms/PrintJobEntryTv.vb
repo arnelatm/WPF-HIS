@@ -44,7 +44,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PaperSource As Int16 Implements IPrintJobView.PaperSource
+        Public Property PaperSource As Integer Implements IPrintJobView.PaperSource
             Get
                 Return cboPaperSource.GetValue()
             End Get
