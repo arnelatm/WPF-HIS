@@ -36,7 +36,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                                         CultureInfo.CurrentCulture.Name, "Language",
                                         cboWarehouseIdNo.SelectedValue, "WarehouseIdNo",
                                         chkAllWarehouses.Checked, "AllWarehouses",
-                                        cboBranchIdNo.SelectedValue, "BranchIdNo"}
+                                        GlobalVariables.BranchIdNo, "BranchIdNo"}
             RaiseEvent PrintReport(reportFileName, crArgs)
         End Sub
 
@@ -46,10 +46,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
 
         Private Sub InventoryReportByWarehouse_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            Ea.PublishEvent(New GetControlDataSource("Branch", cboBranchIdNo))
             Ea.PublishEvent(New GetControlDataSource("Warehouse", cboWarehouseIdNo))
-            cboBranchIdNo.SelectedValue = GlobalVariables.BranchIdNo
-            cboBranchIdNo.EditingMode = True
             cboWarehouseIdNo.EditingMode = True
         End Sub
 

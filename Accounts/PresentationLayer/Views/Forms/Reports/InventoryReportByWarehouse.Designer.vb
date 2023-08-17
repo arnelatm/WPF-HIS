@@ -26,8 +26,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.lblSupplierCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboBranchIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.chkAllWarehouses = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -42,7 +40,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.lblSupplierCode.DisplayOnly = True
             Me.lblSupplierCode.EditingMode = False
             Me.lblSupplierCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblSupplierCode.Location = New System.Drawing.Point(1, 54)
+            Me.lblSupplierCode.Location = New System.Drawing.Point(1, 28)
             Me.lblSupplierCode.Margin = New System.Windows.Forms.Padding(1)
             Me.lblSupplierCode.Name = "lblSupplierCode"
             Me.lblSupplierCode.Size = New System.Drawing.Size(150, 24)
@@ -55,8 +53,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             '
             Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
             Me.CFlowLayout1.Controls.Add(Me.CLabel2)
-            Me.CFlowLayout1.Controls.Add(Me.CLabel4)
-            Me.CFlowLayout1.Controls.Add(Me.cboBranchIdNo)
             Me.CFlowLayout1.Controls.Add(Me.lblSupplierCode)
             Me.CFlowLayout1.Controls.Add(Me.cboWarehouseIdNo)
             Me.CFlowLayout1.Controls.Add(Me.chkAllWarehouses)
@@ -80,69 +76,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.CLabel2.Text = "Inventory Report by Warehouse"
             Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
             Me.CLabel2.Translatable = True
-            '
-            'CLabel4
-            '
-            Me.CLabel4.DisplayOnly = True
-            Me.CLabel4.EditingMode = False
-            Me.CLabel4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel4.Location = New System.Drawing.Point(1, 28)
-            Me.CLabel4.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel4.Name = "CLabel4"
-            Me.CLabel4.Size = New System.Drawing.Size(150, 24)
-            Me.CLabel4.TabIndex = 32
-            Me.CLabel4.Text = "Branch Name"
-            Me.CLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.CLabel4.Translatable = True
-            '
-            'cboBranchIdNo
-            '
-            Me.cboBranchIdNo.BackColor = System.Drawing.Color.White
-            Me.cboBranchIdNo.BegFindValue = Nothing
-            Me.cboBranchIdNo.ChangingSearchValueOnly = False
-            Me.cboBranchIdNo.CurrentSearchTerm = ""
-            Me.cboBranchIdNo.DataValue = Nothing
-            Me.cboBranchIdNo.DefaultValue = Nothing
-            Me.cboBranchIdNo.DisplayMember = "Name"
-            Me.cboBranchIdNo.DropDownHeight = 21
-            Me.cboBranchIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
-            Me.cboBranchIdNo.EditingMode = False
-            Me.cboBranchIdNo.EndFindValue = Nothing
-            Me.cboBranchIdNo.FieldDescription = Nothing
-            Me.cboBranchIdNo.FieldName = Nothing
-            Me.cboBranchIdNo.FilterRule = Nothing
-            Me.cboBranchIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboBranchIdNo.FindEnabled = False
-            Me.CFlowLayout1.SetFlowBreak(Me.cboBranchIdNo, True)
-            Me.cboBranchIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cboBranchIdNo.ForeColor = System.Drawing.Color.Black
-            Me.cboBranchIdNo.FormattingEnabled = True
-            Me.cboBranchIdNo.HideWhenNotEditingOrAdding = False
-            Me.cboBranchIdNo.IgnoreCase = False
-            Me.cboBranchIdNo.IntegralHeight = False
-            Me.cboBranchIdNo.LimitToList = False
-            Me.cboBranchIdNo.LinkedLabel = Nothing
-            Me.cboBranchIdNo.Location = New System.Drawing.Point(153, 28)
-            Me.cboBranchIdNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.cboBranchIdNo.MaxDropDownItems = 1
-            Me.cboBranchIdNo.Name = "cboBranchIdNo"
-            Me.cboBranchIdNo.OldValue = 0
-            Me.cboBranchIdNo.OriginalDataSource = Nothing
-            Me.cboBranchIdNo.OriginalList = Nothing
-            Me.cboBranchIdNo.OverrideDropDownStyleList = False
-            Me.cboBranchIdNo.PreviousSearchTerm = Nothing
-            Me.cboBranchIdNo.PropertySelector = Nothing
-            Me.cboBranchIdNo.ReadOnlyCombo = False
-            Me.cboBranchIdNo.Size = New System.Drawing.Size(530, 24)
-            Me.cboBranchIdNo.SuggestBoxHeight = 200
-            Me.cboBranchIdNo.SuggestListOrderRule = Nothing
-            Me.cboBranchIdNo.TabIndex = 33
-            Me.cboBranchIdNo.TextToSearch = Nothing
-            Me.cboBranchIdNo.Translatable = False
-            Me.cboBranchIdNo.ValueIsMandatory = False
-            Me.cboBranchIdNo.ValueIsNullable = False
-            Me.cboBranchIdNo.ValueIsNumeric = False
-            Me.cboBranchIdNo.ValueMember = "IdNo"
             '
             'cboWarehouseIdNo
             '
@@ -172,7 +105,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboWarehouseIdNo.IntegralHeight = False
             Me.cboWarehouseIdNo.LimitToList = False
             Me.cboWarehouseIdNo.LinkedLabel = Nothing
-            Me.cboWarehouseIdNo.Location = New System.Drawing.Point(153, 54)
+            Me.cboWarehouseIdNo.Location = New System.Drawing.Point(153, 28)
             Me.cboWarehouseIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.cboWarehouseIdNo.MaxDropDownItems = 1
             Me.cboWarehouseIdNo.Name = "cboWarehouseIdNo"
@@ -208,7 +141,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.chkAllWarehouses.FindEnabled = False
             Me.chkAllWarehouses.IgnoreCase = False
             Me.chkAllWarehouses.LinkedLabel = Nothing
-            Me.chkAllWarehouses.Location = New System.Drawing.Point(3, 82)
+            Me.chkAllWarehouses.Location = New System.Drawing.Point(3, 56)
             Me.chkAllWarehouses.Name = "chkAllWarehouses"
             Me.chkAllWarehouses.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.chkAllWarehouses.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -278,7 +211,5 @@ Namespace PresentationLayer.Views.Forms.Reports
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents cboWarehouseIdNo As CaComboBox
         Friend WithEvents chkAllWarehouses As UcCheckBox
-        Friend WithEvents CLabel4 As CLabel
-        Friend WithEvents cboBranchIdNo As CaComboBox
     End Class
 End Namespace

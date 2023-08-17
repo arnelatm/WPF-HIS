@@ -112,7 +112,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Sub OnGetControlDataSourceHandler(ByRef eventType As GetControlDataSource) Implements ISubscriber(Of GetControlDataSource).OnEventHandler
-            SetDataSource(eventType.TableName, eventType.Control)
+            SetDataSource(eventType.TableName, eventType.Control,,, eventType.Filter)
         End Sub
 
         Public Sub PrintReport(reportFileName As String, reportArgs As CrPrintableArgs)

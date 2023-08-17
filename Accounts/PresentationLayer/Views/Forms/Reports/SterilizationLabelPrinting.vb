@@ -1,14 +1,16 @@
-﻿Imports AATM.Common
+﻿Imports System.Globalization
+Imports AATM.Common
+Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms.Reports
 
     Public Class SterilizationLabelPrinter
-        Implements IPrintReportView
+        Implements ICrPrintableReportView
 
         Public Property MainTableName As String
         Protected SortOrderKey As String
-        Public Event PrintReport As IPrintReportView.PrintReportEventHandler Implements IPrintReportView.PrintReport
+        Private Event PrintReport As ICrPrintableReportView.PrintReportEventHandler Implements ICrPrintableReportView.PrintReport
         'Public Event GetLanguageAndCo As IPrintReportView.GetLanguageAndCoEventHandler Implements IPrintReportView.GetLanguageAndCo
 
         Public Sub New()
@@ -32,8 +34,11 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim expiryDate As Date
             productionDate = dtpProductionDate.Value
             expiryDate = dtpExpiryDate.Value
-            Dim args As Object() = {productionDate, "ProductionDate", expiryDate, "ExpiryDate"}
-            RaiseEvent PrintReport("Expiry Label.Rpt", "ISPDATA", args, CInt(txtCopies.Text))
+            Dim reportArgs As New CrPrintableArgs
+            Dim reportParameters As New Object
+            reportArgs.ReportParameters = {productionDate, "ProductionDate", expiryDate, "ExpiryDate"}
+            reportArgs.Copies = CInt(txtCopies.Text)
+            RaiseEvent PrintReport("Expiry Label.Rpt", reportArgs)
         End Sub
 
         Private Sub CButton2_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea

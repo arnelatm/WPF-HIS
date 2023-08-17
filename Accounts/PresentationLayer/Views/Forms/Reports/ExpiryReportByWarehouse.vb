@@ -34,9 +34,13 @@ Namespace PresentationLayer.Views.Forms.Reports
             Else
                 Dim reportArgs As New CrPrintableArgs
                 Dim reportParameters As New Object
-                reportArgs.ReportParameters = {cboWarehouseIdNo.SelectedItem.IdNo, "WarehouseIdNo",
+                Dim reportTitle As String = Messaging.TranslateCaption("Expiry Report by Warehouse")
+                reportArgs.ReportParameters = {CultureInfo.CurrentCulture.Name, "Language",
+                                               reportTitle, "ReportTitle",
+                                               cboWarehouseIdNo.SelectedItem.IdNo, "WarehouseIdNo",
                                                chkAllWarehouses.Checked, "AllWarehouses",
-                                               dtpExpiryDate.Value, "ExpiryDate"}
+                                               dtpExpiryDate.Value, "ExpiryDate",
+                                               GlobalVariables.BranchIdNo, "BranchIdNo"}
                 Dim reportFileName As String = "Inventory Expiry Report By Warehouse.Rpt"
                 RaiseEvent PrintReport(reportFileName, reportArgs)
             End If
@@ -48,7 +52,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
 
         Private Sub ExpiryReportByWarehouse_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            Ea.PublishEvent(New GetControlDataSource("Warehouse", cboWarehouseIdNo))
+            Ea.PublishEvent(New GetControlDataSource("Warehouse", cboWarehouseIdNo, "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString()))
             cboWarehouseIdNo.EditingMode = True
         End Sub
 

@@ -9,6 +9,10 @@ Namespace PresentationLayer.Presenters
     Public Class PMRInvestigationPresenter(Of TM As New)
         Inherits CommonPresenter(Of IPmrInvestigationView, TM)
 
+        Public Sub New()
+
+        End Sub
+
         Public Sub New(itemView As IPmrInvestigationView)
             MyBase.New(itemView)
             Service = New AccountsService("PmrInvestigation")
@@ -86,7 +90,7 @@ Namespace PresentationLayer.Presenters
     Public Class DoctorsPrescriptionPresenter(Of TM As New)
         Inherits CommonPresenter(Of IDoctorsPrescriptionView, TM)
 
-        Private _prescriptionDetailsService = New AccountsService("PrescriptionDetail")
+        Private _prescriptionDetailsService = New AccountsService("PrescriptionItem")
 
         Public Sub New(itemView As IDoctorsPrescriptionView)
             MyBase.New(itemView)
