@@ -245,6 +245,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDrInvestigationsPrescriptions = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -1155,7 +1156,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemPMRReports
             '
-            Me.ToolStripMenuItemPMRReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPrescription})
+            Me.ToolStripMenuItemPMRReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPrescription, Me.ToolStripMenuItemDrInvestigationsPrescriptions})
             Me.ToolStripMenuItemPMRReports.Name = "ToolStripMenuItemPMRReports"
             resources.ApplyResources(Me.ToolStripMenuItemPMRReports, "ToolStripMenuItemPMRReports")
             '
@@ -1384,6 +1385,11 @@ Namespace PresentationLayer.Views.Forms
             '
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
+            '
+            'ToolStripMenuItemDrInvestigationsPrescriptions
+            '
+            Me.ToolStripMenuItemDrInvestigationsPrescriptions.Name = "ToolStripMenuItemDrInvestigationsPrescriptions"
+            resources.ApplyResources(Me.ToolStripMenuItemDrInvestigationsPrescriptions, "ToolStripMenuItemDrInvestigationsPrescriptions")
             '
             'Main
             '
@@ -1626,5 +1632,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemInventoryReport As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemProductExpiryReport As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemApplicationSetting As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemDrInvestigationsPrescriptions As ToolStripMenuItem
     End Class
 End NameSpace

@@ -473,13 +473,15 @@ End Class
 
 Public Class GetControlDataSource
 
-    Public Sub New(tableName As String, control As Control)
+    Public Sub New(tableName As String, control As Control, Optional filter As String = Nothing)
         Me.TableName = tableName
         Me.Control = control
+        Me.Filter = filter
     End Sub
 
     Public Property TableName As String
     Public Property Control As Control
+    Public Property Filter As String
 
 End Class
 

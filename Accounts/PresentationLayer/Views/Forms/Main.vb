@@ -1179,7 +1179,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemSterilizationLabels_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSterilizationLabels.Click
-            RunReport(Of SterilizationLabelPrinter)()
+            RunReportNew(Of SterilizationLabelPrinter)()
         End Sub
 
         Private Sub ToolStripMenuItemReportMaster_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemReportMaster.Click
@@ -1200,12 +1200,6 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ToolStripMenuItemOldDosageTranslation_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemOldDosageTranslation.Click
             RunForm(Of DosageTableManager, DosageMasterListPresenter(Of DosageMasterModel))()
-            'Dim frm As New DosageTableManager With {
-            '    .SystemViewIdNoToTranslate = VSystemViewIdNo,
-            '    .AppDataDAC = AppDataDAC,
-            '    .TranslatorDAC = TranslatorDAC
-            '    }
-            'frm.Show()
         End Sub
 
         Private Sub ToolStripMenuItemDurationTranslation_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDurationTranslation.Click
@@ -1232,6 +1226,10 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of AppSettingEntry, AppSettingPresenter(Of AppSettingModel))()
         End Sub
 
+        Private Sub ToolStripMenuItemDrInvestigationsPrescriptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDrInvestigationsPrescriptions.Click
+            'RunForm(Of PmrInvestigationRequestForm, PMRInvestigationPresenter(Of PmrInvestigationModel))()
+            'RunForm(Of PmrInvestigationRequestForm, PmrInvestigationRequestPresenter(Of PmrInvestigationRequestModel))()
+        End Sub
     End Class
 
 End Namespace
