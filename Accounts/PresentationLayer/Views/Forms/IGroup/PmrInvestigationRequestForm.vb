@@ -5,13 +5,13 @@ Imports AATM.Libraries.MessagingLibrary
 Namespace PresentationLayer.Views.Forms
 
     Public Class PmrInvestigationRequestForm
-        Implements IPmrInvestigationView2
+        Implements IPmrInvestigationRequestView
 
-        Public Event GetDoctorPatientsRequested() Implements IPmrInvestigationView2.GetDoctorPatientsRequested
+        Public Event GetDoctorPatientsRequested() Implements IPmrInvestigationRequestView.GetDoctorPatientsRequested
 
-        Public Event DoctorCodeRequested(ByRef drId As String) Implements IPmrInvestigationView2.DoctorCodeRequested
+        Public Event DoctorCodeRequested(ByRef drId As String) Implements IPmrInvestigationRequestView.DoctorCodeRequested
 
-        Public Event GetPmrDataAccessRequested(ByRef dataAccessCode As String) Implements IPmrInvestigationView2.GetPmrDataAccessRequested
+        Public Event GetPmrDataAccessRequested(ByRef dataAccessCode As String) Implements IPmrInvestigationRequestView.GetPmrDataAccessRequested
 
         Private _pmrPatientsDisplay As New List(Of PmrPatientDisplayView)
         Private _doctorId As String
@@ -42,7 +42,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private _doctorCode As String
 
-        Public Property DoctorCode As String Implements IPmrInvestigationView2.DoctorCode
+        Public Property DoctorCode As String Implements IPmrInvestigationRequestView.DoctorCode
             Get
                 Return cboDoctorName.GetValue()
             End Get
@@ -51,7 +51,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property DoctorName As String Implements IPmrInvestigationView2.DoctorName
+        Public Property DoctorName As String Implements IPmrInvestigationRequestView.DoctorName
             Get
                 Return cboDoctorName.GetValue()
             End Get
@@ -66,7 +66,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
         End Property
 
-        'Public Property DoctorName As String Implements IPmrInvestigationView2.DoctorName
+        'Public Property DoctorName As String Implements IPmrInvestigationRequestView.DoctorName
         '    Get
         '        Return cboDoctorName.Text
         '    End Get
@@ -75,7 +75,7 @@ Namespace PresentationLayer.Views.Forms
         '    End Set
         'End Property
 
-        Public Property TransactionDate As Date? Implements IPmrInvestigationView2.TransactionDate
+        Public Property TransactionDate As Date? Implements IPmrInvestigationRequestView.TransactionDate
             Get
                 Return dtpTransactionDate.Value
             End Get
@@ -84,7 +84,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PmrPatientsDisplay As List(Of PmrPatientDisplayView) Implements IPmrInvestigationView2.PmrPatientsDisplay
+        Public Property PmrPatientsDisplay As List(Of PmrPatientDisplayView) Implements IPmrInvestigationRequestView.PmrPatientsDisplay
             Get
                 Return _pmrPatientsDisplay
             End Get

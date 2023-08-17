@@ -23,5 +23,18 @@ Namespace BusinessLayer
         Property PrescriptionDetails As List(Of PrescriptionItem)
 
     End Class
+    
+    Public Class PmrInvestigationRequest
+        Inherits AATM.BusinessLayer.BusinessObject
+
+        Public Sub New()
+        End Sub
+
+        Property DoctorCode As String
+        Property DoctorName As String
+        Property TransactionDate As Date?
+        Property PmrPatientsDisplay As List(Of PmrPatientDisplay)
+
+    End Class
 
 End Namespace

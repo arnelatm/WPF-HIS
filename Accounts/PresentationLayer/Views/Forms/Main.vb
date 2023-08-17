@@ -1052,9 +1052,9 @@ Namespace PresentationLayer.Views.Forms
             'formToRun.Show()
         End Sub
 
-        'Private Sub ToolStripMenuItemPMRReports_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPMRReports.Click
-        '    RunForm(Of PmrInvestigationForm, PMRInvestigationPresenter(Of PmrInvestigationModel))()
-        'End Sub
+        Private Sub ToolStripMenuItemPMRReports_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPMRReports.Click
+            RunForm(Of PmrInvestigationRequestForm, PmrInvestigationRequestPresenter(Of PmrInvestigationRequestModel))()
+        End Sub
 
         Private Sub ToolStripMenuItemVATReport_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemVATReport.Click
             Dim parameters As New ArrayList
@@ -1226,10 +1226,10 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of AppSettingEntry, AppSettingPresenter(Of AppSettingModel))()
         End Sub
 
-        Private Sub ToolStripMenuItemDrInvestigationsPrescriptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDrInvestigationsPrescriptions.Click
-            'RunForm(Of PmrInvestigationRequestForm, PMRInvestigationPresenter(Of PmrInvestigationModel))()
-            'RunForm(Of PmrInvestigationRequestForm, PmrInvestigationRequestPresenter(Of PmrInvestigationRequestModel))()
-        End Sub
+        'Private Sub ToolStripMenuItemDrInvestigationsPrescriptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDrInvestigationsPrescriptions.Click
+        '    'RunForm(Of PmrInvestigationRequestForm, PMRInvestigationPresenter(Of PmrInvestigationModel))()
+        '    'RunForm(Of PmrInvestigationRequestForm, PmrInvestigationRequestPresenter(Of PmrInvestigationRequestModel))()
+        'End Sub
     End Class
 
 End Namespace

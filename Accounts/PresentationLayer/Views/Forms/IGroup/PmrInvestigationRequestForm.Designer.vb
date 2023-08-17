@@ -440,6 +440,10 @@
             Me.InvTypeDataGridViewTextBoxColumn.Translatable = False
             Me.InvTypeDataGridViewTextBoxColumn.Width = 70
             '
+            'bsPmrPatientDisplay
+            '
+            Me.bsPmrPatientDisplay.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PmrPatientDisplayModel)
+            '
             'PmrInvestigationRequestForm
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
