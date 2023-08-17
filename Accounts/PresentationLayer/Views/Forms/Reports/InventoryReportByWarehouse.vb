@@ -1,6 +1,5 @@
 ﻿Imports System.Globalization
 Imports AATM.Common
-Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
@@ -32,7 +31,12 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim reportParameters As New Object
             Dim reportTitle As String = Messaging.TranslateCaption("Inventory Report By Warehouse")
             Dim reportFileName As String = "Inventory Report By Warehouse.Rpt"
-            crArgs.ReportParameters = {"WarehouseIdNo", cboWarehouseIdNo.SelectedValue, "AllWarehouses", chkAllWarehouses.Checked}
+            crArgs.FormCultureLanguage = CultureInfo.CurrentCulture.Name
+            crArgs.ReportParameters = {reportTitle, "ReportTitle",
+                                        CultureInfo.CurrentCulture.Name, "Language",
+                                        cboWarehouseIdNo.SelectedValue, "WarehouseIdNo",
+                                        chkAllWarehouses.Checked, "AllWarehouses",
+                                        cboBranchIdNo.SelectedValue, "BranchIdNo"}
             RaiseEvent PrintReport(reportFileName, crArgs)
         End Sub
 
@@ -42,7 +46,10 @@ Namespace PresentationLayer.Views.Forms.Reports
 
 
         Private Sub InventoryReportByWarehouse_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            Ea.PublishEvent(New GetControlDataSource("Branch", cboBranchIdNo))
             Ea.PublishEvent(New GetControlDataSource("Warehouse", cboWarehouseIdNo))
+            cboBranchIdNo.SelectedValue = GlobalVariables.BranchIdNo
+            cboBranchIdNo.EditingMode = True
             cboWarehouseIdNo.EditingMode = True
         End Sub
 

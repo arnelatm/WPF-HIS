@@ -769,6 +769,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewInvTransactionDetails.IsDirty = False
             Me.DataGridViewInvTransactionDetails.Location = New System.Drawing.Point(3, 183)
             Me.DataGridViewInvTransactionDetails.Name = "DataGridViewInvTransactionDetails"
+            Me.DataGridViewInvTransactionDetails.OldCellValue = Nothing
             Me.DataGridViewInvTransactionDetails.ReadOnly = True
             Me.DataGridViewInvTransactionDetails.Searchable = True
             Me.DataGridViewInvTransactionDetails.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -1084,6 +1085,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DGVDummy.IsDirty = False
             Me.DGVDummy.Location = New System.Drawing.Point(1083, 183)
             Me.DGVDummy.Name = "DGVDummy"
+            Me.DGVDummy.OldCellValue = Nothing
             Me.DGVDummy.ReadOnly = True
             DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
             DataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control
