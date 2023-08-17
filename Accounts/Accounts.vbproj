@@ -234,6 +234,7 @@
     <Compile Include="BusinessLayer\IGroup\DosageMaster.vb" />
     <Compile Include="BusinessLayer\IGroup\DrugSale.vb" />
     <Compile Include="BusinessLayer\IGroup\GTinMatcher.vb" />
+    <Compile Include="BusinessLayer\IGroup\PmrPatientDisplay.vb" />
     <Compile Include="BusinessLayer\IGroup\Prescription.vb" />
     <Compile Include="BusinessLayer\IGroup\PrescriptionItem.vb" />
     <Compile Include="BusinessLayer\IGroup\StockInventory.vb" />
@@ -323,6 +324,7 @@
     <Compile Include="BusinessLayer\Supplier.vb" />
     <Compile Include="ContainerConfig.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
+    <Compile Include="DataLayer\AdoNet\IGroup\PmrInvestigationRequestDao.vb" />
     <Compile Include="DataLayer\AdoNet\InventoryDao.vb" />
     <Compile Include="DataLayer\AdoNet\DoctorDao.vb" />
     <Compile Include="DataLayer\AdoNet\DosagePrintingDao.vb" />

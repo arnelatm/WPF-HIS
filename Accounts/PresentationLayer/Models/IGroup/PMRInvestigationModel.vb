@@ -21,5 +21,14 @@ Namespace PresentationLayer.Models
         Public Property PrescriptionDetails As List(Of PrescriptionItem)
 
     End Class
+    
+    Public Class PmrInvestigationRequestModel
+
+        Public Property DoctorCode As String
+        Public Property DoctorName As String
+        Public Property TransactionDate As Date?
+        Public Property PmrPatientsDisplay As List(Of PmrPatientDisplayModel)
+
+    End Class
 
 End Namespace

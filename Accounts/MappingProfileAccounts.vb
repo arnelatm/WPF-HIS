@@ -177,8 +177,8 @@ Public Class MappingProfileAccounts
         CreateMap(Of DataImage, DataImageModel)().ReverseMap()
         CreateMap(Of DataImageModel, IDataImageView)().ReverseMap()
 
-        CreateMap(Of PmrInvestigation, PmrInvestigationModel)().ReverseMap()
-        CreateMap(Of PmrInvestigationModel, IPmrInvestigationView)().ReverseMap()
+        CreateMap(Of PmrInvestigationRequest, PmrInvestigationRequestModel)().ReverseMap()
+        CreateMap(Of PmrInvestigationRequestModel, IPmrInvestigationRequestView)().ReverseMap()
 
         CreateMap(Of ItemCode, ItemCodeModel)().ReverseMap()
         CreateMap(Of ItemCodeModel, IItemCodeView)().ReverseMap()
@@ -258,6 +258,11 @@ Public Class MappingProfileAccounts
 
         CreateMap(Of InvTransactionDetail, InvTransactionDetailModel)().ReverseMap()
         CreateMap(Of InvTransactionDetailModel, InvTransactionDetailView)().ReverseMap()
+
+
+        CreateMap(Of PmrPatientDisplay, PmrPatientDisplayModel)().ReverseMap()
+        CreateMap(Of PmrPatientDisplayModel, IPmrPatientDisplayView)().ReverseMap()
+        CreateMap(Of PmrPatientDisplayModel, PmrPatientDisplayView)().ReverseMap()
 
 
         CreateMap(Of Inventory, InventoryModel)().ReverseMap()
