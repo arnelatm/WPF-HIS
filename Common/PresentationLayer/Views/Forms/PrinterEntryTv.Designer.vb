@@ -471,8 +471,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaperOrientation.Editable = True
             Me.cboPaperOrientation.EditingMode = True
             Me.cboPaperOrientation.EndFindValue = Nothing
-        Me.cboPaperOrientation.FieldDescription = Nothing
-        Me.cboPaperOrientation.FieldName = Nothing
+            Me.cboPaperOrientation.FieldDescription = Nothing
+            Me.cboPaperOrientation.FieldName = Nothing
         Me.cboPaperOrientation.FilterRule = Nothing
         Me.cboPaperOrientation.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.cboPaperOrientation.FindEnabled = false

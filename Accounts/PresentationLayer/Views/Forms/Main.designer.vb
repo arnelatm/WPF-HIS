@@ -79,6 +79,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemSecurityGroups = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemSecurityObjects = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemUsers = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemApplicationSetting = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemEmployee = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemEmployees = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemDesignations = New System.Windows.Forms.ToolStripMenuItem()
@@ -244,7 +245,6 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemApplicationSetting = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -520,6 +520,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemUsers.Name = "ToolStripMenuItemUsers"
             resources.ApplyResources(Me.ToolStripMenuItemUsers, "ToolStripMenuItemUsers")
+            '
+            'ToolStripMenuItemApplicationSetting
+            '
+            Me.ToolStripMenuItemApplicationSetting.Name = "ToolStripMenuItemApplicationSetting"
+            resources.ApplyResources(Me.ToolStripMenuItemApplicationSetting, "ToolStripMenuItemApplicationSetting")
             '
             'ToolStripMenuItemEmployee
             '
@@ -1379,11 +1384,6 @@ Namespace PresentationLayer.Views.Forms
             '
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
-            '
-            'ToolStripMenuItemApplicationSetting
-            '
-            Me.ToolStripMenuItemApplicationSetting.Name = "ToolStripMenuItemApplicationSetting"
-            resources.ApplyResources(Me.ToolStripMenuItemApplicationSetting, "ToolStripMenuItemApplicationSetting")
             '
             'Main
             '

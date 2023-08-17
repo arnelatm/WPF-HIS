@@ -49,27 +49,27 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PaperSize As Int16? Implements IPrinterView.PaperSize
+        Public Property PaperSize As Int16 Implements IPrinterView.PaperSize
             Get
-                Return cboPaperSize.GetValue()
+                Return cboPaperSize.GetValue(Of Int16)
             End Get
             Set
                 cboPaperSize.SetValue(Value)
             End Set
         End Property
 
-        Public Property PaperSource As Int16? Implements IPrinterView.PaperSource
+        Public Property PaperSource As Integer Implements IPrinterView.PaperSource
             Get
-                Return cboPaperSource.GetValue()
+                Return cboPaperSource.GetValue(Of Integer)
             End Get
             Set
                 cboPaperSource.SetValue(Value)
             End Set
         End Property
 
-        Public Property PaperOrientation As Int16? Implements IPrinterView.PaperOrientation
+        Public Property PaperOrientation As Int16 Implements IPrinterView.PaperOrientation
             Get
-                Return cboPaperOrientation.GetValue()
+                Return cboPaperOrientation.GetValue(Of Int16)
             End Get
             Set
                 cboPaperOrientation.SetValue(Value)
@@ -104,7 +104,7 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent CheckPrinterClicked(Me)
         End Sub
 
-        Private Sub cboPrinterName_TextChanged(sender As Object, e As EventArgs) Handles cboPrinterName.TextChanged
+        Private Sub cboPrinterName_TextChanged(sender As Object, e As EventArgs) Handles cboPrinterName.SelectionChangeCommitted
             RaiseEvent PrinterChanged(Me)
         End Sub
 
