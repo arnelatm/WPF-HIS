@@ -37,7 +37,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                                         cboWarehouseIdNo.SelectedValue, "WarehouseIdNo",
                                         chkAllWarehouses.Checked, "AllWarehouses",
                                         GlobalVariables.BranchIdNo, "BranchIdNo"}
-            RaiseEvent PrintReport(reportFileName, crArgs)
+            RaiseEvent PrintReport(reportFileName, crArgs, False)
         End Sub
 
         Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea

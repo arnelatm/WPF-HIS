@@ -12,7 +12,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Implements ICrPrintableReportView
 
         Public Property MainTableName As String
-        Private Event PrintReport(reportFileName As String, reportArgs As CrPrintableArgs) Implements ICrPrintableReportView.PrintReport
+        Private Event PrintReport(reportFileName As String, reportArgs As CrPrintableArgs, printDirectly As Boolean) Implements ICrPrintableReportView.PrintReport
         Protected SortOrderKey As String
 
         Public Sub New()
@@ -54,7 +54,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                                     GlobalVariables.EstablishmentName, "EstablishmentName",
                                     formCultureLanguage, "Language"}
                 reportArgs.DataBaseConnectionName = "ISPDATA"
-                RaiseEvent PrintReport(reportFileName, reportArgs)
+                RaiseEvent PrintReport(reportFileName, reportArgs, False)
             Else
                 Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
             End If

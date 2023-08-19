@@ -32,7 +32,7 @@ End Interface
 Public Interface ICrPrintableReportView
     Inherits AATM.PresentationLayer.Views.IView
 
-    Event PrintReport(reportFileName As String, reportArgs As CrPrintableArgs)
+    Event PrintReport(reportFileName As String, reportArgs As CrPrintableArgs, printDirectly As Boolean)
 
 End Interface
 
