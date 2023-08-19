@@ -87,7 +87,7 @@ Namespace PresentationLayer.Presenters
             If print Then
                 Dim printJobIdNo As Int16 = GetPrintJobIdNo(reportFileName)
                 Dim printSetupIdNo As Int16 = GetPrintSetupIdNo(reportFileName, printJobIdNo)
-                Dim crReport As New CrystalReportsPrinter(reportFileName, databaseConnectionName, args)
+                Dim crReport As New CrystalReportPrinter(reportFileName, databaseConnectionName, args)
                 Dim printer As New PrinterModel
                 Dim psModel As New PrintSetupModel
                 If printSetupIdNo <> 0 Then

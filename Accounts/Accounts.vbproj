@@ -532,6 +532,7 @@
     <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\AppSettingPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\BalanceSheetPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ProductFinderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\InventorySelectorPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\InvTransTypePresenter.vb" />
@@ -648,6 +649,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IAppSettingView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IBalanceSheetView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IProductFinderView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IInventoryView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IInventorySelectorView.vb" />

@@ -1,13 +1,17 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
+Imports AATM.Common
+Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms.Reports
 
     Public Class BalanceSheet
+        Implements IBalanceSheetView
 
         Public Property MainTableName As String
+        Public Event PrintButtonClicked() Implements IBalanceSheetView.PrintButtonClicked
         Protected SortOrderKey As String
         Private ReadOnly _period As String
 
@@ -25,47 +29,34 @@ Namespace PresentationLayer.Views.Forms.Reports
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
-            Dim curCulture = CultureInfo.CurrentCulture
-            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-            Dim beginningDate As Date?
-            Dim endingDate As Date?
-            Dim lastFiscalYearDate As Date
-            Dim AccountBalanceYear As Integer
-            Dim begDataDate As Date
-            Dim language As String
-            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
-            lastFiscalYearDate = Presenter.GetRecordFieldWithKeyG(Of Date)("LastFiscalYearEnd", "LastPosting", "TransactionName", "lastPostingDate")
-            beginningDate = IIf(dtpBeginningDate.Value Is Nothing, dtpEndingDate.Value, dtpBeginningDate.Value)
-            endingDate = dtpEndingDate.Value
-            AdjustBeginningEndDates(_period, beginningDate, endingDate)
-            dtpEndingDate.Value = endingDate
-            dtpBeginningDate.Value = beginningDate
-            If beginningDate < lastFiscalYearDate Then
-                AccountBalanceYear = Year(beginningDate)
-                begDataDate = beginningDate
-            Else
-                AccountBalanceYear = Year(lastFiscalYearDate)
-                begDataDate = DateSerial(AccountBalanceYear, 1, 1)
-            End If
-            Dim reportName = Messaging.TranslateCaption("Balance Sheet")
-            Dim reportTitle As String
-            Dim cForm
-            Dim valid As Boolean = True
-            If beginningDate Is Nothing Or endingDate Is Nothing Then
-                Messaging.Show(True, "MsgDatesCannotBeEmpty")
-                valid = False
-            ElseIf beginningDate > endingDate Then
-                Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
-                valid = False
-            End If
-            If valid Then
-                reportTitle = Messaging.SelectReportName(reportName, beginningDate, endingDate, curCulture, _period)
-                cForm = New ReportFormNew("Balance Sheet.Rpt", reportTitle, curCulture, beginningDate, "BeginningDate", endingDate, "EndingDate", AccountBalanceYear, "AccountBalanceYear", begDataDate, "BegDataDate", lastFiscalYearDate, "LastFiscalYearDate")
-                cForm.Show()
-            End If
-            CultureInfo.CurrentCulture = curCulture
-
+            RaiseEvent PrintButtonClicked()
         End Sub
+
+        Public ReadOnly Property BeginningDate As Date? Implements IBalanceSheetView.BeginningDate
+            Get
+                Return dtpBeginningDate.Value
+            End Get
+        End Property
+
+        Public ReadOnly Property EndingDate As Date? Implements IBalanceSheetView.EndingDate
+            Get
+                Return dtpEndingDate.Value
+            End Get
+        End Property
+
+        Public ReadOnly Property Language As String Implements IBalanceSheetView.Language
+            Get
+                Dim curCulture = CultureInfo.CurrentCulture
+                Return Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
+            End Get
+        End Property
+
+
+        Public ReadOnly Property Period As String Implements IBalanceSheetView.Period
+            Get
+                Return _period
+            End Get
+        End Property
 
         Private Sub CButton2_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
             Close()

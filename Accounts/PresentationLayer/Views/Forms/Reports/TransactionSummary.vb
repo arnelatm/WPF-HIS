@@ -1,13 +1,17 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
+Imports AATM.Common
+Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms.Reports
 
     Public Class TransactionSummary
+        Implements ICrPrintableReportView
 
         Public Property MainTableName As String
+        Public Event PrintReport(reportFileName As String, reportArgs As CrPrintableArgs) Implements ICrPrintableReportView.PrintReport
         Protected SortOrderKey As String
 
         Public Sub New()
@@ -25,26 +29,32 @@ Namespace PresentationLayer.Views.Forms.Reports
         End Sub
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
-            Dim curCulture = CultureInfo.CurrentCulture
-            Dim language As String
-            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
+            Dim reportName = Messaging.TranslateCaption("Summary of Employee Loans")
+            Dim reportTitle As String
+            Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpBeginningDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
+            Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpEndingDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
+            reportTitle = Messaging.TranslateCaption("Transaction Summary Report")
+            Dim formCultureLanguage As String = CultureInfo.CurrentUICulture.Name
 
-            Dim valid As Boolean = True
-            If dtpBeginningDate.Value Is Nothing Or dtpBeginningDate.Value Is Nothing Then
-                Messaging.Show(True, "MsgDatesCannotBeEmpty")
-                valid = False
-            ElseIf dtpBeginningDate.Value > dtpEndingDate.Value Then
-                Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
-                valid = False
+            Dim language As String
+            language = Strings.Left(formCultureLanguage, formCultureLanguage.IndexOf("-"))
+
+            Dim reportFileName As String
+            reportFileName = "Transaction Summary Report.Rpt"
+            Dim reportArgs As New CrPrintableArgs
+            Dim reportParameters As New Object
+            Dim estName As String
+            If formCultureLanguage = "ar" Then
+                estName = GlobalVariables.EstablishmentNameAra
+            Else
+                estName = GlobalVariables.EstablishmentName
             End If
-            If valid Then
-                Dim reportTitle As String
-                Dim currentCulture As CultureInfo = CultureInfo.CurrentUICulture
-                reportTitle = Messaging.TranslateCaption("Transaction Summary Report")
-                Dim cForm As New ReportFormNew("Transaction Summary Report.Rpt", reportTitle, currentCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate")
-                cForm.Show()
-            End If
-            CultureInfo.CurrentCulture = curCulture
+            reportArgs.ReportParameters = {reportTitle, "ReportTitle",
+                                           formCultureLanguage, "Language",
+                                           dtpBeginningDate.Value, "BeginningDate",
+                                           dtpEndingDate.Value, "EndingDate",
+                                           estName, "EstablishmentName"}
+            RaiseEvent PrintReport(reportFileName, reportArgs)
 
         End Sub
 

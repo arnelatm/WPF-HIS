@@ -1,6 +1,7 @@
 ﻿Imports System.Globalization
 Imports System.Windows.Forms
 Imports AATM.Libraries.CrystalReportsHelper
+Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
 Imports CrystalDecisions.ReportAppServer.DataDefModel
 
@@ -33,6 +34,31 @@ Public Class CrViewer
         ReportPrinter.ClearDataSourceConnections()
         SetupCrViewer()
 
+    End Sub
+
+    Public Sub New(reportFileName As String, reportArgs As CrPrintableArgs, Optional AddDefaultParameters As Boolean = False, Optional crReport As CrystalReportPrinter = Nothing)
+
+        ' This call is required by the designer.
+        InitializeComponent()
+        ReportPrinter = crReport
+        ReportPrinter.SetReportProperties(reportFileName, reportArgs.DataBaseConnectionName)
+        ReportPrinter.ReportFileName = reportFileName
+        SetParameters(reportArgs, AddDefaultParameters)
+        ReportPrinter.ClearDataSourceConnections()
+        SetupCrViewer()
+
+    End Sub
+
+    Private Sub SetParameters(reportArgs As CrPrintableArgs, Optional addDefaultParameters As Boolean = False)
+        Dim language As String
+        language = Microsoft.VisualBasic.Strings.Left(reportArgs.Language, FormCulture.Name.IndexOf("-", StringComparison.Ordinal))
+        Dim establishmentName As String = GetEstablishmentName(FormCulture, language)
+        ReportPrinter.SetParameterValue(reportArgs.ReportParameters)
+        If addDefaultParameters Then
+            ReportPrinter.SetParameterValue({reportArgs.ReportTitle, "ReportTitle"})
+            ReportPrinter.SetParameterValue({establishmentName, "EstablishmentName"})
+            ReportPrinter.SetParameterValue({reportArgs.Language, "Language"})
+        End If
     End Sub
 
     Private Sub SetParameters(reportTitle As String, formCulture As CultureInfo, args As Object)

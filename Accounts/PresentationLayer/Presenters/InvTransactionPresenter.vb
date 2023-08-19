@@ -170,8 +170,8 @@ Namespace PresentationLayer.Presenters
             Dim pr As New PrintReportPresenter(Of InvTransactionModel)
             Dim title As String = Messaging.TranslateCaption("Inventory Transaction")
             cr.ReportFileName = "Inventory Transaction.Rpt"
-            cr.FormCultureLanguage = CultureInfo.CurrentCulture.Name
-            cr.ReportParameters = {cr.FormCultureLanguage, "Language", title, "ReportTitle", View.IdNo, "InvTransactionIdNo"}
+            cr.Language = CultureInfo.CurrentCulture.Name
+            cr.ReportParameters = {cr.Language, "Language", title, "ReportTitle", View.IdNo, "InvTransactionIdNo"}
             pr.PrintReport(cr.ReportFileName, cr)
         End Sub
 

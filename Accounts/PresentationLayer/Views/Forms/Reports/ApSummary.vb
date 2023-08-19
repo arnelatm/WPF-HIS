@@ -1,14 +1,18 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
+Imports AATM.Common
+Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms.Reports
 
     Public Class ApSummary
+        Implements ICrPrintableReportView
 
         Public Property MainTableName As String
         Protected SortOrderKey As String
+        Public Event PrintReport(reportFileName As String, reportArgs As CrPrintableArgs) Implements ICrPrintableReportView.PrintReport
 
         Public Sub New()
 
@@ -31,9 +35,25 @@ Namespace PresentationLayer.Views.Forms.Reports
             If dtpBeginningDate.Value <= dtpEndingDate.Value Then
                 Dim reportName = Messaging.TranslateCaption("Summary of Accounts Payable")
                 Dim reportTitle As String
-                reportTitle = Messaging.SelectReportName(reportName, dtpBeginningDate.Value, dtpEndingDate.Value, FormCulture)
-                Dim cForm As New ReportFormNew("Summary of Accounts Payable.Rpt", reportTitle, curCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", chkIncludeZeroBalances.Checked, "IncludeZeroBalance")
-                cForm.Show()
+                Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpBeginningDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
+                Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpEndingDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
+                reportTitle = Messaging.SelectReportName(reportName, bDate, eDate, CultureInfo.CurrentCulture)
+                'Dim cForm As New ReportFormNew("Summary of Accounts Payable.Rpt", reportTitle, curCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", chkIncludeZeroBalances.Checked, "IncludeZeroBalance")
+                'cForm.Show()
+
+                Dim formCultureLanguage As String = CultureInfo.CurrentCulture.Name
+                Dim reportFileName As String
+                reportFileName = "Summary of Employee Loans.Rpt"
+                Dim reportArgs As New CrPrintableArgs
+                Dim reportParameters As New Object
+                reportArgs.ReportParameters = {bDate, "BeginningDate",
+                         eDate, "EndingDate",
+                         reportTitle, "ReportTitle",
+                         chkIncludeZeroBalances.Checked, "IncludeZeroBalance",
+                         GlobalVariables.EstablishmentName, "EstablishmentName",
+                         formCultureLanguage, "Language"}
+                RaiseEvent PrintReport(reportFileName, reportArgs)
+
             Else
                 Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
             End If

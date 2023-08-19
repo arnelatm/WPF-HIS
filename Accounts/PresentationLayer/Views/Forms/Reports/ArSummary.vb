@@ -1,12 +1,16 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
+Imports AATM.Common
+Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms.Reports
 
     Public Class ArSummary
+        Implements ICrPrintableReportView
 
+        Public Event PrintReport(reportFileName As String, reportArgs As CrPrintableArgs) Implements ICrPrintableReportView.PrintReport
         Public Property MainTableName As String
         Protected SortOrderKey As String
 
@@ -33,8 +37,21 @@ Namespace PresentationLayer.Views.Forms.Reports
                 Dim reportName = Messaging.TranslateCaption("Summary of Accounts Receivable")
                 Dim reportTitle As String
                 reportTitle = Messaging.SelectReportName(reportName, dtpBeginningDate.Value, dtpEndingDate.Value, curCulture)
-                Dim cForm As New ReportFormNew("Summary of Accounts Receivable.Rpt", reportTitle, curCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", chkIncludeZeroBalances.Checked, "IncludeZeroBalances")
-                cForm.Show()
+                'Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpBeginningDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
+                'Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpEndingDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
+                Dim formCultureLanguage As String = CultureInfo.CurrentCulture.Name
+                Dim reportFileName As String
+                reportFileName = "Summary of Accounts Receivable.Rpt"
+                Dim reportArgs As New CrPrintableArgs
+                Dim reportParameters As New Object
+                reportArgs.ReportParameters = {dtpBeginningDate.Value, "BeginningDate",
+                         dtpEndingDate.Value, "EndingDate",
+                         reportTitle, "ReportTitle",
+                         chkIncludeZeroBalances.Checked, "IncludeZeroBalances",
+                         GlobalVariables.EstablishmentName, "EstablishmentName",
+                         formCultureLanguage, "Language"}
+                RaiseEvent PrintReport(reportFileName, reportArgs)
+
             Else
                 Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
             End If

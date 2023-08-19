@@ -46,6 +46,11 @@ Namespace PresentationLayer.Presenters
             CreateDataSourceThread(data)
         End Sub
 
+        'Protected Sub GetRecordFieldWithKeyG(Of T)(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As T 
+        '    Service.Presenter.GetRecordFieldWithKeyG(Of Date)("LastFiscalYearEnd", "LastPosting", "TransactionName", "lastPostingDate")
+        'End Sub
+
+
     End Class
 
     Public Class DateRangeCompanyPresenter

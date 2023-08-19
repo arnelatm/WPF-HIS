@@ -57,7 +57,11 @@ Namespace PresentationLayer.Views.Forms.Reports
             End If
             If valid Then
                 reportTitle = Messaging.SelectReportName(reportName, beginningDate, endingDate, curCulture, _period)
-                cForm = New ReportFormNew("Trial Balance.Rpt", reportTitle, curCulture, beginningDate, "BeginningDate", dtpEndingDate.Value, "EndingDate", AccountBalanceYear, "AccountBalanceYear", lastFiscalYearDate, "lastFiscalYearDate")
+                cForm = New ReportFormNew("Trial Balance.Rpt", reportTitle, curCulture,
+                                          beginningDate, "BeginningDate",
+                                          dtpEndingDate.Value, "EndingDate",
+                                          AccountBalanceYear, "AccountBalanceYear",
+                                          lastFiscalYearDate, "lastFiscalYearDate")
                 cForm.Show()
             End If
             CultureInfo.CurrentCulture = curCulture

@@ -31,7 +31,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim reportParameters As New Object
             Dim reportTitle As String = Messaging.TranslateCaption("Inventory Report By Warehouse")
             Dim reportFileName As String = "Inventory Report By Warehouse.Rpt"
-            crArgs.FormCultureLanguage = CultureInfo.CurrentCulture.Name
+            crArgs.Language = CultureInfo.CurrentCulture.Name
             crArgs.ReportParameters = {reportTitle, "ReportTitle",
                                         CultureInfo.CurrentCulture.Name, "Language",
                                         cboWarehouseIdNo.SelectedValue, "WarehouseIdNo",

@@ -49,6 +49,26 @@ Public Class CrystalReportPrinter
 
     End Sub
 
+    Public Sub SetReportProperties(pReportFileName As String, databaseConnection As String)
+        Select Case databaseConnection
+            Case Nothing
+                UseDefaultConnection()
+            Case $"ISPDATA"
+                UseDefaultConnection()
+            Case $"IGROUPCLINIC"
+                UseIGroupConnection()
+            Case Else
+                MessageBox.Show($"No database connection specified or connection name not recognized.")
+                Debugger.Break()
+                Return
+        End Select
+        _report.Load(_reportPath & pReportFileName)
+        If _report.DataSourceConnections.Count > 0 Then
+            _report.DataSourceConnections(0).SetConnection(_server, _database, _uid, _pwd)
+        End If
+    End Sub
+
+
     Public Sub SetReportProperties(pReportFileName As String)
         Select Case DataBaseConnectionName
             Case Nothing
@@ -264,13 +284,16 @@ Public Class CrystalReportPrinter
     Public Class CrPrintableArgs
 
         Public Property ReportFileName As String
-        Public Property FormCultureLanguage As String = CultureInfo.CurrentCulture.Name
+        Public Property CultureInfo As String
+        Public Property Language As String
         Public Property ReportParameters As Object()
         Public Property DataBaseConnectionName As String = "ISPDATA"
         Public Property Copies As Integer = 1
         Public Property Collate As Boolean = True
         Public Property StartPage As Integer = 0
         Public Property EndPage As Integer = 0
+        Public Property ReportTitle As String = ""
+
 
     End Class
 
