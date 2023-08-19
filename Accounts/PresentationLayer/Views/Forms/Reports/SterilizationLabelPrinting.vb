@@ -38,7 +38,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim reportParameters As New Object
             reportArgs.ReportParameters = {productionDate, "ProductionDate", expiryDate, "ExpiryDate"}
             reportArgs.Copies = CInt(txtCopies.Text)
-            RaiseEvent PrintReport("Expiry Label.Rpt", reportArgs)
+            RaiseEvent PrintReport("Expiry Label.Rpt", reportArgs, True)
         End Sub
 
         Private Sub CButton2_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea

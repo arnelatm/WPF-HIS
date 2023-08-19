@@ -12,7 +12,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Public Property MainTableName As String
         Protected SortOrderKey As String
-        Public Event PrintReport(reportFileName As String, reportArgs As CrPrintableArgs) Implements ICrPrintableReportView.PrintReport
+        Public Event PrintReport(reportFileName As String, reportArgs As CrPrintableArgs, printDirectly As Boolean) Implements ICrPrintableReportView.PrintReport
 
         Public Sub New()
 
@@ -52,7 +52,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                          chkIncludeZeroBalances.Checked, "IncludeZeroBalance",
                          GlobalVariables.EstablishmentName, "EstablishmentName",
                          formCultureLanguage, "Language"}
-                RaiseEvent PrintReport(reportFileName, reportArgs)
+                RaiseEvent PrintReport(reportFileName, reportArgs, False)
 
             Else
                 Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")

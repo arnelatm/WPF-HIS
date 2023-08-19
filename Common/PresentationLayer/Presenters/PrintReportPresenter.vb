@@ -66,8 +66,6 @@ Namespace PresentationLayer.Presenters
             Else
                 Dim crViewer As New CrViewer(reportFileName, printArgs, addDefaultParameters, crReport)
                 crViewer.Show()
-                'Public Sub New(reportFileName As String, reportArgs As CrPrintableArgs, crReport As CrystalReportPrinter, Optional AddDefaultParameters As Boolean = False)
-                'ViewReport(reportFileName, printArgs, crReport)
             End If
         End Sub
 
@@ -150,10 +148,10 @@ Namespace PresentationLayer.Presenters
             SetDataSource(eventType.TableName, eventType.Control,,, eventType.Filter)
         End Sub
 
-        Public Sub PrintReport(reportFileName As String, reportArgs As CrPrintableArgs, Optional addDefaultParameters As Boolean = False)
+        Public Sub PrintReport(reportFileName As String, reportArgs As CrPrintableArgs, printDirectly As Boolean, Optional addDefaultParameters As Boolean = False)
             ' leave startpage and endpage to 0 - to print all pages
             'Dim rp As CrPrintableArgs = reportArgs
-            ProcessReport(reportFileName, reportArgs, True, addDefaultParameters) 'rp.DataBaseConnectionName, True, rp.ReportParameters, rp.Copies, rp.Collate, rp.StartPage, rp.EndPage)
+            ProcessReport(reportFileName, reportArgs, printDirectly, addDefaultParameters) 'rp.DataBaseConnectionName, True, rp.ReportParameters, rp.Copies, rp.Collate, rp.StartPage, rp.EndPage)
         End Sub
 
 
@@ -169,12 +167,12 @@ Namespace PresentationLayer.Presenters
             crViewerForm.Show()
         End Sub
 
-        Public Sub OnPrintCrystalReport(reportFileName As String, reportArgs As CrPrintableArgs)
+        Public Sub OnPrintCrystalReport(reportFileName As String, reportArgs As CrPrintableArgs, printDirectly As Boolean)
             If reportFileName Is Nothing Or reportFileName = "" Then
                 Debugger.Break()
                 MessageBox.Show("Crystal Report Printing - Empty Filename Error")
             End If
-            PrintReport(reportFileName, reportArgs)
+            PrintReport(reportFileName, reportArgs, printDirectly)
         End Sub
     End Class
 

@@ -28,25 +28,6 @@ Public Class CrystalReportPrinter
         If pArgs IsNot Nothing Then
             SetParameterValue(pArgs)
         End If
-
-        'Args = pArgs
-        'For i = 0 To Args.Length - 1 Step 2
-        '    Dim value As Object = Args(i)
-        '    _report.SetParameterValue(Args(i + 1).ToString(), ConvertObjectToType(value))
-        'Next
-
-
-        'Public Sub SetParameterValue(args() As Object)
-        '    For i = 0 To args.Length - 1 Step 2
-        '        Dim value As Object = GlobalFunctions.ConvertObjectToType(args(i))
-        '        Dim name As String = args(i + 1).ToString()
-        '        _report.SetParameterValue(name, value)
-        '    Next
-        'End Sub
-        'If pArgs IsNot Nothing Then
-        '    SetParameterValue(pArgs)
-        'End If
-
     End Sub
 
     Public Sub SetReportProperties(pReportFileName As String, databaseConnection As String)

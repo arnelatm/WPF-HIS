@@ -11,7 +11,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Implements ICrPrintableReportView
 
         Public Property MainTableName As String
-        Public Event PrintReport(reportFileName As String, reportArgs As CrPrintableArgs) Implements ICrPrintableReportView.PrintReport
+        Public Event PrintReport(reportFileName As String, reportArgs As CrPrintableArgs, printDirectly As Boolean) Implements ICrPrintableReportView.PrintReport
         Protected SortOrderKey As String
 
         Public Sub New()
@@ -52,7 +52,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                          reportTitle, "ReportTitle",
                          GlobalVariables.EstablishmentName, "EstablishmentName",
                          formCultureLanguage, "Language"}
-                RaiseEvent PrintReport(reportFileName, reportArgs)
+                RaiseEvent PrintReport(reportFileName, reportArgs, False)
             Else
                 Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
             End If

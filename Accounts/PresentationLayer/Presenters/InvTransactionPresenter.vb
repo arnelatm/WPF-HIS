@@ -172,7 +172,7 @@ Namespace PresentationLayer.Presenters
             cr.ReportFileName = "Inventory Transaction.Rpt"
             cr.Language = CultureInfo.CurrentCulture.Name
             cr.ReportParameters = {cr.Language, "Language", title, "ReportTitle", View.IdNo, "InvTransactionIdNo"}
-            pr.PrintReport(cr.ReportFileName, cr)
+            pr.PrintReport(cr.ReportFileName, cr, False)
         End Sub
 
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete

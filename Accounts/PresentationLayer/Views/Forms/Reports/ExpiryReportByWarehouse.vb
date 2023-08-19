@@ -42,7 +42,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                                                dtpExpiryDate.Value, "ExpiryDate",
                                                GlobalVariables.BranchIdNo, "BranchIdNo"}
                 Dim reportFileName As String = "Inventory Expiry Report By Warehouse.Rpt"
-                RaiseEvent PrintReport(reportFileName, reportArgs)
+                RaiseEvent PrintReport(reportFileName, reportArgs, False)
             End If
         End Sub
 

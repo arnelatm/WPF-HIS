@@ -12,7 +12,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Implements ICrPrintableReportView
 
         Public Property MainTableName As String
-        Public Event PrintReport(reportFileName As String, reportArgs As CrPrintableArgs) Implements ICrPrintableReportView.PrintReport
+        Public Event PrintReport(reportFileName As String, reportArgs As CrPrintableArgs, printDirectly As Boolean) Implements ICrPrintableReportView.PrintReport
         Protected SortOrderKey As String
 
         Public Sub New()
@@ -53,7 +53,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                                                dtpBeginningDate.Value, "BeginningDate",
                                                dtpEndingDate.Value, "EndingDate"
                                                }
-                RaiseEvent PrintReport(reportFileName, reportArgs)
+                RaiseEvent PrintReport(reportFileName, reportArgs, False)
 
                 'Dim reportName As String
                 'Dim reportTitle As String

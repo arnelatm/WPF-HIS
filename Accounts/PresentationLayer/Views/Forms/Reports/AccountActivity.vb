@@ -1,7 +1,5 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Common
-Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
@@ -13,7 +11,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Implements ICrPrintableReportView
 
         Public Property MainTableName As String
-        Public Event PrintReport(reportFileName As String, reportArgs As CrPrintableArgs) Implements ICrPrintableReportView.PrintReport
+        Public Event PrintReport(reportFileName As String, reportArgs As CrPrintableArgs, printDirectly As Boolean) Implements ICrPrintableReportView.PrintReport
         Protected SortOrderKey As String
 
         Public Sub New()
@@ -94,7 +92,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                                                estName, "EstablishmentName",
                                                cboStartAccountCode.SelectedValue, "BegAccountCode",
                                                cboEndAccountCode.SelectedValue, "EndAccountCode"}
-                RaiseEvent PrintReport(reportFileName, reportArgs)
+                RaiseEvent PrintReport(reportFileName, reportArgs, False)
 
 
                 'Dim reportTitle As String
