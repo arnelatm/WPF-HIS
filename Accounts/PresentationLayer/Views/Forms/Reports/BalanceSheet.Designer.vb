@@ -42,176 +42,183 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.lblEndDateCaption.DisplayOnly = true
         Me.lblEndDateCaption.EditingMode = false
         Me.lblEndDateCaption.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblEndDateCaption.Location = New System.Drawing.Point(11, 38)
-        Me.lblEndDateCaption.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblEndDateCaption.Name = "lblEndDateCaption"
-        Me.lblEndDateCaption.Size = New System.Drawing.Size(171, 25)
-        Me.lblEndDateCaption.TabIndex = 21
-        Me.lblEndDateCaption.Text = "Ending Date:"
-        Me.lblEndDateCaption.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblEndDateCaption.Translatable = true
-        '
-        'dtpEndingDate
-        '
-        Me.dtpEndingDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-        Me.dtpEndingDate.DefaultValue = Nothing
-        Me.dtpEndingDate.DisplayOnly = false
-        Me.dtpEndingDate.DtpDefaultValue = Nothing
-        Me.dtpEndingDate.EditingMode = true
-        Me.dtpEndingDate.EditsAllowed = false
-        Me.CFlowLayout1.SetFlowBreak(Me.dtpEndingDate, true)
-        Me.dtpEndingDate.ForeColor = System.Drawing.Color.Black
-        Me.dtpEndingDate.LinkedLabel = Nothing
-        Me.dtpEndingDate.Location = New System.Drawing.Point(184, 38)
-        Me.dtpEndingDate.Margin = New System.Windows.Forms.Padding(1)
-        Me.dtpEndingDate.Name = "dtpEndingDate"
-        Me.dtpEndingDate.ReadOnlyDp = false
-        Me.dtpEndingDate.SecurityKey = Nothing
-        Me.dtpEndingDate.ShowLongDate = false
-        Me.dtpEndingDate.ShowTime = false
-        Me.dtpEndingDate.Size = New System.Drawing.Size(112, 25)
-        Me.dtpEndingDate.TabIndex = 24
-        Me.dtpEndingDate.TargetCalendar = Nothing
-        Me.dtpEndingDate.Translatable = false
-        Me.dtpEndingDate.Value = Nothing
-        Me.dtpEndingDate.ValueIsMandatory = false
-        Me.dtpEndingDate.ValueIsNullable = false
-        '
-        'CFlowLayout1
-        '
-        Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
-        Me.CFlowLayout1.Controls.Add(Me.lblBegDateCaption)
-        Me.CFlowLayout1.Controls.Add(Me.dtpBeginningDate)
-        Me.CFlowLayout1.Controls.Add(Me.lblEndDateCaption)
-        Me.CFlowLayout1.Controls.Add(Me.dtpEndingDate)
-        Me.CFlowLayout1.Location = New System.Drawing.Point(12, 37)
-        Me.CFlowLayout1.Name = "CFlowLayout1"
-        Me.CFlowLayout1.Padding = New System.Windows.Forms.Padding(10)
-        Me.CFlowLayout1.Size = New System.Drawing.Size(309, 79)
-        Me.CFlowLayout1.TabIndex = 26
-        '
-        'lblBegDateCaption
-        '
-        Me.lblBegDateCaption.DisplayOnly = true
-        Me.lblBegDateCaption.EditingMode = false
-        Me.lblBegDateCaption.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblBegDateCaption.Location = New System.Drawing.Point(11, 11)
-        Me.lblBegDateCaption.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblBegDateCaption.Name = "lblBegDateCaption"
-        Me.lblBegDateCaption.Size = New System.Drawing.Size(171, 25)
-        Me.lblBegDateCaption.TabIndex = 25
-        Me.lblBegDateCaption.Text = "Ending Date:"
-        Me.lblBegDateCaption.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblBegDateCaption.Translatable = true
-        '
-        'dtpBeginningDate
-        '
-        Me.dtpBeginningDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-        Me.dtpBeginningDate.DefaultValue = Nothing
-        Me.dtpBeginningDate.DisplayOnly = false
-        Me.dtpBeginningDate.DtpDefaultValue = Nothing
-        Me.dtpBeginningDate.EditingMode = true
-        Me.dtpBeginningDate.EditsAllowed = false
-        Me.CFlowLayout1.SetFlowBreak(Me.dtpBeginningDate, true)
-        Me.dtpBeginningDate.ForeColor = System.Drawing.Color.Black
-        Me.dtpBeginningDate.LinkedLabel = Nothing
-        Me.dtpBeginningDate.Location = New System.Drawing.Point(184, 11)
-        Me.dtpBeginningDate.Margin = New System.Windows.Forms.Padding(1)
-        Me.dtpBeginningDate.Name = "dtpBeginningDate"
-        Me.dtpBeginningDate.ReadOnlyDp = false
-        Me.dtpBeginningDate.SecurityKey = Nothing
-        Me.dtpBeginningDate.ShowLongDate = false
-        Me.dtpBeginningDate.ShowTime = false
-        Me.dtpBeginningDate.Size = New System.Drawing.Size(112, 25)
-        Me.dtpBeginningDate.TabIndex = 26
-        Me.dtpBeginningDate.TargetCalendar = Nothing
-        Me.dtpBeginningDate.Translatable = false
-        Me.dtpBeginningDate.Value = Nothing
-        Me.dtpBeginningDate.ValueIsMandatory = false
-        Me.dtpBeginningDate.ValueIsNullable = false
-        '
-        'lblTitle
-        '
-        Me.lblTitle.BackColor = System.Drawing.Color.FromArgb(CType(CType(0,Byte),Integer), CType(CType(64,Byte),Integer), CType(CType(0,Byte),Integer))
-        Me.lblTitle.DisplayOnly = true
-        Me.lblTitle.EditingMode = false
-        Me.lblTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.lblTitle.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.lblTitle.Location = New System.Drawing.Point(0, 0)
-        Me.lblTitle.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(339, 25)
-        Me.lblTitle.TabIndex = 26
-        Me.lblTitle.Text = "Balance Sheet"
-        Me.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.lblTitle.Translatable = true
-        '
-        'CLabel1
-        '
-        Me.CLabel1.DisplayOnly = true
-        Me.CLabel1.EditingMode = false
-        Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.CLabel1.Location = New System.Drawing.Point(25, 37)
-        Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
-        Me.CLabel1.Name = "CLabel1"
-        Me.CLabel1.Size = New System.Drawing.Size(150, 25)
-        Me.CLabel1.TabIndex = 26
-        Me.CLabel1.Text = "Beginning Date :"
-        Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.CLabel1.Translatable = true
-        '
-        'btnOk
-        '
-        Me.btnOk.DesignerSelected = false
-        Me.btnOk.ImageIndex = 0
-        Me.btnOk.Location = New System.Drawing.Point(122, 131)
-        Me.btnOk.Name = "btnOk"
-        Me.btnOk.OriginalImageName = Nothing
-        Me.btnOk.SecurityKey = ""
-        Me.btnOk.Size = New System.Drawing.Size(90, 25)
-        Me.btnOk.TabIndex = 27
-        Me.btnOk.Text = "Ok"
-        '
-        'btnCancel
-        '
-        Me.btnCancel.DesignerSelected = true
-        Me.btnCancel.ImageIndex = 0
-        Me.btnCancel.Location = New System.Drawing.Point(231, 131)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.OriginalImageName = Nothing
-        Me.btnCancel.SecurityKey = ""
-        Me.btnCancel.Size = New System.Drawing.Size(90, 25)
-        Me.btnCancel.TabIndex = 28
-        Me.btnCancel.Text = "Cancel"
-        '
-        'btnTranslate
-        '
-        Me.btnTranslate.DesignerSelected = false
-        Me.btnTranslate.ImageIndex = 0
-        Me.btnTranslate.Location = New System.Drawing.Point(12, 131)
-        Me.btnTranslate.Name = "btnTranslate"
-        Me.btnTranslate.OriginalImageName = Nothing
-        Me.btnTranslate.SecurityKey = ""
-        Me.btnTranslate.Size = New System.Drawing.Size(89, 25)
-        Me.btnTranslate.TabIndex = 29
-        Me.btnTranslate.Text = "Translate"
-        '
-        'BalanceSheet
-        '
-        Me.ClientSize = New System.Drawing.Size(337, 171)
-        Me.Controls.Add(Me.btnTranslate)
-        Me.Controls.Add(Me.lblTitle)
-        Me.Controls.Add(Me.btnCancel)
-        Me.Controls.Add(Me.btnOk)
-        Me.Controls.Add(Me.CFlowLayout1)
-        Me.Controls.Add(Me.CLabel1)
-        Me.Name = "BalanceSheet"
-        Me.Text = "Balance Sheet"
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.CFlowLayout1.ResumeLayout(false)
-        Me.ResumeLayout(false)
+            Me.lblEndDateCaption.Location = New System.Drawing.Point(11, 63)
+            Me.lblEndDateCaption.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblEndDateCaption.Name = "lblEndDateCaption"
+            Me.lblEndDateCaption.Size = New System.Drawing.Size(171, 25)
+            Me.lblEndDateCaption.TabIndex = 21
+            Me.lblEndDateCaption.Text = "Ending Date:"
+            Me.lblEndDateCaption.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblEndDateCaption.Translatable = True
+            '
+            'dtpEndingDate
+            '
+            Me.dtpEndingDate.AutoSize = True
+            Me.dtpEndingDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.dtpEndingDate.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
+            Me.dtpEndingDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpEndingDate.DefaultValue = Nothing
+            Me.dtpEndingDate.DisplayOnly = False
+            Me.dtpEndingDate.DtpDefaultValue = Nothing
+            Me.dtpEndingDate.EditingMode = True
+            Me.dtpEndingDate.EditsAllowed = False
+            Me.CFlowLayout1.SetFlowBreak(Me.dtpEndingDate, True)
+            Me.dtpEndingDate.ForeColor = System.Drawing.Color.Black
+            Me.dtpEndingDate.LinkedLabel = Nothing
+            Me.dtpEndingDate.Location = New System.Drawing.Point(11, 90)
+            Me.dtpEndingDate.Margin = New System.Windows.Forms.Padding(1)
+            Me.dtpEndingDate.Name = "dtpEndingDate"
+            Me.dtpEndingDate.ReadOnlyDp = False
+            Me.dtpEndingDate.SecurityKey = Nothing
+            Me.dtpEndingDate.ShowLongDate = False
+            Me.dtpEndingDate.ShowTime = False
+            Me.dtpEndingDate.Size = New System.Drawing.Size(118, 23)
+            Me.dtpEndingDate.TabIndex = 24
+            Me.dtpEndingDate.TargetCalendar = Nothing
+            Me.dtpEndingDate.Translatable = False
+            Me.dtpEndingDate.Value = Nothing
+            Me.dtpEndingDate.ValueIsMandatory = False
+            Me.dtpEndingDate.ValueIsNullable = False
+            '
+            'CFlowLayout1
+            '
+            Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
+            Me.CFlowLayout1.Controls.Add(Me.lblBegDateCaption)
+            Me.CFlowLayout1.Controls.Add(Me.dtpBeginningDate)
+            Me.CFlowLayout1.Controls.Add(Me.lblEndDateCaption)
+            Me.CFlowLayout1.Controls.Add(Me.dtpEndingDate)
+            Me.CFlowLayout1.Location = New System.Drawing.Point(12, 37)
+            Me.CFlowLayout1.Name = "CFlowLayout1"
+            Me.CFlowLayout1.Padding = New System.Windows.Forms.Padding(10)
+            Me.CFlowLayout1.Size = New System.Drawing.Size(309, 131)
+            Me.CFlowLayout1.TabIndex = 26
+            '
+            'lblBegDateCaption
+            '
+            Me.lblBegDateCaption.DisplayOnly = True
+            Me.lblBegDateCaption.EditingMode = False
+            Me.lblBegDateCaption.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblBegDateCaption.Location = New System.Drawing.Point(11, 11)
+            Me.lblBegDateCaption.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblBegDateCaption.Name = "lblBegDateCaption"
+            Me.lblBegDateCaption.Size = New System.Drawing.Size(171, 25)
+            Me.lblBegDateCaption.TabIndex = 25
+            Me.lblBegDateCaption.Text = "Ending Date:"
+            Me.lblBegDateCaption.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblBegDateCaption.Translatable = True
+            '
+            'dtpBeginningDate
+            '
+            Me.dtpBeginningDate.AutoSize = True
+            Me.dtpBeginningDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.dtpBeginningDate.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
+            Me.dtpBeginningDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpBeginningDate.DefaultValue = Nothing
+            Me.dtpBeginningDate.DisplayOnly = False
+            Me.dtpBeginningDate.DtpDefaultValue = Nothing
+            Me.dtpBeginningDate.EditingMode = True
+            Me.dtpBeginningDate.EditsAllowed = False
+            Me.CFlowLayout1.SetFlowBreak(Me.dtpBeginningDate, True)
+            Me.dtpBeginningDate.ForeColor = System.Drawing.Color.Black
+            Me.dtpBeginningDate.LinkedLabel = Nothing
+            Me.dtpBeginningDate.Location = New System.Drawing.Point(11, 38)
+            Me.dtpBeginningDate.Margin = New System.Windows.Forms.Padding(1)
+            Me.dtpBeginningDate.Name = "dtpBeginningDate"
+            Me.dtpBeginningDate.ReadOnlyDp = False
+            Me.dtpBeginningDate.SecurityKey = Nothing
+            Me.dtpBeginningDate.ShowLongDate = False
+            Me.dtpBeginningDate.ShowTime = False
+            Me.dtpBeginningDate.Size = New System.Drawing.Size(118, 23)
+            Me.dtpBeginningDate.TabIndex = 26
+            Me.dtpBeginningDate.TargetCalendar = Nothing
+            Me.dtpBeginningDate.Translatable = False
+            Me.dtpBeginningDate.Value = Nothing
+            Me.dtpBeginningDate.ValueIsMandatory = False
+            Me.dtpBeginningDate.ValueIsNullable = False
+            '
+            'lblTitle
+            '
+            Me.lblTitle.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
+            Me.lblTitle.DisplayOnly = True
+            Me.lblTitle.EditingMode = False
+            Me.lblTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblTitle.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+            Me.lblTitle.Location = New System.Drawing.Point(0, 0)
+            Me.lblTitle.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblTitle.Name = "lblTitle"
+            Me.lblTitle.Size = New System.Drawing.Size(339, 25)
+            Me.lblTitle.TabIndex = 26
+            Me.lblTitle.Text = "Balance Sheet"
+            Me.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+            Me.lblTitle.Translatable = True
+            '
+            'CLabel1
+            '
+            Me.CLabel1.DisplayOnly = True
+            Me.CLabel1.EditingMode = False
+            Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel1.Location = New System.Drawing.Point(25, 37)
+            Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel1.Name = "CLabel1"
+            Me.CLabel1.Size = New System.Drawing.Size(150, 25)
+            Me.CLabel1.TabIndex = 26
+            Me.CLabel1.Text = "Beginning Date :"
+            Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel1.Translatable = True
+            '
+            'btnOk
+            '
+            Me.btnOk.DesignerSelected = False
+            Me.btnOk.ImageIndex = 0
+            Me.btnOk.Location = New System.Drawing.Point(122, 196)
+            Me.btnOk.Name = "btnOk"
+            Me.btnOk.OriginalImageName = Nothing
+            Me.btnOk.SecurityKey = ""
+            Me.btnOk.Size = New System.Drawing.Size(90, 25)
+            Me.btnOk.TabIndex = 27
+            Me.btnOk.Text = "Ok"
+            '
+            'btnCancel
+            '
+            Me.btnCancel.DesignerSelected = False
+            Me.btnCancel.ImageIndex = 0
+            Me.btnCancel.Location = New System.Drawing.Point(231, 196)
+            Me.btnCancel.Name = "btnCancel"
+            Me.btnCancel.OriginalImageName = Nothing
+            Me.btnCancel.SecurityKey = ""
+            Me.btnCancel.Size = New System.Drawing.Size(90, 25)
+            Me.btnCancel.TabIndex = 28
+            Me.btnCancel.Text = "Cancel"
+            '
+            'btnTranslate
+            '
+            Me.btnTranslate.DesignerSelected = False
+            Me.btnTranslate.ImageIndex = 0
+            Me.btnTranslate.Location = New System.Drawing.Point(12, 196)
+            Me.btnTranslate.Name = "btnTranslate"
+            Me.btnTranslate.OriginalImageName = Nothing
+            Me.btnTranslate.SecurityKey = ""
+            Me.btnTranslate.Size = New System.Drawing.Size(89, 25)
+            Me.btnTranslate.TabIndex = 29
+            Me.btnTranslate.Text = "Translate"
+            '
+            'BalanceSheet
+            '
+            Me.ClientSize = New System.Drawing.Size(337, 253)
+            Me.Controls.Add(Me.btnTranslate)
+            Me.Controls.Add(Me.lblTitle)
+            Me.Controls.Add(Me.btnCancel)
+            Me.Controls.Add(Me.btnOk)
+            Me.Controls.Add(Me.CFlowLayout1)
+            Me.Controls.Add(Me.CLabel1)
+            Me.Name = "BalanceSheet"
+            Me.Text = "Balance Sheet"
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.CFlowLayout1.ResumeLayout(False)
+            Me.CFlowLayout1.PerformLayout()
+            Me.ResumeLayout(False)
 
-End Sub
+        End Sub
         Friend WithEvents lblEndDateCaption As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dtpEndingDate As CCustomDateTimePicker
         Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout

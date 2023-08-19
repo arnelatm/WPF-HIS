@@ -270,8 +270,6 @@ Namespace PresentationLayer.Views.Forms
 
             RunForm(Of TrialBalance, PrintReportPresenter(Of ReportModel))()
 
-            'Dim formToRun As TrialBalance
-            'formToRun = New TrialBalance("C")
             'formToRun.Show()
         End Sub
 
@@ -330,7 +328,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub MonthlyToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBSMonthly.Click
-            RunForm(Of BalanceSheet, String)("M")
+            RunForm(Of BalanceSheet, BalanceSheetPresenter(Of AccountModel), String)("M")
         End Sub
 
         Private Sub MonthlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemISMonthly.Click
@@ -375,7 +373,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub QuarterlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBSQuarterly.Click
-            RunForm(Of BalanceSheet, String)("Q")
+            RunForm(Of BalanceSheet, BalanceSheetPresenter(Of AccountModel), String)("Q")
         End Sub
 
         Private Sub ReligionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemReligions.Click
@@ -416,7 +414,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub SemestralToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBSSemestral.Click
-            RunForm(Of BalanceSheet, String)("S")
+            RunForm(Of BalanceSheet, BalanceSheetPresenter(Of AccountModel), String)("S")
         End Sub
 
         Private Sub SemiAnnuallyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemISSemiAnnually.Click
@@ -432,7 +430,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub SummaryOfAccountsPayableToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSummaryOfAccountsPayable.Click
-            RunForm(Of ApSummary)()
+            RunReportNew(Of ApSummary)()
         End Sub
 
         Private Sub SupplierVendorsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSupplierVendors.Click
@@ -474,7 +472,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemSummaryOfAccountsReceivable_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSummaryOfAccountsReceivable.Click
-            RunForm(Of ArSummary)()
+            RunReportNew(Of ArSummary)()
         End Sub
 
         Private Sub ToolStripMenuItemUsers_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUsers.Click
@@ -503,7 +501,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub YearlyToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBSYearly.Click
-            RunForm(Of BalanceSheet, String)("Y")
+            RunForm(Of BalanceSheet, BalanceSheetPresenter(Of AccountModel), String)("Y")
         End Sub
 
         Private Sub YearlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemISYearly.Click
@@ -511,7 +509,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub JournalListingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemJournalTransactionSummary.Click
-            RunForm(Of TransactionSummary)()
+            RunReportNew(Of TransactionSummary)()
         End Sub
 
         Private Sub RecurringPayElementToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemRecurringPayrollEntry.Click
@@ -519,7 +517,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemAccountActivity_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAccountActivity.Click
-            RunForm(Of AccountActivity)()
+            RunReportNew(Of AccountActivity)()
         End Sub
 
         Private Sub ToolStripMenuItemTransactionJournalCodes_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTransactionJournalCodes.Click
@@ -889,18 +887,20 @@ Namespace PresentationLayer.Views.Forms
             Invoker.InvokeFunction(formToRun, "Show")
         End Sub
 
-        Private Overloads Sub RunReportNew(Of TV)()
-            Dim formToRun = Activator.CreateInstance(GetType(TV))
-            formToRun.Presenter = New PrintReportPresenter(Of ReportModel)(formToRun)
-            Invoker.InvokeFunction(formToRun, "Show")
-        End Sub
-
         Private Overloads Sub RunForm(Of TV, TP, TX)(param As TX)
             Dim formToRun = Activator.CreateInstance(GetType(TV), param)
             Dim pType As Type = GetType(TP)
             formToRun.Presenter = Activator.CreateInstance(pType, {formToRun, param})
             ShowEntryForm(formToRun)
         End Sub
+
+        Private Overloads Sub RunReportNew(Of TV)()
+            Dim formToRun = Activator.CreateInstance(GetType(TV))
+            formToRun.Presenter = New PrintReportPresenter(Of ReportModel)(formToRun)
+            Invoker.InvokeFunction(formToRun, "Show")
+        End Sub
+
+
 
         Private Overloads Sub RunBaseForm(Of TV, TP)(tableName As String, formName As String)
             Dim formToRun = Activator.CreateInstance(GetType(TV), tableName, formName)

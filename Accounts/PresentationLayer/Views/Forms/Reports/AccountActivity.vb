@@ -1,13 +1,19 @@
 ﻿Imports System.Globalization
 Imports AATM.Accounts.PresentationLayer.Presenters
+Imports AATM.Common
+Imports AATM.Libraries.CBaseControlsLibrary
+Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms.Reports
 
     Public Class AccountActivity
+        Implements ICrPrintableReportView
 
         Public Property MainTableName As String
+        Public Event PrintReport(reportFileName As String, reportArgs As CrPrintableArgs) Implements ICrPrintableReportView.PrintReport
         Protected SortOrderKey As String
 
         Public Sub New()
@@ -19,8 +25,6 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             MainTableName = "Account"
             SortOrderKey = "IdNo"
-            Presenter.CreateDataSource("Account", cboEndAccountCode, "DetailAccount=1")
-            Presenter.CreateDataSource("Account", cboStartAccountCode, "DetailAccount=1")
             dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(Today.Year, 1, 1)
             dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(Today.Year, Today.Month, Today.Day)
 
@@ -33,14 +37,10 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim lastFiscalYearDate As Date
             Dim AccountBalanceYear As Integer
             Dim begDataDate As Date
-            Dim language As String
             Dim cTemp As String
             Dim dDate As Date
-            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
             lastFiscalYearDate = Presenter.GetRecordFieldWithKeyG(Of Date)("LastFiscalYearEnd", "LastPosting", "TransactionName", "lastPostingDate")
-
             beginningDate = dtpBeginningDate.Value
-            'dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(Year(dtpEndingDate.Value), 12, 31)
 
             If beginningDate < lastFiscalYearDate Then
                 AccountBalanceYear = Year(beginningDate)
@@ -72,10 +72,36 @@ Namespace PresentationLayer.Views.Forms.Reports
             End If
             If valid Then
                 Dim reportTitle As String
+                Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpBeginningDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
+                Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(dtpEndingDate.Value, CultureInfo.CreateSpecificCulture("en-GB"))
                 reportTitle = Messaging.TranslateCaption("Account Activity Report")
-                Dim currentCulture As CultureInfo = CultureInfo.CurrentUICulture
-                Dim cForm As New ReportFormNew("Account Activity Report.Rpt", reportTitle, currentCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboStartAccountCode.SelectedValue, "BegAccountCode", cboEndAccountCode.SelectedValue, "EndAccountCode")
-                cForm.Show()
+                Dim formCultureLanguage As String = CultureInfo.CurrentUICulture.Name
+                Dim language As String = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
+                Dim reportFileName As String
+                reportFileName = "Account Activity Report.Rpt"
+                Dim reportArgs As New CrPrintableArgs
+                Dim reportParameters As New Object
+                Dim estName As String
+                If language = "ar" Then
+                    estName = GlobalVariables.EstablishmentNameAra
+                Else
+                    estName = GlobalVariables.EstablishmentName
+                End If
+                reportArgs.ReportParameters = {reportTitle, "ReportTitle",
+                                               language, "Language",
+                                               dtpBeginningDate.Value, "BeginningDate",
+                                               dtpEndingDate.Value, "EndingDate",
+                                               estName, "EstablishmentName",
+                                               cboStartAccountCode.SelectedValue, "BegAccountCode",
+                                               cboEndAccountCode.SelectedValue, "EndAccountCode"}
+                RaiseEvent PrintReport(reportFileName, reportArgs)
+
+
+                'Dim reportTitle As String
+                'reportTitle = Messaging.TranslateCaption("Account Activity Report")
+                'Dim currentCulture As CultureInfo = CultureInfo.CurrentUICulture
+                'Dim cForm As New ReportFormNew("Account Activity Report.Rpt", reportTitle, currentCulture, dtpBeginningDate.Value, "BeginningDate", dtpEndingDate.Value, "EndingDate", cboStartAccountCode.SelectedValue, "BegAccountCode", cboEndAccountCode.SelectedValue, "EndAccountCode")
+                'cForm.Show()
             End If
             CultureInfo.CurrentCulture = curCulture
 
@@ -88,6 +114,14 @@ Namespace PresentationLayer.Views.Forms.Reports
         Private Sub CButton1_ClickButtonArea_1(Sender As Object, e As MouseEventArgs) Handles btnTranslate.ClickButtonArea
             RunTranslator(VSystemViewIdNo)
         End Sub
+
+        Private Sub AccountActivity_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            Ea.PublishEvent(New GetControlDataSource("Account", cboStartAccountCode, "DetailAccount=1"))
+            Ea.PublishEvent(New GetControlDataSource("Account", cboEndAccountCode, "DetailAccount=1"))
+            cboStartAccountCode.EditingMode = True
+            cboEndAccountCode.EditingMode = True
+        End Sub
+
 
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents CLabel3 As Libraries.CBaseControlsLibrary.CLabel
