@@ -199,6 +199,9 @@ Namespace PresentationLayer.Views.Forms
             reportTitle = reportTitle + " " + GlobalFuncNSub.GregorianLongDate(Now(), CultureInfo.CurrentCulture)
             Dim cForm As New ReportFormNew("Aging of Accounts Receivable.Rpt", reportTitle, CultureInfo.CurrentCulture)
             cForm.Show()
+
+            RunReportNew(Of StatementOfAp)()
+
         End Sub
 
         Private Sub AgingOfAccountsPayableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAPAging.Click
@@ -257,20 +260,16 @@ Namespace PresentationLayer.Views.Forms
             OneTimeRun.CreateAllMessages()
         End Sub
 
-        Private Sub CustomerClientsToolStripMenuItem_Click(sender As Object, e As EventArgs) _
-            Handles ToolStripMenuItemCustomerClients.Click
+        Private Sub CustomerClientsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCustomerClients.Click
             RunForm(Of CustomerEntryTv, CustomerPresenter(Of CustomerModel))()
         End Sub
 
-        Private Sub CustomRangeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemISCustomRange.Click
-            RunForm(Of IncomeStatement, String)("C")
+        Private Sub CustomToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTBCustom.Click
+            RunForm(Of FinancialReport, FinancialReportPresenter(Of AccountModel), String, String)("TrialBalance", "C")
         End Sub
 
-        Private Sub CustomToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTBCustom.Click
-
-            RunForm(Of TrialBalance, PrintReportPresenter(Of ReportModel))()
-
-            'formToRun.Show()
+        Private Sub ToolStripMenuItemISCustomRange_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemISCustomRange.Click
+            RunForm(Of FinancialReport, FinancialReportPresenter(Of AccountModel), String, String)("IncomeStatement", "C")
         End Sub
 
         Private Sub DefaultFieldValuesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDefaultFieldValues.Click
@@ -324,15 +323,15 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub MonthlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTBMonthly.Click
-            RunForm(Of TrialBalance, String)("M")
+            RunForm(Of FinancialReport, FinancialReportPresenter(Of AccountModel), String, String)("TrialBalance", "M")
         End Sub
 
         Private Sub MonthlyToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBSMonthly.Click
-            RunForm(Of BalanceSheet, BalanceSheetPresenter(Of AccountModel), String)("M")
+            RunForm(Of FinancialReport, FinancialReportPresenter(Of AccountModel), String, String)("BalanceSheet", "M")
         End Sub
 
         Private Sub MonthlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemISMonthly.Click
-            RunForm(Of IncomeStatement, String)("M")
+            RunForm(Of FinancialReport, FinancialReportPresenter(Of AccountModel), String, String)("IncomeStatement", "M")
         End Sub
 
         Private Sub NumberOfCashPatientsPerDoctorToolStripMenuItem_Click(sender As Object, e As EventArgs)
@@ -365,15 +364,15 @@ Namespace PresentationLayer.Views.Forms
 
 
         Private Sub QuarterlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTBQuarterly.Click
-            RunForm(Of TrialBalance, String)("Q")
+            RunForm(Of FinancialReport, FinancialReportPresenter(Of AccountModel), String, String)("TrialBalance", "Q")
         End Sub
 
         Private Sub QuarterlyToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemISQuarterly.Click
-            RunForm(Of IncomeStatement, String)("Q")
+            RunForm(Of FinancialReport, FinancialReportPresenter(Of AccountModel), String, String)("IncomeStatement", "Q")
         End Sub
 
         Private Sub QuarterlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBSQuarterly.Click
-            RunForm(Of BalanceSheet, BalanceSheetPresenter(Of AccountModel), String)("Q")
+            RunForm(Of FinancialReport, FinancialReportPresenter(Of AccountModel), String, String)("BalanceSheet", "Q")
         End Sub
 
         Private Sub ReligionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemReligions.Click
@@ -410,15 +409,15 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub SemestralToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTBSemestral.Click
-            RunForm(Of TrialBalance, String)("S")
+            RunForm(Of FinancialReport, FinancialReportPresenter(Of AccountModel), String, String)("TrialBalance", "S")
         End Sub
 
         Private Sub SemestralToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBSSemestral.Click
-            RunForm(Of BalanceSheet, BalanceSheetPresenter(Of AccountModel), String)("S")
+            RunForm(Of FinancialReport, FinancialReportPresenter(Of AccountModel), String, String)("BalanceSheet", "S")
         End Sub
 
         Private Sub SemiAnnuallyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemISSemiAnnually.Click
-            RunForm(Of IncomeStatement, String)("S")
+            RunForm(Of FinancialReport, FinancialReportPresenter(Of AccountModel), String, String)("IncomeStatement", "S")
         End Sub
 
         Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSettings.Click
@@ -430,7 +429,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub SummaryOfAccountsPayableToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSummaryOfAccountsPayable.Click
-            RunReportNew(Of ApSummary)()
+            RunForm(Of FinancialReport, FinancialReportPresenter(Of AccountModel), String, String)("ApSummary", Nothing)
         End Sub
 
         Private Sub SupplierVendorsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSupplierVendors.Click
@@ -472,7 +471,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemSummaryOfAccountsReceivable_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSummaryOfAccountsReceivable.Click
-            RunReportNew(Of ArSummary)()
+            RunForm(Of FinancialReport, FinancialReportPresenter(Of AccountModel), String, String)("ArSummary", Nothing)
         End Sub
 
         Private Sub ToolStripMenuItemUsers_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemUsers.Click
@@ -497,15 +496,15 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub YearlyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemTBYearly.Click
-            RunForm(Of TrialBalance, String)("Y")
+            RunForm(Of FinancialReport, FinancialReportPresenter(Of AccountModel), String, String)("TrialBalance", "Y")
         End Sub
 
         Private Sub YearlyToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBSYearly.Click
-            RunForm(Of BalanceSheet, BalanceSheetPresenter(Of AccountModel), String)("Y")
+            RunForm(Of FinancialReport, FinancialReportPresenter(Of AccountModel), String, String)("BalanceSheet", "Y")
         End Sub
 
         Private Sub YearlyToolStripMenuItem2_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemISYearly.Click
-            RunForm(Of IncomeStatement, String)("Y")
+            RunForm(Of FinancialReport, FinancialReportPresenter(Of AccountModel), String, String)("IncomeStatement", "Y")
         End Sub
 
         Private Sub JournalListingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemJournalTransactionSummary.Click
@@ -894,6 +893,13 @@ Namespace PresentationLayer.Views.Forms
             ShowEntryForm(formToRun)
         End Sub
 
+        Private Overloads Sub RunForm(Of TV, TP, TX, TY)(param1 As TX, param2 As TY)
+            Dim formToRun = Activator.CreateInstance(GetType(TV), param1, param2)
+            Dim pType As Type = GetType(TP)
+            formToRun.Presenter = Activator.CreateInstance(pType, {formToRun})
+            ShowEntryForm(formToRun)
+        End Sub
+
         Private Overloads Sub RunReportNew(Of TV)()
             Dim formToRun = Activator.CreateInstance(GetType(TV))
             formToRun.Presenter = New PrintReportPresenter(Of ReportModel)(formToRun)
@@ -1009,11 +1015,11 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemEmployeeLeaveReport_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeLeaveReport.Click
-            RunForm(Of StatementOfLeave)()
+            RunForm(Of StatementOfLeave, HRReportsPresenter(Of EmployeeModel))()
         End Sub
 
         Private Sub ToolStripMenuItemEmployeeInformation_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeInformation.Click
-            RunForm(Of EmployeeInfo)()
+            RunForm(Of EmployeeInfo, HRReportsPresenter(Of EmployeeModel))()
         End Sub
 
         Private Sub SimplePasswordGeneratorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSimplePasswordGenerator.Click
@@ -1119,7 +1125,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemDiagnosticTestSummary_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDiagnosticTestSummary.Click
-            RunForm(Of DiagnosticTestSummary)()
+            RunReportNew(Of DiagnosticTestSummary)()
         End Sub
 
         Private Sub ToolStripMenuItemIqamaCBCResultBySampleNo_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemIqamaCBCResultBySampleNo.Click
@@ -1225,6 +1231,11 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemApplicationSetting_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemApplicationSetting.Click
             RunForm(Of AppSettingEntry, AppSettingPresenter(Of AppSettingModel))()
         End Sub
+
+        Private Sub ToolStripMenuItemBSCustom_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemBSCustom.Click
+            RunForm(Of FinancialReport, FinancialReportPresenter(Of AccountModel), String, String)("BalanceSheet", "C")
+        End Sub
+
 
         'Private Sub ToolStripMenuItemDrInvestigationsPrescriptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDrInvestigationsPrescriptions.Click
         '    'RunForm(Of PmrInvestigationRequestForm, PMRInvestigationPresenter(Of PmrInvestigationModel))()

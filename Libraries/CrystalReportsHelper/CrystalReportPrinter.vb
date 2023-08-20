@@ -1,6 +1,5 @@
 ﻿Imports System.Configuration
 Imports System.Drawing.Printing
-Imports System.Globalization
 Imports System.Windows.Forms
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary.Messaging
@@ -31,7 +30,7 @@ Public Class CrystalReportPrinter
     End Sub
 
     Public Sub SetReportProperties(pReportFileName As String, databaseConnection As String)
-        Select Case databaseConnection
+        Select Case databaseConnection.ToUpper()
             Case Nothing
                 UseDefaultConnection()
             Case $"ISPDATA"
@@ -51,7 +50,7 @@ Public Class CrystalReportPrinter
 
 
     Public Sub SetReportProperties(pReportFileName As String)
-        Select Case DataBaseConnectionName
+        Select Case DataBaseConnectionName.ToUpper()
             Case Nothing
                 UseDefaultConnection()
             Case $"ISPDATA"

@@ -203,6 +203,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemSalesReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPMRReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPrescription = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDrInvestigationsPrescriptions = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPharmacyReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPharmacyBarcodePrinting = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemGenerateDailyDrugTransferFile = New System.Windows.Forms.ToolStripMenuItem()
@@ -245,7 +246,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemDrInvestigationsPrescriptions = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemBSCustom = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -979,7 +980,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemBalanceSheet
             '
-            Me.ToolStripMenuItemBalanceSheet.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBSYearly, Me.ToolStripMenuItemBSMonthly, Me.ToolStripMenuItemBSQuarterly, Me.ToolStripMenuItemBSSemestral})
+            Me.ToolStripMenuItemBalanceSheet.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemBSYearly, Me.ToolStripMenuItemBSMonthly, Me.ToolStripMenuItemBSQuarterly, Me.ToolStripMenuItemBSSemestral, Me.ToolStripMenuItemBSCustom})
             Me.ToolStripMenuItemBalanceSheet.Name = "ToolStripMenuItemBalanceSheet"
             resources.ApplyResources(Me.ToolStripMenuItemBalanceSheet, "ToolStripMenuItemBalanceSheet")
             '
@@ -1164,6 +1165,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemPrescription.Name = "ToolStripMenuItemPrescription"
             resources.ApplyResources(Me.ToolStripMenuItemPrescription, "ToolStripMenuItemPrescription")
+            '
+            'ToolStripMenuItemDrInvestigationsPrescriptions
+            '
+            Me.ToolStripMenuItemDrInvestigationsPrescriptions.Name = "ToolStripMenuItemDrInvestigationsPrescriptions"
+            resources.ApplyResources(Me.ToolStripMenuItemDrInvestigationsPrescriptions, "ToolStripMenuItemDrInvestigationsPrescriptions")
             '
             'ToolStripMenuItemPharmacyReports
             '
@@ -1386,10 +1392,10 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'ToolStripMenuItemDrInvestigationsPrescriptions
+            'ToolStripMenuItemBSCustom
             '
-            Me.ToolStripMenuItemDrInvestigationsPrescriptions.Name = "ToolStripMenuItemDrInvestigationsPrescriptions"
-            resources.ApplyResources(Me.ToolStripMenuItemDrInvestigationsPrescriptions, "ToolStripMenuItemDrInvestigationsPrescriptions")
+            Me.ToolStripMenuItemBSCustom.Name = "ToolStripMenuItemBSCustom"
+            resources.ApplyResources(Me.ToolStripMenuItemBSCustom, "ToolStripMenuItemBSCustom")
             '
             'Main
             '
@@ -1633,5 +1639,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemProductExpiryReport As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemApplicationSetting As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDrInvestigationsPrescriptions As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemBSCustom As ToolStripMenuItem
     End Class
 End NameSpace
