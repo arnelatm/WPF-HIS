@@ -1,6 +1,7 @@
 ﻿
 Imports AATM.PresentationLayer.Views
 
+
 Public Interface IHrReportsView
     Inherits IView
 

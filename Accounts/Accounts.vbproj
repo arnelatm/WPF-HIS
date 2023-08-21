@@ -532,6 +532,7 @@
     <Compile Include="PresentationLayer\Presenters\AccountEvents.vb" />
     <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\AppSettingPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\ApArEmReportPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\FinancialReportPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\HRReportsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ProductFinderPresenter.vb" />
@@ -655,7 +656,14 @@
     <Compile Include="PresentationLayer\Views\Forms\Reports\InventoryReportByWarehouse.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ApArEmReport.designer.vb">
+      <DependentUpon>ApArEmReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\ApArEmReport.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IAppSettingView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IApArEmReportView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IFinancialReportView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IHrReportsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IProductFinderView.vb" />
@@ -1025,12 +1033,6 @@
     <Compile Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReport.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\EmployeeInfo.designer.vb">
-      <DependentUpon>EmployeeInfo.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\EmployeeInfo.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\StatementOfLeave.designer.vb">
       <DependentUpon>StatementOfLeave.vb</DependentUpon>
     </Compile>
@@ -1287,46 +1289,16 @@
     <Compile Include="PresentationLayer\Views\Forms\PostPettyCash.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\ArSummary.Designer.vb">
-      <DependentUpon>ArSummary.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\ArSummary.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\ErSummary.designer.vb">
-      <DependentUpon>ErSummary.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\ErSummary.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\ReportForm.Designer.vb">
       <DependentUpon>ReportForm.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\ReportForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\StatementOfAr.designer.vb">
-      <DependentUpon>StatementOfAr.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\StatementOfAr.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\StatementOfEr.designer.vb">
-      <DependentUpon>StatementOfEr.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\StatementOfEr.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\AccountActivity.designer.vb">
       <DependentUpon>AccountActivity.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\AccountActivity.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\StatementOfAp.Designer.vb">
-      <DependentUpon>StatementOfAp.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\StatementOfAp.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Models\AccountReconciliationItemModel.vb" />
@@ -2056,6 +2028,9 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\InventoryReportByWarehouse.resx">
       <DependentUpon>InventoryReportByWarehouse.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ApArEmReport.resx">
+      <DependentUpon>ApArEmReport.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\SterilizationLabelPrinting.resx">
       <DependentUpon>SterilizationLabelPrinting.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -2260,10 +2235,6 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ShiftDailyReport.resx">
       <DependentUpon>ShiftDailyReport.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\EmployeeInfo.resx">
-      <DependentUpon>EmployeeInfo.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\StatementOfLeave.resx">
       <DependentUpon>StatementOfLeave.vb</DependentUpon>
     </EmbeddedResource>
@@ -2355,12 +2326,6 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\ArJournalReport.resx">
       <DependentUpon>ArJournalReport.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ArSummary.resx">
-      <DependentUpon>ArSummary.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ErSummary.resx">
-      <DependentUpon>ErSummary.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\DiagnosticTestSummary.resx">
       <DependentUpon>DiagnosticTestSummary.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -2371,18 +2336,9 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ReportForm.resx">
       <DependentUpon>ReportForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\StatementOfAr.resx">
-      <DependentUpon>StatementOfAr.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\StatementOfEr.resx">
-      <DependentUpon>StatementOfEr.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\AccountActivity.resx">
       <DependentUpon>AccountActivity.vb</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\StatementOfAp.resx">
-      <DependentUpon>StatementOfAp.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\LeaveView.resx">
       <DependentUpon>LeaveView.vb</DependentUpon>
