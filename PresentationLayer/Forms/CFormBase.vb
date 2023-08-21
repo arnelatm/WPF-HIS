@@ -348,10 +348,10 @@ Public Class CFormBase
     'End Sub
 
     Private Sub CFormEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If _firstLoadSwitch = 0 Then
-            GetNSaveCaptions()
-            _firstLoadSwitch = 1
-        End If
+        'If _firstLoadSwitch = 0 Then
+        '    GetNSaveCaptions()
+        '    _firstLoadSwitch = 1
+        'End If
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
             TextDisplayLanguage = CultureInfo.CurrentCulture.Name
             'CreateDataSources()

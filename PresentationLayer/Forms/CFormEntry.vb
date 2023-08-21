@@ -89,8 +89,8 @@ Public Class CFormEntry
             End If
         End If
         Me.Activate()
-        Dim allCtrl As New List(Of Control)
-        allCtrl = FindControlRecursive(allCtrl, Me)
+        'Dim allCtrl As New List(Of Control)
+        'allCtrl = FindControlRecursive(allCtrl, Me)
         'For Each control In allCtrl
         '    If TypeOf control Is CDataGridView Then
         '        Dim dgv As CDataGridView
@@ -553,10 +553,10 @@ Public Class CFormEntry
 
     Private Sub CFormEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        If _firstLoadSwitch = 0 Then
-            GetNSaveCaptions()
-            _firstLoadSwitch = 1
-        End If
+        'If _firstLoadSwitch = 0 Then
+        '    GetNSaveCaptions()
+        '    _firstLoadSwitch = 1
+        'End If
         If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
             'AddHandler TextDisplayLanguageChanged, AddressOf OnTextDisplayLanguageChanged
             TextDisplayLanguage = CultureInfo.CurrentCulture.Name
