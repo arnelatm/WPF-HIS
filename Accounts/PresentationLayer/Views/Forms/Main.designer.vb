@@ -172,6 +172,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemBSMonthly = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemBSQuarterly = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemBSSemestral = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemBSCustom = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemIncomeStatement = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemISYearly = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemISMonthly = New System.Windows.Forms.ToolStripMenuItem()
@@ -246,7 +247,6 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemBSCustom = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -1004,6 +1004,11 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemBSSemestral.Name = "ToolStripMenuItemBSSemestral"
             resources.ApplyResources(Me.ToolStripMenuItemBSSemestral, "ToolStripMenuItemBSSemestral")
             '
+            'ToolStripMenuItemBSCustom
+            '
+            Me.ToolStripMenuItemBSCustom.Name = "ToolStripMenuItemBSCustom"
+            resources.ApplyResources(Me.ToolStripMenuItemBSCustom, "ToolStripMenuItemBSCustom")
+            '
             'ToolStripMenuItemIncomeStatement
             '
             Me.ToolStripMenuItemIncomeStatement.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemISYearly, Me.ToolStripMenuItemISMonthly, Me.ToolStripMenuItemISQuarterly, Me.ToolStripMenuItemISSemiAnnually, Me.ToolStripMenuItemISCustomRange})
@@ -1391,11 +1396,6 @@ Namespace PresentationLayer.Views.Forms
             '
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
-            '
-            'ToolStripMenuItemBSCustom
-            '
-            Me.ToolStripMenuItemBSCustom.Name = "ToolStripMenuItemBSCustom"
-            resources.ApplyResources(Me.ToolStripMenuItemBSCustom, "ToolStripMenuItemBSCustom")
             '
             'Main
             '

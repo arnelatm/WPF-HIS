@@ -170,6 +170,48 @@ Public Class BfMain
         End If
     End Function
 
+    'Private Sub OnCFormEntryNewShown() Handles MyBase.Shown
+    '    Parent.SuspendDrawing()
+    '    If CultureInfo.CurrentCulture.TextInfo.IsRightToLeft Then
+    '        SwitchUiLanguage(False)
+    '    Else
+    '        SwitchUiLanguage(True)
+    '    End If
+    '    Me.Activate()
+    '    Dim allCtrl As New List(Of Control)
+    '    allCtrl = FindControlRecursive(allCtrl, Me)
+    '    Parent.ResumeDrawing()
+    '    FormShown = True
+    'End Sub
+
+    'Protected Overridable Sub SwitchUiLanguage(originalUi As Boolean)
+    '    Visible = False
+    '    Dim sw As Integer = 0
+    '    If originalUi Then
+    '        If TextDisplayLanguage <> GlobalVariables.DefaultUnmirroredCultureInfoStr Then
+    '            TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
+    '            sw = 1
+    '        End If
+    '        GlobalVariables.RightToLeftLayout = True
+    '        RightToLeft = RightToLeft.No
+    '    Else
+    '        If TextDisplayLanguage <> GlobalVariables.DefaultMirroredCultureInfoStr Then
+    '            TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
+    '            sw = 1
+    '        End If
+    '        GlobalVariables.RightToLeftLayout = False
+    '        RightToLeft = RightToLeft.Yes
+    '    End If
+    '    TranslateForm()
+    '    If sw = 1 Then
+    '        CultureInfo.CurrentCulture = New CultureInfo(TextDisplayLanguage, False)
+    '        If Ea IsNot Nothing Then
+    '            Ea.PublishEvent(New LanguageChanged(Me))
+    '        End If
+    '    End If
+    '    Visible = True
+    'End Sub
+
     Public Sub TranslateForm()
         Parent.SuspendDrawing()
         Dim settings As New SettingsSaver

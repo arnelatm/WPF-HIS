@@ -46,12 +46,17 @@ Public Class FinancialReportPresenter(Of TM As New)
                 _reportName = "Summary of Accounts Payable"
                 _reportFileName = "Summary of Accounts Payable.Rpt"
                 View.WithZeroBalanceQuery = True
-                _withFiscalYearDateRequirement = True
+                _withFiscalYearDateRequirement = False
             Case "ArSummary"
                 _reportName = "Summary of Accounts Receivable"
                 _reportFileName = "Summary of Accounts Receivable.Rpt"
                 View.WithZeroBalanceQuery = True
-                _withFiscalYearDateRequirement = True
+                _withFiscalYearDateRequirement = False
+            Case "ErSummary"
+                _reportName = "Summary of Employee Loans"
+                _reportFileName = "Summary of Employee Loans.Rpt"
+                View.WithZeroBalanceQuery = True
+                _withFiscalYearDateRequirement = False
         End Select
     End Sub
 
@@ -131,7 +136,7 @@ Public Class FinancialReportPresenter(Of TM As New)
                                       reportTitle, "ReportTitle",
                                       View.Language, "Language"
                                       }
-                Case "ApSummary"
+                Case "ApSummary", "ArSummary", "ErSummary"
                     reportArgs.ReportParameters = {bDate, "BeginningDate",
                                      eDate, "EndingDate",
                                      reportTitle, "ReportTitle",
@@ -139,14 +144,20 @@ Public Class FinancialReportPresenter(Of TM As New)
                                      GlobalVariables.EstablishmentName, "EstablishmentName",
                                      View.Language, "Language"}
 
-                Case "ArSummary"
-                    reportArgs.ReportParameters = {bDate, "BeginningDate",
-                                     eDate, "EndingDate",
-                                     reportTitle, "ReportTitle",
-                                     View.ZeroBalanceChecked, "IncludeZeroBalance",
-                                     GlobalVariables.EstablishmentName, "EstablishmentName",
-                                     View.Language, "Language"}
-
+                    'Case "ArSummary"
+                    '    reportArgs.ReportParameters = {bDate, "BeginningDate",
+                    '                     eDate, "EndingDate",
+                    '                     reportTitle, "ReportTitle",
+                    '                     View.ZeroBalanceChecked, "IncludeZeroBalance",
+                    '                     GlobalVariables.EstablishmentName, "EstablishmentName",
+                    '                     View.Language, "Language"}
+                    'Case "ErSummary"
+                    '    reportArgs.ReportParameters = {bDate, "BeginningDate",
+                    '                     eDate, "EndingDate",
+                    '                     reportTitle, "ReportTitle",
+                    '                     View.ZeroBalanceChecked, "IncludeZeroBalance",
+                    '                     GlobalVariables.EstablishmentName, "EstablishmentName",
+                    '                     View.Language, "Language"}
 
             End Select
             Dim p As New PrintReportPresenter(Of AccountModel)
