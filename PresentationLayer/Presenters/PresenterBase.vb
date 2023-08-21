@@ -1942,9 +1942,12 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Function
 
     Public Sub OnPresenterBase_LanguageChangedEventHandler(ByRef eventType As LanguageChanged) Implements ISubscriber(Of LanguageChanged).OnEventHandler
-        UpdateViewDisplay()
-        CreateDataSources()
-        RaiseEvent LanguageChanged()
+        Dim type As Type = View.GetType
+        If type.GetProperty("UpdateViewDisplay") IsNot Nothing Then
+            UpdateViewDisplay()
+            CreateDataSources()
+            RaiseEvent LanguageChanged()
+        End If
     End Sub
 
     Public Sub CreateListDataSource(ByVal sourceTableName As String, ByVal fieldName As String, ByVal listName As String)

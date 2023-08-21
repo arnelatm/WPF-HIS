@@ -32,10 +32,10 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.dtpBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblTitle = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
-            Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+            Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout1.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
@@ -93,7 +93,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboIdNo.DataValue = Nothing
             Me.cboIdNo.DefaultValue = Nothing
             Me.cboIdNo.DisplayMember = "Name"
-            Me.cboIdNo.DropDownHeight = 24
+            Me.cboIdNo.DropDownHeight = 21
             Me.cboIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboIdNo.Editable = True
             Me.cboIdNo.EditingMode = False
@@ -218,46 +218,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
             Me.lblTitle.Translatable = True
             '
-            'CLabel1
-            '
-            Me.CLabel1.DisplayOnly = True
-            Me.CLabel1.EditingMode = False
-            Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel1.Location = New System.Drawing.Point(25, 37)
-            Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel1.Name = "CLabel1"
-            Me.CLabel1.Size = New System.Drawing.Size(150, 25)
-            Me.CLabel1.TabIndex = 26
-            Me.CLabel1.Text = "Beginning Date :"
-            Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.CLabel1.Translatable = True
-            '
-            'btnOk
-            '
-            Me.btnOk.Anchor = System.Windows.Forms.AnchorStyles.None
-            Me.btnOk.DesignerSelected = False
-            Me.btnOk.ImageIndex = 0
-            Me.btnOk.Location = New System.Drawing.Point(156, 71)
-            Me.btnOk.Name = "btnOk"
-            Me.btnOk.OriginalImageName = Nothing
-            Me.btnOk.SecurityKey = ""
-            Me.btnOk.Size = New System.Drawing.Size(90, 24)
-            Me.btnOk.TabIndex = 27
-            Me.btnOk.Text = "Ok"
-            '
-            'btnCancel
-            '
-            Me.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.None
-            Me.btnCancel.DesignerSelected = False
-            Me.btnCancel.ImageIndex = 0
-            Me.btnCancel.Location = New System.Drawing.Point(290, 71)
-            Me.btnCancel.Name = "btnCancel"
-            Me.btnCancel.OriginalImageName = Nothing
-            Me.btnCancel.SecurityKey = ""
-            Me.btnCancel.Size = New System.Drawing.Size(90, 24)
-            Me.btnCancel.TabIndex = 28
-            Me.btnCancel.Text = "Cancel"
-            '
             'TableLayoutPanel1
             '
             Me.TableLayoutPanel1.AutoSize = True
@@ -285,9 +245,49 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.TableLayoutPanel1.Size = New System.Drawing.Size(537, 98)
             Me.TableLayoutPanel1.TabIndex = 30
             '
+            'btnCancel
+            '
+            Me.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.None
+            Me.btnCancel.DesignerSelected = False
+            Me.btnCancel.ImageIndex = 0
+            Me.btnCancel.Location = New System.Drawing.Point(290, 71)
+            Me.btnCancel.Name = "btnCancel"
+            Me.btnCancel.OriginalImageName = Nothing
+            Me.btnCancel.SecurityKey = ""
+            Me.btnCancel.Size = New System.Drawing.Size(90, 24)
+            Me.btnCancel.TabIndex = 28
+            Me.btnCancel.Text = "Cancel"
+            '
+            'btnOk
+            '
+            Me.btnOk.Anchor = System.Windows.Forms.AnchorStyles.None
+            Me.btnOk.DesignerSelected = False
+            Me.btnOk.ImageIndex = 0
+            Me.btnOk.Location = New System.Drawing.Point(156, 71)
+            Me.btnOk.Name = "btnOk"
+            Me.btnOk.OriginalImageName = Nothing
+            Me.btnOk.SecurityKey = ""
+            Me.btnOk.Size = New System.Drawing.Size(90, 24)
+            Me.btnOk.TabIndex = 27
+            Me.btnOk.Text = "Ok"
+            '
+            'CLabel1
+            '
+            Me.CLabel1.DisplayOnly = True
+            Me.CLabel1.EditingMode = False
+            Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel1.Location = New System.Drawing.Point(25, 37)
+            Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel1.Name = "CLabel1"
+            Me.CLabel1.Size = New System.Drawing.Size(150, 25)
+            Me.CLabel1.TabIndex = 26
+            Me.CLabel1.Text = "Beginning Date :"
+            Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel1.Translatable = True
+            '
             'ApArEmReport
             '
-            Me.ClientSize = New System.Drawing.Size(557, 154)
+            Me.ClientSize = New System.Drawing.Size(899, 405)
             Me.Controls.Add(Me.CFlowLayout1)
             Me.Controls.Add(Me.CLabel1)
             Me.Name = "ApArEmReport"

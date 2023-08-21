@@ -546,16 +546,16 @@ Namespace PresentationLayer.Views.Forms
 
 #End Region
 
-        Protected Sub SwitchUiLanguage(originalUi As Boolean)
-            If originalUi Then
-                TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
-            Else
-                TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
-            End If
-            TranslateForm()
-            ToolStripButtonEnglish.Visible = Not originalUi
-            ToolStripButtonArabic.Visible = originalUi
-        End Sub
+        'Protected Sub SwitchUiLanguage(originalUi As Boolean)
+        '    If originalUi Then
+        '        TextDisplayLanguage = GlobalVariables.DefaultUnmirroredCultureInfoStr
+        '    Else
+        '        TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
+        '    End If
+        '    TranslateForm()
+        '    ToolStripButtonEnglish.Visible = Not originalUi
+        '    ToolStripButtonArabic.Visible = originalUi
+        'End Sub
 
         Private Sub AddChildMenuSecurityObjects(dropDownItems As ToolStripItemCollection, pParentMenuName As String, pParentIdNo As Int32)
             Dim parentIdNo As Int32
