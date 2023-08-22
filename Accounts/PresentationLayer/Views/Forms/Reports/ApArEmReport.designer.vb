@@ -287,10 +287,12 @@ Namespace PresentationLayer.Views.Forms.Reports
             '
             'ApArEmReport
             '
-            Me.ClientSize = New System.Drawing.Size(899, 405)
+            Me.ClientSize = New System.Drawing.Size(556, 160)
             Me.Controls.Add(Me.CFlowLayout1)
             Me.Controls.Add(Me.CLabel1)
+            Me.DoubleBuffered = True
             Me.Name = "ApArEmReport"
+            Me.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.Text = "Statement of Employee Leaves"
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.CFlowLayout1.ResumeLayout(False)

@@ -76,11 +76,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Public Property NoDates As Boolean Implements IApArEmReportView.NoDates
 
         Private Sub CButton1_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
-            If dtpBeginningDate.Value <= dtpEndingDate.Value Then
-                RaiseEvent PrintButtonClicked()
-            Else
-                Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")
-            End If
+            RaiseEvent PrintButtonClicked()
         End Sub
 
         Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
