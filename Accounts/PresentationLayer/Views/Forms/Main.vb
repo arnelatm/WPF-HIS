@@ -1234,8 +1234,8 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of FinancialReport, FinancialReportPresenter(Of AccountModel), String, String)("BalanceSheet", "C")
         End Sub
 
-        Private Sub ToolStripMenuItemPeriodicPayroll_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPeriodicPayroll.Click
-
+        Private Sub ToolStripMenuItemDocDetail_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDocDetail.Click
+            RunForm(Of DocumentDetailEntry, DocumentDetailPresenter(Of DocumentDetailModel))()
         End Sub
 
 

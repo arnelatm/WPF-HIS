@@ -228,6 +228,8 @@
     <Compile Include="BusinessLayer\ApJournal.vb" />
     <Compile Include="BusinessLayer\ApOpenInvoice.vb" />
     <Compile Include="BusinessLayer\AppSetting.vb" />
+    <Compile Include="BusinessLayer\EmployeeDetail.vb" />
+    <Compile Include="BusinessLayer\DocumentDetail.vb" />
     <Compile Include="BusinessLayer\IGroup\Duration.vb" />
     <Compile Include="BusinessLayer\IGroup\DrugAccept.vb" />
     <Compile Include="BusinessLayer\Dosage.vb" />
@@ -324,6 +326,7 @@
     <Compile Include="BusinessLayer\Supplier.vb" />
     <Compile Include="ContainerConfig.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
+    <Compile Include="DataLayer\AdoNet\DocumentDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\PmrInvestigationRequestDao.vb" />
     <Compile Include="DataLayer\AdoNet\InventoryDao.vb" />
     <Compile Include="DataLayer\AdoNet\DoctorDao.vb" />
@@ -459,6 +462,7 @@
     </Compile>
     <Compile Include="OneTimeRun.vb" />
     <Compile Include="PresentationLayer\Models\AppSettingModel.vb" />
+    <Compile Include="PresentationLayer\Models\DocumentDetailModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\DurationModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\DrugAcceptModel.vb" />
     <Compile Include="PresentationLayer\Models\DosageModel.vb" />
@@ -535,6 +539,7 @@
     <Compile Include="PresentationLayer\Presenters\ApArEmReportPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\FinancialReportPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\HRReportsPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\DocumentDetailPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ProductFinderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\InventorySelectorPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\InvTransTypePresenter.vb" />
@@ -594,6 +599,12 @@
       <DependentUpon>AppSettingEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\AppSettingEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\DocumentDetailEntry.designer.vb">
+      <DependentUpon>DocumentDetailEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\DocumentDetailEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\DoctorsPrescriptionForm.Designer.vb">
@@ -664,6 +675,7 @@
     </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IAppSettingView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IApArEmReportView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IDocumentDetailView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IFinancialReportView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IHrReportsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IProductFinderView.vb" />
@@ -1980,6 +1992,9 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\CGridBoxForm.resx">
       <DependentUpon>CGridBoxForm.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\DocumentDetailEntry.resx">
+      <DependentUpon>DocumentDetailEntry.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\DoctorsPrescriptionForm.resx">
       <DependentUpon>DoctorsPrescriptionForm.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -2709,8 +2724,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app-ibn-server-test.config" />
     <None Include="app.config" />
+    <None Include="app-ibn-server-test.config" />
     <None Include="app-Marcelo-Dell.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Isp-Server.config" />

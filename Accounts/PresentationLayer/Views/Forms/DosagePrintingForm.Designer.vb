@@ -91,6 +91,7 @@ Namespace PresentationLayer.Views.Forms
             'FormTreeView
             '
             Me.FormTreeView.LineColor = System.Drawing.Color.Black
+            Me.FormTreeView.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.FormTreeView.Size = New System.Drawing.Size(308, 553)
             '
             'ImageListTreeView
@@ -140,7 +141,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'CButton1
             '
-            Me.CButton1.DesignerSelected = False
+            Me.CButton1.DesignerSelected = True
             Me.CButton1.ImageIndex = 0
             Me.CButton1.Location = New System.Drawing.Point(19, 502)
             Me.CButton1.Name = "CButton1"
@@ -1278,6 +1279,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ClientSize = New System.Drawing.Size(870, 606)
             Me.MinimumSize = New System.Drawing.Size(16, 100)
             Me.Name = "DosagePrintingForm"
+            Me.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.Text = "Dosage Printing"
             Me.ViewDisplayName = "DosagePrintingForm"
             Me.SplitContainer1.Panel1.ResumeLayout(False)

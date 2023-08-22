@@ -812,9 +812,7 @@ Namespace PresentationLayer.Views.Forms
             ProcessCellEndEdit(DataGridViewLeaveCredits, bsLeaveCredits)
         End Sub
 
-        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
-            Debugger.Break()
-        End Sub
+
     End Class
 
 End Namespace
