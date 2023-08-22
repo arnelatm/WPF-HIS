@@ -81,19 +81,19 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property NeedsExpiryDate As Boolean Implements IDocumentView.NeedsExpiryDate
             Get
-                Return chkNeedsNumber.Checked
+                Return chkNeedsExpiryDate.Checked
             End Get
             Set
-                chkNeedsNumber.Checked = Value
+                chkNeedsExpiryDate.Checked = Value
             End Set
         End Property
 
         Public Property NeedsIssueDate As Boolean Implements IDocumentView.NeedsIssueDate
             Get
-                Return chkNeedsNumber.Checked
+                Return chkNeedsIssueDate.Checked
             End Get
             Set
-                chkNeedsNumber.Checked = Value
+                chkNeedsIssueDate.Checked = Value
             End Set
         End Property
 

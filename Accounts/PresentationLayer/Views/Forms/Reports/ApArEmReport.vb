@@ -51,8 +51,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Public ReadOnly Property Language As String Implements IApArEmReportView.Language
             Get
-                Dim curCulture = CultureInfo.CurrentCulture
-                Return Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
+                Return Strings.Left(TextDisplayLanguage, TextDisplayLanguage.IndexOf("-"))
             End Get
         End Property
 

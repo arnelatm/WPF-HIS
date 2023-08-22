@@ -596,6 +596,7 @@ Public Class CFormEntry
             End If
             If AddOnOpen Then
                 btnAdd.PerformClick()
+                FirstControl.Select()
             End If
             'CenterForm(Me)
             'UpdateNavigationButtonDisplay(False, False)

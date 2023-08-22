@@ -104,6 +104,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.MinimumValue = Nothing
             Me.TxtIdNo.Name = "TxtIdNo"
             Me.TxtIdNo.OldValue = Nothing
+            Me.TxtIdNo.OverrideMaxLength = 0
             Me.TxtIdNo.ReadOnly = True
             Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtIdNo.TabStop = False
@@ -140,6 +141,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDocumentCode.MinimumValue = Nothing
             Me.txtDocumentCode.Name = "txtDocumentCode"
             Me.txtDocumentCode.OldValue = Nothing
+            Me.txtDocumentCode.OverrideMaxLength = 0
             Me.txtDocumentCode.ReadOnly = True
             Me.txtDocumentCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtDocumentCode.Translatable = False
@@ -175,6 +177,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDocumentName.MinimumValue = Nothing
             Me.txtDocumentName.Name = "txtDocumentName"
             Me.txtDocumentName.OldValue = Nothing
+            Me.txtDocumentName.OverrideMaxLength = 0
             Me.txtDocumentName.ReadOnly = True
             Me.txtDocumentName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtDocumentName.Translatable = False
@@ -201,6 +204,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.MinimumValue = Nothing
             Me.txtNotes.Name = "txtNotes"
             Me.txtNotes.OldValue = Nothing
+            Me.txtNotes.OverrideMaxLength = 0
             Me.txtNotes.ReadOnly = True
             Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtNotes.Translatable = False
@@ -279,6 +283,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDocumentNameAra.MinimumValue = Nothing
             Me.txtDocumentNameAra.Name = "txtDocumentNameAra"
             Me.txtDocumentNameAra.OldValue = Nothing
+            Me.txtDocumentNameAra.OverrideMaxLength = 0
             Me.txtDocumentNameAra.ReadOnly = True
             Me.txtDocumentNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtDocumentNameAra.Translatable = False
@@ -300,6 +305,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDocumentType.DataValue = Nothing
             Me.cboDocumentType.DefaultValue = Nothing
             Me.cboDocumentType.DisplayMember = "Name"
+            Me.cboDocumentType.Editable = True
             Me.cboDocumentType.EditingMode = True
             Me.cboDocumentType.EndFindValue = Nothing
             Me.cboDocumentType.FieldDescription = Nothing
@@ -313,6 +319,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDocumentType.FormattingEnabled = True
             Me.cboDocumentType.HideWhenNotEditingOrAdding = False
             Me.cboDocumentType.IgnoreCase = False
+            Me.cboDocumentType.LimitToList = False
             Me.cboDocumentType.LinkedLabel = Me.lblDocumentType
             Me.cboDocumentType.Name = "cboDocumentType"
             Me.cboDocumentType.OldValue = 0
@@ -348,6 +355,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboImageType.DataValue = Nothing
             Me.cboImageType.DefaultValue = Nothing
             Me.cboImageType.DisplayMember = "Name"
+            Me.cboImageType.Editable = True
             Me.cboImageType.EditingMode = True
             Me.cboImageType.EndFindValue = Nothing
             Me.cboImageType.FieldDescription = Nothing
@@ -361,6 +369,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboImageType.FormattingEnabled = True
             Me.cboImageType.HideWhenNotEditingOrAdding = False
             Me.cboImageType.IgnoreCase = False
+            Me.cboImageType.LimitToList = False
             Me.cboImageType.LinkedLabel = Nothing
             Me.cboImageType.Name = "cboImageType"
             Me.cboImageType.OldValue = 0
@@ -459,10 +468,10 @@ Namespace PresentationLayer.Views.Forms
             Me.chkNeedsExpiryDate.AutoCheck = False
             Me.chkNeedsExpiryDate.BackColor = System.Drawing.Color.White
             Me.chkNeedsExpiryDate.BegFindValue = Nothing
-        Me.chkNeedsExpiryDate.DisplayOnly = false
-        Me.chkNeedsExpiryDate.EditingMode = false
-        Me.chkNeedsExpiryDate.EndFindValue = Nothing
-        Me.chkNeedsExpiryDate.FieldDescription = Nothing
+            Me.chkNeedsExpiryDate.DisplayOnly = False
+            Me.chkNeedsExpiryDate.EditingMode = False
+            Me.chkNeedsExpiryDate.EndFindValue = Nothing
+            Me.chkNeedsExpiryDate.FieldDescription = Nothing
         Me.chkNeedsExpiryDate.FieldName = Nothing
         Me.chkNeedsExpiryDate.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
         Me.chkNeedsExpiryDate.FindEnabled = true

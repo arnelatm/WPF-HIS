@@ -93,7 +93,6 @@
             Me.cacMaritalStatus = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.lblNationalityCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cacNationalityCode = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-            Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.lblReligion = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cacReligionIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.lblBirthDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -288,6 +287,10 @@
             Me.ImageListTreeView.Images.SetKeyName(0, "TreeNode.ico")
             Me.ImageListTreeView.Images.SetKeyName(1, "openbriefcase.png")
             '
+            'TranslatorDAC
+            '
+            Me.TranslatorDAC.Cs = ""
+            '
             'bsPhones
             '
             Me.bsPhones.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.EmployeePhoneModel)
@@ -365,6 +368,7 @@
             Me.TxtIdNo.Size = New System.Drawing.Size(62, 23)
             Me.TxtIdNo.TabIndex = 0
             Me.TxtIdNo.TabStop = False
+            Me.TxtIdNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.TxtIdNo.Translatable = False
             Me.TxtIdNo.ValueIsNumeric = True
             '
@@ -574,6 +578,7 @@
             Me.tbcEmployee.HotTrack = True
             Me.tbcEmployee.Location = New System.Drawing.Point(3, 79)
             Me.tbcEmployee.Name = "tbcEmployee"
+            Me.tbcEmployee.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.tbcEmployee.SelectedIndex = 0
             Me.tbcEmployee.Size = New System.Drawing.Size(677, 387)
             Me.tbcEmployee.TabIndex = 215
@@ -604,7 +609,6 @@
             Me.floPersonal.Controls.Add(Me.cacMaritalStatus)
             Me.floPersonal.Controls.Add(Me.lblNationalityCode)
             Me.floPersonal.Controls.Add(Me.cacNationalityCode)
-            Me.floPersonal.Controls.Add(Me.CButton1)
             Me.floPersonal.Controls.Add(Me.lblReligion)
             Me.floPersonal.Controls.Add(Me.cacReligionIdNo)
             Me.floPersonal.Controls.Add(Me.lblBirthDate)
@@ -815,6 +819,7 @@
             Me.cacNationalityCode.FilterRule = Nothing
             Me.cacNationalityCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cacNationalityCode.FindEnabled = False
+            Me.floPersonal.SetFlowBreak(Me.cacNationalityCode, True)
             Me.cacNationalityCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.cacNationalityCode.ForeColor = System.Drawing.Color.Black
             Me.cacNationalityCode.FormattingEnabled = True
@@ -844,25 +849,13 @@
             Me.cacNationalityCode.ValueIsNumeric = False
             Me.cacNationalityCode.ValueMember = "Code"
             '
-            'CButton1
-            '
-            Me.CButton1.DesignerSelected = False
-            Me.CButton1.ImageIndex = 0
-            Me.CButton1.Location = New System.Drawing.Point(457, 145)
-            Me.CButton1.Name = "CButton1"
-            Me.CButton1.OriginalImageName = Nothing
-            Me.CButton1.SecurityKey = ""
-            Me.CButton1.Size = New System.Drawing.Size(90, 25)
-            Me.CButton1.TabIndex = 276
-            Me.CButton1.Text = "CButton1"
-            '
             'lblReligion
             '
             Me.lblReligion.DisplayOnly = True
             Me.lblReligion.EditingMode = False
             Me.lblReligion.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblReligion.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblReligion.Location = New System.Drawing.Point(1, 174)
+            Me.lblReligion.Location = New System.Drawing.Point(1, 169)
             Me.lblReligion.Margin = New System.Windows.Forms.Padding(1)
             Me.lblReligion.Name = "lblReligion"
             Me.lblReligion.Size = New System.Drawing.Size(175, 24)
@@ -897,7 +890,7 @@
             Me.cacReligionIdNo.IntegralHeight = False
             Me.cacReligionIdNo.LimitToList = False
             Me.cacReligionIdNo.LinkedLabel = Me.lblNationalityCode
-            Me.cacReligionIdNo.Location = New System.Drawing.Point(177, 174)
+            Me.cacReligionIdNo.Location = New System.Drawing.Point(177, 169)
             Me.cacReligionIdNo.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
             Me.cacReligionIdNo.Name = "cacReligionIdNo"
             Me.cacReligionIdNo.OldValue = 0
@@ -924,7 +917,7 @@
             Me.lblBirthDate.EditingMode = False
             Me.lblBirthDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblBirthDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblBirthDate.Location = New System.Drawing.Point(1, 200)
+            Me.lblBirthDate.Location = New System.Drawing.Point(1, 195)
             Me.lblBirthDate.Margin = New System.Windows.Forms.Padding(1)
             Me.lblBirthDate.Name = "lblBirthDate"
             Me.lblBirthDate.Size = New System.Drawing.Size(174, 23)
@@ -948,7 +941,7 @@
             Me.dtpBirthDate.Font = New System.Drawing.Font("Tahoma", 9.75!)
             Me.dtpBirthDate.ForeColor = System.Drawing.Color.Black
             Me.dtpBirthDate.LinkedLabel = Nothing
-            Me.dtpBirthDate.Location = New System.Drawing.Point(176, 199)
+            Me.dtpBirthDate.Location = New System.Drawing.Point(176, 194)
             Me.dtpBirthDate.Margin = New System.Windows.Forms.Padding(0)
             Me.dtpBirthDate.Name = "dtpBirthDate"
             Me.dtpBirthDate.ReadOnlyDp = False
@@ -969,7 +962,7 @@
             Me.lblNationalIdNo.EditingMode = False
             Me.lblNationalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblNationalIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblNationalIdNo.Location = New System.Drawing.Point(1, 225)
+            Me.lblNationalIdNo.Location = New System.Drawing.Point(1, 220)
             Me.lblNationalIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblNationalIdNo.Name = "lblNationalIdNo"
             Me.lblNationalIdNo.Size = New System.Drawing.Size(174, 23)
@@ -996,7 +989,7 @@
             Me.txtNationalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtNationalIdNo.ForeColor = System.Drawing.Color.Black
             Me.txtNationalIdNo.LinkedLabel = Me.lblNationalIdNo
-            Me.txtNationalIdNo.Location = New System.Drawing.Point(177, 225)
+            Me.txtNationalIdNo.Location = New System.Drawing.Point(177, 220)
             Me.txtNationalIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtNationalIdNo.MaximumValue = Nothing
             Me.txtNationalIdNo.MinimumValue = Nothing
@@ -1006,6 +999,7 @@
             Me.txtNationalIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtNationalIdNo.Size = New System.Drawing.Size(200, 23)
             Me.txtNationalIdNo.TabIndex = 6
+            Me.txtNationalIdNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtNationalIdNo.Translatable = False
             Me.txtNationalIdNo.ValueIsNumeric = True
             Me.txtNationalIdNo.ValueIsUniqueBlanksAllowed = True
@@ -1016,7 +1010,7 @@
             Me.CLabel4.EditingMode = False
             Me.CLabel4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.CLabel4.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.CLabel4.Location = New System.Drawing.Point(1, 250)
+            Me.CLabel4.Location = New System.Drawing.Point(1, 245)
             Me.CLabel4.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel4.Name = "CLabel4"
             Me.CLabel4.Size = New System.Drawing.Size(174, 23)
@@ -1053,7 +1047,7 @@
             Me.cboBloodType.IntegralHeight = False
             Me.cboBloodType.LimitToList = False
             Me.cboBloodType.LinkedLabel = Me.lblMaritalStatus
-            Me.cboBloodType.Location = New System.Drawing.Point(176, 250)
+            Me.cboBloodType.Location = New System.Drawing.Point(176, 245)
             Me.cboBloodType.Margin = New System.Windows.Forms.Padding(0, 1, 0, 1)
             Me.cboBloodType.MaxDropDownItems = 1
             Me.cboBloodType.Name = "cboBloodType"
@@ -1081,7 +1075,7 @@
             Me.lblNotes.EditingMode = False
             Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblNotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblNotes.Location = New System.Drawing.Point(1, 276)
+            Me.lblNotes.Location = New System.Drawing.Point(1, 271)
             Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
             Me.lblNotes.Name = "lblNotes"
             Me.lblNotes.Size = New System.Drawing.Size(174, 23)
@@ -1108,7 +1102,7 @@
             Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
             Me.txtNotes.LinkedLabel = Me.lblNotes
-            Me.txtNotes.Location = New System.Drawing.Point(177, 276)
+            Me.txtNotes.Location = New System.Drawing.Point(177, 271)
             Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
             Me.txtNotes.MaximumValue = Nothing
             Me.txtNotes.MinimumValue = Nothing
@@ -1230,6 +1224,7 @@
             Me.DataGridViewPhoneDisplay.IsDirty = False
             Me.DataGridViewPhoneDisplay.Location = New System.Drawing.Point(3, 174)
             Me.DataGridViewPhoneDisplay.Name = "DataGridViewPhoneDisplay"
+            Me.DataGridViewPhoneDisplay.OldCellValue = Nothing
             Me.DataGridViewPhoneDisplay.ReadOnly = True
             Me.DataGridViewPhoneDisplay.RowHeadersVisible = False
             Me.DataGridViewPhoneDisplay.ScrollBars = System.Windows.Forms.ScrollBars.None
@@ -2513,6 +2508,7 @@
             Me.txtOpeningBalance.SecurityKey = "EmployeePayInfo"
             Me.txtOpeningBalance.Size = New System.Drawing.Size(93, 23)
             Me.txtOpeningBalance.TabIndex = 4
+            Me.txtOpeningBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtOpeningBalance.Translatable = False
             Me.txtOpeningBalance.ValueIsNumeric = True
             '
@@ -2563,6 +2559,7 @@
             Me.txtBalance.SecurityKey = "EmployeePayInfo"
             Me.txtBalance.Size = New System.Drawing.Size(93, 23)
             Me.txtBalance.TabIndex = 5
+            Me.txtBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtBalance.Translatable = False
             Me.txtBalance.ValueIsNumeric = True
             '
@@ -2788,6 +2785,7 @@
             Me.txtDutyHours.SecurityKey = "EmployeePayInfo"
             Me.txtDutyHours.Size = New System.Drawing.Size(93, 23)
             Me.txtDutyHours.TabIndex = 291
+            Me.txtDutyHours.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtDutyHours.Translatable = False
             Me.txtDutyHours.ValueIsNumeric = True
             '
@@ -2837,6 +2835,7 @@
             Me.txtActualDutyHours.SecurityKey = "EmployeePayInfo"
             Me.txtActualDutyHours.Size = New System.Drawing.Size(93, 23)
             Me.txtActualDutyHours.TabIndex = 294
+            Me.txtActualDutyHours.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtActualDutyHours.Translatable = False
             Me.txtActualDutyHours.ValueIsNumeric = True
             '
@@ -2893,6 +2892,7 @@
             Me.DataGridViewEarnings.IsDirty = False
             Me.DataGridViewEarnings.Location = New System.Drawing.Point(0, 0)
             Me.DataGridViewEarnings.Name = "DataGridViewEarnings"
+            Me.DataGridViewEarnings.OldCellValue = Nothing
             Me.DataGridViewEarnings.ReadOnly = True
             Me.DataGridViewEarnings.Searchable = True
             Me.DataGridViewEarnings.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -2940,6 +2940,7 @@
             Me.dgvEarningIdNo.ReadOnly = True
             Me.dgvEarningIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvEarningIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvEarningIdNo.SuggestCharCount = 0
             Me.dgvEarningIdNo.Translatable = False
             '
             'dgvEarningRate
@@ -3067,6 +3068,7 @@
             Me.DataGridViewDeductions.IsDirty = False
             Me.DataGridViewDeductions.Location = New System.Drawing.Point(3, 3)
             Me.DataGridViewDeductions.Name = "DataGridViewDeductions"
+            Me.DataGridViewDeductions.OldCellValue = Nothing
             Me.DataGridViewDeductions.ReadOnly = True
             Me.DataGridViewDeductions.Searchable = True
             Me.DataGridViewDeductions.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -3114,6 +3116,7 @@
             Me.dgvDeductionIdNo.ReadOnly = True
             Me.dgvDeductionIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvDeductionIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvDeductionIdNo.SuggestCharCount = 0
             Me.dgvDeductionIdNo.Translatable = False
             '
             'dgvDeductionRate
@@ -3245,6 +3248,7 @@
             Me.DataGridViewPhones.IsDirty = False
             Me.DataGridViewPhones.Location = New System.Drawing.Point(3, 3)
             Me.DataGridViewPhones.Name = "DataGridViewPhones"
+            Me.DataGridViewPhones.OldCellValue = Nothing
             Me.DataGridViewPhones.ReadOnly = True
             Me.DataGridViewPhones.Searchable = True
             Me.DataGridViewPhones.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -3291,6 +3295,7 @@
             Me.dgvPhoneTypeIdNo.ReadOnly = True
             Me.dgvPhoneTypeIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvPhoneTypeIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvPhoneTypeIdNo.SuggestCharCount = 0
             Me.dgvPhoneTypeIdNo.Translatable = False
             '
             'dgvCountryTelIdNo
@@ -3441,6 +3446,7 @@
             Me.DataGridViewLeaveCredits.IsDirty = False
             Me.DataGridViewLeaveCredits.Location = New System.Drawing.Point(3, 3)
             Me.DataGridViewLeaveCredits.Name = "DataGridViewLeaveCredits"
+            Me.DataGridViewLeaveCredits.OldCellValue = Nothing
             Me.DataGridViewLeaveCredits.ReadOnly = True
             Me.DataGridViewLeaveCredits.Searchable = True
             Me.DataGridViewLeaveCredits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -3476,6 +3482,7 @@
             Me.dgvLeaveIdNo.ReadOnly = True
             Me.dgvLeaveIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvLeaveIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvLeaveIdNo.SuggestCharCount = 0
             Me.dgvLeaveIdNo.Translatable = False
             '
             'dgvLeaveAllowed
@@ -3667,6 +3674,7 @@
             Me.DataGridViewDocuments.IsDirty = False
             Me.DataGridViewDocuments.Location = New System.Drawing.Point(3, 3)
             Me.DataGridViewDocuments.Name = "DataGridViewDocuments"
+            Me.DataGridViewDocuments.OldCellValue = Nothing
             Me.DataGridViewDocuments.ReadOnly = True
             Me.DataGridViewDocuments.Searchable = True
             Me.DataGridViewDocuments.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -3715,6 +3723,7 @@
             Me.dgvDocumentIdNo.ReadOnly = True
             Me.dgvDocumentIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvDocumentIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvDocumentIdNo.SuggestCharCount = 0
             Me.dgvDocumentIdNo.Translatable = False
             '
             'dgvNumber
@@ -4069,7 +4078,6 @@
         Friend WithEvents dgvDataImageIdNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvEmployeeIdNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn1 As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents CButton1 As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents cacNationalityCode As Libraries.CBaseControlsLibrary.CtComboBox
         Friend WithEvents cboSponsorType As Libraries.CBaseControlsLibrary.CaComboBox
     End Class

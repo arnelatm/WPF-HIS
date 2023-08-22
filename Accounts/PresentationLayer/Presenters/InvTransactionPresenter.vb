@@ -112,24 +112,8 @@ Namespace PresentationLayer.Presenters
         Private ReadOnly _InvTransactionItemService As New AccountsService("InvTransactionDetail")
 
         Public Property Errors As List(Of String) Implements IView.Errors
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As List(Of String))
-                Throw New NotImplementedException()
-            End Set
-        End Property
 
         Private Property IView_DataFilter As String Implements IView.DataFilter
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As String)
-                Throw New NotImplementedException()
-            End Set
-        End Property
-
-
 
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
