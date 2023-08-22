@@ -215,20 +215,22 @@ Public Class BfMain
     End Sub
 
     Public Sub TranslateForm()
-        Parent.SuspendDrawing()
-        Dim settings As New SettingsSaver
-        Dim allCtrl As New List(Of Control)
-        allCtrl = FindControlRecursive(allCtrl, Me)
-        settings.SaveSetting(Me)
-        ' form location is being changed when Resetting RightToLeftLayout so need to save values
-        ' to restore form with the same size and location
-        DoubleBuffered = True
-        TranslateCaptions(allCtrl, TextDisplayLanguage)
-        SetControlLayout(allCtrl)
-        settings.RestoreSetting(Me)
-        Parent.ResumeDrawing()
-        If GlobalVariables.TranslationMode Then
-            RaiseEvent AfterTranslateForm()
+        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
+            Parent.SuspendDrawing()
+            Dim settings As New SettingsSaver
+            Dim allCtrl As New List(Of Control)
+            allCtrl = FindControlRecursive(allCtrl, Me)
+            settings.SaveSetting(Me)
+            ' form location is being changed when Resetting RightToLeftLayout so need to save values
+            ' to restore form with the same size and location
+            DoubleBuffered = True
+            TranslateCaptions(allCtrl, TextDisplayLanguage)
+            SetControlLayout(allCtrl)
+            settings.RestoreSetting(Me)
+            Parent.ResumeDrawing()
+            If GlobalVariables.TranslationMode Then
+                RaiseEvent AfterTranslateForm()
+            End If
         End If
     End Sub
 
@@ -289,12 +291,20 @@ Public Class BfMain
     End Function
 
     Protected Sub TranslateCaptions(ByRef allCtrl As List(Of Control), ByVal desiredLanguage As String, Optional ByVal allowFallBack As Boolean = True)
-        Dim targetLanguageIdNo As Short = GetTargetLanguageIdNo(desiredLanguage, allowFallBack)
-        If targetLanguageIdNo = 0 Then
-            UseOriginalCaptions()
-        Else
-            TranslateToLanguageIdNo(allCtrl, targetLanguageIdNo)
-        End If
+        Try
+            If (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
+                ' continue
+            Else
+                Dim targetLanguageIdNo As Short = GetTargetLanguageIdNo(desiredLanguage, allowFallBack)
+                If targetLanguageIdNo = 0 Then
+                    UseOriginalCaptions()
+                Else
+                    TranslateToLanguageIdNo(allCtrl, targetLanguageIdNo)
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Function GetTargetLanguageIdNo(desiredLanguage As String, allowFallBack As Boolean) As Short
@@ -303,26 +313,28 @@ Public Class BfMain
         Dim fallBackLanguageIdNo As Int16
         Dim fallBackLanguage As String
         Dim targetLanguageIdNo As Int16
-        cmd = "Select IdNo from Languages where cultureInfoCode = '" + desiredLanguage + "'"
-        desiredLanguageIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
-        If desiredLanguageIdNo = 0 Then
-            targetLanguageIdNo = 0
-        Else
-            If Not TranslationLanguageExist(desiredLanguage) Then
-                If allowFallBack Then
-                    fallBackLanguageIdNo = GetFallBackLanguageIdNo(desiredLanguage)
-                    cmd = "Select cultureInfoCode from Languages where IdNo = " + fallBackLanguageIdNo.ToString()
-                    fallBackLanguage = TranslatorDAC.ExecScalar(Of String)(cmd)
-                    If Not NeedToTranslateText(fallBackLanguage) Then
-                        targetLanguageIdNo = 0
+        If Not (System.ComponentModel.LicenseManager.UsageMode = System.ComponentModel.LicenseUsageMode.Designtime) Then
+            cmd = "Select IdNo from Languages where cultureInfoCode = '" + desiredLanguage + "'"
+            desiredLanguageIdNo = TranslatorDAC.ExecScalar(Of Int16)(cmd)
+            If desiredLanguageIdNo = 0 Then
+                targetLanguageIdNo = 0
+            Else
+                If Not TranslationLanguageExist(desiredLanguage) Then
+                    If allowFallBack Then
+                        fallBackLanguageIdNo = GetFallBackLanguageIdNo(desiredLanguage)
+                        cmd = "Select cultureInfoCode from Languages where IdNo = " + fallBackLanguageIdNo.ToString()
+                        fallBackLanguage = TranslatorDAC.ExecScalar(Of String)(cmd)
+                        If Not NeedToTranslateText(fallBackLanguage) Then
+                            targetLanguageIdNo = 0
+                        Else
+                            targetLanguageIdNo = fallBackLanguageIdNo
+                        End If
                     Else
-                        targetLanguageIdNo = fallBackLanguageIdNo
+                        targetLanguageIdNo = 0
                     End If
                 Else
-                    targetLanguageIdNo = 0
+                    targetLanguageIdNo = desiredLanguageIdNo
                 End If
-            Else
-                targetLanguageIdNo = desiredLanguageIdNo
             End If
         End If
         Return targetLanguageIdNo
