@@ -289,7 +289,7 @@ Public Class StoreCaptions
                 End If
             Next
         Catch ex As Exception
-            MessageBox.Show(ex.Message, $"SetMenuStripItems", MessageBoxButtons.OK, MessageBoxIcon.[Error])
+            'MessageBox.Show(ex.Message, $"SetMenuStripItems", MessageBoxButtons.OK, MessageBoxIcon.[Error])
         End Try
     End Sub
 
