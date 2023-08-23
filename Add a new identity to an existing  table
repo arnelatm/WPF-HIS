@@ -1,0 +1,2 @@
+alter table Example
+add NewColumn int identity(1,1)

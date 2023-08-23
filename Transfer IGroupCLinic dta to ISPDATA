@@ -1,0 +1,41 @@
+INSERT INTO ispdata.dbo.Product ([BranchIdNo]
+      ,[Primary_Key]
+      ,[Barcode]
+      ,[BaseUnitIdNo]
+      ,[ProductCode]
+      ,[ProductName]
+      ,[ProductNameAra]
+      ,[CategoryIdNo]
+      ,[GTIN]
+      ,[Active]
+      ,[UserIdNo]
+      ,[DateCreated])
+SELECT BranchIdNo,Primary_Key,Barcode,BaseUnitIdNo,ProductCode,ProductName,ProductNameAra,CategoryIdNo,GTIN,Active,UserIdNo,DateCreated
+FROM igroupclinic.dbo.zProduct_View
+
+
+INSERT INTO ispdata.dbo.purchasedetail(PurchaseIdNo,ProductIdNo,Sequence,Quantity,BonusQuantity,UnitIdNo,BatchNo,Price,DiscountAmount,UnitSalesPrice,
+ExpiryDate, NetAmount, VatAmount, VatPercent, ExtraDiscount)
+select PurchaseIdNo,ProductIdNo,Sequence,Quantity,BonusQuantity,UnitIdNo,BatchNo,Price,DiscountAmount,UnitSalesPrice,
+ExpiryDate, NetAmount, VatAmount, VatPercent, ExtraDiscount from iGroupClinic.dbo.zpurchasedetail_view  
+
+DBCC CHECKIDENT ('Product', RESEED, 10000);
+DBCC CHECKIDENT ('Purchase', RESEED, 3000);
+DBCC CHECKIDENT ('PurchaseDetail', RESEED, 20000);
+DBCC CHECKIDENT ('Inventory', RESEED, 20000);
+
+
+
+Insert into ISPData.Dbo.Inventory(BranchIdNo,ProductIdNo,TransactionIdNo,QtyOnHand,WarehouseIdNo,TransactionType,BatchNo,ExpiryDate,UnitCost,TotalCost,UnitSalesPrice)
+select iif(b.BranchId='02',1,2),e.IdNo,d.IdNo,a.PCSQty/(c.Pack2*c.Pack3),3,'P',a.Batch,a.Expiry,a.CostPrice,a.CostPrice*a.PCSQty/(c.Pack2*c.Pack3),a.CashPrice
+from StockPositionCurrent a
+left join igroupClinic.dbo.PurchaseGroup b
+on b.TransNo = a.PurchaseNo and b.BranchID = a.BranchID
+left join IGroupClinic.dbo.ItemDetails c
+on a.item_code = c.Item_Code and a.BranchID = c.BranchID
+left join ispdata.dbo.Purchase d
+on b.Reference = d.ReferenceNo and b.BranchID = iif(d.BranchIdNo=1,'02','01') 
+left join ispdata.dbo.product e
+on c.Primary_Key = e.Primary_Key
+where a.pcsqty <> 0 and a.WarehouseID = '01' and a.BranchID = '02'
+

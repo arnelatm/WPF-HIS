@@ -25,6 +25,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             MainTableName = "Report"
             SortOrderKey = "IdNo"
+            dtpExpiryDate.Value = DateAndTime.DateAdd(DateInterval.Month, 1, DateAndTime.Now())
 
         End Sub
 

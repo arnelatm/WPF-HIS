@@ -94,7 +94,7 @@ Namespace Accounts
                             cExpDate = Mid(cExpDate, 1, 4) + "01"
                         End If
                         Dim dExpDate As Date
-                        Date.TryParseExact(CStr(cExpDate), {"yyyyMM", "yyyy/MM", "yyyy-MM", "yyMMdd"}, Nothing, DateTimeStyles.None, dExpDate)
+                        Date.TryParseExact(CStr(cExpDate), {"yyyyMM", "yyyy/MM", "yyyy-MM", "yyMMdd", "yyyy/MM/dd", "yyyyMMdd", "yyyy-MM-dd"}, Nothing, DateTimeStyles.None, dExpDate)
                         CType(product, IDictionary(Of String, Object))("ExpiryDate") = dExpDate
                         lastPosition += 6
                     Case "11" 'manufacture date

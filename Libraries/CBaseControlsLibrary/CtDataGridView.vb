@@ -631,13 +631,13 @@ Public Class CtDataGridView
         Else
             Dim value As Date
             e.Cancel = Not Date.TryParseExact(CStr(e.FormattedValue),
-                                                      {"yyyyMM", "yyyy/MM", "yyyy-MM"},
+                                                      {"yyyyMMdd", "yyyy/MM/dd", "yyyy-MM-dd", "yyyyMM", "yyyy/MM", "yyyy-MM"},
                                                       Nothing,
                                                       DateTimeStyles.None,
                                                       value)
             If Not e.Cancel Then
                 'Ensure data is displayed using the display format.
-                EditingControl.Text = value.ToString("yyyy/MM")
+                EditingControl.Text = value.ToString("yyyy/MM/dd")
                 If value < Today() Then
                     If Messaging.Show(True, "AskIfUseExpiredDate", "Are you sure you want to use this expired date?", "Please Confirm!", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = DialogResult.No Then
                         e.Cancel = True

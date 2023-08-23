@@ -127,6 +127,7 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "IspDataDb", "IspDataDb\IspD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQueries", "{E0336D98-67DC-4134-9508-7F5598295FEC}"
 	ProjectSection(SolutionItems) = preProject
+		Add a new identity to an existing  table = Add a new identity to an existing  table
 		Add constraint for not duplicate values including null values.sql = Add constraint for not duplicate values including null values.sql
 		Append a table to a new table.sql = Append a table to a new table.sql
 		Check for Duplicate Item RegistraTION pHARMACY.txt = Check for Duplicate Item RegistraTION pHARMACY.txt
@@ -170,6 +171,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateIspdata", "CreateIspd
 		Create Purchase = Create Purchase
 		Create PurchaseDetail = Create PurchaseDetail
 		Create Salt and user.sql = Create Salt and user.sql
+		Transfer IGroupCLinic dta to ISPDATA = Transfer IGroupCLinic dta to ISPDATA
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CAccounts", "Accounts\CAccounts\CAccounts.csproj", "{DFF185B6-1B96-47F7-B39B-C4B114B3C581}"
