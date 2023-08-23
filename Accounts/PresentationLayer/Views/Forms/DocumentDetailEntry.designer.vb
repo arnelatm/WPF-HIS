@@ -190,7 +190,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'CButton1
             '
-            Me.CButton1.DesignerSelected = False
+            Me.CButton1.DesignerSelected = True
             Me.CFlowLayout2.SetFlowBreak(Me.CButton1, True)
             Me.CButton1.ImageIndex = 0
             resources.ApplyResources(Me.CButton1, "CButton1")

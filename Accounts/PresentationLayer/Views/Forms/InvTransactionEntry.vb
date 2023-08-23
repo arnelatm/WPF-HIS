@@ -232,7 +232,7 @@ Namespace PresentationLayer.Views.Forms
             _footer.SetAlignment("dgvQuantity", ContentAlignment.MiddleRight)
             _footer.SetAlignment("dgvNetAmount", ContentAlignment.MiddleRight)
             _footer.SetText("dgvProductName", "Totals ->")
-            DataGridViewInvTransactionDetails.Columns("dgvExpiryDate").DefaultCellStyle.Format = "yyyy/MM"
+            DataGridViewInvTransactionDetails.Columns("dgvExpiryDate").DefaultCellStyle.Format = "yyyy/MM/dd"
             SetupDgvColumns()
             UpdateTotals()
             If DirectCast(cboWarehouseIdNo.DataSource, System.Data.DataTable).Rows.Count() < 2 Then
@@ -415,7 +415,7 @@ Namespace PresentationLayer.Views.Forms
                 ElseIf cColumnName = "dgvExpiryDate" Then
                     'Display the date in the editing format.
                     Dim cellValue = DataGridViewInvTransactionDetails.CurrentCell.Value
-                    Dim text = If(cellValue Is DBNull.Value, "", CDate(cellValue).ToString("yyyy/MM"))
+                    Dim text = If(cellValue Is DBNull.Value, "", CDate(cellValue).ToString("yyyy/MM/dd"))
                     e.Control.Text = text
                 End If
             End With

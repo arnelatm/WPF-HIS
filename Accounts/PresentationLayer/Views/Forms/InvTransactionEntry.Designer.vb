@@ -295,6 +295,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.TxtIdNo.Size = New System.Drawing.Size(123, 23)
             Me.TxtIdNo.TabIndex = 0
+            Me.TxtIdNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.TxtIdNo.Translatable = False
             Me.TxtIdNo.ValueIsNumeric = True
             '
@@ -341,6 +342,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtReferenceNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtReferenceNo.Size = New System.Drawing.Size(160, 23)
             Me.txtReferenceNo.TabIndex = 1
+            Me.txtReferenceNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtReferenceNo.Translatable = False
             Me.txtReferenceNo.ValueIsNumeric = True
             '
@@ -662,6 +664,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtJournalIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtJournalIdNo.Size = New System.Drawing.Size(133, 23)
             Me.txtJournalIdNo.TabIndex = 262
+            Me.txtJournalIdNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtJournalIdNo.Translatable = False
             Me.txtJournalIdNo.ValueIsMandatory = True
             Me.txtJournalIdNo.ValueIsNumeric = True
@@ -777,7 +780,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewInvTransactionDetails.SequenceColumn = "dgvSequence"
             Me.DataGridViewInvTransactionDetails.SequenceFieldName = "Sequence"
             Me.DataGridViewInvTransactionDetails.ShowFooter = False
-            Me.DataGridViewInvTransactionDetails.Size = New System.Drawing.Size(1074, 312)
+            Me.DataGridViewInvTransactionDetails.Size = New System.Drawing.Size(1074, 308)
             Me.DataGridViewInvTransactionDetails.TabIndex = 276
             Me.DataGridViewInvTransactionDetails.Translatable = True
             '
@@ -1101,7 +1104,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DGVDummy.SequenceColumn = "dgvSequence"
             Me.DGVDummy.SequenceFieldName = "Sequence"
             Me.DGVDummy.ShowFooter = False
-            Me.DGVDummy.Size = New System.Drawing.Size(10, 312)
+            Me.DGVDummy.Size = New System.Drawing.Size(10, 308)
             Me.DGVDummy.TabIndex = 9
             Me.DGVDummy.Translatable = True
             '
@@ -1109,7 +1112,7 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.btnPost.DesignerSelected = False
             Me.btnPost.ImageIndex = 0
-            Me.btnPost.Location = New System.Drawing.Point(3, 501)
+            Me.btnPost.Location = New System.Drawing.Point(3, 497)
             Me.btnPost.Name = "btnPost"
             Me.btnPost.OriginalImageName = Nothing
             Me.btnPost.SecurityKey = ""
@@ -1122,7 +1125,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel4.DisplayOnly = True
             Me.CLabel4.EditingMode = False
             Me.CLabel4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel4.Location = New System.Drawing.Point(236, 499)
+            Me.CLabel4.Location = New System.Drawing.Point(236, 495)
             Me.CLabel4.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel4.Name = "CLabel4"
             Me.CLabel4.Size = New System.Drawing.Size(739, 23)
@@ -1148,7 +1151,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtAmount.ForeColor = System.Drawing.Color.Black
             Me.txtAmount.LinkedLabel = Nothing
-            Me.txtAmount.Location = New System.Drawing.Point(977, 499)
+            Me.txtAmount.Location = New System.Drawing.Point(977, 495)
             Me.txtAmount.Margin = New System.Windows.Forms.Padding(1)
             Me.txtAmount.MaximumValue = Nothing
             Me.txtAmount.MinimumValue = Nothing
@@ -1171,6 +1174,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ClientSize = New System.Drawing.Size(1115, 592)
             Me.Controls.Add(Me.FlowLayoutPanel1)
             Me.Name = "InvTransactionEntry"
+            Me.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.Text = "InvTransaction Entry"
             Me.Controls.SetChildIndex(Me.FlowLayoutPanel1, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
