@@ -19,33 +19,44 @@ Namespace PresentationLayer.Presenters
             MyBase.New(view)
             AddHandler view.AddNewDocumentType, AddressOf OnAddNewDocumentType
             AddHandler view.DocumentTypeChanged, AddressOf OnDocumentTypeChanged
+            AddHandler view.LookupNeedsUpdate, AddressOf OnLookupNeedsUpdate
             Service = New AccountsService("DocumentDetail")
             TableName = "DocumentDetail"
             WithTreeView = False
             SortOrderKey = "IdNo"
         End Sub
 
+        Private Sub OnLookupNeedsUpdate()
+            UpdateLookupSources()
+        End Sub
+
         Private Sub OnDocumentTypeChanged()
             Dim documentType As String
             documentType = Service.GetField(Of String, Int32)(View.DocumentIdNo, "Document", "IdNo", "DocumentType")
-            Dim data As New ArrayList
             If documentType = EnumToCode(DocumentTypeSelection.Establishment) Then
                 View.ShowContactIdSelector = False
             Else
                 View.ShowContactIdSelector = True
                 documentType = Service.GetField(Of String, Int32)(View.DocumentIdNo, "Document", "IdNo", "DocumentType")
-                If documentType = EnumToCode(DocumentTypeSelection.Employee) Then
-                    data.Add({"Employee", View.ContactIdDataName})
-                    View.ContactDescription = Libraries.MessagingLibrary.Messaging.TranslateCaption("Employee")
-                ElseIf documentType = EnumToCode(DocumentTypeSelection.Customer) Then
-                    data.Add({"Customer", View.ContactIdDataName})
-                    View.ContactDescription = Libraries.MessagingLibrary.Messaging.TranslateCaption("Customer")
-                ElseIf documentType = EnumToCode(DocumentTypeSelection.Supplier) Then
-                    data.Add({"Supplier", View.ContactIdDataName})
-                    View.ContactDescription = Libraries.MessagingLibrary.Messaging.TranslateCaption("Supplier")
-                End If
-                CreateLookupDataThread(data)
+                UpdateLookupSources()
             End If
+        End Sub
+
+        Private Sub UpdateLookupSources()
+            Dim data As New ArrayList
+            Dim documentType As String
+            documentType = Service.GetField(Of String, Int32)(View.DocumentIdNo, "Document", "IdNo", "DocumentType")
+            If documentType = EnumToCode(DocumentTypeSelection.Employee) Then
+                data.Add({"Employee", View.ContactIdDataName})
+                View.ContactDescription = Libraries.MessagingLibrary.Messaging.TranslateCaption("Employee")
+            ElseIf documentType = EnumToCode(DocumentTypeSelection.Customer) Then
+                data.Add({"Customer", View.ContactIdDataName})
+                View.ContactDescription = Libraries.MessagingLibrary.Messaging.TranslateCaption("Customer")
+            ElseIf documentType = EnumToCode(DocumentTypeSelection.Supplier) Then
+                data.Add({"Supplier", View.ContactIdDataName})
+                View.ContactDescription = Libraries.MessagingLibrary.Messaging.TranslateCaption("Supplier")
+            End If
+            CreateLookupDataThread(data)
         End Sub
 
         Private Sub OnAddNewDocumentType()

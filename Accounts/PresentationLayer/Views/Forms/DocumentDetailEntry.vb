@@ -12,7 +12,7 @@ Namespace PresentationLayer.Views.Forms
         Private _imageFileName As String
         Public Event AddNewDocumentType() Implements IDocumentDetailView.AddNewDocumentType
         Public Event DocumentTypeChanged() Implements IDocumentDetailView.DocumentTypeChanged
-
+        Public Event LookupNeedsUpdate() Implements IDocumentDetailView.LookupNeedsUpdate
 
         Public Sub New()
             ' This call is required by the designer.
@@ -219,6 +219,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
             RaiseEvent AddNewDocumentType()
+            RaiseEvent LookupNeedsUpdate()
         End Sub
 
         Private Sub cboDocumentIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDocumentIdNo.SelectedIndexChanged
@@ -234,9 +235,6 @@ Namespace PresentationLayer.Views.Forms
             cboContactIdNo.Refresh()
         End Sub
 
-        Private Sub imgPicture_Click(sender As Object, e As EventArgs) Handles imgPicture.Click
-
-        End Sub
     End Class
 
 End Namespace
