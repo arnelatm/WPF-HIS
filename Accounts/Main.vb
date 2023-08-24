@@ -1,34 +1,14 @@
 ﻿Imports System.Security.Permissions
 Imports AATM.Accounts.PresentationLayer.Views.Forms
 
-
-'Imports System
-'Imports System.Windows.Forms
-
-'Namespace FormUI
-'    Public Module Program
-
-'        ''' <summary>
-'        ''' The main entry point for the application.
-'        ''' </summary>
-'        <STAThread>
-'        Public Sub Main()
-'            Call Application.EnableVisualStyles()
-'            Application.SetCompatibleTextRenderingDefault(False)
-'            Call Application.Run(New Dashboaard())
-'        End Sub
-
-'    End Module
-'End Namespace
-
 Public Module Main
 
     ''' <summary>
     ''' The main entry point for the application.
     ''' </summary>
     Public IdleTimer As New System.Windows.Forms.Timer()
-    'Public mainForm As New MainForm()
-    Const MilliSecondsTimeOut As Integer = 60000
+    Public WaitTimer As New System.Windows.Forms.Timer()
+    Const MilliSecondsTimeOut As Integer = 15_000_000 ' approximately 4 hours
 
     Public Sub Main()
         Call Application.EnableVisualStyles()
@@ -39,8 +19,6 @@ Public Module Main
         IdleTimer.Interval = MilliSecondsTimeOut
         AddHandler IdleTimer.Tick, AddressOf TimeDone
         IdleTimer.Start()
-        'f = New MainForm()
-        'Application.Run(f)
         Call Application.Run(MainForm)
         RemoveHandler Application.Idle, New EventHandler(AddressOf Application_Idle)
     End Sub
@@ -49,11 +27,43 @@ Public Module Main
         If Not IdleTimer.Enabled Then IdleTimer.Start()
     End Sub
 
+    Dim logOff As Boolean = False
+
     Private Sub TimeDone(ByVal sender As Object, ByVal e As EventArgs)
+
         IdleTimer.[Stop]()
-        MessageBox.Show("Auto logoff")
-        MainForm.Close()
+        logOff = True
+        Dim limf2 As LeaveIdleMessageFilter = New LeaveIdleMessageFilter()
+        Application.AddMessageFilter(limf2)
+        AddHandler Application.Idle, New EventHandler(AddressOf Application_Idle)
+        WaitTimer.Interval = 120_000 ' two minutes
+        AddHandler WaitTimer.Tick, AddressOf WaitTimeDone
+        WaitTimer.Start()
+
+        Dim x As DialogResult = AATM.Libraries.MessagingLibrary.Messaging.Show(True, "AskAutoLogOff",
+                                           MessageBoxButtons.YesNo,
+                                           MessageBoxIcon.Warning,
+                                           MessageBoxDefaultButton.Button2)
+
+        If x = DialogResult.Yes Then
+            logOff = True
+        Else
+            logOff = False
+            'WaitTimer.Stop()
+        End If
+        If logOff Then
+            MainForm.Close()
+        End If
     End Sub
+
+
+    Private Sub WaitTimeDone(ByVal sender As Object, ByVal e As EventArgs)
+        If logOff Then
+            MainForm.Close()
+        End If
+        WaitTimer.[Stop]()
+    End Sub
+
 End Module
 
 
