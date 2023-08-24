@@ -819,17 +819,27 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripButtonLTR_Click(sender As Object, e As EventArgs) Handles ToolStripButtonEnglish.Click
-            If Not GlobalVariables.RightToLeftLayout Then
-                GlobalVariables.RightToLeftLayout = False
-            End If
+            'If GlobalVariables.RightToLeftLayout Then
+            GlobalVariables.RightToLeftLayout = False
+            'End If
             SwitchUiLanguage(True)
+            SetLanguageChangeButtons()
+            'ToolStripButtonArabic.Visible = True
+            'ToolStripButtonArabic.Enabled = True
+            'ToolStripButtonEnglish.Visible = False
+            'ToolStripButtonEnglish.Enabled = False
         End Sub
 
         Private Sub ToolStripButtonRTL_Click(sender As Object, e As EventArgs) Handles ToolStripButtonArabic.Click
-            If Not GlobalVariables.RightToLeftLayout Then
-                GlobalVariables.RightToLeftLayout = True
-            End If
+            'If Not GlobalVariables.RightToLeftLayout Then
+            GlobalVariables.RightToLeftLayout = True
+            'End If
             SwitchUiLanguage(False)
+            SetLanguageChangeButtons()
+            'ToolStripButtonArabic.Visible = False
+            'ToolStripButtonArabic.Enabled = False
+            'ToolStripButtonEnglish.Visible = True
+            'ToolStripButtonEnglish.Enabled = True
         End Sub
 
         Private Sub ToolStripMenuItemChangePassword_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemChangePassword.Click
