@@ -1,18 +1,16 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
+Imports System.Security.Permissions
 Imports System.Threading
-Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Common
-Imports AATM.Common.BusinessLayer
 Imports AATM.Common.Models
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.PresentationLayer.Views.Forms
-Imports AATM.Common.PresentationLayer.Views.Interface
 Imports AATM.Libraries
 Imports AATM.Libraries.ErrorsAndEvents
 Imports AATM.Libraries.GlobalFuncNSub
@@ -22,6 +20,9 @@ Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views.Interfaces
 Imports AutoMapper
+Imports System.Timers
+Imports System
+
 
 Namespace PresentationLayer.Views.Forms
 
@@ -38,12 +39,14 @@ Namespace PresentationLayer.Views.Forms
     '''     reside in its own Visual Studio project.
     '''     MV Patterns: MVP design pattern is used throughout this WinForms application.
     ''' </remarks>
-    Partial Public Class Main
+    Partial Public Class MainForm
         Implements IUserView
+
+        Public IdleTimer As New System.Windows.Forms.Timer()
+        Const MinuteMicroseconds As Integer = 10000
 
         Public Shared AccountsMapper As IMapper
         Private _logStatus As LoginStatus
-
         Public Event UserLoggedIn(sender As Object, formControls As List(Of Control))
 
         'Private ReadOnly _presenterObj
@@ -53,15 +56,15 @@ Namespace PresentationLayer.Views.Forms
         ''' </summary>
         Public Sub New()
 
-            AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf UnhandledExceptionHandler
-            AddHandler Application.ThreadException, AddressOf ThreadExceptionHandler
-
-            Dim mySettings = AppSettings.Load()
-            GlobalVariables.TranslationMode = mySettings.TranslationInitializer
-            GlobalVariables.PreferredLanguage = mySettings.PreferredLanguage
-            _logStatus = LoginStatus.LoggedOut
             InitializeComponent()
+
             If Not (LicenseManager.UsageMode = LicenseUsageMode.Designtime) Then
+                AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf UnhandledExceptionHandler
+                AddHandler Application.ThreadException, AddressOf ThreadExceptionHandler
+                Dim mySettings = AppSettings.Load()
+                GlobalVariables.TranslationMode = mySettings.TranslationInitializer
+                GlobalVariables.PreferredLanguage = mySettings.PreferredLanguage
+                _logStatus = LoginStatus.LoggedOut
                 GlobalFunctions.SetCulture(GlobalVariables.AppCultureInfo.ToString())
                 GlobalVariables.AppCultureInfo = CultureInfo.CurrentCulture
                 GlobalVariables.AppCurrentCultureInfo = CultureInfo.CurrentCulture
@@ -71,11 +74,11 @@ Namespace PresentationLayer.Views.Forms
                     GlobalVariables.RightToLeftLayout = False
                 End If
                 SetLanguageChangeButtons()
+                SetupMapper()
+                Presenter = New UserPresenter(Of UserModel)(Me)
+                GlobalVariables.EstablishmentName = Presenter.EstablishmentName
+                GlobalVariables.EstablishmentNameAra = Presenter.EstablishmentNameAra
             End If
-            SetupMapper()
-            Presenter = New UserPresenter(Of UserModel)(Me)
-            GlobalVariables.EstablishmentName = Presenter.EstablishmentName
-            GlobalVariables.EstablishmentNameAra = Presenter.EstablishmentNameAra
         End Sub
 
         Public Event FormCultureChanged()
@@ -1246,3 +1249,75 @@ Namespace PresentationLayer.Views.Forms
     End Class
 
 End Namespace
+
+
+
+'    Module Program
+
+'        Public IdleTimer As New System.Windows.Forms.Timer()
+'        Const MinuteMicroseconds As Integer = 60000
+'        Dim f As Form1 = Nothing
+
+'        <STAThread>
+'        Private Sub Main()
+'            Application.EnableVisualStyles()
+'            Application.SetCompatibleTextRenderingDefault(False)
+'            Dim limf As LeaveIdleMessageFilter = New LeaveIdleMessageFilter()
+'            Application.AddMessageFilter(limf)
+'            AddHandler Application.Idle, New EventHandler(AddressOf Application_Idle)
+'            IdleTimer.Interval = MinuteMicroseconds
+'            AddHandler IdleTimer.Tick, AddressOf TimeDone
+
+'            IdleTimer.Start()
+'            f = New Form1()
+'            Application.Run(f)
+'            RemoveHandler Application.Idle, New EventHandler(AddressOf Application_Idle)
+'        End Sub
+
+'        Private Sub Application_Idle(ByVal sender As Object, ByVal e As EventArgs)
+'            If Not IdleTimer.Enabled Then IdleTimer.Start()
+'        End Sub
+
+'        Private Sub TimeDone(ByVal sender As Object, ByVal e As EventArgs)
+'            IdleTimer.[Stop]()
+'            MessageBox.Show("Auto logoff")
+'            f.Close()
+'        End Sub
+'    End Module
+
+'    <SecurityPermission(SecurityAction.LinkDemand, Flags:=SecurityPermissionFlag.UnmanagedCode)>
+'    Public Class LeaveIdleMessageFilter
+'        Implements System.Windows.Forms.IMessageFilter
+
+'        Const WM_NCLBUTTONDOWN As Integer = &HA1
+'        Const WM_NCLBUTTONUP As Integer = &HA2
+'        Const WM_NCRBUTTONDOWN As Integer = &HA4
+'        Const WM_NCRBUTTONUP As Integer = &HA5
+'        Const WM_NCMBUTTONDOWN As Integer = &HA7
+'        Const WM_NCMBUTTONUP As Integer = &HA8
+'        Const WM_NCXBUTTONDOWN As Integer = &HAB
+'        Const WM_NCXBUTTONUP As Integer = &HAC
+'        Const WM_KEYDOWN As Integer = &H100
+'        Const WM_KEYUP As Integer = &H101
+'        Const WM_MOUSEMOVE As Integer = &H200
+'        Const WM_LBUTTONDOWN As Integer = &H201
+'        Const WM_LBUTTONUP As Integer = &H202
+'        Const WM_RBUTTONDOWN As Integer = &H204
+'        Const WM_RBUTTONUP As Integer = &H205
+'        Const WM_MBUTTONDOWN As Integer = &H207
+'        Const WM_MBUTTONUP As Integer = &H208
+'        Const WM_XBUTTONDOWN As Integer = &H20B
+'        Const WM_XBUTTONUP As Integer = &H20C
+'        Shared Messages As Integer() = New Integer() {WM_NCLBUTTONDOWN, WM_NCLBUTTONUP, WM_NCRBUTTONDOWN, WM_NCRBUTTONUP, WM_NCMBUTTONDOWN, WM_NCMBUTTONUP, WM_NCXBUTTONDOWN, WM_NCXBUTTONUP, WM_KEYDOWN, WM_KEYUP, WM_LBUTTONDOWN, WM_LBUTTONUP, WM_RBUTTONDOWN, WM_RBUTTONUP, WM_MBUTTONDOWN, WM_MBUTTONUP, WM_XBUTTONDOWN, WM_XBUTTONUP}
+
+'        Public Function PreFilterMessage(ByRef m As Message) As Boolean Implements IMessageFilter.PreFilterMessage
+'            If m.Msg = WM_MOUSEMOVE Then Return False
+'            If Not IdleTimer.Enabled Then Return False
+'            If Array.BinarySearch(Messages, m.Msg) >= 0 Then Program.IdleTimer.[Stop]()
+'            Return False
+'        End Function
+
+'    End Class
+
+'End Namespace
+

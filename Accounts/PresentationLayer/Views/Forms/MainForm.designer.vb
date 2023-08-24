@@ -2,8 +2,8 @@
 Imports AATM.PresentationLayer.Forms
 
 Namespace PresentationLayer.Views.Forms
-    Partial Public Class Main
-        Inherits BFMain
+    Partial Public Class MainForm
+        Inherits BfMain
         ''' <summary>
         ''' Required designer variable.
         ''' </summary>
@@ -27,18 +27,18 @@ Namespace PresentationLayer.Views.Forms
         ''' the contents of this method with the code editor.
         ''' </summary>
         Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Main))
-        Me.imageListMember = New System.Windows.Forms.ImageList(Me.components)
-        Me.ToolStrip = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripButtonLogin = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButtonLogout = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButtonExit = New System.Windows.Forms.ToolStripButton()
-        Me.toolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripButtonArabic = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButtonEnglish = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButtonTranslate = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButtonDebug = New System.Windows.Forms.ToolStripButton()
+            Me.components = New System.ComponentModel.Container()
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
+            Me.imageListMember = New System.Windows.Forms.ImageList(Me.components)
+            Me.ToolStrip = New System.Windows.Forms.ToolStrip()
+            Me.ToolStripButtonLogin = New System.Windows.Forms.ToolStripButton()
+            Me.ToolStripButtonLogout = New System.Windows.Forms.ToolStripButton()
+            Me.ToolStripButtonExit = New System.Windows.Forms.ToolStripButton()
+            Me.toolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+            Me.ToolStripButtonArabic = New System.Windows.Forms.ToolStripButton()
+            Me.ToolStripButtonEnglish = New System.Windows.Forms.ToolStripButton()
+            Me.ToolStripButtonTranslate = New System.Windows.Forms.ToolStripButton()
+            Me.ToolStripButtonDebug = New System.Windows.Forms.ToolStripButton()
             Me.ToolStripButtonDrugSale = New System.Windows.Forms.ToolStripButton()
             Me.ToolStripButtonPrescription = New System.Windows.Forms.ToolStripButton()
             Me.ToolStripButtonDoseLabel = New System.Windows.Forms.ToolStripButton()
@@ -1403,7 +1403,7 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'Main
+            'MainForm
             '
             Me.AllowDrop = True
             resources.ApplyResources(Me, "$this")
@@ -1413,7 +1413,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DoubleBuffered = True
             Me.IsMdiContainer = True
             Me.MenuFormName = "Menu"
-            Me.Name = "Main"
+            Me.Name = "MainForm"
             Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ToolStrip.ResumeLayout(False)
