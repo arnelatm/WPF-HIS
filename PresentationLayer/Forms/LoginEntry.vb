@@ -115,7 +115,7 @@ Public Class LoginEntry
 
     Public Property BranchIdNo As Int16
         Get
-            Return cboBranchIdNo.GetNullableValue(Of Int16)
+            Return cboBranchIdNo.GetValue(Of Int16)
         End Get
         Set
             cboBranchIdNo.SetValue(Value)

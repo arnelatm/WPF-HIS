@@ -490,7 +490,20 @@ Public Class CaComboBox
         If value Is DBNull.Value OrElse value Is Nothing Then
             SelectedIndex = -1
         Else
-            SelectedValue = value
+            Select Case ValueMember
+                Case "IdNo"
+                    IdNoSearch(value)
+                Case "Code"
+                    CodeSearch(value)
+                Case "Name"
+                    NameSearch(value)
+                Case Else
+                    Debugger.Break()
+            End Select
+
+            'SelectedIndex = FindString(value)
+            'CodeSearch(value)
+            'SelectedValue = value
         End If
     End Sub
 
@@ -526,11 +539,11 @@ Public Class CaComboBox
                 If item.IdNo = value Then
                     'SelectedIndex = i
                     'Dim lReadOnlyCombo As Boolean = Visible
-                    If Visible Then
-                        SelectedItem = DataSource(i)
-                    Else
-                        SelectedItem = DataSource(i)
-                    End If
+                    'If Visible Then
+                    SelectedItem = DataSource(i)
+                    'Else
+                    'SelectedItem = DataSource(i)
+                    'End If
                     '    Visible = True
                     '    DisplayOnly = False
                     '    ReadOnlyCombo = False

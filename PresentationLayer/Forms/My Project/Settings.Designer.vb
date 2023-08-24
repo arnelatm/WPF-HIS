@@ -91,14 +91,14 @@ Namespace My
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("1")>  _
-        Public Property BranchIdNo() As Integer
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.Configuration.DefaultSettingValueAttribute("1")>
+        Public Property BranchIdNo() As Int16
             Get
-                Return CType(Me("BranchIdNo"),Integer)
+                Return CType(Me("BranchIdNo"), Int16)
             End Get
             Set
-                Me("BranchIdNo") = value
+                Me("BranchIdNo") = Value
             End Set
         End Property
     End Class

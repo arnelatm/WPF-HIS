@@ -26,6 +26,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Picture As Image
         Event AddNewDocumentType()
         Event DocumentTypeChanged()
+        Event LookupNeedsUpdate()
 
     End Interface
 
