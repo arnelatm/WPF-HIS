@@ -4,6 +4,7 @@ Public Class OneTimeRun
 
     Public Shared Sub CreateAllMessages()
         Messaging.AddMessage("AskAddAnotherRecord", "Do you want to add another record?", "Please Confirm")
+        Messaging.AddMessage("AskAutoLogOff", "Program will close in two minutes, press cancel to continue working?", "Please Confirm")
         Messaging.AddMessage("AskContinueWithPreviousSearch", "Continue with previous search (Yes) or create a new search (No)?", "Information")
         Messaging.AddMessage("AskIfContinueAction", "Are you sure you want to {action} this {itemName} entry?", "Please confirm!")
         Messaging.AddMessage("AskIfDeleteRecord", "Are you sure you want to delete this record?", "Please Confirm Delete!")
