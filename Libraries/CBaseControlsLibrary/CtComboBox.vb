@@ -484,36 +484,52 @@ Public Class CtComboBox
         If value Is DBNull.Value OrElse value Is Nothing Then
             SelectedIndex = -1
         Else
-            Select Case ValueMember
-                Case "IdNo"
-                    IdNoSearch(value)
-                Case "Code"
-                    CodeSearch(value)
-                Case "Name"
-                    NameSearch(value)
-                Case Else
-                    Debugger.Break()
-                    SelectedValue = value
-            End Select
+            ValueSearch(value)
         End If
     End Sub
 
     Public Property DataValue
 
+
+
+    Private Sub ValueSearch(value As Object)
+        Dim returnValue As Int32
+        Dim found As Boolean = False
+        Dim i = 0
+        If DataSource IsNot Nothing Then
+            For Each item As DataRow In DataSource.Rows()
+                If item(ValueMember) = value Then
+                    SelectedItem = item
+                    found = True
+                    Exit For
+                End If
+                i += 1
+            Next
+            If Not found Then
+                SelectedIndex = -1
+                returnValue = Nothing
+                If value IsNot Nothing Then
+                    Text = value
+                End If
+            End If
+        Else
+            SelectedIndex = -1
+        End If
+    End Sub
+
+
     Private Sub IdNoSearch(value As Object)
         Dim returnValue As Int32
         Dim found As Boolean = False
         Dim i = 0
-        Dim dr As DataRow
-        dr = DataSource.Select("IdNo='" & value & "'")
-        If dr IsNot Nothing Then
-            For Each item In DataSource
-                If item.IdNo = value Then
-                    If Visible Then
-                        SelectedItem = dr.Item("IdNo")
-                    Else
-                        SelectedItem = DataSource(i)
-                    End If
+        If DataSource IsNot Nothing Then
+            For Each item As DataRow In DataSource.Rows()
+                If item(ValueMember) = value Then
+                    'If Visible Then
+                    SelectedItem = item
+                    'Else
+                    '    SelectedItem = DataSource(i)
+                    'End If
                     found = True
                     Exit For
                 End If
@@ -537,7 +553,7 @@ Public Class CtComboBox
         If DataSource IsNot Nothing Then
             For Each item In DataSource
                 If item.Code = value Then
-                    SelectedItem = DataSource(i)
+                    SelectedItem = DataSource(i).Code
                     found = True
                     Exit For
                 End If
@@ -560,7 +576,7 @@ Public Class CtComboBox
         If DataSource IsNot Nothing Then
             For Each item In DataSource
                 If item.Name = value Then
-                    SelectedItem = DataSource(i)
+                    SelectedItem = DataSource(i).Name
                     found = True
                     Exit For
                 End If
