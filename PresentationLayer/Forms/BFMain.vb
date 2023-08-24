@@ -201,7 +201,7 @@ Public Class BfMain
                 TextDisplayLanguage = GlobalVariables.DefaultMirroredCultureInfoStr
                 sw = 1
             End If
-            GlobalVariables.RightToLeftLayout = False
+            GlobalVariables.RightToLeftLayout = True
             RightToLeft = RightToLeft.Yes
         End If
         TranslateForm()

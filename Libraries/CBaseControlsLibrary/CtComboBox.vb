@@ -499,7 +499,7 @@ Public Class CtComboBox
         If DataSource IsNot Nothing Then
             For Each item As DataRow In DataSource.Rows()
                 If item(ValueMember) = value Then
-                    SelectedItem = item
+                    SelectedIndex = i
                     found = True
                     Exit For
                 End If
