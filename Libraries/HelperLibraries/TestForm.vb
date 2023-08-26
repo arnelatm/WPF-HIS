@@ -1,7 +1,7 @@
 ﻿Imports System.Threading
 Imports System.Windows.Forms
 
-Public Class MainForm
+Public Class TestForm
 
     Public Sub New()
 
