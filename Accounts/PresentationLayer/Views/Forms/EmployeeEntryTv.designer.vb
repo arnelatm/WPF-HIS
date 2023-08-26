@@ -579,6 +579,7 @@
             Me.tbcEmployee.Location = New System.Drawing.Point(3, 79)
             Me.tbcEmployee.Name = "tbcEmployee"
             Me.tbcEmployee.RightToLeft = System.Windows.Forms.RightToLeft.No
+            Me.tbcEmployee.SecurityKey = "EmployeeEarnings"
             Me.tbcEmployee.SelectedIndex = 0
             Me.tbcEmployee.Size = New System.Drawing.Size(677, 387)
             Me.tbcEmployee.TabIndex = 215
@@ -2896,7 +2897,7 @@
             Me.DataGridViewEarnings.ReadOnly = True
             Me.DataGridViewEarnings.Searchable = True
             Me.DataGridViewEarnings.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.DataGridViewEarnings.SecurityKey = ""
+            Me.DataGridViewEarnings.SecurityKey = "PayrollData"
             Me.DataGridViewEarnings.SequenceColumn = "dgvSequenceEarning"
             Me.DataGridViewEarnings.SequenceFieldName = "Sequence"
             Me.DataGridViewEarnings.ShowFooter = True
@@ -3072,7 +3073,7 @@
             Me.DataGridViewDeductions.ReadOnly = True
             Me.DataGridViewDeductions.Searchable = True
             Me.DataGridViewDeductions.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.DataGridViewDeductions.SecurityKey = ""
+            Me.DataGridViewDeductions.SecurityKey = "EmployeeDeductions"
             Me.DataGridViewDeductions.SequenceColumn = "dgvSequenceDeduction"
             Me.DataGridViewDeductions.SequenceFieldName = "Sequence"
             Me.DataGridViewDeductions.ShowFooter = False
