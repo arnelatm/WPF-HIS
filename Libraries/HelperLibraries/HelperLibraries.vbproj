@@ -129,16 +129,16 @@
     <Compile Include="LoadingForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.designer.vb">
-      <DependentUpon>MainForm.vb</DependentUpon>
+    <Compile Include="TestForm.designer.vb">
+      <DependentUpon>TestForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.vb">
+    <Compile Include="TestForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm2.Designer.vb">
-      <DependentUpon>MainForm2.vb</DependentUpon>
+    <Compile Include="TestForm2.Designer.vb">
+      <DependentUpon>TestForm2.vb</DependentUpon>
     </Compile>
-    <Compile Include="MainForm2.vb">
+    <Compile Include="TestForm2.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MatchParentAttribute.vb" />
@@ -180,11 +180,11 @@
     <EmbeddedResource Include="LoadingForm.resx">
       <DependentUpon>LoadingForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.vb</DependentUpon>
+    <EmbeddedResource Include="TestForm.resx">
+      <DependentUpon>TestForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm2.resx">
-      <DependentUpon>MainForm2.vb</DependentUpon>
+    <EmbeddedResource Include="TestForm2.resx">
+      <DependentUpon>TestForm2.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

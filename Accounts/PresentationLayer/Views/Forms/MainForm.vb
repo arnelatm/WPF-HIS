@@ -1251,6 +1251,10 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of DocumentDetailEntry, DocumentDetailPresenter(Of DocumentDetailModel))()
         End Sub
 
+        Private Sub ToolStripMenuItemPurchaseOrder_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPurchaseOrder.Click
+            RunForm(Of PurchaseOrderEntry, PurchaseOrderPresenter(Of PurchaseOrderModel))()
+        End Sub
+
 
         'Private Sub ToolStripMenuItemDrInvestigationsPrescriptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDrInvestigationsPrescriptions.Click
         '    'RunForm(Of PmrInvestigationRequestForm, PMRInvestigationPresenter(Of PmrInvestigationModel))()

@@ -240,6 +240,8 @@
     <Compile Include="BusinessLayer\IGroup\Prescription.vb" />
     <Compile Include="BusinessLayer\IGroup\PrescriptionItem.vb" />
     <Compile Include="BusinessLayer\IGroup\StockInventory.vb" />
+    <Compile Include="BusinessLayer\PurchaseOrderDetail.vb" />
+    <Compile Include="BusinessLayer\PurchaseOrder.vb" />
     <Compile Include="BusinessLayer\InvTransaction.vb" />
     <Compile Include="BusinessLayer\ItemCode.vb" />
     <Compile Include="BusinessLayer\CodeGroup.vb" />
@@ -335,6 +337,8 @@
     <Compile Include="DataLayer\AdoNet\IGroup\DosageMasterDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\PrescriptionDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\PrescriptionItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PurchaseOrderDetailDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PurchaseOrderDao.vb" />
     <Compile Include="DataLayer\AdoNet\InvTransTypeDao.vb" />
     <Compile Include="DataLayer\AdoNet\InvTransactionDao.vb" />
     <Compile Include="DataLayer\AdoNet\InvTransactionDetailDao.vb" />
@@ -481,6 +485,8 @@
     <Compile Include="PresentationLayer\Models\IGroup\PrescriptionModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\StockInventoryModel.vb" />
     <Compile Include="PresentationLayer\Models\InventoryModel.vb" />
+    <Compile Include="PresentationLayer\Models\PurchaseOrderDetailModel.vb" />
+    <Compile Include="PresentationLayer\Models\PurchaseOrderModel.vb" />
     <Compile Include="PresentationLayer\Models\InvTransactionModel.vb" />
     <Compile Include="PresentationLayer\Models\InvTransTypeModel.vb" />
     <Compile Include="PresentationLayer\Models\SettingModel.vb" />
@@ -547,6 +553,7 @@
     <Compile Include="PresentationLayer\Presenters\FinancialReportPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\HRReportsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DocumentDetailPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\PurchaseOrderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ProductFinderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\InventorySelectorPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\InvTransTypePresenter.vb" />
@@ -656,6 +663,12 @@
     <Compile Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsFinder.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\PurchaserOrderEntry.Designer.vb">
+      <DependentUpon>PurchaserOrderEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\PurchaserOrderEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\FinancialReport.designer.vb">
       <DependentUpon>FinancialReport.vb</DependentUpon>
     </Compile>
@@ -685,6 +698,8 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IDocumentDetailView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IFinancialReportView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IHrReportsView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IPurchaseOrderDetailView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IPurchaseOrderView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IProductFinderView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IInventoryView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IInventorySelectorView.vb" />
@@ -727,6 +742,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IInvTransactionDetailView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISaleDetailView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISaleView.vb" />
+    <Compile Include="PresentationLayer\Views\PurchaseOrderDetailView.vb" />
     <Compile Include="PresentationLayer\Views\ProductUnitView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\ApJournalEntry.designer.vb">
       <DependentUpon>ApJournalEntry.vb</DependentUpon>
@@ -2022,6 +2038,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsFinder.resx">
       <DependentUpon>ItemDetailsFinder.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\PurchaserOrderEntry.resx">
+      <DependentUpon>PurchaserOrderEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\InvTransTypeEntryTv.resx">

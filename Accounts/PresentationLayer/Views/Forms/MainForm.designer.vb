@@ -248,6 +248,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemPurchaseOrder = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -769,7 +770,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemPurchases
             '
-            Me.ToolStripMenuItemPurchases.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPurchase, Me.ToolStripMenuItemPurchaseReturn})
+            Me.ToolStripMenuItemPurchases.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPurchase, Me.ToolStripMenuItemPurchaseReturn, Me.ToolStripMenuItemPurchaseOrder})
             Me.ToolStripMenuItemPurchases.Name = "ToolStripMenuItemPurchases"
             resources.ApplyResources(Me.ToolStripMenuItemPurchases, "ToolStripMenuItemPurchases")
             '
@@ -1403,6 +1404,11 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
+            'ToolStripMenuItemPurchaseOrder
+            '
+            Me.ToolStripMenuItemPurchaseOrder.Name = "ToolStripMenuItemPurchaseOrder"
+            resources.ApplyResources(Me.ToolStripMenuItemPurchaseOrder, "ToolStripMenuItemPurchaseOrder")
+            '
             'MainForm
             '
             Me.AllowDrop = True
@@ -1648,5 +1654,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemDrInvestigationsPrescriptions As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemBSCustom As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDocManagement As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemPurchaseOrder As ToolStripMenuItem
     End Class
 End NameSpace

@@ -259,6 +259,11 @@ Public Class MappingProfileAccounts
         CreateMap(Of InvTransactionDetail, InvTransactionDetailModel)().ReverseMap()
         CreateMap(Of InvTransactionDetailModel, InvTransactionDetailView)().ReverseMap()
 
+        CreateMap(Of PurchaseOrder, PurchaseOrderModel)().ReverseMap()
+        CreateMap(Of PurchaseOrderModel, IPurchaseOrderView)().ReverseMap()
+
+        CreateMap(Of PurchaseOrderDetail, PurchaseOrderDetailModel)().ReverseMap()
+        CreateMap(Of PurchaseOrderDetailModel, PurchaseOrderDetailView)().ReverseMap()
 
         CreateMap(Of PmrPatientDisplay, PmrPatientDisplayModel)().ReverseMap()
         CreateMap(Of PmrPatientDisplayModel, IPmrPatientDisplayView)().ReverseMap()
@@ -268,7 +273,7 @@ Public Class MappingProfileAccounts
         CreateMap(Of DocumentDetailModel, IDocumentDetailView)().ReverseMap()
 
         CreateMap(Of Inventory, InventoryModel)().ReverseMap()
-        'CreateMap(Of InvTransactionModel, IInvTransactionView)().ReverseMap()
+
 
     End Sub
 
