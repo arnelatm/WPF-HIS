@@ -1,10 +1,13 @@
 ﻿Imports System.Dynamic
+Imports System.Globalization
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
+Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries
+Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
@@ -142,26 +145,13 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Overrides Sub GoPrintRecord()
-            'Dim transactionAmount As String
-            'Dim totalApAmount As String
-            'Dim currencies As New List(Of CurrencyInfo)()
-            'Dim curCulture = CultureInfo.CurrentCulture
-            'CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-            'Dim language As String
-            'language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            'currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-            'If language = "ar" Then
-            '    transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
-            'Else
-            '    transactionAmount = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
-            'End If
-            'If language = "ar" Then
-            '    totalApAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToArabic()
-            'Else
-            '    totalApAmount = New ToWord(View.TotalCredits, currencies(0)).ConvertToEnglish()
-            'End If
-            'Dim cForm As New ReportForm("Accounts Payable Journal.Rpt", View.IdNo, "PurchaseIdNo", transactionAmount, "ApAmountInWords", totalApAmount, "TotalLineAmountInWords", language, "Language")
-            'cForm.Show()
+            Dim cr As New CrPrintableArgs
+            Dim pr As New PrintReportPresenter(Of InvTransactionModel)
+            Dim title As String = Messaging.TranslateCaption("Purchase Report")
+            cr.ReportFileName = "Purchase Report.Rpt"
+            cr.Language = CultureInfo.CurrentCulture.Name
+            cr.ReportParameters = {cr.Language, "Language", title, "ReportTitle", View.IdNo, "PurchaseIdNo"}
+            pr.PrintReport(cr.ReportFileName, cr, False)
         End Sub
 
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete

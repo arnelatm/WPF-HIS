@@ -12,19 +12,21 @@ Public Module GlobalSubs
         Dim pInfo As PropertyInfo = objType.GetProperty(propName,
                                                         BindingFlags.IgnoreCase Or BindingFlags.IgnoreCase Or
                                                         BindingFlags.Public Or BindingFlags.Instance)
-        'Dim pInfo As System.Reflection.PropertyInfo = objType.GetProperty(PropName, Reflection.BindingFlags.GetProperty)
-        Try
-            'If  objType.FullName = "AATM.CCustomControls.CCustomDateTimePicker" Then
-            '   Debugger.Break
-            'End If
-            pInfo.SetValue(obj, propValue, BindingFlags.GetProperty, Nothing, Nothing, Nothing)
-        Catch ex As Exception
-            If Not ignoreException Then
-                MessageBox.Show("Invalid property " & propName & " in object " & obj.Name)
-                Throw
-                ' not set
-            End If
-        End Try
+        If pInfo IsNot Nothing Then
+            'Dim pInfo As System.Reflection.PropertyInfo = objType.GetProperty(PropName, Reflection.BindingFlags.GetProperty)
+            Try
+                'If  objType.FullName = "AATM.CCustomControls.CCustomDateTimePicker" Then
+                '   Debugger.Break
+                'End If
+                pInfo.SetValue(obj, propValue, BindingFlags.GetProperty, Nothing, Nothing, Nothing)
+            Catch ex As Exception
+                If Not ignoreException Then
+                    MessageBox.Show("Invalid property " & propName & " in object " & obj.Name)
+                    Throw
+                    ' not set
+                End If
+            End Try
+        End If
     End Sub
 
     Public Sub SwapPosition(c1 As Control, c2 As Control)
