@@ -1677,8 +1677,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Else
             objectSecurityKey = GetControlSecurityKey(cCtrl)
             If objectSecurityKey Is Nothing OrElse objectSecurityKey = "" Then
-                'cCtrl.Visible = True
-                'cCtrl.Enabled = True
+                'leave default values as is
             Else
                 Dim controlSecurityValues As ArrayList
                 Dim isEditable As Boolean
@@ -1707,15 +1706,17 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         If Not controlVisible Then
             'If TypeOf cCtrl Is CTextBox OrElse TypeOf cCtrl Is TextBox Then
             '    SetPropertyValue(cCtrl, "PasswordChar", Convert.ToChar("*"))
-            If TypeOf cCtrl Is CTabPage Then
-                'Dim tabControlObj As CTabControl
-                'Dim tabPageObj As CTabPage
-                'tabControlObj = cCtrl.Parent
-                'tabPageObj = cCtrl
-                'tabControlObj.TabPages.Remove(cCtrl)
-            Else
-                SetPropertyValue(cCtrl, "Visible", False)
-            End If
+            'If TypeOf cCtrl Is CTabPage Then
+            '    Debugger.Break()
+            '    'Dim tabControlObj As CTabControl
+            '    'Dim tabPageObj As CTabPage
+            '    'tabControlObj = cCtrl.Parent
+            '    'tabPageObj = cCtrl
+            '    'tabControlObj.TabPages.Remove(cCtrl)
+            '    SetPropertyValue(cCtrl, "Visible", False)
+            'Else
+            SetPropertyValue(cCtrl, "Visible", False)
+            'End If
         End If
     End Sub
 

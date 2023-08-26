@@ -579,10 +579,10 @@
             Me.tbcEmployee.Location = New System.Drawing.Point(3, 79)
             Me.tbcEmployee.Name = "tbcEmployee"
             Me.tbcEmployee.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.tbcEmployee.SecurityKey = "EmployeeEarnings"
+            Me.tbcEmployee.SecurityKey = ""
             Me.tbcEmployee.SelectedIndex = 0
             Me.tbcEmployee.Size = New System.Drawing.Size(677, 387)
-            Me.tbcEmployee.TabIndex = 215
+            Me.tbcEmployee.TabIndex = 4
             '
             'tbpPersonal
             '
@@ -2027,7 +2027,7 @@
             Me.lblSponsorType.Location = New System.Drawing.Point(4, 108)
             Me.lblSponsorType.Margin = New System.Windows.Forms.Padding(1)
             Me.lblSponsorType.Name = "lblSponsorType"
-            Me.lblSponsorType.SecurityKey = "EPI"
+            Me.lblSponsorType.SecurityKey = ""
             Me.lblSponsorType.Size = New System.Drawing.Size(174, 23)
             Me.lblSponsorType.TabIndex = 292
             Me.lblSponsorType.Text = "Sponsor Type"
@@ -2342,7 +2342,7 @@
             Me.cboPaymentMethod.Size = New System.Drawing.Size(402, 24)
             Me.cboPaymentMethod.SuggestBoxHeight = 200
             Me.cboPaymentMethod.SuggestListOrderRule = Nothing
-            Me.cboPaymentMethod.TabIndex = 287
+            Me.cboPaymentMethod.TabIndex = 1
             Me.cboPaymentMethod.TextToSearch = Nothing
             Me.cboPaymentMethod.Translatable = False
             Me.cboPaymentMethod.ValueIsMandatory = False
@@ -2438,6 +2438,7 @@
             Me.txtBankAccountNo.ComputedValue = False
             Me.txtBankAccountNo.CustomFormat = Nothing
             Me.txtBankAccountNo.DataBoundControl = True
+            Me.txtBankAccountNo.DisplayOnly = True
             Me.txtBankAccountNo.EditingMode = False
             Me.txtBankAccountNo.EndFindValue = Nothing
             Me.txtBankAccountNo.FieldDescription = Nothing
@@ -2447,7 +2448,7 @@
             Me.floPayroll.SetFlowBreak(Me.txtBankAccountNo, True)
             Me.txtBankAccountNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtBankAccountNo.ForeColor = System.Drawing.Color.Black
-            Me.txtBankAccountNo.LinkedLabel = Me.lblBankAccountNo
+            Me.txtBankAccountNo.LinkedLabel = Me.lblOpeningBalance
             Me.txtBankAccountNo.Location = New System.Drawing.Point(191, 56)
             Me.txtBankAccountNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtBankAccountNo.MaximumValue = Nothing
@@ -2460,7 +2461,9 @@
             Me.txtBankAccountNo.SecurityKey = "EmployeePayInfo"
             Me.txtBankAccountNo.Size = New System.Drawing.Size(200, 23)
             Me.txtBankAccountNo.TabIndex = 3
+            Me.txtBankAccountNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtBankAccountNo.Translatable = False
+            Me.txtBankAccountNo.ValueIsNumeric = True
             '
             'lblOpeningBalance
             '
@@ -2732,7 +2735,7 @@
             Me.cboPayGroupIdNo.SuggestBoxHeight = 200
             Me.cboPayGroupIdNo.SuggestCharCount = 0
             Me.cboPayGroupIdNo.SuggestListOrderRule = Nothing
-            Me.cboPayGroupIdNo.TabIndex = 289
+            Me.cboPayGroupIdNo.TabIndex = 8
             Me.cboPayGroupIdNo.TextToSearch = Nothing
             Me.cboPayGroupIdNo.Translatable = False
             Me.cboPayGroupIdNo.ValueIsMandatory = False
@@ -2785,7 +2788,7 @@
             Me.txtDutyHours.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtDutyHours.SecurityKey = "EmployeePayInfo"
             Me.txtDutyHours.Size = New System.Drawing.Size(93, 23)
-            Me.txtDutyHours.TabIndex = 291
+            Me.txtDutyHours.TabIndex = 9
             Me.txtDutyHours.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtDutyHours.Translatable = False
             Me.txtDutyHours.ValueIsNumeric = True
@@ -2835,7 +2838,7 @@
             Me.txtActualDutyHours.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtActualDutyHours.SecurityKey = "EmployeePayInfo"
             Me.txtActualDutyHours.Size = New System.Drawing.Size(93, 23)
-            Me.txtActualDutyHours.TabIndex = 294
+            Me.txtActualDutyHours.TabIndex = 10
             Me.txtActualDutyHours.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtActualDutyHours.Translatable = False
             Me.txtActualDutyHours.ValueIsNumeric = True
@@ -2897,7 +2900,7 @@
             Me.DataGridViewEarnings.ReadOnly = True
             Me.DataGridViewEarnings.Searchable = True
             Me.DataGridViewEarnings.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.DataGridViewEarnings.SecurityKey = "PayrollData"
+            Me.DataGridViewEarnings.SecurityKey = "EmployeeEarnings"
             Me.DataGridViewEarnings.SequenceColumn = "dgvSequenceEarning"
             Me.DataGridViewEarnings.SequenceFieldName = "Sequence"
             Me.DataGridViewEarnings.ShowFooter = True
@@ -3451,7 +3454,7 @@
             Me.DataGridViewLeaveCredits.ReadOnly = True
             Me.DataGridViewLeaveCredits.Searchable = True
             Me.DataGridViewLeaveCredits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.DataGridViewLeaveCredits.SecurityKey = ""
+            Me.DataGridViewLeaveCredits.SecurityKey = "EmpLeaveCredits"
             Me.DataGridViewLeaveCredits.SequenceColumn = "dgvSequenceLeaveCredits"
             Me.DataGridViewLeaveCredits.SequenceFieldName = "Sequence"
             Me.DataGridViewLeaveCredits.ShowCellErrors = False
@@ -3993,7 +3996,6 @@
         Friend WithEvents lblBankIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents cacBankIdNo As Libraries.CBaseControlsLibrary.CtComboBox
         Friend WithEvents lblBankAccountNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents txtBankAccountNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblOpeningBalance As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtOpeningBalance As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblBalance As Libraries.CBaseControlsLibrary.CLabel
@@ -4081,5 +4083,6 @@
         Friend WithEvents IdNoDataGridViewTextBoxColumn1 As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents cacNationalityCode As Libraries.CBaseControlsLibrary.CtComboBox
         Friend WithEvents cboSponsorType As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents txtBankAccountNo As Libraries.CBaseControlsLibrary.CTextBox
     End Class
 End NameSpace
