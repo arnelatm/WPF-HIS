@@ -238,16 +238,22 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub imgPicture_DoubleClick(sender As Object, e As EventArgs) Handles imgPicture.DoubleClick
-            ViewPicture()
+            Dim tempFileName As String = GetPictureFileName()
+            ViewPicture(tempFileName)
         End Sub
 
         Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPictureViewer.ClickButtonArea
+            Dim tempFileName As String = GetPictureFileName()
+            ViewPicture(tempFileName)
+        End Sub
+
+        Private Function GetPictureFileName() As String
             Dim data As Byte() = {}
             Dim saveImage As New Bitmap(Picture)
             Dim tempFileName As String = Path.GetTempFileName() + ".Jpg"
             saveImage.Save(tempFileName, System.Drawing.Imaging.ImageFormat.Jpeg)
             saveImage.Dispose()
-                Dim cPictureBox As New PictureBox
+            Dim cPictureBox As New PictureBox
             cPictureBox.Image = Image.FromFile(tempFileName)
             Using ms = New MemoryStream()
                 If Picture IsNot Nothing Then
@@ -255,11 +261,10 @@ Namespace PresentationLayer.Views.Forms
                     data = ms.ToArray()
                 End If
             End Using
-            ViewPicture()
-        End Sub
+            Return tempFileName
+        End Function
 
-        Private Sub ViewPicture()
-            Dim fileName = "C:\temp\picture.jpg"
+        Private Sub ViewPicture(fileName As String)
             Dim p = New Process
             p.StartInfo.FileName = fileName
             p.StartInfo.Verb = "Open"
