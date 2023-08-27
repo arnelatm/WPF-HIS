@@ -54,6 +54,7 @@ Namespace PresentationLayer.Views.Forms
             Me.imgPicture = New AATM.Libraries.CBaseControlsLibrary.CPictureBox()
             Me.txtDataImageNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtContactType = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.btnPictureViewer = New AATM.Libraries.CBaseControlsLibrary.CButton()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             CType(Me.imgPicture, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -174,6 +175,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.Controls.Add(Me.chkActive)
             Me.CFlowLayout2.Controls.Add(Me.lblPicture)
             Me.CFlowLayout2.Controls.Add(Me.imgPicture)
+            Me.CFlowLayout2.Controls.Add(Me.btnPictureViewer)
             Me.CFlowLayout2.Controls.Add(Me.txtDataImageNo)
             Me.CFlowLayout2.Controls.Add(Me.txtContactType)
             resources.ApplyResources(Me.CFlowLayout2, "CFlowLayout2")
@@ -190,7 +192,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'CButton1
             '
-            Me.CButton1.DesignerSelected = True
+            Me.CButton1.DesignerSelected = False
             Me.CFlowLayout2.SetFlowBreak(Me.CButton1, True)
             Me.CButton1.ImageIndex = 0
             resources.ApplyResources(Me.CButton1, "CButton1")
@@ -498,7 +500,6 @@ Namespace PresentationLayer.Views.Forms
             Me.imgPicture.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
             Me.imgPicture.DisplayOnly = False
             Me.imgPicture.EditingMode = False
-            Me.CFlowLayout2.SetFlowBreak(Me.imgPicture, True)
             resources.ApplyResources(Me.imgPicture, "imgPicture")
             Me.imgPicture.MaxImageSize = 240000
             Me.imgPicture.Name = "imgPicture"
@@ -559,6 +560,15 @@ Namespace PresentationLayer.Views.Forms
             Me.txtContactType.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtContactType.Translatable = False
             '
+            'btnPictureViewer
+            '
+            Me.btnPictureViewer.DesignerSelected = True
+            Me.btnPictureViewer.ImageIndex = 0
+            resources.ApplyResources(Me.btnPictureViewer, "btnPictureViewer")
+            Me.btnPictureViewer.Name = "btnPictureViewer"
+            Me.btnPictureViewer.OriginalImageName = Nothing
+            Me.btnPictureViewer.SecurityKey = ""
+            '
             'DocumentDetailEntry
             '
             resources.ApplyResources(Me, "$this")
@@ -601,5 +611,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents CButton1 As CButton
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents txtContactType As CTextBox
+        Friend WithEvents btnPictureViewer As CButton
     End Class
 End Namespace
