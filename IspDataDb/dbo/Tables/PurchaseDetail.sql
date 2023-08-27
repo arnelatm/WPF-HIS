@@ -6,7 +6,7 @@
     [Quantity]       SMALLINT        NULL,
     [BonusQuantity]  SMALLINT        NULL,
     [UnitIdNo]       TINYINT         NULL,
-    [BatchNo]        VARCHAR (10)    NULL,
+    [BatchNo]        VARCHAR (20)    NULL,
     [Price]          DECIMAL (9, 2)  NULL,
     [DiscountAmount] DECIMAL (12, 2) NULL,
     [UnitSalesPrice] DECIMAL (9, 2)  NULL,
@@ -17,6 +17,8 @@
     [ExtraDiscount]  DECIMAL (5, 2)  NULL,
     CONSTRAINT [PK_PurchaseDetail] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

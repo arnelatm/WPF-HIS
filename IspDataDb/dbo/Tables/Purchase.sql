@@ -18,9 +18,11 @@
     [Cancelled]         BIT            NULL,
     [DateCreated]       DATETIME       CONSTRAINT [DF_PurchaseJournal_DateCreated] DEFAULT (getdate()) NOT NULL,
     [UserIdNo]          SMALLINT       NULL,
-    [DateTimeStamp]     ROWVERSION     NOT NULL,
+    [DateTimeStamp]     ROWVERSION     NULL,
     CONSTRAINT [PK_PurchaseIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

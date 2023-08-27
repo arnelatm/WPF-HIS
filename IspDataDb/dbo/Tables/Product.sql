@@ -17,8 +17,8 @@
     [Active]         BIT            NULL,
     [UserIdNo]       SMALLINT       NULL,
     [DateCreated]    DATETIME       CONSTRAINT [DF_Product_DateCreated_1] DEFAULT (getdate()) NOT NULL,
-    [DateTimeStamp]  ROWVERSION     NOT NULL,
-    CONSTRAINT [PK_ItemDetails] PRIMARY KEY CLUSTERED ([IdNo] ASC),
+    [DateTimeStamp]  ROWVERSION     NULL,
+    CONSTRAINT [PK_Product_1] PRIMARY KEY CLUSTERED ([IdNo] ASC),
     CONSTRAINT [IX_ProductBranchIdNoName] UNIQUE NONCLUSTERED ([BranchIdNo] ASC, [ProductCode] ASC)
 );
 
@@ -37,7 +37,8 @@
 
 
 
+
+
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [IX_ProductName]
-    ON [dbo].[Product]([ProductName] ASC);
+
 
