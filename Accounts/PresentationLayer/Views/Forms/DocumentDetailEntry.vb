@@ -1,4 +1,6 @@
 ﻿Imports System.Globalization
+Imports System.IO
+Imports System.Windows.Interop
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
@@ -235,6 +237,34 @@ Namespace PresentationLayer.Views.Forms
             cboContactIdNo.Refresh()
         End Sub
 
+        Private Sub imgPicture_DoubleClick(sender As Object, e As EventArgs) Handles imgPicture.DoubleClick
+            ViewPicture()
+        End Sub
+
+        Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPictureViewer.ClickButtonArea
+            Dim data As Byte() = {}
+            Dim saveImage As New Bitmap(Picture)
+            Dim tempFileName As String = Path.GetTempFileName() + ".Jpg"
+            saveImage.Save(tempFileName, System.Drawing.Imaging.ImageFormat.Jpeg)
+            saveImage.Dispose()
+                Dim cPictureBox As New PictureBox
+            cPictureBox.Image = Image.FromFile(tempFileName)
+            Using ms = New MemoryStream()
+                If Picture IsNot Nothing Then
+                    cPictureBox.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg)
+                    data = ms.ToArray()
+                End If
+            End Using
+            ViewPicture()
+        End Sub
+
+        Private Sub ViewPicture()
+            Dim fileName = "C:\temp\picture.jpg"
+            Dim p = New Process
+            p.StartInfo.FileName = fileName
+            p.StartInfo.Verb = "Open"
+            p.Start()
+        End Sub
     End Class
 
 End Namespace
