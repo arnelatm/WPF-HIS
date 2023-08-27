@@ -67,6 +67,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ProductBindingSource = New System.Windows.Forms.BindingSource(Me.components)
             Me.ProductTableAdapter = New AATM.Accounts.ISPDATADataSetTableAdapters.ProductTableAdapter()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvProductCode = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvProductName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -82,7 +83,6 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvProductNameAra = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvUnitCount = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsPurchaseOrderDetails = New System.Windows.Forms.BindingSource(Me.components)
-            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.FlowLayoutPanel1.SuspendLayout()
@@ -802,6 +802,35 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblNotes.Translatable = True
             '
+            'txtNotes
+            '
+            Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BegFindValue = Nothing
+            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtNotes.ComputedValue = False
+            Me.txtNotes.CustomFormat = Nothing
+            Me.txtNotes.DataBoundControl = True
+            Me.txtNotes.EditingMode = True
+            Me.txtNotes.EndFindValue = Nothing
+            Me.txtNotes.FieldDescription = Nothing
+            Me.txtNotes.FieldName = Nothing
+            Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtNotes.FindEnabled = False
+            Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtNotes.ForeColor = System.Drawing.Color.Black
+            Me.txtNotes.LinkedLabel = Nothing
+            Me.txtNotes.Location = New System.Drawing.Point(174, 93)
+            Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtNotes.MaximumValue = Nothing
+            Me.txtNotes.MinimumValue = Nothing
+            Me.txtNotes.Name = "txtNotes"
+            Me.txtNotes.OldValue = Nothing
+            Me.txtNotes.OverrideMaxLength = 0
+            Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtNotes.Size = New System.Drawing.Size(732, 23)
+            Me.txtNotes.TabIndex = 5
+            Me.txtNotes.Translatable = False
+            '
             'dgvSequence
             '
             Me.dgvSequence.BegFindValue = Nothing
@@ -1004,34 +1033,6 @@ Namespace PresentationLayer.Views.Forms
             'bsPurchaseOrderDetails
             '
             Me.bsPurchaseOrderDetails.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PurchaseOrderDetailModel)
-            '
-            'txtNotes
-            '
-            Me.txtNotes.BackColor = System.Drawing.SystemColors.ControlLight
-            Me.txtNotes.BegFindValue = Nothing
-            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtNotes.ComputedValue = False
-            Me.txtNotes.CustomFormat = Nothing
-            Me.txtNotes.DataBoundControl = True
-            Me.txtNotes.EditingMode = True
-            Me.txtNotes.EndFindValue = Nothing
-            Me.txtNotes.FieldDescription = Nothing
-            Me.txtNotes.FieldName = Nothing
-            Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtNotes.FindEnabled = False
-            Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtNotes.LinkedLabel = Nothing
-            Me.txtNotes.Location = New System.Drawing.Point(174, 93)
-            Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtNotes.MaximumValue = Nothing
-            Me.txtNotes.MinimumValue = Nothing
-            Me.txtNotes.Name = "txtNotes"
-            Me.txtNotes.OldValue = Nothing
-            Me.txtNotes.OverrideMaxLength = 0
-            Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtNotes.Size = New System.Drawing.Size(732, 23)
-            Me.txtNotes.TabIndex = 5
-            Me.txtNotes.Translatable = False
             '
             'PurchaseOrderEntry
             '

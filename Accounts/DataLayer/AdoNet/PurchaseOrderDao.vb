@@ -19,11 +19,12 @@ Namespace DataLayer.AdoNet
 
 
         Private Const FieldList = "Amount," &
+                                  "Approved," &
                                   "Cancelled," &
                                   "DateCreated," &
+                                  "Disapproved," &
                                   "IdNo," &
                                   "Notes," &
-                                  "Posted," &
                                   "ReferenceNo," &
                                   "SupplierIdNo," &
                                   "TransactionDate," &
@@ -51,10 +52,11 @@ Namespace DataLayer.AdoNet
             Dim retVal As Int32 = 0
             Dim sql As String =
                     "UPDATE [PurchaseOrder] Set " &
+                    "Approved = @Approved," &
                     "Amount = @Amount," &
                     "Cancelled = @Cancelled," &
+                    "Disapproved = @Disapproved," &
                     "Notes = @Notes," &
-                    "Posted = @Posted," &
                     "ReferenceNo = @ReferenceNo," &
                     "SupplierIdNo = @SupplierIdNo," &
                     "TransactionDate = @TransactionDate," &
@@ -73,8 +75,8 @@ Namespace DataLayer.AdoNet
             Dim retVal As Int32 = 0
             Dim sql As String =
                     " INSERT INTO [PurchaseOrder] " &
-                    " (Amount,BranchIdNo,Cancelled,Notes,Posted,ReferenceNo,SupplierIdNo,TransactionDate,UserIdNo,WarehouseIdNo)" &
-                    " VALUES (@Amount,@BranchIdNo,@Cancelled,@Notes,@Posted,@SupplierIdNo,@ReferenceNo,@TransactionDate,@UseridNo,@WarehouseIdNo)"
+                    " (Amount,Approved,BranchIdNo,Cancelled,Disapproved,Notes,Posted,ReferenceNo,SupplierIdNo,TransactionDate,UserIdNo,WarehouseIdNo)" &
+                    " VALUES (@Amount,@Approved,@BranchIdNo,@Cancelled,@Disapproved,@Notes,@Posted,@SupplierIdNo,@ReferenceNo,@TransactionDate,@UseridNo,@WarehouseIdNo)"
             retVal = Db.Insert(sql, Take(PurchaseOrder))
             If retVal > 0 Then
                 UpdateReferenceNumber(retVal)
@@ -85,7 +87,9 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, PurchaseOrder) =
                                     Function(reader) _
             New PurchaseOrder() With {.Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
+                                  .Approved = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Approved")),
                                   .Cancelled = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cancelled")),
+                                  .Disapproved = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Disapproved")),
                                   .IdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("IdNo")),
                                   .Notes = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Notes")),
                                   .Posted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Posted")),
@@ -99,7 +103,9 @@ Namespace DataLayer.AdoNet
         Private Function Take(PurchaseOrder As PurchaseOrder) As Object()
             Return New Object() {
                                     "Amount", PurchaseOrder.Amount,
+                                    "Approved", PurchaseOrder.Approved,
                                     "BranchIdNo", GlobalVariables.BranchIdNo,
+                                    "Disapproved", PurchaseOrder.Disapproved,
                                     "Cancelled", PurchaseOrder.Cancelled,
                                     "IdNo", PurchaseOrder.IdNo,
                                     "Notes", PurchaseOrder.Notes,
