@@ -25,7 +25,6 @@ Namespace DataLayer.AdoNet
                                   "Disapproved," &
                                   "IdNo," &
                                   "Notes," &
-                                  "Posted," &
                                   "ReferenceNo," &
                                   "SupplierIdNo," &
                                   "TransactionDate," &
@@ -53,12 +52,12 @@ Namespace DataLayer.AdoNet
             Dim retVal As Int32 = 0
             Dim sql As String =
                     "UPDATE [PurchaseOrder] Set " &
+                    "Approved = @Approved," &
                     "Amount = @Amount," &
                     "Approved = @Approved," &
                     "Cancelled = @Cancelled," &
                     "Disapproved = @Disapproved," &
                     "Notes = @Notes," &
-                    "Posted = @Posted," &
                     "ReferenceNo = @ReferenceNo," &
                     "SupplierIdNo = @SupplierIdNo," &
                     "TransactionDate = @TransactionDate," &
@@ -107,6 +106,7 @@ Namespace DataLayer.AdoNet
                                     "Amount", PurchaseOrder.Amount,
                                     "Approved" = PurchaseOrder.Approved,
                                     "BranchIdNo", GlobalVariables.BranchIdNo,
+                                    "Disapproved", PurchaseOrder.Disapproved,
                                     "Cancelled", PurchaseOrder.Cancelled,
                                     "Disapproved" = PurchaseOrder.Disapproved,
                                     "IdNo", PurchaseOrder.IdNo,

@@ -1140,4 +1140,4 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents chkApproved As UcCheckBox
     End Class
-End NameSpace
+End Namespace
