@@ -64,6 +64,7 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Sub CreateDataSources()
             Dim data As New ArrayList
             data.Add({"Warehouse", "WarehouseIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"})
+            data.Add({"Supplier", "SupplierIdNo", Nothing, Nothing, "SupplierName"})
             data.Add({"User", "UserIdNo", "IdNo,UserName", Nothing})
             CreateDataSourceThread(data)
 

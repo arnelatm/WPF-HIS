@@ -14,6 +14,7 @@ Namespace PresentationLayer.Models
         Public Property Cancelled As Boolean
         Public Property DateCreated As Date
         Public Property IdNo As Int32
+        Public Property Notes As String
         Public Property Posted As Boolean
         Public Property ReferenceNo As String
         Public Property SupplierIdNo As Int32

@@ -663,10 +663,10 @@
     <Compile Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsFinder.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PurchaserOrderEntry.Designer.vb">
-      <DependentUpon>PurchaserOrderEntry.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\PurchaseOrderEntry.Designer.vb">
+      <DependentUpon>PurchaseOrderEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PurchaserOrderEntry.vb">
+    <Compile Include="PresentationLayer\Views\Forms\PurchaseOrderEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\FinancialReport.designer.vb">
@@ -2040,8 +2040,8 @@
       <DependentUpon>ItemDetailsFinder.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\PurchaserOrderEntry.resx">
-      <DependentUpon>PurchaserOrderEntry.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\PurchaseOrderEntry.resx">
+      <DependentUpon>PurchaseOrderEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\InvTransTypeEntryTv.resx">
@@ -2751,8 +2751,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app-ibn-server-test.config" />
+    <None Include="app.config" />
     <None Include="app-Marcelo-Dell.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Isp-Server.config" />

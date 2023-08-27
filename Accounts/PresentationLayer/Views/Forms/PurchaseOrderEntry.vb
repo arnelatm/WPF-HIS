@@ -177,6 +177,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property Notes As String Implements IPurchaseOrderView.Notes
+            Get
+                Return txtNotes.Text
+            End Get
+            Set
+                txtNotes.Text = Value
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -188,11 +197,11 @@ Namespace PresentationLayer.Views.Forms
          {"IdNo", TxtIdNo},
          {"Posted", chkPosted},
          {"ReferenceNo", txtReferenceNo},
+         {"SupplierIdNo", cboSupplierIdNo},
          {"TransactionDate", dtpTransactionDate},
          {"UserIdNo", cboUserIdNo},
-         {"WarehouseIdNo", cboWarehouseIdNo},
-         {"WarehouseToIdNo", cboSupplierIdNo}
-        }
+         {"WarehouseIdNo", cboWarehouseIdNo}
+         }
         End Sub
 
         Protected Sub PurchaseOrderUpdateView() Handles MyBase.AfterUpdateView

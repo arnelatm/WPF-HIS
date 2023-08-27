@@ -10,6 +10,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Cancelled As Boolean
         Property DateCreated As DateTime
         Property IdNo As Int32
+        Property Notes As String
         Property Posted As Boolean
         Property ReferenceNo As String
         Property SupplierIdNo As Int32

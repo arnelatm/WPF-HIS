@@ -52,9 +52,9 @@ Namespace PresentationLayer.Views.Forms
             Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblPicture = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.imgPicture = New AATM.Libraries.CBaseControlsLibrary.CPictureBox()
+            Me.btnPictureViewer = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.txtDataImageNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtContactType = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.btnPictureViewer = New AATM.Libraries.CBaseControlsLibrary.CButton()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             CType(Me.imgPicture, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -506,6 +506,15 @@ Namespace PresentationLayer.Views.Forms
             Me.imgPicture.TabStop = False
             Me.imgPicture.Translatable = False
             '
+            'btnPictureViewer
+            '
+            Me.btnPictureViewer.DesignerSelected = False
+            Me.btnPictureViewer.ImageIndex = 0
+            resources.ApplyResources(Me.btnPictureViewer, "btnPictureViewer")
+            Me.btnPictureViewer.Name = "btnPictureViewer"
+            Me.btnPictureViewer.OriginalImageName = Nothing
+            Me.btnPictureViewer.SecurityKey = ""
+            '
             'txtDataImageNo
             '
             Me.txtDataImageNo.BackColor = System.Drawing.Color.White
@@ -559,15 +568,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtContactType.OverrideMaxLength = 0
             Me.txtContactType.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtContactType.Translatable = False
-            '
-            'btnPictureViewer
-            '
-            Me.btnPictureViewer.DesignerSelected = True
-            Me.btnPictureViewer.ImageIndex = 0
-            resources.ApplyResources(Me.btnPictureViewer, "btnPictureViewer")
-            Me.btnPictureViewer.Name = "btnPictureViewer"
-            Me.btnPictureViewer.OriginalImageName = Nothing
-            Me.btnPictureViewer.SecurityKey = ""
             '
             'DocumentDetailEntry
             '

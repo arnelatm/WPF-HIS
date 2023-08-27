@@ -11,7 +11,6 @@ Namespace BusinessLayer
         Public Sub New()
             If GetRules().Count() = 0 Then
                 ' establish business rules
-                AddRule(New ValidateRequired("PurchaseOrderIdNo"))
                 AddRule(New ValidateRequired("WarehouseIdNo"))
                 AddRule(New ValidateRequired("TransactionDate"))
                 AddRule(New ValidateRequired("SupplierIdNo"))
