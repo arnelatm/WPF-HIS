@@ -200,25 +200,17 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Posted As Boolean Implements IPurchaseOrderView.Posted
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As Boolean)
-                Throw New NotImplementedException()
-            End Set
-        End Property
-
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
         {
          {"Amount", txtAmount},
+         {"Approved", chkApproved},
          {"Cancelled", chkCancelled},
          {"DateCreated", txtDateCreated},
          {"IdNo", TxtIdNo},
-         {"Posted", chkDisapproved},
+         {"Disapproved", chkDisapproved},
          {"ReferenceNo", txtReferenceNo},
          {"SupplierIdNo", cboSupplierIdNo},
          {"TransactionDate", dtpTransactionDate},
@@ -479,9 +471,6 @@ Namespace PresentationLayer.Views.Forms
             dgvUnitCost.UpdateDisplayOnlyControl()
         End Sub
 
-        Private Sub chkPosted_Load(sender As Object, e As EventArgs) Handles chkDisapproved.Load
-
-        End Sub
     End Class
 
 End Namespace

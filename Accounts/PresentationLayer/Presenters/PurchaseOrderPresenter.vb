@@ -53,7 +53,6 @@ Namespace PresentationLayer.Presenters
             AddHandler view.ProductUnitEditing, AddressOf OnProductUnitEditing
             AddHandler view.ProductCodeChanged, AddressOf OnProductCodeChanged
             AddHandler view.ProductUnitSelection, AddressOf OnProductUnitSelection
-            AddHandler view.PostData, AddressOf OnPostData
             AddHandler view.ProductCodeValidating, AddressOf OnProductCodeValidating
             AddHandler view.ProductNameValidating, AddressOf OnProductNameValidating
 
@@ -468,13 +467,13 @@ Namespace PresentationLayer.Presenters
             View.WarehouseIdNo = wareHouse.IdNo
         End Sub
 
-        Private Function OnPostData(idNo As Int32) As Boolean
-            Dim retVal As Boolean = Service.PostData(idNo)
-            If retVal Then
-                View.Posted = True
-            End If
-            Return retVal
-        End Function
+        'Private Function OnPostData(idNo As Int32) As Boolean
+        '    Dim retVal As Boolean = Service.PostData(idNo)
+        '    If retVal Then
+        '        View.Posted = True
+        '    End If
+        '    Return retVal
+        'End Function
 
     End Class
 
