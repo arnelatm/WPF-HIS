@@ -24,7 +24,6 @@ Namespace BusinessLayer
         Public Property Disapproved As Boolean
         Public Property IdNo As Int32
         Public Property Notes As String
-        Public Property Posted As Boolean
         Public Property ReferenceNo As String
         Public Property SupplierIdNo As Int32
         Public Property TransactionDate As Date?

@@ -76,8 +76,8 @@ Namespace DataLayer.AdoNet
             Dim retVal As Int32 = 0
             Dim sql As String =
                     " INSERT INTO [PurchaseOrder] " &
-                    " (Amount,Approved,BranchIdNo,Cancelled,Disapproved,Notes,Posted,ReferenceNo,SupplierIdNo,TransactionDate,UserIdNo,WarehouseIdNo)" &
-                    " VALUES (@Amount,@Approved,@BranchIdNo,@Cancelled,@Disapproved,@Notes,@Posted,@SupplierIdNo,@ReferenceNo,@TransactionDate,@UseridNo,@WarehouseIdNo)"
+                    "         (Amount,Approved ,BranchIdNo ,Cancelled ,Disapproved ,Notes ,ReferenceNo  ,SupplierIdNo,TransactionDate ,UserIdNo ,WarehouseIdNo)" &
+                    " VALUES (@Amount,@Approved,@BranchIdNo,@Cancelled,@Disapproved,@Notes,@SupplierIdNo,@ReferenceNo,@TransactionDate,@UseridNo,@WarehouseIdNo)"
             retVal = Db.Insert(sql, Take(PurchaseOrder))
             If retVal > 0 Then
                 UpdateReferenceNumber(retVal)
@@ -93,7 +93,6 @@ Namespace DataLayer.AdoNet
                                   .Disapproved = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Disapproved")),
                                   .IdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("IdNo")),
                                   .Notes = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Notes")),
-                                  .Posted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Posted")),
                                   .ReferenceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ReferenceNo")),
                                   .SupplierIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("SupplierIdNo")),
                                   .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),
@@ -104,14 +103,12 @@ Namespace DataLayer.AdoNet
         Private Function Take(PurchaseOrder As PurchaseOrder) As Object()
             Return New Object() {
                                     "Amount", PurchaseOrder.Amount,
-                                    "Approved" = PurchaseOrder.Approved,
+                                    "Approved", PurchaseOrder.Approved,
                                     "BranchIdNo", GlobalVariables.BranchIdNo,
                                     "Disapproved", PurchaseOrder.Disapproved,
                                     "Cancelled", PurchaseOrder.Cancelled,
-                                    "Disapproved" = PurchaseOrder.Disapproved,
                                     "IdNo", PurchaseOrder.IdNo,
                                     "Notes", PurchaseOrder.Notes,
-                                    "Posted", PurchaseOrder.Posted,
                                     "ReferenceNo", PurchaseOrder.ReferenceNo,
                                     "SupplierIdNo", PurchaseOrder.SupplierIdNo,
                                     "TransactionDate", PurchaseOrder.TransactionDate,

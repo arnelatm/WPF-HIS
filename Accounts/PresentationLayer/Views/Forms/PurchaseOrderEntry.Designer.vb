@@ -39,8 +39,9 @@ Namespace PresentationLayer.Views.Forms
             Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.chkDisapproved = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
+            Me.chkApproved = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
+            Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.lblDateAdded = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
@@ -83,7 +84,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.ProductBindingSource = New System.Windows.Forms.BindingSource(Me.components)
             Me.ProductTableAdapter = New AATM.Accounts.ISPDATADataSetTableAdapters.ProductTableAdapter()
-            Me.chkApproved = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.FlowLayoutPanel1.SuspendLayout()
@@ -106,31 +106,6 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.Name = "CFlowLayout2"
             Me.CFlowLayout2.Size = New System.Drawing.Size(144, 154)
             Me.CFlowLayout2.TabIndex = 7
-            '
-            'chkCancelled
-            '
-            Me.chkCancelled.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-            Me.chkCancelled.BackColor = System.Drawing.Color.Transparent
-            Me.chkCancelled.BegFindValue = Nothing
-            Me.chkCancelled.Checked = False
-            Me.chkCancelled.DisplayOnly = True
-            Me.chkCancelled.EditingMode = False
-            Me.chkCancelled.EndFindValue = Nothing
-            Me.chkCancelled.FieldDescription = Nothing
-            Me.chkCancelled.FieldName = Nothing
-            Me.chkCancelled.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkCancelled.FindEnabled = False
-            Me.CFlowLayout2.SetFlowBreak(Me.chkCancelled, True)
-            Me.chkCancelled.IgnoreCase = False
-            Me.chkCancelled.LinkedLabel = Nothing
-            Me.chkCancelled.Location = New System.Drawing.Point(3, 57)
-            Me.chkCancelled.Name = "chkCancelled"
-            Me.chkCancelled.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.chkCancelled.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkCancelled.Size = New System.Drawing.Size(111, 23)
-            Me.chkCancelled.TabIndex = 0
-            Me.chkCancelled.Text = "Cancelled?"
-            Me.chkCancelled.Translatable = True
             '
             'chkDisapproved
             '
@@ -156,6 +131,56 @@ Namespace PresentationLayer.Views.Forms
             Me.chkDisapproved.TabIndex = 1
             Me.chkDisapproved.Text = "Disapproved"
             Me.chkDisapproved.Translatable = True
+            '
+            'chkApproved
+            '
+            Me.chkApproved.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.chkApproved.BackColor = System.Drawing.Color.Transparent
+            Me.chkApproved.BegFindValue = Nothing
+            Me.chkApproved.Checked = False
+            Me.chkApproved.DisplayOnly = True
+            Me.chkApproved.EditingMode = False
+            Me.chkApproved.EndFindValue = Nothing
+            Me.chkApproved.FieldDescription = Nothing
+            Me.chkApproved.FieldName = Nothing
+            Me.chkApproved.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkApproved.FindEnabled = False
+            Me.CFlowLayout2.SetFlowBreak(Me.chkApproved, True)
+            Me.chkApproved.IgnoreCase = False
+            Me.chkApproved.LinkedLabel = Nothing
+            Me.chkApproved.Location = New System.Drawing.Point(3, 30)
+            Me.chkApproved.Name = "chkApproved"
+            Me.chkApproved.RightToLeft = System.Windows.Forms.RightToLeft.No
+            Me.chkApproved.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkApproved.Size = New System.Drawing.Size(111, 21)
+            Me.chkApproved.TabIndex = 4
+            Me.chkApproved.Text = "Approved"
+            Me.chkApproved.Translatable = True
+            '
+            'chkCancelled
+            '
+            Me.chkCancelled.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.chkCancelled.BackColor = System.Drawing.Color.Transparent
+            Me.chkCancelled.BegFindValue = Nothing
+            Me.chkCancelled.Checked = False
+            Me.chkCancelled.DisplayOnly = True
+            Me.chkCancelled.EditingMode = False
+            Me.chkCancelled.EndFindValue = Nothing
+            Me.chkCancelled.FieldDescription = Nothing
+            Me.chkCancelled.FieldName = Nothing
+            Me.chkCancelled.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkCancelled.FindEnabled = False
+            Me.CFlowLayout2.SetFlowBreak(Me.chkCancelled, True)
+            Me.chkCancelled.IgnoreCase = False
+            Me.chkCancelled.LinkedLabel = Nothing
+            Me.chkCancelled.Location = New System.Drawing.Point(3, 57)
+            Me.chkCancelled.Name = "chkCancelled"
+            Me.chkCancelled.RightToLeft = System.Windows.Forms.RightToLeft.No
+            Me.chkCancelled.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkCancelled.Size = New System.Drawing.Size(111, 23)
+            Me.chkCancelled.TabIndex = 0
+            Me.chkCancelled.Text = "Cancelled?"
+            Me.chkCancelled.Translatable = True
             '
             'lblDateAdded
             '
@@ -1035,31 +1060,6 @@ Namespace PresentationLayer.Views.Forms
             'ProductTableAdapter
             '
             Me.ProductTableAdapter.ClearBeforeFill = True
-            '
-            'chkApproved
-            '
-            Me.chkApproved.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-            Me.chkApproved.BackColor = System.Drawing.Color.Transparent
-            Me.chkApproved.BegFindValue = Nothing
-            Me.chkApproved.Checked = False
-            Me.chkApproved.DisplayOnly = True
-            Me.chkApproved.EditingMode = False
-            Me.chkApproved.EndFindValue = Nothing
-            Me.chkApproved.FieldDescription = Nothing
-            Me.chkApproved.FieldName = Nothing
-            Me.chkApproved.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkApproved.FindEnabled = False
-            Me.CFlowLayout2.SetFlowBreak(Me.chkApproved, True)
-            Me.chkApproved.IgnoreCase = False
-            Me.chkApproved.LinkedLabel = Nothing
-            Me.chkApproved.Location = New System.Drawing.Point(3, 30)
-            Me.chkApproved.Name = "chkApproved"
-            Me.chkApproved.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.chkApproved.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkApproved.Size = New System.Drawing.Size(111, 21)
-            Me.chkApproved.TabIndex = 4
-            Me.chkApproved.Text = "Approved"
-            Me.chkApproved.Translatable = True
             '
             'PurchaseOrderEntry
             '
