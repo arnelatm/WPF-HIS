@@ -22,8 +22,10 @@ Namespace DataLayer.AdoNet
                                   "Cancelled," &
                                   "DateCreated," &
                                   "IdNo," &
+                                  "Notes," &
                                   "Posted," &
                                   "ReferenceNo," &
+                                  "SupplierIdNo," &
                                   "TransactionDate," &
                                   "UserIdNo," &
                                   "WarehouseIdNo," &
@@ -51,10 +53,10 @@ Namespace DataLayer.AdoNet
                     "UPDATE [PurchaseOrder] Set " &
                     "Amount = @Amount," &
                     "Cancelled = @Cancelled," &
-                    "InvTransTypeIdNo = @InvTransTypeIdNo," &
+                    "Notes = @Notes," &
                     "Posted = @Posted," &
                     "ReferenceNo = @ReferenceNo," &
-                    "SupplierIdNo = @SupplierIdNo " &
+                    "SupplierIdNo = @SupplierIdNo," &
                     "TransactionDate = @TransactionDate," &
                     "UserIdNo = @UserIdNo," &
                     "WarehouseIdNo = @WarehouseIdNo " &
@@ -71,8 +73,8 @@ Namespace DataLayer.AdoNet
             Dim retVal As Int32 = 0
             Dim sql As String =
                     " INSERT INTO [PurchaseOrder] " &
-                    " (Amount,BranchIdNo,Cancelled,Posted,ReferenceNo,SupplierIdNo,TransactionDate,UserIdNo,WarehouseIdNo)" &
-                    " VALUES (@Amount,@BranchIdNo,@Cancelled,@Posted,@SupplierIdNo,@ReferenceNo,@TransactionDate,@UseridNo,@WarehouseIdNo)"
+                    " (Amount,BranchIdNo,Cancelled,Notes,Posted,ReferenceNo,SupplierIdNo,TransactionDate,UserIdNo,WarehouseIdNo)" &
+                    " VALUES (@Amount,@BranchIdNo,@Cancelled,@Notes,@Posted,@SupplierIdNo,@ReferenceNo,@TransactionDate,@UseridNo,@WarehouseIdNo)"
             retVal = Db.Insert(sql, Take(PurchaseOrder))
             If retVal > 0 Then
                 UpdateReferenceNumber(retVal)
@@ -85,9 +87,10 @@ Namespace DataLayer.AdoNet
             New PurchaseOrder() With {.Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
                                   .Cancelled = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cancelled")),
                                   .IdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("IdNo")),
+                                  .Notes = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Notes")),
                                   .Posted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Posted")),
                                   .ReferenceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ReferenceNo")),
-                                  .SupplierIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("SupplierIdNo")),
+                                  .SupplierIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("SupplierIdNo")),
                                   .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),
                                   .UserIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("UserIdNo")),
                                   .WarehouseIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("WarehouseIdNo"))
