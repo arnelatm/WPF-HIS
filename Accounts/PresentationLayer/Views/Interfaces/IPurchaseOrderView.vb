@@ -7,8 +7,10 @@ Namespace PresentationLayer.Views.Interfaces
         Inherits IView
 
         Property Amount As Decimal
+        Property Approved As Boolean
         Property Cancelled As Boolean
         Property DateCreated As DateTime
+        Property Disapproved As Boolean
         Property IdNo As Int32
         Property Notes As String
         Property Posted As Boolean

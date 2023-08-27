@@ -27,10 +27,6 @@ Namespace PresentationLayer.Views.Forms
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PurchaseOrderEntry))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -38,9 +34,13 @@ Namespace PresentationLayer.Views.Forms
             Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.chkCancelled = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
-            Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
+            Me.chkDisapproved = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.lblDateAdded = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
@@ -55,18 +55,13 @@ Namespace PresentationLayer.Views.Forms
             Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.lblWarehouseToIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboSupplierIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtJournalIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboUserIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.DataGridViewPurchaseOrderDetails = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
-            Me.dgvInventoryIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.DGVDummy = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
-            Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.ProductBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-            Me.ProductTableAdapter = New AATM.Accounts.ISPDATADataSetTableAdapters.ProductTableAdapter()
-            Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvProductCode = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvProductName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -81,28 +76,35 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvProductIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvProductNameAra = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvUnitCount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.dgvInventoryIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsPurchaseOrderDetails = New System.Windows.Forms.BindingSource(Me.components)
-            Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.DGVDummy = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
+            Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.ProductBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+            Me.ProductTableAdapter = New AATM.Accounts.ISPDATADataSetTableAdapters.ProductTableAdapter()
+            Me.chkApproved = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.FlowLayoutPanel1.SuspendLayout()
             Me.floInventoryHeader.SuspendLayout()
             CType(Me.DataGridViewPurchaseOrderDetails, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsPurchaseOrderDetails, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.DGVDummy, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.ProductBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.bsPurchaseOrderDetails, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             '
             'CFlowLayout2
             '
             Me.CFlowLayout2.BackColor = System.Drawing.Color.Transparent
+            Me.CFlowLayout2.Controls.Add(Me.chkDisapproved)
+            Me.CFlowLayout2.Controls.Add(Me.chkApproved)
             Me.CFlowLayout2.Controls.Add(Me.chkCancelled)
-            Me.CFlowLayout2.Controls.Add(Me.chkPosted)
             Me.CFlowLayout2.Controls.Add(Me.lblDateAdded)
             Me.CFlowLayout2.Controls.Add(Me.txtDateCreated)
             Me.CFlowLayout2.Location = New System.Drawing.Point(933, 3)
             Me.CFlowLayout2.Name = "CFlowLayout2"
-            Me.CFlowLayout2.Size = New System.Drawing.Size(144, 127)
+            Me.CFlowLayout2.Size = New System.Drawing.Size(144, 154)
             Me.CFlowLayout2.TabIndex = 7
             '
             'chkCancelled
@@ -121,7 +123,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.SetFlowBreak(Me.chkCancelled, True)
             Me.chkCancelled.IgnoreCase = False
             Me.chkCancelled.LinkedLabel = Nothing
-            Me.chkCancelled.Location = New System.Drawing.Point(3, 3)
+            Me.chkCancelled.Location = New System.Drawing.Point(3, 57)
             Me.chkCancelled.Name = "chkCancelled"
             Me.chkCancelled.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.chkCancelled.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -130,30 +132,30 @@ Namespace PresentationLayer.Views.Forms
             Me.chkCancelled.Text = "Cancelled?"
             Me.chkCancelled.Translatable = True
             '
-            'chkPosted
+            'chkDisapproved
             '
-            Me.chkPosted.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-            Me.chkPosted.BackColor = System.Drawing.Color.Transparent
-            Me.chkPosted.BegFindValue = Nothing
-            Me.chkPosted.Checked = False
-            Me.chkPosted.DisplayOnly = True
-            Me.chkPosted.EditingMode = False
-            Me.chkPosted.EndFindValue = Nothing
-            Me.chkPosted.FieldDescription = Nothing
-            Me.chkPosted.FieldName = Nothing
-            Me.chkPosted.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.chkPosted.FindEnabled = False
-            Me.CFlowLayout2.SetFlowBreak(Me.chkPosted, True)
-            Me.chkPosted.IgnoreCase = False
-            Me.chkPosted.LinkedLabel = Nothing
-            Me.chkPosted.Location = New System.Drawing.Point(3, 32)
-            Me.chkPosted.Name = "chkPosted"
-            Me.chkPosted.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.chkPosted.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkPosted.Size = New System.Drawing.Size(111, 21)
-            Me.chkPosted.TabIndex = 1
-            Me.chkPosted.Text = "Posted?"
-            Me.chkPosted.Translatable = True
+            Me.chkDisapproved.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.chkDisapproved.BackColor = System.Drawing.Color.Transparent
+            Me.chkDisapproved.BegFindValue = Nothing
+            Me.chkDisapproved.Checked = False
+            Me.chkDisapproved.DisplayOnly = True
+            Me.chkDisapproved.EditingMode = False
+            Me.chkDisapproved.EndFindValue = Nothing
+            Me.chkDisapproved.FieldDescription = Nothing
+            Me.chkDisapproved.FieldName = Nothing
+            Me.chkDisapproved.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkDisapproved.FindEnabled = False
+            Me.CFlowLayout2.SetFlowBreak(Me.chkDisapproved, True)
+            Me.chkDisapproved.IgnoreCase = False
+            Me.chkDisapproved.LinkedLabel = Nothing
+            Me.chkDisapproved.Location = New System.Drawing.Point(3, 3)
+            Me.chkDisapproved.Name = "chkDisapproved"
+            Me.chkDisapproved.RightToLeft = System.Windows.Forms.RightToLeft.No
+            Me.chkDisapproved.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkDisapproved.Size = New System.Drawing.Size(111, 21)
+            Me.chkDisapproved.TabIndex = 1
+            Me.chkDisapproved.Text = "Disapproved"
+            Me.chkDisapproved.Translatable = True
             '
             'lblDateAdded
             '
@@ -161,7 +163,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDateAdded.EditingMode = False
             Me.lblDateAdded.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.lblDateAdded.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblDateAdded.Location = New System.Drawing.Point(0, 56)
+            Me.lblDateAdded.Location = New System.Drawing.Point(0, 83)
             Me.lblDateAdded.Margin = New System.Windows.Forms.Padding(0)
             Me.lblDateAdded.Name = "lblDateAdded"
             Me.lblDateAdded.Size = New System.Drawing.Size(87, 26)
@@ -187,7 +189,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDateCreated.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
             Me.txtDateCreated.LinkedLabel = Nothing
-            Me.txtDateCreated.Location = New System.Drawing.Point(1, 83)
+            Me.txtDateCreated.Location = New System.Drawing.Point(1, 110)
             Me.txtDateCreated.Margin = New System.Windows.Forms.Padding(1)
             Me.txtDateCreated.MaximumValue = Nothing
             Me.txtDateCreated.MinimumValue = Nothing
@@ -503,6 +505,50 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSupplierIdNo.ValueIsNumeric = False
             Me.cboSupplierIdNo.ValueMember = "IdNo"
             '
+            'lblNotes
+            '
+            Me.lblNotes.DisplayOnly = True
+            Me.lblNotes.EditingMode = False
+            Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblNotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
+            Me.lblNotes.Location = New System.Drawing.Point(16, 93)
+            Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblNotes.Name = "lblNotes"
+            Me.lblNotes.Size = New System.Drawing.Size(156, 23)
+            Me.lblNotes.TabIndex = 270
+            Me.lblNotes.Text = "Notes"
+            Me.lblNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblNotes.Translatable = True
+            '
+            'txtNotes
+            '
+            Me.txtNotes.BackColor = System.Drawing.Color.White
+            Me.txtNotes.BegFindValue = Nothing
+            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtNotes.ComputedValue = False
+            Me.txtNotes.CustomFormat = Nothing
+            Me.txtNotes.DataBoundControl = True
+            Me.txtNotes.EditingMode = True
+            Me.txtNotes.EndFindValue = Nothing
+            Me.txtNotes.FieldDescription = Nothing
+            Me.txtNotes.FieldName = Nothing
+            Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtNotes.FindEnabled = False
+            Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtNotes.ForeColor = System.Drawing.Color.Black
+            Me.txtNotes.LinkedLabel = Nothing
+            Me.txtNotes.Location = New System.Drawing.Point(174, 93)
+            Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtNotes.MaximumValue = Nothing
+            Me.txtNotes.MinimumValue = Nothing
+            Me.txtNotes.Name = "txtNotes"
+            Me.txtNotes.OldValue = Nothing
+            Me.txtNotes.OverrideMaxLength = 0
+            Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtNotes.Size = New System.Drawing.Size(732, 23)
+            Me.txtNotes.TabIndex = 5
+            Me.txtNotes.Translatable = False
+            '
             'CLabel1
             '
             Me.CLabel1.DisplayOnly = True
@@ -578,7 +624,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboUserIdNo.DefaultValue = Nothing
             Me.cboUserIdNo.DisplayMember = "Name"
             Me.cboUserIdNo.DisplayOnly = True
-            Me.cboUserIdNo.DropDownHeight = 24
+            Me.cboUserIdNo.DropDownHeight = 21
             Me.cboUserIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboUserIdNo.Editable = True
             Me.cboUserIdNo.EditingMode = True
@@ -667,140 +713,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewPurchaseOrderDetails.Size = New System.Drawing.Size(1074, 308)
             Me.DataGridViewPurchaseOrderDetails.TabIndex = 0
             Me.DataGridViewPurchaseOrderDetails.Translatable = True
-            '
-            'dgvInventoryIdNo
-            '
-            Me.dgvInventoryIdNo.DataPropertyName = "InventoryIdNo"
-            Me.dgvInventoryIdNo.HeaderText = "InventoryIdNo"
-            Me.dgvInventoryIdNo.Name = "dgvInventoryIdNo"
-            Me.dgvInventoryIdNo.ReadOnly = True
-            Me.dgvInventoryIdNo.Visible = False
-            '
-            'DGVDummy
-            '
-            DataGridViewCellStyle10.BackColor = System.Drawing.Color.FloralWhite
-            Me.DGVDummy.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle10
-            Me.DGVDummy.BegFindValue = Nothing
-            Me.DGVDummy.Cached = False
-            DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control
-            DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText
-            DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.DGVDummy.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle11
-            Me.DGVDummy.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DGVDummy.DataFilter = Nothing
-            DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DGVDummy.DefaultCellStyle = DataGridViewCellStyle12
-            Me.DGVDummy.DgvFooter = Nothing
-            Me.DGVDummy.DisplayOnly = False
-            Me.DGVDummy.Ea = Nothing
-            Me.DGVDummy.EditingMode = False
-            Me.DGVDummy.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-            Me.DGVDummy.EndFindValue = Nothing
-            Me.DGVDummy.FieldDescription = Nothing
-            Me.DGVDummy.FieldName = Nothing
-            Me.DGVDummy.FieldsDictionary = Nothing
-            Me.DGVDummy.FindColumnNo = CType(0, Short)
-            Me.DGVDummy.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.DGVDummy.FindEnabled = False
-            Me.DGVDummy.FirstRowDeletionEnabled = True
-            Me.DGVDummy.FirstRowInsertionEnabled = True
-            Me.FlowLayoutPanel1.SetFlowBreak(Me.DGVDummy, True)
-            Me.DGVDummy.IgnoreCase = False
-            Me.DGVDummy.IsDirty = False
-            Me.DGVDummy.Location = New System.Drawing.Point(1083, 163)
-            Me.DGVDummy.Name = "DGVDummy"
-            Me.DGVDummy.OldCellValue = Nothing
-            Me.DGVDummy.ReadOnly = True
-            DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control
-            DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText
-            DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.DGVDummy.RowHeadersDefaultCellStyle = DataGridViewCellStyle13
-            Me.DGVDummy.Searchable = True
-            Me.DGVDummy.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.DGVDummy.SecurityKey = ""
-            Me.DGVDummy.SequenceColumn = "dgvSequence"
-            Me.DGVDummy.SequenceFieldName = "Sequence"
-            Me.DGVDummy.ShowFooter = False
-            Me.DGVDummy.Size = New System.Drawing.Size(10, 308)
-            Me.DGVDummy.TabIndex = 9
-            Me.DGVDummy.Translatable = True
-            '
-            'CLabel4
-            '
-            Me.CLabel4.DisplayOnly = True
-            Me.CLabel4.EditingMode = False
-            Me.CLabel4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel4.Location = New System.Drawing.Point(1, 475)
-            Me.CLabel4.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel4.Name = "CLabel4"
-            Me.CLabel4.Size = New System.Drawing.Size(974, 23)
-            Me.CLabel4.TabIndex = 273
-            Me.CLabel4.Text = "Total"
-            Me.CLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-            Me.CLabel4.Translatable = True
-            '
-            'txtAmount
-            '
-            Me.txtAmount.BackColor = System.Drawing.Color.White
-            Me.txtAmount.BegFindValue = Nothing
-            Me.txtAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtAmount.ComputedValue = False
-            Me.txtAmount.CustomFormat = Nothing
-            Me.txtAmount.DataBoundControl = True
-            Me.txtAmount.EditingMode = True
-            Me.txtAmount.EndFindValue = Nothing
-            Me.txtAmount.FieldDescription = Nothing
-            Me.txtAmount.FieldName = Nothing
-            Me.txtAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtAmount.FindEnabled = False
-            Me.txtAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtAmount.ForeColor = System.Drawing.Color.Black
-            Me.txtAmount.LinkedLabel = Nothing
-            Me.txtAmount.Location = New System.Drawing.Point(977, 475)
-            Me.txtAmount.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtAmount.MaximumValue = Nothing
-            Me.txtAmount.MinimumValue = Nothing
-            Me.txtAmount.Name = "txtAmount"
-            Me.txtAmount.OldValue = Nothing
-            Me.txtAmount.OverrideMaxLength = 0
-            Me.txtAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtAmount.Size = New System.Drawing.Size(100, 23)
-            Me.txtAmount.TabIndex = 1
-            Me.txtAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-            Me.txtAmount.Translatable = False
-            '
-            'ProductTableAdapter
-            '
-            Me.ProductTableAdapter.ClearBeforeFill = True
-            '
-            'lblNotes
-            '
-            Me.lblNotes.DisplayOnly = True
-            Me.lblNotes.EditingMode = False
-            Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblNotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblNotes.Location = New System.Drawing.Point(16, 93)
-            Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblNotes.Name = "lblNotes"
-            Me.lblNotes.Size = New System.Drawing.Size(156, 23)
-            Me.lblNotes.TabIndex = 270
-            Me.lblNotes.Text = "Notes"
-            Me.lblNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.lblNotes.Translatable = True
             '
             'dgvSequence
             '
@@ -1001,37 +913,153 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvUnitCount.ReadOnly = True
             Me.dgvUnitCount.Visible = False
             '
+            'dgvInventoryIdNo
+            '
+            Me.dgvInventoryIdNo.DataPropertyName = "InventoryIdNo"
+            Me.dgvInventoryIdNo.HeaderText = "InventoryIdNo"
+            Me.dgvInventoryIdNo.Name = "dgvInventoryIdNo"
+            Me.dgvInventoryIdNo.ReadOnly = True
+            Me.dgvInventoryIdNo.Visible = False
+            '
             'bsPurchaseOrderDetails
             '
             Me.bsPurchaseOrderDetails.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PurchaseOrderDetailModel)
             '
-            'txtNotes
+            'DGVDummy
             '
-            Me.txtNotes.BackColor = System.Drawing.SystemColors.ControlLight
-            Me.txtNotes.BegFindValue = Nothing
-            Me.txtNotes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtNotes.ComputedValue = False
-            Me.txtNotes.CustomFormat = Nothing
-            Me.txtNotes.DataBoundControl = True
-            Me.txtNotes.EditingMode = True
-            Me.txtNotes.EndFindValue = Nothing
-            Me.txtNotes.FieldDescription = Nothing
-            Me.txtNotes.FieldName = Nothing
-            Me.txtNotes.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtNotes.FindEnabled = False
-            Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtNotes.LinkedLabel = Nothing
-            Me.txtNotes.Location = New System.Drawing.Point(174, 93)
-            Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtNotes.MaximumValue = Nothing
-            Me.txtNotes.MinimumValue = Nothing
-            Me.txtNotes.Name = "txtNotes"
-            Me.txtNotes.OldValue = Nothing
-            Me.txtNotes.OverrideMaxLength = 0
-            Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtNotes.Size = New System.Drawing.Size(732, 23)
-            Me.txtNotes.TabIndex = 5
-            Me.txtNotes.Translatable = False
+            DataGridViewCellStyle10.BackColor = System.Drawing.Color.FloralWhite
+            Me.DGVDummy.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle10
+            Me.DGVDummy.BegFindValue = Nothing
+            Me.DGVDummy.Cached = False
+            DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control
+            DataGridViewCellStyle11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText
+            DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.DGVDummy.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle11
+            Me.DGVDummy.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            Me.DGVDummy.DataFilter = Nothing
+            DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DGVDummy.DefaultCellStyle = DataGridViewCellStyle12
+            Me.DGVDummy.DgvFooter = Nothing
+            Me.DGVDummy.DisplayOnly = False
+            Me.DGVDummy.Ea = Nothing
+            Me.DGVDummy.EditingMode = False
+            Me.DGVDummy.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DGVDummy.EndFindValue = Nothing
+            Me.DGVDummy.FieldDescription = Nothing
+            Me.DGVDummy.FieldName = Nothing
+            Me.DGVDummy.FieldsDictionary = Nothing
+            Me.DGVDummy.FindColumnNo = CType(0, Short)
+            Me.DGVDummy.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.DGVDummy.FindEnabled = False
+            Me.DGVDummy.FirstRowDeletionEnabled = True
+            Me.DGVDummy.FirstRowInsertionEnabled = True
+            Me.FlowLayoutPanel1.SetFlowBreak(Me.DGVDummy, True)
+            Me.DGVDummy.IgnoreCase = False
+            Me.DGVDummy.IsDirty = False
+            Me.DGVDummy.Location = New System.Drawing.Point(1083, 163)
+            Me.DGVDummy.Name = "DGVDummy"
+            Me.DGVDummy.OldCellValue = Nothing
+            Me.DGVDummy.ReadOnly = True
+            DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control
+            DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText
+            DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.DGVDummy.RowHeadersDefaultCellStyle = DataGridViewCellStyle13
+            Me.DGVDummy.Searchable = True
+            Me.DGVDummy.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.DGVDummy.SecurityKey = ""
+            Me.DGVDummy.SequenceColumn = "dgvSequence"
+            Me.DGVDummy.SequenceFieldName = "Sequence"
+            Me.DGVDummy.ShowFooter = False
+            Me.DGVDummy.Size = New System.Drawing.Size(10, 308)
+            Me.DGVDummy.TabIndex = 9
+            Me.DGVDummy.Translatable = True
+            '
+            'CLabel4
+            '
+            Me.CLabel4.DisplayOnly = True
+            Me.CLabel4.EditingMode = False
+            Me.CLabel4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel4.Location = New System.Drawing.Point(1, 475)
+            Me.CLabel4.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel4.Name = "CLabel4"
+            Me.CLabel4.Size = New System.Drawing.Size(974, 23)
+            Me.CLabel4.TabIndex = 273
+            Me.CLabel4.Text = "Total"
+            Me.CLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+            Me.CLabel4.Translatable = True
+            '
+            'txtAmount
+            '
+            Me.txtAmount.BackColor = System.Drawing.Color.White
+            Me.txtAmount.BegFindValue = Nothing
+            Me.txtAmount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtAmount.ComputedValue = False
+            Me.txtAmount.CustomFormat = Nothing
+            Me.txtAmount.DataBoundControl = True
+            Me.txtAmount.EditingMode = True
+            Me.txtAmount.EndFindValue = Nothing
+            Me.txtAmount.FieldDescription = Nothing
+            Me.txtAmount.FieldName = Nothing
+            Me.txtAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtAmount.FindEnabled = False
+            Me.txtAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtAmount.ForeColor = System.Drawing.Color.Black
+            Me.txtAmount.LinkedLabel = Nothing
+            Me.txtAmount.Location = New System.Drawing.Point(977, 475)
+            Me.txtAmount.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtAmount.MaximumValue = Nothing
+            Me.txtAmount.MinimumValue = Nothing
+            Me.txtAmount.Name = "txtAmount"
+            Me.txtAmount.OldValue = Nothing
+            Me.txtAmount.OverrideMaxLength = 0
+            Me.txtAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtAmount.Size = New System.Drawing.Size(100, 23)
+            Me.txtAmount.TabIndex = 1
+            Me.txtAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+            Me.txtAmount.Translatable = False
+            '
+            'ProductTableAdapter
+            '
+            Me.ProductTableAdapter.ClearBeforeFill = True
+            '
+            'chkApproved
+            '
+            Me.chkApproved.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.chkApproved.BackColor = System.Drawing.Color.Transparent
+            Me.chkApproved.BegFindValue = Nothing
+            Me.chkApproved.Checked = False
+            Me.chkApproved.DisplayOnly = True
+            Me.chkApproved.EditingMode = False
+            Me.chkApproved.EndFindValue = Nothing
+            Me.chkApproved.FieldDescription = Nothing
+            Me.chkApproved.FieldName = Nothing
+            Me.chkApproved.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.chkApproved.FindEnabled = False
+            Me.CFlowLayout2.SetFlowBreak(Me.chkApproved, True)
+            Me.chkApproved.IgnoreCase = False
+            Me.chkApproved.LinkedLabel = Nothing
+            Me.chkApproved.Location = New System.Drawing.Point(3, 30)
+            Me.chkApproved.Name = "chkApproved"
+            Me.chkApproved.RightToLeft = System.Windows.Forms.RightToLeft.No
+            Me.chkApproved.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.chkApproved.Size = New System.Drawing.Size(111, 21)
+            Me.chkApproved.TabIndex = 4
+            Me.chkApproved.Text = "Approved"
+            Me.chkApproved.Translatable = True
             '
             'PurchaseOrderEntry
             '
@@ -1050,9 +1078,9 @@ Namespace PresentationLayer.Views.Forms
             Me.floInventoryHeader.ResumeLayout(False)
             Me.floInventoryHeader.PerformLayout()
             CType(Me.DataGridViewPurchaseOrderDetails, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsPurchaseOrderDetails, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.DGVDummy, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.ProductBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.bsPurchaseOrderDetails, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
             Me.PerformLayout()
 
@@ -1060,7 +1088,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents bsPurchaseOrderDetails As BindingSource
         Friend WithEvents CFlowLayout2 As CFlowLayout
         Friend WithEvents chkCancelled As UcCheckBox
-        Friend WithEvents chkPosted As UcCheckBox
+        Friend WithEvents chkDisapproved As UcCheckBox
         Friend WithEvents lblDateAdded As CLabel
         Friend WithEvents txtDateCreated As CTextBox
         Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
@@ -1110,5 +1138,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents dgvInventoryIdNo As DataGridViewTextBoxColumn
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents txtNotes As CTextBox
+        Friend WithEvents chkApproved As UcCheckBox
     End Class
 End NameSpace

@@ -95,12 +95,26 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Posted As Boolean Implements IPurchaseOrderView.Posted
+        Public Property Disapproved As Boolean Implements IPurchaseOrderView.Disapproved
             Get
-                Return chkPosted.Checked
+                Return chkDisapproved.Checked
             End Get
             Set(value As Boolean)
-                chkPosted.Checked = value
+                chkDisapproved.Checked = value
+                'If value Then
+                '    btnPost.Enabled = False
+                'Else
+                '    btnPost.Enabled = True
+                'End If
+            End Set
+        End Property
+
+        Public Property Approved As Boolean Implements IPurchaseOrderView.Approved
+            Get
+                Return chkApproved.Checked
+            End Get
+            Set(value As Boolean)
+                chkApproved.Checked = value
                 'If value Then
                 '    btnPost.Enabled = False
                 'Else
@@ -186,6 +200,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property Posted As Boolean Implements IPurchaseOrderView.Posted
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Boolean)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()
@@ -195,7 +218,7 @@ Namespace PresentationLayer.Views.Forms
          {"Cancelled", chkCancelled},
          {"DateCreated", txtDateCreated},
          {"IdNo", TxtIdNo},
-         {"Posted", chkPosted},
+         {"Posted", chkDisapproved},
          {"ReferenceNo", txtReferenceNo},
          {"SupplierIdNo", cboSupplierIdNo},
          {"TransactionDate", dtpTransactionDate},
@@ -456,6 +479,9 @@ Namespace PresentationLayer.Views.Forms
             dgvUnitCost.UpdateDisplayOnlyControl()
         End Sub
 
+        Private Sub chkPosted_Load(sender As Object, e As EventArgs) Handles chkDisapproved.Load
+
+        End Sub
     End Class
 
 End Namespace
