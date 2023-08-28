@@ -6,8 +6,10 @@ Namespace PresentationLayer.Views.Interfaces
         Inherits IView
 
         Property Amount As Decimal
+        Property Approved As Boolean
         Property Cancelled As Boolean
         Property DateCreated As DateTime?
+        Property Disapproved As Boolean
         Property DueDate As Date?
         Property IdNo As Int32
         Property InvoiceDate As Date?
@@ -32,6 +34,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property ProductCodeIsValid As Boolean
         Property NumberOfUnits As Short
         Property ProductNameIsValid As Boolean
+        Property PurchaseOrder As Boolean
         Event ProductUnitEditing(productIdNo As Int32) ', bs As BindingSource)
         Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource)
         Event ProductCodeChanged(productCode As String, bs As BindingSource)

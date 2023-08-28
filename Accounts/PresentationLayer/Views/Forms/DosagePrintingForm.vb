@@ -38,7 +38,7 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
-            Text = Messaging.TranslateCaption("Check Disbursement Journal")
+            Text = Messaging.TranslateCaption("Dosage Printing")
             _nfi.NumberDecimalDigits = 2
 
         End Sub

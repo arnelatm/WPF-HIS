@@ -20,46 +20,90 @@ Namespace PresentationLayer.Presenters
 
         Protected DtInsertTable As New DataTable
         Protected DtUpdateTable As New DataTable
-        Private ReadOnly _productService As New AccountsService("Product")
-        Private ReadOnly _purchaseHistoryService As New AccountsService("PurchaseHistory")
 
-        Public Sub New(view As IPurchaseView)
+        Private _productService
+        Private _purchaseHistoryService
+        Private _purchaseItemService
+        Protected PurchaseOrder As Boolean
+
+        'Private ReadOnly _productService As New AccountsService("Product")
+        'Private ReadOnly _purchaseHistoryService As New AccountsService("PurchaseHistory")
+        'Protected PurchaseOrder As Boolean
+
+        Public Sub New(view As IPurchaseView, ByVal pPurchaseOrder As Boolean)
             MyBase.New(view)
+            PurchaseOrder = pPurchaseOrder
             DataFilter = "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString()
-            TableName = "Purchase"
+            If PurchaseOrder Then
+                TableName = "PurchaseOrder"
+            Else
+                TableName = "Purchase"
+            End If
+            _productService = New AccountsService("Product")
+            _purchaseHistoryService = New AccountsService("PurchaseHistory")
+            _purchaseItemService = New AccountsService("PurchaseDetail", {PurchaseOrder}, {PurchaseOrder})
             WithTreeView = False
-            Service = New AccountsService("Purchase")
             SortOrderKey = "IdNo"
-            DtInsertTable.Columns.Add("BatchNo", GetType(String))
-            DtInsertTable.Columns.Add("BonusQuantity", GetType(Int16))
-            DtInsertTable.Columns.Add("DiscountAmount", GetType(Decimal))
-            DtInsertTable.Columns.Add("ExpiryDate", GetType(Date))
-            DtInsertTable.Columns.Add("NetAmount", GetType(Decimal))
-            DtInsertTable.Columns.Add("Price", GetType(Decimal))
-            DtInsertTable.Columns.Add("ProductIdNo", GetType(Int16))
-            DtInsertTable.Columns.Add("PurchaseIdNo", GetType(Int32))
-            DtInsertTable.Columns.Add("Quantity", GetType(Int16))
-            DtInsertTable.Columns.Add("Sequence", GetType(Int16))
-            DtInsertTable.Columns.Add("UnitIdNo", GetType(Int16))
-            DtInsertTable.Columns.Add("UnitSalesPrice", GetType(Decimal))
-            DtInsertTable.Columns.Add("VatAmount", GetType(Decimal))
-            DtInsertTable.Columns.Add("VatPercent", GetType(Decimal))
+            Service = New AccountsService("Purchase", {PurchaseOrder}, {PurchaseOrder})
 
-            DtUpdateTable.Columns.Add("BatchNo", GetType(String))
-            DtUpdateTable.Columns.Add("BonusQuantity", GetType(Int16))
-            DtUpdateTable.Columns.Add("DiscountAmount", GetType(Decimal))
-            DtUpdateTable.Columns.Add("ExpiryDate", GetType(Date))
-            DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("NetAmount", GetType(Decimal))
-            DtUpdateTable.Columns.Add("Price", GetType(Decimal))
-            DtUpdateTable.Columns.Add("ProductIdNo", GetType(Int16))
-            DtUpdateTable.Columns.Add("PurchaseIdNo", GetType(Int32))
-            DtUpdateTable.Columns.Add("Quantity", GetType(Int16))
-            DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
-            DtUpdateTable.Columns.Add("UnitIdNo", GetType(Int16))
-            DtUpdateTable.Columns.Add("UnitSalesPrice", GetType(Decimal))
-            DtUpdateTable.Columns.Add("VatAmount", GetType(Decimal))
-            DtUpdateTable.Columns.Add("VatPercent", GetType(Decimal))
+            If PurchaseOrder Then
+                DtInsertTable.Columns.Add("BonusQuantity", GetType(Int16))
+                DtInsertTable.Columns.Add("DiscountAmount", GetType(Decimal))
+                DtInsertTable.Columns.Add("NetAmount", GetType(Decimal))
+                DtInsertTable.Columns.Add("Price", GetType(Decimal))
+                DtInsertTable.Columns.Add("ProductIdNo", GetType(Int16))
+                DtInsertTable.Columns.Add("PurchaseOrderIdNo", GetType(Int32))
+                DtInsertTable.Columns.Add("Quantity", GetType(Int16))
+                DtInsertTable.Columns.Add("Sequence", GetType(Int16))
+                DtInsertTable.Columns.Add("UnitIdNo", GetType(Int16))
+                DtInsertTable.Columns.Add("VatAmount", GetType(Decimal))
+                DtInsertTable.Columns.Add("VatPercent", GetType(Decimal))
+
+                DtUpdateTable.Columns.Add("BonusQuantity", GetType(Int16))
+                DtUpdateTable.Columns.Add("DiscountAmount", GetType(Decimal))
+                DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
+                DtUpdateTable.Columns.Add("NetAmount", GetType(Decimal))
+                DtUpdateTable.Columns.Add("Price", GetType(Decimal))
+                DtUpdateTable.Columns.Add("ProductIdNo", GetType(Int16))
+                DtUpdateTable.Columns.Add("PurchaseOrderIdNo", GetType(Int32))
+                DtUpdateTable.Columns.Add("Quantity", GetType(Int16))
+                DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
+                DtUpdateTable.Columns.Add("UnitIdNo", GetType(Int16))
+                DtUpdateTable.Columns.Add("VatAmount", GetType(Decimal))
+                DtUpdateTable.Columns.Add("VatPercent", GetType(Decimal))
+            Else
+                DtInsertTable.Columns.Add("BatchNo", GetType(String))
+                DtInsertTable.Columns.Add("BonusQuantity", GetType(Int16))
+                DtInsertTable.Columns.Add("DiscountAmount", GetType(Decimal))
+                DtInsertTable.Columns.Add("ExpiryDate", GetType(Date))
+                DtInsertTable.Columns.Add("NetAmount", GetType(Decimal))
+                DtInsertTable.Columns.Add("Price", GetType(Decimal))
+                DtInsertTable.Columns.Add("ProductIdNo", GetType(Int16))
+                DtInsertTable.Columns.Add("PurchaseIdNo", GetType(Int32))
+                DtInsertTable.Columns.Add("Quantity", GetType(Int16))
+                DtInsertTable.Columns.Add("Sequence", GetType(Int16))
+                DtInsertTable.Columns.Add("UnitIdNo", GetType(Int16))
+                DtInsertTable.Columns.Add("UnitSalesPrice", GetType(Decimal))
+                DtInsertTable.Columns.Add("VatAmount", GetType(Decimal))
+                DtInsertTable.Columns.Add("VatPercent", GetType(Decimal))
+
+                DtUpdateTable.Columns.Add("BatchNo", GetType(String))
+                DtUpdateTable.Columns.Add("BonusQuantity", GetType(Int16))
+                DtUpdateTable.Columns.Add("DiscountAmount", GetType(Decimal))
+                DtUpdateTable.Columns.Add("ExpiryDate", GetType(Date))
+                DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
+                DtUpdateTable.Columns.Add("NetAmount", GetType(Decimal))
+                DtUpdateTable.Columns.Add("Price", GetType(Decimal))
+                DtUpdateTable.Columns.Add("ProductIdNo", GetType(Int16))
+                DtUpdateTable.Columns.Add("PurchaseIdNo", GetType(Int32))
+                DtUpdateTable.Columns.Add("Quantity", GetType(Int16))
+                DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
+                DtUpdateTable.Columns.Add("UnitIdNo", GetType(Int16))
+                DtUpdateTable.Columns.Add("UnitSalesPrice", GetType(Decimal))
+                DtUpdateTable.Columns.Add("VatAmount", GetType(Decimal))
+                DtUpdateTable.Columns.Add("VatPercent", GetType(Decimal))
+            End If
+
             AddHandler view.ProductUnitEditing, AddressOf OnProductUnitEditing
             AddHandler view.ProductCodeChanged, AddressOf OnProductCodeChanged
             AddHandler view.ProductUnitSelection, AddressOf OnProductUnitSelection
@@ -67,8 +111,6 @@ Namespace PresentationLayer.Presenters
             AddHandler view.ProductNameValidating, AddressOf OnProductNameValidating
             AddHandler view.PostData, AddressOf OnPostData
             AddHandler view.RowChanged, AddressOf OnRowChanged
-
-
         End Sub
 
 
@@ -95,19 +137,33 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub FillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
-            workRow("BatchNo") = itemDataView.BatchNo
-            workRow("BonusQuantity") = itemDataView.BonusQuantity
-            workRow("DiscountAmount") = itemDataView.DiscountAmount
-            workRow("ExpiryDate") = IIf(itemDataView.ExpiryDate Is Nothing, DBNull.Value, itemDataView.ExpiryDate)
-            workRow("NetAmount") = itemDataView.NetAmount
-            workRow("Price") = itemDataView.Price
-            workRow("ProductIdNo") = itemDataView.ProductIdNo
-            workRow("PurchaseIdNo") = View.IdNo
-            workRow("Quantity") = itemDataView.Quantity
-            workRow("UnitIdNo") = itemDataView.UnitIdNo
-            workRow("UnitSalesPrice") = itemDataView.UnitSalesPrice
-            workRow("VatAmount") = itemDataView.VatAmount
-            workRow("VatPercent") = itemDataView.VatPercent
+            If PurchaseOrder Then
+                workRow("BonusQuantity") = itemDataView.BonusQuantity
+                workRow("DiscountAmount") = itemDataView.DiscountAmount
+                workRow("NetAmount") = itemDataView.NetAmount
+                workRow("Price") = itemDataView.Price
+                workRow("ProductIdNo") = itemDataView.ProductIdNo
+                workRow("PurchaseOrderIdNo") = View.IdNo
+                workRow("Quantity") = itemDataView.Quantity
+                workRow("UnitIdNo") = itemDataView.UnitIdNo
+                workRow("VatAmount") = itemDataView.VatAmount
+                workRow("VatPercent") = itemDataView.VatPercent
+            Else
+                workRow("BatchNo") = itemDataView.BatchNo
+                workRow("BonusQuantity") = itemDataView.BonusQuantity
+                workRow("DiscountAmount") = itemDataView.DiscountAmount
+                workRow("ExpiryDate") = IIf(itemDataView.ExpiryDate Is Nothing, DBNull.Value, itemDataView.ExpiryDate)
+                workRow("NetAmount") = itemDataView.NetAmount
+                workRow("Price") = itemDataView.Price
+                workRow("ProductIdNo") = itemDataView.ProductIdNo
+                workRow("PurchaseIdNo") = View.IdNo
+                workRow("Quantity") = itemDataView.Quantity
+                workRow("UnitIdNo") = itemDataView.UnitIdNo
+                workRow("UnitSalesPrice") = itemDataView.UnitSalesPrice
+                workRow("VatAmount") = itemDataView.VatAmount
+                workRow("VatPercent") = itemDataView.VatPercent
+            End If
+
         End Sub
 
         Public Function PurchaseDetailFilter(ByVal obj As Object) As Boolean
@@ -117,11 +173,9 @@ Namespace PresentationLayer.Presenters
             Return True
         End Function
 
-        Private ReadOnly _purchaseItemService As New AccountsService("PurchaseDetail")
-
         Public Sub SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
             Dim passedValue As Integer = retVal
-            retVal = UpdateChildData(_purchaseItemService, DtUpdateTable, DtInsertTable, passedValue, "PurchaseIdNo")
+            retVal = UpdateChildData(_purchaseItemService, DtUpdateTable, DtInsertTable, passedValue, IIf(PurchaseOrder, "PurchaseOrderIdNo", "PurchaseIdNo"))
             If retVal >= 0 AndAlso Not IsEmpty(View.VatNumber) Then
                 Service.UpdateVatNumber(View.VatNumber, View.SupplierIdNo)
             End If
@@ -147,10 +201,19 @@ Namespace PresentationLayer.Presenters
         Public Overrides Sub GoPrintRecord()
             Dim cr As New CrPrintableArgs
             Dim pr As New PrintReportPresenter(Of InvTransactionModel)
-            Dim title As String = Messaging.TranslateCaption("Purchase Report")
-            cr.ReportFileName = "Purchase Report.Rpt"
-            cr.Language = CultureInfo.CurrentCulture.Name
-            cr.ReportParameters = {cr.Language, "Language", title, "ReportTitle", View.IdNo, "PurchaseIdNo"}
+            Dim title As String
+            If PurchaseOrder Then
+                title = Messaging.TranslateCaption("Purchase Order Report")
+                cr.ReportFileName = "Purchase Order Report.Rpt"
+                cr.Language = CultureInfo.CurrentCulture.Name
+                cr.ReportParameters = {cr.Language, "Language", title, "ReportTitle", View.IdNo, "PurchaseOrderIdNo"}
+            Else
+                title = Messaging.TranslateCaption("Purchase Report")
+                cr.ReportFileName = "Purchase Report.Rpt"
+                cr.Language = CultureInfo.CurrentCulture.Name
+                cr.ReportParameters = {cr.Language, "Language", title, "ReportTitle", View.IdNo, "PurchaseIdNo"}
+            End If
+
             pr.PrintReport(cr.ReportFileName, cr, False)
         End Sub
 

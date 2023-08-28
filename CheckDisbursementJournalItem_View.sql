@@ -1,4 +1,4 @@
-﻿USE [ISPDATA]
+﻿dao.vbUSE [ISPDATA]
 GO
 
 /****** Object:  View [dbo].[CkJournalItem_View]    Script Date: 3/18/2020 11:06:56 AM ******/

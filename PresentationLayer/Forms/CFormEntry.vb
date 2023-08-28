@@ -100,6 +100,7 @@ Public Class CFormEntry
         'Next
         Parent.ResumeDrawing()
         FormShown = True
+        PublishClickedButton(ButtonClicked.Last)
     End Sub
 
     'Public Property RecordCount As Integer Implements IViewDataEntry.RecordCount
@@ -126,8 +127,9 @@ Public Class CFormEntry
 
     Public Overridable Sub UpdateViewDisplay(editMode As Boolean, addMode As Boolean, recordPositionNumber As Integer, targetIdNo As Integer, recordCount As Integer)
         If Not HideNavigatorButtons Then
-            tsbCurrentRecord.Text = recordPositionNumber
-            tsbTotalRecords.Text = recordCount
+            tsbCurrentRecord.Text = recordPositionNumber.ToString()
+            tsbTotalRecords.Text = recordCount.ToString()
+            Application.DoEvents()
             UpdateNavigationButtonDisplay(editMode, addMode, recordPositionNumber, recordCount)
         End If
         If addMode Or editMode Then
@@ -566,7 +568,7 @@ Public Class CFormEntry
                 Ea.PublishEvent(New EntryFormLoaded(Me))
             End If
             'Debugger.Break()
-            PublishClickedButton(ButtonClicked.Last)
+            'PublishClickedButton(ButtonClicked.First)
             Inputs(False)
             If SingleData Or HideNavigatorButtons Then
                 btnFirst.Visible = False
@@ -598,9 +600,12 @@ Public Class CFormEntry
                 btnAdd.PerformClick()
                 FirstControl.Select()
             End If
+            'PublishClickedButton(ButtonClicked.Last)
+            'PublishClickedButton(ButtonClicked.Last)
             'CenterForm(Me)
-            'UpdateNavigationButtonDisplay(False, False)
+            'UpdateViewDisplay(editMode, addMode:=, recordPositionNumber:=, targetIdNo, recordCount)
         End If
+        Refresh()
     End Sub
 
     Public Shared Sub CenterForm(ByVal frm As Form, Optional ByVal parent As Form = Nothing)
@@ -711,6 +716,10 @@ Public Class CFormEntry
         End If
         'ResumeDrawing()
         'ResumeLayout()
+    End Sub
+
+    Private Sub tsbCurrentRecord_VisibleChanged(sender As Object, e As EventArgs) Handles tsbCurrentRecord.VisibleChanged
+        Debugger.Break()
     End Sub
 
     'Private Sub btnEdit_EnabledChanged(sender As Object, e As EventArgs) Handles btnEdit.EnabledChanged

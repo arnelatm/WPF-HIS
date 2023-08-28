@@ -37,7 +37,7 @@ Namespace DataLayer.AdoNet
                     ' use IdNo as code
                     Dim code As String
                     If Not IsDBNull(oMaxLength) Then
-                        code = prefix & Right(StrDup(CInt(oMaxLength), "0") & idNo.ToString().Trim(), maxlength)
+                        code = prefix & Right(StrDup(CInt(oMaxLength), "0") & idNo.ToString().Trim(), oMaxLength)
                     Else
                         code = prefix & idNo.ToString().Trim()
                     End If

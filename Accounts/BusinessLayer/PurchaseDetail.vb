@@ -5,7 +5,12 @@ Namespace BusinessLayer
         Inherits AATM.BusinessLayer.BusinessObject
 
         ' ** Enterprise Design Pattern: Identity field pattern
+
         Public Sub New()
+
+        End Sub
+
+        Public Sub New(parameter As Object)
             ' establish business rules
         End Sub
 

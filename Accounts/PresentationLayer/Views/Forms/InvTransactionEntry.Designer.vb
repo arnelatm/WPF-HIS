@@ -1174,7 +1174,6 @@ Namespace PresentationLayer.Views.Forms
             Me.ClientSize = New System.Drawing.Size(1115, 592)
             Me.Controls.Add(Me.FlowLayoutPanel1)
             Me.Name = "InvTransactionEntry"
-            Me.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.Text = "InvTransaction Entry"
             Me.Controls.SetChildIndex(Me.FlowLayoutPanel1, 0)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
