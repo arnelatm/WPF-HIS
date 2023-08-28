@@ -501,7 +501,7 @@ Namespace PresentationLayer.Views.Forms
             Me.imgPicture.DisplayOnly = False
             Me.imgPicture.EditingMode = False
             resources.ApplyResources(Me.imgPicture, "imgPicture")
-            Me.imgPicture.MaxImageSize = 240000
+            Me.imgPicture.MaxImageSize = 5000000
             Me.imgPicture.Name = "imgPicture"
             Me.imgPicture.TabStop = False
             Me.imgPicture.Translatable = False

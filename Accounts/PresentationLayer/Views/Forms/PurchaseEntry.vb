@@ -32,6 +32,7 @@ Namespace PresentationLayer.Views.Forms
         Public Property ProductsByCode As DataTable Implements IPurchaseView.ProductsByCode
         Public Property UnitsByCode As Object Implements IPurchaseView.UnitsByCode
         Public Property UnitsByProduct As Object Implements IPurchaseView.UnitsByProduct
+        Public Property PurchaseOrder As Boolean Implements IPurchaseView.PurchaseOrder
 
         'Public Property UnitsByCode As DataTable Implements IPurchaseView.UnitsByCode
         'Public Property UnitsByProduct As DataTable Implements IPurchaseView.UnitsByProduct
@@ -49,6 +50,7 @@ Namespace PresentationLayer.Views.Forms
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
+            PurchaseOrder = PurOrder
             FirstControl = cboSupplierIdNo
             ' Add any initialization after the InitializeComponent() call.
             _nfi.NumberDecimalDigits = 2
@@ -313,9 +315,75 @@ Namespace PresentationLayer.Views.Forms
             Else
                 cboWarehouseIdNo.Enabled = True
             End If
+            If PurchaseOrder Then
+                chkApproved.Visible = True
+                chkDisapproved.Visible = True
+                chkPosted.Visible = False
+                txtInvoiceNo.Visible = False
+                lblInvoiceNo.Visible = False
+                lblInvoiceDate.Visible = False
+                dtpDueDate.Visible = False
+                lblDueDate.Visible = False
+                dtpInvoiceDate.Visible = False
+                lblInvoiceDate.Visible = False
+                txtNotes.Visible = True
+                lblNotes.Visible = True
+                dgvBatchNo.Visible = False
+                dgvExpiryDate.Visible = False
+                dgvUnitSalesPrice.Visible = False
+                dgvUnitCost.Visible = False
+                Text = "Purchase Order Entry"
+                btnPost.Visible = False
+            Else
+                chkApproved.Visible = False
+                chkDisapproved.Visible = False
+                chkPosted.Visible = True
+                txtInvoiceNo.Visible = True
+                lblInvoiceNo.Visible = True
+                lblInvoiceDate.Visible = True
+                dtpDueDate.Visible = True
+                lblDueDate.Visible = True
+                dtpInvoiceDate.Visible = True
+                lblInvoiceDate.Visible = True
+                txtNotes.Visible = False
+                lblNotes.Visible = False
+                dgvBatchNo.Visible = True
+                dgvExpiryDate.Visible = True
+                dgvUnitCost.Visible = True
+                Text = "Purchase Entry"
+                btnPost.Visible = True
+            End If
         End Sub
 
         Public Property PurchaseDetailsBs As BindingSource Implements IPurchaseView.PurchaseDetailsBs
+
+        Public Property Disapproved As Boolean Implements IPurchaseView.Disapproved
+            Get
+                Return chkDisapproved.Checked
+            End Get
+            Set(value As Boolean)
+                chkDisapproved.Checked = value
+                'If value Then
+                '    btnPost.Enabled = False
+                'Else
+                '    btnPost.Enabled = True
+                'End If
+            End Set
+        End Property
+
+        Public Property Approved As Boolean Implements IPurchaseView.Approved
+            Get
+                Return chkApproved.Checked
+            End Get
+            Set(value As Boolean)
+                chkApproved.Checked = value
+                'If value Then
+                '    btnPost.Enabled = False
+                'Else
+                '    btnPost.Enabled = True
+                'End If
+            End Set
+        End Property
 
         Private Sub BindPurchaseDetail()
             SuspendLayout()

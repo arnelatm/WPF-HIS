@@ -74,8 +74,8 @@ Namespace DataLayer.AdoNet
             Dim retVal As Int32 = 0
             Dim sql As String =
                     " INSERT INTO [InvTransaction] " &
-                    " (Amount,BranchIdNo,Cancelled,InvTransTypeIdNo,Notes,Posted,ReferenceNo,SupplierIdNo,TransactionDate,UserIdNo,WarehouseIdNo,WarehouseToIdNo)" &
-                    " VALUES (@Amount,@BranchIdNo,@Cancelled,@InvTransTypeIdNo,@Notes,@Posted,@SupplierIdNo,@ReferenceNo,@TransactionDate,@UseridNo,@WarehouseIdNo,@WarehouseToIdNo)"
+                    " (Amount,BranchIdNo,Cancelled,InvTransTypeIdNo,Notes,Posted,ReferenceNo,TransactionDate,UserIdNo,WarehouseIdNo,WarehouseToIdNo)" &
+                    " VALUES (@Amount,@BranchIdNo,@Cancelled,@InvTransTypeIdNo,@Notes,@Posted,@ReferenceNo,@TransactionDate,@UseridNo,@WarehouseIdNo,@WarehouseToIdNo)"
             retVal = Db.Insert(sql, Take(InvTransaction))
             If retVal > 0 Then
                 UpdateReferenceNumber(retVal)

@@ -1188,7 +1188,11 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemPurchase_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPurchase.Click
-            RunForm(Of PurchaseEntry, PurchasePresenter(Of PurchaseModel))()
+            Dim formToRun = New PurchaseEntry(False)
+            formToRun.Presenter = New PurchasePresenter(Of PurchaseModel)(formToRun, False)
+            formToRun.Show()
+
+            'RunForm(Of PurchaseEntry, PurchasePresenter(Of PurchaseModel), Object)({False})
         End Sub
 
         Private Sub ToolStripMenuItemSalesEntry_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSalesEntry.Click
@@ -1252,7 +1256,10 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemPurchaseOrder_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPurchaseOrder.Click
-            RunForm(Of PurchaseOrderEntry, PurchaseOrderPresenter(Of PurchaseOrderModel))()
+            Dim formToRun = New PurchaseEntry(True)
+            formToRun.Presenter = New PurchasePresenter(Of PurchaseModel)(formToRun, True)
+            formToRun.Show()
+            'RunForm(Of PurchaseOrderEntry, PurchaseOrderPresenter(Of PurchaseOrderModel))()
         End Sub
 
 

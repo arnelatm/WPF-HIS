@@ -7,12 +7,15 @@
     Public Class PurchaseModel
 
         Public Property Amount As Decimal
+        Public Property Approved As Boolean
         Public Property BranchIdNo As Int16
         Public Property Cancelled As Boolean
         Public Property DateCreated As DateTime?
+        Public Property Disaproved As Boolean
         Public Property DueDate As Date?
         Public Property Errors As List(Of String)
         Public Property IdNo As Int32
+        Public Property InvoiceAmount As Decimal
         Public Property InvoiceDate As Date?
         Public Property InvoiceNo As String
         Public Property Notes As String
