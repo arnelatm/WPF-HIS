@@ -36,7 +36,7 @@ Namespace PresentationLayer.Models
         Public Property NationalityCode As String
         Public Property Notes As String
         Public Property OpeningBalance As Decimal
-        Public Property PayCycleIdNo As Byte?
+        Public Property PayCycleIdNo As Int16?
         Public Property PayGroupIdNo As Int16?
         Public Property PaymentMethod As String
         Public Property Phone1 As String

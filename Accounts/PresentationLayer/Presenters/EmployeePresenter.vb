@@ -592,11 +592,11 @@ End Namespace
 
 Public Class PayCycleIdNoChanged
 
-    Public Sub New(ByVal payCycleIdNo As Byte?)
+    Public Sub New(ByVal payCycleIdNo As Int16?)
         Me.PayCycleIdNo = payCycleIdNo
     End Sub
 
-    Public Property PayCycleIdNo As Byte?
+    Public Property PayCycleIdNo As Int16?
 
 End Class
 

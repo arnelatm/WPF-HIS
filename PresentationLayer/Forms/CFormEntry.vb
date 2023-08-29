@@ -718,9 +718,9 @@ Public Class CFormEntry
         'ResumeLayout()
     End Sub
 
-    Private Sub tsbCurrentRecord_VisibleChanged(sender As Object, e As EventArgs) Handles tsbCurrentRecord.VisibleChanged
-        Debugger.Break()
-    End Sub
+    'Private Sub tsbCurrentRecord_VisibleChanged(sender As Object, e As EventArgs) Handles tsbCurrentRecord.VisibleChanged
+    '    Debugger.Break()
+    'End Sub
 
     'Private Sub btnEdit_EnabledChanged(sender As Object, e As EventArgs) Handles btnEdit.EnabledChanged
     '    Debugger.Break()

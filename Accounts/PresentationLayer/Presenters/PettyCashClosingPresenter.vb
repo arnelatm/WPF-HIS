@@ -189,18 +189,21 @@ Namespace PresentationLayer.Presenters
 
         Public ReadOnly Property DefaultPcAccount As Int16
             Get
-                Dim retVal As String = Nothing
-                If View.PcAccountIdNo Is Nothing Or View.PcAccountIdNo <= 0 Then
-                    If PcAccountCount >= 1 Then
-                        retVal = GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.PettyCashAccount), "Account", "SpecialAccount", "IdNo")
-                    Else
-                        Return 0
-                    End If
-                End If
-                If retVal Is Nothing Then
-                    Return 0
-                End If
-                Return CInt(retVal)
+                Return GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.PettyCashAccount), "Account", "SpecialAccount", "IdNo")
+                'Dim retVal As String = Nothing
+                'If View.PcAccountIdNo Is Nothing Or View.PcAccountIdNo <= 0 Then
+                '    If PcAccountCount >= 1 Then
+                '        retVal = GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.PettyCashAccount), "Account", "SpecialAccount", "IdNo")
+                '    Else
+                '        Return 0
+                '    End If
+                'Else
+                '    retVal = View.PcAccountIdNo
+                'End If
+                'If retVal Is Nothing Then
+                '    Return 0
+                'End If
+                'Return CInt(retVal)
             End Get
         End Property
 

@@ -2192,6 +2192,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\CbcRetrievalEntry.resx">
       <DependentUpon>CbcRetrievalEntry.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\PmrReportSelector.resx">
       <DependentUpon>PmrReportSelector.vb</DependentUpon>
