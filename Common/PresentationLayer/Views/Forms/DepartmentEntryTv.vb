@@ -28,7 +28,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property ParentIdNo As Int16? Implements IDepartmentView.ParentIdNo
             Get
-                Return cacParentIdNo.GetValue(Of Int16?)
+                Return cacParentIdNo.GetValue(Of Int16)
             End Get
             Set
                 cacParentIdNo.SetValue(Value)

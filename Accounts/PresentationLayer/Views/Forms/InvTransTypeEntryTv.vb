@@ -63,7 +63,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property AccountIdNo As Int16? Implements IInvTransTypeView.AccountIdNo
             Get
-                Return cboAccountIdNo.GetValue(Of Int16?)
+                Return cboAccountIdNo.GetValue(Of Int16)
             End Get
             Set
                 cboAccountIdNo.SetValue(Value)

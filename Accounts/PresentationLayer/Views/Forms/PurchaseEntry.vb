@@ -187,7 +187,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property SupplierIdNo As Int32? Implements IPurchaseView.SupplierIdNo
             Get
-                Return cboSupplierIdNo.GetValue(Of Int32?)
+                Return cboSupplierIdNo.GetValue(Of Int32)
             End Get
             Set
                 cboSupplierIdNo.SetValue(Value)

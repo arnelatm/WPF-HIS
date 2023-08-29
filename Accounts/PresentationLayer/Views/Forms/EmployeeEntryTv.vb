@@ -74,7 +74,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property BankIdNo As Int16? Implements IEmployeeView.BankIdNo
             Get
-                Return cacBankIdNo.GetValue(Of Int16?)
+                Return cacBankIdNo.GetValue(Of Int16)
             End Get
             Set
                 cacBankIdNo.SetValue(Value)
@@ -110,7 +110,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DepartmentIdNo As Int16? Implements IEmployeeView.DepartmentIdNo
             Get
-                Return cacDepartmentIdNo.GetValue(Of Int16?)
+                Return cacDepartmentIdNo.GetValue(Of Int16)
             End Get
             Set
                 cacDepartmentIdNo.SetValue(Value)
@@ -119,7 +119,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DesignationIdNo As Int16? Implements IEmployeeView.DesignationIdNo
             Get
-                Return cacDesignationIdNo.GetValue(Of Int16?)
+                Return cacDesignationIdNo.GetValue(Of Int16)
             End Get
             Set
                 cacDesignationIdNo.SetValue(Value)
@@ -318,7 +318,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PayCycleIdNo As Int16? Implements IEmployeeView.PayCycleIdNo
             Get
-                Return cboPayCycleIdNo.GetValue(Of Int16?)
+                Return cboPayCycleIdNo.GetValue(Of Int16)
             End Get
             Set
                 cboPayCycleIdNo.SetValue(Value)
@@ -328,7 +328,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PayGroupIdNo As Int16? Implements IEmployeeView.PayGroupIdNo
             Get
-                Return cboPayGroupIdNo.GetValue(Of Int16?)
+                Return cboPayGroupIdNo.GetValue(Of Int16)
             End Get
             Set
                 cboPayGroupIdNo.SetValue(Value)
@@ -373,7 +373,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property ReligionIdNo As Int16? Implements IEmployeeView.ReligionIdNo
             Get
-                Return cacReligionIdNo.GetValue(Of Int16?)
+                Return cacReligionIdNo.GetValue(Of Int16)
             End Get
             Set
                 cacReligionIdNo.SetValue(Value)
