@@ -244,7 +244,7 @@ Set(value As Integer)
 
         Public Property Volume As Double? Implements IItemDetailsView.Volume
             Get
-                Return txtVolume.GetValue(Of Double?)
+                Return txtVolume.GetValue(Of Double)
             End Get
             Set
                 txtVolume.SetValue(Value)
@@ -262,7 +262,7 @@ Set(value As Integer)
 
         Public Property PackageSize As Double? Implements IItemDetailsView.PackageSize
             Get
-                Return txtPackageSize.GetValue(Of Double?)
+                Return txtPackageSize.GetValue(Of Double)
             End Get
             Set
                 txtPackageSize.SetValue(Value)
@@ -369,7 +369,7 @@ Set(value As Integer)
 
         Public Property DrugVolume As Double? Implements IGTinMatcherView.DrugVolume
 Get
-                txtDrugVolume.GetValue(Of Double?)()
+                txtDrugVolume.GetValue(Of Double)()
             End Get
             Set
                 txtDrugVolume.SetValue(Value)
@@ -387,7 +387,7 @@ Get
 
         Public Property DrugPackageSize As Double? Implements IGTinMatcherView.DrugPackageSize
             Get
-                txtDrugPackageSize.GetValue(Of Double?)()
+                txtDrugPackageSize.GetValue(Of Double)()
             End Get
             Set
                 txtDrugPackageSize.SetValue(Value)
@@ -414,7 +414,7 @@ Get
 
         Public Property Price_Cash As Decimal? Implements IItemDetailsView.Price_Cash
             Get
-                Return txtPrice_Cash.GetValue(Of Decimal?)
+                Return txtPrice_Cash.GetValue(Of Decimal)
             End Get
             Set
                 txtPrice_Cash.SetValue(Value)
@@ -423,7 +423,7 @@ Get
 
         Private Property QtyOnHand As Decimal? Implements IItemDetailsView.QtyOnHand
             Get
-                Return txtQtyOnHand.GetValue(Of Decimal?)
+                Return txtQtyOnHand.GetValue(Of Decimal)
             End Get
             Set
                 txtQtyOnHand.SetValue(Value)

@@ -256,7 +256,7 @@ Namespace PresentationLayer.Views.Forms
         End Property
         Public Property Price_Cash As Decimal? Implements IItemDetailsView.Price_Cash
             Get
-                Return txtPrice_Cash.GetValue(Of Decimal?)
+                Return txtPrice_Cash.GetValue(Of Decimal)
             End Get
             Set
                 txtPrice_Cash.SetValue(Value)
@@ -265,7 +265,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Property QtyOnHand As Decimal? Implements IItemDetailsView.QtyOnHand
             Get
-                Return txtQtyOnHand.GetValue(Of Decimal?)
+                Return txtQtyOnHand.GetValue(Of Decimal)
             End Get
             Set
                 txtQtyOnHand.SetValue(Value)

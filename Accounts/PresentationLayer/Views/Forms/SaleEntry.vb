@@ -149,7 +149,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property CustomerIdNo As Int32? Implements ISaleView.CustomerIdNo
             Get
-                Return cboCustomerIdNo.GetValue(Of Int32?)
+                Return cboCustomerIdNo.GetValue(Of Int32)
             End Get
             Set
                 cboCustomerIdNo.SetValue(Value)
