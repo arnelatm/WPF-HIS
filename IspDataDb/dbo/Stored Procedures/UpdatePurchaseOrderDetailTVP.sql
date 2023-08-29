@@ -12,12 +12,6 @@
 
 
 
-
-
-
-
-
-
 CREATE PROCEDURE  [dbo].[UpdatePurchaseOrderDetailTVP]
   @MParam PurchaseOrderDetailUpdate READONLY, @GroupIdNo as INT
 AS 
@@ -31,13 +25,17 @@ WHERE  (PurchaseOrderIdNo = @GroupIdNo and NOT EXISTS (SELECT * FROM @MParam whe
 
 -- Update existing Details
 UPDATE a 
-SET a.PurchaseOrderIdNo = b.PurchaseOrderIdNo,
+SET a.BonusQuantity = b.BonusQuantity,
+	a.DiscountAmount = b.DiscountAmount,
 	a.NetAmount = b.NetAmount,
+	a.Price = b.Price,
 	a.ProductIdNo = b.ProductIdNo ,
+	a.PurchaseOrderIdNo = b.PurchaseOrderIdNo,
 	a.Quantity = b.Quantity,
 	a.[Sequence] = b.[Sequence],
-	a.UnitCost = b.UnitCost,
-	a.UnitIdNo = b.UnitIdNo
+	a.UnitIdNo = b.UnitIdNo,
+	a.VatAmount = b.VatAmount,
+	a.VatPercent = b.VatPercent
 from PurchaseOrderDetail a INNER JOIN @MParam As b
 on a.IdNo = b.IdNo
 

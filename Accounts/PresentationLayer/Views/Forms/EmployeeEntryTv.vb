@@ -316,12 +316,12 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PayCycleIdNo As Byte? Implements IEmployeeView.PayCycleIdNo
+        Public Property PayCycleIdNo As Int16? Implements IEmployeeView.PayCycleIdNo
             Get
-                Return cboPayCycleidNo.GetValue(Of Byte?)
+                Return cboPayCycleIdNo.GetValue(Of Int16?)
             End Get
             Set
-                cboPayCycleidNo.SetValue(Value)
+                cboPayCycleIdNo.SetValue(Value)
                 Ea.PublishEvent(New PayCycleIdNoChanged(Value))
             End Set
         End Property
@@ -643,7 +643,7 @@ Namespace PresentationLayer.Views.Forms
          {"NationalityCode", cacNationalityCode},
          {"Notes", txtNotes},
          {"OpeningBalance", txtOpeningBalance},
-         {"PayCycleIdNo", cboPayCycleidNo},
+         {"PayCycleIdNo", cboPayCycleIdNo},
          {"PayGroupIdNo", cboPayGroupIdNo},
          {"PaymentMethod", cboPaymentMethod},
          {"Picture", imgPicture},

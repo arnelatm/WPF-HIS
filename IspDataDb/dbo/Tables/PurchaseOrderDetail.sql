@@ -4,9 +4,16 @@
     [PurchaseOrderIdNo] INT             NULL,
     [ProductIdNo]       INT             NULL,
     [Quantity]          SMALLINT        NULL,
+    [BonusQuantity]     SMALLINT        NULL,
     [UnitIdNo]          TINYINT         NULL,
-    [UnitCost]          DECIMAL (11, 4) NULL,
-    [NetAmount]         DECIMAL (9, 2)  NULL,
+    [Price]             DECIMAL (9, 2)  NULL,
+    [DiscountAmount]    DECIMAL (12, 2) NULL,
+    [UnitSalesPrice]    DECIMAL (9, 2)  NULL,
+    [NetAmount]         DECIMAL (12, 2) NULL,
+    [VatAmount]         DECIMAL (12, 2) NULL,
+    [VatPercent]        DECIMAL (5, 2)  NULL,
     CONSTRAINT [PK_PurchaseOrderDetail] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
