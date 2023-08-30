@@ -551,6 +551,7 @@
     <Compile Include="PresentationLayer\Presenters\AppSettingPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ApArEmReportPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\BasicPresenterHelper.vb" />
+    <Compile Include="PresentationLayer\Presenters\StockRequestApprovalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\FinancialReportPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\HRReportsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DocumentDetailPresenter.vb" />
@@ -607,6 +608,8 @@
     <Compile Include="PresentationLayer\Presenters\PensionSchemePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PensionProviderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DisbursementJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IStockRequestApprovalItemView.vb" />
+    <Compile Include="PresentationLayer\Views\StockRequestApprovalItemView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeLeaveApprovalItemView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeLeaveCreditView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeePayElementView.vb" />
@@ -621,6 +624,12 @@
       <DependentUpon>DocumentDetailEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DocumentDetailEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\StockRequestApproval.Designer.vb">
+      <DependentUpon>StockRequestApproval.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\StockRequestApproval.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\DoctorsPrescriptionForm.Designer.vb">
@@ -744,6 +753,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IInvTransactionDetailView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISaleDetailView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISaleView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IStockRequestApprovalView.vb" />
     <Compile Include="PresentationLayer\Views\PurchaseOrderDetailView.vb" />
     <Compile Include="PresentationLayer\Views\ProductUnitView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\ApJournalEntry.designer.vb">
@@ -2020,6 +2030,9 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\DocumentDetailEntry.resx">
       <DependentUpon>DocumentDetailEntry.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\StockRequestApproval.resx">
+      <DependentUpon>StockRequestApproval.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\DoctorsPrescriptionForm.resx">
       <DependentUpon>DoctorsPrescriptionForm.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -2809,6 +2822,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.IGroup.PmrPatientDisplayModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.InventoryModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.InvTransactionDetailModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.InvTransactionModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.ItemDetailsModel2.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.JournalItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.OvertimeItemModel.datasource" />
