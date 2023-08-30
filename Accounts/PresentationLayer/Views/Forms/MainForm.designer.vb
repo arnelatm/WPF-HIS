@@ -129,6 +129,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemPurchases = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPurchase = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPurchaseReturn = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemPurchaseOrder = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemSalesJournalEntry = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemInventoryTransactions = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemAccountReconciliation = New System.Windows.Forms.ToolStripMenuItem()
@@ -216,6 +217,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemInventoryReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemInventoryReport = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemProductExpiryReport = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemRequestApproval = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemUtilities = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemUpdateMenuSecurityObjects = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemRecreateSecurityObjectMenu = New System.Windows.Forms.ToolStripMenuItem()
@@ -248,7 +250,6 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemPurchaseOrder = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -784,6 +785,11 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemPurchaseReturn.Name = "ToolStripMenuItemPurchaseReturn"
             resources.ApplyResources(Me.ToolStripMenuItemPurchaseReturn, "ToolStripMenuItemPurchaseReturn")
             '
+            'ToolStripMenuItemPurchaseOrder
+            '
+            Me.ToolStripMenuItemPurchaseOrder.Name = "ToolStripMenuItemPurchaseOrder"
+            resources.ApplyResources(Me.ToolStripMenuItemPurchaseOrder, "ToolStripMenuItemPurchaseOrder")
+            '
             'ToolStripMenuItemSalesJournalEntry
             '
             Me.ToolStripMenuItemSalesJournalEntry.Name = "ToolStripMenuItemSalesJournalEntry"
@@ -1222,7 +1228,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemInventoryReports
             '
-            Me.ToolStripMenuItemInventoryReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemInventoryReport, Me.ToolStripMenuItemProductExpiryReport})
+            Me.ToolStripMenuItemInventoryReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemInventoryReport, Me.ToolStripMenuItemProductExpiryReport, Me.ToolStripMenuItemRequestApproval})
             Me.ToolStripMenuItemInventoryReports.Name = "ToolStripMenuItemInventoryReports"
             resources.ApplyResources(Me.ToolStripMenuItemInventoryReports, "ToolStripMenuItemInventoryReports")
             '
@@ -1235,6 +1241,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemProductExpiryReport.Name = "ToolStripMenuItemProductExpiryReport"
             resources.ApplyResources(Me.ToolStripMenuItemProductExpiryReport, "ToolStripMenuItemProductExpiryReport")
+            '
+            'ToolStripMenuItemRequestApproval
+            '
+            Me.ToolStripMenuItemRequestApproval.Name = "ToolStripMenuItemRequestApproval"
+            resources.ApplyResources(Me.ToolStripMenuItemRequestApproval, "ToolStripMenuItemRequestApproval")
             '
             'ToolStripMenuItemUtilities
             '
@@ -1403,11 +1414,6 @@ Namespace PresentationLayer.Views.Forms
             '
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
-            '
-            'ToolStripMenuItemPurchaseOrder
-            '
-            Me.ToolStripMenuItemPurchaseOrder.Name = "ToolStripMenuItemPurchaseOrder"
-            resources.ApplyResources(Me.ToolStripMenuItemPurchaseOrder, "ToolStripMenuItemPurchaseOrder")
             '
             'MainForm
             '
@@ -1655,5 +1661,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemBSCustom As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDocManagement As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemPurchaseOrder As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemRequestApproval As ToolStripMenuItem
     End Class
 End NameSpace
