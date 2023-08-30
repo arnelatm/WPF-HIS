@@ -11,6 +11,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property Name As String
         Property NameAra As String
         Property Notes As String
+        Property AutoCode As Boolean
+
 
     End Interface
 

@@ -124,7 +124,7 @@ Namespace DataLayer.AdoNet
 
     Public Class ProductUnitDao
         Inherits AccountsDao
-        Implements IDaoChild(Of ProductUnit)
+        Implements IDaoChild(Of ProductUnit), IDaoAutoCode
 
         Private ReadOnly Db As New Db()
 
@@ -152,6 +152,10 @@ Namespace DataLayer.AdoNet
 
         Public Function InsertTvp(ByRef tvpTable As DataTable) As Integer Implements IDaoChild(Of ProductUnit).InsertTvp
             Return Db.InsertTvp("InsertProductUnitTVP", tvpTable)
+        End Function
+
+        Public Function GenerateCode(idNo As Integer) As String Implements IDaoAutoCode.GenerateCode
+            Return UpdateCode("ProductUnit", "UnitCode", "IdNo", idNo)
         End Function
 
         Private Shared ReadOnly Make As Func(Of IDataReader, ProductUnit) =

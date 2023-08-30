@@ -550,9 +550,11 @@
     <Compile Include="PresentationLayer\Presenters\AccountsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\AppSettingPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ApArEmReportPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\BasicPresenterHelper.vb" />
     <Compile Include="PresentationLayer\Presenters\FinancialReportPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\HRReportsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DocumentDetailPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\PresenterHelper.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchaseOrderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ProductFinderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\InventorySelectorPresenter.vb" />

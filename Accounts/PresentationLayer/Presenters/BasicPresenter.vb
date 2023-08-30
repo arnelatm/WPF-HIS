@@ -23,6 +23,20 @@ Namespace PresentationLayer.Presenters
             TableName = tableOrViewName
             WithTreeView = False
             Service = New AccountsService("Basic", , tableOrViewName)
+            If AutoGenerateCode(TableName) Then
+                view.AutoCode = True
+            Else
+                view.AutoCode = False
+            End If
+        End Sub
+
+        Public Sub UpdateCode(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
+            If AutoGenerateCode(TableName) Then
+                If retVal >= 0 And IsEmpty(View.Code) Then
+                    retVal = Service.GenerateCode(View.IdNo)
+                    View.Code = Service.GetFieldWithIdNo(View.IdNo, TableName, TableName + "Code")
+                End If
+            End If
         End Sub
 
     End Class
