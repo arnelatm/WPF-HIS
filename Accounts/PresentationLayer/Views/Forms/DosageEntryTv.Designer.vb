@@ -63,29 +63,34 @@ Namespace PresentationLayer.Views.Forms
         'FormTreeView
         '
         Me.FormTreeView.LineColor = System.Drawing.Color.Black
-        Me.FormTreeView.Size = New System.Drawing.Size(484, 480)
-        '
-        'ImageListTreeView
-        '
-        Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"),System.Windows.Forms.ImageListStreamer)
-        Me.ImageListTreeView.Images.SetKeyName(0, "TreeNode.ico")
-        Me.ImageListTreeView.Images.SetKeyName(1, "openbriefcase.png")
-        '
-        'CLabel3
-        '
-        Me.CLabel3.AutoSize = true
-        Me.TableLayoutPanel1.SetColumnSpan(Me.CLabel3, 2)
-        Me.CLabel3.DisplayOnly = true
-        Me.CLabel3.EditingMode = false
-        Me.CLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!)
-        Me.CLabel3.Location = New System.Drawing.Point(11, 217)
-        Me.CLabel3.Margin = New System.Windows.Forms.Padding(1)
-        Me.CLabel3.Name = "CLabel3"
-        Me.CLabel3.Size = New System.Drawing.Size(46, 17)
-        Me.CLabel3.TabIndex = 4
-        Me.CLabel3.Text = "Route"
-        Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.CLabel3.Translatable = True
+            Me.FormTreeView.RightToLeft = System.Windows.Forms.RightToLeft.No
+            Me.FormTreeView.Size = New System.Drawing.Size(484, 480)
+            '
+            'ImageListTreeView
+            '
+            Me.ImageListTreeView.ImageStream = CType(resources.GetObject("ImageListTreeView.ImageStream"), System.Windows.Forms.ImageListStreamer)
+            Me.ImageListTreeView.Images.SetKeyName(0, "TreeNode.ico")
+            Me.ImageListTreeView.Images.SetKeyName(1, "openbriefcase.png")
+            '
+            'TranslatorDAC
+            '
+            Me.TranslatorDAC.Cs = ""
+            '
+            'CLabel3
+            '
+            Me.CLabel3.AutoSize = True
+            Me.TableLayoutPanel1.SetColumnSpan(Me.CLabel3, 2)
+            Me.CLabel3.DisplayOnly = True
+            Me.CLabel3.EditingMode = False
+            Me.CLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CLabel3.Location = New System.Drawing.Point(11, 217)
+            Me.CLabel3.Margin = New System.Windows.Forms.Padding(1)
+            Me.CLabel3.Name = "CLabel3"
+            Me.CLabel3.Size = New System.Drawing.Size(46, 17)
+            Me.CLabel3.TabIndex = 4
+            Me.CLabel3.Text = "Route"
+            Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.CLabel3.Translatable = True
             '
             'cboRoute
             '
@@ -98,6 +103,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboRoute.DefaultValue = Nothing
             Me.cboRoute.DisplayMember = "Name"
             Me.cboRoute.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.cboRoute.Editable = True
             Me.cboRoute.EditingMode = True
             Me.cboRoute.EndFindValue = Nothing
             Me.cboRoute.FieldDescription = Nothing
@@ -111,6 +117,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboRoute.HideWhenNotEditingOrAdding = False
             Me.cboRoute.IgnoreCase = False
             Me.cboRoute.IntegralHeight = False
+            Me.cboRoute.LimitToList = False
             Me.cboRoute.LinkedLabel = Nothing
             Me.cboRoute.Location = New System.Drawing.Point(11, 236)
             Me.cboRoute.Margin = New System.Windows.Forms.Padding(1)
@@ -228,6 +235,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDosageNameAra.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.txtDosageNameAra.Size = New System.Drawing.Size(758, 47)
             Me.txtDosageNameAra.TabIndex = 305
+            Me.txtDosageNameAra.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtDosageNameAra.Translatable = False
             '
             'CLabel12
@@ -364,6 +372,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDirection.DefaultValue = Nothing
             Me.cboDirection.DisplayMember = "Name"
             Me.cboDirection.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.cboDirection.Editable = True
             Me.cboDirection.EditingMode = True
             Me.cboDirection.EndFindValue = Nothing
             Me.cboDirection.FieldDescription = Nothing
@@ -377,6 +386,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDirection.HideWhenNotEditingOrAdding = False
             Me.cboDirection.IgnoreCase = False
             Me.cboDirection.IntegralHeight = False
+            Me.cboDirection.LimitToList = False
             Me.cboDirection.LinkedLabel = Nothing
             Me.cboDirection.Location = New System.Drawing.Point(11, 281)
             Me.cboDirection.Margin = New System.Windows.Forms.Padding(1)
@@ -425,6 +435,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboFrequency.DataValue = Nothing
             Me.cboFrequency.DefaultValue = Nothing
             Me.cboFrequency.DisplayMember = "Name"
+            Me.cboFrequency.Editable = True
             Me.cboFrequency.EditingMode = True
             Me.cboFrequency.EndFindValue = Nothing
             Me.cboFrequency.FieldDescription = Nothing
@@ -438,6 +449,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboFrequency.HideWhenNotEditingOrAdding = False
             Me.cboFrequency.IgnoreCase = False
             Me.cboFrequency.IntegralHeight = False
+            Me.cboFrequency.LimitToList = False
             Me.cboFrequency.LinkedLabel = Nothing
             Me.cboFrequency.Location = New System.Drawing.Point(11, 191)
             Me.cboFrequency.Margin = New System.Windows.Forms.Padding(1)
@@ -471,6 +483,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboFrequencyTiming.DefaultValue = Nothing
             Me.cboFrequencyTiming.DisplayMember = "Name"
             Me.cboFrequencyTiming.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.cboFrequencyTiming.Editable = True
             Me.cboFrequencyTiming.EditingMode = True
             Me.cboFrequencyTiming.EndFindValue = Nothing
             Me.cboFrequencyTiming.FieldDescription = Nothing
@@ -484,6 +497,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboFrequencyTiming.HideWhenNotEditingOrAdding = False
             Me.cboFrequencyTiming.IgnoreCase = False
             Me.cboFrequencyTiming.IntegralHeight = False
+            Me.cboFrequencyTiming.LimitToList = False
             Me.cboFrequencyTiming.LinkedLabel = Nothing
             Me.cboFrequencyTiming.Location = New System.Drawing.Point(155, 191)
             Me.cboFrequencyTiming.Margin = New System.Windows.Forms.Padding(1)
@@ -579,7 +593,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CTextBox1.OverrideMaxLength = 0
             Me.CTextBox1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.CTextBox1.Size = New System.Drawing.Size(505, 47)
-        Me.CTextBox1.TabIndex = 305
+            Me.CTextBox1.TabIndex = 305
         Me.CTextBox1.Translatable = false
         '
         'DosageEntryTv

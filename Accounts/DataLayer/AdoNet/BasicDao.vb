@@ -11,7 +11,7 @@ Namespace DataLayer.AdoNet
 
     Public Class BasicDao
         Inherits CommonDao
-        Implements IDao(Of Basic)
+        Implements IDao(Of Basic), IDaoAutoCode
 
         Private ReadOnly Db As New Db()
         Private ReadOnly _tableOrViewName As String
@@ -169,6 +169,9 @@ Namespace DataLayer.AdoNet
             End If
         End Function
 
+        Public Function GenerateCode(idNo As Integer) As String Implements IDaoAutoCode.GenerateCode
+            Return UpdateCode(_tableOrViewName, _tableOrViewName + "Code", "IdNo", idNo)
+        End Function
 
     End Class
 

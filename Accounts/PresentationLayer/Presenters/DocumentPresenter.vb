@@ -28,10 +28,12 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
             Dim returnValue As Boolean = False
-            If CheckDependentRecords(Of Int32)(View.IdNo, "EmployeeDocuments", "DocumentIdNo") Then
-                Return True
+            If CheckDependentRecords(Of Int32)(View.IdNo, "EmployeeDocument", "DocumentIdNo") Then
+                returnValue = True
+            ElseIf CheckDependentRecords(Of Int32)(View.IdNo, "DocumentDetail", "DocumentIdNo") Then
+                returnValue = True
             End If
-            Return False
+            Return returnValue
         End Function
 
         Public Sub UpdateCode(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully

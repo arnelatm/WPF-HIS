@@ -13,7 +13,11 @@ Namespace PresentationLayer.Views.Forms
 
             ' This call is required by the designer.
             InitializeComponent()
-            FirstControl = TxtCode
+            If AutoCode Then
+                FirstControl = TxtCode
+            Else
+                FirstControl = TxtName
+            End If
             Me.Text = Messaging.TranslateCaption(formCaption)
             If Accounts.AccountHelpers.BasicWithNotes(tableOrViewName) Then
                 TxtNote.Visible = True
@@ -81,6 +85,8 @@ Namespace PresentationLayer.Views.Forms
                 Return GlobalVariables.BranchIdNo
             End Get
         End Property
+
+        Public Property AutoCode As Boolean Implements IBasicView.AutoCode
 
 #End Region
 

@@ -351,7 +351,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
     End Sub
 
     Public Sub TreeViewAfterDelete(retVal As Integer)
-        If retVal > 0 Then
+        If retVal >= 0 Then
             FormTreeView.Nodes.Remove(NodeToDelete)
         End If
     End Sub
