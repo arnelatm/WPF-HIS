@@ -386,7 +386,7 @@
         Friend WithEvents DataGridViewInvTransactionRequests As Libraries.CBaseControlsLibrary.CDataGridView
         Friend WithEvents CreateDateDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents lblWarehouseIdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboWarehouseIdNo As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents cboWarehouseSelector As Libraries.CBaseControlsLibrary.CtComboBox
         Friend WithEvents txtDoctorCode As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents dgvReferenceNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvWarehouseToIdNo As Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn
