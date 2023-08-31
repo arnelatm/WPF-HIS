@@ -27,8 +27,13 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateDataSource("Warehouse", "WarehouseIdNo")
-            Service.RestoreConnectionString()
+            Dim data As New ArrayList
+            data.Add({"Warehouse", "WarehouseIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"})
+            CreateDataSourceThread(data)
+            data.Clear()
+            data.Add({"User", "UserList", "IdNo,UserName", Nothing})
+            data.Add({"Warehouse", "WarehouseList", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"})
+            CreateLookupDataThread(data)
         End Sub
 
         Private Sub GetInvTransactions()
@@ -56,7 +61,7 @@ Namespace PresentationLayer.Presenters
             'Next
             'View.InvTransactionRequests.Clear()
             'For Each item In invTransactions.InvTransactionRequests
-            '    Dim x As New InvRequestListView
+            '    Dim x As IInvTransactionBaseView
             '    GlobalVariables.Mapper.Map(item, x)
             '    View.InvTransactionRequests.Add(x)
             '    'x.Cancelled = item.Cancelled
