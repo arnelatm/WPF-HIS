@@ -24,33 +24,25 @@
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(InvRequestForm))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.btnRefresh = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.imgList = New System.Windows.Forms.ImageList(Me.components)
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.DataGridViewInvTransactionRequests = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.dgvFileType = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvTime = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.dgvTransKey = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.lblWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
             Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.AmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.CancelledDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-            Me.DateCreatedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.InvTransTypeIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.NotesDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.PostedDataGridViewCheckBoxColumn = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-            Me.ReferenceNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.TransactionDateDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.UserIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.WarehouseIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.WarehouseToIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsInvTransactionRequest = New System.Windows.Forms.BindingSource(Me.components)
+            Me.dgvReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvWarehouseToIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
+            Me.dgvUserIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
+            Me.dgvDateCreated = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.dgvNotes = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.dgvTransactionDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.IdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.Amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.Cancelled = New System.Windows.Forms.DataGridViewCheckBoxColumn()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
@@ -116,18 +108,10 @@
             Me.DataGridViewInvTransactionRequests.BegFindValue = Nothing
             Me.DataGridViewInvTransactionRequests.Cached = False
             Me.DataGridViewInvTransactionRequests.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewInvTransactionRequests.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvFileType, Me.dgvTime, Me.dgvTransKey, Me.AmountDataGridViewTextBoxColumn, Me.CancelledDataGridViewCheckBoxColumn, Me.DateCreatedDataGridViewTextBoxColumn, Me.IdNoDataGridViewTextBoxColumn, Me.InvTransTypeIdNoDataGridViewTextBoxColumn, Me.NotesDataGridViewTextBoxColumn, Me.PostedDataGridViewCheckBoxColumn, Me.ReferenceNoDataGridViewTextBoxColumn, Me.TransactionDateDataGridViewTextBoxColumn, Me.UserIdNoDataGridViewTextBoxColumn, Me.WarehouseIdNoDataGridViewTextBoxColumn, Me.WarehouseToIdNoDataGridViewTextBoxColumn})
+            Me.DataGridViewInvTransactionRequests.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvReferenceNo, Me.dgvWarehouseToIdNo, Me.dgvUserIdNo, Me.dgvDateCreated, Me.dgvNotes, Me.dgvTransactionDate, Me.IdNo, Me.Amount, Me.Cancelled})
             Me.TableLayoutPanel1.SetColumnSpan(Me.DataGridViewInvTransactionRequests, 4)
             Me.DataGridViewInvTransactionRequests.DataFilter = Nothing
             Me.DataGridViewInvTransactionRequests.DataSource = Me.bsInvTransactionRequest
-            DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle4.BackColor = System.Drawing.Color.Black
-            DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.6!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewInvTransactionRequests.DefaultCellStyle = DataGridViewCellStyle4
             Me.DataGridViewInvTransactionRequests.DgvFooter = Nothing
             Me.DataGridViewInvTransactionRequests.DisplayOnly = True
             Me.DataGridViewInvTransactionRequests.Dock = System.Windows.Forms.DockStyle.Fill
@@ -157,51 +141,6 @@
             Me.DataGridViewInvTransactionRequests.Size = New System.Drawing.Size(777, 431)
             Me.DataGridViewInvTransactionRequests.TabIndex = 11
             Me.DataGridViewInvTransactionRequests.Translatable = True
-            '
-            'dgvFileType
-            '
-            Me.dgvFileType.BegFindValue = Nothing
-            Me.dgvFileType.DataPropertyName = "InvType"
-            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
-            Me.dgvFileType.DefaultCellStyle = DataGridViewCellStyle2
-            Me.dgvFileType.EditingMode = False
-            Me.dgvFileType.EndFindValue = Nothing
-            Me.dgvFileType.FieldDescription = Nothing
-            Me.dgvFileType.FieldName = Nothing
-            Me.dgvFileType.FillWeight = 60.0!
-            Me.dgvFileType.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvFileType.FindEnabled = False
-            Me.dgvFileType.HeaderText = "Patient Type"
-            Me.dgvFileType.IgnoreCase = False
-            Me.dgvFileType.MinimumWidth = 6
-            Me.dgvFileType.Name = "dgvFileType"
-            Me.dgvFileType.ReadOnly = True
-            Me.dgvFileType.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvFileType.Translatable = False
-            Me.dgvFileType.Width = 60
-            '
-            'dgvTime
-            '
-            Me.dgvTime.DataPropertyName = "InvTime"
-            DataGridViewCellStyle3.Format = "hh:mm tt"
-            DataGridViewCellStyle3.NullValue = Nothing
-            Me.dgvTime.DefaultCellStyle = DataGridViewCellStyle3
-            Me.dgvTime.HeaderText = "Time"
-            Me.dgvTime.MinimumWidth = 6
-            Me.dgvTime.Name = "dgvTime"
-            Me.dgvTime.ReadOnly = True
-            Me.dgvTime.Width = 125
-            '
-            'dgvTransKey
-            '
-            Me.dgvTransKey.DataPropertyName = "TransKey"
-            Me.dgvTransKey.HeaderText = "TransKey"
-            Me.dgvTransKey.MinimumWidth = 6
-            Me.dgvTransKey.Name = "dgvTransKey"
-            Me.dgvTransKey.ReadOnly = True
-            Me.dgvTransKey.Visible = False
-            Me.dgvTransKey.Width = 125
             '
             'lblWarehouseIdNo
             '
@@ -294,119 +233,121 @@
             Me.txtDoctorCode.Translatable = False
             Me.txtDoctorCode.Visible = False
             '
-            'AmountDataGridViewTextBoxColumn
-            '
-            Me.AmountDataGridViewTextBoxColumn.DataPropertyName = "Amount"
-            Me.AmountDataGridViewTextBoxColumn.HeaderText = "Amount"
-            Me.AmountDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.AmountDataGridViewTextBoxColumn.Name = "AmountDataGridViewTextBoxColumn"
-            Me.AmountDataGridViewTextBoxColumn.ReadOnly = True
-            Me.AmountDataGridViewTextBoxColumn.Width = 125
-            '
-            'CancelledDataGridViewCheckBoxColumn
-            '
-            Me.CancelledDataGridViewCheckBoxColumn.DataPropertyName = "Cancelled"
-            Me.CancelledDataGridViewCheckBoxColumn.HeaderText = "Cancelled"
-            Me.CancelledDataGridViewCheckBoxColumn.MinimumWidth = 6
-            Me.CancelledDataGridViewCheckBoxColumn.Name = "CancelledDataGridViewCheckBoxColumn"
-            Me.CancelledDataGridViewCheckBoxColumn.ReadOnly = True
-            Me.CancelledDataGridViewCheckBoxColumn.Width = 125
-            '
-            'DateCreatedDataGridViewTextBoxColumn
-            '
-            Me.DateCreatedDataGridViewTextBoxColumn.DataPropertyName = "DateCreated"
-            Me.DateCreatedDataGridViewTextBoxColumn.HeaderText = "DateCreated"
-            Me.DateCreatedDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.DateCreatedDataGridViewTextBoxColumn.Name = "DateCreatedDataGridViewTextBoxColumn"
-            Me.DateCreatedDataGridViewTextBoxColumn.ReadOnly = True
-            Me.DateCreatedDataGridViewTextBoxColumn.Width = 125
-            '
-            'IdNoDataGridViewTextBoxColumn
-            '
-            Me.IdNoDataGridViewTextBoxColumn.DataPropertyName = "IdNo"
-            Me.IdNoDataGridViewTextBoxColumn.HeaderText = "IdNo"
-            Me.IdNoDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
-            Me.IdNoDataGridViewTextBoxColumn.ReadOnly = True
-            Me.IdNoDataGridViewTextBoxColumn.Width = 125
-            '
-            'InvTransTypeIdNoDataGridViewTextBoxColumn
-            '
-            Me.InvTransTypeIdNoDataGridViewTextBoxColumn.DataPropertyName = "InvTransTypeIdNo"
-            Me.InvTransTypeIdNoDataGridViewTextBoxColumn.HeaderText = "InvTransTypeIdNo"
-            Me.InvTransTypeIdNoDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.InvTransTypeIdNoDataGridViewTextBoxColumn.Name = "InvTransTypeIdNoDataGridViewTextBoxColumn"
-            Me.InvTransTypeIdNoDataGridViewTextBoxColumn.ReadOnly = True
-            Me.InvTransTypeIdNoDataGridViewTextBoxColumn.Width = 125
-            '
-            'NotesDataGridViewTextBoxColumn
-            '
-            Me.NotesDataGridViewTextBoxColumn.DataPropertyName = "Notes"
-            Me.NotesDataGridViewTextBoxColumn.HeaderText = "Notes"
-            Me.NotesDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.NotesDataGridViewTextBoxColumn.Name = "NotesDataGridViewTextBoxColumn"
-            Me.NotesDataGridViewTextBoxColumn.ReadOnly = True
-            Me.NotesDataGridViewTextBoxColumn.Width = 125
-            '
-            'PostedDataGridViewCheckBoxColumn
-            '
-            Me.PostedDataGridViewCheckBoxColumn.DataPropertyName = "Posted"
-            Me.PostedDataGridViewCheckBoxColumn.HeaderText = "Posted"
-            Me.PostedDataGridViewCheckBoxColumn.MinimumWidth = 6
-            Me.PostedDataGridViewCheckBoxColumn.Name = "PostedDataGridViewCheckBoxColumn"
-            Me.PostedDataGridViewCheckBoxColumn.ReadOnly = True
-            Me.PostedDataGridViewCheckBoxColumn.Width = 125
-            '
-            'ReferenceNoDataGridViewTextBoxColumn
-            '
-            Me.ReferenceNoDataGridViewTextBoxColumn.DataPropertyName = "ReferenceNo"
-            Me.ReferenceNoDataGridViewTextBoxColumn.HeaderText = "ReferenceNo"
-            Me.ReferenceNoDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.ReferenceNoDataGridViewTextBoxColumn.Name = "ReferenceNoDataGridViewTextBoxColumn"
-            Me.ReferenceNoDataGridViewTextBoxColumn.ReadOnly = True
-            Me.ReferenceNoDataGridViewTextBoxColumn.Width = 125
-            '
-            'TransactionDateDataGridViewTextBoxColumn
-            '
-            Me.TransactionDateDataGridViewTextBoxColumn.DataPropertyName = "TransactionDate"
-            Me.TransactionDateDataGridViewTextBoxColumn.HeaderText = "TransactionDate"
-            Me.TransactionDateDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.TransactionDateDataGridViewTextBoxColumn.Name = "TransactionDateDataGridViewTextBoxColumn"
-            Me.TransactionDateDataGridViewTextBoxColumn.ReadOnly = True
-            Me.TransactionDateDataGridViewTextBoxColumn.Width = 125
-            '
-            'UserIdNoDataGridViewTextBoxColumn
-            '
-            Me.UserIdNoDataGridViewTextBoxColumn.DataPropertyName = "UserIdNo"
-            Me.UserIdNoDataGridViewTextBoxColumn.HeaderText = "UserIdNo"
-            Me.UserIdNoDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.UserIdNoDataGridViewTextBoxColumn.Name = "UserIdNoDataGridViewTextBoxColumn"
-            Me.UserIdNoDataGridViewTextBoxColumn.ReadOnly = True
-            Me.UserIdNoDataGridViewTextBoxColumn.Width = 125
-            '
-            'WarehouseIdNoDataGridViewTextBoxColumn
-            '
-            Me.WarehouseIdNoDataGridViewTextBoxColumn.DataPropertyName = "WarehouseIdNo"
-            Me.WarehouseIdNoDataGridViewTextBoxColumn.HeaderText = "WarehouseIdNo"
-            Me.WarehouseIdNoDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.WarehouseIdNoDataGridViewTextBoxColumn.Name = "WarehouseIdNoDataGridViewTextBoxColumn"
-            Me.WarehouseIdNoDataGridViewTextBoxColumn.ReadOnly = True
-            Me.WarehouseIdNoDataGridViewTextBoxColumn.Width = 125
-            '
-            'WarehouseToIdNoDataGridViewTextBoxColumn
-            '
-            Me.WarehouseToIdNoDataGridViewTextBoxColumn.DataPropertyName = "WarehouseToIdNo"
-            Me.WarehouseToIdNoDataGridViewTextBoxColumn.HeaderText = "WarehouseToIdNo"
-            Me.WarehouseToIdNoDataGridViewTextBoxColumn.MinimumWidth = 6
-            Me.WarehouseToIdNoDataGridViewTextBoxColumn.Name = "WarehouseToIdNoDataGridViewTextBoxColumn"
-            Me.WarehouseToIdNoDataGridViewTextBoxColumn.ReadOnly = True
-            Me.WarehouseToIdNoDataGridViewTextBoxColumn.Width = 125
-            '
             'bsInvTransactionRequest
             '
             Me.bsInvTransactionRequest.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.InvTransactionModel)
             '
-            'InvTransactionRequestForm
+            'dgvReferenceNo
+            '
+            Me.dgvReferenceNo.BegFindValue = Nothing
+            Me.dgvReferenceNo.DataPropertyName = "ReferenceNo"
+            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+            Me.dgvReferenceNo.DefaultCellStyle = DataGridViewCellStyle2
+            Me.dgvReferenceNo.EditingMode = False
+            Me.dgvReferenceNo.EndFindValue = Nothing
+            Me.dgvReferenceNo.FieldDescription = Nothing
+            Me.dgvReferenceNo.FieldName = Nothing
+            Me.dgvReferenceNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvReferenceNo.FindEnabled = False
+            Me.dgvReferenceNo.HeaderText = "ReferenceNo"
+            Me.dgvReferenceNo.IgnoreCase = False
+            Me.dgvReferenceNo.MinimumWidth = 6
+            Me.dgvReferenceNo.Name = "dgvReferenceNo"
+            Me.dgvReferenceNo.ReadOnly = True
+            Me.dgvReferenceNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvReferenceNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvReferenceNo.Translatable = False
+            Me.dgvReferenceNo.Width = 125
+            '
+            'dgvWarehouseToIdNo
+            '
+            Me.dgvWarehouseToIdNo.AutoComplete = False
+            Me.dgvWarehouseToIdNo.DataPropertyName = "WarehouseToIdNo"
+            Me.dgvWarehouseToIdNo.EditingMode = False
+            Me.dgvWarehouseToIdNo.HeaderText = "WarehouseToIdNo"
+            Me.dgvWarehouseToIdNo.MinimumWidth = 6
+            Me.dgvWarehouseToIdNo.Name = "dgvWarehouseToIdNo"
+            Me.dgvWarehouseToIdNo.ReadOnly = True
+            Me.dgvWarehouseToIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvWarehouseToIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvWarehouseToIdNo.SuggestCharCount = 0
+            Me.dgvWarehouseToIdNo.Translatable = False
+            Me.dgvWarehouseToIdNo.Width = 125
+            '
+            'dgvUserIdNo
+            '
+            Me.dgvUserIdNo.AutoComplete = False
+            Me.dgvUserIdNo.DataPropertyName = "UserIdNo"
+            Me.dgvUserIdNo.EditingMode = False
+            Me.dgvUserIdNo.HeaderText = "UserIdNo"
+            Me.dgvUserIdNo.MinimumWidth = 6
+            Me.dgvUserIdNo.Name = "dgvUserIdNo"
+            Me.dgvUserIdNo.ReadOnly = True
+            Me.dgvUserIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvUserIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvUserIdNo.SuggestCharCount = 0
+            Me.dgvUserIdNo.Translatable = False
+            Me.dgvUserIdNo.Width = 125
+            '
+            'dgvDateCreated
+            '
+            Me.dgvDateCreated.DataPropertyName = "DateCreated"
+            Me.dgvDateCreated.HeaderText = "DateCreated"
+            Me.dgvDateCreated.MinimumWidth = 6
+            Me.dgvDateCreated.Name = "dgvDateCreated"
+            Me.dgvDateCreated.ReadOnly = True
+            Me.dgvDateCreated.Width = 125
+            '
+            'dgvNotes
+            '
+            Me.dgvNotes.DataPropertyName = "Notes"
+            Me.dgvNotes.HeaderText = "Notes"
+            Me.dgvNotes.MinimumWidth = 6
+            Me.dgvNotes.Name = "dgvNotes"
+            Me.dgvNotes.ReadOnly = True
+            Me.dgvNotes.Width = 125
+            '
+            'dgvTransactionDate
+            '
+            Me.dgvTransactionDate.DataPropertyName = "TransactionDate"
+            Me.dgvTransactionDate.HeaderText = "TransactionDate"
+            Me.dgvTransactionDate.MinimumWidth = 6
+            Me.dgvTransactionDate.Name = "dgvTransactionDate"
+            Me.dgvTransactionDate.ReadOnly = True
+            Me.dgvTransactionDate.Width = 125
+            '
+            'IdNo
+            '
+            Me.IdNo.DataPropertyName = "IdNo"
+            Me.IdNo.HeaderText = "IdNo"
+            Me.IdNo.MinimumWidth = 6
+            Me.IdNo.Name = "IdNo"
+            Me.IdNo.ReadOnly = True
+            Me.IdNo.Visible = False
+            Me.IdNo.Width = 125
+            '
+            'Amount
+            '
+            Me.Amount.DataPropertyName = "Amount"
+            Me.Amount.HeaderText = "Amount"
+            Me.Amount.MinimumWidth = 6
+            Me.Amount.Name = "Amount"
+            Me.Amount.ReadOnly = True
+            Me.Amount.Visible = False
+            Me.Amount.Width = 125
+            '
+            'Cancelled
+            '
+            Me.Cancelled.DataPropertyName = "Cancelled"
+            Me.Cancelled.HeaderText = "Cancelled"
+            Me.Cancelled.MinimumWidth = 6
+            Me.Cancelled.Name = "Cancelled"
+            Me.Cancelled.ReadOnly = True
+            Me.Cancelled.Visible = False
+            Me.Cancelled.Width = 125
+            '
+            'InvRequestForm
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
@@ -414,7 +355,7 @@
             Me.ClientSize = New System.Drawing.Size(790, 553)
             Me.Controls.Add(Me.CFlowLayout2)
             Me.Controls.Add(Me.txtDoctorCode)
-            Me.Name = "InvTransactionRequestForm"
+            Me.Name = "InvRequestForm"
             Me.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.Text = "Inventory Request Viewer"
             Me.Controls.SetChildIndex(Me.txtDoctorCode, 0)
@@ -445,22 +386,16 @@
         Friend WithEvents DataGridViewInvTransactionRequests As Libraries.CBaseControlsLibrary.CDataGridView
         Friend WithEvents CreateDateDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents lblWarehouseIdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents dgvFileType As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents dgvTime As DataGridViewTextBoxColumn
-        Friend WithEvents dgvTransKey As DataGridViewTextBoxColumn
         Friend WithEvents cboWarehouseIdNo As Libraries.CBaseControlsLibrary.CaComboBox
         Friend WithEvents txtDoctorCode As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents AmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents CancelledDataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
-        Friend WithEvents DateCreatedDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents InvTransTypeIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents NotesDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents PostedDataGridViewCheckBoxColumn As DataGridViewCheckBoxColumn
-        Friend WithEvents ReferenceNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents TransactionDateDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents UserIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents WarehouseIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents WarehouseToIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents dgvReferenceNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents dgvWarehouseToIdNo As Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn
+        Friend WithEvents dgvUserIdNo As Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn
+        Friend WithEvents dgvDateCreated As DataGridViewTextBoxColumn
+        Friend WithEvents dgvNotes As DataGridViewTextBoxColumn
+        Friend WithEvents dgvTransactionDate As DataGridViewTextBoxColumn
+        Friend WithEvents IdNo As DataGridViewTextBoxColumn
+        Friend WithEvents Amount As DataGridViewTextBoxColumn
+        Friend WithEvents Cancelled As DataGridViewCheckBoxColumn
     End Class
 End Namespace
