@@ -54,25 +54,25 @@ Namespace PresentationLayer.Presenters
             '    x.WarehouseToIdNo = item.WarehouseToIdNo
             '    View.InvTransactionRequests.Add(x)
             'Next
-            View.InvTransactionRequests.Clear()
-            For Each item In invTransactions.InvTransactionRequests
-                Dim x As New InvRequestListView
-                GlobalVariables.Mapper.Map(item, x)
-                View.InvTransactionRequests.Add(x)
-                'x.Cancelled = item.Cancelled
-                'x.DateCreated = item.DateCreated
-                'x.IdNo = item.IdNo
-                'x.InvTransTypeIdNo = item.InvTransTypeIdNo
-                'x.Notes = item.Notes
-                'x.Posted = item.Posted
-                'x.ReferenceNo = item.ReferenceNo
-                'x.TransactionDate = item.TransactionDate
-                'x.UserIdNo = item.UserIdNo
-                'x.WarehouseIdNo = item.WarehouseIdNo
-                'x.WarehouseToIdNo = item.WarehouseToIdNo
-                'View.InvTransactionRequests.Add(x)
-            Next
-            'GlobalVariables.Mapper.Map(invTransactions, View)
+            'View.InvTransactionRequests.Clear()
+            'For Each item In invTransactions.InvTransactionRequests
+            '    Dim x As New InvRequestListView
+            '    GlobalVariables.Mapper.Map(item, x)
+            '    View.InvTransactionRequests.Add(x)
+            '    'x.Cancelled = item.Cancelled
+            '    'x.DateCreated = item.DateCreated
+            '    'x.IdNo = item.IdNo
+            '    'x.InvTransTypeIdNo = item.InvTransTypeIdNo
+            '    'x.Notes = item.Notes
+            '    'x.Posted = item.Posted
+            '    'x.ReferenceNo = item.ReferenceNo
+            '    'x.TransactionDate = item.TransactionDate
+            '    'x.UserIdNo = item.UserIdNo
+            '    'x.WarehouseIdNo = item.WarehouseIdNo
+            '    'x.WarehouseToIdNo = item.WarehouseToIdNo
+            '    'View.InvTransactionRequests.Add(x)
+            'Next
+            GlobalVariables.Mapper.Map(invTransactions, View)
 
             'Dim x As InvTransactionView =
             'For Each item In invTransactions.InvTransactionRequests
