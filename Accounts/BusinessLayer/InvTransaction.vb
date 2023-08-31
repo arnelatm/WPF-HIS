@@ -34,4 +34,22 @@ Namespace BusinessLayer
 
     End Class
 
+    Public Class InvRequest
+        Inherits AATM.BusinessLayer.BusinessObject
+
+        ' ** Enterprise Design Pattern: Identity field pattern
+        Public Sub New()
+            'If GetRules().Count() = 0 Then
+            '    ' establish business rules
+            '    AddRule(New ValidateRequired("InvTransTypeIdNo"))
+            '    AddRule(New ValidateRequired("WarehouseIdNo"))
+            '    AddRule(New ValidateRequired("TransactionDate"))
+            '    AddRule(New ValidateRequired("Notes"))
+            'End If
+        End Sub
+
+        Public Property InvTransactionRequests As List(Of InvTransaction)
+        Public Property WarehouseIdNo As Int16
+    End Class
+
 End Namespace

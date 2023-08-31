@@ -1263,16 +1263,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemRequestApproval_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemRequestApproval.Click
-            RunForm(Of StockRequestApproval, StockRequestApprovalPresenter(Of InvTransactionModel))()
+            RunForm(Of InvRequestForm, InvRequestPresenter(Of InvTransactionModel))()
         End Sub
 
-
-
-
-        'Private Sub ToolStripMenuItemDrInvestigationsPrescriptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDrInvestigationsPrescriptions.Click
-        '    'RunForm(Of PmrInvestigationRequestForm, PMRInvestigationPresenter(Of PmrInvestigationModel))()
-        '    'RunForm(Of PmrInvestigationRequestForm, PmrInvestigationRequestPresenter(Of PmrInvestigationRequestModel))()
-        'End Sub
     End Class
 
 End Namespace
