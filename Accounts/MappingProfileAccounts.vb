@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Common.BusinessLayer
@@ -255,9 +256,16 @@ Public Class MappingProfileAccounts
 
         CreateMap(Of InvTransaction, InvTransactionModel)().ReverseMap()
         CreateMap(Of InvTransactionModel, IInvTransactionView)().ReverseMap()
+        CreateMap(Of InvTransactionModel, InvRequestListView)().ReverseMap()
 
         CreateMap(Of InvTransactionDetail, InvTransactionDetailModel)().ReverseMap()
         CreateMap(Of InvTransactionDetailModel, InvTransactionDetailView)().ReverseMap()
+        CreateMap(Of InvTransactionDetailModel, InvRequestListView)().ReverseMap()
+
+        CreateMap(Of InvRequest, InvRequestModel)().ReverseMap()
+        CreateMap(Of InvRequestModel, InvRequestView)().ReverseMap()
+        CreateMap(Of InvRequestModel, IInvRequestView)().ReverseMap()
+
 
         CreateMap(Of PurchaseOrder, PurchaseOrderModel)().ReverseMap()
         CreateMap(Of PurchaseOrderModel, IPurchaseOrderView)().ReverseMap()

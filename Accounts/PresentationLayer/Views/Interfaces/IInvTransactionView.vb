@@ -8,7 +8,7 @@ Namespace PresentationLayer.Views.Interfaces
 
         Property Amount As Decimal
         Property Cancelled As Boolean
-        Property DateCreated As DateTime
+        Property DateCreated As Date
         Property IdNo As Int32
         Property InvTransTypeIdNo As Int16
         Property Notes As String
@@ -43,6 +43,30 @@ Namespace PresentationLayer.Views.Interfaces
         Event InvTransactionTypeChanged(invTransTypeIdNo As Int16)
         Event ProductCodeValidating(productCode As String, control As Control)
         Event ProductNameValidating(productName As String, control As Control)
+    End Interface
+
+    Public Interface IInvRequestView
+        Inherits IView
+        Property InvTransactionRequests As List(Of InvRequestListView)
+        Property WarehouseIdNo As Int16
+        Event WarehouseIdNoChanged()
+    End Interface
+
+    Public Interface IInvRequestListView
+        Inherits IView
+
+        Property Amount As Decimal
+        Property Cancelled As Boolean
+        Property DateCreated As Date
+        Property IdNo As Int32
+        Property InvTransTypeIdNo As Int16
+        Property Notes As String
+        Property Posted As Boolean
+        Property ReferenceNo As String
+        Property TransactionDate As Date?
+        Property UserIdNo As Int16
+        Property WarehouseIdNo As Int16
+        Property WarehouseToIdNo As Int16?
     End Interface
 
 End Namespace

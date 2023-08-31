@@ -3,6 +3,7 @@ Imports System.Web.UI.WebControls.Expressions
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
+Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 Imports AATM.DataLayer.AdoNet.Db
@@ -319,13 +320,50 @@ Namespace DataLayer.AdoNet
             Throw New NotImplementedException()
         End Function
 
-        'Public Function GetLastPurchaseCost(productidNo As Int32) As Decimal Implements IGetLastPurchaseCost.GetLastPurchaseCost
-        '    Return Db.RunSqlStoredProcedure("spGetLastPurchaseCost", {"@ProductIdNo", productidNo})
-        'End Function
-
-
     End Class
 
+    Public Class InvRequestDao
+        Inherits AccountsDao
+        Implements IDaoParametrized(Of InvRequest)
 
+        Private ReadOnly _db As New Db()
+
+        Public Overrides Function GetDB()
+            Return _db
+        End Function
+
+
+        Public Function GetParametrized(Of TM)(parameter As Object, Optional sortExpression As String = Nothing) As InvRequest Implements IDaoParametrized(Of InvRequest).GetParametrized
+            Dim warehouseIdNo As Int16 = parameter(0)
+            Dim sql As String = "SELECT WarehouseCode, WarehouseName from Warehouse where WarehouseIdNo = '" + warehouseIdNo.ToString() + "'"
+            Dim data As New InvRequest
+            Dim params() As Object = {"@WarehouseIdNo", warehouseIdNo, "@BranchIdNo", GlobalVariables.BranchIdNo}
+            sql = $"SELECT IdNo,ReferenceNo,TransactionDate,WarehouseIdNo,WarehouseToIdNo,Amount,Notes,Posted,Cancelled,DateCreated,UserIdNo,InvTransTypeIdNo from InvTransaction where WarehouseIdNo = @WarehouseIdNo and InvTransTypeIdNo = 15 and BranchIdNo = @BranchIdNo"
+            _db.SetConnectionString("ISPDATA")
+            data.InvTransactionRequests = _db.Read(sql, MakeInvTransRequests, params).ToList()
+            Return data
+        End Function
+
+
+        Private Shared ReadOnly Make As Func(Of IDataReader, PmrInvestigation) = Function(reader) New PmrInvestigation() With
+            {
+            .DoctorName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("EmpNameEnglish"))
+            }
+
+        Private Shared ReadOnly MakeInvTransRequests As Func(Of IDataReader, InvTransaction) = Function(reader) New InvTransaction() With
+                                {.Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
+                                  .Cancelled = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cancelled")),
+                                  .IdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("IdNo")),
+                                  .InvTransTypeIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("InvTransTypeIdNo")),
+                                  .Notes = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Notes")),
+                                  .Posted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Posted")),
+                                  .ReferenceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ReferenceNo")),
+                                  .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),
+                                  .UserIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("UserIdNo")),
+                                  .WarehouseIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("WarehouseIdNo")),
+                                  .WarehouseToIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("WarehouseToIdNo"))
+                                }
+
+    End Class
 
 End Namespace

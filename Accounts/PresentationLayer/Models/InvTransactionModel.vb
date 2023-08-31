@@ -1,5 +1,4 @@
-﻿Imports AATM.Accounts.PresentationLayer.Views
-Imports AATM.PresentationLayer.Models
+﻿Imports AATM.Accounts.BusinessLayer
 
 Namespace PresentationLayer.Models
 
@@ -8,7 +7,13 @@ Namespace PresentationLayer.Models
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
     Public Class InvTransactionModel
+        Inherits InvRequestHeader
 
+        Public Property InvTransactionDetails As List(Of InvTransactionDetailModel)
+
+    End Class
+
+    Public Class InvRequestHeader
 
         Public Property Amount As Decimal
         Public Property Cancelled As Boolean
@@ -22,8 +27,14 @@ Namespace PresentationLayer.Models
         Public Property UserIdNo As Int16
         Public Property WarehouseIdNo As Int16
         Public Property WarehouseToIdNo As Int16?
-        Public Property InvTransactionDetails As List(Of InvTransactionDetailModel)
+    End Class
+
+    Public Class InvRequestModel
+
+        Public Property InvTransactionRequests As List(Of InvTransactionModel)
+        Public Property WarehouseIdNo As Int16
 
     End Class
+
 
 End Namespace

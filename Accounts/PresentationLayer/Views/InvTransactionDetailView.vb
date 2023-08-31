@@ -1,11 +1,11 @@
-﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+﻿Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views
 
     Public Class InvTransactionDetailView
         Implements IInvTransactionDetailView
-
 
         Public Property BaseUnitIdNo As Int16 Implements IInvTransactionDetailView.BaseUnitIdNo
         Public Property BatchNo As String Implements IInvTransactionDetailView.BatchNo
