@@ -256,11 +256,13 @@ Public Class MappingProfileAccounts
 
         CreateMap(Of InvTransaction, InvTransactionModel)().ReverseMap()
         CreateMap(Of InvTransactionModel, IInvTransactionView)().ReverseMap()
-        CreateMap(Of InvTransactionModel, InvRequestListView)().ReverseMap()
+        CreateMap(Of InvTransactionModel, IInvTransactionBaseView)().ReverseMap()
+
+        'CreateMap(Of InvTransactionModel, InvRequestListView)().ReverseMap()
 
         CreateMap(Of InvTransactionDetail, InvTransactionDetailModel)().ReverseMap()
         CreateMap(Of InvTransactionDetailModel, InvTransactionDetailView)().ReverseMap()
-        CreateMap(Of InvTransactionDetailModel, InvRequestListView)().ReverseMap()
+        'CreateMap(Of InvTransactionDetailModel, InvRequestListView)().ReverseMap()
 
         CreateMap(Of InvRequest, InvRequestModel)().ReverseMap()
         CreateMap(Of InvRequestModel, InvRequestView)().ReverseMap()

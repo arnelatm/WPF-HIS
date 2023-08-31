@@ -1,5 +1,4 @@
-﻿Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms
@@ -7,9 +6,10 @@ Namespace PresentationLayer.Views.Forms
     Public Class InvRequestForm
         Implements IInvRequestView
 
-        Private _invTransactionRequests As New List(Of InvRequestListView)
+        Private _invTransactionRequests As New List(Of IInvTransactionBaseView)
         Public Event WarehouseIdNoChanged() Implements IInvRequestView.WarehouseIdNoChanged
-
+        Public Property WarehouseList As DataTable Implements IInvRequestView.WarehouseList
+        Public Property UserList As DataTable Implements IInvRequestView.UserList
 
         Public Sub New()
             'MyBase.New()
@@ -29,16 +29,26 @@ Namespace PresentationLayer.Views.Forms
             End With
         End Sub
 
-        Public Property WarehouseIdNo As Short Implements IInvRequestView.WarehouseIdNo
+        Public Property WarehouseSelector As Short
             Get
-                Return cboWarehouseIdNo.GetValue(Of Short)
+                Return cboWarehouseSelector.GetValue(Of Short)
             End Get
             Set(value As Short)
-                cboWarehouseIdNo.SetValue(value)
+                cboWarehouseSelector.SetValue(value)
+                txtWarehouseIdNo.Text = value.ToString()
             End Set
         End Property
 
-        Public Property InvTransactionRequests As List(Of InvRequestListView) Implements IInvRequestView.InvTransactionRequests
+        Public Property WarehouseIdNo As Short Implements IInvRequestView.WarehouseIdNo
+            Get
+                Return txtWarehouseIdNo.GetValue(Of Short)
+            End Get
+            Set(value As Short)
+                txtWarehouseIdNo.SetValue(value)
+            End Set
+        End Property
+
+        Public Property InvTransactionRequests As List(Of IInvTransactionBaseView) Implements IInvRequestView.InvTransactionRequests
             Get
                 Return _invTransactionRequests
             End Get
@@ -51,12 +61,17 @@ Namespace PresentationLayer.Views.Forms
         Private Sub BindInvTransactionRequests()
             SuspendLayout()
             bsInvTransactionRequest.DataSource = Nothing
-            DataGridViewInvTransactionRequests.Refresh()
             bsInvTransactionRequest.DataSource = InvTransactionRequests
-            bsInvTransactionRequest.AllowNew = True
+            bsInvTransactionRequest.AllowNew = False
             With DataGridViewInvTransactionRequests
                 .AutoGenerateColumns = False
                 .DataSource = bsInvTransactionRequest
+                dgvUserIdNo.DataSource = UserList
+                dgvUserIdNo.DisplayMember = "Name"
+                dgvUserIdNo.ValueMember = "IdNo"
+                dgvWarehouseToIdNo.DataSource = WarehouseList
+                dgvWarehouseToIdNo.DisplayMember = "Name"
+                dgvWarehouseToIdNo.ValueMember = "IdNo"
             End With
             ResumeLayout()
         End Sub
@@ -64,16 +79,24 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
-                {"WarehouseIdNo", cboWarehouseIdNo}
+                {"WarehouseIdNo", cboWarehouseSelector}
                 }
         End Sub
 
-        Private Sub SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboWarehouseIdNo.SelectionChangeCommitted
+        Private Sub SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboWarehouseSelector.SelectionChangeCommitted
+            WarehouseIdNo = cboWarehouseSelector.SelectedValue
             RaiseEvent WarehouseIdNoChanged()
             bsInvTransactionRequest.ResetBindings(True)
             DataGridViewInvTransactionRequests.Refresh()
         End Sub
 
+        Private Sub TableLayoutPanel1_Paint(sender As Object, e As PaintEventArgs) Handles TableLayoutPanel1.Paint
+
+        End Sub
+
+        Private Sub CtDataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewInvTransactionRequests.CellContentClick
+
+        End Sub
     End Class
 
 End Namespace
