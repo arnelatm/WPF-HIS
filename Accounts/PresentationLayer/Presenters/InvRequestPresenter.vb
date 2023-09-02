@@ -9,6 +9,9 @@ Namespace PresentationLayer.Presenters
     Public Class InvRequestPresenter(Of TM As New)
         Inherits CommonPresenter(Of IInvRequestView, TM)
 
+        Private _invRequestItemService
+
+
         Public Sub New()
 
         End Sub
@@ -19,7 +22,15 @@ Namespace PresentationLayer.Presenters
             TableName = "InvTransaction"
             SortOrderKey = "IdNo"
             WithTreeView = False
+            _invRequestItemService = New AccountsService("InvTransactionDetail")
             AddHandler view.WarehouseIdNoChanged, AddressOf OnWarehouseIdNoChanged
+            AddHandler view.RowChanged, AddressOf OnRowChanged
+        End Sub
+
+        Private Sub OnRowChanged(productIdNo As Integer)
+            Dim invRequestItems As List(Of InvTransactionDetailModel)
+            invRequestItems = _invRequestItemService.GetRecordsWithGroupIdNo(Of InvTransactionDetailModel)(productIdNo)
+            GlobalVariables.Mapper.Map(invRequestItems, View.InvTransactionDetails)
         End Sub
 
         Private Sub OnWarehouseIdNoChanged()

@@ -11,12 +11,11 @@ Namespace PresentationLayer.Views
         Public Property WarehouseIdNo As Short Implements IInvRequestView.WarehouseIdNo
         Public Property Errors As List(Of String) Implements IView.Errors
         Public Property DataFilter As String Implements IView.DataFilter
-
         Public Property WarehouseList As DataTable Implements IInvRequestView.WarehouseList
         Public Property UserList As DataTable Implements IInvRequestView.UserList
-
+        Public Property InvTransactionDetails As List(Of InvTransactionDetailView) Implements IInvRequestView.InvTransactionDetails
         Public Event WarehouseIdNoChanged() Implements IInvRequestView.WarehouseIdNoChanged
-
+        Public Event RowChanged(productIdNo As Integer) Implements IInvRequestView.RowChanged
     End Class
 
     'Public Class InvRequestListView

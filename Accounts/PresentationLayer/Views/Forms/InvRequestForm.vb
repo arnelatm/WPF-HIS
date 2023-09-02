@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.MessagingLibrary
 
 Namespace PresentationLayer.Views.Forms
@@ -7,7 +8,9 @@ Namespace PresentationLayer.Views.Forms
         Implements IInvRequestView
 
         Private _invTransactionRequests As New List(Of IInvTransactionBaseView)
+        Private _invTransactionDetails As List(Of InvTransactionDetailView)
         Public Event WarehouseIdNoChanged() Implements IInvRequestView.WarehouseIdNoChanged
+        Public Event RowChanged(productIdNo As Int32) Implements IInvRequestView.RowChanged
         Public Property WarehouseList As DataTable Implements IInvRequestView.WarehouseList
         Public Property UserList As DataTable Implements IInvRequestView.UserList
 
@@ -76,6 +79,26 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
+        Public Property InvTransactionDetails As List(Of InvTransactionDetailView) Implements IInvRequestView.InvTransactionDetails
+            Get
+                Return _invTransactionDetails
+            End Get
+            Set
+                _invTransactionDetails = Value
+                BindInvTransactionDetail()
+            End Set
+        End Property
+
+        Private Sub BindInvTransactionDetail()
+            SuspendLayout()
+            bsInvTranItems.DataSource = Nothing
+            DataGridViewInvTransItems.Refresh()
+            bsInvTranItems.DataSource = InvTransactionDetails
+            bsInvTranItems.AllowNew = False
+            'SetupDgvColumns()
+            ResumeLayout()
+        End Sub
+
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
                 {
@@ -90,13 +113,14 @@ Namespace PresentationLayer.Views.Forms
             DataGridViewInvTransactionRequests.Refresh()
         End Sub
 
-        Private Sub TableLayoutPanel1_Paint(sender As Object, e As PaintEventArgs) Handles TableLayoutPanel1.Paint
-
+        Private Sub DgvInvTransactionRequest_RowEnter(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewInvTransactionRequests.RowEnter
+            Dim dgvRow As DataGridViewRow = DataGridViewInvTransactionRequests.Rows(e.RowIndex)
+            Dim invTranIdNo As Int32 = dgvRow.Cells("dgvIdNo").Value
+            RaiseEvent RowChanged(invTranIdNo)
+            bsInvTranItems.ResetBindings(False)
+            lblRequestedItems.Text = Messaging.TranslateCaption("Requested Items for ") + dgvRow.Cells("dgvReferenceNo").Value
         End Sub
 
-        Private Sub CtDataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewInvTransactionRequests.CellContentClick
-
-        End Sub
     End Class
 
 End Namespace

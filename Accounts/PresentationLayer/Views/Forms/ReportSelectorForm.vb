@@ -128,6 +128,10 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent ReportDoubleClickEvent(IdNo)
         End Sub
 
+        Private Sub DataGridViewReportList_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReportList.CellContentClick
+
+        End Sub
+
         'Private Sub DataGridViewReportList_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridViewReportList.CellMouseDoubleClick
         '    Debugger.Break()
         'End Sub
