@@ -26,7 +26,6 @@ Namespace PresentationLayer.Views.Forms
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReportSelectorForm))
             Me.DataGridViewReportList = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
@@ -37,10 +36,6 @@ Namespace PresentationLayer.Views.Forms
             CType(Me.DataGridViewReportList, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsReportList, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
-            '
-            'TranslatorDAC
-            '
-            Me.TranslatorDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
             '
             'AppDataDAC
             '
@@ -60,14 +55,6 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewReportList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ReportName, Me.dgvIdNo})
             Me.DataGridViewReportList.DataFilter = Nothing
             Me.DataGridViewReportList.DataSource = Me.bsReportList
-            DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewReportList.DefaultCellStyle = DataGridViewCellStyle3
             Me.DataGridViewReportList.DgvFooter = Nothing
             Me.DataGridViewReportList.DisplayOnly = True
             Me.DataGridViewReportList.Dock = System.Windows.Forms.DockStyle.Fill
@@ -78,23 +65,25 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewReportList.FieldDescription = Nothing
             Me.DataGridViewReportList.FieldName = Nothing
             Me.DataGridViewReportList.FieldsDictionary = Nothing
+            Me.DataGridViewReportList.FindColumnNo = CType(0, Short)
             Me.DataGridViewReportList.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.DataGridViewReportList.FindEnabled = False
             Me.DataGridViewReportList.FirstRowDeletionEnabled = True
             Me.DataGridViewReportList.FirstRowInsertionEnabled = True
             Me.DataGridViewReportList.IgnoreCase = False
             Me.DataGridViewReportList.IsDirty = False
-            Me.DataGridViewReportList.Location = New System.Drawing.Point(0, 53)
+            Me.DataGridViewReportList.Location = New System.Drawing.Point(0, 59)
             Me.DataGridViewReportList.Name = "DataGridViewReportList"
             Me.DataGridViewReportList.ReadOnly = True
             Me.DataGridViewReportList.RowHeadersVisible = False
             Me.DataGridViewReportList.RowHeadersWidth = 4
+            Me.DataGridViewReportList.Searchable = True
             Me.DataGridViewReportList.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewReportList.SecurityKey = ""
             Me.DataGridViewReportList.SequenceColumn = "dgvSequence"
             Me.DataGridViewReportList.SequenceFieldName = "Sequence"
             Me.DataGridViewReportList.ShowFooter = False
-            Me.DataGridViewReportList.Size = New System.Drawing.Size(476, 510)
+            Me.DataGridViewReportList.Size = New System.Drawing.Size(476, 504)
             Me.DataGridViewReportList.TabIndex = 11
             Me.DataGridViewReportList.Translatable = True
             '
@@ -103,6 +92,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ReportName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
             Me.ReportName.DataPropertyName = "ReportName"
             Me.ReportName.HeaderText = "Report Name"
+            Me.ReportName.MinimumWidth = 6
             Me.ReportName.Name = "ReportName"
             Me.ReportName.ReadOnly = True
             '
@@ -121,6 +111,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvIdNo.FindEnabled = False
             Me.dgvIdNo.HeaderText = "IdNo"
             Me.dgvIdNo.IgnoreCase = False
+            Me.dgvIdNo.MinimumWidth = 6
             Me.dgvIdNo.Name = "dgvIdNo"
             Me.dgvIdNo.ReadOnly = True
             Me.dgvIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
@@ -131,7 +122,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'bsReportList
             '
-            Me.bsReportList.DataSource = GetType(ReportModel)
+            Me.bsReportList.DataSource = GetType(AATM.Common.PresentationLayer.Models.ReportModel)
             '
             'ReportSelectorForm
             '

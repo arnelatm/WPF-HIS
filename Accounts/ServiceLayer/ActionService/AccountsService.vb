@@ -76,13 +76,6 @@ Namespace ServiceLayer.ActionService
             Return model
         End Function
 
-        Public Function GetListParametrized(Of TM)(parameter As Object, Optional sortOrder As String = "")
-            Dim model As New List(Of TM)
-            Dim records = DataDao.GetListParametrized(parameter, sortOrder)
-            GlobalVariables.Mapper.Map(records, model)
-            Return model
-        End Function
-
         'Public Function GetEmployeeLeaveList()
         '    Dim model As New List(Of EmployeeLeaveModel)
         '    Dim records As List(Of EmployeeLeave) = DataDao.GetEmployeeLeaveList()

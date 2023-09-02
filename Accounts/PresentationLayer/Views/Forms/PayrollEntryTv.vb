@@ -27,7 +27,7 @@ Namespace PresentationLayer.Views.Forms
             dgvDaysTotal.DisplayOnly = True
             dgvDaysVacationLeave.SetFormat(7, 4)
             dgvEmployeeIdNo.DisplayOnly = True
-            dgvDaysAbsentWoPay.DisplayOnly = True
+            'dgvDaysAbsentWoPay.DisplayOnly = True
         End Sub
 
         Protected Sub OnPayrollLoad() Handles MyBase.Load

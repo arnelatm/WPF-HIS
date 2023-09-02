@@ -303,9 +303,6 @@ Namespace PresentationLayer.Presenters
                     dateReleased = IIf(IsDBNull(employees(i * 6 - 3)), Nothing, employees(i * 6 - 3))
                     dutyHours = employees(i * 6 - 2)
                     actualDutyHours = employees(i * 6 - 1)
-                    'If empId = 331 Then
-                    '    Debugger.Break()
-                    'End If
                     If dateHired <= View.EndDate AndAlso (dateReleased Is Nothing OrElse dateReleased >= View.StartDate OrElse dateReleased > View.EndDate) Then
                         AddEmployeeAttendance(dateHired, dateReleased, empId, empName, daysInPeriod, daysOffInPeriod, seq)
                         seq = seq + 1
@@ -402,7 +399,9 @@ Namespace PresentationLayer.Presenters
             empAttendance.EmployeeIdNo = empId
             empAttendance.EmployeeName = empName
             empAttendance.Sequence = seq
-
+            'If empId = 232 Then
+            '    Debugger.Break()
+            'End If
             If dateHired <= View.StartDate AndAlso (dateReleased Is Nothing OrElse dateReleased > View.EndDate) Then
                 empAttendance.DaysAbsentWithoutPay = 0
                 empAttendance.DaysAbsentWithPay = 0

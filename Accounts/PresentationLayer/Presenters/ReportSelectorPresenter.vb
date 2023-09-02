@@ -5,6 +5,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports System.Globalization
@@ -20,7 +21,7 @@ Namespace PresentationLayer.Presenters
         Public Sub New(view As IReportSelectorView, reportGroup As String)
             MyBase.New(view)
             WithTreeView = False
-            Service = New AccountsService("Report")
+            Service = New CommonService("Report")
             TableName = "Report"
             SortOrderKey = "ReportName"
             AskBeforeSave = True

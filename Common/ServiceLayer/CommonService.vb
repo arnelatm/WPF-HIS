@@ -1,5 +1,6 @@
 ﻿Imports AATM.Common.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.ServicesLayer.Services
 
 Namespace ServiceLayer
@@ -23,6 +24,14 @@ Namespace ServiceLayer
                 Debugger.Break()
             End If
         End Sub
+
+
+        Public Function GetListParametrized(Of TM)(parameter As Object, Optional sortOrder As String = "")
+            Dim model As New List(Of TM)
+            Dim records = DataDao.GetListParametrized(parameter, sortOrder)
+            GlobalVariables.Mapper.Map(records, model)
+            Return model
+        End Function
 
         Protected Overrides Sub CreateDao(objectName As String, Optional daoParam As Object = Nothing, Optional connection As String = Nothing)
             If objectName IsNot Nothing Then
