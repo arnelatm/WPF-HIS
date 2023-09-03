@@ -53,20 +53,6 @@ Namespace PresentationLayer.Presenters
 
     End Class
 
-    Public Class DateRangeCompanyPresenter
-        Inherits CommonPresenter(Of IView, ReportModel)
-
-        Public Sub New(view As IView)
-            MyBase.New(view)
-            TableName = "Account"
-            Service = New CommonService("Report")
-            TableName = "Account"
-            SortOrderKey = "IdNo"
-            WithTreeView = False
-        End Sub
-
-    End Class
-
 End Namespace
 
 Public Class ShowReportRequested

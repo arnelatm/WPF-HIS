@@ -26,9 +26,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReportSelectorForm))
-            Me.DataGridViewReportList = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewReportList = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.ReportName = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.bsReportList = New System.Windows.Forms.BindingSource(Me.components)
@@ -55,6 +56,14 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewReportList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ReportName, Me.dgvIdNo})
             Me.DataGridViewReportList.DataFilter = Nothing
             Me.DataGridViewReportList.DataSource = Me.bsReportList
+            DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.6!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewReportList.DefaultCellStyle = DataGridViewCellStyle3
             Me.DataGridViewReportList.DgvFooter = Nothing
             Me.DataGridViewReportList.DisplayOnly = True
             Me.DataGridViewReportList.Dock = System.Windows.Forms.DockStyle.Fill
@@ -74,6 +83,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewReportList.IsDirty = False
             Me.DataGridViewReportList.Location = New System.Drawing.Point(0, 59)
             Me.DataGridViewReportList.Name = "DataGridViewReportList"
+            Me.DataGridViewReportList.OldCellValue = Nothing
             Me.DataGridViewReportList.ReadOnly = True
             Me.DataGridViewReportList.RowHeadersVisible = False
             Me.DataGridViewReportList.RowHeadersWidth = 4
@@ -162,7 +172,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn8 As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewImageColumn2 As DataGridViewImageColumn
-        Friend WithEvents DataGridViewReportList As CDataGridView
+        Friend WithEvents DataGridViewReportList As CtDataGridView
         Friend WithEvents ReportName As DataGridViewTextBoxColumn
         Friend WithEvents dgvIdNo As CDgvTextColumn
     End Class

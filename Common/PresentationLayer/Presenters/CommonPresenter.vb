@@ -151,6 +151,62 @@ Namespace PresentationLayer.Presenters
             Next
         End Sub
 
+        Protected Sub CreateDataSourceLookup(dataSourceNames As ArrayList)
+            Dim luItems As List(Of DataLookup)
+            luItems = CreateDataLookups(dataSourceNames)
+            For Each luItem As DataLookup In luItems
+                luItem.PropertyControl = GetFieldControlName(luItem.PropertyName)
+                luItem.Data = luItem.LookUpTask.Result
+                Invoker.SetPropertyR(luItem.PropertyControl, "DataSource", luItem.Data)
+                Dim displayColumnNo As Integer = 0
+                Dim valueColumnNo As Integer = 0
+                If luItem.DisplayMember = "Name" Then
+                    If luItem.Data.Columns.Count() = 1 Then
+                        displayColumnNo = 0
+                        valueColumnNo = 0
+                    Else
+                        displayColumnNo = 1
+                    End If
+                ElseIf luItem.DisplayMember = "Code" Then
+                    If luItem.Data.Columns.Count() = 1 Then
+                        displayColumnNo = 0
+                    ElseIf luItem.Data.Columns.Count() = 2 Then
+                        displayColumnNo = 1
+                    Else
+                        displayColumnNo = 2
+                    End If
+                Else
+                    If luItem.Data.Columns.Count() = 1 Then
+                        displayColumnNo = 0
+                    Else
+                        displayColumnNo = 1
+                    End If
+                End If
+                If luItem.ValueMember = "Name" Then
+                    If luItem.Data.Columns.Count() = 1 Then
+                        valueColumnNo = 0
+                    Else
+                        valueColumnNo = 1
+                    End If
+                ElseIf luItem.DisplayMember = "Code" Then
+                    If luItem.Data.Columns.Count() = 1 Then
+                        valueColumnNo = 0
+                    ElseIf luItem.Data.Columns.Count() = 2 Then
+                        valueColumnNo = 1
+                    Else
+                        valueColumnNo = 2
+                    End If
+                Else
+                    valueColumnNo = 0
+                End If
+
+                Invoker.SetPropertyR(luItem.PropertyControl, "DisplayMember", luItem.Data.Columns(displayColumnNo).ColumnName)
+                Invoker.SetPropertyR(luItem.PropertyControl, "ValueMember", luItem.Data.Columns(valueColumnNo).ColumnName)
+                'Invoker.SetPropertyR(luItem.PropertyControl, "DisplayMember", "Name") 'luItem.DisplayMember)
+                'Invoker.SetPropertyR(luItem.PropertyControl, "ValueMember", luItem.ValueMember)
+            Next
+        End Sub
+
         'Protected Sub CreateLookupDataThread(dataSourceNames As Object)
         '    Dim luItems As List(Of DataLookup)
         '    luItems = CreateDataLookups(dataSourceNames)
@@ -183,6 +239,31 @@ Namespace PresentationLayer.Presenters
                 dataSourceNames.Add({"ItemCode", GroupCodeCodes(i, 0), "ItemCodeCode,ItemCodeName", "CodeGroupIdNo = " & idNo.ToString()})
             Next
             CreateDataSourceThread(dataSourceNames)
+        End Sub
+
+        Public Sub MakeVarDataSources(dataObject As Object)
+            Dim data As New ArrayList
+            For Each item As String() In dataObject
+                data.Add(item)
+            Next
+            CreateLookupDataThread(data)
+        End Sub
+
+        Public Sub MakeControlDataSources(dataObject As Object)
+            Dim data As New ArrayList
+            For Each aItem As String() In dataObject
+                'If you are only interested in the first element you don't need the inner for each loop
+                'Dim sDesiredValue As String = aItem(0) 'This is the first element in the inner array (second dimension)
+                data.Add(aItem)
+                'For Each sElement As String In aOuter
+                ' Dim sCatch As String = sElement 'Assign the value of each element in the inner array to sCatch
+                'sElement = "This Won't Stick" 'This will only hold value within the context of this loop iteration
+                'Next 'sElement
+            Next 'aOuter
+            'For Each item In arrayData
+            '    data.Add(item)
+            'Next
+            CreateDataSourceThread(data)
         End Sub
 
         'Private Function CreateDataLookup(dataSourceName As Array) As DataLookup
@@ -534,6 +615,20 @@ Namespace PresentationLayer.Presenters
             'End If
             Return lookupObj
         End Function
+
+        'Public Function CreateDataSourceThread(tableName, variableName, fields, filter)
+        '    Dim data As New ArrayList
+        '    data.Add({"Bank", "BankIdNo", Nothing, Nothing})
+        '    data.Add({"Country", "CountryCode", "CountryCode,CountryName", Nothing})
+        '    data.Add({"Department", "DepartmentIdNo", Nothing, Nothing})
+        '    data.Add({"Designation", "DesignationIdNo", Nothing, Nothing})
+        '    data.Add({"Country", "NationalityCode", "CountryCode,CountryName", Nothing})
+        '    data.Add({"Religion", "ReligionIdNo", Nothing, Nothing})
+        '    data.Add({"PayCycle", "PayCycleIdNo", Nothing, Nothing})
+        '    data.Add({"PayGroup", "PayGroupIdNo", Nothing, Nothing})
+        '    data.Add({"Employee", "SupervisorIdNo", Nothing, "Supervisor=1"})
+        '    Return CreateDataSourceThread(data)
+        'End Function
 
     End Class
 

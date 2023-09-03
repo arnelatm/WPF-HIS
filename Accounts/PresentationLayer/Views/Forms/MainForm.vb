@@ -62,7 +62,7 @@ Namespace PresentationLayer.Views.Forms
                 AddHandler AppDomain.CurrentDomain.UnhandledException, AddressOf UnhandledExceptionHandler
                 AddHandler Application.ThreadException, AddressOf ThreadExceptionHandler
                 Dim mySettings = AppSettings.Load()
-                GlobalVariables.TranslationMode = mySettings.TranslationInitializer
+                GlobalVariables.TranslationMode = True ' mySettings.TranslationInitializer
                 GlobalVariables.PreferredLanguage = mySettings.PreferredLanguage
                 _logStatus = LoginStatus.LoggedOut
                 GlobalFunctions.SetCulture(GlobalVariables.AppCultureInfo.ToString())

@@ -130,25 +130,21 @@ Namespace PresentationLayer.Presenters
             CreateEnumDataSource(Of BloodTypeSelection)("BloodType")
             CreateListDataSource("List", "Title", "NameTitle")
             CreateEnumData(Of PayRateUnitSelection)(View.Unit)
-            Dim data As New ArrayList
-            data.Add({"Bank", "BankIdNo", Nothing, Nothing})
-            data.Add({"Country", "CountryCode", "CountryCode,CountryName", Nothing})
-            data.Add({"Department", "DepartmentIdNo", Nothing, Nothing})
-            data.Add({"Designation", "DesignationIdNo", Nothing, Nothing})
-            data.Add({"Country", "NationalityCode", "CountryCode,CountryName", Nothing})
-            data.Add({"Religion", "ReligionIdNo", Nothing, Nothing})
-            data.Add({"PayCycle", "PayCycleIdNo", Nothing, Nothing})
-            data.Add({"PayGroup", "PayGroupIdNo", Nothing, Nothing})
-            data.Add({"Employee", "SupervisorIdNo", Nothing, "Supervisor=1"})
-            CreateDataSourceThread(data)
+            MakeControlDataSources({New String() {"Bank", "BankIdNo", Nothing, Nothing},
+                             New String() {"Country", "CountryCode", "CountryCode,CountryName", Nothing},
+                             New String() {"Department", "DepartmentIdNo", Nothing, Nothing},
+                             New String() {"Designation", "DesignationIdNo", Nothing, Nothing},
+                             New String() {"Country", "NationalityCode", "CountryCode,CountryName", Nothing},
+                             New String() {"Religion", "ReligionIdNo", Nothing, Nothing},
+                             New String() {"PayCycle", "PayCycleIdNo", Nothing, Nothing},
+                             New String() {"PayGroup", "PayGroupIdNo", Nothing, Nothing},
+                             New String() {"Employee", "SupervisorIdNo", Nothing, "Supervisor=1"}})
 
-            data.Clear()
-            data.Add({"PayElement", "DeductionsByName", Nothing, "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"})
-            data.Add({"PayElement", "EarningsByName", Nothing, "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"})
-            data.Add({"PhoneType", "PhoneTypes", Nothing, Nothing})
-            data.Add({"Document", "Documents", Nothing, "DocumentType = '" + EnumToCode(DocumentTypeSelection.Employee) + "'"})
-            data.Add({"Leave", "Leaves", Nothing, Nothing})
-            CreateLookupDataThread(data)
+            MakeVarDataSources({New String() {"PayElement", "DeductionsByName", Nothing, "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"},
+                               New String() {"PayElement", "EarningsByName", Nothing, "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"},
+                               New String() {"PhoneType", "PhoneTypes", Nothing, Nothing},
+                               New String() {"Document", "Documents", Nothing, "DocumentType = '" + EnumToCode(DocumentTypeSelection.Employee) + "'"},
+                               New String() {"Leave", "Leaves", Nothing, Nothing}})
 
         End Sub
 
