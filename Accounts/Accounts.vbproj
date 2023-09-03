@@ -552,6 +552,7 @@
     <Compile Include="PresentationLayer\Presenters\AppSettingPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ApArEmReportPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\BasicPresenterHelper.vb" />
+    <Compile Include="PresentationLayer\Presenters\DateRangeContactPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\InvRequestPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\StockRequestApprovalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\FinancialReportPresenter.vb" />
@@ -622,6 +623,8 @@
     <Compile Include="PresentationLayer\Views\Forms\StockRequestApprovalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Interfaces\IApArEmReportView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IContactDateRangeView.vb" />
     <Compile Include="PresentationLayer\Views\InvRequestView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeLeaveApprovalItemView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeLeaveCreditView.vb" />
@@ -712,7 +715,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IAppSettingView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\IApArEmReportView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IDocumentDetailView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IFinancialReportView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IHrReportsView.vb" />

@@ -713,7 +713,7 @@ Public Class GlobalVariables
         End Get
     End Property
 
-    Public Shared Property TranslationMode As Boolean = False
+    Public Shared Property TranslationMode As Boolean = True
 
     Public Shared Property PreferredLanguage As String = $"English (إنجليزي)"
 
