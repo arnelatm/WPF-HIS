@@ -16,6 +16,7 @@ Namespace DataLayer.AdoNet
 
         Private Const FieldList = "Active," &
                                   "BranchIdNo," &
+                                  "DatabaseName," &
                                   "DateCreated," &
                                   "IdNo," &
                                   "PrintJobIdNo," &
@@ -35,6 +36,7 @@ Namespace DataLayer.AdoNet
             New Report() With {
             .Active = Extensions.AsBool(reader("Active")),
             .BranchIdNo = Extensions.AsInt(Of Int16)(reader("BranchIdNo")),
+            .DatabaseName = Extensions.AsString(reader("DatabaseName")),
             .DateCreated = Extensions.AsDateTime(reader("DateCreated")),
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .PrintJobIdNo = Extensions.AsInt(Of Int16)(reader("PrintJobIdNo")),
@@ -56,8 +58,8 @@ Namespace DataLayer.AdoNet
             '        " VALUES (@QueryForm,@QueryFormParameters,@QueryParameters,@ReportCode,@ReportFileName,@ReportName,@ReportNameAra,@ReportTitle,@ReportTitleAra)"
             Dim sql As String =
                     " INSERT INTO [PrintSetup] " &
-                    " (Active,BranchIdNo,PrintJobIdNo,QueryForm,QueryFormParameters,QueryParameters,ReportCode,ReportFileName,ReportName,ReportNameAra,ReportTitle,ReportTitleAra) " &
-                    " VALUES (@Active,@BranchIdNo,@PrintJobIdNo,@QueryForm,@QueryFormParameters,@QueryParameters,@ReportCode,@ReportFileName,@ReportName,@ReportNameAra,@ReportTitle,@ReportTitleAra)"
+                    " (Active,BranchIdNo,DatabaseName,PrintJobIdNo,QueryForm,QueryFormParameters,QueryParameters,ReportCode,ReportFileName,ReportName,ReportNameAra,ReportTitle,ReportTitleAra) " &
+                    " VALUES (@Active,@BranchIdNo,@DatabaseName,@PrintJobIdNo,@QueryForm,@QueryFormParameters,@QueryParameters,@ReportCode,@ReportFileName,@ReportName,@ReportNameAra,@ReportTitle,@ReportTitleAra)"
             Return _db.Insert(sql, Take(report))
         End Function
 
@@ -66,6 +68,7 @@ Namespace DataLayer.AdoNet
                                     "@IdNo", report.IdNo,
                                     "Active", report.Active,
                                     "BranchIdNo", report.BranchIdNo,
+                                    "DatabaseName", report.DatabaseName,
                                     "PrintJobIdNo", report.PrintJobIdNo,
                                     "QueryForm", report.QueryForm,
                                     "QueryFormParameters", report.QueryFormParameters,
@@ -84,6 +87,7 @@ Namespace DataLayer.AdoNet
                     "UPDATE Report SET " &
                     "Active = @Active," &
                     "BranchIdNo = @BranchIdNo," &
+                    "DatabaseName = @DatabaseName," &
                     "PrintJobIdNo = @PrintJobIdNo," &
                     "QueryForm = @QueryForm, " &
                     "QueryFormParameters = @QueryFormParameters, " &

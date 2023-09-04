@@ -19,6 +19,7 @@ Namespace BusinessLayer
 
         Public Property Active As Boolean
         Public Property BranchIdNo As Int16
+        Public Property DatabaseName As String
         Public Property DateCreated As DateTime
         Public Property IdNo As Int16
         Public Property PrintJobIdNo As Int16
