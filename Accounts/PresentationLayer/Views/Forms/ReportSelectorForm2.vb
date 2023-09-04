@@ -75,6 +75,15 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property DatabaseName As String Implements IReportView.DatabaseName
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As String)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
 
 #End Region
 

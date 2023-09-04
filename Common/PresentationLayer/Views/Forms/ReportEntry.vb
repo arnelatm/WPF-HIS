@@ -155,6 +155,21 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Private _databaseName As String
+
+        Public Property DatabaseName As String Implements IReportView.DatabaseName
+            Get
+                Return _databaseName
+            End Get
+            Set(value As String)
+                If value Is Nothing OrElse value = "" Then
+                    _databaseName = $"ISPDATA"
+                Else
+                    _databaseName = value
+                End If
+            End Set
+        End Property
+
 #End Region
 
         Protected Overrides Sub CreateMainFieldsDictionary()

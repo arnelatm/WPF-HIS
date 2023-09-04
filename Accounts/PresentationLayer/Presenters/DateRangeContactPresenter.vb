@@ -64,6 +64,9 @@ Public Class DateRangeContactPresenter(Of TM As New)
         End Select
         View.BeginningDate = begValue
         View.EndingDate = endValue
+        If Not (_reportModel.DatabaseName Is Nothing OrElse _reportModel.DatabaseName = "") Then
+
+        End If
         If contactName = "Customer" Then
             MakeVarDataSources({New String() {"Customer", "InsuranceList", Nothing, Nothing}})
         End If
@@ -182,44 +185,18 @@ Public Class DateRangeContactPresenter(Of TM As New)
             Dim reportArgs As New CrPrintableArgs
             Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(beginningDate, CultureInfo.CreateSpecificCulture("en-GB"))
             Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(endingDate, CultureInfo.CreateSpecificCulture("en-GB"))
-            reportTitle = Libraries.MessagingLibrary.Messaging.SelectReportName(reportName, beginningDate, endingDate, curCulture)
-            Select Case View.ReportCode
-                Case "ApStatement"
-                    reportArgs.ReportParameters = {beginningDate.Value, "BeginningDate",
-                        endingDate.Value, "EndingDate",
-                        View.IdNo, "SupplierIdNo",
-                        View.PersonSelectorControl.Text, "DisplayName",
-                        reportTitle, "ReportTitle",
-                        GlobalVariables.EstablishmentName, "EstablishmentName",
-                        View.Language, "Language"}
-                Case "ArStatement"
-                    reportArgs.ReportParameters = {beginningDate.Value, "BeginningDate",
-                        endingDate.Value, "EndingDate",
-                        View.IdNo, "CustomerIdNo",
-                        View.PersonSelectorControl.Text, "DisplayName",
-                        reportTitle, "ReportTitle",
-                        GlobalVariables.EstablishmentName, "EstablishmentName",
-                        View.Language, "Language"}
-                Case "ErStatement"
-                    reportArgs.ReportParameters = {beginningDate.Value, "BeginningDate",
-                        endingDate.Value, "EndingDate",
-                        View.IdNo, "EmployeeIdNo",
-                        View.PersonSelectorControl.Text, "DisplayName",
-                        reportTitle, "ReportTitle",
-                        GlobalVariables.EstablishmentName, "EstablishmentName",
-                        View.Language, "Language"}
-                Case "EmployeeInfo"
-                    reportArgs.ReportParameters = {View.IdNo, "EmployeeIdNo"}
-                Case "LeaveStatement"
-                    reportArgs.ReportParameters = {beginningDate.Value, "BeginningDate",
-                        endingDate.Value, "EndingDate",
-                        View.IdNo, "EmployeeIdNo",
-                        reportTitle, "ReportTitle",
-                        GlobalVariables.EstablishmentName, "EstablishmentName",
-                        View.Language, "Language"}
-            End Select
+            Dim language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+            reportTitle = Libraries.MessagingLibrary.Messaging.SelectReportName(_reportModel.ReportName, beginningDate, endingDate, curCulture)
+            reportArgs.ReportParameters = {
+                                            beginningDate.Value, "BeginningDate",
+                                            endingDate.Value, "EndingDate",
+                                            View.IdNo, "IdNo",
+                                            _reportModel.ReportTitle, "ReportTitle",
+                                            GlobalVariables.EstablishmentName, "EstablishmentName",
+                                            language, "Language"}
+            reportArgs.DataBaseConnectionName = _reportModel.DatabaseName
             Dim p As New PrintReportPresenter(Of AccountModel)
-            p.ViewReport(_reportFileName, reportArgs, False)
+            p.ViewReport(_reportModel.ReportFileName, reportArgs, False)
         End If
         CultureInfo.CurrentCulture = curCulture
 
