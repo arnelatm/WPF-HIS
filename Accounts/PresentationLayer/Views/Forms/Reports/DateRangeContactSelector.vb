@@ -84,10 +84,10 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Public Property IdNo As Integer Implements IContactDateRangeView.IdNo
             Get
-                Return cboInsuranceIdNo.GetValue(Of Integer)
+                Return cboContactIdNo.GetValue(Of Integer)
             End Get
             Set(value As Integer)
-                cboInsuranceIdNo.SetValue(value)
+                cboContactIdNo.SetValue(value)
             End Set
         End Property
 
@@ -99,15 +99,15 @@ Namespace PresentationLayer.Views.Forms.Reports
 
         Private Sub DateRangeCompanyEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             RaiseEvent FormLoaded()
-            cboInsuranceIdNo.DisplayOnly = False
-            cboInsuranceIdNo.EditingMode = True
+            cboContactIdNo.DisplayOnly = False
+            cboContactIdNo.EditingMode = True
         End Sub
 
         Private Sub BindContactDataSource()
-            cboInsuranceIdNo.DataSource = Nothing
-            cboInsuranceIdNo.DataSource = ContactDataSource
-            cboInsuranceIdNo.EditingMode = True
-            cboInsuranceIdNo.Refresh()
+            cboContactIdNo.DataSource = Nothing
+            cboContactIdNo.DataSource = ContactDataSource
+            cboContactIdNo.EditingMode = True
+            cboContactIdNo.Refresh()
         End Sub
 
     End Class

@@ -23,15 +23,14 @@ Namespace PresentationLayer.Views.Forms.Reports
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DateRangeContactSelector))
-        Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.dtpEndingDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-        Me.dtpBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-        Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboInsuranceIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.dtpEndingDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
+            Me.dtpBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
+            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblContactIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboContactIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -94,7 +93,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.dtpEndingDate.ShowTime = False
             Me.dtpEndingDate.Size = New System.Drawing.Size(118, 27)
             Me.dtpEndingDate.TabIndex = 24
-            Me.dtpEndingDate.TargetCalendar = CType(resources.GetObject("dtpEndingDate.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpEndingDate.TargetCalendar = Nothing
             Me.dtpEndingDate.Translatable = False
             Me.dtpEndingDate.Value = Nothing
             Me.dtpEndingDate.ValueIsMandatory = False
@@ -123,7 +122,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.dtpBeginningDate.ShowTime = False
             Me.dtpBeginningDate.Size = New System.Drawing.Size(118, 27)
             Me.dtpBeginningDate.TabIndex = 23
-            Me.dtpBeginningDate.TargetCalendar = CType(resources.GetObject("dtpBeginningDate.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpBeginningDate.TargetCalendar = Nothing
             Me.dtpBeginningDate.Translatable = False
             Me.dtpBeginningDate.Value = Nothing
             Me.dtpBeginningDate.ValueIsMandatory = False
@@ -137,8 +136,8 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.CFlowLayout1.Controls.Add(Me.dtpBeginningDate)
             Me.CFlowLayout1.Controls.Add(Me.CLabel3)
             Me.CFlowLayout1.Controls.Add(Me.dtpEndingDate)
-            Me.CFlowLayout1.Controls.Add(Me.CLabel4)
-            Me.CFlowLayout1.Controls.Add(Me.cboInsuranceIdNo)
+            Me.CFlowLayout1.Controls.Add(Me.lblContactIdNo)
+            Me.CFlowLayout1.Controls.Add(Me.cboContactIdNo)
             Me.CFlowLayout1.Location = New System.Drawing.Point(12, 12)
             Me.CFlowLayout1.Name = "CFlowLayout1"
             Me.CFlowLayout1.Size = New System.Drawing.Size(541, 119)
@@ -161,67 +160,67 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
             Me.CLabel2.Translatable = True
             '
-            'CLabel4
+            'lblContactIdNo
             '
-            Me.CLabel4.DisplayOnly = True
-            Me.CLabel4.EditingMode = False
-            Me.CLabel4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel4.Location = New System.Drawing.Point(1, 86)
-            Me.CLabel4.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel4.Name = "CLabel4"
-            Me.CLabel4.Size = New System.Drawing.Size(150, 25)
-            Me.CLabel4.TabIndex = 27
-            Me.CLabel4.Text = "Company"
-            Me.CLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.CLabel4.Translatable = True
+            Me.lblContactIdNo.DisplayOnly = True
+            Me.lblContactIdNo.EditingMode = False
+            Me.lblContactIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblContactIdNo.Location = New System.Drawing.Point(1, 86)
+            Me.lblContactIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblContactIdNo.Name = "lblContactIdNo"
+            Me.lblContactIdNo.Size = New System.Drawing.Size(150, 25)
+            Me.lblContactIdNo.TabIndex = 27
+            Me.lblContactIdNo.Text = "Company"
+            Me.lblContactIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblContactIdNo.Translatable = True
             '
-            'cboInsuranceIdNo
+            'cboContactIdNo
             '
-            Me.cboInsuranceIdNo.BackColor = System.Drawing.Color.White
-            Me.cboInsuranceIdNo.BegFindValue = Nothing
-            Me.cboInsuranceIdNo.ChangingSearchValueOnly = False
-            Me.cboInsuranceIdNo.CurrentSearchTerm = ""
-            Me.cboInsuranceIdNo.DataValue = Nothing
-            Me.cboInsuranceIdNo.DefaultValue = Nothing
-            Me.cboInsuranceIdNo.DisplayMember = "Name"
-            Me.cboInsuranceIdNo.DropDownHeight = 28
-            Me.cboInsuranceIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
-            Me.cboInsuranceIdNo.Editable = True
-            Me.cboInsuranceIdNo.EditingMode = False
-            Me.cboInsuranceIdNo.EndFindValue = Nothing
-            Me.cboInsuranceIdNo.FieldDescription = Nothing
-            Me.cboInsuranceIdNo.FieldName = Nothing
-            Me.cboInsuranceIdNo.FilterRule = Nothing
-            Me.cboInsuranceIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboInsuranceIdNo.FindEnabled = False
-            Me.cboInsuranceIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cboInsuranceIdNo.ForeColor = System.Drawing.Color.Black
-            Me.cboInsuranceIdNo.FormattingEnabled = True
-            Me.cboInsuranceIdNo.HideWhenNotEditingOrAdding = False
-            Me.cboInsuranceIdNo.IgnoreCase = False
-            Me.cboInsuranceIdNo.LimitToList = False
-            Me.cboInsuranceIdNo.LinkedLabel = Nothing
-            Me.cboInsuranceIdNo.Location = New System.Drawing.Point(153, 86)
-            Me.cboInsuranceIdNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.cboInsuranceIdNo.MaxDropDownItems = 1
-            Me.cboInsuranceIdNo.Name = "cboInsuranceIdNo"
-            Me.cboInsuranceIdNo.OldValue = 0
-            Me.cboInsuranceIdNo.OriginalDataSource = Nothing
-            Me.cboInsuranceIdNo.OriginalList = Nothing
-            Me.cboInsuranceIdNo.OverrideDropDownStyleList = False
-            Me.cboInsuranceIdNo.PreviousSearchTerm = Nothing
-            Me.cboInsuranceIdNo.PropertySelector = Nothing
-            Me.cboInsuranceIdNo.Size = New System.Drawing.Size(379, 28)
-            Me.cboInsuranceIdNo.SuggestBoxHeight = 200
-            Me.cboInsuranceIdNo.SuggestCharCount = 0
-            Me.cboInsuranceIdNo.SuggestListOrderRule = Nothing
-            Me.cboInsuranceIdNo.TabIndex = 28
-            Me.cboInsuranceIdNo.TextToSearch = Nothing
-            Me.cboInsuranceIdNo.Translatable = False
-            Me.cboInsuranceIdNo.ValueIsMandatory = False
-            Me.cboInsuranceIdNo.ValueIsNullable = False
-            Me.cboInsuranceIdNo.ValueIsNumeric = False
-            Me.cboInsuranceIdNo.ValueMember = "IdNo"
+            Me.cboContactIdNo.BackColor = System.Drawing.Color.White
+            Me.cboContactIdNo.BegFindValue = Nothing
+            Me.cboContactIdNo.ChangingSearchValueOnly = False
+            Me.cboContactIdNo.CurrentSearchTerm = ""
+            Me.cboContactIdNo.DataValue = Nothing
+            Me.cboContactIdNo.DefaultValue = Nothing
+            Me.cboContactIdNo.DisplayMember = "Name"
+            Me.cboContactIdNo.DropDownHeight = 23
+            Me.cboContactIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cboContactIdNo.Editable = True
+            Me.cboContactIdNo.EditingMode = False
+            Me.cboContactIdNo.EndFindValue = Nothing
+            Me.cboContactIdNo.FieldDescription = Nothing
+            Me.cboContactIdNo.FieldName = Nothing
+            Me.cboContactIdNo.FilterRule = Nothing
+            Me.cboContactIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboContactIdNo.FindEnabled = False
+            Me.cboContactIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboContactIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboContactIdNo.FormattingEnabled = True
+            Me.cboContactIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboContactIdNo.IgnoreCase = False
+            Me.cboContactIdNo.LimitToList = False
+            Me.cboContactIdNo.LinkedLabel = Nothing
+            Me.cboContactIdNo.Location = New System.Drawing.Point(153, 86)
+            Me.cboContactIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.cboContactIdNo.MaxDropDownItems = 1
+            Me.cboContactIdNo.Name = "cboContactIdNo"
+            Me.cboContactIdNo.OldValue = 0
+            Me.cboContactIdNo.OriginalDataSource = Nothing
+            Me.cboContactIdNo.OriginalList = Nothing
+            Me.cboContactIdNo.OverrideDropDownStyleList = False
+            Me.cboContactIdNo.PreviousSearchTerm = Nothing
+            Me.cboContactIdNo.PropertySelector = Nothing
+            Me.cboContactIdNo.Size = New System.Drawing.Size(379, 28)
+            Me.cboContactIdNo.SuggestBoxHeight = 200
+            Me.cboContactIdNo.SuggestCharCount = 0
+            Me.cboContactIdNo.SuggestListOrderRule = Nothing
+            Me.cboContactIdNo.TabIndex = 28
+            Me.cboContactIdNo.TextToSearch = Nothing
+            Me.cboContactIdNo.Translatable = False
+            Me.cboContactIdNo.ValueIsMandatory = False
+            Me.cboContactIdNo.ValueIsNullable = False
+            Me.cboContactIdNo.ValueIsNumeric = False
+            Me.cboContactIdNo.ValueMember = "IdNo"
             '
             'CLabel1
             '
@@ -261,7 +260,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.btnCancel.TabIndex = 28
             Me.btnCancel.Text = "Cancel"
             '
-            'DateRangeCompanyEntry
+            'DateRangeContactSelector
             '
             Me.ClientSize = New System.Drawing.Size(554, 187)
             Me.Controls.Add(Me.btnCancel)
@@ -269,7 +268,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.Controls.Add(Me.CFlowLayout1)
             Me.Controls.Add(Me.CLabel1)
             Me.DoubleBuffered = True
-            Me.Name = "DateRangeCompanyEntry"
+            Me.Name = "DateRangeContactSelector"
             Me.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.Text = "Date Range Selection"
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
@@ -287,7 +286,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
-        Friend WithEvents CLabel4 As CLabel
-        Friend WithEvents cboInsuranceIdNo As CtComboBox
+        Friend WithEvents lblContactIdNo As CLabel
+        Friend WithEvents cboContactIdNo As CtComboBox
     End Class
 End Namespace

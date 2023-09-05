@@ -106,10 +106,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property Errors As List(Of String) Implements IView.Errors
-
-        Public Property DataFilter As String Implements IView.DataFilter
-
         Public Property AppSettingGroupIdNo As Short Implements IAppSettingView.AppSettingGroupIdNo
             Get
                 Return txtAppSettingGroupIdNo.Text

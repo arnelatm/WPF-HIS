@@ -2,10 +2,9 @@
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Libraries.GlobalFuncNSub
 
-Namespace Accounts.PresentationLayer.Views.Forms
-
-    Public Class DateRangeForm
-        Implements IDateRangeView
+Namespace PresentationLayer.Presenters.Views.Forms
+    Public Class ContactDateRangeForm
+        Implements IContactDateRangeView
 
         Public ReadOnly Property Language As String Implements IDateRangeView.Language
         Public ReadOnly Property ReportCode As String Implements IDateRangeView.ReportCode
@@ -38,6 +37,21 @@ Namespace Accounts.PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property IdNo As Integer Implements IContactDateRangeView.IdNo
+            Get
+                Return cboContactIdNo.GetValue(Of Integer)
+            End Get
+            Set(value As Integer)
+                cboContactIdNo.SetValue(value)
+            End Set
+        End Property
+
+        Public Property PersonSelectorControl As Control Implements IContactDateRangeView.PersonSelectorControl
+
+        Public Property PersonSelectorLabel As String Implements IContactDateRangeView.PersonSelectorLabel
+
+        Public Property ContactDataSource As Object Implements IContactDateRangeView.ContactDataSource
+
         Public Sub New()
 
             ' This call is required by the designer.
@@ -61,7 +75,6 @@ Namespace Accounts.PresentationLayer.Views.Forms
             _reportModel = reportModel
             MainTableName = "Report"
             SortOrderKey = "IdNo"
-
         End Sub
 
         Private Sub btnOk_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
@@ -71,7 +84,6 @@ Namespace Accounts.PresentationLayer.Views.Forms
         Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
             Close()
         End Sub
-
     End Class
 
 End Namespace
