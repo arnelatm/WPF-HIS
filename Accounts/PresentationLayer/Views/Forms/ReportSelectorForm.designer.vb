@@ -38,10 +38,6 @@ Namespace PresentationLayer.Views.Forms
             CType(Me.bsReportList, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             '
-            'AppDataDAC
-            '
-            Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
-            '
             'DataGridViewReportList
             '
             Me.DataGridViewReportList.AllowUserToAddRows = False

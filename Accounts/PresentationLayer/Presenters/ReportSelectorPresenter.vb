@@ -49,6 +49,7 @@ Namespace PresentationLayer.Presenters
         Public Sub OnReportDoubleClickEvent(reportIdNo As Int16)
             Dim report As ReportModel = Service.GetRecordByIdNo(Of ReportModel)(reportIdNo)
             Dim queryForm As String = report.QueryForm
+            report.ReportFileName = IIf(Strings.Right(report.ReportFileName, 4).ToLower() = $".rpt", report.ReportFileName, report.ReportFileName + ".rpt")
             If queryForm Is Nothing Then
                 'Dim cForm = New ReportFormIGroup(report.ReportFileName + ".rpt", CultureInfo.CurrentCulture, If(parameters.Count() = 0, Nothing, parameters))
                 'cForm.Show()
@@ -60,11 +61,14 @@ Namespace PresentationLayer.Presenters
                 'formToRun.QuitOnSave = True
                 'formToRun.Show()
                 Select Case queryForm
-                    Case "DateRangeCompanyEntry"
-                        Dim formToRun As New DateRangeCompanyEntry(report)
-                        formToRun.Presenter = New DateRangeContactPresenter(Of ReportModel)(formToRun, report)
+                    Case "DateRangeContactSelector"
+                        Dim formToRun As New DateRangeForm(report)
+                        formToRun.Presenter = New DateRangePresenter(Of ReportModel)(formToRun, report)
                         formToRun.Show()
-                    Case "DateRangeEntry"
+                    Case "DateRangeForm"
+                        Dim formToRun As New DateRangeForm(report)
+                        formToRun.Presenter = New DateRangePresenter(Of ReportModel)(formToRun, report)
+                        formToRun.Show()
                 End Select
 
             End If

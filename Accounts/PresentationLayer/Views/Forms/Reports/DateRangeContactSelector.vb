@@ -4,7 +4,7 @@ Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms.Reports
 
-    Public Class DateRangeCompanyEntry
+    Public Class DateRangeContactSelector
         Implements IContactDateRangeView
 
         Public Property MainTableName As String
@@ -12,7 +12,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Private ReadOnly _reportParameters As New ArrayList
         Private ReadOnly _reportModel As ReportModel
         Private ReadOnly _period As String
-        Private _insuranceList As Object
+        Private _contactDataSource As DataTable
         Public Event FormLoaded() Implements IContactDateRangeView.FormLoaded
         Public Event PrintButtonClicked() Implements IContactDateRangeView.PrintButtonClicked
 
@@ -52,13 +52,13 @@ Namespace PresentationLayer.Views.Forms.Reports
             Close()
         End Sub
 
-        Public Property InsuranceList As Object
+        Public Property ContactDataSource As Object Implements IContactDateRangeView.ContactDataSource
             Get
-                Return _insuranceList
+                Return _contactDataSource
             End Get
             Set(value As Object)
-                _insuranceList = value
-                BindInsuranceList()
+                _contactDataSource = value
+                BindContactDataSource()
             End Set
         End Property
 
@@ -96,11 +96,6 @@ Namespace PresentationLayer.Views.Forms.Reports
         Public Property UserHasAccess As Boolean Implements IContactDateRangeView.UserHasAccess
         Public Property PersonSelectorControl As Control Implements IContactDateRangeView.PersonSelectorControl
         Public Property PersonSelectorLabel As String Implements IContactDateRangeView.PersonSelectorLabel
-        Public Property NoDates As Boolean Implements IContactDateRangeView.NoDates
-
-        Public Property ContactDataSource As Object
-
-        Private Property IContactDateRangeView_ContactDataSource As Object Implements IContactDateRangeView.ContactDataSource
 
         Private Sub DateRangeCompanyEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             RaiseEvent FormLoaded()
@@ -108,9 +103,9 @@ Namespace PresentationLayer.Views.Forms.Reports
             cboInsuranceIdNo.EditingMode = True
         End Sub
 
-        Private Sub BindInsuranceList()
+        Private Sub BindContactDataSource()
             cboInsuranceIdNo.DataSource = Nothing
-            cboInsuranceIdNo.DataSource = InsuranceList
+            cboInsuranceIdNo.DataSource = ContactDataSource
             cboInsuranceIdNo.EditingMode = True
             cboInsuranceIdNo.Refresh()
         End Sub

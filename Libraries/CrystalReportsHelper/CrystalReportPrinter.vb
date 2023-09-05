@@ -62,7 +62,7 @@ Public Class CrystalReportPrinter
                 Debugger.Break()
                 Return
         End Select
-        Dim fileSpecification As String = _reportPath & IIf(Strings.LCase(Right(pReportFileName, 4)) <> ".rpt", pReportFileName + ".rpt", pReportFileName)
+        Dim fileSpecification As String = _reportPath & pReportFileName
         _report.Load(fileSpecification)
         If _report.DataSourceConnections.Count > 0 Then
             _report.DataSourceConnections(0).SetConnection(_server, _database, _uid, _pwd)

@@ -5,11 +5,12 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
 
-Public Class DateRangeContactPresenter(Of TM As New)
-    Inherits AccountsPresenter(Of IContactDateRangeView, TM)
+Public Class DateRangePresenter(Of TM As New)
+    Inherits AccountsPresenter(Of IDateRangeView, TM)
 
     Private _reportFileName As String
     Private _reportName As String
@@ -19,11 +20,11 @@ Public Class DateRangeContactPresenter(Of TM As New)
     Private _filter As String = ""
     Private _reportModel As ReportModel
 
-    Public Sub New(view As IContactDateRangeView, reportModel As ReportModel)
+    Public Sub New(view As IDateRangeView, reportModel As ReportModel)
         MyBase.New(view)
-        TableName = "Account"
+        TableName = "Report"
         WithTreeView = False
-        Service = New AccountsService("Account")
+        Service = New CommonService("Report")
         AddHandler view.PrintButtonClicked, AddressOf OnPrintButtonClicked
         AddHandler view.FormLoaded, AddressOf OnReportLoaded
         _reportModel = reportModel
@@ -66,21 +67,6 @@ Public Class DateRangeContactPresenter(Of TM As New)
         End Select
         View.BeginningDate = begValue
         View.EndingDate = endValue
-        If contactName <> "" And Not (_reportModel.DatabaseName Is Nothing OrElse _reportModel.DatabaseName = "") Then
-            Service.SaveConnectionString()
-            Service.SetConnectionString(_reportModel.DatabaseName)
-            If contactName = "InsuranceDetails" Then
-                MakeVarDataSources({New String() {"InsuranceDetails", "ContactDataSource", "InsuranceId,NameEnglish", Nothing}})
-            Else
-                Debugger.Break()
-                MessageBox.Show("Missing ContactName <" & contactName & ">")
-            End If
-            Service.RestoreConnectionString()
-        Else
-            If contactName = "Customer" Then
-                MakeVarDataSources({New String() {"Customer", "ContactDataSource", Nothing, Nothing}})
-            End If
-        End If
     End Sub
 
     Private Function GetCodedDate(dateCode As String) As Date
@@ -150,10 +136,16 @@ Public Class DateRangeContactPresenter(Of TM As New)
             reportArgs.ReportParameters = {
                                             beginningDate.Value, "BeginningDate",
                                             endingDate.Value, "EndingDate",
-                                            View.IdNo, "IdNo",
                                             _reportModel.ReportTitle, "ReportTitle",
                                             GlobalVariables.EstablishmentName, "EstablishmentName",
                                             language, "Language"}
+            'reportArgs.ReportParameters = {
+            '                                beginningDate.Value, "BeginningDate",
+            '                                endingDate.Value, "EndingDate",
+            '                                View.IdNo, "IdNo",
+            '                                _reportModel.ReportTitle, "ReportTitle",
+            '                                GlobalVariables.EstablishmentName, "EstablishmentName",
+            '                                language, "Language"}
             reportArgs.DataBaseConnectionName = _reportModel.DatabaseName
             Dim p As New PrintReportPresenter(Of AccountModel)
             p.ViewReport(_reportModel.ReportFileName, reportArgs, False)
@@ -162,20 +154,12 @@ Public Class DateRangeContactPresenter(Of TM As New)
 
     End Sub
 
-    Private Sub OnFormLoaded()
-        View.BeginningDate = GlobalFunctions.GregorianDateSerial(Today.Year, 1, 1)
-        View.EndingDate = GlobalFunctions.GregorianDateSerial(Today.Year, Today.Month, Today.Day)
-        View.Title = Libraries.MessagingLibrary.Messaging.TranslateCaption(_reportName)
-        SetDataSource(_tableName, View.PersonSelectorControl,,, _filter)
-        'Select Case contactName
-        '    Case "LeaveStatement", "ErStatement", "EmployeeInfo"
-        '        View.PersonSelectorLabel = "Employee Name"
-        '    Case "ApStatement"
-        '        View.PersonSelectorLabel = "Supplier Name"
-        '    Case "ArStatement"
-        '        View.PersonSelectorLabel = "Customer Name"
-        'End Select
-    End Sub
+    'Private Sub OnFormLoaded()
+    '    View.BeginningDate = GlobalFunctions.GregorianDateSerial(Today.Year, 1, 1)
+    '    View.EndingDate = GlobalFunctions.GregorianDateSerial(Today.Year, Today.Month, Today.Day)
+    '    View.Title = Libraries.MessagingLibrary.Messaging.TranslateCaption(_reportName)
+    '    SetDataSource(_tableName, View.PersonSelectorControl,,, _filter)
+    'End Sub
 
 
 End Class

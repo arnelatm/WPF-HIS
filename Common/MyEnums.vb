@@ -54,6 +54,17 @@ Public Enum BloodType
 End Enum
 
 
+Public Enum CodedDate
+    <EnumCode("CD")> CurrentDate
+    <EnumCode("PD")> PreviousDay
+    <EnumCode("ND")> NextDay
+    <EnumCode("CM")> CurrentMonth
+    <EnumCode("PM")> PreviousMonth
+    <EnumCode("NM")> NextMonth
+    <EnumCode("CY")> CurrentYear
+    <EnumCode("PY")> PreviousYear
+    <EnumCode("NY")> NextYear
+End Enum
 'Public Enum eTimeAMPM
 '    <EnumCode("0")> am
 '    <EnumCode("1")> pm
