@@ -1,5 +1,4 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
@@ -26,12 +25,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
             dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
 
-            'If parameters.Count() > 1 Then
-            '    For i = 0 To parameters.Count() - 1
-            '        _reportParameters.Add(parameters(i)(0), parameters(i)(1))
-            '    Next
-            'End If
-
         End Sub
 
         Public Sub New(reportModel As ReportModel)
@@ -41,7 +34,7 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             ' Add any initialization after the InitializeComponent() call.
             _reportModel = reportModel
-            MainTableName = "ApJournal"
+            MainTableName = "Report"
             SortOrderKey = "IdNo"
             Dim qParameters As String = _reportModel.QueryFormParameters
             Dim lParameters As String() = qParameters.Split(","c)
@@ -110,16 +103,7 @@ Namespace PresentationLayer.Views.Forms.Reports
                         parameters.Add({parameterName, parameterValue})
                     Next
                 End If
-                'If _reportParameters.Count() > 1 Then
-                '    For i = 0 To _reportParameters.Count() - 1
-                '        parameters.Add(_reportParameters(i))
-                '    Next
-                'End If
-                'If Strings.Left(cFormCulture.Name, 2) = "ar" Then
                 cForm = New ReportFormIGroup(_reportModel.ReportFileName + ".rpt", CultureInfo.CurrentCulture, parameters)
-                'Else
-                '    cForm = New ReportFormIGroup(_reportModel.ReportFileName + ".rpt", FormCulture, parameters)
-                'End If
                 cForm.Show()
             Else
                 Messaging.Show(True, "MsgBegDateMustBeLessThanEndDate")

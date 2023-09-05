@@ -386,6 +386,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CustomComboBox.vb" />
+    <Compile Include="DateRangeControl.Designer.vb">
+      <DependentUpon>DateRangeControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DateRangeControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="dgvfooter.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -595,6 +601,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CTreeViewOld.resx">
       <DependentUpon>CTreeViewOld.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DateRangeControl.resx">
+      <DependentUpon>DateRangeControl.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTimeColors.resx">
       <DependentUpon>dlgTimeColors.vb</DependentUpon>

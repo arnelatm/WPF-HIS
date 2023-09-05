@@ -552,6 +552,7 @@
     <Compile Include="PresentationLayer\Presenters\AppSettingPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ApArEmReportPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\BasicPresenterHelper.vb" />
+    <Compile Include="PresentationLayer\Presenters\DateRangePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DateRangeContactPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\InvRequestPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\StockRequestApprovalPresenter.vb" />
@@ -611,10 +612,22 @@
     <Compile Include="PresentationLayer\Presenters\PensionSchemePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PensionProviderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DisbursementJournalPresenter.vb" />
+    <Compile Include="PresentationLayer\Views\Forms\DateRangeForm.Designer.vb">
+      <DependentUpon>DateRangeForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\DateRangeForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\InvRequestForm.Designer.vb">
       <DependentUpon>InvRequestForm.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\InvRequestForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\DateRangeSelector.designer.vb">
+      <DependentUpon>DateRangeSelector.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\DateRangeSelector.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\StockRequestApprovalEntry.Designer.vb">
@@ -1029,10 +1042,10 @@
     <Compile Include="PresentationLayer\Views\Forms\ReportSelectorForm2.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\DateRangeCompanyEntry.designer.vb">
-      <DependentUpon>DateRangeCompanyEntry.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\DateRangeContactSelector.designer.vb">
+      <DependentUpon>DateRangeContactSelector.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\DateRangeCompanyEntry.vb">
+    <Compile Include="PresentationLayer\Views\Forms\Reports\DateRangeContactSelector.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\EmployeeMedicalReport.designer.vb">
@@ -2030,6 +2043,9 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\CGridBoxForm.resx">
       <DependentUpon>CGridBoxForm.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\DateRangeForm.resx">
+      <DependentUpon>DateRangeForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\DocumentDetailEntry.resx">
       <DependentUpon>DocumentDetailEntry.vb</DependentUpon>
     </EmbeddedResource>
@@ -2072,6 +2088,9 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\InventorySelector.resx">
       <DependentUpon>InventorySelector.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\DateRangeSelector.resx">
+      <DependentUpon>DateRangeSelector.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\FinancialReport.resx">
       <DependentUpon>FinancialReport.vb</DependentUpon>
@@ -2262,8 +2281,8 @@
       <DependentUpon>ReportSelectorForm2.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\DateRangeCompanyEntry.resx">
-      <DependentUpon>DateRangeCompanyEntry.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\DateRangeContactSelector.resx">
+      <DependentUpon>DateRangeContactSelector.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\EmployeeMedicalReport.resx">
       <DependentUpon>EmployeeMedicalReport.vb</DependentUpon>

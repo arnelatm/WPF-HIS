@@ -2,7 +2,7 @@
 
 Namespace PresentationLayer.Views.Forms.Reports
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-    Partial Class DateRangeCompanyEntry
+    Partial Class DateRangeContactSelector
         Inherits AATM.PresentationLayer.Forms.BFMain
 
         'Form overrides dispose to clean up the component list.
@@ -23,7 +23,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DateRangeCompanyEntry))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DateRangeContactSelector))
         Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpEndingDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
