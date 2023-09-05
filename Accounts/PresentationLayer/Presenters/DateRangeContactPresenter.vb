@@ -190,7 +190,7 @@ Public Class DateRangeContactPresenter(Of TM As New)
             reportArgs.ReportParameters = {
                                             beginningDate.Value, "BeginningDate",
                                             endingDate.Value, "EndingDate",
-                                            View.IdNo, "IdNo",
+                                            View.IdNo, "InsuranceIdNo",
                                             _reportModel.ReportTitle, "ReportTitle",
                                             GlobalVariables.EstablishmentName, "EstablishmentName",
                                             language, "Language"}

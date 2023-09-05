@@ -1071,12 +1071,6 @@
     <Compile Include="PresentationLayer\Views\Forms\Reports\ReportFormIGroup.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\ReportFormNew.Designer.vb">
-      <DependentUpon>ReportFormNew.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\ReportFormNew.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\ReportFormTest.Designer.vb">
       <DependentUpon>ReportFormTest.vb</DependentUpon>
     </Compile>
@@ -2289,9 +2283,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ReportFormIGroup.resx">
       <DependentUpon>ReportFormIGroup.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ReportFormNew.resx">
-      <DependentUpon>ReportFormNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ReportFormTest.resx">
       <DependentUpon>ReportFormTest.vb</DependentUpon>

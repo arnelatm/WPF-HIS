@@ -22,6 +22,7 @@ Imports AATM.PresentationLayer.Views.Interfaces
 Imports AutoMapper
 Imports System.Timers
 Imports System
+Imports AATM.Libraries.GlobalFuncNSub.CurrencyInfo
 
 
 Namespace PresentationLayer.Views.Forms
@@ -200,14 +201,34 @@ Namespace PresentationLayer.Views.Forms
         Private Sub AccountsReceivableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemARAging.Click
             Dim reportTitle = Messaging.TranslateCaption("Aging of Accounts Receivable")
             reportTitle = reportTitle + " " + GlobalFuncNSub.GregorianLongDate(Now(), CultureInfo.CurrentCulture)
-            Dim cForm As New ReportFormNew("Aging of Accounts Receivable.Rpt", reportTitle, CultureInfo.CurrentCulture)
+            Dim curCulture = CultureInfo.CurrentCulture
+            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+            Dim language As String
+            Dim estName As String
+            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+            If language = "ar" Then
+                estName = GlobalVariables.EstablishmentName
+            Else
+                estName = GlobalVariables.EstablishmentNameAra
+            End If
+            Dim cForm As New ReportForm("Aging of Accounts Receivable.Rpt", reportTitle, "ReportTitle", estName, "EstablishmentName", language, "Language")
             cForm.Show()
         End Sub
 
         Private Sub AgingOfAccountsPayableToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemAPAging.Click
             Dim reportTitle = Messaging.TranslateCaption("Aging of Accounts Payable as of ")
             reportTitle = reportTitle + " " + GlobalFuncNSub.GregorianLongDate(Now(), CultureInfo.CurrentCulture)
-            Dim cForm As New ReportFormNew("Aging of Accounts Payable.Rpt", reportTitle, CultureInfo.CurrentCulture)
+            Dim curCulture = CultureInfo.CurrentCulture
+            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+            Dim language As String
+            Dim estName As String
+            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+            If language = "ar" Then
+                estName = GlobalVariables.EstablishmentName
+            Else
+                estName = GlobalVariables.EstablishmentNameAra
+            End If
+            Dim cForm As New ReportForm("Aging of Accounts Payable.Rpt", reportTitle, "ReportTitle", language, "Language", estName, "EstablishmentName")
             cForm.Presenter = New PrintReportPresenter(Of ReportModel)
             cForm.Show()
         End Sub
