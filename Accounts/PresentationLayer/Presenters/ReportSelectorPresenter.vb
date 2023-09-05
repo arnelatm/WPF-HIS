@@ -1,4 +1,5 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.Accounts.PresentationLayer.Views.Forms
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
