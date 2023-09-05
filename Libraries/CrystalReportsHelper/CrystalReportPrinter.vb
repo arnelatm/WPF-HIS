@@ -42,7 +42,7 @@ Public Class CrystalReportPrinter
                 Debugger.Break()
                 Return
         End Select
-        _report.Load(_reportPath & pReportFileName)
+        _report.Load(_reportPath & IIf(Strings.Right(pReportFileName, 4).ToLower() = $".rpt", pReportFileName, pReportFileName + ".rpt"))
         If _report.DataSourceConnections.Count > 0 Then
             _report.DataSourceConnections(0).SetConnection(_server, _database, _uid, _pwd)
         End If
@@ -62,7 +62,8 @@ Public Class CrystalReportPrinter
                 Debugger.Break()
                 Return
         End Select
-        _report.Load(_reportPath & pReportFileName)
+        Dim fileSpecification As String = _reportPath & IIf(Strings.LCase(Right(pReportFileName, 4)) <> ".rpt", pReportFileName + ".rpt", pReportFileName)
+        _report.Load(fileSpecification)
         If _report.DataSourceConnections.Count > 0 Then
             _report.DataSourceConnections(0).SetConnection(_server, _database, _uid, _pwd)
         End If

@@ -26,9 +26,18 @@ Namespace PresentationLayer.Views.Forms.Reports
             Dim cForm
             Dim reportName As String
             Dim reportTitle As String
+            Dim curCulture = CultureInfo.CurrentCulture
+            Dim language As String
+            Dim estName As String
+            language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
             reportName = Messaging.TranslateCaption("Employee Medical Report")
             reportTitle = Messaging.GetParametrizedMessage(True, "RptForThePeriod", {"reportName", reportName})
-            cForm = New ReportFormNew("Employee Medical Report.rpt", reportTitle, CultureInfo.CurrentCulture, cboEmployeeIdNo.SelectedItem.IdNo, "EmployeeIdNo",Convert.ToDateTime(dtpMedicalReportDate.Value), "MedicalReportDate", chkVision.Checked, "Vision", chkHearing.Checked, "Hearing", chkBpPulse.Checked, "BPPulse", chkChestHeart.Checked, "ChestHeart", chkAbdomentDerma.Checked, "AbdomenDerma", chkNeuro.Checked, "Neuro", chkFinalResult.Checked, "FinalResult" )
+            If language = "ar" Then
+                estName = GlobalVariables.EstablishmentNameAra
+            Else
+                estName = GlobalVariables.EstablishmentName
+            End If
+            cForm = New ReportForm("Employee Medical Report.rpt", estName, "EstablishmentName", reportTitle, "ReportTitle", CultureInfo.CurrentCulture, cboEmployeeIdNo.SelectedItem.IdNo, "EmployeeIdNo", Convert.ToDateTime(dtpMedicalReportDate.Value), "MedicalReportDate", chkVision.Checked, "Vision", chkHearing.Checked, "Hearing", chkBpPulse.Checked, "BPPulse", chkChestHeart.Checked, "ChestHeart", chkAbdomentDerma.Checked, "AbdomenDerma", chkNeuro.Checked, "Neuro", chkFinalResult.Checked, "FinalResult")
             cForm.Show()
         End Sub
 
