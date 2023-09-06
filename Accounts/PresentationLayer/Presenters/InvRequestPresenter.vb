@@ -30,7 +30,9 @@ Namespace PresentationLayer.Presenters
         Private Sub OnRowChanged(productIdNo As Integer)
             Dim invRequestItems As List(Of InvTransactionDetailModel)
             invRequestItems = _invRequestItemService.GetRecordsWithGroupIdNo(Of InvTransactionDetailModel)(productIdNo)
-            GlobalVariables.Mapper.Map(invRequestItems, View.InvTransactionDetails)
+            Dim invItems As New List(Of InvTransactionDetailView)
+            GlobalVariables.Mapper.Map(invRequestItems, invItems)
+            View.InvTransactionDetails = invItems
         End Sub
 
         Private Sub OnWarehouseIdNoChanged()
@@ -40,6 +42,7 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Sub CreateDataSources()
             MakeControlDataSources({New String() {"Warehouse", "WarehouseIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"}})
             MakeVarDataSources({New String() {"User", "UserList", Nothing, Nothing, "UserName"},
+                                New String() {"Unit", "UnitList", Nothing, Nothing, "UnitName"},
                                 New String() {"Warehouse", "WarehouseList", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"}})
         End Sub
 
@@ -50,58 +53,7 @@ Namespace PresentationLayer.Presenters
             Else
                 invTransactions = Service.GetParametrized(Of InvRequestModel)({View.WarehouseIdNo})
             End If
-            'For Each item In invTransactions.InvTransactionRequests
-            '    Dim x As New InvRequestListView
-            '    View.InvTransactionRequests.Clear()
-            '    x.Cancelled = item.Cancelled
-            '    x.DateCreated = item.DateCreated
-            '    x.IdNo = item.IdNo
-            '    x.InvTransTypeIdNo = item.InvTransTypeIdNo
-            '    x.Notes = item.Notes
-            '    x.Posted = item.Posted
-            '    x.ReferenceNo = item.ReferenceNo
-            '    x.TransactionDate = item.TransactionDate
-            '    x.UserIdNo = item.UserIdNo
-            '    x.WarehouseIdNo = item.WarehouseIdNo
-            '    x.WarehouseToIdNo = item.WarehouseToIdNo
-            '    View.InvTransactionRequests.Add(x)
-            'Next
-            'View.InvTransactionRequests.Clear()
-            'For Each item In invTransactions.InvTransactionRequests
-            '    Dim x As IInvTransactionBaseView
-            '    GlobalVariables.Mapper.Map(item, x)
-            '    View.InvTransactionRequests.Add(x)
-            '    'x.Cancelled = item.Cancelled
-            '    'x.DateCreated = item.DateCreated
-            '    'x.IdNo = item.IdNo
-            '    'x.InvTransTypeIdNo = item.InvTransTypeIdNo
-            '    'x.Notes = item.Notes
-            '    'x.Posted = item.Posted
-            '    'x.ReferenceNo = item.ReferenceNo
-            '    'x.TransactionDate = item.TransactionDate
-            '    'x.UserIdNo = item.UserIdNo
-            '    'x.WarehouseIdNo = item.WarehouseIdNo
-            '    'x.WarehouseToIdNo = item.WarehouseToIdNo
-            '    'View.InvTransactionRequests.Add(x)
-            'Next
             GlobalVariables.Mapper.Map(invTransactions, View)
-
-            'Dim x As InvTransactionView =
-            'For Each item In invTransactions.InvTransactionRequests
-            '    GlobalVariables.Mapper.Map(item, x)
-            'Next
-
-
-            '
-            'View.InvTransactionRequests = DirectCast(invTransactions, IInvRequestView)
-
-
-
-            'For Each item In invTransactions.InvTransactionRequests
-            '    Dim x As IInvTransactionView = Nothing
-            '    GlobalVariables.Mapper.Map(item, x)
-            'Next
-
         End Sub
 
 

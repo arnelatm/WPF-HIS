@@ -159,11 +159,11 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property UserIdNo As Int16 Implements IInvTransactionView.UserIdNo
+        Public Property UserIdNo As Int32 Implements IInvTransactionView.UserIdNo
             Get
-                Return cboUserIdNo.GetValue(Of Int16)()
+                Return cboUserIdNo.GetValue(Of Int32)()
             End Get
-            Set(value As Short)
+            Set(value As Int32)
                 cboUserIdNo.SetValue(value)
             End Set
         End Property
