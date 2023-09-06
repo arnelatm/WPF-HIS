@@ -187,7 +187,6 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemARAging = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemAPAging = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemCheckPrinting = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemVATReport = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPayrollReport = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPeriodicPayroll = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemBankTransferReport = New System.Windows.Forms.ToolStripMenuItem()
@@ -926,7 +925,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemReports
             '
-            Me.ToolStripMenuItemReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemStatementOfAccountsPayable, Me.ToolStripMenuItemStatementOfAccountsReceivable, Me.ToolStripMenuItemStatementOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfAccountsPayable, Me.ToolStripMenuItemSummaryOfAccountsReceivable, Me.ToolStripMenuItemTrialBalance, Me.ToolStripMenuItemBalanceSheet, Me.ToolStripMenuItemIncomeStatement, Me.ToolStripMenuItemAccountingtLists, Me.ToolStripMenuItemARAging, Me.ToolStripMenuItemAPAging, Me.ToolStripMenuItemCheckPrinting, Me.ToolStripMenuItemVATReport, Me.ToolStripMenuItemPayrollReport, Me.ToolStripMenuItemHRReports, Me.ToolStripMenuItemReceptionReports, Me.ToolStripMenuItemAccountingReports, Me.ToolStripMenuItemLaboratoryReports, Me.ToolStripMenuItemSalesReports, Me.ToolStripMenuItemPMRReports, Me.ToolStripMenuItemPharmacyReports, Me.ToolStripMenuItemClinicReports, Me.ToolStripMenuItemInventoryReports})
+            Me.ToolStripMenuItemReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemStatementOfAccountsPayable, Me.ToolStripMenuItemStatementOfAccountsReceivable, Me.ToolStripMenuItemStatementOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfEmployeeLoans, Me.ToolStripMenuItemSummaryOfAccountsPayable, Me.ToolStripMenuItemSummaryOfAccountsReceivable, Me.ToolStripMenuItemTrialBalance, Me.ToolStripMenuItemBalanceSheet, Me.ToolStripMenuItemIncomeStatement, Me.ToolStripMenuItemAccountingtLists, Me.ToolStripMenuItemARAging, Me.ToolStripMenuItemAPAging, Me.ToolStripMenuItemCheckPrinting, Me.ToolStripMenuItemPayrollReport, Me.ToolStripMenuItemHRReports, Me.ToolStripMenuItemReceptionReports, Me.ToolStripMenuItemAccountingReports, Me.ToolStripMenuItemLaboratoryReports, Me.ToolStripMenuItemSalesReports, Me.ToolStripMenuItemPMRReports, Me.ToolStripMenuItemPharmacyReports, Me.ToolStripMenuItemClinicReports, Me.ToolStripMenuItemInventoryReports})
             Me.ToolStripMenuItemReports.Name = "ToolStripMenuItemReports"
             resources.ApplyResources(Me.ToolStripMenuItemReports, "ToolStripMenuItemReports")
             '
@@ -1083,11 +1082,6 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.ToolStripMenuItemCheckPrinting.Name = "ToolStripMenuItemCheckPrinting"
             resources.ApplyResources(Me.ToolStripMenuItemCheckPrinting, "ToolStripMenuItemCheckPrinting")
-            '
-            'ToolStripMenuItemVATReport
-            '
-            Me.ToolStripMenuItemVATReport.Name = "ToolStripMenuItemVATReport"
-            resources.ApplyResources(Me.ToolStripMenuItemVATReport, "ToolStripMenuItemVATReport")
             '
             'ToolStripMenuItemPayrollReport
             '
@@ -1607,7 +1601,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemDocuments As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemTestForm As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemPMRReports As ToolStripMenuItem
-        Friend WithEvents ToolStripMenuItemVATReport As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemCodeGroup As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemItemCode As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDoctor As ToolStripMenuItem

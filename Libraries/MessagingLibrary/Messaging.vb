@@ -266,9 +266,37 @@ Public Class Messaging
             If beginningDate = endingDate Then
                 Dim cDay As String
                 cDay = beginningDate.ToString($"dd MMMMM yyyy")
-                Return Messaging.GetParametrizedMessage(True, "RptForTheDay", {"reportName", reportName, "day", cDay})
+                Return Messaging.GetParametrizedMessage(True, "RptForTheDay", {"reportName", reportName, "cDate", cDay})
             ElseIf GregorianDay(beginningDate) = 1 And GregorianDay(endingDate) = 31 And GregorianMonth(beginningDate) = 1 And GregorianMonth(endingDate) = 12 And GregorianYear(beginningDate) = GregorianYear(endingDate) Then
                 Return Messaging.GetParametrizedMessage(True, "RptForTheYear", {"reportName", reportName, "year", GregorianYear(endingDate).ToString})
+            ElseIf GregorianYear(beginningDate) = GregorianYear(endingDate) AndAlso
+                   ((GregorianDay(beginningDate) = 1 AndAlso GregorianDay(endingDate) = 31 AndAlso GregorianMonth(beginningDate) = 1 AndAlso GregorianMonth(endingDate) = 3) Or
+                    (GregorianDay(beginningDate) = 1 AndAlso GregorianDay(endingDate) = 30 AndAlso GregorianMonth(beginningDate) = 4 AndAlso GregorianMonth(endingDate) = 6) Or
+                    (GregorianDay(beginningDate) = 1 AndAlso GregorianDay(endingDate) = 30 AndAlso GregorianMonth(beginningDate) = 7 AndAlso GregorianMonth(endingDate) = 9) Or
+                    (GregorianDay(beginningDate) = 1 AndAlso GregorianDay(endingDate) = 31 AndAlso GregorianMonth(beginningDate) = 10 AndAlso GregorianMonth(endingDate) = 12)) Then
+                Dim quarterName As String = ""
+                Select Case GregorianMonth(beginningDate)
+                    Case 1
+                        quarterName = TranslateCaption("First")
+                    Case 4
+                        quarterName = TranslateCaption("Second")
+                    Case 7
+                        quarterName = TranslateCaption("Third")
+                    Case 10
+                        quarterName = TranslateCaption("Fourth")
+                End Select
+                Return Messaging.GetParametrizedMessage(True, "RptForTheQuarter", {"reportName", reportName, "quarterName", quarterName, "year", GregorianYear(endingDate).ToString})
+            ElseIf GregorianYear(beginningDate) = GregorianYear(endingDate) AndAlso
+                   ((GregorianDay(beginningDate) = 1 AndAlso GregorianDay(endingDate) = 30 AndAlso GregorianMonth(beginningDate) = 1 AndAlso GregorianMonth(endingDate) = 6) Or
+                    (GregorianDay(beginningDate) = 1 AndAlso GregorianDay(endingDate) = 31 AndAlso GregorianMonth(beginningDate) = 7 AndAlso GregorianMonth(endingDate) = 12)) Then
+                Dim semesterName As String = ""
+                Select Case GregorianMonth(beginningDate)
+                    Case 1
+                        semesterName = TranslateCaption("First")
+                    Case 7
+                        semesterName = TranslateCaption("Second")
+                End Select
+                Return Messaging.GetParametrizedMessage(True, "RptForTheSemester", {"reportName", reportName, "semesterName", semesterName, "year", GregorianYear(endingDate).ToString})
             ElseIf GregorianDay(beginningDate) = 1 And GregorianDay(DateAdd("d", 1, endingDate)) = 1 And GregorianMonth(beginningDate) = GregorianMonth(endingDate) And GregorianYear(beginningDate) = GregorianYear(endingDate) Then
                 Dim monthName As String
                 Dim cYear = GregorianYear(endingDate).ToString

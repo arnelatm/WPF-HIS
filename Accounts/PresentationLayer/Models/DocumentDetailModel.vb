@@ -17,7 +17,7 @@
         Public Property ImageFileName As String
         Public Property IssueDate As Date?
         Public Property DateCreated As Date
-        Public Property UserIdNo As Int32
+        Public Property UserIdNo As Int16
         Public Property Picture As Image
     End Class
 

@@ -1,9 +1,7 @@
 ﻿Imports System.Globalization
-Imports System.Web.UI.WebControls
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Common.ServiceLayer
@@ -47,12 +45,8 @@ Public Class DateRangePresenter(Of TM As New)
         SetInitialDates(period, defStart, defEnd, View.BeginningDate, View.EndingDate)
     End Sub
 
-
-
     Public Sub New()
     End Sub
-
-
 
     Public Sub OnPrintButtonClicked()
         Dim curCulture = CultureInfo.CurrentCulture
@@ -69,7 +63,6 @@ Public Class DateRangePresenter(Of TM As New)
         beginningDate = View.BeginningDate
         endingDate = View.EndingDate
         Dim reportName = Libraries.MessagingLibrary.Messaging.TranslateCaption(_reportName)
-        Dim reportTitle As String
         Dim valid As Boolean = True
         If beginningDate Is Nothing Or endingDate Is Nothing Then
             Libraries.MessagingLibrary.Messaging.Show(True, "MsgDatesCannotBeEmpty")
@@ -83,20 +76,13 @@ Public Class DateRangePresenter(Of TM As New)
             Dim bDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(beginningDate, CultureInfo.CreateSpecificCulture("en-GB"))
             Dim eDate As String = GlobalFunctions.DateToSpecificCultureShortDateString(endingDate, CultureInfo.CreateSpecificCulture("en-GB"))
             Dim language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            reportTitle = Libraries.MessagingLibrary.Messaging.SelectReportName(_reportModel.ReportName, beginningDate, endingDate, curCulture)
+            _reportModel.ReportTitle = Libraries.MessagingLibrary.Messaging.SelectReportName(_reportModel.ReportName, beginningDate, endingDate, curCulture)
             reportArgs.ReportParameters = {
                                             beginningDate.Value, "BeginningDate",
                                             endingDate.Value, "EndingDate",
                                             _reportModel.ReportTitle, "ReportTitle",
                                             GlobalVariables.EstablishmentName, "EstablishmentName",
                                             language, "Language"}
-            'reportArgs.ReportParameters = {
-            '                                beginningDate.Value, "BeginningDate",
-            '                                endingDate.Value, "EndingDate",
-            '                                View.IdNo, "IdNo",
-            '                                _reportModel.ReportTitle, "ReportTitle",
-            '                                GlobalVariables.EstablishmentName, "EstablishmentName",
-            '                                language, "Language"}
             reportArgs.DataBaseConnectionName = _reportModel.DatabaseName
             Dim p As New PrintReportPresenter(Of AccountModel)
             p.ViewReport(_reportModel.ReportFileName, reportArgs, False)
