@@ -72,7 +72,5 @@ Namespace PresentationLayer.Presenters.Views.Forms
 
         End Sub
 
-        Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents dateRange As Libraries.CBaseControlsLibrary.DateRangeControl
     End Class
 End Namespace

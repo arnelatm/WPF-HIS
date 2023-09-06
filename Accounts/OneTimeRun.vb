@@ -101,6 +101,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("RptForTheQuarter", "{reportName} for the {quarterName} Quarter of {year}", "")
         Messaging.AddMessage("RptForTheSemester", "{reportName} for the {semesterName} Semester of {year}", "")
         Messaging.AddMessage("RptForTheYear", "{reportName} for the Year Ending {year}", "")
+        Messaging.AddMessage("RptForDay", "{reportName} for {cDate}", "")
         Messaging.AddMessage("MsgInvalidNumericValue", "The entered value '{text}' in field [{controlName}] is not a number.", "Error")
         Messaging.AddMessage("MsgNumericOverflow", "The entered number '{Number}' in field [{controlName}] is too large or too low. Entry must be between [{lowNumber}] and [{highNumber}].", "Error")
         Messaging.AddMessage("MsgInvalidInteger", "The entered number '{number}' in field [{controlName}] is not a valid integer (whole number).", "Error")

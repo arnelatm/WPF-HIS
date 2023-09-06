@@ -38,13 +38,9 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            Dim data As New ArrayList
-            data.Add({"Warehouse", "WarehouseIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"})
-            CreateDataSourceThread(data)
-            data.Clear()
-            data.Add({"User", "UserList", "IdNo,UserName", Nothing})
-            data.Add({"Warehouse", "WarehouseList", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"})
-            CreateLookupDataThread(data)
+            MakeControlDataSources({New String() {"Warehouse", "WarehouseIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"}})
+            MakeVarDataSources({New String() {"User", "UserList", Nothing, Nothing, "UserName"},
+                                New String() {"Warehouse", "WarehouseList", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"}})
         End Sub
 
         Private Sub GetInvTransactions()

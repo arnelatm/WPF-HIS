@@ -553,7 +553,6 @@
     <Compile Include="PresentationLayer\Presenters\ApArEmReportPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\BasicPresenterHelper.vb" />
     <Compile Include="PresentationLayer\Presenters\DateRangePresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\DateRangeContactPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\InvRequestPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\StockRequestApprovalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\FinancialReportPresenter.vb" />
@@ -628,12 +627,6 @@
       <DependentUpon>InvRequestForm.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\InvRequestForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\DateRangeSelector.designer.vb">
-      <DependentUpon>DateRangeSelector.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\DateRangeSelector.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\StockRequestApprovalEntry.Designer.vb">
@@ -1048,12 +1041,6 @@
     <Compile Include="PresentationLayer\Views\Forms\ReportSelectorForm2.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\DateRangeContactSelector.designer.vb">
-      <DependentUpon>DateRangeContactSelector.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\DateRangeContactSelector.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\EmployeeMedicalReport.designer.vb">
       <DependentUpon>EmployeeMedicalReport.vb</DependentUpon>
     </Compile>
@@ -1076,12 +1063,6 @@
       <DependentUpon>NumberofCashPatientsPerDoctorPerDay - Copy.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\NumberofCashPatientsPerDoctorPerDay - Copy.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\DateRangeEntry.Designer.vb">
-      <DependentUpon>DateRangeEntry.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\Reports\DateRangeEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\ReportFormIGroup.Designer.vb">
@@ -2098,9 +2079,6 @@
       <DependentUpon>InventorySelector.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\DateRangeSelector.resx">
-      <DependentUpon>DateRangeSelector.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\FinancialReport.resx">
       <DependentUpon>FinancialReport.vb</DependentUpon>
     </EmbeddedResource>
@@ -2290,9 +2268,6 @@
       <DependentUpon>ReportSelectorForm2.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\DateRangeContactSelector.resx">
-      <DependentUpon>DateRangeContactSelector.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\EmployeeMedicalReport.resx">
       <DependentUpon>EmployeeMedicalReport.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -2305,9 +2280,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\NumberofCashPatientsPerDoctorPerDay - Copy.resx">
       <DependentUpon>NumberofCashPatientsPerDoctorPerDay - Copy.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\DateRangeEntry.resx">
-      <DependentUpon>DateRangeEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\ReportFormIGroup.resx">
       <DependentUpon>ReportFormIGroup.vb</DependentUpon>
@@ -2798,8 +2770,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app-ibn-server-test.config" />
+    <None Include="app.config" />
     <None Include="app-Marcelo-Dell.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Isp-Server.config" />

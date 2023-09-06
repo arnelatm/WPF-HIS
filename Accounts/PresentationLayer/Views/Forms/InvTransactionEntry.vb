@@ -200,6 +200,21 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
 #End Region
+        Private _inventoryManager As Boolean = False
+
+        Public Property InventoryManager As Boolean Implements IInvTransactionView.InventoryManager
+            Get
+                Return _inventoryManager
+            End Get
+            Set(value As Boolean)
+                _inventoryManager = value
+                If value Then
+                    dtpTransactionDate.DisplayOnly = False
+                Else
+                    dtpTransactionDate.DisplayOnly = True
+                End If
+            End Set
+        End Property
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
@@ -242,6 +257,11 @@ Namespace PresentationLayer.Views.Forms
             End If
             UpdateDgvColumns()
             dgvNetAmount.DisplayOnly = True
+            If InventoryManager Then
+                dtpTransactionDate.Enabled = True
+            Else
+                dtpTransactionDate.Enabled = False
+            End If
         End Sub
 
         Private Sub BindInvTransactionDetail()

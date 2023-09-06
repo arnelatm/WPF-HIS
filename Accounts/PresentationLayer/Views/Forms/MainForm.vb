@@ -1094,17 +1094,6 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of PmrInvestigationRequestForm, PmrInvestigationRequestPresenter(Of PmrInvestigationRequestModel))()
         End Sub
 
-        Private Sub ToolStripMenuItemVATReport_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemVATReport.Click
-            Dim parameters As New ArrayList
-            parameters.Add("Revenue Sale Vat Report Summary")
-            parameters.Add({"ReportTitle", "Revenue/Sale Vat Report Summary"})
-            RunForm(Of DateRangeEntry, ArrayList)(parameters)
-        End Sub
-
-        Private Sub ToolStripMenuItemIGroup_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemIGroup.Click
-
-        End Sub
-
         Private Sub ToolStripMenuItemCodeGroup_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemCodeGroup.Click
             RunForm(Of CodeGroupEntryTv, CodeGroupPresenter(Of CodeGroupModel))()
         End Sub

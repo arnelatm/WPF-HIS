@@ -353,6 +353,7 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly MakeInvTransRequests As Func(Of IDataReader, InvTransaction) = Function(reader) New InvTransaction() With
                                 {.Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
                                   .Cancelled = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cancelled")),
+                                  .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("DateCreated")),
                                   .IdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("IdNo")),
                                   .InvTransTypeIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("InvTransTypeIdNo")),
                                   .Notes = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Notes")),

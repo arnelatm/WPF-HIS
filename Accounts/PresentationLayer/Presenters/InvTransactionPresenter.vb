@@ -63,7 +63,11 @@ Namespace PresentationLayer.Presenters
             AddHandler view.PostData, AddressOf OnPostData
             AddHandler view.ProductCodeValidating, AddressOf OnProductCodeValidating
             AddHandler view.ProductNameValidating, AddressOf OnProductNameValidating
-
+            If UserHasAccess("InventoryManager") Then
+                view.InventoryManager = True
+            Else
+                view.InventoryManager = False
+            End If
         End Sub
 
 

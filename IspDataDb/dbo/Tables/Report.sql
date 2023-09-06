@@ -37,9 +37,12 @@
     [MachineID]             VARCHAR (20)   CONSTRAINT [DF__ReportCre__Machi__2F6FF32E] DEFAULT (host_name()) NULL,
     [QueryForm]             VARCHAR (50)   NULL,
     [QueryFormParameters]   VARCHAR (MAX)  NULL,
+    [DatabaseName]          VARCHAR (12)   NULL,
     [Active]                BIT            NULL,
     CONSTRAINT [PK_ReportCreator] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 
