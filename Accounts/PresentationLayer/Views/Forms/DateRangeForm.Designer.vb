@@ -83,8 +83,10 @@ Namespace Accounts.PresentationLayer.Views.Forms
             Me.cboContactIdNo.DefaultValue = Nothing
             Me.cboContactIdNo.DisplayMember = "Name"
             Me.cboContactIdNo.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.cboContactIdNo.DropDownHeight = 28
+            Me.cboContactIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
             Me.cboContactIdNo.Editable = True
-            Me.cboContactIdNo.EditingMode = True
+            Me.cboContactIdNo.EditingMode = False
             Me.cboContactIdNo.EndFindValue = Nothing
             Me.cboContactIdNo.FieldDescription = Nothing
             Me.cboContactIdNo.FieldName = Nothing
@@ -96,11 +98,11 @@ Namespace Accounts.PresentationLayer.Views.Forms
             Me.cboContactIdNo.FormattingEnabled = True
             Me.cboContactIdNo.HideWhenNotEditingOrAdding = False
             Me.cboContactIdNo.IgnoreCase = False
-            Me.cboContactIdNo.IntegralHeight = False
             Me.cboContactIdNo.LimitToList = False
             Me.cboContactIdNo.LinkedLabel = Nothing
             Me.cboContactIdNo.Location = New System.Drawing.Point(121, 60)
             Me.cboContactIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.cboContactIdNo.MaxDropDownItems = 1
             Me.cboContactIdNo.Name = "cboContactIdNo"
             Me.cboContactIdNo.OldValue = 0
             Me.cboContactIdNo.OriginalDataSource = Nothing
@@ -108,7 +110,7 @@ Namespace Accounts.PresentationLayer.Views.Forms
             Me.cboContactIdNo.OverrideDropDownStyleList = False
             Me.cboContactIdNo.PreviousSearchTerm = Nothing
             Me.cboContactIdNo.PropertySelector = Nothing
-            Me.cboContactIdNo.Size = New System.Drawing.Size(342, 24)
+            Me.cboContactIdNo.Size = New System.Drawing.Size(342, 28)
             Me.cboContactIdNo.SuggestBoxHeight = 200
             Me.cboContactIdNo.SuggestCharCount = 0
             Me.cboContactIdNo.SuggestListOrderRule = Nothing
@@ -155,7 +157,7 @@ Namespace Accounts.PresentationLayer.Views.Forms
             Me.lblContactIdNo.Location = New System.Drawing.Point(1, 60)
             Me.lblContactIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblContactIdNo.Name = "lblContactIdNo"
-            Me.lblContactIdNo.Size = New System.Drawing.Size(97, 17)
+            Me.lblContactIdNo.Size = New System.Drawing.Size(116, 20)
             Me.lblContactIdNo.TabIndex = 31
             Me.lblContactIdNo.Text = "Contact Name"
             Me.lblContactIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -189,9 +191,9 @@ Namespace Accounts.PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.SetColumnSpan(Me.CFlowLayout1, 3)
             Me.CFlowLayout1.Controls.Add(Me.TableLayoutPanel2)
             Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.CFlowLayout1.Location = New System.Drawing.Point(3, 88)
+            Me.CFlowLayout1.Location = New System.Drawing.Point(3, 92)
             Me.CFlowLayout1.Name = "CFlowLayout1"
-            Me.CFlowLayout1.Size = New System.Drawing.Size(458, 48)
+            Me.CFlowLayout1.Size = New System.Drawing.Size(458, 44)
             Me.CFlowLayout1.TabIndex = 32
             '
             'TableLayoutPanel2

@@ -12,11 +12,11 @@ Namespace Accounts.PresentationLayer.Views.Forms
         Public Property UserHasAccess As Boolean Implements IDateRangeView.UserHasAccess
         Public Property Title As String Implements IDateRangeView.Title
         Protected SortOrderKey As String
-        Private ReadOnly _reportParameters As New ArrayList
-        Private ReadOnly _reportModel As ReportModel
-        Private ReadOnly _period As String
-        Public Event FormLoaded() Implements IDateRangeView.FormLoaded
-        Public Event PrintButtonClicked() Implements IDateRangeView.PrintButtonClicked
+        Protected ReadOnly _reportParameters As New ArrayList
+        Protected ReadOnly _reportModel As ReportModel
+        Protected ReadOnly _period As String
+        Protected Event FormLoaded() Implements IDateRangeView.FormLoaded
+        Protected Event PrintButtonClicked() Implements IDateRangeView.PrintButtonClicked
 
         Public Property MainTableName As String
 
@@ -38,10 +38,15 @@ Namespace Accounts.PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public ReadOnly Property NoContact As Boolean Implements IDateRangeView.NoContact
+        Private _noContact As Boolean
+
+        Public Property NoContact As Boolean Implements IDateRangeView.NoContact
             Get
-                Return True
+                Return _noContact
             End Get
+            Set(value As Boolean)
+                _noContact = value
+            End Set
         End Property
 
         Public Sub New()
@@ -52,12 +57,7 @@ Namespace Accounts.PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
             MainTableName = "Report"
             SortOrderKey = "IdNo"
-            Dim today = Now()
-            dateRange.BeginningDate = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
-            dateRange.EndingDate = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
-            lblContactIdNo.Visible = False
-            cboContactIdNo.Visible = False
-            Height = Height - 25
+            NoContact = True
         End Sub
 
         Public Sub New(reportModel As ReportModel)
@@ -69,7 +69,7 @@ Namespace Accounts.PresentationLayer.Views.Forms
             _reportModel = reportModel
             MainTableName = "Report"
             SortOrderKey = "IdNo"
-
+            NoContact = True
         End Sub
 
         Private Sub btnOk_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
@@ -80,6 +80,20 @@ Namespace Accounts.PresentationLayer.Views.Forms
             Close()
         End Sub
 
+        Private Sub DateRangeForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            Dim today = Now()
+            dateRange.BeginningDate = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
+            dateRange.EndingDate = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
+            If NoContact Then
+                lblContactIdNo.Visible = False
+                cboContactIdNo.Visible = False
+                Height = 215
+            Else
+                lblContactIdNo.Visible = True
+                cboContactIdNo.Visible = True
+                Height = 240
+            End If
+        End Sub
 
     End Class
 
