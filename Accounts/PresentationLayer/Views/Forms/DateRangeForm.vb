@@ -38,6 +38,12 @@ Namespace Accounts.PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public ReadOnly Property NoContact As Boolean Implements IDateRangeView.NoContact
+            Get
+                Return True
+            End Get
+        End Property
+
         Public Sub New()
 
             ' This call is required by the designer.
@@ -49,7 +55,9 @@ Namespace Accounts.PresentationLayer.Views.Forms
             Dim today = Now()
             dateRange.BeginningDate = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
             dateRange.EndingDate = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
-
+            lblContactIdNo.Visible = False
+            cboContactIdNo.Visible = False
+            Height = Height - 25
         End Sub
 
         Public Sub New(reportModel As ReportModel)
