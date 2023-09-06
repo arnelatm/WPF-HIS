@@ -45,7 +45,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Posted As Boolean
         Property ReferenceNo As String
         Property TransactionDate As Date?
-        Property UserIdNo As Int16
+        Property UserIdNo As Int32
         Property WarehouseIdNo As Int16
         Property WarehouseToIdNo As Int16?
     End Interface
@@ -56,6 +56,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property WarehouseIdNo As Int16
         Property WarehouseList As DataTable
         Property UserList As DataTable
+        Property UnitList As DataTable
         Property InvTransactionDetails As List(Of InvTransactionDetailView)
         Event WarehouseIdNoChanged()
         Event RowChanged(productIdNo As Integer)

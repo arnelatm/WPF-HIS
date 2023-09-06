@@ -919,6 +919,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProgramTemplates", "Program
 	ProjectSection(SolutionItems) = preProject
 		ExecuteMultipleSqlStatementsInATransaction.Vb = ExecuteMultipleSqlStatementsInATransaction.Vb
 		OnCellFormating.vb = OnCellFormating.vb
+		SampleManualMapping = SampleManualMapping
 	EndProjectSection
 EndProject
 Global

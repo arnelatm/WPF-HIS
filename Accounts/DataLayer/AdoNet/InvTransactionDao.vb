@@ -94,7 +94,7 @@ Namespace DataLayer.AdoNet
                                   .Posted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Posted")),
                                   .ReferenceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ReferenceNo")),
                                   .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),
-                                  .UserIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("UserIdNo")),
+                                  .UserIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("UserIdNo")),
                                   .WarehouseIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("WarehouseIdNo")),
                                   .WarehouseToIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("WarehouseToIdNo"))
                                 }
@@ -360,7 +360,7 @@ Namespace DataLayer.AdoNet
                                   .Posted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Posted")),
                                   .ReferenceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ReferenceNo")),
                                   .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),
-                                  .UserIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("UserIdNo")),
+                                  .UserIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("UserIdNo")),
                                   .WarehouseIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("WarehouseIdNo")),
                                   .WarehouseToIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("WarehouseToIdNo"))
                                 }

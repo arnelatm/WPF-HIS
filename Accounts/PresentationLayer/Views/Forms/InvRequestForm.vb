@@ -13,6 +13,7 @@ Namespace PresentationLayer.Views.Forms
         Public Event RowChanged(productIdNo As Int32) Implements IInvRequestView.RowChanged
         Public Property WarehouseList As DataTable Implements IInvRequestView.WarehouseList
         Public Property UserList As DataTable Implements IInvRequestView.UserList
+        Public Property UnitList As DataTable Implements IInvRequestView.UnitList
 
         Public Sub New()
             'MyBase.New()
@@ -89,13 +90,16 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+
         Private Sub BindInvTransactionDetail()
             SuspendLayout()
             bsInvTranItems.DataSource = Nothing
             DataGridViewInvTransItems.Refresh()
             bsInvTranItems.DataSource = InvTransactionDetails
             bsInvTranItems.AllowNew = False
-            'SetupDgvColumns()
+            dgvUnitIdNo.DataSource = UnitList
+            dgvUnitIdNo.DisplayMember = "Name"
+            dgvUnitIdNo.ValueMember = "IdNo"
             ResumeLayout()
         End Sub
 
@@ -121,6 +125,9 @@ Namespace PresentationLayer.Views.Forms
             lblRequestedItems.Text = Messaging.TranslateCaption("Requested Items for ") + dgvRow.Cells("dgvReferenceNo").Value
         End Sub
 
+        Private Sub DataGridViewInvTransItems_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewInvTransItems.CellContentClick
+
+        End Sub
     End Class
 
 End Namespace
