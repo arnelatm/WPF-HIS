@@ -97,6 +97,12 @@ Namespace PresentationLayer.Views.Forms.Reports
         Public Property PersonSelectorControl As Control Implements IContactDateRangeView.PersonSelectorControl
         Public Property PersonSelectorLabel As String Implements IContactDateRangeView.PersonSelectorLabel
 
+        Public ReadOnly Property NoContact As Boolean Implements IDateRangeView.NoContact
+            Get
+                Throw New NotImplementedException()
+            End Get
+        End Property
+
         Private Sub DateRangeCompanyEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             RaiseEvent FormLoaded()
             cboContactIdNo.DisplayOnly = False

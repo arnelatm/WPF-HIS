@@ -26,13 +26,17 @@ Namespace Accounts.PresentationLayer.Views.Forms
             Me.components = New System.ComponentModel.Container()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dateRange = New AATM.Libraries.CBaseControlsLibrary.DateRangeControl()
-            Me.CtComboBox1 = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboContactIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
-            Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblContactIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+            Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+            Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.TableLayoutPanel1.SuspendLayout()
+            Me.CFlowLayout1.SuspendLayout()
+            Me.TableLayoutPanel2.SuspendLayout()
             Me.SuspendLayout()
             '
             'AppDataDAC
@@ -50,7 +54,7 @@ Namespace Accounts.PresentationLayer.Views.Forms
             Me.CLabel2.Location = New System.Drawing.Point(0, 0)
             Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel2.Name = "CLabel2"
-            Me.CLabel2.Size = New System.Drawing.Size(687, 39)
+            Me.CLabel2.Size = New System.Drawing.Size(478, 39)
             Me.CLabel2.TabIndex = 26
             Me.CLabel2.Text = "Date Range Selection"
             Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -60,68 +64,68 @@ Namespace Accounts.PresentationLayer.Views.Forms
             '
             Me.dateRange.BackColor = System.Drawing.Color.Transparent
             Me.dateRange.BeginningDate = Nothing
-            Me.TableLayoutPanel1.SetColumnSpan(Me.dateRange, 2)
+            Me.TableLayoutPanel1.SetColumnSpan(Me.dateRange, 3)
+            Me.dateRange.Dock = System.Windows.Forms.DockStyle.Fill
             Me.dateRange.EndingDate = Nothing
             Me.dateRange.Location = New System.Drawing.Point(3, 3)
             Me.dateRange.Name = "dateRange"
-            Me.dateRange.Size = New System.Drawing.Size(230, 53)
+            Me.dateRange.Size = New System.Drawing.Size(458, 53)
             Me.dateRange.TabIndex = 29
             '
-            'CtComboBox1
+            'cboContactIdNo
             '
-            Me.CtComboBox1.BackColor = System.Drawing.Color.White
-            Me.CtComboBox1.BegFindValue = Nothing
-            Me.CtComboBox1.ChangingSearchValueOnly = False
-            Me.TableLayoutPanel1.SetColumnSpan(Me.CtComboBox1, 2)
-            Me.CtComboBox1.CurrentSearchTerm = ""
-            Me.CtComboBox1.DataValue = Nothing
-            Me.CtComboBox1.DefaultValue = Nothing
-            Me.CtComboBox1.DisplayMember = "Name"
-            Me.CtComboBox1.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.CtComboBox1.Editable = True
-            Me.CtComboBox1.EditingMode = True
-            Me.CtComboBox1.EndFindValue = Nothing
-            Me.CtComboBox1.FieldDescription = Nothing
-            Me.CtComboBox1.FieldName = Nothing
-            Me.CtComboBox1.FilterRule = Nothing
-            Me.CtComboBox1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.CtComboBox1.FindEnabled = False
-            Me.CtComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CtComboBox1.ForeColor = System.Drawing.Color.Black
-            Me.CtComboBox1.FormattingEnabled = True
-            Me.CtComboBox1.HideWhenNotEditingOrAdding = False
-            Me.CtComboBox1.IgnoreCase = False
-            Me.CtComboBox1.IntegralHeight = False
-            Me.CtComboBox1.LimitToList = False
-            Me.CtComboBox1.LinkedLabel = Nothing
-            Me.CtComboBox1.Location = New System.Drawing.Point(209, 75)
-            Me.CtComboBox1.Margin = New System.Windows.Forms.Padding(1)
-            Me.CtComboBox1.Name = "CtComboBox1"
-            Me.CtComboBox1.OldValue = 0
-            Me.CtComboBox1.OriginalDataSource = Nothing
-            Me.CtComboBox1.OriginalList = Nothing
-            Me.CtComboBox1.OverrideDropDownStyleList = False
-            Me.CtComboBox1.PreviousSearchTerm = Nothing
-            Me.CtComboBox1.PropertySelector = Nothing
-            Me.CtComboBox1.Size = New System.Drawing.Size(496, 28)
-            Me.CtComboBox1.SuggestBoxHeight = 200
-            Me.CtComboBox1.SuggestCharCount = 0
-            Me.CtComboBox1.SuggestListOrderRule = Nothing
-            Me.CtComboBox1.TabIndex = 30
-            Me.CtComboBox1.TextToSearch = Nothing
-            Me.CtComboBox1.Translatable = False
-            Me.CtComboBox1.ValueIsMandatory = False
-            Me.CtComboBox1.ValueIsNullable = False
-            Me.CtComboBox1.ValueIsNumeric = False
-            Me.CtComboBox1.ValueMember = "IdNo"
+            Me.cboContactIdNo.BackColor = System.Drawing.Color.White
+            Me.cboContactIdNo.BegFindValue = Nothing
+            Me.cboContactIdNo.ChangingSearchValueOnly = False
+            Me.TableLayoutPanel1.SetColumnSpan(Me.cboContactIdNo, 2)
+            Me.cboContactIdNo.CurrentSearchTerm = ""
+            Me.cboContactIdNo.DataValue = Nothing
+            Me.cboContactIdNo.DefaultValue = Nothing
+            Me.cboContactIdNo.DisplayMember = "Name"
+            Me.cboContactIdNo.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.cboContactIdNo.Editable = True
+            Me.cboContactIdNo.EditingMode = True
+            Me.cboContactIdNo.EndFindValue = Nothing
+            Me.cboContactIdNo.FieldDescription = Nothing
+            Me.cboContactIdNo.FieldName = Nothing
+            Me.cboContactIdNo.FilterRule = Nothing
+            Me.cboContactIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboContactIdNo.FindEnabled = False
+            Me.cboContactIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboContactIdNo.ForeColor = System.Drawing.Color.Black
+            Me.cboContactIdNo.FormattingEnabled = True
+            Me.cboContactIdNo.HideWhenNotEditingOrAdding = False
+            Me.cboContactIdNo.IgnoreCase = False
+            Me.cboContactIdNo.IntegralHeight = False
+            Me.cboContactIdNo.LimitToList = False
+            Me.cboContactIdNo.LinkedLabel = Nothing
+            Me.cboContactIdNo.Location = New System.Drawing.Point(121, 60)
+            Me.cboContactIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.cboContactIdNo.Name = "cboContactIdNo"
+            Me.cboContactIdNo.OldValue = 0
+            Me.cboContactIdNo.OriginalDataSource = Nothing
+            Me.cboContactIdNo.OriginalList = Nothing
+            Me.cboContactIdNo.OverrideDropDownStyleList = False
+            Me.cboContactIdNo.PreviousSearchTerm = Nothing
+            Me.cboContactIdNo.PropertySelector = Nothing
+            Me.cboContactIdNo.Size = New System.Drawing.Size(342, 24)
+            Me.cboContactIdNo.SuggestBoxHeight = 200
+            Me.cboContactIdNo.SuggestCharCount = 0
+            Me.cboContactIdNo.SuggestListOrderRule = Nothing
+            Me.cboContactIdNo.TabIndex = 30
+            Me.cboContactIdNo.TextToSearch = Nothing
+            Me.cboContactIdNo.Translatable = False
+            Me.cboContactIdNo.ValueIsMandatory = False
+            Me.cboContactIdNo.ValueIsNullable = False
+            Me.cboContactIdNo.ValueIsNumeric = False
+            Me.cboContactIdNo.ValueMember = "IdNo"
             '
             'btnOk
             '
             Me.btnOk.Anchor = System.Windows.Forms.AnchorStyles.None
-            Me.TableLayoutPanel1.SetColumnSpan(Me.btnOk, 2)
             Me.btnOk.DesignerSelected = False
             Me.btnOk.ImageIndex = 0
-            Me.btnOk.Location = New System.Drawing.Point(166, 243)
+            Me.btnOk.Location = New System.Drawing.Point(81, 7)
             Me.btnOk.Name = "btnOk"
             Me.btnOk.OriginalImageName = Nothing
             Me.btnOk.SecurityKey = ""
@@ -134,7 +138,7 @@ Namespace Accounts.PresentationLayer.Views.Forms
             Me.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.None
             Me.btnCancel.DesignerSelected = False
             Me.btnCancel.ImageIndex = 0
-            Me.btnCancel.Location = New System.Drawing.Point(570, 243)
+            Me.btnCancel.Location = New System.Drawing.Point(299, 7)
             Me.btnCancel.Name = "btnCancel"
             Me.btnCancel.OriginalImageName = Nothing
             Me.btnCancel.SecurityKey = ""
@@ -142,45 +146,72 @@ Namespace Accounts.PresentationLayer.Views.Forms
             Me.btnCancel.TabIndex = 28
             Me.btnCancel.Text = "Cancel"
             '
-            'CLabel3
+            'lblContactIdNo
             '
-            Me.CLabel3.AutoSize = True
-            Me.CLabel3.DisplayOnly = True
-            Me.CLabel3.EditingMode = False
-            Me.CLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel3.Location = New System.Drawing.Point(1, 60)
-            Me.CLabel3.Margin = New System.Windows.Forms.Padding(1)
-            Me.CLabel3.Name = "CLabel3"
-            Me.CLabel3.Size = New System.Drawing.Size(71, 20)
-            Me.CLabel3.TabIndex = 31
-            Me.CLabel3.Text = "CLabel3"
-            Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.CLabel3.Translatable = True
+            Me.lblContactIdNo.AutoSize = True
+            Me.lblContactIdNo.DisplayOnly = True
+            Me.lblContactIdNo.EditingMode = False
+            Me.lblContactIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblContactIdNo.Location = New System.Drawing.Point(1, 60)
+            Me.lblContactIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblContactIdNo.Name = "lblContactIdNo"
+            Me.lblContactIdNo.Size = New System.Drawing.Size(97, 17)
+            Me.lblContactIdNo.TabIndex = 31
+            Me.lblContactIdNo.Text = "Contact Name"
+            Me.lblContactIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblContactIdNo.Translatable = True
             '
             'TableLayoutPanel1
             '
             Me.TableLayoutPanel1.BackColor = System.Drawing.Color.Transparent
             Me.TableLayoutPanel1.ColumnCount = 3
-            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
-            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.86207!))
+            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.13793!))
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
             Me.TableLayoutPanel1.Controls.Add(Me.dateRange, 0, 0)
-            Me.TableLayoutPanel1.Controls.Add(Me.btnOk, 0, 2)
-            Me.TableLayoutPanel1.Controls.Add(Me.CtComboBox1, 1, 1)
-            Me.TableLayoutPanel1.Controls.Add(Me.CLabel3, 0, 1)
-            Me.TableLayoutPanel1.Controls.Add(Me.btnCancel, 2, 2)
+            Me.TableLayoutPanel1.Controls.Add(Me.cboContactIdNo, 1, 1)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblContactIdNo, 0, 1)
+            Me.TableLayoutPanel1.Controls.Add(Me.CFlowLayout1, 0, 2)
             Me.TableLayoutPanel1.Location = New System.Drawing.Point(5, 44)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             Me.TableLayoutPanel1.RowCount = 3
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.Size = New System.Drawing.Size(664, 325)
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
+            Me.TableLayoutPanel1.Size = New System.Drawing.Size(464, 139)
             Me.TableLayoutPanel1.TabIndex = 29
+            '
+            'CFlowLayout1
+            '
+            Me.CFlowLayout1.AutoSize = True
+            Me.CFlowLayout1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
+            Me.TableLayoutPanel1.SetColumnSpan(Me.CFlowLayout1, 3)
+            Me.CFlowLayout1.Controls.Add(Me.TableLayoutPanel2)
+            Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.CFlowLayout1.Location = New System.Drawing.Point(3, 88)
+            Me.CFlowLayout1.Name = "CFlowLayout1"
+            Me.CFlowLayout1.Size = New System.Drawing.Size(458, 48)
+            Me.CFlowLayout1.TabIndex = 32
+            '
+            'TableLayoutPanel2
+            '
+            Me.TableLayoutPanel2.ColumnCount = 2
+            Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+            Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+            Me.TableLayoutPanel2.Controls.Add(Me.btnCancel, 1, 0)
+            Me.TableLayoutPanel2.Controls.Add(Me.btnOk, 0, 0)
+            Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 3)
+            Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+            Me.TableLayoutPanel2.RowCount = 1
+            Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+            Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+            Me.TableLayoutPanel2.Size = New System.Drawing.Size(455, 39)
+            Me.TableLayoutPanel2.TabIndex = 0
             '
             'DateRangeForm
             '
-            Me.ClientSize = New System.Drawing.Size(687, 449)
+            Me.ClientSize = New System.Drawing.Size(478, 191)
             Me.Controls.Add(Me.CLabel2)
             Me.Controls.Add(Me.TableLayoutPanel1)
             Me.DoubleBuffered = True
@@ -190,6 +221,8 @@ Namespace Accounts.PresentationLayer.Views.Forms
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.TableLayoutPanel1.ResumeLayout(False)
             Me.TableLayoutPanel1.PerformLayout()
+            Me.CFlowLayout1.ResumeLayout(False)
+            Me.TableLayoutPanel2.ResumeLayout(False)
             Me.ResumeLayout(False)
 
         End Sub
@@ -197,8 +230,10 @@ Namespace Accounts.PresentationLayer.Views.Forms
         Friend WithEvents dateRange As DateRangeControl
         Private WithEvents btnOk As CButton
         Private WithEvents btnCancel As CButton
-        Friend WithEvents CtComboBox1 As CtComboBox
-        Friend WithEvents CLabel3 As CLabel
+        Friend WithEvents cboContactIdNo As CtComboBox
+        Friend WithEvents lblContactIdNo As CLabel
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+        Friend WithEvents CFlowLayout1 As CFlowLayout
+        Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
     End Class
 End Namespace

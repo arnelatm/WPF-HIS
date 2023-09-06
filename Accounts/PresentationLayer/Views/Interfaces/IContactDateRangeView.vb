@@ -21,6 +21,7 @@ Namespace PresentationLayer.Views.Interfaces
         ReadOnly Property ReportCode As String
         Property UserHasAccess As Boolean
         Property Title As String
+        ReadOnly Property NoContact As Boolean
         Event FormLoaded()
         Event PrintButtonClicked()
 
