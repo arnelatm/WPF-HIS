@@ -429,7 +429,7 @@ Namespace PresentationLayer.Presenters
                     End If
                     If dtl.DisplayMember Is Nothing Then
                         dtl.NameDisplayValue = "Concat(" + dtl.NameField + ",'-'," + fieldNames(0) + ") COLLATE SQL_Latin1_General_CP1_CI_AS"
-                        dtl.DisplayMember = "IdNo"
+                        dtl.DisplayMember = "Name"
                     End If
                     dtl.LuFields = fieldNames(0) + " as IdNo," + dtl.NameDisplayValue + " as Name"
                     If dtl.SortKey Is Nothing Then

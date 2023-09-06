@@ -10,10 +10,10 @@
 
     Public Property EndingDate As Date?
         Get
-            Return dtpBeginningDate.Value
+            Return dtpEndingDate.Value
         End Get
         Set(value As Date?)
-            dtpBeginningDate.Value = value
+            dtpEndingDate.Value = value
         End Set
     End Property
 

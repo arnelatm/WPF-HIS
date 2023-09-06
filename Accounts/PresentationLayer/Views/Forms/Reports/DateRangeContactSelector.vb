@@ -15,7 +15,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Private _contactDataSource As DataTable
         Public Event FormLoaded() Implements IContactDateRangeView.FormLoaded
         Public Event PrintButtonClicked() Implements IContactDateRangeView.PrintButtonClicked
-
+        Public Event ContactDateRangeFormLoaded() Implements IContactDateRangeView.ContactDateRangeFormLoaded
 
         Public Sub New()
 
@@ -97,14 +97,18 @@ Namespace PresentationLayer.Views.Forms.Reports
         Public Property PersonSelectorControl As Control Implements IContactDateRangeView.PersonSelectorControl
         Public Property PersonSelectorLabel As String Implements IContactDateRangeView.PersonSelectorLabel
 
-        Public ReadOnly Property NoContact As Boolean Implements IDateRangeView.NoContact
+        Public Property NoContact As Boolean Implements IDateRangeView.NoContact
             Get
                 Throw New NotImplementedException()
             End Get
+            Set(value As Boolean)
+                Throw New NotImplementedException()
+            End Set
         End Property
 
         Private Sub DateRangeCompanyEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            RaiseEvent FormLoaded()
+            'RaiseEvent FormLoaded()
+            RaiseEvent ContactDateRangeFormLoaded()
             cboContactIdNo.DisplayOnly = False
             cboContactIdNo.EditingMode = True
         End Sub

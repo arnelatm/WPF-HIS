@@ -72,10 +72,13 @@ Namespace PresentationLayer.Views.Forms.Reports
         Public Property Title As String Implements IDateRangeView.Title
         Public Property UserHasAccess As Boolean Implements IDateRangeView.UserHasAccess
 
-        Public ReadOnly Property NoContact As Boolean Implements IDateRangeView.NoContact
+        Public Property NoContact As Boolean Implements IDateRangeView.NoContact
             Get
                 Throw New NotImplementedException()
             End Get
+            Set(value As Boolean)
+                Throw New NotImplementedException()
+            End Set
         End Property
     End Class
 

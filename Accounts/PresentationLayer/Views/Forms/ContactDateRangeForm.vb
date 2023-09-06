@@ -1,41 +1,14 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Libraries.GlobalFuncNSub
+Imports Microsoft.Office.Core
 
 Namespace PresentationLayer.Presenters.Views.Forms
     Public Class ContactDateRangeForm
         Implements IContactDateRangeView
 
-        Public ReadOnly Property Language As String Implements IDateRangeView.Language
-        Public ReadOnly Property ReportCode As String Implements IDateRangeView.ReportCode
-        Public Property UserHasAccess As Boolean Implements IDateRangeView.UserHasAccess
-        Public Property Title As String Implements IDateRangeView.Title
-        Protected SortOrderKey As String
-        Private ReadOnly _reportParameters As New ArrayList
-        Private ReadOnly _reportModel As ReportModel
-        Private ReadOnly _period As String
-        Public Event FormLoaded() Implements IDateRangeView.FormLoaded
-        Public Event PrintButtonClicked() Implements IDateRangeView.PrintButtonClicked
+        Public Event ContactDateRangeFormLoaded() Implements IContactDateRangeView.ContactDateRangeFormLoaded
 
-        Public Property MainTableName As String
-
-        Public Property BeginningDate As Date? Implements IDateRangeView.BeginningDate
-            Get
-                Return dateRange.BeginningDate.Value
-            End Get
-            Set(value As Date?)
-                dateRange.BeginningDate = value
-            End Set
-        End Property
-
-        Public Property EndingDate As Date? Implements IDateRangeView.EndingDate
-            Get
-                Return dateRange.EndingDate
-            End Get
-            Set(value As Date?)
-                dateRange.EndingDate = value
-            End Set
-        End Property
 
         Public Property IdNo As Integer Implements IContactDateRangeView.IdNo
             Get
@@ -50,14 +23,16 @@ Namespace PresentationLayer.Presenters.Views.Forms
 
         Public Property PersonSelectorLabel As String Implements IContactDateRangeView.PersonSelectorLabel
 
+        Private _contactDataSource As Object
         Public Property ContactDataSource As Object Implements IContactDateRangeView.ContactDataSource
-
-        Public ReadOnly Property NoContact As Boolean Implements IDateRangeView.NoContact
             Get
-                Return False
+                Return _contactDataSource
             End Get
+            Set(value As Object)
+                _contactDataSource = value
+                BindContactDataSource()
+            End Set
         End Property
-
         Public Sub New()
 
             ' This call is required by the designer.
@@ -67,30 +42,39 @@ Namespace PresentationLayer.Presenters.Views.Forms
             MainTableName = "Report"
             SortOrderKey = "IdNo"
             Dim today = Now()
-            dateRange.BeginningDate = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
-            dateRange.EndingDate = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
             lblContactIdNo.Visible = True
             cboContactIdNo.Visible = True
+            dateRange.BeginningDate = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
+            dateRange.EndingDate = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
+
+
         End Sub
 
         Public Sub New(reportModel As ReportModel)
-
+            MyBase.New(reportModel)
             ' This call is required by the designer.
             InitializeComponent()
-
+            cboContactIdNo.EditingMode = False
             ' Add any initialization after the InitializeComponent() call.
-            _reportModel = reportModel
-            MainTableName = "Report"
-            SortOrderKey = "IdNo"
+            NoContact = False
         End Sub
 
-        Private Sub btnOk_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
-            RaiseEvent PrintButtonClicked()
+        Private Sub DateRangeCompanyEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            RaiseEvent ContactDateRangeFormLoaded()
+            cboContactIdNo.DisplayOnly = False
+            cboContactIdNo.EditingMode = True
+            cboContactIdNo.DropDownHeight = 28
+            cboContactIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            cboContactIdNo.Editable = True
+            cboContactIdNo.EditingMode = True
+            'cboContactIdNo.DataSource = ContactDataSource
         End Sub
 
-        Private Sub CButton2_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea
-            Close()
+        Private Sub BindContactDataSource()
+            cboContactIdNo.DataSource = Nothing
+            cboContactIdNo.DataSource = ContactDataSource
         End Sub
+
     End Class
 
 End Namespace

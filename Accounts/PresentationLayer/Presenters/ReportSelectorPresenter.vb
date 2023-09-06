@@ -1,5 +1,6 @@
 ﻿Imports AATM.Accounts.Accounts.PresentationLayer.Views.Forms
 Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Presenters.Views.Forms
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Forms
 Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
@@ -62,9 +63,9 @@ Namespace PresentationLayer.Presenters
                 'formToRun.QuitOnSave = True
                 'formToRun.Show()
                 Select Case queryForm
-                    Case "DateRangeContactSelector"
-                        Dim formToRun As New DateRangeForm(report)
-                        formToRun.Presenter = New DateRangePresenter(Of ReportModel)(formToRun, report)
+                    Case "ContactDateRangeForm"
+                        Dim formToRun As New ContactDateRangeForm(report)
+                        formToRun.Presenter = New ContactDateRangePresenter(Of ReportModel)(formToRun, report)
                         formToRun.Show()
                     Case "DateRangeForm"
                         Dim formToRun As New DateRangeForm(report)
