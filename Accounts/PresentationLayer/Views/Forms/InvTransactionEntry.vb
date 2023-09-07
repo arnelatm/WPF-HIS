@@ -264,6 +264,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+
         Private Sub BindInvTransactionDetail()
             SuspendLayout()
             bsInvTransactionDetails.DataSource = Nothing

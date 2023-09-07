@@ -106,6 +106,17 @@ Namespace Services
             Return DataDao.GetField(Of TR, TS)(searchValue, tableName, searchFieldName, returnFieldName, filter)
         End Function
 
+        Public Function GetField(Of TR, TS1, TS2)(searchValue1 As TS1, searchValue2 As TS2, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String, Optional filter As String = Nothing) As TR Implements IService.GetField
+            Return DataDao.GetField(Of TR, TS1, TS2)(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2, returnFieldName, filter)
+        End Function
+
+        Public Function GetField(Of TR, TS1, TS2, TS3)(searchValue1 As TS1, searchValue2 As TS2, searchValue3 As TS3,
+                                                       tableName As String,
+                                                       searchFieldName1 As String, searchFieldName2 As String, searchFieldName3 As String,
+                                                       returnFieldName As String, Optional filter As String = Nothing) As TR Implements IService.GetField
+            Return DataDao.GetField(Of TR, TS1, TS2)(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2, returnFieldName, filter)
+        End Function
+
         Public Function GetHLookup(lookupObj As Lookup) As List(Of Lookup.HLookupData)
             If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
                 Dim nameFieldArabic = lookupObj.NameField + "Ara"

@@ -1,7 +1,6 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Dynamic
 Imports System.Globalization
-Imports System.Runtime.InteropServices.WindowsRuntime
 Imports AATM.BusinessLayer.BusinessObjects
 Imports AATM.Libraries.AatmInterfaces
 Imports AATM.Libraries.GlobalFuncNSub
@@ -333,13 +332,13 @@ Namespace AdoNet
         End Function
 
         Public Function GetField(Of TR, TS)(searchValue As TS, tableName As String, searchFieldName As String, returnFieldName As String, Optional filter As String = Nothing) As TR Implements IBaseDao.GetField
-            Dim sql As String = " Select " & returnFieldName & " FROM [" & tableName & "] Where " & searchFieldName & " = @SearchValue "
+            Dim sql As String
             Dim params() As Object
             Dim tType As Type = searchValue.GetType
             If tType = GetType(String) OrElse tType = GetType(Decimal) OrElse tType = GetType(Int32) OrElse tType = GetType(Int16) OrElse tType = GetType(Int64) OrElse
                                               tType = GetType(UInt16) OrElse tType = GetType(UInt32) OrElse tType = GetType(UInt64) Then
                 params = {"@SearchValue", searchValue}
-
+                sql = " Select " & returnFieldName & " FROM [" & tableName & "] Where " & searchFieldName & " = @SearchValue "
             ElseIf tType = GetType(Boolean) Then
                 Dim boolSearch As Boolean = Convert.ToBoolean(searchValue)
                 If boolSearch Then
@@ -348,15 +347,17 @@ Namespace AdoNet
                     boolSearch = 0
                 End If
                 params = {"@SearchValue", boolSearch}
+                sql = " Select " & returnFieldName & " FROM [" & tableName & "] Where " & searchFieldName & " = @SearchValue "
             ElseIf tType = GetType(Date) Then
                 Dim dDate = Convert.ToDateTime(searchValue)
                 Dim dateSearch1 As String = dDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture)
                 dDate = DateAndTime.DateAdd(DateInterval.Day, 1, dDate)
                 Dim dateSearch2 As String = dDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture)
-                sql = " Select " & returnFieldName & " FROM [" & tableName & "] Where " & searchFieldName & " >= @dateSearch1 and " & searchFieldName & "< @dateSearch2"
                 params = {"@dateSearch1", dateSearch1, "@dateSearch2", dateSearch1}
+                sql = " Select " & returnFieldName & " FROM [" & tableName & "] Where " & searchFieldName & " >= @dateSearch1 and " & searchFieldName & "< @dateSearch2"
             Else
                 params = {"@SearchValue", searchValue}
+                sql = " Select " & returnFieldName & " FROM [" & tableName & "] Where " & searchFieldName & " = @SearchValue "
             End If
             If filter IsNot Nothing Then
                 sql = sql & " and (" & filter & ")"
@@ -366,6 +367,78 @@ Namespace AdoNet
                 Return Nothing
             End If
             Return retVal
+        End Function
+
+        Public Function GetField(Of TR, TS1, TS2)(searchValue1 As TS1, searchValue2 As TS2, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String, Optional filter As String = Nothing) As TR Implements IBaseDao.GetField
+            Dim sql As String = "Select " & returnFieldName & " FROM [" & tableName & "] Where "
+            Dim condition1 As String = ""
+            Dim condition2 As String = ""
+            Dim obj1 As Object = ComposeSqlCommand(Of TS1)(searchValue1, searchFieldName1, condition1)
+            Dim obj2 As Object = ComposeSqlCommand(Of TS2)(searchValue2, searchFieldName2, condition2)
+            Dim params() As Object = {obj1(0), obj1(1), obj2(0), obj2(1)}
+            sql += condition1 & " and " & condition2
+            If filter IsNot Nothing Then
+                sql = sql & " and (" & filter & ")"
+            End If
+            Dim retVal = GetDb().Scalar(sql, params)
+            If retVal Is Nothing Or IsDBNull(retVal) Then
+                Return Nothing
+            End If
+            Return retVal
+        End Function
+
+        Public Function GetField(Of TR, TS1, TS2, TS3)(searchValue1 As TS1, searchValue2 As TS2, searchValue3 As TS3,
+                                                       tableName As String,
+                                                       searchFieldName1 As String, searchFieldName2 As String, searchFieldName3 As String,
+                                                       returnFieldName As String, Optional filter As String = Nothing) As TR Implements IBaseDao.GetField
+            Dim sql As String = "Select " & returnFieldName & " FROM [" & tableName & "] Where "
+            Dim params() As Object = Nothing
+            Dim condition1 As String = ""
+            Dim condition2 As String = ""
+            Dim condition3 As String = ""
+            params.Add(ComposeSqlCommand(Of TS1)(searchValue1, searchFieldName1, condition1))
+            params.Add(ComposeSqlCommand(Of TS2)(searchValue2, searchFieldName2, condition2))
+            params.Add(ComposeSqlCommand(Of TS3)(searchValue3, searchFieldName3, condition3))
+            sql += sql & " and " & condition1 & " and " & condition2 & " and " & condition3
+            If filter IsNot Nothing Then
+                sql = sql & " and (" & filter & ")"
+            End If
+            Dim retVal = GetDb().Scalar(sql, params)
+            If retVal Is Nothing Or IsDBNull(retVal) Then
+                Return Nothing
+            End If
+            Return retVal
+        End Function
+
+        Private Shared Function ComposeSqlCommand(Of TS)(searchValue As TS, searchFieldName As String, ByRef sql As String) As Array
+            Dim arrayParameter As Object
+            Dim tType As Type = searchValue.GetType
+            Dim searchParameterName As String = "@" + searchFieldName
+            If tType = GetType(String) OrElse tType = GetType(Decimal) OrElse tType = GetType(Int32) OrElse tType = GetType(Int16) OrElse tType = GetType(Int64) OrElse
+                                              tType = GetType(UInt16) OrElse tType = GetType(UInt32) OrElse tType = GetType(UInt64) Then
+                arrayParameter = {searchParameterName, searchValue}
+                sql += searchFieldName & " = " & searchParameterName
+            ElseIf tType = GetType(Boolean) Then
+                Dim boolSearch As Boolean = Convert.ToBoolean(searchValue)
+                If boolSearch Then
+                    boolSearch = 1
+                Else
+                    boolSearch = 0
+                End If
+                arrayParameter = {searchParameterName, boolSearch}
+                sql += searchFieldName & " = " & searchParameterName
+            ElseIf tType = GetType(Date) Then
+                Dim dDate = Convert.ToDateTime(searchValue)
+                Dim dateSearch1 As String = dDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture)
+                dDate = DateAndTime.DateAdd(DateInterval.Day, 1, dDate)
+                Dim dateSearch2 As String = dDate.ToString("yyyyMMdd", CultureInfo.InvariantCulture)
+                arrayParameter = {"@dateSearch1", dateSearch1, "@dateSearch2", dateSearch1}
+                sql += searchFieldName & " >= @dateSearch1 and " & searchFieldName & "< @dateSearch2"
+            Else
+                arrayParameter = {searchParameterName, searchValue}
+                sql += searchFieldName & " = " & searchParameterName
+            End If
+            Return arrayParameter
         End Function
 
         Public Function ConvertToString(Of T1)(value As T1) As String

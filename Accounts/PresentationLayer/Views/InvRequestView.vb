@@ -17,6 +17,7 @@ Namespace PresentationLayer.Views
         Public Property InvTransactionDetails As List(Of InvTransactionDetailView) Implements IInvRequestView.InvTransactionDetails
         Public Event WarehouseIdNoChanged() Implements IInvRequestView.WarehouseIdNoChanged
         Public Event RowChanged(productIdNo As Integer) Implements IInvRequestView.RowChanged
+        Public Event FormLoaded() Implements IInvRequestView.FormLoaded
     End Class
 
     'Public Class InvRequestListView

@@ -1,6 +1,4 @@
 ﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries.CBaseControlsLibrary
-Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Forms
 
@@ -134,13 +132,8 @@ Namespace PresentationLayer.Views.Forms
             LockGroup = Not LockGroup
             If cboAppSettingGroupSelector.SelectedValue <> 0 Then
                 If Not LockGroup Then
-                    'LockGroup = True
-
-                    'cboAppSettingCodeSelector.Enabled = False
-                    'RaiseEvent LockGroupClicked()
                     cboAppSettingGroupSelector.EditingMode = True
                 Else
-                    'RaiseEvent LockGroupClicked()
                     SavedGroupIdNo = AppSettingGroupIdNo
                     cboAppSettingGroupSelector.EditingMode = False
                 End If
@@ -148,7 +141,6 @@ Namespace PresentationLayer.Views.Forms
                 cboAppSettingGroupSelector.EditingMode = True
             End If
             cboAppSettingGroupSelector.Refresh()
-            'RaiseEvent LockGroupClicked()
         End Sub
 
         Private Sub OnFormLoad() Handles MyBase.Load
@@ -160,10 +152,6 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent AppSettingGroupValueChanged(cboAppSettingGroupSelector)
         End Sub
 
-        'Protected Overrides Sub BeforeEdit()
-        '    cboAppSettingCodeSelector.Enabled = False
-        'End Sub
-
         Protected Overrides Sub AfterEdit()
             EnableSelector1Selection()
         End Sub
@@ -174,23 +162,16 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub EnableSelector1Selection()
             cboAppSettingGroupSelector.EditingMode = True
-            'cboAppSettingCodeSelector.DisplayOnly = False
         End Sub
 
         Protected Overrides Sub BeforeAdd()
             _groupIdNo = AppSettingGroupIdNo
             MyBase.BeforeAdd()
-            'Selector1 = _groupIdNo
         End Sub
 
         Protected Overrides Sub AfterAdd()
             MyBase.AfterAdd()
             AppSettingGroupIdNo = _groupIdNo
-            'If Selector1 <> 0 Then
-            '    cboAppSettingCodeSelector.EditingMode = True
-            'Else
-            '    cboAppSettingCodeSelector.EditingMode = False
-            'End If
         End Sub
 
         Private Sub AppSettingEntryTv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
@@ -198,14 +179,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub cboSelector1_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cboAppSettingGroupSelector.SelectionChangeCommitted
-            'If FormShown Then
             RaiseEvent AppSettingGroupValueChanged(sender)
             Refresh()
-            'DataFilter = "Selector1 = " & cboAppSettingGroupSelector.SelectedValue.ToString()
-            'AppSettingGroupIdNo = cboAppSettingGroupSelector.SelectedValue
-            'SavedGroupIdNo = AppSettingGroupIdNo
-            'RaiseEvent FilterRecords()
-            'End If
         End Sub
 
         Public Overloads Sub Inputs(onOff As Boolean)

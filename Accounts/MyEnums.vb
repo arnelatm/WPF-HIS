@@ -441,4 +441,8 @@ Public Enum DataTypeEnum
     [Boolean]
 End Enum
 
+Public Enum AppSettingGroupSelector
+    <EnumCode("1")> UserDefaultWarehouse
+    <EnumCode("2")> SecurityGroupDefaultBranch
+End Enum
 
