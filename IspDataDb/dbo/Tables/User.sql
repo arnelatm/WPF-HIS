@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [dbo].[User] (
-    [IdNo]              SMALLINT           IDENTITY (18, 1) NOT NULL,
-    [UserName]          VARCHAR (20)  NOT NULL,
+    [IdNo]              SMALLINT      IDENTITY (18, 1) NOT NULL,
+    [UserName]          VARCHAR (20)  COLLATE SQL_1xCompat_CP850_CI_AS NOT NULL,
+    [UserCode]          VARCHAR (10)  NULL,
     [Password]          VARCHAR (50)  NULL,
     [EmployeeIdNo]      INT           NULL,
     [SecurityGroupIDNo] SMALLINT      NULL,
@@ -12,6 +13,8 @@
     CONSTRAINT [PK_UserIDNo] PRIMARY KEY CLUSTERED ([IdNo] ASC),
     CONSTRAINT [FK_User_User] FOREIGN KEY ([IdNo]) REFERENCES [dbo].[User] ([IdNo])
 );
+
+
 
 
 
