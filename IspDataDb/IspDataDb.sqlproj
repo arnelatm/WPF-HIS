@@ -608,6 +608,7 @@
     <Build Include="dbo\User Defined Types\PurchaseOrderDetailUpdate.sql" />
     <Build Include="dbo\User Defined Types\PurchaseOrderDetailInsert.sql" />
     <Build Include="dbo\Views\PurchaseOrderDetail_View.sql" />
+    <Build Include="dbo\Views\InvTransactionRequest_View.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
