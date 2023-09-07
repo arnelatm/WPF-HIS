@@ -17,7 +17,7 @@ BEGIN
     -- Insert statements for procedure here
 	 /****** Script for SelectTopNRows command from SSMS  ******/
 	(SELECT [IdNo],[Sequence],[TransactionDate],[JournalItemIdNo],[JournalCode],[AccountReconciliationIdNo],[Debit],[DocumentNumber],[Credit],[Cleared],[AccountIdNo],[PayDescription],[PayDescriptionAra],[ReferenceNo],[JournalIdNo],[Reconciled],[Posted]
-     FROM [ISPDATA].[dbo].[AccountReconciliationItem_View] where [AccountReconciliationIdNo] = @reconciliationIdNo and cleared = 0
+     FROM [dbo].[AccountReconciliationItem_View] where [AccountReconciliationIdNo] = @reconciliationIdNo and cleared = 0
 	 )
 	  Union
 	(SELECT 0,0,'',0,'',@ReconciliationIdNo,0,'',0,0,0,'','','',0,0,0     
