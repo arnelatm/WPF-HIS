@@ -11,6 +11,7 @@ Namespace PresentationLayer.Views.Forms
         Private _invTransactionDetails As List(Of InvTransactionDetailView)
         Public Event WarehouseIdNoChanged() Implements IInvRequestView.WarehouseIdNoChanged
         Public Event RowChanged(productIdNo As Int32) Implements IInvRequestView.RowChanged
+        Public Event FormLoaded() Implements IInvRequestView.FormLoaded
         Public Property WarehouseList As DataTable Implements IInvRequestView.WarehouseList
         Public Property UserList As DataTable Implements IInvRequestView.UserList
         Public Property UnitList As DataTable Implements IInvRequestView.UnitList
@@ -125,8 +126,8 @@ Namespace PresentationLayer.Views.Forms
             lblRequestedItems.Text = Messaging.TranslateCaption("Requested Items for ") + dgvRow.Cells("dgvReferenceNo").Value
         End Sub
 
-        Private Sub DataGridViewInvTransItems_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewInvTransItems.CellContentClick
-
+        Private Sub InvRequestForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+            RaiseEvent FormLoaded()
         End Sub
     End Class
 

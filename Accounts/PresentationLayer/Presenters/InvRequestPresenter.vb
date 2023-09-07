@@ -25,6 +25,12 @@ Namespace PresentationLayer.Presenters
             _invRequestItemService = New AccountsService("InvTransactionDetail")
             AddHandler view.WarehouseIdNoChanged, AddressOf OnWarehouseIdNoChanged
             AddHandler view.RowChanged, AddressOf OnRowChanged
+            AddHandler view.FormLoaded, AddressOf OnEntryFormLoaded
+
+        End Sub
+
+        Private Sub OnEntryFormLoaded()
+            Throw New NotImplementedException()
         End Sub
 
         Private Sub OnRowChanged(productIdNo As Integer)

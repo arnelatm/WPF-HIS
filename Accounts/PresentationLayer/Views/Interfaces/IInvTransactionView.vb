@@ -60,6 +60,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property InvTransactionDetails As List(Of InvTransactionDetailView)
         Event WarehouseIdNoChanged()
         Event RowChanged(productIdNo As Integer)
+        Event FormLoaded()
     End Interface
 
     'Public Interface IInvRequestListView

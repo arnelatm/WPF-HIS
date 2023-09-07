@@ -37,6 +37,7 @@ Public Interface IBaseDao
     Function GetDataTable(tableName As String, Optional sortField As String = Nothing, Optional fieldsList As String = Nothing, Optional filter As String = Nothing) As DataTable
 
     Function GetField(Of TR, TS)(searchValue As TS, tableName As String, searchFieldName As String, returnFieldName As String, Optional filter As String = Nothing) As TR
+    Function GetField(Of TR, TS1, TS2)(searchValue1 As TS1, searchValue2 As TS2, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String, Optional filter As String = Nothing) As TR
 
     Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object
 
@@ -122,4 +123,5 @@ Public Interface IBaseDao
     Function GetDtRecords(tableName As String, fieldNames As String, filterKey As String, sortKey As String) As DataTable
     Function DeleteRecords(Of T)(keyFieldValue As T, tableName As String, keyFieldName As String) As Integer
     Function RunStoredProcedure(storedProcedureName As String, parameters As Object) As Object
+    Function GetField(Of TR, TS1, TS2, TS3)(searchValue1 As TS1, searchValue2 As TS2, searchValue3 As TS3, tableName As String, searchFieldName1 As String, searchFieldName2 As String, searchFieldName3 As String, returnFieldName As String, Optional filter As String = Nothing) As TR
 End Interface

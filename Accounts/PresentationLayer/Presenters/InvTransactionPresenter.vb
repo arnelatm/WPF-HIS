@@ -717,11 +717,20 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnInvTransactionTypeChanged(invTransType As Int16)
+            Dim appSettingGroupIdNo As Int16 = AppSettingGroupSelector.UserDefaultWarehouse + 1
             View.InventoryAction = Service.GetField(View.InvTransTypeIdNo, "InvTransType", "IdNo", "InventoryAction")
             If View.InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Or
                View.InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
                 View.WarehouseToIdNoEnabled = True
+                If AddMode Then
+                    Dim userIdNo As Int16 = GlobalVariables.UserIdNo
+                    View.WarehouseToIdNo = Service.GetField(Of Int16, Int16, Int16)(appSettingGroupIdNo, userIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "selector2IdNo")
+                End If
             Else
+                If AddMode Then
+                    Dim userIdNo As Int16 = GlobalVariables.UserIdNo
+                    View.WarehouseIdNo = Service.GetField(Of Int16, Int16, Int16)(appSettingGroupIdNo, userIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "selector2IdNo")
+                End If
                 View.WarehouseToIdNoEnabled = False
             End If
         End Sub
