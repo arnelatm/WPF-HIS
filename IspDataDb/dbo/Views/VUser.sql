@@ -1,6 +1,8 @@
-﻿CREATE VIEW dbo.VUser
+﻿
+
+CREATE VIEW [dbo].[VUser]
 AS
-SELECT        dbo.[User].UserName AS VUserName, dbo.[User].IdNo, dbo.[User].EmployeeIdNo, dbo.Employee.EmployeeCode AS VUserCode, dbo.Employee.EmployeeName AS VEmployeeName, 
+SELECT        dbo.[User].UserName  COLLATE SQL_Latin1_General_CP1_CI_AS AS VUserName, dbo.[User].IdNo, dbo.[User].EmployeeIdNo, dbo.Employee.EmployeeCode AS VUserCode, dbo.Employee.EmployeeName AS VEmployeeName, 
                          dbo.Employee.EmployeeNameAra AS VEmployeeNameAra
 FROM            dbo.[User] INNER JOIN
                          dbo.Employee ON dbo.[User].EmployeeIdNo = dbo.Employee.IdNo
