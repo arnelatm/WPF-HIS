@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[User] (
-    [IdNo]              INT           IDENTITY (18, 1) NOT NULL,
+    [IdNo]              SMALLINT           IDENTITY (18, 1) NOT NULL,
     [UserName]          VARCHAR (20)  NOT NULL,
     [Password]          VARCHAR (50)  NULL,
     [EmployeeIdNo]      INT           NULL,

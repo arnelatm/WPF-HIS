@@ -14,7 +14,7 @@ Namespace PresentationLayer.Models
         Public Property DateEnd As DateTime
         Public Property DateStart As DateTime
         Public Property IdNo As Int32
-        Public Property UserIdNo As Int32
+        Public Property UserIdNo As Int16
 
     End Class
 

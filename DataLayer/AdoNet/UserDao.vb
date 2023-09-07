@@ -49,7 +49,7 @@ Namespace AdoNet
 
         Private Shared ReadOnly Make As Func(Of IDataReader, User) = Function(reader) _
             New User() With {
-            .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
+            .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .UserName = Extensions.AsString(reader("UserName")),
             .EmployeeIdNo = Extensions.AsNullable(Of Int32?)(reader("EmployeeIdNo")),
             .Password = Extensions.AsString(reader("Password")),

@@ -23,7 +23,7 @@ Namespace BusinessLayer
         Public Property ExpiryDate As Date?
         Public Property IdNo As Int32
         Public Property IssueDate As Date?
-        Public Property UserIdNo As Int32
+        Public Property UserIdNo As Int16
         Public Property DateCreated As Date
         Public Property Picture As Image
 

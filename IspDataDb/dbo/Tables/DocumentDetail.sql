@@ -6,7 +6,7 @@
     [DocumentNumber] VARCHAR (30)    NULL,
     [IssueDate]      DATE            NULL,
     [ExpiryDate]     DATE            NULL,
-    [UserIdNo]       INT             NULL,
+    [UserIdNo]       SMALLINT        NULL,
     [Active]         BIT             NULL,
     [Picture]        VARBINARY (MAX) NULL,
     [DateCreated]    DATE            CONSTRAINT [DF_DocumentDetail_DatedCreated] DEFAULT (getdate()) NULL,

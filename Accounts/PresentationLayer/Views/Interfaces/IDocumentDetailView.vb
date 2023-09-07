@@ -15,7 +15,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property IdNo As Int32
         Property IssueDate As Date?
         Property DateCreated As Date
-        Property UserIdNo As Int32
+        Property UserIdNo As Int16
         Property UserName As String
         Property ContactIdControl As Control
         Property ContactIdDataName As String

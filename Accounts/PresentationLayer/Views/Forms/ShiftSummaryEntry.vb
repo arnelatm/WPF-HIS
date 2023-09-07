@@ -31,9 +31,9 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property UserIdNo As Int32 Implements IShiftSummaryView.UserIdNo
+        Public Property UserIdNo As Int16 Implements IShiftSummaryView.UserIdNo
             Get
-                Return cboUserIdNo.GetNullableValue(Of Int32)
+                Return cboUserIdNo.GetNullableValue(Of Int16)
             End Get
             Set
                 cboUserIdNo.SetValue(Value)
