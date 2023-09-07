@@ -45,7 +45,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Posted As Boolean
         Property ReferenceNo As String
         Property TransactionDate As Date?
-        Property UserIdNo As Int32
+        Property UserIdNo As Int16
         Property WarehouseIdNo As Int16
         Property WarehouseToIdNo As Int16?
     End Interface

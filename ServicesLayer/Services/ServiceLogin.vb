@@ -150,7 +150,7 @@ Namespace Services
             Return HashEncryptString(salt + s)
         End Function
 
-        Public Function SavePassword(userIdNo As Int32, password As String)
+        Public Function SavePassword(userIdNo As Int16, password As String)
             Dim retVal As Boolean
             Dim ePassword As String
             ePassword = EncryptPassword(userIdNo, password)

@@ -24,7 +24,7 @@ Namespace PresentationLayer.Models
         Public Property Posted As Boolean
         Public Property ReferenceNo As String
         Public Property TransactionDate As Date?
-        Public Property UserIdNo As Int32
+        Public Property UserIdNo As Int16
         Public Property WarehouseIdNo As Int16
         Public Property WarehouseToIdNo As Int16?
     End Class

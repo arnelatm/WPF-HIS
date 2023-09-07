@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[ShiftSummary] (
     [IdNo]          INT             IDENTITY (1, 1) NOT NULL,
-    [UserIdNo]      INT             NOT NULL,
+    [UserIdNo]      SMALLINT        NOT NULL,
     [DateStart]     DATETIME        NOT NULL,
     [DateEnd]       DATETIME        NOT NULL,
     [Cash]          DECIMAL (10, 2) NULL,

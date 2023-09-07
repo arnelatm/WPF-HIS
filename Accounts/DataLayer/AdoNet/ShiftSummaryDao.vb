@@ -67,7 +67,7 @@ Namespace DataLayer.AdoNet
             .DateEnd = Extensions.AsDateTime(reader("DateEnd")),
             .DateStart = Extensions.AsDateTime(reader("DateStart")),
             .IdNo = Extensions.AsId(Of Int32)(reader("IdNo")),
-            .UserIdNo = Extensions.AsInt(Of Int32)(reader("UserIdNo"))
+            .UserIdNo = Extensions.AsInt(Of Int16)(reader("UserIdNo"))
             }
 
         Public Sub New()

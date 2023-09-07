@@ -31,7 +31,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property ControlDataSource As Object
 
-        Public Property UserIdNo As Int32 Implements IDocumentDetailView.UserIdNo
+        Public Property UserIdNo As Int16 Implements IDocumentDetailView.UserIdNo
             Get
                 Return txtUserIdNo.Text
             End Get
