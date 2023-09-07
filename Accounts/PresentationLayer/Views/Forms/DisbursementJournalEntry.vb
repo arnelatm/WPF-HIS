@@ -837,12 +837,9 @@ Namespace PresentationLayer.Views.Forms
             cboPayeeIdNo.EditingMode = False
             SetPayeeDataSource(PaymentType)
             cboPayeeIdNo.Refresh()
-
         End Sub
 
-        Private Sub cboPayeeIdNo_DisplayMemberChanged(sender As Object, e As EventArgs) Handles cboPayeeIdNo.DisplayMemberChanged
-            Debugger.Break()
-        End Sub
+
     End Class
 
 End Namespace
