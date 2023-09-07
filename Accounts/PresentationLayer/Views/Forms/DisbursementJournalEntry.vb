@@ -272,7 +272,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PaymentType As String Implements IDisbursementJournalView.PaymentType
             Get
-                Return cboPaymentType.GetValue()
+                Return cboPaymentType.GetValue(Of String)
             End Get
             Set
                 cboPaymentType.SetValue(Value)
@@ -808,12 +808,14 @@ Namespace PresentationLayer.Views.Forms
                 If paymentTypeEnum = PaymentTypeSelection.Supplier Then
                     cbDataSource = _SuppliersByName
                 ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
-                    cbDataSource = _EmployeesByName
+                    'cbDataSource = _EmployeesByName
+                    cbDataSource = Presenter.GetLookup("Employee")
                 ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
                     cbDataSource = _CustomersByName
                 End If
             End If
             cboPayeeIdNo.DataSource = cbDataSource
+
             If curValue IsNot Nothing Then
                 cboPayeeIdNo.SelectedValue = curValue
             Else
@@ -831,10 +833,16 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub DataGridViewJournalItems_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewJournalItems.CellContentClick
+        Private Sub DisbursementJournalEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+            cboPayeeIdNo.EditingMode = False
+            SetPayeeDataSource(PaymentType)
+            cboPayeeIdNo.Refresh()
 
         End Sub
 
+        Private Sub cboPayeeIdNo_DisplayMemberChanged(sender As Object, e As EventArgs) Handles cboPayeeIdNo.DisplayMemberChanged
+            Debugger.Break()
+        End Sub
     End Class
 
 End Namespace

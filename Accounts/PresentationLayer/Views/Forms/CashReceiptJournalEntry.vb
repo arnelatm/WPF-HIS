@@ -771,6 +771,9 @@ Namespace PresentationLayer.Views.Forms
             UpdateOiTotals()
         End Sub
 
+        Private Sub CashReceiptJournalEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+            SetPayorDataSource(PayorType)
+        End Sub
     End Class
 
 End Namespace
