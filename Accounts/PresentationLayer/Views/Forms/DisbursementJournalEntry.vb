@@ -800,7 +800,7 @@ Namespace PresentationLayer.Views.Forms
         Public Sub SetPayeeDataSource(ByVal cPaymentType As String)
             Dim cbDataSource = Nothing
             Dim curValue As Int32? = cboPayeeIdNo.SelectedValue
-            cboPayeeIdNo.DataSource = cbDataSource
+            'cboPayeeIdNo.DataSource = cbDataSource
             If OpenInvoiceMode Then
                 cbDataSource = _SuppliersByName
             Else
