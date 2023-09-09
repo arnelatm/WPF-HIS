@@ -53,7 +53,7 @@ Namespace PresentationLayer.Views.Interfaces
         Event FirstLineUpdateNeeded()
 
         Event SetSupplierVatNumber(ByRef currentVatNumber As String, idNo As String, override As Boolean)
-        Event PaymentTypeChanged()
+        Event PaymentTypeChanged(paymentType As String)
 
     End Interface
 

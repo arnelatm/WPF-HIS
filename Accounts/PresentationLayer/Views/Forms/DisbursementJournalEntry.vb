@@ -35,7 +35,7 @@ Namespace PresentationLayer.Views.Forms
         Public Event FirstLineUpdateNeeded() Implements IDisbursementJournalView.FirstLineUpdateNeeded
 
         Public Event SetSupplierVatNumber(ByRef currentVatNumber As String, ByVal idNo As String, ByVal override As Boolean) Implements IDisbursementJournalView.SetSupplierVatNumber
-        Public Event PaymentTypeChanged() Implements IDisbursementJournalView.PaymentTypeChanged
+        Public Event PaymentTypeChanged(paymentType As String) Implements IDisbursementJournalView.PaymentTypeChanged
 
         Public Sub New(ByVal tableName As String)
             MyBase.New()
@@ -318,8 +318,11 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As Object)
                 _payeeDataSource = value
-                cboPayeeIdNo.DataSource = value
+                cboPayeeIdNo.DataSource = PayeeDataSource
+                cboPayeeIdNo.ValueMember = "IdNo"
+                cboPayeeIdNo.DisplayMember = "Name"
                 cboPayeeIdNo.DropDownStyle = ComboBoxStyle.DropDownList
+                cboPayeeIdNo.Refresh()
             End Set
         End Property
 
@@ -564,7 +567,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub CboPaymentType_ValueChanged(sender As Object, e As EventArgs) Handles cboPaymentType.Validated, cboPaymentType.SelectionChangeCommitted
-            SetPayeeDataSource(PaymentType)
+            RaiseEvent PaymentTypeChanged(PaymentType)
+            ' SetPayeeDataSource(PaymentType)
             If OpenInvoiceMode Then
                 UpdateOpenInvoicesDisplay()
                 If cboPayeeIdNo.SelectedIndex = -1 Then
@@ -812,34 +816,34 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Public Sub SetPayeeDataSource(ByVal cPaymentType As String)
-            Dim cbDataSource = Nothing
-            Dim curValue As Int32? = cboPayeeIdNo.SelectedValue
-            cboPayeeIdNo.DataSource = cbDataSource
-            If OpenInvoiceMode Then
-                cbDataSource = _SuppliersByName
-            Else
-                Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cPaymentType)
-                If paymentTypeEnum = PaymentTypeSelection.Supplier Then
-                    cbDataSource = _SuppliersByName
-                ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
-                    'cbDataSource = _EmployeesByName
-                    cbDataSource = Presenter.GetLookup("Employee")
-                ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
-                    cbDataSource = _CustomersByName
-                End If
-            End If
-            cboPayeeIdNo.ValueMember = "IdNo"
-            cboPayeeIdNo.DisplayMember = "Name"
-            cboPayeeIdNo.DataSource = cbDataSource
-            cboPayeeIdNo.SetValue(curValue)
-            'If curValue IsNot Nothing Then
-            '    cboPayeeIdNo.SelectedIndex = cboPayeeIdNo.SetValue(curValue)
-            'Else
-            '    cboPayeeIdNo.SelectedIndex = -1
-            'End If
-            cboPaymentType.SelectedValue = IIf(PaymentType = Nothing, 0, PaymentType)
-        End Sub
+        'Public Sub SetPayeeDataSource(ByVal cPaymentType As String)
+        '    Dim cbDataSource = Nothing
+        '    Dim curValue As Int32? = cboPayeeIdNo.SelectedValue
+        '    cboPayeeIdNo.DataSource = cbDataSource
+        '    If OpenInvoiceMode Then
+        '        cbDataSource = _SuppliersByName
+        '    Else
+        '        Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(cPaymentType)
+        '        If paymentTypeEnum = PaymentTypeSelection.Supplier Then
+        '            cbDataSource = _SuppliersByName
+        '        ElseIf paymentTypeEnum = PaymentTypeSelection.Employee Then
+        '            'cbDataSource = _EmployeesByName
+        '            cbDataSource = Presenter.GetLookup("Employee")
+        '        ElseIf paymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
+        '            cbDataSource = _CustomersByName
+        '        End If
+        '    End If
+        '    cboPayeeIdNo.ValueMember = "IdNo"
+        '    cboPayeeIdNo.DisplayMember = "Name"
+        '    cboPayeeIdNo.DataSource = cbDataSource
+        '    cboPayeeIdNo.SetValue(curValue)
+        '    'If curValue IsNot Nothing Then
+        '    '    cboPayeeIdNo.SelectedIndex = cboPayeeIdNo.SetValue(curValue)
+        '    'Else
+        '    '    cboPayeeIdNo.SelectedIndex = -1
+        '    'End If
+        '    cboPaymentType.SelectedValue = IIf(PaymentType = Nothing, 0, PaymentType)
+        'End Sub
 
         Private Sub UpdateFirstLine()
             RaiseEvent FirstLineUpdateNeeded()
@@ -850,16 +854,6 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub DisbursementJournalEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-            cboPayeeIdNo.EditingMode = False
-            SetPayeeDataSource(PaymentType)
-            cboPayeeIdNo.Refresh()
-        End Sub
-
-
-        Private Sub cboPayeeIdNo_ValueMemberChanged(sender As Object, e As EventArgs) Handles cboPayeeIdNo.ValueMemberChanged
-            Debugger.Break()
-        End Sub
     End Class
 
 End Namespace
