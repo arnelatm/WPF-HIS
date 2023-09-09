@@ -562,6 +562,7 @@ Public Class CaComboBox
             For Each item In DataSource
                 If item.Code = value Then
                     SelectedItem = DataSource(i)
+                    SelectedIndex = i
                     found = True
                     Exit For
                 End If

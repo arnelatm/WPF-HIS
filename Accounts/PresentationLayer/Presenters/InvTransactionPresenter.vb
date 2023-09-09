@@ -8,6 +8,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common
 Imports AATM.Common.PresentationLayer.Presenters
+Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
@@ -710,10 +711,13 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
+            Dim appSettingGroupIdNo As Int16 = AppSettingGroupSelector.UserDefaultWarehouse + 1
+            Dim userIdNo As Int16 = GlobalVariables.UserIdNo
             View.TransactionDate = Date.Now()
             View.UserIdNo = GlobalVariables.UserIdNo
             Dim wareHouse = Service.GetTopOneFields("Warehouse", "IdNo", "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString(), "IdNo", True)
-            View.WarehouseIdNo = wareHouse.IdNo
+            View.DefaultUserWarehouseIdNo = Service.GetField(Of Int16, Int16, Int16)(appSettingGroupIdNo, userIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "selector2IdNo")
+            View.WarehouseIdNo = View.DefaultUserWarehouseIdNo
         End Sub
 
         Private Sub OnInvTransactionTypeChanged(invTransType As Int16)
@@ -724,12 +728,12 @@ Namespace PresentationLayer.Presenters
                 View.WarehouseToIdNoEnabled = True
                 If AddMode Then
                     Dim userIdNo As Int16 = GlobalVariables.UserIdNo
-                    View.WarehouseToIdNo = Service.GetField(Of Int16, Int16, Int16)(appSettingGroupIdNo, userIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "selector2IdNo")
+                    View.WarehouseToIdNo = View.DefaultUserWarehouseIdNo
                 End If
             Else
                 If AddMode Then
                     Dim userIdNo As Int16 = GlobalVariables.UserIdNo
-                    View.WarehouseIdNo = Service.GetField(Of Int16, Int16, Int16)(appSettingGroupIdNo, userIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "selector2IdNo")
+                    View.WarehouseIdNo = View.DefaultUserWarehouseIdNo
                 End If
                 View.WarehouseToIdNoEnabled = False
             End If

@@ -97,6 +97,10 @@ Namespace PresentationLayer.Presenters
             AddHandler view.FirstLineUpdateNeeded, AddressOf OnFirstLineUpdateNeeded
             AddHandler view.SetSupplierVatNumber, AddressOf SetSupplierVatNumber
             AddHandler view.PaymentTypeChanged, AddressOf MakePayeeIdNoDataSource
+            ' needed the next line for the payeeidno to be displayed
+            ' don't know why but without this the EmployeeNames if "E" won't display in the
+            ' cboPayeeIdNo control, leave this until you find a fix.
+            MakePayeeIdNoDataSource("E")
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -1044,13 +1048,17 @@ Namespace PresentationLayer.Presenters
             Return payee
         End Function
 
-        Private Sub OnBeforeMappingData(ByVal dataModel As Object) Handles MyBase.BeforeMappingData
-            ' need to do this because the Mapping source part of this program maps the PayeeIdNo first before
-            ' the DepositType so in order to override this part we need to retrieve the DepositType first
-            ' because when assigning the cboPayeeIdNo the dataSource must be correct that is why
-            ' we need to set the DataSource part of the cboPayeeIdNo before we can assign the PayeeIdNo
-            MakePayeeIdNoDataSource(dataModel.PaymentType)
-        End Sub
+        'Private Sub OnBeforeMappingData(ByVal dataModel As Object) Handles MyBase.BeforeMappingData
+        '    ' need to do this because the Mapping source part of this program maps the PayeeIdNo first before
+        '    ' the DepositType so in order to override this part we need to retrieve the DepositType first
+        '    ' because when assigning the cboPayeeIdNo the dataSource must be correct that is why
+        '    ' we need to set the DataSource part of the cboPayeeIdNo before we can assign the PayeeIdNo
+        '    Dim data As DisbursementJournalModel
+        '    data = dataModel
+        '    View.PaymentType = data.PaymentType
+        '    MakePayeeIdNoDataSource(dataModel.PaymentType)
+        '    View.PayeeIdNo = data.PayeeIdNo
+        'End Sub
 
         Private Sub MakePayeeIdNoDataSource(paymentType As String)
             Dim x As PaymentTypeSelection = CodeToEnum(Of PaymentTypeSelection)(paymentType)

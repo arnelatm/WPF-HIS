@@ -1,4 +1,5 @@
 ﻿Imports System.Globalization
+Imports System.Windows.Controls
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
@@ -254,11 +255,14 @@ Namespace PresentationLayer.Views.Forms
                 Return cboPayeeIdNo.GetValue(Of Int32)
             End Get
             Set
-                If cboPayeeIdNo.DataSource IsNot Nothing Then
-                    cboPayeeIdNo.SetValue(Value)
-                Else
-                    cboPayeeIdNo.SelectedValue = Nothing
-                End If
+                cboPayeeIdNo.SetValue(Value)
+                ShowPayee()
+
+                'If cboPayeeIdNo.DataSource IsNot Nothing Then
+                '    cboPayeeIdNo.SetValue(Value)
+                'Else
+                '    cboPayeeIdNo.SelectedValue = Nothing
+                'End If
             End Set
         End Property
 
@@ -317,12 +321,18 @@ Namespace PresentationLayer.Views.Forms
                 Return _payeeDataSource
             End Get
             Set(value As Object)
+                Dim x As Int32 = PayeeIdNo
                 _payeeDataSource = value
-                cboPayeeIdNo.DataSource = PayeeDataSource
                 cboPayeeIdNo.ValueMember = "IdNo"
                 cboPayeeIdNo.DisplayMember = "Name"
+                cboPayeeIdNo.DataSource = value
+                cboPayeeIdNo.SetValue(PayeeIdNo)
                 cboPayeeIdNo.DropDownStyle = ComboBoxStyle.DropDownList
+                cboPayeeIdNo.BackColor = cboPaymentType.BackColor
+                cboPayeeIdNo.MaxDropDownItems = 8
+                cboPayeeIdNo.DropDownHeight = 106
                 cboPayeeIdNo.Refresh()
+
             End Set
         End Property
 
@@ -566,7 +576,7 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        Private Sub CboPaymentType_ValueChanged(sender As Object, e As EventArgs) Handles cboPaymentType.Validated, cboPaymentType.SelectionChangeCommitted
+        Private Sub CboPaymentType_ValueChanged(sender As Object, e As EventArgs) Handles cboPaymentType.Validated, cboPaymentType.SelectedIndexChanged
             RaiseEvent PaymentTypeChanged(PaymentType)
             ' SetPayeeDataSource(PaymentType)
             If OpenInvoiceMode Then
@@ -758,6 +768,7 @@ Namespace PresentationLayer.Views.Forms
             Else
                 cboPayeeIdNo.Visible = True
                 txtPayeeName.Visible = False
+                txtPayeeName.Text = cboPayeeIdNo.Text
                 tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(6, 9))
                 tlpDisbursement.SetCellPosition(cboPayeeIdNo, New TableLayoutPanelCellPosition(1, 2))
                 tlpDisbursement.SetColumnSpan(txtPayeeName, 3)
@@ -854,6 +865,11 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private Sub txtJournalCode_TextChanged(sender As Object, e As EventArgs) Handles txtJournalCode.DoubleClick
+            Debugger.Break()
+            cboAccountIdNo.MaxDropDownItems = 8
+            cboAccountIdNo.EditingMode = True
+        End Sub
     End Class
 
 End Namespace

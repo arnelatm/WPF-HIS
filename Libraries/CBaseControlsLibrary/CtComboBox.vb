@@ -485,7 +485,11 @@ Public Class CtComboBox
         If value Is DBNull.Value OrElse value Is Nothing Then
             SelectedIndex = -1
         Else
-            ValueSearch(value)
+            If value > 0 Then
+                ValueSearch(value)
+            Else
+                SelectedIndex = -1
+            End If
         End If
     End Sub
 

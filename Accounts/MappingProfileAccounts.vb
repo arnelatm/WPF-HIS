@@ -166,6 +166,8 @@ Public Class MappingProfileAccounts
         CreateMap(Of Lab_InvoiceDetailsModel, Lab_InvoiceDetailsView)().ReverseMap()
         CreateMap(Of Document, DocumentModel)().ReverseMap()
         CreateMap(Of DocumentModel, IDocumentView)().ReverseMap()
+        CreateMap(Of AppSetting, AppSettingModel)().ReverseMap()
+        CreateMap(Of AppSettingModel, IAppSettingView)().ReverseMap()
 
         CreateMap(Of IEmployeeDocumentView, EmployeeDocumentModel)()
         CreateMap(Of EmployeeDocument, EmployeeDocumentModel)().ReverseMap()
@@ -247,16 +249,13 @@ Public Class MappingProfileAccounts
         CreateMap(Of Duration, DurationModel)().ReverseMap()
         CreateMap(Of DurationModel, IDurationView)().ReverseMap()
 
-        CreateMap(Of AppSetting, AppSettingModel)().ReverseMap()
-        CreateMap(Of AppSettingModel, IAppSettingView)().ReverseMap()
-
         CreateMap(Of InvTransType, InvTransTypeModel)().ReverseMap()
         CreateMap(Of InvTransTypeModel, IInvTransTypeView)().ReverseMap()
-
 
         CreateMap(Of InvTransaction, InvTransactionModel)().ReverseMap()
         CreateMap(Of InvTransactionModel, IInvTransactionView)().ReverseMap()
         CreateMap(Of InvTransactionModel, IInvTransactionBaseView)().ReverseMap()
+        CreateMap(Of InvTransactionModel, IInvRequestView)().ReverseMap()
 
         'CreateMap(Of InvTransactionModel, InvRequestListView)().ReverseMap()
 
