@@ -39,7 +39,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property CustomersByName
         Property RevCostCentersByCode
         Property BankTransfer As Boolean
-
+        Property PayeeDataSource As Object
         Event PrintCheck()
 
         Event AutoApplyAmount(bsDjOiItem As BindingSource)
@@ -53,6 +53,7 @@ Namespace PresentationLayer.Views.Interfaces
         Event FirstLineUpdateNeeded()
 
         Event SetSupplierVatNumber(ByRef currentVatNumber As String, idNo As String, override As Boolean)
+        Event PaymentTypeChanged()
 
     End Interface
 
