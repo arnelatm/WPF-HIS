@@ -216,6 +216,8 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
+        Public Property DefaultUserWarehouseIdNo As Short Implements IInvTransactionView.DefaultUserWarehouseIdNo
+
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
         {

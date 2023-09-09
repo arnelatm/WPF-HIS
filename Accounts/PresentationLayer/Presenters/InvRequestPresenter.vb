@@ -30,7 +30,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnEntryFormLoaded()
-            Throw New NotImplementedException()
+            'Throw New NotImplementedException()
         End Sub
 
         Private Sub OnRowChanged(productIdNo As Integer)

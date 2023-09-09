@@ -106,12 +106,15 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property AppSettingGroupIdNo As Short Implements IAppSettingView.AppSettingGroupIdNo
             Get
-                Return txtAppSettingGroupIdNo.Text
+                Return txtAppSettingGroupIdNo.GetValue(Of Short)
             End Get
             Set(value As Short)
                 txtAppSettingGroupIdNo.Text = value
             End Set
         End Property
+
+        Public Property SettingValue As String Implements IAppSettingView.SettingValue
+
 
 
 #End Region

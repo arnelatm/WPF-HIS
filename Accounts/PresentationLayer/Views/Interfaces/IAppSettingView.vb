@@ -8,6 +8,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property AppSettingGroupIdNo As Int16
         Property Selector1IdNo As Int32
         Property Selector2IdNo As Int32
+        Property SettingValue As String
         Property LockGroup As Boolean
         Property SavedGroupIdNo As Int16
         Property AppSettingGroupSelector As Int16

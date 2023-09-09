@@ -21,6 +21,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property ProductInInventory As Boolean
         Property ValidationErrorText As String
         Property InventoryManager As Boolean
+        Property DefaultUserWarehouseIdNo As Int16
         Event ProductUnitEditing(productIdNo As Int32) ', bs As BindingSource)
         Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource)
         Event ProductCodeChanged(productCode As String, bs As BindingSource)
