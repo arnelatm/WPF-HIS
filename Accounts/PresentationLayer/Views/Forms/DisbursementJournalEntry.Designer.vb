@@ -23,7 +23,7 @@ Namespace PresentationLayer.Views.Forms
         'Do not modify it using the code editor.
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
+            Me.components = New System.ComponentModel.Container()
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim EventAggregator1 As AATM.Libraries.EventAggregator = New AATM.Libraries.EventAggregator()
@@ -207,9 +207,10 @@ Namespace PresentationLayer.Views.Forms
             Me.tlpDisbursement.Controls.Add(Me.lblCheckDate, 7, 5)
             Me.tlpDisbursement.Controls.Add(Me.chkApproved, 8, 6)
             Me.tlpDisbursement.Controls.Add(Me.chkCancelled, 11, 6)
-            Me.tlpDisbursement.Location = New System.Drawing.Point(0, 53)
+            Me.tlpDisbursement.Location = New System.Drawing.Point(0, 65)
+            Me.tlpDisbursement.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.tlpDisbursement.Name = "tlpDisbursement"
-            Me.tlpDisbursement.Padding = New System.Windows.Forms.Padding(10)
+            Me.tlpDisbursement.Padding = New System.Windows.Forms.Padding(13, 12, 13, 12)
             Me.tlpDisbursement.RowCount = 11
             Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -223,7 +224,7 @@ Namespace PresentationLayer.Views.Forms
             Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.tlpDisbursement.Size = New System.Drawing.Size(1020, 1004)
+            Me.tlpDisbursement.Size = New System.Drawing.Size(1360, 1236)
             Me.tlpDisbursement.TabIndex = 5
             '
             'chkPcClosed
@@ -242,11 +243,12 @@ Namespace PresentationLayer.Views.Forms
             Me.chkPcClosed.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.chkPcClosed.IgnoreCase = False
             Me.chkPcClosed.LinkedLabel = Nothing
-            Me.chkPcClosed.Location = New System.Drawing.Point(860, 176)
+            Me.chkPcClosed.Location = New System.Drawing.Point(1144, 216)
+            Me.chkPcClosed.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
             Me.chkPcClosed.Name = "chkPcClosed"
             Me.chkPcClosed.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.chkPcClosed.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkPcClosed.Size = New System.Drawing.Size(67, 21)
+            Me.chkPcClosed.Size = New System.Drawing.Size(89, 26)
             Me.chkPcClosed.TabIndex = 300
             Me.chkPcClosed.Text = "Closed?"
             Me.chkPcClosed.Translatable = True
@@ -267,11 +269,12 @@ Namespace PresentationLayer.Views.Forms
             Me.chkPosted.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.chkPosted.IgnoreCase = False
             Me.chkPosted.LinkedLabel = Nothing
-            Me.chkPosted.Location = New System.Drawing.Point(775, 176)
+            Me.chkPosted.Location = New System.Drawing.Point(1029, 216)
+            Me.chkPosted.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
             Me.chkPosted.Name = "chkPosted"
             Me.chkPosted.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.chkPosted.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkPosted.Size = New System.Drawing.Size(79, 21)
+            Me.chkPosted.Size = New System.Drawing.Size(105, 26)
             Me.chkPosted.TabIndex = 299
             Me.chkPosted.Text = "Posted?"
             Me.chkPosted.Translatable = True
@@ -287,7 +290,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayType.DataValue = Nothing
             Me.cboPayType.DefaultValue = "0"
             Me.cboPayType.DisplayMember = "Name"
-            Me.cboPayType.DropDownHeight = 21
+            Me.cboPayType.DropDownHeight = 24
             Me.cboPayType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboPayType.Editable = True
             Me.cboPayType.EditingMode = False
@@ -304,7 +307,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayType.IntegralHeight = False
             Me.cboPayType.LimitToList = False
             Me.cboPayType.LinkedLabel = Me.lblPaymentType
-            Me.cboPayType.Location = New System.Drawing.Point(550, 38)
+            Me.cboPayType.Location = New System.Drawing.Point(730, 46)
             Me.cboPayType.Margin = New System.Windows.Forms.Padding(1)
             Me.cboPayType.MaxDropDownItems = 1
             Me.cboPayType.Name = "cboPayType"
@@ -315,7 +318,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayType.PreviousSearchTerm = Nothing
             Me.cboPayType.PropertySelector = Nothing
             Me.cboPayType.ReadOnlyCombo = False
-            Me.cboPayType.Size = New System.Drawing.Size(215, 24)
+            Me.cboPayType.Size = New System.Drawing.Size(285, 29)
             Me.cboPayType.SuggestBoxHeight = 200
             Me.cboPayType.SuggestListOrderRule = Nothing
             Me.cboPayType.TabIndex = 5
@@ -332,10 +335,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPaymentType.EditingMode = False
             Me.lblPaymentType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblPaymentType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPaymentType.Location = New System.Drawing.Point(11, 38)
+            Me.lblPaymentType.Location = New System.Drawing.Point(14, 46)
             Me.lblPaymentType.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPaymentType.Name = "lblPaymentType"
-            Me.lblPaymentType.Size = New System.Drawing.Size(115, 23)
+            Me.lblPaymentType.Size = New System.Drawing.Size(153, 28)
             Me.lblPaymentType.TabIndex = 257
             Me.lblPaymentType.Text = "Payee Type:"
             Me.lblPaymentType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -347,10 +350,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayType.EditingMode = False
             Me.lblPayType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblPayType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblPayType.Location = New System.Drawing.Point(459, 38)
+            Me.lblPayType.Location = New System.Drawing.Point(608, 46)
             Me.lblPayType.Margin = New System.Windows.Forms.Padding(1)
             Me.lblPayType.Name = "lblPayType"
-            Me.lblPayType.Size = New System.Drawing.Size(89, 25)
+            Me.lblPayType.Size = New System.Drawing.Size(119, 31)
             Me.lblPayType.TabIndex = 292
             Me.lblPayType.Text = "Pay Type:"
             Me.lblPayType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -392,16 +395,18 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.FirstRowInsertionEnabled = False
             Me.DataGridViewJournalItems.IgnoreCase = False
             Me.DataGridViewJournalItems.IsDirty = False
-            Me.DataGridViewJournalItems.Location = New System.Drawing.Point(13, 203)
+            Me.DataGridViewJournalItems.Location = New System.Drawing.Point(17, 251)
+            Me.DataGridViewJournalItems.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
             Me.DataGridViewJournalItems.ReadOnly = True
+            Me.DataGridViewJournalItems.RowHeadersWidth = 51
             Me.DataGridViewJournalItems.Searchable = True
             Me.DataGridViewJournalItems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewJournalItems.SecurityKey = ""
             Me.DataGridViewJournalItems.SequenceColumn = "dgvSequence"
             Me.DataGridViewJournalItems.SequenceFieldName = "Sequence"
             Me.DataGridViewJournalItems.ShowFooter = False
-            Me.DataGridViewJournalItems.Size = New System.Drawing.Size(996, 340)
+            Me.DataGridViewJournalItems.Size = New System.Drawing.Size(1328, 418)
             Me.DataGridViewJournalItems.TabIndex = 15
             Me.DataGridViewJournalItems.Translatable = True
             '
@@ -422,6 +427,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvSequence.Frozen = True
             Me.dgvSequence.HeaderText = "Seq"
             Me.dgvSequence.IgnoreCase = False
+            Me.dgvSequence.MinimumWidth = 6
             Me.dgvSequence.Name = "dgvSequence"
             Me.dgvSequence.ReadOnly = True
             Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
@@ -541,49 +547,61 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.DiscountTakenDataGridViewTextBoxColumn.DataPropertyName = "DiscountTaken"
             Me.DiscountTakenDataGridViewTextBoxColumn.HeaderText = "DiscountTaken"
+            Me.DiscountTakenDataGridViewTextBoxColumn.MinimumWidth = 6
             Me.DiscountTakenDataGridViewTextBoxColumn.Name = "DiscountTakenDataGridViewTextBoxColumn"
             Me.DiscountTakenDataGridViewTextBoxColumn.ReadOnly = True
             Me.DiscountTakenDataGridViewTextBoxColumn.Visible = False
+            Me.DiscountTakenDataGridViewTextBoxColumn.Width = 125
             '
             'IdNoDataGridViewTextBoxColumn
             '
             Me.IdNoDataGridViewTextBoxColumn.DataPropertyName = "IdNo"
             Me.IdNoDataGridViewTextBoxColumn.HeaderText = "IdNo"
+            Me.IdNoDataGridViewTextBoxColumn.MinimumWidth = 6
             Me.IdNoDataGridViewTextBoxColumn.Name = "IdNoDataGridViewTextBoxColumn"
             Me.IdNoDataGridViewTextBoxColumn.ReadOnly = True
             Me.IdNoDataGridViewTextBoxColumn.Visible = False
+            Me.IdNoDataGridViewTextBoxColumn.Width = 125
             '
             'JournalIdNoDataGridViewTextBoxColumn
             '
             Me.JournalIdNoDataGridViewTextBoxColumn.DataPropertyName = "JournalIdNo"
             Me.JournalIdNoDataGridViewTextBoxColumn.HeaderText = "JournalIdNo"
+            Me.JournalIdNoDataGridViewTextBoxColumn.MinimumWidth = 6
             Me.JournalIdNoDataGridViewTextBoxColumn.Name = "JournalIdNoDataGridViewTextBoxColumn"
             Me.JournalIdNoDataGridViewTextBoxColumn.ReadOnly = True
             Me.JournalIdNoDataGridViewTextBoxColumn.Visible = False
+            Me.JournalIdNoDataGridViewTextBoxColumn.Width = 125
             '
             'OpenInvoiceIdNoDataGridViewTextBoxColumn
             '
             Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.DataPropertyName = "OpenInvoiceIdNo"
             Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.HeaderText = "OpenInvoiceIdNo"
+            Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.MinimumWidth = 6
             Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.Name = "OpenInvoiceIdNoDataGridViewTextBoxColumn"
             Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.ReadOnly = True
             Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.Visible = False
+            Me.OpenInvoiceIdNoDataGridViewTextBoxColumn.Width = 125
             '
             'OriginalAmountDataGridViewTextBoxColumn
             '
             Me.OriginalAmountDataGridViewTextBoxColumn.DataPropertyName = "OriginalAmount"
             Me.OriginalAmountDataGridViewTextBoxColumn.HeaderText = "OriginalAmount"
+            Me.OriginalAmountDataGridViewTextBoxColumn.MinimumWidth = 6
             Me.OriginalAmountDataGridViewTextBoxColumn.Name = "OriginalAmountDataGridViewTextBoxColumn"
             Me.OriginalAmountDataGridViewTextBoxColumn.ReadOnly = True
             Me.OriginalAmountDataGridViewTextBoxColumn.Visible = False
+            Me.OriginalAmountDataGridViewTextBoxColumn.Width = 125
             '
             'PaidAmountDataGridViewTextBoxColumn
             '
             Me.PaidAmountDataGridViewTextBoxColumn.DataPropertyName = "PaidAmount"
             Me.PaidAmountDataGridViewTextBoxColumn.HeaderText = "PaidAmount"
+            Me.PaidAmountDataGridViewTextBoxColumn.MinimumWidth = 6
             Me.PaidAmountDataGridViewTextBoxColumn.Name = "PaidAmountDataGridViewTextBoxColumn"
             Me.PaidAmountDataGridViewTextBoxColumn.ReadOnly = True
             Me.PaidAmountDataGridViewTextBoxColumn.Visible = False
+            Me.PaidAmountDataGridViewTextBoxColumn.Width = 125
             '
             'dgvVatAmount
             '
@@ -601,19 +619,23 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvVatAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.dgvVatAmount.FindEnabled = False
             Me.dgvVatAmount.HeaderText = "Vat Amount"
+            Me.dgvVatAmount.MinimumWidth = 6
             Me.dgvVatAmount.Name = "dgvVatAmount"
             Me.dgvVatAmount.ReadOnly = True
             Me.dgvVatAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvVatAmount.Translatable = False
             Me.dgvVatAmount.Visible = False
+            Me.dgvVatAmount.Width = 125
             '
             'dgvPayeeType
             '
             Me.dgvPayeeType.DataPropertyName = "PayeeType"
             Me.dgvPayeeType.HeaderText = "PayeeType"
+            Me.dgvPayeeType.MinimumWidth = 6
             Me.dgvPayeeType.Name = "dgvPayeeType"
             Me.dgvPayeeType.ReadOnly = True
             Me.dgvPayeeType.Visible = False
+            Me.dgvPayeeType.Width = 125
             '
             'dgvSpecialAccount
             '
@@ -630,28 +652,34 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvSpecialAccount.FindEnabled = False
             Me.dgvSpecialAccount.HeaderText = "SpecialAccount"
             Me.dgvSpecialAccount.IgnoreCase = False
+            Me.dgvSpecialAccount.MinimumWidth = 6
             Me.dgvSpecialAccount.Name = "dgvSpecialAccount"
             Me.dgvSpecialAccount.ReadOnly = True
             Me.dgvSpecialAccount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvSpecialAccount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvSpecialAccount.Translatable = False
             Me.dgvSpecialAccount.Visible = False
+            Me.dgvSpecialAccount.Width = 125
             '
             'AccountNameDataGridViewTextBoxColumn
             '
             Me.AccountNameDataGridViewTextBoxColumn.DataPropertyName = "AccountName"
             Me.AccountNameDataGridViewTextBoxColumn.HeaderText = "AccountName"
+            Me.AccountNameDataGridViewTextBoxColumn.MinimumWidth = 6
             Me.AccountNameDataGridViewTextBoxColumn.Name = "AccountNameDataGridViewTextBoxColumn"
             Me.AccountNameDataGridViewTextBoxColumn.ReadOnly = True
             Me.AccountNameDataGridViewTextBoxColumn.Visible = False
+            Me.AccountNameDataGridViewTextBoxColumn.Width = 125
             '
             'CancelledDataGridViewCheckBoxColumn
             '
             Me.CancelledDataGridViewCheckBoxColumn.DataPropertyName = "Cancelled"
             Me.CancelledDataGridViewCheckBoxColumn.HeaderText = "Cancelled"
+            Me.CancelledDataGridViewCheckBoxColumn.MinimumWidth = 6
             Me.CancelledDataGridViewCheckBoxColumn.Name = "CancelledDataGridViewCheckBoxColumn"
             Me.CancelledDataGridViewCheckBoxColumn.ReadOnly = True
             Me.CancelledDataGridViewCheckBoxColumn.Visible = False
+            Me.CancelledDataGridViewCheckBoxColumn.Width = 125
             '
             'bsJournalItems
             '
@@ -663,10 +691,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDiscountAccountIdNo.EditingMode = False
             Me.lblDiscountAccountIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblDiscountAccountIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblDiscountAccountIdNo.Location = New System.Drawing.Point(11, 147)
+            Me.lblDiscountAccountIdNo.Location = New System.Drawing.Point(14, 179)
             Me.lblDiscountAccountIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblDiscountAccountIdNo.Name = "lblDiscountAccountIdNo"
-            Me.lblDiscountAccountIdNo.Size = New System.Drawing.Size(115, 24)
+            Me.lblDiscountAccountIdNo.Size = New System.Drawing.Size(153, 30)
             Me.lblDiscountAccountIdNo.TabIndex = 281
             Me.lblDiscountAccountIdNo.Text = "Discount Acct."
             Me.lblDiscountAccountIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -678,10 +706,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNotes.EditingMode = False
             Me.lblNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblNotes.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblNotes.Location = New System.Drawing.Point(11, 174)
+            Me.lblNotes.Location = New System.Drawing.Point(14, 212)
             Me.lblNotes.Margin = New System.Windows.Forms.Padding(1)
             Me.lblNotes.Name = "lblNotes"
-            Me.lblNotes.Size = New System.Drawing.Size(115, 23)
+            Me.lblNotes.Size = New System.Drawing.Size(153, 28)
             Me.lblNotes.TabIndex = 161
             Me.lblNotes.Text = "Description/Notes"
             Me.lblNotes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -698,7 +726,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.DataValue = Nothing
             Me.cboAccountIdNo.DefaultValue = ""
             Me.cboAccountIdNo.DisplayMember = "Name"
-            Me.cboAccountIdNo.DropDownHeight = 21
+            Me.cboAccountIdNo.DropDownHeight = 24
             Me.cboAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboAccountIdNo.Editable = True
             Me.cboAccountIdNo.EditingMode = False
@@ -715,7 +743,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.IntegralHeight = False
             Me.cboAccountIdNo.LimitToList = False
             Me.cboAccountIdNo.LinkedLabel = Me.lblAccountIdNo
-            Me.cboAccountIdNo.Location = New System.Drawing.Point(128, 92)
+            Me.cboAccountIdNo.Location = New System.Drawing.Point(169, 112)
             Me.cboAccountIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.cboAccountIdNo.MaxDropDownItems = 1
             Me.cboAccountIdNo.Name = "cboAccountIdNo"
@@ -726,7 +754,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.PreviousSearchTerm = Nothing
             Me.cboAccountIdNo.PropertySelector = Nothing
             Me.cboAccountIdNo.ReadOnlyCombo = False
-            Me.cboAccountIdNo.Size = New System.Drawing.Size(420, 24)
+            Me.cboAccountIdNo.Size = New System.Drawing.Size(559, 29)
             Me.cboAccountIdNo.SuggestBoxHeight = 200
             Me.cboAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboAccountIdNo.TabIndex = 7
@@ -743,10 +771,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblAccountIdNo.EditingMode = False
             Me.lblAccountIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblAccountIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblAccountIdNo.Location = New System.Drawing.Point(11, 92)
+            Me.lblAccountIdNo.Location = New System.Drawing.Point(14, 112)
             Me.lblAccountIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblAccountIdNo.Name = "lblAccountIdNo"
-            Me.lblAccountIdNo.Size = New System.Drawing.Size(115, 18)
+            Me.lblAccountIdNo.Size = New System.Drawing.Size(153, 22)
             Me.lblAccountIdNo.TabIndex = 266
             Me.lblAccountIdNo.Text = "Acct. to Credit:"
             Me.lblAccountIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -770,7 +798,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtJournalCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtJournalCode.ForeColor = System.Drawing.Color.Black
             Me.txtJournalCode.LinkedLabel = Nothing
-            Me.txtJournalCode.Location = New System.Drawing.Point(128, 11)
+            Me.txtJournalCode.Location = New System.Drawing.Point(169, 13)
             Me.txtJournalCode.Margin = New System.Windows.Forms.Padding(1)
             Me.txtJournalCode.MaximumValue = Nothing
             Me.txtJournalCode.MinimumValue = Nothing
@@ -779,7 +807,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtJournalCode.OverrideMaxLength = 0
             Me.txtJournalCode.ReadOnly = True
             Me.txtJournalCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtJournalCode.Size = New System.Drawing.Size(28, 23)
+            Me.txtJournalCode.Size = New System.Drawing.Size(37, 26)
             Me.txtJournalCode.TabIndex = 0
             Me.txtJournalCode.TabStop = False
             Me.txtJournalCode.Text = "PC"
@@ -792,10 +820,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo.EditingMode = False
             Me.lblIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblIdNo.Location = New System.Drawing.Point(11, 11)
+            Me.lblIdNo.Location = New System.Drawing.Point(14, 13)
             Me.lblIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblIdNo.Name = "lblIdNo"
-            Me.lblIdNo.Size = New System.Drawing.Size(115, 23)
+            Me.lblIdNo.Size = New System.Drawing.Size(153, 28)
             Me.lblIdNo.TabIndex = 17
             Me.lblIdNo.Text = "Transaction No."
             Me.lblIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -812,7 +840,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDiscountAccountIdNo.DataValue = Nothing
             Me.cboDiscountAccountIdNo.DefaultValue = Nothing
             Me.cboDiscountAccountIdNo.DisplayMember = "Name"
-            Me.cboDiscountAccountIdNo.DropDownHeight = 21
+            Me.cboDiscountAccountIdNo.DropDownHeight = 24
             Me.cboDiscountAccountIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboDiscountAccountIdNo.Editable = True
             Me.cboDiscountAccountIdNo.EditingMode = False
@@ -828,10 +856,10 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDiscountAccountIdNo.HideWhenNotEditingOrAdding = False
             Me.cboDiscountAccountIdNo.IgnoreCase = False
             Me.cboDiscountAccountIdNo.IntegralHeight = False
-            Me.cboDiscountAccountIdNo.ItemHeight = 16
+            Me.cboDiscountAccountIdNo.ItemHeight = 20
             Me.cboDiscountAccountIdNo.LimitToList = False
             Me.cboDiscountAccountIdNo.LinkedLabel = Nothing
-            Me.cboDiscountAccountIdNo.Location = New System.Drawing.Point(128, 147)
+            Me.cboDiscountAccountIdNo.Location = New System.Drawing.Point(169, 179)
             Me.cboDiscountAccountIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.cboDiscountAccountIdNo.MaxDropDownItems = 1
             Me.cboDiscountAccountIdNo.Name = "cboDiscountAccountIdNo"
@@ -842,7 +870,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDiscountAccountIdNo.PreviousSearchTerm = Nothing
             Me.cboDiscountAccountIdNo.PropertySelector = Nothing
             Me.cboDiscountAccountIdNo.ReadOnlyCombo = False
-            Me.cboDiscountAccountIdNo.Size = New System.Drawing.Size(420, 24)
+            Me.cboDiscountAccountIdNo.Size = New System.Drawing.Size(559, 29)
             Me.cboDiscountAccountIdNo.SuggestBoxHeight = 200
             Me.cboDiscountAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboDiscountAccountIdNo.TabIndex = 12
@@ -859,10 +887,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblInvoiceNo.EditingMode = False
             Me.lblInvoiceNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblInvoiceNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblInvoiceNo.Location = New System.Drawing.Point(11, 118)
+            Me.lblInvoiceNo.Location = New System.Drawing.Point(14, 144)
             Me.lblInvoiceNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblInvoiceNo.Name = "lblInvoiceNo"
-            Me.lblInvoiceNo.Size = New System.Drawing.Size(94, 18)
+            Me.lblInvoiceNo.Size = New System.Drawing.Size(125, 22)
             Me.lblInvoiceNo.TabIndex = 254
             Me.lblInvoiceNo.Text = "Inv./O.R. No."
             Me.lblInvoiceNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -887,7 +915,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtORNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtORNumber.ForeColor = System.Drawing.Color.Black
             Me.txtORNumber.LinkedLabel = Me.lblInvoiceNo
-            Me.txtORNumber.Location = New System.Drawing.Point(128, 118)
+            Me.txtORNumber.Location = New System.Drawing.Point(169, 144)
             Me.txtORNumber.Margin = New System.Windows.Forms.Padding(1)
             Me.txtORNumber.MaximumValue = Nothing
             Me.txtORNumber.MinimumValue = Nothing
@@ -896,7 +924,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtORNumber.OverrideMaxLength = 0
             Me.txtORNumber.ReadOnly = True
             Me.txtORNumber.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtORNumber.Size = New System.Drawing.Size(120, 23)
+            Me.txtORNumber.Size = New System.Drawing.Size(159, 26)
             Me.txtORNumber.TabIndex = 9
             Me.txtORNumber.Translatable = False
             Me.txtORNumber.ValueIsMandatory = True
@@ -918,7 +946,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtAmount.ForeColor = System.Drawing.Color.Black
             Me.txtAmount.LinkedLabel = Me.lblAmount
-            Me.txtAmount.Location = New System.Drawing.Point(653, 92)
+            Me.txtAmount.Location = New System.Drawing.Point(868, 112)
             Me.txtAmount.Margin = New System.Windows.Forms.Padding(1)
             Me.txtAmount.MaximumValue = Nothing
             Me.txtAmount.MinimumValue = Nothing
@@ -927,7 +955,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtAmount.OverrideMaxLength = 0
             Me.txtAmount.ReadOnly = True
             Me.txtAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtAmount.Size = New System.Drawing.Size(112, 23)
+            Me.txtAmount.Size = New System.Drawing.Size(149, 26)
             Me.txtAmount.TabIndex = 8
             Me.txtAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtAmount.Translatable = False
@@ -940,10 +968,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblAmount.EditingMode = False
             Me.lblAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblAmount.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblAmount.Location = New System.Drawing.Point(550, 92)
+            Me.lblAmount.Location = New System.Drawing.Point(730, 112)
             Me.lblAmount.Margin = New System.Windows.Forms.Padding(1)
             Me.lblAmount.Name = "lblAmount"
-            Me.lblAmount.Size = New System.Drawing.Size(101, 24)
+            Me.lblAmount.Size = New System.Drawing.Size(135, 30)
             Me.lblAmount.TabIndex = 264
             Me.lblAmount.Text = "Amount:"
             Me.lblAmount.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -955,10 +983,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblTransactionDate.EditingMode = False
             Me.lblTransactionDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblTransactionDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblTransactionDate.Location = New System.Drawing.Point(550, 11)
+            Me.lblTransactionDate.Location = New System.Drawing.Point(730, 13)
             Me.lblTransactionDate.Margin = New System.Windows.Forms.Padding(1)
             Me.lblTransactionDate.Name = "lblTransactionDate"
-            Me.lblTransactionDate.Size = New System.Drawing.Size(101, 25)
+            Me.lblTransactionDate.Size = New System.Drawing.Size(135, 31)
             Me.lblTransactionDate.TabIndex = 4
             Me.lblTransactionDate.Text = "Date:"
             Me.lblTransactionDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -983,7 +1011,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtNotes.ForeColor = System.Drawing.Color.Black
             Me.txtNotes.LinkedLabel = Nothing
-            Me.txtNotes.Location = New System.Drawing.Point(128, 174)
+            Me.txtNotes.Location = New System.Drawing.Point(169, 212)
             Me.txtNotes.Margin = New System.Windows.Forms.Padding(1)
             Me.txtNotes.MaximumValue = Nothing
             Me.txtNotes.MinimumValue = Nothing
@@ -993,7 +1021,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtNotes.OverrideMaxLength = 0
             Me.txtNotes.ReadOnly = True
             Me.txtNotes.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtNotes.Size = New System.Drawing.Size(523, 25)
+            Me.txtNotes.Size = New System.Drawing.Size(697, 34)
             Me.txtNotes.TabIndex = 14
             Me.txtNotes.Translatable = False
             Me.txtNotes.ValueIsMandatory = True
@@ -1017,7 +1045,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtVatAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtVatAmount.ForeColor = System.Drawing.Color.Black
             Me.txtVatAmount.LinkedLabel = Me.lblApplied
-            Me.txtVatAmount.Location = New System.Drawing.Point(931, 11)
+            Me.txtVatAmount.Location = New System.Drawing.Point(1239, 13)
             Me.txtVatAmount.Margin = New System.Windows.Forms.Padding(1)
             Me.txtVatAmount.MaximumValue = Nothing
             Me.txtVatAmount.MinimumValue = Nothing
@@ -1026,7 +1054,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtVatAmount.OverrideMaxLength = 0
             Me.txtVatAmount.ReadOnly = True
             Me.txtVatAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtVatAmount.Size = New System.Drawing.Size(83, 23)
+            Me.txtVatAmount.Size = New System.Drawing.Size(110, 26)
             Me.txtVatAmount.TabIndex = 17
             Me.txtVatAmount.TabStop = False
             Me.txtVatAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -1042,10 +1070,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblApplied.EditingMode = False
             Me.lblApplied.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblApplied.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblApplied.Location = New System.Drawing.Point(773, 38)
+            Me.lblApplied.Location = New System.Drawing.Point(1025, 46)
             Me.lblApplied.Margin = New System.Windows.Forms.Padding(1)
             Me.lblApplied.Name = "lblApplied"
-            Me.lblApplied.Size = New System.Drawing.Size(107, 17)
+            Me.lblApplied.Size = New System.Drawing.Size(126, 20)
             Me.lblApplied.TabIndex = 277
             Me.lblApplied.Text = "Applied Amount"
             Me.lblApplied.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1070,7 +1098,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtApplied.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtApplied.ForeColor = System.Drawing.Color.Black
             Me.txtApplied.LinkedLabel = Me.lblApplied
-            Me.txtApplied.Location = New System.Drawing.Point(931, 38)
+            Me.txtApplied.Location = New System.Drawing.Point(1239, 46)
             Me.txtApplied.Margin = New System.Windows.Forms.Padding(1)
             Me.txtApplied.MaximumValue = Nothing
             Me.txtApplied.MinimumValue = Nothing
@@ -1079,7 +1107,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtApplied.OverrideMaxLength = 0
             Me.txtApplied.ReadOnly = True
             Me.txtApplied.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtApplied.Size = New System.Drawing.Size(83, 23)
+            Me.txtApplied.Size = New System.Drawing.Size(110, 26)
             Me.txtApplied.TabIndex = 18
             Me.txtApplied.TabStop = False
             Me.txtApplied.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -1105,7 +1133,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtUnapplied.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtUnapplied.ForeColor = System.Drawing.Color.Black
             Me.txtUnapplied.LinkedLabel = Me.CLabel2
-            Me.txtUnapplied.Location = New System.Drawing.Point(931, 65)
+            Me.txtUnapplied.Location = New System.Drawing.Point(1239, 79)
             Me.txtUnapplied.Margin = New System.Windows.Forms.Padding(1)
             Me.txtUnapplied.MaximumValue = Nothing
             Me.txtUnapplied.MinimumValue = Nothing
@@ -1114,7 +1142,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtUnapplied.OverrideMaxLength = 0
             Me.txtUnapplied.ReadOnly = True
             Me.txtUnapplied.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtUnapplied.Size = New System.Drawing.Size(83, 23)
+            Me.txtUnapplied.Size = New System.Drawing.Size(110, 26)
             Me.txtUnapplied.TabIndex = 19
             Me.txtUnapplied.TabStop = False
             Me.txtUnapplied.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -1130,10 +1158,10 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel2.EditingMode = False
             Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.CLabel2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.CLabel2.Location = New System.Drawing.Point(773, 65)
+            Me.CLabel2.Location = New System.Drawing.Point(1025, 79)
             Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel2.Name = "CLabel2"
-            Me.CLabel2.Size = New System.Drawing.Size(124, 17)
+            Me.CLabel2.Size = New System.Drawing.Size(145, 20)
             Me.CLabel2.TabIndex = 279
             Me.CLabel2.Text = "Unapplied Amount"
             Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1158,7 +1186,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDiscountTaken.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDiscountTaken.ForeColor = System.Drawing.Color.Black
             Me.txtDiscountTaken.LinkedLabel = Me.lblDiscountTaken
-            Me.txtDiscountTaken.Location = New System.Drawing.Point(931, 92)
+            Me.txtDiscountTaken.Location = New System.Drawing.Point(1239, 112)
             Me.txtDiscountTaken.Margin = New System.Windows.Forms.Padding(1)
             Me.txtDiscountTaken.MaximumValue = Nothing
             Me.txtDiscountTaken.MinimumValue = Nothing
@@ -1167,7 +1195,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDiscountTaken.OverrideMaxLength = 0
             Me.txtDiscountTaken.ReadOnly = True
             Me.txtDiscountTaken.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtDiscountTaken.Size = New System.Drawing.Size(83, 23)
+            Me.txtDiscountTaken.Size = New System.Drawing.Size(110, 26)
             Me.txtDiscountTaken.TabIndex = 20
             Me.txtDiscountTaken.TabStop = False
             Me.txtDiscountTaken.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -1183,10 +1211,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDiscountTaken.EditingMode = False
             Me.lblDiscountTaken.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblDiscountTaken.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblDiscountTaken.Location = New System.Drawing.Point(773, 92)
+            Me.lblDiscountTaken.Location = New System.Drawing.Point(1025, 112)
             Me.lblDiscountTaken.Margin = New System.Windows.Forms.Padding(1)
             Me.lblDiscountTaken.Name = "lblDiscountTaken"
-            Me.lblDiscountTaken.Size = New System.Drawing.Size(107, 17)
+            Me.lblDiscountTaken.Size = New System.Drawing.Size(126, 20)
             Me.lblDiscountTaken.TabIndex = 275
             Me.lblDiscountTaken.Text = "Discount Taken"
             Me.lblDiscountTaken.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1231,17 +1259,19 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewDjOiItems.FirstRowInsertionEnabled = False
             Me.DataGridViewDjOiItems.IgnoreCase = False
             Me.DataGridViewDjOiItems.IsDirty = False
-            Me.DataGridViewDjOiItems.Location = New System.Drawing.Point(13, 549)
-            Me.DataGridViewDjOiItems.MinimumSize = New System.Drawing.Size(996, 335)
+            Me.DataGridViewDjOiItems.Location = New System.Drawing.Point(17, 677)
+            Me.DataGridViewDjOiItems.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.DataGridViewDjOiItems.MinimumSize = New System.Drawing.Size(1328, 412)
             Me.DataGridViewDjOiItems.Name = "DataGridViewDjOiItems"
             Me.DataGridViewDjOiItems.ReadOnly = True
+            Me.DataGridViewDjOiItems.RowHeadersWidth = 51
             Me.DataGridViewDjOiItems.Searchable = True
             Me.DataGridViewDjOiItems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewDjOiItems.SecurityKey = ""
             Me.DataGridViewDjOiItems.SequenceColumn = "dgvSequencePcsOi"
             Me.DataGridViewDjOiItems.SequenceFieldName = "Sequence"
             Me.DataGridViewDjOiItems.ShowFooter = False
-            Me.DataGridViewDjOiItems.Size = New System.Drawing.Size(996, 340)
+            Me.DataGridViewDjOiItems.Size = New System.Drawing.Size(1328, 418)
             Me.DataGridViewDjOiItems.TabIndex = 16
             Me.DataGridViewDjOiItems.Translatable = True
             Me.DataGridViewDjOiItems.Visible = False
@@ -1262,6 +1292,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvSequenceDjOi.FindEnabled = False
             Me.dgvSequenceDjOi.HeaderText = "Seq"
             Me.dgvSequenceDjOi.IgnoreCase = False
+            Me.dgvSequenceDjOi.MinimumWidth = 6
             Me.dgvSequenceDjOi.Name = "dgvSequenceDjOi"
             Me.dgvSequenceDjOi.ReadOnly = True
             Me.dgvSequenceDjOi.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -1283,11 +1314,13 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvInvoiceNo.FindEnabled = False
             Me.dgvInvoiceNo.HeaderText = "Invoice No."
             Me.dgvInvoiceNo.IgnoreCase = False
+            Me.dgvInvoiceNo.MinimumWidth = 6
             Me.dgvInvoiceNo.Name = "dgvInvoiceNo"
             Me.dgvInvoiceNo.ReadOnly = True
             Me.dgvInvoiceNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvInvoiceNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvInvoiceNo.Translatable = False
+            Me.dgvInvoiceNo.Width = 125
             '
             'DgvTransactionDate
             '
@@ -1304,11 +1337,13 @@ Namespace PresentationLayer.Views.Forms
             Me.DgvTransactionDate.FindEnabled = False
             Me.DgvTransactionDate.HeaderText = "Transaction Date"
             Me.DgvTransactionDate.IgnoreCase = False
+            Me.DgvTransactionDate.MinimumWidth = 6
             Me.DgvTransactionDate.Name = "DgvTransactionDate"
             Me.DgvTransactionDate.ReadOnly = True
             Me.DgvTransactionDate.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.DgvTransactionDate.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DgvTransactionDate.Translatable = False
+            Me.DgvTransactionDate.Width = 125
             '
             'dgvJournalCode
             '
@@ -1325,6 +1360,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvJournalCode.FindEnabled = False
             Me.dgvJournalCode.HeaderText = "Journal Code"
             Me.dgvJournalCode.IgnoreCase = False
+            Me.dgvJournalCode.MinimumWidth = 6
             Me.dgvJournalCode.Name = "dgvJournalCode"
             Me.dgvJournalCode.ReadOnly = True
             Me.dgvJournalCode.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
@@ -1347,11 +1383,13 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvJournalIdNoAp.FindEnabled = False
             Me.dgvJournalIdNoAp.HeaderText = "Journal Id No"
             Me.dgvJournalIdNoAp.IgnoreCase = False
+            Me.dgvJournalIdNoAp.MinimumWidth = 6
             Me.dgvJournalIdNoAp.Name = "dgvJournalIdNoAp"
             Me.dgvJournalIdNoAp.ReadOnly = True
             Me.dgvJournalIdNoAp.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvJournalIdNoAp.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvJournalIdNoAp.Translatable = False
+            Me.dgvJournalIdNoAp.Width = 125
             '
             'dgvPreviousBalance
             '
@@ -1369,12 +1407,14 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvPreviousBalance.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.dgvPreviousBalance.FindEnabled = False
             Me.dgvPreviousBalance.HeaderText = "Previous Balance"
+            Me.dgvPreviousBalance.MinimumWidth = 6
             Me.dgvPreviousBalance.Name = "dgvPreviousBalance"
             Me.dgvPreviousBalance.ReadOnly = True
             Me.dgvPreviousBalance.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvPreviousBalance.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvPreviousBalance.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
             Me.dgvPreviousBalance.Translatable = False
+            Me.dgvPreviousBalance.Width = 125
             '
             'dgvAmount
             '
@@ -1392,12 +1432,14 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvAmount.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.dgvAmount.FindEnabled = False
             Me.dgvAmount.HeaderText = "Amount"
+            Me.dgvAmount.MinimumWidth = 6
             Me.dgvAmount.Name = "dgvAmount"
             Me.dgvAmount.ReadOnly = True
             Me.dgvAmount.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
             Me.dgvAmount.Translatable = False
+            Me.dgvAmount.Width = 125
             '
             'dgvDiscountTaken
             '
@@ -1415,12 +1457,14 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvDiscountTaken.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.dgvDiscountTaken.FindEnabled = False
             Me.dgvDiscountTaken.HeaderText = "Discount Taken"
+            Me.dgvDiscountTaken.MinimumWidth = 6
             Me.dgvDiscountTaken.Name = "dgvDiscountTaken"
             Me.dgvDiscountTaken.ReadOnly = True
             Me.dgvDiscountTaken.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvDiscountTaken.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvDiscountTaken.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
             Me.dgvDiscountTaken.Translatable = False
+            Me.dgvDiscountTaken.Width = 125
             '
             'dgvBalance
             '
@@ -1439,6 +1483,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvBalance.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.dgvBalance.FindEnabled = False
             Me.dgvBalance.HeaderText = "Balance"
+            Me.dgvBalance.MinimumWidth = 6
             Me.dgvBalance.Name = "dgvBalance"
             Me.dgvBalance.ReadOnly = True
             Me.dgvBalance.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
@@ -1450,9 +1495,11 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.DataGridViewTextBoxColumn6.DataPropertyName = "AccountIdNo"
             Me.DataGridViewTextBoxColumn6.HeaderText = "AccountIdNo"
+            Me.DataGridViewTextBoxColumn6.MinimumWidth = 6
             Me.DataGridViewTextBoxColumn6.Name = "DataGridViewTextBoxColumn6"
             Me.DataGridViewTextBoxColumn6.ReadOnly = True
             Me.DataGridViewTextBoxColumn6.Visible = False
+            Me.DataGridViewTextBoxColumn6.Width = 125
             '
             'bsDjOiItems
             '
@@ -1476,7 +1523,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayeeName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtPayeeName.ForeColor = System.Drawing.Color.Black
             Me.txtPayeeName.LinkedLabel = Me.lblAmount
-            Me.txtPayeeName.Location = New System.Drawing.Point(128, 893)
+            Me.txtPayeeName.Location = New System.Drawing.Point(169, 1100)
             Me.txtPayeeName.Margin = New System.Windows.Forms.Padding(1)
             Me.txtPayeeName.MaximumValue = Nothing
             Me.txtPayeeName.MinimumValue = Nothing
@@ -1485,7 +1532,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtPayeeName.OverrideMaxLength = 0
             Me.txtPayeeName.ReadOnly = True
             Me.txtPayeeName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtPayeeName.Size = New System.Drawing.Size(637, 23)
+            Me.txtPayeeName.Size = New System.Drawing.Size(849, 26)
             Me.txtPayeeName.TabIndex = 6
             Me.txtPayeeName.Translatable = False
             Me.txtPayeeName.ValueIsMandatory = True
@@ -1503,14 +1550,14 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpCheckDate.EditsAllowed = False
             Me.dtpCheckDate.ForeColor = System.Drawing.Color.Black
             Me.dtpCheckDate.LinkedLabel = Nothing
-            Me.dtpCheckDate.Location = New System.Drawing.Point(653, 147)
+            Me.dtpCheckDate.Location = New System.Drawing.Point(868, 179)
             Me.dtpCheckDate.Margin = New System.Windows.Forms.Padding(1)
             Me.dtpCheckDate.Name = "dtpCheckDate"
             Me.dtpCheckDate.ReadOnlyDp = False
             Me.dtpCheckDate.SecurityKey = Nothing
             Me.dtpCheckDate.ShowLongDate = False
             Me.dtpCheckDate.ShowTime = False
-            Me.dtpCheckDate.Size = New System.Drawing.Size(118, 23)
+            Me.dtpCheckDate.Size = New System.Drawing.Size(119, 27)
             Me.dtpCheckDate.TabIndex = 13
             Me.dtpCheckDate.TargetCalendar = Nothing
             Me.dtpCheckDate.Translatable = False
@@ -1535,7 +1582,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtVatNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtVatNumber.ForeColor = System.Drawing.Color.Black
             Me.txtVatNumber.LinkedLabel = Me.lblApplied
-            Me.txtVatNumber.Location = New System.Drawing.Point(343, 118)
+            Me.txtVatNumber.Location = New System.Drawing.Point(453, 144)
             Me.txtVatNumber.Margin = New System.Windows.Forms.Padding(1)
             Me.txtVatNumber.MaximumValue = Nothing
             Me.txtVatNumber.MaxLength = 15
@@ -1545,7 +1592,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtVatNumber.OverrideMaxLength = 0
             Me.txtVatNumber.ReadOnly = True
             Me.txtVatNumber.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtVatNumber.Size = New System.Drawing.Size(114, 23)
+            Me.txtVatNumber.Size = New System.Drawing.Size(151, 26)
             Me.txtVatNumber.TabIndex = 10
             Me.txtVatNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.txtVatNumber.Translatable = False
@@ -1569,7 +1616,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCheckNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtCheckNumber.ForeColor = System.Drawing.Color.Black
             Me.txtCheckNumber.LinkedLabel = Me.lblInvoiceNo
-            Me.txtCheckNumber.Location = New System.Drawing.Point(653, 118)
+            Me.txtCheckNumber.Location = New System.Drawing.Point(868, 144)
             Me.txtCheckNumber.Margin = New System.Windows.Forms.Padding(1)
             Me.txtCheckNumber.MaximumValue = Nothing
             Me.txtCheckNumber.MinimumValue = Nothing
@@ -1578,7 +1625,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCheckNumber.OverrideMaxLength = 0
             Me.txtCheckNumber.ReadOnly = True
             Me.txtCheckNumber.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtCheckNumber.Size = New System.Drawing.Size(112, 23)
+            Me.txtCheckNumber.Size = New System.Drawing.Size(149, 26)
             Me.txtCheckNumber.TabIndex = 11
             Me.txtCheckNumber.Translatable = False
             Me.txtCheckNumber.ValueIsMandatory = True
@@ -1591,10 +1638,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblVatAmount.EditingMode = False
             Me.lblVatAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblVatAmount.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblVatAmount.Location = New System.Drawing.Point(773, 11)
+            Me.lblVatAmount.Location = New System.Drawing.Point(1025, 13)
             Me.lblVatAmount.Margin = New System.Windows.Forms.Padding(1)
             Me.lblVatAmount.Name = "lblVatAmount"
-            Me.lblVatAmount.Size = New System.Drawing.Size(81, 17)
+            Me.lblVatAmount.Size = New System.Drawing.Size(96, 20)
             Me.lblVatAmount.TabIndex = 283
             Me.lblVatAmount.Text = "Vat Amount"
             Me.lblVatAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1611,7 +1658,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaymentType.DataValue = Nothing
             Me.cboPaymentType.DefaultValue = "0"
             Me.cboPaymentType.DisplayMember = "Name"
-            Me.cboPaymentType.DropDownHeight = 21
+            Me.cboPaymentType.DropDownHeight = 24
             Me.cboPaymentType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboPaymentType.Editable = True
             Me.cboPaymentType.EditingMode = False
@@ -1628,7 +1675,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaymentType.IntegralHeight = False
             Me.cboPaymentType.LimitToList = False
             Me.cboPaymentType.LinkedLabel = Me.lblPaymentType
-            Me.cboPaymentType.Location = New System.Drawing.Point(128, 38)
+            Me.cboPaymentType.Location = New System.Drawing.Point(169, 46)
             Me.cboPaymentType.Margin = New System.Windows.Forms.Padding(1)
             Me.cboPaymentType.MaxDropDownItems = 1
             Me.cboPaymentType.Name = "cboPaymentType"
@@ -1639,7 +1686,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaymentType.PreviousSearchTerm = Nothing
             Me.cboPaymentType.PropertySelector = Nothing
             Me.cboPaymentType.ReadOnlyCombo = False
-            Me.cboPaymentType.Size = New System.Drawing.Size(329, 24)
+            Me.cboPaymentType.Size = New System.Drawing.Size(437, 29)
             Me.cboPaymentType.SuggestBoxHeight = 200
             Me.cboPaymentType.SuggestListOrderRule = Nothing
             Me.cboPaymentType.TabIndex = 4
@@ -1669,7 +1716,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.TxtIdNo.ForeColor = System.Drawing.Color.Black
             Me.TxtIdNo.LinkedLabel = Me.lblIdNo
-            Me.TxtIdNo.Location = New System.Drawing.Point(158, 11)
+            Me.TxtIdNo.Location = New System.Drawing.Point(208, 13)
             Me.TxtIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.TxtIdNo.MaximumValue = Nothing
             Me.TxtIdNo.MinimumValue = Nothing
@@ -1678,7 +1725,7 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo.OverrideMaxLength = 0
             Me.TxtIdNo.ReadOnly = True
             Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.TxtIdNo.Size = New System.Drawing.Size(90, 23)
+            Me.TxtIdNo.Size = New System.Drawing.Size(120, 26)
             Me.TxtIdNo.TabIndex = 1
             Me.TxtIdNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             Me.TxtIdNo.Translatable = False
@@ -1701,7 +1748,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtReferenceNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtReferenceNo.ForeColor = System.Drawing.Color.Black
             Me.txtReferenceNo.LinkedLabel = Me.lblReferenceNo
-            Me.txtReferenceNo.Location = New System.Drawing.Point(459, 11)
+            Me.txtReferenceNo.Location = New System.Drawing.Point(608, 13)
             Me.txtReferenceNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtReferenceNo.MaximumValue = Nothing
             Me.txtReferenceNo.MinimumValue = Nothing
@@ -1710,7 +1757,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtReferenceNo.OverrideMaxLength = 0
             Me.txtReferenceNo.ReadOnly = True
             Me.txtReferenceNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtReferenceNo.Size = New System.Drawing.Size(89, 23)
+            Me.txtReferenceNo.Size = New System.Drawing.Size(118, 26)
             Me.txtReferenceNo.TabIndex = 2
             Me.txtReferenceNo.Translatable = False
             Me.txtReferenceNo.ValueIsMandatory = True
@@ -1722,10 +1769,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblReferenceNo.EditingMode = False
             Me.lblReferenceNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblReferenceNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblReferenceNo.Location = New System.Drawing.Point(250, 11)
+            Me.lblReferenceNo.Location = New System.Drawing.Point(330, 13)
             Me.lblReferenceNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblReferenceNo.Name = "lblReferenceNo"
-            Me.lblReferenceNo.Size = New System.Drawing.Size(207, 25)
+            Me.lblReferenceNo.Size = New System.Drawing.Size(276, 31)
             Me.lblReferenceNo.TabIndex = 2
             Me.lblReferenceNo.Text = "Reference No.:"
             Me.lblReferenceNo.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1741,7 +1788,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayeeIdNo.DataValue = Nothing
             Me.cboPayeeIdNo.DefaultValue = Nothing
             Me.cboPayeeIdNo.DisplayMember = "Name"
-            Me.cboPayeeIdNo.DropDownHeight = 21
+            Me.cboPayeeIdNo.DropDownHeight = 24
             Me.cboPayeeIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboPayeeIdNo.Editable = True
             Me.cboPayeeIdNo.EditingMode = False
@@ -1758,7 +1805,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayeeIdNo.IgnoreCase = False
             Me.cboPayeeIdNo.LimitToList = False
             Me.cboPayeeIdNo.LinkedLabel = Nothing
-            Me.cboPayeeIdNo.Location = New System.Drawing.Point(128, 65)
+            Me.cboPayeeIdNo.Location = New System.Drawing.Point(169, 79)
             Me.cboPayeeIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.cboPayeeIdNo.MaxDropDownItems = 1
             Me.cboPayeeIdNo.Name = "cboPayeeIdNo"
@@ -1787,10 +1834,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblVatNo.EditingMode = False
             Me.lblVatNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblVatNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblVatNo.Location = New System.Drawing.Point(250, 118)
+            Me.lblVatNo.Location = New System.Drawing.Point(330, 144)
             Me.lblVatNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblVatNo.Name = "lblVatNo"
-            Me.lblVatNo.Size = New System.Drawing.Size(91, 27)
+            Me.lblVatNo.Size = New System.Drawing.Size(121, 33)
             Me.lblVatNo.TabIndex = 2
             Me.lblVatNo.Text = "Vat Number"
             Me.lblVatNo.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1809,14 +1856,14 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpTransactionDate.EditsAllowed = False
             Me.dtpTransactionDate.ForeColor = System.Drawing.Color.Black
             Me.dtpTransactionDate.LinkedLabel = Nothing
-            Me.dtpTransactionDate.Location = New System.Drawing.Point(653, 11)
+            Me.dtpTransactionDate.Location = New System.Drawing.Point(868, 13)
             Me.dtpTransactionDate.Margin = New System.Windows.Forms.Padding(1)
             Me.dtpTransactionDate.Name = "dtpTransactionDate"
             Me.dtpTransactionDate.ReadOnlyDp = False
             Me.dtpTransactionDate.SecurityKey = Nothing
             Me.dtpTransactionDate.ShowLongDate = False
             Me.dtpTransactionDate.ShowTime = False
-            Me.dtpTransactionDate.Size = New System.Drawing.Size(118, 23)
+            Me.dtpTransactionDate.Size = New System.Drawing.Size(119, 27)
             Me.dtpTransactionDate.TabIndex = 3
             Me.dtpTransactionDate.TargetCalendar = Nothing
             Me.dtpTransactionDate.Translatable = False
@@ -1830,10 +1877,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblSupplierIdNo.EditingMode = False
             Me.lblSupplierIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblSupplierIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblSupplierIdNo.Location = New System.Drawing.Point(11, 65)
+            Me.lblSupplierIdNo.Location = New System.Drawing.Point(14, 79)
             Me.lblSupplierIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblSupplierIdNo.Name = "lblSupplierIdNo"
-            Me.lblSupplierIdNo.Size = New System.Drawing.Size(115, 25)
+            Me.lblSupplierIdNo.Size = New System.Drawing.Size(153, 31)
             Me.lblSupplierIdNo.TabIndex = 7
             Me.lblSupplierIdNo.Text = "Payee:"
             Me.lblSupplierIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1845,10 +1892,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDateCreated.EditingMode = False
             Me.lblDateCreated.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
             Me.lblDateCreated.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblDateCreated.Location = New System.Drawing.Point(773, 147)
+            Me.lblDateCreated.Location = New System.Drawing.Point(1025, 179)
             Me.lblDateCreated.Margin = New System.Windows.Forms.Padding(1)
             Me.lblDateCreated.Name = "lblDateCreated"
-            Me.lblDateCreated.Size = New System.Drawing.Size(69, 25)
+            Me.lblDateCreated.Size = New System.Drawing.Size(92, 31)
             Me.lblDateCreated.TabIndex = 268
             Me.lblDateCreated.Text = "Date Added:"
             Me.lblDateCreated.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1868,14 +1915,14 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpDateCreated.EditsAllowed = False
             Me.dtpDateCreated.ForeColor = System.Drawing.Color.Black
             Me.dtpDateCreated.LinkedLabel = Nothing
-            Me.dtpDateCreated.Location = New System.Drawing.Point(867, 147)
-            Me.dtpDateCreated.Margin = New System.Windows.Forms.Padding(10, 1, 1, 1)
+            Me.dtpDateCreated.Location = New System.Drawing.Point(1152, 179)
+            Me.dtpDateCreated.Margin = New System.Windows.Forms.Padding(13, 1, 1, 1)
             Me.dtpDateCreated.Name = "dtpDateCreated"
             Me.dtpDateCreated.ReadOnlyDp = True
             Me.dtpDateCreated.SecurityKey = Nothing
             Me.dtpDateCreated.ShowLongDate = False
             Me.dtpDateCreated.ShowTime = True
-            Me.dtpDateCreated.Size = New System.Drawing.Size(174, 23)
+            Me.dtpDateCreated.Size = New System.Drawing.Size(185, 27)
             Me.dtpDateCreated.TabIndex = 24
             Me.dtpDateCreated.TabStop = False
             Me.dtpDateCreated.TargetCalendar = Nothing
@@ -1891,10 +1938,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCdJournalIdNo.DisplayOnly = True
             Me.lblCdJournalIdNo.EditingMode = False
             Me.lblCdJournalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblCdJournalIdNo.Location = New System.Drawing.Point(773, 118)
+            Me.lblCdJournalIdNo.Location = New System.Drawing.Point(1025, 144)
             Me.lblCdJournalIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblCdJournalIdNo.Name = "lblCdJournalIdNo"
-            Me.lblCdJournalIdNo.Size = New System.Drawing.Size(121, 17)
+            Me.lblCdJournalIdNo.Size = New System.Drawing.Size(144, 20)
             Me.lblCdJournalIdNo.TabIndex = 296
             Me.lblCdJournalIdNo.Text = "Disbursement No."
             Me.lblCdJournalIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -1917,7 +1964,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCdJournalIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtCdJournalIdNo.ForeColor = System.Drawing.Color.Black
             Me.txtCdJournalIdNo.LinkedLabel = Nothing
-            Me.txtCdJournalIdNo.Location = New System.Drawing.Point(931, 118)
+            Me.txtCdJournalIdNo.Location = New System.Drawing.Point(1239, 144)
             Me.txtCdJournalIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtCdJournalIdNo.MaximumValue = Nothing
             Me.txtCdJournalIdNo.MinimumValue = Nothing
@@ -1925,7 +1972,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCdJournalIdNo.OldValue = Nothing
             Me.txtCdJournalIdNo.OverrideMaxLength = 0
             Me.txtCdJournalIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtCdJournalIdNo.Size = New System.Drawing.Size(83, 23)
+            Me.txtCdJournalIdNo.Size = New System.Drawing.Size(110, 26)
             Me.txtCdJournalIdNo.TabIndex = 297
             Me.txtCdJournalIdNo.TabStop = False
             Me.txtCdJournalIdNo.Translatable = False
@@ -1937,10 +1984,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCheckNumber.EditingMode = False
             Me.lblCheckNumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblCheckNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblCheckNumber.Location = New System.Drawing.Point(459, 118)
+            Me.lblCheckNumber.Location = New System.Drawing.Point(608, 144)
             Me.lblCheckNumber.Margin = New System.Windows.Forms.Padding(1)
             Me.lblCheckNumber.Name = "lblCheckNumber"
-            Me.lblCheckNumber.Size = New System.Drawing.Size(192, 27)
+            Me.lblCheckNumber.Size = New System.Drawing.Size(256, 33)
             Me.lblCheckNumber.TabIndex = 290
             Me.lblCheckNumber.Text = "Check Number"
             Me.lblCheckNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1952,10 +1999,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCheckDate.EditingMode = False
             Me.lblCheckDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.lblCheckDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-            Me.lblCheckDate.Location = New System.Drawing.Point(550, 147)
+            Me.lblCheckDate.Location = New System.Drawing.Point(730, 179)
             Me.lblCheckDate.Margin = New System.Windows.Forms.Padding(1)
             Me.lblCheckDate.Name = "lblCheckDate"
-            Me.lblCheckDate.Size = New System.Drawing.Size(101, 25)
+            Me.lblCheckDate.Size = New System.Drawing.Size(135, 31)
             Me.lblCheckDate.TabIndex = 284
             Me.lblCheckDate.Text = "Check Date"
             Me.lblCheckDate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1975,11 +2022,12 @@ Namespace PresentationLayer.Views.Forms
             Me.chkApproved.FindEnabled = True
             Me.chkApproved.IgnoreCase = False
             Me.chkApproved.LinkedLabel = Nothing
-            Me.chkApproved.Location = New System.Drawing.Point(655, 176)
+            Me.chkApproved.Location = New System.Drawing.Point(872, 216)
+            Me.chkApproved.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
             Me.chkApproved.Name = "chkApproved"
             Me.chkApproved.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.chkApproved.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkApproved.Size = New System.Drawing.Size(110, 21)
+            Me.chkApproved.Size = New System.Drawing.Size(147, 26)
             Me.chkApproved.TabIndex = 298
             Me.chkApproved.Text = "Approved?"
             Me.chkApproved.Translatable = True
@@ -2000,11 +2048,12 @@ Namespace PresentationLayer.Views.Forms
             Me.chkCancelled.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.chkCancelled.IgnoreCase = False
             Me.chkCancelled.LinkedLabel = Nothing
-            Me.chkCancelled.Location = New System.Drawing.Point(933, 176)
+            Me.chkCancelled.Location = New System.Drawing.Point(1243, 216)
+            Me.chkCancelled.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
             Me.chkCancelled.Name = "chkCancelled"
             Me.chkCancelled.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.chkCancelled.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.chkCancelled.Size = New System.Drawing.Size(80, 21)
+            Me.chkCancelled.Size = New System.Drawing.Size(107, 26)
             Me.chkCancelled.TabIndex = 301
             Me.chkCancelled.Text = "Cancelled?"
             Me.chkCancelled.Translatable = True
@@ -2014,11 +2063,12 @@ Namespace PresentationLayer.Views.Forms
             Me.btnViewGL.DesignerSelected = False
             Me.btnViewGL.Font = New System.Drawing.Font("Tahoma", 8.0!)
             Me.btnViewGL.ImageIndex = 0
-            Me.btnViewGL.Location = New System.Drawing.Point(3, 3)
+            Me.btnViewGL.Location = New System.Drawing.Point(4, 4)
+            Me.btnViewGL.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.btnViewGL.Name = "btnViewGL"
             Me.btnViewGL.OriginalImageName = Nothing
             Me.btnViewGL.SecurityKey = ""
-            Me.btnViewGL.Size = New System.Drawing.Size(141, 25)
+            Me.btnViewGL.Size = New System.Drawing.Size(188, 31)
             Me.btnViewGL.TabIndex = 24
             Me.btnViewGL.TabStop = False
             Me.btnViewGL.Text = "View Journal Entry"
@@ -2028,11 +2078,12 @@ Namespace PresentationLayer.Views.Forms
             Me.btnAutoApply.DesignerSelected = False
             Me.btnAutoApply.Font = New System.Drawing.Font("Tahoma", 8.0!)
             Me.btnAutoApply.ImageIndex = 0
-            Me.btnAutoApply.Location = New System.Drawing.Point(150, 3)
+            Me.btnAutoApply.Location = New System.Drawing.Point(200, 4)
+            Me.btnAutoApply.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.btnAutoApply.Name = "btnAutoApply"
             Me.btnAutoApply.OriginalImageName = Nothing
             Me.btnAutoApply.SecurityKey = ""
-            Me.btnAutoApply.Size = New System.Drawing.Size(132, 25)
+            Me.btnAutoApply.Size = New System.Drawing.Size(176, 31)
             Me.btnAutoApply.TabIndex = 25
             Me.btnAutoApply.TabStop = False
             Me.btnAutoApply.Text = "Auto Apply Invoices"
@@ -2041,11 +2092,12 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.btnPrintCheck.DesignerSelected = False
             Me.btnPrintCheck.ImageIndex = 0
-            Me.btnPrintCheck.Location = New System.Drawing.Point(288, 3)
+            Me.btnPrintCheck.Location = New System.Drawing.Point(384, 4)
+            Me.btnPrintCheck.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.btnPrintCheck.Name = "btnPrintCheck"
             Me.btnPrintCheck.OriginalImageName = Nothing
             Me.btnPrintCheck.SecurityKey = ""
-            Me.btnPrintCheck.Size = New System.Drawing.Size(151, 25)
+            Me.btnPrintCheck.Size = New System.Drawing.Size(201, 31)
             Me.btnPrintCheck.TabIndex = 291
             Me.btnPrintCheck.TabStop = False
             Me.btnPrintCheck.Text = "Print Check"
@@ -2060,20 +2112,22 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout1.Controls.Add(Me.txtTotalCredits)
             Me.CFlowLayout1.Controls.Add(Me.txtTotalDebits)
             Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Bottom
-            Me.CFlowLayout1.Location = New System.Drawing.Point(0, 951)
+            Me.CFlowLayout1.Location = New System.Drawing.Point(0, 1018)
+            Me.CFlowLayout1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.CFlowLayout1.Name = "CFlowLayout1"
-            Me.CFlowLayout1.Size = New System.Drawing.Size(1023, 30)
+            Me.CFlowLayout1.Size = New System.Drawing.Size(1364, 37)
             Me.CFlowLayout1.TabIndex = 6
             '
             'btnPrintPcReplenishment
             '
             Me.btnPrintPcReplenishment.DesignerSelected = False
             Me.btnPrintPcReplenishment.ImageIndex = 0
-            Me.btnPrintPcReplenishment.Location = New System.Drawing.Point(445, 3)
+            Me.btnPrintPcReplenishment.Location = New System.Drawing.Point(593, 4)
+            Me.btnPrintPcReplenishment.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.btnPrintPcReplenishment.Name = "btnPrintPcReplenishment"
             Me.btnPrintPcReplenishment.OriginalImageName = Nothing
             Me.btnPrintPcReplenishment.SecurityKey = ""
-            Me.btnPrintPcReplenishment.Size = New System.Drawing.Size(285, 25)
+            Me.btnPrintPcReplenishment.Size = New System.Drawing.Size(380, 31)
             Me.btnPrintPcReplenishment.TabIndex = 292
             Me.btnPrintPcReplenishment.Text = "Print Petty Cash Replenishment Report"
             '
@@ -2094,7 +2148,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalCredits.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtTotalCredits.ForeColor = System.Drawing.Color.Black
             Me.txtTotalCredits.LinkedLabel = Nothing
-            Me.txtTotalCredits.Location = New System.Drawing.Point(734, 1)
+            Me.txtTotalCredits.Location = New System.Drawing.Point(978, 1)
             Me.txtTotalCredits.Margin = New System.Windows.Forms.Padding(1)
             Me.txtTotalCredits.MaximumValue = Nothing
             Me.txtTotalCredits.MinimumValue = Nothing
@@ -2102,7 +2156,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalCredits.OldValue = Nothing
             Me.txtTotalCredits.OverrideMaxLength = 0
             Me.txtTotalCredits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtTotalCredits.Size = New System.Drawing.Size(100, 23)
+            Me.txtTotalCredits.Size = New System.Drawing.Size(133, 26)
             Me.txtTotalCredits.TabIndex = 294
             Me.txtTotalCredits.Translatable = False
             Me.txtTotalCredits.Visible = False
@@ -2124,7 +2178,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalDebits.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtTotalDebits.ForeColor = System.Drawing.Color.Black
             Me.txtTotalDebits.LinkedLabel = Nothing
-            Me.txtTotalDebits.Location = New System.Drawing.Point(836, 1)
+            Me.txtTotalDebits.Location = New System.Drawing.Point(1113, 1)
             Me.txtTotalDebits.Margin = New System.Windows.Forms.Padding(1)
             Me.txtTotalDebits.MaximumValue = Nothing
             Me.txtTotalDebits.MinimumValue = Nothing
@@ -2132,21 +2186,22 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalDebits.OldValue = Nothing
             Me.txtTotalDebits.OverrideMaxLength = 0
             Me.txtTotalDebits.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtTotalDebits.Size = New System.Drawing.Size(100, 23)
+            Me.txtTotalDebits.Size = New System.Drawing.Size(133, 26)
             Me.txtTotalDebits.TabIndex = 293
             Me.txtTotalDebits.Translatable = False
             Me.txtTotalDebits.Visible = False
             '
             'DisbursementJournalEntry
             '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+            Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
             Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
             Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Tile
-            Me.ClientSize = New System.Drawing.Size(1023, 981)
+            Me.ClientSize = New System.Drawing.Size(1364, 1055)
             Me.Controls.Add(Me.CFlowLayout1)
             Me.Controls.Add(Me.tlpDisbursement)
             Me.DefaultFormBackColor = System.Drawing.Color.Transparent
-            Me.MinimumSize = New System.Drawing.Size(1039, 590)
+            Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+            Me.MinimumSize = New System.Drawing.Size(1379, 715)
             Me.Name = "DisbursementJournalEntry"
             Me.Text = "Petty Cash Journal "
             Me.Controls.SetChildIndex(Me.tlpDisbursement, 0)
