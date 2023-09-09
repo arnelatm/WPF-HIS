@@ -31,6 +31,7 @@ Namespace PresentationLayer.Views.Forms
         Public Event FirstLineUpdateNeeded() Implements IDisbursementJournalView.FirstLineUpdateNeeded
 
         Public Event SetSupplierVatNumber(ByRef currentVatNumber As String, idNo As String, override As Boolean) Implements IDisbursementJournalView.SetSupplierVatNumber
+        Public Event PaymentTypeChanged() Implements IDisbursementJournalView.PaymentTypeChanged
 
         Public Sub New()
 
@@ -226,6 +227,15 @@ Namespace PresentationLayer.Views.Forms
                 Throw New NotImplementedException()
             End Get
             Set(value As Boolean)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property PayeeDataSource As Object Implements IDisbursementJournalView.PayeeDataSource
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Object)
                 Throw New NotImplementedException()
             End Set
         End Property

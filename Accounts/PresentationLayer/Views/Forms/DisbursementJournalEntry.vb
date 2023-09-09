@@ -35,6 +35,7 @@ Namespace PresentationLayer.Views.Forms
         Public Event FirstLineUpdateNeeded() Implements IDisbursementJournalView.FirstLineUpdateNeeded
 
         Public Event SetSupplierVatNumber(ByRef currentVatNumber As String, ByVal idNo As String, ByVal override As Boolean) Implements IDisbursementJournalView.SetSupplierVatNumber
+        Public Event PaymentTypeChanged() Implements IDisbursementJournalView.PaymentTypeChanged
 
         Public Sub New(ByVal tableName As String)
             MyBase.New()
@@ -250,7 +251,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property PayeeIdNo As Int32? Implements IDisbursementJournalView.PayeeIdNo
             Get
-                Return cboPayeeIdNo.GetNullableValue(Of Int32)
+                Return cboPayeeIdNo.GetValue(Of Int32)
             End Get
             Set
                 If cboPayeeIdNo.DataSource IsNot Nothing Then
@@ -307,6 +308,20 @@ Namespace PresentationLayer.Views.Forms
         Public Property SuppliersByName As Object Implements IDisbursementJournalView.SuppliersByName
         Public Property RevCostCentersByCode As Object Implements IDisbursementJournalView.RevCostCentersByCode
         Public Property BankTransfer As Boolean Implements IDisbursementJournalView.BankTransfer
+
+        Private _payeeDataSource
+
+
+        Public Property PayeeDataSource As Object Implements IDisbursementJournalView.PayeeDataSource
+            Get
+                Return _payeeDataSource
+            End Get
+            Set(value As Object)
+                _payeeDataSource = value
+                cboPayeeIdNo.DataSource = value
+                cboPayeeIdNo.DropDownStyle = ComboBoxStyle.DropDownList
+            End Set
+        End Property
 
         Public Property Posted As Boolean Implements IDisbursementJournalView.Posted
             Get
@@ -814,13 +829,15 @@ Namespace PresentationLayer.Views.Forms
                     cbDataSource = _CustomersByName
                 End If
             End If
+            cboPayeeIdNo.ValueMember = "IdNo"
+            cboPayeeIdNo.DisplayMember = "Name"
             cboPayeeIdNo.DataSource = cbDataSource
-
-            If curValue IsNot Nothing Then
-                cboPayeeIdNo.SelectedValue = curValue
-            Else
-                cboPayeeIdNo.SelectedValue = -1
-            End If
+            cboPayeeIdNo.SetValue(curValue)
+            'If curValue IsNot Nothing Then
+            '    cboPayeeIdNo.SelectedIndex = cboPayeeIdNo.SetValue(curValue)
+            'Else
+            '    cboPayeeIdNo.SelectedIndex = -1
+            'End If
             cboPaymentType.SelectedValue = IIf(PaymentType = Nothing, 0, PaymentType)
         End Sub
 
@@ -840,6 +857,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
 
+        Private Sub cboPayeeIdNo_ValueMemberChanged(sender As Object, e As EventArgs) Handles cboPayeeIdNo.ValueMemberChanged
+            Debugger.Break()
+        End Sub
     End Class
 
 End Namespace

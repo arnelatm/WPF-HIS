@@ -1326,6 +1326,8 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         SetAllControlsDynamicProperties(eventType.ViewControl)
         CreateDataSources()
         EntryFormLoaded()
+        EditMode = True
+        EditMode = False
         'GoFirstRecord()
         'GoLastRecord()
     End Sub

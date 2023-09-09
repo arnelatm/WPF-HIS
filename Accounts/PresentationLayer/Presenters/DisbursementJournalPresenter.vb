@@ -10,6 +10,7 @@ Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
+Imports AATM.PresentationLayer.Presenters
 
 Namespace PresentationLayer.Presenters
 
@@ -22,6 +23,7 @@ Namespace PresentationLayer.Presenters
         Protected DtOiInsertTable As New DataTable
         Protected DtOiUpdateTable As New DataTable
         Protected DtUpdateTable As New DataTable
+        Public Event PaymentTypeChanged()
 
         Private _oiItemService
         Private _journalItemService
@@ -94,6 +96,7 @@ Namespace PresentationLayer.Presenters
             AddHandler view.PrintPcReplenishment, AddressOf OnPrintPcReplenishment
             AddHandler view.FirstLineUpdateNeeded, AddressOf OnFirstLineUpdateNeeded
             AddHandler view.SetSupplierVatNumber, AddressOf SetSupplierVatNumber
+            'AddHandler view.PaymentTypeChanged, AddressOf OnPaymentTypeChanged
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -117,6 +120,7 @@ Namespace PresentationLayer.Presenters
             End If
             CreateSpecialAccountDataSource("DiscountAccountIdNo", {EnumToCode(SpecialAccountSelection.PurchaseDiscount)})
         End Sub
+
 
         Private Function GetAdvancesToSupplierAccountIdNo()
             Return GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.AdvancesToSupplier), "Account", "SpecialAccount", "IdNo")
@@ -251,21 +255,23 @@ Namespace PresentationLayer.Presenters
 
         Private Sub OnFirstLineUpdateNeeded()
             If EditMode Or AddMode Then
-                If View.JournalItems.Count() = 0 Then
-                    View.JournalItems = New List(Of JournalItemView) From {
+                If View.JournalItems IsNot Nothing Then
+                    If View.JournalItems.Count() = 0 Then
+                        View.JournalItems = New List(Of JournalItemView) From {
                             FirstJournalItem()
                             }
+                    End If
+                    For Each item In View.JournalItems
+                        item.JournalIdNo = View.IdNo
+                        item.Sequence = 1
+                        item.AccountIdNo = View.AccountIdNo
+                        item.Credit = View.Amount
+                        item.Debit = 0
+                        item.RevCostCenterIdNo = 0
+                        MakePayTypeAndSpecialAccount(item, View.AccountIdNo)
+                        Exit For
+                    Next
                 End If
-                For Each item In View.JournalItems
-                    item.JournalIdNo = View.IdNo
-                    item.Sequence = 1
-                    item.AccountIdNo = View.AccountIdNo
-                    item.Credit = View.Amount
-                    item.Debit = 0
-                    item.RevCostCenterIdNo = 0
-                    MakePayTypeAndSpecialAccount(item, View.AccountIdNo)
-                    Exit For
-                Next
             End If
         End Sub
 
@@ -1043,8 +1049,18 @@ Namespace PresentationLayer.Presenters
             ' the DepositType so in order to override this part we need to retrieve the DepositType first
             ' because when assigning the cboPayeeIdNo the dataSource must be correct that is why
             ' we need to set the DataSource part of the cboPayeeIdNo before we can assign the PayeeIdNo
-            View.PaymentType = dataModel.PaymentType
-            CallByName(View, "setPayeeDataSource", CallType.Method, View.PaymentType)
+            Dim x As String = CodeToEnum(Of PaymentTypeSelection)(dataModel.PaymentType)
+            Select Case x
+                Case PaymentTypeSelection.Employee
+                    MakeVarDataSources({New String() {"Employee", "PayeeDataSource", Nothing, Nothing}})
+                Case PaymentTypeSelection.Supplier
+                    MakeVarDataSources({New String() {"Supplier", "PayeeDataSource", Nothing, Nothing}})
+                Case PaymentTypeSelection.CustomerRefund
+                    MakeVarDataSources({New String() {"Customer", "PayeeDataSource", Nothing, Nothing}})
+            End Select
+
+
+            'CallByName(View, "setPayeeDataSource", CallType.Method, View.PaymentType)
         End Sub
 
         Private Sub OnDisbursementJournalChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler
