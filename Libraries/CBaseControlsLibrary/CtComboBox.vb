@@ -406,13 +406,14 @@ Public Class CtComboBox
     Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged
         Dim nCol As Int32 = 0
         If DataSource IsNot Nothing Then
-            If DataSource.Columns.Count() = 1 Then
+            Dim data As DataTable = DirectCast(DataSource, DataTable)
+            If data.Columns.Count = 0 Then
                 nCol = 0
             Else
                 nCol = 1
             End If
         End If
-        PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(1).ToString())
+        PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(nCol).ToString())
     End Sub
 
     Private Shadows Sub OnParentChanged(ByVal sender As Object, ByVal e As EventArgs)

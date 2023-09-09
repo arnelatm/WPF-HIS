@@ -96,7 +96,7 @@ Namespace PresentationLayer.Presenters
             AddHandler view.PrintPcReplenishment, AddressOf OnPrintPcReplenishment
             AddHandler view.FirstLineUpdateNeeded, AddressOf OnFirstLineUpdateNeeded
             AddHandler view.SetSupplierVatNumber, AddressOf SetSupplierVatNumber
-            'AddHandler view.PaymentTypeChanged, AddressOf OnPaymentTypeChanged
+            AddHandler view.PaymentTypeChanged, AddressOf MakePayeeIdNoDataSource
         End Sub
 
         Protected Overrides Sub CreateDataSources()
@@ -1049,19 +1049,23 @@ Namespace PresentationLayer.Presenters
             ' the DepositType so in order to override this part we need to retrieve the DepositType first
             ' because when assigning the cboPayeeIdNo the dataSource must be correct that is why
             ' we need to set the DataSource part of the cboPayeeIdNo before we can assign the PayeeIdNo
-            Dim x As String = CodeToEnum(Of PaymentTypeSelection)(dataModel.PaymentType)
+            MakePayeeIdNoDataSource(dataModel.PaymentType)
+        End Sub
+
+        Private Sub MakePayeeIdNoDataSource(paymentType As String)
+            Dim x As PaymentTypeSelection = CodeToEnum(Of PaymentTypeSelection)(paymentType)
             Select Case x
                 Case PaymentTypeSelection.Employee
                     MakeVarDataSources({New String() {"Employee", "PayeeDataSource", Nothing, Nothing}})
-                Case PaymentTypeSelection.Supplier
+                Case PaymentTypeSelection.Supplier, PaymentTypeSelection.AccountsPayable
                     MakeVarDataSources({New String() {"Supplier", "PayeeDataSource", Nothing, Nothing}})
                 Case PaymentTypeSelection.CustomerRefund
                     MakeVarDataSources({New String() {"Customer", "PayeeDataSource", Nothing, Nothing}})
+                Case Else
+                    View.PayeeDataSource = Nothing
             End Select
-
-
-            'CallByName(View, "setPayeeDataSource", CallType.Method, View.PaymentType)
         End Sub
+
 
         Private Sub OnDisbursementJournalChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler
             With eventType.BindingSource
