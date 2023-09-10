@@ -1474,6 +1474,19 @@ Namespace AdoNet
             Return GetDb().RunStoredProcedure(storedProcedureName, parameters)
         End Function
 
+        Public Function PerformUtility(utilityName As String, Optional parameters As Object = Nothing) As Object Implements IBaseDao.PerformUtility
+            Dim retVal As Int16
+            Dim storedProcedureName As String
+            If parameters.StoredProcedure Then
+                storedProcedureName = "sp" + utilityName
+                retVal = GetDb().RunStoredProcedure(storedProcedureName, parameters)
+            Else
+
+            End If
+            Return retVal
+        End Function
+
+
         Public Function DeleteRecord(idNo As Integer, tableName As String) As Integer Implements IBaseDao.DeleteRecord
             Dim params() As Object = {"@IdNo", idNo}
             Dim sql As String

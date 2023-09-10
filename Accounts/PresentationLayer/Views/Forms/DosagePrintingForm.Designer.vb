@@ -25,7 +25,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DosagePrintingForm))
-            Dim CBlendItems1 As AATM.Libraries.CBaseControlsLibrary.cBlendItems = New AATM.Libraries.CBaseControlsLibrary.cBlendItems()
+            Dim CBlendItems2 As AATM.Libraries.CBaseControlsLibrary.cBlendItems = New AATM.Libraries.CBaseControlsLibrary.cBlendItems()
             Me.CTextBox1 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.lblGender = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -85,14 +85,14 @@ Namespace PresentationLayer.Views.Forms
             Me.SplitContainer1.Panel2.Controls.Add(Me.btnClear)
             Me.SplitContainer1.Panel2.Controls.Add(Me.CButton1)
             Me.SplitContainer1.Panel2.Controls.Add(Me.TableLayoutPanel1)
-            Me.SplitContainer1.Size = New System.Drawing.Size(870, 553)
+            Me.SplitContainer1.Size = New System.Drawing.Size(870, 551)
             Me.SplitContainer1.SplitterDistance = 308
             '
             'FormTreeView
             '
             Me.FormTreeView.LineColor = System.Drawing.Color.Black
             Me.FormTreeView.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.FormTreeView.Size = New System.Drawing.Size(308, 553)
+            Me.FormTreeView.Size = New System.Drawing.Size(308, 551)
             '
             'ImageListTreeView
             '
@@ -141,7 +141,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'CButton1
             '
-            Me.CButton1.DesignerSelected = True
+            Me.CButton1.DesignerSelected = False
             Me.CButton1.ImageIndex = 0
             Me.CButton1.Location = New System.Drawing.Point(19, 502)
             Me.CButton1.Name = "CButton1"
@@ -154,6 +154,7 @@ Namespace PresentationLayer.Views.Forms
             'lblGender
             '
             Me.lblGender.AutoSize = True
+            Me.lblGender.BackColor = System.Drawing.Color.Transparent
             Me.lblGender.DisplayOnly = True
             Me.lblGender.EditingMode = False
             Me.lblGender.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -169,6 +170,7 @@ Namespace PresentationLayer.Views.Forms
             'lblDoseUnit
             '
             Me.lblDoseUnit.AutoSize = True
+            Me.lblDoseUnit.BackColor = System.Drawing.Color.Transparent
             Me.TableLayoutPanel1.SetColumnSpan(Me.lblDoseUnit, 2)
             Me.lblDoseUnit.DisplayOnly = True
             Me.lblDoseUnit.EditingMode = False
@@ -185,6 +187,7 @@ Namespace PresentationLayer.Views.Forms
             'CLabel1
             '
             Me.CLabel1.AutoSize = True
+            Me.CLabel1.BackColor = System.Drawing.Color.Transparent
             Me.CLabel1.DisplayOnly = True
             Me.CLabel1.EditingMode = False
             Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -200,6 +203,7 @@ Namespace PresentationLayer.Views.Forms
             'CLabel10
             '
             Me.CLabel10.AutoSize = True
+            Me.CLabel10.BackColor = System.Drawing.Color.Transparent
             Me.CLabel10.DisplayOnly = True
             Me.CLabel10.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CLabel10.EditingMode = False
@@ -216,6 +220,7 @@ Namespace PresentationLayer.Views.Forms
             'CLabel5
             '
             Me.CLabel5.AutoSize = True
+            Me.CLabel5.BackColor = System.Drawing.Color.Transparent
             Me.CLabel5.DisplayOnly = True
             Me.CLabel5.EditingMode = False
             Me.CLabel5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -262,6 +267,7 @@ Namespace PresentationLayer.Views.Forms
             'CLabel8
             '
             Me.CLabel8.AutoSize = True
+            Me.CLabel8.BackColor = System.Drawing.Color.Transparent
             Me.CLabel8.DisplayOnly = True
             Me.CLabel8.EditingMode = False
             Me.CLabel8.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -277,6 +283,7 @@ Namespace PresentationLayer.Views.Forms
             'CLabel7
             '
             Me.CLabel7.AutoSize = True
+            Me.CLabel7.BackColor = System.Drawing.Color.Transparent
             Me.TableLayoutPanel1.SetColumnSpan(Me.CLabel7, 2)
             Me.CLabel7.DisplayOnly = True
             Me.CLabel7.EditingMode = False
@@ -423,6 +430,7 @@ Namespace PresentationLayer.Views.Forms
             'CLabel11
             '
             Me.CLabel11.AutoSize = True
+            Me.CLabel11.BackColor = System.Drawing.Color.Transparent
             Me.TableLayoutPanel1.SetColumnSpan(Me.CLabel11, 3)
             Me.CLabel11.DisplayOnly = True
             Me.CLabel11.EditingMode = False
@@ -439,6 +447,7 @@ Namespace PresentationLayer.Views.Forms
             'CLabel12
             '
             Me.CLabel12.AutoSize = True
+            Me.CLabel12.BackColor = System.Drawing.Color.Transparent
             Me.TableLayoutPanel1.SetColumnSpan(Me.CLabel12, 3)
             Me.CLabel12.DisplayOnly = True
             Me.CLabel12.EditingMode = False
@@ -455,6 +464,7 @@ Namespace PresentationLayer.Views.Forms
             'lblFileNo
             '
             Me.lblFileNo.AutoSize = True
+            Me.lblFileNo.BackColor = System.Drawing.Color.Transparent
             Me.lblFileNo.DisplayOnly = True
             Me.lblFileNo.EditingMode = False
             Me.lblFileNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -503,6 +513,7 @@ Namespace PresentationLayer.Views.Forms
             'lblAge
             '
             Me.lblAge.AutoSize = True
+            Me.lblAge.BackColor = System.Drawing.Color.Transparent
             Me.lblAge.DisplayOnly = True
             Me.lblAge.EditingMode = False
             Me.lblAge.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -549,6 +560,7 @@ Namespace PresentationLayer.Views.Forms
             'lblPatientName
             '
             Me.lblPatientName.AutoSize = True
+            Me.lblPatientName.BackColor = System.Drawing.Color.Transparent
             Me.lblPatientName.DisplayOnly = True
             Me.lblPatientName.EditingMode = False
             Me.lblPatientName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -670,7 +682,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'btnScanQrCode
             '
-            Me.btnScanQrCode.DesignerSelected = False
+            Me.btnScanQrCode.DesignerSelected = True
             Me.btnScanQrCode.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.btnScanQrCode.ImageIndex = 0
             Me.btnScanQrCode.Location = New System.Drawing.Point(413, 35)
@@ -767,6 +779,7 @@ Namespace PresentationLayer.Views.Forms
             'CLabel3
             '
             Me.CLabel3.AutoSize = True
+            Me.CLabel3.BackColor = System.Drawing.Color.Transparent
             Me.CLabel3.DisplayOnly = True
             Me.CLabel3.EditingMode = False
             Me.CLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -846,6 +859,7 @@ Namespace PresentationLayer.Views.Forms
             'lblBarCode
             '
             Me.lblBarCode.AutoSize = True
+            Me.lblBarCode.BackColor = System.Drawing.Color.Transparent
             Me.lblBarCode.DisplayOnly = True
             Me.lblBarCode.Dock = System.Windows.Forms.DockStyle.Fill
             Me.lblBarCode.EditingMode = False
@@ -862,6 +876,7 @@ Namespace PresentationLayer.Views.Forms
             'lblGtin
             '
             Me.lblGtin.AutoSize = True
+            Me.lblGtin.BackColor = System.Drawing.Color.Transparent
             Me.lblGtin.DisplayOnly = True
             Me.lblGtin.Dock = System.Windows.Forms.DockStyle.Fill
             Me.lblGtin.EditingMode = False
@@ -1086,9 +1101,9 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.btnFindPatient.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
             Me.btnFindPatient.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-            CBlendItems1.iColor = New System.Drawing.Color() {System.Drawing.Color.White, System.Drawing.Color.White}
-            CBlendItems1.iPoint = New Single() {0!, 1.0!}
-            Me.btnFindPatient.ColorFillBlend = CBlendItems1
+            CBlendItems2.iColor = New System.Drawing.Color() {System.Drawing.Color.White, System.Drawing.Color.White}
+            CBlendItems2.iPoint = New Single() {0!, 1.0!}
+            Me.btnFindPatient.ColorFillBlend = CBlendItems2
             Me.btnFindPatient.DesignerSelected = False
             Me.btnFindPatient.Image = Global.AATM.Accounts.My.Resources.Resources.btnfind
             Me.btnFindPatient.ImageIndex = 0
@@ -1104,6 +1119,7 @@ Namespace PresentationLayer.Views.Forms
             'lblItemName
             '
             Me.lblItemName.AutoSize = True
+            Me.lblItemName.BackColor = System.Drawing.Color.Transparent
             Me.lblItemName.DisplayOnly = True
             Me.lblItemName.EditingMode = False
             Me.lblItemName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -1150,6 +1166,7 @@ Namespace PresentationLayer.Views.Forms
             'CLabel2
             '
             Me.CLabel2.AutoSize = True
+            Me.CLabel2.BackColor = System.Drawing.Color.Transparent
             Me.CLabel2.DisplayOnly = True
             Me.CLabel2.EditingMode = False
             Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
@@ -1279,7 +1296,6 @@ Namespace PresentationLayer.Views.Forms
             Me.ClientSize = New System.Drawing.Size(870, 606)
             Me.MinimumSize = New System.Drawing.Size(16, 100)
             Me.Name = "DosagePrintingForm"
-            Me.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.Text = "Dosage Printing"
             Me.ViewDisplayName = "DosagePrintingForm"
             Me.SplitContainer1.Panel1.ResumeLayout(False)

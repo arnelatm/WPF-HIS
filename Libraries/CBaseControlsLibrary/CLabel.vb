@@ -16,6 +16,7 @@ Public Class CLabel
         Dim myFont As New Font("Sans Serif", 10, FontStyle.Regular)
         Text = ""
         TextAlign = ContentAlignment.MiddleLeft
+        BackColor = System.Drawing.Color.Transparent
         Font = myFont
         Margin = New Padding(1, 1, 1, 1)
     End Sub

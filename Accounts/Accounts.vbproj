@@ -553,6 +553,7 @@
     <Compile Include="PresentationLayer\Presenters\ApArEmReportPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\BasicPresenterHelper.vb" />
     <Compile Include="PresentationLayer\Presenters\DateRangePresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\UtilityPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\InvRequestPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\StockRequestApprovalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\FinancialReportPresenter.vb" />
@@ -629,6 +630,12 @@
     <Compile Include="PresentationLayer\Views\Forms\InvRequestForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\ProductBaseUnitChanger.Designer.vb">
+      <DependentUpon>ProductBaseUnitChanger.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\ProductBaseUnitChanger.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\StockRequestApprovalEntry.Designer.vb">
       <DependentUpon>StockRequestApprovalEntry.vb</DependentUpon>
     </Compile>
@@ -637,6 +644,7 @@
     </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IApArEmReportView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IContactDateRangeView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IUtilityView.vb" />
     <Compile Include="PresentationLayer\Views\InvRequestView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeLeaveApprovalItemView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeLeaveCreditView.vb" />
@@ -2063,6 +2071,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\InvRequestForm.resx">
       <DependentUpon>InvRequestForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\ProductBaseUnitChanger.resx">
+      <DependentUpon>ProductBaseUnitChanger.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PurchaseOrderEntry.resx">
       <DependentUpon>PurchaseOrderEntry.vb</DependentUpon>
