@@ -485,12 +485,20 @@ Public Class CtComboBox
         If value Is DBNull.Value OrElse value Is Nothing Then
             SelectedIndex = -1
         Else
-            If value > 0 Then
-                ValueSearch(value)
-            Else
-                SelectedIndex = -1
-            End If
+            Select Case DisplayMember
+                Case "IdNo"
+                    If DisplayMember Then
+                        If value > 0 Then
+                            ValueSearch(value)
+                        Else
+                            SelectedIndex = -1
+                        End If
+                    End If
+                Case "Code", "Name"
+                    ValueSearch(value)
+            End Select
         End If
+
     End Sub
 
     Public Property DataValue
