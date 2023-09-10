@@ -332,6 +332,10 @@ Namespace ServiceLayer.ActionService
             Return DataDao.GetLastPurchaseCost(productIdNo)
         End Function
 
+        Public Function PerformUtility(ByVal utilityName As String) Implements IServiceAccounts.PerformUtility
+            Return DataDao.PerformUtility(utilityName)
+        End Function
+
         'Public Function GetCustomerOpenInvoices(Of TM)(idNo As Int32) As List(Of TM)
         '    Return GetOpenInvoices(Of TM)(idNo)
         'End Function

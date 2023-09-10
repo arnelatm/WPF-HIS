@@ -4,8 +4,8 @@ Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common.PresentationLayer.Presenters
 Imports AATM.Libraries.MessagingLibrary.Messaging
 Imports AATM.Libraries.GlobalFuncNSub
-Imports AATM.DataLayer
-Imports AATM.Accounts.DataLayer.AdoNet
+Imports AATM.Accounts.PresentationLayer.Models
+Imports AATM.Accounts.PresentationLayer.Views.Forms
 
 Namespace PresentationLayer.Presenters
 
@@ -24,6 +24,17 @@ Namespace PresentationLayer.Presenters
             WithTreeView = False
             SortOrderKey = "ProductName"
             AddHandler view.FilterRecords, AddressOf FilterRecords
+            AddHandler view.ChangeBaseUnitButtonClicked, AddressOf OnChangeBaseUnitButtonClicked
+        End Sub
+
+        Private Sub OnChangeBaseUnitButtonClicked()
+            If UserHasAccess("InventoryManager") Then
+                Dim formToRun = Activator.CreateInstance(GetType(ProductBaseUnitChanger), View)
+                Dim pType As Type = GetType(UtilityPresenter(Of ProductModel))
+                formToRun.Presenter = Activator.CreateInstance(pType, {formToRun})
+                formToRun.ShowDialog()
+                UpdateView(View.IdNo)
+            End If
         End Sub
 
         'Private Function GetBranchCount()

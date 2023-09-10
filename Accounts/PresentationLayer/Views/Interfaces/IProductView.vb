@@ -20,6 +20,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property UnitsByCode As Object
         Property UserName As String
         Event FilterRecords()
+        Event ChangeBaseUnitButtonClicked()
 
     End Interface
 

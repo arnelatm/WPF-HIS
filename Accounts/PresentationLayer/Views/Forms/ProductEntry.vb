@@ -1,8 +1,5 @@
 ﻿Imports System.Globalization
-Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 
 Namespace PresentationLayer.Views.Forms
@@ -198,7 +195,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Public Event FilterRecords() Implements IProductView.FilterRecords
-
+        Public Event ChangeBaseUnitButtonClicked() Implements IProductView.ChangeBaseUnitButtonClicked
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
@@ -257,6 +254,10 @@ Namespace PresentationLayer.Views.Forms
         Protected Overrides Sub AfterAdd()
             MyBase.AfterAdd()
             'cboBranchIdNo.SelectedValue = GlobalVariables.BranchIdNo
+        End Sub
+
+        Private Sub btnBaseUnitChanger_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnBaseUnitChanger.ClickButtonArea
+            RaiseEvent ChangeBaseUnitButtonClicked()
         End Sub
 
 
