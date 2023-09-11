@@ -60,7 +60,7 @@ Namespace PresentationLayer.Views.Forms
                 dtpCheckDate.Visible = False
             End If
             FirstControl = cboPaymentType
-            Height = 710
+            Height = 860
         End Sub
 
         'Private Sub JournalItemBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
@@ -170,13 +170,13 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DateCreated As DateTime? Implements IDisbursementJournalView.DateCreated
             Get
-                Return dtpDateCreated.Value
+                Return txtDateCreated.Text
             End Get
             Set
                 If Value.HasValue Then
-                    dtpDateCreated.Value = Value
+                    txtDateCreated.Text = Value
                 Else
-                    dtpDateCreated.Value = Date.Now()
+                    txtDateCreated.Text = Date.Now()
                 End If
             End Set
         End Property
@@ -415,7 +415,7 @@ Namespace PresentationLayer.Views.Forms
          {"CheckDate", dtpCheckDate},
          {"PcClosed", chkPcClosed},
          {"CheckNumber", txtCheckNumber},
-         {"DateCreated", dtpDateCreated},
+         {"DateCreated", txtDateCreated},
          {"PayType", cboPayType},
          {"DiscountAccountIdNo", cboDiscountAccountIdNo},
          {"DiscountTaken", txtDiscountTaken},
@@ -764,14 +764,14 @@ Namespace PresentationLayer.Views.Forms
                 cboPayeeIdNo.SelectedIndex = -1
                 tlpDisbursement.SetCellPosition(cboPayeeIdNo, New TableLayoutPanelCellPosition(12, 9))
                 tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(1, 2))
-                tlpDisbursement.SetColumnSpan(txtPayeeName, 8)
+                tlpDisbursement.SetColumnSpan(txtPayeeName, 7)
             Else
                 cboPayeeIdNo.Visible = True
                 txtPayeeName.Visible = False
                 txtPayeeName.Text = cboPayeeIdNo.Text
-                tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(6, 9))
+                tlpDisbursement.SetCellPosition(txtPayeeName, New TableLayoutPanelCellPosition(12, 9))
                 tlpDisbursement.SetCellPosition(cboPayeeIdNo, New TableLayoutPanelCellPosition(1, 2))
-                tlpDisbursement.SetColumnSpan(txtPayeeName, 3)
+                tlpDisbursement.SetColumnSpan(txtPayeeName, 7)
             End If
         End Sub
 

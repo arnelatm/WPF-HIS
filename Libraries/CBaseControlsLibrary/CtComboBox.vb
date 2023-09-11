@@ -15,7 +15,7 @@ Public Class CtComboBox
 
     'Private MyErrorProvider As New ErrorProviderExtended
     Private _translatable As Boolean = False
-    Private _editingMode As Boolean = True
+    Private _editingMode As Boolean = False
     Private _filterRule As Expression(Of Func(Of String, String, Boolean))
     Private _filterRuleCompiled As Func(Of String, Boolean)
     Private _propertySelector As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String)))
@@ -88,6 +88,7 @@ Public Class CtComboBox
                 ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlBackgroundColor
             End If
+
         Else
             DropDownStyle = ComboBoxStyle.Simple
             DropDownHeight = Height
@@ -437,8 +438,8 @@ Public Class CtComboBox
         ValueMember = "IdNo"
         DisplayMember = "Name"
         _defaultMaxDropDownItems = MaxDropDownItems
-        _defaultDropdownStyle = DropDownStyle
-        _defaultDropDownHeight = DropDownHeight
+        _defaultDropdownStyle = ComboBoxStyle.DropDownList
+        _defaultDropDownHeight = 106
         Text = ""
         _filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
         _suggestListOrderRuleCompiled = Function(s) s
@@ -446,6 +447,7 @@ Public Class CtComboBox
         SetStyle(ControlStyles.EnableNotifyMessage, True)
         SuggestListForm.SuggestListBox.DataSource = _suggestBindingList
         SuggestListForm.SuggestListBox.ForeColor = Color.Green
+        EditingMode = False
         AddHandler SuggestListForm.SuggestListBox.Click, AddressOf SuggestListBoxOnClick
         AddHandler ParentChanged, AddressOf OnParentChanged
 
