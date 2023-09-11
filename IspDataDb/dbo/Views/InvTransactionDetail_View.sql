@@ -3,7 +3,7 @@ AS
 SELECT     dbo.InvTransactionDetail.IdNo, dbo.InvTransactionDetail.Sequence, dbo.InvTransactionDetail.InvTransactionIdNo, dbo.InvTransactionDetail.ProductIdNo, dbo.InvTransactionDetail.Quantity, dbo.InvTransactionDetail.ExpiryDate, dbo.InvTransactionDetail.UnitIdNo, 
                   dbo.InvTransactionDetail.BatchNo, dbo.InvTransactionDetail.NetAmount, dbo.Product.ProductCode, dbo.Product.ProductName, dbo.Product.ProductNameAra, dbo.Product.Barcode, dbo.Product.GTIN, dbo.Product.BaseUnitIdNo, dbo.Unit.UnitCode, dbo.Unit.UnitName, dbo.Unit.UnitNameAra, 
                   dbo.Category.VatSaleAccountIdNo, dbo.Category.SaleAccountIdNo, dbo.Category.PurchaseAccountIdNo, dbo.Product.CategoryIdNo,
-                      (SELECT     COUNT(ProductIdNo) AS Expr1
+                      (SELECT     COUNT(ProductIdNo) 
                        FROM        dbo.ProductUnit
                        WHERE     (ProductIdNo = dbo.InvTransactionDetail.ProductIdNo)) AS UnitCount, dbo.Category.NeedsExpiryDate, dbo.InvTransactionDetail.UnitCost, dbo.InvTransactionDetail.InventoryIdNo
 FROM        dbo.InvTransactionDetail LEFT OUTER JOIN

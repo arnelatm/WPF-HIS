@@ -77,6 +77,7 @@ Public Class CFindForm
     'End Function
 
     Private Sub BtnFind_Click(sender As Object, e As EventArgs) Handles BtnFind.Click
+        Debugger.Break()
         DialogResult = DialogResult.OK
         If _findableControl.FindDataType = IFindableControl.DataTypeEnum.String Then
             _findableControl.BegFindValue = TxtTextToSearch.Text
@@ -217,7 +218,7 @@ Public Class CFindForm
             chkChecked.Visible = False
             txtBegValue.Visible = False
             txtEndValue.Visible = False
-            Height = 165
+            Height = 200
         Else
             SetupDisplay()
         End If
