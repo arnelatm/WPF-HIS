@@ -145,7 +145,11 @@ Namespace AdoNet
             Dim sql As String = " SELECT " & GetPrimaryFieldName() & " FROM [" & tableName & "] " & " Where "
             Dim params As String() = Nothing
             Dim searchString As String
-            If findableControl.FindDataType = IFindableControl.DataTypeEnum.String Then
+            If findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
+                sql &= GetActualFieldName(findableControl.FieldName).Trim() & " = @SearchString"
+                searchString = findableControl.BegFindValue
+                params = {"@SearchString", searchString}
+            ElseIf findableControl.FindDataType = IFindableControl.DataTypeEnum.String Then
                 If findableControl.BegFindValue Is Nothing OrElse findableControl.BegFindValue = "" Then
                     sql &= " (" & GetActualFieldName(findableControl.FieldName) & " Is Null or " & GetActualFieldName(findableControl.FieldName) & " = '') "
                 Else

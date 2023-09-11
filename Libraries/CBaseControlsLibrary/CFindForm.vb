@@ -77,13 +77,18 @@ Public Class CFindForm
     'End Function
 
     Private Sub BtnFind_Click(sender As Object, e As EventArgs) Handles BtnFind.Click
-        Debugger.Break()
         DialogResult = DialogResult.OK
         If _findableControl.FindDataType = IFindableControl.DataTypeEnum.String Then
             _findableControl.BegFindValue = TxtTextToSearch.Text
             If _findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
                 _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
-                _findableControl.BegFindValue = cboTextToSearch.SelectedValue
+                If TypeOf _findableControl IsNot CtComboBox Then
+                    _findableControl.BegFindValue = cboTextToSearch.SelectedValue
+                    _findableControl.EndFindValue = cboTextToSearch.SelectedValue
+                Else
+                    _findableControl.BegFindValue = cbtTextToSearch.SelectedValue
+                    _findableControl.EndFindValue = cbtTextToSearch.SelectedValue
+                End If
             ElseIf RBtnStart.Checked Then
                 _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.StartOfField
             ElseIf RBtnExactMatch.Checked Then
@@ -99,7 +104,13 @@ Public Class CFindForm
         ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Date Then
             If _findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
                 _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
-                _findableControl.BegFindValue = cboTextToSearch.SelectedValue
+                If TypeOf _findableControl IsNot CtComboBox Then
+                    _findableControl.BegFindValue = cboTextToSearch.SelectedValue
+                    _findableControl.EndFindValue = cboTextToSearch.SelectedValue
+                Else
+                    _findableControl.BegFindValue = cbtTextToSearch.SelectedValue
+                    _findableControl.EndFindValue = cbtTextToSearch.SelectedValue
+                End If
             Else
                 _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
                 _findableControl.BegFindValue = dtpBegDate.Value
@@ -108,7 +119,13 @@ Public Class CFindForm
         ElseIf _findableControl.FindDataType = IFindableControl.DataTypeEnum.Decimal Or _findableControl.FindDataType = IFindableControl.DataTypeEnum.Integer Then
             If _findableControl.SearchMode = IFindableControl.SearchModeEnum.ComboBox Then
                 _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
-                _findableControl.BegFindValue = cboTextToSearch.SelectedValue
+                If TypeOf _findableControl IsNot CtComboBox Then
+                    _findableControl.BegFindValue = cboTextToSearch.SelectedValue
+                    _findableControl.EndFindValue = cboTextToSearch.SelectedValue
+                Else
+                    _findableControl.BegFindValue = cbtTextToSearch.SelectedValue
+                    _findableControl.EndFindValue = cbtTextToSearch.SelectedValue
+                End If
             Else
                 _findableControl.SearchPlace = IFindableControl.SearchPlaceEnum.ExactValue
                 If txtBegValue.Text Is Nothing OrElse txtBegValue.Text = "" Then
@@ -205,19 +222,32 @@ Public Class CFindForm
             'lblLookFor3.Visible = False
             'lblLookFor4.Visible = False
             TxtTextToSearch.Visible = False
-            cboTextToSearch.Visible = True
+            If TypeOf _findableControl IsNot CtComboBox Then
+                cboTextToSearch.Visible = True
+                cboTextToSearch.DataSource = _findableControl.FindDataSource
+                cboTextToSearch.DisplayMember = _findableControl.FindDisplayMember
+                cboTextToSearch.ValueMember = _findableControl.FindValueMember
+                cboTextToSearch.EditingMode = True
+                cbtTextToSearch.Visible = False
+            Else
+                cbtTextToSearch.Visible = True
+                cbtTextToSearch.DataSource = _findableControl.FindDataSource
+                cbtTextToSearch.DisplayMember = _findableControl.FindDisplayMember
+                cbtTextToSearch.ValueMember = _findableControl.FindValueMember
+                cbtTextToSearch.EditingMode = True
+                cboTextToSearch.Visible = False
+            End If
             RBtnAnywhere.Visible = False
             RBtnStart.Visible = False
             RBtnExactMatch.Visible = False
-            cboTextToSearch.DataSource = _findableControl.FindDataSource
-            cboTextToSearch.DisplayMember = _findableControl.FindDisplayMember
-            cboTextToSearch.ValueMember = _findableControl.FindValueMember
             dtpBegDate.Visible = False
             dtpEndDate.Visible = False
             lblTo1.Visible = False
             chkChecked.Visible = False
             txtBegValue.Visible = False
             txtEndValue.Visible = False
+            dtpBegDate.EditingMode = True
+            chkChecked.EditingMode = True
             Height = 200
         Else
             SetupDisplay()
@@ -240,6 +270,7 @@ Public Class CFindForm
         If _findableControl.FindDataType = IFindableControl.DataTypeEnum.String Then
             TxtTextToSearch.Visible = True
             cboTextToSearch.Visible = False
+            cbtTextToSearch.Visible = False
             RBtnAnywhere.Visible = True
             RBtnStart.Visible = True
             RBtnExactMatch.Visible = True
@@ -263,6 +294,7 @@ Public Class CFindForm
             'lblLookFor4.Visible = False
             TxtTextToSearch.Visible = False
             cboTextToSearch.Visible = False
+            cbtTextToSearch.Visible = False
             RBtnExactMatch.Visible = False
             RBtnAnywhere.Visible = False
             RBtnStart.Visible = False
@@ -276,6 +308,7 @@ Public Class CFindForm
             dtpEndDate.Visible = False
             TxtTextToSearch.Visible = False
             cboTextToSearch.Visible = False
+            cbtTextToSearch.Visible = False
             RBtnExactMatch.Visible = False
             RBtnAnywhere.Visible = False
             RBtnStart.Visible = False
@@ -295,6 +328,7 @@ Public Class CFindForm
             'lblLookFor3.Visible = False
             TxtTextToSearch.Visible = False
             cboTextToSearch.Visible = False
+            cbtTextToSearch.Visible = False
             RBtnExactMatch.Visible = False
             RBtnAnywhere.Visible = False
             RBtnStart.Visible = False
