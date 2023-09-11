@@ -15,7 +15,7 @@ Public Class CaComboBox
 
     'Private MyErrorProvider As New ErrorProviderExtended
     Private _translatable As Boolean = False
-    Private _editingMode As Boolean = True
+    Private _editingMode As Boolean = False
     Private _filterRule As Expression(Of Func(Of String, String, Boolean))
     Private _filterRuleCompiled As Func(Of String, Boolean)
     Private _propertySelector As Expression(Of Func(Of ObjectCollection, IEnumerable(Of String)))
