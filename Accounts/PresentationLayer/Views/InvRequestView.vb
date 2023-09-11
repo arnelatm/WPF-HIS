@@ -15,6 +15,7 @@ Namespace PresentationLayer.Views
         Public Property UserList As DataTable Implements IInvRequestView.UserList
         Public Property UnitList As DataTable Implements IInvRequestView.UnitList
         Public Property InvTransactionDetails As List(Of InvTransactionDetailView) Implements IInvRequestView.InvTransactionDetails
+        Public Property WarehouseSelector As Short Implements IInvRequestView.WarehouseSelector
         Public Event WarehouseIdNoChanged() Implements IInvRequestView.WarehouseIdNoChanged
         Public Event RowChanged(productIdNo As Integer) Implements IInvRequestView.RowChanged
         Public Event FormLoaded() Implements IInvRequestView.FormLoaded

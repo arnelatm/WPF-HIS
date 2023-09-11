@@ -49,6 +49,7 @@ Namespace PresentationLayer.Views.Forms
             Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DisbursementJournalEntry))
             Me.tlpDisbursement = New System.Windows.Forms.TableLayoutPanel()
+            Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.chkPcClosed = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.cboPayType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
@@ -132,7 +133,6 @@ Namespace PresentationLayer.Views.Forms
             Me.btnPrintPcReplenishment = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.txtTotalCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtTotalDebits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.tlpDisbursement.SuspendLayout()
             CType(Me.DataGridViewJournalItems, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -227,6 +227,40 @@ Namespace PresentationLayer.Views.Forms
             Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.tlpDisbursement.Size = New System.Drawing.Size(1142, 1137)
             Me.tlpDisbursement.TabIndex = 5
+            '
+            'txtDateCreated
+            '
+            Me.txtDateCreated.BackColor = System.Drawing.Color.White
+            Me.txtDateCreated.BegFindValue = Nothing
+            Me.txtDateCreated.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.tlpDisbursement.SetColumnSpan(Me.txtDateCreated, 2)
+            Me.txtDateCreated.ComputedValue = False
+            Me.txtDateCreated.CustomFormat = Nothing
+            Me.txtDateCreated.DataBoundControl = True
+            Me.txtDateCreated.DisplayOnly = True
+            Me.txtDateCreated.Dock = System.Windows.Forms.DockStyle.Fill
+            Me.txtDateCreated.EditingMode = True
+            Me.txtDateCreated.EndFindValue = Nothing
+            Me.txtDateCreated.FieldDescription = Nothing
+            Me.txtDateCreated.FieldName = Nothing
+            Me.txtDateCreated.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtDateCreated.FindEnabled = True
+            Me.txtDateCreated.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
+            Me.txtDateCreated.LinkedLabel = Nothing
+            Me.txtDateCreated.Location = New System.Drawing.Point(914, 179)
+            Me.txtDateCreated.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtDateCreated.MaximumValue = Nothing
+            Me.txtDateCreated.MinimumValue = Nothing
+            Me.txtDateCreated.Name = "txtDateCreated"
+            Me.txtDateCreated.OldValue = Nothing
+            Me.txtDateCreated.OverrideMaxLength = 0
+            Me.txtDateCreated.ReadOnly = True
+            Me.txtDateCreated.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtDateCreated.Size = New System.Drawing.Size(214, 26)
+            Me.txtDateCreated.TabIndex = 20
+            Me.txtDateCreated.TabStop = False
+            Me.txtDateCreated.Translatable = False
             '
             'chkPcClosed
             '
@@ -2197,40 +2231,6 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalDebits.TabIndex = 1
             Me.txtTotalDebits.Translatable = False
             Me.txtTotalDebits.Visible = False
-            '
-            'txtDateCreated
-            '
-            Me.txtDateCreated.BackColor = System.Drawing.Color.White
-            Me.txtDateCreated.BegFindValue = Nothing
-            Me.txtDateCreated.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.tlpDisbursement.SetColumnSpan(Me.txtDateCreated, 2)
-            Me.txtDateCreated.ComputedValue = False
-            Me.txtDateCreated.CustomFormat = Nothing
-            Me.txtDateCreated.DataBoundControl = True
-            Me.txtDateCreated.DisplayOnly = True
-            Me.txtDateCreated.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.txtDateCreated.EditingMode = True
-            Me.txtDateCreated.EndFindValue = Nothing
-            Me.txtDateCreated.FieldDescription = Nothing
-            Me.txtDateCreated.FieldName = Nothing
-            Me.txtDateCreated.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtDateCreated.FindEnabled = True
-            Me.txtDateCreated.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
-            Me.txtDateCreated.LinkedLabel = Nothing
-            Me.txtDateCreated.Location = New System.Drawing.Point(914, 179)
-            Me.txtDateCreated.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtDateCreated.MaximumValue = Nothing
-            Me.txtDateCreated.MinimumValue = Nothing
-            Me.txtDateCreated.Name = "txtDateCreated"
-            Me.txtDateCreated.OldValue = Nothing
-            Me.txtDateCreated.OverrideMaxLength = 0
-            Me.txtDateCreated.ReadOnly = True
-            Me.txtDateCreated.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtDateCreated.Size = New System.Drawing.Size(214, 26)
-            Me.txtDateCreated.TabIndex = 20
-            Me.txtDateCreated.TabStop = False
-            Me.txtDateCreated.Translatable = False
             '
             'DisbursementJournalEntry
             '

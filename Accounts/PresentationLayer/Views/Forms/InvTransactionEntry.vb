@@ -217,6 +217,7 @@ Namespace PresentationLayer.Views.Forms
         End Property
 
         Public Property DefaultUserWarehouseIdNo As Short Implements IInvTransactionView.DefaultUserWarehouseIdNo
+        Public Property DefaultSecGroupInvWarehouseIdNo As Short Implements IInvTransactionView.DefaultSecGroupInvWarehouseIdNo
 
         Protected Overrides Sub CreateMainFieldsDictionary()
             MainFieldsDictionary = New Dictionary(Of String, Object) From
@@ -355,8 +356,7 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent ProductNameValidating(findText, DataGridViewInvTransactionDetails.EditingControl)
             If ProductNameIsValid Then
                 valid = True
-                If InventoryAction = EnumToCode(InventoryActionSelection.PurchaseOrder) Or
-                   InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
+                If InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
                     'just go to the next field, in this case go to the quantity field
                     'Purchase Order/Request Items are always valid no check needed
                 Else
@@ -571,13 +571,7 @@ Namespace PresentationLayer.Views.Forms
 
 
         Private Sub UpdateDgvColumns()
-            If InventoryAction = EnumToCode(InventoryActionSelection.PurchaseOrder) Then
-                dgvBatchNo.Visible = False
-                dgvExpiryDate.Visible = False
-                dgvBatchNo.DisplayOnly = False
-                dgvExpiryDate.DisplayOnly = False
-                dgvUnitCost.DisplayOnly = False
-            ElseIf InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or
+            If InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or
                 InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
                 dgvBatchNo.Visible = True
                 dgvExpiryDate.Visible = True

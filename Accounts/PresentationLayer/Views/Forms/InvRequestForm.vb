@@ -34,7 +34,7 @@ Namespace PresentationLayer.Views.Forms
             End With
         End Sub
 
-        Public Property WarehouseSelector As Short
+        Public Property WarehouseSelector As Short Implements IInvRequestView.WarehouseSelector
             Get
                 Return cboWarehouseSelector.GetValue(Of Short)
             End Get

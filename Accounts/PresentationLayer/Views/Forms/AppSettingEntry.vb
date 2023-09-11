@@ -115,6 +115,9 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property SettingValue As String Implements IAppSettingView.SettingValue
 
+        Public Property SelectorCount As Short Implements IAppSettingView.SelectorCount
+
+
 
 
 #End Region
@@ -206,6 +209,9 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private Sub cboAppSettingGroupSelector_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboAppSettingGroupSelector.SelectedIndexChanged
+            txtAppSettingGroupIdNo.Text = cboAppSettingGroupSelector.SelectedValue
+        End Sub
     End Class
 
 End Namespace

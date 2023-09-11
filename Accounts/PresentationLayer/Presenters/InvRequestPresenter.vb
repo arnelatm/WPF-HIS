@@ -26,10 +26,12 @@ Namespace PresentationLayer.Presenters
             AddHandler view.WarehouseIdNoChanged, AddressOf OnWarehouseIdNoChanged
             AddHandler view.RowChanged, AddressOf OnRowChanged
             AddHandler view.FormLoaded, AddressOf OnEntryFormLoaded
-
         End Sub
 
         Private Sub OnEntryFormLoaded()
+            View.WarehouseIdNo = Service.GetField(Of Int16, Int16, Int16)(AppSettingGroupSelector.UserDefaultWarehouse, GlobalVariables.UserIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "selector2IdNo")
+            View.WarehouseSelector = View.WarehouseIdNo
+            GetInvTransactions()
             'Throw New NotImplementedException()
         End Sub
 

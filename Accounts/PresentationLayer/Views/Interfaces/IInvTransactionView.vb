@@ -21,6 +21,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property ProductInInventory As Boolean
         Property ValidationErrorText As String
         Property InventoryManager As Boolean
+        Property DefaultSecGroupInvWarehouseIdNo As Int16
         Property DefaultUserWarehouseIdNo As Int16
         Event ProductUnitEditing(productIdNo As Int32) ', bs As BindingSource)
         Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource)
@@ -59,6 +60,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property UserList As DataTable
         Property UnitList As DataTable
         Property InvTransactionDetails As List(Of InvTransactionDetailView)
+        Property WarehouseSelector As Int16
         Event WarehouseIdNoChanged()
         Event RowChanged(productIdNo As Integer)
         Event FormLoaded()
