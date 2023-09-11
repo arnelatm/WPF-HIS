@@ -24,15 +24,18 @@ Namespace PresentationLayer.Presenters
             Dim idNo As Int16 = cb.SelectedValue
             View.DataFilter = "AppSettingGroupIdNo = " & idNo.ToString()
             Dim appSettingGroup As Object
-            appSettingGroup = Service.GetFieldsWithIdNo(idNo, "AppSettingGroup", "IdNo,AppSettingCode,AppSettingGroupName,AppSettingGroupNameAra,SelectorTable1,SelectorTable2,SelectorText1,SelectorText2", "IdNo")
+            appSettingGroup = Service.GetFieldsWithIdNo(idNo, "AppSettingGroup", "IdNo,AppSettingCode,AppSettingGroupName,AppSettingGroupNameAra,SelectorTable1,SelectorTable2,SelectorText1,SelectorText2,SelectorCount", "IdNo")
             If appSettingGroup IsNot Nothing Then
                 View.AppSettingGroupIdNo = idNo
                 View.SavedGroupIdNo = idNo
                 View.Selector1Text = appSettingGroup.SelectorText1
-                View.Selector2Text = appSettingGroup.SelectorText2
+                View.SelectorCount = appSettingGroup.SelectorCount
                 Dim data As New ArrayList
                 data.Add({appSettingGroup.SelectorTable1, "Selector1IdNo", Nothing, Nothing})
-                data.Add({appSettingGroup.SelectorTable2, "Selector2IdNo", Nothing, Nothing})
+                If appSettingGroup.SelectorCount > 1 Then
+                    View.Selector2Text = appSettingGroup.SelectorText2
+                    data.Add({appSettingGroup.SelectorTable2, "Selector2IdNo", Nothing, Nothing})
+                End If
                 CreateDataSourceThread(data)
             End If
             FilterRecords()

@@ -395,7 +395,6 @@ Public Enum InventoryActionSelection
     <EnumCode("A")> Add
     <EnumCode("D")> Deduct
     <EnumCode("T")> Transfer
-    <EnumCode("P")> PurchaseOrder
     <EnumCode("R")> Request
 End Enum
 Public Enum AbsenceTypeSelection
@@ -442,7 +441,8 @@ Public Enum DataTypeEnum
 End Enum
 
 Public Enum AppSettingGroupSelector
-    <EnumCode("1")> UserDefaultWarehouse
-    <EnumCode("2")> SecurityGroupDefaultBranch
+    UserDefaultWarehouse = 1
+    SecurityGroupDefaultBranch = 2
+    SecurityGroupDefaultInvWarehouse = 3
 End Enum
 

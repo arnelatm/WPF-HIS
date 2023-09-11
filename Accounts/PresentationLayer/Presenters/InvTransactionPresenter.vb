@@ -69,6 +69,8 @@ Namespace PresentationLayer.Presenters
             Else
                 view.InventoryManager = False
             End If
+            view.DefaultUserWarehouseIdNo = Service.GetField(Of Int16, Int16, Int16)(AppSettingGroupSelector.UserDefaultWarehouse, GlobalVariables.UserIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "selector2IdNo")
+            view.DefaultSecGroupInvWarehouseIdNo = Service.GetField(Of Int16, Int16, Int16)(AppSettingGroupSelector.SecurityGroupDefaultInvWarehouse, GlobalVariables.SecurityGroupIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "selector2IdNo")
         End Sub
 
 
@@ -329,7 +331,7 @@ Namespace PresentationLayer.Presenters
                 product = GetProductModel(productCode)
                 If product.ProductName Is Nothing Then
                     entryIsValid = False
-                ElseIf View.InventoryAction = EnumToCode(InventoryActionSelection.PurchaseOrder) Then
+                ElseIf View.InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
                     ' no need to select from inventory, accept the product code as is
                     With View.InvTransactionDetailsBs.Current
                         .ProductIdNo = product.IdNo
@@ -432,22 +434,20 @@ Namespace PresentationLayer.Presenters
                 If product Is Nothing Then
                     View.ProductNameIsValid = False
                 Else
-                    If View.InventoryAction = EnumToCode(InventoryActionSelection.PurchaseOrder) Then
+                    If View.InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
                         ' accept ProductName as is no need to check with inventory
                         product = SetProductInitialValues(product)
                         View.InvTransactionDetailsBs.Current.InventoryIdNo = 0
+                        View.InvTransactionDetailsBs.Current.ProductName = product.ProductName
+                        View.NumberOfUnits = formToRun.NoOfUnits
+                        View.InvTransactionDetailsBs.Current.ProductCode = product.ProductCode
+
                     ElseIf ItemInInventory(control, product) Then
                         View.ProductInInventory = True
                     Else
-                        If View.InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
-                            View.InvTransactionDetailsBs.Current.ProductName = product.ProductName
-                            View.NumberOfUnits = formToRun.NoOfUnits
-                            View.InvTransactionDetailsBs.Current.ProductCode = product.ProductCode
-                        Else
-                            View.ProductInInventory = False
-                            View.ProductNameIsValid = False
-                            retVal = False
-                        End If
+                        View.ProductInInventory = False
+                        View.ProductNameIsValid = False
+                        retVal = False
                         View.InvTransactionDetailsBs.Current.InventoryIdNo = 0
                     End If
                 End If
@@ -716,7 +716,6 @@ Namespace PresentationLayer.Presenters
             View.TransactionDate = Date.Now()
             View.UserIdNo = GlobalVariables.UserIdNo
             Dim wareHouse = Service.GetTopOneFields("Warehouse", "IdNo", "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString(), "IdNo", True)
-            View.DefaultUserWarehouseIdNo = Service.GetField(Of Int16, Int16, Int16)(appSettingGroupIdNo, userIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "selector2IdNo")
             View.WarehouseIdNo = View.DefaultUserWarehouseIdNo
         End Sub
 
@@ -729,6 +728,7 @@ Namespace PresentationLayer.Presenters
                 If AddMode Then
                     Dim userIdNo As Int16 = GlobalVariables.UserIdNo
                     View.WarehouseToIdNo = View.DefaultUserWarehouseIdNo
+                    View.WarehouseIdNo = View.DefaultSecGroupInvWarehouseIdNo
                 End If
             Else
                 If AddMode Then

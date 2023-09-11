@@ -438,8 +438,8 @@ Public Class CtComboBox
         ValueMember = "IdNo"
         DisplayMember = "Name"
         _defaultMaxDropDownItems = MaxDropDownItems
-        _defaultDropdownStyle = ComboBoxStyle.DropDownList
-        _defaultDropDownHeight = 106
+        _defaultDropdownStyle = DropDownStyle
+        _defaultDropDownHeight = DropDownHeight
         Text = ""
         _filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
         _suggestListOrderRuleCompiled = Function(s) s
@@ -448,6 +448,7 @@ Public Class CtComboBox
         SuggestListForm.SuggestListBox.DataSource = _suggestBindingList
         SuggestListForm.SuggestListBox.ForeColor = Color.Green
         EditingMode = False
+
         AddHandler SuggestListForm.SuggestListBox.Click, AddressOf SuggestListBoxOnClick
         AddHandler ParentChanged, AddressOf OnParentChanged
 

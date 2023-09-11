@@ -14,6 +14,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property AppSettingGroupSelector As Int16
         Property Selector1Data As Object
         Property Selector2Data As Object
+        Property SelectorCount As Int16
         WriteOnly Property Selector1Text As String
         WriteOnly Property Selector2Text As String
         Event LockGroupClicked()

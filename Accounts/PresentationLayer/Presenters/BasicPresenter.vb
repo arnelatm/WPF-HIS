@@ -34,7 +34,8 @@ Namespace PresentationLayer.Presenters
             If AutoGenerateCode(TableName) Then
                 If retVal >= 0 And IsEmpty(View.Code) Then
                     retVal = Service.GenerateCode(View.IdNo)
-                    View.Code = Service.GetFieldWithIdNo(View.IdNo, TableName, TableName + "Code")
+                    Dim code = Service.GetFieldWithIdNo(View.IdNo, TableName, TableName + "Code")
+                    View.Code = IIf(IsDBNull(code), Nothing, code)
                 End If
             End If
         End Sub

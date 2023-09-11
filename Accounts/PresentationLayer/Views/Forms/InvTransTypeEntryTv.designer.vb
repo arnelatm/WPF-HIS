@@ -75,6 +75,10 @@ Namespace PresentationLayer.Views.Forms
             Me.ImageListTreeView.Images.SetKeyName(0, "openbriefcase.png")
             Me.ImageListTreeView.Images.SetKeyName(1, "TreeNode.ico")
             '
+            'TranslatorDAC
+            '
+            Me.TranslatorDAC.Cs = ""
+            '
             'floDataDisplay
             '
             resources.ApplyResources(Me.floDataDisplay, "floDataDisplay")
@@ -149,6 +153,7 @@ Namespace PresentationLayer.Views.Forms
             'lblInventoryAction
             '
             resources.ApplyResources(Me.lblInventoryAction, "lblInventoryAction")
+            Me.lblInventoryAction.BackColor = System.Drawing.Color.Transparent
             Me.lblInventoryAction.DisplayOnly = True
             Me.lblInventoryAction.EditingMode = False
             Me.lblInventoryAction.Name = "lblInventoryAction"
@@ -157,6 +162,7 @@ Namespace PresentationLayer.Views.Forms
             'lblNotes
             '
             resources.ApplyResources(Me.lblNotes, "lblNotes")
+            Me.lblNotes.BackColor = System.Drawing.Color.Transparent
             Me.lblNotes.DisplayOnly = True
             Me.lblNotes.EditingMode = False
             Me.lblNotes.Name = "lblNotes"
@@ -249,6 +255,7 @@ Namespace PresentationLayer.Views.Forms
             'lblName
             '
             resources.ApplyResources(Me.lblName, "lblName")
+            Me.lblName.BackColor = System.Drawing.Color.Transparent
             Me.TableLayoutPanel1.SetColumnSpan(Me.lblName, 2)
             Me.lblName.DisplayOnly = True
             Me.lblName.EditingMode = False
@@ -258,6 +265,7 @@ Namespace PresentationLayer.Views.Forms
             'lblNameAra
             '
             resources.ApplyResources(Me.lblNameAra, "lblNameAra")
+            Me.lblNameAra.BackColor = System.Drawing.Color.Transparent
             Me.TableLayoutPanel1.SetColumnSpan(Me.lblNameAra, 2)
             Me.lblNameAra.DisplayOnly = True
             Me.lblNameAra.EditingMode = False
@@ -294,6 +302,7 @@ Namespace PresentationLayer.Views.Forms
             'lblCode
             '
             resources.ApplyResources(Me.lblCode, "lblCode")
+            Me.lblCode.BackColor = System.Drawing.Color.Transparent
             Me.lblCode.DisplayOnly = True
             Me.lblCode.EditingMode = False
             Me.lblCode.Name = "lblCode"
@@ -331,6 +340,7 @@ Namespace PresentationLayer.Views.Forms
             'lblIdNo
             '
             resources.ApplyResources(Me.lblIdNo, "lblIdNo")
+            Me.lblIdNo.BackColor = System.Drawing.Color.Transparent
             Me.lblIdNo.DisplayOnly = True
             Me.lblIdNo.EditingMode = False
             Me.lblIdNo.Name = "lblIdNo"
@@ -380,6 +390,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'lblInvTransTypeCycle
             '
+            Me.lblInvTransTypeCycle.BackColor = System.Drawing.Color.Transparent
             Me.lblInvTransTypeCycle.DisplayOnly = True
             Me.lblInvTransTypeCycle.EditingMode = False
             resources.ApplyResources(Me.lblInvTransTypeCycle, "lblInvTransTypeCycle")
@@ -389,6 +400,7 @@ Namespace PresentationLayer.Views.Forms
             'lblAccountIdNo
             '
             resources.ApplyResources(Me.lblAccountIdNo, "lblAccountIdNo")
+            Me.lblAccountIdNo.BackColor = System.Drawing.Color.Transparent
             Me.lblAccountIdNo.DisplayOnly = True
             Me.lblAccountIdNo.EditingMode = False
             Me.lblAccountIdNo.Name = "lblAccountIdNo"
@@ -421,6 +433,7 @@ Namespace PresentationLayer.Views.Forms
             'lblActive
             '
             resources.ApplyResources(Me.lblActive, "lblActive")
+            Me.lblActive.BackColor = System.Drawing.Color.Transparent
             Me.lblActive.DisplayOnly = True
             Me.lblActive.EditingMode = False
             Me.lblActive.Name = "lblActive"
