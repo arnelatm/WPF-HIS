@@ -78,6 +78,7 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgRecordSuccessfullyDeleted", "Record was successfully deleted.", "Record Deleted")
         Messaging.AddMessage("MsgRecordSuccessfullyPosted", "Record posted successfully!", "Successful Posting")
         Messaging.AddMessage("MsgRecordSuccessfullySaved", "Record saved successfully!", "Record Saved")
+        Messaging.AddMessage("MsgRecordSuccessfullyUpdated", "Record updated successfully!", "Record Updated")
         Messaging.AddMessage("MsgRowDelNotAllowedInViewMode", "Row deletion not allowed while in itemView mode. Press edit button to enable deletion.", "Error")
         Messaging.AddMessage("MsgRowInsNotAllowedInFirstRow", "Row insertion on first row not allowed for this transaction.", "Error")
         Messaging.AddMessage("MsgRowInsNotAllowedInViewMode", "Row insertion not allowed while in itemView mode. Press edit button to enable insertion.", "Error")
@@ -152,6 +153,8 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgCannotEditInvItems", "Cannot Edit <{fieldName}>, for existing inventory items. Reverting to previous value.", "invalid entry")
         Messaging.AddMessage("MsgNoPostOnWHouse", "Sorry, you have no access to post on the selected warehouse.", "error")
         Messaging.AddMessage("MsgRowDelExistNotAllowed", "Row deletion not allowed for existing records!", "Delete Error")
+        Messaging.AddMessage("MsgRecordUpdateFail", "Update failed.", "error")
+        Messaging.AddMessage("MsgSameSourceNTargetWH", "Warehouse transfer source and warehouse transfer target cannot be the same.", "error")
     End Sub
 
     'Public Shared Sub CreateEnums()

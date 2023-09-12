@@ -27,7 +27,12 @@ Namespace PresentationLayer.Presenters
             Dim utilityIdNo As Int16 = Service.GetField(Of Int16, String)(utilityName, "Utilities", "UtilityName", "IdNo")
             Dim utilityObject As Object = Service.GetFieldsWithIdNo(utilityIdNo, "Utilities", "StoredProcedure")
             If utilityObject.StoredProcedure Then
-                Dim x As Object = Service.RunStoredProcedure("sp" & utilityName, parameters)
+                retVal = Service.RunStoredProcedure("sp" & utilityName, parameters)
+                If retVal = 0 Then
+                    AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgRecordSuccessfullyUpdated")
+                Else
+                    AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgRecordUpdateFail")
+                End If
             End If
             Return retVal
         End Function
