@@ -1,0 +1,9 @@
+Update [BranchDetails2]
+Set [BranchNameEnglish]='ISP Pharmacy' 
+ OUTPUT deleted.[BranchNameEnglish] , inserted.[BranchNameEnglish] 
+Where [BranchNameEnglish]='Ibn Sina Polyclinic Pharmacy'
+
+
+key here is the OUTPUT word with the 
+deleted - for the old value
+inserted - for the new value

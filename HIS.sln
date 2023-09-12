@@ -148,6 +148,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UsefulQueries", "UsefulQuer
 		Query compare total from one table to total from a sub table.sql = Query compare total from one table to total from a sub table.sql
 		Query Sql Database for a certain name.sql = Query Sql Database for a certain name.sql
 		Query tables for Creation Date.sql = Query tables for Creation Date.sql
+		Query with output of modified field and new field values = Query with output of modified field and new field values
 		QueryAvailableIdentityFieldSpace.sql = QueryAvailableIdentityFieldSpace.sql
 		QueryWrongAccountsInReconciliation.sql = QueryWrongAccountsInReconciliation.sql
 		REplace field with a sequential number.sql = REplace field with a sequential number.sql

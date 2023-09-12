@@ -15,11 +15,14 @@ Namespace DataLayer.AdoNet
             Dim sql2 As String
             Dim retVal As Integer
             Dim series = tableName
-            Dim maxlength As Int16
+            'Dim maxlength As Int16
             Dim prefix As String
             Dim oMaxLength
             If BaseDb.Scalar("Select Count(*) from Series where SeriesName = '" & series & "'") < 1 Then
-                'nothing to set no data.
+                ' use identity key as the code
+                Dim params() As Object = {"@code", idNo.ToString()}
+                sql1 = "Update [" & tableName & "] set " & codeFieldName & " = '" & idNo.ToString() & "'" & " where IdNo = " & idNo
+                retVal = BaseDb.Scalar(sql1, params)
             Else
                 Dim x = BaseDb.Scalar("select prefix from series where seriesName = '" & series & "'")
                 If IsDBNull(x) Then

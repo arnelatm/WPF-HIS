@@ -680,7 +680,7 @@ Namespace Services
             End If
         End Function
 
-        Public Function RunStoredProcedure(storeProcedureName As String, parameters As Object) Implements IService.RunStoredProcedure
+        Public Function RunStoredProcedure(storeProcedureName As String, parameters As Object) As Object Implements IService.RunStoredProcedure
             Return DataDao.RunStoredProcedure(storeProcedureName, parameters)
         End Function
 
