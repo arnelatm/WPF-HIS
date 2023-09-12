@@ -678,6 +678,10 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return Service.GetDtRecords(pTableName, fieldNames, filter, sortKey)
     End Function
 
+    Public Function GetDtRecords(ByVal pTableName As String, ByVal fieldNames As String, Optional filter As String = Nothing, Optional sortKey As String = Nothing)
+        Return Service.GetDtRecords(pTableName, fieldNames, filter, sortKey)
+    End Function
+
     Public Function GetRecords(ByVal pTableName As String, ByVal sortOrder As String, ByVal fieldNames As String(), Optional filter As String = Nothing)
         Return Service.GetRecords(pTableName, sortOrder, fieldNames, filter)
     End Function

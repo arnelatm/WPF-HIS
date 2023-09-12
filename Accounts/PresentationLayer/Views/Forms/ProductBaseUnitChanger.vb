@@ -7,7 +7,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IUtilityView
 
         Private _productIdNo As Int32
-        Private _unitIdNo As Int16
+        Private _baseUnitIdNo As Int16
         Public Event UtilityButtonClicked(parameters As Object) Implements IUtilityView.UtilityButtonClicked
 
         Public Sub New()
@@ -24,7 +24,7 @@ Namespace PresentationLayer.Views.Forms
             ' This call is required by the designer.
             InitializeComponent()
             _productIdNo = productIdNo
-            _unitIdNo = unitIdNo
+            _baseUnitIdNo = unitIdNo
             txtProductName.Text = productName
             txtOldUnitIdNo.Text = unitName
             cboNewUnitIdNo.EditingMode = True
@@ -42,16 +42,16 @@ Namespace PresentationLayer.Views.Forms
             Close()
         End Sub
 
-        Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-            RaiseEvent FormLoad()
-            'If UserIsASuperAdministrator() Then
-            '    btnChangeUnit.Enabled = True
-            'End If
-            'RaiseEvent DataSourceCreator("Unit", "UnitLists", Nothing, Nothing)
-        End Sub
+        'Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+        '    RaiseEvent FormLoad()
+        '    'If UserIsASuperAdministrator() Then
+        '    '    btnChangeUnit.Enabled = True
+        '    'End If
+        '    'RaiseEvent DataSourceCreator("Unit", "UnitLists", Nothing, Nothing)
+        'End Sub
 
         Private Sub btnChangeUnit_Click(sender As Object, e As EventArgs) Handles btnChangeUnit.Click
-            Dim parameters As Object = {"IdNo", _product.IdNo, "BaseUnitIdNo", _product.BaseUnitIdNo, "NewUnitIdNo", cboNewUnitIdNo.SelectedValue}
+            Dim parameters As Object = {"IdNo", _productIdNo, "BaseUnitIdNo", _baseUnitIdNo, "NewUnitIdNo", cboNewUnitIdNo.SelectedValue}
             RaiseEvent UtilityButtonClicked(parameters)
         End Sub
 
