@@ -147,6 +147,9 @@ Namespace PresentationLayer.Presenters
                         If View.WarehouseToIdNo Is Nothing OrElse View.WarehouseToIdNo = 0 Then
                             retValue = False
                             Messaging.Show(True, "MsgWareHouseToBlank")
+                        ElseIf View.WarehouseIdNo = View.WarehouseToIdNo Then
+                            retValue = False
+                            Messaging.Show(True, "MsgSameSourceNTargetWH")
                         End If
                     End If
                 End If
