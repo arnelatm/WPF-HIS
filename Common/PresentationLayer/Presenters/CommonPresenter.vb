@@ -187,20 +187,34 @@ Namespace PresentationLayer.Presenters
             CreateLookupDataThread(data)
         End Sub
 
-        Public Function MakeVarDataSource(dataObject As Object) As DataTable
-            Dim luItem As DataLookup
-            CreateDataLookUp(dataObject)
-
-            Dim varDataSource As DataTable
-            Dim data As New ArrayList
-            For Each item As String() In dataObject
-                data.Add(item)
-            Next
-
-
-
-            CreateLookupDataThread(data)
-            Return varDataSource
+        Public Function MakeVarDataSource(item As Object) As DataTable
+            Dim dtl As New DataLookup
+            Const LookupTableName As Int32 = 0
+            Const PropertyFieldName As Int32 = 1
+            Const LookupFieldNames As Int32 = 2
+            Const LookupFilter As Int32 = 3
+            Const LookupSortKey As Int32 = 4
+            Const ValueMember As Int32 = 5
+            Const DisplayMember As Int32 = 6
+            dtl.TableName = item(LookupTableName)
+            dtl.PropertyName = item(PropertyFieldName)
+            If item.Length - 1 > 1 Then
+                dtl.LuFields = item(LookupFieldNames)
+            End If
+            If item.Length - 1 > 2 Then
+                dtl.Filter = item(LookupFilter)
+            End If
+            If item.Length - 1 > 3 Then
+                dtl.SortKey = item(LookupSortKey)
+            End If
+            If item.Length - 1 > 4 Then
+                dtl.ValueMember = item(ValueMember)
+            End If
+            If item.Length - 1 > 5 Then
+                dtl.DisplayMember = item(DisplayMember)
+            End If
+            ComposeLookupProperties(dtl)
+            Return GetDtRecords(dtl.TableName, dtl.LuFields, dtl.Filter, dtl.SortKey)
         End Function
 
         Public Sub MakeControlDataSources(dataObject As Object)
