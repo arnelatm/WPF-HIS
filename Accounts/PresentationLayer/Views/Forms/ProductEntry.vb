@@ -126,15 +126,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        'Public Property Drug As Boolean Implements IProductView.Drug
-        '    Get
-        '        Return chkDrugActive.Checked
-        '    End Get
-        '    Set
-        '        chkActive.Checked = Value
-        '    End Set
-        'End Property
-
         Public Property ProductUnits As List(Of ProductUnitView) Implements IProductView.ProductUnits
             Get
                 Return _productUnits
@@ -144,21 +135,6 @@ Namespace PresentationLayer.Views.Forms
                 BindProductUnits()
             End Set
         End Property
-
-        'Public Property LockBranch As Boolean Implements IProductView.LockBranch
-        '    Get
-        '        Return _lockBranch
-        '    End Get
-        '    Set(value As Boolean)
-        '        _lockBranch = value
-        '        If value Then
-        '            btnLockBranch.BackgroundImage = My.Resources.Lock
-        '        Else
-        '            btnLockBranch.BackgroundImage = My.Resources.Unlock
-        '        End If
-        '    End Set
-        'End Property
-
 
         Public Property UnitsByCode As Object Implements IProductView.UnitsByCode
 
@@ -194,6 +170,18 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent FilterRecords()
         End Sub
 
+        Protected Overrides Sub BeforeEdit()
+            cboBaseUnitIdNo.DisplayOnly = True
+            ' editing not allowed for units, can only be changed when newly added
+            Refresh()
+        End Sub
+
+        Protected Overrides Sub BeforeAdd()
+            cboBaseUnitIdNo.DisplayOnly = False
+            ' editing not allowed for units, can only be changed when newly added
+            Refresh()
+        End Sub
+
         Public Event FilterRecords() Implements IProductView.FilterRecords
         Public Event ChangeBaseUnitButtonClicked() Implements IProductView.ChangeBaseUnitButtonClicked
 
@@ -215,7 +203,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub OnInputsTurnedOn() Handles MyBase.InputsTurnedOn
             bsProductUnits.ResetBindings(False)
-            'UpdateDisplay()
+            'If EditingMode Then
+
+            'End If
+
         End Sub
 
         Private Sub Gtin_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtGTIN.KeyPress
@@ -234,80 +225,22 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
-        'Private Sub btnLockBranch_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnLockBranch.ClickButtonArea
-        '    If BranchCount > 1 Then
-        '        If Not LockBranch Then
-        '            LockBranch = True
-        '            SavedBranch = BranchIdNo
-        '            cboBranchIdNo.Enabled = False
-        '        Else
-        '            cboBranchIdNo.Enabled = True
-        '            LockBranch = False
-        '        End If
-        '    Else
-        '        LockBranch = True
-        '        cboBranchIdNo.Enabled = False
-        '    End If
-        '    RaiseEvent LockBranchClicked()
-        'End Sub
-
         Protected Overrides Sub AfterAdd()
             MyBase.AfterAdd()
-            'cboBranchIdNo.SelectedValue = GlobalVariables.BranchIdNo
         End Sub
 
         Private Sub btnBaseUnitChanger_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnBaseUnitChanger.ClickButtonArea
             RaiseEvent ChangeBaseUnitButtonClicked()
         End Sub
 
-
-        'Private Sub txtGTin_Validated(sender As Object, e As EventArgs) Handles txtGTIN.Validated
-        '    txtGTIN.Text = txtGTIN.Text
-        '    chkActive.Select()
-        'End Sub
-
-
-
-
-
-        ''Temporary Controls to represent the Editing Cells  
-        'Private cboCase As DataGridViewComboBoxEditingControl = Nothing
-        'Private cboUnit As CtDgvComboBoxCell = Nothing
-        'Private colUnit = New CtDgvComboBoxColumn
-
-
-        'Private Sub DataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewEditingControlShowingEventArgs) Handles DataGridViewProductUnits.EditingControlShowing
-        '    'If the current cell is of the type "ComboBox"  
-        '    If TypeOf (e.Control) Is DataGridViewComboBoxEditingControl Then
-        '        'Cast the current cell to the temporary control  
-        '        cboCase = DirectCast(e.Control, CtDgvComboBoxEditingControl)
-        '        'Cast the other cell to the other temporary control  
-        '        cboUnit = DirectCast(DataGridViewProductUnits.CurrentRow.Cells("dgvUnitIdNo"), CtDgvComboBoxCell)
-
-        '        If cboCase IsNot Nothing Then
-        '            'Add an EventHandler to the first temporary control  
-        '            AddHandler cboCase.SelectedIndexChanged, AddressOf cboCase_SelectedIndexChanged
-        '        End If
-        '    End If
-        'End Sub
-
-        ''Do your thing in the EventHandler  
-        'Private Sub cboCase_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs)
-        '    'cboUnit.Value = "box"
-        '    'txtReportTime.Value = Now.TimeOfDay
-        '    If cboCase.Text = "System.Data.DataRowView" Then
-        '        cboCase.SelectedIndex = -1
-        '    End If
-        'End Sub
-
-        ''After editing, remove the eventHandler  
-        'Private Sub DataGridView1_CellEndEdit(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles DataGridViewProductUnits.CellEndEdit
-        '    If cboCase IsNot Nothing Then
-        '        RemoveHandler cboCase.SelectedIndexChanged, AddressOf cboCase_SelectedIndexChanged
-        '        cboCase = Nothing
-        '    End If
-        'End Sub
-
+        Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) _
+                Handles DataGridViewProductUnits.UserDeletingRow
+            If EditingMode Then
+                e.Cancel = True
+                AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgRowDelExistNotAllowed")
+                'Do not allow deletions for units
+            End If
+        End Sub
     End Class
 
 End Namespace

@@ -32,7 +32,7 @@ Public Class CFormEntry
     'Private _recordPositionNumber As Int32 = 0
     Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
-    Private _editingMode As Boolean = False
+    Protected EditingMode As Boolean = False
     Private _displayOnly As Boolean = False
     Private _translatable As Boolean = True
     Private _firstLoadSwitch As UInt16 = 0
@@ -382,6 +382,7 @@ Public Class CFormEntry
             Debugger.Break()
         End If
         PublishClickedButton(ButtonClicked.Edit)
+        EditingMode = True
         BeforeEdit()
         'If EditMode Then
         '    TurnOnInputs()
@@ -468,6 +469,7 @@ Public Class CFormEntry
                 End If
             End If
         End If
+        EditingMode = False
     End Sub
 
     Protected Overridable Sub PublishClickedButton(buttonClicked As ButtonClicked)
@@ -511,6 +513,7 @@ Public Class CFormEntry
             Debugger.Break()
         End If
         PublishClickedButton(ButtonClicked.Undo)
+        EditingMode = False
     End Sub
 
     Private Sub BtnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click

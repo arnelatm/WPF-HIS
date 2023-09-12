@@ -90,6 +90,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Public Event NewRecordInitialized()
 
     Public Event RecordAddedSuccessfully(ByRef idNoOfRecord As Integer)
+    Public Event GenerateCode(ByVal idNoOfRecord As Integer)
 
     Public Event RecordUpdatedSuccessfully(ByRef idNoOfRecord As Integer)
 
@@ -1234,6 +1235,10 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                     scope.Complete()
                 End If
             End Using
+            If AddMode Then
+                RaiseEvent GenerateCode(retValue)
+            End If
+
         Catch ex As TransactionAbortedException
             retValue = -1
             MessageBox.Show(ex.Message, $"Transaction Aborted")

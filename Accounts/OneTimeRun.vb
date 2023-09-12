@@ -150,7 +150,8 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgNonPostableEntry", "Sorry, this entry is a non-postable inventory transaction.", "error")
         Messaging.AddMessage("MsgDateCannotBeBlank", "Sorry, empty date not allowed.", "error")
         Messaging.AddMessage("MsgCannotEditInvItems", "Cannot Edit <{fieldName}>, for existing inventory items. Reverting to previous value.", "invalid entry")
-        Messaging.AddMessage("MsgNoPostOnWHouse", "Sorry, you have no access to post on the selected warehouse.", "erro")
+        Messaging.AddMessage("MsgNoPostOnWHouse", "Sorry, you have no access to post on the selected warehouse.", "error")
+        Messaging.AddMessage("MsgRowDelExistNotAllowed", "Row deletion not allowed for existing records!", "Delete Error")
     End Sub
 
     'Public Shared Sub CreateEnums()

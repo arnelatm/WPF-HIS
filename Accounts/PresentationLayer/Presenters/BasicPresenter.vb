@@ -30,10 +30,10 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Public Sub UpdateCode(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
+        Public Sub UpdateCode(ByVal retVal As Integer) Handles MyBase.GenerateCode
             If AutoGenerateCode(TableName) Then
                 If retVal >= 0 And IsEmpty(View.Code) Then
-                    retVal = Service.GenerateCode(View.IdNo)
+                    Service.GenerateCode(View.IdNo)
                     Dim code = Service.GetFieldWithIdNo(View.IdNo, TableName, TableName + "Code")
                     View.Code = IIf(IsDBNull(code), Nothing, code)
                 End If

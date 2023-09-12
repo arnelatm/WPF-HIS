@@ -36,12 +36,12 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboNewUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
-            Me.bsNotes = New System.Windows.Forms.BindingSource(Me.components)
             Me.txtOldUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+            Me.bsNotes = New System.Windows.Forms.BindingSource(Me.components)
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.bsNotes, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.TableLayoutPanel1.SuspendLayout()
+            CType(Me.bsNotes, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             '
             'cmdCancel
@@ -64,14 +64,13 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel2.Location = New System.Drawing.Point(370, 382)
             Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel2.Name = "CLabel2"
-            Me.CLabel2.Size = New System.Drawing.Size(0, 20)
+            Me.CLabel2.Size = New System.Drawing.Size(0, 17)
             Me.CLabel2.TabIndex = 24
             Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.CLabel2.Translatable = True
             '
             'btnChangeUnit
             '
-            Me.btnChangeUnit.Enabled = False
             Me.btnChangeUnit.Location = New System.Drawing.Point(154, 109)
             Me.btnChangeUnit.Name = "btnChangeUnit"
             Me.btnChangeUnit.Size = New System.Drawing.Size(99, 29)
@@ -98,7 +97,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtProductName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtProductName.ForeColor = System.Drawing.Color.Black
             Me.txtProductName.LinkedLabel = Nothing
-            Me.txtProductName.Location = New System.Drawing.Point(119, 1)
+            Me.txtProductName.Location = New System.Drawing.Point(101, 1)
             Me.txtProductName.Margin = New System.Windows.Forms.Padding(1)
             Me.txtProductName.MaximumValue = Nothing
             Me.txtProductName.MinimumValue = Nothing
@@ -107,7 +106,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtProductName.OverrideMaxLength = 0
             Me.txtProductName.ReadOnly = True
             Me.txtProductName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtProductName.Size = New System.Drawing.Size(406, 26)
+            Me.txtProductName.Size = New System.Drawing.Size(406, 23)
             Me.txtProductName.TabIndex = 0
             Me.txtProductName.Translatable = False
             '
@@ -121,7 +120,7 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel1.Location = New System.Drawing.Point(1, 1)
             Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel1.Name = "CLabel1"
-            Me.CLabel1.Size = New System.Drawing.Size(116, 20)
+            Me.CLabel1.Size = New System.Drawing.Size(98, 17)
             Me.CLabel1.TabIndex = 36
             Me.CLabel1.Text = "Product Name"
             Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -134,10 +133,10 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel3.DisplayOnly = True
             Me.CLabel3.EditingMode = False
             Me.CLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel3.Location = New System.Drawing.Point(1, 29)
+            Me.CLabel3.Location = New System.Drawing.Point(1, 26)
             Me.CLabel3.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel3.Name = "CLabel3"
-            Me.CLabel3.Size = New System.Drawing.Size(75, 20)
+            Me.CLabel3.Size = New System.Drawing.Size(63, 17)
             Me.CLabel3.TabIndex = 37
             Me.CLabel3.Text = "Old Unit "
             Me.CLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -150,10 +149,10 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel4.DisplayOnly = True
             Me.CLabel4.EditingMode = False
             Me.CLabel4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel4.Location = New System.Drawing.Point(1, 57)
+            Me.CLabel4.Location = New System.Drawing.Point(1, 51)
             Me.CLabel4.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel4.Name = "CLabel4"
-            Me.CLabel4.Size = New System.Drawing.Size(77, 20)
+            Me.CLabel4.Size = New System.Drawing.Size(64, 17)
             Me.CLabel4.TabIndex = 38
             Me.CLabel4.Text = "New Unit"
             Me.CLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -184,7 +183,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboNewUnitIdNo.IntegralHeight = False
             Me.cboNewUnitIdNo.LimitToList = False
             Me.cboNewUnitIdNo.LinkedLabel = Nothing
-            Me.cboNewUnitIdNo.Location = New System.Drawing.Point(119, 57)
+            Me.cboNewUnitIdNo.Location = New System.Drawing.Point(101, 51)
             Me.cboNewUnitIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.cboNewUnitIdNo.Name = "cboNewUnitIdNo"
             Me.cboNewUnitIdNo.OldValue = 0
@@ -193,7 +192,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboNewUnitIdNo.OverrideDropDownStyleList = False
             Me.cboNewUnitIdNo.PreviousSearchTerm = Nothing
             Me.cboNewUnitIdNo.PropertySelector = Nothing
-            Me.cboNewUnitIdNo.Size = New System.Drawing.Size(170, 28)
+            Me.cboNewUnitIdNo.Size = New System.Drawing.Size(170, 24)
             Me.cboNewUnitIdNo.SuggestBoxHeight = 200
             Me.cboNewUnitIdNo.SuggestCharCount = 0
             Me.cboNewUnitIdNo.SuggestListOrderRule = Nothing
@@ -205,13 +204,9 @@ Namespace PresentationLayer.Views.Forms
             Me.cboNewUnitIdNo.ValueIsNumeric = False
             Me.cboNewUnitIdNo.ValueMember = "IdNo"
             '
-            'bsNotes
-            '
-            Me.bsNotes.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.TransactionNotesModel)
-            '
             'txtOldUnitIdNo
             '
-            Me.txtOldUnitIdNo.BackColor = System.Drawing.SystemColors.ControlLight
+            Me.txtOldUnitIdNo.BackColor = System.Drawing.Color.White
             Me.txtOldUnitIdNo.BegFindValue = Nothing
             Me.txtOldUnitIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
             Me.txtOldUnitIdNo.ComputedValue = False
@@ -224,8 +219,9 @@ Namespace PresentationLayer.Views.Forms
             Me.txtOldUnitIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.txtOldUnitIdNo.FindEnabled = False
             Me.txtOldUnitIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtOldUnitIdNo.ForeColor = System.Drawing.Color.Black
             Me.txtOldUnitIdNo.LinkedLabel = Nothing
-            Me.txtOldUnitIdNo.Location = New System.Drawing.Point(119, 29)
+            Me.txtOldUnitIdNo.Location = New System.Drawing.Point(101, 26)
             Me.txtOldUnitIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.txtOldUnitIdNo.MaximumValue = Nothing
             Me.txtOldUnitIdNo.MinimumValue = Nothing
@@ -233,7 +229,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtOldUnitIdNo.OldValue = Nothing
             Me.txtOldUnitIdNo.OverrideMaxLength = 0
             Me.txtOldUnitIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtOldUnitIdNo.Size = New System.Drawing.Size(170, 26)
+            Me.txtOldUnitIdNo.Size = New System.Drawing.Size(170, 23)
             Me.txtOldUnitIdNo.TabIndex = 39
             Me.txtOldUnitIdNo.Translatable = False
             '
@@ -259,9 +255,13 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Size = New System.Drawing.Size(527, 91)
             Me.TableLayoutPanel1.TabIndex = 40
             '
+            'bsNotes
+            '
+            Me.bsNotes.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.TransactionNotesModel)
+            '
             'ProductBaseUnitChanger
             '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
             Me.ClientSize = New System.Drawing.Size(549, 152)
             Me.Controls.Add(Me.TableLayoutPanel1)
@@ -273,9 +273,9 @@ Namespace PresentationLayer.Views.Forms
             Me.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.Text = "Product Base Unit Changer"
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.bsNotes, System.ComponentModel.ISupportInitialize).EndInit()
             Me.TableLayoutPanel1.ResumeLayout(False)
             Me.TableLayoutPanel1.PerformLayout()
+            CType(Me.bsNotes, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
             Me.PerformLayout()
 

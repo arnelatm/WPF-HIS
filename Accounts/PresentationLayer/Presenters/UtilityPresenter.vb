@@ -26,8 +26,8 @@ Namespace PresentationLayer.Presenters
             Dim utilityName As String = View.UtilityName
             Dim utilityIdNo As Int16 = Service.GetField(Of Int16, String)(utilityName, "Utilities", "UtilityName", "IdNo")
             Dim utilityObject As Object = Service.GetFieldsWithIdNo(utilityIdNo, "Utilities", "StoredProcedure")
-            If utilityObject.StoreProcedure Then
-                retVal = Service.RunStoredProcedure(utilityName, parameters)()
+            If utilityObject.StoredProcedure Then
+                Dim x As Object = Service.RunStoredProcedure("sp" & utilityName, parameters)
             End If
             Return retVal
         End Function

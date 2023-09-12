@@ -51,7 +51,7 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
         Private Sub btnChangeUnit_Click(sender As Object, e As EventArgs) Handles btnChangeUnit.Click
-            Dim parameters As Object = {"IdNo", _productIdNo, "BaseUnitIdNo", _baseUnitIdNo, "NewUnitIdNo", cboNewUnitIdNo.SelectedValue}
+            Dim parameters As Object = {"productIdNo", _productIdNo, "oldUnitIdNo", _baseUnitIdNo, "newUnitIdNo", cboNewUnitIdNo.SelectedValue}
             RaiseEvent UtilityButtonClicked(parameters)
         End Sub
 

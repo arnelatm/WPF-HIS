@@ -1475,7 +1475,7 @@ Namespace AdoNet
         End Function
 
         Public Function RunStoredProcedure(storedProcedureName As String, parameters As Object) As Object Implements IBaseDao.RunStoredProcedure
-            Return GetDb().RunStoredProcedure(storedProcedureName, parameters)
+            Return GetDb().RunSqlStoredProcedure(storedProcedureName, parameters)
         End Function
 
         Public Function PerformUtility(utilityName As String, Optional parameters As Object = Nothing) As Object Implements IBaseDao.PerformUtility
@@ -1495,7 +1495,7 @@ Namespace AdoNet
             Dim params() As Object = {"@IdNo", idNo}
             Dim sql As String
             'Dim cTableName = GetPhysicalTableName(tableName)
-            If tableName.Right(5) = "_View" Then
+            If tableName.Length >= 5 AndAlso tableName.Right(5) = "_View" Then
                 Dim l As Int16 = Len(tableName)
                 sql = "Delete From [" & Left(tableName, Len(tableName) - 5) & "] " & " Where IdNo = " & idNo
                 Return GetDb().scalar(sql, params)
