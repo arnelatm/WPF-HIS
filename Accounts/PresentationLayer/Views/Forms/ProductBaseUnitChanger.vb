@@ -6,7 +6,8 @@ Namespace PresentationLayer.Views.Forms
     Public Class ProductBaseUnitChanger
         Implements IUtilityView
 
-        Private _product As IProductView
+        Private _productIdNo As Int32
+        Private _unitIdNo As Int16
         Public Event UtilityButtonClicked(parameters As Object) Implements IUtilityView.UtilityButtonClicked
 
         Public Sub New()
@@ -18,12 +19,16 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
-        Public Sub New(product As IProductView)
+        Public Sub New(productIdNo As Int32, productName As String, unitIdNo As Int16, unitName As String, unitList As Object)
 
             ' This call is required by the designer.
             InitializeComponent()
-            _product = product
-            txtProductName.Text = product.ProductName
+            _productIdNo = productIdNo
+            _unitIdNo = unitIdNo
+            txtProductName.Text = productName
+            txtOldUnitIdNo.Text = unitName
+            cboNewUnitIdNo.EditingMode = True
+            cboNewUnitIdNo.DataSource = unitList
 
         End Sub
 
@@ -38,6 +43,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+            RaiseEvent FormLoad()
             'If UserIsASuperAdministrator() Then
             '    btnChangeUnit.Enabled = True
             'End If

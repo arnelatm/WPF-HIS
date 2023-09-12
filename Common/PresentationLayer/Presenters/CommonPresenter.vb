@@ -187,6 +187,22 @@ Namespace PresentationLayer.Presenters
             CreateLookupDataThread(data)
         End Sub
 
+        Public Function MakeVarDataSource(dataObject As Object) As DataTable
+            Dim luItem As DataLookup
+            CreateDataLookUp(dataObject)
+
+            Dim varDataSource As DataTable
+            Dim data As New ArrayList
+            For Each item As String() In dataObject
+                data.Add(item)
+            Next
+
+
+
+            CreateLookupDataThread(data)
+            Return varDataSource
+        End Function
+
         Public Sub MakeControlDataSources(dataObject As Object)
             Dim data As New ArrayList
             For Each aItem As String() In dataObject

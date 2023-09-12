@@ -1,14 +1,9 @@
 ﻿Imports System.ComponentModel
-Imports System.Dynamic
 Imports System.Globalization
-Imports System.Windows.Controls
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement.Window
-Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
@@ -389,8 +384,8 @@ Namespace PresentationLayer.Views.Forms
             Dim code As String = dgv.CurrentRow.Cells("dgvProductCode").EditedFormattedValue
             RaiseEvent ProductCodeValidating(code, DataGridViewInvTransactionDetails.EditingControl)
             If ProductCodeIsValid Then
-                If code Is Nothing Or code = "" Then
-                    ' go to next cell (which is the productname)
+                If InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
+                    SendKeys.Send("{Tab}")
                 ElseIf ProductInInventory Then
                     SendKeys.Send("{Tab}{Tab}{Tab}")
                 Else
@@ -547,19 +542,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub btnPost_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPost.ClickButtonArea
-            If InventoryAction = EnumToCode(InventoryActionSelection.Add) Or
-                    InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or
-                    InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
-                Dim caption = Messaging.TranslateCaption("Please confirm.")
-                Dim action As String = Messaging.TranslateCaption("post")
-                Dim itemName As String = Messaging.TranslateCaption("InvTransaction transaction")
-                Dim msg = Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
-                If Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-                    RaiseEvent PostData(IdNo)
-                End If
-            Else
-                Messaging.Show(True, "MsgNonPostableEntry")
-            End If
+            RaiseEvent PostData(IdNo)
         End Sub
 
 
@@ -578,13 +561,16 @@ Namespace PresentationLayer.Views.Forms
                 dgvBatchNo.DisplayOnly = True
                 dgvExpiryDate.DisplayOnly = True
                 dgvUnitCost.DisplayOnly = True
-            ElseIf InventoryAction = EnumToCode(InventoryActionSelection.Add) Or
-                InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
+            ElseIf InventoryAction = EnumToCode(InventoryActionSelection.Add) Then
                 dgvBatchNo.Visible = True
                 dgvExpiryDate.Visible = True
                 dgvBatchNo.DisplayOnly = False
                 dgvExpiryDate.DisplayOnly = False
                 dgvUnitCost.DisplayOnly = False
+            ElseIf InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
+                dgvBatchNo.Visible = False
+                dgvExpiryDate.Visible = False
+                dgvUnitCost.DisplayOnly = True
             End If
             dgvBatchNo.UpdateDisplayOnlyControl()
             dgvExpiryDate.UpdateDisplayOnlyControl()

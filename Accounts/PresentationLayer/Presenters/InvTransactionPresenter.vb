@@ -739,13 +739,40 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
-        Private Function OnPostData(idNo As Int32) As Boolean
-            Dim retVal As Boolean = Service.PostData(idNo)
-            If retVal Then
-                View.Posted = True
+        Private Sub OnPostData(idNo As Int32)
+            Dim okToPost As Boolean = False
+            Dim retVal As Boolean = False
+            If View.InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
+                Messaging.Show(True, "MsgNonPostableEntry")
+            Else
+                If UserHasAccess("InventoryManager") Then
+                    okToPost = True
+                ElseIf View.InventoryAction = EnumToCode(InventoryActionSelection.Add) Or View.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Then
+                    If View.DefaultUserWarehouseIdNo = View.WarehouseIdNo Then
+                        ' you can post if your default warehouseid is the same as the current warehouseidno
+                        okToPost = True
+                    End If
+                ElseIf View.InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
+                    If View.DefaultUserWarehouseIdNo = View.WarehouseIdNo Then
+                        okToPost = True
+                    End If
+                End If
+                If okToPost Then
+                    Dim caption = Messaging.TranslateCaption("Please confirm.")
+                    Dim action As String = Messaging.TranslateCaption("post")
+                    Dim itemName As String = Messaging.TranslateCaption("InvTransaction transaction")
+                    Dim msg = Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
+                    If Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                        retVal = Service.PostData(idNo)
+                        If retVal Then
+                            View.Posted = True
+                        End If
+                    End If
+                Else
+                    Messaging.Show(True, "MsgNoPostOnWHouse")
+                End If
             End If
-            Return retVal
-        End Function
+        End Sub
 
         'Public Sub OnInvTransactionDgvItemsValidatingEventHandler(ByRef eventType As DgvItemsValidating) Implements ISubscriber(Of DgvItemsValidating).OnEventHandler
         '    Dim InvTransactionDetail As InvTransactionDetailView = eventType.BindingSource.Current
