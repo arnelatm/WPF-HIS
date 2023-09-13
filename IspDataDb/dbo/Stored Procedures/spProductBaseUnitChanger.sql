@@ -20,5 +20,4 @@ BEGIN
 	Update ProductUnit set UnitIdNo = @newUnitIdNo where UnitIdNo = @oldUnitIdNo and ProductIdNo = @productIdNo
 	Update InvTransactionDetail set UnitIdNo = @newUnitIdNo where UnitIdNo = @oldUnitIdNo and ProductIdNo = @productIdNo
 	Update Product set BaseUnitIdNo = @newUnitIdNo where BaseUnitIdNo = @oldUnitIdNo and IdNo = @productIdNo
-	Select 0
 END
