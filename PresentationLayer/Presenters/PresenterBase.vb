@@ -551,6 +551,38 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return Service.GetLookup(lookupObj)
     End Function
 
+    Public Overloads Function GetLookupT(lookupObj As LookupTable) As List(Of LookupTable.LookupData)
+        Return Service.GetLookupT(lookupObj)
+    End Function
+
+    Public Overloads Function GetLookupT(pTableName As String, Optional pFilter As String = Nothing) As List(Of LookupTable.LookupData)
+        Dim lookupObj As New LookupTable(pTableName, pFilter)
+        Return Service.GetLookupT(lookupObj)
+    End Function
+
+    Public Overloads Function GetLookupT(pTableName As String, pSortKey As String, Optional pFilter As String = Nothing) As List(Of LookupTable.LookupData)
+        Dim lookupObj As New LookupTable(pTableName, pFilter)
+        lookupObj.SortKey = pSortKey
+        lookupObj.FilterKey = pFilter
+        Return Service.GetLookupT(lookupObj)
+    End Function
+
+    Public Overloads Function GetLookupT(pTableName As String, pFieldsToShow As String(), Optional pFilter As String = Nothing) As List(Of LookupTable.LookupData)
+        Dim lookupObj As New LookupTable(pTableName, pFilter)
+        lookupObj.FieldsToShow = pFieldsToShow
+        lookupObj.FilterKey = pFilter
+        lookupObj.SortKey = pFieldsToShow(1)
+        Return Service.GetLookupT(lookupObj)
+    End Function
+
+    Public Overloads Function GetLookupT(pTableName As String, pFieldsToShow As String(), pSortKey As String, Optional pFilter As String = Nothing) As List(Of LookupTable.LookupData)
+        Dim lookupObj As New LookupTable(pTableName, pFilter)
+        lookupObj.FieldsToShow = pFieldsToShow
+        lookupObj.SortKey = pSortKey
+        lookupObj.FilterKey = pFilter
+        Return Service.GetLookupT(lookupObj)
+    End Function
+
     Public Function GetOriginalModel() As TM
         Return OriginalModel
     End Function
@@ -1919,14 +1951,14 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Sub
 
     Public Sub OnGetLookupDataRequestedTableHandler(ByRef eventType As GetLookupDataTableRequested) Implements ISubscriber(Of GetLookupDataTableRequested).OnEventHandler
-        If eventType.View IsNot Nothing Then
+        If eventType.Control IsNot Nothing Then
             Dim data As DataTable
             If eventType.Fields Is Nothing Then
                 data = GetLookupDataTable(eventType.TableName, eventType.SortKey, eventType.Filter)
             Else
                 data = GetLookupDataTable(eventType.TableName, eventType.Fields, eventType.SortKey, eventType.Filter)
             End If
-            Invoker.SetProperty(eventType.View, eventType.TargetProperty, {data})
+            Invoker.SetProperty(eventType.Control, "DataSource", {data})
         End If
     End Sub
 
@@ -2042,6 +2074,17 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Invoker.SetProperty(control, "DataSource", {data})
     End Sub
 
+    Public Sub SetDataSourceT(dataTableName As String, control As Control, Optional dataFields As String() = Nothing, Optional sortKey As String = Nothing, Optional filter As String = Nothing)
+        Dim data As List(Of LookupTable.LookupData)
+        Dim lookupObj
+        lookupObj = SetLookupObjectT(dataTableName, control, dataFields, sortKey, filter)
+        data = GetLookupT(lookupObj)
+        Dim Task1
+        Task1 = Task.Factory.StartNew(Sub() GetLookup(lookupObj))
+        Task.WaitAll(Task1) ' ,Task2)
+        Invoker.SetProperty(control, "DataSource", {data})
+    End Sub
+
     Protected Sub SetListDataSource(dataTableName As String, control As Control, listName As String)
         Dim data As List(Of Lookup.LookupData)
         Dim lookupObj
@@ -2052,6 +2095,20 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Protected Function SetLookupObject(dataTableName As String, control As Control, Optional dataFields As String() = Nothing, Optional sortKey As String = Nothing, Optional filter As String = Nothing) As Lookup
         Dim lookupObj As New Lookup(dataTableName)
+        If dataFields IsNot Nothing Then
+            lookupObj.FieldsToShow = dataFields
+        End If
+        If Not (sortKey Is Nothing OrElse sortKey = "") Then
+            lookupObj.SortKey = sortKey
+        End If
+        If Not (filter Is Nothing OrElse filter = "") Then
+            lookupObj.FilterKey = filter
+        End If
+        Return lookupObj
+    End Function
+
+    Protected Function SetLookupObjectT(dataTableName As String, control As Control, Optional dataFields As String() = Nothing, Optional sortKey As String = Nothing, Optional filter As String = Nothing) As LookupTable
+        Dim lookupObj As New LookupTable(dataTableName)
         If dataFields IsNot Nothing Then
             lookupObj.FieldsToShow = dataFields
         End If

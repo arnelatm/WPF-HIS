@@ -5,6 +5,7 @@ Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.PresentationLayer.Views.[Interface]
 Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries
+Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.CrystalReportsHelper
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.PresentationLayer.Events
@@ -16,6 +17,7 @@ Namespace PresentationLayer.Presenters
     Public Class PrintReportPresenter(Of TM As New)
         Inherits CommonPresenter(Of ICrPrintableReportView, TM)
         Implements ISubscriber(Of GetControlDataSource)
+        Implements ISubscriber(Of GetLookupDataTableRequested)
 
         Private _psService As Object
         Private _pjService As Object
@@ -145,8 +147,16 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Sub OnGetControlDataSourceHandler(ByRef eventType As GetControlDataSource) Implements ISubscriber(Of GetControlDataSource).OnEventHandler
-            SetDataSource(eventType.TableName, eventType.Control,,, eventType.Filter)
+            If TypeOf eventType.Control Is CtComboBox Then
+                MakeControlDataSourcesT({New Object() {eventType.TableName, eventType.Control, Nothing, Nothing, eventType.Filter}})
+            Else
+                SetDataSource(eventType.TableName, eventType.Control,,, eventType.Filter)
+            End If
         End Sub
+
+        'Public Sub OnGetControlDataSourceHandler(ByRef eventType As GetLookupDataTableRequested) Implements ISubscriber(Of GetLookupDataTableRequested).OnEventHandler
+        '    SetDataSourceT(eventType.TableName, eventType.Control,,, eventType.Filter)
+        'End Sub
 
         Public Sub PrintReport(reportFileName As String, reportArgs As CrPrintableArgs, printDirectly As Boolean, Optional addDefaultParameters As Boolean = False)
             ' leave startpage and endpage to 0 - to print all pages

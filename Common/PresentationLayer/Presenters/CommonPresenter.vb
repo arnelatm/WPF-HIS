@@ -41,6 +41,19 @@ Namespace PresentationLayer.Presenters
             Next
         End Sub
 
+        Protected Sub CreateDataSourceThreadT(dataSourceNames As ArrayList)
+            Dim luItems As List(Of DataLookup)
+            luItems = CreateDataLookupsT(dataSourceNames)
+            For Each luItem As DataLookup In luItems
+                Dim displayColumnNo As Integer = Nothing
+                Dim valueColumnNo As Integer = Nothing
+                MakeLookupItemT(luItem, displayColumnNo, valueColumnNo)
+                Invoker.SetPropertyR(luItem.PropertyControl, "DisplayMember", luItem.Data.Columns(displayColumnNo).ColumnName)
+                Invoker.SetPropertyR(luItem.PropertyControl, "ValueMember", luItem.Data.Columns(valueColumnNo).ColumnName)
+            Next
+        End Sub
+
+
         'Protected Function GetLookupThread(dataSourceName As Object)
         '    Dim lookup As New Object
         '    Dim luItem As DataLookup
@@ -58,6 +71,54 @@ Namespace PresentationLayer.Presenters
 
         Private Sub MakeLookupItem(ByRef luItem As DataLookup, ByRef displayColumnNo As Integer, ByRef valueColumnNo As Integer)
             luItem.PropertyControl = GetFieldControlName(luItem.PropertyName)
+            luItem.Data = luItem.LookUpTask.Result
+            Invoker.SetPropertyR(luItem.PropertyControl, "DataSource", luItem.Data)
+            displayColumnNo = 0
+            valueColumnNo = 0
+
+            If luItem.DisplayMember = "Name" Then
+                If luItem.Data.Columns.Count() = 1 Then
+                    displayColumnNo = 0
+                    valueColumnNo = 0
+                Else
+                    displayColumnNo = 1
+                End If
+            ElseIf luItem.DisplayMember = "Code" Then
+                If luItem.Data.Columns.Count() = 1 Then
+                    displayColumnNo = 0
+                ElseIf luItem.Data.Columns.Count() = 2 Then
+                    displayColumnNo = 1
+                Else
+                    displayColumnNo = 2
+                End If
+            Else
+                If luItem.Data.Columns.Count() = 1 Then
+                    displayColumnNo = 0
+                Else
+                    displayColumnNo = 1
+                End If
+            End If
+            If luItem.ValueMember = "Name" Then
+                If luItem.Data.Columns.Count() = 1 Then
+                    valueColumnNo = 0
+                Else
+                    valueColumnNo = 1
+                End If
+            ElseIf luItem.DisplayMember = "Code" Then
+                If luItem.Data.Columns.Count() = 1 Then
+                    valueColumnNo = 0
+                ElseIf luItem.Data.Columns.Count() = 2 Then
+                    valueColumnNo = 1
+                Else
+                    valueColumnNo = 2
+                End If
+            Else
+                valueColumnNo = 0
+            End If
+        End Sub
+
+        Private Sub MakeLookupItemT(ByRef luItem As DataLookup, ByRef displayColumnNo As Integer, ByRef valueColumnNo As Integer)
+            luItem.PropertyControl = luItem.PropertyControl
             luItem.Data = luItem.LookUpTask.Result
             Invoker.SetPropertyR(luItem.PropertyControl, "DataSource", luItem.Data)
             displayColumnNo = 0
@@ -225,6 +286,14 @@ Namespace PresentationLayer.Presenters
             CreateDataSourceThread(data)
         End Sub
 
+        Public Sub MakeControlDataSourcesT(dataObject As Object)
+            Dim data As New ArrayList
+            For Each aItem As Object In dataObject
+                data.Add(aItem)
+            Next
+            CreateDataSourceThreadT(data)
+        End Sub
+
         Public Sub MakeControlDataSource(dataObject As ArrayList)
             Dim data As New ArrayList From {
                 dataObject
@@ -243,6 +312,17 @@ Namespace PresentationLayer.Presenters
             Return lookups
         End Function
 
+        Private Function CreateDataLookupsT(dataSourceNames As ArrayList) As List(Of DataLookup)
+            Dim lookups As New List(Of DataLookup)
+            For Each item In dataSourceNames
+                Dim dtl As DataLookup
+                dtl = CreateDataLookUpT(item)
+                lookups.Add(dtl)
+            Next
+            Return lookups
+        End Function
+
+
         Private Function CreateDataLookUp(item As Object) As DataLookup
             Const LookupTableName As Int32 = 0
             Const PropertyFieldName As Int32 = 1
@@ -254,6 +334,39 @@ Namespace PresentationLayer.Presenters
             Dim dtl As New DataLookup
             dtl.TableName = item(LookupTableName)
             dtl.PropertyName = item(PropertyFieldName)
+            If item.Length - 1 > 1 Then
+                dtl.LuFields = item(LookupFieldNames)
+            End If
+            If item.Length - 1 > 2 Then
+                dtl.Filter = item(LookupFilter)
+            End If
+            If item.Length - 1 > 3 Then
+                dtl.SortKey = item(LookupSortKey)
+            End If
+            If item.Length - 1 > 4 Then
+                dtl.ValueMember = item(ValueMember)
+            End If
+            If item.Length - 1 > 5 Then
+                dtl.DisplayMember = item(DisplayMember)
+            End If
+            ComposeLookupProperties(dtl)
+            dtl.LookUpTask = Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(dtl))
+            Return dtl
+        End Function
+
+
+
+        Private Function CreateDataLookUpT(item As Object) As DataLookup
+            Const LookupTableName As Int32 = 0
+            Const PropertyControl As Int32 = 1
+            Const LookupFieldNames As Int32 = 2
+            Const LookupFilter As Int32 = 3
+            Const LookupSortKey As Int32 = 4
+            Const ValueMember As Int32 = 5
+            Const DisplayMember As Int32 = 6
+            Dim dtl As New DataLookup
+            dtl.TableName = item(LookupTableName)
+            dtl.PropertyControl = item(PropertyControl)
             If item.Length - 1 > 1 Then
                 dtl.LuFields = item(LookupFieldNames)
             End If

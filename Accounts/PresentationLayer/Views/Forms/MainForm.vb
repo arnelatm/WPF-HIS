@@ -1277,7 +1277,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemProductMovement_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemProductMovement.Click
-
+            RunReportNew(Of ProductMovementReport)()
         End Sub
     End Class
 

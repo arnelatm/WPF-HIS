@@ -12,5 +12,5 @@ SELECT [BranchIdNo]
       ,[WarehouseIdNo]
       ,iif(sum([QtyOnHand])=0,0,sUM([TotalCost])/Sum([QtyOnHand])) as UnitCost
       ,sUM([TotalCost]) AS TotalCost
-  FROM [ISPData].[dbo].[Inventory_View]
+  FROM [dbo].[Inventory_View]
   GROUP BY BRANCHIDNO,PRODUCTIDNO,PRODUCTCODE,ProductName,WAREHOUSEIDNO
