@@ -613,6 +613,8 @@
     <Build Include="dbo\Stored Procedures\spProductBaseUnitChanger.sql" />
     <Build Include="dbo\Views\InventoryCount_View.sql" />
     <Build Include="dbo\Views\InventoryCount_View.sql" />
+    <Build Include="dbo\Views\ProductMovement_View.sql" />
+    <Build Include="dbo\Stored Procedures\spProductMovement.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />
