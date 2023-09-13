@@ -1276,6 +1276,9 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of InvRequestForm, InvRequestPresenter(Of InvTransactionModel))()
         End Sub
 
+        Private Sub ToolStripMenuItemProductMovement_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemProductMovement.Click
+
+        End Sub
     End Class
 
 End Namespace
