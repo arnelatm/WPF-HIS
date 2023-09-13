@@ -298,32 +298,32 @@ Public Class GetLookupDataTableRequested
         Me.TargetSourceName = targetSourceName
     End Sub
 
-    Public Sub New(ByVal tableName As String, ByRef view As Control, targetProperty As String, ByVal Optional filter As String = Nothing)
+    Public Sub New(ByVal tableName As String, ByRef control As Control, targetProperty As String, ByVal Optional filter As String = Nothing)
         Me.TableName = tableName
         Me.TargetProperty = targetProperty
         Me.Filter = filter
-        Me.View = view
+        Me.Control = control
     End Sub
 
-    Public Sub New(ByVal tableName As String, ByRef view As Control, targetProperty As String, ByVal sortKey As String, ByVal Optional filter As String = Nothing)
+    Public Sub New(ByVal tableName As String, ByRef control As Control, targetProperty As String, ByVal sortKey As String, ByVal Optional filter As String = Nothing)
         Me.TableName = tableName
         Me.TargetProperty = targetProperty
         Me.SortKey = sortKey
         Me.Filter = filter
-        Me.View = view
+        Me.Control = control
     End Sub
 
-    Public Sub New(ByVal tableName As String, ByRef view As Control, targetProperty As String, ByVal fields As String(), ByVal Optional filter As String = Nothing)
+    Public Sub New(ByVal tableName As String, ByRef control As Control, targetProperty As String, ByVal fields As String(), ByVal Optional filter As String = Nothing)
         Me.TableName = tableName
-        Me.View = view
+        Me.Control = control
         Me.TargetProperty = targetProperty
         Me.Filter = filter
         Me.Fields = fields
     End Sub
 
-    Public Sub New(ByVal tableName As String, ByRef view As Control, targetProperty As String, ByVal sortKey As String, ByVal fields As String(), ByVal Optional filter As String = Nothing)
+    Public Sub New(ByVal tableName As String, ByRef control As Control, targetProperty As String, ByVal sortKey As String, ByVal fields As String(), ByVal Optional filter As String = Nothing)
         Me.TableName = tableName
-        Me.View = view
+        Me.Control = control
         Me.TargetProperty = targetProperty
         Me.Filter = filter
         Me.SortKey = sortKey
@@ -331,7 +331,7 @@ Public Class GetLookupDataTableRequested
     End Sub
 
     Public Property TableName As String
-    Public Property View As Control
+    Public Property Control As Control
     Public Property TargetProperty As String
     Public Property Fields As String()
     Public Property Filter As String
@@ -484,6 +484,8 @@ Public Class GetControlDataSource
     Public Property Filter As String
 
 End Class
+
+
 
 Public Class PrintCrEventArgs
 

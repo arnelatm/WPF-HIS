@@ -173,6 +173,29 @@ Namespace Services
             Return ProcessListLookup(data, lookupObj.FieldsToShow.Count())
         End Function
 
+
+        Public Function GetListLookupT(lookupObj As LookupTable) As DataTable
+            If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+                Dim nameFieldArabic = lookupObj.NameField + "Ara"
+                If FieldExistInTable(lookupObj.TableName, nameFieldArabic) Then
+                    If lookupObj.SortKey = lookupObj.NameField Then
+                        lookupObj.SortKey = nameFieldArabic
+                        Dim i As Integer = 0
+                        For Each field In lookupObj.FieldsToShow
+                            If field = lookupObj.NameField Then
+                                lookupObj.FieldsToShow(i) = nameFieldArabic
+                            End If
+                            i = i + 1
+                        Next
+                        lookupObj.NameField = nameFieldArabic
+                    End If
+                End If
+            End If
+            Return GetRecords(lookupObj.TableName, lookupObj.SortKey, lookupObj.FieldsToShow, lookupObj.FilterKey)
+            'Dim lookupSetting = GlobalVariables.LookupSetting()
+            'Return ProcessListLookup(data, lookupObj.FieldsToShow.Count())
+        End Function
+
         Public Function GetLookup(lookupObj As Lookup, Optional hierarchical As Boolean = False) As List(Of Lookup.LookupData)
             If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
                 Dim nameFieldArabic = lookupObj.NameField + "Ara"
@@ -224,6 +247,60 @@ Namespace Services
             lookupObj.FieldsToShow = fieldsToShow
             lookupObj.SortKey = sortKey
             Return GetLookup(lookupObj)
+        End Function
+
+        Public Function GetLookupT(lookupObj As LookupTable, Optional hierarchical As Boolean = False) As DataTable
+            If IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
+                Dim nameFieldArabic = lookupObj.NameField + "Ara"
+                If FieldExistInTable(lookupObj.TableName, nameFieldArabic) Then
+                    If lookupObj.SortKey = lookupObj.NameField Then
+                        lookupObj.SortKey = nameFieldArabic
+                        Dim i As Integer = 0
+                        For Each field In lookupObj.FieldsToShow
+                            If field = lookupObj.NameField Then
+                                lookupObj.FieldsToShow(i) = nameFieldArabic
+                            End If
+                            i = i + 1
+                        Next
+                        lookupObj.NameField = nameFieldArabic
+                    End If
+                End If
+            End If
+            If Not hierarchical Then
+                Return GetRecords(lookupObj.TableName, lookupObj.SortKey, lookupObj.FieldsToShow, lookupObj.FilterKey)
+                'Dim data = GetRecords(lookupObj.TableName, lookupObj.SortKey, lookupObj.FieldsToShow, lookupObj.FilterKey)
+                'Dim lookupSetting = GlobalVariables.LookupSetting()
+                'If lookupSetting = "NameAndCode" Then
+                '    Return ProcessLookupByNameCode(data, lookupObj.FieldsToShow.Count())
+                'ElseIf lookupSetting = "CodeAndName" Then
+                '    Return ProcessLookupByCodeName(data, lookupObj.FieldsToShow.Count())
+                'ElseIf lookupSetting = "Name" Then
+                '    Return ProcessLookupByName(data, lookupObj.FieldsToShow.Count())
+                'Else
+                '    Return ProcessLookupByNameCode(data, lookupObj.FieldsToShow.Count())
+                'End If
+            End If
+        End Function
+
+        Public Function GetLookupT(tableName As String, Optional filter As String = Nothing) As DataTable
+            Dim lookupObj As New LookupTable(tableName, filter)
+            If tableName = "List" Then
+                Return GetListLookupT(lookupObj)
+            End If
+            Return GetLookupT(lookupObj)
+        End Function
+
+        Public Function GetLookupT(tableName As String, sortKey As String, Optional filter As String = Nothing) As DataTable
+            Dim lookupObj As New LookupTable(tableName, filter)
+            lookupObj.SortKey = sortKey
+            Return GetLookupT(lookupObj)
+        End Function
+
+        Public Function GetLookupT(tableName As String, sortKey As String, fieldsToShow As String(), Optional filter As String = Nothing) As DataTable
+            Dim lookupObj As New LookupTable(tableName, filter)
+            lookupObj.FieldsToShow = fieldsToShow
+            lookupObj.SortKey = sortKey
+            Return GetLookupT(lookupObj)
         End Function
 
         Public Function GetMainTableColumnProperties(tableName As String) As List(Of TblColProp) Implements IService.GetMainTableColumnProperties
