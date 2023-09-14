@@ -62,6 +62,7 @@ Public Class FinancialReportPresenter(Of TM As New)
 
     Public Sub OnPrintButtonClicked()
         Dim curCulture = CultureInfo.CurrentCulture
+        Dim language = Strings.Left(curCulture.Name, curCulture.Name.IndexOf("-"))
         CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
         Dim beginningDate As Date?
         Dim endingDate As Date?
@@ -69,7 +70,7 @@ Public Class FinancialReportPresenter(Of TM As New)
         Dim AccountBalanceYear As Integer
         Dim begDataDate As Date
         Dim estName As String
-        If View.Language = "ar" Then
+        If language = "ar" Then
             estName = GlobalVariables.EstablishmentNameAra
         Else
             estName = GlobalVariables.EstablishmentName
@@ -118,7 +119,7 @@ Public Class FinancialReportPresenter(Of TM As New)
                                   lastFiscalYearDate, "LastFiscalYearDate",
                                   estName, "EstablishmentName",
                                   reportTitle, "ReportTitle",
-                                  View.Language, "Language"
+                                  language, "Language"
                                   }
                 Case "TrialBalance"
                     reportArgs.ReportParameters = {beginningDate, "BeginningDate",
@@ -127,29 +128,29 @@ Public Class FinancialReportPresenter(Of TM As New)
                                       lastFiscalYearDate, "LastFiscalYearDate",
                                       estName, "EstablishmentName",
                                       reportTitle, "ReportTitle",
-                                      View.Language, "Language"
+                                      language, "Language"
                                       }
                 Case "IncomeStatement"
                     reportArgs.ReportParameters = {beginningDate, "BeginningDate",
                                       endingDate, "EndingDate",
                                       estName, "EstablishmentName",
                                       reportTitle, "ReportTitle",
-                                      View.Language, "Language"
+                                      language, "Language"
                                       }
                 Case "ApSummary", "ArSummary", "ErSummary"
                     reportArgs.ReportParameters = {bDate, "BeginningDate",
                                      eDate, "EndingDate",
                                      reportTitle, "ReportTitle",
                                      View.ZeroBalanceChecked, "IncludeZeroBalance",
-                                     GlobalVariables.EstablishmentName, "EstablishmentName",
-                                     View.Language, "Language"}
+                                     estName, "EstablishmentName",
+                                     language, "Language"}
 
                     'Case "ArSummary"
                     '    reportArgs.ReportParameters = {bDate, "BeginningDate",
                     '                     eDate, "EndingDate",
                     '                     reportTitle, "ReportTitle",
                     '                     View.ZeroBalanceChecked, "IncludeZeroBalance",
-                    '                     GlobalVariables.EstablishmentName, "EstablishmentName",
+                    '                     estName, "EstablishmentName",
                     '                     View.Language, "Language"}
                     'Case "ErSummary"
                     '    reportArgs.ReportParameters = {bDate, "BeginningDate",

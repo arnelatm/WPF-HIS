@@ -131,13 +131,15 @@ Namespace DataLayer.AdoNet
             If InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
                 Dim connection As New Db
                 Dim transactionObj As New TransactionObject()
-                transactionObj.CreateConnection("PostInvTransDetailTransfer", Db.GetConnectionString)
+                transactionObj.CreateConnection("PostInvTransDetail", Db.GetConnectionString)
                 For Each item As InvTransactionDetail In invTransDetails
                     Dim parameters As Object = {"@InvTransactionDetailIdNo", item.IdNo,
+                                                "@ProductIdNo", item.ProductIdNo,
+                                                "@UnitIdNo", item.IdNo,
                                                 "@InventoryIdNo", item.InventoryIdNo,
                                                 "@InvTransactionIdNo", InvTrans.IdNo,
                                                 "@WarehouseIdNo", InvTrans.WarehouseToIdNo}
-                    Dim updatedCount As Int32 = Db.RunSqlStoredProcedure("PostInvTransDetailTransfer", parameters)
+                    Dim updatedCount As Int32 = Db.RunSqlStoredProcedure("PostInvTransDetail", parameters)
                     If updatedCount < 0 Then
                         retVal = False
                         Exit For
