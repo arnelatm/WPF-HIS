@@ -166,6 +166,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreateIspdata", "CreateIspd
 		Change all 599 accountcode to 99 id no in account table.sql = Change all 599 accountcode to 99 id no in account table.sql
 		Create Chart Balance.sql = Create Chart Balance.sql
 		Create ISPDATA Database.sql = Create ISPDATA Database.sql
+		Create Posting Querry for InvTransactionDetails = Create Posting Querry for InvTransactionDetails
 		Create Product from IGroupCLinic Data = Create Product from IGroupCLinic Data
 		Create ProductUnit = Create ProductUnit
 		Create Purchase = Create Purchase

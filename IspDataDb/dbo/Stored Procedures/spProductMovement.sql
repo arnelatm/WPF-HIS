@@ -11,21 +11,23 @@ AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
 	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
+	-- SET NOCOUNT ON;
 
     -- Insert statements for procedure here
 	SELECT [ProductIdNo]
       ,[WarehouseIdNo]
       ,[WarehouseToIdNo]
-      ,[IdNo]
+      ,a.[IdNo]
       ,[TransactionDate]
 	  ,[BaseQty] * IIf(WarehouseIdNo = @WareHouseIdNo,1,-1) as 'BaseQty'
       ,[Quantity] * IIf(WarehouseIdNo = @WareHouseIdNo,1,-1) as 'Quantity'
       ,[UnitIdNo]
 	  ,[UnitName]
       ,[UnitCost]
-      ,[Description]
-  FROM [dbo].[ProductMovement_View] 
-  where (warehouseidno = @WarehouseIdNo or warehousetoidno = @WarehouseIdNo) and ProductIdNo = @ProductIdNo and [dbo].[ProductMovement_View].Description <> 'Purchase'
+	  ,[Description] + ' ' + IIf(IsNull(WarehouseToIdNo,0)=0,'',b.WarehouseName) as 'Description'
+  FROM [dbo].[ProductMovement_View] a
+  Left Join Warehouse b
+  on b.IdNo = WarehouseToIdNo
+  where (warehouseidno = @WarehouseIdNo or warehousetoidno = @WarehouseIdNo) and ProductIdNo = @ProductIdNo 
   order by Productidno
 END
