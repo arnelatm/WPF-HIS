@@ -59,7 +59,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property WarehouseList As DataTable
         Property UserList As DataTable
         Property UnitList As DataTable
-        Property InvTransactionDetails As List(Of InvTransactionDetailView)
+        Property InvRequestDetails As List(Of InvRequestDetailView)
         Property WarehouseSelector As Int16
         Event WarehouseIdNoChanged()
         Event RowChanged(productIdNo As Integer)

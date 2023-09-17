@@ -25,5 +25,15 @@ Namespace PresentationLayer.Views.Interfaces
 
     End Interface
 
+    Public Interface IInvRequestDetailView
+
+        Property BaseUnitName As String
+        Property QtyOnHand As Decimal
+        Property QtySupplied As Decimal
+        Property UnitName As String
+
+    End Interface
+
+
 
 End Namespace

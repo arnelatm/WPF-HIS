@@ -44,8 +44,8 @@ Namespace PresentationLayer.Presenters.Views.Forms
             Dim today = Now()
             lblContactIdNo.Visible = True
             cboContactIdNo.Visible = True
-            dateRange.BeginningDate = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
-            dateRange.EndingDate = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
+            'dateRange.BeginningDate = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
+            'dateRange.EndingDate = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
 
 
         End Sub

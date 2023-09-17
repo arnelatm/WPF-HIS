@@ -22,19 +22,19 @@ Namespace Accounts.PresentationLayer.Views.Forms
 
         Public Property BeginningDate As Date? Implements IDateRangeView.BeginningDate
             Get
-                Return dateRange.BeginningDate.Value
+                Return dtpBeginningDate.Value
             End Get
             Set(value As Date?)
-                dateRange.BeginningDate = value
+                dtpBeginningDate.Value = value
             End Set
         End Property
 
         Public Property EndingDate As Date? Implements IDateRangeView.EndingDate
             Get
-                Return dateRange.EndingDate
+                Return dtpEndingDate.Value
             End Get
             Set(value As Date?)
-                dateRange.EndingDate = value
+                dtpEndingDate.Value = value
             End Set
         End Property
 
@@ -73,6 +73,8 @@ Namespace Accounts.PresentationLayer.Views.Forms
         End Sub
 
         Private Sub btnOk_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
+            'BeginningDate = dateRange.BeginningDate
+            'EndingDate = dateRange.EndingDate
             RaiseEvent PrintButtonClicked()
         End Sub
 
@@ -82,8 +84,8 @@ Namespace Accounts.PresentationLayer.Views.Forms
 
         Private Sub DateRangeForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             Dim today = Now()
-            dateRange.BeginningDate = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
-            dateRange.EndingDate = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
+            dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
+            dtpEndingDate.Value = GlobalFunctions.GregorianDateSerial(today.Year, today.Month, today.Day).AddDays(-1)
             If NoContact Then
                 lblContactIdNo.Visible = False
                 cboContactIdNo.Visible = False
@@ -95,6 +97,9 @@ Namespace Accounts.PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private Sub CLabel2_Click(sender As Object, e As EventArgs) Handles CLabel2.Click
+            Debugger.Break()
+        End Sub
     End Class
 
 End Namespace

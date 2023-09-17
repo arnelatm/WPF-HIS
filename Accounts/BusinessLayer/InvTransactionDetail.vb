@@ -1,4 +1,6 @@
 ﻿' ** Enterprise Design Pattern: Domain Model, Identity Field
+Imports AATM.Accounts.PresentationLayer.Views
+
 Namespace BusinessLayer
 
     Public Class InvTransactionDetail
@@ -27,6 +29,18 @@ Namespace BusinessLayer
         Public Property UnitCost As Decimal
         Public Property UnitCount As Int16
         Public Property UnitIdNo As Int16
+
+    End Class
+
+
+    Public Class InvRequestDetail
+        Inherits InvTransactionDetail
+
+        Public Property QtyOnHand As Decimal
+        Public Property QtySupplied As Decimal
+        Public Property UnitName As String
+        Public Property BaseUnitName As String
+
 
     End Class
 

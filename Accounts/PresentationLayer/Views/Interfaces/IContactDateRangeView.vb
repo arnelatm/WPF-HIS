@@ -3,6 +3,7 @@
 Namespace PresentationLayer.Views.Interfaces
 
     Public Interface IContactDateRangeView
+
         Inherits IDateRangeView
 
         ReadOnly Property IdNo As Int32

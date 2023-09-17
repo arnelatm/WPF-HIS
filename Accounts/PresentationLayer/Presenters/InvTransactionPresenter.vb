@@ -74,7 +74,6 @@ Namespace PresentationLayer.Presenters
         End Sub
 
 
-
         Protected Overrides Sub CreateDataSources()
             Dim data As New ArrayList
             data.Add({"Warehouse", "WarehouseIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"})
@@ -153,8 +152,19 @@ Namespace PresentationLayer.Presenters
                         End If
                     End If
                 End If
-            Else
-                retValue = False
+                If retValue Then
+                    ' don't allow duplicate values for productIdNo this is to make it easy to check for
+                    ' inventory e.g. if we will not do this, it will be more complicated to check for
+                    ' quantity available on hand say if 2 entries, to check for available quantity we need
+                    ' to sum first all records with the same code then check for available quantity.
+
+                    ' look for duplicate PayElementIdNo in bsEarning
+                    Dim duplicate = FirstFieldDuplicate(Of InvTransactionDetailView, Int16)(View.InvTransactionDetails, "ProductIdNo")
+                    If duplicate IsNot Nothing Then
+                        MessageBox.Show("Duplicate product code found in Inventory Transaction Details. See line <" + (duplicate + 1).ToString() + ">.")
+                        retValue = False
+                    End If
+                End If
             End If
             Return retValue
         End Function

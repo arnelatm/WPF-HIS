@@ -7,14 +7,8 @@ Namespace PresentationLayer.Models
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
     Public Class InvTransactionModel
-        Inherits InvRequestHeader
 
         Public Property InvTransactionDetails As List(Of InvTransactionDetailModel)
-
-    End Class
-
-    Public Class InvRequestHeader
-
         Public Property Amount As Decimal
         Public Property Cancelled As Boolean
         Public Property DateCreated As Date

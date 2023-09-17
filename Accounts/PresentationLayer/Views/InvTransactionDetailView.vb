@@ -30,4 +30,16 @@ Namespace PresentationLayer.Views
 
     End Class
 
+
+    Public Class InvRequestDetailView
+        Inherits InvTransactionDetailView
+        Implements IInvRequestDetailView
+
+        Public Property BaseUnitName As String Implements IInvRequestDetailView.BaseUnitName
+        Public Property QtyOnHand As Decimal Implements IInvRequestDetailView.QtyOnHand
+        Public Property QtySupplied As Decimal Implements IInvRequestDetailView.QtySupplied
+        Public Property UnitName As String Implements IInvRequestDetailView.UnitName
+
+    End Class
+
 End Namespace
