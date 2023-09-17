@@ -22,7 +22,7 @@ Namespace PresentationLayer.Presenters
             TableName = "InvTransaction"
             SortOrderKey = "IdNo"
             WithTreeView = False
-            _invRequestItemService = New AccountsService("InvTransactionDetail")
+            _invRequestItemService = New AccountsService("InvRequestDetail")
             AddHandler view.WarehouseIdNoChanged, AddressOf OnWarehouseIdNoChanged
             AddHandler view.RowChanged, AddressOf OnRowChanged
             AddHandler view.FormLoaded, AddressOf OnEntryFormLoaded
@@ -36,11 +36,11 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub OnRowChanged(productIdNo As Integer)
-            Dim invRequestItems As List(Of InvTransactionDetailModel)
-            invRequestItems = _invRequestItemService.GetRecordsWithGroupIdNo(Of InvTransactionDetailModel)(productIdNo)
-            Dim invItems As New List(Of InvTransactionDetailView)
+            Dim invRequestItems As List(Of InvRequestDetailModel)
+            invRequestItems = _invRequestItemService.GetRecordsWithGroupIdNo(Of InvRequestDetailModel)(productIdNo)
+            Dim invItems As New List(Of InvRequestDetailView)
             GlobalVariables.Mapper.Map(invRequestItems, invItems)
-            View.InvTransactionDetails = invItems
+            View.InvRequestDetails = invItems
         End Sub
 
         Private Sub OnWarehouseIdNoChanged()

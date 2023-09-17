@@ -21,7 +21,10 @@ Partial Class StockRequestApprovalEntry
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
+        Me.lblWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+        Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
         Me.DataGridViewStockRequest = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewCheckBoxColumn1 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
@@ -36,8 +39,6 @@ Partial Class StockRequestApprovalEntry
         Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsInvTransactionRequest = New System.Windows.Forms.BindingSource(Me.components)
-        Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.CFlowLayout1.SuspendLayout()
         CType(Me.DataGridViewStockRequest, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -55,6 +56,67 @@ Partial Class StockRequestApprovalEntry
         Me.CFlowLayout1.Size = New System.Drawing.Size(1067, 542)
         Me.CFlowLayout1.TabIndex = 5
         '
+        'lblWarehouseIdNo
+        '
+        Me.lblWarehouseIdNo.BackColor = System.Drawing.Color.Transparent
+        Me.lblWarehouseIdNo.DisplayOnly = True
+        Me.lblWarehouseIdNo.EditingMode = False
+        Me.lblWarehouseIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.lblWarehouseIdNo.Location = New System.Drawing.Point(1, 1)
+        Me.lblWarehouseIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.lblWarehouseIdNo.Name = "lblWarehouseIdNo"
+        Me.lblWarehouseIdNo.Size = New System.Drawing.Size(236, 24)
+        Me.lblWarehouseIdNo.TabIndex = 8
+        Me.lblWarehouseIdNo.Text = "Warehouse Code/Name2 :"
+        Me.lblWarehouseIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblWarehouseIdNo.Translatable = True
+        '
+        'cboWarehouseIdNo
+        '
+        Me.cboWarehouseIdNo.BackColor = System.Drawing.Color.White
+        Me.cboWarehouseIdNo.BegFindValue = Nothing
+        Me.cboWarehouseIdNo.ChangingSearchValueOnly = False
+        Me.cboWarehouseIdNo.CurrentSearchTerm = ""
+        Me.cboWarehouseIdNo.DataValue = Nothing
+        Me.cboWarehouseIdNo.DefaultValue = Nothing
+        Me.cboWarehouseIdNo.DisplayMember = "Name"
+        Me.cboWarehouseIdNo.Editable = True
+        Me.cboWarehouseIdNo.EditingMode = True
+        Me.cboWarehouseIdNo.EndFindValue = Nothing
+        Me.cboWarehouseIdNo.FieldDescription = Nothing
+        Me.cboWarehouseIdNo.FieldName = Nothing
+        Me.cboWarehouseIdNo.FilterRule = Nothing
+        Me.cboWarehouseIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.cboWarehouseIdNo.FindEnabled = False
+        Me.cboWarehouseIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+        Me.cboWarehouseIdNo.ForeColor = System.Drawing.Color.Black
+        Me.cboWarehouseIdNo.FormattingEnabled = True
+        Me.cboWarehouseIdNo.HideWhenNotEditingOrAdding = False
+        Me.cboWarehouseIdNo.IgnoreCase = False
+        Me.cboWarehouseIdNo.IntegralHeight = False
+        Me.cboWarehouseIdNo.LimitToList = False
+        Me.cboWarehouseIdNo.LinkedLabel = Nothing
+        Me.cboWarehouseIdNo.Location = New System.Drawing.Point(239, 1)
+        Me.cboWarehouseIdNo.Margin = New System.Windows.Forms.Padding(1)
+        Me.cboWarehouseIdNo.Name = "cboWarehouseIdNo"
+        Me.cboWarehouseIdNo.OldValue = 0
+        Me.cboWarehouseIdNo.OriginalDataSource = Nothing
+        Me.cboWarehouseIdNo.OriginalList = Nothing
+        Me.cboWarehouseIdNo.OverrideDropDownStyleList = False
+        Me.cboWarehouseIdNo.PreviousSearchTerm = Nothing
+        Me.cboWarehouseIdNo.PropertySelector = Nothing
+        Me.cboWarehouseIdNo.ReadOnlyCombo = False
+        Me.cboWarehouseIdNo.Size = New System.Drawing.Size(340, 24)
+        Me.cboWarehouseIdNo.SuggestBoxHeight = 200
+        Me.cboWarehouseIdNo.SuggestListOrderRule = Nothing
+        Me.cboWarehouseIdNo.TabIndex = 1
+        Me.cboWarehouseIdNo.TextToSearch = Nothing
+        Me.cboWarehouseIdNo.Translatable = False
+        Me.cboWarehouseIdNo.ValueIsMandatory = False
+        Me.cboWarehouseIdNo.ValueIsNullable = False
+        Me.cboWarehouseIdNo.ValueIsNumeric = False
+        Me.cboWarehouseIdNo.ValueMember = "IdNo"
+        '
         'DataGridViewStockRequest
         '
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
@@ -66,6 +128,14 @@ Partial Class StockRequestApprovalEntry
         Me.DataGridViewStockRequest.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewCheckBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewCheckBoxColumn2, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn10})
         Me.DataGridViewStockRequest.DataFilter = Nothing
         Me.DataGridViewStockRequest.DataSource = Me.bsInvTransactionRequest
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.Black
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewStockRequest.DefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridViewStockRequest.DgvFooter = Nothing
         Me.DataGridViewStockRequest.DisplayOnly = False
         Me.DataGridViewStockRequest.Ea = Nothing
@@ -82,7 +152,7 @@ Partial Class StockRequestApprovalEntry
         Me.DataGridViewStockRequest.FirstRowInsertionEnabled = True
         Me.DataGridViewStockRequest.IgnoreCase = False
         Me.DataGridViewStockRequest.IsDirty = False
-        Me.DataGridViewStockRequest.Location = New System.Drawing.Point(3, 33)
+        Me.DataGridViewStockRequest.Location = New System.Drawing.Point(3, 29)
         Me.DataGridViewStockRequest.Name = "DataGridViewStockRequest"
         Me.DataGridViewStockRequest.ReadOnly = True
         Me.DataGridViewStockRequest.RowHeadersWidth = 51
@@ -207,66 +277,6 @@ Partial Class StockRequestApprovalEntry
         'bsInvTransactionRequest
         '
         Me.bsInvTransactionRequest.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.InvTransactionModel)
-        '
-        'cboWarehouseIdNo
-        '
-        Me.cboWarehouseIdNo.BackColor = System.Drawing.Color.White
-        Me.cboWarehouseIdNo.BegFindValue = Nothing
-        Me.cboWarehouseIdNo.ChangingSearchValueOnly = False
-        Me.cboWarehouseIdNo.CurrentSearchTerm = ""
-        Me.cboWarehouseIdNo.DataValue = Nothing
-        Me.cboWarehouseIdNo.DefaultValue = Nothing
-        Me.cboWarehouseIdNo.DisplayMember = "Name"
-        Me.cboWarehouseIdNo.Editable = True
-        Me.cboWarehouseIdNo.EditingMode = True
-        Me.cboWarehouseIdNo.EndFindValue = Nothing
-        Me.cboWarehouseIdNo.FieldDescription = Nothing
-        Me.cboWarehouseIdNo.FieldName = Nothing
-        Me.cboWarehouseIdNo.FilterRule = Nothing
-        Me.cboWarehouseIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.cboWarehouseIdNo.FindEnabled = False
-        Me.cboWarehouseIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.cboWarehouseIdNo.ForeColor = System.Drawing.Color.Black
-        Me.cboWarehouseIdNo.FormattingEnabled = True
-        Me.cboWarehouseIdNo.HideWhenNotEditingOrAdding = False
-        Me.cboWarehouseIdNo.IgnoreCase = False
-        Me.cboWarehouseIdNo.IntegralHeight = False
-        Me.cboWarehouseIdNo.LimitToList = False
-        Me.cboWarehouseIdNo.LinkedLabel = Nothing
-        Me.cboWarehouseIdNo.Location = New System.Drawing.Point(239, 1)
-        Me.cboWarehouseIdNo.Margin = New System.Windows.Forms.Padding(1)
-        Me.cboWarehouseIdNo.Name = "cboWarehouseIdNo"
-        Me.cboWarehouseIdNo.OldValue = 0
-        Me.cboWarehouseIdNo.OriginalDataSource = Nothing
-        Me.cboWarehouseIdNo.OriginalList = Nothing
-        Me.cboWarehouseIdNo.OverrideDropDownStyleList = False
-        Me.cboWarehouseIdNo.PreviousSearchTerm = Nothing
-        Me.cboWarehouseIdNo.PropertySelector = Nothing
-        Me.cboWarehouseIdNo.ReadOnlyCombo = False
-        Me.cboWarehouseIdNo.Size = New System.Drawing.Size(340, 28)
-        Me.cboWarehouseIdNo.SuggestBoxHeight = 200
-        Me.cboWarehouseIdNo.SuggestListOrderRule = Nothing
-        Me.cboWarehouseIdNo.TabIndex = 1
-        Me.cboWarehouseIdNo.TextToSearch = Nothing
-        Me.cboWarehouseIdNo.Translatable = False
-        Me.cboWarehouseIdNo.ValueIsMandatory = False
-        Me.cboWarehouseIdNo.ValueIsNullable = False
-        Me.cboWarehouseIdNo.ValueIsNumeric = False
-        Me.cboWarehouseIdNo.ValueMember = "IdNo"
-        '
-        'lblWarehouseIdNo
-        '
-        Me.lblWarehouseIdNo.DisplayOnly = True
-        Me.lblWarehouseIdNo.EditingMode = False
-        Me.lblWarehouseIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.lblWarehouseIdNo.Location = New System.Drawing.Point(1, 1)
-        Me.lblWarehouseIdNo.Margin = New System.Windows.Forms.Padding(1)
-        Me.lblWarehouseIdNo.Name = "lblWarehouseIdNo"
-        Me.lblWarehouseIdNo.Size = New System.Drawing.Size(236, 24)
-        Me.lblWarehouseIdNo.TabIndex = 8
-        Me.lblWarehouseIdNo.Text = "Warehouse Code/Name :"
-        Me.lblWarehouseIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblWarehouseIdNo.Translatable = True
         '
         'StockRequestApprovalEntry
         '

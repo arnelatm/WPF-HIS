@@ -24,8 +24,8 @@ Namespace PresentationLayer.Views.Forms.Reports
 
             MainTableName = "Report"
             SortOrderKey = "IdNo"
-            dtpBeginningDate.Value = DateAndTime.DateAdd(DateInterval.Month, 1, DateAndTime.Now())
-
+            dtpBeginningDate.Value = GlobalFunctions.GregorianDateSerial(Today.Year, 1, 1)
+            dtpEndingDate.Value = DateAndTime.Now()
         End Sub
 
         Private Sub btnOk_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea

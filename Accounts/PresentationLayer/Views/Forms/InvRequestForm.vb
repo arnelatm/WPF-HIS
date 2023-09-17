@@ -8,7 +8,7 @@ Namespace PresentationLayer.Views.Forms
         Implements IInvRequestView
 
         Private _invTransactionRequests As New List(Of IInvTransactionBaseView)
-        Private _invTransactionDetails As List(Of InvTransactionDetailView)
+        Private _invRequestDetails As List(Of InvRequestDetailView)
         Public Event WarehouseIdNoChanged() Implements IInvRequestView.WarehouseIdNoChanged
         Public Event RowChanged(productIdNo As Int32) Implements IInvRequestView.RowChanged
         Public Event FormLoaded() Implements IInvRequestView.FormLoaded
@@ -81,12 +81,12 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
-        Public Property InvTransactionDetails As List(Of InvTransactionDetailView) Implements IInvRequestView.InvTransactionDetails
+        Public Property InvRequestDetails As List(Of InvRequestDetailView) Implements IInvRequestView.InvRequestDetails
             Get
-                Return _invTransactionDetails
+                Return _invRequestDetails
             End Get
             Set
-                _invTransactionDetails = Value
+                _invRequestDetails = Value
                 BindInvTransactionDetail()
             End Set
         End Property
@@ -96,11 +96,8 @@ Namespace PresentationLayer.Views.Forms
             SuspendLayout()
             bsInvTranItems.DataSource = Nothing
             DataGridViewInvTransItems.Refresh()
-            bsInvTranItems.DataSource = InvTransactionDetails
+            bsInvTranItems.DataSource = InvRequestDetails
             bsInvTranItems.AllowNew = False
-            dgvUnitIdNo.DataSource = UnitList
-            dgvUnitIdNo.DisplayMember = "Name"
-            dgvUnitIdNo.ValueMember = "IdNo"
             ResumeLayout()
         End Sub
 

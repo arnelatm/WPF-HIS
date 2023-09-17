@@ -28,4 +28,15 @@
 
     End Class
 
+    Public Class InvRequestDetailModel
+        Inherits InvTransactionDetailModel
+
+        Public Property BaseUnitName As String
+        Public Property QtyOnHand As Decimal
+        Public Property QtySupplied As Decimal
+        Public Property UnitName As String
+
+
+    End Class
+
 End Namespace

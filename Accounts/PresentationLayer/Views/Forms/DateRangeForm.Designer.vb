@@ -24,8 +24,8 @@ Namespace Accounts.PresentationLayer.Views.Forms
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DateRangeForm))
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.dateRange = New AATM.Libraries.CBaseControlsLibrary.DateRangeControl()
             Me.cboContactIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -33,6 +33,10 @@ Namespace Accounts.PresentationLayer.Views.Forms
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+            Me.dtpEndingDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
+            Me.lblBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblEndingDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.dtpBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.TableLayoutPanel1.SuspendLayout()
             Me.CFlowLayout1.SuspendLayout()
@@ -60,18 +64,6 @@ Namespace Accounts.PresentationLayer.Views.Forms
             Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
             Me.CLabel2.Translatable = True
             '
-            'dateRange
-            '
-            Me.dateRange.BackColor = System.Drawing.Color.Transparent
-            Me.dateRange.BeginningDate = Nothing
-            Me.TableLayoutPanel1.SetColumnSpan(Me.dateRange, 3)
-            Me.dateRange.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.dateRange.EndingDate = Nothing
-            Me.dateRange.Location = New System.Drawing.Point(3, 3)
-            Me.dateRange.Name = "dateRange"
-            Me.dateRange.Size = New System.Drawing.Size(458, 53)
-            Me.dateRange.TabIndex = 29
-            '
             'cboContactIdNo
             '
             Me.cboContactIdNo.BackColor = System.Drawing.Color.White
@@ -83,8 +75,8 @@ Namespace Accounts.PresentationLayer.Views.Forms
             Me.cboContactIdNo.DefaultValue = Nothing
             Me.cboContactIdNo.DisplayMember = "Name"
             Me.cboContactIdNo.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.cboContactIdNo.DropDownHeight = 28
-            Me.cboContactIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+            Me.cboContactIdNo.DropDownHeight = 21
+            Me.cboContactIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboContactIdNo.Editable = True
             Me.cboContactIdNo.EditingMode = False
             Me.cboContactIdNo.EndFindValue = Nothing
@@ -100,7 +92,7 @@ Namespace Accounts.PresentationLayer.Views.Forms
             Me.cboContactIdNo.IgnoreCase = False
             Me.cboContactIdNo.LimitToList = False
             Me.cboContactIdNo.LinkedLabel = Nothing
-            Me.cboContactIdNo.Location = New System.Drawing.Point(121, 60)
+            Me.cboContactIdNo.Location = New System.Drawing.Point(121, 47)
             Me.cboContactIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.cboContactIdNo.MaxDropDownItems = 1
             Me.cboContactIdNo.Name = "cboContactIdNo"
@@ -151,13 +143,14 @@ Namespace Accounts.PresentationLayer.Views.Forms
             'lblContactIdNo
             '
             Me.lblContactIdNo.AutoSize = True
+            Me.lblContactIdNo.BackColor = System.Drawing.Color.Transparent
             Me.lblContactIdNo.DisplayOnly = True
             Me.lblContactIdNo.EditingMode = False
             Me.lblContactIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblContactIdNo.Location = New System.Drawing.Point(1, 60)
+            Me.lblContactIdNo.Location = New System.Drawing.Point(1, 47)
             Me.lblContactIdNo.Margin = New System.Windows.Forms.Padding(1)
             Me.lblContactIdNo.Name = "lblContactIdNo"
-            Me.lblContactIdNo.Size = New System.Drawing.Size(116, 20)
+            Me.lblContactIdNo.Size = New System.Drawing.Size(97, 17)
             Me.lblContactIdNo.TabIndex = 31
             Me.lblContactIdNo.Text = "Contact Name"
             Me.lblContactIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -168,18 +161,22 @@ Namespace Accounts.PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.BackColor = System.Drawing.Color.Transparent
             Me.TableLayoutPanel1.ColumnCount = 3
             Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.86207!))
-            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.13793!))
-            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-            Me.TableLayoutPanel1.Controls.Add(Me.dateRange, 0, 0)
-            Me.TableLayoutPanel1.Controls.Add(Me.cboContactIdNo, 1, 1)
-            Me.TableLayoutPanel1.Controls.Add(Me.lblContactIdNo, 0, 1)
-            Me.TableLayoutPanel1.Controls.Add(Me.CFlowLayout1, 0, 2)
+            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.50862!))
+            Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.62931!))
+            Me.TableLayoutPanel1.Controls.Add(Me.cboContactIdNo, 1, 2)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblContactIdNo, 0, 2)
+            Me.TableLayoutPanel1.Controls.Add(Me.CFlowLayout1, 0, 3)
+            Me.TableLayoutPanel1.Controls.Add(Me.dtpEndingDate, 1, 1)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblBeginningDate, 0, 0)
+            Me.TableLayoutPanel1.Controls.Add(Me.lblEndingDate, 0, 1)
+            Me.TableLayoutPanel1.Controls.Add(Me.dtpBeginningDate, 1, 0)
             Me.TableLayoutPanel1.Location = New System.Drawing.Point(5, 44)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-            Me.TableLayoutPanel1.RowCount = 3
+            Me.TableLayoutPanel1.RowCount = 4
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+            Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.Size = New System.Drawing.Size(464, 139)
             Me.TableLayoutPanel1.TabIndex = 29
             '
@@ -191,9 +188,9 @@ Namespace Accounts.PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.SetColumnSpan(Me.CFlowLayout1, 3)
             Me.CFlowLayout1.Controls.Add(Me.TableLayoutPanel2)
             Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.CFlowLayout1.Location = New System.Drawing.Point(3, 92)
+            Me.CFlowLayout1.Location = New System.Drawing.Point(3, 79)
             Me.CFlowLayout1.Name = "CFlowLayout1"
-            Me.CFlowLayout1.Size = New System.Drawing.Size(458, 44)
+            Me.CFlowLayout1.Size = New System.Drawing.Size(458, 57)
             Me.CFlowLayout1.TabIndex = 32
             '
             'TableLayoutPanel2
@@ -211,9 +208,97 @@ Namespace Accounts.PresentationLayer.Views.Forms
             Me.TableLayoutPanel2.Size = New System.Drawing.Size(455, 39)
             Me.TableLayoutPanel2.TabIndex = 0
             '
+            'dtpEndingDate
+            '
+            Me.dtpEndingDate.AutoSize = True
+            Me.dtpEndingDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.dtpEndingDate.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
+            Me.dtpEndingDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpEndingDate.DefaultValue = Nothing
+            Me.dtpEndingDate.DisplayOnly = False
+            Me.dtpEndingDate.DtpDefaultValue = Nothing
+            Me.dtpEndingDate.EditingMode = True
+            Me.dtpEndingDate.EditsAllowed = False
+            Me.dtpEndingDate.ForeColor = System.Drawing.Color.Black
+            Me.dtpEndingDate.LinkedLabel = Nothing
+            Me.dtpEndingDate.Location = New System.Drawing.Point(120, 23)
+            Me.dtpEndingDate.Margin = New System.Windows.Forms.Padding(0)
+            Me.dtpEndingDate.Name = "dtpEndingDate"
+            Me.dtpEndingDate.ReadOnlyDp = False
+            Me.dtpEndingDate.SecurityKey = Nothing
+            Me.dtpEndingDate.ShowLongDate = False
+            Me.dtpEndingDate.ShowTime = False
+            Me.dtpEndingDate.Size = New System.Drawing.Size(118, 23)
+            Me.dtpEndingDate.TabIndex = 34
+            Me.dtpEndingDate.TargetCalendar = CType(resources.GetObject("dtpEndingDate.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpEndingDate.Translatable = False
+            Me.dtpEndingDate.Value = Nothing
+            Me.dtpEndingDate.ValueIsMandatory = False
+            Me.dtpEndingDate.ValueIsNullable = False
+            '
+            'lblBeginningDate
+            '
+            Me.lblBeginningDate.AutoSize = True
+            Me.lblBeginningDate.BackColor = System.Drawing.Color.Transparent
+            Me.lblBeginningDate.DisplayOnly = True
+            Me.lblBeginningDate.EditingMode = False
+            Me.lblBeginningDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblBeginningDate.Location = New System.Drawing.Point(1, 1)
+            Me.lblBeginningDate.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblBeginningDate.Name = "lblBeginningDate"
+            Me.lblBeginningDate.Size = New System.Drawing.Size(105, 17)
+            Me.lblBeginningDate.TabIndex = 35
+            Me.lblBeginningDate.Text = "Beginning Date"
+            Me.lblBeginningDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblBeginningDate.Translatable = True
+            '
+            'lblEndingDate
+            '
+            Me.lblEndingDate.AutoSize = True
+            Me.lblEndingDate.BackColor = System.Drawing.Color.Transparent
+            Me.lblEndingDate.DisplayOnly = True
+            Me.lblEndingDate.EditingMode = False
+            Me.lblEndingDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblEndingDate.Location = New System.Drawing.Point(1, 24)
+            Me.lblEndingDate.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblEndingDate.Name = "lblEndingDate"
+            Me.lblEndingDate.Size = New System.Drawing.Size(86, 17)
+            Me.lblEndingDate.TabIndex = 36
+            Me.lblEndingDate.Text = "Ending Date"
+            Me.lblEndingDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblEndingDate.Translatable = True
+            '
+            'dtpBeginningDate
+            '
+            Me.dtpBeginningDate.AutoSize = True
+            Me.dtpBeginningDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+            Me.dtpBeginningDate.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
+            Me.dtpBeginningDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
+            Me.dtpBeginningDate.DefaultValue = Nothing
+            Me.dtpBeginningDate.DisplayOnly = False
+            Me.dtpBeginningDate.DtpDefaultValue = Nothing
+            Me.dtpBeginningDate.EditingMode = True
+            Me.dtpBeginningDate.EditsAllowed = False
+            Me.dtpBeginningDate.ForeColor = System.Drawing.Color.Black
+            Me.dtpBeginningDate.LinkedLabel = Nothing
+            Me.dtpBeginningDate.Location = New System.Drawing.Point(120, 0)
+            Me.dtpBeginningDate.Margin = New System.Windows.Forms.Padding(0)
+            Me.dtpBeginningDate.Name = "dtpBeginningDate"
+            Me.dtpBeginningDate.ReadOnlyDp = False
+            Me.dtpBeginningDate.SecurityKey = Nothing
+            Me.dtpBeginningDate.ShowLongDate = False
+            Me.dtpBeginningDate.ShowTime = False
+            Me.dtpBeginningDate.Size = New System.Drawing.Size(118, 23)
+            Me.dtpBeginningDate.TabIndex = 33
+            Me.dtpBeginningDate.TargetCalendar = CType(resources.GetObject("dtpBeginningDate.TargetCalendar"), System.Globalization.Calendar)
+            Me.dtpBeginningDate.Translatable = False
+            Me.dtpBeginningDate.Value = Nothing
+            Me.dtpBeginningDate.ValueIsMandatory = False
+            Me.dtpBeginningDate.ValueIsNullable = False
+            '
             'DateRangeForm
             '
-            Me.ClientSize = New System.Drawing.Size(478, 191)
+            Me.ClientSize = New System.Drawing.Size(478, 181)
             Me.Controls.Add(Me.CLabel2)
             Me.Controls.Add(Me.TableLayoutPanel1)
             Me.DoubleBuffered = True
@@ -229,7 +314,6 @@ Namespace Accounts.PresentationLayer.Views.Forms
 
         End Sub
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents dateRange As DateRangeControl
         Private WithEvents btnOk As CButton
         Private WithEvents btnCancel As CButton
         Friend WithEvents cboContactIdNo As CtComboBox
@@ -237,5 +321,9 @@ Namespace Accounts.PresentationLayer.Views.Forms
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
+        Friend WithEvents dtpEndingDate As CCustomDateTimePicker
+        Friend WithEvents lblBeginningDate As CLabel
+        Friend WithEvents lblEndingDate As CLabel
+        Friend WithEvents dtpBeginningDate As CCustomDateTimePicker
     End Class
 End Namespace

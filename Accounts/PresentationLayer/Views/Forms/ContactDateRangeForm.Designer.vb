@@ -26,7 +26,6 @@ Namespace PresentationLayer.Presenters.Views.Forms
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.dateRange = New AATM.Libraries.CBaseControlsLibrary.DateRangeControl()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             '
@@ -47,16 +46,6 @@ Namespace PresentationLayer.Presenters.Views.Forms
             Me.CLabel2.Text = "Date Range Selection"
             Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
             Me.CLabel2.Translatable = True
-            '
-            'dateRange
-            '
-            Me.dateRange.BackColor = System.Drawing.Color.Transparent
-            Me.dateRange.BeginningDate = Nothing
-            Me.dateRange.EndingDate = Nothing
-            Me.dateRange.Location = New System.Drawing.Point(3, 30)
-            Me.dateRange.Name = "dateRange"
-            Me.dateRange.Size = New System.Drawing.Size(274, 62)
-            Me.dateRange.TabIndex = 29
             '
             'ContactDateRangeForm
             '
