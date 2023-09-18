@@ -95,7 +95,7 @@ Public Class CaComboBox
             End If
         Else
             DropDownStyle = ComboBoxStyle.Simple
-            DropDownHeight = Height
+            DropDownHeight = IIf(Height = 0, 1, Height)
             MaxDropDownItems = 1
             IntegralHeight = True
             ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
@@ -534,6 +534,7 @@ Public Class CaComboBox
         Dim returnValue As Int32
         Dim found As Boolean = False
         Dim i = 0
+        Dim x = SelectedIndex
         If DataSource IsNot Nothing Then
             For Each item In DataSource
                 If item.IdNo = value Then
@@ -549,6 +550,8 @@ Public Class CaComboBox
                 If value IsNot Nothing Then
                     Text = value
                 End If
+            Else
+                SelectedIndex = i
             End If
         Else
             SelectedIndex = -1

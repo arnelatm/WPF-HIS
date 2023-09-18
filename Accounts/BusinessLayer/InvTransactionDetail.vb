@@ -36,6 +36,7 @@ Namespace BusinessLayer
     Public Class InvRequestDetail
         Inherits InvTransactionDetail
 
+        Public Property QtyApproved As Decimal
         Public Property QtyOnHand As Decimal
         Public Property QtySupplied As Decimal
         Public Property UnitName As String

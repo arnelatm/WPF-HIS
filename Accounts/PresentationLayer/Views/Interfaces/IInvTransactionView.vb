@@ -64,6 +64,8 @@ Namespace PresentationLayer.Views.Interfaces
         Event WarehouseIdNoChanged()
         Event RowChanged(productIdNo As Integer)
         Event FormLoaded()
+        Event SupplyQuantityClicked()
+        Event TransferRequestClicked(invTransIdNo As Integer)
     End Interface
 
     'Public Interface IInvRequestListView

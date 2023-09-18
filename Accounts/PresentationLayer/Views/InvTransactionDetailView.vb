@@ -36,6 +36,7 @@ Namespace PresentationLayer.Views
         Implements IInvRequestDetailView
 
         Public Property BaseUnitName As String Implements IInvRequestDetailView.BaseUnitName
+        Public Property QtyApproved As Decimal Implements IInvRequestDetailView.QtyApproved
         Public Property QtyOnHand As Decimal Implements IInvRequestDetailView.QtyOnHand
         Public Property QtySupplied As Decimal Implements IInvRequestDetailView.QtySupplied
         Public Property UnitName As String Implements IInvRequestDetailView.UnitName

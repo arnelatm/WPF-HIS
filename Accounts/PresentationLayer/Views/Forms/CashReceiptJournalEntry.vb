@@ -28,8 +28,9 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             ' Add any initialization after the InitializeComponent() call.
             FirstControl = cboPayorType
-            _payorOrigWidth = cboPayorIdNo.Width
             _nfi.NumberDecimalDigits = 2
+            _payorOrigWidth = cboPayorIdNo.Width
+            cboPayorIdNo.EditingMode = False
         End Sub
 
         'Private Sub JournalItemBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
@@ -132,13 +133,13 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property DateCreated As DateTime? Implements ICashReceiptJournalView.DateCreated
             Get
-                Return dtpDateCreated.Value
+                Return txtDateCreated.Text
             End Get
             Set
                 If Value.HasValue Then
-                    dtpDateCreated.Value = Value
+                    txtDateCreated.Text = Value
                 Else
-                    dtpDateCreated.Value = Date.Now()
+                    txtDateCreated.Text = Date.Now()
                 End If
             End Set
         End Property
@@ -324,7 +325,7 @@ Namespace PresentationLayer.Views.Forms
          {"Cancelled", chkCancelled},
          {"CheckDate", dtpCheckDate},
          {"CheckNumber", txtCheckNumber},
-         {"DateCreated", dtpDateCreated},
+         {"DateCreated", txtDateCreated},
          {"DiscountAccountIdNo", cboDiscountAccountIdNo},
          {"DiscountTaken", txtDiscountTaken},
          {"IdNo", TxtIdNo},
@@ -393,6 +394,12 @@ Namespace PresentationLayer.Views.Forms
             End If
             BindCsrOiItem()
             BindJournalItem()
+            cboPayorIdNo.EditingMode = False
+            cboPayorIdNo.DataSource = Nothing
+            cboPayorIdNo.DisplayMember = "Name"
+            cboPayorIdNo.ValueMember = "IdNo"
+            cboPayorIdNo.DataSource = Presenter.GetLookup("Customer")
+            cboPayorIdNo.EditingMode = True
         End Sub
 
         Private Sub BindCsrOiItem()
@@ -461,6 +468,7 @@ Namespace PresentationLayer.Views.Forms
                 bsCsrOiItems.ResetBindings(True)
                 UpdateOiTotals()
                 'UpdateVatNumber()
+                cboPayorIdNo.DisplayMember = "Name"
             End If
         End Sub
 
@@ -471,41 +479,50 @@ Namespace PresentationLayer.Views.Forms
             UpdateFirstLine()
         End Sub
 
-        Private Sub CboPayorIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayorIdNo.Validated, cboPayorIdNo.SelectionChangeCommitted
-            If OpenInvoiceMode Then
-                UpdateOpenInvoicesDisplay()
-            Else
-                If CodeToEnum(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.SupplierRefund Then
-                    Presenter.SetSupplierVatNumber(VatNumber, PayorIdNo, True)
+        Private Sub CboPayorIdNo_ValueChanged(sender As Object, e As EventArgs) Handles cboPayorIdNo.Validated, cboPayorIdNo.SelectedIndexChanged
+            If FormShown Then
+                If OpenInvoiceMode Then
+                    UpdateOpenInvoicesDisplay()
+                    'Debugger.Break()
                 Else
-                    VatNumber = ""
+                    If CodeToEnum(Of ReceiptTypeSelection)(PayorType) = ReceiptTypeSelection.SupplierRefund Then
+                        Presenter.SetSupplierVatNumber(VatNumber, PayorIdNo, True)
+                    Else
+                        VatNumber = ""
+                    End If
                 End If
             End If
         End Sub
 
-        Private Sub CboPayorType_ValueChanged(sender As Object, e As EventArgs) Handles cboPayorType.SelectionChangeCommitted, cboPayorType.Validated
-            SetPayorDataSource(PayorType)
-            If OpenInvoiceMode Then
-                UpdateOpenInvoicesDisplay()
-                If cboPayorIdNo.SelectedIndex = -1 Then
-                    bsCsrOiItems.Clear()
+        Private Sub CboPayorType_ValueChanged(sender As Object, e As EventArgs) Handles cboPayorType.Validated, cboPayorType.SelectionChangeCommitted
+            If FormShown Then
+                SetPayorDataSource(PayorType)
+                If OpenInvoiceMode Then
+                    UpdateOpenInvoicesDisplay()
+                    If cboPayorIdNo.SelectedIndex = -1 Then
+                        bsCsrOiItems.Clear()
+                    End If
+                Else
+                    cboPayorIdNo.SelectedIndex = -1
                 End If
-            Else
-                cboPayorIdNo.SelectedIndex = -1
+                UpdateFirstLine()
+                UpdateDisplay()
             End If
-            UpdateFirstLine()
-            UpdateDisplay()
         End Sub
 
-        Private Sub CboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.SelectionChangeCommitted, cboAccountIdNo.Validated
-            UpdateFirstLine()
+        Private Sub CboAccountIdNo_Changed(sender As Object, e As EventArgs) Handles cboAccountIdNo.Validated, cboAccountIdNo.SelectedIndexChanged
+            If FormShown Then
+                UpdateFirstLine()
+            End If
         End Sub
 
         Private Sub TxtNotes_Leave(sender As Object, e As EventArgs) Handles txtNotes.Leave
-            If OpenInvoiceMode Then
-                MoveToGridView(DataGridViewCsrOiItems, "dgvAmount")
-            Else
-                MoveToGridView(DataGridViewJournalItems, "dgvRevCostCenterIdNo")
+            If FormShown Then
+                If OpenInvoiceMode Then
+                    MoveToGridView(DataGridViewCsrOiItems, "dgvAmount")
+                Else
+                    MoveToGridView(DataGridViewJournalItems, "dgvRevCostCenterIdNo")
+                End If
             End If
         End Sub
 
@@ -660,6 +677,7 @@ Namespace PresentationLayer.Views.Forms
             If OpenInvoiceMode Then
                 ShowOpenInvoicesDataGrid()
                 cboDiscountAccountIdNo.Enabled = True
+                btnViewGL.Visible = True
             Else
                 ShowJournalItemDataGrid()
                 btnViewGL.Visible = False
@@ -749,6 +767,8 @@ Namespace PresentationLayer.Views.Forms
                     cbDataSource = Presenter.GetLookup("Supplier")
                 End If
             End If
+            cboPayorIdNo.DisplayMember = "Name"
+            cboPayorIdNo.ValueMember = "IdNo"
             cboPayorIdNo.DataSource = cbDataSource
             If curValue IsNot Nothing Then
                 cboPayorIdNo.SelectedValue = curValue
@@ -773,6 +793,10 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub CashReceiptJournalEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
             SetPayorDataSource(PayorType)
+        End Sub
+
+        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs)
+            Debugger.Break()
         End Sub
     End Class
 
