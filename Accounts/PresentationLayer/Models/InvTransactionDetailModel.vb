@@ -34,6 +34,7 @@
         Public Property BaseUnitName As String
         Public Property QtyOnHand As Decimal
         Public Property QtySupplied As Decimal
+        Public Property QtyApproved As Decimal
         Public Property UnitName As String
 
 

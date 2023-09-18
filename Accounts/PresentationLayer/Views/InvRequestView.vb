@@ -19,6 +19,8 @@ Namespace PresentationLayer.Views
         Public Event WarehouseIdNoChanged() Implements IInvRequestView.WarehouseIdNoChanged
         Public Event RowChanged(productIdNo As Integer) Implements IInvRequestView.RowChanged
         Public Event FormLoaded() Implements IInvRequestView.FormLoaded
+        Public Event TransferRequestClicked() Implements IInvRequestView.TransferRequestClicked
+        Public Event SupplyQuantityClicked() Implements IInvRequestView.SupplyQuantityClicked
     End Class
 
     'Public Class InvRequestListView

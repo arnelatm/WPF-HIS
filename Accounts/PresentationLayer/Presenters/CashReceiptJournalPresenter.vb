@@ -918,6 +918,7 @@ Namespace PresentationLayer.Presenters
             ' we need to set the DataSource part of the cboPayorIdNo before we can assign the PayorIdNo
             View.PayorType = dataModel.PayorType
             CallByName(View, "SetPayorDataSource", CallType.Method, View.PayorType)
+            View.PayorIdNo = dataModel.PayorIdNo
         End Sub
 
         'Public Function GetCustomerOpenInvoices(dView As List(Of CsrOiItemView)) As List(Of CsrOiItemView)

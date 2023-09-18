@@ -12,6 +12,8 @@ Namespace PresentationLayer.Views.Forms
         Public Event WarehouseIdNoChanged() Implements IInvRequestView.WarehouseIdNoChanged
         Public Event RowChanged(productIdNo As Int32) Implements IInvRequestView.RowChanged
         Public Event FormLoaded() Implements IInvRequestView.FormLoaded
+        Public Event TransferRequestClicked() Implements IInvRequestView.TransferRequestClicked
+        Public Event SupplyQuantityClicked() Implements IInvRequestView.SupplyQuantityClicked
         Public Property WarehouseList As DataTable Implements IInvRequestView.WarehouseList
         Public Property UserList As DataTable Implements IInvRequestView.UserList
         Public Property UnitList As DataTable Implements IInvRequestView.UnitList
@@ -22,6 +24,7 @@ Namespace PresentationLayer.Views.Forms
             InitializeComponent()
             SingleData = True
             QueryOnly = True
+            cboWarehouseSelector.EditingMode = True
         End Sub
 
         Private Sub AddDgColumn(dgvColumnName As DataGridViewImageColumn, dgvName As String, caption As String)
@@ -125,6 +128,53 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub InvRequestForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             RaiseEvent FormLoaded()
+            DataGridViewInvTransactionRequests.DisplayOnly = True
+            'DataGridViewInvTransItems.DisplayOnly = True
+            dgvQtyApproved.DisplayOnly = False
+            dgvQuantity.DisplayOnly = True
+            dgvIdNo.DisplayOnly = True
+            dgvNetAmount.DisplayOnly = True
+            dgvQtyOnHand.DisplayOnly = True
+            dgvQtySupplied.DisplayOnly = True
+            dgvUnitCost.DisplayOnly = True
+            dgvUnitIdNo.DisplayOnly = True
+            dgvUnitName.DisplayOnly = True
+            dgvProductName.DisplayOnly = True
+            dgvProductCode.DisplayOnly = True
+            dgvAmount.DisplayOnly = True
+            dgvQtyApproved.ReadOnly = False
+            dgvQtyApproved.EditingMode = True
+
+        End Sub
+
+
+        ' Changes how cells are displayed depending on their columns and values.
+        Private Sub dgvPurDetailsFormatting(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellFormattingEventArgs) Handles DataGridViewInvTransItems.CellFormatting
+            'If sender.CurrentRow IsNot Nothing AndAlso e.ColumnIndex > 0 Then
+            If e.ColumnIndex > 0 AndAlso sender.CurrentRow() IsNot Nothing Then
+                If sender.Columns(e.ColumnIndex).Name.Equals("dgvQtyOnHand") Then
+                    Dim x = DirectCast(sender, DataGridView).Rows(e.RowIndex)
+                    If x IsNot Nothing Then
+                        If e.Value <= x.Cells("dgvQuantity").Value Then
+                            e.CellStyle.BackColor = Color.Red
+                        End If
+                    End If
+                End If
+
+                'If sender.currentrow().cells("dgvQtyOnHand").Value < sender.currentrow().cells("dgvQuantity").Value Then
+                '    e.CellStyle.BackColor = Color.Red
+                'End If
+            End If
+
+        End Sub
+
+        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
+            RaiseEvent TransferRequestClicked()
+        End Sub
+
+        Private Sub btnSupplyQuantity_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnSupplyQuantity.ClickButtonArea
+            RaiseEvent SupplyQuantityClicked()
+            bsInvTranItems.ResetBindings(False)
         End Sub
     End Class
 

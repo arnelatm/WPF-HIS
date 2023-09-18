@@ -28,6 +28,7 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface IInvRequestDetailView
 
         Property BaseUnitName As String
+        Property QtyApproved As Decimal
         Property QtyOnHand As Decimal
         Property QtySupplied As Decimal
         Property UnitName As String
