@@ -42,43 +42,73 @@ Namespace PresentationLayer.Presenters
             Dim invTranDao = New InvTransactionDao
             Dim invRequest As New Object
             Dim invReqSupDataTable As New System.Data.DataTable
-            'invRequestSuppliedDTable.Columns.Add("InvTransactionDetailIdNo", GetType(Int32))
-            'invRequestSuppliedDTable.Columns.Add("QtySupplied", GetType(Int32))
-            'Dim dataObj As New Object()
-            'For Each item In View.InvRequestDetails
-            '    dataObj.Add(New Object() {item.Quantity, item.QtyApproved})
-            'Next
-            'CustomObjToDataTable(dataObj, invRequestSuppliedDTable)
-
-            'invTranDao.DelUpdateTvp("PostInvRequestSupplied", invReqSupDataTable, @MParam, invTransactionIdNo)
-
-
             invTransaction = invTranDao.GetRecordByIdNo(invTransactionIdNo)
-            invTransaction.Notes = "Request approved by : " + GlobalVariables.UserName
+            invTransaction.Notes = "Request Number " & invTransactionIdNo.ToString() & " approved by : " + GlobalVariables.UserName
             invTransaction.TransactionDate = Today()
             invTransaction.Cancelled = False
             invTransaction.InvTransTypeIdNo = 15
             invTransaction.IdNo = 0
-            Dim idNo As Int32 = invTranDao.AddRecord(invTransaction)
+
+            Dim dtInvRequest As New System.Data.DataTable
+            dtInvRequest.Columns.Add("InvTransactionDetailIdNo", GetType(Int32))
+            dtInvRequest.Columns.Add("QtySupplied", GetType(Int32))
+
+            Dim dataObj As New Object()
+            For Each item In View.InvRequestDetails
+                Dim dr As DataRow = dtInvRequest.NewRow
+                dr("InvTransactionDetailIdNo") = item.InvTransactionIdNo
+                dr("QtySupplied") = item.QtySupplied
+                dtInvRequest.Rows.Add(dr)
+            Next
+
+            CustomObjToDataTable(dataObj, dtInvRequest)
+
+            'invTranDao.DelUpdateTvp("PostInvRequestSupplied", invReqSupDataTable, @MParam, invTransactionIdNo)
 
 
-            If idNo > 0 Then
+            'Dim idNo As Int32 = invTranDao.AddRecord(invTransaction)
+
+
+            'If idNo > 0 Then
 
 
 
-                Dim parameters As Object = {"InvTransactionIdNo", invTransactionIdNo, "oldUnitIdNo", parameters}
+            Dim parameters As Object = {"MParam",
+                                        "BranchIdNo", GlobalVariables.BranchIdNo,
+                                        "Cancelled", False,
+                                        "InvTransTypeIdNo", 15,
+                                        "Notes", "Posting of Request No." & invTransactionIdNo.ToString(),
+                                        "Posted", True,
+                                        "ReferenceNo", invTransaction.ReferenceNo,
+                                        "TransactionDate", Today(),
+                                        "UserIdNo", GlobalVariables.UserIdNo,
+                                        "WarehouseIdNo", invTransaction.WarehouseIdNo,
+                                        "WarehouseToIdNo", invTransaction.WarehouseToIdNo
+                                        }
 
-                invTranDao.RunStoredProcedure("PostUpdateInvTransactionDetailTVP", parameters)
+            invTranDao.RunStoredProcedure("PostInvRequest", parameters)
 
-                'For Each item In View.InvRequestDetails
-                '    DtInsertTable.Rows.Add(item.Quantity, item.QtyApproved)
-                'Next
+            'For Each item In View.InvRequestDetails
+            '    DtInsertTable.Rows.Add(item.Quantity, item.QtyApproved)
+            'Next
 
-                Service.RunStoredProcedure("SpPostInvRequest", {invTransactionIdNo, invTransaction, invRequest})
-                Service.Insert()
+            'Service.RunStoredProcedure("SpPostInvRequest", {0, invTransaction.BranchIdNo,
+            '                            "Cancelled", False,
+            '                            @InvTransTypeIdNo,
+            '                            @Notes,
+            '                            @Posted,
+            '                            @ReferenceNo,
+            '                            @TransactionDate,
+            '                            @UseridNo,
+            '                            @WarehouseIdNo,
+            '                            @WarehouseToIdNo)
 
 
-            End If
+            'invTransactionIdNo, invTransaction, invRequest})
+            'Service.Insert()
+
+
+            'End If
 
 
             'Dim 
