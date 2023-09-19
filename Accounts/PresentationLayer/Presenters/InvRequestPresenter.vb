@@ -36,16 +36,53 @@ Namespace PresentationLayer.Presenters
             AddHandler view.TransferRequestClicked, AddressOf OnTransferRequest
         End Sub
 
-        Private Sub OnTransferRequest()
-            Dim invTransaction As New InvTransactionModel
+        Private Sub OnTransferRequest(invTransactionIdNo As Int32)
+
+            Dim invTransaction As New InvTransaction
             Dim invTranDao = New InvTransactionDao
+            Dim invRequest As New Object
+            Dim invReqSupDataTable As New System.Data.DataTable
+            'invRequestSuppliedDTable.Columns.Add("InvTransactionDetailIdNo", GetType(Int32))
+            'invRequestSuppliedDTable.Columns.Add("QtySupplied", GetType(Int32))
+            'Dim dataObj As New Object()
+            'For Each item In View.InvRequestDetails
+            '    dataObj.Add(New Object() {item.Quantity, item.QtyApproved})
+            'Next
+            'CustomObjToDataTable(dataObj, invRequestSuppliedDTable)
+
+            'invTranDao.DelUpdateTvp("PostInvRequestSupplied", invReqSupDataTable, @MParam, invTransactionIdNo)
+
+
+            invTransaction = invTranDao.GetRecordByIdNo(invTransactionIdNo)
+            invTransaction.Notes = "Request approved by : " + GlobalVariables.UserName
+            invTransaction.TransactionDate = Today()
+            invTransaction.Cancelled = False
+            invTransaction.InvTransTypeIdNo = 15
+            invTransaction.IdNo = 0
+            Dim idNo As Int32 = invTranDao.AddRecord(invTransaction)
+
+
+            If idNo > 0 Then
+
+
+
+                Dim parameters As Object = {"InvTransactionIdNo", invTransactionIdNo, "oldUnitIdNo", parameters}
+
+                invTranDao.RunStoredProcedure("PostUpdateInvTransactionDetailTVP", parameters)
+
+                'For Each item In View.InvRequestDetails
+                '    DtInsertTable.Rows.Add(item.Quantity, item.QtyApproved)
+                'Next
+
+                Service.RunStoredProcedure("SpPostInvRequest", {invTransactionIdNo, invTransaction, invRequest})
+                Service.Insert()
+
+
+            End If
+
 
             'Dim 
-            'For Each item In View.InvRequestDetails
-            '    Service.InsertRecord("InvRequestSupplied", {"InvTransactionDetailIdNo", "QtySupplied"},
-            '                                               {"Integer", "Decimal"},
-            '                                               {item.IdNo, item.QtyApproved})
-            'Next
+
             'Service.InsertRecord("InvTransaction", {"BranchIdNo", "ReferenceNo", "TransactionDate", "InvTransTypeIdNo", "WarehouseIdNo", "WarehouseToIdNo", "Amount", "Cancelled", "Notes", "Posted", "UserIdNo"},
             '                                       {"Integer", "String", "Date", "Integer", "Integer", "Integer", "Decimal", "Boolean", "String", "Boolean", "Integer"}
             '                                       {GlobalVariables.BranchIdNo,"",Today(), 15, View.WarehouseIdNo, View.InvRequest(index), item.IdNo, item.QtyApproved})

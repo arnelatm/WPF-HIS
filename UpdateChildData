@@ -1,0 +1,125 @@
+	PresenterBase.InitiateSave() 
+		RaiseEvent RecordAddedSuccessfully()
+		SaveChildren(ByRef retVal As Integer) Handles MyBase.RecordAddedSuccessfully, MyBase.RecordUpdatedSuccessfully
+            Dim passedValue As Integer = retVal
+			Private ReadOnly _itemDataService As New AccountsService("BizObjDetail")
+            retVal = UpdateChildData(_itemDataService, DtUpdateTable, DtInsertTable, passedValue, "InvTransactionIdNo")
+		    UpdateChildData(ByRef childDataService As Service, updateTable As DataTable, insertTable As DataTable, passedValue As Integer, parentIdFieldName As String
+				
+
+	Presenter.UpdateChildData(ByRef childDataService As Service, updateTable As DataTable, insertTable As DataTable, passedValue As Integer, parentIdFieldName As String) As Integer
+        Dim retVal As Integer
+        Dim updateReturnValue As Object
+        Dim insertReturnValue As Object
+        Dim parentIdNo As Integer
+        If AddMode Then
+            parentIdNo = passedValue
+        Else
+            parentIdNo = Invoker.GetProperty(View, IdFieldName)
+        End If
+        updateReturnValue = childDataService.DelUpdateTvp(updateTable, parentIdNo)
+        If updateReturnValue >= 0 AndAlso insertTable.Rows.Count > 0 Then
+            If passedValue <> 0 Then
+                For Each row As DataRow In insertTable.Rows
+                    row.Item(parentIdFieldName) = parentIdNo
+                Next
+            End If
+            insertReturnValue = childDataService.InsertTvp(insertTable)
+            If insertReturnValue >= 0 Then
+                retVal = updateReturnValue + insertReturnValue
+            Else
+                retVal = insertReturnValue
+            End If
+        Else
+            retVal = updateReturnValue
+        End If
+
+
+	Service.DelUpdateTvp(dtTable As DataTable, ByVal groupKey As Integer) As Integer Implements IService.DelUpdateTvp
+        Return DataDao.DelUpdateTvp(dtTable, groupKey)
+        
+	<dao>Dao.DelUpdateTvp(ByRef tvpTable As DataTable, groupIdNo As Integer) As Integer Implements IDaoChild(Of InvTransactionDetail).DelUpdateTvp
+            Return Db.DelUpdateTvp("UpdateInvTransactionDetailTVP", tvpTable, "@MParam", groupIdNo)
+        End Function
+	
+	Db.DelUpdateTvp(Of TI)(tableValuedProcedure As String, dataTableName As DataTable, mParam As String,
+                                     groupIdNo As TI) As Integer
+            Dim retValue As Integer = 0
+            Dim tryAgain As Boolean
+            '_waitForm.Show()
+            Do While True
+                tryAgain = False
+                Try
+                    Using connection = CreateConnection()
+                        Using command As New SqlCommand(tableValuedProcedure)
+                            Try
+                                command.CommandType = CommandType.StoredProcedure
+                                command.Connection = connection
+                                command.Parameters.AddWithValue(mParam, dataTableName)
+                                command.Parameters.AddWithValue("GroupIdNo", groupIdNo)
+                                'connection.Open()
+                                Dim x = command.ExecuteNonQuery()
+                                retValue = x
+                                'connection.Close()
+                                Exit Do
+                            Catch ex As Exception
+                                retValue = -1
+                                MessageBox.Show(ex.Message)
+                                Throw
+                            End Try
+                        End Using
+                    End Using
+                Catch ex As Exception
+                    '_waitForm.Close()
+                    Select Case TryToCatchError(ex)
+                        Case DialogResult.Cancel
+                            'Exit Do
+                            retValue = -1
+                        Case DialogResult.Retry
+                            '_waitForm.Show()
+                            tryAgain = True
+                        Case Else
+                            MessageBox.Show(ex.Message)
+                            Throw
+                    End Select
+                Finally
+                    '_waitForm.Close()
+                End Try
+                If Not tryAgain Then
+                    Exit Do
+                End If
+            Loop
+            Return retValue
+        End Function
+			
+
+	db.Insert(sql as String, ParamArray byVal params() as Object) as integer
+			Using connection = CreateConnection()
+				Using command = CreateCommand(sql & ";SELECT SCOPE_IDENTITY();", connection, params)
+					'Db.CreateCommand
+					'	Dim command = Factory.CreateCommand()
+					'	command.Connection = conn
+					'	command.CommandText = sql
+					' 	CreateCommand(sql, connection, params) as DbCCommand
+					'	   command.AddParameters(params)
+					'
+					'DbExtensions.AddParameters 
+					' 	Public Sub AddParameters(command As DbCommand, parms() As Object)
+					'               ' ** Factory pattern
+                    '		Dim dbParameter = command.CreateParameter()
+                    '    	dbParameter.ParameterName = name
+                    '    	dbParameter.Value = value
+                    '    	command.Parameters.Add(dbParameter)
+					'
+					retValue = Parse(command.ExecuteScalar().ToString())
+				end while
+			end connection
+
+
+	
+
+
+			
+	
+
+	

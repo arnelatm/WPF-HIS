@@ -78,8 +78,8 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
-                ViewToDataTables(View.PayElementAccounts, DtInsertTable, DtUpdateTable, AddressOf FillData, AddressOf PayElementAccountFilter)
-                ViewToDataTables(View.PayElementItems, DtEarnInsertTable, DtEarnUpdateTable, AddressOf FillEsData, AddressOf EarnSummaryFilter)
+                CustomObjToDataTables(View.PayElementAccounts, DtInsertTable, DtUpdateTable, AddressOf FillData, AddressOf PayElementAccountFilter)
+                CustomObjToDataTables(View.PayElementItems, DtEarnInsertTable, DtEarnUpdateTable, AddressOf FillEsData, AddressOf EarnSummaryFilter)
             End If
         End Sub
 

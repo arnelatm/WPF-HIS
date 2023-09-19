@@ -178,11 +178,11 @@ Namespace PresentationLayer.Presenters
                 employeePayElements.AddRange(View.RegularEmployeeEarnings)
                 employeePayElements.AddRange(View.RegularEmployeeDeductions)
 
-                ViewToDataTables(employeePayElements, DtEmpPayElementInsertTable, DtEmpPayElementUpdateTable, AddressOf EmpPayElementFillData, AddressOf EmpPayElementFilter)
-                ViewToDataTables(View.EmployeePhones, DtPhoneInsertTable, DtPhoneUpdateTable, AddressOf PhoneFillData, AddressOf PhoneFilter)
-                ViewToDataTables(View.EmployeeLeaveCredits, DtEmpLeaveCreditInsertTable, DtEmpLeaveCreditUpdateTable, AddressOf EmpLeaveCreditFillData, AddressOf EmpLeaveCreditFilter)
+                CustomObjToDataTables(employeePayElements, DtEmpPayElementInsertTable, DtEmpPayElementUpdateTable, AddressOf EmpPayElementFillData, AddressOf EmpPayElementFilter)
+                CustomObjToDataTables(View.EmployeePhones, DtPhoneInsertTable, DtPhoneUpdateTable, AddressOf PhoneFillData, AddressOf PhoneFilter)
+                CustomObjToDataTables(View.EmployeeLeaveCredits, DtEmpLeaveCreditInsertTable, DtEmpLeaveCreditUpdateTable, AddressOf EmpLeaveCreditFillData, AddressOf EmpLeaveCreditFilter)
                 SaveDocumentImages()
-                ViewToDataTables(View.EmployeeDocuments, DtDocumentInsertTable, DtDocumentUpdateTable, AddressOf DocumentFillData, AddressOf DocumentFilter)
+                CustomObjToDataTables(View.EmployeeDocuments, DtDocumentInsertTable, DtDocumentUpdateTable, AddressOf DocumentFillData, AddressOf DocumentFilter)
                 If IsEmpty(View.HiredDate) Then
                     View.HiredDate = Today()
                 End If

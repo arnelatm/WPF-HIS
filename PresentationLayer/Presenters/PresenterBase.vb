@@ -1202,7 +1202,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return Service.UpdateRecord(record)
     End Function
 
-    Protected Function ViewToDataTables(ByRef dataViews As Object, ByRef insertTable As DataTable, ByRef updateTable As DataTable, ByVal fillSub As FillDataFunc,
+    Protected Function CustomObjToDataTables(ByRef dataViews As Object, ByRef insertTable As DataTable, ByRef updateTable As DataTable, ByVal fillSub As FillDataFunc,
                                       ByVal includeFilter As Predicate(Of Object), ByVal Optional dataViewIdNoFieldName As String = "IdNo", ByVal Optional sequenceFieldName As String = "Sequence") As DataRow
         If insertTable IsNot Nothing Then
             insertTable.Clear()
@@ -1232,6 +1232,18 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                 End If
                 nRowCount += 1
             End If
+        Next
+        Return workRow
+    End Function
+
+    Protected Function CustomObjToDataTable(ByRef dataObject As Object, ByRef dataTable As DataTable) As DataRow
+        If dataTable IsNot Nothing Then
+            dataTable.Clear()
+        End If
+        Dim workRow As DataRow = Nothing
+        For Each dataView In dataObject
+            workRow = dataTable.NewRow()
+            dataTable.Rows.Add(workRow)
         Next
         Return workRow
     End Function

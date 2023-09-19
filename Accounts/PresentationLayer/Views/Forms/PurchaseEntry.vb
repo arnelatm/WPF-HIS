@@ -522,7 +522,7 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UpdateTotals()
             If _footer IsNot Nothing Then
                 _footer.CalculateTotals()
-                Dim netAmtBefVat As Decimal = _footer.Value("dgvNetAmount")
+                Dim netAmtBefVat As Decimal = _footer.Value("dgvAmtBefVat")
                 Dim vatAmount As Decimal = _footer.Value("dgvVatAmount")
                 txtVatAmount.Text = vatAmount.ToString("n2")
                 txtAmount.Text = (netAmtBefVat + vatAmount).ToString("n2")
@@ -684,6 +684,7 @@ Namespace PresentationLayer.Views.Forms
             Presenter.UpdateEarlySettlementValues()
             Presenter.UpdateSupplierDate()
         End Sub
+
 
     End Class
 
