@@ -144,6 +144,8 @@ Namespace PresentationLayer.Views.Forms
             dgvAmount.DisplayOnly = True
             dgvQtyApproved.ReadOnly = False
             dgvQtyApproved.EditingMode = True
+            dgvQtySupplied.SetFormat(12, 4)
+            dgvQtyOnHand.SetFormat(12, 4)
 
         End Sub
 
