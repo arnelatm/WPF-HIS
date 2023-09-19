@@ -121,7 +121,7 @@ Namespace PresentationLayer.Presenters
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
                 If CodeToEnum(Of ReceiptTypeSelection)(View.PayorType) <> ReceiptTypeSelection.AccountsReceivable Then
-                    ViewToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalItemFillData,
+                    CustomObjToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalItemFillData,
                                      AddressOf JournalItemFilter)
                     View.UnApplied = 0
                     View.Applied = View.Amount
@@ -133,9 +133,9 @@ Namespace PresentationLayer.Presenters
                     End If
                 Else
                     MakeJournalItem()
-                    ViewToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalItemFillData,
+                    CustomObjToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalItemFillData,
                                      AddressOf JournalItemFilter)
-                    ViewToDataTables(View.CsrOiItems, DtOiInsertTable, DtOiUpdateTable, AddressOf CsrOiFillData,
+                    CustomObjToDataTables(View.CsrOiItems, DtOiInsertTable, DtOiUpdateTable, AddressOf CsrOiFillData,
                                      AddressOf CsrOiItemFilter)
                 End If
                 For Each item In View.JournalItems

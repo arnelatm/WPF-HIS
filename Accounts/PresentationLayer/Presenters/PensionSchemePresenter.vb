@@ -45,7 +45,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
-                ViewToDataTables(View.PensionRates, DtInsertTable, DtUpdateTable, AddressOf FillData, AddressOf PensionRateFilter)
+                CustomObjToDataTables(View.PensionRates, DtInsertTable, DtUpdateTable, AddressOf FillData, AddressOf PensionRateFilter)
             End If
         End Sub
 

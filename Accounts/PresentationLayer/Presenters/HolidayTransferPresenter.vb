@@ -83,7 +83,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
-                ViewToDataTables(View.HolidayTransferItems, DtInsertTable, DtUpdateTable, AddressOf FillData, AddressOf ItemFilter, "IdNo", "")
+                CustomObjToDataTables(View.HolidayTransferItems, DtInsertTable, DtUpdateTable, AddressOf FillData, AddressOf ItemFilter, "IdNo", "")
             End If
         End Sub
 

@@ -177,7 +177,7 @@ Namespace PresentationLayer.Presenters
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
                 If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
-                    ViewToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalItemFillData, AddressOf JournalItemFilter)
+                    CustomObjToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalItemFillData, AddressOf JournalItemFilter)
                     View.UnApplied = 0
                     View.Applied = View.Amount
                     If DtOiInsertTable IsNot Nothing Then
@@ -189,8 +189,8 @@ Namespace PresentationLayer.Presenters
                 Else
                     'View.TotalDebits = 0
                     MakeJournalItem()
-                    ViewToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalItemFillData, AddressOf JournalItemFilter)
-                    ViewToDataTables(View.DjOiItems, DtOiInsertTable, DtOiUpdateTable, AddressOf DjOiFillData, AddressOf DjOiItemFilter)
+                    CustomObjToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalItemFillData, AddressOf JournalItemFilter)
+                    CustomObjToDataTables(View.DjOiItems, DtOiInsertTable, DtOiUpdateTable, AddressOf DjOiFillData, AddressOf DjOiItemFilter)
                     'View.TotalCredits = View.TotalDebits
                 End If
 

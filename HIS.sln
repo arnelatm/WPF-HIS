@@ -52,6 +52,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 		CreateBaseSecurityObject.sql = CreateBaseSecurityObject.sql
 		CreatePayElementGroups.sql = CreatePayElementGroups.sql
 		CreateProgramSecurities(non menu).sql = CreateProgramSecurities(non menu).sql
+		Data Save Heirarchy = Data Save Heirarchy
 		DO THIS NOW.txt = DO THIS NOW.txt
 		Error correction for DTC error.pdf = Error correction for DTC error.pdf
 		HomeSqlDataStructures.sql = HomeSqlDataStructures.sql
@@ -94,6 +95,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Views", "Views", "{5DC97E00
 		SqlQuery_7.sql = SqlQuery_7.sql
 		TranslatedMessages_View.sql = TranslatedMessages_View.sql
 		UpdateCheckDisbursementJournalItemTVP.sql = UpdateCheckDisbursementJournalItemTVP.sql
+		UpdateChildData = UpdateChildData
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Table", "Table", "{6FD94599-A0DF-448F-BF82-CAB5948D5F53}"

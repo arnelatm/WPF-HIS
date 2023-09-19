@@ -131,7 +131,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
-                ViewToDataTables(View.PurchaseDetails, DtInsertTable, DtUpdateTable, AddressOf FillData, AddressOf PurchaseDetailFilter)
+                CustomObjToDataTables(View.PurchaseDetails, DtInsertTable, DtUpdateTable, AddressOf FillData, AddressOf PurchaseDetailFilter)
                 UpdateSupplierDate()
             End If
         End Sub
@@ -336,7 +336,7 @@ Namespace PresentationLayer.Presenters
                     .UnitIdNo = product.BaseUnitIdNo
                     .Quantity = 1
                     .UnitCost = Service.GetLastPurchaseCost(product.IdNo)
-                    .NetAmount = .UnitCost * .Quantity
+                    .NetAmount = .Price * .Quantity
                 End With
             End If
         End Sub
@@ -367,7 +367,7 @@ Namespace PresentationLayer.Presenters
                                 .UnitIdNo = product.BaseUnitIdNo
                                 .Quantity = 1
                                 .UnitCost = Service.GetLastPurchaseCost(product.IdNo)
-                                .NetAmount = .UnitCost * .Quantity
+                                .NetAmount = .Price * .Quantity
                             End With
                             View.PurchaseDetailsBs.ResetBindings(False)
                         End If

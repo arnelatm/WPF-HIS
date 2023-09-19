@@ -75,7 +75,7 @@ Namespace PresentationLayer.Presenters
                 Dim data As New List(Of PayrollPayElementView)
                 data.AddRange(View.PayrollEarnings)
                 data.AddRange(View.PayrollDeductions)
-                ViewToDataTables(data, DtPayElementInsertTable, DtPayElementUpdateTable, AddressOf FillData, AddressOf PayrollPayElementFilter, "IdNo", "")
+                CustomObjToDataTables(data, DtPayElementInsertTable, DtPayElementUpdateTable, AddressOf FillData, AddressOf PayrollPayElementFilter, "IdNo", "")
             End If
         End Sub
 

@@ -77,7 +77,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
-                ViewToDataTables(View.PurchaseOrderDetails, DtInsertTable, DtUpdateTable, AddressOf FillData, AddressOf PurchaseOrderDetailFilter)
+                CustomObjToDataTables(View.PurchaseOrderDetails, DtInsertTable, DtUpdateTable, AddressOf FillData, AddressOf PurchaseOrderDetailFilter)
             End If
         End Sub
 
