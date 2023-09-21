@@ -1,8 +1,6 @@
 ﻿Imports System.Globalization
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports AATM.Common.Models
 Imports AATM.Common.PresentationLayer.Models
-Imports AATM.Common.PresentationLayer.Views.[Interface]
 Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
@@ -148,7 +146,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnGetControlDataSourceHandler(ByRef eventType As GetControlDataSource) Implements ISubscriber(Of GetControlDataSource).OnEventHandler
             If TypeOf eventType.Control Is CtComboBox Then
-                MakeControlDataSourcesT({New Object() {eventType.TableName, eventType.Control, Nothing, Nothing, eventType.Filter}})
+                MakeControlDataSourcesT({New Object() {eventType.TableName, eventType.Control, Nothing, eventType.Filter}})
             Else
                 SetDataSource(eventType.TableName, eventType.Control,,, eventType.Filter)
             End If

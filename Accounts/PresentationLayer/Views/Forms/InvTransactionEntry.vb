@@ -168,8 +168,8 @@ Namespace PresentationLayer.Views.Forms
                 Return cboInvTransTypeIdNo.GetValue(Of Int16)
             End Get
             Set(value As Short)
-                cboInvTransTypeIdNo.SetValue(value)
                 RaiseEvent InvTransactionTypeChanged(value)
+                cboInvTransTypeIdNo.SetValue(value)
             End Set
         End Property
 
@@ -253,7 +253,7 @@ Namespace PresentationLayer.Views.Forms
             Else
                 cboWarehouseIdNo.Enabled = True
             End If
-            UpdateDgvColumns()
+            'UpdateDgvColumns()
             dgvNetAmount.DisplayOnly = True
             If InventoryManager Then
                 dtpTransactionDate.Enabled = True
@@ -548,7 +548,9 @@ Namespace PresentationLayer.Views.Forms
 
 
         Private Sub cboInvTransTypeIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboInvTransTypeIdNo.SelectedIndexChanged
-            UpdateDgvColumns()
+            If FormShown Then
+                UpdateDgvColumns()
+            End If
         End Sub
 
 

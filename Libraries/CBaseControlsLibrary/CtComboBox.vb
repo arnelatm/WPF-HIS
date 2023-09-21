@@ -489,16 +489,10 @@ Public Class CtComboBox
             SelectedIndex = -1
         Else
             Select Case DisplayMember
-                Case "IdNo"
-                    If DisplayMember Then
-                        If value > 0 Then
-                            ValueSearch(value)
-                        Else
-                            SelectedIndex = -1
-                        End If
-                    End If
-                Case "Code", "Name"
+                Case "IdNo", "Code", "Name"
                     ValueSearch(value)
+                Case Else
+                    SelectedValue = value
             End Select
         End If
 
@@ -509,25 +503,46 @@ Public Class CtComboBox
 
 
     Private Sub ValueSearch(value As Object)
-        Dim returnValue As Int32
-        Dim found As Boolean = False
-        Dim i = 0
+        'Dim returnValue As Int32
+        'Dim found As Boolean = False
+        'Dim i = 0
         If DataSource IsNot Nothing Then
-            For Each item As DataRow In DataSource.Rows()
-                If item(ValueMember) = value Then
-                    SelectedIndex = i
-                    found = True
-                    Exit For
-                End If
-                i += 1
-            Next
-            If Not found Then
-                SelectedIndex = -1
-                returnValue = Nothing
-                If value IsNot Nothing Then
-                    Text = value
-                End If
-            End If
+            SelectedValue = value
+
+
+
+
+
+            '            If Not DataManager Is Nothing Then
+            '                Dim bindingField As String = ValueMember.BindingField
+            '                If String.IsNullOrEmpty(bindingField) Then
+            '                    Throw New InvalidOperationException(sR.GetString("ListControlEmptyValueMemberInSettingSelectedValue"))
+            '                End If
+
+            '                Dim itemProperties As PropertyDescriptorCollection = DataManager.GetItemProperties()
+            '                Dim property As PropertyDescriptor = itemProperties.Find(bindingField, IgnoreCase:  True) 
+
+            '                    Dim num2 As Integer = (SelectedIndex = DataManager.Find(property, value, keepIndex:  True)) 
+
+            'End If
+            'For Each item As DataRow In DataSource.Rows()
+            '    If item(ValueMember) = value Then
+            '        SelectedIndex = i
+            '        found = True
+            '        Exit For
+            '    End If
+            '    i += 1
+            'Next
+            'If Not found Then
+            '    SelectedIndex = -1
+            '    Select Case ValueMember
+            '        Case 
+            '    End Select
+            '    returnValue = Nothing
+            '    If value IsNot Nothing Then
+            '        Text = value
+            '    End If
+            'End If
         Else
             SelectedIndex = -1
         End If

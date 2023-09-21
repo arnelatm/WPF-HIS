@@ -25,6 +25,8 @@ BEGIN
 	  ,[UnitName]
       ,[UnitCost]
 	  ,[Description] + ' ' + IIf(IsNull(WarehouseToIdNo,0)=0,'',b.WarehouseName) as 'Description'
+	  ,[ExpiryDate]
+	  ,[BatchNo]
   FROM [dbo].[ProductMovement_View] a
   Left Join Warehouse b
   on b.IdNo = WarehouseToIdNo

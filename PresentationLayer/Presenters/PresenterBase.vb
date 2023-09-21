@@ -1236,7 +1236,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return workRow
     End Function
 
-    Protected Function CustomObjToDataTable(ByRef dataObject As Object, ByRef dataTable As DataTable) As DataRow
+    Protected Function CustomObjToDataTable(ByRef dataObject As Object(), ByRef dataTable As DataTable) As DataRow
         If dataTable IsNot Nothing Then
             dataTable.Clear()
         End If

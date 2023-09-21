@@ -1,0 +1,7 @@
+  
+ Dim duplicate = FirstFieldDuplicate(Of ClassObject, Int16)(Object, "FieldNameToSearch")
+ If duplicate IsNot Nothing Then
+    MessageBox.Show("Duplicate product code found in <Object>. See line <" + (duplicate + 1).ToString() + ">.")
+    retValue = False
+ End If
+                

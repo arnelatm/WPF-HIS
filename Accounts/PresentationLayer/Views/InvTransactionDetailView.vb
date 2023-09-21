@@ -22,7 +22,7 @@ Namespace PresentationLayer.Views
         Public Property ProductIdNo As Int32 Implements IInvTransactionDetailView.ProductIdNo
         Public Property ProductName As String Implements IInvTransactionDetailView.ProductName
         Public Property ProductNameAra As String Implements IInvTransactionDetailView.ProductNameAra
-        Public Property Quantity As Int16 Implements IInvTransactionDetailView.Quantity
+        Public Property Quantity As Decimal Implements IInvTransactionDetailView.Quantity
         Public Property Sequence As Int16 Implements IInvTransactionDetailView.Sequence
         Public Property UnitCost As Decimal Implements IInvTransactionDetailView.UnitCost
         Public Property UnitCount As Int16 Implements IInvTransactionDetailView.UnitCount

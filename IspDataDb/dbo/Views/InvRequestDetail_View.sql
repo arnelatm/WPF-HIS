@@ -7,6 +7,8 @@
 
 
 
+
+
 CREATE VIEW [dbo].[InvRequestDetail_View] as 
 Select a.IdNo,		
 		a.Quantity,
@@ -21,11 +23,11 @@ Select a.IdNo,
 		IIf(c.UnitQty=0,0,Cast(a.Quantity as Decimal(12,2)) * c.BaseQty / c.UnitQty) as BaseQuantity,
         IIf((cast(a.Quantity as Decimal(12,2)) * c.BaseQty / c.UnitQty)=0,0,a.NetAmount / (cast(a.Quantity as Decimal(12,2)) * c.BaseQty / c.UnitQty)) as UnitCost, 
 		a.NetAmount, 
-		IIf(c.BaseQty=0,0,d.QtyOnHand * c.UnitQty / c.BaseQty) as QtyOnHand,
+		IIf(c.BaseQty=0,0,Cast(d.QtyOnHand as Decimal(12,2)) * c.UnitQty / c.BaseQty) as QtyOnHand,
 		a.Sequence, 
 		IsNull(s.QtySupplied,0) * c.BaseQTy/c.UnitQty as QtySupplied,
-
-		a.InvTransactionIdNo
+		a.InvTransactionIdNo,
+		0 as QuantityApproved
 	From InvTransactionDetail a 
  	Left Join InvTransaction b 
  	On a.InvTransactionIdNo = b.IdNo 

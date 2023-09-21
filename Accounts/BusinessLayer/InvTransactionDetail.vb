@@ -24,7 +24,7 @@ Namespace BusinessLayer
         Public Property ProductIdNo As Int32
         Public Property ProductName As String
         Public Property ProductNameAra As String
-        Public Property Quantity As Int16
+        Public Property Quantity As Decimal
         Public Property Sequence As Int16
         Public Property UnitCost As Decimal
         Public Property UnitCount As Int16

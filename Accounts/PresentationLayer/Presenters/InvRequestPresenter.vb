@@ -4,16 +4,15 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.Common.PresentationLayer.Presenters
-Imports AATM.DataLayer
-Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries
 Imports AATM.Libraries.GlobalFuncNSub
-Imports Microsoft.Office.Interop.Excel
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Presenters
     Public Class InvRequestPresenter(Of TM As New)
         Inherits CommonPresenter(Of IInvRequestView, TM)
+        Implements ISubscriber(Of DgvItemsChanged)
 
         Private _invRequestItemService
 
@@ -46,82 +45,58 @@ Namespace PresentationLayer.Presenters
             invTransaction.Notes = "Request Number " & invTransactionIdNo.ToString() & " approved by : " + GlobalVariables.UserName
             invTransaction.TransactionDate = Today()
             invTransaction.Cancelled = False
-            invTransaction.InvTransTypeIdNo = 15
-            invTransaction.IdNo = 0
+            invTransaction.InvTransTypeIdNo = 1
+
 
             Dim dtInvRequest As New System.Data.DataTable
             dtInvRequest.Columns.Add("InvTransactionDetailIdNo", GetType(Int32))
             dtInvRequest.Columns.Add("QtySupplied", GetType(Int32))
 
-            Dim dataObj As New Object()
+            'Dim dataObj As New Object()
             For Each item In View.InvRequestDetails
                 Dim dr As DataRow = dtInvRequest.NewRow
-                dr("InvTransactionDetailIdNo") = item.InvTransactionIdNo
-                dr("QtySupplied") = item.QtySupplied
+                dr("InvTransactionDetailIdNo") = item.IdNo
+                dr("QtySupplied") = item.QtyApproved
                 dtInvRequest.Rows.Add(dr)
             Next
 
-            CustomObjToDataTable(dataObj, dtInvRequest)
+            Dim parameters As Object = {"@MParamType", dtInvRequest,
+                                        "@InvTransactionIdNo", invTransaction.IdNo,
+                                        "@Amount", 0,
+                                        "@BranchIdNo", GlobalVariables.BranchIdNo,
+                                        "@Cancelled", False,
+                                        "@InvTransTypeIdNo", 1,
+                                        "@Notes", "Inventory Request No. " & invTransaction.IdNo.ToString() & " Approved by " & GlobalVariables.UserName,
+                                        "@Posted", True,
+                                        "@ReferenceNo", invTransaction.ReferenceNo,
+                                        "@TransactionDate", Today(),
+                                        "@UseridNo", GlobalVariables.UserIdNo,
+                                        "@WarehouseIdNo", invTransaction.WarehouseIdNo,
+                                        "@WarehouseToIdNo", invTransaction.WarehouseToIdNo}
 
-            'invTranDao.DelUpdateTvp("PostInvRequestSupplied", invReqSupDataTable, @MParam, invTransactionIdNo)
-
-
-            'Dim idNo As Int32 = invTranDao.AddRecord(invTransaction)
-
-
-            'If idNo > 0 Then
-
-
-
-            Dim parameters As Object = {"MParam",
-                                        "BranchIdNo", GlobalVariables.BranchIdNo,
-                                        "Cancelled", False,
-                                        "InvTransTypeIdNo", 15,
-                                        "Notes", "Posting of Request No." & invTransactionIdNo.ToString(),
-                                        "Posted", True,
-                                        "ReferenceNo", invTransaction.ReferenceNo,
-                                        "TransactionDate", Today(),
-                                        "UserIdNo", GlobalVariables.UserIdNo,
-                                        "WarehouseIdNo", invTransaction.WarehouseIdNo,
-                                        "WarehouseToIdNo", invTransaction.WarehouseToIdNo
-                                        }
-
-            invTranDao.RunStoredProcedure("PostInvRequest", parameters)
-
-            'For Each item In View.InvRequestDetails
-            '    DtInsertTable.Rows.Add(item.Quantity, item.QtyApproved)
-            'Next
-
-            'Service.RunStoredProcedure("SpPostInvRequest", {0, invTransaction.BranchIdNo,
-            '                            "Cancelled", False,
-            '                            @InvTransTypeIdNo,
-            '                            @Notes,
-            '                            @Posted,
-            '                            @ReferenceNo,
-            '                            @TransactionDate,
-            '                            @UseridNo,
-            '                            @WarehouseIdNo,
-            '                            @WarehouseToIdNo)
-
-
-            'invTransactionIdNo, invTransaction, invRequest})
-            'Service.Insert()
-
-
-            'End If
-
-
-            'Dim 
-
-            'Service.InsertRecord("InvTransaction", {"BranchIdNo", "ReferenceNo", "TransactionDate", "InvTransTypeIdNo", "WarehouseIdNo", "WarehouseToIdNo", "Amount", "Cancelled", "Notes", "Posted", "UserIdNo"},
-            '                                       {"Integer", "String", "Date", "Integer", "Integer", "Integer", "Decimal", "Boolean", "String", "Boolean", "Integer"}
-            '                                       {GlobalVariables.BranchIdNo,"",Today(), 15, View.WarehouseIdNo, View.InvRequest(index), item.IdNo, item.QtyApproved})
+            Dim retVal As Int16
+            retVal = invTranDao.RunStoredProcedure("spPostInvRequest", parameters)
+            If retVal >= 0 Then
+                View.WarehouseIdNo = View.WarehouseSelector
+                AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgInvTransferSuccess")
+                GetInvTransactions()
+            End If
         End Sub
 
-        Private Sub OnSupplyQuantity()
-            For Each item In View.InvRequestDetails
-                item.QtyApproved = Math.Min(item.Quantity, item.QtyOnHand)
-            Next
+        Private Sub OnSupplyQuantity(invTransactionIdNo As Integer)
+            ' refresh quantity on hand to reflect current values
+            ' values might have changed if the screen has been left open for a long time
+            RefreshRequestDetailsAndQtyOnHand(invTransactionIdNo)
+            If View.InvRequestDetails Is Nothing Then
+                AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgNoSelectedRecordToView")
+            Else
+                Dim qtyToTransfer As Decimal
+                For Each item In View.InvRequestDetails
+                    qtyToTransfer = Math.Min(item.Quantity, item.QtyOnHand)
+                    item.QtyApproved = qtyToTransfer
+                Next
+                AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgApprovedQtyUpdated")
+            End If
         End Sub
 
         Private Sub OnEntryFormLoaded()
@@ -130,19 +105,19 @@ Namespace PresentationLayer.Presenters
             GetInvTransactions()
         End Sub
 
-        Private Sub OnRowChanged(productIdNo As Integer)
-            Dim invRequestItems As List(Of InvRequestDetailModel)
-            invRequestItems = _invRequestItemService.GetRecordsWithGroupIdNo(Of InvRequestDetailModel)(productIdNo)
+        Private Sub OnRowChanged(invTransactionIdNo As Integer)
+            RefreshRequestDetailsAndQtyOnHand(invTransactionIdNo)
+        End Sub
+
+        Private Sub RefreshRequestDetailsAndQtyOnHand(invTransactionIdNo As Integer)
+            Dim invRequestItems As List(Of InvRequestDetailModel) = _invRequestItemService.GetRecordsWithGroupIdNo(Of InvRequestDetailModel)(invTransactionIdNo)
             Dim invItems As New List(Of InvRequestDetailView)
             GlobalVariables.Mapper.Map(invRequestItems, invItems)
             View.InvRequestDetails = invItems
         End Sub
 
         Public Overrides Sub UpdateViewData(idNo As Int32)
-            'MyBase.UpdateViewData(idNo)
-            'If _WithTreeView Then
-            '    TreeViewUpdateViewDisplay(idNo)
-            'End If
+            ' Override default action for this case do nothing
         End Sub
 
         Private Sub OnWarehouseIdNoChanged()
@@ -166,6 +141,25 @@ Namespace PresentationLayer.Presenters
             GlobalVariables.Mapper.Map(invTransactions, View)
         End Sub
 
+        Public Sub OnInvTransactiondgvItemsChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler
+            Dim invRequestDetail As InvRequestDetailView = eventType.BindingSource.Current
+            With eventType.BindingSource.Current
+                If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
+                    Dim gAmt As Decimal = 0
+                    Dim dAmt As Decimal = 0
+                    Dim nAmt As Decimal = 0
+                    Select Case eventType.PropertyName
+                        Case $"QtyApproved"
+                            If invRequestDetail.QtyApproved + invRequestDetail.QtySupplied > invRequestDetail.Quantity Then
+                                AATM.Libraries.MessagingLibrary.Messaging.Show("Sorry Quantity Approved + Quantity Supplied can't be more than the requested quantity! Changing value to maximum allowed quantity.")
+                                invRequestDetail.QtyApproved = invRequestDetail.Quantity - invRequestDetail.QtySupplied
+                            End If
+                    End Select
+                    '.NetAmount = GetNetAmount(InvTransactionDetail)
+                    eventType.BindingSource.ResetItem(eventType.Row)
+                End If
+            End With
+        End Sub
 
     End Class
 

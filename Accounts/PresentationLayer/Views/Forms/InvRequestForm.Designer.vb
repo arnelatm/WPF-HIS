@@ -25,16 +25,16 @@
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(InvRequestForm))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -51,43 +51,43 @@
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.DataGridViewInvTransactionRequests = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
-            Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvWarehouseToIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
             Me.dgvDateCreated = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-            Me.dgvUserIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
-            Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.bsInvTransactionRequest = New System.Windows.Forms.BindingSource(Me.components)
             Me.lblWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboWarehouseSelector = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.DataGridViewInvTransItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
-            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvProductCode = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvProductName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvQuantity = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvQtyOnHand = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
-            Me.dgvQtySupplied = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
-            Me.dgvQtyApproved = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
-            Me.dgvUnitName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvUnitCost = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-            Me.dgvUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvNetAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-            Me.dgvProductIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-            Me.CDgvTextColumn1 = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.bsInvTranItems = New System.Windows.Forms.BindingSource(Me.components)
             Me.lblRequestedItems = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.btnSupplyQuantity = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvWarehouseToIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
+            Me.dgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvUserIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
+            Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.bsInvTransactionRequest = New System.Windows.Forms.BindingSource(Me.components)
+            Me.bsInvTranItems = New System.Windows.Forms.BindingSource(Me.components)
+            Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvProductCode = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvProductName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvQuantity = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvUnitName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvQtyOnHand = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
+            Me.dgvQtySupplied = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
+            Me.dgvQtyApproved = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
+            Me.dgvUnitCost = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvUnitIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvNetAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
+            Me.dgvProductIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.CDgvTextColumn1 = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
             CType(Me.DataGridViewInvTransactionRequests, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.bsInvTransactionRequest, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.DataGridViewInvTransItems, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.bsInvTransactionRequest, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsInvTranItems, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             '
@@ -186,6 +186,249 @@
             Me.DataGridViewInvTransactionRequests.TabIndex = 18
             Me.DataGridViewInvTransactionRequests.Translatable = True
             '
+            'dgvDateCreated
+            '
+            Me.dgvDateCreated.BegFindValue = Nothing
+            Me.dgvDateCreated.DataPropertyName = "DateCreated"
+            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
+            Me.dgvDateCreated.DefaultCellStyle = DataGridViewCellStyle5
+            Me.dgvDateCreated.EditingMode = False
+            Me.dgvDateCreated.EndFindValue = Nothing
+            Me.dgvDateCreated.FieldDescription = Nothing
+            Me.dgvDateCreated.FieldName = Nothing
+            Me.dgvDateCreated.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.dgvDateCreated.FindEnabled = False
+            Me.dgvDateCreated.HeaderText = "Date Created"
+            Me.dgvDateCreated.IgnoreCase = False
+            Me.dgvDateCreated.MinimumWidth = 6
+            Me.dgvDateCreated.Name = "dgvDateCreated"
+            Me.dgvDateCreated.ReadOnly = True
+            Me.dgvDateCreated.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.dgvDateCreated.Translatable = False
+            Me.dgvDateCreated.Width = 125
+            '
+            'lblWarehouseIdNo
+            '
+            Me.lblWarehouseIdNo.BackColor = System.Drawing.Color.Transparent
+            Me.lblWarehouseIdNo.DisplayOnly = True
+            Me.lblWarehouseIdNo.EditingMode = False
+            Me.lblWarehouseIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblWarehouseIdNo.Location = New System.Drawing.Point(1, 1)
+            Me.lblWarehouseIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblWarehouseIdNo.Name = "lblWarehouseIdNo"
+            Me.lblWarehouseIdNo.Size = New System.Drawing.Size(171, 23)
+            Me.lblWarehouseIdNo.TabIndex = 14
+            Me.lblWarehouseIdNo.Text = "Warehouse Code - Name:"
+            Me.lblWarehouseIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblWarehouseIdNo.Translatable = True
+            '
+            'cboWarehouseSelector
+            '
+            Me.cboWarehouseSelector.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Me.cboWarehouseSelector.BackColor = System.Drawing.Color.White
+            Me.cboWarehouseSelector.BegFindValue = Nothing
+            Me.cboWarehouseSelector.ChangingSearchValueOnly = False
+            Me.TableLayoutPanel1.SetColumnSpan(Me.cboWarehouseSelector, 2)
+            Me.cboWarehouseSelector.CurrentSearchTerm = ""
+            Me.cboWarehouseSelector.DataValue = Nothing
+            Me.cboWarehouseSelector.DefaultValue = Nothing
+            Me.cboWarehouseSelector.DisplayMember = "Name"
+            Me.cboWarehouseSelector.DropDownHeight = 24
+            Me.cboWarehouseSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cboWarehouseSelector.Editable = True
+            Me.cboWarehouseSelector.EditingMode = False
+            Me.cboWarehouseSelector.EndFindValue = Nothing
+            Me.cboWarehouseSelector.FieldDescription = Nothing
+            Me.cboWarehouseSelector.FieldName = Nothing
+            Me.cboWarehouseSelector.FilterRule = Nothing
+            Me.cboWarehouseSelector.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboWarehouseSelector.FindEnabled = False
+            Me.cboWarehouseSelector.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.cboWarehouseSelector.ForeColor = System.Drawing.Color.Black
+            Me.cboWarehouseSelector.FormattingEnabled = True
+            Me.cboWarehouseSelector.HideWhenNotEditingOrAdding = False
+            Me.cboWarehouseSelector.IgnoreCase = False
+            Me.cboWarehouseSelector.LimitToList = False
+            Me.cboWarehouseSelector.LinkedLabel = Nothing
+            Me.cboWarehouseSelector.Location = New System.Drawing.Point(174, 1)
+            Me.cboWarehouseSelector.Margin = New System.Windows.Forms.Padding(1)
+            Me.cboWarehouseSelector.MaxDropDownItems = 1
+            Me.cboWarehouseSelector.Name = "cboWarehouseSelector"
+            Me.cboWarehouseSelector.OldValue = 0
+            Me.cboWarehouseSelector.OriginalDataSource = Nothing
+            Me.cboWarehouseSelector.OriginalList = Nothing
+            Me.cboWarehouseSelector.OverrideDropDownStyleList = False
+            Me.cboWarehouseSelector.PreviousSearchTerm = Nothing
+            Me.cboWarehouseSelector.PropertySelector = Nothing
+            Me.cboWarehouseSelector.Size = New System.Drawing.Size(588, 24)
+            Me.cboWarehouseSelector.SuggestBoxHeight = 200
+            Me.cboWarehouseSelector.SuggestCharCount = 0
+            Me.cboWarehouseSelector.SuggestListOrderRule = Nothing
+            Me.cboWarehouseSelector.TabIndex = 15
+            Me.cboWarehouseSelector.TextToSearch = Nothing
+            Me.cboWarehouseSelector.Translatable = False
+            Me.cboWarehouseSelector.ValueIsMandatory = False
+            Me.cboWarehouseSelector.ValueIsNullable = False
+            Me.cboWarehouseSelector.ValueIsNumeric = False
+            Me.cboWarehouseSelector.ValueMember = "IdNo"
+            '
+            'DataGridViewInvTransItems
+            '
+            Me.DataGridViewInvTransItems.AllowUserToAddRows = False
+            Me.DataGridViewInvTransItems.AllowUserToDeleteRows = False
+            DataGridViewCellStyle11.BackColor = System.Drawing.Color.FloralWhite
+            Me.DataGridViewInvTransItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle11
+            Me.DataGridViewInvTransItems.AutoGenerateColumns = False
+            Me.DataGridViewInvTransItems.BegFindValue = Nothing
+            Me.DataGridViewInvTransItems.Cached = False
+            Me.DataGridViewInvTransItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+            Me.DataGridViewInvTransItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvProductCode, Me.dgvProductName, Me.dgvQuantity, Me.dgvUnitName, Me.dgvQtyOnHand, Me.dgvQtySupplied, Me.dgvQtyApproved, Me.dgvUnitCost, Me.dgvUnitIdNo, Me.dgvNetAmount, Me.dgvProductIdNo, Me.CDgvTextColumn1})
+            Me.TableLayoutPanel1.SetColumnSpan(Me.DataGridViewInvTransItems, 4)
+            Me.DataGridViewInvTransItems.DataFilter = Nothing
+            Me.DataGridViewInvTransItems.DataSource = Me.bsInvTranItems
+            DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle24.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle24.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.6!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle24.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewInvTransItems.DefaultCellStyle = DataGridViewCellStyle24
+            Me.DataGridViewInvTransItems.DgvFooter = Nothing
+            Me.DataGridViewInvTransItems.DisplayOnly = False
+            Me.DataGridViewInvTransItems.Ea = Nothing
+            Me.DataGridViewInvTransItems.EditingMode = False
+            Me.DataGridViewInvTransItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+            Me.DataGridViewInvTransItems.EndFindValue = Nothing
+            Me.DataGridViewInvTransItems.FieldDescription = Nothing
+            Me.DataGridViewInvTransItems.FieldName = Nothing
+            Me.DataGridViewInvTransItems.FieldsDictionary = Nothing
+            Me.DataGridViewInvTransItems.FindColumnNo = CType(0, Short)
+            Me.DataGridViewInvTransItems.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.DataGridViewInvTransItems.FindEnabled = False
+            Me.DataGridViewInvTransItems.FirstRowDeletionEnabled = True
+            Me.DataGridViewInvTransItems.FirstRowInsertionEnabled = True
+            Me.DataGridViewInvTransItems.IgnoreCase = False
+            Me.DataGridViewInvTransItems.IsDirty = False
+            Me.DataGridViewInvTransItems.Location = New System.Drawing.Point(3, 249)
+            Me.DataGridViewInvTransItems.Name = "DataGridViewInvTransItems"
+            Me.DataGridViewInvTransItems.OldCellValue = Nothing
+            Me.DataGridViewInvTransItems.ReadOnly = True
+            Me.DataGridViewInvTransItems.RowHeadersWidth = 51
+            Me.DataGridViewInvTransItems.Searchable = True
+            Me.DataGridViewInvTransItems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.DataGridViewInvTransItems.SecurityKey = ""
+            Me.DataGridViewInvTransItems.SequenceColumn = "dgvSequence"
+            Me.DataGridViewInvTransItems.SequenceFieldName = "Sequence"
+            Me.DataGridViewInvTransItems.ShowFooter = False
+            Me.DataGridViewInvTransItems.Size = New System.Drawing.Size(902, 194)
+            Me.DataGridViewInvTransItems.TabIndex = 19
+            Me.DataGridViewInvTransItems.Translatable = True
+            '
+            'lblRequestedItems
+            '
+            Me.lblRequestedItems.AutoSize = True
+            Me.lblRequestedItems.BackColor = System.Drawing.Color.Transparent
+            Me.lblRequestedItems.DisplayOnly = True
+            Me.lblRequestedItems.EditingMode = False
+            Me.lblRequestedItems.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.lblRequestedItems.Location = New System.Drawing.Point(1, 227)
+            Me.lblRequestedItems.Margin = New System.Windows.Forms.Padding(1)
+            Me.lblRequestedItems.Name = "lblRequestedItems"
+            Me.lblRequestedItems.Size = New System.Drawing.Size(118, 17)
+            Me.lblRequestedItems.TabIndex = 20
+            Me.lblRequestedItems.Text = "Requested Items:"
+            Me.lblRequestedItems.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+            Me.lblRequestedItems.Translatable = True
+            '
+            'txtWarehouseIdNo
+            '
+            Me.txtWarehouseIdNo.BackColor = System.Drawing.Color.White
+            Me.txtWarehouseIdNo.BegFindValue = Nothing
+            Me.txtWarehouseIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtWarehouseIdNo.ComputedValue = False
+            Me.txtWarehouseIdNo.CustomFormat = Nothing
+            Me.txtWarehouseIdNo.DataBoundControl = True
+            Me.txtWarehouseIdNo.EditingMode = True
+            Me.txtWarehouseIdNo.EndFindValue = Nothing
+            Me.txtWarehouseIdNo.FieldDescription = Nothing
+            Me.txtWarehouseIdNo.FieldName = Nothing
+            Me.txtWarehouseIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtWarehouseIdNo.FindEnabled = False
+            Me.txtWarehouseIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtWarehouseIdNo.ForeColor = System.Drawing.Color.Black
+            Me.txtWarehouseIdNo.LinkedLabel = Nothing
+            Me.txtWarehouseIdNo.Location = New System.Drawing.Point(1, 453)
+            Me.txtWarehouseIdNo.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtWarehouseIdNo.MaximumValue = Nothing
+            Me.txtWarehouseIdNo.MinimumValue = Nothing
+            Me.txtWarehouseIdNo.Name = "txtWarehouseIdNo"
+            Me.txtWarehouseIdNo.OldValue = Nothing
+            Me.txtWarehouseIdNo.OverrideMaxLength = 0
+            Me.txtWarehouseIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtWarehouseIdNo.Size = New System.Drawing.Size(100, 23)
+            Me.txtWarehouseIdNo.TabIndex = 16
+            Me.txtWarehouseIdNo.Translatable = False
+            Me.txtWarehouseIdNo.Visible = False
+            '
+            'btnSupplyQuantity
+            '
+            Me.btnSupplyQuantity.DesignerSelected = False
+            Me.btnSupplyQuantity.ImageIndex = 0
+            Me.btnSupplyQuantity.Location = New System.Drawing.Point(104, 454)
+            Me.btnSupplyQuantity.Margin = New System.Windows.Forms.Padding(2)
+            Me.btnSupplyQuantity.Name = "btnSupplyQuantity"
+            Me.btnSupplyQuantity.OriginalImageName = Nothing
+            Me.btnSupplyQuantity.SecurityKey = ""
+            Me.btnSupplyQuantity.Size = New System.Drawing.Size(216, 27)
+            Me.btnSupplyQuantity.TabIndex = 19
+            Me.btnSupplyQuantity.Text = "Supply Requested Quantity"
+            '
+            'CButton1
+            '
+            Me.CButton1.DesignerSelected = False
+            Me.CButton1.ImageIndex = 0
+            Me.CButton1.Location = New System.Drawing.Point(324, 454)
+            Me.CButton1.Margin = New System.Windows.Forms.Padding(2)
+            Me.CButton1.Name = "CButton1"
+            Me.CButton1.OriginalImageName = Nothing
+            Me.CButton1.SecurityKey = ""
+            Me.CButton1.Size = New System.Drawing.Size(188, 27)
+            Me.CButton1.TabIndex = 18
+            Me.CButton1.Text = "Transfer Selected Request"
+            '
+            'txtDoctorCode
+            '
+            Me.txtDoctorCode.BackColor = System.Drawing.Color.White
+            Me.txtDoctorCode.BegFindValue = Nothing
+            Me.txtDoctorCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDoctorCode.ComputedValue = False
+            Me.txtDoctorCode.CustomFormat = Nothing
+            Me.txtDoctorCode.DataBoundControl = True
+            Me.txtDoctorCode.EditingMode = True
+            Me.txtDoctorCode.EndFindValue = Nothing
+            Me.txtDoctorCode.FieldDescription = Nothing
+            Me.txtDoctorCode.FieldName = Nothing
+            Me.txtDoctorCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtDoctorCode.FindEnabled = False
+            Me.txtDoctorCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtDoctorCode.ForeColor = System.Drawing.Color.Black
+            Me.txtDoctorCode.LinkedLabel = Nothing
+            Me.txtDoctorCode.Location = New System.Drawing.Point(693, 89)
+            Me.txtDoctorCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtDoctorCode.MaximumValue = Nothing
+            Me.txtDoctorCode.MinimumValue = Nothing
+            Me.txtDoctorCode.Name = "txtDoctorCode"
+            Me.txtDoctorCode.OldValue = Nothing
+            Me.txtDoctorCode.OverrideMaxLength = 0
+            Me.txtDoctorCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtDoctorCode.Size = New System.Drawing.Size(80, 23)
+            Me.txtDoctorCode.TabIndex = 16
+            Me.txtDoctorCode.Translatable = False
+            Me.txtDoctorCode.Visible = False
+            '
             'dgvIdNo
             '
             Me.dgvIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
@@ -252,28 +495,6 @@
             Me.dgvWarehouseToIdNo.SuggestCharCount = 0
             Me.dgvWarehouseToIdNo.Translatable = False
             Me.dgvWarehouseToIdNo.Width = 130
-            '
-            'dgvDateCreated
-            '
-            Me.dgvDateCreated.BegFindValue = Nothing
-            Me.dgvDateCreated.DataPropertyName = "DateCreated"
-            DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-            Me.dgvDateCreated.DefaultCellStyle = DataGridViewCellStyle5
-            Me.dgvDateCreated.EditingMode = False
-            Me.dgvDateCreated.EndFindValue = Nothing
-            Me.dgvDateCreated.FieldDescription = Nothing
-            Me.dgvDateCreated.FieldName = Nothing
-            Me.dgvDateCreated.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.dgvDateCreated.FindEnabled = False
-            Me.dgvDateCreated.HeaderText = "Date Created"
-            Me.dgvDateCreated.IgnoreCase = False
-            Me.dgvDateCreated.MinimumWidth = 6
-            Me.dgvDateCreated.Name = "dgvDateCreated"
-            Me.dgvDateCreated.ReadOnly = True
-            Me.dgvDateCreated.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.dgvDateCreated.Translatable = False
-            Me.dgvDateCreated.Width = 125
             '
             'dgvTransactionDate
             '
@@ -371,128 +592,12 @@
             '
             Me.bsInvTransactionRequest.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.InvTransactionModel)
             '
-            'lblWarehouseIdNo
+            'bsInvTranItems
             '
-            Me.lblWarehouseIdNo.BackColor = System.Drawing.Color.Transparent
-            Me.lblWarehouseIdNo.DisplayOnly = True
-            Me.lblWarehouseIdNo.EditingMode = False
-            Me.lblWarehouseIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblWarehouseIdNo.Location = New System.Drawing.Point(1, 1)
-            Me.lblWarehouseIdNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblWarehouseIdNo.Name = "lblWarehouseIdNo"
-            Me.lblWarehouseIdNo.Size = New System.Drawing.Size(171, 23)
-            Me.lblWarehouseIdNo.TabIndex = 14
-            Me.lblWarehouseIdNo.Text = "Warehouse Code - Name:"
-            Me.lblWarehouseIdNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.lblWarehouseIdNo.Translatable = True
-            '
-            'cboWarehouseSelector
-            '
-            Me.cboWarehouseSelector.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.cboWarehouseSelector.BackColor = System.Drawing.Color.White
-            Me.cboWarehouseSelector.BegFindValue = Nothing
-            Me.cboWarehouseSelector.ChangingSearchValueOnly = False
-            Me.TableLayoutPanel1.SetColumnSpan(Me.cboWarehouseSelector, 2)
-            Me.cboWarehouseSelector.CurrentSearchTerm = ""
-            Me.cboWarehouseSelector.DataValue = Nothing
-            Me.cboWarehouseSelector.DefaultValue = Nothing
-            Me.cboWarehouseSelector.DisplayMember = "Name"
-            Me.cboWarehouseSelector.DropDownHeight = 21
-            Me.cboWarehouseSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
-            Me.cboWarehouseSelector.Editable = True
-            Me.cboWarehouseSelector.EditingMode = False
-            Me.cboWarehouseSelector.EndFindValue = Nothing
-            Me.cboWarehouseSelector.FieldDescription = Nothing
-            Me.cboWarehouseSelector.FieldName = Nothing
-            Me.cboWarehouseSelector.FilterRule = Nothing
-            Me.cboWarehouseSelector.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboWarehouseSelector.FindEnabled = False
-            Me.cboWarehouseSelector.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.cboWarehouseSelector.ForeColor = System.Drawing.Color.Black
-            Me.cboWarehouseSelector.FormattingEnabled = True
-            Me.cboWarehouseSelector.HideWhenNotEditingOrAdding = False
-            Me.cboWarehouseSelector.IgnoreCase = False
-            Me.cboWarehouseSelector.LimitToList = False
-            Me.cboWarehouseSelector.LinkedLabel = Nothing
-            Me.cboWarehouseSelector.Location = New System.Drawing.Point(174, 1)
-            Me.cboWarehouseSelector.Margin = New System.Windows.Forms.Padding(1)
-            Me.cboWarehouseSelector.MaxDropDownItems = 1
-            Me.cboWarehouseSelector.Name = "cboWarehouseSelector"
-            Me.cboWarehouseSelector.OldValue = 0
-            Me.cboWarehouseSelector.OriginalDataSource = Nothing
-            Me.cboWarehouseSelector.OriginalList = Nothing
-            Me.cboWarehouseSelector.OverrideDropDownStyleList = False
-            Me.cboWarehouseSelector.PreviousSearchTerm = Nothing
-            Me.cboWarehouseSelector.PropertySelector = Nothing
-            Me.cboWarehouseSelector.Size = New System.Drawing.Size(588, 24)
-            Me.cboWarehouseSelector.SuggestBoxHeight = 200
-            Me.cboWarehouseSelector.SuggestCharCount = 0
-            Me.cboWarehouseSelector.SuggestListOrderRule = Nothing
-            Me.cboWarehouseSelector.TabIndex = 15
-            Me.cboWarehouseSelector.TextToSearch = Nothing
-            Me.cboWarehouseSelector.Translatable = False
-            Me.cboWarehouseSelector.ValueIsMandatory = False
-            Me.cboWarehouseSelector.ValueIsNullable = False
-            Me.cboWarehouseSelector.ValueIsNumeric = False
-            Me.cboWarehouseSelector.ValueMember = "IdNo"
-            '
-            'DataGridViewInvTransItems
-            '
-            Me.DataGridViewInvTransItems.AllowUserToAddRows = False
-            Me.DataGridViewInvTransItems.AllowUserToDeleteRows = False
-            DataGridViewCellStyle11.BackColor = System.Drawing.Color.FloralWhite
-            Me.DataGridViewInvTransItems.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle11
-            Me.DataGridViewInvTransItems.AutoGenerateColumns = False
-            Me.DataGridViewInvTransItems.BegFindValue = Nothing
-            Me.DataGridViewInvTransItems.Cached = False
-            Me.DataGridViewInvTransItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewInvTransItems.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvSequence, Me.dgvProductCode, Me.dgvProductName, Me.dgvQuantity, Me.dgvQtyOnHand, Me.dgvQtySupplied, Me.dgvQtyApproved, Me.dgvUnitName, Me.dgvUnitCost, Me.dgvUnitIdNo, Me.dgvNetAmount, Me.dgvProductIdNo, Me.CDgvTextColumn1})
-            Me.TableLayoutPanel1.SetColumnSpan(Me.DataGridViewInvTransItems, 4)
-            Me.DataGridViewInvTransItems.DataFilter = Nothing
-            Me.DataGridViewInvTransItems.DataSource = Me.bsInvTranItems
-            DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle24.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle24.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.6!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle24.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewInvTransItems.DefaultCellStyle = DataGridViewCellStyle24
-            Me.DataGridViewInvTransItems.DgvFooter = Nothing
-            Me.DataGridViewInvTransItems.DisplayOnly = False
-            Me.DataGridViewInvTransItems.Ea = Nothing
-            Me.DataGridViewInvTransItems.EditingMode = False
-            Me.DataGridViewInvTransItems.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-            Me.DataGridViewInvTransItems.EndFindValue = Nothing
-            Me.DataGridViewInvTransItems.FieldDescription = Nothing
-            Me.DataGridViewInvTransItems.FieldName = Nothing
-            Me.DataGridViewInvTransItems.FieldsDictionary = Nothing
-            Me.DataGridViewInvTransItems.FindColumnNo = CType(0, Short)
-            Me.DataGridViewInvTransItems.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.DataGridViewInvTransItems.FindEnabled = False
-            Me.DataGridViewInvTransItems.FirstRowDeletionEnabled = True
-            Me.DataGridViewInvTransItems.FirstRowInsertionEnabled = True
-            Me.DataGridViewInvTransItems.IgnoreCase = False
-            Me.DataGridViewInvTransItems.IsDirty = False
-            Me.DataGridViewInvTransItems.Location = New System.Drawing.Point(3, 249)
-            Me.DataGridViewInvTransItems.Name = "DataGridViewInvTransItems"
-            Me.DataGridViewInvTransItems.OldCellValue = Nothing
-            Me.DataGridViewInvTransItems.ReadOnly = True
-            Me.DataGridViewInvTransItems.RowHeadersWidth = 51
-            Me.DataGridViewInvTransItems.Searchable = True
-            Me.DataGridViewInvTransItems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.DataGridViewInvTransItems.SecurityKey = ""
-            Me.DataGridViewInvTransItems.SequenceColumn = "dgvSequence"
-            Me.DataGridViewInvTransItems.SequenceFieldName = "Sequence"
-            Me.DataGridViewInvTransItems.ShowFooter = False
-            Me.DataGridViewInvTransItems.Size = New System.Drawing.Size(902, 194)
-            Me.DataGridViewInvTransItems.TabIndex = 19
-            Me.DataGridViewInvTransItems.Translatable = True
+            Me.bsInvTranItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.InvRequestDetailModel)
             '
             'dgvSequence
             '
-            Me.dgvSequence.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
             Me.dgvSequence.BegFindValue = Nothing
             Me.dgvSequence.DataPropertyName = "Sequence"
             DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
@@ -513,7 +618,7 @@
             Me.dgvSequence.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvSequence.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvSequence.Translatable = False
-            Me.dgvSequence.Width = 51
+            Me.dgvSequence.Width = 30
             '
             'dgvProductCode
             '
@@ -586,70 +691,14 @@
             Me.dgvQuantity.Translatable = False
             Me.dgvQuantity.Width = 71
             '
-            'dgvQtyOnHand
-            '
-            Me.dgvQtyOnHand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.dgvQtyOnHand.DataPropertyName = "QtyOnHand"
-            Me.dgvQtyOnHand.DecimalPlaces = -1
-            DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle16.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black
-            Me.dgvQtyOnHand.DefaultCellStyle = DataGridViewCellStyle16
-            Me.dgvQtyOnHand.EditingMode = False
-            Me.dgvQtyOnHand.HeaderText = "Qty. On Hand"
-            Me.dgvQtyOnHand.MinimumWidth = 6
-            Me.dgvQtyOnHand.Name = "dgvQtyOnHand"
-            Me.dgvQtyOnHand.ReadOnly = True
-            Me.dgvQtyOnHand.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvQtyOnHand.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            Me.dgvQtyOnHand.Translatable = False
-            Me.dgvQtyOnHand.Width = 97
-            '
-            'dgvQtySupplied
-            '
-            Me.dgvQtySupplied.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
-            Me.dgvQtySupplied.DataPropertyName = "QtySupplied"
-            Me.dgvQtySupplied.DecimalPlaces = -1
-            DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black
-            Me.dgvQtySupplied.DefaultCellStyle = DataGridViewCellStyle17
-            Me.dgvQtySupplied.EditingMode = False
-            Me.dgvQtySupplied.HeaderText = "Qty. Supplied"
-            Me.dgvQtySupplied.MinimumWidth = 6
-            Me.dgvQtySupplied.Name = "dgvQtySupplied"
-            Me.dgvQtySupplied.ReadOnly = True
-            Me.dgvQtySupplied.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvQtySupplied.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            Me.dgvQtySupplied.Translatable = False
-            Me.dgvQtySupplied.Width = 95
-            '
-            'dgvQtyApproved
-            '
-            Me.dgvQtyApproved.DataPropertyName = "QtyApproved"
-            Me.dgvQtyApproved.DecimalPlaces = -1
-            DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle18.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black
-            Me.dgvQtyApproved.DefaultCellStyle = DataGridViewCellStyle18
-            Me.dgvQtyApproved.EditingMode = False
-            Me.dgvQtyApproved.HeaderText = "Qty. Approved"
-            Me.dgvQtyApproved.MinimumWidth = 6
-            Me.dgvQtyApproved.Name = "dgvQtyApproved"
-            Me.dgvQtyApproved.ReadOnly = True
-            Me.dgvQtyApproved.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvQtyApproved.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            Me.dgvQtyApproved.Translatable = False
-            Me.dgvQtyApproved.Width = 125
-            '
             'dgvUnitName
             '
             Me.dgvUnitName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
             Me.dgvUnitName.BegFindValue = Nothing
             Me.dgvUnitName.DataPropertyName = "UnitName"
-            DataGridViewCellStyle19.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle19.ForeColor = System.Drawing.Color.Black
-            Me.dgvUnitName.DefaultCellStyle = DataGridViewCellStyle19
+            DataGridViewCellStyle16.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black
+            Me.dgvUnitName.DefaultCellStyle = DataGridViewCellStyle16
             Me.dgvUnitName.EditingMode = False
             Me.dgvUnitName.EndFindValue = Nothing
             Me.dgvUnitName.FieldDescription = Nothing
@@ -665,6 +714,62 @@
             Me.dgvUnitName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvUnitName.Translatable = False
             Me.dgvUnitName.Width = 82
+            '
+            'dgvQtyOnHand
+            '
+            Me.dgvQtyOnHand.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+            Me.dgvQtyOnHand.DataPropertyName = "QtyOnHand"
+            Me.dgvQtyOnHand.DecimalPlaces = -1
+            DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle17.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black
+            Me.dgvQtyOnHand.DefaultCellStyle = DataGridViewCellStyle17
+            Me.dgvQtyOnHand.EditingMode = False
+            Me.dgvQtyOnHand.HeaderText = "Qty. On Hand"
+            Me.dgvQtyOnHand.MinimumWidth = 6
+            Me.dgvQtyOnHand.Name = "dgvQtyOnHand"
+            Me.dgvQtyOnHand.ReadOnly = True
+            Me.dgvQtyOnHand.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvQtyOnHand.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvQtyOnHand.Translatable = False
+            Me.dgvQtyOnHand.Width = 97
+            '
+            'dgvQtySupplied
+            '
+            Me.dgvQtySupplied.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+            Me.dgvQtySupplied.DataPropertyName = "QtySupplied"
+            Me.dgvQtySupplied.DecimalPlaces = -1
+            DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle18.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black
+            Me.dgvQtySupplied.DefaultCellStyle = DataGridViewCellStyle18
+            Me.dgvQtySupplied.EditingMode = False
+            Me.dgvQtySupplied.HeaderText = "Qty. Supplied"
+            Me.dgvQtySupplied.MinimumWidth = 6
+            Me.dgvQtySupplied.Name = "dgvQtySupplied"
+            Me.dgvQtySupplied.ReadOnly = True
+            Me.dgvQtySupplied.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvQtySupplied.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvQtySupplied.Translatable = False
+            Me.dgvQtySupplied.Width = 95
+            '
+            'dgvQtyApproved
+            '
+            Me.dgvQtyApproved.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+            Me.dgvQtyApproved.DataPropertyName = "QtyApproved"
+            Me.dgvQtyApproved.DecimalPlaces = -1
+            DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle19.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle19.ForeColor = System.Drawing.Color.Black
+            Me.dgvQtyApproved.DefaultCellStyle = DataGridViewCellStyle19
+            Me.dgvQtyApproved.EditingMode = False
+            Me.dgvQtyApproved.HeaderText = "Qty. Approved"
+            Me.dgvQtyApproved.MinimumWidth = 6
+            Me.dgvQtyApproved.Name = "dgvQtyApproved"
+            Me.dgvQtyApproved.ReadOnly = True
+            Me.dgvQtyApproved.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvQtyApproved.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvQtyApproved.Translatable = False
             '
             'dgvUnitCost
             '
@@ -694,6 +799,7 @@
             '
             'dgvUnitIdNo
             '
+            Me.dgvUnitIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
             Me.dgvUnitIdNo.BegFindValue = Nothing
             Me.dgvUnitIdNo.DataPropertyName = "UnitIdNo"
             DataGridViewCellStyle21.BackColor = System.Drawing.Color.White
@@ -714,10 +820,11 @@
             Me.dgvUnitIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvUnitIdNo.Translatable = False
             Me.dgvUnitIdNo.Visible = False
-            Me.dgvUnitIdNo.Width = 125
+            Me.dgvUnitIdNo.Width = 51
             '
             'dgvNetAmount
             '
+            Me.dgvNetAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
             Me.dgvNetAmount.BegFindValue = Nothing
             Me.dgvNetAmount.DataPropertyName = "NetAmount"
             DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
@@ -739,20 +846,22 @@
             Me.dgvNetAmount.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvNetAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
             Me.dgvNetAmount.Translatable = False
-            Me.dgvNetAmount.Width = 125
+            Me.dgvNetAmount.Width = 88
             '
             'dgvProductIdNo
             '
+            Me.dgvProductIdNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
             Me.dgvProductIdNo.DataPropertyName = "ProductIdNo"
             Me.dgvProductIdNo.HeaderText = "ProductIdNo"
             Me.dgvProductIdNo.MinimumWidth = 6
             Me.dgvProductIdNo.Name = "dgvProductIdNo"
             Me.dgvProductIdNo.ReadOnly = True
             Me.dgvProductIdNo.Visible = False
-            Me.dgvProductIdNo.Width = 125
+            Me.dgvProductIdNo.Width = 92
             '
             'CDgvTextColumn1
             '
+            Me.CDgvTextColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
             Me.CDgvTextColumn1.BegFindValue = Nothing
             Me.CDgvTextColumn1.DataPropertyName = "BaseUnitIdNo"
             DataGridViewCellStyle23.BackColor = System.Drawing.Color.White
@@ -773,113 +882,7 @@
             Me.CDgvTextColumn1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.CDgvTextColumn1.Translatable = False
             Me.CDgvTextColumn1.Visible = False
-            Me.CDgvTextColumn1.Width = 125
-            '
-            'bsInvTranItems
-            '
-            Me.bsInvTranItems.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.InvRequestDetailModel)
-            '
-            'lblRequestedItems
-            '
-            Me.lblRequestedItems.AutoSize = True
-            Me.lblRequestedItems.BackColor = System.Drawing.Color.Transparent
-            Me.lblRequestedItems.DisplayOnly = True
-            Me.lblRequestedItems.EditingMode = False
-            Me.lblRequestedItems.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblRequestedItems.Location = New System.Drawing.Point(1, 227)
-            Me.lblRequestedItems.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblRequestedItems.Name = "lblRequestedItems"
-            Me.lblRequestedItems.Size = New System.Drawing.Size(118, 17)
-            Me.lblRequestedItems.TabIndex = 20
-            Me.lblRequestedItems.Text = "Requested Items:"
-            Me.lblRequestedItems.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.lblRequestedItems.Translatable = True
-            '
-            'txtWarehouseIdNo
-            '
-            Me.txtWarehouseIdNo.BackColor = System.Drawing.Color.White
-            Me.txtWarehouseIdNo.BegFindValue = Nothing
-            Me.txtWarehouseIdNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtWarehouseIdNo.ComputedValue = False
-            Me.txtWarehouseIdNo.CustomFormat = Nothing
-            Me.txtWarehouseIdNo.DataBoundControl = True
-            Me.txtWarehouseIdNo.EditingMode = True
-            Me.txtWarehouseIdNo.EndFindValue = Nothing
-            Me.txtWarehouseIdNo.FieldDescription = Nothing
-            Me.txtWarehouseIdNo.FieldName = Nothing
-            Me.txtWarehouseIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtWarehouseIdNo.FindEnabled = False
-            Me.txtWarehouseIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtWarehouseIdNo.ForeColor = System.Drawing.Color.Black
-            Me.txtWarehouseIdNo.LinkedLabel = Nothing
-            Me.txtWarehouseIdNo.Location = New System.Drawing.Point(1, 453)
-            Me.txtWarehouseIdNo.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtWarehouseIdNo.MaximumValue = Nothing
-            Me.txtWarehouseIdNo.MinimumValue = Nothing
-            Me.txtWarehouseIdNo.Name = "txtWarehouseIdNo"
-            Me.txtWarehouseIdNo.OldValue = Nothing
-            Me.txtWarehouseIdNo.OverrideMaxLength = 0
-            Me.txtWarehouseIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtWarehouseIdNo.Size = New System.Drawing.Size(100, 23)
-            Me.txtWarehouseIdNo.TabIndex = 16
-            Me.txtWarehouseIdNo.Translatable = False
-            Me.txtWarehouseIdNo.Visible = False
-            '
-            'btnSupplyQuantity
-            '
-            Me.btnSupplyQuantity.DesignerSelected = False
-            Me.btnSupplyQuantity.ImageIndex = 0
-            Me.btnSupplyQuantity.Location = New System.Drawing.Point(104, 454)
-            Me.btnSupplyQuantity.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-            Me.btnSupplyQuantity.Name = "btnSupplyQuantity"
-            Me.btnSupplyQuantity.OriginalImageName = Nothing
-            Me.btnSupplyQuantity.SecurityKey = ""
-            Me.btnSupplyQuantity.Size = New System.Drawing.Size(216, 27)
-            Me.btnSupplyQuantity.TabIndex = 19
-            Me.btnSupplyQuantity.Text = "Supply Requested Quantity"
-            '
-            'CButton1
-            '
-            Me.CButton1.DesignerSelected = False
-            Me.CButton1.ImageIndex = 0
-            Me.CButton1.Location = New System.Drawing.Point(324, 454)
-            Me.CButton1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-            Me.CButton1.Name = "CButton1"
-            Me.CButton1.OriginalImageName = Nothing
-            Me.CButton1.SecurityKey = ""
-            Me.CButton1.Size = New System.Drawing.Size(188, 27)
-            Me.CButton1.TabIndex = 18
-            Me.CButton1.Text = "Transfer Selected Request"
-            '
-            'txtDoctorCode
-            '
-            Me.txtDoctorCode.BackColor = System.Drawing.Color.White
-            Me.txtDoctorCode.BegFindValue = Nothing
-            Me.txtDoctorCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtDoctorCode.ComputedValue = False
-            Me.txtDoctorCode.CustomFormat = Nothing
-            Me.txtDoctorCode.DataBoundControl = True
-            Me.txtDoctorCode.EditingMode = True
-            Me.txtDoctorCode.EndFindValue = Nothing
-            Me.txtDoctorCode.FieldDescription = Nothing
-            Me.txtDoctorCode.FieldName = Nothing
-            Me.txtDoctorCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtDoctorCode.FindEnabled = False
-            Me.txtDoctorCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtDoctorCode.ForeColor = System.Drawing.Color.Black
-            Me.txtDoctorCode.LinkedLabel = Nothing
-            Me.txtDoctorCode.Location = New System.Drawing.Point(693, 89)
-            Me.txtDoctorCode.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtDoctorCode.MaximumValue = Nothing
-            Me.txtDoctorCode.MinimumValue = Nothing
-            Me.txtDoctorCode.Name = "txtDoctorCode"
-            Me.txtDoctorCode.OldValue = Nothing
-            Me.txtDoctorCode.OverrideMaxLength = 0
-            Me.txtDoctorCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtDoctorCode.Size = New System.Drawing.Size(80, 23)
-            Me.txtDoctorCode.TabIndex = 16
-            Me.txtDoctorCode.Translatable = False
-            Me.txtDoctorCode.Visible = False
+            Me.CDgvTextColumn1.Width = 98
             '
             'InvRequestForm
             '
@@ -899,8 +902,8 @@
             Me.TableLayoutPanel1.ResumeLayout(False)
             Me.TableLayoutPanel1.PerformLayout()
             CType(Me.DataGridViewInvTransactionRequests, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.bsInvTransactionRequest, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.DataGridViewInvTransItems, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.bsInvTransactionRequest, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.bsInvTranItems, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
             Me.PerformLayout()
@@ -947,20 +950,20 @@
         Friend WithEvents dgvAmount As Libraries.CBaseControlsLibrary.CdgvMoneyColumn
         Friend WithEvents dgvUserIdNo As Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn
         Friend WithEvents dgvNotes As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents CButton1 As Libraries.CBaseControlsLibrary.CButton
+        Friend WithEvents btnSupplyQuantity As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents dgvSequence As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvProductCode As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvProductName As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvQuantity As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents dgvUnitName As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvQtyOnHand As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
         Friend WithEvents dgvQtySupplied As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
         Friend WithEvents dgvQtyApproved As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
-        Friend WithEvents dgvUnitName As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvUnitCost As Libraries.CBaseControlsLibrary.CdgvMoneyColumn
         Friend WithEvents dgvUnitIdNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvNetAmount As Libraries.CBaseControlsLibrary.CdgvMoneyColumn
         Friend WithEvents dgvProductIdNo As DataGridViewTextBoxColumn
         Friend WithEvents CDgvTextColumn1 As Libraries.CBaseControlsLibrary.CDgvTextColumn
-        Friend WithEvents CButton1 As Libraries.CBaseControlsLibrary.CButton
-        Friend WithEvents btnSupplyQuantity As Libraries.CBaseControlsLibrary.CButton
     End Class
 End Namespace

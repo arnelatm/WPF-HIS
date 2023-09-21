@@ -8,7 +8,6 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Common
 Imports AATM.Common.PresentationLayer.Presenters
-Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries
 Imports AATM.Libraries.CrystalReportsHelper.CrystalReportPrinter
 Imports AATM.Libraries.GlobalFuncNSub
@@ -142,8 +141,9 @@ Namespace PresentationLayer.Presenters
                     Next
                 End If
                 If retValue Then
-                    If View.InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
-                        If View.WarehouseToIdNo Is Nothing OrElse View.WarehouseToIdNo = 0 Then
+                    If View.InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Or
+                        View.InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
+                        If View.WarehouseToIdNo Is Nothing OrElse View.WarehouseToIdNo = 0 OrElse View.WarehouseIdNo = 0 Then
                             retValue = False
                             Messaging.Show(True, "MsgWareHouseToBlank")
                         ElseIf View.WarehouseIdNo = View.WarehouseToIdNo Then
@@ -153,18 +153,27 @@ Namespace PresentationLayer.Presenters
                     End If
                 End If
                 If retValue Then
-                    ' don't allow duplicate values for productIdNo this is to make it easy to check for
-                    ' inventory e.g. if we will not do this, it will be more complicated to check for
-                    ' quantity available on hand say if 2 entries, to check for available quantity we need
-                    ' to sum first all records with the same code then check for available quantity.
+                    If View.InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
 
-                    ' look for duplicate PayElementIdNo in bsEarning
-                    Dim duplicate = FirstFieldDuplicate(Of InvTransactionDetailView, Int16)(View.InvTransactionDetails, "ProductIdNo")
-                    If duplicate IsNot Nothing Then
-                        MessageBox.Show("Duplicate product code found in Inventory Transaction Details. See line <" + (duplicate + 1).ToString() + ">.")
-                        retValue = False
+
+                        ' don't allow duplicate values for productIdNo this is to make it easy to check for
+                        ' inventory e.g. if we will not do this, it will be more complicated to check for
+                        ' quantity available on hand say if 2 entries, to check for available quantity we need
+                        ' to sum first all records with the same code then check for available quantity.
+                        ' also might be misleading when showing quantity on hand if multiple items are entered
+                        ' since the quantity on hand will appear to be more since quantity on hand will be stated multiple
+                        ' times for same product
+
+                        ' look for duplicate PayElementIdNo in bsEarning
+                        Dim duplicate = FirstFieldDuplicate(Of InvTransactionDetailView, Int16)(View.InvTransactionDetails, "ProductIdNo")
+                        If duplicate IsNot Nothing Then
+                            MessageBox.Show("Duplicate product code found in Inventory Transaction Details. See line <" + (duplicate + 1).ToString() + ">.")
+                            retValue = False
+                        End If
                     End If
                 End If
+            Else
+                retValue = False
             End If
             Return retValue
         End Function
@@ -734,7 +743,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub OnInvTransactionTypeChanged(invTransType As Int16)
             Dim appSettingGroupIdNo As Int16 = AppSettingGroupSelector.UserDefaultWarehouse + 1
-            View.InventoryAction = Service.GetField(View.InvTransTypeIdNo, "InvTransType", "IdNo", "InventoryAction")
+            View.InventoryAction = Service.GetField(invTransType, "InvTransType", "IdNo", "InventoryAction")
             If View.InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Or
                View.InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
                 View.WarehouseToIdNoEnabled = True

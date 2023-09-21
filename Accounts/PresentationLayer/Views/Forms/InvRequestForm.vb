@@ -13,7 +13,7 @@ Namespace PresentationLayer.Views.Forms
         Public Event RowChanged(productIdNo As Int32) Implements IInvRequestView.RowChanged
         Public Event FormLoaded() Implements IInvRequestView.FormLoaded
         Public Event TransferRequestClicked(invTransIdNo As Int32) Implements IInvRequestView.TransferRequestClicked
-        Public Event SupplyQuantityClicked() Implements IInvRequestView.SupplyQuantityClicked
+        Public Event SupplyQuantityClicked(invTransIdNo As Int32) Implements IInvRequestView.SupplyQuantityClicked
         Public Property WarehouseList As DataTable Implements IInvRequestView.WarehouseList
         Public Property UserList As DataTable Implements IInvRequestView.UserList
         Public Property UnitList As DataTable Implements IInvRequestView.UnitList
@@ -177,9 +177,18 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub btnSupplyQuantity_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnSupplyQuantity.ClickButtonArea
-            RaiseEvent SupplyQuantityClicked()
+            Dim dgvRow As DataGridViewRow = DataGridViewInvTransactionRequests.CurrentRow
+            Dim invTranIdNo As Int32 = dgvRow.Cells("dgvIdNo").Value
+            RaiseEvent SupplyQuantityClicked(invTranIdNo)
             bsInvTranItems.ResetBindings(False)
         End Sub
+
+
+        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewInvTransItems.CellEndEdit
+            ProcessCellEndEdit(sender, bsInvTranItems)
+            'UpdateTotals()
+        End Sub
+
     End Class
 
 End Namespace

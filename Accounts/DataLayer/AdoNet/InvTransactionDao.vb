@@ -340,7 +340,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String = "SELECT WarehouseCode, WarehouseName from Warehouse where WarehouseIdNo = '" + warehouseIdNo.ToString() + "'"
             Dim data As New InvRequest
             Dim params() As Object = {"@WarehouseIdNo", warehouseIdNo, "@BranchIdNo", GlobalVariables.BranchIdNo}
-            sql = $"SELECT IdNo,ReferenceNo,TransactionDate,WarehouseIdNo,WarehouseToIdNo,Amount,Notes,Posted,Cancelled,DateCreated,UserIdNo,InvTransTypeIdNo from InvTransaction where WarehouseIdNo = @WarehouseIdNo and InvTransTypeIdNo = 15 and BranchIdNo = @BranchIdNo"
+            sql = $"SELECT IdNo,ReferenceNo,TransactionDate,WarehouseIdNo,WarehouseToIdNo,Amount,Notes,Posted,Cancelled,DateCreated,UserIdNo,InvTransTypeIdNo from InvTransaction where WarehouseIdNo = @WarehouseIdNo and InvTransTypeIdNo = 15 and BranchIdNo = @BranchIdNo and Posted = 0"
             _db.SetConnectionString("ISPDATA")
             data.InvTransactionRequests = _db.Read(sql, MakeInvTransRequests, params).ToList()
             Return data
