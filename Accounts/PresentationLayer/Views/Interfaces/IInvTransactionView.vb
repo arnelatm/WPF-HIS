@@ -64,7 +64,7 @@ Namespace PresentationLayer.Views.Interfaces
         Event WarehouseIdNoChanged()
         Event RowChanged(productIdNo As Integer)
         Event FormLoaded()
-        Event SupplyQuantityClicked()
+        Event SupplyQuantityClicked(invTransIdNo As Integer)
         Event TransferRequestClicked(invTransIdNo As Integer)
     End Interface
 

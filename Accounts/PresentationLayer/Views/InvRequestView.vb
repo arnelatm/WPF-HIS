@@ -1,5 +1,4 @@
-﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views
@@ -19,8 +18,9 @@ Namespace PresentationLayer.Views
         Public Event WarehouseIdNoChanged() Implements IInvRequestView.WarehouseIdNoChanged
         Public Event RowChanged(productIdNo As Integer) Implements IInvRequestView.RowChanged
         Public Event FormLoaded() Implements IInvRequestView.FormLoaded
-        Public Event SupplyQuantityClicked() Implements IInvRequestView.SupplyQuantityClicked
+        Public Event SupplyQuantityClicked(invTransIdNo As Integer) Implements IInvRequestView.SupplyQuantityClicked
         Public Event TransferRequestClicked(invTransIdNo As Integer) Implements IInvRequestView.TransferRequestClicked
+
     End Class
 
     'Public Class InvRequestListView

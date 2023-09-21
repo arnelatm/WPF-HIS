@@ -1,0 +1,13 @@
+
+If Not dataManager Is Nothing Then
+                    Dim bindingField As String =  valueMember.BindingField 
+                    If String.IsNullOrEmpty(bindingField) Then
+                        Throw New InvalidOperationException(SR.GetString("ListControlEmptyValueMemberInSettingSelectedValue"))
+                    End If
+ 
+                    Dim itemProperties As PropertyDescriptorCollection =  dataManager.GetItemProperties() 
+                    Dim property As PropertyDescriptor =  itemProperties.Find(bindingField,ignoreCase: True) 
+
+                    Dim num2 As Integer = (SelectedIndex  =  dataManager.Find(property,value,keepIndex: True)) 
+
+End If
