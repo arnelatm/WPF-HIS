@@ -1198,11 +1198,9 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemPurchase_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPurchase.Click
-            Dim formToRun = New PurchaseEntry(False)
-            formToRun.Presenter = New PurchasePresenter(Of PurchaseModel)(formToRun, False)
+            Dim formToRun = New PurchaseEntry(False, False)
+            formToRun.Presenter = New PurchasePresenter(Of PurchaseModel)(formToRun, {False, False})
             formToRun.Show()
-
-            'RunForm(Of PurchaseEntry, PurchasePresenter(Of PurchaseModel), Object)({False})
         End Sub
 
         Private Sub ToolStripMenuItemSalesEntry_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemSalesEntry.Click
@@ -1266,8 +1264,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemPurchaseOrder_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPurchaseOrder.Click
-            Dim formToRun = New PurchaseEntry(True)
-            formToRun.Presenter = New PurchasePresenter(Of PurchaseModel)(formToRun, True)
+            Dim formToRun = New PurchaseEntry(True, False)
+            formToRun.Presenter = New PurchasePresenter(Of PurchaseModel)(formToRun, {True, False})
             formToRun.Show()
             'RunForm(Of PurchaseOrderEntry, PurchaseOrderPresenter(Of PurchaseOrderModel))()
         End Sub
@@ -1278,6 +1276,12 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ToolStripMenuItemProductMovement_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemProductMovement.Click
             RunReportNew(Of ProductMovementReport)()
+        End Sub
+
+        Private Sub ToolStripMenuItemPurchaseReturn_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPurchaseReturn.Click
+            Dim formToRun = New PurchaseEntry(False, True)
+            formToRun.Presenter = New PurchasePresenter(Of PurchaseModel)(formToRun, {False, True})
+            formToRun.Show()
         End Sub
     End Class
 

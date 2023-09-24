@@ -17,6 +17,7 @@ Namespace PresentationLayer.Views.Forms
         Private _purchaseDetails As List(Of PurchaseDetailView)
         Private _purchaseHistory As List(Of PurchaseHistoryView)
         Private _noOfUnits As Int16
+        Private _purchaseReturn As Boolean
 
         Public Event ProductCodeChanged(productCode As String, bs As BindingSource) Implements IPurchaseView.ProductCodeChanged
         Public Event ProductUnitSelection(productIdNo As Int32, bs As BindingSource) Implements IPurchaseView.ProductUnitSelection
@@ -46,11 +47,12 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
-        Public Sub New(PurOrder As Boolean)
+        Public Sub New(PurOrder As Boolean, PurReturn As Boolean)
             MyBase.New()
             ' This call is required by the designer.
             InitializeComponent()
             PurchaseOrder = PurOrder
+            _purchaseReturn = PurReturn
             FirstControl = cboSupplierIdNo
             ' Add any initialization after the InitializeComponent() call.
             _nfi.NumberDecimalDigits = 2

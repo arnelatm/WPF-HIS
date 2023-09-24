@@ -217,6 +217,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemInventoryReport = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemProductExpiryReport = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemRequestApproval = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemProductMovement = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemUtilities = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemUpdateMenuSecurityObjects = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemRecreateSecurityObjectMenu = New System.Windows.Forms.ToolStripMenuItem()
@@ -249,7 +250,6 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemProductMovement = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -1242,6 +1242,11 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemRequestApproval.Name = "ToolStripMenuItemRequestApproval"
             resources.ApplyResources(Me.ToolStripMenuItemRequestApproval, "ToolStripMenuItemRequestApproval")
             '
+            'ToolStripMenuItemProductMovement
+            '
+            Me.ToolStripMenuItemProductMovement.Name = "ToolStripMenuItemProductMovement"
+            resources.ApplyResources(Me.ToolStripMenuItemProductMovement, "ToolStripMenuItemProductMovement")
+            '
             'ToolStripMenuItemUtilities
             '
             Me.ToolStripMenuItemUtilities.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemUpdateMenuSecurityObjects, Me.ToolStripMenuItemRecreateSecurityObjectMenu, Me.ToolStripMenuItemTransactionNotesTranslator, Me.ToolStripMenuItemSimplePasswordGenerator, Me.ToolStripMenuItemTestForm})
@@ -1409,11 +1414,6 @@ Namespace PresentationLayer.Views.Forms
             '
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
-            '
-            'ToolStripMenuItemProductMovement
-            '
-            Me.ToolStripMenuItemProductMovement.Name = "ToolStripMenuItemProductMovement"
-            resources.ApplyResources(Me.ToolStripMenuItemProductMovement, "ToolStripMenuItemProductMovement")
             '
             'MainForm
             '
