@@ -25,14 +25,16 @@ Namespace PresentationLayer.Presenters
         Private _purchaseHistoryService
         Private _purchaseItemService
         Protected PurchaseOrder As Boolean
+        Protected PurchaseReturn As Boolean
 
         'Private ReadOnly _productService As New AccountsService("Product")
         'Private ReadOnly _purchaseHistoryService As New AccountsService("PurchaseHistory")
         'Protected PurchaseOrder As Boolean
 
-        Public Sub New(view As IPurchaseView, ByVal pPurchaseOrder As Boolean)
+        Public Sub New(view As IPurchaseView, ByVal param As Object())
             MyBase.New(view)
-            PurchaseOrder = pPurchaseOrder
+            PurchaseOrder = param(0)
+            PurchaseReturn = param(1)
             DataFilter = "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString()
             If PurchaseOrder Then
                 TableName = "PurchaseOrder"
@@ -41,10 +43,10 @@ Namespace PresentationLayer.Presenters
             End If
             _productService = New AccountsService("Product")
             _purchaseHistoryService = New AccountsService("PurchaseHistory")
-            _purchaseItemService = New AccountsService("PurchaseDetail", {PurchaseOrder}, {PurchaseOrder})
+            _purchaseItemService = New AccountsService("PurchaseDetail", Nothing, {PurchaseOrder, PurchaseReturn})
             WithTreeView = False
             SortOrderKey = "IdNo"
-            Service = New AccountsService("Purchase", {PurchaseOrder}, {PurchaseOrder})
+            Service = New AccountsService("Purchase", {PurchaseOrder, PurchaseReturn}, {PurchaseOrder, PurchaseReturn})
 
             If PurchaseOrder Then
                 DtInsertTable.Columns.Add("BonusQuantity", GetType(Int16))

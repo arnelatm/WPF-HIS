@@ -15,12 +15,18 @@ Namespace DataLayer.AdoNet
 
         Private _tableName As String
         Private _purchaseOrder As Boolean
+        Private _purchaseReturn As Boolean
         Private _fieldList As String
         Protected DboTvpUpdateName As String = ""
         Protected DboTvpInsertName As String = ""
 
+        Public Sub New()
+
+        End Sub
+
         Public Sub New(parameter As Object)
             _purchaseOrder = parameter(0)
+            _purchaseReturn = parameter(1)
             If _purchaseOrder Then
                 _tableName = "PurchaseOrder"
                 _fieldList = "AmtBefVat,BaseUnitIdNo,BonusQuantity,CategoryIdNo,DiscountAmount,DiscountPercent,GrossAmount," &

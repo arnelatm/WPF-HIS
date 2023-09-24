@@ -18,22 +18,36 @@ Namespace DataLayer.AdoNet
         ' ReSharper disable once InconsistentNaming
         Private ReadOnly Db As New Db()
         Private ReadOnly _purchaseOrder As Boolean
+        Private ReadOnly _purchaseReturn As Boolean
 
-        Public Sub New(parameter As Object)
-            _purchaseOrder = parameter(0)
+        Public Sub New()
+
+        End Sub
+
+        Public Sub New(ParamArray parameter As Object())
+            _purchaseOrder = parameter(0)(0)
+            _purchaseReturn = parameter(0)(1)
             If _purchaseOrder Then
                 _tableName = "PurchaseOrder"
                 _fieldList = "Amount,Approved,Cancelled,DateCreated,Disapproved,IdNo,TransactionDate,ReferenceNo,SupplierIdNo,TransactionDate,UserIdNo,VatAmount,VatNumber,WarehouseIdNo"
             Else
                 _tableName = "Purchase"
-                _fieldList = "Amount,Cancelled,DateCreated,DueDate,IdNo,InvoiceDate,InvoiceNo,Posted,ReferenceNo,SupplierIdNo,TransactionDate,UserIdNo,VatAmount,VatNumber,WarehouseIdNo"
+                _fieldList = "Amount,Cancelled,DateCreated,DueDate,IdNo,InvoiceDate,InvoiceNo,Posted,PurchaseReturn,ReferenceNo,SupplierIdNo,TransactionDate,UserIdNo,VatAmount,VatNumber,WarehouseIdNo"
             End If
         End Sub
 
         Public Function GetRecordByIdNo(idNo) As Purchase _
         Implements IDao(Of Purchase).GetRecordByIdNo
-            Dim sql As String = " SELECT " & _fieldList & " FROM " & _tableName & " WHERE IdNo = @IdNo And BranchIdNo = @BranchIdNo"
+            Dim sql As String
             Dim params() As Object = {"@IdNo", idNo, "@BranchIdNo", GlobalVariables.BranchIdNo}
+            If _purchaseOrder Then
+                sql = " SELECT " & _fieldList & " FROM " & _tableName & " WHERE IdNo = @IdNo And BranchIdNo = @BranchIdNo"
+                params = {"@IdNo", idNo, "@BranchIdNo", GlobalVariables.BranchIdNo}
+            Else
+                sql = " SELECT " & _fieldList & " FROM " & _tableName & " WHERE IdNo = @IdNo And BranchIdNo = @BranchIdNo And PurchaseReturn = @PurchaseReturn"
+                params = {"@IdNo", idNo, "@BranchIdNo", GlobalVariables.BranchIdNo, "@PurchaseReturn", _purchaseReturn}
+            End If
+
             Dim data
             If _purchaseOrder Then
                 data = Db.Read(sql, MakePo, params).FirstOrDefault()
@@ -43,9 +57,13 @@ Namespace DataLayer.AdoNet
             If data IsNot Nothing Then
                 Dim purchaseDetailDao
                 If _purchaseOrder Then
-                    purchaseDetailDao = New PurchaseDetailDao({True, "UpdatePurchaseOrderDetailTVP", "InsertPurchaseOrderDetailTVP"})
+                    purchaseDetailDao = New PurchaseDetailDao({True, False}) ' "UpdatePurchaseOrderDetailTVP", "InsertPurchaseOrderDetailTVP"})
                 Else
-                    purchaseDetailDao = New PurchaseDetailDao({False, "UpdatePurchaseDetailTVP", "InsertPurchaseDetailTVP"})
+                    If _purchaseReturn Then
+                        purchaseDetailDao = New PurchaseDetailDao({False, True})
+                    Else
+                        purchaseDetailDao = New PurchaseDetailDao({False, False})
+                    End If
                 End If
                 data.PurchaseDetails = purchaseDetailDao.GetRecordsWithGroupIdNo(idNo, "sequence")
                 If data.PurchaseDetails.Count() > 0 Then
@@ -114,22 +132,25 @@ Namespace DataLayer.AdoNet
                 Return Db.Insert(sql, TakePo(Purchase))
             Else
                 sql = "INSERT INTO [Purchase] " &
-                    " (Amount,BranchIdNo,Cancelled,DueDate,InvoiceDate,InvoiceNo,Posted,ReferenceNo,SupplierIdNo,TransactionDate,UserIdNo,VatAmount,VatNumber,WarehouseIdNo)" &
-                    " VALUES (@Amount,@BranchIdNo,@Cancelled,@DueDate,@InvoiceDate,@InvoiceNo,@Posted,@ReferenceNo,@SupplierIdNo,@TransactionDate,@UseridNo,@VatAmount,@VatNumber,@WarehouseIdNo)"
+                    " (Amount,BranchIdNo,Cancelled,DueDate,InvoiceDate,InvoiceNo,Posted,PurchaseReturn,ReferenceNo,SupplierIdNo,TransactionDate,UserIdNo,VatAmount,VatNumber,WarehouseIdNo)" &
+                    " VALUES (@Amount,@BranchIdNo,@Cancelled,@DueDate,@InvoiceDate,@InvoiceNo,@Posted,@PurchaseReturn,@ReferenceNo,@SupplierIdNo,@TransactionDate,@UseridNo,@VatAmount,@VatNumber,@WarehouseIdNo)"
                 Return Db.Insert(sql, Take(Purchase))
             End If
 
         End Function
 
+        Private mkParam As Object = {{_purchaseOrder, _purchaseReturn}}
+
         Private ReadOnly Make As Func(Of IDataReader, Purchase) =
                                     Function(reader) _
-            New Purchase({_purchaseOrder}) With {.Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
+            New Purchase(mkParam) With {.Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
                                   .Cancelled = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cancelled")),
                                   .DueDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("DueDate")),
                                   .IdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("IdNo")),
                                   .InvoiceDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("InvoiceDate")),
                                   .InvoiceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("InvoiceNo")),
                                   .Posted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Posted")),
+                                  .PurchaseReturn = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("PurchaseReturn")),
                                   .ReferenceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ReferenceNo")),
                                   .SupplierIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("SupplierIdNo")),
                                   .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),
@@ -166,6 +187,7 @@ Namespace DataLayer.AdoNet
                                     "InvoiceDate", Purchase.InvoiceDate,
                                     "InvoiceNo", Purchase.InvoiceNo,
                                     "Posted", Purchase.Posted,
+                                    "PurchaseReturn", _purchaseReturn,
                                     "ReferenceNo", Purchase.ReferenceNo,
                                     "SupplierIdNo", Purchase.SupplierIdNo,
                                     "TransactionDate", Purchase.TransactionDate,
@@ -230,7 +252,7 @@ Namespace DataLayer.AdoNet
                                           "@Value", 0,
                                           "@MaxLength", maxlength,
                                           "@Prefix", "",
-                                          "@Description", IIf(_purchaseOrder, "Purchase Order Series", "Purchase Series")
+                                          "@Description", IIf(_purchaseOrder, "Purchase Order Series", IIf(_purchaseReturn, "Purchase Return Series", "Purchase Series"))
                                          }
                 retVal = Db.Insert(sql, params)
                 If retVal < 0 Then
