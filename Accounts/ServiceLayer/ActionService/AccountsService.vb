@@ -332,6 +332,10 @@ Namespace ServiceLayer.ActionService
             Return DataDao.GetLastPurchaseCost(productIdNo)
         End Function
 
+        Public Function GetLastPurchaseData(ByVal productIdNo As Integer) Implements IServiceAccounts.GetLastPurchaseData
+            Return DataDao.GetLastPurchaseData(productIdNo)
+        End Function
+
         Public Function PerformUtility(ByVal utilityName As String) Implements IServiceAccounts.PerformUtility
             Return DataDao.PerformUtility(utilityName)
         End Function

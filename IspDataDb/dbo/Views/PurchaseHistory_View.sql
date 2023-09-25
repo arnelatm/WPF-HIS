@@ -10,10 +10,11 @@
 
 
 
+
 CREATE VIEW [dbo].[PurchaseHistory_View]
 AS
 SELECT        dbo.PurchaseDetail.IdNo, dbo.PurchaseDetail.PurchaseIdNo,dbo.Purchase.TransactionDate, dbo.PurchaseDetail.ProductIdNo, dbo.PurchaseDetail.Quantity, dbo.PurchaseDetail.BonusQuantity, dbo.PurchaseDetail.ExpiryDate, dbo.PurchaseDetail.BatchNo,
-                         dbo.PurchaseDetail.UnitSalesPrice, dbo.Unit.UnitName, dbo.Unit.UnitNameAra, 
+                         dbo.PurchaseDetail.UnitSalesPrice, dbo.PurchaseDetail.UnitIdNo, dbo.Unit.UnitName, dbo.Unit.UnitNameAra, dbo.Purchase.PurchaseReturn,
 						 IIf((dbo.PurchaseDetail.Quantity + dbo.PurchaseDetail.BonusQuantity) = 0,0,((dbo.PurchaseDetail.Quantity * dbo.PurchaseDetail.Price - dbo.PurchaseDetail.DiscountAmount) / (dbo.PurchaseDetail.Quantity + dbo.PurchaseDetail.BonusQuantity))) as 'UnitCost',
 						 dbo.Supplier.SupplierName,dbo.Supplier.SupplierCode,dbo.Supplier.SupplierNameAra
 FROM            dbo.PurchaseDetail 

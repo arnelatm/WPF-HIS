@@ -37,6 +37,11 @@ Namespace DataLayer.AdoNet
             Return _db.RunSqlStoredProcedure("spGetLastPurchaseCost", {"@ProductIdNo", productidNo})
         End Function
 
+        Public Function GetLastPurchaseData(productidNo As Int32) As Object Implements IAccountsDao.GetLastPurchaseData
+            Return GetRecordFieldsFiltered("PurchaseHistory_View", "UnitCost,BatchNo,ExpiryDate", "ProductIdNo = @ProductIdNo and PurchaseReturn = 0", {"@ProductIdNo", productidNo}, "TransactionDate Desc")
+        End Function
+
+
     End Class
 
 End Namespace

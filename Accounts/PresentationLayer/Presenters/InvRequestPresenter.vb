@@ -66,7 +66,7 @@ Namespace PresentationLayer.Presenters
                                         "@BranchIdNo", GlobalVariables.BranchIdNo,
                                         "@Cancelled", False,
                                         "@InvTransTypeIdNo", 1,
-                                        "@Notes", "Inventory Request No. " & invTransaction.IdNo.ToString() & " Approved by " & GlobalVariables.UserName,
+                                        "@Notes", "Request #" & invTransaction.IdNo.ToString() & " Appr. by " & GlobalVariables.UserName,
                                         "@Posted", True,
                                         "@ReferenceNo", invTransaction.ReferenceNo,
                                         "@TransactionDate", Today(),

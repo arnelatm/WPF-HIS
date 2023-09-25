@@ -162,7 +162,7 @@ Namespace DataLayer.AdoNet
 
         Private ReadOnly MakePo As Func(Of IDataReader, Purchase) =
                                     Function(reader) _
-            New Purchase({_purchaseOrder}) With {.Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
+            New Purchase({{_purchaseOrder, _purchaseReturn}}) With {.Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
                                   .Approved = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Approved")),
                                   .Cancelled = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cancelled")),
                                   .Disapproved = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Disapproved")),

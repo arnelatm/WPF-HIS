@@ -26,7 +26,7 @@ Namespace PresentationLayer.Views.Forms
         Public Event PostData(idNo As Int32) Implements IPurchaseView.PostData
         Public Event ProductCodeValidating(productCode As String, control As Control) Implements IPurchaseView.ProductCodeValidating
         Public Event ProductNameValidating(productName As String, control As Control) Implements IPurchaseView.ProductNameValidating
-
+        Public Event FilterRecords() Implements IPurchaseView.FilterRecords
         Public Property NumberOfUnits As Int16 Implements IPurchaseView.NumberOfUnits
         Public Property ProductCodeIsValid As Boolean Implements IPurchaseView.ProductCodeIsValid
         Public Property ProductNameIsValid As Boolean Implements IPurchaseView.ProductNameIsValid
@@ -57,6 +57,7 @@ Namespace PresentationLayer.Views.Forms
             ' Add any initialization after the InitializeComponent() call.
             _nfi.NumberDecimalDigits = 2
         End Sub
+
 
 
 #Region "Fields"
@@ -352,9 +353,14 @@ Namespace PresentationLayer.Views.Forms
                 dgvBatchNo.Visible = True
                 dgvExpiryDate.Visible = True
                 dgvUnitCost.Visible = True
-                Text = "Purchase Entry"
+                If _purchaseReturn Then
+                    Text = "Purchase Return Entry"
+                Else
+                    Text = "Purchase Entry"
+                End If
                 btnPost.Visible = True
             End If
+
         End Sub
 
         Public Property PurchaseDetailsBs As BindingSource Implements IPurchaseView.PurchaseDetailsBs
@@ -549,11 +555,11 @@ Namespace PresentationLayer.Views.Forms
                 If cColumnName = "dgvUnitIdNo" Then
                     Dim comboBox = TryCast(e.Control, DataGridViewComboBoxEditingControl)
                     'Dim comboBox = TryCast(e.Control, CDgvComboBoxEditingControl)
-                    If ComboBox IsNot Nothing Then
+                    If comboBox IsNot Nothing Then
                         RaiseEvent ProductUnitSelection(DataGridViewPurchaseDetails.CurrentRow.Cells("dgvProductIdNo").Value, bsPurchaseDetails)
-                        ComboBox.DropDownStyle = ComboBoxStyle.DropDown
-                        ComboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend
-                        ComboBox.DataSource = UnitsByProduct
+                        comboBox.DropDownStyle = ComboBoxStyle.DropDown
+                        comboBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+                        comboBox.DataSource = UnitsByProduct
                     End If
                 ElseIf cColumnName = "dgvExpiryDate" Then
                     'Display the date in the editing format.
@@ -685,6 +691,10 @@ Namespace PresentationLayer.Views.Forms
             Presenter.UpdateDueDate()
             Presenter.UpdateEarlySettlementValues()
             Presenter.UpdateSupplierDate()
+        End Sub
+
+        Private Sub OnFormLoad() Handles MyBase.Load
+            RaiseEvent FilterRecords()
         End Sub
 
 

@@ -42,6 +42,7 @@ Namespace PresentationLayer.Views.Interfaces
         Event PostData(idNo As Int32)
         Event ProductCodeValidating(productCode As String, control As Control)
         Event ProductNameValidating(productName As String, control As Control)
+        Event FilterRecords()
         'Event ProductNameChanged(productName As String, bs As BindingSource)
     End Interface
 

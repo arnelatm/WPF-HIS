@@ -35,10 +35,12 @@ Namespace PresentationLayer.Presenters
             MyBase.New(view)
             PurchaseOrder = param(0)
             PurchaseReturn = param(1)
-            DataFilter = "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString()
+
             If PurchaseOrder Then
                 TableName = "PurchaseOrder"
+                DataFilter = "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString()
             Else
+                DataFilter = "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString() & " and PurchaseReturn = " & IIf(PurchaseReturn, "1", "0")
                 TableName = "Purchase"
             End If
             _productService = New AccountsService("Product")
@@ -113,6 +115,12 @@ Namespace PresentationLayer.Presenters
             AddHandler view.ProductNameValidating, AddressOf OnProductNameValidating
             AddHandler view.PostData, AddressOf OnPostData
             AddHandler view.RowChanged, AddressOf OnRowChanged
+        End Sub
+
+
+        Public Sub FilterRecords()
+            ' force move to last record to force the retrieval of filtered records
+            GoLastRecord()
         End Sub
 
 
@@ -339,6 +347,7 @@ Namespace PresentationLayer.Presenters
                     .Quantity = 1
                     .UnitCost = Service.GetLastPurchaseCost(product.IdNo)
                     .NetAmount = .Price * .Quantity
+                    .NeedsExpiryDate = Service.GetField(Of Boolean, Integer)(product.IdNo, "Product_View", "IdNo", "NeedsExpiryDate")
                 End With
             End If
         End Sub
@@ -370,6 +379,7 @@ Namespace PresentationLayer.Presenters
                                 .Quantity = 1
                                 .UnitCost = Service.GetLastPurchaseCost(product.IdNo)
                                 .NetAmount = .Price * .Quantity
+                                .NeedsExpiryDate = Service.GetField(Of Boolean, Integer)(product.IdNo, "Product_View", "IdNo", "NeedsExpiryDate")
                             End With
                             View.PurchaseDetailsBs.ResetBindings(False)
                         End If

@@ -31,6 +31,7 @@ Namespace PresentationLayer.Views.Forms
             _nfi.NumberDecimalDigits = 2
             _payorOrigWidth = cboPayorIdNo.Width
             cboPayorIdNo.EditingMode = False
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         End Sub
 
         'Private Sub JournalItemBs_AddingNew(ByVal sender As Object, ByVal e As AddingNewEventArgs) Handles bsJournalItems.AddingNew
@@ -461,14 +462,16 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub UpdateOpenInvoicesDisplay()
             If OpenInvoiceMode Then
-                If Presenter.AddMode Or cboPayorIdNo.ValueChanged() Then
-                    CsrOiItems.Clear()
+                If CsrOiItems IsNot Nothing Then
+                    If Presenter.AddMode Or cboPayorIdNo.ValueChanged() Then
+                        CsrOiItems.Clear()
+                    End If
+                    bsCsrOiItems.DataSource = Presenter.GetCustomerOpenInvoices(CsrOiItems)
+                    bsCsrOiItems.ResetBindings(True)
+                    UpdateOiTotals()
+                    'UpdateVatNumber()
+                    cboPayorIdNo.DisplayMember = "Name"
                 End If
-                bsCsrOiItems.DataSource = Presenter.GetCustomerOpenInvoices(CsrOiItems)
-                bsCsrOiItems.ResetBindings(True)
-                UpdateOiTotals()
-                'UpdateVatNumber()
-                cboPayorIdNo.DisplayMember = "Name"
             End If
         End Sub
 

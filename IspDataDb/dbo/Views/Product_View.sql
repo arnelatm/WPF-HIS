@@ -1,13 +1,17 @@
 ﻿
+
 CREATE VIEW [dbo].[Product_View]
 AS
 SELECT        dbo.Product.IdNo, dbo.Product.CategoryIdNo, dbo.Product.ProductCode, dbo.Product.ProductName, dbo.Product.ProductNameAra, dbo.Product.Barcode, dbo.Product.GTIN, dbo.Product.BaseUnitIdNo, dbo.Product.Active, 
                          dbo.Product.DateCreated, dbo.Product.DateTimeStamp, dbo.Product.UserIdNo, dbo.Category.CategoryName AS CategoryName, dbo.Unit.UnitCode, dbo.Unit.UnitName, dbo.Unit.UnitNameAra, dbo.Product.BranchIdNo AS BranchIdNo, 
-                         dbo.[User].UserName
-FROM            dbo.Product LEFT OUTER JOIN
-                         dbo.Category ON dbo.Product.BranchIdNo = dbo.Category.BranchIdNo AND dbo.Product.CategoryIdNo = dbo.Category.IdNo LEFT OUTER JOIN
-                         dbo.Unit ON dbo.Product.BaseUnitIdNo = dbo.Unit.IdNo LEFT OUTER JOIN
-                         dbo.[User] ON dbo.Product.UserIdNo = dbo.[User].IdNo
+                         dbo.[User].UserName, dbo.Category.NeedsExpiryDate
+FROM            dbo.Product 
+				LEFT OUTER JOIN dbo.Category 
+				ON dbo.Product.BranchIdNo = dbo.Category.BranchIdNo AND dbo.Product.CategoryIdNo = dbo.Category.IdNo 
+				LEFT OUTER JOIN dbo.Unit 
+				ON dbo.Product.BaseUnitIdNo = dbo.Unit.IdNo 
+				LEFT OUTER JOIN dbo.[User] 
+				ON dbo.Product.UserIdNo = dbo.[User].IdNo
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'Product_View';
 

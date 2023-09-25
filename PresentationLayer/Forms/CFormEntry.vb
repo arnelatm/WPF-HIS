@@ -98,9 +98,10 @@ Public Class CFormEntry
         '        dgv.MakeGridSearchable()
         '    End If
         'Next
-        Parent.ResumeDrawing()
         FormShown = True
         PublishClickedButton(ButtonClicked.Last)
+        SetFormTitleCaption()
+        Parent.ResumeDrawing()
     End Sub
 
     'Public Property RecordCount As Integer Implements IViewDataEntry.RecordCount
@@ -669,9 +670,9 @@ Public Class CFormEntry
         End If
     End Sub
 
-    Private Sub OnBeforeLoad() Handles MyBase.BeforeLoad
-        SetFormTitleCaption()
-    End Sub
+    'Private Sub OnBeforeLoad() Handles MyBase.BeforeLoad
+    '    SetFormTitleCaption()
+    'End Sub
 
     Private Sub PasteToolStripButton_Click(sender As Object, e As EventArgs) Handles PasteToolStripButton.Click
         PasteText()
