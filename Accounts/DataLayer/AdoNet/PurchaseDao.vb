@@ -139,11 +139,11 @@ Namespace DataLayer.AdoNet
 
         End Function
 
-        Private mkParam As Object = {{_purchaseOrder, _purchaseReturn}}
+        'Private mkParam As Object = {{_purchaseOrder, _purchaseReturn}}
 
         Private ReadOnly Make As Func(Of IDataReader, Purchase) =
                                     Function(reader) _
-            New Purchase(mkParam) With {.Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
+            New Purchase({{_purchaseOrder, _purchaseReturn}}) With {.Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
                                   .Cancelled = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cancelled")),
                                   .DueDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("DueDate")),
                                   .IdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("IdNo")),
