@@ -610,6 +610,10 @@ Namespace Services
             Return DataDao.GetRecordFieldsFiltered(tableName, fieldList, filter)
         End Function
 
+        Public Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String, parameter As Object) As ExpandoObject Implements IService.GetRecordFieldsFiltered
+            Return DataDao.GetRecordFieldsFiltered(tableName, fieldList, filter, parameter)
+        End Function
+
         Public Function GetTopOneFields(tableName As String, fieldList As String, filter As String, order As String, orderAscending As Boolean) As ExpandoObject Implements IService.GetTopOneFields
             Return DataDao.GetTopOneFields(tableName, fieldList, filter, order, orderAscending)
         End Function

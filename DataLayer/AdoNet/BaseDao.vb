@@ -515,10 +515,31 @@ Namespace AdoNet
 
         Public Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String) As ExpandoObject Implements IBaseDao.GetRecordFieldsFiltered
             Dim sql As String =
-                    " Select " & fieldList & " FROM [" & tableName & "] " &
+                    " Select Top 1 " & fieldList & " FROM [" & tableName & "] " &
                     " Where " & filter
             Dim values As Object
             values = GetDb().SqlRead(sql)
+            Return SqlReadToExpandoObject(values, fieldList)
+        End Function
+
+        Public Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String, parameter As Object) As ExpandoObject Implements IBaseDao.GetRecordFieldsFiltered
+            Dim sql As String =
+                    " Select Top 1 " & fieldList & " FROM [" & tableName & "] " &
+                    " Where " & filter
+            Dim values As Object = GetDb().SqlRead(sql, parameter)
+            Return SqlReadToExpandoObject(values, fieldList)
+        End Function
+
+
+        Public Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String, parameter As Object, sortKey As String) As ExpandoObject Implements IBaseDao.GetRecordFieldsFiltered
+            Dim sql As String =
+                    " Select Top 1 " & fieldList & " FROM [" & tableName & "] " &
+                    " Where " & filter & " order by " & sortKey
+            Dim values As Object = GetDb().SqlRead(sql, parameter)
+            Return SqlReadToExpandoObject(values, fieldList)
+        End Function
+
+        Private Function SqlReadToExpandoObject(values As Object, fieldList As String) As ExpandoObject
             If values.Count() > 0 Then
                 Dim fields = fieldList.Split(",")
                 Dim obj As Object
@@ -533,6 +554,7 @@ Namespace AdoNet
                 Return Nothing
             End If
         End Function
+
 
         Public Function GetTopOneFields(tableName As String, fieldList As String, filter As String, order As String, orderAscending As Boolean) As ExpandoObject Implements IBaseDao.GetTopOneFields
             Dim sql As String =

@@ -3,7 +3,7 @@
     [Sequence]           SMALLINT        NULL,
     [InvTransactionIdNo] INT             NULL,
     [ProductIdNo]        INT             NULL,
-    [Quantity]           SMALLINT        NULL,
+    [Quantity]           DECIMAL (12, 4) NULL,
     [UnitIdNo]           TINYINT         NULL,
     [BatchNo]            VARCHAR (20)    NULL,
     [UnitCost]           DECIMAL (11, 4) NULL,
@@ -12,6 +12,8 @@
     [InventoryIdNo]      INT             NULL,
     CONSTRAINT [PK_InvTransactionDetail] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

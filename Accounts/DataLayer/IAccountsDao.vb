@@ -10,6 +10,7 @@ Namespace DataLayer
 
         Function GetAccountBalance(endDate As Date, accountIdNo As Short) As Decimal
         Function GetLastPurchaseCost(productidNo As Integer) As Decimal
+        Function GetLastPurchaseData(productidNo As Integer) As Object
     End Interface
 
     Public Interface IDaoContacts(Of TBiz)
@@ -90,6 +91,11 @@ Namespace DataLayer
 
     Public Interface IGetLastPurchaseCost
         Function GetLastPurchaseCost(productIdNo As Integer) As Decimal
+
+    End Interface
+
+    Public Interface IGetLastPurchaseData
+        Function GetLastPurchaseData(productIdNo As Integer) As Object
 
     End Interface
 

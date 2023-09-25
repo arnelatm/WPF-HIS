@@ -34,6 +34,7 @@ Namespace ServiceLayer.ActionService
         Function EmployeeIdInsertTvp(tvpTable As DataTable) As Integer
         Function GetLastPurchaseCost(productIdNo As Integer) As Object
         Function PerformUtility(utilityName As String) As Object
+        Function GetLastPurchaseData(productIdNo As Integer) As Object
     End Interface
 
     'Friend Interface IOpenInvoiceService

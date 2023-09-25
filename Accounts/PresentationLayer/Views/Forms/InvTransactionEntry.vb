@@ -4,6 +4,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
@@ -312,6 +313,7 @@ Namespace PresentationLayer.Views.Forms
                             '.EndEdit()
                         Else
                             .Rows(e.RowIndex).ErrorText = String.Empty
+                            bsInvTransactionDetails.ResetBindings(False)
                         End If
                     ElseIf cColumnName = $"dgvUnitIdNo" Then
                         '(DataGridViewInvTransactionDetails, e)
@@ -412,10 +414,19 @@ Namespace PresentationLayer.Views.Forms
         Private Sub UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles DataGridViewInvTransactionDetails.UserDeletingRow
             'RaiseEvent UserDeletedRow()
             'UpdateTotals()
+            If DataGridViewInvTransactionDetails.Rows.Count() < 1 Then
+                cboInvTransTypeIdNo.DisplayOnly = False
+                cboInvTransTypeIdNo.Refresh()
+            End If
         End Sub
 
         Private Sub OnUserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles DataGridViewInvTransactionDetails.UserDeletedRow
             UpdateTotals()
+            If DataGridViewInvTransactionDetails.Rows.Count() <= 1 Then
+                cboInvTransTypeIdNo.DisplayOnly = False
+                cboInvTransTypeIdNo.EditingMode = True
+                cboInvTransTypeIdNo.Refresh()
+            End If
             'UpdateInputVatAmount()
         End Sub
 
@@ -449,6 +460,12 @@ Namespace PresentationLayer.Views.Forms
                     RaiseEvent ProductUnitEditing(DataGridViewInvTransactionDetails.CurrentRow.Cells("dgvProductIdNo").Value)
                 End If
             End With
+            If DataGridViewInvTransactionDetails.Rows.Count > 0 Then
+                cboInvTransTypeIdNo.DisplayOnly = True
+            Else
+                cboInvTransTypeIdNo.DisplayOnly = False
+            End If
+            cboInvTransTypeIdNo.Refresh()
         End Sub
 
         <System.Security.Permissions.UIPermission(System.Security.Permissions.SecurityAction.LinkDemand, Window:=System.Security.Permissions.UIPermissionWindow.AllWindows)>
@@ -613,9 +630,14 @@ Namespace PresentationLayer.Views.Forms
             'End If
         End Sub
 
-        Private Sub DataGridViewInvTransactionDetails_ChangesMade(sender As Object, e As EventArgs) Handles DataGridViewInvTransactionDetails.ChangesMade
-
+        Protected Overrides Sub BeforeEdit()
+            cboInvTransTypeIdNo.DisplayOnly = True
         End Sub
+
+        Protected Overrides Sub BeforeAdd()
+            cboInvTransTypeIdNo.DisplayOnly = False
+        End Sub
+
     End Class
 
 End Namespace

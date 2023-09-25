@@ -1022,6 +1022,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             RecordDateTimeStampValue = Nothing
         End Try
         modelData = Service.GetRecordByIdNo(Of TM)(idNo)
+
         RaiseEvent BeforeMappingData(modelData)
         GlobalVariables.Mapper.Map(Of TM, TV)(modelData, View)
         For Each child In ChildPresenters

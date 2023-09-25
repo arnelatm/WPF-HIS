@@ -79,6 +79,7 @@ Public Class CFormBase
             btnNew.Visible = False
         End If
         Parent.ResumeDrawing()
+        SetFormTitleCaption()
     End Sub
 
     Public Overridable Sub UpdateViewDisplay(editMode As Boolean, addMode As Boolean, recordPositionNumber As Integer, targetIdNo As Integer, recordCount As Integer)
@@ -432,7 +433,7 @@ Public Class CFormBase
     End Sub
 
     Private Sub OnBeforeLoad() Handles MyBase.BeforeLoad
-        SetFormTitleCaption()
+        'SetFormTitleCaption()
     End Sub
 
     Private Sub PasteToolStripButton_Click(sender As Object, e As EventArgs) Handles PasteToolStripButton.Click

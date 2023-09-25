@@ -6,6 +6,7 @@
     [ReferenceNo]       VARCHAR (15)   NULL,
     [AmountBeforeVat]   DECIMAL (9, 2) NULL,
     [Amount]            DECIMAL (9, 2) NOT NULL,
+    [PurchaseReturn]    BIT            CONSTRAINT [DF_Purchase_PurchaseReturn] DEFAULT ((0)) NOT NULL,
     [DueDate]           DATE           NULL,
     [InvoiceNo]         VARCHAR (20)   NOT NULL,
     [InvoiceDate]       DATE           NULL,
@@ -21,6 +22,8 @@
     [DateTimeStamp]     ROWVERSION     NULL,
     CONSTRAINT [PK_PurchaseIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

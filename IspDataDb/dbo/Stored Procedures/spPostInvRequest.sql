@@ -56,9 +56,11 @@ BEGIN
 		Declare @UnitCost as Decimal(12,4)
 		Declare @Qty as Decimal(12,4)
 		Declare @NetAmount as Decimal(12,4)
+		Declare @QtyFactor as Decimal(12,4)
 		FETCH NEXT FROM inventory_cursor INTO @InventoryIdNo, @QtyOnHand, @BatchNo, @ExpiryDate, @UnitCost
 		-- Check @@FETCH_STATUS to see if there are any more rows to fetch.  
-		Set @QtySupplied = @QtySuppliedReqUnit * (Select Iif(BaseQTy = 0,0, Cast(UnitQty / BaseQty as Decimal(12,4))) from ProductUnit where IdNo = @ProductIdNo and UnitIdNo = @UnitIdNo)
+		Set @QtyFactor = (Select Iif(BaseQTy = 0,0, Cast(BaseQty as Decimal(12,4)) / UnitQty ) from ProductUnit_View where ProductIdNo = @ProductIdNo and UnitIdNo = @UnitIdNo)	
+		Set @QtySupplied = @QtySuppliedReqUnit * @QtyFactor
 		Set @RunningQty = @QtySupplied
 		WHILE @@FETCH_STATUS = 0  
 			BEGIN  -- Loop through existing inventory and reduced the quantity
@@ -71,7 +73,7 @@ BEGIN
 				Set @NetAmount = @Qty * @UnitCost
 				-- add a new InvTransactionDetail
 				Insert Into InvTransactionDetail (Sequence,InvTransactionIdNo,ProductIdNo,Quantity,UnitIdNo,BatchNo,UnitCost,NetAmount,ExpiryDate,InventoryIdNo)
-					VALUES (@Sequence,@NewInvTransactionIdNo,@ProductIdNo,@Qty,@UnitIdNo,@BatchNo,@UnitCost,@NetAmount,@ExpiryDate,@InventoryIdNo)
+					VALUES (@Sequence,@NewInvTransactionIdNo,@ProductIdNo,iIf(@qtyFactor=0,0,@Qty/@QtyFactor),@UnitIdNo,@BatchNo,@UnitCost,@NetAmount,@ExpiryDate,@InventoryIdNo)
 				-- update the Inventory qty on hand and cost
 				Update Inventory set QtyOnHand = QtyOnHand - @Qty, TotalCost = TotalCost - @Qty * @UnitCost where IdNo = @InventoryIdNo 
 				Set @RunningQty = @RunningQty - @Qty
@@ -92,10 +94,10 @@ BEGIN
 				Update Inventory set QtyOnHand = QtyOnHand - @RunningQty, UnitCost = UnitCost - @Qty * @UnitCost where IdNo = @InvTransactionDetailIdNo 
 			end
 		
-		Declare @qtySuppliedInRequestUnit as Decimal(12,4) 
-
+		-- Declare @qtySuppliedInRequestUnit as Decimal(12,4) 
+		-- Set @qtySuppliedInRequestUnit = @QtySupplied * @Qty
 		IF NOT EXISTS (Select * from InvRequestSupplied where InvTransactionDetailIdNo = @InvTransactionDetailIdNo)
-			INSERT INTO InvRequestSupplied (InvTransactionDetailIdNo, QtySupplied) Values (@InvTransactionDetailIdNo, @qtySuppliedInRequestUnit)
+			INSERT INTO InvRequestSupplied (InvTransactionDetailIdNo, QtySupplied) Values (@InvTransactionDetailIdNo, @QtySuppliedReqUnit)
 		else
 			Update InvRequestSupplied Set QtySupplied = QtySupplied + @QtySuppliedReqUnit where InvTransactionDetailIdNo = @InvTransactionDetailIdNo
 
@@ -108,7 +110,7 @@ BEGIN
 	CLOSE InvRequestSupply_Cursor
 	DEALLOCATE InvRequestSupply_Cursor	
 
-	IF NOT EXISTS (select * from InvRequestDetail_view where invTransactionIdNo = @InvTransactionIdNo and Quantity - QtySupplied >= 0)
+	IF NOT EXISTS (select * from InvRequestDetail_view where invTransactionIdNo = @InvTransactionIdNo and Cast(Quantity as Decimal(12,4)) - IIf(@QtyFactor=0,0,Cast(QtySupplied as Decimal(12,4)) / @QtyFactor) > 0)
 		Update InvTransaction Set Posted = 1 where IdNo = @InvTransactionIdNo
 
 END
