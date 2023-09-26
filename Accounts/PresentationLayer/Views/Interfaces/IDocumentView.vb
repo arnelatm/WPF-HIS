@@ -14,6 +14,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property NeedsIssueDate As Boolean
         Property NeedsNumber As Boolean
         Property Notes As String
+
     End Interface
 
 End Namespace

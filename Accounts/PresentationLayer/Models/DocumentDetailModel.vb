@@ -7,6 +7,7 @@
     Public Class DocumentDetailModel
 
         Public Property Active As Boolean
+        Public Property BranchIdNo As Int16
         Public Property Changed As Boolean
         Public Property DataImageIdNo As Int32
         Public Property DocumentIdNo As Int16

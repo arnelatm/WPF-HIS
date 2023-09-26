@@ -15,6 +15,7 @@ Namespace PresentationLayer.Views.Forms
         Public Event AddNewDocumentType() Implements IDocumentDetailView.AddNewDocumentType
         Public Event DocumentTypeChanged() Implements IDocumentDetailView.DocumentTypeChanged
         Public Event LookupNeedsUpdate() Implements IDocumentDetailView.LookupNeedsUpdate
+        Public Event FilterRecords() Implements IDocumentDetailView.FilterRecords
 
         Public Sub New()
             ' This call is required by the designer.
@@ -37,6 +38,15 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 txtUserIdNo.SetValue(Value)
+            End Set
+        End Property
+
+        Public Property BranchName As String Implements IDocumentDetailView.BranchName
+            Get
+                Return cBranchName.Text
+            End Get
+            Set(value As String)
+                cBranchName.Text = value
             End Set
         End Property
 
@@ -200,6 +210,9 @@ Namespace PresentationLayer.Views.Forms
         Public Property ContactDescription As String Implements IDocumentDetailView.ContactDescription
 
         Public Property Changed As Boolean Implements IDocumentDetailView.Changed
+
+        Public Property BranchIdNo As Short Implements IDocumentDetailView.BranchIdNo
+
 
 #End Region
 

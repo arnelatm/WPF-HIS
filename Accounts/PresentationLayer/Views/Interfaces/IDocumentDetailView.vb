@@ -6,6 +6,8 @@ Namespace PresentationLayer.Views.Interfaces
         Inherits IView
 
         Property Active As Boolean
+        Property BranchIdNo As Int16
+        Property BranchName As String
         Property ContactType As String
         Property DataImageIdNo As Int32
         Property DocumentIdNo As Int16
@@ -27,7 +29,7 @@ Namespace PresentationLayer.Views.Interfaces
         Event AddNewDocumentType()
         Event DocumentTypeChanged()
         Event LookupNeedsUpdate()
-
+        Event FilterRecords()
     End Interface
 
 End Namespace

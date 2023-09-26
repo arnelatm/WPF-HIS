@@ -31,8 +31,8 @@ Namespace DataLayer.AdoNet
         Public Function GetRecordByIdNo(idNo) As Product Implements IDao(Of Product).GetRecordByIdNo
             Dim sql As String = " SELECT " & FieldList &
                     " FROM Product_View" &
-                    " WHERE IdNo = @IdNo and BranchIdNo = @BranchIdNo"
-            Dim params() As Object = {"@IdNo", idNo, "@BranchIdNo", GlobalVariables.BranchIdNo}
+                    " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
             Dim data = Db.Read(sql, Make, params).FirstOrDefault()
             If data IsNot Nothing Then
                 Dim productUnitDao = New ProductUnitDao

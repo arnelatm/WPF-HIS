@@ -728,6 +728,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'cboPayorIdNo
             '
+            resources.ApplyResources(Me.cboPayorIdNo, "cboPayorIdNo")
             Me.cboPayorIdNo.BackColor = System.Drawing.Color.White
             Me.cboPayorIdNo.BegFindValue = Nothing
             Me.cboPayorIdNo.ChangingSearchValueOnly = False
@@ -735,8 +736,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayorIdNo.DataValue = Nothing
             Me.cboPayorIdNo.DefaultValue = "0"
             Me.cboPayorIdNo.DisplayMember = "Name"
-            resources.ApplyResources(Me.cboPayorIdNo, "cboPayorIdNo")
-            Me.cboPayorIdNo.DropDownHeight = 1
+            Me.cboPayorIdNo.DropDownHeight = 24
             Me.cboPayorIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboPayorIdNo.Editable = True
             Me.cboPayorIdNo.EditingMode = False
@@ -746,7 +746,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayorIdNo.FilterRule = Nothing
             Me.cboPayorIdNo.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.cboPayorIdNo.FindEnabled = False
-            Me.floPayor.SetFlowBreak(Me.cboPayorIdNo, True)
             Me.cboPayorIdNo.ForeColor = System.Drawing.Color.Black
             Me.cboPayorIdNo.HideWhenNotEditingOrAdding = False
             Me.cboPayorIdNo.IgnoreCase = False
@@ -1744,7 +1743,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtVatNumber As CTextBox
         Friend WithEvents floPayor As CFlowLayout
         Friend WithEvents txtPayorName As CTextBox
-        Friend WithEvents cboPayorIdNo As CaComboBox
         Friend WithEvents txtDateCreated As CTextBox
         Friend dgvSequence As CDgvTextColumn
         Friend WithEvents dgvAccountIdNo As CDgvComboBoxColumn
@@ -1773,5 +1771,6 @@ Namespace PresentationLayer.Views.Forms
         Friend dgvBalance As CdgvMoneyColumn
         Friend WithEvents AccountIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+        Friend WithEvents cboPayorIdNo As CaComboBox
     End Class
 End Namespace

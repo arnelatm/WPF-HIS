@@ -170,6 +170,8 @@ Namespace Accounts
             Select Case tableName
                 Case "Warehouse"
                     Return True
+                Case "DocumentDetail"
+                    Return True
                 Case Else
                     Return False
             End Select
