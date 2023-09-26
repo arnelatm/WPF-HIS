@@ -1,6 +1,7 @@
 ﻿Imports System.ComponentModel
 Imports System.Reflection
 Imports System.Reflection.Emit
+Imports System.Security.Principal
 Imports System.Transactions
 Imports System.Windows.Forms
 Imports AATM.BusinessLayer.BusinessObjects
@@ -2163,6 +2164,30 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             Debugger.Break()
             MessageBox.Show($"Field '" & fieldName & $"' is not valid!")
         End If
+    End Sub
+
+    Public Sub CreateEnumDataSourceT2(ByVal control As CtComboBox, ByVal EnumObj As [Enum])
+        'Dim exAssembly = Reflection.Assembly.GetExecutingAssembly
+        'Dim enumType = exAssembly.GetTypes.First(Function(f) f.Name = EnumObj)
+        Dim dt As New DataTable
+        Dim workCol As New DataColumn
+        dt.Columns.Add("IdNo", GetType(Int16))
+        dt.Columns("IdNo").AllowDBNull = False
+        dt.Columns("IdNo").Unique = True
+        dt.Columns.Add("Code", GetType(String))
+        dt.Columns("Code").AllowDBNull = False
+        dt.Columns("Code").Unique = True
+        dt.Columns.Add("Name", GetType(String))
+        dt.Columns("Name").AllowDBNull = False
+        dt.Columns("Name").Unique = True
+        For Each c In [Enum].GetValues(EnumObj.GetType())
+            Dim workRow As DataRow = dt.NewRow()
+            workRow("IdNo") = CInt(c)
+            workRow("Code") = EnumToCode(c)
+            workRow("Name") = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
+            dt.Rows.Add(workRow)
+        Next
+        control.DataSource = dt
     End Sub
 
     Public Sub CreateEnumDataSource(Of TE)(ByRef comboControl As CaComboBox)

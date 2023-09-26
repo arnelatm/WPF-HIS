@@ -15,6 +15,7 @@ Namespace PresentationLayer.Presenters
     Public Class PrintReportPresenter(Of TM As New)
         Inherits CommonPresenter(Of ICrPrintableReportView, TM)
         Implements ISubscriber(Of GetControlDataSource)
+        Implements ISubscriber(Of GetControlEnumDataSource)
         Implements ISubscriber(Of GetLookupDataTableRequested)
 
         Private _psService As Object
@@ -28,12 +29,14 @@ Namespace PresentationLayer.Presenters
             MakeServices()
             _computerName = Environment.MachineName      ' "Pharmacy" '
             _computerIdNo = _psService.GetRecordFieldWithKeyG(Of Int16)(_computerName, "Computer", "ComputerName", "IdNo")
+
         End Sub
 
         Public Sub New(view As ICrPrintableReportView)
             MyBase.New(view)
             MakeServices()
             AddHandler view.PrintReport, AddressOf OnPrintCrystalReport
+            'AddHandler view.CreateDataSourceEnum, AddressOf OnCreateDataSourceEnum
             Ea = New EventAggregator()
             Ea.SubscribeEvent(Me)
         End Sub
@@ -150,6 +153,10 @@ Namespace PresentationLayer.Presenters
             Else
                 SetDataSource(eventType.TableName, eventType.Control,,, eventType.Filter)
             End If
+        End Sub
+
+        Public Sub OnGetControlDataSourceHandler(ByRef eventType As GetControlEnumDataSource) Implements ISubscriber(Of GetControlEnumDataSource).OnEventHandler
+            CreateEnumDataSourceT2(eventType.Control, eventType.EnumObj)
         End Sub
 
         'Public Sub OnGetControlDataSourceHandler(ByRef eventType As GetLookupDataTableRequested) Implements ISubscriber(Of GetLookupDataTableRequested).OnEventHandler

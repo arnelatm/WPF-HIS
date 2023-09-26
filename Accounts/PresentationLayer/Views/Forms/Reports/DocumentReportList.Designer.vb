@@ -2,7 +2,7 @@
 
 Namespace PresentationLayer.Views.Forms.Reports
     <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-    Partial Class DocumentExpiryList
+    Partial Class DocumentReportList
         Inherits AATM.PresentationLayer.Forms.BfMain
 
         'Form overrides dispose to clean up the component list.
@@ -23,14 +23,11 @@ Namespace PresentationLayer.Views.Forms.Reports
         <System.Diagnostics.DebuggerStepThrough()>
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
-            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DocumentExpiryList))
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblSupplierCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboDocumentType = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.chkAllDocuments = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
-            Me.lblExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.dtpExpiryDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -45,11 +42,9 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.CFlowLayout1.Controls.Add(Me.lblSupplierCode)
             Me.CFlowLayout1.Controls.Add(Me.cboDocumentType)
             Me.CFlowLayout1.Controls.Add(Me.chkAllDocuments)
-            Me.CFlowLayout1.Controls.Add(Me.lblExpiryDate)
-            Me.CFlowLayout1.Controls.Add(Me.dtpExpiryDate)
             Me.CFlowLayout1.Location = New System.Drawing.Point(12, 12)
             Me.CFlowLayout1.Name = "CFlowLayout1"
-            Me.CFlowLayout1.Size = New System.Drawing.Size(689, 127)
+            Me.CFlowLayout1.Size = New System.Drawing.Size(687, 93)
             Me.CFlowLayout1.TabIndex = 26
             '
             'CLabel2
@@ -119,9 +114,8 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboDocumentType.OverrideDropDownStyleList = False
             Me.cboDocumentType.PreviousSearchTerm = Nothing
             Me.cboDocumentType.PropertySelector = Nothing
-            Me.cboDocumentType.Size = New System.Drawing.Size(530, 30)
+            Me.cboDocumentType.Size = New System.Drawing.Size(530, 24)
             Me.cboDocumentType.SuggestBoxHeight = 200
-            Me.cboDocumentType.SuggestCharCount = 0
             Me.cboDocumentType.SuggestListOrderRule = Nothing
             Me.cboDocumentType.TabIndex = 35
             Me.cboDocumentType.TextToSearch = Nothing
@@ -145,7 +139,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.chkAllDocuments.FindEnabled = False
             Me.chkAllDocuments.IgnoreCase = False
             Me.chkAllDocuments.LinkedLabel = Nothing
-            Me.chkAllDocuments.Location = New System.Drawing.Point(4, 63)
+            Me.chkAllDocuments.Location = New System.Drawing.Point(4, 57)
             Me.chkAllDocuments.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.chkAllDocuments.Name = "chkAllDocuments"
             Me.chkAllDocuments.RightToLeft = System.Windows.Forms.RightToLeft.No
@@ -154,50 +148,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.chkAllDocuments.TabIndex = 36
             Me.chkAllDocuments.Text = "Print All Document Types"
             Me.chkAllDocuments.Translatable = True
-            '
-            'lblExpiryDate
-            '
-            Me.lblExpiryDate.BackColor = System.Drawing.Color.Transparent
-            Me.lblExpiryDate.DisplayOnly = True
-            Me.lblExpiryDate.EditingMode = False
-            Me.lblExpiryDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.lblExpiryDate.Location = New System.Drawing.Point(1, 89)
-            Me.lblExpiryDate.Margin = New System.Windows.Forms.Padding(1)
-            Me.lblExpiryDate.Name = "lblExpiryDate"
-            Me.lblExpiryDate.Size = New System.Drawing.Size(150, 23)
-            Me.lblExpiryDate.TabIndex = 33
-            Me.lblExpiryDate.Text = "Expiry Date"
-            Me.lblExpiryDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-            Me.lblExpiryDate.Translatable = True
-            '
-            'dtpExpiryDate
-            '
-            Me.dtpExpiryDate.AutoSize = True
-            Me.dtpExpiryDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-            Me.dtpExpiryDate.CalendarCulture = New System.Globalization.CultureInfo("en-GB")
-            Me.dtpExpiryDate.CalendarType = AATM.Libraries.GlobalFuncNSub.GlobalSubs.CalendarToUse.Gregorian
-            Me.dtpExpiryDate.DefaultValue = Nothing
-            Me.dtpExpiryDate.DisplayOnly = False
-            Me.dtpExpiryDate.DtpDefaultValue = Nothing
-            Me.dtpExpiryDate.EditingMode = True
-            Me.dtpExpiryDate.EditsAllowed = False
-            Me.CFlowLayout1.SetFlowBreak(Me.dtpExpiryDate, True)
-            Me.dtpExpiryDate.ForeColor = System.Drawing.Color.Black
-            Me.dtpExpiryDate.LinkedLabel = Nothing
-            Me.dtpExpiryDate.Location = New System.Drawing.Point(152, 88)
-            Me.dtpExpiryDate.Margin = New System.Windows.Forms.Padding(0)
-            Me.dtpExpiryDate.Name = "dtpExpiryDate"
-            Me.dtpExpiryDate.ReadOnlyDp = False
-            Me.dtpExpiryDate.SecurityKey = Nothing
-            Me.dtpExpiryDate.ShowLongDate = False
-            Me.dtpExpiryDate.ShowTime = False
-            Me.dtpExpiryDate.Size = New System.Drawing.Size(119, 27)
-            Me.dtpExpiryDate.TabIndex = 32
-            Me.dtpExpiryDate.TargetCalendar = CType(resources.GetObject("dtpExpiryDate.TargetCalendar"), System.Globalization.Calendar)
-            Me.dtpExpiryDate.Translatable = False
-            Me.dtpExpiryDate.Value = Nothing
-            Me.dtpExpiryDate.ValueIsMandatory = False
-            Me.dtpExpiryDate.ValueIsNullable = False
             '
             'CLabel1
             '
@@ -218,7 +168,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             '
             Me.btnOk.DesignerSelected = False
             Me.btnOk.ImageIndex = 0
-            Me.btnOk.Location = New System.Drawing.Point(252, 154)
+            Me.btnOk.Location = New System.Drawing.Point(214, 111)
             Me.btnOk.Name = "btnOk"
             Me.btnOk.OriginalImageName = Nothing
             Me.btnOk.SecurityKey = ""
@@ -230,7 +180,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             '
             Me.btnCancel.DesignerSelected = False
             Me.btnCancel.ImageIndex = 0
-            Me.btnCancel.Location = New System.Drawing.Point(374, 154)
+            Me.btnCancel.Location = New System.Drawing.Point(336, 111)
             Me.btnCancel.Name = "btnCancel"
             Me.btnCancel.OriginalImageName = Nothing
             Me.btnCancel.SecurityKey = ""
@@ -238,20 +188,19 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.btnCancel.TabIndex = 28
             Me.btnCancel.Text = "Cancel"
             '
-            'DocumentExpiryList
+            'DocumentReportList
             '
-            Me.ClientSize = New System.Drawing.Size(705, 195)
+            Me.ClientSize = New System.Drawing.Size(705, 149)
             Me.Controls.Add(Me.btnCancel)
             Me.Controls.Add(Me.btnOk)
             Me.Controls.Add(Me.CFlowLayout1)
             Me.Controls.Add(Me.CLabel1)
             Me.DoubleBuffered = True
-            Me.Name = "DocumentExpiryList"
+            Me.Name = "DocumentReportList"
             Me.RightToLeft = System.Windows.Forms.RightToLeft.No
-            Me.Text = "Document Expiry Report"
+            Me.Text = "Document Report List"
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.CFlowLayout1.ResumeLayout(False)
-            Me.CFlowLayout1.PerformLayout()
             Me.ResumeLayout(False)
 
         End Sub
@@ -260,8 +209,6 @@ Namespace PresentationLayer.Views.Forms.Reports
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
-        Friend WithEvents lblExpiryDate As CLabel
-        Friend WithEvents dtpExpiryDate As CCustomDateTimePicker
         Friend WithEvents lblSupplierCode As CLabel
         Friend WithEvents cboDocumentType As CtComboBox
         Friend WithEvents chkAllDocuments As UcCheckBox

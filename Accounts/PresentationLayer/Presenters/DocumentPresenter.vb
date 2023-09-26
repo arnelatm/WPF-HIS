@@ -23,7 +23,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateEnumDataSource(Of DocumentTypeSelection)("DocumentType")
+            CreateEnumDataSourceT(Of DocumentTypeSelection)("DocumentType")
             CreateEnumDataSource(Of ImageTypeSelection)("ImageType")
         End Sub
 

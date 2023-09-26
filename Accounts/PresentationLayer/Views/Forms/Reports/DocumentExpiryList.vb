@@ -26,7 +26,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             MainTableName = "Report"
             SortOrderKey = "IdNo"
             dtpExpiryDate.Value = DateAndTime.DateAdd(DateInterval.Month, 1, DateAndTime.Now())
-
+            chkAllDocuments.Checked = True
         End Sub
 
         Private Sub btnOk_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
@@ -40,7 +40,9 @@ Namespace PresentationLayer.Views.Forms.Reports
                 reportArgs.ReportParameters = {language, "Language",
                                                reportTitle, "ReportTitle",
                                                GlobalVariables.BranchIdNo, "BranchIdNo",
-                                               dtpExpiryDate.Value, "ExpiryDate"
+                                               dtpExpiryDate.Value, "ExpiryDate",
+                                               chkAllDocuments.Checked, "AllDocumentTypes",
+                                               cboDocumentType.SelectedItem("Code"), "DocumentType"
                                                }
                 Dim reportFileName As String = "Document Expiry Report By Branch.Rpt"
                 RaiseEvent PrintReport(reportFileName, reportArgs, False)
@@ -53,8 +55,9 @@ Namespace PresentationLayer.Views.Forms.Reports
 
 
         Private Sub DocumentExpiryList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            'Ea.PublishEvent(New GetControlDataSource("Warehouse", cboWarehouseIdNo, "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString()))
-            'cboWarehouseIdNo.EditingMode = True
+            Dim docTypeEnum As New DocumentTypeSelection
+            Ea.PublishEvent(New GetControlEnumDataSource(docTypeEnum, cboDocumentType))
+            cboDocumentType.EditingMode = True
         End Sub
 
 
