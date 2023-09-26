@@ -33,6 +33,7 @@ Public Interface ICrPrintableReportView
     Inherits AATM.PresentationLayer.Views.IView
 
     Event PrintReport(reportFileName As String, reportArgs As CrPrintableArgs, printDirectly As Boolean)
+    'Event CreateDataSourceEnum(control As Control, EnumData As [Enum])
 
 End Interface
 

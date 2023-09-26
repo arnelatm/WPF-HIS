@@ -1,5 +1,6 @@
 ﻿Imports AATM.Libraries
 Imports AATM.Libraries.AatmInterfaces
+Imports AATM.Libraries.CBaseControlsLibrary
 
 Public Enum ButtonClicked
     [Add]
@@ -482,6 +483,18 @@ Public Class GetControlDataSource
     Public Property TableName As String
     Public Property Control As Control
     Public Property Filter As String
+
+End Class
+
+Public Class GetControlEnumDataSource
+
+    Public Sub New(enumObj As [Enum], control As CtComboBox)
+        Me.Control = control
+        Me.EnumObj = enumObj
+    End Sub
+
+    Public Property EnumObj As [Enum]
+    Public Property Control As CtComboBox
 
 End Class
 

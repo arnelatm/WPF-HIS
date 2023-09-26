@@ -636,6 +636,12 @@
     <Compile Include="PresentationLayer\Views\Forms\ProductBaseUnitChanger.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\DocumentReportList.Designer.vb">
+      <DependentUpon>DocumentReportList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\DocumentReportList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\DocumentExpiryList.Designer.vb">
       <DependentUpon>DocumentExpiryList.vb</DependentUpon>
     </Compile>
@@ -1963,18 +1969,6 @@
       <DependentUpon>Trial Balance.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\VAT\01-Simplified Combined Total Income &amp; Vat Summary Report All.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>01-Simplified Combined Total Income &amp; Vat Summary Report All.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\VAT\02-Self Sale-Revenue.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>02-Self Sale-Revenue.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Reports\VAT\03-Total Output VAT Report.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1985,30 +1979,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>04-Total Purchases Report.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\VAT\Daily Simplified Combined Total Income &amp; Vat Summary Report All.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Daily Simplified Combined Total Income &amp; Vat Summary Report All.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\VAT\Revenue Except Self Sale.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Revenue Except Self Sale.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\VAT\Sale-Revenue Except Self Sale.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Sale-Revenue Except Self Sale.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\VAT\Sales Except Self Sale.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Sales Except Self Sale.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ServiceLayer\ActionService\AccountsModule.vb" />
@@ -2101,6 +2071,9 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\InventorySelector.resx">
       <DependentUpon>InventorySelector.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\DocumentReportList.resx">
+      <DependentUpon>DocumentReportList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\DocumentExpiryList.resx">
       <DependentUpon>DocumentExpiryList.vb</DependentUpon>
@@ -2664,9 +2637,6 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Income Statement.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\Local Statement of Employee Loans.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reports\Medical Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Medical Report.vb</LastGenOutput>
@@ -2759,14 +2729,6 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Trial Balance.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\VAT\01-Simplified Combined Total Income &amp; Vat Summary Report All.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>01-Simplified Combined Total Income &amp; Vat Summary Report All.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\VAT\02-Self Sale-Revenue.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>02-Self Sale-Revenue.vb</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reports\VAT\03-Total Output VAT Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>03-Total Output VAT Report.vb</LastGenOutput>
@@ -2774,22 +2736,6 @@
     <EmbeddedResource Include="Reports\VAT\04-Total Purchases Report.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>04-Total Purchases Report.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\VAT\Daily Simplified Combined Total Income &amp; Vat Summary Report All.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>Daily Simplified Combined Total Income &amp; Vat Summary Report All.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\VAT\Revenue Except Self Sale.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>Revenue Except Self Sale.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\VAT\Sale-Revenue Except Self Sale.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>Sale-Revenue Except Self Sale.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\VAT\Sales Except Self Sale.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>Sales Except Self Sale.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="SetSettings.resx">
       <DependentUpon>SetSettings.vb</DependentUpon>
