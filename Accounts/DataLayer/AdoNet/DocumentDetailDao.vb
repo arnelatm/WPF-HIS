@@ -19,6 +19,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     "SELECT " &
                     "Active," &
+                    "BranchIdNo," &
                     "ContactIdNo," &
                     "DateCreated," &
                     "DataImageIdNo," &
@@ -38,6 +39,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " UPDATE [DocumentDetail]" &
                     " SET Active = @Active," &
+                    " BranchIdNo = @BranchIdNo," &
                     " ContactIdNo = @ContactIdNo," &
                     " DataImageIdNo = @DataImageIdNo," &
                     " DocumentIdNo = @DocumentIdNo," &
@@ -52,6 +54,7 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef documentDetail As DocumentDetail) As Integer Implements IDao(Of DocumentDetail).AddRecord
             Dim sql As String = "INSERT INTO [DocumentDetail] (" &
                                   "Active," &
+                                  "BranchIdNo," &
                                   "ContactIdNo," &
                                   "DataImageIdNo," &
                                   "DocumentIdNo," &
@@ -62,6 +65,7 @@ Namespace DataLayer.AdoNet
                                   "UserIdNo" &
                                   ") VALUES (" &
                                   "@Active," &
+                                  "@BranchI*dNo," &
                                   "@ContactIdNo," &
                                   "@DataImageIdNo," &
                                   "@DocumentIdNo," &
@@ -93,6 +97,7 @@ Namespace DataLayer.AdoNet
         Private Function Take(documentDetail As DocumentDetail) As Object()
             Return New Object() {
                                     "@Active", documentDetail.Active,
+                                    "@BranchIdNo", GlobalVariables.BranchIdNo,
                                     "@ContactIdNo", documentDetail.ContactIdNo,
                                     "@DataImageIdNo", documentDetail.DataImageIdNo,
                                     "@DocumentIdNo", documentDetail.DocumentIdNo,

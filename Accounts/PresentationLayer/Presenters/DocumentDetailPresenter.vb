@@ -20,7 +20,9 @@ Namespace PresentationLayer.Presenters
             AddHandler view.AddNewDocumentType, AddressOf OnAddNewDocumentType
             AddHandler view.DocumentTypeChanged, AddressOf OnDocumentTypeChanged
             AddHandler view.LookupNeedsUpdate, AddressOf OnLookupNeedsUpdate
+            AddHandler view.FilterRecords, AddressOf FilterRecords
             Service = New AccountsService("DocumentDetail")
+            DataFilter = "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString()
             TableName = "DocumentDetail"
             WithTreeView = False
             SortOrderKey = "IdNo"
@@ -148,10 +150,18 @@ Namespace PresentationLayer.Presenters
             Return Nothing
         End Function
 
+        Public Sub FilterRecords()
+            GoLastRecord()
+        End Sub
+
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             View.Active = True
             View.Changed = False
+        End Sub
+
+        Public Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
+            View.BranchName = Service.GetField(Of String, Int16)(GlobalVariables.BranchIdNo, "Branch", "IdNo", "BranchName")
         End Sub
 
     End Class

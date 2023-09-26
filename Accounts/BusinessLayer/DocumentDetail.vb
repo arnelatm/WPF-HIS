@@ -16,6 +16,7 @@ Namespace BusinessLayer
         End Sub
 
         Public Property Active As Boolean
+        Public Property BranchIdNo As Int16
         Public Property DataImageIdNo As Int32
         Public Property DocumentIdNo As Int16
         Public Property DocumentNumber As String

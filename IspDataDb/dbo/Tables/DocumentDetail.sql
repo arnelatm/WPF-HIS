@@ -1,5 +1,6 @@
 ﻿CREATE TABLE [dbo].[DocumentDetail] (
     [IdNo]           INT             IDENTITY (1, 1) NOT NULL,
+    [BranchIdNo]     TINYINT         NULL,
     [ContactIdNo]    INT             NULL,
     [DocumentIdNo]   SMALLINT        NULL,
     [DataImageIdNo]  INT             NULL,

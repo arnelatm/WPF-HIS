@@ -14,6 +14,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub New(view As IDocumentView)
             MyBase.New(view)
+            DataFilter = "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString()
             Service = New AccountsService("Document")
             TableName = "Document"
             SortOrderKey = "DocumentName"
@@ -23,7 +24,7 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Sub CreateDataSources()
             CreateEnumDataSource(Of DocumentTypeSelection)("DocumentType")
-            CreateEnumDataSource(Of ImageTypeSelection)("ImageType")           
+            CreateEnumDataSource(Of ImageTypeSelection)("ImageType")
         End Sub
 
         Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean

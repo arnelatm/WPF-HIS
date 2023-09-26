@@ -1283,6 +1283,10 @@ Namespace PresentationLayer.Views.Forms
             formToRun.Presenter = New PurchasePresenter(Of PurchaseModel)(formToRun, {False, True})
             formToRun.Show()
         End Sub
+
+        Private Sub ListToolStripMenuItemDocumentExpiry_Click(sender As Object, e As EventArgs) Handles ListToolStripMenuItemDocumentExpiry.Click
+            RunReportNew(Of DocumentExpiryList)()
+        End Sub
     End Class
 
 End Namespace

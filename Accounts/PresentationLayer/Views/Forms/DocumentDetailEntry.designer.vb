@@ -35,6 +35,8 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CButton1 = New AATM.Libraries.CBaseControlsLibrary.CButton()
+            Me.lblBranchName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cBranchName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblContactName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboContactIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.lblDocumentNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -156,6 +158,8 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.Controls.Add(Me.TxtIdNo)
             Me.CFlowLayout2.Controls.Add(Me.CLabel1)
             Me.CFlowLayout2.Controls.Add(Me.CButton1)
+            Me.CFlowLayout2.Controls.Add(Me.lblBranchName)
+            Me.CFlowLayout2.Controls.Add(Me.cBranchName)
             Me.CFlowLayout2.Controls.Add(Me.lblLeaveIdNo)
             Me.CFlowLayout2.Controls.Add(Me.cboDocumentIdNo)
             Me.CFlowLayout2.Controls.Add(Me.lblContactName)
@@ -194,11 +198,48 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.CButton1.DesignerSelected = False
             Me.CFlowLayout2.SetFlowBreak(Me.CButton1, True)
-            Me.CButton1.ImageIndex = 0
             resources.ApplyResources(Me.CButton1, "CButton1")
+            Me.CButton1.ImageIndex = 0
             Me.CButton1.Name = "CButton1"
             Me.CButton1.OriginalImageName = Nothing
             Me.CButton1.SecurityKey = ""
+            '
+            'lblBranchName
+            '
+            Me.lblBranchName.BackColor = System.Drawing.Color.Transparent
+            Me.lblBranchName.DisplayOnly = True
+            Me.lblBranchName.EditingMode = False
+            resources.ApplyResources(Me.lblBranchName, "lblBranchName")
+            Me.lblBranchName.Name = "lblBranchName"
+            Me.lblBranchName.Translatable = True
+            '
+            'cBranchName
+            '
+            Me.cBranchName.BackColor = System.Drawing.Color.White
+            Me.cBranchName.BegFindValue = Nothing
+            Me.cBranchName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.cBranchName.ComputedValue = False
+            Me.cBranchName.CustomFormat = Nothing
+            Me.cBranchName.DataBoundControl = True
+            Me.cBranchName.DisplayOnly = True
+            Me.cBranchName.EditingMode = True
+            Me.cBranchName.EndFindValue = Nothing
+            Me.cBranchName.FieldDescription = Nothing
+            Me.cBranchName.FieldName = Nothing
+            Me.cBranchName.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cBranchName.FindEnabled = False
+            Me.CFlowLayout2.SetFlowBreak(Me.cBranchName, True)
+            resources.ApplyResources(Me.cBranchName, "cBranchName")
+            Me.cBranchName.ForeColor = System.Drawing.Color.Black
+            Me.cBranchName.LinkedLabel = Nothing
+            Me.cBranchName.MaximumValue = Nothing
+            Me.cBranchName.MinimumValue = Nothing
+            Me.cBranchName.Name = "cBranchName"
+            Me.cBranchName.OldValue = Nothing
+            Me.cBranchName.OverrideMaxLength = 0
+            Me.cBranchName.ReadOnly = True
+            Me.cBranchName.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.cBranchName.Translatable = False
             '
             'lblContactName
             '
@@ -475,6 +516,7 @@ Namespace PresentationLayer.Views.Forms
             Me.chkActive.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
             Me.chkActive.FindEnabled = False
             Me.chkActive.FlatAppearance.BorderSize = 0
+            Me.CFlowLayout2.SetFlowBreak(Me.chkActive, True)
             Me.chkActive.ForeColor = System.Drawing.Color.Black
             Me.chkActive.IFindableControl_FindEnabled = False
             Me.chkActive.IgnoreCase = False
@@ -612,5 +654,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents txtContactType As CTextBox
         Friend WithEvents btnPictureViewer As CButton
+        Friend WithEvents lblBranchName As CLabel
+        Friend WithEvents cBranchName As CTextBox
     End Class
 End Namespace
