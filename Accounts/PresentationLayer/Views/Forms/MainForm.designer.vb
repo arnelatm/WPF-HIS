@@ -196,6 +196,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemEmployeeInformation = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemEmployeeMedicalReport = New System.Windows.Forms.ToolStripMenuItem()
             Me.ListToolStripMenuItemDocumentExpiry = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDocumentReportList = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemReceptionReports = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemShiftDailySummary = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemAccountingReports = New System.Windows.Forms.ToolStripMenuItem()
@@ -251,7 +252,6 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemDocumentReportList = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -1133,6 +1133,11 @@ Namespace PresentationLayer.Views.Forms
             Me.ListToolStripMenuItemDocumentExpiry.Name = "ListToolStripMenuItemDocumentExpiry"
             resources.ApplyResources(Me.ListToolStripMenuItemDocumentExpiry, "ListToolStripMenuItemDocumentExpiry")
             '
+            'ToolStripMenuItemDocumentReportList
+            '
+            Me.ToolStripMenuItemDocumentReportList.Name = "ToolStripMenuItemDocumentReportList"
+            resources.ApplyResources(Me.ToolStripMenuItemDocumentReportList, "ToolStripMenuItemDocumentReportList")
+            '
             'ToolStripMenuItemReceptionReports
             '
             Me.ToolStripMenuItemReceptionReports.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemShiftDailySummary})
@@ -1421,11 +1426,6 @@ Namespace PresentationLayer.Views.Forms
             '
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
-            '
-            'ToolStripMenuItemDocumentReportList
-            '
-            Me.ToolStripMenuItemDocumentReportList.Name = "ToolStripMenuItemDocumentReportList"
-            resources.ApplyResources(Me.ToolStripMenuItemDocumentReportList, "ToolStripMenuItemDocumentReportList")
             '
             'MainForm
             '

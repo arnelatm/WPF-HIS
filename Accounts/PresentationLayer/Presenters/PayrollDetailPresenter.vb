@@ -106,7 +106,7 @@ Namespace PresentationLayer.Presenters
             Return retVal
         End Function
 
-        Public Shadows Sub GoPrintRecord()
+        Public Overrides Sub GoPrintRecord()
             Dim curCulture = CultureInfo.CurrentCulture
             CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
             Dim reportName As String = "Payroll Report.Rpt"

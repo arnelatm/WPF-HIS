@@ -97,7 +97,7 @@ Public Interface IBaseDao
 
     Function GetRecordPositionByName(tableName As String, sortField As String, nameValue As String) As Integer
 
-    Function GetRecords(tableName As String, sortKey As String, Optional fieldNames As String() = Nothing, Optional filterKey As String = Nothing) As Object
+    Function GetRecords(tableName As String, sortKey As String, Optional fieldNames As String() = Nothing, Optional filterKey As String = Nothing, Optional ascending As Boolean = True) As Object
 
     'Function GetRecordsDataTable(tableName As String, sortKey As String, Optional fieldNames() As String = Nothing, Optional filterKey As String = Nothing) As Object
 

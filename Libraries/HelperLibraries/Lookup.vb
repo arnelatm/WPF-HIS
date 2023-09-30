@@ -10,6 +10,7 @@ Public Class Lookup
     Public Property NameField As String
     Public Property NameFieldOriginal As String
     Public Property NameFieldArabic As String
+    Public Property Ascending As Boolean
 
     Public Sub New(tableName As String, Optional filter As String = Nothing)
         Me.TableName = tableName
@@ -47,7 +48,10 @@ Public Class Lookup
                 CodeField = TableName + "Code"
             End If
         End If
-        SortKey = NameField
+        If SortKey Is Nothing Then
+            SortKey = NameField
+        End If
+
         If TableName = "List" Then
             FieldsToShow = {"IdNo", NameField}
         Else
@@ -72,10 +76,11 @@ Public Class LookupTable
     Public Property NameField As String
     Public Property NameFieldOriginal As String
     Public Property NameFieldArabic As String
+    Public Property Ascending As Boolean
 
-    Public Sub New(tableName As String, Optional filter As String = Nothing)
+    Public Sub New(tableName As String, Optional filter As String = Nothing, Optional sortKey As String = Nothing, Optional ascending As Boolean = True)
         Me.TableName = tableName
-        ComposeDefaultLookupValues(filter)
+        ComposeDefaultLookupValues(filter, sortKey, ascending)
     End Sub
 
     Public Class HLookupData
@@ -97,7 +102,7 @@ Public Class LookupTable
 
     End Class
 
-    Private Sub ComposeDefaultLookupValues(Optional filter As String = Nothing)
+    Private Sub ComposeDefaultLookupValues(Optional filter As String = Nothing, Optional sortOrderKey As String = Nothing, Optional ascendingOrder As Boolean = True)
         If Right(TableName, 5) = "_View" Then
             NameField = Left(TableName, TableName.Length - 5) + "Name"
             CodeField = Left(TableName, TableName.Length - 5) + "Code"
@@ -112,6 +117,8 @@ Public Class LookupTable
             FieldsToShow = {"IdNo", NameField, CodeField}
         End If
         FilterKey = filter
+        SortKey = sortOrderKey
+        Ascending = ascendingOrder
     End Sub
 
 End Class

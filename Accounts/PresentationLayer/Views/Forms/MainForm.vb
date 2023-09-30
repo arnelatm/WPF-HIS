@@ -1291,6 +1291,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemDocumentReportList_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDocumentReportList.Click
             RunReportNew(Of DocumentReportList)()
         End Sub
+
+        Private Sub ToolStripMenuItemPeriodicPayroll_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPeriodicPayroll.Click
+            RunReportNew(Of PayrollPrinting)()
+        End Sub
     End Class
 
 End Namespace

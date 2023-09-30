@@ -910,7 +910,7 @@ Namespace AdoNet
             Return GetDb().Scalar(sql)
         End Function
 
-        Public Function GetRecords(tableName As String, sortKey As String, Optional fieldNames As String() = Nothing, Optional filterKey As String = Nothing) As Object Implements IBaseDao.GetRecords
+        Public Function GetRecords(tableName As String, sortKey As String, Optional fieldNames As String() = Nothing, Optional filterKey As String = Nothing, Optional ascending As Boolean = True) As Object Implements IBaseDao.GetRecords
             Dim fields As String
             If fieldNames Is Nothing Then
                 fields = "*"
@@ -922,13 +922,13 @@ Namespace AdoNet
                 If sortKey Is Nothing Or sortKey = "" Then
                     sql = " SELECT " & fields & " from [" & tableName & "]"
                 Else
-                    sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey
+                    sql = " SELECT " & fields & " from [" & tableName & "] order by " & sortKey & IIf(ascending, "", " DESC")
                 End If
             Else
                 If sortKey Is Nothing Or sortKey = "" Then
                     sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey
                 Else
-                    sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey & " order by " & sortKey
+                    sql = " SELECT " & fields & " from [" & tableName & "] where " & filterKey & " order by " & sortKey & IIf(ascending, "", " DESC")
                 End If
             End If
             Return GetDb().SqlRead(sql)
