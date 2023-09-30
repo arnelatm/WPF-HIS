@@ -74,7 +74,7 @@ Namespace Services
         Function UpdateTable(ByRef data As DataTable, groupIdNo As Integer) As Integer
         Function UpdateTvp(dtTable As DataTable) As Integer
         Function GetRecordsWithParams(Of TM)(parameters As Object) As List(Of TM)
-        Function RunStoredProcedure(storeProcedureName As String, parameters As Object) As Object
+        Function RunSpWithRollBack(storeProcedureName As String, parameters As Object) As Object
         Function GetField(Of TR, TS1, TS2)(searchValue1 As TS1, searchValue2 As TS2, tableName As String, searchFieldName1 As String, searchFieldName2 As String, returnFieldName As String, Optional filter As String = Nothing) As TR
         Function GetField(Of TR, TS1, TS2, TS3)(searchValue1 As TS1, searchValue2 As TS2, searchValue3 As TS3, tableName As String, searchFieldName1 As String, searchFieldName2 As String, searchFieldName3 As String, returnFieldName As String, Optional filter As String = Nothing) As TR
         Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String, parameter As Object) As ExpandoObject

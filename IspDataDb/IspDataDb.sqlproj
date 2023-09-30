@@ -622,6 +622,7 @@
     <Build Include="dbo\Stored Procedures\spPostInvRequest.sql" />
     <Build Include="dbo\User Defined Types\InvRequestSuppliedInsertType.sql" />
     <Build Include="dbo\Views\Contact_View.sql" />
+    <Build Include="dbo\Stored Procedures\spPostPurchaseReturn.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

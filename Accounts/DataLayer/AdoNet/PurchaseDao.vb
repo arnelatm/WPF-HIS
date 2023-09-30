@@ -3,6 +3,7 @@ Imports AATM.Common.BusinessLayer
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
 Imports AATM.Libraries.GlobalFuncNSub
+Imports Microsoft.Office.Interop.Excel
 
 Namespace DataLayer.AdoNet
     ' Data access object for Purchase
@@ -217,21 +218,31 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function PostData(idNo As Integer) As Boolean Implements IDaoPosting.PostData
-
+            Dim purchaseReturn As Boolean
             Dim retVal As Boolean
-            Dim commands As New List(Of DaoCommand)
-            Dim command1, command2 As New DaoCommand
-            command1.Add("Insert into Inventory (BranchIdNo,TransactionIdNo,ProductIdNo,QtyOnHand,UnitCost,TotalCost,BatchNo,ExpiryDate,WarehouseIdNo,TransactionType,UnitSalesPrice) " &
-                         "Select @BranchIdNo,a.IdNo,a.ProductIdNo,IIf(c.UnitQty=0,0,Cast(a.Quantity+a.BonusQuantity As Decimal(12,2)) * c.BaseQty / c.UnitQty)," &
-                         "a.NetAmount / (cast((a.Quantity+a.BonusQuantity) As Decimal(12,2)) * c.BaseQty / c.UnitQty), a.NetAmount , a.BatchNo, a.ExpiryDate, b.WarehouseIdNo, 'P' ," &
-                         "IIf(c.BaseQty = 0, 0, a.UnitSalesPrice * c.UnitQty / c.BaseQty) " &
-                         "From PurchaseDetail a Left Join Purchase b On a.PurchaseIdNo = b.IdNo " &
-                         "Left Join ProductUnit_View c On a.ProductIdNo = c.ProductIdNo And a.UnitIdNo = c.UnitIdNo " &
-                         "where a.PurchaseIdNo = @IdNo", {"@IdNo", idNo, "@BranchIdNo", GlobalVariables.BranchIdNo})
-            commands.Add(command1)
-            command2.Add("Update Purchase set Posted = 1 where IdNo = @IdNo", {"@IdNo", idNo})
-            commands.Add(command2)
-            retVal = Db.ExecuteNonQueryCommands("PostPurchase", commands)
+
+            purchaseReturn = GetField(Of Boolean, Int32)(idNo, "Purchase", "IdNo", "PurchaseReturn")
+            If purchaseReturn Then
+                Dim purchase As Purchase = GetRecordByIdNo(idNo)
+                Dim parameters As Object = {"@PurchaseIdNo", purchase.IdNo,
+                                        "@BranchIdNo", GlobalVariables.BranchIdNo,
+                                        "@WarehouseIdNo", purchase.WarehouseIdNo}
+                retVal = RunSpWithRollBack("spPostPurchaseReturn", parameters)
+            Else
+                Dim commands As New List(Of DaoCommand)
+                Dim command1, command2 As New DaoCommand
+                command1.Add("Insert into Inventory (BranchIdNo,TransactionIdNo,ProductIdNo,QtyOnHand,UnitCost,TotalCost,BatchNo,ExpiryDate,WarehouseIdNo,TransactionType,UnitSalesPrice) " &
+                             "Select @BranchIdNo,a.IdNo,a.ProductIdNo,IIf(c.UnitQty=0,0,Cast(a.Quantity+a.BonusQuantity As Decimal(12,2)) * c.BaseQty / c.UnitQty)," &
+                             "a.NetAmount / (cast((a.Quantity+a.BonusQuantity) As Decimal(12,2)) * c.BaseQty / c.UnitQty), a.NetAmount , a.BatchNo, a.ExpiryDate, b.WarehouseIdNo, 'P' ," &
+                             "IIf(c.BaseQty = 0, 0, a.UnitSalesPrice * c.UnitQty / c.BaseQty) " &
+                             "From PurchaseDetail a Left Join Purchase b On a.PurchaseIdNo = b.IdNo " &
+                             "Left Join ProductUnit_View c On a.ProductIdNo = c.ProductIdNo And a.UnitIdNo = c.UnitIdNo " &
+                             "where a.PurchaseIdNo = @IdNo", {"@IdNo", idNo, "@BranchIdNo", GlobalVariables.BranchIdNo})
+                commands.Add(command1)
+                command2.Add("Update Purchase set Posted = 1 where IdNo = @IdNo", {"@IdNo", idNo})
+                commands.Add(command2)
+                retVal = Db.ExecuteNonQueryCommands("PostPurchase", commands)
+            End If
             Return retVal
         End Function
 

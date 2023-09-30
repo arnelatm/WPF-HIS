@@ -1496,21 +1496,21 @@ Namespace AdoNet
             Return GetDb().Scalar(sqlCommand)
         End Function
 
-        Public Function RunStoredProcedure(storedProcedureName As String, parameters As Object) As Object Implements IBaseDao.RunStoredProcedure
-            Return GetDb().RunSqlStoredProcedure(storedProcedureName, parameters)
+        Public Function RunSpWithRollBack(storedProcedureName As String, parameters As Object) As Object Implements IBaseDao.RunSpWithRollBack
+            Return GetDb().RunSqlSpWithRollBack(storedProcedureName, parameters)
         End Function
 
-        Public Function PerformUtility(utilityName As String, Optional parameters As Object = Nothing) As Object Implements IBaseDao.PerformUtility
-            Dim retVal As Int16
-            Dim storedProcedureName As String
-            If parameters.StoredProcedure Then
-                storedProcedureName = "sp" + utilityName
-                retVal = GetDb().RunStoredProcedure(storedProcedureName, parameters)
-            Else
+        'Public Function PerformUtility(utilityName As String, Optional parameters As Object = Nothing) As Object Implements IBaseDao.PerformUtility
+        '    Dim retVal As Int16
+        '    Dim storedProcedureName As String
+        '    If parameters.StoredProcedure Then
+        '        storedProcedureName = "sp" + utilityName
+        '        retVal = GetDb().RunSpWithRollBack(storedProcedureName, parameters)
+        '    Else
 
-            End If
-            Return retVal
-        End Function
+        '    End If
+        '    Return retVal
+        'End Function
 
 
         Public Function DeleteRecord(idNo As Integer, tableName As String) As Integer Implements IBaseDao.DeleteRecord

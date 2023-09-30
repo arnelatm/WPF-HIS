@@ -256,20 +256,8 @@ Namespace PresentationLayer.Views.Forms
         '    cboPaymentType.DataSource = Presenter.MakeEnumComboList(Of PaymentTypeSelection)
         'End Sub
 
-        Private Sub DjJournalEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            dtpCheckDate.Visible = True
-            lblCheckDate.Visible = True
-            lblCheckNumber.Visible = True
-            txtCheckNumber.Visible = True
-            btnSave.Visible = False
-            btnEdit.Visible = False
-            btnDelete.Visible = False
-            btnAdd.Visible = False
-            btnFind.Visible = False
-            dtpCheckDate.Value = Today
-            TurnOnInputs()
-            ShowPayee()
-            Presenter.MakeEnumComboList(Of PaymentTypeSelection)("PaymentType")
+        Private Sub DjJournalEntry_Load(sender As Object, e As EventArgs)
+
         End Sub
 
         Public Overloads Sub Dispose()
@@ -343,6 +331,21 @@ Namespace PresentationLayer.Views.Forms
             End If
         End Sub
 
+        Private Sub CheckPrinter_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+            dtpCheckDate.Visible = True
+            lblCheckDate.Visible = True
+            lblCheckNumber.Visible = True
+            txtCheckNumber.Visible = True
+            btnSave.Visible = False
+            btnEdit.Visible = False
+            btnDelete.Visible = False
+            btnAdd.Visible = False
+            btnFind.Visible = False
+            dtpCheckDate.Value = Today
+            TurnOnInputs()
+            ShowPayee()
+            Presenter.MakeEnumComboList(Of PaymentTypeSelection)("PaymentType")
+        End Sub
     End Class
 
 End Namespace

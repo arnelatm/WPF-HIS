@@ -10,7 +10,7 @@ Namespace PresentationLayer.Views
         Public Property AmtBefVat As Decimal Implements IPurchaseDetailView.AmtBefVat
         Public Property BaseUnitIdNo As Int16 Implements IPurchaseDetailView.BaseUnitIdNo
         Public Property BatchNo As String Implements IPurchaseDetailView.BatchNo
-        Public Property BonusQuantity As Int16 Implements IPurchaseDetailView.BonusQuantity
+        Public Property BonusQuantity As Decimal Implements IPurchaseDetailView.BonusQuantity
         Public Property CategoryIdNo As Short Implements IPurchaseDetailView.CategoryIdNo
         Public Property DataFilter As String Implements IView.DataFilter
         Public Property DiscountAmount As Decimal Implements IPurchaseDetailView.DiscountAmount
@@ -27,7 +27,7 @@ Namespace PresentationLayer.Views
         Public Property ProductName As String Implements IPurchaseDetailView.ProductName
         Public Property ProductNameAra As String Implements IPurchaseDetailView.ProductNameAra
         Public Property PurchaseIdNo As Int32 Implements IPurchaseDetailView.PurchaseIdNo
-        Public Property Quantity As Int16 Implements IPurchaseDetailView.Quantity
+        Public Property Quantity As Decimal Implements IPurchaseDetailView.Quantity
         Public Property Sequence As Int16 Implements IPurchaseDetailView.Sequence
         Public Property UnitCount As Int16 Implements IPurchaseDetailView.UnitCount
         Public Property UnitIdNo As Int16 Implements IPurchaseDetailView.UnitIdNo
@@ -45,7 +45,7 @@ Namespace PresentationLayer.Views
 
 
         Public Property BatchNo As String Implements IPurchaseHistoryView.BatchNo
-        Public Property BonusQuantity As Int16 Implements IPurchaseHistoryView.BonusQuantity
+        Public Property BonusQuantity As Decimal Implements IPurchaseHistoryView.BonusQuantity
         Public Property DataFilter As String Implements IView.DataFilter
         Public Property Errors As List(Of String) Implements IView.Errors
         Public Property ExpiryDate As Date? Implements IPurchaseHistoryView.ExpiryDate
@@ -53,7 +53,7 @@ Namespace PresentationLayer.Views
         Public Property IdNo As Int32 Implements IPurchaseHistoryView.IdNo
         Public Property Price As Decimal Implements IPurchaseHistoryView.Price
         Public Property PurchaseIdNo As Int32 Implements IPurchaseHistoryView.PurchaseIdNo
-        Public Property Quantity As Int16 Implements IPurchaseHistoryView.Quantity
+        Public Property Quantity As Decimal Implements IPurchaseHistoryView.Quantity
         Public Property SupplierCode As String Implements IPurchaseHistoryView.SupplierCode
         Public Property SupplierName As String Implements IPurchaseHistoryView.SupplierName
         Public Property SupplierNameAra As String Implements IPurchaseHistoryView.SupplierNameAra

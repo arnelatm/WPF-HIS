@@ -93,7 +93,7 @@ End Interface
 
 Public Interface IDaoStoredProcedure
 
-    Function RunStoredProcedure(ByRef storedProcedureName As String, parameter As Object) As Object
+    Function RunSpWithRollBack(ByRef storedProcedureName As String, parameter As Object) As Object
 
 End Interface
 
