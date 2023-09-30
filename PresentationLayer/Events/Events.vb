@@ -474,15 +474,19 @@ End Class
 
 Public Class GetControlDataSource
 
-    Public Sub New(tableName As String, control As Control, Optional filter As String = Nothing)
+    Public Sub New(tableName As String, control As Control, Optional filter As String = Nothing, Optional sortOrder As String = Nothing, Optional Ascending As Boolean = True)
         Me.TableName = tableName
         Me.Control = control
         Me.Filter = filter
+        Me.Ascending = Ascending
+        Me.SortOrder = sortOrder
     End Sub
 
     Public Property TableName As String
     Public Property Control As Control
     Public Property Filter As String
+    Public Property SortOrder As String
+    Public Property Ascending As Boolean
 
 End Class
 

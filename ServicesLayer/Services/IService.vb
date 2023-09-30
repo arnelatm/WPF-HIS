@@ -54,7 +54,7 @@ Namespace Services
         Function GetRecordFieldWithKeyG(Of TR, TS)(searchValue As TS, tableName As String, searchFieldName As String, returnFieldName As String) As TR
         Function GetRecordPosition(tableName As String, idNo As Int32, Optional IdFieldName As String = Nothing) As Integer
         Function GetRecordPositionByKey(Of T)(keyValue As T, tableName As String, sortKey As String, Optional KeyFieldName As String = Nothing) As Integer
-        Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal Optional fields As String() = Nothing, Optional filterKey As String = Nothing) As Object
+        Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal Optional fields As String() = Nothing, Optional filterKey As String = Nothing, Optional Ascending As Boolean = True) As Object
         Function GetRecordsWithGroupIdNo(Of TM)(ByVal idNo, Optional ByRef sortKey = Nothing) As List(Of TM)
         Function GetSortedRecordPosition(idNo As Int32, tableName As String, sortOrder As String, Optional filter As String = Nothing) As Integer
         Function GetSpRecords(spName As String, fields As String, sortKey As String, filter As String) As Object

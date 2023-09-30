@@ -78,7 +78,7 @@ Namespace PresentationLayer.Views.Forms
             Me.tlpDisbursement.Controls.Add(Me.dtpCheckDate, 5, 1)
             Me.tlpDisbursement.Controls.Add(Me.btnPrintCheck, 5, 5)
             Me.tlpDisbursement.Location = New System.Drawing.Point(0, 65)
-            Me.tlpDisbursement.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.tlpDisbursement.Margin = New System.Windows.Forms.Padding(4)
             Me.tlpDisbursement.Name = "tlpDisbursement"
             Me.tlpDisbursement.RowCount = 6
             Me.tlpDisbursement.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -248,7 +248,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayeeIdNo.PreviousSearchTerm = Nothing
             Me.cboPayeeIdNo.PropertySelector = Nothing
             Me.cboPayeeIdNo.ReadOnlyCombo = False
-            Me.cboPayeeIdNo.Size = New System.Drawing.Size(739, 30)
+            Me.cboPayeeIdNo.Size = New System.Drawing.Size(741, 30)
             Me.cboPayeeIdNo.SuggestBoxHeight = 200
             Me.cboPayeeIdNo.SuggestListOrderRule = Nothing
             Me.cboPayeeIdNo.TabIndex = 5
@@ -454,7 +454,7 @@ Namespace PresentationLayer.Views.Forms
             Me.btnPrintCheck.DesignerSelected = False
             Me.btnPrintCheck.ImageIndex = 0
             Me.btnPrintCheck.Location = New System.Drawing.Point(736, 133)
-            Me.btnPrintCheck.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.btnPrintCheck.Margin = New System.Windows.Forms.Padding(4)
             Me.btnPrintCheck.Name = "btnPrintCheck"
             Me.btnPrintCheck.OriginalImageName = Nothing
             Me.btnPrintCheck.SecurityKey = ""
@@ -482,7 +482,7 @@ Namespace PresentationLayer.Views.Forms
             Me.MaximumSize = New System.Drawing.Size(1327, 358)
             Me.MinimumSize = New System.Drawing.Size(18, 112)
             Me.Name = "CheckPrinter"
-        Me.Text = "Petty Cash Journal "
+            Me.Text = "Petty Cash Journal "
         Me.Controls.SetChildIndex(Me.tlpDisbursement, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
         Me.tlpDisbursement.ResumeLayout(false)

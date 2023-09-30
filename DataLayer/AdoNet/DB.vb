@@ -1697,7 +1697,7 @@ Namespace AdoNet
                 tryAgain = False
                 Dim trans As SqlTransaction
                 Try
-                    Using connection = New SqlConnection(_connectionString)
+                    Using connection = CreateConnection()
                         connection.Open()
                         Using command As New SqlCommand(storeProcedureName)
                             trans = connection.BeginTransaction()
@@ -1714,7 +1714,6 @@ Namespace AdoNet
                                 retValue = -1
                                 trans.Rollback()
                                 MessageBox.Show(ex.Message)
-                                Throw
                             End Try
 
                         End Using

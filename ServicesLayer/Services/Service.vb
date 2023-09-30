@@ -214,7 +214,7 @@ Namespace Services
                 End If
             End If
             If Not hierarchical Then
-                Dim data = GetRecords(lookupObj.TableName, lookupObj.SortKey, lookupObj.FieldsToShow, lookupObj.FilterKey)
+                Dim data = GetRecords(lookupObj.TableName, lookupObj.SortKey, lookupObj.FieldsToShow, lookupObj.FilterKey, lookupObj.Ascending)
                 Dim lookupSetting = GlobalVariables.LookupSetting()
                 If lookupSetting = "NameAndCode" Then
                     Return ProcessLookupByNameCode(data, lookupObj.FieldsToShow.Count())
@@ -650,8 +650,8 @@ Namespace Services
             Return DataDao.GetRecordPositionByKey(Of T)(keyValue, tableName, sortKey, IdFieldName)
         End Function
 
-        Public Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal Optional fields As String() = Nothing, Optional filterKey As String = Nothing) As Object Implements IService.GetRecords
-            Return DataDao.GetRecords(tableName, sortKey, fields, filterKey)
+        Public Function GetRecords(ByVal tableName As String, ByVal sortKey As String, ByVal Optional fields As String() = Nothing, Optional filterKey As String = Nothing, Optional Ascending As Boolean = True) As Object Implements IService.GetRecords
+            Return DataDao.GetRecords(tableName, sortKey, fields, filterKey, Ascending)
         End Function
 
         'Public Function GetRecords(Of TM)(ByVal parameters As Object, ByVal Optional sortKey As String = Nothing) As List(Of TM) Implements IService.GetRecords

@@ -151,7 +151,7 @@ Namespace PresentationLayer.Presenters
             If TypeOf eventType.Control Is CtComboBox Then
                 MakeControlDataSourcesT({New Object() {eventType.TableName, eventType.Control, Nothing, eventType.Filter}})
             Else
-                SetDataSource(eventType.TableName, eventType.Control,,, eventType.Filter)
+                SetDataSource(eventType.TableName, eventType.Control,, eventType.SortOrder, eventType.Filter, eventType.Ascending)
             End If
         End Sub
 
