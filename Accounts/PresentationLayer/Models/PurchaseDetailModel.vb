@@ -9,7 +9,7 @@
         Public Property AmtBefVat As Decimal
         Public Property BaseUnitIdNo As Int16
         Public Property BatchNo As String
-        Public Property BonusQuantity As Int16
+        Public Property BonusQuantity As Decimal
         Public Property CategoryIdNo As Int16
         Public Property DiscountAmount As Decimal
         Public Property DiscountPercent As Decimal
@@ -24,7 +24,7 @@
         Public Property ProductName As String
         Public Property ProductNameAra As String
         Public Property PurchaseIdNo As Int32
-        Public Property Quantity As Int16
+        Public Property Quantity As Decimal
         Public Property Sequence As Int16
         Public Property UnitCount As Int16
         Public Property UnitIdNo As Int16

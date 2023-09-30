@@ -122,9 +122,9 @@ Public Interface IBaseDao
     Function UpdateRecordWithKey(Of T1, T2)(tableName As String, keyFieldName As String, keyFieldValue As T1, fieldToReplace As String, replaceValue As T2) As Integer
     Function GetDtRecords(tableName As String, fieldNames As String, filterKey As String, sortKey As String) As DataTable
     Function DeleteRecords(Of T)(keyFieldValue As T, tableName As String, keyFieldName As String) As Integer
-    Function RunStoredProcedure(storedProcedureName As String, parameters As Object) As Object
+    Function RunSpWithRollBack(storedProcedureName As String, parameters As Object) As Object
     Function GetField(Of TR, TS1, TS2, TS3)(searchValue1 As TS1, searchValue2 As TS2, searchValue3 As TS3, tableName As String, searchFieldName1 As String, searchFieldName2 As String, searchFieldName3 As String, returnFieldName As String, Optional filter As String = Nothing) As TR
-    Function PerformUtility(utilityName As String, Optional parameters As Object = Nothing) As Object
+    'Function PerformUtility(utilityName As String, Optional parameters As Object = Nothing) As Object
     Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String, parameter As Object) As ExpandoObject
     Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String, parameter As Object, sortKey As String) As ExpandoObject
 End Interface

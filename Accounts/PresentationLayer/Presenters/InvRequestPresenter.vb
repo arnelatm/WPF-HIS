@@ -75,7 +75,7 @@ Namespace PresentationLayer.Presenters
                                         "@WarehouseToIdNo", invTransaction.WarehouseToIdNo}
 
             Dim retVal As Int16
-            retVal = invTranDao.RunStoredProcedure("spPostInvRequest", parameters)
+            retVal = invTranDao.RunSpWithRollBack("spPostInvRequest", parameters)
             If retVal >= 0 Then
                 View.WarehouseIdNo = View.WarehouseSelector
                 AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgInvTransferSuccess")

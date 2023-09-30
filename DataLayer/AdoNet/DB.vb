@@ -2,6 +2,7 @@
 Imports System.Data.Common
 Imports System.Data.SqlClient
 Imports System.Runtime.CompilerServices
+Imports System.Security.Policy
 Imports System.Text.RegularExpressions
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
@@ -1666,6 +1667,58 @@ Namespace AdoNet
                                 Throw
                             End Try
                         End Using
+                    End Using
+                Catch ex As Exception
+                    Select Case TryToCatchError(ex)
+                        Case DialogResult.Cancel
+                            retValue = -1
+                        Case DialogResult.Retry
+                            tryAgain = True
+                        Case Else
+                            MessageBox.Show(ex.Message)
+                            Throw
+                    End Select
+                Finally
+                    ' nothing
+                End Try
+                If Not tryAgain Then
+                    Exit Do
+                End If
+            Loop
+            Return retValue
+        End Function
+
+
+        Public Function RunSqlSpWithRollBack(storeProcedureName As String, ByVal parms() As Object) As Int32
+            Dim retValue As Int32
+            Dim tryAgain As Boolean
+            '_waitForm.Show()
+            Do While True
+                tryAgain = False
+                Dim trans As SqlTransaction
+                Try
+                    Using connection = New SqlConnection(_connectionString)
+                        connection.Open()
+                        Using command As New SqlCommand(storeProcedureName)
+                            trans = connection.BeginTransaction()
+                            command.CommandType = CommandType.StoredProcedure
+                            command.Connection = connection
+                            command.Transaction = trans
+                            If parms IsNot Nothing AndAlso parms.Count > 0 Then
+                                command.AddParameters(parms)
+                            End If
+                            Try
+                                retValue = command.ExecuteNonQuery()
+                                trans.Commit()
+                            Catch ex As Exception
+                                retValue = -1
+                                trans.Rollback()
+                                MessageBox.Show(ex.Message)
+                                Throw
+                            End Try
+
+                        End Using
+                        connection.Close()
                     End Using
                 Catch ex As Exception
                     Select Case TryToCatchError(ex)

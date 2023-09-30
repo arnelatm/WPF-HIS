@@ -5,13 +5,14 @@
 
 
 
+
 /****** Script for SelectTopNRows command from SSMS  ******/
 CREATE VIEW [dbo].[ProductMovement_View]
   AS
 (SELECT a.ProductIdNo, b.WarehouseIdNo,0 as WarehouseToIdNo, d.UnitName, a.PurchaseIdNo as IdNo,b.TransactionDate,
-IIf(d.UnitQty=0,0,Cast((a.Quantity+a.BonusQuantity) as Decimal(12,4)) * d.BaseQty/UnitQty) as BaseQty,
-a.Quantity+a.BonusQuantity as Quantity,
-a.UnitIdNo, IIf(a.Quantity+a.BonusQuantity=0,0,a.NetAmount/(a.Quantity+a.BonusQuantity)) as UnitCost,'Purchase' as 
+IIf(d.UnitQty=0,0,Cast((a.Quantity+a.BonusQuantity) as Decimal(12,4)) * d.BaseQty/UnitQty) * IIf(b.PurchaseReturn=0,1,-1) as BaseQty,
+(a.Quantity+a.BonusQuantity) * IIf(b.PurchaseReturn=0,1,-1) as Quantity,
+a.UnitIdNo, IIf(a.Quantity+a.BonusQuantity=0,0,a.NetAmount/(a.Quantity+a.BonusQuantity)) as UnitCost,IIf(b.PurchaseReturn=0,'Purchase','Purchase Return') as 
 Description,ExpiryDate,BatchNo
   FROM dbo.PurchaseDetail a
   left join dbo.Purchase b 

@@ -90,15 +90,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub GeneratePayrollBankCsv_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            btnPrint.Visible = False
-            btnSave.Visible = False
-            btnEdit.Visible = False
-            btnFilter.Visible = False
-            btnDelete.Visible = False
-            btnUndo.Visible = False
-            btnNew.Visible = False
-            btnOpen.Visible = False
-            TurnOnInputs()
+
         End Sub
 
         Private Sub btnOk_ClickButtonArea(sender As Object, e As MouseEventArgs) Handles btnOk.ClickButtonArea
@@ -124,6 +116,17 @@ Namespace PresentationLayer.Views.Forms
                 }
         End Sub
 
+        Private Sub GeneratePayrollBankCsv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+            btnPrint.Visible = False
+            btnSave.Visible = False
+            btnEdit.Visible = False
+            btnFilter.Visible = False
+            btnDelete.Visible = False
+            btnUndo.Visible = False
+            btnNew.Visible = False
+            btnOpen.Visible = False
+            TurnOnInputs()
+        End Sub
     End Class
 
 End Namespace

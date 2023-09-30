@@ -8,7 +8,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property AmtBefVat As Decimal
         Property BaseUnitIdNo As Int16
         Property BatchNo As String
-        Property BonusQuantity As Int16
+        Property BonusQuantity As Decimal
         Property CategoryIdNo As Int16
         Property DiscountAmount As Decimal
         Property DiscountPercent As Decimal
@@ -23,7 +23,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property ProductName As String
         Property ProductNameAra As String
         Property PurchaseIdNo As Int32
-        Property Quantity As Int16
+        Property Quantity As Decimal
         Property Sequence As Int16
         Property UnitCount As Int16
         Property UnitIdNo As Int16
@@ -40,13 +40,13 @@ Namespace PresentationLayer.Views.Interfaces
 
 
         Property BatchNo As String
-        Property BonusQuantity As Int16
+        Property BonusQuantity As Decimal
         Property ExpiryDate As Date?
         Property GrossAmount As Decimal
         Property IdNo As Int32
         Property Price As Decimal
         Property PurchaseIdNo As Int32
-        Property Quantity As Int16
+        Property Quantity As Decimal
         Property SupplierCode As String
         Property SupplierName As String
         Property SupplierNameAra As String
