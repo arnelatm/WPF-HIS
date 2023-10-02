@@ -3,9 +3,9 @@ Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Interfaces
 
-    Public Interface IStockRequestApprovalView
+    Public Interface IPurchaseOrderApprovalView
         Inherits IView
-        Property StockRequests As List(Of InvTransaction)
+        Property PurchaseOrders As List(Of PurchaseOrder)
 
     End Interface
 

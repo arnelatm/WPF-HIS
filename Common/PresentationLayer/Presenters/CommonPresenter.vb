@@ -364,6 +364,7 @@ Namespace PresentationLayer.Presenters
             Const LookupSortKey As Int32 = 4
             Const ValueMember As Int32 = 5
             Const DisplayMember As Int32 = 6
+            Const Ascending As Int32 = 7
             Dim dtl As New DataLookup
             dtl.TableName = item(LookupTableName)
             dtl.PropertyControl = item(PropertyControl)
@@ -381,6 +382,9 @@ Namespace PresentationLayer.Presenters
             End If
             If item.Length - 1 > 5 Then
                 dtl.DisplayMember = item(DisplayMember)
+            End If
+            If item.Length - 1 > 6 Then
+                dtl.Ascending = item(Ascending)
             End If
             ComposeLookupProperties(dtl)
             dtl.LookUpTask = Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(dtl))
@@ -633,6 +637,7 @@ Namespace PresentationLayer.Presenters
         Public Property NameDisplayValue As String
         Public Property LookUpTask As Task(Of DataTable)
         Public Property NameFieldToUse As String
+        Public Property Ascending As Boolean
     End Class
 
     Public Class DataCreator
@@ -644,7 +649,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Public Function CreateDataTable(dtl As DataLookup) As DataTable
-            Return _sv.GetDtRecords(dtl.TableName, dtl.LuFields, dtl.Filter, dtl.SortKey)
+            Return _sv.GetDtRecords(dtl.TableName, dtl.LuFields, dtl.Filter, dtl.SortKey, dtl.Ascending)
         End Function
 
         Public Function CreateData(dataTableName As String) As List(Of Lookup.LookupData)

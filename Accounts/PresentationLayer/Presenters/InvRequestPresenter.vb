@@ -80,6 +80,7 @@ Namespace PresentationLayer.Presenters
                 View.WarehouseIdNo = View.WarehouseSelector
                 AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgInvTransferSuccess")
                 GetInvTransactions()
+                RefreshRequestDetailsAndQtyOnHand(0)
             End If
         End Sub
 
@@ -126,7 +127,7 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Sub CreateDataSources()
             MakeControlDataSources({New String() {"Warehouse", "WarehouseIdNo", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"}})
-            MakeVarDataSources({New String() {"User", "UserList", Nothing, Nothing, "UserName"},
+            MakeVarDataSources({New String() {"User", "UserList", "IdNo,UserName", Nothing, "UserName"},
                                 New String() {"Unit", "UnitList", Nothing, Nothing, "UnitName"},
                                 New String() {"Warehouse", "WarehouseList", Nothing, "BranchIdNo = " + GlobalVariables.BranchIdNo.ToString(), "WarehouseName"}})
         End Sub

@@ -708,12 +708,12 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return Service.GetFieldOnMaxField(searchFieldName, tableName, returnFieldName, filter)
     End Function
 
-    Public Function GetDtRecords(ByVal pTableName As String, ByVal fieldNames As String(), Optional filter As String = Nothing, Optional sortKey As String = Nothing)
-        Return Service.GetDtRecords(pTableName, fieldNames, filter, sortKey)
+    Public Function GetDtRecords(ByVal pTableName As String, ByVal fieldNames As String(), Optional filter As String = Nothing, Optional sortKey As String = Nothing, Optional ascending As Boolean = True)
+        Return Service.GetDtRecords(pTableName, fieldNames, filter, sortKey, ascending)
     End Function
 
-    Public Function GetDtRecords(ByVal pTableName As String, ByVal fieldNames As String, Optional filter As String = Nothing, Optional sortKey As String = Nothing)
-        Return Service.GetDtRecords(pTableName, fieldNames, filter, sortKey)
+    Public Function GetDtRecords(ByVal pTableName As String, ByVal fieldNames As String, Optional filter As String = Nothing, Optional sortKey As String = Nothing, Optional ascending As Boolean = True)
+        Return Service.GetDtRecords(pTableName, fieldNames, filter, sortKey, ascending)
     End Function
 
     Public Function GetRecords(ByVal pTableName As String, ByVal sortOrder As String, ByVal fieldNames As String(), Optional filter As String = Nothing)

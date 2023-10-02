@@ -50,6 +50,7 @@ Namespace BusinessLayer
 
         Public Property InvTransactionRequests As List(Of InvTransaction)
         Public Property WarehouseIdNo As Int16
+        Public Property UserName As String
     End Class
 
 End Namespace

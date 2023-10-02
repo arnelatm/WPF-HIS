@@ -27,6 +27,7 @@ Namespace PresentationLayer.Models
 
         Public Property InvTransactionRequests As List(Of InvTransactionModel)
         Public Property WarehouseIdNo As Int16
+        Public Property UserName As String
 
     End Class
 

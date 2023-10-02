@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class StockRequestApprovalEntry
+Partial Class PurchaseOrderApprovalEntry
     Inherits AATM.PresentationLayer.Forms.CFormEntry
 
     'Form overrides dispose to clean up the component list.
@@ -25,7 +25,7 @@ Partial Class StockRequestApprovalEntry
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.DataGridViewStockRequest = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.DataGridViewPurchaseOrder = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewCheckBoxColumn1 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -38,11 +38,11 @@ Partial Class StockRequestApprovalEntry
         Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.bsInvTransactionRequest = New System.Windows.Forms.BindingSource(Me.components)
+        Me.bsPurchaseOrders = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.CFlowLayout1.SuspendLayout()
-        CType(Me.DataGridViewStockRequest, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.bsInvTransactionRequest, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DataGridViewPurchaseOrder, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.bsPurchaseOrders, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'CFlowLayout1
@@ -50,7 +50,7 @@ Partial Class StockRequestApprovalEntry
         Me.CFlowLayout1.BackColor = System.Drawing.Color.Transparent
         Me.CFlowLayout1.Controls.Add(Me.lblWarehouseIdNo)
         Me.CFlowLayout1.Controls.Add(Me.cboWarehouseIdNo)
-        Me.CFlowLayout1.Controls.Add(Me.DataGridViewStockRequest)
+        Me.CFlowLayout1.Controls.Add(Me.DataGridViewPurchaseOrder)
         Me.CFlowLayout1.Location = New System.Drawing.Point(5, 86)
         Me.CFlowLayout1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.CFlowLayout1.Name = "CFlowLayout1"
@@ -118,17 +118,17 @@ Partial Class StockRequestApprovalEntry
         Me.cboWarehouseIdNo.ValueIsNumeric = False
         Me.cboWarehouseIdNo.ValueMember = "IdNo"
         '
-        'DataGridViewStockRequest
+        'DataGridViewPurchaseOrder
         '
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-        Me.DataGridViewStockRequest.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.DataGridViewStockRequest.AutoGenerateColumns = False
-        Me.DataGridViewStockRequest.BegFindValue = Nothing
-        Me.DataGridViewStockRequest.Cached = False
-        Me.DataGridViewStockRequest.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridViewStockRequest.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewCheckBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewCheckBoxColumn2, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn10})
-        Me.DataGridViewStockRequest.DataFilter = Nothing
-        Me.DataGridViewStockRequest.DataSource = Me.bsInvTransactionRequest
+        Me.DataGridViewPurchaseOrder.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.DataGridViewPurchaseOrder.AutoGenerateColumns = False
+        Me.DataGridViewPurchaseOrder.BegFindValue = Nothing
+        Me.DataGridViewPurchaseOrder.Cached = False
+        Me.DataGridViewPurchaseOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridViewPurchaseOrder.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewCheckBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewCheckBoxColumn2, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn10})
+        Me.DataGridViewPurchaseOrder.DataFilter = Nothing
+        Me.DataGridViewPurchaseOrder.DataSource = Me.bsPurchaseOrders
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.Black
         DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -136,37 +136,37 @@ Partial Class StockRequestApprovalEntry
         DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewStockRequest.DefaultCellStyle = DataGridViewCellStyle2
-        Me.DataGridViewStockRequest.DgvFooter = Nothing
-        Me.DataGridViewStockRequest.DisplayOnly = False
-        Me.DataGridViewStockRequest.Ea = Nothing
-        Me.DataGridViewStockRequest.EditingMode = False
-        Me.DataGridViewStockRequest.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.DataGridViewStockRequest.EndFindValue = Nothing
-        Me.DataGridViewStockRequest.FieldDescription = Nothing
-        Me.DataGridViewStockRequest.FieldName = Nothing
-        Me.DataGridViewStockRequest.FieldsDictionary = Nothing
-        Me.DataGridViewStockRequest.FindColumnNo = CType(0, Short)
-        Me.DataGridViewStockRequest.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.DataGridViewStockRequest.FindEnabled = False
-        Me.DataGridViewStockRequest.FirstRowDeletionEnabled = True
-        Me.DataGridViewStockRequest.FirstRowInsertionEnabled = True
-        Me.DataGridViewStockRequest.IgnoreCase = False
-        Me.DataGridViewStockRequest.IsDirty = False
-        Me.DataGridViewStockRequest.Location = New System.Drawing.Point(4, 36)
-        Me.DataGridViewStockRequest.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.DataGridViewStockRequest.Name = "DataGridViewStockRequest"
-        Me.DataGridViewStockRequest.ReadOnly = True
-        Me.DataGridViewStockRequest.RowHeadersWidth = 51
-        Me.DataGridViewStockRequest.Searchable = True
-        Me.DataGridViewStockRequest.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.DataGridViewStockRequest.SecurityKey = ""
-        Me.DataGridViewStockRequest.SequenceColumn = "dgvSequence"
-        Me.DataGridViewStockRequest.SequenceFieldName = "Sequence"
-        Me.DataGridViewStockRequest.ShowFooter = False
-        Me.DataGridViewStockRequest.Size = New System.Drawing.Size(1407, 593)
-        Me.DataGridViewStockRequest.TabIndex = 3
-        Me.DataGridViewStockRequest.Translatable = True
+        Me.DataGridViewPurchaseOrder.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DataGridViewPurchaseOrder.DgvFooter = Nothing
+        Me.DataGridViewPurchaseOrder.DisplayOnly = False
+        Me.DataGridViewPurchaseOrder.Ea = Nothing
+        Me.DataGridViewPurchaseOrder.EditingMode = False
+        Me.DataGridViewPurchaseOrder.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+        Me.DataGridViewPurchaseOrder.EndFindValue = Nothing
+        Me.DataGridViewPurchaseOrder.FieldDescription = Nothing
+        Me.DataGridViewPurchaseOrder.FieldName = Nothing
+        Me.DataGridViewPurchaseOrder.FieldsDictionary = Nothing
+        Me.DataGridViewPurchaseOrder.FindColumnNo = CType(0, Short)
+        Me.DataGridViewPurchaseOrder.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.DataGridViewPurchaseOrder.FindEnabled = False
+        Me.DataGridViewPurchaseOrder.FirstRowDeletionEnabled = True
+        Me.DataGridViewPurchaseOrder.FirstRowInsertionEnabled = True
+        Me.DataGridViewPurchaseOrder.IgnoreCase = False
+        Me.DataGridViewPurchaseOrder.IsDirty = False
+        Me.DataGridViewPurchaseOrder.Location = New System.Drawing.Point(4, 36)
+        Me.DataGridViewPurchaseOrder.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DataGridViewPurchaseOrder.Name = "DataGridViewPurchaseOrder"
+        Me.DataGridViewPurchaseOrder.ReadOnly = True
+        Me.DataGridViewPurchaseOrder.RowHeadersWidth = 51
+        Me.DataGridViewPurchaseOrder.Searchable = True
+        Me.DataGridViewPurchaseOrder.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.DataGridViewPurchaseOrder.SecurityKey = ""
+        Me.DataGridViewPurchaseOrder.SequenceColumn = "dgvSequence"
+        Me.DataGridViewPurchaseOrder.SequenceFieldName = "Sequence"
+        Me.DataGridViewPurchaseOrder.ShowFooter = False
+        Me.DataGridViewPurchaseOrder.Size = New System.Drawing.Size(1407, 593)
+        Me.DataGridViewPurchaseOrder.TabIndex = 3
+        Me.DataGridViewPurchaseOrder.Translatable = True
         '
         'DataGridViewTextBoxColumn1
         '
@@ -276,30 +276,30 @@ Partial Class StockRequestApprovalEntry
         Me.DataGridViewTextBoxColumn10.ReadOnly = True
         Me.DataGridViewTextBoxColumn10.Width = 125
         '
-        'bsInvTransactionRequest
+        'bsPurchaseOrders
         '
-        Me.bsInvTransactionRequest.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.InvTransactionModel)
+        Me.bsPurchaseOrders.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.InvTransactionModel)
         '
-        'StockRequestApprovalEntry
+        'PurchaseOrderApprovalEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.ClientSize = New System.Drawing.Size(1431, 757)
         Me.Controls.Add(Me.CFlowLayout1)
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.Name = "StockRequestApprovalEntry"
-        Me.Text = "Stock Request Approval"
+        Me.Name = "PurchaseOrderApprovalEntry"
+        Me.Text = "Employee Leave Approval"
         Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
         Me.CFlowLayout1.ResumeLayout(False)
-        CType(Me.DataGridViewStockRequest, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.bsInvTransactionRequest, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DataGridViewPurchaseOrder, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.bsPurchaseOrders, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout
-    Friend WithEvents DataGridViewStockRequest As Libraries.CBaseControlsLibrary.CDataGridView
-    Friend WithEvents dgvStockRequestIdNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
+    Friend WithEvents DataGridViewPurchaseOrder As Libraries.CBaseControlsLibrary.CDataGridView
+    Friend WithEvents dgvPurchaseOrderIdNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
     Friend WithEvents dgvEmployeeIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
     Friend WithEvents dgvFullDay As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
     Friend WithEvents dgvStartDate As Libraries.CBaseControlsLibrary.CDgvTextColumn
@@ -321,7 +321,7 @@ Partial Class StockRequestApprovalEntry
     Friend WithEvents UserIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents WarehouseIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents WarehouseToIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents bsInvTransactionRequest As BindingSource
+    Friend WithEvents bsPurchaseOrders As BindingSource
     Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewCheckBoxColumn1 As DataGridViewCheckBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn

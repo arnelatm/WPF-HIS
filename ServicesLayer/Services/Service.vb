@@ -661,8 +661,8 @@ Namespace Services
         '    Return dataModel
         'End Function
 
-        Public Function GetDtRecords(ByVal tableName As String, ByVal Optional fields As String = Nothing, Optional filterKey As String = Nothing, Optional ByVal sortKey As String = Nothing) As Object Implements IService.GetDtRecords
-            Return DataDao.GetDtRecords(tableName, fields, filterKey, sortKey)
+        Public Function GetDtRecords(ByVal tableName As String, ByVal Optional fields As String = Nothing, Optional filterKey As String = Nothing, Optional ByVal sortKey As String = Nothing, Optional ascending As Boolean = True) As Object Implements IService.GetDtRecords
+            Return DataDao.GetDtRecords(tableName, fields, filterKey, sortKey, ascending)
         End Function
 
         Public Function GetRecordsWithGroupIdNo(Of TM)(idNo, Optional ByRef sortKey = Nothing) As List(Of TM) Implements IService.GetRecordsWithGroupIdNo
