@@ -149,7 +149,7 @@ Namespace PresentationLayer.Presenters
 
         Public Sub OnGetControlDataSourceHandler(ByRef eventType As GetControlDataSource) Implements ISubscriber(Of GetControlDataSource).OnEventHandler
             If TypeOf eventType.Control Is CtComboBox Then
-                MakeControlDataSourcesT({New Object() {eventType.TableName, eventType.Control, Nothing, eventType.Filter}})
+                MakeControlDataSourcesT({New Object() {eventType.TableName, eventType.Control, Nothing, eventType.Filter, eventType.Ascending}})
             Else
                 SetDataSource(eventType.TableName, eventType.Control,, eventType.SortOrder, eventType.Filter, eventType.Ascending)
             End If

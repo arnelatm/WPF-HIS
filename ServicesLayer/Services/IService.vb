@@ -25,7 +25,7 @@ Namespace Services
         Function GetAll(Of TM As New)(sortKey As String) As List(Of TM)
         Function GetControlSecurityIdNo(searchValue As String, Optional menu As Boolean = False) As String
         Function GetDataSet(storedProcedureName As String, parameters As Object) As DataSet
-        Function GetDtRecords(tableName As String, Optional fields As String = Nothing, Optional filterKey As String = Nothing, Optional sortKey As String = Nothing) As Object
+        Function GetDtRecords(tableName As String, Optional fields As String = Nothing, Optional filterKey As String = Nothing, Optional sortKey As String = Nothing, Optional ascending As Boolean = True) As Object
         Function GetField(Of TR, TS)(searchValue As TS, tableName As String, searchFieldName As String, returnFieldName As String, Optional filter As String = Nothing) As TR
         Function GetField(searchValue As String, tableName As String, searchFieldName As String, returnFieldName As String) As Object
         Function GetFieldOnMaxField(searchFieldName As String, tableName As String, returnFieldName As String, Optional filter As String = Nothing) As Object

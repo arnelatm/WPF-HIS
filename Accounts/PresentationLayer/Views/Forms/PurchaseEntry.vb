@@ -1,7 +1,5 @@
 ﻿Imports System.ComponentModel
-Imports System.Dynamic
 Imports System.Globalization
-Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub

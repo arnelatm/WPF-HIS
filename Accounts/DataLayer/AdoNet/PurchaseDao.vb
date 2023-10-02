@@ -126,18 +126,22 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef Purchase As Purchase) As Integer _
             Implements IDao(Of Purchase).AddRecord
             Dim sql As String
+            Dim retVal As Int32
             If _purchaseOrder Then
                 sql = "INSERT INTO [PurchaseOrder] " &
                     " (Amount,Approved,BranchIdNo,Cancelled,Disapproved,ReferenceNo,SupplierIdNo,TransactionDate,UserIdNo,VatAmount,VatNumber,WarehouseIdNo)" &
                     " VALUES (@Amount,@Approved,@BranchIdNo,@Cancelled,@Disapproved,@ReferenceNo,@SupplierIdNo,@TransactionDate,@UseridNo,@VatAmount,@VatNumber,@WarehouseIdNo)"
-                Return Db.Insert(sql, TakePo(Purchase))
+                retVal = Db.Insert(sql, TakePo(Purchase))
             Else
                 sql = "INSERT INTO [Purchase] " &
                     " (Amount,BranchIdNo,Cancelled,DueDate,InvoiceDate,InvoiceNo,Posted,PurchaseReturn,ReferenceNo,SupplierIdNo,TransactionDate,UserIdNo,VatAmount,VatNumber,WarehouseIdNo)" &
                     " VALUES (@Amount,@BranchIdNo,@Cancelled,@DueDate,@InvoiceDate,@InvoiceNo,@Posted,@PurchaseReturn,@ReferenceNo,@SupplierIdNo,@TransactionDate,@UseridNo,@VatAmount,@VatNumber,@WarehouseIdNo)"
-                Return Db.Insert(sql, Take(Purchase))
+                retVal = Db.Insert(sql, Take(Purchase))
             End If
-
+            If retVal > 0 Then
+                UpdateReferenceNumber(retVal)
+            End If
+            Return retVal
         End Function
 
         'Private mkParam As Object = {{_purchaseOrder, _purchaseReturn}}

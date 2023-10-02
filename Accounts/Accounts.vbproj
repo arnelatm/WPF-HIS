@@ -668,6 +668,7 @@
     </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IApArEmReportView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IContactDateRangeView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IPurchaseOrderApprovalView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IUtilityView.vb" />
     <Compile Include="PresentationLayer\Views\InvRequestView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeLeaveApprovalItemView.vb" />
@@ -2754,8 +2755,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app-ibn-server-test.config" />
+    <None Include="app.config" />
     <None Include="app-Marcelo-Dell.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Isp-Server.config" />

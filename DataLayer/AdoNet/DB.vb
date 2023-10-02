@@ -1697,7 +1697,7 @@ Namespace AdoNet
                 tryAgain = False
                 Dim trans As SqlTransaction
                 Try
-                    Using connection = CreateConnection()
+                    Using connection = New SqlConnection(_connectionString)
                         connection.Open()
                         Using command As New SqlCommand(storeProcedureName)
                             trans = connection.BeginTransaction()
