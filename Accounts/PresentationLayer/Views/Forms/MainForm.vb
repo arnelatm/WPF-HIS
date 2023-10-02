@@ -1295,6 +1295,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemPeriodicPayroll_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPeriodicPayroll.Click
             RunReportNew(Of PayrollPrinting)()
         End Sub
+
+        Private Sub ToolStripMenuItemPurchaseOrderApproval_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPurchaseOrderApproval.Click
+            RunForm(Of PurchaseOrderApprovalForm, PurchaseOrderApprovalPresenter(Of PurchaseOrderModel))()
+        End Sub
     End Class
 
 End Namespace

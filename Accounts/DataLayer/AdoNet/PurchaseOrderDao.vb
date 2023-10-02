@@ -147,6 +147,35 @@ Namespace DataLayer.AdoNet
             Return retVal
         End Function
 
+        Public Function GetRecordsWithParams(parameters As Object) As List(Of Inventory) Implements IDaoGetRecordsWithParams(Of Inventory).GetRecordsWithParams
+            Dim sortExpression As String = ""
+            Dim filter As String = ""
+            If parameters.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or
+               parameters.InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Or
+               parameters.InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
+                sortExpression = "ExpiryDate"
+                filter = "ProductIdNo = @ProductIdNo and QtyOnHand <> 0 and WarehouseIdNo = @WarehouseIdNo"
+            ElseIf parameters.InventoryAction = EnumToCode(InventoryActionSelection.Add) Then
+                sortExpression = "ExpiryDate Desc"
+                filter = "ProductIdNo = @ProductIdNo and WarehouseIdNo = @WarehouseIdNo and ExpiryDate > CAST( GETDATE() AS Date )"
+            End If
+            Dim sql As String = "select BatchNo, ExpiryDate, IdNo, TotalCost, ProductIdNo, TransactionIdNo, QtyOnHand, UnitCost, UnitSalesPrice, WarehouseIdNo from Inventory_View " &
+                    "where " & filter & " Order By " + sortExpression
+            Dim params() As Object = {"@ProductIdNo", parameters.ProductIdNo, "@WarehouseIdNo", parameters.WarehouseIdNo}
+            Return Db.Read(sql, MakeInventory, params).ToList()
+        End Function
+
+        Public Function GetRecordsWithGroupIdNo(idNo As Object, Optional sortExpression As Object = Nothing) As List(Of Inventory) Implements IDaoChild(Of Inventory).GetRecordsWithGroupIdNo
+            If sortExpression Is Nothing Then
+                sortExpression = "IdNo"
+            End If
+            Dim sql As String = "select BatchNo, ExpiryDate, IdNo, TotalCost, ProductIdNo, TransactionIdNo, QtyOnHand, UnitCost, UnitSalesPrice, WarehouseIdNo from Inventory_View " &
+                    "where ProductIdNo = @ProductIdNo And QtyOnHand <> 0 And BranchIdNo = @BranchIdNo and WarehouseIdNo = @WarehouseIdNo Order By " + sortExpression
+            Dim params() As Object = {"@ProductIdNo", idNo, "@BranchIdNo", GlobalVariables.BranchIdNo}
+            Return Db.Read(sql, MakeInventory, params).ToList()
+        End Function
+
+
     End Class
 
 
