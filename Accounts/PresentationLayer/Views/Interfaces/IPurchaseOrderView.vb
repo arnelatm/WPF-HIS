@@ -39,4 +39,18 @@ Namespace PresentationLayer.Views.Interfaces
         Event ProductNameValidating(productName As String, control As Control)
     End Interface
 
+    Public Interface IPurchaseOrderApprovalView
+        Inherits IView
+        Property PurchaseOrderList As List(Of IPurchaseOrderView)
+        Property WarehouseIdNo As Int16
+        Property WarehouseList As DataTable
+        Property UserList As DataTable
+        Property UnitList As DataTable
+        Property PurchaseOrderDetails As List(Of PurchaseOrderDetailView)
+
+        Event RowChanged(productIdNo As Integer)
+        Event FormLoaded()
+        Event SupplyQuantityClicked(invTransIdNo As Integer)
+        Event TransferRequestClicked(invTransIdNo As Integer)
+    End Interface
 End Namespace

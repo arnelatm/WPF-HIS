@@ -252,6 +252,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemPurchaseOrderApproval = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -773,7 +774,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemPurchases
             '
-            Me.ToolStripMenuItemPurchases.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPurchase, Me.ToolStripMenuItemPurchaseReturn, Me.ToolStripMenuItemPurchaseOrder})
+            Me.ToolStripMenuItemPurchases.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemPurchase, Me.ToolStripMenuItemPurchaseReturn, Me.ToolStripMenuItemPurchaseOrder, Me.ToolStripMenuItemPurchaseOrderApproval})
             Me.ToolStripMenuItemPurchases.Name = "ToolStripMenuItemPurchases"
             resources.ApplyResources(Me.ToolStripMenuItemPurchases, "ToolStripMenuItemPurchases")
             '
@@ -1427,6 +1428,11 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
+            'ToolStripMenuItemPurchaseOrderApproval
+            '
+            Me.ToolStripMenuItemPurchaseOrderApproval.Name = "ToolStripMenuItemPurchaseOrderApproval"
+            resources.ApplyResources(Me.ToolStripMenuItemPurchaseOrderApproval, "ToolStripMenuItemPurchaseOrderApproval")
+            '
             'MainForm
             '
             Me.AllowDrop = True
@@ -1676,5 +1682,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemProductMovement As ToolStripMenuItem
         Friend WithEvents ListToolStripMenuItemDocumentExpiry As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDocumentReportList As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemPurchaseOrderApproval As ToolStripMenuItem
     End Class
 End NameSpace
