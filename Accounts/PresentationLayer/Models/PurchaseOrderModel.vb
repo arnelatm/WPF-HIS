@@ -17,12 +17,21 @@ Namespace PresentationLayer.Models
         Public Property Disapproved As Boolean
         Public Property IdNo As Int32
         Public Property Notes As String
+        Public Property Posted As Boolean
         Public Property ReferenceNo As String
         Public Property SupplierIdNo As Int32
         Public Property TransactionDate As Date?
         Public Property UserIdNo As Int16
         Public Property WarehouseIdNo As Int16
         Public Property PurchaseOrderDetails As List(Of PurchaseOrderDetailModel)
+
+    End Class
+
+    Public Class PurchaseOrderApprovalModel
+
+        Public Property UnpostedPurchaseOrders As List(Of PurchaseOrderModel)
+        Public Property WarehouseIdNo As Int16
+        Public Property UserName As String
 
     End Class
 

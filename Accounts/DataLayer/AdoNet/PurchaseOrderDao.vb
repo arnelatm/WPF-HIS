@@ -25,6 +25,7 @@ Namespace DataLayer.AdoNet
                                   "Disapproved," &
                                   "IdNo," &
                                   "Notes," &
+                                  "Posted," &
                                   "ReferenceNo," &
                                   "SupplierIdNo," &
                                   "TransactionDate," &
@@ -58,6 +59,7 @@ Namespace DataLayer.AdoNet
                     "Cancelled = @Cancelled," &
                     "Disapproved = @Disapproved," &
                     "Notes = @Notes," &
+                    "Posted = @Posted," &
                     "ReferenceNo = @ReferenceNo," &
                     "SupplierIdNo = @SupplierIdNo," &
                     "TransactionDate = @TransactionDate," &
@@ -76,8 +78,8 @@ Namespace DataLayer.AdoNet
             Dim retVal As Int32 = 0
             Dim sql As String =
                     " INSERT INTO [PurchaseOrder] " &
-                    "         (Amount,Approved ,BranchIdNo ,Cancelled ,Disapproved ,Notes ,ReferenceNo  ,SupplierIdNo,TransactionDate ,UserIdNo ,WarehouseIdNo)" &
-                    " VALUES (@Amount,@Approved,@BranchIdNo,@Cancelled,@Disapproved,@Notes,@SupplierIdNo,@ReferenceNo,@TransactionDate,@UseridNo,@WarehouseIdNo)"
+                    "         (Amount,Approved ,BranchIdNo ,Cancelled ,Disapproved ,Notes ,Posted, ReferenceNo  ,SupplierIdNo,TransactionDate ,UserIdNo ,WarehouseIdNo)" &
+                    " VALUES (@Amount,@Approved,@BranchIdNo,@Cancelled,@Disapproved,@Notes,@Posted, @SupplierIdNo,@ReferenceNo,@TransactionDate,@UseridNo,@WarehouseIdNo)"
             retVal = Db.Insert(sql, Take(PurchaseOrder))
             If retVal > 0 Then
                 UpdateReferenceNumber(retVal)
@@ -93,6 +95,7 @@ Namespace DataLayer.AdoNet
                                   .Disapproved = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Disapproved")),
                                   .IdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("IdNo")),
                                   .Notes = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Notes")),
+                                  .Posted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Posted")),
                                   .ReferenceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ReferenceNo")),
                                   .SupplierIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("SupplierIdNo")),
                                   .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),
@@ -109,6 +112,7 @@ Namespace DataLayer.AdoNet
                                     "Cancelled", PurchaseOrder.Cancelled,
                                     "IdNo", PurchaseOrder.IdNo,
                                     "Notes", PurchaseOrder.Notes,
+                                    "Posted", PurchaseOrder.Posted,
                                     "ReferenceNo", PurchaseOrder.ReferenceNo,
                                     "SupplierIdNo", PurchaseOrder.SupplierIdNo,
                                     "TransactionDate", PurchaseOrder.TransactionDate,
@@ -147,34 +151,70 @@ Namespace DataLayer.AdoNet
             Return retVal
         End Function
 
-        Public Function GetRecordsWithParams(parameters As Object) As List(Of Inventory) Implements IDaoGetRecordsWithParams(Of Inventory).GetRecordsWithParams
-            Dim sortExpression As String = ""
-            Dim filter As String = ""
-            If parameters.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or
-               parameters.InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Or
-               parameters.InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
-                sortExpression = "ExpiryDate"
-                filter = "ProductIdNo = @ProductIdNo and QtyOnHand <> 0 and WarehouseIdNo = @WarehouseIdNo"
-            ElseIf parameters.InventoryAction = EnumToCode(InventoryActionSelection.Add) Then
-                sortExpression = "ExpiryDate Desc"
-                filter = "ProductIdNo = @ProductIdNo and WarehouseIdNo = @WarehouseIdNo and ExpiryDate > CAST( GETDATE() AS Date )"
-            End If
-            Dim sql As String = "select BatchNo, ExpiryDate, IdNo, TotalCost, ProductIdNo, TransactionIdNo, QtyOnHand, UnitCost, UnitSalesPrice, WarehouseIdNo from Inventory_View " &
-                    "where " & filter & " Order By " + sortExpression
-            Dim params() As Object = {"@ProductIdNo", parameters.ProductIdNo, "@WarehouseIdNo", parameters.WarehouseIdNo}
-            Return Db.Read(sql, MakeInventory, params).ToList()
+        'Public Function GetRecordsWithParams(parameters As Object) As List(Of Inventory) Implements IDaoGetRecordsWithParams(Of PurchaseOrder).GetRecordsWithParams
+        '    Dim sortExpression As String = ""
+        '    Dim filter As String = ""
+        '    If parameters.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or
+        '       parameters.InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Or
+        '       parameters.InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
+        '        sortExpression = "ExpiryDate"
+        '        filter = "ProductIdNo = @ProductIdNo and QtyOnHand <> 0 and WarehouseIdNo = @WarehouseIdNo"
+        '    ElseIf parameters.InventoryAction = EnumToCode(InventoryActionSelection.Add) Then
+        '        sortExpression = "ExpiryDate Desc"
+        '        filter = "ProductIdNo = @ProductIdNo and WarehouseIdNo = @WarehouseIdNo and ExpiryDate > CAST( GETDATE() AS Date )"
+        '    End If
+        '    Dim sql As String = "select BatchNo, ExpiryDate, IdNo, TotalCost, ProductIdNo, TransactionIdNo, QtyOnHand, UnitCost, UnitSalesPrice, WarehouseIdNo from Inventory_View " &
+        '            "where " & filter & " Order By " + sortExpression
+        '    Dim params() As Object = {"@ProductIdNo", parameters.ProductIdNo, "@WarehouseIdNo", parameters.WarehouseIdNo}
+        '    Return Db.Read(sql, MakeInventory, params).ToList()
+        'End Function
+
+        'Public Function GetRecordsWithGroupIdNo(idNo As Object, Optional sortExpression As Object = Nothing) As List(Of Inventory) Implements IDaoChild(Of Inventory).GetRecordsWithGroupIdNo
+        '    If sortExpression Is Nothing Then
+        '        sortExpression = "IdNo"
+        '    End If
+        '    Dim sql As String = "select BatchNo, ExpiryDate, IdNo, TotalCost, ProductIdNo, TransactionIdNo, QtyOnHand, UnitCost, UnitSalesPrice, WarehouseIdNo from Inventory_View " &
+        '            "where ProductIdNo = @ProductIdNo And QtyOnHand <> 0 And BranchIdNo = @BranchIdNo and WarehouseIdNo = @WarehouseIdNo Order By " + sortExpression
+        '    Dim params() As Object = {"@ProductIdNo", idNo, "@BranchIdNo", GlobalVariables.BranchIdNo}
+        '    Return Db.Read(sql, MakeInventory, params).ToList()
+        'End Function
+
+
+    End Class
+
+    Public Class PurchaseOrderApprovalDao
+        Inherits AccountsDao
+        Implements IDaoParametrized(Of PurchaseOrderApproval)
+
+        Private ReadOnly _db As New Db()
+
+        Public Overrides Function GetDB()
+            Return _db
         End Function
 
-        Public Function GetRecordsWithGroupIdNo(idNo As Object, Optional sortExpression As Object = Nothing) As List(Of Inventory) Implements IDaoChild(Of Inventory).GetRecordsWithGroupIdNo
-            If sortExpression Is Nothing Then
-                sortExpression = "IdNo"
-            End If
-            Dim sql As String = "select BatchNo, ExpiryDate, IdNo, TotalCost, ProductIdNo, TransactionIdNo, QtyOnHand, UnitCost, UnitSalesPrice, WarehouseIdNo from Inventory_View " &
-                    "where ProductIdNo = @ProductIdNo And QtyOnHand <> 0 And BranchIdNo = @BranchIdNo and WarehouseIdNo = @WarehouseIdNo Order By " + sortExpression
-            Dim params() As Object = {"@ProductIdNo", idNo, "@BranchIdNo", GlobalVariables.BranchIdNo}
-            Return Db.Read(sql, MakeInventory, params).ToList()
+
+        Public Function GetParametrized(Of TM)(parameter As Object, Optional sortExpression As String = Nothing) As PurchaseOrderApproval Implements IDaoParametrized(Of PurchaseOrderApproval).GetParametrized
+            Dim sql As String
+            Dim data As New PurchaseOrderApproval
+            Dim params() As Object = {"@BranchIdNo", GlobalVariables.BranchIdNo}
+            sql = $"SELECT IdNo,ReferenceNo,TransactionDate,WarehouseIdNo,Amount,Notes,Posted,Cancelled,DateCreated,UserIdNo from PurchaseOrder where BranchIdNo = @BranchIdNo and Posted = 0"
+            _db.SetConnectionString("ISPDATA")
+            data.UnpostedPurchaseOrders = _db.Read(sql, Make, params).ToList()
+            Return data
         End Function
 
+
+        Private Shared ReadOnly Make As Func(Of IDataReader, PurchaseOrder) = Function(reader) New PurchaseOrder() With
+                                {.Amount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Amount")),
+                                  .Cancelled = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cancelled")),
+                                  .DateCreated = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("DateCreated")),
+                                  .IdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("IdNo")),
+                                  .Notes = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Notes")),
+                                  .ReferenceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ReferenceNo")),
+                                  .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),
+                                  .UserIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("UserIdNo")),
+                                  .WarehouseIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("WarehouseIdNo"))
+                                }
 
     End Class
 

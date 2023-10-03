@@ -126,8 +126,8 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub GetUnPostedPo()
-            Dim purchaseOrders As New PurchaseOrderModel
-            purchaseOrders = Service.GetParametrized(Of PurchaseOrderModel)({View.WarehouseIdNo})
+            Dim purchaseOrders As New PurchaseOrderApprovalModel
+            purchaseOrders = Service.GetParametrized(Of PurchaseOrderApprovalModel)(Nothing)
             GlobalVariables.Mapper.Map(purchaseOrders, View)
         End Sub
 

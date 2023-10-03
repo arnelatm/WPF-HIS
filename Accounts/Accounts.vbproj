@@ -337,6 +337,7 @@
     <Compile Include="DataLayer\AdoNet\IGroup\DosageMasterDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\PrescriptionDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\PrescriptionItemDao.vb" />
+    <Compile Include="DataLayer\AdoNet\PurchaseOrderApprovalDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\InvRequestDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseOrderDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseOrderDao.vb" />
@@ -670,7 +671,6 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IApArEmReportView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IContactDateRangeView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IUtilityView.vb" />
-    <Compile Include="PresentationLayer\Views\InvRequestView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeLeaveApprovalItemView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeLeaveCreditView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeePayElementView.vb" />
@@ -727,12 +727,6 @@
       <DependentUpon>ItemDetailsFinder.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\ItemDetailsFinder.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PurchaseOrderEntry.Designer.vb">
-      <DependentUpon>PurchaseOrderEntry.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\PurchaseOrderEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\FinancialReport.designer.vb">
@@ -2066,10 +2060,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\PurchaseOrderApprovalForm.resx">
       <DependentUpon>PurchaseOrderApprovalForm.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\PurchaseOrderEntry.resx">
-      <DependentUpon>PurchaseOrderEntry.vb</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\InvTransTypeEntryTv.resx">
       <DependentUpon>InvTransTypeEntryTv.vb</DependentUpon>

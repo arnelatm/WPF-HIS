@@ -26,4 +26,17 @@ Namespace BusinessLayer
 
     End Class
 
+
+    Public Class PurchaseOrderApprovalDetail
+        Inherits PurchaseOrderDetail
+
+        Public Property QtyApproved As Decimal
+        Public Property QtyOnHand As Decimal
+        Public Property QtySupplied As Decimal
+        Public Property UnitName As String
+        Public Property BaseUnitName As String
+
+
+    End Class
+
 End Namespace
