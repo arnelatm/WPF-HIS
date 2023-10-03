@@ -8,7 +8,7 @@ Namespace PresentationLayer.Views.Forms
     Public Class PurchaseOrderApprovalForm
         Implements IPurchaseOrderApprovalView
 
-        Private _purchaseOrderList As New List(Of IPurchaseOrderView)
+        Private _unpostedPurchaseOrders As New List(Of IPurchaseOrderView)
         Private _PurchaseOrderDetails As List(Of PurchaseOrderDetailView)
 
         Public Event RowChanged(productIdNo As Int32) Implements IPurchaseOrderApprovalView.RowChanged
@@ -46,20 +46,20 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property PurchaseOrderList As List(Of IPurchaseOrderView) Implements IPurchaseOrderApprovalView.PurchaseOrderList
+        Public Property UnpostedPurchaseOrders As List(Of IPurchaseOrderView) Implements IPurchaseOrderApprovalView.UnpostedPurchaseOrders
             Get
-                Return _purchaseOrderList
+                Return _unpostedPurchaseOrders
             End Get
             Set
-                _purchaseOrderList = Value
-                BindInvTransactionRequests()
+                _unpostedPurchaseOrders = Value
+                BindPurchaseOrderApproval()
             End Set
         End Property
 
-        Private Sub BindInvTransactionRequests()
+        Private Sub BindPurchaseOrderApproval()
             SuspendLayout()
             bsPurchaseOrders.DataSource = Nothing
-            bsPurchaseOrders.DataSource = PurchaseOrderList
+            bsPurchaseOrders.DataSource = UnpostedPurchaseOrders
             bsPurchaseOrders.AllowNew = False
             With DataGridViewInvTransactionRequests
                 .AutoGenerateColumns = False

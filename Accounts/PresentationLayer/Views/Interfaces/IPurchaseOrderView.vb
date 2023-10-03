@@ -13,6 +13,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Disapproved As Boolean
         Property IdNo As Int32
         Property Notes As String
+        Property Posted As Boolean
         Property ReferenceNo As String
         Property SupplierIdNo As Int32
         Property TransactionDate As Date?
@@ -41,7 +42,7 @@ Namespace PresentationLayer.Views.Interfaces
 
     Public Interface IPurchaseOrderApprovalView
         Inherits IView
-        Property PurchaseOrderList As List(Of IPurchaseOrderView)
+        Property UnpostedPurchaseOrders As List(Of IPurchaseOrderView)
         Property WarehouseIdNo As Int16
         Property WarehouseList As DataTable
         Property UserList As DataTable

@@ -24,6 +24,7 @@ Namespace BusinessLayer
         Public Property Disapproved As Boolean
         Public Property IdNo As Int32
         Public Property Notes As String
+        Public Property Posted As Boolean
         Public Property ReferenceNo As String
         Public Property SupplierIdNo As Int32
         Public Property TransactionDate As Date?
@@ -32,5 +33,26 @@ Namespace BusinessLayer
         Public Property PurchaseOrderDetails As List(Of PurchaseOrderDetail)
 
     End Class
+
+    Public Class PurchaseOrderApproval
+        Inherits AATM.BusinessLayer.BusinessObject
+
+        ' ** Enterprise Design Pattern: Identity field pattern
+        Public Sub New()
+            'If GetRules().Count() = 0 Then
+            '    ' establish business rules
+            '    AddRule(New ValidateRequired("InvTransTypeIdNo"))
+            '    AddRule(New ValidateRequired("WarehouseIdNo"))
+            '    AddRule(New ValidateRequired("TransactionDate"))
+            '    AddRule(New ValidateRequired("Notes"))
+            'End If
+        End Sub
+
+        Public Property UnpostedPurchaseOrders As List(Of PurchaseOrder)
+        Public Property WarehouseIdNo As Int16
+        Public Property UserName As String
+    End Class
+
+
 
 End Namespace

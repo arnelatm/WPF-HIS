@@ -30,7 +30,7 @@ Namespace DataLayer.AdoNet
             _purchaseReturn = parameter(0)(1)
             If _purchaseOrder Then
                 _tableName = "PurchaseOrder"
-                _fieldList = "Amount,Approved,Cancelled,DateCreated,Disapproved,IdNo,TransactionDate,ReferenceNo,SupplierIdNo,TransactionDate,UserIdNo,VatAmount,VatNumber,WarehouseIdNo"
+                _fieldList = "Amount,Approved,Cancelled,DateCreated,Disapproved,IdNo,TransactionDate,Posted,ReferenceNo,SupplierIdNo,TransactionDate,UserIdNo,VatAmount,VatNumber,WarehouseIdNo"
             Else
                 _tableName = "Purchase"
                 _fieldList = "Amount,Cancelled,DateCreated,DueDate,IdNo,InvoiceDate,InvoiceNo,Posted,PurchaseReturn,ReferenceNo,SupplierIdNo,TransactionDate,UserIdNo,VatAmount,VatNumber,WarehouseIdNo"
@@ -90,6 +90,7 @@ Namespace DataLayer.AdoNet
                     "Approved = @Approved," &
                     "Cancelled = @Cancelled," &
                     "Disapproved = @Disapproved," &
+                    "Posted = @Posted," &
                     "ReferenceNo = @ReferenceNo," &
                     "SupplierIdNo = @SupplierIdNo," &
                     "TransactionDate = @TransactionDate," &
@@ -129,8 +130,8 @@ Namespace DataLayer.AdoNet
             Dim retVal As Int32
             If _purchaseOrder Then
                 sql = "INSERT INTO [PurchaseOrder] " &
-                    " (Amount,Approved,BranchIdNo,Cancelled,Disapproved,ReferenceNo,SupplierIdNo,TransactionDate,UserIdNo,VatAmount,VatNumber,WarehouseIdNo)" &
-                    " VALUES (@Amount,@Approved,@BranchIdNo,@Cancelled,@Disapproved,@ReferenceNo,@SupplierIdNo,@TransactionDate,@UseridNo,@VatAmount,@VatNumber,@WarehouseIdNo)"
+                    " (Amount,Approved,BranchIdNo,Cancelled,Disapproved,Posted,ReferenceNo,SupplierIdNo,TransactionDate,UserIdNo,VatAmount,VatNumber,WarehouseIdNo)" &
+                    " VALUES (@Amount,@Approved,@BranchIdNo,@Cancelled,@Disapproved,@Posted,@ReferenceNo,@SupplierIdNo,@TransactionDate,@UseridNo,@VatAmount,@VatNumber,@WarehouseIdNo)"
                 retVal = Db.Insert(sql, TakePo(Purchase))
             Else
                 sql = "INSERT INTO [Purchase] " &
@@ -172,6 +173,7 @@ Namespace DataLayer.AdoNet
                                   .Cancelled = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Cancelled")),
                                   .Disapproved = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Disapproved")),
                                   .IdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("IdNo")),
+                                  .Posted = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("Posted")),
                                   .ReferenceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ReferenceNo")),
                                   .SupplierIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("SupplierIdNo")),
                                   .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),
@@ -211,6 +213,7 @@ Namespace DataLayer.AdoNet
                                     "Cancelled", Purchase.Cancelled,
                                     "Disapproved", Purchase.Disapproved,
                                     "IdNo", Purchase.IdNo,
+                                    "Posted", Purchase.Posted,
                                     "ReferenceNo", Purchase.ReferenceNo,
                                     "SupplierIdNo", Purchase.SupplierIdNo,
                                     "TransactionDate", Purchase.TransactionDate,
