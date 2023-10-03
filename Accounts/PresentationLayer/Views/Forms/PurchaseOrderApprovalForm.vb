@@ -8,7 +8,7 @@ Namespace PresentationLayer.Views.Forms
     Public Class PurchaseOrderApprovalForm
         Implements IPurchaseOrderApprovalView
 
-        Private _unpostedPurchaseOrders As New List(Of IPurchaseOrderView)
+        Private _unpostedPurchaseOrders As New List(Of IPurchaseOrderBaseView)
         Private _PurchaseOrderDetails As List(Of PurchaseOrderDetailView)
 
         Public Event RowChanged(productIdNo As Int32) Implements IPurchaseOrderApprovalView.RowChanged
@@ -46,7 +46,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property UnpostedPurchaseOrders As List(Of IPurchaseOrderView) Implements IPurchaseOrderApprovalView.UnpostedPurchaseOrders
+        Public Property UnpostedPurchaseOrders As List(Of IPurchaseOrderBaseView) Implements IPurchaseOrderApprovalView.UnpostedPurchaseOrders
             Get
                 Return _unpostedPurchaseOrders
             End Get
@@ -55,6 +55,7 @@ Namespace PresentationLayer.Views.Forms
                 BindPurchaseOrderApproval()
             End Set
         End Property
+
 
         Private Sub BindPurchaseOrderApproval()
             SuspendLayout()
@@ -80,6 +81,8 @@ Namespace PresentationLayer.Views.Forms
                 BindInvTransactionDetail()
             End Set
         End Property
+
+
 
         'Public Property PurchaseOrders As List(Of PurchaseOrder) Implements IPurchaseOrderApprovalView.PurchaseOrders
         '    Get
