@@ -275,6 +275,8 @@ Public Class MappingProfileAccounts
 
         CreateMap(Of PurchaseOrder, PurchaseOrderModel)().ReverseMap()
         CreateMap(Of PurchaseOrderModel, IPurchaseOrderView)().ReverseMap()
+        CreateMap(Of PurchaseOrderModel, IPurchaseOrderBaseView)().ReverseMap()
+        CreateMap(Of PurchaseOrderModel, IPurchaseOrderApprovalView)().ReverseMap()
 
         CreateMap(Of PurchaseOrderApproval, PurchaseOrderApprovalModel)().ReverseMap()
         'CreateMap(Of PurchaseOrderApprovalModel, PurchaseOrderApprovalView)().ReverseMap()
