@@ -10,6 +10,7 @@
     [DueDate]           DATE           NULL,
     [InvoiceNo]         VARCHAR (20)   NOT NULL,
     [InvoiceDate]       DATE           NULL,
+    [Notes]             NVARCHAR (100) NULL,
     [VatNumber]         VARCHAR (15)   NULL,
     [VatAmount]         DECIMAL (9, 2) NULL,
     [ExtraDiscount]     DECIMAL (9, 2) NULL,
@@ -22,6 +23,8 @@
     [DateTimeStamp]     ROWVERSION     NULL,
     CONSTRAINT [PK_PurchaseIdNo] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

@@ -4,6 +4,7 @@ Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
+Imports AATM.PresentationLayer.Events
 
 Namespace PresentationLayer.Views.Forms
 
@@ -327,8 +328,6 @@ Namespace PresentationLayer.Views.Forms
                 lblDueDate.Visible = False
                 dtpInvoiceDate.Visible = False
                 lblInvoiceDate.Visible = False
-                txtNotes.Visible = True
-                lblNotes.Visible = True
                 dgvBatchNo.Visible = False
                 dgvExpiryDate.Visible = False
                 dgvUnitSalesPrice.Visible = False
@@ -346,8 +345,6 @@ Namespace PresentationLayer.Views.Forms
                 lblDueDate.Visible = True
                 dtpInvoiceDate.Visible = True
                 lblInvoiceDate.Visible = True
-                txtNotes.Visible = False
-                lblNotes.Visible = False
                 dgvBatchNo.Visible = True
                 dgvExpiryDate.Visible = True
                 dgvUnitCost.Visible = True
@@ -386,8 +383,17 @@ Namespace PresentationLayer.Views.Forms
                 'If value Then
                 '    btnPost.Enabled = False
                 'Else
-                '    btnPost.Enabled = True
+                '    btnPost.Enabled = Truepurchase
                 'End If
+            End Set
+        End Property
+
+        Public Property Notes As String Implements IPurchaseBaseView.Notes
+            Get
+                Return txtNotes.Text
+            End Get
+            Set(value As String)
+                txtNotes.Text = value
             End Set
         End Property
 
@@ -654,15 +660,23 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub btnPost_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnPost.ClickButtonArea
-            If Not Posted Then
-                Dim caption = Messaging.TranslateCaption("Please confirm.")
-                Dim action As String = Messaging.TranslateCaption("post")
-                Dim itemName As String = Messaging.TranslateCaption("purchase transaction")
-                Dim msg = Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
-                If Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-                    RaiseEvent PostData(IdNo)
-                End If
-            End If
+            RaiseEvent PostData(IdNo)
+
+            'If EditingMode Or AddModeChanged Then
+            '    Messaging.Show(True, "MsgCannotPostUnsaved")
+            'Else
+            '    If Posted Then
+            '        Messaging.Show(True, "MsgAlreadyPosted")
+            '    Else
+            '        Dim caption = Messaging.TranslateCaption("Please confirm.")
+            '        Dim action As String = Messaging.TranslateCaption("post")
+            '        Dim itemName As String = Messaging.TranslateCaption("purchase transaction")
+            '        Dim msg = Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
+            '        If Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+            '            RaiseEvent PostData(IdNo)
+            '        End If
+            '    End If
+            'End If
         End Sub
 
         ' Changes how cells are displayed depending on their columns and values.

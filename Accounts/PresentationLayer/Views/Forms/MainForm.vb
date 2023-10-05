@@ -1297,7 +1297,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub ToolStripMenuItemPurchaseOrderApproval_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPurchaseOrderApproval.Click
-            RunForm(Of PurchaseOrderApprovalForm, PurchaseOrderApprovalPresenter(Of PurchaseOrderModel))()
+            RunForm(Of PurchaseOrderApprovalForm, PurchaseOrderApprovalPresenter(Of PurchaseModel))()
         End Sub
     End Class
 

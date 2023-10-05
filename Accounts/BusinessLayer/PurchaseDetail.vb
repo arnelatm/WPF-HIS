@@ -53,7 +53,7 @@ Namespace BusinessLayer
         End Sub
 
         Public Property BatchNo As String
-        Public Property BonusQuantity As Int16
+        Public Property BonusQuantity As Decimal
         Public Property ExpiryDate As Date?
         Public Property GrossAmount As Decimal
         Public Property IdNo As Int32

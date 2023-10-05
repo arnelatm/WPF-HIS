@@ -14,9 +14,13 @@ Namespace DataLayer.AdoNet
 
         Const FieldList As String =
                                     "BaseUnitName," &
+                                    "BonusQuantity," &
+                                    "DiscountAmount," &
+                                    "DiscountPercent," &
                                     "IdNo," &
-                                    "InvTransactionIdNo," &
+                                    "PurchaseOrderIdNo," &
                                     "NetAmount," &
+                                    "Price," &
                                     "ProductCode," &
                                     "ProductIdNo," &
                                     "ProductName," &
@@ -26,7 +30,11 @@ Namespace DataLayer.AdoNet
                                     "Quantity," &
                                     "Sequence," &
                                     "UnitCost," &
-                                    "UnitName"
+                                    "UnitIdNo," &
+                                    "UnitName," &
+                                    "VatAmount," &
+                                    "VatPercent"
+
 
         Public Function GetRecordsWithGroupIdNo(idNo, Optional sortExpression = Nothing) As List(Of PurchaseOrderApprovalDetail) Implements IDaoChild(Of PurchaseOrderApprovalDetail).GetRecordsWithGroupIdNo
             If sortExpression Is Nothing Then
@@ -35,7 +43,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " SELECT " & FieldList &
                     " FROM [PurchaseOrderApprovalDetail_View]" &
-                    " WHERE InvTransactionIdNo = @IdNo  " &
+                    " WHERE PurchaseOrderIdNo = @IdNo  " &
                     " ORDER BY " & sortExpression
             Dim params() As Object = {"@IdNo", idNo}
             Return Db.Read(sql, Make, params).ToList()

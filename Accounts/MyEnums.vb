@@ -443,6 +443,7 @@ End Enum
 Public Enum AppSettingGroupSelector
     UserDefaultWarehouse = 1
     SecurityGroupDefaultBranch = 2
-    SecurityGroupDefaultInvWarehouse = 3
+    SecurityGroupDefaultInventoryWarehouse = 3
+    UserManagedWarehouse = 4
 End Enum
 

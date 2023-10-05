@@ -3,33 +3,13 @@
 Namespace PresentationLayer.Views.Interfaces
 
     Public Interface IPurchaseView
-        Inherits IView
+        Inherits IPurchaseBaseView
 
-        Property Amount As Decimal
-        Property Approved As Boolean
-        Property Cancelled As Boolean
-        Property DateCreated As DateTime?
-        Property Disapproved As Boolean
-        Property DueDate As Date?
-        Property IdNo As Int32
-        Property InvoiceDate As Date?
-        Property InvoiceNo As String
-        Property Posted As Boolean
         Property ProductsByCode As DataTable
         Property PurchaseDetails As List(Of PurchaseDetailView)
         Property PurchaseHistory As List(Of PurchaseHistoryView)
-        Property ReferenceNo As String
-        Property SupplierIdNo As Int32?
-        Property TransactionDate As Date?
-        Property UserIdNo As Int16
-        Property VatAmount As Decimal
-        Property VatNumber As String
-        Property WarehouseIdNo As Int16
-
         Property PurchaseDetailsBs As BindingSource
-        'Property UnitsByCode As DataTable
         Property UnitsByCode As Object
-        'Property UnitsByProduct As DataTable
         Property UnitsByProduct As Object
         Property ProductCodeIsValid As Boolean
         Property NumberOfUnits As Short
@@ -44,6 +24,44 @@ Namespace PresentationLayer.Views.Interfaces
         Event ProductNameValidating(productName As String, control As Control)
         Event FilterRecords()
         'Event ProductNameChanged(productName As String, bs As BindingSource)
+    End Interface
+
+    Public Interface IPurchaseBaseView
+        Inherits IView
+        Property Amount As Decimal
+        Property Approved As Boolean
+        Property Cancelled As Boolean
+        Property DateCreated As DateTime?
+        Property Disapproved As Boolean
+        Property DueDate As Date?
+        Property IdNo As Int32
+        Property InvoiceDate As Date?
+        Property InvoiceNo As String
+        Property Notes As String
+        Property Posted As Boolean
+        Property ReferenceNo As String
+        Property SupplierIdNo As Int32?
+        Property TransactionDate As Date?
+        Property UserIdNo As Int16
+        Property VatAmount As Decimal
+        Property VatNumber As String
+        Property WarehouseIdNo As Int16
+
+    End Interface
+
+    Public Interface IPurchaseOrderApprovalView
+        Inherits IView
+        Property UnpostedPurchaseOrders As List(Of IPurchaseBaseView)
+        Property WarehouseIdNo As Int16
+        Property WarehouseList As DataTable
+        Property UserList As DataTable
+        Property UnitList As DataTable
+        Property PurchaseOrderDetails As List(Of PurchaseOrderApprovalDetailView)
+
+        Event RowChanged(productIdNo As Integer)
+        Event FormLoaded()
+        Event SupplyQuantityClicked(invTransIdNo As Integer)
+        Event TransferRequestClicked(invTransIdNo As Integer)
     End Interface
 
 End Namespace

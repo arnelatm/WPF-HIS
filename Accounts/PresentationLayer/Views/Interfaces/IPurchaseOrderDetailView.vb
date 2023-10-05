@@ -21,5 +21,16 @@ Namespace PresentationLayer.Views.Interfaces
 
     End Interface
 
+    Public Interface IPurchaseOrderApprovalDetailView
+
+        Property BaseUnitName As String
+        Property QtyApproved As Decimal
+        Property QtyOnHand As Decimal
+        Property QtySupplied As Decimal
+        Property UnitName As String
+
+    End Interface
+
+
 
 End Namespace

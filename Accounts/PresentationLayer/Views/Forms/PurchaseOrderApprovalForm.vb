@@ -8,8 +8,8 @@ Namespace PresentationLayer.Views.Forms
     Public Class PurchaseOrderApprovalForm
         Implements IPurchaseOrderApprovalView
 
-        Private _unpostedPurchaseOrders As New List(Of IPurchaseOrderBaseView)
-        Private _PurchaseOrderDetails As List(Of PurchaseOrderDetailView)
+        Private _unpostedPurchaseOrders As New List(Of IPurchaseBaseView)
+        Private _purchaseOrderDetails As List(Of PurchaseOrderApprovalDetailView)
 
         Public Event RowChanged(productIdNo As Int32) Implements IPurchaseOrderApprovalView.RowChanged
         Public Event FormLoaded() Implements IPurchaseOrderApprovalView.FormLoaded
@@ -46,7 +46,7 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property UnpostedPurchaseOrders As List(Of IPurchaseOrderBaseView) Implements IPurchaseOrderApprovalView.UnpostedPurchaseOrders
+        Public Property UnpostedPurchaseOrders As List(Of IPurchaseBaseView) Implements IPurchaseOrderApprovalView.UnpostedPurchaseOrders
             Get
                 Return _unpostedPurchaseOrders
             End Get
@@ -72,12 +72,12 @@ Namespace PresentationLayer.Views.Forms
             ResumeLayout()
         End Sub
 
-        Public Property PurchaseOrderDetails As List(Of PurchaseOrderDetailView) Implements IPurchaseOrderApprovalView.PurchaseOrderDetails
+        Public Property PurchaseOrderDetails As List(Of PurchaseOrderApprovalDetailView) Implements IPurchaseOrderApprovalView.PurchaseOrderDetails
             Get
-                Return _PurchaseOrderDetails
+                Return _purchaseOrderDetails
             End Get
             Set
-                _PurchaseOrderDetails = Value
+                _purchaseOrderDetails = Value
                 BindInvTransactionDetail()
             End Set
         End Property

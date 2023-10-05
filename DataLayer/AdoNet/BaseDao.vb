@@ -417,9 +417,9 @@ Namespace AdoNet
             Dim condition3 As String = ""
             Dim obj1 As Object = ComposeSqlCommand(Of TS1)(searchValue1, searchFieldName1, condition1)
             Dim obj2 As Object = ComposeSqlCommand(Of TS2)(searchValue2, searchFieldName2, condition2)
-            Dim obj3 As Object = ComposeSqlCommand(Of TS2)(searchValue2, searchFieldName2, condition2)
+            Dim obj3 As Object = ComposeSqlCommand(Of TS3)(searchValue3, searchFieldName3, condition3)
             Dim params() As Object = {obj1(0), obj1(1), obj2(0), obj2(1), obj3(0), obj3(1)}
-            sql += condition1 & " and " & condition2
+            sql += condition1 & " and " & condition2 & " and " & condition3
             If filter IsNot Nothing Then
                 sql = sql & " and (" & filter & ")"
             End If

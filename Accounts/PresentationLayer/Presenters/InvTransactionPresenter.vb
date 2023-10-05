@@ -15,6 +15,7 @@ Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Views
 Imports Telerik.Licensing
+Imports Telerik.WinControls.UI.Barcode.Symbology
 
 Namespace PresentationLayer.Presenters
 
@@ -70,7 +71,7 @@ Namespace PresentationLayer.Presenters
                 view.InventoryManager = False
             End If
             view.DefaultUserWarehouseIdNo = Service.GetField(Of Int16, Int16, Int16)(AppSettingGroupSelector.UserDefaultWarehouse, GlobalVariables.UserIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "selector2IdNo")
-            view.DefaultSecGroupInvWarehouseIdNo = Service.GetField(Of Int16, Int16, Int16)(AppSettingGroupSelector.SecurityGroupDefaultInvWarehouse, GlobalVariables.SecurityGroupIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "selector2IdNo")
+            view.DefaultSecGroupInvWarehouseIdNo = Service.GetField(Of Int16, Int16, Int16)(AppSettingGroupSelector.SecurityGroupDefaultInventoryWarehouse, GlobalVariables.SecurityGroupIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "selector2IdNo")
         End Sub
 
 
@@ -816,16 +817,17 @@ Namespace PresentationLayer.Presenters
             If View.InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
                 Messaging.Show(True, "MsgNonPostableEntry")
             Else
-                If UserHasAccess("InventoryManager") Then
-                    okToPost = True
-                ElseIf View.InventoryAction = EnumToCode(InventoryActionSelection.Add) Or View.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Then
-                    If View.DefaultUserWarehouseIdNo = View.WarehouseIdNo Then
-                        ' you can post if your default warehouseid is the same as the current warehouseidno
+                If EditMode Or AddMode Then
+                    Messaging.Show(True, "MsgCannotPostUnsaved")
+                ElseIf View.InventoryAction = EnumToCode(InventoryActionSelection.Add) Or View.InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or View.InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
+                    If UserHasAccess("InventoryManager") Then
                         okToPost = True
-                    End If
-                ElseIf View.InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
-                    If View.DefaultUserWarehouseIdNo = View.WarehouseIdNo Then
-                        okToPost = True
+                    Else
+                        Dim userManagedWarehouseIdNo = Service.GetField(Of Int32, Int32, Int32, Int32)(AppSettingGroupSelector.UserManagedWarehouse, GlobalVariables.UserIdNo, View.WarehouseIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "selector2IdNo", "IdNo")
+                        If userManagedWarehouseIdNo > 0 Then
+                            ' you can post if you have Managed Right to the warehouse 
+                            okToPost = True
+                        End If
                     End If
                 End If
                 If okToPost Then
