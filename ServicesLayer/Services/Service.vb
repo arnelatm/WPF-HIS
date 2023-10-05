@@ -114,7 +114,7 @@ Namespace Services
                                                        tableName As String,
                                                        searchFieldName1 As String, searchFieldName2 As String, searchFieldName3 As String,
                                                        returnFieldName As String, Optional filter As String = Nothing) As TR Implements IService.GetField
-            Return DataDao.GetField(Of TR, TS1, TS2)(searchValue1, searchValue2, tableName, searchFieldName1, searchFieldName2, returnFieldName, filter)
+            Return DataDao.GetField(Of TR, TS1, TS2, TS3)(searchValue1, searchValue2, searchValue3, tableName, searchFieldName1, searchFieldName2, searchFieldName3, returnFieldName, filter)
         End Function
 
         Public Function GetHLookup(lookupObj As Lookup) As List(Of Lookup.HLookupData)

@@ -24,6 +24,7 @@ Namespace PresentationLayer.Presenters
         Private _productService
         Private _purchaseHistoryService
         Private _purchaseItemService
+        Private _defaultUserWarehouseIdNo
         Protected PurchaseOrder As Boolean
         Protected PurchaseReturn As Boolean
 
@@ -51,40 +52,40 @@ Namespace PresentationLayer.Presenters
             Service = New AccountsService("Purchase", {PurchaseOrder, PurchaseReturn}, {PurchaseOrder, PurchaseReturn})
 
             If PurchaseOrder Then
-                DtInsertTable.Columns.Add("BonusQuantity", GetType(Int16))
+                DtInsertTable.Columns.Add("BonusQuantity", GetType(Decimal))
                 DtInsertTable.Columns.Add("DiscountAmount", GetType(Decimal))
                 DtInsertTable.Columns.Add("NetAmount", GetType(Decimal))
                 DtInsertTable.Columns.Add("Price", GetType(Decimal))
                 DtInsertTable.Columns.Add("ProductIdNo", GetType(Int16))
                 DtInsertTable.Columns.Add("PurchaseOrderIdNo", GetType(Int32))
-                DtInsertTable.Columns.Add("Quantity", GetType(Int16))
+                DtInsertTable.Columns.Add("Quantity", GetType(Decimal))
                 DtInsertTable.Columns.Add("Sequence", GetType(Int16))
                 DtInsertTable.Columns.Add("UnitIdNo", GetType(Int16))
                 DtInsertTable.Columns.Add("VatAmount", GetType(Decimal))
                 DtInsertTable.Columns.Add("VatPercent", GetType(Decimal))
 
-                DtUpdateTable.Columns.Add("BonusQuantity", GetType(Int16))
+                DtUpdateTable.Columns.Add("BonusQuantity", GetType(Decimal))
                 DtUpdateTable.Columns.Add("DiscountAmount", GetType(Decimal))
                 DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
                 DtUpdateTable.Columns.Add("NetAmount", GetType(Decimal))
                 DtUpdateTable.Columns.Add("Price", GetType(Decimal))
                 DtUpdateTable.Columns.Add("ProductIdNo", GetType(Int16))
                 DtUpdateTable.Columns.Add("PurchaseOrderIdNo", GetType(Int32))
-                DtUpdateTable.Columns.Add("Quantity", GetType(Int16))
+                DtUpdateTable.Columns.Add("Quantity", GetType(Decimal))
                 DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
                 DtUpdateTable.Columns.Add("UnitIdNo", GetType(Int16))
                 DtUpdateTable.Columns.Add("VatAmount", GetType(Decimal))
                 DtUpdateTable.Columns.Add("VatPercent", GetType(Decimal))
             Else
                 DtInsertTable.Columns.Add("BatchNo", GetType(String))
-                DtInsertTable.Columns.Add("BonusQuantity", GetType(Int16))
+                DtInsertTable.Columns.Add("BonusQuantity", GetType(Decimal))
                 DtInsertTable.Columns.Add("DiscountAmount", GetType(Decimal))
                 DtInsertTable.Columns.Add("ExpiryDate", GetType(Date))
                 DtInsertTable.Columns.Add("NetAmount", GetType(Decimal))
                 DtInsertTable.Columns.Add("Price", GetType(Decimal))
                 DtInsertTable.Columns.Add("ProductIdNo", GetType(Int16))
                 DtInsertTable.Columns.Add("PurchaseIdNo", GetType(Int32))
-                DtInsertTable.Columns.Add("Quantity", GetType(Int16))
+                DtInsertTable.Columns.Add("Quantity", GetType(Decimal))
                 DtInsertTable.Columns.Add("Sequence", GetType(Int16))
                 DtInsertTable.Columns.Add("UnitIdNo", GetType(Int16))
                 DtInsertTable.Columns.Add("UnitSalesPrice", GetType(Decimal))
@@ -92,7 +93,7 @@ Namespace PresentationLayer.Presenters
                 DtInsertTable.Columns.Add("VatPercent", GetType(Decimal))
 
                 DtUpdateTable.Columns.Add("BatchNo", GetType(String))
-                DtUpdateTable.Columns.Add("BonusQuantity", GetType(Int16))
+                DtUpdateTable.Columns.Add("BonusQuantity", GetType(Decimal))
                 DtUpdateTable.Columns.Add("DiscountAmount", GetType(Decimal))
                 DtUpdateTable.Columns.Add("ExpiryDate", GetType(Date))
                 DtUpdateTable.Columns.Add("IdNo", GetType(Int32))
@@ -100,7 +101,7 @@ Namespace PresentationLayer.Presenters
                 DtUpdateTable.Columns.Add("Price", GetType(Decimal))
                 DtUpdateTable.Columns.Add("ProductIdNo", GetType(Int16))
                 DtUpdateTable.Columns.Add("PurchaseIdNo", GetType(Int32))
-                DtUpdateTable.Columns.Add("Quantity", GetType(Int16))
+                DtUpdateTable.Columns.Add("Quantity", GetType(Decimal))
                 DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
                 DtUpdateTable.Columns.Add("UnitIdNo", GetType(Int16))
                 DtUpdateTable.Columns.Add("UnitSalesPrice", GetType(Decimal))
@@ -115,6 +116,7 @@ Namespace PresentationLayer.Presenters
             AddHandler view.ProductNameValidating, AddressOf OnProductNameValidating
             AddHandler view.PostData, AddressOf OnPostData
             AddHandler view.RowChanged, AddressOf OnRowChanged
+            _defaultUserWarehouseIdNo = Service.GetField(Of Int16, Int16, Int16)(AppSettingGroupSelector.UserDefaultWarehouse, GlobalVariables.UserIdNo, "AppSetting", "AppSettingGroupIdNo", "Selector1IdNo", "selector2IdNo")
         End Sub
 
 
@@ -657,16 +659,34 @@ Namespace PresentationLayer.Presenters
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             View.TransactionDate = Date.Now()
             View.UserIdNo = GlobalVariables.UserIdNo
-            Dim wareHouse = Service.GetTopOneFields("Warehouse", "IdNo", "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString(), "IdNo", True)
-            View.WarehouseIdNo = wareHouse.IdNo
+            If _defaultUserWarehouseIdNo Is Nothing OrElse _defaultUserWarehouseIdNo = 0 Then
+                Dim wareHouse = Service.GetTopOneFields("Warehouse", "IdNo", "BranchIdNo = " & GlobalVariables.BranchIdNo.ToString(), "IdNo", True)
+                View.WarehouseIdNo = wareHouse.IdNo
+            Else
+                View.WarehouseIdNo = _defaultUserWarehouseIdNo
+            End If
         End Sub
 
         Private Function OnPostData(idNo As Int32) As Boolean
-            Dim retVal As Boolean = Service.PostData(idNo)
-            If retVal Then
-                View.Posted = True
+            Dim okToPost As Boolean = False
+            Dim retVal As Boolean = False
+            If EditMode Or AddMode Then
+                Messaging.Show(True, "MsgCannotPostUnsaved")
+            ElseIf View.WarehouseIdNo = _defaultUserWarehouseIdNo Then
+                ' you can post if your default warehouseid is the same as the current warehouseidno
+                okToPost = True
+            End If
+            If okToPost Then
+                retVal = Service.PostData(idNo)
+                If retVal Then
+                    View.Posted = True
+                Else
+                    MessageBox.Show("Posting Error")
+                    Debugger.Break()
+                End If
             End If
             Return retVal
+
         End Function
 
 

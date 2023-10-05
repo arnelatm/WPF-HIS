@@ -241,7 +241,6 @@
     <Compile Include="BusinessLayer\IGroup\PrescriptionItem.vb" />
     <Compile Include="BusinessLayer\IGroup\StockInventory.vb" />
     <Compile Include="BusinessLayer\PurchaseOrderDetail.vb" />
-    <Compile Include="BusinessLayer\PurchaseOrder.vb" />
     <Compile Include="BusinessLayer\InvTransaction.vb" />
     <Compile Include="BusinessLayer\ItemCode.vb" />
     <Compile Include="BusinessLayer\CodeGroup.vb" />
@@ -340,7 +339,6 @@
     <Compile Include="DataLayer\AdoNet\PurchaseOrderApprovalDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\InvRequestDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\PurchaseOrderDetailDao.vb" />
-    <Compile Include="DataLayer\AdoNet\PurchaseOrderDao.vb" />
     <Compile Include="DataLayer\AdoNet\InvTransTypeDao.vb" />
     <Compile Include="DataLayer\AdoNet\InvTransactionDao.vb" />
     <Compile Include="DataLayer\AdoNet\InvTransactionDetailDao.vb" />
@@ -488,7 +486,6 @@
     <Compile Include="PresentationLayer\Models\IGroup\StockInventoryModel.vb" />
     <Compile Include="PresentationLayer\Models\InventoryModel.vb" />
     <Compile Include="PresentationLayer\Models\PurchaseOrderDetailModel.vb" />
-    <Compile Include="PresentationLayer\Models\PurchaseOrderModel.vb" />
     <Compile Include="PresentationLayer\Models\InvTransactionModel.vb" />
     <Compile Include="PresentationLayer\Models\InvTransTypeModel.vb" />
     <Compile Include="PresentationLayer\Models\SettingModel.vb" />
@@ -562,7 +559,6 @@
     <Compile Include="PresentationLayer\Presenters\HRReportsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DocumentDetailPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PresenterHelper.vb" />
-    <Compile Include="PresentationLayer\Presenters\PurchaseOrderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ProductFinderPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\InventorySelectorPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\InvTransTypePresenter.vb" />
@@ -758,7 +754,6 @@
     <Compile Include="PresentationLayer\Views\Interfaces\IFinancialReportView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IHrReportsView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IPurchaseOrderDetailView.vb" />
-    <Compile Include="PresentationLayer\Views\Interfaces\IPurchaseOrderView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IProductFinderView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IInventoryView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IInventorySelectorView.vb" />

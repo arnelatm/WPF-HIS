@@ -1,14 +1,15 @@
 ﻿
+
 CREATE VIEW [dbo].[Contact_View]
 AS
 
-SELECT 'C' as ContactType,IdNo as IdNo, CustomerCode as ContactCode, CustomerName as ContactName, CustomerNameAra as ContactNameAra
+SELECT 'C' COLLATE SQL_Latin1_General_CP1_CI_AS as ContactType,IdNo as IdNo, CustomerCode as ContactCode, CustomerName as ContactName, CustomerNameAra as ContactNameAra
 FROM     dbo.Customer
 Union
-SELECT 'S',IdNo, SupplierCode, SupplierName, SupplierNameAra 
+SELECT 'S' COLLATE SQL_Latin1_General_CP1_CI_AS,IdNo, SupplierCode, SupplierName, SupplierNameAra 
 FROM     dbo.Supplier
 Union
-SELECT 'E',IdNo, EmployeeCode, EmployeeName, EmployeeNameAra
+SELECT 'E' COLLATE SQL_Latin1_General_CP1_CI_AS,IdNo, EmployeeCode, EmployeeName, EmployeeNameAra
 FROM     dbo.Employee
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'Contact_View';

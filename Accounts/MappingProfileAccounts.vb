@@ -144,6 +144,7 @@ Public Class MappingProfileAccounts
         CreateMap(Of ProductModel, IProductView)().ReverseMap()
         CreateMap(Of Purchase, PurchaseModel)().ReverseMap()
         CreateMap(Of PurchaseModel, IPurchaseView)().ReverseMap()
+        CreateMap(Of PurchaseModel, IPurchaseBaseView)().ReverseMap()
         CreateMap(Of RecurringPayElement, RecurringPayElementModel)().ReverseMap()
         CreateMap(Of RecurringPayElementModel, IRecurringPayElementView)().ReverseMap()
         CreateMap(Of Sale, SaleModel)().ReverseMap()
@@ -221,8 +222,6 @@ Public Class MappingProfileAccounts
         CreateMap(Of ProductUnitModel, ProductUnitView)().ReverseMap()
         CreateMap(Of IProductUnitView, ProductUnitModel)().ReverseMap()
 
-        CreateMap(Of Purchase, PurchaseModel)().ReverseMap()
-        CreateMap(Of PurchaseModel, IPurchaseView)().ReverseMap()
 
         CreateMap(Of PurchaseDetail, PurchaseDetailModel)().ReverseMap()
         CreateMap(Of PurchaseDetailModel, PurchaseDetailView)().ReverseMap()
@@ -269,17 +268,15 @@ Public Class MappingProfileAccounts
         CreateMap(Of InvRequestDetailModel, InvRequestDetailView)().ReverseMap()
 
         CreateMap(Of InvRequest, InvRequestModel)().ReverseMap()
-        'CreateMap(Of InvRequestModel, InvRequestView)().ReverseMap()
         CreateMap(Of InvRequestModel, IInvRequestView)().ReverseMap()
 
 
-        CreateMap(Of PurchaseOrder, PurchaseOrderModel)().ReverseMap()
-        CreateMap(Of PurchaseOrderModel, IPurchaseOrderView)().ReverseMap()
-        CreateMap(Of PurchaseOrderModel, IPurchaseOrderBaseView)().ReverseMap()
-        CreateMap(Of PurchaseOrderModel, IPurchaseOrderApprovalView)().ReverseMap()
+        'CreateMap(Of Purchase, PurchaseOrderModel)().ReverseMap()
+        'CreateMap(Of PurchaseOrderModel, IPurchaseOrderView)().ReverseMap()
+        'CreateMap(Of PurchaseOrderModel, IPurchaseOrderBaseView)().ReverseMap()
+        CreateMap(Of PurchaseModel, IPurchaseOrderApprovalView)().ReverseMap()
 
         CreateMap(Of PurchaseOrderApproval, PurchaseOrderApprovalModel)().ReverseMap()
-        'CreateMap(Of PurchaseOrderApprovalModel, PurchaseOrderApprovalView)().ReverseMap()
         CreateMap(Of PurchaseOrderApprovalModel, IPurchaseOrderApprovalView)().ReverseMap()
 
         CreateMap(Of PurchaseOrderDetail, PurchaseOrderDetailModel)().ReverseMap()

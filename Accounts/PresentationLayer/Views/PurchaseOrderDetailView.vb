@@ -26,4 +26,17 @@ Namespace PresentationLayer.Views
 
     End Class
 
+    Public Class PurchaseOrderApprovalDetailView
+        Inherits InvTransactionDetailView
+        Implements IPurchaseOrderApprovalDetailView
+
+        Public Property BaseUnitName As String Implements IPurchaseOrderApprovalDetailView.BaseUnitName
+        Public Property QtyApproved As Decimal Implements IPurchaseOrderApprovalDetailView.QtyApproved
+        Public Property QtyOnHand As Decimal Implements IPurchaseOrderApprovalDetailView.QtyOnHand
+        Public Property QtySupplied As Decimal Implements IPurchaseOrderApprovalDetailView.QtySupplied
+        Public Property UnitName As String Implements IPurchaseOrderApprovalDetailView.UnitName
+
+    End Class
+
+
 End Namespace

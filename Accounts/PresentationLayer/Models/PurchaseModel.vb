@@ -32,4 +32,12 @@
 
     End Class
 
+    Public Class PurchaseOrderApprovalModel
+
+        Public Property UnpostedPurchaseOrders As List(Of PurchaseModel)
+        Public Property WarehouseIdNo As Int16
+        Public Property UserName As String
+
+    End Class
+
 End Namespace

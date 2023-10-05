@@ -347,7 +347,7 @@
             '
             'bsPurchaseOrders
             '
-            Me.bsPurchaseOrders.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PurchaseOrderModel)
+            Me.bsPurchaseOrders.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PurchaseModel)
             '
             'DataGridViewInvTransItems
             '

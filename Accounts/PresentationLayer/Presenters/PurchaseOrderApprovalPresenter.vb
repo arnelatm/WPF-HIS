@@ -36,8 +36,8 @@ Namespace PresentationLayer.Presenters
 
         Private Sub OnTransferRequest(PurchaseOrderIdNo As Int32)
 
-            Dim PurchaseOrder As New PurchaseOrder
-            Dim invTranDao = New PurchaseOrderDao
+            Dim PurchaseOrder As New Purchase
+            Dim invTranDao = New PurchaseDao
             Dim PurchaseOrderApproval As New Object
             Dim invReqSupDataTable As New System.Data.DataTable
             PurchaseOrder = invTranDao.GetRecordByIdNo(PurchaseOrderIdNo)
@@ -104,10 +104,10 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Private Sub RefreshRequestDetailsAndQtyOnHand(PurchaseOrderIdNo As Integer)
-            'Dim PurchaseOrderApprovalItems As List(Of PurchaseOrderApprovalDetailModel) = _PurchaseOrderApprovalItemService.GetRecordsWithGroupIdNo(Of PurchaseOrderApprovalDetailModel)(PurchaseOrderIdNo)
-            'Dim invItems As New List(Of PurchaseOrderApprovalDetailView)
-            'GlobalVariables.Mapper.Map(PurchaseOrderApprovalItems, invItems)
-            'View.PurchaseOrderApprovalDetails = invItems
+            Dim PurchaseOrderApprovalItems As List(Of PurchaseOrderApprovalDetailModel) = _purchaseOrderApprovalItemService.GetRecordsWithGroupIdNo(Of PurchaseOrderApprovalDetailModel)(PurchaseOrderIdNo)
+            Dim invItems As New List(Of PurchaseOrderApprovalDetailView)
+            GlobalVariables.Mapper.Map(PurchaseOrderApprovalItems, invItems)
+            View.PurchaseOrderDetails = invItems
         End Sub
 
         Public Overrides Sub UpdateViewData(idNo As Int32)

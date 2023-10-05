@@ -38,12 +38,12 @@
 
     Public Class PurchaseHistoryModel
         Public Property BatchNo As String
-        Public Property BonusQuantity As Int16
+        Public Property BonusQuantity As Decimal
         Public Property ExpiryDate As Date?
         Public Property GrossAmount As Decimal
         Public Property IdNo As Int32
         Public Property PurchaseIdNo As Int32
-        Public Property Quantity As Int16
+        Public Property Quantity As Decimal
         Public Property SupplierCode As String
         Public Property SupplierName As String
         Public Property SupplierNameAra As String

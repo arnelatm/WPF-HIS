@@ -1,5 +1,4 @@
-﻿
-CREATE PROCEDURE [dbo].[spPostPurchaseReturn] 
+﻿CREATE PROCEDURE [dbo].[spPostPurchaseReturn] 
 	@PurchaseIdNo Int,
 	@BranchIdNo TinyInt,
 	@WarehouseIdNo SmallInt
@@ -14,7 +13,7 @@ BEGIN
 
 	-- DECLARE @InvTransactionDetailInsert Int, @QtyReturnedInBaseUnit Int;
 
-	--Declare PurchaseReturnItems_Cursor CURSOR For (SELECT  IdNo,ProductIdNo,Quantity,BonusQuantity,BatchNo,ExpiryDate,NetAmount FROM PurchaseDetail where PurchaseIdNo = @PurchaseIdNo)
+    --Declare PurchaseReturnItems_Cursor CURSOR For (SELECT  IdNo,Quantity,BonusQuantity,BatchNo,ExpiryDate,NetAmount FROM PurchaseDetail where PurchaseIdNo = @PurchaseIdNo)
 	Declare PurchaseReturnItems_Cursor CURSOR For (SELECT  IdNo,Quantity+BonusQuantity,BatchNo,ExpiryDate,NetAmount,Price,UnitSalesPrice FROM PurchaseDetail where PurchaseIdNo = @PurchaseIdNo)
 	Declare @UnitSalesPrice as Decimal(12,4)
 	OPEN PurchaseReturnItems_Cursor
@@ -29,7 +28,7 @@ BEGIN
 	Declare @NetAmount as Decimal(12,4)
 	Declare @QtyFactor as Decimal(12,4)
 	Declare @PrUnitCost as Decimal(12,4)
-
+	Declare @Switch as Int = 0
 	FETCH NEXT FROM PurchaseReturnItems_Cursor INTO @PurchaseReturnDetailIdNo, @QtyReturnInRetUnit, @BatchNo, @ExpiryDate, @NetAmount, @PrUnitCost, @UnitSalesPrice
 	WHILE @@FETCH_STATUS = 0  
 		BEGIN -- PurchaseReturnItems_Cursor loop
@@ -39,9 +38,12 @@ BEGIN
 			Declare @InventoryIdNo as Int = (Select IdNo from Inventory where ProductIdNo = @ProductIdNo and BatchNo = @BatchNo and ExpiryDate = @ExpiryDate and WarehouseIdNo=@WarehouseIdNo and QtyOnHand > 0)
 			Set @QtyFactor = (Select Iif(BaseQTy = 0,0, Cast(BaseQty as Decimal(12,4)) / UnitQty ) from ProductUnit_View where ProductIdNo = @ProductIdNo and UnitIdNo = @UnitIdNo)	
 			if @InventoryIdNo Is Not Null 
-				Update Inventory set UnitCost = IIf( Round(QtyOnHand - @QtyReturnInRetUnit * @QtyFactor,4) = 0,UnitCost,(TotalCost - @NetAmount) / (QtyOnHand - @QtyReturnInRetUnit*@QtyFactor) ),
+				BEGIN
+					Set @Switch = 1
+					Update Inventory set UnitCost = IIf( Round(QtyOnHand - @QtyReturnInRetUnit * @QtyFactor,4) = 0,UnitCost,(TotalCost - @NetAmount) / (QtyOnHand - @QtyReturnInRetUnit*@QtyFactor) ),
 								QtyOnHand = QtyOnHand - @QtyReturnInRetUnit * @QtyFactor,  TotalCost = TotalCost - @NetAmount 
 								where IdNo = @InventoryIdNo
+				END
 			else
 				BEGIN -- @InventoryIdNo Is Null 
 
@@ -64,6 +66,7 @@ BEGIN
 					Set @QtyReturnedInBaseUnit = @QtyReturnInRetUnit * @QtyFactor
 					Set @RunningQty = @QtyReturnedInBaseUnit
 					WHILE @@FETCH_STATUS = 0  
+						Set @Switch = 1
 						BEGIN  -- Loop through existing inventory and reduced the quantity
 		
 							if @QtyOnHand > @RunningQty 
@@ -77,7 +80,7 @@ BEGIN
 									Set @PrNetAmount = @QtyOnHand * @PrUnitCost * @QtyFactor
 								end
 							-- endif  @QtyOnHand > @RunningQty 
-							Update Inventory set UnitCost = IIf(Round(qtyOnHand-@QtyInBaseUnit,4)=0,UnitCost,(TotalCost - @PrNetAmount)/(QtyOnHand-@QtyInBaseUnit)),
+							Update Inventory set UnitCost = IIf(Round(qtyOnHand-@QtyInBaseUnit,2)=0,UnitCost,(TotalCost - @PrNetAmount)/(QtyOnHand-@QtyInBaseUnit)),
 									QtyOnHand = QtyOnHand - @QtyInBaseUnit, TotalCost = TotalCost - @PrNetAmount where IdNo = @InventoryIdNo 
 							Set @RunningQty = @RunningQty - @QtyInBaseUnit
 							if @RunningQty <= 0 Break
@@ -104,12 +107,12 @@ BEGIN
 					-- endif @RunningQTy > 0
 				END -- @InventoryIdNo Is Null 	
 			-- endif                                         
-			FETCH NEXT FROM PurchaseReturnItems_Cursor INTO @PurchaseReturnDetailIdNo, @QtyReturnInRetUnit, @BatchNo, @ExpiryDate, @NetAmount, @PrUnitCost, @UnitSalesPrice
+			FETCH NEXT FROM PurchaseReturnItems_Cursor INTO @PurchaseReturnDetailIdNo,@QtyReturnInRetUnit, @BatchNo, @ExpiryDate, @NetAmount, @PrUnitCost, @UnitSalesPrice
 			IF @@FETCH_STATUS < 0 BREAK;
 		-- Endif @InventoryIdNo > 0 
 		END -- PurchaseReturnItems_Cursor loop
 	-- END WHILE
 	CLOSE PurchaseReturnItems_Cursor
 	DEALLOCATE PurchaseReturnItems_Cursor	
-	Update Purchase Set Posted = 1 where IdNo = @PurchaseIdNo
+	if @Switch = 1 Update Purchase Set Posted = 1 where IdNo = @PurchaseIdNo
 END
