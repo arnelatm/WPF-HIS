@@ -694,7 +694,7 @@
             '
             'bsPurchaseOrderDetails
             '
-            Me.bsPurchaseOrderDetails.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PurchaseOrderDetailModel)
+            Me.bsPurchaseOrderDetails.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.PurchaseOrderApprovalDetailModel)
             '
             'lblRequestedItems
             '

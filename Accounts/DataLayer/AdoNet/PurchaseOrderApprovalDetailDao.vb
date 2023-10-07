@@ -20,7 +20,6 @@ Namespace DataLayer.AdoNet
                                     "IdNo," &
                                     "PurchaseOrderIdNo," &
                                     "NetAmount," &
-                                    "Price," &
                                     "ProductCode," &
                                     "ProductIdNo," &
                                     "ProductName," &

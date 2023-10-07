@@ -173,6 +173,9 @@ Namespace PresentationLayer.Views.Forms
             'UpdateTotals()
         End Sub
 
+        Private Sub DataGridViewInvTransItems_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewInvTransItems.CellContentClick
+
+        End Sub
     End Class
 
 End Namespace

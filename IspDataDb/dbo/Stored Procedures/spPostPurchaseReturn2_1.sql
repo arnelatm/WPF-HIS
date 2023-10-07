@@ -1,4 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[spPostPurchaseReturn] 
+﻿
+CREATE PROCEDURE [dbo].[spPostPurchaseReturn2] 
 	@PurchaseIdNo Int,
 	@BranchIdNo TinyInt,
 	@WarehouseIdNo SmallInt
