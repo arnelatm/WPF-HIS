@@ -2740,8 +2740,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app-ibn-server-test.config" />
     <None Include="app.config" />
+    <None Include="app-ibn-server-test.config" />
     <None Include="app-Marcelo-Dell.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Isp-Server.config" />
@@ -2813,6 +2813,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PurchaseDetailModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PurchaseHistoryModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PurchaseModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PurchaseOrderApprovalDetailModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.PurchaseOrderModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.TransactionNotesModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Views.SalesDepositView.datasource" />
