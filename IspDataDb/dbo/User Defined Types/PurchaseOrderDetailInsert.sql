@@ -1,14 +1,14 @@
 ﻿CREATE TYPE [dbo].[PurchaseOrderDetailInsert] AS TABLE (
     [BonusQuantity]     SMALLINT        NOT NULL,
-    [DiscountAmount]    DECIMAL (8, 2)  NOT NULL,
-    [NetAmount]         DECIMAL (10, 2) NOT NULL,
-    [Price]             DECIMAL (8, 2)  NOT NULL,
+    [DiscountAmount]    DECIMAL (12, 4)  NOT NULL,
+    [NetAmount]         DECIMAL (9, 2) NOT NULL,
+    [Price]             DECIMAL (9, 2)  NOT NULL,
     [ProductIdNo]       INT             NOT NULL,
     [PurchaseOrderIdNo] INT             NOT NULL,
-    [Quantity]          SMALLINT        NOT NULL,
+    [Quantity]          DECIMAL (12, 4) NOT NULL,
     [Sequence]          SMALLINT        NOT NULL,
     [UnitIdNo]          TINYINT         NOT NULL,
-    [VatAmount]         DECIMAL (8, 2)  NULL,
+    [VatAmount]         DECIMAL (9, 2)  NULL,
     [VatPercent]        DECIMAL (5, 2)  NULL);
 
 

@@ -3,7 +3,7 @@
 Namespace PresentationLayer.Views.Interfaces
 
     Public Interface IPurchaseDetailView
-        Inherits IView
+        Inherits IPurchaseDetailBaseView
 
         Property AmtBefVat As Decimal
         Property BaseUnitIdNo As Int16
@@ -14,19 +14,9 @@ Namespace PresentationLayer.Views.Interfaces
         Property DiscountPercent As Decimal
         Property ExpiryDate As Date?
         Property GrossAmount As Decimal
-        Property IdNo As Int32
         Property NeedsExpiryDate As Boolean
-        Property NetAmount As Decimal
-        Property Price As Decimal
-        Property ProductCode As String
-        Property ProductIdNo As Int32
-        Property ProductName As String
-        Property ProductNameAra As String
         Property PurchaseIdNo As Int32
-        Property Quantity As Decimal
-        Property Sequence As Int16
         Property UnitCount As Int16
-        Property UnitIdNo As Int16
         Property UnitCost As Decimal
         Property UnitSalesPrice As Decimal
         Property VatAmount As Decimal
@@ -53,6 +43,22 @@ Namespace PresentationLayer.Views.Interfaces
         Property UnitCost As Decimal
         Property UnitName As String
         Property UnitSalesPrice As Decimal
+
+    End Interface
+
+    Public Interface IPurchaseDetailBaseView
+        Inherits IView
+
+        Property IdNo As Int32
+        Property NetAmount As Decimal
+        Property Price As Decimal
+        Property ProductCode As String
+        Property ProductIdNo As Int32
+        Property ProductName As String
+        Property ProductNameAra As String
+        Property Quantity As Int16
+        Property Sequence As Int16
+        Property UnitIdNo As Int16
 
     End Interface
 

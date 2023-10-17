@@ -158,6 +158,8 @@ Public Class OneTimeRun
         Messaging.AddMessage("MsgNoSelectedRecordToView", "Sorry no selected record to view, please select a record to view first.", "Error")
         Messaging.AddMessage("MsgInvTransferSuccess", "Inventory Transfer of products successful.", "Success")
         Messaging.AddMessage("MsgApprovedQtyUpdated", "Approved quantity updated for all items with enough stock!", "Success")
+        Messaging.AddMessage("MsgNoApprovedQtySpecified", "Approved quantity not specified for this request! Nothing to Approve.", "Error")
+        Messaging.AddMessage("MsgNegativeValNotAllowed", "Negative values not allowed for field '<{fieldName}>'. See line number '<{lineNumber}>'. Please correct the error before saving.", "Error")
     End Sub
 
     'Public Shared Sub CreateEnums()

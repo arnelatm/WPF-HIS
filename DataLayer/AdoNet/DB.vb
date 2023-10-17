@@ -1632,7 +1632,7 @@ Namespace AdoNet
             Return retValue
         End Function
 
-        Public Function RunSqlStoredProcedure(storeProcedureName As String, ByVal parms() As Object) As Int32
+        Public Function RunSqlStoredProcedure(storeProcedureName As String, ByVal parms() As Object, Optional outParms() As Object = Nothing) As Int32
             Dim retValue As Int32
             Dim tryAgain As Boolean
             '_waitForm.Show()

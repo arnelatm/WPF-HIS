@@ -10,6 +10,7 @@
 
 
 
+
 CREATE VIEW [dbo].[PurchaseOrderApprovalDetail_View]
 AS
 SELECT        dbo.PurchaseOrderDetail.IdNo, dbo.PurchaseOrderDetail.Sequence, dbo.PurchaseOrderDetail.PurchaseOrderIdNo, dbo.PurchaseOrderDetail.ProductIdNo, dbo.PurchaseOrderDetail.Quantity, dbo.PurchaseOrderDetail.BonusQuantity, dbo.PurchaseOrderDetail.UnitIdNo, 
@@ -22,7 +23,8 @@ SELECT        dbo.PurchaseOrderDetail.IdNo, dbo.PurchaseOrderDetail.Sequence, db
 FROM            dbo.PurchaseOrderDetail 
 				LEFT OUTER JOIN dbo.Unit ON dbo.PurchaseOrderDetail.UnitIdNo = dbo.Unit.IdNo 
 				LEFT OUTER JOIN dbo.Product ON dbo.PurchaseOrderDetail.ProductIdNo = dbo.Product.IdNo 
+				LEFT OUTER JOIN dbo.PurchaseOrder on dbo.PurchaseOrderDetail.PurchaseOrderIdNo = dbo.PurchaseOrder.IdNo
 				LEFT OUTER JOIN dbo.Category ON dbo.Product.CategoryIdNo = dbo.Category.IdNo
 				LEFT OUTER JOIN dbo.ProductUnit_View on dbo.Product.BaseUnitIdNo = dbo.ProductUnit_View.UnitIdNo and dbo.ProductUnit_View.ProductIdNo = dbo.Product.IdNo
-				LEFT OUTER JOIN dbo.InventoryCount_View on dbo.PurchaseOrderDetail.ProductIdNo = dbo.InventoryCount_View.ProductIdNo
+				LEFT OUTER JOIN dbo.InventoryCount_View on dbo.PurchaseOrderDetail.ProductIdNo = dbo.InventoryCount_View.ProductIdNo and dbo.InventoryCount_View.WarehouseIdNo = dbo.PurchaseOrder.WarehouseIdNo
 				LEFT OUTER JOIN dbo.PurchaseOrderSupplied on dbo.PurchaseOrderDetail.IdNo = dbo.PurchaseOrderSupplied.PurchaseOrderDetailIdNo

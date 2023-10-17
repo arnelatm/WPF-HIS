@@ -1,153 +1,141 @@
 ﻿
 
-CREATE PROCEDURE [dbo].[PostInvTransDetail] @InvTransactionDetailIdNo Int,@ProductIdNo Int, @UnitIdNo SmallInt, @InventoryIdNo Int, @InvTransactionIdNo Int, @WarehouseIdNo Smallint
+CREATE PROCEDURE [dbo].[PostInvTransDetail] @InvTransactionDetailIdNo Int,@ProductIdNo Int, @UnitIdNo SmallInt, @InventoryIdNo Int, @InvTransactionIdNo Int, @WarehouseIdNo Smallint, @WarehouseToIdNo Smallint, @Sequence as Int Output
 AS
-Declare @quantity as Decimal(12,4) = 0 
+Declare @Quantity as Decimal(12,4) = 0 
 Declare @Cost as Decimal(12,2) = 0 
-Declare @unitCost as Decimal(12,4) = 0 
-Declare @qtyOnHand as Decimal(12,4)
-SELECT @quantity = (select IIf(c.UnitQTy = 0,0,(cast(a.Quantity as Decimal(12,4)) * c.BaseQty / c.UnitQty))
+Declare @UnitCost as Decimal(12,4) = 0 
+Declare @QtyOnHand as Decimal(12,4)
+Declare @BatchNo as VarChar(20)
+Declare @ExpiryDate as Date
+Declare @BranchIdNo as Smallint
+
+Set @Quantity = (select IIf(c.UnitQTy = 0,0,(cast(a.Quantity as Decimal(12,4)) * c.BaseQty / c.UnitQty))
 					from InvTransactionDetail a
 					Left Join ProductUnit_View c 
 				    On a.ProductIdNo = c.ProductIdNo And a.UnitIdNo = c.UnitIdNo where idno = @InvTransactionDetailIdNo) 
-Select @qtyOnHand = (Select qtyOnHand from inventory where idno = @InventoryIdNo)
+Select @QtyOnHand = QtyOnHand, @unitCost = UnitCost,@BranchIdNo = BranchIdNo, @ExpiryDate = ExpiryDate, @BatchNo = BatchNo from inventory where idno = @InventoryIdNo
 Declare @UnitQty as Int = (select UnitQty from ProductUnit where ProductIdNo = @ProductIdNo and UnitIdNo = @UnitIdNo)
 Declare @BaseQty as Int = (select BaseQty from ProductUnit where ProductIdNo = @ProductIdNo and UnitIdNo = @UnitIdNo)
-If @Quantity > 0 
-	/* Positive Quantity */
-	BEGIN
-		Set @unitCost = (Select UnitCost from inventory where idno = @InventoryIdNo) 
+Declare @UnitSalesPrice as Decimal(12,4)
+Declare @InvQty as Decimal(12,4)
+Declare @TotalCost as Decimal(12,4)
+Declare @ZeroQtySw as Int = 0
+If @Quantity <> 0 
+	BEGIN /* 1 */
+		Declare @Qty as Decimal(12,4)
+		Select @unitCost = UnitCost,@InvQty = QtyOnHand, @BranchIdNo = BranchIdNo, @ExpiryDate = ExpiryDate, @BatchNo = BatchNo, @TotalCost = TotalCost, @UnitSalesPrice = UnitSalesPrice from inventory where idno = @InventoryIdNo
 		/* Quantity On Inventory is greater than the quantity to be deducted */
-		if @qtyOnHand >= @quantity 
-			BEGIN
-				/* update inventory by reducing the quantity on hand and the total cost */
-				Set @cost = @UnitCost * @Quantity
-				update inventory set qtyonhand = qtyonhand - @Quantity, TotalCost = TotalCost - @cost where idno = @InventoryIdNo 
+		if @QtyOnHand >= @Quantity Set @Qty = @Quantity else Set @Qty = @InvQty
+		/* if @QtyOnHand >= @Quantity 
+		update inventory by reducing the quantity on hand and the total cost */
+		if @Qty <> 0 
+			BEGIN /* 2 */
+				Set @Sequence = @Sequence + 1
+				Set @Cost = @TotalCost / @QtyOnHand * @Qty
+				update inventory set Qtyonhand = Qtyonhand - @Qty, TotalCost = TotalCost - @cost where idno = @InventoryIdNo 
 				/* update the Inventory Transaction detail to reflect the actual cost based on the inventory values */
- 				update InvTransactionDetail set unitCost = @UnitCost, NetAmount = @cost where idno = @InvTransactionDetailIdNo
-			END
+				update InvTransactionDetail set [Sequence] = @Sequence, unitCost = @UnitCost, NetAmount = @cost, Quantity = @Qty where idno = @InvTransactionDetailIdNo
+
+				Declare @InvIdNo as Int
+				Select Top 1 @InvIdNo = IdNo from Inventory where BatchNo = @BatchNo and ExpiryDate = @ExpiryDate and ProductIdNo = @ProductIdNo and WarehouseIdNo = @WarehouseToIdNo order by QtyOnHand Desc
+				if @InvIdNo > 0 
+					Update Inventory set QtyOnHand = QtyOnHand + @Qty, TotalCost = TotalCost + @cost where IdNo = @InvIdNo 
+				else					
+					Insert into Inventory (BranchIdNo, ProductIdNo, TransactionIdNo, QtyOnHand, WarehouseIdNo, TransactionType, BatchNo, ExpiryDate, UnitCost, TotalCost, UnitSalesPrice)
+						Values(@BranchIdNo, @ProductIdNo, @InvTransactionDetailIdNo, @Qty, @WarehouseToIdNo, 'I', @BatchNo, @ExpiryDate, @UnitCost, @Cost, @UnitSalesPrice)
+			END /* 2 */
 		else
-			/* Quantity On Inventory is less than the quantity to transfer */
-			BEGIN
-				/* get the total cost of the inventory */
-				Set @cost = (Select TotalCost from inventory where idno = @InventoryIdNo) 
-				/* update inventory quantity and total cost to 0 because we'll use all of it */
-				update inventory set qtyonhand = 0, TotalCost = 0 where idno = @InventoryIdNo 
-				/* update invTransaction Details to reflect the true values for inventory */
- 				update invTransactionDetail Set Quantity = IIf(@BaseQty = 0, 0, @qtyOnHand * @UnitQty / @BaseQty),
-											UnitCost = @UnitCost / @UnitQty * @BaseQty,
-											NetAmount = @cost 
-										where IdNo = @InvTransactionDetailIdNo
-				Declare @ExcessQty as Decimal(12,4)
-				/*, ,
+			Set @ZeroQtySw = 1
+		/* if @Qty <> 0 */
+		Declare @ExcessQty as Decimal(12,4)
+		Declare @excessCost as Decimal(12,2)
+		Set @ExcessQty = @Quantity - @Qty
 
-				a.unitCost = iif(b.BaseQty = 0, 0, @UnitCost * b.BaseQty / b.UnitQty),
-				a.NetAmount = @cost 
-				from InvTransactionDetail as a
-				inner join ProductUnit_View b
-				on a.UnitIdNo = b.UnitIdNo and a.ProductIdNo = b.ProductIdNo
-				where a.IdNo = @InvTransactionDetailIdNo
-				*/
-				/* there are still quantities left to be deducted so find the next available inventory to deduct if any 
-				by creating another invTransactionDetail entry with the remaining quantity so as to create a correct
-				inventory transaction detail
-				*/
-				Declare @excessCost as Decimal(12,2)
-				Declare @sequence as smallint
-				Declare @batchNo as Varchar(20)
-				Declare @expiryDate as Date
-				Set @ExcessQty = @Quantity - @QtyOnHand
-
-				WHILE ( @excessQty > 0)		
-					BEGIN
-						Declare @nextInventoryIdNo as Int 
-						/* find the next available inventory with the same productidno & warehouseIdNo beginning with the item with the lowest expired date */
-						Set @nextInventoryIdNo = (Select Top 1 IdNo From Inventory where WarehouseIdNo = @WarehouseIdNo and ProductIdNo = @ProductIdNo and QtyOnHand > 0 order by ExpiryDate Asc)				
-						if @nextInventoryIdNo > 0 
-							BEGIN
-								Declare @iUnitCost as Decimal(12,4)
-								Declare @iQtyOnHand as Decimal(12,4)
-								Set @UnitCost = (Select UnitCost from inventory where idno = @nextInventoryIdNo)
-								Set @QtyOnHand = (Select qtyOnHand from inventory where idno = @nextInventoryIdNo) 
-								/* Quantity On Inventory is greater than the quantity to be deducted */
-								if @QtyOnHand > @excessQty
-									set @cost = @unitcost * 1
-								else
-									BEGIN
-										Set @cost = @unitCost * @qtyOnHand
-										Set @sequence = (select max(sequence) from InvTransactionDetail where InvTransactionIdNo = @InvTransactionIdNo) + 1
-										INSERT INTO [dbo].[InvTransactionDetail]
-											([Sequence]
-											,[InvTransactionIdNo]
-											,[ProductIdNo]
-											,[Quantity]
-											,[UnitIdNo]
-											,[BatchNo]
-											,[UnitCost]
-											,[NetAmount]
-											,[ExpiryDate]
-											,[InventoryIdNo])
-										VALUES
-											(@sequence
-											,@invTransactionIdNo
-											,@productIdNo
-											,@qtyOnHand * @UnitQty / @BaseQty
-											,@UnitIdNo
-											,@BatchNo
-											,@unitCost * @BaseQty / @UnitQty
-											,@unitCost * @qtyOnHand
-											,@expiryDate
-											,@nextInventoryIdNo);
-											Declare @newIdNo as Int = (Select scope_identity())
-											/* recursively call this procedure */
-											Set @excessQty = @excessQty - @Quantity
-											Exec PostInvTransDetail @newIdNo,@productIdNo,@UnitIdNo,@nextInventoryIdNo,@InvTransactionIdNo,@WarehouseIdNo
-									END
-								/* endif @qtyOnHand >= @excessQty */
-							End 
-						/* else */
-							/* data not found */
-						/* end if @nextInventoryIdNo > 0 */		
-					END
-				/* END WHILE */
-			END 
-		/* end if @qtyOnHand >= @quantity  */
-	END 
-	/* positive @Quantity */
-ELSE
-	/* Negative @Quantity  
-	BEGIN
-		if @qtyOnHand > 0 
-			BEGIN
-				Declare @ExcessQty as Decimal(12,4)
-				Set @ExcessQty = @Quantity - @qtyOnHand
-				update inventory set qtyonhand = 0 where idno = @InventoryIdNo
-
-				update inventory set TotalCost = TotalCost - @Cost where idno = @InventoryIdNo
-				Declare @productIdNo as Int = (Select productIdNo from inventory where idno = @InventoryIdNo)
-				WHILE ( @ExcessQty > 0)				
-					Declare @nextInventoryIdNo as Int 
-					Set @nextInventoryIdNo = (Select Top 1 IdNo From Inventory where WarehouseIdNo = @WarehouseIdNo and ProductIdNo = @ProductIdNo and QtyOnHand > 0 order by ExpiryDate Asc)				
-					Select @QtyOnHand = (Select qtyOnHand from inventory where idno = @InventoryIdNo)
-					Set @ExcessQty = @ExcessQty - @qtyOnHand
-					if @qtyOnHand > @ExcessQty
-						Begin
-							update inventory set qtyonhand = qtyonhand - @ExcessQty, TotalCost = TotalCost - @Cost where idno = @InventoryIdNo 
-						end 
-					else
-						Begin
-							Select top 1 * from Inventory
-						end
-					
-			END
-		else
-			Begin
-				update inventory set qtyonhand = 0 where idno = @InventoryIdNo 
-			End
-	END
-	*/
-/* End If */
-insert into Inventory(BranchIdNo,ProductIdNo,TransactionIdNo,QtyOnHand,WarehouseIdNo,TransactionType,BatchNo,ExpiryDate,UnitCost,TotalCost,UnitSalesPrice)
+		WHILE ( @excessQty <> 0)		
+			BEGIN /* 3 */
+				Declare @nextInventoryIdNo as Int 
+				/* find the next available inventory with the same productidno & warehouseIdNo beginning with the item with the lowest expired date */
+				Set @nextInventoryIdNo = (Select Top 1 IdNo From Inventory where WarehouseIdNo = @WarehouseIdNo and ProductIdNo = @ProductIdNo and QtyOnHand <> 0 and BranchIdNo = @BranchIdNo order by ExpiryDate Asc )				
+				if @nextInventoryIdNo > 0 
+					BEGIN /* 4 */
+						/* Declare @iUnitCost as Decimal(12,4)
+						Declare @iQtyOnHand as Decimal(12,4) */
+						Set @QtyOnHand = (Select qtyOnHand from inventory where idno = @nextInventoryIdNo) 
+						Set @UnitCost = (Select TotalCost / QtyOnHand from inventory where idno = @nextInventoryIdNo)
+						/* Quantity On Inventory is greater than the quantity to be deducted */
+						if @QtyOnHand > @excessQty set @Qty = @excessQty else set @Qty = @QtyOnHand
+						Set @cost = @unitcost * @Qty
+						if @ZeroQtySw = 0 
+							BEGIN /* 5 */
+								INSERT INTO [dbo].[InvTransactionDetail]
+								([Sequence]
+								,[InvTransactionIdNo]
+								,[ProductIdNo]
+								,[Quantity]
+								,[UnitIdNo]
+								,[BatchNo]
+								,[UnitCost]
+								,[NetAmount]
+								,[ExpiryDate]
+								,[InventoryIdNo])
+								VALUES
+								(@sequence
+								,@invTransactionIdNo
+								,@productIdNo
+								,@Qty 
+								,@UnitIdNo
+								,@BatchNo
+								,@unitCost 
+								,@cost
+								,@expiryDate
+								,@nextInventoryIdNo);
+								Set @ExcessQty = @ExcessQty - @Qty
+								Set @InvTransactionDetailIdNo = (Select scope_identity())
+							END /* 5 */
+						else
+							Begin /* 6 */
+								Set @sequence = @sequence + 1
+								/* inventory Qty for selected item is zero, so cannot reduce anymore, so get the nextInventory values with non zero quantity values */
+								Select @BatchNo = BatchNo, @ExpiryDate = ExpiryDate, @UnitCost = TotalCost / QtyOnHand From Inventory where IdNo = @nextInventoryIdNo
+								/* update invTransactionDetail values with the values acquired above */
+								update InvTransactionDetail set [Sequence] = @Sequence, BatchNo = @BatchNo, ExpiryDate = @ExpiryDate, UnitCost = @UnitCost, NetAmount = @UnitCost * @ExcessQty, InventoryIdNo = @nextInventoryIdNo where idno = @InvTransactionDetailIdNo 
+								/* call this program recursively with the corrected values */
+								Set @ExcessQty = 0 /* force quit loop */
+							End   /* 6 */
+						/* if @QtySw = 0 */												
+						/* recursively call this procedure */
+						/* Exec PostInvTransDetail @InvTransactionDetailIdNo,@productIdNo,@UnitIdNo,@nextInventoryIdNo,@InvTransactionIdNo,@WarehouseIdNo,@WarehouseToIdNo */
+						EXEC @Sequence = PostInvTransDetail @InvTransactionDetailIdNo,@productIdNo,@UnitIdNo,@nextInventoryIdNo,@InvTransactionIdNo,@WarehouseIdNo,@WarehouseToIdNo,@Sequence
+					END /* 4 */
+				Else  
+					Set @ExcessQty = 0
+					/* 
+					reduce the quantity to the actual qtyon hand 
+					update InvTransactionDetail set NetAmount = NetAmount - @ExcessQty * @UnitCost, Quantity = Quantity - @ExcessQty where idno = @InvTransactionDetailIdNo 
+					BEGIN /* 7 */
+						/* code here to run if no more stock for the said productIdNo by finding the lastest inventory with the said batch & expiryDate */
+						Declare @InvFind as Int 
+						Select Top 1 @InvFind = IdNo From Inventory where WarehouseIdNo = @WarehouseIdNo and ProductIdNo = @ProductIdNo and BranchIdNo = @BranchIdNo and BatchNo = @BatchNo and ExpiryDate = @ExpiryDate order by IdNo Desc			
+						if @InvFind > 0 
+							update Inventory set QtyOnHand = @ExcessQty * -1, TotalCost = @UnitCost * @ExcessQty * -1 where idno = @InvFind
+						else
+							Begin /* 8 */
+								Set @InvFind = (Select Top 1 IdNo From Inventory where WarehouseIdNo = @WarehouseIdNo and ProductIdNo = @ProductIdNo and BranchIdNo = @BranchIdNo order by IdNo Desc)
+								update Inventory set QtyOnHand = @ExcessQty * -1, TotalCost = @UnitCost * @ExcessQty * -1 where idno = @InvFind
+								/* update InvTransactionDetail set NetAmount = NetAmount + @UnitCost * @ExcessQty * -1 where idno = @InvTransactionDetailIdNo  */
+							End /* 8 */
+						Set @ExcessQty = 0 /* force quit loop */
+						Declare @DummyLine as Int  
+					END 7 
+					*/
+				/* end if @nextInventoryIdNo > 0 */
+			END /* 3 */
+		/* END WHILE */
+	END /* 1 */
+/* @Quantity <> 0 
+	insert into Inventory(BranchIdNo,ProductIdNo,TransactionIdNo,QtyOnHand,WarehouseIdNo,TransactionType,BatchNo,ExpiryDate,UnitCost,TotalCost,UnitSalesPrice)
 	Select BranchIdNo,ProductIdNo,@InvTransactionIdNo,@Quantity,@WarehouseIdNo,'I',BatchNo,ExpiryDate,UnitCost, @Cost as TotalCost,UnitSalesPrice 
 	   from Inventory where IdNo = @InventoryIdNo
-/* select @@ROWCOUNT */
+*/
+RETURN (@Sequence)

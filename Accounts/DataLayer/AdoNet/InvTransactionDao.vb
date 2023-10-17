@@ -1,4 +1,5 @@
-﻿Imports System.Data.SqlClient
+﻿
+Imports System.Data.SqlClient
 Imports System.Web.UI.WebControls.Expressions
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.PresentationLayer.Models
@@ -128,88 +129,23 @@ Namespace DataLayer.AdoNet
             Dim sqls As New List(Of String)
             InventoryAction = GetField(Of String, Int16)(InvTrans.InvTransTypeIdNo, "InvTransType", "IdNo", "InventoryAction")
             warehouseToIdNo = InvTrans.WarehouseToIdNo
-            If InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
-                Dim connection As New Db
-                Dim transactionObj As New TransactionObject()
-                transactionObj.CreateConnection("PostInvTransDetail", Db.GetConnectionString)
-                For Each item As InvTransactionDetail In invTransDetails
-                    Dim parameters As Object = {"@InvTransactionDetailIdNo", item.IdNo,
-                                                "@ProductIdNo", item.ProductIdNo,
-                                                "@UnitIdNo", item.IdNo,
-                                                "@InventoryIdNo", item.InventoryIdNo,
-                                                "@InvTransactionIdNo", InvTrans.IdNo,
-                                                "@WarehouseIdNo", InvTrans.WarehouseToIdNo}
-                    Dim updatedCount As Int32 = Db.RunSqlStoredProcedure("PostInvTransDetail", parameters)
-                    If updatedCount < 0 Then
-                        retVal = False
-                        Exit For
-                    End If
-                Next
-                If retVal Then
-                    Dim sql As String = "update invtransaction set posted = 1 where idno = @InvTranactionIdNo"
-                    Dim updatedCount = Db.ExecuteSqlInTransaction(transactionObj, sql, {"@InvTranactionIdNo", InvTrans.IdNo})
-                    If updatedCount < 0 Then
-                        retVal = False
-                    End If
+            Dim totCost As Decimal = 0
+            Dim connection As New Db
+            Dim transactionObj As New TransactionObject()
+            Dim seq As Int32
+            transactionObj.CreateConnection("PostInvTransDetailTransfer", Db.GetConnectionString)
+            Dim parameters As Object = {"@InvTransactionIdNo", idNo,
+                                        "@InventoryAction", InventoryAction
+                                       }
+            seq = Db.RunSqlStoredProcedure("spPostInvTransaction", parameters)
+            Db.CloseTransaction(transactionObj, IIf(seq > 0, True, False))
+            retVal = IIf(seq = 0, False, True)
+            If Not retVal Then
+                If InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
+                    MessageBox.Show("Sorry, either quantity is zero or cannot find item in the inventory, no item(s) posted.")
+                ElseIf InventoryAction = EnumToCode(InventoryActionSelection.Add) Then
+                    MessageBox.Show("Sorry, cannot post these items, either product does not exist or quantity is zero, no item(s) posted.")
                 End If
-                Db.CloseTransaction(transactionObj, retVal)
-            ElseIf InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Then
-                Dim connection As New Db
-                Dim transactionObj As New TransactionObject()
-                transactionObj.CreateConnection("PostInvTransDetailDeduct", Db.GetConnectionString)
-                For Each item As InvTransactionDetail In invTransDetails
-                    Dim parameters As Object = {"@InvTransactionDetailIdNo", item.IdNo,
-                                                "@InventoryIdNo", item.InventoryIdNo,
-                                                "@InvTransactionIdNo", InvTrans.IdNo,
-                                                "@WarehouseIdNo", InvTrans.WarehouseToIdNo}
-                    Dim updatedCount As Int32 = Db.RunSqlStoredProcedure("PostInvTransDetailDeduct", parameters)
-                    If updatedCount < 0 Then
-                        retVal = False
-                        Exit For
-                    End If
-                Next
-                If retVal Then
-                    Dim sql As String = "update invtransaction set posted = 1 where idno = @InvTranactionIdNo"
-                    Dim updatedCount = Db.ExecuteSqlInTransaction(transactionObj, sql, {"@InvTranactionIdNo", InvTrans.IdNo})
-                    If updatedCount < 0 Then
-                        retVal = False
-                    End If
-                End If
-                Db.CloseTransaction(transactionObj, retVal)
-            ElseIf InventoryAction = EnumToCode(InventoryActionSelection.Add) Then
-                Dim connection As New Db
-                Dim transactionObj As New TransactionObject()
-                transactionObj.CreateConnection("PostInvTransDetailAdd", Db.GetConnectionString)
-                Dim updatedCount As Int32
-                For Each item As InvTransactionDetail In invTransDetails
-                    Dim parameters As Object
-                    If item.InventoryIdNo = 0 Then
-                        parameters = {"@InvTransactionDetailIdNo", item.IdNo,
-                                                "@InventoryIdNo", item.InventoryIdNo,
-                                                "@InvTransactionIdNo", InvTrans.IdNo,
-                                                "@WarehouseIdNo", InvTrans.WarehouseIdNo,
-                                                "@BranchIdNo", GlobalVariables.BranchIdNo}
-                        updatedCount = Db.RunSqlStoredProcedure("PostInvTransDetailInsert", parameters)
-                    Else
-                        parameters = {"@InvTransactionDetailIdNo", item.IdNo,
-                                                    "@InventoryIdNo", item.InventoryIdNo,
-                                                    "@InvTransactionIdNo", InvTrans.IdNo,
-                                                    "@WarehouseIdNo", InvTrans.WarehouseIdNo}
-                        updatedCount = Db.RunSqlStoredProcedure("PostInvTransDetailAdd", parameters)
-                    End If
-                    If updatedCount < 0 Then
-                        retVal = False
-                        Exit For
-                    End If
-                Next
-                If retVal Then
-                    Dim sql As String = "update invtransaction set posted = 1 where idno = @InvTranactionIdNo"
-                    updatedCount = Db.ExecuteSqlInTransaction(transactionObj, sql, {"@InvTranactionIdNo", InvTrans.IdNo})
-                    If updatedCount < 0 Then
-                        retVal = False
-                    End If
-                End If
-                Db.CloseTransaction(transactionObj, retVal)
             End If
             'retVal = Db.ExecuteMultiSqls("UpdateInventory", sqls)
             Return retVal

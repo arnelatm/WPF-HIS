@@ -15,6 +15,8 @@
 
 
 
+
+
 GO
 CREATE NONCLUSTERED INDEX [IX_ApOpenInvoiceJournalCode]
     ON [dbo].[ApOpenInvoice]([JournalCode] ASC);

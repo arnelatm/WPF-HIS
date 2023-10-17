@@ -51,16 +51,17 @@ Namespace PresentationLayer.Presenters
             Dim dtInvRequest As New System.Data.DataTable
             dtInvRequest.Columns.Add("InvTransactionDetailIdNo", GetType(Int32))
             dtInvRequest.Columns.Add("QtySupplied", GetType(Int32))
-
+            Dim qtyToPost As Decimal = 0
             'Dim dataObj As New Object()
             For Each item In View.InvRequestDetails
                 Dim dr As DataRow = dtInvRequest.NewRow
                 dr("InvTransactionDetailIdNo") = item.IdNo
                 dr("QtySupplied") = item.QtyApproved
                 dtInvRequest.Rows.Add(dr)
+                qtyToPost += Math.Abs(item.QtyApproved)
             Next
-
-            Dim parameters As Object = {"@MParamType", dtInvRequest,
+            If qtyToPost > 0 Then
+                Dim parameters As Object = {"@MParamType", dtInvRequest,
                                         "@InvTransactionIdNo", invTransaction.IdNo,
                                         "@Amount", 0,
                                         "@BranchIdNo", GlobalVariables.BranchIdNo,
@@ -74,13 +75,16 @@ Namespace PresentationLayer.Presenters
                                         "@WarehouseIdNo", invTransaction.WarehouseIdNo,
                                         "@WarehouseToIdNo", invTransaction.WarehouseToIdNo}
 
-            Dim retVal As Int16
-            retVal = invTranDao.RunSpWithRollBack("spPostInvRequest", parameters)
-            If retVal >= 0 Then
-                View.WarehouseIdNo = View.WarehouseSelector
-                AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgInvTransferSuccess")
-                GetInvTransactions()
-                RefreshRequestDetailsAndQtyOnHand(0)
+                Dim retVal As Int16
+                retVal = invTranDao.RunSpWithRollBack("spPostInvRequest", parameters)
+                If retVal >= 0 Then
+                    View.WarehouseIdNo = View.WarehouseSelector
+                    AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgInvTransferSuccess")
+                    GetInvTransactions()
+                    RefreshRequestDetailsAndQtyOnHand(0)
+                End If
+            Else
+                AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgNoApprovedQtySpecified")
             End If
         End Sub
 

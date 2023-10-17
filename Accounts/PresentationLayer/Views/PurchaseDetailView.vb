@@ -4,6 +4,7 @@ Imports AATM.PresentationLayer.Views
 Namespace PresentationLayer.Views
 
     Public Class PurchaseDetailView
+        Inherits PurchaseDetailBaseView
         Implements IPurchaseDetailView
 
 
@@ -12,25 +13,13 @@ Namespace PresentationLayer.Views
         Public Property BatchNo As String Implements IPurchaseDetailView.BatchNo
         Public Property BonusQuantity As Decimal Implements IPurchaseDetailView.BonusQuantity
         Public Property CategoryIdNo As Short Implements IPurchaseDetailView.CategoryIdNo
-        Public Property DataFilter As String Implements IView.DataFilter
         Public Property DiscountAmount As Decimal Implements IPurchaseDetailView.DiscountAmount
         Public Property DiscountPercent As Decimal Implements IPurchaseDetailView.DiscountPercent
-        Public Property Errors As List(Of String) Implements IView.Errors
         Public Property ExpiryDate As Date? Implements IPurchaseDetailView.ExpiryDate
         Public Property GrossAmount As Decimal Implements IPurchaseDetailView.GrossAmount
-        Public Property IdNo As Int32 Implements IPurchaseDetailView.IdNo
         Public Property NeedsExpiryDate As Boolean Implements IPurchaseDetailView.NeedsExpiryDate
-        Public Property NetAmount As Decimal Implements IPurchaseDetailView.NetAmount
-        Public Property Price As Decimal Implements IPurchaseDetailView.Price
-        Public Property ProductCode As String Implements IPurchaseDetailView.ProductCode
-        Public Property ProductIdNo As Int32 Implements IPurchaseDetailView.ProductIdNo
-        Public Property ProductName As String Implements IPurchaseDetailView.ProductName
-        Public Property ProductNameAra As String Implements IPurchaseDetailView.ProductNameAra
         Public Property PurchaseIdNo As Int32 Implements IPurchaseDetailView.PurchaseIdNo
-        Public Property Quantity As Decimal Implements IPurchaseDetailView.Quantity
-        Public Property Sequence As Int16 Implements IPurchaseDetailView.Sequence
         Public Property UnitCount As Int16 Implements IPurchaseDetailView.UnitCount
-        Public Property UnitIdNo As Int16 Implements IPurchaseDetailView.UnitIdNo
         Public Property UnitCost As Decimal Implements IPurchaseDetailView.UnitCost
         Public Property UnitSalesPrice As Decimal Implements IPurchaseDetailView.UnitSalesPrice
         Public Property VatAmount As Decimal Implements IPurchaseDetailView.VatAmount
@@ -59,6 +48,24 @@ Namespace PresentationLayer.Views
         Public Property UnitCost As Decimal Implements IPurchaseHistoryView.UnitCost
         Public Property UnitName As String Implements IPurchaseHistoryView.UnitName
         Public Property UnitSalesPrice As Decimal Implements IPurchaseHistoryView.UnitSalesPrice
+
+    End Class
+
+    Public Class PurchaseDetailBaseView
+        Implements IPurchaseDetailBaseView
+
+        Public Property Errors As List(Of String) Implements IView.Errors
+        Public Property DataFilter As String Implements IView.DataFilter
+        Public Property IdNo As Integer Implements IPurchaseDetailBaseView.IdNo
+        Public Property NetAmount As Decimal Implements IPurchaseDetailBaseView.NetAmount
+        Public Property Price As Decimal Implements IPurchaseDetailBaseView.Price
+        Public Property ProductCode As String Implements IPurchaseDetailBaseView.ProductCode
+        Public Property ProductIdNo As Integer Implements IPurchaseDetailBaseView.ProductIdNo
+        Public Property ProductName As String Implements IPurchaseDetailBaseView.ProductName
+        Public Property ProductNameAra As String Implements IPurchaseDetailBaseView.ProductNameAra
+        Public Property Quantity As Short Implements IPurchaseDetailBaseView.Quantity
+        Public Property Sequence As Short Implements IPurchaseDetailBaseView.Sequence
+        Public Property UnitIdNo As Short Implements IPurchaseDetailBaseView.UnitIdNo
 
     End Class
 

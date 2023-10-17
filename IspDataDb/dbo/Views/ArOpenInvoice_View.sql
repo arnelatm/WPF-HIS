@@ -1,12 +1,13 @@
 ﻿
+
 CREATE View [dbo].[ArOpenInvoice_View] as
 (SELECT      a.IdNo, 
 			a.JournalCode, 
 			a.JournalItemIdNo, 
 			d.Debit - d.Credit AS Amount, 
-			co.PaidAmount, 
-			co.DiscountTaken, 
-			d.Debit - d.Credit - co.PaidAmount - co.DiscountTaken AS 'Balance', 
+			co.PaidAmount,
+			co.DiscountTaken,
+			d.Debit - d.Credit - IsNull(co.PaidAmount,0) - IsNull(co.DiscountTaken,0) AS Balance, 
 			a.JournalIdNo, 
 			d.AccountIdNo, 
 			d.CustomerIdNo, 

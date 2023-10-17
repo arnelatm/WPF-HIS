@@ -54,6 +54,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property UnpostedPurchaseOrders As List(Of IPurchaseBaseView)
         Property WarehouseIdNo As Int16
         Property WarehouseList As DataTable
+        Property SupplierList As DataTable
         Property UserList As DataTable
         Property UnitList As DataTable
         Property PurchaseOrderDetails As List(Of PurchaseOrderApprovalDetailView)
@@ -61,7 +62,7 @@ Namespace PresentationLayer.Views.Interfaces
         Event RowChanged(productIdNo As Integer)
         Event FormLoaded()
         Event SupplyQuantityClicked(invTransIdNo As Integer)
-        Event TransferRequestClicked(invTransIdNo As Integer)
+        Event ApproveSelectedPO(invTransIdNo As Integer)
     End Interface
 
 End Namespace
