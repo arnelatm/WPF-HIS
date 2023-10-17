@@ -670,7 +670,9 @@ Namespace PresentationLayer.Presenters
         Private Function OnPostData(idNo As Int32) As Boolean
             Dim okToPost As Boolean = False
             Dim retVal As Boolean = False
-            If EditMode Or AddMode Then
+            If UserIsASuperAdministrator() Then
+                okToPost = True
+            ElseIf EditMode Or AddMode Then
                 Messaging.Show(True, "MsgCannotPostUnsaved")
             ElseIf View.WarehouseIdNo = _defaultUserWarehouseIdNo Then
                 ' you can post if your default warehouseid is the same as the current warehouseidno

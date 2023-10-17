@@ -1,7 +1,5 @@
-﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
+﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Libraries.MessagingLibrary
-Imports AATM.PresentationLayer.Views
 
 Namespace PresentationLayer.Views.Forms
 
@@ -13,10 +11,11 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event RowChanged(productIdNo As Int32) Implements IPurchaseOrderApprovalView.RowChanged
         Public Event FormLoaded() Implements IPurchaseOrderApprovalView.FormLoaded
-        Public Event TransferRequestClicked(invTransIdNo As Int32) Implements IPurchaseOrderApprovalView.TransferRequestClicked
+        Public Event ApproveSelectedPO(invTransIdNo As Int32) Implements IPurchaseOrderApprovalView.ApproveSelectedPO
         Public Event SupplyQuantityClicked(invTransIdNo As Int32) Implements IPurchaseOrderApprovalView.SupplyQuantityClicked
         Public Property WarehouseList As DataTable Implements IPurchaseOrderApprovalView.WarehouseList
         Public Property UserList As DataTable Implements IPurchaseOrderApprovalView.UserList
+        Public Property SupplierList As DataTable Implements IPurchaseOrderApprovalView.SupplierList
         Public Property UnitList As DataTable Implements IPurchaseOrderApprovalView.UnitList
 
         Public Sub New()
@@ -28,7 +27,7 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub AddDgColumn(dgvColumnName As DataGridViewImageColumn, dgvName As String, caption As String)
-            With DataGridViewInvTransactionRequests
+            With DataGridViewPoUnposted
                 .Columns.Insert(.Columns.Count, dgvColumnName)
                 dgvColumnName.Image = imgList.Images(0)
                 dgvColumnName.Width = 35
@@ -62,12 +61,21 @@ Namespace PresentationLayer.Views.Forms
             bsPurchaseOrders.DataSource = Nothing
             bsPurchaseOrders.DataSource = UnpostedPurchaseOrders
             bsPurchaseOrders.AllowNew = False
-            With DataGridViewInvTransactionRequests
+            With DataGridViewPoUnposted
                 .AutoGenerateColumns = False
                 .DataSource = bsPurchaseOrders
                 dgvUserIdNo.DataSource = UserList
                 dgvUserIdNo.DisplayMember = "Name"
                 dgvUserIdNo.ValueMember = "IdNo"
+                dgvUserIdNo.DisplayOnly = True
+                dgvWarehouseIdNo.DisplayOnly = True
+                dgvSupplierIdNo.DisplayOnly = True
+                dgvWarehouseIdNo.DataSource = WarehouseList
+                dgvWarehouseIdNo.DisplayMember = "Name"
+                dgvWarehouseIdNo.ValueMember = "IdNo"
+                dgvSupplierIdNo.DataSource = SupplierList
+                dgvSupplierIdNo.DisplayMember = "Name"
+                dgvSupplierIdNo.ValueMember = "IdNo"
             End With
             ResumeLayout()
         End Sub
@@ -96,14 +104,14 @@ Namespace PresentationLayer.Views.Forms
         Private Sub BindInvTransactionDetail()
             SuspendLayout()
             bsPurchaseOrderDetails.DataSource = Nothing
-            DataGridViewInvTransItems.Refresh()
+            DataGridViewPoItems.Refresh()
             bsPurchaseOrderDetails.DataSource = PurchaseOrderDetails
             bsPurchaseOrderDetails.AllowNew = False
             ResumeLayout()
         End Sub
 
-        Private Sub DgvInvTransactionRequest_RowEnter(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewInvTransactionRequests.RowEnter
-            Dim dgvRow As DataGridViewRow = DataGridViewInvTransactionRequests.Rows(e.RowIndex)
+        Private Sub DgvInvTransactionRequest_RowEnter(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPoUnposted.RowEnter
+            Dim dgvRow As DataGridViewRow = DataGridViewPoUnposted.Rows(e.RowIndex)
             Dim invTranIdNo As Int32 = dgvRow.Cells("dgvIdNo").Value
             RaiseEvent RowChanged(invTranIdNo)
             bsPurchaseOrderDetails.ResetBindings(False)
@@ -112,7 +120,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub PurchaseOrderApprovalForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             RaiseEvent FormLoaded()
-            DataGridViewInvTransactionRequests.DisplayOnly = True
+            DataGridViewPoUnposted.DisplayOnly = True
             'DataGridViewInvTransItems.DisplayOnly = True
             dgvQtyApproved.DisplayOnly = False
             dgvQuantity.DisplayOnly = True
@@ -134,48 +142,39 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
 
-        ' Changes how cells are displayed depending on their columns and values.
-        Private Sub dgvPurDetailsFormatting(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellFormattingEventArgs) Handles DataGridViewInvTransItems.CellFormatting
-            'If sender.CurrentRow IsNot Nothing AndAlso e.ColumnIndex > 0 Then
-            If e.ColumnIndex > 0 AndAlso sender.CurrentRow() IsNot Nothing Then
-                If sender.Columns(e.ColumnIndex).Name.Equals("dgvQtyOnHand") Then
-                    Dim x = DirectCast(sender, DataGridView).Rows(e.RowIndex)
-                    If x IsNot Nothing Then
-                        If e.Value < x.Cells("dgvQuantity").Value Then
-                            e.CellStyle.BackColor = Color.Red
-                        End If
-                    End If
-                End If
+        '' Changes how cells are displayed depending on their columns and values.
+        'Private Sub dgvPurDetailsFormatting(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellFormattingEventArgs) Handles DataGridViewInvTransItems.CellFormatting
+        '    If e.ColumnIndex > 0 AndAlso sender.CurrentRow() IsNot Nothing Then
+        '        If sender.Columns(e.ColumnIndex).Name.Equals("dgvQtyOnHand") Then
+        '            Dim x = DirectCast(sender, DataGridView).Rows(e.RowIndex)
+        '            If x IsNot Nothing Then
+        '                If e.Value < x.Cells("dgvQuantity").Value Then
+        '                    e.CellStyle.BackColor = Color.Red
+        '                End If
+        '            End If
+        '        End If
+        '    End If
+        'End Sub
 
-                'If sender.currentrow().cells("dgvQtyOnHand").Value < sender.currentrow().cells("dgvQuantity").Value Then
-                '    e.CellStyle.BackColor = Color.Red
-                'End If
-            End If
-
-        End Sub
-
-        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles CButton1.ClickButtonArea
-            Dim dgvRow As DataGridViewRow = DataGridViewInvTransactionRequests.CurrentRow
-            Dim invTranIdNo As Int32 = dgvRow.Cells("dgvIdNo").Value
-            RaiseEvent TransferRequestClicked(invTranIdNo)
+        Private Sub CButton1_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnApproveOrder.ClickButtonArea
+            Dim dgvRow As DataGridViewRow = DataGridViewPoUnposted.CurrentRow
+            Dim poIdNo As Int32 = dgvRow.Cells("dgvIdNo").Value
+            RaiseEvent ApproveSelectedPO(poIdNo)
         End Sub
 
         Private Sub btnSupplyQuantity_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnSupplyQuantity.ClickButtonArea
-            Dim dgvRow As DataGridViewRow = DataGridViewInvTransactionRequests.CurrentRow
-            Dim invTranIdNo As Int32 = dgvRow.Cells("dgvIdNo").Value
-            RaiseEvent SupplyQuantityClicked(invTranIdNo)
+            Dim dgvRow As DataGridViewRow = DataGridViewPoUnposted.CurrentRow
+            Dim poIdNo As Int32 = dgvRow.Cells("dgvIdNo").Value
+            RaiseEvent SupplyQuantityClicked(poIdNo)
             bsPurchaseOrderDetails.ResetBindings(False)
         End Sub
 
 
-        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewInvTransItems.CellEndEdit
+        Private Sub OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewPoItems.CellEndEdit
             ProcessCellEndEdit(sender, bsPurchaseOrderDetails)
             'UpdateTotals()
         End Sub
 
-        Private Sub DataGridViewInvTransItems_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewInvTransItems.CellContentClick
-
-        End Sub
     End Class
 
 End Namespace

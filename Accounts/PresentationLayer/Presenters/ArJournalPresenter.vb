@@ -209,7 +209,7 @@ Namespace PresentationLayer.Presenters
             If MyBase.IsBizDataValid() Then
                 Dim cashAccount As String = EnumToCode(SpecialAccountSelection.Bank) + "|" + EnumToCode(SpecialAccountSelection.Cash) + "|" + EnumToCode(SpecialAccountSelection.PettyCashAccount)
                 Dim invalidAccounts As String = EnumToCode(SpecialAccountSelection.EmployeeLoan) + "|" + EnumToCode(SpecialAccountSelection.AccountsPayable) + "|" +
-                                                EnumToCode(SpecialAccountSelection.AccountsPayableDiscount) + "|" + EnumToCode(SpecialAccountSelection.AccountsReceivableDiscount) + "|" +
+                                                EnumToCode(SpecialAccountSelection.AccountsPayableDiscount) + "|" +
                                                 EnumToCode(SpecialAccountSelection.AdvancesToSupplier) + "|"
                 Dim dateToday As DateTime = Now()
                 retValue = True

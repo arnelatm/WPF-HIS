@@ -315,7 +315,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String
             Dim data As New PurchaseOrderApproval
             Dim params() As Object = {"@BranchIdNo", GlobalVariables.BranchIdNo}
-            sql = $"SELECT IdNo,ReferenceNo,TransactionDate,WarehouseIdNo,Amount,Notes,Posted,Cancelled,DateCreated,UserIdNo from PurchaseOrder where BranchIdNo = @BranchIdNo and Posted = 0"
+            sql = $"SELECT IdNo,ReferenceNo,TransactionDate,WarehouseIdNo,Amount,Notes,Posted,SupplierIdNo,Cancelled,DateCreated,UserIdNo from PurchaseOrder where BranchIdNo = @BranchIdNo and Posted = 0 and Approved = 0"
             _db.SetConnectionString("ISPDATA")
             data.UnpostedPurchaseOrders = _db.Read(sql, Make, params).ToList()
             Return data
@@ -331,6 +331,7 @@ Namespace DataLayer.AdoNet
                                   .ReferenceNo = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ReferenceNo")),
                                   .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),
                                   .UserIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("UserIdNo")),
+                                  .SupplierIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("SupplierIdNo")),
                                   .WarehouseIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("WarehouseIdNo"))
                                 }
 

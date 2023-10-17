@@ -76,9 +76,18 @@ BEGIN
 					VALUES (@Sequence,@NewInvTransactionIdNo,@ProductIdNo,iIf(@qtyFactor=0,0,@Qty/@QtyFactor),@UnitIdNo,@BatchNo,@UnitCost,@NetAmount,@ExpiryDate,@InventoryIdNo)
 				-- update the Inventory qty on hand and cost
 				Update Inventory set QtyOnHand = QtyOnHand - @Qty, TotalCost = TotalCost - @Qty * @UnitCost where IdNo = @InventoryIdNo 
+				Declare @InvIdNo as Int
+				Set @InvIdNo = (Select Top 1 IdNo from Inventory where BatchNo = @BatchNo and ExpiryDate = @ExpiryDate and ProductIdNo = @ProductIdNo and WarehouseIdNo = @WarehouseToIdNo)
+				if @InvIdNo > 0 
+					Update Inventory set QtyOnHand = QtyOnHand + @Qty, TotalCost = TotalCost + @Qty * @UnitCost where IdNo = @InvIdNo 
+				else					
+					Insert into Inventory (BranchIdNo, ProductIdNo, TransactionIdNo, QtyOnHand,WarehouseIdNo, TransactionType, BatchNo, ExpiryDate, UnitCost, TotalCost, UnitSalesPrice)
+						Values(@BranchIdNo, @ProductIdNo, @NewInvTransactionIdNo, @Qty, @WarehouseToIdNo, 'I', @BatchNo, @ExpiryDate, @UnitCost, @UnitCost * @Qty, @UnitCost)
+
 				Set @RunningQty = @RunningQty - @Qty
 				if @RunningQty <= 0 Break
 			
+				
 				-- This is executed as long as the previous fetch succeeds.  
 				FETCH NEXT FROM inventory_cursor INTO @InventoryIdNo, @QtyOnHand, @BatchNo, @ExpiryDate, @UnitCost  
 				IF @@FETCH_STATUS = -1 BREAK;

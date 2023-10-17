@@ -627,6 +627,13 @@
     <Build Include="dbo\Views\PurchaseOrderApprovalDetail_View.sql" />
     <Build Include="dbo\Views\ItemInventoryDetailsQty_View.sql" />
     <Build Include="dbo\Stored Procedures\spPostPurchaseReturn2_1.sql" />
+    <Build Include="dbo\Stored Procedures\spPostPurchaseOrder.sql" />
+    <Build Include="dbo\User Defined Types\PurchaseOrderSuppliedInsertType.sql" />
+    <Build Include="dbo\Stored Procedures\spPostInvTransactionTransfer.sql" />
+    <Build Include="dbo\Stored Procedures\spPostInvTransDetail.sql" />
+    <Build Include="dbo\Stored Procedures\spPostInvTransaction.sql" />
+    <Build Include="dbo\Stored Procedures\spPostInvTransDetailBaqckup.sql" />
+    <Build Include="dbo\Stored Procedures\spPostInvTransDetailBackup.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

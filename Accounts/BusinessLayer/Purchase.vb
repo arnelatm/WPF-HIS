@@ -42,6 +42,7 @@ Namespace BusinessLayer
 
         Public Property Amount As Decimal
         Public Property Approved As Boolean
+        Public Property ApprovedDateTime As DateTime?
         Public Property BranchIdNo As Int16
         Public Property Cancelled As Boolean
         Public Property DateCreated As DateTime?

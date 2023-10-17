@@ -14,8 +14,6 @@ Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 Imports AATM.PresentationLayer.Events
 Imports AATM.PresentationLayer.Views
-Imports Telerik.Licensing
-Imports Telerik.WinControls.UI.Barcode.Symbology
 
 Namespace PresentationLayer.Presenters
 
@@ -137,6 +135,11 @@ Namespace PresentationLayer.Presenters
                         If item.NeedsExpiryDate AndAlso (item.ExpiryDate Is Nothing OrElse item.ExpiryDate.Value = Date.MinValue) Then
                             Dim lineNumber = Format(item.Sequence, "0")
                             Messaging.ShowPmMessage(True, "MsgExpDateNeeded", {"lineNumber", lineNumber})
+                            retValue = False
+                            Exit For
+                        ElseIf item.Quantity < 0 Then
+                            Dim lineNumber = Format(item.Sequence, "0")
+                            Messaging.ShowPmMessage(True, "MsgNegativeValNotAllowed", {"fieldName", "Quantity", "lineNumber", lineNumber})
                             retValue = False
                             Exit For
                         End If
@@ -839,6 +842,7 @@ Namespace PresentationLayer.Presenters
                         retVal = Service.PostData(idNo)
                         If retVal Then
                             View.Posted = True
+                            UpdateViewDisplay()
                         End If
                     End If
                 Else

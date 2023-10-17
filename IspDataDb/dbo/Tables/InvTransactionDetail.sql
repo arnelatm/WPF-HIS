@@ -6,7 +6,7 @@
     [Quantity]           DECIMAL (12, 4) NULL,
     [UnitIdNo]           TINYINT         NULL,
     [BatchNo]            VARCHAR (20)    NULL,
-    [UnitCost]           DECIMAL (11, 4) NULL,
+    [UnitCost]           DECIMAL (12, 4) NULL,
     [NetAmount]          DECIMAL (9, 2)  NULL,
     [ExpiryDate]         DATE            NULL,
     [InventoryIdNo]      INT             NULL,
