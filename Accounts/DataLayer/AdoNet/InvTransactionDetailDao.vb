@@ -71,7 +71,7 @@ Namespace DataLayer.AdoNet
             .InventoryIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("InventoryIdNo")),
             .NetAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("NetAmount")),
             .ProductCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ProductCode")),
-            .ProductIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("ProductIdNo")),
+            .ProductIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("ProductIdNo")),
             .ProductName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ProductName")),
             .ProductNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ProductNameAra")),
             .InvTransactionIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("InvTransactionIdNo")),

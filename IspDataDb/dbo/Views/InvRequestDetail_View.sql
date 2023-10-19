@@ -10,6 +10,7 @@
 
 
 
+
 CREATE VIEW [dbo].[InvRequestDetail_View] as 
 Select a.IdNo,		
 		a.Quantity,
@@ -21,14 +22,14 @@ Select a.IdNo,
 		p.ProductName,
 		p.ProductNameAra,
 		a.ProductIdNo,
-		IIf(c.UnitQty=0,0,Cast(a.Quantity as Decimal(12,2)) * c.BaseQty / c.UnitQty) as BaseQuantity,
-        IIf((cast(a.Quantity as Decimal(12,2)) * c.BaseQty / c.UnitQty)=0,0,a.NetAmount / (cast(a.Quantity as Decimal(12,2)) * c.BaseQty / c.UnitQty)) as UnitCost, 
+		Cast(IIf(c.UnitQty=0,0,Cast(a.Quantity as Decimal(12,2)) * c.BaseQty / c.UnitQty) as Decimal(12,4)) as BaseQuantity,
+        Cast(IIf((cast(a.Quantity as Decimal(12,2)) * c.BaseQty / c.UnitQty)=0,0,a.NetAmount / (cast(a.Quantity as Decimal(12,2)) * c.BaseQty / c.UnitQty)) as Decimal(12,4)) as UnitCost, 
 		a.NetAmount, 
-		IIf(c.BaseQty=0,0,Cast(d.QtyOnHand as Decimal(12,2)) * c.UnitQty / c.BaseQty) as QtyOnHand,
+		Cast(IIf(c.BaseQty=0,0,Cast(d.QtyOnHand as Decimal(12,2)) * c.UnitQty / c.BaseQty) as Decimal(12,4)) as QtyOnHand,
 		a.Sequence, 
 		IsNull(s.QtySupplied,0) as QtySupplied,
 		a.InvTransactionIdNo,
-		0 as QuantityApproved
+		Cast(0 as Decimal(12,4)) as QuantityApproved
 	From InvTransactionDetail a 
  	Left Join InvTransaction b 
  	On a.InvTransactionIdNo = b.IdNo 

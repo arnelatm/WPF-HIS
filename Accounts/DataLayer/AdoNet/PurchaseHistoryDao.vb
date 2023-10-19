@@ -56,7 +56,7 @@ Namespace DataLayer.AdoNet
             .ExpiryDate = AATM.DataLayer.AdoNet.Extensions.AsNullable(Of Date)(reader("ExpiryDate")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .PurchaseIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("PurchaseIdNo")),
-            .Quantity = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("Quantity")),
+            .Quantity = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Quantity")),
             .SupplierCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("SupplierCode")),
             .SupplierName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("SupplierName")),
             .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsDate(reader("TransactionDate")),

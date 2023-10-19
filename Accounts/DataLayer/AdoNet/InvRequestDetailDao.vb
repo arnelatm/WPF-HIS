@@ -13,6 +13,7 @@ Namespace DataLayer.AdoNet
         Private ReadOnly Db As New Db()
 
         Const FieldList As String =
+                                    "BaseUnitIdNo," &
                                     "BaseUnitName," &
                                     "IdNo," &
                                     "InvTransactionIdNo," &
@@ -61,18 +62,18 @@ Namespace DataLayer.AdoNet
         Private Shared ReadOnly Make As Func(Of IDataReader, InvRequestDetail) =
                                     Function(reader) _
             New InvRequestDetail() With {
-            .BaseUnitIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
+            .BaseUnitIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("BaseUnitIdNo")),
             .BaseUnitName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("BaseUnitName")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
-            .InvTransactionIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("InvTransactionIdNo")),
+            .InvTransactionIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("InvTransactionIdNo")),
             .NetAmount = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("NetAmount")),
             .ProductCode = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ProductCode")),
-            .ProductIdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int16)(reader("ProductIdNo")),
+            .ProductIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("ProductIdNo")),
             .ProductName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ProductName")),
             .ProductNameAra = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ProductNameAra")),
             .QtyOnHand = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("QtyOnHand")),
             .QtySupplied = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("QtySupplied")),
-            .Quantity = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("Quantity")),
+            .Quantity = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("Quantity")),
             .Sequence = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("Sequence")),
             .UnitName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("UnitName")),
             .UnitCost = AATM.DataLayer.AdoNet.Extensions.AsDecimal(reader("UnitCost"))

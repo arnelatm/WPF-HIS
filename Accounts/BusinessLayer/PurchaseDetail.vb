@@ -50,7 +50,7 @@ Namespace BusinessLayer
         Public Property IdNo As Int32
         Public Property Price As Decimal
         Public Property PurchaseIdNo As Int32
-        Public Property Quantity As Int16
+        Public Property Quantity As Decimal
         Public Property SupplierCode As String
         Public Property SupplierName As String
         Public Property SupplierNameAra As String
@@ -77,7 +77,7 @@ Namespace BusinessLayer
         Public Property ProductIdNo As Int32
         Public Property ProductName As String
         Public Property ProductNameAra As String
-        Public Property Quantity As Int16
+        Public Property Quantity As Decimal
         Public Property Sequence As Int16
         Public Property UnitIdNo As Int16
 

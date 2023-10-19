@@ -39,8 +39,8 @@ Namespace PresentationLayer.Presenters
             DtInsertTable.Columns.Add("InventoryIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("InvTransactionIdNo", GetType(Int32))
             DtInsertTable.Columns.Add("NetAmount", GetType(Decimal))
-            DtInsertTable.Columns.Add("ProductIdNo", GetType(Int16))
-            DtInsertTable.Columns.Add("Quantity", GetType(Int16))
+            DtInsertTable.Columns.Add("ProductIdNo", GetType(Int32))
+            DtInsertTable.Columns.Add("Quantity", GetType(Decimal))
             DtInsertTable.Columns.Add("Sequence", GetType(Int16))
             DtInsertTable.Columns.Add("UnitCost", GetType(Decimal))
             DtInsertTable.Columns.Add("UnitIdNo", GetType(Int16))
@@ -51,8 +51,8 @@ Namespace PresentationLayer.Presenters
             DtUpdateTable.Columns.Add("InventoryIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("InvTransactionIdNo", GetType(Int32))
             DtUpdateTable.Columns.Add("NetAmount", GetType(Decimal))
-            DtUpdateTable.Columns.Add("ProductIdNo", GetType(Int16))
-            DtUpdateTable.Columns.Add("Quantity", GetType(Int16))
+            DtUpdateTable.Columns.Add("ProductIdNo", GetType(Int32))
+            DtUpdateTable.Columns.Add("Quantity", GetType(Decimal))
             DtUpdateTable.Columns.Add("Sequence", GetType(Int16))
             DtUpdateTable.Columns.Add("UnitCost", GetType(Decimal))
             DtUpdateTable.Columns.Add("UnitIdNo", GetType(Int16))
@@ -170,7 +170,7 @@ Namespace PresentationLayer.Presenters
                         ' times for same product
 
                         ' look for duplicate PayElementIdNo in bsEarning
-                        Dim duplicate = FirstFieldDuplicate(Of InvTransactionDetailView, Int16)(View.InvTransactionDetails, "ProductIdNo")
+                        Dim duplicate = FirstFieldDuplicate(Of InvTransactionDetailView, Int32)(View.InvTransactionDetails, "ProductIdNo")
                         If duplicate IsNot Nothing Then
                             MessageBox.Show("Duplicate product code found in Inventory Transaction Details. See line <" + (duplicate + 1).ToString() + ">.")
                             retValue = False
@@ -609,7 +609,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
 
-        Private Function SetInitialQuantity(inventory As InventoryModel) As Int16
+        Private Function SetInitialQuantity(inventory As InventoryModel) As Decimal
             Dim qty As Int16
             Dim InventoryAction As String
             InventoryAction = Service.GetField(Of String, Int16)(View.InvTransTypeIdNo, "InvTransType", "IdNo", "InventoryAction")
@@ -741,7 +741,7 @@ Namespace PresentationLayer.Presenters
             SetProductUnits(productIdNo)
         End Sub
 
-        Private Sub SetProductUnits(productIdNo As Int16)
+        Private Sub SetProductUnits(productIdNo As Int32)
             Dim data As New ArrayList
             data.Add({"ProductUnit_View", "UnitsByProduct", "UnitIdNo,UnitName,UnitCode", "ProductIdNo = " + productIdNo.ToString()})
             CreateLookupDataThread(data)
@@ -816,7 +816,7 @@ Namespace PresentationLayer.Presenters
 
         Private Sub OnPostData(idNo As Int32)
             Dim okToPost As Boolean = False
-            Dim retVal As Boolean = False
+            Dim retVal As Boolean
             If View.InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
                 Messaging.Show(True, "MsgNonPostableEntry")
             Else
@@ -842,6 +842,7 @@ Namespace PresentationLayer.Presenters
                         retVal = Service.PostData(idNo)
                         If retVal Then
                             View.Posted = True
+                            UpdateViewData(View.IdNo)
                             UpdateViewDisplay()
                         End If
                     End If

@@ -593,12 +593,8 @@
     <Build Include="dbo\Tables\CategoryOLd.sql" />
     <Build Include="dbo\Views\ProductUnitV.sql" />
     <Build Include="dbo\Stored Procedures\spGetLastPurchaseCost.sql" />
-    <Build Include="dbo\Stored Procedures\PostInvTransDetailTransfer.sql" />
-    <Build Include="dbo\Stored Procedures\PostInvTransDetailDeduct.sql" />
     <Build Include="dbo\Tables\AppSettingGroup.sql" />
     <Build Include="dbo\Tables\AppSetting.sql" />
-    <Build Include="dbo\Stored Procedures\PostInvTransDetailInsert.sql" />
-    <Build Include="dbo\Stored Procedures\PostInvTransDetailAdd.sql" />
     <Build Include="dbo\Tables\PurchaseOrderDetail.sql" />
     <Build Include="dbo\Tables\PurchaseOrder.sql" />
     <Build Include="dbo\Tables\DocumentDetail.sql" />
@@ -618,7 +614,6 @@
     <Build Include="dbo\Tables\InvRequestSupplied.sql" />
     <Build Include="dbo\Views\InvRequestQtyOnHand_View.sql" />
     <Build Include="dbo\Views\InvRequestDetail_View.sql" />
-    <Build Include="dbo\Stored Procedures\PostInvTransDetail.sql" />
     <Build Include="dbo\Stored Procedures\spPostInvRequest.sql" />
     <Build Include="dbo\User Defined Types\InvRequestSuppliedInsertType.sql" />
     <Build Include="dbo\Views\Contact_View.sql" />
@@ -629,11 +624,9 @@
     <Build Include="dbo\Stored Procedures\spPostPurchaseReturn2_1.sql" />
     <Build Include="dbo\Stored Procedures\spPostPurchaseOrder.sql" />
     <Build Include="dbo\User Defined Types\PurchaseOrderSuppliedInsertType.sql" />
-    <Build Include="dbo\Stored Procedures\spPostInvTransactionTransfer.sql" />
-    <Build Include="dbo\Stored Procedures\spPostInvTransDetail.sql" />
     <Build Include="dbo\Stored Procedures\spPostInvTransaction.sql" />
-    <Build Include="dbo\Stored Procedures\spPostInvTransDetailBaqckup.sql" />
-    <Build Include="dbo\Stored Procedures\spPostInvTransDetailBackup.sql" />
+    <Build Include="dbo\Stored Procedures\spPostInvTransactionBackup.sql" />
+    <Build Include="dbo\Views\ProductUnits_View.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

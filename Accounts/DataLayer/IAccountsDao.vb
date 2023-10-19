@@ -9,8 +9,8 @@ Namespace DataLayer
         Function UpdateVatNumber(vatNumber As String, idNo As Integer) As Integer
 
         Function GetAccountBalance(endDate As Date, accountIdNo As Short) As Decimal
-        Function GetLastPurchaseCost(productidNo As Integer) As Decimal
-        Function GetLastPurchaseData(productidNo As Integer) As Object
+        Function GetLastPurchaseCost(productIdNo As Integer) As Decimal
+        Function GetLastPurchaseData(productIdNo As Integer) As Object
     End Interface
 
     Public Interface IDaoContacts(Of TBiz)

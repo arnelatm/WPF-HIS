@@ -794,6 +794,9 @@ Namespace Services
             Return BaseDao.InitializeSecurityObject()
         End Function
 
+        Public Function GetRecordWithIdNo(tableName As String, fieldList As String, IdNo As Integer) As ExpandoObject Implements IService.GetRecordWithIdNo
+            Return BaseDao.GetRecordWithIdNo(tableName, fieldList, IdNo)
+        End Function
 
 #End Region
 

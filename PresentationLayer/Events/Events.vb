@@ -519,3 +519,17 @@ Public Class PrintCrEventArgs
     Public Property Args As Object
 
 End Class
+
+Public Class OtherData
+
+    Public Sub New(ByVal referenceName As String, ByVal eventArgs As Object, ByRef returnArgs As Object)
+        Me.ReferenceName = referenceName
+        Me.EventArgs = eventArgs
+        Me.ReturnArgs = returnArgs
+    End Sub
+
+    Public Property ReferenceName As String
+    Public Property EventArgs As Object
+    Public Property ReturnArgs As Object
+
+End Class

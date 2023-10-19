@@ -118,7 +118,7 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function PostData(idNo As Integer) As Boolean Implements IDaoPosting.PostData
-            Dim retVal As Boolean = True
+            Dim retVal As Boolean
             Dim commands As New List(Of DaoCommand)
             Dim invTransDetails As List(Of InvTransactionDetail)
             Dim itDao = New InvTransactionDetailDao
@@ -129,17 +129,14 @@ Namespace DataLayer.AdoNet
             Dim sqls As New List(Of String)
             InventoryAction = GetField(Of String, Int16)(InvTrans.InvTransTypeIdNo, "InvTransType", "IdNo", "InventoryAction")
             warehouseToIdNo = InvTrans.WarehouseToIdNo
-            Dim totCost As Decimal = 0
             Dim connection As New Db
             Dim transactionObj As New TransactionObject()
-            Dim seq As Int32
             transactionObj.CreateConnection("PostInvTransDetailTransfer", Db.GetConnectionString)
-            Dim parameters As Object = {"@InvTransactionIdNo", idNo,
-                                        "@InventoryAction", InventoryAction
-                                       }
-            seq = Db.RunSqlStoredProcedure("spPostInvTransaction", parameters)
-            Db.CloseTransaction(transactionObj, IIf(seq > 0, True, False))
-            retVal = IIf(seq = 0, False, True)
+            Dim parameters As Object = {"@InvTransactionIdNo", idNo}
+            Dim x As Int16 = Db.RunSqlStoredProcedure("spPostInvTransaction", parameters)
+            retVal = IIf(x = 1, True, False)
+            'retVal = IIf(Db.RunSqlStoredProcedure("spPostInvTransaction", parameters) = 1, True, False)
+            Db.CloseTransaction(transactionObj, retVal)
             If Not retVal Then
                 If InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
                     MessageBox.Show("Sorry, either quantity is zero or cannot find item in the inventory, no item(s) posted.")
@@ -147,7 +144,6 @@ Namespace DataLayer.AdoNet
                     MessageBox.Show("Sorry, cannot post these items, either product does not exist or quantity is zero, no item(s) posted.")
                 End If
             End If
-            'retVal = Db.ExecuteMultiSqls("UpdateInventory", sqls)
             Return retVal
         End Function
 
