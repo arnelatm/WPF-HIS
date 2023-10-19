@@ -1,4 +1,5 @@
-﻿Imports System.Globalization
+﻿Imports System.Dynamic
+Imports System.Globalization
 Imports AATM.Common.Models
 Imports AATM.Common.PresentationLayer.Models
 Imports AATM.Common.ServiceLayer
@@ -17,6 +18,7 @@ Namespace PresentationLayer.Presenters
         Implements ISubscriber(Of GetControlDataSource)
         Implements ISubscriber(Of GetControlEnumDataSource)
         Implements ISubscriber(Of GetLookupDataTableRequested)
+        Implements ISubscriber(Of OtherData)
 
         Private _psService As Object
         Private _pjService As Object
@@ -155,6 +157,24 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+
+        Public Sub OnOtherDataHandler(ByRef eventType As OtherData) Implements ISubscriber(Of OtherData).OnEventHandler
+            If eventType.ReferenceName = "GetUnitDescription" Then
+                Dim unitsIdNo As Object
+                Dim baseUnitIdNo As Int16 = Service.GetRecordWithIdNo("Product", "BaseUnitIdNo", DirectCast(eventType.EventArgs, Int32)).BaseUnitIdNo
+                Dim baseUnitName As String = Service.GetRecordWithIdNo("Unit", "UnitName", baseUnitIdNo).UnitName
+                unitsIdNo = Service.GetRecords("ProductUnit", "BaseQty", {"IdNo"}, "ProductIdNo = " + eventType.EventArgs.ToString())
+                eventType.ReturnArgs = "Base Unit Name = " & baseUnitName.Trim() + " : "
+                For Each idNo In unitsIdNo
+                    Dim units As Object = New ExpandoObject
+                    Dim unitName As String
+                    units = Service.GetRecordWithIdNo("ProductUnit", "BaseQty,UnitQty,UnitIdNo", idNo)
+                    unitName = Service.GetRecordWithIdNo("Unit", "UnitName", units.UnitIdNo).UnitName
+                    eventType.ReturnArgs = eventType.ReturnArgs + units.BaseQty.ToString() + " " + baseUnitName.Trim() + "=" + units.UnitQTy.ToString() + " " + unitName.Trim()
+                Next
+            End If
+        End Sub
+
         Public Sub OnGetControlDataSourceHandler(ByRef eventType As GetControlEnumDataSource) Implements ISubscriber(Of GetControlEnumDataSource).OnEventHandler
             CreateEnumDataSourceT2(eventType.Control, eventType.EnumObj)
         End Sub
@@ -168,7 +188,6 @@ Namespace PresentationLayer.Presenters
             'Dim rp As CrPrintableArgs = reportArgs
             ProcessReport(reportFileName, reportArgs, printDirectly, addDefaultParameters) 'rp.DataBaseConnectionName, True, rp.ReportParameters, rp.Copies, rp.Collate, rp.StartPage, rp.EndPage)
         End Sub
-
 
         Public Sub ViewReport(reportFileName As String, reportArgs As CrPrintableArgs, Optional AddDefaultParameters As Boolean = False)
             'Dim rp As CrPrintableArgs = reportArgs
@@ -189,6 +208,8 @@ Namespace PresentationLayer.Presenters
             End If
             PrintReport(reportFileName, reportArgs, printDirectly)
         End Sub
+
+
     End Class
 
 End Namespace

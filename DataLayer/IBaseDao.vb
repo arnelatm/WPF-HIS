@@ -127,4 +127,5 @@ Public Interface IBaseDao
     'Function PerformUtility(utilityName As String, Optional parameters As Object = Nothing) As Object
     Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String, parameter As Object) As ExpandoObject
     Function GetRecordFieldsFiltered(tableName As String, fieldList As String, filter As String, parameter As Object, sortKey As String) As ExpandoObject
+    Function GetRecordWithIdNo(tableName As String, fieldList As String, IdNo As Integer) As ExpandoObject
 End Interface

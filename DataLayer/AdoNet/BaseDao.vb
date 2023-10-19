@@ -1527,6 +1527,13 @@ Namespace AdoNet
             Return GetDb().Scalar(sql, params)
         End Function
 
+        Public Function GetRecordWithIdNo(tableName As String, fieldList As String, IdNo As Integer) As ExpandoObject Implements IBaseDao.GetRecordWithIdNo
+            Dim sql As String = "Select " & fieldList & " FROM [" & tableName & "] " &
+                    " Where IdNo = @IdNo "
+            Dim values As Object
+            values = GetDb().SqlRead(sql, {"@IdNo", IdNo})
+            Return SqlReadToExpandoObject(values, fieldList)
+        End Function
     End Class
 
     Public Class DaoCommand

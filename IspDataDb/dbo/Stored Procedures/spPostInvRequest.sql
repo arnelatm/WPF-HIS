@@ -73,7 +73,7 @@ BEGIN
 				Set @NetAmount = @Qty * @UnitCost
 				-- add a new InvTransactionDetail
 				Insert Into InvTransactionDetail (Sequence,InvTransactionIdNo,ProductIdNo,Quantity,UnitIdNo,BatchNo,UnitCost,NetAmount,ExpiryDate,InventoryIdNo)
-					VALUES (@Sequence,@NewInvTransactionIdNo,@ProductIdNo,iIf(@qtyFactor=0,0,@Qty/@QtyFactor),@UnitIdNo,@BatchNo,@UnitCost,@NetAmount,@ExpiryDate,@InventoryIdNo)
+					VALUES (@Sequence,@NewInvTransactionIdNo,@ProductIdNo,iIf(@qtyFactor=0,0,@Qty/@QtyFactor),@UnitIdNo,@BatchNo,iIf(@qtyFactor=0,0,@UnitCost * @QtyFactor),@NetAmount,@ExpiryDate,@InventoryIdNo)
 				-- update the Inventory qty on hand and cost
 				Update Inventory set QtyOnHand = QtyOnHand - @Qty, TotalCost = TotalCost - @Qty * @UnitCost where IdNo = @InventoryIdNo 
 				Declare @InvIdNo as Int

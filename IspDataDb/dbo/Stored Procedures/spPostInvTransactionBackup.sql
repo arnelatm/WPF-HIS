@@ -1,9 +1,7 @@
 ﻿
 /****** Object:  UserDefinedTableType [dbo].[InvRequestSuppliedInsertType]    Script Date: 19/09/2023 4:33:38 PM ******/
-CREATE PROCEDURE [dbo].[spPostInvTransactionTransfer] 
-	@InvTransactionIdNo Int,
-	@InventoryAction Char(1),
-	@Sequence Int
+CREATE PROCEDURE [dbo].[spPostInvTransactionBackup] 
+	@InvTransactionIdNo Int
 AS
 
 BEGIN
@@ -19,8 +17,9 @@ BEGIN
 	Declare @NetAmount as Decimal(12,4)
 	Declare @ExpiryDate as Date
 	Declare @InvTransTypeIdNo as SmallInt
+	Declare @InventoryAction as Char(1)
 	Select @BranchIdNo = BranchIdNo, @WarehouseIdNo = WarehouseIdNo, @WarehouseToIdNo = WarehouseToIdNo, @InvTransTypeIdNo = InvTransTypeIdNo  from InvTransaction where IdNo = @InvTransactionIdNo
-
+	Select @InventoryAction from InvTransType where IdNo = @InvTransTypeIdNo
 
 	DECLARE invTransactionDetail_cursor CURSOR FOR  
 		(Select IdNo, ProductIdNo, Quantity, UnitIdNo, BatchNo, UnitCost, NetAmount, ExpiryDate, InventoryIdNo from InvTransactionDetail
@@ -29,21 +28,24 @@ BEGIN
 	OPEN invTransactionDetail_cursor
 	Declare @InvTransactionDetailIdNo Int
 	
-	FETCH NEXT FROM invTransactionDetail_cursor INTO @InvTransactionDetailIdNo, @ProductIdNo, @Quantity, @UnitIdNo, @BatchNo, @UnitCost, @NetAmount, @ExpiryDate, @InventoryIdNo 
+	FETCH NEXT FROM invTransactionDetail_cursor INTO @InvTransactionDetailIdNo, @InventoryIdNo 
+	Declare @Switch as Int = 0
+	Declare @SubSwitch as Int = 0
 	WHILE @@FETCH_STATUS = 0  
-	BEGIN -- invTransactionDetail_cursor loop
-		Exec @Sequence = spPostInvTransDetail @InvTransactionDetailIdNo,@InvTransactionIdNo,@WarehouseIdNo,@WarehouseToIdNo,@InventoryAction,@Sequence
-		FETCH NEXT FROM invTransactionDetail_cursor INTO @InvTransactionDetailIdNo, @ProductIdNo, @Quantity, @UnitIdNo, @BatchNo, @UnitCost, @NetAmount, @ExpiryDate, @InventoryIdNo 	
-		IF @@FETCH_STATUS < 0 BREAK;
-	END		
+		BEGIN -- invTransactionDetail_cursor loop
+			Exec @SubSwitch = spPostInvTransDetail @InvTransactionDetailIdNo,@InvTransactionIdNo,@BranchIdNo,@WarehouseIdNo,@WarehouseToIdNo,@InventoryAction
+			if @SubSwitch = 1 Set @Switch = 1
+			FETCH NEXT FROM invTransactionDetail_cursor INTO @InvTransactionDetailIdNo, @InventoryIdNo 	
+			IF @@FETCH_STATUS < 0 BREAK;
+		END		
 	CLOSE invTransactionDetail_cursor
 	DEALLOCATE invTransactionDetail_cursor	
-
-	/* IF NOT EXISTS (select * from InvTransactionDetail where invTransactionIdNo = @InvTransactionIdNo) */
-	If @Sequence > 0 
+	If @Switch > 0 
 		Begin
+			DECLARE @myVar SmallInt
+			SET @myVar = 0
+			UPDATE InvTransactionDetail SET @myvar = [Sequence] = @myVar + 1 where InvTransactionIdNo = @InvTransactionIdNo
 			Update InvTransaction Set Posted = 1, amount = (Select Sum(NetAmount) from InvTransactionDetail where InvTransactionIdNo = @InvTransactionIdNo) where IdNo = @InvTransactionIdNo
 		End
-	Return @Sequence
 
 END
