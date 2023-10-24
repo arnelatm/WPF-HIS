@@ -22,7 +22,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property ProductName As String
         Property ProductNameAra As String
         Property SaleIdNo As Int32
-        Property Quantity As Int16
+        Property Quantity As Decimal
         Property Sequence As Int16
         Property UnitCount As Int16
         Property UnitIdNo As Int16

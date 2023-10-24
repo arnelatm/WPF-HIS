@@ -26,7 +26,7 @@ Namespace PresentationLayer.Views
         Public Property ProductName As String Implements ISaleDetailView.ProductName
         Public Property ProductNameAra As String Implements ISaleDetailView.ProductNameAra
         Public Property SaleIdNo As Int32 Implements ISaleDetailView.SaleIdNo
-        Public Property Quantity As Int16 Implements ISaleDetailView.Quantity
+        Public Property Quantity As Decimal Implements ISaleDetailView.Quantity
         Public Property Sequence As Int16 Implements ISaleDetailView.Sequence
         Public Property UnitCount As Int16 Implements ISaleDetailView.UnitCount
         Public Property UnitIdNo As Int16 Implements ISaleDetailView.UnitIdNo

@@ -17,7 +17,7 @@ Namespace PresentationLayer.Views
         Public Property ProductIdNo As Int32 Implements IPurchaseOrderDetailView.ProductIdNo
         Public Property ProductName As String Implements IPurchaseOrderDetailView.ProductName
         Public Property ProductNameAra As String Implements IPurchaseOrderDetailView.ProductNameAra
-        Public Property Quantity As Int16 Implements IPurchaseOrderDetailView.Quantity
+        Public Property Quantity As Decimal Implements IPurchaseOrderDetailView.Quantity
         Public Property Sequence As Int16 Implements IPurchaseOrderDetailView.Sequence
         Public Property UnitCost As Decimal Implements IPurchaseOrderDetailView.UnitCost
         Public Property UnitCount As Int16 Implements IPurchaseOrderDetailView.UnitCount

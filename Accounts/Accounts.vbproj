@@ -236,6 +236,7 @@
     <Compile Include="BusinessLayer\IGroup\DosageMaster.vb" />
     <Compile Include="BusinessLayer\IGroup\DrugSale.vb" />
     <Compile Include="BusinessLayer\IGroup\GTinMatcher.vb" />
+    <Compile Include="BusinessLayer\IGroup\IbLabSample.vb" />
     <Compile Include="BusinessLayer\IGroup\PmrPatientDisplay.vb" />
     <Compile Include="BusinessLayer\IGroup\Prescription.vb" />
     <Compile Include="BusinessLayer\IGroup\PrescriptionItem.vb" />
@@ -480,6 +481,7 @@
     <Compile Include="PresentationLayer\Models\IGroup\DosageMasterModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\DrugSaleModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\GTinMatcherModel.vb" />
+    <Compile Include="PresentationLayer\Models\IGroup\IbLabSampleModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\PrescriptionItemModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\PmrPrescriptionModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\PrescriptionModel.vb" />
@@ -622,6 +624,12 @@
     <Compile Include="PresentationLayer\Views\Forms\DateRangeForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\LabSampleCollectionForm.Designer.vb">
+      <DependentUpon>LabSampleCollectionForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\LabSampleCollectionForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\InvRequestForm.Designer.vb">
       <DependentUpon>InvRequestForm.vb</DependentUpon>
     </Compile>
@@ -666,6 +674,7 @@
     </Compile>
     <Compile Include="PresentationLayer\Views\Interfaces\IApArEmReportView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IContactDateRangeView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IIbLabSampleView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IUtilityView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeLeaveApprovalItemView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeLeaveCreditView.vb" />
@@ -797,6 +806,7 @@
     <Compile Include="PresentationLayer\Views\Interfaces\ISaleDetailView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\ISaleView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IStockRequestApprovalView.vb" />
+    <Compile Include="PresentationLayer\Views\IbLabSampleDetailView.vb" />
     <Compile Include="PresentationLayer\Views\PurchaseOrderDetailView.vb" />
     <Compile Include="PresentationLayer\Views\ProductUnitView.vb" />
     <Compile Include="PresentationLayer\Views\Forms\ApJournalEntry.designer.vb">
@@ -2036,6 +2046,9 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\DosageTableManager.resx">
       <DependentUpon>DosageTableManager.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\LabSampleCollectionForm.resx">
+      <DependentUpon>LabSampleCollectionForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationRequestForm.resx">
       <DependentUpon>PmrInvestigationRequestForm.vb</DependentUpon>
     </EmbeddedResource>
@@ -2740,8 +2753,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app-ibn-server-test.config" />
     <None Include="app.config" />
+    <None Include="app-ibn-server-test.config" />
     <None Include="app-Marcelo-Dell.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Isp-Server.config" />
@@ -2792,6 +2805,7 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.GeneralJournalModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.HolidayTransferItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.HolidayTransferItemModel1.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.IbLabSampleDetailModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.IGroup.PmrPatientDisplayModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.InventoryModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.InvRequestDetailModel.datasource" />

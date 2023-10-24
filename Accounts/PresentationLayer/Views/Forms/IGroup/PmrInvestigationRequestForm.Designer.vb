@@ -62,11 +62,12 @@
             '
             Me.btnRefresh.DesignerSelected = False
             Me.btnRefresh.ImageIndex = 0
-            Me.btnRefresh.Location = New System.Drawing.Point(687, 3)
+            Me.btnRefresh.Location = New System.Drawing.Point(913, 4)
+            Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.btnRefresh.Name = "btnRefresh"
             Me.btnRefresh.OriginalImageName = Nothing
             Me.btnRefresh.SecurityKey = ""
-            Me.btnRefresh.Size = New System.Drawing.Size(90, 25)
+            Me.btnRefresh.Size = New System.Drawing.Size(120, 31)
             Me.btnRefresh.TabIndex = 11
             Me.btnRefresh.Text = "Refresh"
             '
@@ -82,8 +83,9 @@
             Me.CFlowLayout2.Controls.Add(Me.TableLayoutPanel1)
             Me.CFlowLayout2.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CFlowLayout2.Location = New System.Drawing.Point(0, 59)
+            Me.CFlowLayout2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.CFlowLayout2.Name = "CFlowLayout2"
-            Me.CFlowLayout2.Size = New System.Drawing.Size(790, 494)
+            Me.CFlowLayout2.Size = New System.Drawing.Size(1053, 622)
             Me.CFlowLayout2.TabIndex = 5
             '
             'TableLayoutPanel1
@@ -101,13 +103,14 @@
             Me.TableLayoutPanel1.Controls.Add(Me.dtpTransactionDate, 1, 1)
             Me.TableLayoutPanel1.Controls.Add(Me.cboDoctorName, 1, 0)
             Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-            Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
+            Me.TableLayoutPanel1.Location = New System.Drawing.Point(4, 4)
+            Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             Me.TableLayoutPanel1.RowCount = 3
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-            Me.TableLayoutPanel1.Size = New System.Drawing.Size(783, 497)
+            Me.TableLayoutPanel1.Size = New System.Drawing.Size(1044, 607)
             Me.TableLayoutPanel1.TabIndex = 17
             '
             'DataGridViewPmrPatientDisplay
@@ -146,7 +149,8 @@
             Me.DataGridViewPmrPatientDisplay.FirstRowInsertionEnabled = True
             Me.DataGridViewPmrPatientDisplay.IgnoreCase = False
             Me.DataGridViewPmrPatientDisplay.IsDirty = False
-            Me.DataGridViewPmrPatientDisplay.Location = New System.Drawing.Point(3, 63)
+            Me.DataGridViewPmrPatientDisplay.Location = New System.Drawing.Point(4, 73)
+            Me.DataGridViewPmrPatientDisplay.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
             Me.DataGridViewPmrPatientDisplay.Name = "DataGridViewPmrPatientDisplay"
             Me.DataGridViewPmrPatientDisplay.ReadOnly = True
             Me.DataGridViewPmrPatientDisplay.RowHeadersWidth = 51
@@ -156,7 +160,7 @@
             Me.DataGridViewPmrPatientDisplay.SequenceColumn = "dgvSequence"
             Me.DataGridViewPmrPatientDisplay.SequenceFieldName = "Sequence"
             Me.DataGridViewPmrPatientDisplay.ShowFooter = False
-            Me.DataGridViewPmrPatientDisplay.Size = New System.Drawing.Size(777, 431)
+            Me.DataGridViewPmrPatientDisplay.Size = New System.Drawing.Size(1036, 530)
             Me.DataGridViewPmrPatientDisplay.TabIndex = 11
             Me.DataGridViewPmrPatientDisplay.Translatable = True
             '
@@ -330,13 +334,14 @@
             '
             'CLabel1
             '
+            Me.CLabel1.BackColor = System.Drawing.Color.Transparent
             Me.CLabel1.DisplayOnly = True
             Me.CLabel1.EditingMode = False
             Me.CLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CLabel1.Location = New System.Drawing.Point(1, 32)
+            Me.CLabel1.Location = New System.Drawing.Point(1, 40)
             Me.CLabel1.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel1.Name = "CLabel1"
-            Me.CLabel1.Size = New System.Drawing.Size(156, 23)
+            Me.CLabel1.Size = New System.Drawing.Size(208, 28)
             Me.CLabel1.TabIndex = 13
             Me.CLabel1.Text = "Transaction Date:"
             Me.CLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -344,13 +349,14 @@
             '
             'CLabel2
             '
+            Me.CLabel2.BackColor = System.Drawing.Color.Transparent
             Me.CLabel2.DisplayOnly = True
             Me.CLabel2.EditingMode = False
             Me.CLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.CLabel2.Location = New System.Drawing.Point(1, 1)
             Me.CLabel2.Margin = New System.Windows.Forms.Padding(1)
             Me.CLabel2.Name = "CLabel2"
-            Me.CLabel2.Size = New System.Drawing.Size(171, 23)
+            Me.CLabel2.Size = New System.Drawing.Size(228, 28)
             Me.CLabel2.TabIndex = 14
             Me.CLabel2.Text = "Doctors Code - Name:"
             Me.CLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -370,14 +376,14 @@
             Me.dtpTransactionDate.EditsAllowed = False
             Me.dtpTransactionDate.ForeColor = System.Drawing.Color.Black
             Me.dtpTransactionDate.LinkedLabel = Nothing
-            Me.dtpTransactionDate.Location = New System.Drawing.Point(174, 32)
+            Me.dtpTransactionDate.Location = New System.Drawing.Point(231, 40)
             Me.dtpTransactionDate.Margin = New System.Windows.Forms.Padding(1)
             Me.dtpTransactionDate.Name = "dtpTransactionDate"
             Me.dtpTransactionDate.ReadOnlyDp = False
             Me.dtpTransactionDate.SecurityKey = Nothing
             Me.dtpTransactionDate.ShowLongDate = False
             Me.dtpTransactionDate.ShowTime = False
-            Me.dtpTransactionDate.Size = New System.Drawing.Size(118, 27)
+            Me.dtpTransactionDate.Size = New System.Drawing.Size(119, 27)
             Me.dtpTransactionDate.TabIndex = 12
             Me.dtpTransactionDate.TargetCalendar = CType(resources.GetObject("dtpTransactionDate.TargetCalendar"), System.Globalization.Calendar)
             Me.dtpTransactionDate.Translatable = False
@@ -411,7 +417,7 @@
             Me.cboDoctorName.IntegralHeight = False
             Me.cboDoctorName.LimitToList = False
             Me.cboDoctorName.LinkedLabel = Nothing
-            Me.cboDoctorName.Location = New System.Drawing.Point(174, 1)
+            Me.cboDoctorName.Location = New System.Drawing.Point(231, 1)
             Me.cboDoctorName.Margin = New System.Windows.Forms.Padding(1)
             Me.cboDoctorName.Name = "cboDoctorName"
             Me.cboDoctorName.OldValue = 0
@@ -421,7 +427,7 @@
             Me.cboDoctorName.PreviousSearchTerm = Nothing
             Me.cboDoctorName.PropertySelector = Nothing
             Me.cboDoctorName.ReadOnlyCombo = False
-            Me.cboDoctorName.Size = New System.Drawing.Size(509, 28)
+            Me.cboDoctorName.Size = New System.Drawing.Size(677, 28)
             Me.cboDoctorName.SuggestBoxHeight = 200
             Me.cboDoctorName.SuggestListOrderRule = Nothing
             Me.cboDoctorName.TabIndex = 15
@@ -449,7 +455,7 @@
             Me.txtDoctorCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
             Me.txtDoctorCode.ForeColor = System.Drawing.Color.Black
             Me.txtDoctorCode.LinkedLabel = Nothing
-            Me.txtDoctorCode.Location = New System.Drawing.Point(693, 89)
+            Me.txtDoctorCode.Location = New System.Drawing.Point(924, 110)
             Me.txtDoctorCode.Margin = New System.Windows.Forms.Padding(1)
             Me.txtDoctorCode.MaximumValue = Nothing
             Me.txtDoctorCode.MinimumValue = Nothing
@@ -457,21 +463,21 @@
             Me.txtDoctorCode.OldValue = Nothing
             Me.txtDoctorCode.OverrideMaxLength = 0
             Me.txtDoctorCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtDoctorCode.Size = New System.Drawing.Size(80, 26)
+            Me.txtDoctorCode.Size = New System.Drawing.Size(106, 26)
             Me.txtDoctorCode.TabIndex = 16
             Me.txtDoctorCode.Translatable = False
             Me.txtDoctorCode.Visible = False
             '
             'PmrInvestigationRequestForm
             '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+            Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
             Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
             Me.BackgroundImage = Global.AATM.Accounts.My.Resources.Resources.GreenGradientBackgroundLarge
-            Me.ClientSize = New System.Drawing.Size(790, 553)
+            Me.ClientSize = New System.Drawing.Size(1053, 681)
             Me.Controls.Add(Me.CFlowLayout2)
             Me.Controls.Add(Me.txtDoctorCode)
+            Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
             Me.Name = "PmrInvestigationRequestForm"
-            Me.RightToLeft = System.Windows.Forms.RightToLeft.No
             Me.Text = "PMR Request Form"
             Me.Controls.SetChildIndex(Me.txtDoctorCode, 0)
             Me.Controls.SetChildIndex(Me.CFlowLayout2, 0)

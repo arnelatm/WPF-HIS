@@ -10,13 +10,13 @@ Public Class CDgvTextBoxCell
     Private _displayOnly As Boolean
     Private _translatable As Boolean = False
 
-    'Public Overrides Function Clone() As Object
-    '    Dim copy As CDgvTextCell = TryCast(MyBase.Clone(), CDgvTextCell)
-    '    copy.DisplayOnly = DisplayOnly
-    '    copy.Translatable = Translatable
-    '    copy.EditingMode = EditingMode
-    '    Return copy
-    'End Function
+    Public Overrides Function Clone() As Object
+        Dim copy As CDgvTextBoxCell = TryCast(MyBase.Clone(), CDgvTextBoxCell)
+        copy.DisplayOnly = DisplayOnly
+        copy.Translatable = Translatable
+        copy.EditingMode = EditingMode
+        Return copy
+    End Function
 
 
     <Category("Custom Properties")>
@@ -61,7 +61,9 @@ Public Class CDgvTextBoxCell
             [ReadOnly] = False
             Style.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
             Style.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-            [ReadOnly] = True
+            If ColumnIndex >= 0 Then
+                [ReadOnly] = True
+            End If
         End If
     End Sub
 
