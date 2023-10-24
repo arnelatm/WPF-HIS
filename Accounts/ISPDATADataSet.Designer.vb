@@ -1401,16 +1401,16 @@ Partial Public Class ISPDATADataSet
             Me.Rows.Add(row)
         End Sub
         
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Overloads Function AddPurchaseDetailRow(ByVal Sequence As Short, ByVal PurchaseIdNo As Integer, ByVal ProductIdNo As Integer, ByVal Quantity As Short, ByVal BonusQuantity As Integer, ByVal UnitIdNo As Byte, ByVal Price As Decimal, ByVal DiscountAmount As Decimal, ByVal VatPercent As Decimal, ByVal VatAmount As Decimal, ByVal NetAmount As Decimal, ByVal ProductName As String) As PurchaseDetailRow
-            Dim rowPurchaseDetailRow As PurchaseDetailRow = CType(Me.NewRow,PurchaseDetailRow)
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
+        Public Overloads Function AddPurchaseDetailRow(ByVal Sequence As Short, ByVal PurchaseIdNo As Integer, ByVal ProductIdNo As Integer, ByVal Quantity As Short, ByVal BonusQuantity As Decimal, ByVal UnitIdNo As Byte, ByVal Price As Decimal, ByVal DiscountAmount As Decimal, ByVal VatPercent As Decimal, ByVal VatAmount As Decimal, ByVal NetAmount As Decimal, ByVal ProductName As String) As PurchaseDetailRow
+            Dim rowPurchaseDetailRow As PurchaseDetailRow = CType(Me.NewRow, PurchaseDetailRow)
             Dim columnValuesArray() As Object = New Object() {Nothing, Sequence, PurchaseIdNo, ProductIdNo, Quantity, BonusQuantity, UnitIdNo, Price, DiscountAmount, VatPercent, VatAmount, NetAmount, ProductName}
             rowPurchaseDetailRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowPurchaseDetailRow)
             Return rowPurchaseDetailRow
         End Function
-        
+
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Function FindByIdNo(ByVal IdNo As Integer) As PurchaseDetailRow
@@ -2286,21 +2286,21 @@ Partial Public Class ISPDATADataSet
             End Set
         End Property
         
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
-        Public Property BonusQuantity() As Integer
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>
+        Public Property BonusQuantity() As Decimal
             Get
-                Try 
-                    Return CType(Me(Me.tablePurchaseDetail.BonusQuantityColumn),Integer)
+                Try
+                    Return CType(Me(Me.tablePurchaseDetail.BonusQuantityColumn), Integer)
                 Catch e As Global.System.InvalidCastException
                     Throw New Global.System.Data.StrongTypingException("The value for column 'BonusQuantity' in table 'PurchaseDetail' is DBNull.", e)
                 End Try
             End Get
             Set
-                Me(Me.tablePurchaseDetail.BonusQuantityColumn) = value
+                Me(Me.tablePurchaseDetail.BonusQuantityColumn) = Value
             End Set
         End Property
-        
+
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Public Property UnitIdNo() As Byte

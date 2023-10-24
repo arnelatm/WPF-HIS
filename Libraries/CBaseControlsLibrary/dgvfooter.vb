@@ -329,7 +329,7 @@ Public Class DgvFooter
     ''' <param name="e"></param>
     ''' <remarks>When the control gets populated with rows to the point where a scrollbar appears, the newly added rows tend to hide behind footer.
     ''' As a fix, we add another row and hide it. When another row is added, a hidden row is deleted.
-    ''' To prevent a recursive call when we add a hidden row, we set a sentinel to determine whether we will proceed with hidden row processes.</remarks>
+    ''' </remarks>
     Private Sub OnParentRowsAdded(ByVal sender As Object, ByVal e As DataGridViewRowsAddedEventArgs) Handles _parentDgv.RowsAdded
 
         If _parentDgv.Rows.Count < 1 Then Exit Sub
@@ -342,20 +342,28 @@ Public Class DgvFooter
             'Rows.Add()
         End If
 
-        If rowY >= footY And Not _killParentRowAddedEvent Then
+        If rowY >= footY Then
+            If _parentDgv.CurrentRow IsNot Nothing Then
+                Dim nIndex = _parentDgv.CurrentRow.Index
+                If _parentDgv.DataSource IsNot Nothing Then
+                    If _parentDgv.DataSource.[GetType]() Is GetType(BindingSource) Then
+                        'AssignEvent()
+                        Dim myBindingSource = CType(_parentDgv.DataSource, BindingSource)
+                        Dim nDataCount = _parentDgv.DataSource().Count()
+                        If _parentDgv.CurrentRow.Index + 1 = _parentDgv.NewRowIndex Then
+                            Try
+                                myBindingSource.AddNew()
+                                ' adding a new row to the bindingsource adds a new empty row at the end with null values
+                                ' therefore there is a need to remove that row because it causes errors when moving to that empty row
+                                myBindingSource.RemoveAt(myBindingSource.Count - 1)
+                                _parentDgv.FirstDisplayedScrollingRowIndex = _parentDgv.FirstDisplayedScrollingRowIndex + 1
+                            Catch
 
-            _killParentRowAddedEvent = True
-
-            For Each dgvr As DataGridViewRow In _parentDgv.Rows
-                If dgvr.Tag Is Nothing Then Continue For
-                If dgvr.Tag.ToString = "spacer" Then _parentDgv.Rows.Remove(dgvr)
-            Next
-
-            '_parentDGV.Rows.Add(SpacerRow)
-
-            _parentDgv.FirstDisplayedScrollingRowIndex = _parentDgv.Rows.Count - 2
-
-            _killParentRowAddedEvent = False
+                            End Try
+                        End If
+                    End If
+                End If
+            End If
         End If
         CheckParentVScrollBar()
     End Sub

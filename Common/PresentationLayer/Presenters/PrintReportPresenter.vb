@@ -1,4 +1,5 @@
-﻿Imports System.Dynamic
+﻿Imports System.Data.Entity.Design.PluralizationServices
+Imports System.Dynamic
 Imports System.Globalization
 Imports AATM.Common.Models
 Imports AATM.Common.PresentationLayer.Models
@@ -165,12 +166,17 @@ Namespace PresentationLayer.Presenters
                 Dim baseUnitName As String = Service.GetRecordWithIdNo("Unit", "UnitName", baseUnitIdNo).UnitName
                 unitsIdNo = Service.GetRecords("ProductUnit", "BaseQty", {"IdNo"}, "ProductIdNo = " + eventType.EventArgs.ToString())
                 eventType.ReturnArgs = "Base Unit Name = " & baseUnitName.Trim() + " : "
+                Dim ps As PluralizationService = PluralizationService.CreateService(CultureInfo.GetCultureInfo("en-us"))
+                Dim nSeq As Int16 = 0
                 For Each idNo In unitsIdNo
                     Dim units As Object = New ExpandoObject
                     Dim unitName As String
                     units = Service.GetRecordWithIdNo("ProductUnit", "BaseQty,UnitQty,UnitIdNo", idNo)
                     unitName = Service.GetRecordWithIdNo("Unit", "UnitName", units.UnitIdNo).UnitName
-                    eventType.ReturnArgs = eventType.ReturnArgs + units.BaseQty.ToString() + " " + baseUnitName.Trim() + "=" + units.UnitQTy.ToString() + " " + unitName.Trim()
+                    unitName = IIf(units.UnitQty < 2, ps.Singularize(unitName), ps.Pluralize(unitName))
+                    baseUnitName = IIf(units.BaseQty < 2, ps.Singularize(baseUnitName), ps.Pluralize(baseUnitName))
+                    nSeq = nSeq + 1
+                    eventType.ReturnArgs = eventType.ReturnArgs + IIf(nSeq = 1, units.BaseQty.ToString() + " " + baseUnitName.Trim(), "") + " = " + units.UnitQTy.ToString() + " " + unitName.Trim()
                 Next
             End If
         End Sub

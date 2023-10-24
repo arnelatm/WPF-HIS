@@ -63,7 +63,7 @@ Namespace PresentationLayer.Views
         Public Property ProductIdNo As Integer Implements IPurchaseDetailBaseView.ProductIdNo
         Public Property ProductName As String Implements IPurchaseDetailBaseView.ProductName
         Public Property ProductNameAra As String Implements IPurchaseDetailBaseView.ProductNameAra
-        Public Property Quantity As Short Implements IPurchaseDetailBaseView.Quantity
+        Public Property Quantity As Decimal Implements IPurchaseDetailBaseView.Quantity
         Public Property Sequence As Short Implements IPurchaseDetailBaseView.Sequence
         Public Property UnitIdNo As Short Implements IPurchaseDetailBaseView.UnitIdNo
 

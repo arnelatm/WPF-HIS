@@ -36,8 +36,9 @@ Namespace PresentationLayer.Views.Forms.Reports
                 Dim reportParameters As New Object
                 Dim reportTitle As String = Messaging.TranslateCaption("Product Movement Report By Warehouse")
                 Dim unitDescriptionObj As New Object
-                Ea.PublishEvent(New OtherData("GetUnitDescription", cboProductIdNo.SelectedItem("IdNo"), unitDescriptionObj))
-                Dim unitDescription As String = unitDescriptionObj.ToString()
+                Dim myOtherData As New OtherData("GetUnitDescription", cboProductIdNo.SelectedItem("IdNo"), unitDescriptionObj)
+                Ea.PublishEvent(myOtherData)
+                Dim unitsDescription As String = myOtherData.ReturnArgs.ToString()
                 reportArgs.ReportParameters = {cboProductIdNo.SelectedItem("IdNo"), "ProductIdNo",
                                                cboWarehouseIdNo.SelectedItem("IdNo"), "WarehouseIdNo",
                                                reportTitle, "ReportTitle",
@@ -45,7 +46,8 @@ Namespace PresentationLayer.Views.Forms.Reports
                                                CultureInfo.CurrentCulture.Name, "Language",
                                                cboWarehouseIdNo.SelectedItem("Name"), "WarehouseName",
                                                dtpBeginningDate.Value, "BeginningDate",
-                                               dtpEndingDate.Value, "EndingDate"
+                                               dtpEndingDate.Value, "EndingDate",
+                                               unitsDescription, "UnitsDescription"
                                                }
                 Dim reportFileName As String = "Product Movement Report By Warehouse.Rpt"
                 RaiseEvent PrintReport(reportFileName, reportArgs, False)

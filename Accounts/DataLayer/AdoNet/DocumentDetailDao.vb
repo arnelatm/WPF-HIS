@@ -65,7 +65,7 @@ Namespace DataLayer.AdoNet
                                   "UserIdNo" &
                                   ") VALUES (" &
                                   "@Active," &
-                                  "@BranchI*dNo," &
+                                  "@BranchIdNo," &
                                   "@ContactIdNo," &
                                   "@DataImageIdNo," &
                                   "@DocumentIdNo," &
