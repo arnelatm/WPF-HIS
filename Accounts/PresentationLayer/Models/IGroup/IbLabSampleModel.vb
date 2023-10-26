@@ -12,14 +12,20 @@ Namespace PresentationLayer.Models
 
 
     Public Class IbLabSampleDetailModel
-        Property IdNo As Int32
-        Property TransKey As Int32
-        Property TakenDate As Date
-        Property TakenTime As DateTime
-        Property TakenBy As String
-        Property Urine As Boolean
-        Property Stool As Boolean
-        Property Rbs As Decimal
+
+        Public Property Age As Decimal
+        Public Property IdNo As Int32
+        Public Property IqamaNo As String
+        Public Property LabNo As String
+        Public Property Nationality As String
+        Public Property PatientName As String
+        Public Property Rbs As Decimal
+        Public Property Sequence As Int32
+        Public Property Stool As Boolean
+        Public Property TakenBy As String
+        Public Property TakenDate As Date
+        Public Property TakenTime As String
+        Public Property Urine As Boolean
     End Class
 
 End Namespace

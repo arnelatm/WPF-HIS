@@ -150,7 +150,7 @@ Namespace AdoNet
             If item Is Nothing OrElse String.IsNullOrEmpty(item.ToString()) Then
                 Return defaultDateTime
             End If
-            Dim retDate As DateTime?
+            Dim retDate As New DateTime
             Try
                 'round datetime values to seconds, ignore milliseconds
                 'date comparison fails sometimes because of difference of milliseconds
@@ -160,6 +160,24 @@ Namespace AdoNet
                 retDate = Nothing
             End Try
             Return retDate
+        End Function
+
+
+        <Extension>
+        Public Function AsTimeString(item As Object, Optional ByVal defaultDateTime As DateTime? = Nothing) As String
+            If item Is Nothing OrElse String.IsNullOrEmpty(item.ToString()) Then
+                Return defaultDateTime
+            End If
+            Dim time As String
+            Try
+                'round datetime values to seconds, ignore milliseconds
+                'date comparison fails sometimes because of difference of milliseconds
+                time = item.ToString()
+            Catch ex As Exception
+                Debugger.Break()
+                time = Nothing
+            End Try
+            Return time
         End Function
 
         'Public Function AsNullable(Of T)(ByVal obj As IConvertible) As T

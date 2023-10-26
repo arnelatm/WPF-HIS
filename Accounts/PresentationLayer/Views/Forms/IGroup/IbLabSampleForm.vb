@@ -1,6 +1,4 @@
-﻿Imports AATM.Accounts.PresentationLayer.Views.Forms.Reports
-Imports AATM.Accounts.PresentationLayer.Views.Interfaces
-Imports AATM.Libraries.MessagingLibrary
+﻿Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 
 Namespace PresentationLayer.Views.Forms
 
@@ -17,6 +15,8 @@ Namespace PresentationLayer.Views.Forms
         Private _doctorId As String
         Private _dataAccessLevel As String = ""
 
+        Public Event IbLabSamplesRequested(transactionDate As Date?) Implements IIbLabSampleView.IbLabSamplesRequested
+
         Public Sub New()
             'MyBase.New()
             ' This call is required by the designer.
@@ -30,22 +30,6 @@ Namespace PresentationLayer.Views.Forms
             dtpTransactionDate.Value = Today()
         End Sub
 
-        Private Sub AddDgColumn(dgvColumnName As DataGridViewImageColumn, dgvName As String, caption As String)
-            With DataGridViewIbLabSample
-                .Columns.Insert(.Columns.Count, dgvColumnName)
-                dgvColumnName.Image = imgList.Images(0)
-                dgvColumnName.Width = 35
-                dgvColumnName.Name = dgvName
-                dgvColumnName.HeaderText = Messaging.TranslateCaption(caption)
-            End With
-        End Sub
-
-        Public ReadOnly Property SeriesDataGridViewTextBoxColumnProperty As DataGridViewTextBoxColumn
-            Get
-                Return SeriesDataGridViewTextBoxColumn
-            End Get
-        End Property
-
         Public Property TransactionDate As Date? Implements IIbLabSampleView.TransactionDate
             Get
                 Return dtpTransactionDate.Value
@@ -55,43 +39,36 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-
-
         Public Property IbLabSampleDetails As List(Of IbLabSampleDetailView) Implements IIbLabSampleView.IbLabSampleDetails
             Get
                 Return _ibLabSampleDetails
             End Get
             Set
                 _ibLabSampleDetails = Value
-                BindIbSampleDisplay()
+                BindIbLabSampleDisplay()
             End Set
         End Property
 
-        Private Sub BindIbSampleDisplay()
+        Private Sub BindIbLabSampleDisplay()
             SuspendLayout()
-            bsLabSampleDetail.DataSource = Nothing
-            DataGridViewIbLabSample.Refresh()
-            bsLabSampleDetail.DataSource = IbLabSampleDetails
-            bsLabSampleDetail.AllowNew = True
-            With DataGridViewIbLabSample
+            bsIbLabSampleDetails.DataSource = Nothing
+            DataGridViewIbLabSampleDetails.Refresh()
+            bsIbLabSampleDetails.DataSource = IbLabSampleDetails
+            bsIbLabSampleDetails.AllowNew = True
+            With DataGridViewIbLabSampleDetails
                 .AutoGenerateColumns = False
-                .DataSource = bsLabSampleDetail
+                .DataSource = bsIbLabSampleDetails
             End With
-
             ResumeLayout()
         End Sub
 
         Private Sub btnRefresh_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnRefresh.ClickButtonArea
-            'If DoctorCode IsNot Nothing Then
-            '    RaiseEvent GetDoctorPatientsRequested()
-            'Else
-            '    PmrPatientsDisplay.Clear()
-            '    DataGridViewIbLabSample.Refresh()
-            'End If
+            RaiseEvent IbLabSamplesRequested(TransactionDate)
         End Sub
 
         Private Sub IbLabSampleCollectionForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            'RaiseEvent GetPmrDataAccessRequested(_dataAccessLevel)
+            RaiseEvent IbLabSamplesRequested(TransactionDate)
+            'dgvAge.SetFormat(3, 0)
             'With DataGridViewPmrPatientDisplay
             '    .DefaultCellStyle.ForeColor = Color.Black
             '    .BackColor = Color.White
@@ -132,22 +109,22 @@ Namespace PresentationLayer.Views.Forms
             'End If
         End Sub
 
-        Private Sub dataGridView1_CellFormatting(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs) Handles DataGridViewIbLabSample.CellFormatting
-            For Each myRow As DataGridViewRow In DataGridViewIbLabSample.Rows
-                If myRow.Cells("dgvFileType").Value = "Old" Then
-                    myRow.DefaultCellStyle.ForeColor = Color.Coral
-                Else
-                    myRow.DefaultCellStyle.ForeColor = Color.DarkGreen
-                End If
-                myRow.DefaultCellStyle.BackColor = Color.White
-            Next
+        Private Sub dataGridView1_CellFormatting(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs)
+            'For Each myRow As DataGridViewRow In DataGridViewIbLabSampleDetails.Rows
+            '    If myRow.Cells("dgvFileType").Value = "Old" Then
+            '        myRow.DefaultCellStyle.ForeColor = Color.Coral
+            '    Else
+            '        myRow.DefaultCellStyle.ForeColor = Color.DarkGreen
+            '    End If
+            '    myRow.DefaultCellStyle.BackColor = Color.White
+            'Next
         End Sub
 
         Private Sub dtpTransactionDate_Validated(sender As Object, e As EventArgs) Handles dtpTransactionDate.Validated
             'RaiseEvent GetDoctorPatientsRequested()
         End Sub
 
-        Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewIbLabSample.CellClick
+        Private Sub DataGridView_CellClick(sender As Object, e As DataGridViewCellEventArgs)
             'With DataGridViewIbLabSample
             '    Dim whichToPrint As Int16 = 0
             '    If .CurrentCell IsNot Nothing And .CurrentCell.OwningColumn.Name() = $"dgvPharma" Then

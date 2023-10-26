@@ -130,6 +130,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemPurchase = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPurchaseReturn = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPurchaseOrder = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemPurchaseOrderApproval = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemSalesJournalEntry = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemInventoryTransactions = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemAccountReconciliation = New System.Windows.Forms.ToolStripMenuItem()
@@ -252,7 +253,7 @@ Namespace PresentationLayer.Views.Forms
             Me.toolStripMenuItem18 = New System.Windows.Forms.ToolStripMenuItem()
             Me.toolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
             Me.toolStripMenuItem19 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemPurchaseOrderApproval = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemDiagnosticSamples = New System.Windows.Forms.ToolStripMenuItem()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.ToolStrip.SuspendLayout()
             Me.AccountsMenu.SuspendLayout()
@@ -793,6 +794,11 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemPurchaseOrder.Name = "ToolStripMenuItemPurchaseOrder"
             resources.ApplyResources(Me.ToolStripMenuItemPurchaseOrder, "ToolStripMenuItemPurchaseOrder")
             '
+            'ToolStripMenuItemPurchaseOrderApproval
+            '
+            Me.ToolStripMenuItemPurchaseOrderApproval.Name = "ToolStripMenuItemPurchaseOrderApproval"
+            resources.ApplyResources(Me.ToolStripMenuItemPurchaseOrderApproval, "ToolStripMenuItemPurchaseOrderApproval")
+            '
             'ToolStripMenuItemSalesJournalEntry
             '
             Me.ToolStripMenuItemSalesJournalEntry.Name = "ToolStripMenuItemSalesJournalEntry"
@@ -887,7 +893,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemLaboratory
             '
-            Me.ToolStripMenuItemLaboratory.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCbcResultRetrieval})
+            Me.ToolStripMenuItemLaboratory.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemCbcResultRetrieval, Me.ToolStripMenuItemDiagnosticSamples})
             Me.ToolStripMenuItemLaboratory.Name = "ToolStripMenuItemLaboratory"
             resources.ApplyResources(Me.ToolStripMenuItemLaboratory, "ToolStripMenuItemLaboratory")
             '
@@ -1428,10 +1434,10 @@ Namespace PresentationLayer.Views.Forms
             resources.ApplyResources(Me.toolStripMenuItem19, "toolStripMenuItem19")
             Me.toolStripMenuItem19.Name = "toolStripMenuItem19"
             '
-            'ToolStripMenuItemPurchaseOrderApproval
+            'ToolStripMenuItemDiagnosticSamples
             '
-            Me.ToolStripMenuItemPurchaseOrderApproval.Name = "ToolStripMenuItemPurchaseOrderApproval"
-            resources.ApplyResources(Me.ToolStripMenuItemPurchaseOrderApproval, "ToolStripMenuItemPurchaseOrderApproval")
+            Me.ToolStripMenuItemDiagnosticSamples.Name = "ToolStripMenuItemDiagnosticSamples"
+            resources.ApplyResources(Me.ToolStripMenuItemDiagnosticSamples, "ToolStripMenuItemDiagnosticSamples")
             '
             'MainForm
             '
@@ -1683,5 +1689,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ListToolStripMenuItemDocumentExpiry As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemDocumentReportList As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemPurchaseOrderApproval As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemDiagnosticSamples As ToolStripMenuItem
     End Class
 End NameSpace

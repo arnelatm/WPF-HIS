@@ -44,6 +44,10 @@ Public Class Messaging
     End Function
 
     '-------------------------------------------------------------------------------------------------------------------------------
+    Public Overloads Shared Function Show(ByVal key As String) As DialogResult
+        Return Show(True, key)
+    End Function
+
     Public Overloads Shared Function Show(ByVal translate As Boolean, ByVal key As String) As DialogResult
         MessageKey = key
         Dim message As String = ""
