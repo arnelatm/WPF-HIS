@@ -9,7 +9,7 @@ Namespace DataLayer.AdoNet
 
     Public Class IbLabSampleDao
         Inherits CommonDao
-        Implements IDaoParametrized(Of IbLabSample)
+        Implements IDaoParametrized(Of IbLabSample), IDao(Of IbLabSample)
 
         Private ReadOnly _db As New Db("IGROUPCLINIC")
 
@@ -20,6 +20,10 @@ Namespace DataLayer.AdoNet
         'Public Overrides Function GetPrimaryFieldName()
         '    Return "Trans_Key"
         'End Function
+
+        Public Function GetRecordByIdNo(idNo) As IbLabSample Implements IDao(Of IbLabSample).GetRecordByIdNo
+            Return Nothing
+        End Function
 
         Public Function GetParametrized(Of IbLabSampleModel)(parameter As Object, Optional sortExpression As String = Nothing) As IbLabSample Implements IDaoParametrized(Of IbLabSample).GetParametrized
             If parameter(0) Is Nothing Then
@@ -37,10 +41,29 @@ Namespace DataLayer.AdoNet
             Return data
         End Function
 
+
+        Public Function AddRecord(ByRef recordData As IbLabSample) As Integer Implements IDao(Of IbLabSample).AddRecord
+            Return 0
+        End Function
+
+        Public Function UpdateRecord(ByRef recordData As IbLabSample) As Integer Implements IDao(Of IbLabSample).UpdateRecord
+            Return 0
+        End Function
+
+        Public Function UpdateIbLabSampleDetail(IdNo As Int32, urine As Boolean, stool As Boolean, rbs As Decimal)
+            Dim sql As String =
+                    " UPDATE [IbLabSampleTaken] Set" &
+                    " Urine = @Urine," &
+                    " Stool = @Stool," &
+                    " Rbs = @Rbs" &
+                    " WHERE IdNo = @IdNo"
+            Return _db.Update(sql, {"@Urine", urine, "@Stool", stool, "@Rbs", rbs})
+        End Function
+
         Private Shared ReadOnly Make As Func(Of IDataReader, IbLabSample) = Function(reader) New IbLabSample() With
-            {
-            .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsString(reader("TransDateEnglish"))
-            }
+        {
+        .TransactionDate = AATM.DataLayer.AdoNet.Extensions.AsString(reader("TransDateEnglish"))
+        }
 
         Private Shared ReadOnly MakeIbLabSampleDetails As Func(Of IDataReader, IbLabSampleDetail) = Function(reader) New IbLabSampleDetail() With
             {

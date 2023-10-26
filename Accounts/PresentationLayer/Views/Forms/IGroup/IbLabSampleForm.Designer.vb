@@ -43,8 +43,6 @@
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.DataGridViewIbLabSampleDetails = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.bsIbLabSampleDetails = New System.Windows.Forms.BindingSource(Me.components)
-            Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.Sequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.DataGridViewTextBoxColumn9 = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.DataGridViewTextBoxColumn4 = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -57,6 +55,8 @@
             Me.dgvRBS = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
             Me.DataGridViewTextBoxColumn8 = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+            Me.bsIbLabSampleDetails = New System.Windows.Forms.BindingSource(Me.components)
+            Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
             Me.TableLayoutPanel1.SuspendLayout()
@@ -162,7 +162,7 @@
             '
             'DataGridViewIbLabSampleDetails
             '
-            DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
+            DataGridViewCellStyle1.BackColor = System.Drawing.Color.SandyBrown
             Me.DataGridViewIbLabSampleDetails.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
             Me.DataGridViewIbLabSampleDetails.AutoGenerateColumns = False
             Me.DataGridViewIbLabSampleDetails.BegFindValue = Nothing
@@ -207,40 +207,6 @@
             Me.DataGridViewIbLabSampleDetails.Size = New System.Drawing.Size(962, 421)
             Me.DataGridViewIbLabSampleDetails.TabIndex = 14
             Me.DataGridViewIbLabSampleDetails.Translatable = True
-            '
-            'bsIbLabSampleDetails
-            '
-            Me.bsIbLabSampleDetails.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.IbLabSampleDetailModel)
-            '
-            'txtDoctorCode
-            '
-            Me.txtDoctorCode.BackColor = System.Drawing.Color.White
-            Me.txtDoctorCode.BegFindValue = Nothing
-            Me.txtDoctorCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtDoctorCode.ComputedValue = False
-            Me.txtDoctorCode.CustomFormat = Nothing
-            Me.txtDoctorCode.DataBoundControl = True
-            Me.txtDoctorCode.EditingMode = True
-            Me.txtDoctorCode.EndFindValue = Nothing
-            Me.txtDoctorCode.FieldDescription = Nothing
-            Me.txtDoctorCode.FieldName = Nothing
-            Me.txtDoctorCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtDoctorCode.FindEnabled = False
-            Me.txtDoctorCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.txtDoctorCode.ForeColor = System.Drawing.Color.Black
-            Me.txtDoctorCode.LinkedLabel = Nothing
-            Me.txtDoctorCode.Location = New System.Drawing.Point(693, 89)
-            Me.txtDoctorCode.Margin = New System.Windows.Forms.Padding(1)
-            Me.txtDoctorCode.MaximumValue = Nothing
-            Me.txtDoctorCode.MinimumValue = Nothing
-            Me.txtDoctorCode.Name = "txtDoctorCode"
-            Me.txtDoctorCode.OldValue = Nothing
-            Me.txtDoctorCode.OverrideMaxLength = 0
-            Me.txtDoctorCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtDoctorCode.Size = New System.Drawing.Size(80, 23)
-            Me.txtDoctorCode.TabIndex = 16
-            Me.txtDoctorCode.Translatable = False
-            Me.txtDoctorCode.Visible = False
             '
             'Sequence
             '
@@ -288,7 +254,7 @@
             Me.DataGridViewTextBoxColumn9.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.DataGridViewTextBoxColumn9.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewTextBoxColumn9.Translatable = False
-            Me.DataGridViewTextBoxColumn9.Width = 89
+            Me.DataGridViewTextBoxColumn9.Width = 82
             '
             'DataGridViewTextBoxColumn4
             '
@@ -312,7 +278,7 @@
             Me.DataGridViewTextBoxColumn4.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.DataGridViewTextBoxColumn4.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.DataGridViewTextBoxColumn4.Translatable = False
-            Me.DataGridViewTextBoxColumn4.Width = 70
+            Me.DataGridViewTextBoxColumn4.Width = 50
             '
             'DataGridViewTextBoxColumn6
             '
@@ -499,6 +465,40 @@
             Me.DataGridViewTextBoxColumn2.HeaderText = "IdNo"
             Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
             Me.DataGridViewTextBoxColumn2.Visible = False
+            '
+            'bsIbLabSampleDetails
+            '
+            Me.bsIbLabSampleDetails.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.IbLabSampleDetailModel)
+            '
+            'txtDoctorCode
+            '
+            Me.txtDoctorCode.BackColor = System.Drawing.Color.White
+            Me.txtDoctorCode.BegFindValue = Nothing
+            Me.txtDoctorCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtDoctorCode.ComputedValue = False
+            Me.txtDoctorCode.CustomFormat = Nothing
+            Me.txtDoctorCode.DataBoundControl = True
+            Me.txtDoctorCode.EditingMode = True
+            Me.txtDoctorCode.EndFindValue = Nothing
+            Me.txtDoctorCode.FieldDescription = Nothing
+            Me.txtDoctorCode.FieldName = Nothing
+            Me.txtDoctorCode.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtDoctorCode.FindEnabled = False
+            Me.txtDoctorCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.txtDoctorCode.ForeColor = System.Drawing.Color.Black
+            Me.txtDoctorCode.LinkedLabel = Nothing
+            Me.txtDoctorCode.Location = New System.Drawing.Point(693, 89)
+            Me.txtDoctorCode.Margin = New System.Windows.Forms.Padding(1)
+            Me.txtDoctorCode.MaximumValue = Nothing
+            Me.txtDoctorCode.MinimumValue = Nothing
+            Me.txtDoctorCode.Name = "txtDoctorCode"
+            Me.txtDoctorCode.OldValue = Nothing
+            Me.txtDoctorCode.OverrideMaxLength = 0
+            Me.txtDoctorCode.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtDoctorCode.Size = New System.Drawing.Size(80, 23)
+            Me.txtDoctorCode.TabIndex = 16
+            Me.txtDoctorCode.Translatable = False
+            Me.txtDoctorCode.Visible = False
             '
             'IbLabSampleForm
             '

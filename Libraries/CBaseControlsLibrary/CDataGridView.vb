@@ -33,7 +33,7 @@ Public Class CDataGridView
         BackColor = Drawing.SystemColors.ControlLight
         DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
         DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-        AlternatingRowsDefaultCellStyle.BackColor = Color.FloralWhite
+        AlternatingRowsDefaultCellStyle.BackColor = Color.SandyBrown
         ShowEditingIcon = True
         ShowCellErrors = True
         ShowRowErrors = True
