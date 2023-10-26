@@ -24,7 +24,7 @@
             Me.components = New System.ComponentModel.Container()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(IbLabSampleForm))
             Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-            Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -35,6 +35,7 @@
             Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+            Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.btnRefresh = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.imgList = New System.Windows.Forms.ImageList(Me.components)
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -42,14 +43,15 @@
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.DataGridViewIbLabSampleDetails = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.bsIbLabSampleDetails = New System.Windows.Forms.BindingSource(Me.components)
+            Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.Sequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.DataGridViewTextBoxColumn9 = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.DataGridViewTextBoxColumn4 = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.DataGridViewTextBoxColumn6 = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.IqamaNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.DataGridViewTextBoxColumn5 = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
+            Me.dgvAge = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
             Me.dgvUrine = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
             Me.dgvStool = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
             Me.dgvRBS = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
@@ -166,18 +168,18 @@
             Me.DataGridViewIbLabSampleDetails.BegFindValue = Nothing
             Me.DataGridViewIbLabSampleDetails.Cached = False
             Me.DataGridViewIbLabSampleDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewIbLabSampleDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Sequence, Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn6, Me.IqamaNo, Me.DataGridViewTextBoxColumn5, Me.dgvUrine, Me.dgvStool, Me.dgvRBS, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn2})
+            Me.DataGridViewIbLabSampleDetails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Sequence, Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn6, Me.IqamaNo, Me.DataGridViewTextBoxColumn5, Me.dgvAge, Me.dgvUrine, Me.dgvStool, Me.dgvRBS, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn2})
             Me.TableLayoutPanel1.SetColumnSpan(Me.DataGridViewIbLabSampleDetails, 4)
             Me.DataGridViewIbLabSampleDetails.DataFilter = Nothing
             Me.DataGridViewIbLabSampleDetails.DataSource = Me.bsIbLabSampleDetails
-            DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle12.BackColor = System.Drawing.Color.Black
-            DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
-            DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
-            DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-            DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-            Me.DataGridViewIbLabSampleDetails.DefaultCellStyle = DataGridViewCellStyle12
+            DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+            DataGridViewCellStyle13.BackColor = System.Drawing.Color.Black
+            DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
+            DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+            DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+            Me.DataGridViewIbLabSampleDetails.DefaultCellStyle = DataGridViewCellStyle13
             Me.DataGridViewIbLabSampleDetails.DgvFooter = Nothing
             Me.DataGridViewIbLabSampleDetails.DisplayOnly = False
             Me.DataGridViewIbLabSampleDetails.Ea = Nothing
@@ -205,6 +207,10 @@
             Me.DataGridViewIbLabSampleDetails.Size = New System.Drawing.Size(962, 421)
             Me.DataGridViewIbLabSampleDetails.TabIndex = 14
             Me.DataGridViewIbLabSampleDetails.Translatable = True
+            '
+            'bsIbLabSampleDetails
+            '
+            Me.bsIbLabSampleDetails.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.IbLabSampleDetailModel)
             '
             'txtDoctorCode
             '
@@ -235,10 +241,6 @@
             Me.txtDoctorCode.TabIndex = 16
             Me.txtDoctorCode.Translatable = False
             Me.txtDoctorCode.Visible = False
-            '
-            'bsIbLabSampleDetails
-            '
-            Me.bsIbLabSampleDetails.DataSource = GetType(AATM.Accounts.PresentationLayer.Models.IbLabSampleDetailModel)
             '
             'Sequence
             '
@@ -383,16 +385,32 @@
             Me.DataGridViewTextBoxColumn5.Translatable = False
             Me.DataGridViewTextBoxColumn5.Width = 81
             '
+            'dgvAge
+            '
+            Me.dgvAge.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+            Me.dgvAge.DataPropertyName = "Age"
+            Me.dgvAge.DecimalPlaces = -1
+            DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
+            Me.dgvAge.DefaultCellStyle = DataGridViewCellStyle8
+            Me.dgvAge.EditingMode = False
+            Me.dgvAge.HeaderText = "Age"
+            Me.dgvAge.Name = "dgvAge"
+            Me.dgvAge.ReadOnly = True
+            Me.dgvAge.Translatable = False
+            Me.dgvAge.Width = 32
+            '
             'dgvUrine
             '
             Me.dgvUrine.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
             Me.dgvUrine.BegFindValue = Nothing
             Me.dgvUrine.DataPropertyName = "Urine"
-            DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Orange
-            DataGridViewCellStyle8.NullValue = False
-            Me.dgvUrine.DefaultCellStyle = DataGridViewCellStyle8
+            DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Orange
+            DataGridViewCellStyle9.NullValue = False
+            Me.dgvUrine.DefaultCellStyle = DataGridViewCellStyle9
             Me.dgvUrine.EditingMode = False
             Me.dgvUrine.EndFindValue = Nothing
             Me.dgvUrine.FieldDescription = Nothing
@@ -413,11 +431,11 @@
             Me.dgvStool.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader
             Me.dgvStool.BegFindValue = Nothing
             Me.dgvStool.DataPropertyName = "Stool"
-            DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Orange
-            DataGridViewCellStyle9.NullValue = False
-            Me.dgvStool.DefaultCellStyle = DataGridViewCellStyle9
+            DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+            DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Orange
+            DataGridViewCellStyle10.NullValue = False
+            Me.dgvStool.DefaultCellStyle = DataGridViewCellStyle10
             Me.dgvStool.EditingMode = False
             Me.dgvStool.EndFindValue = Nothing
             Me.dgvStool.FieldDescription = Nothing
@@ -438,10 +456,10 @@
             Me.dgvRBS.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
             Me.dgvRBS.DataPropertyName = "Rbs"
             Me.dgvRBS.DecimalPlaces = -1
-            DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
-            DataGridViewCellStyle10.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black
-            Me.dgvRBS.DefaultCellStyle = DataGridViewCellStyle10
+            DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight
+            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
+            Me.dgvRBS.DefaultCellStyle = DataGridViewCellStyle11
             Me.dgvRBS.EditingMode = False
             Me.dgvRBS.HeaderText = "Rbs"
             Me.dgvRBS.Name = "dgvRBS"
@@ -456,9 +474,9 @@
             Me.DataGridViewTextBoxColumn8.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
             Me.DataGridViewTextBoxColumn8.BegFindValue = Nothing
             Me.DataGridViewTextBoxColumn8.DataPropertyName = "TakenBy"
-            DataGridViewCellStyle11.BackColor = System.Drawing.Color.White
-            DataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black
-            Me.DataGridViewTextBoxColumn8.DefaultCellStyle = DataGridViewCellStyle11
+            DataGridViewCellStyle12.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black
+            Me.DataGridViewTextBoxColumn8.DefaultCellStyle = DataGridViewCellStyle12
             Me.DataGridViewTextBoxColumn8.DisplayOnly = True
             Me.DataGridViewTextBoxColumn8.EditingMode = False
             Me.DataGridViewTextBoxColumn8.EndFindValue = Nothing
@@ -539,6 +557,7 @@
         Friend WithEvents DataGridViewTextBoxColumn6 As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents IqamaNo As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents DataGridViewTextBoxColumn5 As Libraries.CBaseControlsLibrary.CDgvTextColumn
+        Friend WithEvents dgvAge As Libraries.CBaseControlsLibrary.CDgvDecimalColumn
         Friend WithEvents dgvUrine As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
         Friend WithEvents dgvStool As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
         Friend WithEvents dgvRBS As Libraries.CBaseControlsLibrary.CDgvDecimalColumn

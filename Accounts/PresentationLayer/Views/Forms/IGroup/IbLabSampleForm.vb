@@ -68,7 +68,8 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub IbLabSampleCollectionForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             RaiseEvent IbLabSamplesRequested(TransactionDate)
-            'dgvAge.SetFormat(3, 0)
+            dgvAge.SetFormat(3, 0)
+            dgvAge.DisplayOnly = True
             'With DataGridViewPmrPatientDisplay
             '    .DefaultCellStyle.ForeColor = Color.Black
             '    .BackColor = Color.White
