@@ -329,6 +329,7 @@
     <Compile Include="ContainerConfig.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\DocumentDetailDao.vb" />
+    <Compile Include="DataLayer\AdoNet\IGroup\IbLabSampleDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\PmrInvestigationRequestDao.vb" />
     <Compile Include="DataLayer\AdoNet\InventoryDao.vb" />
     <Compile Include="DataLayer\AdoNet\DoctorDao.vb" />
@@ -553,6 +554,7 @@
     <Compile Include="PresentationLayer\Presenters\ApArEmReportPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\BasicPresenterHelper.vb" />
     <Compile Include="PresentationLayer\Presenters\DateRangePresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\IGroup\IbLabSamplePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchaseOrderApprovalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\UtilityPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\InvRequestPresenter.vb" />
@@ -624,10 +626,10 @@
     <Compile Include="PresentationLayer\Views\Forms\DateRangeForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\LabSampleCollectionForm.Designer.vb">
-      <DependentUpon>LabSampleCollectionForm.vb</DependentUpon>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\IbLabSampleForm.Designer.vb">
+      <DependentUpon>IbLabSampleForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\IGroup\LabSampleCollectionForm.vb">
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\IbLabSampleForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\InvRequestForm.Designer.vb">
@@ -2046,8 +2048,8 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\DosageTableManager.resx">
       <DependentUpon>DosageTableManager.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\LabSampleCollectionForm.resx">
-      <DependentUpon>LabSampleCollectionForm.vb</DependentUpon>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\IbLabSampleForm.resx">
+      <DependentUpon>IbLabSampleForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\PmrInvestigationRequestForm.resx">
       <DependentUpon>PmrInvestigationRequestForm.vb</DependentUpon>
@@ -2753,8 +2755,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app-ibn-server-test.config" />
+    <None Include="app.config" />
     <None Include="app-Marcelo-Dell.config" />
     <None Include="app-Ispadmin2.config" />
     <None Include="app-Isp-Server.config" />
@@ -2806,6 +2808,8 @@
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.HolidayTransferItemModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.HolidayTransferItemModel1.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.IbLabSampleDetailModel.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.IbLabSampleDetailModel1.datasource" />
+    <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.IbLabSampleDetailModel2.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.IGroup.PmrPatientDisplayModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.InventoryModel.datasource" />
     <None Include="My Project\DataSources\AATM.Accounts.PresentationLayer.Models.InvRequestDetailModel.datasource" />

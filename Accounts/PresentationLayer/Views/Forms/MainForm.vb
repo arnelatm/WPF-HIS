@@ -1299,6 +1299,10 @@ Namespace PresentationLayer.Views.Forms
         Private Sub ToolStripMenuItemPurchaseOrderApproval_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemPurchaseOrderApproval.Click
             RunForm(Of PurchaseOrderApprovalForm, PurchaseOrderApprovalPresenter(Of PurchaseModel))()
         End Sub
+
+        Private Sub DiagnosticSamplesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDiagnosticSamples.Click
+            RunForm(Of IbLabSampleForm, IbLabSamplePresenter(Of IbLabSampleModel))()
+        End Sub
     End Class
 
 End Namespace
