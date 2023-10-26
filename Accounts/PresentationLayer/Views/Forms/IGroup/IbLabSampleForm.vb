@@ -16,6 +16,7 @@ Namespace PresentationLayer.Views.Forms
         Private _dataAccessLevel As String = ""
 
         Public Event IbLabSamplesRequested(transactionDate As Date?) Implements IIbLabSampleView.IbLabSamplesRequested
+        Public Event IbLabSampleChanged(bindingSource As BindingSource) Implements IIbLabSampleView.IbLabSampleChanged
 
         Public Sub New()
             'MyBase.New()
@@ -70,44 +71,6 @@ Namespace PresentationLayer.Views.Forms
             RaiseEvent IbLabSamplesRequested(TransactionDate)
             dgvAge.SetFormat(3, 0)
             dgvAge.DisplayOnly = True
-            'With DataGridViewPmrPatientDisplay
-            '    .DefaultCellStyle.ForeColor = Color.Black
-            '    .BackColor = Color.White
-            '    .AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke
-            '    If Mid(_dataAccessLevel, 1, 1) = "1" Then
-            '        Dim dgvPharma As New DataGridViewImageColumn
-            '        AddDgColumn(dgvPharma, "dgvPharma", "Pharm")
-            '    End If
-            '    If Mid(_dataAccessLevel, 2, 1) = "1" Then
-            '        Dim dgvLab As New DataGridViewImageColumn
-            '        AddDgColumn(dgvLab, "dgvLab", "Lab")
-            '    End If
-            '    If Mid(_dataAccessLevel, 3, 1) = "1" Then
-            '        Dim dgvXray As New DataGridViewImageColumn
-            '        AddDgColumn(dgvXray, "dgvXray", "XRay")
-            '    End If
-            '    If Mid(_dataAccessLevel, 4, 1) = "1" Then
-            '        Dim dgvOther As New DataGridViewImageColumn
-            '        AddDgColumn(dgvOther, "dgvOther", "Other")
-            '    End If
-            '    If _dataAccessLevel = "1111" Then
-            '        Dim dgvAll As New DataGridViewImageColumn
-            '        AddDgColumn(dgvAll, "dgvAll", "All")
-            '    End If
-            'End With
-
-            'Dim drCode As String = ""
-            'RaiseEvent DoctorCodeRequested(drCode)
-            'If drCode IsNot Nothing Then
-            '    DoctorCode = drCode
-            '    RaiseEvent GetDoctorPatientsRequested()
-            '    cboDoctorName.DisplayOnly = True
-            '    'dtpTransactionDate.EditingMode = True
-            'Else
-            '    'btnEdit.PerformClick()
-            '    cboDoctorName.DisplayOnly = False
-            '    dtpTransactionDate.DisplayOnly = False
-            'End If
         End Sub
 
         Private Sub dataGridView1_CellFormatting(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs)
@@ -169,6 +132,9 @@ Namespace PresentationLayer.Views.Forms
             'End If
         End Sub
 
+        Private Sub DataGridViewIbLabSampleDetails_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewIbLabSampleDetails.CellEndEdit
+            RaiseEvent IbLabSampleChanged(bsIbLabSampleDetails)
+        End Sub
     End Class
 
 End Namespace

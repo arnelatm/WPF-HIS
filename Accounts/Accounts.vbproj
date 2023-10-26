@@ -330,6 +330,7 @@
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\DocumentDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\IbLabSampleDao.vb" />
+    <Compile Include="DataLayer\AdoNet\IGroup\IbLabSampleDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\PmrInvestigationRequestDao.vb" />
     <Compile Include="DataLayer\AdoNet\InventoryDao.vb" />
     <Compile Include="DataLayer\AdoNet\DoctorDao.vb" />

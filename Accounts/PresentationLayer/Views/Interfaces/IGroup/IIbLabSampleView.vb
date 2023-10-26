@@ -8,6 +8,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property TransactionDate As Date?
         Property IbLabSampleDetails As List(Of IbLabSampleDetailView)
         Event IbLabSamplesRequested(transactionDate As Date?)
+        Event IbLabSampleChanged(bindingSource As BindingSource)
     End Interface
 
 
