@@ -349,7 +349,7 @@ Namespace PresentationLayer.Presenters
                     .ProductName = product.ProductName
                     .UnitIdNo = product.BaseUnitIdNo
                     .Quantity = 1
-                    .UnitCost = Service.GetLastPurchaseCost(product.IdNo)
+                    .UnitCost = Service.GetLastPurchaseCostBaseUnit(product.IdNo)
                     .NetAmount = .Price * .Quantity
                     .NeedsExpiryDate = Service.GetField(Of Boolean, Integer)(product.IdNo, "Product_View", "IdNo", "NeedsExpiryDate")
                 End With
@@ -381,7 +381,7 @@ Namespace PresentationLayer.Presenters
                                 .ProductCode = product.ProductCode
                                 .UnitIdNo = product.BaseUnitIdNo
                                 .Quantity = 1
-                                .UnitCost = Service.GetLastPurchaseCost(product.IdNo)
+                                .UnitCost = Service.GetLastPurchaseCostBaseUnit(product.IdNo)
                                 .NetAmount = .Price * .Quantity
                                 .NeedsExpiryDate = Service.GetField(Of Boolean, Integer)(product.IdNo, "Product_View", "IdNo", "NeedsExpiryDate")
                             End With

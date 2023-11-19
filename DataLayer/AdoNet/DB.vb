@@ -1632,6 +1632,49 @@ Namespace AdoNet
             Return retValue
         End Function
 
+        Public Function RunSqlSpWithReturnValue(Of T)(storeProcedureName As String, ByVal parms() As Object, Optional outParms() As Object = Nothing) As T
+            Dim retValue As T
+            Dim tryAgain As Boolean
+            '_waitForm.Show()
+            Do While True
+                tryAgain = False
+                Try
+                    Using connection = CreateConnection()
+                        Using command As New SqlCommand(storeProcedureName)
+                            Try
+                                command.CommandType = CommandType.StoredProcedure
+                                command.Connection = connection
+                                If parms IsNot Nothing AndAlso parms.Count > 0 Then
+                                    command.AddParameters(parms)
+                                End If
+                                retValue = command.ExecuteScalar()
+                            Catch ex As Exception
+                                retValue = Nothing
+                                MessageBox.Show(ex.Message)
+                                Throw
+                            End Try
+                        End Using
+                    End Using
+                Catch ex As Exception
+                    Select Case TryToCatchError(ex)
+                        Case DialogResult.Cancel
+                            retValue = Nothing
+                        Case DialogResult.Retry
+                            tryAgain = True
+                        Case Else
+                            MessageBox.Show(ex.Message)
+                            Throw
+                    End Select
+                Finally
+                    ' nothing
+                End Try
+                If Not tryAgain Then
+                    Exit Do
+                End If
+            Loop
+            Return retValue
+        End Function
+
         Public Function RunSqlStoredProcedure(storeProcedureName As String, ByVal parms() As Object, Optional outParms() As Object = Nothing) As Int32
             Dim retValue As Int32
             Dim tryAgain As Boolean

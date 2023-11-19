@@ -36,6 +36,7 @@ Public Class GlobalVariables
     Private Shared _defaultFormControlReadOnlyForegroundColor As Nullable(Of Color)
     Private Shared _defaultFormControlEditingBackgroundColor As Nullable(Of Color)
     Private Shared _defaultFormControlEditingForegroundColor As Nullable(Of Color)
+    Private Shared _defaultAlternatingBackGroundColor As Nullable(Of Color)
 
     Public Shared ReadOnly Property OriginalAppTextLanguage As String = "en-PH"
 
@@ -208,6 +209,25 @@ Public Class GlobalVariables
             _defaultFormControlEditingForegroundColor = Value
         End Set
     End Property
+
+    Public Shared Property DefaultAlternatingBackGroundColor As Color
+        Get
+            If _defaultAlternatingBackGroundColor Is Nothing Then
+                Dim cColor As String
+                cColor = ConfigurationManager.AppSettings("_defaultAlternatingBackGroundColor")
+                If Not (cColor Is Nothing Or cColor = "") Then
+                    _defaultAlternatingBackGroundColor = System.Drawing.Color.FromName(cColor)
+                Else
+                    _defaultAlternatingBackGroundColor = Color.NavajoWhite
+                End If
+            End If
+            Return _defaultAlternatingBackGroundColor
+        End Get
+        Set
+            _defaultAlternatingBackGroundColor = Value
+        End Set
+    End Property
+
 
 #End Region
 

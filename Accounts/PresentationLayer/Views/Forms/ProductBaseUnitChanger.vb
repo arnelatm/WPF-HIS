@@ -8,7 +8,7 @@ Namespace PresentationLayer.Views.Forms
 
         Private _productIdNo As Int32
         Private _baseUnitIdNo As Int16
-        Public Event UtilityButtonClicked(parameters As Object) Implements IUtilityView.UtilityButtonClicked
+        Public Event UtilityButtonClicked(utilityName As String, parameters As Object) Implements IUtilityView.UtilityButtonClicked
 
         Public Sub New()
 
@@ -32,12 +32,6 @@ Namespace PresentationLayer.Views.Forms
 
         End Sub
 
-        Public ReadOnly Property UtilityName As String Implements IUtilityView.UtilityName
-            Get
-                Return "ProductBaseUnitChanger"
-            End Get
-        End Property
-
         Private Sub cmdCancel_Click(ByVal sender As Object, ByVal e As EventArgs) Handles cmdCancel.Click
             Close()
         End Sub
@@ -51,8 +45,11 @@ Namespace PresentationLayer.Views.Forms
         'End Sub
 
         Private Sub btnChangeUnit_Click(sender As Object, e As EventArgs) Handles btnChangeUnit.Click
-            Dim parameters As Object = {"productIdNo", _productIdNo, "oldUnitIdNo", _baseUnitIdNo, "newUnitIdNo", cboNewUnitIdNo.SelectedValue}
-            RaiseEvent UtilityButtonClicked(parameters)
+            If _baseUnitIdNo <> cboNewUnitIdNo.SelectedValue Then
+                Dim parameters As Object = {"productIdNo", _productIdNo, "oldUnitIdNo", _baseUnitIdNo, "newUnitIdNo", cboNewUnitIdNo.SelectedValue}
+                RaiseEvent UtilityButtonClicked("ProductBaseUnitChanger", parameters)
+                Close()
+            End If
         End Sub
 
 

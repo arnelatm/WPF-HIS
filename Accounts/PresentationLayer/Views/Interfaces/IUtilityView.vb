@@ -4,8 +4,7 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface IUtilityView
         Inherits IView
 
-        Event UtilityButtonClicked(parameters As Object)
-        ReadOnly Property UtilityName As String
+        Event UtilityButtonClicked(utilityName As String, parameters As Object)
 
 
     End Interface

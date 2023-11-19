@@ -9,7 +9,7 @@ Namespace DataLayer
         Function UpdateVatNumber(vatNumber As String, idNo As Integer) As Integer
 
         Function GetAccountBalance(endDate As Date, accountIdNo As Short) As Decimal
-        Function GetLastPurchaseCost(productIdNo As Integer) As Decimal
+        Function GetLastPurchaseCostBaseUnit(productIdNo As Integer) As Decimal
         Function GetLastPurchaseData(productIdNo As Integer) As Object
     End Interface
 
@@ -89,8 +89,8 @@ Namespace DataLayer
 
     End Interface
 
-    Public Interface IGetLastPurchaseCost
-        Function GetLastPurchaseCost(productIdNo As Integer) As Decimal
+    Public Interface IGetLastPurchaseCostBaseUnit
+        Function GetLastPurchaseCostBaseUnit(productIdNo As Integer) As Decimal
 
     End Interface
 

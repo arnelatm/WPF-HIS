@@ -33,8 +33,8 @@ Namespace DataLayer.AdoNet
             End If
         End Function
 
-        Public Function GetLastPurchaseCost(productidNo As Int32) As Decimal Implements IAccountsDao.GetLastPurchaseCost
-            Return _db.RunSqlStoredProcedure("spGetLastPurchaseCost", {"@ProductIdNo", productidNo})
+        Public Function GetLastPurchaseCostBaseUnit(productidNo As Int32) As Decimal Implements IAccountsDao.GetLastPurchaseCostBaseUnit
+            Return _db.RunSqlSpWithReturnValue(Of Decimal)("spGetLastPurchaseCostBaseUnit", {"@ProductIdNo", productidNo})
         End Function
 
         Public Function GetLastPurchaseData(productidNo As Int32) As Object Implements IAccountsDao.GetLastPurchaseData

@@ -299,17 +299,17 @@ Namespace PresentationLayer.Views.Forms
 
 #Region "FindValues"
 
-        Private Sub DataGridViewReconciliationItems_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReconciliationItems.CellContentClick
-            If DataGridViewReconciliationItems.CurrentCell IsNot Nothing AndAlso (Presenter.EditMode Or Presenter.AddMode) Then
-                With DataGridViewReconciliationItems.CurrentCell
-                    Select Case .OwningColumn.Name.ToLower()
-                        Case $"dgvcleared"
-                            Dim selectedRow = DataGridViewReconciliationItems.Rows(.RowIndex).DataBoundItem
-                            RaiseEvent ReconciliationClearEvent(selectedRow, False, .Value, bsAccountReconciliationItems)
-                    End Select
-                End With
-            End If
-        End Sub
+        'Private Sub DataGridViewReconciliationItems_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridViewReconciliationItems.CellContentClick
+        '    If DataGridViewReconciliationItems.CurrentCell IsNot Nothing AndAlso (Presenter.EditMode Or Presenter.AddMode) Then
+        '        With DataGridViewReconciliationItems.CurrentCell
+        '            Select Case .OwningColumn.Name.ToLower()
+        '                Case $"dgvcleared"
+        '                    Dim selectedRow = DataGridViewReconciliationItems.Rows(.RowIndex).DataBoundItem
+        '                    RaiseEvent ReconciliationClearEvent(selectedRow, False, .Value, bsAccountReconciliationItems)
+        '            End Select
+        '        End With
+        '    End If
+        'End Sub
 
         'Private Sub DataGridViewReconciliationItems_CellContentClick() Handles DataGridViewReconciliationItems.CellValueChanged
         '    If DataGridViewReconciliationItems.CurrentCell IsNot Nothing AndAlso (Presenter.EditMode Or Presenter.AddMode) Then
@@ -323,16 +323,16 @@ Namespace PresentationLayer.Views.Forms
         '    End If
         'End Sub
 
-        'Private Sub CheckBoxValueChanged() Handles DataGridViewReconciliationItems.CellValueChanged
-        '    If TypeOf DataGridViewReconciliationItems.CurrentCell Is DataGridViewCheckBoxCell Then
-        '        If DataGridViewReconciliationItems.CurrentCell.OwningColumn.Name = "dgvCleared" Then
-        '            With DataGridViewReconciliationItems.CurrentCell
-        '                Dim selectedRow = DataGridViewReconciliationItems.Rows(.RowIndex).DataBoundItem
-        '                RaiseEvent ReconciliationClearEvent(selectedRow, False, .Value, bsAccountReconciliationItems)
-        '            End With
-        '        End If
-        '    End If
-        'End Sub
+        Private Sub CheckBoxValueChanged() Handles DataGridViewReconciliationItems.CellValueChanged
+            If TypeOf DataGridViewReconciliationItems.CurrentCell Is DataGridViewCheckBoxCell Then
+                If DataGridViewReconciliationItems.CurrentCell.OwningColumn.Name = "dgvCleared" Then
+                    With DataGridViewReconciliationItems.CurrentCell
+                        Dim selectedRow = DataGridViewReconciliationItems.Rows(.RowIndex).DataBoundItem
+                        RaiseEvent ReconciliationClearEvent(selectedRow, False, .Value, bsAccountReconciliationItems)
+                    End With
+                End If
+            End If
+        End Sub
 
         Private Sub MenuClicked()
             Dim myForm = FindForm()
@@ -592,6 +592,11 @@ Namespace PresentationLayer.Views.Forms
         '        If value IsNot Nothing AndAlso value <> DBNull.Value Then e.Value = If(CBool(value), "-", "+")
         '    End If
         'End Sub
+
+        Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+            DataGridViewReconciliationItems.FirstDisplayedScrollingRowIndex = 0
+            DataGridViewReconciliationItems.Focus()
+        End Sub
 
     End Class
 

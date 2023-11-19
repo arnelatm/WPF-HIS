@@ -162,7 +162,7 @@
             '
             'DataGridViewIbLabSampleDetails
             '
-            DataGridViewCellStyle1.BackColor = System.Drawing.Color.SandyBrown
+            DataGridViewCellStyle1.BackColor = System.Drawing.Color.NavajoWhite
             Me.DataGridViewIbLabSampleDetails.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
             Me.DataGridViewIbLabSampleDetails.AutoGenerateColumns = False
             Me.DataGridViewIbLabSampleDetails.BegFindValue = Nothing

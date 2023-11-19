@@ -119,7 +119,7 @@ BEGIN
 	CLOSE InvRequestSupply_Cursor
 	DEALLOCATE InvRequestSupply_Cursor	
 
-	IF NOT EXISTS (select * from InvRequestDetail_view where invTransactionIdNo = @InvTransactionIdNo and Cast(Quantity as Decimal(12,4)) - IIf(@QtyFactor=0,0,Cast(QtySupplied as Decimal(12,4)) / @QtyFactor) > 0)
+	IF NOT EXISTS (select * from InvRequestDetail_view where invTransactionIdNo = @InvTransactionIdNo and (Quantity - QtySupplied)  > 0)
 		Update InvTransaction Set Posted = 1 where IdNo = @InvTransactionIdNo
 
 END

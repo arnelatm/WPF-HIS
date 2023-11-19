@@ -270,7 +270,7 @@ Public Class Messaging
             If beginningDate = endingDate Then
                 Dim cDay As String
                 cDay = beginningDate.ToString($"dd MMMMM yyyy")
-                Return Messaging.GetParametrizedMessage(True, "RptForTheDay", {"reportName", reportName, "cDate", cDay})
+                Return Messaging.GetParametrizedMessage(True, "RptForTheDay", {"reportName", reportName, "day", cDay})
             ElseIf GregorianDay(beginningDate) = 1 And GregorianDay(endingDate) = 31 And GregorianMonth(beginningDate) = 1 And GregorianMonth(endingDate) = 12 And GregorianYear(beginningDate) = GregorianYear(endingDate) Then
                 Return Messaging.GetParametrizedMessage(True, "RptForTheYear", {"reportName", reportName, "year", GregorianYear(endingDate).ToString})
             ElseIf GregorianYear(beginningDate) = GregorianYear(endingDate) AndAlso

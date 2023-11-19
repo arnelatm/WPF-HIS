@@ -421,7 +421,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                     TableBaseName = TableName
                 End If
                 retValue = Service.DeleteRecord(idNo, TableBaseName)
-                If retValue > 0 Then
+                If retValue >= 0 Then
                     If Ea IsNot Nothing Then
                         Ea.PublishEvent(New RecordDeleted(idNo))
                     End If
@@ -1423,7 +1423,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             Else
                 Beep()
                 Messaging.MessageKey = "ValidationErrors"
-                Messaging.Show("Record not saved!" & Environment.NewLine & _dataErrors, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("Record not saved!" & Environment.NewLine & _dataErrors, $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 eventType.ValidData = False
                 'ShowErrors("Record not saved!" & Environment.NewLine & _dataErrors)
             End If

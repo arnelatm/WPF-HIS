@@ -196,6 +196,18 @@
     <Compile Include="CFormBase.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CFormEntryNew.Designer.vb">
+      <DependentUpon>CFormEntryNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CFormEntryNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CFormEntryTvNew.Designer.vb">
+      <DependentUpon>CFormEntryTvNew.vb</DependentUpon>
+    </Compile>
+    <Compile Include="CFormEntryTvNew.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="CPictureViewer.Designer.vb">
       <DependentUpon>CPictureViewer.vb</DependentUpon>
     </Compile>
@@ -283,6 +295,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CFormBase.resx">
       <DependentUpon>CFormBase.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CFormEntryNew.resx">
+      <DependentUpon>CFormEntryNew.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CFormEntryTvNew.resx">
+      <DependentUpon>CFormEntryTvNew.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CPictureViewer.resx">
       <DependentUpon>CPictureViewer.vb</DependentUpon>

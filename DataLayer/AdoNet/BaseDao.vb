@@ -1430,7 +1430,7 @@ Namespace AdoNet
                 ElseIf fieldTypes(i) = "Integer" OrElse fieldTypes(i) = "Int32" OrElse fieldTypes(i) = "Int16" Then
                     parameters.Add(Integer.Parse(value))
                 Else
-                    Messaging.Show("Invalid data Type <" & fieldTypes(i) & ">.")
+                    MessageBox.Show("Invalid data Type <" & fieldTypes(i) & ">.")
                     Debugger.Break()
                 End If
 

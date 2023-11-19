@@ -65,15 +65,15 @@ Namespace PresentationLayer.Presenters
 
         Public Sub RetrieveLabResult()
             If View.InvoiceNoF Is Nothing Or View.InvoiceNoF = "" Then
-                Messaging.Show("Sorry you must enter the invoice number to be retrieved.")
+                MessageBox.Show("Sorry you must enter the invoice number to be retrieved.")
                 BlankOutResults()
             Else
                 If RetrieveCbcMachineResults() Then
                     RetrieveCurrentSystemResult()
                     If View.LabInvoiceDetails.Count() <> 0 Then
-                        Messaging.Show("Data successfully retrieved!")
+                        MessageBox.Show("Data successfully retrieved!")
                     Else
-                        Messaging.Show("No CBC result generated for that invoice number. Please generate first a blank CBC Report before attempting to transfer result!")
+                        MessageBox.Show("No CBC result generated for that invoice number. Please generate first a blank CBC Report before attempting to transfer result!")
                         View.LabInvoiceDetails.Clear()
                     End If
                 End If
@@ -102,7 +102,7 @@ Namespace PresentationLayer.Presenters
             End If
             If Not retVal Then
                 BlankOutResults()
-                Messaging.Show("No result with that invoice number was found on [" + filePath + "]")
+                MessageBox.Show("No result with that invoice number was found on [" + filePath + "]")
             End If
             Return retVal
         End Function
@@ -128,7 +128,7 @@ Namespace PresentationLayer.Presenters
                 GetResultOnFile(sFiles, aFileResults, aCBCResults)
                 success = True
             ElseIf sFiles.Count() > 1 Then
-                Messaging.Show("Multiple results found on file, please manually select the record you want to transfer")
+                Messaging.Show("MsgMultiResultCBCFound")
                 Dim cbcReportSelector As New CbcReportSelector(sFiles, filePath, View.InvoiceNo)
                 Dim result = cbcReportSelector.ShowDialog()
                 If result = DialogResult.OK Then
@@ -366,7 +366,7 @@ Namespace PresentationLayer.Presenters
             End If
             If retVal >= 0 Then
                 RetrieveCurrentSystemResult()
-                Messaging.Show("CBC Results successfully transferred!")
+                MessageBox.Show("CBC Results successfully transferred!")
             End If
             Return retVal
         End Function

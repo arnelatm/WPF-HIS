@@ -287,18 +287,6 @@ Namespace PresentationLayer.Presenters
             Else
                 If sender.Cleared Then
                     If sender.Debit > 0 Then
-                        View.TotalDebitsCleared -= sender.Debit
-                        View.TotalQtyDebitsCleared -= 1
-                        View.TotalDebitsNotCleared += sender.Debit
-                        View.TotalQtyDebitsNotCleared += 1
-                    Else
-                        View.TotalCreditsCleared -= sender.Credit
-                        View.TotalQtyCreditsCleared -= 1
-                        View.TotalCreditsNotCleared += sender.Credit
-                        View.TotalQtyCreditsNotCleared += 1
-                    End If
-                Else
-                    If sender.Debit > 0 Then
                         View.TotalDebitsCleared += sender.Debit
                         View.TotalQtyDebitsCleared += 1
                         View.TotalDebitsNotCleared -= sender.Debit
@@ -309,8 +297,19 @@ Namespace PresentationLayer.Presenters
                         View.TotalCreditsNotCleared -= sender.Credit
                         View.TotalQtyCreditsNotCleared -= 1
                     End If
+                Else
+                    If sender.Debit > 0 Then
+                        View.TotalDebitsCleared -= sender.Debit
+                        View.TotalQtyDebitsCleared -= 1
+                        View.TotalDebitsNotCleared += sender.Debit
+                        View.TotalQtyDebitsNotCleared += 1
+                    Else
+                        View.TotalCreditsCleared -= sender.Credit
+                        View.TotalQtyCreditsCleared -= 1
+                        View.TotalCreditsNotCleared += sender.Credit
+                        View.TotalQtyCreditsNotCleared += 1
+                    End If
                 End If
-                'sender.Cleared = Not sender.Cleared
             End If
             ReComputeDifference()
         End Sub

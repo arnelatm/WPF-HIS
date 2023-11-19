@@ -30,7 +30,7 @@ Namespace PresentationLayer.Presenters
         Private Sub OnChangeBaseUnitButtonClicked()
             If UserHasAccess("InventoryManager") Then
                 Dim baseUnitName As String = Service.GetField(Of String, Int32)(View.BaseUnitIdNo, "Unit", "IdNo", "UnitName")
-                Dim unitList As DataTable = MakeVarDataSource({"Unit", "IdNo,UnitName", Nothing, Nothing})
+                Dim unitList As DataTable = MakeVarDataSource({"ProductUnit_View", "UnitIdNo,UnitName", "UnitIdNo,UnitName", "ProductIdNo=" & View.IdNo.ToString()})
                 Dim formToRun = Activator.CreateInstance(GetType(ProductBaseUnitChanger), View.IdNo, View.ProductName, View.BaseUnitIdNo, baseUnitName, unitList)
                 Dim pType As Type = GetType(UtilityPresenter(Of ProductModel))
                 formToRun.Presenter = Activator.CreateInstance(pType, {formToRun})

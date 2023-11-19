@@ -156,7 +156,7 @@ Namespace PresentationLayer.Presenters
                     Select Case eventType.PropertyName
                         Case $"QtyApproved"
                             If invRequestDetail.QtyApproved + invRequestDetail.QtySupplied > invRequestDetail.Quantity Then
-                                AATM.Libraries.MessagingLibrary.Messaging.Show("Sorry Quantity Approved + Quantity Supplied can't be more than the requested quantity! Changing value to maximum allowed quantity.")
+                                MessageBox.Show("Sorry Quantity Approved + Quantity Supplied can't be more than the requested quantity! Changing value to maximum allowed quantity.")
                                 invRequestDetail.QtyApproved = invRequestDetail.Quantity - invRequestDetail.QtySupplied
                             End If
                     End Select

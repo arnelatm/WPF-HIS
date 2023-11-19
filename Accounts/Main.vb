@@ -6,6 +6,7 @@ Public Module Main
     ''' <summary>
     ''' The main entry point for the application.
     ''' </summary>
+    ''' 
     Public IdleTimer As New System.Windows.Forms.Timer()
     Public WaitTimer As New System.Windows.Forms.Timer()
     Const MilliSecondsTimeOut As Integer = 15_000_000 ' approximately 4 hours

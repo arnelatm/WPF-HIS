@@ -28,7 +28,7 @@ Namespace PresentationLayer.Presenters
         Protected DtDocumentUpdateTable As New DataTable
         Private ReadOnly _employeePayElementService As New AccountsService("EmployeePayElement")
         Private ReadOnly _employeeDocumentService As New AccountsService("EmployeeDocument")
-        Private ReadOnly _employeeLeaveCreditService As New AccountsService("EmployeeLeaveCredit")
+        Private ReadOnly _EmployeeLeaveCreditService As New AccountsService("EmployeeLeaveCredit")
         Private ReadOnly _employeePhoneService As New AccountsService("EmployeePhone")
 
         Public Sub New(itemView As IEmployeeView)
@@ -179,8 +179,8 @@ Namespace PresentationLayer.Presenters
                 employeePayElements.AddRange(View.RegularEmployeeDeductions)
 
                 CustomObjToDataTables(employeePayElements, DtEmpPayElementInsertTable, DtEmpPayElementUpdateTable, AddressOf EmpPayElementFillData, AddressOf EmpPayElementFilter)
-                CustomObjToDataTables(View.EmployeePhones, DtPhoneInsertTable, DtPhoneUpdateTable, AddressOf PhoneFillData, AddressOf PhoneFilter)
                 CustomObjToDataTables(View.EmployeeLeaveCredits, DtEmpLeaveCreditInsertTable, DtEmpLeaveCreditUpdateTable, AddressOf EmpLeaveCreditFillData, AddressOf EmpLeaveCreditFilter)
+                CustomObjToDataTables(View.EmployeePhones, DtPhoneInsertTable, DtPhoneUpdateTable, AddressOf PhoneFillData, AddressOf PhoneFilter)
                 SaveDocumentImages()
                 CustomObjToDataTables(View.EmployeeDocuments, DtDocumentInsertTable, DtDocumentUpdateTable, AddressOf DocumentFillData, AddressOf DocumentFilter)
                 If IsEmpty(View.HiredDate) Then
@@ -265,7 +265,7 @@ Namespace PresentationLayer.Presenters
 
                     retVal = UpdateChildData(_employeeDocumentService, DtDocumentUpdateTable, DtDocumentInsertTable, passedValue, "EmployeeIdNo")
                     If retVal >= 0 Then
-                        retVal = UpdateChildData(_employeeLeaveCreditService, DtEmpLeaveCreditUpdateTable, DtEmpLeaveCreditInsertTable, passedValue, "EmployeeIdNo")
+                        retVal = UpdateChildData(_EmployeeLeaveCreditService, DtEmpLeaveCreditUpdateTable, DtEmpLeaveCreditInsertTable, passedValue, "EmployeeIdNo")
                     End If
                 End If
             End If
