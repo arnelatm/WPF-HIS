@@ -24,6 +24,7 @@ BEGIN
       ,[UnitIdNo]
 	  ,[UnitName]
       ,[UnitCost]
+	  ,[TotalCost]
 	  ,[Description] + ' ' + IIf(IsNull(WarehouseToIdNo,0)=0,'',b.WarehouseName) as 'Description'
 	  ,[ExpiryDate]
 	  ,[BatchNo]

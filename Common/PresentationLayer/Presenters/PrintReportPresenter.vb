@@ -165,7 +165,7 @@ Namespace PresentationLayer.Presenters
                 Dim baseUnitIdNo As Int16 = Service.GetRecordWithIdNo("Product", "BaseUnitIdNo", DirectCast(eventType.EventArgs, Int32)).BaseUnitIdNo
                 Dim baseUnitName As String = Service.GetRecordWithIdNo("Unit", "UnitName", baseUnitIdNo).UnitName
                 unitsIdNo = Service.GetRecords("ProductUnit", "BaseQty", {"IdNo"}, "ProductIdNo = " + eventType.EventArgs.ToString())
-                eventType.ReturnArgs = "Base Unit Name = " & baseUnitName.Trim() + " : "
+                eventType.ReturnArgs = "Base Unit Name = " & baseUnitName.Trim() + " "
                 Dim ps As PluralizationService = PluralizationService.CreateService(CultureInfo.GetCultureInfo("en-us"))
                 Dim nSeq As Int16 = 0
                 For Each idNo In unitsIdNo
@@ -176,7 +176,7 @@ Namespace PresentationLayer.Presenters
                     unitName = IIf(units.UnitQty < 2, ps.Singularize(unitName), ps.Pluralize(unitName))
                     baseUnitName = IIf(units.BaseQty < 2, ps.Singularize(baseUnitName), ps.Pluralize(baseUnitName))
                     nSeq = nSeq + 1
-                    eventType.ReturnArgs = eventType.ReturnArgs + IIf(nSeq = 1, units.BaseQty.ToString() + " " + baseUnitName.Trim(), "") + " = " + units.UnitQTy.ToString() + " " + unitName.Trim()
+                    eventType.ReturnArgs = eventType.ReturnArgs + " : " + units.BaseQty.ToString() + " " + baseUnitName.Trim() + " = " + units.UnitQTy.ToString() + " " + unitName.Trim()
                 Next
             End If
         End Sub

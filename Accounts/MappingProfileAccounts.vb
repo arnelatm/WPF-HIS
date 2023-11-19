@@ -69,6 +69,9 @@ Public Class MappingProfileAccounts
         CreateMap(Of EmployeeLeaveApproval, EmployeeLeaveApprovalModel)().ReverseMap()
         CreateMap(Of EmployeeLeaveApprovalModel, IEmployeeLeaveApprovalView)().ReverseMap()
 
+        CreateMap(Of EmployeeLeaveEarned, EmployeeLeaveEarnedModel)().ReverseMap()
+        CreateMap(Of EmployeeLeaveEarnedModel, IEmployeeLeaveEarnedView)().ReverseMap()
+
         CreateMap(Of EmployeeLeaveApprovalItem, EmployeeLeaveApprovalItemModel)().ReverseMap()
         CreateMap(Of EmployeeLeaveApprovalItemModel, EmployeeLeaveApprovalItemView)().ReverseMap()
         CreateMap(Of EmployeeLeaveApprovalHistory, EmployeeLeaveApprovalHistoryModel)().ReverseMap()
@@ -171,6 +174,10 @@ Public Class MappingProfileAccounts
         CreateMap(Of IbLabSampleDetail, IbLabSampleDetailModel)().ReverseMap()
         CreateMap(Of IbLabSampleDetailModel, IbLabSampleDetailView)().ReverseMap()
 
+        CreateMap(Of ClinicLabSample, ClinicLabSampleModel)().ReverseMap()
+        CreateMap(Of ClinicLabSampleModel, IClinicLabSampleView)().ReverseMap()
+        CreateMap(Of ClinicLabSampleDetail, ClinicLabSampleDetailModel)().ReverseMap()
+        CreateMap(Of ClinicLabSampleDetailModel, ClinicLabSampleDetailView)().ReverseMap()
 
         CreateMap(Of Document, DocumentModel)().ReverseMap()
         CreateMap(Of DocumentModel, IDocumentView)().ReverseMap()

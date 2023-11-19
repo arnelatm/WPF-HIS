@@ -1,6 +1,5 @@
 ﻿Imports System.ComponentModel
 Imports System.Globalization
-Imports System.Security.Permissions
 Imports System.Threading
 Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Presenters
@@ -20,9 +19,6 @@ Imports AATM.PresentationLayer.Models
 Imports AATM.PresentationLayer.Presenters
 Imports AATM.PresentationLayer.Views.Interfaces
 Imports AutoMapper
-Imports System.Timers
-Imports System
-Imports AATM.Libraries.GlobalFuncNSub.CurrencyInfo
 
 
 Namespace PresentationLayer.Views.Forms
@@ -1145,7 +1141,7 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of IqamaCbcReport, String)("InvoiceNo")
         End Sub
 
-        Private Sub ToolStripMenuItemDiagnosticTestSummary_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDiagnosticTestSummary.Click
+        Private Sub ToolStripMenuItemDiagnosticTestSummary_Click(sender As Object, e As EventArgs)
             RunReportNew(Of DiagnosticTestSummary)()
         End Sub
 
@@ -1303,6 +1299,23 @@ Namespace PresentationLayer.Views.Forms
         Private Sub DiagnosticSamplesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDiagnosticSamples.Click
             RunForm(Of IbLabSampleForm, IbLabSamplePresenter(Of IbLabSampleModel))()
         End Sub
+
+        Private Sub ToolStripMenuItemClinicTestSummary_Click(sender As Object, e As EventArgs)
+            RunReportNew(Of ClinicTestSummary)()
+        End Sub
+
+        Private Sub ToolStripMenuItemClinicSamples_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemClinicSamples.Click
+            RunForm(Of ClinicLabSampleForm, ClinicLabSamplePresenter(Of ClinicLabSampleModel))()
+        End Sub
+
+        Private Sub ToolStripMenuItemOtherLab_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemOtherLab.Click
+            RunForm(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)($"IGLAB")
+        End Sub
+
+        Private Sub ToolStripMenuItemEmployeeLeavesEarned_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeLeavesEarned.Click
+            'RunForm(Of EmployeeLeaveEarnedEntry, EmployeeLeaveEarnedPresenter(Of EmployeeLeaveEarnedModel))()
+        End Sub
+
     End Class
 
 End Namespace

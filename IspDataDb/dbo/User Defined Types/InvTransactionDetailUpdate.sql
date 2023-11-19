@@ -6,7 +6,7 @@
     [InvTransactionIdNo] INT             NOT NULL,
     [NetAmount]          DECIMAL (9, 2)  NOT NULL,
     [ProductIdNo]        INT             NOT NULL,
-    [Quantity]           SMALLINT        NOT NULL,
+    [Quantity]           DECIMAL (12, 4) NOT NULL,
     [Sequence]           SMALLINT        NOT NULL,
     [UnitCost]           DECIMAL (11, 4) NOT NULL,
     [UnitIdNo]           TINYINT         NOT NULL,

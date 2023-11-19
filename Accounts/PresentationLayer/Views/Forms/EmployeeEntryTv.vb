@@ -1,5 +1,4 @@
-﻿
-Imports System.Globalization
+﻿Imports System.Globalization
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer.AdoNet
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
@@ -16,7 +15,7 @@ Namespace PresentationLayer.Views.Forms
         Private _countryTelCodes As List(Of Lookup.LookupData)
         Private _regularEmployeeDeductions As List(Of EmployeePayElementView)
         Private _regularEmployeeEarnings As List(Of EmployeePayElementView)
-        Private _employeeLeaveCredits As List(Of EmployeeLeaveCreditView)
+        Private _EmployeeLeaveCredits As List(Of EmployeeLeaveCreditView)
         Private _employeeDocuments As List(Of EmployeeDocumentView)
         Private _employeePhones As List(Of EmployeePhoneView)
         Private _fileSizeTooLarge As Boolean = False
@@ -179,7 +178,6 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _regularEmployeeDeductions = Value
-                BindEmployeeDeduction()
             End Set
         End Property
 
@@ -189,7 +187,6 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _regularEmployeeEarnings = Value
-                BindEmployeeEarning()
             End Set
         End Property
 
@@ -199,7 +196,6 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _employeePhones = Value
-                BindEmployeePhone()
             End Set
         End Property
 
@@ -209,7 +205,6 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 _employeeDocuments = Value
-                BindEmployeeDocument()
             End Set
         End Property
 
@@ -466,11 +461,10 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property EmployeeLeaveCredits As List(Of EmployeeLeaveCreditView) Implements IEmployeeView.EmployeeLeaveCredits
             Get
-                Return _employeeLeaveCredits
+                Return _EmployeeLeaveCredits
             End Get
             Set
-                _employeeLeaveCredits = Value
-                BindEmployeeLeaveCredits()
+                _EmployeeLeaveCredits = Value
             End Set
         End Property
 
@@ -600,10 +594,8 @@ Namespace PresentationLayer.Views.Forms
             bsLeaveCredits.DataSource = EmployeeLeaveCredits
             bsLeaveCredits.AllowNew = True
             With DataGridViewLeaveCredits
-                .Refresh()
                 .AutoGenerateColumns = False
                 .DataSource = bsLeaveCredits
-                .Refresh()
             End With
             With DataGridViewLeaveCredits.Columns
                 dgvLeaveIdNo.DisplayStyleForCurrentCellOnly = True
@@ -677,7 +669,7 @@ Namespace PresentationLayer.Views.Forms
             BindEmployeePhone()
         End Sub
 
-        Private Sub OnEmployeeEntryTvTest_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        Private Sub OnEmployeeEntryTv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
             tbpPhones.Parent = Nothing
         End Sub
 
@@ -727,7 +719,7 @@ Namespace PresentationLayer.Views.Forms
                     End If
                 End With
             Catch ex As Exception
-                Messaging.Show("error")
+                MessageBox.Show("error")
             End Try
 
         End Sub
@@ -812,6 +804,22 @@ Namespace PresentationLayer.Views.Forms
             ProcessCellEndEdit(DataGridViewLeaveCredits, bsLeaveCredits)
         End Sub
 
+        Private Sub EmployeeEntryTv_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+            BindEmployeeDeduction()
+            BindEmployeeEarning()
+            BindEmployeePhone()
+            BindEmployeeDocument()
+            BindEmployeeLeaveCredits()
+        End Sub
+
+
+        Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
+            bsDeductions.ResetBindings(False)
+            bsEarnings.ResetBindings(False)
+            bsPhones.ResetBindings(False)
+            bsDocuments.ResetBindings(False)
+            bsLeaveCredits.ResetBindings(False)
+        End Sub
 
     End Class
 

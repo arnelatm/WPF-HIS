@@ -21,14 +21,13 @@ Namespace PresentationLayer.Presenters
             'AddHandler view.ProductCodeChanged, AddressOf OnProductCodeChanged
         End Sub
 
-        Private Function OnUtilityButtonClicked(parameters As Object)
+        Private Function OnUtilityButtonClicked(utilityName As String, parameters As Object)
             Dim retVal As Int16
-            Dim utilityName As String = View.UtilityName
             Dim utilityIdNo As Int16 = Service.GetField(Of Int16, String)(utilityName, "Utilities", "UtilityName", "IdNo")
             Dim utilityObject As Object = Service.GetFieldsWithIdNo(utilityIdNo, "Utilities", "StoredProcedure")
             If utilityObject.StoredProcedure Then
                 retVal = Service.RunSpWithRollBack("sp" & utilityName, parameters)
-                If retVal = 0 Then
+                If retVal >= 0 Then
                     AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgRecordSuccessfullyUpdated")
                 Else
                     AATM.Libraries.MessagingLibrary.Messaging.Show(True, "MsgRecordUpdateFail")

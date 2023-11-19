@@ -62,6 +62,7 @@ Public Class Lookup
             End If
         End If
         FilterKey = filter
+        Ascending = True
     End Sub
 
 End Class

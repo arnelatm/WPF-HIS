@@ -230,12 +230,14 @@
     <Compile Include="BusinessLayer\AppSetting.vb" />
     <Compile Include="BusinessLayer\EmployeeDetail.vb" />
     <Compile Include="BusinessLayer\DocumentDetail.vb" />
+    <Compile Include="BusinessLayer\EmployeeLeaveEarned.vb" />
     <Compile Include="BusinessLayer\IGroup\Duration.vb" />
     <Compile Include="BusinessLayer\IGroup\DrugAccept.vb" />
     <Compile Include="BusinessLayer\Dosage.vb" />
     <Compile Include="BusinessLayer\IGroup\DosageMaster.vb" />
     <Compile Include="BusinessLayer\IGroup\DrugSale.vb" />
     <Compile Include="BusinessLayer\IGroup\GTinMatcher.vb" />
+    <Compile Include="BusinessLayer\IGroup\ClinicLabSample.vb" />
     <Compile Include="BusinessLayer\IGroup\IbLabSample.vb" />
     <Compile Include="BusinessLayer\IGroup\PmrPatientDisplay.vb" />
     <Compile Include="BusinessLayer\IGroup\Prescription.vb" />
@@ -329,7 +331,10 @@
     <Compile Include="ContainerConfig.vb" />
     <Compile Include="DataLayer\AdoNet\AccountReconciliationDao.vb" />
     <Compile Include="DataLayer\AdoNet\DocumentDetailDao.vb" />
+    <Compile Include="DataLayer\AdoNet\EmployeeLeaveEarnedDao.vb" />
+    <Compile Include="DataLayer\AdoNet\IGroup\ClinicLabSampleDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\IbLabSampleDao.vb" />
+    <Compile Include="DataLayer\AdoNet\IGroup\ClinicLabSampleDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\IbLabSampleDetailDao.vb" />
     <Compile Include="DataLayer\AdoNet\IGroup\PmrInvestigationRequestDao.vb" />
     <Compile Include="DataLayer\AdoNet\InventoryDao.vb" />
@@ -477,12 +482,14 @@
     <Compile Include="OneTimeRun.vb" />
     <Compile Include="PresentationLayer\Models\AppSettingModel.vb" />
     <Compile Include="PresentationLayer\Models\DocumentDetailModel.vb" />
+    <Compile Include="PresentationLayer\Models\EmployeeLeaveEarnedModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\DurationModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\DrugAcceptModel.vb" />
     <Compile Include="PresentationLayer\Models\DosageModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\DosageMasterModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\DrugSaleModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\GTinMatcherModel.vb" />
+    <Compile Include="PresentationLayer\Models\IGroup\ClinicLabSampleModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\IbLabSampleModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\PrescriptionItemModel.vb" />
     <Compile Include="PresentationLayer\Models\IGroup\PmrPrescriptionModel.vb" />
@@ -555,6 +562,10 @@
     <Compile Include="PresentationLayer\Presenters\ApArEmReportPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\BasicPresenterHelper.vb" />
     <Compile Include="PresentationLayer\Presenters\DateRangePresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\EmployeeAbsencePresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\EmployeeLeaveEarnedPresenterX.vb" />
+    <Compile Include="PresentationLayer\Presenters\EmployeeLeaveEarnedPresenter.vb" />
+    <Compile Include="PresentationLayer\Presenters\IGroup\ClinicLabSamplePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\IbLabSamplePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PurchaseOrderApprovalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\UtilityPresenter.vb" />
@@ -594,7 +605,6 @@
     <Compile Include="PresentationLayer\Presenters\HolidayAvailmentPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\ShiftSummaryPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\HolidayPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\EmployeeAbsencePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayElementPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PayrollDetailPresenter.vb" />
@@ -625,6 +635,42 @@
       <DependentUpon>DateRangeForm.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\DateRangeForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTv.designer.vb">
+      <DependentUpon>EmployeeEntryTv.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTv.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveApprovalEntry.Designer.vb">
+      <DependentUpon>EmployeeLeaveApprovalEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveApprovalEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveEarnedEntry.Designer.vb">
+      <DependentUpon>EmployeeLeaveEarnedEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveEarnedEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveEarnedEntryX.designer.vb">
+      <DependentUpon>EmployeeLeaveEarnedEntryX.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveEarnedEntryX.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Form5.Designer.vb">
+      <DependentUpon>Form5.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Form5.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\ClinicLabSampleForm.Designer.vb">
+      <DependentUpon>ClinicLabSampleForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\IGroup\ClinicLabSampleForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\IGroup\IbLabSampleForm.Designer.vb">
@@ -663,6 +709,12 @@
     <Compile Include="PresentationLayer\Views\Forms\Reports\DocumentExpiryList.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\ClinicTestSummary.designer.vb">
+      <DependentUpon>ClinicTestSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\Views\Forms\Reports\IGroup\ClinicTestSummary.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\Reports\PayrollPrinting.Designer.vb">
       <DependentUpon>PayrollPrinting.vb</DependentUpon>
     </Compile>
@@ -675,8 +727,11 @@
     <Compile Include="PresentationLayer\Views\Forms\Reports\ProductMovementReport.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PresentationLayer\Views\ClinicLabSampleDetailView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IApArEmReportView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IContactDateRangeView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IEmployeeLeaveEarnedView.vb" />
+    <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IClinicLabSampleView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IGroup\IIbLabSampleView.vb" />
     <Compile Include="PresentationLayer\Views\Interfaces\IUtilityView.vb" />
     <Compile Include="PresentationLayer\Views\EmployeeLeaveApprovalItemView.vb" />
@@ -956,22 +1011,10 @@
     <Compile Include="PresentationLayer\Views\Forms\DocumentEntryTv.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTv.designer.vb">
-      <DependentUpon>EmployeeEntryTv.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\EmployeeEntryTv.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="PresentationLayer\Views\Forms\HolidayTransferEntry.Designer.vb">
       <DependentUpon>HolidayTransferEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\HolidayTransferEntry.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveApprovalEntry.Designer.vb">
-      <DependentUpon>EmployeeLeaveApprovalEntry.vb</DependentUpon>
-    </Compile>
-    <Compile Include="PresentationLayer\Views\Forms\EmployeeLeaveApprovalEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PresentationLayer\Views\Forms\FormDataViewer.Designer.vb">
@@ -2038,6 +2081,16 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\DocumentDetailEntry.resx">
       <DependentUpon>DocumentDetailEntry.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\EmployeeEntryTv.resx">
+      <DependentUpon>EmployeeEntryTv.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\EmployeeLeaveApprovalEntry.resx">
+      <DependentUpon>EmployeeLeaveApprovalEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\EmployeeLeaveEarnedEntryX.resx">
+      <DependentUpon>EmployeeLeaveEarnedEntryX.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\DoctorsPrescriptionForm.resx">
       <DependentUpon>DoctorsPrescriptionForm.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -2048,6 +2101,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\DosageTableManager.resx">
       <DependentUpon>DosageTableManager.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\ClinicLabSampleForm.resx">
+      <DependentUpon>ClinicLabSampleForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\IGroup\IbLabSampleForm.resx">
       <DependentUpon>IbLabSampleForm.vb</DependentUpon>
@@ -2088,6 +2144,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\DocumentExpiryList.resx">
       <DependentUpon>DocumentExpiryList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\IGroup\ClinicTestSummary.resx">
+      <DependentUpon>ClinicTestSummary.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\Reports\PayrollPrinting.resx">
       <DependentUpon>PayrollPrinting.vb</DependentUpon>
@@ -2208,15 +2268,8 @@
       <DependentUpon>DisbursementJournalEntry.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\EmployeeEntryTv.resx">
-      <DependentUpon>EmployeeEntryTv.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\HolidayTransferEntry.resx">
       <DependentUpon>HolidayTransferEntry.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PresentationLayer\Views\Forms\EmployeeLeaveApprovalEntry.resx">
-      <DependentUpon>EmployeeLeaveApprovalEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\FormDataViewer.resx">
       <DependentUpon>FormDataViewer.vb</DependentUpon>
@@ -2756,10 +2809,12 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app-ibn-server-test.config" />
     <None Include="app.config" />
+    <None Include="app-ISP-SERVERNEW.config" />
+    <None Include="app-ibn-server-test.config" />
+    <None Include="app-Isp-Server - Copy.config" />
+    <None Include="app-Ispadmin2 - Copy.config" />
     <None Include="app-Marcelo-Dell.config" />
-    <None Include="app-Ispadmin2.config" />
     <None Include="app-Isp-Server.config" />
     <None Include="appx.config" />
     <None Include="app-Ibn-Server.config" />

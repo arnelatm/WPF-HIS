@@ -531,7 +531,7 @@ Namespace PresentationLayer.Presenters
             Dim patient As Object = New ExpandoObject
             patient = _igService.GetRecordFieldsFiltered("PatientDetails", "PatientNameEnglish,Age,AgeYMD,Sex", filter)
             If patient Is Nothing Then
-                AATM.Libraries.MessagingLibrary.Messaging.Show("No Such Patient with that File number and type found on file.")
+                MessageBox.Show("No Such Patient with that File number and type found on file.")
             Else
                 View.PatientName = patient.PatientNameEnglish
                 View.Age = patient.Age

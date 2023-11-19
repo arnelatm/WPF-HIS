@@ -163,8 +163,8 @@ Namespace PresentationLayer.Views.Forms.Reports
             '
             'cboReportSelector
             '
+            Me.cboReportSelector.AlwaysEditable = True
             Me.cboReportSelector.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
-            Me.cboReportSelector.BackColor = System.Drawing.Color.White
             Me.cboReportSelector.DefaultValue = Nothing
             Me.cboReportSelector.DisplayOnly = False
             Me.cboReportSelector.EditingMode = True
@@ -261,10 +261,10 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.Text = "Diagnostic Test Summary"
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.CFlowLayout1.ResumeLayout(False)
-            Me.CFlowLayout1.PerformLayout
-        Me.ResumeLayout(false)
+            Me.CFlowLayout1.PerformLayout()
+            Me.ResumeLayout(False)
 
-End Sub
+        End Sub
         Friend WithEvents lblEndingDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblBeginningDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dtpEndingDate As CCustomDateTimePicker

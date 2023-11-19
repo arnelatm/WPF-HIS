@@ -252,7 +252,7 @@ Namespace PresentationLayer.Presenters
                         End If
                     End If
                 Else
-                    Dim lastCost As Decimal = Service.GetLastPurchaseCost(invTransactionDetail.ProductIdNo)
+                    Dim lastCost As Decimal = Service.GetLastPurchaseCostBaseUnit(invTransactionDetail.ProductIdNo)
                     If invTransactionDetail.UnitIdNo = product.BaseUnitIdNo Then
                         invTransactionDetail.UnitCost = lastCost
                     Else
@@ -377,8 +377,8 @@ Namespace PresentationLayer.Presenters
                     .ProductCode = product.ProductCode
                     .UnitIdNo = product.BaseUnitIdNo
                     .ProductIdNo = product.IdNo
-                    .Quantity = 1
-                    .UnitCost = Service.GetLastPurchaseCost(product.IdNo)
+                    .Quantity = 1D
+                    .UnitCost = Service.GetLastPurchaseCostBaseUnit(product.IdNo)
                     .NetAmount = .UnitCost * .Quantity
                     .NeedsExpiryDate = Service.GetField(Of Boolean, Integer)(product.IdNo, "Product_View", "IdNo", "NeedsExpiryDate")
                 End With
@@ -423,7 +423,7 @@ Namespace PresentationLayer.Presenters
                         View.ValidationErrorText = errorText
                         entryIsValid = False
                         itemCodeOkButNotInInventory = True
-                        Messaging.Show(errorText)
+                        Messaging.Show(True, "MsgNoSuchInventory")
                     Else
                         UpdateIdNameUnit(product)
                         View.InvTransactionDetailsBs.Current.InventoryIdNo = 0
@@ -538,8 +538,8 @@ Namespace PresentationLayer.Presenters
                 .ProductName = product.ProductName
                 .ProductCode = product.ProductCode
                 .UnitIdNo = product.BaseUnitIdNo
-                .Quantity = 1
-                .UnitCost = Service.GetLastPurchaseCost(product.IdNo)
+                .Quantity = 1D
+                .UnitCost = Service.GetLastPurchaseCostBaseUnit(product.IdNo)
                 .NetAmount = .UnitCost * .Quantity
             End With
             View.InvTransactionDetailsBs.ResetBindings(False)
@@ -610,7 +610,7 @@ Namespace PresentationLayer.Presenters
 
 
         Private Function SetInitialQuantity(inventory As InventoryModel) As Decimal
-            Dim qty As Int16
+            Dim qty As Decimal
             Dim InventoryAction As String
             InventoryAction = Service.GetField(Of String, Int16)(View.InvTransTypeIdNo, "InvTransType", "IdNo", "InventoryAction")
             If InventoryAction Is Nothing Then
@@ -839,12 +839,10 @@ Namespace PresentationLayer.Presenters
                     Dim itemName As String = Messaging.TranslateCaption("InvTransaction transaction")
                     Dim msg = Messaging.GetParametrizedMessage(True, "AskIfContinueAction", {"action", action, "itemName", itemName})
                     If Messaging.Show(msg, caption, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-                        retVal = Service.PostData(idNo)
-                        If retVal Then
-                            View.Posted = True
-                            UpdateViewData(View.IdNo)
-                            UpdateViewDisplay()
-                        End If
+                        Service.PostData(idNo)
+                        View.Posted = True
+                        UpdateViewData(View.IdNo)
+                        UpdateViewDisplay()
                     End If
                 Else
                     Messaging.Show(True, "MsgNoPostOnWHouse")

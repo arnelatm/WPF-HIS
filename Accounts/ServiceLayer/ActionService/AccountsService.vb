@@ -5,6 +5,7 @@ Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Common.ServiceLayer
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.ServicesLayer.Services
+Imports CrystalDecisions.ReportAppServer.DataDefModel
 
 Namespace ServiceLayer.ActionService
 
@@ -324,12 +325,16 @@ Namespace ServiceLayer.ActionService
             Return DataDao.GetHolidayTransferItems(employeeIdNo, holidayIdNo)
         End Function
 
-        Public Function GetLeaveCredit(ByVal employeeIdNo As Int32, ByVal leaveIdNo As Int16)
-            Return DataDao.GetLeaveCredit(employeeIdNo, leaveIdNo)
+        Public Function GetLeaveCredit(ByVal employeeIdNo As Int32, ByVal leaveIdNo As Int16) As EmployeeLeaveCreditModel
+            Dim empLvCredits = New EmployeeLeaveCredit
+            empLvCredits = DataDao.GetLeaveCredit(employeeIdNo, leaveIdNo)
+            Dim model As New EmployeeLeaveCreditModel
+            GlobalVariables.Mapper.Map(empLvCredits, model)
+            Return model
         End Function
 
-        Public Function GetLastPurchaseCost(ByVal productIdNo As Integer) Implements IServiceAccounts.GetLastPurchaseCost
-            Return DataDao.GetLastPurchaseCost(productIdNo)
+        Public Function GetLastPurchaseCostBaseUnit(ByVal productIdNo As Integer) As Decimal Implements IServiceAccounts.GetLastPurchaseCostBaseUnit
+            Return DataDao.GetLastPurchaseCostBaseUnit(productIdNo)
         End Function
 
         Public Function GetLastPurchaseData(ByVal productIdNo As Integer) Implements IServiceAccounts.GetLastPurchaseData

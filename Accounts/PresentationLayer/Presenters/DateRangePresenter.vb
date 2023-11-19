@@ -83,11 +83,18 @@ Public Class DateRangePresenter(Of TM As New)
                                             _reportModel.ReportTitle, "ReportTitle",
                                             GlobalVariables.EstablishmentName, "EstablishmentName",
                                             language, "Language"}
+            If _reportModel.QueryParameters IsNot Nothing AndAlso _reportModel.QueryParameters <> "" Then
+                Dim qParameters As String = _reportModel.QueryParameters
+                Dim lParameters As String() = qParameters.Split(","c)
+                For Each item In lParameters
+                    reportArgs.ReportParameters.Add(item)
+                Next
+            End If
             reportArgs.DataBaseConnectionName = _reportModel.DatabaseName
             Dim p As New PrintReportPresenter(Of AccountModel)
-            p.ViewReport(_reportModel.ReportFileName, reportArgs, False)
-        End If
-        CultureInfo.CurrentCulture = curCulture
+                p.ViewReport(_reportModel.ReportFileName, reportArgs, False)
+            End If
+            CultureInfo.CurrentCulture = curCulture
 
     End Sub
 

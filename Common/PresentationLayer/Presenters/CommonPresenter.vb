@@ -257,8 +257,10 @@ Namespace PresentationLayer.Presenters
             Const LookupSortKey As Int32 = 4
             Const ValueMember As Int32 = 5
             Const DisplayMember As Int32 = 6
+            Const Ascending As Int32 = 7
             dtl.TableName = item(LookupTableName)
             dtl.PropertyName = item(PropertyFieldName)
+            dtl.Ascending = True
             If item.Length - 1 > 1 Then
                 dtl.LuFields = item(LookupFieldNames)
             End If
@@ -273,6 +275,9 @@ Namespace PresentationLayer.Presenters
             End If
             If item.Length - 1 > 5 Then
                 dtl.DisplayMember = item(DisplayMember)
+            End If
+            If item.Length - 1 > 6 Then
+                dtl.Ascending = item(Ascending)
             End If
             ComposeLookupProperties(dtl)
             Return GetDtRecords(dtl.TableName, dtl.LuFields, dtl.Filter, dtl.SortKey)
@@ -331,9 +336,11 @@ Namespace PresentationLayer.Presenters
             Const LookupSortKey As Int32 = 4
             Const ValueMember As Int32 = 5
             Const DisplayMember As Int32 = 6
+            Const Ascending As Int32 = 7
             Dim dtl As New DataLookup
             dtl.TableName = item(LookupTableName)
             dtl.PropertyName = item(PropertyFieldName)
+            dtl.Ascending = True
             If item.Length - 1 > 1 Then
                 dtl.LuFields = item(LookupFieldNames)
             End If
@@ -348,6 +355,9 @@ Namespace PresentationLayer.Presenters
             End If
             If item.Length - 1 > 5 Then
                 dtl.DisplayMember = item(DisplayMember)
+            End If
+            If item.Length - 1 > 6 Then
+                dtl.Ascending = item(Ascending)
             End If
             ComposeLookupProperties(dtl)
             dtl.LookUpTask = Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(dtl))
@@ -368,6 +378,7 @@ Namespace PresentationLayer.Presenters
             Dim dtl As New DataLookup
             dtl.TableName = item(LookupTableName)
             dtl.PropertyControl = item(PropertyControl)
+            dtl.Ascending = True
             If item.Length - 1 > 1 Then
                 dtl.LuFields = item(LookupFieldNames)
             End If

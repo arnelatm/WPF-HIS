@@ -59,7 +59,7 @@ Namespace PresentationLayer.Presenters
             Dim patient As Object = New ExpandoObject
             patient = _igService.GetRecordFieldsFiltered("PatientDetails", "PatientNameEnglish,Age,AgeYMD,Sex", filter)
             If patient Is Nothing Then
-                AATM.Libraries.MessagingLibrary.Messaging.Show("No Such Patient with that File number and type found on file.")
+                MessageBox.Show("No Such Patient with that File number and type found on file.")
             Else
                 View.PatientName = patient.PatientNameEnglish
                 View.Age = patient.Age
@@ -73,7 +73,7 @@ Namespace PresentationLayer.Presenters
             Dim medicine As Object = New ExpandoObject
             medicine = _igService.GetRecordFieldsFiltered("Medicines_View", "IdNo,ItemName,GenericName,GTin,BarCode", filter)
             If medicine Is Nothing Then
-                AATM.Libraries.MessagingLibrary.Messaging.Show("No Such medicine with that item code on file.")
+                MessageBox.Show("No Such medicine with that item code on file.")
             Else
                 View.ItemIdNo = IIf(IsDBNull(medicine.IdNo), 0, medicine.IdNo)
                 View.GenericName = IIf(IsDBNull(medicine.GenericName), "", medicine.GenericName)
@@ -88,7 +88,7 @@ Namespace PresentationLayer.Presenters
             Dim medicine As Object = New ExpandoObject
             medicine = _igService.GetRecordFieldsFiltered("Medicines_View", "IdNo,ItemName,GenericName,GTin,ItemCode", filter)
             If medicine Is Nothing Then
-                AATM.Libraries.MessagingLibrary.Messaging.Show("No Such medicine with that Barcode on file.")
+                MessageBox.Show("No Such medicine with that Barcode on file.")
             Else
                 View.ItemIdNo = IIf(IsDBNull(medicine.IdNo), 0, medicine.IdNo)
                 View.ItemName = IIf(IsDBNull(medicine.ItemName), "", medicine.ItemName)
@@ -104,7 +104,7 @@ Namespace PresentationLayer.Presenters
             Dim medicine As Object = New ExpandoObject
             medicine = _igService.GetRecordFieldsFiltered("Medicines_View", "IdNo,ItemName,GenericName,BarCode,ItemCode", filter)
             If medicine Is Nothing Then
-                AATM.Libraries.MessagingLibrary.Messaging.Show("No Such medicine with that GTin on file.")
+                MessageBox.Show("No Such medicine with that GTin on file.")
             Else
                 View.ItemIdNo = IIf(IsDBNull(medicine.IdNo), 0, medicine.IdNo)
                 View.ItemName = IIf(IsDBNull(medicine.ItemName), "", medicine.ItemName)
@@ -120,7 +120,7 @@ Namespace PresentationLayer.Presenters
             Dim medicine As Object = New ExpandoObject
             medicine = _igService.GetRecordFieldsFiltered("Medicines_View", "ItemName,ItemCode,GenericName,GTin,BarCode", filter)
             If medicine Is Nothing Then
-                AATM.Libraries.MessagingLibrary.Messaging.Show("No Such medicine with that item code on file.")
+                MessageBox.Show("No Such medicine with that item code on file.")
             Else
                 View.ItemCode = IIf(IsDBNull(medicine.ItemCode), "", medicine.ItemCode)
                 View.GenericName = IIf(IsDBNull(medicine.GenericName), "", medicine.GenericName)

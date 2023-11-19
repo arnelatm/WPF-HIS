@@ -7,33 +7,22 @@ Public Class CDgvTextBoxCell
     Implements IEntryControl
 
     Private _editingMode As Boolean
-    Private _displayOnly As Boolean
     Private _translatable As Boolean = False
 
-    Public Overrides Function Clone() As Object
-        Dim copy As CDgvTextBoxCell = TryCast(MyBase.Clone(), CDgvTextBoxCell)
-        copy.DisplayOnly = DisplayOnly
-        copy.Translatable = Translatable
-        copy.EditingMode = EditingMode
-        Return copy
-    End Function
+    'Public Overrides Function Clone() As Object
+    '    Dim copy As CDgvTextBoxCell = TryCast(MyBase.Clone(), CDgvTextBoxCell)
+    '    copy.DisplayOnly = DisplayOnly
+    '    copy.Translatable = Translatable
+    '    copy.EditingMode = EditingMode
+    '    Return copy
+    'End Function
 
 
     <Category("Custom Properties")>
     <DefaultValue(False)>
     <Description("Set to True to specify that this control is Read Only .")>
     <Browsable(True)>
-    Public Property DisplayOnly As Boolean
-        Get
-            Return _displayOnly
-        End Get
-        Set(val As Boolean)
-            _displayOnly = val
-            If val Then
-                _editingMode = True
-            End If
-        End Set
-    End Property
+    Public Property DisplayOnly As Boolean = False
 
     <Bindable(True)>
     <Category("Properties")>

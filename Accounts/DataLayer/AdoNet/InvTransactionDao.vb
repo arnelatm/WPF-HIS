@@ -133,18 +133,19 @@ Namespace DataLayer.AdoNet
             Dim transactionObj As New TransactionObject()
             transactionObj.CreateConnection("PostInvTransDetailTransfer", Db.GetConnectionString)
             Dim parameters As Object = {"@InvTransactionIdNo", idNo}
-            Dim x As Int16 = Db.RunSqlStoredProcedure("spPostInvTransaction", parameters)
-            retVal = IIf(x = 1, True, False)
+            Db.RunSqlStoredProcedure("spPostInvTransaction", parameters)
+            'Dim x As Int16 = FDb.RunSqlStoredProcedure("spPostInvTransaction", parameters)
+            'retVal = IIf(x = 1, True, False)
             'retVal = IIf(Db.RunSqlStoredProcedure("spPostInvTransaction", parameters) = 1, True, False)
             Db.CloseTransaction(transactionObj, retVal)
-            If Not retVal Then
-                If InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
-                    MessageBox.Show("Sorry, either quantity is zero or cannot find item in the inventory, no item(s) posted.")
-                ElseIf InventoryAction = EnumToCode(InventoryActionSelection.Add) Then
-                    MessageBox.Show("Sorry, cannot post these items, either product does not exist or quantity is zero, no item(s) posted.")
-                End If
-            End If
-            Return retVal
+            'If Not retVal Then
+            '    If InventoryAction = EnumToCode(InventoryActionSelection.Deduct) Or InventoryAction = EnumToCode(InventoryActionSelection.Transfer) Then
+            '        MessageBox.Show("Sorry, either quantity is zero or cannot find item in the inventory, no item(s) posted.")
+            '    ElseIf InventoryAction = EnumToCode(InventoryActionSelection.Add) Then
+            '        MessageBox.Show("Sorry, cannot post these items, either product does not exist or quantity is zero, no item(s) posted.")
+            '    End If
+            'End If
+            Return True
         End Function
 
         'Private Function ConvertToBaseUnitPrice(product As ProductModel, invTransactionDetail As InvTransactionDetailView)

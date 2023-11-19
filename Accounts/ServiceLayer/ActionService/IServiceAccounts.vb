@@ -32,7 +32,7 @@ Namespace ServiceLayer.ActionService
         Function GetLastSeriesNumber(seriesName As String) As Integer
 
         Function EmployeeIdInsertTvp(tvpTable As DataTable) As Integer
-        Function GetLastPurchaseCost(productIdNo As Integer) As Object
+        Function GetLastPurchaseCostBaseUnit(productIdNo As Integer) As Decimal
         'Function PerformUtility(utilityName As String) As Object
         Function GetLastPurchaseData(productIdNo As Integer) As Object
     End Interface
