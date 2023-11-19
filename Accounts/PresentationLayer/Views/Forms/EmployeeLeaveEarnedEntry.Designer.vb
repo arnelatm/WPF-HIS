@@ -1,8 +1,6 @@
-﻿Imports AATM.PresentationLayer.Forms
-
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class EmployeeLeaveEarnedEntry
-    Inherits CFormEntry
+    Inherits AATM.PresentationLayer.Forms.CFormEntry
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
