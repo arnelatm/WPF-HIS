@@ -1,6 +1,4 @@
-﻿Imports System.Windows.Forms.VisualStyles
-Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
 Imports AATM.Libraries.GlobalFuncNSub
@@ -68,27 +66,27 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
+
             If UserHasAccess("HumanResources") Then
-                CreateDataSource("Employee", "EmployeeIdNo")
+                MakeControlDataSources({New String() {"Employee", "EmployeeIdNo", Nothing, Nothing}})
             ElseIf IsUserASupervisor() Then
                 Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
                 Dim filter As String = "IdNo = " + employeeIdNo.ToString() + " or SupervisorIdNo = " + employeeIdNo.ToString()
-                CreateDataSource("Employee", "EmployeeIdNo", filter)
+                MakeControlDataSources({New String() {"Employee", "EmployeeIdNo", Nothing, filter}})
             Else
                 Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
-                CreateDataSource("Employee", "EmployeeIdNo", "IdNo = " + employeeIdNo.ToString())
+                MakeControlDataSourcesT({New String() {"Employee", "EmployeeIdNo", Nothing, "EmployeeIdNo", "IdNo = " + employeeIdNo.ToString()}})
             End If
-            CreateDataSource("User", "EnteredBy", {"IdNo", "UserName"})
+            MakeControlDataSources({New String() {"User", "EnteredBy", "IdNo,UserName", Nothing}})
             If _holidayLeave Then
-                CreateDataSource("Leave", "LeaveIdNo", "Holiday = 1")
-                CreateDataSource("Holiday_View", "HolidayIdNo", {"IdNo", "HolidayName", "DateStart"})
+                MakeControlDataSources({New String() {"Leave", "LeaveIdNo", Nothing, " Holiday = 1"},
+                                        New String() {"Holiday_View", "HolidayIdNo", "IdNo,HolidayName,DateStart", Nothing}})
             Else
-                CreateDataSource("Leave", "LeaveIdNo", "Holiday = 0")
+                MakeControlDataSources({New String() {"Leave", "LeaveIdNo", Nothing, " Holiday = 0"}})
             End If
-            CreateEnumDataSource(Of LeaveStatusSelection)("LeaveStatus")
-            CreateEnumData(Of LeaveStatusSelection)(View.LeaveStatusList)
-            CreateLookupData("User", "Users", {"IdNo", "UserName"})
-            'CreateEnumDataSource(Of LeaveApprovalSelection)("Approval")
+            CreateEnumDataSourceT(Of LeaveStatusSelection)("LeaveStatus")
+            CreateEnumDataT(Of LeaveStatusSelection)(View.LeaveStatusList)
+            MakeVarDataSources({New String() {"User", "Users", "IdNo,UserName", Nothing, Nothing}})
         End Sub
 
         Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
@@ -183,7 +181,6 @@ Namespace PresentationLayer.Presenters
             If NoOverlappingDates() Then
                 Dim leaveModel As LeaveModel = _leaveService.GetRecordByIdNo(Of LeaveModel)(View.LeaveIdNo)
                 Dim employeeLeaveCreditModel As EmployeeLeaveCreditModel
-                'employeeLeaveCreditModel = GetLeaveCreditModel(View.EmployeeIdNo, View.LeaveIdNo, leaveModel)
                 employeeLeaveCreditModel = _employeeLeaveCreditService.GetLeaveCredit(View.EmployeeIdNo, View.LeaveIdNo)
                 Dim noOfRequestedDays As Long = DateDiff(DateInterval.Day, View.StartDate, View.EndDate) + 1
                 Dim records As New List(Of EmployeeLeaveModel)
@@ -195,9 +192,6 @@ Namespace PresentationLayer.Presenters
                         If leaveModel.LeaveCycle = LeaveCycleSelection.ResetsYearly Then
                             ' check if no. of days for leave is not yet exceeded
                             Dim leaveYear As Int16 = Year(View.StartDate)
-                            'If employeeLeaveCreditModel.Cumulative Then
-                            'no record of accumulated leave treat as non-cumulative
-                            'End if
                             records = _employeeLeaveService.GetEmployeeLeaves(View.EmployeeIdNo, View.LeaveIdNo, "ActiveYear", Year(View.EndDate))
                             For Each item As EmployeeLeaveModel In records
                                 noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
@@ -270,24 +264,6 @@ Namespace PresentationLayer.Presenters
             Return retValue
         End Function
 
-        'Private Function GetLeaveCreditModel(employeeIdNo As Int32, leaveIdNo As Int16, leaveModel As LeaveModel) As EmployeeLeaveCreditModel
-        '    Dim employeeLeaveCreditModel As EmployeeLeaveCreditModel
-        '    employeeLeaveCreditModel = _employeeLeaveCreditService.GetLeaveCredit(employeeIdNo, leaveIdNo)
-        '    If employeeLeaveCreditModel Is Nothing Then
-        '        employeeLeaveCreditModel = New EmployeeLeaveCreditModel
-        '        ' get the default values if no leavecredit is avaiable for this employee
-        '        employeeLeaveCreditModel.Cumulative = leaveModel.Cumulative
-        '        employeeLeaveCreditModel.LeaveAllowed = leaveModel.LeaveAllowed
-        '        employeeLeaveCreditModel.LeaveIdNo = leaveModel.IdNo
-        '        employeeLeaveCreditModel.MaxCarryOver = leaveModel.MaxCarryOver
-        '        employeeLeaveCreditModel.MaxLimit = leaveModel.MaxLimit
-        '        employeeLeaveCreditModel.NoMaxLimit = leaveModel.NoMaxLimit
-        '        employeeLeaveCreditModel.PaidPercent = leaveModel.PaidPercent
-        '        employeeLeaveCreditModel.AccumulatedLeave = leaveModel.LeaveAllowed
-        '    End If
-        '    Return employeeLeaveCreditModel
-        'End Function
-
         Private Function RequestedLeaveDaysOk(noOfDaysAllowed As Long, noOfRequestedDays As Long) As Boolean
             Dim leaveDaysOk As Boolean = True
             If noOfRequestedDays > noOfDaysAllowed Then
@@ -296,18 +272,6 @@ Namespace PresentationLayer.Presenters
             End If
             Return leaveDaysOk
         End Function
-
-        'Private Function GetNoOfDaysAllowed(employeeLeaveCreditModel As EmployeeLeaveCreditModel) As Long
-        '    Dim noOfDaysAllowed As Long
-        '    If employeeLeaveCreditModel IsNot Nothing Then
-        '        If employeeLeaveCreditModel.Cumulative Then
-        '            noOfDaysAllowed = employeeLeaveCreditModel.AccumulatedLeave
-        '        Else
-        '            noOfDaysAllowed = employeeLeaveCreditModel.LeaveAllowed
-        '        End If
-        '    End If
-        '    Return noOfDaysAllowed
-        'End Function
 
         Private Function NoOverlappingDates() As Boolean
             Dim noOverlap As Boolean = True
