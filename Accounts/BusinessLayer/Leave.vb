@@ -16,6 +16,7 @@ Namespace BusinessLayer
             End If
         End Sub
 
+        Public Property Earnable As Boolean
         Public Property IdNo As Int16
         Public Property LeaveCode As String
         Public Property LeaveCycle As String

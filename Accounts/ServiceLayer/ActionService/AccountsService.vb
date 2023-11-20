@@ -167,6 +167,13 @@ Namespace ServiceLayer.ActionService
             Return model
         End Function
 
+        Public Function GetOverlappingEarnedLeave(employeeIdNo As Int32, beginningDate As Date, endingDate As Date, leaveIdNo As Int16) As EmployeeLeaveEarnedModel
+            Dim records = DataDao.GetOverlappingEarnedLeave(employeeIdNo, beginningDate, endingDate, leaveIdNo)
+            Dim model As New EmployeeLeaveEarnedModel
+            GlobalVariables.Mapper.Map(records, model)
+            Return model
+        End Function
+
         Private Function ComputeFixedRateEarning(payFrequency As Char, amount As Decimal, payRateUnit As Char) As Decimal
             Dim factor As Decimal
             Dim payFrequencySel = CodeToEnum(Of PayFrequencySelection)(payFrequency)

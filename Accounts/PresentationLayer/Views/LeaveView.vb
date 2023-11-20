@@ -112,18 +112,19 @@ Namespace PresentationLayer.Views
         Public Property Errors As List(Of String) Implements IView.Errors
 
         Public Property Holiday As Boolean Implements ILeaveView.Holiday
-            Get
-                Return chkCumulative.Checked
-            End Get
-            Set(value As Boolean)
-                chkCumulative.Checked = value
-            End Set
-        End Property
 
         Public Property LeaveCycle As String Implements ILeaveView.LeaveCycle
 
         Public Property DataFilter As String Implements IView.DataFilter
 
+        Public Property Earnable As Boolean Implements ILeaveView.Earnable
+            Get
+                Return chkEarnable.Checked
+            End Get
+            Set(value As Boolean)
+                chkEarnable.Checked = value
+            End Set
+        End Property
     End Class
 
 End Namespace

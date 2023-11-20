@@ -142,7 +142,7 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemHolidayEntry = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemEmployeeLeaveApproval = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemEmployeeHolidayTransfer = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripMenuItemEmployeeLeavesEarned = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItemEmployeeLeaveEarned = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemClosing = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPayrollTransaction = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItemPayrollEntry = New System.Windows.Forms.ToolStripMenuItem()
@@ -823,7 +823,7 @@ Namespace PresentationLayer.Views.Forms
             '
             'ToolStripMenuItemHR
             '
-            Me.ToolStripMenuItemHR.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemEmployeeLeaveNonHoliday, Me.ToolStripMenuItemEmployeeLeaveHoliday, Me.ToolStripMenuItemEmployeeAbsenceLate, Me.ToolStripMenuItemHolidayEntry, Me.ToolStripMenuItemEmployeeLeaveApproval, Me.ToolStripMenuItemEmployeeHolidayTransfer, Me.ToolStripMenuItemEmployeeLeavesEarned})
+            Me.ToolStripMenuItemHR.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItemEmployeeLeaveNonHoliday, Me.ToolStripMenuItemEmployeeLeaveHoliday, Me.ToolStripMenuItemEmployeeAbsenceLate, Me.ToolStripMenuItemHolidayEntry, Me.ToolStripMenuItemEmployeeLeaveApproval, Me.ToolStripMenuItemEmployeeHolidayTransfer, Me.ToolStripMenuItemEmployeeLeaveEarned})
             Me.ToolStripMenuItemHR.Name = "ToolStripMenuItemHR"
             resources.ApplyResources(Me.ToolStripMenuItemHR, "ToolStripMenuItemHR")
             '
@@ -857,10 +857,10 @@ Namespace PresentationLayer.Views.Forms
             Me.ToolStripMenuItemEmployeeHolidayTransfer.Name = "ToolStripMenuItemEmployeeHolidayTransfer"
             resources.ApplyResources(Me.ToolStripMenuItemEmployeeHolidayTransfer, "ToolStripMenuItemEmployeeHolidayTransfer")
             '
-            'ToolStripMenuItemEmployeeLeavesEarned
+            'ToolStripMenuItemEmployeeLeaveEarned
             '
-            resources.ApplyResources(Me.ToolStripMenuItemEmployeeLeavesEarned, "ToolStripMenuItemEmployeeLeavesEarned")
-            Me.ToolStripMenuItemEmployeeLeavesEarned.Name = "ToolStripMenuItemEmployeeLeavesEarned"
+            resources.ApplyResources(Me.ToolStripMenuItemEmployeeLeaveEarned, "ToolStripMenuItemEmployeeLeaveEarned")
+            Me.ToolStripMenuItemEmployeeLeaveEarned.Name = "ToolStripMenuItemEmployeeLeaveEarned"
             '
             'ToolStripMenuItemClosing
             '
@@ -1703,6 +1703,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents ToolStripMenuItemDiagnosticSamples As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemClinicSamples As ToolStripMenuItem
         Friend WithEvents ToolStripMenuItemOtherLab As ToolStripMenuItem
-        Friend WithEvents ToolStripMenuItemEmployeeLeavesEarned As ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItemEmployeeLeaveEarned As ToolStripMenuItem
     End Class
 End NameSpace

@@ -563,7 +563,6 @@
     <Compile Include="PresentationLayer\Presenters\BasicPresenterHelper.vb" />
     <Compile Include="PresentationLayer\Presenters\DateRangePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeeAbsencePresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\EmployeeLeaveEarnedPresenterX.vb" />
     <Compile Include="PresentationLayer\Presenters\EmployeeLeaveEarnedPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\ClinicLabSamplePresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\IGroup\IbLabSamplePresenter.vb" />
@@ -2088,6 +2087,9 @@
     <EmbeddedResource Include="PresentationLayer\Views\Forms\EmployeeLeaveApprovalEntry.resx">
       <DependentUpon>EmployeeLeaveApprovalEntry.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\Views\Forms\EmployeeLeaveEarnedEntry.resx">
+      <DependentUpon>EmployeeLeaveEarnedEntry.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\Views\Forms\EmployeeLeaveEarnedEntryX.resx">
       <DependentUpon>EmployeeLeaveEarnedEntryX.vb</DependentUpon>
     </EmbeddedResource>
@@ -2809,11 +2811,11 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <None Include="app.config" />
     <None Include="app-ISP-SERVERNEW.config" />
     <None Include="app-ibn-server-test.config" />
     <None Include="app-Isp-Server - Copy.config" />
-    <None Include="app-Ispadmin2 - Copy.config" />
+    <None Include="app-Ispadmin2.config" />
+    <None Include="app.config" />
     <None Include="app-Marcelo-Dell.config" />
     <None Include="app-Isp-Server.config" />
     <None Include="appx.config" />

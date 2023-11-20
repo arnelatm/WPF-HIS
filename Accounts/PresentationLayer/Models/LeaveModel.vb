@@ -6,20 +6,21 @@
     ''' </summary>
     Public Class LeaveModel
 
-        Public Property Cumulative As Boolean
-        Public Property Errors As List(Of String)
-        Public Property Holiday As Boolean
-        Public Property IdNo As Int16
-        Public Property LeaveAllowed As Decimal
-        Public Property LeaveCode As String
-        Public Property LeaveCycle As String
-        Public Property LeaveName As String
-        Public Property LeaveNameAra As String
-        Public Property MaxCarryOver As Decimal
-        Public Property MaxLimit As Decimal
-        Public Property NoMaxLimit As Boolean
-        Public Property Notes As String
+        Public Property Earnable As Boolean
         Public Property PaidPercent As Decimal
+        Public Property Notes As String
+        Public Property NoMaxLimit As Boolean
+        Public Property MaxLimit As Decimal
+        Public Property MaxCarryOver As Decimal
+        Public Property LeaveNameAra As String
+        Public Property LeaveName As String
+        Public Property LeaveCycle As String
+        Public Property LeaveCode As String
+        Public Property LeaveAllowed As Decimal
+        Public Property IdNo As Int16
+        Public Property Holiday As Boolean
+        Public Property Errors As List(Of String)
+        Public Property Cumulative As Boolean
 
     End Class
 

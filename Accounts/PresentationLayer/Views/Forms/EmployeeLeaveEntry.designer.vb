@@ -496,7 +496,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboLeaveStatus.DefaultValue = Nothing
             Me.cboLeaveStatus.DisplayMember = "Name"
             Me.cboLeaveStatus.DisplayOnly = True
-            Me.cboLeaveStatus.DropDownHeight = 21
+            Me.cboLeaveStatus.DropDownHeight = 24
             Me.cboLeaveStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboLeaveStatus.Editable = True
             Me.cboLeaveStatus.EditingMode = True
@@ -549,7 +549,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboenteredBy.DefaultValue = Nothing
             Me.cboenteredBy.DisplayMember = "Name"
             Me.cboenteredBy.DisplayOnly = True
-            Me.cboenteredBy.DropDownHeight = 21
+            Me.cboenteredBy.DropDownHeight = 24
             Me.cboenteredBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboenteredBy.Editable = True
             Me.cboenteredBy.EditingMode = True
@@ -643,8 +643,8 @@ Namespace PresentationLayer.Views.Forms
             '
             Me.dgvApprovalIdNo.BegFindValue = Nothing
             Me.dgvApprovalIdNo.DataPropertyName = "ApprovalIdNo"
-        DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
+            DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
+            DataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black
         Me.dgvApprovalIdNo.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgvApprovalIdNo.EditingMode = false
         Me.dgvApprovalIdNo.EndFindValue = Nothing

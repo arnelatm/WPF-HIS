@@ -87,17 +87,6 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 chkCumulative.Checked = Value
-                'If Value Then
-                '    txtMaxLimit.DisplayOnly = False
-                '    chkNoMaxLimit.DisplayOnly = False
-                '    txtMaxCarryOver.DisplayOnly = False
-                'Else
-                '    txtMaxLimit.DisplayOnly = True
-                '    chkNoMaxLimit.DisplayOnly = True
-                '    txtMaxCarryOver.DisplayOnly = True
-                'End If
-                'chkNoMaxLimit.Refresh()
-                'txtMaxCarryOver.Refresh()
             End Set
         End Property
 
@@ -106,10 +95,7 @@ Namespace PresentationLayer.Views.Forms
                 Return txtMaxCarryOver.GetDecimalValue()
             End Get
             Set
-                'Dim oldDisplayOnly = txtMaxCarryOver.DisplayOnly
-                'txtMaxCarryOver.DisplayOnly = False
                 txtMaxCarryOver.Text = Value
-                'txtMaxCarryOver.DisplayOnly = oldDisplayOnly
             End Set
         End Property
 
@@ -118,10 +104,7 @@ Namespace PresentationLayer.Views.Forms
                 Return txtMaxLimit.GetDecimalValue()
             End Get
             Set
-                'Dim oldDisplayOnly As Boolean = txtMaxLimit.DisplayOnly
-                'txtMaxLimit.DisplayOnly = False
                 txtMaxLimit.Text = Value
-                'txtMaxLimit.DisplayOnly = oldDisplayOnly
             End Set
         End Property
 
@@ -130,16 +113,7 @@ Namespace PresentationLayer.Views.Forms
                 Return chkNoMaxLimit.Checked
             End Get
             Set
-                'Dim oldDisplayOnly As Boolean = chkNoMaxLimit.DisplayOnly
-                'chkNoMaxLimit.DisplayOnly = False
                 chkNoMaxLimit.Checked = Value
-                'if Not btnEdit.Enabled then
-                '    if Value Then
-                '        MaxLimit = 0
-                '    End If
-                'End If
-                'chkNoMaxLimit.DisplayOnly = oldDisplayOnly
-                'chkNoMaxLimit.Refresh()
             End Set
         End Property
 
@@ -158,6 +132,15 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set
                 chkHoliday.Checked = Value
+            End Set
+        End Property
+
+        Public Property Earnable As Boolean Implements ILeaveView.Earnable
+            Get
+                Return chkEarnable.Checked
+            End Get
+            Set
+                chkEarnable.Checked = Value
             End Set
         End Property
 
@@ -236,6 +219,10 @@ Namespace PresentationLayer.Views.Forms
                     chkCumulative.Enabled = True
                 End If
             End If
+        End Sub
+
+        Private Sub CbCumulativeValueChanged(sender As Object, e As EventArgs) Handles chkCumulative.CheckedChanged
+
         End Sub
     End Class
 

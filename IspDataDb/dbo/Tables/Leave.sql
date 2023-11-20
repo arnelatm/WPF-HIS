@@ -12,9 +12,12 @@
     [NoMaxLimit]    BIT            NULL,
     [MaxLimit]      DECIMAL (7, 2) NULL,
     [Notes]         NVARCHAR (200) NULL,
+    [Earnable]      BIT            NULL,
     [DateTimeStamp] ROWVERSION     NULL,
     CONSTRAINT [PK_AbsenceLeave] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

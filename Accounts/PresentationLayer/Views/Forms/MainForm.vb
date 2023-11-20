@@ -1312,8 +1312,8 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of ReportSelectorForm, ReportSelectorPresenter(Of ReportSelectorModel), String)($"IGLAB")
         End Sub
 
-        Private Sub ToolStripMenuItemEmployeeLeavesEarned_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeLeavesEarned.Click
-            'RunForm(Of EmployeeLeaveEarnedEntry, EmployeeLeaveEarnedPresenter(Of EmployeeLeaveEarnedModel))()
+        Private Sub ToolStripMenuItemEmployeeLeaveEarned_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeLeaveEarned.Click
+            RunForm(Of EmployeeLeaveEarnedEntry, EmployeeLeaveEarnedPresenter(Of EmployeeLeaveEarnedModel))()
         End Sub
 
     End Class
