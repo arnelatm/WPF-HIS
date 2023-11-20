@@ -2200,6 +2200,10 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         dataTarget = GetEnumData(Of TE)()
     End Sub
 
+    Public Sub CreateEnumDataT(Of TE)(ByRef dataTarget As Object)
+        dataTarget = GetEnumDataT(Of TE)()
+    End Sub
+
     Private Function GetEnumData(Of TE)()
         Dim dataList As New List(Of Lookup.LookupData)
         For Each c In [Enum].GetValues(GetType(TE))
@@ -2214,6 +2218,21 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Function
 
     Private Function GetEnumDataT(Of TE)()
+        Dim dt As New DataTable
+        CreateDataTable(dt, {{"IdNo", GetType(Int16)},
+                             {"Code", GetType(String)},
+                             {"Name", GetType(String)}})
+        For Each c In [Enum].GetValues(GetType(TE))
+            Dim workRow As DataRow = dt.NewRow()
+            workRow("IdNo") = CInt(c)
+            workRow("Code") = EnumToCode(c)
+            workRow("Name") = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
+            dt.Rows.Add(workRow)
+        Next
+        Return dt
+    End Function
+
+    Private Function GetEnumDataT2(Of TE)()
         Dim dataList As New List(Of Lookup.LookupData)
         For Each c In [Enum].GetValues(GetType(TE))
             Dim data As New Lookup.LookupData With {

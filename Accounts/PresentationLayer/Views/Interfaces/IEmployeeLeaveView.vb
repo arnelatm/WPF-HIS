@@ -24,8 +24,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property Disapprove As Boolean
         Property ApprovalNote As String
         Property ApprovalHistory As List(Of EmployeeLeaveApprovalHistoryView)
-        Property Users As List(Of Lookup.LookupData)
-        Property LeaveStatusList As List(Of Lookup.LookupData)
+        Property Users As DataTable
+        Property LeaveStatusList As DataTable
     End Interface
 
 End Namespace

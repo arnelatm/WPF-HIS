@@ -145,8 +145,8 @@ Namespace PresentationLayer.Views.Forms
         Public Property Disapprove As Boolean Implements IEmployeeLeaveView.Disapprove
         Public Property ApprovalNote As String Implements IEmployeeLeaveView.ApprovalNote
         Public Property Approve As Boolean Implements IEmployeeLeaveView.Approve
-        Public Property Users As List(Of Lookup.LookupData) Implements IEmployeeLeaveView.Users
-        Public Property LeaveStatusList As List(Of Lookup.LookupData) Implements IEmployeeLeaveView.LeaveStatusList
+        Public Property Users As DataTable Implements IEmployeeLeaveView.Users
+        Public Property LeaveStatusList As DataTable Implements IEmployeeLeaveView.LeaveStatusList
 
         Public Property ApprovalHistory As List(Of EmployeeLeaveApprovalHistoryView) Implements IEmployeeLeaveView.ApprovalHistory
             Get
