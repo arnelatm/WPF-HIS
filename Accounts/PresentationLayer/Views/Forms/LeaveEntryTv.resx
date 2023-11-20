@@ -137,10 +137,94 @@
   <data name="TableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
+  <data name="CLabel1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="CLabel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="CLabel1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 10pt</value>
+  </data>
+  <data name="CLabel1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="CLabel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>210, 224</value>
+  </data>
+  <data name="CLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="CLabel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>89, 17</value>
+  </data>
+  <data name="CLabel1.TabIndex" type="System.Int32, mscorlib">
+    <value>293</value>
+  </data>
+  <data name="CLabel1.Text" xml:space="preserve">
+    <value>Earnable?</value>
+  </data>
+  <data name="CLabel1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.Name" xml:space="preserve">
+    <value>CLabel1</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.Parent" xml:space="preserve">
+    <value>TableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;CLabel1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="chkEarnable.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="chkEarnable.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="chkEarnable.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9pt</value>
+  </data>
+  <data name="chkEarnable.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkEarnable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>210, 243</value>
+  </data>
+  <data name="chkEarnable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="chkEarnable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>24, 24</value>
+  </data>
+  <data name="chkEarnable.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="chkEarnable.Text" xml:space="preserve">
+    <value> </value>
+  </data>
+  <data name="chkEarnable.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleRight</value>
+  </data>
+  <data name="&gt;&gt;chkEarnable.Name" xml:space="preserve">
+    <value>chkEarnable</value>
+  </data>
+  <data name="&gt;&gt;chkEarnable.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CCheckBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;chkEarnable.Parent" xml:space="preserve">
+    <value>TableLayoutPanel1</value>
+  </data>
+  <data name="&gt;&gt;chkEarnable.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="lblLeaveCycle.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblLeaveCycle.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
@@ -175,7 +259,7 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;lblLeaveCycle.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="lblHoliday.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -187,7 +271,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblHoliday.Location" type="System.Drawing.Point, System.Drawing">
-    <value>293, 1</value>
+    <value>301, 1</value>
   </data>
   <data name="lblHoliday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -214,7 +298,7 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;lblHoliday.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="chkHoliday.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -229,7 +313,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkHoliday.Location" type="System.Drawing.Point, System.Drawing">
-    <value>293, 20</value>
+    <value>301, 20</value>
   </data>
   <data name="chkHoliday.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -238,7 +322,7 @@
     <value>24, 24</value>
   </data>
   <data name="chkHoliday.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="chkHoliday.Text" xml:space="preserve">
     <value> </value>
@@ -256,7 +340,7 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;chkHoliday.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="lblNotes.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -268,7 +352,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 268</value>
+    <value>1, 269</value>
   </data>
   <data name="lblNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -295,7 +379,7 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;lblNotes.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="txtNotes.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -304,7 +388,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtNotes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 287</value>
+    <value>1, 288</value>
   </data>
   <data name="txtNotes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -316,7 +400,7 @@
     <value>416, 93</value>
   </data>
   <data name="txtNotes.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;txtNotes.Name" xml:space="preserve">
     <value>txtNotes</value>
@@ -328,13 +412,13 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;txtNotes.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="txtMaxLimit.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtMaxLimit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>293, 242</value>
+    <value>301, 243</value>
   </data>
   <data name="txtMaxLimit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -343,7 +427,7 @@
     <value>62, 23</value>
   </data>
   <data name="txtMaxLimit.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;txtMaxLimit.Name" xml:space="preserve">
     <value>txtMaxLimit</value>
@@ -355,7 +439,7 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;txtMaxLimit.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="lblMaxLimit.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -367,7 +451,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMaxLimit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>293, 223</value>
+    <value>301, 224</value>
   </data>
   <data name="lblMaxLimit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -394,13 +478,13 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;lblMaxLimit.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="txtMaxCarryOver.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtMaxCarryOver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>293, 197</value>
+    <value>301, 197</value>
   </data>
   <data name="txtMaxCarryOver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -409,7 +493,7 @@
     <value>62, 23</value>
   </data>
   <data name="txtMaxCarryOver.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;txtMaxCarryOver.Name" xml:space="preserve">
     <value>txtMaxCarryOver</value>
@@ -421,7 +505,7 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;txtMaxCarryOver.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="lblMaxCarryOver.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -433,7 +517,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMaxCarryOver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>293, 178</value>
+    <value>301, 178</value>
   </data>
   <data name="lblMaxCarryOver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -460,7 +544,7 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;lblMaxCarryOver.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="chkCumulative.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -484,7 +568,7 @@
     <value>24, 24</value>
   </data>
   <data name="chkCumulative.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="chkCumulative.Text" xml:space="preserve">
     <value> </value>
@@ -502,7 +586,7 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;chkCumulative.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="lblCumulative.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -520,13 +604,13 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="lblCumulative.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 17</value>
+    <value>85, 17</value>
   </data>
   <data name="lblCumulative.TabIndex" type="System.Int32, mscorlib">
     <value>276</value>
   </data>
   <data name="lblCumulative.Text" xml:space="preserve">
-    <value>Cumulative</value>
+    <value>Cumulative?</value>
   </data>
   <data name="lblCumulative.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -541,13 +625,13 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;lblCumulative.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="txtPaidPercent.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtPaidPercent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>293, 153</value>
+    <value>301, 153</value>
   </data>
   <data name="txtPaidPercent.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -556,7 +640,7 @@
     <value>62, 23</value>
   </data>
   <data name="txtPaidPercent.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;txtPaidPercent.Name" xml:space="preserve">
     <value>txtPaidPercent</value>
@@ -568,7 +652,7 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;txtPaidPercent.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="lblPaidPercent.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -580,7 +664,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPaidPercent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>293, 134</value>
+    <value>301, 134</value>
   </data>
   <data name="lblPaidPercent.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -607,7 +691,7 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;lblPaidPercent.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="txtLeaveAllowed.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -622,7 +706,7 @@
     <value>62, 23</value>
   </data>
   <data name="txtLeaveAllowed.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;txtLeaveAllowed.Name" xml:space="preserve">
     <value>txtLeaveAllowed</value>
@@ -634,7 +718,7 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;txtLeaveAllowed.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>15</value>
   </data>
   <data name="lblLeaveAllowed.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -673,7 +757,7 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;lblLeaveAllowed.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>16</value>
   </data>
   <data name="txtLeaveName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -688,7 +772,7 @@
     <value>416, 23</value>
   </data>
   <data name="txtLeaveName.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;txtLeaveName.Name" xml:space="preserve">
     <value>txtLeaveName</value>
@@ -700,7 +784,7 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;txtLeaveName.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>19</value>
   </data>
   <data name="txtLeaveNameAra.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -718,7 +802,7 @@
     <value>416, 23</value>
   </data>
   <data name="txtLeaveNameAra.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;txtLeaveNameAra.Name" xml:space="preserve">
     <value>txtLeaveNameAra</value>
@@ -730,7 +814,7 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;txtLeaveNameAra.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>17</value>
   </data>
   <data name="lblNameAra.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -769,7 +853,7 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;lblNameAra.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>18</value>
   </data>
   <data name="lblName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -808,7 +892,7 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;lblName.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>20</value>
   </data>
   <data name="txtLeaveCode.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -823,7 +907,7 @@
     <value>62, 23</value>
   </data>
   <data name="txtLeaveCode.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;txtLeaveCode.Name" xml:space="preserve">
     <value>txtLeaveCode</value>
@@ -835,7 +919,7 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;txtLeaveCode.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>21</value>
   </data>
   <data name="TxtIdNo.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
@@ -850,7 +934,10 @@
     <value>62, 23</value>
   </data>
   <data name="TxtIdNo.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
+  </data>
+  <data name="TxtIdNo.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="&gt;&gt;TxtIdNo.Name" xml:space="preserve">
     <value>TxtIdNo</value>
@@ -862,7 +949,7 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;TxtIdNo.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>22</value>
   </data>
   <data name="lblIdNo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -883,7 +970,7 @@
     <value>47, 17</value>
   </data>
   <data name="lblIdNo.TabIndex" type="System.Int32, mscorlib">
-    <value>150</value>
+    <value>0</value>
   </data>
   <data name="lblIdNo.Text" xml:space="preserve">
     <value>ID No.</value>
@@ -901,7 +988,7 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;lblIdNo.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>23</value>
   </data>
   <data name="lblCode.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -940,7 +1027,7 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;lblCode.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>24</value>
   </data>
   <data name="lblNoMaxLimit.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -952,7 +1039,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblNoMaxLimit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 223</value>
+    <value>1, 224</value>
   </data>
   <data name="lblNoMaxLimit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -961,7 +1048,7 @@
     <value>129, 17</value>
   </data>
   <data name="lblNoMaxLimit.TabIndex" type="System.Int32, mscorlib">
-    <value>289</value>
+    <value>11</value>
   </data>
   <data name="lblNoMaxLimit.Text" xml:space="preserve">
     <value>No Maximum Limit?</value>
@@ -979,7 +1066,7 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;lblNoMaxLimit.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>25</value>
   </data>
   <data name="chkNoMaxLimit.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -994,7 +1081,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkNoMaxLimit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 242</value>
+    <value>1, 243</value>
   </data>
   <data name="chkNoMaxLimit.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -1003,7 +1090,7 @@
     <value>24, 24</value>
   </data>
   <data name="chkNoMaxLimit.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>12</value>
   </data>
   <data name="chkNoMaxLimit.Text" xml:space="preserve">
     <value> </value>
@@ -1021,7 +1108,7 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;chkNoMaxLimit.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>26</value>
   </data>
   <data name="cboLeaveCycle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1042,7 +1129,7 @@
     <value>207, 24</value>
   </data>
   <data name="cboLeaveCycle.TabIndex" type="System.Int32, mscorlib">
-    <value>291</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;cboLeaveCycle.Name" xml:space="preserve">
     <value>cboLeaveCycle</value>
@@ -1054,7 +1141,7 @@
     <value>TableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;cboLeaveCycle.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>27</value>
   </data>
   <data name="TableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 18</value>
@@ -1081,7 +1168,7 @@
     <value>0</value>
   </data>
   <data name="TableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="lblLeaveCycle" Row="10" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblHoliday" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="chkHoliday" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblNotes" Row="14" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtNotes" Row="15" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="txtMaxLimit" Row="13" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblMaxLimit" Row="12" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txtMaxCarryOver" Row="11" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblMaxCarryOver" Row="10" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="chkCumulative" Row="11" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblCumulative" Row="10" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txtPaidPercent" Row="9" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblPaidPercent" Row="8" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txtLeaveAllowed" Row="9" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblLeaveAllowed" Row="8" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="txtLeaveNameAra" Row="7" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="lblNameAra" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="txtLeaveName" Row="5" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="lblName" Row="4" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="txtLeaveCode" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="TxtIdNo" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblIdNo" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblCode" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblNoMaxLimit" Row="12" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="chkNoMaxLimit" Row="13" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboLeaveCycle" Row="11" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,20,Percent,30" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="CLabel1" Row="12" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="chkEarnable" Row="13" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblLeaveCycle" Row="10" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblHoliday" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="chkHoliday" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblNotes" Row="14" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtNotes" Row="15" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="txtMaxLimit" Row="13" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblMaxLimit" Row="12" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txtMaxCarryOver" Row="11" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblMaxCarryOver" Row="10" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="chkCumulative" Row="11" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblCumulative" Row="10" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="txtPaidPercent" Row="9" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="lblPaidPercent" Row="8" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="txtLeaveAllowed" Row="9" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblLeaveAllowed" Row="8" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="txtLeaveNameAra" Row="7" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="lblNameAra" Row="6" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="txtLeaveName" Row="5" RowSpan="1" Column="0" ColumnSpan="3" /&gt;&lt;Control Name="lblName" Row="4" RowSpan="1" Column="0" ColumnSpan="2" /&gt;&lt;Control Name="txtLeaveCode" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="TxtIdNo" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblIdNo" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="lblCode" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="lblNoMaxLimit" Row="12" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="chkNoMaxLimit" Row="13" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="cboLeaveCycle" Row="11" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Percent,22,Percent,28" /&gt;&lt;Rows Styles="AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0,AutoSize,0" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="floDataDisplay.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1096,7 +1183,7 @@
     <value>15, 15, 15, 15</value>
   </data>
   <data name="floDataDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>453, 414</value>
+    <value>453, 412</value>
   </data>
   <data name="floDataDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>149</value>
@@ -1126,7 +1213,7 @@
     <value>1</value>
   </data>
   <data name="SplitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>786, 414</value>
+    <value>786, 412</value>
   </data>
   <data name="SplitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>323</value>
@@ -1143,8 +1230,11 @@
   <data name="&gt;&gt;SplitContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="FormTreeView.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
+  </data>
   <data name="FormTreeView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>323, 414</value>
+    <value>323, 412</value>
   </data>
   <data name="&gt;&gt;FormTreeView.Name" xml:space="preserve">
     <value>FormTreeView</value>
@@ -1166,7 +1256,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACG
-        CQAAAk1TRnQBSQFMAgEBAgEAATgBAAFoAQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        CQAAAk1TRnQBSQFMAgEBAgEAATgBAAGoAQABEAEAARABAAT/AQkBEAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABQAMAARADAAEBAQABCAYAAQQYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA

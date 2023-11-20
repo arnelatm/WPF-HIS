@@ -2,6 +2,8 @@
 Imports AATM.Common.DataLayer.AdoNet
 Imports AATM.DataLayer
 Imports AATM.DataLayer.AdoNet
+Imports AATM.Libraries.GlobalFuncNSub
+
 
 Namespace DataLayer.AdoNet
     ' Data access object for EmployeeLeaveEarned
@@ -82,6 +84,16 @@ Namespace DataLayer.AdoNet
                                     "@Reason", EmployeeLeaveEarned.Reason,
                                     "@StartDate", EmployeeLeaveEarned.StartDate
                                 }
+        End Function
+
+        Public Function GetOverlappingEarnedLeave(employeeIdNo As Int32, beginningDate As Date, endingDate As Date, leaveIdNo As Int16) As EmployeeLeaveEarned
+            Dim sql As String
+            sql = "Select " & FieldList & " From EmployeeLeaveEarned " &
+                  "where EmployeeIdNo = @employeeIdNo and " &
+                  "(@BeginningDate <= EndDate) and (@EndingDate >= StartDate) and LeaveIdNo = @leaveIdNo"
+            Dim params() As Object = {"@employeeIdNo", employeeIdNo, "@BeginningDate", beginningDate, "@EndingDate", endingDate, "@LeaveIdNo", leaveIdNo}
+            Dim data = Db.Read(sql, Make, params).FirstOrDefault()
+            Return data
         End Function
 
     End Class

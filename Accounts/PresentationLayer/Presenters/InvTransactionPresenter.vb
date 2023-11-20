@@ -816,7 +816,6 @@ Namespace PresentationLayer.Presenters
 
         Private Sub OnPostData(idNo As Int32)
             Dim okToPost As Boolean = False
-            Dim retVal As Boolean
             If View.InventoryAction = EnumToCode(InventoryActionSelection.Request) Then
                 Messaging.Show(True, "MsgNonPostableEntry")
             Else

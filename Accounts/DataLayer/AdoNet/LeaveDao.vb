@@ -15,6 +15,7 @@ Namespace DataLayer.AdoNet
 
         Private Const FieldList =
                     "Cumulative," &
+                    "Earnable," &
                     "Holiday," &
                     "IdNo," &
                     "LeaveAllowed," &
@@ -41,6 +42,7 @@ Namespace DataLayer.AdoNet
             Dim sql As String =
                     " UPDATE [Leave] SET " &
                     " Cumulative = @Cumulative," &
+                    " Earnable = @Earnable," &
                     " Holiday = @Holiday," &
                     " LeaveAllowed = @LeaveAllowed," &
                     " LeaveCode = @LeaveCode," &
@@ -59,8 +61,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef leave As Leave) As Integer Implements iDao(Of Leave).AddRecord
             Dim sql As String =
                     " INSERT INTO [Leave] " &
-                    " (Cumulative,Holiday,LeaveAllowed,LeaveCode,LeaveCycle,LeaveName,LeaveNameAra,MaxCarryOver,MaxLimit,NoMaxLimit,Notes,PaidPercent)" &
-                    " VALUES (@Cumulative,@Holiday,@LeaveAllowed,@LeaveCode,@LeaveCycle,@LeaveName,@LeaveNameAra,@MaxCarryOver,@MaxLimit,@NoMaxLimit,@Notes,@PaidPercent)"
+                    " (Cumulative,Earnable,Holiday,LeaveAllowed,LeaveCode,LeaveCycle,LeaveName,LeaveNameAra,MaxCarryOver,MaxLimit,NoMaxLimit,Notes,PaidPercent)" &
+                    " VALUES (@Cumulative,@Earnable,@Holiday,@LeaveAllowed,@LeaveCode,@LeaveCycle,@LeaveName,@LeaveNameAra,@MaxCarryOver,@MaxLimit,@NoMaxLimit,@Notes,@PaidPercent)"
             Return Db.Insert(sql, Take(leave))
         End Function
 
@@ -68,6 +70,7 @@ Namespace DataLayer.AdoNet
                                     Function(reader) _
             New Leave() With {
             .Cumulative = Extensions.AsBool(reader("Cumulative")),
+            .Earnable = Extensions.AsBool(reader("Earnable")),
             .Holiday = Extensions.AsBool(reader("Holiday")),
             .IdNo = Extensions.AsId(Of Int16)(reader("IdNo")),
             .LeaveAllowed = Extensions.AsDecimal(reader("LeaveAllowed")),
@@ -85,6 +88,7 @@ Namespace DataLayer.AdoNet
         Private Function Take(leave As Leave) As Object()
             Return New Object() {
                                     "@Cumulative", leave.Cumulative,
+                                    "@Earnable", leave.Earnable,
                                     "@Holiday", leave.Holiday,
                                     "@IdNo", leave.IdNo,
                                     "@LeaveAllowed", leave.LeaveAllowed,

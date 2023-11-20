@@ -389,7 +389,7 @@ Public Class CtComboBox
         EndUpdate()
     End Sub
 
-    Private Sub caComboBox_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
+    Private Sub ctComboBox_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
         HandleMouseUp(sender, e)
     End Sub
 
@@ -474,6 +474,30 @@ Public Class CtComboBox
             'End If
         End If
     End Function
+
+    Public Function GetValue()
+        Dim fldName As String
+        If SelectedItem IsNot Nothing Then
+
+            'Dim col As Int16 = DirectCast(DataSource, System.Data.DataTable).Columns(ValueMember).Ordinal
+            Return DirectCast(SelectedItem, System.Data.DataRowView).Row(ValueMember)
+            'If ValueMember.ToLower() = "idno" Then
+            '    Dim col As Int16 = DirectCast(DataSource, System.Data.DataTable).Columns("").Ordinal
+            '    Return CType(SelectedItem, DataRow)(col)
+            'ElseIf ValueMember.ToLower() = "name" Then
+            '    Return CType(SelectedItem, DataRow)("Name")
+            'ElseIf ValueMember.ToLower() = "code" Then
+            '    Return CType(SelectedItem, DataRow)("Code")
+            'ElseIf ValueMember.ToLower() = "index" Then
+            '    Return CType(SelectedItem, DataRow)("Index")
+            'Else
+            '    Return Text
+            'End If
+        Else
+            Return Nothing
+        End If
+    End Function
+
 
     'Public Function GetNullableValue(Of T)()
     '    Dim x = GetValue()
@@ -771,7 +795,7 @@ Public Class CtComboBox
         Return MyBase.ProcessCmdKey(msg, keyData)
     End Function
 
-    Private Sub caCombobox_Leave(sender As Object, e As EventArgs) Handles Me.Leave
+    Private Sub ctCombobox_Leave(sender As Object, e As EventArgs) Handles Me.Leave
         If SelectedIndex < 0 Then
             If Text = "" Then
                 'allow empty strings
@@ -869,6 +893,14 @@ Public Class CtComboBox
     '    End If
     'End Sub
 
+    Public Function GetNullableValue(Of T)()
+        Dim x = GetValue()
+        If x Is Nothing Then
+            Return Nothing
+        Else
+            Return CType(x, T)
+        End If
+    End Function
 #End Region
 
 #Region "FindableControl"

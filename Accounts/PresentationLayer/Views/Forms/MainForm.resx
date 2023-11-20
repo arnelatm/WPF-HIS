@@ -4399,16 +4399,16 @@
   <data name="ToolStripMenuItemEmployeeHolidayTransfer.Text" xml:space="preserve">
     <value>Bulk Employee Holiday Transfer</value>
   </data>
-  <data name="ToolStripMenuItemEmployeeLeavesEarned.Enabled" type="System.Boolean, mscorlib">
+  <data name="ToolStripMenuItemEmployeeLeaveEarned.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="ToolStripMenuItemEmployeeLeavesEarned.ShowShortcutKeys" type="System.Boolean, mscorlib">
+  <data name="ToolStripMenuItemEmployeeLeaveEarned.ShowShortcutKeys" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="ToolStripMenuItemEmployeeLeavesEarned.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ToolStripMenuItemEmployeeLeaveEarned.Size" type="System.Drawing.Size, System.Drawing">
     <value>240, 22</value>
   </data>
-  <data name="ToolStripMenuItemEmployeeLeavesEarned.Text" xml:space="preserve">
+  <data name="ToolStripMenuItemEmployeeLeaveEarned.Text" xml:space="preserve">
     <value>Employee Leaves Earned</value>
   </data>
   <data name="ToolStripMenuItemHR.Size" type="System.Drawing.Size, System.Drawing">
@@ -7285,10 +7285,10 @@
   <data name="&gt;&gt;ToolStripMenuItemEmployeeHolidayTransfer.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItemEmployeeLeavesEarned.Name" xml:space="preserve">
-    <value>ToolStripMenuItemEmployeeLeavesEarned</value>
+  <data name="&gt;&gt;ToolStripMenuItemEmployeeLeaveEarned.Name" xml:space="preserve">
+    <value>ToolStripMenuItemEmployeeLeaveEarned</value>
   </data>
-  <data name="&gt;&gt;ToolStripMenuItemEmployeeLeavesEarned.Type" xml:space="preserve">
+  <data name="&gt;&gt;ToolStripMenuItemEmployeeLeaveEarned.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripMenuItemClosing.Name" xml:space="preserve">

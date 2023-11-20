@@ -4,6 +4,8 @@ Namespace PresentationLayer.Views.Interfaces
 
     Public Interface ILeaveView
         Inherits IView
+
+        Property Earnable As Boolean
         Property IdNo As Int16
         Property LeaveCode As String
         Property LeaveCycle As String

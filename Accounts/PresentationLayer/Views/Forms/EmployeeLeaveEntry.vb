@@ -245,7 +245,6 @@ Namespace PresentationLayer.Views.Forms
                 dgvApprovedBy.DisplayOnly = True
                 dgvApprovalIdNo.DisplayOnly = True
                 dgvApprovalDate.DisplayOnly = True
-                dgvApprovedBy.DisplayOnly = True
                 dgvItemIdNo.DisplayOnly = True
             End With
             ResumeLayout()
