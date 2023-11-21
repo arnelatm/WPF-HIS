@@ -123,13 +123,13 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateEnumDataSource(Of MaleFemaleSelection)("Gender")
-            CreateEnumDataSource(Of MaritalStatusSelection)("MaritalStatus")
-            CreateEnumDataSource(Of PayrollPaymentMethodSelection)("PaymentMethod")
-            CreateEnumDataSource(Of SponsorTypeSelection)("SponsorType")
-            CreateEnumDataSource(Of BloodTypeSelection)("BloodType")
-            CreateListDataSource("List", "Title", "NameTitle")
-            CreateEnumData(Of PayRateUnitSelection)(View.Unit)
+            CreateEnumDataSourceT(Of MaleFemaleSelection)("Gender")
+            CreateEnumDataSourceT(Of MaritalStatusSelection)("MaritalStatus")
+            CreateEnumDataSourceT(Of PayrollPaymentMethodSelection)("PaymentMethod")
+            CreateEnumDataSourceT(Of SponsorTypeSelection)("SponsorType")
+            CreateEnumDataSourceT(Of BloodTypeSelection)("BloodType")
+            'CreateListDataSourceT("List", "Title", "NameTitle")
+            CreateEnumDataT(Of PayRateUnitSelection)(View.Unit)
             MakeControlDataSources({New String() {"Bank", "BankIdNo", Nothing, Nothing},
                              New String() {"Country", "CountryCode", "CountryCode,CountryName", Nothing},
                              New String() {"Department", "DepartmentIdNo", Nothing, Nothing},
@@ -138,8 +138,9 @@ Namespace PresentationLayer.Presenters
                              New String() {"Religion", "ReligionIdNo", Nothing, Nothing},
                              New String() {"PayCycle", "PayCycleIdNo", Nothing, Nothing},
                              New String() {"PayGroup", "PayGroupIdNo", Nothing, Nothing},
+                             New String() {"List", "Title", "IdNo,ListName", Nothing},
                              New String() {"Employee", "SupervisorIdNo", Nothing, "Supervisor=1"}})
-
+            'New String() {"List", "Title", "ListCode,ListName", Nothing},
             MakeVarDataSources({New String() {"PayElement", "DeductionsByName", Nothing, "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"},
                                New String() {"PayElement", "EarningsByName", Nothing, "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"},
                                New String() {"PhoneType", "PhoneTypes", Nothing, Nothing},

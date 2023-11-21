@@ -33,6 +33,7 @@ Public Class CFormEntry
     Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
 
     Protected EditingMode As Boolean = False
+    Protected AddingMode As Boolean = False
     Private _displayOnly As Boolean = False
     Private _translatable As Boolean = True
     Private _firstLoadSwitch As UInt16 = 0
@@ -332,6 +333,9 @@ Public Class CFormEntry
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
+
+        AddingMode = True
+
         BeforeAdd()
         PublishClickedButton(ButtonClicked.Add)
 
@@ -471,6 +475,7 @@ Public Class CFormEntry
             End If
         End If
         EditingMode = False
+        AddingMode = False
     End Sub
 
     Protected Overridable Sub PublishClickedButton(buttonClicked As ButtonClicked)
@@ -515,6 +520,7 @@ Public Class CFormEntry
         End If
         PublishClickedButton(ButtonClicked.Undo)
         EditingMode = False
+        AddingMode = False
     End Sub
 
     Private Sub BtnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click

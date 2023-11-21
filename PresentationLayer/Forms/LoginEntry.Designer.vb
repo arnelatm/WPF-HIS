@@ -33,7 +33,7 @@ Partial Class LoginEntry
         Me.lblNewPassword = New System.Windows.Forms.Label()
         Me.floPasswordEntry = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.cboBranchIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboBranchIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.textNewPassword = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.textBoxPassword = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -258,7 +258,6 @@ Partial Class LoginEntry
         Me.cboBranchIdNo.OverrideDropDownStyleList = False
         Me.cboBranchIdNo.PreviousSearchTerm = Nothing
         Me.cboBranchIdNo.PropertySelector = Nothing
-        Me.cboBranchIdNo.ReadOnlyCombo = False
         Me.cboBranchIdNo.Size = New System.Drawing.Size(277, 24)
         Me.cboBranchIdNo.SuggestBoxHeight = 200
         Me.cboBranchIdNo.SuggestListOrderRule = Nothing
@@ -486,5 +485,5 @@ Partial Class LoginEntry
     Friend WithEvents btnCancel As Button
     Friend WithEvents btn_Login As Button
     Friend WithEvents CLabel1 As CLabel
-    Friend WithEvents cboBranchIdNo As CaComboBox
+    Friend WithEvents cboBranchIdNo As CtComboBox
 End Class

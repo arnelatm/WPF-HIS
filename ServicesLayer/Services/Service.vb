@@ -191,7 +191,9 @@ Namespace Services
                     End If
                 End If
             End If
-            Return GetRecords(lookupObj.TableName, lookupObj.SortKey, lookupObj.FieldsToShow, lookupObj.FilterKey)
+            Dim fieldList As String = String.Join(",", lookupObj.FieldsToShow)
+            Dim retVal As DataTable = GetDtRecords(lookupObj.TableName, lookupObj.SortKey, fieldList, lookupObj.FilterKey)
+            Return retVal
             'Dim lookupSetting = GlobalVariables.LookupSetting()
             'Return ProcessListLookup(data, lookupObj.FieldsToShow.Count())
         End Function

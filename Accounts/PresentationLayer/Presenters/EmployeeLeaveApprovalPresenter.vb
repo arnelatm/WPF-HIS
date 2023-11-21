@@ -1,9 +1,7 @@
-﻿Imports AATM.Accounts.BusinessLayer
-Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
-Imports AATM.Common
 Imports AATM.Libraries.GlobalFuncNSub
 Imports AATM.Libraries.MessagingLibrary
 
@@ -37,15 +35,17 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            MakeControlDataSources({New String() {"Employee", "EmployeeList", Nothing, Nothing},
-                             New String() {"User", "ApprovedBy", "IdNo,UserName", Nothing, Nothing},
-                             New String() {"Leave", "LeaveLst", Nothing, Nothing}
-                             })
-            CreateEnumData(Of LeaveStatusSelection)(View.LeaveStatusList)
+            MakeVarDataSources({New String() {"Employee", "EmployeeList", Nothing, Nothing},
+                                New String() {"Leave", "LeaveList", Nothing, Nothing}
+                               })
+
+            MakeControlDataSources({New String() {"User", "ApprovedBy", "IdNo,UserName", Nothing, Nothing}})
+
+            CreateEnumDataT(Of LeaveStatusSelection)(View.LeaveStatusList)
             If IsUserASupervisor() Then
-                CreateEnumData(Of SupervisorApprovalSelection)(View.ApprovalStatusList)
+                CreateEnumDataT(Of SupervisorApprovalSelection)(View.ApprovalStatusList)
             Else
-                CreateEnumData(Of LeaveApprovalSelection)(View.ApprovalStatusList)
+                CreateEnumDataT(Of LeaveApprovalSelection)(View.ApprovalStatusList)
             End If
         End Sub
 

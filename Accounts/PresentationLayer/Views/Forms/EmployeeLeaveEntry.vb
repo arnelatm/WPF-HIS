@@ -233,21 +233,21 @@ Namespace PresentationLayer.Views.Forms
                 .DataSource = bsEmployeeLeaveApprovalHistory
             End With
             With DataGridViewApprovalHistory.Columns
-                dgvApprovedBy.DataSource = Users
-                dgvApprovedBy.DisplayMember = "Name"
-                dgvApprovedBy.ValueMember = "IdNo"
-                dgvApprovedBy.DisplayStyleForCurrentCellOnly = True
                 dgvLeaveStatus.DataSource = LeaveStatusList
                 dgvLeaveStatus.DisplayOnly = True
                 dgvLeaveStatus.DisplayMember = "Name"
                 dgvLeaveStatus.ValueMember = "Code"
                 dgvLeaveStatus.DisplayStyleForCurrentCellOnly = True
-                dgvApprovedBy.DisplayOnly = True
                 dgvApprovalIdNo.DisplayOnly = True
                 dgvApprovalDate.DisplayOnly = True
                 dgvItemIdNo.DisplayOnly = True
             End With
             ResumeLayout()
+        End Sub
+
+        Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
+            bsEmployeeLeaveApprovalHistory.ResetBindings(False)
+            bsEmployeeLeaveApproval.ResetBindings(False)
         End Sub
 
     End Class

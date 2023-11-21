@@ -7,6 +7,7 @@ Namespace PresentationLayer.Views.Interfaces
         Inherits IView
         Property Active As Boolean
         Property ActualDutyHours As Decimal
+        Property ArAccountIdNo As Int16?
         Property BankAccountNo As String
         Property BankIdNo As Int16?
         Property Balance As Decimal
@@ -56,7 +57,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property Leaves As DataTable
         Property DeductionsByName As DataTable
         Property EarningsByName As DataTable
-        Property Unit As List(Of Lookup.LookupData)
+        Property Unit As DataTable
     End Interface
 
 End Namespace

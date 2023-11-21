@@ -109,6 +109,7 @@ Namespace DataLayer.AdoNet
                                 "ApprovalNote," &
                                 "ApprovalDate," &
                                 "ApprovedBy," &
+                                "ApprovedByName," &
                                 "IdNo," &
                                 "Status" &
                                 " FROM EmployeeLeaveApproval_View" &
@@ -123,6 +124,7 @@ Namespace DataLayer.AdoNet
             .ApprovalNote = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ApprovalNote")),
             .ApprovalDate = AATM.DataLayer.AdoNet.Extensions.AsNullableDateTime(reader("ApprovalDate")),
             .ApprovedBy = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32?)(reader("ApprovedBy")),
+            .ApprovedByName = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ApprovedByName")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .LeaveStatus = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveStatus"))
             }

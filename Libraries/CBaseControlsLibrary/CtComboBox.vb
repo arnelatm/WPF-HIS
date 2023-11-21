@@ -410,11 +410,14 @@ Public Class CtComboBox
             Dim data As DataTable = DirectCast(DataSource, DataTable)
             If data.Columns.Count = 0 Then
                 nCol = 0
+            ElseIf data.Columns.Count = 1 Then
+                nCol = 0
             Else
                 nCol = 1
             End If
+            PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(nCol).ToString())
         End If
-        PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(nCol).ToString())
+
     End Sub
 
     Private Shadows Sub OnParentChanged(ByVal sender As Object, ByVal e As EventArgs)
@@ -476,7 +479,6 @@ Public Class CtComboBox
     End Function
 
     Public Function GetValue()
-        Dim fldName As String
         If SelectedItem IsNot Nothing Then
 
             'Dim col As Int16 = DirectCast(DataSource, System.Data.DataTable).Columns(ValueMember).Ordinal
