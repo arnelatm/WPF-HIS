@@ -21,6 +21,12 @@ Namespace PresentationLayer.Presenters
             MyBase.New(itemView)
         End Sub
 
+        Public Sub CreateSpecialAccountDataSourceT(fieldName As String, specialAccountArray As String())
+            Dim filter As String
+            filter = Accounts.AccountHelpers.CreateSpecialAccountFilterKey(specialAccountArray)
+            MakeControlDataSources({New String() {"Account", fieldName, Nothing, filter}})
+        End Sub
+
         Public Sub CreateSpecialAccountDataSource(fieldName As String, specialAccountArray As String())
             Dim filter As String
             filter = Accounts.AccountHelpers.CreateSpecialAccountFilterKey(specialAccountArray)

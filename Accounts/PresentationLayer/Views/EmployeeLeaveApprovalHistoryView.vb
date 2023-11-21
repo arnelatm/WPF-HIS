@@ -9,6 +9,7 @@ Namespace PresentationLayer.Views
         Public Sub New()
         End Sub
 
+        Public Property ApprovedByName As String Implements IEmployeeLeaveApprovalHistoryView.ApprovedByName
         Public Property ApprovalIdNo As Int32? Implements IEmployeeLeaveApprovalHistoryView.ApprovalIdNo
         Public Property ApprovalNote As String Implements IEmployeeLeaveApprovalHistoryView.ApprovalNote
         Public Property ApprovalDate As Date? Implements IEmployeeLeaveApprovalHistoryView.ApprovalDate

@@ -16,12 +16,13 @@ Public Class EmployeeLeaveApprovalEntry
         ' Add any initialization after the InitializeComponent() call.
     End Sub
 
-    Public Property EmployeeList As List(Of Lookup.LookupData) Implements IEmployeeLeaveApprovalView.EmployeeList
+    Public Property EmployeeList As DataTable Implements IEmployeeLeaveApprovalView.EmployeeList
 
-    Public Property LeaveList As List(Of Lookup.LookupData) Implements IEmployeeLeaveApprovalView.LeaveList
+    Public Property LeaveList As DataTable Implements IEmployeeLeaveApprovalView.LeaveList
 
-    Public Property LeaveStatusList As List(Of Lookup.LookupData) Implements IEmployeeLeaveApprovalView.LeaveStatusList
-    Public Property ApprovalStatusList As List(Of Lookup.LookupData) Implements IEmployeeLeaveApprovalView.ApprovalStatusList
+    Public Property LeaveStatusList As DataTable Implements IEmployeeLeaveApprovalView.LeaveStatusList
+    Public Property ApprovalStatusList As DataTable Implements IEmployeeLeaveApprovalView.ApprovalStatusList
+
 
 #Region "Fields"
 
@@ -36,7 +37,7 @@ Public Class EmployeeLeaveApprovalEntry
 
     Public Property ApprovedBy As Integer Implements IEmployeeLeaveApprovalView.ApprovedBy
         Get
-            Return cboApprovedBy.GetValue()
+            Return cboApprovedBy.GetValue(Of Integer)
         End Get
         Set
             cboApprovedBy.SetValue(Value)
@@ -147,5 +148,20 @@ Public Class EmployeeLeaveApprovalEntry
             {"ApprovedBy", cboApprovedBy}
             }
     End Sub
+    Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
+        If AddingMode Then
+            dgvApprove.Visible = True
+            dgvDisapprove.Visible = True
+        Else
+            dgvApprove.Visible = False
+            dgvDisapprove.Visible = False
+        End If
+    End Sub
 
+    Private Sub EmployeeLeaveApprovalEntry_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        btnEdit.Enabled = False
+        btnEdit.Visible = False
+        btnDelete.Enabled = False
+        btnDelete.Visible = False
+    End Sub
 End Class

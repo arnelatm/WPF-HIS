@@ -90,15 +90,15 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.txtVatNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.cacRevAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.cacArAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.cacPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacRevAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacArAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cacPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacDiscountSchemeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cacDiscountSchemeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.dtpDateAccountOpen = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-            Me.cacAccountStatus = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cacAccountStatus = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -1250,7 +1250,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacCountryCode.OverrideDropDownStyleList = False
             Me.cacCountryCode.PreviousSearchTerm = Nothing
             Me.cacCountryCode.PropertySelector = Nothing
-            Me.cacCountryCode.ReadOnlyCombo = False
             Me.cacCountryCode.SecurityKey = ""
             Me.cacCountryCode.SuggestBoxHeight = 200
             Me.cacCountryCode.SuggestListOrderRule = Nothing
@@ -1291,7 +1290,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacBankIdNo.OverrideDropDownStyleList = False
             Me.cacBankIdNo.PreviousSearchTerm = Nothing
             Me.cacBankIdNo.PropertySelector = Nothing
-            Me.cacBankIdNo.ReadOnlyCombo = False
             Me.cacBankIdNo.SuggestBoxHeight = 200
             Me.cacBankIdNo.SuggestListOrderRule = Nothing
             Me.cacBankIdNo.TextToSearch = Nothing
@@ -1330,7 +1328,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacRevAccountIdNo.OverrideDropDownStyleList = False
             Me.cacRevAccountIdNo.PreviousSearchTerm = Nothing
             Me.cacRevAccountIdNo.PropertySelector = Nothing
-            Me.cacRevAccountIdNo.ReadOnlyCombo = False
             Me.cacRevAccountIdNo.SuggestBoxHeight = 200
             Me.cacRevAccountIdNo.SuggestListOrderRule = Nothing
             Me.cacRevAccountIdNo.TextToSearch = Nothing
@@ -1370,7 +1367,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacArAccountIdNo.OverrideDropDownStyleList = False
             Me.cacArAccountIdNo.PreviousSearchTerm = Nothing
             Me.cacArAccountIdNo.PropertySelector = Nothing
-            Me.cacArAccountIdNo.ReadOnlyCombo = False
             Me.cacArAccountIdNo.SuggestBoxHeight = 200
             Me.cacArAccountIdNo.SuggestListOrderRule = Nothing
             Me.cacArAccountIdNo.TextToSearch = Nothing
@@ -1410,7 +1406,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacPaymentMethod.OverrideDropDownStyleList = False
             Me.cacPaymentMethod.PreviousSearchTerm = Nothing
             Me.cacPaymentMethod.PropertySelector = Nothing
-            Me.cacPaymentMethod.ReadOnlyCombo = False
             Me.cacPaymentMethod.SuggestBoxHeight = 200
             Me.cacPaymentMethod.SuggestListOrderRule = Nothing
             Me.cacPaymentMethod.TextToSearch = Nothing
@@ -1457,7 +1452,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacDiscountSchemeIdNo.OverrideDropDownStyleList = False
             Me.cacDiscountSchemeIdNo.PreviousSearchTerm = Nothing
             Me.cacDiscountSchemeIdNo.PropertySelector = Nothing
-            Me.cacDiscountSchemeIdNo.ReadOnlyCombo = False
             Me.cacDiscountSchemeIdNo.SuggestBoxHeight = 200
             Me.cacDiscountSchemeIdNo.SuggestListOrderRule = Nothing
             Me.cacDiscountSchemeIdNo.TextToSearch = Nothing
@@ -1520,7 +1514,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacAccountStatus.OverrideDropDownStyleList = False
             Me.cacAccountStatus.PreviousSearchTerm = Nothing
             Me.cacAccountStatus.PropertySelector = Nothing
-            Me.cacAccountStatus.ReadOnlyCombo = False
             Me.cacAccountStatus.SuggestBoxHeight = 200
             Me.cacAccountStatus.SuggestListOrderRule = Nothing
             Me.cacAccountStatus.TextToSearch = Nothing
@@ -1680,13 +1673,13 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents lblActive As CLabel
         Friend WithEvents dtpDateAccountOpen As CCustomDateTimePicker
-        Friend WithEvents cacCountryCode As CaComboBox
-        Friend WithEvents cacBankIdNo As CaComboBox
-        Friend WithEvents cacRevAccountIdNo As CaComboBox
-        Friend WithEvents cacArAccountIdNo As CaComboBox
-        Friend WithEvents cacPaymentMethod As CaComboBox
-        Friend WithEvents cacDiscountSchemeIdNo As CaComboBox
-        Friend WithEvents cacAccountStatus As CaComboBox
+        Friend WithEvents cacCountryCode As CtComboBox
+        Friend WithEvents cacBankIdNo As CtComboBox
+        Friend WithEvents cacRevAccountIdNo As CtComboBox
+        Friend WithEvents cacArAccountIdNo As CtComboBox
+        Friend WithEvents cacPaymentMethod As CtComboBox
+        Friend WithEvents cacDiscountSchemeIdNo As CtComboBox
+        Friend WithEvents cacAccountStatus As CtComboBox
         Friend WithEvents CLabel3 As CLabel
         Friend WithEvents txtBalance As CTextBox
         Friend WithEvents chkActive As CCheckBox

@@ -42,7 +42,7 @@ Namespace PresentationLayer.Views.Forms
         Public Property Leaves As DataTable Implements IEmployeeView.Leaves
         Public Property DeductionsByName As DataTable Implements IEmployeeView.DeductionsByName
         Public Property EarningsByName As DataTable Implements IEmployeeView.EarningsByName
-        Public Property Unit As List(Of Lookup.LookupData) Implements IEmployeeView.Unit
+        Public Property Unit As DataTable Implements IEmployeeView.Unit
 
         Public Property Active As Boolean Implements IEmployeeView.Active
             Get
@@ -404,7 +404,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property Title As String Implements IEmployeeView.Title
             Get
-                Return cboTitle.GetValue()
+                Return cboTitle.GetValue(Of String)
             End Get
             Set
                 cboTitle.SetValue(Value)
@@ -476,6 +476,9 @@ Namespace PresentationLayer.Views.Forms
                 txtActualDutyHours.SetValue(Value)
             End Set
         End Property
+
+        Public Property ArAccountIdNo As Short? Implements IEmployeeView.ArAccountIdNo
+
 
 #End Region
 

@@ -10,6 +10,7 @@ Namespace PresentationLayer.Models
 
         Public Property ApprovalDate As DateTime?
         Public Property ApprovalIdNo As Int32?
+        Public Property ApprovedByName As String
         Public Property ApprovalNote As String
         Public Property ApprovedBy As Int32?
         Public Property EmployeeLeaveIdNo As Int32

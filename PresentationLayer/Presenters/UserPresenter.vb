@@ -29,7 +29,8 @@ Public Class UserPresenter(Of TM As New)
     End Sub
 
     Public Sub CreateBranchSource()
-        CreateDataSource("Branch", "BranchIdNo")
+        MakeControlDataSources({New String() {"Branch", "BranchIdNo", Nothing, Nothing}})
+        'CreateDataSource("Branch", "BranchIdNo")
     End Sub
 
     Private Sub OnBeforeSave() Handles MyBase.BeforeSave

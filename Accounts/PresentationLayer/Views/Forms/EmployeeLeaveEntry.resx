@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="StoreCaptions1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>146, 17</value>
+    <value>170, 17</value>
   </metadata>
   <metadata name="TranslatorDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>281, 17</value>
+    <value>327, 17</value>
   </metadata>
   <metadata name="AppDataDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>411, 17</value>
+    <value>478, 17</value>
   </metadata>
   <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>535, 17</value>
+    <value>621, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblIdNo.Font" type="System.Drawing.Font, System.Drawing">
@@ -175,7 +175,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblEmployeeIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 36</value>
+    <value>11, 39</value>
   </data>
   <data name="lblEmployeeIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -211,13 +211,13 @@
     <value>False</value>
   </data>
   <data name="cboEmployeeIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 36</value>
+    <value>203, 39</value>
   </data>
   <data name="cboEmployeeIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboEmployeeIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 24</value>
+    <value>534, 28</value>
   </data>
   <data name="cboEmployeeIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -241,7 +241,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblLeaveName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 62</value>
+    <value>11, 69</value>
   </data>
   <data name="lblLeaveName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -277,13 +277,13 @@
     <value>False</value>
   </data>
   <data name="cboLeaveIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 62</value>
+    <value>203, 69</value>
   </data>
   <data name="cboLeaveIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboLeaveIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 24</value>
+    <value>534, 28</value>
   </data>
   <data name="cboLeaveIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -307,7 +307,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblHolidayName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 88</value>
+    <value>11, 99</value>
   </data>
   <data name="lblHolidayName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -343,13 +343,13 @@
     <value>False</value>
   </data>
   <data name="cboHolidayIdNo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 88</value>
+    <value>203, 99</value>
   </data>
   <data name="cboHolidayIdNo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="cboHolidayIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 24</value>
+    <value>534, 28</value>
   </data>
   <data name="cboHolidayIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>304</value>
@@ -373,7 +373,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFullDay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 114</value>
+    <value>11, 129</value>
   </data>
   <data name="lblFullDay.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -412,7 +412,7 @@
     <value>NoControl</value>
   </data>
   <data name="chkFullDay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>205, 116</value>
+    <value>205, 131</value>
   </data>
   <data name="chkFullDay.Size" type="System.Drawing.Size, System.Drawing">
     <value>13, 13</value>
@@ -442,7 +442,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblStartDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 139</value>
+    <value>11, 154</value>
   </data>
   <data name="lblStartDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -478,13 +478,13 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="dtpStartDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 139</value>
+    <value>203, 154</value>
   </data>
   <data name="dtpStartDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="dtpStartDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 23</value>
+    <value>119, 27</value>
   </data>
   <data name="dtpStartDate.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -508,7 +508,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblEndDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 164</value>
+    <value>11, 183</value>
   </data>
   <data name="lblEndDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -544,13 +544,13 @@
     <value>GrowAndShrink</value>
   </data>
   <data name="dtpEndDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 164</value>
+    <value>203, 183</value>
   </data>
   <data name="dtpEndDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="dtpEndDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 23</value>
+    <value>119, 27</value>
   </data>
   <data name="dtpEndDate.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -574,7 +574,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblLeaveReason.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 189</value>
+    <value>11, 212</value>
   </data>
   <data name="lblLeaveReason.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -607,7 +607,7 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtLeaveReason.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 189</value>
+    <value>203, 212</value>
   </data>
   <data name="txtLeaveReason.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -616,7 +616,7 @@
     <value>True</value>
   </data>
   <data name="txtLeaveReason.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 48</value>
+    <value>534, 48</value>
   </data>
   <data name="txtLeaveReason.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -640,7 +640,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblLeaveStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 239</value>
+    <value>11, 262</value>
   </data>
   <data name="lblLeaveStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -676,7 +676,7 @@
     <value>False</value>
   </data>
   <data name="cboLeaveStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 239</value>
+    <value>203, 262</value>
   </data>
   <data name="cboLeaveStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -685,7 +685,7 @@
     <value>1</value>
   </data>
   <data name="cboLeaveStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 24</value>
+    <value>534, 24</value>
   </data>
   <data name="cboLeaveStatus.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -709,7 +709,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblenteredBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 265</value>
+    <value>11, 288</value>
   </data>
   <data name="lblenteredBy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -745,7 +745,7 @@
     <value>False</value>
   </data>
   <data name="cboenteredBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 265</value>
+    <value>203, 288</value>
   </data>
   <data name="cboenteredBy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -754,7 +754,7 @@
     <value>1</value>
   </data>
   <data name="cboenteredBy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>418, 24</value>
+    <value>534, 24</value>
   </data>
   <data name="cboenteredBy.TabIndex" type="System.Int32, mscorlib">
     <value>300</value>
@@ -778,7 +778,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 291</value>
+    <value>11, 314</value>
   </data>
   <data name="lblDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -811,13 +811,13 @@
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
   <data name="txtDateCreated.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 291</value>
+    <value>203, 314</value>
   </data>
   <data name="txtDateCreated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="txtDateCreated.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 23</value>
+    <value>129, 26</value>
   </data>
   <data name="txtDateCreated.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -841,7 +841,7 @@
     <value>NoControl</value>
   </data>
   <data name="CLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 316</value>
+    <value>11, 342</value>
   </data>
   <data name="CLabel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -876,6 +876,9 @@
   <data name="dgvApprovalIdNo.HeaderText" xml:space="preserve">
     <value>App. Id No.</value>
   </data>
+  <data name="dgvApprovalIdNo.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="dgvApprovalIdNo.Width" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
@@ -885,17 +888,20 @@
   <data name="dgvApprovalDate.HeaderText" xml:space="preserve">
     <value>Date</value>
   </data>
+  <data name="dgvApprovalDate.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dgvApprovalDate.Width" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
   <data name="dgvItemIdNo.HeaderText" xml:space="preserve">
     <value>Item ID No.</value>
   </data>
+  <data name="dgvItemIdNo.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="dgvItemIdNo.Width" type="System.Int32, mscorlib">
     <value>50</value>
-  </data>
-  <metadata name="dgvApprovedBy.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dgvApprovedBy.HeaderText" xml:space="preserve">
-    <value>Approved / Disapproved By</value>
   </data>
   <metadata name="dgvLeaveStatus.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -903,8 +909,23 @@
   <data name="dgvLeaveStatus.HeaderText" xml:space="preserve">
     <value>Approval / Disapproval Status</value>
   </data>
+  <data name="dgvLeaveStatus.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="dgvLeaveStatus.Width" type="System.Int32, mscorlib">
     <value>120</value>
+  </data>
+  <metadata name="dgvApprovedBy.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="dgvApprovedBy.HeaderText" xml:space="preserve">
+    <value>Approved / Disapproved By</value>
+  </data>
+  <data name="dgvApprovedBy.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="dgvApprovedBy.Width" type="System.Int32, mscorlib">
+    <value>125</value>
   </data>
   <metadata name="dgvApprovalNote.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -912,23 +933,32 @@
   <data name="dgvApprovalNote.HeaderText" xml:space="preserve">
     <value>Approval / Disapproval Note</value>
   </data>
+  <data name="dgvApprovalNote.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <metadata name="EmployeeLeaveIdNo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="EmployeeLeaveIdNo.HeaderText" xml:space="preserve">
     <value>EmployeeLeaveIdNo</value>
   </data>
+  <data name="EmployeeLeaveIdNo.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
   <data name="EmployeeLeaveIdNo.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <metadata name="bsEmployeeLeaveApprovalHistory.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 56</value>
+    <value>1024, 17</value>
   </metadata>
   <data name="DataGridViewApprovalHistory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 343</value>
+    <value>13, 369</value>
+  </data>
+  <data name="DataGridViewApprovalHistory.RowHeadersWidth" type="System.Int32, mscorlib">
+    <value>51</value>
   </data>
   <data name="DataGridViewApprovalHistory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>608, 274</value>
+    <value>823, 274</value>
   </data>
   <data name="DataGridViewApprovalHistory.TabIndex" type="System.Int32, mscorlib">
     <value>302</value>
@@ -955,7 +985,7 @@
     <value>10, 10, 10, 10</value>
   </data>
   <data name="CFlowLayout2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>642, 624</value>
+    <value>848, 661</value>
   </data>
   <data name="CFlowLayout2.TabIndex" type="System.Int32, mscorlib">
     <value>290</value>
@@ -982,7 +1012,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="TxtIdNo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 23</value>
+    <value>62, 26</value>
   </data>
   <data name="TxtIdNo.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1003,22 +1033,25 @@
     <value>1</value>
   </data>
   <metadata name="bsEmployeeLeaveApproval.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>675, 17</value>
+    <value>785, 17</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>8, 16</value>
   </data>
   <data name="$this.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Tile</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>642, 679</value>
+    <value>848, 716</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>16, 268</value>
+    <value>18, 319</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Employee Leave Maintenance Form</value>
@@ -1047,6 +1080,18 @@
   <data name="&gt;&gt;MyErrorProvider.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="&gt;&gt;bsEmployeeLeaveApproval.Name" xml:space="preserve">
+    <value>bsEmployeeLeaveApproval</value>
+  </data>
+  <data name="&gt;&gt;bsEmployeeLeaveApproval.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bsEmployeeLeaveApprovalHistory.Name" xml:space="preserve">
+    <value>bsEmployeeLeaveApprovalHistory</value>
+  </data>
+  <data name="&gt;&gt;bsEmployeeLeaveApprovalHistory.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;dgvApprovalIdNo.Name" xml:space="preserve">
     <value>dgvApprovalIdNo</value>
   </data>
@@ -1065,17 +1110,17 @@
   <data name="&gt;&gt;dgvItemIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dgvApprovedBy.Name" xml:space="preserve">
-    <value>dgvApprovedBy</value>
-  </data>
-  <data name="&gt;&gt;dgvApprovedBy.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="&gt;&gt;dgvLeaveStatus.Name" xml:space="preserve">
     <value>dgvLeaveStatus</value>
   </data>
   <data name="&gt;&gt;dgvLeaveStatus.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dgvApprovedBy.Name" xml:space="preserve">
+    <value>dgvApprovedBy</value>
+  </data>
+  <data name="&gt;&gt;dgvApprovedBy.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvApprovalNote.Name" xml:space="preserve">
     <value>dgvApprovalNote</value>
@@ -1088,18 +1133,6 @@
   </data>
   <data name="&gt;&gt;EmployeeLeaveIdNo.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bsEmployeeLeaveApprovalHistory.Name" xml:space="preserve">
-    <value>bsEmployeeLeaveApprovalHistory</value>
-  </data>
-  <data name="&gt;&gt;bsEmployeeLeaveApprovalHistory.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;bsEmployeeLeaveApproval.Name" xml:space="preserve">
-    <value>bsEmployeeLeaveApproval</value>
-  </data>
-  <data name="&gt;&gt;bsEmployeeLeaveApproval.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>EmployeeLeaveEntry</value>

@@ -25,12 +25,12 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateEnumDataSource(Of AccountStatusSelection)("AccountStatus")
-            CreateEnumDataSource(Of PaymentMethodSelection)("PaymentMethod")
-            CreateDataSource("Bank", "BankIdNo")
-            CreateDataSource("Country", "CountryCode")
-            CreateDataSource("Account", "ExpAccountIdNo", "DetailAccount=1")
-            CreateSpecialAccountDataSource("ApAccountIdNo", {EnumToCode(SpecialAccountSelection.AccountsPayable)})
+            CreateEnumDataSourceT(Of AccountStatusSelection)("AccountStatus")
+            CreateEnumDataSourceT(Of PaymentMethodSelection)("PaymentMethod")
+            MakeControlDataSources({New String() {"Bank", "BankIdNo", Nothing, Nothing},
+                             New String() {"Country", "CountryCode", "CountryCode,CountryName", Nothing},
+                             New String() {"Account", "ExpAccountIdNo", Nothing, "DetailAccount=1"}})
+            CreateSpecialAccountDataSourceT("ApAccountIdNo", {EnumToCode(SpecialAccountSelection.AccountsPayable)})
         End Sub
 
         Public Function GetSupplierBalance(idNo As Integer)

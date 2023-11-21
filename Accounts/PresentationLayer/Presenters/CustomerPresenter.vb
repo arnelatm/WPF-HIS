@@ -22,13 +22,13 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateEnumDataSource(Of PaymentMethodSelection)("PaymentMethod")
-            CreateEnumDataSource(Of AccountStatusSelection)("AccountStatus")
-            CreateDataSource("Country", "CountryCode")
-            CreateDataSource("Bank", "BankIdNo")
-            CreateDataSource("DiscountScheme", "DiscountSchemeIdNo")
-            CreateSpecialAccountDataSource("ArAccountIdNo", {EnumToCode(SpecialAccountSelection.AccountsReceivable)})
-            CreateDataSource("Account", "RevAccountIdNo", "DetailAccount=1")
+            CreateEnumDataSourceT(Of PaymentMethodSelection)("PaymentMethod")
+            CreateEnumDataSourceT(Of AccountStatusSelection)("AccountStatus")
+            MakeControlDataSources({New String() {"Bank", "BankIdNo", Nothing, Nothing},
+                             New String() {"Country", "CountryCode", "CountryCode,CountryName", Nothing},
+                             New String() {"DiscountScheme", "DiscountSchemeIdNo", Nothing, Nothing},
+                             New String() {"Account", "RevAccountIdNo", Nothing, "DetailAccount=1"}})
+            CreateSpecialAccountDataSourceT("ArAccountIdNo", {EnumToCode(SpecialAccountSelection.AccountsReceivable)})
         End Sub
 
         Private Sub OnSuccessfulUpdate(ByRef retVal As Integer) Handles MyBase.RecordUpdatedSuccessfully, MyBase.RecordAddedSuccessfully

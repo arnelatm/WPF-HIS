@@ -4,6 +4,7 @@
 
         Property ApprovalDate As DateTime?
         Property ApprovalIdNo As Int32?
+        Property ApprovedByName As String
         Property ApprovalNote As String
         Property ApprovedBy As Int32?
         Property EmployeeLeaveIdNo As Int32

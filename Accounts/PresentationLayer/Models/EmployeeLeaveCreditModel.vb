@@ -9,7 +9,7 @@
         Public Property AccumulatedLeave As Decimal
         Public Property Cumulative As Boolean
         Public Property EmployeeIdNo As Int32
-        Public Property IdNo As Int16
+        Public Property IdNo As Int32
         Public Property LeaveAllowed As Decimal
         Public Property LeaveIdNo As Int16
         Public Property MaxCarryOver As Decimal

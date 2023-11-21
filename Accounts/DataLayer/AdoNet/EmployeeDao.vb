@@ -131,6 +131,7 @@ Namespace DataLayer.AdoNet
             New Employee() With {
             .Active = Extensions.AsBool(reader("Active")),
             .ActualDutyHours = Extensions.AsDecimal(reader("ActualDutyHours")),
+            .ArAccountIdNo = Extensions.AsDecimal(reader("ArAccountIdNo")),
             .Balance = Extensions.AsDecimal(reader("Balance")),
             .BankAccountNo = Extensions.AsString(reader("BankAccountNo")),
             .BankIdNo = Extensions.AsNullable(Of Int16?)(reader("BankIdNo")),

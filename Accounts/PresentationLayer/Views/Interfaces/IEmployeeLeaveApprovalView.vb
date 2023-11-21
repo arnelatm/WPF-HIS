@@ -10,10 +10,10 @@ Namespace PresentationLayer.Views.Interfaces
         Property ApprovedBy As Int32
         Property DateCreated As DateTime?
         Property EmployeeLeaveApprovalItems As List(Of EmployeeLeaveApprovalItemView)
-        Property EmployeeList As List(Of Lookup.LookupData)
-        Property LeaveList As List(Of Lookup.LookupData)
-        Property LeaveStatusList As List(Of Lookup.LookupData)
-        Property ApprovalStatusList As List(Of Lookup.LookupData)
+        Property EmployeeList As DataTable
+        Property LeaveList As DataTable
+        Property LeaveStatusList As DataTable
+        Property ApprovalStatusList As DataTable
 
         Event ApprovalCheckedEvent(sender As Object)
 
