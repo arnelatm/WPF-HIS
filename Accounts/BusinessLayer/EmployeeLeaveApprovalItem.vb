@@ -17,6 +17,7 @@ Namespace BusinessLayer
         End Sub
 
         Public Property ApprovalNote As String
+        Public Property DateCreated As DateTime
         Public Property EmployeeLeaveIdNo As Int32
         Public Property EmployeeIdNo As Int32
         Public Property EmployeeName As String
@@ -26,14 +27,12 @@ Namespace BusinessLayer
         Public Property EnteredBy As Int32
         Public Property FullDay As Boolean
         Public Property IdNo As Int32
-        Public Property LeaveDate As Date
         Public Property LeaveIdNo As Int16
         Public Property LeaveName As String
         Public Property LeaveNameAra As String
-        Public Property LeaveReason As String
-        Public Property LeaveStatus As String
-        Public Property StartDate As Date
+        Public Property Reason As String
         Public Property Status As String
+        Public Property StartDate As Date
         Public Property SupervisorIdNo As Int32
 
     End Class
@@ -45,13 +44,15 @@ Namespace BusinessLayer
         Public Sub New()
             ' establish business rules
             If GetRules().Count() = 0 Then
-                AddRule(New ValidateRequired("EmployeeLeaveIdNo"))
+                AddRule(New ValidateRequired("EmployeeLeaveEarnedIdNo"))
                 AddRule(New ValidateRequired("Status"))
             End If
         End Sub
 
         Public Property ApprovalNote As String
-        Public Property EmployeeLeaveIdNo As Int32
+        Public Property DateCreated As DateTime?
+        Public Property DaysEarned As Decimal
+        Public Property EmployeeLeaveEarnedIdNo As Int32
         Public Property EmployeeIdNo As Int32
         Public Property EmployeeName As String
         Public Property EmployeeNameAra As String

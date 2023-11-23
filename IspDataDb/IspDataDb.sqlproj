@@ -474,7 +474,6 @@
     <Build Include="dbo\Sequences\EmployeeLeaveApprovalSeries.sql" />
     <Build Include="dbo\Sequences\EmployeeIdPrintingSeries.sql" />
     <Build Include="dbo\Views\EmployeeLeaveList_View.sql" />
-    <Build Include="dbo\Views\EmployeeLeaveLatestApproval_View.sql" />
     <Build Include="dbo\Views\LeaveApproval_View.sql" />
     <Build Include="dbo\Tables\HolidayTransfer.sql" />
     <Build Include="dbo\Tables\HolidayTransferItem.sql" />
@@ -645,6 +644,18 @@
     <Build Include="dbo\Functions\fnMovementVsInventoryOld.sql" />
     <Build Include="dbo\Tables\EmployeeLeaveEarned.sql" />
     <Build Include="dbo\Stored Procedures\spPostInvTransactionBackup.sql" />
+    <Build Include="dbo\Tables\EmployeeLeaveEarnedApprovalItem.sql" />
+    <Build Include="dbo\Tables\EmployeeLeaveEarnedApproval.sql" />
+    <Build Include="dbo\Views\LeaveEarnedLatestApproval_View_1.sql" />
+    <Build Include="dbo\Views\EmployeeLeaveEarnedLatestApproval_View.sql" />
+    <Build Include="dbo\Views\EmployeeLeaveEarned_View.sql" />
+    <Build Include="dbo\Tables\LabTest.sql" />
+    <Build Include="dbo\Tables\LabResultTypeDetails.sql" />
+    <Build Include="dbo\Tables\LabResultType.sql" />
+    <Build Include="dbo\Stored Procedures\InsertEmployeeLeaveEarnedApprovalItemTvp.sql" />
+    <Build Include="dbo\User Defined Types\EmployeeLeaveEarnedApprovalItemInsert.sql" />
+    <Build Include="dbo\Stored Procedures\UpdateEmployeeLeaveEarnedApprovalItemTVP.sql" />
+    <Build Include="dbo\User Defined Types\EmployeeLeaveEarnedApprovalItemUpdate.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

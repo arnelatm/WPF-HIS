@@ -20,7 +20,7 @@ Public Class EmployeeLeaveApprovalEntry
 
     Public Property LeaveList As DataTable Implements IEmployeeLeaveApprovalView.LeaveList
 
-    Public Property LeaveStatusList As DataTable Implements IEmployeeLeaveApprovalView.LeaveStatusList
+    Public Property LeaveStatusList As DataTable Implements IEmployeeLeaveApprovalView.StatusList
     Public Property ApprovalStatusList As DataTable Implements IEmployeeLeaveApprovalView.ApprovalStatusList
 
 
@@ -90,16 +90,15 @@ Public Class EmployeeLeaveApprovalEntry
             dgvLeaveIdNo.ValueMember = "IdNo"
             dgvLeaveIdNo.DisplayStyleForCurrentCellOnly = True
             dgvLeaveIdNo.DisplayOnly = True
-            dgvLeaveStatus.DisplayOnly = True
-            dgvLeaveStatus.DataSource = LeaveStatusList
-            dgvLeaveStatus.ValueMember = "Code"
-            dgvLeaveStatus.DisplayMember = "Name"
-            dgvLeaveStatus.DisplayStyleForCurrentCellOnly = True
-            dgvDateCreated.DisplayOnly = True
+            dgvStatus.DisplayOnly = True
+            dgvStatus.DataSource = LeaveStatusList
+            dgvStatus.ValueMember = "Code"
+            dgvStatus.DisplayMember = "Name"
+            dgvStatus.DisplayStyleForCurrentCellOnly = True
             dgvApprove.DisplayOnly = False
             dgvFullDay.DisplayOnly = True
             dgvEndDate.DisplayOnly = True
-            dgvLeaveReason.DisplayOnly = True
+            dgvReason.DisplayOnly = True
             dgvFullDay.DisplayOnly = True
             dgvStartDate.DisplayOnly = True
             dgvFullDay.DisplayOnly = True

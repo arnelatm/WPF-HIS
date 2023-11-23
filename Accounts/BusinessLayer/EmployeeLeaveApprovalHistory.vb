@@ -12,7 +12,20 @@ Namespace BusinessLayer
         Public Property ApprovedByName As String
         Public Property EmployeeLeaveIdNo As Int32
         Public Property IdNo As Int32
-        Public Property LeaveStatus As String
+        Public Property Status As String
+
+    End Class
+
+    Public Class EmployeeLeaveEarnedApprovalHistory
+
+        Public Property ApprovalDate As DateTime?
+        Public Property ApprovalIdNo As Int32?
+        Public Property ApprovalNote As String
+        Public Property ApprovedBy As Int32?
+        Public Property ApprovedByName As String
+        Public Property EmployeeLeaveEarnedIdNo As Int32
+        Public Property IdNo As Int32
+        Public Property Status As String
 
     End Class
 

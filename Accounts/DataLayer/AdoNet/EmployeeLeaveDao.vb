@@ -25,8 +25,8 @@ Namespace DataLayer.AdoNet
                                   "HolidayIdNo," &
                                   "IdNo," &
                                   "LeaveIdNo," &
-                                  "LeaveReason," &
-                                  "LeaveStatus," &
+                                  "Reason," &
+                                  "Status," &
                                   "StartDate," &
                                   "SupervisorIdNo"
 
@@ -51,7 +51,7 @@ Namespace DataLayer.AdoNet
                     " FullDay = @FullDay," &
                     " HolidayIdNo = @HolidayIdNo," &
                     " LeaveIdNo = @LeaveIdNo," &
-                    " LeaveReason = @LeaveReason," &
+                    " Reason = @Reason," &
                     " StartDate = @StartDate" &
                     " WHERE IdNo = @IdNo"
             Return Db.Update(sql, Take(EmployeeLeave))
@@ -60,8 +60,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef EmployeeLeave As EmployeeLeave) As Integer Implements IDao(Of EmployeeLeave).AddRecord
             Dim sql As String =
                     " INSERT INTO [EmployeeLeave] " &
-                    " (EnteredBy,EmployeeIdNo,EndDate,FullDay,HolidayIdNo,LeaveIdNo,LeaveReason,StartDate) " &
-                    " VALUES (@EnteredBy,@EmployeeIdNo,@EndDate,@FullDay,@HolidayIdNo,@LeaveIdNo,@LeaveReason,@StartDate)"
+                    " (EnteredBy,EmployeeIdNo,EndDate,FullDay,HolidayIdNo,LeaveIdNo,Reason,StartDate) " &
+                    " VALUES (@EnteredBy,@EmployeeIdNo,@EndDate,@FullDay,@HolidayIdNo,@LeaveIdNo,@Reason,@StartDate)"
             Return Db.Insert(sql, Take(EmployeeLeave))
         End Function
 
@@ -77,8 +77,8 @@ Namespace DataLayer.AdoNet
             .HolidayIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("HolidayIdNo")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .LeaveIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("LeaveIdNo")),
-            .LeaveReason = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveReason")),
-            .LeaveStatus = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveStatus")),
+            .Reason = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Reason")),
+            .Status = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Status")),
             .StartDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("StartDate")),
             .SupervisorIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32?)(reader("SupervisorIdNo"))
             }
@@ -92,7 +92,7 @@ Namespace DataLayer.AdoNet
                                     "@HolidayIdNo", employeeLeave.HolidayIdNo,
                                     "@IdNo", employeeLeave.IdNo,
                                     "@LeaveIdNo", employeeLeave.LeaveIdNo,
-                                    "@LeaveReason", employeeLeave.LeaveReason,
+                                    "@Reason", employeeLeave.Reason,
                                     "@StartDate", employeeLeave.StartDate
                                 }
         End Function
@@ -122,7 +122,7 @@ Namespace DataLayer.AdoNet
                                 "EmployeeLeaveApprovalIdNo," &
                                 "EmployeeLeaveIdNo," &
                                 "IdNo," &
-                                "LeaveStatus" &
+                                "Status" &
                                 " From LeaveApproval_View where EmployeeLeaveIdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data = Db.Read(sql, MakeLeaveApprovalHistory, params).ToList()
@@ -133,8 +133,8 @@ Namespace DataLayer.AdoNet
         End Function
 
         Public Function GetEmployeeHolidayLeaves(employeeIdNo As Int32, holidayIdNo As Int16)
-            Dim sql As String = "SELECT EnteredBy,DateCreated,EmployeeIdNo,EndDate,FullDay,Holiday,HolidayIdNo,IdNo,LeaveIdNo,LeaveReason,LeaveStatus,StartDate,SupervisorIdNo " &
-                  " FROM [EmployeeLeave_View] where EmployeeIdNo = @employeeIdNo and HolidayIdNo = @holidayIdNo and LeaveStatus in (" &
+            Dim sql As String = "SELECT EnteredBy,DateCreated,EmployeeIdNo,EndDate,FullDay,Holiday,HolidayIdNo,IdNo,LeaveIdNo,Reason,Status,StartDate,SupervisorIdNo " &
+                  " FROM [EmployeeLeave_View] where EmployeeIdNo = @employeeIdNo and HolidayIdNo = @holidayIdNo and Status in (" &
                   EnumToCode(LeaveStatusSelection.SupervisorApproved) & "," &
                   EnumToCode(LeaveStatusSelection.Approved) & "," &
                   EnumToCode(LeaveStatusSelection.Submitted) & ")"
@@ -148,7 +148,7 @@ Namespace DataLayer.AdoNet
             Dim params() As Object
             sql = "SELECT " & FieldList & " FROM [EmployeeLeave_View] where EmployeeIdNo = @employeeIdNo and LeaveIdNo = @leaveIdNo"
             If filterSelection = "All" Then
-                sql += " and LeaveStatus in (" &
+                sql += " and Status in (" &
                        EnumToCode(LeaveStatusSelection.SupervisorApproved) & "," &
                        EnumToCode(LeaveStatusSelection.Approved) & "," &
                        EnumToCode(LeaveStatusSelection.Used) & "," &
@@ -156,7 +156,7 @@ Namespace DataLayer.AdoNet
                 params = {"@employeeIdNo", employeeIdNo, "@LeaveIdNo", leaveIdNo}
                 Return Db.Read(sql, Make, params).ToList()
             ElseIf filterSelection = "ActiveYear" Then
-                sql += " and LeaveStatus in (" &
+                sql += " and Status in (" &
                        EnumToCode(LeaveStatusSelection.SupervisorApproved) & "," &
                        EnumToCode(LeaveStatusSelection.Approved) & "," &
                        EnumToCode(LeaveStatusSelection.Used) & "," &
@@ -165,7 +165,7 @@ Namespace DataLayer.AdoNet
                 params = {"@employeeIdNo", employeeIdNo, "@LeaveIdNo", leaveIdNo, "@LeaveYear", leaveYear}
                 Return Db.Read(sql, Make, params).ToList()
             ElseIf filterSelection = "Active" Then
-                sql += " and LeaveStatus in (" &
+                sql += " and Status in (" &
                        EnumToCode(LeaveStatusSelection.SupervisorApproved) & "," &
                        EnumToCode(LeaveStatusSelection.Approved) & "," &
                        EnumToCode(LeaveStatusSelection.Used) & "," &
@@ -181,7 +181,7 @@ Namespace DataLayer.AdoNet
             sql = "Select " & FieldList & " From [EmployeeLeave_View] " &
                   "where EmployeeIdNo = @employeeIdNo and " &
                   "(@BeginningDate <= EndDate) and (@EndingDate >= StartDate) and " &
-                  "LeaveStatus in (" &
+                  "Status in (" &
                        EnumToCode(LeaveStatusSelection.SupervisorApproved) & "," &
                        EnumToCode(LeaveStatusSelection.Approved) & "," &
                        EnumToCode(LeaveStatusSelection.Used) & "," &
@@ -202,7 +202,7 @@ Namespace DataLayer.AdoNet
             .ApprovalIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32?)(reader("EmployeeLeaveApprovalIdNo")),
             .EmployeeLeaveIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("EmployeeLeaveIdNo")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
-            .LeaveStatus = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveStatus"))
+            .Status = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Status"))
             }
 
     End Class

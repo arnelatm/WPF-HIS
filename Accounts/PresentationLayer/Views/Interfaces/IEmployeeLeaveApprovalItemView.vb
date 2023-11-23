@@ -6,6 +6,7 @@ Namespace PresentationLayer.Views.Interfaces
         Inherits IView
 
         Property ApprovalNote As String
+        Property DateCreated As DateTime?
         Property EmployeeLeaveIdNo As Int32
         Property EmployeeIdNo As Int32
         Property EmployeeName As String
@@ -15,14 +16,39 @@ Namespace PresentationLayer.Views.Interfaces
         Property EnteredBy As Int32
         Property FullDay As Boolean
         Property IdNo As Int32
-        Property LeaveDate As Date
         Property LeaveIdNo As Int16
         Property LeaveName As String
         Property LeaveNameAra As String
-        Property LeaveReason As String
-        Property LeaveStatus As String
-        Property StartDate As Date
+        Property Reason As String
         Property Status As String
+        Property StartDate As Date
+        Property SupervisorIdNo As Int32
+        Property Approve As Boolean
+        Property Disapprove As Boolean
+
+    End Interface
+
+
+    Public Interface IEmployeeLeaveEarnedApprovalItemView
+        Inherits IView
+
+        Property ApprovalNote As String
+        Property DateCreated As DateTime?
+        Property EmployeeLeaveEarnedIdNo As Int32
+        Property EmployeeIdNo As Int32
+        Property EmployeeName As String
+        Property EmployeeNameAra As String
+        Property EmployeeLeaveEarnedApprovalIdNo As Int32
+        Property EndDate As Date
+        Property EnteredBy As Int32
+        Property FullDay As Boolean
+        Property IdNo As Int32
+        Property LeaveIdNo As Int16
+        Property LeaveName As String
+        Property LeaveNameAra As String
+        Property Reason As String
+        Property Status As String
+        Property StartDate As Date
         Property SupervisorIdNo As Int32
         Property Approve As Boolean
         Property Disapprove As Boolean

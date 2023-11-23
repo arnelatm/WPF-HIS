@@ -14,7 +14,6 @@ Namespace PresentationLayer.Views.Interfaces
         Property LeaveIdNo As Int16
         Property Reason As String
         Property StartDate As Date
-        Property Posted As Boolean
 
     End Interface
 

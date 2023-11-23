@@ -1,16 +1,15 @@
-﻿CREATE VIEW dbo.EmployeeLeaveLatestApproval_View
+﻿CREATE VIEW dbo.EmployeeLeaveEarned_View
 AS
-SELECT        a.LeaveIdNo, a.StartDate, a.EndDate, a.FullDay, b.EmployeeLeaveIdNo, b.LatestStatusUpdate, dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.LeaveReason, dbo.Employee.SupervisorIdNo, 
-                         a.EmployeeLeaveApprovalIdNo, ISNULL(a.LeaveStatus, '0') AS LeaveStatus, a.ApprovedBy, a.EnteredBy, a.ApprovalNote, a.LeaveDate, a.ApprovalDate, a.IdNo
-FROM            dbo.Employee RIGHT OUTER JOIN
-                         dbo.EmployeeLeave RIGHT OUTER JOIN
-                         dbo.EmployeeLeaveApprovalList_View AS a LEFT OUTER JOIN
-                             (SELECT        c.EmployeeLeaveIdNo, MAX(d.DateCreated) AS LatestStatusUpdate
-                               FROM            dbo.EmployeeLeaveApprovalItem AS c LEFT OUTER JOIN
-                                                         dbo.EmployeeLeaveApproval AS d ON c.EmployeeLeaveApprovalIdNo = d.IdNo
-                               GROUP BY c.EmployeeLeaveIdNo) AS b ON a.EmployeeLeaveIdNo = b.EmployeeLeaveIdNo ON dbo.EmployeeLeave.IdNo = a.EmployeeLeaveIdNo ON dbo.Employee.IdNo = dbo.EmployeeLeave.EmployeeIdNo
+SELECT        dbo.Employee.SupervisorIdNo, dbo.Leave.Holiday, dbo.EmployeeLeaveEarned.IdNo, dbo.EmployeeLeaveEarned.EmployeeIdNo, dbo.EmployeeLeaveEarned.LeaveIdNo, dbo.EmployeeLeaveEarned.StartDate, 
+                         dbo.EmployeeLeaveEarned.EndDate, dbo.EmployeeLeaveEarned.EnteredBy, dbo.EmployeeLeaveEarned.DaysEarned, dbo.EmployeeLeaveEarned.DateCreated, 
+                         dbo.EmployeeLeaveEarnedLatestApproval_View.EmployeeLeaveEarnedApprovalIdNo, dbo.EmployeeLeaveEarnedLatestApproval_View.EmployeeLeaveEarnedIdNo, dbo.EmployeeLeaveEarned.Reason, 
+                         dbo.EmployeeLeaveEarned.DateTimeStamp, dbo.EmployeeLeaveEarned.Status, dbo.EmployeeLeaveEarned.Posted
+FROM            dbo.EmployeeLeaveEarnedLatestApproval_View RIGHT OUTER JOIN
+                         dbo.EmployeeLeaveEarned LEFT OUTER JOIN
+                         dbo.Employee ON dbo.EmployeeLeaveEarned.EmployeeIdNo = dbo.Employee.IdNo LEFT OUTER JOIN
+                         dbo.Leave ON dbo.EmployeeLeaveEarned.LeaveIdNo = dbo.Leave.IdNo ON dbo.EmployeeLeaveEarnedLatestApproval_View.EmployeeLeaveEarnedIdNo = dbo.EmployeeLeaveEarned.IdNo
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveLatestApproval_View';
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveEarned_View';
 
 
 GO
@@ -19,7 +18,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[35] 4[60] 2[3] 3) )"
+         Configuration = "(H (1[70] 4[11] 2[2] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -85,42 +84,42 @@ Begin DesignProperties =
          Left = 0
       End
       Begin Tables = 
+         Begin Table = "EmployeeLeaveEarnedLatestApproval_View"
+            Begin Extent = 
+               Top = 272
+               Left = 336
+               Bottom = 686
+               Right = 675
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "EmployeeLeaveEarned"
+            Begin Extent = 
+               Top = 67
+               Left = 36
+               Bottom = 637
+               Right = 277
+            End
+            DisplayFlags = 280
+            TopColumn = 3
+         End
          Begin Table = "Employee"
             Begin Extent = 
-               Top = 34
-               Left = 859
-               Bottom = 436
-               Right = 1057
+               Top = 353
+               Left = 889
+               Bottom = 516
+               Right = 1121
             End
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "EmployeeLeave"
+         Begin Table = "Leave"
             Begin Extent = 
-               Top = 37
-               Left = 554
-               Bottom = 309
-               Right = 727
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "a"
-            Begin Extent = 
-               Top = 47
-               Left = 38
-               Bottom = 743
-               Right = 283
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
-         Begin Table = "b"
-            Begin Extent = 
-               Top = 338
-               Left = 465
-               Bottom = 704
-               Right = 662
+               Top = 41
+               Left = 878
+               Bottom = 266
+               Right = 1081
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -135,9 +134,9 @@ Begin DesignProperties =
    End
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
-         Column = 3540
-         Alias = 3405
-         Table = 3300
+         Column = 1440
+         Alias = 2535
+         Table = 4245
          Output = 720
          Append = 1400
          NewValue = 1170
@@ -151,9 +150,5 @@ Begin DesignProperties =
       End
    End
 End
-', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveLatestApproval_View';
-
-
-
-
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveEarned_View';
 

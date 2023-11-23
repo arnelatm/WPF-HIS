@@ -69,6 +69,9 @@ Public Class MappingProfileAccounts
         CreateMap(Of EmployeeLeaveApproval, EmployeeLeaveApprovalModel)().ReverseMap()
         CreateMap(Of EmployeeLeaveApprovalModel, IEmployeeLeaveApprovalView)().ReverseMap()
 
+        CreateMap(Of EmployeeLeaveEarnedApproval, EmployeeLeaveEarnedApprovalModel)().ReverseMap()
+        CreateMap(Of EmployeeLeaveEarnedApprovalModel, IEmployeeLeaveEarnedApprovalView)().ReverseMap()
+
         CreateMap(Of EmployeeLeaveEarned, EmployeeLeaveEarnedModel)().ReverseMap()
         CreateMap(Of EmployeeLeaveEarnedModel, IEmployeeLeaveEarnedView)().ReverseMap()
 
@@ -76,6 +79,12 @@ Public Class MappingProfileAccounts
         CreateMap(Of EmployeeLeaveApprovalItemModel, EmployeeLeaveApprovalItemView)().ReverseMap()
         CreateMap(Of EmployeeLeaveApprovalHistory, EmployeeLeaveApprovalHistoryModel)().ReverseMap()
         CreateMap(Of EmployeeLeaveApprovalHistoryModel, EmployeeLeaveApprovalHistoryView)().ReverseMap()
+
+        CreateMap(Of EmployeeLeaveEarnedApprovalItem, EmployeeLeaveEarnedApprovalItemModel)().ReverseMap()
+        CreateMap(Of EmployeeLeaveEarnedApprovalItemModel, EmployeeLeaveEarnedApprovalItemView)().ReverseMap()
+        CreateMap(Of EmployeeLeaveEarnedApprovalHistory, EmployeeLeaveEarnedApprovalHistoryModel)().ReverseMap()
+        CreateMap(Of EmployeeLeaveEarnedApprovalHistoryModel, EmployeeLeaveEarnedApprovalHistoryView)().ReverseMap()
+
         CreateMap(Of EmployeeLeaveCredit, EmployeeLeaveCreditModel)().ReverseMap()
         CreateMap(Of EmployeeLeaveCreditModel, EmployeeLeaveCreditView)().ReverseMap()
         CreateMap(Of EmployeeLeaveCreditModel, IEmployeeLeaveCreditView)().ReverseMap()

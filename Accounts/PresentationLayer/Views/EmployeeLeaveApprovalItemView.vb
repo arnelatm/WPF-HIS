@@ -10,6 +10,7 @@ Namespace PresentationLayer.Views
         End Sub
 
         Public Property ApprovalNote As String Implements IEmployeeLeaveApprovalItemView.ApprovalNote
+        Public Property DateCreated As DateTime? Implements IEmployeeLeaveApprovalItemView.DateCreated
         Public Property EmployeeLeaveIdNo As Integer Implements IEmployeeLeaveApprovalItemView.EmployeeLeaveIdNo
         Public Property EmployeeIdNo As Integer Implements IEmployeeLeaveApprovalItemView.EmployeeIdNo
         Public Property EmployeeName As String Implements IEmployeeLeaveApprovalItemView.EmployeeName
@@ -19,14 +20,12 @@ Namespace PresentationLayer.Views
         Public Property EnteredBy As Integer Implements IEmployeeLeaveApprovalItemView.EnteredBy
         Public Property FullDay As Boolean Implements IEmployeeLeaveApprovalItemView.FullDay
         Public Property IdNo As Integer Implements IEmployeeLeaveApprovalItemView.IdNo
-        Public Property LeaveDate As Date Implements IEmployeeLeaveApprovalItemView.LeaveDate
         Public Property LeaveIdNo As Short Implements IEmployeeLeaveApprovalItemView.LeaveIdNo
         Public Property LeaveName As String Implements IEmployeeLeaveApprovalItemView.LeaveName
         Public Property LeaveNameAra As String Implements IEmployeeLeaveApprovalItemView.LeaveNameAra
-        Public Property LeaveReason As String Implements IEmployeeLeaveApprovalItemView.LeaveReason
-        Public Property LeaveStatus As String Implements IEmployeeLeaveApprovalItemView.LeaveStatus
-        Public Property StartDate As Date Implements IEmployeeLeaveApprovalItemView.StartDate
+        Public Property Reason As String Implements IEmployeeLeaveApprovalItemView.Reason
         Public Property Status As String Implements IEmployeeLeaveApprovalItemView.Status
+        Public Property StartDate As Date Implements IEmployeeLeaveApprovalItemView.StartDate
         Public Property SupervisorIdNo As Integer Implements IEmployeeLeaveApprovalItemView.SupervisorIdNo
         Public Property Approve As Boolean Implements IEmployeeLeaveApprovalItemView.Approve
         Public Property Disapprove As Boolean Implements IEmployeeLeaveApprovalItemView.Disapprove
@@ -34,4 +33,35 @@ Namespace PresentationLayer.Views
         Public Property DataFilter As String Implements IView.DataFilter
     End Class
 
+
+    Public Class EmployeeLeaveEarnedApprovalItemView
+        Implements IEmployeeLeaveEarnedApprovalItemView
+
+        Public Sub New()
+        End Sub
+
+        Public Property Errors As List(Of String) Implements IView.Errors
+        Public Property DataFilter As String Implements IView.DataFilter
+        Public Property DateCreated As DateTime? Implements IEmployeeLeaveEarnedApprovalItemView.DateCreated
+        Public Property ApprovalNote As String Implements IEmployeeLeaveEarnedApprovalItemView.ApprovalNote
+        Public Property EmployeeLeaveEarnedIdNo As Integer Implements IEmployeeLeaveEarnedApprovalItemView.EmployeeLeaveEarnedIdNo
+        Public Property EmployeeIdNo As Integer Implements IEmployeeLeaveEarnedApprovalItemView.EmployeeIdNo
+        Public Property EmployeeName As String Implements IEmployeeLeaveEarnedApprovalItemView.EmployeeName
+        Public Property EmployeeNameAra As String Implements IEmployeeLeaveEarnedApprovalItemView.EmployeeNameAra
+        Public Property EmployeeLeaveEarnedApprovalIdNo As Integer Implements IEmployeeLeaveEarnedApprovalItemView.EmployeeLeaveEarnedApprovalIdNo
+        Public Property EndDate As Date Implements IEmployeeLeaveEarnedApprovalItemView.EndDate
+        Public Property EnteredBy As Integer Implements IEmployeeLeaveEarnedApprovalItemView.EnteredBy
+        Public Property FullDay As Boolean Implements IEmployeeLeaveEarnedApprovalItemView.FullDay
+        Public Property IdNo As Integer Implements IEmployeeLeaveEarnedApprovalItemView.IdNo
+        Public Property LeaveIdNo As Short Implements IEmployeeLeaveEarnedApprovalItemView.LeaveIdNo
+        Public Property LeaveName As String Implements IEmployeeLeaveEarnedApprovalItemView.LeaveName
+        Public Property LeaveNameAra As String Implements IEmployeeLeaveEarnedApprovalItemView.LeaveNameAra
+        Public Property Reason As String Implements IEmployeeLeaveEarnedApprovalItemView.Reason
+        Public Property Status As String Implements IEmployeeLeaveEarnedApprovalItemView.Status
+        Public Property StartDate As Date Implements IEmployeeLeaveEarnedApprovalItemView.StartDate
+        Public Property SupervisorIdNo As Integer Implements IEmployeeLeaveEarnedApprovalItemView.SupervisorIdNo
+        Public Property Approve As Boolean Implements IEmployeeLeaveEarnedApprovalItemView.Approve
+        Public Property Disapprove As Boolean Implements IEmployeeLeaveEarnedApprovalItemView.Disapprove
+
+    End Class
 End Namespace

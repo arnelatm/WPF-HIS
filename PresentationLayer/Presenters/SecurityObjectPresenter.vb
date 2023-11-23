@@ -17,8 +17,8 @@ Public Class SecurityObjectPresenter(Of TM As New)
     End Sub
 
     Protected Overrides Sub CreateDataSources()
-        CreateDataSource("SystemView", "SystemViewIdNo")
-        CreateDataSource("SecurityObject", "ParentIdNo")
+        MakeControlDataSources({New String() {"SystemView", "SystemViewIdNo", Nothing, Nothing},
+                             New String() {"SecurityObject", "ParentIdNo", Nothing, Nothing}})
     End Sub
 
     Protected Overrides Function IsBizDataValid() As Boolean

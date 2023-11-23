@@ -22,7 +22,6 @@ Namespace DataLayer.AdoNet
                                   "EnteredBy," &
                                   "IdNo," &
                                   "LeaveIdNo," &
-                                  "Posted," &
                                   "Reason," &
                                   "StartDate"
         Public Function GetRecordByIdNo(idNo) As EmployeeLeaveEarned Implements IDao(Of EmployeeLeaveEarned).GetRecordByIdNo
@@ -42,7 +41,6 @@ Namespace DataLayer.AdoNet
                     "EndDate = @EndDate," &
                     "EnteredBy = @EnteredBy," &
                     "LeaveIdNo = @LeaveIdNo," &
-                    "Posted = @Posted," &
                     "Reason = @Reason," &
                     "StartDate = @StartDate " &
                     "WHERE IdNo = @IdNo"
@@ -52,8 +50,8 @@ Namespace DataLayer.AdoNet
         Public Function AddRecord(ByRef EmployeeLeaveEarned As EmployeeLeaveEarned) As Integer Implements IDao(Of EmployeeLeaveEarned).AddRecord
             Dim sql As String =
                     " INSERT INTO [EmployeeLeaveEarned] " &
-                    " (DaysEarned,EmployeeIdNo,EndDate,EnteredBy,LeaveIdNo,Posted,Reason,StartDate) " &
-                    " VALUES (@DaysEarned,@EmployeeIdNo,@EndDate,@EnteredBy,@LeaveIdNo,@Posted,@Reason,@StartDate)"
+                    " (DaysEarned,EmployeeIdNo,EndDate,EnteredBy,LeaveIdNo,Reason,StartDate) " &
+                    " VALUES (@DaysEarned,@EmployeeIdNo,@EndDate,@EnteredBy,@LeaveIdNo,@Reason,@StartDate)"
             Return Db.Insert(sql, Take(EmployeeLeaveEarned))
         End Function
 
@@ -67,7 +65,6 @@ Namespace DataLayer.AdoNet
             .EnteredBy = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EnteredBy")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .LeaveIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("LeaveIdNo")),
-            .Posted = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Posted")),
             .Reason = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Reason")),
             .StartDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("StartDate"))
             }
@@ -80,7 +77,6 @@ Namespace DataLayer.AdoNet
                                     "@EnteredBy", EmployeeLeaveEarned.EnteredBy,
                                     "@IdNo", EmployeeLeaveEarned.IdNo,
                                     "@LeaveIdNo", EmployeeLeaveEarned.LeaveIdNo,
-                                    "@Posted", EmployeeLeaveEarned.Posted,
                                     "@Reason", EmployeeLeaveEarned.Reason,
                                     "@StartDate", EmployeeLeaveEarned.StartDate
                                 }

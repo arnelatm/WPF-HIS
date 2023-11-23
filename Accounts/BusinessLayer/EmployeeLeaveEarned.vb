@@ -31,7 +31,6 @@ Namespace BusinessLayer
         Public Property LeaveIdNo As Int16
         Public Property Reason As String
         Public Property StartDate As Date
-        Public Property Posted As Boolean
 
 
     End Class

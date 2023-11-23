@@ -15,7 +15,7 @@ Public Class SecurityGroupPresenter(Of TM As New)
     Protected DtInsertTable As New DataTable
     Protected DtUpdateTable As New DataTable
     Private _groupAccessService
-    Private WithEvents _groupAccessDataGrid As CDataGridView
+    Private WithEvents _groupAccessDataGrid As CtDataGridView
 
     Public Sub New(itemView As ISecurityGroupView)
         MyBase.New(itemView)
@@ -45,7 +45,7 @@ Public Class SecurityGroupPresenter(Of TM As New)
     End Sub
 
     Protected Overrides Sub CreateDataSources()
-        CreateDataSource("SecurityGroup", "ParentIdNo")
+        MakeControlDataSources({New String() {"SecurityGroup", "ParentIdNo", Nothing, Nothing}})
         Dim control = GetControlName("ParentIdNo")
         control.Refresh()
     End Sub

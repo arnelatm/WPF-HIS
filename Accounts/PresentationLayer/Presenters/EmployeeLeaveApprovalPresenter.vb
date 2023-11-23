@@ -41,7 +41,7 @@ Namespace PresentationLayer.Presenters
 
             MakeControlDataSources({New String() {"User", "ApprovedBy", "IdNo,UserName", Nothing, Nothing}})
 
-            CreateEnumDataT(Of LeaveStatusSelection)(View.LeaveStatusList)
+            CreateEnumDataT(Of LeaveStatusSelection)(View.StatusList)
             If IsUserASupervisor() Then
                 CreateEnumDataT(Of SupervisorApprovalSelection)(View.ApprovalStatusList)
             Else
@@ -52,14 +52,14 @@ Namespace PresentationLayer.Presenters
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized
             View.ApprovedBy = GlobalVariables.UserIdNo
             View.DateCreated = Now()
-            Dim filter As String = "LeaveStatus <> '" + EnumToCode(LeaveStatusSelection.Approved) + "' and " &
-                         "LeaveStatus <> '" + EnumToCode(LeaveStatusSelection.Disapproved) + "' and " &
-                         "LeaveStatus <> '" + EnumToCode(LeaveStatusSelection.Used) + "' and " &
-                         "LeaveStatus <> '" + EnumToCode(LeaveStatusSelection.Cancelled) + "'"
+            Dim filter As String = "Status <> '" + EnumToCode(LeaveStatusSelection.Approved) + "' and " &
+                         "Status <> '" + EnumToCode(LeaveStatusSelection.Disapproved) + "' and " &
+                         "Status <> '" + EnumToCode(LeaveStatusSelection.Used) + "' and " &
+                         "Status <> '" + EnumToCode(LeaveStatusSelection.Cancelled) + "'"
             If IsUserASupervisor() Then
                 Dim employeeIdNo As Int32
                 employeeIdNo = Service.GetUserEmployeeIdNo()
-                filter += " and LeaveStatus <> '" + EnumToCode(LeaveStatusSelection.SupervisorApproved) + "' and EmployeeIdNo <> " & employeeIdNo.ToString()
+                filter += " and Status <> '" + EnumToCode(LeaveStatusSelection.SupervisorApproved) + "' and EmployeeIdNo <> " & employeeIdNo.ToString()
                 filter += " and SuperVisorIdNo = " + employeeIdNo.ToString()
             End If
             Dim employeeLeaveApprovalItemsModel As List(Of EmployeeLeaveApprovalItemModel)

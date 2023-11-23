@@ -127,7 +127,7 @@ Namespace PresentationLayer.Views.Forms
             End Get
             Set(value As List(Of GroupAccessView))
                 _groupAccesses = value
-                BindGroupAccess()
+                'BindGroupAccess()
             End Set
         End Property
 
@@ -172,8 +172,12 @@ Namespace PresentationLayer.Views.Forms
         Private Sub DgvGroupAccess_OnCellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles _dgvSecurityGroup.CellEndEdit
             Dim firstDisplayedRow = _dgvSecurityGroup.FirstDisplayedScrollingRowIndex
             ProcessCellEndEdit(_dgvSecurityGroup, SecurityGroupView.bsGroupAccesses)
-            SecurityGroupView.bsGroupAccesses.ResetBindings(False)
+            'SecurityGroupView.bsGroupAccesses.ResetBindings(False)
             SecurityGroupView.DataGridViewGroupAccesses.FirstDisplayedScrollingRowIndex = firstDisplayedRow
+        End Sub
+
+        Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
+            SecurityGroupView.bsGroupAccesses.ResetBindings(False)
         End Sub
 
     End Class

@@ -91,26 +91,26 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property LeaveReason As String Implements IEmployeeLeaveView.LeaveReason
+        Public Property Reason As String Implements IEmployeeLeaveView.Reason
             Get
-                Return txtLeaveReason.Text
+                Return txtReason.Text
             End Get
             Set(value As String)
-                txtLeaveReason.Text = value
+                txtReason.Text = value
             End Set
         End Property
 
-        Public Property LeaveStatus As String Implements IEmployeeLeaveView.LeaveStatus
+        Public Property Status As String Implements IEmployeeLeaveView.Status
             Get
-                Return cboLeaveStatus.GetValue()
+                Return cboStatus.GetValue()
             End Get
             Set
-                cboLeaveStatus.SetValue(Value)
+                cboStatus.SetValue(Value)
                 'Dim status As String = value
                 'If status Is Nothing Then
                 '    status = "0"
                 'End If
-                'cboLeaveStatus.SetValue(status)
+                'cboStatus.SetValue(status)
             End Set
         End Property
 
@@ -146,7 +146,7 @@ Namespace PresentationLayer.Views.Forms
         Public Property ApprovalNote As String Implements IEmployeeLeaveView.ApprovalNote
         Public Property Approve As Boolean Implements IEmployeeLeaveView.Approve
         Public Property Users As DataTable Implements IEmployeeLeaveView.Users
-        Public Property LeaveStatusList As DataTable Implements IEmployeeLeaveView.LeaveStatusList
+        Public Property StatusList As DataTable Implements IEmployeeLeaveView.StatusList
 
         Public Property ApprovalHistory As List(Of EmployeeLeaveApprovalHistoryView) Implements IEmployeeLeaveView.ApprovalHistory
             Get
@@ -172,8 +172,8 @@ Namespace PresentationLayer.Views.Forms
                 {"HolidayIdNo", cboHolidayIdNo},
                 {"IdNo", TxtIdNo},
                 {"LeaveIdNo", cboLeaveIdNo},
-                {"LeaveReason", txtLeaveReason},
-                {"LeaveStatus", cboLeaveStatus},
+                {"Reason", txtReason},
+                {"Status", cboStatus},
                 {"StartDate", dtpStartDate}
                 }
         End Sub
@@ -233,11 +233,11 @@ Namespace PresentationLayer.Views.Forms
                 .DataSource = bsEmployeeLeaveApprovalHistory
             End With
             With DataGridViewApprovalHistory.Columns
-                dgvLeaveStatus.DataSource = LeaveStatusList
-                dgvLeaveStatus.DisplayOnly = True
-                dgvLeaveStatus.DisplayMember = "Name"
-                dgvLeaveStatus.ValueMember = "Code"
-                dgvLeaveStatus.DisplayStyleForCurrentCellOnly = True
+                dgvStatus.DataSource = StatusList
+                dgvStatus.DisplayOnly = True
+                dgvStatus.DisplayMember = "Name"
+                dgvStatus.ValueMember = "Code"
+                dgvStatus.DisplayStyleForCurrentCellOnly = True
                 dgvApprovalIdNo.DisplayOnly = True
                 dgvApprovalDate.DisplayOnly = True
                 dgvItemIdNo.DisplayOnly = True

@@ -107,8 +107,6 @@ Public Class EmployeeLeaveEarnedEntry
         End Set
     End Property
 
-    Public Property Posted As Boolean Implements IEmployeeLeaveEarnedView.Posted
-
 
 #End Region
 
