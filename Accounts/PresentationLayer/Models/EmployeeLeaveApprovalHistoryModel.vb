@@ -15,7 +15,21 @@ Namespace PresentationLayer.Models
         Public Property ApprovedBy As Int32?
         Public Property EmployeeLeaveIdNo As Int32
         Public Property IdNo As Int32
-        Public Property LeaveStatus As String
+        Public Property Status As String
+
+    End Class
+
+    ''' </summary>
+    Public Class EmployeeLeaveEarnedApprovalHistoryModel
+
+        Public Property ApprovalDate As DateTime?
+        Public Property ApprovalIdNo As Int32?
+        Public Property ApprovedByName As String
+        Public Property ApprovalNote As String
+        Public Property ApprovedBy As Int32?
+        Public Property EmployeeLeaveEarnedIdNo As Int32
+        Public Property IdNo As Int32
+        Public Property Status As String
 
     End Class
 

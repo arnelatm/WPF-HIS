@@ -1,8 +1,8 @@
-﻿CREATE VIEW dbo.EmployeeLeave_View
+﻿
+CREATE VIEW [dbo].[EmployeeLeave_View]
 AS
 SELECT        dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.IdNo, dbo.EmployeeLeave.LeaveIdNo, dbo.EmployeeLeave.StartDate, dbo.EmployeeLeave.EndDate, dbo.EmployeeLeave.FullDay, dbo.EmployeeLeave.EnteredBy, 
-                         dbo.EmployeeLeave.LeaveReason, dbo.EmployeeLeave.DateCreated, dbo.EmployeeLeave.DateTimeStamp, dbo.EmployeeLeave.HolidayIdNo, dbo.EmployeeLeave.DateCreated AS LeaveDate, 
-                         dbo.EmployeeLeave.IdNo AS EmployeeLeaveIdNo, dbo.Employee.SupervisorIdNo, ISNULL(dbo.LatestApproval_View.LeaveStatus, '0') AS LeaveStatus, dbo.LatestApproval_View.DateCreated AS LatestStatusUpdate, 
+                         dbo.EmployeeLeave.Reason, dbo.EmployeeLeave.DateCreated, dbo.EmployeeLeave.DateTimeStamp, dbo.EmployeeLeave.HolidayIdNo, dbo.EmployeeLeave.IdNo AS EmployeeLeaveIdNo, dbo.Employee.SupervisorIdNo, ISNULL(dbo.LatestApproval_View.Status, '0') AS Status, dbo.LatestApproval_View.DateCreated AS LatestStatusUpdate, 
                          dbo.LatestApproval_View.ApprovedBy, dbo.LatestApproval_View.EmployeeLeaveApprovalIdNo, dbo.Leave.Holiday
 FROM            dbo.EmployeeLeave INNER JOIN
                          dbo.Employee ON dbo.EmployeeLeave.EmployeeIdNo = dbo.Employee.IdNo LEFT OUTER JOIN
@@ -106,22 +106,22 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 41
          End
-         Begin Table = "LatestApproval_View"
-            Begin Extent = 
-               Top = 140
-               Left = 251
-               Bottom = 363
-               Right = 538
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
          Begin Table = "Leave"
             Begin Extent = 
                Top = 272
                Left = 608
                Bottom = 486
                Right = 781
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "LatestApproval_View"
+            Begin Extent = 
+               Top = 140
+               Left = 251
+               Bottom = 363
+               Right = 538
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -160,6 +160,8 @@ Begin DesignProperties =
          Alias = 2910
          Table = 4275
          Output = 147', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeave_View';
+
+
 
 
 

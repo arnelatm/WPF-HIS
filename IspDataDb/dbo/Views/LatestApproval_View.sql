@@ -1,16 +1,12 @@
-﻿
-
-CREATE VIEW [dbo].[LatestApproval_View]
-AS 
-Select a.IdNo, a.EmployeeLeaveApprovalIdNo, a.EmployeeLeaveIdNo, a.Status as LeaveStatus, e.DateCreated, e.ApprovedBy
-From EmployeeLeaveApprovalItem a
-Inner Join EmployeeLeaveApproval e
-On a.EmployeeLeaveApprovalIdNo = e.IdNo
-INNER JOIN (SELECT  b.EmployeeLeaveIdNo, MAX(c.DateCreated) as MaxDate
-			FROM    dbo.EmployeeLeaveApprovalItem AS b INNER JOIN
-			dbo.EmployeeLeaveApproval AS c ON b.EmployeeLeaveApprovalIdNo = c.IdNo
-			GROUP BY b.EmployeeLeaveIdNo) d
-on a.EmployeeLeaveIdNo = d.EmployeeLeaveIdNo and e.DateCreated = d.MaxDate
+﻿CREATE VIEW dbo.LatestApproval_View
+AS
+SELECT a.IdNo, a.EmployeeLeaveApprovalIdNo, a.EmployeeLeaveIdNo, a.Status AS Status, e.DateCreated, e.ApprovedBy
+FROM     dbo.EmployeeLeaveApprovalItem AS a INNER JOIN
+                  dbo.EmployeeLeaveApproval AS e ON a.EmployeeLeaveApprovalIdNo = e.IdNo INNER JOIN
+                      (SELECT b.EmployeeLeaveIdNo, MAX(c.DateCreated) AS MaxDate
+                       FROM      dbo.EmployeeLeaveApprovalItem AS b INNER JOIN
+                                         dbo.EmployeeLeaveApproval AS c ON b.EmployeeLeaveApprovalIdNo = c.IdNo
+                       GROUP BY b.EmployeeLeaveIdNo) AS d ON a.EmployeeLeaveIdNo = d.EmployeeLeaveIdNo AND e.DateCreated = d.MaxDate
 GO
 EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'LatestApproval_View';
 
@@ -21,7 +17,7 @@ Begin DesignProperties =
    Begin PaneConfigurations = 
       Begin PaneConfiguration = 0
          NumPanes = 4
-         Configuration = "(H (1[40] 4[20] 2[20] 3) )"
+         Configuration = "(H (1[46] 4[19] 2[32] 3) )"
       End
       Begin PaneConfiguration = 1
          NumPanes = 3
@@ -97,12 +93,22 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "b"
+         Begin Table = "e"
             Begin Extent = 
                Top = 5
-               Left = 344
-               Bottom = 316
-               Right = 533
+               Left = 550
+               Bottom = 168
+               Right = 753
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "d"
+            Begin Extent = 
+               Top = 268
+               Left = 915
+               Bottom = 613
+               Right = 1147
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -116,17 +122,17 @@ Begin DesignProperties =
       End
    End
    Begin CriteriaPane = 
-      Begin ColumnWidths = 12
+      Begin ColumnWidths = 11
          Column = 1440
          Alias = 900
-         Table = 1170
+         Table = 1176
          Output = 720
          Append = 1400
          NewValue = 1170
-         SortType = 1350
-         SortOrder = 1410
+         SortType = 1356
+         SortOrder = 1416
          GroupBy = 1350
-         Filter = 1350
+         Filter = 1356
          Or = 1350
          Or = 1350
          Or = 1350
@@ -134,4 +140,6 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'LatestApproval_View';
+
+
 

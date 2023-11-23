@@ -74,7 +74,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.CFlowLayout1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.CFlowLayout1.Location = New System.Drawing.Point(0, 55)
         Me.CFlowLayout1.Name = "CFlowLayout1"
-        Me.CFlowLayout1.Size = New System.Drawing.Size(743, 307)
+        Me.CFlowLayout1.Size = New System.Drawing.Size(743, 327)
         Me.CFlowLayout1.TabIndex = 4
         '
         'lblIdNo
@@ -121,7 +121,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.TxtIdNo.OverrideMaxLength = 0
         Me.TxtIdNo.ReadOnly = True
         Me.TxtIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.TxtIdNo.Size = New System.Drawing.Size(62, 23)
+        Me.TxtIdNo.Size = New System.Drawing.Size(62, 26)
         Me.TxtIdNo.TabIndex = 305
         Me.TxtIdNo.TabStop = False
         Me.TxtIdNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -135,7 +135,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.lblEmployeeIdNo.EditingMode = False
         Me.lblEmployeeIdNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.lblEmployeeIdNo.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblEmployeeIdNo.Location = New System.Drawing.Point(1, 35)
+        Me.lblEmployeeIdNo.Location = New System.Drawing.Point(1, 38)
         Me.lblEmployeeIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.lblEmployeeIdNo.Name = "lblEmployeeIdNo"
         Me.lblEmployeeIdNo.Size = New System.Drawing.Size(190, 23)
@@ -170,7 +170,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.cboEmployeeIdNo.IntegralHeight = False
         Me.cboEmployeeIdNo.LimitToList = False
         Me.cboEmployeeIdNo.LinkedLabel = Me.lblEmployeeIdNo
-        Me.cboEmployeeIdNo.Location = New System.Drawing.Point(193, 35)
+        Me.cboEmployeeIdNo.Location = New System.Drawing.Point(193, 38)
         Me.cboEmployeeIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.cboEmployeeIdNo.Name = "cboEmployeeIdNo"
         Me.cboEmployeeIdNo.OldValue = 0
@@ -179,7 +179,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.cboEmployeeIdNo.OverrideDropDownStyleList = False
         Me.cboEmployeeIdNo.PreviousSearchTerm = Nothing
         Me.cboEmployeeIdNo.PropertySelector = Nothing
-        Me.cboEmployeeIdNo.Size = New System.Drawing.Size(539, 24)
+        Me.cboEmployeeIdNo.Size = New System.Drawing.Size(539, 28)
         Me.cboEmployeeIdNo.SuggestBoxHeight = 200
         Me.cboEmployeeIdNo.SuggestCharCount = 0
         Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
@@ -198,7 +198,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.lblLeaveName.EditingMode = False
         Me.lblLeaveName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.lblLeaveName.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblLeaveName.Location = New System.Drawing.Point(1, 61)
+        Me.lblLeaveName.Location = New System.Drawing.Point(1, 68)
         Me.lblLeaveName.Margin = New System.Windows.Forms.Padding(1)
         Me.lblLeaveName.Name = "lblLeaveName"
         Me.lblLeaveName.Size = New System.Drawing.Size(190, 23)
@@ -233,7 +233,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.cboLeaveIdNo.IntegralHeight = False
         Me.cboLeaveIdNo.LimitToList = False
         Me.cboLeaveIdNo.LinkedLabel = Me.lblLeaveName
-        Me.cboLeaveIdNo.Location = New System.Drawing.Point(193, 61)
+        Me.cboLeaveIdNo.Location = New System.Drawing.Point(193, 68)
         Me.cboLeaveIdNo.Margin = New System.Windows.Forms.Padding(1)
         Me.cboLeaveIdNo.Name = "cboLeaveIdNo"
         Me.cboLeaveIdNo.OldValue = 0
@@ -242,7 +242,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.cboLeaveIdNo.OverrideDropDownStyleList = False
         Me.cboLeaveIdNo.PreviousSearchTerm = Nothing
         Me.cboLeaveIdNo.PropertySelector = Nothing
-        Me.cboLeaveIdNo.Size = New System.Drawing.Size(539, 24)
+        Me.cboLeaveIdNo.Size = New System.Drawing.Size(539, 28)
         Me.cboLeaveIdNo.SuggestBoxHeight = 200
         Me.cboLeaveIdNo.SuggestCharCount = 0
         Me.cboLeaveIdNo.SuggestListOrderRule = Nothing
@@ -261,7 +261,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.lblStartDate.EditingMode = False
         Me.lblStartDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.lblStartDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblStartDate.Location = New System.Drawing.Point(1, 87)
+        Me.lblStartDate.Location = New System.Drawing.Point(1, 98)
         Me.lblStartDate.Margin = New System.Windows.Forms.Padding(1)
         Me.lblStartDate.Name = "lblStartDate"
         Me.lblStartDate.Size = New System.Drawing.Size(190, 23)
@@ -284,14 +284,14 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.CFlowLayout1.SetFlowBreak(Me.dtpStartDate, True)
         Me.dtpStartDate.ForeColor = System.Drawing.Color.Black
         Me.dtpStartDate.LinkedLabel = Me.lblStartDate
-        Me.dtpStartDate.Location = New System.Drawing.Point(193, 87)
+        Me.dtpStartDate.Location = New System.Drawing.Point(193, 98)
         Me.dtpStartDate.Margin = New System.Windows.Forms.Padding(1)
         Me.dtpStartDate.Name = "dtpStartDate"
         Me.dtpStartDate.ReadOnlyDp = False
         Me.dtpStartDate.SecurityKey = Nothing
         Me.dtpStartDate.ShowLongDate = False
         Me.dtpStartDate.ShowTime = False
-        Me.dtpStartDate.Size = New System.Drawing.Size(118, 23)
+        Me.dtpStartDate.Size = New System.Drawing.Size(118, 27)
         Me.dtpStartDate.TabIndex = 308
         Me.dtpStartDate.TargetCalendar = Nothing
         Me.dtpStartDate.Translatable = False
@@ -306,7 +306,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.lblEndDate.EditingMode = False
         Me.lblEndDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.lblEndDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblEndDate.Location = New System.Drawing.Point(1, 112)
+        Me.lblEndDate.Location = New System.Drawing.Point(1, 127)
         Me.lblEndDate.Margin = New System.Windows.Forms.Padding(1)
         Me.lblEndDate.Name = "lblEndDate"
         Me.lblEndDate.Size = New System.Drawing.Size(190, 23)
@@ -329,14 +329,14 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.CFlowLayout1.SetFlowBreak(Me.dtpEndDate, True)
         Me.dtpEndDate.ForeColor = System.Drawing.Color.Black
         Me.dtpEndDate.LinkedLabel = Me.lblEndDate
-        Me.dtpEndDate.Location = New System.Drawing.Point(193, 112)
+        Me.dtpEndDate.Location = New System.Drawing.Point(193, 127)
         Me.dtpEndDate.Margin = New System.Windows.Forms.Padding(1)
         Me.dtpEndDate.Name = "dtpEndDate"
         Me.dtpEndDate.ReadOnlyDp = False
         Me.dtpEndDate.SecurityKey = Nothing
         Me.dtpEndDate.ShowLongDate = False
         Me.dtpEndDate.ShowTime = False
-        Me.dtpEndDate.Size = New System.Drawing.Size(118, 23)
+        Me.dtpEndDate.Size = New System.Drawing.Size(118, 27)
         Me.dtpEndDate.TabIndex = 309
         Me.dtpEndDate.TargetCalendar = Nothing
         Me.dtpEndDate.Translatable = False
@@ -351,7 +351,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.lblDaysEarned.EditingMode = False
         Me.lblDaysEarned.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.lblDaysEarned.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDaysEarned.Location = New System.Drawing.Point(1, 137)
+        Me.lblDaysEarned.Location = New System.Drawing.Point(1, 156)
         Me.lblDaysEarned.Margin = New System.Windows.Forms.Padding(1)
         Me.lblDaysEarned.Name = "lblDaysEarned"
         Me.lblDaysEarned.Size = New System.Drawing.Size(190, 23)
@@ -378,7 +378,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.txtDaysEarned.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.txtDaysEarned.ForeColor = System.Drawing.Color.Black
         Me.txtDaysEarned.LinkedLabel = Me.lblIdNo
-        Me.txtDaysEarned.Location = New System.Drawing.Point(193, 137)
+        Me.txtDaysEarned.Location = New System.Drawing.Point(193, 156)
         Me.txtDaysEarned.Margin = New System.Windows.Forms.Padding(1)
         Me.txtDaysEarned.MaximumValue = Nothing
         Me.txtDaysEarned.MinimumValue = Nothing
@@ -386,7 +386,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.txtDaysEarned.OldValue = Nothing
         Me.txtDaysEarned.OverrideMaxLength = 0
         Me.txtDaysEarned.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtDaysEarned.Size = New System.Drawing.Size(62, 23)
+        Me.txtDaysEarned.Size = New System.Drawing.Size(62, 26)
         Me.txtDaysEarned.TabIndex = 310
         Me.txtDaysEarned.TabStop = False
         Me.txtDaysEarned.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
@@ -400,7 +400,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.lblReason.EditingMode = False
         Me.lblReason.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.lblReason.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblReason.Location = New System.Drawing.Point(1, 162)
+        Me.lblReason.Location = New System.Drawing.Point(1, 184)
         Me.lblReason.Margin = New System.Windows.Forms.Padding(1)
         Me.lblReason.Name = "lblReason"
         Me.lblReason.Size = New System.Drawing.Size(190, 23)
@@ -427,7 +427,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.txtReason.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.txtReason.ForeColor = System.Drawing.Color.Black
         Me.txtReason.LinkedLabel = Me.lblReason
-        Me.txtReason.Location = New System.Drawing.Point(193, 162)
+        Me.txtReason.Location = New System.Drawing.Point(193, 184)
         Me.txtReason.Margin = New System.Windows.Forms.Padding(1)
         Me.txtReason.MaximumValue = Nothing
         Me.txtReason.MinimumValue = Nothing
@@ -449,7 +449,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.lblenteredBy.EditingMode = False
         Me.lblenteredBy.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.lblenteredBy.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblenteredBy.Location = New System.Drawing.Point(1, 212)
+        Me.lblenteredBy.Location = New System.Drawing.Point(1, 234)
         Me.lblenteredBy.Margin = New System.Windows.Forms.Padding(1)
         Me.lblenteredBy.Name = "lblenteredBy"
         Me.lblenteredBy.Size = New System.Drawing.Size(190, 23)
@@ -468,7 +468,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.cboenteredBy.DefaultValue = Nothing
         Me.cboenteredBy.DisplayMember = "Name"
         Me.cboenteredBy.DisplayOnly = True
-        Me.cboenteredBy.DropDownHeight = 21
+        Me.cboenteredBy.DropDownHeight = 23
         Me.cboenteredBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
         Me.cboenteredBy.Editable = True
         Me.cboenteredBy.EditingMode = True
@@ -487,7 +487,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.cboenteredBy.IntegralHeight = False
         Me.cboenteredBy.LimitToList = False
         Me.cboenteredBy.LinkedLabel = Me.lblEmployeeIdNo
-        Me.cboenteredBy.Location = New System.Drawing.Point(193, 212)
+        Me.cboenteredBy.Location = New System.Drawing.Point(193, 234)
         Me.cboenteredBy.Margin = New System.Windows.Forms.Padding(1)
         Me.cboenteredBy.MaxDropDownItems = 1
         Me.cboenteredBy.Name = "cboenteredBy"
@@ -516,7 +516,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.lblPosted.EditingMode = False
         Me.lblPosted.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.lblPosted.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPosted.Location = New System.Drawing.Point(1, 240)
+        Me.lblPosted.Location = New System.Drawing.Point(1, 262)
         Me.lblPosted.Margin = New System.Windows.Forms.Padding(1)
         Me.lblPosted.Name = "lblPosted"
         Me.lblPosted.Size = New System.Drawing.Size(190, 24)
@@ -547,7 +547,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.chkActive.IgnoreCase = False
         Me.chkActive.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.chkActive.LinkedLabel = Me.lblPosted
-        Me.chkActive.Location = New System.Drawing.Point(193, 240)
+        Me.chkActive.Location = New System.Drawing.Point(193, 262)
         Me.chkActive.Margin = New System.Windows.Forms.Padding(1)
         Me.chkActive.Name = "chkActive"
         Me.chkActive.NoLabel = False
@@ -566,7 +566,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.lblDateCreated.EditingMode = False
         Me.lblDateCreated.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.lblDateCreated.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDateCreated.Location = New System.Drawing.Point(1, 266)
+        Me.lblDateCreated.Location = New System.Drawing.Point(1, 288)
         Me.lblDateCreated.Margin = New System.Windows.Forms.Padding(1)
         Me.lblDateCreated.Name = "lblDateCreated"
         Me.lblDateCreated.Size = New System.Drawing.Size(190, 23)
@@ -594,7 +594,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.txtDateCreated.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
         Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
         Me.txtDateCreated.LinkedLabel = Me.lblDateCreated
-        Me.txtDateCreated.Location = New System.Drawing.Point(193, 266)
+        Me.txtDateCreated.Location = New System.Drawing.Point(193, 288)
         Me.txtDateCreated.Margin = New System.Windows.Forms.Padding(1)
         Me.txtDateCreated.MaximumValue = Nothing
         Me.txtDateCreated.MinimumValue = Nothing
@@ -603,7 +603,7 @@ Partial Class EmployeeLeaveEarnedEntry
         Me.txtDateCreated.OverrideMaxLength = 0
         Me.txtDateCreated.ReadOnly = True
         Me.txtDateCreated.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.txtDateCreated.Size = New System.Drawing.Size(129, 23)
+        Me.txtDateCreated.Size = New System.Drawing.Size(129, 26)
         Me.txtDateCreated.TabIndex = 314
         Me.txtDateCreated.Translatable = False
         Me.txtDateCreated.ValueIsMandatory = True
@@ -612,10 +612,10 @@ Partial Class EmployeeLeaveEarnedEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(743, 362)
+        Me.ClientSize = New System.Drawing.Size(743, 382)
         Me.Controls.Add(Me.CFlowLayout1)
         Me.Name = "EmployeeLeaveEarnedEntry"
-        Me.Text = "EmployeeLeaveEarnedEntry"
+        Me.Text = "Employee Leave Earned Entry"
         Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)
         CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
         Me.CFlowLayout1.ResumeLayout(False)

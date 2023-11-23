@@ -106,7 +106,7 @@ Namespace PresentationLayer.Views.Forms
                 {"EmployeeIdNo", cboEmployeeIdNo},
                 {"IdNo", TxtIdNo},
                 {"HolidayTransferIdNo", cboHolidayTransferIdNo},
-                {"LeaveStatus", cboStatus},
+                {"Status", cboStatus},
                 {"StartDate", dtpAvailmentDate}
                 }
         End Sub
@@ -150,7 +150,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvEnteredBy.ValueMember = "IdNo"
                 dgvEnteredBy.DisplayStyleForCurrentCellOnly = True
                 dgvEnteredBy.DisplayOnly = True
-                'dgvLeaveStatus.DataSource = LeaveStatusList
+                'dgvLeaveStatus.DataSource = StatusList
                 'dgvLeaveStatus.DisplayMember = "Name"
                 'dgvLeaveStatus.ValueMember = "Code"
                 'dgvLeaveStatus.DisplayStyleForCurrentCellOnly = True
@@ -159,7 +159,7 @@ Namespace PresentationLayer.Views.Forms
                 dgvEnteredBy.DisplayOnly = True
                 dgvItemIdNo.DisplayOnly = True
                 dgvNote.DisplayOnly = True
-                dgvLeaveStatus.DisplayOnly = True
+                dgvStatus.DisplayOnly = True
             End With
             ResumeLayout()
         End Sub

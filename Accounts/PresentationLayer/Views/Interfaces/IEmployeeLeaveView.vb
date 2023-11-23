@@ -16,8 +16,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property HolidayIdNo As Int16
         Property IdNo As Int32
         Property LeaveIdNo As Int16
-        Property LeaveReason As String
-        Property LeaveStatus As String
+        Property Reason As String
+        Property Status As String
         Property StartDate As DateTime
         Property SupervisorIdNo As Int32?
         Property Approve As Boolean
@@ -25,7 +25,7 @@ Namespace PresentationLayer.Views.Interfaces
         Property ApprovalNote As String
         Property ApprovalHistory As List(Of EmployeeLeaveApprovalHistoryView)
         Property Users As DataTable
-        Property LeaveStatusList As DataTable
+        Property StatusList As DataTable
     End Interface
 
 End Namespace

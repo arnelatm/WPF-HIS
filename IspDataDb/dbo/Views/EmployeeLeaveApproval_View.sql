@@ -1,12 +1,15 @@
-﻿CREATE VIEW dbo.EmployeeLeaveApproval_View
+﻿
+
+
+CREATE VIEW [dbo].[EmployeeLeaveApproval_View]
 AS
-SELECT        a.IdNo, a.LeaveIdNo, a.StartDate, a.EndDate, a.FullDay, b.EmployeeLeaveIdNo, b.LatestStatusUpdate, dbo.EmployeeLeave.DateCreated, dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.LeaveReason, 
-                         dbo.Employee.SupervisorIdNo, a.EmployeeLeaveApprovalIdNo, a.LeaveStatus, a.ApprovedBy, a.LeaveDate, a.EnteredBy, a.ApprovalNote, a.ApprovalDate
+SELECT        a.IdNo, a.LeaveIdNo, a.StartDate, a.EndDate, a.FullDay, b.EmployeeLeaveIdNo, b.LatestStatusUpdate, dbo.EmployeeLeave.DateCreated, dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.Reason, 
+                         dbo.Employee.SupervisorIdNo, a.EmployeeLeaveApprovalIdNo, a.Status, a.ApprovedBy, a.EnteredBy, a.ApprovalNote, a.ApprovalDate
 FROM            dbo.EmployeeLeaveApprovalList_View AS a LEFT OUTER JOIN
                              (SELECT        c.EmployeeLeaveIdNo, MAX(d.DateCreated) AS LatestStatusUpdate
                                FROM            dbo.EmployeeLeaveApprovalItem AS c LEFT OUTER JOIN
                                                          dbo.EmployeeLeaveApproval AS d ON c.EmployeeLeaveApprovalIdNo = d.IdNo
-                               GROUP BY c.EmployeeLeaveIdNo) AS b ON a.IdNo = b.EmployeeLeaveIdNo AND a.LeaveDate = b.LatestStatusUpdate LEFT OUTER JOIN
+                               GROUP BY c.EmployeeLeaveIdNo) AS b ON a.IdNo = b.EmployeeLeaveIdNo AND a.DateCreated = b.LatestStatusUpdate LEFT OUTER JOIN
                          dbo.EmployeeLeave ON a.IdNo = dbo.EmployeeLeave.IdNo LEFT OUTER JOIN
                          dbo.Employee ON dbo.EmployeeLeave.EmployeeIdNo = dbo.Employee.IdNo
 GO

@@ -66,8 +66,8 @@ Namespace DataLayer.AdoNet
                                 "FullDay," &
                                 "IdNo," &
                                 "LeaveIdNo," &
-                                "LeaveReason," &
-                                "LeaveStatus," &
+                                "Reason," &
+                                "Status," &
                                 "StartDate," &
                                 "SupervisorIdNo" &
                                 " FROM EmployeeLeaveLatestApproval_View" &
@@ -85,8 +85,8 @@ Namespace DataLayer.AdoNet
             .FullDay = AATM.DataLayer.AdoNet.Extensions.AsBool(reader("FullDay")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
             .LeaveIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int16)(reader("LeaveIdNo")),
-            .LeaveReason = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveReason")),
-            .LeaveStatus = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveStatus")),
+            .Reason = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Reason")),
+            .Status = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Status")),
             .StartDate = AATM.DataLayer.AdoNet.Extensions.AsDateTime(reader("StartDate")),
             .SupervisorIdNo = AATM.DataLayer.AdoNet.Extensions.AsInt(Of Int32)(reader("SupervisorIdNo"))
             }
@@ -102,8 +102,8 @@ Namespace DataLayer.AdoNet
                                 "ApprovalDate," &
                                 "ApprovalNote," &
                                 "EnteredBy," &
-                                "IdNo," &                               
-                                "LeaveStatus" &
+                                "IdNo," &
+                                "Status" &
                                 " FROM EmployeeLeaveApproval_View" &
                                 " WHERE EmployeeLeaveIdNo = " & employeeLeaveIdNo.ToString()
             Return _db.Read(sql, MakeApprovalHistory).ToList()
@@ -116,7 +116,7 @@ Namespace DataLayer.AdoNet
             .ApprovalNote = AATM.DataLayer.AdoNet.Extensions.AsString(reader("ApprovalNote")),
             .EnteredBy = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("EnteredBy")),
             .IdNo = AATM.DataLayer.AdoNet.Extensions.AsId(Of Int32)(reader("IdNo")),
-            .LeaveStatus = AATM.DataLayer.AdoNet.Extensions.AsString(reader("LeaveStatus"))
+            .Status = AATM.DataLayer.AdoNet.Extensions.AsString(reader("Status"))
             }
 
     End Class

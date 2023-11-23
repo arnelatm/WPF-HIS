@@ -53,10 +53,10 @@ Namespace PresentationLayer.Views.Forms
             Me.chkFullDay = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpEndDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-            Me.lblLeaveReason = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.txtLeaveReason = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.lblLeaveStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboLeaveStatus = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.lblReason = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.txtReason = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
+            Me.lblStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboStatus = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.lblenteredBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -66,7 +66,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvApprovalIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvApprovalDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvItemIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvLeaveStatus = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
+            Me.dgvStatus = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
             Me.dgvApprovedBy = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvApprovalNote = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.EmployeeLeaveIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -255,10 +255,10 @@ Namespace PresentationLayer.Views.Forms
             Me.CFlowLayout2.Controls.Add(Me.dtpStartDate)
             Me.CFlowLayout2.Controls.Add(Me.lblEndDate)
             Me.CFlowLayout2.Controls.Add(Me.dtpEndDate)
-            Me.CFlowLayout2.Controls.Add(Me.lblLeaveReason)
-            Me.CFlowLayout2.Controls.Add(Me.txtLeaveReason)
-            Me.CFlowLayout2.Controls.Add(Me.lblLeaveStatus)
-            Me.CFlowLayout2.Controls.Add(Me.cboLeaveStatus)
+            Me.CFlowLayout2.Controls.Add(Me.lblReason)
+            Me.CFlowLayout2.Controls.Add(Me.txtReason)
+            Me.CFlowLayout2.Controls.Add(Me.lblStatus)
+            Me.CFlowLayout2.Controls.Add(Me.cboStatus)
             Me.CFlowLayout2.Controls.Add(Me.lblenteredBy)
             Me.CFlowLayout2.Controls.Add(Me.cboenteredBy)
             Me.CFlowLayout2.Controls.Add(Me.lblDateCreated)
@@ -436,96 +436,96 @@ Namespace PresentationLayer.Views.Forms
             Me.dtpEndDate.ValueIsMandatory = False
             Me.dtpEndDate.ValueIsNullable = False
             '
-            'lblLeaveReason
+            'lblReason
             '
-            Me.lblLeaveReason.BackColor = System.Drawing.Color.Transparent
-            Me.lblLeaveReason.DisplayOnly = True
-            Me.lblLeaveReason.EditingMode = False
-            resources.ApplyResources(Me.lblLeaveReason, "lblLeaveReason")
-            Me.lblLeaveReason.Name = "lblLeaveReason"
-            Me.lblLeaveReason.Translatable = True
+            Me.lblReason.BackColor = System.Drawing.Color.Transparent
+            Me.lblReason.DisplayOnly = True
+            Me.lblReason.EditingMode = False
+            resources.ApplyResources(Me.lblReason, "lblReason")
+            Me.lblReason.Name = "lblReason"
+            Me.lblReason.Translatable = True
             '
-            'txtLeaveReason
+            'txtReason
             '
-            Me.txtLeaveReason.BackColor = System.Drawing.Color.White
-            Me.txtLeaveReason.BegFindValue = Nothing
-            Me.txtLeaveReason.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-            Me.txtLeaveReason.ComputedValue = False
-            Me.txtLeaveReason.CustomFormat = Nothing
-            Me.txtLeaveReason.DataBoundControl = True
-            Me.txtLeaveReason.EditingMode = True
-            Me.txtLeaveReason.EndFindValue = Nothing
-            Me.txtLeaveReason.FieldDescription = Nothing
-            Me.txtLeaveReason.FieldName = Nothing
-            Me.txtLeaveReason.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.txtLeaveReason.FindEnabled = True
-            Me.CFlowLayout2.SetFlowBreak(Me.txtLeaveReason, True)
-            resources.ApplyResources(Me.txtLeaveReason, "txtLeaveReason")
-            Me.txtLeaveReason.ForeColor = System.Drawing.Color.Black
-            Me.txtLeaveReason.LinkedLabel = Me.lblLeaveReason
-            Me.txtLeaveReason.MaximumValue = Nothing
-            Me.txtLeaveReason.MinimumValue = Nothing
-            Me.txtLeaveReason.Name = "txtLeaveReason"
-            Me.txtLeaveReason.OldValue = Nothing
-            Me.txtLeaveReason.OverrideMaxLength = 0
-            Me.txtLeaveReason.ReadOnly = True
-            Me.txtLeaveReason.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-            Me.txtLeaveReason.Translatable = False
-            Me.txtLeaveReason.ValueIsMandatory = True
+            Me.txtReason.BackColor = System.Drawing.Color.White
+            Me.txtReason.BegFindValue = Nothing
+            Me.txtReason.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+            Me.txtReason.ComputedValue = False
+            Me.txtReason.CustomFormat = Nothing
+            Me.txtReason.DataBoundControl = True
+            Me.txtReason.EditingMode = True
+            Me.txtReason.EndFindValue = Nothing
+            Me.txtReason.FieldDescription = Nothing
+            Me.txtReason.FieldName = Nothing
+            Me.txtReason.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.txtReason.FindEnabled = True
+            Me.CFlowLayout2.SetFlowBreak(Me.txtReason, True)
+            resources.ApplyResources(Me.txtReason, "txtReason")
+            Me.txtReason.ForeColor = System.Drawing.Color.Black
+            Me.txtReason.LinkedLabel = Me.lblReason
+            Me.txtReason.MaximumValue = Nothing
+            Me.txtReason.MinimumValue = Nothing
+            Me.txtReason.Name = "txtReason"
+            Me.txtReason.OldValue = Nothing
+            Me.txtReason.OverrideMaxLength = 0
+            Me.txtReason.ReadOnly = True
+            Me.txtReason.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+            Me.txtReason.Translatable = False
+            Me.txtReason.ValueIsMandatory = True
             '
-            'lblLeaveStatus
+            'lblStatus
             '
-            Me.lblLeaveStatus.BackColor = System.Drawing.Color.Transparent
-            Me.lblLeaveStatus.DisplayOnly = True
-            Me.lblLeaveStatus.EditingMode = False
-            resources.ApplyResources(Me.lblLeaveStatus, "lblLeaveStatus")
-            Me.lblLeaveStatus.Name = "lblLeaveStatus"
-            Me.lblLeaveStatus.Translatable = True
+            Me.lblStatus.BackColor = System.Drawing.Color.Transparent
+            Me.lblStatus.DisplayOnly = True
+            Me.lblStatus.EditingMode = False
+            resources.ApplyResources(Me.lblStatus, "lblStatus")
+            Me.lblStatus.Name = "lblStatus"
+            Me.lblStatus.Translatable = True
             '
-            'cboLeaveStatus
+            'cboStatus
             '
-            Me.cboLeaveStatus.BackColor = System.Drawing.Color.White
-            Me.cboLeaveStatus.BegFindValue = Nothing
-            Me.cboLeaveStatus.ChangingSearchValueOnly = False
-            Me.cboLeaveStatus.CurrentSearchTerm = ""
-            Me.cboLeaveStatus.DataValue = Nothing
-            Me.cboLeaveStatus.DefaultValue = Nothing
-            Me.cboLeaveStatus.DisplayMember = "Name"
-            Me.cboLeaveStatus.DisplayOnly = True
-            Me.cboLeaveStatus.DropDownHeight = 24
-            Me.cboLeaveStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
-            Me.cboLeaveStatus.Editable = True
-            Me.cboLeaveStatus.EditingMode = True
-            Me.cboLeaveStatus.EndFindValue = Nothing
-            Me.cboLeaveStatus.FieldDescription = Nothing
-            Me.cboLeaveStatus.FieldName = Nothing
-            Me.cboLeaveStatus.FilterRule = Nothing
-            Me.cboLeaveStatus.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.cboLeaveStatus.FindEnabled = True
-            Me.CFlowLayout2.SetFlowBreak(Me.cboLeaveStatus, True)
-            resources.ApplyResources(Me.cboLeaveStatus, "cboLeaveStatus")
-            Me.cboLeaveStatus.ForeColor = System.Drawing.Color.Black
-            Me.cboLeaveStatus.FormattingEnabled = True
-            Me.cboLeaveStatus.HideWhenNotEditingOrAdding = False
-            Me.cboLeaveStatus.IgnoreCase = False
-            Me.cboLeaveStatus.LimitToList = False
-            Me.cboLeaveStatus.LinkedLabel = Me.lblLeaveStatus
-            Me.cboLeaveStatus.Name = "cboLeaveStatus"
-            Me.cboLeaveStatus.OldValue = 0
-            Me.cboLeaveStatus.OriginalDataSource = Nothing
-            Me.cboLeaveStatus.OriginalList = Nothing
-            Me.cboLeaveStatus.OverrideDropDownStyleList = False
-            Me.cboLeaveStatus.PreviousSearchTerm = Nothing
-            Me.cboLeaveStatus.PropertySelector = Nothing
-            Me.cboLeaveStatus.SuggestBoxHeight = 200
-            Me.cboLeaveStatus.SuggestCharCount = 0
-            Me.cboLeaveStatus.SuggestListOrderRule = Nothing
-            Me.cboLeaveStatus.TextToSearch = Nothing
-            Me.cboLeaveStatus.Translatable = False
-            Me.cboLeaveStatus.ValueIsMandatory = False
-            Me.cboLeaveStatus.ValueIsNullable = False
-            Me.cboLeaveStatus.ValueIsNumeric = False
-            Me.cboLeaveStatus.ValueMember = "Code"
+            Me.cboStatus.BackColor = System.Drawing.Color.White
+            Me.cboStatus.BegFindValue = Nothing
+            Me.cboStatus.ChangingSearchValueOnly = False
+            Me.cboStatus.CurrentSearchTerm = ""
+            Me.cboStatus.DataValue = Nothing
+            Me.cboStatus.DefaultValue = Nothing
+            Me.cboStatus.DisplayMember = "Name"
+            Me.cboStatus.DisplayOnly = True
+            Me.cboStatus.DropDownHeight = 24
+            Me.cboStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
+            Me.cboStatus.Editable = True
+            Me.cboStatus.EditingMode = True
+            Me.cboStatus.EndFindValue = Nothing
+            Me.cboStatus.FieldDescription = Nothing
+            Me.cboStatus.FieldName = Nothing
+            Me.cboStatus.FilterRule = Nothing
+            Me.cboStatus.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.cboStatus.FindEnabled = True
+            Me.CFlowLayout2.SetFlowBreak(Me.cboStatus, True)
+            resources.ApplyResources(Me.cboStatus, "cboStatus")
+            Me.cboStatus.ForeColor = System.Drawing.Color.Black
+            Me.cboStatus.FormattingEnabled = True
+            Me.cboStatus.HideWhenNotEditingOrAdding = False
+            Me.cboStatus.IgnoreCase = False
+            Me.cboStatus.LimitToList = False
+            Me.cboStatus.LinkedLabel = Me.lblStatus
+            Me.cboStatus.Name = "cboStatus"
+            Me.cboStatus.OldValue = 0
+            Me.cboStatus.OriginalDataSource = Nothing
+            Me.cboStatus.OriginalList = Nothing
+            Me.cboStatus.OverrideDropDownStyleList = False
+            Me.cboStatus.PreviousSearchTerm = Nothing
+            Me.cboStatus.PropertySelector = Nothing
+            Me.cboStatus.SuggestBoxHeight = 200
+            Me.cboStatus.SuggestCharCount = 0
+            Me.cboStatus.SuggestListOrderRule = Nothing
+            Me.cboStatus.TextToSearch = Nothing
+            Me.cboStatus.Translatable = False
+            Me.cboStatus.ValueIsMandatory = False
+            Me.cboStatus.ValueIsNullable = False
+            Me.cboStatus.ValueIsNumeric = False
+            Me.cboStatus.ValueMember = "Code"
             '
             'lblenteredBy
             '
@@ -598,7 +598,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewApprovalHistory.BegFindValue = Nothing
             Me.DataGridViewApprovalHistory.Cached = False
             Me.DataGridViewApprovalHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.DataGridViewApprovalHistory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvApprovalIdNo, Me.dgvApprovalDate, Me.dgvItemIdNo, Me.dgvLeaveStatus, Me.dgvApprovedBy, Me.dgvApprovalNote, Me.EmployeeLeaveIdNo})
+            Me.DataGridViewApprovalHistory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgvApprovalIdNo, Me.dgvApprovalDate, Me.dgvItemIdNo, Me.dgvStatus, Me.dgvApprovedBy, Me.dgvApprovalNote, Me.EmployeeLeaveIdNo})
             Me.DataGridViewApprovalHistory.DataFilter = Nothing
             Me.DataGridViewApprovalHistory.DataSource = Me.bsEmployeeLeaveApprovalHistory
             DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -706,22 +706,22 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvItemIdNo.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
             Me.dgvItemIdNo.Translatable = False
             '
-            'dgvLeaveStatus
+            'dgvStatus
             '
-            Me.dgvLeaveStatus.AutoComplete = False
-            Me.dgvLeaveStatus.DataPropertyName = "LeaveStatus"
+            Me.dgvStatus.AutoComplete = False
+            Me.dgvStatus.DataPropertyName = "Status"
             DataGridViewCellStyle5.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black
-            Me.dgvLeaveStatus.DefaultCellStyle = DataGridViewCellStyle5
-            Me.dgvLeaveStatus.EditingMode = False
-            Me.dgvLeaveStatus.Frozen = True
-            resources.ApplyResources(Me.dgvLeaveStatus, "dgvLeaveStatus")
-            Me.dgvLeaveStatus.Name = "dgvLeaveStatus"
-            Me.dgvLeaveStatus.ReadOnly = True
-            Me.dgvLeaveStatus.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
-            Me.dgvLeaveStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-            Me.dgvLeaveStatus.SuggestCharCount = 0
-            Me.dgvLeaveStatus.Translatable = False
+            Me.dgvStatus.DefaultCellStyle = DataGridViewCellStyle5
+            Me.dgvStatus.EditingMode = False
+            Me.dgvStatus.Frozen = True
+            resources.ApplyResources(Me.dgvStatus, "dgvStatus")
+            Me.dgvStatus.Name = "dgvStatus"
+            Me.dgvStatus.ReadOnly = True
+            Me.dgvStatus.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+            Me.dgvStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvStatus.SuggestCharCount = 0
+            Me.dgvStatus.Translatable = False
             '
             'dgvApprovedBy
             '
@@ -809,10 +809,10 @@ Namespace PresentationLayer.Views.Forms
         Public WithEvents dtpEndDate As CCustomDateTimePicker
         Friend WithEvents lblFullDay As CLabel
         Friend WithEvents chkFullDay As CCheckBox
-        Friend WithEvents lblLeaveReason As CLabel
-        Public WithEvents txtLeaveReason As CTextBox
-        Friend WithEvents lblLeaveStatus As CLabel
-        Public WithEvents cboLeaveStatus As CtComboBox
+        Friend WithEvents lblReason As CLabel
+        Public WithEvents txtReason As CTextBox
+        Friend WithEvents lblStatus As CLabel
+        Public WithEvents cboStatus As CtComboBox
         Friend WithEvents lblenteredBy As CLabel
         Public WithEvents cboenteredBy As CtComboBox
         Friend WithEvents DataGridViewApprovalHistory As CDataGridView
@@ -826,7 +826,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents dgvApprovalIdNo As CDgvTextColumn
         Friend WithEvents dgvApprovalDate As CDgvTextColumn
         Friend WithEvents dgvItemIdNo As CDgvTextColumn
-        Friend WithEvents dgvLeaveStatus As CtDgvComboBoxColumn
+        Friend WithEvents dgvStatus As CtDgvComboBoxColumn
         Friend WithEvents dgvApprovedBy As CDgvTextColumn
         Friend WithEvents dgvApprovalNote As CDgvTextColumn
         Friend WithEvents EmployeeLeaveIdNo As DataGridViewTextBoxColumn

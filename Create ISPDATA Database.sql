@@ -6360,8 +6360,8 @@ CREATE TABLE [dbo].[EmployeeLeave](
 	[LeaveStart] [datetime] NULL,
 	[LeaveEnd] [datetime] NULL,
 	[FullDayLeave] [bit] NULL,
-	[LeaveStatus] [char](1) NULL,
-	[LeaveReason] [nvarchar](200) NULL,
+	[Status] [char](1) NULL,
+	[Reason] [nvarchar](200) NULL,
 	[DateCreated] [nchar](10) NULL,
 	[DateTimeStamp] [timestamp] NULL,
  CONSTRAINT [PK_EmployeeLeave] PRIMARY KEY CLUSTERED 

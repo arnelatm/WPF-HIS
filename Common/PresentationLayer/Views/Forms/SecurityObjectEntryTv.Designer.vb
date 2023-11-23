@@ -36,12 +36,12 @@ Namespace PresentationLayer.Views.Forms
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtSecurityObjectCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblSystemViewIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboSystemViewIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblSecurityObjectName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblSecurityObjectNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboSystemViewIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.lblSecurityObjectName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblSecurityObjectNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblManuallyGenerated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkManuallyAdded = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -286,7 +286,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSystemViewIdNo.OverrideDropDownStyleList = False
             Me.cboSystemViewIdNo.PreviousSearchTerm = Nothing
             Me.cboSystemViewIdNo.PropertySelector = Nothing
-            Me.cboSystemViewIdNo.ReadOnlyCombo = False
             Me.cboSystemViewIdNo.SuggestBoxHeight = 200
             Me.cboSystemViewIdNo.SuggestListOrderRule = Nothing
             Me.cboSystemViewIdNo.TextToSearch = Nothing
@@ -349,7 +348,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacParentIdNo.OverrideDropDownStyleList = False
             Me.cacParentIdNo.PreviousSearchTerm = Nothing
             Me.cacParentIdNo.PropertySelector = Nothing
-            Me.cacParentIdNo.ReadOnlyCombo = False
             Me.cacParentIdNo.SuggestBoxHeight = 200
             Me.cacParentIdNo.SuggestListOrderRule = Nothing
             Me.cacParentIdNo.TextToSearch = Nothing
@@ -408,10 +406,10 @@ Namespace PresentationLayer.Views.Forms
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
             Me.floDataDisplay.ResumeLayout(False)
             Me.floDataDisplay.PerformLayout()
-            Me.ResumeLayout(false)
-        Me.PerformLayout
+            Me.ResumeLayout(False)
+            Me.PerformLayout()
 
-End Sub
+        End Sub
         Friend WithEvents TxtIdNo As CTextBox
         Friend WithEvents txtSecurityObjectName As CTextBox
         Friend WithEvents txtSecurityObjectNameAra As CTextBoxArabic
@@ -422,11 +420,11 @@ End Sub
         Friend WithEvents lblSecurityObjectNameAra As CLabel
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents lblParentIdNo As CLabel
-        Friend WithEvents cacParentIdNo As CaComboBox
+        Friend WithEvents cacParentIdNo As CtComboBox
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents txtSecurityObjectCode As CTextBox
         Friend WithEvents lblSystemViewIdNo As CLabel
-        Friend WithEvents cboSystemViewIdNo As CaComboBox
+        Friend WithEvents cboSystemViewIdNo As CtComboBox
         Friend WithEvents lblManuallyGenerated As CLabel
         Friend WithEvents chkManuallyAdded As CCheckBox
     End Class

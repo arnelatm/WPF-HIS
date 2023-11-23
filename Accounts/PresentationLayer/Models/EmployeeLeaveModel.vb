@@ -17,8 +17,8 @@ Namespace PresentationLayer.Models
         Public Property HolidayIdNo As Int16
         Public Property IdNo As Int32
         Public Property LeaveIdNo As Int16
-        Public Property LeaveReason As String
-        Public Property LeaveStatus As String
+        Public Property Reason As String
+        Public Property Status As String
         Public Property StartDate As DateTime
         Public Property SupervisorIdNo As Int32?
 

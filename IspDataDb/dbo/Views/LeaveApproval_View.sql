@@ -1,16 +1,18 @@
-﻿
-CREATE VIEW [dbo].[LeaveApproval_View]
+﻿CREATE VIEW dbo.LeaveApproval_View
 AS
-SELECT        dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.LeaveIdNo, dbo.EmployeeLeave.StartDate, dbo.EmployeeLeave.EndDate, dbo.EmployeeLeave.FullDay, dbo.EmployeeLeave.EnteredBy, 
-                         dbo.EmployeeLeave.LeaveReason, dbo.EmployeeLeave.DateCreated AS LeaveDate, dbo.EmployeeLeaveApproval.ApprovedBy, IsNull(dbo.EmployeeLeaveApprovalItem.Status,'0') AS LeaveStatus, 
-                         dbo.EmployeeLeaveApprovalItem.ApprovalNote, dbo.EmployeeLeaveApproval.DateCreated AS ApprovalDate, dbo.Employee.SupervisorIdNo, dbo.EmployeeLeave.DateTimeStamp, 
-                         dbo.EmployeeLeaveApprovalItem.EmployeeLeaveApprovalIdNo, dbo.EmployeeLeaveApprovalItem.EmployeeLeaveIdNo, dbo.EmployeeLeaveApprovalItem.IdNo
-FROM            dbo.EmployeeLeaveApproval RIGHT OUTER JOIN
-                         dbo.EmployeeLeaveApprovalItem ON dbo.EmployeeLeaveApproval.IdNo = dbo.EmployeeLeaveApprovalItem.EmployeeLeaveApprovalIdNo LEFT OUTER JOIN
-                         dbo.EmployeeLeave LEFT OUTER JOIN
-                         dbo.Employee ON dbo.EmployeeLeave.EmployeeIdNo = dbo.Employee.IdNo ON dbo.EmployeeLeaveApprovalItem.EmployeeLeaveIdNo = dbo.EmployeeLeave.IdNo
+SELECT dbo.EmployeeLeave.EmployeeIdNo, dbo.EmployeeLeave.LeaveIdNo, dbo.EmployeeLeave.StartDate, dbo.EmployeeLeave.EndDate, dbo.EmployeeLeave.FullDay, dbo.EmployeeLeave.EnteredBy, dbo.EmployeeLeave.Reason, 
+                  dbo.EmployeeLeave.DateCreated, dbo.EmployeeLeaveApproval.ApprovedBy, ISNULL(dbo.EmployeeLeaveApprovalItem.Status, '0') AS Status, dbo.EmployeeLeaveApprovalItem.ApprovalNote, 
+                  dbo.EmployeeLeaveApproval.DateCreated AS ApprovalDate, dbo.Employee.SupervisorIdNo, dbo.EmployeeLeave.DateTimeStamp, dbo.EmployeeLeaveApprovalItem.EmployeeLeaveApprovalIdNo, 
+                  dbo.EmployeeLeaveApprovalItem.EmployeeLeaveIdNo, dbo.EmployeeLeaveApprovalItem.IdNo, dbo.[User].UserName AS ApprovedByName
+FROM     dbo.EmployeeLeaveApproval INNER JOIN
+                  dbo.[User] ON dbo.EmployeeLeaveApproval.ApprovedBy = dbo.[User].IdNo RIGHT OUTER JOIN
+                  dbo.EmployeeLeaveApprovalItem ON dbo.EmployeeLeaveApproval.IdNo = dbo.EmployeeLeaveApprovalItem.EmployeeLeaveApprovalIdNo LEFT OUTER JOIN
+                  dbo.EmployeeLeave LEFT OUTER JOIN
+                  dbo.Employee ON dbo.EmployeeLeave.EmployeeIdNo = dbo.Employee.IdNo ON dbo.EmployeeLeaveApprovalItem.EmployeeLeaveIdNo = dbo.EmployeeLeave.IdNo
 GO
-EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 1, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'LeaveApproval_View';
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPaneCount', @value = 2, @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'LeaveApproval_View';
+
+
 
 
 GO
@@ -117,10 +119,20 @@ Begin DesignProperties =
          End
          Begin Table = "Employee"
             Begin Extent = 
-               Top = 27
-               Left = 606
-               Bottom = 157
-               Right = 804
+               Top = 178
+               Left = 561
+               Bottom = 308
+               Right = 759
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "User"
+            Begin Extent = 
+               Top = 6
+               Left = 849
+               Bottom = 169
+               Right = 1072
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -136,22 +148,28 @@ Begin DesignProperties =
    Begin CriteriaPane = 
       Begin ColumnWidths = 11
          Column = 2880
-         Alias = 2310
+         Alias = 2316
          Table = 3600
          Output = 720
          Append = 1400
          NewValue = 1170
-         SortType = 1350
-         SortOrder = 1410
+         SortType = 1356
+         SortOrder = 1416
          GroupBy = 1350
-         Filter = 1350
+         Filter = 1356
          Or = 1350
-         Or = 1350
+', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'LeaveApproval_View';
+
+
+
+
+
+
+GO
+EXECUTE sp_addextendedproperty @name = N'MS_DiagramPane2', @value = N'         Or = 1350
          Or = 1350
       End
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'LeaveApproval_View';
-
-
 

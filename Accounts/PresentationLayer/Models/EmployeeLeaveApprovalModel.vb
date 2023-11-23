@@ -7,14 +7,18 @@ Namespace PresentationLayer.Models
     '''     Implements IModel and communicates with WCF Service.
     ''' </summary>
     Public Class EmployeeLeaveApprovalModel
-        Public Property DateCreated As DateTime
+        Public Property DateCreated As DateTime?
         Public Property ApprovedBy As Int32
         Public Property IdNo As Int32
         Public Property EmployeeLeaveApprovalItems As List(Of EmployeeLeaveApprovalItemModel)
-        'Public Property EmployeeLeaveIdNo As Int32
-        'Public Property Notes As String
-        'Public Property Status As String
 
+    End Class
+
+    Public Class EmployeeLeaveEarnedApprovalModel
+        Public Property DateCreated As DateTime?
+        Public Property ApprovedBy As Int32
+        Public Property IdNo As Int32
+        Public Property EmployeeLeaveEarnedApprovalItems As List(Of EmployeeLeaveEarnedApprovalItemModel)
     End Class
 
 End Namespace

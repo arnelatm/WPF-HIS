@@ -13,7 +13,6 @@ Public Class CtComboBox
 
 #Region "Custom Properties"
 
-    'Private MyErrorProvider As New ErrorProviderExtended
     Private _translatable As Boolean = False
     Private _editingMode As Boolean = False
     Private _filterRule As Expression(Of Func(Of String, String, Boolean))
@@ -464,51 +463,16 @@ Public Class CtComboBox
             Dim x As T
             x = CType(SelectedValue, T)
             Return x
-            'If ValueMember.ToLower() = "idno" Then
-            '    Return CType(SelectedItem, Lookup.LookupData).IdNo
-            'ElseIf ValueMember.ToLower() = "name" Then
-            '    Return CType(SelectedItem, Lookup.LookupData).Name
-            'ElseIf ValueMember.ToLower() = "code" Then
-            '    Return CType(SelectedItem, Lookup.LookupData).Code
-            'ElseIf ValueMember.ToLower() = "index" Then
-            '    Return CType(SelectedItem, Lookup.LookupData).Index
-            'Else
-            '    Return Text
-            'End If
         End If
     End Function
 
     Public Function GetValue()
         If SelectedItem IsNot Nothing Then
-
-            'Dim col As Int16 = DirectCast(DataSource, System.Data.DataTable).Columns(ValueMember).Ordinal
             Return DirectCast(SelectedItem, System.Data.DataRowView).Row(ValueMember)
-            'If ValueMember.ToLower() = "idno" Then
-            '    Dim col As Int16 = DirectCast(DataSource, System.Data.DataTable).Columns("").Ordinal
-            '    Return CType(SelectedItem, DataRow)(col)
-            'ElseIf ValueMember.ToLower() = "name" Then
-            '    Return CType(SelectedItem, DataRow)("Name")
-            'ElseIf ValueMember.ToLower() = "code" Then
-            '    Return CType(SelectedItem, DataRow)("Code")
-            'ElseIf ValueMember.ToLower() = "index" Then
-            '    Return CType(SelectedItem, DataRow)("Index")
-            'Else
-            '    Return Text
-            'End If
         Else
             Return Nothing
         End If
     End Function
-
-
-    'Public Function GetNullableValue(Of T)()
-    '    Dim x = GetValue()
-    '    If x Is Nothing Then
-    '        Return Nothing
-    '    Else
-    '        Return CType(x, T)
-    '    End If
-    'End Function
 
     Public Sub SetValue(value)
         If value Is DBNull.Value OrElse value Is Nothing Then
@@ -526,49 +490,9 @@ Public Class CtComboBox
 
     Public Property DataValue
 
-
-
     Private Sub ValueSearch(value As Object)
-        'Dim returnValue As Int32
-        'Dim found As Boolean = False
-        'Dim i = 0
         If DataSource IsNot Nothing Then
             SelectedValue = value
-
-
-
-
-
-            '            If Not DataManager Is Nothing Then
-            '                Dim bindingField As String = ValueMember.BindingField
-            '                If String.IsNullOrEmpty(bindingField) Then
-            '                    Throw New InvalidOperationException(sR.GetString("ListControlEmptyValueMemberInSettingSelectedValue"))
-            '                End If
-
-            '                Dim itemProperties As PropertyDescriptorCollection = DataManager.GetItemProperties()
-            '                Dim property As PropertyDescriptor = itemProperties.Find(bindingField, IgnoreCase:  True) 
-
-            '                    Dim num2 As Integer = (SelectedIndex = DataManager.Find(property, value, keepIndex:  True)) 
-
-            'End If
-            'For Each item As DataRow In DataSource.Rows()
-            '    If item(ValueMember) = value Then
-            '        SelectedIndex = i
-            '        found = True
-            '        Exit For
-            '    End If
-            '    i += 1
-            'Next
-            'If Not found Then
-            '    SelectedIndex = -1
-            '    Select Case ValueMember
-            '        Case 
-            '    End Select
-            '    returnValue = Nothing
-            '    If value IsNot Nothing Then
-            '        Text = value
-            '    End If
-            'End If
         Else
             SelectedIndex = -1
         End If
@@ -651,33 +575,6 @@ Public Class CtComboBox
     End Sub
 
     Protected Sub ContextHandler(sender As Object, e As EventArgs)
-
-        'Const separator = "-"
-
-        '_contextMenuStrip1.Items.Clear()
-
-        'Dim menuItemFind As New ToolStripMenuItem With {
-        '        .Text = _textFind
-        '        }
-        '_contextMenuStrip1.Items.Add(menuItemFind)
-        'menuItemFind.ShortcutKeys = Keys.Control Or Keys.F
-        '' ReSharper disable once LocalizableElement
-        'menuItemFind.ShortcutKeyDisplayString = "Ctrl-F"
-        'AddHandler menuItemFind.Click, AddressOf MenuItemFind_Click
-
-        '_contextMenuStrip1.Items.Add(separator)
-
-        'Dim menuItemSelectAll As New ToolStripMenuItem With {
-        '        .Text = _textSelectAll
-        '        }
-        '_contextMenuStrip1.Items.Add(menuItemSelectAll)
-        'menuItemSelectAll.ShortcutKeys = Keys.Control Or Keys.A
-        '' ReSharper disable once LocalizableElement
-        'menuItemSelectAll.ShortcutKeyDisplayString = "Ctrl-A"
-        ''menuItemSelectAll.Enabled = (IIf(SampleTextBox.SelectionLength = SampleTextBox.Text.Length Or SampleTextBox.SelectionLength = SampleTextBox.Text.Trim.Length, False, True))
-        'AddHandler menuItemSelectAll.Click, AddressOf MenuItemSelectAll_Click
-
-        '_contextMenuStrip1.Items.Add(separator)
 
         Const separator = "-"
 
@@ -828,15 +725,8 @@ Public Class CtComboBox
             searchForm.SetFieldDescription(FieldName)
         End If
         Dim x = CallByName(myForm, "GetFieldType", CallType.Method, {FieldName})
-        'Dim x = Invoker.InvokeProperty(myForm, "GetFieldType", CallType.Method, {FieldName})
-        'If x IsNot Nothing Then
         FindDataType = GetObjectDataType(x)
-        'Else
-        'Dim y = Invoker.InvokeProperty(myForm, "GetFieldType", CallType.Method, {FieldName})
-        'FindDataType = GetObjectDataType(y)
-        'End If
         searchForm.ShowDialog()
-        'CallByName(myForm, "FindFieldNew", CallType.Method, Me)
         Invoker.InvokeFunction(myForm, "FindFieldNew", {Me})
     End Sub
 
@@ -852,7 +742,6 @@ Public Class CtComboBox
     End Sub
 
     Private Sub SetListBoxFormLocation(ByRef suggestLbForm As CListBoxForm)
-        'SetVisibleCore(True)
         Dim pnt As Point
         Dim formLocation As Point
         Dim screenRectangle As Rectangle
@@ -876,25 +765,6 @@ Public Class CtComboBox
         Focus()
     End Sub
 
-    'Private Event SuggestListBoxOnTextChanged()
-
-    'Private Sub OnSuggestListBoxOnTextChanged()
-    '    If Not Focused Then Return
-    '    _suggestBindingList.Clear()
-    '    _suggestBindingList.RaiseListChangedEvents = False
-    '    PropertySelectorCompiled(Items).Where(_filterRuleCompiled).OrderBy(_suggestListOrderRuleCompiled).ToList().ForEach(AddressOf _suggestBindingList.Add)
-    '    _suggestBindingList.RaiseListChangedEvents = True
-    '    _suggestBindingList.ResetBindings()
-    '    If _suggestBindingList.Count = 0 And LimitToList Then
-    '        Beep()
-    '        SendKeys.SendWait("{BACKSPACE}")
-    '    ElseIf _suggestBindingList.Count = 1 AndAlso _suggestBindingList.Single().Length = Text.Trim().Length Then
-    '        Text = _suggestBindingList.Single()
-    '        [Select](0, Text.Length)
-    '        HideSuggestionBox()
-    '    End If
-    'End Sub
-
     Public Function GetNullableValue(Of T)()
         Dim x = GetValue()
         If x Is Nothing Then
@@ -903,6 +773,7 @@ Public Class CtComboBox
             Return CType(x, T)
         End If
     End Function
+
 #End Region
 
 #Region "FindableControl"
@@ -971,18 +842,6 @@ Public Class CtComboBox
         SelectedValue = _lastValue
     End Sub
 
-    'Private Sub caCombobox_TextChanged(sender As Object, e As EventArgs) Handles Me.TextChanged
-    '    ComboBoxValueChanged = True
-    'End Sub
-
-    'Private Sub caComboBox_SelectedValueChanged(sender As Object, e As EventArgs) Handles Me.SelectedValueChanged
-    '    If Not ComboBoxValueChanged Then
-    '        ComboBoxValueChanged = True
-    '    Else
-    '        ComboBoxValueChanged = False
-    '    End If
-    'End Sub
-
     Public Function ValueChanged()
         If SelectedValue = _lastValue Then
             Return False
@@ -1010,35 +869,6 @@ Public Class CtComboBox
         End If
         Return description
     End Function
-
-    'Public Function SaveFieldName()
-    '    _displayField = DisplayMember
-    'End Function
-
-    'Public Function binarySearch(value)
-    '    Dim index As Int32
-    '    Dim lowerBound = 0
-    '    Dim upperBound = DataSource.Count() - 1
-    '    Dim found = False
-    '    While Not found
-
-    '    End While
-    '    Return index
-    '    '   If upperBound < lowerBound Then
-    '    '             Exit: x does Not exists.
-
-    '    '   set midPoint = lowerBound + ( upperBound - lowerBound ) / 2
-
-    '    '   If A Then[midPoint] < x
-    '    '      set lowerBound = midPoint + 1
-
-    '    '   If A Then[midPoint] > x
-    '    '      set upperBound = midPoint - 1
-
-    '    '   If A Then[midPoint] = x
-    '    '      Exit: x found at location midPoint
-    '    'End While
-    'End Function
 
 End Class
 

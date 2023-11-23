@@ -84,15 +84,15 @@ Namespace PresentationLayer.Presenters
             Else
                 MakeControlDataSources({New String() {"Leave", "LeaveIdNo", Nothing, " Holiday = 0"}})
             End If
-            CreateEnumDataSourceT(Of LeaveStatusSelection)("LeaveStatus")
-            CreateEnumDataT(Of LeaveStatusSelection)(View.LeaveStatusList)
+            CreateEnumDataSourceT(Of LeaveStatusSelection)("Status")
+            CreateEnumDataT(Of LeaveStatusSelection)(View.StatusList)
             MakeVarDataSources({New String() {"User", "Users", "IdNo,UserName", Nothing, Nothing}})
         End Sub
 
         Private Sub OnBeforeEdit() Handles MyBase.BeforeEdit
             Dim type As Type = View.GetType
-            If View.LeaveStatus <> EnumToCode(LeaveStatusSelection.Submitted) Then
-                Messaging.Show(True, "MsgLeaveAlreadyActed", {"approvalAction", CodeToEnum(Of LeaveStatusSelection)(View.LeaveStatus).ToString()})
+            If View.Status <> EnumToCode(LeaveStatusSelection.Submitted) Then
+                Messaging.Show(True, "MsgLeaveAlreadyActed", {"approvalAction", CodeToEnum(Of LeaveStatusSelection)(View.Status).ToString()})
                 CancelEdit = True
             ElseIf View.EnteredBy <> GlobalVariables.UserIdNo Then
                 If Not UserHasAccess("HumanResources") Then
@@ -219,7 +219,7 @@ Namespace PresentationLayer.Presenters
                             If employeeLeaveCreditModel.Cumulative Then
                                 records = _employeeLeaveService.GetEmployeeLeaves(View.EmployeeIdNo, View.LeaveIdNo, "All")
                                 For Each item As EmployeeLeaveModel In records
-                                    If item.LeaveStatus <> EnumToCode(LeaveStatusSelection.Used) Then
+                                    If item.Status <> EnumToCode(LeaveStatusSelection.Used) Then
                                         noOfAppliedDays += DateDiff(DateInterval.Day, item.StartDate, item.EndDate) + 1
                                     End If
                                 Next
@@ -276,7 +276,7 @@ Namespace PresentationLayer.Presenters
         Private Function NoOverlappingDates() As Boolean
             Dim noOverlap As Boolean = True
             Dim overlappingLeave As EmployeeLeaveModel = _employeeLeaveService.GetOverlappingLeave(View.EmployeeIdNo, View.StartDate, View.EndDate)
-            If overlappingLeave.IdNo > 0 Then
+            If View.IdNo <> overlappingLeave.IdNo And overlappingLeave.IdNo > 0 Then
                 MessageBox.Show("The applied date for this leave overlaps with an existing leave application. See Leave Application Number #" & overlappingLeave.IdNo.ToString("N0"))
                 noOverlap = False
             End If

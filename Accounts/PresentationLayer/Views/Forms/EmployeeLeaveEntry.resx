@@ -567,139 +567,139 @@
   <data name="&gt;&gt;dtpEndDate.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="lblLeaveReason.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblReason.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="lblLeaveReason.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblReason.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblLeaveReason.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblReason.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 212</value>
   </data>
-  <data name="lblLeaveReason.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblReason.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="lblLeaveReason.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblReason.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 23</value>
   </data>
-  <data name="lblLeaveReason.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblReason.TabIndex" type="System.Int32, mscorlib">
     <value>297</value>
   </data>
-  <data name="lblLeaveReason.Text" xml:space="preserve">
+  <data name="lblReason.Text" xml:space="preserve">
     <value>Reason </value>
   </data>
-  <data name="lblLeaveReason.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblReason.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;lblLeaveReason.Name" xml:space="preserve">
-    <value>lblLeaveReason</value>
+  <data name="&gt;&gt;lblReason.Name" xml:space="preserve">
+    <value>lblReason</value>
   </data>
-  <data name="&gt;&gt;lblLeaveReason.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblReason.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lblLeaveReason.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblReason.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
-  <data name="&gt;&gt;lblLeaveReason.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblReason.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="txtLeaveReason.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="txtReason.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="txtLeaveReason.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="txtReason.Location" type="System.Drawing.Point, System.Drawing">
     <value>203, 212</value>
   </data>
-  <data name="txtLeaveReason.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="txtReason.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtLeaveReason.Multiline" type="System.Boolean, mscorlib">
+  <data name="txtReason.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="txtLeaveReason.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="txtReason.Size" type="System.Drawing.Size, System.Drawing">
     <value>534, 48</value>
   </data>
-  <data name="txtLeaveReason.TabIndex" type="System.Int32, mscorlib">
+  <data name="txtReason.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;txtLeaveReason.Name" xml:space="preserve">
-    <value>txtLeaveReason</value>
+  <data name="&gt;&gt;txtReason.Name" xml:space="preserve">
+    <value>txtReason</value>
   </data>
-  <data name="&gt;&gt;txtLeaveReason.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtReason.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CTextBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;txtLeaveReason.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtReason.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
-  <data name="&gt;&gt;txtLeaveReason.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtReason.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
-  <data name="lblLeaveStatus.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblStatus.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="lblLeaveStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblStatus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblLeaveStatus.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblStatus.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 262</value>
   </data>
-  <data name="lblLeaveStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="lblLeaveStatus.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>190, 23</value>
   </data>
-  <data name="lblLeaveStatus.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblStatus.TabIndex" type="System.Int32, mscorlib">
     <value>298</value>
   </data>
-  <data name="lblLeaveStatus.Text" xml:space="preserve">
+  <data name="lblStatus.Text" xml:space="preserve">
     <value>Status</value>
   </data>
-  <data name="lblLeaveStatus.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblStatus.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="&gt;&gt;lblLeaveStatus.Name" xml:space="preserve">
-    <value>lblLeaveStatus</value>
+  <data name="&gt;&gt;lblStatus.Name" xml:space="preserve">
+    <value>lblStatus</value>
   </data>
-  <data name="&gt;&gt;lblLeaveStatus.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblStatus.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CLabel, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lblLeaveStatus.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblStatus.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
-  <data name="&gt;&gt;lblLeaveStatus.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblStatus.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
-  <data name="cboLeaveStatus.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="cboStatus.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 10pt</value>
   </data>
-  <data name="cboLeaveStatus.IntegralHeight" type="System.Boolean, mscorlib">
+  <data name="cboStatus.IntegralHeight" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="cboLeaveStatus.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cboStatus.Location" type="System.Drawing.Point, System.Drawing">
     <value>203, 262</value>
   </data>
-  <data name="cboLeaveStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="cboStatus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="cboLeaveStatus.MaxDropDownItems" type="System.Int32, mscorlib">
+  <data name="cboStatus.MaxDropDownItems" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="cboLeaveStatus.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cboStatus.Size" type="System.Drawing.Size, System.Drawing">
     <value>534, 24</value>
   </data>
-  <data name="cboLeaveStatus.TabIndex" type="System.Int32, mscorlib">
+  <data name="cboStatus.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;cboLeaveStatus.Name" xml:space="preserve">
-    <value>cboLeaveStatus</value>
+  <data name="&gt;&gt;cboStatus.Name" xml:space="preserve">
+    <value>cboStatus</value>
   </data>
-  <data name="&gt;&gt;cboLeaveStatus.Type" xml:space="preserve">
+  <data name="&gt;&gt;cboStatus.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;cboLeaveStatus.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cboStatus.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
   </data>
-  <data name="&gt;&gt;cboLeaveStatus.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cboStatus.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
   <data name="lblenteredBy.Font" type="System.Drawing.Font, System.Drawing">
@@ -903,16 +903,16 @@
   <data name="dgvItemIdNo.Width" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
-  <metadata name="dgvLeaveStatus.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="dgvStatus.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="dgvLeaveStatus.HeaderText" xml:space="preserve">
+  <data name="dgvStatus.HeaderText" xml:space="preserve">
     <value>Approval / Disapproval Status</value>
   </data>
-  <data name="dgvLeaveStatus.MinimumWidth" type="System.Int32, mscorlib">
+  <data name="dgvStatus.MinimumWidth" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="dgvLeaveStatus.Width" type="System.Int32, mscorlib">
+  <data name="dgvStatus.Width" type="System.Int32, mscorlib">
     <value>120</value>
   </data>
   <metadata name="dgvApprovedBy.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -1110,10 +1110,10 @@
   <data name="&gt;&gt;dgvItemIdNo.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dgvLeaveStatus.Name" xml:space="preserve">
-    <value>dgvLeaveStatus</value>
+  <data name="&gt;&gt;dgvStatus.Name" xml:space="preserve">
+    <value>dgvStatus</value>
   </data>
-  <data name="&gt;&gt;dgvLeaveStatus.Type" xml:space="preserve">
+  <data name="&gt;&gt;dgvStatus.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvApprovedBy.Name" xml:space="preserve">

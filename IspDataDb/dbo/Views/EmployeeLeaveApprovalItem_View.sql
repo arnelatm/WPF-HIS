@@ -1,7 +1,7 @@
 ﻿CREATE VIEW dbo.EmployeeLeaveApprovalItem_View
 AS
-SELECT        b.EnteredBy, b.LeaveIdNo, b.StartDate, b.EndDate, b.FullDay, a.Status AS LeaveStatus, a.ApprovalNote, a.EmployeeLeaveApprovalIdNo, b.EmployeeIdNo, b.DateCreated AS LeaveDate, b.LeaveReason, c.SupervisorIdNo, 
-                         c.EmployeeName, c.EmployeeNameAra, d.LeaveName, d.LeaveNameAra, a.EmployeeLeaveIdNo, a.IdNo
+SELECT        b.EnteredBy, b.LeaveIdNo, b.StartDate, b.EndDate, b.FullDay, a.Status, a.ApprovalNote, a.EmployeeLeaveApprovalIdNo, b.EmployeeIdNo, b.DateCreated, b.Reason, c.SupervisorIdNo, c.EmployeeName, c.EmployeeNameAra, 
+                         d.LeaveName, d.LeaveNameAra, a.EmployeeLeaveIdNo, a.IdNo
 FROM            dbo.EmployeeLeave AS b INNER JOIN
                          dbo.EmployeeLeaveApprovalItem AS a ON b.IdNo = a.EmployeeLeaveIdNo LEFT OUTER JOIN
                          dbo.Leave AS d ON b.LeaveIdNo = d.IdNo LEFT OUTER JOIN
@@ -102,22 +102,22 @@ Begin DesignProperties =
             DisplayFlags = 280
             TopColumn = 0
          End
-         Begin Table = "c"
-            Begin Extent = 
-               Top = 95
-               Left = 538
-               Bottom = 424
-               Right = 736
-            End
-            DisplayFlags = 280
-            TopColumn = 0
-         End
          Begin Table = "d"
             Begin Extent = 
                Top = 17
                Left = 783
                Bottom = 327
                Right = 956
+            End
+            DisplayFlags = 280
+            TopColumn = 0
+         End
+         Begin Table = "c"
+            Begin Extent = 
+               Top = 95
+               Left = 538
+               Bottom = 424
+               Right = 736
             End
             DisplayFlags = 280
             TopColumn = 0
@@ -149,6 +149,8 @@ Begin DesignProperties =
    End
 End
 ', @level0type = N'SCHEMA', @level0name = N'dbo', @level1type = N'VIEW', @level1name = N'EmployeeLeaveApprovalItem_View';
+
+
 
 
 

@@ -33,13 +33,13 @@ Namespace PresentationLayer.Views.Forms
             Me.lblUserName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtUserName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cacEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacSecurityLevel = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cacSecurityLevel = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.lblPassword = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.TxtPassword = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblSecurityGroupID = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacSecurityGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cacSecurityGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -242,7 +242,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacEmployeeIdNo.OverrideDropDownStyleList = False
             Me.cacEmployeeIdNo.PreviousSearchTerm = Nothing
             Me.cacEmployeeIdNo.PropertySelector = Nothing
-            Me.cacEmployeeIdNo.ReadOnlyCombo = False
             Me.cacEmployeeIdNo.Size = New System.Drawing.Size(320, 24)
             Me.cacEmployeeIdNo.SuggestBoxHeight = 200
             Me.cacEmployeeIdNo.SuggestListOrderRule = Nothing
@@ -306,7 +305,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacSecurityLevel.OverrideDropDownStyleList = False
             Me.cacSecurityLevel.PreviousSearchTerm = Nothing
             Me.cacSecurityLevel.PropertySelector = Nothing
-            Me.cacSecurityLevel.ReadOnlyCombo = False
             Me.cacSecurityLevel.Size = New System.Drawing.Size(320, 24)
             Me.cacSecurityLevel.SuggestBoxHeight = 200
             Me.cacSecurityLevel.SuggestListOrderRule = Nothing
@@ -418,7 +416,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacSecurityGroupIdNo.OverrideDropDownStyleList = False
             Me.cacSecurityGroupIdNo.PreviousSearchTerm = Nothing
             Me.cacSecurityGroupIdNo.PropertySelector = Nothing
-            Me.cacSecurityGroupIdNo.ReadOnlyCombo = False
             Me.cacSecurityGroupIdNo.Size = New System.Drawing.Size(320, 24)
             Me.cacSecurityGroupIdNo.SuggestBoxHeight = 200
             Me.cacSecurityGroupIdNo.SuggestListOrderRule = Nothing
@@ -485,17 +482,17 @@ Namespace PresentationLayer.Views.Forms
             Me.MinimumSize = New System.Drawing.Size(817, 262)
             Me.Name = "UserEntryTv"
             Me.Text = "User Maintenance Form"
-        Me.SplitContainer1.Panel1.ResumeLayout(false)
-        Me.SplitContainer1.Panel2.ResumeLayout(false)
-        CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).EndInit
-        Me.SplitContainer1.ResumeLayout(false)
-        CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.CFlowLayout1.ResumeLayout(false)
-        Me.CFlowLayout1.PerformLayout
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+            Me.SplitContainer1.Panel1.ResumeLayout(False)
+            Me.SplitContainer1.Panel2.ResumeLayout(False)
+            CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.SplitContainer1.ResumeLayout(False)
+            CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
+            Me.CFlowLayout1.ResumeLayout(False)
+            Me.CFlowLayout1.PerformLayout()
+            Me.ResumeLayout(False)
+            Me.PerformLayout()
 
-End Sub
+        End Sub
 
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents lblIdNo As CLabel
@@ -505,11 +502,11 @@ End Sub
         Friend WithEvents lblPassword As CLabel
         Friend WithEvents TxtPassword As CTextBox
         Friend WithEvents lblSecurityGroupID As CLabel
-        Friend WithEvents cacSecurityGroupIdNo As CaComboBox
+        Friend WithEvents cacSecurityGroupIdNo As CtComboBox
         Friend WithEvents CLabel1 As CLabel
-        Friend WithEvents cacSecurityLevel As CaComboBox
+        Friend WithEvents cacSecurityLevel As CtComboBox
         Friend WithEvents lblEmployeeIdNo As CLabel
-        Friend WithEvents cacEmployeeIdNo As CaComboBox
+        Friend WithEvents cacEmployeeIdNo As CtComboBox
         Friend WithEvents lblActive As CLabel
         Friend WithEvents chkActive As CCheckBox
     End Class
