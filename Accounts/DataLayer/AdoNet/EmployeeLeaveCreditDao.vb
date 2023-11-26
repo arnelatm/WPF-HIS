@@ -8,7 +8,8 @@ Namespace DataLayer.AdoNet
 
     Public Class EmployeeLeaveCreditDao
         Inherits AccountsDao
-        Implements IDaoChild(Of EmployeeLeaveCredit), IDaoGetListByIdNo(Of EmployeeLeaveCredit), IDaoGetRecords(Of EmployeeLeaveCredit), IDaoGetRecord(Of EmployeeLeaveCredit)
+        Implements IDaoChild(Of EmployeeLeaveCredit), IDaoGetListByIdNo(Of EmployeeLeaveCredit), IDaoGetRecords(Of EmployeeLeaveCredit), IDaoGetRecord(Of EmployeeLeaveCredit), IDao(Of EmployeeLeaveCredit)
+
 
         Private ReadOnly Db As New Db()
 
@@ -86,13 +87,59 @@ Namespace DataLayer.AdoNet
             Return x
         End Function
 
-        Public Function GetLeaveCredit(employeeIdNo As Int32, leaveIdNo As Int16) As EmployeeLeaveCredit 
+        Public Function GetLeaveCredit(employeeIdNo As Int32, leaveIdNo As Int16) As EmployeeLeaveCredit
             Dim sql As String =
                     " SELECT " & FieldList &
                     " FROM EmployeeLeaveCredit" &
-                    " WHERE EmployeeIdNo = @employeeIdNo and LeaveIdNo = @LeaveIdNo"                     
+                    " WHERE EmployeeIdNo = @employeeIdNo and LeaveIdNo = @LeaveIdNo"
             Dim params() As Object = {"@EmployeeIdNo", employeeIdNo, "@LeaveIdNo", leaveIdNo}
             Return Db.Read(sql, Make, params).FirstOrDefault()
+        End Function
+
+        Public Function GetRecordByIdNo(idNo) As EmployeeLeaveCredit Implements IDao(Of EmployeeLeaveCredit).GetRecordByIdNo
+            Dim sql As String = " SELECT " & FieldList & " FROM EmployeeLeaveCredit" & " WHERE IdNo = @IdNo"
+            Dim params() As Object = {"@IdNo", idNo}
+            Return Db.Read(sql, Make, params).FirstOrDefault()
+        End Function
+
+
+        Public Function AddRecord(ByRef employeeLeaveCredit As EmployeeLeaveCredit) As Integer Implements IDao(Of EmployeeLeaveCredit).AddRecord
+            Dim sql As String =
+                    " INSERT INTO [EmployeeLeaveCredit] " &
+                    " (AccumulatedLeave,Cumulative,EmployeeIdNo,LeaveAllowed,LeaveIdNo,MaxCarryOver,MaxLimit,NoMaxLimit,PaidPercent,Sequence)" &
+                    " VALUES (@AccumulatedLeave,@Cumulative,@EmployeeIdNo,@LeaveAllowed,@LeaveIdNo,@MaxCarryOver,@MaxLimit,@NoMaxLimit,@PaidPercent,@Sequence)"
+            Return Db.Insert(sql, Take(employeeLeaveCredit))
+        End Function
+
+        Public Function UpdateRecord(ByRef employeeLeaveCredit As EmployeeLeaveCredit) As Integer Implements IDao(Of EmployeeLeaveCredit).UpdateRecord
+            Dim sql As String =
+                    " UPDATE EmployeeLeaveCredit SET " &
+                    " AccumulatedLeave = @AccumulatedLeave," &
+                    " Cumulative = @Cumulative," &
+                    " LeaveAllowed = @LeaveAllowed," &
+                    " LeaveIdNo = @LeaveIdNo," &
+                    " MaxCarryOver = @MaxCarryOver," &
+                    " MaxLimit = @MaxLimit," &
+                    " NoMaxLimit = @NoMaxLimit," &
+                    " PaidPercent = @PaidPercent," &
+                    " Sequence = @Sequence" &
+                    " WHERE IdNo = @IdNo"
+            Return Db.Update(sql, Take(employeeLeaveCredit))
+        End Function
+
+        Private Function Take(employeeLeaveCredit As EmployeeLeaveCredit) As Object()
+            Return New Object() {"@AccumulatedLeave", employeeLeaveCredit.AccumulatedLeave,
+                                    "@Cumulative", employeeLeaveCredit.Cumulative,
+                                    "@EmployeeIdNo", employeeLeaveCredit.EmployeeIdNo,
+                                    "@IdNo", employeeLeaveCredit.IdNo,
+                                    "@LeaveAllowed", employeeLeaveCredit.LeaveAllowed,
+                                    "@LeaveIdNo", employeeLeaveCredit.LeaveIdNo,
+                                    "@MaxCarryOver", employeeLeaveCredit.MaxCarryOver,
+                                    "@MaxLimit", employeeLeaveCredit.MaxLimit,
+                                    "@NoMaxLimit", employeeLeaveCredit.NoMaxLimit,
+                                    "@PaidPercent", employeeLeaveCredit.PaidPercent,
+                                    "@Sequence", employeeLeaveCredit.Sequence
+                                }
         End Function
 
     End Class

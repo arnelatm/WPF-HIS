@@ -22,7 +22,7 @@ Public Class CtDgvComboBoxColumn
         End Get
         Set(ByVal value As DataGridViewCell)
 
-            ' Ensure that the cell used for the template is a CDgvComboboxCell.
+            ' Ensure that the cell used for the template is a CtDgvComboboxCell.
             If (value IsNot Nothing) AndAlso
                Not value.GetType().IsAssignableFrom(GetType(CtDgvComboBoxCell)) _
                 Then

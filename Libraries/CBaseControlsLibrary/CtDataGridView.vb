@@ -433,11 +433,14 @@ Public Class CtDataGridView
                 If dgvControl.CellEditingControl.SelectedItem IsNot Nothing Then
                     Select Case field.ToLower()
                         Case $"code"
-                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CtDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).Code
+                            Dim x = DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CtDgvComboBoxCell).CellEditingControl.SelectedItem, DataRowView).Row("Code")
+                            Return x
                         Case $"name"
-                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CtDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).Name
+                            Dim x = DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CtDgvComboBoxCell).CellEditingControl.SelectedItem, DataRowView).Row("Name")
+                            Return x
                         Case $"idno"
-                            Return DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CtDgvComboBoxCell).CellEditingControl.SelectedItem, AATM.Libraries.Lookup.LookupData).IdNo
+                            Dim x = DirectCast(DirectCast(CurrentCell, Libraries.CBaseControlsLibrary.CtDgvComboBoxCell).CellEditingControl.SelectedItem, DataRowView).Row("IdNo")
+                            Return x
                         Case Else
                             Return CurrentCell.Value
                     End Select

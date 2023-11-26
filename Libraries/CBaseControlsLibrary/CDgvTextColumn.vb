@@ -88,7 +88,9 @@ Public Class CDgvTextColumn
         If _editingMode And Not DisplayOnly Then
             DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlForegroundColor
             DefaultCellStyle.BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-            [ReadOnly] = False
+            If [ReadOnly] Then
+                [ReadOnly] = False
+            End If
         Else
             [ReadOnly] = False
             DefaultCellStyle.ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
