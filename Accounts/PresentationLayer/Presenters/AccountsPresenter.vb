@@ -141,6 +141,15 @@ Namespace PresentationLayer.Presenters
             Return False
         End Function
 
+
+        Public Function IsUserAnHrManager()
+            Dim employeeIdNo As Int32 = GetUserEmployeeIdNo()
+            If employeeIdNo > 0 Then
+                Return Service.GetField(Of Boolean, Int32)(employeeIdNo, "Employee", "IdNo", "Supervisor")
+            End If
+            Return False
+        End Function
+
         Public Function GetUserEmployeeIdNo() As Int32
             Return Service.GetField(Of Integer, Integer)(GlobalVariables.UserIdNo, "User", "IdNo", "EmployeeIdNo")
         End Function

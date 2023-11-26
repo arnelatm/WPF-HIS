@@ -144,6 +144,7 @@ Namespace PresentationLayer.Presenters
             MakeVarDataSources({New String() {"PayElement", "DeductionsByName", Nothing, "PayElementKind = '" + EnumToCode(PayElementKindSelection.Deduction) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"},
                                New String() {"PayElement", "EarningsByName", Nothing, "PayElementKind = '" + EnumToCode(PayElementKindSelection.Earning) + "' and PayElementType = '" + EnumToCode(PayElementTypeSelection.Regular) + "'"},
                                New String() {"PhoneType", "PhoneTypes", Nothing, Nothing},
+                               New String() {"Country", "CountryTelCodes", "IdNo,CountryName,CountryTelCode", Nothing},
                                New String() {"Document", "Documents", Nothing, "DocumentType = '" + EnumToCode(DocumentTypeSelection.Employee) + "'"},
                                New String() {"Leave", "Leaves", Nothing, Nothing}})
 

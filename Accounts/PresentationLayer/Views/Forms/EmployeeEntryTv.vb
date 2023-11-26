@@ -12,7 +12,7 @@ Namespace PresentationLayer.Views.Forms
     Public Class EmployeeEntryTv
         Implements IEmployeeView
 
-        Private _countryTelCodes As List(Of Lookup.LookupData)
+        Private _countryTelCodes As DataTable
         Private _regularEmployeeDeductions As List(Of EmployeePayElementView)
         Private _regularEmployeeEarnings As List(Of EmployeePayElementView)
         Private _EmployeeLeaveCredits As List(Of EmployeeLeaveCreditView)
@@ -34,9 +34,6 @@ Namespace PresentationLayer.Views.Forms
 
 #Region "Fields"
 
-        'Public Property Documents As List(Of Lookup.LookupData) Implements IEmployeeView.Documents
-        'Public Property PhoneTypes As List(Of Lookup.LookupData) Implements IEmployeeView.PhoneTypes
-        'Public Property Leaves As List(Of Lookup.LookupData) Implements IEmployeeView.Leaves
         Public Property Documents As DataTable Implements IEmployeeView.Documents
         Public Property PhoneTypes As DataTable Implements IEmployeeView.PhoneTypes
         Public Property Leaves As DataTable Implements IEmployeeView.Leaves
@@ -449,9 +446,9 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property CountryTelCodes As List(Of Lookup.LookupData)
+        Public Property CountryTelCodes As DataTable
             Get
-                MyBase.CreateLookupData("Country", "CountryTelCodes", "CountryName", {"IdNo", "CountryName", "CountryTelCode"})
+                'MyBase.CreateLookupData("Country", "CountryTelCodes", "CountryName", {"IdNo", "CountryName", "CountryTelCode"})
                 Return _countryTelCodes
             End Get
             Set
@@ -689,7 +686,7 @@ Namespace PresentationLayer.Views.Forms
                 If .CurrentRow IsNot Nothing Then
                     Select Case .CurrentCell.OwningColumn.Name.ToLower()
                         Case $"dgvphonetypeidno"
-                            bsPhones.Current.PhoneTypeName = DataGridViewPhones.GetEditingValue("Code")
+                            bsPhones.Current.PhoneTypeName = DataGridViewPhones.GetEditingValue("IdNo")
                         Case $"dgvcountrytelidno"
                             bsPhones.Current.CountryTelCode = DataGridViewPhones.GetEditingValue("Code")
                     End Select
@@ -817,11 +814,17 @@ Namespace PresentationLayer.Views.Forms
 
 
         Protected Sub OnAfterUpdateView() Handles MyBase.AfterUpdateView
-            bsDeductions.ResetBindings(False)
-            bsEarnings.ResetBindings(False)
-            bsPhones.ResetBindings(False)
-            bsDocuments.ResetBindings(False)
-            bsLeaveCredits.ResetBindings(False)
+            Try
+                bsDeductions.ResetBindings(False)
+                bsEarnings.ResetBindings(False)
+                DataGridViewPhones.Refresh()
+                'bsPhones.ResetBindings(False)
+                bsDocuments.ResetBindings(False)
+                bsLeaveCredits.ResetBindings(False)
+            Catch ex As Exception
+
+            End Try
+
         End Sub
 
     End Class

@@ -2794,12 +2794,12 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                 ' assumed the first field is the value member and the second field as the display Value
                 dtl.NameFieldOrig = fieldNames(1)
                 dtl.NameField = TranslateNameField(dtl.TableName, dtl.NameFieldOrig)
-                dtl.NameDisplayValue = "Concat(" + dtl.NameField + ",'-'," + fieldNames(0) + ") COLLATE SQL_Latin1_General_CP1_CI_AS"
+                dtl.NameDisplayValue = "Concat(" + dtl.NameField + " COLLATE SQL_Latin1_General_CP1_CI_AS,'-'," + fieldNames(0) + ") COLLATE SQL_Latin1_General_CP1_CI_AS"
                 If dtl.ValueMember Is Nothing Then
                     dtl.ValueMember = fieldNames(0).Trim()
                 End If
                 If dtl.DisplayMember Is Nothing Then
-                    dtl.NameDisplayValue = "Concat(" + dtl.NameField + ",'-'," + fieldNames(0) + ") COLLATE SQL_Latin1_General_CP1_CI_AS"
+                    dtl.NameDisplayValue = "Concat(" + dtl.NameField + " COLLATE SQL_Latin1_General_CP1_CI_AS,'-'," + fieldNames(0) + ") COLLATE SQL_Latin1_General_CP1_CI_AS"
                     dtl.DisplayMember = "Name"
                 End If
                 dtl.LuFields = fieldNames(0) + " as IdNo," + dtl.NameDisplayValue + " as Name"
@@ -2808,7 +2808,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                 End If
             ElseIf fieldNames.Count() = 3 Then
                 dtl.NameField = fieldNames(1).Trim()
-                dtl.NameDisplayValue = "Concat(" + TranslateNameField(dtl.TableName, dtl.NameField) + ",'-'," + fieldNames(2) + ") COLLATE SQL_Latin1_General_CP1_CI_AS"
+                dtl.NameDisplayValue = "Concat(" + TranslateNameField(dtl.TableName, dtl.NameField) + " COLLATE SQL_Latin1_General_CP1_CI_AS,'-'," + fieldNames(2) + ") COLLATE SQL_Latin1_General_CP1_CI_AS"
                 If dtl.ValueMember Is Nothing Then
                     dtl.ValueMember = "IdNo"
                 End If

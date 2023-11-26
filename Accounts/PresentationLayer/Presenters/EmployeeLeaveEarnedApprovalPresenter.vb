@@ -1,4 +1,6 @@
-﻿Imports AATM.Accounts.PresentationLayer.Models
+﻿Imports AATM.Accounts.BusinessLayer
+Imports AATM.Accounts.DataLayer.AdoNet
+Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
@@ -22,11 +24,6 @@ Namespace PresentationLayer.Presenters
             Service = New AccountsService("EmployeeLeaveEarnedApproval")
             TableName = "EmployeeLeaveEarnedApproval"
             SortOrderKey = "IdNo"
-            'AskBeforeSave = True
-            'DisableSaveMemento = True
-            '_holiday = holiday
-            'AddHandler view.ClearAllEmployee, AddressOf OnClearAllEmployeeId
-            'AddHandler view.ApprovalCheckedEvent, AddressOf OnApprovalCheckedEvent
             CreateDataTable(_dtEmployeeLeaveEarnedApproval, {{"ApprovalNote", GetType(String)},
                                           {"EmployeeLeaveEarnedApprovalIdNo", GetType(Int32)},
                                           {"EmployeeLeaveIdNo", GetType(Int32)},
@@ -96,6 +93,10 @@ Namespace PresentationLayer.Presenters
             Dim retVal As Integer
             Dim record As New EmployeeLeaveEarnedApprovalModel
             GlobalVariables.Mapper.Map(Of IEmployeeLeaveEarnedApprovalView, EmployeeLeaveEarnedApprovalModel)(View, record)
+            Dim _userHasHrManagerAccess As Boolean = False
+            If UserHasAccess("HumanResourcesManager") Then
+                _userHasHrManagerAccess = True
+            End If
             NewlyAddedRecordIdNo = Service.AddRecord(record)
             If NewlyAddedRecordIdNo > 0 Then
                 CreateApprovalData()
@@ -103,6 +104,42 @@ Namespace PresentationLayer.Presenters
                     row.Item("EmployeeLeaveEarnedApprovalIdNo") = NewlyAddedRecordIdNo
                 Next row
                 retVal = Service.ExecuteTvpSp("InsertEmployeeLeaveEarnedApprovalItemTvp", _dtEmployeeLeaveEarnedApproval)
+                If retVal >= 0 And _userHasHrManagerAccess Then
+                    Dim leaveCreditDao As New EmployeeLeaveCreditDao
+                    Dim leaveDao As New LeaveDao
+                    Dim leaveCredit As New EmployeeLeaveCredit
+                    For Each employeeLeave As IEmployeeLeaveEarnedApprovalItemView In View.EmployeeLeaveEarnedApprovalItems
+                        If employeeLeave.Approve Then
+                            Dim idNo As Int32 = Service.GetField(Of Int32, Int32, Int32)(employeeLeave.EmployeeIdNo, employeeLeave.LeaveIdNo, "EmployeeLeaveCredit", "EmployeeIdNo", "LeaveIdNo", "IdNo")
+                            If idNo > 0 Then
+                                leaveCredit = leaveCreditDao.GetRecordByIdNo(idNo)
+                                Dim accumulatedLeave As Decimal = leaveCredit.AccumulatedLeave
+                                If leaveCredit.Cumulative Then
+                                    Dim earnableDays As Decimal = IIf(employeeLeave.DaysEarned > leaveCredit.MaxCarryOver, leaveCredit.MaxCarryOver, employeeLeave.DaysEarned)
+                                    earnableDays = IIf(leaveCredit.NoMaxLimit, earnableDays, IIf(earnableDays + accumulatedLeave > leaveCredit.MaxLimit, leaveCredit.MaxLimit - accumulatedLeave, earnableDays))
+                                    Service.UpdateRecordWithIdNo(Of Decimal)(idNo, "EmployeeLeaveCredit", "AccumulatedLeave", accumulatedLeave + earnableDays)
+                                Else
+                                    Service.UpdateRecordWithIdNo(Of Decimal)(idNo, "EmployeeLeaveCredit", "AccumulatedLeave", employeeLeave.DaysEarned)
+                                End If
+                            Else
+                                Dim seq As Int16 = GetFieldOnMaxField("Sequence", "EmployeeLeaveCredit", "Sequence", "EmployeeIdNo = " & employeeLeave.IdNo.ToString() & " and LeaveidNo = " & employeeLeave.LeaveIdNo.ToString())
+                                Dim leave As Leave = leaveDao.GetRecordByIdNo(employeeLeave.LeaveIdNo)
+                                leaveCredit.Cumulative = leave.Cumulative
+                                leaveCredit.LeaveIdNo = employeeLeave.LeaveIdNo
+                                leaveCredit.EmployeeIdNo = employeeLeave.EmployeeIdNo
+                                leaveCredit.LeaveAllowed = leave.LeaveAllowed
+                                leaveCredit.PaidPercent = leave.PaidPercent
+                                leaveCredit.MaxCarryOver = leave.MaxCarryOver
+                                leaveCredit.Cumulative = leave.Cumulative
+                                leaveCredit.MaxLimit = leave.MaxLimit
+                                leaveCredit.NoMaxLimit = leave.NoMaxLimit
+                                leaveCredit.Sequence = seq + 1
+                                leaveCredit.AccumulatedLeave = employeeLeave.DaysEarned
+                                leaveCreditDao.AddRecord(leaveCredit)
+                            End If
+                        End If
+                    Next
+                End If
             End If
             If retVal < 0 Then
                 Messaging.Show(True, "MsgSaveRecordFailed", "Something went wrong during saving, saving record failed", "Saving Error", MessageBoxButtons.OK, MessageBoxIcon.Error)

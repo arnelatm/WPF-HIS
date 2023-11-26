@@ -43,6 +43,7 @@ Namespace PresentationLayer.Views
         Public Property Errors As List(Of String) Implements IView.Errors
         Public Property DataFilter As String Implements IView.DataFilter
         Public Property DateCreated As DateTime? Implements IEmployeeLeaveEarnedApprovalItemView.DateCreated
+        Public Property DaysEarned As Decimal Implements IEmployeeLeaveEarnedApprovalItemView.DaysEarned
         Public Property ApprovalNote As String Implements IEmployeeLeaveEarnedApprovalItemView.ApprovalNote
         Public Property EmployeeLeaveEarnedIdNo As Integer Implements IEmployeeLeaveEarnedApprovalItemView.EmployeeLeaveEarnedIdNo
         Public Property EmployeeIdNo As Integer Implements IEmployeeLeaveEarnedApprovalItemView.EmployeeIdNo
@@ -51,7 +52,6 @@ Namespace PresentationLayer.Views
         Public Property EmployeeLeaveEarnedApprovalIdNo As Integer Implements IEmployeeLeaveEarnedApprovalItemView.EmployeeLeaveEarnedApprovalIdNo
         Public Property EndDate As Date Implements IEmployeeLeaveEarnedApprovalItemView.EndDate
         Public Property EnteredBy As Integer Implements IEmployeeLeaveEarnedApprovalItemView.EnteredBy
-        Public Property FullDay As Boolean Implements IEmployeeLeaveEarnedApprovalItemView.FullDay
         Public Property IdNo As Integer Implements IEmployeeLeaveEarnedApprovalItemView.IdNo
         Public Property LeaveIdNo As Short Implements IEmployeeLeaveEarnedApprovalItemView.LeaveIdNo
         Public Property LeaveName As String Implements IEmployeeLeaveEarnedApprovalItemView.LeaveName

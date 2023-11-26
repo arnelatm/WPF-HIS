@@ -34,6 +34,7 @@ Namespace PresentationLayer.Views.Interfaces
 
         Property ApprovalNote As String
         Property DateCreated As DateTime?
+        Property DaysEarned As Decimal
         Property EmployeeLeaveEarnedIdNo As Int32
         Property EmployeeIdNo As Int32
         Property EmployeeName As String
@@ -41,7 +42,6 @@ Namespace PresentationLayer.Views.Interfaces
         Property EmployeeLeaveEarnedApprovalIdNo As Int32
         Property EndDate As Date
         Property EnteredBy As Int32
-        Property FullDay As Boolean
         Property IdNo As Int32
         Property LeaveIdNo As Int16
         Property LeaveName As String
