@@ -31,10 +31,10 @@ Namespace PresentationLayer.Views.Forms
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblSupplierIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPayeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboPayeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.lblPaymentType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPaymentType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboPaymentType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.txtCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblCheckDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -247,7 +247,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayeeIdNo.OverrideDropDownStyleList = False
             Me.cboPayeeIdNo.PreviousSearchTerm = Nothing
             Me.cboPayeeIdNo.PropertySelector = Nothing
-            Me.cboPayeeIdNo.ReadOnlyCombo = False
             Me.cboPayeeIdNo.Size = New System.Drawing.Size(741, 30)
             Me.cboPayeeIdNo.SuggestBoxHeight = 200
             Me.cboPayeeIdNo.SuggestListOrderRule = Nothing
@@ -329,7 +328,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaymentType.OverrideDropDownStyleList = False
             Me.cboPaymentType.PreviousSearchTerm = Nothing
             Me.cboPaymentType.PropertySelector = Nothing
-            Me.cboPaymentType.ReadOnlyCombo = False
             Me.cboPaymentType.Size = New System.Drawing.Size(256, 29)
             Me.cboPaymentType.SuggestBoxHeight = 200
             Me.cboPaymentType.SuggestListOrderRule = Nothing
@@ -512,13 +510,13 @@ End Sub
         Friend WithEvents txtAmount As CTextBox
         Friend WithEvents lblAmount As CLabel
         Friend WithEvents txtNotes As CTextBox
-        Friend WithEvents cboPayeeIdNo As CaComboBox
+        Friend WithEvents cboPayeeIdNo As CtCombobox
         Friend WithEvents dtpCheckDate As CCustomDateTimePicker
         Friend WithEvents lblCheckDate As CLabel
         Friend WithEvents txtCheckNumber As CTextBox
         Friend WithEvents lblCheckNumber As CLabel
         Friend WithEvents lblPaymentType As CLabel
-        Friend WithEvents cboPaymentType As CaComboBox
+        Friend WithEvents cboPaymentType As CtCombobox
         Friend WithEvents btnPrintCheck As CButton
         Friend WithEvents txtPayeeName As CTextBox
     End Class

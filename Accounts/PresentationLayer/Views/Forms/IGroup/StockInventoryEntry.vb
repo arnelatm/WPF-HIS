@@ -37,7 +37,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event FinderValueChanged(itemIdNo As Int16) Implements IStockInventoryView.FinderValueChanged
 
-        Public Property StockInventoryByName As List(Of Lookup.LookupData)
+        Public Property StockInventoryByName As DataTable
 
 #Region "Field Items"
 

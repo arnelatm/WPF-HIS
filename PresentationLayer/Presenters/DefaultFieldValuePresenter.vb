@@ -15,7 +15,7 @@ Public Class DefaultFieldValuePresenter(Of TM As New)
 
     Protected Overrides Sub CreateDataSources()
         CreateEnumDataSource(Of DataTypeSelection)("DataType")
-        CreateDataSource("SystemView", "SystemViewIdNo")
+        MakeControlDataSources({New String() {"SystemView", "SystemViewIdNo", Nothing, Nothing}})
     End Sub
 
 End Class

@@ -31,7 +31,7 @@ Namespace PresentationLayer.Views.Forms
         Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.tlpPaymentType = New System.Windows.Forms.TableLayoutPanel()
         Me.lblWithBankCharges = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDepositTypeNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
         Me.txtDepositTypeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -42,9 +42,9 @@ Namespace PresentationLayer.Views.Forms
         Me.lblNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblBankChargesAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.cboBankChargesAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboBankChargesAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.lblBankChargesVatAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboBankChargesVatAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboBankChargesVatAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.txtRate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblRate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -152,9 +152,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAccountIdNo.OverrideDropDownStyleList = false
         Me.cboAccountIdNo.PreviousSearchTerm = Nothing
         Me.cboAccountIdNo.PropertySelector = Nothing
-        Me.cboAccountIdNo.ReadOnlyCombo = false
-        Me.cboAccountIdNo.SuggestBoxHeight = 200
-        Me.cboAccountIdNo.SuggestListOrderRule = Nothing
+            Me.cboAccountIdNo.SuggestBoxHeight = 200
+            Me.cboAccountIdNo.SuggestListOrderRule = Nothing
         Me.cboAccountIdNo.TextToSearch = Nothing
         Me.cboAccountIdNo.Translatable = false
         Me.cboAccountIdNo.ValueIsMandatory = false
@@ -371,9 +370,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboBankChargesAccountIdNo.OverrideDropDownStyleList = false
         Me.cboBankChargesAccountIdNo.PreviousSearchTerm = Nothing
         Me.cboBankChargesAccountIdNo.PropertySelector = Nothing
-        Me.cboBankChargesAccountIdNo.ReadOnlyCombo = false
-        Me.cboBankChargesAccountIdNo.SuggestBoxHeight = 200
-        Me.cboBankChargesAccountIdNo.SuggestListOrderRule = Nothing
+            Me.cboBankChargesAccountIdNo.SuggestBoxHeight = 200
+            Me.cboBankChargesAccountIdNo.SuggestListOrderRule = Nothing
         Me.cboBankChargesAccountIdNo.TextToSearch = Nothing
         Me.cboBankChargesAccountIdNo.Translatable = false
         Me.cboBankChargesAccountIdNo.ValueIsMandatory = false
@@ -419,9 +417,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboBankChargesVatAccountIdNo.OverrideDropDownStyleList = false
         Me.cboBankChargesVatAccountIdNo.PreviousSearchTerm = Nothing
         Me.cboBankChargesVatAccountIdNo.PropertySelector = Nothing
-        Me.cboBankChargesVatAccountIdNo.ReadOnlyCombo = false
-        Me.cboBankChargesVatAccountIdNo.SuggestBoxHeight = 200
-        Me.cboBankChargesVatAccountIdNo.SuggestListOrderRule = Nothing
+            Me.cboBankChargesVatAccountIdNo.SuggestBoxHeight = 200
+            Me.cboBankChargesVatAccountIdNo.SuggestListOrderRule = Nothing
         Me.cboBankChargesVatAccountIdNo.TextToSearch = Nothing
         Me.cboBankChargesVatAccountIdNo.Translatable = false
         Me.cboBankChargesVatAccountIdNo.ValueIsMandatory = false
@@ -532,7 +529,7 @@ End Sub
         Friend WithEvents floDataDisplay As CFlowLayout
         Friend WithEvents tlpPaymentType As TableLayoutPanel
         Friend WithEvents lblWithBankCharges As CLabel
-        Friend WithEvents cboAccountIdNo As CaComboBox
+        Friend WithEvents cboAccountIdNo As CtCombobox
         Friend WithEvents lblCode As CLabel
         Friend WithEvents txtDepositTypeNameAra As CTextBoxArabic
         Friend WithEvents txtDepositTypeName As CTextBox
@@ -543,9 +540,9 @@ End Sub
         Friend WithEvents lblNameAra As CLabel
         Friend WithEvents lblBankChargesAccountIdNo As CLabel
         Friend WithEvents txtNotes As CTextBox
-        Friend WithEvents cboBankChargesAccountIdNo As CaComboBox
+        Friend WithEvents cboBankChargesAccountIdNo As CtCombobox
         Friend WithEvents lblBankChargesVatAccountIdNo As CLabel
-        Friend WithEvents cboBankChargesVatAccountIdNo As CaComboBox
+        Friend WithEvents cboBankChargesVatAccountIdNo As CtCombobox
         Friend WithEvents txtRate As CTextBox
         Friend WithEvents lblRate As CLabel
         Friend WithEvents lblNotes As CLabel

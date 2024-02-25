@@ -37,7 +37,7 @@ Partial Class DosageTableManager
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.DataGridViewDosageMaster = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.DataGridViewDosageMaster = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
         Me.dgvDosageCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvDosageName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvDosageNameArabic = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -271,7 +271,7 @@ Partial Class DosageTableManager
     Friend WithEvents DosageMasterNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents DosageMasterNameARaDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewDosageMaster As CDataGridView
+    Friend WithEvents DataGridViewDosageMaster As CtDataGridView
     Friend WithEvents bsDosageMaster As BindingSource
     Friend WithEvents txtDosageCode As TextBox
     Friend WithEvents txtIdNo As TextBox

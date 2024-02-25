@@ -86,6 +86,8 @@ Namespace PresentationLayer.Views.Forms
             LoggedOut
         End Enum
 
+        Public MainFieldsDictionary As New Dictionary(Of String, Object)
+
         Public Property IdNo As Int32 Implements IUserView.IdNo
         Public Property SecurityGroupIdNo As Int16 Implements IUserView.SecurityGroupIdNo
         Public Property EmployeeIdNo As Int32? Implements IUserView.EmployeeIdNo
@@ -170,6 +172,10 @@ Namespace PresentationLayer.Views.Forms
                                                                       End Sub)
             GlobalVariables.Mapper = mapperConfigurationAccounts.CreateMapper()
             'mapperConfigurationAccounts.AssertConfigurationIsValid()
+        End Sub
+
+
+        Public Sub UpdateViewDisplay(editMode As Boolean, addMode As Boolean, recordPositionNumber As Integer, targetIdNo As Integer, recordCount As Integer)
         End Sub
 
 #Region "MenuActions"
@@ -1211,10 +1217,6 @@ Namespace PresentationLayer.Views.Forms
             RunForm(Of ReportEntry, ReportPresenter(Of ReportModel))()
         End Sub
 
-        'Private Sub ToolStripMenuItemDosageLabelPrinting_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDosageLabelPrinting.Click
-        '    RunForm(Of DoctorsPrescriptionForm, PMRInvestigationPresenter(Of PmrInvestigationModel))()
-        'End Sub
-
         Private Sub ToolStripMenuItemDoctorsPrescriptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDoctorsPrescriptions.Click
             RunForm(Of DoctorsPrescriptionForm, DoctorsPrescriptionPresenter(Of DoctorsPrescriptionModel))()
         End Sub
@@ -1318,6 +1320,11 @@ Namespace PresentationLayer.Views.Forms
 
         Private Sub ToolStripMenuItemEmployeeLeavesEarnedApproval_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemEmployeeLeavesEarnedApproval.Click
             RunForm(Of EmployeeLeaveEarnedApprovalEntry, EmployeeLeaveEarnedApprovalPresenter(Of EmployeeLeaveEarnedApprovalModel))()
+        End Sub
+
+        Private Sub ToolStripMenuItemDrInvestigationsPrescriptions_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItemDrInvestigationsPrescriptions.Click
+            RunForm(Of PmrInvestigationRequestForm, PmrInvestigationRequestPresenter(Of PmrInvestigationRequestModel))()
+            'RunForm(Of DoctorsPrescriptionForm, PMRInvestigationPresenter(Of PmrInvestigationModel))()
         End Sub
     End Class
 

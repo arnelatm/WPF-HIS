@@ -34,7 +34,7 @@ Namespace PresentationLayer.Views.Forms
         Me.bsEmployeeIdList = New System.Windows.Forms.BindingSource(Me.components)
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnUnSelectAll = New AATM.Libraries.CBaseControlsLibrary.CButton()
-        Me.DataGridViewEmployeeIdList = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.DataGridViewEmployeeIdList = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
         Me.PrintThis = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
         Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvEmployeeName = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -282,7 +282,7 @@ End Sub
         Friend WithEvents PcsIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
         Friend WithEvents btnUnSelectAll As CButton
-        Friend WithEvents DataGridViewEmployeeIdList As CDataGridView
+        Friend WithEvents DataGridViewEmployeeIdList As CtDataGridView
         Friend WithEvents btnSelectAll As CButton
         Friend WithEvents IdNoDataGridViewTextBoxColumn As CDgvTextColumn
         Friend WithEvents EmployeeNameDataGridViewTextBoxColumn As CDgvTextColumn

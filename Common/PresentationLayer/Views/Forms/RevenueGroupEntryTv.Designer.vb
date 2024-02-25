@@ -41,9 +41,9 @@ Namespace PresentationLayer.Views.Forms
             Me.lblRevenueGroupName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblRevenueGroupNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cacParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.lblRevCostCenter = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.CaComboBox1 = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.CtCombobox1 = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtLevelNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -274,7 +274,7 @@ Namespace PresentationLayer.Views.Forms
             Me.floDataDisplay.Controls.Add(Me.lblParentIdNo)
             Me.floDataDisplay.Controls.Add(Me.cacParentIdNo)
             Me.floDataDisplay.Controls.Add(Me.lblRevCostCenter)
-            Me.floDataDisplay.Controls.Add(Me.CaComboBox1)
+            Me.floDataDisplay.Controls.Add(Me.CtCombobox1)
             Me.floDataDisplay.Controls.Add(Me.CLabel1)
             Me.floDataDisplay.Controls.Add(Me.txtLevelNumber)
             Me.floDataDisplay.Controls.Add(Me.lblNotes)
@@ -391,7 +391,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacParentIdNo.OverrideDropDownStyleList = False
             Me.cacParentIdNo.PreviousSearchTerm = Nothing
             Me.cacParentIdNo.PropertySelector = Nothing
-            Me.cacParentIdNo.ReadOnlyCombo = False
             Me.cacParentIdNo.Size = New System.Drawing.Size(418, 24)
             Me.cacParentIdNo.SuggestBoxHeight = 200
             Me.cacParentIdNo.SuggestListOrderRule = Nothing
@@ -418,49 +417,48 @@ Namespace PresentationLayer.Views.Forms
             Me.lblRevCostCenter.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.lblRevCostCenter.Translatable = True
             '
-            'CaComboBox1
+            'CtCombobox1
             '
-            Me.CaComboBox1.BackColor = System.Drawing.Color.White
-            Me.CaComboBox1.BegFindValue = Nothing
-            Me.CaComboBox1.ChangingSearchValueOnly = False
-            Me.CaComboBox1.CurrentSearchTerm = ""
-            Me.CaComboBox1.DefaultValue = Nothing
-            Me.CaComboBox1.DisplayMember = "Name"
-            Me.CaComboBox1.EditingMode = False
-            Me.CaComboBox1.EndFindValue = Nothing
-            Me.CaComboBox1.FieldDescription = Nothing
-            Me.CaComboBox1.FieldName = Nothing
-            Me.CaComboBox1.FilterRule = Nothing
-            Me.CaComboBox1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.CaComboBox1.FindEnabled = False
-            Me.floDataDisplay.SetFlowBreak(Me.CaComboBox1, True)
-            Me.CaComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CaComboBox1.ForeColor = System.Drawing.Color.Black
-            Me.CaComboBox1.FormattingEnabled = True
-            Me.CaComboBox1.HideWhenNotEditingOrAdding = False
-            Me.CaComboBox1.IgnoreCase = False
-            Me.CaComboBox1.IntegralHeight = False
-            Me.CaComboBox1.LinkedLabel = Nothing
-            Me.CaComboBox1.Location = New System.Drawing.Point(256, 137)
-            Me.CaComboBox1.Margin = New System.Windows.Forms.Padding(1)
-            Me.CaComboBox1.Name = "CaComboBox1"
-            Me.CaComboBox1.OldValue = 0
-            Me.CaComboBox1.OriginalDataSource = Nothing
-            Me.CaComboBox1.OriginalList = Nothing
-            Me.CaComboBox1.OverrideDropDownStyleList = False
-            Me.CaComboBox1.PreviousSearchTerm = Nothing
-            Me.CaComboBox1.PropertySelector = Nothing
-            Me.CaComboBox1.ReadOnlyCombo = False
-            Me.CaComboBox1.Size = New System.Drawing.Size(418, 24)
-            Me.CaComboBox1.SuggestBoxHeight = 200
-            Me.CaComboBox1.SuggestListOrderRule = Nothing
-            Me.CaComboBox1.TabIndex = 165
-            Me.CaComboBox1.TextToSearch = Nothing
-            Me.CaComboBox1.Translatable = False
-            Me.CaComboBox1.ValueIsMandatory = False
-            Me.CaComboBox1.ValueIsNullable = False
-            Me.CaComboBox1.ValueIsNumeric = False
-            Me.CaComboBox1.ValueMember = "IdNo"
+            Me.CtCombobox1.BackColor = System.Drawing.Color.White
+            Me.CtCombobox1.BegFindValue = Nothing
+            Me.CtCombobox1.ChangingSearchValueOnly = False
+            Me.CtCombobox1.CurrentSearchTerm = ""
+            Me.CtCombobox1.DefaultValue = Nothing
+            Me.CtCombobox1.DisplayMember = "Name"
+            Me.CtCombobox1.EditingMode = False
+            Me.CtCombobox1.EndFindValue = Nothing
+            Me.CtCombobox1.FieldDescription = Nothing
+            Me.CtCombobox1.FieldName = Nothing
+            Me.CtCombobox1.FilterRule = Nothing
+            Me.CtCombobox1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.CtCombobox1.FindEnabled = False
+            Me.floDataDisplay.SetFlowBreak(Me.CtCombobox1, True)
+            Me.CtCombobox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CtCombobox1.ForeColor = System.Drawing.Color.Black
+            Me.CtCombobox1.FormattingEnabled = True
+            Me.CtCombobox1.HideWhenNotEditingOrAdding = False
+            Me.CtCombobox1.IgnoreCase = False
+            Me.CtCombobox1.IntegralHeight = False
+            Me.CtCombobox1.LinkedLabel = Nothing
+            Me.CtCombobox1.Location = New System.Drawing.Point(256, 137)
+            Me.CtCombobox1.Margin = New System.Windows.Forms.Padding(1)
+            Me.CtCombobox1.Name = "CtCombobox1"
+            Me.CtCombobox1.OldValue = 0
+            Me.CtCombobox1.OriginalDataSource = Nothing
+            Me.CtCombobox1.OriginalList = Nothing
+            Me.CtCombobox1.OverrideDropDownStyleList = False
+            Me.CtCombobox1.PreviousSearchTerm = Nothing
+            Me.CtCombobox1.PropertySelector = Nothing
+            Me.CtCombobox1.Size = New System.Drawing.Size(418, 24)
+            Me.CtCombobox1.SuggestBoxHeight = 200
+            Me.CtCombobox1.SuggestListOrderRule = Nothing
+            Me.CtCombobox1.TabIndex = 165
+            Me.CtCombobox1.TextToSearch = Nothing
+            Me.CtCombobox1.Translatable = False
+            Me.CtCombobox1.ValueIsMandatory = False
+            Me.CtCombobox1.ValueIsNullable = False
+            Me.CtCombobox1.ValueIsNumeric = False
+            Me.CtCombobox1.ValueMember = "IdNo"
             '
             'CLabel1
             '
@@ -593,8 +591,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents _MBParentWithChildrenChangedDisallowed As LocalizableMessageBox
         Friend WithEvents _MSGMandatoryFields As LocalizableMessage
         Friend WithEvents txtSortKey As CTextBox
-        Friend WithEvents cacParentIdNo As CaComboBox
-        Friend WithEvents CaComboBox1 As CaComboBox
+        Friend WithEvents cacParentIdNo As CtCombobox
+        Friend WithEvents CtCombobox1 As CtCombobox
         Friend WithEvents CLabel1 As CLabel
     End Class
 End Namespace

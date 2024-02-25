@@ -41,7 +41,7 @@
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-            Me.DataGridViewClinicLabSampleDetails = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewClinicLabSampleDetails = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.bsClinicLabSampleDetails = New System.Windows.Forms.BindingSource(Me.components)
             Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.Sequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -512,7 +512,7 @@
         Friend WithEvents dtpTransactionDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
         Friend WithEvents txtDoctorCode As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
-        Friend WithEvents DataGridViewClinicLabSampleDetails As Libraries.CBaseControlsLibrary.CDataGridView
+        Friend WithEvents DataGridViewClinicLabSampleDetails As Libraries.CBaseControlsLibrary.CtDataGridView
         Friend WithEvents TakenTimeDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents LabNoDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents PatientNameDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvTextColumn

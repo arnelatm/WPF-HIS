@@ -7,9 +7,7 @@
     Public Class AccountReconciliationModel
         'Inherits ModelNew
 
-        'Public Property Accounts As List(Of Lookup.LookupData)
         Public Property AccountReconciliationItems As List(Of AccountReconciliationItemModel)
-
         Public Property AccountIdNo As Int16?
         Public Property Balance As Decimal
         Public Property DateCreated As DateTime?

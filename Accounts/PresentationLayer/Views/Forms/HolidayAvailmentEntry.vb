@@ -66,8 +66,8 @@ Namespace PresentationLayer.Views.Forms
         Public Property SupervisorIdNo As Int32 Implements IHolidayAvailmentView.SupervisorIdNo
         Public Property Disapprove As Boolean Implements IHolidayAvailmentView.Disapprove
         Public Property Approve As Boolean Implements IHolidayAvailmentView.Approve
-        Public Property Users As List(Of Lookup.LookupData) Implements IHolidayAvailmentView.Users
-        Public Property HolidayStatusList As List(Of Lookup.LookupData) Implements IHolidayAvailmentView.HolidayStatusList
+        Public Property Users As DataTable Implements IHolidayAvailmentView.Users
+        Public Property HolidayStatusList As DataTable Implements IHolidayAvailmentView.HolidayStatusList
 
         Public Property ApprovalHistory As List(Of IHolidayAvailmentApprovalHistoryView) Implements IHolidayAvailmentView.ApprovalHistory
             Get
@@ -111,26 +111,6 @@ Namespace PresentationLayer.Views.Forms
                 }
         End Sub
 
-        'Protected Overrides Sub CreateDataSources()
-        '    CreateDataSource("Employee", cboEmployeeIdNo)
-        '    CreateDataSource("User", cboenteredBy, {"IdNo", "UserName"})
-        '    CreateDataSource("Leave", cboLeaveIdNo)
-        '    CreateEnumDataSource(Of LeaveStatusSelection)(cboLeaveStatus)
-        'End Sub
-
-        'Private Sub dtpStartDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpAvailmentDate.Validated
-        '    If dtpAvailmentDate.Value Is Nothing OrElse dtpAvailmentDate.Value < dtpAvailmentDate.Value Then
-        '        dtpAvailmentDate.Value = dtpAvailmentDate.Value
-        '    End If
-        'End Sub
-
-        'Private Sub dtpEndDate_ValueChanged(sender As Object, e As EventArgs)
-        '    If dtpAvailmentDate.Value Is Nothing OrElse dtpAvailmentDate.Value > dtpEndDate.Value Then
-        '        dtpAvailmentDate.Value = dtpEndDate.Value
-        '    End If
-        'End Sub
-
-        'Public Overrides Sub UpdateViewDisplay(editMode As Boolean, addMode As Boolean, recordPositionNumber As Integer, targetIdNo As Integer, recordCount As Integer)
         Public Sub OnBeforeLoad() Handles MyBase.BeforeLoad
         End Sub
 

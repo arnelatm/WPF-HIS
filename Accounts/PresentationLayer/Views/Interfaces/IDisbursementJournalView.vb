@@ -34,12 +34,17 @@ Namespace PresentationLayer.Views.Interfaces
         Property JournalItems As List(Of JournalItemView)
         Property DjOiItems As List(Of DjOiItemView)
         Property AccountsByCode
+        Property CdAccountCount As Int32
         Property EmployeesByName
         Property SuppliersByName
         Property CustomersByName
         Property RevCostCentersByCode
         Property BankTransfer As Boolean
         Property PayeeDataSource As Object
+        Property DefaultAccount As Int32?
+        Property JournalCode As String
+        Property JournalCodeDisplay As String
+        Property OpenInvoiceMode As Boolean
         Event PrintCheck()
 
         Event AutoApplyAmount(bsDjOiItem As BindingSource)
@@ -54,7 +59,7 @@ Namespace PresentationLayer.Views.Interfaces
 
         Event SetSupplierVatNumber(ByRef currentVatNumber As String, idNo As String, override As Boolean)
         Event PaymentTypeChanged(paymentType As String)
-
+        Event PayeeIdNoChanged()
     End Interface
 
 End Namespace

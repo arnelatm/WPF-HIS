@@ -867,10 +867,21 @@ Namespace AdoNet
                     " Where " & searchFieldName & " = @SearchValue "
             Dim params() As Object = {"@SearchValue", searchValue}
             Dim retVal = GetDb().Scalar(sql, params)
-            If retVal Is Nothing Or IsDBNull(retVal) Then
-                Return Nothing
+            If IsDBNull(retVal) Then
+                retVal = Nothing
             End If
-            Return retVal
+            Try
+                Dim UnderlyingType As Type = Nullable.GetUnderlyingType(GetType(T))
+                Dim result
+                If UnderlyingType Is Nothing Then
+                    result = DirectCast(Convert.ChangeType(retVal, GetType(T)), T)
+                Else
+                    result = DirectCast(Convert.ChangeType(retVal, UnderlyingType), T)
+                End If
+                Return result
+            Catch ex As Exception
+                Return Nothing
+            End Try
         End Function
 
         Public Function GetRecordFieldWithKeyG(Of TR, TS)(searchValue As TS, tableName As String, searchFieldName As String, returnFieldName As String) As TR _

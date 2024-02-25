@@ -448,7 +448,6 @@ Namespace PresentationLayer.Views.Forms
 
         Public Property CountryTelCodes As DataTable
             Get
-                'MyBase.CreateLookupData("Country", "CountryTelCodes", "CountryName", {"IdNo", "CountryName", "CountryTelCode"})
                 Return _countryTelCodes
             End Get
             Set
@@ -658,10 +657,10 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub DisplayPhoneTab()
-            If Not tbcEmployee.Controls.Contains(tbpPhones) Then
-                tbpPhones.Parent = tbcEmployee
+            If Not tbcEmployeeInformation.Controls.Contains(tbpPhones) Then
+                tbpPhones.Parent = tbcEmployeeInformation
             End If
-            tbcEmployee.SelectTab(tbpPhones)
+            tbcEmployeeInformation.SelectTab(tbpPhones)
         End Sub
 
         Private Sub OnTbpPhones_Leave(sender As Object, e As EventArgs) Handles tbpPhones.Leave

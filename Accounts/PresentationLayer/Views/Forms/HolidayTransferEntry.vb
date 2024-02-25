@@ -59,8 +59,8 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        Public Property EmployeeList As List(Of Lookup.LookupData) Implements IHolidayTransferView.EmployeeList
-        Public Property HolidayList As List(Of Lookup.LookupData) Implements IHolidayTransferView.HolidayList
+        Public Property EmployeeList As DataTable Implements IHolidayTransferView.EmployeeList
+        Public Property HolidayList As DataTable Implements IHolidayTransferView.HolidayList
 
         Public Property HolidayTransferItems As List(Of HolidayTransferItemView) Implements IHolidayTransferView.HolidayTransferItems
             Get

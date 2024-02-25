@@ -338,146 +338,6 @@ Public Class CbComboBox
         End If
     End Sub
 
-    'Protected Overrides Sub OnDropDown(e As EventArgs)
-    '    HideSuggestionBox()
-    '    'SetVisibleCore(True)
-    '    If DisplayOnly Then
-    '        _previousIndex = SelectedIndex
-    '    End If
-    'End Sub
-
-    'Protected Overrides Sub OnLocationChanged(ByVal e As EventArgs)
-    '    MyBase.OnLocationChanged(e)
-    '    SetListBoxFormLocation(SuggestListForm)
-    'End Sub
-
-    'Protected Overloads Overrides Sub OnLostFocus(e As EventArgs)
-    '    If Not SuggestListForm.SuggestListBox.Focused Then
-    '        HideSuggestionBox()
-    '    End If
-    'End Sub
-
-    'Protected Overrides Sub OnGotFocus(e As EventArgs)
-    '    MyBase.OnGotFocus(e)
-    '    _lastValue = SelectedValue
-    'End Sub
-
-    '    Protected Overloads Overrides Sub OnPreviewKeyDown(e As PreviewKeyDownEventArgs)
-    '        If Not SuggestListForm.Visible Then
-    '            MyBase.OnPreviewKeyDown(e)
-    '            Return
-    '        End If
-    '        Select Case e.KeyCode
-    '            Case Keys.Down
-    '                If SuggestListForm.SuggestListBox.SelectedIndex < _suggestBindingList.Count - 1 Then
-    '                    ' ReSharper disable once ReturnValueOfPureMethodIsNotUsed
-    '                    Math.Max(Interlocked.Increment(SuggestListForm.SuggestListBox.SelectedIndex), SuggestListForm.SuggestListBox.SelectedIndex - 1)
-    '                End If
-    '                Return
-    '            Case Keys.Up
-    '                If SuggestListForm.SuggestListBox.SelectedIndex > 0 Then
-    '#Disable Warning ReturnValueOfPureMethodIsNotUsed
-    '                    Math.Max(Interlocked.Decrement(SuggestListForm.SuggestListBox.SelectedIndex), SuggestListForm.SuggestListBox.SelectedIndex + 1)
-    '#Enable Warning ReturnValueOfPureMethodIsNotUsed
-    '                End If
-    '                Return
-    '            Case Keys.Enter
-    '                Text = SuggestListForm.SuggestListBox.Text
-    '                [Select](0, Text.Length)
-    '                SuggestListForm.Hide()
-    '                SuggestListForm.Visible = False
-    '                Return
-    '            Case Keys.Escape
-    '                HideSuggestionBox()
-    '                Return
-    '        End Select
-    '        MyBase.OnPreviewKeyDown(e)
-    '    End Sub
-
-    'Private Sub HideDropDown(hide As Boolean)
-    '    If hide Then
-    '        DropDownStyle = ComboBoxStyle.Simple
-    '        MaxDropDownItems = 1
-    '        If Hidden Then
-    '            ForeColor = Color.Black
-    '            BackColor = Color.Black
-    '        Else
-    '            ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-    '            BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
-    '        End If
-    '        DropDownHeight = Height
-    '    Else
-    '        MaxDropDownItems = _defaultMaxDropDownItems
-    '        DropDownStyle = _defaultDropdownStyle
-    '        If Hidden Then
-    '            ForeColor = Color.Black
-    '            BackColor = Color.Black
-    '        Else
-    '            ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-    '            BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-    '        End If
-    '        DropDownHeight = _defaultDropDownHeight
-    '    End If
-    'End Sub
-
-
-
-    'Protected Overrides Sub OnTextChanged(ByVal e As EventArgs)
-    '    MyBase.OnTextChanged(e)
-    '    If Not Focused Then Return
-    '    _suggestBindingList.Clear()
-    '    _suggestBindingList.RaiseListChangedEvents = False
-    '    '    PropertySelectorCompiled(Items).Where(_filterRuleCompiled).OrderBy(_suggestListOrderRuleCompiled).ToList().ForEach(AddressOf _suggestBindingList.Add)
-    '    _suggestBindingList.RaiseListChangedEvents = True
-    '    _suggestBindingList.ResetBindings()
-    '    Dim showForm As Boolean
-    '    showForm = _suggestBindingList.Any()
-    '    'SuggestListForm.Visible = showForm
-    '    If showForm Then
-    '        SetListBoxFormLocation(SuggestListForm)
-    '        SuggestListForm.Visible = True
-    '        'Me.SendToBack()
-    '        'SuggestListForm.BringToFront()
-    '        'Me.Focus()
-    '    Else
-    '        'SuggestListForm.Hide()
-    '        'Me.SetVisibleCore(True)
-    '    End If
-    '    If _suggestBindingList.Count = 0 And LimitToList Then
-    '        Beep()
-    '        SendKeys.SendWait("{BACKSPACE}")
-    '    ElseIf _suggestBindingList.Count = 1 AndAlso _suggestBindingList.Single().Length = Text.Trim().Length Then
-    '        Text = _suggestBindingList.Single()
-    '        [Select](0, Text.Length)
-    '        HideSuggestionBox()
-    '    End If
-    'End Sub
-
-    'Private Sub caComboBox_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
-    '    HandleMouseUp(sender, e)
-    'End Sub
-
-    'Private Sub HandleMouseUp(control As Object, e As MouseEventArgs)
-    '    ' Checking the Mouse right Button
-    '    If e.Button = MouseButtons.Right Then
-    '        control.ContextMenuStrip.Show(control, New Point(e.X, e.Y))
-    '    End If
-    'End Sub
-
-    'Private Sub HandlePopup(sender As Object, e As EventArgs) Handles _contextMenuStrip1.Opening
-    '    ContextHandler(sender, e)
-    'End Sub
-
-    'Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged
-    '    'PropertySelectorCompiled = Function(collection) collection.Cast(Of Lookup.LookupData)().[Select](Function(p) p.Name)
-    '    PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRow)().Select(Function(p) p.ItemArray(0))
-    'End Sub
-
-    'Private Shadows Sub OnParentChanged(ByVal sender As Object, ByVal e As EventArgs)
-    '    SetListBoxFormLocation(SuggestListForm)
-    '    SuggestListForm.SuggestListBox.Font = New Font("Segoe UI", 9)
-    'End Sub
-
 #End Region
 
 #Region "Methods"
@@ -491,37 +351,14 @@ Public Class CbComboBox
         FlatStyle = FlatStyle.Standard
         Font = myFont
         BorderColor = Color.DimGray
-        'ValueMember = "IdNo"
-        'DisplayMember = "Name"
         _defaultMaxDropDownItems = MaxDropDownItems
         _defaultDropdownStyle = DropDownStyle
-        '_defaultDropDownHeight = DropDownHeight
         Text = ""
-        '_filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
-        '_suggestListOrderRuleCompiled = Function(s) s
-        'PropertySelectorCompiled = Function(collection) collection.Cast(Of String)()
-        'SetStyle(ControlStyles.EnableNotifyMessage, True)
-        'SuggestListForm.SuggestListBox.DataSource = _suggestBindingList
-        'SuggestListForm.SuggestListBox.ForeColor = Color.Green
-        'AddHandler SuggestListForm.SuggestListBox.Click, AddressOf SuggestListBoxOnClick
-        'AddHandler ParentChanged, AddressOf OnParentChanged
-
     End Sub
 
     Public Function GetValue()
         If SelectedItem IsNot Nothing Then
             Return ValueMember
-            'If ValueMember.ToLower() = "idno" Then
-            '    Return CType(SelectedItem, Lookup.LookupData).IdNo
-            'ElseIf ValueMember.ToLower() = "name" Then
-            '    Return CType(SelectedItem, Lookup.LookupData).Name
-            'ElseIf ValueMember.ToLower() = "code" Then
-            '    Return CType(SelectedItem, Lookup.LookupData).Code
-            'ElseIf ValueMember.ToLower() = "index" Then
-            '    Return CType(SelectedItem, Lookup.LookupData).Index
-            'Else
-            '    Return Text
-            'End If
         Else
             Return Nothing
         End If
@@ -789,7 +626,7 @@ Public Class CbComboBox
     '    Return MyBase.ProcessCmdKey(msg, keyData)
     'End Function
 
-    'Private Sub caCombobox_Leave(sender As Object, e As EventArgs) Handles Me.Leave
+    'Private Sub CtCombobox_Leave(sender As Object, e As EventArgs) Handles Me.Leave
     '    If SelectedIndex < 0 Then
     '        If Text = "" Then
     '            'allow empty strings
@@ -955,11 +792,11 @@ Public Class CbComboBox
         SelectedValue = _lastValue
     End Sub
 
-    'Private Sub caCombobox_TextChanged(sender As Object, e As EventArgs) Handles Me.TextChanged
+    'Private Sub CtCombobox_TextChanged(sender As Object, e As EventArgs) Handles Me.TextChanged
     '    ComboBoxValueChanged = True
     'End Sub
 
-    'Private Sub caComboBox_SelectedValueChanged(sender As Object, e As EventArgs) Handles Me.SelectedValueChanged
+    'Private Sub CtCombobox_SelectedValueChanged(sender As Object, e As EventArgs) Handles Me.SelectedValueChanged
     '    If Not ComboBoxValueChanged Then
     '        ComboBoxValueChanged = True
     '    Else

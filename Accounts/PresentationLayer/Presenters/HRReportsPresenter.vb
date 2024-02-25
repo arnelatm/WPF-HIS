@@ -30,13 +30,13 @@ Public Class HRReportsPresenter(Of TM As New)
     Private Function OnFormLoaded() As Object
         Dim showAll As Boolean = False
         If UserHasAccess("HumanResources") Then
-            CreateDataSource("Employee", View.EmployeeSelectorControl)
+            MakeControlDataSources({New String() {("Employee", View.EmployeeSelectorControl)
         Else
             Dim employeeIdNo = GetUserEmployeeIdNo()
             If IsUserASupervisor() Then
-                CreateDataSource("Employee", View.EmployeeSelectorControl, "SupervisorIdNo = " & employeeIdNo.ToString() & " or IdNo = " & employeeIdNo.ToString())
+                MakeVarDataSource("Employee", View.EmployeeSelectorControl, "SupervisorIdNo = " & employeeIdNo.ToString() & " or IdNo = " & employeeIdNo.ToString())
             Else
-                CreateDataSource("Employee", View.EmployeeSelectorControl, "IdNo = " & employeeIdNo.ToString())
+                MakeVarDataSource("Employee", View.EmployeeSelectorControl, "IdNo = " & employeeIdNo.ToString())
             End If
         End If
     End Function

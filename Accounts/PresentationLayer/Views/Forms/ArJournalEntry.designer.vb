@@ -36,12 +36,12 @@ Namespace PresentationLayer.Views.Forms
             Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ArJournalEntry))
             Me.floArJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn()
             Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-            Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn()
             Me.dgvNotes = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvPaidAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvDiscountTaken = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -64,9 +64,9 @@ Namespace PresentationLayer.Views.Forms
             Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblCustomerIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboCustomerIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboCustomerIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.lblTransactionType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboTransactionType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboTransactionType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblDueDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -74,7 +74,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -1348,7 +1348,7 @@ Namespace PresentationLayer.Views.Forms
 
 End Sub
         Friend WithEvents floArJournalItems As CFlowLayout
-        Friend WithEvents DataGridViewJournalItems As CDataGridView
+        Friend WithEvents DataGridViewJournalItems As CtDataGridView
         Friend WithEvents floArJournalHeader As CFlowLayout
         Friend WithEvents lblIdNo As CLabel
         Friend WithEvents txtJournalCode As CTextBox
@@ -1371,15 +1371,15 @@ End Sub
         Friend WithEvents lblDateAdded As CLabel
         Friend WithEvents lblPercent As CLabel
         Friend WithEvents lblAccountIdNo As CLabel
-        Friend WithEvents cboCustomerIdNo As CaComboBox
+        Friend WithEvents cboCustomerIdNo As CtCombobox
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents bsJournalItems As Windows.Forms.BindingSource
         Friend WithEvents CFlowLayout3 As CFlowLayout
         Friend WithEvents CLabel5 As CLabel
         Friend WithEvents CFlowLayout2 As CFlowLayout
-        Friend WithEvents cboAccountIdNo As CaComboBox
+        Friend WithEvents cboAccountIdNo As CtCombobox
         Friend WithEvents lblTransactionType As CLabel
-        Friend WithEvents cboTransactionType As CaComboBox
+        Friend WithEvents cboTransactionType As CtCombobox
         Friend WithEvents CLabel2 As CLabel
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents BalanceDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
@@ -1392,10 +1392,10 @@ End Sub
         Friend WithEvents txtTotalDebits As CTextBox
         Friend WithEvents txtTotalCredits As CTextBox
         Friend WithEvents dgvSequence As CDgvTextColumn
-        Friend WithEvents dgvAccountIdNo As CDgvComboBoxColumn
+        Friend WithEvents dgvAccountIdNo As CtDgvComboboxColumn
         Friend WithEvents dgvDebit As CdgvMoneyColumn
         Friend WithEvents dgvCredit As CdgvMoneyColumn
-        Friend WithEvents dgvRevCostCenterIdNo As CDgvComboBoxColumn
+        Friend WithEvents dgvRevCostCenterIdNo As CtDgvComboboxColumn
         Friend WithEvents dgvNotes As CDgvTextColumn
         Friend WithEvents dgvPaidAmount As DataGridViewTextBoxColumn
         Friend WithEvents dgvDiscountTaken As DataGridViewTextBoxColumn

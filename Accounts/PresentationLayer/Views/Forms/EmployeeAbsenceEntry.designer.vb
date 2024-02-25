@@ -31,7 +31,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.lblEquivalentHours = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtEquivalentHours = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblAddedBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -48,7 +48,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPayrollName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtPayrollName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblAbsenceType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboAbsenceType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboAbsenceType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.lblAbsenceReason = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtAbsenceReason = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -141,9 +141,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboEmployeeIdNo.OverrideDropDownStyleList = false
         Me.cboEmployeeIdNo.PreviousSearchTerm = Nothing
         Me.cboEmployeeIdNo.PropertySelector = Nothing
-        Me.cboEmployeeIdNo.ReadOnlyCombo = false
-        Me.cboEmployeeIdNo.SuggestBoxHeight = 200
-        Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
+            Me.cboEmployeeIdNo.SuggestBoxHeight = 200
+            Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
         Me.cboEmployeeIdNo.TextToSearch = Nothing
         Me.cboEmployeeIdNo.Translatable = false
         Me.cboEmployeeIdNo.ValueIsMandatory = false
@@ -473,9 +472,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAbsenceType.OverrideDropDownStyleList = false
         Me.cboAbsenceType.PreviousSearchTerm = Nothing
         Me.cboAbsenceType.PropertySelector = Nothing
-        Me.cboAbsenceType.ReadOnlyCombo = false
-        Me.cboAbsenceType.SuggestBoxHeight = 200
-        Me.cboAbsenceType.SuggestListOrderRule = Nothing
+            Me.cboAbsenceType.SuggestBoxHeight = 200
+            Me.cboAbsenceType.SuggestListOrderRule = Nothing
         Me.cboAbsenceType.TextToSearch = Nothing
         Me.cboAbsenceType.Translatable = false
         Me.cboAbsenceType.ValueIsMandatory = false
@@ -601,14 +599,14 @@ End Sub
         Friend WithEvents lblIdNo As CLabel
         Public WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblEmployeeIdNo As CLabel
-        Public WithEvents cboEmployeeIdNo As CaComboBox
+        Public WithEvents cboEmployeeIdNo As CtCombobox
         Friend WithEvents lblEquivalentHours As CLabel
         Public WithEvents txtEquivalentHours As CTextBox
         Friend WithEvents lblAddedBy As CLabel
         Public WithEvents txtUserName As CTextBox
         Friend WithEvents CFlowLayout2 As CFlowLayout
         Friend WithEvents lblAbsenceType As CLabel
-        Public WithEvents cboAbsenceType As CaComboBox
+        Public WithEvents cboAbsenceType As CtComboBox
         Friend WithEvents lblAbsenceReason As CLabel
         Public WithEvents txtAbsenceReason As CTextBox
         Friend WithEvents lblPayrollIdNo As CLabel

@@ -36,7 +36,7 @@
             Me.imgList = New System.Windows.Forms.ImageList(Me.components)
             Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-            Me.DataGridViewPmrPatientDisplay = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewPmrPatientDisplay = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.TokenDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.StatusDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
             Me.FileNoDataGridViewTextBoxColumn = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -49,7 +49,7 @@
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-            Me.cboDoctorName = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboDoctorName = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.txtDoctorCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout2.SuspendLayout()
@@ -63,7 +63,7 @@
             Me.btnRefresh.DesignerSelected = False
             Me.btnRefresh.ImageIndex = 0
             Me.btnRefresh.Location = New System.Drawing.Point(913, 4)
-            Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4)
             Me.btnRefresh.Name = "btnRefresh"
             Me.btnRefresh.OriginalImageName = Nothing
             Me.btnRefresh.SecurityKey = ""
@@ -83,7 +83,7 @@
             Me.CFlowLayout2.Controls.Add(Me.TableLayoutPanel1)
             Me.CFlowLayout2.Dock = System.Windows.Forms.DockStyle.Fill
             Me.CFlowLayout2.Location = New System.Drawing.Point(0, 59)
-            Me.CFlowLayout2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.CFlowLayout2.Margin = New System.Windows.Forms.Padding(4)
             Me.CFlowLayout2.Name = "CFlowLayout2"
             Me.CFlowLayout2.Size = New System.Drawing.Size(1053, 622)
             Me.CFlowLayout2.TabIndex = 5
@@ -104,7 +104,7 @@
             Me.TableLayoutPanel1.Controls.Add(Me.cboDoctorName, 1, 0)
             Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
             Me.TableLayoutPanel1.Location = New System.Drawing.Point(4, 4)
-            Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
             Me.TableLayoutPanel1.RowCount = 3
             Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -126,7 +126,7 @@
             Me.DataGridViewPmrPatientDisplay.DataFilter = Nothing
             Me.DataGridViewPmrPatientDisplay.DataSource = Me.bsPmrPatientDisplay
             DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle9.BackColor = System.Drawing.Color.Black
+            DataGridViewCellStyle9.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             DataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black
             DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
@@ -138,6 +138,7 @@
             Me.DataGridViewPmrPatientDisplay.Dock = System.Windows.Forms.DockStyle.Fill
             Me.DataGridViewPmrPatientDisplay.Ea = Nothing
             Me.DataGridViewPmrPatientDisplay.EditingMode = False
+            Me.DataGridViewPmrPatientDisplay.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
             Me.DataGridViewPmrPatientDisplay.EndFindValue = Nothing
             Me.DataGridViewPmrPatientDisplay.FieldDescription = Nothing
             Me.DataGridViewPmrPatientDisplay.FieldName = Nothing
@@ -150,8 +151,9 @@
             Me.DataGridViewPmrPatientDisplay.IgnoreCase = False
             Me.DataGridViewPmrPatientDisplay.IsDirty = False
             Me.DataGridViewPmrPatientDisplay.Location = New System.Drawing.Point(4, 73)
-            Me.DataGridViewPmrPatientDisplay.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+            Me.DataGridViewPmrPatientDisplay.Margin = New System.Windows.Forms.Padding(4)
             Me.DataGridViewPmrPatientDisplay.Name = "DataGridViewPmrPatientDisplay"
+            Me.DataGridViewPmrPatientDisplay.OldCellValue = Nothing
             Me.DataGridViewPmrPatientDisplay.ReadOnly = True
             Me.DataGridViewPmrPatientDisplay.RowHeadersWidth = 51
             Me.DataGridViewPmrPatientDisplay.Searchable = True
@@ -426,9 +428,9 @@
             Me.cboDoctorName.OverrideDropDownStyleList = False
             Me.cboDoctorName.PreviousSearchTerm = Nothing
             Me.cboDoctorName.PropertySelector = Nothing
-            Me.cboDoctorName.ReadOnlyCombo = False
             Me.cboDoctorName.Size = New System.Drawing.Size(677, 28)
             Me.cboDoctorName.SuggestBoxHeight = 200
+            Me.cboDoctorName.SuggestCharCount = 0
             Me.cboDoctorName.SuggestListOrderRule = Nothing
             Me.cboDoctorName.TabIndex = 15
             Me.cboDoctorName.TextToSearch = Nothing
@@ -505,7 +507,7 @@
         Friend WithEvents imgList As ImageList
         Friend WithEvents CFlowLayout2 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-        Friend WithEvents DataGridViewPmrPatientDisplay As Libraries.CBaseControlsLibrary.CDataGridView
+        Friend WithEvents DataGridViewPmrPatientDisplay As Libraries.CBaseControlsLibrary.CtDataGridView
         Friend WithEvents CreateDateDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
@@ -518,7 +520,7 @@
         Friend WithEvents InvTypeDataGridViewTextBoxColumn As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents dgvTime As DataGridViewTextBoxColumn
         Friend WithEvents dgvTransKey As DataGridViewTextBoxColumn
-        Friend WithEvents cboDoctorName As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents cboDoctorName As Libraries.CBaseControlsLibrary.CtCombobox
         Friend WithEvents txtDoctorCode As Libraries.CBaseControlsLibrary.CTextBox
     End Class
 End Namespace

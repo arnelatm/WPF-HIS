@@ -26,7 +26,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event AddDrugAccept() Implements IDrugAcceptView.AddDrugAccept
 
-        Public Property DrugAcceptByName As List(Of Lookup.LookupData)
+        Public Property DrugAcceptByName As DataTable
 
         Public Sub New()
 

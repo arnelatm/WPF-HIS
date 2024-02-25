@@ -17,7 +17,7 @@ Namespace PresentationLayer.Presenters
     Public Class PrintReportPresenter(Of TM As New)
         Inherits CommonPresenter(Of ICrPrintableReportView, TM)
         Implements ISubscriber(Of GetControlDataSource)
-        Implements ISubscriber(Of GetControlEnumDataSource)
+        'Implements ISubscriber(Of GetControlEnumDataSource)
         Implements ISubscriber(Of GetLookupDataTableRequested)
         Implements ISubscriber(Of OtherData)
 
@@ -151,13 +151,9 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Sub OnGetControlDataSourceHandler(ByRef eventType As GetControlDataSource) Implements ISubscriber(Of GetControlDataSource).OnEventHandler
-            If TypeOf eventType.Control Is CtComboBox Then
-                MakeControlDataSourcesT({New Object() {eventType.TableName, eventType.Control, Nothing, eventType.Filter, eventType.Ascending}})
-            Else
-                SetDataSource(eventType.TableName, eventType.Control,, eventType.SortOrder, eventType.Filter, eventType.Ascending)
-            End If
+            'MakeControlDataSourcesT({New GetControlDataSource eventType})
+            MakeControlDataSourcesT({New Object() {eventType.TableName, eventType.Control, Nothing, eventType.Filter, eventType.SortOrder, eventType.DisplayMember, eventType.ValueMember, eventType.Ascending}})
         End Sub
-
 
         Public Sub OnOtherDataHandler(ByRef eventType As OtherData) Implements ISubscriber(Of OtherData).OnEventHandler
             If eventType.ReferenceName = "GetUnitDescription" Then
@@ -180,26 +176,13 @@ Namespace PresentationLayer.Presenters
                 Next
             End If
         End Sub
-
-        Public Sub OnGetControlDataSourceHandler(ByRef eventType As GetControlEnumDataSource) Implements ISubscriber(Of GetControlEnumDataSource).OnEventHandler
-            CreateEnumDataSourceT2(eventType.Control, eventType.EnumObj)
-        End Sub
-
-        'Public Sub OnGetControlDataSourceHandler(ByRef eventType As GetLookupDataTableRequested) Implements ISubscriber(Of GetLookupDataTableRequested).OnEventHandler
-        '    SetDataSourceT(eventType.TableName, eventType.Control,,, eventType.Filter)
-        'End Sub
-
         Public Sub PrintReport(reportFileName As String, reportArgs As CrPrintableArgs, printDirectly As Boolean, Optional addDefaultParameters As Boolean = False)
             ' leave startpage and endpage to 0 - to print all pages
-            'Dim rp As CrPrintableArgs = reportArgs
             ProcessReport(reportFileName, reportArgs, printDirectly, addDefaultParameters) 'rp.DataBaseConnectionName, True, rp.ReportParameters, rp.Copies, rp.Collate, rp.StartPage, rp.EndPage)
         End Sub
 
         Public Sub ViewReport(reportFileName As String, reportArgs As CrPrintableArgs, Optional AddDefaultParameters As Boolean = False)
-            'Dim rp As CrPrintableArgs = reportArgs
             ProcessReport(reportFileName, reportArgs, False, AddDefaultParameters)
-            'Dim crViewerForm As New CrViewer(reportFileName, reportArgs, crReport)
-            'crViewerForm.Show()
         End Sub
 
         Public Sub ViewReport(reportFileName As String, reportTitle As String, cFormCulture As CultureInfo, dbConnectionName As String, args As Object)
@@ -215,7 +198,9 @@ Namespace PresentationLayer.Presenters
             PrintReport(reportFileName, reportArgs, printDirectly)
         End Sub
 
-
+        'Public Sub OnEventHandler(ByRef eventType As GetControlEnumDataSource) Implements ISubscriber(Of GetControlEnumDataSource).OnEventHandler
+        '    Throw New NotImplementedException()
+        'End Sub
     End Class
 
 End Namespace

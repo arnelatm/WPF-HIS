@@ -3,6 +3,7 @@ Imports System.Drawing
 Imports System.Globalization
 Imports System.Threading
 Imports System.Windows.Forms
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel
 Imports AATM.Libraries
 Imports AATM.Libraries.CBaseControlsLibrary
 Imports AATM.Libraries.GlobalFuncNSub
@@ -424,6 +425,7 @@ Public Class CFormBase
         Next
         If onOff Then
             RaiseEvent InputsTurnedOn()
+            UnselectTextOnCtComboboxes(allCtrl)
         Else
             RaiseEvent InputsTurnedOff()
         End If
@@ -431,6 +433,16 @@ Public Class CFormBase
             FirstControl.Focus()
         End If
     End Sub
+
+    Public Shared Sub UnselectTextOnCtComboboxes(allCtrl As List(Of Control))
+        ' i don't want text to be selected on comboboxes this sub will make sure to unselect the text for CtCombobox's
+        For Each ctrl In allCtrl
+            If TypeOf ctrl Is CtComboBox Then
+                DirectCast(ctrl, CtComboBox).SelectionLength = 0
+            End If
+        Next
+    End Sub
+
 
     Private Sub OnBeforeLoad() Handles MyBase.BeforeLoad
         'SetFormTitleCaption()

@@ -172,7 +172,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
 
     Public Function GetTreeViewData()
         Dim cModel As New TM
-        Dim lookupObj As New Lookup(TableName, DataFilter)
+        Dim lookupObj As New LookupTable(TableName, DataFilter)
         lookupObj.NameField = TreeViewMainField
 
         ComposeSecondaryField()
@@ -185,7 +185,7 @@ Public MustInherit Class Presenter(Of TV As IView, TM As New)
             Else
                 lookupObj.FieldsToShow = {IdFieldName, TreeViewMainField, TreeViewSecondaryField}
             End If
-            Return Service.GetLookup(lookupObj)
+            Return Service.GetLookupT(lookupObj)
         Else
             lookupObj.SortKey = "SortKey"
             If String.IsNullOrEmpty(TreeViewSecondaryField) Then

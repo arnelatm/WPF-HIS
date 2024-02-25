@@ -48,20 +48,20 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Sub CreateDataSources()
             If UserHasAccess("HumanResources") Then
-                CreateDataSource("Employee", "EmployeeIdNo")
+                MakeControlDataSources({New String() {"Employee", "EmployeeIdNo", Nothing, Nothing}})
             ElseIf IsUserASupervisor() Then
                 Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
                 Dim filter As String = "IdNo = " + employeeIdNo.ToString() + " or SupervisorIdNo = " + employeeIdNo.ToString()
-                CreateDataSource("Employee", "EmployeeIdNo", filter)
+                MakeControlDataSources({New String() {"Employee", "EmployeeIdNo", Nothing, filter}})
             Else
                 Dim employeeIdNo As Int32 = Service.GetUserEmployeeIdNo()
-                CreateDataSource("Employee", "EmployeeIdNo", "IdNo = " + employeeIdNo.ToString())
+                MakeControlDataSources({New String() {"Employee", "EmployeeIdNo", Nothing, "IdNo = " + employeeIdNo.ToString()}})
             End If
-            CreateDataSource("User", "EnteredBy", {"IdNo", "UserName"})
-            CreateDataSource("Holiday", "HolidayTransferIdNo")
+            MakeControlDataSources({New String() {"User", "EnteredBy", "IdNo,UserName", Nothing},
+                                    New String() {"Holiday", "HolidayTransferIdNo", Nothing, Nothing}})
             CreateEnumDataSource(Of LeaveStatusSelection)("Status")
-            CreateEnumData(Of LeaveStatusSelection)(View.HolidayStatusList)
-            CreateLookupData("User", "Users", {"IdNo", "UserName"})
+            CreateEnumDataT(Of LeaveStatusSelection)(View.HolidayStatusList)
+            MakeVarDataSources({New String() {"User", "Users", "IdNo,UserName", Nothing}})
             'CreateEnumDataSource(Of LeaveApprovalSelection)("Approval")
         End Sub
 

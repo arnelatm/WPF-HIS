@@ -139,6 +139,14 @@ Namespace PresentationLayer.Presenters
             End If
         End Sub
 
+        Public Function TranslateJournalPrefix(original As Boolean, journalCode As String)
+            If original Then
+                Return journalCode
+            Else
+                Return Service.GetField(journalCode, "JournalPrefix", "JournalCode", "JournalCodeAra")
+            End If
+        End Function
+
         Public Function GetLocalizedPrefix(journalCode As String)
             Return Service.GetField(journalCode, "JournalPrefix", "JournalCode", "JournalCodeAra")
         End Function

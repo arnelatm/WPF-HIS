@@ -20,21 +20,19 @@ Namespace PresentationLayer.Presenters
         Protected DtUpdateTable As New DataTable
         Protected ReportName As String
 
-        Private ReadOnly _
-            _djArgs =
-                {"CashReceiptJournalItem_View", "UpdateCashReceiptJournalItemTVP", "InsertCashReceiptJournalItemTVP"}
-
-        Private ReadOnly _openInvItemService As New AccountsService("CsrOiItem")
-        Private ReadOnly _journalItemService As New AccountsService("JournalItem", Nothing, _djArgs)
+        Private ReadOnly _oiItemService
+        Private ReadOnly _journalItemService
 
         Public Sub New(view As ICashReceiptJournalView)
             MyBase.New(view)
+            Dim djArgs = {"CashReceiptJournalItem_View", "UpdateCashReceiptJournalItemTVP", "InsertCashReceiptJournalItemTVP"}
             WithTreeView = False
             SortOrderKey = "IdNo"
             ReportName = "Cash Receipt Journal.Rpt"
             Service = New AccountsService("CashReceiptJournal")
             TableName = "CashReceiptJournal"
-
+            _journalItemService = New AccountsService("JournalItem", Nothing, djArgs)
+            _oiItemService = New AccountsService("CsrOiItem")
             _advancesToCustomerAccountIdNo = GetCustomerAdvancesAccountIdNo()
 
             CreateDataTable(DtInsertTable, {{"AccountIdNo", GetType(Int16)},
@@ -68,14 +66,20 @@ Namespace PresentationLayer.Presenters
                                               {"DiscountTaken", GetType(Decimal)},
                                               {"IdNo", GetType(Int32)},
                                               {"Sequence", GetType(Int16)}})
+
+            AddHandler view.AutoApplyAmount, AddressOf OnAutoApplyAmount
+            AddHandler view.AddCustomerOpenInvoices, AddressOf OnAddCustomerOpenInvoices
+            AddHandler view.FirstLineUpdateNeeded, AddressOf OnFirstLineUpdateNeeded
+            AddHandler view.ReceiptTypeChanged, AddressOf MakePayorIdNoDataSource
+
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateLookupData("Account", "AccountsByCode")
-            CreateLookupData("RevCostCenter", "RevCostCentersByCode")
-            CreateLookupData("Employee", "EmployeesByName")
-            CreateLookupData("Customer", "CustomersByName")
-            CreateLookupData("Supplier", "SuppliersByName")
+            MakeVarDataSources({New String() {"Account", "AccountsByCode", Nothing, Nothing},
+            New String() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing},
+            New String() {"Employee", "EmployeesByName", Nothing, Nothing},
+            New String() {"Customer", "CustomersByName", Nothing, Nothing},
+            New String() {"Supplier", "SuppliersByName", Nothing, Nothing}})
             CreateEnumDataSource(Of ReceiptTypeSelection)("PayorType")
             CreateSpecialAccountDataSource("AccountIdNo", {EnumToCode(SpecialAccountSelection.Bank), EnumToCode(SpecialAccountSelection.Cash), EnumToCode(SpecialAccountSelection.CheckingAccount)})
             CreateSpecialAccountDataSource("DiscountAccountIdNo", {EnumToCode(SpecialAccountSelection.AccountsReceivableDiscount)})
@@ -166,7 +170,7 @@ Namespace PresentationLayer.Presenters
             Dim passedValue As Integer = retVal
             retVal = UpdateChildData(_journalItemService, DtUpdateTable, DtInsertTable, passedValue, "JournalIdNo")
             If retVal >= 0 Then
-                retVal = UpdateChildData(_openInvItemService, DtOiUpdateTable, DtOiInsertTable, passedValue, "CsrIdNo")
+                retVal = UpdateChildData(_oiItemService, DtOiUpdateTable, DtOiInsertTable, passedValue, "CsrIdNo")
                 If retVal >= 0 Then
                     retVal = SaveOpenInvoices()
                 End If
@@ -302,19 +306,6 @@ Namespace PresentationLayer.Presenters
             cForm.Show()
         End Sub
 
-        Private Sub OnSuccessfulDelete(idNo As Int32) Handles MyBase.SuccessfulDelete
-            ' ReSharper disable once VBUseMethodAny.1
-            If View.CsrOiItems IsNot Nothing And View.CsrOiItems.Count() > 0 Then
-                DtOiUpdateTable.Clear()
-                _openInvItemService.DelUpdateTvp(DtOiUpdateTable, idNo)
-            End If
-            ' ReSharper disable once VBUseMethodAny.1
-            If View.JournalItems IsNot Nothing And View.JournalItems.Count() > 0 Then
-                DtUpdateTable.Clear()
-                _journalItemService.DelUpdateTvp(DtUpdateTable, idNo)
-            End If
-        End Sub
-
         Public Sub AutoApplyAmount()
             Dim amountToApply = View.Amount
             'Dim appliedAmount As Decimal = 0D
@@ -338,6 +329,11 @@ Namespace PresentationLayer.Presenters
                 End If
             Next item
         End Sub
+
+        'Private Sub OnUserDeletedRow()
+        '    Dim payeeTypeEnum = CodeToEnum(Of ReceiptTypeSelection)(View.PayorType)
+        '    UpdateVatAmount(View.JournalItems)
+        'End Sub
 
         Private Sub MakeJournalItem()
             If CodeToEnum(Of ReceiptTypeSelection)(View.PayorType) = ReceiptTypeSelection.AccountsReceivable Then
@@ -727,7 +723,7 @@ Namespace PresentationLayer.Presenters
         End Function
 
         Public Function GetCsrOiItems(csrOiIdNo As Int32) As List(Of CsrOiItemModel)
-            Return _openInvItemService.GetRecordsWithGroupIdNo(Of CsrOiItemModel)(csrOiIdNo, "Sequence")
+            Return _oiItemService.GetRecordsWithGroupIdNo(Of CsrOiItemModel)(csrOiIdNo, "Sequence")
         End Function
 
         Public Function GetJournalItems(journalIdNo As Int32) As List(Of JournalItemModel)
@@ -917,9 +913,143 @@ Namespace PresentationLayer.Presenters
             ' because when assigning the cboPayorIdNo the datasource must be correct that is why
             ' we need to set the DataSource part of the cboPayorIdNo before we can assign the PayorIdNo
             View.PayorType = dataModel.PayorType
-            CallByName(View, "SetPayorDataSource", CallType.Method, View.PayorType)
+            MakePayorIdNoDataSource(dataModel.PayorType)
+            'CallByName(View, "SetPayorDataSource", CallType.Method, View.PayorType)
             View.PayorIdNo = dataModel.PayorIdNo
         End Sub
+
+        Private Sub OnFirstLineUpdateNeeded()
+            If EditMode Or AddMode Then
+                If View.JournalItems IsNot Nothing Then
+                    If View.JournalItems.Count() = 0 Then
+                        View.JournalItems = New List(Of JournalItemView) From {
+                            FirstJournalItem()
+                            }
+                    End If
+                    For Each item In View.JournalItems
+                        item.JournalIdNo = View.IdNo
+                        item.Sequence = 1
+                        item.AccountIdNo = View.AccountIdNo
+                        item.Credit = 0
+                        item.Debit = View.Amount
+                        item.RevCostCenterIdNo = 0
+                        MakePayTypeAndSpecialAccount(item, View.AccountIdNo)
+                        Exit For
+                    Next
+                End If
+            End If
+        End Sub
+
+        Private Sub OnSuccessfulDelete(idNo As Int32) Handles MyBase.SuccessfulDelete
+            ' ReSharper disable once VBUseMethodAny.1
+            If View.CsrOiItems IsNot Nothing And View.CsrOiItems.Count() > 0 Then
+                DtOiUpdateTable.Clear()
+                _oiItemService.DelUpdateTvp(DtOiUpdateTable, idNo)
+            End If
+            ' ReSharper disable once VBUseMethodAny.1
+            If View.JournalItems IsNot Nothing And View.JournalItems.Count() > 0 Then
+                DtUpdateTable.Clear()
+                _journalItemService.DelUpdateTvp(DtUpdateTable, idNo)
+            End If
+        End Sub
+
+        Private Sub OnAutoApplyAmount(bsCsrOiItems As BindingSource)
+            Dim amountToApply = View.Amount
+            'apply the negative values first
+            For Each item In bsCsrOiItems
+                If item.PreviousBalance <= 0 Then
+                    amountToApply += item.PreviousBalance * -1
+                    item.Amount = item.PreviousBalance
+                    item.DiscountTaken = 0D
+                    item.Balance = 0D
+                Else
+                    item.Amount = 0D
+                    item.DiscountTaken = 0D
+                    item.Balance = item.PreviousBalance
+                End If
+            Next item
+            For Each item In bsCsrOiItems
+                If item.Balance > 0D Then
+                    If item.Balance <= amountToApply Then
+                        amountToApply -= item.PreviousBalance
+                        item.Amount = item.PreviousBalance
+                        item.DiscountTaken = 0D
+                        item.Balance = 0D
+                    Else
+                        item.Amount = amountToApply
+                        item.DiscountTaken = 0D
+                        item.Balance = item.PreviousBalance - amountToApply
+                        amountToApply = 0D
+                    End If
+                End If
+            Next item
+        End Sub
+
+        Private Sub OnAddCustomerOpenInvoices()
+            If View.PayorIdNo <> 0 Then
+                Dim unpaidInvoices = GetCustomerOpenInvoices(View.PayorIdNo)
+                Dim nSeq As Integer
+                If AddMode Then
+                    View.CsrOiItems.Clear()
+                End If
+                If View.CsrOiItems IsNot Nothing Then
+                    nSeq = View.CsrOiItems.Count()
+                Else
+                    nSeq = 0
+                End If
+                For Each unpaidInvoice In unpaidInvoices
+                    Dim itemFound = False
+                    If View.CsrOiItems IsNot Nothing Then
+                        For Each item In View.CsrOiItems
+                            If item.ArOpenInvoiceIdNo = unpaidInvoice.IdNo Then
+                                itemFound = True
+                                Exit For
+                            End If
+                        Next
+                    End If
+                    If Not itemFound Then
+
+                        If unpaidInvoice.JournalCode = JournalCode And unpaidInvoice.JournalIdNo = View.IdNo Then
+                            ' ignore advance payments if applied to this entry.
+                        Else
+                            nSeq += 1
+                            Dim item As New CsrOiItemView With {
+                                    .AccountIdNo = unpaidInvoice.AccountIdNo,
+                                    .Amount = unpaidInvoice.Amount,
+                                    .ArOpenInvoiceIdNo = unpaidInvoice.ArOpenInvoiceIdNo,
+                                    .Balance = unpaidInvoice.Balance,
+                                    .DiscountTaken = unpaidInvoice.DiscountTaken,
+                                    .InvoiceNo = unpaidInvoice.InvoiceNo,
+                                    .JournalCode = unpaidInvoice.JournalCode,
+                                    .JournalIdNo = unpaidInvoice.JournalIdNo,
+                                    .PreviousBalance = unpaidInvoice.Balance,
+                                    .Sequence = nSeq,
+                                    .TransactionDate = unpaidInvoice.TransactionDate
+                                    }
+                            If View.CsrOiItems Is Nothing Then
+                                View.CsrOiItems = New List(Of CsrOiItemView)
+                            End If
+                            View.CsrOiItems.Add(item)
+                        End If
+                    End If
+                Next
+            End If
+        End Sub
+
+        Private Sub MakePayorIdNoDataSource(payorType As String)
+            Dim x As ReceiptTypeSelection = CodeToEnum(Of ReceiptTypeSelection)(payorType)
+            Select Case x
+                Case ReceiptTypeSelection.Employee
+                    MakeVarDataSources({New String() {"Employee", "PayorDataSource", Nothing, Nothing}})
+                Case ReceiptTypeSelection.Customer, ReceiptTypeSelection.AccountsReceivable
+                    MakeVarDataSources({New String() {"Customer", "PayorDataSource", Nothing, Nothing}})
+                Case ReceiptTypeSelection.SupplierRefund
+                    MakeVarDataSources({New String() {"Supplier", "PayorDataSource", Nothing, Nothing}})
+                Case Else
+                    View.PayorDataSource = Nothing
+            End Select
+        End Sub
+
 
         'Public Function GetCustomerOpenInvoices(dView As List(Of CsrOiItemView)) As List(Of CsrOiItemView)
         '    Dim dModel As New List(Of CsrOiItemModel)
@@ -977,6 +1107,33 @@ Namespace PresentationLayer.Presenters
             End If
             Return retValue
         End Function
+
+        'Public Sub SetPayorDataSource()
+        '    Dim cPayorType As String = View.PayorType
+        '    Dim cbDataSource = Nothing
+        '    Dim curValue As Int32? = cboPayorIdNo.SelectedValue
+        '    cboPayorIdNo.DataSource = cbDataSource
+        '    If OpenInvoiceMode Then
+        '        cbDataSource = Presenter.GetLookup("Customer")
+        '    Else
+        '        Dim payorTypeEnum = CodeToEnum(Of ReceiptTypeSelection)(cPayorType)
+        '        If payorTypeEnum = ReceiptTypeSelection.Customer Then
+        '            cbDataSource = Presenter.GetLookup("Customer")
+        '        ElseIf payorTypeEnum = ReceiptTypeSelection.Employee Then
+        '            cbDataSource = Presenter.GetLookup("Employee")
+        '        ElseIf payorTypeEnum = ReceiptTypeSelection.SupplierRefund Then
+        '            cbDataSource = Presenter.GetLookup("Supplier")
+        '        End If
+        '    End If
+        '    cboPayorIdNo.DisplayMember = "Name"
+        '    cboPayorIdNo.ValueMember = "IdNo"
+        '    cboPayorIdNo.DataSource = cbDataSource
+        '    If curValue IsNot Nothing Then
+        '        cboPayorIdNo.SelectedValue = curValue
+        '    Else
+        '        cboPayorIdNo.SelectedValue = -1
+        '    End If
+        'End Sub
 
         'Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean
         '    Dim returnValue As Boolean = False

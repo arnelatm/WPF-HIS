@@ -31,14 +31,14 @@ Namespace PresentationLayer.Views.Forms
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboLeaveIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpDateStart = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpDateEnd = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblEnteredBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboEnteredBy = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboEnteredBy = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
@@ -129,9 +129,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboLeaveIdNo.OverrideDropDownStyleList = false
         Me.cboLeaveIdNo.PreviousSearchTerm = Nothing
         Me.cboLeaveIdNo.PropertySelector = Nothing
-        Me.cboLeaveIdNo.ReadOnlyCombo = false
-        Me.cboLeaveIdNo.SuggestBoxHeight = 200
-        Me.cboLeaveIdNo.SuggestListOrderRule = Nothing
+            Me.cboLeaveIdNo.SuggestBoxHeight = 200
+            Me.cboLeaveIdNo.SuggestListOrderRule = Nothing
         Me.cboLeaveIdNo.TextToSearch = Nothing
         Me.cboLeaveIdNo.Translatable = false
         Me.cboLeaveIdNo.ValueIsMandatory = false
@@ -262,9 +261,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboEnteredBy.OverrideDropDownStyleList = false
         Me.cboEnteredBy.PreviousSearchTerm = Nothing
         Me.cboEnteredBy.PropertySelector = Nothing
-        Me.cboEnteredBy.ReadOnlyCombo = true
-        Me.cboEnteredBy.SuggestBoxHeight = 200
-        Me.cboEnteredBy.SuggestListOrderRule = Nothing
+            Me.cboEnteredBy.SuggestBoxHeight = 200
+            Me.cboEnteredBy.SuggestListOrderRule = Nothing
         Me.cboEnteredBy.TextToSearch = Nothing
         Me.cboEnteredBy.Translatable = false
         Me.cboEnteredBy.ValueIsMandatory = false
@@ -327,7 +325,7 @@ End Sub
         Friend WithEvents lblIdNo As CLabel
         Public WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblLeaveIdNo As CLabel
-        Public WithEvents cboLeaveIdNo As CaComboBox
+        Public WithEvents cboLeaveIdNo As CtCombobox
         Friend WithEvents CFlowLayout2 As CFlowLayout
         Public WithEvents txtDateCreated As CTextBox
         Friend WithEvents lblDateCreated As CLabel
@@ -336,6 +334,6 @@ End Sub
         Friend WithEvents lblEndDate As CLabel
         Public WithEvents dtpDateEnd As CCustomDateTimePicker
         Friend WithEvents lblEnteredBy As CLabel
-        Public WithEvents cboEnteredBy As CaComboBox
+        Public WithEvents cboEnteredBy As CtCombobox
     End Class
 End Namespace

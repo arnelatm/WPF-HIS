@@ -73,8 +73,13 @@ Public Class CtDgvComboBoxEditingControl
     Public Property SuggestCharCount As Integer
 
     Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged
-        DisplayMember = "Name"
-        PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(1).ToString())
+        If DataSource IsNot Nothing Then
+            DisplayMember = "Name"
+            Dim nCol As Int16 = DirectCast(Me.DataSource, System.Data.DataTable).Columns.Count - 1
+            If nCol >= 0 Then
+                PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(nCol).ToString())
+            End If
+        End If
     End Sub
 
     Protected Overrides Sub OnTextChanged(ByVal e As EventArgs)

@@ -15,7 +15,6 @@ Namespace PresentationLayer.Views.Forms
         Public TxtTotalDebits As Decimal
 
         Private ReadOnly _nfi As NumberFormatInfo = New CultureInfo(CultureInfo.CurrentCulture.ToString, False).NumberFormat
-        Private _accountsByCode
 
         Public Event PrintCheck() Implements IDisbursementJournalView.PrintCheck
 
@@ -31,6 +30,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event SetSupplierVatNumber(ByRef currentVatNumber As String, idNo As String, override As Boolean) Implements IDisbursementJournalView.SetSupplierVatNumber
         Public Event PaymentTypeChanged(paymentType As String) Implements IDisbursementJournalView.PaymentTypeChanged
+        Public Event PayeeIdNoChanged() Implements IDisbursementJournalView.PayeeIdNoChanged
 
         Public Sub New()
 
@@ -177,67 +177,17 @@ Namespace PresentationLayer.Views.Forms
         Public Property PcClosed As Boolean Implements IDisbursementJournalView.PcClosed
 
         Public Property AccountsByCode As Object Implements IDisbursementJournalView.AccountsByCode
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As Object)
-                Throw New NotImplementedException()
-            End Set
-        End Property
-
         Public Property EmployeesByName As Object Implements IDisbursementJournalView.EmployeesByName
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As Object)
-                Throw New NotImplementedException()
-            End Set
-        End Property
-
         Public Property SuppliersByName As Object Implements IDisbursementJournalView.SuppliersByName
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As Object)
-                Throw New NotImplementedException()
-            End Set
-        End Property
-
         Public Property CustomersByName As Object Implements IDisbursementJournalView.CustomersByName
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As Object)
-                Throw New NotImplementedException()
-            End Set
-        End Property
-
         Public Property RevCostCentersByCode As Object Implements IDisbursementJournalView.RevCostCentersByCode
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As Object)
-                Throw New NotImplementedException()
-            End Set
-        End Property
-
         Public Property BankTransfer As Boolean Implements IDisbursementJournalView.BankTransfer
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As Boolean)
-                Throw New NotImplementedException()
-            End Set
-        End Property
-
         Public Property PayeeDataSource As Object Implements IDisbursementJournalView.PayeeDataSource
-            Get
-                Throw New NotImplementedException()
-            End Get
-            Set(value As Object)
-                Throw New NotImplementedException()
-            End Set
-        End Property
+        Public Property JournalCode As String Implements IDisbursementJournalView.JournalCode
+        Public Property JournalCodeDisplay As String Implements IDisbursementJournalView.JournalCodeDisplay
+        Public Property CdAccountCount As Int32 Implements IDisbursementJournalView.CdAccountCount
+        Public Property DefaultAccount As Int32? Implements IDisbursementJournalView.DefaultAccount
+        Public Property OpenInvoiceMode As Boolean Implements IDisbursementJournalView.OpenInvoiceMode
 
 #End Region
 

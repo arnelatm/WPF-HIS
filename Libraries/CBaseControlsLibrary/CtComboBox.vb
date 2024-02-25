@@ -44,6 +44,10 @@ Public Class CtComboBox
     Public Shared Property Delete As String = "Delete Selected Text"
     Public ComboBoxValueChanged As Boolean = False
 
+    <Category("Custom Properties")>
+    <DefaultValue(False)>
+    <Description("Set to True to specify that this control is always editable.")>
+    Public Property AlwaysEditable As Boolean = False
     Private _lastValue As Object = Nothing
 
     <Bindable(True)>
@@ -87,7 +91,6 @@ Public Class CtComboBox
                 ForeColor = GlobalVariables.DefaultFormControlForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlBackgroundColor
             End If
-
         Else
             DropDownStyle = ComboBoxStyle.Simple
             DropDownHeight = Height
@@ -96,6 +99,7 @@ Public Class CtComboBox
             ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
             BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
         End If
+
     End Sub
 
     Public Property FilterRule As Expression(Of Func(Of String, String, Boolean))
@@ -245,12 +249,15 @@ Public Class CtComboBox
             ForeColor = Color.Black
             BackColor = Color.Black
         Else
-            If EditingMode And Not DisplayOnly Then
+            If DisplayOnly Then
+                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            ElseIf EditingMode AndAlso Editable Then
                 ForeColor = GlobalVariables.DefaultFormControlEditingForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlEditingBackgroundColor
             Else
-                ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+                ForeColor = GlobalVariables.DefaultFormForegroundColor
+                BackColor = GlobalVariables.DefaultFormBackgroundColor
             End If
         End If
     End Sub
@@ -260,12 +267,24 @@ Public Class CtComboBox
             ForeColor = Color.Black
             BackColor = Color.Black
         Else
-            If EditingMode And Not DisplayOnly Then
-                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
-                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
-            Else
+            If DisplayOnly Or (Not Editable) Or (Not EditingMode) Then
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            Else
+                ForeColor = GlobalVariables.DefaultFormControlForegroundColor
+                BackColor = GlobalVariables.DefaultFormControlBackgroundColor
+            End If
+        End If
+        If SelectedIndex < 0 Then
+            If Text = "" Then
+                'allow empty strings
+            Else
+                If _suggestBindingList.Count() = 1 Then
+                    Text = SuggestListForm.SuggestListBox.Items(0)
+                Else
+                    ' invalid selection or text set to empty string
+                    Text = Nothing
+                End If
             End If
         End If
     End Sub
@@ -407,13 +426,7 @@ Public Class CtComboBox
         Dim nCol As Int32 = 0
         If DataSource IsNot Nothing Then
             Dim data As DataTable = DirectCast(DataSource, DataTable)
-            If data.Columns.Count = 0 Then
-                nCol = 0
-            ElseIf data.Columns.Count = 1 Then
-                nCol = 0
-            Else
-                nCol = 1
-            End If
+            nCol = Math.Max(data.Columns.Count - 1, 0)
             PropertySelectorCompiled = Function(collection) collection.Cast(Of DataRowView)().[Select](Function(p) p.Row.ItemArray(nCol).ToString())
         End If
 
@@ -442,6 +455,7 @@ Public Class CtComboBox
         _defaultMaxDropDownItems = MaxDropDownItems
         _defaultDropdownStyle = DropDownStyle
         _defaultDropDownHeight = DropDownHeight
+
         Text = ""
         _filterRuleCompiled = Function(s) s.ToLower().Contains(Text.Trim().ToLower())
         _suggestListOrderRuleCompiled = Function(s) s
@@ -450,10 +464,8 @@ Public Class CtComboBox
         SuggestListForm.SuggestListBox.DataSource = _suggestBindingList
         SuggestListForm.SuggestListBox.ForeColor = Color.Green
         EditingMode = False
-
         AddHandler SuggestListForm.SuggestListBox.Click, AddressOf SuggestListBoxOnClick
         AddHandler ParentChanged, AddressOf OnParentChanged
-
     End Sub
 
     Public Function GetValue(Of T)() As T
@@ -485,7 +497,6 @@ Public Class CtComboBox
                     SelectedValue = value
             End Select
         End If
-
     End Sub
 
     Public Property DataValue
@@ -694,20 +705,22 @@ Public Class CtComboBox
         Return MyBase.ProcessCmdKey(msg, keyData)
     End Function
 
-    Private Sub ctCombobox_Leave(sender As Object, e As EventArgs) Handles Me.Leave
-        If SelectedIndex < 0 Then
-            If Text = "" Then
-                'allow empty strings
-            Else
-                If _suggestBindingList.Count() = 1 Then
-                    Text = SuggestListForm.SuggestListBox.Items(0)
-                Else
-                    ' invalid selection or text set to empty string
-                    Text = Nothing
-                End If
-            End If
-        End If
-    End Sub
+    'Private Sub ctCombobox_Leave(sender As Object, e As EventArgs) Handles Me.Leave
+    '    If SelectedIndex < 0 Then
+    '        If Text = "" Then
+    '            'allow empty strings
+    '        Else
+    '            If _suggestBindingList.Count() = 1 Then
+    '                Text = SuggestListForm.SuggestListBox.Items(0)
+    '            Else
+    '                ' invalid selection or text set to empty string
+    '                Text = Nothing
+    '            End If
+    '        End If
+    '    End If
+    '    SelectionLength = 0
+    '    SelectionStart = 0
+    'End Sub
 
     Private Sub HideSuggestionBox()
         SuggestListForm.Hide()

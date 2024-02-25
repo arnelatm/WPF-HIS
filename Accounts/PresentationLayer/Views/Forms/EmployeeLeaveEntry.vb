@@ -178,13 +178,6 @@ Namespace PresentationLayer.Views.Forms
                 }
         End Sub
 
-        'Protected Overrides Sub CreateDataSources()
-        '    CreateDataSource("Employee", cboEmployeeIdNo)
-        '    CreateDataSource("User", cboenteredBy, {"IdNo", "UserName"})
-        '    CreateDataSource("Leave", cboLeaveIdNo)
-        '    CreateEnumDataSource(Of LeaveStatusSelection)(cboLeaveStatus)
-        'End Sub
-
         Private Sub dtpStartDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpStartDate.Validated
             If dtpEndDate.Value Is Nothing OrElse dtpEndDate.Value < dtpStartDate.Value Then
                 dtpEndDate.Value = dtpStartDate.Value

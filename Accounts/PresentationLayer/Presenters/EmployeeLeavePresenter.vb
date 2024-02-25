@@ -84,7 +84,7 @@ Namespace PresentationLayer.Presenters
             Else
                 MakeControlDataSources({New String() {"Leave", "LeaveIdNo", Nothing, " Holiday = 0"}})
             End If
-            CreateEnumDataSourceT(Of LeaveStatusSelection)("Status")
+            CreateEnumDataSource(Of LeaveStatusSelection)("Status")
             CreateEnumDataT(Of LeaveStatusSelection)(View.StatusList)
             MakeVarDataSources({New String() {"User", "Users", "IdNo,UserName", Nothing, Nothing}})
         End Sub

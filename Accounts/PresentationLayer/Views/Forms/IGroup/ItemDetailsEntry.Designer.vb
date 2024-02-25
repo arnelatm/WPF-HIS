@@ -28,7 +28,7 @@
         Me.txtpack2 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtpack3 = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.txtQtyOnHand = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.cboRouteOfAdministration = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboRouteOfAdministration = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.txtGenericName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -46,11 +46,11 @@
         Me.lblGenericName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtPackageSize = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.cboPackageType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.cboUnitOfVolume = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboPackageType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboUnitOfVolume = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.txtVolume = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.cboDosageForm = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.cboUnitOfStrength = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboDosageForm = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.cboUnitOfStrength = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.txtStrengthValue = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.chkPrescriptionDrug = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -58,7 +58,7 @@
         Me.lblRegistrationCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblGTIN = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtGTIN = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-        Me.cboItemFinder = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboItemFinder = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.btnScanQrCode = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -359,9 +359,8 @@
         Me.cboRouteOfAdministration.OverrideDropDownStyleList = false
         Me.cboRouteOfAdministration.PreviousSearchTerm = Nothing
         Me.cboRouteOfAdministration.PropertySelector = Nothing
-        Me.cboRouteOfAdministration.ReadOnlyCombo = true
-        Me.cboRouteOfAdministration.Size = New System.Drawing.Size(436, 24)
-        Me.cboRouteOfAdministration.SuggestBoxHeight = 200
+            Me.cboRouteOfAdministration.Size = New System.Drawing.Size(436, 24)
+            Me.cboRouteOfAdministration.SuggestBoxHeight = 200
         Me.cboRouteOfAdministration.SuggestListOrderRule = Nothing
         Me.cboRouteOfAdministration.TabIndex = 12
         Me.cboRouteOfAdministration.TextToSearch = Nothing
@@ -745,9 +744,8 @@
         Me.cboPackageType.OverrideDropDownStyleList = false
         Me.cboPackageType.PreviousSearchTerm = Nothing
         Me.cboPackageType.PropertySelector = Nothing
-        Me.cboPackageType.ReadOnlyCombo = true
-        Me.cboPackageType.Size = New System.Drawing.Size(436, 24)
-        Me.cboPackageType.SuggestBoxHeight = 200
+            Me.cboPackageType.Size = New System.Drawing.Size(436, 24)
+            Me.cboPackageType.SuggestBoxHeight = 200
         Me.cboPackageType.SuggestListOrderRule = Nothing
         Me.cboPackageType.TabIndex = 10
         Me.cboPackageType.TextToSearch = Nothing
@@ -797,9 +795,8 @@
         Me.cboUnitOfVolume.OverrideDropDownStyleList = false
         Me.cboUnitOfVolume.PreviousSearchTerm = Nothing
         Me.cboUnitOfVolume.PropertySelector = Nothing
-        Me.cboUnitOfVolume.ReadOnlyCombo = true
-        Me.cboUnitOfVolume.Size = New System.Drawing.Size(436, 24)
-        Me.cboUnitOfVolume.SuggestBoxHeight = 200
+            Me.cboUnitOfVolume.Size = New System.Drawing.Size(436, 24)
+            Me.cboUnitOfVolume.SuggestBoxHeight = 200
         Me.cboUnitOfVolume.SuggestListOrderRule = Nothing
         Me.cboUnitOfVolume.TabIndex = 9
         Me.cboUnitOfVolume.TextToSearch = Nothing
@@ -880,9 +877,8 @@
         Me.cboDosageForm.OverrideDropDownStyleList = false
         Me.cboDosageForm.PreviousSearchTerm = Nothing
         Me.cboDosageForm.PropertySelector = Nothing
-        Me.cboDosageForm.ReadOnlyCombo = true
-        Me.cboDosageForm.Size = New System.Drawing.Size(436, 24)
-        Me.cboDosageForm.SuggestBoxHeight = 200
+            Me.cboDosageForm.Size = New System.Drawing.Size(436, 24)
+            Me.cboDosageForm.SuggestBoxHeight = 200
         Me.cboDosageForm.SuggestListOrderRule = Nothing
         Me.cboDosageForm.TabIndex = 7
         Me.cboDosageForm.TextToSearch = Nothing
@@ -932,9 +928,8 @@
         Me.cboUnitOfStrength.OverrideDropDownStyleList = false
         Me.cboUnitOfStrength.PreviousSearchTerm = Nothing
         Me.cboUnitOfStrength.PropertySelector = Nothing
-        Me.cboUnitOfStrength.ReadOnlyCombo = true
-        Me.cboUnitOfStrength.Size = New System.Drawing.Size(436, 24)
-        Me.cboUnitOfStrength.SuggestBoxHeight = 200
+            Me.cboUnitOfStrength.Size = New System.Drawing.Size(436, 24)
+            Me.cboUnitOfStrength.SuggestBoxHeight = 200
         Me.cboUnitOfStrength.SuggestListOrderRule = Nothing
         Me.cboUnitOfStrength.TabIndex = 6
         Me.cboUnitOfStrength.TextToSearch = Nothing
@@ -1149,9 +1144,8 @@
         Me.cboItemFinder.OverrideDropDownStyleList = false
         Me.cboItemFinder.PreviousSearchTerm = Nothing
         Me.cboItemFinder.PropertySelector = Nothing
-        Me.cboItemFinder.ReadOnlyCombo = false
-        Me.cboItemFinder.Size = New System.Drawing.Size(164, 24)
-        Me.cboItemFinder.SuggestBoxHeight = 200
+            Me.cboItemFinder.Size = New System.Drawing.Size(164, 24)
+            Me.cboItemFinder.SuggestBoxHeight = 200
         Me.cboItemFinder.SuggestListOrderRule = Nothing
         Me.cboItemFinder.TabIndex = 37
         Me.cboItemFinder.TextToSearch = Nothing
@@ -1241,26 +1235,26 @@ End Sub
         Friend WithEvents txtStrengthValue As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtGenericName As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboUnitOfStrength As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents cboUnitOfStrength As Libraries.CBaseControlsLibrary.CtCombobox
         Friend WithEvents cboPackageSize As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblPackageType As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblUnitOfVolume As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblVolume As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblUnitOfStrength As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtPackageSize As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents cboPackageType As Libraries.CBaseControlsLibrary.CaComboBox
-        Friend WithEvents cboUnitOfVolume As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents cboPackageType As Libraries.CBaseControlsLibrary.CtCombobox
+        Friend WithEvents cboUnitOfVolume As Libraries.CBaseControlsLibrary.CtCombobox
         Friend WithEvents txtVolume As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents cboDosageForm As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents cboDosageForm As Libraries.CBaseControlsLibrary.CtCombobox
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents chkPrescriptionDrug As Libraries.CBaseControlsLibrary.CCheckBox
         Friend WithEvents CLabel3 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboRouteOfAdministration As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents cboRouteOfAdministration As Libraries.CBaseControlsLibrary.CtCombobox
         Friend WithEvents txtRegistrationNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblRegistrationCode As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtGTIN As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblGTIN As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboItemFinder As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents cboItemFinder As Libraries.CBaseControlsLibrary.CtCombobox
         Friend WithEvents btnScanQrCode As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents EventLog1 As EventLog
         Friend WithEvents txtQtyOnHand As Libraries.CBaseControlsLibrary.CTextBox

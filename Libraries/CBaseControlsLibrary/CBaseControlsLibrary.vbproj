@@ -215,17 +215,9 @@
     <Compile Include="CDgvButtonColumn.vb" />
     <Compile Include="CDgvCheckboxCell.vb" />
     <Compile Include="CDgvButtonCell.vb" />
-    <Compile Include="CDgvComboBoxCell.vb" />
-    <Compile Include="CDgvComboBoxColumn.vb" />
-    <Compile Include="CDgvComboBoxEditingControl.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="CDgvDecimalCell.vb" />
     <Compile Include="CDgvCheckBoxColumn.vb" />
     <Compile Include="CdgvDecimalColumn.vb" />
-    <Compile Include="CaComboBox.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="cbsComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -233,9 +225,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CComboBox.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="CDataGridView.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CDateTimePicker.vb">
@@ -280,9 +269,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="cfsComboBox.vb">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="CGDateTimePicker.Designer.vb">
       <DependentUpon>CGDateTimePicker.vb</DependentUpon>
@@ -333,9 +319,6 @@
     <Compile Include="CMonthPicker.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="CMyCombobox.vb">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="CNewTabControl.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -355,9 +338,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CRadioButton.vb">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="CSuggestFilterComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CTabPage.vb">
@@ -455,7 +435,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="HijriDates.vb" />
-    <Compile Include="ICDataGridView.vb" />
     <Compile Include="ISequencedData.vb" />
     <Compile Include="IEntryControl.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -595,6 +574,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CTextBox.resx">
       <DependentUpon>CTextBox.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CToolStripMenu.resx">
       <DependentUpon>CToolStripMenu.vb</DependentUpon>

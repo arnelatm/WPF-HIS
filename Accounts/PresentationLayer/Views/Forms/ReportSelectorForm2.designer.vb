@@ -29,7 +29,7 @@ Namespace PresentationLayer.Views.Forms
             Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReportSelectorForm2))
-            Me.DataGridViewReportList = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewReportList = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.ReportName = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.bsReportList = New System.Windows.Forms.BindingSource(Me.components)
@@ -49,8 +49,8 @@ Namespace PresentationLayer.Views.Forms
             Me.CCustomDateTimePicker2 = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.CLabel5 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel6 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.CaComboBox1 = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.CaComboBox2 = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.CtCombobox1 = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.CtCombobox2 = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.DataGridViewReportList, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.bsReportList, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -243,8 +243,8 @@ Namespace PresentationLayer.Views.Forms
             Me.TableLayoutPanel1.Controls.Add(Me.CCustomDateTimePicker1, 1, 3)
             Me.TableLayoutPanel1.Controls.Add(Me.CCustomDateTimePicker2, 3, 3)
             Me.TableLayoutPanel1.Controls.Add(Me.CLabel5, 0, 5)
-            Me.TableLayoutPanel1.Controls.Add(Me.CaComboBox1, 1, 5)
-            Me.TableLayoutPanel1.Controls.Add(Me.CaComboBox2, 1, 6)
+            Me.TableLayoutPanel1.Controls.Add(Me.CtCombobox1, 1, 5)
+            Me.TableLayoutPanel1.Controls.Add(Me.CtCombobox2, 1, 6)
             Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
             Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 3)
             Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -418,91 +418,89 @@ Namespace PresentationLayer.Views.Forms
             Me.CLabel6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             Me.CLabel6.Translatable = True
             '
-            'CaComboBox1
+            'CtCombobox1
             '
-            Me.CaComboBox1.BackColor = System.Drawing.SystemColors.ControlLight
-            Me.CaComboBox1.BegFindValue = Nothing
-            Me.CaComboBox1.ChangingSearchValueOnly = False
-            Me.TableLayoutPanel1.SetColumnSpan(Me.CaComboBox1, 3)
-            Me.CaComboBox1.CurrentSearchTerm = ""
-            Me.CaComboBox1.DataValue = Nothing
-            Me.CaComboBox1.DefaultValue = Nothing
-            Me.CaComboBox1.DisplayMember = "Name"
-            Me.CaComboBox1.EditingMode = True
-            Me.CaComboBox1.EndFindValue = Nothing
-            Me.CaComboBox1.FieldDescription = Nothing
-            Me.CaComboBox1.FieldName = Nothing
-            Me.CaComboBox1.FilterRule = Nothing
-            Me.CaComboBox1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.CaComboBox1.FindEnabled = False
-            Me.CaComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CaComboBox1.FormattingEnabled = True
-            Me.CaComboBox1.HideWhenNotEditingOrAdding = False
-            Me.CaComboBox1.IgnoreCase = False
-            Me.CaComboBox1.LinkedLabel = Nothing
-            Me.CaComboBox1.Location = New System.Drawing.Point(123, 98)
-            Me.CaComboBox1.Margin = New System.Windows.Forms.Padding(1)
-            Me.CaComboBox1.Name = "CaComboBox1"
-            Me.CaComboBox1.OldValue = 0
-            Me.CaComboBox1.OriginalDataSource = Nothing
-            Me.CaComboBox1.OriginalList = Nothing
-            Me.CaComboBox1.OverrideDropDownStyleList = False
-            Me.CaComboBox1.PreviousSearchTerm = Nothing
-            Me.CaComboBox1.PropertySelector = Nothing
-            Me.CaComboBox1.ReadOnlyCombo = False
-            Me.CaComboBox1.Size = New System.Drawing.Size(367, 24)
-            Me.CaComboBox1.SuggestBoxHeight = 200
-            Me.CaComboBox1.SuggestListOrderRule = Nothing
-            Me.CaComboBox1.TabIndex = 9
-            Me.CaComboBox1.TextToSearch = Nothing
-            Me.CaComboBox1.Translatable = False
-            Me.CaComboBox1.ValueIsMandatory = False
-            Me.CaComboBox1.ValueIsNullable = False
-            Me.CaComboBox1.ValueIsNumeric = False
-            Me.CaComboBox1.ValueMember = "IdNo"
+            Me.CtCombobox1.BackColor = System.Drawing.SystemColors.ControlLight
+            Me.CtCombobox1.BegFindValue = Nothing
+            Me.CtCombobox1.ChangingSearchValueOnly = False
+            Me.TableLayoutPanel1.SetColumnSpan(Me.CtCombobox1, 3)
+            Me.CtCombobox1.CurrentSearchTerm = ""
+            Me.CtCombobox1.DataValue = Nothing
+            Me.CtCombobox1.DefaultValue = Nothing
+            Me.CtCombobox1.DisplayMember = "Name"
+            Me.CtCombobox1.EditingMode = True
+            Me.CtCombobox1.EndFindValue = Nothing
+            Me.CtCombobox1.FieldDescription = Nothing
+            Me.CtCombobox1.FieldName = Nothing
+            Me.CtCombobox1.FilterRule = Nothing
+            Me.CtCombobox1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.CtCombobox1.FindEnabled = False
+            Me.CtCombobox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CtCombobox1.FormattingEnabled = True
+            Me.CtCombobox1.HideWhenNotEditingOrAdding = False
+            Me.CtCombobox1.IgnoreCase = False
+            Me.CtCombobox1.LinkedLabel = Nothing
+            Me.CtCombobox1.Location = New System.Drawing.Point(123, 98)
+            Me.CtCombobox1.Margin = New System.Windows.Forms.Padding(1)
+            Me.CtCombobox1.Name = "CtCombobox1"
+            Me.CtCombobox1.OldValue = 0
+            Me.CtCombobox1.OriginalDataSource = Nothing
+            Me.CtCombobox1.OriginalList = Nothing
+            Me.CtCombobox1.OverrideDropDownStyleList = False
+            Me.CtCombobox1.PreviousSearchTerm = Nothing
+            Me.CtCombobox1.PropertySelector = Nothing
+            Me.CtCombobox1.Size = New System.Drawing.Size(367, 24)
+            Me.CtCombobox1.SuggestBoxHeight = 200
+            Me.CtCombobox1.SuggestListOrderRule = Nothing
+            Me.CtCombobox1.TabIndex = 9
+            Me.CtCombobox1.TextToSearch = Nothing
+            Me.CtCombobox1.Translatable = False
+            Me.CtCombobox1.ValueIsMandatory = False
+            Me.CtCombobox1.ValueIsNullable = False
+            Me.CtCombobox1.ValueIsNumeric = False
+            Me.CtCombobox1.ValueMember = "IdNo"
             '
-            'CaComboBox2
+            'CtCombobox2
             '
-            Me.CaComboBox2.BackColor = System.Drawing.Color.White
-            Me.CaComboBox2.BegFindValue = Nothing
-            Me.CaComboBox2.ChangingSearchValueOnly = False
-            Me.TableLayoutPanel1.SetColumnSpan(Me.CaComboBox2, 3)
-            Me.CaComboBox2.CurrentSearchTerm = ""
-            Me.CaComboBox2.DataValue = Nothing
-            Me.CaComboBox2.DefaultValue = Nothing
-            Me.CaComboBox2.DisplayMember = "Name"
-            Me.CaComboBox2.EditingMode = True
-            Me.CaComboBox2.EndFindValue = Nothing
-            Me.CaComboBox2.FieldDescription = Nothing
-            Me.CaComboBox2.FieldName = Nothing
-            Me.CaComboBox2.FilterRule = Nothing
-            Me.CaComboBox2.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-            Me.CaComboBox2.FindEnabled = False
-            Me.CaComboBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-            Me.CaComboBox2.FormattingEnabled = True
-            Me.CaComboBox2.HideWhenNotEditingOrAdding = False
-            Me.CaComboBox2.IgnoreCase = False
-            Me.CaComboBox2.LinkedLabel = Nothing
-            Me.CaComboBox2.Location = New System.Drawing.Point(123, 121)
-            Me.CaComboBox2.Margin = New System.Windows.Forms.Padding(1)
-            Me.CaComboBox2.Name = "CaComboBox2"
-            Me.CaComboBox2.OldValue = 0
-            Me.CaComboBox2.OriginalDataSource = Nothing
-            Me.CaComboBox2.OriginalList = Nothing
-            Me.CaComboBox2.OverrideDropDownStyleList = False
-            Me.CaComboBox2.PreviousSearchTerm = Nothing
-            Me.CaComboBox2.PropertySelector = Nothing
-            Me.CaComboBox2.ReadOnlyCombo = False
-            Me.CaComboBox2.Size = New System.Drawing.Size(367, 24)
-            Me.CaComboBox2.SuggestBoxHeight = 200
-            Me.CaComboBox2.SuggestListOrderRule = Nothing
-            Me.CaComboBox2.TabIndex = 10
-            Me.CaComboBox2.TextToSearch = Nothing
-            Me.CaComboBox2.Translatable = False
-            Me.CaComboBox2.ValueIsMandatory = False
-            Me.CaComboBox2.ValueIsNullable = False
-            Me.CaComboBox2.ValueIsNumeric = False
-            Me.CaComboBox2.ValueMember = "IdNo"
+            Me.CtCombobox2.BackColor = System.Drawing.Color.White
+            Me.CtCombobox2.BegFindValue = Nothing
+            Me.CtCombobox2.ChangingSearchValueOnly = False
+            Me.TableLayoutPanel1.SetColumnSpan(Me.CtCombobox2, 3)
+            Me.CtCombobox2.CurrentSearchTerm = ""
+            Me.CtCombobox2.DataValue = Nothing
+            Me.CtCombobox2.DefaultValue = Nothing
+            Me.CtCombobox2.DisplayMember = "Name"
+            Me.CtCombobox2.EditingMode = True
+            Me.CtCombobox2.EndFindValue = Nothing
+            Me.CtCombobox2.FieldDescription = Nothing
+            Me.CtCombobox2.FieldName = Nothing
+            Me.CtCombobox2.FilterRule = Nothing
+            Me.CtCombobox2.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+            Me.CtCombobox2.FindEnabled = False
+            Me.CtCombobox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
+            Me.CtCombobox2.FormattingEnabled = True
+            Me.CtCombobox2.HideWhenNotEditingOrAdding = False
+            Me.CtCombobox2.IgnoreCase = False
+            Me.CtCombobox2.LinkedLabel = Nothing
+            Me.CtCombobox2.Location = New System.Drawing.Point(123, 121)
+            Me.CtCombobox2.Margin = New System.Windows.Forms.Padding(1)
+            Me.CtCombobox2.Name = "CtCombobox2"
+            Me.CtCombobox2.OldValue = 0
+            Me.CtCombobox2.OriginalDataSource = Nothing
+            Me.CtCombobox2.OriginalList = Nothing
+            Me.CtCombobox2.OverrideDropDownStyleList = False
+            Me.CtCombobox2.PreviousSearchTerm = Nothing
+            Me.CtCombobox2.PropertySelector = Nothing
+            Me.CtCombobox2.Size = New System.Drawing.Size(367, 24)
+            Me.CtCombobox2.SuggestBoxHeight = 200
+            Me.CtCombobox2.SuggestListOrderRule = Nothing
+            Me.CtCombobox2.TabIndex = 10
+            Me.CtCombobox2.TextToSearch = Nothing
+            Me.CtCombobox2.Translatable = False
+            Me.CtCombobox2.ValueIsMandatory = False
+            Me.CtCombobox2.ValueIsNullable = False
+            Me.CtCombobox2.ValueIsNumeric = False
+            Me.CtCombobox2.ValueMember = "IdNo"
             '
             'ReportSelectorForm2
             '
@@ -553,7 +551,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents DataGridViewTextBoxColumn7 As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewTextBoxColumn8 As DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewImageColumn2 As DataGridViewImageColumn
-        Friend WithEvents DataGridViewReportList As CDataGridView
+        Friend WithEvents DataGridViewReportList As CtDataGridView
         Friend WithEvents ReportName As DataGridViewTextBoxColumn
         Friend WithEvents dgvIdNo As CDgvTextColumn
         Friend WithEvents CTabControl1 As CTabControl
@@ -572,7 +570,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents CCustomDateTimePicker2 As CCustomDateTimePicker
         Friend WithEvents CLabel5 As CLabel
         Friend WithEvents CLabel6 As CLabel
-        Friend WithEvents CaComboBox1 As CaComboBox
-        Friend WithEvents CaComboBox2 As CaComboBox
+        Friend WithEvents CtCombobox1 As CtCombobox
+        Friend WithEvents CtCombobox2 As CtCombobox
     End Class
 End Namespace

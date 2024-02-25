@@ -93,9 +93,9 @@ Public Class CFormEntry
         'Dim allCtrl As New List(Of Control)
         'allCtrl = FindControlRecursive(allCtrl, Me)
         'For Each control In allCtrl
-        '    If TypeOf control Is CDataGridView Then
-        '        Dim dgv As CDataGridView
-        '        dgv = DirectCast(control, CDataGridView)
+        '    If TypeOf control Is CtDataGridView Then
+        '        Dim dgv As CtDataGridView
+        '        dgv = DirectCast(control, CtDataGridView)
         '        dgv.MakeGridSearchable()
         '    End If
         'Next
@@ -386,8 +386,8 @@ Public Class CFormEntry
         If _debugSwitch = 1 Then
             Debugger.Break()
         End If
-        PublishClickedButton(ButtonClicked.Edit)
         EditingMode = True
+        PublishClickedButton(ButtonClicked.Edit)
         BeforeEdit()
         'If EditMode Then
         '    TurnOnInputs()
@@ -518,9 +518,9 @@ Public Class CFormEntry
         If _debugSwitch Then
             Debugger.Break()
         End If
-        PublishClickedButton(ButtonClicked.Undo)
         EditingMode = False
         AddingMode = False
+        PublishClickedButton(ButtonClicked.Undo)
     End Sub
 
     Private Sub BtnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
@@ -657,7 +657,7 @@ Public Class CFormEntry
         Dim ctrl As Control
         For Each ctrl In FindControlRecursive(allCtrl, Me)
             If TypeOf ctrl Is IEntryControl Then
-                'If ctrl.Name = "dtpDateStart" Then
+                'If TypeOf ctrl Is CtComboBox Then ' = "cboAccountIdNo" Then
                 '    Debugger.Break()
                 'End If
                 If TypeOf ctrl Is DataGridView Then
@@ -671,9 +671,22 @@ Public Class CFormEntry
         Else
             RaiseEvent InputsTurnedOff()
         End If
+        UnselectTextOnCtComboboxes(allCtrl)
         If FirstControl IsNot Nothing Then
             FirstControl.Focus()
         End If
+    End Sub
+
+    Public Sub UnselectTextOnCtComboboxes(Optional allCtrl As List(Of Control) = Nothing)
+        If allCtrl Is Nothing Then
+            FindControlRecursive(allCtrl, Me)
+        End If
+        ' i don't want text to be selected on comboboxes this sub will make sure to unselect the text for CtCombobox's
+        For Each ctrl In allCtrl
+            If TypeOf ctrl Is CtComboBox Then
+                DirectCast(ctrl, CtComboBox).SelectionLength = 0
+            End If
+        Next
     End Sub
 
     'Private Sub OnBeforeLoad() Handles MyBase.BeforeLoad

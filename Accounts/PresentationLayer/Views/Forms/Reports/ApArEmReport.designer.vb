@@ -27,7 +27,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblEndingDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.dtpEndingDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.dtpBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -120,7 +120,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboIdNo.OverrideDropDownStyleList = False
             Me.cboIdNo.PreviousSearchTerm = Nothing
             Me.cboIdNo.PropertySelector = Nothing
-            Me.cboIdNo.ReadOnlyCombo = False
             Me.cboIdNo.Size = New System.Drawing.Size(399, 24)
             Me.cboIdNo.SuggestBoxHeight = 200
             Me.cboIdNo.SuggestListOrderRule = Nothing
@@ -306,7 +305,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblEndingDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents lblBeginningDate As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboIdNo As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents cboIdNo As Libraries.CBaseControlsLibrary.CtCombobox
         Friend WithEvents dtpEndingDate As CCustomDateTimePicker
         Friend WithEvents dtpBeginningDate As CCustomDateTimePicker
         Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout

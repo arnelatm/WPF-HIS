@@ -30,7 +30,7 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Sub CreateDataSources()
             Service.SaveConnectionString()
             Service.SetConnectionString($"ISPDATA")
-            CreateDataSource("Doctor_View", "DoctorName")
+            MakeControlDataSources({New String() {"Doctor_View", "DoctorName", Nothing, Nothing}})
             Service.RestoreConnectionString()
         End Sub
 
@@ -119,7 +119,7 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Sub CreateDataSources()
             Service.SaveConnectionString()
             Service.SetConnectionString($"ISPDATA")
-            CreateDataSource("Doctor_View", "DoctorName")
+            MakeControlDataSources({New String() {"Doctor_View", "DoctorName", Nothing, Nothing}})
             Service.RestoreConnectionString()
         End Sub
 
@@ -179,7 +179,7 @@ Namespace PresentationLayer.Presenters
         'Protected Overrides Sub CreateDataSources()
         '    Service.SaveConnectionString()
         '    Service.SetConnectionString($"ISPDATA")
-        '    CreateDataSource("Doctor_View", "DoctorName")
+        '    MakeControlDataSources({"Doctor_View", "DoctorName")
         '    Service.RestoreConnectionString()
         'End Sub
 
@@ -269,7 +269,7 @@ Namespace PresentationLayer.Presenters
         Protected Overrides Sub CreateDataSources()
             Service.SaveConnectionString()
             Service.SetConnectionString($"ISPDATA")
-            CreateDataSource("Doctor_View", "DoctorName")
+            MakeControlDataSources({New String() {"Doctor_View", "DoctorName,DoctorCode", Nothing, Nothing}})
             Service.RestoreConnectionString()
         End Sub
 

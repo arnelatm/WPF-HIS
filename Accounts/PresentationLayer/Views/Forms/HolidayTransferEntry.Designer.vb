@@ -31,15 +31,15 @@
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpDateCreated = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblEnteredBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboHolidayIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboHolidayIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.lblHolidayDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpDateStart = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpDateEnd = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.DataGridViewHolidayTransferitems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-        Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+        Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+        Me.DataGridViewHolidayTransferitems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
+        Me.dgvEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn()
         Me.HolidayTransferIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvTransfer = New System.Windows.Forms.DataGridViewCheckBoxColumn()
@@ -207,9 +207,8 @@
         Me.cboHolidayIdNo.OverrideDropDownStyleList = false
         Me.cboHolidayIdNo.PreviousSearchTerm = Nothing
         Me.cboHolidayIdNo.PropertySelector = Nothing
-        Me.cboHolidayIdNo.ReadOnlyCombo = false
-        Me.cboHolidayIdNo.Size = New System.Drawing.Size(431, 24)
-        Me.cboHolidayIdNo.SuggestBoxHeight = 200
+            Me.cboHolidayIdNo.Size = New System.Drawing.Size(431, 24)
+            Me.cboHolidayIdNo.SuggestBoxHeight = 200
         Me.cboHolidayIdNo.SuggestListOrderRule = Nothing
         Me.cboHolidayIdNo.TabIndex = 2
         Me.cboHolidayIdNo.TextToSearch = Nothing
@@ -344,9 +343,8 @@
         Me.cboenteredBy.OverrideDropDownStyleList = false
         Me.cboenteredBy.PreviousSearchTerm = Nothing
         Me.cboenteredBy.PropertySelector = Nothing
-        Me.cboenteredBy.ReadOnlyCombo = false
-        Me.cboenteredBy.Size = New System.Drawing.Size(431, 24)
-        Me.cboenteredBy.SuggestBoxHeight = 200
+            Me.cboenteredBy.Size = New System.Drawing.Size(431, 24)
+            Me.cboenteredBy.SuggestBoxHeight = 200
         Me.cboenteredBy.SuggestListOrderRule = Nothing
         Me.cboenteredBy.TabIndex = 4
         Me.cboenteredBy.TextToSearch = Nothing
@@ -465,13 +463,13 @@ End Sub
         Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblEnteredBy As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents DataGridViewHolidayTransferitems As Libraries.CBaseControlsLibrary.CDataGridView
-        Friend WithEvents cboenteredBy As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents DataGridViewHolidayTransferitems As Libraries.CBaseControlsLibrary.CtDataGridView
+        Friend WithEvents cboenteredBy As Libraries.CBaseControlsLibrary.CtCombobox
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dtpDateCreated As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboHolidayIdNo As Libraries.CBaseControlsLibrary.CaComboBox
-        Friend WithEvents dgvEmployeeIdNo As Libraries.CBaseControlsLibrary.CDgvComboBoxColumn
+        Friend WithEvents cboHolidayIdNo As Libraries.CBaseControlsLibrary.CtCombobox
+        Friend WithEvents dgvEmployeeIdNo As Libraries.CBaseControlsLibrary.CtDgvComboboxColumn
         Friend WithEvents HolidayTransferIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents dgvTransfer As DataGridViewCheckBoxColumn

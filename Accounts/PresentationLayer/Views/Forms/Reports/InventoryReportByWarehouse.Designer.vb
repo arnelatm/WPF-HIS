@@ -26,7 +26,7 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.lblSupplierCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboWarehouseIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.chkAllWarehouses = New AATM.Libraries.CBaseControlsLibrary.UcCheckBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -115,7 +115,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboWarehouseIdNo.OverrideDropDownStyleList = False
             Me.cboWarehouseIdNo.PreviousSearchTerm = Nothing
             Me.cboWarehouseIdNo.PropertySelector = Nothing
-            Me.cboWarehouseIdNo.ReadOnlyCombo = False
             Me.cboWarehouseIdNo.Size = New System.Drawing.Size(530, 24)
             Me.cboWarehouseIdNo.SuggestBoxHeight = 200
             Me.cboWarehouseIdNo.SuggestListOrderRule = Nothing
@@ -209,7 +208,7 @@ Namespace PresentationLayer.Views.Forms.Reports
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
         Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton
-        Friend WithEvents cboWarehouseIdNo As CaComboBox
+        Friend WithEvents cboWarehouseIdNo As CtCombobox
         Friend WithEvents chkAllWarehouses As UcCheckBox
     End Class
 End Namespace

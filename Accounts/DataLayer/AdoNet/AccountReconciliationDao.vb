@@ -32,8 +32,6 @@ Namespace DataLayer.AdoNet
                     " WHERE IdNo = @IdNo"
             Dim params() As Object = {"@IdNo", idNo}
             Dim data As AccountReconciliation = _db.Read(sql, Make, params).FirstOrDefault()
-            'Dim accounts As List(Of Lookup.LookupData) = GetLookupData("Account", "AccountCode", "SpecialAccount = 'BA' or SpecialAccount = 'CK' or SpecialAccount = 'CS'")
-            'data.Accounts = accounts
             If data IsNot Nothing Then
                 data.AccountReconciliationItems = GetRecordsWithGroupIdNo(idNo, "Sequence")
                 data.ComputeCalculatedProperties()
@@ -257,50 +255,24 @@ Namespace DataLayer.AdoNet
             Return ProcessLookupByCodeName(data, lookupFieldsToShow.Count())
         End Function
 
-        Private Function ProcessLookupByCodeName(data As Object, fieldCount As UInt16) As List(Of Lookup.LookupData)
-            Dim tlData As New List(Of Lookup.LookupData)
+        Private Function ProcessLookupByCodeName(data As Object, fieldCount As UInt16) As List(Of LookupTable.LookupData)
+            Dim tlData As New List(Of LookupTable.LookupData)
             If fieldCount = 3 Then
-                For each item In data 
-                    Dim tData As New Lookup.LookupData With {.IdNo = item(0), 
+                For Each item In data
+                    Dim tData As New LookupTable.LookupData With {.IdNo = item(0),
                                                              .Name = item(1),
                                                              .Code = item(2)}
                     tlData.Add(tData)
                 Next
             Else
-                For each item In data 
-                    Dim tData As New Lookup.LookupData With {.IdNo = data(0),
+                For Each item In data
+                    Dim tData As New LookupTable.LookupData With {.IdNo = data(0),
                                                              .Name = data(1)}
                     tlData.Add(tData)
                 Next
             End If
-
-            'If fieldCount = 3 Then
-            '    For i = 1 To Int(data.Count / 3)
-            '        Dim tData As New Lookup.LookupData With {.IdNo = data(i * 3 - 3),
-            '                .Name = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1)) & " | " & data(i * 3 - 2),
-            '                .Code = If(IsDBNull(data(i * 3 - 1)), "", data(i * 3 - 1))
-            '                }
-            '        tlData.Add(tData)
-            '    Next
-            'Else
-            '    For i = 1 To Int(data.Count / 2)
-            '        Dim tData As New Lookup.LookupData With {.IdNo = data(i * 2 - 2),
-            '                .Name = If(IsDBNull(data(i * 2 - 1)), "", data(i * 2 - 1)) & " | " & data(i * 2 - 2)
-            '                }
-            '        tlData.Add(tData)
-            '    Next
-            'End If
             Return tlData
         End Function
-
-        'Dim values = accountType.Split(",")
-        'FilterKey = ""
-        'For Each account In values
-        'If FilterKey <> "" Then
-        'FilterKey = FilterKey + " Or "
-        'End If
-        'FilterKey = FilterKey + "SpecialAccount = '" & account & "'"
-        'Next
 
     End Class
 

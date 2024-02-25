@@ -10,14 +10,16 @@ Namespace PresentationLayer.Presenters
         Public Sub New(itemView As IDoctorVIew)
             MyBase.New(itemView)
             Service = New AccountsService("Doctor")
+            TableBaseName = "Doctor"
             TableName = "Doctor_View"
             TreeViewMainField = "DoctorName"
             SortOrderKey = "DoctorName"
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateDataSource("Employee", "EmployeeIdNo")
-            CreateDataSourceGroupCode("SpecialtyIdNo", $"DRSP")
+            MakeControlDataSources({New String() {"Employee", "EmployeeIdNo", Nothing, Nothing}})
+            CreateDataSourceGroupCodeThread({"SpecialtyIdNo"})
+            'CreateDataSourceGroupCodeThread("SpecialtyIdNo", $"DRSP")
         End Sub
 
         Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean

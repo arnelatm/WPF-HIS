@@ -398,6 +398,9 @@ Public Class CTextBox
             If Not AlwaysEditable Then
                 ForeColor = GlobalVariables.DefaultFormControlReadOnlyForegroundColor
                 BackColor = GlobalVariables.DefaultFormControlReadOnlyBackgroundColor
+            Else
+                ForeColor = GlobalVariables.DefaultFormForegroundColor
+                BackColor = GlobalVariables.DefaultFormBackgroundColor
             End If
         End If
     End Sub

@@ -32,15 +32,15 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPrinterCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtPrinterCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblPrinterName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPrinterName = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboPrinterName = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.lblHostName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtHostOrIpName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.LblDefaultPaperSource = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPaperSource = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboPaperSource = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.LblDefaultPaperSize = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPaperSize = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboPaperSize = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.LblDefaultPaperOrientation = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPaperOrientation = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboPaperOrientation = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -258,7 +258,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPrinterName.OverrideDropDownStyleList = False
             Me.cboPrinterName.PreviousSearchTerm = Nothing
             Me.cboPrinterName.PropertySelector = Nothing
-            Me.cboPrinterName.ReadOnlyCombo = False
             Me.cboPrinterName.Size = New System.Drawing.Size(423, 24)
             Me.cboPrinterName.SuggestBoxHeight = 200
             Me.cboPrinterName.SuggestListOrderRule = Nothing
@@ -367,7 +366,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaperSource.OverrideDropDownStyleList = False
             Me.cboPaperSource.PreviousSearchTerm = Nothing
             Me.cboPaperSource.PropertySelector = Nothing
-            Me.cboPaperSource.ReadOnlyCombo = False
             Me.cboPaperSource.Size = New System.Drawing.Size(221, 24)
             Me.cboPaperSource.SuggestBoxHeight = 200
             Me.cboPaperSource.SuggestListOrderRule = Nothing
@@ -431,7 +429,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaperSize.OverrideDropDownStyleList = False
             Me.cboPaperSize.PreviousSearchTerm = Nothing
             Me.cboPaperSize.PropertySelector = Nothing
-            Me.cboPaperSize.ReadOnlyCombo = False
             Me.cboPaperSize.Size = New System.Drawing.Size(221, 24)
             Me.cboPaperSize.SuggestBoxHeight = 200
             Me.cboPaperSize.SuggestListOrderRule = Nothing
@@ -493,9 +490,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboPaperOrientation.OverrideDropDownStyleList = false
         Me.cboPaperOrientation.PreviousSearchTerm = Nothing
         Me.cboPaperOrientation.PropertySelector = Nothing
-        Me.cboPaperOrientation.ReadOnlyCombo = false
-        Me.cboPaperOrientation.Size = New System.Drawing.Size(221, 24)
-        Me.cboPaperOrientation.SuggestBoxHeight = 200
+            Me.cboPaperOrientation.Size = New System.Drawing.Size(221, 24)
+            Me.cboPaperOrientation.SuggestBoxHeight = 200
         Me.cboPaperOrientation.SuggestListOrderRule = Nothing
         Me.cboPaperOrientation.TabIndex = 6
         Me.cboPaperOrientation.TextToSearch = Nothing
@@ -533,13 +529,13 @@ End Sub
         Friend WithEvents LblDefaultPaperSize As CLabel
         Friend WithEvents LblDefaultPaperOrientation As CLabel
         Friend WithEvents lblPrinterName As CLabel
-        Friend WithEvents cboPaperSource As CaComboBox
-        Friend WithEvents cboPaperSize As CaComboBox
-        Friend WithEvents cboPaperOrientation As CaComboBox
+        Friend WithEvents cboPaperSource As CtCombobox
+        Friend WithEvents cboPaperSize As CtCombobox
+        Friend WithEvents cboPaperOrientation As CtCombobox
         Friend WithEvents txtPrinterCode As CTextBox
         Friend WithEvents lblHostName As CLabel
         Friend WithEvents txtHostOrIpName As CTextBox
         Friend WithEvents btnCheckPrinter As CButton
-        Friend WithEvents cboPrinterName As CaComboBox
+        Friend WithEvents cboPrinterName As CtCombobox
     End Class
 End Namespace

@@ -57,7 +57,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNoMaxLimit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkNoMaxLimit = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-            Me.cboLeaveCycle = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboLeaveCycle = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
             Me.SplitContainer1.Panel2.SuspendLayout()
@@ -635,7 +635,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboLeaveCycle.OverrideDropDownStyleList = False
             Me.cboLeaveCycle.PreviousSearchTerm = Nothing
             Me.cboLeaveCycle.PropertySelector = Nothing
-            Me.cboLeaveCycle.ReadOnlyCombo = False
             Me.cboLeaveCycle.SuggestBoxHeight = 200
             Me.cboLeaveCycle.SuggestListOrderRule = Nothing
             Me.cboLeaveCycle.TextToSearch = Nothing
@@ -689,7 +688,7 @@ End Sub
         Friend WithEvents lblNoMaxLimit As CLabel
         Friend WithEvents chkNoMaxLimit As CCheckBox
         Friend WithEvents lblLeaveCycle As CLabel
-        Friend WithEvents cboLeaveCycle As CaComboBox
+        Friend WithEvents cboLeaveCycle As CtCombobox
         Friend WithEvents chkEarnable As CCheckBox
         Friend WithEvents CLabel1 As CLabel
     End Class

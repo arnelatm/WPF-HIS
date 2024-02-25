@@ -272,13 +272,7 @@ Public Class DgvFooter
         Dim curColumnName As String = _parentDgv.Columns(e.ColumnIndex).Name
         Dim columnAddable As Boolean = _columnsToSum.Contains(curColumnName)
         Dim decLength As Integer = -1
-        If TypeOf (sender) Is CDataGridView Then
-            Dim dgv As CDataGridView = sender
-            If TypeOf (dgv.Columns(e.ColumnIndex)) Is CDgvDecimalColumn Then
-                Dim col As CDgvDecimalColumn = dgv.Columns(e.ColumnIndex)
-                decLength = col.DecimalPlaces
-            End If
-        ElseIf TypeOf (sender) Is CtDataGridView Then
+        If TypeOf (sender) Is CtDataGridView Then
             Dim dgv As CtDataGridView = sender
             If TypeOf (dgv.Columns(e.ColumnIndex)) Is CDgvDecimalColumn Then
                 Dim col As CDgvDecimalColumn = dgv.Columns(e.ColumnIndex)
@@ -302,15 +296,7 @@ Public Class DgvFooter
         For Each c As DataGridViewColumn In CType(sender, DataGridView).Columns.OfType(Of DataGridViewTextBoxColumn)()
             Dim columnAddable As Boolean = _columnsToSum.Contains(c.Name)
             If Not columnAddable Then Continue For
-            If TypeOf sender Is CDataGridView Then
-                Dim dgv As CDataGridView = sender
-                If TypeOf (dgv.Columns(c.Name)) Is CDgvDecimalColumn Then
-                    Dim col As CDgvDecimalColumn = dgv.Columns(c.Name)
-                    SumColumn(c.Name, col.DecimalPlaces)
-                Else
-                    SumColumn(c.Name)
-                End If
-            ElseIf TypeOf sender Is CtDataGridView Then
+            If TypeOf sender Is CtDataGridView Then
                 Dim dgv As CtDataGridView = sender
                 If TypeOf (dgv.Columns(c.Name)) Is CDgvDecimalColumn Then
                     Dim col As CDgvDecimalColumn = dgv.Columns(c.Name)
@@ -342,29 +328,66 @@ Public Class DgvFooter
             'Rows.Add()
         End If
 
-        If rowY >= footY Then
-            If _parentDgv.CurrentRow IsNot Nothing Then
-                Dim nIndex = _parentDgv.CurrentRow.Index
-                If _parentDgv.DataSource IsNot Nothing Then
-                    If _parentDgv.DataSource.[GetType]() Is GetType(BindingSource) Then
-                        'AssignEvent()
-                        Dim myBindingSource = CType(_parentDgv.DataSource, BindingSource)
-                        Dim nDataCount = _parentDgv.DataSource().Count()
-                        If _parentDgv.CurrentRow.Index + 1 = _parentDgv.NewRowIndex Then
-                            Try
-                                myBindingSource.AddNew()
-                                ' adding a new row to the bindingsource adds a new empty row at the end with null values
-                                ' therefore there is a need to remove that row because it causes errors when moving to that empty row
-                                myBindingSource.RemoveAt(myBindingSource.Count - 1)
-                                _parentDgv.FirstDisplayedScrollingRowIndex = _parentDgv.FirstDisplayedScrollingRowIndex + 1
-                            Catch
+        If rowY >= footY And Not _killParentRowAddedEvent Then
 
-                            End Try
-                        End If
-                    End If
-                End If
-            End If
+            _killParentRowAddedEvent = True
+
+            'For Each dgvr As DataGridViewRow In _parentDgv.Rows
+            '    If dgvr.Tag Is Nothing Then Continue For
+            '    If dgvr.Tag.ToString = "spacer" Then _parentDgv.Rows.Remove(dgvr)
+            'Next
+
+
+            'If _parentDgv.CurrentRow IsNot Nothing Then
+            '    Dim nIndex = _parentDgv.CurrentRow.Index
+            '    If _parentDgv.DataSource IsNot Nothing Then
+            '        If _parentDgv.DataSource.[GetType]() Is GetType(BindingSource) Then
+            '            'AssignEvent()
+            '            Dim myBindingSource = CType(_parentDgv.DataSource, BindingSource)
+            '            Dim nDataCount = _parentDgv.DataSource().Count()
+            '            If _parentDgv.CurrentRow.Index + 1 = _parentDgv.NewRowIndex Then
+            '                Try
+            '                    myBindingSource.AddNew()
+            '                    ' adding a new row to the bindingsource adds a new empty row at the end with null values
+            '                    ' therefore there is a need to remove that row because it causes errors when moving to that empty row
+            '                    myBindingSource.RemoveAt(myBindingSource.Count - 1)
+            '                    _parentDgv.FirstDisplayedScrollingRowIndex = _parentDgv.FirstDisplayedScrollingRowIndex + 1
+            '                Catch
+
+            '                End Try
+            '            End If
+            '        End If
+            '    End If
+            'End If
+
+            _parentDgv.FirstDisplayedScrollingRowIndex = _parentDgv.Rows.Count - 1
+
+            _killParentRowAddedEvent = False
         End If
+
+        'If rowY >= footY Then
+        '    If _parentDgv.CurrentRow IsNot Nothing Then
+        '        Dim nIndex = _parentDgv.CurrentRow.Index
+        '        If _parentDgv.DataSource IsNot Nothing Then
+        '            If _parentDgv.DataSource.[GetType]() Is GetType(BindingSource) Then
+        '                'AssignEvent()
+        '                Dim myBindingSource = CType(_parentDgv.DataSource, BindingSource)
+        '                Dim nDataCount = _parentDgv.DataSource().Count()
+        '                If _parentDgv.CurrentRow.Index + 1 = _parentDgv.NewRowIndex Then
+        '                    Try
+        '                        myBindingSource.AddNew()
+        '                        ' adding a new row to the bindingsource adds a new empty row at the end with null values
+        '                        ' therefore there is a need to remove that row because it causes errors when moving to that empty row
+        '                        myBindingSource.RemoveAt(myBindingSource.Count - 1)
+        '                        _parentDgv.FirstDisplayedScrollingRowIndex = _parentDgv.FirstDisplayedScrollingRowIndex + 1
+        '                    Catch
+
+        '                    End Try
+        '                End If
+        '            End If
+        '        End If
+        '    End If
+        'End If
         CheckParentVScrollBar()
     End Sub
 

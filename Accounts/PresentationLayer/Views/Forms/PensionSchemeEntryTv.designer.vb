@@ -44,15 +44,15 @@ Namespace PresentationLayer.Views.Forms
             Me.tbpMain = New System.Windows.Forms.TabPage()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.tlpMainTab = New System.Windows.Forms.TableLayoutPanel()
-            Me.cboPensionProviderIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboPensionProviderIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.lblPensionProviderIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.tbpPensionRates = New System.Windows.Forms.TabPage()
             Me.tlpPostingAccounts = New System.Windows.Forms.TableLayoutPanel()
             Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.DataGridViewPensionRates = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.DataGridViewPensionRates = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvLowRange = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.dgvHighRange = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
@@ -197,7 +197,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPensionProviderIdNo.OverrideDropDownStyleList = False
             Me.cboPensionProviderIdNo.PreviousSearchTerm = Nothing
             Me.cboPensionProviderIdNo.PropertySelector = Nothing
-            Me.cboPensionProviderIdNo.ReadOnlyCombo = False
             Me.cboPensionProviderIdNo.SuggestBoxHeight = 200
             Me.cboPensionProviderIdNo.SuggestListOrderRule = Nothing
             Me.cboPensionProviderIdNo.TextToSearch = Nothing
@@ -304,7 +303,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.OverrideDropDownStyleList = False
             Me.cboAccountIdNo.PreviousSearchTerm = Nothing
             Me.cboAccountIdNo.PropertySelector = Nothing
-            Me.cboAccountIdNo.ReadOnlyCombo = False
             Me.cboAccountIdNo.SuggestBoxHeight = 200
             Me.cboAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboAccountIdNo.TextToSearch = Nothing
@@ -702,15 +700,15 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents tbpMain As TabPage
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents tlpMainTab As TableLayoutPanel
-        Friend WithEvents cboPensionProviderIdNo As CaComboBox
+        Friend WithEvents cboPensionProviderIdNo As CtCombobox
         Friend WithEvents lblPensionProviderIdNo As CLabel
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents tbpPensionRates As TabPage
         Friend WithEvents tlpPostingAccounts As TableLayoutPanel
         Friend WithEvents lblAccountIdNo As CLabel
-        Friend WithEvents cboAccountIdNo As CaComboBox
-        Friend WithEvents DataGridViewPensionRates As CDataGridView
+        Friend WithEvents cboAccountIdNo As CtCombobox
+        Friend WithEvents DataGridViewPensionRates As CtDataGridView
         Friend WithEvents dgvSequence As CDgvTextColumn
         Friend WithEvents dgvLowRange As CdgvMoneyColumn
         Friend WithEvents dgvHighRange As CdgvMoneyColumn

@@ -26,7 +26,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event AddDrugSale() Implements IDrugSaleView.AddDrugSale
 
-        Public Property DrugSaleByName As List(Of Lookup.LookupData)
+        Public Property DrugSaleByName As DataTable
 
         Public Sub New()
 

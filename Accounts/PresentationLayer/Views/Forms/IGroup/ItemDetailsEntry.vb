@@ -40,7 +40,7 @@ Namespace PresentationLayer.Views.Forms
 
         Public Event GTinValueChanged(sender As DataGridView, gTinValue As String) Implements IItemDetailsView.GTinValueChanged
 
-        Public Property ItemDetailsByName As List(Of Lookup.LookupData)
+        Public Property ItemDetailsByName As DataTable
 
 #Region "Field Items"
 

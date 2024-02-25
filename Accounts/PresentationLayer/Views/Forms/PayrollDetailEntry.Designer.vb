@@ -40,15 +40,15 @@ Namespace PresentationLayer.Views.Forms
             Me.txtEmployeeCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.tbcPayroll = New AATM.Libraries.CBaseControlsLibrary.CTabControl()
             Me.tpgEarnings = New System.Windows.Forms.TabPage()
-            Me.DataGridViewEarnings = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewEarnings = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvEarningGenerated = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
-            Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvEarningIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn()
             Me.dgvEarningAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.bsEarnings = New System.Windows.Forms.BindingSource(Me.components)
             Me.tpgDeductions = New System.Windows.Forms.TabPage()
-            Me.DataGridViewDeductions = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewDeductions = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvDeductionGenerated = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
-            Me.dgvDeductionIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvDeductionIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn()
             Me.dgvDeductionAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.bsDeductions = New System.Windows.Forms.BindingSource(Me.components)
             Me.txtPayrollIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -66,7 +66,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtTotalDeductions = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtNetPay = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel11 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.lblBankTransfer = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkBankTransfer = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -915,7 +915,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboEmployeeIdNo.OverrideDropDownStyleList = False
             Me.cboEmployeeIdNo.PreviousSearchTerm = Nothing
             Me.cboEmployeeIdNo.PropertySelector = Nothing
-            Me.cboEmployeeIdNo.ReadOnlyCombo = True
             Me.cboEmployeeIdNo.Size = New System.Drawing.Size(416, 29)
             Me.cboEmployeeIdNo.SuggestBoxHeight = 200
             Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
@@ -1026,18 +1025,18 @@ End Sub
         Friend WithEvents dtpEndDate As CCustomDateTimePicker
         Friend WithEvents txtEmployeeCode As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents txtIdNo As Libraries.CBaseControlsLibrary.CTextBox
-        Friend WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.CaComboBox
-        Friend WithEvents DataGridViewEarnings As Libraries.CBaseControlsLibrary.CDataGridView
+        Friend WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.CtCombobox
+        Friend WithEvents DataGridViewEarnings As Libraries.CBaseControlsLibrary.CtDataGridView
         Friend WithEvents bsEarnings As BindingSource
         Friend WithEvents bsDeductions As BindingSource
-        Friend WithEvents DataGridViewDeductions As Libraries.CBaseControlsLibrary.CDataGridView
+        Friend WithEvents DataGridViewDeductions As Libraries.CBaseControlsLibrary.CtDataGridView
         Friend WithEvents lblBankTransfer As CLabel
         Friend WithEvents chkBankTransfer As CCheckBox
         Friend WithEvents dgvEarningGenerated As CDgvCheckBoxColumn
-        Friend WithEvents dgvEarningIdNo As CDgvComboBoxColumn
+        Friend WithEvents dgvEarningIdNo As CtDgvComboboxColumn
         Friend WithEvents dgvEarningAmount As CdgvMoneyColumn
         Friend WithEvents dgvDeductionGenerated As CDgvCheckBoxColumn
-        Friend WithEvents dgvDeductionIdNo As CDgvComboBoxColumn
+        Friend WithEvents dgvDeductionIdNo As CtDgvComboboxColumn
         Friend WithEvents dgvDeductionAmount As CdgvMoneyColumn
     End Class
 End Namespace

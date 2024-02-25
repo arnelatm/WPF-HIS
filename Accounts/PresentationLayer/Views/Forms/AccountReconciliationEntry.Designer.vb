@@ -51,7 +51,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblDateAdded = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.lblPosted = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.chkPosted = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
         Me.txtOutstandingCredits = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -89,7 +89,7 @@ Namespace PresentationLayer.Views.Forms
         Me.txtUnreconciledDifference = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CsrOiItemModelBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.CFlowLayout4 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.DataGridViewReconciliationItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.DataGridViewReconciliationItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
         Me.bsAccountReconciliationItems = New System.Windows.Forms.BindingSource(Me.components)
         Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -1298,7 +1298,7 @@ End Sub
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents CFlowLayout3 As CFlowLayout
         Friend WithEvents CFlowLayout4 As CFlowLayout
-        Friend WithEvents cboAccountIdNo As CaComboBox
+        Friend WithEvents cboAccountIdNo As CtCombobox
         Friend WithEvents lblEndingBankBalance As CLabel
         Friend WithEvents lblCreditsCleared As CLabel
         Friend WithEvents txtTotalCreditsCleared As CTextBox
@@ -1329,7 +1329,7 @@ End Sub
         Friend WithEvents txtBalance As CTextBox
         Friend WithEvents lblDateAdded As CLabel
         Friend WithEvents txtDateCreated As CTextBox
-        Friend WithEvents DataGridViewReconciliationItems As CDataGridView
+        Friend WithEvents DataGridViewReconciliationItems As CtDataGridView
         Friend WithEvents CsrOiItemModelBindingSource As Windows.Forms.BindingSource
         Friend WithEvents dgvAccountIdNo As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents lblPosted As CLabel

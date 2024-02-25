@@ -2,7 +2,7 @@
 Imports System.Windows.Forms
 
 Public Class ComboIcon
-    Inherits CaComboBox
+    Inherits CtCombobox
 
     Private ReadOnly _imageList As New ImageList
     'It is the ImageList associated to the Combo

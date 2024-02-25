@@ -36,7 +36,6 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            'CreateLookupData("Warehouse", "WarehouseIdNo")
         End Sub
 
 

@@ -562,7 +562,7 @@ Get
             End If
         End Sub
 
-        Private Sub MoveToRow(dataGridView As CDataGridView, rowCount As Integer)
+        Private Sub MoveToRow(dataGridView As CtDataGridView, rowCount As Integer)
             Dim nRow As Integer = dataGridView.CurrentRow.Index
             With dataGridView
                 Dim col = .CurrentCell.ColumnIndex
@@ -613,7 +613,7 @@ Get
             BnRefresh(DataGridViewItems)
         End Sub
 
-        Private Sub BnRefresh(dataGridView As CDataGridView)
+        Private Sub BnRefresh(dataGridView As CtDataGridView)
             If dataGridView.CurrentRow() IsNot Nothing Then
                 If dataGridView.Name = "DataGridViewItems" Then
                     tsItemsCount.Text = "of " + (dataGridView.RowCount()).ToString()

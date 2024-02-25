@@ -66,8 +66,8 @@ Namespace PresentationLayer.Views.Forms
             Me.lblItemName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtItemCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboGender = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.cboAgeYmd = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboGender = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboAgeYmd = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.btnClear = New AATM.Libraries.CBaseControlsLibrary.CButton()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
@@ -1216,7 +1216,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboGender.OverrideDropDownStyleList = False
             Me.cboGender.PreviousSearchTerm = Nothing
             Me.cboGender.PropertySelector = Nothing
-            Me.cboGender.ReadOnlyCombo = False
             Me.cboGender.Size = New System.Drawing.Size(113, 24)
             Me.cboGender.SuggestBoxHeight = 200
             Me.cboGender.SuggestListOrderRule = Nothing
@@ -1263,7 +1262,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAgeYmd.OverrideDropDownStyleList = False
             Me.cboAgeYmd.PreviousSearchTerm = Nothing
             Me.cboAgeYmd.PropertySelector = Nothing
-            Me.cboAgeYmd.ReadOnlyCombo = True
             Me.cboAgeYmd.Size = New System.Drawing.Size(74, 24)
             Me.cboAgeYmd.SuggestBoxHeight = 200
             Me.cboAgeYmd.SuggestListOrderRule = Nothing
@@ -1346,8 +1344,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtDosageNameAra As CTextBox
         Friend WithEvents cboDoseUnit As CtComboBox
         Friend WithEvents cboDurationUnit As CtComboBox
-        Friend WithEvents cboGender As CaComboBox
-        Friend WithEvents cboAgeYmd As CaComboBox
+        Friend WithEvents cboGender As CtCombobox
+        Friend WithEvents cboAgeYmd As CtCombobox
         Friend WithEvents btnFindPatient As CButton
         Friend WithEvents cboPatientType As CtComboBox
         Friend WithEvents lblItemName As CLabel

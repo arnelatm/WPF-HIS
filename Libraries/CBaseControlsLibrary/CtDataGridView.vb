@@ -454,7 +454,7 @@ Public Class CtDataGridView
 
     Private Sub DataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles MyBase.EditingControlShowing
         If TypeOf e.Control Is CtDgvComboBoxEditingControl Then
-            'declare variable(cb) as a caCombobox
+            'declare variable(cb) as a CtCombobox
             Dim cb As CtDgvComboBoxEditingControl
             cb = e.Control
             'set the dropdown style of a combobox

@@ -30,8 +30,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Implements ISubscriber(Of ViewButtonClicked),
                ISubscriber(Of EntryFormLoaded),
                ISubscriber(Of SaveDataRequested),
-               ISubscriber(Of GetDataSource),
-               ISubscriber(Of GetLookupDataRequested),
                ISubscriber(Of GetLookupDataTableRequested),
                ISubscriber(Of LanguageChanged)
 
@@ -518,44 +516,8 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End Try
     End Function
 
-    Public Overloads Function GetListLookup(lookupObj As Lookup) As List(Of Lookup.LookupData)
-        Return Service.GetListLookup(lookupObj)
-    End Function
-
     Public Overloads Function GetListLookupT(lookupObj As LookupTable) As DataTable
         Return Service.GetListLookupT(lookupObj)
-    End Function
-
-    Public Overloads Function GetLookup(lookupObj As Lookup) As List(Of Lookup.LookupData)
-        Return Service.GetLookup(lookupObj)
-    End Function
-
-    Public Overloads Function GetLookup(pTableName As String, Optional pFilter As String = Nothing) As List(Of Lookup.LookupData)
-        Dim lookupObj As New Lookup(pTableName, pFilter)
-        Return Service.GetLookup(lookupObj)
-    End Function
-
-    Public Overloads Function GetLookup(pTableName As String, pSortKey As String, Optional pFilter As String = Nothing) As List(Of Lookup.LookupData)
-        Dim lookupObj As New Lookup(pTableName, pFilter)
-        lookupObj.SortKey = pSortKey
-        lookupObj.FilterKey = pFilter
-        Return Service.GetLookup(lookupObj)
-    End Function
-
-    Public Overloads Function GetLookup(pTableName As String, pFieldsToShow As String(), Optional pFilter As String = Nothing) As List(Of Lookup.LookupData)
-        Dim lookupObj As New Lookup(pTableName, pFilter)
-        lookupObj.FieldsToShow = pFieldsToShow
-        lookupObj.FilterKey = pFilter
-        lookupObj.SortKey = pFieldsToShow(1)
-        Return Service.GetLookup(lookupObj)
-    End Function
-
-    Public Overloads Function GetLookup(pTableName As String, pFieldsToShow As String(), pSortKey As String, Optional pFilter As String = Nothing) As List(Of Lookup.LookupData)
-        Dim lookupObj As New Lookup(pTableName, pFilter)
-        lookupObj.FieldsToShow = pFieldsToShow
-        lookupObj.SortKey = pSortKey
-        lookupObj.FilterKey = pFilter
-        Return Service.GetLookup(lookupObj)
     End Function
 
     Public Overloads Function GetLookupT(lookupObj As LookupTable) As List(Of LookupTable.LookupData)
@@ -662,11 +624,8 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Function
 
     Public Function GetRecordFieldWithKeyG(Of TT)(searchValue As String, cTableName As String, searchFieldName As String, returnFieldName As String) As TT
-        Try
-            Return Service.GetRecordFieldWithKeyG(Of TT)(searchValue, cTableName, searchFieldName, returnFieldName)
-        Catch ex As Exception
-            Return Nothing
-        End Try
+        Return Service.GetRecordFieldWithKeyG(Of TT)(searchValue, cTableName, searchFieldName, returnFieldName)
+
     End Function
 
     Public Function GetRecordPosition(idNo As Int32)
@@ -947,9 +906,10 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                 Else
                     RecordPositionNumber = GetSortedRecordPosition(TargetIdNo)
                 End If
-                AddMode = False
-                EditMode = False
+                _addMode = False
+                _editMode = False
                 UpdateViewData(TargetIdNo)
+                UpdateViewDisplay()
                 ClearAllErrorMessages()
             End If
         Else
@@ -1120,7 +1080,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Private Sub FormatError(ctrl As Object, ctrlError As String)
         If DirectCast(ctrl, Control).Dock = DockStyle.Fill Then
-            If TypeOf ctrl Is CaComboBox Then
+            If TypeOf ctrl Is CtComboBox Then
                 MyErrorProvider.SetIconPadding(ctrl, -27)
             Else
                 MyErrorProvider.SetIconPadding(ctrl, -16)
@@ -1330,9 +1290,9 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Function
 
     Public Function MakeEnumComboList(Of TE)()
-        Dim dataList As New List(Of Lookup.LookupData)
+        Dim dataList As New List(Of LookupTable.LookupData)
         For Each c In [Enum].GetValues(GetType(TE))
-            Dim data As New Lookup.LookupData With {
+            Dim data As New LookupTable.LookupData With {
                 .IdNo = CInt(c),
                 .Code = EnumToCode(c),
                 .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
@@ -1623,12 +1583,14 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Sub
 
     Protected Sub ClearAllErrorMessages()
-        Dim myDict = MainFieldsDictionary
-        For Each cCtrl As Control In myDict.Values
-            If cCtrl IsNot Nothing Then
-                MyErrorProvider.SetError(cCtrl, "")
-            End If
-        Next
+        If MainFieldsDictionary.Count() > 0 Then
+            Dim myDict = MainFieldsDictionary
+            For Each cCtrl As Control In myDict.Values
+                If cCtrl IsNot Nothing Then
+                    MyErrorProvider.SetError(cCtrl, "")
+                End If
+            Next
+        End If
     End Sub
 
     Private Sub SetControlDynamicProperties(ByRef cCtrl As Control)
@@ -1699,7 +1661,7 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                             End If
                         End If
                         Exit For
-                    ElseIf TypeOf cCtrl Is CaComboBox OrElse TypeOf cCtrl Is CComboBox Then
+                    ElseIf TypeOf cCtrl Is CtComboBox OrElse TypeOf cCtrl Is CComboBox Then
                         '
                         '
                     ElseIf TypeOf cCtrl Is CCustomDateTimePicker OrElse TypeOf cCtrl Is CDateTimePicker OrElse
@@ -1954,21 +1916,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     '    DoPaintEvents()
     'End Sub
 
-    Public Sub OnGetDataSourceHandler(ByRef eventType As GetDataSource) Implements ISubscriber(Of GetDataSource).OnEventHandler
-        SetDataSource(eventType.TableName, eventType.Control, eventType.Fields, eventType.SortKey, eventType.Filter)
-    End Sub
-
-    Public Sub OnGetLookupDataRequestedHandler(ByRef eventType As GetLookupDataRequested) Implements ISubscriber(Of GetLookupDataRequested).OnEventHandler
-        If eventType.View IsNot Nothing Then
-            Dim data As List(Of Lookup.LookupData)
-            If eventType.Fields Is Nothing Then
-                data = GetLookup(eventType.TableName, eventType.SortKey, eventType.Filter)
-            Else
-                data = GetLookup(eventType.TableName, eventType.Fields, eventType.SortKey, eventType.Filter)
-            End If
-            Invoker.SetProperty(eventType.View, eventType.TargetProperty, {data})
-        End If
-    End Sub
 
     Public Sub OnGetLookupDataRequestedTableHandler(ByRef eventType As GetLookupDataTableRequested) Implements ISubscriber(Of GetLookupDataTableRequested).OnEventHandler
         If eventType.Control IsNot Nothing Then
@@ -2010,59 +1957,60 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         If type.GetProperty("UpdateViewDisplay") IsNot Nothing Then
             UpdateViewDisplay()
             CreateDataSources()
-            RaiseEvent LanguageChanged()
+            'RaiseEvent LanguageChanged()
         End If
+        RaiseEvent LanguageChanged()
     End Sub
 
-    Public Sub CreateListDataSource(ByVal sourceTableName As String, ByVal fieldName As String, ByVal listName As String)
-        SetListDataSource(sourceTableName, GetControlName(fieldName), listName)
-    End Sub
+    'Public Sub CreateListDataSource(ByVal sourceTableName As String, ByVal fieldName As String, ByVal listName As String)
+    '    SetListDataSource(sourceTableName, GetControlName(fieldName), listName)
+    'End Sub
 
     Public Sub CreateListDataSourceT(ByVal sourceTableName As String, ByVal fieldName As String, ByVal listName As String)
         SetListDataSourceT(sourceTableName, GetControlName(fieldName), listName)
     End Sub
 
-    Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal fieldName As String)
-        CreateDataSource(sourceTableName, fieldName, Nothing, Nothing, Nothing)
-    End Sub
+    'Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal fieldName As String)
+    '    CreateDataSource(sourceTableName, fieldName, Nothing, Nothing, Nothing)
+    'End Sub
 
-    Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal fieldName As String, ByVal list As Boolean, ByVal ListName As String)
-        CreateDataSource(sourceTableName, fieldName, Nothing, Nothing, Nothing)
-    End Sub
+    'Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal fieldName As String, ByVal list As Boolean, ByVal ListName As String)
+    '    CreateDataSource(sourceTableName, fieldName, Nothing, Nothing, Nothing)
+    'End Sub
 
-    Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal fieldName As String, Optional filter As String = Nothing)
-        CreateDataSource(sourceTableName, fieldName, Nothing, Nothing, filter)
-    End Sub
+    'Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal fieldName As String, Optional filter As String = Nothing)
+    '    CreateDataSource(sourceTableName, fieldName, Nothing, Nothing, filter)
+    'End Sub
 
-    Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal fieldName As String, Optional sortKey As String = Nothing, Optional filter As String = Nothing)
-        CreateDataSource(sourceTableName, fieldName, Nothing, sortKey, filter)
-    End Sub
+    'Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal fieldName As String, Optional sortKey As String = Nothing, Optional filter As String = Nothing)
+    '    CreateDataSource(sourceTableName, fieldName, Nothing, sortKey, filter)
+    'End Sub
 
-    Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal fieldName As String, fieldsArray As String(), Optional sortKey As String = Nothing, Optional filter As String = Nothing)
-        SetDataSource(sourceTableName, GetControlName(fieldName), fieldsArray, sortKey, filter)
-    End Sub
+    'Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal fieldName As String, fieldsArray As String(), Optional sortKey As String = Nothing, Optional filter As String = Nothing)
+    '    SetDataSource(sourceTableName, GetControlName(fieldName), fieldsArray, sortKey, filter)
+    'End Sub
 
     'Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal fieldName As String, list As Boolean, fieldsArray As String(), Optional sortKey As String = Nothing, Optional filter As String = Nothing)
     '    SetDataSource(sourceTableName, GetControlName(fieldName), fieldsArray, sortKey, filter)
     'End Sub
 
-    Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal control As Control, fieldsArray As String(), Optional sortKey As String = Nothing, Optional filter As String = Nothing)
-        SetDataSource(sourceTableName, control, fieldsArray, sortKey, filter)
-    End Sub
+    'Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal control As Control, fieldsArray As String(), Optional sortKey As String = Nothing, Optional filter As String = Nothing)
+    '    SetDataSource(sourceTableName, control, fieldsArray, sortKey, filter)
+    'End Sub
 
-    Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal control As Control)
-        SetDataSource(sourceTableName, control, Nothing, Nothing, Nothing)
-    End Sub
+    'Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal control As Control)
+    '    SetDataSource(sourceTableName, control, Nothing, Nothing, Nothing)
+    'End Sub
 
-    Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal control As Control, Optional ByVal filter As String = Nothing)
-        SetDataSource(sourceTableName, control, Nothing, Nothing, filter)
-    End Sub
+    'Public Sub CreateDataSource(ByVal sourceTableName As String, ByVal control As Control, Optional ByVal filter As String = Nothing)
+    '    SetDataSource(sourceTableName, control, Nothing, Nothing, filter)
+    'End Sub
 
-    Public Sub CreateDataSourceGroupCode(ByVal fieldName As String, groupCode As String)
-        Dim idNo As Int16
-        idNo = Service.GetRecordFieldWithKeyG(Of Int16, String)(groupCode, "CodeGroup", "CodeGroupCode", "IdNo")
-        CreateDataSource("ItemCode", fieldName, Nothing, Nothing, "CodeGroupIdNo = " & idNo.ToString())
-    End Sub
+    'Public Sub CreateDataSourceGroupCode(ByVal fieldName As String, groupCode As String)
+    '    Dim idNo As Int16
+    '    idNo = Service.GetRecordFieldWithKeyG(Of Int16, String)(groupCode, "CodeGroup", "CodeGroupCode", "IdNo")
+    '    CreateDataSource("ItemCode", fieldName, Nothing, Nothing, "CodeGroupIdNo = " & idNo.ToString())
+    'End Sub
 
     Protected Function GetControlName(ByVal fieldName As String) As CtComboBox
         Dim control As Control = Nothing
@@ -2086,34 +2034,14 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return control
     End Function
 
-
-    Public Sub SetDataSource(dataTableName As String, control As Control, Optional dataFields As String() = Nothing, Optional sortKey As String = Nothing, Optional filter As String = Nothing, Optional ascending As Boolean = True)
-        Dim data As List(Of Lookup.LookupData)
-        Dim lookupObj
-        lookupObj = SetLookupObject(dataTableName, control, dataFields, sortKey, filter, ascending)
-        data = GetLookup(lookupObj)
-        Dim Task1
-        Task1 = Task.Factory.StartNew(Sub() GetLookup(lookupObj))
-        Task.WaitAll(Task1) ' ,Task2)
-        Invoker.SetProperty(control, "DataSource", {data})
-    End Sub
-
     Public Sub SetDataSourceT(dataTableName As String, control As Control, Optional dataFields As String() = Nothing, Optional sortKey As String = Nothing, Optional filter As String = Nothing, Optional ascending As Boolean = True)
         Dim data As List(Of LookupTable.LookupData)
         Dim lookupObj
         lookupObj = SetLookupObjectT(dataTableName, control, dataFields, sortKey, filter, ascending)
         data = GetLookupT(lookupObj)
         Dim Task1
-        Task1 = Task.Factory.StartNew(Sub() GetLookup(lookupObj))
+        Task1 = Task.Factory.StartNew(Sub() GetLookupT(lookupObj))
         Task.WaitAll(Task1) ' ,Task2)
-        Invoker.SetProperty(control, "DataSource", {data})
-    End Sub
-
-    Protected Sub SetListDataSource(dataTableName As String, control As Control, listName As String)
-        Dim data As List(Of Lookup.LookupData)
-        Dim lookupObj
-        lookupObj = SetLookupListObject(dataTableName, control, listName)
-        data = GetListLookup(lookupObj)
         Invoker.SetProperty(control, "DataSource", {data})
     End Sub
 
@@ -2124,22 +2052,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         data = GetListLookupT(lookupObj)
         Invoker.SetProperty(control, "DataSource", {data})
     End Sub
-
-
-    Protected Function SetLookupObject(dataTableName As String, control As Control, Optional dataFields As String() = Nothing, Optional sortKey As String = Nothing, Optional filter As String = Nothing, Optional ascending As Boolean = True) As Lookup
-        Dim lookupObj As New Lookup(dataTableName)
-        If dataFields IsNot Nothing Then
-            lookupObj.FieldsToShow = dataFields
-        End If
-        If Not (sortKey Is Nothing OrElse sortKey = "") Then
-            lookupObj.SortKey = sortKey
-        End If
-        If Not (filter Is Nothing OrElse filter = "") Then
-            lookupObj.FilterKey = filter
-        End If
-        lookupObj.Ascending = ascending
-        Return lookupObj
-    End Function
 
     Protected Function SetLookupObjectT(dataTableName As String, control As Control, Optional dataFields As String() = Nothing, Optional sortKey As String = Nothing, Optional filter As String = Nothing, Optional ascending As Boolean = True) As LookupTable
         Dim lookupObj As New LookupTable(dataTableName)
@@ -2156,15 +2068,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return lookupObj
     End Function
 
-    Protected Function SetLookupListObject(dataTableName As String, control As Control, listName As String) As Lookup
-        Dim lookupObj As New Lookup(dataTableName)
-        Dim dataFields = {"ListIdNo", "ListName", "ListCode"}
-        lookupObj.SortKey = "ListName"
-        Dim listIdNo As Int16 = Service.GetField(Of Int16, String)(listName, "ListGroup", "ListName", "IdNo")
-        lookupObj.FilterKey = "ListIdNo=" & listIdNo.ToString()
-        Return lookupObj
-    End Function
-
     Protected Function SetLookupListObjectT(dataTableName As String, control As Control, listName As String) As LookupTable
         Dim lookupObj As New LookupTable(dataTableName)
         Dim dataFields = {"ListIdNo", "ListName", "ListCode"}
@@ -2175,17 +2078,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     End Function
 
     Public Sub CreateEnumDataSource(Of TE)(ByVal fieldName As String)
-        Dim control As CaComboBox = Nothing
-        Dim x = MainFieldsDictionary
-        If MainFieldsDictionary.TryGetValue(fieldName, control) Then
-            control.DataSource = GetEnumData(Of TE)()
-        Else
-            Debugger.Break()
-            MessageBox.Show($"Field '" & fieldName & $"' is not valid!")
-        End If
-    End Sub
-
-    Public Sub CreateEnumDataSourceT(Of TE)(ByVal fieldName As String)
         Dim control As CtComboBox = Nothing
         Dim x = MainFieldsDictionary
         If MainFieldsDictionary.TryGetValue(fieldName, control) Then
@@ -2196,54 +2088,9 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         End If
     End Sub
 
-    Public Sub CreateEnumDataSourceT2(ByVal control As CtComboBox, ByVal EnumObj As [Enum])
-        'Dim exAssembly = Reflection.Assembly.GetExecutingAssembly
-        'Dim enumType = exAssembly.GetTypes.First(Function(f) f.Name = EnumObj)
-        Dim dt As New DataTable
-        Dim workCol As New DataColumn
-        dt.Columns.Add("IdNo", GetType(Int16))
-        dt.Columns("IdNo").AllowDBNull = False
-        dt.Columns("IdNo").Unique = True
-        dt.Columns.Add("Code", GetType(String))
-        dt.Columns("Code").AllowDBNull = False
-        dt.Columns("Code").Unique = True
-        dt.Columns.Add("Name", GetType(String))
-        dt.Columns("Name").AllowDBNull = False
-        dt.Columns("Name").Unique = True
-        For Each c In [Enum].GetValues(EnumObj.GetType())
-            Dim workRow As DataRow = dt.NewRow()
-            workRow("IdNo") = CInt(c)
-            workRow("Code") = EnumToCode(c)
-            workRow("Name") = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
-            dt.Rows.Add(workRow)
-        Next
-        control.DataSource = dt
-    End Sub
-
-    Public Sub CreateEnumDataSource(Of TE)(ByRef comboControl As CaComboBox)
-        comboControl.DataSource = GetEnumData(Of TE)()
-    End Sub
-
-    Public Sub CreateEnumData(Of TE)(ByRef dataTarget As Object)
-        dataTarget = GetEnumData(Of TE)()
-    End Sub
-
     Public Sub CreateEnumDataT(Of TE)(ByRef dataTarget As Object)
         dataTarget = GetEnumDataT(Of TE)()
     End Sub
-
-    Private Function GetEnumData(Of TE)()
-        Dim dataList As New List(Of Lookup.LookupData)
-        For Each c In [Enum].GetValues(GetType(TE))
-            Dim data As New Lookup.LookupData With {
-                    .IdNo = CInt(c),
-                    .Code = EnumToCode(c),
-                    .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
-                    }
-            dataList.Add(data)
-        Next
-        Return dataList
-    End Function
 
     Private Function GetEnumDataT(Of TE)()
         Dim dt As New DataTable
@@ -2259,59 +2106,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Next
         Return dt
     End Function
-
-    Private Function GetEnumDataT2(Of TE)()
-        Dim dataList As New List(Of Lookup.LookupData)
-        For Each c In [Enum].GetValues(GetType(TE))
-            Dim data As New Lookup.LookupData With {
-                    .IdNo = CInt(c),
-                    .Code = EnumToCode(c),
-                    .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
-                    }
-            dataList.Add(data)
-        Next
-        Return dataList
-    End Function
-
-    Protected Overloads Sub CreateLookupData(sourceTableName As String, targetProperty As String)
-        Dim data As List(Of Lookup.LookupData)
-        data = GetLookup(sourceTableName)
-        Invoker.SetProperty(View, targetProperty, {data})
-    End Sub
-
-    Protected Overloads Sub CreateLookupData(sourceTableName As String, targetProperty As String, filter As String)
-        Dim data As List(Of Lookup.LookupData)
-        data = GetLookup(sourceTableName, filter)
-        Invoker.SetProperty(View, targetProperty, {data})
-    End Sub
-
-    Protected Overloads Sub CreateLookupData(sourceTableName As String, targetProperty As String, sortKey As String, filter As String)
-        Dim data As List(Of Lookup.LookupData)
-        data = GetLookup(sourceTableName, sortKey, filter)
-        Invoker.SetProperty(View, targetProperty, {data})
-    End Sub
-
-    Protected Overloads Sub CreateLookupData(sourceTableName As String, targetProperty As String, fields As String(), Optional filter As String = Nothing)
-        Dim data As List(Of Lookup.LookupData)
-        data = GetLookup(sourceTableName, fields, filter)
-        Invoker.SetProperty(View, targetProperty, {data})
-    End Sub
-
-    Protected Overloads Sub CreateLookupData(sourceTableName As String, targetProperty As String, fields As String(), sortKey As String, Optional filter As String = Nothing)
-        Dim data As List(Of Lookup.LookupData)
-        data = GetLookup(sourceTableName, fields, sortKey, filter)
-        Invoker.SetProperty(View, targetProperty, {data})
-    End Sub
-
-    Protected Sub SetLookupData(ByVal sourceTableName As String, ByVal targetProperty As String, Optional ByVal sortKey As String = Nothing, ByVal Optional fields As String() = Nothing, Optional ByVal filter As String = Nothing)
-        Dim data As List(Of Lookup.LookupData)
-        If fields Is Nothing Then
-            data = GetLookup(sourceTableName, sortKey, filter)
-        Else
-            data = GetLookup(sourceTableName, fields, sortKey, filter)
-        End If
-        Invoker.SetProperty(View, targetProperty, {data})
-    End Sub
 
     Public Function GetService()
         Return Service
@@ -2355,22 +2149,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
             Invoker.SetPropertyR(luItem.PropertyControl, "ValueMember", luItem.Data.Columns(valueColumnNo).ColumnName)
         Next
     End Sub
-
-
-    'Protected Function GetLookupThread(dataSourceName As Object)
-    '    Dim lookup As New Object
-    '    Dim luItem As DataLookup
-    '    luItem = CreateDataLookUp(luItem)
-    '    For Each luItem As DataLookup In luItems
-    '        Dim displayColumnNo As Integer = Nothing
-    '        Dim valueColumnNo As Integer = Nothing
-    '        MakeLookupItem(luItem, displayColumnNo, valueColumnNo)
-    '        Invoker.SetPropertyR(luItem.PropertyControl, "DisplayMember", luItem.Data.Columns(displayColumnNo).ColumnName)
-    '        Invoker.SetPropertyR(luItem.PropertyControl, "ValueMember", luItem.Data.Columns(valueColumnNo).ColumnName)
-    '    Next
-    '    Return lookup
-    'End Function
-
 
     Private Sub MakeLookupItem(ByRef luItem As DataLookup, ByRef displayColumnNo As Integer, ByRef valueColumnNo As Integer)
         luItem.PropertyControl = GetFieldControlName(luItem.PropertyName)
@@ -2705,71 +2483,6 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
         Return dtl
     End Function
 
-    'Private Function CreateDataLookupsGroupCode(GroupCodeCodes As Object) As List(Of DataLookup)  
-    '    Dim dataSourceNames As Object = Nothing
-    '    For each item In GroupCodeCodes
-    '        Dim idNo As Int16
-    '        idNo = Service.GetRecordFieldWithKeyG(Of Int16, String)(item(2), "CodeGroup", "CodeGroupCode", "IdNo")
-    '        dataSourceNames.Add("ItemCode",GroupCodeCodes(1),"ItemCodeCode,ItemCodeName","CodeGroupIdNo = " & idNo.ToString())
-    '    Next
-    '    Return CreateDataLookups(dataSourceNames)
-    'End Function
-
-
-    'Private Function CreateDataLookups(dataSourceNames As Object) As List(Of DataLookup)
-    '    Const LookupTableName As Int32 = 0
-    '    Const PropertyFieldName As Int32 = 1
-    '    Const LookupFieldNames As Int32 = 2
-    '    Const LookupFilter As Int32 = 3
-    '    Const LookupSortKey As Int32 = 4
-    '    Dim lookups As New List(Of DataLookup)
-    '    For i = 0 To dataSourceNames.Length()-1
-    '        Dim dtl As New DataLookup
-    '        dtl.TableName = datasourcenames(i)(LookupTableName)
-    '        dtl.PropertyName = dataSourceNames(i)(PropertyFieldName)
-    '        If dataSourceNames(i).Length() > 2 Then
-    '            dtl.LuFields = dataSourceNames(i)(LookupFieldNames)
-    '        End If
-    '        If dataSourceNames(i).Length() > 3 Then
-    '            dtl.Filter = dataSourceNames(i)(LookupFilter)
-    '        End If
-    '        If dataSourceNames(i).Length() > 4 Then
-    '            dtl.SortKey = dataSourceNames(i)(LookupSortKey)
-    '        End If
-    '        ComposeLookupProperties(dtl)
-    '        dtl.LookUpTask = Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(dtl))
-    '        lookups.Add(dtl)
-    '    Next
-    '    Return lookups
-    'End Function
-
-    'Private Function CreateDataLookups(dataSourceNames As Object) As List(Of DataLookup)
-    '    Const LookupTableName As Int32 = 0
-    '    Const PropertyFieldName As Int32 = 1
-    '    Const LookupFieldNames As Int32 = 2
-    '    Const LookupFilter As Int32 = 3
-    '    Const LookupSortKey As Int32 = 4
-    '    Dim lookups As New List(Of DataLookup)
-    '    For i = 0 To UBound(dataSourceNames, 1)
-    '        Dim dtl As New DataLookup
-    '        dtl.TableName = dataSourceNames(i, LookupTableName)
-    '        dtl.PropertyName = dataSourceNames(i, PropertyFieldName)
-    '        If UBound(dataSourceNames, 2) > 1 Then
-    '            dtl.LuFields = dataSourceNames(i, LookupFieldNames)
-    '        End If
-    '        If UBound(dataSourceNames, 2) > 2 Then
-    '            dtl.Filter = dataSourceNames(i, LookupFilter)
-    '        End If
-    '        If UBound(dataSourceNames, 2) > 3 Then
-    '            dtl.SortKey = dataSourceNames(i, LookupSortKey)
-    '        End If
-    '        ComposeLookupProperties(dtl)
-    '        dtl.LookUpTask = Task(Of DataTable).Factory.StartNew(Function() LookupDataTableCreator(dtl))
-    '        lookups.Add(dtl)
-    '    Next
-    '    Return lookups
-    'End Function
-
     Private Sub ComposeLookupProperties(dtl As DataLookup)
         Dim RightToLeftFormat = GlobalFunctions.IsRightToLeft(CultureInfo.CurrentCulture.ToString())
         If dtl.LuFields Is Nothing Then
@@ -2824,15 +2537,13 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
                 Debugger.Break()
             End If
         End If
-        'TranslateFields(dtl)
     End Sub
 
     Private Function TranslateNameField(tableName As String, fieldName As String) As String
         Dim retValue As String = fieldName
         If GlobalFunctions.IsRightToLeft(CultureInfo.CurrentCulture.ToString()) Then
             Dim nameFieldArabic As String = fieldName + "Ara"
-            Dim svc As New Service
-            If svc.FieldExistInTable(tableName, nameFieldArabic) Then
+            If Service.FieldExistInTable(tableName, nameFieldArabic) Then
                 retValue = fieldName + "Ara"
             End If
         End If
@@ -2842,17 +2553,16 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
     Private Function LookupDataTableCreator(dtl As DataLookup) As DataTable
         Dim cd As New DataCreator(Service)
         Dim data As DataTable = cd.CreateDataTable(dtl)
-        'data.Columns(0).ColumnName = "Name"
         cd = Nothing
         Return data
     End Function
 
     Protected Sub SetDataSourceInstalledPrinter(controlName As String)
-        Dim data As New List(Of Lookup.LookupData)
+        Dim data As New List(Of LookupTable.LookupData)
         ' Find all printers installed
         Dim index As Int16 = 0
         For Each item In PrinterSettings.InstalledPrinters
-            Dim dbLookup = New Lookup.LookupData
+            Dim dbLookup = New LookupTable.LookupData
             dbLookup.IdNo = index
             dbLookup.Name = item
             dbLookup.Code = item
@@ -2865,10 +2575,10 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Protected Sub SetPrinterSupportedSources(pPrinterName As String, ByRef paperSource As Int16)
         Dim data = GlobalFunctions.GetPrinterPageInfo(pPrinterName)
-        Dim paperSourceLookup As New List(Of Lookup.LookupData)
+        Dim paperSourceLookup As New List(Of LookupTable.LookupData)
         Dim index As Int16 = 0
         For Each item As Drawing.Printing.PaperSource In data.PrinterSettings.PaperSources
-            Dim dbLookup = New Lookup.LookupData
+            Dim dbLookup = New LookupTable.LookupData
             dbLookup.IdNo = item.RawKind
             dbLookup.Name = item.SourceName
             dbLookup.Code = item.Kind
@@ -2886,10 +2596,10 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Protected Sub SetPrinterSupportedPaperSize(pPrinterName As String, ByRef paperSize As Int16?)
         Dim data = GetPrinterPageInfo(pPrinterName)
-        Dim paperSizeLookup As New List(Of Lookup.LookupData)
+        Dim paperSizeLookup As New List(Of LookupTable.LookupData)
         Dim index As Int16 = 0
         For Each item As Drawing.Printing.PaperSize In data.PrinterSettings.PaperSizes
-            Dim dbLookup = New Lookup.LookupData
+            Dim dbLookup = New LookupTable.LookupData
             dbLookup.IdNo = item.RawKind
             dbLookup.Name = item.PaperName
             dbLookup.Code = item.Kind
@@ -2907,21 +2617,21 @@ Public MustInherit Class PresenterBase(Of TV As IView, TM As New)
 
     Protected Sub SetPrinterSupportedPaperOrientation(pPrinterName As String, ByRef paperOrientation As Int16?)
         'Dim data = GetPrinterPageInfo(pPrinterName)
-        Dim paperOrientationLookup As New List(Of Lookup.LookupData)
+        Dim paperOrientationLookup As New List(Of LookupTable.LookupData)
         Dim index As Int16 = 0
-        Dim dbLookup = New Lookup.LookupData
+        Dim dbLookup = New LookupTable.LookupData
         dbLookup.IdNo = 0 'CInt(CrystalDecisions.Shared.PaperOrientation.DefaultPaperOrientation)
         dbLookup.Name = "DefaultPaperOrientation"
         dbLookup.Code = "DefaultPaperOrientation"
         dbLookup.Index = 0 'CInt(CrystalDecisions.Shared.PaperOrientation.DefaultPaperOrientation)
         paperOrientationLookup.Add(dbLookup)
-        dbLookup = New Lookup.LookupData
+        dbLookup = New LookupTable.LookupData
         dbLookup.IdNo = 1 'CInt(CrystalDecisions.Shared.PaperOrientation.Landscape)
         dbLookup.Name = "Landscape"
         dbLookup.Code = "Landscape"
         dbLookup.Index = 1 'CInt(CrystalDecisions.Shared.PaperOrientation.Landscape)
         paperOrientationLookup.Add(dbLookup)
-        dbLookup = New Lookup.LookupData
+        dbLookup = New LookupTable.LookupData
         dbLookup.IdNo = 2 ' CInt(CrystalDecisions.Shared.PaperOrientation.Portrait)
         dbLookup.Name = "Portrait"
         dbLookup.Code = "Portrait"
@@ -2966,42 +2676,6 @@ Public Class DataCreator
     Public Function CreateDataTable(dtl As DataLookup) As DataTable
         Return _sv.GetDtRecords(dtl.TableName, dtl.LuFields, dtl.Filter, dtl.SortKey, dtl.Ascending)
     End Function
-
-    Public Function CreateData(dataTableName As String) As List(Of Lookup.LookupData)
-        Dim lookupObj
-        Dim data As List(Of Lookup.LookupData)
-        lookupObj = SetLookupObject(dataTableName)
-        data = _sv.GetLookup(lookupObj)
-        Return data
-    End Function
-
-    Public Function SetLookupObject(dataTableName As String, Optional dataFields As String() = Nothing, Optional sortKey As String = Nothing, Optional filter As String = Nothing) As Lookup
-        Dim lookupObj As New Lookup(dataTableName)
-        If dataFields IsNot Nothing Then
-            lookupObj.FieldsToShow = dataFields
-        End If
-        If Not (sortKey Is Nothing OrElse sortKey = "") Then
-            lookupObj.SortKey = sortKey
-        End If
-        'If Not (Filter() Is Nothing OrElse Filter() = "") Then
-        '    lookupObj.FilterKey = Filter()
-        'End If
-        Return lookupObj
-    End Function
-
-    'Public Function CreateDataSourceThread(tableName, variableName, fields, filter)
-    '    Dim data As New ArrayList
-    '    data.Add({"Bank", "BankIdNo", Nothing, Nothing})
-    '    data.Add({"Country", "CountryCode", "CountryCode,CountryName", Nothing})
-    '    data.Add({"Department", "DepartmentIdNo", Nothing, Nothing})
-    '    data.Add({"Designation", "DesignationIdNo", Nothing, Nothing})
-    '    data.Add({"Country", "NationalityCode", "CountryCode,CountryName", Nothing})
-    '    data.Add({"Religion", "ReligionIdNo", Nothing, Nothing})
-    '    data.Add({"PayCycle", "PayCycleIdNo", Nothing, Nothing})
-    '    data.Add({"PayGroup", "PayGroupIdNo", Nothing, Nothing})
-    '    data.Add({"Employee", "SupervisorIdNo", Nothing, "Supervisor=1"})
-    '    Return CreateDataSourceThread(data)
-    'End Function
 
 End Class
 

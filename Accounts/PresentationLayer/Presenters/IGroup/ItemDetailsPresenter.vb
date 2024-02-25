@@ -25,13 +25,12 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-
-            CreateDataSource("DrugDosageForm_View", "DosageForm", {"DosageForm"}, "DosageForm")
-            CreateDataSource("DrugUnitOfVolume_View", "UnitOfVolume", {"UnitOfVolume"}, "UnitOfVolume")
-            CreateDataSource("DrugUnitOfStrength_View", "UnitOfStrength", {"UnitOfStrength"}, "UnitOfStrength")
-            CreateDataSource("DrugPackageType_View", "PackageType", {"PackageType"}, "PackageType")
-            CreateDataSource("DrugRouteOfAdministration_View", "RouteOfAdministration", {"RouteOfAdministration"}, "RouteOfAdministration")
-            CreateLookupData("ItemDetails", "ItemDetailsByName", {"Primary_Key", "ItemNameEnglish", "Item_Code"}, "BranchId='01'")
+            MakeControlDataSources({New String() {"DrugDosageForm_View", "DosageForm", "DosageForm", Nothing, "DosageForm"},
+            New String() {"DrugUnitOfVolume_View", "UnitOfVolume", "UnitOfVolume", Nothing, "UnitOfVolume"},
+            New String() {"DrugUnitOfStrength_View", "UnitOfStrength", "UnitOfStrength", Nothing, "UnitOfStrength"},
+            New String() {"DrugPackageType_View", "PackageType", "PackageType", Nothing, "PackageType"},
+            New String() {"DrugRouteOfAdministration_View", "RouteOfAdministration", Nothing, "RouteOfAdministration", "RouteOfAdministration"}})
+            MakeVarDataSources({New String() {"ItemDetails", "ItemDetailsByName", "Primary_Key,ItemNameEnglish,Item_Code", "BranchId='01'"}})
         End Sub
 
         Public Overrides Sub GoFilter()

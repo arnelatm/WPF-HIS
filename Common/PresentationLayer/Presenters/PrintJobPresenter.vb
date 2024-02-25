@@ -19,7 +19,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateDataSource("Printer", "PrinterIdNo")
+            MakeControlDataSources({New String() {"Printer", "PrinterIdNo", Nothing, Nothing}})
         End Sub
 
         Private Sub UpdatePrinterDataSource()
