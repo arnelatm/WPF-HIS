@@ -5,9 +5,7 @@ Namespace PresentationLayer.Views.Interfaces
     Public Interface IAccountReconciliationView
         Inherits IView
 
-        'Property Accounts As List(Of Lookup.LookupData)
         Property AccountReconciliationItems As List(Of AccountReconciliationItemView)
-
         Property AccountIdNo As Int16?
         Property Balance As Decimal
         Property DateCreated As DateTime?

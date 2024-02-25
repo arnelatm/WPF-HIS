@@ -30,7 +30,7 @@ Namespace PresentationLayer.Presenters
         Public Sub CreateSpecialAccountDataSource(fieldName As String, specialAccountArray As String())
             Dim filter As String
             filter = Accounts.AccountHelpers.CreateSpecialAccountFilterKey(specialAccountArray)
-            CreateDataSource("Account", fieldName, filter)
+            MakeControlDataSources({New String() {"Account", fieldName, Nothing, filter}})
         End Sub
 
         Public Function GetDepositTypeModel() As List(Of DepositTypeModel)
@@ -271,7 +271,7 @@ Namespace PresentationLayer.Presenters
                 End If
                 lookupFilterKey = lookupFilterKey + "SpecialAccount = '" & account & "'"
             Next
-            Return GetLookup("Account", sortKey, lookupFilterKey)
+            Return GetLookupT("Account", sortKey, lookupFilterKey)
         End Function
 
         Public Function GetApOpenInvoiceNumber(journalItemIdNo As Int32) As Int32

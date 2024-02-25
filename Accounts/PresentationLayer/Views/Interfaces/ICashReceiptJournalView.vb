@@ -35,6 +35,12 @@ Namespace PresentationLayer.Views.Interfaces
         Property EmployeesByName As Object
         Property CustomersByName As Object
         Property SuppliersByName As Object
+        Property PayorDataSource As Object
+        Event AutoApplyAmount(bsDjOiItem As BindingSource)
+        Event AddCustomerOpenInvoices()
+        Event UserDeletedRow()
+        Event FirstLineUpdateNeeded()
+        Event ReceiptTypeChanged(paymentType As String)
     End Interface
 
 End Namespace

@@ -90,8 +90,6 @@ Namespace PresentationLayer.Views.Forms
             End Set
         End Property
 
-        'Public Property AccountReconciliationItemsDataSource As List(Of AccountReconciliationModel)
-
         Public Property IdNo As Int32 Implements IAccountReconciliationView.IdNo
             Get
                 Return TxtIdNo.Text.ToInt32Number()
@@ -108,23 +106,8 @@ Namespace PresentationLayer.Views.Forms
             Set
                 _accountReconciliations = Value
                 BindAccountReconciliation()
-                'If Value.Any() Then
-                '    dtpReconciliationDate.DisplayOnly = True
-                '    cboAccountIdNo.DisplayOnly = True
-                'End If
             End Set
         End Property
-
-        'Public Property Accounts As List(Of Lookup.LookupData) Implements IAccountReconciliationView.Accounts
-        '    Get
-        '        Return _accounts
-        '    End Get
-        '    Set(value As List(Of Lookup.LookupData))
-        '        _accounts = value
-        '        cboAccountIdNo.DataSource = Nothing
-        '        cboAccountIdNo.DataSource = value
-        '    End Set
-        'End Property
 
         Public Property TotalCreditsCleared As Decimal Implements IAccountReconciliationView.TotalCreditsCleared
             Get
@@ -551,7 +534,7 @@ Namespace PresentationLayer.Views.Forms
 
         'Private Sub dgView_CellClick(ByVal sender As Object, ByVal e As DataGridViewCellFormattingEventArgs) Handles DataGridViewReconciliationItems.CellFormatting
         '    Dim dgBtn As CDgvButtonCell
-        '    Dim dgView As CDataGridView = DataGridViewReconciliationItems
+        '    Dim dgView As CtDataGridView = DataGridViewReconciliationItems
         '    If (dgView.Columns(e.ColumnIndex).Name = "dgvCleared") Then
         '        dgBtn = CType(dgView.Rows(e.RowIndex).Cells(8), CDgvButtonCell)
         '        If (dgBtn.Value.ToString = "True") Then

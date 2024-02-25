@@ -19,7 +19,7 @@ Namespace PresentationLayer.Models
 
     End Class
 
-    ''' </summary>
+
     Public Class EmployeeLeaveEarnedApprovalHistoryModel
 
         Public Property ApprovalDate As DateTime?

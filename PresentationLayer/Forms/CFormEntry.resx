@@ -121,16 +121,16 @@
     <value>17, 17</value>
   </metadata>
   <metadata name="TranslatorDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 60</value>
+    <value>174, 17</value>
   </metadata>
   <metadata name="AppDataDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 103</value>
+    <value>325, 17</value>
   </metadata>
   <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 146</value>
+    <value>468, 17</value>
   </metadata>
   <metadata name="FormToolStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 189</value>
+    <value>632, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnFirst.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -566,7 +566,7 @@
   <data name="btnArabic.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABUAAAAQCAYAAAD52jQlAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAAjNJREFUOE/Nk2tIk1EYx0cRfe9TBBUVBl3IDyFhZEgRREktY5WYsJKIVLoYZESR
+        wAAADsABataJCQAAAjNJREFUOE/Nk2tIk1EYx0cRfe9TBBUVBl3IDyFhZEgRREktY5WYsJKIVLoYZESR
         pdGHyhmhmbO1FTPtohaYgqaJYWGXlSnW1Fw2NZ3t4nTzFr/Oji+BYTk/BP3ghfM+53/+nOdyVPwD/g/T
         oVEfn3os1NsqePWlEmuvhZGxYWV3nGmZev0uDC/SiDEuZ71uNut0s9iZtxjjy3S8Q25FFYRpb79d3M4v
         15cqDhFrWklq6V5hdIGCNzpynp8muWgLpY23GPsxKnVTmmbXnuKZtViu12bMpKzJxOBw/6+UA0ZfXS3Y

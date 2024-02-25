@@ -37,9 +37,9 @@ Namespace PresentationLayer.Views.Forms
         Me.lblDocumentNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDocumentNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
         Me.lblDocumentType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboDocumentType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboDocumentType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.lblImageType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboImageType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboImageType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkNeedsNumber = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -328,7 +328,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDocumentType.OverrideDropDownStyleList = False
             Me.cboDocumentType.PreviousSearchTerm = Nothing
             Me.cboDocumentType.PropertySelector = Nothing
-            Me.cboDocumentType.ReadOnlyCombo = False
             Me.cboDocumentType.SuggestBoxHeight = 200
             Me.cboDocumentType.SuggestListOrderRule = Nothing
             Me.cboDocumentType.TextToSearch = Nothing
@@ -378,7 +377,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboImageType.OverrideDropDownStyleList = False
             Me.cboImageType.PreviousSearchTerm = Nothing
             Me.cboImageType.PropertySelector = Nothing
-            Me.cboImageType.ReadOnlyCombo = False
             Me.cboImageType.SuggestBoxHeight = 200
             Me.cboImageType.SuggestListOrderRule = Nothing
             Me.cboImageType.TextToSearch = Nothing
@@ -512,9 +510,9 @@ End Sub
         Friend WithEvents lblDocumentName As CLabel
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents lblDocumentType As CLabel
-        Friend WithEvents cboDocumentType As CaComboBox
+        Friend WithEvents cboDocumentType As CtCombobox
         Friend WithEvents lblImageType As CLabel
-        Friend WithEvents cboImageType As CaComboBox
+        Friend WithEvents cboImageType As CtCombobox
         Friend WithEvents lblDocumentNameAra As CLabel
         Friend WithEvents txtDocumentNameAra As CTextBoxArabic
         Friend WithEvents CLabel1 As CLabel

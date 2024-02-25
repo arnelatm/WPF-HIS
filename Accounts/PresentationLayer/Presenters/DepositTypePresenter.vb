@@ -23,7 +23,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Sub CreateDetailAccountList(fieldName As String)
-            CreateDataSource("Account", fieldName, "DetailAccount=1")
+            MakeControlDataSources({New String() {"Account", fieldName, Nothing, "DetailAccount=1"}})
         End Sub
 
         Private Sub OnBeforeSave() Handles MyBase.BeforeSave

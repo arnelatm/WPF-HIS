@@ -452,7 +452,7 @@ Public Class CdComboBox
         End If
     End Sub
 
-    Private Sub caComboBox_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
+    Private Sub CtCombobox_MouseUp(sender As Object, e As MouseEventArgs) Handles Me.MouseUp
         HandleMouseUp(sender, e)
     End Sub
 
@@ -466,10 +466,6 @@ Public Class CdComboBox
     Private Sub HandlePopup(sender As Object, e As EventArgs) Handles _contextMenuStrip1.Opening
         ContextHandler(sender, e)
     End Sub
-
-    'Private Overloads Sub OnBindingContextChanged(sender As Object, e As EventArgs) Handles MyBase.BindingContextChanged
-    '    PropertySelectorCompiled = Function(collection) collection.Cast(Of Lookup.LookupData)().[Select](Function(p) p.Name)
-    'End Sub
 
     Private Shadows Sub OnParentChanged(ByVal sender As Object, ByVal e As EventArgs)
         SetListBoxFormLocation(SuggestListForm)
@@ -513,17 +509,6 @@ Public Class CdComboBox
     Public Function GetValue()
         If SelectedItem IsNot Nothing Then
             Return SelectedItem(1)
-            'If ValueMember.ToLower() = "idno" Then
-
-            'ElseIf ValueMember.ToLower() = "name" Then
-            '    Return CType(SelectedItem, Lookup.LookupData).Name
-            'ElseIf ValueMember.ToLower() = "code" Then
-            '    Return CType(SelectedItem, Lookup.LookupData).Code
-            'ElseIf ValueMember.ToLower() = "index" Then
-            '    Return CType(SelectedItem, Lookup.LookupData).Index
-            'Else
-            '    Return Text
-            'End If
         Else
             Return Nothing
         End If
@@ -791,7 +776,7 @@ Public Class CdComboBox
         Return MyBase.ProcessCmdKey(msg, keyData)
     End Function
 
-    Private Sub caCombobox_Leave(sender As Object, e As EventArgs) Handles Me.Leave
+    Private Sub CtCombobox_Leave(sender As Object, e As EventArgs) Handles Me.Leave
         If SelectedIndex < 0 Then
             If Text = "" Then
                 'allow empty strings
@@ -957,11 +942,11 @@ Public Class CdComboBox
         SelectedValue = _lastValue
     End Sub
 
-    'Private Sub caCombobox_TextChanged(sender As Object, e As EventArgs) Handles Me.TextChanged
+    'Private Sub CtCombobox_TextChanged(sender As Object, e As EventArgs) Handles Me.TextChanged
     '    ComboBoxValueChanged = True
     'End Sub
 
-    'Private Sub caComboBox_SelectedValueChanged(sender As Object, e As EventArgs) Handles Me.SelectedValueChanged
+    'Private Sub CtCombobox_SelectedValueChanged(sender As Object, e As EventArgs) Handles Me.SelectedValueChanged
     '    If Not ComboBoxValueChanged Then
     '        ComboBoxValueChanged = True
     '    Else

@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="StoreCaptions1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>143, 17</value>
+    <value>170, 17</value>
   </metadata>
   <metadata name="TranslatorDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>272, 17</value>
+    <value>327, 17</value>
   </metadata>
   <metadata name="AppDataDAC.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>396, 17</value>
+    <value>478, 17</value>
   </metadata>
   <metadata name="MyErrorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>764, 17</value>
+    <value>621, 17</value>
   </metadata>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="floFullEntryArea.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
@@ -295,7 +295,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="dtpCheckDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 27</value>
+    <value>118, 27</value>
   </data>
   <data name="dtpCheckDate.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -484,7 +484,7 @@
     <value>cboPayorType</value>
   </data>
   <data name="&gt;&gt;cboPayorType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboPayorType.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>
@@ -748,7 +748,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="dtpTransactionDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 27</value>
+    <value>118, 27</value>
   </data>
   <data name="dtpTransactionDate.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -790,7 +790,7 @@
     <value>cboAccountIdNo</value>
   </data>
   <data name="&gt;&gt;cboAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboAccountIdNo.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>
@@ -823,7 +823,7 @@
     <value>cboDiscountAccountIdNo</value>
   </data>
   <data name="&gt;&gt;cboDiscountAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboDiscountAccountIdNo.Parent" xml:space="preserve">
     <value>TableLayoutPanel1</value>
@@ -1063,7 +1063,7 @@
     <value>cboPayorIdNo</value>
   </data>
   <data name="&gt;&gt;cboPayorIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboPayorIdNo.Parent" xml:space="preserve">
     <value>floPayor</value>
@@ -1810,7 +1810,7 @@
     <value>125</value>
   </data>
   <metadata name="bsJournalItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>634, 17</value>
+    <value>931, 17</value>
   </metadata>
   <data name="DataGridViewJournalItems.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
@@ -1831,7 +1831,7 @@
     <value>DataGridViewJournalItems</value>
   </data>
   <data name="&gt;&gt;DataGridViewJournalItems.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDataGridView, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtDataGridView, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;DataGridViewJournalItems.Parent" xml:space="preserve">
     <value>floPurchaseJournalItems</value>
@@ -1870,7 +1870,7 @@
     <value>6</value>
   </data>
   <data name="dgvTransactionDate.Width" type="System.Int32, mscorlib">
-    <value>105</value>
+    <value>96</value>
   </data>
   <metadata name="dgvJournalCode.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1882,7 +1882,7 @@
     <value>6</value>
   </data>
   <data name="dgvJournalCode.Width" type="System.Int32, mscorlib">
-    <value>84</value>
+    <value>78</value>
   </data>
   <metadata name="dgvJournalIdNoAp.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1894,7 +1894,7 @@
     <value>6</value>
   </data>
   <data name="dgvJournalIdNoAp.Width" type="System.Int32, mscorlib">
-    <value>90</value>
+    <value>86</value>
   </data>
   <metadata name="dgvPreviousBalance.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1960,7 +1960,7 @@
     <value>125</value>
   </data>
   <metadata name="bsCsrOiItems.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>514, 17</value>
+    <value>785, 17</value>
   </metadata>
   <data name="DataGridViewCsrOiItems.Location" type="System.Drawing.Point, System.Drawing">
     <value>1099, 3</value>
@@ -1978,7 +1978,7 @@
     <value>DataGridViewCsrOiItems</value>
   </data>
   <data name="&gt;&gt;DataGridViewCsrOiItems.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDataGridView, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtDataGridView, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;DataGridViewCsrOiItems.Parent" xml:space="preserve">
     <value>floPurchaseJournalItems</value>
@@ -2179,7 +2179,7 @@
     <value>42</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>8, 16</value>
+    <value>6, 13</value>
   </data>
   <data name="$this.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
@@ -90393,13 +90393,7 @@
     <value>Tile</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1117, 667</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
+    <value>1123, 647</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Cash Receipt Journal </value>
@@ -90428,42 +90422,6 @@
   <data name="&gt;&gt;MyErrorProvider.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.ErrorProviderExtended, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;dgvSequenceCsrOi.Name" xml:space="preserve">
-    <value>dgvSequenceCsrOi</value>
-  </data>
-  <data name="&gt;&gt;dgvSequenceCsrOi.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dgvInvoiceNo.Name" xml:space="preserve">
-    <value>dgvInvoiceNo</value>
-  </data>
-  <data name="&gt;&gt;dgvInvoiceNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dgvJournalCode.Name" xml:space="preserve">
-    <value>dgvJournalCode</value>
-  </data>
-  <data name="&gt;&gt;dgvJournalCode.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dgvJournalIdNoAp.Name" xml:space="preserve">
-    <value>dgvJournalIdNoAp</value>
-  </data>
-  <data name="&gt;&gt;dgvJournalIdNoAp.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dgvPreviousBalance.Name" xml:space="preserve">
-    <value>dgvPreviousBalance</value>
-  </data>
-  <data name="&gt;&gt;dgvPreviousBalance.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;dgvBalance.Name" xml:space="preserve">
-    <value>dgvBalance</value>
-  </data>
-  <data name="&gt;&gt;dgvBalance.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
   <data name="&gt;&gt;dgvSequence.Name" xml:space="preserve">
     <value>dgvSequence</value>
   </data>
@@ -90474,7 +90432,7 @@
     <value>dgvAccountIdNo</value>
   </data>
   <data name="&gt;&gt;dgvAccountIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvDebit.Name" xml:space="preserve">
     <value>dgvDebit</value>
@@ -90492,7 +90450,7 @@
     <value>dgvRevCostCenterIdNo</value>
   </data>
   <data name="&gt;&gt;dgvRevCostCenterIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvNotesDescription.Name" xml:space="preserve">
     <value>dgvNotesDescription</value>
@@ -90566,11 +90524,41 @@
   <data name="&gt;&gt;bsJournalItems.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;dgvSequenceCsrOi.Name" xml:space="preserve">
+    <value>dgvSequenceCsrOi</value>
+  </data>
+  <data name="&gt;&gt;dgvSequenceCsrOi.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dgvInvoiceNo.Name" xml:space="preserve">
+    <value>dgvInvoiceNo</value>
+  </data>
+  <data name="&gt;&gt;dgvInvoiceNo.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
   <data name="&gt;&gt;dgvTransactionDate.Name" xml:space="preserve">
     <value>dgvTransactionDate</value>
   </data>
   <data name="&gt;&gt;dgvTransactionDate.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dgvJournalCode.Name" xml:space="preserve">
+    <value>dgvJournalCode</value>
+  </data>
+  <data name="&gt;&gt;dgvJournalCode.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dgvJournalIdNoAp.Name" xml:space="preserve">
+    <value>dgvJournalIdNoAp</value>
+  </data>
+  <data name="&gt;&gt;dgvJournalIdNoAp.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dgvPreviousBalance.Name" xml:space="preserve">
+    <value>dgvPreviousBalance</value>
+  </data>
+  <data name="&gt;&gt;dgvPreviousBalance.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvAmount.Name" xml:space="preserve">
     <value>dgvAmount</value>
@@ -90582,6 +90570,12 @@
     <value>dgvDiscountTaken</value>
   </data>
   <data name="&gt;&gt;dgvDiscountTaken.Type" xml:space="preserve">
+    <value>AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dgvBalance.Name" xml:space="preserve">
+    <value>dgvBalance</value>
+  </data>
+  <data name="&gt;&gt;dgvBalance.Type" xml:space="preserve">
     <value>AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;AccountIdNoDataGridViewTextBoxColumn.Name" xml:space="preserve">

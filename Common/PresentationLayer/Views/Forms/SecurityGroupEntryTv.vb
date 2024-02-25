@@ -9,7 +9,7 @@ Namespace PresentationLayer.Views.Forms
     Public Class SecurityGroupEntryTv
         Implements ISecurityGroupView
 
-        Private WithEvents _dgvSecurityGroup As CDataGridView
+        Private WithEvents _dgvSecurityGroup As CtDataGridView
         Private _groupAccesses As List(Of GroupAccessView)
 
         Public Sub New()

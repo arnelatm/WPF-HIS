@@ -5,3 +5,14 @@ Edit 'MsgNoAccessToSecurity' parameter to securityKey from securityMessage
 add rptForTheDay Message
 {reportName} for {day}
 {reportName} ل {day} ل
+
+Check error for absences entry in payroll (sample employee with only 3 days present, system is 
+automatically entering 4 days in days off).
+
+Edit size of grid on general journal entry problem on last line not being accepted line to small
+
+Reprocessing payroll for employee for newly added in attendance not working right away need to save and close
+and reprocess to work.
+
+
+EDIT CASH DISBURSEMENT TO UPDATE PAYEE NAME (DOES NOT UPDATE FOR AP TRANSACTION)

@@ -16,8 +16,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property HolidayIdNo As Int16
         Property IdNo As Int32
         Property HolidayTransferItems As List(Of HolidayTransferItemView)
-        Property HolidayList As List(Of Lookup.LookupData)
-        Property EmployeeList As List(Of Lookup.LookupData)
+        Property HolidayList As DataTable
+        Property EmployeeList As DataTable
 
         Event HolidayIdChangedEvent()
 

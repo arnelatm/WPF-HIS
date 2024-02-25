@@ -30,10 +30,10 @@ Namespace PresentationLayer.Views.Forms
         Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblSystemViewIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboSystemViewIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboSystemViewIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.lblFieldName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.lblDataType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboDataType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboDataType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.lblLength = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtLength = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblDecimalPart = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -198,9 +198,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboSystemViewIdNo.OverrideDropDownStyleList = false
         Me.cboSystemViewIdNo.PreviousSearchTerm = Nothing
         Me.cboSystemViewIdNo.PropertySelector = Nothing
-        Me.cboSystemViewIdNo.ReadOnlyCombo = false
-        Me.cboSystemViewIdNo.SuggestBoxHeight = 200
-        Me.cboSystemViewIdNo.SuggestListOrderRule = Nothing
+            Me.cboSystemViewIdNo.SuggestBoxHeight = 200
+            Me.cboSystemViewIdNo.SuggestListOrderRule = Nothing
         Me.cboSystemViewIdNo.TextToSearch = Nothing
         Me.cboSystemViewIdNo.Translatable = false
         Me.cboSystemViewIdNo.ValueIsMandatory = false
@@ -252,9 +251,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboDataType.OverrideDropDownStyleList = false
         Me.cboDataType.PreviousSearchTerm = Nothing
         Me.cboDataType.PropertySelector = Nothing
-        Me.cboDataType.ReadOnlyCombo = false
-        Me.cboDataType.SuggestBoxHeight = 200
-        Me.cboDataType.SuggestListOrderRule = Nothing
+            Me.cboDataType.SuggestBoxHeight = 200
+            Me.cboDataType.SuggestListOrderRule = Nothing
         Me.cboDataType.TextToSearch = Nothing
         Me.cboDataType.Translatable = false
         Me.cboDataType.ValueIsMandatory = false
@@ -524,8 +522,8 @@ End Sub
         Friend WithEvents txtDefaultValue As CTextBox
         Friend WithEvents lblDecimalPart As CLabel
         Friend WithEvents txtDecimalPart As CTextBox
-        Friend WithEvents cboDataType As CaComboBox
-        Friend WithEvents cboSystemViewIdNo As CaComboBox
+        Friend WithEvents cboDataType As CtCombobox
+        Friend WithEvents cboSystemViewIdNo As CtCombobox
         Friend WithEvents txtSystemViewNameAra As CTextBox
         Friend WithEvents txtSystemViewName As CTextBox
     End Class

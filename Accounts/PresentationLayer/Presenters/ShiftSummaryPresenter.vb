@@ -23,7 +23,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateDataSource("VUser", "UserIdNo")
+            MakeControlDataSources({New String() {"VUser", "UserIdNo", Nothing, Nothing}})
         End Sub
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized

@@ -744,7 +744,7 @@
     <value>DataGridViewDistributionSchemeItems</value>
   </data>
   <data name="&gt;&gt;DataGridViewDistributionSchemeItems.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDataGridView, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtDataGridView, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;DataGridViewDistributionSchemeItems.Parent" xml:space="preserve">
     <value>$this</value>
@@ -834,13 +834,13 @@
     <value>dgvRevCostCenterIdNo</value>
   </data>
   <data name="&gt;&gt;dgvRevCostCenterIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;dgvRevCostCenterName.Name" xml:space="preserve">
     <value>dgvRevCostCenterName</value>
   </data>
   <data name="&gt;&gt;dgvRevCostCenterName.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;Percentage.Name" xml:space="preserve">
     <value>Percentage</value>

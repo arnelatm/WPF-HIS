@@ -74,9 +74,9 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateLookupData("Account", "AccountsByCode", "DetailAccount=1")
-            CreateLookupData("DepositType", "DepositTypesByCode")
-            CreateLookupData("RevCostCenter", "RevCostCentersByCode")
+            MakeVarDataSources({New String() {"Account", "AccountsByCode", Nothing, "DetailAccount=1"},
+                                New String() {"DepositType", "DepositTypesByCode", Nothing, Nothing},
+                                New String() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing}})
             CreateSpecialAccountDataSource("AccountIdNo", {EnumToCode(SpecialAccountSelection.Sales)})
         End Sub
 

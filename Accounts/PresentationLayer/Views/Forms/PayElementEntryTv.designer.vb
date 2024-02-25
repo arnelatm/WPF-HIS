@@ -41,9 +41,9 @@ Namespace PresentationLayer.Views.Forms
             Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
             Me.floPayElement = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.tlpPayElement = New System.Windows.Forms.TableLayoutPanel()
-            Me.cboReportGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboReportGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.lblReportGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayElementKind = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboPayElementKind = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.lblPayElementType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblPayElementKind = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPayElementNameAra = New AATM.Libraries.CBaseControlsLibrary.CTextBoxArabic()
@@ -63,8 +63,8 @@ Namespace PresentationLayer.Views.Forms
             Me.floCalculation = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.tlpCalculation = New System.Windows.Forms.TableLayoutPanel()
             Me.lblQuantityType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboQuantityType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.cboCalculationType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboQuantityType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cboCalculationType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.lblFactorValue = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblCalculationType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtRate = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -72,41 +72,41 @@ Namespace PresentationLayer.Views.Forms
             Me.txtDefaultQuantity = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblDefaultQuantity = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblBasePayment = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboBasePaymentIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboBasePaymentIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.lblIncludeInEos = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkIncludeInEOS = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.txtMultiplier = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.cboFactorType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboFactorType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.lblFactorType = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkTaxable = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.lblTaxable = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblSlash = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboUnit = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboUnit = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.lblUnit = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayElementType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboPayElementType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.lblSlash2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.tbpAccountPosting = New System.Windows.Forms.TabPage()
             Me.floPostingAccounts = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.tlpPostingAccounts = New System.Windows.Forms.TableLayoutPanel()
             Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
-            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.lblUsePayGroups = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.DataGridViewPayElementAccounts = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewPayElementAccounts = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
-            Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvPayGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn()
+            Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn()
             Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.PayElementIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.PayGroupNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsPayElementAccounts = New System.Windows.Forms.BindingSource(Me.components)
             Me.tbpSummaryDetail = New System.Windows.Forms.TabPage()
-            Me.DataGridViewPayElementItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewPayElementItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequenceSummary = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvPayElementIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvPayElementIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn()
             Me.dgvFactorValue = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvFactorType = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvFactorType = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn()
             Me.ParentIdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsPayElementItems = New System.Windows.Forms.BindingSource(Me.components)
@@ -222,7 +222,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboReportGroupIdNo.OverrideDropDownStyleList = False
             Me.cboReportGroupIdNo.PreviousSearchTerm = Nothing
             Me.cboReportGroupIdNo.PropertySelector = Nothing
-            Me.cboReportGroupIdNo.ReadOnlyCombo = False
             Me.cboReportGroupIdNo.SuggestBoxHeight = 200
             Me.cboReportGroupIdNo.SuggestListOrderRule = Nothing
             Me.cboReportGroupIdNo.TextToSearch = Nothing
@@ -269,7 +268,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayElementKind.OverrideDropDownStyleList = False
             Me.cboPayElementKind.PreviousSearchTerm = Nothing
             Me.cboPayElementKind.PropertySelector = Nothing
-            Me.cboPayElementKind.ReadOnlyCombo = False
             Me.cboPayElementKind.SuggestBoxHeight = 200
             Me.cboPayElementKind.SuggestListOrderRule = Nothing
             Me.cboPayElementKind.TextToSearch = Nothing
@@ -597,7 +595,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboQuantityType.OverrideDropDownStyleList = False
             Me.cboQuantityType.PreviousSearchTerm = Nothing
             Me.cboQuantityType.PropertySelector = Nothing
-            Me.cboQuantityType.ReadOnlyCombo = False
             Me.cboQuantityType.SuggestBoxHeight = 200
             Me.cboQuantityType.SuggestListOrderRule = Nothing
             Me.cboQuantityType.TextToSearch = Nothing
@@ -637,7 +634,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboCalculationType.OverrideDropDownStyleList = False
             Me.cboCalculationType.PreviousSearchTerm = Nothing
             Me.cboCalculationType.PropertySelector = Nothing
-            Me.cboCalculationType.ReadOnlyCombo = False
             Me.cboCalculationType.SuggestBoxHeight = 200
             Me.cboCalculationType.SuggestListOrderRule = Nothing
             Me.cboCalculationType.TextToSearch = Nothing
@@ -765,7 +761,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboBasePaymentIdNo.OverrideDropDownStyleList = False
             Me.cboBasePaymentIdNo.PreviousSearchTerm = Nothing
             Me.cboBasePaymentIdNo.PropertySelector = Nothing
-            Me.cboBasePaymentIdNo.ReadOnlyCombo = False
             Me.cboBasePaymentIdNo.SuggestBoxHeight = 200
             Me.cboBasePaymentIdNo.SuggestListOrderRule = Nothing
             Me.cboBasePaymentIdNo.TextToSearch = Nothing
@@ -862,7 +857,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboFactorType.OverrideDropDownStyleList = False
             Me.cboFactorType.PreviousSearchTerm = Nothing
             Me.cboFactorType.PropertySelector = Nothing
-            Me.cboFactorType.ReadOnlyCombo = False
             Me.cboFactorType.SuggestBoxHeight = 200
             Me.cboFactorType.SuggestListOrderRule = Nothing
             Me.cboFactorType.TextToSearch = Nothing
@@ -950,7 +944,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboUnit.OverrideDropDownStyleList = False
             Me.cboUnit.PreviousSearchTerm = Nothing
             Me.cboUnit.PropertySelector = Nothing
-            Me.cboUnit.ReadOnlyCombo = False
             Me.cboUnit.SuggestBoxHeight = 200
             Me.cboUnit.SuggestListOrderRule = Nothing
             Me.cboUnit.TextToSearch = Nothing
@@ -998,7 +991,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayElementType.OverrideDropDownStyleList = False
             Me.cboPayElementType.PreviousSearchTerm = Nothing
             Me.cboPayElementType.PropertySelector = Nothing
-            Me.cboPayElementType.ReadOnlyCombo = False
             Me.cboPayElementType.SuggestBoxHeight = 200
             Me.cboPayElementType.SuggestListOrderRule = Nothing
             Me.cboPayElementType.TextToSearch = Nothing
@@ -1103,7 +1095,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.OverrideDropDownStyleList = False
             Me.cboAccountIdNo.PreviousSearchTerm = Nothing
             Me.cboAccountIdNo.PropertySelector = Nothing
-            Me.cboAccountIdNo.ReadOnlyCombo = False
             Me.cboAccountIdNo.SuggestBoxHeight = 200
             Me.cboAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboAccountIdNo.TextToSearch = Nothing
@@ -1533,12 +1524,12 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtRate As CTextBox
         Friend WithEvents txtDefaultQuantity As CTextBox
         Friend WithEvents lblBasePayment As CLabel
-        Friend WithEvents cboBasePaymentIdNo As CaComboBox
+        Friend WithEvents cboBasePaymentIdNo As CtCombobox
         Friend WithEvents lblIncludeInEos As CLabel
         Friend WithEvents chkIncludeInEOS As CCheckBox
         Friend WithEvents txtMultiplier As CTextBox
-        Friend WithEvents cboFactorType As CaComboBox
-        Friend WithEvents cboUnit As CaComboBox
+        Friend WithEvents cboFactorType As CtCombobox
+        Friend WithEvents cboUnit As CtCombobox
         Friend WithEvents lblSlash As CLabel
         Friend WithEvents tbpAccountPosting As TabPage
         Friend WithEvents floPostingAccounts As CFlowLayout
@@ -1549,37 +1540,37 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblUsePayGroups As CLabel
         Friend WithEvents lblPayElementType As CLabel
         Friend WithEvents lblAccountIdNo As CLabel
-        Friend WithEvents cboAccountIdNo As CaComboBox
+        Friend WithEvents cboAccountIdNo As CtCombobox
         Friend WithEvents lblUnit As CLabel
         Friend WithEvents tbpSummaryDetail As TabPage
         Friend WithEvents tabPageImages As ImageList
         Friend WithEvents lblFactorType As CLabel
-        Friend WithEvents cboPayElementType As CaComboBox
-        Friend WithEvents cboCalculationType As CaComboBox
-        Friend WithEvents cboQuantityType As CaComboBox
+        Friend WithEvents cboPayElementType As CtCombobox
+        Friend WithEvents cboCalculationType As CtCombobox
+        Friend WithEvents cboQuantityType As CtCombobox
         Friend WithEvents lblSlash2 As CLabel
         Friend WithEvents lblQuantityType As CLabel
-        Friend WithEvents DataGridViewPayElementItems As CDataGridView
+        Friend WithEvents DataGridViewPayElementItems As CtDataGridView
         Friend WithEvents bsPayElementItems As BindingSource
-        Friend WithEvents DataGridViewPayElementAccounts As CDataGridView
+        Friend WithEvents DataGridViewPayElementAccounts As CtDataGridView
         Friend WithEvents bsPayElementAccounts As BindingSource
-        Friend WithEvents cboPayElementKind As CaComboBox
+        Friend WithEvents cboPayElementKind As CtCombobox
         Friend WithEvents lblPayElementKind As CLabel
-        Friend WithEvents cboReportGroupIdNo As CaComboBox
+        Friend WithEvents cboReportGroupIdNo As CtCombobox
         Friend WithEvents lblReportGroupIdNo As CLabel
         Friend WithEvents chkSummary As CCheckBox
         Friend WithEvents chkActive As CCheckBox
         Friend WithEvents lblSummary As CLabel
         Friend WithEvents lblActive As CLabel
         Friend WithEvents dgvSequenceSummary As CDgvTextColumn
-        Friend WithEvents dgvPayElementIdNo As CDgvComboBoxColumn
+        Friend WithEvents dgvPayElementIdNo As CtDgvComboboxColumn
         Friend WithEvents dgvFactorValue As CDgvTextColumn
-        Friend WithEvents dgvFactorType As CDgvComboBoxColumn
+        Friend WithEvents dgvFactorType As CtDgvComboboxColumn
         Friend WithEvents ParentIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents dgvSequence As CDgvTextColumn
-        Friend WithEvents dgvPayGroupIdNo As CDgvComboBoxColumn
-        Friend WithEvents dgvAccountIdNo As CDgvComboBoxColumn
+        Friend WithEvents dgvPayGroupIdNo As CtDgvComboboxColumn
+        Friend WithEvents dgvAccountIdNo As CtDgvComboboxColumn
         Friend WithEvents AccountNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents PayElementIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn

@@ -38,9 +38,9 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDoctorNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboSpecialtyIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboSpecialtyIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SplitContainer1.Panel1.SuspendLayout()
@@ -283,7 +283,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboEmployeeIdNo.OverrideDropDownStyleList = False
             Me.cboEmployeeIdNo.PreviousSearchTerm = Nothing
             Me.cboEmployeeIdNo.PropertySelector = Nothing
-            Me.cboEmployeeIdNo.ReadOnlyCombo = False
             Me.cboEmployeeIdNo.SuggestBoxHeight = 200
             Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
             Me.cboEmployeeIdNo.TextToSearch = Nothing
@@ -331,7 +330,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboSpecialtyIdNo.OverrideDropDownStyleList = False
             Me.cboSpecialtyIdNo.PreviousSearchTerm = Nothing
             Me.cboSpecialtyIdNo.PropertySelector = Nothing
-            Me.cboSpecialtyIdNo.ReadOnlyCombo = False
             Me.cboSpecialtyIdNo.SuggestBoxHeight = 200
             Me.cboSpecialtyIdNo.SuggestListOrderRule = Nothing
             Me.cboSpecialtyIdNo.TextToSearch = Nothing
@@ -375,8 +373,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblDoctorNameAra As CLabel
         Friend WithEvents CFlowLayout1 As CFlowLayout
         Friend WithEvents CLabel1 As CLabel
-        Friend WithEvents cboEmployeeIdNo As CaComboBox
+        Friend WithEvents cboEmployeeIdNo As CtCombobox
         Friend WithEvents CLabel2 As CLabel
-        Friend WithEvents cboSpecialtyIdNo As CaComboBox
+        Friend WithEvents cboSpecialtyIdNo As CtCombobox
     End Class
 End Namespace

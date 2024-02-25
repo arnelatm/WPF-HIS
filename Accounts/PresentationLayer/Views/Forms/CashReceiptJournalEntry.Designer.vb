@@ -58,7 +58,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayorType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboPayorType = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.lblInvoiceDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -67,8 +67,8 @@ Namespace PresentationLayer.Views.Forms
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtJournalCode = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.cboDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.cboDiscountAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.txtAmount = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtVatNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -76,7 +76,7 @@ Namespace PresentationLayer.Views.Forms
             Me.txtCheckNumber = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.floPayor = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.cboPayorIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboPayorIdNo = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.txtPayorName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.floHeader2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.lblApplied = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -93,12 +93,12 @@ Namespace PresentationLayer.Views.Forms
             Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.floPurchaseJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
             Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
             Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-            Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboBoxColumn()
             Me.dgvNotesDescription = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.AccountNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.CancelledDataGridViewCheckBoxColumn1 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
@@ -111,7 +111,7 @@ Namespace PresentationLayer.Views.Forms
             Me.PayeeTypeDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.SpecialAccountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
-            Me.DataGridViewCsrOiItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewCsrOiItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequenceCsrOi = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvInvoiceNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -322,7 +322,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayorType.DataValue = Nothing
             Me.cboPayorType.DefaultValue = "0"
             Me.cboPayorType.DisplayMember = "Name"
-            Me.cboPayorType.DropDownHeight = 24
+            Me.cboPayorType.DropDownHeight = 23
             Me.cboPayorType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboPayorType.Editable = True
             Me.cboPayorType.EditingMode = False
@@ -345,8 +345,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayorType.OverrideDropDownStyleList = False
             Me.cboPayorType.PreviousSearchTerm = Nothing
             Me.cboPayorType.PropertySelector = Nothing
-            Me.cboPayorType.ReadOnlyCombo = False
             Me.cboPayorType.SuggestBoxHeight = 200
+            Me.cboPayorType.SuggestCharCount = 0
             Me.cboPayorType.SuggestListOrderRule = Nothing
             Me.cboPayorType.TextToSearch = Nothing
             Me.cboPayorType.Translatable = False
@@ -532,8 +532,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.OverrideDropDownStyleList = False
             Me.cboAccountIdNo.PreviousSearchTerm = Nothing
             Me.cboAccountIdNo.PropertySelector = Nothing
-            Me.cboAccountIdNo.ReadOnlyCombo = False
             Me.cboAccountIdNo.SuggestBoxHeight = 200
+            Me.cboAccountIdNo.SuggestCharCount = 0
             Me.cboAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboAccountIdNo.TextToSearch = Nothing
             Me.cboAccountIdNo.Translatable = False
@@ -577,8 +577,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboDiscountAccountIdNo.OverrideDropDownStyleList = False
             Me.cboDiscountAccountIdNo.PreviousSearchTerm = Nothing
             Me.cboDiscountAccountIdNo.PropertySelector = Nothing
-            Me.cboDiscountAccountIdNo.ReadOnlyCombo = False
             Me.cboDiscountAccountIdNo.SuggestBoxHeight = 200
+            Me.cboDiscountAccountIdNo.SuggestCharCount = 0
             Me.cboDiscountAccountIdNo.SuggestListOrderRule = Nothing
             Me.cboDiscountAccountIdNo.TextToSearch = Nothing
             Me.cboDiscountAccountIdNo.Translatable = False
@@ -736,7 +736,7 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayorIdNo.DataValue = Nothing
             Me.cboPayorIdNo.DefaultValue = "0"
             Me.cboPayorIdNo.DisplayMember = "Name"
-            Me.cboPayorIdNo.DropDownHeight = 28
+            Me.cboPayorIdNo.DropDownHeight = 24
             Me.cboPayorIdNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple
             Me.cboPayorIdNo.Editable = True
             Me.cboPayorIdNo.EditingMode = False
@@ -758,8 +758,8 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayorIdNo.OverrideDropDownStyleList = False
             Me.cboPayorIdNo.PreviousSearchTerm = Nothing
             Me.cboPayorIdNo.PropertySelector = Nothing
-            Me.cboPayorIdNo.ReadOnlyCombo = False
             Me.cboPayorIdNo.SuggestBoxHeight = 200
+            Me.cboPayorIdNo.SuggestCharCount = 0
             Me.cboPayorIdNo.SuggestListOrderRule = Nothing
             Me.cboPayorIdNo.TextToSearch = Nothing
             Me.cboPayorIdNo.Translatable = False
@@ -1088,7 +1088,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.DataFilter = Nothing
             Me.DataGridViewJournalItems.DataSource = Me.bsJournalItems
             DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle8.BackColor = System.Drawing.Color.Black
+            DataGridViewCellStyle8.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle8.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
             DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
@@ -1113,6 +1113,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewJournalItems.IgnoreCase = False
             Me.DataGridViewJournalItems.IsDirty = False
             Me.DataGridViewJournalItems.Name = "DataGridViewJournalItems"
+            Me.DataGridViewJournalItems.OldCellValue = Nothing
             Me.DataGridViewJournalItems.ReadOnly = True
             Me.DataGridViewJournalItems.Searchable = True
             Me.DataGridViewJournalItems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -1157,6 +1158,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvAccountIdNo.ReadOnly = True
             Me.dgvAccountIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvAccountIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvAccountIdNo.SuggestCharCount = 0
             Me.dgvAccountIdNo.Translatable = False
             '
             'dgvDebit
@@ -1218,6 +1220,7 @@ Namespace PresentationLayer.Views.Forms
             Me.dgvRevCostCenterIdNo.ReadOnly = True
             Me.dgvRevCostCenterIdNo.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
             Me.dgvRevCostCenterIdNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+            Me.dgvRevCostCenterIdNo.SuggestCharCount = 0
             Me.dgvRevCostCenterIdNo.Translatable = False
             '
             'dgvNotesDescription
@@ -1330,7 +1333,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewCsrOiItems.DataFilter = Nothing
             Me.DataGridViewCsrOiItems.DataSource = Me.bsCsrOiItems
             DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-            DataGridViewCellStyle19.BackColor = System.Drawing.Color.Black
+            DataGridViewCellStyle19.BackColor = System.Drawing.Color.White
             DataGridViewCellStyle19.Font = New System.Drawing.Font("Arial", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             DataGridViewCellStyle19.ForeColor = System.Drawing.Color.Black
             DataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight
@@ -1355,6 +1358,7 @@ Namespace PresentationLayer.Views.Forms
             Me.DataGridViewCsrOiItems.IsDirty = False
             resources.ApplyResources(Me.DataGridViewCsrOiItems, "DataGridViewCsrOiItems")
             Me.DataGridViewCsrOiItems.Name = "DataGridViewCsrOiItems"
+            Me.DataGridViewCsrOiItems.OldCellValue = Nothing
             Me.DataGridViewCsrOiItems.ReadOnly = True
             Me.DataGridViewCsrOiItems.Searchable = True
             Me.DataGridViewCsrOiItems.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
@@ -1705,7 +1709,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents floPurchaseJournalItems As CFlowLayout
-        Friend WithEvents DataGridViewJournalItems As CDataGridView
+        Friend WithEvents DataGridViewJournalItems As CtDataGridView
         Friend WithEvents floFooter As CFlowLayout
         Friend WithEvents lblDateCreated As CLabel
         Friend WithEvents bsJournalItems As Windows.Forms.BindingSource
@@ -1717,11 +1721,11 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblUnapplied As CLabel
         Friend WithEvents txtUnapplied As CTextBox
         Friend WithEvents lblDiscountAccountIdNo As CLabel
-        Friend WithEvents cboDiscountAccountIdNo As CaComboBox
+        Friend WithEvents cboDiscountAccountIdNo As CtCombobox
         Friend WithEvents floHeader2 As CFlowLayout
         Friend WithEvents txtApplied As CTextBox
         Friend WithEvents bsCsrOiItems As Windows.Forms.BindingSource
-        Friend WithEvents DataGridViewCsrOiItems As CDataGridView
+        Friend WithEvents DataGridViewCsrOiItems As CtDataGridView
         Friend WithEvents btnViewGL As CButton
         Friend WithEvents dgvJournalIdNoJi As CDgvTextColumn
         Friend WithEvents OpenInvoiceIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
@@ -1735,8 +1739,8 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtTotalCredits As CTextBox
         Friend WithEvents txtTotalDebits As CTextBox
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-        Friend WithEvents cboPayorType As CaComboBox
-        Friend WithEvents cboAccountIdNo As CaComboBox
+        Friend WithEvents cboPayorType As CtCombobox
+        Friend WithEvents cboAccountIdNo As CtCombobox
         Friend WithEvents txtORNumber As CTextBox
         Friend WithEvents dtpTransactionDate As CCustomDateTimePicker
         Friend WithEvents txtAmount As CTextBox
@@ -1745,10 +1749,10 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtPayorName As CTextBox
         Friend WithEvents txtDateCreated As CTextBox
         Friend dgvSequence As CDgvTextColumn
-        Friend WithEvents dgvAccountIdNo As CDgvComboBoxColumn
+        Friend WithEvents dgvAccountIdNo As CtDgvComboboxColumn
         Friend dgvDebit As CdgvMoneyColumn
         Friend dgvCredit As CdgvMoneyColumn
-        Friend WithEvents dgvRevCostCenterIdNo As CDgvComboBoxColumn
+        Friend WithEvents dgvRevCostCenterIdNo As CtDgvComboboxColumn
         Friend dgvNotesDescription As CDgvTextColumn
         Friend WithEvents AccountNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents CancelledDataGridViewCheckBoxColumn1 As DataGridViewCheckBoxColumn
@@ -1771,6 +1775,6 @@ Namespace PresentationLayer.Views.Forms
         Friend dgvBalance As CdgvMoneyColumn
         Friend WithEvents AccountIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents cboPayorIdNo As CaComboBox
+        Friend WithEvents cboPayorIdNo As CtCombobox
     End Class
 End Namespace

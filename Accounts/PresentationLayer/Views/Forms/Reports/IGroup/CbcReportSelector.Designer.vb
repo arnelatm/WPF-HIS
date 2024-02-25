@@ -28,7 +28,7 @@ Partial Class CbcReportSelector
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Me.DataGridViewReportFiles = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.DataGridViewReportFiles = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -216,7 +216,7 @@ Partial Class CbcReportSelector
 
 End Sub
 
-    Friend WithEvents DataGridViewReportFiles As Libraries.CBaseControlsLibrary.CDataGridView
+    Friend WithEvents DataGridViewReportFiles As Libraries.CBaseControlsLibrary.CtDataGridView
     Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
     Friend WithEvents btnOk As Libraries.CBaseControlsLibrary.CButton
     Friend WithEvents btnCancel As Libraries.CBaseControlsLibrary.CButton

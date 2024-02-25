@@ -19,8 +19,8 @@ Namespace PresentationLayer.Presenters
 
         Protected Overrides Sub CreateDataSources()
             CreateEnumDataSource(Of RecurTypeSelection)("RecurType")
-            CreateDataSource("Employee", "EmployeeIdNo")
-            CreateDataSource("PayElement", "PayElementIdNo")
+            MakeControlDataSources({New String() {"Employee", "EmployeeIdNo", Nothing, Nothing},
+                                    New String() {"PayElement", "PayElementIdNo", Nothing, Nothing}})
         End Sub
 
         Protected Overrides Function DependentRecordExist(Optional ByVal warn As Boolean = True) As Boolean

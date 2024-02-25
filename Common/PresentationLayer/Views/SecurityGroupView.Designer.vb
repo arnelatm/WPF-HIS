@@ -45,7 +45,7 @@ Namespace PresentationLayer.Views
             Me.lblParentIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.DataGridViewGroupAccesses = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewGroupAccesses = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.DgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.DgvSecurityGroupIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.DgvSecurityObjectIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -607,7 +607,7 @@ Namespace PresentationLayer.Views
         Friend WithEvents DgvSecurityObjectName As Libraries.CBaseControlsLibrary.CDgvTextColumn
         Friend WithEvents DgvVisible As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
         Friend WithEvents DgvEditable As Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn
-        Public WithEvents DataGridViewGroupAccesses As Libraries.CBaseControlsLibrary.CDataGridView
+        Public WithEvents DataGridViewGroupAccesses As Libraries.CBaseControlsLibrary.CtDataGridView
         Friend WithEvents cacParentIdNo As Libraries.CBaseControlsLibrary.CtComboBox
     End Class
 End NameSpace

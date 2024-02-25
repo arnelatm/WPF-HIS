@@ -574,7 +574,6 @@
     <Compile Include="PresentationLayer\Presenters\InvRequestPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\StockRequestApprovalPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\FinancialReportPresenter.vb" />
-    <Compile Include="PresentationLayer\Presenters\HRReportsPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\DocumentDetailPresenter.vb" />
     <Compile Include="PresentationLayer\Presenters\PresenterHelper.vb" />
     <Compile Include="PresentationLayer\Presenters\ProductFinderPresenter.vb" />
@@ -2815,11 +2814,13 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="app - Copy.config" />
+    <None Include="app-IBNSINAP2 - Copy.config" />
     <None Include="app-ISP-SERVERNEW.config" />
     <None Include="app-ibn-server-test.config" />
-    <None Include="app-Isp-Server - Copy.config" />
-    <None Include="app-Ispadmin2.config" />
+    <None Include="app-IBNSINAP2.config" />
     <None Include="app.config" />
+    <None Include="app-ISPADMIN2.config" />
     <None Include="app-Marcelo-Dell.config" />
     <None Include="app-Isp-Server.config" />
     <None Include="appx.config" />

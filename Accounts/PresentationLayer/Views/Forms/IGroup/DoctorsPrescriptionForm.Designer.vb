@@ -48,7 +48,7 @@
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
-            Me.cboDoctorName = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboDoctorName = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.CGroupBox1 = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
             Me.DataGridViewPrescriptionDetails = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.ItemNameEnglishDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -383,7 +383,6 @@
             Me.cboDoctorName.OverrideDropDownStyleList = False
             Me.cboDoctorName.PreviousSearchTerm = Nothing
             Me.cboDoctorName.PropertySelector = Nothing
-            Me.cboDoctorName.ReadOnlyCombo = False
             Me.cboDoctorName.Size = New System.Drawing.Size(509, 24)
             Me.cboDoctorName.SuggestBoxHeight = 200
             Me.cboDoctorName.SuggestListOrderRule = Nothing
@@ -594,7 +593,7 @@
         Friend WithEvents CLabel1 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents CLabel2 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents dtpTransactionDate As Libraries.CBaseControlsLibrary.CCustomDateTimePicker
-        Friend WithEvents cboDoctorName As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents cboDoctorName As Libraries.CBaseControlsLibrary.CtCombobox
         Friend WithEvents txtDoctorCode As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents DataGridViewPrescriptionDetails As Libraries.CBaseControlsLibrary.CtDataGridView
         Friend WithEvents bsPrescriptionDetails As BindingSource

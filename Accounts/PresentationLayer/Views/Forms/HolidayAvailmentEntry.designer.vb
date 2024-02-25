@@ -34,22 +34,22 @@ Namespace PresentationLayer.Views.Forms
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtDateCreated = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CFlowLayout2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboHolidayTransferIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboHolidayTransferIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.lblHolidayIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboHolidayIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboHolidayIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.lblAvailmentDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpAvailmentDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblStatus = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboStatus = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboStatus = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.lblenteredBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.DataGridViewApprovalHistory = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.DataGridViewApprovalHistory = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
         Me.dgvApprovalIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.HolidayAvailmentIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsHolidayAvailmentApprovalHistory = New System.Windows.Forms.BindingSource(Me.components)
@@ -145,9 +145,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboEmployeeIdNo.OverrideDropDownStyleList = false
         Me.cboEmployeeIdNo.PreviousSearchTerm = Nothing
         Me.cboEmployeeIdNo.PropertySelector = Nothing
-        Me.cboEmployeeIdNo.ReadOnlyCombo = false
-        Me.cboEmployeeIdNo.SuggestBoxHeight = 200
-        Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
+            Me.cboEmployeeIdNo.SuggestBoxHeight = 200
+            Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
         Me.cboEmployeeIdNo.TextToSearch = Nothing
         Me.cboEmployeeIdNo.Translatable = false
         Me.cboEmployeeIdNo.ValueIsMandatory = false
@@ -254,9 +253,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboHolidayTransferIdNo.OverrideDropDownStyleList = false
         Me.cboHolidayTransferIdNo.PreviousSearchTerm = Nothing
         Me.cboHolidayTransferIdNo.PropertySelector = Nothing
-        Me.cboHolidayTransferIdNo.ReadOnlyCombo = false
-        Me.cboHolidayTransferIdNo.SuggestBoxHeight = 200
-        Me.cboHolidayTransferIdNo.SuggestListOrderRule = Nothing
+            Me.cboHolidayTransferIdNo.SuggestBoxHeight = 200
+            Me.cboHolidayTransferIdNo.SuggestListOrderRule = Nothing
         Me.cboHolidayTransferIdNo.TextToSearch = Nothing
         Me.cboHolidayTransferIdNo.Translatable = false
         Me.cboHolidayTransferIdNo.ValueIsMandatory = false
@@ -305,9 +303,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboHolidayIdNo.OverrideDropDownStyleList = false
         Me.cboHolidayIdNo.PreviousSearchTerm = Nothing
         Me.cboHolidayIdNo.PropertySelector = Nothing
-        Me.cboHolidayIdNo.ReadOnlyCombo = true
-        Me.cboHolidayIdNo.SuggestBoxHeight = 200
-        Me.cboHolidayIdNo.SuggestListOrderRule = Nothing
+            Me.cboHolidayIdNo.SuggestBoxHeight = 200
+            Me.cboHolidayIdNo.SuggestListOrderRule = Nothing
         Me.cboHolidayIdNo.TextToSearch = Nothing
         Me.cboHolidayIdNo.Translatable = false
         Me.cboHolidayIdNo.ValueIsMandatory = false
@@ -387,9 +384,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboStatus.OverrideDropDownStyleList = false
         Me.cboStatus.PreviousSearchTerm = Nothing
         Me.cboStatus.PropertySelector = Nothing
-        Me.cboStatus.ReadOnlyCombo = true
-        Me.cboStatus.SuggestBoxHeight = 200
-        Me.cboStatus.SuggestListOrderRule = Nothing
+            Me.cboStatus.SuggestBoxHeight = 200
+            Me.cboStatus.SuggestListOrderRule = Nothing
         Me.cboStatus.TextToSearch = Nothing
         Me.cboStatus.Translatable = false
         Me.cboStatus.ValueIsMandatory = false
@@ -438,9 +434,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboenteredBy.OverrideDropDownStyleList = false
         Me.cboenteredBy.PreviousSearchTerm = Nothing
         Me.cboenteredBy.PropertySelector = Nothing
-        Me.cboenteredBy.ReadOnlyCombo = true
-        Me.cboenteredBy.SuggestBoxHeight = 200
-        Me.cboenteredBy.SuggestListOrderRule = Nothing
+            Me.cboenteredBy.SuggestBoxHeight = 200
+            Me.cboenteredBy.SuggestListOrderRule = Nothing
         Me.cboenteredBy.TextToSearch = Nothing
         Me.cboenteredBy.Translatable = false
         Me.cboenteredBy.ValueIsMandatory = false
@@ -548,30 +543,30 @@ End Sub
         Friend WithEvents lblIdNo As CLabel
         Public WithEvents TxtIdNo As CTextBox
         Friend WithEvents lblEmployeeIdNo As CLabel
-        Public WithEvents cboEmployeeIdNo As CaComboBox
+        Public WithEvents cboEmployeeIdNo As CtCombobox
         Friend WithEvents lblDateCreated As CLabel
         Public WithEvents txtDateCreated As CTextBox
         Friend WithEvents CFlowLayout2 As CFlowLayout
         Friend WithEvents lblenteredBy As CLabel
-        Public WithEvents cboenteredBy As CaComboBox
-        Friend WithEvents DataGridViewApprovalHistory As CDataGridView
+        Public WithEvents cboenteredBy As CtCombobox
+        Friend WithEvents DataGridViewApprovalHistory As CtDataGridView
         Friend WithEvents bsHolidayAvailmentApproval As BindingSource
         Friend WithEvents bsHolidayAvailmentApprovalHistory As BindingSource
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents dgvApprovalIdNo As CDgvTextColumn
         Friend WithEvents dgvItemIdNo As CDgvTextColumn
         Friend WithEvents dgvDateCreated As CDgvTextColumn
-        Friend WithEvents dgvEnteredBy As CDgvComboBoxColumn
+        Friend WithEvents dgvEnteredBy As CtDgvComboboxColumn
         Friend WithEvents dgvNote As CDgvTextColumn
-        Friend WithEvents dgvStatus As CDgvComboBoxColumn
+        Friend WithEvents dgvStatus As CtDgvComboboxColumn
         Friend WithEvents HolidayAvailmentIdNo As DataGridViewTextBoxColumn
         Friend WithEvents CLabel2 As CLabel
-        Public WithEvents cboHolidayTransferIdNo As CaComboBox
+        Public WithEvents cboHolidayTransferIdNo As CtCombobox
         Friend WithEvents lblHolidayIdNo As CLabel
-        Public WithEvents cboHolidayIdNo As CaComboBox
+        Public WithEvents cboHolidayIdNo As CtCombobox
         Friend WithEvents lblStatus As CLabel
         Friend WithEvents lblAvailmentDate As CLabel
         Public WithEvents dtpAvailmentDate As CCustomDateTimePicker
-        Public WithEvents cboStatus As CaComboBox
+        Public WithEvents cboStatus As CtCombobox
     End Class
 End Namespace

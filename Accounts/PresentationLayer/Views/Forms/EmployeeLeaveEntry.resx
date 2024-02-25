@@ -967,7 +967,7 @@
     <value>DataGridViewApprovalHistory</value>
   </data>
   <data name="&gt;&gt;DataGridViewApprovalHistory.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CDataGridView, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtDataGridView, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;DataGridViewApprovalHistory.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>

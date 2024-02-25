@@ -231,14 +231,6 @@ End Class
 
 Public Class GetLookupDataRequested
 
-    'Public Sub New(ByVal tableName As String, ByRef view As Control, ByRef targetLookup As List(Of Lookup.LookupData), ByVal Optional filter As String = Nothing)
-    '    Me.TableName = tableName
-    '    Me.TargetProperty = TargetProperty
-    '    Me.Filter = filter
-    '    Me.View = view
-    '    Me.TargetLookup = targetLookup
-    'End Sub
-
     Public Sub New(ByVal targetSourceName As String)
         Me.TargetSourceName = targetSourceName
     End Sub
@@ -282,18 +274,10 @@ Public Class GetLookupDataRequested
     Public Property Filter As String
     Public Property SortKey As String
     Public Property TargetSourceName As String
-    'Public Property TargetLookup As List(Of Lookup.LookupData)
+
 End Class
 
 Public Class GetLookupDataTableRequested
-
-    'Public Sub New(ByVal tableName As String, ByRef view As Control, ByRef targetLookup As List(Of Lookup.LookupData), ByVal Optional filter As String = Nothing)
-    '    Me.TableName = tableName
-    '    Me.TargetProperty = TargetProperty
-    '    Me.Filter = filter
-    '    Me.View = view
-    '    Me.TargetLookup = targetLookup
-    'End Sub
 
     Public Sub New(ByVal targetSourceName As String)
         Me.TargetSourceName = targetSourceName
@@ -338,29 +322,6 @@ Public Class GetLookupDataTableRequested
     Public Property Filter As String
     Public Property SortKey As String
     Public Property TargetSourceName As String
-    'Public Property TargetLookup As List(Of Lookup.LookupData)
-End Class
-Public Class GetEnumListRequested
-
-    Public Sub New(ByRef enumList As Object, ByRef target As List(Of Lookup.LookupData))
-        Me.Target = target
-        Me.EnumList = enumList
-    End Sub
-
-    Public Property Target As List(Of Lookup.LookupData)
-    Public Property EnumList As Object
-
-End Class
-
-Public Class GetEnumListRequestedNew(Of TE)
-
-    Public Sub New(ByRef enumList As TE, ByRef target As List(Of Lookup.LookupData))
-        Me.Target = target
-        Me.EnumList = enumList
-    End Sub
-
-    Public Property Target As List(Of Lookup.LookupData)
-    Public Property EnumList As TE
 
 End Class
 
@@ -474,12 +435,14 @@ End Class
 
 Public Class GetControlDataSource
 
-    Public Sub New(tableName As String, control As Control, Optional filter As String = Nothing, Optional sortOrder As String = Nothing, Optional Ascending As Boolean = True)
+    Public Sub New(tableName As String, control As Control, Optional filter As String = Nothing, Optional sortOrder As String = Nothing, Optional ascending As Boolean = True, Optional displayMember As String = Nothing, Optional valueMember As String = Nothing)
         Me.TableName = tableName
         Me.Control = control
         Me.Filter = filter
-        Me.Ascending = Ascending
         Me.SortOrder = sortOrder
+        Me.Ascending = ascending
+        Me.DisplayMember = displayMember
+        Me.ValueMember = valueMember
     End Sub
 
     Public Property TableName As String
@@ -487,6 +450,8 @@ Public Class GetControlDataSource
     Public Property Filter As String
     Public Property SortOrder As String
     Public Property Ascending As Boolean
+    Public Property DisplayMember As String
+    Public Property ValueMember As String
 
 End Class
 

@@ -466,7 +466,7 @@ Public Class StoreCaptions
     '       TypeOf ctrl Is CLabel OrElse
     '       TypeOf ctrl Is CCheckBox OrElse
     '       TypeOf ctrl Is CRadioButton OrElse
-    '       TypeOf ctrl Is CDataGridView OrElse
+    '       TypeOf ctrl Is CtDataGridView OrElse
     '       TypeOf ctrl Is CGroupBox OrElse
     '       TypeOf ctrl Is CTabControl OrElse
     '       TypeOf ctrl Is CTabPage OrElse

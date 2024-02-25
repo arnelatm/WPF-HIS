@@ -17,8 +17,8 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateDataSource("User", "EnteredBy", {"IdNo", "UserName"})
-            CreateDataSource("Leave", "LeaveIdNo", "Holiday = 1")
+            MakeControlDataSources({New String() {"User", "EnteredBy", "IdNo,UserName", Nothing},
+                                    New String() {"Leave", "LeaveIdNo", Nothing, "Holiday = 1"}})
         End Sub
 
         Public Sub OnNewRecordInitialized() Handles MyBase.NewRecordInitialized

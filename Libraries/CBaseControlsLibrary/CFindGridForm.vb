@@ -3,7 +3,7 @@
 Public Class CFindGridForm
     Inherits CFindForm
 
-    Private _dgView As CDataGridView
+    Private _dgView As CtDataGridView
 
     Public Sub New(findableControl As IFindableControl)
         MyBase.New(findableControl)

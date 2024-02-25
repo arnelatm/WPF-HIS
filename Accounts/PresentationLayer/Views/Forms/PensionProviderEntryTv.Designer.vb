@@ -76,9 +76,9 @@ Namespace PresentationLayer.Views.Forms
             Me.TxtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-            Me.cacPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cacCountryCode = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cacBankIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
+            Me.cacPaymentMethod = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.lblActive = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.chkActive = New AATM.Libraries.CBaseControlsLibrary.CCheckBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -940,7 +940,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacCountryCode.OverrideDropDownStyleList = False
             Me.cacCountryCode.PreviousSearchTerm = Nothing
             Me.cacCountryCode.PropertySelector = Nothing
-            Me.cacCountryCode.ReadOnlyCombo = False
             Me.cacCountryCode.SuggestBoxHeight = 200
             Me.cacCountryCode.SuggestListOrderRule = Nothing
             Me.cacCountryCode.TextToSearch = Nothing
@@ -978,7 +977,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacBankIdNo.OverrideDropDownStyleList = False
             Me.cacBankIdNo.PreviousSearchTerm = Nothing
             Me.cacBankIdNo.PropertySelector = Nothing
-            Me.cacBankIdNo.ReadOnlyCombo = False
             Me.cacBankIdNo.SuggestBoxHeight = 200
             Me.cacBankIdNo.SuggestListOrderRule = Nothing
             Me.cacBankIdNo.TextToSearch = Nothing
@@ -1017,7 +1015,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cacPaymentMethod.OverrideDropDownStyleList = False
             Me.cacPaymentMethod.PreviousSearchTerm = Nothing
             Me.cacPaymentMethod.PropertySelector = Nothing
-            Me.cacPaymentMethod.ReadOnlyCombo = False
             Me.cacPaymentMethod.SuggestBoxHeight = 200
             Me.cacPaymentMethod.SuggestListOrderRule = Nothing
             Me.cacPaymentMethod.TextToSearch = Nothing
@@ -1134,9 +1131,9 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblPaymentMethod As CLabel
         Friend WithEvents chkActive As CCheckBox
         Friend WithEvents lblActive As CLabel
-        Friend WithEvents cacCountryCode As CaComboBox
-        Friend WithEvents cacBankIdNo As CaComboBox
-        Friend WithEvents cacPaymentMethod As CaComboBox
+        Friend WithEvents cacCountryCode As CtCombobox
+        Friend WithEvents cacBankIdNo As CtCombobox
+        Friend WithEvents cacPaymentMethod As CtCombobox
         Friend WithEvents CLabel1 As CLabel
     End Class
 End Namespace

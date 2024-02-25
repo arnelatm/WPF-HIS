@@ -25,7 +25,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateDataSource("Account", "ParentIdNo")
+            MakeControlDataSources({New String() {"Account", "ParentIdNo", Nothing, Nothing}})
             CreateEnumDataSource(Of AccountGroupSelection)("AccountGroup")
             CreateEnumDataSource(Of PayeeTypeSelection)("PayeeType")
             CreateEnumDataSource(Of DebitCreditSelection)("NormalBalance")

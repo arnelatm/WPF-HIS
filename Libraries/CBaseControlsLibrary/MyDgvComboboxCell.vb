@@ -13,7 +13,7 @@ Public Class MyDgvComboboxCell
     ' editing control type, which is your custom ComboBox class...
     Public Overrides ReadOnly Property EditType() As Type
         Get
-            Return GetType(CaComboBox)
+            Return GetType(CtCombobox)
         End Get
     End Property
 
@@ -26,7 +26,7 @@ Public Class MyDgvComboboxCell
         MyBase.InitializeEditingControl(rowIndex, formattedValue, cellStyle)
 
         ' Convert the cell's EditingControl to your custom ComboBox type...
-        Dim ctl As CaComboBox = CType(DataGridView.EditingControl, CaComboBox)
+        Dim ctl As CtCombobox = CType(DataGridView.EditingControl, CtCombobox)
 
         ' Make sure you have an instance...
         If ctl IsNot Nothing Then

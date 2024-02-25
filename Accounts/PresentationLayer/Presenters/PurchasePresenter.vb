@@ -615,7 +615,6 @@ Namespace PresentationLayer.Presenters
             Dim data As New ArrayList
             data.Add({"ProductUnit_View", "UnitsByProduct", "UnitIdNo,UnitName,UnitCode", "ProductIdNo = " + productIdNo.ToString()})
             CreateLookupDataThread(data)
-            'CreateLookupData("ProductUnitV", "UnitsByProduct", "ProductIdNo = " + productIdNo.ToString())
         End Sub
 
         Private Function GetLastPurchaseInfo(pModel As ProductModel) As ExpandoObject

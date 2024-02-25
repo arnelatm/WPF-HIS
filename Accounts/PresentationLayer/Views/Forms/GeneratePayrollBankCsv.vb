@@ -98,7 +98,8 @@ Namespace PresentationLayer.Views.Forms
         End Sub
 
         Private Sub cboIdNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboIdNo.SelectedValueChanged
-            RaiseEvent SelectedPayrollChanged(cboIdNo.SelectedValue)
+            Dim idNo As Int16 = DirectCast(cboIdNo.SelectedValue, System.Data.DataRowView).Row(0)
+            RaiseEvent SelectedPayrollChanged(idNo)
         End Sub
 
         Private Sub btnCancel_ClickButtonArea(Sender As Object, e As MouseEventArgs) Handles btnCancel.ClickButtonArea

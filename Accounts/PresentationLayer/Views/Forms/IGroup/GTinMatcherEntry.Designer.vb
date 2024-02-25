@@ -121,8 +121,8 @@
             Me.txtDrugRouteOfAdministration = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
             Me.CFlowLayout3 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-            Me.DataGridViewItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
-            Me.DataGridViewDrugs = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
+            Me.DataGridViewDrugs = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             CType(Me.MyErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.EventLog1, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.CFlowLayout1.SuspendLayout()
@@ -2213,8 +2213,8 @@ End Sub
         Friend WithEvents txtQtyOnHand As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents CLabel9 As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents CFlowLayout3 As Libraries.CBaseControlsLibrary.CFlowLayout
-        Friend WithEvents DataGridViewItems As Libraries.CBaseControlsLibrary.CDataGridView
-        Friend WithEvents DataGridViewDrugs As Libraries.CBaseControlsLibrary.CDataGridView
+        Friend WithEvents DataGridViewItems As Libraries.CBaseControlsLibrary.CtDataGridView
+        Friend WithEvents DataGridViewDrugs As Libraries.CBaseControlsLibrary.CtDataGridView
         Friend WithEvents BnDrugs As BindingNavigator
         Friend WithEvents btnDrugBnAddNewItem As ToolStripButton
         Friend WithEvents tsDrugsCount As ToolStripLabel

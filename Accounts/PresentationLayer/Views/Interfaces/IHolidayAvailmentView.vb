@@ -15,8 +15,8 @@ Namespace PresentationLayer.Views.Interfaces
         Property SupervisorIdNo As Integer
         Property Disapprove As Boolean
         Property Status As String
-        Property Users As List(Of Lookup.LookupData)
-        Property HolidayStatusList As List(Of Lookup.LookupData)
+        Property Users As DataTable
+        Property HolidayStatusList As DataTable
         Property ApprovalHistory As List(Of IHolidayAvailmentApprovalHistoryView)
     End Interface
 

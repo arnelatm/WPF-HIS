@@ -20,7 +20,7 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateDataSource("RevCostCenter", "ParentIdNo")
+            MakeControlDataSources({New String() {"RevCostCenter", "ParentIdNo", Nothing, Nothing}})
             CreateEnumDataSource(Of RevCostTypeSelection)("RcType")
         End Sub
 

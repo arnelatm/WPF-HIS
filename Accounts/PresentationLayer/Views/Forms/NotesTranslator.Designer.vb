@@ -37,7 +37,7 @@ Namespace PresentationLayer.Views.Forms
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.DataGridViewTransactionNotes = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.DataGridViewTransactionNotes = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
         Me.dgvNotes = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsNotes = New System.Windows.Forms.BindingSource(Me.components)
         Me.btnTranslateWord = New System.Windows.Forms.Button()
@@ -227,7 +227,7 @@ End Sub
         Friend WithEvents CLabel2 As CLabel
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents CLabel3 As CLabel
-        Friend WithEvents DataGridViewTransactionNotes As CDataGridView
+        Friend WithEvents DataGridViewTransactionNotes As CtDataGridView
         Friend WithEvents bsNotes As BindingSource
         Friend WithEvents dgvNotes As DataGridViewTextBoxColumn
         Friend WithEvents btnTranslateWord As Button

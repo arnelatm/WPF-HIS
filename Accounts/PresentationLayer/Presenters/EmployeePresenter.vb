@@ -1,7 +1,6 @@
 ﻿Imports System.IO
 Imports AATM.Accounts.BusinessLayer
 Imports AATM.Accounts.DataLayer.AdoNet
-Imports AATM.Accounts.PresentationLayer.Models
 Imports AATM.Accounts.PresentationLayer.Views
 Imports AATM.Accounts.PresentationLayer.Views.Interfaces
 Imports AATM.Accounts.ServiceLayer.ActionService
@@ -123,11 +122,11 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateEnumDataSourceT(Of MaleFemaleSelection)("Gender")
-            CreateEnumDataSourceT(Of MaritalStatusSelection)("MaritalStatus")
-            CreateEnumDataSourceT(Of PayrollPaymentMethodSelection)("PaymentMethod")
-            CreateEnumDataSourceT(Of SponsorTypeSelection)("SponsorType")
-            CreateEnumDataSourceT(Of BloodTypeSelection)("BloodType")
+            CreateEnumDataSource(Of MaleFemaleSelection)("Gender")
+            CreateEnumDataSource(Of MaritalStatusSelection)("MaritalStatus")
+            CreateEnumDataSource(Of PayrollPaymentMethodSelection)("PaymentMethod")
+            CreateEnumDataSource(Of SponsorTypeSelection)("SponsorType")
+            CreateEnumDataSource(Of BloodTypeSelection)("BloodType")
             'CreateListDataSourceT("List", "Title", "NameTitle")
             CreateEnumDataT(Of PayRateUnitSelection)(View.Unit)
             MakeControlDataSources({New String() {"Bank", "BankIdNo", Nothing, Nothing},

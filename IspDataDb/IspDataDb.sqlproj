@@ -656,6 +656,9 @@
     <Build Include="dbo\User Defined Types\EmployeeLeaveEarnedApprovalItemInsert.sql" />
     <Build Include="dbo\Stored Procedures\UpdateEmployeeLeaveEarnedApprovalItemTVP.sql" />
     <Build Include="dbo\User Defined Types\EmployeeLeaveEarnedApprovalItemUpdate.sql" />
+    <Build Include="dbo\Views\EmployeeLeaveEarnedApprovalList_View.sql" />
+    <Build Include="dbo\Views\EmployeeLeaveEarnedApprovalItem_View.sql" />
+    <Build Include="dbo\Views\EmployeeLeaveEarnedApproval_View.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="IspDataDb.refactorlog" />

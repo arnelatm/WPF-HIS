@@ -29,10 +29,10 @@ Namespace PresentationLayer.Views.Forms.Reports
         Me.lblBegDateCaption = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpBeginningDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboStartAccountCode = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboEndAccountCode = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
-        Me.lblTitle = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboStartAccountCode = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
+            Me.cboEndAccountCode = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
+            Me.lblTitle = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.btnOk = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.btnCancel = New AATM.Libraries.CBaseControlsLibrary.CButton()
@@ -194,7 +194,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboStartAccountCode.OverrideDropDownStyleList = False
             Me.cboStartAccountCode.PreviousSearchTerm = Nothing
             Me.cboStartAccountCode.PropertySelector = Nothing
-            Me.cboStartAccountCode.ReadOnlyCombo = False
             Me.cboStartAccountCode.Size = New System.Drawing.Size(520, 24)
             Me.cboStartAccountCode.SuggestBoxHeight = 200
             Me.cboStartAccountCode.SuggestListOrderRule = Nothing
@@ -256,7 +255,6 @@ Namespace PresentationLayer.Views.Forms.Reports
             Me.cboEndAccountCode.OverrideDropDownStyleList = False
             Me.cboEndAccountCode.PreviousSearchTerm = Nothing
             Me.cboEndAccountCode.PropertySelector = Nothing
-            Me.cboEndAccountCode.ReadOnlyCombo = False
             Me.cboEndAccountCode.Size = New System.Drawing.Size(520, 24)
             Me.cboEndAccountCode.SuggestBoxHeight = 200
             Me.cboEndAccountCode.SuggestListOrderRule = Nothing

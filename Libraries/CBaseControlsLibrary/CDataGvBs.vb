@@ -214,7 +214,7 @@ Public Class CDataGvBs
         'Return MyBase.ProcessDialogKey(keyData)
     End Function
 
-    Private Sub CDataGridView_DefaultValuesNeeded(sender As Object, e As DataGridViewRowEventArgs) Handles Me.DefaultValuesNeeded
+    Private Sub CtDataGridView_DefaultValuesNeeded(sender As Object, e As DataGridViewRowEventArgs) Handles Me.DefaultValuesNeeded
         If EditMode And (SequenceColumn IsNot Nothing AndAlso SequenceColumn <> "") Then
             With e.Row
                 .Cells(SequenceColumn).Value = RowCount()
@@ -222,12 +222,12 @@ Public Class CDataGvBs
         End If
     End Sub
 
-    Private Sub CDataGridView_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles MyBase.UserDeletedRow
+    Private Sub CtDataGridView_UserDeletedRow(sender As Object, e As DataGridViewRowEventArgs) Handles MyBase.UserDeletedRow
         ReSequenceDgvAfterDelete()
         'RaiseEvent ChangesMade(Me, EventArgs.Empty)
     End Sub
 
-    Private Sub CDataGridView_UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles Me.UserDeletingRow
+    Private Sub CtDataGridView_UserDeletingRow(ByVal sender As Object, ByVal e As DataGridViewRowCancelEventArgs) Handles Me.UserDeletingRow
         If Not EditingMode Then
             Messaging.Show(True, "MsgRowDelNotAllowedInViewMode")
             e.Cancel = True
@@ -522,10 +522,10 @@ Public Class CDataGvBs
 
     'Private Sub DataGridView1_EditingControlShowing(ByVal sender As Object, ByVal e As DataGridViewEditingControlShowingEventArgs) Handles Me.EditingControlShowing
     '    'declare variable(cb) as a combobox
-    '    Dim cb As CaComboBox
+    '    Dim cb As CtCombobox
     '    'e represent the editing control in the datagridview
     '    'the condition is, if the type of e is combobox then set your code for autocomplete
-    '    If TypeOf e.Control Is CaComboBox Then
+    '    If TypeOf e.Control Is CtCombobox Then
     '        cb = e.Control
     '        'set the dropdown style of a combobox
     '        cb.DropDownStyle = ComboBoxStyle.DropDown
@@ -536,7 +536,7 @@ Public Class CDataGvBs
     'End Sub
 
     ' sample cellvalidating event handler
-    'Private Sub CDataGridView_CellValidating(ByVal sender As Object, ByVal e As DataGridViewCellValidatingEventArgs) Handles Me.CellValidating
+    'Private Sub CtDataGridView_CellValidating(ByVal sender As Object, ByVal e As DataGridViewCellValidatingEventArgs) Handles Me.CellValidating
     '    If e.FormattedValue = "error" Then
     '        Me.Rows(e.RowIndex).Cells(e.ColumnIndex).ErrorText = "Negative Values not allowed"
     '        e.Cancel = False

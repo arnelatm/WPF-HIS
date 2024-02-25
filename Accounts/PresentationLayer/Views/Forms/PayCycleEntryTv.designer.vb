@@ -36,7 +36,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblPayCycleCode = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblPayCycleName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblPayFrequency = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboPayFrequency = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboPayFrequency = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.lblPayCycleNameAra = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -339,7 +339,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayFrequency.OverrideDropDownStyleList = False
             Me.cboPayFrequency.PreviousSearchTerm = Nothing
             Me.cboPayFrequency.PropertySelector = Nothing
-            Me.cboPayFrequency.ReadOnlyCombo = False
             Me.cboPayFrequency.Size = New System.Drawing.Size(202, 24)
             Me.cboPayFrequency.SuggestBoxHeight = 200
             Me.cboPayFrequency.SuggestListOrderRule = Nothing
@@ -411,6 +410,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents _MBParentWithChildrenChangedDisallowed As LocalizableMessageBox
         Friend WithEvents _MSGMandatoryFields As LocalizableMessage
         Friend WithEvents lblPayFrequency As CLabel
-        Friend WithEvents cboPayFrequency As CaComboBox
+        Friend WithEvents cboPayFrequency As CtCombobox
     End Class
 End Namespace

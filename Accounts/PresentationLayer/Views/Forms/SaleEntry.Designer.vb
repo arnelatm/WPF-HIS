@@ -72,10 +72,10 @@ Namespace PresentationLayer.Views.Forms
             Me.lblNationality = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboNationalityCode = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.lblGender = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.cboGender = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboGender = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.lblAge = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtAge = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
-            Me.cboAgeYmd = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboAgeYmd = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.lblPhoneNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtPhoneNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblDoctorIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
@@ -738,7 +738,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboGender.OverrideDropDownStyleList = False
             Me.cboGender.PreviousSearchTerm = Nothing
             Me.cboGender.PropertySelector = Nothing
-            Me.cboGender.ReadOnlyCombo = False
             Me.cboGender.Size = New System.Drawing.Size(84, 24)
             Me.cboGender.SuggestBoxHeight = 200
             Me.cboGender.SuggestListOrderRule = Nothing
@@ -829,7 +828,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAgeYmd.OverrideDropDownStyleList = False
             Me.cboAgeYmd.PreviousSearchTerm = Nothing
             Me.cboAgeYmd.PropertySelector = Nothing
-            Me.cboAgeYmd.ReadOnlyCombo = False
             Me.cboAgeYmd.Size = New System.Drawing.Size(84, 24)
             Me.cboAgeYmd.SuggestBoxHeight = 200
             Me.cboAgeYmd.SuggestListOrderRule = Nothing
@@ -2062,7 +2060,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents lblNationality As CLabel
         Friend WithEvents cboNationalityCode As CtComboBox
         Friend WithEvents lblGender As CLabel
-        Friend WithEvents cboGender As CaComboBox
+        Friend WithEvents cboGender As CtCombobox
         Friend WithEvents lblAge As CLabel
         Friend WithEvents txtAge As CTextBox
         Friend WithEvents lblPhoneNo As CLabel
@@ -2074,6 +2072,6 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents txtJournalIdNo As CTextBox
         Friend WithEvents lblJournalIdNo As CLabel
         Friend WithEvents cboPatientType As CtComboBox
-        Friend WithEvents cboAgeYmd As CaComboBox
+        Friend WithEvents cboAgeYmd As CtCombobox
     End Class
 End NameSpace

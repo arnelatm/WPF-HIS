@@ -60,7 +60,7 @@ Namespace PresentationLayer.Views.Forms
             Me.lblenteredBy = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.cboenteredBy = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
             Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.DataGridViewApprovalHistory = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewApprovalHistory = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.bsEmployeeLeaveApproval = New System.Windows.Forms.BindingSource(Me.components)
             Me.bsEmployeeLeaveApprovalHistory = New System.Windows.Forms.BindingSource(Me.components)
             Me.dgvApprovalIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -815,7 +815,7 @@ Namespace PresentationLayer.Views.Forms
         Public WithEvents cboStatus As CtComboBox
         Friend WithEvents lblenteredBy As CLabel
         Public WithEvents cboenteredBy As CtComboBox
-        Friend WithEvents DataGridViewApprovalHistory As CDataGridView
+        Friend WithEvents DataGridViewApprovalHistory As CtDataGridView
         Friend WithEvents bsEmployeeLeaveApproval As BindingSource
         Friend WithEvents bsEmployeeLeaveApprovalHistory As BindingSource
         Friend WithEvents CLabel1 As CLabel

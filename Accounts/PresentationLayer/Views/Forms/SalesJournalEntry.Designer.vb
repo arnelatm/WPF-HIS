@@ -60,7 +60,7 @@ Namespace PresentationLayer.Views.Forms
         Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.txtPayeeName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.floHeader2 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
@@ -70,12 +70,12 @@ Namespace PresentationLayer.Views.Forms
         Me.lblDateCreated = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpDateCreated = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.floPurchaseJournalItems = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
-        Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.DataGridViewJournalItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
         Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+        Me.dgvAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn()
         Me.dgvDebit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
         Me.dgvCredit = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
-        Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+        Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn()
         Me.dgvNotes = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.DataGridViewCheckBoxColumn3 = New System.Windows.Forms.DataGridViewCheckBoxColumn()
@@ -83,9 +83,9 @@ Namespace PresentationLayer.Views.Forms
         Me.dgvJournalIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ItemVatAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bsJournalItems = New System.Windows.Forms.BindingSource(Me.components)
-        Me.DataGridViewSalesDeposits = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.DataGridViewSalesDeposits = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
         Me.dgvSequenceSc = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-        Me.dgvDepositTypeIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+        Me.dgvDepositTypeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn()
         Me.dgvSaleAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
         Me.dgvDepositAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
         Me.dgvVatAmount = New AATM.Libraries.CBaseControlsLibrary.CdgvMoneyColumn()
@@ -361,9 +361,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboAccountIdNo.OverrideDropDownStyleList = false
         Me.cboAccountIdNo.PreviousSearchTerm = Nothing
         Me.cboAccountIdNo.PropertySelector = Nothing
-        Me.cboAccountIdNo.ReadOnlyCombo = false
-        Me.cboAccountIdNo.SuggestBoxHeight = 200
-        Me.cboAccountIdNo.SuggestListOrderRule = Nothing
+            Me.cboAccountIdNo.SuggestBoxHeight = 200
+            Me.cboAccountIdNo.SuggestListOrderRule = Nothing
         Me.cboAccountIdNo.TextToSearch = Nothing
         Me.cboAccountIdNo.Translatable = false
         Me.cboAccountIdNo.ValueIsMandatory = false
@@ -1251,7 +1250,7 @@ End Sub
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents floPurchaseJournalItems As CFlowLayout
-        Friend WithEvents DataGridViewJournalItems As CDataGridView
+        Friend WithEvents DataGridViewJournalItems As CtDataGridView
         Friend WithEvents floJournalItemsFooter As CFlowLayout
         Friend WithEvents lblDateCreated As CLabel
         Friend WithEvents bsJournalItems As Windows.Forms.BindingSource
@@ -1281,16 +1280,16 @@ End Sub
         Friend WithEvents IdNoDataGridViewTextBoxColumn1 As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents SalesJournalIdNoDataGridViewTextBoxColumn As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents lblAccountIdNo As CLabel
-        Friend WithEvents cboAccountIdNo As CaComboBox
+        Friend WithEvents cboAccountIdNo As CtCombobox
         Friend WithEvents floSalesDepositsFooter As CFlowLayout
         Friend WithEvents CLabel1 As CLabel
         Friend WithEvents btnHideJournalEntries As CButton
-        Public WithEvents DataGridViewSalesDeposits As CDataGridView
+        Public WithEvents DataGridViewSalesDeposits As CtDataGridView
         Friend WithEvents dgvSequence As CDgvTextColumn
-        Friend WithEvents dgvAccountIdNo As CDgvComboBoxColumn
+        Friend WithEvents dgvAccountIdNo As CtDgvComboboxColumn
         Friend WithEvents dgvDebit As CdgvMoneyColumn
         Friend WithEvents dgvCredit As CdgvMoneyColumn
-        Friend WithEvents dgvRevCostCenterIdNo As CDgvComboBoxColumn
+        Friend WithEvents dgvRevCostCenterIdNo As CtDgvComboboxColumn
         Friend WithEvents dgvNotes As DataGridViewTextBoxColumn
         Friend WithEvents dgvIdNo As CDgvTextColumn
         Friend WithEvents DataGridViewCheckBoxColumn3 As DataGridViewCheckBoxColumn
@@ -1299,7 +1298,7 @@ End Sub
         Friend WithEvents ItemVatAmount As DataGridViewTextBoxColumn
         Friend WithEvents dtpDateCreated As CCustomDateTimePicker
         Friend WithEvents dgvSequenceSc As CDgvTextColumn
-        Friend WithEvents dgvDepositTypeIdNo As CDgvComboBoxColumn
+        Friend WithEvents dgvDepositTypeIdNo As CtDgvComboboxColumn
         Friend WithEvents dgvSaleAmount As CdgvMoneyColumn
         Friend WithEvents dgvDepositAmount As CdgvMoneyColumn
         Friend WithEvents dgvVatAmount As CdgvMoneyColumn

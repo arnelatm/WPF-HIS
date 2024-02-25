@@ -52,12 +52,12 @@ Namespace PresentationLayer.Presenters
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateLookupData("Account", "AccountsByCode", "DetailAccount=1")
-            CreateLookupData("RevCostCenter", "RevCostCentersByCode")
-            CreateLookupData("Payee_View", "PayeeByCode")
-            CreateLookupData("Payee_View", "CustomerByCode", "PayeeType = 'C'")
-            CreateLookupData("Payee_View", "SupplierByCode", "PayeeType = 'S'")
-            CreateLookupData("Payee_View", "EmployeeByCode", "PayeeType = 'E'")
+            MakeVarDataSources({New String() {"Account", "AccountsByCode", Nothing, "DetailAccount=1"},
+            New String() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing},
+            New String() {"Payee_View", "PayeeByCode", "PayeeIdNo,PayeeName,PayeeCode", Nothing, Nothing},
+            New String() {"Payee_View", "CustomerByCode", "PayeeIdNo,PayeeName,PayeeCode", "PayeeType = 'C'"},
+            New String() {"Payee_View", "SupplierByCode", "PayeeIdNo,PayeeName,PayeeCode", "PayeeType = 'S'"},
+            New String() {"Payee_View", "EmployeeByCode", "PayeeIdNo,PayeeName,PayeeCode", "PayeeType = 'E'"}})
         End Sub
 
 

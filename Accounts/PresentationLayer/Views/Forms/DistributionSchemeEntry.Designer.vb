@@ -48,10 +48,10 @@ Namespace PresentationLayer.Views.Forms
         Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.DataGridViewDistributionSchemeItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.DataGridViewDistributionSchemeItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
-            Me.dgvRevCostCenterName = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn()
+            Me.dgvRevCostCenterName = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn()
             Me.Percentage = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
             Me.dgvDistributionSchemeIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -532,7 +532,7 @@ End Sub
         Friend WithEvents lblNotes As CLabel
         Friend WithEvents lblIdNo As CLabel
         Friend WithEvents lblAmount As CLabel
-        Friend WithEvents DataGridViewDistributionSchemeItems As CDataGridView
+        Friend WithEvents DataGridViewDistributionSchemeItems As CtDataGridView
         Friend WithEvents txtTotalPercentage As CTextBox
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents bsDistributionSchemeItems As Windows.Forms.BindingSource
@@ -545,8 +545,8 @@ End Sub
         Friend WithEvents lblValidityEndDate As CLabel
         Friend WithEvents dtpValidityEndDate As CCustomDateTimePicker
         Friend WithEvents dgvSequence As CDgvTextColumn
-        Friend WithEvents dgvRevCostCenterIdNo As CDgvComboBoxColumn
-        Friend WithEvents dgvRevCostCenterName As CDgvComboBoxColumn
+        Friend WithEvents dgvRevCostCenterIdNo As CtDgvComboboxColumn
+        Friend WithEvents dgvRevCostCenterName As CtDgvComboboxColumn
         Friend WithEvents Percentage As DataGridViewTextBoxColumn
         Friend WithEvents dgvIdNo As CDgvTextColumn
         Friend WithEvents dgvDistributionSchemeIdNo As CDgvTextColumn

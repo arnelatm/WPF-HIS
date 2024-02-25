@@ -43,12 +43,12 @@ Namespace PresentationLayer.Views.Forms
             Me.lblValidityEndDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dtpValidityEndDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-            Me.DataGridViewDistributionSchemeItems = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+            Me.DataGridViewDistributionSchemeItems = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
             Me.bsDistributionSchemeItems = New System.Windows.Forms.BindingSource(Me.components)
             Me.txtTotalPercentage = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
             Me.lblAmount = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.dgvSequence = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
-            Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvComboBoxColumn()
+            Me.dgvRevCostCenterIdNo = New AATM.Libraries.CBaseControlsLibrary.CtDgvComboboxColumn()
             Me.dgvPercentage = New AATM.Libraries.CBaseControlsLibrary.CDgvDecimalColumn()
             Me.IdNoDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
             Me.dgvDistributionSchemeIdNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -480,12 +480,12 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents dtpValidityStartDate As CCustomDateTimePicker
         Friend WithEvents lblValidityEndDate As CLabel
         Friend WithEvents dtpValidityEndDate As CCustomDateTimePicker
-        Friend WithEvents DataGridViewDistributionSchemeItems As CDataGridView
+        Friend WithEvents DataGridViewDistributionSchemeItems As CtDataGridView
         Friend WithEvents txtTotalPercentage As CTextBox
         Friend WithEvents lblAmount As CLabel
         Friend WithEvents bsDistributionSchemeItems As Windows.Forms.BindingSource
         Friend WithEvents dgvSequence As CDgvTextColumn
-        Friend WithEvents dgvRevCostCenterIdNo As CDgvComboBoxColumn
+        Friend WithEvents dgvRevCostCenterIdNo As CtDgvComboboxColumn
         Friend WithEvents dgvPercentage As CDgvDecimalColumn
         Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
         Friend WithEvents dgvDistributionSchemeIdNo As DataGridViewTextBoxColumn

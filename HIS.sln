@@ -46,7 +46,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 	ProjectSection(SolutionItems) = preProject
 		App.config = App.config
 		C-Sharp to VB Net Translation.txt = C-Sharp to VB Net Translation.txt
-		CommonErrors.txt = CommonErrors.txt
 		ComputeClientFormSizeEqually.txt = ComputeClientFormSizeEqually.txt
 		Create JournalPrefix.sql = Create JournalPrefix.sql
 		CreateBaseSecurityObject.sql = CreateBaseSecurityObject.sql
@@ -914,6 +913,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ToDos", "ToDos", "{E4F0E91F
 		01-DrugSale_View.sql = 01-DrugSale_View.sql
 		02-do this first.txt = 02-do this first.txt
 		ClinicBeginningStock = ClinicBeginningStock
+		CommonErrors.txt = CommonErrors.txt
 		Pharmacy.exe.config = Pharmacy.exe.config
 		Sample Data.txt = Sample Data.txt
 	EndProjectSection

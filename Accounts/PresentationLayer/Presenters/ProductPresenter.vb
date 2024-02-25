@@ -58,6 +58,7 @@ Namespace PresentationLayer.Presenters
             data2.Clear()
             data2.Add({"Unit", "UnitsByCode", Nothing, Nothing})
             CreateLookupDataThread(data2)
+
             CreateDataTable(DtProductUnitInsertTable, {{"BaseQty", GetType(Int16)},
                                  {"ProductIdNo", GetType(Int32)},
                                  {"Sequence", GetType(Int16)},

@@ -250,7 +250,7 @@
     <value>cboSystemViewIdNo</value>
   </data>
   <data name="&gt;&gt;cboSystemViewIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboSystemViewIdNo.Parent" xml:space="preserve">
     <value>floDataDisplay</value>
@@ -373,7 +373,7 @@
     <value>cboDataType</value>
   </data>
   <data name="&gt;&gt;cboDataType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboDataType.Parent" xml:space="preserve">
     <value>floDataDisplay</value>

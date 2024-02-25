@@ -7,7 +7,7 @@
     [PaymentType]         CHAR (1)       COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [PayType]             CHAR (1)       NULL,
     [PayeeIdNo]           INT            NULL,
-    [PayeeName]           NVARCHAR (50)  COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+    [PayeeName]           NVARCHAR (100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
     [CheckNumber]         VARCHAR (10)   NULL,
     [CheckDate]           DATE           NULL,
     [ORNumber]            VARCHAR (15)   COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
@@ -26,6 +26,8 @@
     [DateTimeStamp]       ROWVERSION     NULL,
     CONSTRAINT [PK_CashDisbursementJournal1] PRIMARY KEY CLUSTERED ([IdNo] ASC)
 );
+
+
 
 
 

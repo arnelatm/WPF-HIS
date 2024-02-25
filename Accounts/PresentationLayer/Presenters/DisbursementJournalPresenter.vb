@@ -90,25 +90,28 @@ Namespace PresentationLayer.Presenters
                                              })
 
             AddHandler view.PrintCheck, AddressOf OnPrintCheck
+            AddHandler view.SetSupplierVatNumber, AddressOf SetSupplierVatNumber
+            AddHandler view.PrintPcReplenishment, AddressOf OnPrintPcReplenishment
             AddHandler view.AutoApplyAmount, AddressOf OnAutoApplyAmount
             AddHandler view.AddSupplierOpenInvoices, AddressOf OnAddSupplierOpenInvoices
             AddHandler view.UserDeletedRow, AddressOf OnUserDeletedRow
-            AddHandler view.PrintPcReplenishment, AddressOf OnPrintPcReplenishment
             AddHandler view.FirstLineUpdateNeeded, AddressOf OnFirstLineUpdateNeeded
-            AddHandler view.SetSupplierVatNumber, AddressOf SetSupplierVatNumber
-            AddHandler view.PaymentTypeChanged, AddressOf MakePayeeIdNoDataSource
+            AddHandler view.PaymentTypeChanged, AddressOf OnPaymentTypeChanged
+            AddHandler view.PayeeIdNoChanged, AddressOf OnPayeeIdNoChanged
             ' needed the next line for the payeeidno to be displayed
             ' don't know why but without this the EmployeeNames if "E" won't display in the
             ' cboPayeeIdNo control, leave this until you find a fix.
-            MakePayeeIdNoDataSource("E")
+            view.CdAccountCount = CdAccountCount
+            view.DefaultAccount = DefaultDisbursementAccount
+            CreatePayeeDataSource(CodeToEnum(Of PaymentTypeSelection)(view.PaymentType))
         End Sub
 
         Protected Overrides Sub CreateDataSources()
-            CreateLookupData("Account", "AccountsByCode")
-            CreateLookupData("RevCostCenter", "RevCostCentersByCode")
-            CreateLookupData("Employee", "EmployeesByName")
-            CreateLookupData("Customer", "CustomersByName")
-            CreateLookupData("Supplier", "SuppliersByName")
+            MakeVarDataSources({New String() {"Account", "AccountsByCode", Nothing, Nothing},
+            New String() {"RevCostCenter", "RevCostCentersByCode", Nothing, Nothing},
+            New String() {"Employee", "EmployeesByName", Nothing, Nothing},
+            New String() {"Customer", "CustomersByName", Nothing, Nothing},
+            New String() {"Supplier", "SuppliersByName", Nothing, Nothing}})
             CreateEnumDataSource(Of PaymentTypeSelection)("PaymentType")
             CreateEnumDataSource(Of PayTypeSelection)("PayType")
             If TableName = "CdJournal" Then
@@ -125,6 +128,24 @@ Namespace PresentationLayer.Presenters
             CreateSpecialAccountDataSource("DiscountAccountIdNo", {EnumToCode(SpecialAccountSelection.PurchaseDiscount)})
         End Sub
 
+        Public Sub CdLanguageChanged() Handles MyBase.LanguageChanged
+            UpdateJournalCodeDisplay()
+        End Sub
+
+
+        Protected Overrides Sub UpdateViewDisplay()
+            View.OpenInvoiceMode = GetOpenInvoiceMode()
+            MyBase.UpdateViewDisplay()
+            UpdateJournalCodeDisplay()
+        End Sub
+
+        Private Sub UpdateJournalCodeDisplay()
+            If GlobalVariables.RightToLeftLayout Then
+                View.JournalCodeDisplay = GetLocalizedPrefix(JournalCode)
+            Else
+                View.JournalCodeDisplay = JournalCode
+            End If
+        End Sub
 
         Private Function GetAdvancesToSupplierAccountIdNo()
             Return GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.AdvancesToSupplier), "Account", "SpecialAccount", "IdNo")
@@ -148,35 +169,34 @@ Namespace PresentationLayer.Presenters
             End Get
         End Property
 
-        Public ReadOnly Property DefaultDisbursementAccount As Int16
+        Public ReadOnly Property DefaultDisbursementAccount As Int16?
             Get
-                Dim retVal As String = Nothing
+                Dim retVal As Int32?
                 If View.AccountIdNo Is Nothing Or View.AccountIdNo <= 0 Then
                     If CdAccountCount >= 1 Then
                         If JournalCode = "PC" Then
-                            retVal = GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.PettyCashAccount), "Account", "SpecialAccount", "IdNo")
+                            retVal = GetRecordFieldWithKeyG(Of Int32?)(EnumToCode(SpecialAccountSelection.PettyCashAccount), "Account", "SpecialAccount", "IdNo")
                         ElseIf JournalCode = "CK" Then
-                            retVal = GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.CheckingAccount), "Account", "SpecialAccount", "IdNo")
+                            retVal = GetRecordFieldWithKeyG(Of Int32?)(EnumToCode(SpecialAccountSelection.CheckingAccount), "Account", "SpecialAccount", "IdNo")
                         Else
-                            retVal = GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.Bank), "Account", "SpecialAccount", "IdNo")
-                            If retVal Is Nothing Then
-                                GetRecordFieldWithKey(EnumToCode(SpecialAccountSelection.Cash), "Account", "SpecialAccount", "IdNo")
+                            retVal = GetRecordFieldWithKeyG(Of Int32?)(EnumToCode(SpecialAccountSelection.Bank), "Account", "SpecialAccount", "IdNo")
+                            If retVal Is Nothing OrElse retVal = 0 Then
+                                retVal = GetRecordFieldWithKeyG(Of Int32?)(EnumToCode(SpecialAccountSelection.Cash), "Account", "SpecialAccount", "IdNo")
                             End If
                         End If
-                    Else
-                        Return 0
                     End If
                 End If
                 If retVal Is Nothing Then
-                    Return 0
+                    retVal = 0
                 End If
-                Return CInt(retVal)
+                Return retVal
             End Get
         End Property
 
         Public Sub OnBeforeSave() Handles MyBase.BeforeSave
             If Not CancelSave Then
-                If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) <> PaymentTypeSelection.AccountsPayable Then
+                Dim lViewPaymentTypeEnum As PaymentTypeSelection = CodeToEnum(Of PaymentTypeSelection)(View.PaymentType)
+                If lViewPaymentTypeEnum <> PaymentTypeSelection.AccountsPayable Then
                     CustomObjToDataTables(View.JournalItems, DtInsertTable, DtUpdateTable, AddressOf JournalItemFillData, AddressOf JournalItemFilter)
                     View.UnApplied = 0
                     View.Applied = View.Amount
@@ -202,6 +222,14 @@ Namespace PresentationLayer.Presenters
                         item.Notes = ""
                     End If
                 Next
+                If View.PayeeIdNo IsNot Nothing AndAlso View.PayeeIdNo <> 0 Then
+                    If lViewPaymentTypeEnum = PaymentTypeSelection.AccountsPayable Or
+                       lViewPaymentTypeEnum = PaymentTypeSelection.Employee Or
+                       lViewPaymentTypeEnum = PaymentTypeSelection.Supplier Or
+                       lViewPaymentTypeEnum = PaymentTypeSelection.CustomerRefund Then
+                        View.PayeeName = ""
+                    End If
+                End If
             End If
         End Sub
 
@@ -254,28 +282,6 @@ Namespace PresentationLayer.Presenters
             If retVal >= 0 AndAlso (View.PaymentType = EnumToCode(PaymentTypeSelection.AccountsPayable) Or View.PaymentType = EnumToCode(PaymentTypeSelection.Supplier)) _
                            AndAlso Not IsEmpty(View.VatNumber) Then
                 Service.UpdateVatNumber(View.VatNumber, View.PayeeIdNo)
-            End If
-        End Sub
-
-        Private Sub OnFirstLineUpdateNeeded()
-            If EditMode Or AddMode Then
-                If View.JournalItems IsNot Nothing Then
-                    If View.JournalItems.Count() = 0 Then
-                        View.JournalItems = New List(Of JournalItemView) From {
-                            FirstJournalItem()
-                            }
-                    End If
-                    For Each item In View.JournalItems
-                        item.JournalIdNo = View.IdNo
-                        item.Sequence = 1
-                        item.AccountIdNo = View.AccountIdNo
-                        item.Credit = View.Amount
-                        item.Debit = 0
-                        item.RevCostCenterIdNo = 0
-                        MakePayTypeAndSpecialAccount(item, View.AccountIdNo)
-                        Exit For
-                    Next
-                End If
             End If
         End Sub
 
@@ -390,6 +396,161 @@ Namespace PresentationLayer.Presenters
             cForm.Show()
         End Sub
 
+        Private Sub OnPrintCheck()
+            Dim checkAmountInWords As String
+            Dim currencies As New List(Of CurrencyInfo)()
+            Dim curCulture = CultureInfo.CurrentCulture
+            Dim language As String
+            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+            currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
+            If language = "ar" Then
+                checkAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
+            Else
+                checkAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
+            End If
+            Dim reportFileName As String
+            reportFileName = "Check Printing" & View.AccountIdNo.ToString() & ".Rpt"
+            Dim cForm As New ReportForm(reportFileName, checkAmountInWords, "CheckAmountInWords", GetPayeeName(View.PayeeIdNo), "PayeeName", View.CheckDate, "CheckDate", Convert.ToDecimal(View.Amount), "CheckAmount", language, "Language", View.Notes, "Notes")
+            cForm.Show()
+        End Sub
+
+        Private Sub OnPrintPcReplenishment()
+            Dim transactionAmountInWords As String
+            Dim currencies As New List(Of CurrencyInfo)()
+            Dim curCulture = CultureInfo.CurrentCulture
+            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
+            Dim language As String
+            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
+            currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
+            If language = "ar" Then
+                transactionAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
+            Else
+                transactionAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
+            End If
+            Dim cForm As New ReportForm("Petty Cash Replenishment Report.Rpt", transactionAmountInWords, "TransactionAmountInWords", View.IdNo, "JournalIdNo", language, "Language")
+            cForm.Show()
+        End Sub
+
+
+        Private Sub OnDisbursementJournalChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler
+            With eventType.BindingSource
+                If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
+                    'Dim nIndex = eventType.BindingSource.Current.Index
+                    Select Case eventType.PropertyName
+                        Case $"AccountIdNo"
+                            Dim accountId = eventType.BindingSource.Current.AccountIdNo
+                            MakePayTypeAndSpecialAccount(eventType.BindingSource.Current, accountId)
+                            UpdateVatAmount(eventType.BindingSource.DataSource)
+                        Case $"Debit"
+                            MakeDebitAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Debit)
+                            CallByName(View, "UpdateJiTotals", CallType.Method)
+                            UpdateVatAmount(eventType.BindingSource.DataSource)
+                            SendKeys.Send("{TAB}")
+                        Case $"Credit"
+                            MakeCreditAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Credit)
+                            CallByName(View, "UpdateJiTotals", CallType.Method)
+                            UpdateVatAmount(eventType.BindingSource.DataSource)
+                        Case $"Notes"
+                            SendKeys.Send("{DOWN}")
+                        Case $"Amount"
+                            eventType.BindingSource.Current.Balance = eventType.BindingSource.Current.PreviousBalance - eventType.BindingSource.Current.Amount - eventType.BindingSource.Current.DiscountTaken
+                            CallByName(View, "UpdateOiTotals", CallType.Method)
+                        Case $"DiscountTaken"
+                            eventType.BindingSource.Current.Balance = eventType.BindingSource.Current.PreviousBalance - eventType.BindingSource.Current.Amount - eventType.BindingSource.Current.DiscountTaken
+                            CallByName(View, "UpdateOiTotals", CallType.Method)
+                        Case $"Balance"
+                            SendKeys.Send("{DOWN}")
+                    End Select
+                End If
+            End With
+        End Sub
+
+        Private Sub OnBeforeMappingData(ByVal dataModel As Object) Handles MyBase.BeforeMappingData
+            ' need to do this because the Mapping source part of this program maps the PayeeIdNo first before
+            ' the DepositType so in order to override this part we need to retrieve the DepositType first
+            ' because when assigning the cboPayeeIdNo the dataSource must be correct that is why
+            ' we need to set the DataSource part of the cboPayeeIdNo before we can assign the PayeeIdNo
+            Dim data As DisbursementJournalModel
+            data = dataModel
+            View.PaymentType = data.PaymentType
+            CreatePayeeDataSource(CodeToEnum(Of PaymentTypeSelection)(View.PaymentType))
+            View.PayeeIdNo = data.PayeeIdNo
+        End Sub
+
+        Private Sub OnFirstLineUpdateNeeded()
+            If EditMode Or AddMode Then
+                If View.JournalItems IsNot Nothing Then
+                    If View.JournalItems.Count() = 0 Then
+                        View.JournalItems = New List(Of JournalItemView) From {
+                            FirstJournalItem()
+                            }
+                    End If
+                    For Each item In View.JournalItems
+                        item.JournalIdNo = View.IdNo
+                        item.Sequence = 1
+                        item.AccountIdNo = View.AccountIdNo
+                        item.Credit = View.Amount
+                        item.Debit = 0
+                        item.RevCostCenterIdNo = 0
+                        MakePayTypeAndSpecialAccount(item, View.AccountIdNo)
+                        Exit For
+                    Next
+                End If
+            End If
+        End Sub
+
+        Private Sub OnAddSupplierOpenInvoices()
+            If View.PayeeIdNo <> 0 Then
+                Dim unpaidInvoices = GetSupplierOpenInvoices(View.PayeeIdNo)
+                Dim nSeq As Integer
+                If AddMode Then
+                    View.DjOiItems.Clear()
+                End If
+                If View.DjOiItems IsNot Nothing Then
+                    nSeq = View.DjOiItems.Count()
+                Else
+                    nSeq = 0
+                End If
+                For Each unpaidInvoice In unpaidInvoices
+                    Dim itemFound = False
+                    If View.DjOiItems IsNot Nothing Then
+                        For Each item In View.DjOiItems
+                            If item.ApOpenInvoiceIdNo = unpaidInvoice.IdNo Then
+                                itemFound = True
+                                Exit For
+                            End If
+                        Next
+                    End If
+                    If Not itemFound Then
+
+                        If unpaidInvoice.JournalCode = JournalCode And unpaidInvoice.JournalIdNo = View.IdNo Then
+                            ' ignore advance payments if applied to this entry.
+                        Else
+                            nSeq += 1
+                            Dim item As New DjOiItemView With {
+                                    .AccountIdNo = unpaidInvoice.AccountIdNo,
+                                    .Amount = unpaidInvoice.Amount,
+                                    .ApOpenInvoiceIdNo = unpaidInvoice.ApOpenInvoiceIdNo,
+                                    .Balance = unpaidInvoice.Balance,
+                                    .DiscountTaken = unpaidInvoice.DiscountTaken,
+                                    .InvoiceNo = unpaidInvoice.InvoiceNo,
+                                    .JournalCode = unpaidInvoice.JournalCode,
+                                    .JournalIdNo = unpaidInvoice.JournalIdNo,
+                                    .PreviousBalance = unpaidInvoice.Balance,
+                                    .Sequence = nSeq,
+                                    .TransactionDate = unpaidInvoice.TransactionDate
+                                    }
+                            If View.DjOiItems Is Nothing Then
+                                View.DjOiItems = New List(Of DjOiItemView)
+                            End If
+                            View.DjOiItems.Add(item)
+                        End If
+                    End If
+                Next
+            End If
+        End Sub
+
+
         Private Sub OnSuccessfulDelete(ByVal idNo As Int32) Handles MyBase.SuccessfulDelete
             ' ReSharper disable once VBUseMethodAny.1
             If View.DjOiItems IsNot Nothing And View.DjOiItems.Count() > 0 Then
@@ -434,6 +595,13 @@ Namespace PresentationLayer.Presenters
                 End If
             Next item
         End Sub
+
+        Private Sub OnUserDeletedRow()
+            Dim payeeTypeEnum = CodeToEnum(Of PaymentTypeSelection)(View.PaymentType)
+            UpdateVatAmount(View.JournalItems)
+        End Sub
+
+
 
         Private Sub MakeJournalItem()
             If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
@@ -861,6 +1029,36 @@ Namespace PresentationLayer.Presenters
 
         End Sub
 
+        Public Sub OnPayeeIdNoChanged()
+            If View.OpenInvoiceMode Then
+                UpdateOpenInvoicesDisplay()
+            End If
+            If CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.Supplier Or CodeToEnum(Of PaymentTypeSelection)(View.PaymentType) = PaymentTypeSelection.AccountsPayable Then
+                If View.PayeeIdNo IsNot Nothing Then
+                    SetSupplierVatNumber(View.VatNumber, View.PayeeIdNo.ToString(), True)
+                End If
+            Else
+                View.VatNumber = ""
+            End If
+        End Sub
+
+        Private Function GetOpenInvoiceMode() As Boolean
+            Dim paymentTypeEnum = CodeToEnum(Of PaymentTypeSelection)(View.PaymentType)
+            If paymentTypeEnum = PaymentTypeSelection.AccountsPayable Then
+                Return True
+            Else
+                Return False
+            End If
+        End Function
+
+        Private Sub UpdateOpenInvoicesDisplay()
+            If EditMode Or AddMode Then
+                View.DjOiItems.Clear()
+                View.DjOiItems = GetSupplierOpenInvoices(View.DjOiItems)
+            End If
+        End Sub
+
+
         Private Sub JournalItemFillData(ByRef itemDataView As Object, ByRef workRow As DataRow)
             workRow("AccountIdNo") = itemDataView.AccountIdNo
             workRow("Credit") = itemDataView.Credit
@@ -892,57 +1090,6 @@ Namespace PresentationLayer.Presenters
             End If
             Return True
         End Function
-
-        Private Sub OnAddSupplierOpenInvoices()
-            If View.PayeeIdNo <> 0 Then
-                Dim unpaidInvoices = GetSupplierOpenInvoices(View.PayeeIdNo)
-                Dim nSeq As Integer
-                If AddMode Then
-                    View.DjOiItems.Clear()
-                End If
-                If View.DjOiItems IsNot Nothing Then
-                    nSeq = View.DjOiItems.Count()
-                Else
-                    nSeq = 0
-                End If
-                For Each unpaidInvoice In unpaidInvoices
-                    Dim itemFound = False
-                    If View.DjOiItems IsNot Nothing Then
-                        For Each item In View.DjOiItems
-                            If item.ApOpenInvoiceIdNo = unpaidInvoice.IdNo Then
-                                itemFound = True
-                                Exit For
-                            End If
-                        Next
-                    End If
-                    If Not itemFound Then
-
-                        If unpaidInvoice.JournalCode = JournalCode And unpaidInvoice.JournalIdNo = View.IdNo Then
-                            ' ignore advance payments if applied to this entry.
-                        Else
-                            nSeq += 1
-                            Dim item As New DjOiItemView With {
-                                    .AccountIdNo = unpaidInvoice.AccountIdNo,
-                                    .Amount = unpaidInvoice.Amount,
-                                    .ApOpenInvoiceIdNo = unpaidInvoice.ApOpenInvoiceIdNo,
-                                    .Balance = unpaidInvoice.Balance,
-                                    .DiscountTaken = unpaidInvoice.DiscountTaken,
-                                    .InvoiceNo = unpaidInvoice.InvoiceNo,
-                                    .JournalCode = unpaidInvoice.JournalCode,
-                                    .JournalIdNo = unpaidInvoice.JournalIdNo,
-                                    .PreviousBalance = unpaidInvoice.Balance,
-                                    .Sequence = nSeq,
-                                    .TransactionDate = unpaidInvoice.TransactionDate
-                                    }
-                            If View.DjOiItems Is Nothing Then
-                                View.DjOiItems = New List(Of DjOiItemView)
-                            End If
-                            View.DjOiItems.Add(item)
-                        End If
-                    End If
-                Next
-            End If
-        End Sub
 
         Private Function AddOpenInvoices(original As Boolean, source As List(Of DjOiItemModel), target As List(Of DjOiItemModel), nSeq As Integer) As Integer
             For Each invoice In source
@@ -983,40 +1130,6 @@ Namespace PresentationLayer.Presenters
             Return item
         End Function
 
-        Private Sub OnPrintCheck()
-            Dim checkAmountInWords As String
-            Dim currencies As New List(Of CurrencyInfo)()
-            Dim curCulture = CultureInfo.CurrentCulture
-            Dim language As String
-            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-            If language = "ar" Then
-                checkAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
-            Else
-                checkAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
-            End If
-            Dim reportFileName As String
-            reportFileName = "Check Printing" & View.AccountIdNo.ToString() & ".Rpt"
-            Dim cForm As New ReportForm(reportFileName, checkAmountInWords, "CheckAmountInWords", GetPayeeName(View.PayeeIdNo), "PayeeName", View.CheckDate, "CheckDate", Convert.ToDecimal(View.Amount), "CheckAmount", language, "Language", View.Notes, "Notes")
-            cForm.Show()
-        End Sub
-
-        Private Sub OnPrintPcReplenishment()
-            Dim transactionAmountInWords As String
-            Dim currencies As New List(Of CurrencyInfo)()
-            Dim curCulture = CultureInfo.CurrentCulture
-            CultureInfo.CurrentCulture = New CultureInfo("En-GB", False)
-            Dim language As String
-            language = Left(curCulture.Name, curCulture.Name.IndexOf("-", StringComparison.Ordinal))
-            currencies.Add(New CurrencyInfo(CurrencyInfo.Currencies.SaudiArabia))
-            If language = "ar" Then
-                transactionAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToArabic()
-            Else
-                transactionAmountInWords = New ToWord(View.Amount, currencies(0)).ConvertToEnglish()
-            End If
-            Dim cForm As New ReportForm("Petty Cash Replenishment Report.Rpt", transactionAmountInWords, "TransactionAmountInWords", View.IdNo, "JournalIdNo", language, "Language")
-            cForm.Show()
-        End Sub
 
         Private Function GetPayeeName(ByVal payeeIdNo? As Int32)
             Dim payee As String
@@ -1048,21 +1161,17 @@ Namespace PresentationLayer.Presenters
             Return payee
         End Function
 
-        Private Sub OnBeforeMappingData(ByVal dataModel As Object) Handles MyBase.BeforeMappingData
-            ' need to do this because the Mapping source part of this program maps the PayeeIdNo first before
-            ' the DepositType so in order to override this part we need to retrieve the DepositType first
-            ' because when assigning the cboPayeeIdNo the dataSource must be correct that is why
-            ' we need to set the DataSource part of the cboPayeeIdNo before we can assign the PayeeIdNo
-            Dim data As DisbursementJournalModel
-            data = dataModel
-            View.PaymentType = data.PaymentType
-            MakePayeeIdNoDataSource(dataModel.PaymentType)
-            View.PayeeIdNo = data.PayeeIdNo
+        Private Sub OnPaymentTypeChanged(paymentType As String)
+            Dim cPaymentTypeSelection As PaymentTypeSelection = CodeToEnum(Of PaymentTypeSelection)(paymentType)
+            View.OpenInvoiceMode = GetOpenInvoiceMode()
+            CreatePayeeDataSource(cPaymentTypeSelection)
+            If View.OpenInvoiceMode Then
+                UpdateOpenInvoicesDisplay()
+            End If
         End Sub
 
-        Private Sub MakePayeeIdNoDataSource(paymentType As String)
-            Dim x As PaymentTypeSelection = CodeToEnum(Of PaymentTypeSelection)(paymentType)
-            Select Case x
+        Private Sub CreatePayeeDataSource(paymentType As PaymentTypeSelection)
+            Select Case paymentType
                 Case PaymentTypeSelection.Employee
                     MakeVarDataSources({New String() {"Employee", "PayeeDataSource", Nothing, Nothing}})
                 Case PaymentTypeSelection.Supplier, PaymentTypeSelection.AccountsPayable
@@ -1072,45 +1181,6 @@ Namespace PresentationLayer.Presenters
                 Case Else
                     View.PayeeDataSource = Nothing
             End Select
-        End Sub
-
-
-        Private Sub OnDisbursementJournalChangedEventHandler(ByRef eventType As DgvItemsChanged) Implements ISubscriber(Of DgvItemsChanged).OnEventHandler
-            With eventType.BindingSource
-                If eventType.Row >= 0 And eventType.Row < eventType.BindingSource.Count() Then
-                    'Dim nIndex = eventType.BindingSource.Current.Index
-                    Select Case eventType.PropertyName
-                        Case $"AccountIdNo"
-                            Dim accountId = eventType.BindingSource.Current.AccountIdNo
-                            MakePayTypeAndSpecialAccount(eventType.BindingSource.Current, accountId)
-                            UpdateVatAmount(eventType.BindingSource.DataSource)
-                        Case $"Debit"
-                            MakeDebitAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Debit)
-                            CallByName(View, "UpdateJiTotals", CallType.Method)
-                            UpdateVatAmount(eventType.BindingSource.DataSource)
-                            SendKeys.Send("{TAB}")
-                        Case $"Credit"
-                            MakeCreditAmount(eventType.BindingSource.Current, eventType.BindingSource.Current.Credit)
-                            CallByName(View, "UpdateJiTotals", CallType.Method)
-                            UpdateVatAmount(eventType.BindingSource.DataSource)
-                        Case $"Notes"
-                            SendKeys.Send("{DOWN}")
-                        Case $"Amount"
-                            eventType.BindingSource.Current.Balance = eventType.BindingSource.Current.PreviousBalance - eventType.BindingSource.Current.Amount - eventType.BindingSource.Current.DiscountTaken
-                            CallByName(View, "UpdateOiTotals", CallType.Method)
-                        Case $"DiscountTaken"
-                            eventType.BindingSource.Current.Balance = eventType.BindingSource.Current.PreviousBalance - eventType.BindingSource.Current.Amount - eventType.BindingSource.Current.DiscountTaken
-                            CallByName(View, "UpdateOiTotals", CallType.Method)
-                        Case $"Balance"
-                            SendKeys.Send("{DOWN}")
-                    End Select
-                End If
-            End With
-        End Sub
-
-        Private Sub OnUserDeletedRow()
-            Dim payeeTypeEnum = CodeToEnum(Of PaymentTypeSelection)(View.PaymentType)
-            UpdateVatAmount(View.JournalItems)
         End Sub
 
         Private Sub UpdateVatAmount(data As List(Of JournalItemView))

@@ -36,7 +36,7 @@ Namespace PresentationLayer.Views.Forms
         Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PettyCashClosingEntry))
-        Me.DataGridViewPcJournals = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.DataGridViewPcJournals = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
         Me.dgvPcClosed = New AATM.Libraries.CBaseControlsLibrary.CDgvCheckBoxColumn()
         Me.dgvTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
         Me.dgvIdNo = New AATM.Libraries.CBaseControlsLibrary.CDgvTextColumn()
@@ -54,7 +54,7 @@ Namespace PresentationLayer.Views.Forms
         Me.lblTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.dtpTransactionDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.lblAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtReferenceNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -65,9 +65,9 @@ Namespace PresentationLayer.Views.Forms
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.btnSelectAll = New AATM.Libraries.CBaseControlsLibrary.CButton()
         Me.CLabel3 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPayType = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboPayType = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.CLabel4 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPcAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboPcAccountIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.DataGridViewPcJournals,System.ComponentModel.ISupportInitialize).BeginInit
@@ -540,7 +540,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboAccountIdNo.OverrideDropDownStyleList = False
             Me.cboAccountIdNo.PreviousSearchTerm = Nothing
             Me.cboAccountIdNo.PropertySelector = Nothing
-            Me.cboAccountIdNo.ReadOnlyCombo = False
             Me.cboAccountIdNo.SecurityKey = "ClosePettyCash"
             Me.cboAccountIdNo.Size = New System.Drawing.Size(411, 24)
             Me.cboAccountIdNo.SuggestBoxHeight = 200
@@ -802,7 +801,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPayType.OverrideDropDownStyleList = False
             Me.cboPayType.PreviousSearchTerm = Nothing
             Me.cboPayType.PropertySelector = Nothing
-            Me.cboPayType.ReadOnlyCombo = False
             Me.cboPayType.SecurityKey = "ClosePettyCash"
             Me.cboPayType.Size = New System.Drawing.Size(341, 24)
             Me.cboPayType.SuggestBoxHeight = 200
@@ -866,7 +864,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPcAccountIdNo.OverrideDropDownStyleList = False
             Me.cboPcAccountIdNo.PreviousSearchTerm = Nothing
             Me.cboPcAccountIdNo.PropertySelector = Nothing
-            Me.cboPcAccountIdNo.ReadOnlyCombo = False
             Me.cboPcAccountIdNo.SecurityKey = "ClosePettyCash"
             Me.cboPcAccountIdNo.Size = New System.Drawing.Size(411, 24)
             Me.cboPcAccountIdNo.SuggestBoxHeight = 200
@@ -941,12 +938,12 @@ End Sub
         Friend WithEvents DataGridViewTextBoxColumn5 As Windows.Forms.DataGridViewTextBoxColumn
         Friend WithEvents DataGridViewCheckBoxColumn1 As Windows.Forms.DataGridViewCheckBoxColumn
         Friend WithEvents PcsIdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-        Friend WithEvents DataGridViewPcJournals As CDataGridView
+        Friend WithEvents DataGridViewPcJournals As CtDataGridView
         Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
         Friend WithEvents lblTransactionDate As CLabel
         Friend WithEvents dtpTransactionDate As CCustomDateTimePicker
         Friend WithEvents lblAccountIdNo As CLabel
-        Friend WithEvents cboAccountIdNo As CaComboBox
+        Friend WithEvents cboAccountIdNo As CtCombobox
         Friend WithEvents CLabel2 As CLabel
         Friend WithEvents txtNotes As CTextBox
         Friend WithEvents txtReferenceNo As CTextBox
@@ -960,9 +957,9 @@ End Sub
         Friend WithEvents btnUnselectAll As CButton
         Friend WithEvents btnSelectAll As CButton
         Friend WithEvents CLabel3 As CLabel
-        Friend WithEvents cboPayType As CaComboBox
+        Friend WithEvents cboPayType As CtCombobox
         Friend WithEvents CLabel4 As CLabel
-        Friend WithEvents cboPcAccountIdNo As CaComboBox
+        Friend WithEvents cboPcAccountIdNo As CtCombobox
         Friend WithEvents txtIdNo As CTextBox
         Friend WithEvents dgvPcClosed As CDgvCheckBoxColumn
         Friend WithEvents dgvTransactionDate As CDgvTextColumn

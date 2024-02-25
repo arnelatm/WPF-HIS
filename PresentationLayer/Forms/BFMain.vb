@@ -148,7 +148,7 @@ Public Class BfMain
                TypeOf ctrl Is CButton OrElse
                TypeOf ctrl Is CCheckBox OrElse
                TypeOf ctrl Is CRadioButton OrElse
-               TypeOf ctrl Is CDataGridView OrElse
+               TypeOf ctrl Is CtDataGridView OrElse
                TypeOf ctrl Is CGroupBox OrElse
                TypeOf ctrl Is CTabControl OrElse
                TypeOf ctrl Is CTreeViewOld OrElse
@@ -438,8 +438,8 @@ Public Class BfMain
                     End If
                 End If
             End If
-            'If TypeOf cCtrl Is CDataGridView Or TypeOf cCtrl Is CtDataGridView Then
-            '    Dim cControl As CDataGridView = DirectCast(cCtrl, CDataGridView)
+            'If TypeOf cCtrl Is CtDataGridView Or TypeOf cCtrl Is CtDataGridView Then
+            '    Dim cControl As CtDataGridView = DirectCast(cCtrl, CtDataGridView)
             '    cControl.MakeGridSearchable()
             'End If
         Next
@@ -563,14 +563,14 @@ Public Class BfMain
         Next
     End Sub
 
-    Private Sub UseOriginalDataGridView(ByRef cDataGridView As DataGridView)
-        For Each col As DataGridViewColumn In cDataGridView.Columns
+    Private Sub UseOriginalDataGridView(ByRef CtDataGridView As DataGridView)
+        For Each col As DataGridViewColumn In CtDataGridView.Columns
             col.HeaderText = col.Tag
         Next
     End Sub
 
-    Private Sub TranslateDataGridView(ByRef cDataGridView As DataGridView)
-        Dim cGrid As DataGridView = cDataGridView
+    Private Sub TranslateDataGridView(ByRef CtDataGridView As DataGridView)
+        Dim cGrid As DataGridView = CtDataGridView
         Dim r As String
         For Each column As DataGridViewColumn In cGrid.Columns
             r = Dv.Find(column.HeaderText)
@@ -1182,69 +1182,6 @@ Public Class BfMain
         Return retValue
     End Function
 
-    'Protected Overloads Sub CreateDataSource(tableName As String, ByRef control As Control)
-    '    If Ea IsNot Nothing Then
-    '        Ea.PublishEvent(New GetDataSource(tableName, control))
-    '    End If
-    'End Sub
-
-    'Protected Overloads Sub CreateDataSource(tableName As String, ByRef control As Control, filter As String)
-    '    If Ea IsNot Nothing Then
-    '        Ea.PublishEvent(New GetDataSource(tableName, control, filter))
-    '    End If
-    'End Sub
-
-    'Protected Overloads Sub CreateDataSource(tableName As String, ByRef control As Control, sortKey As String, filter As String)
-    '    If Ea IsNot Nothing Then
-    '        Ea.PublishEvent(New GetDataSource(tableName, control, sortKey, filter))
-    '    End If
-    'End Sub
-
-    'Protected Overloads Sub CreateDataSource(tableName As String, ByRef control As Control, fields As String(), optional sortKey As String = "", Optional filter As String = "")
-    '    If Ea IsNot Nothing Then
-    '        Ea.PublishEvent(New GetDataSource(tableName, control, fields, sortKey, filter))
-    '    End If
-    'End Sub
-
-    'Protected Overloads Sub CreateLookupData(tableName As String, ByRef targetLookup As List(Of Lookup.LookupData), Optional filter As String = Nothing)
-    '    Dim varName = NameOf(targetLookup)
-    '    Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, varName, filter))
-    'End Sub
-
-    'Protected Function CreateLookupData(tableName As String, targetProperty As String) As List(Of Lookup.LookupData)
-    '    Dim data As List(Of Lookup.LookupData)
-    '    Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty))
-    '    Return data
-    'End Function
-
-    ' ReSharper disable once UnassignedField.Local
-
-    Protected Sub GetLookupData(tableName As String, targetProperty As String, Optional filter As String = Nothing) 'As List(Of Lookup.LookupData)
-        'Dim dataLookupFunctionVariable As New List(Of Lookup.LookupData)
-        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, filter))
-        'Return dataLookupFunctionVariable
-    End Sub
-
-    Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String)
-        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty))
-    End Sub
-
-    Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String, filter As String)
-        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, filter))
-    End Sub
-
-    Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String, sortKey As String, filter As String)
-        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, sortKey, filter))
-    End Sub
-
-    Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String, fields As String(), Optional filter As String = Nothing)
-        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, fields, filter))
-    End Sub
-
-    Protected Overloads Sub CreateLookupData(tableName As String, targetProperty As String, sortField As String, fields As String(), Optional filter As String = Nothing)
-        Ea.PublishEvent(New GetLookupDataRequested(tableName, Me, targetProperty, sortField, fields, filter))
-    End Sub
-
     Protected Overloads Sub CreateLookupDataTable(tableName As String, targetProperty As String)
         Ea.PublishEvent(New GetLookupDataTableRequested(tableName, Me, targetProperty))
     End Sub
@@ -1264,27 +1201,6 @@ Public Class BfMain
     Protected Overloads Sub CreateLookupDataTable(tableName As String, targetProperty As String, sortField As String, fields As String(), Optional filter As String = Nothing)
         Ea.PublishEvent(New GetLookupDataTableRequested(tableName, Me, targetProperty, sortField, fields, filter))
     End Sub
-
-    Public Sub CreateEnumDataSource(Of TE)(ByRef comboControl As CaComboBox)
-        comboControl.DataSource = GetEnumData(Of TE)()
-    End Sub
-
-    Public Sub CreateEnumData(Of TE)(ByRef dataTarget As Object)
-        dataTarget = GetEnumData(Of TE)()
-    End Sub
-
-    Private Function GetEnumData(Of TE)()
-        Dim dataList As New List(Of Lookup.LookupData)
-        For Each c In [Enum].GetValues(GetType(TE))
-            Dim data As New Lookup.LookupData With {
-                    .IdNo = CInt(c),
-                    .Code = EnumToCode(c),
-                    .Name = Messaging.TranslateCaption(c.ToString().SplitCamelCase())
-                    }
-            dataList.Add(data)
-        Next
-        Return dataList
-    End Function
 
     Public Function GetFieldType(fieldName As String) As Type
         If Invoker.GetProperty(Me, fieldName) IsNot Nothing Then

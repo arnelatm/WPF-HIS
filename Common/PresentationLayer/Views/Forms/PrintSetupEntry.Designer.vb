@@ -31,17 +31,17 @@ Namespace PresentationLayer.Views.Forms
         Me.lblPrintSetupName = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtPrintSetupName = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblPrintSetupIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPrintJobIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboPrintJobIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.LblComputerIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboComputerIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboComputerIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.lblPrinterIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPrinterIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboPrinterIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.LblPaperSource = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPaperSource = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboPaperSource = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.LblPaperSize = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPaperSize = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboPaperSize = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.LblPaperOrientation = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboPaperOrientation = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboPaperOrientation = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         CType(Me.SplitContainer1,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SplitContainer1.Panel1.SuspendLayout
         Me.SplitContainer1.Panel2.SuspendLayout
@@ -250,7 +250,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPrintJobIdNo.OverrideDropDownStyleList = False
             Me.cboPrintJobIdNo.PreviousSearchTerm = Nothing
             Me.cboPrintJobIdNo.PropertySelector = Nothing
-            Me.cboPrintJobIdNo.ReadOnlyCombo = False
             Me.cboPrintJobIdNo.Size = New System.Drawing.Size(307, 24)
             Me.cboPrintJobIdNo.SuggestBoxHeight = 200
             Me.cboPrintJobIdNo.SuggestListOrderRule = Nothing
@@ -313,7 +312,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboComputerIdNo.OverrideDropDownStyleList = False
             Me.cboComputerIdNo.PreviousSearchTerm = Nothing
             Me.cboComputerIdNo.PropertySelector = Nothing
-            Me.cboComputerIdNo.ReadOnlyCombo = False
             Me.cboComputerIdNo.Size = New System.Drawing.Size(307, 24)
             Me.cboComputerIdNo.SuggestBoxHeight = 200
             Me.cboComputerIdNo.SuggestListOrderRule = Nothing
@@ -376,7 +374,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPrinterIdNo.OverrideDropDownStyleList = False
             Me.cboPrinterIdNo.PreviousSearchTerm = Nothing
             Me.cboPrinterIdNo.PropertySelector = Nothing
-            Me.cboPrinterIdNo.ReadOnlyCombo = False
             Me.cboPrinterIdNo.Size = New System.Drawing.Size(307, 24)
             Me.cboPrinterIdNo.SuggestBoxHeight = 200
             Me.cboPrinterIdNo.SuggestListOrderRule = Nothing
@@ -439,7 +436,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaperSource.OverrideDropDownStyleList = False
             Me.cboPaperSource.PreviousSearchTerm = Nothing
             Me.cboPaperSource.PropertySelector = Nothing
-            Me.cboPaperSource.ReadOnlyCombo = False
             Me.cboPaperSource.Size = New System.Drawing.Size(307, 24)
             Me.cboPaperSource.SuggestBoxHeight = 200
             Me.cboPaperSource.SuggestListOrderRule = Nothing
@@ -502,7 +498,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaperSize.OverrideDropDownStyleList = False
             Me.cboPaperSize.PreviousSearchTerm = Nothing
             Me.cboPaperSize.PropertySelector = Nothing
-            Me.cboPaperSize.ReadOnlyCombo = False
             Me.cboPaperSize.Size = New System.Drawing.Size(307, 24)
             Me.cboPaperSize.SuggestBoxHeight = 200
             Me.cboPaperSize.SuggestListOrderRule = Nothing
@@ -564,7 +559,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboPaperOrientation.OverrideDropDownStyleList = False
             Me.cboPaperOrientation.PreviousSearchTerm = Nothing
             Me.cboPaperOrientation.PropertySelector = Nothing
-            Me.cboPaperOrientation.ReadOnlyCombo = False
             Me.cboPaperOrientation.Size = New System.Drawing.Size(307, 24)
             Me.cboPaperOrientation.SuggestBoxHeight = 200
             Me.cboPaperOrientation.SuggestListOrderRule = Nothing
@@ -605,12 +599,12 @@ End Sub
         Friend WithEvents LblPaperOrientation As CLabel
         Friend WithEvents lblPrinterIdNo As CLabel
         Friend WithEvents lblPrintSetupIdNo As CLabel
-        Friend WithEvents cboPrintJobIdNo As CaComboBox
-        Friend WithEvents cboPaperSource As CaComboBox
-        Friend WithEvents cboPaperSize As CaComboBox
-        Friend WithEvents cboPaperOrientation As CaComboBox
-        Friend WithEvents cboComputerIdNo As CaComboBox
-        Friend WithEvents cboPrinterIdNo As CaComboBox
+        Friend WithEvents cboPrintJobIdNo As CtCombobox
+        Friend WithEvents cboPaperSource As CtCombobox
+        Friend WithEvents cboPaperSize As CtCombobox
+        Friend WithEvents cboPaperOrientation As CtCombobox
+        Friend WithEvents cboComputerIdNo As CtCombobox
+        Friend WithEvents cboPrinterIdNo As CtCombobox
         Friend WithEvents lblPrintSetupName As CLabel
         Friend WithEvents txtPrintSetupName As CTextBox
     End Class

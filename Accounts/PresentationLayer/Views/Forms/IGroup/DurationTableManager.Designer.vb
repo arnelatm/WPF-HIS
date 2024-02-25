@@ -37,7 +37,7 @@ Partial Class DurationTableManager
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.CLabel2 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.DataGridViewDuration = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.DataGridViewDuration = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
         Me.dgvDurationCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvDurationName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.dgvDurationNameArabic = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -271,7 +271,7 @@ Partial Class DurationTableManager
     Friend WithEvents DurationNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents DurationNameARaDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents IdNoDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
-    Friend WithEvents DataGridViewDuration As CDataGridView
+    Friend WithEvents DataGridViewDuration As CtDataGridView
     Friend WithEvents bsDuration As BindingSource
     Friend WithEvents txtDurationCode As TextBox
     Friend WithEvents txtIdNo As TextBox

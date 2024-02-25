@@ -226,7 +226,7 @@
     <value>cboEmployeeIdNo</value>
   </data>
   <data name="&gt;&gt;cboEmployeeIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboEmployeeIdNo.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
@@ -292,7 +292,7 @@
     <value>cboPayElementIdNo</value>
   </data>
   <data name="&gt;&gt;cboPayElementIdNo.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboPayElementIdNo.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>
@@ -358,7 +358,7 @@
     <value>cboRecurType</value>
   </data>
   <data name="&gt;&gt;cboRecurType.Type" xml:space="preserve">
-    <value>AATM.Libraries.CBaseControlsLibrary.CaComboBox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>AATM.Libraries.CBaseControlsLibrary.CtCombobox, CBaseControlsLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;cboRecurType.Parent" xml:space="preserve">
     <value>CFlowLayout2</value>

@@ -1,7 +1,7 @@
 ﻿Imports System.Drawing
 Imports System.Windows.Forms
 Imports AATM.Libraries.AatmInterfaces
-Imports AATM.Libraries.CBaseControlsLibrary.CDataGridView
+Imports AATM.Libraries.CBaseControlsLibrary.CtDataGridView
 Imports AATM.Libraries.GlobalFuncNSub
 
 Public Class CFindForm
@@ -23,8 +23,8 @@ Public Class CFindForm
         InitializeComponent()
         _findableControl = findableControl
 
-        'If TypeOf findableControl Is CDataGridView Then
-        '    _dgFindColumnNo = DirectCast(findableControl, CDataGridView).FindColumnNo
+        'If TypeOf findableControl Is CtDataGridView Then
+        '    _dgFindColumnNo = DirectCast(findableControl, CtDataGridView).FindColumnNo
         'End If
         Dim ctrl As Control
         Dim formPoint As Point

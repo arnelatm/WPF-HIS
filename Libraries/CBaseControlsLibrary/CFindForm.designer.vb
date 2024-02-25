@@ -37,7 +37,7 @@ Partial Class CFindForm
         Me.txtEndValue = New System.Windows.Forms.TextBox()
         Me.txtBegValue = New System.Windows.Forms.TextBox()
         Me.lblTo1 = New System.Windows.Forms.Label()
-        Me.cboTextToSearch = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboTextToSearch = New AATM.Libraries.CBaseControlsLibrary.CtComboBox()
         Me.dtpEndDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.dtpBegDate = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.cgbStringFindOption = New AATM.Libraries.CBaseControlsLibrary.CGroupBox()
@@ -49,10 +49,10 @@ Partial Class CFindForm
         Me.BtnFind = New System.Windows.Forms.Button()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtFieldToSearch = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.CDataGridViewWithFooter1 = New AATM.Libraries.CBaseControlsLibrary.cDataGridViewWithFooter()
+        Me.CtDataGridViewWithFooter1 = New AATM.Libraries.CBaseControlsLibrary.CtDataGridViewWithFooter()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.cgbStringFindOption.SuspendLayout()
-        CType(Me.CDataGridViewWithFooter1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.CtDataGridViewWithFooter1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TxtTextToSearch
@@ -254,7 +254,6 @@ Partial Class CFindForm
         Me.cboTextToSearch.OverrideDropDownStyleList = False
         Me.cboTextToSearch.PreviousSearchTerm = Nothing
         Me.cboTextToSearch.PropertySelector = Nothing
-        Me.cboTextToSearch.ReadOnlyCombo = False
         Me.cboTextToSearch.Size = New System.Drawing.Size(279, 28)
         Me.cboTextToSearch.SuggestBoxHeight = 200
         Me.cboTextToSearch.SuggestListOrderRule = Nothing
@@ -471,14 +470,14 @@ Partial Class CFindForm
         Me.txtFieldToSearch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.txtFieldToSearch.Translatable = True
         '
-        'CDataGridViewWithFooter1
+        'CtDataGridViewWithFooter1
         '
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.FloralWhite
-        Me.CDataGridViewWithFooter1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
-        Me.CDataGridViewWithFooter1.BegFindValue = Nothing
-        Me.CDataGridViewWithFooter1.Cached = False
-        Me.CDataGridViewWithFooter1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.CDataGridViewWithFooter1.DataFilter = Nothing
+        Me.CtDataGridViewWithFooter1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle3
+        Me.CtDataGridViewWithFooter1.BegFindValue = Nothing
+        Me.CtDataGridViewWithFooter1.Cached = False
+        Me.CtDataGridViewWithFooter1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.CtDataGridViewWithFooter1.DataFilter = Nothing
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle4.BackColor = System.Drawing.Color.Black
         DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -486,41 +485,41 @@ Partial Class CFindForm
         DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.CDataGridViewWithFooter1.DefaultCellStyle = DataGridViewCellStyle4
-        Me.CDataGridViewWithFooter1.DgvFooter = Nothing
-        Me.CDataGridViewWithFooter1.DisplayOnly = False
-        Me.CDataGridViewWithFooter1.Ea = Nothing
-        Me.CDataGridViewWithFooter1.EditingMode = False
-        Me.CDataGridViewWithFooter1.EndFindValue = Nothing
-        Me.CDataGridViewWithFooter1.FieldDescription = Nothing
-        Me.CDataGridViewWithFooter1.FieldName = Nothing
-        Me.CDataGridViewWithFooter1.FieldsDictionary = Nothing
-        Me.CDataGridViewWithFooter1.FindColumnNo = CType(0, Short)
-        Me.CDataGridViewWithFooter1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.CDataGridViewWithFooter1.FindEnabled = False
-        Me.CDataGridViewWithFooter1.FirstRowDeletionEnabled = True
-        Me.CDataGridViewWithFooter1.FirstRowInsertionEnabled = True
-        Me.CDataGridViewWithFooter1.IgnoreCase = False
-        Me.CDataGridViewWithFooter1.IsDirty = False
-        Me.CDataGridViewWithFooter1.Location = New System.Drawing.Point(0, 353)
-        Me.CDataGridViewWithFooter1.Name = "CDataGridViewWithFooter1"
-        Me.CDataGridViewWithFooter1.RowHeadersWidth = 51
-        Me.CDataGridViewWithFooter1.Searchable = True
-        Me.CDataGridViewWithFooter1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.CDataGridViewWithFooter1.SecurityKey = ""
-        Me.CDataGridViewWithFooter1.SequenceColumn = "dgvSequence"
-        Me.CDataGridViewWithFooter1.SequenceFieldName = "Sequence"
-        Me.CDataGridViewWithFooter1.ShowFooter = False
-        Me.CDataGridViewWithFooter1.Size = New System.Drawing.Size(21, 8)
-        Me.CDataGridViewWithFooter1.TabIndex = 9
-        Me.CDataGridViewWithFooter1.Translatable = True
+        Me.CtDataGridViewWithFooter1.DefaultCellStyle = DataGridViewCellStyle4
+        Me.CtDataGridViewWithFooter1.DgvFooter = Nothing
+        Me.CtDataGridViewWithFooter1.DisplayOnly = False
+        Me.CtDataGridViewWithFooter1.Ea = Nothing
+        Me.CtDataGridViewWithFooter1.EditingMode = False
+        Me.CtDataGridViewWithFooter1.EndFindValue = Nothing
+        Me.CtDataGridViewWithFooter1.FieldDescription = Nothing
+        Me.CtDataGridViewWithFooter1.FieldName = Nothing
+        Me.CtDataGridViewWithFooter1.FieldsDictionary = Nothing
+        Me.CtDataGridViewWithFooter1.FindColumnNo = CType(0, Short)
+        Me.CtDataGridViewWithFooter1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.CtDataGridViewWithFooter1.FindEnabled = False
+        Me.CtDataGridViewWithFooter1.FirstRowDeletionEnabled = True
+        Me.CtDataGridViewWithFooter1.FirstRowInsertionEnabled = True
+        Me.CtDataGridViewWithFooter1.IgnoreCase = False
+        Me.CtDataGridViewWithFooter1.IsDirty = False
+        Me.CtDataGridViewWithFooter1.Location = New System.Drawing.Point(0, 353)
+        Me.CtDataGridViewWithFooter1.Name = "CtDataGridViewWithFooter1"
+        Me.CtDataGridViewWithFooter1.RowHeadersWidth = 51
+        Me.CtDataGridViewWithFooter1.Searchable = True
+        Me.CtDataGridViewWithFooter1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.CtDataGridViewWithFooter1.SecurityKey = ""
+        Me.CtDataGridViewWithFooter1.SequenceColumn = "dgvSequence"
+        Me.CtDataGridViewWithFooter1.SequenceFieldName = "Sequence"
+        Me.CtDataGridViewWithFooter1.ShowFooter = False
+        Me.CtDataGridViewWithFooter1.Size = New System.Drawing.Size(21, 8)
+        Me.CtDataGridViewWithFooter1.TabIndex = 9
+        Me.CtDataGridViewWithFooter1.Translatable = True
         '
         'CFindForm
         '
         Me.AcceptButton = Me.BtnFind
         Me.CancelButton = Me.BtnCancel
         Me.ClientSize = New System.Drawing.Size(357, 353)
-        Me.Controls.Add(Me.CDataGridViewWithFooter1)
+        Me.Controls.Add(Me.CtDataGridViewWithFooter1)
         Me.Controls.Add(Me.txtFieldToSearch)
         Me.Controls.Add(Me.CLabel1)
         Me.Controls.Add(Me.TableLayoutPanel1)
@@ -530,18 +529,18 @@ Partial Class CFindForm
         Me.TableLayoutPanel1.PerformLayout()
         Me.cgbStringFindOption.ResumeLayout(False)
         Me.cgbStringFindOption.PerformLayout()
-        CType(Me.CDataGridViewWithFooter1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CtDataGridViewWithFooter1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout
+        Me.PerformLayout()
 
-End Sub
+    End Sub
 
     Friend WithEvents TxtTextToSearch As TextBox
     Friend WithEvents lblLookFor1 As Label
     Friend WithEvents RBtnStart As RadioButton
     Friend WithEvents RBtnAnywhere As RadioButton
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-    Public WithEvents cboTextToSearch As CaComboBox
+    Public WithEvents cboTextToSearch As CtComboBox
     Friend WithEvents lblTo1 As Label
     Friend WithEvents chkChecked As UcCheckBox
     Friend WithEvents dtpEndDate As CCustomDateTimePicker
@@ -557,5 +556,5 @@ End Sub
     Friend WithEvents BtnCancel As Button
     Friend WithEvents BtnFind As Button
     Friend WithEvents cbtTextToSearch As CtComboBox
-    Friend WithEvents CDataGridViewWithFooter1 As cDataGridViewWithFooter
+    Friend WithEvents CtDataGridViewWithFooter1 As CtDataGridViewWithFooter
 End Class

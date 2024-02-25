@@ -30,7 +30,7 @@ Namespace PresentationLayer.Views.Forms
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(InvTransTypeEntryTv))
             Me.floDataDisplay = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
             Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-            Me.cboInventoryAction = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+            Me.cboInventoryAction = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
             Me.lblInventoryAction = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.lblNotes = New AATM.Libraries.CBaseControlsLibrary.CLabel()
             Me.txtNotes = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
@@ -140,8 +140,6 @@ Namespace PresentationLayer.Views.Forms
             Me.cboInventoryAction.OverrideDropDownStyleList = False
             Me.cboInventoryAction.PreviousSearchTerm = Nothing
             Me.cboInventoryAction.PropertySelector = Nothing
-            Me.cboInventoryAction.ReadOnlyCombo = False
-            Me.cboInventoryAction.SuggestBoxHeight = 200
             Me.cboInventoryAction.SuggestListOrderRule = Nothing
             Me.cboInventoryAction.TextToSearch = Nothing
             Me.cboInventoryAction.Translatable = False
@@ -472,7 +470,7 @@ Namespace PresentationLayer.Views.Forms
         Friend WithEvents chkActive As CCheckBox
         Friend WithEvents lblInvTransTypeCycle As CLabel
         Friend WithEvents cboAccountIdNo As CtComboBox
-        Friend WithEvents cboInventoryAction As CaComboBox
+        Friend WithEvents cboInventoryAction As CtCombobox
         Friend WithEvents lblInventoryAction As CLabel
         Friend WithEvents txtInvTransTypeNameAra As CTextBoxArabic
     End Class

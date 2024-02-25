@@ -27,19 +27,19 @@ Namespace PresentationLayer.Views.Forms
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormDataViewer))
-        Me.CDataGridView1 = New AATM.Libraries.CBaseControlsLibrary.CDataGridView()
+        Me.CtDataGridView1 = New AATM.Libraries.CBaseControlsLibrary.CtDataGridView()
         Me.bsLeaveHistory = New System.Windows.Forms.BindingSource(Me.components)
         Me.lblIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.txtIdNo = New AATM.Libraries.CBaseControlsLibrary.CTextBox()
         Me.lblEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CLabel()
-        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CaComboBox()
+        Me.cboEmployeeIdNo = New AATM.Libraries.CBaseControlsLibrary.CtCombobox()
         Me.dtpStartDate = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CFlowLayout1 = New AATM.Libraries.CBaseControlsLibrary.CFlowLayout()
         Me.CCustomDateTimePicker1 = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         Me.CLabel1 = New AATM.Libraries.CBaseControlsLibrary.CLabel()
         Me.CCustomDateTimePicker2 = New AATM.Libraries.CBaseControlsLibrary.CCustomDateTimePicker()
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.CDataGridView1,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.CtDataGridView1,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.bsLeaveHistory,System.ComponentModel.ISupportInitialize).BeginInit
         Me.CFlowLayout1.SuspendLayout
         Me.SuspendLayout
@@ -52,12 +52,12 @@ Namespace PresentationLayer.Views.Forms
         '
         Me.AppDataDAC.Cs = "Data Source=;Initial Catalog=;Integrated Security=True;Connection Timeout=5"
         '
-        'CDataGridView1
+        'CtDataGridView1
         '
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.FloralWhite
-        Me.CDataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
-        Me.CDataGridView1.BegFindValue = Nothing
-        Me.CDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.CtDataGridView1.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.CtDataGridView1.BegFindValue = Nothing
+        Me.CtDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
@@ -65,33 +65,33 @@ Namespace PresentationLayer.Views.Forms
         DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.CDataGridView1.DefaultCellStyle = DataGridViewCellStyle2
-        Me.CDataGridView1.DgvFooter = Nothing
-        Me.CDataGridView1.DisplayOnly = false
-        Me.CDataGridView1.Ea = Nothing
-        Me.CDataGridView1.EditingMode = false
-        Me.CDataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
-        Me.CDataGridView1.EndFindValue = Nothing
-        Me.CDataGridView1.FieldDescription = Nothing
-        Me.CDataGridView1.FieldName = Nothing
-        Me.CDataGridView1.FieldsDictionary = Nothing
-        Me.CDataGridView1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
-        Me.CDataGridView1.FindEnabled = false
-        Me.CDataGridView1.FirstRowDeletionEnabled = true
-        Me.CDataGridView1.FirstRowInsertionEnabled = true
-        Me.CDataGridView1.IgnoreCase = false
-        Me.CDataGridView1.IsDirty = false
-        Me.CDataGridView1.Location = New System.Drawing.Point(12, 172)
-        Me.CDataGridView1.Name = "CDataGridView1"
-        Me.CDataGridView1.ReadOnly = true
-        Me.CDataGridView1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
-        Me.CDataGridView1.SecurityKey = ""
-        Me.CDataGridView1.SequenceColumn = "dgvSequence"
-        Me.CDataGridView1.SequenceFieldName = "Sequence"
-        Me.CDataGridView1.ShowFooter = False
-            Me.CDataGridView1.Size = New System.Drawing.Size(841, 375)
-            Me.CDataGridView1.TabIndex = 4
-        Me.CDataGridView1.Translatable = true
+        Me.CtDataGridView1.DefaultCellStyle = DataGridViewCellStyle2
+        Me.CtDataGridView1.DgvFooter = Nothing
+        Me.CtDataGridView1.DisplayOnly = false
+        Me.CtDataGridView1.Ea = Nothing
+        Me.CtDataGridView1.EditingMode = false
+        Me.CtDataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke
+        Me.CtDataGridView1.EndFindValue = Nothing
+        Me.CtDataGridView1.FieldDescription = Nothing
+        Me.CtDataGridView1.FieldName = Nothing
+        Me.CtDataGridView1.FieldsDictionary = Nothing
+        Me.CtDataGridView1.FindDataType = AATM.Libraries.AatmInterfaces.IFindableControl.DataTypeEnum.[String]
+        Me.CtDataGridView1.FindEnabled = false
+        Me.CtDataGridView1.FirstRowDeletionEnabled = true
+        Me.CtDataGridView1.FirstRowInsertionEnabled = true
+        Me.CtDataGridView1.IgnoreCase = false
+        Me.CtDataGridView1.IsDirty = false
+        Me.CtDataGridView1.Location = New System.Drawing.Point(12, 172)
+        Me.CtDataGridView1.Name = "CtDataGridView1"
+        Me.CtDataGridView1.ReadOnly = true
+        Me.CtDataGridView1.SearchPlace = AATM.Libraries.AatmInterfaces.IFindableControl.SearchPlaceEnum.StartOfField
+        Me.CtDataGridView1.SecurityKey = ""
+        Me.CtDataGridView1.SequenceColumn = "dgvSequence"
+        Me.CtDataGridView1.SequenceFieldName = "Sequence"
+        Me.CtDataGridView1.ShowFooter = False
+            Me.CtDataGridView1.Size = New System.Drawing.Size(841, 375)
+            Me.CtDataGridView1.TabIndex = 4
+        Me.CtDataGridView1.Translatable = true
         '
         'lblIdNo
         '
@@ -183,9 +183,8 @@ Namespace PresentationLayer.Views.Forms
         Me.cboEmployeeIdNo.OverrideDropDownStyleList = false
         Me.cboEmployeeIdNo.PreviousSearchTerm = Nothing
         Me.cboEmployeeIdNo.PropertySelector = Nothing
-        Me.cboEmployeeIdNo.ReadOnlyCombo = false
-        Me.cboEmployeeIdNo.Size = New System.Drawing.Size(350, 24)
-        Me.cboEmployeeIdNo.SuggestBoxHeight = 200
+            Me.cboEmployeeIdNo.Size = New System.Drawing.Size(350, 24)
+            Me.cboEmployeeIdNo.SuggestBoxHeight = 200
         Me.cboEmployeeIdNo.SuggestListOrderRule = Nothing
         Me.cboEmployeeIdNo.TabIndex = 14
         Me.cboEmployeeIdNo.TextToSearch = Nothing
@@ -296,12 +295,12 @@ Namespace PresentationLayer.Views.Forms
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.ClientSize = New System.Drawing.Size(865, 571)
         Me.Controls.Add(Me.CFlowLayout1)
-        Me.Controls.Add(Me.CDataGridView1)
+        Me.Controls.Add(Me.CtDataGridView1)
         Me.Name = "FormDataViewer"
-        Me.Controls.SetChildIndex(Me.CDataGridView1, 0)
+        Me.Controls.SetChildIndex(Me.CtDataGridView1, 0)
         Me.Controls.SetChildIndex(Me.CFlowLayout1, 0)
         CType(Me.MyErrorProvider,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.CDataGridView1,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.CtDataGridView1,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.bsLeaveHistory,System.ComponentModel.ISupportInitialize).EndInit
         Me.CFlowLayout1.ResumeLayout(false)
         Me.CFlowLayout1.PerformLayout
@@ -310,12 +309,12 @@ Namespace PresentationLayer.Views.Forms
 
 End Sub
 
-        Friend WithEvents CDataGridView1 As Libraries.CBaseControlsLibrary.CDataGridView
+        Friend WithEvents CtDataGridView1 As Libraries.CBaseControlsLibrary.CtDataGridView
         Friend WithEvents bsLeaveHistory As BindingSource
         Friend WithEvents lblIdNo As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents txtIdNo As Libraries.CBaseControlsLibrary.CTextBox
         Friend WithEvents lblEmployeeIdNo As Libraries.CBaseControlsLibrary.CLabel
-        Friend WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.CaComboBox
+        Friend WithEvents cboEmployeeIdNo As Libraries.CBaseControlsLibrary.CtCombobox
         Friend WithEvents CFlowLayout1 As Libraries.CBaseControlsLibrary.CFlowLayout
         Friend WithEvents dtpStartDate As Libraries.CBaseControlsLibrary.CLabel
         Friend WithEvents CCustomDateTimePicker1 As Libraries.CBaseControlsLibrary.CCustomDateTimePicker

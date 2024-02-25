@@ -1,4 +1,4 @@
-﻿Public Class cDataGridViewWithFooter
-    Inherits CDataGridView
+﻿Public Class CtDataGridViewWithFooter
+    Inherits CtDataGridView
 
 End Class
